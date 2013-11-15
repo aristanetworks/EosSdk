@@ -5,13 +5,21 @@
 <<= TacModule("EthIntf::EthIntf");
 <<= TacModule("Sysdb::EntityManager");
 
+// Fwd.h contains forward declarations for non-TACC types.
+<<= CppInlineInclude("Fwd.h");
+
 EosSdk : Tac::Namespace {
+
+SDK : extern Tac::Type {
+   `allowsIndirectRef;
+}
 
 Agent : Tac::Type( name ) : AgentBase::CAgent {
    `allowsNotifiee=false;
    `hasFactoryFunction;
    `allowsDirInstantiation;
 
+   sdk : SDK::RawPtr;
    ethPhyIntfStatusDir : Interface::EthPhyIntfStatusDir::PtrConst;
 
    doInit : extern invasive overriding void();

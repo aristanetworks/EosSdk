@@ -20,6 +20,9 @@ typedef double Seconds;
 typedef uint32_t U32;
 typedef uint16_t U16;
 
+class SDK;
+typedef void (*EosSdkInitFunc)(SDK*);
+
 struct Via {};  // TBD
 struct AclRule {};  // TBD
 struct IPv4 {}; // TBD

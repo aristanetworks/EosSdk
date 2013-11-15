@@ -1,9 +1,15 @@
 // Copyright (c) 2013 Arista Networks, Inc.  All rights reserved.
 // Arista Networks, Inc. Confidential and Proprietary.
 
+#include <dlfcn.h>
+
+#include <iostream>
+
 #include <Tac/Tracing.h>
 
-DEFAULT_TRACE_HANDLE( "EosSdk" )
+#include "EosSdk/EosSdk.h"
+
+DEFAULT_TRACE_HANDLE( "EosSdkAgent" )
 
 namespace EosSdk {
 
@@ -28,7 +34,27 @@ Agent::doMountsComplete( Sysdb::MountStatus mountStatus,
    ethPhyIntfStatusDirIs( em->getEntity<Interface::EthPhyIntfStatusDir>(
             "interface/status/eth/phy" ) );
 
-   TRACE0( "Loading " << extraArg()->extraArgs() );
+   Tac::String app = extraArg()->extraArg( "app" );
+   TRACE0( "Loading " << app );
+
+   // Do we want RTLD_NOW | RTLD_GLOBAL?  I'd rather be lazy if we can.
+   void * lib = dlopen( app.charPtr(), RTLD_LAZY );
+   if ( !lib ) {
+      std::cerr << "Failed to load `" << app << "': " << dlerror() << std::endl;
+      abort();
+   }
+   TRACE0( "Loaded " << app );
+
+   EosSdkInitFunc init = (EosSdkInitFunc) dlsym( lib, "EosSdkInit" );
+   char* error = dlerror();
+   if ( error ) {
+      std::cerr << "Failed to get the `EosSdkInit' symbol: " << error << std::endl;
+      abort();
+   }
+
+   sdkIs( new SDK() );
+   TRACE0( "Calling EosSdkInit from " << app );
+   init( sdk() );
 }
 
 }  // namespace EosSdk
