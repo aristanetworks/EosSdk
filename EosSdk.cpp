@@ -64,8 +64,19 @@ bool IntfConfig::adminEnabled() const {
    return entity_->adminEnabled();
 }
 
-std::string IntfConfig::adminDisabledReason() const {
-   return convert(entity_->enabledStateReason());
+AdminDisabledReason IntfConfig::adminDisabledReason() const {
+   Tac::String reason = entity_->enabledStateReason();
+   // See IntfSM::handleStateChange in Intf/SysdbErrdisableIntf.tin
+   if (reason.empty()) {
+      return reasonEnabled;
+   } else if (reason == "admin") {
+      return reasonAdmin;
+   } else if (reason == "errdisabled") {
+      return reasonErrDisabled;
+   } else if (reason == "inactive") {
+      return reasonInactive;
+   }
+   return reasonUnknown;
 }
 
 // ---------- //

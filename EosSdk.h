@@ -107,6 +107,14 @@ class TacEntity {
    const T* entity_;  // TODO: Remove this and replace with a per-class handler.
 };
 
+enum AdminDisabledReason {
+   reasonUnknown,
+   reasonEnabled,
+   reasonAdmin,
+   reasonErrDisabled,
+   reasonInactive,
+};
+
 class IntfConfig : public TacEntity< ::Interface::IntfConfig> {
  public:
    explicit IntfConfig(const TacType* config) : TacEntity(config) {
@@ -115,8 +123,7 @@ class IntfConfig : public TacEntity< ::Interface::IntfConfig> {
    IntfId intfId() const;
    std::string description() const;
    bool adminEnabled() const;
-   // TODO: change return value to an enum type.
-   std::string adminDisabledReason() const;
+   AdminDisabledReason adminDisabledReason() const;
 };
 
 enum OperStatus {
