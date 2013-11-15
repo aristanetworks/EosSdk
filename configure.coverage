@@ -1,0 +1,1 @@
+CXXFLAGS="-g -fprofile-arcs -ftest-coverage" LDFLAGS="-lgcov" $(dirname $0)/configure "$@" 
