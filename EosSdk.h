@@ -278,7 +278,7 @@ class IntfHandler {
                                       AdminDisabledReason reason) {
    }
 
-   virtual void onDeletion() {
+   virtual void onDeletion(const IntfId& intfId) {
    }
 };
 

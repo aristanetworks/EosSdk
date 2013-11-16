@@ -52,15 +52,21 @@ void SdkSm::handleEthIntfConfigDir( Arnet::IntfId intfId ) {
    TRACE8( __PRETTY_FUNCTION__ << " intfId=" << intfId );
    Interface::EthIntfConfig::PtrConst intfConfig =
       ethIntfConfigDir()->intfConfig( intfId );
+   EosSdk::IntfId sdkIntfId = convert( intfId );
    if ( intfConfig ) {
       IntfHandler* intfHandler =
-         handlers()->handleIntfCreation( sdk()->intfStatus( convert( intfId ) ) );
+         handlers()->handleIntfCreation( sdk()->intfStatus( sdkIntfId ) );
       if ( intfHandler ) {
          TRACE7( __PRETTY_FUNCTION__ << " Created nested SM for " << intfId );
          ethIntfConfigSmIs( intfHandler, intfId, intfConfig );
       }
    } else {
-      // TBD
+      auto sm = ethIntfConfigSm( intfId );
+      if ( sm ) {
+         TRACE7( __PRETTY_FUNCTION__ << " Deleting nested SM for " << intfId );
+         sm->handler()->onDeletion( sdkIntfId );
+         ethIntfConfigSmDel( intfId );
+      }
    }
 }
 
