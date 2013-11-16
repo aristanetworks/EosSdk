@@ -11,6 +11,7 @@ pkginclude_HEADERS = Fwd.h EosSdk.h
 
 libEosSdk_la_SOURCES = EosSdk.cpp
 libEosSdk_la_SOURCES += SDKInternal.h
+libEosSdk_la_SOURCES += EnumCast.h
 libEosSdk_la_SOURCES += EosSdkAgent.tac EosSdkAgent.tin
 libEosSdk_la_SOURCES += EthIntfSm.tac EthIntfSm.tin
 libEosSdk_la_LIBADD = -lEthIntf -lIntf -lArnet -lAgentBase -lSysdbEntityMgr -ltac -ldl
