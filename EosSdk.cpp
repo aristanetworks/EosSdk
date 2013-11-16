@@ -9,6 +9,7 @@
 #include <EthIntf/EthIntf.h>
 
 #include "SDKInternal.h"
+#include "EnumCast.h"
 
 namespace EosSdk {
 
@@ -77,8 +78,8 @@ AdminDisabledReason IntfConfig::adminDisabledReason() const {
 // ---------- //
 
 OperStatus IntfStatus::operStatus() const {
-   return static_cast<OperStatus>(
-         static_cast<int>(sdk_->internal_->ethIntfStatus(intfId_)->operStatus()));
+   return enum_cast<OperStatus>(
+         sdk_->internal_->ethIntfStatus(intfId_)->operStatus());
 }
 
 // ---------------- //
@@ -91,18 +92,18 @@ EthAddr EthPhyIntfConfig::addr() const {
 
 
 EthLinkMode EthPhyIntfConfig::linkModeLocal() const {
-   return static_cast<EthLinkMode>(static_cast<int>(
-         sdk_->internal_->ethPhyIntfConfig(intfId_)->linkModeLocal()));
+   return enum_cast<EthLinkMode>(
+         sdk_->internal_->ethPhyIntfConfig(intfId_)->linkModeLocal());
 }
 
 LoopbackMode EthPhyIntfConfig::loopbackMode() const {
-   return static_cast<LoopbackMode>(static_cast<int>(
-         sdk_->internal_->ethPhyIntfConfig(intfId_)->loopbackMode()));
+   return enum_cast<LoopbackMode>(
+         sdk_->internal_->ethPhyIntfConfig(intfId_)->loopbackMode());
 }
 
 EthTimestampMode EthPhyIntfConfig::timestampMode() const {
-   return static_cast<EthTimestampMode>(static_cast<int>(
-         sdk_->internal_->ethPhyIntfConfig(intfId_)->timestampMode()));
+   return enum_cast<EthTimestampMode>(
+         sdk_->internal_->ethPhyIntfConfig(intfId_)->timestampMode());
 }
 
 // ---------------- //
@@ -118,8 +119,8 @@ EthAddr EthPhyIntfStatus::burnedInAddr() const {
 }
 
 LinkStatus EthPhyIntfStatus::linkStatus() const {
-   return static_cast<LinkStatus>(
-        static_cast<int>(sdk_->internal_->ethPhyIntfStatus(intfId_)->linkStatus()));
+   return enum_cast<LinkStatus>(
+        sdk_->internal_->ethPhyIntfStatus(intfId_)->linkStatus());
 }
 
 
@@ -150,8 +151,8 @@ Seconds EthPhyIntfStatus::lastMacRxLocalFaultChange() const {
 
 
 LocalFaultStatus EthPhyIntfStatus::localFaultStatus() const {
-   return static_cast<LocalFaultStatus>(static_cast<int>(
-         sdk_->internal_->ethPhyIntfStatus(intfId_)->localFaultStatus()));
+   return enum_cast<LocalFaultStatus>(
+         sdk_->internal_->ethPhyIntfStatus(intfId_)->localFaultStatus());
 }
 
 Seconds EthPhyIntfStatus::localFaultStatusChangeTime() const {
@@ -164,8 +165,8 @@ U32 EthPhyIntfStatus::localFaultStatusChanges() const {
 
 
 TxFaultStatus EthPhyIntfStatus::txFaultStatus() const {
-   return static_cast<TxFaultStatus>(static_cast<int>(
-         sdk_->internal_->ethPhyIntfStatus(intfId_)->txFaultStatus()));
+   return enum_cast<TxFaultStatus>(
+         sdk_->internal_->ethPhyIntfStatus(intfId_)->txFaultStatus());
 }
 
 Seconds EthPhyIntfStatus::txFaultStatusChangeTime() const {
@@ -178,30 +179,28 @@ U32 EthPhyIntfStatus::txFaultStatusChanges() const {
 
 
 EthTimestampMode EthPhyIntfStatus::timestampMode() const {
-   return static_cast<EthTimestampMode>(static_cast<int>(
-         sdk_->internal_->ethPhyIntfStatus(intfId_)->timestampMode()));
+   return enum_cast<EthTimestampMode>(
+         sdk_->internal_->ethPhyIntfStatus(intfId_)->timestampMode());
 }
 
 
 EthDuplex EthPhyIntfStatus::duplex() const {
-   return static_cast<EthDuplex>(
-         static_cast<int>(sdk_->internal_->ethPhyIntfStatus(intfId_)->duplex()));
+   return enum_cast<EthDuplex>(sdk_->internal_->ethPhyIntfStatus(intfId_)->duplex());
 }
 
 EthSpeed EthPhyIntfStatus::speed() const {
-   return static_cast<EthSpeed>(
-         static_cast<int>(sdk_->internal_->ethPhyIntfStatus(intfId_)->speed()));
+   return enum_cast<EthSpeed>(sdk_->internal_->ethPhyIntfStatus(intfId_)->speed());
 }
 
 LoopbackMode EthPhyIntfStatus::loopbackMode() const {
-   return static_cast<LoopbackMode>(static_cast<int>(
-         sdk_->internal_->ethPhyIntfStatus(intfId_)->loopbackMode()));
+   return enum_cast<LoopbackMode>(
+         sdk_->internal_->ethPhyIntfStatus(intfId_)->loopbackMode());
 }
 
 
 XcvrPresence EthPhyIntfStatus::xcvrPresence() const {
-   return static_cast<XcvrPresence>(static_cast<int>(
-         sdk_->internal_->ethPhyIntfStatus(intfId_)->xcvrPresence()));
+   return enum_cast<XcvrPresence>(
+         sdk_->internal_->ethPhyIntfStatus(intfId_)->xcvrPresence());
 }
 
 std::string EthPhyIntfStatus::xcvrType() const {
