@@ -25,6 +25,10 @@ AdminDisabledReason convertAdminDisabledReason( const Tac::String& reason ) {
    return reasonUnknown;
 }
 
+static EOS::EthAddr convert( Arnet::EthAddr addr ) {
+   return EOS::EthAddr( addr.word0(), addr.word1(), addr.word2() );
+}
+
 static EOS::IntfId convert( Arnet::IntfId intfId ) {
    return EOS::IntfId( intfId.stringValue().stdString() );
 }
@@ -48,6 +52,25 @@ void EthIntfConfigSm::handleAdminDisabledReason() {
 void EthIntfStatusSm::handleOperStatus() {
    handler()->onOperStatus( convert( intfId() ),
                             enum_cast<OperStatus>( ethIntfStatus()->operStatus() ) );
+}
+
+void EthPhyIntfConfigSm::handleAddr() {
+   handler()->onAddr( convert( intfId() ), convert( ethPhyIntfConfig()->addr() ) );
+}
+
+void EthPhyIntfConfigSm::handleLinkModeLocal() {
+   handler()->onLinkModeLocal( convert( intfId() ), enum_cast<EthLinkMode>(
+         ethPhyIntfConfig()->linkModeLocal() ) );
+}
+
+void EthPhyIntfConfigSm::handleLoopbackMode() {
+   handler()->onLoopbackMode( convert( intfId() ), enum_cast<LoopbackMode>(
+         ethPhyIntfConfig()->loopbackMode() ) );
+}
+
+void EthPhyIntfConfigSm::handleTimestampMode() {
+   handler()->onTimestampMode( convert( intfId() ), enum_cast<EthTimestampMode>(
+         ethPhyIntfConfig()->timestampMode() ) );
 }
 
 void SdkSm::handleEthIntfConfigDir( Arnet::IntfId intfId ) {

@@ -307,6 +307,15 @@ class EthPhyIntfHandler {
    // EthPhyIntfConfig //
    // ---------------- //
 
+   virtual void onAddr(const IntfId& intfId, EthAddr addr) {
+   }
+   virtual void onLinkModeLocal(const IntfId& intfId, EthLinkMode mode) {
+   }
+   virtual void onLoopbackMode(const IntfId& intfId, LoopbackMode mode) {
+   }
+   virtual void onTimestampMode(const IntfId& intfId, EthTimestampMode mode) {
+   }
+
    // ---------------- //
    // EthPhyIntfStatus //
    // ---------------- //

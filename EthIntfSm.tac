@@ -38,7 +38,6 @@ EthIntfStatusSm : Tac::Type(handler, intfId, ethIntfStatus) : Tac::Constrainer {
 
    handleOperStatus : extern invasive void();
    ethIntfStatus::operStatus => handleOperStatus();
-   // TBD
 }
 
 EthPhyIntfConfigSm : Tac::Type(handler, intfId,
@@ -47,7 +46,15 @@ EthPhyIntfConfigSm : Tac::Type(handler, intfId,
    handler : EthPhyIntfHandler::RawPtr;
    intfId : Arnet::IntfId;
    ethPhyIntfConfig : in Interface::EthPhyIntfConfig::PtrConst;
-   // TBD
+
+   handleAddr : extern invasive void();
+   ethPhyIntfConfig::addr => handleAddr();
+   handleLinkModeLocal : extern invasive void();
+   ethPhyIntfConfig::linkModeLocal => handleLinkModeLocal();
+   handleLoopbackMode : extern invasive void();
+   ethPhyIntfConfig::loopbackMode => handleLoopbackMode();
+   handleTimestampMode : extern invasive void();
+   ethPhyIntfConfig::timestampMode => handleTimestampMode();
 }
 
 EthPhyIntfStatusSm : Tac::Type(handler, intfId,
