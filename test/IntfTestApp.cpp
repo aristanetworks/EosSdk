@@ -5,21 +5,21 @@
 
 #include <EosSdk/EosSdk.h>
 
-class IntfHandler : public EosSdk::IntfHandler {
+class IntfHandler : public EOS::IntfHandler {
  public:
-   void onOperStatus(const EosSdk::IntfId & intfId, EosSdk::OperStatus status) {
+   void onOperStatus(const EOS::IntfId & intfId, EOS::OperStatus status) {
       std::cout << "onOperStatus( " << intfId.name() << " ), operStatus is "
                 << status;
    }
-   
-   void onDeletion(const EosSdk::IntfId & intfId) {
+
+   void onDeletion(const EOS::IntfId & intfId) {
       std::cout << "onDeletion( " << intfId.name() << " )";
    }
 };
 
-class Handlers : public EosSdk::Handlers {
+class Handlers : public EOS::Handlers {
  public:
-   IntfHandler* handleIntfCreation(const EosSdk::IntfStatus& status) {
+   IntfHandler* handleIntfCreation(const EOS::IntfStatus& status) {
       std::cout << "handleIntfCreation " << status.intfId().name();
       if( !intfHandler_ ) {
          intfHandler_ = new IntfHandler();
@@ -29,12 +29,12 @@ class Handlers : public EosSdk::Handlers {
    }
 
  private:
-   IntfHandler *intfHandler_;   
+   IntfHandler *intfHandler_;
 };
 
 
 extern "C" {
-void EosSdkInit(EosSdk::SDK* sdk) {
+void EosSdkInit(EOS::SDK* sdk) {
    sdk->registerHandlers( "IntfTest", new Handlers() );
 }
 }

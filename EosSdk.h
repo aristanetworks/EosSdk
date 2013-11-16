@@ -14,7 +14,7 @@
 
 #include <EosSdk/Fwd.h>
 
-namespace EosSdk {
+namespace EOS {
 
 class SDKInternal;
 
@@ -412,6 +412,6 @@ class SDK {
 
 };
 
-}  // namespace EosSdk
+}  // namespace EOS
 
 #endif // EOSSDK_EOSSDK_H

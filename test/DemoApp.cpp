@@ -5,22 +5,22 @@
 
 #include <EosSdk/EosSdk.h>
 
-class MyIntfHandler : public EosSdk::IntfHandler {
-   virtual void onDescription(const EosSdk::IntfId& intfId,
+class MyIntfHandler : public EOS::IntfHandler {
+   virtual void onDescription(const EOS::IntfId& intfId,
                               const std::string& descr) {
       std::cout << "New description for " << intfId.name()
          << " is " << descr << std::endl;
    }
 };
 
-class MyHandlers : public EosSdk::Handlers {
-   virtual MyIntfHandler* handleIntfCreation(const EosSdk::IntfStatus& status) {
+class MyHandlers : public EOS::Handlers {
+   virtual MyIntfHandler* handleIntfCreation(const EOS::IntfStatus& status) {
       return new MyIntfHandler();
    }
 };
 
 extern "C" {
-void EosSdkInit(EosSdk::SDK* sdk) {
+void EosSdkInit(EOS::SDK* sdk) {
    std::cout << "Hello world!" << std::endl;
    sdk->registerHandlers("myHandler", new MyHandlers());
 }

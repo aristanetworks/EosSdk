@@ -9,7 +9,7 @@ namespace Tac {
    class PtrInterface;
 }
 
-namespace EosSdk {
+namespace EOS {
    class SDK;
    class Handlers;
    class IntfHandler;

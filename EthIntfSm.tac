@@ -6,7 +6,7 @@
 // Fwd.h contains forward declarations for non-TACC types.
 <<= CppInlineInclude("Fwd.h");
 
-EosSdk : Tac::Namespace {
+EOS : Tac::Namespace {
 
 IntfHandler : extern Tac::Type {
    `allowsIndirectRef;

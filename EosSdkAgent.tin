@@ -12,7 +12,7 @@
 
 DEFAULT_TRACE_HANDLE( "EosSdkAgent" )
 
-namespace EosSdk {
+namespace EOS {
 
 void
 Agent::doInit() {
@@ -75,4 +75,4 @@ Agent::doMountsComplete( Sysdb::MountStatus mountStatus,
 
 }
 
-}  // namespace EosSdk
+}  // namespace EOS

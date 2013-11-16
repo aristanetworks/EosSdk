@@ -10,7 +10,7 @@
 // Fwd.h contains forward declarations for non-TACC types.
 <<= CppInlineInclude("Fwd.h");
 
-EosSdk : Tac::Namespace {
+EOS : Tac::Namespace {
 
 SDK : extern Tac::Type {
    `allowsIndirectRef;
@@ -73,6 +73,6 @@ Agent : Tac::Type( name ) : AgentBase::CAgent {
          em : Sysdb::EntityManager::Ptr);
 }
 
-}  // namespace EosSdk
+}  // namespace EOS
 
 <<= CppBlock("EosSdkAgent.tin");

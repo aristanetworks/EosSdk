@@ -12,7 +12,7 @@
 
 // This file is not part of the public SDK.
 
-namespace EosSdk {
+namespace EOS {
 
 static Arnet::IntfId convert(const IntfId& intfId) {
    return Arnet::IntfId(intfId.name());  // TODO use a U32 instead.

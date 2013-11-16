@@ -9,7 +9,7 @@
 
 DEFAULT_TRACE_HANDLE( "EosSdkEthIntfSm" )
 
-namespace EosSdk {
+namespace EOS {
 
 AdminDisabledReason convertAdminDisabledReason( const Tac::String& reason ) {
    // See IntfSM::handleStateChange in Intf/SysdbErrdisableIntf.tin
@@ -25,8 +25,8 @@ AdminDisabledReason convertAdminDisabledReason( const Tac::String& reason ) {
    return reasonUnknown;
 }
 
-static EosSdk::IntfId convert( Arnet::IntfId intfId ) {
-   return EosSdk::IntfId( intfId.stringValue().stdString() );
+static EOS::IntfId convert( Arnet::IntfId intfId ) {
+   return EOS::IntfId( intfId.stringValue().stdString() );
 }
 
 void EthIntfConfigSm::handleDescription() {
@@ -58,7 +58,7 @@ void SdkSm::handleEthIntfStatusDir( Arnet::IntfId intfId ) {
    TRACE8( __PRETTY_FUNCTION__ << " intfId=" << intfId );
    Interface::EthIntfStatus::PtrConst intfStatus =
       ethIntfStatusDir()->intfStatus( intfId );
-   EosSdk::IntfId sdkIntfId = convert( intfId );
+   EOS::IntfId sdkIntfId = convert( intfId );
    if ( intfStatus ) {
       Interface::EthIntfConfig::PtrConst intfConfig =
          ethIntfConfigDir()->intfConfig( intfId );

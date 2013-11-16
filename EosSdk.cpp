@@ -11,7 +11,7 @@
 #include "SDKInternal.h"
 #include "EnumCast.h"
 
-namespace EosSdk {
+namespace EOS {
 
 const EthAddr EthAddr::kZero = EthAddr(0x0000, 0x0000, 0x0000);
 const EthAddr EthAddr::kBroadcast = EthAddr(0xffff, 0xffff, 0xffff);
@@ -208,4 +208,4 @@ std::string EthPhyIntfStatus::xcvrType() const {
 }
 
 
-}  // namespace EosSdk
+}  // namespace EOS
