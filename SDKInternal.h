@@ -6,6 +6,7 @@
 
 #include <Arnet/IntfId.h>
 #include <EthIntf/EthIntf.h>
+#include <Tac/ActivityLock.h>
 
 #include "EosSdk.h"
 #include "EosSdkAgent.h"
@@ -30,22 +31,27 @@ class SDKInternal {
    }
 
    Interface::EthIntfConfig::Ptr ethIntfConfig(const IntfId& intfId) {
+      Tac::ActivityLockAnchor lock;
       return agent_->ethIntfConfigDir()->intfConfig(convert(intfId));
    }
 
    Interface::EthIntfStatus::PtrConst ethIntfStatus(const IntfId& intfId) {
+      Tac::ActivityLockAnchor lock;
       return agent_->ethIntfStatusDir()->intfStatus(convert(intfId));
    }
 
    Interface::EthPhyIntfConfig::Ptr ethPhyIntfConfig(const IntfId& intfId) {
+      Tac::ActivityLockAnchor lock;
       return agent_->ethPhyIntfConfigDir()->intfConfig(convert(intfId));
    }
 
    Interface::EthPhyIntfStatus::PtrConst ethPhyIntfStatus(const IntfId& intfId) {
+      Tac::ActivityLockAnchor lock;
       return agent_->ethPhyIntfStatusDir()->intfStatus(convert(intfId));
    }
 
    void registerHandlers(const std::string& name, Handlers* handlers) {
+      Tac::ActivityLockAnchor lock;
       SdkSm::Ptr sm = agent_->sdkSmIs( agent_->sdk(), Tac::Name( name ), handlers,
                                        agent_->ethIntfConfigDir(),
                                        agent_->ethIntfStatusDir(),
@@ -58,6 +64,7 @@ class SDKInternal {
    }
 
    void unregisterHandlers(const std::string& name) {
+      Tac::ActivityLockAnchor lock;
       agent_->sdkSmDel( Tac::Name( name ) );
    }
 
