@@ -35,6 +35,25 @@ static EthAddr convert(Arnet::EthAddr addr) {
    return EthAddr(addr.word0(), addr.word1(), addr.word2());
 }
 
+// --- //
+// SDK //
+// --- //
+
+void SDK::registerHandlers(const std::string& name, Handlers* handlers) {
+   Handlers* prev = handlers_[name];
+   if (prev) {
+      // TODO: throw an exception?
+      return;
+   }
+   handlers_[name] = handlers;
+   internal_->registerHandlers(name, handlers);
+};
+
+void SDK::unregisterHandlers(const std::string& name) {
+   handlers_.erase(name);
+   internal_->unregisterHandlers(name);
+}
+
 // ---------- //
 // IntfConfig //
 // ---------- //

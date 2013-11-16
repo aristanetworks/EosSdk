@@ -6,6 +6,8 @@
 
 namespace EosSdk {
    class SDK;
+   class Handlers;
+   class IntfHandler;
 }
 
 #endif // EOSSDK_FWD_H

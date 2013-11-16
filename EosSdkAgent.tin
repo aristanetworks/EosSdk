@@ -14,6 +14,43 @@ DEFAULT_TRACE_HANDLE( "EosSdkAgent" )
 
 namespace EosSdk {
 
+static EosSdk::IntfId convert( Arnet::IntfId intfId ) {
+   return EosSdk::IntfId( intfId.stringValue().stdString() );
+}
+
+void EthIntfConfigSm::handleDescription() {
+   handler()->onDescription( convert( intfId() ),
+                             ethIntfConfig()->description().stdString() );
+}
+
+void SdkSm::handleEthIntfConfigDir( Arnet::IntfId intfId ) {
+   TRACE8( __PRETTY_FUNCTION__ << " intfId=" << intfId );
+   Interface::EthIntfConfig::PtrConst intfConfig =
+      ethIntfConfigDir()->intfConfig( intfId );
+   if ( intfConfig ) {
+      IntfHandler* intfHandler =
+         handlers()->handleIntfCreation( sdk()->intfStatus( convert( intfId ) ) );
+      if ( intfHandler ) {
+         TRACE7( __PRETTY_FUNCTION__ << " Created nested SM for " << intfId );
+         ethIntfConfigSmIs( intfHandler, intfId, intfConfig );
+      }
+   } else {
+      // TBD
+   }
+}
+
+void SdkSm::handleEthIntfStatusDir( Arnet::IntfId intfId ) {
+   TRACE8( __PRETTY_FUNCTION__ << " intfId=" << intfId );
+}
+
+void SdkSm::handleEthPhyIntfConfigDir( Arnet::IntfId intfId ) {
+   TRACE8( __PRETTY_FUNCTION__ << " intfId=" << intfId );
+}
+
+void SdkSm::handleEthPhyIntfStatusDir( Arnet::IntfId intfId ) {
+   TRACE8( __PRETTY_FUNCTION__ << " intfId=" << intfId );
+}
+
 void
 Agent::doInit() {
    TRACE8( __PRETTY_FUNCTION__ );
@@ -26,7 +63,7 @@ Agent::doInit() {
                               "Interface::EthIntfStatusDir", "r" ) );
 
    mg->doMount( Sysdb::Mount( "interface/config/eth/phy",
-                              "Interface::EthPhyIntfConfigDit", "r" ) );
+                              "Interface::EthPhyIntfConfigDir", "r" ) );
    mg->doMount( Sysdb::Mount( "interface/status/eth/phy",
                               "Interface::EthPhyIntfStatusDir", "r" ) );
 
@@ -69,8 +106,10 @@ Agent::doMountsComplete( Sysdb::MountStatus mountStatus,
 
    SDKInternal* internal = new SDKInternal( this );
    sdkIs( internal->createSDK() );
+
    TRACE0( "Calling EosSdkInit from " << app );
    init( sdk() );
+
 }
 
 }  // namespace EosSdk

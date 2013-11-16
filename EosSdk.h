@@ -7,7 +7,7 @@
 #include <algorithm>
 #include <cassert>
 #include <cstdint>
-#include <list>
+#include <map>
 #include <set>
 #include <string>
 #include <type_traits>
@@ -276,10 +276,14 @@ class EthLagIntfStatus {
 
 class IntfHandler {
  public:
-   virtual void onOperStatus(OperStatus status) {
+   virtual void onDescription(const IntfId& intfId, const std::string& description) {
    }
-   virtual void onMtu(U32 mtu) {
+   virtual void onAdminEnabled(const IntfId& intfId, bool adminEnabled) {
    }
+   virtual void onAdminDisabledReason(const IntfId& intfId,
+                                      AdminDisabledReason reason) {
+   }
+
    virtual void onDeletion() {
    }
 };
@@ -372,21 +376,8 @@ class SDK {
       fds_.erase(const_cast<FileDescriptorHandler*>(&fd));
    }
 
-   void registerHandlers(Handlers& handlers) {
-      std::list<Handlers*>::const_iterator i = std::find(handlers_.begin(),
-            handlers_.end(), &handlers);
-      if (i == handlers_.end()) {
-         handlers_.push_back(&handlers);
-      }
-   };
-
-   void unregisterHandlers(const Handlers& handlers) {
-      std::list<Handlers*>::iterator i = std::find(handlers_.begin(),
-            handlers_.end(), const_cast<Handlers*>(&handlers));
-      if (i != handlers_.end()) {
-         handlers_.erase(i);
-      }
-   }
+   void registerHandlers(const std::string& name, Handlers* handlers);
+   void unregisterHandlers(const std::string& name);
 
  private:
    friend class SDKInternal;
@@ -394,8 +385,10 @@ class SDK {
    friend class IntfStatus;
    friend class EthPhyIntfConfig;
    friend class EthPhyIntfStatus;
+   friend class SdkSm;
+
    SDKInternal* const internal_;
-   std::list<Handlers*> handlers_;
+   std::map<std::string, Handlers*> handlers_;
 
    struct FileDescriptorCmp {
       bool operator()(const FileDescriptorHandler* const a,
@@ -411,6 +404,7 @@ class SDK {
    // Disable copy constructor and assignment operator.
    SDK(const SDK& sdk);
    SDK& operator=(const SDK& sdk);
+
 };
 
 }  // namespace EosSdk

@@ -43,6 +43,22 @@ class SDKInternal {
       return agent_->ethPhyIntfStatusDir()->intfStatus(convert(intfId));
    }
 
+   void registerHandlers(const std::string& name, Handlers* handlers) {
+      SdkSm::Ptr sm = agent_->sdkSmIs( agent_->sdk(), Tac::Name( name ), handlers,
+                                       agent_->ethIntfConfigDir(),
+                                       agent_->ethIntfStatusDir(),
+                                       agent_->ethPhyIntfConfigDir(),
+                                       agent_->ethPhyIntfStatusDir() );
+      for( auto intf = agent_->ethIntfConfigDir()->intfConfigIteratorConst();
+           intf; ++intf ) {
+         sm->handleEthIntfConfigDir( intf->intfId() );
+      }
+   }
+
+   void unregisterHandlers(const std::string& name) {
+      agent_->sdkSmDel( Tac::Name( name ) );
+   }
+
  private:
    Agent* const agent_;
 
