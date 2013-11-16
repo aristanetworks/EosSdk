@@ -36,6 +36,15 @@ Requires: EosSdk
 %description devel
 Provides the files necessary development with the EOS Software Development Kit.
 
+%package test
+Summary: EosSdk test package
+Group: dev/Arista Networks
+Requires: EosSdk
+Requires: EosSdk-devel
+
+%description test
+Provides the test libraries that are internal to Arista and not needed to use the SDK.
+
 %prep
 %setup -q
 
@@ -60,3 +69,6 @@ rm -f "$RPM_BUILD_ROOT"%{_libdir}/*.la
 %files devel
 %defattr(-,root,root)
 %{_includedir}/EosSdk
+
+%files test
+%{_datadir}/EosSdk/libDemoApp.*

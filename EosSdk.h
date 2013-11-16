@@ -12,17 +12,11 @@
 #include <string>
 #include <type_traits>
 
-#include <EosSdk/EosFwdDecls.h>
+#include <EosSdk/Fwd.h>
 
 namespace EosSdk {
 
-typedef double Seconds;
-typedef uint32_t U32;
-typedef uint16_t U16;
-
 class SDKInternal;
-class SDK;
-typedef void (*EosSdkInitFunc)(SDK*);
 
 struct Via {};  // TBD
 struct AclRule {};  // TBD
