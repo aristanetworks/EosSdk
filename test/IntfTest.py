@@ -7,7 +7,7 @@ import EntityManager
 import Tac
 
 def startEosSdk( entityManager, appLibPath ):
-   agent = Tac.newInstance( "EosSdk::Agent", "EosSdk" )
+   agent = Tac.newInstance( "EOS::Agent", "EosSdk" )
    agent.entityManager = entityManager.cEntityManager()
    agent.extraArg = Tac.newInstance( "AgentBase::ExtraArg", "args" )
    agent.extraArg.extraArg[ "app" ] = appLibPath
