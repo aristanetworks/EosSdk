@@ -29,7 +29,7 @@ class SDKInternal {
       return new SDK(this);
    }
 
-   Interface::EthIntfConfig::PtrConst ethIntfConfig(const IntfId& intfId) {
+   Interface::EthIntfConfig::Ptr ethIntfConfig(const IntfId& intfId) {
       return agent_->ethIntfConfigDir()->intfConfig(convert(intfId));
    }
 
@@ -37,7 +37,7 @@ class SDKInternal {
       return agent_->ethIntfStatusDir()->intfStatus(convert(intfId));
    }
 
-   Interface::EthPhyIntfConfig::PtrConst ethPhyIntfConfig(const IntfId& intfId) {
+   Interface::EthPhyIntfConfig::Ptr ethPhyIntfConfig(const IntfId& intfId) {
       return agent_->ethPhyIntfConfigDir()->intfConfig(convert(intfId));
    }
 

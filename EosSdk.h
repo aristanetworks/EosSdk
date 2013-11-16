@@ -97,7 +97,9 @@ class IntfConfig {
       return intfId_;
    }
    std::string description() const;
+   void descriptionIs(const std::string& description);
    bool adminEnabled() const;
+   void adminEnabledIs(bool enabled);
    AdminDisabledReason adminDisabledReason() const;
 
  private:

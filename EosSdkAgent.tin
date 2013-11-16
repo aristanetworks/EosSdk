@@ -21,12 +21,12 @@ Agent::doInit() {
    Sysdb::MountGroup::Ptr mg = entityManager()->getMountGroup( this );
 
    mg->doMount( Sysdb::Mount( "interface/config/eth/intf",
-                              "Interface::EthIntfConfigDir", "r" ) );
+                              "Interface::EthIntfConfigDir", "w" ) );
    mg->doMount( Sysdb::Mount( "interface/status/eth/intf",
                               "Interface::EthIntfStatusDir", "r" ) );
 
    mg->doMount( Sysdb::Mount( "interface/config/eth/phy",
-                              "Interface::EthPhyIntfConfigDir", "r" ) );
+                              "Interface::EthPhyIntfConfigDir", "w" ) );
    mg->doMount( Sysdb::Mount( "interface/status/eth/phy",
                               "Interface::EthPhyIntfStatusDir", "r" ) );
 

@@ -94,8 +94,16 @@ std::string IntfConfig::description() const {
    return convert(sdk_->internal_->ethIntfConfig(intfId_)->description());
 }
 
+void IntfConfig::descriptionIs(const std::string& description) {
+   sdk_->internal_->ethIntfConfig(intfId_)->descriptionIs(description);
+}
+
 bool IntfConfig::adminEnabled() const {
    return sdk_->internal_->ethIntfConfig(intfId_)->adminEnabled();
+}
+
+void IntfConfig::adminEnabledIs(bool enabled) {
+   return sdk_->internal_->ethIntfConfig(intfId_)->enabledIs(enabled);
 }
 
 AdminDisabledReason IntfConfig::adminDisabledReason() const {

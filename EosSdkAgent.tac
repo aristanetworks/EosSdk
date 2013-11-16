@@ -33,7 +33,7 @@ SdkSm : Tac::Type(sdk,
    name : Tac::Name;
    handlers : Handlers::RawPtr;
 
-   ethIntfConfigDir : in Interface::EthIntfConfigDir::PtrConst;
+   ethIntfConfigDir : inout Interface::EthIntfConfigDir::Ptr;
    handleEthIntfConfigDir : extern invasive void(intfId : Arnet::IntfId);
    ethIntfConfigDir::intfConfig[intfId] => handleEthIntfConfigDir(intfId);
    ethIntfConfigSm : EthIntfConfigSm[intfId];
@@ -43,7 +43,7 @@ SdkSm : Tac::Type(sdk,
    ethIntfStatusDir::intfStatus[intfId] => handleEthIntfStatusDir(intfId);
    ethIntfStatusSm : EthIntfStatusSm[intfId];
 
-   ethPhyIntfConfigDir : in Interface::EthPhyIntfConfigDir::PtrConst;
+   ethPhyIntfConfigDir : inout Interface::EthPhyIntfConfigDir::Ptr;
    handleEthPhyIntfConfigDir : extern invasive void(intfId : Arnet::IntfId);
    ethPhyIntfConfigDir::intfConfig[intfId] => handleEthPhyIntfConfigDir(intfId);
    ethPhyIntfConfigSm : EthPhyIntfConfigSm[intfId];
@@ -59,9 +59,9 @@ Agent : Tac::Type( name ) : AgentBase::CAgent {
    `hasFactoryFunction;
    `allowsDirInstantiation;
 
-   ethIntfConfigDir : Interface::EthIntfConfigDir::PtrConst;
+   ethIntfConfigDir : Interface::EthIntfConfigDir::Ptr;
    ethIntfStatusDir : Interface::EthIntfStatusDir::PtrConst;
-   ethPhyIntfConfigDir : Interface::EthPhyIntfConfigDir::PtrConst;
+   ethPhyIntfConfigDir : Interface::EthPhyIntfConfigDir::Ptr;
    ethPhyIntfStatusDir : Interface::EthPhyIntfStatusDir::PtrConst;
 
    sdk : SDK::RawPtr;
