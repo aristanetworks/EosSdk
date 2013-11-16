@@ -4,22 +4,19 @@ CPP_INCLUDE_FLAGS = -I/usr/include/python$(PYTHON_VERSION) \
    -Isrc-includes -I$(includedir)
 AM_CPPFLAGS = $(CPP_INCLUDE_FLAGS) -DTAC_STRING_TO_NAME_CONVERSION
 AM_CXXFLAGS = -std=gnu++0x -Wextra -Wall -Werror -Wno-unused-parameter
+AM_LDFLAGS = -Wl,--no-undefined
 
-lib_LTLIBRARIES = libEosSdk.la libEosSdkAgent.la libEosSdkLoader.la
+lib_LTLIBRARIES = libEosSdk.la libEosSdkLoader.la
 pkginclude_HEADERS = Fwd.h EosSdk.h
 
 libEosSdk_la_SOURCES = EosSdk.cpp
-libEosSdk_la_LIBADD = -lEthIntf -lIntf -lArnet -ltac
-
-libEosSdkAgent_la_SOURCES = SDKInternal.h
-libEosSdkAgent_la_SOURCES += EosSdkAgent.tac EosSdkAgent.tin
-libEosSdkAgent_la_SOURCES += EthIntfSm.tac EthIntfSm.tin
-libEosSdkAgent_la_LIBADD = libEosSdk.la -lAgentBase -lSysdbEntityMgr -ltac -ldl
-libEosSdkAgent_la_LDFLAGS = -Wl,--no-undefined
+libEosSdk_la_SOURCES += SDKInternal.h
+libEosSdk_la_SOURCES += EosSdkAgent.tac EosSdkAgent.tin
+libEosSdk_la_SOURCES += EthIntfSm.tac EthIntfSm.tin
+libEosSdk_la_LIBADD = -lEthIntf -lIntf -lArnet -lAgentBase -lSysdbEntityMgr -ltac -ldl
 
 libEosSdkLoader_la_SOURCES = EosSdkLoader.cpp
 libEosSdkLoader_la_LIBADD = -lAgentBase -ltac /usr/lib/Scrt1.o
-libEosSdkLoader_la_LDFLAGS = -Wl,--no-undefined
 
 pkgdata_LTLIBRARIES = libDemoApp.la
 libDemoApp_la_SOURCES = test/DemoApp.cpp
