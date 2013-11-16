@@ -398,12 +398,8 @@ class SDK {
    void createTimer(TimerTask& task, Seconds deadline);
    void cancelTimer(TimerTask& task);
 
-   void registerFileDescriptor(FileDescriptorHandler& fd) {
-      fds_.insert(&fd);
-   }
-   void unregisterFileDescriptor(const FileDescriptorHandler& fd) {
-      fds_.erase(const_cast<FileDescriptorHandler*>(&fd));
-   }
+   void registerFileDescriptor(FileDescriptorHandler& fd);
+   void unregisterFileDescriptor(const FileDescriptorHandler& fd);
 
    void registerHandlers(const std::string& name, Handlers* handlers);
    void unregisterHandlers(const std::string& name);
@@ -417,7 +413,7 @@ class SDK {
    friend class SdkSm;
 
    SDKInternal* const internal_;
-   std::map<std::string, Handlers*> handlers_;
+   std::map<std::string, Handlers*> handlers_;  // Protected by the ActivityLock.
 
    struct FileDescriptorCmp {
       bool operator()(const FileDescriptorHandler* const a,
@@ -425,6 +421,7 @@ class SDK {
          return a->fd() < b->fd();
       }
    };
+   // Protected by the ActivityLock.
    std::set<FileDescriptorHandler*, FileDescriptorCmp> fds_;
 
    explicit SDK(SDKInternal* const internal) : internal_(internal) {

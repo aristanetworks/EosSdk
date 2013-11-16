@@ -5,10 +5,10 @@
 
 #include "EosSdk.h"
 
-#include <Tac/PtrInterface.h>
 #include <Arnet/EthAddr.h>
 #include <Arnet/IntfId.h>
 #include <EthIntf/EthIntf.h>
+#include <Tac/ActivityLock.h>
 
 #include "SDKInternal.h"
 #include "EnumCast.h"
@@ -43,6 +43,7 @@ static EthAddr convert(Arnet::EthAddr addr) {
 // --- //
 
 void SDK::registerHandlers(const std::string& name, Handlers* handlers) {
+   Tac::ActivityLockAnchor lock;
    Handlers* prev = handlers_[name];
    if (prev) {
       // TODO: throw an exception?
@@ -53,8 +54,21 @@ void SDK::registerHandlers(const std::string& name, Handlers* handlers) {
 };
 
 void SDK::unregisterHandlers(const std::string& name) {
+   Tac::ActivityLockAnchor lock;
    handlers_.erase(name);
    internal_->unregisterHandlers(name);
+}
+
+void SDK::registerFileDescriptor(FileDescriptorHandler& fd) {
+   Tac::ActivityLockAnchor lock;
+   fds_.insert(&fd);
+   // TODO: use internal_ to insert this FD in the Activity loop.
+}
+
+void SDK::unregisterFileDescriptor(const FileDescriptorHandler& fd) {
+   Tac::ActivityLockAnchor lock;
+   fds_.erase(const_cast<FileDescriptorHandler*>(&fd));
+   // TODO: use internal_ to remove this FD from the Activity loop.
 }
 
 // ------ //
