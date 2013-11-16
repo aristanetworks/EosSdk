@@ -57,3 +57,5 @@ EthPhyIntfStatusSm : Tac::Type(handler, intfId,
 }
 
 }
+
+<<= CppBlock("EthIntfSm.tin");
