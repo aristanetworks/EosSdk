@@ -1,4 +1,4 @@
-EXTRA_DIST = EosSdk.spec $(TESTS)
+EXTRA_DIST = EosSdk.spec $(TESTS) test/EosSdkTestLib.py
 
 CPP_INCLUDE_FLAGS = -I/usr/include/python$(PYTHON_VERSION) \
    -Isrc-includes -I$(includedir)
