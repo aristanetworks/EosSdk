@@ -20,6 +20,9 @@ Agent : Tac::Type( name ) : AgentBase::CAgent {
    `allowsDirInstantiation;
 
    sdk : SDK::RawPtr;
+   ethIntfConfigDir : Interface::EthIntfConfigDir::PtrConst;
+   ethIntfStatusDir : Interface::EthIntfStatusDir::PtrConst;
+   ethPhyIntfConfigDir : Interface::EthPhyIntfConfigDir::PtrConst;
    ethPhyIntfStatusDir : Interface::EthPhyIntfStatusDir::PtrConst;
 
    doInit : extern invasive overriding void();

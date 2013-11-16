@@ -8,6 +8,7 @@
 #include <Tac/Tracing.h>
 
 #include "EosSdk/EosSdk.h"
+#include "SDKInternal.h"
 
 DEFAULT_TRACE_HANDLE( "EosSdkAgent" )
 
@@ -19,6 +20,13 @@ Agent::doInit() {
 
    Sysdb::MountGroup::Ptr mg = entityManager()->getMountGroup( this );
 
+   mg->doMount( Sysdb::Mount( "interface/config/eth/intf",
+                              "Interface::EthIntfConfigDir", "r" ) );
+   mg->doMount( Sysdb::Mount( "interface/status/eth/intf",
+                              "Interface::EthIntfStatusDir", "r" ) );
+
+   mg->doMount( Sysdb::Mount( "interface/config/eth/phy",
+                              "Interface::EthPhyIntfConfigDit", "r" ) );
    mg->doMount( Sysdb::Mount( "interface/status/eth/phy",
                               "Interface::EthPhyIntfStatusDir", "r" ) );
 
@@ -31,6 +39,13 @@ Agent::doMountsComplete( Sysdb::MountStatus mountStatus,
    TRACE8( __PRETTY_FUNCTION__ );
    assert( mountStatus == Sysdb::mountSuccess() );
 
+   ethIntfConfigDirIs( em->getEntity<Interface::EthIntfConfigDir>(
+            "interface/config/eth/intf" ) );
+   ethIntfStatusDirIs( em->getEntity<Interface::EthIntfStatusDir>(
+            "interface/status/eth/intf" ) );
+
+   ethPhyIntfConfigDirIs( em->getEntity<Interface::EthPhyIntfConfigDir>(
+            "interface/config/eth/phy" ) );
    ethPhyIntfStatusDirIs( em->getEntity<Interface::EthPhyIntfStatusDir>(
             "interface/status/eth/phy" ) );
 
@@ -52,7 +67,8 @@ Agent::doMountsComplete( Sysdb::MountStatus mountStatus,
       abort();
    }
 
-   sdkIs( new SDK() );
+   SDKInternal* internal = new SDKInternal( this );
+   sdkIs( internal->createSDK() );
    TRACE0( "Calling EosSdkInit from " << app );
    init( sdk() );
 }

@@ -20,6 +20,7 @@ typedef double Seconds;
 typedef uint32_t U32;
 typedef uint16_t U16;
 
+class SDKInternal;
 class SDK;
 typedef void (*EosSdkInitFunc)(SDK*);
 
@@ -85,28 +86,6 @@ class EthAddr {
    U16 word2;
 };
 
-namespace Internal {
-void _referencesInc(const Tac::PtrInterface* entity);
-void _referencesDec(const Tac::PtrInterface* entity);
-}
-
-// TODO: Hide all constructors and befriend a factory helper class not exposed
-// by the SDK.
-template <typename T>
-class TacEntity {
- public:
-   typedef T TacType;
-   explicit TacEntity(const T* entity) : entity_(entity) {
-      assert(entity);
-      Internal::_referencesInc(reinterpret_cast<const Tac::PtrInterface*>(entity_));
-   }
-   ~TacEntity() {
-      Internal::_referencesDec(reinterpret_cast<const Tac::PtrInterface*>(entity_));
-   }
- protected:
-   const T* entity_;  // TODO: Remove this and replace with a per-class handler.
-};
-
 enum AdminDisabledReason {
    reasonUnknown,
    reasonEnabled,
@@ -115,15 +94,21 @@ enum AdminDisabledReason {
    reasonInactive,
 };
 
-class IntfConfig : public TacEntity< ::Interface::IntfConfig> {
+class IntfConfig {
  public:
-   explicit IntfConfig(const TacType* config) : TacEntity(config) {
+   IntfId intfId() const {
+      return intfId_;
    }
-
-   IntfId intfId() const;
    std::string description() const;
    bool adminEnabled() const;
    AdminDisabledReason adminDisabledReason() const;
+
+ private:
+   friend class SDK;
+   IntfConfig(SDK* const sdk, const IntfId& intfId) : sdk_(sdk), intfId_(intfId) {
+   }
+   SDK* const sdk_;
+   IntfId intfId_;
 };
 
 enum OperStatus {
@@ -136,13 +121,19 @@ enum OperStatus {
    intfOperLowerLayerDown,
 };
 
-class IntfStatus : public TacEntity< ::Interface::IntfStatus> {
+class IntfStatus {
  public:
-   explicit IntfStatus(const TacType* status) : TacEntity(status) {
+   IntfId intfId() const {
+      return intfId_;
    }
-
-   IntfId intfId() const;
    OperStatus operStatus() const;
+
+ private:
+   friend class SDK;
+   IntfStatus(SDK* const sdk, const IntfId& intfId) : sdk_(sdk), intfId_(intfId) {
+   }
+   SDK* const sdk_;
+   IntfId intfId_;
 };
 
 enum EthLinkMode {
@@ -175,17 +166,24 @@ enum EthTimestampMode {
    timestampModeReplaceFcs, // replace FCS with timestamp field
 };
 
-class EthPhyIntfConfig : public TacEntity< ::Interface::EthPhyIntfConfig> {
+class EthPhyIntfConfig {
  public:
-   explicit EthPhyIntfConfig(const TacType* config) : TacEntity(config) {
+   IntfId intfId() const {
+      return intfId_;
    }
-
-   IntfId intfId() const;
    EthAddr addr() const;
 
    EthLinkMode linkModeLocal() const;
    LoopbackMode loopbackMode() const;
    EthTimestampMode timestampMode() const;
+
+ private:
+   friend class SDK;
+   EthPhyIntfConfig(SDK* const sdk, const IntfId& intfId)
+      : sdk_(sdk), intfId_(intfId) {
+   }
+   SDK* const sdk_;
+   IntfId intfId_;
 };
 
 enum LinkStatus {
@@ -229,12 +227,11 @@ enum TxFaultStatus {
    txFaultNotDetected,
 };
 
-class EthPhyIntfStatus : public TacEntity< ::Interface::EthPhyIntfStatus> {
+class EthPhyIntfStatus {
  public:
-   explicit EthPhyIntfStatus(const TacType* status): TacEntity(status) {
+   IntfId intfId() const {
+      return intfId_;
    }
-
-   IntfId intfId() const;
    EthAddr addr() const;
    EthAddr burnedInAddr() const;
    LinkStatus linkStatus() const;
@@ -263,6 +260,14 @@ class EthPhyIntfStatus : public TacEntity< ::Interface::EthPhyIntfStatus> {
 
    XcvrPresence xcvrPresence() const;
    std::string xcvrType() const;
+
+ private:
+   friend class SDK;
+   EthPhyIntfStatus(SDK* const sdk, const IntfId& intfId)
+      : sdk_(sdk), intfId_(intfId) {
+   }
+   SDK* const sdk_;
+   IntfId intfId_;
 };
 
 class EthLagIntfStatus {
@@ -294,10 +299,8 @@ class Handlers {
    }
 };
 
-class FileDescriptor {
+class FileDescriptorHandler {
  public:
-   FileDescriptor(int fd) : fd_(fd) {
-   }
    int fd() const {
       return fd_;
    }
@@ -310,7 +313,11 @@ class FileDescriptor {
    virtual void handleWriteable() = 0;
    virtual void handleException() = 0;
 
- protected:
+ private:
+   FileDescriptorHandler(SDK* const sdk, int fd)
+      : sdk_(sdk), fd_(fd) {
+   }
+   SDK* const sdk_;
    int fd_;
 };
 
@@ -321,11 +328,25 @@ class TimerTask {
 
 class SDK {
  public:
+   // Access to basic interface config and status.
+   IntfConfig intfConfig(const IntfId& intfId) {
+      return IntfConfig(this, intfId);
+   }
+   IntfStatus intfStatus(const IntfId& intfId) {
+      return IntfStatus(this, intfId);
+   }
+   // Access to the Ethernet interface config and status.
+   EthPhyIntfConfig ethIntfConfig(const IntfId& intfId) {
+      return EthPhyIntfConfig(this, intfId);
+   }
+   EthPhyIntfStatus ethIntfStatus(const IntfId& intfId) {
+      return EthPhyIntfStatus(this, intfId);
+   }
+
    void addRoute(const IPv4& ipAddress, Via &via) {};
    void addRoute(const IPv6& ipAddress, Via &via) {};
    void delRoute(const IPv4& ipAddress, Via &via) {};
    void delRoute(const IPv6& ipAddress, Via &via) {};
-
 
    // Create/delete ACLs
    void createAcl(const std::string& name, AclType aclType) {};
@@ -344,11 +365,11 @@ class SDK {
    void createTimer(TimerTask& task, Seconds deadline);
    void cancelTimer(TimerTask& task);
 
-   void registerFileDescriptor(FileDescriptor& fd) {
+   void registerFileDescriptor(FileDescriptorHandler& fd) {
       fds_.insert(&fd);
    }
-   void unregisterFileDescriptor(const FileDescriptor& fd) {
-      fds_.erase(const_cast<FileDescriptor*>(&fd));
+   void unregisterFileDescriptor(const FileDescriptorHandler& fd) {
+      fds_.erase(const_cast<FileDescriptorHandler*>(&fd));
    }
 
    void registerHandlers(Handlers& handlers) {
@@ -368,15 +389,28 @@ class SDK {
    }
 
  private:
+   friend class SDKInternal;
+   friend class IntfConfig;
+   friend class IntfStatus;
+   friend class EthPhyIntfConfig;
+   friend class EthPhyIntfStatus;
+   SDKInternal* const internal_;
    std::list<Handlers*> handlers_;
 
    struct FileDescriptorCmp {
-      bool operator()(const FileDescriptor* const a,
-                      const FileDescriptor* const b) const {
+      bool operator()(const FileDescriptorHandler* const a,
+                      const FileDescriptorHandler* const b) const {
          return a->fd() < b->fd();
       }
    };
-   std::set<FileDescriptor*, FileDescriptorCmp> fds_;
+   std::set<FileDescriptorHandler*, FileDescriptorCmp> fds_;
+
+   explicit SDK(SDKInternal* const internal) : internal_(internal) {
+   }
+
+   // Disable copy constructor and assignment operator.
+   SDK(const SDK& sdk);
+   SDK& operator=(const SDK& sdk);
 };
 
 }  // namespace EosSdk

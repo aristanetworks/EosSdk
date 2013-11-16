@@ -8,18 +8,9 @@
 #include <Arnet/IntfId.h>
 #include <EthIntf/EthIntf.h>
 
+#include "SDKInternal.h"
+
 namespace EosSdk {
-
-namespace Internal {
-void _referencesInc(const Tac::PtrInterface* entity) {
-   U32 refCnt = entity->referencesInc(1);
-   assert(refCnt > 1);  // We can't possibly be the only ones.
-}
-
-void _referencesDec(const Tac::PtrInterface* entity) {
-   entity->referencesDec(1);
-}
-} // namespace Internal
 
 const EthAddr EthAddr::kZero = EthAddr(0x0000, 0x0000, 0x0000);
 const EthAddr EthAddr::kBroadcast = EthAddr(0xffff, 0xffff, 0xffff);
@@ -40,10 +31,6 @@ static std::string convert(const Tac::String& s) {
    return s.stdString();
 }
 
-static IntfId convert(Arnet::IntfId intf) {
-   return IntfId(intf.stringValue().stdString());
-}
-
 static EthAddr convert(Arnet::EthAddr addr) {
    return EthAddr(addr.word0(), addr.word1(), addr.word2());
 }
@@ -52,20 +39,17 @@ static EthAddr convert(Arnet::EthAddr addr) {
 // IntfConfig //
 // ---------- //
 
-IntfId IntfConfig::intfId() const {
-   return convert(entity_->intfId());
-}
-
 std::string IntfConfig::description() const {
-   return convert(entity_->description());
+   return convert(sdk_->internal_->ethIntfConfig(intfId_)->description());
 }
 
 bool IntfConfig::adminEnabled() const {
-   return entity_->adminEnabled();
+   return sdk_->internal_->ethIntfConfig(intfId_)->adminEnabled();
 }
 
 AdminDisabledReason IntfConfig::adminDisabledReason() const {
-   Tac::String reason = entity_->enabledStateReason();
+   Tac::String reason =
+      sdk_->internal_->ethIntfConfig(intfId_)->enabledStateReason();
    // See IntfSM::handleStateChange in Intf/SysdbErrdisableIntf.tin
    if (reason.empty()) {
       return reasonEnabled;
@@ -83,139 +67,136 @@ AdminDisabledReason IntfConfig::adminDisabledReason() const {
 // IntfStatus //
 // ---------- //
 
-IntfId IntfStatus::intfId() const {
-   return convert(entity_->intfId());
-}
-
 OperStatus IntfStatus::operStatus() const {
-   return static_cast<OperStatus>(static_cast<int>(entity_->operStatus()));
+   return static_cast<OperStatus>(
+         static_cast<int>(sdk_->internal_->ethIntfStatus(intfId_)->operStatus()));
 }
 
 // ---------------- //
 // EthPhyIntfConfig //
 // ---------------- //
 
-IntfId EthPhyIntfConfig::intfId() const {
-   return convert(entity_->intfId());
-}
-
 EthAddr EthPhyIntfConfig::addr() const {
-   return convert(entity_->addr());
+   return convert(sdk_->internal_->ethPhyIntfConfig(intfId_)->addr());
 }
 
 
 EthLinkMode EthPhyIntfConfig::linkModeLocal() const {
-   return static_cast<EthLinkMode>(static_cast<int>(entity_->linkModeLocal()));
+   return static_cast<EthLinkMode>(static_cast<int>(
+         sdk_->internal_->ethPhyIntfConfig(intfId_)->linkModeLocal()));
 }
 
 LoopbackMode EthPhyIntfConfig::loopbackMode() const {
-   return static_cast<LoopbackMode>(static_cast<int>(entity_->loopbackMode()));
+   return static_cast<LoopbackMode>(static_cast<int>(
+         sdk_->internal_->ethPhyIntfConfig(intfId_)->loopbackMode()));
 }
 
 EthTimestampMode EthPhyIntfConfig::timestampMode() const {
-   return static_cast<EthTimestampMode>(
-         static_cast<int>(entity_->timestampMode()));
+   return static_cast<EthTimestampMode>(static_cast<int>(
+         sdk_->internal_->ethPhyIntfConfig(intfId_)->timestampMode()));
 }
 
 // ---------------- //
 // EthPhyIntfStatus //
 // ---------------- //
 
-IntfId EthPhyIntfStatus::intfId() const {
-   return convert(entity_->intfId());
-}
-
 EthAddr EthPhyIntfStatus::addr() const {
-   return convert(entity_->addr());
+   return convert(sdk_->internal_->ethPhyIntfStatus(intfId_)->addr());
 }
 
 EthAddr EthPhyIntfStatus::burnedInAddr() const {
-   return convert(entity_->burnedInAddr());
+   return convert(sdk_->internal_->ethPhyIntfStatus(intfId_)->burnedInAddr());
 }
 
 LinkStatus EthPhyIntfStatus::linkStatus() const {
-   return static_cast<LinkStatus>(static_cast<int>(entity_->linkStatus()));
+   return static_cast<LinkStatus>(
+        static_cast<int>(sdk_->internal_->ethPhyIntfStatus(intfId_)->linkStatus()));
 }
 
 
 bool EthPhyIntfStatus::macRxRemoteFault() const {
-   return entity_->macRxRemoteFault();
+   return sdk_->internal_->ethPhyIntfStatus(intfId_)->macRxRemoteFault();
 }
 
 U32 EthPhyIntfStatus::macRxRemoteFaultChanges() const {
-   return entity_->macRxRemoteFaultChanges();
+   return sdk_->internal_->ethPhyIntfStatus(intfId_)->macRxRemoteFaultChanges();
 }
 
 Seconds EthPhyIntfStatus::lastMacRxRemoteFaultChange() const {
-   return entity_->lastMacRxRemoteFaultChange();
+   return sdk_->internal_->ethPhyIntfStatus(intfId_)->lastMacRxRemoteFaultChange();
 }
 
 
 bool EthPhyIntfStatus::macRxLocalFault() const {
-   return entity_->macRxLocalFault();
+   return sdk_->internal_->ethPhyIntfStatus(intfId_)->macRxLocalFault();
 }
 
 U32 EthPhyIntfStatus::macRxLocalFaultChanges() const {
-   return entity_->macRxLocalFaultChanges();
+   return sdk_->internal_->ethPhyIntfStatus(intfId_)->macRxLocalFaultChanges();
 }
 
 Seconds EthPhyIntfStatus::lastMacRxLocalFaultChange() const {
-   return entity_->lastMacRxLocalFaultChange();
+   return sdk_->internal_->ethPhyIntfStatus(intfId_)->lastMacRxLocalFaultChange();
 }
 
 
 LocalFaultStatus EthPhyIntfStatus::localFaultStatus() const {
-   return static_cast<LocalFaultStatus>(
-         static_cast<int>(entity_->localFaultStatus()));
+   return static_cast<LocalFaultStatus>(static_cast<int>(
+         sdk_->internal_->ethPhyIntfStatus(intfId_)->localFaultStatus()));
 }
 
 Seconds EthPhyIntfStatus::localFaultStatusChangeTime() const {
-   return entity_->localFaultStatusChangeTime();
+   return sdk_->internal_->ethPhyIntfStatus(intfId_)->localFaultStatusChangeTime();
 }
 
 U32 EthPhyIntfStatus::localFaultStatusChanges() const {
-   return entity_->localFaultStatusChanges();
+   return sdk_->internal_->ethPhyIntfStatus(intfId_)->localFaultStatusChanges();
 }
 
 
 TxFaultStatus EthPhyIntfStatus::txFaultStatus() const {
-   return static_cast<TxFaultStatus>(static_cast<int>(entity_->txFaultStatus()));
+   return static_cast<TxFaultStatus>(static_cast<int>(
+         sdk_->internal_->ethPhyIntfStatus(intfId_)->txFaultStatus()));
 }
 
 Seconds EthPhyIntfStatus::txFaultStatusChangeTime() const {
-   return entity_->txFaultStatusChangeTime();
+   return sdk_->internal_->ethPhyIntfStatus(intfId_)->txFaultStatusChangeTime();
 }
 
 U32 EthPhyIntfStatus::txFaultStatusChanges() const {
-   return entity_->txFaultStatusChanges();
+   return sdk_->internal_->ethPhyIntfStatus(intfId_)->txFaultStatusChanges();
 }
 
 
 EthTimestampMode EthPhyIntfStatus::timestampMode() const {
-   return static_cast<EthTimestampMode>(
-         static_cast<int>(entity_->timestampMode()));
+   return static_cast<EthTimestampMode>(static_cast<int>(
+         sdk_->internal_->ethPhyIntfStatus(intfId_)->timestampMode()));
 }
 
 
 EthDuplex EthPhyIntfStatus::duplex() const {
-   return static_cast<EthDuplex>(static_cast<int>(entity_->duplex()));
+   return static_cast<EthDuplex>(
+         static_cast<int>(sdk_->internal_->ethPhyIntfStatus(intfId_)->duplex()));
 }
 
 EthSpeed EthPhyIntfStatus::speed() const {
-   return static_cast<EthSpeed>(static_cast<int>(entity_->speed()));
+   return static_cast<EthSpeed>(
+         static_cast<int>(sdk_->internal_->ethPhyIntfStatus(intfId_)->speed()));
 }
 
 LoopbackMode EthPhyIntfStatus::loopbackMode() const {
-   return static_cast<LoopbackMode>(static_cast<int>(entity_->loopbackMode()));
+   return static_cast<LoopbackMode>(static_cast<int>(
+         sdk_->internal_->ethPhyIntfStatus(intfId_)->loopbackMode()));
 }
 
 
 XcvrPresence EthPhyIntfStatus::xcvrPresence() const {
-   return static_cast<XcvrPresence>(static_cast<int>(entity_->xcvrPresence()));
+   return static_cast<XcvrPresence>(static_cast<int>(
+         sdk_->internal_->ethPhyIntfStatus(intfId_)->xcvrPresence()));
 }
 
 std::string EthPhyIntfStatus::xcvrType() const {
-   return convert(entity_->xcvrType());
+   return convert(sdk_->internal_->ethPhyIntfStatus(intfId_)->xcvrType());
 }
 
 

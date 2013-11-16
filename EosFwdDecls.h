@@ -9,16 +9,4 @@ namespace Tac {
    class PtrInterface;
 }
 
-// From Intf/Intf.tac
-namespace Interface {
-   class IntfConfig;
-   class IntfStatus;
-}
-
-// From EthIntf/EthIntf.tac
-namespace Interface {
-   class EthPhyIntfConfig;
-   class EthPhyIntfStatus;
-}
-
 #endif // EOSSDK_EOSFWDDECLS_H
