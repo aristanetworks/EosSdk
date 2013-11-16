@@ -26,22 +26,22 @@ enum AclType { AclIPv4, AclIPv6, AclMAC };
 
 class IntfId {
  public:
-   explicit IntfId(const std::string& name) : name_(name) {
+   explicit IntfId(U32 intfId) : intfId_(intfId) {
    }
+   explicit IntfId(const std::string& name);
 
-   const std::string& name() const {
-      return name_;
-   }
+   std::string name() const;
+   std::string shortName() const;
 
    bool operator==(const IntfId& other) {
-      return name_ == other.name_;
+      return intfId_ == other.intfId_;
    }
 
    bool operator!=(const IntfId& other) {
-      return name_ != other.name_;
+      return intfId_ != other.intfId_;
    }
  private:
-   std::string name_;
+   U32 intfId_;
 };
 
 class EthAddr {

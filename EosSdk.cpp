@@ -55,6 +55,31 @@ void SDK::unregisterHandlers(const std::string& name) {
    internal_->unregisterHandlers(name);
 }
 
+// ------ //
+// IntfId //
+// ------ //
+
+// We can't create an Arnet::IntfId from a U32, so this subclass helps us work
+// around that by (ab)using the fact that there is a protected mutator available.
+namespace {
+   struct IntfIdHelper : public Arnet::IntfId {
+      explicit IntfIdHelper(U32 intfId) {
+         intfIdIs(intfId);
+      }
+   };
+}
+
+IntfId::IntfId(const std::string& name) : intfId_(Arnet::IntfId(name).intfId()) {
+}
+
+std::string IntfId::name() const {
+   return IntfIdHelper(intfId_).stringValue().stdString();
+}
+
+std::string IntfId::shortName() const {
+   return IntfIdHelper(intfId_).shortName().stdString();
+}
+
 // ---------- //
 // IntfConfig //
 // ---------- //
