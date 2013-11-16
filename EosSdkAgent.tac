@@ -46,12 +46,12 @@ SdkSm : Tac::Type(sdk,
    ethPhyIntfConfigDir : in Interface::EthPhyIntfConfigDir::PtrConst;
    handleEthPhyIntfConfigDir : extern invasive void(intfId : Arnet::IntfId);
    ethPhyIntfConfigDir::intfConfig[intfId] => handleEthPhyIntfConfigDir(intfId);
-   ethPhyIntfConfigSm : EthIntfConfigSm[intfId];
+   ethPhyIntfConfigSm : EthPhyIntfConfigSm[intfId];
 
    ethPhyIntfStatusDir : in Interface::EthPhyIntfStatusDir::PtrConst;
    handleEthPhyIntfStatusDir : extern invasive void(intfId : Arnet::IntfId);
    ethPhyIntfStatusDir::intfStatus[intfId] => handleEthPhyIntfStatusDir(intfId);
-   ethPhyIntfStatusSm : EthIntfConfigSm[intfId];
+   ethPhyIntfStatusSm : EthPhyIntfStatusSm[intfId];
 }
 
 Agent : Tac::Type( name ) : AgentBase::CAgent {

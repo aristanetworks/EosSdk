@@ -297,7 +297,17 @@ class IntfHandler {
 };
 
 class EthPhyIntfHandler {
-   // TBD
+ public:
+   virtual void onDeletion(const IntfId& intfId) {
+   }
+
+   // ---------------- //
+   // EthPhyIntfConfig //
+   // ---------------- //
+
+   // ---------------- //
+   // EthPhyIntfStatus //
+   // ---------------- //
 };
 
 class Handlers {

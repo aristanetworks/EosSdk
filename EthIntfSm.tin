@@ -87,6 +87,29 @@ void SdkSm::handleEthPhyIntfConfigDir( Arnet::IntfId intfId ) {
 
 void SdkSm::handleEthPhyIntfStatusDir( Arnet::IntfId intfId ) {
    TRACE8( __PRETTY_FUNCTION__ << " intfId=" << intfId );
+   Interface::EthPhyIntfStatus::PtrConst intfStatus =
+      ethPhyIntfStatusDir()->intfStatus( intfId );
+   EOS::IntfId sdkIntfId = convert( intfId );
+   if ( intfStatus ) {
+      Interface::EthPhyIntfConfig::PtrConst intfConfig =
+         ethPhyIntfConfigDir()->intfConfig( intfId );
+      assert( intfConfig );
+      EthPhyIntfHandler* intfHandler =
+         handlers()->handleEthPhyIntfCreation( sdk()->ethIntfStatus( sdkIntfId ) );
+      if ( intfHandler ) {
+         TRACE7( __PRETTY_FUNCTION__ << " Created nested SM for " << intfId );
+         ethPhyIntfConfigSmIs( intfHandler, intfId, intfConfig );
+         ethPhyIntfStatusSmIs( intfHandler, intfId, intfStatus );
+      }
+   } else {
+      auto sm = ethPhyIntfConfigSm( intfId );
+      if ( sm ) {
+         TRACE7( __PRETTY_FUNCTION__ << " Deleting nested SM for " << intfId );
+         sm->handler()->onDeletion( sdkIntfId );
+         ethPhyIntfConfigSmDel( intfId );
+         ethPhyIntfStatusSmDel( intfId );
+      }
+   }
 }
 
 }
