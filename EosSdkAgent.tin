@@ -72,7 +72,6 @@ Agent::doMountsComplete( Sysdb::MountStatus mountStatus,
 
    TRACE0( "Calling EosSdkInit from " << app );
    init( sdk() );
-
 }
 
 }  // namespace EOS

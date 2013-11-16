@@ -1,0 +1,79 @@
+// Copyright (c) 2013 Arista Networks, Inc.  All rights reserved.
+// Arista Networks, Inc. Confidential and Proprietary.
+
+#include <Tac/Tracing.h>
+
+#include "EosSdk/EosSdk.h"
+#include "SDKInternal.h"
+
+DEFAULT_TRACE_HANDLE( "EosSdkSm" )
+
+namespace EOS {
+
+static EOS::IntfId convert( Arnet::IntfId intfId ) {
+   return EOS::IntfId( intfId.stringValue().stdString() );
+}
+
+void SdkSm::handleEthIntfConfigDir( Arnet::IntfId intfId ) {
+   TRACE8( __PRETTY_FUNCTION__ << " intfId=" << intfId );
+}
+
+void SdkSm::handleEthIntfStatusDir( Arnet::IntfId intfId ) {
+   TRACE8( __PRETTY_FUNCTION__ << " intfId=" << intfId );
+   Interface::EthIntfStatus::PtrConst intfStatus =
+      ethIntfStatusDir()->intfStatus( intfId );
+   EOS::IntfId sdkIntfId = convert( intfId );
+   if ( intfStatus ) {
+      Interface::EthIntfConfig::PtrConst intfConfig =
+         ethIntfConfigDir()->intfConfig( intfId );
+      assert( intfConfig );
+      IntfHandler* intfHandler =
+         handlers()->handleIntfCreation( sdk()->intfStatus( sdkIntfId ) );
+      if ( intfHandler ) {
+         TRACE7( __PRETTY_FUNCTION__ << " Created nested SM for " << intfId );
+         ethIntfConfigSmIs( intfHandler, intfId, intfConfig );
+         ethIntfStatusSmIs( intfHandler, intfId, intfStatus );
+      }
+   } else {
+      auto sm = ethIntfConfigSm( intfId );
+      if ( sm ) {
+         TRACE7( __PRETTY_FUNCTION__ << " Deleting nested SM for " << intfId );
+         sm->handler()->onDeletion( sdkIntfId );
+         ethIntfConfigSmDel( intfId );
+         ethIntfStatusSmDel( intfId );
+      }
+   }
+}
+
+void SdkSm::handleEthPhyIntfConfigDir( Arnet::IntfId intfId ) {
+   TRACE8( __PRETTY_FUNCTION__ << " intfId=" << intfId );
+}
+
+void SdkSm::handleEthPhyIntfStatusDir( Arnet::IntfId intfId ) {
+   TRACE8( __PRETTY_FUNCTION__ << " intfId=" << intfId );
+   Interface::EthPhyIntfStatus::PtrConst intfStatus =
+      ethPhyIntfStatusDir()->intfStatus( intfId );
+   EOS::IntfId sdkIntfId = convert( intfId );
+   if ( intfStatus ) {
+      Interface::EthPhyIntfConfig::PtrConst intfConfig =
+         ethPhyIntfConfigDir()->intfConfig( intfId );
+      assert( intfConfig );
+      EthPhyIntfHandler* intfHandler =
+         handlers()->handleEthPhyIntfCreation( sdk()->ethIntfStatus( sdkIntfId ) );
+      if ( intfHandler ) {
+         TRACE7( __PRETTY_FUNCTION__ << " Created nested SM for " << intfId );
+         ethPhyIntfConfigSmIs( intfHandler, intfId, intfConfig );
+         ethPhyIntfStatusSmIs( intfHandler, intfId, intfStatus );
+      }
+   } else {
+      auto sm = ethPhyIntfConfigSm( intfId );
+      if ( sm ) {
+         TRACE7( __PRETTY_FUNCTION__ << " Deleting nested SM for " << intfId );
+         sm->handler()->onDeletion( sdkIntfId );
+         ethPhyIntfConfigSmDel( intfId );
+         ethPhyIntfStatusSmDel( intfId );
+      }
+   }
+}
+
+}  // namespace EOS
