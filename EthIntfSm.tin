@@ -5,6 +5,7 @@
 
 #include "EosSdk/EosSdk.h"
 #include "SDKInternal.h"
+#include "EnumCast.h"
 
 DEFAULT_TRACE_HANDLE( "EosSdkEthIntfSm" )
 
@@ -42,6 +43,11 @@ void EthIntfConfigSm::handleAdminDisabledReason() {
    AdminDisabledReason reason =
       convertAdminDisabledReason( ethIntfConfig()->enabledStateReason() );
    handler()->onAdminDisabledReason( convert( intfId() ), reason );
+}
+
+void EthIntfStatusSm::handleOperStatus() {
+   handler()->onOperStatus( convert( intfId() ),
+                            enum_cast<OperStatus>( ethIntfStatus()->operStatus() ) );
 }
 
 void SdkSm::handleEthIntfConfigDir( Arnet::IntfId intfId ) {

@@ -270,6 +270,13 @@ class EthLagIntfStatus {
 
 class IntfHandler {
  public:
+   virtual void onDeletion(const IntfId& intfId) {
+   }
+
+   // ---------- //
+   // IntfConfig //
+   // ---------- //
+
    virtual void onDescription(const IntfId& intfId, const std::string& description) {
    }
    virtual void onAdminEnabled(const IntfId& intfId, bool adminEnabled) {
@@ -278,7 +285,11 @@ class IntfHandler {
                                       AdminDisabledReason reason) {
    }
 
-   virtual void onDeletion(const IntfId& intfId) {
+   // ---------- //
+   // IntfStatus //
+   // ---------- //
+
+   virtual void onOperStatus(const IntfId& intfId, OperStatus operStatus) {
    }
 };
 
