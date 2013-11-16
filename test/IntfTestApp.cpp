@@ -8,19 +8,19 @@
 class IntfHandler : public EOS::IntfHandler {
  public:
    void onOperStatus(const EOS::IntfId & intfId, EOS::OperStatus status) {
-      std::cout << "onOperStatus( " << intfId.name() << " ), operStatus is "
-                << status;
+      std::cout << "onOperStatus( " << intfId << " ), operStatus is "
+                << status << std::endl;
    }
 
    void onDeletion(const EOS::IntfId & intfId) {
-      std::cout << "onDeletion( " << intfId.name() << " )";
+      std::cout << "onDeletion( " << intfId << " )" << std::endl;
    }
 };
 
 class Handlers : public EOS::Handlers {
  public:
    IntfHandler* handleIntfCreation(const EOS::IntfStatus& status) {
-      std::cout << "handleIntfCreation " << status.intfId().name();
+      std::cout << "handleIntfCreation " << status.intfId() << std::endl;
       if( !intfHandler_ ) {
          intfHandler_ = new IntfHandler();
       }

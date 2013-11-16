@@ -7,6 +7,7 @@
 #include <algorithm>
 #include <cassert>
 #include <cstdint>
+#include <iosfwd>
 #include <map>
 #include <set>
 #include <string>
@@ -43,6 +44,8 @@ class IntfId {
  private:
    U32 intfId_;
 };
+
+std::ostream& operator<<(std::ostream& o, const IntfId& intfId);
 
 class EthAddr {
  public:

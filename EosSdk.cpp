@@ -1,6 +1,8 @@
 // Copyright (c) 2013 Arista Networks, Inc.  All rights reserved.
 // Arista Networks, Inc. Confidential and Proprietary.
 
+#include <ostream>
+
 #include "EosSdk.h"
 
 #include <Tac/PtrInterface.h>
@@ -78,6 +80,10 @@ std::string IntfId::name() const {
 
 std::string IntfId::shortName() const {
    return IntfIdHelper(intfId_).shortName().stdString();
+}
+
+std::ostream& operator<<(std::ostream& o, const IntfId& intfId) {
+   return o << intfId.name();
 }
 
 // ---------- //
