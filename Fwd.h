@@ -13,6 +13,7 @@ namespace EosSdk {
    class SDK;
    class Handlers;
    class IntfHandler;
+   class EthPhyIntfHandler;
 
    typedef double Seconds;
    typedef uint32_t U32;

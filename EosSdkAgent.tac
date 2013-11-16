@@ -22,6 +22,10 @@ IntfHandler : extern Tac::Type {
    `allowsIndirectRef;
 }
 
+EthPhyIntfHandler : extern Tac::Type {
+   `allowsIndirectRef;
+}
+
 EthIntfConfigSm : Tac::Type(handler, intfId, ethIntfConfig) : Tac::Constrainer {
    tacFwkActivity = 0;
    handler : IntfHandler::RawPtr;
@@ -34,6 +38,32 @@ EthIntfConfigSm : Tac::Type(handler, intfId, ethIntfConfig) : Tac::Constrainer {
    ethIntfConfig::adminEnabledStateLocal => handleAdminEnabled();
    handleAdminDisabledReason : extern invasive void();
    ethIntfConfig::enabledStateReason => handleAdminDisabledReason();
+}
+
+EthIntfStatusSm : Tac::Type(handler, intfId, ethIntfStatus) : Tac::Constrainer {
+   tacFwkActivity = 0;
+   handler : IntfHandler::RawPtr;
+   intfId : Arnet::IntfId;
+   ethIntfStatus : in Interface::EthIntfStatus::PtrConst;
+   // TBD
+}
+
+EthPhyIntfConfigSm : Tac::Type(handler, intfId,
+                               ethPhyIntfConfig) : Tac::Constrainer {
+   tacFwkActivity = 0;
+   handler : EthPhyIntfHandler::RawPtr;
+   intfId : Arnet::IntfId;
+   ethPhyIntfConfig : in Interface::EthPhyIntfConfig::PtrConst;
+   // TBD
+}
+
+EthPhyIntfStatusSm : Tac::Type(handler, intfId
+                               ethPhyIntfStatus) : Tac::Constrainer {
+   tacFwkActivity = 0;
+   handler : EthPhyIntfHandler::RawPtr;
+   intfId : Arnet::IntfId;
+   ethPhyIntfStatus : in Interface::EthPhyIntfStatus::PtrConst;
+   // TBD
 }
 
 SdkSm : Tac::Type(sdk,
@@ -57,14 +87,17 @@ SdkSm : Tac::Type(sdk,
    ethIntfStatusDir : in Interface::EthIntfStatusDir::PtrConst;
    handleEthIntfStatusDir : extern invasive void(intfId : Arnet::IntfId);
    ethIntfStatusDir::intfStatus[intfId] => handleEthIntfStatusDir(intfId);
+   ethIntfStatusSm : EthIntfConfigSm[intfId];
 
    ethPhyIntfConfigDir : in Interface::EthPhyIntfConfigDir::PtrConst;
    handleEthPhyIntfConfigDir : extern invasive void(intfId : Arnet::IntfId);
    ethPhyIntfConfigDir::intfConfig[intfId] => handleEthPhyIntfConfigDir(intfId);
+   ethPhyIntfConfigSm : EthIntfConfigSm[intfId];
 
    ethPhyIntfStatusDir : in Interface::EthPhyIntfStatusDir::PtrConst;
    handleEthPhyIntfStatusDir : extern invasive void(intfId : Arnet::IntfId);
    ethPhyIntfStatusDir::intfStatus[intfId] => handleEthPhyIntfStatusDir(intfId);
+   ethPhyIntfStatusSm : EthIntfConfigSm[intfId];
 }
 
 Agent : Tac::Type( name ) : AgentBase::CAgent {
