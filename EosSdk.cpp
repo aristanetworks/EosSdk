@@ -69,17 +69,7 @@ bool IntfConfig::adminEnabled() const {
 AdminDisabledReason IntfConfig::adminDisabledReason() const {
    Tac::String reason =
       sdk_->internal_->ethIntfConfig(intfId_)->enabledStateReason();
-   // See IntfSM::handleStateChange in Intf/SysdbErrdisableIntf.tin
-   if (reason.empty()) {
-      return reasonEnabled;
-   } else if (reason == "admin") {
-      return reasonAdmin;
-   } else if (reason == "errdisabled") {
-      return reasonErrDisabled;
-   } else if (reason == "inactive") {
-      return reasonInactive;
-   }
-   return reasonUnknown;
+   return convertAdminDisabledReason(reason);
 }
 
 // ---------- //

@@ -14,6 +14,20 @@ DEFAULT_TRACE_HANDLE( "EosSdkAgent" )
 
 namespace EosSdk {
 
+AdminDisabledReason convertAdminDisabledReason( const Tac::String& reason ) {
+   // See IntfSM::handleStateChange in Intf/SysdbErrdisableIntf.tin
+   if (reason.empty()) {
+      return reasonEnabled;
+   } else if (reason == "admin") {
+      return reasonAdmin;
+   } else if (reason == "errdisabled") {
+      return reasonErrDisabled;
+   } else if (reason == "inactive") {
+      return reasonInactive;
+   }
+   return reasonUnknown;
+}
+
 static EosSdk::IntfId convert( Arnet::IntfId intfId ) {
    return EosSdk::IntfId( intfId.stringValue().stdString() );
 }
@@ -21,6 +35,17 @@ static EosSdk::IntfId convert( Arnet::IntfId intfId ) {
 void EthIntfConfigSm::handleDescription() {
    handler()->onDescription( convert( intfId() ),
                              ethIntfConfig()->description().stdString() );
+}
+
+void EthIntfConfigSm::handleAdminEnabled() {
+   handler()->onAdminEnabled( convert( intfId() ),
+                              ethIntfConfig()->adminEnabled() );
+}
+
+void EthIntfConfigSm::handleAdminDisabledReason() {
+   AdminDisabledReason reason =
+      convertAdminDisabledReason( ethIntfConfig()->enabledStateReason() );
+   handler()->onAdminDisabledReason( convert( intfId() ), reason );
 }
 
 void SdkSm::handleEthIntfConfigDir( Arnet::IntfId intfId ) {

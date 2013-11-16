@@ -18,6 +18,8 @@ static Arnet::IntfId convert(const IntfId& intfId) {
    return Arnet::IntfId(intfId.name());  // TODO use a U32 instead.
 }
 
+AdminDisabledReason convertAdminDisabledReason( const Tac::String& reason );
+
 class SDKInternal {
  public:
    SDKInternal(Agent* const agent) : agent_(agent) {

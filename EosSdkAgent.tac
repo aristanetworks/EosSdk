@@ -30,7 +30,10 @@ EthIntfConfigSm : Tac::Type(handler, intfId, ethIntfConfig) : Tac::Constrainer {
 
    handleDescription : extern invasive void();
    ethIntfConfig::description => handleDescription();
-   // TODO: other attributes.
+   handleAdminEnabled : extern invasive void();
+   ethIntfConfig::adminEnabledStateLocal => handleAdminEnabled();
+   handleAdminDisabledReason : extern invasive void();
+   ethIntfConfig::enabledStateReason => handleAdminDisabledReason();
 }
 
 SdkSm : Tac::Type(sdk,
