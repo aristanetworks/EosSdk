@@ -41,7 +41,7 @@ SdkSm : Tac::Type(sdk,
    ethIntfStatusDir : in Interface::EthIntfStatusDir::PtrConst;
    handleEthIntfStatusDir : extern invasive void(intfId : Arnet::IntfId);
    ethIntfStatusDir::intfStatus[intfId] => handleEthIntfStatusDir(intfId);
-   ethIntfStatusSm : EthIntfConfigSm[intfId];
+   ethIntfStatusSm : EthIntfStatusSm[intfId];
 
    ethPhyIntfConfigDir : in Interface::EthPhyIntfConfigDir::PtrConst;
    handleEthPhyIntfConfigDir : extern invasive void(intfId : Arnet::IntfId);

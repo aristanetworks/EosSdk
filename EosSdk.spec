@@ -72,3 +72,4 @@ rm -f "$RPM_BUILD_ROOT"%{_libdir}/*.la
 
 %files test
 %{_datadir}/EosSdk/libDemoApp.*
+%{_datadir}/EosSdk/libIntfTestApp.*

@@ -52,15 +52,23 @@ void EthIntfStatusSm::handleOperStatus() {
 
 void SdkSm::handleEthIntfConfigDir( Arnet::IntfId intfId ) {
    TRACE8( __PRETTY_FUNCTION__ << " intfId=" << intfId );
-   Interface::EthIntfConfig::PtrConst intfConfig =
-      ethIntfConfigDir()->intfConfig( intfId );
+}
+
+void SdkSm::handleEthIntfStatusDir( Arnet::IntfId intfId ) {
+   TRACE8( __PRETTY_FUNCTION__ << " intfId=" << intfId );
+   Interface::EthIntfStatus::PtrConst intfStatus =
+      ethIntfStatusDir()->intfStatus( intfId );
    EosSdk::IntfId sdkIntfId = convert( intfId );
-   if ( intfConfig ) {
+   if ( intfStatus ) {
+      Interface::EthIntfConfig::PtrConst intfConfig =
+         ethIntfConfigDir()->intfConfig( intfId );
+      assert( intfConfig );
       IntfHandler* intfHandler =
          handlers()->handleIntfCreation( sdk()->intfStatus( sdkIntfId ) );
       if ( intfHandler ) {
          TRACE7( __PRETTY_FUNCTION__ << " Created nested SM for " << intfId );
          ethIntfConfigSmIs( intfHandler, intfId, intfConfig );
+         ethIntfStatusSmIs( intfHandler, intfId, intfStatus );
       }
    } else {
       auto sm = ethIntfConfigSm( intfId );
@@ -68,12 +76,9 @@ void SdkSm::handleEthIntfConfigDir( Arnet::IntfId intfId ) {
          TRACE7( __PRETTY_FUNCTION__ << " Deleting nested SM for " << intfId );
          sm->handler()->onDeletion( sdkIntfId );
          ethIntfConfigSmDel( intfId );
+         ethIntfStatusSmDel( intfId );
       }
    }
-}
-
-void SdkSm::handleEthIntfStatusDir( Arnet::IntfId intfId ) {
-   TRACE8( __PRETTY_FUNCTION__ << " intfId=" << intfId );
 }
 
 void SdkSm::handleEthPhyIntfConfigDir( Arnet::IntfId intfId ) {

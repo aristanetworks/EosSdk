@@ -37,7 +37,8 @@ EthIntfStatusSm : Tac::Type(handler, intfId, ethIntfStatus) : Tac::Constrainer {
    ethIntfStatus : in Interface::EthIntfStatus::PtrConst;
 
    handleOperStatus : extern invasive void();
-   ethIntfStatus::operStatus => handleOperStatus();
+   ethIntfStatus::handleOperStatus => handleOperStatus();
+   // TBD
 }
 
 EthPhyIntfConfigSm : Tac::Type(handler, intfId,

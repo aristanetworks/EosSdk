@@ -19,9 +19,13 @@ libEosSdk_la_LIBADD = -lEthIntf -lIntf -lArnet -lAgentBase -lSysdbEntityMgr -lta
 libEosSdkLoader_la_SOURCES = EosSdkLoader.cpp
 libEosSdkLoader_la_LIBADD = -lAgentBase -ltac /usr/lib/Scrt1.o
 
-pkgdata_LTLIBRARIES = libDemoApp.la
+pkgdata_LTLIBRARIES = libDemoApp.la libIntfTestApp.la
+
 libDemoApp_la_SOURCES = test/DemoApp.cpp
 libDemoApp_la_LIBADD = libEosSdk.la
+
+libIntfTestApp_la_SOURCES = test/IntfTestApp.cpp
+libIntfTestApp_la_LIBADD = libEosSdk.la
 
 LIBMAP = .libs/tacc/map.d/$(PACKAGE).map
 mapdir = $(libdir)/tacc/map.d
@@ -35,6 +39,7 @@ TESTS_ENVIRONMENT = SRCDIR="$(srcdir)"
 
 sanityTests = 
 TESTS = $(sanityTests)
+TESTS += test/IntfTest.py
 sanity:
 	make TESTS="$(sanityTests)" check
 
