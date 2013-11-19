@@ -14,6 +14,7 @@ namespace EOS {
    class Handlers;
    class IntfHandler;
    class EthPhyIntfHandler;
+   class EthLagIntfHandler;
 
    typedef double Seconds;
    typedef uint32_t U32;
