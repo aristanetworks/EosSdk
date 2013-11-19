@@ -30,6 +30,11 @@ Agent::doInit() {
    mg->doMount( Sysdb::Mount( "interface/status/eth/phy",
                               "Interface::EthPhyIntfStatusDir", "r" ) );
 
+   mg->doMount( Sysdb::Mount( "interface/config/eth/lag",
+                              "Interface::EthLagIntfConfigDir", "w" ) );
+   mg->doMount( Sysdb::Mount( "interface/status/eth/lag",
+                              "Interface::EthLagIntfStatusDir", "r" ) );
+
    mg->doClose( false, "", 0 );
 }
 
@@ -48,6 +53,11 @@ Agent::doMountsComplete( Sysdb::MountStatus mountStatus,
             "interface/config/eth/phy" ) );
    ethPhyIntfStatusDirIs( em->getEntity<Interface::EthPhyIntfStatusDir>(
             "interface/status/eth/phy" ) );
+
+   ethLagIntfConfigDirIs( em->getEntity<Interface::EthLagIntfConfigDir>(
+            "interface/config/eth/lag" ) );
+   ethLagIntfStatusDirIs( em->getEntity<Interface::EthLagIntfStatusDir>(
+            "interface/status/eth/lag" ) );
 
    Tac::String app = extraArg()->extraArg( "app" );
    TRACE0( "Loading " << app );

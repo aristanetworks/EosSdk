@@ -3,6 +3,7 @@
 
 <<= TacModule("Arnet::IntfId");
 <<= TacModule("EthIntf::EthIntf");
+<<= TacModule("Lag::EthLagIntf");
 
 <<= TacModule("EthIntfSm");
 
@@ -25,7 +26,9 @@ SdkSm : Tac::Type(sdk,
                   ethIntfConfigDir,
                   ethIntfStatusDir,
                   ethPhyIntfConfigDir,
-                  ethPhyIntfStatusDir) : Tac::Constrainer {
+                  ethPhyIntfStatusDir,
+                  ethLagIntfConfigDir,
+                  ethLagIntfStatusDir) : Tac::Constrainer {
    tacFwkActivity = 0;
 
    sdk : SDK::RawPtr;
@@ -51,6 +54,16 @@ SdkSm : Tac::Type(sdk,
    handleEthPhyIntfStatusDir : extern invasive void(intfId : Arnet::IntfId);
    ethPhyIntfStatusDir::intfStatus[intfId] => handleEthPhyIntfStatusDir(intfId);
    ethPhyIntfStatusSm : EthPhyIntfStatusSm[intfId];
+
+   ethLagIntfConfigDir : inout Interface::EthLagIntfConfigDir::Ptr;
+   handleEthLagIntfConfigDir : extern invasive void(intfId : Arnet::IntfId);
+   ethLagIntfConfigDir::intfConfig[intfId] => handleEthLagIntfConfigDir(intfId);
+   ethLagIntfConfigSm : EthLagIntfConfigSm[intfId];
+
+   ethLagIntfStatusDir : in Interface::EthLagIntfStatusDir::PtrConst;
+   handleEthLagIntfStatusDir : extern invasive void(intfId : Arnet::IntfId);
+   ethLagIntfStatusDir::intfStatus[intfId] => handleEthLagIntfStatusDir(intfId);
+   ethLagIntfStatusSm : EthLagIntfStatusSm[intfId];
 }
 
 }  // namespace EOS

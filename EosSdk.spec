@@ -12,12 +12,14 @@ Requires: Agent
 Requires: Arnet
 Requires: EthIntf
 Requires: Intf
+Requires: Lag
 BuildRequires: tacc
 BuildRequires: Agent-devel
 BuildRequires: Ark-devel
 BuildRequires: Arnet-devel
 BuildRequires: EthIntf-devel
 BuildRequires: Intf-devel
+BuildRequires: Lag-devel
 
 # NOTE: Please do NOT put the names of macros into any comments in this
 #       file, or you will find yourself wading through very baffling RPM

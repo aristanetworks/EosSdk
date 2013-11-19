@@ -3,6 +3,7 @@
 
 <<= TacModule("Agent::CAgent");
 <<= TacModule("EthIntf::EthIntf");
+<<= TacModule("Lag::EthLagIntf");
 <<= TacModule("Sysdb::EntityManager");
 
 <<= TacModule("SdkSm");
@@ -21,6 +22,8 @@ Agent : Tac::Type( name ) : AgentBase::CAgent {
    ethIntfStatusDir : Interface::EthIntfStatusDir::PtrConst;
    ethPhyIntfConfigDir : Interface::EthPhyIntfConfigDir::Ptr;
    ethPhyIntfStatusDir : Interface::EthPhyIntfStatusDir::PtrConst;
+   ethLagIntfConfigDir : Interface::EthLagIntfConfigDir::Ptr;
+   ethLagIntfStatusDir : Interface::EthLagIntfStatusDir::PtrConst;
 
    sdk : SDK::RawPtr;
    sdkSm : SdkSm[name];

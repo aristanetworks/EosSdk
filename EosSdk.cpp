@@ -230,12 +230,10 @@ U32 EthPhyIntfStatus::txFaultStatusChanges() const {
    return sdk_->internal_->ethPhyIntfStatus(intfId_)->txFaultStatusChanges();
 }
 
-
 EthTimestampMode EthPhyIntfStatus::timestampMode() const {
    return enum_cast<EthTimestampMode>(
          sdk_->internal_->ethPhyIntfStatus(intfId_)->timestampMode());
 }
-
 
 EthDuplex EthPhyIntfStatus::duplex() const {
    return enum_cast<EthDuplex>(sdk_->internal_->ethPhyIntfStatus(intfId_)->duplex());
@@ -250,7 +248,6 @@ LoopbackMode EthPhyIntfStatus::loopbackMode() const {
          sdk_->internal_->ethPhyIntfStatus(intfId_)->loopbackMode());
 }
 
-
 XcvrPresence EthPhyIntfStatus::xcvrPresence() const {
    return enum_cast<XcvrPresence>(
          sdk_->internal_->ethPhyIntfStatus(intfId_)->xcvrPresence());
@@ -260,5 +257,28 @@ std::string EthPhyIntfStatus::xcvrType() const {
    return convert(sdk_->internal_->ethPhyIntfStatus(intfId_)->xcvrType());
 }
 
+// ---------------- //
+// EthLagIntfStatus //
+// ---------------- //
+
+uint64_t EthLagIntfStatus::speed() const {
+   return sdk_->internal_->ethLagIntfStatus(intfId_)->speed();
+}
+
+std::string EthLagIntfStatus::localDeviceName() const {
+   return convert(sdk_->internal_->ethLagIntfStatus(intfId_)->localDeviceName());
+}
+
+bool EthLagIntfStatus::fallbackEnabled() const {
+   return sdk_->internal_->ethLagIntfStatus(intfId_)->fallbackEnabled();
+}
+
+U32 EthLagIntfStatus::minLinks() const {
+   return sdk_->internal_->ethLagIntfStatus(intfId_)->minLinks();
+}
+
+U32 EthLagIntfStatus::maxBundle() const {
+   return sdk_->internal_->ethLagIntfStatus(intfId_)->maxBundle();
+}
 
 }  // namespace EOS

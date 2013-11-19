@@ -2,6 +2,7 @@
 // Arista Networks, Inc. Confidential and Proprietary.
 
 <<= TacModule("EthIntf::EthIntf");
+<<= TacModule("Lag::EthLagIntf");
 
 // Fwd.h contains forward declarations for non-TACC types.
 <<= CppInlineInclude("Fwd.h");
@@ -13,6 +14,10 @@ IntfHandler : extern Tac::Type {
 }
 
 EthPhyIntfHandler : extern Tac::Type {
+   `allowsIndirectRef;
+}
+
+EthLagIntfHandler : extern Tac::Type {
    `allowsIndirectRef;
 }
 
@@ -63,6 +68,24 @@ EthPhyIntfStatusSm : Tac::Type(handler, intfId,
    handler : EthPhyIntfHandler::RawPtr;
    intfId : Arnet::IntfId;
    ethPhyIntfStatus : in Interface::EthPhyIntfStatus::PtrConst;
+   // TBD
+}
+
+EthLagIntfConfigSm : Tac::Type(handler, intfId,
+                               ethLagIntfConfig) : Tac::Constrainer {
+   tacFwkActivity = 0;
+   handler : EthLagIntfHandler::RawPtr;
+   intfId : Arnet::IntfId;
+   ethLagIntfConfig : in Interface::EthLagIntfConfig::PtrConst;
+   // TBD
+}
+
+EthLagIntfStatusSm : Tac::Type(handler, intfId,
+                               ethLagIntfStatus) : Tac::Constrainer {
+   tacFwkActivity = 0;
+   handler : EthLagIntfHandler::RawPtr;
+   intfId : Arnet::IntfId;
+   ethLagIntfStatus : in Interface::EthLagIntfStatus::PtrConst;
    // TBD
 }
 

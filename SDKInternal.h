@@ -50,13 +50,25 @@ class SDKInternal {
       return agent_->ethPhyIntfStatusDir()->intfStatus(convert(intfId));
    }
 
+   Interface::EthLagIntfConfig::Ptr ethLagIntfConfig(const IntfId& intfId) {
+      Tac::ActivityLockAnchor lock;
+      return agent_->ethLagIntfConfigDir()->intfConfig(convert(intfId));
+   }
+
+   Interface::EthLagIntfStatus::PtrConst ethLagIntfStatus(const IntfId& intfId) {
+      Tac::ActivityLockAnchor lock;
+      return agent_->ethLagIntfStatusDir()->intfStatus(convert(intfId));
+   }
+
    void registerHandlers(const std::string& name, Handlers* handlers) {
       Tac::ActivityLockAnchor lock;
       SdkSm::Ptr sm = agent_->sdkSmIs( agent_->sdk(), Tac::Name( name ), handlers,
                                        agent_->ethIntfConfigDir(),
                                        agent_->ethIntfStatusDir(),
                                        agent_->ethPhyIntfConfigDir(),
-                                       agent_->ethPhyIntfStatusDir() );
+                                       agent_->ethPhyIntfStatusDir(),
+                                       agent_->ethLagIntfConfigDir(),
+                                       agent_->ethLagIntfStatusDir());
       for( auto intf = agent_->ethIntfConfigDir()->intfConfigIteratorConst();
            intf; ++intf ) {
          sm->handleEthIntfConfigDir( intf->intfId() );

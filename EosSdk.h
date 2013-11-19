@@ -226,6 +226,12 @@ enum TxFaultStatus {
    txFaultNotDetected,
 };
 
+enum LagMode {
+   lagModeUnconfigured,
+   lagModeOn,
+   lagModeLacp,
+};
+
 class EthPhyIntfStatus {
  public:
    IntfId intfId() const {
@@ -269,7 +275,44 @@ class EthPhyIntfStatus {
    IntfId intfId_;
 };
 
+class EthLagIntfConfig {
+ public:
+   IntfId intfId() const {
+      return intfId_;
+   }
+
+ private:
+   friend class SDK;
+   EthLagIntfConfig(SDK* const sdk, const IntfId& intfId)
+      : sdk_(sdk), intfId_(intfId) {
+   }
+   SDK* const sdk_;
+   IntfId intfId_;
+
+   // TBD
+};
+
 class EthLagIntfStatus {
+ public:
+   IntfId intfId() const {
+      return intfId_;
+   }
+
+   // TBD "member", which is a collection
+   uint64_t speed() const;
+   std::string localDeviceName() const;
+   bool fallbackEnabled() const;
+   U32 minLinks() const;
+   U32 maxBundle() const;
+
+ private:
+   friend class SDK;
+   EthLagIntfStatus(SDK* const sdk, const IntfId& intfId)
+      : sdk_(sdk), intfId_(intfId) {
+   }
+   SDK* const sdk_;
+   IntfId intfId_;
+
    // TBD
 };
 
@@ -321,6 +364,27 @@ class EthPhyIntfHandler {
    // ---------------- //
 };
 
+class EthLagIntfHandler {
+ public:
+   virtual void onDeletion(const IntfId& intfId) {
+   }
+
+   // ---------------- //
+   // EthLagIntfConfig //
+   // ---------------- //
+
+   virtual void onMode(const IntfId& intfId, LagMode mode) {
+   }
+   virtual void onFallback(const IntfId& intfId, bool fallback) {
+   }
+   virtual void onFallbackTimeout(const IntfId& intfId, Seconds fallbackTimeout) {
+   }
+
+   // ---------------- //
+   // EthLagIntfStatus //
+   // ---------------- //
+};
+
 class Handlers {
  public:
    virtual IntfHandler* handleIntfCreation(const IntfStatus& status) {
@@ -328,6 +392,10 @@ class Handlers {
    }
    virtual EthPhyIntfHandler*
    handleEthPhyIntfCreation(const EthPhyIntfStatus& status) {
+      return 0;
+   }
+   virtual EthLagIntfHandler*
+   handleEthLagIntfCreation(const EthLagIntfStatus& status) {
       return 0;
    }
 };
@@ -375,6 +443,13 @@ class SDK {
    EthPhyIntfStatus ethIntfStatus(const IntfId& intfId) {
       return EthPhyIntfStatus(this, intfId);
    }
+   // Access to the LAG (port channel) interface config and status.
+   EthLagIntfConfig lagIntfConfig(const IntfId& intfId) {
+      return EthLagIntfConfig(this, intfId);
+   }
+   EthLagIntfStatus lagIntfStatus(const IntfId& intfId) {
+      return EthLagIntfStatus(this, intfId);
+   }
 
    void addRoute(const IPv4& ipAddress, Via &via) {};
    void addRoute(const IPv6& ipAddress, Via &via) {};
@@ -410,6 +485,8 @@ class SDK {
    friend class IntfStatus;
    friend class EthPhyIntfConfig;
    friend class EthPhyIntfStatus;
+   friend class EthLagIntfConfig;
+   friend class EthLagIntfStatus;
    friend class SdkSm;
 
    SDKInternal* const internal_;

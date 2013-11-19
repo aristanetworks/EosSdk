@@ -15,7 +15,9 @@ libEosSdk_la_SOURCES += EnumCast.h
 libEosSdk_la_SOURCES += EosSdkAgent.tac EosSdkAgent.tin
 libEosSdk_la_SOURCES += EthIntfSm.tac EthIntfSm.tin
 libEosSdk_la_SOURCES += SdkSm.tac SdkSm.tin
-libEosSdk_la_LIBADD = -lEthIntf -lIntf -lArnet -lAgentBase -lSysdbEntityMgr -ltac -ldl
+libEosSdk_la_LIBADD =
+libEosSdk_la_LIBADD += -lEthIntf -lLag -lIntf -lArnet -lAgentBase
+libEosSdk_la_LIBADD += -lSysdbEntityMgr -ltac -ldl
 
 libEosSdkLoader_la_SOURCES = EosSdkLoader.cpp
 libEosSdkLoader_la_LIBADD = -lAgentBase -ltac /usr/lib/Scrt1.o
