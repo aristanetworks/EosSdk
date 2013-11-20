@@ -1,0 +1,32 @@
+#!/usr/bin/env python
+# Copyright (c) 2013 Arista Networks, Inc.  All rights reserved.
+# Arista Networks, Inc. Confidential and Proprietary.
+
+"""Generates a public EOS SDK header file given a private header at stdin."""
+
+import sys, re
+
+publishing = True
+for lineNo, line in enumerate( sys.stdin ):
+   m = re.match("(.*)//=(.*)", line)
+   if m:
+      command = m.group(2).strip()
+      if command[0:2] == "> ":
+         # Make lines starting with '//=> ' show in the public header
+         sys.stdout.write(m.group(1) + command[2:] + "\n")
+         continue
+      elif command == "hide":
+         # ignore lines marked with '//= hide'
+         continue
+      elif command == "hidden":
+         # Start hiding a block of code
+         publishing = False
+         continue
+      elif command == "end_hidden":
+         # End hiding a block of code
+         assert not publishing, ("Cannot 'end_hidden' on line %d, code already "
+                                 "set to publish" % lineNo )
+         publishing = True
+         continue
+   if publishing:
+      sys.stdout.write(line)
