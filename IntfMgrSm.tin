@@ -1,0 +1,88 @@
+// Copyright (c) 2013 Arista Networks, Inc.  All rights reserved.
+// Arista Networks, Inc. Confidential and Proprietary.
+
+#include <Tac/Tracing.h>
+#include <EosSdk/intf.h>
+
+DEFAULT_TRACE_HANDLE( "eos" )
+
+namespace eos {
+
+void
+IntfConfigSm::handleAdminEnabled() {
+   TRACE8( __PRETTY_FUNCTION__ << " adminEnabled is "
+           << intfConfig()->adminEnabled() );
+   intf_mgr *mgr = eos::get_intf_mgr();
+   intf_id_t intf_id = intf_id_t( (uint32_t)intfId().intfId() );
+   mgr->on_admin_enabled( intf_id, intfConfig()->adminEnabled() );
+}
+
+void
+IntfStatusSm::handleOperStatus() {
+   TRACE8( __PRETTY_FUNCTION__ );
+   intf_mgr *mgr = eos::get_intf_mgr();
+   oper_status_t status;
+   switch( intfStatus()->operStatus() ) {
+    case Interface::intfOperUp_:
+      status = INTF_OPER_UP;
+      break;
+    case Interface::intfOperDown_:
+    case Interface::intfOperDormant_:
+    case Interface::intfOperNotPresent_:
+    case Interface::intfOperLowerLayerDown_:
+      status = INTF_OPER_DOWN;
+      break;
+    default:
+      status = INTF_OPER_NULL;
+      break;
+   }
+
+   intf_id_t intf_id = intf_id_t( (uint32_t)intfId().intfId() );
+   mgr->on_oper_status( intf_id, status );
+}
+
+void
+IntfMgrSm::handleIntfConfig() {
+   TRACE8( __PRETTY_FUNCTION__ );
+   for( auto i = allIntfConfigDir()->intfConfigIteratorConst(); i; ++i ) {
+      intfConfigSmIs( i.ptr() );
+   }
+}
+
+void
+IntfMgrSm::handleIntfConfig( Arnet::IntfId intfId ) {
+   TRACE8( __PRETTY_FUNCTION__ );
+   Interface::IntfConfig::PtrConst intfConfig = \
+      allIntfConfigDir()->intfConfig( intfId );
+   if( intfConfig ) {
+      intfConfigSmIs( intfConfig );
+   } else {
+      intfConfigSmDel( intfId );
+   }
+}
+
+void
+IntfMgrSm::handleIntfStatus() {
+   TRACE8( __PRETTY_FUNCTION__ );
+   for( auto i = allIntfStatusDir()->intfStatusIteratorConst(); i; ++i ) {
+      intfStatusSmIs( i.ptr() );
+   }
+}
+
+void
+IntfMgrSm::handleIntfStatus( Arnet::IntfId intfId ) {
+   TRACE8( __PRETTY_FUNCTION__ );
+   intf_mgr *mgr = eos::get_intf_mgr();
+   intf_id_t intf_id = intf_id_t( (uint32_t)intfId.intfId() );
+   Interface::IntfStatus::PtrConst intfStatus = \
+      allIntfStatusDir()->intfStatus( intfId );
+   if( intfStatus ) {
+      intfStatusSmIs( intfStatus );
+      mgr->on_create( intf_id );
+   } else {
+      intfStatusSmDel( intfId );
+      mgr->on_delete( intf_id );
+   }
+}
+
+}
