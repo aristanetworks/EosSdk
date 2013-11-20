@@ -19,7 +19,9 @@ eos/%.h: $(srcdir)/%.h $(srcdir)/publish
 libeos_la_SOURCES =
 libeos_la_SOURCES += EosSdkAgent.tac EosSdkAgent.tin
 libeos_la_SOURCES += types.h agent.cpp Mount.h Mount.cpp
-libeos_la_SOURCES += IntfMgrSm.tac IntfMgrSm.tin intf.h intf.cpp panic.cpp
+libeos_la_SOURCES += panic.cpp
+libeos_la_SOURCES += TimerSm.tac TimerSm.tin timer.h timer.cpp
+libeos_la_SOURCES += IntfMgrSm.tac IntfMgrSm.tin intf.h intf.cpp
 libeos_la_SOURCES += ip.h ip.cpp
 
 libeos_la_LIBADD = -lAgentBase -lSysdbEntityMgr -ltac -ldl
