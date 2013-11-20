@@ -6,29 +6,27 @@ AM_CPPFLAGS = $(CPP_INCLUDE_FLAGS) -DTAC_STRING_TO_NAME_CONVERSION
 AM_CXXFLAGS = -std=gnu++0x -Wextra -Wall -Werror -Wno-unused-parameter
 AM_LDFLAGS = -Wl,--no-undefined
 
-lib_LTLIBRARIES = libEosSdk.la libEosSdkLoader.la
-pkginclude_HEADERS = Fwd.h EosSdk.h
+lib_LTLIBRARIES = libeos.la
+bin_PROGRAMS = demo1 demo2
+nobase_pkginclude_HEADERS = Fwd.h EosSdk.h
 
-libEosSdk_la_SOURCES = EosSdk.cpp
-libEosSdk_la_SOURCES += SDKInternal.h
-libEosSdk_la_SOURCES += EnumCast.h
-libEosSdk_la_SOURCES += EosSdkAgent.tac EosSdkAgent.tin
-libEosSdk_la_SOURCES += EthIntfSm.tac EthIntfSm.tin
-libEosSdk_la_SOURCES += SdkSm.tac SdkSm.tin
-libEosSdk_la_LIBADD =
-libEosSdk_la_LIBADD += -lEthIntf -lLag -lIntf -lArnet -lAgentBase
-libEosSdk_la_LIBADD += -lSysdbEntityMgr -ltac -ldl
+eos/%.h: $(srcdir)/%.h $(srcdir)/publish
+	mkdir -p eos
+	rm -f $@
+	$(srcdir)/publish < $< > $@
+	chmod 444 $@
 
-libEosSdkLoader_la_SOURCES = EosSdkLoader.cpp
-libEosSdkLoader_la_LIBADD = -lAgentBase -ltac /usr/lib/Scrt1.o
+libeos_la_SOURCES = EosSdkAgent.tac EosSdkAgent.tin
+libeos_la_SOURCES += types.h agent.cpp Mount.h Mount.cpp
+libeos_la_SOURCES += IntfMgrSm.tac IntfMgrSm.tin intf.h intf.cpp panic.cpp
+libeos_la_LIBADD = -lAgentBase -lSysdbEntityMgr -ltac -ldl
+libeos_la_LIBADD += -lIntf -lArnet
 
-pkgdata_LTLIBRARIES = libDemoApp.la libIntfTestApp.la
+demo1_SOURCES = examples/demo1.cpp
+demo1_LDADD = libeos.la
 
-libDemoApp_la_SOURCES = test/DemoApp.cpp
-libDemoApp_la_LIBADD = libEosSdk.la
-
-libIntfTestApp_la_SOURCES = test/IntfTestApp.cpp
-libIntfTestApp_la_LIBADD = libEosSdk.la
+demo2_SOURCES = examples/demo2.cpp
+demo2_LDADD = libeos.la
 
 LIBMAP = .libs/tacc/map.d/$(PACKAGE).map
 mapdir = $(libdir)/tacc/map.d

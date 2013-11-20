@@ -1,40 +1,20 @@
 // Copyright (c) 2013 Arista Networks, Inc.  All rights reserved.
 // Arista Networks, Inc. Confidential and Proprietary.
 
-#include <dlfcn.h>
-
-#include <iostream>
-
 #include <Tac/Tracing.h>
-
-#include "EosSdk/EosSdk.h"
-#include "SDKInternal.h"
+#include <EosSdk/Mount.h>
+#include <EosSdk/panic.h>
 
 DEFAULT_TRACE_HANDLE( "EosSdkAgent" )
 
-namespace EOS {
+namespace eos {
 
 void
 Agent::doInit() {
    TRACE8( __PRETTY_FUNCTION__ );
-
+   
    Sysdb::MountGroup::Ptr mg = entityManager()->getMountGroup( this );
-
-   mg->doMount( Sysdb::Mount( "interface/config/eth/intf",
-                              "Interface::EthIntfConfigDir", "w" ) );
-   mg->doMount( Sysdb::Mount( "interface/status/eth/intf",
-                              "Interface::EthIntfStatusDir", "r" ) );
-
-   mg->doMount( Sysdb::Mount( "interface/config/eth/phy",
-                              "Interface::EthPhyIntfConfigDir", "w" ) );
-   mg->doMount( Sysdb::Mount( "interface/status/eth/phy",
-                              "Interface::EthPhyIntfStatusDir", "r" ) );
-
-   mg->doMount( Sysdb::Mount( "interface/config/eth/lag",
-                              "Interface::EthLagIntfConfigDir", "w" ) );
-   mg->doMount( Sysdb::Mount( "interface/status/eth/lag",
-                              "Interface::EthLagIntfStatusDir", "r" ) );
-
+   askAllMountHandlersToDoTheirMounts( mg );
    mg->doClose( false, "", 0 );
 }
 
@@ -42,46 +22,10 @@ void
 Agent::doMountsComplete( Sysdb::MountStatus mountStatus,
                          Sysdb::EntityManager::Ptr const & em ) {
    TRACE8( __PRETTY_FUNCTION__ );
-   assert( mountStatus == Sysdb::mountSuccess() );
-
-   ethIntfConfigDirIs( em->getEntity<Interface::EthIntfConfigDir>(
-            "interface/config/eth/intf" ) );
-   ethIntfStatusDirIs( em->getEntity<Interface::EthIntfStatusDir>(
-            "interface/status/eth/intf" ) );
-
-   ethPhyIntfConfigDirIs( em->getEntity<Interface::EthPhyIntfConfigDir>(
-            "interface/config/eth/phy" ) );
-   ethPhyIntfStatusDirIs( em->getEntity<Interface::EthPhyIntfStatusDir>(
-            "interface/status/eth/phy" ) );
-
-   ethLagIntfConfigDirIs( em->getEntity<Interface::EthLagIntfConfigDir>(
-            "interface/config/eth/lag" ) );
-   ethLagIntfStatusDirIs( em->getEntity<Interface::EthLagIntfStatusDir>(
-            "interface/status/eth/lag" ) );
-
-   Tac::String app = extraArg()->extraArg( "app" );
-   TRACE0( "Loading " << app );
-
-   // Do we want RTLD_NOW | RTLD_GLOBAL?  I'd rather be lazy if we can.
-   void * lib = dlopen( app.charPtr(), RTLD_LAZY );
-   if ( !lib ) {
-      std::cerr << "Failed to load `" << app << "': " << dlerror() << std::endl;
-      abort();
+   if( mountStatus != Sysdb::mountSuccess_ ) {
+      panic("error code %d mounting sysdb", (int) mountStatus);
    }
-   TRACE0( "Loaded " << app );
-
-   EosSdkInitFunc init = (EosSdkInitFunc) dlsym( lib, "EosSdkInit" );
-   char* error = dlerror();
-   if ( error ) {
-      std::cerr << "Failed to get the `EosSdkInit' symbol: " << error << std::endl;
-      abort();
-   }
-
-   SDKInternal* internal = new SDKInternal( this );
-   sdkIs( internal->createSDK() );
-
-   TRACE0( "Calling EosSdkInit from " << app );
-   init( sdk() );
+   notifyAllMountHandlersThatAllMountsAreComplete( em );
 }
 
-}  // namespace EOS
+};
