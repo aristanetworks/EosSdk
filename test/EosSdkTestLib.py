@@ -5,13 +5,3 @@
 import Artest
 import Tac
 
-def startEosSdk( entityManager, appLibPath ):
-   agent = Tac.newInstance( "EOS::Agent", "EosSdk" )
-   agent.entityManager = entityManager.cEntityManager()
-   agent.extraArg = Tac.newInstance( "AgentBase::ExtraArg", "args" )
-   agent.extraArg.extraArg[ "app" ] = appLibPath
-   agent.initialized = True
-   return agent
-
-def testAppPath( app ):
-   return Artest.findBldDir() + "/.libs/lib%s.so" % app

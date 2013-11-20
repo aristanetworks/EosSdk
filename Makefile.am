@@ -16,9 +16,12 @@ eos/%.h: $(srcdir)/%.h $(srcdir)/publish
 	$(srcdir)/publish < $< > $@
 	chmod 444 $@
 
-libeos_la_SOURCES = EosSdkAgent.tac EosSdkAgent.tin
+libeos_la_SOURCES =
+libeos_la_SOURCES += EosSdkAgent.tac EosSdkAgent.tin
 libeos_la_SOURCES += types.h agent.cpp Mount.h Mount.cpp
 libeos_la_SOURCES += IntfMgrSm.tac IntfMgrSm.tin intf.h intf.cpp panic.cpp
+libeos_la_SOURCES += ip.h ip.cpp
+
 libeos_la_LIBADD = -lAgentBase -lSysdbEntityMgr -ltac -ldl
 libeos_la_LIBADD += -lIntf -lArnet
 
@@ -54,7 +57,6 @@ check-TESTS: check.ark
 install-exec-hook:
 	[ -n "$(DESTDIR)" ] || a4 post EosSdk.spec
 	mkdir -p $(DESTDIR)$(bindir)
-	ln -sf $(libdir)/libEosSdkLoader.so $(DESTDIR)$(bindir)/EosSdk
 
 SUFFIXES = .tac
 TACC := tacc

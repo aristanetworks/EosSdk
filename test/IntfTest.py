@@ -2,37 +2,62 @@
 # Copyright (c) 2013 Arista Networks, Inc.  All rights reserved.
 # Arista Networks, Inc. Confidential and Proprietary.
 
+import Artest
 import EntityManager
-import EosSdkTestLib
+import ManagedSubprocess
 import Tac
+import Tracing
+
+import ctypes
+import unittest
+
+traceHandle = Tracing.Handle( 'IntfApiTests' )
+t0 = traceHandle.trace0
+t1 = traceHandle.trace1
+Tracing.traceSettingIs( "IntfApiTests/01" )
+
 
 sysname = "IntfTest"
+sysdb = Artest.startAgent( "Sysdb", sysname )
+# TODO: create one interface before starting the agent to make sure
+# the agent can handle initialization correctly.
 
-em = EntityManager.Local( sysname )
+class IntfApiTest( unittest.TestCase ):
+   
+   # Ignore pylint complaining about vars declared outside init for unittests
+   # pylint: disable-msg=W0201
+   def setUp( self ):
+      self.config = sysdb[ "interface" ][ "config" ][ "eth" ][ "phy" ]
+      self.status = sysdb[ "interface" ][ "status" ][ "eth" ][ "phy" ]
+      self.et1Config, self.et1Status = self._createInterface()
+      self.intfTestAgent = Artest.startAgent( "demo2", sysname )
 
-agent = EosSdkTestLib.startEosSdk( em, EosSdkTestLib.testAppPath( "IntfTestApp" ) )
+   def tearDown( self ):
+      Artest.stopAgent( "demo2", sysname )
+      self.config.clear()
+      self.status.clear()
 
-sysdb = em.root()
-config = sysdb[ "interface" ][ "config" ][ "eth" ][ "phy" ]
-status = sysdb[ "interface" ][ "status" ][ "eth" ][ "phy" ]
+   def _createInterface( self, name="Ethernet1", mac="00:11:22:33:44:55" ):
+      intfStatus = self.status.intfStatus.newMember( name, None, 0, mac )
+      intfConfig = self.config.intfConfig[ name ]
+      return intfConfig, intfStatus
 
-# Create Ethernet1
-intfStatus = status.intfStatus.newMember( "Ethernet1", None, 0, "00:11:22:33:44:55" )
-intfConfig = config.intfConfig[ "Ethernet1" ]
+   def testOperStatusReactor( self ):
+      t0( "Testing the operStatus reactor" )
+      def testIntfOperStatus( intfConfig, intfStatus ):
+         intfStatus.operStatus = "intfOperDown"
+         Tac.waitFor( lambda: intfConfig.description == "Oper status is 2" )
+         
+         intfStatus.operStatus = "intfOperUp"
+         Tac.waitFor( lambda: intfConfig.description == "Oper status is 1" )
 
-intfConfig.adminEnabled = False
-Tac.waitFor( lambda: intfConfig.description == "Admin enabled is 0" )
+      testIntfOperStatus( self.et1Config, self.et1Status )
+      # Now try reacting to an interface that was added after agent initialization
+      et2Config, et2Status = self._createInterface( "Ethernet2",
+                                                    "00:aa:bb:cc:dd:ee" )
+      testIntfOperStatus( et2Config, et2Status )
 
-intfStatus.operStatus = "intfOperDown"
-Tac.waitFor( lambda: intfConfig.description == "Oper status is 2" )
 
-intfConfig.adminEnabled = True
-Tac.waitFor( lambda: intfConfig.description == "Admin enabled is 1" )
-
-intfStatus.operStatus = "intfOperUp"
-Tac.waitFor( lambda: intfConfig.description == "Oper status is 1" )
-
-# Delete Ethernet1
-del status.intfStatus[ "Ethernet1" ]
-
-Tac.runActivities( 0 )
+if __name__ == '__main__':
+   unittest.longMessage = True
+   unittest.main( buffer=False )

@@ -13,6 +13,7 @@ Requires: Arnet
 Requires: EthIntf
 Requires: Intf
 Requires: Lag
+Requires: Ira
 BuildRequires: tacc
 BuildRequires: Agent-devel
 BuildRequires: Ark-devel
@@ -20,6 +21,7 @@ BuildRequires: Arnet-devel
 BuildRequires: EthIntf-devel
 BuildRequires: Intf-devel
 BuildRequires: Lag-devel
+BuildRequires: Ira-devel
 
 # NOTE: Please do NOT put the names of macros into any comments in this
 #       file, or you will find yourself wading through very baffling RPM
@@ -64,8 +66,7 @@ rm -f "$RPM_BUILD_ROOT"%{_libdir}/*.la
 
 %files
 %defattr(-,root,root)
-%{_bindir}/EosSdk
-%{_libdir}/libEosSdk*.so*
+%{_libdir}/libeos*.so*
 %{_libdir}/tacc/map.d/EosSdk.map
 
 %files devel
@@ -73,5 +74,4 @@ rm -f "$RPM_BUILD_ROOT"%{_libdir}/*.la
 %{_includedir}/EosSdk
 
 %files test
-%{_datadir}/EosSdk/libDemoApp.*
-%{_datadir}/EosSdk/libIntfTestApp.*
+%defattr(-,root,root)
