@@ -8,7 +8,7 @@ AM_LDFLAGS = -Wl,--no-undefined
 
 lib_LTLIBRARIES = libeos.la
 bin_PROGRAMS = demo1 demo2
-nobase_pkginclude_HEADERS = Fwd.h EosSdk.h
+nobase_pkginclude_HEADERS = eos/agent.h eos/intf.h eos/ip.h
 
 eos/%.h: $(srcdir)/%.h $(srcdir)/publish
 	mkdir -p eos

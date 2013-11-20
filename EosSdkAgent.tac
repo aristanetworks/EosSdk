@@ -19,4 +19,4 @@ Agent : Tac::Type( name ) : AgentBase::CAgent {
 
 }
 
-<<= CppBlock("EosSdkAgent2.tin");
+<<= CppBlock("EosSdkAgent.tin");
