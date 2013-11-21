@@ -34,7 +34,7 @@ libeos_la_SOURCES += IntfMgrSm.tac IntfMgrSm.tin intf.h intf.cpp
 libeos_la_SOURCES += ip.h ip.cpp
 
 libeos_la_LIBADD = -lAgentBase -lSysdbEntityMgr -ltac -ldl
-libeos_la_LIBADD += -lIntf -lArnet
+libeos_la_LIBADD += -lIntf -lArnet -lArk
 
 IntfTestAgent_SOURCES = test/IntfTestAgent.cpp
 IntfTestAgent_LDADD = libeos.la

@@ -3,12 +3,9 @@
 # Arista Networks, Inc. Confidential and Proprietary.
 
 import Artest
-import EntityManager
-import ManagedSubprocess
 import Tac
 import Tracing
 
-import ctypes
 import unittest
 
 traceHandle = Tracing.Handle( 'IntfApiTests' )

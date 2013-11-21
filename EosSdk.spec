@@ -9,6 +9,7 @@ BuildRoot: %{_tmppath}/%{name}-root
 Url: http://www.AristaNetworks.com
 Requires: libtac
 Requires: Agent
+Requires: Ark
 Requires: Arnet
 Requires: EthIntf
 Requires: Intf
