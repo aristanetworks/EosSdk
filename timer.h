@@ -4,6 +4,10 @@
 #ifndef EOSSDK_TIMER_H
 #define EOSSDK_TIMER_H
 
+#include <math.h>
+
+#include <TimerSm.h> // hide
+
 namespace eos {
 
 typedef double seconds_t;
@@ -21,6 +25,7 @@ class timer_task {
    
 };
 
+timer_task *get_timer_task( const TimerTaskSm::Ptr & ); // hide
 
 }
 

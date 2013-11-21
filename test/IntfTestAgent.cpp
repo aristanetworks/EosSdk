@@ -1,9 +1,6 @@
 // Copyright (c) 2013 Arista Networks, Inc.  All rights reserved.
 // Arista Networks, Inc. Confidential and Proprietary.
 
-// Copyright (c) 2013 Arista Networks, Inc.  All rights reserved.
-// Arista Networks, Inc. Confidential and Proprietary.
-
 #include <eos/agent.h>
 #include <eos/intf.h>
 #include <eos/types.h>

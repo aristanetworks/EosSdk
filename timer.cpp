@@ -28,22 +28,31 @@ get_timer_wheel() {
    return timer_wheel;
 }
 
-std::map< timer_task *, TimerTaskSm::Ptr > timerTaskSm;
+std::map< timer_task *, TimerTaskSm::Ptr > taskToTaskSm;
+std::map< TimerTaskSm *, timer_task * > taskSmToTask;
+
+timer_task *get_timer_task( const TimerTaskSm::Ptr & taskSm ) {
+   return taskSmToTask[ taskSm.ptr() ];
+}
 
 timer_task::timer_task() {
    // Enqueue the new timer task, with no wakeup time
-   timerTaskSm[ this ] = TimerTaskSm::TimerTaskSmIs( get_timer_wheel() );
+   TimerTaskSm::Ptr taskSm = TimerTaskSm::TimerTaskSmIs( get_timer_wheel() );
+   taskSmToTask[ taskSm.ptr() ] = this;
+   taskToTaskSm[ this ] = taskSm;
 }
 
 timer_task::~timer_task() {
    // Dequeue ourselves
-   timerTaskSm.erase( this );
+   TimerTaskSm::Ptr taskSm = taskToTaskSm[ this ];
+   taskSmToTask.erase( taskSm.ptr() );
+   taskToTaskSm.erase( this );
 }
 
 void
 timer_task::wakeup_time_is( seconds_t when ) {
    TRACE9( __PRETTY_FUNCTION__ << " " << when );
-   timerTaskSm[ this ]->wakeupTimeIs( when );
+   taskToTaskSm[ this ]->wakeupTimeIs( when );
 }
 
 }
