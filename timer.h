@@ -25,8 +25,6 @@ class timer_task {
    
 };
 
-timer_task *get_timer_task( const TimerTaskSm::Ptr & ); // hide
-
 }
 
 #endif // EOSSDK_TIMER_H

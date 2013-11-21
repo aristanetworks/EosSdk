@@ -18,5 +18,3 @@ TimerTaskSm : Tac::Type(wheel) : Tac::Constrainer {
 }
 
 }
-
-<<= CppBlock("TimerSm.tin");

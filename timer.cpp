@@ -55,4 +55,19 @@ timer_task::wakeup_time_is( seconds_t when ) {
    taskToTaskSm[ this ]->wakeupTimeIs( when );
 }
 
+//
+// TimerTaskSm method implementations
+//
+
+void
+TimerTaskSm::run() {
+   taskSmToTask[ this ]->run();
+}
+
+void
+TimerTaskSm::wakeupTimeIs( const Tac::Seconds & when ) {
+   wheel_->timeMinIs( when );
+}
+
+
 }
