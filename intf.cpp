@@ -6,13 +6,34 @@
 #include <Intf/Intf.h>
 #include <EosSdk/intf.h>
 #include <EosSdk/Mount.h>
+#include <EosSdk/panic.h>
 #include <IntfMgrSm.h>
 #include <Sysdb/EntityManager.h>
 #include <list>
 
-DEFAULT_TRACE_HANDLE( "eos" )
+
+DEFAULT_TRACE_HANDLE( "EosSdkIntf" )
 
 namespace eos {
+
+static oper_status_t convert( Interface::IntfOperStatus operStatus ) {
+   oper_status_t ret;
+   switch( operStatus ) {
+    case Interface::intfOperUp_:
+      ret = INTF_OPER_UP;
+      break;
+    case Interface::intfOperDown_:
+    case Interface::intfOperDormant_:
+    case Interface::intfOperNotPresent_:
+    case Interface::intfOperLowerLayerDown_:
+      ret = INTF_OPER_DOWN;
+      break;
+    default:
+      ret = INTF_OPER_NULL;
+      break;
+   }
+   return ret;
+}
 
 intf_id_t::intf_id_t(uint32_t id) {
    assert( sizeof(id) == sizeof(intfId_) );
@@ -74,6 +95,12 @@ class intf_mgr_impl : public intf_mgr,
 
       intfMgrSm_ = IntfMgrSm::IntfMgrSmIs( allIntfConfigDir_,
                                            allIntfStatusDir_ );
+
+      for (auto handler_iterator = this->handlerList_.begin();
+           handler_iterator!=this->handlerList_.end(); ++handler_iterator) {
+         (*handler_iterator)->on_initialized();
+   }
+
    }
    Interface::AllIntfStatusDir::Ptr allIntfStatusDir_;
    Interface::AllIntfConfigDir::Ptr allIntfConfigDir_;
@@ -147,8 +174,14 @@ intf_mgr::description_is(intf_id_t id, char const * descr) {
 }
 
 oper_status_t
-intf_mgr::oper_status(intf_id_t) {
-   return INTF_OPER_NULL;
+intf_mgr::oper_status(intf_id_t id) {
+   intf_mgr_impl * impl = get_intf_mgr_impl(this);
+   Interface::IntfStatus::Ptr intfStatus = 
+      impl->allIntfStatusDir_->intfStatus( id.intfId_ );
+   if( !intfStatus ) {
+      panic( "No matching interface" );
+   }
+   return convert( intfStatus->operStatus() );
 }
 
 void
@@ -174,9 +207,9 @@ intf_mgr::on_delete(intf_id_t intf_id) {
 }
 
 void
-intf_mgr::on_oper_status(intf_id_t intf_id, oper_status_t status) {
+intf_mgr::on_oper_status(intf_id_t intf_id, Interface::IntfOperStatus oper_status) {
    intf_mgr_impl * impl = get_intf_mgr_impl(this);
-
+   oper_status_t status = convert( oper_status );
    std::list<intf_handler *>::const_iterator handler_iterator;
    for (handler_iterator = impl->handlerList_.begin();
         handler_iterator!=impl->handlerList_.end(); ++handler_iterator) {

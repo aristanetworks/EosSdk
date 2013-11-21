@@ -74,7 +74,7 @@ class intf_mgr {
    // on all handlers
    void on_create(intf_id_t);
    void on_delete(intf_id_t);
-   void on_oper_status(intf_id_t, oper_status_t);
+   void on_oper_status(intf_id_t, Interface::IntfOperStatus);
    void on_admin_enabled(intf_id_t, bool);
    //= end_hidden
    

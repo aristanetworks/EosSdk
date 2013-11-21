@@ -14,9 +14,9 @@ import unittest
 traceHandle = Tracing.Handle( 'IntfApiTests' )
 t0 = traceHandle.trace0
 t1 = traceHandle.trace1
-Tracing.traceSettingIs( "IntfApiTests/01" )
+Tracing.traceSettingIs( "IntfApiTests/01,IntfTestAgent,EosSdk*" )
 
-
+AGENT_NAME = "IntfTestAgent"
 sysname = "IntfTest"
 sysdb = Artest.startAgent( "Sysdb", sysname )
 # TODO: create one interface before starting the agent to make sure
@@ -30,10 +30,10 @@ class IntfApiTest( unittest.TestCase ):
       self.config = sysdb[ "interface" ][ "config" ][ "eth" ][ "phy" ]
       self.status = sysdb[ "interface" ][ "status" ][ "eth" ][ "phy" ]
       self.et1Config, self.et1Status = self._createInterface()
-      self.intfTestAgent = Artest.startAgent( "demo2", sysname )
+      self.intfTestAgent = Artest.startAgent( AGENT_NAME, sysname )
 
    def tearDown( self ):
-      Artest.stopAgent( "demo2", sysname )
+      Artest.stopAgent( AGENT_NAME, sysname )
       self.config.clear()
       self.status.clear()
 
@@ -51,12 +51,12 @@ class IntfApiTest( unittest.TestCase ):
          intfStatus.operStatus = "intfOperUp"
          Tac.waitFor( lambda: intfConfig.description == "Oper status is 1" )
 
+      t1( "Ensure that our handler fires for pre-existing interfaces" )
       testIntfOperStatus( self.et1Config, self.et1Status )
-      # Now try reacting to an interface that was added after agent initialization
+      t1( "Now react to an interface that was added after agent initialization" )
       et2Config, et2Status = self._createInterface( "Ethernet2",
                                                     "00:aa:bb:cc:dd:ee" )
       testIntfOperStatus( et2Config, et2Status )
-
 
 if __name__ == '__main__':
    unittest.longMessage = True

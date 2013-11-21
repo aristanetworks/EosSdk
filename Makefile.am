@@ -7,7 +7,7 @@ AM_CXXFLAGS = -std=gnu++0x -Wextra -Wall -Werror -Wno-unused-parameter
 AM_LDFLAGS = -Wl,--no-undefined
 
 lib_LTLIBRARIES = libeos.la
-bin_PROGRAMS = demo1 demo2
+bin_PROGRAMS = IntfTestAgent # demo1 
 nobase_pkginclude_HEADERS = eos/agent.h eos/intf.h eos/ip.h
 
 eos/%.h: $(srcdir)/%.h $(srcdir)/publish
@@ -27,11 +27,11 @@ libeos_la_SOURCES += ip.h ip.cpp
 libeos_la_LIBADD = -lAgentBase -lSysdbEntityMgr -ltac -ldl
 libeos_la_LIBADD += -lIntf -lArnet
 
-demo1_SOURCES = examples/demo1.cpp
-demo1_LDADD = libeos.la
+# demo1_SOURCES = examples/demo1.cpp <<<
+# demo1_LDADD = libeos.la <<<
 
-demo2_SOURCES = examples/demo2.cpp
-demo2_LDADD = libeos.la
+IntfTestAgent_SOURCES = test/IntfTestAgent.cpp
+IntfTestAgent_LDADD = libeos.la
 
 LIBMAP = .libs/tacc/map.d/$(PACKAGE).map
 mapdir = $(libdir)/tacc/map.d

@@ -4,7 +4,7 @@
 #include <Tac/Tracing.h>
 #include <EosSdk/intf.h>
 
-DEFAULT_TRACE_HANDLE( "eos" )
+DEFAULT_TRACE_HANDLE( "EosSdkIntfMgrSm" )
 
 namespace eos {
 
@@ -21,24 +21,9 @@ void
 IntfStatusSm::handleOperStatus() {
    TRACE8( __PRETTY_FUNCTION__ );
    intf_mgr *mgr = eos::get_intf_mgr();
-   oper_status_t status;
-   switch( intfStatus()->operStatus() ) {
-    case Interface::intfOperUp_:
-      status = INTF_OPER_UP;
-      break;
-    case Interface::intfOperDown_:
-    case Interface::intfOperDormant_:
-    case Interface::intfOperNotPresent_:
-    case Interface::intfOperLowerLayerDown_:
-      status = INTF_OPER_DOWN;
-      break;
-    default:
-      status = INTF_OPER_NULL;
-      break;
-   }
 
    intf_id_t intf_id = intf_id_t( (uint32_t)intfId().intfId() );
-   mgr->on_oper_status( intf_id, status );
+   mgr->on_oper_status( intf_id, intfStatus()->operStatus() );
 }
 
 void
