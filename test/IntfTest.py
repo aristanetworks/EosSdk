@@ -15,6 +15,7 @@ Tracing.traceSettingIs( "IntfApiTests/01,IntfTestAgent,EosSdk*" )
 
 AGENT_NAME = "IntfTestAgent"
 sysname = "IntfTest"
+Artest.beginTest()
 sysdb = Artest.startAgent( "Sysdb", sysname )
 # TODO: create one interface before starting the agent to make sure
 # the agent can handle initialization correctly.
@@ -58,3 +59,4 @@ class IntfApiTest( unittest.TestCase ):
 if __name__ == '__main__':
    unittest.longMessage = True
    unittest.main( buffer=False )
+   Artest.endTest()
