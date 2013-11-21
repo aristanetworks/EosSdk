@@ -16,7 +16,7 @@ class timer_task {
  public:
    timer_task();
    ~timer_task();
-   virtual void run();
+   virtual void run() = 0;
    void wakeup_time_is( seconds_t );
    
 };

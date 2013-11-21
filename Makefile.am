@@ -7,8 +7,17 @@ AM_CXXFLAGS = -std=gnu++0x -Wextra -Wall -Werror -Wno-unused-parameter
 AM_LDFLAGS = -Wl,--no-undefined
 
 lib_LTLIBRARIES = libeos.la
-bin_PROGRAMS = IntfTestAgent # demo1 
-nobase_pkginclude_HEADERS = eos/agent.h eos/intf.h eos/ip.h
+bin_PROGRAMS = IntfTestAgent
+
+PUBLISHED_HEADER_FILES = eos/agent.h
+PUBLISHED_HEADER_FILES += eos/types.h
+PUBLISHED_HEADER_FILES += eos/panic.h
+PUBLISHED_HEADER_FILES += eos/timer.h
+PUBLISHED_HEADER_FILES += eos/intf.h
+PUBLISHED_HEADER_FILES += eos/ip.h
+
+eosheaderdir = $(includedir)/eos
+eosheader_HEADERS = $(PUBLISHED_HEADER_FILES)
 
 eos/%.h: $(srcdir)/%.h $(srcdir)/publish
 	mkdir -p eos
@@ -19,16 +28,13 @@ eos/%.h: $(srcdir)/%.h $(srcdir)/publish
 libeos_la_SOURCES =
 libeos_la_SOURCES += EosSdkAgent.tac EosSdkAgent.tin
 libeos_la_SOURCES += types.h agent.cpp Mount.h Mount.cpp
-libeos_la_SOURCES += panic.cpp
+libeos_la_SOURCES += panic.h panic.cpp
 libeos_la_SOURCES += TimerSm.tac TimerSm.tin timer.h timer.cpp
 libeos_la_SOURCES += IntfMgrSm.tac IntfMgrSm.tin intf.h intf.cpp
 libeos_la_SOURCES += ip.h ip.cpp
 
 libeos_la_LIBADD = -lAgentBase -lSysdbEntityMgr -ltac -ldl
 libeos_la_LIBADD += -lIntf -lArnet
-
-# demo1_SOURCES = examples/demo1.cpp <<<
-# demo1_LDADD = libeos.la <<<
 
 IntfTestAgent_SOURCES = test/IntfTestAgent.cpp
 IntfTestAgent_LDADD = libeos.la
@@ -69,9 +75,10 @@ TAC_FILES = $(filter %.tac,$(SOURCES))
 TAC_CPP_FILES = $(subst .tac,.cpp,$(TAC_FILES))
 TAC_H_FILES = $(subst .tac,.h,$(TAC_FILES))
 TAC_D_FILES = $(subst .tac,.tac.d,$(TAC_FILES))
-BUILT_SOURCES = $(TAC_CPP_FILES)
+BUILT_SOURCES = $(TAC_CPP_FILES) $(PUBLISHED_HEADER_FILES)
 clean-local:
 	rm -f $(TAC_CPP_FILES)
 	rm -f $(TAC_H_FILES)
 	rm -f $(TAC_D_FILES)
+	rm -f $(PUBLISHED_HEADER_FILES)
 -include *.d

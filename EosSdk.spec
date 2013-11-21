@@ -32,13 +32,22 @@ The EOS Software Development Kit provides a set of stable C++ interfaces for
 high-performance access to EOS primitives, for on-box programming beyond what
 can be done with Python.
 
-%package devel
+%package -n eos-sdk
 Summary: EosSdk devel package
 Group: dev/Arista Networks
 Requires: EosSdk
 
-%description devel
+%description -n eos-sdk
 Provides the files necessary development with the EOS Software Development Kit.
+
+%package devel
+Summary: EosSdk devel package
+Group: dev/Arista Networks
+Requires: eos-sdk
+Requires: EosSdk
+
+%description devel
+Provides the files necessary for EosSdk package development.
 
 %package test
 Summary: EosSdk test package
@@ -66,12 +75,16 @@ rm -f "$RPM_BUILD_ROOT"%{_libdir}/*.la
 
 %files
 %defattr(-,root,root)
-%{_libdir}/libeos*.so*
+%{_libdir}/libeos.so*
 %{_libdir}/tacc/map.d/EosSdk.map
+
+%files -n eos-sdk
+%defattr(-,root,root)
+%{_includedir}/eos
 
 %files devel
 %defattr(-,root,root)
-%{_includedir}/EosSdk
 
 %files test
 %defattr(-,root,root)
+%{_bindir}/IntfTestAgent

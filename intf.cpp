@@ -64,10 +64,11 @@ class intf_mgr_impl : public intf_mgr,
                       public mount_handler {
  public:
    intf_mgr_impl() {
-      TRACE0( "intf_mgr_impl ctor: registering my mounts" );
+      TRACE0( __PRETTY_FUNCTION__ );
    }
 
    virtual void doMounts( const Sysdb::MountGroup::Ptr & mg ) {
+      TRACE0( __PRETTY_FUNCTION__ );
       mg->doMount( Sysdb::Mount( "interface/config/eth/intf",
                                  "Interface::EthIntfConfigDir", "w" ) );
       mg->doMount( Sysdb::Mount( "interface/status/eth/intf",
