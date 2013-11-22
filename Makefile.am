@@ -32,7 +32,7 @@ libeos_la_SOURCES += types.h agent.cpp Mount.h Mount.cpp
 libeos_la_SOURCES += panic.h panic.cpp
 libeos_la_SOURCES += TimerSm.tac timer.h timer.cpp
 libeos_la_SOURCES += FileSm.tac file.h file.cpp
-libeos_la_SOURCES += IntfMgrSm.tac IntfMgrSm.tin intf.h intf.cpp
+libeos_la_SOURCES += IntfMgrSm.tac intf.h intf.cpp
 libeos_la_SOURCES += ip.h ip.cpp
 
 libeos_la_LIBADD = -lAgentBase -lSysdbEntityMgr -ltac -ldl

@@ -100,9 +100,42 @@ class intf_mgr_impl : public intf_mgr,
       for (auto handler_iterator = this->handlerList_.begin();
            handler_iterator!=this->handlerList_.end(); ++handler_iterator) {
          (*handler_iterator)->on_initialized();
-   }
+      }
 
    }
+
+   void on_create(intf_id_t intf_id) {
+      std::list<intf_handler *>::const_iterator handler_iterator;
+      for (handler_iterator = this->handlerList_.begin();
+           handler_iterator!=this->handlerList_.end(); ++handler_iterator) {
+         (*handler_iterator)->on_create( intf_id );
+      }
+   }
+   
+   void on_delete(intf_id_t intf_id) {
+      std::list<intf_handler *>::const_iterator handler_iterator;
+      for (handler_iterator = this->handlerList_.begin();
+           handler_iterator!=this->handlerList_.end(); ++handler_iterator) {
+         (*handler_iterator)->on_delete( intf_id );
+      }
+   }
+   void on_oper_status(intf_id_t intf_id, Interface::IntfOperStatus oper_status) {
+      oper_status_t status = convert( oper_status );
+      std::list<intf_handler *>::const_iterator handler_iterator;
+      for (handler_iterator = this->handlerList_.begin();
+           handler_iterator!=this->handlerList_.end(); ++handler_iterator) {
+         (*handler_iterator)->on_oper_status( intf_id, status );
+      }
+   }
+      
+   void on_admin_enabled(intf_id_t intf_id, bool enabled) {
+      std::list<intf_handler *>::const_iterator handler_iterator;
+      for (handler_iterator = this->handlerList_.begin();
+           handler_iterator!=this->handlerList_.end(); ++handler_iterator) {
+         (*handler_iterator)->on_admin_enabled( intf_id, enabled );
+      }
+   }
+
    Interface::AllIntfStatusDir::Ptr allIntfStatusDir_;
    Interface::AllIntfConfigDir::Ptr allIntfConfigDir_;
    IntfMgrSm::Ptr intfMgrSm_;
@@ -185,56 +218,85 @@ intf_mgr::oper_status(intf_id_t id) {
    return convert( intfStatus->operStatus() );
 }
 
-void
-intf_mgr::on_create(intf_id_t intf_id) {
-   intf_mgr_impl * impl = get_intf_mgr_impl(this);
-
-   std::list<intf_handler *>::const_iterator handler_iterator;
-   for (handler_iterator = impl->handlerList_.begin();
-        handler_iterator!=impl->handlerList_.end(); ++handler_iterator) {
-      (*handler_iterator)->on_create( intf_id );
-   }
-}
-
-void
-intf_mgr::on_delete(intf_id_t intf_id) {
-   intf_mgr_impl * impl = get_intf_mgr_impl(this);
-
-   std::list<intf_handler *>::const_iterator handler_iterator;
-   for (handler_iterator = impl->handlerList_.begin();
-        handler_iterator!=impl->handlerList_.end(); ++handler_iterator) {
-      (*handler_iterator)->on_delete( intf_id );
-   }
-}
-
-void
-intf_mgr::on_oper_status(intf_id_t intf_id, Interface::IntfOperStatus oper_status) {
-   intf_mgr_impl * impl = get_intf_mgr_impl(this);
-   oper_status_t status = convert( oper_status );
-   std::list<intf_handler *>::const_iterator handler_iterator;
-   for (handler_iterator = impl->handlerList_.begin();
-        handler_iterator!=impl->handlerList_.end(); ++handler_iterator) {
-      (*handler_iterator)->on_oper_status( intf_id, status );
-   }
-}
-
-void
-intf_mgr::on_admin_enabled(intf_id_t intf_id, bool enabled) {
-   intf_mgr_impl * impl = get_intf_mgr_impl(this);
-
-   std::list<intf_handler *>::const_iterator handler_iterator;
-   for (handler_iterator = impl->handlerList_.begin();
-        handler_iterator!=impl->handlerList_.end(); ++handler_iterator) {
-      (*handler_iterator)->on_admin_enabled( intf_id, enabled );
-   }
-}
-
-
 intf_mgr * 
 get_intf_mgr() {
    static intf_mgr_impl impl;
    return &impl;
 }
 
+
+//
+// IntfConfigSm method implementations
+//
+
+void
+IntfConfigSm::handleAdminEnabled() {
+   TRACE8( __PRETTY_FUNCTION__ << " adminEnabled is "
+           << intfConfig()->adminEnabled() );
+   intf_mgr_impl * impl = get_intf_mgr_impl( eos::get_intf_mgr() );
+   intf_id_t intf_id = intf_id_t( (uint32_t)intfId().intfId() );
+   impl->on_admin_enabled( intf_id, intfConfig()->adminEnabled() );
+}
+
+//
+// IntfStatusSm method implementations
+//
+
+void
+IntfStatusSm::handleOperStatus() {
+   TRACE8( __PRETTY_FUNCTION__ );
+   intf_mgr_impl * impl = get_intf_mgr_impl( eos::get_intf_mgr() );
+
+   intf_id_t intf_id = intf_id_t( (uint32_t)intfId().intfId() );
+   impl->on_oper_status( intf_id, intfStatus()->operStatus() );
+}
+
+//
+// IntfMgrSm method implementations
+//
+
+void
+IntfMgrSm::handleIntfConfig() {
+   TRACE8( __PRETTY_FUNCTION__ );
+   for( auto i = allIntfConfigDir()->intfConfigIteratorConst(); i; ++i ) {
+      intfConfigSmIs( i.ptr() );
+   }
+}
+
+void
+IntfMgrSm::handleIntfConfig( Arnet::IntfId intfId ) {
+   TRACE8( __PRETTY_FUNCTION__ );
+   Interface::IntfConfig::PtrConst intfConfig = \
+      allIntfConfigDir()->intfConfig( intfId );
+   if( intfConfig ) {
+      intfConfigSmIs( intfConfig );
+   } else {
+      intfConfigSmDel( intfId );
+   }
+}
+
+void
+IntfMgrSm::handleIntfStatus() {
+   TRACE8( __PRETTY_FUNCTION__ );
+   for( auto i = allIntfStatusDir()->intfStatusIteratorConst(); i; ++i ) {
+      intfStatusSmIs( i.ptr() );
+   }
+}
+
+void
+IntfMgrSm::handleIntfStatus( Arnet::IntfId intfId ) {
+   TRACE8( __PRETTY_FUNCTION__ );
+   intf_mgr_impl * impl = get_intf_mgr_impl( eos::get_intf_mgr() );
+   intf_id_t intf_id = intf_id_t( (uint32_t)intfId.intfId() );
+   Interface::IntfStatus::PtrConst intfStatus = \
+      allIntfStatusDir()->intfStatus( intfId );
+   if( intfStatus ) {
+      intfStatusSmIs( intfStatus );
+      impl->on_create( intf_id );
+   } else {
+      intfStatusSmDel( intfId );
+      impl->on_delete( intf_id );
+   }
+}
 
 };

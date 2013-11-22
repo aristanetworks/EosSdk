@@ -47,5 +47,3 @@ IntfMgrSm : Tac::Type(allIntfConfigDir,
 }
 
 }
-
-<<= CppBlock("IntfMgrSm.tin");
