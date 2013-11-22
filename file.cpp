@@ -5,6 +5,9 @@
 #include <eos/panic.h>
 #include <FileSm.h>
 #include <map>
+#include <Tac/Tracing.h>
+
+DEFAULT_TRACE_HANDLE( "EosSdkFile" )
 
 namespace eos {
 
@@ -28,11 +31,17 @@ get_file_descriptor_sm( file_handler *file_handler, int fd ) {
    FileHandlerSm::Ptr fhSm = fileHandlerToFileHandlerSm[ file_handler ];
    assert( fhSm );
    // Get or create a file descriptor sm for this descriptor
-   FileDescriptorSm::Ptr fdSm = fhSm->fileDescriptorSmIs(
+   FileDescriptorSm::Ptr fdSm = fhSm->fileDescriptorSm( fd );
+   if( !fdSm ) {
+      fdSm = fhSm->fileDescriptorSmIs(
          fd,
          Tac::FileDescriptor::FileDescriptorIs( "FileDescriptor" ),
          fhSm.ptr() );
-   fdSm->fileDescriptor()->descriptorIs( fd );
+      fdSm->fileDescriptor()->descriptorIs( fd );
+      fdSm->fileDescriptor()->notifyOnReadableIs( false );
+      fdSm->fileDescriptor()->notifyOnWritableIs( false );
+      fdSm->fileDescriptor()->notifyOnExceptionIs( false );
+   }
    return fdSm;
 }
 
@@ -84,6 +93,7 @@ FileHandlerSm::maybeCleanupAfterFileDescriptor( int fd ) {
    if( !fdSm->fileDescriptor()->notifyOnReadable() &&
        !fdSm->fileDescriptor()->notifyOnWritable() &&
        !fdSm->fileDescriptor()->notifyOnException() ) {
+      TRACE1("Cleaning up after fd " << fd);
       fileDescriptorSmDel( fd );
    }
 }

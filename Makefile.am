@@ -7,7 +7,7 @@ AM_CXXFLAGS = -std=gnu++0x -Wextra -Wall -Werror -Wno-unused-parameter
 AM_LDFLAGS = -Wl,--no-undefined
 
 lib_LTLIBRARIES = libeos.la
-bin_PROGRAMS = IntfTestAgent
+bin_PROGRAMS = IntfTestAgent EchoBot
 
 PUBLISHED_HEADER_FILES = eos/agent.h
 PUBLISHED_HEADER_FILES += eos/types.h
@@ -40,6 +40,9 @@ libeos_la_LIBADD += -lIntf -lArnet -lArk
 
 IntfTestAgent_SOURCES = test/IntfTestAgent.cpp
 IntfTestAgent_LDADD = libeos.la
+
+EchoBot_SOURCES = examples/EchoBot.cpp
+EchoBot_LDADD = libeos.la
 
 LIBMAP = .libs/tacc/map.d/$(PACKAGE).map
 mapdir = $(libdir)/tacc/map.d
