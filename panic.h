@@ -16,4 +16,4 @@ void panic_handler_is(panic_handler_t);
 
 };
 
-#endif // EOSSDK_PANIC_H
+#endif // EOS_PANIC_H

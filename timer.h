@@ -1,8 +1,8 @@
 // Copyright (c) 2013 Arista Networks, Inc.  All rights reserved.
 // Arista Networks, Inc. Confidential and Proprietary.
 
-#ifndef EOSSDK_TIMER_H
-#define EOSSDK_TIMER_H
+#ifndef EOS_TIMER_H
+#define EOS_TIMER_H
 
 #include <math.h>
 
@@ -25,4 +25,4 @@ class timer_task {
 
 }
 
-#endif // EOSSDK_TIMER_H
+#endif // EOS_TIMER_H

@@ -1,8 +1,8 @@
 // Copyright (c) 2013 Arista Networks, Inc.  All rights reserved.
 // Arista Networks, Inc. Confidential and Proprietary.
 
-#ifndef EOSSDK_FILE_H
-#define EOSSDK_FILE_H
+#ifndef EOS_FILE_H
+#define EOS_FILE_H
 
 namespace eos {
 
@@ -20,4 +20,4 @@ class file_handler {
 
 };
 
-#endif // EOSSDK_FILE_H
+#endif // EOS_FILE_H
