@@ -6,8 +6,6 @@
 
 #include <math.h>
 
-#include <TimerSm.h> // hide
-
 namespace eos {
 
 typedef double seconds_t;
