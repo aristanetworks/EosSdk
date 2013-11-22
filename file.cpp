@@ -23,7 +23,8 @@ file_handler::~file_handler() {
    fileHandlerToFileHandlerSm.erase( this );
 }
 
-FileDescriptorSm::Ptr get_file_descriptor_sm( file_handler *file_handler, int fd ) {
+FileDescriptorSm::Ptr
+get_file_descriptor_sm( file_handler *file_handler, int fd ) {
    FileHandlerSm::Ptr fhSm = fileHandlerToFileHandlerSm[ file_handler ];
    assert( fhSm );
    // Get or create a file descriptor sm for this descriptor
@@ -75,6 +76,10 @@ file_handler::exception_interest_is(int fd, bool interest) {
 void
 FileHandlerSm::maybeCleanupAfterFileDescriptor( int fd ) {
    FileDescriptorSm::Ptr fdSm = fileDescriptorSm( fd );
+   // I'm guaranteed that the fdSm exists at this point (because
+   // we called get_file_descriptor_sm earlier to get the sm,
+   // which creates it if it doesn't exist), so this should be
+   // an assert not a panic.
    assert( fdSm );
    if( !fdSm->fileDescriptor()->notifyOnReadable() &&
        !fdSm->fileDescriptor()->notifyOnWritable() &&
