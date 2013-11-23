@@ -11,24 +11,27 @@ DEFAULT_TRACE_HANDLE( "EosSdkFile" )
 
 namespace eos {
 
-std::map< file_handler *, FileHandlerSm::Ptr > fileHandlerToFileHandlerSm;
-std::map< FileHandlerSm *, file_handler * > fileHandlerSmToFileHandler;
+static std::map< file_handler *, FileHandlerSm::Ptr >
+file_handler_to_file_handler_sm;
+
+static std::map< FileHandlerSm *, file_handler * >
+file_handler_sm_to_file_handler;
 
 file_handler::file_handler() {
    FileHandlerSm::Ptr fileHandlerSm = FileHandlerSm::FileHandlerSmIs();
-   fileHandlerSmToFileHandler[ fileHandlerSm.ptr() ] = this;
-   fileHandlerToFileHandlerSm[ this ] = fileHandlerSm;
+   file_handler_sm_to_file_handler[ fileHandlerSm.ptr() ] = this;
+   file_handler_to_file_handler_sm[ this ] = fileHandlerSm;
 }
 
 file_handler::~file_handler() {
-   FileHandlerSm::Ptr fileHandlerSm = fileHandlerToFileHandlerSm[ this ];
-   fileHandlerSmToFileHandler.erase( fileHandlerSm.ptr() );
-   fileHandlerToFileHandlerSm.erase( this );
+   FileHandlerSm::Ptr fileHandlerSm = file_handler_to_file_handler_sm[ this ];
+   file_handler_sm_to_file_handler.erase( fileHandlerSm.ptr() );
+   file_handler_to_file_handler_sm.erase( this );
 }
 
 FileDescriptorSm::Ptr
 get_file_descriptor_sm( file_handler *file_handler, int fd ) {
-   FileHandlerSm::Ptr fhSm = fileHandlerToFileHandlerSm[ file_handler ];
+   FileHandlerSm::Ptr fhSm = file_handler_to_file_handler_sm[ file_handler ];
    assert( fhSm );
    // Get or create a file descriptor sm for this descriptor
    FileDescriptorSm::Ptr fdSm = fhSm->fileDescriptorSm( fd );
@@ -100,7 +103,7 @@ FileHandlerSm::maybeCleanupAfterFileDescriptor( int fd ) {
 
 void
 FileDescriptorSm::handleReadable() {
-   file_handler *fh = fileHandlerSmToFileHandler[ fileHandlerSm() ];
+   file_handler *fh = file_handler_sm_to_file_handler[ fileHandlerSm() ];
    assert( fh );
 
    fh->on_readable( fd() );
@@ -108,7 +111,7 @@ FileDescriptorSm::handleReadable() {
 
 void
 FileDescriptorSm::handleWritable() {
-   file_handler *fh = fileHandlerSmToFileHandler[ fileHandlerSm() ];
+   file_handler *fh = file_handler_sm_to_file_handler[ fileHandlerSm() ];
    assert( fh );
 
    fh->on_writable( fd() );
@@ -116,7 +119,7 @@ FileDescriptorSm::handleWritable() {
 
 void
 FileDescriptorSm::handleExceptionPending() {
-   file_handler *fh = fileHandlerSmToFileHandler[ fileHandlerSm() ];
+   file_handler *fh = file_handler_sm_to_file_handler[ fileHandlerSm() ];
    assert( fh );
 
    fh->on_exception( fd() );
