@@ -2,7 +2,7 @@
 // Arista Networks, Inc. Confidential and Proprietary.
 
 #include <EosSdk/file.h>
-#include <eos/panic.h>
+#include <EosSdk/panic.h>
 #include <FileSm.h>
 #include <map>
 #include <Tac/Tracing.h>
