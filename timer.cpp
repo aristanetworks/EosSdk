@@ -3,6 +3,7 @@
 
 #include <Ark/HTimerWheel.h>
 #include <EosSdk/timer.h>
+#include <EosSdk/panic.h>
 #include <TimerSm.h>
 #include <Tac/Tracing.h>
 #include <Tac/Time.h>
@@ -12,8 +13,16 @@ DEFAULT_TRACE_HANDLE( "eos" );
 
 namespace eos {
 
+static struct CheckNever {
+   CheckNever() {
+      assert( never == Tac::endOfTime );
+   }
+} checkNever;
+
+static double const TIME_BASE = 1000000.0;
+
 seconds_t now() {
-   return Tac::now();
+   return Tac::now() + TIME_BASE;
 }
 
 Ark::TimerWheel::Ptr
@@ -28,21 +37,21 @@ get_timer_wheel() {
    return timer_wheel;
 }
 
-std::map< timer_task *, TimerTaskSm::Ptr > taskToTaskSm;
-std::map< TimerTaskSm *, timer_task * > taskSmToTask;
+std::map< timeout_handler *, TimerTaskSm::Ptr > taskToTaskSm;
+std::map< TimerTaskSm *, timeout_handler * > taskSmToTask;
 
-timer_task *get_timer_task( const TimerTaskSm::Ptr & taskSm ) {
+timeout_handler *get_timeout_handler( const TimerTaskSm::Ptr & taskSm ) {
    return taskSmToTask[ taskSm.ptr() ];
 }
 
-timer_task::timer_task() {
+timeout_handler::timeout_handler() {
    // Enqueue the new timer task, with no wakeup time
    TimerTaskSm::Ptr taskSm = TimerTaskSm::TimerTaskSmIs( get_timer_wheel() );
    taskSmToTask[ taskSm.ptr() ] = this;
    taskToTaskSm[ this ] = taskSm;
 }
 
-timer_task::~timer_task() {
+timeout_handler::~timeout_handler() {
    // Dequeue ourselves
    TimerTaskSm::Ptr taskSm = taskToTaskSm[ this ];
    taskSmToTask.erase( taskSm.ptr() );
@@ -50,9 +59,12 @@ timer_task::~timer_task() {
 }
 
 void
-timer_task::wakeup_time_is( seconds_t when ) {
+timeout_handler::timeout_time_is( seconds_t when ) {
    TRACE9( __PRETTY_FUNCTION__ << " " << when );
-   taskToTaskSm[ this ]->wakeupTimeIs( when );
+   if( when < TIME_BASE ) {
+      panic( "absolute time value %lf too small to be plausible", when );
+   }
+   taskToTaskSm[ this ]->wakeupTimeIs( when - TIME_BASE );
 }
 
 //
@@ -61,7 +73,7 @@ timer_task::wakeup_time_is( seconds_t when ) {
 
 void
 TimerTaskSm::run() {
-   taskSmToTask[ this ]->run();
+   taskSmToTask[ this ]->on_timeout();
 }
 
 void

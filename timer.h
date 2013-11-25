@@ -9,18 +9,17 @@
 namespace eos {
 
 typedef double seconds_t;
-static const seconds_t NEVER = NAN;
 
 // Seconds since boot (clock_monotonic).
 seconds_t now();
+static const seconds_t never = INFINITY;
 
-class timer_task {
+class timeout_handler {
  public:
-   timer_task();
-   ~timer_task();
-   virtual void run() = 0;
-   void wakeup_time_is( seconds_t );
-   
+   timeout_handler();
+   ~timeout_handler();
+   virtual void on_timeout() = 0;
+   void timeout_time_is(seconds_t);
 };
 
 }

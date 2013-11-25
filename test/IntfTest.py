@@ -2,7 +2,7 @@
 # Copyright (c) 2013 Arista Networks, Inc.  All rights reserved.
 # Arista Networks, Inc. Confidential and Proprietary.
 
-import Artest
+import EosSdkTestLib
 import Tac
 import Tracing
 
@@ -14,26 +14,19 @@ t1 = traceHandle.trace1
 Tracing.traceSettingIs( "IntfApiTests/01,IntfTestAgent,EosSdk*" )
 
 AGENT_NAME = "IntfTestAgent"
-sysname = "IntfTest"
-Artest.beginTest()
-sysdb = Artest.startAgent( "Sysdb", sysname )
-# TODO: create one interface before starting the agent to make sure
-# the agent can handle initialization correctly.
+agentManager = EosSdkTestLib.AgentManager( sysname="IntfTest" )
+sysdb = agentManager.startAgent( "Sysdb" )
+
 
 class IntfApiTest( unittest.TestCase ):
-   
-   # Ignore pylint complaining about vars declared outside init for unittests
-   # pylint: disable-msg=W0201
    def setUp( self ):
       self.config = sysdb[ "interface" ][ "config" ][ "eth" ][ "phy" ]
       self.status = sysdb[ "interface" ][ "status" ][ "eth" ][ "phy" ]
       self.et1Config, self.et1Status = self._createInterface()
-      # BUG73783 - not sure why we're failing the heap check, but there's zero
-      # debugging info, and I'm not sure this is real.
-      self.intfTestAgent = Artest.startAgent( AGENT_NAME, sysname, heapCheck=False )
+      agentManager.startAgent( AGENT_NAME )
 
    def tearDown( self ):
-      Artest.stopAgent( AGENT_NAME, sysname )
+      agentManager.stopAgent( AGENT_NAME )
       self.config.clear()
       self.status.clear()
 
@@ -61,4 +54,4 @@ class IntfApiTest( unittest.TestCase ):
 if __name__ == '__main__':
    unittest.longMessage = True
    unittest.main( buffer=False )
-   Artest.endTest()
+
