@@ -4,20 +4,22 @@
 #ifndef EOS_TIMER_H
 #define EOS_TIMER_H
 
-#include <math.h>
-
 namespace eos {
 
 typedef double seconds_t;
 
-// Seconds since boot (clock_monotonic).
+// Monotonically increasing time. Corresponds to the number of seconds
+// since boottime (with some offset).
 seconds_t now();
-static const seconds_t never = INFINITY;
+// 'never' represents a time that will we never see
+static const seconds_t never = 0;
 
+/* Class to handle timer events. */
 class timeout_handler {
  public:
    timeout_handler();
    ~timeout_handler();
+
    virtual void on_timeout() = 0;
    void timeout_time_is(seconds_t);
 };

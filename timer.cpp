@@ -13,12 +13,6 @@ DEFAULT_TRACE_HANDLE( "eos" );
 
 namespace eos {
 
-static struct CheckNever {
-   CheckNever() {
-      assert( never == Tac::endOfTime );
-   }
-} checkNever;
-
 static double const TIME_BASE = 1000000.0;
 
 seconds_t now() {
@@ -61,8 +55,11 @@ timeout_handler::~timeout_handler() {
 void
 timeout_handler::timeout_time_is( seconds_t when ) {
    TRACE9( __PRETTY_FUNCTION__ << " " << when );
-   if( when < TIME_BASE ) {
+   if( when != never && when < TIME_BASE ) {
       panic( "absolute time value %lf too small to be plausible", when );
+   }
+   if( when == never ){
+      when = Tac::endOfTime;
    }
    taskToTaskSm[ this ]->wakeupTimeIs( when - TIME_BASE );
 }
