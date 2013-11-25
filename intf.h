@@ -48,21 +48,29 @@ class intf_id_t {
 
 class intf_handler {
  public:
-   virtual void on_initialized() {}
-   virtual void on_create(intf_id_t) {}
-   virtual void on_delete(intf_id_t) {}
-   virtual void on_oper_status(intf_id_t, oper_status_t) {}
-   virtual void on_admin_enabled(intf_id_t, bool) {}
+   intf_handler();
+   ~intf_handler();
+
+   void watch_all_intfs( bool );
+   void watch_intf( intf_id_t, bool );
+
+   virtual void on_initialized();
+   virtual void on_create(intf_id_t);
+   virtual void on_delete(intf_id_t);
+   virtual void on_oper_status(intf_id_t, oper_status_t);
+   virtual void on_admin_enabled(intf_id_t, bool);
 };
 
 
 class intf_mgr {
  public:
+//= hidden
    // Reactor registration
-   void add_handler(intf_handler *); // handles all interfaces
+   void add_handler(intf_handler *);
    void remove_handler(intf_handler *);
-   void add_handler(intf_id_t, intf_handler *); // handle given interface
+   void add_handler(intf_id_t, intf_handler *);
    void remove_handler(intf_id_t, intf_handler *);
+//= end_hidden
 
    // Collection management
    void intf_foreach(bool (*handler)(intf_id_t, void *), void *);

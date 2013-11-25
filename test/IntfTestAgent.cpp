@@ -15,6 +15,11 @@ eos::intf_mgr * intf_mgr;
 
 class IntfTestHandler : public eos::intf_handler {
  public:
+   IntfTestHandler(){
+      TRACE0( __PRETTY_FUNCTION__ );  
+      watch_all_intfs( true );
+   }
+
    static bool handle_initial_intf( eos::intf_id_t i, void * me_void ){
       IntfTestHandler * me = (IntfTestHandler *) me_void;
       char name[eos::INTF_NAME_MAX];
@@ -25,7 +30,7 @@ class IntfTestHandler : public eos::intf_handler {
    }
 
    void on_initialized() {
-      TRACE0("on_initialized");
+      TRACE0( __PRETTY_FUNCTION__ );
       intf_mgr->intf_foreach( handle_initial_intf, this );
    }
    
@@ -57,7 +62,6 @@ int main(int argc, char ** argv) {
    TRACE0( "Agent started" );
    intf_mgr = eos::get_intf_mgr();
    IntfTestHandler handler;
-   intf_mgr->add_handler( &handler );
    TRACE0( "Handing over control of the main loop" );
    eos::agent_main_loop("IntfTestAgent", argc, argv);
 }
