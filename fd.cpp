@@ -1,7 +1,7 @@
 // Copyright (c) 2013 Arista Networks, Inc.  All rights reserved.
 // Arista Networks, Inc. Confidential and Proprietary.
 
-#include <EosSdk/file.h>
+#include <EosSdk/fd.h>
 #include <EosSdk/panic.h>
 #include <FileSm.h>
 #include <map>
@@ -11,27 +11,27 @@ DEFAULT_TRACE_HANDLE( "EosSdkFile" )
 
 namespace eos {
 
-static std::map< file_handler *, FileHandlerSm::Ptr >
-file_handler_to_file_handler_sm;
+static std::map< fd_handler *, FileHandlerSm::Ptr >
+fd_handler_to_fd_handler_sm;
 
-static std::map< FileHandlerSm *, file_handler * >
-file_handler_sm_to_file_handler;
+static std::map< FileHandlerSm *, fd_handler * >
+fd_handler_sm_to_fd_handler;
 
-file_handler::file_handler() {
+fd_handler::fd_handler() {
    FileHandlerSm::Ptr fileHandlerSm = FileHandlerSm::FileHandlerSmIs();
-   file_handler_sm_to_file_handler[ fileHandlerSm.ptr() ] = this;
-   file_handler_to_file_handler_sm[ this ] = fileHandlerSm;
+   fd_handler_sm_to_fd_handler[ fileHandlerSm.ptr() ] = this;
+   fd_handler_to_fd_handler_sm[ this ] = fileHandlerSm;
 }
 
-file_handler::~file_handler() {
-   FileHandlerSm::Ptr fileHandlerSm = file_handler_to_file_handler_sm[ this ];
-   file_handler_sm_to_file_handler.erase( fileHandlerSm.ptr() );
-   file_handler_to_file_handler_sm.erase( this );
+fd_handler::~fd_handler() {
+   FileHandlerSm::Ptr fileHandlerSm = fd_handler_to_fd_handler_sm[ this ];
+   fd_handler_sm_to_fd_handler.erase( fileHandlerSm.ptr() );
+   fd_handler_to_fd_handler_sm.erase( this );
 }
 
 FileDescriptorSm::Ptr
-get_file_descriptor_sm( file_handler *file_handler, int fd ) {
-   FileHandlerSm::Ptr fhSm = file_handler_to_file_handler_sm[ file_handler ];
+get_fd_sm( fd_handler *fd_handler, int fd ) {
+   FileHandlerSm::Ptr fhSm = fd_handler_to_fd_handler_sm[ fd_handler ];
    assert( fhSm );
    // Get or create a file descriptor sm for this descriptor
    FileDescriptorSm::Ptr fdSm = fhSm->fileDescriptorSm( fd );
@@ -49,8 +49,8 @@ get_file_descriptor_sm( file_handler *file_handler, int fd ) {
 }
 
 void
-file_handler::read_interest_is(int fd, bool interest) {
-   FileDescriptorSm::Ptr fdSm = get_file_descriptor_sm( this, fd );
+fd_handler::watch_readable(int fd, bool interest) {
+   FileDescriptorSm::Ptr fdSm = get_fd_sm( this, fd );
    fdSm->fileDescriptor()->notifyOnReadableIs( interest );
    if( !interest ) {
       // If we aren't interested in anything about this file descriptor
@@ -60,8 +60,8 @@ file_handler::read_interest_is(int fd, bool interest) {
 }
 
 void
-file_handler::write_interest_is(int fd, bool interest) {
-   FileDescriptorSm::Ptr fdSm = get_file_descriptor_sm( this, fd );
+fd_handler::watch_writable(int fd, bool interest) {
+   FileDescriptorSm::Ptr fdSm = get_fd_sm( this, fd );
    fdSm->fileDescriptor()->notifyOnWritableIs( interest );
    if( !interest ) {
       // If we aren't interested in anything about this file descriptor
@@ -71,8 +71,8 @@ file_handler::write_interest_is(int fd, bool interest) {
 }
 
 void
-file_handler::exception_interest_is(int fd, bool interest) {
-   FileDescriptorSm::Ptr fdSm = get_file_descriptor_sm( this, fd );
+fd_handler::watch_exception(int fd, bool interest) {
+   FileDescriptorSm::Ptr fdSm = get_fd_sm( this, fd );
    fdSm->fileDescriptor()->notifyOnExceptionIs( interest );
    if( !interest ) {
       // If we aren't interested in anything about this file descriptor
@@ -89,7 +89,7 @@ void
 FileHandlerSm::maybeCleanupAfterFileDescriptor( int fd ) {
    FileDescriptorSm::Ptr fdSm = fileDescriptorSm( fd );
    // I'm guaranteed that the fdSm exists at this point (because
-   // we called get_file_descriptor_sm earlier to get the sm,
+   // we called get_fd_sm earlier to get the sm,
    // which creates it if it doesn't exist), so this should be
    // an assert not a panic.
    assert( fdSm );
@@ -103,7 +103,7 @@ FileHandlerSm::maybeCleanupAfterFileDescriptor( int fd ) {
 
 void
 FileDescriptorSm::handleReadable() {
-   file_handler *fh = file_handler_sm_to_file_handler[ fileHandlerSm() ];
+   fd_handler *fh = fd_handler_sm_to_fd_handler[ fileHandlerSm() ];
    assert( fh );
 
    fh->on_readable( fd() );
@@ -111,7 +111,7 @@ FileDescriptorSm::handleReadable() {
 
 void
 FileDescriptorSm::handleWritable() {
-   file_handler *fh = file_handler_sm_to_file_handler[ fileHandlerSm() ];
+   fd_handler *fh = fd_handler_sm_to_fd_handler[ fileHandlerSm() ];
    assert( fh );
 
    fh->on_writable( fd() );
@@ -119,7 +119,7 @@ FileDescriptorSm::handleWritable() {
 
 void
 FileDescriptorSm::handleExceptionPending() {
-   file_handler *fh = file_handler_sm_to_file_handler[ fileHandlerSm() ];
+   fd_handler *fh = fd_handler_sm_to_fd_handler[ fileHandlerSm() ];
    assert( fh );
 
    fh->on_exception( fd() );
