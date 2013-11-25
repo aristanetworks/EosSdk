@@ -13,7 +13,7 @@ PUBLISHED_HEADER_FILES = eos/agent.h
 PUBLISHED_HEADER_FILES += eos/types.h
 PUBLISHED_HEADER_FILES += eos/panic.h
 PUBLISHED_HEADER_FILES += eos/timer.h
-PUBLISHED_HEADER_FILES += eos/file.h
+PUBLISHED_HEADER_FILES += eos/fd.h
 PUBLISHED_HEADER_FILES += eos/intf.h
 PUBLISHED_HEADER_FILES += eos/ip.h
 
@@ -31,7 +31,7 @@ libeos_la_SOURCES += EosSdkAgent.tac EosSdkAgent.tin
 libeos_la_SOURCES += types.h agent.cpp Mount.h Mount.cpp
 libeos_la_SOURCES += panic.h panic.cpp
 libeos_la_SOURCES += TimerSm.tac timer.h timer.cpp
-libeos_la_SOURCES += FileSm.tac file.h file.cpp
+libeos_la_SOURCES += FileSm.tac fd.h fd.cpp
 libeos_la_SOURCES += IntfMgrSm.tac intf.h intf.cpp
 libeos_la_SOURCES += ip.h ip.cpp
 
