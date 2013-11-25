@@ -6,7 +6,7 @@
 
 #include <stddef.h>
 #include <eos/types.h>
-#include <Arnet/IntfId.h> //= hide
+#include <Arnet/IntfId.h> //= eos_internal
 
 namespace eos {
 
@@ -21,20 +21,30 @@ typedef enum oper_status_e {
 
 class intf_id_t {
  public:
+   intf_id_t();
    explicit intf_id_t(uint32_t);
    explicit intf_id_t(char const *name);
 
-   void to_string(char *namebuf, size_t namebuf_size);
+   bool operator !() const;
 
-   bool operator==(intf_id_t const & other);
-   bool operator!=(intf_id_t const & other);
-   void validate(); //= hide
-   Arnet::IntfId intfId_; //= hide
+   bool is_null0() const;
 
+   size_t to_string(char * namebuf, size_t namebuf_size) const;
+   // string to_string() const;  //= eos_internal
+
+   // explicit operator==(intf_id_t const & other);
+   // explicit operator!=(intf_id_t const & other);
+//= hidden
+   void validate();
+   bool valid() const;
+
+   Arnet::IntfId intfId_;
+//= end_hidden
  //=> private:
    //=> uint32_t intfId_;
 
 };
+
 
 class intf_handler {
  public:
@@ -65,6 +75,15 @@ class intf_mgr {
    void admin_enabled_is(intf_id_t, bool);
    void description_is(intf_id_t, char const *);
    oper_status_t oper_status(intf_id_t);
+
+//= hidden
+   // Trampoline methods for calling the associated methods
+   // on all handlers
+   void on_create(intf_id_t);
+   void on_delete(intf_id_t);
+   void on_oper_status(intf_id_t, Interface::IntfOperStatus);
+   void on_admin_enabled(intf_id_t, bool);
+//= end_hidden
 
  //=> private:
    intf_mgr();

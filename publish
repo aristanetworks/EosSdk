@@ -15,7 +15,7 @@ for lineNo, line in enumerate( sys.stdin ):
          # Make lines starting with '//=> ' show in the public header
          sys.stdout.write(m.group(1) + command[2:] + "\n")
          continue
-      elif command == "hide":
+      elif command == "hide" or command == "eos_internal":
          # ignore lines marked with '//= hide'
          continue
       elif command == "hidden":

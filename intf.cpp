@@ -35,6 +35,9 @@ static oper_status_t convert( Interface::IntfOperStatus operStatus ) {
    return ret;
 }
 
+intf_id_t::intf_id_t() : intfId_("") {
+}
+
 intf_id_t::intf_id_t(uint32_t id) {
    assert( sizeof(id) == sizeof(intfId_) );
    memcpy( &intfId_, &id, sizeof(intfId_) );
@@ -46,18 +49,33 @@ intf_id_t::intf_id_t(char const * intfname) :
    validate();
 }
 
+// Arnet::IntfId's default constructor sets emptyIntfId as the intfId
+// when passed the empty string, as we do in our default
+// constructor. See Arnet/IntfId.tin IntfId::handleInitialized()
+bool
+intf_id_t::operator !() const {
+   return intfId_.intfId() == Arnet::IntfId::emptyIntfId();
+}
+
+bool
+intf_id_t::is_null0() const {
+   static uint32_t null0_intf_id = Arnet::IntfId("Null0").intfId();
+   return intfId_.intfId() == null0_intf_id;
+}
+
 void
 intf_id_t::validate() {
    // Ask IntfIdTrie if intfId_ looks valid.
    // If not, call panic().
 }
 
-void
-intf_id_t::to_string(char *namebuf, size_t namebuf_size) {
+size_t
+intf_id_t::to_string(char *namebuf, size_t namebuf_size) const {
    Tac::String name = intfId_.stringValue();
    char const * ptr = name.charPtr();
    strncpy( namebuf, ptr, namebuf_size );
    namebuf[namebuf_size - 1] = 0;
+   return namebuf_size;
 }
 
 class intf_mgr_impl : public intf_mgr,
