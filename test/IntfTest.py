@@ -19,6 +19,8 @@ sysdb = agentManager.startAgent( "Sysdb" )
 
 
 class IntfApiTest( unittest.TestCase ):
+   # Ignore attributes defined outside the __init__
+   # pylint: disable-msg=W0201
    def setUp( self ):
       self.config = sysdb[ "interface" ][ "config" ][ "eth" ][ "phy" ]
       self.status = sysdb[ "interface" ][ "status" ][ "eth" ][ "phy" ]
