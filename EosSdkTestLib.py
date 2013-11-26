@@ -63,7 +63,7 @@ class AgentManager( object ):
       if sysdbSockname:
          env[ "SYSDBSOCKNAME" ] = sysdbSockname
       outfile = None
-      if self.logdir_:
+      if self.logdir_ is not None:
          outfile = file( self.getLogfileName( agentName ), "w" )
       p = ManagedSubprocess.Popen( argv=cmd, verbose=True, env=env,
                                    stdout=outfile, stderr=outfile )
@@ -91,9 +91,10 @@ class AgentManager( object ):
          # If the agent starts enough to accept a pyclient connection, and
          # then dies, we're likely to end up here.  If we have the
          # ManagedSubprocess, then cat the log file.
-         filename = self.getLogfileName( agentName )
-         if self.logdir_ and os.path.exists( filename ):
-            print file( filename ).read()
+         if self.logdir_ is not None:
+            filename = self.getLogfileName( agentName )
+            if os.path.exists( filename ):
+               print file( filename ).read()
          print "Exception: ", e
          raise AgentNotRunningException( agentName )
    
