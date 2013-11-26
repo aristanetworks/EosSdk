@@ -48,6 +48,12 @@ get_fd_sm( fd_handler *fd_handler, int fd ) {
    return fdSm;
 }
 
+
+// Dummy implementations of virtual methods
+void fd_handler::on_readable(int fd) {}
+void fd_handler::on_writable(int fd) {}
+void fd_handler::on_exception(int fd) {}
+
 void
 fd_handler::watch_readable(int fd, bool interest) {
    FileDescriptorSm::Ptr fdSm = get_fd_sm( this, fd );

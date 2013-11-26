@@ -171,6 +171,7 @@ intf_mgr::intf_mgr() {
 }
 
 void intf_mgr::add_handler(intf_handler *handler) {
+   // ordering: registration order (first to register is first to be notified).
    IntfMgrImpl * impl = getIntfMgrImpl(this);
    impl->handlerList_.push_back( handler );
 }
@@ -247,40 +248,45 @@ get_intf_mgr() {
 // intf_handler implementation
 //
 
-intf_handler::intf_handler() {}
+intf_handler::intf_handler() : watching_all_intfs_(false) {}
 
 // The intf_handler destructor automatically unregisters itself as a
 // handler for all interfaces via the intf_mgr
 intf_handler::~intf_handler() {
    TRACE0( __PRETTY_FUNCTION__ << " unregistering myself as a handler");
-   IntfMgrImpl * impl = (IntfMgrImpl *) get_intf_mgr();
+   if( watching_all_intfs_ ) {
+      IntfMgrImpl * impl = (IntfMgrImpl *) get_intf_mgr();
+      impl->remove_handler(this);
+   }
    // TODO: remove per-interface handlers
    // impl->remove_handler( (eos::intf_id_t)iter.key().intfId(), this );
-   impl->remove_handler(this);
 }
 
 void
 intf_handler::watch_all_intfs(bool interest) {
    TRACE0( __PRETTY_FUNCTION__ << " registering myself as new handler" );
+   if( watching_all_intfs_ == interest ) return;
    IntfMgrImpl * impl = (IntfMgrImpl *) get_intf_mgr();
    if(interest) {
       impl->add_handler(this);
    } else {
       impl->remove_handler(this);
    }
+   watching_all_intfs_ = interest;
 }
 
-void
-intf_handler::watch_intf(intf_id_t i, bool interest) {
-   TRACE0( __PRETTY_FUNCTION__ << " registering myself as a " <<
-           "interface-specific handler" );
-   IntfMgrImpl * impl = (IntfMgrImpl *) get_intf_mgr();
-   if(interest) {
-      impl->add_handler(i, this);
-   } else {
-      impl->remove_handler(i, this);
-   }
-}
+// Not implemented:
+// void
+// intf_handler::watch_intf(intf_id_t i, bool interest) {
+//    TRACE0( __PRETTY_FUNCTION__ << " registering myself as a " <<
+//            "interface-specific handler" );
+//    IntfMgrImpl * impl = (IntfMgrImpl *) get_intf_mgr();
+//    if(interest) {
+//       impl->add_handler(i, this);
+//    } else {
+//       impl->remove_handler(i, this);
+//    }
+// }
 
 // Dummy implementations for virtual handler methods.
 void intf_handler::on_initialized() {}
