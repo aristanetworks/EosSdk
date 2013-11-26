@@ -1,4 +1,4 @@
-EXTRA_DIST = EosSdk.spec $(TESTS) test/EosSdkTestLib.py
+EXTRA_DIST = EosSdk.spec $(TESTS) 
 
 CPP_INCLUDE_FLAGS = -I/usr/include/python$(PYTHON_VERSION) \
    -Isrc-includes -I$(includedir)
@@ -54,9 +54,11 @@ $(LIBMAP): $(lib_LTLIBRARIES)
 
 TESTS_ENVIRONMENT = SRCDIR="$(srcdir)"
 
+python_PYTHON = EosSdkTestLib.py
+
 sanityTests = 
 TESTS = $(sanityTests)
-TESTS += test/IntfTest.py
+TESTS += test/IntfTest.py examples/EchoBotTest.py
 sanity:
 	make TESTS="$(sanityTests)" check
 
