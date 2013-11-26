@@ -31,7 +31,8 @@ class AgentNotRunningException( EosSdkException ):
 class UnknownAgentException( EosSdkException ):
    def __init__( self, agent ):
       EosSdkException.__init__( self, "Agent %s exists (pid %d) but is not owned "
-                                "by this manager" % (agent["name"], agent["pid"]) )
+                                "by this manager"
+                                % ( agent[ "name" ], agent[ "pid" ] ) )
 
 
 class AgentManager( object ):
@@ -55,20 +56,19 @@ class AgentManager( object ):
       t0( "Starting agent %s with sysname %s" % (agentName, self.sysname_) )
       cmd = [ agentName , "--sysname=%s" % self.sysname_ ] + (argv or [])
       if asRoot:
-         cmd.insert( 0, 'arsudo' )
+         cmd.insert( 0, "arsudo" )
       env = dict( os.environ )
       if sysdbPort:
-         env[ 'SYSDBPORT' ] = str( sysdbPort )
+         env[ "SYSDBPORT" ] = str( sysdbPort )
       if sysdbSockname:
-         env[ 'SYSDBSOCKNAME' ] = sysdbSockname
+         env[ "SYSDBSOCKNAME" ] = sysdbSockname
       outfile = None
       if self.logdir_:
-         outfile = file( getLogfileName( agentName ), 'w' )
+         outfile = file( self.getLogfileName( agentName ), "w" )
       p = ManagedSubprocess.Popen( argv=cmd, verbose=True, env=env,
                                    stdout=outfile, stderr=outfile )
       self.agentProcesses_[ agentName ] = p
       return self.getAgentRoot( agentName )
-
 
    def stopAgent( self, agentName ):
       t1( "Stopping agent %s" % agentName )
@@ -94,7 +94,7 @@ class AgentManager( object ):
          filename = self.getLogfileName( agentName )
          if self.logdir_ and os.path.exists( filename ):
             print file( filename ).read()
-         print 'Exception: ', e
+         print "Exception: ", e
          raise AgentNotRunningException( agentName )
    
       entity = pyClient.root()[self.sysname_][agentName]
