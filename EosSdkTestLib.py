@@ -36,15 +36,17 @@ class UnknownAgentException( EosSdkException ):
 
 
 class AgentManager( object ):
-   def __init__( self, sysname='ar', logdir=None ):
+   def __init__( self, sysname='ar', logdir=None,
+                 sysdbPort=None, sysdbSockname=None  ):
       self.sysname_ = sysname
       if logdir and not os.path.isdir( logdir ):
          raise ValueError( "No existing directory at %s" % logdir )
       self.logdir_ = logdir
       self.agentProcesses_ = {} # Mapping from agent name to managed subprocess
+      self.sysdbPort_ = sysdbPort
+      self.sysdbSockname_ = sysdbSockname
 
-   def startAgent( self, agentName, asRoot=True, argv=None,
-                   sysdbPort=None, sysdbSockname=None ):
+   def startAgent( self, agentName, asRoot=True, argv=None ):
       """ Start a named agent and return an entity at the agent's
       root. If a logdir was set for this manager, output from this
       agent will be stored in a file with this agent's name in that
@@ -58,10 +60,10 @@ class AgentManager( object ):
       if asRoot:
          cmd.insert( 0, "arsudo" )
       env = dict( os.environ )
-      if sysdbPort:
-         env[ "SYSDBPORT" ] = str( sysdbPort )
-      if sysdbSockname:
-         env[ "SYSDBSOCKNAME" ] = sysdbSockname
+      if self.sysdbPort_:
+         env[ "SYSDBPORT" ] = str( self.sysdbPort_ )
+      if self.sysdbSockname_:
+         env[ "SYSDBSOCKNAME" ] = self.sysdbSockname_
       outfile = None
       if self.logdir_ is not None:
          outfile = file( self.getLogfileName( agentName ), "w" )

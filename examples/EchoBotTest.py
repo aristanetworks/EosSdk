@@ -9,10 +9,12 @@ import time
 
 DEFAULT_PORT = 10000
 PREFIX = 'You said: '
-SERVER_BUF_SIZE = 1024 -len(PREFIX)
+SERVER_BUF_SIZE = 1024 - len(PREFIX)
 CONNECTION_TIMEOUT = 10
 
-agentManager = EosSdkTestLib.AgentManager( sysname="EchoBotTest" )
+SYSDB_PORT = 9631 # Use a non-default sysdb port
+agentManager = EosSdkTestLib.AgentManager( sysname="EchoBotTest",
+                                           sysdbPort=SYSDB_PORT )
 sysdb = agentManager.startAgent( "Sysdb" )
 
 class EchoBotTests( unittest.TestCase ):

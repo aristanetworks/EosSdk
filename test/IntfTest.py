@@ -14,7 +14,8 @@ t1 = traceHandle.trace1
 Tracing.traceSettingIs( "IntfApiTests/01,IntfTestAgent,EosSdk*" )
 
 AGENT_NAME = "IntfTestAgent"
-agentManager = EosSdkTestLib.AgentManager( sysname="IntfTest" )
+SYSDB_PORT = 9631 # Pick a hopefully unused Sysdb port
+agentManager = EosSdkTestLib.AgentManager( sysname="IntfTest", sysdbPort=SYSDB_PORT )
 sysdb = agentManager.startAgent( "Sysdb" )
 
 
