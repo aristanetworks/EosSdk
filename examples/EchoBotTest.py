@@ -2,10 +2,11 @@
 # Copyright (c) 2013 Arista Networks, Inc.  All rights reserved.
 # Arista Networks, Inc. Confidential and Proprietary.
 
-import EosSdkTestLib
 import unittest
 import socket
 import time
+
+import EosSdkTestLib
 
 DEFAULT_PORT = 10000
 PREFIX = 'You said: '
@@ -58,7 +59,6 @@ class EchoBotTests( unittest.TestCase ):
       time.sleep( CONNECTION_TIMEOUT + 1 )
       client.send( 'Here is a message sent to a closed socket' )
       self.assertEqual( client.recv(SERVER_BUF_SIZE), '' )
-
 
    def _createClientSocket( self ):
       s = socket.socket( socket.AF_INET, socket.SOCK_STREAM )
