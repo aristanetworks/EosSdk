@@ -15,6 +15,7 @@ PUBLISHED_HEADER_FILES += eos/panic.h
 PUBLISHED_HEADER_FILES += eos/timer.h
 PUBLISHED_HEADER_FILES += eos/fd.h
 PUBLISHED_HEADER_FILES += eos/intf.h
+PUBLISHED_HEADER_FILES += eos/openflow_intf.h
 PUBLISHED_HEADER_FILES += eos/ip.h
 
 eosheaderdir = $(includedir)/eos
@@ -33,6 +34,7 @@ libeos_la_SOURCES += panic.h panic.cpp
 libeos_la_SOURCES += TimerSm.tac timer.h timer.cpp
 libeos_la_SOURCES += FileSm.tac fd.h fd.cpp
 libeos_la_SOURCES += IntfMgrSm.tac intf.h intf.cpp
+libeos_la_SOURCES += openflow_intf.h openflow_intf.cpp
 libeos_la_SOURCES += ip.h ip.cpp
 
 libeos_la_LIBADD = -lAgentBase -lSysdbEntityMgr -ltac -ldl
