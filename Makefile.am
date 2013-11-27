@@ -1,4 +1,4 @@
-EXTRA_DIST = EosSdk.spec $(TESTS) 
+EXTRA_DIST = EosSdk.spec $(TESTS) eossdkpublish
 
 CPP_INCLUDE_FLAGS = -I/usr/include/python$(PYTHON_VERSION) \
    -Isrc-includes -I$(includedir)
@@ -8,6 +8,7 @@ AM_LDFLAGS = -Wl,--no-undefined
 
 lib_LTLIBRARIES = libeos.la
 bin_PROGRAMS = IntfTestAgent EchoBot
+bin_SCRIPTS = eossdkpublish
 
 PUBLISHED_HEADER_FILES = eos/agent.h
 PUBLISHED_HEADER_FILES += eos/types.h
@@ -20,11 +21,13 @@ PUBLISHED_HEADER_FILES += eos/ip.h
 eosheaderdir = $(includedir)/eos
 eosheader_HEADERS = $(PUBLISHED_HEADER_FILES)
 
-eos/%.h: $(srcdir)/%.h $(srcdir)/publish
+eos/%.h: $(srcdir)/%.h $(srcdir)/eossdkpublish
 	mkdir -p eos
 	rm -f $@
-	$(srcdir)/publish < $< > $@
+	$(srcdir)/eossdkpublish < $< > $@
 	chmod 444 $@
+
+pkginclude_HEADERS = Mount.h
 
 libeos_la_SOURCES =
 libeos_la_SOURCES += EosSdkAgent.tac EosSdkAgent.tin
