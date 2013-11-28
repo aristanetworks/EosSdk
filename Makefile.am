@@ -27,7 +27,7 @@ eos/%.h: $(srcdir)/%.h $(srcdir)/eossdkpublish
 	$(srcdir)/eossdkpublish < $< > $@
 	chmod 444 $@
 
-pkginclude_HEADERS = Mount.h
+pkginclude_HEADERS = Mount.h intf.h
 
 libeos_la_SOURCES =
 libeos_la_SOURCES += EosSdkAgent.tac EosSdkAgent.tin
