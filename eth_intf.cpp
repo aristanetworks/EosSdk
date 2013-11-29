@@ -59,6 +59,15 @@ class EthIntfMgrImpl : public eth_intf_mgr,
       }
    }
 
+   void add_handler(eth_intf_handler *handler) {
+      // ordering: registration order (first to register is first to be notified).
+      handlerList_.push_back( handler );
+   }
+
+   void remove_handler(eth_intf_handler *handler) {
+      handlerList_.remove( handler );   
+   }
+   
    void on_create(intf_id_t intf_id) {
       std::list<eth_intf_handler *>::const_iterator handler_iterator;
       for (handler_iterator = this->handlerList_.begin();
@@ -115,5 +124,40 @@ get_eth_intf_mgr() {
    static EthIntfMgrImpl impl;
    return &impl;
 }
+
+//
+// eth_intf_handler implementations
+//
+
+eth_intf_handler::eth_intf_handler() : watching_all_intfs_(false) {}
+eth_intf_handler::~eth_intf_handler() {
+   TRACE0( __PRETTY_FUNCTION__ << " unregistering myself as a handler");
+   if( watching_all_intfs_ ) {
+      EthIntfMgrImpl * impl = (EthIntfMgrImpl *) get_eth_intf_mgr();
+      impl->remove_handler(this);
+   }
+   // TODO: remove per-interface handlers
+   // impl->remove_handler( (eos::intf_id_t)iter.key().intfId(), this );
+}
+
+void
+eth_intf_handler::watch_all_intfs(bool interest) {
+   TRACE0( __PRETTY_FUNCTION__ << " registering myself as new handler" );
+   if( watching_all_intfs_ == interest ) return;
+   EthIntfMgrImpl * impl = (EthIntfMgrImpl *) get_eth_intf_mgr();
+   if(interest) {
+      impl->add_handler(this);
+   } else {
+      impl->remove_handler(this);
+   }
+   watching_all_intfs_ = interest;
+}
+
+// Dummy implementations for virtual handler methods
+void eth_intf_handler::on_initialized() {}
+void eth_intf_handler::on_create(intf_id_t) {}
+void eth_intf_handler::on_delete(intf_id_t) {}
+void eth_intf_handler::on_eth_addr(intf_id_t, eth_addr_t) {}
+void eth_intf_handler::on_link_mode(intf_id_t, eth_link_mode_t) {}
 
 } // end namespace eos

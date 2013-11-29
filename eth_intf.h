@@ -66,18 +66,13 @@ class eth_intf_handler {
    virtual void on_eth_addr(intf_id_t, eth_addr_t);
    // Handler called when the link mode on an interface changes state
    virtual void on_link_mode(intf_id_t, eth_link_mode_t);
+
+ private:
+   bool watching_all_intfs_;
 };
 
 class eth_intf_mgr {
  public:
-//= hidden
-   // Reactor registration
-   void add_handler(eth_intf_handler *); // handles all interfaces
-   void remove_handler(eth_intf_handler *);
-   void add_handler(intf_id_t, eth_intf_handler *); // handle given interface
-   void remove_handler(intf_id_t, eth_intf_handler *);
-//= end_hidden
-   
    // Collection management
    void eth_intf_foreach(bool (*handler)(intf_id_t, void *), void *);
    void eth_intf_foreach(bool (*handler)(intf_id_t, void *), void *,

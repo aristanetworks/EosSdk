@@ -81,14 +81,6 @@ class intf_handler {
 /* This class inspects and configures base interface attribtues */
 class intf_mgr {
  public:
-//= hidden
-   // Reactor registration
-   void add_handler(intf_handler *);
-   void remove_handler(intf_handler *);
-   void add_handler(intf_id_t, intf_handler *);
-   void remove_handler(intf_id_t, intf_handler *);
-//= end_hidden
-
    /* Collection management */
    // Iterator that, for each interface, call the supplied handler callback with the
    // corresponding intf_id_t and arg. If callback returns false, we

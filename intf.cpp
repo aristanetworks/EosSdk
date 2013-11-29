@@ -122,6 +122,23 @@ class IntfMgrImpl : public intf_mgr,
       }
    }
 
+   void add_handler(intf_handler *handler) {
+      // ordering: registration order (first to register is first to be notified).
+      handlerList_.push_back( handler );
+   }
+
+   void remove_handler(intf_handler *handler) {
+      handlerList_.remove( handler );   
+   }
+
+   void add_handler(intf_id_t, intf_handler *handler) {
+      assert( false && "Not yet implemented" );
+   }
+
+   void remove_handler(intf_id_t, intf_handler *) {
+      assert( false && "Not yet implemented" );
+   }
+   
    void on_create(intf_id_t intf_id) {
       std::list<intf_handler *>::const_iterator handler_iterator;
       for (handler_iterator = this->handlerList_.begin();
@@ -168,25 +185,6 @@ getIntfMgrImpl(intf_mgr *me) {
 }
 
 intf_mgr::intf_mgr() {
-}
-
-void intf_mgr::add_handler(intf_handler *handler) {
-   // ordering: registration order (first to register is first to be notified).
-   IntfMgrImpl * impl = getIntfMgrImpl(this);
-   impl->handlerList_.push_back( handler );
-}
-
-void intf_mgr::remove_handler(intf_handler *handler) {
-   IntfMgrImpl * impl = getIntfMgrImpl(this);
-   impl->handlerList_.remove( handler );   
-}
-
-void intf_mgr::add_handler(intf_id_t, intf_handler *handler) {
-   assert( false && "Not yet implemented" );
-}
-
-void intf_mgr::remove_handler(intf_id_t, intf_handler *) {
-   assert( false && "Not yet implemented" );
 }
 
 void
