@@ -36,8 +36,9 @@ class intf_id_t {
    size_t to_string(char * namebuf, size_t namebuf_size) const;
    // string to_string() const;  //= eos_internal
 
-   // explicit operator==(intf_id_t const & other);
-   // explicit operator!=(intf_id_t const & other);
+   bool operator==(intf_id_t const & other);
+   bool operator!=(intf_id_t const & other);
+   
 //= hidden
    void validate();
    bool valid() const;

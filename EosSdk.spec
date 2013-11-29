@@ -91,5 +91,7 @@ rm -f "$RPM_BUILD_ROOT"%{_libdir}/*.la
 
 %files test
 %defattr(-,root,root)
-%{_bindir}/IntfTestAgent
 %{_bindir}/EchoBot
+%{_bindir}/EthAddrTest
+%{_bindir}/EthIdTest
+%{_bindir}/IntfTestAgent

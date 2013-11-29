@@ -7,7 +7,7 @@ AM_CXXFLAGS = -std=gnu++0x -Wextra -Wall -Werror -Wno-unused-parameter
 AM_LDFLAGS = -Wl,--no-undefined
 
 lib_LTLIBRARIES = libeos.la
-bin_PROGRAMS = IntfTestAgent EchoBot EthAddrTest
+bin_PROGRAMS = IntfTestAgent EchoBot IntfIdTest EthAddrTest
 bin_SCRIPTS = eossdkpublish
 
 PUBLISHED_HEADER_FILES = eos/agent.h
@@ -45,11 +45,14 @@ libeos_la_SOURCES += EthIntfMgrSm.tac eth_intf.h eth_intf.cpp
 libeos_la_LIBADD = -lAgentBase -lSysdbEntityMgr -ltac -ldl
 libeos_la_LIBADD += -lIntf -lArnet -lArk -lEthIntf
 
-IntfTestAgent_SOURCES = test/IntfTestAgent.cpp
-IntfTestAgent_LDADD = libeos.la
+IntfIdTest_SOURCES = test/IntfIdTest.cpp
+IntfIdTest_LDADD = libeos.la
 
 EthAddrTest_SOURCES = test/EthAddrTest.cpp
 EthAddrTest_LDADD = libeos.la
+
+IntfTestAgent_SOURCES = test/IntfTestAgent.cpp
+IntfTestAgent_LDADD = libeos.la
 
 EchoBot_SOURCES = examples/EchoBot.cpp
 EchoBot_LDADD = libeos.la
@@ -68,9 +71,10 @@ python_PYTHON = EosSdkTestLib.py
 
 sanityTests = 
 TESTS = $(sanityTests)
+TESTS += ${builddir}/IntfIdTest
+TESTS += ${builddir}/EthAddrTest
 TESTS += test/IntfTest.py
 TESTS += examples/EchoBotTest.py
-TESTS += ${builddir}/EthAddrTest
 sanity:
 	make TESTS="$(sanityTests)" check
 

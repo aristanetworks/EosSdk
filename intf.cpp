@@ -63,6 +63,16 @@ intf_id_t::is_null0() const {
    return intfId_.intfId() == null0_intf_id;
 }
 
+bool
+intf_id_t::operator==(intf_id_t const & other) {
+   return (intfId_ == other.intfId_);
+}
+
+bool
+intf_id_t::operator!=(intf_id_t const & other) {
+   return (intfId_ != other.intfId_);
+}
+
 void
 intf_id_t::validate() {
    // Ask IntfIdTrie if intfId_ looks valid.
