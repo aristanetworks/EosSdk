@@ -23,9 +23,7 @@ class eth_addr_t {
    Arnet::EthAddr ethAddr_; //= hide
 
  //=> private:
-   //=> uint32_t word0_;
-   //=> uint32_t word1_;
-   //=> uint32_t word2_;
+   //=> uint32_t[3] words_;
 
 };
 
