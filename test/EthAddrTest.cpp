@@ -31,5 +31,5 @@ int main() {
    eos::eth_addr_t addr1_copy = addr1;
    assert(addr1 == addr1_copy);
    
-   printf( "PASS!\n" );
+   printf( "PASS\n" );
 }

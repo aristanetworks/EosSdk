@@ -31,5 +31,5 @@ int main() {
    eos::intf_id_t intf1_copy = intf1;
    assert(intf1 == intf1_copy);
    
-   printf( "PASS!\n" );
+   printf( "PASS\n" );
 }

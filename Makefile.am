@@ -7,7 +7,11 @@ AM_CXXFLAGS = -std=gnu++0x -Wextra -Wall -Werror -Wno-unused-parameter
 AM_LDFLAGS = -Wl,--no-undefined
 
 lib_LTLIBRARIES = libeos.la
-bin_PROGRAMS = IntfTestAgent EchoBot IntfIdTest EthAddrTest
+bin_PROGRAMS =
+bin_PROGRAMS += IntfTestAgent
+bin_PROGRAMS += EchoBot
+bin_PROGRAMS += IntfIdTest
+bin_PROGRAMS += EthAddrTest
 bin_SCRIPTS = eossdkpublish
 
 PUBLISHED_HEADER_FILES = eos/agent.h
