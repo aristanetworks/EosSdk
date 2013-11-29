@@ -36,7 +36,7 @@ can be done with Python.
 %package -n eos-sdk
 Summary: EosSdk devel package
 Group: dev/Arista Networks
-Requires: EosSdk
+Requires: EosSdk = %{version}
 
 %description -n eos-sdk
 Provides the files necessary development with the EOS Software Development Kit.
