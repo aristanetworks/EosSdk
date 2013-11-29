@@ -17,6 +17,7 @@ PUBLISHED_HEADER_FILES += eos/timer.h
 PUBLISHED_HEADER_FILES += eos/fd.h
 PUBLISHED_HEADER_FILES += eos/intf.h
 PUBLISHED_HEADER_FILES += eos/eth.h
+PUBLISHED_HEADER_FILES += eos/eth_intf.h
 PUBLISHED_HEADER_FILES += eos/ip.h
 
 eosheaderdir = $(includedir)/eos
@@ -39,9 +40,10 @@ libeos_la_SOURCES += FileSm.tac fd.h fd.cpp
 libeos_la_SOURCES += IntfMgrSm.tac intf.h intf.cpp
 libeos_la_SOURCES += ip.h ip.cpp
 libeos_la_SOURCES += eth.h eth.cpp
+libeos_la_SOURCES += EthIntfMgrSm.tac eth_intf.h eth_intf.cpp
 
 libeos_la_LIBADD = -lAgentBase -lSysdbEntityMgr -ltac -ldl
-libeos_la_LIBADD += -lIntf -lArnet -lArk
+libeos_la_LIBADD += -lIntf -lArnet -lArk -lEthIntf
 
 IntfTestAgent_SOURCES = test/IntfTestAgent.cpp
 IntfTestAgent_LDADD = libeos.la
