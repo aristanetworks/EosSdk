@@ -4,6 +4,9 @@
 #ifndef EOS_ETH_H
 #define EOS_ETH_H
 
+#include <stddef.h>
+#include <eos/types.h>
+
 #include <Arnet/EthAddr.h> //= hide
 
 namespace eos {
