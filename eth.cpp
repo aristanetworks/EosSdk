@@ -6,8 +6,19 @@
 namespace eos {
 
 eth_addr_t::eth_addr_t(char const * addr) {
+   ethAddr_.stringValueIs( addr );
    validate();
    // todo
+}
+
+bool
+eth_addr_t::operator==(eth_addr_t const & other) {
+   return (ethAddr_ == other.ethAddr_);
+}
+
+bool
+eth_addr_t::operator!=(eth_addr_t const & other) {
+   return (ethAddr_ != other.ethAddr_);
 }
 
 void
