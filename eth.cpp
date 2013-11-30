@@ -11,6 +11,10 @@ eth_addr_t::eth_addr_t(char const * addr) {
    // todo
 }
 
+eth_addr_t::eth_addr_t(const Arnet::EthAddr & ethAddr) {
+   ethAddr_ = ethAddr;
+}
+
 bool
 eth_addr_t::operator==(eth_addr_t const & other) {
    return (ethAddr_ == other.ethAddr_);

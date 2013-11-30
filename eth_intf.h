@@ -9,6 +9,9 @@
 
 namespace eos {
 
+//= hidden
+// Not needed at this point
+
 typedef enum eth_link_mode_e {
    LINK_MODE_UNKNOWN,
    LINK_MODE_AUTONEG,
@@ -24,9 +27,6 @@ typedef enum eth_link_mode_e {
    LINK_MODE_FORCED_40GBPS_FULL,
    LINK_MODE_FORCED_100GBPS_FULL,
 } eth_link_mode_t;
-
-//= hidden
-// Not needed at this point
 
 // Loopback mode of the eth phy interface
 typedef enum eth_loopback_mode_e {
@@ -64,8 +64,6 @@ class eth_intf_handler {
    virtual void on_delete(intf_id_t);
    // Handler called when the mac address of an interface changes
    virtual void on_eth_addr(intf_id_t, eth_addr_t);
-   // Handler called when the link mode on an interface changes state
-   virtual void on_link_mode(intf_id_t, eth_link_mode_t);
 
  private:
    bool watching_all_intfs_;
@@ -84,10 +82,6 @@ class eth_intf_mgr {
    eth_addr_t eth_addr(intf_id_t);
    // Configure the ethernet address of the interface
    void eth_addr_is(intf_id_t, eth_addr_t);
-   // Read the operational link mode of the interface
-   eth_link_mode_t link_mode(intf_id_t);
-   // Configure the link mode of the interface
-   void link_mode_is(intf_id_t, eth_link_mode_t);
 
  //=> private:
    eth_intf_mgr();

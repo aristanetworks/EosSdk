@@ -14,6 +14,8 @@ class MountHandler {
    MountHandler();
    virtual void doMounts( const Sysdb::MountGroup::Ptr & mg ) = 0;
    virtual void onMountsComplete( const Sysdb::EntityManager::Ptr & em ) = 0;
+   virtual void handleInitialized() = 0;
+   bool initialized;
 };
 
 // Implementation function called during agent startup.

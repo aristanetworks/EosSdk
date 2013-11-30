@@ -9,6 +9,7 @@ AM_LDFLAGS = -Wl,--no-undefined
 lib_LTLIBRARIES = libeos.la
 bin_PROGRAMS =
 bin_PROGRAMS += IntfTestAgent
+bin_PROGRAMS += EthIntfTestAgent
 bin_PROGRAMS += EchoBot
 bin_PROGRAMS += IntfIdTest
 bin_PROGRAMS += EthAddrTest
@@ -58,6 +59,9 @@ EthAddrTest_LDADD = libeos.la
 IntfTestAgent_SOURCES = test/IntfTestAgent.cpp
 IntfTestAgent_LDADD = libeos.la
 
+EthIntfTestAgent_SOURCES = test/EthIntfTestAgent.cpp
+EthIntfTestAgent_LDADD = libeos.la
+
 EchoBot_SOURCES = examples/EchoBot.cpp
 EchoBot_LDADD = libeos.la
 
@@ -78,6 +82,7 @@ TESTS = $(sanityTests)
 TESTS += ${builddir}/IntfIdTest
 TESTS += ${builddir}/EthAddrTest
 TESTS += test/IntfTest.py
+TESTS += test/EthIntfTest.py
 TESTS += examples/EchoBotTest.py
 sanity:
 	make TESTS="$(sanityTests)" check

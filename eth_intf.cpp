@@ -1,15 +1,17 @@
 // Copyright (c) 2013 Arista Networks, Inc.  All rights reserved.
 // Arista Networks, Inc. Confidential and Proprietary.
 
+#include <EosSdk/intf.h>
 #include <EosSdk/eth.h>
 #include <EosSdk/eth_intf.h>
-#include <EosSdk/intf.h>
+#include <EosSdk/panic.h>
 #include <EosSdk/Mount.h>
 
 #include <EthIntfMgrSm.h>
 
 #include <Arnet/EthAddr.h>
 #include <EthIntf/EthIntf.h>
+#include <Lag/EthLagIntf.h>
 #include <Sysdb/EntityManager.h>
 #include <Tac/Tracing.h>
 
@@ -29,8 +31,8 @@ class EthIntfMgrImpl : public eth_intf_mgr,
    void doMounts( const Sysdb::MountGroup::Ptr & mg ) {
       mg->doMount( Sysdb::Mount( "interface/config/eth/phy",
                                  "Interface::EthPhyIntfConfigDir", "w" ) );
-      mg->doMount( Sysdb::Mount( "interface/status/eth/phy",
-                                 "Interface::EthPhyIntfStatusDir", "r" ) );
+      mg->doMount( Sysdb::Mount( "interface/config/eth/lag",
+                                 "Interface::EthLagIntfConfigDir", "w" ) );
       mg->doMount( Sysdb::Mount( "interface/config/eth/intf",
                                  "Interface::EthIntfConfigDir", "w" ) );
       mg->doMount( Sysdb::Mount( "interface/status/eth/intf",
@@ -39,20 +41,16 @@ class EthIntfMgrImpl : public eth_intf_mgr,
 
    virtual void onMountsComplete( const Sysdb::EntityManager::Ptr & em ) {
       TRACE0( __FUNCTION__ );
-      ethPhyIntfConfigDir_ = em->getEntity<Interface::EthPhyIntfConfigDir>( 
-            "interface/config/eth/phy" );
-      ethPhyIntfStatusDir_ = em->getEntity<Interface::EthPhyIntfStatusDir>( 
-            "interface/status/eth/phy" );
       ethIntfConfigDir_ = em->getEntity<Interface::EthIntfConfigDir>( 
             "interface/config/eth/intf" );
       ethIntfStatusDir_ = em->getEntity<Interface::EthIntfStatusDir>( 
             "interface/status/eth/intf" );
 
-      ethIntfMgrSm_ = EthIntfMgrSm::EthIntfMgrSmIs( ethPhyIntfConfigDir_,
-                                                    ethPhyIntfStatusDir_,
-                                                    ethIntfConfigDir_,
+      ethIntfMgrSm_ = EthIntfMgrSm::EthIntfMgrSmIs( ethIntfConfigDir_,
                                                     ethIntfStatusDir_ );
+   }
 
+   void handleInitialized() {   
       for (auto handler_iterator = this->handlerList_.begin();
            handler_iterator!=this->handlerList_.end(); ++handler_iterator) {
          (*handler_iterator)->on_initialized();
@@ -92,16 +90,6 @@ class EthIntfMgrImpl : public eth_intf_mgr,
       }
    }
 
-   void on_link_mode(intf_id_t intf_id, eth_link_mode_t link_mode) {
-      std::list<eth_intf_handler *>::const_iterator handler_iterator;
-      for (handler_iterator = this->handlerList_.begin();
-           handler_iterator!=this->handlerList_.end(); ++handler_iterator) {
-         (*handler_iterator)->on_link_mode(intf_id, link_mode);
-      }
-   }
-
-   Interface::EthPhyIntfConfigDir::Ptr ethPhyIntfConfigDir_;
-   Interface::EthPhyIntfStatusDir::PtrConst ethPhyIntfStatusDir_;
    Interface::EthIntfConfigDir::Ptr ethIntfConfigDir_;
    Interface::EthIntfStatusDir::PtrConst ethIntfStatusDir_;
    EthIntfMgrSm::Ptr ethIntfMgrSm_;
@@ -117,6 +105,58 @@ getEthIntfMgrImpl(eth_intf_mgr *me) {
 }
 
 eth_intf_mgr::eth_intf_mgr() {
+}
+
+void
+eth_intf_mgr::eth_intf_foreach(bool (*handler)(intf_id_t, void *), void *arg) {
+   EthIntfMgrImpl * impl = getEthIntfMgrImpl(this);
+   for( auto iter = impl->ethIntfStatusDir_->intfStatusIteratorConst();
+        iter && (*handler)((eos::intf_id_t)iter.key().intfId(), arg);
+        ++iter ) {}
+}
+
+void
+eth_intf_mgr::eth_intf_foreach(bool (*handler)(intf_id_t, void *), void *arg,
+                               intf_id_t bookmark) {
+   /* Starting with the first element after bookmark's position, for
+    * each interface, call the supplied handler callback with the
+    * corresponding intf_id_t and arg. If callback returns false, we
+    * stop iteration.  */
+
+   EthIntfMgrImpl * impl = getEthIntfMgrImpl(this);
+   for( auto iter = impl->ethIntfStatusDir_->intfStatusIteratorConst(
+              bookmark.intfId_ );
+        iter && (*handler)((eos::intf_id_t)iter.key().intfId(), arg);
+        ++iter ) {}
+}
+
+bool
+eth_intf_mgr::exists(intf_id_t id) {
+   /* returns true if intf_id_t has a corresponding status. */
+   EthIntfMgrImpl * impl = getEthIntfMgrImpl(this);
+   return !!impl->ethIntfStatusDir_->intfStatus( id.intfId_ );
+}
+
+eth_addr_t
+eth_intf_mgr::eth_addr(intf_id_t intf_id) {
+   EthIntfMgrImpl * impl = getEthIntfMgrImpl(this);
+   Interface::EthIntfStatus::PtrConst intfStatus = \
+      impl->ethIntfStatusDir_->intfStatus( intf_id.intfId_ );
+   if( !intfStatus ) {
+      panic( "Intf does not exist" );
+   }
+   return eth_addr_t(intfStatus->addr());
+}
+
+void
+eth_intf_mgr::eth_addr_is(intf_id_t intf_id, eth_addr_t addr) {
+   EthIntfMgrImpl * impl = getEthIntfMgrImpl(this);
+   Interface::EthIntfConfig::Ptr intfConfig = \
+      impl->ethIntfConfigDir_->intfConfig( intf_id.intfId_ );
+   if( !intfConfig ) {
+      panic( "Intf does not exist" );
+   }
+   intfConfig->addrIs( addr.ethAddr_ );
 }
 
 eth_intf_mgr * 
@@ -158,6 +198,46 @@ void eth_intf_handler::on_initialized() {}
 void eth_intf_handler::on_create(intf_id_t) {}
 void eth_intf_handler::on_delete(intf_id_t) {}
 void eth_intf_handler::on_eth_addr(intf_id_t, eth_addr_t) {}
-void eth_intf_handler::on_link_mode(intf_id_t, eth_link_mode_t) {}
+
+//
+// IntfStatusSm method implementations
+//
+
+void
+EthIntfStatusSm::handleAddr() {
+   TRACE8( __PRETTY_FUNCTION__ );
+   EthIntfMgrImpl * impl = getEthIntfMgrImpl( eos::get_eth_intf_mgr() );
+
+   intf_id_t intf_id = intf_id_t( (uint32_t)intfId().intfId() );
+   impl->on_eth_addr( intf_id, intfStatus()->addr() );
+}
+
+//
+// EthIntfMgrSm method implementations
+//
+
+void
+EthIntfMgrSm::handleIntfStatus() {
+   TRACE8( __PRETTY_FUNCTION__ );
+   for( auto i = ethIntfStatusDir()->intfStatusIteratorConst(); i; ++i ) {
+      ethIntfStatusSmIs( i.ptr() );
+   }
+}
+
+void
+EthIntfMgrSm::handleIntfStatus( Arnet::IntfId intfId ) {
+   TRACE8( __PRETTY_FUNCTION__ );
+   EthIntfMgrImpl * impl = getEthIntfMgrImpl( eos::get_eth_intf_mgr() );
+   intf_id_t intf_id = intf_id_t( (uint32_t)intfId.intfId() );
+   Interface::EthIntfStatus::PtrConst intfStatus = \
+      ethIntfStatusDir()->intfStatus( intfId );
+   if( intfStatus ) {
+      ethIntfStatusSmIs( intfStatus );
+      impl->on_create( intf_id );
+   } else {
+      ethIntfStatusSmDel( intfId );
+      impl->on_delete( intf_id );
+   }
+}
 
 } // end namespace eos

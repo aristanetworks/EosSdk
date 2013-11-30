@@ -7,13 +7,14 @@
 #include <stddef.h>
 #include <eos/types.h>
 
-#include <Arnet/EthAddr.h> //= hide
+#include <Arnet/EthAddr.h> //= eos_internal
 
 namespace eos {
 
 class eth_addr_t {
  public:
    explicit eth_addr_t(char const *name);
+   eth_addr_t(const Arnet::EthAddr &); //= eos_internal
 
    void to_string(char *namebuf, size_t namebuf_size);
 

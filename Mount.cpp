@@ -15,6 +15,7 @@ MountHandler::MountHandler() {
    if( initializationComplete ) {
       panic("attempt to manage additional state after agent initialization");
    }
+   initialized = false;
    TRACE0( __PRETTY_FUNCTION__ << " registering new mount handler" );
    mountHandlerList.push_front( this );   
 }
@@ -30,9 +31,19 @@ void askAllMountHandlersToDoTheirMounts( const Sysdb::MountGroup::Ptr & mg ) {
 void notifyAllMountHandlersThatAllMountsAreComplete(
       const Sysdb::EntityManager::Ptr & em ) {
    TRACE0( __PRETTY_FUNCTION__ );
+   // First let all MountHandlers setup their initial state now
+   // that all mounts are complete
    for( auto i = mountHandlerList.begin(); i!=mountHandlerList.end(); ++i) {
       (*i)->onMountsComplete( em );
+      (*i)->initialized = true;
    }
+   // Second, notify all MountHandlers that they're initialized. This
+   // has to happen in a second phase so that MountHandlers can call
+   // each other once initialized.
+   for( auto i = mountHandlerList.begin(); i!=mountHandlerList.end(); ++i) {
+      (*i)->handleInitialized();
+   }
+
 }
 
 };

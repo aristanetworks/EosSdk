@@ -125,7 +125,9 @@ class IntfMgrImpl : public intf_mgr,
 
       intfMgrSm_ = IntfMgrSm::IntfMgrSmIs( allIntfConfigDir_,
                                            allIntfStatusDir_ );
+   }
 
+   void handleInitialized() {
       for (auto handler_iterator = this->handlerList_.begin();
            handler_iterator!=this->handlerList_.end(); ++handler_iterator) {
          (*handler_iterator)->on_initialized();
@@ -133,11 +135,13 @@ class IntfMgrImpl : public intf_mgr,
    }
 
    void add_handler(intf_handler *handler) {
+      TRACE0( __PRETTY_FUNCTION__ );
       // ordering: registration order (first to register is first to be notified).
       handlerList_.push_back( handler );
    }
 
    void remove_handler(intf_handler *handler) {
+      TRACE0( __PRETTY_FUNCTION__ );
       handlerList_.remove( handler );   
    }
 
