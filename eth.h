@@ -13,6 +13,7 @@ namespace eos {
 
 class eth_addr_t {
  public:
+   eth_addr_t(); //= eos_internal
    explicit eth_addr_t(char const *name);
    eth_addr_t(const Arnet::EthAddr &); //= eos_internal
 

@@ -5,6 +5,9 @@
 
 namespace eos {
 
+eth_addr_t::eth_addr_t() : ethAddr_(0, 0, 0) {
+}
+
 eth_addr_t::eth_addr_t(char const * addr) {
    ethAddr_.stringValueIs( addr );
    validate();

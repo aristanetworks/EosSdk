@@ -4,8 +4,10 @@
 #ifndef EOS_ETH_INTF_H
 #define EOS_ETH_INTF_H
 
-#include <eos/eth.h>
-#include <eos/intf.h>
+#include <EosSdk/eth.h> //= eos_internal
+//=> #include <eos/eth.h>
+#include <EosSdk/intf.h> //= eos_internal
+//=> #include <eos/intf.h>
 
 namespace eos {
 
