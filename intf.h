@@ -107,15 +107,6 @@ class intf_mgr {
    // Inspect the curren operational status of the given interface.
    oper_status_t oper_status(intf_id_t);
 
-//= hidden
-   // Trampoline methods for calling the associated methods
-   // on all handlers
-   void on_create(intf_id_t);
-   void on_delete(intf_id_t);
-   void on_oper_status(intf_id_t, Interface::IntfOperStatus);
-   void on_admin_enabled(intf_id_t, bool);
-//= end_hidden
-
  //=> private:
    intf_mgr();
 
