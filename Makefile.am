@@ -34,15 +34,13 @@ eos/%.h: $(srcdir)/%.h $(srcdir)/eossdkpublish
 	$(srcdir)/eossdkpublish < $< > $@
 	chmod 444 $@
 
-pkginclude_HEADERS = Mount.h IntfId.h
-
 libeos_la_SOURCES =
 libeos_la_SOURCES += EosSdkAgent.tac EosSdkAgent.tin
 libeos_la_SOURCES += types.h agent.cpp Mount.h Mount.cpp
 libeos_la_SOURCES += panic.h panic.cpp
 libeos_la_SOURCES += TimerSm.tac timer.h timer.cpp
 libeos_la_SOURCES += FileSm.tac fd.h fd.cpp
-libeos_la_SOURCES += IntfMgrSm.tac intf.h intf.cpp
+libeos_la_SOURCES += IntfId.h IntfMgrSm.tac intf.h intf.cpp
 libeos_la_SOURCES += ip.h ip.cpp
 libeos_la_SOURCES += eth.h eth.cpp
 libeos_la_SOURCES += EthIntfMgrSm.tac eth_intf.h eth_intf.cpp
