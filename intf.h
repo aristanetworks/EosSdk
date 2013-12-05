@@ -19,35 +19,45 @@ typedef enum oper_status_e {
    INTF_OPER_DOWN
 } oper_status_t;
 
+typedef enum intf_type_e {
+   INTF_TYPE_NULL,
+   INTF_TYPE_OTHER,
+   INTF_TYPE_ETH,
+   INTF_TYPE_VLAN,
+   INTF_TYPE_MANAGEMENT,
+   INTF_TYPE_LOOPBACK,
+   INTF_TYPE_LAG,
+   INTF_TYPE_NULL0,
+   // Don't expose these types until we are ready.
+   // INTF_TYPE_MLAG, //= hide
+   // INTF_TYPE_VXLAN, //= hide
+} intf_type_t;
+
 
 /* Unique identifier for an interface. */
 class intf_id_t {
  public:
-   // Default 'falsy' constructor' //= hide
+   // Default constructor
    intf_id_t();
    // Constructor based on internal id representation
    explicit intf_id_t(uint32_t);
    // Constructor based on an interface name, i.e. 'Ethernet3/1', or 'Management1'
    explicit intf_id_t(char const *name);
 
-   bool operator !() const;
    bool is_null0() const;
+   intf_type_t type() const;
+
+   bool operator !() const;
 
    size_t to_string(char * namebuf, size_t namebuf_size) const;
    // string to_string() const;  //= eos_internal
 
    bool operator==(intf_id_t const & other);
    bool operator!=(intf_id_t const & other);
-   
-//= hidden
-   void validate();
-   bool valid() const;
 
-   Arnet::IntfId intfId_;
-//= end_hidden
- //=> private:
-   //=> uint32_t intfId_;
-
+ private:
+   friend struct IntfIdHelper; //= hide
+   uint32_t intfId_;
 };
 
 

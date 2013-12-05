@@ -2,6 +2,7 @@
 // Arista Networks, Inc. Confidential and Proprietary.
 
 #include <EosSdk/eth.h>
+#include <EosSdk/panic.h>
 
 namespace eos {
 
@@ -9,13 +10,21 @@ eth_addr_t::eth_addr_t() : ethAddr_(0, 0, 0) {
 }
 
 eth_addr_t::eth_addr_t(char const * addr) {
-   ethAddr_.stringValueIs( addr );
-   validate();
-   // todo
+   try {
+      Tac::Expect exception(Tac::Exception::rangeException_);
+      ethAddr_.stringValueIs( addr );
+   } catch(Tac::RangeException e) {
+      panic("Invalid MAC address");
+   }
 }
 
 eth_addr_t::eth_addr_t(const Arnet::EthAddr & ethAddr) {
    ethAddr_ = ethAddr;
+}
+
+bool
+eth_addr_t::operator !() const {
+   return !ethAddr_;
 }
 
 bool
@@ -26,12 +35,6 @@ eth_addr_t::operator==(eth_addr_t const & other) {
 bool
 eth_addr_t::operator!=(eth_addr_t const & other) {
    return (ethAddr_ != other.ethAddr_);
-}
-
-void
-eth_addr_t::validate() {
-   // Make sure this is a valid MAC address.
-   // If not, call panic().
 }
 
 void

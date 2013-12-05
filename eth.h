@@ -13,15 +13,18 @@ namespace eos {
 
 class eth_addr_t {
  public:
-   eth_addr_t(); //= eos_internal
+   // Default constructor
+   eth_addr_t();
+   // Construct an address from one of three string forms:
+   // xx:xx:xx:xx:xx:xx, xx-xx-xx-xx-xx-xx, or xxxx.xxxx.xxxx
    explicit eth_addr_t(char const *name);
    eth_addr_t(const Arnet::EthAddr &); //= eos_internal
 
    void to_string(char *namebuf, size_t namebuf_size);
 
+   bool operator !() const;
    bool operator==(eth_addr_t const & other);
    bool operator!=(eth_addr_t const & other);
-   void validate(); //= hide
    Arnet::EthAddr ethAddr_; //= hide
 
  //=> private:

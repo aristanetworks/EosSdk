@@ -5,6 +5,7 @@
 #include <EosSdk/eth.h>
 #include <EosSdk/eth_intf.h>
 #include <EosSdk/panic.h>
+#include <EosSdk/IntfId.h>
 #include <EosSdk/Mount.h>
 
 #include <EthIntfMgrSm.h>
@@ -118,14 +119,9 @@ eth_intf_mgr::eth_intf_foreach(bool (*handler)(intf_id_t, void *), void *arg) {
 void
 eth_intf_mgr::eth_intf_foreach(bool (*handler)(intf_id_t, void *), void *arg,
                                intf_id_t bookmark) {
-   /* Starting with the first element after bookmark's position, for
-    * each interface, call the supplied handler callback with the
-    * corresponding intf_id_t and arg. If callback returns false, we
-    * stop iteration.  */
-
    EthIntfMgrImpl * impl = getEthIntfMgrImpl(this);
    for( auto iter = impl->ethIntfStatusDir_->intfStatusIteratorConst(
-              bookmark.intfId_ );
+              IntfIdHelper(bookmark));
         iter && (*handler)((eos::intf_id_t)iter.key().intfId(), arg);
         ++iter ) {}
 }
@@ -134,14 +130,14 @@ bool
 eth_intf_mgr::exists(intf_id_t id) {
    /* returns true if intf_id_t has a corresponding status. */
    EthIntfMgrImpl * impl = getEthIntfMgrImpl(this);
-   return !!impl->ethIntfStatusDir_->intfStatus( id.intfId_ );
+   return !!impl->ethIntfStatusDir_->intfStatus(IntfIdHelper(id));
 }
 
 eth_addr_t
 eth_intf_mgr::eth_addr(intf_id_t intf_id) {
    EthIntfMgrImpl * impl = getEthIntfMgrImpl(this);
    Interface::EthIntfStatus::PtrConst intfStatus = \
-      impl->ethIntfStatusDir_->intfStatus( intf_id.intfId_ );
+      impl->ethIntfStatusDir_->intfStatus( IntfIdHelper(intf_id) );
    if( !intfStatus ) {
       panic( "Intf does not exist" );
    }
@@ -152,7 +148,7 @@ void
 eth_intf_mgr::eth_addr_is(intf_id_t intf_id, eth_addr_t addr) {
    EthIntfMgrImpl * impl = getEthIntfMgrImpl(this);
    Interface::EthIntfConfig::Ptr intfConfig = \
-      impl->ethIntfConfigDir_->intfConfig( intf_id.intfId_ );
+      impl->ethIntfConfigDir_->intfConfig( IntfIdHelper(intf_id) );
    if( !intfConfig ) {
       panic( "Intf does not exist" );
    }

@@ -3,22 +3,25 @@
 
 #include <Tac/Tracing.h>
 #include <Arnet/IntfId.h>
+#include <Arnet/IntfIdDesc.h>
 #include <Intf/Intf.h>
 #include <EosSdk/intf.h>
 #include <EosSdk/Mount.h>
 #include <EosSdk/panic.h>
+#include <EosSdk/IntfId.h>
 #include <IntfMgrSm.h>
 #include <Sysdb/EntityManager.h>
+
 #include <list>
 
 
-DEFAULT_TRACE_HANDLE( "EosSdkIntf" )
+DEFAULT_TRACE_HANDLE("EosSdkIntf")
 
 namespace eos {
 
-static oper_status_t convert( Interface::IntfOperStatus operStatus ) {
+static oper_status_t convert(Interface::IntfOperStatus operStatus) {
    oper_status_t ret;
-   switch( operStatus ) {
+   switch(operStatus) {
     case Interface::intfOperUp_:
       ret = INTF_OPER_UP;
       break;
@@ -35,18 +38,34 @@ static oper_status_t convert( Interface::IntfOperStatus operStatus ) {
    return ret;
 }
 
-intf_id_t::intf_id_t() : intfId_("") {
+static uint32_t empty_intf_id = Arnet::IntfId::emptyIntfId();
+
+intf_id_t::intf_id_t() : intfId_(empty_intf_id) {
 }
 
 intf_id_t::intf_id_t(uint32_t id) {
-   assert( sizeof(id) == sizeof(intfId_) );
-   memcpy( &intfId_, &id, sizeof(intfId_) );
-   validate();
+   try {
+      Tac::Expect exception(Tac::Exception::rangeException_);
+      Arnet::IntfId validId = IntfIdHelper(id);
+      intfId_ = id;
+   } catch(Tac::RangeException e) {
+      panic("Invalid interface id");
+   }
 }
 
-intf_id_t::intf_id_t(char const * intfname) :
-      intfId_(intfname) {
-   validate();
+intf_id_t::intf_id_t(char const * intfname) {
+   try {
+      Tac::Expect exception(Tac::Exception::rangeException_);
+      intfId_ = Arnet::IntfId(intfname).intfId();
+   } catch(Tac::RangeException e) {
+      panic("Invalid interface name");
+   }
+}
+
+bool
+intf_id_t::is_null0() const {
+   static uint32_t null0_intf_id = Arnet::IntfId("Null0").intfId();
+   return intfId_ == null0_intf_id;
 }
 
 // Arnet::IntfId's default constructor sets emptyIntfId as the intfId
@@ -54,13 +73,7 @@ intf_id_t::intf_id_t(char const * intfname) :
 // constructor. See Arnet/IntfId.tin IntfId::handleInitialized()
 bool
 intf_id_t::operator !() const {
-   return intfId_.intfId() == Arnet::IntfId::emptyIntfId();
-}
-
-bool
-intf_id_t::is_null0() const {
-   static uint32_t null0_intf_id = Arnet::IntfId("Null0").intfId();
-   return intfId_.intfId() == null0_intf_id;
+   return intfId_ == empty_intf_id;
 }
 
 bool
@@ -73,17 +86,11 @@ intf_id_t::operator!=(intf_id_t const & other) {
    return (intfId_ != other.intfId_);
 }
 
-void
-intf_id_t::validate() {
-   // Ask IntfIdTrie if intfId_ looks valid.
-   // If not, call panic().
-}
-
 size_t
 intf_id_t::to_string(char *namebuf, size_t namebuf_size) const {
-   Tac::String name = intfId_.stringValue();
+   Tac::String name = IntfIdHelper(intfId_).stringValue();
    char const * ptr = name.charPtr();
-   strncpy( namebuf, ptr, namebuf_size );
+   strncpy(namebuf, ptr, namebuf_size);
    namebuf[namebuf_size - 1] = 0;
    return namebuf_size;
 }
@@ -93,7 +100,7 @@ class IntfMgrImpl : public intf_mgr,
                     public MountHandler {
  public:
    IntfMgrImpl() {
-      TRACE0( __PRETTY_FUNCTION__ );
+      TRACE0( __PRETTY_FUNCTION__);
    }
 
    virtual void doMounts( const Sysdb::MountGroup::Ptr & mg ) {
@@ -116,15 +123,15 @@ class IntfMgrImpl : public intf_mgr,
                                  "Interface::AllIntfStatusDir", "r" ) );
    }
 
-   virtual void onMountsComplete( const Sysdb::EntityManager::Ptr & em ) {
-      TRACE0( "IntfMgrImpl: all mounts completed" );
-      allIntfStatusDir_ = em->getEntity<Interface::AllIntfStatusDir>( 
-            "interface/status/all" );
-      allIntfConfigDir_ = em->getEntity<Interface::AllIntfConfigDir>( 
-            "interface/config/all" );
+   virtual void onMountsComplete(const Sysdb::EntityManager::Ptr & em) {
+      TRACE0("IntfMgrImpl: all mounts completed");
+      allIntfStatusDir_ = em->getEntity<Interface::AllIntfStatusDir>(
+            "interface/status/all");
+      allIntfConfigDir_ = em->getEntity<Interface::AllIntfConfigDir>(
+            "interface/config/all");
 
-      intfMgrSm_ = IntfMgrSm::IntfMgrSmIs( allIntfConfigDir_,
-                                           allIntfStatusDir_ );
+      intfMgrSm_ = IntfMgrSm::IntfMgrSmIs(allIntfConfigDir_,
+                                          allIntfStatusDir_);
    }
 
    void handleInitialized() {
@@ -135,29 +142,29 @@ class IntfMgrImpl : public intf_mgr,
    }
 
    void add_handler(intf_handler *handler) {
-      TRACE0( __PRETTY_FUNCTION__ );
+      TRACE0(__PRETTY_FUNCTION__);
       // ordering: registration order (first to register is first to be notified).
-      handlerList_.push_back( handler );
+      handlerList_.push_back(handler);
    }
 
    void remove_handler(intf_handler *handler) {
-      TRACE0( __PRETTY_FUNCTION__ );
-      handlerList_.remove( handler );   
+      TRACE0(__PRETTY_FUNCTION__);
+      handlerList_.remove(handler);   
    }
 
    void add_handler(intf_id_t, intf_handler *handler) {
-      assert( false && "Not yet implemented" );
+      assert(false && "Not yet implemented");
    }
 
    void remove_handler(intf_id_t, intf_handler *) {
-      assert( false && "Not yet implemented" );
+      assert(false && "Not yet implemented");
    }
    
    void on_create(intf_id_t intf_id) {
       std::list<intf_handler *>::const_iterator handler_iterator;
       for (handler_iterator = this->handlerList_.begin();
            handler_iterator!=this->handlerList_.end(); ++handler_iterator) {
-         (*handler_iterator)->on_create( intf_id );
+         (*handler_iterator)->on_create(intf_id);
       }
    }
    
@@ -165,15 +172,15 @@ class IntfMgrImpl : public intf_mgr,
       std::list<intf_handler *>::const_iterator handler_iterator;
       for (handler_iterator = this->handlerList_.begin();
            handler_iterator!=this->handlerList_.end(); ++handler_iterator) {
-         (*handler_iterator)->on_delete( intf_id );
+         (*handler_iterator)->on_delete(intf_id);
       }
    }
    void on_oper_status(intf_id_t intf_id, Interface::IntfOperStatus oper_status) {
-      oper_status_t status = convert( oper_status );
+      oper_status_t status = convert(oper_status);
       std::list<intf_handler *>::const_iterator handler_iterator;
       for (handler_iterator = this->handlerList_.begin();
            handler_iterator!=this->handlerList_.end(); ++handler_iterator) {
-         (*handler_iterator)->on_oper_status( intf_id, status );
+         (*handler_iterator)->on_oper_status(intf_id, status);
       }
    }
       
@@ -181,7 +188,7 @@ class IntfMgrImpl : public intf_mgr,
       std::list<intf_handler *>::const_iterator handler_iterator;
       for (handler_iterator = this->handlerList_.begin();
            handler_iterator!=this->handlerList_.end(); ++handler_iterator) {
-         (*handler_iterator)->on_admin_enabled( intf_id, enabled );
+         (*handler_iterator)->on_admin_enabled(intf_id, enabled);
       }
    }
 
@@ -194,7 +201,7 @@ class IntfMgrImpl : public intf_mgr,
 IntfMgrImpl *
 getIntfMgrImpl(intf_mgr *me) {
    IntfMgrImpl * impl = static_cast<IntfMgrImpl *>(me);
-   assert( impl == get_intf_mgr() );
+   assert(impl == get_intf_mgr());
    return impl;
 }
 
@@ -204,9 +211,9 @@ intf_mgr::intf_mgr() {
 void
 intf_mgr::intf_foreach(bool (*handler)(intf_id_t, void *), void *arg) {
    IntfMgrImpl * impl = getIntfMgrImpl(this);
-   for( auto iter = impl->allIntfStatusDir_->intfStatusIterator();
+   for(auto iter = impl->allIntfStatusDir_->intfStatusIterator();
         iter && (*handler)((eos::intf_id_t)iter.key().intfId(), arg);
-        ++iter ) {}
+        ++iter) {}
 }
 
 void
@@ -218,35 +225,36 @@ intf_mgr::intf_foreach(bool (*handler)(intf_id_t, void *), void *arg,
     * stop iteration.  */
 
    IntfMgrImpl * impl = getIntfMgrImpl(this);
-   for( auto iter = impl->allIntfStatusDir_->intfStatusIterator( bookmark.intfId_ );
+   for(auto iter = impl->allIntfStatusDir_->intfStatusIterator(
+             IntfIdHelper(bookmark));
         iter && (*handler)((eos::intf_id_t)iter.key().intfId(), arg);
-        ++iter ) {}
+        ++iter) {}
 }
 
 bool
 intf_mgr::exists(intf_id_t id) {
    /* returns true if intf_id_t has a corresponding status. */
    IntfMgrImpl * impl = getIntfMgrImpl(this);
-   return !!impl->allIntfStatusDir_->intfStatus( id.intfId_ );
+   return !!impl->allIntfStatusDir_->intfStatus(IntfIdHelper(id));
 }
 
 void
 intf_mgr::description_is(intf_id_t id, char const * descr) {
    IntfMgrImpl * impl = getIntfMgrImpl(this);
    Interface::IntfConfig::Ptr intfConfig = 
-      impl->allIntfConfigDir_->intfConfig( id.intfId_ );
-   intfConfig->descriptionIs( descr );
+      impl->allIntfConfigDir_->intfConfig(IntfIdHelper(id));
+   intfConfig->descriptionIs(descr);
 }
 
 oper_status_t
 intf_mgr::oper_status(intf_id_t id) {
    IntfMgrImpl * impl = getIntfMgrImpl(this);
    Interface::IntfStatus::Ptr intfStatus = 
-      impl->allIntfStatusDir_->intfStatus( id.intfId_ );
-   if( !intfStatus ) {
-      panic( "No matching interface" );
+      impl->allIntfStatusDir_->intfStatus(IntfIdHelper(id));
+   if(!intfStatus) {
+      panic("No matching interface");
    }
-   return convert( intfStatus->operStatus() );
+   return convert(intfStatus->operStatus());
 }
 
 intf_mgr * 
@@ -317,7 +325,7 @@ IntfConfigSm::handleAdminEnabled() {
    TRACE8( __PRETTY_FUNCTION__ << " adminEnabled is "
            << intfConfig()->adminEnabled() );
    IntfMgrImpl * impl = getIntfMgrImpl( eos::get_intf_mgr() );
-   intf_id_t intf_id = intf_id_t( (uint32_t)intfId().intfId() );
+   intf_id_t intf_id = intf_id_t_helper( intfId() );
    impl->on_admin_enabled( intf_id, intfConfig()->adminEnabled() );
 }
 
