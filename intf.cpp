@@ -8,7 +8,7 @@
 #include <EosSdk/intf.h>
 #include <EosSdk/Mount.h>
 #include <EosSdk/panic.h>
-#include <EosSdk/IntfId.h>
+#include <EosSdk/Conversions.h>
 #include <IntfMgrSm.h>
 #include <Sysdb/EntityManager.h>
 

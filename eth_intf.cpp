@@ -5,7 +5,7 @@
 #include <EosSdk/eth.h>
 #include <EosSdk/eth_intf.h>
 #include <EosSdk/panic.h>
-#include <EosSdk/IntfId.h>
+#include <EosSdk/Conversions.h>
 #include <EosSdk/Mount.h>
 
 #include <EthIntfMgrSm.h>
