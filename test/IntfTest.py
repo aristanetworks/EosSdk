@@ -30,8 +30,8 @@ class IntfApiTest( unittest.TestCase ):
 
    def tearDown( self ):
       agentManager.stopAgent( AGENT_NAME )
-      self.config.clear()
       self.status.clear()
+      self.config.clear()
 
    def _createInterface( self, name="Ethernet1", mac="00:11:22:33:44:55" ):
       intfStatus = self.status.intfStatus.newMember( name, None, 0, mac )
@@ -53,6 +53,22 @@ class IntfApiTest( unittest.TestCase ):
       et2Config, et2Status = self._createInterface( "Ethernet2",
                                                     "00:aa:bb:cc:dd:ee" )
       testIntfOperStatus( et2Config, et2Status )
+
+   def testAdminEnabledReactor( self ):
+      t0( "Testing the admin reactor" )
+      def testIntfAdminEnabled( intfConfig ):
+         intfConfig.adminEnabled = False
+         Tac.runActivities( 1 )
+         intfConfig.adminEnabled = True
+         Tac.waitFor( lambda: intfConfig.description == "Admin enabled is true" )
+         intfConfig.adminEnabled = False
+         Tac.waitFor( lambda: intfConfig.description == "Admin enabled is false" )
+
+      t1( "Ensure that our handler fires for pre-existing interfaces" )
+      testIntfAdminEnabled( self.et1Config )
+      t1( "Now react to an interface that was added after agent initialization" )
+      et2Config, _ = self._createInterface( "Ethernet2", "00:aa:bb:cc:dd:ee" )
+      testIntfAdminEnabled( et2Config )
 
 if __name__ == '__main__':
    unittest.longMessage = True

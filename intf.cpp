@@ -12,6 +12,11 @@
 #include <IntfMgrSm.h>
 #include <Sysdb/EntityManager.h>
 
+// Interface type definitions:
+#include <EthIntf/EthIntfId.h>
+#include <Intf/IntfIntfId.h>
+#include <Ebra/EbraIntfId.h>
+
 #include <list>
 
 
@@ -38,7 +43,10 @@ static oper_status_t convert(Interface::IntfOperStatus operStatus) {
    return ret;
 }
 
+static int INTFID_TYPEID_BITSHIFT = 25; // From Arnet/IntfIdDesc.tin
+
 static uint32_t empty_intf_id = Arnet::IntfId::emptyIntfId();
+static Arnet::IntfIdMgr::Ptr intfIdMgr = Tac::Entity::singleton<Arnet::IntfIdMgr>();
 
 intf_id_t::intf_id_t() : intfId_(empty_intf_id) {
 }
@@ -66,6 +74,26 @@ bool
 intf_id_t::is_null0() const {
    static uint32_t null0_intf_id = Arnet::IntfId("Null0").intfId();
    return intfId_ == null0_intf_id;
+}
+
+intf_type_t intf_id_t::intf_type() const {
+   uint32_t type_id = intfId_ >> INTFID_TYPEID_BITSHIFT;
+   if(type_id == Arnet::EthIntfId::ethIntfIdType()) {
+      return INTF_TYPE_ETH;
+   } else if(type_id == Arnet::VlanIntfId::vlanIntfIdType()) {
+      return INTF_TYPE_VLAN;
+   } else if(type_id == Arnet::MgmtIntfId::mgmtIntfIdType()) {
+      return INTF_TYPE_MANAGEMENT;
+   } else if(type_id == Arnet::LoopbackIntfId::loopbackIntfIdType()) {
+      return INTF_TYPE_LOOPBACK;
+   } else if(type_id == Arnet::PortChannelIntfId::poIntfIdType()) {
+      return INTF_TYPE_LAG;
+   } else if(is_null0()) {
+      return INTF_TYPE_NULL0;
+   } else if(intfId_ == empty_intf_id) {
+      return INTF_TYPE_NULL;
+   }
+   return INTF_TYPE_OTHER;
 }
 
 // Arnet::IntfId's default constructor sets emptyIntfId as the intfId

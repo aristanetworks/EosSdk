@@ -19,6 +19,20 @@ typedef enum oper_status_e {
    INTF_OPER_DOWN
 } oper_status_t;
 
+typedef enum intf_type_e {
+   INTF_TYPE_NULL,
+   INTF_TYPE_OTHER,
+   INTF_TYPE_ETH,
+   INTF_TYPE_VLAN,
+   INTF_TYPE_MANAGEMENT,
+   INTF_TYPE_LOOPBACK,
+   INTF_TYPE_LAG,
+   INTF_TYPE_NULL0,
+   // Don't expose these types until we are ready. //= hide
+   // INTF_TYPE_MLAG, //= hide
+   // INTF_TYPE_VXLAN, //= hide
+} intf_type_t;
+
 
 /* Unique identifier for an interface. */
 class intf_id_t {
@@ -31,6 +45,7 @@ class intf_id_t {
    explicit intf_id_t(char const *name);
 
    bool is_null0() const;
+   intf_type_t intf_type() const;
 
    bool operator !() const;
 

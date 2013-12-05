@@ -20,8 +20,8 @@ class IntfTestHandler : public eos::intf_handler {
       watch_all_intfs( true );
    }
 
-   static bool handle_initial_intf( eos::intf_id_t i, void * me_void ){
-      IntfTestHandler * me = (IntfTestHandler *) me_void;
+   static bool handle_initial_intf(eos::intf_id_t i, void * me_void) {
+      IntfTestHandler * me = static_cast<IntfTestHandler*>(me_void);
       char name[eos::INTF_NAME_MAX];
       i.to_string(name, sizeof(name));
       TRACE1( "Handling initial interface " << name );
@@ -53,6 +53,19 @@ class IntfTestHandler : public eos::intf_handler {
       TRACE1("on_oper_status: " << name << " is now " << status );
       char buf[100];
       snprintf(buf, sizeof(buf), "Oper status is %d", status);
+      intf_mgr->description_is(i, buf);
+   }
+
+   void on_admin_enabled(eos::intf_id_t i, bool enabled) {
+      char name[eos::INTF_NAME_MAX];
+      i.to_string(name, sizeof(name));
+      TRACE1("on_admin_enabled: " << name << " is now " << enabled );
+      char buf[100];
+      if( enabled ) {
+         snprintf(buf, sizeof(buf), "Admin enabled is true");
+      } else {
+         snprintf(buf, sizeof(buf), "Admin enabled is false");
+      }
       intf_mgr->description_is(i, buf);
    }
 

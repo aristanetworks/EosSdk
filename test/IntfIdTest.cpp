@@ -67,5 +67,16 @@ int main() {
    //    assert(err==1);
    // }
 
+   printf( "Checking intf type conversion\n" );
+   assert(eos::intf_id_t("").intf_type() == eos::INTF_TYPE_NULL);
+   assert(eos::intf_id_t("Ethernet1").intf_type() == eos::INTF_TYPE_ETH);
+   assert(eos::intf_id_t("Ethernet5/10/1").intf_type() == eos::INTF_TYPE_ETH);
+   assert(eos::intf_id_t("Vlan54").intf_type() == eos::INTF_TYPE_VLAN);
+   assert(eos::intf_id_t("Management1/2").intf_type() == eos::INTF_TYPE_MANAGEMENT);
+   assert(eos::intf_id_t("Loopback3").intf_type() == eos::INTF_TYPE_LOOPBACK);
+   assert(eos::intf_id_t("Port-Channel3").intf_type() == eos::INTF_TYPE_LAG);
+   assert(eos::intf_id_t("Null0").intf_type() == eos::INTF_TYPE_NULL0);
+   assert(eos::intf_id_t("Vxlan2").intf_type() == eos::INTF_TYPE_OTHER);
+
    printf( "PASS\n" );
 }
