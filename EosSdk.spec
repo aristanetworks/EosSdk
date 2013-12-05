@@ -87,6 +87,7 @@ rm -f "$RPM_BUILD_ROOT"%{_libdir}/*.la
 %defattr(-,root,root)
 %{_bindir}/eossdkpublish
 %{python_sitelib}/EosSdkTestLib.py*
+%{_includedir}/EosSdk
 
 %files test
 %defattr(-,root,root)
