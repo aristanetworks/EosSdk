@@ -4,6 +4,7 @@
 #ifndef EOS_INTF_H
 #define EOS_INTF_H
 
+#include <string>
 #include <stddef.h>
 #include <eos/types.h>
 #include <Arnet/IntfId.h> //= eos_internal
@@ -49,8 +50,7 @@ class intf_id_t {
 
    bool operator !() const;
 
-   size_t to_string(char * namebuf, size_t namebuf_size) const;
-   // string to_string() const;  //= eos_internal
+   std::string to_string() const;
 
    bool operator==(intf_id_t const & other);
    bool operator!=(intf_id_t const & other);

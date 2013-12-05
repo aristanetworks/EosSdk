@@ -16,15 +16,13 @@ eos::intf_mgr * intf_mgr;
 class IntfTestHandler : public eos::intf_handler {
  public:
    IntfTestHandler(){
-      TRACE0( __PRETTY_FUNCTION__ );  
+      TRACE0( __PRETTY_FUNCTION__ );
       watch_all_intfs( true );
    }
 
    static bool handle_initial_intf(eos::intf_id_t i, void * me_void) {
       IntfTestHandler * me = static_cast<IntfTestHandler*>(me_void);
-      char name[eos::INTF_NAME_MAX];
-      i.to_string(name, sizeof(name));
-      TRACE1( "Handling initial interface " << name );
+      TRACE1( "Handling initial interface " << i.to_string() );
       me->on_oper_status( i, intf_mgr->oper_status( i ) );
       return true;
    }
@@ -33,38 +31,30 @@ class IntfTestHandler : public eos::intf_handler {
       TRACE0( __PRETTY_FUNCTION__ );
       intf_mgr->intf_foreach( handle_initial_intf, this );
    }
-   
+
    void on_create(eos::intf_id_t i) {
-      char name[eos::INTF_NAME_MAX];
-      i.to_string(name, sizeof(name));
-      TRACE1("on_create: " << name << " showed up\n");
+      TRACE1("on_create: " << i.to_string() << " showed up\n");
       on_oper_status(i, intf_mgr->oper_status(i));
    }
 
    void on_delete(eos::intf_id_t i) {
-      char name[eos::INTF_NAME_MAX];
-      i.to_string(name, sizeof(name));
-      TRACE1("on_delete: " << name << " went away" );
+      TRACE1("on_delete: " << i.to_string() << " went away" );
    }
 
    void on_oper_status(eos::intf_id_t i, eos::oper_status_t status) {
-      char name[eos::INTF_NAME_MAX];
-      i.to_string(name, sizeof(name));
-      TRACE1("on_oper_status: " << name << " is now " << status );
+      TRACE1("on_oper_status: " << i.to_string() << " is now " << status );
       char buf[100];
       snprintf(buf, sizeof(buf), "Oper status is %d", status);
       intf_mgr->description_is(i, buf);
    }
 
    void on_admin_enabled(eos::intf_id_t i, bool enabled) {
-      char name[eos::INTF_NAME_MAX];
-      i.to_string(name, sizeof(name));
-      TRACE1("on_admin_enabled: " << name << " is now " << enabled );
-      char buf[100];
+      TRACE1("on_admin_enabled: " << i.to_string() << " is now " << enabled );
+      const char* buf;
       if( enabled ) {
-         snprintf(buf, sizeof(buf), "Admin enabled is true");
+         buf = "Admin enabled is true";
       } else {
-         snprintf(buf, sizeof(buf), "Admin enabled is false");
+         buf = "Admin enabled is false";
       }
       intf_mgr->description_is(i, buf);
    }

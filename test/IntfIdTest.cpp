@@ -24,9 +24,7 @@ int main() {
    eos::intf_id_t intf2(intf2_str);
 
    printf( "Checking to_string\n" );
-   char buf[eos::INTF_NAME_MAX];
-   intf1.to_string(buf, sizeof(buf));
-   assert(strcmp(intf1_str, buf) == 0);
+   assert(intf1_str == intf1.to_string());
 
    printf( "Checking equality\n" );
    assert(intf1 == intf1);
@@ -37,11 +35,10 @@ int main() {
    printf( "Checking copy constructor\n" );
    eos::intf_id_t intf1_copy = intf1;
    assert(intf1 == intf1_copy);
-   
+
    printf( "Checking default constructor\n" );
    eos::intf_id_t default_intf;
-   default_intf.to_string(buf, sizeof(buf));
-   assert(strcmp("", buf) == 0);
+   assert("" == default_intf.to_string());
 
    printf( "Checking boolean evaluation\n" );
    assert( !!intf1 );

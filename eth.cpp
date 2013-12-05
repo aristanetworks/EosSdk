@@ -37,12 +37,9 @@ eth_addr_t::operator!=(eth_addr_t const & other) {
    return (ethAddr_ != other.ethAddr_);
 }
 
-void
-eth_addr_t::to_string(char *namebuf, size_t namebuf_size) {
-   Tac::String name = ethAddr_.stringValue();
-   char const * ptr = name.charPtr();
-   strncpy( namebuf, ptr, namebuf_size );
-   namebuf[namebuf_size - 1] = 0;
+std::string
+eth_addr_t::to_string() const {
+   return ethAddr_.stringValue().stdString();
 }
 
 }

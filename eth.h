@@ -4,6 +4,7 @@
 #ifndef EOS_ETH_H
 #define EOS_ETH_H
 
+#include <string>
 #include <stddef.h>
 #include <eos/types.h>
 
@@ -20,7 +21,7 @@ class eth_addr_t {
    explicit eth_addr_t(char const *name);
    eth_addr_t(const Arnet::EthAddr &); //= eos_internal
 
-   void to_string(char *namebuf, size_t namebuf_size);
+   std::string to_string() const;
 
    bool operator !() const;
    bool operator==(eth_addr_t const & other);

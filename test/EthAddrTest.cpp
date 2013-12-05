@@ -14,7 +14,7 @@ void handle_panic(char const * msg) {
 
 int main() {
    printf( "Starting EthAddrTest\n" );
-   
+
    eos::panic_handler_is( handle_panic );
 
    // Create an eth_addr_t
@@ -24,9 +24,7 @@ int main() {
    eos::eth_addr_t addr2(addr2_str);
 
    printf( "Checking to_string\n" );
-   char buf[18];
-   addr1.to_string(buf, sizeof(buf));
-   assert(strcmp(addr1_str, buf) == 0);
+   assert(addr1_str == addr1.to_string());
 
    printf( "Checking equality\n" );
    assert(addr1 == addr1);
@@ -40,8 +38,7 @@ int main() {
 
    printf( "Checking default constructor\n" );
    eos::eth_addr_t default_addr;
-   default_addr.to_string(buf, sizeof(buf));
-   assert(strcmp("00:00:00:00:00:00", buf) == 0);
+   assert("00:00:00:00:00:00" == default_addr.to_string());
 
    printf( "Checking boolean evaluation\n" );
    assert( !!addr1 );
@@ -61,6 +58,6 @@ int main() {
       assert(err==1);
    }
 
-   
+
    printf( "PASS\n" );
 }

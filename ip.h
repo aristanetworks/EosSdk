@@ -4,6 +4,7 @@
 #ifndef EOS_IP_H
 #define EOS_IP_H
 
+#include <string>
 #include <eos/types.h>
 
 namespace eos {
@@ -16,16 +17,16 @@ typedef enum addr_family_e {
 
 class ip_prefix_t {
  public:
-   
+
    ip_prefix_t(addr_family_t, void const * address); // address gets copied.
    ip_prefix_t(addr_family_t, void const * address, int prefix_length);
    explicit ip_prefix_t(uint32_t); // IPv4 only, network byte order.
    addr_family_t addr_family();
    void const * address();
    uint32_t addressV4();
-   char const * to_string();  // returns "10.2.3.4/24", "::1" or "::1/128", etc
+   std::string to_string() const;  // returns "10.2.3.4/24", "::1" or "::1/128", etc
    void address_is(uint32_t); // also sets addr_family to IPv4.
-   void address_is(addr_family_t, void const *); 
+   void address_is(addr_family_t, void const *);
    int prefix_length();
    void prefix_length_is(int);
 
@@ -40,10 +41,10 @@ class ip_prefix_t {
 typedef ip_prefix_t ip_addr_t;
 
 // e.g., "10.1.2.0/24" or "fffe::0001/96"
-bool parse_ip_prefix(char const *, ip_prefix_t * result); 
+bool parse_ip_prefix(char const *, ip_prefix_t * result);
 
 // same as above but without the prefix.
-bool parse_ip_addr(char const *, ip_addr_t * result); 
+bool parse_ip_addr(char const *, ip_addr_t * result);
 
 };  // end namespace eos
 

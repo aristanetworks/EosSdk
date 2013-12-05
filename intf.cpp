@@ -114,13 +114,9 @@ intf_id_t::operator!=(intf_id_t const & other) {
    return (intfId_ != other.intfId_);
 }
 
-size_t
-intf_id_t::to_string(char *namebuf, size_t namebuf_size) const {
-   Tac::String name = IntfIdHelper(intfId_).stringValue();
-   char const * ptr = name.charPtr();
-   strncpy(namebuf, ptr, namebuf_size);
-   namebuf[namebuf_size - 1] = 0;
-   return namebuf_size;
+std::string
+intf_id_t::to_string() const {
+   return IntfIdHelper(intfId_).stringValue().stdString();
 }
 
 
