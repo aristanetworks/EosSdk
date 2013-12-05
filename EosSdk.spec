@@ -37,6 +37,7 @@ can be done with Python.
 Summary: Public development headers for the EOS SDK
 Group: dev/Arista Networks
 Requires: EosSdk = %{version}
+Obsoletes: eos-sdk
 
 %description headers
 Provides the files necessary for development with the EOS Software Development Kit.
