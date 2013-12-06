@@ -16,7 +16,7 @@ bin_PROGRAMS += EthAddrTest
 bin_SCRIPTS = eossdkpublish
 
 PUBLISHED_HEADER_FILES = eos/agent.h
-PUBLISHED_HEADER_FILES += eos/types.h
+PUBLISHED_HEADER_FILES += eos/base.h
 PUBLISHED_HEADER_FILES += eos/panic.h
 PUBLISHED_HEADER_FILES += eos/timer.h
 PUBLISHED_HEADER_FILES += eos/fd.h
@@ -38,7 +38,7 @@ pkginclude_HEADERS = Conversions.h Mount.h
 
 libeos_la_SOURCES =
 libeos_la_SOURCES += EosSdkAgent.tac EosSdkAgent.tin
-libeos_la_SOURCES += types.h agent.cpp Mount.h Mount.cpp
+libeos_la_SOURCES += base.h agent.cpp Mount.h Mount.cpp
 libeos_la_SOURCES += panic.h panic.cpp
 libeos_la_SOURCES += TimerSm.tac timer.h timer.cpp
 libeos_la_SOURCES += FileSm.tac fd.h fd.cpp

@@ -3,7 +3,6 @@
 
 #include <eos/agent.h>
 #include <eos/intf.h>
-#include <eos/types.h>
 
 #include <stdio.h>
 

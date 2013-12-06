@@ -5,7 +5,7 @@
 #define EOS_IP_H
 
 #include <string>
-#include <eos/types.h>
+#include <eos/base.h>
 
 namespace eos {
 

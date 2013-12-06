@@ -5,7 +5,7 @@
 
 #include <EosSdk/ip.h>
 #include <EosSdk/panic.h>
-#include <EosSdk/types.h>
+#include <EosSdk/base.h>
 
 namespace eos {
 

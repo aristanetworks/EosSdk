@@ -6,7 +6,7 @@
 
 #include <string>
 #include <stddef.h>
-#include <eos/types.h>
+#include <eos/base.h>
 
 namespace eos {
 
