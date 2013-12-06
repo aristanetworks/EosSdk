@@ -6,6 +6,14 @@
 
 #include <Arnet/IntfId.h>
 
+/**
+ * Contains in-line conversions for commonly-used types.
+ * This header is internal only.  Common value types like
+ * interfaces, MAC addresses, IP types, can be added here
+ * to easily go back and forth between the SDK types and
+ * tacc types.
+ */
+
 namespace eos {
 
 struct IntfIdHelper : public Arnet::IntfId {
