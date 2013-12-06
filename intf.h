@@ -7,8 +7,6 @@
 #include <string>
 #include <stddef.h>
 #include <eos/types.h>
-#include <Arnet/IntfId.h> //= eos_internal
-#include <Intf/Intf.h> //= eos_internal
 
 namespace eos {
 

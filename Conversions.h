@@ -4,6 +4,8 @@
 #ifndef EOSSDK_CONVERSIONS_H
 #define EOSSDK_CONVERSIONS_H
 
+#include <Arnet/IntfId.h>
+
 namespace eos {
 
 struct IntfIdHelper : public Arnet::IntfId {
