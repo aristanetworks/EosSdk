@@ -24,6 +24,7 @@ PUBLISHED_HEADER_FILES += eos/intf.h
 PUBLISHED_HEADER_FILES += eos/eth.h
 PUBLISHED_HEADER_FILES += eos/eth_intf.h
 PUBLISHED_HEADER_FILES += eos/ip.h
+PUBLISHED_HEADER_FILES += eos/version.h
 
 eosheaderdir = $(includedir)/eos
 eosheader_HEADERS = $(PUBLISHED_HEADER_FILES)
@@ -46,6 +47,7 @@ libeos_la_SOURCES += Conversions.h IntfMgrSm.tac intf.h intf.cpp
 libeos_la_SOURCES += ip.h ip.cpp
 libeos_la_SOURCES += eth.h eth.cpp
 libeos_la_SOURCES += EthIntfMgrSm.tac eth_intf.h eth_intf.cpp
+libeos_la_SOURCES += version.h version.cpp
 
 libeos_la_LIBADD = -lAgentBase -lSysdbEntityMgr -ltac -ldl
 libeos_la_LIBADD += -lIntf -lArnet -lArk -lEthIntf
