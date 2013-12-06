@@ -52,11 +52,8 @@ intf_id_t::intf_id_t() : intfId_(empty_intf_id) {
 }
 
 intf_id_t::intf_id_t(uint32_t id) {
-   try {
-      Tac::Expect exception(Tac::Exception::rangeException_);
-      Arnet::IntfId validId = IntfIdHelper(id);
-      intfId_ = id;
-   } catch(Tac::RangeException e) {
+   intfId_ = id;
+   if (intf_type() == INTF_TYPE_OTHER) {
       panic("Invalid interface id");
    }
 }
@@ -116,7 +113,7 @@ intf_id_t::operator!=(intf_id_t const & other) {
 
 std::string
 intf_id_t::to_string() const {
-   return IntfIdHelper(intfId_).stringValue().stdString();
+   return convert(*this).stringValue().stdString();
 }
 
 
@@ -173,7 +170,7 @@ class IntfMgrImpl : public intf_mgr,
 
    void remove_handler(intf_handler *handler) {
       TRACE0(__PRETTY_FUNCTION__);
-      handlerList_.remove(handler);   
+      handlerList_.remove(handler);
    }
 
    void add_handler(intf_id_t, intf_handler *handler) {
@@ -183,7 +180,7 @@ class IntfMgrImpl : public intf_mgr,
    void remove_handler(intf_id_t, intf_handler *) {
       assert(false && "Not yet implemented");
    }
-   
+
    void on_create(intf_id_t intf_id) {
       std::list<intf_handler *>::const_iterator handler_iterator;
       for (handler_iterator = this->handlerList_.begin();
@@ -191,7 +188,7 @@ class IntfMgrImpl : public intf_mgr,
          (*handler_iterator)->on_create(intf_id);
       }
    }
-   
+
    void on_delete(intf_id_t intf_id) {
       std::list<intf_handler *>::const_iterator handler_iterator;
       for (handler_iterator = this->handlerList_.begin();
@@ -207,7 +204,7 @@ class IntfMgrImpl : public intf_mgr,
          (*handler_iterator)->on_oper_status(intf_id, status);
       }
    }
-      
+
    void on_admin_enabled(intf_id_t intf_id, bool enabled) {
       std::list<intf_handler *>::const_iterator handler_iterator;
       for (handler_iterator = this->handlerList_.begin();
@@ -250,7 +247,7 @@ intf_mgr::intf_foreach(bool (*handler)(intf_id_t, void *), void *arg,
 
    IntfMgrImpl * impl = getIntfMgrImpl(this);
    for(auto iter = impl->allIntfStatusDir_->intfStatusIterator(
-             IntfIdHelper(bookmark));
+             convert(bookmark));
         iter && (*handler)((eos::intf_id_t)iter.key().intfId(), arg);
         ++iter) {}
 }
@@ -259,36 +256,36 @@ bool
 intf_mgr::exists(intf_id_t id) {
    /* returns true if intf_id_t has a corresponding status. */
    IntfMgrImpl * impl = getIntfMgrImpl(this);
-   return !!impl->allIntfStatusDir_->intfStatus(IntfIdHelper(id));
+   return !!impl->allIntfStatusDir_->intfStatus(convert(id));
 }
 
 void
 intf_mgr::description_is(intf_id_t id, char const * descr) {
    IntfMgrImpl * impl = getIntfMgrImpl(this);
-   Interface::IntfConfig::Ptr intfConfig = 
-      impl->allIntfConfigDir_->intfConfig(IntfIdHelper(id));
+   Interface::IntfConfig::Ptr intfConfig =
+      impl->allIntfConfigDir_->intfConfig(convert(id));
    intfConfig->descriptionIs(descr);
 }
 
 oper_status_t
 intf_mgr::oper_status(intf_id_t id) {
    IntfMgrImpl * impl = getIntfMgrImpl(this);
-   Interface::IntfStatus::Ptr intfStatus = 
-      impl->allIntfStatusDir_->intfStatus(IntfIdHelper(id));
+   Interface::IntfStatus::Ptr intfStatus =
+      impl->allIntfStatusDir_->intfStatus(convert(id));
    if(!intfStatus) {
       panic("No matching interface");
    }
    return convert(intfStatus->operStatus());
 }
 
-intf_mgr * 
+intf_mgr *
 get_intf_mgr() {
    static IntfMgrImpl impl;
    return &impl;
 }
 
 
-// 
+//
 // intf_handler implementation
 //
 
@@ -349,7 +346,7 @@ IntfConfigSm::handleAdminEnabled() {
    TRACE8( __PRETTY_FUNCTION__ << " adminEnabled is "
            << intfConfig()->adminEnabled() );
    IntfMgrImpl * impl = getIntfMgrImpl( eos::get_intf_mgr() );
-   intf_id_t intf_id = intf_id_t_helper( intfId() );
+   intf_id_t intf_id = convert(intfId());
    impl->on_admin_enabled( intf_id, intfConfig()->adminEnabled() );
 }
 

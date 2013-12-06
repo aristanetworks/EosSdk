@@ -52,19 +52,18 @@ int main() {
    printf( "Checking invalid intf\n" );
    try {
       eos::intf_id_t bad_intf("InvalidIntf1");
-      assert( false );
+      assert(false);
    } catch(int err) {
-      assert(err==1);
+      assert(err == 1);
    }
-   // Currently unable to find an invalid IntfId
-   // try {
-   //    eos::intf_id_t bad_intf(0xabcdef12);
-   //    assert( false );
-   // } catch(int err) {
-   //    assert(err==1);
-   // }
+   try {
+      eos::intf_id_t bad_intf(0xaBad1dea);
+      assert(false);
+   } catch(int err) {
+      assert(err == 1);
+   }
 
-   printf( "Checking intf type conversion\n" );
+   printf("Checking intf type conversion\n");
    assert(eos::intf_id_t("").intf_type() == eos::INTF_TYPE_NULL);
    assert(eos::intf_id_t("Ethernet1").intf_type() == eos::INTF_TYPE_ETH);
    assert(eos::intf_id_t("Ethernet5/10/1").intf_type() == eos::INTF_TYPE_ETH);

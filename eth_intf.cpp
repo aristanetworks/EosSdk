@@ -42,16 +42,16 @@ class EthIntfMgrImpl : public eth_intf_mgr,
 
    virtual void onMountsComplete( const Sysdb::EntityManager::Ptr & em ) {
       TRACE0( __FUNCTION__ );
-      ethIntfConfigDir_ = em->getEntity<Interface::EthIntfConfigDir>( 
+      ethIntfConfigDir_ = em->getEntity<Interface::EthIntfConfigDir>(
             "interface/config/eth/intf" );
-      ethIntfStatusDir_ = em->getEntity<Interface::EthIntfStatusDir>( 
+      ethIntfStatusDir_ = em->getEntity<Interface::EthIntfStatusDir>(
             "interface/status/eth/intf" );
 
       ethIntfMgrSm_ = EthIntfMgrSm::EthIntfMgrSmIs( ethIntfConfigDir_,
                                                     ethIntfStatusDir_ );
    }
 
-   void handleInitialized() {   
+   void handleInitialized() {
       for (auto handler_iterator = this->handlerList_.begin();
            handler_iterator!=this->handlerList_.end(); ++handler_iterator) {
          (*handler_iterator)->on_initialized();
@@ -64,9 +64,9 @@ class EthIntfMgrImpl : public eth_intf_mgr,
    }
 
    void remove_handler(eth_intf_handler *handler) {
-      handlerList_.remove( handler );   
+      handlerList_.remove( handler );
    }
-   
+
    void on_create(intf_id_t intf_id) {
       std::list<eth_intf_handler *>::const_iterator handler_iterator;
       for (handler_iterator = this->handlerList_.begin();
@@ -74,7 +74,7 @@ class EthIntfMgrImpl : public eth_intf_mgr,
          (*handler_iterator)->on_create(intf_id);
       }
    }
-   
+
    void on_delete(intf_id_t intf_id) {
       std::list<eth_intf_handler *>::const_iterator handler_iterator;
       for (handler_iterator = this->handlerList_.begin();
@@ -121,23 +121,24 @@ eth_intf_mgr::eth_intf_foreach(bool (*handler)(intf_id_t, void *), void *arg,
                                intf_id_t bookmark) {
    EthIntfMgrImpl * impl = getEthIntfMgrImpl(this);
    for( auto iter = impl->ethIntfStatusDir_->intfStatusIteratorConst(
-              IntfIdHelper(bookmark));
+              convert(bookmark));
         iter && (*handler)((eos::intf_id_t)iter.key().intfId(), arg);
-        ++iter ) {}
+        ++iter ) {
+   }
 }
 
 bool
 eth_intf_mgr::exists(intf_id_t id) {
    /* returns true if intf_id_t has a corresponding status. */
    EthIntfMgrImpl * impl = getEthIntfMgrImpl(this);
-   return !!impl->ethIntfStatusDir_->intfStatus(IntfIdHelper(id));
+   return !!impl->ethIntfStatusDir_->intfStatus(convert(id));
 }
 
 eth_addr_t
 eth_intf_mgr::eth_addr(intf_id_t intf_id) {
    EthIntfMgrImpl * impl = getEthIntfMgrImpl(this);
    Interface::EthIntfStatus::PtrConst intfStatus = \
-      impl->ethIntfStatusDir_->intfStatus( IntfIdHelper(intf_id) );
+      impl->ethIntfStatusDir_->intfStatus(convert(intf_id));
    if( !intfStatus ) {
       panic( "Intf does not exist" );
    }
@@ -148,14 +149,14 @@ void
 eth_intf_mgr::eth_addr_is(intf_id_t intf_id, eth_addr_t addr) {
    EthIntfMgrImpl * impl = getEthIntfMgrImpl(this);
    Interface::EthIntfConfig::Ptr intfConfig = \
-      impl->ethIntfConfigDir_->intfConfig( IntfIdHelper(intf_id) );
+      impl->ethIntfConfigDir_->intfConfig(convert(intf_id));
    if( !intfConfig ) {
       panic( "Intf does not exist" );
    }
    intfConfig->addrIs( addr.ethAddr_ );
 }
 
-eth_intf_mgr * 
+eth_intf_mgr *
 get_eth_intf_mgr() {
    static EthIntfMgrImpl impl;
    return &impl;

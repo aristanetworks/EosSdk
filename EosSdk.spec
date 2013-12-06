@@ -1,6 +1,6 @@
 Summary: EOS Software Development Kit
 Name: EosSdk
-Version: 1.0.0
+Version: 1.0.1
 Release: %{?release:%{release}}%{!?release:eng}
 Source0: %{name}-%{version}.tar.gz
 License: Arista Networks
