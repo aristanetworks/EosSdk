@@ -4,14 +4,6 @@
 #ifndef EOS_TYPES_H
 #define EOS_TYPES_H
 
-namespace eos {
-
-typedef unsigned char uint8_t;
-typedef unsigned short uint16_t;
-typedef unsigned int uint32_t;
-typedef unsigned long long uint64_t;
-
-};
-
+#include <cstdint> // for uint8_t, uint16_t, uint32_t, uint64_t, etc.
 
 #endif // EOS_TYPES_H
