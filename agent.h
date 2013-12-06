@@ -4,9 +4,12 @@
 #ifndef EOS_AGENT_H
 #define EOS_AGENT_H
 
+#include <eos/base.h>
+
 namespace eos {
 
-void agent_main_loop(const char *agent_name, int argc, char ** argv);
+void EOS_SDK_PUBLIC
+agent_main_loop(const char *agent_name, int argc, char ** argv);
 
 };
 

@@ -4,6 +4,8 @@
 #ifndef EOS_ETH_INTF_H
 #define EOS_ETH_INTF_H
 
+#include <eos/base.h>
+
 #include <EosSdk/eth.h> //= eos_internal
 //=> #include <eos/eth.h>
 #include <EosSdk/intf.h> //= eos_internal
@@ -46,7 +48,7 @@ typedef enum eth_timestamp_mode_e {
 
 //= end_hidden
 
-class eth_intf_handler {
+class EOS_SDK_PUBLIC eth_intf_handler {
  public:
    eth_intf_handler();
    ~eth_intf_handler();
@@ -71,7 +73,7 @@ class eth_intf_handler {
    bool watching_all_intfs_;
 };
 
-class eth_intf_mgr {
+class EOS_SDK_PUBLIC eth_intf_mgr {
  public:
    // Collection management
    void eth_intf_foreach(bool (*handler)(intf_id_t, void *), void *);
@@ -89,10 +91,10 @@ class eth_intf_mgr {
    eth_intf_mgr();
 
  private:
-   eth_intf_mgr(eth_intf_mgr const &);
+   eth_intf_mgr(eth_intf_mgr const &) EOS_SDK_PRIVATE;
 };
 
-eth_intf_mgr * get_eth_intf_mgr();
+eth_intf_mgr * get_eth_intf_mgr() EOS_SDK_PUBLIC;
 
 };
 

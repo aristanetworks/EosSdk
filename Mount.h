@@ -7,10 +7,14 @@
 #include <list>
 #include <Sysdb/EntityManager.h>
 
+#include <eos/base.h>
+
 namespace eos {
 
-class MountHandler {
+class EOS_SDK_INTERNAL MountHandler {
  public:
+   // This constructor shouldn't be public, but it's accessed from the
+   // GOpenFlow SDK implementation.
    MountHandler();
    virtual void doMounts( const Sysdb::MountGroup::Ptr & mg ) = 0;
    virtual void onMountsComplete( const Sysdb::EntityManager::Ptr & em ) = 0;

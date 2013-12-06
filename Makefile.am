@@ -3,7 +3,8 @@ EXTRA_DIST = EosSdk.spec $(TESTS) eossdkpublish
 CPP_INCLUDE_FLAGS = -I/usr/include/python$(PYTHON_VERSION) \
    -Isrc-includes -I$(includedir)
 AM_CPPFLAGS = $(CPP_INCLUDE_FLAGS) -DTAC_STRING_TO_NAME_CONVERSION
-AM_CXXFLAGS = -std=gnu++0x -Wextra -Wall -Werror -Wno-unused-parameter
+AM_CXXFLAGS = -fvisibility=hidden -std=gnu++0x
+AM_CXXFLAGS += -Wextra -Wall -Werror -Wno-unused-parameter
 AM_LDFLAGS = -Wl,--no-undefined
 
 lib_LTLIBRARIES = libeos.la

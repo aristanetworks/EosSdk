@@ -4,6 +4,7 @@
 #ifndef EOS_PANIC_H
 #define EOS_PANIC_H
 
+#include <eos/base.h>
 #include <stdarg.h> //= hide
 
 namespace eos {
@@ -11,7 +12,7 @@ namespace eos {
 void panic( char const * fmt, ... ) __attribute__((noreturn)); //= hide
 void vpanic( char const * fmt, va_list ap ) __attribute__((noreturn)); //= hide
 typedef void (*panic_handler_t)(char const *);
-void panic_handler_is(panic_handler_t);
+void panic_handler_is(panic_handler_t) EOS_SDK_PUBLIC;
 
 
 };

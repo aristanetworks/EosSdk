@@ -12,7 +12,7 @@
 
 namespace eos {
 
-class eth_addr_t {
+class EOS_SDK_PUBLIC eth_addr_t {
  public:
    // Default constructor
    eth_addr_t();

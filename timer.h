@@ -4,13 +4,15 @@
 #ifndef EOS_TIMER_H
 #define EOS_TIMER_H
 
+#include <eos/base.h>
+
 namespace eos {
 
 typedef double seconds_t;
 
 // Monotonically increasing time in seconds. Corresponds to the number
 // of seconds since boottime plus an arbitrary offset.
-seconds_t now();
+seconds_t now() EOS_SDK_PUBLIC;
 
 // 'never' represents a future time that now() can never reach.
 static const seconds_t never = 0;
@@ -24,7 +26,7 @@ timer, set the timeout to the 'never' constant.
 There are no guarantees that 'on_timeout()' will be called exactly at
 the configured timeout, though we guarantee this will never be called
 *before* the configured timeout.*/
-class timeout_handler {
+class EOS_SDK_PUBLIC timeout_handler {
  public:
    timeout_handler();
    ~timeout_handler();

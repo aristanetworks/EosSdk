@@ -26,7 +26,7 @@ AF_IPV6 = 6
 
 // An IP address type that supports IPv4 and IPv6
 //
-class ip_addr_t {
+class EOS_SDK_PUBLIC ip_addr_t {
 public:
 ip_addr_t();
 ip_addr_t(af_t, uint8_t const * ip_addr);  // copied; in network byte order
@@ -59,7 +59,7 @@ uint8_t af_;   // af_t in one byte.
 // A v4 or v6 IP route prefix of a network address and a prefix_length.
 // Network adresses have non-zero bits in only the first prefix_length
 // bits (in big/network endian)
-class ip_prefix_t {
+class EOS_SDK_PUBLIC ip_prefix_t {
 public:
 ip_prefix_t();
 ip_prefix_t(ip_addr_t const &, int);
@@ -79,7 +79,7 @@ uint8_t prefix_length_;
 
 // An IPv4 or IPv6 address with a full 32-bit mask, to allow for non-
 // contiguous subnet masks (e.g., for ACLs).
-class ip_addr_mask_t {
+class EOS_SDK_PUBLIC ip_addr_mask_t {
 public:
 ip_addr_mask_t();
 ip_addr_mask_t(ip_addr_t const &, int mask_length);
@@ -105,14 +105,13 @@ Arnet::Ip6AddrWithMask getIp6AddrWithMask() const;
 
 // e.g., "10.1.2.0/24" or "fffe::0001/96"
 // Note that "10.1.2.7/24" is not legal.
-bool parse_ip_prefix(char const *, ip_prefix_t * result);
+bool parse_ip_prefix(char const *, ip_prefix_t * result) EOS_SDK_PUBLIC;
 
 // same as above but without the prefix length.
-bool parse_ip_addr(char const *, ip_addr_t * result);
+bool parse_ip_addr(char const *, ip_addr_t * result) EOS_SDK_PUBLIC;
 
 // same as above but "10.1.2.7/24" is legal.
-bool parse_ip_addr_mask(char const *, ip_addr_mask_t * result);
-
+bool parse_ip_addr_mask(char const *, ip_addr_mask_t * result) EOS_SDK_PUBLIC;
 
 };  // end namespace eos
 

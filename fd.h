@@ -4,6 +4,8 @@
 #ifndef EOS_FILE_H
 #define EOS_FILE_H
 
+#include <eos/base.h>
+
 namespace eos {
 
 /* This class manages file descriptors within the event loop
@@ -25,7 +27,7 @@ backlog, though, your descriptor will return an error on write,
 indicating that the socket is no longer writeable, and it is at that
 point that 'watch_writeable(fd, true)' should be invoked. When the
 other end of the connection */
-class fd_handler {
+class EOS_SDK_PUBLIC fd_handler {
  public:
    fd_handler();
    ~fd_handler();

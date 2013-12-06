@@ -34,7 +34,7 @@ typedef enum intf_type_e {
 
 
 /* Unique identifier for an interface. */
-class intf_id_t {
+class EOS_SDK_PUBLIC intf_id_t {
  public:
    // Default constructor
    intf_id_t();
@@ -60,7 +60,7 @@ class intf_id_t {
 
 
 /* This class handles changes to base interface attributes. */
-class intf_handler {
+class EOS_SDK_PUBLIC intf_handler {
  public:
    intf_handler();
    ~intf_handler();
@@ -88,7 +88,7 @@ class intf_handler {
 };
 
 /* This class inspects and configures base interface attribtues */
-class intf_mgr {
+class EOS_SDK_PUBLIC intf_mgr {
  public:
    /* Collection management */
    // Iterator that, for each interface, call the supplied handler callback with the
@@ -119,10 +119,10 @@ class intf_mgr {
    intf_mgr();
 
  private:
-   intf_mgr(intf_mgr const &);
+   intf_mgr(intf_mgr const &) EOS_SDK_PRIVATE;
 };
 
-intf_mgr * get_intf_mgr();
+intf_mgr * get_intf_mgr() EOS_SDK_PUBLIC;
 
 };
 

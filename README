@@ -1,0 +1,32 @@
+Random internal notes about the EOS SDK.
+
+   +-----+
+   | FAQ |
+   +-----+
+
+Q: Where do I need to add EOS_SDK_PUBLIC?
+A: Typically once per class: "class foo" becomes "class EOS_SDK_PUBLIC foo".
+   Global functions we expose: right before the semicolon of the function
+   declaration, or in between the return type and the function name:
+   "int foo();" becomes "int foo() EOS_SDK_PUBLIC;"
+   or "int EOS_SDK_PUBLIC foo() { ... }"
+
+Q: Do I need this on enums, global constants, plain old structs with no
+   functions?
+A: No.
+
+Q: Do I need this on mutable global constants?
+A: Yes, but we should really not have global mutable constants in our API.
+
+Q: When do I need to use EOS_SDK_PRIVATE?
+A: Typically only when you marked a class as EOS_SDK_PUBLIC but you want to
+   re-hide certain members.
+   The "private" keyword in C++ will only prevent compile-time access to your
+   member, whereas the EOS_SDK_PRIVATE annotation will prevent use at
+   link-time and run-time, and will make calls to your private member faster.
+
+Q: When do I need to use EOS_SDK_INTERNAL?
+A: When something that shouldn't be part of the API actually needs to be
+   exposed because another library than libeos.so needs to use it.
+   For instance when the libeosgopenflow.so needs to poke at some private
+   parts of libeos.so that aren't otherwise of the public API.
