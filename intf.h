@@ -54,7 +54,7 @@ class intf_id_t {
    bool operator!=(intf_id_t const & other);
 
  private:
-   friend struct IntfIdHelper; //= hide
+   friend struct IntfIdHelper;
    uint32_t intfId_;
 };
 
