@@ -18,7 +18,7 @@ static char const ADDR4_LOCAL[] = "127.0.0.1";
 
 // test cases return true if they succeeded, else false
 
-bool test_parse_ip_addr_v4() {
+static bool test_parse_ip_addr_v4() {
    eos::ip_addr_t addr;
    // Parse '1.2.3.4' into an IPv4 address
    eos::parse_ip_addr(ADDR1234, &addr);
@@ -31,7 +31,7 @@ bool test_parse_ip_addr_v4() {
    return false;
 }
 
-bool test_parse_ip_addr_v6() {
+static bool test_parse_ip_addr_v6() {
    eos::ip_addr_t addr;
    // Parse '::1' into an IPV6 address
    eos::parse_ip_addr(ADDR6_LOCAL, &addr);
@@ -44,7 +44,7 @@ bool test_parse_ip_addr_v6() {
    return false;
 }
 
-bool test_valid_addr_v4() {
+static bool test_valid_addr_v4() {
    eos::ip_addr_t addr;
    // Check that valid IPv4 addresses parse and never crash
    if ((eos::parse_ip_addr("1.1.1.1", &addr)) &&
@@ -60,7 +60,7 @@ bool test_valid_addr_v4() {
    return false;
 }
 
-bool test_invalid_addr_v4() {
+static bool test_invalid_addr_v4() {
    eos::ip_addr_t addr;
    // Check that invalid IPv4 addresses do not parse or crash
    if ((!eos::parse_ip_addr("-1", &addr)) &&
@@ -75,7 +75,7 @@ bool test_invalid_addr_v4() {
    return false;
 }
 
-bool test_valid_addr_v6() {
+static bool test_valid_addr_v6() {
    eos::ip_addr_t addr;
    // Check that valid IPv6 addresses parse and never crash
    if ((eos::parse_ip_addr("::1", &addr)) &&
@@ -88,7 +88,7 @@ bool test_valid_addr_v6() {
    return false;
 }
 
-bool test_invalid_addr_v6() {
+static bool test_invalid_addr_v6() {
    eos::ip_addr_t addr;
    // Check that invalid IPv6 addresses do not parse or crash
    if ((!eos::parse_ip_addr("hhhh:0db8:85a3:0042:1001:882e:0370:1337", &addr)) &&
@@ -100,7 +100,7 @@ bool test_invalid_addr_v6() {
    return false;
 }
 
-bool test_ip_addr_string_constructor_v4() {
+static bool test_ip_addr_string_constructor_v4() {
    eos::ip_addr_t addr = eos::ip_addr_t("1.2.3.4");  // decimal 16909060
    // Convert the address value back to a string
    // Compare the string buffer is the same as the string input, and that
@@ -114,7 +114,7 @@ bool test_ip_addr_string_constructor_v4() {
    return false;
 }
 
-bool test_ip_addr_string_constructor_v6() {
+static bool test_ip_addr_string_constructor_v6() {
    eos::ip_addr_t addr = eos::ip_addr_t(ADDR6_LOCAL);
    // Convert the address value back to a string
    if (ADDR6_LOCAL == addr.to_string()) {
@@ -125,7 +125,7 @@ bool test_ip_addr_string_constructor_v6() {
    return false;
 }
 
-bool test_valid_ip_prefix_v4() {
+static bool test_valid_ip_prefix_v4() {
    eos::ip_prefix_t prefix;
    if ((eos::parse_ip_prefix("127.0.0.0/8", &prefix)) &&
        (eos::parse_ip_prefix("203.147.0.0/16", &prefix)) &&
@@ -140,7 +140,7 @@ bool test_valid_ip_prefix_v4() {
    return false;
 }
 
-bool test_invalid_ip_prefix_v4() {
+static bool test_invalid_ip_prefix_v4() {
    eos::ip_prefix_t prefix;
    eos::parse_ip_prefix("127.0.0.0/33", &prefix);
    if ((!eos::parse_ip_prefix("127.0.0.0/33", &prefix)) &&
@@ -156,7 +156,7 @@ bool test_invalid_ip_prefix_v4() {
    return false;
 }
 
-bool test_ip_addr_t_compare_construction_methods() {
+static bool test_ip_addr_t_compare_construction_methods() {
    uint8_t a1[4] = { 1, 0, 0, 127 };  // network word order
    auto ipv4_addr1 = eos::ip_addr_t(eos::AF_IPV4, a1);
    auto ipv4_addr2 = eos::ip_addr_t("127.0.0.1");
@@ -178,7 +178,7 @@ bool test_ip_addr_t_compare_construction_methods() {
    return false;
 }
 
-bool test_ip_prefix_to_string_v4() {
+static bool test_ip_prefix_to_string_v4() {
    eos::ip_addr_t addr = eos::ip_addr_t("192.0.2.0");
    eos::ip_prefix_t prefix = eos::ip_prefix_t(addr, 24);
    // Convert the prefix value back to a string and check it's what we expect
