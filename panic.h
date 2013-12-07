@@ -9,8 +9,8 @@
 
 namespace eos {
 
-void panic( char const * fmt, ... ) __attribute__((noreturn)); //= hide
-void vpanic( char const * fmt, va_list ap ) __attribute__((noreturn)); //= hide
+void panic(char const * fmt, ...) __attribute__((noreturn)); //= hide
+void vpanic(char const * fmt, va_list ap) __attribute__((noreturn)); //= hide
 typedef void (*panic_handler_t)(char const *);
 void panic_handler_is(panic_handler_t) EOS_SDK_PUBLIC;
 

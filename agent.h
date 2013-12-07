@@ -9,7 +9,7 @@
 namespace eos {
 
 void EOS_SDK_PUBLIC
-agent_main_loop(const char *agent_name, int argc, char ** argv);
+agent_main_loop(const char * agent_name, int argc, char ** argv);
 
 };
 

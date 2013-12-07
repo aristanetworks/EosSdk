@@ -15,7 +15,7 @@ static const int INTF_NAME_MAX = 64;
 enum oper_status_t {
    INTF_OPER_NULL,
    INTF_OPER_UP,
-   INTF_OPER_DOWN
+   INTF_OPER_DOWN,
 };
 
 enum intf_type_t {
@@ -42,15 +42,14 @@ class EOS_SDK_PUBLIC intf_id_t {
    explicit intf_id_t(uint32_t);
    // Constructor based on an interface name, i.e. 'Ethernet3/1', or 'Management1'
    explicit intf_id_t(char const * name);
-   explicit intf_id_t(const std::string & name);
+   explicit intf_id_t(std::string const & name);
 
    bool is_null0() const;
    intf_type_t intf_type() const;
 
-   bool operator !() const;
-
    std::string to_string() const;
 
+   bool operator!() const;
    bool operator==(intf_id_t const & other);
    bool operator!=(intf_id_t const & other);
 
@@ -69,8 +68,8 @@ class EOS_SDK_PUBLIC intf_handler {
    // Registers this class to receive updates on changes to the
    // interface. Expects a boolean signifying whether notifications
    // should be propagated to this instance or not.
-   void watch_all_intfs( bool );
-   // void watch_intf( intf_id_t, bool ); //= hide
+   void watch_all_intfs(bool);
+   // void watch_intf(intf_id_t, bool); //= hide
 
    // Called after this instance has been internally inialized and is
    // ready to start receiving notifications.
@@ -87,6 +86,7 @@ class EOS_SDK_PUBLIC intf_handler {
  private:
    bool watching_all_intfs_;
 };
+
 
 /* This class inspects and configures base interface attribtues */
 class EOS_SDK_PUBLIC intf_mgr {

@@ -56,8 +56,8 @@ class EOS_SDK_PUBLIC eth_intf_handler {
    // Registers this class to receive updates on changes to the
    // interface. Expects a boolean signifying whether notifications
    // should be propagated to this instance or not.
-   void watch_all_intfs( bool );
-   // void watch_intf( intf_id_t, bool ); //= hide
+   void watch_all_intfs(bool);
+   // void watch_intf(intf_id_t, bool); //= hide
 
    // Called after this handler instance has been internally initialized
    // and is ready to start receiving notifications.

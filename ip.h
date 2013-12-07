@@ -33,7 +33,7 @@ class EOS_SDK_PUBLIC ip_addr_t {
    explicit ip_addr_t(struct in_addr const &);
    explicit ip_addr_t(struct in6_addr const &);
    explicit ip_addr_t(char const * name); // converts from IPv4/v6 string
-   explicit ip_addr_t(const std::string & name); // converts from IPv4/v6 string
+   explicit ip_addr_t(std::string const & name); // converts from IPv4/v6 string
    explicit ip_addr_t(uint32_be_t addr_v4);
    //= hidden
    // Conversion constructors for Arnet types
@@ -41,7 +41,7 @@ class EOS_SDK_PUBLIC ip_addr_t {
    explicit ip_addr_t(Arnet::Ip6Addr const &);
    //= end_hidden
 
-   bool operator==(ip_addr_t const &other) const;
+   bool operator==(ip_addr_t const & other) const;
 
    af_t af() const;
    uint8_t const * addr() const;
