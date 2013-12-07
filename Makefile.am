@@ -20,13 +20,13 @@ bin_SCRIPTS = eossdkpublish
 
 PUBLISHED_HEADER_FILES = eos/agent.h
 PUBLISHED_HEADER_FILES += eos/base.h
-PUBLISHED_HEADER_FILES += eos/panic.h
-PUBLISHED_HEADER_FILES += eos/timer.h
-PUBLISHED_HEADER_FILES += eos/fd.h
-PUBLISHED_HEADER_FILES += eos/intf.h
 PUBLISHED_HEADER_FILES += eos/eth.h
 PUBLISHED_HEADER_FILES += eos/eth_intf.h
+PUBLISHED_HEADER_FILES += eos/fd.h
+PUBLISHED_HEADER_FILES += eos/intf.h
 PUBLISHED_HEADER_FILES += eos/ip.h
+PUBLISHED_HEADER_FILES += eos/panic.h
+PUBLISHED_HEADER_FILES += eos/timer.h
 PUBLISHED_HEADER_FILES += eos/version.h
 
 eosheaderdir = $(includedir)/eos
@@ -41,15 +41,22 @@ eos/%.h: $(srcdir)/%.h $(srcdir)/eossdkpublish
 pkginclude_HEADERS = Conversions.h Mount.h
 
 libeos_la_SOURCES =
+libeos_la_SOURCES += agent.cpp
+libeos_la_SOURCES += base.h
+libeos_la_SOURCES += Conversions.h
 libeos_la_SOURCES += EosSdkAgent.tac EosSdkAgent.tin
-libeos_la_SOURCES += base.h agent.cpp Mount.h Mount.cpp
-libeos_la_SOURCES += panic.h panic.cpp
-libeos_la_SOURCES += TimerSm.tac timer.h timer.cpp
-libeos_la_SOURCES += FileSm.tac fd.h fd.cpp
-libeos_la_SOURCES += Conversions.h IntfMgrSm.tac intf.h intf.cpp
-libeos_la_SOURCES += ip.h ip.cpp
 libeos_la_SOURCES += eth.h eth.cpp
-libeos_la_SOURCES += EthIntfMgrSm.tac eth_intf.h eth_intf.cpp
+libeos_la_SOURCES += eth_intf.h eth_intf.cpp
+libeos_la_SOURCES += EthIntfMgrSm.tac
+libeos_la_SOURCES += fd.h fd.cpp
+libeos_la_SOURCES += FileSm.tac
+libeos_la_SOURCES += intf.h intf.cpp
+libeos_la_SOURCES += IntfMgrSm.tac
+libeos_la_SOURCES += ip.h ip.cpp
+libeos_la_SOURCES += Mount.h Mount.cpp
+libeos_la_SOURCES += panic.h panic.cpp
+libeos_la_SOURCES += timer.h timer.cpp
+libeos_la_SOURCES += TimerSm.tac
 libeos_la_SOURCES += version.h version.cpp
 
 libeos_la_LIBADD = -lAgentBase -lSysdbEntityMgr -ltac -ldl
@@ -87,12 +94,12 @@ python_PYTHON = EosSdkTestLib.py
 
 sanityTests = 
 TESTS = $(sanityTests)
-TESTS += ${builddir}/IntfIdTest
-TESTS += ${builddir}/EthAddrTest
-TESTS += ${builddir}/IpAddrTest
-TESTS += test/IntfTest.py
-TESTS += test/EthIntfTest.py
+TESTS += EthAddrTest
 TESTS += examples/EchoBotTest.py
+TESTS += IntfIdTest
+TESTS += IpAddrTest
+TESTS += test/EthIntfTest.py
+TESTS += test/IntfTest.py
 sanity:
 	make TESTS="$(sanityTests)" check
 
@@ -105,7 +112,6 @@ check-TESTS: check.ark
 
 install-exec-hook:
 	[ -n "$(DESTDIR)" ] || a4 post EosSdk.spec
-	mkdir -p $(DESTDIR)$(bindir)
 
 SUFFIXES = .tac
 TACC := tacc
