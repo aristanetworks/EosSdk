@@ -12,7 +12,19 @@ eth_addr_t::eth_addr_t() : ethAddr_(0, 0, 0) {
 eth_addr_t::eth_addr_t(char const * addr) {
    try {
       Tac::Expect exception(Tac::Exception::rangeException_);
-      ethAddr_.stringValueIs( addr );
+      ethAddr_.stringValueIs(addr);
+   } catch(Tac::RangeException e) {
+      panic("Invalid MAC address");
+   }
+}
+
+eth_addr_t::eth_addr_t(const std::string & addr) {
+   // TODO: Remove this code duplication by using a delegating constructor.
+   // Apparently our >3 year old version of g++ (4.5.1 now) doesn't parse
+   // those, we need at least 4.7.
+   try {
+      Tac::Expect exception(Tac::Exception::rangeException_);
+      ethAddr_.stringValueIs(addr);
    } catch(Tac::RangeException e) {
       panic("Invalid MAC address");
    }

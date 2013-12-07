@@ -67,6 +67,18 @@ intf_id_t::intf_id_t(char const * intfname) {
    }
 }
 
+intf_id_t::intf_id_t(const std::string & intfname) {
+   // TODO: Remove this code duplication by using a delegating constructor.
+   // Apparently our >3 year old version of g++ (4.5.1 now) doesn't parse
+   // those, we need at least 4.7.
+   try {
+      Tac::Expect exception(Tac::Exception::rangeException_);
+      intfId_ = Arnet::IntfId(intfname).intfId();
+   } catch(Tac::RangeException e) {
+      panic("Invalid interface name");
+   }
+}
+
 bool
 intf_id_t::is_null0() const {
    static uint32_t null0_intf_id = Arnet::IntfId("Null0").intfId();

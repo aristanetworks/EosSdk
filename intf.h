@@ -41,7 +41,8 @@ class EOS_SDK_PUBLIC intf_id_t {
    // Constructor based on internal id representation
    explicit intf_id_t(uint32_t);
    // Constructor based on an interface name, i.e. 'Ethernet3/1', or 'Management1'
-   explicit intf_id_t(char const *name);
+   explicit intf_id_t(char const * name);
+   explicit intf_id_t(const std::string & name);
 
    bool is_null0() const;
    intf_type_t intf_type() const;

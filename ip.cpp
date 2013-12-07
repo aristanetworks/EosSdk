@@ -34,6 +34,15 @@ ip_addr_t::ip_addr_t(const char *address_string) {
    }
 }
 
+ip_addr_t::ip_addr_t(const std::string& address) {
+   // TODO: Remove this code duplication by using a delegating constructor.
+   // Apparently our >3 year old version of g++ (4.5.1 now) doesn't parse
+   // those, we need at least 4.7.
+   if (!parse_ip_addr(address.c_str(), this)) {
+      panic("invalid IP address");
+   }
+}
+
 // Take an address family and an array of 4 (v4) or 16 (v6) uint8_t's.
 // Representation compatible to Linux's sockaddr_in6.sin6_addr (i.e.,
 // __be8[16]).

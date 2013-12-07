@@ -18,7 +18,8 @@ class EOS_SDK_PUBLIC eth_addr_t {
    eth_addr_t();
    // Construct an address from one of three string forms:
    // xx:xx:xx:xx:xx:xx, xx-xx-xx-xx-xx-xx, or xxxx.xxxx.xxxx
-   explicit eth_addr_t(char const *name);
+   explicit eth_addr_t(char const * addr);
+   explicit eth_addr_t(const std::string & addr);
    eth_addr_t(const Arnet::EthAddr &); //= eos_internal
 
    std::string to_string() const;
