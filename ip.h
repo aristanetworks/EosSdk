@@ -68,7 +68,7 @@ class EOS_SDK_PUBLIC ip_prefix_t {
    ip_prefix_t(char const *);  // Converts IPv4/IPv6 prefix string
 
    af_t af() const;
-   void const * network();
+   uint8_t const * network() const;
    uint32_t network_v4() const;
    int prefix_length() const;
 

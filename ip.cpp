@@ -151,6 +151,11 @@ ip_addr_mask_t::addr() const {
    return addr_.addr();
 }
 
+uint8_t const *
+ip_prefix_t::network() const {
+   return addr_.addr();
+}
+
 // The IPv4 address as a word in network byte order
 uint32_be_t
 ip_addr_t::addr_v4() const {
@@ -162,7 +167,6 @@ ip_addr_t::addr_v4() const {
 
 uint32_t
 ip_addr_mask_t::addr_v4() const {
-
    return addr_.addr_v4();
 }
 
