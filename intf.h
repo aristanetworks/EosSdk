@@ -36,10 +36,9 @@ enum intf_type_t {
 /* Unique identifier for an interface. */
 class EOS_SDK_PUBLIC intf_id_t {
  public:
-   // Default constructor
-   intf_id_t();
-   // Constructor based on internal id representation
-   explicit intf_id_t(uint32_t);
+   intf_id_t();  // Default constructor
+   // Copy constructor and assignment operator implicitly declared.
+
    // Constructor based on an interface name, i.e. 'Ethernet3/1', or 'Management1'
    explicit intf_id_t(char const * name);
    explicit intf_id_t(std::string const & name);
@@ -49,6 +48,8 @@ class EOS_SDK_PUBLIC intf_id_t {
 
    std::string to_string() const;
 
+   // Only the "default interface" provided by the default constructor
+   // evaluates to false.
    bool operator!() const;
    bool operator==(intf_id_t const & other) const;
    bool operator!=(intf_id_t const & other) const;
@@ -56,6 +57,9 @@ class EOS_SDK_PUBLIC intf_id_t {
  private:
    friend struct IntfIdHelper;
    uint32_t intfId_;
+ public:  // Not part of the public API.
+   // Constructor based on internal id representation
+   explicit intf_id_t(uint32_t) EOS_SDK_INTERNAL;
 };
 
 

@@ -74,5 +74,13 @@ int main() {
    assert(eos::intf_id_t("Null0").intf_type() == eos::INTF_TYPE_NULL0);
    assert(eos::intf_id_t("Vxlan2").intf_type() == eos::INTF_TYPE_OTHER);
 
+   // Test copy constructor.
+   eos::intf_id_t intf3(intf2);
+   assert(intf2 == intf3);
+   // Test assignment operator.
+   intf3 = intf1;
+   assert(intf2 != intf3);
+   assert(intf1 == intf3);
+
    printf( "PASS\n" );
 }
