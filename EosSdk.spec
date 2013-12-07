@@ -7,22 +7,22 @@ License: Arista Networks
 Group: dev/Arista Networks
 BuildRoot: %{_tmppath}/%{name}-root
 Url: http://www.AristaNetworks.com
-Requires: libtac
 Requires: Agent
 Requires: Ark
 Requires: Arnet
 Requires: EthIntf
 Requires: Intf
-Requires: Lag
 Requires: Ira
-BuildRequires: tacc
+Requires: Lag
+Requires: libtac
 BuildRequires: Agent-devel
 BuildRequires: Ark-devel
 BuildRequires: Arnet-devel
 BuildRequires: EthIntf-devel
 BuildRequires: Intf-devel
-BuildRequires: Lag-devel
 BuildRequires: Ira-devel
+BuildRequires: Lag-devel
+BuildRequires: tacc
 
 # NOTE: Please do NOT put the names of macros into any comments in this
 #       file, or you will find yourself wading through very baffling RPM
