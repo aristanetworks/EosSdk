@@ -4,6 +4,8 @@
 #ifndef EOS_IP_H
 #define EOS_IP_H
 
+#include <netinet/in.h>
+
 #include <string>
 #include <eos/base.h>
 
@@ -14,8 +16,6 @@
 #include <Arnet/Arnet.h>
 #include <Arnet/IpAddr.h>
 //= end_hidden
-
-#include <eos/base.h>
 
 namespace eos {
 
@@ -36,11 +36,6 @@ class EOS_SDK_PUBLIC ip_addr_t {
    explicit ip_addr_t(char const * name); // converts from IPv4/v6 string
    explicit ip_addr_t(std::string const & name); // converts from IPv4/v6 string
    explicit ip_addr_t(uint32_be_t addr_v4);
-   //= hidden
-   // Conversion constructors for Arnet types
-   explicit ip_addr_t(Arnet::IpAddr const &);
-   explicit ip_addr_t(Arnet::Ip6Addr const &);
-   //= end_hidden
 
    bool operator==(ip_addr_t const & other) const;
    bool operator!=(ip_addr_t const & other) const;

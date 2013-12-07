@@ -8,9 +8,11 @@
 
 #include <eos/ip.h>
 
+#include "Conversions.h"
+
 // address constants
 static char const ADDR1234[] = "1.2.3.4";
-static unsigned int const ADDR1234_DEC = 16909060;
+static uint32_t const ADDR1234_DEC = 16909060;
 static char const ADDR6_LOCAL[] = "::1";
 static char const ADDR4_LOCAL[] = "127.0.0.1";
 
@@ -183,6 +185,22 @@ bool test_ip_prefix_to_string_v4() {
    return prefix.to_string() == "192.0.2.0/24";
 }
 
+static bool test_conversion_v4() {
+   Arnet::IpAddr ip1234(ADDR1234_DEC);
+   eos::ip_addr_t ip = eos::convert(ip1234);
+   return ip.to_string() == ADDR1234;
+}
+
+static bool test_conversion_v6() {
+   Arnet::Ip6Addr ip6;
+   ip6.u16Is(0, 0x2001);
+   ip6.u16Is(1, 0x0550);
+   ip6.u16Is(2, 0x0401);
+   ip6.u16Is(7, 0x1234);
+   eos::ip_addr_t ip = eos::convert(ip6);
+   return ip.to_string() == "2001:550:401::1234";
+}
+
 
 int main() {
    printf("Starting IpAddrTest\n");
@@ -195,6 +213,8 @@ int main() {
        test_valid_ip_prefix_v4() &&
        test_invalid_ip_prefix_v4() &&
        test_ip_prefix_to_string_v4() &&
+       test_conversion_v4() &&
+       test_conversion_v6() &&
        test_ip_addr_string_constructor_v4() &&
        test_ip_addr_string_constructor_v6() &&
        test_ip_addr_t_compare_construction_methods()) {

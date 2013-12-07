@@ -76,19 +76,6 @@ ip_addr_t::ip_addr_t(uint32_be_t addr_v4) {
    addr_.words[0] = addr_v4;
 }
 
-// Hidden consturctors for conversions from TACC types
-ip_addr_t::ip_addr_t(Arnet::IpAddr const &other) {
-   af_ = AF_IPV4;
-   addr_.words[0] = other.valueNbo();
-}
-
-ip_addr_t::ip_addr_t(Arnet::Ip6Addr const &other) {
-   for (int i=0; i < 16; i++) {
-      addr_.bytes[i] = uint32_t(other.u8(i));
-   }
-   af_ = AF_IPV6;
-}
-
 // ip_prefix_t constructors
 
 ip_prefix_t::ip_prefix_t() {
