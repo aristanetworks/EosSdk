@@ -12,6 +12,33 @@ AC_PROG_CXX
 
 AM_PATH_PYTHON
 
+m4_define([VERSION_MAJOR],
+          [m4_bregexp(_VERSION_, [^\([0-9]+\)], [\1])])dnl
+AC_DEFINE([SDK_VERSION_MAJOR], [VERSION_MAJOR],
+          [Major version number of the EOS SDK])
+m4_define([VERSION_MINOR],
+          [m4_bregexp(_VERSION_, [^[0-9]+[-._]\([0-9]+\)], [\1])])dnl
+AC_DEFINE([SDK_VERSION_MINOR], [VERSION_MINOR],
+          [Minor version number of the EOS SDK])
+m4_define([VERSION_PATCH],
+          [m4_bregexp(_VERSION_, [^[0-9]+[-._][0-9]+[-._]\([0-9]+\)], [\1])])dnl
+AC_DEFINE([[SDK_VERSION_PATCH]], [VERSION_PATCH],
+          [Patch version number of the EOS SDK])
+AC_SUBST([SDK_LIBTOOL_VERSION],
+         [m4_eval(VERSION_MAJOR + VERSION_MINOR):VERSION_PATCH:VERSION_MINOR])dnl
+
+AC_DEFINE_UNQUOTED([SDK_BUILD_TIMESTAMP], [`date +%s`UL],
+                   [UNIX timestamp at which the EOS SDK was built])
+AC_DEFINE_UNQUOTED([SDK_BUILD_PROJECT], ["${WP-unknown}"],
+                   [Arista project from which the EOS SDK was built])
+AC_DEFINE_UNQUOTED([SDK_BUILD_PROJECT_CL],
+                   [`cat /eng/project/$WP/syncpoint 2>/dev/null || echo 0`UL],
+                   [Change list number from which the EOS SDK was built])
+AC_DEFINE_UNQUOTED([SDK_BUILD_USER], ["${USER-unknown}"],
+                   [User that built the EOS SDK])
+AC_DEFINE_UNQUOTED([SDK_BUILD_PATH], ["`pwd -P`"],
+                   [Path from which the EOS SDK was built])
+
 rm -rf src-includes generated-includes
 mkdir src-includes generated-includes
 ln -s $(cd ${srcdir}; /bin/pwd) src-includes/EosSdk

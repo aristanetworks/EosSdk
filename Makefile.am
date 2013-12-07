@@ -61,6 +61,7 @@ libeos_la_SOURCES += version.h version.cpp
 
 libeos_la_LIBADD = -lAgentBase -lSysdbEntityMgr -ltac -ldl
 libeos_la_LIBADD += -lIntf -lArnet -lArk -lEthIntf
+libeos_la_LDFLAGS = -version-info $(SDK_LIBTOOL_VERSION)
 
 IntfIdTest_SOURCES = test/IntfIdTest.cpp
 IntfIdTest_LDADD = libeos.la
