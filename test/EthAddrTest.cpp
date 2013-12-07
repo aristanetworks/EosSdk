@@ -23,6 +23,10 @@ int main() {
    const char *addr2_str = "ff:ff:ff:ff:ff:ff";
    eos::eth_addr_t addr2(addr2_str);
 
+   assert(addr1.word0() == 0x0011);
+   assert(addr1.word1() == 0x2233);
+   assert(addr1.word2() == 0x4455);
+
    printf( "Checking to_string\n" );
    assert(addr1_str == addr1.to_string());
 
@@ -58,6 +62,13 @@ int main() {
       assert(err==1);
    }
 
+   // Test assignment operator.
+   assert(addr1 != addr2);
+   addr2 = addr1;
+   assert(addr1 == addr2);
+   // Test copy constructor.
+   eos::eth_addr_t addr3(addr2);
+   assert(addr2 == addr3);
 
    printf( "PASS\n" );
 }

@@ -8,30 +8,41 @@
 #include <stddef.h>
 #include <eos/base.h>
 
-#include <Arnet/EthAddr.h> //= eos_internal
-
 namespace eos {
 
 class EOS_SDK_PUBLIC eth_addr_t {
  public:
-   // Default constructor
-   eth_addr_t();
+   eth_addr_t();  // Default constructor
+   // Copy constructor and assignment operator implicitly declared.
+
    // Construct an address from one of three string forms:
    // xx:xx:xx:xx:xx:xx, xx-xx-xx-xx-xx-xx, or xxxx.xxxx.xxxx
    explicit eth_addr_t(char const * addr);
    explicit eth_addr_t(std::string const & addr);
-   eth_addr_t(const Arnet::EthAddr &); //= eos_internal
+   // Construct an address from the 3 words that make it up.
+   eth_addr_t(uint16_t word0, uint16_t word1, uint16_t word2);
 
    std::string to_string() const;
 
+   // Only the default MAC address (all zeros) evaluates to false.
    bool operator!() const;
    bool operator==(eth_addr_t const & other) const;
    bool operator!=(eth_addr_t const & other) const;
-   Arnet::EthAddr ethAddr_; //= hide
 
- //=> private:
-   //=> uint32_t words_[3];
+   uint16_t word0() const {
+      return words_[0];
+   }
 
+   uint16_t word1() const {
+      return words_[1];
+   }
+
+   uint16_t word2() const {
+      return words_[2];
+   }
+
+ private:
+   uint16_t words_[3];
 };
 
 };

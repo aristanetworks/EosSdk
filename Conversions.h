@@ -12,9 +12,11 @@
  * tacc types.
  */
 
+#include <eos/eth.h>
 #include <eos/intf.h>
 #include <eos/ip.h>
 
+#include <Arnet/EthAddr.h>
 #include <Arnet/IntfId.h>
 #include <Arnet/Ip6Addr.h>
 #include <Arnet/IpAddr.h>
@@ -49,6 +51,18 @@ static inline ip_addr_t convert(Arnet::Ip6Addr const & other) {
       other.u8(12), other.u8(13), other.u8(14), other.u8(15)
    }}};
    return ip_addr_t(ip6);
+}
+
+static inline Arnet::EthAddr convert(eth_addr_t mac) {
+   Arnet::EthAddr addr;
+   addr.word0Is(mac.word0());
+   addr.word1Is(mac.word1());
+   addr.word2Is(mac.word2());
+   return addr;
+}
+
+static inline eth_addr_t convert(Arnet::EthAddr mac) {
+   return eth_addr_t(mac.word0(), mac.word1(), mac.word2());
 }
 
 };
