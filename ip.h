@@ -42,6 +42,7 @@ class EOS_SDK_PUBLIC ip_addr_t {
    //= end_hidden
 
    bool operator==(ip_addr_t const & other) const;
+   bool operator!=(ip_addr_t const & other) const;
 
    af_t af() const;
    uint8_t const * addr() const;

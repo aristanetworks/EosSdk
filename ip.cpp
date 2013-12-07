@@ -126,11 +126,16 @@ ip_addr_mask_t::ip_addr_mask_t(ip_addr_t const &address, int mask_length) {
 // Operators
 
 bool
-ip_addr_t::operator==(ip_addr_t const &other) const {
+ip_addr_t::operator==(ip_addr_t const & other) const {
    if (af_ != other.af_) {
       return false;
    }
    return memcmp(addr_.bytes, other.addr_.bytes, sizeof(addr_)) == 0;
+}
+
+bool
+ip_addr_t::operator!=(ip_addr_t const & other) const {
+   return !(*this == other);
 }
 
 // Accessors
