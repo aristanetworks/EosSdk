@@ -146,10 +146,10 @@ eth_intf_mgr::eth_addr(intf_id_t intf_id) const {
    const EthIntfMgrImpl * impl = getEthIntfMgrImpl(this);
    Interface::EthIntfStatus::PtrConst intfStatus =
       impl->ethIntfStatusDir_->intfStatus(convert(intf_id));
-   if( !intfStatus ) {
+   if(!intfStatus) {
       panic( "Intf does not exist" );
    }
-   return eth_addr_t(intfStatus->addr());
+   return convert(intfStatus->addr());
 }
 
 void
@@ -160,7 +160,7 @@ eth_intf_mgr::eth_addr_is(intf_id_t intf_id, eth_addr_t addr) {
    if( !intfConfig ) {
       panic( "Intf does not exist" );
    }
-   intfConfig->addrIs( addr.ethAddr_ );
+   intfConfig->addrIs(convert(addr));
 }
 
 eth_intf_mgr *
@@ -212,8 +212,8 @@ EthIntfStatusSm::handleAddr() {
    TRACE8( __PRETTY_FUNCTION__ );
    EthIntfMgrImpl * impl = getEthIntfMgrImpl( eos::get_eth_intf_mgr() );
 
-   intf_id_t intf_id = intf_id_t( (uint32_t)intfId().intfId() );
-   impl->on_eth_addr( intf_id, intfStatus()->addr() );
+   intf_id_t intf_id = convert(intfId());
+   impl->on_eth_addr(intf_id, convert(intfStatus()->addr()));
 }
 
 //
