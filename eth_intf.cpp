@@ -233,7 +233,7 @@ EthIntfMgrSm::handleIntfStatus( Arnet::IntfId intfId ) {
    TRACE8( __PRETTY_FUNCTION__ );
    EthIntfMgrImpl * impl = getEthIntfMgrImpl( eos::get_eth_intf_mgr() );
    intf_id_t intf_id = intf_id_t( (uint32_t)intfId.intfId() );
-   Interface::EthIntfStatus::PtrConst intfStatus = \
+   Interface::EthIntfStatus::PtrConst intfStatus =
       ethIntfStatusDir()->intfStatus( intfId );
    if( intfStatus ) {
       ethIntfStatusSmIs( intfStatus );

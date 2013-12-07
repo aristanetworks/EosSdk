@@ -397,7 +397,7 @@ IntfMgrSm::handleIntfConfig() {
 void
 IntfMgrSm::handleIntfConfig( Arnet::IntfId intfId ) {
    TRACE8( __PRETTY_FUNCTION__ );
-   Interface::IntfConfig::PtrConst intfConfig = \
+   Interface::IntfConfig::PtrConst intfConfig =
       allIntfConfigDir()->intfConfig( intfId );
    if( intfConfig ) {
       intfConfigSmIs( intfConfig );
@@ -419,7 +419,7 @@ IntfMgrSm::handleIntfStatus( Arnet::IntfId intfId ) {
    TRACE8( __PRETTY_FUNCTION__ );
    IntfMgrImpl * impl = getIntfMgrImpl( eos::get_intf_mgr() );
    intf_id_t intf_id = intf_id_t( (uint32_t)intfId.intfId() );
-   Interface::IntfStatus::PtrConst intfStatus = \
+   Interface::IntfStatus::PtrConst intfStatus =
       allIntfStatusDir()->intfStatus( intfId );
    if( intfStatus ) {
       intfStatusSmIs( intfStatus );
