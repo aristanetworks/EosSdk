@@ -18,11 +18,11 @@
 
 namespace eos {
 
-typedef enum {
+enum af_t {
    AF_NULL = 0,
    AF_IPV4 = 4,
    AF_IPV6 = 6,
-} af_t;
+};
 
 // An IP address type that supports IPv4 and IPv6
 //

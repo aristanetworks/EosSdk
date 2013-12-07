@@ -12,13 +12,13 @@ namespace eos {
 
 static const int INTF_NAME_MAX = 64;
 
-typedef enum oper_status_e {
+enum oper_status_t {
    INTF_OPER_NULL,
    INTF_OPER_UP,
    INTF_OPER_DOWN
-} oper_status_t;
+};
 
-typedef enum intf_type_e {
+enum intf_type_t {
    INTF_TYPE_NULL,
    INTF_TYPE_OTHER,
    INTF_TYPE_ETH,
@@ -30,7 +30,7 @@ typedef enum intf_type_e {
    // Don't expose these types until we are ready. //= hide
    // INTF_TYPE_MLAG, //= hide
    // INTF_TYPE_VXLAN, //= hide
-} intf_type_t;
+};
 
 
 /* Unique identifier for an interface. */

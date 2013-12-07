@@ -16,7 +16,7 @@ namespace eos {
 //= hidden
 // Not needed at this point
 
-typedef enum eth_link_mode_e {
+enum eth_link_mode_t {
    LINK_MODE_UNKNOWN,
    LINK_MODE_AUTONEG,
    LINK_MODE_AUTO40GBPS_FULL,
@@ -30,21 +30,21 @@ typedef enum eth_link_mode_e {
    LINK_MODE_FORCED_10GBPS_FULL,
    LINK_MODE_FORCED_40GBPS_FULL,
    LINK_MODE_FORCED_100GBPS_FULL,
-} eth_link_mode_t;
+};
 
 // Loopback mode of the eth phy interface
-typedef enum eth_loopback_mode_e {
+enum eth_loopback_mode_t {
    LOOPBACK_NONE,
    LOOPBACK_MAC,
    LOOPBACK_PHY,
-} eth_loopback_mode_t;
+};
 
 // Add timestamp information in packets going out of this intf.
-typedef enum eth_timestamp_mode_e {
+enum eth_timestamp_mode_t {
    TIMESTAMP_MODE_DISABLED,
    TIMESTAMP_MODE_BEFORE_FCS,  // insert timestamp before FCS field
    TIMESTAMP_MODE_REPLACE_FCS, // replace FCS with timestamp field
-} eth_timestamp_mode_t;
+};
 
 //= end_hidden
 
