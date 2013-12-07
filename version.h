@@ -10,7 +10,7 @@ namespace eos {
 
 // Version string, at least of the form "X.Y.Z", but possibly followed by a
 // dash and more characters (e.g. "X.Y.Z-rc1").
-extern const char * const version EOS_SDK_PUBLIC;
+extern const char * const version;
 
 }
 
