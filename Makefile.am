@@ -9,12 +9,13 @@ AM_LDFLAGS = -Wl,--no-undefined
 
 lib_LTLIBRARIES = libeos.la
 bin_PROGRAMS =
-bin_PROGRAMS += IntfTestAgent
-bin_PROGRAMS += IpAddrTest
-bin_PROGRAMS += EthIntfTestAgent
 bin_PROGRAMS += EchoBot
-bin_PROGRAMS += IntfIdTest
-bin_PROGRAMS += EthAddrTest
+noinst_PROGRAMS =
+noinst_PROGRAMS += EthAddrTest
+noinst_PROGRAMS += EthIntfTestAgent
+noinst_PROGRAMS += IntfIdTest
+noinst_PROGRAMS += IntfTestAgent
+noinst_PROGRAMS += IpAddrTest
 bin_SCRIPTS = eossdkpublish
 
 PUBLISHED_HEADER_FILES = eos/agent.h
