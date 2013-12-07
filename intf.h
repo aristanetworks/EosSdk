@@ -50,8 +50,8 @@ class EOS_SDK_PUBLIC intf_id_t {
    std::string to_string() const;
 
    bool operator!() const;
-   bool operator==(intf_id_t const & other);
-   bool operator!=(intf_id_t const & other);
+   bool operator==(intf_id_t const & other) const;
+   bool operator!=(intf_id_t const & other) const;
 
  private:
    friend struct IntfIdHelper;
@@ -100,13 +100,13 @@ class EOS_SDK_PUBLIC intf_mgr {
    void intf_foreach(bool (*handler)(intf_id_t, void *), void *,
                           intf_id_t bookmark);
    // Returns true if the intf_id_t has a corresponding status.
-   bool exists(intf_id_t);
+   bool exists(intf_id_t) const;
 
    // Attribute accessors
 //= hidden
    // NOT IMPLEMENTED:
    // Returns true if the given interface is configured to be enabled
-   bool admin_enabled(intf_id_t);
+   bool admin_enabled(intf_id_t) const;
    // Configure the enabled status of the interface
    void admin_enabled_is(intf_id_t, bool);
 //= end_hidden
@@ -114,7 +114,7 @@ class EOS_SDK_PUBLIC intf_mgr {
    // copy of the passed in string description.
    void description_is(intf_id_t, char const *);
    // Inspect the curren operational status of the given interface.
-   oper_status_t oper_status(intf_id_t);
+   oper_status_t oper_status(intf_id_t) const;
 
  //=> private:
    intf_mgr();

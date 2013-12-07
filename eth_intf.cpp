@@ -98,10 +98,17 @@ class EthIntfMgrImpl : public eth_intf_mgr,
 
 };
 
-EthIntfMgrImpl *
-getEthIntfMgrImpl(eth_intf_mgr *me) {
+static EthIntfMgrImpl *
+getEthIntfMgrImpl(eth_intf_mgr * me) {
    EthIntfMgrImpl * impl = static_cast<EthIntfMgrImpl *>(me);
-   assert( impl == get_eth_intf_mgr() );
+   assert(impl == get_eth_intf_mgr());
+   return impl;
+}
+
+static const EthIntfMgrImpl *
+getEthIntfMgrImpl(const eth_intf_mgr * me) {
+   const EthIntfMgrImpl * impl = static_cast<const EthIntfMgrImpl *>(me);
+   assert(impl == get_eth_intf_mgr());
    return impl;
 }
 
@@ -128,16 +135,16 @@ eth_intf_mgr::eth_intf_foreach(bool (*handler)(intf_id_t, void *), void *arg,
 }
 
 bool
-eth_intf_mgr::exists(intf_id_t id) {
+eth_intf_mgr::exists(intf_id_t id) const {
    /* returns true if intf_id_t has a corresponding status. */
-   EthIntfMgrImpl * impl = getEthIntfMgrImpl(this);
+   const EthIntfMgrImpl * impl = getEthIntfMgrImpl(this);
    return !!impl->ethIntfStatusDir_->intfStatus(convert(id));
 }
 
 eth_addr_t
-eth_intf_mgr::eth_addr(intf_id_t intf_id) {
-   EthIntfMgrImpl * impl = getEthIntfMgrImpl(this);
-   Interface::EthIntfStatus::PtrConst intfStatus = \
+eth_intf_mgr::eth_addr(intf_id_t intf_id) const {
+   const EthIntfMgrImpl * impl = getEthIntfMgrImpl(this);
+   Interface::EthIntfStatus::PtrConst intfStatus =
       impl->ethIntfStatusDir_->intfStatus(convert(intf_id));
    if( !intfStatus ) {
       panic( "Intf does not exist" );
@@ -148,7 +155,7 @@ eth_intf_mgr::eth_addr(intf_id_t intf_id) {
 void
 eth_intf_mgr::eth_addr_is(intf_id_t intf_id, eth_addr_t addr) {
    EthIntfMgrImpl * impl = getEthIntfMgrImpl(this);
-   Interface::EthIntfConfig::Ptr intfConfig = \
+   Interface::EthIntfConfig::Ptr intfConfig =
       impl->ethIntfConfigDir_->intfConfig(convert(intf_id));
    if( !intfConfig ) {
       panic( "Intf does not exist" );

@@ -25,8 +25,8 @@ class EOS_SDK_PUBLIC eth_addr_t {
    std::string to_string() const;
 
    bool operator!() const;
-   bool operator==(eth_addr_t const & other);
-   bool operator!=(eth_addr_t const & other);
+   bool operator==(eth_addr_t const & other) const;
+   bool operator!=(eth_addr_t const & other) const;
    Arnet::EthAddr ethAddr_; //= hide
 
  //=> private:

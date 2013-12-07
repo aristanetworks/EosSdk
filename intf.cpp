@@ -114,13 +114,13 @@ intf_id_t::operator !() const {
 }
 
 bool
-intf_id_t::operator==(intf_id_t const & other) {
-   return (intfId_ == other.intfId_);
+intf_id_t::operator==(intf_id_t const & other) const {
+   return intfId_ == other.intfId_;
 }
 
 bool
-intf_id_t::operator!=(intf_id_t const & other) {
-   return (intfId_ != other.intfId_);
+intf_id_t::operator!=(intf_id_t const & other) const {
+   return intfId_ != other.intfId_;
 }
 
 std::string
@@ -231,9 +231,16 @@ class IntfMgrImpl : public intf_mgr,
    std::list<intf_handler *> handlerList_;
 };
 
-IntfMgrImpl *
+static IntfMgrImpl *
 getIntfMgrImpl(intf_mgr *me) {
    IntfMgrImpl * impl = static_cast<IntfMgrImpl *>(me);
+   assert(impl == get_intf_mgr());
+   return impl;
+}
+
+static const IntfMgrImpl *
+getIntfMgrImpl(const intf_mgr *me) {
+   const IntfMgrImpl * impl = static_cast<const IntfMgrImpl *>(me);
    assert(impl == get_intf_mgr());
    return impl;
 }
@@ -265,9 +272,9 @@ intf_mgr::intf_foreach(bool (*handler)(intf_id_t, void *), void *arg,
 }
 
 bool
-intf_mgr::exists(intf_id_t id) {
+intf_mgr::exists(intf_id_t id) const {
    /* returns true if intf_id_t has a corresponding status. */
-   IntfMgrImpl * impl = getIntfMgrImpl(this);
+   const IntfMgrImpl * impl = getIntfMgrImpl(this);
    return !!impl->allIntfStatusDir_->intfStatus(convert(id));
 }
 
@@ -280,8 +287,8 @@ intf_mgr::description_is(intf_id_t id, char const * descr) {
 }
 
 oper_status_t
-intf_mgr::oper_status(intf_id_t id) {
-   IntfMgrImpl * impl = getIntfMgrImpl(this);
+intf_mgr::oper_status(intf_id_t id) const {
+   const IntfMgrImpl * impl = getIntfMgrImpl(this);
    Interface::IntfStatus::Ptr intfStatus =
       impl->allIntfStatusDir_->intfStatus(convert(id));
    if(!intfStatus) {

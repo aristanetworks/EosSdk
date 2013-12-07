@@ -79,11 +79,11 @@ class EOS_SDK_PUBLIC eth_intf_mgr {
    void eth_intf_foreach(bool (*handler)(intf_id_t, void *), void *);
    void eth_intf_foreach(bool (*handler)(intf_id_t, void *), void *,
                          intf_id_t bookmark);
-   bool exists(intf_id_t);
+   bool exists(intf_id_t) const;
 
    // Attribute accessors
    // Read the operational ethernet address of the interface
-   eth_addr_t eth_addr(intf_id_t);
+   eth_addr_t eth_addr(intf_id_t) const;
    // Configure the ethernet address of the interface
    void eth_addr_is(intf_id_t, eth_addr_t);
 

@@ -35,18 +35,18 @@ eth_addr_t::eth_addr_t(const Arnet::EthAddr & ethAddr) {
 }
 
 bool
-eth_addr_t::operator !() const {
+eth_addr_t::operator!() const {
    return !ethAddr_;
 }
 
 bool
-eth_addr_t::operator==(eth_addr_t const & other) {
-   return (ethAddr_ == other.ethAddr_);
+eth_addr_t::operator==(eth_addr_t const & other) const {
+   return ethAddr_ == other.ethAddr_;
 }
 
 bool
-eth_addr_t::operator!=(eth_addr_t const & other) {
-   return (ethAddr_ != other.ethAddr_);
+eth_addr_t::operator!=(eth_addr_t const & other) const {
+   return ethAddr_ != other.ethAddr_;
 }
 
 std::string
