@@ -7,44 +7,113 @@
 #include <string>
 #include <eos/base.h>
 
+#include <stddef.h>
+
+//= hidde
+#include <Arnet/Arnet.h>
+#include <Arnet/IpAddr.h>
+//= end_hidden
+
+#include <EosSdk/types.h>  //= eos_internal
+//=> #include <eos/types.h>
+
 namespace eos {
 
-typedef enum addr_family_e {
-   addr_family_null,
-   addr_family_ipv4,
-   addr_family_ipv6
-} addr_family_t;
+typedef enum {
+AF_NULL = 0,
+AF_IPV4 = 4,
+AF_IPV6 = 6
+} af_t;
 
-class ip_prefix_t {
- public:
+// An IP address type that supports IPv4 and IPv6
+//
+class ip_addr_t {
+public:
+ip_addr_t();
+ip_addr_t(af_t, uint8_t const * ip_addr);  // copied; in network byte order
+explicit ip_addr_t(struct in_addr const &);
+explicit ip_addr_t(struct in6_addr const &);
+explicit ip_addr_t(char const *); // converts from IPv4/v6 string
+explicit ip_addr_t(uint32_be_t addr_v4);
+//= hidden
+// Conversion constructors for Arnet types
+explicit ip_addr_t(Arnet::IpAddr const &);
+explicit ip_addr_t(Arnet::Ip6Addr const &);
+//= end_hidden
 
-   ip_prefix_t(addr_family_t, void const * address); // address gets copied.
-   ip_prefix_t(addr_family_t, void const * address, int prefix_length);
-   explicit ip_prefix_t(uint32_t); // IPv4 only, network byte order.
-   addr_family_t addr_family();
-   void const * address();
-   uint32_t addressV4();
-   std::string to_string() const;  // returns "10.2.3.4/24", "::1" or "::1/128", etc
-   void address_is(uint32_t); // also sets addr_family to IPv4.
-   void address_is(addr_family_t, void const *);
-   int prefix_length();
-   void prefix_length_is(int);
+bool operator==(ip_addr_t const &other) const;
 
- //=> private:
-   uint8_t bytes_[16];
-   uint8_t addr_family_;   // addr_family_t in one byte.
-   uint8_t prefix_length_;
+af_t af() const;
+uint8_t const * addr() const;
+uint32_be_t addr_v4() const;
+
+std::string to_string() const;
+
+//=> private:
+union {
+   uint8_t bytes[16];
+   uint32_t words[4];
+} addr_;
+uint8_t af_;   // af_t in one byte.
 };
 
-// An IP address is just an IP prefix whose prefix_length is 32 (128
-// for v6).
-typedef ip_prefix_t ip_addr_t;
+// A v4 or v6 IP route prefix of a network address and a prefix_length.
+// Network adresses have non-zero bits in only the first prefix_length
+// bits (in big/network endian)
+class ip_prefix_t {
+public:
+ip_prefix_t();
+ip_prefix_t(ip_addr_t const &, int);
+ip_prefix_t(char const *);  // Converts IPv4/IPv6 prefix string
+
+af_t af() const;
+void const * network();
+uint32_t network_v4() const;
+int prefix_length() const;
+
+std::string to_string() const;  // returns "10.2.3.4/24", "::1" or "::1/128", etc
+
+//=> private:
+ip_addr_t addr_;
+uint8_t prefix_length_;
+};
+
+// An IPv4 or IPv6 address with a full 32-bit mask, to allow for non-
+// contiguous subnet masks (e.g., for ACLs).
+class ip_addr_mask_t {
+public:
+ip_addr_mask_t();
+ip_addr_mask_t(ip_addr_t const &, int mask_length);
+
+af_t af() const;
+uint8_t const * addr() const;
+uint32_be_t addr_v4() const;
+int mask_length() const; // e.g., 24
+uint32_be_t mask() const; // e.g., 0xffffff00
+
+std::string to_string() const;
+
+//=> private:
+ip_addr_t addr_;
+uint8_t mask_length_;
+
+//= hidden
+// Private helper function used by EOS SDK users of ip.h
+Arnet::IpAddrWithFullMask getIpAddrWithFullMask() const;
+Arnet::Ip6AddrWithMask getIp6AddrWithMask() const;
+//= end_hidden
+};
 
 // e.g., "10.1.2.0/24" or "fffe::0001/96"
+// Note that "10.1.2.7/24" is not legal.
 bool parse_ip_prefix(char const *, ip_prefix_t * result);
 
-// same as above but without the prefix.
+// same as above but without the prefix length.
 bool parse_ip_addr(char const *, ip_addr_t * result);
+
+// same as above but "10.1.2.7/24" is legal.
+bool parse_ip_addr_mask(char const *, ip_addr_mask_t * result);
+
 
 };  // end namespace eos
 
