@@ -7,8 +7,8 @@
 #include <cstdint> // for uint8_t, uint16_t, uint32_t, uint64_t, etc.
 
 // Big endian (network byte order) hinted forms of uint16_t/uint32_t
-typedef unsigned short uint16_be_t;
-typedef unsigned int uint32_be_t;
+typedef uint16_t uint16_be_t;
+typedef uint32_t uint32_be_t;
 
 #if __GNUC__ < 4
 // We could easily support other compilers but we don't need it right now.
