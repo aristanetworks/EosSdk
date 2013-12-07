@@ -84,7 +84,6 @@ ip_addr_t::ip_addr_t(Arnet::IpAddr const &other) {
 }
 
 ip_addr_t::ip_addr_t(Arnet::Ip6Addr const &other) {
-   memset(&addr_, 0, sizeof(addr_));
    for (int i=0; i < 16; i++) {
       addr_.bytes[i] = uint32_t(other.u8(i));
    }
@@ -126,11 +125,11 @@ ip_addr_mask_t::ip_addr_mask_t(ip_addr_t const &address, int mask_length) {
 // Operators
 
 bool
-ip_addr_t::operator==(ip_addr_t const & other) const {
+ip_addr_t::operator==(ip_addr_t const &other) const {
    if (af_ != other.af_) {
       return false;
    }
-   return memcmp(addr_.bytes, other.addr_.bytes, sizeof(addr_)) == 0;
+   return memcmp(addr_.bytes, other.addr_.bytes, af_ == AF_IPV4 ? 4 : 16) == 0;
 }
 
 bool
@@ -254,19 +253,16 @@ parse_ip_prefix(char const *prefix, ip_prefix_t *result) {
 
       pfx = Arnet::IpGenPrefix(Tac::Name(prefix));
    } catch (...) {
-      TRACE9("exception");
       return false;
    }
+   // The prefix is valid, update the passed ip_prefix_t result
    switch (pfx.af()) {
     case Arnet::ipv4_:
-      TRACE9("v4 address");
       result->addr_ = ip_addr_t(pfx.v4Prefix().address().value());
       result->prefix_length_ = uint8_t(pfx.v4Prefix().len());
       break;
     case Arnet::ipv6_:
       uint8_t bytes[16];
-
-      TRACE9("v6 address");
       for (int i=0; i < 16; i++) {
          bytes[i] = uint8_t(pfx.v6Prefix().address().u8(i));
       }

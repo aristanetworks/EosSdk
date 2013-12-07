@@ -4,6 +4,7 @@
 #include <assert.h>
 #include <stdio.h>
 #include <string.h>
+#include <stdlib.h>
 
 #include <eos/ip.h>
 
@@ -153,12 +154,12 @@ bool test_invalid_ip_prefix_v4() {
    return false;
 }
 
-bool test_ip_addr_t_constructions() {
-   uint8_t a1[4] = { 127, 0, 0, 1 };
+bool test_ip_addr_t_compare_construction_methods() {
+   uint8_t a1[4] = { 1, 0, 0, 127 };  // network word order
    auto ipv4_addr1 = eos::ip_addr_t(eos::AF_IPV4, a1);
    auto ipv4_addr2 = eos::ip_addr_t("127.0.0.1");
 
-   uint8_t a2[16] = { 255, 255, 255, 255,
+   uint8_t a2[16] = { 255, 255, 0, 0,  // ffff::1
                       0, 0, 0, 0,
                       0, 0, 0, 0,
                       0, 0, 0, 1 };
@@ -167,10 +168,10 @@ bool test_ip_addr_t_constructions() {
 
    if (ipv4_addr1 == ipv4_addr2 &&
        ipv6_addr1 == ipv6_addr2) {
-      printf("OK: test_ip_addr_t_constructions\n");
+      printf("OK: test_ip_addr_t_compare_construction_methods\n");
       return true;
    } else {
-      printf("FAIL: test_ip_addr_t_constructions\n");
+      printf("FAIL: test_ip_addr_t_compare_construction_methods\n");
    }
    return false;
 }
@@ -178,24 +179,29 @@ bool test_ip_addr_t_constructions() {
 bool test_ip_prefix_to_string_v4() {
    eos::ip_addr_t addr = eos::ip_addr_t("192.0.2.0");
    eos::ip_prefix_t prefix = eos::ip_prefix_t(addr, 24);
-   // Convert the address value back to a string
-   return addr.to_string() == "192.0.2.0/24";
+   // Convert the prefix value back to a string and check it's what we expect
+   return prefix.to_string() == "192.0.2.0/24";
 }
 
 
 int main() {
    printf("Starting IpAddrTest\n");
-   assert(test_parse_ip_addr_v4());
-   assert(test_parse_ip_addr_v6());
-   assert(test_invalid_addr_v4());
-   assert(test_valid_addr_v4());
-   assert(test_invalid_addr_v6());
-   assert(test_valid_addr_v6());
-   assert(test_valid_ip_prefix_v4());
-   assert(test_invalid_ip_prefix_v4());
-   assert(test_ip_prefix_to_string_v4());
-   assert(test_ip_addr_string_constructor_v4());
-   assert(test_ip_addr_string_constructor_v6());
-   assert(test_ip_addr_t_constructions());
-   printf("PASS\n");
+   if (test_parse_ip_addr_v4() &&
+       test_parse_ip_addr_v6() &&
+       test_invalid_addr_v4() &&
+       test_valid_addr_v4() &&
+       test_invalid_addr_v6() &&
+       test_valid_addr_v6() &&
+       test_valid_ip_prefix_v4() &&
+       test_invalid_ip_prefix_v4() &&
+       test_ip_prefix_to_string_v4() &&
+       test_ip_addr_string_constructor_v4() &&
+       test_ip_addr_string_constructor_v6() &&
+       test_ip_addr_t_compare_construction_methods()) {
+      printf("PASS\n");
+   } else {
+      printf("FAIL\n");
+      // signal to test runner that we failed
+      exit(1);
+   }
 }

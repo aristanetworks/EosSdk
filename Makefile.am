@@ -89,6 +89,7 @@ sanityTests =
 TESTS = $(sanityTests)
 TESTS += ${builddir}/IntfIdTest
 TESTS += ${builddir}/EthAddrTest
+TESTS += ${builddir}/IpAddrTest
 TESTS += test/IntfTest.py
 TESTS += test/EthIntfTest.py
 TESTS += examples/EchoBotTest.py
