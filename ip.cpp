@@ -1,7 +1,6 @@
 // Copyright (c) 2013 Arista Networks, Inc.  All rights reserved.
 // Arista Networks, Inc. Confidential and Proprietary.
 
-#include <arpa/inet.h>
 #include <string.h>
 
 #include <Arnet/Arnet.h>
@@ -58,14 +57,14 @@ ip_addr_t::ip_addr_t(af_t af, uint8_t const * addr) {
 }
 
 // Construct from a Linux sockaddr in_addr (IPv4)
-ip_addr_t::ip_addr_t(struct in_addr const & addr) {
+ip_addr_t::ip_addr_t(in_addr const & addr) {
    // Linux in.h in_addr is in network byte order, no conversion required
    af_ = AF_IPV4;
    memcpy(&addr_, &addr, sizeof(addr));
 }
 
 // Construct from a Linux sockaddr6 in6_addr (IPv6)
-ip_addr_t::ip_addr_t(struct in6_addr const & addr) {
+ip_addr_t::ip_addr_t(in6_addr const & addr) {
    // Linux in.h in_addr is in network byte order, no conversion required
    af_ = AF_IPV6;
    memcpy(&addr_, &addr, sizeof(addr));

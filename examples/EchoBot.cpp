@@ -60,7 +60,7 @@ class echo_bot : public eos::timeout_handler,
       address.sin_family = AF_INET;
       address.sin_addr.s_addr = INADDR_ANY;
       address.sin_port = htons(listen_port);
-      int result = bind(listen_socket_,(struct sockaddr *)&address,sizeof(address));
+      int result = bind(listen_socket_, (sockaddr *) &address, sizeof(address));
       assert(result == 0 && "Could not bind");
 
       result = listen(listen_socket_, listen_backlog);
@@ -79,16 +79,16 @@ class echo_bot : public eos::timeout_handler,
       assert(connected_socket_ == -1 && "Already handling a connection");
       // handle a new connection!
       struct sockaddr_storage their_addr;
-      socklen_t addr_size = sizeof their_addr;
-      int new_fd = accept(listen_socket_, (struct sockaddr *)&their_addr,
+      socklen_t addr_size = sizeof(their_addr);
+      int new_fd = accept(listen_socket_, (sockaddr *) &their_addr,
                           &addr_size);
-      if( new_fd == -1 ){
-         if( errno == EAGAIN ){
+      if( new_fd == -1 ) {
+         if( errno == EAGAIN ) {
             // Nothing to accept on this connection
             return false;
          }
          assert("Unable to accept new connection");
-      } 
+      }
       connected_socket_ = new_fd;
       watch_readable(connected_socket_, true);
 
@@ -124,7 +124,7 @@ class echo_bot : public eos::timeout_handler,
             watch_readable(connected_socket_, false);
             watch_writable(connected_socket_, true);
             return;
-         } 
+         }
          if(errno == ECONNRESET) {
             // Connection closed by the other side while we were
             // busy getting through our buf_.
@@ -185,7 +185,7 @@ class echo_bot : public eos::timeout_handler,
       assert( connected_socket_ != -1 );
       end_connection();
    }
-   
+
  private:
    // Number of seconds of idleness before we disconnect
    eos::seconds_t idle_timeout_;
@@ -196,7 +196,7 @@ class echo_bot : public eos::timeout_handler,
 
    int listen_socket_; // Socket listening for new connections
    int connected_socket_; // Socket we are communicating with. 0 if not connected
-   
+
    int buf_size_; // Size of the buffer
    char buf_[1024];
    int buf_data_size_; // Amount of content currently stored in the buffer

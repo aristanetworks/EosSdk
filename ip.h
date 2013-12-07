@@ -8,6 +8,7 @@
 #include <eos/base.h>
 
 #include <stddef.h>
+#include <netinet/in.h>
 
 //= hidden
 #include <Arnet/Arnet.h>
@@ -30,8 +31,8 @@ class EOS_SDK_PUBLIC ip_addr_t {
  public:
    ip_addr_t();
    ip_addr_t(af_t, uint8_t const * ip_addr);  // copied; in network byte order
-   explicit ip_addr_t(struct in_addr const &);
-   explicit ip_addr_t(struct in6_addr const &);
+   explicit ip_addr_t(in_addr const &);
+   explicit ip_addr_t(in6_addr const &);
    explicit ip_addr_t(char const * name); // converts from IPv4/v6 string
    explicit ip_addr_t(std::string const & name); // converts from IPv4/v6 string
    explicit ip_addr_t(uint32_be_t addr_v4);
