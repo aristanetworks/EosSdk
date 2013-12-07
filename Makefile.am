@@ -41,22 +41,22 @@ eos/%.h: $(srcdir)/%.h $(srcdir)/eossdkpublish
 pkginclude_HEADERS = Conversions.h Mount.h
 
 libeos_la_SOURCES =
+libeos_la_SOURCES += EosSdkAgent.tac EosSdkAgent.tin
+libeos_la_SOURCES += EthIntfMgrSm.tac
+libeos_la_SOURCES += FileSm.tac
+libeos_la_SOURCES += IntfMgrSm.tac
+libeos_la_SOURCES += TimerSm.tac
 libeos_la_SOURCES += agent.cpp
 libeos_la_SOURCES += base.h
 libeos_la_SOURCES += Conversions.h
-libeos_la_SOURCES += EosSdkAgent.tac EosSdkAgent.tin
 libeos_la_SOURCES += eth.h eth.cpp
 libeos_la_SOURCES += eth_intf.h eth_intf.cpp
-libeos_la_SOURCES += EthIntfMgrSm.tac
 libeos_la_SOURCES += fd.h fd.cpp
-libeos_la_SOURCES += FileSm.tac
 libeos_la_SOURCES += intf.h intf.cpp
-libeos_la_SOURCES += IntfMgrSm.tac
 libeos_la_SOURCES += ip.h ip.cpp
 libeos_la_SOURCES += Mount.h Mount.cpp
 libeos_la_SOURCES += panic.h panic.cpp
 libeos_la_SOURCES += timer.h timer.cpp
-libeos_la_SOURCES += TimerSm.tac
 libeos_la_SOURCES += version.h version.cpp
 
 libeos_la_LIBADD = -lAgentBase -lSysdbEntityMgr -ltac -ldl
