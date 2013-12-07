@@ -154,14 +154,14 @@ bool test_invalid_ip_prefix_v4() {
 }
 
 bool test_ip_addr_t_constructions() {
-   eos::uint8_t a1[4] = { 127, 0, 0, 1 };
+   uint8_t a1[4] = { 127, 0, 0, 1 };
    auto ipv4_addr1 = eos::ip_addr_t(eos::AF_IPV4, a1);
    auto ipv4_addr2 = eos::ip_addr_t("127.0.0.1");
 
-   eos::uint8_t a2[16] = { 255, 255, 255, 255,
-                           0, 0, 0, 0,
-                           0, 0, 0, 0,
-                           0, 0, 0, 1 };
+   uint8_t a2[16] = { 255, 255, 255, 255,
+                      0, 0, 0, 0,
+                      0, 0, 0, 0,
+                      0, 0, 0, 1 };
    auto ipv6_addr1 = eos::ip_addr_t(eos::AF_IPV6, a2);
    auto ipv6_addr2 = eos::ip_addr_t("ffff::1");
 

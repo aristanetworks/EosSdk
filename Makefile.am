@@ -9,6 +9,7 @@ AM_LDFLAGS = -Wl,--no-undefined
 lib_LTLIBRARIES = libeos.la
 bin_PROGRAMS =
 bin_PROGRAMS += IntfTestAgent
+bin_PROGRAMS += IpAddrTest
 bin_PROGRAMS += EthIntfTestAgent
 bin_PROGRAMS += EchoBot
 bin_PROGRAMS += IntfIdTest
@@ -60,6 +61,9 @@ EthAddrTest_LDADD = libeos.la
 
 IntfTestAgent_SOURCES = test/IntfTestAgent.cpp
 IntfTestAgent_LDADD = libeos.la
+
+IpAddrTest_SOURCES = test/IpAddrTest.cpp
+IpAddrTest_LDADD = libeos.la
 
 EthIntfTestAgent_SOURCES = test/EthIntfTestAgent.cpp
 EthIntfTestAgent_LDADD = libeos.la

@@ -9,13 +9,12 @@
 
 #include <stddef.h>
 
-//= hidde
+//= hidden
 #include <Arnet/Arnet.h>
 #include <Arnet/IpAddr.h>
 //= end_hidden
 
-#include <EosSdk/types.h>  //= eos_internal
-//=> #include <eos/types.h>
+#include <eos/base.h>
 
 namespace eos {
 

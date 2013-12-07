@@ -280,10 +280,9 @@ ip_addr_t::to_string() const {
       return std::string(ip6.stringValue().charPtr());
    } else {
       panic("Cannot generate string value of unknown address family");
+      return std::string();
    }
 }
-
-// TBD: use std::string
 
 std::string
 ip_prefix_t::to_string() const {

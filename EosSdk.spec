@@ -97,3 +97,4 @@ rm -f "$RPM_BUILD_ROOT"%{_libdir}/*.la
 %{_bindir}/EthIntfTestAgent
 %{_bindir}/IntfIdTest
 %{_bindir}/IntfTestAgent
+%{_bindir}/IpAddrTest
