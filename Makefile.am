@@ -1,4 +1,4 @@
-EXTRA_DIST = EosSdk.spec $(TESTS) eossdkpublish
+EXTRA_DIST = EosSdk.spec $(python_tests) eossdkpublish
 
 CPP_INCLUDE_FLAGS = -I/usr/include/python$(PYTHON_VERSION) \
    -Isrc-includes -I$(includedir)
@@ -93,14 +93,20 @@ TESTS_ENVIRONMENT = SRCDIR="$(srcdir)"
 
 python_PYTHON = EosSdkTestLib.py
 
-sanityTests = 
-TESTS = $(sanityTests)
-TESTS += EthAddrTest
-TESTS += examples/EchoBotTest.py
-TESTS += IntfIdTest
-TESTS += IpAddrTest
-TESTS += test/EthIntfTest.py
-TESTS += test/IntfTest.py
+python_tests =
+python_tests += examples/EchoBotTest.py
+python_tests += test/EthIntfTest.py
+python_tests += test/IntfTest.py
+
+cpp_tests =
+cpp_tests += EthAddrTest
+cpp_tests += IntfIdTest
+cpp_tests += IpAddrTest
+
+TESTS = $(cpp_tests) $(python_tests)
+# Right now all our test are reasonably fast, so they can all be sanity tests.
+sanityTests = $(TESTS)
+
 sanity:
 	make TESTS="$(sanityTests)" check
 
