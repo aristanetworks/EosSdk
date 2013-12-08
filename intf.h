@@ -124,7 +124,7 @@ class EOS_SDK_PUBLIC intf_mgr {
    intf_mgr();
 
  private:
-   intf_mgr(intf_mgr const &) EOS_SDK_PRIVATE;
+   EOS_SDK_DISALLOW_COPY_CTOR(intf_mgr);
 };
 
 intf_mgr * get_intf_mgr() EOS_SDK_PUBLIC;

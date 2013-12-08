@@ -21,4 +21,9 @@ typedef uint32_t uint32_be_t;
 // TODO(tsuna): Why can't we make this visibility protected?
 #define EOS_SDK_INTERNAL __attribute__ ((visibility ("default")))
 
+#define EOS_SDK_DISALLOW_COPY_CTOR(ClassName) \
+ private: \
+   ClassName(ClassName const &) EOS_SDK_PRIVATE; \
+   ClassName & operator=(ClassName const &) EOS_SDK_PRIVATE;
+
 #endif // EOS_BASE_H
