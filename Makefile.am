@@ -32,6 +32,9 @@ PUBLISHED_HEADER_FILES += eos/version.h
 eosheaderdir = $(includedir)/eos
 eosheader_HEADERS = $(PUBLISHED_HEADER_FILES)
 
+examplesdir = $(pkgdatadir)/examples
+examples_HEADERS = $(EchoBot_SOURCES)
+
 eos/%.h: $(srcdir)/%.h $(srcdir)/eossdkpublish
 	mkdir -p eos
 	rm -f $@

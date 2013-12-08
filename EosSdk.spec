@@ -83,6 +83,7 @@ rm -f "$RPM_BUILD_ROOT"%{_libdir}/*.la
 %files headers
 %defattr(-,root,root)
 %{_includedir}/eos
+%{_datadir}/EosSdk/examples/*
 
 %files devel
 %defattr(-,root,root)
