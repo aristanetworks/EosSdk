@@ -1,7 +1,7 @@
 #!/bin/sh
 LANG=C
 export LANG
-unset DISPLAY  
+unset DISPLAY
 CFLAGS='-Os -g -pipe -Wall -Wp,-D_FORTIFY_SOURCE=2 -fexceptions -fstack-protector -fno-var-tracking -fno-var-tracking-assignments --param=ssp-buffer-size=4 -Wno-unused -Wno-uninitialized -m32 -march=i686 -mtune=atom -fasynchronous-unwind-tables'
 export CFLAGS
 CXXFLAGS=$CFLAGS
