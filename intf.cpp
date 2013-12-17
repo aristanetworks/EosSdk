@@ -93,7 +93,17 @@ intf_mgr::intf_foreach(bool (*handler)(intf_id_t, void *), void *,
 
 bool
 intf_mgr::exists(intf_id_t) const {
-   return false;
+   return false;  // TODO: No op impl.
+}
+
+bool
+intf_mgr::admin_enabled(intf_id_t id) const {
+   return false;  // TODO: No op impl.
+}
+
+void
+intf_mgr::admin_enabled_is(intf_id_t id, bool enabled) {
+   // TODO: No op impl.
 }
 
 void
