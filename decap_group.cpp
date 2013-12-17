@@ -71,7 +71,7 @@ decap_group_mgr::decap_group_foreach(callback_func_decap_group handler,
 }
 
 void
-decap_group_mgr::decap_group_is(decap_group_t const &group) {
+decap_group_mgr::decap_group_set(decap_group_t const &group) {
    // TODO: No op impl.
 }
 
