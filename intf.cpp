@@ -34,16 +34,6 @@ intf_id_t::operator !() const {
    return intfId_;
 }
 
-bool
-intf_id_t::operator==(intf_id_t const & other) const {
-   return intfId_ == other.intfId_;
-}
-
-bool
-intf_id_t::operator!=(intf_id_t const & other) const {
-   return intfId_ != other.intfId_;
-}
-
 std::string
 intf_id_t::to_string() const {
    return "NotImplemented";  // TODO: No op impl.

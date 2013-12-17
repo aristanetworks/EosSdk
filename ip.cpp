@@ -8,9 +8,6 @@
 
 namespace eos {
 
-ip_addr_t::ip_addr_t() : af_(AF_NULL), addr_() {
-}
-
 ip_addr_t::ip_addr_t(char const *address_string) {
    assert(parse_ip_addr(address_string, this));
 }
@@ -42,32 +39,13 @@ ip_addr_t::ip_addr_t(in6_addr const & addr) {
    memcpy(&addr_, &addr, sizeof(addr));
 }
 
-// IPv4 address (one word) in network byte order
-ip_addr_t::ip_addr_t(uint32_be_t addr_v4) {
-   af_ = AF_IPV4;
-   addr_.words[0] = addr_v4;
-}
-
 // ip_prefix_t constructors
-
-ip_prefix_t::ip_prefix_t() {
-}
 
 ip_prefix_t::ip_prefix_t(char const *prefix_string) {
    assert(!parse_ip_prefix(prefix_string, this));
 }
 
-ip_prefix_t::ip_prefix_t(ip_addr_t const & address, int prefix_length) {
-   addr_ = address;
-   prefix_length_ = prefix_length;
-}
-
 // ip_addr_mask_t constructors
-
-ip_addr_mask_t::ip_addr_mask_t() {
-   addr_ = ip_addr_t();
-   mask_length_ = 0;
-}
 
 ip_addr_mask_t::ip_addr_mask_t(ip_addr_t const &address, int mask_length) {
    addr_ = address;
@@ -88,60 +66,13 @@ ip_addr_t::operator==(ip_addr_t const &other) const {
    return memcmp(addr_.bytes, other.addr_.bytes, af_ == AF_IPV4 ? 4 : 16) == 0;
 }
 
-bool
-ip_addr_t::operator!=(ip_addr_t const & other) const {
-   return !(*this == other);
-}
-
 // Accessors
-
-// Returns the 16-byte address for the address, in network byte order
-// IPv4 addresses occupy the first word only; words 2-4 are empty
-uint8_t const *
-ip_addr_t::addr() const {
-   return static_cast<uint8_t const *>(addr_.bytes);
-}
-
-ip_addr_t const
-ip_addr_mask_t::addr() const {
-   return addr_;
-}
-
-ip_addr_t const
-ip_prefix_t::network() const {
-   return addr_;
-}
 
 // The IPv4 address as a word in network byte order
 uint32_be_t
 ip_addr_t::addr_v4() const {
    assert(af_ == AF_IPV4 && "cannot call addr_v4() for non AF_IPV4 addresses");
    return addr_.words[0];
-}
-
-af_t
-ip_addr_t::af() const {
-   return af_;
-}
-
-af_t
-ip_prefix_t::af() const {
-   return addr_.af();
-}
-
-af_t
-ip_addr_mask_t::af() const {
-   return addr_.af();
-}
-
-int
-ip_prefix_t::prefix_length() const {
-   return prefix_length_;
-}
-
-int
-ip_addr_mask_t::mask_length() const {
-   return mask_length_;
 }
 
 bool
