@@ -26,3 +26,4 @@ libeos_la_SOURCES += version.cpp
 libeos_la_LDFLAGS = -version-info $(SDK_LIBTOOL_VERSION)
 
 ACLOCAL_AMFLAGS = -I autogen
+EXTRA_DIST = bootstrap build.sh
