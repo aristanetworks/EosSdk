@@ -8,9 +8,6 @@ namespace eos {
 intf_id_t::intf_id_t() : intfId_(0) {
 }
 
-intf_id_t::intf_id_t(uint32_t id) : intfId_(id) {
-}
-
 intf_id_t::intf_id_t(char const * intfname) : intfId_(0) {
    // TODO: No op impl.
 }
