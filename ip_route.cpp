@@ -5,32 +5,6 @@
 
 namespace eos {
 
-ip_route_key_t::ip_route_key_t() : prefix(), preference(1), metric(0) {
-}
-
-ip_route_key_t::ip_route_key_t(const ip_prefix_t & prefix) :
-      prefix(prefix), preference(1), metric(0) {
-}
-
-ip_route_key_t::ip_route_key_t(const ip_prefix_t & prefix,
-                               ip_route_preference_t preference) :
-      prefix(prefix), preference(preference), metric(0) {
-}
-
-ip_route_t::ip_route_t() : key(), tag(0), persistent(false) {
-}
-
-ip_route_t::ip_route_t(const ip_route_key_t & route_key) :
-      key(route_key), tag(0), persistent(false) {
-}
-
-ip_route_via_t::ip_route_via_t() : route_key(), hop(), intf() {
-}
-
-ip_route_via_t::ip_route_via_t(const ip_route_key_t & route_key)
-      : route_key(route_key), hop(), intf() {
-}
-
 ip_route_mgr::ip_route_mgr() {
 }
 
