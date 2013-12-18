@@ -7,17 +7,6 @@
 
 namespace eos {
 
-decap_group_t::decap_group_t(std::string group_name,
-                             ip_addr_t const &destination_ip,
-                             decap_protocol_type_t protocol)
-   : group_name_(group_name),
-     destination_addr_(destination_ip),
-     protocol_type_(protocol) {
-   assert(!group_name.empty() && "group_name must be a non-empty string");
-   assert(protocol != PROTOCOL_TYPE_NULL
-          && "must pass a tunnel protocol other than PROTOCOL_TYPE_NULL");
-}
-
 decap_group_mgr::decap_group_mgr() {
 }
 
