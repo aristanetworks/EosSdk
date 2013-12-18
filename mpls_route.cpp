@@ -5,37 +5,6 @@
 
 namespace eos {
 
-mpls_route_key_t::mpls_route_key_t() : top_label(0), metric(0) {
-}
-
-mpls_route_key_t::mpls_route_key_t(mpls_label_t const & _label,
-                                   mpls_route_metric_t _metric)
-   : top_label(_label), metric(_metric) {
-}
-
-mpls_route_t::mpls_route_t() : key(), persistent(false) {
-}
-
-mpls_route_t::mpls_route_t(mpls_route_key_t const &route_key)
-   : key(route_key), persistent(false) {
-}
-
-mpls_route_via_t::mpls_route_via_t()
-   : route_key(), hop(), intf(),
-     pushswap_label(0),
-     label_action(MPLS_ACTION_NULL),
-     ttl_mode(MPLS_TTLMODE_NULL),
-     payload_type(MPLS_PAYLOAD_TYPE_NULL) {
-}
-
-mpls_route_via_t::mpls_route_via_t(mpls_route_key_t const & key)
-   : route_key(key), hop(), intf(),
-     pushswap_label(0),
-     label_action(MPLS_ACTION_NULL),
-     ttl_mode(MPLS_TTLMODE_NULL),
-     payload_type(MPLS_PAYLOAD_TYPE_NULL) {
-}
-
 mpls_route_mgr::mpls_route_mgr() {
 }
 

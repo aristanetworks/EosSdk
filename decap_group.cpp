@@ -7,9 +7,6 @@
 
 namespace eos {
 
-decap_group_t::decap_group_t() {
-}
-
 decap_group_t::decap_group_t(std::string group_name,
                              ip_addr_t const &destination_ip,
                              decap_protocol_type_t protocol)
@@ -19,33 +16,6 @@ decap_group_t::decap_group_t(std::string group_name,
    assert(!group_name.empty() && "group_name must be a non-empty string");
    assert(protocol != PROTOCOL_TYPE_NULL
           && "must pass a tunnel protocol other than PROTOCOL_TYPE_NULL");
-}
-
-// Accessors and mutators on decap_group_t
-
-std::string
-decap_group_t::group_name() const {
-   return group_name_;
-}
-
-ip_addr_t const &
-decap_group_t::destination_addr() const {
-   return destination_addr_;
-}
-
-void
-decap_group_t::destination_addr_is(ip_addr_t const & addr) {
-   destination_addr_ = addr;
-}
-
-decap_protocol_type_t
-decap_group_t::protocol_type() const {
-   return protocol_type_;
-}
-
-void
-decap_group_t::protocol_type_is(decap_protocol_type_t protocol_type) {
-   protocol_type_ = protocol_type;
 }
 
 decap_group_mgr::decap_group_mgr() {
