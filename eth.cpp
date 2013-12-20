@@ -2,6 +2,7 @@
 // Arista Networks, Inc. Confidential and Proprietary.
 
 #include <cassert>
+#include <string.h>
 
 #include "eos/eth.h"
 
