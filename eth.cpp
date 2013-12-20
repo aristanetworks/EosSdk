@@ -28,4 +28,9 @@ eth_addr_t::byte(int index) const {
    assert(!"invalid byte index, must be in [0; 5].");
 }
 
+void
+eth_addr_t::bytes(void *arr) const {
+   memcpy( arr, bytes_, sizeof( bytes_ ) );
+}
+
 };
