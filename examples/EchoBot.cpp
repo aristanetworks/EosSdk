@@ -13,7 +13,7 @@
 #include <assert.h>
 #include <errno.h>
 #include <stdio.h>
-#include <string.h>
+#include <cstring>
 #include <netinet/in.h>
 #include <sys/fcntl.h>
 #include <sys/socket.h>
