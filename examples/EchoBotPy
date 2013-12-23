@@ -1,0 +1,79 @@
+#!/usr/bin/env python
+# Copyright (c) 2013 Arista Networks, Inc.  All rights reserved.
+# Arista Networks, Inc. Confidential and Proprietary.
+
+""" Implements a simple Echo bot script. This script does not handle
+write errors as EchoBot.cpp does. """
+
+import EosSdk
+
+import socket
+import sys
+
+ECHO_MSG = "You said: "
+LISTEN_PORT = 10000
+IDLE_TIMEOUT = 10
+LISTEN_BACKLOG = 5
+MAX_BUF_SIZE = 1024
+
+class EchoBot(EosSdk.TimeoutHandler, EosSdk.FdHandler):
+   def __init__(self):
+      print "initializing..."
+      EosSdk.TimeoutHandler.__init__(self)
+      EosSdk.FdHandler.__init__(self)
+      self.server = self._createServer()
+      self.watchReadable(self.server.fileno(), True)
+      self.connectedSocket = None
+      print "initialized with server=%d" % self.server.fileno()
+
+   def onReadable(self, fd):
+      print "onReadable called"
+      if fd == self.server.fileno():
+         assert not self.connectedSocket, ("Should not be readable if we "
+                                           "already have a connection")
+         self._acceptConnection()
+      elif fd == self.connectedSocket.fileno():
+         data = self.connectedSocket.recv(MAX_BUF_SIZE)
+         print "Client said: %r" % data
+         if not data:
+            self._endConnection()
+            return
+         self.connectedSocket.send(ECHO_MSG + data)
+      else:
+         assert False, "Unknown fd %d is readable" % fd
+
+   def onTimeout(self):
+      print "Timer called"
+      assert self.connectedSocket
+      self._endConnection()
+         
+   def _acceptConnection(self):
+      print "Accepting connection"
+      assert not self.connectedSocket
+      self.watchReadable(self.server.fileno(), False)
+      newFd, _ = self.server.accept()
+      newFd.setblocking(0)
+      self.connectedSocket = newFd
+      self.watchReadable(newFd.fileno(), True)
+      self.timeoutTimeIs(EosSdk.now() + IDLE_TIMEOUT)
+
+   def _endConnection(self):
+      print "end connection to connected socket %d" % self.connectedSocket.fileno()
+      self.watchReadable(self.connectedSocket.fileno(), False)
+      self.connectedSocket.close()
+      self.connectedSocket = None
+      # Start listening for new connections again
+      self.watchReadable(self.server.fileno(), True)
+      self.timeoutTimeIs(EosSdk.never)
+
+   def _createServer(self):
+      print "Creating server"
+      s = socket.socket()
+      s.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
+      s.setblocking(0)
+      s.bind(("", LISTEN_PORT))
+      s.listen(LISTEN_BACKLOG)
+      return s
+
+echoBot = EchoBot()
+EosSdk.agentMainLoop("EchoBotPy", len(sys.argv), sys.argv)
