@@ -9,10 +9,10 @@
 // Change all some_class_t names to just SomeClass:
  // The <<""< uses automatic string concatination to get around the
  // conflict marker limitation.
-%rename("%(command:python /src/EosSdk/SwigRenamer.py --classname <<""<)s", %$isclass) "";
+%rename("%(command:python $SRCDIR/SwigRenamer.py --classname <<""<)s", %$isclass) "";
 // Rename all functions and variables to be lowerCamelCased:
-%rename("%(command:python /src/EosSdk/SwigRenamer.py <<""<)s", %$isfunction) "";
-%rename("%(command:python /src/EosSdk/SwigRenamer.py <<""<)s", %$isvariable) "";
+%rename("%(command:python $SRCDIR/SwigRenamer.py <<""<)s", %$isfunction) "";
+%rename("%(command:python $SRCDIR/SwigRenamer.py <<""<)s", %$isvariable) "";
 // Don't do anything for enum values.
 
 // Ignored conversions:
