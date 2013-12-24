@@ -20,7 +20,7 @@ class EchoBot(EosSdk.TimeoutHandler, EosSdk.FdHandler):
    def __init__(self):
       print "initializing..."
       EosSdk.TimeoutHandler.__init__(self)
-      EosSdk.FdHandler.__init__(self)
+      EosSdk.FdHandler.__init__(self)  # pylint: disable-msg=W0233
       self.server = self._createServer()
       self.watchReadable(self.server.fileno(), True)
       self.connectedSocket = None
@@ -32,13 +32,13 @@ class EchoBot(EosSdk.TimeoutHandler, EosSdk.FdHandler):
          assert not self.connectedSocket, ("Should not be readable if we "
                                            "already have a connection")
          self._acceptConnection()
-      elif fd == self.connectedSocket.fileno():
-         data = self.connectedSocket.recv(MAX_BUF_SIZE)
+      elif fd == self.connectedSocket.fileno():  # pylint: disable-msg=E1101
+         data = self.connectedSocket.recv(MAX_BUF_SIZE) # pylint: disable-msg=E1101
          print "Client said: %r" % data
          if not data:
             self._endConnection()
             return
-         self.connectedSocket.send(ECHO_MSG + data)
+         self.connectedSocket.send(ECHO_MSG + data)  # pylint: disable-msg=E1101
       else:
          assert False, "Unknown fd %d is readable" % fd
 
@@ -52,14 +52,15 @@ class EchoBot(EosSdk.TimeoutHandler, EosSdk.FdHandler):
       assert not self.connectedSocket
       self.watchReadable(self.server.fileno(), False)
       newFd, _ = self.server.accept()
-      newFd.setblocking(0)
+      newFd.setblocking(0)  # pylint: disable-msg=E1101
       self.connectedSocket = newFd
-      self.watchReadable(newFd.fileno(), True)
+      self.watchReadable(newFd.fileno(), True)  # pylint: disable-msg=E1101
       self.timeoutTimeIs(EosSdk.now() + IDLE_TIMEOUT)
 
    def _endConnection(self):
-      print "end connection to connected socket %d" % self.connectedSocket.fileno()
-      self.watchReadable(self.connectedSocket.fileno(), False)
+      fd = self.connectedSocket.fileno()  # pylint: disable-msg=E1101
+      print "end connection to connected socket %d" % fd
+      self.watchReadable(fd, False)
       self.connectedSocket.close()
       self.connectedSocket = None
       # Start listening for new connections again
