@@ -16,6 +16,7 @@ libeos_la_SOURCES += eth_intf.cpp
 libeos_la_SOURCES += eth_phy_intf.cpp
 libeos_la_SOURCES += fd.cpp
 libeos_la_SOURCES += intf.cpp
+libeos_la_SOURCES += impl.cpp
 libeos_la_SOURCES += ip.cpp
 libeos_la_SOURCES += ip_route.cpp
 libeos_la_SOURCES += mpls_route.cpp
@@ -23,7 +24,7 @@ libeos_la_SOURCES += panic.cpp
 libeos_la_SOURCES += timer.cpp
 libeos_la_SOURCES += version.cpp
 
-libeos_la_LDFLAGS = -version-info $(SDK_LIBTOOL_VERSION)
+libeos_la_LDFLAGS = -version-info $(SDK_LIBTOOL_VERSION) -lrt
 
 ACLOCAL_AMFLAGS = -I autogen
 EXTRA_DIST = bootstrap build.sh
