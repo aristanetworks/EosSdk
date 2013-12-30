@@ -24,10 +24,13 @@
 #define EOS_SDK_PRIVATE
 #define EOS_SDK_INTERNAL
 
+typedef double seconds_t; // Tell swig about our custom seconds_t type
+
 // generate directors for all classes that have virtual methods
 %feature("director");
 
 %include "eos/agent.h"
+%include "eos/event_loop.h"
 %include "eos/fd.h"
 %include "eos/timer.h"
 %include "eos/intf.h"
@@ -35,6 +38,7 @@
 
 %{
 #include "eos/agent.h"
+#include "eos/event_loop.h"
 #include "eos/fd.h"
 #include "eos/timer.h"
 #include "eos/intf.h"
