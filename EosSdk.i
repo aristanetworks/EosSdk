@@ -18,13 +18,13 @@
 // Ignored conversions:
 %ignore handle_agent_initialized;
 
-
 #define SWIG_FILE_WITH_INIT
-#define EOS_SDK_PUBLIC
-#define EOS_SDK_PRIVATE
-#define EOS_SDK_INTERNAL
+%import "eos/base.h"
 
-typedef double seconds_t; // Tell swig about our custom seconds_t type
+// Tell swig about our custom types (copied from base.h)
+typedef double seconds_t;
+typedef uint16_t uint16_be_t;
+typedef uint32_t uint32_be_t;
 
 // generate directors for all classes that have virtual methods
 %feature("director");
