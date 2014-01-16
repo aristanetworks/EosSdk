@@ -60,4 +60,9 @@ ip_prefix_t::to_string() const {
    return "not.implemented/yet";
 }
 
+std::string
+ip_addr_mask_t::to_string() const {
+   return "not.implemented/yet";
+}
+
 }
