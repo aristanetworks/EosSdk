@@ -4,9 +4,8 @@ AM_CXXFLAGS = -fvisibility=hidden -std=gnu++0x
 AM_CXXFLAGS += -Wextra -Wall -Werror -Wno-unused-parameter
 AM_LDFLAGS = -Wl,--no-undefined
 
-PUBLISHED_HEADER_FILES = $(wildcard eos/*.h) $(wildcard eos/inline/*.h)
-eosheaderdir = $(includedir)/eos
-eosheader_HEADERS = $(PUBLISHED_HEADER_FILES)
+PUBLISHED_HEADER_FILES := $(wildcard eos/*.h) $(wildcard eos/inline/*.h)
+nobase_include_HEADERS = $(PUBLISHED_HEADER_FILES)
 
 libeos_la_SOURCES =
 libeos_la_SOURCES += agent.cpp
