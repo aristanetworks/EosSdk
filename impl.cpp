@@ -3,7 +3,6 @@
 
 #include <algorithm>
 #include <cerrno>
-#include <cstdio>
 #include <ctime>  // for time_t
 #include <sys/select.h>
 #include <sys/time.h>  // for struct timeval
@@ -84,9 +83,28 @@ static struct timeval to_timeval(seconds_t time) {
    return tv;
 }
 
-void Impl::main_loop(const char * agent_name) {
+void Impl::agent_name_is(const char * agent_name) {
+   this->agent_name = agent_name;
+   // TODO: Set the process title or whatever else.
+}
+
+void Impl::do_initialize() {
    for(auto i = agent_handlers_.begin(); i != agent_handlers_.end(); ++i) {
       (*i)->on_initialized();
+   }
+}
+
+void Impl::main_loop(seconds_t duration) {
+   if(!initialized_) {
+      do_initialize();
+      initialized_ = true;
+   }
+
+   seconds_t loop_end;
+   if(duration >= 0) {  // If the event loop must run for a given amount of time:
+      loop_end = now() + duration;  // Turn this amount into an absolute deadline.
+   } else {
+      loop_end = 0;  // Never end.
    }
 
    while(true) {
@@ -115,6 +133,23 @@ void Impl::main_loop(const char * agent_name) {
          timers_.pop();
          next_deadline = next_timer->timeout();
          timeout_seconds = next_deadline - now();
+      }
+      // If this loop must eventually stop, check whether we need to stop
+      // before the next timer fires.
+      if(loop_end) {
+         if(next_deadline == never) {
+            // We don't have any outstanding timer, so just stop at the point
+            // we were asked to terminate this loop.
+            next_deadline = loop_end;
+         } else {
+            // If the point at which we need to stop the loop is before our
+            // next timer then we must stop at that point instead of the timer.
+            next_deadline = next_deadline < loop_end ? next_deadline : loop_end;
+         }
+         timeout_seconds = next_deadline - now();
+         if (timeout_seconds < 0) {  // Can't have a negative timeout.
+            timeout_seconds = 0;     // Tells select() to return immediately.
+         }
       }
 
       // Consider switching to epoll, but this doesn't matter for now.
@@ -173,6 +208,9 @@ void Impl::main_loop(const char * agent_name) {
          } else {  // Our first timer needs to be rescheduled.
             timers_.push(next_timer);
          }
+      }
+      if(loop_end && loop_end <= now()) {
+         break;
       }
    }
 }

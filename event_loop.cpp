@@ -3,6 +3,7 @@
 
 #include "eos/panic.h"
 #include "eos/event_loop.h"
+#include "impl.h"
 
 namespace eos {
 
@@ -17,7 +18,7 @@ event_loop::run(seconds_t duration) const {
    if(duration < 0){
       panic("duration must be 0 or greater");
    }
-   // TODO: Implement.
+   impl.main_loop(duration);
 }
 
 }

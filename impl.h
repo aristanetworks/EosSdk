@@ -7,6 +7,7 @@
 #include <list>
 #include <map>
 #include <queue>
+#include <string>
 
 #include <sys/select.h>  // for fd_set
 
@@ -176,9 +177,20 @@ class Impl {
    }
    void timeout_is(timeout_handler * handler, seconds_t timeout);
 
-   /// Goes into an infinite event loop.
-   void main_loop(const char * agent_name);
+   /// Sets the name of this agent.
+   void agent_name_is(const char * agent_name);
+   /**
+    * Goes into the event loop for the duration specified.
+    * If duration is negative, we run forever.  If it's 0,
+    * we run one iteration of the event loop to completion.
+    */
+   void main_loop(seconds_t duration = -1);
  private:
+   void do_initialize();
+
+   // Whether or not we're done initializing.
+   bool initialized_;
+
    // Min-heap for all outstanding timers.
    timer_queue timers_;
 
@@ -189,6 +201,8 @@ class Impl {
 
    // Maps a user-created timeout_handler to an outstanding timer.
    std::map<timeout_handler *, timer> timeout_to_timer_;
+
+   std::string agent_name;
 
    EOS_SDK_DISALLOW_COPY_CTOR(Impl);
 };
