@@ -1,0 +1,16 @@
+                  _____ ___  ____    ____  ____  _  __
+                 | ____/ _ \/ ___|  / ___||  _ \| |/ /
+                 |  _|| | | \___ \  \___ \| | | | ' /
+                 | |__| |_| |___) |  ___) | |_| | . \
+                 |_____\___/|____/  |____/|____/|_|\_\
+
+This package provides a self-contained implementation of stubs for the EOS
+SDK.  The stubs mock how the real EOS SDK behaves on a real switch, to a
+certain extent.  They are useful to build and test software in your favorite
+Linux environment, with your preferred build tools.
+
+In order to build code against the EOS SDK that can be run on EOS or vEOS,
+you must build your code for i686 in a similar fashion to how build.sh builds
+the stubs package, and you must link against ABI-compatible libraries.  For
+instance if your code depends on OpenSSL, make sure you link against a version
+that is ABI-compatible with the version bundled in EOS.
