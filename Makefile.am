@@ -28,3 +28,6 @@ libeos_la_LDFLAGS = -version-info $(SDK_LIBTOOL_VERSION) -lrt
 
 ACLOCAL_AMFLAGS = -I autogen
 EXTRA_DIST = bootstrap build.sh
+
+dist-hook:
+	chmod -R u+w .
