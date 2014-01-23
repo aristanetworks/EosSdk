@@ -7,3 +7,4 @@ config.status
 libtool
 stamp-h1
 eos/
+EosSdk-stubs-*.*.*
