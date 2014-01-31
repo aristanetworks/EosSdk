@@ -25,6 +25,7 @@
 typedef double seconds_t;
 typedef uint16_t uint16_be_t;
 typedef uint32_t uint32_be_t;
+typedef uint64_t uint64_be_t;
 
 // generate directors for all classes that have virtual methods
 %feature("director");

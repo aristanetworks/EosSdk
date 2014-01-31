@@ -8,7 +8,7 @@
 
 namespace eos {
 
-inline intf_id_t::intf_id_t(uint32_t id) {
+inline intf_id_t::intf_id_t(uint64_t id) {
    intfId_ = id;
    if (intf_type() == INTF_TYPE_OTHER) {
       panic("Invalid interface id");
