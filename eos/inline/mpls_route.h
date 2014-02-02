@@ -10,15 +10,35 @@ inline mpls_route_key_t::mpls_route_key_t() : top_label(0), metric(0) {
 }
 
 inline mpls_route_key_t::mpls_route_key_t(mpls_label_t const & _label,
-                                   mpls_route_metric_t _metric)
+                                          mpls_route_metric_t _metric)
    : top_label(_label), metric(_metric) {
+}
+
+inline bool
+mpls_route_key_t::operator==(mpls_route_key_t const & other) const {
+   return top_label == other.top_label && metric == other.metric;
+}
+
+inline bool
+mpls_route_key_t::operator!=(mpls_route_key_t const & other) const {
+   return !(*this == other);
 }
 
 inline mpls_route_t::mpls_route_t() : key(), persistent(false) {
 }
 
-inline mpls_route_t::mpls_route_t(mpls_route_key_t const &route_key)
+inline mpls_route_t::mpls_route_t(mpls_route_key_t const & route_key)
    : key(route_key), persistent(false) {
+}
+
+inline bool
+mpls_route_t::operator==(mpls_route_t const & other) const {
+   return persistent == other.persistent && key == other.key;
+}
+
+inline bool
+mpls_route_t::operator!=(mpls_route_t const & other) const {
+   return !(*this == other);
 }
 
 inline mpls_route_via_t::mpls_route_via_t()
