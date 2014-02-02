@@ -24,6 +24,18 @@ inline decap_group_t::decap_group_t(std::string group_name,
    }
 }
 
+inline bool
+decap_group_t::operator==(decap_group_t const & other) const {
+   return protocol_type_ == other.protocol_type_
+      && destination_addr_ == other.destination_addr_
+      && group_name_ == other.group_name_;
+}
+
+inline bool
+decap_group_t::operator!=(decap_group_t const & other) const {
+   return !(*this == other);
+}
+
 // Accessors and mutators on decap_group_t
 
 inline std::string
