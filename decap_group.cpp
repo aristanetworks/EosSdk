@@ -16,6 +16,12 @@ class decap_group_mgr_impl : public decap_group_mgr {
    }
 };
 
+decap_group_iter_t
+decap_group_mgr::decap_group_iter() const {
+   decap_group_iter_t * nop = 0;
+   return *nop;  // TODO: No op impl.
+}
+
 void
 decap_group_mgr::decap_group_foreach(callback_func_decap_group handler,
                                      void *context) {
