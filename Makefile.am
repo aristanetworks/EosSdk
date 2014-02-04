@@ -19,6 +19,7 @@ libeos_la_SOURCES += intf.cpp
 libeos_la_SOURCES += impl.cpp impl.h
 libeos_la_SOURCES += ip.cpp
 libeos_la_SOURCES += ip_route.cpp
+libeos_la_SOURCES += iterator.cpp
 libeos_la_SOURCES += mpls_route.cpp
 libeos_la_SOURCES += panic.cpp
 libeos_la_SOURCES += timer.cpp

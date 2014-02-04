@@ -20,6 +20,48 @@ get_ip_route_mgr() {
    return &impl;
 }
 
+ip_route_iter_t::ip_route_iter_t(ip_route_iter_impl * const impl)
+   : impl(0) {
+}
+
+ip_route_iter_t::ip_route_iter_t(ip_route_iter_t const & other)
+   : impl(0) {
+}
+
+ip_route_iter_t::~ip_route_iter_t() {
+}
+
+ip_route_iter_t&
+ip_route_iter_t::operator++() {
+   return *this;
+}
+
+bool
+ip_route_iter_t::operator==(const ip_route_iter_t& rhs) const {
+   return impl == rhs.impl;
+}
+
+bool
+ip_route_iter_t::operator!=(const ip_route_iter_t& rhs) const {
+   return impl != rhs.impl;
+}
+
+ip_route_t
+ip_route_iter_t::operator*() {
+   return ip_route_t();
+}
+
+ip_route_iter_t::operator bool() const {
+   return false;
+}
+
+
+ip_route_iter_t
+ip_route_mgr::ip_route_iter() const {
+   ip_route_iter_t * nop = 0;
+   return *nop;  // TODO: No op impl.
+}
+
 void
 ip_route_mgr::ip_route_foreach(callback_func_route handler, void *context) {
    // TODO: No op impl.
