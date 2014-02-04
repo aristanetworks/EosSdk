@@ -25,6 +25,11 @@ intf_id_t::operator!=(intf_id_t const & other) const {
    return intfId_ != other.intfId_;
 }
 
+inline bool
+intf_id_t::operator<(intf_id_t const & other) const {
+   return intfId_ < other.intfId_;
+}
+
 }
 
 #endif // EOS_INLINE_INTF_H
