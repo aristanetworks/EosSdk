@@ -16,7 +16,6 @@
 // Don't do anything for enum values.
 
 // Ignored conversions:
-%ignore handle_agent_initialized;
 
 #define SWIG_FILE_WITH_INIT
 %import "eos/base.h"
