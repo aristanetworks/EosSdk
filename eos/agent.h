@@ -25,6 +25,10 @@ class EOS_SDK_PUBLIC agent_handler {
 void EOS_SDK_PUBLIC
 agent_main_loop(const char * agent_name, int argc, char ** argv);
 
+// Stop this agent's execution (after the next pass through the event loop)
+void EOS_SDK_PUBLIC
+agent_exit();
+
 }
 
 #endif // EOS_AGENT_H
