@@ -5,9 +5,9 @@
 #define EOS_ETH_INTF_H
 
 #include <eos/base.h>
-
 #include <eos/eth.h>
 #include <eos/intf.h>
+#include <eos/iterator.h>
 
 namespace eos {
 
@@ -35,9 +35,20 @@ class EOS_SDK_PUBLIC eth_intf_handler {
 };
 
 
+class eth_intf_iter_impl;
+
+class EOS_SDK_PUBLIC eth_intf_iter_t : public iter_base<intf_id_t,
+                                                        eth_intf_iter_impl> {
+ private:
+   friend class eth_intf_iter_impl;
+   explicit eth_intf_iter_t(eth_intf_iter_impl * const) EOS_SDK_PRIVATE;
+};
+
+
 class EOS_SDK_PUBLIC eth_intf_mgr {
  public:
    // Collection management
+   eth_intf_iter_t eth_intf_iter() const;
    typedef bool (*callback_func_eth_intf)(intf_id_t, void * context);
    void eth_intf_foreach(callback_func_eth_intf handler, void * context);
    void eth_intf_foreach(callback_func_eth_intf handler, void * context,
