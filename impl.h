@@ -177,6 +177,9 @@ class Impl {
    }
    void timeout_is(timeout_handler * handler, seconds_t timeout);
 
+   // Stop the loop after the current iteration
+   void stop_loop();
+
    /// Sets the name of this agent.
    void agent_name_is(const char * agent_name);
    /**
@@ -190,6 +193,8 @@ class Impl {
 
    // Whether or not we're done initializing.
    bool initialized_;
+   // Whether the loop should be running
+   bool running_;
 
    // Min-heap for all outstanding timers.
    timer_queue timers_;

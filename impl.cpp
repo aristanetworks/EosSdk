@@ -94,6 +94,10 @@ void Impl::do_initialize() {
    }
 }
 
+void Impl::stop_loop() {
+   running_ = false;
+}
+
 void Impl::main_loop(seconds_t duration) {
    if(!initialized_) {
       do_initialize();
@@ -107,7 +111,8 @@ void Impl::main_loop(seconds_t duration) {
       loop_end = 0;  // Never end.
    }
 
-   while(true) {
+   running_ = true;
+   while(running_) {
       int maxfd = 0;
       fd_set readfds;
       FD_ZERO(&readfds);
