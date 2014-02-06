@@ -27,10 +27,12 @@ agent_main_loop(const char * agent_name, int argc, char ** argv) {
    assert(*agent_name);  // Must be at least one char long.
    impl.agent_name_is(agent_name);
    impl.main_loop();
-   assert(!"why did main_loop return?");
-   for(;;) {
-      abort();
-   }
 }
+
+void
+agent_exit() {
+   impl.stop_loop();
+}
+
 
 }
