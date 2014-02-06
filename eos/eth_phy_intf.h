@@ -6,6 +6,7 @@
 
 #include <eos/eth.h>
 #include <eos/intf.h>
+#include <eos/iterator.h>
 
 namespace eos {
 
@@ -39,9 +40,20 @@ class EOS_SDK_PUBLIC eth_phy_intf_handler {
 };
 
 
+class eth_phy_intf_iter_impl;
+
+class EOS_SDK_PUBLIC eth_phy_intf_iter_t : public iter_base<intf_id_t,
+                                                            eth_phy_intf_iter_impl> {
+ private:
+   friend class eth_phy_intf_iter_impl;
+   explicit eth_phy_intf_iter_t(eth_phy_intf_iter_impl * const) EOS_SDK_PRIVATE;
+};
+
+
 class EOS_SDK_PUBLIC eth_phy_intf_mgr {
  public:
    // Collection management
+   eth_phy_intf_iter_t eth_phy_intf_iter() const;
    typedef bool (*callback_func_eth_phy_intf)(intf_id_t, void * context);
    void eth_phy_intf_foreach(callback_func_eth_phy_intf handler, void * context);
    void eth_phy_intf_foreach(callback_func_eth_phy_intf handler, void * context,

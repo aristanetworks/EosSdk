@@ -6,7 +6,9 @@
 
 #include <string>
 #include <stddef.h>
+
 #include <eos/base.h>
+#include <eos/iterator.h>
 
 namespace eos {
 
@@ -84,9 +86,20 @@ class EOS_SDK_PUBLIC intf_handler {
 };
 
 
+class intf_iter_impl;
+
+class EOS_SDK_PUBLIC intf_iter_t : public iter_base<intf_id_t,
+                                                    intf_iter_impl> {
+ private:
+   friend class intf_iter_impl;
+   explicit intf_iter_t(intf_iter_impl * const) EOS_SDK_PRIVATE;
+};
+
+
 /* This class inspects and configures base interface attribtues */
 class EOS_SDK_PUBLIC intf_mgr {
  public:
+   intf_iter_t intf_iter() const;
    /* Collection management */
    typedef bool (*callback_func_intf)(intf_id_t, void * context);
    // Iterator that, for each interface, call the supplied handler callback with the
