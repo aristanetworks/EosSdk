@@ -10,6 +10,7 @@ nobase_include_HEADERS = $(PUBLISHED_HEADER_FILES)
 libeos_la_SOURCES =
 libeos_la_SOURCES += agent.cpp
 libeos_la_SOURCES += decap_group.cpp
+libeos_la_SOURCES += directflow.cpp
 libeos_la_SOURCES += eth.cpp
 libeos_la_SOURCES += eth_intf.cpp
 libeos_la_SOURCES += event_loop.cpp
