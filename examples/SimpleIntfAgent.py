@@ -2,9 +2,9 @@
 # Copyright (c) 2014 Arista Networks, Inc.  All rights reserved.
 # Arista Networks, Inc. Confidential and Proprietary.
 
-import EosSdk
-import os
 import sys
+
+import EosSdk
 
 INTF = "Ethernet1"
 
@@ -48,8 +48,13 @@ class MyTestAgent(EosSdk.AgentHandler, EosSdk.FdHandler):
       print '> ',
       sys.stdout.flush()
 
-if __name__ == '__main__':
+
+def main(args):
    intfMgr = EosSdk.getIntfMgr()
    testAgent = MyTestAgent(intfMgr)
    args = ["MyTestAgent"]
    EosSdk.agentMainLoop(args[0], len(args), args)
+
+
+if __name__ == '__main__':
+   sys.exit(main(sys.argv))
