@@ -32,6 +32,17 @@ flow_match_t::flow_match_t() : match_field_set_(),
 }
 
 void
+flow_match_t::match_field_set_is(const flow_match_field_set_t & field_set) {
+   match_field_set_ = field_set;
+}
+
+flow_match_field_set_t
+flow_match_t::match_field_set() const {
+   return match_field_set_;
+}
+
+
+void
 flow_match_t::input_intfs_is(const std::set<intf_id_t> & input_intfs) {
    input_intfs_ = input_intfs;
 }
@@ -161,6 +172,17 @@ flow_action_t::flow_action_t() : action_set_(),
                                  eth_dst_(),
                                  ip_src_(),
                                  ip_dst_() {
+}
+
+
+void 
+flow_action_t::action_set_is(const flow_action_set_t & action_set) {
+   action_set_ = action_set;
+}
+
+flow_action_set_t
+flow_action_t::action_set() const {
+   return action_set_;
 }
 
 void

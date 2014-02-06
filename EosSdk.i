@@ -34,6 +34,9 @@ typedef uint64_t uint64_be_t;
 %include "eos/fd.h"
 %include "eos/timer.h"
 %include "eos/intf.h"
+%include "eos/ip.h"
+%include "eos/eth.h"
+%include "eos/directflow.h"
 
 
 %{
@@ -43,5 +46,11 @@ typedef uint64_t uint64_be_t;
 #include "eos/timer.h"
 #include "eos/intf.h"
 #include "eos/inline/intf.h"
+#include "eos/ip.h"
+#include "eos/inline/ip.h"
+#include "eos/eth.h"
+#include "eos/inline/eth.h"
+#include "eos/directflow.h"
+#include "eos/inline/directflow.h"
 using namespace eos;
 %}
