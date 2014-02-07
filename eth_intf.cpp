@@ -30,6 +30,12 @@ void eth_intf_handler::on_eth_addr(intf_id_t, eth_addr_t) {
 }
 
 
+eth_intf_iter_t
+eth_intf_mgr::eth_intf_iter() const {
+   eth_intf_iter_t * nop = 0;
+   return *nop;  // TODO: No op impl.
+}
+
 void
 eth_intf_mgr::eth_intf_foreach(bool (*handler)(intf_id_t, void *), void *) {
 }

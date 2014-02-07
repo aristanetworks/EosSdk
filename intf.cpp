@@ -67,6 +67,12 @@ intf_handler::on_admin_enabled(intf_id_t, bool) {
    // TODO: No op impl.
 }
 
+intf_iter_t
+intf_mgr::intf_iter() const {
+   intf_iter_t * nop = 0;
+   return *nop;  // TODO: No op impl.
+}
+
 void
 intf_mgr::intf_foreach(bool (*handler)(intf_id_t, void *), void *) {
    // TODO: No op impl.
