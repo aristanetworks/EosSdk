@@ -20,6 +20,7 @@ class MyTestAgent(EosSdk.AgentHandler, EosSdk.FdHandler):
       self.intfObj_ = EosSdk.IntfId(INTF)
       EosSdk.AgentHandler.__init__(self)
       EosSdk.FdHandler.__init__(self)
+      self.eventCount = 0
 
    def onInitialized(self):
       print "Initialized!"
@@ -36,9 +37,11 @@ class MyTestAgent(EosSdk.AgentHandler, EosSdk.FdHandler):
       if msg.startswith("shut"):
          print "Shutting down Ethernet1"
          self.intfMgr_.adminEnabledIs(self.intfObj_, False)
+         self.eventCount += 1
       elif msg.strip():
          print "Enabling Ethernet1"
          self.intfMgr_.adminEnabledIs(self.intfObj_, True)
+         self.eventCount += 1
       else:
          print "Exiting!"
          EosSdk.agentExit()
@@ -54,6 +57,7 @@ def main(args):
    testAgent = MyTestAgent(intfMgr)
    args = ["MyTestAgent"]
    EosSdk.agentMainLoop(args[0], len(args), args)
+   print "Handled %d events" % testAgent.eventCount
 
 
 if __name__ == '__main__':
