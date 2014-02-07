@@ -17,7 +17,7 @@ class MyTestAgent(EosSdk.AgentHandler, EosSdk.FdHandler):
       self.intfMgr_ = intfMgr
       self.intfObj_ = EosSdk.IntfId(interfaceName)
       EosSdk.AgentHandler.__init__(self)
-      EosSdk.FdHandler.__init__(self)
+      EosSdk.FdHandler.__init__(self)  # pylint: disable-msg=W0233
       self.eventCount = 0
 
    def onInitialized(self):
