@@ -14,6 +14,10 @@ event_loop::~event_loop() {
 }
 
 void
+event_loop::wait_for_initialized() const {
+}
+
+void
 event_loop::run(seconds_t duration) const {
    if(duration < 0){
       panic("duration must be 0 or greater");
