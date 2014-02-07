@@ -6,18 +6,16 @@ import sys
 
 import EosSdk
 
-INTF = "Ethernet1"
-
 # Listens to standard input and shuts down an interface when it
 # receives a "shutdown" message. To exit, enter a blank line.
 class MyTestAgent(EosSdk.AgentHandler, EosSdk.FdHandler):
-   def __init__(self, intfMgr):
-      print "This program controls the admin enabled state of Ethernet1"
+   def __init__(self, intfMgr, interfaceName):
+      print "This program controls the admin enabled state of the given interface"
       print " - 'shutdown' will disable the interface"
       print " - any other text will enable the interface"
       print " - an empty line will quit this program"
       self.intfMgr_ = intfMgr
-      self.intfObj_ = EosSdk.IntfId(INTF)
+      self.intfObj_ = EosSdk.IntfId(interfaceName)
       EosSdk.AgentHandler.__init__(self)
       EosSdk.FdHandler.__init__(self)
       self.eventCount = 0
@@ -32,14 +30,14 @@ class MyTestAgent(EosSdk.AgentHandler, EosSdk.FdHandler):
       print "- Fd %d is readable" % fd
       curEnabledStatus = ("enabled" if self.intfMgr_.adminEnabled(self.intfObj_)
                           else "disabled")
-      print "- Ethernet1 is currently", curEnabledStatus
+      print "- %s is currently %s" % (self.intfObj_.toString(), curEnabledStatus)
       msg = sys.stdin.readline()
       if msg.startswith("shut"):
-         print "Shutting down Ethernet1"
+         print "Shutting down %s" % self.intfObj_.toString()
          self.intfMgr_.adminEnabledIs(self.intfObj_, False)
          self.eventCount += 1
       elif msg.strip():
-         print "Enabling Ethernet1"
+         print "Enabling %s" % self.intfObj_.toString()
          self.intfMgr_.adminEnabledIs(self.intfObj_, True)
          self.eventCount += 1
       else:
@@ -54,7 +52,7 @@ class MyTestAgent(EosSdk.AgentHandler, EosSdk.FdHandler):
 
 def main(args):
    intfMgr = EosSdk.getIntfMgr()
-   testAgent = MyTestAgent(intfMgr)
+   testAgent = MyTestAgent(intfMgr, "Ethernet1")
    args = ["MyTestAgent"]
    EosSdk.agentMainLoop(args[0], len(args), args)
    print "Handled %d events" % testAgent.eventCount
