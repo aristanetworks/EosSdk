@@ -9,6 +9,7 @@ nobase_include_HEADERS = $(PUBLISHED_HEADER_FILES)
 
 libeos_la_SOURCES =
 libeos_la_SOURCES += agent.cpp
+libeos_la_SOURCES += acl.cpp
 libeos_la_SOURCES += aresolve.cpp
 libeos_la_SOURCES += decap_group.cpp
 libeos_la_SOURCES += directflow.cpp
