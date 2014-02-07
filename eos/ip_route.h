@@ -61,6 +61,16 @@ class EOS_SDK_PUBLIC ip_route_iter_t : public iter_base<ip_route_t,
 };
 
 
+class ip_route_via_iter_impl;
+
+class EOS_SDK_PUBLIC ip_route_via_iter_t : public iter_base<ip_route_via_t,
+                                                            ip_route_via_iter_impl> {
+ private:
+   friend class ip_route_via_iter_impl;
+   explicit ip_route_via_iter_t(ip_route_via_iter_impl * const) EOS_SDK_PRIVATE;
+};
+
+
 // Manages IP static route configuration
 class EOS_SDK_PUBLIC ip_route_mgr {
  public:
@@ -72,8 +82,10 @@ class EOS_SDK_PUBLIC ip_route_mgr {
    void ip_route_foreach(callback_func_route handler, void * context);
    void ip_route_foreach(callback_func_route handler, void * context,
                          ip_route_t const & bookmark);
+
    // Iterate across configured nexthops for a given route key, i.e.,
    // emit all ip_route_via_t's for a given route key
+   ip_route_via_iter_t ip_route_via_iter(ip_route_key_t const &) const;
    void ip_route_via_foreach(ip_route_key_t const &,
                              callback_func_via handler, void * context);
 
