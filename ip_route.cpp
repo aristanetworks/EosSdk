@@ -31,6 +31,12 @@ ip_route_mgr::ip_route_iter() const {
    return *nop;  // TODO: No op impl.
 }
 
+ip_route_via_iter_t
+ip_route_mgr::ip_route_via_iter(ip_route_key_t const & key) const {
+   ip_route_via_iter_t * nop = 0;
+   return *nop;  // TODO: No op impl.
+}
+
 void
 ip_route_mgr::ip_route_foreach(callback_func_route handler, void *context) {
    // TODO: No op impl.
