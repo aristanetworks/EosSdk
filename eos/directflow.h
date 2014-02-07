@@ -236,8 +236,22 @@ class EOS_SDK_PUBLIC flow_handler {
    void watch_all_flows(bool);
    // void watch_flow(const std::string & name, bool); //= hide
 
+   // Handler called when the flow is first created, so that
+   // the initial status of the flow can be handled
+   virtual void on_flow_create(const std::string & name);
+
+   // Handler called when the flow has been deleted. This is
+   // not the same as the flow simply being deleted from
+   // the hardware table, which will cause the on_flow_status
+   // handler to fire. This is really to handle a flow being
+   // complete deconfigured
+   virtual void on_flow_delete(const std::string & name);
+   
    // Handler called when flow status changes
    virtual void on_flow_status(const std::string & name, flow_status_t);
+
+  private:
+   bool watching_all_flows_;
 };
 
 // Manages DirectFlow configuration
