@@ -26,6 +26,13 @@ eth_phy_intf_handler::on_eth_phy_intf_delete(intf_id_t) {
    // TODO: No op impl.
 }
 
+
+eth_phy_intf_iter_t
+eth_phy_intf_mgr::eth_phy_intf_iter() const {
+   eth_phy_intf_iter_t * nop = 0;
+   return *nop;  // TODO: No op impl.
+}
+
 void
 eth_phy_intf_mgr::eth_phy_intf_foreach(bool (*handler)(intf_id_t, void *), void *) {
    // TODO: No op impl.
