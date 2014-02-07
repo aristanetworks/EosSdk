@@ -178,6 +178,25 @@ flow_action_set_t::set_ip_dst() const {
 }
 
 //
+// flow_handler
+//
+
+flow_handler::flow_handler() {
+   // TODO
+}
+
+flow_handler::~flow_handler() {
+}
+
+void
+flow_handler::watch_all_flows(bool should_watch) {
+}
+
+void
+flow_handler::on_flow_status(const std::string & name, flow_status_t status) {
+}
+
+//
 // directflow_mgr
 //
 
@@ -194,6 +213,38 @@ class directflow_mgr_impl : public directflow_mgr {
 directflow_mgr * get_directflow_mgr() {
    static directflow_mgr_impl impl;
    return &impl;
+}
+
+void
+directflow_mgr::flow_entry_foreach(callback_func handler, void * context) {
+}
+
+void
+directflow_mgr::flow_entry_foreach(callback_func handler, void * context,
+                                   std::string const & bookmark ) {
+}
+
+bool
+directflow_mgr::exists(std::string const & name) const {
+   return false;
+}
+
+void
+directflow_mgr::flow_entry_set(flow_entry_t const & flow_entry) {
+}
+
+void
+directflow_mgr::flow_entry_del(std::string const & name) {
+}
+
+flow_status_t
+directflow_mgr::flow_status(std::string const & name) const {
+   return FLOW_STATUS_UNKNOWN;
+}
+
+flow_rejected_reason_t
+directflow_mgr::flow_rejected_reason(std::string const & name) const {
+   return FLOW_REJECTED_OTHER;
 }
 
 }

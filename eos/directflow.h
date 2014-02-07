@@ -44,6 +44,7 @@ class EOS_SDK_PUBLIC flow_match_field_set_t {
    bool ip_dst() const;
    
   private:
+   friend class directflow_mgr;
    uint32_t match_bitset_;
 };
 
@@ -136,6 +137,7 @@ class EOS_SDK_PUBLIC flow_action_set_t {
    void set_ip_dst_is(bool);
 
   private:
+   friend class directflow_mgr;
    uint32_t action_bitset_;
 };
 
@@ -210,7 +212,7 @@ class EOS_SDK_PUBLIC flow_entry_t {
 enum flow_status_t {
    FLOW_STATUS_UNKNOWN,
    FLOW_CREATED,                // Flow created or modified in hardware
-   FLOW_DELETED,                // Flow deleted from hardware
+   FLOW_DELETED,                // Flow removed from hardware
    FLOW_REJECTED,               // Flow not created
 };
 
@@ -256,13 +258,13 @@ class EOS_SDK_PUBLIC directflow_mgr {
    // Inserts or updates a flow
    void flow_entry_set(flow_entry_t const &);
    // Deletes a flow
-   void flow_entry_del(flow_entry_t const &);
+   void flow_entry_del(std::string const &);
 
    // Returns the status of the given flow
-   flow_status_t flow_status(const std::string & name) const;
+   flow_status_t flow_status(std::string const & name) const;
    // Reason a flow was not programmed. Only valid if the flow's
    // status is FLOW_REJECTED
-   flow_rejected_reason_t flow_rejected_reason(const std::string & name) const;
+   flow_rejected_reason_t flow_rejected_reason(std::string const & name) const;
    
   protected:
    directflow_mgr() EOS_SDK_PRIVATE;
