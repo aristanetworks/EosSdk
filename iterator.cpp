@@ -1,8 +1,11 @@
 // Copyright (c) 2014 Arista Networks, Inc.  All rights reserved.
 // Arista Networks, Inc. Confidential and Proprietary.
 
-#include "eos/iterator.h"
 #include "eos/decap_group.h"
+#include "eos/eth_intf.h"
+#include "eos/eth_phy_intf.h"
+#include "eos/intf.h"
+#include "eos/iterator.h"
 #include "eos/mpls_route.h"
 
 namespace eos {
@@ -50,6 +53,9 @@ inline iter_base<T, Impl>::operator bool() const {
    return false;
 }
 
+template class iter_base<intf_id_t, intf_iter_impl>;
+template class iter_base<intf_id_t, eth_intf_iter_impl>;
+template class iter_base<intf_id_t, eth_phy_intf_iter_impl>;
 template class iter_base<decap_group_t, decap_group_iter_impl>;
 template class iter_base<mpls_route_t, mpls_route_iter_impl>;
 
