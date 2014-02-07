@@ -34,4 +34,4 @@ ACLOCAL_AMFLAGS = -I autogen
 EXTRA_DIST = bootstrap build.sh
 
 dist-hook:
-	chmod -R u+w .
+	chmod -R u+w $(distdir)
