@@ -21,38 +21,7 @@ get_ip_route_mgr() {
 }
 
 ip_route_iter_t::ip_route_iter_t(ip_route_iter_impl * const impl)
-   : impl(0) {
-}
-
-ip_route_iter_t::ip_route_iter_t(ip_route_iter_t const & other)
-   : impl(0) {
-}
-
-ip_route_iter_t::~ip_route_iter_t() {
-}
-
-ip_route_iter_t&
-ip_route_iter_t::operator++() {
-   return *this;
-}
-
-bool
-ip_route_iter_t::operator==(const ip_route_iter_t& rhs) const {
-   return impl == rhs.impl;
-}
-
-bool
-ip_route_iter_t::operator!=(const ip_route_iter_t& rhs) const {
-   return impl != rhs.impl;
-}
-
-ip_route_t
-ip_route_iter_t::operator*() {
-   return ip_route_t();
-}
-
-ip_route_iter_t::operator bool() const {
-   return false;
+   : iter_base(0) {
 }
 
 

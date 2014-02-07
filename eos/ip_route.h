@@ -6,8 +6,7 @@
 
 #include <eos/intf.h>
 #include <eos/ip.h>
-
-#include <iterator>
+#include <eos/iterator.h>
 
 namespace eos {
 
@@ -54,22 +53,11 @@ class EOS_SDK_PUBLIC ip_route_via_t {
 
 class ip_route_iter_impl;
 
-class EOS_SDK_PUBLIC ip_route_iter_t :
-      public std::iterator<std::input_iterator_tag, ip_route_t> {
- public:
-   ip_route_iter_t(ip_route_iter_t const &);
-   ~ip_route_iter_t();
-   ip_route_iter_t& operator++();
-   bool operator==(ip_route_iter_t const & rhs) const;
-   bool operator!=(ip_route_iter_t const & rhs) const;
-   operator bool() const;
-   ip_route_t operator*();
-
+class EOS_SDK_PUBLIC ip_route_iter_t : public iter_base<ip_route_t,
+                                                        ip_route_iter_impl> {
  private:
    friend class ip_route_iter_impl;
-   ip_route_iter_impl * const impl;
    explicit ip_route_iter_t(ip_route_iter_impl * const) EOS_SDK_PRIVATE;
-   ip_route_iter_t() EOS_SDK_PRIVATE;
 };
 
 
