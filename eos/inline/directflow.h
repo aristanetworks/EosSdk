@@ -121,7 +121,7 @@ flow_match_t::cos() const {
 }
 
 inline void
-flow_match_t::ip_src_is(ip_addr_t const & src, ip_addr_mask_t const & mask) {
+flow_match_t::ip_src_is(ip_addr_t const & src, ip_addr_t const & mask) {
    ip_src_ = src;
    ip_src_mask_ = mask;
 }
@@ -131,13 +131,13 @@ flow_match_t::ip_src() const {
    return ip_src_;
 }
 
-inline ip_addr_mask_t
+inline ip_addr_t
 flow_match_t::ip_src_mask() const {
    return ip_src_mask_;
 }
 
 inline void
-flow_match_t::ip_dst_is(ip_addr_t const & dst, ip_addr_mask_t const & mask) {
+flow_match_t::ip_dst_is(ip_addr_t const & dst, ip_addr_t const & mask) {
    ip_dst_ = dst;
    ip_dst_mask_ = mask;
 }
@@ -147,7 +147,7 @@ flow_match_t::ip_dst() const {
    return ip_dst_;
 }
 
-inline ip_addr_mask_t
+inline ip_addr_t
 flow_match_t::ip_dst_mask() const {
    return ip_dst_mask_;
 }
