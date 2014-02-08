@@ -20,79 +20,90 @@ changebit(uint32_t value, uint32_t bit, bool enabled) {
 }
 
 void
-flow_match_field_set_t::eth_src_is(bool enabled) {
+flow_match_field_set_t::input_intfs_is(bool enabled) {
    match_bitset_ = changebit(match_bitset_, 0, enabled);
 }
 
 bool
-flow_match_field_set_t::eth_src() const {
+flow_match_field_set_t::input_intfs() const {
    uint32_t bit = 0;
    return (match_bitset_ & (1 << bit));
 }
 
 void
-flow_match_field_set_t::eth_dst_is(bool enabled) {
+flow_match_field_set_t::eth_src_is(bool enabled) {
    match_bitset_ = changebit(match_bitset_, 1, enabled);
 }
 
 bool
-flow_match_field_set_t::eth_dst() const {
+flow_match_field_set_t::eth_src() const {
    uint32_t bit = 1;
    return (match_bitset_ & (1 << bit));
 }
 
 void
-flow_match_field_set_t::eth_type_is(bool enabled) {
+flow_match_field_set_t::eth_dst_is(bool enabled) {
    match_bitset_ = changebit(match_bitset_, 2, enabled);
 }
 
 bool
-flow_match_field_set_t::eth_type() const {
+flow_match_field_set_t::eth_dst() const {
    uint32_t bit = 2;
    return (match_bitset_ & (1 << bit));
 }
 
 void
-flow_match_field_set_t::vlan_id_is(bool enabled) {
+flow_match_field_set_t::eth_type_is(bool enabled) {
    match_bitset_ = changebit(match_bitset_, 3, enabled);
 }
 
 bool
-flow_match_field_set_t::vlan_id() const {
+flow_match_field_set_t::eth_type() const {
    uint32_t bit = 3;
    return (match_bitset_ & (1 << bit));
 }
 
 void
-flow_match_field_set_t::cos_is(bool enabled) {
+flow_match_field_set_t::vlan_id_is(bool enabled) {
    match_bitset_ = changebit(match_bitset_, 4, enabled);
 }
 
 bool
-flow_match_field_set_t::cos() const {
+flow_match_field_set_t::vlan_id() const {
    uint32_t bit = 4;
    return (match_bitset_ & (1 << bit));
 }
 
 void
-flow_match_field_set_t::ip_src_is(bool enabled) {
+flow_match_field_set_t::cos_is(bool enabled) {
    match_bitset_ = changebit(match_bitset_, 5, enabled);
 }
 
 bool
-flow_match_field_set_t::ip_src() const {
+flow_match_field_set_t::cos() const {
    uint32_t bit = 5;
    return (match_bitset_ & (1 << bit));
 }
 
 void
-flow_match_field_set_t::ip_dst_is(bool enabled) {
+flow_match_field_set_t::ip_src_is(bool enabled) {
    match_bitset_ = changebit(match_bitset_, 6, enabled);
 }
 
 bool
-flow_match_field_set_t::ip_dst() const {
+flow_match_field_set_t::ip_src() const {
    uint32_t bit = 6;
+   return (match_bitset_ & (1 << bit));
+}
+
+void
+flow_match_field_set_t::ip_dst_is(bool enabled) {
+   match_bitset_ = changebit(match_bitset_, 7, enabled);
+}
+
+bool
+flow_match_field_set_t::ip_dst() const {
+   uint32_t bit = 7;
    return (match_bitset_ & (1 << bit));
 }
 
