@@ -31,8 +31,29 @@ libeos_la_SOURCES += version.cpp
 libeos_la_LDFLAGS = -version-info $(SDK_LIBTOOL_VERSION) -lrt
 
 
+# --------- #
+# SWIG libs #
+# --------- #
+
+SWIG_FILES := EosSdk.i SwigUtils.i SwigRenamer.py
+python_PYTHON = EosSdk.py
+pyexec_LTLIBRARIES = _EosSdk.la
+_EosSdk_la_SOURCES = $(srcdir)/EosSdk_wrap.cpp $(srcdir)/EosSdk_wrap.h
+_EosSdk_la_LDFLAGS = -avoid-version -module
+_EosSdk_la_CXXFLAGS = $(AM_CXXFLAGS) -Wno-missing-field-initializers
+_EosSdk_la_CPPFLAGS = -I/usr/include/python$(PYTHON_VERSION)
+_EosSdk_la_LIBADD = libeos.la
+
+$(srcdir)/EosSdk_wrap.cpp: $(SWIG_FILES)
+	SRCDIR=$(srcdir) $(SWIG) -c++ -python -I$(srcdir) -o $@ $(srcdir)/EosSdk.i
+
+$(srcdir)/EosSdk.py: $(SWIG_FILES)
+	$(MAKE) $(AM_MAKEFLAGS) EosSdk_wrap.cpp
+
+MAINTAINERCLEANFILES = $(_EosSdk_la_SOURCES)
+
 ACLOCAL_AMFLAGS = -I autogen
-EXTRA_DIST = bootstrap build.sh
+EXTRA_DIST = bootstrap build.sh $(SWIG_FILES)
 
 dist-hook:
 	chmod -R u+w $(distdir)
