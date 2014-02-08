@@ -238,7 +238,6 @@ class EOS_SDK_PUBLIC flow_handler {
    // flow state. Expects a boolean signifying whether notifications
    // should be proagated to this instance or not.
    void watch_all_flows(bool);
-   // void watch_flow(const std::string & name, bool); //= hide
 
    // Handler called when flow status changes
    virtual void on_flow_status(const std::string & name, flow_status_t);
