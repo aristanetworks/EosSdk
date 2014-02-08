@@ -28,4 +28,6 @@ class EOS_SDK_PUBLIC iter_base : public std::iterator<std::input_iterator_tag, T
 
 }
 
+#include <eos/inline/iterator.h>
+
 #endif // EOS_ITERATOR_H
