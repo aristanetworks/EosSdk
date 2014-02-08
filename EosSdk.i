@@ -20,6 +20,11 @@
 #define SWIG_FILE_WITH_INIT
 %import "eos/base.h"
 
+// Tell swig about uint8/16/32/64_t
+typedef unsigned short uint8_t;
+typedef unsigned short uint16_t;
+typedef unsigned int uint32_t;
+typedef unsigned long long uint64_t;
 // Tell swig about our custom types (copied from base.h)
 typedef double seconds_t;
 typedef uint16_t uint16_be_t;
