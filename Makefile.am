@@ -40,7 +40,10 @@ python_PYTHON = EosSdk.py
 pyexec_LTLIBRARIES = _EosSdk.la
 _EosSdk_la_SOURCES = $(srcdir)/EosSdk_wrap.cpp $(srcdir)/EosSdk_wrap.h
 _EosSdk_la_LDFLAGS = -avoid-version -module
-_EosSdk_la_CXXFLAGS = $(AM_CXXFLAGS) -Wno-missing-field-initializers
+# Swig generated code produces some warnings, depending on the combination of
+# Python version and GCC version, so we turn the problematic ones off here as
+# we build with -Werror:
+_EosSdk_la_CXXFLAGS = $(AM_CXXFLAGS) -Wno-strict-aliasing -Wno-missing-field-initializers
 _EosSdk_la_CPPFLAGS = -I/usr/include/python$(PYTHON_VERSION)
 _EosSdk_la_LIBADD = libeos.la
 
