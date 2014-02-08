@@ -23,6 +23,9 @@ class EOS_SDK_PUBLIC flow_match_field_set_t {
   public:
    flow_match_field_set_t();
 
+   void input_intfs_is(bool);
+   bool input_intfs() const;
+   
    void eth_src_is(bool);
    bool eth_src() const;
 
