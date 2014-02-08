@@ -193,14 +193,6 @@ flow_handler::watch_all_flows(bool should_watch) {
 }
 
 void
-flow_handler::on_flow_create(const std::string & name) {
-}
-
-void
-flow_handler::on_flow_delete(const std::string & name) {
-}
-
-void
 flow_handler::on_flow_status(const std::string & name, flow_status_t status) {
 }
 
