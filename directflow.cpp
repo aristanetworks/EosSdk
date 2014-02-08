@@ -223,13 +223,10 @@ directflow_mgr * get_directflow_mgr() {
    return &impl;
 }
 
-void
-directflow_mgr::flow_entry_foreach(callback_func handler, void * context) {
-}
-
-void
-directflow_mgr::flow_entry_foreach(callback_func handler, void * context,
-                                   std::string const & bookmark ) {
+flow_entry_iter_t
+directflow_mgr::flow_entry_iter() const {
+   flow_entry_iter_t * nop = 0;
+   return *nop;  // TODO: No op impl.
 }
 
 bool
