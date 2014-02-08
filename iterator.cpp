@@ -2,6 +2,7 @@
 // Arista Networks, Inc. Confidential and Proprietary.
 
 #include "eos/decap_group.h"
+#include "eos/directflow.h"
 #include "eos/eth_intf.h"
 #include "eos/eth_phy_intf.h"
 #include "eos/intf.h"
@@ -60,6 +61,7 @@ template class iter_base<intf_id_t, eth_phy_intf_iter_impl>;
 template class iter_base<ip_route_t, ip_route_iter_impl>;
 template class iter_base<ip_route_via_t, ip_route_via_iter_impl>;
 template class iter_base<decap_group_t, decap_group_iter_impl>;
+template class iter_base<flow_entry_t, flow_entry_iter_impl>;
 template class iter_base<mpls_route_t, mpls_route_iter_impl>;
 
 }
