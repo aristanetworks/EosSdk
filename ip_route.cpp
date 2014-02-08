@@ -21,7 +21,7 @@ get_ip_route_mgr() {
 }
 
 ip_route_iter_t::ip_route_iter_t(ip_route_iter_impl * const impl)
-   : iter_base(0) {
+   : iter_base<ip_route_t, ip_route_iter_impl>(0) {
 }
 
 
