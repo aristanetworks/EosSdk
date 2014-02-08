@@ -8,6 +8,11 @@ AM_INIT_AUTOMAKE([foreign 1.9 tar-pax])
 AC_CONFIG_HEADERS([config.h])
 LT_INIT([disable-static])
 AC_PROG_CXX
+AM_PATH_PYTHON([2.6])
+
+# Debian has a binary for SWIG 2.0 named swig2.0 and they kept swig as
+# an alias for swig-1.3.  Let's use the former when available.
+AC_CHECK_PROGS([SWIG], [swig2.0 swig], [swig])
 
 m4_define([VERSION_MAJOR],
           [m4_bregexp(_VERSION_, [^\([0-9]+\)], [\1])])dnl
