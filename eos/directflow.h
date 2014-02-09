@@ -64,6 +64,11 @@ class EOS_SDK_PUBLIC flow_match_t {
    // Match on input interface.
    void input_intfs_is(const std::set<intf_id_t> &);
    std::set<intf_id_t> input_intfs() const;
+   // input_intf_set and input_intf_del are a workaround
+   // until there is proper support for std::set in python.
+   // consider these deprecated
+   void input_intf_set(intf_id_t);
+   void input_intf_del(intf_id_t);
 
    // Match on Ethernet src, dst, and type
 
@@ -158,6 +163,11 @@ class EOS_SDK_PUBLIC flow_action_t {
    // Passing in the empty set will cause the packet to be dropped.
    void output_intfs_is(const std::set<intf_id_t> &);
    std::set<intf_id_t> output_intfs() const;
+   // output_intf_set and output_intf_del are a workaround
+   // until there is proper support for std::set in python.
+   // consider these deprecated
+   void output_intf_set(intf_id_t);
+   void output_intf_del(intf_id_t);
 
    // Specify the VLAN id
    // 0 means use configured native VLAN
