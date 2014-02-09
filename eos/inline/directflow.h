@@ -47,6 +47,16 @@ flow_match_t::input_intfs_is(std::set<intf_id_t> const & input_intfs) {
    input_intfs_ = input_intfs;
 }
 
+inline void
+flow_match_t::input_intf_set(intf_id_t intf_id) {
+   input_intfs_.insert(intf_id);
+}
+
+inline void
+flow_match_t::input_intf_del(intf_id_t intf_id) {
+   input_intfs_.erase(intf_id);
+}
+
 inline std::set<intf_id_t>
 flow_match_t::input_intfs() const {
    return input_intfs_;
@@ -189,6 +199,16 @@ flow_action_t::action_set() const {
 inline void
 flow_action_t::output_intfs_is(const std::set<intf_id_t> & output_intfs) {
    output_intfs_ = output_intfs;
+}
+
+inline void
+flow_action_t::output_intf_set(intf_id_t intf_id) {
+   output_intfs_.insert(intf_id);
+}
+
+inline void
+flow_action_t::output_intf_del(intf_id_t intf_id) {
+   output_intfs_.erase(intf_id);
 }
 
 inline std::set<intf_id_t>
