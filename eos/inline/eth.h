@@ -24,6 +24,11 @@ eth_addr_t::operator!() const {
       && !bytes_[3] && !bytes_[4] && !bytes_[5];
 }
 
+inline
+eth_addr_t::operator bool() const {
+   return !!(*this);
+}
+
 inline bool
 eth_addr_t::operator==(eth_addr_t const & other) const {
    return bytes_[0] == other.bytes_[0]
