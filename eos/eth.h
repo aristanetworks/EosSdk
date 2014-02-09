@@ -31,6 +31,7 @@ class EOS_SDK_PUBLIC eth_addr_t {
    bool operator!() const;
    bool operator==(eth_addr_t const & other) const;
    bool operator!=(eth_addr_t const & other) const;
+   operator bool() const;
 
    uint8_t byte(int index) const;
    void bytes(void *) const;
