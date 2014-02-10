@@ -89,7 +89,7 @@ class DirectFlowProgrammer(EosSdk.AgentHandler,
    def __init__(self):
       self.directFlowMgr_ = EosSdk.getDirectflowMgr()
       EosSdk.AgentHandler.__init__(self)
-      EosSdk.FdHandler.__init__(self)
+      EosSdk.FdHandler.__init__(self) # pylint: disable-msg=W0233
    
    def onInitialized(self):
       # Resynchronize initial flows
