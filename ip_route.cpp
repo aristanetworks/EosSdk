@@ -20,6 +20,26 @@ get_ip_route_mgr() {
    return &impl;
 }
 
+void
+ip_route_mgr::resync_complete() {
+   // TODO: No op impl.
+}
+void
+ip_route_mgr::resync_init()  {
+   // TODO: No op impl.
+}
+
+uint32_t
+ip_route_mgr::tag() {
+   return 0; // TODO: No op impl.
+}
+
+void
+ip_route_mgr::tag_is(uint32_t tag) {
+   // TODO: No op impl.
+}
+
+
 ip_route_iter_t::ip_route_iter_t(ip_route_iter_impl * const impl)
    : iter_base<ip_route_t, ip_route_iter_impl>(0) {
 }
