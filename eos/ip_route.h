@@ -74,6 +74,12 @@ class EOS_SDK_PUBLIC ip_route_via_iter_t : public iter_base<ip_route_via_t,
 // Manages IP static route configuration
 class EOS_SDK_PUBLIC ip_route_mgr {
  public:
+   uint32_t tag();
+   void tag_is(uint32_t);
+
+   void resync_init();    
+   void resync_complete();
+
    typedef bool (*callback_func_route)(ip_route_t const &, void * context);
    typedef bool (*callback_func_via)(ip_route_via_t const &, void * context);
 
