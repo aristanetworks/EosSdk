@@ -3,6 +3,8 @@
 
 #include <cassert>
 #include <cstdlib>  // for abort()
+#include <functional> // For dummy agent_id impl
+
 #include "eos/agent.h"
 #include "impl.h"
 
@@ -34,5 +36,12 @@ agent_exit() {
    impl.stop_loop();
 }
 
+uint32_t
+agent_id(const char * agent_name) {
+   // Dummy implementation. Eventually we should base this of
+   // /proc/run or some other universal lookup.
+   std::hash<const char *> h;
+   return h(agent_name);
+}
 
 }
