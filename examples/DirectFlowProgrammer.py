@@ -124,6 +124,7 @@ class DirectFlowProgrammer(EosSdk.AgentHandler,
       # Set up the FlowHandlerTrampoline to be notified of flow
       # status changes
       self.flowHandlerTrampoline_ = FlowHandlerTrampoline(self)
+      self.watchAllFlows(True)
       
       # Now start accepting input on stdin
       self.watchReadable(sys.stdin.fileno(), True)
