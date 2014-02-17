@@ -245,6 +245,11 @@ void
 directflow_mgr::flow_entry_del(std::string const & name) {
 }
 
+flow_counters_t
+directflow_mgr::flow_counters(std::string const & name) const {
+   return flow_counters_t();
+}
+
 flow_status_t
 directflow_mgr::flow_status(std::string const & name) const {
    return FLOW_STATUS_UNKNOWN;

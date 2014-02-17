@@ -223,6 +223,18 @@ class EOS_SDK_PUBLIC flow_entry_t {
    flow_priority_t priority_;
 };
 
+class EOS_SDK_PUBLIC flow_counters_t {
+  public:
+   flow_counters_t();
+   uint64_t bytes() const;
+   uint64_t packets() const;
+   
+  private:
+   friend class directflow_mgr;
+   uint64_t bytes_;
+   uint64_t packets_;
+};
+
 enum flow_status_t {
    FLOW_STATUS_UNKNOWN,
    FLOW_CREATED,                // Flow created or modified in hardware
@@ -288,6 +300,8 @@ class EOS_SDK_PUBLIC directflow_mgr {
    // Reason a flow was not programmed. Only valid if the flow's
    // status is FLOW_REJECTED
    flow_rejected_reason_t flow_rejected_reason(std::string const & name) const;
+   // Returns the counters for a flow
+   flow_counters_t flow_counters(std::string const & name) const;
 
   protected:
    directflow_mgr() EOS_SDK_PRIVATE;
