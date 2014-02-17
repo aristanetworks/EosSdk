@@ -309,6 +309,23 @@ flow_entry_t::priority() const {
    return priority_;
 }
 
+//
+// flow_counter_t method implementation
+//
+
+inline flow_counters_t::flow_counters_t() : bytes_(0), packets_(0) {
+}
+
+inline uint64_t
+flow_counters_t::bytes() const {
+   return bytes_;
+}
+
+inline uint64_t
+flow_counters_t::packets() const {
+   return packets_;
+}
+
 }
 
 #endif // EOS_INLINE_DIRECTFLOW_H
