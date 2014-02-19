@@ -30,7 +30,7 @@ ip_route_mgr::resync_init()  {
 }
 
 uint32_t
-ip_route_mgr::tag() {
+ip_route_mgr::tag() const {
    return 0; // TODO: No op impl.
 }
 
@@ -82,6 +82,12 @@ ip_route_mgr::exists(const ip_route_key_t & route_key) const {
 bool
 ip_route_mgr::exists(const ip_route_via_t & route_via) const {
    return false;  // TODO: No op impl.
+}
+
+ip_route_t
+ip_route_mgr::ip_route(ip_route_key_t const & route_key) {
+   // TODO: No op impl.
+   return ip_route_t();
 }
 
 void
