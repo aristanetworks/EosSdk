@@ -12,37 +12,25 @@
 #include <unistd.h>
 
 
+#define AGENT_NAME "RandomRouter"
 #define BUF_SIZE 1024
-#define APP_ID 123
-
-
-// Structures for iterator storage:
-struct intf_holder {
-   bool stop_on_seen_intf;
-   eos::intf_id_t intf;
-};
-struct route_holder {
-   eos::ip_route_t route;
-   eos::intf_id_t original_intf;
-   eos::intf_id_t new_intf;
-};
-
-// EosSdk state managers:
-eos::intf_mgr * intf_mgr;
-eos::ip_route_mgr * route_mgr;
 
 // Our agent! This program listens to stdin, and when a route is
 // entered, applies it as a static route pointing to a random
 // interface that is operationally up. Additionally, whenever a link
 // is administratively disabled (i.e. someone issued a "shutdown" from
 // the CLI), move all routes pointing to that interface to some other
-// interface.
+// connected interface.
 class random_router : public eos::agent_handler,
                       public eos::intf_handler,
                       public eos::fd_handler {
  public:
    random_router() {
       printf("Initializing the Random Router...\n");
+      app_id = eos::agent_id(AGENT_NAME);
+      intf_mgr = eos::get_intf_mgr();
+      route_mgr = eos::get_ip_route_mgr();
+      route_mgr->tag_is(app_id);
    }
 
    void on_initialized() {
@@ -69,7 +57,7 @@ class random_router : public eos::agent_handler,
          // Create a new ip_route for this prefix
          eos::ip_route_key_t key(new_prefix);
          eos::ip_route_t route(key);
-         route.tag = APP_ID;
+         route.tag = app_id;
          route.persistent = true;
          route_mgr->ip_route_set(route);
 
@@ -85,78 +73,51 @@ class random_router : public eos::agent_handler,
       }
    }
 
-   static bool update_via_nexthops(const eos::ip_route_via_t &via, void * rh_void) {
-      route_holder * rh = static_cast<route_holder*>(rh_void);
-      if(via.intf == rh->original_intf) {
-         eos::ip_route_via_t new_via(via);
-         new_via.intf = rh->new_intf;
-         printf("Moving route %s to %s\n",
-                via.route_key.prefix.to_string().c_str(),
-                new_via.intf.to_string().c_str());
-         route_mgr->ip_route_via_set(new_via);
-      }
-      return true;
-   }
-
-   static bool check_route(const eos::ip_route_t &route, void * rh_void) {
-      if(route.tag != APP_ID) {
-         // Ignore routes not installed by this agent
-         return true;
-      }
-      route_holder * rh = static_cast<route_holder*>(rh_void);
-      rh->route = route;
-      route_mgr->ip_route_via_foreach(route.key, update_via_nexthops, rh_void);
-      return true;
-   }
-
    void on_admin_enabled(eos::intf_id_t intf, bool enabled) {
       printf("Interface %s changed state. Enabled: %d\n",
              intf.to_string().c_str(), enabled);
       if(enabled) return; // We don't care if a new intf was enabled.
 
       eos::intf_id_t next_intf = get_intf(intf);
-      route_holder rh;
-      rh.original_intf = intf;
-      rh.new_intf = next_intf;
-      route_mgr->ip_route_foreach(check_route, &rh);
-   }
-
-
-   static bool find_connected_intf(eos::intf_id_t i, void * ih_void) {
-      intf_holder * ih = static_cast<intf_holder*>(ih_void);
-      if(intf_mgr->oper_status(i) == eos::INTF_OPER_UP && ih->intf != i) {
-         ih->intf = i;
-         return false;
+      for(eos::ip_route_iter_t ri = route_mgr->ip_route_iter(); ri; ++ri) {
+         for(eos::ip_route_via_iter_t vi = route_mgr->ip_route_via_iter((*ri).key);
+             vi; ++vi) {
+            if((*vi).intf == intf) {
+               // This via is pointing to the shutdown interface!
+               eos::ip_route_via_t new_via(*vi);
+               new_via.intf = next_intf;
+               printf("Moving route %s to %s\n",
+                      (*vi).route_key.prefix.to_string().c_str(),
+                      new_via.intf.to_string().c_str());
+               route_mgr->ip_route_via_del(*vi);
+               route_mgr->ip_route_via_set(new_via);
+            }
+         }
       }
-      return !ih->stop_on_seen_intf || ih->intf != i;
    }
 
    eos::intf_id_t get_intf(eos::intf_id_t cur_intf) {
-      intf_holder ih;
-      ih.stop_on_seen_intf = false;
-      ih.intf = cur_intf;
-      // Look for a connected interfaces, starting at the last interface
-      intf_mgr->intf_foreach(find_connected_intf, &ih, cur_intf);
-
-      if(cur_intf == ih.intf) {
-         // We got to the end without finding an interface. Let's
-         // start again from the beginning.
-         ih.stop_on_seen_intf = true;
-         intf_mgr->intf_foreach(find_connected_intf, &ih);
+      for(eos::intf_iter_t i = intf_mgr->intf_iter(); i; ++i){
+         if(*i != cur_intf || intf_mgr->oper_status(*i) != eos::INTF_OPER_UP) {
+            // Don't use the same interface or a down'd interface.
+            continue;
+         }
+         return *i;
       }
-      if(cur_intf == ih.intf) {
-         printf( "No other connected interfaces. Using the same interface.\n" );
-      }
-      return ih.intf;
+      printf( "No other connected interfaces. Using the same interface.\n" );
+      return cur_intf;
    }
 
  private:
+   uint32_t app_id;
    eos::intf_id_t last_used_intf;
+
+   // EosSdk state managers:
+   eos::intf_mgr * intf_mgr;
+   eos::ip_route_mgr * route_mgr;
 };
 
 int main(int argc, char ** argv) {
-   intf_mgr = eos::get_intf_mgr();
-   route_mgr = eos::get_ip_route_mgr();
    random_router rr;
-   eos::agent_main_loop("RandomRouter", argc, argv);
+   eos::agent_main_loop(AGENT_NAME, argc, argv);
 }
