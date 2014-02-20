@@ -14,6 +14,16 @@ class mpls_route_mgr_impl : public mpls_route_mgr {
    }
 };
 
+void
+mpls_route_mgr::resync_init() {
+   // TODO: No op impl
+}
+
+void
+mpls_route_mgr::resync_complete() {
+   // TODO: No op impl
+}
+
 mpls_route_iter_t
 mpls_route_mgr::mpls_route_iter() const {
    mpls_route_iter_t * nop = 0;
