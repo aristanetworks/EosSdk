@@ -59,6 +59,9 @@ class EOS_SDK_PUBLIC decap_group_iter_t : public iter_base<decap_group_t,
 // virtual function is called, the manager is valid for use.
 class EOS_SDK_PUBLIC decap_group_mgr {
  public:
+   void resync_init();    
+   void resync_complete();
+
    // Iterates over all the decap groups currently configured.
    decap_group_iter_t decap_group_iter() const;
    typedef bool (*callback_func_decap_group)(decap_group_t const &, void * context);
