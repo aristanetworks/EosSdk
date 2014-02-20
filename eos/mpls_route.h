@@ -70,6 +70,9 @@ class EOS_SDK_PUBLIC mpls_route_iter_t : public iter_base<mpls_route_t,
 
 class EOS_SDK_PUBLIC mpls_route_mgr {
   public:
+   void resync_init();
+   void resync_complete();
+
    mpls_route_iter_t mpls_route_iter() const;
 
    typedef bool (*callback_func_route)(mpls_route_t const &, void * context);
