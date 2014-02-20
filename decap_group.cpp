@@ -16,6 +16,16 @@ class decap_group_mgr_impl : public decap_group_mgr {
    }
 };
 
+void
+decap_group_mgr::resync_init() {
+   // TODO: No op impl
+}
+
+void
+decap_group_mgr::resync_complete() {
+   // TODO: No op impl
+}
+
 decap_group_iter_t
 decap_group_mgr::decap_group_iter() const {
    decap_group_iter_t * nop = 0;
