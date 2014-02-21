@@ -1,7 +1,7 @@
 // Copyright (c) 2013 Arista Networks, Inc.  All rights reserved.
 // Arista Networks, Inc. Confidential and Proprietary.
 
-%module(directors="1") EosSdk
+%module(directors="1") eossdk
 
 %include "std_string.i"
 %import "SwigUtils.i"
@@ -10,10 +10,7 @@
  // The <<""< uses automatic string concatination to get around the
  // conflict marker limitation.
 %rename("%(command:python $SRCDIR/SwigRenamer.py --classname <<""<)s", %$isclass) "";
-// Rename all functions and variables to be lowerCamelCased:
-%rename("%(command:python $SRCDIR/SwigRenamer.py <<""<)s", %$isfunction) "";
-%rename("%(command:python $SRCDIR/SwigRenamer.py <<""<)s", %$isvariable) "";
-// Don't do anything for enum values.
+// Don't do anything for enum values, functions or variables.
 
 // Ignored conversions:
 
