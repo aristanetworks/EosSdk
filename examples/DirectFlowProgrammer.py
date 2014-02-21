@@ -94,19 +94,19 @@ class FlowHandlerTrampoline(EosSdk.FlowHandler):
       EosSdk.FlowHandler.__init__(self)
       # Register callback for the status of all flows
       EosSdk.FlowHandler.watchAllFlows(self, True)
-      
+
    def onFlowStatus(self, name, status):        # pylint: disable-msg=W0221
       self.parent_.onFlowStatus(name, status)
 
 class DirectFlowProgrammer(EosSdk.AgentHandler,
                            EosSdk.FdHandler):
-   
+
    def __init__(self):
       self.directFlowMgr_ = EosSdk.getDirectflowMgr()
       self.flowHandlerTrampoline_ = None
       EosSdk.AgentHandler.__init__(self)
       EosSdk.FdHandler.__init__(self)           # pylint: disable-msg=W0233
-   
+
    def onInitialized(self):
       # Resynchronize initial flows
       # Uncomment once we've added hitless resync support to the API:
@@ -125,10 +125,10 @@ class DirectFlowProgrammer(EosSdk.AgentHandler,
       # status changes
       self.flowHandlerTrampoline_ = FlowHandlerTrampoline(self)
       self.watchAllFlows(True)
-      
+
       # Now start accepting input on stdin
       self.watchReadable(sys.stdin.fileno(), True)
-   
+
    def onReadable(self, fd):
       # Handle input on stdin of the format:
       # NAME (add|delete) IPADDR INTERFACE
@@ -158,9 +158,9 @@ class DirectFlowProgrammer(EosSdk.AgentHandler,
          else:
             assert operation == "delete"
             self.directFlowMgr_.flowEntryDel(name)
-      
+
    def onFlowStatus(self, name, status):
       print "Flow", name, "status changed to", status
 
 programmer = DirectFlowProgrammer()
-EosSdk.agentMainLoop("DirectFlowProgrammer", len(sys.argv), sys.argv)
+EosSdk.agentMainLoop("DirectFlowProgrammer", sys.argv)
