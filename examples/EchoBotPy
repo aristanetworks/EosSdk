@@ -77,4 +77,4 @@ class EchoBot(EosSdk.TimeoutHandler, EosSdk.FdHandler):
       return s
 
 echoBot = EchoBot()
-EosSdk.agentMainLoop("EchoBotPy", len(sys.argv), sys.argv)
+EosSdk.agentMainLoop("EchoBotPy", sys.argv)
