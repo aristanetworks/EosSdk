@@ -1,7 +1,7 @@
 lib_LTLIBRARIES = libeos.la
 
 AM_CXXFLAGS = -fvisibility=hidden -std=gnu++0x
-AM_CXXFLAGS += -Wextra -Wall -Werror -Wno-unused-parameter
+AM_CXXFLAGS += -Wextra -Wall -Wnon-virtual-dtor -Werror -Wno-unused-parameter
 AM_LDFLAGS = -Wl,--no-undefined
 
 PUBLISHED_HEADER_FILES := $(wildcard eos/*.h) $(wildcard eos/inline/*.h)
