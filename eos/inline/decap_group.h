@@ -8,7 +8,11 @@
 
 namespace eos {
 
-inline decap_group_t::decap_group_t() {
+inline decap_group_t::decap_group_t()
+      : group_name_(),
+        destination_addr_(),
+        protocol_type_(PROTOCOL_TYPE_NULL),
+        persistent_(false) {
 }
 
 inline decap_group_t::decap_group_t(std::string group_name,
@@ -16,7 +20,8 @@ inline decap_group_t::decap_group_t(std::string group_name,
                                     decap_protocol_type_t protocol)
    : group_name_(group_name),
      destination_addr_(destination_ip),
-     protocol_type_(protocol) {
+     protocol_type_(protocol),
+     persistent_(false) {
    if(group_name.empty()) {
       panic("group_name must be a non-empty string");
    } else if(protocol == PROTOCOL_TYPE_NULL) {
@@ -61,6 +66,16 @@ decap_group_t::protocol_type() const {
 inline void
 decap_group_t::protocol_type_is(decap_protocol_type_t protocol_type) {
    protocol_type_ = protocol_type;
+}
+
+inline bool
+decap_group_t::persistent() const {
+   return persistent_;
+}
+
+inline void
+decap_group_t::persistent_is(bool persistent) {
+   persistent_ = persistent;
 }
 
 }

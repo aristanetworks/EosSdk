@@ -34,6 +34,9 @@ class EOS_SDK_PUBLIC decap_group_t {
    void destination_addr_is(ip_addr_t const &);
    decap_protocol_type_t protocol_type() const;
    void protocol_type_is(decap_protocol_type_t);
+
+   bool persistent() const;
+   void persistent_is(bool);
  private:
    // The decap-group name, must be supplied.  Note that the decap
    // group namespace is per-VRF, that is, the vrf_name scopes the
@@ -42,6 +45,8 @@ class EOS_SDK_PUBLIC decap_group_t {
 
    ip_addr_t destination_addr_;  // Match destination IP on the outermost IP header
    decap_protocol_type_t protocol_type_;  // Match this outer IP protocol to decap
+
+   bool persistent_; // If true, the decap group is stored in the startup-config
 };
 
 class decap_group_iter_impl;
