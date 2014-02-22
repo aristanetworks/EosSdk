@@ -8,11 +8,22 @@ AM_INIT_AUTOMAKE([foreign 1.9 tar-pax])
 AC_CONFIG_HEADERS([config.h])
 LT_INIT([disable-static])
 AC_PROG_CXX
-AM_PATH_PYTHON([2.6])
 
-# Debian has a binary for SWIG 2.0 named swig2.0 and they kept swig as
-# an alias for swig-1.3.  Let's use the former when available.
-AC_CHECK_PROGS([SWIG], [swig2.0 swig], [swig])
+AC_ARG_ENABLE([python],
+              [AS_HELP_STRING([--enable-python],
+                              [compile Python bindings])],
+              [enable_python=yes], [])
+AM_CONDITIONAL([USE_PYTHON], [test "x$enable_python" = xyes])
+if test "x$enable_python" != xyes; then
+   AC_MSG_NOTICE([You may configure with --enable-python ]dnl
+[if you need Python bindings.])
+else
+   AM_PATH_PYTHON([2.6])
+
+   # Debian has a binary for SWIG 2.0 named swig2.0 and they kept swig as
+   # an alias for swig-1.3.  Let's use the former when available.
+   AC_CHECK_PROGS([SWIG], [swig2.0 swig], [swig])
+fi
 
 m4_define([VERSION_MAJOR],
           [m4_bregexp(_VERSION_, [^\([0-9]+\)], [\1])])dnl
