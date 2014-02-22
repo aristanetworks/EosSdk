@@ -95,7 +95,7 @@ class EOS_SDK_PUBLIC ip_route_mgr {
    // regardless of the real values in Sysdb. The one exception is
    // iteration; they will traverse the table stored in Sysdb,
    // regardless of whether or not the manager is in resync mode.
-   void resync_init();    
+   void resync_init();
    void resync_complete();
 
    typedef bool (*callback_func_route)(ip_route_t const &, void * context);
@@ -128,7 +128,7 @@ class EOS_SDK_PUBLIC ip_route_mgr {
    ip_route_t ip_route(ip_route_key_t const &);
    // Inserts or updates a static route into the switch configuration.
    void ip_route_set(ip_route_t const &);
-   // Removes all ECMP vias matching the route key, and the route itself. 
+   // Removes all ECMP vias matching the route key, and the route itself.
    void ip_route_del(ip_route_key_t const &);
 
    // Adds a via to an ip_route_t. Will panic if the corresponding route
