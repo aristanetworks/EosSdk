@@ -25,7 +25,7 @@ class EOS_SDK_PUBLIC flow_match_field_set_t {
 
    void input_intfs_is(bool);
    bool input_intfs() const;
-   
+
    void eth_src_is(bool);
    bool eth_src() const;
 
@@ -228,7 +228,7 @@ class EOS_SDK_PUBLIC flow_counters_t {
    flow_counters_t();
    uint64_t bytes() const;
    uint64_t packets() const;
-   
+
   private:
    friend class directflow_mgr;
    uint64_t bytes_;
