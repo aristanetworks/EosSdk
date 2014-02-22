@@ -2,7 +2,8 @@
 # Copyright (c) 2014 Arista Networks, Inc.  All rights reserved.
 # Arista Networks, Inc. Confidential and Proprietary.
 
-import EosSdk
+import eossdk
+
 import re
 import os
 import sys
@@ -17,38 +18,38 @@ def createMatch(inputIntfs=None,
                 ipSrcMask="255.255.255.255",
                 ipDst=None,
                 ipDstMask="255.255.255.255"):
-   match = EosSdk.FlowMatch()
-   matchFieldSet = EosSdk.FlowMatchFieldSet()
+   match = eossdk.FlowMatch()
+   matchFieldSet = eossdk.FlowMatchFieldSet()
    if inputIntfs is not None:
       # Until we have correct swig support for std::set,
       # need to add each interface individually
-      matchFieldSet.inputIntfsIs(True)
+      matchFieldSet.input_intfs_is(True)
       for intfId in inputIntfs:
-         match.inputIntfSet(intfId)
+         match.input_intf_set(intfId)
    if ethSrc is not None:
-      matchFieldSet.ethSrcIs(True)
-      ethSrc = EosSdk.EthAddr(ethSrc)
-      ethSrcMask = EosSdk.EthAddr(ethSrcMask)
-      match.ethSrcIs(ethSrc, ethSrcMask)
+      matchFieldSet.eth_src_is(True)
+      ethSrc = eossdk.EthAddr(ethSrc)
+      ethSrcMask = eossdk.EthAddr(ethSrcMask)
+      match.eth_src_is(ethSrc, ethSrcMask)
    if ethDst is not None:
-      matchFieldSet.ethDstIs(True)
-      ethDst = EosSdk.EthAddr(ethDst)
-      ethDstMask = EosSdk.EthAddr(ethDstMask)
-      match.ethDstIs(ethDst, ethDstMask)
+      matchFieldSet.eth_dst_is(True)
+      ethDst = eossdk.EthAddr(ethDst)
+      ethDstMask = eossdk.EthAddr(ethDstMask)
+      match.eth_dst_is(ethDst, ethDstMask)
    if ethType is not None:
-      matchFieldSet.ethTypeIs(True)
-      match.ethTypeIs(ethType)
+      matchFieldSet.ethType_is(True)
+      match.ethType_is(ethType)
    if ipSrc is not None:
-      matchFieldSet.ipSrcIs(True)
-      ipSrc = EosSdk.IpAddr(ipSrc)
-      ipSrcMask = EosSdk.IpAddr(ipSrcMask)
-      match.ipSrcIs(ipSrc, ipSrcMask)
+      matchFieldSet.ip_src_is(True)
+      ipSrc = eossdk.IpAddr(ipSrc)
+      ipSrcMask = eossdk.IpAddr(ipSrcMask)
+      match.ip_src_is(ipSrc, ipSrcMask)
    if ipDst is not None:
-      matchFieldSet.ipDstIs(True)
-      ipDst = EosSdk.IpAddr(ipDst)
-      ipDstMask = EosSdk.IpAddr(ipDstMask)
-      match.ipDstIs(ipDst, ipDstMask)
-   match.matchFieldSetIs(matchFieldSet)
+      matchFieldSet.ip_dst_is(True)
+      ipDst = eossdk.IpAddr(ipDst)
+      ipDstMask = eossdk.IpAddr(ipDstMask)
+      match.ip_dst_is(ipDst, ipDstMask)
+   match.match_field_set_is(matchFieldSet)
    return match
 
 def createAction(outputIntfs=None,
@@ -56,80 +57,80 @@ def createAction(outputIntfs=None,
                  ethDst=None,
                  ipSrc=None,
                  ipDst=None):
-   action = EosSdk.FlowAction()
-   actionSet = EosSdk.FlowActionSet()
+   action = eossdk.FlowAction()
+   actionSet = eossdk.FlowActionSet()
    if outputIntfs is not None:
       # Until we have correct swig support for std::set,
       # need to add each interface individually
-      actionSet.setOutputIntfsIs(True)
+      actionSet.set_output_intfs_is(True)
       for intfId in outputIntfs:
-         action.outputIntfSet(intfId)
+         action.output_intf_set(intfId)
    if ethSrc is not None:
-      actionSet.setEthSrcIs(True)
-      newEthSrc = EosSdk.EthAddr(ethSrc)
-      action.ethSrcIs(newEthSrc)
+      actionSet.setEth_src_is(True)
+      newEthSrc = eossdk.EthAddr(ethSrc)
+      action.eth_src_is(newEthSrc)
    if ethDst is not None:
-      actionSet.setEthDstIs(True)
-      newEthDst = EosSdk.EthAddr(ethDst)
-      action.ethDstIs(newEthDst)
+      actionSet.setEth_dst_is(True)
+      newEthDst = eossdk.EthAddr(ethDst)
+      action.eth_dst_is(newEthDst)
    if ipSrc is not None:
-      actionSet.setIpSrcIs(True)
-      newIpSrc = EosSdk.IpAddr(ipSrc)
-      action.ipSrcIs(newIpSrc)
+      actionSet.setIp_src_is(True)
+      newIpSrc = eossdk.IpAddr(ipSrc)
+      action.ip_src_is(newIpSrc)
    if ipDst is not None:
-      actionSet.setIpDstIs(True)
-      newIpDst = EosSdk.IpAddr(ipDst)
-      action.ipDstIs(newIpDst)
-   action.actionSetIs(actionSet)
+      actionSet.setIp_dst_is(True)
+      newIpDst = eossdk.IpAddr(ipDst)
+      action.ip_dst_is(newIpDst)
+   action.action_set_is(actionSet)
    return action
 
-class FlowHandlerTrampoline(EosSdk.FlowHandler):
+class FlowHandlerTrampoline(eossdk.FlowHandler):
    # Multiple inheritance doesn't work great with our python bindings
    # at this point, so we have to use a trampoline class
    # to be notified of changes to flows, instead of just having
-   # the DirectFlowProgrammer also inhering from EosSdk.FlowHandler
+   # the DirectFlowProgrammer also inhering from eossdk.FlowHandler
 
    def __init__(self, parent):
       self.parent_ = parent
-      EosSdk.FlowHandler.__init__(self)
+      eossdk.FlowHandler.__init__(self)
       # Register callback for the status of all flows
-      EosSdk.FlowHandler.watchAllFlows(self, True)
+      eossdk.FlowHandler.watch_all_flows(self, True)
 
-   def onFlowStatus(self, name, status):        # pylint: disable-msg=W0221
-      self.parent_.onFlowStatus(name, status)
+   def on_flow_status(self, name, status):        # pylint: disable-msg=W0221
+      self.parent_.on_flow_status(name, status)
 
-class DirectFlowProgrammer(EosSdk.AgentHandler,
-                           EosSdk.FdHandler):
+class DirectFlowProgrammer(eossdk.AgentHandler,
+                           eossdk.FdHandler):
 
    def __init__(self):
-      self.directFlowMgr_ = EosSdk.getDirectflowMgr()
+      self.directFlowMgr_ = eossdk.get_directflow_mgr()
       self.flowHandlerTrampoline_ = None
-      EosSdk.AgentHandler.__init__(self)
-      EosSdk.FdHandler.__init__(self)           # pylint: disable-msg=W0233
+      eossdk.AgentHandler.__init__(self)
+      eossdk.FdHandler.__init__(self)           # pylint: disable-msg=W0233
 
-   def onInitialized(self):
+   def on_initialized(self):
       # Resynchronize initial flows
       # Uncomment once we've added hitless resync support to the API:
-      # self.directFlowMgr_.resyncInit()
+      # self.directFlowMgr_.resync_init()
       # Add default flow entry. In this case, drop all IPv4 traffic.
-      defaultEntry = EosSdk.FlowEntry("DefaultFlow",
+      defaultEntry = eossdk.FlowEntry("DefaultFlow",
                                       createMatch(ipDst="0.0.0.0",
                                                   ipDstMask="0.0.0.0"),
                                       createAction(outputIntfs=[]),
                                       0)
-      self.directFlowMgr_.flowEntrySet(defaultEntry)
+      self.directFlowMgr_.flow_entry_set(defaultEntry)
       # Uncomment once we've added hitless resync support to the API:
-      # self.directFlowMgr_.resyncComplete()
+      # self.directFlowMgr_.resync_complete()
 
       # Set up the FlowHandlerTrampoline to be notified of flow
       # status changes
       self.flowHandlerTrampoline_ = FlowHandlerTrampoline(self)
-      self.watchAllFlows(True)
+      self.watch_all_flows(True)
 
       # Now start accepting input on stdin
-      self.watchReadable(sys.stdin.fileno(), True)
+      self.watch_readable(sys.stdin.fileno(), True)
 
-   def onReadable(self, fd):
+   def on_readable(self, fd):
       # Handle input on stdin of the format:
       # NAME (add|delete) IPADDR INTERFACE
       # and adds/deletes a flow that matches on that destination ip address
@@ -147,20 +148,20 @@ class DirectFlowProgrammer(EosSdk.AgentHandler,
          if operation == "add":
             match = createMatch(ipDst=m.group(3),
                                 ipDstMask="255.255.255.255")
-            outputIntf = EosSdk.IntfId(m.group(4))
+            outputIntf = eossdk.IntfId(m.group(4))
             action = createAction(outputIntfs=[ outputIntf ])
             priority = 100
-            entry = EosSdk.FlowEntry(name,
+            entry = eossdk.FlowEntry(name,
                                      match,
                                      action,
                                      priority)
-            self.directFlowMgr_.flowEntrySet(entry)
+            self.directFlowMgr_.flow_entry_set(entry)
          else:
             assert operation == "delete"
-            self.directFlowMgr_.flowEntryDel(name)
+            self.directFlowMgr_.flow_entry_del(name)
 
-   def onFlowStatus(self, name, status):
+   def on_flow_status(self, name, status):
       print "Flow", name, "status changed to", status
 
 programmer = DirectFlowProgrammer()
-EosSdk.agentMainLoop("DirectFlowProgrammer", sys.argv)
+eossdk.agent_main_loop("DirectFlowProgrammer", sys.argv)

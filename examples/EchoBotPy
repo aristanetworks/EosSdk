@@ -5,7 +5,7 @@
 """ Implements a simple Echo bot script. This script does not handle
 write errors as EchoBot.cpp does. """
 
-import EosSdk
+import eossdk
 
 import socket
 import sys
@@ -16,17 +16,17 @@ IDLE_TIMEOUT = 10
 LISTEN_BACKLOG = 5
 MAX_BUF_SIZE = 1024
 
-class EchoBot(EosSdk.TimeoutHandler, EosSdk.FdHandler):
+class EchoBot(eossdk.TimeoutHandler, eossdk.FdHandler):
    def __init__(self):
       print "initializing..."
-      EosSdk.TimeoutHandler.__init__(self)
-      EosSdk.FdHandler.__init__(self)  # pylint: disable-msg=W0233
+      eossdk.TimeoutHandler.__init__(self)
+      eossdk.FdHandler.__init__(self)  # pylint: disable-msg=W0233
       self.server = self._createServer()
-      self.watchReadable(self.server.fileno(), True)
+      self.watch_readable(self.server.fileno(), True)
       self.connectedSocket = None
       print "initialized with server=%d" % self.server.fileno()
 
-   def onReadable(self, fd):
+   def on_readable(self, fd):
       print "onReadable called"
       if fd == self.server.fileno():
          assert not self.connectedSocket, ("Should not be readable if we "
@@ -42,7 +42,7 @@ class EchoBot(EosSdk.TimeoutHandler, EosSdk.FdHandler):
       else:
          assert False, "Unknown fd %d is readable" % fd
 
-   def onTimeout(self):
+   def on_timeut(self):
       print "Timer called"
       assert self.connectedSocket
       self._endConnection()
@@ -50,22 +50,22 @@ class EchoBot(EosSdk.TimeoutHandler, EosSdk.FdHandler):
    def _acceptConnection(self):
       print "Accepting connection"
       assert not self.connectedSocket
-      self.watchReadable(self.server.fileno(), False)
+      self.watch_readable(self.server.fileno(), False)
       newFd, _ = self.server.accept()
       newFd.setblocking(0)  # pylint: disable-msg=E1101
       self.connectedSocket = newFd
-      self.watchReadable(newFd.fileno(), True)  # pylint: disable-msg=E1101
-      self.timeoutTimeIs(EosSdk.now() + IDLE_TIMEOUT)
+      self.watch_readable(newFd.fileno(), True)  # pylint: disable-msg=E1101
+      self.timeout_time_is(eossdk.now() + IDLE_TIMEOUT)
 
    def _endConnection(self):
       fd = self.connectedSocket.fileno()  # pylint: disable-msg=E1101
       print "end connection to connected socket %d" % fd
-      self.watchReadable(fd, False)
+      self.watch_readable(fd, False)
       self.connectedSocket.close()
       self.connectedSocket = None
       # Start listening for new connections again
-      self.watchReadable(self.server.fileno(), True)
-      self.timeoutTimeIs(EosSdk.never)
+      self.watch_readable(self.server.fileno(), True)
+      self.timeout_time_is(eossdk.never)
 
    def _createServer(self):
       print "Creating server"
@@ -77,4 +77,4 @@ class EchoBot(EosSdk.TimeoutHandler, EosSdk.FdHandler):
       return s
 
 echoBot = EchoBot()
-EosSdk.agentMainLoop("EchoBotPy", sys.argv)
+eossdk.agent_main_loop("EchoBotPy", sys.argv)
