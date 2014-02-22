@@ -51,10 +51,13 @@ _eossdk_la_LIBADD = libeos.la
 $(srcdir)/eossdk_wrap.cpp: $(SWIG_FILES)
 	SRCDIR=$(srcdir) $(SWIG) -c++ -python -I$(srcdir) -o $@ $(srcdir)/EosSdk.i
 
+$(srcdir)/eossdk_wrap.h: $(srcdir)/eossdk_wrap.cpp
+
 $(srcdir)/eossdk.py: $(SWIG_FILES)
 	$(MAKE) $(AM_MAKEFLAGS) eossdk_wrap.cpp
 
-MAINTAINERCLEANFILES = $(_eossdk_la_SOURCES)
+BUILT_SOURCES = $(_eossdk_la_SOURCES)
+MAINTAINERCLEANFILES = $(BUILT_SOURCES)
 endif
 
 ACLOCAL_AMFLAGS = -I autogen
