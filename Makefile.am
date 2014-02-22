@@ -36,24 +36,24 @@ libeos_la_LDFLAGS = -version-info $(SDK_LIBTOOL_VERSION) -lrt
 # # --------- #
 # 
 # SWIG_FILES := EosSdk.i SwigUtils.i SwigRenamer.py
-# python_PYTHON = EosSdk.py
-# pyexec_LTLIBRARIES = _EosSdk.la
-# _EosSdk_la_SOURCES = $(srcdir)/EosSdk_wrap.cpp $(srcdir)/EosSdk_wrap.h
-# _EosSdk_la_LDFLAGS = -avoid-version -module
+# python_PYTHON = eossdk.py
+# pyexec_LTLIBRARIES = _eossdk.la
+# _eossdk_la_SOURCES = $(srcdir)/eossdk_wrap.cpp $(srcdir)/eossdk_wrap.h
+# _eossdk_la_LDFLAGS = -avoid-version -module
 # # Swig generated code produces some warnings, depending on the combination of
 # # Python version and GCC version, so we turn the problematic ones off here as
 # # we build with -Werror:
-# _EosSdk_la_CXXFLAGS = $(AM_CXXFLAGS) -Wno-strict-aliasing -Wno-missing-field-initializers
-# _EosSdk_la_CPPFLAGS = -I/usr/include/python$(PYTHON_VERSION)
-# _EosSdk_la_LIBADD = libeos.la
+# _eossdk_la_CXXFLAGS = $(AM_CXXFLAGS) -Wno-strict-aliasing -Wno-missing-field-initializers
+# _eossdk_la_CPPFLAGS = -I/usr/include/python$(PYTHON_VERSION)
+# _eossdk_la_LIBADD = libeos.la
 # 
-# $(srcdir)/EosSdk_wrap.cpp: $(SWIG_FILES)
+# $(srcdir)/eossdk_wrap.cpp: $(SWIG_FILES)
 # 	SRCDIR=$(srcdir) $(SWIG) -c++ -python -I$(srcdir) -o $@ $(srcdir)/EosSdk.i
 # 
-# $(srcdir)/EosSdk.py: $(SWIG_FILES)
-# 	$(MAKE) $(AM_MAKEFLAGS) EosSdk_wrap.cpp
+# $(srcdir)/eossdk.py: $(SWIG_FILES)
+# 	$(MAKE) $(AM_MAKEFLAGS) eossdk_wrap.cpp
 # 
-# MAINTAINERCLEANFILES = $(_EosSdk_la_SOURCES)
+# MAINTAINERCLEANFILES = $(_eossdk_la_SOURCES)
 
 ACLOCAL_AMFLAGS = -I autogen
 # EXTRA_DIST = bootstrap build.sh $(SWIG_FILES)
