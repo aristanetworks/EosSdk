@@ -57,5 +57,6 @@ template class iter_base<ip_route_via_t, ip_route_via_iter_impl>;
 template class iter_base<decap_group_t, decap_group_iter_impl>;
 template class iter_base<flow_entry_t, flow_entry_iter_impl>;
 template class iter_base<mpls_route_t, mpls_route_iter_impl>;
+template class iter_base<mpls_route_via_t, mpls_route_via_iter_impl>;
 
 }
