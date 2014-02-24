@@ -68,6 +68,17 @@ class EOS_SDK_PUBLIC mpls_route_iter_t : public iter_base<mpls_route_t,
    explicit mpls_route_iter_t(mpls_route_iter_impl * const) EOS_SDK_PRIVATE;
 };
 
+
+class mpls_route_via_iter_impl;
+
+class EOS_SDK_PUBLIC mpls_route_via_iter_t :
+   public iter_base<mpls_route_via_t, mpls_route_via_iter_impl> {
+ private:
+   friend class mpls_route_via_iter_impl;
+   explicit mpls_route_via_iter_t(mpls_route_via_iter_impl * const) EOS_SDK_PRIVATE;
+};
+
+
 class EOS_SDK_PUBLIC mpls_route_mgr {
   public:
    void resync_init();
@@ -83,6 +94,7 @@ class EOS_SDK_PUBLIC mpls_route_mgr {
    void mpls_route_foreach(callback_func_route handler, void * context,
                            mpls_route_t const & bookmark);
 
+   mpls_route_via_iter_t mpls_route_via_iter(mpls_route_key_t const &) const;
    // Iterate across configured nexthops for a given MPLS route, i.e.,
    // emits all mpls_route_via_t's for a given mpls_route_t.
    void mpls_route_via_foreach(mpls_route_key_t const &,
