@@ -8,7 +8,7 @@
 
 /**
  * @mainpage
- * @section s_intro The Arista EOS Sofware Development Kit
+ * @section s_intro The Arista EOS Software Development Kit
  */
 
 /**
@@ -17,10 +17,14 @@
 namespace eos {
 
 // Big endian (network byte order) hinted forms of uint16_t/uint32_t/uint64_t
+/// A uint16_t in big endian (network byte) order
 typedef uint16_t uint16_be_t;
+/// A uint32_t in big endian (network byte) order
 typedef uint32_t uint32_be_t;
+/// A uint64_t in big endian (network byte) order
 typedef uint64_t uint64_be_t;
 
+/// A decimal number of seconds, used for timestamps and durations
 typedef double seconds_t;
 
 #if defined(__GNUC__) && !defined(SWIG)
