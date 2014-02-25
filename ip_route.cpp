@@ -40,11 +40,6 @@ ip_route_mgr::tag_is(uint32_t tag) {
 }
 
 
-ip_route_iter_t::ip_route_iter_t(ip_route_iter_impl * const impl)
-   : iter_base<ip_route_t, ip_route_iter_impl>(0) {
-}
-
-
 ip_route_iter_t
 ip_route_mgr::ip_route_iter() const {
    ip_route_iter_t * nop = 0;
