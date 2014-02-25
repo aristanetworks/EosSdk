@@ -14,10 +14,6 @@ class mpls_route_mgr_impl : public mpls_route_mgr {
    }
 };
 
-mpls_route_iter_t::mpls_route_iter_t(mpls_route_iter_impl * const impl)
-   : iter_base<mpls_route_t, mpls_route_iter_impl>(0) {
-}
-
 void
 mpls_route_mgr::resync_init() {
    // TODO: No op impl
@@ -73,6 +69,12 @@ void
 mpls_route_mgr::mpls_route_foreach(callback_func_route handler, void * context,
                                    mpls_route_t const & bookmark) {
    // TODO: No op impl.
+}
+
+mpls_route_via_iter_t
+mpls_route_mgr::mpls_route_via_iter(mpls_route_key_t const & key) const {
+   mpls_route_via_iter_t * nop = 0;
+   return *nop;  // TODO: No op impl.
 }
 
 void
