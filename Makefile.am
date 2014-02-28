@@ -24,6 +24,7 @@ libeos_la_SOURCES += ip.cpp
 libeos_la_SOURCES += ip_route.cpp
 libeos_la_SOURCES += iterator.cpp
 libeos_la_SOURCES += mpls_route.cpp
+libeos_la_SOURCES += nexthop_group.cpp
 libeos_la_SOURCES += panic.cpp
 libeos_la_SOURCES += timer.cpp
 libeos_la_SOURCES += version.cpp
