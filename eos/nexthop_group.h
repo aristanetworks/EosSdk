@@ -13,10 +13,10 @@
 namespace eos {
 
 /// A nexthop destination IP array index number, an int 0..255
-typedef enum {
-   NEXTHOP_DESTINATION_IP_INDEX_MIN=0,
-   NEXTHOP_DESTINATION_IP_INDEX_MAX=255,
-} nexthop_destination_ip_index_t;
+enum nexthop_destination_ip_index_t {
+   NEXTHOP_DESTINATION_IP_INDEX_MIN = 0,
+   NEXTHOP_DESTINATION_IP_INDEX_MAX = 255,
+};
 
 /**
  * The type of encapsulation to use for this nexthop group.

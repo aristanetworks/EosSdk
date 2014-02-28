@@ -14,10 +14,10 @@ namespace eos {
 typedef uint32_t policy_map_tag_t;
 
 /// A policy map rule sequence number, an int in the range LOW to HIGH, inclusive.
-typedef enum {
-   POLICY_MAP_RULE_SEQUENCE_LOW=1,
-   POLICY_MAP_RULE_SEQUENCE_HIGH=255,
-} policy_map_rule_sequence_t;
+enum policy_map_rule_sequence_t {
+   POLICY_MAP_RULE_SEQUENCE_LOW = 1,
+   POLICY_MAP_RULE_SEQUENCE_HIGH = 255,
+};
 
 /**
  * The default match condition for the policy map.
