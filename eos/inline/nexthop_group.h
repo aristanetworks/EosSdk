@@ -6,9 +6,21 @@
 
 namespace eos {
 
+inline nexthop_group_t::nexthop_group_t() :
+      name_(""), ttl_(64), size_(256),
+      source_ip_(), source_intf_(),
+      encap_type_(NEXTHOP_GROUP_TYPE_NULL),
+      destination_ip_(),
+      persistent_(false) {
+}
+
 inline nexthop_group_t::nexthop_group_t(std::string const & name,
                                         nexthop_group_encap_t type) :
-      name_(name), encap_type_(type) {
+      name_(name), ttl_(64), size_(256),
+      source_ip_(), source_intf_(),
+      encap_type_(type),
+      destination_ip_(),
+      persistent_(false) {
 }
 
 inline std::string const & 
@@ -47,11 +59,11 @@ nexthop_group_t::destination_address() const {
 }
 
 inline void
-nexthop_group_t::size_is(uint8_t size) const {
+nexthop_group_t::size_is(uint16_t size) {
    size_ = size;
 }
 
-inline uint8_t
+inline uint16_t
 nexthop_group_t::size() const {
    return size_;
 }
@@ -65,10 +77,6 @@ inline bool
 nexthop_group_t::persistent() const {
    return persistent_;
 }
-
-
-
-
 
 }
 

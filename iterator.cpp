@@ -9,6 +9,7 @@
 #include "eos/ip_route.h"
 #include "eos/iterator.h"
 #include "eos/mpls_route.h"
+#include "eos/nexthop_group.h"
 
 namespace eos {
 
@@ -55,6 +56,7 @@ template class iter_base<intf_id_t, eth_phy_intf_iter_impl>;
 template class iter_base<ip_route_t, ip_route_iter_impl>;
 template class iter_base<ip_route_via_t, ip_route_via_iter_impl>;
 template class iter_base<decap_group_t, decap_group_iter_impl>;
+template class iter_base<nexthop_group_t, nexthop_group_iter_impl>;
 template class iter_base<flow_entry_t, flow_entry_iter_impl>;
 template class iter_base<mpls_route_t, mpls_route_iter_impl>;
 template class iter_base<mpls_route_via_t, mpls_route_via_iter_impl>;
