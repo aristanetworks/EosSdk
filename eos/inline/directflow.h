@@ -42,6 +42,39 @@ flow_match_t::match_field_set() const {
    return match_field_set_;
 }
 
+inline bool
+flow_match_field_set_t::operator==(flow_match_field_set_t const & other) const {
+   return match_bitset_ == other.match_bitset_;
+}
+
+inline bool
+flow_match_field_set_t::operator!=(flow_match_field_set_t const & other) const {
+   return !operator==(other);
+}
+
+inline bool
+flow_match_t::operator==(flow_match_t const & other) const {
+   return match_field_set_ == other.match_field_set_
+      && ip_src_ == other.ip_src_
+      && ip_src_mask_ == other.ip_src_mask_
+      && ip_dst_ == other.ip_dst_
+      && ip_dst_mask_ == other.ip_dst_mask_
+      && vlan_id_ == other.vlan_id_
+      && vlan_id_mask_ == other.vlan_id_mask_
+      && cos_ == other.cos_
+      && eth_src_ == other.eth_src_
+      && eth_src_mask_ == other.eth_src_mask_
+      && eth_dst_ == other.eth_dst_
+      && eth_dst_mask_ == other.eth_dst_mask_
+      && eth_type_ == other.eth_type_
+      && input_intfs_ == other.input_intfs_;
+}
+
+inline bool
+flow_match_t::operator!=(flow_match_t const & other) const {
+   return !operator==(other);
+}
+
 inline void
 flow_match_t::input_intfs_is(std::set<intf_id_t> const & input_intfs) {
    input_intfs_ = input_intfs;
@@ -169,6 +202,16 @@ flow_match_t::ip_dst_mask() const {
 inline flow_action_set_t::flow_action_set_t() : action_bitset_() {
 }
 
+inline bool
+flow_action_set_t::operator==(flow_action_set_t const & other) const {
+   return action_bitset_ == other.action_bitset_;
+}
+
+inline bool
+flow_action_set_t::operator!=(flow_action_set_t const & other) const {
+   return !operator==(other);
+}
+
 
 //
 // flow_action_t method implementation
@@ -183,6 +226,23 @@ inline flow_action_t::flow_action_t()
      eth_dst_(),
      ip_src_(),
      ip_dst_() {
+}
+
+inline bool
+flow_action_t::operator==(flow_action_t const & other) const {
+   return eth_src_ == other.eth_src_
+      && eth_dst_ == other.eth_dst_
+      && ip_src_ == other.ip_src_
+      && ip_dst_ == other.ip_dst_
+      && vlan_id_ == other.vlan_id_
+      && cos_ == other.cos_
+      && action_set_ == other.action_set_
+      && output_intfs_ == other.output_intfs_;
+}
+
+inline bool
+flow_action_t::operator!=(flow_action_t const & other) const {
+   return !operator==(other);
 }
 
 
@@ -289,6 +349,19 @@ inline flow_entry_t::flow_entry_t(std::string const & name, flow_match_t match,
    : name_(name), match_(match), action_(action), priority_(priority) {
 }
 
+inline bool
+flow_entry_t::operator==(flow_entry_t const & other) const {
+   return match_ == other.match_
+      && action_ == other.action_
+      && priority_ == other.priority_
+      && name_ == other.name_;
+}
+
+inline bool
+flow_entry_t::operator!=(flow_entry_t const & other) const {
+   return !operator==(other);
+}
+
 inline std::string
 flow_entry_t::name() const {
    return name_;
@@ -314,6 +387,17 @@ flow_entry_t::priority() const {
 //
 
 inline flow_counters_t::flow_counters_t() : bytes_(0), packets_(0) {
+}
+
+inline bool
+flow_counters_t::operator==(flow_counters_t const & other) const {
+   return bytes_ == other.bytes_
+      && packets_ == other.packets_;
+}
+
+inline bool
+flow_counters_t::operator!=(flow_counters_t const & other) const {
+   return !operator==(other);
 }
 
 inline uint64_t

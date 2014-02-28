@@ -20,8 +20,11 @@ typedef uint16_t vlan_id_t;
 typedef uint8_t cos_t;
 
 class EOS_SDK_PUBLIC flow_match_field_set_t {
-  public:
+ public:
    flow_match_field_set_t();
+
+   bool operator==(flow_match_field_set_t const & other) const;
+   bool operator!=(flow_match_field_set_t const & other) const;
 
    void input_intfs_is(bool);
    bool input_intfs() const;
@@ -47,15 +50,18 @@ class EOS_SDK_PUBLIC flow_match_field_set_t {
    void ip_dst_is(bool);
    bool ip_dst() const;
 
-  private:
+ private:
    friend class directflow_mgr;
    uint32_t match_bitset_;
 };
 
 // Match criteria for a flow
 class EOS_SDK_PUBLIC flow_match_t {
-  public:
+ public:
    flow_match_t();
+
+   bool operator==(flow_match_t const & other) const;
+   bool operator!=(flow_match_t const & other) const;
 
    // Specify which fields to match on
    void match_field_set_is(const flow_match_field_set_t &);
@@ -99,7 +105,7 @@ class EOS_SDK_PUBLIC flow_match_t {
    ip_addr_t ip_dst() const;
    ip_addr_t ip_dst_mask() const;
 
-  private:
+ private:
    flow_match_field_set_t match_field_set_;
 
    std::set<intf_id_t> input_intfs_;
@@ -121,8 +127,11 @@ class EOS_SDK_PUBLIC flow_match_t {
 };
 
 class EOS_SDK_PUBLIC flow_action_set_t {
-  public:
+ public:
    flow_action_set_t();
+
+   bool operator==(flow_action_set_t const & other) const;
+   bool operator!=(flow_action_set_t const & other) const;
 
    bool set_output_intfs() const;
    void set_output_intfs_is(bool);
@@ -145,15 +154,18 @@ class EOS_SDK_PUBLIC flow_action_set_t {
    bool set_ip_dst() const;
    void set_ip_dst_is(bool);
 
-  private:
+ private:
    friend class directflow_mgr;
    uint32_t action_bitset_;
 };
 
 // Actions a flow takes on match
 class EOS_SDK_PUBLIC flow_action_t {
-  public:
+ public:
    flow_action_t();
+
+   bool operator==(flow_action_t const & other) const;
+   bool operator!=(flow_action_t const & other) const;
 
    // Specify which actions are enabled
    void action_set_is(const flow_action_set_t &);
@@ -189,7 +201,7 @@ class EOS_SDK_PUBLIC flow_action_t {
    void ip_dst_is(const ip_addr_t &);
    ip_addr_t ip_dst() const;
 
-  private:
+ private:
    flow_action_set_t action_set_;
 
    std::set<intf_id_t> output_intfs_;
@@ -206,17 +218,20 @@ class EOS_SDK_PUBLIC flow_action_t {
 
 // A flow entry
 class EOS_SDK_PUBLIC flow_entry_t {
-  public:
+ public:
    flow_entry_t();
    flow_entry_t(const std::string & name, flow_match_t,
                 flow_action_t, flow_priority_t);
+
+   bool operator==(flow_entry_t const & other) const;
+   bool operator!=(flow_entry_t const & other) const;
 
    std::string name() const;
    flow_match_t match() const;
    flow_action_t action() const;
    flow_priority_t priority() const;
 
-  private:
+ private:
    std::string name_;
    flow_match_t match_;
    flow_action_t action_;
@@ -224,12 +239,16 @@ class EOS_SDK_PUBLIC flow_entry_t {
 };
 
 class EOS_SDK_PUBLIC flow_counters_t {
-  public:
+ public:
    flow_counters_t();
+
+   bool operator==(flow_counters_t const & other) const;
+   bool operator!=(flow_counters_t const & other) const;
+
    uint64_t bytes() const;
    uint64_t packets() const;
 
-  private:
+ private:
    friend class directflow_mgr;
    uint64_t bytes_;
    uint64_t packets_;
@@ -252,7 +271,7 @@ enum flow_rejected_reason_t {
 };
 
 class EOS_SDK_PUBLIC flow_handler {
-  public:
+ public:
    flow_handler();
    virtual ~flow_handler();
 
@@ -264,7 +283,7 @@ class EOS_SDK_PUBLIC flow_handler {
    // Handler called when flow status changes
    virtual void on_flow_status(const std::string & name, flow_status_t);
 
-  private:
+ private:
    bool watching_all_flows_;
 };
 
@@ -281,7 +300,7 @@ class EOS_SDK_PUBLIC flow_entry_iter_t : public iter_base<flow_entry_t,
 
 // Manages DirectFlow configuration
 class EOS_SDK_PUBLIC directflow_mgr {
-  public:
+ public:
    // Iterate across all configured flows
    flow_entry_iter_t flow_entry_iter() const;
 
@@ -303,10 +322,10 @@ class EOS_SDK_PUBLIC directflow_mgr {
    // Returns the counters for a flow
    flow_counters_t flow_counters(std::string const & name) const;
 
-  protected:
+ protected:
    directflow_mgr() EOS_SDK_PRIVATE;
 
-  private:
+ private:
    EOS_SDK_DISALLOW_COPY_CTOR(directflow_mgr);
 };
 
