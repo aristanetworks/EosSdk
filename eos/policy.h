@@ -4,10 +4,22 @@
 #ifndef EOS_POLICY_H
 #define EOS_POLICY_H
 
+#include <utility>
+
 #include <eos/acl.h>
 #include <eos/intf.h>
 #include <eos/ip.h>
 #include <eos/iterator.h>
+
+/**
+ * Policy map manipulation.
+ *
+ * This module permits the manipulation of policy maps used in the
+ * creation of service policies that can be applied to one or more
+ * types of hardware features, beginning with Policy Based Routing
+ * (PBR).
+ *
+ */
 
 namespace eos {
 
@@ -81,6 +93,11 @@ class EOS_SDK_PUBLIC policy_map_key_t {
 
 class EOS_SDK_PUBLIC policy_map_t {
  public:
+};
+
+class EOS_SDK_PUBLIC policy_map_rule_t {
+ public:
+ private:
 };
 
 /**
@@ -229,6 +246,18 @@ class EOS_SDK_PUBLIC policy_map_iter_t : public iter_base<policy_map_t,
    explicit policy_map_iter_t(policy_map_iter_impl * const) EOS_SDK_PRIVATE;
 };
 
+class policy_map_rule_iter_impl;
+
+/// An iterator providing forwards iteration through the rules of a given policy map
+class EOS_SDK_PUBLIC policy_map_rule_iter_t
+   : public iter_base<std::pair<uint32_t, policy_map_rule_t>,
+                      policy_map_rule_iter_impl> {
+ private:
+   friend class policy_map_rule_iter_impl;
+   explicit policy_map_rule_iter_t(
+         policy_map_rule_iter_impl * const) EOS_SDK_PRIVATE;
+};
+
 /**
  * Policy map manager.
  *
@@ -255,7 +284,7 @@ class EOS_SDK_PUBLIC policy_map_mgr {
    void policy_map_rule_set(policy_map_key_t const &,
                             policy_map_rule_sequence_t,
                             class_map_match_base_t const & match,
-                            std::list<policy_map_action_base_t const & actions>);
+                            std::list<policy_map_action_base_t const &> actions);
 
    /**
     * Removes the numbered rule from the policy map identified by the key.
@@ -270,9 +299,14 @@ class EOS_SDK_PUBLIC policy_map_mgr {
    void policy_map_del(policy_map_key_t const &);
 
    /**
-    * Provides iteration type over the configured policy maps for a feature.
+    * Provides iteration over the configured policy maps for a feature.
     */
    policy_map_iter_t policy_map_iter(policy_feature_t) const;
+
+   /**
+    * Provides iteration over the rules of the given policy map.
+    */
+   policy_map_rule_iter_t policy_map_rule_iter(policy_map_key_t const &) const;
 
    /**
     * Commits all outstanding policy map changes.

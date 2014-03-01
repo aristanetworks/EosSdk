@@ -10,6 +10,7 @@
 #include "eos/iterator.h"
 #include "eos/mpls_route.h"
 #include "eos/nexthop_group.h"
+#include "eos/policy.h"
 
 namespace eos {
 
@@ -60,5 +61,8 @@ template class iter_base<nexthop_group_t, nexthop_group_iter_impl>;
 template class iter_base<flow_entry_t, flow_entry_iter_impl>;
 template class iter_base<mpls_route_t, mpls_route_iter_impl>;
 template class iter_base<mpls_route_via_t, mpls_route_via_iter_impl>;
+template class iter_base<policy_map_t, policy_map_iter_impl>;
+template class iter_base<std::pair<uint32_t, policy_map_rule_t>,
+                         policy_map_rule_iter_impl>;
 
 }
