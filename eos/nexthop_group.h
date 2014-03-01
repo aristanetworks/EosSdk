@@ -12,12 +12,6 @@
 
 namespace eos {
 
-/// A nexthop destination IP array index number, an int 0..255
-enum nexthop_destination_ip_index_t {
-   NEXTHOP_DESTINATION_IP_INDEX_MIN = 0,
-   NEXTHOP_DESTINATION_IP_INDEX_MAX = 255,
-};
-
 /**
  * The type of encapsulation to use for this nexthop group.
  *
@@ -77,10 +71,10 @@ class EOS_SDK_PUBLIC nexthop_group_t {
     * different sequence numbers to perform unequal cost multipath.
     * Setting a value at an index beyond size() is undefined.
     *
-    * @param nexthop_destination_ip_index_t Index into the destination IP array.
+    * @param uint8_t Index into the destination IP array.
     * @param ip_addr_t The IP address to set at the index.
     */
-   void destination_ip_is(nexthop_destination_ip_index_t, ip_addr_t const &);
+   void destination_ip_is(uint8_t, ip_addr_t const &);
    /// Returns a reference to the current destination address list.
    std::forward_list<ip_addr_t> const & destination_address() const;
 

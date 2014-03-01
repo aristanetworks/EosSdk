@@ -5,9 +5,8 @@
 
 namespace eos {
 
-void 
-nexthop_group_t::destination_ip_is(nexthop_destination_ip_index_t i, 
-                                   ip_addr_t const & addr) {
+void
+nexthop_group_t::destination_ip_is(uint8_t i, ip_addr_t const & addr) {
    // TODO: no-op impl.
 }
 

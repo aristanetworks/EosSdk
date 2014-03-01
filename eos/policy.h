@@ -25,12 +25,6 @@ namespace eos {
 
 typedef uint32_t policy_map_tag_t;
 
-/// A policy map rule sequence number, an int in the range LOW to HIGH, inclusive.
-enum policy_map_rule_sequence_t {
-   POLICY_MAP_RULE_SEQUENCE_LOW = 1,
-   POLICY_MAP_RULE_SEQUENCE_HIGH = 255,
-};
-
 /**
  * The default match condition for the policy map.
  *
@@ -274,15 +268,14 @@ class EOS_SDK_PUBLIC policy_map_mgr {
     * Sets a policy map match rule at a sequence number in a policy map.
     *
     * On the policy map identified by the key, at the numbered
-    * sequence number, which must be no less than 1 and goes up to
-    * POLICY_MAP_RULE_SEQUENCE_HIGH, install a rule matching the
+    * sequence number, which cannot be 0, install a rule matching the
     * policy map match rule, applying the set of actions.
     * policy_map_commit() must be called after _rule_set() and before
     * policy_map_apply() is called to apply the policy map configured
     * by these functions to be applied to traffic.
     */
    void policy_map_rule_set(policy_map_key_t const &,
-                            policy_map_rule_sequence_t,
+                            uint8_t,
                             class_map_match_base_t const & match,
                             std::list<policy_map_action_base_t const &> actions);
 
@@ -292,8 +285,7 @@ class EOS_SDK_PUBLIC policy_map_mgr {
     * To actually remove the rule from the policy map in the switch
     * forwarding hardware, you must call policy_map_commit().
     */
-   void policy_map_rule_del(policy_map_key_t const &,
-                            policy_map_rule_sequence_t);
+   void policy_map_rule_del(policy_map_key_t const &, uint8_t);
 
    /// Deletes the policy map identified by the argument.
    void policy_map_del(policy_map_key_t const &);
