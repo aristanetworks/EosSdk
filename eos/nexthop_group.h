@@ -127,7 +127,7 @@ class EOS_SDK_PUBLIC nexthop_group_mgr {
    /// Iterates over all the nexthop groups currently configured.
    nexthop_group_iter_t nexthop_group_iter() const;
 
-   // Creates or updates a nexthop group
+   /// Creates or updates a nexthop group.
    void nexthop_group_set(nexthop_group_t const &);
    /// Removes the named nexthop group from the configuration if it exists
    void nexthop_group_del(std::string const & nexthop_group_name);
