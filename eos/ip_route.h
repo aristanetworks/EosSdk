@@ -48,6 +48,16 @@ class EOS_SDK_PUBLIC ip_route_via_t {
    ip_addr_t hop;            // IP v4/v6 nexthop address
    intf_id_t intf;           // Use the named interface if not a default intf_id_t
    // using intf Null0 installs a 'drop' route for the given prefix and preference
+
+   /**
+    * Name of the next-hop group to use.
+    * If this string is non-empty, the next-hop group of the given name will
+    * be used, and both `hop' and `intf' must be left to their default value
+    * otherwise we will panic().
+    *
+    * Note this is currently only supported for IPv4 routes.
+    */
+   std::string nexthop_group;
 };
 
 
