@@ -12,7 +12,7 @@ AC_PROG_CXX
 AC_ARG_ENABLE([python],
               [AS_HELP_STRING([--enable-python],
                               [compile Python bindings])],
-              [enable_python=yes], [])
+              [], [enable_python=no])
 AM_CONDITIONAL([USE_PYTHON], [test "x$enable_python" = xyes])
 if test "x$enable_python" != xyes; then
    AC_MSG_NOTICE([You may configure with --enable-python ]dnl
