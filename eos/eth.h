@@ -10,21 +10,27 @@
 
 namespace eos {
 
+/**
+ * An Ethernet address.
+ */
 class EOS_SDK_PUBLIC eth_addr_t {
  public:
    eth_addr_t();  // Default constructor
    // Copy constructor and assignment operator implicitly declared.
 
-   // Construct an address from one of three string forms:
-   // xx:xx:xx:xx:xx:xx, xx-xx-xx-xx-xx-xx, or xxxx.xxxx.xxxx
+   /**
+    * Construct an address from one of three string forms:
+    * xx:xx:xx:xx:xx:xx, xx-xx-xx-xx-xx-xx, or xxxx.xxxx.xxxx
+    */
    explicit eth_addr_t(char const * addr);
    explicit eth_addr_t(std::string const & addr);
-   // Construct an address from the 3 bytes that make it up.
+   /// Construct an address from the 6 bytes that make it up.
    eth_addr_t(uint8_t byte0, uint8_t byte1, uint8_t byte2,
               uint8_t byte3, uint8_t byte4, uint8_t byte5);
-   // Same constructor but with an array.  The array will be copied.
+   /// Construct an address from a byte array. The array will be copied.
    explicit eth_addr_t(uint8_t const bytes[6]);
 
+   /// String representation of a Ethernet address, e.g "xx:xx:xx:xx:xx"
    std::string to_string() const;
 
    // Only the default MAC address (all zeros) evaluates to false.
@@ -33,7 +39,9 @@ class EOS_SDK_PUBLIC eth_addr_t {
    bool operator!=(eth_addr_t const & other) const;
    operator bool() const;
 
+   /// Return a given byte from the address
    uint8_t byte(int index) const;
+   /// Copy the bytes of the Ethernet address to the given address
    void bytes(void *) const;
 
  private:
