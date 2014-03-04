@@ -19,15 +19,21 @@ class EOS_SDK_PUBLIC eth_addr_t {
    // Copy constructor and assignment operator implicitly declared.
 
    /**
-    * Construct an address from one of three string forms:
-    * xx:xx:xx:xx:xx:xx, xx-xx-xx-xx-xx-xx, or xxxx.xxxx.xxxx
+    * Constructs an address from a char *.
+    * Supported formats are xx:xx:xx:xx:xx:xx, xx-xx-xx-xx-xx-xx,
+    * or xxxx.xxxx.xxxx
     */
    explicit eth_addr_t(char const * addr);
+   /**
+    * Constructs an address from a std::string.
+    * Supported formats are xx:xx:xx:xx:xx:xx, xx-xx-xx-xx-xx-xx,
+    * or xxxx.xxxx.xxxx
+    */
    explicit eth_addr_t(std::string const & addr);
-   /// Construct an address from the 6 bytes that make it up.
+   /// Constructs an address from the 6 bytes that make it up.
    eth_addr_t(uint8_t byte0, uint8_t byte1, uint8_t byte2,
               uint8_t byte3, uint8_t byte4, uint8_t byte5);
-   /// Construct an address from a byte array. The array will be copied.
+   /// Constructs an address from a byte array. The array will be copied.
    explicit eth_addr_t(uint8_t const bytes[6]);
 
    /// String representation of a Ethernet address, e.g "xx:xx:xx:xx:xx"
@@ -39,9 +45,9 @@ class EOS_SDK_PUBLIC eth_addr_t {
    bool operator!=(eth_addr_t const & other) const;
    operator bool() const;
 
-   /// Return a given byte from the address
+   /// Returns the given byte from the address
    uint8_t byte(int index) const;
-   /// Copy the bytes of the Ethernet address to the given address
+   /// Copies the bytes of the Ethernet address to the given address
    void bytes(void *) const;
 
  private:
