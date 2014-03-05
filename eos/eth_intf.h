@@ -11,23 +11,30 @@
 
 namespace eos {
 
-// Handles events on ethernet interfaces. Includes physical interfaces
-// and lags (port-channels) among other interface types.
+/**
+ * Event handler for ethernet interface specific events.
+ *
+ * Handles events on ethernet interfaces. Includes physical interfaces
+ * and LAGs (port-channels) among other interface types.
+ */
 class EOS_SDK_PUBLIC eth_intf_handler {
  public:
    eth_intf_handler();
    virtual ~eth_intf_handler();
 
-   // Registers this class to receive updates on changes to the
-   // interface. Expects a boolean signifying whether notifications
-   // should be propagated to this instance or not.
+   /**
+    * Registers to receive updates on changes to the interface.
+    *
+    * @param bool Signifyies whether notifications should be
+    * propagated to this handler instance or not.
+    */
    void watch_all_eth_intfs(bool);
 
-   // Handler called when an ethernet interface is created
+   /// Handler called when an ethernet interface is created
    virtual void on_eth_intf_create(intf_id_t);
-   // Handler called when an ethernet interface is deleted
+   /// Handler called when an ethernet interface is deleted
    virtual void on_eth_intf_delete(intf_id_t);
-   // Handler called when the mac address of an interface changes
+   /// Handler called when the mac address of an interface changes
    virtual void on_eth_addr(intf_id_t, eth_addr_t);
 
  private:
@@ -37,6 +44,7 @@ class EOS_SDK_PUBLIC eth_intf_handler {
 
 class eth_intf_iter_impl;
 
+/// Iterator type for ethernet interfaces
 class EOS_SDK_PUBLIC eth_intf_iter_t : public iter_base<intf_id_t,
                                                         eth_intf_iter_impl> {
  private:
@@ -45,6 +53,7 @@ class EOS_SDK_PUBLIC eth_intf_iter_t : public iter_base<intf_id_t,
 };
 
 
+/// The ethernet interface manager
 class EOS_SDK_PUBLIC eth_intf_mgr {
  public:
    // Collection management
@@ -56,12 +65,16 @@ class EOS_SDK_PUBLIC eth_intf_mgr {
    bool exists(intf_id_t) const;
 
    // Attribute accessors
-   // Read the operational ethernet address of the interface
+   /// Returns the operational ethernet address of the interface
    eth_addr_t eth_addr(intf_id_t) const;
-   // Read the currently configured ethernet address
+   /// Returns the currently configured ethernet address
    eth_addr_t configured_eth_addr(intf_id_t) const;
 
-   // Configure the ethernet address of the interface
+   /**
+    * Configures the ethernet address of the interface
+    * @param intf_id_t The interface ID of the interface to change the address of
+    * @param eth_addr_t The address to set
+    */
    void eth_addr_is(intf_id_t, eth_addr_t);
 
  protected:
@@ -71,6 +84,7 @@ class EOS_SDK_PUBLIC eth_intf_mgr {
    EOS_SDK_DISALLOW_COPY_CTOR(eth_intf_mgr);
 };
 
+/// Returns an ethernet interface manager instance
 eth_intf_mgr * get_eth_intf_mgr() EOS_SDK_PUBLIC;
 
 }
