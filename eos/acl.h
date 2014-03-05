@@ -15,8 +15,7 @@ namespace eos {
 
 class acl_internal;
 
-// The ACL type, of which valid types are either an IPv4, IPv6, or
-// Ethernet (MAC) access list.
+/// The ACL type, of which valid types are either IPv4, IPv6, or Ethernet.
 enum acl_type_t {
    ACL_TYPE_NULL,
    ACL_TYPE_IPV4,
@@ -24,15 +23,17 @@ enum acl_type_t {
    ACL_TYPE_ETH,
 };
 
-// The direction in which an ACL is applied to an interface (both
-// directions is two operations).
+/**
+ * The direction in which an ACL is applied.
+ * To apply in both directions, use both operations in order.
+ */
 enum acl_direction_t {
    ACL_DIRECTION_NULL,
    ACL_IN,
    ACL_OUT,
 };
 
-// The type of range operator for TTL and port specifications below.
+/// The type of range operator for TTL and port specifications below.
 enum acl_range_operator_t {
    ACL_RANGE_NULL,
    ACL_RANGE_ANY,
@@ -43,15 +44,14 @@ enum acl_range_operator_t {
    ACL_RANGE_BETWEEN,
 };
 
-// The action for an individual ACL rule.
+/// The action to take for an individual ACL rule
 enum acl_action_t {
    ACL_ACTION_NULL,
    ACL_PERMIT,
    ACL_DENY,
 };
 
-// TCP flags used in acl_rule_ip_t to specify which TCP flags the
-// filter rule should match on.
+/// TCP flags used in IP rules to specify which TCP flags to match
 enum acl_tcp_flag_t {
    ACL_TCP_NULL = 0,
    ACL_TCP_FIN = 1,
@@ -62,13 +62,13 @@ enum acl_tcp_flag_t {
    ACL_TCP_URG = 32,
 };
 
-// A TTL specifier, used in an IP ACL rule to define a range of
-// IP TTL values that the filter rule must match.
-
-// Normally, one creates an instance of the classes below,
-// such as a acl_ttl_spec_gt_t to specify matching TTLs
-// greater than the value passed.
-
+/**
+ * A TTL specifier, used in an IP ACL rule to define TTLs to match.
+ *
+ * Create an instance of the classes below, such as a
+ * acl_ttl_spec_gt_t to specify matching TTLs greater than the value
+ * passed.
+ */
 class EOS_SDK_PUBLIC acl_ttl_spec_t {
  public:
    acl_ttl_spec_t();  // Default TTL spec; matches any TTL
@@ -82,49 +82,51 @@ class EOS_SDK_PUBLIC acl_ttl_spec_t {
    friend class acl_internal;
 };
 
-// Matches an exact TTL
+/// Matches an exact TTL
 class EOS_SDK_PUBLIC acl_ttl_spec_eq_t : public acl_ttl_spec_t {
  public:
    explicit acl_ttl_spec_eq_t(uint8_t ttl);
    friend class acl_internal;
 };
 
-// Matches all TTLs except this one
+/// Matches all TTLs except this
 class EOS_SDK_PUBLIC acl_ttl_spec_neq_t : public acl_ttl_spec_t {
  public:
    explicit acl_ttl_spec_neq_t(uint8_t ttl);
    friend class acl_internal;
 };
 
-// Matches TTLs greater than this
+/// Matches TTLs greater than this
 class EOS_SDK_PUBLIC acl_ttl_spec_gt_t : public acl_ttl_spec_t {
  public:
    explicit acl_ttl_spec_gt_t(uint8_t ttl);
    friend class acl_internal;
 };
 
-// Matches TTLs less than this
+/// Matches TTLs less than this
 class EOS_SDK_PUBLIC acl_ttl_spec_lt_t : public acl_ttl_spec_t {
  public:
    explicit acl_ttl_spec_lt_t(uint8_t ttl);
    friend class acl_internal;
 };
 
-// Matches any TTL value
+/// Matches any TTL value
 class EOS_SDK_PUBLIC acl_ttl_spec_any_t : public acl_ttl_spec_t {
  public:
    explicit acl_ttl_spec_any_t();
    friend class acl_internal;
 };
 
-// Defines a UDP/TCP port specifier.
-// Pick one of either:
-// - acl_port_spec_eq_t : Matches 1-10 port numbers
-// - acl_port_spec_neq_t : Doesn't match these 1-10 ports
-// - acl_port_spec_lt_t : Matches ports less than the value
-// - acl_port_spec_gt_t : Matches ports greater than the value
-// - acl_port_spec_between_t : Matches ports between the two values
-
+/**
+ * A UDP or TCP port specifier.
+ *
+ * Pick one of either:
+ * - acl_port_spec_eq_t : Matches 1-10 port numbers
+ * - acl_port_spec_neq_t : Doesn't match these 1-10 ports
+ * - acl_port_spec_lt_t : Matches ports less than the value
+ * - acl_port_spec_gt_t : Matches ports greater than the value
+ * - acl_port_spec_between_t : Matches ports between the two values
+ */
 class EOS_SDK_PUBLIC acl_port_spec_t {
  public:
    acl_port_spec_t();  // Default port spec; matches any port
@@ -137,7 +139,7 @@ class EOS_SDK_PUBLIC acl_port_spec_t {
    friend class acl_internal;
 };
 
-// Matches one or more ports exactly
+/// Matches one or more ports exactly
 class EOS_SDK_PUBLIC acl_port_spec_eq_t : public acl_port_spec_t {
  public:
    explicit acl_port_spec_eq_t(uint16_t port);
@@ -145,7 +147,7 @@ class EOS_SDK_PUBLIC acl_port_spec_eq_t : public acl_port_spec_t {
    friend class acl_internal;
 };
 
-// Matches every port except these one or more ports
+/// Matches every port except these one or more ports
 class EOS_SDK_PUBLIC acl_port_spec_neq_t : public acl_port_spec_t {
  public:
    explicit acl_port_spec_neq_t(uint16_t port);
@@ -154,35 +156,35 @@ class EOS_SDK_PUBLIC acl_port_spec_neq_t : public acl_port_spec_t {
    friend class acl_internal;
 };
 
-// Matches ports between low and high
+/// Matches ports between low and high
 class EOS_SDK_PUBLIC acl_port_spec_between_t : public acl_port_spec_t {
  public:
    acl_port_spec_between_t(uint16_t low, uint16_t high);
    friend class acl_internal;
 };
 
-// Matches ports greater than this
+/// Matches ports greater than this
 class EOS_SDK_PUBLIC acl_port_spec_gt_t : public acl_port_spec_t {
  public:
    explicit acl_port_spec_gt_t(uint16_t port);
    friend class acl_internal;
 };
 
-// Matches ports less than this
+/// Matches ports less than this
 class EOS_SDK_PUBLIC acl_port_spec_lt_t : public acl_port_spec_t {
  public:
    explicit acl_port_spec_lt_t(uint16_t port);
    friend class acl_internal;
 };
 
-// Matches any port number
+/// Matches any port number
 class EOS_SDK_PUBLIC acl_port_spec_any_t : public acl_port_spec_t {
  public:
    explicit acl_port_spec_any_t();
    friend class acl_internal;
 };
 
-// An ACL key is the combination of its name and ACL type (IPv4, IPv6 or ETH)
+/// An ACL key is the combination of its name and ACL type (IPv4, IPv6 or ETH)
 class EOS_SDK_PUBLIC acl_key_t {
  public:
    acl_key_t();
@@ -213,9 +215,11 @@ class EOS_SDK_PUBLIC acl_key_t {
 // acl_base_filter_t, such as 'log' to enable logging of packets matching
 // the rule, and the action applied to packets matching the rule.
 
-// Abstract ACL rule class. Instead of this, instantiate one of the
-// concrete rule classes.
-
+/**
+ * Base ACL rule class containing common fields.
+ *
+ * Instead of this, instantiate one of the concrete rule classes.
+ */
 class EOS_SDK_PUBLIC acl_rule_base_t {
  public:
    acl_action_t action;
@@ -226,7 +230,7 @@ class EOS_SDK_PUBLIC acl_rule_base_t {
    acl_rule_base_t() EOS_SDK_PRIVATE;
 };
 
-// An individual ACL rule for IPv4 or IPv6 ACLs
+/// An individual ACL rule for IPv4 or IPv6 ACLs
 class EOS_SDK_PUBLIC acl_rule_ip_t : public acl_rule_base_t {
  public:
    acl_rule_ip_t();
@@ -263,7 +267,7 @@ class EOS_SDK_PUBLIC acl_rule_ip_t : public acl_rule_base_t {
    bool match_ip_priority;
 };
 
-// An Ethernet ACL, which can be applied to Ethernet, Vlan, and MLAG interfaces.
+/// An Ethernet ACL, which can be applied to Ethernet, Vlan, and MLAG interfaces.
 class EOS_SDK_PUBLIC acl_rule_eth_t : public acl_rule_base_t {
  public:
    acl_rule_eth_t();
@@ -279,39 +283,49 @@ class EOS_SDK_PUBLIC acl_rule_eth_t : public acl_rule_base_t {
    eth_addr_t destination_mask;
 };
 
-// An ACL handler is the class users should derive from if they wish
-// to react to ACL hardware synchronisation events.
+/**
+ * An ACL handler.
+ *
+ * Derive from this class to react to ACL hardware synchronisation events.
+ */
 class EOS_SDK_PUBLIC acl_handler {
  public:
    acl_handler();
    virtual ~acl_handler();
 
-   // Call this method to receive notifications (on_acl_* function
-   // calls) for all ACLs configured on the system. Setting this to
-   // false will stop your acl_handler subclass receiving
-   // notifications. Defaults to false.
-   void watch_all_acls(bool interest);
+   /**
+    * Watches updates to synchronization status for all ACLs.
+    * This defaults to false at handler construction time.
+    *
+    * @param bool If true, receive ACL sync status notifications, else do not.
+    */
+   void watch_all_acls(bool);
 
-   // Called when all pending transactions have been successfully
-   // committed into hardware.  It may be called more than once for a
-   // single transaction, or only once for a whole bunch of separate
-   // ACL updates. In fact, if someone updates an ACL in the CLI, this
-   // function may get called, i.e., it can get called once for zero
-   // transactions.
+   /**
+    * Called upon hardware succesfully committing all pending transactions.
+    *
+    * It may be called more than once for a single transaction, or
+    * only once for a whole bunch of separate ACL updates. In fact, if
+    * someone updates an ACL in the CLI, this function may get called,
+    * i.e., it can get called once for zero transactions.
+    */
    virtual void on_acl_sync();
 
-   // Called when we notice a problem keeping the ACL configuration
-   // from being committed into hardware. It indicates that the ACL
-   // config (as stored in Sysdb) cannot be loaded into hardware,
-   // ever. It must be changed in some way to get Sysdb and the
-   // hardware back in sync. The most common problem, of course, is
-   // too many ACLs or ACL entries. It is up to you to find some
-   // things to delete, commit those deletions, and then see if things
-   // fit once again (on_acl_sync() will get called if they do, or
-   // on_acl_sync_fail() will get called again if they don't). Note
-   // you may be notified more than once of the same problem, and you
-   // may be notified of problems that have nothing to do with you,
-   // such as an operator at the CLI doing something unsupported.
+   /**
+    * Called upon a problem stopping ACL configuration from being commited.
+    *
+    * This indicates that the ACL config (as stored in Sysdb) cannot
+    * be loaded into hardware, ever. It must be changed in some way to
+    * get Sysdb and the hardware back in sync. The most common
+    * problem, of course, is too many ACLs or ACL entries. It is up to
+    * you to find some things to delete, commit those deletions, and
+    * then see if things fit once again (on_acl_sync() will get called
+    * if they do, or on_acl_sync_fail() will get called again if they
+    * don't). Note you may be notified more than once of the same
+    * problem, and you may be notified of problems that have nothing
+    * to do with you, such as an operator at the CLI doing something
+    * unsupported.
+    */
    virtual void on_acl_sync_fail(std::string const & linecard,
                                  std::string const & message);
 
@@ -319,10 +333,14 @@ class EOS_SDK_PUBLIC acl_handler {
    bool watching_all_acls_;
 };
 
-// The ACL manager provides access to current ACL configuration,
-// creation, modification and deletion of ACLs, and functions to
-// commit changes, apply ACLs to interfaces as well as manage
-// fragements mode and enabling counters.
+/**
+ * The ACL manager.
+ *
+ * This manager provides access to current ACL configuration,
+ * creation, modification and deletion of ACLs, and functions to
+ * commit changes, apply ACLs to interfaces as well as manage
+ * fragements mode and enabling counters.
+ */
 class EOS_SDK_PUBLIC acl_mgr {
  public:
    typedef bool (*acl_cb)(acl_key_t const &, void * context);
@@ -333,19 +351,46 @@ class EOS_SDK_PUBLIC acl_mgr {
                                    acl_rule_eth_t const &,
                                    void * context);
 
+   /**
+    * Iterates over all ACLs from the beginning.
+    *
+    * @param[in] handler An ACL callback handler.
+    * @param[out] context A pointer to state to pass to the handler when called.
+    */
    void acl_foreach(acl_cb handler, void * context);
    void acl_foreach(acl_cb handler, void * context, acl_key_t bookmark);
 
-   // Iterates over the rules within an ACL. Provide a callback function matching
-   // the acl_rule_cb_* function definitions above.
-   void acl_rule_eth_foreach(acl_key_t const &, acl_rule_eth_cb, void * context);
+   /**
+    * Iterates over the rules with an IP ACL.
+    * Provide a callback function matching the acl_rule_cb_* definitions above.
+    */
    void acl_rule_ip_foreach(acl_key_t const &, acl_rule_ip_cb, void * context);
 
-   // ACL management
-   //
-   // Returns true if an ACL with the same name and type (i.e., key)
-   // exists in the configuration.
+   /**
+    * Iterates over the rules with an Ethernet ACL.
+    * Provide a callback function matching the acl_rule_cb_* definitions above.
+    */
+   void acl_rule_eth_foreach(acl_key_t const &, acl_rule_eth_cb, void * context);
+
+   /**
+    * Configuration ACL existance test.
+    *
+    * @returns true if an ACL with the same name and type (i.e., key)
+    * exists in the configuration, else false.
+    */
    bool acl_exists(acl_key_t const &) const;
+
+   /**
+    * Adds an IP ACL rule to an ACL.
+    *
+    * If the ACL key doesn't exist, it will be created.
+    * If the ACL type is not the same as the rule type, panic() is called.
+    *
+    * @param acl_key_t The ACL key to modify (name and ACL type)
+    * @param int ACL sequence number
+    * @param acl_rule_ip_t ACL rule to set at sequence number
+    */
+   void acl_rule_set(acl_key_t const &, int, acl_rule_ip_t const &);
 
    // Add and remove ACL rules of a particular type. If the ACL
    // doesn't exist, it will be created before the rule is added to
@@ -359,45 +404,63 @@ class EOS_SDK_PUBLIC acl_mgr {
    // acl_apply(), else the manager will panic(). Note that extremely
    // large numbers of ACLs or rules per ACL can result in undefined
    // behaviour, including a switch reload.
-   void acl_rule_set(acl_key_t const &, int, acl_rule_ip_t const &);
    void acl_rule_set(acl_key_t const &, int, acl_rule_eth_t const &);
-   // Removes the rule for sequence number from the ACL
+
+   /**
+    * Removes a rule from an ACL.
+    *
+    * If the ACL key doesn't exist, that is a no op.
+    * If there is no rule at the sequence number, that is also a no op.
+
+    * @param acl_key_t The ACL key to modify (name and ACL type)
+    * @param int ACL sequence number to remove
+    */
    void acl_rule_delete(acl_key_t const &, int);
 
-   // Commits all rule changes and application changes made above, to
-   // all ACLs, pushing them into Sysdb's active configuration. This
-   // commit cannot fail, but it can lead to a state where not all
-   // ACLs can be loaded into hardware. You will be notified via
-   // on_acl_sync() when this commit and all other outstanding
-   // operations (applications of any ACL to an interface) are loaded
-   // into hardware, or on_acl_sync_fail() if the newly committed
-   // configuration can't be loaded.  If there are no changes pending
-   // and you call this function, you will get one of those callbacks
-   // depending on whether the current state in Sysdb can be loaded
-   // into hardware or not.
+   /**
+    * Commits all rule changes and application changes made above to all ACLs.
+    *
+    * Pushes ACLs into Sysdb's active configuration. This commit
+    * cannot fail, but it can lead to a state where not all ACLs can
+    * be loaded into hardware. You will be notified via on_acl_sync()
+    * when this commit and all other outstanding operations such as
+    * interface applications are loaded into hardware, or
+    * on_acl_sync_fail() if the newly committed configuration can't be
+    * loaded. If there are no changes pending and you call this
+    * function, you will get one of those callbacks depending on
+    * whether the current state in Sysdb can be loaded into hardware
+    * or not.
+    */
    void acl_commit();
 
-   // Deletes the ACL.  Removes all rules and unapplies from all
-   // interfaces. Any pending changes to the ACL are discarded.  Is
-   // effective immediately (no commit or commit notification).
+   /**
+    * Deletes the ACL.
+    *
+    * Removes all rules and unapplies from all
+    * interfaces. Any pending changes to the ACL are discarded.  Is
+    * effective immediately (no commit or commit notification).
+    */
    void acl_delete(acl_key_t const &);
 
-   // Request that an ACL be (un)applied on the given interface. ACL
-   // is loaded into hardware asynchronously. Like commit(), this
-   // function results in a call to your handler when we have applied,
-   // or failed to apply, this ACL configuration. That is, you do not
-   // get a handler callback per call; you get a handler callback when
-   // everything is loaded into hardware, or when we notice problems.
-   //
-   // API call ordering note: any acl_rule_set() or acl_rule_delete()
-   // calls be followed by an acl_commit() prior to calling this
-   // function else a panic() will occur.
+   /**
+    * Requests that an ACL be (un)applied on the given interface and direction.
+    *
+    * ACL is loaded into hardware asynchronously. Like commit(), this
+    * function results in a call to your handler when we have applied,
+    * or failed to apply, this ACL configuration. That is, you do not
+    * get a handler callback per call; you get a handler callback when
+    * everything is loaded into hardware, or when we notice problems.
+    *
+    * API call ordering note: any acl_rule_set() or acl_rule_delete()
+    * calls be followed by an acl_commit() prior to calling this
+    * function else a panic() will occur.
+    */
    void acl_apply(acl_key_t const &, intf_id_t, acl_direction_t, bool);
 
-   // Immediately enable or disable counters for the ACL.
+   /// Immediately enable or disable counters for the ACL
    void acl_counters_enabled_set(acl_key_t const &, bool);
 
-   // Immediately enable or disable fragments matching on the ACL
+   /// Immediately enable or disable fragments matching on the ACL
    void acl_fragments_enabled_set(acl_key_t const &, bool);
 
  protected:

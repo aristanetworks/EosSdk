@@ -10,6 +10,7 @@
 
 namespace eos {
 
+/// Possible interface link speeds
 enum eth_link_speed_t {
    LINK_SPEED_UNKNOWN,
    LINK_SPEED_10MBPS,
@@ -20,19 +21,25 @@ enum eth_link_speed_t {
    LINK_SPEED_100GBPS,
 };
 
+/**
+ * A handler for Ethernet Physical Interface events.
+ */
 class EOS_SDK_PUBLIC eth_phy_intf_handler {
  public:
    eth_phy_intf_handler();
    virtual ~eth_phy_intf_handler();
 
-   // Registers this class to receive updates on changes to the
-   // interface. Expects a boolean signifying whether notifications
-   // should be propagated to this instance or not.
+   /**
+    * Registers this class to receive interface change update notifications.
+    *
+    * Expects a boolean signifying whether notifications
+    * should be propagated to this instance or not.
+    */
    void watch_all_eth_phy_intfs(bool);
 
-   // Handler called when a physical ethernet interface is created
+   /// Handler called when a physical ethernet interface is created
    virtual void on_eth_phy_intf_create(intf_id_t);
-   // Handler called when a physical ethernet interface is deleted
+   /// Handler called when a physical ethernet interface is deleted
    virtual void on_eth_phy_intf_delete(intf_id_t);
 
  private:
@@ -42,6 +49,7 @@ class EOS_SDK_PUBLIC eth_phy_intf_handler {
 
 class eth_phy_intf_iter_impl;
 
+/// Iterator over physical interfaces
 class EOS_SDK_PUBLIC eth_phy_intf_iter_t : public iter_base<intf_id_t,
                                                             eth_phy_intf_iter_impl> {
  private:
@@ -58,12 +66,13 @@ class EOS_SDK_PUBLIC eth_phy_intf_mgr {
    void eth_phy_intf_foreach(callback_func_eth_phy_intf handler, void * context);
    void eth_phy_intf_foreach(callback_func_eth_phy_intf handler, void * context,
                              intf_id_t bookmark);
+   /// Returns true if the interface ID passed exists in the system configuration
    bool exists(intf_id_t) const;
 
-   // Read the "burned in" address
+   /// Returns the "burned in" address of the interface
    eth_addr_t burned_in_eth_addr(intf_id_t) const;
 
-   // Returns the operational link speed
+   /// Returns the operational link speed
    eth_link_speed_t link_speed(intf_id_t) const;
 
  protected:
@@ -72,6 +81,7 @@ class EOS_SDK_PUBLIC eth_phy_intf_mgr {
    EOS_SDK_DISALLOW_COPY_CTOR(eth_phy_intf_mgr);
 };
 
+/// Returns an instance of the physical ethernet interface manager
 eth_phy_intf_mgr * get_eth_phy_intf_mgr() EOS_SDK_PUBLIC;
 
 }
