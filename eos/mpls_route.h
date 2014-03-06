@@ -14,34 +14,52 @@ namespace eos {
 
 typedef uint8_t mpls_route_metric_t;  // 1..255; default/null is 0
 
-// Defines an MPLS route key for MPLS RIB configuration
+
+/// An MPLS route key is used for MPLS RIB configuration.
 class EOS_SDK_PUBLIC mpls_route_key_t {
  public:
    mpls_route_key_t();
+   /**
+    * Constructor taking an ingress MPLS route label and a metric.
+    *
+    * @param mpls_label_t The MPLS label to match on ingress for this route
+    * @param mpls_route_metric_t A metric value between 1 and 255
+    */
    mpls_route_key_t(mpls_label_t const &, mpls_route_metric_t metric);
 
    bool operator==(mpls_route_key_t const & other) const;
    bool operator!=(mpls_route_key_t const & other) const;
 
-   mpls_label_t top_label;      // the label to match on ingress route lookup
-   // 0 is the null metric; valid MPLS routes must have a metric in range 1..255
+   /**
+    * The label to match on ingress route lookup.
+    *
+    * 0 is the null metric; valid MPLS routes must have a metric in range 1..255
+    */
+   mpls_label_t top_label;
+   /// The MPLS route metric. Lower metric routes are preferred.
    mpls_route_metric_t metric;
 };
 
-// An MPLS v4/v6 static route.
+/// An MPLS v4/v6 static route.
 class EOS_SDK_PUBLIC mpls_route_t {
  public:
+   /// Default value constructor
    mpls_route_t();
+   /// MPLS route constructor taking an MPLS route key.
+
    explicit mpls_route_t(mpls_route_key_t const & route_key);
 
    bool operator==(mpls_route_t const & other) const;
    bool operator!=(mpls_route_t const & other) const;
 
+   /// The MPLS route key
    mpls_route_key_t key;
 
-   bool persistent;         // If true, the route is stored to startup-config
+   /// If true, this route is persisted in the startup-config
+   bool persistent;
 };
 
+/// An MPLS route via, defining the action to take for a given MPLS route.
 class EOS_SDK_PUBLIC mpls_route_via_t {
   public:
    mpls_route_via_t();
@@ -49,18 +67,20 @@ class EOS_SDK_PUBLIC mpls_route_via_t {
 
    mpls_route_key_t route_key;
 
-   // Use these fields to determine the nexthop
-   ip_addr_t hop;           // IP v4/v6 nexthop address (for decap and IP forward)
-   intf_id_t intf;          // Use the named interface if not a default intf_id_t
+   /// Use these fields to determine the nexthop
 
-   mpls_label_t pushswap_label;  // Push or swap this label
-   mpls_action_t label_action;  // Perform this MPLS operation
-   mpls_ttl_mode_t ttl_mode;    // Applies to push and pop
-   mpls_payload_type_t payload_type;  // Used to assign ethertype after final pop
+   ip_addr_t hop;           ///< IP v4/v6 nexthop address (for decap and IP forward)
+   intf_id_t intf;          ///< Use the named interface if not a default intf_id_t
+
+   mpls_label_t pushswap_label;  ///< Push or swap this label
+   mpls_action_t label_action;  ///< Perform this MPLS operation
+   mpls_ttl_mode_t ttl_mode;    ///< Applies to push and pop
+   mpls_payload_type_t payload_type;  ///< Used to assign ethertype after final pop
 };
 
 class mpls_route_iter_impl;
 
+/// An iterator over MPLS routes
 class EOS_SDK_PUBLIC mpls_route_iter_t : public iter_base<mpls_route_t,
                                                           mpls_route_iter_impl> {
  private:
@@ -71,6 +91,7 @@ class EOS_SDK_PUBLIC mpls_route_iter_t : public iter_base<mpls_route_t,
 
 class mpls_route_via_iter_impl;
 
+/// An iterator over MPLS route via
 class EOS_SDK_PUBLIC mpls_route_via_iter_t :
    public iter_base<mpls_route_via_t, mpls_route_via_iter_impl> {
  private:
@@ -79,44 +100,55 @@ class EOS_SDK_PUBLIC mpls_route_via_iter_t :
 };
 
 
+/// The IP static route manager
 class EOS_SDK_PUBLIC mpls_route_mgr {
   public:
+   /// Begin resync mode.
    void resync_init();
+   /// Complete resync mode, ready for regular updates.
    void resync_complete();
 
+   /// Returns an MPLS route iterator.
    mpls_route_iter_t mpls_route_iter() const;
 
    typedef bool (*callback_func_route)(mpls_route_t const &, void * context);
    typedef bool (*callback_func_via)(mpls_route_via_t const &, void * context);
 
-   // Iterate across all MPLS static routes.
+   /// Iterate across all MPLS static routes.
    void mpls_route_foreach(callback_func_route handler, void * context);
+   /// Iterate across all MPLS static routes from a given bookmark.
    void mpls_route_foreach(callback_func_route handler, void * context,
                            mpls_route_t const & bookmark);
 
+   /// Returns an MPLS via iterator for a given route (key).
    mpls_route_via_iter_t mpls_route_via_iter(mpls_route_key_t const &) const;
-   // Iterate across configured nexthops for a given MPLS route, i.e.,
-   // emits all mpls_route_via_t's for a given mpls_route_t.
+   /**
+    * Iterates over configured nexthops for a given MPLS route.
+    * emits all mpls_route_via_t's for a given mpls_route_t.
+    */
    void mpls_route_via_foreach(mpls_route_key_t const &,
                                callback_func_via handler, void * context);
 
-   // Tests for existence of any routes matching the route key in the switch config
+   /// Tests for existence of any routes matching the route key in the switch config
    bool exists(mpls_route_key_t const &) const;
-   // Tests if the given via exists
+   /// Tests if the given via exists
    bool exists(mpls_route_via_t const &) const;
 
-   // MPLS route management functions
+   /// MPLS route management functions
 
-   // Inserts or updates MPLS static route in the switch configuration
+   /// Inserts or updates MPLS static route in the switch configuration
    void mpls_route_set(mpls_route_t const &);
 
-   // Removes the MPLS route and all vias matching the route key
+   /// Removes the MPLS route and all vias matching the route key
    void mpls_route_del(mpls_route_key_t const &);
 
-   // Adds a via to an mpls_route_t
+   /// Adds a via to an mpls_route_t
    void mpls_route_via_set(mpls_route_via_t const &);
-   // Removes a via from an mpls_route_t. When all vias are removed,
-   // the route still exists with no nexthop information.
+   /**
+    * Removes a via from an mpls_route_t.
+    * When all vias are removed, the route still exists with no
+    * nexthop information.
+    */
    void mpls_route_via_del(mpls_route_via_t const &);
 
  protected:
@@ -125,6 +157,7 @@ class EOS_SDK_PUBLIC mpls_route_mgr {
    EOS_SDK_DISALLOW_COPY_CTOR(mpls_route_mgr);
 };
 
+/// Returns the MPLS route manager
 mpls_route_mgr * get_mpls_route_mgr() EOS_SDK_PUBLIC;
 
 }
