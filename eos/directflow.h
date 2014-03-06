@@ -19,6 +19,7 @@ typedef uint16_t eth_type_t;
 typedef uint16_t vlan_id_t;
 typedef uint8_t cos_t;
 
+/// Defines the set of fields to match on
 class EOS_SDK_PUBLIC flow_match_field_set_t {
  public:
    flow_match_field_set_t();
@@ -55,7 +56,7 @@ class EOS_SDK_PUBLIC flow_match_field_set_t {
    uint32_t match_bitset_;
 };
 
-// Match criteria for a flow
+/// Match criteria for a flow
 class EOS_SDK_PUBLIC flow_match_t {
  public:
    flow_match_t();
@@ -63,11 +64,11 @@ class EOS_SDK_PUBLIC flow_match_t {
    bool operator==(flow_match_t const & other) const;
    bool operator!=(flow_match_t const & other) const;
 
-   // Specify which fields to match on
+   /// Specify which fields to match on
    void match_field_set_is(const flow_match_field_set_t &);
    flow_match_field_set_t match_field_set() const;
 
-   // Match on input interface.
+   /// Match on input interface.
    void input_intfs_is(const std::set<intf_id_t> &);
    std::set<intf_id_t> input_intfs() const;
    // input_intf_set and input_intf_del are a workaround
@@ -76,31 +77,37 @@ class EOS_SDK_PUBLIC flow_match_t {
    void input_intf_set(intf_id_t);
    void input_intf_del(intf_id_t);
 
-   // Match on Ethernet src, dst, and type
-
+   /// Match on source Eth address
    void eth_src_is(eth_addr_t src, eth_addr_t mask);
    eth_addr_t eth_src() const;
    eth_addr_t eth_src_mask() const;
+   /// Match on destination Eth address
    void eth_dst_is(eth_addr_t dst, eth_addr_t mask);
    eth_addr_t eth_dst() const;
    eth_addr_t eth_dst_mask() const;
+   /// Match on Eth type
    void eth_type_is(eth_type_t);
    eth_type_t eth_type() const;
 
-   // Match on VLAN id
-   // 0 means match configured native VLAN
+   /**
+    * Match on VLAN id
+    * 0 means match configured native VLAN
+    */
    void vlan_id_is(vlan_id_t, uint16_t mask);
    vlan_id_t vlan_id() const;
    uint16_t vlan_id_mask() const;
-   // Match on class of service
-   // Only used if vlan_id is set to something other than 0
+   /**
+    * Match on class of service
+    * Only used if vlan_id is set to something other than 0
+    */
    void cos_is(cos_t);
    cos_t cos() const;
 
-   // Match on IPv4 or IPv6 header fields
+   /// Match on source IPv4 address
    void ip_src_is(const ip_addr_t & src, const ip_addr_t & mask);
    ip_addr_t ip_src() const;
    ip_addr_t ip_src_mask() const;
+   /// Match on destination IPv4 address
    void ip_dst_is(const ip_addr_t & dst, const ip_addr_t & mask);
    ip_addr_t ip_dst() const;
    ip_addr_t ip_dst_mask() const;
@@ -126,6 +133,7 @@ class EOS_SDK_PUBLIC flow_match_t {
    ip_addr_t ip_dst_mask_;
 };
 
+/// Defines the set of enabled actions
 class EOS_SDK_PUBLIC flow_action_set_t {
  public:
    flow_action_set_t();
@@ -159,7 +167,7 @@ class EOS_SDK_PUBLIC flow_action_set_t {
    uint32_t action_bitset_;
 };
 
-// Actions a flow takes on match
+/// Defines the actions to take on a matching flow
 class EOS_SDK_PUBLIC flow_action_t {
  public:
    flow_action_t();
@@ -167,12 +175,14 @@ class EOS_SDK_PUBLIC flow_action_t {
    bool operator==(flow_action_t const & other) const;
    bool operator!=(flow_action_t const & other) const;
 
-   // Specify which actions are enabled
+   /// Specify which actions are enabled
    void action_set_is(const flow_action_set_t &);
    flow_action_set_t action_set() const;
 
-   // Specify 0 or more output interfaces
-   // Passing in the empty set will cause the packet to be dropped.
+   /**
+    * Specify 0 or more output interfaces
+    * Passing in the empty set will cause the packet to be dropped.
+    */
    void output_intfs_is(const std::set<intf_id_t> &);
    std::set<intf_id_t> output_intfs() const;
    // output_intf_set and output_intf_del are a workaround
@@ -181,23 +191,27 @@ class EOS_SDK_PUBLIC flow_action_t {
    void output_intf_set(intf_id_t);
    void output_intf_del(intf_id_t);
 
-   // Specify the VLAN id
-   // 0 means use configured native VLAN
+   /**
+    * Specify the VLAN id
+    * 0 means use configured native VLAN
+    */
    void vlan_id_is(vlan_id_t);
    vlan_id_t vlan_id() const;
-   // Specify the cos
+   /// Specify the cos
    void cos_is(cos_t);
    cos_t cos() const;
 
-   // Rewrite the eth headers
+   /// Rewrite the destination eth address
    void eth_src_is(eth_addr_t);
    eth_addr_t eth_src() const;
+   /// Rewrite the source eth address
    void eth_dst_is(eth_addr_t);
    eth_addr_t eth_dst() const;
 
-   // Rewrite ip headers
+   /// Rewrite the source IP address
    void ip_src_is(const ip_addr_t &);
    ip_addr_t ip_src() const;
+   /// Rewrite the destination IP address
    void ip_dst_is(const ip_addr_t &);
    ip_addr_t ip_dst() const;
 
@@ -216,7 +230,7 @@ class EOS_SDK_PUBLIC flow_action_t {
    ip_addr_t ip_dst_;
 };
 
-// A flow entry
+/// A flow entry
 class EOS_SDK_PUBLIC flow_entry_t {
  public:
    flow_entry_t();
@@ -238,6 +252,8 @@ class EOS_SDK_PUBLIC flow_entry_t {
    flow_priority_t priority_;
 };
 
+
+/// Counters for a flow entry
 class EOS_SDK_PUBLIC flow_counters_t {
  public:
    flow_counters_t();
@@ -254,33 +270,45 @@ class EOS_SDK_PUBLIC flow_counters_t {
    uint64_t packets_;
 };
 
+/**
+ * Flow entry status
+ */
 enum flow_status_t {
    FLOW_STATUS_UNKNOWN,
-   FLOW_CREATED,                // Flow created or modified in hardware
-   FLOW_DELETED,                // Flow removed from hardware
-   FLOW_REJECTED,               // Flow not created
+   FLOW_CREATED,                //< Flow created or modified in hardware
+   FLOW_DELETED,                //< Flow removed from hardware
+   FLOW_REJECTED,               //< Flow not created
 };
 
-// Reason why a flow was not successfully created
-// in hardware
+/**
+ * Reason why a flow was not successfully created
+ * in hardware
+ */
 enum flow_rejected_reason_t {
-   FLOW_REJECTED_BAD_MATCH,     // Flow not created due to bad match criteria
-   FLOW_REJECTED_BAD_ACTION,    // Flow not created due to bad action criteria
-   FLOW_REJECTED_HW_TABLE_FULL, // Flow not created due to insufficient resources
-   FLOW_REJECTED_OTHER,         // Flow not created for some other reason
+   FLOW_REJECTED_BAD_MATCH,     //< Flow not created due to bad match criteria
+   FLOW_REJECTED_BAD_ACTION,    //< Flow not created due to bad action criteria
+   FLOW_REJECTED_HW_TABLE_FULL, //< Flow not created due to insufficient resources
+   FLOW_REJECTED_OTHER,         //< Flow not created for some other reason
 };
 
+/**
+ * Flow handler.
+ *
+ * A flow handler is notified when the status of configured flows changes.
+ */
 class EOS_SDK_PUBLIC flow_handler {
  public:
    flow_handler();
    virtual ~flow_handler();
 
-   // Registers this class to receive updates on changes to
-   // flow state. Expects a boolean signifying whether notifications
-   // should be proagated to this instance or not.
+   /**
+    * Registers this class to receive updates on changes to
+    * flow state. Expects a boolean signifying whether notifications
+    * should be proagated to this instance or not.
+    */
    void watch_all_flows(bool);
 
-   // Handler called when flow status changes
+   /// Handler called when flow status changes
    virtual void on_flow_status(const std::string & name, flow_status_t);
 
  private:
@@ -290,6 +318,7 @@ class EOS_SDK_PUBLIC flow_handler {
 
 class flow_entry_iter_impl;
 
+/// An iterator providing forwards iteration through the configured flows
 class EOS_SDK_PUBLIC flow_entry_iter_t : public iter_base<flow_entry_t,
                                                           flow_entry_iter_impl> {
  private:
@@ -298,28 +327,32 @@ class EOS_SDK_PUBLIC flow_entry_iter_t : public iter_base<flow_entry_t,
 };
 
 
-// Manages DirectFlow configuration
+/**
+ * DirectFlow configuration and status manager.
+ */
 class EOS_SDK_PUBLIC directflow_mgr {
  public:
-   // Iterate across all configured flows
+   /// Iterate across all configured flows
    flow_entry_iter_t flow_entry_iter() const;
 
-   // Tests for existence of a flow entry with the given name
+   /// Tests for existence of a flow entry with the given name
    bool exists(std::string const &) const;
 
    // Flow management functions
 
-   // Inserts or updates a flow
+   /// Insert or update a flow
    void flow_entry_set(flow_entry_t const &);
-   // Deletes a flow
+   /// Delete a flow
    void flow_entry_del(std::string const &);
 
-   // Returns the status of the given flow
+   /// Return the status of the given flow
    flow_status_t flow_status(std::string const & name) const;
-   // Reason a flow was not programmed. Only valid if the flow's
-   // status is FLOW_REJECTED
+   /**
+    * The reason a flow was not programmed. Only valid if the flow's
+    * status is FLOW_REJECTED
+    */
    flow_rejected_reason_t flow_rejected_reason(std::string const & name) const;
-   // Returns the counters for a flow
+   /// Return the counters for a flow
    flow_counters_t flow_counters(std::string const & name) const;
 
  protected:
