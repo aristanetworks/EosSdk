@@ -39,12 +39,14 @@ class EOS_SDK_PUBLIC aresolve_record_base {
    virtual ~aresolve_record_base() EOS_SDK_INTERNAL;
 
  public:
-   std::string const & qname() const;  ///< The DNS query (request) name
-   seconds_t last_refresh() const;     ///< The last refresh time, seconds since boot
-   bool valid() const;                 ///< Was the request successful?
-                                       ///< If not, last_error() will be non-zero
-   int last_error() const;             ///< The last error reported (0 = success)
-                                       ///< This value is one of EAI_* in netdb.h
+   /// Returns the DNS query (request) name
+   std::string const & qname() const;
+   /// Returns the last refresh time, seconds since boot
+   seconds_t last_refresh() const;
+   /// Was the request successful? If not, last_error() will return a non-zero value
+   bool valid() const;
+   /// Reports the last error (0 = success). Values from EAI_* constants in netdb.h
+   int last_error() const;
  private:
    std::string qname_;
    seconds_t last_refresh_;
@@ -55,8 +57,8 @@ class EOS_SDK_PUBLIC aresolve_record_base {
 };
 
 /**
- * A host DNS response. Received by the on_aresolve_host() receiver method.
- *
+ * A DNS response for a hostname query containing resolved IP addresses
+ * Received by the on_aresolve_host() receiver method.
  * A host response contains zero or more IPv4 or IPv6 addresses.
  */
 class EOS_SDK_PUBLIC aresolve_record_host : public aresolve_record_base {
@@ -64,9 +66,10 @@ class EOS_SDK_PUBLIC aresolve_record_host : public aresolve_record_base {
    aresolve_record_host() EOS_SDK_INTERNAL;
    virtual ~aresolve_record_host();
 
-   std::list<ip_addr_t> const & addr_v4() const;  ///< Returns any IPv4 addresses
-   std::list<ip_addr_t> const & addr_v6() const;  ///< Returns any IPv6 addresses
-
+   /// Returns any resolved IPv4 addresses for the qname()
+   std::list<ip_addr_t> const & addr_v4() const;
+   /// Returns any resolved IPv6 addresses for the qname()
+   std::list<ip_addr_t> const & addr_v6() const;
  private:
    std::list<ip_addr_t> addr_v4_;
    std::list<ip_addr_t> addr_v6_;
@@ -126,7 +129,7 @@ class EOS_SDK_PUBLIC aresolve_handler {
    uint32_t aresolve_short_time() const;
 
    /**
-    * The long time sets the period between re-resolution of queries.
+    * Returns the long timer, or seconds between repeated DNS queries.
     *
     * You will receive at most one notification per DNS query (watched
     * host) every aresolve_long_time() number of sceonds. (default: 300s)
