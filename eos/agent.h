@@ -6,32 +6,47 @@
 
 #include <eos/base.h>
 
+/**
+ * @file
+ * EOS Agent handler and agent loop management.
+ */
+
 namespace eos {
 
-/* This class handles events in the agent's lifecycle. */
+/**
+ * The agent_handler class handles events in the agent's lifecycle.
+ */
 class EOS_SDK_PUBLIC agent_handler {
  public:
    agent_handler();
    virtual ~agent_handler();
 
-   // Called after the agent has been internally
-   // initialized. Accessors and mutators (from _mgr classes) should
-   // not be called before this event, and other handlers will not
-   // fire before this event.
+   /**
+    * Handler called after the agent has been internally initialized.
+    *
+    * Accessors and mutators (from _mgr classes) should not be called
+    * before this event, and other handlers will not fire before this
+    * event.
+    */
    virtual void on_initialized();
 };
 
-// Handover the main event loop to EOS
+/**
+ * Hands over the main event loop to EOS.
+ * Blocks until the event loop stops.
+ */
 void EOS_SDK_PUBLIC
 agent_main_loop(const char * agent_name, int argc, char ** argv);
 
-// Stop this agent's execution (after the next pass through the event loop)
+/// Stop this agent's execution (after the next pass through the event loop)
 void EOS_SDK_PUBLIC
 agent_exit();
 
-// Given a name, return a numeric ID which uniquely identifies the
-// agent. This number is guaranteed to remain the same across agent
-// restarts, though not across reboots.
+/**
+ * Given a name, returns a numeric ID uniquely identifying the agent.
+ * This number is guaranteed to remain the same across agent restarts,
+ * though not across reboots.
+ */
 uint32_t EOS_SDK_PUBLIC
 agent_id(const char * agent_name);
 
