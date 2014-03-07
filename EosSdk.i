@@ -40,6 +40,7 @@ typedef uint64_t uint64_be_t;
 %include "eos/eth.h"
 %include "eos/directflow.h"
 %include "eos/ip_route.h"
+%include "eos/neighbor_table.h"
 
 
 %{
@@ -57,5 +58,7 @@ typedef uint64_t uint64_be_t;
 #include "eos/inline/directflow.h"
 #include "eos/ip_route.h"
 #include "eos/inline/ip_route.h"
+#include "eos/neighbor_table.h"
+#include "eos/inline/neighbor_table.h"
 using namespace eos;
 %}
