@@ -46,15 +46,15 @@ acl_mgr::acl_apply(acl_key_t const & key, intf_id_t intf,
 }
 
 void
-acl_mgr::acl_rule_set(acl_key_t const &, int, acl_rule_ip_t const &) {
+acl_mgr::acl_rule_set(acl_key_t const &, uint32_t, acl_rule_ip_t const &) {
 }
 
 void
-acl_mgr::acl_rule_set(acl_key_t const &, int, acl_rule_eth_t const &) {
+acl_mgr::acl_rule_set(acl_key_t const &, uint32_t, acl_rule_eth_t const &) {
 }
 
 void
-acl_mgr::acl_rule_delete(acl_key_t const &, int seq) {
+acl_mgr::acl_rule_delete(acl_key_t const &, uint32_t seq) {
 }
 
 void

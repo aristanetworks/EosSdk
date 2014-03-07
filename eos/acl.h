@@ -251,7 +251,7 @@ class EOS_SDK_PUBLIC acl_rule_ip_t : public acl_rule_base_t {
    acl_port_spec_t destination_port;
 
    // Bitmask of TCP flags to match, if set
-   int tcp_flags;
+   uint16_t tcp_flags;
    // Match "established" connections
    bool established;
 
@@ -344,10 +344,10 @@ class EOS_SDK_PUBLIC acl_handler {
 class EOS_SDK_PUBLIC acl_mgr {
  public:
    typedef bool (*acl_cb)(acl_key_t const &, void * context);
-   typedef bool (*acl_rule_ip_cb)(int seq,
+   typedef bool (*acl_rule_ip_cb)(uint32_t seq,
                                   acl_rule_ip_t const &,
                                   void * context);
-   typedef bool (*acl_rule_eth_cb)(int seq,
+   typedef bool (*acl_rule_eth_cb)(uint32_t seq,
                                    acl_rule_eth_t const &,
                                    void * context);
 
@@ -387,10 +387,10 @@ class EOS_SDK_PUBLIC acl_mgr {
     * If the ACL type is not the same as the rule type, panic() is called.
     *
     * @param acl_key_t The ACL key to modify (name and ACL type)
-    * @param int ACL sequence number
+    * @param uint32_t ACL sequence number
     * @param acl_rule_ip_t ACL rule to set at sequence number
     */
-   void acl_rule_set(acl_key_t const &, int, acl_rule_ip_t const &);
+   void acl_rule_set(acl_key_t const &, uint32_t, acl_rule_ip_t const &);
 
    // Add and remove ACL rules of a particular type. If the ACL
    // doesn't exist, it will be created before the rule is added to
@@ -404,7 +404,7 @@ class EOS_SDK_PUBLIC acl_mgr {
    // acl_apply(), else the manager will panic(). Note that extremely
    // large numbers of ACLs or rules per ACL can result in undefined
    // behaviour, including a switch reload.
-   void acl_rule_set(acl_key_t const &, int, acl_rule_eth_t const &);
+   void acl_rule_set(acl_key_t const &, uint32_t, acl_rule_eth_t const &);
 
    /**
     * Removes a rule from an ACL.
@@ -413,9 +413,9 @@ class EOS_SDK_PUBLIC acl_mgr {
     * If there is no rule at the sequence number, that is also a no op.
 
     * @param acl_key_t The ACL key to modify (name and ACL type)
-    * @param int ACL sequence number to remove
+    * @param uint32_t ACL sequence number to remove
     */
-   void acl_rule_delete(acl_key_t const &, int);
+   void acl_rule_delete(acl_key_t const &, uint32_t);
 
    /**
     * Commits all rule changes and application changes made above to all ACLs.
