@@ -275,9 +275,9 @@ class EOS_SDK_PUBLIC flow_counters_t {
  */
 enum flow_status_t {
    FLOW_STATUS_UNKNOWN,
-   FLOW_CREATED,                //< Flow created or modified in hardware
-   FLOW_DELETED,                //< Flow removed from hardware
-   FLOW_REJECTED,               //< Flow not created
+   FLOW_CREATED,                ///< Flow created or modified in hardware
+   FLOW_DELETED,                ///< Flow removed from hardware
+   FLOW_REJECTED,               ///< Flow not created
 };
 
 /**
@@ -285,10 +285,10 @@ enum flow_status_t {
  * in hardware
  */
 enum flow_rejected_reason_t {
-   FLOW_REJECTED_BAD_MATCH,     //< Flow not created due to bad match criteria
-   FLOW_REJECTED_BAD_ACTION,    //< Flow not created due to bad action criteria
-   FLOW_REJECTED_HW_TABLE_FULL, //< Flow not created due to insufficient resources
-   FLOW_REJECTED_OTHER,         //< Flow not created for some other reason
+   FLOW_REJECTED_BAD_MATCH,     ///< Flow not created due to bad match criteria
+   FLOW_REJECTED_BAD_ACTION,    ///< Flow not created due to bad action criteria
+   FLOW_REJECTED_HW_TABLE_FULL, ///< Flow not created due to insufficient resources
+   FLOW_REJECTED_OTHER,         ///< Flow not created for some other reason
 };
 
 /**

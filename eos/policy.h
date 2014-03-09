@@ -41,10 +41,10 @@ enum policy_match_condition_t {
  */
 enum class_map_match_type_t {
    CLASS_MAP_MATCH_NULL,
-   CLASS_MAP_MATCH_ACL,            //< Matches all the permit rules in the ACL
-   CLASS_MAP_MATCH_ACL_RULE_IPV4,  //< Matches a single IPv4 ACL rule
-   CLASS_MAP_MATCH_ACL_RULE_IPV6,  //< Matches a single IPv6 ACL rule
-   CLASS_MAP_MATCH_ACL_RULE_ETH,   //< Matches a single Ethernet ACL rule
+   CLASS_MAP_MATCH_ACL,            ///< Matches all the permit rules in the ACL
+   CLASS_MAP_MATCH_ACL_RULE_IPV4,  ///< Matches a single IPv4 ACL rule
+   CLASS_MAP_MATCH_ACL_RULE_IPV6,  ///< Matches a single IPv6 ACL rule
+   CLASS_MAP_MATCH_ACL_RULE_ETH,   ///< Matches a single Ethernet ACL rule
 };
 
 /**
@@ -52,9 +52,9 @@ enum class_map_match_type_t {
  */
 enum policy_feature_t {
    POLICY_FEATURE_NULL,
-   POLICY_FEATURE_QOS,      //< Quality of service
-   POLICY_FEATURE_PBR,      //< Policy based routing (PBR)
-   POLICY_FEATURE_TAP_AGG,  //< Tap aggregation
+   POLICY_FEATURE_QOS,      ///< Quality of service
+   POLICY_FEATURE_PBR,      ///< Policy based routing (PBR)
+   POLICY_FEATURE_TAP_AGG,  ///< Tap aggregation
 };
 
 /**
@@ -63,10 +63,10 @@ enum policy_feature_t {
 enum policy_action_type_t {
    POLICY_ACTION_NULL,
    POLICY_ACTION_SHAPING,
-   POLICY_ACTION_NONE,            //< Perform no action
-   POLICY_ACTION_NEXTHOP,         //< Forward to a nexthop
-   POLICY_ACTION_NEXTHOP_GROUP,   //< Forward to a group of nexthops/interfaces
-   POLICY_ACTION_SET_DSCP,        //< Set DSCP bits
+   POLICY_ACTION_NONE,            ///< Perform no action
+   POLICY_ACTION_NEXTHOP,         ///< Forward to a nexthop
+   POLICY_ACTION_NEXTHOP_GROUP,   ///< Forward to a group of nexthops/interfaces
+   POLICY_ACTION_SET_DSCP,        ///< Set DSCP bits
    POLICY_ACTION_SET_AGG_GROUP,
    POLICY_ACTION_SET_ID_TAG,
 };
