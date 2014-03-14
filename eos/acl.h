@@ -235,10 +235,10 @@ class EOS_SDK_PUBLIC acl_rule_ip_t : public acl_rule_base_t {
  public:
    acl_rule_ip_t();
 
-   uint16_t vlan;
-   uint16_t vlan_mask;
-   uint16_t inner_vlan;
-   uint16_t inner_vlan_mask;
+   vlan_id_t vlan;
+   vlan_id_t vlan_mask;
+   vlan_id_t inner_vlan;
+   vlan_id_t inner_vlan_mask;
 
    uint8_t ip_protocol;
 
@@ -272,10 +272,10 @@ class EOS_SDK_PUBLIC acl_rule_eth_t : public acl_rule_base_t {
  public:
    acl_rule_eth_t();
 
-   uint16_t vlan;
-   uint16_t vlan_mask;
-   uint16_t inner_vlan;
-   uint16_t inner_vlan_mask;
+   vlan_id_t vlan;
+   vlan_id_t vlan_mask;
+   vlan_id_t inner_vlan;
+   vlan_id_t inner_vlan_mask;
 
    eth_addr_t source_addr;
    eth_addr_t source_mask;

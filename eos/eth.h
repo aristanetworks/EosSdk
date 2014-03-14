@@ -10,6 +10,9 @@
 
 namespace eos {
 
+/// Valid range of 1-4095 (0 often being used as a special case).
+typedef uint16_t vlan_id_t;
+
 /**
  * An Ethernet address.
  */
