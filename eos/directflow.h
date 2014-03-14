@@ -6,6 +6,7 @@
 
 #include <set>
 
+#include <eos/base.h>
 #include <eos/eth.h>
 #include <eos/intf.h>
 #include <eos/ip.h>
@@ -15,8 +16,6 @@ namespace eos {
 
 typedef uint16_t flow_priority_t;
 typedef uint16_t eth_type_t;
-// Valid range of 0-4095
-typedef uint16_t vlan_id_t;
 typedef uint8_t cos_t;
 
 /// Defines the set of fields to match on
