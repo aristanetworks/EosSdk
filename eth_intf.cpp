@@ -64,6 +64,16 @@ void
 eth_intf_mgr::eth_addr_is(intf_id_t, eth_addr_t) {
 }
 
+switchport_mode_t
+eth_intf_mgr::switchport_mode(intf_id_t) const {
+   return SWITCHPORT_MODE_ACCESS;
+}
+
+void
+eth_intf_mgr::switchport_mode_is(intf_id_t, switchport_mode_t) {
+   // TODO: No-op impl.
+}
+
 eth_intf_mgr::eth_intf_mgr() {
 }
 
