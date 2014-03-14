@@ -11,6 +11,16 @@
 
 namespace eos {
 
+/// Mode of operation of a switch port.
+enum switchport_mode_t {
+   SWITCHPORT_MODE_ACCESS,        ///< Interface only has access to its access VLAN.
+   SWITCHPORT_MODE_TRUNK,         ///< Interface is in 802.1q mode ("trunk mode").
+   SWITCHPORT_MODE_DOT1Q_TUNNEL,  ///< Interface is in 802.1ad mode ("QinQ mode").
+   SWITCHPORT_MODE_TAP,           ///< Interface is in tap mode ("span mode").
+   SWITCHPORT_MODE_TOOL,          ///< Interface is a tool port (egress for a tap).
+   SWITCHPORT_MODE_ROUTED,        ///< Interface routed ("no switchport").
+};
+
 /**
  * Event handler for ethernet interface specific events.
  *
@@ -76,6 +86,20 @@ class EOS_SDK_PUBLIC eth_intf_mgr {
     * @param eth_addr_t The address to set
     */
    void eth_addr_is(intf_id_t, eth_addr_t);
+
+   /**
+    * Returns the currently configured mode of operation of a given interface.
+    * Note that only Ethernet and Port-Channel interfaces can be switchports,
+    * using any other type of interface will lead to a panic.
+    */
+   switchport_mode_t switchport_mode(intf_id_t) const;
+
+   /**
+    * Configures the mode of operation of a given interface.
+    * Note that only Ethernet and Port-Channel interfaces can be switchports,
+    * using any other type of interface will lead to a panic.
+    */
+   void switchport_mode_is(intf_id_t, switchport_mode_t);
 
  protected:
    eth_intf_mgr() EOS_SDK_PRIVATE;
