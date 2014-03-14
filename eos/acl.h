@@ -415,7 +415,7 @@ class EOS_SDK_PUBLIC acl_mgr {
     * @param acl_key_t The ACL key to modify (name and ACL type)
     * @param uint32_t ACL sequence number to remove
     */
-   void acl_rule_delete(acl_key_t const &, uint32_t);
+   void acl_rule_del(acl_key_t const &, uint32_t);
 
    /**
     * Commits all rule changes and application changes made above to all ACLs.
@@ -440,7 +440,7 @@ class EOS_SDK_PUBLIC acl_mgr {
     * interfaces. Any pending changes to the ACL are discarded.  Is
     * effective immediately (no commit or commit notification).
     */
-   void acl_delete(acl_key_t const &);
+   void acl_del(acl_key_t const &);
 
    /**
     * Requests that an ACL be (un)applied on the given interface and direction.
@@ -451,7 +451,7 @@ class EOS_SDK_PUBLIC acl_mgr {
     * get a handler callback per call; you get a handler callback when
     * everything is loaded into hardware, or when we notice problems.
     *
-    * API call ordering note: any acl_rule_set() or acl_rule_delete()
+    * API call ordering note: any acl_rule_set() or acl_rule_del()
     * calls be followed by an acl_commit() prior to calling this
     * function else a panic() will occur.
     */

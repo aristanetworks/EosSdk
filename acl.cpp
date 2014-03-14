@@ -54,11 +54,11 @@ acl_mgr::acl_rule_set(acl_key_t const &, uint32_t, acl_rule_eth_t const &) {
 }
 
 void
-acl_mgr::acl_rule_delete(acl_key_t const &, uint32_t seq) {
+acl_mgr::acl_rule_del(acl_key_t const &, uint32_t seq) {
 }
 
 void
-acl_mgr::acl_delete(acl_key_t const &) {
+acl_mgr::acl_del(acl_key_t const &) {
 }
 
 void
