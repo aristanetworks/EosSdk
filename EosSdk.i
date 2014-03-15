@@ -38,16 +38,11 @@ typedef uint64_t uint64_be_t;
 #include "eos/timer.h"
 #include "eos/iterator.h"
 #include "eos/intf.h"
-#include "eos/inline/intf.h"
 #include "eos/ip.h"
-#include "eos/inline/ip.h"
 #include "eos/eth.h"
 #include "eos/eth_intf.h"
-#include "eos/inline/eth.h"
 #include "eos/directflow.h"
-#include "eos/inline/directflow.h"
 #include "eos/ip_route.h"
-#include "eos/inline/ip_route.h"
 #include "eos/neighbor_table.h"
 using namespace eos;
 
