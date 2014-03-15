@@ -92,6 +92,7 @@ struct stop_iteration {};
 // Pythonify our iterators.
 wrap_iterator(eos::flow_entry_iter_t, eos::flow_entry_iter_impl, eos::flow_entry_t);
 wrap_iterator(eos::intf_iter_t, eos::intf_iter_impl, eos::intf_id_t);
+wrap_iterator(eos::eth_intf_iter_t, eos::eth_intf_iter_impl, eos::intf_id_t);
 wrap_iterator(eos::ip_route_iter_t, eos::ip_route_iter_impl, eos::ip_route_t);
 wrap_iterator(eos::ip_route_via_iter_t, eos::ip_route_via_iter_impl, eos::ip_route_via_t);
 
