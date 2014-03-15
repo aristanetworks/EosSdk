@@ -12,26 +12,14 @@
 %rename("%(command:python $SRCDIR/SwigRenamer.py --classname <<""<)s", %$isclass) "";
 // Don't do anything for enum values, functions or variables.
 
-// Ignored conversions:
-
-#define SWIG_FILE_WITH_INIT
-%import "eos/base.h"
-
-// Tell swig about uint8/16/32/64_t
-typedef unsigned short uint8_t;
-typedef unsigned short uint16_t;
-typedef unsigned int uint32_t;
-typedef unsigned long long uint64_t;
-// Tell swig about our custom types (copied from base.h)
-typedef double seconds_t;
-typedef uint16_t uint16_be_t;
-typedef uint32_t uint32_be_t;
-typedef uint64_t uint64_be_t;
-
 // generate directors for all classes that have virtual methods
 %feature("director");
 
+#define SWIG_FILE_WITH_INIT
+%include "eos/base.h"
+
 %{
+#include "eos/base.h"
 #include "eos/agent.h"
 #include "eos/event_loop.h"
 #include "eos/fd.h"
