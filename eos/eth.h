@@ -4,11 +4,15 @@
 #ifndef EOS_ETH_H
 #define EOS_ETH_H
 
+#include <bitset>
 #include <string>
 #include <stddef.h>
 #include <eos/base.h>
 
 namespace eos {
+
+class EOS_SDK_PUBLIC vlan_set : public std::bitset<4096> {
+};
 
 /// Valid range of 1-4095 (0 often being used as a special case).
 typedef uint16_t vlan_id_t;

@@ -42,6 +42,7 @@ typedef uint64_t uint64_be_t;
 #include "eos/ip.h"
 #include "eos/inline/ip.h"
 #include "eos/eth.h"
+#include "eos/eth_intf.h"
 #include "eos/inline/eth.h"
 #include "eos/directflow.h"
 #include "eos/inline/directflow.h"
@@ -90,11 +91,15 @@ struct stop_iteration {};
    }
 %enddef
 
+// For vlan_set
+%template(_BitSet4096) std::bitset<4096>;
+
 %include "eos/agent.h"
 %include "eos/eth.h"
 %include "eos/event_loop.h"
 %include "eos/fd.h"
 %include "eos/intf.h"
+%include "eos/eth_intf.h"
 %include "eos/ip.h"
 %include "eos/timer.h"
 %include "eos/directflow.h"

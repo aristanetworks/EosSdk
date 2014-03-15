@@ -101,6 +101,54 @@ class EOS_SDK_PUBLIC eth_intf_mgr {
     */
    void switchport_mode_is(intf_id_t, switchport_mode_t);
 
+   /**
+    * Returns the 'default' VLAN of a given interface.
+    * The 'default' VLAN depends on the switchport mode of the interface.
+    * If the interface is in access mode, then the access VLAN is returned.
+    * If the interface is in tap or trunk mode, then the native VLAN is
+    * returned.  If no native VLAN is configured, then 0 is returned.
+    */
+   vlan_id_t default_vlan(intf_id_t) const;
+
+   /**
+    * Configures the 'default' VLAN of a given interface.
+    * The 'default' VLAN depends on the switchport mode of the interface.
+    * If the interface is in access mode, then the access VLAN is configured.
+    * If the interface is in tap or trunk mode, then the native VLAN is
+    * configured.
+    */
+   void default_vlan_is(intf_id_t, vlan_id_t);
+
+   /**
+    * Returns the set of VLANs trunked on this interface.
+    * Note that by default all VLANs are trunked on all interfaces.
+    */
+   vlan_set trunk_vlans(intf_id_t) const;
+
+   /**
+    * Adds a VLAN to the set of allowed VLANs when in trunk mode.
+    * If the interface isn't in trunk mode, then the configuration is changed
+    * nevertheless, but the configuration won't take effect until the
+    * interface is switched to trunk mode.
+    */
+   void trunk_vlan_set(intf_id_t, vlan_id_t);
+
+   /**
+    * Configures the set of allowed VLANs when in trunk mode.
+    * If the interface isn't in trunk mode, then the configuration is changed
+    * nevertheless, but the configuration won't take effect until the
+    * interface is switched to trunk mode.
+    */
+   void trunk_vlan_is(intf_id_t, vlan_set const & vlans);
+
+   /**
+    * Removes a VLAN to the set of allowed VLANs when in trunk mode.
+    * If the interface isn't in trunk mode, then the configuration is changed
+    * nevertheless, but the configuration won't take effect until the
+    * interface is switched to trunk mode.
+    */
+   void trunk_vlan_del(intf_id_t, vlan_id_t);
+
  protected:
    eth_intf_mgr() EOS_SDK_PRIVATE;
 
