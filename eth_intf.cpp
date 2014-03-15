@@ -74,6 +74,38 @@ eth_intf_mgr::switchport_mode_is(intf_id_t, switchport_mode_t) {
    // TODO: No-op impl.
 }
 
+vlan_id_t
+eth_intf_mgr::default_vlan(intf_id_t) const {
+   return 0;  // TODO: No-op impl.
+}
+
+void
+eth_intf_mgr::default_vlan_is(intf_id_t, vlan_id_t) {
+   // TODO: No-op impl.
+}
+
+vlan_set
+eth_intf_mgr::trunk_vlans(intf_id_t) const {
+   vlan_set vlans;
+   // TODO: No-op impl.
+   return vlans;
+}
+
+void
+eth_intf_mgr::trunk_vlan_set(intf_id_t, vlan_id_t) {
+   // TODO: No-op impl.
+}
+
+void
+eth_intf_mgr::trunk_vlan_is(intf_id_t, vlan_set const &) {
+   // TODO: No-op impl.
+}
+
+void
+eth_intf_mgr::trunk_vlan_del(intf_id_t, vlan_id_t) {
+   // TODO: No-op impl.
+}
+
 eth_intf_mgr::eth_intf_mgr() {
 }
 

@@ -26,3 +26,26 @@
 %typemap(freearg) (int argc, char **argv) {
   free((char *) $2);
 }
+
+namespace std {
+   template <size_t N> class bitset {
+   public:
+      bool operator==(bitset<N> const &) const;
+      bool operator!=(bitset<N> const &) const;
+      bool operator[] (size_t pos) const;
+      bitset<N>& operator&=(bitset<N> const &);
+      bitset<N>& operator|=(bitset<N> const &);
+      bitset<N>& operator^=(bitset<N> const &);
+      bitset<N> operator~() const;
+      bool test(size_t position) const;
+      bitset<N>& set(size_t position);
+      bitset<N>& reset(size_t position);
+      bitset<N>& flip(size_t position);
+      bool all() const;
+      bool any() const;
+      bool none() const;
+      std::string to_string() const;
+      size_t count() const;
+      size_t size() const;
+   };
+}
