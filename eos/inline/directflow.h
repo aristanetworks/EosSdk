@@ -53,6 +53,12 @@ flow_match_field_set_t::operator!=(flow_match_field_set_t const & other) const {
 }
 
 inline bool
+flow_match_field_set_t::operator<(flow_match_field_set_t const & other) const {
+  return match_bitset_ < other.match_bitset_;
+}
+
+
+inline bool
 flow_match_t::operator==(flow_match_t const & other) const {
    return match_field_set_ == other.match_field_set_
       && ip_src_ == other.ip_src_
@@ -73,6 +79,40 @@ flow_match_t::operator==(flow_match_t const & other) const {
 inline bool
 flow_match_t::operator!=(flow_match_t const & other) const {
    return !operator==(other);
+}
+
+inline bool
+flow_match_t::operator<(flow_match_t const & other) const {
+   if(match_field_set_ != other.match_field_set_) {
+      return match_field_set_ < other.match_field_set_;
+   }  else if(input_intfs_ != other.input_intfs_) {
+      return input_intfs_ < other.input_intfs_;
+   }  else if(eth_src_ != other.eth_src_) {
+      return eth_src_ < other.eth_src_;
+   }  else if(eth_src_mask_ != other.eth_src_mask_) {
+      return eth_src_mask_ < other.eth_src_mask_;
+   }  else if(eth_dst_ != other.eth_dst_) {
+      return eth_dst_ < other.eth_dst_;
+   }  else if(eth_dst_mask_ != other.eth_dst_mask_) {
+      return eth_dst_mask_ < other.eth_dst_mask_;
+   }  else if(eth_type_ != other.eth_type_) {
+      return eth_type_ < other.eth_type_;
+   }  else if(vlan_id_ != other.vlan_id_) {
+      return vlan_id_ < other.vlan_id_;
+   }  else if(vlan_id_mask_ != other.vlan_id_mask_) {
+      return vlan_id_mask_ < other.vlan_id_mask_;
+   }  else if(cos_ != other.cos_) {
+      return cos_ < other.cos_;
+   }  else if(ip_src_ != other.ip_src_) {
+      return ip_src_ < other.ip_src_;
+   }  else if(ip_src_mask_ != other.ip_src_mask_) {
+      return ip_src_mask_ < other.ip_src_mask_;
+   }  else if(ip_dst_ != other.ip_dst_) {
+      return ip_dst_ < other.ip_dst_;
+   }  else if(ip_dst_mask_ != other.ip_dst_mask_) {
+      return ip_dst_mask_ < other.ip_dst_mask_;
+   } 
+   return false;
 }
 
 inline void

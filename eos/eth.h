@@ -50,6 +50,7 @@ class EOS_SDK_PUBLIC eth_addr_t {
    bool operator!() const;
    bool operator==(eth_addr_t const & other) const;
    bool operator!=(eth_addr_t const & other) const;
+   bool operator<(eth_addr_t const & other) const;
    operator bool() const;
 
    /// Returns the given byte from the address

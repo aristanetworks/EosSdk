@@ -119,6 +119,22 @@ ip_prefix_t::network() const {
    return addr_;
 }
 
+inline ip_addr_t const
+ip_prefix_t::mask() const {
+   uint8_t addr[16] = {};
+   int word;
+   for(word = 0; word < prefix_length_ / 8; word++) {
+      // Set any full words.
+      addr[word] = 0xFF;
+   }
+   if(word < (af() == AF_IPV4 ? 4 : 16) && prefix_length_ % 8) {
+      // There are remaining bits to set
+      addr[word] = 0xFF;
+      addr[word] <<= (8 - prefix_length_ % 8);
+   }
+   return ip_addr_t(af(), addr);
+}
+
 inline af_t
 ip_addr_t::af() const {
    return af_;
