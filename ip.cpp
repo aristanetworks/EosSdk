@@ -41,6 +41,13 @@ ip_addr_t::operator==(ip_addr_t const &other) const {
 }
 
 bool
+ip_addr_t::operator<(ip_addr_t const & other) const {
+   if( af_ < other.af_ ) return true;
+   if( af_ != other.af_ ) return false;
+   return memcmp(addr_.bytes, other.addr_.bytes, af_ == AF_IPV4 ? 4 : 16) < 0;
+}
+
+bool
 parse_ip_prefix(char const *, ip_prefix_t * result) {
    return true;  // TODO: No op impl.
 }

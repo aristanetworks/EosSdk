@@ -34,4 +34,9 @@ eth_addr_t::bytes(void *arr) const {
    memcpy( arr, bytes_, sizeof( bytes_ ) );
 }
 
+bool
+eth_addr_t::operator<(eth_addr_t const & other) const {
+   return memcmp(bytes_, other.bytes_, 6) < 0;
+}
+
 };

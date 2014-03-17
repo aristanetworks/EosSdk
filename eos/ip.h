@@ -57,6 +57,7 @@ class EOS_SDK_PUBLIC ip_addr_t {
 
    bool operator==(ip_addr_t const & other) const;
    bool operator!=(ip_addr_t const & other) const;
+   bool operator<(ip_addr_t const & other) const;
    operator bool() const;
 
    /// The address family of this IP address.
@@ -111,7 +112,7 @@ class EOS_SDK_PUBLIC ip_prefix_t {
     * Supports IPv4 and IPv6 address prefixes. This constructor
     * will call panic() if the string passed is not a valid network
     * prefix (e.g., "10.1.2.7/24" is invalid, while "10.1.2.0/24" is OK).
-   */
+    */
    explicit ip_prefix_t(char const *);
 
    /// The address family of the prefix.
@@ -120,6 +121,11 @@ class EOS_SDK_PUBLIC ip_prefix_t {
    ip_addr_t const network() const;
    /// The prefix length in bits.
    int prefix_length() const;
+   /**
+    * The prefix as mask. A prefix length of 8 on a v4 address will
+    * yield the mask 255.0.0.0
+    */
+   ip_addr_t const mask() const;
    /// Returns the prefix as a string, e.g., "10.2.3.4/24" or "cafe::1/128"
    std::string to_string() const;
 
