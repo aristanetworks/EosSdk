@@ -25,6 +25,7 @@ class EOS_SDK_PUBLIC flow_match_field_set_t {
 
    bool operator==(flow_match_field_set_t const & other) const;
    bool operator!=(flow_match_field_set_t const & other) const;
+   bool operator<(flow_match_field_set_t const & other) const;
 
    void input_intfs_is(bool);
    bool input_intfs() const;
@@ -62,6 +63,7 @@ class EOS_SDK_PUBLIC flow_match_t {
 
    bool operator==(flow_match_t const & other) const;
    bool operator!=(flow_match_t const & other) const;
+   bool operator<(flow_match_t const & other) const;
 
    /// Specify which fields to match on
    void match_field_set_is(const flow_match_field_set_t &);
