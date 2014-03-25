@@ -42,7 +42,13 @@ class EOS_SDK_PUBLIC ip_route_t {
    ip_route_key_t key;  ///< The route's key
 
    ip_route_tag_t tag;  ///< A numbered tag, used for table segregation
-   bool persistent;     ///< If true, the route is stored in the startup-config
+   /**
+    * Whether this route persists in system configuration.
+    * If true, the route appears in 'show running-config', and will
+    * be saved to startup-config if a 'copy running start' or
+    * 'write memory' CLI command is issued.
+    */
+   bool persistent;
 };
 
 /**
