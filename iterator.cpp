@@ -47,6 +47,12 @@ iter_base<T, Impl>::operator*() {
 }
 
 template <typename T, typename Impl>
+inline T*
+iter_base<T, Impl>::operator->() {
+   return 0;
+}
+
+template <typename T, typename Impl>
 inline iter_base<T, Impl>::operator bool() const {
    return false;
 }
