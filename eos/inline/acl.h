@@ -69,7 +69,8 @@ inline acl_port_spec_eq_t::acl_port_spec_eq_t(uint16_t port) {
 }
 
 inline acl_port_spec_eq_t::acl_port_spec_eq_t(std::list<uint16_t> ports) {
-   for (auto pit = ports.begin(); pit != ports.end(); ++pit) {
+   for (std::list<uint16_t>::const_iterator pit = ports.begin(); pit != ports.end();
+         ++pit) {
       ports_.push_back(*pit);
    }
 }
