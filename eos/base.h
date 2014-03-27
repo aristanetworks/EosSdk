@@ -4,7 +4,7 @@
 #ifndef EOS_BASE_H
 #define EOS_BASE_H
 
-#include <cstdint> // for uint8_t, uint16_t, uint32_t, uint64_t, etc.
+#include <stdint.h> // for uint8_t, uint16_t, uint32_t, uint64_t, etc.
 
 /**
  * @mainpage
