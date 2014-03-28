@@ -115,6 +115,8 @@ class EOS_SDK_PUBLIC ip_prefix_t {
     */
    explicit ip_prefix_t(char const *);
 
+   bool operator==(ip_prefix_t const & other) const;
+
    /// The address family of the prefix.
    af_t af() const;
    /// The prefix's network address.

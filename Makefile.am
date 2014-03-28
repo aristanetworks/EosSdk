@@ -22,6 +22,7 @@ libeos_la_SOURCES += intf.cpp
 libeos_la_SOURCES += impl.cpp impl.h
 libeos_la_SOURCES += ip.cpp
 libeos_la_SOURCES += ip_route.cpp
+libeos_la_SOURCES += fib.cpp
 libeos_la_SOURCES += iterator.cpp
 libeos_la_SOURCES += mpls_route.cpp
 libeos_la_SOURCES += nexthop_group.cpp
