@@ -53,6 +53,12 @@ inline ip_prefix_t::ip_prefix_t(char const *prefix_string) {
    }
 }
 
+// Operators
+inline bool
+ip_prefix_t::operator==(ip_prefix_t const & other) const {
+   return (addr_ == other.addr_) && (prefix_length_ == other.prefix_length_);
+}
+
 // ip_addr_mask_t constructors
 
 inline ip_addr_mask_t::ip_addr_mask_t()
