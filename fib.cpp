@@ -76,6 +76,7 @@ fib_mgr::fib_route(ip_prefix_t const & prefix) {
    return route;
 }
 
+/*
 fib_route_iter_t
 fib_mgr::fib_route_iter() const {
    fib_route_iter_t *nop = 0;
@@ -87,5 +88,6 @@ fib_mgr::fib_fec_iter() const {
    fib_fec_iter_t *nop = 0;
    return *nop;
 }
+*/
 
 } // namespace eos
