@@ -4,7 +4,11 @@
 #ifndef EXAMPLES_LIBEVENT_H
 #define EXAMPLES_LIBEVENT_H
 
+#include <sys/time.h>
+
 #include <eos/event_loop.h>
+
+struct event_base;  // Forward declare libevent's main data structure.
 
 class libevent_loop : public eos::event_loop_handler {
  public:
