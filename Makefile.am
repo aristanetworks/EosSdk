@@ -51,12 +51,12 @@ _eossdk_la_CXXFLAGS = $(AM_CXXFLAGS) -Wno-strict-aliasing -Wno-missing-field-ini
 _eossdk_la_CPPFLAGS = -I/usr/include/python$(PYTHON_VERSION)
 _eossdk_la_LIBADD = libeos.la
 
-$(srcdir)/eossdk_wrap.cpp: $(SWIG_FILES)
+$(srcdir)/eossdk_wrap.cpp: $(SWIG_FILES) $(nobase_include_HEADERS)
 	SRCDIR=$(srcdir) $(SWIG) -c++ -python -I$(srcdir) -o $@ $(srcdir)/EosSdk.i
 
 $(srcdir)/eossdk_wrap.h: $(srcdir)/eossdk_wrap.cpp
 
-$(srcdir)/eossdk.py: $(SWIG_FILES)
+$(srcdir)/eossdk.py: $(SWIG_FILES) $(nobase_include_HEADERS)
 	$(MAKE) $(AM_MAKEFLAGS) eossdk_wrap.cpp
 
 BUILT_SOURCES = $(_eossdk_la_SOURCES)
