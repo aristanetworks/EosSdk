@@ -14,7 +14,12 @@ eth_intf_handler::~eth_intf_handler() {
 
 void
 eth_intf_handler::watch_all_eth_intfs(bool all) {
-  watching_all_intfs_ = all;
+   // TODO: No op impl.
+}
+
+void
+eth_intf_handler::watch_eth_intf(intf_id_t, bool) {
+   // TODO: No op impl.
 }
 
 void eth_intf_handler::on_eth_intf_create(intf_id_t) {

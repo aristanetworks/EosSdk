@@ -44,7 +44,12 @@ intf_handler::~intf_handler() {
 
 void
 intf_handler::watch_all_intfs(bool all) {
-   watching_all_intfs_ = all;
+   // TODO: No op impl.
+}
+
+void
+intf_handler::watch_intf(intf_id_t, bool) {
+   // TODO: No op impl.
 }
 
 void

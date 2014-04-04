@@ -90,6 +90,14 @@ class EOS_SDK_PUBLIC intf_handler {
     */
    void watch_all_intfs(bool);
 
+  /**
+    * Registers this class to receive change updates on the given interface.
+    *
+    * Expects the id of the corresponding interface and a boolean signifying whether
+    * notifications should be propagated to this instance or not.
+    */
+   void watch_intf(intf_id_t, bool);
+
    /// Handler called when a new interface is created.
    virtual void on_intf_create(intf_id_t);
    /// Handler called when an interface has been removed.
@@ -98,9 +106,6 @@ class EOS_SDK_PUBLIC intf_handler {
    virtual void on_oper_status(intf_id_t, oper_status_t);
    /// Handler called after an interface has been configured to be enabled.
    virtual void on_admin_enabled(intf_id_t, bool);
-
- private:
-   bool watching_all_intfs_;
 };
 
 

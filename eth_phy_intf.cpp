@@ -13,7 +13,12 @@ eth_phy_intf_handler::~eth_phy_intf_handler() {
 
 void
 eth_phy_intf_handler::watch_all_eth_phy_intfs(bool all) {
-   watching_all_intfs_ = all;
+   // TODO: No op impl.
+}
+
+void
+eth_phy_intf_handler::watch_eth_phy_intf(intf_id_t, bool) {
+   // TODO: No op impl.
 }
 
 void

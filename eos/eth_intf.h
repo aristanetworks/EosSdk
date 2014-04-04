@@ -40,15 +40,21 @@ class EOS_SDK_PUBLIC eth_intf_handler {
     */
    void watch_all_eth_intfs(bool);
 
+  /**
+    * Registers this class to receive change updates on the given interface.
+    *
+    * @param intf_id_t Signifyies which interface to subscribe to.
+    * @param bool Signifyies whether notifications should be
+    * propagated to this handler instance or not.
+    */
+   void watch_eth_intf(intf_id_t, bool);
+
    /// Handler called when an ethernet interface is created
    virtual void on_eth_intf_create(intf_id_t);
    /// Handler called when an ethernet interface is deleted
    virtual void on_eth_intf_delete(intf_id_t);
    /// Handler called when the mac address of an interface changes
    virtual void on_eth_addr(intf_id_t, eth_addr_t);
-
- private:
-   bool watching_all_intfs_;
 };
 
 
