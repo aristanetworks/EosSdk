@@ -309,11 +309,15 @@ class EOS_SDK_PUBLIC flow_handler {
     */
    void watch_all_flows(bool);
 
-   /// Handler called when flow status changes
-   virtual void on_flow_status(const std::string & name, flow_status_t);
+  /**
+    * Registers this class to receive updates on changes to flow state for the given
+    * flow name. Expects the name of the flow to watch and a boolean signifying
+    * whether notifications should be propagated to this instance or not.
+    */
+   void watch_flow(std::string const &, bool);
 
- private:
-   bool watching_all_flows_;
+   /// Handler called when flow status changes
+   virtual void on_flow_status(std::string const &, flow_status_t);
 };
 
 
@@ -338,6 +342,9 @@ class EOS_SDK_PUBLIC directflow_mgr {
 
    /// Tests for existence of a flow entry with the given name
    bool exists(std::string const &) const;
+
+   /// Return the flow entry with the given name
+   flow_entry_t flow_entry(std::string const &) const;
 
    // Flow management functions
 

@@ -37,13 +37,19 @@ class EOS_SDK_PUBLIC eth_phy_intf_handler {
     */
    void watch_all_eth_phy_intfs(bool);
 
+   /**
+    * Registers this class to receive interface change update notifications for the
+    * given interface.
+    *
+    * Expects the id of the corresponding interface and a boolean signifying whether
+    * notifications should be propagated to this instance or not.
+    */
+   void watch_eth_phy_intf(intf_id_t, bool);
+
    /// Handler called when a physical ethernet interface is created
    virtual void on_eth_phy_intf_create(intf_id_t);
    /// Handler called when a physical ethernet interface is deleted
    virtual void on_eth_phy_intf_delete(intf_id_t);
-
- private:
-   bool watching_all_intfs_;
 };
 
 
