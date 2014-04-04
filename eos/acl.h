@@ -328,9 +328,6 @@ class EOS_SDK_PUBLIC acl_handler {
     */
    virtual void on_acl_sync_fail(std::string const & linecard,
                                  std::string const & message);
-
-  private:
-   bool watching_all_acls_;
 };
 
 /**

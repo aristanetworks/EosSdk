@@ -77,7 +77,6 @@ acl_mgr::acl_commit() {
 
 void
 acl_handler::watch_all_acls(bool all) {
-   watching_all_acls_ = all;
 }
 
 void

@@ -203,6 +203,9 @@ void
 flow_handler::watch_all_flows(bool should_watch) {
 }
 
+void flow_handler::watch_flow(std::string const &, bool) {
+}
+
 void
 flow_handler::on_flow_status(const std::string & name, flow_status_t status) {
 }
@@ -235,6 +238,11 @@ directflow_mgr::flow_entry_iter() const {
 bool
 directflow_mgr::exists(std::string const & name) const {
    return false;
+}
+
+flow_entry_t
+directflow_mgr::flow_entry(std::string const & name) const {
+   return flow_entry_t();
 }
 
 void
