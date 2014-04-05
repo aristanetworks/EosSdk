@@ -83,9 +83,11 @@ class EOS_SDK_PUBLIC decap_group_mgr {
    // The decap_group_foreach methods are deprecated and will be
    // removed in the future.
    typedef bool (*callback_func_decap_group)(decap_group_t const &, void * context);
-   void decap_group_foreach(callback_func_decap_group handler, void * context);
+   void decap_group_foreach(callback_func_decap_group handler, void * context)
+      EOS_SDK_DEPRECATED; // Use decap_group_iter() instead.
    void decap_group_foreach(callback_func_decap_group handler, void * context,
-                            decap_group_t const &bookmark);
+                            decap_group_t const &bookmark)
+      EOS_SDK_DEPRECATED; // Use decap_group_iter() instead.
 
    /**
     * Adds the specified decap group to the system configuration
