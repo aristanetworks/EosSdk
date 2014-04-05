@@ -75,9 +75,11 @@ class EOS_SDK_PUBLIC eth_intf_mgr {
    // Collection management
    eth_intf_iter_t eth_intf_iter() const;
    typedef bool (*callback_func_eth_intf)(intf_id_t, void * context);
-   void eth_intf_foreach(callback_func_eth_intf handler, void * context);
+   void eth_intf_foreach(callback_func_eth_intf handler, void * context)
+      EOS_SDK_DEPRECATED;  // Use eth_intf_iter() instead.
    void eth_intf_foreach(callback_func_eth_intf handler, void * context,
-                         intf_id_t bookmark);
+                         intf_id_t bookmark)
+      EOS_SDK_DEPRECATED;  // Use eth_intf_iter() instead.
    bool exists(intf_id_t) const;
 
    // Attribute accessors
