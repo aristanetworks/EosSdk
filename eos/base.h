@@ -33,11 +33,13 @@ typedef double seconds_t;
 // Things we need to expose but that aren't part of the API.
 // TODO(tsuna): Why can't we make this visibility protected?
 #define EOS_SDK_INTERNAL __attribute__ ((visibility ("default")))
+#define EOS_SDK_NORETURN __attribute__((noreturn))
 #else
 // SWIG doesn't understand __attribute__ overload macros
 #define EOS_SDK_PUBLIC
 #define EOS_SDK_PRIVATE
 #define EOS_SDK_INTERNAL
+#define EOS_SDK_NORETURN
 #endif
 
 #define EOS_SDK_DISALLOW_COPY_CTOR(ClassName) \
