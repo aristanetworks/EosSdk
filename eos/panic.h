@@ -28,21 +28,51 @@
 
 namespace eos {
 
-void panic(char const * fmt, ...)
-   __attribute__((noreturn)) __attribute__((format(printf, 1, 2))) EOS_SDK_PUBLIC;
-void vpanic(char const * fmt, va_list ap) __attribute__((noreturn)) EOS_SDK_PUBLIC;
+class error;  // Forward declaration.
+
 /**
- * The panic handler callback definition.
+ * Reports an exception from the SDK.
+ * Internal errors and programming errors are reported via subclasses of
+ * exception.  See eos/exception.h for possible exceptions.
+ */
+void panic(error const & exception) EOS_SDK_NORETURN EOS_SDK_PUBLIC;
+
+/// Obsolete, replaced with panic(error).
+void panic(char const * fmt, ...)
+   EOS_SDK_NORETURN __attribute__((format(printf, 1, 2))) EOS_SDK_PUBLIC;
+
+/// Obsolete, replaced with panic(error).
+void vpanic(char const * fmt, va_list ap) EOS_SDK_NORETURN EOS_SDK_PUBLIC;
+
+/**
+ * The obsolete panic handler callback definition.
+ * This has been replaced with exception_handler_t.
  *
  * @param message The error message
  */
 typedef void (*panic_handler_t)(char const * message);
+
 /**
- * Sets a custom panic handler.
+ * The exception handler callback definition.
+ *
+ * @param exception The exception that needs to be handled.
+ */
+typedef void (*exception_handler_t)(error const & exception);
+
+/**
+ * Sets an obsolete custom panic handler.
+ * This has been replaced with exception_handler_is.
  *
  * @param panic_handler_t A panic handler callback
  */
 void panic_handler_is(panic_handler_t) EOS_SDK_PUBLIC;
+
+/**
+ * Sets a custom panic handler.
+ *
+ * @param exception_handler_t An exception handler callback
+ */
+void exception_handler_is(exception_handler_t) EOS_SDK_PUBLIC;
 
 }
 

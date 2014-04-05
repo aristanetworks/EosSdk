@@ -34,6 +34,7 @@ typedef uint64_t uint64_be_t;
 %{
 #include "eos/agent.h"
 #include "eos/event_loop.h"
+#include "eos/exception.h"
 #include "eos/fd.h"
 #include "eos/timer.h"
 #include "eos/iterator.h"
@@ -48,6 +49,28 @@ using namespace eos;
 
 struct stop_iteration {};
 %}
+
+%define translate_exception(ExceptionClass)
+   catch(ExceptionClass const & e) {
+      ExceptionClass * exc = new ExceptionClass(e);
+      PyObject * obj = SWIG_NewPointerObj(exc, SWIGTYPE_p_eos__##ExceptionClass, 1);
+      PyErr_SetObject(SWIG_Python_ExceptionType(SWIGTYPE_p_eos__##ExceptionClass), obj);
+      SWIG_fail;
+   }
+%enddef
+
+%exceptionclass error;
+
+%exception {
+   try {
+      $action
+   }
+   translate_exception(no_such_interface_error)
+   translate_exception(not_switchport_eligible_error)
+   translate_exception(invalid_vlan_error)
+   translate_exception(internal_vlan_error)
+   // TODO(tsuna): Add a catch-all case for the base type `exception'.
+}
 
 %typemap(throws) stop_iteration {
   (void)$1;
@@ -90,6 +113,15 @@ struct stop_iteration {};
 %template(_BitSet4096) std::bitset<4096>;
 
 %include "eos/agent.h"
+// Ignore the `raise' method of all exceptions.  `raise' is a Python keyword
+// and also this method is used to throw the exception from C++ and is useless
+// in Python.
+%ignore raise;
+// Ignore the `what' method of all exceptions.  This method is redundant with
+// the `msg' method (it's only provided for "compatibility" with standard
+// exceptions).
+%ignore what;
+%include "eos/exception.h"
 %include "eos/eth.h"
 %include "eos/event_loop.h"
 %include "eos/fd.h"
