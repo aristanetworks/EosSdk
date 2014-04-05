@@ -112,6 +112,16 @@ struct stop_iteration {};
 // For vlan_set
 %template(_BitSet4096) std::bitset<4096>;
 
+// Ignore all the old-style iterators.
+%ignore eos::decap_group_mgr::decap_group_foreach;
+%ignore eos::eth_intf_mgr::eth_intf_foreach;
+%ignore eos::eth_phy_intf_mgr::eth_phy_intf_foreach;
+%ignore eos::intf_mgr::intf_foreach;
+%ignore eos::ip_route_mgr::ip_route_foreach;
+%ignore eos::ip_route_mgr::ip_route_via_foreach;
+%ignore eos::mpls_route_mgr::mpls_route_foreach;
+%ignore eos::mpls_route_mgr::mpls_route_via_foreach;
+
 %include "eos/agent.h"
 // Ignore the `raise' method of all exceptions.  `raise' is a Python keyword
 // and also this method is used to throw the exception from C++ and is useless
