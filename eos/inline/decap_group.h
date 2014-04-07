@@ -24,8 +24,6 @@ inline decap_group_t::decap_group_t(std::string group_name,
      persistent_(false) {
    if(group_name.empty()) {
       panic("group_name must be a non-empty string");
-   } else if(protocol == PROTOCOL_TYPE_NULL) {
-      panic("must pass a tunnel protocol other than PROTOCOL_TYPE_NULL");
    }
 }
 

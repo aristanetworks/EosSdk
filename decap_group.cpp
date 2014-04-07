@@ -4,6 +4,7 @@
 #include <cassert>
 
 #include "eos/decap_group.h"
+#include "eos/panic.h"
 
 namespace eos {
 
@@ -47,6 +48,11 @@ decap_group_mgr::decap_group_foreach(callback_func_decap_group handler,
 
 void
 decap_group_mgr::decap_group_set(decap_group_t const &group) {
+   if(group.group_name().empty()) {
+      panic("Empty decap group name");
+   } else if(group.protocol_type() == PROTOCOL_TYPE_NULL) {
+      panic("must pass a tunnel protocol other than PROTOCOL_TYPE_NULL");
+   }
    // TODO: No op impl.
 }
 
