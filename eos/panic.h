@@ -37,12 +37,14 @@ class error;  // Forward declaration.
  */
 void panic(error const & exception) EOS_SDK_NORETURN EOS_SDK_PUBLIC;
 
-/// Obsolete, replaced with panic(error).
+/// @deprecated Obsolete, replaced with panic(error).
 void panic(char const * fmt, ...)
-   EOS_SDK_NORETURN __attribute__((format(printf, 1, 2))) EOS_SDK_PUBLIC;
+   EOS_SDK_NORETURN __attribute__((format(printf, 1, 2)))
+   EOS_SDK_PUBLIC;
 
-/// Obsolete, replaced with panic(error).
-void vpanic(char const * fmt, va_list ap) EOS_SDK_NORETURN EOS_SDK_PUBLIC;
+/// @deprecated Obsolete, replaced with panic(error).
+void vpanic(char const * fmt, va_list ap)
+   EOS_SDK_NORETURN EOS_SDK_PUBLIC;
 
 /**
  * The obsolete panic handler callback definition.
@@ -61,11 +63,11 @@ typedef void (*exception_handler_t)(error const & exception);
 
 /**
  * Sets an obsolete custom panic handler.
- * This has been replaced with exception_handler_is.
  *
  * @param panic_handler_t A panic handler callback
+ * @deprecated This has been replaced with exception_handler_is.
  */
-void panic_handler_is(panic_handler_t) EOS_SDK_PUBLIC;
+void panic_handler_is(panic_handler_t) EOS_SDK_PUBLIC EOS_SDK_DEPRECATED;
 
 /**
  * Sets a custom panic handler.
