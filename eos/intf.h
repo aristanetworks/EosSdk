@@ -126,6 +126,7 @@ class EOS_SDK_PUBLIC intf_iter_t : public iter_base<intf_id_t,
  */
 class EOS_SDK_PUBLIC intf_mgr {
  public:
+   /// Iterates over all interfaces currently available in the system.
    intf_iter_t intf_iter() const;
    /* Collection management */
    typedef bool (*callback_func_intf)(intf_id_t, void * context);
@@ -133,11 +134,15 @@ class EOS_SDK_PUBLIC intf_mgr {
     * An iterator that for each interface, calls the handler with an interface ID.
     * Also passed is a pointer to a context managed by the application.
     * If callback returns false, we stop iteration.
+    * @deprecated Use intf_iter() instead.
     */
-   void intf_foreach(callback_func_intf handler, void *context);
+   void intf_foreach(callback_func_intf handler, void *context)
+      EOS_SDK_DEPRECATED;
    /// Iterator that starts at the first element after the bookmark's position
+   /// @deprecated Use intf_iter() instead.
    void intf_foreach(callback_func_intf handler, void *context,
-                          intf_id_t bookmark);
+                          intf_id_t bookmark)
+      EOS_SDK_DEPRECATED;
    /// Returns true if the intf_id_t has a corresponding status.
    bool exists(intf_id_t) const;
 
