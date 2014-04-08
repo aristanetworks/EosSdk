@@ -69,9 +69,13 @@ class EOS_SDK_PUBLIC eth_phy_intf_mgr {
    // Collection management
    eth_phy_intf_iter_t eth_phy_intf_iter() const;
    typedef bool (*callback_func_eth_phy_intf)(intf_id_t, void * context);
-   void eth_phy_intf_foreach(callback_func_eth_phy_intf handler, void * context);
+   /// @deprecated Use eth_phy_intf_iter() instead.
+   void eth_phy_intf_foreach(callback_func_eth_phy_intf handler, void * context)
+      EOS_SDK_DEPRECATED;
+   /// @deprecated Use eth_phy_intf_iter() instead.
    void eth_phy_intf_foreach(callback_func_eth_phy_intf handler, void * context,
-                             intf_id_t bookmark);
+                             intf_id_t bookmark)
+      EOS_SDK_DEPRECATED;
    /// Returns true if the interface ID passed exists in the system configuration
    bool exists(intf_id_t) const;
 
