@@ -148,9 +148,13 @@ class EOS_SDK_PUBLIC ip_route_mgr {
     * If a tag is set, only return routes that have match the current tag.
     */
    ip_route_iter_t ip_route_iter() const;
-   void ip_route_foreach(callback_func_route handler, void * context);
+   /// @deprecated Use ip_route_iter() instead.
+   void ip_route_foreach(callback_func_route handler, void * context)
+      EOS_SDK_DEPRECATED;
+   /// @deprecated Use ip_route_iter() instead.
    void ip_route_foreach(callback_func_route handler, void * context,
-                         ip_route_t const & bookmark);
+                         ip_route_t const & bookmark)
+      EOS_SDK_DEPRECATED;
 
    /**
     * Iterates across configured nexthops for a given route key,
@@ -158,8 +162,10 @@ class EOS_SDK_PUBLIC ip_route_mgr {
     * is set, only return vias on routes that match the current tag.
     */
    ip_route_via_iter_t ip_route_via_iter(ip_route_key_t const &) const;
+   /// @deprecated Use ip_route_via_iter() instead.
    void ip_route_via_foreach(ip_route_key_t const &,
-                             callback_func_via handler, void * context);
+                             callback_func_via handler, void * context)
+      EOS_SDK_DEPRECATED;
 
    /**
     * Tests for existence of any routes matching the route key in the config.
