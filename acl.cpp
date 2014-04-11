@@ -17,6 +17,12 @@ acl_handler::~acl_handler() {}
 
 // acl_mgr methods
 
+acl_iter_t
+acl_mgr::acl_iter() const {
+   acl_iter_t * nop = 0;
+   return *nop;  // TODO: No op impl.
+}
+
 void
 acl_mgr::acl_foreach(acl_cb handle, void * context) {
 }
@@ -25,9 +31,21 @@ void
 acl_mgr::acl_foreach(acl_cb handle, void * context, acl_key_t bookmark) {
 }
 
+acl_rule_ip_iter_t
+acl_mgr::acl_rule_ip_iter(acl_key_t const &) const {
+   acl_rule_ip_iter_t * nop = 0;
+   return *nop;  // TODO: No op impl.
+}
+
 void
 acl_mgr::acl_rule_eth_foreach(acl_key_t const &,
                               acl_rule_eth_cb handle, void * context) {
+}
+
+acl_rule_eth_iter_t
+acl_mgr::acl_rule_eth_iter(acl_key_t const &) const {
+   acl_rule_eth_iter_t * nop = 0;
+   return *nop;  // TODO: No op impl.
 }
 
 void

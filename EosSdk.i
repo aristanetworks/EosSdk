@@ -113,6 +113,9 @@ struct stop_iteration {};
 %template(_BitSet4096) std::bitset<4096>;
 
 // Ignore all the old-style iterators.
+%ignore eos::acl_mgr::acl_foreach;
+%ignore eos::acl_mgr::acl_rule_eth_foreach;
+%ignore eos::acl_mgr::acl_rule_ip_foreach;
 %ignore eos::decap_group_mgr::decap_group_foreach;
 %ignore eos::eth_intf_mgr::eth_intf_foreach;
 %ignore eos::eth_phy_intf_mgr::eth_phy_intf_foreach;

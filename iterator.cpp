@@ -1,6 +1,7 @@
 // Copyright (c) 2014 Arista Networks, Inc.  All rights reserved.
 // Arista Networks, Inc. Confidential and Proprietary.
 
+#include "eos/acl.h"
 #include "eos/decap_group.h"
 #include "eos/directflow.h"
 #include "eos/eth_intf.h"
@@ -57,6 +58,9 @@ inline iter_base<T, Impl>::operator bool() const {
    return false;
 }
 
+template class iter_base<acl_key_t, acl_iter_impl>;
+template class iter_base<acl_rule_eth_entry_t, acl_rule_eth_iter_impl>;
+template class iter_base<acl_rule_ip_entry_t, acl_rule_ip_iter_impl>;
 template class iter_base<intf_id_t, intf_iter_impl>;
 template class iter_base<intf_id_t, eth_intf_iter_impl>;
 template class iter_base<intf_id_t, eth_phy_intf_iter_impl>;
