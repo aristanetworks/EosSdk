@@ -5,6 +5,7 @@
 #define EOS_ACL_H
 
 #include <list>
+#include <utility>
 
 #include <eos/eth.h>
 #include <eos/ip.h>
@@ -330,6 +331,41 @@ class EOS_SDK_PUBLIC acl_handler {
                                  std::string const & message);
 };
 
+class acl_iter_impl;
+
+/// An ACL iterator.
+class EOS_SDK_PUBLIC acl_iter_t : public iter_base<acl_key_t, acl_iter_impl> {
+ private:
+   friend class acl_iter_impl;
+   explicit acl_iter_t(acl_iter_impl * const) EOS_SDK_PRIVATE;
+};
+
+/// A rule in an IP ACL.
+typedef std::pair<uint32_t, acl_rule_ip_t> acl_rule_ip_entry_t;
+
+class acl_rule_ip_iter_impl;
+
+/// An IP ACL rule iterator.
+class EOS_SDK_PUBLIC acl_rule_ip_iter_t : public iter_base<acl_rule_ip_entry_t,
+                                                           acl_rule_ip_iter_impl> {
+ private:
+   friend class acl_rule_ip_iter_impl;
+   explicit acl_rule_ip_iter_t(acl_rule_ip_iter_impl * const) EOS_SDK_PRIVATE;
+};
+
+/// A rule in an Ethernet ACL.
+typedef std::pair<uint32_t, acl_rule_eth_t> acl_rule_eth_entry_t;
+
+class acl_rule_eth_iter_impl;
+
+/// An Ethernet ACL rule iterator.
+class EOS_SDK_PUBLIC acl_rule_eth_iter_t : public iter_base<acl_rule_eth_entry_t,
+                                                            acl_rule_eth_iter_impl> {
+ private:
+   friend class acl_rule_eth_iter_impl;
+   explicit acl_rule_eth_iter_t(acl_rule_eth_iter_impl * const) EOS_SDK_PRIVATE;
+};
+
 /**
  * The ACL manager.
  *
@@ -348,26 +384,41 @@ class EOS_SDK_PUBLIC acl_mgr {
                                    acl_rule_eth_t const &,
                                    void * context);
 
+   /// Iterates over all ACLs.
+   acl_iter_t acl_iter() const;
+
    /**
     * Iterates over all ACLs from the beginning.
     *
+    * @deprecated Use acl_iter() instead.
     * @param[in] handler An ACL callback handler.
     * @param[out] context A pointer to state to pass to the handler when called.
     */
-   void acl_foreach(acl_cb handler, void * context);
-   void acl_foreach(acl_cb handler, void * context, acl_key_t bookmark);
+   void acl_foreach(acl_cb handler, void * context) EOS_SDK_DEPRECATED;
+   void acl_foreach(acl_cb handler, void * context, acl_key_t bookmark)
+      EOS_SDK_DEPRECATED;
+
+   /// Iterates over the rules with an IP ACL.
+   acl_rule_ip_iter_t acl_rule_ip_iter(acl_key_t const &) const;
 
    /**
     * Iterates over the rules with an IP ACL.
     * Provide a callback function matching the acl_rule_cb_* definitions above.
+    * @deprecated Use acl_rule_ip_iter() instead.
     */
-   void acl_rule_ip_foreach(acl_key_t const &, acl_rule_ip_cb, void * context);
+   void acl_rule_ip_foreach(acl_key_t const &, acl_rule_ip_cb, void * context)
+      EOS_SDK_DEPRECATED;
+
+   /// Iterates over the rules with an Ethernet ACL.
+   acl_rule_eth_iter_t acl_rule_eth_iter(acl_key_t const &) const;
 
    /**
     * Iterates over the rules with an Ethernet ACL.
     * Provide a callback function matching the acl_rule_cb_* definitions above.
+    * @deprecated Use acl_rule_eth_iter() instead.
     */
-   void acl_rule_eth_foreach(acl_key_t const &, acl_rule_eth_cb, void * context);
+   void acl_rule_eth_foreach(acl_key_t const &, acl_rule_eth_cb, void * context)
+      EOS_SDK_DEPRECATED;
 
    /**
     * Configuration ACL existance test.
