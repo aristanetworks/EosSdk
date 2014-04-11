@@ -27,10 +27,12 @@ acl_key_t::acl_type() const {
 
 // Constructors for ACL keys and port/TTL specifiers
 
-inline acl_key_t::acl_key_t() {}
+inline acl_key_t::acl_key_t() : acl_name_(), acl_type_(ACL_TYPE_NULL) {
+}
 
-inline acl_key_t::acl_key_t(std::string const & acl_name, acl_type_t acl_type) :
-      acl_name_(acl_name), acl_type_(acl_type) {}
+inline acl_key_t::acl_key_t(std::string const & acl_name, acl_type_t acl_type)
+   : acl_name_(acl_name), acl_type_(acl_type) {
+}
 
 inline acl_ttl_spec_t::acl_ttl_spec_t() : oper_(ACL_RANGE_ANY), ttl_(0) {
 }
