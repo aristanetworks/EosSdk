@@ -28,7 +28,7 @@ class EOS_SDK_PUBLIC neighbor_entry_t {
    ip_addr_t ip_addr() const;
    eth_addr_t eth_addr() const;
    neighbor_entry_type_t entry_type() const;
-   
+
   private:
    ip_addr_t ip_addr_;
    eth_addr_t eth_addr_;
@@ -43,7 +43,7 @@ class EOS_SDK_PUBLIC neighbor_entry_t {
  * IPv4 addresses and the Neighbor Discovery table for IPv6 addresses)
 */
 class EOS_SDK_PUBLIC neighbor_table_mgr {
-  public:
+ public:
 
    // Attribute accessors
 
