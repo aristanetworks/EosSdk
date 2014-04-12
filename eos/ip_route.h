@@ -23,6 +23,9 @@ class EOS_SDK_PUBLIC ip_route_key_t {
    explicit ip_route_key_t(ip_prefix_t const &);
    ip_route_key_t(ip_prefix_t const &, ip_route_preference_t);
 
+   bool operator==(ip_route_key_t const & other) const;
+   bool operator!=(ip_route_key_t const & other) const;
+
    ip_prefix_t prefix;                // IP v4/v6 network prefix
    ip_route_preference_t preference;  // 0..255 only, defaults to 1
    ip_route_metric_t metric;
