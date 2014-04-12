@@ -43,12 +43,18 @@ iter_base<T, Impl>::operator==(const iter_base<T, Impl> & rhs) const {
 
 template <typename T, typename Impl>
 inline T
-iter_base<T, Impl>::operator*() {
+iter_base<T, Impl>::operator*() const {
    return T();
 }
 
 template <typename T, typename Impl>
-inline T*
+inline T const *
+iter_base<T, Impl>::operator->() const {
+   return 0;
+}
+
+template <typename T, typename Impl>
+inline T *
 iter_base<T, Impl>::operator->() {
    return 0;
 }
