@@ -18,6 +18,19 @@ inline ip_route_key_t::ip_route_key_t(ip_prefix_t const & prefix,
    : prefix(prefix), preference(preference), metric(0) {
 }
 
+inline bool
+ip_route_key_t::operator==(ip_route_key_t const & other) const {
+   return prefix == other.prefix
+      && preference == other.preference
+      && metric == other.metric;
+}
+
+inline bool
+ip_route_key_t::operator!=(ip_route_key_t const & other) const {
+   return !operator==(other);
+}
+
+
 inline ip_route_t::ip_route_t() : key(), tag(0), persistent(false) {
 }
 
