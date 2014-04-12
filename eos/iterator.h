@@ -19,7 +19,8 @@ class EOS_SDK_PUBLIC iter_base : public std::iterator<std::input_iterator_tag, T
    bool operator==(iter_base const & rhs) const;
    bool operator!=(iter_base const & rhs) const;
    operator bool() const;
-   T operator*();
+   T operator*() const;
+   T const * operator->() const;
    T * operator->();
 
  protected:
