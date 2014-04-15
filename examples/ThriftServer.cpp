@@ -4,6 +4,7 @@
 #include <thrift/server/TNonblockingServer.h>
 
 #include <eos/intf.h>
+#include <eos/sdk.h>
 
 #include "ThriftSdk.h"
 #include "libevent.h"
@@ -19,8 +20,7 @@ using namespace eos;
 
 class ThriftSdkHandler : virtual public ThriftSdkIf {
  public:
-  ThriftSdkHandler() {
-    intf_mgr = get_intf_mgr();
+  explicit ThriftSdkHandler(eos::intf_mgr * mgr) : intf_mgr(mgr) {
   }
 
   bool exists(const std::string& intf) {
@@ -73,7 +73,8 @@ class event_base_holder {
 
 int main(int argc, char **argv) {
   int port = 9090;
-  shared_ptr<ThriftSdkHandler> handler(new ThriftSdkHandler());
+  sdk sdk;
+  shared_ptr<ThriftSdkHandler> handler(new ThriftSdkHandler(sdk.get_intf_mgr()));
   event_base_holder base;
   libevent_loop loop(base.ptr());
   shared_ptr<TProcessor> processor(new ThriftSdkProcessor(handler));

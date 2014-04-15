@@ -6,6 +6,7 @@
 #include <eos/intf.h>
 #include <eos/ip.h>
 #include <eos/ip_route.h>
+#include <eos/sdk.h>
 
 #include <assert.h>
 #include <stdio.h>
@@ -25,10 +26,9 @@ class random_router : public eos::agent_handler,
                       public eos::intf_handler,
                       public eos::fd_handler {
  public:
-   random_router() {
+   explicit random_router(eos::intf_mgr * mgr) : eos::intf_handler(mgr) {
       printf("Initializing the Random Router...\n");
       app_id = eos::agent_id(AGENT_NAME);
-      intf_mgr = eos::get_intf_mgr();
       route_mgr = eos::get_ip_route_mgr();
       route_mgr->tag_is(app_id);
    }
@@ -97,8 +97,8 @@ class random_router : public eos::agent_handler,
    }
 
    eos::intf_id_t get_intf(eos::intf_id_t cur_intf) {
-      for(eos::intf_iter_t i = intf_mgr->intf_iter(); i; ++i){
-         if(*i != cur_intf || intf_mgr->oper_status(*i) != eos::INTF_OPER_UP) {
+      for(eos::intf_iter_t i = intf_mgr_->intf_iter(); i; ++i){
+         if(*i != cur_intf || intf_mgr_->oper_status(*i) != eos::INTF_OPER_UP) {
             // Don't use the same interface or a down'd interface.
             continue;
          }
@@ -113,11 +113,11 @@ class random_router : public eos::agent_handler,
    eos::intf_id_t last_used_intf;
 
    // EosSdk state managers:
-   eos::intf_mgr * intf_mgr;
    eos::ip_route_mgr * route_mgr;
 };
 
 int main(int argc, char ** argv) {
-   random_router rr;
+   eos::sdk sdk;
+   random_router rr(sdk.get_intf_mgr());
    eos::agent_main_loop(AGENT_NAME, argc, argv);
 }

@@ -30,6 +30,7 @@ typedef uint64_t uint64_be_t;
 
 // generate directors for all classes that have virtual methods
 %feature("director");
+%feature("nodirector") eos::intf_mgr;
 
 %{
 #include "eos/agent.h"
@@ -46,6 +47,7 @@ typedef uint64_t uint64_be_t;
 #include "eos/ip_route.h"
 #include "eos/neighbor_table.h"
 #include "eos/mac_table.h"
+#include "eos/sdk.h"
 using namespace eos;
 
 struct stop_iteration {};
@@ -147,6 +149,7 @@ struct stop_iteration {};
 %include "eos/ip_route.h"
 %include "eos/neighbor_table.h"
 %include "eos/mac_table.h"
+%include "eos/sdk.h"
 
 // Pythonify our iterators.
 wrap_iterator(eos::flow_entry_iter_t, eos::flow_entry_iter_impl, eos::flow_entry_t);
