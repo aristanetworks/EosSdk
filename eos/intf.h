@@ -8,6 +8,7 @@
 #include <stddef.h>
 
 #include <eos/base.h>
+#include <eos/base_mgr.h>
 #include <eos/iterator.h>
 
 /**
@@ -75,11 +76,12 @@ class EOS_SDK_PUBLIC intf_id_t {
    explicit intf_id_t(uint64_t) EOS_SDK_INTERNAL;
 };
 
+class intf_mgr;
 
 /// This class receives changes to base interface attributes.
 class EOS_SDK_PUBLIC intf_handler {
  public:
-   intf_handler();
+   explicit intf_handler(intf_mgr *);
    virtual ~intf_handler();
 
    /**
@@ -106,8 +108,10 @@ class EOS_SDK_PUBLIC intf_handler {
    virtual void on_oper_status(intf_id_t, oper_status_t);
    /// Handler called after an interface has been configured to be enabled.
    virtual void on_admin_enabled(intf_id_t, bool);
-};
 
+ protected:
+   intf_mgr * intf_mgr_;
+};
 
 class intf_iter_impl;
 
@@ -119,15 +123,16 @@ class EOS_SDK_PUBLIC intf_iter_t : public iter_base<intf_id_t,
    explicit intf_iter_t(intf_iter_impl * const) EOS_SDK_PRIVATE;
 };
 
-
 /**
  * The interface manager.
  * This class inspects and configures base interface attribtues.
  */
-class EOS_SDK_PUBLIC intf_mgr {
+class EOS_SDK_PUBLIC intf_mgr : protected base_mgr<intf_handler, intf_id_t> {
  public:
+   virtual ~intf_mgr();
+
    /// Iterates over all interfaces currently available in the system.
-   intf_iter_t intf_iter() const;
+   virtual intf_iter_t intf_iter() const = 0;
    /* Collection management */
    typedef bool (*callback_func_intf)(intf_id_t, void * context);
    /**
@@ -136,38 +141,35 @@ class EOS_SDK_PUBLIC intf_mgr {
     * If callback returns false, we stop iteration.
     * @deprecated Use intf_iter() instead.
     */
-   void intf_foreach(callback_func_intf handler, void *context)
-      EOS_SDK_DEPRECATED;
+   virtual void intf_foreach(callback_func_intf handler, void *context)
+      EOS_SDK_DEPRECATED = 0;
    /// Iterator that starts at the first element after the bookmark's position
    /// @deprecated Use intf_iter() instead.
-   void intf_foreach(callback_func_intf handler, void *context,
-                          intf_id_t bookmark)
-      EOS_SDK_DEPRECATED;
+   virtual void intf_foreach(callback_func_intf handler, void *context,
+                             intf_id_t bookmark) EOS_SDK_DEPRECATED = 0;
    /// Returns true if the intf_id_t has a corresponding status.
-   bool exists(intf_id_t) const;
+   virtual bool exists(intf_id_t) const = 0;
 
    // Attribute accessors
    /// Returns true if the given interface is configured to be enabled
-   bool admin_enabled(intf_id_t) const;
+   virtual bool admin_enabled(intf_id_t) const = 0;
    /// Configures the enabled status of the interface
-   void admin_enabled_is(intf_id_t, bool);
+   virtual void admin_enabled_is(intf_id_t, bool) = 0;
    /**
     * Configure the description of the given interface.
     * Creates a copy of the passed in string description.
     */
-   void description_is(intf_id_t, char const *);
+   virtual void description_is(intf_id_t, char const *) = 0;
    /// Inspects the curren operational status of the given interface.
-   oper_status_t oper_status(intf_id_t) const;
+   virtual oper_status_t oper_status(intf_id_t) const = 0;
 
  protected:
    intf_mgr() EOS_SDK_PRIVATE;
+   friend class intf_handler;
 
  private:
    EOS_SDK_DISALLOW_COPY_CTOR(intf_mgr);
 };
-
-/// Returns the base interface manager.
-intf_mgr * get_intf_mgr() EOS_SDK_PUBLIC;
 
 }
 
