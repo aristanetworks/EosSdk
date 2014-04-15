@@ -36,7 +36,7 @@ intf_id_t::to_string() const {
    return "NotImplemented";  // TODO: No op impl.
 }
 
-intf_handler::intf_handler() {
+intf_handler::intf_handler(intf_mgr * mgr) {
 }
 
 intf_handler::~intf_handler() {
@@ -72,48 +72,11 @@ intf_handler::on_admin_enabled(intf_id_t, bool) {
    // TODO: No op impl.
 }
 
-intf_iter_t
-intf_mgr::intf_iter() const {
-   intf_iter_t * nop = 0;
-   return *nop;  // TODO: No op impl.
-}
-
-void
-intf_mgr::intf_foreach(bool (*handler)(intf_id_t, void *), void *) {
-   // TODO: No op impl.
-}
-
-void
-intf_mgr::intf_foreach(bool (*handler)(intf_id_t, void *), void *,
-                       intf_id_t bookmark) {
-   // TODO: No op impl.
-}
-
-bool
-intf_mgr::exists(intf_id_t) const {
-   return false;  // TODO: No op impl.
-}
-
-bool
-intf_mgr::admin_enabled(intf_id_t id) const {
-   return false;  // TODO: No op impl.
-}
-
-void
-intf_mgr::admin_enabled_is(intf_id_t id, bool enabled) {
-   // TODO: No op impl.
-}
-
-void
-intf_mgr::description_is(intf_id_t, char const *) {
-   // TODO: No op impl.
-}
-
-oper_status_t intf_mgr::oper_status(intf_id_t) const {
-   return INTF_OPER_NULL;  // TODO: No op impl.
-}
-
 intf_mgr::intf_mgr() {
+   // TODO: No op impl.
+}
+
+intf_mgr::~intf_mgr() {
    // TODO: No op impl.
 }
 
@@ -121,11 +84,40 @@ class intf_mgr_impl : public intf_mgr {
  public:
    intf_mgr_impl() {
    }
-};
 
-intf_mgr * get_intf_mgr() {
-   static intf_mgr_impl impl;
-   return &impl;
-}
+   intf_iter_t intf_iter() const {
+      intf_iter_t * nop = 0;
+      return *nop;  // TODO: No op impl.
+   }
+
+   void intf_foreach(bool (*handler)(intf_id_t, void *), void *) {
+      // TODO: No op impl.
+   }
+
+   void intf_foreach(bool (*handler)(intf_id_t, void *), void *,
+                          intf_id_t bookmark) {
+      // TODO: No op impl.
+   }
+
+   bool exists(intf_id_t) const {
+      return false;  // TODO: No op impl.
+   }
+
+   bool admin_enabled(intf_id_t id) const {
+      return false;  // TODO: No op impl.
+   }
+
+   void admin_enabled_is(intf_id_t id, bool enabled) {
+      // TODO: No op impl.
+   }
+
+   void description_is(intf_id_t, char const *) {
+      // TODO: No op impl.
+   }
+
+   oper_status_t oper_status(intf_id_t) const {
+      return INTF_OPER_NULL;  // TODO: No op impl.
+   }
+};
 
 }
