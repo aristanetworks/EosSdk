@@ -15,6 +15,10 @@ void sdk::init_eth_intf_mgr() {
    // TODO: No op impl.
 }
 
+void sdk::init_eth_phy_intf_mgr() {
+   // TODO: No op impl.
+}
+
 void sdk::init_intf_mgr() {
    // TODO: No op impl.
 }

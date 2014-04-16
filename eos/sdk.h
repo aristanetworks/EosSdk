@@ -8,8 +8,9 @@
 
 namespace eos {
 
-class intf_mgr;
 class eth_intf_mgr;
+class eth_phy_intf_mgr;
+class intf_mgr;
 
 /**
  * Manages the differents managers of the SDK. One manager of each type can be
@@ -26,14 +27,17 @@ class EOS_SDK_PUBLIC sdk {
     ~sdk();
 
     void init_eth_intf_mgr();
+    void init_eth_phy_intf_mgr();
     void init_intf_mgr();
 
     eth_intf_mgr * get_eth_intf_mgr();
+    eth_phy_intf_mgr * get_eth_phy_intf_mgr();
     intf_mgr * get_intf_mgr();
 
  private:
     EOS_SDK_DISALLOW_COPY_CTOR(sdk);
     eth_intf_mgr * eth_intf_mgr_;
+    eth_phy_intf_mgr * eth_phy_intf_mgr_;
     intf_mgr * intf_mgr_;
 };
 
