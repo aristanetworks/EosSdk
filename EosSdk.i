@@ -28,9 +28,10 @@ typedef uint16_t uint16_be_t;
 typedef uint32_t uint32_be_t;
 typedef uint64_t uint64_be_t;
 
-// generate directors for all classes that have virtual methods
+// generate directors for all classes that have virtual methods, except the managers
 %feature("director");
 %feature("nodirector") eos::intf_mgr;
+%feature("nodirector") eos::eth_intf_mgr;
 
 %{
 #include "eos/agent.h"
