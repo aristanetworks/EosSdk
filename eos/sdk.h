@@ -9,6 +9,7 @@
 namespace eos {
 
 class intf_mgr;
+class eth_intf_mgr;
 
 /**
  * Manages the differents managers of the SDK. One manager of each type can be
@@ -24,20 +25,15 @@ class EOS_SDK_PUBLIC sdk {
     sdk();
     ~sdk();
 
-    /**
-     * This function should be called at the beginning of your code if you plan to
-     * use the intf_mgr.
-     */
+    void init_eth_intf_mgr();
     void init_intf_mgr();
-    /**
-     * Returns the intf_mgr linked to this sdk object. If no intf_mgr object has
-     * been initialized, this function will call init_intf_mgr().
-     * As a the
-     */
+
+    eth_intf_mgr * get_eth_intf_mgr();
     intf_mgr * get_intf_mgr();
 
  private:
     EOS_SDK_DISALLOW_COPY_CTOR(sdk);
+    eth_intf_mgr * eth_intf_mgr_;
     intf_mgr * intf_mgr_;
 };
 

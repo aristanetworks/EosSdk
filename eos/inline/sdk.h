@@ -13,6 +13,13 @@ inline intf_mgr * sdk::get_intf_mgr() {
    return intf_mgr_;
 }
 
+inline eth_intf_mgr * sdk::get_eth_intf_mgr() {
+   if (!eth_intf_mgr_) {
+      init_eth_intf_mgr();
+   }
+   return eth_intf_mgr_;
+}
+
 }
 
 #endif // EOS_INLINE_SDK_H

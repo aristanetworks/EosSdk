@@ -5,6 +5,7 @@
 #define EOS_ETH_INTF_H
 
 #include <eos/base.h>
+#include <eos/base_mgr.h>
 #include <eos/eth.h>
 #include <eos/intf.h>
 #include <eos/iterator.h>
@@ -21,6 +22,8 @@ enum switchport_mode_t {
    SWITCHPORT_MODE_ROUTED,        ///< Interface routed ("no switchport").
 };
 
+class eth_intf_mgr;
+
 /**
  * Event handler for ethernet interface specific events.
  *
@@ -29,7 +32,7 @@ enum switchport_mode_t {
  */
 class EOS_SDK_PUBLIC eth_intf_handler {
  public:
-   eth_intf_handler();
+   explicit eth_intf_handler(eth_intf_mgr *);
    virtual ~eth_intf_handler();
 
    /**
@@ -55,6 +58,9 @@ class EOS_SDK_PUBLIC eth_intf_handler {
    virtual void on_eth_intf_delete(intf_id_t);
    /// Handler called when the mac address of an interface changes
    virtual void on_eth_addr(intf_id_t, eth_addr_t);
+
+ protected:
+   eth_intf_mgr * eth_intf_mgr_;
 };
 
 
@@ -70,46 +76,48 @@ class EOS_SDK_PUBLIC eth_intf_iter_t : public iter_base<intf_id_t,
 
 
 /// The ethernet interface manager
-class EOS_SDK_PUBLIC eth_intf_mgr {
+class EOS_SDK_PUBLIC eth_intf_mgr : protected base_mgr<eth_intf_handler, intf_id_t>{
  public:
+   virtual ~eth_intf_mgr();
+
    // Collection management
-   eth_intf_iter_t eth_intf_iter() const;
+   virtual eth_intf_iter_t eth_intf_iter() const = 0;
    typedef bool (*callback_func_eth_intf)(intf_id_t, void * context);
    /// @deprecated Use eth_intf_iter() instead.
-   void eth_intf_foreach(callback_func_eth_intf handler, void * context)
-      EOS_SDK_DEPRECATED;
+   virtual void eth_intf_foreach(callback_func_eth_intf handler, void * context)
+      EOS_SDK_DEPRECATED = 0;
    /// @deprecated Use eth_intf_iter() instead.
-   void eth_intf_foreach(callback_func_eth_intf handler, void * context,
-                         intf_id_t bookmark)
-      EOS_SDK_DEPRECATED;  // Use eth_intf_iter() instead.
-   bool exists(intf_id_t) const;
+   virtual void eth_intf_foreach(callback_func_eth_intf handler, void * context,
+                                 intf_id_t bookmark)
+      EOS_SDK_DEPRECATED = 0;  // Use eth_intf_iter() instead.
+   virtual bool exists(intf_id_t) const = 0;
 
    // Attribute accessors
    /// Returns the operational ethernet address of the interface
-   eth_addr_t eth_addr(intf_id_t) const;
+   virtual eth_addr_t eth_addr(intf_id_t) const = 0;
    /// Returns the currently configured ethernet address
-   eth_addr_t configured_eth_addr(intf_id_t) const;
+   virtual eth_addr_t configured_eth_addr(intf_id_t) const = 0;
 
    /**
     * Configures the ethernet address of the interface
     * @param intf_id_t The interface ID of the interface to change the address of
     * @param eth_addr_t The address to set
     */
-   void eth_addr_is(intf_id_t, eth_addr_t);
+   virtual void eth_addr_is(intf_id_t, eth_addr_t) = 0;
 
    /**
     * Returns the currently configured mode of operation of a given interface.
     * Note that only Ethernet and Port-Channel interfaces can be switchports,
     * using any other type of interface will lead to a panic.
     */
-   switchport_mode_t switchport_mode(intf_id_t) const;
+   virtual switchport_mode_t switchport_mode(intf_id_t) const = 0;
 
    /**
     * Configures the mode of operation of a given interface.
     * Note that only Ethernet and Port-Channel interfaces can be switchports,
     * using any other type of interface will lead to a panic.
     */
-   void switchport_mode_is(intf_id_t, switchport_mode_t);
+   virtual void switchport_mode_is(intf_id_t, switchport_mode_t) = 0;
 
    /**
     * Returns the 'default' VLAN of a given interface.
@@ -118,7 +126,7 @@ class EOS_SDK_PUBLIC eth_intf_mgr {
     * If the interface is in tap or trunk mode, then the native VLAN is
     * returned.  If no native VLAN is configured, then 0 is returned.
     */
-   vlan_id_t default_vlan(intf_id_t) const;
+   virtual vlan_id_t default_vlan(intf_id_t) const = 0;
 
    /**
     * Configures the 'default' VLAN of a given interface.
@@ -127,13 +135,13 @@ class EOS_SDK_PUBLIC eth_intf_mgr {
     * If the interface is in tap or trunk mode, then the native VLAN is
     * configured.
     */
-   void default_vlan_is(intf_id_t, vlan_id_t);
+   virtual void default_vlan_is(intf_id_t, vlan_id_t) = 0;
 
    /**
     * Returns the set of VLANs trunked on this interface.
     * Note that by default all VLANs are trunked on all interfaces.
     */
-   vlan_set trunk_vlans(intf_id_t) const;
+   virtual vlan_set trunk_vlans(intf_id_t) const = 0;
 
    /**
     * Adds a VLAN to the set of allowed VLANs when in trunk mode.
@@ -141,7 +149,7 @@ class EOS_SDK_PUBLIC eth_intf_mgr {
     * nevertheless, but the configuration won't take effect until the
     * interface is switched to trunk mode.
     */
-   void trunk_vlan_set(intf_id_t, vlan_id_t);
+   virtual void trunk_vlan_set(intf_id_t, vlan_id_t) = 0;
 
    /**
     * Configures the set of allowed VLANs when in trunk mode.
@@ -149,7 +157,7 @@ class EOS_SDK_PUBLIC eth_intf_mgr {
     * nevertheless, but the configuration won't take effect until the
     * interface is switched to trunk mode.
     */
-   void trunk_vlan_is(intf_id_t, vlan_set const & vlans);
+   virtual void trunk_vlan_is(intf_id_t, vlan_set const & vlans) = 0;
 
    /**
     * Removes a VLAN to the set of allowed VLANs when in trunk mode.
@@ -157,17 +165,15 @@ class EOS_SDK_PUBLIC eth_intf_mgr {
     * nevertheless, but the configuration won't take effect until the
     * interface is switched to trunk mode.
     */
-   void trunk_vlan_del(intf_id_t, vlan_id_t);
+   virtual void trunk_vlan_del(intf_id_t, vlan_id_t) = 0;
 
  protected:
    eth_intf_mgr() EOS_SDK_PRIVATE;
+   friend class eth_intf_handler;
 
  private:
    EOS_SDK_DISALLOW_COPY_CTOR(eth_intf_mgr);
 };
-
-/// Returns an ethernet interface manager instance
-eth_intf_mgr * get_eth_intf_mgr() EOS_SDK_PUBLIC;
 
 }
 
