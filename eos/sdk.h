@@ -8,6 +8,7 @@
 
 namespace eos {
 
+class directflow_mgr;
 class eth_intf_mgr;
 class eth_phy_intf_mgr;
 class intf_mgr;
@@ -26,16 +27,19 @@ class EOS_SDK_PUBLIC sdk {
     sdk();
     ~sdk();
 
+    void init_directflow_mgr();
     void init_eth_intf_mgr();
     void init_eth_phy_intf_mgr();
     void init_intf_mgr();
 
+    directflow_mgr * get_directflow_mgr();
     eth_intf_mgr * get_eth_intf_mgr();
     eth_phy_intf_mgr * get_eth_phy_intf_mgr();
     intf_mgr * get_intf_mgr();
 
  private:
     EOS_SDK_DISALLOW_COPY_CTOR(sdk);
+    directflow_mgr * directflow_mgr_;
     eth_intf_mgr * eth_intf_mgr_;
     eth_phy_intf_mgr * eth_phy_intf_mgr_;
     intf_mgr * intf_mgr_;

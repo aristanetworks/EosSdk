@@ -7,6 +7,7 @@
 #include <set>
 
 #include <eos/base.h>
+#include <eos/base_mgr.h>
 #include <eos/eth.h>
 #include <eos/intf.h>
 #include <eos/ip.h>
@@ -52,7 +53,7 @@ class EOS_SDK_PUBLIC flow_match_field_set_t {
    bool ip_dst() const;
 
  private:
-   friend class directflow_mgr;
+   friend class flow_helper;
    uint32_t match_bitset_;
 };
 
@@ -164,7 +165,7 @@ class EOS_SDK_PUBLIC flow_action_set_t {
    void set_ip_dst_is(bool);
 
  private:
-   friend class directflow_mgr;
+   friend class flow_helper;
    uint32_t action_bitset_;
 };
 
@@ -266,7 +267,7 @@ class EOS_SDK_PUBLIC flow_counters_t {
    uint64_t packets() const;
 
  private:
-   friend class directflow_mgr;
+   friend class flow_helper;
    uint64_t bytes_;
    uint64_t packets_;
 };
@@ -292,6 +293,8 @@ enum flow_rejected_reason_t {
    FLOW_REJECTED_OTHER,         ///< Flow not created for some other reason
 };
 
+class directflow_mgr;
+
 /**
  * Flow handler.
  *
@@ -299,7 +302,7 @@ enum flow_rejected_reason_t {
  */
 class EOS_SDK_PUBLIC flow_handler {
  public:
-   flow_handler();
+   explicit flow_handler(directflow_mgr *);
    virtual ~flow_handler();
 
    /**
@@ -318,6 +321,9 @@ class EOS_SDK_PUBLIC flow_handler {
 
    /// Handler called when flow status changes
    virtual void on_flow_status(std::string const &, flow_status_t);
+
+ protected:
+   directflow_mgr * directflow_mgr_;
 };
 
 
@@ -335,42 +341,45 @@ class EOS_SDK_PUBLIC flow_entry_iter_t : public iter_base<flow_entry_t,
 /**
  * DirectFlow configuration and status manager.
  */
-class EOS_SDK_PUBLIC directflow_mgr {
+class EOS_SDK_PUBLIC directflow_mgr : protected base_mgr<flow_handler,
+                                                         std::string> {
  public:
+   virtual ~directflow_mgr();
+
    /// Iterate across all configured flows
-   flow_entry_iter_t flow_entry_iter() const;
+   virtual flow_entry_iter_t flow_entry_iter() const = 0;
 
    /// Tests for existence of a flow entry with the given name
-   bool exists(std::string const &) const;
+   virtual bool exists(std::string const &) const = 0;
 
    /// Return the flow entry with the given name
-   flow_entry_t flow_entry(std::string const &) const;
+   virtual flow_entry_t flow_entry(std::string const &) const = 0;
 
    // Flow management functions
 
    /// Insert or update a flow
-   void flow_entry_set(flow_entry_t const &);
+   virtual void flow_entry_set(flow_entry_t const &) = 0;
    /// Delete a flow
-   void flow_entry_del(std::string const &);
+   virtual void flow_entry_del(std::string const &) = 0;
 
    /// Return the status of the given flow
-   flow_status_t flow_status(std::string const & name) const;
+   virtual flow_status_t flow_status(std::string const & name) const = 0;
    /**
     * The reason a flow was not programmed. Only valid if the flow's
     * status is FLOW_REJECTED
     */
-   flow_rejected_reason_t flow_rejected_reason(std::string const & name) const;
+   virtual flow_rejected_reason_t flow_rejected_reason(std::string const & name)
+      const = 0;
    /// Return the counters for a flow
-   flow_counters_t flow_counters(std::string const & name) const;
+   virtual flow_counters_t flow_counters(std::string const & name) const = 0;
 
  protected:
    directflow_mgr() EOS_SDK_PRIVATE;
+   friend class flow_handler;
 
  private:
    EOS_SDK_DISALLOW_COPY_CTOR(directflow_mgr);
 };
-
-directflow_mgr * get_directflow_mgr() EOS_SDK_PUBLIC;
 
 } // end namespace eos
 
