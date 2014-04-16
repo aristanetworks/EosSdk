@@ -6,6 +6,13 @@
 
 namespace eos {
 
+inline directflow_mgr * sdk::get_directflow_mgr() {
+   if (!directflow_mgr_) {
+      init_directflow_mgr();
+   }
+   return directflow_mgr_;
+}
+
 inline eth_intf_mgr * sdk::get_eth_intf_mgr() {
    if (!eth_intf_mgr_) {
       init_eth_intf_mgr();
