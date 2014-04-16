@@ -192,7 +192,7 @@ flow_action_set_t::set_ip_dst() const {
 // flow_handler
 //
 
-flow_handler::flow_handler() {
+flow_handler::flow_handler(directflow_mgr * mgr) {
    // TODO
 }
 
@@ -218,54 +218,45 @@ directflow_mgr::directflow_mgr() {
    // TODO: No op impl.
 }
 
+directflow_mgr::~directflow_mgr() {
+}
+
 class directflow_mgr_impl : public directflow_mgr {
  public:
    directflow_mgr_impl() {
    }
+
+   flow_entry_iter_t flow_entry_iter() const {
+      flow_entry_iter_t * nop = 0;
+      return *nop;  // TODO: No op impl.
+   }
+
+   bool exists(std::string const & name) const {
+      return false;
+   }
+
+   flow_entry_t flow_entry(std::string const & name) const {
+      return flow_entry_t();
+   }
+
+   void flow_entry_set(flow_entry_t const & flow_entry) {
+   }
+
+   void flow_entry_del(std::string const & name) {
+   }
+
+   flow_counters_t flow_counters(std::string const & name) const {
+      return flow_counters_t();
+   }
+
+   flow_status_t flow_status(std::string const & name) const {
+      return FLOW_STATUS_UNKNOWN;
+   }
+
+   flow_rejected_reason_t flow_rejected_reason(std::string const & name) const {
+      return FLOW_REJECTED_OTHER;
+   }
+
 };
-
-directflow_mgr * get_directflow_mgr() {
-   static directflow_mgr_impl impl;
-   return &impl;
-}
-
-flow_entry_iter_t
-directflow_mgr::flow_entry_iter() const {
-   flow_entry_iter_t * nop = 0;
-   return *nop;  // TODO: No op impl.
-}
-
-bool
-directflow_mgr::exists(std::string const & name) const {
-   return false;
-}
-
-flow_entry_t
-directflow_mgr::flow_entry(std::string const & name) const {
-   return flow_entry_t();
-}
-
-void
-directflow_mgr::flow_entry_set(flow_entry_t const & flow_entry) {
-}
-
-void
-directflow_mgr::flow_entry_del(std::string const & name) {
-}
-
-flow_counters_t
-directflow_mgr::flow_counters(std::string const & name) const {
-   return flow_counters_t();
-}
-
-flow_status_t
-directflow_mgr::flow_status(std::string const & name) const {
-   return FLOW_STATUS_UNKNOWN;
-}
-
-flow_rejected_reason_t
-directflow_mgr::flow_rejected_reason(std::string const & name) const {
-   return FLOW_REJECTED_OTHER;
-}
 
 }

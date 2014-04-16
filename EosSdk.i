@@ -33,6 +33,7 @@ typedef uint64_t uint64_be_t;
 %feature("nodirector") eos::intf_mgr;
 %feature("nodirector") eos::eth_intf_mgr;
 %feature("nodirector") eos::eth_phy_intf_mgr;
+%feature("nodirector") eos::directflow_mgr;
 
 %{
 #include "eos/agent.h"
