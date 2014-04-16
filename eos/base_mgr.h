@@ -27,7 +27,7 @@ namespace eos {
  */
 template <typename T, typename Key=int> // `int' is an arbitrary default for classes
 class EOS_SDK_PRIVATE base_mgr {        // that don't use key-specific notifications
- public:
+ protected:
    void add_handler(T *handler) {
       // no specific ordering
       watchAllHandlers_.insert(handler);
@@ -65,7 +65,6 @@ class EOS_SDK_PRIVATE base_mgr {        // that don't use key-specific notificat
       }
    }
 
- protected:
    // Run the function f for each registered handler, with no specific ordering
    template <typename Func> void handler_foreach(Func f) {
       for (auto i = watchAllHandlers_.begin(); i != watchAllHandlers_.end(); ++i) {
