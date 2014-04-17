@@ -102,11 +102,12 @@ class FlowHandlerTrampoline(eossdk.FlowHandler):
 class DirectFlowProgrammer(eossdk.AgentHandler,
                            eossdk.FdHandler):
 
-   def __init__(self):
-      self.directFlowMgr_ = eossdk.get_directflow_mgr()
+   def __init__(self, directFlowMgr):
+      self.directFlowMgr_ = directFlowMgr
       self.flowHandlerTrampoline_ = None
       eossdk.AgentHandler.__init__(self)
       eossdk.FdHandler.__init__(self)           # pylint: disable-msg=W0233
+      self.changes = 0
 
    def on_initialized(self):
       # Resynchronize initial flows
@@ -162,6 +163,16 @@ class DirectFlowProgrammer(eossdk.AgentHandler,
 
    def on_flow_status(self, name, status):
       print "Flow", name, "status changed to", status
+      self.changes += 1
 
-programmer = DirectFlowProgrammer()
-eossdk.agent_main_loop("DirectFlowProgrammer", sys.argv)
+
+def main(args):
+   sdk = eossdk.Sdk()
+   directFlowMgr = sdk.get_directflow_mgr()
+   programmer = DirectFlowProgrammer(directFlowMgr)
+   eossdk.agent_main_loop("DirectFlowProgrammer", sys.argv)
+   print "Saw %d flow status changes" % programmer.changes
+
+
+if __name__ == '__main__':
+   sys.exit(main(sys.argv))
