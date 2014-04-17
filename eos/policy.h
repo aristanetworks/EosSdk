@@ -260,10 +260,9 @@ class EOS_SDK_PUBLIC policy_map_rule_iter_t
  * application functions.
  */
 class EOS_SDK_PUBLIC policy_map_mgr {
- protected:
-   policy_map_mgr() EOS_SDK_PRIVATE;
-
  public:
+    virtual ~policy_map_mgr();
+
    /**
     * Sets a policy map match rule at a sequence number in a policy map.
     *
@@ -274,10 +273,10 @@ class EOS_SDK_PUBLIC policy_map_mgr {
     * policy_map_apply() is called to apply the policy map configured
     * by these functions to be applied to traffic.
     */
-   void policy_map_rule_set(policy_map_key_t const &,
-                            uint8_t,
-                            class_map_match_base_t const & match,
-                            std::list<policy_map_action_base_t const &> actions);
+   virtual void policy_map_rule_set(policy_map_key_t const &,
+                                    uint8_t,
+                                    class_map_match_base_t const & match,
+                                    std::list<policy_map_action_base_t>) = 0;
 
    /**
     * Removes the numbered rule from the policy map identified by the key.
@@ -285,20 +284,21 @@ class EOS_SDK_PUBLIC policy_map_mgr {
     * To actually remove the rule from the policy map in the switch
     * forwarding hardware, you must call policy_map_commit().
     */
-   void policy_map_rule_del(policy_map_key_t const &, uint8_t);
+   virtual void policy_map_rule_del(policy_map_key_t const &, uint8_t) = 0;
 
    /// Deletes the policy map identified by the argument.
-   void policy_map_del(policy_map_key_t const &);
+   virtual void policy_map_del(policy_map_key_t const &) = 0;
 
    /**
     * Provides iteration over the configured policy maps for a feature.
     */
-   policy_map_iter_t policy_map_iter(policy_feature_t) const;
+   virtual policy_map_iter_t policy_map_iter(policy_feature_t) const = 0;
 
    /**
     * Provides iteration over the rules of the given policy map.
     */
-   policy_map_rule_iter_t policy_map_rule_iter(policy_map_key_t const &) const;
+   virtual policy_map_rule_iter_t policy_map_rule_iter(policy_map_key_t const &)
+      const = 0;
 
    /**
     * Commits all outstanding policy map changes.
@@ -307,26 +307,17 @@ class EOS_SDK_PUBLIC policy_map_mgr {
     * updated will have its on_policy_map_sync_complete or
     * on_policy_map_sync_failed functions called.
     */
-   void policy_map_commit();
+   virtual void policy_map_commit() = 0;
 
    /// Applies or unapplies the policy map to an interface in a direction
-   void policy_map_apply(policy_map_key_t const &, intf_id_t, acl_direction_t,
-                         bool apply);
+   virtual void policy_map_apply(policy_map_key_t const &, intf_id_t,
+                                 acl_direction_t, bool apply) = 0;
 
+ protected:
+   policy_map_mgr() EOS_SDK_PRIVATE;
  private:
    EOS_SDK_DISALLOW_COPY_CTOR(policy_map_mgr);
 };
-
-/**
- * Creates a policy map manager.
- *
- * A policy map manager is used to setup policy maps using ACL names,
- * ACL rules to build class map match rules. From there, policy maps
- * with sequenced rules matching a class map match to a set of actions
- * are set using this manager. Finally, configured policy maps are
- * committed and applied to interfaces.
- */
-policy_map_mgr * get_policy_map_mgr() EOS_SDK_PUBLIC;
 
 } // end namespace eos
 

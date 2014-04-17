@@ -30,10 +30,19 @@ typedef uint64_t uint64_be_t;
 
 // generate directors for all classes that have virtual methods, except the managers
 %feature("director");
-%feature("nodirector") eos::intf_mgr;
+%feature("nodirector") eos::acl_mgr;
+%feature("nodirector") eos::decap_group_mgr;
+%feature("nodirector") eos::directflow_mgr;
 %feature("nodirector") eos::eth_intf_mgr;
 %feature("nodirector") eos::eth_phy_intf_mgr;
-%feature("nodirector") eos::directflow_mgr;
+%feature("nodirector") eos::fib_mgr;
+%feature("nodirector") eos::intf_mgr;
+%feature("nodirector") eos::ip_route_mgr;
+%feature("nodirector") eos::mac_table_mgr;
+%feature("nodirector") eos::mpls_route_mgr;
+%feature("nodirector") eos::neighbor_table_mgr;
+%feature("nodirector") eos::nexthop_group_mgr;
+%feature("nodirector") eos::policy_map_mgr;
 
 %{
 #include "eos/agent.h"

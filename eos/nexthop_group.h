@@ -115,29 +115,29 @@ class EOS_SDK_PUBLIC nexthop_group_iter_t :
 /**
  * A manager of 'nexthop-group' configurations.
  *
- * Create one of these via eos::get_nexthop_group_mgr() prior to
- * starting the agent main loop. When your eos::agent_handler::on_initialized
- * virtual function is called, the manager is valid for use.
+ * Create one of these via an sdk object prior to starting the agent main loop.
+ * When your eos::agent_handler::on_initialized virtual function is called, the
+ * manager is valid for use.
  */
 class EOS_SDK_PUBLIC nexthop_group_mgr {
  public:
-   void resync_init();
-   void resync_complete();
+   virtual ~nexthop_group_mgr();
+
+   virtual void resync_init() = 0;
+   virtual void resync_complete() = 0;
 
    /// Iterates over all the nexthop groups currently configured.
-   nexthop_group_iter_t nexthop_group_iter() const;
+   virtual nexthop_group_iter_t nexthop_group_iter() const = 0;
 
    /// Creates or updates a nexthop group.
-   void nexthop_group_set(nexthop_group_t const &);
+   virtual void nexthop_group_set(nexthop_group_t const &) = 0;
    /// Removes the named nexthop group from the configuration if it exists
-   void nexthop_group_del(std::string const & nexthop_group_name);
+   virtual void nexthop_group_del(std::string const & nexthop_group_name) = 0;
  protected:
    nexthop_group_mgr() EOS_SDK_PRIVATE;
  private:
    EOS_SDK_DISALLOW_COPY_CTOR(nexthop_group_mgr);
 };
-
-nexthop_group_mgr * get_nexthop_group_mgr() EOS_SDK_PUBLIC;
 
 } // end namespace eos
 

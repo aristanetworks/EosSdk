@@ -36,6 +36,7 @@ class EOS_SDK_PUBLIC mac_entry_t {
  */
 class EOS_SDK_PUBLIC mac_table_mgr {
  public:
+   virtual ~mac_table_mgr();
    /**
     * Returns the MAC table entry for the given VLAN and MAC address.
     * If the given MAC is not found, or if the VLAN queried doesn't exist,
@@ -44,17 +45,13 @@ class EOS_SDK_PUBLIC mac_table_mgr {
     * @param vlan The VLAN in which to perform the look up.
     * @param mac The MAC address to look up.
     */
-   mac_entry_t mac_entry(vlan_id_t vlan, eth_addr_t mac) const;
+   virtual mac_entry_t mac_entry(vlan_id_t vlan, eth_addr_t mac) const = 0;
 
  protected:
    mac_table_mgr() EOS_SDK_PRIVATE;
-
  private:
    EOS_SDK_DISALLOW_COPY_CTOR(mac_table_mgr);
 };
-
-/// Returns the MAC table manager.
-mac_table_mgr * get_mac_table_mgr() EOS_SDK_PUBLIC;
 
 }
 
