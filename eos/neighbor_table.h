@@ -44,21 +44,18 @@ class EOS_SDK_PUBLIC neighbor_entry_t {
 */
 class EOS_SDK_PUBLIC neighbor_table_mgr {
  public:
+   virtual ~neighbor_table_mgr();
 
    // Attribute accessors
 
    /// Lookup an neighbor entry for a given L3 interface and IP address
-   neighbor_entry_t neighbor_entry(intf_id_t, ip_addr_t) const;
+   virtual neighbor_entry_t neighbor_entry(intf_id_t, ip_addr_t) const = 0;
 
  protected:
    neighbor_table_mgr() EOS_SDK_PRIVATE;
-
  private:
    EOS_SDK_DISALLOW_COPY_CTOR(neighbor_table_mgr);
 };
-
-/// Returns the neighbor table manager.
-neighbor_table_mgr * get_neighbor_table_mgr() EOS_SDK_PUBLIC;
 
 } // end namespace eos
 

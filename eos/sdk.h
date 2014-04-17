@@ -8,10 +8,19 @@
 
 namespace eos {
 
+class acl_mgr;
+class decap_group_mgr;
 class directflow_mgr;
 class eth_intf_mgr;
 class eth_phy_intf_mgr;
+class fib_mgr;
 class intf_mgr;
+class ip_route_mgr;
+class mac_table_mgr;
+class mpls_route_mgr;
+class neighbor_table_mgr;
+class nexthop_group_mgr;
+class policy_map_mgr;
 
 /**
  * Manages the differents managers of the SDK. One manager of each type can be
@@ -27,22 +36,49 @@ class EOS_SDK_PUBLIC sdk {
     sdk();
     ~sdk();
 
+    void init_acl_mgr();
+    void init_decap_group_mgr();
     void init_directflow_mgr();
     void init_eth_intf_mgr();
     void init_eth_phy_intf_mgr();
+    void init_fib_mgr();
     void init_intf_mgr();
+    void init_ip_route_mgr();
+    void init_mac_table_mgr();
+    void init_mpls_route_mgr();
+    void init_neighbor_table_mgr();
+    void init_nexthop_group_mgr();
+    void init_policy_map_mgr();
 
+    acl_mgr * get_acl_mgr();
+    decap_group_mgr * get_decap_group_mgr();
     directflow_mgr * get_directflow_mgr();
     eth_intf_mgr * get_eth_intf_mgr();
     eth_phy_intf_mgr * get_eth_phy_intf_mgr();
+    fib_mgr * get_fib_mgr();
     intf_mgr * get_intf_mgr();
+    ip_route_mgr * get_ip_route_mgr();
+    mac_table_mgr * get_mac_table_mgr();
+    mpls_route_mgr * get_mpls_route_mgr();
+    neighbor_table_mgr * get_neighbor_table_mgr();
+    nexthop_group_mgr * get_nexthop_group_mgr();
+    policy_map_mgr * get_policy_map_mgr();
 
  private:
     EOS_SDK_DISALLOW_COPY_CTOR(sdk);
+    acl_mgr * acl_mgr_;
+    decap_group_mgr * decap_group_mgr_;
     directflow_mgr * directflow_mgr_;
     eth_intf_mgr * eth_intf_mgr_;
     eth_phy_intf_mgr * eth_phy_intf_mgr_;
+    fib_mgr * fib_mgr_;
     intf_mgr * intf_mgr_;
+    ip_route_mgr * ip_route_mgr_;
+    mac_table_mgr * mac_table_mgr_;
+    mpls_route_mgr * mpls_route_mgr_;
+    neighbor_table_mgr * neighbor_table_mgr_;
+    nexthop_group_mgr * nexthop_group_mgr_;
+    policy_map_mgr * policy_map_mgr_;
 };
 
 }

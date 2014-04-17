@@ -67,44 +67,44 @@ class EOS_SDK_PUBLIC decap_group_iter_t : public iter_base<decap_group_t,
 /**
  * A manager of 'ip decap-group' configurations.
  *
- * Create one of these via eos::get_decap_group_mgr() prior to
- * starting the agent main loop. When your eos::agent_handler::on_initialized
- * virtual function is called, the manager is valid for use.
+ * Create one of these via sdk object prior to starting the agent main loop. When
+ * your eos::agent_handler::on_initialized virtual function is called, the manager
+ * is valid for use.
  */
 class EOS_SDK_PUBLIC decap_group_mgr {
  public:
-   void resync_init();
-   void resync_complete();
+   virtual ~decap_group_mgr();
+
+   virtual void resync_init() = 0;
+   virtual void resync_complete() = 0;
 
    /**
     * Iterates over all the decap groups currently configured.
     */
-   decap_group_iter_t decap_group_iter() const;
+   virtual decap_group_iter_t decap_group_iter() const = 0;
    // The decap_group_foreach methods are deprecated and will be
    // removed in the future.
    typedef bool (*callback_func_decap_group)(decap_group_t const &, void * context);
    /// @deprecated Use decap_group_iter() instead.
-   void decap_group_foreach(callback_func_decap_group handler, void * context)
-      EOS_SDK_DEPRECATED;
+   virtual void decap_group_foreach(callback_func_decap_group handler,
+                                    void * context) EOS_SDK_DEPRECATED = 0;
    /// @deprecated Use decap_group_iter() instead.
-   void decap_group_foreach(callback_func_decap_group handler, void * context,
-                            decap_group_t const &bookmark)
-      EOS_SDK_DEPRECATED;
+   virtual void decap_group_foreach(callback_func_decap_group handler,
+                                    void * context, decap_group_t const &bookmark)
+      EOS_SDK_DEPRECATED = 0;
 
    /**
     * Adds the specified decap group to the system configuration
     * Create a new or updates an existing decap group with the same name
     */
-   void decap_group_set(decap_group_t const &);
+   virtual void decap_group_set(decap_group_t const &) = 0;
    /// Removes the named decap group from the configuration if it exists
-   void decap_group_del(std::string const & decap_group_name);
+   virtual void decap_group_del(std::string const & decap_group_name) = 0;
  protected:
    decap_group_mgr() EOS_SDK_PRIVATE;
  private:
    EOS_SDK_DISALLOW_COPY_CTOR(decap_group_mgr);
 };
-
-decap_group_mgr * get_decap_group_mgr() EOS_SDK_PUBLIC;
 
 }
 
