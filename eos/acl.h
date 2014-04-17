@@ -7,10 +7,11 @@
 #include <list>
 #include <utility>
 
+#include <eos/base.h>
+#include <eos/base_mgr.h>
 #include <eos/eth.h>
 #include <eos/ip.h>
 #include <eos/intf.h>
-#include <eos/base.h>
 
 namespace eos {
 
@@ -284,6 +285,8 @@ class EOS_SDK_PUBLIC acl_rule_eth_t : public acl_rule_base_t {
    eth_addr_t destination_mask;
 };
 
+class acl_mgr;
+
 /**
  * An ACL handler.
  *
@@ -291,7 +294,7 @@ class EOS_SDK_PUBLIC acl_rule_eth_t : public acl_rule_base_t {
  */
 class EOS_SDK_PUBLIC acl_handler {
  public:
-   acl_handler();
+   explicit acl_handler(acl_mgr *);
    virtual ~acl_handler();
 
    /**
@@ -329,6 +332,9 @@ class EOS_SDK_PUBLIC acl_handler {
     */
    virtual void on_acl_sync_fail(std::string const & linecard,
                                  std::string const & message);
+
+ protected:
+   acl_mgr * acl_mgr_;
 };
 
 class acl_iter_impl;
@@ -374,8 +380,10 @@ class EOS_SDK_PUBLIC acl_rule_eth_iter_t : public iter_base<acl_rule_eth_entry_t
  * commit changes, apply ACLs to interfaces as well as manage
  * fragements mode and enabling counters.
  */
-class EOS_SDK_PUBLIC acl_mgr {
+class EOS_SDK_PUBLIC acl_mgr : protected base_mgr<acl_handler> {
  public:
+   virtual ~acl_mgr();
+
    typedef bool (*acl_cb)(acl_key_t const &, void * context);
    typedef bool (*acl_rule_ip_cb)(uint32_t seq,
                                   acl_rule_ip_t const &,
@@ -385,7 +393,7 @@ class EOS_SDK_PUBLIC acl_mgr {
                                    void * context);
 
    /// Iterates over all ACLs.
-   acl_iter_t acl_iter() const;
+   virtual acl_iter_t acl_iter() const = 0;
 
    /**
     * Iterates over all ACLs from the beginning.
@@ -394,31 +402,31 @@ class EOS_SDK_PUBLIC acl_mgr {
     * @param[in] handler An ACL callback handler.
     * @param[out] context A pointer to state to pass to the handler when called.
     */
-   void acl_foreach(acl_cb handler, void * context) EOS_SDK_DEPRECATED;
-   void acl_foreach(acl_cb handler, void * context, acl_key_t bookmark)
-      EOS_SDK_DEPRECATED;
+   virtual void acl_foreach(acl_cb handler, void * context) EOS_SDK_DEPRECATED = 0;
+   virtual void acl_foreach(acl_cb handler, void * context, acl_key_t bookmark)
+      EOS_SDK_DEPRECATED = 0;
 
    /// Iterates over the rules with an IP ACL.
-   acl_rule_ip_iter_t acl_rule_ip_iter(acl_key_t const &) const;
+   virtual acl_rule_ip_iter_t acl_rule_ip_iter(acl_key_t const &) const = 0;
 
    /**
     * Iterates over the rules with an IP ACL.
     * Provide a callback function matching the acl_rule_cb_* definitions above.
     * @deprecated Use acl_rule_ip_iter() instead.
     */
-   void acl_rule_ip_foreach(acl_key_t const &, acl_rule_ip_cb, void * context)
-      EOS_SDK_DEPRECATED;
+   virtual void acl_rule_ip_foreach(acl_key_t const &, acl_rule_ip_cb,
+                                    void * context) EOS_SDK_DEPRECATED = 0;
 
    /// Iterates over the rules with an Ethernet ACL.
-   acl_rule_eth_iter_t acl_rule_eth_iter(acl_key_t const &) const;
+   virtual acl_rule_eth_iter_t acl_rule_eth_iter(acl_key_t const &) const = 0;
 
    /**
     * Iterates over the rules with an Ethernet ACL.
     * Provide a callback function matching the acl_rule_cb_* definitions above.
     * @deprecated Use acl_rule_eth_iter() instead.
     */
-   void acl_rule_eth_foreach(acl_key_t const &, acl_rule_eth_cb, void * context)
-      EOS_SDK_DEPRECATED;
+   virtual void acl_rule_eth_foreach(acl_key_t const &, acl_rule_eth_cb,
+                                     void * context) EOS_SDK_DEPRECATED = 0;
 
    /**
     * Configuration ACL existance test.
@@ -426,7 +434,7 @@ class EOS_SDK_PUBLIC acl_mgr {
     * @returns true if an ACL with the same name and type (i.e., key)
     * exists in the configuration, else false.
     */
-   bool acl_exists(acl_key_t const &) const;
+   virtual bool acl_exists(acl_key_t const &) const = 0;
 
    /**
     * Adds an IP ACL rule to an ACL.
@@ -438,7 +446,8 @@ class EOS_SDK_PUBLIC acl_mgr {
     * @param uint32_t ACL sequence number
     * @param acl_rule_ip_t ACL rule to set at sequence number
     */
-   void acl_rule_set(acl_key_t const &, uint32_t, acl_rule_ip_t const &);
+   virtual void acl_rule_set(acl_key_t const &, uint32_t,
+                             acl_rule_ip_t const &) = 0;
 
    // Add and remove ACL rules of a particular type. If the ACL
    // doesn't exist, it will be created before the rule is added to
@@ -452,7 +461,8 @@ class EOS_SDK_PUBLIC acl_mgr {
    // acl_apply(), else the manager will panic(). Note that extremely
    // large numbers of ACLs or rules per ACL can result in undefined
    // behaviour, including a switch reload.
-   void acl_rule_set(acl_key_t const &, uint32_t, acl_rule_eth_t const &);
+   virtual void acl_rule_set(acl_key_t const &, uint32_t,
+                             acl_rule_eth_t const &) = 0;
 
    /**
     * Removes a rule from an ACL.
@@ -463,7 +473,7 @@ class EOS_SDK_PUBLIC acl_mgr {
     * @param acl_key_t The ACL key to modify (name and ACL type)
     * @param uint32_t ACL sequence number to remove
     */
-   void acl_rule_del(acl_key_t const &, uint32_t);
+   virtual void acl_rule_del(acl_key_t const &, uint32_t) = 0;
 
    /**
     * Commits all rule changes and application changes made above to all ACLs.
@@ -479,7 +489,7 @@ class EOS_SDK_PUBLIC acl_mgr {
     * whether the current state in Sysdb can be loaded into hardware
     * or not.
     */
-   void acl_commit();
+   virtual void acl_commit() = 0;
 
    /**
     * Deletes the ACL.
@@ -488,7 +498,7 @@ class EOS_SDK_PUBLIC acl_mgr {
     * interfaces. Any pending changes to the ACL are discarded.  Is
     * effective immediately (no commit or commit notification).
     */
-   void acl_del(acl_key_t const &);
+   virtual void acl_del(acl_key_t const &) = 0;
 
    /**
     * Requests that an ACL be (un)applied on the given interface and direction.
@@ -503,21 +513,21 @@ class EOS_SDK_PUBLIC acl_mgr {
     * calls be followed by an acl_commit() prior to calling this
     * function else a panic() will occur.
     */
-   void acl_apply(acl_key_t const &, intf_id_t, acl_direction_t, bool);
+   virtual void acl_apply(acl_key_t const &, intf_id_t, acl_direction_t, bool) = 0;
 
    /// Immediately enable or disable counters for the ACL
-   void acl_counters_enabled_set(acl_key_t const &, bool);
+   virtual void acl_counters_enabled_set(acl_key_t const &, bool) = 0;
 
    /// Immediately enable or disable fragments matching on the ACL
-   void acl_fragments_enabled_set(acl_key_t const &, bool);
+   virtual void acl_fragments_enabled_set(acl_key_t const &, bool) = 0;
 
  protected:
    acl_mgr() EOS_SDK_PRIVATE;
+   friend class acl_handler;
+
  private:
    EOS_SDK_DISALLOW_COPY_CTOR(acl_mgr);
 };
-
-acl_mgr * get_acl_mgr() EOS_SDK_PUBLIC;
 
 }  // namespace eos
 

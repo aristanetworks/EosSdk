@@ -30,6 +30,7 @@ libeos_la_SOURCES += mpls_route.cpp
 libeos_la_SOURCES += nexthop_group.cpp
 libeos_la_SOURCES += panic.cpp
 libeos_la_SOURCES += neighbor_table.cpp
+libeos_la_SOURCES += policy.cpp
 libeos_la_SOURCES += timer.cpp
 libeos_la_SOURCES += sdk.cpp
 libeos_la_SOURCES += version.cpp

@@ -103,68 +103,68 @@ class EOS_SDK_PUBLIC mpls_route_via_iter_t :
 /// The IP static route manager
 class EOS_SDK_PUBLIC mpls_route_mgr {
   public:
+   virtual ~mpls_route_mgr();
+
    /// Begin resync mode.
-   void resync_init();
+   virtual void resync_init() = 0;
    /// Complete resync mode, ready for regular updates.
-   void resync_complete();
+   virtual void resync_complete() = 0;
 
    /// Returns an MPLS route iterator.
-   mpls_route_iter_t mpls_route_iter() const;
+   virtual mpls_route_iter_t mpls_route_iter() const = 0;
 
    typedef bool (*callback_func_route)(mpls_route_t const &, void * context);
    typedef bool (*callback_func_via)(mpls_route_via_t const &, void * context);
 
    /// Iterate across all MPLS static routes.
    /// @deprecated Use mpls_route_iter() instead.
-   void mpls_route_foreach(callback_func_route handler, void * context)
-      EOS_SDK_DEPRECATED;
+   virtual void mpls_route_foreach(callback_func_route handler, void * context)
+      EOS_SDK_DEPRECATED = 0;
    /// Iterate across all MPLS static routes from a given bookmark.
    /// @deprecated Use mpls_route_iter() instead.
-   void mpls_route_foreach(callback_func_route handler, void * context,
-                           mpls_route_t const & bookmark)
-      EOS_SDK_DEPRECATED;
+   virtual void mpls_route_foreach(callback_func_route handler, void * context,
+                                   mpls_route_t const & bookmark)
+      EOS_SDK_DEPRECATED = 0;
 
    /// Returns an MPLS via iterator for a given route (key).
-   mpls_route_via_iter_t mpls_route_via_iter(mpls_route_key_t const &) const;
+   virtual mpls_route_via_iter_t mpls_route_via_iter(mpls_route_key_t const &)
+      const = 0;
    /**
     * Iterates over configured nexthops for a given MPLS route.
     * emits all mpls_route_via_t's for a given mpls_route_t.
     * @deprecated Use mpls_route_iter() instead.
     */
-   void mpls_route_via_foreach(mpls_route_key_t const &,
-                               callback_func_via handler, void * context)
-      EOS_SDK_DEPRECATED;
+   virtual void mpls_route_via_foreach(mpls_route_key_t const &,
+                                       callback_func_via handler, void * context)
+      EOS_SDK_DEPRECATED = 0;
 
    /// Tests for existence of any routes matching the route key in the switch config
-   bool exists(mpls_route_key_t const &) const;
+   virtual bool exists(mpls_route_key_t const &) const = 0;
    /// Tests if the given via exists
-   bool exists(mpls_route_via_t const &) const;
+   virtual bool exists(mpls_route_via_t const &) const = 0;
 
    /// MPLS route management functions
 
    /// Inserts or updates MPLS static route in the switch configuration
-   void mpls_route_set(mpls_route_t const &);
+   virtual void mpls_route_set(mpls_route_t const &) = 0;
 
    /// Removes the MPLS route and all vias matching the route key
-   void mpls_route_del(mpls_route_key_t const &);
+   virtual void mpls_route_del(mpls_route_key_t const &) = 0;
 
    /// Adds a via to an mpls_route_t
-   void mpls_route_via_set(mpls_route_via_t const &);
+   virtual void mpls_route_via_set(mpls_route_via_t const &) = 0;
    /**
     * Removes a via from an mpls_route_t.
     * When all vias are removed, the route still exists with no
     * nexthop information.
     */
-   void mpls_route_via_del(mpls_route_via_t const &);
+   virtual void mpls_route_via_del(mpls_route_via_t const &) = 0;
 
  protected:
    mpls_route_mgr() EOS_SDK_PRIVATE;
  private:
    EOS_SDK_DISALLOW_COPY_CTOR(mpls_route_mgr);
 };
-
-/// Returns the MPLS route manager
-mpls_route_mgr * get_mpls_route_mgr() EOS_SDK_PUBLIC;
 
 }
 

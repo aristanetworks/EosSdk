@@ -11,60 +11,48 @@ namespace eos {
 decap_group_mgr::decap_group_mgr() {
 }
 
+decap_group_mgr::~decap_group_mgr() {
+}
+
 class decap_group_mgr_impl : public decap_group_mgr {
  public:
-   decap_group_mgr_impl() {
-   }
+    decap_group_mgr_impl() {
+    }
+
+    void resync_init() {
+       // TODO: No op impl
+    }
+
+    void resync_complete() {
+       // TODO: No op impl
+    }
+
+    decap_group_iter_t decap_group_iter() const {
+       decap_group_iter_t * nop = 0;
+       return *nop;  // TODO: No op impl.
+    }
+
+    void decap_group_foreach(callback_func_decap_group handler, void *context) {
+       // TODO: No op impl.
+    }
+
+    void decap_group_foreach(callback_func_decap_group handler, void * context,
+                             decap_group_t const &bookmark) {
+       // TODO: No op impl.
+    }
+
+    void decap_group_set(decap_group_t const &group) {
+       if(group.group_name().empty()) {
+          panic("Empty decap group name");
+       } else if(group.protocol_type() == PROTOCOL_TYPE_NULL) {
+          panic("must pass a tunnel protocol other than PROTOCOL_TYPE_NULL");
+       }
+       // TODO: No op impl.
+    }
+
+    void decap_group_del(std::string const & group_name) {
+       // TODO: No op impl.
+    }
 };
-
-void
-decap_group_mgr::resync_init() {
-   // TODO: No op impl
-}
-
-void
-decap_group_mgr::resync_complete() {
-   // TODO: No op impl
-}
-
-decap_group_iter_t
-decap_group_mgr::decap_group_iter() const {
-   decap_group_iter_t * nop = 0;
-   return *nop;  // TODO: No op impl.
-}
-
-void
-decap_group_mgr::decap_group_foreach(callback_func_decap_group handler,
-                                     void *context) {
-   // TODO: No op impl.
-}
-
-void
-decap_group_mgr::decap_group_foreach(callback_func_decap_group handler,
-                                     void * context,
-                                     decap_group_t const &bookmark) {
-   // TODO: No op impl.
-}
-
-void
-decap_group_mgr::decap_group_set(decap_group_t const &group) {
-   if(group.group_name().empty()) {
-      panic("Empty decap group name");
-   } else if(group.protocol_type() == PROTOCOL_TYPE_NULL) {
-      panic("must pass a tunnel protocol other than PROTOCOL_TYPE_NULL");
-   }
-   // TODO: No op impl.
-}
-
-void
-decap_group_mgr::decap_group_del(std::string const & group_name) {
-   // TODO: No op impl.
-}
-
-decap_group_mgr *
-get_decap_group_mgr() {
-   static decap_group_mgr_impl impl;
-   return &impl;
-}
 
 };  // end namespace eos

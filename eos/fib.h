@@ -170,31 +170,29 @@ class EOS_SDK_PUBLIC fib_fec_iter_t {
 /// The FIB Manager
 class EOS_SDK_PUBLIC fib_mgr {
  public:
+   virtual ~fib_mgr();
 
    // Iterators
-   fib_route_iter_t fib_route_iter() const;
-   fib_fec_iter_t fib_fec_iter() const;
+   virtual fib_route_iter_t fib_route_iter() const = 0;
+   virtual fib_fec_iter_t fib_fec_iter() const = 0;
 
    // FEC management
-   bool fib_fec_set(fib_fec_t const &);
-   void fib_fec_del(uint64_t const &);
-   bool fib_fec_exists(uint64_t const &);
-   fib_fec_t fib_fec(uint64_t const &);
+   virtual bool fib_fec_set(fib_fec_t const &) = 0;
+   virtual void fib_fec_del(uint64_t const &) = 0;
+   virtual bool fib_fec_exists(uint64_t const &) = 0;
+   virtual fib_fec_t fib_fec(uint64_t const &) = 0;
 
    // Route Management
-   bool fib_route_set(fib_route_t const &);
-   void fib_route_del(ip_prefix_t const &);
-   bool fib_route_exists(ip_prefix_t const &);
-   fib_route_t fib_route(ip_prefix_t const &);
+   virtual bool fib_route_set(fib_route_t const &) = 0;
+   virtual void fib_route_del(ip_prefix_t const &) = 0;
+   virtual bool fib_route_exists(ip_prefix_t const &) = 0;
+   virtual fib_route_t fib_route(ip_prefix_t const &) = 0;
 
  protected:
    fib_mgr() EOS_SDK_PRIVATE;
-
  private:
    EOS_SDK_DISALLOW_COPY_CTOR(fib_mgr);
 };
-
-fib_mgr * get_fib_mgr() EOS_SDK_PUBLIC;
 
 #include <eos/inline/fib.h>
 

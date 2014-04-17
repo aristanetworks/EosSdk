@@ -110,16 +110,18 @@ class EOS_SDK_PUBLIC ip_route_via_iter_t : public iter_base<ip_route_via_t,
 /// The manager for IP static route configuration
 class EOS_SDK_PUBLIC ip_route_mgr {
  public:
+    virtual ~ip_route_mgr();
+
    /**
     * Set the manager to only interact with routes with the given tag.
     *
     * If this tag is set to a non-zero number, then methods on this
     * class will only affect or expose routes with the given tag.
     */
-   void tag_is(uint32_t);
+   virtual void tag_is(uint32_t) = 0;
 
    /// Returns the current tag, or 0 if no tag is set.
-   uint32_t tag() const;
+   virtual uint32_t tag() const = 0;
 
    /**
     * Resync provides a mechanism to set routes to a known state.
@@ -139,9 +141,9 @@ class EOS_SDK_PUBLIC ip_route_mgr {
     * iteration; they will traverse the table stored in Sysdb,
     * regardless of whether or not the manager is in resync mode.
     */
-   void resync_init();
+   virtual void resync_init() = 0;
    /// Completes any underway resync operation.
-   void resync_complete();
+   virtual void resync_complete() = 0;
 
    typedef bool (*callback_func_route)(ip_route_t const &, void * context);
    typedef bool (*callback_func_via)(ip_route_via_t const &, void * context);
@@ -150,65 +152,62 @@ class EOS_SDK_PUBLIC ip_route_mgr {
     * Iterates across all configured static routes.
     * If a tag is set, only return routes that have match the current tag.
     */
-   ip_route_iter_t ip_route_iter() const;
+   virtual ip_route_iter_t ip_route_iter() const = 0;
    /// @deprecated Use ip_route_iter() instead.
-   void ip_route_foreach(callback_func_route handler, void * context)
-      EOS_SDK_DEPRECATED;
+   virtual void ip_route_foreach(callback_func_route handler, void * context)
+      EOS_SDK_DEPRECATED = 0;
    /// @deprecated Use ip_route_iter() instead.
-   void ip_route_foreach(callback_func_route handler, void * context,
-                         ip_route_t const & bookmark)
-      EOS_SDK_DEPRECATED;
+   virtual void ip_route_foreach(callback_func_route handler, void * context,
+                                 ip_route_t const & bookmark)
+      EOS_SDK_DEPRECATED = 0;
 
    /**
     * Iterates across configured nexthops for a given route key,
     * i.e., emit all ip_route_via_t's for a given route key. If a tag
     * is set, only return vias on routes that match the current tag.
     */
-   ip_route_via_iter_t ip_route_via_iter(ip_route_key_t const &) const;
+   virtual ip_route_via_iter_t ip_route_via_iter(ip_route_key_t const &) const = 0;
    /// @deprecated Use ip_route_via_iter() instead.
-   void ip_route_via_foreach(ip_route_key_t const &,
-                             callback_func_via handler, void * context)
-      EOS_SDK_DEPRECATED;
+   virtual void ip_route_via_foreach(ip_route_key_t const &,
+                                     callback_func_via handler, void * context)
+      EOS_SDK_DEPRECATED = 0;
 
    /**
     * Tests for existence of any routes matching the route key in the config.
     * If a tag is set and the route belongs to a different tag, this
     * function returns false.
     */
-   bool exists(ip_route_key_t const &) const;
+   virtual bool exists(ip_route_key_t const &) const = 0;
    /// Tests if the given via exists.
-   bool exists(ip_route_via_t const &) const;
+   virtual bool exists(ip_route_via_t const &) const = 0;
 
    // Route management functions
 
    /// Gets a static route, or panics if the route key does not exist.
-   ip_route_t ip_route(ip_route_key_t const &);
+   virtual ip_route_t ip_route(ip_route_key_t const &) = 0;
    /// Inserts or updates a static route into the switch configuration.
-   void ip_route_set(ip_route_t const &);
+   virtual void ip_route_set(ip_route_t const &) = 0;
    /// Removes all ECMP vias matching the route key, and the route itself.
-   void ip_route_del(ip_route_key_t const &);
+   virtual void ip_route_del(ip_route_key_t const &) = 0;
 
    /**
     * Adds a via to an ip_route_t.
     * Will call panic() if the corresponding route does not match the
     * currently configured tag.
     */
-   void ip_route_via_set(ip_route_via_t const &);
+   virtual void ip_route_via_set(ip_route_via_t const &) = 0;
    /**
     * Removes a via from an ip_route_t.
     * When all vias are removed, the route still exists with no
     * nexthop information.
     */
-   void ip_route_via_del(ip_route_via_t const &);
+   virtual void ip_route_via_del(ip_route_via_t const &) = 0;
 
  protected:
    ip_route_mgr() EOS_SDK_PRIVATE;
  private:
    EOS_SDK_DISALLOW_COPY_CTOR(ip_route_mgr);
 };
-
-/// Returns the IP route manager
-ip_route_mgr * get_ip_route_mgr() EOS_SDK_PUBLIC;
 
 }  // end namespace eos
 
