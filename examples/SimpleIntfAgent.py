@@ -51,7 +51,8 @@ class MyTestAgent(eossdk.AgentHandler, eossdk.FdHandler):
 
 
 def main(args):
-   intfMgr = eossdk.get_intf_mgr()
+   sdk = eossdk.Sdk()
+   intfMgr = sdk.get_intf_mgr()
    testAgent = MyTestAgent(intfMgr, "Ethernet1")
    args = ["MyTestAgent"]
    eossdk.agent_main_loop(args[0], args)
