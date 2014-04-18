@@ -6,6 +6,7 @@
 
 #include <eos/base.h>
 #include <eos/base_mgr.h>
+#include <string>
 
 namespace eos {
 
