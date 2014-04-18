@@ -69,6 +69,13 @@ inline mac_table_mgr * sdk::get_mac_table_mgr() {
    return mac_table_mgr_;
 }
 
+inline mlag_mgr * sdk::get_mlag_mgr() {
+   if (!mlag_mgr_) {
+      init_mlag_mgr();
+   }
+   return mlag_mgr_;
+}
+
 inline mpls_route_mgr * sdk::get_mpls_route_mgr() {
    if (!mpls_route_mgr_) {
       init_mpls_route_mgr();

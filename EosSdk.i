@@ -39,6 +39,7 @@ typedef uint64_t uint64_be_t;
 %feature("nodirector") eos::intf_mgr;
 %feature("nodirector") eos::ip_route_mgr;
 %feature("nodirector") eos::mac_table_mgr;
+%feature("nodirector") eos::mlag_mgr;
 %feature("nodirector") eos::mpls_route_mgr;
 %feature("nodirector") eos::neighbor_table_mgr;
 %feature("nodirector") eos::nexthop_group_mgr;
@@ -60,6 +61,7 @@ typedef uint64_t uint64_be_t;
 #include "eos/ip_route.h"
 #include "eos/neighbor_table.h"
 #include "eos/mac_table.h"
+#include "eos/mlag.h"
 #include "eos/sdk.h"
 #include "eos/system.h"
 
@@ -164,6 +166,7 @@ struct stop_iteration {};
 %include "eos/ip_route.h"
 %include "eos/neighbor_table.h"
 %include "eos/mac_table.h"
+%include "eos/mlag.h"
 %include "eos/sdk.h"
 %include "eos/system.h"
 
