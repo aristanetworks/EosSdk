@@ -56,7 +56,7 @@ _eossdk_la_CPPFLAGS = -I/usr/include/python$(PYTHON_VERSION)
 _eossdk_la_LIBADD = libeos.la
 
 $(srcdir)/eossdk_wrap.cpp: $(SWIG_FILES) $(nobase_include_HEADERS)
-	SRCDIR=$(srcdir) $(SWIG) -c++ -python -I$(srcdir) -o $@ $(srcdir)/EosSdk.i
+	SRCDIR=$(srcdir) $(SWIG) -threads -c++ -python -I$(srcdir) -o $@ $(srcdir)/EosSdk.i
 
 $(srcdir)/eossdk_wrap.h: $(srcdir)/eossdk_wrap.cpp
 

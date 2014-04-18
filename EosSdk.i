@@ -43,6 +43,7 @@ typedef uint64_t uint64_be_t;
 %feature("nodirector") eos::neighbor_table_mgr;
 %feature("nodirector") eos::nexthop_group_mgr;
 %feature("nodirector") eos::policy_map_mgr;
+%feature("nodirector") eos::system_mgr;
 
 %{
 #include "eos/agent.h"
@@ -60,6 +61,8 @@ typedef uint64_t uint64_be_t;
 #include "eos/neighbor_table.h"
 #include "eos/mac_table.h"
 #include "eos/sdk.h"
+#include "eos/system.h"
+
 using namespace eos;
 
 struct stop_iteration {};
@@ -162,6 +165,7 @@ struct stop_iteration {};
 %include "eos/neighbor_table.h"
 %include "eos/mac_table.h"
 %include "eos/sdk.h"
+%include "eos/system.h"
 
 // Pythonify our iterators.
 wrap_iterator(eos::flow_entry_iter_t, eos::flow_entry_iter_impl, eos::flow_entry_t);
