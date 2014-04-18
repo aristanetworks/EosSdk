@@ -18,9 +18,9 @@ class EOS_SDK_PUBLIC system_handler {
    virtual ~system_handler();
 
    /// Handler called when the hostname changes
-   virtual void on_hostname();
+   virtual void on_hostname(std::string const &);
    /// Handler called when the fully qualified domain name changes
-   virtual void on_fqdn();
+   virtual void on_fqdn(std::string const &);
    
    /**
     * Handler called once the system identifying information is set.
@@ -31,7 +31,7 @@ class EOS_SDK_PUBLIC system_handler {
     */
    virtual void on_system_info_initialized();
 
-  protected:
+ protected:
    system_mgr * system_mgr_;
 };
 

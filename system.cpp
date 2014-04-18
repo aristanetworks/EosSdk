@@ -51,10 +51,10 @@ system_handler::system_handler() {
 system_handler::~system_handler() {
 }
 
-void system_handler::on_hostname() {
+void system_handler::on_hostname(std::string const & hostname) {
 }
 
-void system_handler::on_fqdn() {
+void system_handler::on_fqdn(std::string const & fqdn) {
 }
 
 void system_handler::on_system_info_initialized() {
