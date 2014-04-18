@@ -63,4 +63,8 @@ void sdk::init_policy_map_mgr() {
    // TODO: No op impl.
 }
 
+void sdk::init_system_mgr() {
+   // TODO: No op impl.
+}
+
 }

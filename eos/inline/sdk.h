@@ -97,6 +97,13 @@ inline policy_map_mgr * sdk::get_policy_map_mgr() {
    return policy_map_mgr_;
 }
 
+inline system_mgr * sdk::get_system_mgr() {
+   if (!system_mgr_) {
+      init_system_mgr();
+   }
+   return system_mgr_;
+}
+
 }
 
 #endif // EOS_INLINE_SDK_H
