@@ -45,7 +45,7 @@ class system_mgr_impl : public system_mgr {
    }
 };
 
-system_handler::system_handler() {
+system_handler::system_handler(system_mgr * mgr) : system_mgr_(mgr) {
 }
 
 system_handler::~system_handler() {
