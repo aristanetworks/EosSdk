@@ -47,6 +47,10 @@ void sdk::init_mac_table_mgr() {
    // TODO: No op impl.
 }
 
+void sdk::init_mlag_mgr() {
+   // TODO: No op impl.
+}
+
 void sdk::init_mpls_route_mgr() {
    // TODO: No op impl.
 }

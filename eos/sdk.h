@@ -17,6 +17,7 @@ class fib_mgr;
 class intf_mgr;
 class ip_route_mgr;
 class mac_table_mgr;
+class mlag_mgr;
 class mpls_route_mgr;
 class neighbor_table_mgr;
 class nexthop_group_mgr;
@@ -46,6 +47,7 @@ class EOS_SDK_PUBLIC sdk {
     void init_intf_mgr();
     void init_ip_route_mgr();
     void init_mac_table_mgr();
+    void init_mlag_mgr();
     void init_mpls_route_mgr();
     void init_neighbor_table_mgr();
     void init_nexthop_group_mgr();
@@ -61,6 +63,7 @@ class EOS_SDK_PUBLIC sdk {
     intf_mgr * get_intf_mgr();
     ip_route_mgr * get_ip_route_mgr();
     mac_table_mgr * get_mac_table_mgr();
+    mlag_mgr * get_mlag_mgr();
     mpls_route_mgr * get_mpls_route_mgr();
     neighbor_table_mgr * get_neighbor_table_mgr();
     nexthop_group_mgr * get_nexthop_group_mgr();
@@ -78,6 +81,7 @@ class EOS_SDK_PUBLIC sdk {
     intf_mgr * intf_mgr_;
     ip_route_mgr * ip_route_mgr_;
     mac_table_mgr * mac_table_mgr_;
+    mlag_mgr * mlag_mgr_;
     mpls_route_mgr * mpls_route_mgr_;
     neighbor_table_mgr * neighbor_table_mgr_;
     nexthop_group_mgr * nexthop_group_mgr_;
