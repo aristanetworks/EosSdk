@@ -1,2 +1,2 @@
 m4_define([_NAME_],[EosSdk])
-m4_define([_VERSION_],[1.0.13])
+m4_define([_VERSION_],[1.0.14])
