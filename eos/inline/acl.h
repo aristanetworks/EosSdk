@@ -135,6 +135,10 @@ inline acl_rule_eth_t::acl_rule_eth_t() : vlan(), vlan_mask(),
                                           destination_addr(), destination_mask() {
 }
 
+inline acl_mgr * acl_handler::get_acl_mgr() const {
+   return mgr_;
+}
+
 }  // end namespace eos
 
 #endif // EOS_INLINE_ACL_H

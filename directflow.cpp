@@ -192,11 +192,8 @@ flow_action_set_t::set_ip_dst() const {
 // flow_handler
 //
 
-flow_handler::flow_handler(directflow_mgr * mgr) {
+flow_handler::flow_handler(directflow_mgr * mgr) : base_handler(mgr) {
    // TODO
-}
-
-flow_handler::~flow_handler() {
 }
 
 void

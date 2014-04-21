@@ -28,6 +28,19 @@ namespace eos {
 template <typename T, typename Key=int> // `int' is an arbitrary default for classes
 class EOS_SDK_PRIVATE base_mgr {        // that don't use key-specific notifications
  protected:
+   virtual ~base_mgr() {
+      for (auto it = watchAllHandlers_.begin(); it != watchAllHandlers_.end();
+            ++it) {
+         (*it)->unregister_mgr();
+      }
+      for (auto set = keySpecificHandlers_.begin();
+            set != keySpecificHandlers_.end(); ++set) {
+         for (auto it = set->second.begin(); it != set->second.end(); ++it) {
+            (*it)->unregister_mgr();
+         }
+      }
+   }
+
    void add_handler(T *handler) {
       // no specific ordering
       watchAllHandlers_.insert(handler);
@@ -92,6 +105,8 @@ class EOS_SDK_PRIVATE base_mgr {        // that don't use key-specific notificat
    }
 
  private:
+   template <typename U, typename V> friend class base_handler;
+
    std::set<T *> watchAllHandlers_;
    std::map<Key, std::set<T *> > keySpecificHandlers_;
 };
