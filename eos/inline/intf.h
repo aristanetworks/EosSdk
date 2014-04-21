@@ -30,6 +30,10 @@ intf_id_t::operator<(intf_id_t const & other) const {
    return intfId_ < other.intfId_;
 }
 
+inline intf_mgr * intf_handler::get_intf_mgr() const {
+   return mgr_;
+}
+
 }
 
 #endif // EOS_INLINE_INTF_H

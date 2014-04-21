@@ -98,8 +98,9 @@ class random_router : public eos::agent_handler,
    }
 
    eos::intf_id_t get_intf(eos::intf_id_t cur_intf) {
-      for(eos::intf_iter_t i = intf_mgr_->intf_iter(); i; ++i){
-         if(*i != cur_intf || intf_mgr_->oper_status(*i) != eos::INTF_OPER_UP) {
+      for(eos::intf_iter_t i = get_intf_mgr()->intf_iter(); i; ++i){
+         if(*i != cur_intf ||
+            get_intf_mgr()->oper_status(*i) != eos::INTF_OPER_UP) {
             // Don't use the same interface or a down'd interface.
             continue;
          }

@@ -7,6 +7,7 @@
 #include <set>
 
 #include <eos/base.h>
+#include <eos/base_handler.h>
 #include <eos/base_mgr.h>
 #include <eos/eth.h>
 #include <eos/intf.h>
@@ -300,10 +301,11 @@ class directflow_mgr;
  *
  * A flow handler is notified when the status of configured flows changes.
  */
-class EOS_SDK_PUBLIC flow_handler {
+class EOS_SDK_PUBLIC flow_handler : public base_handler<directflow_mgr,
+                                                        flow_handler> {
  public:
    explicit flow_handler(directflow_mgr *);
-   virtual ~flow_handler();
+   directflow_mgr * get_directflow_mgr() const;
 
    /**
     * Registers this class to receive updates on changes to
@@ -321,9 +323,6 @@ class EOS_SDK_PUBLIC flow_handler {
 
    /// Handler called when flow status changes
    virtual void on_flow_status(std::string const &, flow_status_t);
-
- protected:
-   directflow_mgr * directflow_mgr_;
 };
 
 
@@ -341,8 +340,7 @@ class EOS_SDK_PUBLIC flow_entry_iter_t : public iter_base<flow_entry_t,
 /**
  * DirectFlow configuration and status manager.
  */
-class EOS_SDK_PUBLIC directflow_mgr : protected base_mgr<flow_handler,
-                                                         std::string> {
+class EOS_SDK_PUBLIC directflow_mgr : public base_mgr<flow_handler, std::string> {
  public:
    virtual ~directflow_mgr();
 

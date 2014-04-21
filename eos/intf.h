@@ -8,6 +8,7 @@
 #include <stddef.h>
 
 #include <eos/base.h>
+#include <eos/base_handler.h>
 #include <eos/base_mgr.h>
 #include <eos/iterator.h>
 
@@ -79,10 +80,10 @@ class EOS_SDK_PUBLIC intf_id_t {
 class intf_mgr;
 
 /// This class receives changes to base interface attributes.
-class EOS_SDK_PUBLIC intf_handler {
+class EOS_SDK_PUBLIC intf_handler : public base_handler<intf_mgr, intf_handler> {
  public:
    explicit intf_handler(intf_mgr *);
-   virtual ~intf_handler();
+   intf_mgr * get_intf_mgr() const;
 
    /**
     * Registers this class to receive change updates on the interface.
@@ -108,9 +109,6 @@ class EOS_SDK_PUBLIC intf_handler {
    virtual void on_oper_status(intf_id_t, oper_status_t);
    /// Handler called after an interface has been configured to be enabled.
    virtual void on_admin_enabled(intf_id_t, bool);
-
- protected:
-   intf_mgr * intf_mgr_;
 };
 
 class intf_iter_impl;
@@ -127,7 +125,7 @@ class EOS_SDK_PUBLIC intf_iter_t : public iter_base<intf_id_t,
  * The interface manager.
  * This class inspects and configures base interface attribtues.
  */
-class EOS_SDK_PUBLIC intf_mgr : protected base_mgr<intf_handler, intf_id_t> {
+class EOS_SDK_PUBLIC intf_mgr : public base_mgr<intf_handler, intf_id_t> {
  public:
    virtual ~intf_mgr();
 

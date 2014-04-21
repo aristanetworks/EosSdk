@@ -5,6 +5,7 @@
 #define EOS_ETH_PHY_INTF_H
 
 #include <eos/base.h>
+#include <eos/base_handler.h>
 #include <eos/base_mgr.h>
 #include <eos/eth.h>
 #include <eos/intf.h>
@@ -28,10 +29,12 @@ class eth_phy_intf_mgr;
 /**
  * A handler for Ethernet Physical Interface events.
  */
-class EOS_SDK_PUBLIC eth_phy_intf_handler {
+class EOS_SDK_PUBLIC eth_phy_intf_handler
+   : public base_handler<eth_phy_intf_mgr, eth_phy_intf_handler> {
  public:
    explicit eth_phy_intf_handler(eth_phy_intf_mgr *);
-   virtual ~eth_phy_intf_handler();
+
+   eth_phy_intf_mgr * get_eth_phy_intf_mgr() const;
 
    /**
     * Registers this class to receive interface change update notifications.
@@ -54,9 +57,6 @@ class EOS_SDK_PUBLIC eth_phy_intf_handler {
    virtual void on_eth_phy_intf_create(intf_id_t);
    /// Handler called when a physical ethernet interface is deleted
    virtual void on_eth_phy_intf_delete(intf_id_t);
-
- protected:
-   eth_phy_intf_mgr * eth_phy_intf_mgr_;
 };
 
 
@@ -71,8 +71,8 @@ class EOS_SDK_PUBLIC eth_phy_intf_iter_t : public iter_base<intf_id_t,
 };
 
 
-class EOS_SDK_PUBLIC eth_phy_intf_mgr : protected base_mgr<eth_phy_intf_handler,
-                                                           intf_id_t> {
+class EOS_SDK_PUBLIC eth_phy_intf_mgr : public base_mgr<eth_phy_intf_handler,
+                                                        intf_id_t> {
  public:
    virtual ~eth_phy_intf_mgr();
 
@@ -102,5 +102,7 @@ class EOS_SDK_PUBLIC eth_phy_intf_mgr : protected base_mgr<eth_phy_intf_handler,
 };
 
 }
+
+#include <eos/inline/eth_phy_intf.h>
 
 #endif // EOS_ETH_PHY_INTF_H

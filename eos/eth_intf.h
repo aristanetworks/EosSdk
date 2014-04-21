@@ -5,6 +5,7 @@
 #define EOS_ETH_INTF_H
 
 #include <eos/base.h>
+#include <eos/base_handler.h>
 #include <eos/base_mgr.h>
 #include <eos/eth.h>
 #include <eos/intf.h>
@@ -30,10 +31,11 @@ class eth_intf_mgr;
  * Handles events on ethernet interfaces. Includes physical interfaces
  * and LAGs (port-channels) among other interface types.
  */
-class EOS_SDK_PUBLIC eth_intf_handler {
+class EOS_SDK_PUBLIC eth_intf_handler : public base_handler<eth_intf_mgr,
+                                                            eth_intf_handler> {
  public:
    explicit eth_intf_handler(eth_intf_mgr *);
-   virtual ~eth_intf_handler();
+   eth_intf_mgr * get_eth_intf_mgr() const;
 
    /**
     * Registers to receive updates on changes to the interface.
@@ -58,9 +60,6 @@ class EOS_SDK_PUBLIC eth_intf_handler {
    virtual void on_eth_intf_delete(intf_id_t);
    /// Handler called when the mac address of an interface changes
    virtual void on_eth_addr(intf_id_t, eth_addr_t);
-
- protected:
-   eth_intf_mgr * eth_intf_mgr_;
 };
 
 
@@ -76,7 +75,7 @@ class EOS_SDK_PUBLIC eth_intf_iter_t : public iter_base<intf_id_t,
 
 
 /// The ethernet interface manager
-class EOS_SDK_PUBLIC eth_intf_mgr : protected base_mgr<eth_intf_handler, intf_id_t>{
+class EOS_SDK_PUBLIC eth_intf_mgr : public base_mgr<eth_intf_handler, intf_id_t> {
  public:
    virtual ~eth_intf_mgr();
 
@@ -176,5 +175,7 @@ class EOS_SDK_PUBLIC eth_intf_mgr : protected base_mgr<eth_intf_handler, intf_id
 };
 
 }
+
+#include <eos/inline/eth_intf.h>
 
 #endif // EOS_ETH_INTF_H
