@@ -30,17 +30,14 @@ class mlag_mgr_impl : public mlag_mgr {
    ip_addr_t peer_address() const {
       return ip_addr_t();
    }
-   
+
    mlag_state_t state() const {
       return MLAG_STATE_DISABLED;
    }
-   
+
 };
 
-mlag_handler::mlag_handler(mlag_mgr *mgr) : mlag_mgr_(mgr) {
-}
-
-mlag_handler::~mlag_handler() {
+mlag_handler::mlag_handler(mlag_mgr *mgr) : base_handler(mgr) {
 }
 
 void mlag_handler::on_mlag_state(mlag_state_t state) {

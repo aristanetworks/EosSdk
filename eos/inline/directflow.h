@@ -450,6 +450,10 @@ flow_counters_t::packets() const {
    return packets_;
 }
 
+inline directflow_mgr * flow_handler::get_directflow_mgr() const {
+   return mgr_;
+}
+
 }
 
 #endif // EOS_INLINE_DIRECTFLOW_H

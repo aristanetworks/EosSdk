@@ -8,6 +8,7 @@
 #include <utility>
 
 #include <eos/base.h>
+#include <eos/base_handler.h>
 #include <eos/base_mgr.h>
 #include <eos/eth.h>
 #include <eos/ip.h>
@@ -292,10 +293,10 @@ class acl_mgr;
  *
  * Derive from this class to react to ACL hardware synchronisation events.
  */
-class EOS_SDK_PUBLIC acl_handler {
+class EOS_SDK_PUBLIC acl_handler : public base_handler<acl_mgr, acl_handler> {
  public:
    explicit acl_handler(acl_mgr *);
-   virtual ~acl_handler();
+   acl_mgr * get_acl_mgr() const;
 
    /**
     * Watches updates to synchronization status for all ACLs.
@@ -332,9 +333,6 @@ class EOS_SDK_PUBLIC acl_handler {
     */
    virtual void on_acl_sync_fail(std::string const & linecard,
                                  std::string const & message);
-
- protected:
-   acl_mgr * acl_mgr_;
 };
 
 class acl_iter_impl;
@@ -380,7 +378,7 @@ class EOS_SDK_PUBLIC acl_rule_eth_iter_t : public iter_base<acl_rule_eth_entry_t
  * commit changes, apply ACLs to interfaces as well as manage
  * fragements mode and enabling counters.
  */
-class EOS_SDK_PUBLIC acl_mgr : protected base_mgr<acl_handler> {
+class EOS_SDK_PUBLIC acl_mgr : public base_mgr<acl_handler> {
  public:
    virtual ~acl_mgr();
 

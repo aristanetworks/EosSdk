@@ -5,6 +5,7 @@
 #define EOS_SYSTEM_H
 
 #include <eos/base.h>
+#include <eos/base_handler.h>
 #include <eos/base_mgr.h>
 #include <string>
 
@@ -13,16 +14,17 @@ namespace eos {
 class system_mgr;
 
 /// This class receives changes to system identifying information
-class EOS_SDK_PUBLIC system_handler {
+class EOS_SDK_PUBLIC system_handler : public base_handler<system_mgr,
+                                                          system_handler> {
  public:
    explicit system_handler(system_mgr *);
-   virtual ~system_handler();
+   system_mgr * get_system_mgr() const;
 
    /// Handler called when the hostname changes
    virtual void on_hostname(std::string const &);
    /// Handler called when the fully qualified domain name changes
    virtual void on_fqdn(std::string const &);
-   
+
    /**
     * Handler called once the system identifying information is set.
     *
@@ -31,9 +33,6 @@ class EOS_SDK_PUBLIC system_handler {
     * are accessible via the system_mgr class.
     */
    virtual void on_system_info_initialized();
-
- protected:
-   system_mgr * system_mgr_;
 };
 
 /**
@@ -43,7 +42,7 @@ class EOS_SDK_PUBLIC system_handler {
  * agent main loop. When your eos::agent_handler::on_initialized
  * virtual function is called, the manager is valid for use.
  */
-class EOS_SDK_PUBLIC system_mgr : protected base_mgr<system_handler> {
+class EOS_SDK_PUBLIC system_mgr : public base_mgr<system_handler> {
  public:
    virtual ~system_mgr();
 
@@ -70,5 +69,7 @@ class EOS_SDK_PUBLIC system_mgr : protected base_mgr<system_handler> {
 };
 
 } // end namespace eos
+
+#include <eos/inline/system.h>
 
 #endif // EOS_SYSTEM_H

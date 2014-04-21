@@ -23,32 +23,29 @@ class system_mgr_impl : public system_mgr {
    std::string hostname() const {
       return "localhost";
    }
-   
+
    std::string fqdn() const {
       return "localhost";
    }
-   
+
    std::string serial_number() const {
       return "None";
    }
-   
+
    std::string model_name() const {
       return "None";
    }
-   
+
    std::string hardware_revision() const {
       return "None";
    }
-   
+
    std::string software_revision() const {
       return "None";
    }
 };
 
-system_handler::system_handler(system_mgr * mgr) : system_mgr_(mgr) {
-}
-
-system_handler::~system_handler() {
+system_handler::system_handler(system_mgr * mgr) : base_handler(mgr) {
 }
 
 void system_handler::on_hostname(std::string const & hostname) {
