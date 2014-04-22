@@ -76,7 +76,7 @@ int main(int argc, char **argv) {
   sdk sdk;
   shared_ptr<ThriftSdkHandler> handler(new ThriftSdkHandler(sdk.get_intf_mgr()));
   event_base_holder base;
-  libevent_loop loop(base.ptr());
+  libevent_loop loop(sdk, base.ptr());
   shared_ptr<TProcessor> processor(new ThriftSdkProcessor(handler));
 
   TNonblockingServer server(processor, port);

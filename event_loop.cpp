@@ -27,7 +27,7 @@ event_loop_handler::on_timeout() {
    impl.main_loop(0);
 }
 
-event_loop::event_loop() {
+event_loop::event_loop(sdk & sdk) {
 }
 
 event_loop::~event_loop() {

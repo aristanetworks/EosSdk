@@ -51,6 +51,10 @@ void sdk::init_mlag_mgr() {
    // TODO: No op impl.
 }
 
+void sdk::init_mount_mgr() {
+   // TODO: No op impl.
+}
+
 void sdk::init_mpls_route_mgr() {
    // TODO: No op impl.
 }

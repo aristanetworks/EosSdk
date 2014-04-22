@@ -9,6 +9,7 @@
 #include <eos/agent.h>
 #include <eos/timer.h>
 #include <eos/fd.h>
+#include <eos/sdk.h>
 
 #include <assert.h>
 #include <errno.h>
@@ -215,6 +216,7 @@ class echo_bot : public eos::timeout_handler,
 
 int main(int argc, char ** argv) {
    echo_bot bot;
-   eos::agent_main_loop("EchoBot", argc, argv);
+   eos::sdk sdk;
+   eos::agent_main_loop(&sdk, "EchoBot", argc, argv);
 }
 

@@ -76,6 +76,13 @@ inline mlag_mgr * sdk::get_mlag_mgr() {
    return mlag_mgr_;
 }
 
+inline mount_mgr * sdk::get_mount_mgr() {
+   if (!mount_mgr_) {
+      init_mount_mgr();
+   }
+   return mount_mgr_;
+}
+
 inline mpls_route_mgr * sdk::get_mpls_route_mgr() {
    if (!mpls_route_mgr_) {
       init_mpls_route_mgr();
