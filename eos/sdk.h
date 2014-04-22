@@ -18,6 +18,7 @@ class intf_mgr;
 class ip_route_mgr;
 class mac_table_mgr;
 class mlag_mgr;
+class mount_mgr;
 class mpls_route_mgr;
 class neighbor_table_mgr;
 class nexthop_group_mgr;
@@ -71,6 +72,13 @@ class EOS_SDK_PUBLIC sdk {
     system_mgr * get_system_mgr();
 
  private:
+    friend class event_loop;
+    // This is only a temporary fix... next CL will remove that (when the function
+    // will be integrated in the agent_mgr)
+    friend void agent_main_loop(sdk *, const char *, int , char **);
+    void init_mount_mgr();
+    mount_mgr * get_mount_mgr();
+
     EOS_SDK_DISALLOW_COPY_CTOR(sdk);
     acl_mgr * acl_mgr_;
     decap_group_mgr * decap_group_mgr_;
@@ -82,6 +90,7 @@ class EOS_SDK_PUBLIC sdk {
     ip_route_mgr * ip_route_mgr_;
     mac_table_mgr * mac_table_mgr_;
     mlag_mgr * mlag_mgr_;
+    mount_mgr * mount_mgr_;
     mpls_route_mgr * mpls_route_mgr_;
     neighbor_table_mgr * neighbor_table_mgr_;
     nexthop_group_mgr * nexthop_group_mgr_;

@@ -55,7 +55,7 @@ def main(args):
    intfMgr = sdk.get_intf_mgr()
    testAgent = MyTestAgent(intfMgr, "Ethernet1")
    args = ["MyTestAgent"]
-   eossdk.agent_main_loop(args[0], args)
+   eossdk.agent_main_loop(sdk, args[0], args)
    print "Handled %d events" % testAgent.eventCount
 
 

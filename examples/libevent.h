@@ -12,7 +12,7 @@ struct event_base;  // Forward declare libevent's main data structure.
 
 class libevent_loop : public eos::event_loop_handler {
  public:
-   explicit libevent_loop(event_base * eb) : eb_(eb) {
+   libevent_loop(eos::sdk & sdk, event_base * eb) : eb_(eb), loop_(sdk) {
    }
 
    virtual ~libevent_loop() {

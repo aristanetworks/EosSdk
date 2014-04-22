@@ -121,5 +121,5 @@ class random_router : public eos::agent_handler,
 int main(int argc, char ** argv) {
    eos::sdk sdk;
    random_router rr(sdk.get_intf_mgr(), sdk.get_ip_route_mgr());
-   eos::agent_main_loop(AGENT_NAME, argc, argv);
+   eos::agent_main_loop(&sdk, AGENT_NAME, argc, argv);
 }

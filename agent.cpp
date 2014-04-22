@@ -24,7 +24,7 @@ agent_handler::on_initialized() {
 }
 
 void
-agent_main_loop(const char * agent_name, int argc, char ** argv) {
+agent_main_loop(sdk *, const char * agent_name, int argc, char ** argv) {
    assert(agent_name);   // Must not be NULL.
    assert(*agent_name);  // Must be at least one char long.
    impl.agent_name_is(agent_name);

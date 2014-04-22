@@ -170,7 +170,7 @@ def main(args):
    sdk = eossdk.Sdk()
    directFlowMgr = sdk.get_directflow_mgr()
    programmer = DirectFlowProgrammer(directFlowMgr)
-   eossdk.agent_main_loop("DirectFlowProgrammer", sys.argv)
+   eossdk.agent_main_loop(sdk, "DirectFlowProgrammer", sys.argv)
    print "Saw %d flow status changes" % programmer.changes
 
 
