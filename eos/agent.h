@@ -31,12 +31,14 @@ class EOS_SDK_PUBLIC agent_handler {
    virtual void on_initialized();
 };
 
+class sdk;
+
 /**
  * Hands over the main event loop to EOS.
  * Blocks until the event loop stops.
  */
 void EOS_SDK_PUBLIC
-agent_main_loop(const char * agent_name, int argc, char ** argv);
+agent_main_loop(sdk * sdk, const char * agent_name, int argc, char ** argv);
 
 /// Stop this agent's execution (after the next pass through the event loop)
 void EOS_SDK_PUBLIC
