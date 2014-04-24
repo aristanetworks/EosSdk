@@ -11,4 +11,24 @@ policy_map_mgr::policy_map_mgr() {
 policy_map_mgr::~policy_map_mgr() {
 }
 
+policy_map_action_t::~policy_map_action_t() {
+}
+
+policy_map_handler::policy_map_handler(policy_map_mgr * mgr) : policy_map_mgr_(mgr) {
+}
+
+policy_map_handler::~policy_map_handler() {
+}
+
+void
+policy_map_handler::on_policy_map_sync_fail(policy_map_key_t const & key,
+                                            std::string const & message) {
+   // TODO: no op impl.
+}
+
+void
+policy_map_handler::on_policy_map_sync(policy_map_key_t const & key) {
+   // TODO: no op impl.
+}
+
 }
