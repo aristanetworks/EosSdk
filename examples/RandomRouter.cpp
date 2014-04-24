@@ -26,11 +26,12 @@ class random_router : public eos::agent_handler,
                       public eos::intf_handler,
                       public eos::fd_handler {
  public:
-   random_router(eos::intf_mgr * mgr, eos::ip_route_mgr * route_mgr_)
-      : eos::intf_handler(mgr) {
+   explicit random_router(eos::sdk & sdk)
+      : eos::agent_handler(sdk.get_agent_mgr()),
+        eos::intf_handler(sdk.get_intf_mgr()) {
       printf("Initializing the Random Router...\n");
-      app_id = eos::agent_id(AGENT_NAME);
-      route_mgr = route_mgr_;
+      app_id = eos::agent_mgr::id(AGENT_NAME);
+      route_mgr = sdk.get_ip_route_mgr();
       route_mgr->tag_is(app_id);
    }
 
@@ -41,7 +42,7 @@ class random_router : public eos::agent_handler,
       watch_readable(0, true);
       watch_all_intfs(true);
    }
-   
+
    void on_readable(int fd) {
       printf("Stdin (fd %d) is readable\n", fd);
       assert(fd == 0);
@@ -120,6 +121,6 @@ class random_router : public eos::agent_handler,
 
 int main(int argc, char ** argv) {
    eos::sdk sdk;
-   random_router rr(sdk.get_intf_mgr(), sdk.get_ip_route_mgr());
-   eos::agent_main_loop(&sdk, AGENT_NAME, argc, argv);
+   random_router rr(sdk);
+   sdk.main_loop(AGENT_NAME, argc, argv);
 }

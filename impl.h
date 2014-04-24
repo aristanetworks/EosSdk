@@ -137,6 +137,8 @@ class timer_queue : public std::priority_queue<timer *,
    EOS_SDK_DISALLOW_COPY_CTOR(timer_queue);
 };
 
+class sdk;
+
 /**
  * Provides a basic implementation for various EOS SDK primitives.
  * Keeps track of the state of the stubbed out SDK so we can behave
@@ -149,11 +151,9 @@ class Impl {
  public:
    Impl() {
    }
-   void register_agent_handler(agent_handler * handler) {
-      agent_handlers_.push_back(handler);
-   }
-   void unregister_agent_handler(agent_handler * handler) {
-      agent_handlers_.remove(handler);  // O(N) but the list is tiny.
+
+   void register_sdk(sdk * sdk) {
+      sdk_ = sdk;
    }
 
    void register_fd_handler(fd_handler * handler) {
@@ -196,13 +196,13 @@ class Impl {
    // Whether the loop should be running
    bool running_;
 
+   sdk * sdk_;
+
    // Min-heap for all outstanding timers.
    timer_queue timers_;
 
    // Maps a FD handler to the set of FDs it's interested in.
    std::map<fd_handler *, fd_handler_sm> fd_handlers_;
-
-   std::list<agent_handler *> agent_handlers_;
 
    // Maps a user-created timeout_handler to an outstanding timer.
    std::map<timeout_handler *, timer> timeout_to_timer_;

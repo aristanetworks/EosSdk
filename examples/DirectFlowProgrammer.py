@@ -102,10 +102,10 @@ class FlowHandlerTrampoline(eossdk.FlowHandler):
 class DirectFlowProgrammer(eossdk.AgentHandler,
                            eossdk.FdHandler):
 
-   def __init__(self, directFlowMgr):
+   def __init__(self, agentMgr, directFlowMgr):
       self.directFlowMgr_ = directFlowMgr
       self.flowHandlerTrampoline_ = None
-      eossdk.AgentHandler.__init__(self)
+      eossdk.AgentHandler.__init__(self, agentMgr)
       eossdk.FdHandler.__init__(self)           # pylint: disable-msg=W0233
       self.changes = 0
 
@@ -168,9 +168,8 @@ class DirectFlowProgrammer(eossdk.AgentHandler,
 
 def main(args):
    sdk = eossdk.Sdk()
-   directFlowMgr = sdk.get_directflow_mgr()
-   programmer = DirectFlowProgrammer(directFlowMgr)
-   eossdk.agent_main_loop(sdk, "DirectFlowProgrammer", sys.argv)
+   programmer = DirectFlowProgrammer(sdk.get_agent_mgr(), sdk.get_directflow_mgr())
+   sdk.main_loop("DirectFlowProgrammer", sys.argv)
    print "Saw %d flow status changes" % programmer.changes
 
 
