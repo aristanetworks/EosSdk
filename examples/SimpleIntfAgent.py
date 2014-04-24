@@ -9,14 +9,14 @@ import sys
 # Listens to standard input and shuts down an interface when it
 # receives a "shutdown" message. To exit, enter a blank line.
 class MyTestAgent(eossdk.AgentHandler, eossdk.FdHandler):
-   def __init__(self, intfMgr, interfaceName):
+   def __init__(self, agentMgr, intfMgr, interfaceName):
       print "This program controls the admin enabled state of the given interface"
       print " - 'shutdown' will disable the interface"
       print " - any other text will enable the interface"
       print " - an empty line will quit this program"
       self.intfMgr_ = intfMgr
       self.intfObj_ = eossdk.IntfId(interfaceName)
-      eossdk.AgentHandler.__init__(self)
+      eossdk.AgentHandler.__init__(self, agentMgr)
       eossdk.FdHandler.__init__(self)  # pylint: disable-msg=W0233
       self.eventCount = 0
 
@@ -52,10 +52,9 @@ class MyTestAgent(eossdk.AgentHandler, eossdk.FdHandler):
 
 def main(args):
    sdk = eossdk.Sdk()
-   intfMgr = sdk.get_intf_mgr()
-   testAgent = MyTestAgent(intfMgr, "Ethernet1")
+   testAgent = MyTestAgent(sdk.get_agent_mgr(), sdk.get_intf_mgr(), "Ethernet1")
    args = ["MyTestAgent"]
-   eossdk.agent_main_loop(sdk, args[0], args)
+   sdk.main_loop(args[0], args)
    print "Handled %d events" % testAgent.eventCount
 
 

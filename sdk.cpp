@@ -2,10 +2,12 @@
 // Arista Networks, Inc. Confidential and Proprietary.
 
 #include "eos/sdk.h"
+#include "impl.h"
 
 namespace eos {
 
 sdk::sdk() {
+   impl.register_sdk(this);
 }
 
 sdk::~sdk() {
@@ -13,6 +15,14 @@ sdk::~sdk() {
 
 void sdk::init_acl_mgr() {
    // TODO: No op impl.
+}
+
+agent_mgr * new_agent_mgr();
+
+void sdk::init_agent_mgr() {
+   if (!agent_mgr_) {
+      agent_mgr_ = new_agent_mgr();
+   }
 }
 
 void sdk::init_decap_group_mgr() {
