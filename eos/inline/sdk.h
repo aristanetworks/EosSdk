@@ -6,11 +6,22 @@
 
 namespace eos {
 
+inline void sdk::main_loop(const char * agent_name, int argc, char ** argv) {
+   get_agent_mgr()->main_loop(agent_name, argc, argv);
+}
+
 inline acl_mgr * sdk::get_acl_mgr() {
    if (!acl_mgr_) {
       init_acl_mgr();
    }
    return acl_mgr_;
+}
+
+inline agent_mgr * sdk::get_agent_mgr() {
+   if (!agent_mgr_) {
+      init_agent_mgr();
+   }
+   return agent_mgr_;
 }
 
 inline decap_group_mgr * sdk::get_decap_group_mgr() {

@@ -4,6 +4,7 @@
 #ifndef EOS_SDK_H
 #define EOS_SDK_H
 
+#include <eos/agent.h>
 #include <eos/base.h>
 
 namespace eos {
@@ -40,6 +41,7 @@ class EOS_SDK_PUBLIC sdk {
     ~sdk();
 
     void init_acl_mgr();
+    void init_agent_mgr();
     void init_decap_group_mgr();
     void init_directflow_mgr();
     void init_eth_intf_mgr();
@@ -55,7 +57,10 @@ class EOS_SDK_PUBLIC sdk {
     void init_policy_map_mgr();
     void init_system_mgr();
 
+    void main_loop(const char * agent_name, int argc, char ** argv);
+
     acl_mgr * get_acl_mgr();
+    agent_mgr * get_agent_mgr();
     decap_group_mgr * get_decap_group_mgr();
     directflow_mgr * get_directflow_mgr();
     eth_intf_mgr * get_eth_intf_mgr();
@@ -73,14 +78,12 @@ class EOS_SDK_PUBLIC sdk {
 
  private:
     friend class event_loop;
-    // This is only a temporary fix... next CL will remove that (when the function
-    // will be integrated in the agent_mgr)
-    friend void agent_main_loop(sdk *, const char *, int , char **);
     void init_mount_mgr();
     mount_mgr * get_mount_mgr();
 
     EOS_SDK_DISALLOW_COPY_CTOR(sdk);
     acl_mgr * acl_mgr_;
+    agent_mgr * agent_mgr_;
     decap_group_mgr * decap_group_mgr_;
     directflow_mgr * directflow_mgr_;
     eth_intf_mgr * eth_intf_mgr_;

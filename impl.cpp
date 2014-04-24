@@ -9,6 +9,7 @@
 
 #include "impl.h"
 #include "eos/panic.h"
+#include "eos/sdk.h"
 
 namespace eos {
 
@@ -88,10 +89,10 @@ void Impl::agent_name_is(const char * agent_name) {
    // TODO: Set the process title or whatever else.
 }
 
+void handle_agent_initialize(agent_mgr *);
+
 void Impl::do_initialize() {
-   for(auto i = agent_handlers_.begin(); i != agent_handlers_.end(); ++i) {
-      (*i)->on_initialized();
-   }
+   handle_agent_initialize(sdk_->get_agent_mgr());
 }
 
 void Impl::stop_loop() {

@@ -5,6 +5,8 @@
 #define EOS_AGENT_H
 
 #include <eos/base.h>
+#include <eos/base_handler.h>
+#include <eos/base_mgr.h>
 
 /**
  * @file
@@ -13,13 +15,16 @@
 
 namespace eos {
 
+class agent_mgr;
+
 /**
  * The agent_handler class handles events in the agent's lifecycle.
  */
-class EOS_SDK_PUBLIC agent_handler {
+class EOS_SDK_PUBLIC agent_handler : public base_handler<agent_mgr, agent_handler> {
  public:
-   agent_handler();
-   virtual ~agent_handler();
+   explicit agent_handler(agent_mgr *);
+
+   agent_mgr * get_agent_mgr() const;
 
    /**
     * Handler called after the agent has been internally initialized.
@@ -31,27 +36,36 @@ class EOS_SDK_PUBLIC agent_handler {
    virtual void on_initialized();
 };
 
-class sdk;
+class EOS_SDK_PUBLIC agent_mgr : public base_mgr<agent_handler> {
+ public:
+    virtual ~agent_mgr();
 
-/**
- * Hands over the main event loop to EOS.
- * Blocks until the event loop stops.
- */
-void EOS_SDK_PUBLIC
-agent_main_loop(sdk * sdk, const char * agent_name, int argc, char ** argv);
+    /**
+     * Hands over the main event loop to EOS.
+     * Blocks until the event loop stops.
+     */
+    virtual void main_loop(const char * agent_name, int argc, char ** argv) = 0;
 
-/// Stop this agent's execution (after the next pass through the event loop)
-void EOS_SDK_PUBLIC
-agent_exit();
+    /// Stop this agent's execution (after the next pass through the event loop)
+    void exit();
 
-/**
- * Given a name, returns a numeric ID uniquely identifying the agent.
- * This number is guaranteed to remain the same across agent restarts,
- * though not across reboots.
- */
-uint32_t EOS_SDK_PUBLIC
-agent_id(const char * agent_name);
+    /**
+     * Given a name, returns a numeric ID uniquely identifying the agent.
+     * This number is guaranteed to remain the same across agent restarts,
+     * though not across reboots.
+     */
+    static uint32_t id(const char * agent_name);
+
+ protected:
+    agent_mgr() EOS_SDK_PRIVATE;
+    friend class agent_handler;
+ private:
+    EOS_SDK_DISALLOW_COPY_CTOR(agent_mgr);
+
+};
 
 }
+
+#include <eos/inline/agent.h>
 
 #endif // EOS_AGENT_H
