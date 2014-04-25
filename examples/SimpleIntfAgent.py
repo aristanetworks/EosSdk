@@ -14,6 +14,7 @@ class MyTestAgent(eossdk.AgentHandler, eossdk.FdHandler):
       print " - 'shutdown' will disable the interface"
       print " - any other text will enable the interface"
       print " - an empty line will quit this program"
+      self.agentMgr_ = agentMgr
       self.intfMgr_ = intfMgr
       self.intfObj_ = eossdk.IntfId(interfaceName)
       eossdk.AgentHandler.__init__(self, agentMgr)
@@ -42,7 +43,7 @@ class MyTestAgent(eossdk.AgentHandler, eossdk.FdHandler):
          self.eventCount += 1
       else:
          print "Exiting!"
-         eossdk.agent_exit()
+         self.agentMgr_.exit()
       self._printPrompt()
 
    def _printPrompt(self):
