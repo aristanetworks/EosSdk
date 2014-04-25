@@ -299,6 +299,6 @@ class EOS_SDK_PUBLIC policy_map_mgr : public base_mgr<policy_map_handler,
 } // end namespace eos
 
 // The inline header relies on definitions above
-#include <eos/inline/policy.h>
+#include <eos/inline/policy_map.h>
 
 #endif // EOS_POLICY_H

@@ -8,7 +8,7 @@
 
 #include <eos/acl.h>
 #include <eos/iterator.h>
-#include <eos/policy.h>
+#include <eos/policy_map.h>
 
 /**
  * Class map manipulation.
@@ -16,7 +16,7 @@
  * This module provides access to the management of class maps.
  * Classification or "class" maps, provide a way for the network
  * operator to classify packets arriving on an interface. Together
- * with the policy_map_mgr in policy.h, classified traffic can drive
+ * with the policy_map_mgr in policy_map.h, classified traffic can drive
  * policy features, such as PBR.
  */
 
@@ -68,7 +68,7 @@ class EOS_SDK_PUBLIC class_map_rule_iter_t
  * EOS class map manager.
  *
  * This manager provides access to EOS traffic classifers, or "class
- * maps". Class maps are referred to by policy maps (policy.h) to classify
+ * maps". Class maps are referred to by policy maps (policy_map.h) to classify
  * traffic that should be subject to the policy's actions.
  */
 class EOS_SDK_PUBLIC class_map_mgr {
