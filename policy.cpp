@@ -14,10 +14,7 @@ policy_map_mgr::~policy_map_mgr() {
 policy_map_action_t::~policy_map_action_t() {
 }
 
-policy_map_handler::policy_map_handler(policy_map_mgr * mgr) : policy_map_mgr_(mgr) {
-}
-
-policy_map_handler::~policy_map_handler() {
+policy_map_handler::policy_map_handler(policy_map_mgr * mgr) : base_handler(mgr) {
 }
 
 void
