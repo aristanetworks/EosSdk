@@ -24,6 +24,13 @@ inline agent_mgr * sdk::get_agent_mgr() {
    return agent_mgr_;
 }
 
+inline class_map_mgr * sdk::get_class_map_mgr() {
+   if (!class_map_mgr_) {
+      init_class_map_mgr();
+   }
+   return class_map_mgr_;
+}
+
 inline decap_group_mgr * sdk::get_decap_group_mgr() {
    if (!decap_group_mgr_) {
       init_decap_group_mgr();
