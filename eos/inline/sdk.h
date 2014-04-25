@@ -59,6 +59,13 @@ inline eth_phy_intf_mgr * sdk::get_eth_phy_intf_mgr() {
    return eth_phy_intf_mgr_;
 }
 
+inline event_loop * sdk::get_event_loop() {
+   if (!event_loop_) {
+      init_event_loop();
+   }
+   return event_loop_;
+}
+
 inline fib_mgr * sdk::get_fib_mgr() {
    if (!fib_mgr_) {
       init_fib_mgr();

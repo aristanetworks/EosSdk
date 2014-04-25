@@ -45,6 +45,10 @@ void sdk::init_eth_phy_intf_mgr() {
    // TODO: No op impl.
 }
 
+void sdk::init_event_loop() {
+   // TODO: No op impl.
+}
+
 void sdk::init_fib_mgr() {
    // TODO: No op impl.
 }
