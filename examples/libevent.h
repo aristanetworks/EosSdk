@@ -7,12 +7,14 @@
 #include <sys/time.h>
 
 #include <eos/event_loop.h>
+#include <eos/sdk.h>
 
 struct event_base;  // Forward declare libevent's main data structure.
 
 class libevent_loop : public eos::event_loop_handler {
  public:
-   libevent_loop(eos::sdk & sdk, event_base * eb) : eb_(eb), loop_(sdk) {
+   libevent_loop(eos::sdk & sdk, event_base * eb)
+      : eb_(eb), loop_(sdk.get_event_loop()) {
    }
 
    virtual ~libevent_loop() {
@@ -26,7 +28,7 @@ class libevent_loop : public eos::event_loop_handler {
 
  private:
    event_base * const eb_;
-   eos::event_loop loop_;
+   eos::event_loop * loop_;
 };
 
 #endif // EXAMPLES_LIBEVENT_H
