@@ -45,6 +45,6 @@ inline policy_action_type_t policy_map_action_t::action_type() const {
    return type_;
 }
 
-}
+} // namespace eos
 
 #endif // EOS_INLINE_POLICY_H
