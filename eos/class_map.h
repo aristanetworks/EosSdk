@@ -124,7 +124,6 @@ class EOS_SDK_PUBLIC class_map_mgr {
 
 } // end namespace eos
 
-// The inline header relies on definitions above
 #include <eos/inline/class_map.h>
 
 #endif // EOS_CLASS_MAP_H

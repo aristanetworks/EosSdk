@@ -68,6 +68,9 @@ class EOS_SDK_PUBLIC policy_map_key_t {
  public:
    policy_map_key_t();
    policy_map_key_t(std::string const &, policy_feature_t);
+   bool operator==(policy_map_key_t const & other) const;
+   bool operator!=(policy_map_key_t const & other) const;
+   bool operator<(policy_map_key_t const & other) const;
 
    std::string const & name() const;
    void name_is(std::string const &);
@@ -102,6 +105,8 @@ class EOS_SDK_PUBLIC policy_map_action_t {
     */
    explicit policy_map_action_t(policy_action_type_t);
    virtual ~policy_map_action_t();
+   bool operator==(policy_map_action_t const & other) const;
+   bool operator!=(policy_map_action_t const & other) const;
 
    /// The action type represented by this object.
    policy_action_type_t action_type() const;
@@ -194,15 +199,14 @@ class EOS_SDK_PUBLIC policy_map_handler : public base_handler<policy_map_mgr,
  public:
    /// Constructs a policy map handler for the supplied policy hardware feature.
    explicit policy_map_handler(policy_map_mgr *);
-   virtual ~policy_map_handler();
 
    /**
     * Registers to receive updates on changes to this policy feature.
     *
-    * @param feature The policy feature to receive notifications for
+    * @param key The policy feature to receive notifications for
     * @param watch Receives notifications if and only if true.
     */
-   void watch_policy_feature(policy_feature_t feature, bool watch);
+   void watch_policy_feature(policy_map_key_t const & key, bool interest);
 
    /**
     * Callback fired upon successful policy map application.
