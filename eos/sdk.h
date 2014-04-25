@@ -73,6 +73,8 @@ class EOS_SDK_PUBLIC sdk {
     ip_route_mgr * get_ip_route_mgr();
     mac_table_mgr * get_mac_table_mgr();
     mlag_mgr * get_mlag_mgr();
+    // TODO: move back to private (BUG86400)
+    mount_mgr * get_mount_mgr();
     mpls_route_mgr * get_mpls_route_mgr();
     neighbor_table_mgr * get_neighbor_table_mgr();
     nexthop_group_mgr * get_nexthop_group_mgr();
@@ -82,7 +84,6 @@ class EOS_SDK_PUBLIC sdk {
  private:
     friend class event_loop;
     void init_mount_mgr();
-    mount_mgr * get_mount_mgr();
 
     EOS_SDK_DISALLOW_COPY_CTOR(sdk);
     acl_mgr * acl_mgr_;
