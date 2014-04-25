@@ -2,6 +2,7 @@
 // Arista Networks, Inc. Confidential and Proprietary.
 
 #include "eos/acl.h"
+#include "eos/class_map.h"
 #include "eos/decap_group.h"
 #include "eos/directflow.h"
 #include "eos/eth_intf.h"
@@ -67,6 +68,8 @@ inline iter_base<T, Impl>::operator bool() const {
 template class iter_base<acl_key_t, acl_iter_impl>;
 template class iter_base<acl_rule_eth_entry_t, acl_rule_eth_iter_impl>;
 template class iter_base<acl_rule_ip_entry_t, acl_rule_ip_iter_impl>;
+template class iter_base<policy_map_key_t, class_map_iter_impl>;
+template class iter_base<class_map_rule_entry_t, class_map_rule_iter_impl>;
 template class iter_base<intf_id_t, intf_iter_impl>;
 template class iter_base<intf_id_t, eth_intf_iter_impl>;
 template class iter_base<intf_id_t, eth_phy_intf_iter_impl>;
@@ -77,8 +80,7 @@ template class iter_base<nexthop_group_t, nexthop_group_iter_impl>;
 template class iter_base<flow_entry_t, flow_entry_iter_impl>;
 template class iter_base<mpls_route_t, mpls_route_iter_impl>;
 template class iter_base<mpls_route_via_t, mpls_route_via_iter_impl>;
-template class iter_base<policy_map_t, policy_map_iter_impl>;
-template class iter_base<std::pair<uint32_t, policy_map_rule_t>,
-                         policy_map_rule_iter_impl>;
+template class iter_base<policy_map_key_t, policy_map_iter_impl>;
+template class iter_base<policy_map_rule_entry_t, policy_map_rule_iter_impl>;
 
 }
