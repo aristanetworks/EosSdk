@@ -8,6 +8,9 @@
 #include <unordered_set>
 
 #include <eos/acl.h>
+#include <eos/base.h>
+#include <eos/base_handler.h>
+#include <eos/base_mgr.h>
 #include <eos/intf.h>
 #include <eos/ip.h>
 #include <eos/iterator.h>
