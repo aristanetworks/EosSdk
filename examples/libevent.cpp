@@ -9,8 +9,8 @@
 
 void
 libevent_loop::init() {
-   loop_.wait_for_initialized();
-   loop_.external_loop_is(this);
+   loop_->wait_for_initialized();
+   loop_->external_loop_is(this);
 }
 
 static void cb_read(evutil_socket_t fd, short /*what*/, void *arg) {

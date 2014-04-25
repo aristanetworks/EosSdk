@@ -57,7 +57,6 @@ class EOS_SDK_PUBLIC event_loop_handler {
    virtual void timeout_time_is(struct timeval deadline) = 0;
 };
 
-class sdk;
 class mount_mgr;
 
 /**
@@ -70,7 +69,6 @@ class mount_mgr;
  */
 class EOS_SDK_PUBLIC event_loop {
  public:
-   explicit event_loop(sdk &);
    ~event_loop();
 
    /**
@@ -106,7 +104,10 @@ class EOS_SDK_PUBLIC event_loop {
    void external_loop_is(event_loop_handler * loop);
 
  private:
+   friend class sdk;
+   explicit event_loop(mount_mgr *) EOS_SDK_PRIVATE;
    EOS_SDK_DISALLOW_COPY_CTOR(event_loop);
+
    mount_mgr * mount_mgr_;
    event_loop_handler * loop_;
 };
