@@ -230,8 +230,8 @@ class EOS_SDK_PUBLIC policy_map_handler : public base_handler<policy_map_mgr,
  * The policy manager provides access to policy-map management, as
  * well as policy map application to interfaces.
  */
-class EOS_SDK_PUBLIC policy_map_mgr : protected base_mgr<policy_map_handler,
-                                                         policy_map_key_t> {
+class EOS_SDK_PUBLIC policy_map_mgr : public base_mgr<policy_map_handler,
+                                                      policy_map_key_t> {
  public:
    virtual ~policy_map_mgr();
 
@@ -246,9 +246,8 @@ class EOS_SDK_PUBLIC policy_map_mgr : protected base_mgr<policy_map_handler,
     * by these functions to be applied to traffic.
     */
    virtual void policy_map_rule_set(policy_map_key_t const & policy_key,
-                                    uint32_t,
-                                    policy_map_key_t const & class_key,
-                                    std::set<policy_map_action_t>) = 0;
+                                    uint32_t seq,
+                                    policy_map_rule_t const & rule) = 0;
 
    /**
     * Removes the numbered rule from the policy map identified by the key.
