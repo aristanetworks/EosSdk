@@ -12,7 +12,7 @@
 #include "eos/iterator.h"
 #include "eos/mpls_route.h"
 #include "eos/nexthop_group.h"
-#include "eos/policy.h"
+#include "eos/policy_map.h"
 
 namespace eos {
 
