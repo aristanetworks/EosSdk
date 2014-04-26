@@ -18,6 +18,12 @@ policy_map_handler::policy_map_handler(policy_map_mgr * mgr) : base_handler(mgr)
 }
 
 void
+policy_map_handler::watch_policy_feature(policy_map_key_t const & key,
+                                         bool interest) {
+   // TODO: no op impl.
+}
+
+void
 policy_map_handler::on_policy_map_sync_fail(policy_map_key_t const & key,
                                             std::string const & message) {
    // TODO: no op impl.
