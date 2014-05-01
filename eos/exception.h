@@ -31,28 +31,28 @@ class EOS_SDK_PUBLIC error {
 
 /**
  * Base exception for all cases where an attempt was made to configure
- * the system with completely invalid parameters -- for example, an
+ * the system with completely invalid arguments -- for example, an
  * out-of-range VLAN ID (>4095).
  */
-class EOS_SDK_PUBLIC invalid_parameter_error : public error {
+class EOS_SDK_PUBLIC invalid_argument_error : public error {
   public:
-   virtual ~invalid_parameter_error() noexcept;
-   explicit invalid_parameter_error(std::string const & parameter_name) noexcept;
-   explicit invalid_parameter_error(std::string const & parameter_name,
+   virtual ~invalid_argument_error() noexcept;
+   explicit invalid_argument_error(std::string const & argument_name) noexcept;
+   explicit invalid_argument_error(std::string const & argument_name,
                                     std::string const & error_details) noexcept;
    virtual void raise() const;  ///< Throws this exception.
-   std::string parameter_name() const noexcept;
+   std::string argument_name() const noexcept;
 
   private:
-   std::string parameter_name_;
+   std::string argument_name_;
 };
 
-/// The given parameter was outside of the legal range of values for
-/// that parameter (e.g., VLAN IDs must be between 1 and 4094).
-class EOS_SDK_PUBLIC invalid_range_error : public invalid_parameter_error {
+/// The given argument was outside of the legal range of values for
+/// that argument (e.g., VLAN IDs must be between 1 and 4094).
+class EOS_SDK_PUBLIC invalid_range_error : public invalid_argument_error {
   public:
    virtual ~invalid_range_error() noexcept;
-   explicit invalid_range_error(std::string const & parameter_name,
+   explicit invalid_range_error(std::string const & argument_name,
                                 uint32_t min_valid, uint32_t max_valid) noexcept;
    virtual void raise() const;  ///< Throws this exception.
    uint32_t min_valid() const noexcept;

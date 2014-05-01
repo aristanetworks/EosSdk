@@ -25,17 +25,17 @@ error::what() const noexcept {
 }
 
 inline
-invalid_parameter_error::~invalid_parameter_error() noexcept {
+invalid_argument_error::~invalid_argument_error() noexcept {
 }
 
 inline void
-invalid_parameter_error::raise() const {
+invalid_argument_error::raise() const {
    throw *this;
 }
 
 inline std::string
-invalid_parameter_error::parameter_name() const noexcept {
-   return parameter_name_;
+invalid_argument_error::argument_name() const noexcept {
+   return argument_name_;
 }
 
 inline
