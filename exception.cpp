@@ -13,18 +13,18 @@ namespace eos {
 // copy of each string used in each translation unit, which contributes
 // to increased binary size.
 
-invalid_parameter_error::invalid_parameter_error(
-      std::string const & parameter_name) noexcept
-   : error(std::string("Invalid parameter '" + parameter_name + "'")),
-   parameter_name_(parameter_name) {
+invalid_argument_error::invalid_argument_error(
+      std::string const & argument_name) noexcept
+   : error(std::string("Invalid argument '" + argument_name + "'")),
+   argument_name_(argument_name) {
 }
 
-invalid_parameter_error::invalid_parameter_error(
-      std::string const & parameter_name,
+invalid_argument_error::invalid_argument_error(
+      std::string const & argument_name,
       std::string const & error_details) noexcept
-   : error(std::string("Invalid parameter '" + parameter_name +
+   : error(std::string("Invalid argument '" + argument_name +
                        "': " + error_details)),
-   parameter_name_(parameter_name) {
+   argument_name_(argument_name) {
 }
 
 static inline std::string
@@ -35,12 +35,12 @@ invalid_range_error_msg(uint32_t min_valid, uint32_t max_valid) {
    return str.str();
 }
 
-invalid_range_error::invalid_range_error(std::string const & parameter_name,
+invalid_range_error::invalid_range_error(std::string const & argument_name,
                                          uint32_t min_valid, uint32_t max_valid)
    noexcept
-   : invalid_parameter_error(parameter_name,
-                             invalid_range_error_msg(min_valid, max_valid)),
-                             min_valid_(min_valid), max_valid_(max_valid) {
+   : invalid_argument_error(argument_name,
+                            invalid_range_error_msg(min_valid, max_valid)),
+                            min_valid_(min_valid), max_valid_(max_valid) {
 }
                              
 no_such_interface_error::no_such_interface_error(intf_id_t intf) noexcept
