@@ -13,6 +13,36 @@ namespace eos {
 // copy of each string used in each translation unit, which contributes
 // to increased binary size.
 
+invalid_parameter_error::invalid_parameter_error(
+      std::string const & parameter_name) noexcept
+   : error(std::string("Invalid parameter '" + parameter_name + "'")),
+   parameter_name_(parameter_name) {
+}
+
+invalid_parameter_error::invalid_parameter_error(
+      std::string const & parameter_name,
+      std::string const & error_details) noexcept
+   : error(std::string("Invalid parameter '" + parameter_name +
+                       "': " + error_details)),
+   parameter_name_(parameter_name) {
+}
+
+static inline std::string
+invalid_range_error_msg(uint32_t min_valid, uint32_t max_valid) {
+   std::stringstream str;
+   str << "value is outside its valid range. min_valid = "
+       << min_valid << ", max_valid = " << max_valid;
+   return str.str();
+}
+
+invalid_range_error::invalid_range_error(std::string const & parameter_name,
+                                         uint32_t min_valid, uint32_t max_valid)
+   noexcept
+   : invalid_parameter_error(parameter_name,
+                             invalid_range_error_msg(min_valid, max_valid)),
+                             min_valid_(min_valid), max_valid_(max_valid) {
+}
+                             
 no_such_interface_error::no_such_interface_error(intf_id_t intf) noexcept
    : error(std::string("No such interface: ") + intf.to_string()),
      intf_(intf) {
