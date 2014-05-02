@@ -58,9 +58,11 @@ typedef uint64_t uint64_be_t;
 #include "eos/ip.h"
 #include "eos/eth.h"
 #include "eos/eth_intf.h"
+#include "eos/decap_group.h"
 #include "eos/directflow.h"
 #include "eos/ip_route.h"
 #include "eos/neighbor_table.h"
+#include "eos/nexthop_group.h"
 #include "eos/mac_table.h"
 #include "eos/mlag.h"
 #include "eos/sdk.h"
@@ -165,9 +167,11 @@ struct stop_iteration {};
 %include "eos/eth_intf.h"
 %include "eos/ip.h"
 %include "eos/timer.h"
+%include "eos/decap_group.h"
 %include "eos/directflow.h"
 %include "eos/ip_route.h"
 %include "eos/neighbor_table.h"
+%include "eos/nexthop_group.h"
 %include "eos/mac_table.h"
 %include "eos/mlag.h"
 %include "eos/sdk.h"
@@ -179,6 +183,8 @@ wrap_iterator(eos::intf_iter_t, eos::intf_iter_impl, eos::intf_id_t);
 wrap_iterator(eos::eth_intf_iter_t, eos::eth_intf_iter_impl, eos::intf_id_t);
 wrap_iterator(eos::ip_route_iter_t, eos::ip_route_iter_impl, eos::ip_route_t);
 wrap_iterator(eos::ip_route_via_iter_t, eos::ip_route_via_iter_impl, eos::ip_route_via_t);
+wrap_iterator(eos::decap_group_iter_t, eos::decap_group_iter_impl, eos::decap_group_t);
+wrap_iterator(eos::nexthop_group_iter_t, eos::nexthop_group_iter_impl, eos::nexthop_group_t);
 
 // Make managers themselves iterable, when it makes sense:
 default_iterator(eos::directflow_mgr, flow_entry_iter);
