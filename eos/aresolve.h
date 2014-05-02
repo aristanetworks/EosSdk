@@ -7,6 +7,9 @@
 #include <list>
 #include <string>
 
+#include <eos/base.h>
+#include <eos/base_handler.h>
+#include <eos/base_mgr.h>
 #include <eos/ip.h>
 
 /**
@@ -77,19 +80,22 @@ class EOS_SDK_PUBLIC aresolve_record_host : public aresolve_record_base {
    friend class aresolve_internal;
 };
 
+class aresolve_mgr;
+
 /**
  * The Aresolve handler.
  *
  * This handler receives callback notifications about objects that are
  * being resolved via watch_* calls.
  */
-class EOS_SDK_PUBLIC aresolve_handler {
+class EOS_SDK_PUBLIC aresolve_handler : public base_handler<aresolve_mgr,
+                                                            aresolve_handler> {
  public:
-   aresolve_handler();
-   virtual ~aresolve_handler();
+   explicit aresolve_handler(aresolve_mgr *);
+   aresolve_mgr * get_aresolve_mgr() const;
 
    /**
-    * Starts watching IPv4 and IPv6 addresses for the provided host name.
+    * Starts or stops watching IPv4 and IPv6 addresses for the provided host name.
     *
     * When host resolution completes or an error occurs,
     * on_aresolve_host() is called.  After host resolution completes
@@ -99,10 +105,7 @@ class EOS_SDK_PUBLIC aresolve_handler {
     * you're interested in and implement the on_aresolve_host() method
     * to deal with the changes in results.
     */
-   void watch_host(std::string const &);
-
-   /// Stops watching address information for the host name (qname) provided.
-   void unwatch_host(std::string const &);
+   void watch_host(std::string const &, bool);
 
    /**
     * Callback called by Aresolve when host resolution completes.
@@ -116,17 +119,19 @@ class EOS_SDK_PUBLIC aresolve_handler {
     * temporary failure.
     */
    virtual void on_aresolve_host(aresolve_record_host const &);
+};
+
+class EOS_SDK_PUBLIC aresolve_mgr : public base_mgr<aresolve_handler, std::string> {
+ public:
+   virtual ~aresolve_mgr();
 
    /**
     * Aresolve implementation configuration settings.
     *
-    * Setting these values is a global change and applies to all
-    * aresolve_handler.
-
     * The short time defines the minimum period between DNS
     * resolutions. (default: 1s)
     */
-   uint32_t aresolve_short_time() const;
+   virtual uint32_t aresolve_short_time() const = 0;
 
    /**
     * Returns the long timer, or seconds between repeated DNS queries.
@@ -134,12 +139,20 @@ class EOS_SDK_PUBLIC aresolve_handler {
     * You will receive at most one notification per DNS query (watched
     * host) every aresolve_long_time() number of sceonds. (default: 300s)
     */
-   uint32_t aresolve_long_time() const;
+   virtual uint32_t aresolve_long_time() const = 0;
 
    /// Sets the Aresolve short timer to the value provided.
-   void aresolve_short_time_is(uint32_t);
+   virtual void aresolve_short_time_is(uint32_t) = 0;
    /// Sets the Aresolve long timer to the value provided.
-   void aresolve_long_time_is(uint32_t);
+   virtual void aresolve_long_time_is(uint32_t) = 0;
+
+ protected:
+   aresolve_mgr() EOS_SDK_PRIVATE;
+   friend class aresolve_handler;
+
+ private:
+   EOS_SDK_DISALLOW_COPY_CTOR(aresolve_mgr);
+
 };
 
 }

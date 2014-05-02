@@ -35,6 +35,10 @@ inline std::list<ip_addr_t> const & aresolve_record_host::addr_v6() const {
    return addr_v6_;
 }
 
+inline aresolve_mgr * aresolve_handler::get_aresolve_mgr() const {
+   return mgr_;
+}
+
 }
 
 #endif // EOS_INLINE_ARESOLVE_H

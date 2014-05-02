@@ -15,40 +15,40 @@ aresolve_record_host::~aresolve_record_host() {
    addr_v6_.clear();
 }
 
-aresolve_handler::aresolve_handler() {
+aresolve_handler::aresolve_handler(aresolve_mgr * mgr) : base_handler(mgr) {
 }
 
-aresolve_handler::~aresolve_handler() {
+void aresolve_handler::watch_host(std::string const &, bool) {
 }
 
-void
-aresolve_handler::on_aresolve_host(aresolve_record_host const & record) {
+void aresolve_handler::on_aresolve_host(aresolve_record_host const & record) {
 }
 
-uint32_t
-aresolve_handler::aresolve_short_time() const {
-   return 1;
-}
+class aresolve_mgr_impl : public aresolve_mgr {
+ public:
+   aresolve_mgr_impl() {
+   }
 
-uint32_t
-aresolve_handler::aresolve_long_time() const {
-   return 300;
-}
+   uint32_t aresolve_short_time() const {
+      return 1;
+   }
 
-void
-aresolve_handler::aresolve_short_time_is(uint32_t time) {
-}
+   uint32_t aresolve_long_time() const {
+      return 300;
+   }
 
-void
-aresolve_handler::aresolve_long_time_is(uint32_t time) {
-}
+   void aresolve_short_time_is(uint32_t time) {
+   }
 
-void
-aresolve_handler::watch_host(std::string const & qname) {
-}
+   void aresolve_long_time_is(uint32_t time) {
+   }
 
-void
-aresolve_handler::unwatch_host(std::string const & qname) {
+   void on_aresolve_host(aresolve_record_host const &) {
+   }
+
+};
+
+aresolve_mgr::~aresolve_mgr() {
 }
 
 }
