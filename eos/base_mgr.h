@@ -7,7 +7,6 @@
 #include <eos/base.h>
 
 #include <map>
-#include <set>
 
 namespace eos {
 
@@ -28,87 +27,141 @@ namespace eos {
 template <typename T, typename Key=int> // `int' is an arbitrary default for classes
 class EOS_SDK_PRIVATE base_mgr {        // that don't use key-specific notifications
  protected:
+   base_mgr() : inForeach_(false) {
+   }
+
    virtual ~base_mgr() {
       for (auto it = watchAllHandlers_.begin(); it != watchAllHandlers_.end();
             ++it) {
-         (*it)->unregister_mgr();
+         if (it->second) {
+            // mgr may want to do so specific work in the remove_handler function.
+            // We need to call it there so that handlers that did not unsubscribe
+            // are still correctly cleaned.
+            remove_handler(it->first);
+            it->first->unregister_mgr();
+         }
       }
-      for (auto set = keySpecificHandlers_.begin();
-            set != keySpecificHandlers_.end(); ++set) {
-         for (auto it = set->second.begin(); it != set->second.end(); ++it) {
-            (*it)->unregister_mgr();
+      for (auto map = keySpecificHandlers_.begin();
+            map != keySpecificHandlers_.end(); ++map) {
+         for (auto it = map->second.begin(); it != map->second.end(); ++it) {
+            if (it->second) {
+               // mgr may want to do so specific work in the remove_handler
+               // function. We need to call it there so that handlers that did not
+               // unsubscribe are still correctly cleaned.
+               remove_handler(map->first, it->first);
+               it->first->unregister_mgr();
+            }
          }
       }
    }
 
-   void add_handler(T *handler) {
+   virtual void add_handler(T *handler) {
       // no specific ordering
-      watchAllHandlers_.insert(handler);
+      watchAllHandlers_.insert(std::make_pair(handler, true));
 
       // The handler is now registered in the "watchAll" set. The key-specific
       // registration needs to be cleaned to avoid calling the handler twice.
       for (auto it = keySpecificHandlers_.begin(); it != keySpecificHandlers_.end();
             ++it) {
-         it->second.erase(handler);
-         if (it->second.empty()) {
-            keySpecificHandlers_.erase(it);
+         auto element = it->second.find(handler);
+         if (element != it->second.end()) {
+            element->second = false;
          }
       }
    }
 
    // We don't allow a handler to be registered both as generic and key-specific.
    // We always favor generic over key-specific.
-   void add_handler(Key key, T *handler) {
+   virtual void add_handler(Key key, T *handler) {
       if (!watchAllHandlers_.count(handler)) {
-         keySpecificHandlers_[key].insert(handler);
+         keySpecificHandlers_[key].insert(std::make_pair(handler, true));
       }
    }
 
-   void remove_handler(T *handler) {
-      watchAllHandlers_.erase(handler);
+   virtual void remove_handler(T *handler) {
+      auto element = watchAllHandlers_.find(handler);
+      if (element != watchAllHandlers_.end()) {
+         element->second = false;
+      }
    }
 
-   void remove_handler(Key key, T *handler) {
+   virtual void remove_handler(Key key, T *handler) {
       auto entry = keySpecificHandlers_.find(key);
       if (entry != keySpecificHandlers_.end()) {
-         entry->second.erase(handler);
-         if (entry->second.empty()) {
-            keySpecificHandlers_.erase(entry);
+         auto element = entry->second.find(handler);
+         if (element != entry->second.end()) {
+            element->second = false;
          }
       }
    }
 
    // Run the function f for each registered handler, with no specific ordering
    template <typename Func> void handler_foreach(Func f) {
-      for (auto i = watchAllHandlers_.begin(); i != watchAllHandlers_.end(); ++i) {
-         f(*i);
+      bool wasInForeach = inForeach_;
+      inForeach_ = true;
+
+      auto currentIt = watchAllHandlers_.begin();
+      for (auto it = currentIt; it != watchAllHandlers_.end();) {
+         currentIt = it++;
+         if (currentIt->second) {
+            f(currentIt->first);
+         } else if (!wasInForeach) {
+            // If we are not in a nested foreach, we can clean up the lazy work left
+            // to us
+            watchAllHandlers_.erase(currentIt);
+         }
       }
+
+      inForeach_ = wasInForeach;
    }
 
    // Run the function f for each registered handler on the given key, with no
    // specific ordering
    template <typename Func> void handler_foreach(Key key, Func f) {
-      for (auto i = watchAllHandlers_.begin(); i != watchAllHandlers_.end(); ++i) {
-         f(*i);
+      bool wasInForeach = inForeach_;
+      inForeach_ = true;
+
+      auto currentIt = watchAllHandlers_.begin();
+      for (auto it = currentIt; it != watchAllHandlers_.end();) {
+         currentIt = it++;
+         if (currentIt->second) {
+            f(currentIt->first);
+         } else if (!wasInForeach) {
+            // If we are not in a nested foreach, we can clean up the lazy work left
+            // to us
+            watchAllHandlers_.erase(currentIt);
+         }
       }
 
       // Since we don't allow a handler to be both key-specific and generic, we
       // don't have to check if F was already executed for a given handler.
       auto entry = keySpecificHandlers_.find(key);
       if (entry != keySpecificHandlers_.end()) {
-         for (auto i = entry->second.begin(); i != entry->second.end(); ++i) {
-            if (!watchAllHandlers_.count(*i)) {
-               f(*i);
+         auto currentIt= entry->second.begin();
+         for (auto it = currentIt; it != entry->second.end();) {
+            currentIt = it++;
+            if (currentIt->second) {
+               f(currentIt->first);
+            } else if (!wasInForeach) {
+               // If we are not in a nested foreach, we can clean up the lazy work
+               // left to us
+               entry->second.erase(currentIt);
             }
          }
+         if (entry->second.empty()) {
+            keySpecificHandlers_.erase(entry);
+         }
       }
+
+      inForeach_ = wasInForeach;
    }
 
  private:
    template <typename U, typename V> friend class base_handler;
 
-   std::set<T *> watchAllHandlers_;
-   std::map<Key, std::set<T *> > keySpecificHandlers_;
+   bool inForeach_;
+   std::map<T *, bool> watchAllHandlers_;
+   std::map<Key, std::map<T *, bool> > keySpecificHandlers_;
 };
 
 }

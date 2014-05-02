@@ -24,6 +24,13 @@ inline agent_mgr * sdk::get_agent_mgr() {
    return agent_mgr_;
 }
 
+inline aresolve_mgr * sdk::get_aresolve_mgr() {
+   if (!aresolve_mgr_) {
+      init_aresolve_mgr();
+   }
+   return aresolve_mgr_;
+}
+
 inline class_map_mgr * sdk::get_class_map_mgr() {
    if (!class_map_mgr_) {
       init_class_map_mgr();
