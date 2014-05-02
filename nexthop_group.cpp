@@ -6,7 +6,12 @@
 namespace eos {
 
 void
-nexthop_group_t::destination_ip_is(uint8_t i, ip_addr_t const & addr) {
+nexthop_group_t::destination_ip_set(uint8_t i, ip_addr_t const & addr) {
+   // TODO: no-op impl.
+}
+
+void
+nexthop_group_t::destination_ip_del(uint8_t i) {
    // TODO: no-op impl.
 }
 
