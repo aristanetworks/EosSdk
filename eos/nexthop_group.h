@@ -4,7 +4,7 @@
 #ifndef EOS_NEXTHOP_GROUP_H
 #define EOS_NEXTHOP_GROUP_H
 
-#include <forward_list>
+#include <map>
 
 #include <eos/intf.h>
 #include <eos/ip.h>
@@ -49,7 +49,8 @@ class EOS_SDK_PUBLIC nexthop_group_t {
 
    /**
     * Sets the source IP address to use for frames sent on this group.
-    * source_intf() will be cleared after the source IP is set.
+    * source_intf() will be cleared after the source IP is set. This
+    * must be an IPv4 address.
     */
    void source_ip_is(ip_addr_t const &);
    /// The source IP for frames sent on this group.
@@ -66,25 +67,18 @@ class EOS_SDK_PUBLIC nexthop_group_t {
    /**
     * Sets an entry in the nexthop group's destination IP address array.
     *
-    * Use in conjunction with size_is() to set the length of the list
-    * to program upon policy_map_commit(). Use duplicate addresses in
-    * different sequence numbers to perform unequal cost multipath.
-    * Setting a value at an index beyond size() is undefined.
+    * Use duplicate addresses in different sequence numbers to perform
+    * unequal cost multipath.
     *
     * @param uint8_t Index into the destination IP array.
-    * @param ip_addr_t The IP address to set at the index.
+    * @param ip_addr_t The IP address to set at the index. This must
+    * be an IPv4 address.
     */
    void destination_ip_is(uint8_t, ip_addr_t const &);
    /// Returns a reference to the current destination address list.
-   std::forward_list<ip_addr_t> const & destination_address() const;
+   std::map<uint8_t, ip_addr_t> const & destination_address() const;
 
-   /**
-    * Sets the size of the destination IP address list for this group.
-    *
-    * @param size The new length or size of the list
-    */
-   void size_is(uint16_t size);
-   /// The number of destination IP addresses in this nexthop group.
+   /// Returns the number of destination IP addresses in this nexthop group.
    uint16_t size() const;
 
    /// Sets the config persistence for this nexthop group (defaults to false).
@@ -95,11 +89,10 @@ class EOS_SDK_PUBLIC nexthop_group_t {
  private:
    std::string name_;
    uint8_t ttl_;
-   uint16_t size_;
    ip_addr_t source_ip_;
    intf_id_t source_intf_;
    nexthop_group_encap_t encap_type_;
-   std::forward_list<ip_addr_t> destination_ip_;
+   std::map<uint8_t, ip_addr_t> destination_ip_;
    bool persistent_;
 };
 
