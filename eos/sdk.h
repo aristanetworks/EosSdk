@@ -10,6 +10,7 @@
 namespace eos {
 
 class acl_mgr;
+class aresolve_mgr;
 class class_map_mgr;
 class decap_group_mgr;
 class directflow_mgr;
@@ -44,6 +45,7 @@ class EOS_SDK_PUBLIC sdk {
 
     void init_acl_mgr();
     void init_agent_mgr();
+    void init_aresolve_mgr();
     void init_class_map_mgr();
     void init_decap_group_mgr();
     void init_directflow_mgr();
@@ -65,6 +67,7 @@ class EOS_SDK_PUBLIC sdk {
 
     acl_mgr * get_acl_mgr();
     agent_mgr * get_agent_mgr();
+    aresolve_mgr * get_aresolve_mgr();
     class_map_mgr * get_class_map_mgr();
     decap_group_mgr * get_decap_group_mgr();
     directflow_mgr * get_directflow_mgr();
@@ -90,6 +93,7 @@ class EOS_SDK_PUBLIC sdk {
     EOS_SDK_DISALLOW_COPY_CTOR(sdk);
     acl_mgr * acl_mgr_;
     agent_mgr * agent_mgr_;
+    aresolve_mgr * aresolve_mgr_;
     class_map_mgr * class_map_mgr_;
     decap_group_mgr * decap_group_mgr_;
     directflow_mgr * directflow_mgr_;

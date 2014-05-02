@@ -25,6 +25,10 @@ void sdk::init_agent_mgr() {
    }
 }
 
+void sdk::init_aresolve_mgr() {
+   // TODO: No op impl.
+}
+
 void sdk::init_class_map_mgr() {
    // TODO: No op impl.
 }
