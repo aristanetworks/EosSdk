@@ -86,6 +86,7 @@ struct stop_iteration {};
    try {
       $action
    }
+   // translate_exception(invalid_argument_error)
    translate_exception(invalid_range_error)
    translate_exception(no_such_interface_error)
    translate_exception(not_switchport_eligible_error)

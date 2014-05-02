@@ -7,7 +7,7 @@
 namespace eos {
 
 inline nexthop_group_t::nexthop_group_t() :
-      name_(""), ttl_(64), size_(256),
+      name_(""), ttl_(64),
       source_ip_(), source_intf_(),
       encap_type_(NEXTHOP_GROUP_TYPE_NULL),
       destination_ip_(),
@@ -16,7 +16,7 @@ inline nexthop_group_t::nexthop_group_t() :
 
 inline nexthop_group_t::nexthop_group_t(std::string const & name,
                                         nexthop_group_encap_t type) :
-      name_(name), ttl_(64), size_(256),
+      name_(name), ttl_(64),
       source_ip_(), source_intf_(),
       encap_type_(type),
       destination_ip_(),
@@ -44,8 +44,8 @@ nexthop_group_t::ttl() const {
 }
 
 inline void
-nexthop_group_t::source_ip_is(ip_addr_t const & srcIp) {
-   source_ip_ = srcIp;
+nexthop_group_t::source_ip_is(ip_addr_t const & src_ip) {
+   source_ip_ = src_ip;
 }
 
 inline ip_addr_t const & 
@@ -53,19 +53,32 @@ nexthop_group_t::source_ip() const {
    return source_ip_;
 }
 
-inline std::forward_list<ip_addr_t> const &
+inline void
+nexthop_group_t::source_intf_is(intf_id_t const & src_intf) {
+   source_intf_ = src_intf;
+}
+
+inline intf_id_t const
+nexthop_group_t::source_intf() const {
+   return source_intf_;
+}
+
+inline std::map<uint8_t, ip_addr_t> const &
 nexthop_group_t::destination_address() const {
    return destination_ip_;
 }
 
-inline void
-nexthop_group_t::size_is(uint16_t size) {
-   size_ = size;
-}
-
 inline uint16_t
 nexthop_group_t::size() const {
-   return size_;
+   // "size" really means "the index of the last non-zero entry in the
+   // 'destinationIp' array of the
+   // NexthopGroup::NexthopGroupConfigEntry in Ira/Routing.tac".
+   //
+   // We want the *index* of the last element in "destination_ip_",
+   // not the "size" of the data structure, which tells you the number
+   // of entries, to handle the case where "destination_ip_" is
+   // sparse.
+   return destination_ip_.rbegin()->first + 1;
 }
 
 inline void
