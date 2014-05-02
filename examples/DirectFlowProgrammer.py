@@ -90,11 +90,11 @@ class FlowHandlerTrampoline(eossdk.FlowHandler):
    # to be notified of changes to flows, instead of just having
    # the DirectFlowProgrammer also inhering from eossdk.FlowHandler
 
-   def __init__(self, parent):
+   def __init__(self, parent, directFlowMgr):
       self.parent_ = parent
-      eossdk.FlowHandler.__init__(self)
+      eossdk.FlowHandler.__init__(self, directFlowMgr)
       # Register callback for the status of all flows
-      eossdk.FlowHandler.watch_all_flows(self, True)
+      self.watch_all_flows(True)
 
    def on_flow_status(self, name, status):        # pylint: disable-msg=W0221
       self.parent_.on_flow_status(name, status)
@@ -125,8 +125,7 @@ class DirectFlowProgrammer(eossdk.AgentHandler,
 
       # Set up the FlowHandlerTrampoline to be notified of flow
       # status changes
-      self.flowHandlerTrampoline_ = FlowHandlerTrampoline(self)
-      self.watch_all_flows(True)
+      self.flowHandlerTrampoline_ = FlowHandlerTrampoline(self, self.directFlowMgr_)
 
       # Now start accepting input on stdin
       self.watch_readable(sys.stdin.fileno(), True)
