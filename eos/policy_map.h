@@ -4,6 +4,7 @@
 #ifndef EOS_POLICY_H
 #define EOS_POLICY_H
 
+#include <map>
 #include <utility>
 #include <unordered_set>
 
@@ -25,6 +26,31 @@
  *
  */
 
+// Provide the hash functor for the policy_map_action_t type.
+// This allows users to use policy_map_action_t's without explicitly
+// supplying the functor to the STL collection template.
+// This specialization must be placed here, prior to instantiation.
+
+namespace eos {
+// Forward declarations used by std::hash specializations below
+class policy_map_action_t;
+class policy_map_key_t;
+}
+
+namespace std {
+
+template <>
+struct EOS_SDK_PUBLIC hash<eos::policy_map_action_t> {
+   size_t operator() (eos::policy_map_action_t const &) const;
+};
+
+template <>
+struct EOS_SDK_PUBLIC hash<eos::policy_map_key_t> {
+   size_t operator() (eos::policy_map_key_t const &) const;
+};
+
+} // end namespace std
+
 namespace eos {
 
 typedef uint32_t policy_map_tag_t;
@@ -45,8 +71,8 @@ enum policy_match_condition_t {
  */
 enum policy_feature_t {
    POLICY_FEATURE_NULL,
-   POLICY_FEATURE_QOS,      ///< Quality of service (not yet supported)
    POLICY_FEATURE_PBR,      ///< Policy based routing (PBR)
+   POLICY_FEATURE_QOS,      ///< Quality of service (not yet supported)
    POLICY_FEATURE_TAP_AGG,  ///< TAP Aggregation steering (not yet supported)
 };
 
@@ -61,37 +87,36 @@ enum policy_action_type_t {
    POLICY_ACTION_NEXTHOP_GROUP,   ///< Forward to named group of nexthops/interfaces
 };
 
-/**
- * The key used to uniquely identify both class and policy maps.
- */
+/** The key used to uniquely identify both class and policy maps. */
 class EOS_SDK_PUBLIC policy_map_key_t {
  public:
    policy_map_key_t();
-   policy_map_key_t(std::string const &, policy_feature_t);
+   policy_map_key_t(std::string const & name, policy_feature_t const & feature);
+
+   std::string name() const;
+   void name_is(std::string const & name);
+
+   policy_feature_t feature() const;
+   void feature_is(policy_feature_t const & feature);
+
    bool operator==(policy_map_key_t const & other) const;
    bool operator!=(policy_map_key_t const & other) const;
    bool operator<(policy_map_key_t const & other) const;
 
-   std::string const & name() const;
-   void name_is(std::string const &);
-
-   policy_feature_t feature() const;
-   void feature_is(policy_feature_t);
  private:
    std::string name_;
    policy_feature_t feature_;
 };
 
+typedef policy_map_key_t class_map_key_t;
+
 /**
  * A single policy map action.
- *
- * Each action defines a single type of action to be performed,
- * presently supporting: "set nexthop", "set nexthop group" and "drop".
- *
- * It is illegal to set both nexthop and nexthop group or drop
- * operations in a single policy map rule.
+ * Each action defines a single type of action to be performed,presently
+ * supporting: "set nexthop", "set nexthop group" and "drop".
+ * It is illegal to set both nexthop and nexthop group or dropoperations in a
+ * single policy map rule.
  */
-
 class EOS_SDK_PUBLIC policy_map_action_t {
  public:
    policy_map_action_t();
@@ -103,68 +128,88 @@ class EOS_SDK_PUBLIC policy_map_action_t {
     * will be considered when the policy is applied. If the action is
     * POLICY_ACTION_DROP, no further attributes require being set.
     */
-   explicit policy_map_action_t(policy_action_type_t);
+   explicit policy_map_action_t(policy_action_type_t action_type);
    virtual ~policy_map_action_t();
-   bool operator==(policy_map_action_t const & other) const;
-   bool operator!=(policy_map_action_t const & other) const;
 
-   /// The action type represented by this object.
    policy_action_type_t action_type() const;
-   /// Changes this policy action's type of action
-   void action_type_is(policy_action_type_t action);
+   void action_type_is(policy_action_type_t action_type);
 
    /**
-    * Sets the nexthop group to be used when the action
+    * Manage the nexthop group to be used when the action is
+    * POLICY_ACTION_NEXTHOP_GROUP
     *
     * If the nexthop group does not yet exist when calling
-    * policy_map_rule_set() on the policy_map_mgr, that action will
+    * policy_map_is() on the policy_map_mgr, that action will
     * complete successfully but FIB entries for the nextop group will
-    * not be programmed until such time as the group is configured.
+    * not be programmed until the group is configured.
     */
-   void nexthop_group_is(std::string const &);
-   std::string const & nexthop_group() const;
+   std::string nexthop_group_name() const;
+   void nexthop_group_name_is(std::string const & nexthop_group_name);
 
-   /// Places an IP address in the set of nexthop IP addresses
-   void nexthop_set(ip_addr_t const &);
+   /// Manage the set of nexthop IP addresses
+   std::unordered_set<ip_addr_t> const & nexthops() const;
+   void nexthops_is(std::unordered_set<ip_addr_t> const & nexthops);
+   void nexthop_set(ip_addr_t const & value);
+   void nexthop_del(ip_addr_t const & value);
 
-   /// Removes an IP address from the set of nexthop IP addresses
-   void nexthop_del(ip_addr_t const &);
-
-   /// Returns the set of nexthop IP addresses
-   std::unordered_set<ip_addr_t> const & nexthop() const;
+   bool operator==(policy_map_action_t const & other) const;
+   bool operator!=(policy_map_action_t const & other) const;
+   bool operator<(policy_map_action_t const & other) const;
 
  private:
-   policy_action_type_t type_;
-   bool drop_;
-   std::string next_hop_group_name_;
-   std::unordered_set<ip_addr_t> next_hops_;
+   policy_action_type_t action_type_;
+   std::string nexthop_group_name_;
+   std::unordered_set<ip_addr_t> nexthops_;
 };
 
-/// An individual policy map rule, describing a class map match and actions
+
+
+/** An individual policy map rule, describing a class map match and actions */
 class EOS_SDK_PUBLIC policy_map_rule_t {
  public:
    policy_map_rule_t();
-   explicit policy_map_rule_t(policy_map_key_t const & class_map_key);
+   explicit policy_map_rule_t(class_map_key_t const & class_map_key);
 
-   policy_map_key_t const & class_map_key() const;
-   void class_map_key_is(policy_map_key_t const &);
+   class_map_key_t class_map_key() const;
+   void class_map_key_is(class_map_key_t const & class_map_key);
 
-   /// The set of actions configured for this particular rule
+   /// Manage the set of actions configured for this particular rule
    std::unordered_set<policy_map_action_t> const & actions() const;
+   void action_set(policy_map_action_t const & value);
+   void action_del(policy_map_action_t const & value);
+   void action_del(policy_action_type_t action_type);
 
-   /// Sets the action for this policy map rule
-   void action_set(policy_map_action_t const &);
-   /// Removes an action from the rule by the action type
-   void action_del(policy_action_type_t const &);
-   /// Removes the provided action from the rule
-   void action_del(policy_map_action_t const &);
+   bool operator==(policy_map_rule_t const & other) const;
+   bool operator!=(policy_map_rule_t const & other) const;
+   bool operator<(policy_map_rule_t const & other) const;
 
  private:
-   policy_map_key_t class_map_key_;
+   class_map_key_t class_map_key_;
    std::unordered_set<policy_map_action_t> actions_;
 };
 
-typedef std::pair<uint32_t, policy_map_rule_t> policy_map_rule_entry_t;
+
+/** A policy map instance */
+class EOS_SDK_PUBLIC policy_map_t {
+ public:
+   policy_map_t();
+   explicit policy_map_t(policy_map_key_t const & key);
+
+   policy_map_key_t key() const;
+   void key_is(policy_map_key_t const & key);
+
+   std::map<uint32_t, policy_map_rule_t> const & rules() const;
+   void rules_is(std::map<uint32_t, policy_map_rule_t> const & rules);
+   void rule_set(uint32_t seq, policy_map_rule_t const & value);
+   void rule_del(uint32_t seq);
+
+   bool operator==(policy_map_t const & other) const;
+   bool operator!=(policy_map_t const & other) const;
+
+ private:
+   policy_map_key_t key_;
+   std::map<uint32_t, policy_map_rule_t> rules_;
+};
 
 class policy_map_iter_impl;
 
@@ -176,16 +221,6 @@ class EOS_SDK_PUBLIC policy_map_iter_t : public iter_base<policy_map_key_t,
    explicit policy_map_iter_t(policy_map_iter_impl * const) EOS_SDK_PRIVATE;
 };
 
-class policy_map_rule_iter_impl;
-
-/// An iterator providing forwards iteration through the rules of a given policy map
-class EOS_SDK_PUBLIC policy_map_rule_iter_t
-   : public iter_base<policy_map_rule_entry_t, policy_map_rule_iter_impl> {
- private:
-   friend class policy_map_rule_iter_impl;
-   explicit policy_map_rule_iter_t(
-         policy_map_rule_iter_impl * const) EOS_SDK_PRIVATE;
-};
 
 // Forward declaration for policy_map_handler
 class policy_map_mgr;
@@ -197,8 +232,11 @@ class policy_map_mgr;
 class EOS_SDK_PUBLIC policy_map_handler : public base_handler<policy_map_mgr,
                                                               policy_map_handler> {
  public:
-   /// Constructs a policy map handler for the supplied policy hardware feature.
+   /// Constructs a policy map handler for the supplied policy hardware feature
    explicit policy_map_handler(policy_map_mgr *);
+
+   /// Returns a pointer to the policy map manager for use in a derived handler
+   policy_map_mgr * get_policy_map_mgr() const;
 
    /**
     * Registers to receive updates on changes to this policy feature.
@@ -206,7 +244,7 @@ class EOS_SDK_PUBLIC policy_map_handler : public base_handler<policy_map_mgr,
     * @param key The policy feature to receive notifications for
     * @param watch Receives notifications if and only if true.
     */
-   void watch_policy_feature(policy_map_key_t const & key, bool interest);
+   void watch_policy_map(policy_map_key_t const & key, bool interest);
 
    /**
     * Callback fired upon successful policy map application.
@@ -228,6 +266,7 @@ class EOS_SDK_PUBLIC policy_map_handler : public base_handler<policy_map_mgr,
    policy_feature_t feature_;
 };
 
+
 /**
  * EOS policy map manager.
  *
@@ -239,50 +278,14 @@ class EOS_SDK_PUBLIC policy_map_mgr : public base_mgr<policy_map_handler,
  public:
    virtual ~policy_map_mgr();
 
-   /**
-    * Sets a policy map rule at a sequence number in a policy map.
-    *
-    * On the policy map identified by the key, at the numbered
-    * sequence number, which cannot be 0, install a rule matching the
-    * class map key and applying the set of actions supplied.
-    * policy_map_commit() must be called after _rule_set() and before
-    * policy_map_apply() is called to apply the policy map configured
-    * by these functions to be applied to traffic.
-    */
-   virtual void policy_map_rule_set(policy_map_key_t const & policy_key,
-                                    uint32_t seq,
-                                    policy_map_rule_t const & rule) = 0;
-
-   /**
-    * Removes the numbered rule from the policy map identified by the key.
-    *
-    * To actually remove the rule from the policy map in the switch
-    * forwarding hardware, you must call policy_map_commit().
-    */
-   virtual void policy_map_rule_del(policy_map_key_t const &, uint32_t) = 0;
-
-   /// Deletes the policy map identified by the argument.
-   virtual void policy_map_del(policy_map_key_t const &) = 0;
+   virtual policy_map_t policy_map(policy_map_key_t const & key) const = 0;
+   virtual void policy_map_is(policy_map_t const & policy_map) = 0;
+   virtual void policy_map_del(policy_map_key_t const & key) = 0;
 
    /**
     * Provides iteration over the configured policy maps for a feature.
     */
    virtual policy_map_iter_t policy_map_iter(policy_feature_t) const = 0;
-
-   /**
-    * Provides iteration over the rules of the given policy map.
-    */
-   virtual policy_map_rule_iter_t policy_map_rule_iter(policy_map_key_t const &)
-      const = 0;
-
-   /**
-    * Commits all outstanding policy map changes.
-    *
-    * Upon completion, the handler for the appropriate hardware tables
-    * updated will have its on_policy_map_sync_complete or
-    * on_policy_map_sync_failed functions called.
-    */
-   virtual void policy_map_commit() = 0;
 
    /// Applies or unapplies the policy map to an interface in a direction
    virtual void policy_map_apply(policy_map_key_t const &, intf_id_t,

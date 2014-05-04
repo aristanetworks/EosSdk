@@ -11,6 +11,23 @@
 
 #include <stddef.h>
 
+
+namespace eos {
+// Forward declarations used by std::hash specializations below
+class ip_addr_t;
+
+}
+
+// Declaration of hash specialization for ip_addr_t
+namespace std {
+
+template <>
+struct EOS_SDK_PUBLIC hash<eos::ip_addr_t> {
+   size_t operator() (eos::ip_addr_t const &) const;
+};
+
+}
+
 namespace eos {
 
 /// The address family of an IP address.
