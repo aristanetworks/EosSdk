@@ -197,6 +197,7 @@ class EOS_SDK_PUBLIC acl_key_t {
    acl_type_t acl_type() const;
 
    bool operator() (acl_key_t const &, acl_key_t const &) const;
+   bool operator==(acl_key_t const &) const;
 
   private:
    std::string acl_name_;

@@ -76,4 +76,10 @@ internal_vlan_error::internal_vlan_error(vlan_id_t vlan) noexcept
    : configuration_error(internal_vlan_error_msg(vlan)), vlan_(vlan) {
 }
 
+unsupported_policy_feature_error::unsupported_policy_feature_error(policy_feature_t
+                                                                   policy_feature)
+   noexcept : unsupported_error(std::string("Unsupported policy feature")),
+   policy_feature_(policy_feature) {
+}
+
 }
