@@ -122,6 +122,33 @@ internal_vlan_error::vlan() const noexcept {
    return vlan_;
 }
 
+inline
+unsupported_error::unsupported_error(std::string const & msg) noexcept : error(msg) {
+}
+
+inline
+unsupported_error::~unsupported_error() noexcept {
+}
+
+inline void
+unsupported_error::raise() const {
+   throw *this;
+}
+
+inline
+unsupported_policy_feature_error::~unsupported_policy_feature_error() noexcept {
+}
+
+inline void
+unsupported_policy_feature_error::raise() const {
+   throw *this;
+}
+
+inline policy_feature_t
+unsupported_policy_feature_error::policy_feature() const noexcept {
+   return policy_feature_;
+}
+
 }
 
 #endif // EOS_INLINE_EXCEPTION_H

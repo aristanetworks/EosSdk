@@ -5,6 +5,14 @@
 
 #include "eos/ip.h"
 
+namespace std {
+
+size_t hash<eos::ip_addr_t>::operator() (eos::ip_addr_t const & addr) const {
+   return 0;  // TODO: no op impl.
+}
+
+}  // end namespace std
+
 namespace eos {
 
 // Take an address family and an array of 4 (v4) or 16 (v6) uint8_t's.

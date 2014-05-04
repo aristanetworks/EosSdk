@@ -9,6 +9,7 @@
 #include <eos/base.h>
 #include <eos/eth.h>
 #include <eos/intf.h>
+#include <eos/policy_map.h>
 
 #if __cplusplus <= 199711L
 #define noexcept throw()
@@ -126,6 +127,29 @@ class EOS_SDK_PUBLIC internal_vlan_error : public configuration_error {
 
  private:
    vlan_id_t vlan_;
+};
+
+/// Base class for "unsupported" errors
+class EOS_SDK_PUBLIC unsupported_error : public error {
+ public:
+   virtual ~unsupported_error() noexcept;
+   explicit unsupported_error(std::string const & msg) noexcept;
+   virtual void raise() const;  ///< Throws this exception.
+
+ private:
+   std::string msg_;
+};
+
+/// The policy feature requested is unavailable in this SDK release
+class EOS_SDK_PUBLIC unsupported_policy_feature_error : public unsupported_error {
+ public:
+   virtual ~unsupported_policy_feature_error() noexcept;
+   explicit unsupported_policy_feature_error(policy_feature_t) noexcept;
+   virtual void raise() const;  ///< Throws this exception.
+   policy_feature_t policy_feature() const noexcept;
+
+ private:
+   policy_feature_t policy_feature_;
 };
 
 }

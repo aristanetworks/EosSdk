@@ -65,6 +65,7 @@ typedef uint64_t uint64_be_t;
 #include "eos/nexthop_group.h"
 #include "eos/mac_table.h"
 #include "eos/mlag.h"
+#include "eos/policy_map.h"
 #include "eos/sdk.h"
 #include "eos/system.h"
 
@@ -174,6 +175,7 @@ struct stop_iteration {};
 %include "eos/nexthop_group.h"
 %include "eos/mac_table.h"
 %include "eos/mlag.h"
+%include "eos/policy_map.h"
 %include "eos/sdk.h"
 %include "eos/system.h"
 
@@ -185,6 +187,7 @@ wrap_iterator(eos::ip_route_iter_t, eos::ip_route_iter_impl, eos::ip_route_t);
 wrap_iterator(eos::ip_route_via_iter_t, eos::ip_route_via_iter_impl, eos::ip_route_via_t);
 wrap_iterator(eos::decap_group_iter_t, eos::decap_group_iter_impl, eos::decap_group_t);
 wrap_iterator(eos::nexthop_group_iter_t, eos::nexthop_group_iter_impl, eos::nexthop_group_t);
+wrap_iterator(eos::policy_map_iter_t, eos::policy_map_iter_impl, eos::policy_map_key_t);
 
 // Make managers themselves iterable, when it makes sense:
 default_iterator(eos::directflow_mgr, flow_entry_iter);

@@ -15,6 +15,12 @@ acl_key_t::operator() (acl_key_t const & lhs, acl_key_t const & rhs) const {
    return lhs.acl_name_ < rhs.acl_name_;
 }
 
+inline bool
+acl_key_t::operator==(acl_key_t const & other) const {
+   return acl_name_ == other.acl_name_ &&
+      acl_type_ == other.acl_type_;
+}
+
 inline std::string const
 acl_key_t::acl_name() const {
    return acl_name_;
@@ -117,8 +123,8 @@ inline acl_rule_base_t::acl_rule_base_t() :
 
 // Constructors for concrete rule types passed to acl_add_rule() variants
 
-inline acl_rule_ip_t::acl_rule_ip_t() : vlan(), vlan_mask(),
-                                        inner_vlan(), inner_vlan_mask(),
+inline acl_rule_ip_t::acl_rule_ip_t() : vlan(), vlan_mask(0xFFF),
+                                        inner_vlan(), inner_vlan_mask(0xFFF),
                                         ip_protocol(),
                                         source_addr(), destination_addr(),
                                         source_port(), destination_port(),
@@ -129,8 +135,8 @@ inline acl_rule_ip_t::acl_rule_ip_t() : vlan(), vlan_mask(),
                                         match_fragments(), match_ip_priority() {
 }
 
-inline acl_rule_eth_t::acl_rule_eth_t() : vlan(), vlan_mask(),
-                                          inner_vlan(), inner_vlan_mask(),
+inline acl_rule_eth_t::acl_rule_eth_t() : vlan(), vlan_mask(0xFFF),
+                                          inner_vlan(), inner_vlan_mask(0xFFF),
                                           source_addr(), source_mask(),
                                           destination_addr(), destination_mask() {
 }
