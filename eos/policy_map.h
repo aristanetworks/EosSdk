@@ -147,6 +147,7 @@ class EOS_SDK_PUBLIC policy_map_action_t {
    void nexthop_group_name_is(std::string const & nexthop_group_name);
 
    /// Manage the set of nexthop IP addresses
+   std::unordered_set<ip_addr_t> & nexthops();
    std::unordered_set<ip_addr_t> const & nexthops() const;
    void nexthops_is(std::unordered_set<ip_addr_t> const & nexthops);
    void nexthop_set(ip_addr_t const & value);
@@ -174,6 +175,7 @@ class EOS_SDK_PUBLIC policy_map_rule_t {
    void class_map_key_is(class_map_key_t const & class_map_key);
 
    /// Manage the set of actions configured for this particular rule
+   std::unordered_set<policy_map_action_t> & actions();
    std::unordered_set<policy_map_action_t> const & actions() const;
    void action_set(policy_map_action_t const & value);
    void action_del(policy_map_action_t const & value);
@@ -198,6 +200,7 @@ class EOS_SDK_PUBLIC policy_map_t {
    policy_map_key_t key() const;
    void key_is(policy_map_key_t const & key);
 
+   std::map<uint32_t, policy_map_rule_t> & rules();
    std::map<uint32_t, policy_map_rule_t> const & rules() const;
    void rules_is(std::map<uint32_t, policy_map_rule_t> const & rules);
    void rule_set(uint32_t seq, policy_map_rule_t const & value);

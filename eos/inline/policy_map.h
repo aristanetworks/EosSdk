@@ -95,10 +95,16 @@ policy_map_action_t::nexthop_group_name_is(std::string const & nexthop_group_nam
    nexthop_group_name_ = nexthop_group_name;
 }
 
+inline std::unordered_set<ip_addr_t> &
+policy_map_action_t::nexthops() {
+   return nexthops_;
+}
+
 inline std::unordered_set<ip_addr_t> const &
 policy_map_action_t::nexthops() const {
    return nexthops_;
 }
+
 
 inline void
 policy_map_action_t::nexthops_is(std::unordered_set<ip_addr_t> const & nexthops) {
@@ -148,6 +154,11 @@ policy_map_rule_t::class_map_key() const {
 inline void
 policy_map_rule_t::class_map_key_is(class_map_key_t const & class_map_key) {
    class_map_key_ = class_map_key;
+}
+
+inline std::unordered_set<policy_map_action_t> &
+policy_map_rule_t::actions() {
+   return actions_;
 }
 
 inline std::unordered_set<policy_map_action_t> const &
@@ -209,6 +220,11 @@ policy_map_t::key() const {
 inline void
 policy_map_t::key_is(policy_map_key_t const & key) {
    key_ = key;
+}
+
+inline std::map<uint32_t, policy_map_rule_t> &
+policy_map_t::rules() {
+   return rules_;
 }
 
 inline std::map<uint32_t, policy_map_rule_t> const &

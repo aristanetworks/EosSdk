@@ -61,6 +61,7 @@ class EOS_SDK_PUBLIC class_map_t {
    void key_is(class_map_key_t const & key);
 
    /// Returns the map of sequence number to class map rule for this class map
+   std::map<uint32_t, class_map_rule_t> & rules();
    std::map<uint32_t, class_map_rule_t> const & rules() const;
 
    /// Sets the sequence of class map rules

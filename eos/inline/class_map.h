@@ -48,6 +48,11 @@ class_map_t::key_is(class_map_key_t const & key) {
    key_ = key;
 }
 
+inline std::map<uint32_t, class_map_rule_t> &
+class_map_t::rules() {
+   return rules_;
+}
+
 inline std::map<uint32_t, class_map_rule_t> const &
 class_map_t::rules() const {
    return rules_;
