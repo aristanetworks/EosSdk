@@ -168,6 +168,9 @@ ip_addr_mask_t::mask_length() const {
 
 inline uint32_be_t
 ip_addr_mask_t::mask() const {
+   if (mask_length_ == 0) {
+      return 0;
+   }
    uint32_be_t r = (0xFFFFFFFF << (32 - mask_length_)) & 0xFFFFFFFF;
    return r;
 }
