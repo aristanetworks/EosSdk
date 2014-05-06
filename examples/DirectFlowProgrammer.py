@@ -103,6 +103,7 @@ class DirectFlowProgrammer(eossdk.AgentHandler,
                            eossdk.FdHandler):
 
    def __init__(self, agentMgr, directFlowMgr):
+      self.agentMgr_ = agentMgr
       self.directFlowMgr_ = directFlowMgr
       self.flowHandlerTrampoline_ = None
       eossdk.AgentHandler.__init__(self, agentMgr)
@@ -135,7 +136,9 @@ class DirectFlowProgrammer(eossdk.AgentHandler,
       # NAME (add|delete) IPADDR INTERFACE
       # and adds/deletes a flow that matches on that destination ip address
       # and outputs that flow on the given interface
-      buf = os.read(fd, 4096)
+      buf = os.read(fd, 4096).strip()
+      if not buf:
+         self.agentMgr_.exit()
       for line in buf.split("\n"):
          if not line:
             continue
