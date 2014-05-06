@@ -150,6 +150,13 @@ inline system_mgr * sdk::get_system_mgr() {
    return system_mgr_;
 }
 
+inline timeout_mgr * sdk::get_timeout_mgr() {
+   if (!timeout_mgr_) {
+      init_timeout_mgr();
+   }
+   return timeout_mgr_;
+}
+
 }
 
 #endif // EOS_INLINE_SDK_H

@@ -17,9 +17,9 @@ LISTEN_BACKLOG = 5
 MAX_BUF_SIZE = 1024
 
 class EchoBot(eossdk.TimeoutHandler, eossdk.FdHandler):
-   def __init__(self):
+   def __init__(self, timeoutMgr):
       print "initializing..."
-      eossdk.TimeoutHandler.__init__(self)
+      eossdk.TimeoutHandler.__init__(self, timeoutMgr)
       eossdk.FdHandler.__init__(self)  # pylint: disable-msg=W0233
       self.server = self._createServer()
       self.watch_readable(self.server.fileno(), True)
@@ -42,11 +42,11 @@ class EchoBot(eossdk.TimeoutHandler, eossdk.FdHandler):
       else:
          assert False, "Unknown fd %d is readable" % fd
 
-   def on_timeut(self):
+   def on_timeout(self):
       print "Timer called"
       assert self.connectedSocket
       self._endConnection()
-         
+
    def _acceptConnection(self):
       print "Accepting connection"
       assert not self.connectedSocket
@@ -76,6 +76,6 @@ class EchoBot(eossdk.TimeoutHandler, eossdk.FdHandler):
       s.listen(LISTEN_BACKLOG)
       return s
 
-echoBot = EchoBot()
 sdk = eossdk.Sdk()
+echoBot = EchoBot(sdk.get_timeout_mgr())
 sdk.main_loop("EchoBotPy", sys.argv)

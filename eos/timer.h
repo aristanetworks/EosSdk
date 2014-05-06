@@ -5,6 +5,7 @@
 #define EOS_TIMER_H
 
 #include <eos/base.h>
+#include <eos/base_handler.h>
 
 /**
  * Periodic timeout support.
@@ -30,6 +31,9 @@ seconds_t now() EOS_SDK_PUBLIC;
 /// 'never' represents a future time that now() can never reach.
 static const seconds_t never = 0;
 
+class timer_internal;
+class timeout_mgr;
+
 /**
  * The 'timeout_handler' class manages a single instance of a timer.
  *
@@ -42,9 +46,10 @@ static const seconds_t never = 0;
  * the configured timeout, though we guarantee this will never be
  * called *before* the configured timeout
  */
-class EOS_SDK_PUBLIC timeout_handler {
+class EOS_SDK_PUBLIC timeout_handler : public base_handler<timeout_mgr,
+                                                           timeout_handler> {
  public:
-   timeout_handler();
+   explicit timeout_handler(timeout_mgr * mgr);
    virtual ~timeout_handler();
 
    /**
@@ -56,6 +61,10 @@ class EOS_SDK_PUBLIC timeout_handler {
    void timeout_time_is(seconds_t);
    /// Returns the next timeout value.
    virtual void on_timeout() = 0;
+
+ private:
+   friend class timeout_mgr;
+   timer_internal * timer_;
 };
 
 }
