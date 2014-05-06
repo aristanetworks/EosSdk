@@ -97,4 +97,8 @@ void sdk::init_system_mgr() {
    // TODO: No op impl.
 }
 
+void sdk::init_timeout_mgr() {
+   // TODO: No op impl.
+}
+
 }

@@ -34,7 +34,7 @@
 class echo_bot : public eos::timeout_handler,
                  public eos::fd_handler {
  public:
-   echo_bot() {
+   explicit echo_bot(eos::sdk & sdk) : eos::timeout_handler(sdk.get_timeout_mgr()) {
       printf( "initializing...\n" );
       snprintf( echo_msg_, sizeof(echo_msg_), "You said: " );
       echo_msg_len_ = strlen(echo_msg_);
@@ -215,8 +215,8 @@ class echo_bot : public eos::timeout_handler,
 };
 
 int main(int argc, char ** argv) {
-   echo_bot bot;
    eos::sdk sdk;
+   echo_bot bot(sdk);
    sdk.main_loop("EchoBot", argc, argv);
 }
 
