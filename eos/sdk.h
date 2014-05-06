@@ -28,6 +28,7 @@ class neighbor_table_mgr;
 class nexthop_group_mgr;
 class policy_map_mgr;
 class system_mgr;
+class timeout_mgr;
 
 /**
  * Manages the differents managers of the SDK. One manager of each type can be
@@ -62,6 +63,7 @@ class EOS_SDK_PUBLIC sdk {
     void init_nexthop_group_mgr();
     void init_policy_map_mgr();
     void init_system_mgr();
+    void init_timeout_mgr();
 
     void main_loop(const char * agent_name, int argc, char ** argv);
 
@@ -86,6 +88,7 @@ class EOS_SDK_PUBLIC sdk {
     nexthop_group_mgr * get_nexthop_group_mgr();
     policy_map_mgr * get_policy_map_mgr();
     system_mgr * get_system_mgr();
+    timeout_mgr * get_timeout_mgr();
 
  private:
     void init_mount_mgr();
@@ -111,6 +114,7 @@ class EOS_SDK_PUBLIC sdk {
     nexthop_group_mgr * nexthop_group_mgr_;
     policy_map_mgr * policy_map_mgr_;
     system_mgr * system_mgr_;
+    timeout_mgr * timeout_mgr_;
 };
 
 }

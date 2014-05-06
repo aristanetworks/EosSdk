@@ -5,6 +5,7 @@
 
 #include <cstdio>
 
+#include "eos/base_mgr.h"
 #include "eos/panic.h"
 #include "eos/timer.h"
 #include "impl.h"
@@ -22,7 +23,10 @@ seconds_t now() {
    return t.tv_sec + 0.000000001 * t.tv_nsec;// + TIME_BASE;
 }
 
-timeout_handler::timeout_handler() {
+class timeout_mgr : public base_mgr<timeout_handler> {
+};
+
+timeout_handler::timeout_handler(timeout_mgr * mgr) : base_handler(mgr) {
    impl.register_timeout_handler(this);
 }
 
