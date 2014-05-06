@@ -18,6 +18,8 @@
 
 namespace eos {
 
+class fd_internal;
+
 /**
  * This class manages file descriptors within the event loop context.
  *
@@ -59,6 +61,9 @@ class EOS_SDK_PUBLIC fd_handler {
    void watch_writable(int fd, bool);
    /// Notifies this handler when the passed file descriptor has exceptions.
    void watch_exception(int fd, bool);
+
+ private:
+   fd_internal * fd_;
 };
 
 }
