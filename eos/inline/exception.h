@@ -14,7 +14,7 @@ inline
 error::~error() noexcept {
 }
 
-inline std::string
+inline std::string const &
 error::msg() const noexcept {
    return msg_;
 }
