@@ -6,6 +6,7 @@
 
 #include <eos/base.h>
 #include <eos/base_handler.h>
+#include <eos/base_mgr.h>
 
 /**
  * Periodic timeout support.
@@ -63,8 +64,21 @@ class EOS_SDK_PUBLIC timeout_handler : public base_handler<timeout_mgr,
    virtual void on_timeout() = 0;
 
  private:
-   friend class timeout_mgr;
+   friend class timer_internal;
    timer_internal * timer_;
+};
+
+class EOS_SDK_PUBLIC timeout_mgr : public base_mgr<timeout_handler> {
+ public:
+   virtual ~timeout_mgr();
+
+ protected:
+   virtual void init_handler(timeout_handler *) = 0;
+   timeout_mgr() EOS_SDK_PRIVATE;
+   friend class timeout_handler;
+
+ private:
+   EOS_SDK_DISALLOW_COPY_CTOR(timeout_mgr);
 };
 
 }

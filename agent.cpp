@@ -45,6 +45,10 @@ agent_mgr * new_agent_mgr() {
    return new agent_mgr_impl();
 }
 
+void delete_agent_mgr(agent_mgr * mgr) {
+   delete mgr;
+}
+
 agent_mgr::agent_mgr() {
 }
 
