@@ -22,7 +22,7 @@ class EOS_SDK_PUBLIC error {
  public:
    virtual ~error() noexcept;
    explicit error(std::string const & msg) noexcept;
-   std::string msg() const noexcept;
+   std::string const & msg() const noexcept;
    const char * what() const noexcept;
    virtual void raise() const EOS_SDK_NORETURN = 0;  ///< Throws this exception.
 
