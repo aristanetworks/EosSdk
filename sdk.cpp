@@ -6,11 +6,35 @@
 
 namespace eos {
 
-sdk::sdk() {
+sdk::sdk()
+   : acl_mgr_(0),
+     agent_mgr_(0),
+     aresolve_mgr_(0),
+     class_map_mgr_(0),
+     decap_group_mgr_(0),
+     directflow_mgr_(0),
+     eth_intf_mgr_(0),
+     eth_phy_intf_mgr_(0),
+     event_loop_(0),
+     fib_mgr_(0),
+     intf_mgr_(0),
+     ip_route_mgr_(0),
+     mac_table_mgr_(0),
+     mlag_mgr_(0),
+     mount_mgr_(0),
+     mpls_route_mgr_(0),
+     neighbor_table_mgr_(0),
+     nexthop_group_mgr_(0),
+     policy_map_mgr_(0),
+     system_mgr_(0),
+     timeout_mgr_(0) {
    impl.register_sdk(this);
 }
 
+void delete_agent_mgr(agent_mgr *);
+
 sdk::~sdk() {
+   delete_agent_mgr(agent_mgr_);
 }
 
 void sdk::init_acl_mgr() {
