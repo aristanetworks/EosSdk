@@ -46,6 +46,7 @@ typedef uint64_t uint64_be_t;
 %feature("nodirector") eos::nexthop_group_mgr;
 %feature("nodirector") eos::policy_map_mgr;
 %feature("nodirector") eos::system_mgr;
+%feature("nodirector") eos::timeout_mgr;
 
 %{
 #include "eos/agent.h"

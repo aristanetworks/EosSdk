@@ -23,9 +23,6 @@ seconds_t now() {
    return t.tv_sec + 0.000000001 * t.tv_nsec;// + TIME_BASE;
 }
 
-class timeout_mgr : public base_mgr<timeout_handler> {
-};
-
 timeout_handler::timeout_handler(timeout_mgr * mgr) : base_handler(mgr) {
    impl.register_timeout_handler(this);
 }
@@ -38,5 +35,18 @@ void
 timeout_handler::timeout_time_is(seconds_t timeout) {
    impl.timeout_is(this, timeout);
 }
+
+timeout_mgr::~timeout_mgr() {
+}
+
+class timeout_mgr_impl: public timeout_mgr {
+ public:
+   timeout_mgr_impl() {
+   }
+
+   void init_handler(timeout_handler * handler) {
+      // TODO: No op impl.
+   }
+};
 
 }
