@@ -33,12 +33,14 @@ class EchoBot(eossdk.TimeoutHandler, eossdk.FdHandler):
                                            "already have a connection")
          self._acceptConnection()
       elif fd == self.connectedSocket.fileno():  # pylint: disable-msg=E1101
-         data = self.connectedSocket.recv(MAX_BUF_SIZE) # pylint: disable-msg=E1101
+         data = self.connectedSocket.recv(MAX_BUF_SIZE -
+                                          len(ECHO_MSG)) # pylint: disable-msg=E1101
          print "Client said: %r" % data
          if not data:
             self._endConnection()
             return
          self.connectedSocket.send(ECHO_MSG + data)  # pylint: disable-msg=E1101
+         self.timeout_time_is(eossdk.now() + IDLE_TIMEOUT)
       else:
          assert False, "Unknown fd %d is readable" % fd
 
