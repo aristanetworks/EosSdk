@@ -40,6 +40,7 @@ enum intf_type_t {
    INTF_TYPE_LOOPBACK,
    INTF_TYPE_LAG,
    INTF_TYPE_NULL0,
+   INTF_TYPE_CPU,
 };
 
 /// Unique identifier for an interface.
