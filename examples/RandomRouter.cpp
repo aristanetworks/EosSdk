@@ -30,6 +30,7 @@ class random_router : public eos::agent_handler,
       : eos::agent_handler(sdk.get_agent_mgr()),
         eos::intf_handler(sdk.get_intf_mgr()) {
       printf("Initializing the Random Router...\n");
+      fflush(stdout);
       app_id = eos::agent_mgr::id(AGENT_NAME);
       route_mgr = sdk.get_ip_route_mgr();
       route_mgr->tag_is(app_id);
@@ -37,6 +38,7 @@ class random_router : public eos::agent_handler,
 
    void on_initialized() {
       printf("... and we're initialized!\n");
+      fflush(stdout);
       // All state has been sync'd with Sysdb. We're good to go!
       // Watch stdin:
       watch_readable(0, true);
@@ -54,6 +56,7 @@ class random_router : public eos::agent_handler,
          bool valid_pfx = eos::parse_ip_prefix(buf, &new_prefix);
          if(!valid_pfx) {
             printf("! Invalid IP prefix specified.\n");
+            fflush(stdout);
             return;
          }
          // Create a new ip_route for this prefix
@@ -71,6 +74,7 @@ class random_router : public eos::agent_handler,
          printf( "Set route %s to have nexthop %s\n",
                  new_prefix.to_string().c_str(),
                  i.to_string().c_str() );
+         fflush(stdout);
          last_used_intf = i;
       }
    }
@@ -78,6 +82,7 @@ class random_router : public eos::agent_handler,
    void on_admin_enabled(eos::intf_id_t intf, bool enabled) {
       printf("Interface %s changed state. Enabled: %d\n",
              intf.to_string().c_str(), enabled);
+      fflush(stdout);
       if(enabled) return; // We don't care if a new intf was enabled.
 
       eos::intf_id_t next_intf = get_intf(intf);
@@ -91,6 +96,7 @@ class random_router : public eos::agent_handler,
                printf("Moving route %s to %s\n",
                       (*vi).route_key.prefix.to_string().c_str(),
                       new_via.intf.to_string().c_str());
+               fflush(stdout);
                route_mgr->ip_route_via_del(*vi);
                route_mgr->ip_route_via_set(new_via);
             }
@@ -100,14 +106,16 @@ class random_router : public eos::agent_handler,
 
    eos::intf_id_t get_intf(eos::intf_id_t cur_intf) {
       for(eos::intf_iter_t i = get_intf_mgr()->intf_iter(); i; ++i){
-         if(*i != cur_intf ||
-            get_intf_mgr()->oper_status(*i) != eos::INTF_OPER_UP) {
+         if(*i == cur_intf ||
+            get_intf_mgr()->oper_status(*i) != eos::INTF_OPER_UP ||
+            !get_intf_mgr()->admin_enabled(*i)) {
             // Don't use the same interface or a down'd interface.
             continue;
          }
          return *i;
       }
       printf( "No other connected interfaces. Using the same interface.\n" );
+      fflush(stdout);
       return cur_intf;
    }
 
