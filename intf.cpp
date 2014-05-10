@@ -36,7 +36,8 @@ intf_id_t::to_string() const {
    return "NotImplemented";  // TODO: No op impl.
 }
 
-intf_handler::intf_handler(intf_mgr * mgr) : base_handler(mgr) {
+intf_handler::intf_handler(intf_mgr * mgr) : 
+      base_handler<intf_mgr, intf_handler>(mgr) {
 }
 
 void

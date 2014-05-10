@@ -45,7 +45,8 @@ class system_mgr_impl : public system_mgr {
    }
 };
 
-system_handler::system_handler(system_mgr * mgr) : base_handler(mgr) {
+system_handler::system_handler(system_mgr * mgr) : 
+      base_handler<system_mgr, system_handler>(mgr) {
 }
 
 void system_handler::on_hostname(std::string const & hostname) {
