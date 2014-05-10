@@ -15,7 +15,8 @@ aresolve_record_host::~aresolve_record_host() {
    addr_v6_.clear();
 }
 
-aresolve_handler::aresolve_handler(aresolve_mgr * mgr) : base_handler(mgr) {
+aresolve_handler::aresolve_handler(aresolve_mgr * mgr) : 
+      base_handler<aresolve_mgr, aresolve_handler>(mgr) {
 }
 
 void aresolve_handler::watch_host(std::string const &, bool) {

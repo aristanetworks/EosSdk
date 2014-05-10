@@ -27,7 +27,8 @@ policy_map_mgr::policy_map_mgr() {
 policy_map_mgr::~policy_map_mgr() {
 }
 
-policy_map_handler::policy_map_handler(policy_map_mgr * mgr) : base_handler(mgr) {
+policy_map_handler::policy_map_handler(policy_map_mgr * mgr) : 
+      base_handler<policy_map_mgr, policy_map_handler>(mgr) {
 }
 
 void

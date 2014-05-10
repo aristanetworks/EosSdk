@@ -37,7 +37,8 @@ class mlag_mgr_impl : public mlag_mgr {
 
 };
 
-mlag_handler::mlag_handler(mlag_mgr *mgr) : base_handler(mgr) {
+mlag_handler::mlag_handler(mlag_mgr *mgr) : 
+      base_handler<mlag_mgr, mlag_handler>(mgr) {
 }
 
 void mlag_handler::on_mlag_state(mlag_state_t state) {

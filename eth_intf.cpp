@@ -6,7 +6,8 @@
 
 namespace eos {
 
-eth_intf_handler::eth_intf_handler(eth_intf_mgr * mgr) : base_handler(mgr) {
+eth_intf_handler::eth_intf_handler(eth_intf_mgr * mgr) : 
+      base_handler<eth_intf_mgr, eth_intf_handler>(mgr) {
 }
 
 void
