@@ -10,7 +10,8 @@ namespace eos {
 
 // acl_handler methods
 
-acl_handler::acl_handler(acl_mgr * mgr) : base_handler(mgr) {
+acl_handler::acl_handler(acl_mgr * mgr) :
+      base_handler<acl_mgr, acl_handler>(mgr) {
 }
 
 void

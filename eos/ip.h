@@ -6,6 +6,7 @@
 
 #include <netinet/in.h>
 
+#include <functional>
 #include <string>
 #include <eos/base.h>
 

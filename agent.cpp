@@ -10,7 +10,8 @@
 
 namespace eos {
 
-agent_handler::agent_handler(agent_mgr * mgr) : base_handler(mgr) {
+agent_handler::agent_handler(agent_mgr * mgr) : 
+      base_handler<agent_mgr, agent_handler>(mgr) {
    mgr_->add_handler(this);
 }
 
@@ -31,9 +32,11 @@ class agent_mgr_impl : public agent_mgr {
    }
 
    void on_initialized() {
-      handler_foreach([=] (agent_handler* handler) {
-         handler->on_initialized();
-      });
+      // Currently disabled to support old versions of GCC that do not
+      // support lambda expressions.
+      // handler_foreach([=] (agent_handler* handler) {
+      //    handler->on_initialized();
+      // });
    }
 };
 
