@@ -73,6 +73,18 @@ typedef uint64_t uint64_be_t;
 
 using namespace eos;
 
+/// Used to convert uncaught exceptions into Python exceptions.
+class misc_error : public error {
+ public:
+   virtual ~misc_error() noexcept {
+   }
+   explicit misc_error(std::string const & msg) noexcept : error(msg) {
+   }
+   virtual void raise() const EOS_SDK_NORETURN {
+      throw *this;
+   }
+};
+
 struct stop_iteration {};
 %}
 
@@ -98,7 +110,13 @@ struct stop_iteration {};
    translate_exception(not_switchport_eligible_error)
    translate_exception(invalid_vlan_error)
    translate_exception(internal_vlan_error)
-   // TODO(tsuna): Add a catch-all case for the base type `exception'.
+   catch(error const & e) {
+      misc_error * exc = new misc_error(e.msg());
+      PyObject * obj = SWIG_NewPointerObj(exc, SWIGTYPE_p_eos__error,
+                                          SWIG_POINTER_OWN);
+      PyErr_SetObject(SWIG_Python_ExceptionType(SWIGTYPE_p_eos__error), obj);
+      SWIG_fail;
+   }
 }
 
 %typemap(throws) stop_iteration {
