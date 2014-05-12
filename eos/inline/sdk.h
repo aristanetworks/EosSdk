@@ -87,6 +87,13 @@ inline intf_mgr * sdk::get_intf_mgr() {
    return intf_mgr_;
 }
 
+inline intf_counter_mgr * sdk::get_intf_counter_mgr() {
+   if (!intf_counter_mgr_) {
+      init_intf_counter_mgr();
+   }
+   return intf_counter_mgr_;
+}
+
 inline ip_route_mgr * sdk::get_ip_route_mgr() {
    if (!ip_route_mgr_) {
       init_ip_route_mgr();

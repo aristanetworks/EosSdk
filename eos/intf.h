@@ -78,6 +78,133 @@ class EOS_SDK_PUBLIC intf_id_t {
    explicit intf_id_t(uint64_t) EOS_SDK_INTERNAL;
 };
 
+/**
+ * Interface counter class
+ * 
+ * All of these attributes have the same meanings as the corresponding
+ * objects in the Interface MIB (RFC 2863, "IF-MIB").
+ */
+class EOS_SDK_PUBLIC intf_counters_t {
+ public:
+   intf_counters_t();
+   intf_counters_t(uint64_t out_ucast_pkts,
+                   uint64_t out_multicast_pkts,
+                   uint64_t out_broadcast_pkts,
+                   uint64_t in_ucast_pkts,
+                   uint64_t in_multicast_pkts,
+                   uint64_t in_broadcast_pkts,
+                   uint64_t out_octets,
+                   uint64_t in_octets,
+                   uint64_t out_discards,
+                   uint64_t out_errors,
+                   uint64_t in_discards,
+                   uint64_t in_errors,
+                   seconds_t sample_time);
+
+   /** IF-MIB ifOutUcastPkts
+    *
+    * Note that IF-MIB specifies that ifOutUcastPkts
+    * should include packets that were dropped due to excessive
+    * collisions, as if they were successfully transmitted.  We count
+    * these as out_errors
+    */
+   uint64_t out_ucast_pkts() const;
+   /// IF-MIB ifOutMulticastPkts counter
+   uint64_t out_multicast_pkts() const;
+   /// IF-MIB ifOutBroadcastPkts counter
+   uint64_t out_broadcast_pkts() const;
+
+   /// IF-MIB ifInUcastPkts counter
+   uint64_t in_ucast_pkts() const;
+   /// IF-MIB ifInMulticastPkts counter
+   uint64_t in_multicast_pkts() const;
+   /// IF-MIB ifInBroadcastPkts counter
+   uint64_t in_broadcast_pkts() const;
+
+   /** IF-MIB ifOutOctets counter
+    *
+    * Note that for Ethernet interfaces, the octet counters include the MAC header
+    * and FCS (but not the preamble or SFD).  This is different to the IEEE 802.3
+    * counters (which do not include MAC header and FCS).  See RFC 3635.
+    */
+   uint64_t out_octets() const;
+   /** IF-MIB ifInOctets counter
+    *
+    * Note that for Ethernet interfaces, the octet counters include the MAC header
+    * and FCS (but not the preamble or SFD).  This is different to the IEEE 802.3
+    * counters (which do not include MAC header and FCS).  See RFC 3635.
+    */
+   uint64_t in_octets() const;
+   
+   /// IF-MIB ifOutDiscards counter
+   uint64_t out_discards() const;
+   /// IF-MIB ifOutErrors counter
+   uint64_t out_errors() const;
+   /// IF-MIB ifInDiscards counter
+   uint64_t in_discards() const;
+   /** IF-MIB ifInErrors counter
+    *
+    * The IF-MIB specifies that CRC errors should not get counted at all!, and
+    * that inErrors should include IP header checksum errors.  We do not do this.
+    * We count CRC errors as inErrors, and IP header checksum errors as good
+    *  packets at this level (in_ucast_pkts);
+    */
+   uint64_t in_errors() const;
+
+   // Time when the counters were updated
+   seconds_t sample_time() const;
+
+   bool operator==(intf_counters_t const & other) const;
+   bool operator!=(intf_counters_t const & other) const;
+   
+ private:
+   uint64_t out_ucast_pkts_;
+   uint64_t out_multicast_pkts_;
+   uint64_t out_broadcast_pkts_;
+   uint64_t in_ucast_pkts_;
+   uint64_t in_multicast_pkts_;
+   uint64_t in_broadcast_pkts_;
+   uint64_t out_octets_;
+   uint64_t in_octets_;
+   uint64_t out_discards_;
+   uint64_t out_errors_;
+   uint64_t in_discards_;
+   uint64_t in_errors_;
+   seconds_t sample_time_;
+};
+
+/// Interface traffic rates class
+class EOS_SDK_PUBLIC intf_traffic_rates_t {
+ public:
+   intf_traffic_rates_t();
+   intf_traffic_rates_t(double out_pkts_rate,
+                        double in_pkts_rate,
+                        double out_bits_rate,
+                        double in_bits_rate,
+                        seconds_t sample_time);
+   
+   /// Output packets per second
+   double out_pkts_rate() const;
+   /// Input packets per second
+   double in_pkts_rate() const;
+   /// Output bits per second
+   double out_bits_rate() const;
+   /// Input bits per second
+   double in_bits_rate() const;
+   // Time when the rates were updated
+   seconds_t sample_time() const;
+
+   bool operator==(intf_traffic_rates_t const & other) const;
+   bool operator!=(intf_traffic_rates_t const & other) const;
+
+ private:
+   double out_pkts_rate_;
+   double in_pkts_rate_;
+   double out_bits_rate_;
+   double in_bits_rate_;
+   seconds_t sample_time_;
+};
+
 class intf_mgr;
 
 /// This class receives changes to base interface attributes.
@@ -124,7 +251,7 @@ class EOS_SDK_PUBLIC intf_iter_t : public iter_base<intf_id_t,
 
 /**
  * The interface manager.
- * This class inspects and configures base interface attribtues.
+ * This class inspects and configures base interface attributes.
  */
 class EOS_SDK_PUBLIC intf_mgr : public base_mgr<intf_handler, intf_id_t> {
  public:
@@ -168,6 +295,27 @@ class EOS_SDK_PUBLIC intf_mgr : public base_mgr<intf_handler, intf_id_t> {
 
  private:
    EOS_SDK_DISALLOW_COPY_CTOR(intf_mgr);
+};
+
+
+/**
+ * The interface counter manager.
+ * This class inspects base interface counters and statistics.
+ */
+class EOS_SDK_PUBLIC intf_counter_mgr {
+ public:
+   virtual ~intf_counter_mgr();
+   
+   /// Get the current counters of the given interface.
+   virtual intf_counters_t counters(intf_id_t) const = 0;
+   /// Get the current traffic rates of the given interface.
+   virtual intf_traffic_rates_t traffic_rates(intf_id_t) const = 0;
+   
+ protected:
+   intf_counter_mgr() EOS_SDK_PRIVATE;
+   
+ private:
+   EOS_SDK_DISALLOW_COPY_CTOR(intf_counter_mgr);
 };
 
 }

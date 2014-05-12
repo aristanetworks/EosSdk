@@ -85,6 +85,10 @@ void sdk::init_intf_mgr() {
    // TODO: No op impl.
 }
 
+void sdk::init_intf_counter_mgr() {
+   // TODO: No op impl.
+}
+
 void sdk::init_ip_route_mgr() {
    // TODO: No op impl.
 }
