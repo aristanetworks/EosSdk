@@ -79,7 +79,8 @@ struct stop_iteration {};
 %define translate_exception(ExceptionClass)
    catch(ExceptionClass const & e) {
       ExceptionClass * exc = new ExceptionClass(e);
-      PyObject * obj = SWIG_NewPointerObj(exc, SWIGTYPE_p_eos__##ExceptionClass, 1);
+      PyObject * obj = SWIG_NewPointerObj(exc, SWIGTYPE_p_eos__##ExceptionClass,
+                                          SWIG_POINTER_OWN);
       PyErr_SetObject(SWIG_Python_ExceptionType(SWIGTYPE_p_eos__##ExceptionClass), obj);
       SWIG_fail;
    }
