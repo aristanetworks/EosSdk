@@ -83,6 +83,10 @@ class intf_mgr_impl : public intf_mgr {
    intf_mgr_impl() {
    }
 
+   void counters_accessible_is(bool accessible) {
+      // TODO: No op impl.
+   }
+   
    intf_iter_t intf_iter() const {
       intf_iter_t * nop = 0;
       return *nop;  // TODO: No op impl.
@@ -115,6 +119,28 @@ class intf_mgr_impl : public intf_mgr {
 
    oper_status_t oper_status(intf_id_t) const {
       return INTF_OPER_NULL;  // TODO: No op impl.
+   }
+};
+
+intf_counter_mgr::intf_counter_mgr() {
+   // TODO: No op impl.
+}
+
+intf_counter_mgr::~intf_counter_mgr() {
+   // TODO: No op impl.
+}
+
+class intf_counter_mgr_impl : public intf_counter_mgr {
+ public:
+   intf_counter_mgr_impl() {
+   }
+   
+   intf_counters_t counters(intf_id_t) const {
+      return intf_counters_t();
+   }
+   
+   intf_traffic_rates_t traffic_rates(intf_id_t) const {
+      return intf_traffic_rates_t();
    }
 };
 

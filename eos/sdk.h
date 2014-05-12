@@ -19,6 +19,7 @@ class eth_phy_intf_mgr;
 class event_loop;
 class fib_mgr;
 class intf_mgr;
+class intf_counter_mgr;
 class ip_route_mgr;
 class mac_table_mgr;
 class mlag_mgr;
@@ -55,6 +56,7 @@ class EOS_SDK_PUBLIC sdk {
     void init_event_loop();
     void init_fib_mgr();
     void init_intf_mgr();
+    void init_intf_counter_mgr();
     void init_ip_route_mgr();
     void init_mac_table_mgr();
     void init_mlag_mgr();
@@ -78,6 +80,7 @@ class EOS_SDK_PUBLIC sdk {
     event_loop * get_event_loop();
     fib_mgr * get_fib_mgr();
     intf_mgr * get_intf_mgr();
+    intf_counter_mgr * get_intf_counter_mgr();
     ip_route_mgr * get_ip_route_mgr();
     mac_table_mgr * get_mac_table_mgr();
     mlag_mgr * get_mlag_mgr();
@@ -105,6 +108,7 @@ class EOS_SDK_PUBLIC sdk {
     event_loop * event_loop_;
     fib_mgr * fib_mgr_;
     intf_mgr * intf_mgr_;
+    intf_counter_mgr * intf_counter_mgr_;
     ip_route_mgr * ip_route_mgr_;
     mac_table_mgr * mac_table_mgr_;
     mlag_mgr * mlag_mgr_;
