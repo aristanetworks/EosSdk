@@ -24,8 +24,7 @@ def createMatch(inputIntfs=None,
       # Until we have correct swig support for std::set,
       # need to add each interface individually
       matchFieldSet.input_intfs_is(True)
-      for intfId in inputIntfs:
-         match.input_intf_set(intfId)
+      match.input_intfs_is(tuple([intfId for intfId in inputIntfs]))
    if ethSrc is not None:
       matchFieldSet.eth_src_is(True)
       ethSrc = eossdk.EthAddr(ethSrc)
@@ -63,8 +62,7 @@ def createAction(outputIntfs=None,
       # Until we have correct swig support for std::set,
       # need to add each interface individually
       actionSet.set_output_intfs_is(True)
-      for intfId in outputIntfs:
-         action.output_intf_set(intfId)
+      action.output_intfs_is(tuple([intfId for intfId in outputIntfs]))
    if ethSrc is not None:
       actionSet.setEth_src_is(True)
       newEthSrc = eossdk.EthAddr(ethSrc)
