@@ -1,0 +1,16 @@
+# URL of the bug: https://sourceforge.net/p/swig/bugs/1370/
+--- eossdk_wrap.cpp-t
++++ eossdk_wrap.cpp-t
+@@ -3440,7 +3440,11 @@
+     }
+       
+   public:
+-    virtual ~SwigPyIterator() {}
++    virtual ~SwigPyIterator() {
++       SWIG_PYTHON_THREAD_BEGIN_BLOCK;
++       _seq = 0;
++       SWIG_PYTHON_THREAD_END_BLOCK;
++    }
+ 
+     // Access iterator method, required by Python
+     virtual PyObject *value() const = 0;

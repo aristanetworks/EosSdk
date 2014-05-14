@@ -3,7 +3,11 @@
 
 %module(directors="1") eossdk
 
+%include "stdint.i"
+%include "std_map.i"
+%include "std_set.i"
 %include "std_string.i"
+%include "std_vector.i"
 %import "SwigUtils.i"
 
 // Change all some_class_t names to just SomeClass:
@@ -17,11 +21,6 @@
 #define SWIG_FILE_WITH_INIT
 %import "eos/base.h"
 
-// Tell swig about uint8/16/32/64_t
-typedef unsigned short uint8_t;
-typedef unsigned short uint16_t;
-typedef unsigned int uint32_t;
-typedef unsigned long long uint64_t;
 // Tell swig about our custom types (copied from base.h)
 typedef double seconds_t;
 typedef uint16_t uint16_be_t;
@@ -155,6 +154,12 @@ struct stop_iteration {};
       }
    }
 %enddef
+
+// Different stl containers used directly in our exposed headers
+%template() std::map<uint32_t, eos::class_map_rule_t>;
+%template() std::map<uint32_t, eos::policy_map_rule_t>;
+%template() std::map<uint8_t, eos::ip_addr_t>;
+%template() std::set<eos::intf_id_t>;
 
 // For vlan_set
 %template(_BitSet4096) std::bitset<4096>;
