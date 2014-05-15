@@ -85,36 +85,43 @@ class misc_error : public error {
 };
 
 struct stop_iteration {};
-%}
 
-%define translate_exception(ExceptionClass)
-   catch(ExceptionClass const & e) {
-      ExceptionClass * exc = new ExceptionClass(e);
-      PyObject * obj = SWIG_NewPointerObj(exc, SWIGTYPE_p_eos__##ExceptionClass,
-                                          SWIG_POINTER_OWN);
-      PyErr_SetObject(SWIG_Python_ExceptionType(SWIGTYPE_p_eos__##ExceptionClass), obj);
-      SWIG_fail;
+#define TRANSLATE_EXCEPTION(ExceptionClass)\
+   catch(ExceptionClass const & e) {\
+      ExceptionClass * exc = new ExceptionClass(e);\
+      PyObject * obj = SWIG_NewPointerObj(exc, SWIGTYPE_p_eos__##ExceptionClass,\
+                                          SWIG_POINTER_OWN);\
+      PyErr_SetObject(SWIG_Python_ExceptionType(SWIGTYPE_p_eos__##ExceptionClass), obj);\
    }
-%enddef
+
+void throw_py_error(error const& err) {
+   try {
+      err.raise();
+   }
+   TRANSLATE_EXCEPTION(invalid_range_error)
+   TRANSLATE_EXCEPTION(invalid_argument_error)
+   TRANSLATE_EXCEPTION(no_such_interface_error)
+   TRANSLATE_EXCEPTION(not_switchport_eligible_error)
+   TRANSLATE_EXCEPTION(invalid_vlan_error)
+   TRANSLATE_EXCEPTION(internal_vlan_error)
+   TRANSLATE_EXCEPTION(unsupported_policy_feature_error)
+   catch(error const & e) {
+      misc_error * exc = new misc_error(e.msg());
+      PyObject * obj = SWIG_NewPointerObj(exc, SWIGTYPE_p_eos__error,
+                                          SWIG_POINTER_OWN);
+      PyErr_SetObject(SWIG_Python_ExceptionType(SWIGTYPE_p_eos__error), obj);
+   }
+}
+
+%}
 
 %exceptionclass error;
 
 %exception {
    try {
       $action
-   }
-   translate_exception(invalid_range_error)
-   translate_exception(invalid_argument_error)
-   translate_exception(no_such_interface_error)
-   translate_exception(not_switchport_eligible_error)
-   translate_exception(invalid_vlan_error)
-   translate_exception(internal_vlan_error)
-   translate_exception(unsupported_policy_feature_error)
-   catch(error const & e) {
-      misc_error * exc = new misc_error(e.msg());
-      PyObject * obj = SWIG_NewPointerObj(exc, SWIGTYPE_p_eos__error,
-                                          SWIG_POINTER_OWN);
-      PyErr_SetObject(SWIG_Python_ExceptionType(SWIGTYPE_p_eos__error), obj);
+   } catch (error const & e) {
+      throw_py_error(e);
       SWIG_fail;
    }
 }
