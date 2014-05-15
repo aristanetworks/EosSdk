@@ -103,12 +103,13 @@ struct stop_iteration {};
    try {
       $action
    }
-   // translate_exception(invalid_argument_error)
    translate_exception(invalid_range_error)
+   translate_exception(invalid_argument_error)
    translate_exception(no_such_interface_error)
    translate_exception(not_switchport_eligible_error)
    translate_exception(invalid_vlan_error)
    translate_exception(internal_vlan_error)
+   translate_exception(unsupported_policy_feature_error)
    catch(error const & e) {
       misc_error * exc = new misc_error(e.msg());
       PyObject * obj = SWIG_NewPointerObj(exc, SWIGTYPE_p_eos__error,
