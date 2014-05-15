@@ -60,12 +60,12 @@ _eossdk_la_LIBADD = libeos.la
 
 $(srcdir)/eossdk_wrap.cpp: $(SWIG_FILES) $(nobase_include_HEADERS)
 	SRCDIR=$(srcdir) $(SWIG) -threads -c++ -python -I$(srcdir) -o $@-t $(srcdir)/EosSdk.i
-	if [ -f "$@-t" ]; then patch --batch -p0 <$(srcdir)/swig.patch; mv $@-t $@; fi
+	patch --batch --no-backup-if-mismatch -p0 <$(srcdir)/swig.patch
+	mv $@-t $@
 
 $(srcdir)/eossdk_wrap.h: $(srcdir)/eossdk_wrap.cpp
 
-$(srcdir)/eossdk.py: $(SWIG_FILES) $(nobase_include_HEADERS)
-	$(MAKE) $(AM_MAKEFLAGS) eossdk_wrap.cpp
+$(srcdir)/eossdk.py: $(srcdir)/eossdk_wrap.cpp
 
 BUILT_SOURCES = $(_eossdk_la_SOURCES)
 MAINTAINERCLEANFILES = $(BUILT_SOURCES)
