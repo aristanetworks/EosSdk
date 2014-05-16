@@ -207,9 +207,15 @@ class EOS_SDK_PUBLIC policy_map_t {
    bool operator==(policy_map_t const & other) const;
    bool operator!=(policy_map_t const & other) const;
 
+   /// Sets the config persistence for this policy map (defaults to false).
+   void persistent_is(bool);
+   /// The persistence state for this policy map
+   bool persistent() const;
+
  private:
    policy_map_key_t key_;
    std::map<uint32_t, policy_map_rule_t> rules_;
+   bool persistent_;
 };
 
 class policy_map_iter_impl;
