@@ -31,11 +31,12 @@ class_map_rule_t::operator!=(class_map_rule_t const & other) const {
 }
 
 inline
-class_map_t::class_map_t() : key_(), rules_() {
+class_map_t::class_map_t() : key_(), rules_(), persistent_(false) {
 }
 
 inline
-class_map_t::class_map_t(class_map_key_t const & key) : key_(key), rules_() {
+class_map_t::class_map_t(class_map_key_t const & key) : key_(key), rules_(),
+                                                        persistent_(false) {
 }
 
 inline class_map_key_t
@@ -77,6 +78,16 @@ class_map_t::operator==(class_map_t const & other) const {
 inline bool
 class_map_t::operator!=(class_map_t const & other) const {
    return !operator==(other);
+}
+
+inline void
+class_map_t::persistent_is(bool persistent) {
+   persistent_ = persistent;
+}
+
+inline bool
+class_map_t::persistent() const {
+   return persistent_;
 }
 
 }

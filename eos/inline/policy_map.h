@@ -200,11 +200,11 @@ policy_map_rule_t::operator<(policy_map_rule_t const& other) const {
 }
 
 inline policy_map_t::policy_map_t() :
-      key_(), rules_() {
+      key_(), rules_(), persistent_(false) {
 }
 
 inline policy_map_t::policy_map_t(policy_map_key_t const & key) :
-      key_(key), rules_() {
+      key_(key), rules_(), persistent_(false) {
 }
 
 inline policy_map_key_t
@@ -248,7 +248,15 @@ policy_map_t::operator!=(policy_map_t const & other) const {
    return !operator==(other);
 }
 
+inline void
+policy_map_t::persistent_is(bool persistent) {
+   persistent_ = persistent;
+}
 
+inline bool
+policy_map_t::persistent() const {
+   return persistent_;
+}
 
 } // namespace eos
 

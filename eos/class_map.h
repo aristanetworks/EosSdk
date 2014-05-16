@@ -75,9 +75,15 @@ class EOS_SDK_PUBLIC class_map_t {
    bool operator==(class_map_t const &) const;
    bool operator!=(class_map_t const &) const;
 
+   /// Sets the config persistence for this class map (defaults to false).
+   void persistent_is(bool);
+   /// The persistence state for this class map
+   bool persistent() const;
+
  private:
    class_map_key_t key_;
    std::map<uint32_t, class_map_rule_t> rules_;
+   bool persistent_;
 };
 
 typedef std::pair<uint32_t, class_map_rule_t> class_map_rule_entry_t;
