@@ -38,11 +38,26 @@ inline ip_route_t::ip_route_t(ip_route_key_t const & route_key)
    : key(route_key), tag(0), persistent(false) {
 }
 
-inline ip_route_via_t::ip_route_via_t() : route_key(), hop(), intf() {
+inline ip_route_via_t::ip_route_via_t() : route_key(), hop(), intf(),
+                                          nexthop_group(), mpls_label() {
 }
 
 inline ip_route_via_t::ip_route_via_t(ip_route_key_t const & route_key)
-   : route_key(route_key), hop(), intf() {
+      : route_key(route_key), hop(), intf(), nexthop_group(), mpls_label() {
+}
+
+inline bool
+ip_route_via_t::operator==(ip_route_via_t const & other) const {
+   return (route_key == other.route_key &&
+           hop == other.hop &&
+           intf == other.intf &&
+           nexthop_group == other.nexthop_group &&
+           mpls_label == other.mpls_label);
+}
+
+inline bool
+ip_route_via_t::operator!=(ip_route_via_t const & other) const {
+   return !operator==(other);
 }
 
 }

@@ -7,6 +7,7 @@
 #include <eos/intf.h>
 #include <eos/ip.h>
 #include <eos/iterator.h>
+#include <eos/mpls.h>
 
 namespace eos {
 
@@ -69,9 +70,12 @@ class EOS_SDK_PUBLIC ip_route_via_t {
 
    ip_route_key_t route_key; ///< Key for the route this via is attached to
    ip_addr_t hop;            ///< IP v4/v6 nexthop address
-   intf_id_t intf;           ///< Use the named interface if not a default intf_id_t
-
-   // using intf Null0 installs a 'drop' route for the given prefix and preference
+   /**
+    * Use the named interface if not a default intf_id_t
+    *
+    * Using intf Null0 installs a 'drop' route for the given prefix and preference
+    */
+   intf_id_t intf;
 
    /**
     * Name of the next-hop group to use.
@@ -82,6 +86,12 @@ class EOS_SDK_PUBLIC ip_route_via_t {
     * Note this is currently only supported for IPv4 routes.
     */
    std::string nexthop_group;
+
+   /// Push an MPLS label
+   mpls_label_t mpls_label;
+
+   bool operator==(ip_route_via_t const & other) const;
+   bool operator!=(ip_route_via_t const & other) const;
 };
 
 
