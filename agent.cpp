@@ -19,6 +19,19 @@ void agent_handler::on_initialized() {
    // Default implementation: do nothing.
 }
 
+void agent_handler::on_agent_enabled(bool enabled) {
+   // Default implementation calls agent_shutdown_complete
+   // automatically when the agent is disabled
+   if(!enabled) {
+      get_agent_mgr()->agent_shutdown_complete();
+   }
+}
+
+void agent_handler::on_agent_option(std::string const & name,
+                                    std::string const & value) {
+   // Default implementation: do nothing.
+}
+
 class agent_mgr_impl : public agent_mgr {
  public:
    agent_mgr_impl() {
@@ -38,6 +51,18 @@ class agent_mgr_impl : public agent_mgr {
       //    handler->on_initialized();
       // });
    }
+
+   bool enabled() const {
+      return true;
+   }
+
+   void agent_shutdown_complete() {
+   }
+
+   std::string agent_option(std::string const & name) const {
+      return "";
+   }
+
 };
 
 void handle_agent_initialize(agent_mgr * mgr) {
