@@ -28,6 +28,7 @@ libeos_la_SOURCES += fib.cpp
 libeos_la_SOURCES += iterator.cpp
 libeos_la_SOURCES += mac_table.cpp
 libeos_la_SOURCES += mlag.cpp
+libeos_la_SOURCES += mpls.cpp
 libeos_la_SOURCES += mpls_route.cpp
 libeos_la_SOURCES += nexthop_group.cpp
 libeos_la_SOURCES += panic.cpp
