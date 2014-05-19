@@ -217,6 +217,12 @@ void throw_py_error(error const& err) {
 %include "eos/sdk.h"
 %include "eos/system.h"
 
+%extend eos::error {
+   std::string const & __str__() {
+      return $self->msg();
+   }
+};
+
 // Pythonify our iterators.
 wrap_iterator(eos::flow_entry_iter_t, eos::flow_entry_iter_impl, eos::flow_entry_t);
 wrap_iterator(eos::intf_iter_t, eos::intf_iter_impl, eos::intf_id_t);
