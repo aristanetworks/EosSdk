@@ -32,6 +32,10 @@ void agent_handler::on_agent_option(std::string const & name,
    // Default implementation: do nothing.
 }
 
+static void call_on_initialized(agent_handler* handler) {
+   handler->on_initialized();
+}
+
 class agent_mgr_impl : public agent_mgr {
  public:
    agent_mgr_impl() {
@@ -45,11 +49,7 @@ class agent_mgr_impl : public agent_mgr {
    }
 
    void on_initialized() {
-      // Currently disabled to support old versions of GCC that do not
-      // support lambda expressions.
-      // handler_foreach([=] (agent_handler* handler) {
-      //    handler->on_initialized();
-      // });
+      handler_foreach(call_on_initialized);
    }
 
    bool enabled() const {
