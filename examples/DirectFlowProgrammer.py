@@ -36,8 +36,8 @@ def createMatch(inputIntfs=None,
       ethDstMask = eossdk.EthAddr(ethDstMask)
       match.eth_dst_is(ethDst, ethDstMask)
    if ethType is not None:
-      matchFieldSet.ethType_is(True)
-      match.ethType_is(ethType)
+      matchFieldSet.eth_type_is(True)
+      match.eth_type_is(ethType)
    if ipSrc is not None:
       matchFieldSet.ip_src_is(True)
       ipSrc = eossdk.IpAddr(ipSrc)
@@ -64,19 +64,19 @@ def createAction(outputIntfs=None,
       actionSet.set_output_intfs_is(True)
       action.output_intfs_is(tuple([intfId for intfId in outputIntfs]))
    if ethSrc is not None:
-      actionSet.setEth_src_is(True)
+      actionSet.set_eth_src_is(True)
       newEthSrc = eossdk.EthAddr(ethSrc)
       action.eth_src_is(newEthSrc)
    if ethDst is not None:
-      actionSet.setEth_dst_is(True)
+      actionSet.set_eth_dst_is(True)
       newEthDst = eossdk.EthAddr(ethDst)
       action.eth_dst_is(newEthDst)
    if ipSrc is not None:
-      actionSet.setIp_src_is(True)
+      actionSet.set_ip_src_is(True)
       newIpSrc = eossdk.IpAddr(ipSrc)
       action.ip_src_is(newIpSrc)
    if ipDst is not None:
-      actionSet.setIp_dst_is(True)
+      actionSet.set_ip_dst_is(True)
       newIpDst = eossdk.IpAddr(ipDst)
       action.ip_dst_is(newIpDst)
    action.action_set_is(actionSet)
@@ -127,7 +127,7 @@ class DirectFlowProgrammer(eossdk.AgentHandler,
       self.flowHandlerTrampoline_ = FlowHandlerTrampoline(self, self.directFlowMgr_)
 
       # Now start accepting input on stdin
-      self.watch_readable(sys.stdin.fileno(), True)
+      self.watch_readable(sys.stdin.fileno(), True) # pylint: disable-msg=E1101
 
    def on_readable(self, fd):
       # Handle input on stdin of the format:
