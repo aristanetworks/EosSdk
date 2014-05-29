@@ -20,10 +20,10 @@ void agent_handler::on_initialized() {
 }
 
 void agent_handler::on_agent_enabled(bool enabled) {
-   // Default implementation calls agent_shutdown_complete
+   // Default implementation calls agent_shutdown_complete_is
    // automatically when the agent is disabled
    if(!enabled) {
-      get_agent_mgr()->agent_shutdown_complete();
+      get_agent_mgr()->agent_shutdown_complete_is(true);
    }
 }
 
@@ -56,7 +56,7 @@ class agent_mgr_impl : public agent_mgr {
       return true;
    }
 
-   void agent_shutdown_complete() {
+   void agent_shutdown_complete_is(bool complete) {
    }
 
    std::string agent_option(std::string const & name) const {

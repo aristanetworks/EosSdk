@@ -98,7 +98,7 @@ class EOS_SDK_PUBLIC agent_mgr : public base_mgr<agent_handler> {
      * the agent is disabled, then an agent_handler must be created
      * that overrides the on_agent_enabled method and appropriately
      * cleans up when the agent is disabled. Once the agent is
-     * ready to be killed, it must call agent_shutdown_complete,
+     * ready to be killed, it must call agent_shutdown_complete_is(true),
      * after which it will be killed by ProcMgr.
      * 
      * This method is called automatically by the default implementation
@@ -107,7 +107,7 @@ class EOS_SDK_PUBLIC agent_mgr : public base_mgr<agent_handler> {
      * on_agent_enabled and the agent will be killed by ProcMgr as
      * soon as it is administratively disabled.
      */
-    virtual void agent_shutdown_complete() = 0;
+    virtual void agent_shutdown_complete_is(bool) = 0;
 
  protected:
     agent_mgr() EOS_SDK_PRIVATE;
