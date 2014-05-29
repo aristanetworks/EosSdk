@@ -79,12 +79,12 @@ class EOS_SDK_PUBLIC acl_ttl_spec_t {
    acl_range_operator_t oper() const;
    uint8_t ttl() const;
 
-   void oper(acl_range_operator_t a);
-   void ttl(uint8_t u);
+   void oper_is(acl_range_operator_t a);
+   void ttl_is(uint8_t u);
 
  protected:
-   acl_range_operator_t _oper;  // BETWEEN is not supported.
-   uint8_t _ttl;
+   acl_range_operator_t oper_;  // BETWEEN is not supported.
+   uint8_t ttl_;
    friend class acl_internal;
 };
 
@@ -139,11 +139,11 @@ class EOS_SDK_PUBLIC acl_port_spec_t {
    acl_range_operator_t oper() const;
    std::list<uint16_t> ports() const;
 
-   void oper(acl_range_operator_t a);
-   void ports(std::list<uint16_t> l);
+   void oper_is(acl_range_operator_t a);
+   void ports_is(std::list<uint16_t> const l);
  protected:
-   acl_range_operator_t _oper;
-   std::list<uint16_t> _ports;
+   acl_range_operator_t oper_;
+   std::list<uint16_t> ports_;
 
    friend class acl_internal;
 };
@@ -232,19 +232,18 @@ class EOS_SDK_PUBLIC acl_key_t {
  */
 class EOS_SDK_PUBLIC acl_rule_base_t {
  public:
-  void action(acl_action_t a);
+  void log_is(bool l);
+  void tracked_is(bool t);
+  void action_is(acl_action_t a);
+
+  bool log() const;
+  bool tracked() const;
   acl_action_t action() const;
 
-  void log(bool l);
-  bool log() const;
-
-  void tracked(bool t);
-  bool tracked() const;
-
  private:
-   acl_action_t _action;
-   bool _log;
-   bool _tracked;
+   acl_action_t action_;
+   bool log_;
+   bool tracked_;
 
  protected:
    acl_rule_base_t() EOS_SDK_PRIVATE;
@@ -254,82 +253,74 @@ class EOS_SDK_PUBLIC acl_rule_base_t {
 class EOS_SDK_PUBLIC acl_rule_ip_t : public acl_rule_base_t {
  public:
    acl_rule_ip_t();
-
-   void vlan(vlan_id_t v);
-   vlan_id_t vlan() const;
-   void vlan_mask(vlan_id_t v);
-   vlan_id_t vlan_mask() const;
-   void inner_vlan(vlan_id_t v);
    vlan_id_t inner_vlan() const;
-   void inner_vlan_mask(vlan_id_t v);
+   vlan_id_t vlan() const;
+   vlan_id_t vlan_mask() const;
    vlan_id_t inner_vlan_mask() const;
-
-   void ip_protocol(uint8_t ip);
-   uint8_t ip_protocol() const;
-
-   void ttl(acl_ttl_spec_t t);
-   acl_ttl_spec_t ttl() const;
-
-   void source_addr(ip_addr_mask_t ip);
-   void destination_addr(ip_addr_mask_t ip);
    ip_addr_mask_t source_addr() const;
    ip_addr_mask_t destination_addr() const;
-
    acl_port_spec_t source_port() const;
    acl_port_spec_t destination_port() const;
-   void source_port(acl_port_spec_t a);
-   void destination_port(acl_port_spec_t a);
-   
-   void tcp_flags(uint16_t n);
+   acl_ttl_spec_t ttl() const;
+   uint8_t ip_protocol() const;
    uint16_t tcp_flags() const;
-
-   void established(bool b);
    bool established() const;
-
-   void icmp_type(uint16_t n);
-   void icmp_code(uint16_t n);
    uint16_t icmp_type() const;
    uint16_t icmp_code() const;
-
-   void priority_value(uint8_t n);
-   void priority_mask(uint8_t n);
-   void match_fragments(bool b);
-   void match_ip_priority(bool b);
    uint8_t priority_value() const;
    uint8_t priority_mask() const;
    bool match_fragments() const;
    bool match_ip_priority() const;
+
+   void vlan_is(vlan_id_t v);
+   void vlan_mask_is(vlan_id_t v);
+   void inner_vlan_is(vlan_id_t v);
+   void inner_vlan_mask_is(vlan_id_t v);
+   void ip_protocol_is(uint8_t ip);
+   void ttl_is(acl_ttl_spec_t t);
+   void source_addr_is(ip_addr_mask_t ip);
+   void destination_addr_is(ip_addr_mask_t ip);
+   void source_port_is(acl_port_spec_t const a);
+   void destination_port_is(acl_port_spec_t const a);
+   void tcp_flags_is(uint16_t n);
+   void established_is(bool b);
+   void icmp_type_is(uint16_t n);
+   void icmp_code_is(uint16_t n);
+   void priority_value_is(uint8_t n);
+   void priority_mask_is(uint8_t n);
+   void match_fragments_is(bool b);
+   void match_ip_priority_is(bool b);
  private:
-   vlan_id_t _vlan;
-   vlan_id_t _vlan_mask;
-   vlan_id_t _inner_vlan;
-   vlan_id_t _inner_vlan_mask;
+   vlan_id_t vlan_;
+   vlan_id_t vlan_mask_;
+   vlan_id_t inner_vlan_;
+   vlan_id_t inner_vlan_mask_;
 
-   uint8_t _ip_protocol;
+   uint8_t ip_protocol_;
 
-   acl_ttl_spec_t _ttl;
+   acl_ttl_spec_t ttl_;
 
-   ip_addr_mask_t _source_addr;
-   ip_addr_mask_t _destination_addr;
+   ip_addr_mask_t source_addr_;
+   ip_addr_mask_t destination_addr_;
 
-   acl_port_spec_t _source_port;
-   acl_port_spec_t _destination_port;
+   acl_port_spec_t source_port_;
+   acl_port_spec_t destination_port_;
 
    // Bitmask of TCP flags to match, if set
-   uint16_t _tcp_flags;
+   uint16_t tcp_flags_;
    // Match "established" connections
-   bool _established;
+   bool established_;
 
    // Match a specific ICMP type and code
    // The default value 0xFFFF matches all types or codes
-   uint16_t _icmp_type;
-   uint16_t _icmp_code;
+   uint16_t icmp_type_;
+   uint16_t icmp_code_;
 
-   uint8_t _priority_value;// 0..63, DSCP match to value (IPv4);traffic class (IPv6)
-   uint8_t _priority_mask; // supported for IPv6 only
-   bool _match_fragments;  // match IP fragments?
+   uint8_t priority_value_;// 0..63, DSCP match to value (IPv4);traffic class (IPv6)
+   uint8_t priority_mask_; // supported for IPv6 only
+   bool match_fragments_;  // match IP fragments?
    // Match DSCP (IPv4) or TE (IPv6) data provided in priority_{value,mask}
-   bool _match_ip_priority;
+   bool match_ip_priority_;
 };
 
 /// An Ethernet ACL, which can be applied to Ethernet, Vlan, and MLAG interfaces.
@@ -337,34 +328,34 @@ class EOS_SDK_PUBLIC acl_rule_eth_t : public acl_rule_base_t {
  public:
    acl_rule_eth_t();
 
-   void vlan(vlan_id_t v);
-   void vlan_mask(vlan_id_t v);
-   void inner_vlan(vlan_id_t v);
-   void inner_vlan_mask(vlan_id_t v);
+   void vlan_is(vlan_id_t v);
+   void vlan_mask_is(vlan_id_t v);
+   void inner_vlan_is(vlan_id_t v);
+   void inner_vlan_mask_is(vlan_id_t v);
+   void source_addr_is(eth_addr_t const e);
+   void source_mask_is(eth_addr_t const e);
+   void destination_addr_is(eth_addr_t const e);
+   void destination_mask_is(eth_addr_t const e);
+
    vlan_id_t vlan() const;
    vlan_id_t vlan_mask() const;
    vlan_id_t inner_vlan() const;
    vlan_id_t inner_vlan_mask() const;
-
-   void source_addr(eth_addr_t e);
-   void source_mask(eth_addr_t e);
-   void destination_addr(eth_addr_t e);
-   void destination_mask(eth_addr_t e);
    eth_addr_t source_addr() const;
    eth_addr_t source_mask() const;
    eth_addr_t destination_addr() const;
    eth_addr_t destination_mask() const;
 
  private:
-   vlan_id_t _vlan;
-   vlan_id_t _vlan_mask;
-   vlan_id_t _inner_vlan;
-   vlan_id_t _inner_vlan_mask;
+   vlan_id_t vlan_;
+   vlan_id_t vlan_mask_;
+   vlan_id_t inner_vlan_;
+   vlan_id_t inner_vlan_mask_;
 
-   eth_addr_t _source_addr;
-   eth_addr_t _source_mask;
-   eth_addr_t _destination_addr;
-   eth_addr_t _destination_mask;
+   eth_addr_t source_addr_;
+   eth_addr_t source_mask_;
+   eth_addr_t destination_addr_;
+   eth_addr_t destination_mask_;
 };
 
 class acl_mgr;

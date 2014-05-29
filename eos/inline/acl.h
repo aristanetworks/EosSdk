@@ -11,156 +11,324 @@ enum {
 };
 
 inline void 
-acl_ttl_spec_t::oper(acl_range_operator_t a) {_oper = a;}
+acl_ttl_spec_t::oper_is(acl_range_operator_t a) {
+  oper_ = a;
+}
 
 inline void 
-acl_ttl_spec_t::ttl(uint8_t u) {_ttl = u;}
+acl_ttl_spec_t::ttl_is(uint8_t u) {
+  ttl_ = u;
+}
 
 inline void 
-acl_port_spec_t::oper(acl_range_operator_t a) {_oper = a;}
+acl_port_spec_t::oper_is(acl_range_operator_t a) {
+  oper_ = a;
+}
 
 inline std::list<uint16_t> 
-acl_port_spec_t::ports() const{return _ports;}
+acl_port_spec_t::ports() const{
+  return ports_;
+}
 
 inline void
-acl_port_spec_t::ports(std::list<uint16_t> l) {_ports = l;}
+acl_port_spec_t::ports_is(std::list<uint16_t> const l) {
+  ports_ = l;
+}
+
+inline void 
+acl_rule_base_t::log_is(bool l) {
+  log_ = l;
+}
+
+inline bool
+acl_rule_base_t::log() const {
+  return log_;
+}
+
+inline void
+acl_rule_base_t::tracked_is(bool t) {
+  tracked_ = t;
+}
+
+inline bool 
+acl_rule_base_t::tracked() const {
+  return tracked_;
+}
+
+inline void 
+acl_rule_base_t::action_is(acl_action_t a) {
+  action_ = a;
+}
+
+inline acl_action_t
+acl_rule_base_t::action() const {
+  return action_;
+}
+
+inline void 
+acl_rule_ip_t::vlan_is(vlan_id_t v) {
+  vlan_ = v;
+}
+
+inline vlan_id_t 
+acl_rule_ip_t::vlan() const {
+  return vlan_;
+}
+
+inline void 
+acl_rule_ip_t::vlan_mask_is(vlan_id_t v) {
+  vlan_mask_ = v;
+}
+
+inline vlan_id_t 
+acl_rule_ip_t::vlan_mask() const {
+  return vlan_mask_;
+}
+
+inline void 
+acl_rule_ip_t::inner_vlan_is(vlan_id_t v) {
+  inner_vlan_ = v;
+}
+
+inline vlan_id_t 
+acl_rule_ip_t::inner_vlan() const {
+  return inner_vlan_;
+}
+
+inline void 
+acl_rule_ip_t::inner_vlan_mask_is(vlan_id_t v) {
+  inner_vlan_mask_ = v;
+}
+
+inline vlan_id_t 
+acl_rule_ip_t::inner_vlan_mask() const {
+  return inner_vlan_mask_;
+}
+
+inline void 
+acl_rule_ip_t::ip_protocol_is(uint8_t ip) {
+  ip_protocol_ = ip;
+}
+
+inline uint8_t
+acl_rule_ip_t::ip_protocol() const {
+  return ip_protocol_;
+}
+
+inline void 
+acl_rule_ip_t::ttl_is(acl_ttl_spec_t t) {
+  ttl_ = t;
+}
+
+inline acl_ttl_spec_t 
+acl_rule_ip_t::ttl() const {
+  return ttl_;
+}
+
+inline void 
+acl_rule_ip_t::source_addr_is(ip_addr_mask_t ip) {
+  source_addr_ = ip;
+}
+
+inline void 
+acl_rule_ip_t::destination_addr_is(ip_addr_mask_t ip) {
+  destination_addr_ = ip;
+}
+
+inline ip_addr_mask_t
+acl_rule_ip_t::source_addr() const {
+  return source_addr_;
+}
+
+inline ip_addr_mask_t
+acl_rule_ip_t::destination_addr() const {
+  return destination_addr_;
+}
+
+inline acl_port_spec_t 
+acl_rule_ip_t::source_port() const {
+  return source_port_;
+}
+
+inline acl_port_spec_t
+acl_rule_ip_t::destination_port() const {
+  return destination_port_;
+}
+
+inline void 
+acl_rule_ip_t::source_port_is(acl_port_spec_t const a) {
+  source_port_ = a;
+}
+
+inline void 
+acl_rule_ip_t::destination_port_is(acl_port_spec_t const a) {
+  destination_port_ = a;
+}
+
+inline void 
+acl_rule_ip_t::tcp_flags_is(uint16_t n) {
+  tcp_flags_ = n;
+}
+
+inline uint16_t 
+acl_rule_ip_t::tcp_flags() const {
+  return tcp_flags_;
+}
+
+inline void 
+acl_rule_ip_t::established_is(bool b) {
+  established_ = b;
+}
+
+inline bool 
+acl_rule_ip_t::established() const {
+  return established_;
+}
+
+inline void 
+acl_rule_ip_t::icmp_type_is(uint16_t n) {
+  icmp_type_ = n;
+}
+
+inline void
+acl_rule_ip_t::icmp_code_is(uint16_t n) {
+  icmp_code_ = n;
+}
+
+inline uint16_t
+acl_rule_ip_t::icmp_type() const {
+  return icmp_type_;
+}
+
+inline uint16_t 
+acl_rule_ip_t::icmp_code() const {
+  return icmp_code_;
+}
+
+inline void 
+acl_rule_ip_t::priority_value_is(uint8_t n) {
+  priority_value_ = n;
+}
+
+inline void 
+acl_rule_ip_t::priority_mask_is(uint8_t n) {
+  priority_mask_ = n;
+}
+
+inline void 
+acl_rule_ip_t::match_fragments_is(bool b) {
+  match_fragments_ = b;
+}
+
+inline void 
+acl_rule_ip_t::match_ip_priority_is(bool b) {
+  match_ip_priority_ = b;
+}
+
+inline uint8_t
+acl_rule_ip_t::priority_value() const {
+  return priority_value_;
+}
+
+inline uint8_t 
+acl_rule_ip_t::priority_mask() const {
+  return priority_mask_;
+}
+
+inline bool 
+acl_rule_ip_t::match_fragments() const {
+  return match_fragments_;
+}
+
+inline bool 
+acl_rule_ip_t::match_ip_priority() const {
+  return match_ip_priority_;
+}
+
+inline void 
+acl_rule_eth_t::vlan_is(vlan_id_t v) {
+  vlan_ = v;
+}
+
+inline void 
+acl_rule_eth_t::vlan_mask_is(vlan_id_t v) {
+  vlan_mask_ = v;
+}
+
+inline void 
+acl_rule_eth_t::inner_vlan_is(vlan_id_t v) {
+  inner_vlan_ = v;
+}
+
+inline void 
+acl_rule_eth_t::inner_vlan_mask_is(vlan_id_t v) {
+  inner_vlan_mask_ = v;
+}
+
+inline vlan_id_t 
+acl_rule_eth_t::vlan() const {
+  return vlan_;
+}
+
+inline vlan_id_t 
+acl_rule_eth_t::vlan_mask() const {
+  return vlan_mask_;
+}
+
+inline vlan_id_t 
+acl_rule_eth_t::inner_vlan() const {
+  return inner_vlan_;
+}
+
+inline vlan_id_t 
+acl_rule_eth_t::inner_vlan_mask() const {
+  return inner_vlan_mask_;
+}
+
+inline void 
+acl_rule_eth_t::source_addr_is(eth_addr_t const e) {
+  source_addr_ = e;
+}
+
+inline void 
+acl_rule_eth_t::source_mask_is(eth_addr_t const e) {
+  source_mask_ = e;
+}
+
+inline void 
+acl_rule_eth_t::destination_addr_is(eth_addr_t const e) {
+  destination_addr_ = e;
+}
+
+inline void 
+acl_rule_eth_t::destination_mask_is(eth_addr_t const e) {
+  destination_mask_ = e;
+}
+
+inline eth_addr_t 
+acl_rule_eth_t::source_addr() const {
+  return source_addr_;
+}
+
+inline eth_addr_t 
+acl_rule_eth_t::source_mask() const {
+  return source_mask_;
+}
+
+inline eth_addr_t 
+acl_rule_eth_t::destination_addr() const {
+  return destination_addr_;
+}
+
+inline eth_addr_t 
+acl_rule_eth_t::destination_mask() const{
+  return destination_mask_;
+}
 
 inline bool
 acl_key_t::operator() (acl_key_t const & lhs, acl_key_t const & rhs) const {
    return lhs.acl_name_ < rhs.acl_name_;
 }
-
-inline void 
-acl_rule_base_t::log(bool l) {_log = l;}
-
-inline bool
-acl_rule_base_t::log() const {return _log;}
-
-inline void
-acl_rule_base_t::tracked(bool t) {_tracked = t;}
-
-inline bool 
-acl_rule_base_t::tracked() const {return _tracked;}
-
-inline void 
-acl_rule_base_t::action(acl_action_t a) {_action = a;}
-
-inline acl_action_t
-acl_rule_base_t::action() const {return _action;}
-
-inline void 
-acl_rule_ip_t::vlan(vlan_id_t v) {_vlan = v;}
-inline vlan_id_t 
-acl_rule_ip_t::vlan() const {return _vlan;}
-inline void 
-acl_rule_ip_t::vlan_mask(vlan_id_t v) {_vlan_mask = v;}
-inline vlan_id_t 
-acl_rule_ip_t::vlan_mask() const {return _vlan_mask;}
-inline void 
-acl_rule_ip_t::inner_vlan(vlan_id_t v) {_inner_vlan = v;}
-inline vlan_id_t 
-acl_rule_ip_t::inner_vlan() const {return _inner_vlan;}
-inline void 
-acl_rule_ip_t::inner_vlan_mask(vlan_id_t v) {_inner_vlan_mask = v;}
-inline vlan_id_t 
-acl_rule_ip_t::inner_vlan_mask() const {return _inner_vlan_mask;}
-
-inline void 
-acl_rule_ip_t::ip_protocol(uint8_t ip) {_ip_protocol = ip;}
-inline uint8_t
-acl_rule_ip_t::ip_protocol() const {return _ip_protocol;}
-
-inline void 
-acl_rule_ip_t::ttl(acl_ttl_spec_t t) {_ttl = t;}
-inline acl_ttl_spec_t 
-acl_rule_ip_t::ttl() const {return _ttl;}
-
-inline void 
-acl_rule_ip_t::source_addr(ip_addr_mask_t ip) {_source_addr = ip;}
-inline void 
-acl_rule_ip_t::destination_addr(ip_addr_mask_t ip) {_destination_addr = ip;}
-inline ip_addr_mask_t
-acl_rule_ip_t::source_addr() const {return _source_addr;}
-inline ip_addr_mask_t
-acl_rule_ip_t::destination_addr() const {return _destination_addr;}
-inline acl_port_spec_t 
-acl_rule_ip_t::source_port() const {return _source_port;}
-inline acl_port_spec_t
-acl_rule_ip_t::destination_port() const {return _destination_port;}
-inline void 
-acl_rule_ip_t::source_port(acl_port_spec_t a) {_source_port = a;}
-inline void 
-acl_rule_ip_t::destination_port(acl_port_spec_t a) {_destination_port = a;}
-
-inline void 
-acl_rule_ip_t::tcp_flags(uint16_t n) {_tcp_flags = n;}
-inline uint16_t 
-acl_rule_ip_t::tcp_flags() const {return _tcp_flags;}
-
-inline void 
-acl_rule_ip_t::established(bool b) {_established = b;}
-inline bool 
-acl_rule_ip_t::established() const {return _established;}
-
-inline void 
-acl_rule_ip_t::icmp_type(uint16_t n) {_icmp_type = n;}
-inline void
-acl_rule_ip_t::icmp_code(uint16_t n) {_icmp_code = n;}
-inline uint16_t
-acl_rule_ip_t::icmp_type() const {return _icmp_type;}
-inline uint16_t 
-acl_rule_ip_t::icmp_code() const {return _icmp_code;}
-
-inline void 
-acl_rule_ip_t::priority_value(uint8_t n) {_priority_value = n;}
-inline void 
-acl_rule_ip_t::priority_mask(uint8_t n) {_priority_mask = n;}
-inline void 
-acl_rule_ip_t::match_fragments(bool b) {_match_fragments = b;}
-inline void 
-acl_rule_ip_t::match_ip_priority(bool b) {_match_ip_priority = b;}
-inline uint8_t
-acl_rule_ip_t::priority_value() const {return _priority_value;}
-inline uint8_t 
-acl_rule_ip_t::priority_mask() const {return _priority_mask;}
-inline bool 
-acl_rule_ip_t::match_fragments() const {return _match_fragments;}
-inline bool 
-acl_rule_ip_t::match_ip_priority() const {return _match_ip_priority;}
-
-inline void 
-acl_rule_eth_t::vlan(vlan_id_t v) {_vlan = v;}
-inline void 
-acl_rule_eth_t::vlan_mask(vlan_id_t v) {_vlan_mask = v;}
-inline void 
-acl_rule_eth_t::inner_vlan(vlan_id_t v) {_inner_vlan = v;}
-inline void 
-acl_rule_eth_t::inner_vlan_mask(vlan_id_t v) {_inner_vlan_mask = v;}
-inline vlan_id_t 
-acl_rule_eth_t::vlan() const{return _vlan;}
-inline vlan_id_t 
-acl_rule_eth_t::vlan_mask() const{return _vlan_mask;}
-inline vlan_id_t 
-acl_rule_eth_t::inner_vlan() const{return _inner_vlan;}
-inline vlan_id_t 
-acl_rule_eth_t::inner_vlan_mask() const{return _inner_vlan_mask;}
-
-inline void 
-acl_rule_eth_t::source_addr(eth_addr_t e) {_source_addr = e;}
-inline void 
-acl_rule_eth_t::source_mask(eth_addr_t e) {_source_mask = e;}
-inline void 
-acl_rule_eth_t::destination_addr(eth_addr_t e) {_destination_addr = e;}
-inline void 
-acl_rule_eth_t::destination_mask(eth_addr_t e) {_destination_mask = e;}
-inline eth_addr_t 
-acl_rule_eth_t::source_addr() const{return _source_addr;}
-inline eth_addr_t 
-acl_rule_eth_t::source_mask() const{return _source_mask;}
-inline eth_addr_t 
-acl_rule_eth_t::destination_addr() const{return _destination_addr;}
-inline eth_addr_t 
-acl_rule_eth_t::destination_mask() const{return _destination_mask;}
 
 inline bool
 acl_key_t::operator==(acl_key_t const & other) const {
@@ -187,105 +355,105 @@ inline acl_key_t::acl_key_t(std::string const & acl_name, acl_type_t acl_type)
    : acl_name_(acl_name), acl_type_(acl_type) {
 }
 
-inline acl_ttl_spec_t::acl_ttl_spec_t() : _oper(ACL_RANGE_ANY), _ttl(0) {
+inline acl_ttl_spec_t::acl_ttl_spec_t() : oper_(ACL_RANGE_ANY), ttl_(0) {
 }
 
 inline acl_ttl_spec_lt_t::acl_ttl_spec_lt_t(uint8_t ttl) {
-   _oper = ACL_RANGE_LT;
-   _ttl = ttl;
+   oper_ = ACL_RANGE_LT;
+   ttl_ = ttl;
 }
 
 inline acl_ttl_spec_gt_t::acl_ttl_spec_gt_t(uint8_t ttl) {
-   _oper = ACL_RANGE_GT;
-   _ttl = ttl;
+   oper_ = ACL_RANGE_GT;
+   ttl_ = ttl;
 }
 
 inline acl_ttl_spec_eq_t::acl_ttl_spec_eq_t(uint8_t ttl) {
-   _oper = ACL_RANGE_EQ;
-   _ttl = ttl;
+   oper_ = ACL_RANGE_EQ;
+   ttl_ = ttl;
 }
 
 inline acl_ttl_spec_neq_t::acl_ttl_spec_neq_t(uint8_t ttl) {
-   _oper = ACL_RANGE_NEQ;
-   _ttl = ttl;
+   oper_ = ACL_RANGE_NEQ;
+   ttl_ = ttl;
 }
 
 inline acl_ttl_spec_any_t::acl_ttl_spec_any_t() {
-   _oper = ACL_RANGE_ANY;
-   _ttl = 0;
+   oper_ = ACL_RANGE_ANY;
+   ttl_ = 0;
 }
 
-inline acl_port_spec_t::acl_port_spec_t() : _oper(ACL_RANGE_ANY), _ports() {
+inline acl_port_spec_t::acl_port_spec_t() : oper_(ACL_RANGE_ANY), ports_() {
 }
 
 inline acl_port_spec_eq_t::acl_port_spec_eq_t(uint16_t port) {
-   _oper = ACL_RANGE_EQ;
-   _ports.push_back(port);
+   oper_ = ACL_RANGE_EQ;
+   ports_.push_back(port);
 }
 
 inline acl_port_spec_eq_t::acl_port_spec_eq_t(std::list<uint16_t> ports) {
    for (std::list<uint16_t>::const_iterator pit = ports.begin(); pit != ports.end();
          ++pit) {
-      _ports.push_back(*pit);
+      ports_.push_back(*pit);
    }
 }
 
 inline acl_port_spec_neq_t::acl_port_spec_neq_t(uint16_t port) {
-   _oper = ACL_RANGE_NEQ;
-   _ports.push_back(port);
+   oper_ = ACL_RANGE_NEQ;
+   ports_.push_back(port);
 }
 
 inline acl_port_spec_lt_t::acl_port_spec_lt_t(uint16_t port) {
-   _oper = ACL_RANGE_LT;
-   _ports.push_back(port);
+   oper_ = ACL_RANGE_LT;
+   ports_.push_back(port);
 }
 
 inline acl_port_spec_gt_t::acl_port_spec_gt_t(uint16_t port) {
-   _oper = ACL_RANGE_GT;
-   _ports.push_back(port);
+   oper_ = ACL_RANGE_GT;
+   ports_.push_back(port);
 }
 
 inline acl_port_spec_any_t::acl_port_spec_any_t() {
-   _oper = ACL_RANGE_ANY;
+   oper_ = ACL_RANGE_ANY;
 }
 
 inline acl_range_operator_t acl_port_spec_t::oper() const {
-   return _oper;
+   return oper_;
 }
 
 inline acl_range_operator_t acl_ttl_spec_t::oper() const {
-   return _oper;
+   return oper_;
 }
 
 inline uint8_t acl_ttl_spec_t::ttl() const {
-   return _ttl;
+   return ttl_;
 }
 
 // Constructors for ACL rule base types.
 
 // Default values match internal TACC type default values
 inline acl_rule_base_t::acl_rule_base_t() :
-      _action(ACL_PERMIT), _log(false), _tracked(false) {
+      action_(ACL_PERMIT), log_(false), tracked_(false) {
 }
 
 // Constructors for concrete rule types passed to acl_add_rule() variants
 
-inline acl_rule_ip_t::acl_rule_ip_t() : _vlan(), _vlan_mask(0xFFF),
-                                        _inner_vlan(), _inner_vlan_mask(0xFFF),
-                                        _ip_protocol(),
-                                        _source_addr(), _destination_addr(),
-                                        _source_port(), _destination_port(),
-                                        _tcp_flags(),
-                                        _established(),
-                                        _icmp_type(ALL_ICMP), _icmp_code(ALL_ICMP),
-                                        _priority_value(), _priority_mask(),
-                                        _match_fragments(), _match_ip_priority() {
+inline acl_rule_ip_t::acl_rule_ip_t() : vlan_(), vlan_mask_(0xFFF),
+                                        inner_vlan_(), inner_vlan_mask_(0xFFF),
+                                        ip_protocol_(),
+                                        source_addr_(), destination_addr_(),
+                                        source_port_(), destination_port_(),
+                                        tcp_flags_(),
+                                        established_(),
+                                        icmp_type_(ALL_ICMP), icmp_code_(ALL_ICMP),
+                                        priority_value_(), priority_mask_(),
+                                        match_fragments_(), match_ip_priority_() {
 }
 
-inline acl_rule_eth_t::acl_rule_eth_t() : _vlan(), _vlan_mask(0xFFF),
-                                          _inner_vlan(), _inner_vlan_mask(0xFFF),
-                                          _source_addr(), _source_mask(),
-                                          _destination_addr(), _destination_mask() {
+inline acl_rule_eth_t::acl_rule_eth_t() : vlan_(), vlan_mask_(0xFFF),
+                                          inner_vlan_(), inner_vlan_mask_(0xFFF),
+                                          source_addr_(), source_mask_(),
+                                          destination_addr_(), destination_mask_() {
 }
 
 inline acl_mgr * acl_handler::get_acl_mgr() const {
