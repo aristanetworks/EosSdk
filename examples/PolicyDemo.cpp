@@ -51,9 +51,9 @@ class policy_demo : public eos::agent_handler,
       auto acl1 = eos::acl_key_t("acl1", eos::ACL_TYPE_IPV4);
       auto rule = eos::acl_rule_ip_t();
       // match source 0/0 (all traffic) for PBR
-      rule.action = eos::ACL_PERMIT;
-      rule.source_addr = eos::ip_addr_mask_t(sip, 1);
-      rule.destination_addr = eos::ip_addr_mask_t(sip, 32);
+      rule.action(eos::ACL_PERMIT);
+      rule.source_addr() = eos::ip_addr_mask_t(sip, 1);
+      rule.destination_addr() = eos::ip_addr_mask_t(sip, 32);
       get_acl_mgr()->acl_rule_set(acl1, 1, rule);
       get_acl_mgr()->acl_commit();
 
