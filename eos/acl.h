@@ -278,8 +278,8 @@ class EOS_SDK_PUBLIC acl_rule_ip_t : public acl_rule_base_t {
    void inner_vlan_mask_is(vlan_id_t v);
    void ip_protocol_is(uint8_t ip);
    void ttl_is(acl_ttl_spec_t t);
-   void source_addr_is(ip_addr_mask_t ip);
-   void destination_addr_is(ip_addr_mask_t ip);
+   void source_addr_is(ip_addr_mask_t const & ip);
+   void destination_addr_is(ip_addr_mask_t const & ip);
    void source_port_is(acl_port_spec_t const & a);
    void destination_port_is(acl_port_spec_t const & a);
    void tcp_flags_is(uint16_t n);

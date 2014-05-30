@@ -126,12 +126,12 @@ acl_rule_ip_t::ttl() const {
 }
 
 inline void 
-acl_rule_ip_t::source_addr_is(ip_addr_mask_t ip) {
+acl_rule_ip_t::source_addr_is(ip_addr_mask_t const & ip) {
   source_addr_ = ip;
 }
 
 inline void 
-acl_rule_ip_t::destination_addr_is(ip_addr_mask_t ip) {
+acl_rule_ip_t::destination_addr_is(ip_addr_mask_t const & ip) {
   destination_addr_ = ip;
 }
 
