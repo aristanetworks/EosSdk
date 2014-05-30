@@ -31,7 +31,7 @@ acl_port_spec_t::ports() const{
 }
 
 inline void
-acl_port_spec_t::ports_is(std::list<uint16_t> const l) {
+acl_port_spec_t::ports_is(std::list<uint16_t> const & l) {
   ports_ = l;
 }
 
@@ -156,12 +156,12 @@ acl_rule_ip_t::destination_port() const {
 }
 
 inline void 
-acl_rule_ip_t::source_port_is(acl_port_spec_t const a) {
+acl_rule_ip_t::source_port_is(acl_port_spec_t const & a) {
   source_port_ = a;
 }
 
 inline void 
-acl_rule_ip_t::destination_port_is(acl_port_spec_t const a) {
+acl_rule_ip_t::destination_port_is(acl_port_spec_t const & a) {
   destination_port_ = a;
 }
 
@@ -286,22 +286,22 @@ acl_rule_eth_t::inner_vlan_mask() const {
 }
 
 inline void 
-acl_rule_eth_t::source_addr_is(eth_addr_t const e) {
+acl_rule_eth_t::source_addr_is(eth_addr_t const & e) {
   source_addr_ = e;
 }
 
 inline void 
-acl_rule_eth_t::source_mask_is(eth_addr_t const e) {
+acl_rule_eth_t::source_mask_is(eth_addr_t const & e) {
   source_mask_ = e;
 }
 
 inline void 
-acl_rule_eth_t::destination_addr_is(eth_addr_t const e) {
+acl_rule_eth_t::destination_addr_is(eth_addr_t const & e) {
   destination_addr_ = e;
 }
 
 inline void 
-acl_rule_eth_t::destination_mask_is(eth_addr_t const e) {
+acl_rule_eth_t::destination_mask_is(eth_addr_t const & e) {
   destination_mask_ = e;
 }
 

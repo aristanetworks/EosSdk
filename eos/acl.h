@@ -140,7 +140,7 @@ class EOS_SDK_PUBLIC acl_port_spec_t {
    std::list<uint16_t> ports() const;
 
    void oper_is(acl_range_operator_t a);
-   void ports_is(std::list<uint16_t> const l);
+   void ports_is(std::list<uint16_t> const & l);
  protected:
    acl_range_operator_t oper_;
    std::list<uint16_t> ports_;
@@ -232,13 +232,13 @@ class EOS_SDK_PUBLIC acl_key_t {
  */
 class EOS_SDK_PUBLIC acl_rule_base_t {
  public:
-  void log_is(bool l);
-  void tracked_is(bool t);
-  void action_is(acl_action_t a);
-
   bool log() const;
   bool tracked() const;
   acl_action_t action() const;
+
+  void log_is(bool l);
+  void tracked_is(bool t);
+  void action_is(acl_action_t a);
 
  private:
    acl_action_t action_;
@@ -280,8 +280,8 @@ class EOS_SDK_PUBLIC acl_rule_ip_t : public acl_rule_base_t {
    void ttl_is(acl_ttl_spec_t t);
    void source_addr_is(ip_addr_mask_t ip);
    void destination_addr_is(ip_addr_mask_t ip);
-   void source_port_is(acl_port_spec_t const a);
-   void destination_port_is(acl_port_spec_t const a);
+   void source_port_is(acl_port_spec_t const & a);
+   void destination_port_is(acl_port_spec_t const & a);
    void tcp_flags_is(uint16_t n);
    void established_is(bool b);
    void icmp_type_is(uint16_t n);
@@ -328,15 +328,6 @@ class EOS_SDK_PUBLIC acl_rule_eth_t : public acl_rule_base_t {
  public:
    acl_rule_eth_t();
 
-   void vlan_is(vlan_id_t v);
-   void vlan_mask_is(vlan_id_t v);
-   void inner_vlan_is(vlan_id_t v);
-   void inner_vlan_mask_is(vlan_id_t v);
-   void source_addr_is(eth_addr_t const e);
-   void source_mask_is(eth_addr_t const e);
-   void destination_addr_is(eth_addr_t const e);
-   void destination_mask_is(eth_addr_t const e);
-
    vlan_id_t vlan() const;
    vlan_id_t vlan_mask() const;
    vlan_id_t inner_vlan() const;
@@ -345,6 +336,15 @@ class EOS_SDK_PUBLIC acl_rule_eth_t : public acl_rule_base_t {
    eth_addr_t source_mask() const;
    eth_addr_t destination_addr() const;
    eth_addr_t destination_mask() const;
+
+   void vlan_is(vlan_id_t v);
+   void vlan_mask_is(vlan_id_t v);
+   void inner_vlan_is(vlan_id_t v);
+   void inner_vlan_mask_is(vlan_id_t v);
+   void source_addr_is(eth_addr_t const & e);
+   void source_mask_is(eth_addr_t const & e);
+   void destination_addr_is(eth_addr_t const & e);
+   void destination_mask_is(eth_addr_t const & e);
 
  private:
    vlan_id_t vlan_;
