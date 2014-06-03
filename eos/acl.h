@@ -152,7 +152,7 @@ class EOS_SDK_PUBLIC acl_port_spec_t {
 class EOS_SDK_PUBLIC acl_port_spec_eq_t : public acl_port_spec_t {
  public:
    explicit acl_port_spec_eq_t(uint16_t port);
-   explicit acl_port_spec_eq_t(std::list<uint16_t> ports);
+   explicit acl_port_spec_eq_t(std::list<uint16_t> const & ports);
    friend class acl_internal;
 };
 
@@ -160,7 +160,7 @@ class EOS_SDK_PUBLIC acl_port_spec_eq_t : public acl_port_spec_t {
 class EOS_SDK_PUBLIC acl_port_spec_neq_t : public acl_port_spec_t {
  public:
    explicit acl_port_spec_neq_t(uint16_t port);
-   explicit acl_port_spec_neq_t(std::list<uint16_t> ports);
+   explicit acl_port_spec_neq_t(std::list<uint16_t> const & ports);
 
    friend class acl_internal;
 };
