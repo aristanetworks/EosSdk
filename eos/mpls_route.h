@@ -69,7 +69,7 @@ class EOS_SDK_PUBLIC mpls_route_via_t {
 
    /// Use these fields to determine the nexthop
 
-   ip_addr_t hop;           ///< IP v4/v6 nexthop address (for decap and IP forward)
+   ip_addr_t hop;           ///< IP v4/v6 nexthop address
    intf_id_t intf;          ///< Use the named interface if not a default intf_id_t
 
    mpls_label_t pushswap_label;  ///< Push or swap this label
