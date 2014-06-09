@@ -70,21 +70,21 @@ class EOS_SDK_PUBLIC nexthop_group_t {
     * Use duplicate addresses in different sequence numbers to perform
     * unequal cost multipath.
     *
-    * @param uint8_t Index into the destination IP array.
+    * @param uint16_t Index into the destination IP array.
     * @param ip_addr_t The IP address to set at the index. This must
     * be an IPv4 address.
     */
-   void destination_ip_set(uint8_t, ip_addr_t const &);
+   void destination_ip_set(uint16_t, ip_addr_t const &);
 
    /**
     * Deletes an entry in the nexthop group's destination IP address array.
     *
     * @param uint8_t Index into the destination IP array.
     */
-   void destination_ip_del(uint8_t);
+   void destination_ip_del(uint16_t);
 
    /// Returns a reference to the current destination address list.
-   std::map<uint8_t, ip_addr_t> const & destination_ips() const;
+   std::map<uint16_t, ip_addr_t> const & destination_ips() const;
 
    /// Returns the number of destination IP addresses in this nexthop group.
    uint16_t size() const;
@@ -100,7 +100,7 @@ class EOS_SDK_PUBLIC nexthop_group_t {
    ip_addr_t source_ip_;
    intf_id_t source_intf_;
    nexthop_group_encap_t encap_type_;
-   std::map<uint8_t, ip_addr_t> destination_ips_;
+   std::map<uint16_t, ip_addr_t> destination_ips_;
    bool persistent_;
 };
 
