@@ -73,7 +73,7 @@ nexthop_group_t::source_intf() const {
    return source_intf_;
 }
 
-inline std::map<uint8_t, ip_addr_t> const &
+inline std::map<uint16_t, ip_addr_t> const &
 nexthop_group_t::destination_ips() const {
    return destination_ips_;
 }
