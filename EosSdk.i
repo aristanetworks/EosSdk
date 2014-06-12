@@ -169,7 +169,7 @@ void throw_py_error(error const& err) {
 // Different stl containers used directly in our exposed headers
 %template() std::map<uint32_t, eos::class_map_rule_t>;
 %template() std::map<uint32_t, eos::policy_map_rule_t>;
-%template() std::map<uint8_t, eos::ip_addr_t>;
+%template() std::map<uint16_t, eos::ip_addr_t>;
 %template() std::set<eos::intf_id_t>;
 
 // For vlan_set
