@@ -34,9 +34,10 @@ libeos_la_SOURCES += nexthop_group.cpp
 libeos_la_SOURCES += panic.cpp
 libeos_la_SOURCES += neighbor_table.cpp
 libeos_la_SOURCES += policy_map.cpp
-libeos_la_SOURCES += timer.cpp
 libeos_la_SOURCES += sdk.cpp
 libeos_la_SOURCES += system.cpp
+libeos_la_SOURCES += timer.cpp
+libeos_la_SOURCES += tracing.cpp
 libeos_la_SOURCES += version.cpp
 
 libeos_la_LDFLAGS = -version-info $(SDK_LIBTOOL_VERSION) -lrt
