@@ -35,6 +35,7 @@ typedef double seconds_t;
 #define EOS_SDK_INTERNAL __attribute__ ((visibility ("default")))
 #define EOS_SDK_NORETURN __attribute__ ((noreturn))
 #define EOS_SDK_DEPRECATED __attribute__ ((deprecated))
+#define EOS_SDK_FORMAT_STRING_CHECK(N) __attribute__ ((format (printf, N, N+1)))
 #else
 // SWIG doesn't understand __attribute__ overload macros
 #define EOS_SDK_PUBLIC
@@ -42,6 +43,7 @@ typedef double seconds_t;
 #define EOS_SDK_INTERNAL
 #define EOS_SDK_NORETURN
 #define EOS_SDK_DEPRECATED
+#define EOS_SDK_FORMAT_STRING_CHECK(N)
 #endif
 
 #define EOS_SDK_DISALLOW_COPY_CTOR(ClassName) \
