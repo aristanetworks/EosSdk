@@ -4,6 +4,7 @@
 %module(directors="1") eossdk
 
 %include "stdint.i"
+%include "std_list.i"
 %include "std_map.i"
 %include "std_set.i"
 %include "std_string.i"
@@ -38,6 +39,7 @@ typedef uint64_t uint64_be_t;
 %feature("nodirector") eos::fib_mgr;
 %feature("nodirector") eos::intf_mgr;
 %feature("nodirector") eos::intf_counter_mgr;
+%feature("nodirector") eos::ip_intf_mgr;
 %feature("nodirector") eos::ip_route_mgr;
 %feature("nodirector") eos::mac_table_mgr;
 %feature("nodirector") eos::mlag_mgr;
@@ -61,6 +63,7 @@ typedef uint64_t uint64_be_t;
 #include "eos/eth_intf.h"
 #include "eos/decap_group.h"
 #include "eos/directflow.h"
+#include "eos/ip_intf.h"
 #include "eos/ip_route.h"
 #include "eos/neighbor_table.h"
 #include "eos/nexthop_group.h"
@@ -171,6 +174,7 @@ void throw_py_error(error const& err) {
 %template() std::map<uint32_t, eos::policy_map_rule_t>;
 %template() std::map<uint16_t, eos::ip_addr_t>;
 %template() std::set<eos::intf_id_t>;
+%template() std::set<eos::ip_addr_mask_t>;
 
 // For vlan_set
 %template(_BitSet4096) std::bitset<4096>;
@@ -207,6 +211,7 @@ void throw_py_error(error const& err) {
 %include "eos/timer.h"
 %include "eos/decap_group.h"
 %include "eos/directflow.h"
+%include "eos/ip_intf.h"
 %include "eos/ip_route.h"
 %include "eos/neighbor_table.h"
 %include "eos/nexthop_group.h"

@@ -97,6 +97,12 @@ ip_addr_mask_t::operator!=(ip_addr_mask_t const & other) const {
    return !(*this == other);
 }
 
+inline bool
+ip_addr_mask_t::operator<(ip_addr_mask_t const & other) const {
+   return (addr_ < other.addr_) ||
+      (addr_ == other.addr_ && mask_length_ < other.mask_length_);
+}
+
 // Accessors
 
 // The IPv4 address as a word in network byte order

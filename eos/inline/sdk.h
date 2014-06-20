@@ -94,6 +94,13 @@ inline intf_counter_mgr * sdk::get_intf_counter_mgr() {
    return intf_counter_mgr_;
 }
 
+inline ip_intf_mgr * sdk::get_ip_intf_mgr() {
+   if (!ip_intf_mgr_) {
+      init_ip_intf_mgr();
+   }
+   return ip_intf_mgr_;
+}
+
 inline ip_route_mgr * sdk::get_ip_route_mgr() {
    if (!ip_route_mgr_) {
       init_ip_route_mgr();

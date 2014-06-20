@@ -18,6 +18,7 @@ sdk::sdk()
      event_loop_(0),
      fib_mgr_(0),
      intf_mgr_(0),
+     ip_intf_mgr_(0),
      ip_route_mgr_(0),
      mac_table_mgr_(0),
      mlag_mgr_(0),
@@ -86,6 +87,10 @@ void sdk::init_intf_mgr() {
 }
 
 void sdk::init_intf_counter_mgr() {
+   // TODO: No op impl.
+}
+
+void sdk::init_ip_intf_mgr() {
    // TODO: No op impl.
 }
 
