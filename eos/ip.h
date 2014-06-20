@@ -170,6 +170,7 @@ class EOS_SDK_PUBLIC ip_addr_mask_t {
 
    bool operator==(ip_addr_mask_t const & other) const;
    bool operator!=(ip_addr_mask_t const & other) const;
+   bool operator<(ip_addr_mask_t const & other) const;
 
    /// Address family of this address/mask.
    af_t af() const;
