@@ -204,6 +204,9 @@ class EOS_SDK_PUBLIC ip_route_mgr {
     * Adds a via to an ip_route_t.
     * Will call panic() if the corresponding route does not match the
     * currently configured tag.
+    *
+    * @throws eos::invalid_argument_error If the passed via has no IP
+    * address, interface or nexthop group set.
     */
    virtual void ip_route_via_set(ip_route_via_t const &) = 0;
    /**
