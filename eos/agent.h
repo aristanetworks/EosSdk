@@ -13,6 +13,21 @@
 /**
  * @file
  * EOS Agent handler and agent loop management.
+ *
+ * The agent_handler and agent_mgr provide a means to manage the agent
+ * process lifecycle as managed by EOS' ProcMgr/Launcher
+ * infrastructure, including any agent specific cleanup that must be
+ * performed prior to ProcMgr terminating the agent when it is disabled.
+ *
+ * After ProcMgr tells Launcher to start the agent, if the agent is
+ * configured to shutdown in EOS, the on_agent_enabled function of
+ * agent_handler is called with false. In reaction to this call, if
+ * your agent has resources (such as files or sockets) to close prior
+ * to being terminated, you must override the implementation of
+ * on_agent_enabled() to perform this cleanup. After cleanup, from
+ * on_agent_enabled call the agent_mgr function
+ * agent_shutdown_complete_is(true) to signal to ProcMgr that your
+ * process is finished and can be terminated.
  */
 
 namespace eos {
@@ -44,7 +59,6 @@ class EOS_SDK_PUBLIC agent_handler : public base_handler<agent_mgr, agent_handle
     * agent_mgr's agent_shutdown_complete method. If you override
     * on_agent_enabled, then you are also responsible for calling
     * agent_shutdown_complete.
-    * 
     */
    virtual void on_agent_enabled(bool enabled);
 
@@ -78,8 +92,10 @@ class EOS_SDK_PUBLIC agent_mgr : public base_mgr<agent_handler> {
     /**
      * Return whether the agent is enabled or not.
      *
-     * When enabled is false, the agent is responsible for cleaning
-     * itself up as necessary and then calling running_is(false).
+     * When enabled is false, as reported by the agent_handler's
+     * on_agent_enabled() callback, the agent is responsible for
+     * cleaning itself up as necessary and then calling
+     * agent_shutdown_complete_is(false).
      */
     virtual bool enabled() const = 0;
 
@@ -100,7 +116,7 @@ class EOS_SDK_PUBLIC agent_mgr : public base_mgr<agent_handler> {
      * cleans up when the agent is disabled. Once the agent is
      * ready to be killed, it must call agent_shutdown_complete_is(true),
      * after which it will be killed by ProcMgr.
-     * 
+     *
      * This method is called automatically by the default implementation
      * of on_agent_enabled when the agent is disabled. If no special
      * cleanup handling is required, then simply do not override
