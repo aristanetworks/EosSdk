@@ -15,6 +15,7 @@ class class_map_mgr;
 class decap_group_mgr;
 class directflow_mgr;
 class eth_intf_mgr;
+class eth_lag_intf_mgr;
 class eth_phy_intf_mgr;
 class event_loop;
 class fib_mgr;
@@ -53,6 +54,7 @@ class EOS_SDK_PUBLIC sdk {
     void init_decap_group_mgr();
     void init_directflow_mgr();
     void init_eth_intf_mgr();
+    void init_eth_lag_intf_mgr();
     void init_eth_phy_intf_mgr();
     void init_event_loop();
     void init_fib_mgr();
@@ -78,6 +80,7 @@ class EOS_SDK_PUBLIC sdk {
     decap_group_mgr * get_decap_group_mgr();
     directflow_mgr * get_directflow_mgr();
     eth_intf_mgr * get_eth_intf_mgr();
+    eth_lag_intf_mgr * get_eth_lag_intf_mgr();
     eth_phy_intf_mgr * get_eth_phy_intf_mgr();
     event_loop * get_event_loop();
     fib_mgr * get_fib_mgr();
@@ -108,6 +111,7 @@ class EOS_SDK_PUBLIC sdk {
     directflow_mgr * directflow_mgr_;
     eth_intf_mgr * eth_intf_mgr_;
     eth_phy_intf_mgr * eth_phy_intf_mgr_;
+    eth_lag_intf_mgr * eth_lag_intf_mgr_;
     event_loop * event_loop_;
     fib_mgr * fib_mgr_;
     intf_mgr * intf_mgr_;

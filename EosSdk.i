@@ -17,6 +17,7 @@
 %rename("%(command:python $SRCDIR/SwigRenamer.py --classname <<""<)s", %$isclass) "";
 // Don't do anything for enum values, functions or variables.
 
+
 // Ignored conversions:
 
 #define SWIG_FILE_WITH_INIT
@@ -36,6 +37,7 @@ typedef uint64_t uint64_be_t;
 %feature("nodirector") eos::directflow_mgr;
 %feature("nodirector") eos::eth_intf_mgr;
 %feature("nodirector") eos::eth_phy_intf_mgr;
+%feature("nodirector") eos::eth_lag_intf_mgr;
 %feature("nodirector") eos::fib_mgr;
 %feature("nodirector") eos::intf_mgr;
 %feature("nodirector") eos::intf_counter_mgr;
@@ -61,6 +63,7 @@ typedef uint64_t uint64_be_t;
 #include "eos/ip.h"
 #include "eos/eth.h"
 #include "eos/eth_intf.h"
+#include "eos/eth_lag_intf.h"
 #include "eos/decap_group.h"
 #include "eos/directflow.h"
 #include "eos/ip_intf.h"
@@ -207,6 +210,7 @@ void throw_py_error(error const& err) {
 %include "eos/fd.h"
 %include "eos/intf.h"
 %include "eos/eth_intf.h"
+%include "eos/eth_lag_intf.h"
 %include "eos/ip.h"
 %include "eos/timer.h"
 %include "eos/decap_group.h"
@@ -234,6 +238,8 @@ void throw_py_error(error const& err) {
 wrap_iterator(eos::flow_entry_iter_t, eos::flow_entry_iter_impl, eos::flow_entry_t);
 wrap_iterator(eos::intf_iter_t, eos::intf_iter_impl, eos::intf_id_t);
 wrap_iterator(eos::eth_intf_iter_t, eos::eth_intf_iter_impl, eos::intf_id_t);
+wrap_iterator(eos::eth_lag_intf_iter_t, eos::eth_lag_intf_iter_impl, eos::intf_id_t);
+wrap_iterator(eos::eth_lag_intf_member_iter_t, eos::eth_lag_intf_member_iter_impl, eos::intf_id_t);
 wrap_iterator(eos::ip_route_iter_t, eos::ip_route_iter_impl, eos::ip_route_t);
 wrap_iterator(eos::ip_route_via_iter_t, eos::ip_route_via_iter_impl, eos::ip_route_via_t);
 wrap_iterator(eos::decap_group_iter_t, eos::decap_group_iter_impl, eos::decap_group_t);

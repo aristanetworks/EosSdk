@@ -59,6 +59,13 @@ inline eth_intf_mgr * sdk::get_eth_intf_mgr() {
    return eth_intf_mgr_;
 }
 
+inline eth_lag_intf_mgr * sdk::get_eth_lag_intf_mgr() {
+   if (!eth_lag_intf_mgr_) {
+      init_eth_lag_intf_mgr();
+   }
+   return eth_lag_intf_mgr_;
+}
+
 inline eth_phy_intf_mgr * sdk::get_eth_phy_intf_mgr() {
    if (!eth_phy_intf_mgr_) {
       init_eth_phy_intf_mgr();
