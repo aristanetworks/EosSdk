@@ -16,6 +16,7 @@ libeos_la_SOURCES += decap_group.cpp
 libeos_la_SOURCES += directflow.cpp
 libeos_la_SOURCES += eth.cpp
 libeos_la_SOURCES += eth_intf.cpp
+libeos_la_SOURCES += eth_lag_intf.cpp
 libeos_la_SOURCES += eth_phy_intf.cpp
 libeos_la_SOURCES += event_loop.cpp
 libeos_la_SOURCES += exception.cpp

@@ -15,6 +15,7 @@ sdk::sdk()
      directflow_mgr_(0),
      eth_intf_mgr_(0),
      eth_phy_intf_mgr_(0),
+     eth_lag_intf_mgr_(0),
      event_loop_(0),
      fib_mgr_(0),
      intf_mgr_(0),
@@ -71,6 +72,10 @@ void sdk::init_eth_intf_mgr() {
 }
 
 void sdk::init_eth_phy_intf_mgr() {
+   // TODO: No op impl.
+}
+
+void sdk::init_eth_lag_intf_mgr() {
    // TODO: No op impl.
 }
 
