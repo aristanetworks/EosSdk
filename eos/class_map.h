@@ -91,7 +91,7 @@ typedef std::pair<uint32_t, class_map_rule_t> class_map_rule_entry_t;
 class class_map_iter_impl;
 
 /// An iterator providing forwards only iteration over collections of class maps
-class EOS_SDK_PUBLIC class_map_iter_t : public iter_base<policy_map_key_t,
+class EOS_SDK_PUBLIC class_map_iter_t : public iter_base<class_map_key_t,
                                                          class_map_iter_impl> {
  private:
    friend class class_map_iter_impl;
@@ -108,6 +108,26 @@ class EOS_SDK_PUBLIC class_map_iter_t : public iter_base<policy_map_key_t,
 class EOS_SDK_PUBLIC class_map_mgr {
  public:
    virtual ~class_map_mgr();
+
+   /**
+    * Resync mediates class map configuration into a known good state.
+    *
+    * To start a resync, call resync_init() and then use the functions
+    * in the module to manipulate class maps like normal, setting them
+    * with class_map_is(). After all entries have been set, call
+    * resync_complete(), which will delete existing class_maps that
+    * were not added or modified during resync.
+    *
+    * During resync, this manager will act like it is referencing a
+    * temporary table that starts off empty. Thus, methods like exist,
+    * del, and getters will act only on that temporary table,
+    * regardless of the real values in Sysdb. The one exception is
+    * iteration; they will traverse the table stored in Sysdb,
+    * regardless of whether or not the manager is in resync mode.
+    */
+   virtual void resync_init() = 0;
+   /// Completes any underway resync operation.
+   virtual void resync_complete() = 0;
 
    /// Returns true if and only if the provided key exists in the system config
    virtual bool exists(class_map_key_t const & key) const = 0;
