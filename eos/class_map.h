@@ -23,6 +23,20 @@
 
 namespace eos {
 
+/**
+ * A special class map name which means "match all MPLS traffic"
+ *
+ * Use as follows when defining a class_map_key_t:
+ *
+ * @code{.cpp}
+ *   eos::class_map_key_t key(eos::CLASS_MAP_MPLS_ANY, eos::POLICY_FEATURE_PBR);
+ *   eos::class_map_t cm(key);
+ * @endcode
+ *
+ * Only one such rule can be set on any one policy map.
+ */
+static std::string const CLASS_MAP_MPLS_ANY("__mpls_permit_any__");
+
 typedef policy_map_key_t class_map_key_t;
 
 /**
@@ -49,6 +63,9 @@ class EOS_SDK_PUBLIC class_map_rule_t {
 
 /**
  * A class map. Classifies traffic to apply policy features to.
+ *
+ * A class map can match IP or MPLS traffic. To match IP traffic,
+ * specify a class map matching one or more IPv4 ACLs (for PBR).
  */
 class EOS_SDK_PUBLIC class_map_t {
  public:
@@ -72,21 +89,25 @@ class EOS_SDK_PUBLIC class_map_t {
    /// Removes the provided sequence rule entry from the class map
    void rule_del(uint32_t);
 
-   bool operator==(class_map_t const &) const;
-   bool operator!=(class_map_t const &) const;
-
    /// Sets the config persistence for this class map (defaults to false).
    void persistent_is(bool);
-   /// The persistence state for this class map
+
+   /**
+    * The persistence state for this class map.
+    *
+    * When true, the class map will be stored in the running
+    * and startup configuration.
+    */
    bool persistent() const;
+
+   bool operator==(class_map_t const &) const;
+   bool operator!=(class_map_t const &) const;
 
  private:
    class_map_key_t key_;
    std::map<uint32_t, class_map_rule_t> rules_;
    bool persistent_;
 };
-
-typedef std::pair<uint32_t, class_map_rule_t> class_map_rule_entry_t;
 
 class class_map_iter_impl;
 

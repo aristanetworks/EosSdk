@@ -24,6 +24,7 @@ enum acl_type_t {
    ACL_TYPE_IPV4,
    ACL_TYPE_IPV6,
    ACL_TYPE_ETH,
+   ACL_TYPE_MPLS,
 };
 
 /**
@@ -449,6 +450,15 @@ class EOS_SDK_PUBLIC acl_rule_eth_iter_t : public iter_base<acl_rule_eth_entry_t
  * creation, modification and deletion of ACLs, and functions to
  * commit changes, apply ACLs to interfaces as well as manage
  * fragements mode and enabling counters.
+ *
+ * When managing ACLs, you provide give an ACL key to modify, a
+ * "sequence number" which starts at 1 and goes up to MAXINT, and for
+ * set operations, the rule to set. Note: you must call commit() for
+ * your changes here to get pushed into the hardware, and once you
+ * have started setting rules, you must call acl_commit() prior to any
+ * calls to acl_apply(), else the manager will panic(). Note that
+ * extremely large numbers of ACLs or rules per ACL can result in
+ * undefined behaviour, including a switch reload.
  */
 class EOS_SDK_PUBLIC acl_mgr : public base_mgr<acl_handler> {
  public:
@@ -519,18 +529,18 @@ class EOS_SDK_PUBLIC acl_mgr : public base_mgr<acl_handler> {
    virtual void acl_rule_set(acl_key_t const &, uint32_t,
                              acl_rule_ip_t const &) = 0;
 
-   // Add and remove ACL rules of a particular type. If the ACL
-   // doesn't exist, it will be created before the rule is added to
-   // it. There's no explicit ACL add operation.
-   //
-   // You give an ACL key to modify, a "sequence number" which starts
-   // at 1 and goes up to MAXINT, and for set operations, the rule to
-   // set. Note: you must call commit() for your changes here to get
-   // pushed into the hardware, and once you have started setting
-   // rules, you must call acl_commit() prior to any calls to
-   // acl_apply(), else the manager will panic(). Note that extremely
-   // large numbers of ACLs or rules per ACL can result in undefined
-   // behaviour, including a switch reload.
+   /**
+    * Adds an Ethernet (MAC) ACL rule to an ACL.
+    *
+    * If the ACL doesn't exist, it will be created before the rule is
+    * added to it: there is no explicit "create ACL" operation. If the
+    * ACL type is not the same as the rule type (i.e., Ethernet),
+    * panic() is called.
+    *
+    * @param acl_key_t The ACL key to modify (name and ACL type)
+    * @param uint32_t ACL sequence number (in the range 1..MAXINT)
+    * @param acl_rule_eth_t ACL rule to set at sequence number
+    */
    virtual void acl_rule_set(acl_key_t const &, uint32_t,
                              acl_rule_eth_t const &) = 0;
 
