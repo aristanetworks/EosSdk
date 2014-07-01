@@ -91,6 +91,7 @@ class EOS_SDK_PUBLIC configuration_error : public error {
  public:
    virtual ~configuration_error() noexcept;
    explicit configuration_error(std::string const & msg) noexcept;
+   virtual void raise() const;  ///< Throws this exception.
 };
 
 /// Tried to configure an interface as a routed port that cannot be a routed port.

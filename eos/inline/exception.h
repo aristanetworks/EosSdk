@@ -80,6 +80,11 @@ inline
 configuration_error::~configuration_error() noexcept {
 }
 
+inline void
+configuration_error::raise() const {
+   throw *this;
+}
+
 inline
 not_switchport_eligible_error::~not_switchport_eligible_error() noexcept {
 }

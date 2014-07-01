@@ -42,6 +42,7 @@ policy_map_key_t::feature_is(policy_feature_t const & feature) {
 inline bool
 policy_map_key_t::operator==(policy_map_key_t const & other) const {
    return name_ == other.name_ &&
+          persistent_ == other.persistent_ &&
           feature_ == other.feature_;
 }
 
@@ -63,11 +64,12 @@ policy_map_key_t::operator<(policy_map_key_t const & other) const {
 
 
 inline policy_map_action_t::policy_map_action_t() :
-      action_type_(), nexthop_group_name_(), nexthops_() {
+      action_type_(), nexthop_group_name_(), nexthops_(), dscp_(), traffic_class_() {
 }
 
 inline policy_map_action_t::policy_map_action_t(policy_action_type_t action_type) :
-      action_type_(action_type), nexthop_group_name_(), nexthops_() {
+      action_type_(action_type), nexthop_group_name_(), nexthops_(), dscp_(), 
+      traffic_class_() {
 }
 
 inline 
@@ -115,11 +117,34 @@ policy_map_action_t::nexthop_del(ip_addr_t const & value) {
    nexthops_.erase(value);
 }
 
+
+inline uint8_t
+policy_map_action_t::dscp() const {
+   return dscp_;
+}
+
+inline void
+policy_map_action_t::dscp_is(uint8_t dscp) {
+   dscp_ = dscp;
+}
+
+inline uint8_t
+policy_map_action_t::traffic_class() const {
+   return traffic_class_;
+}
+
+inline void
+policy_map_action_t::traffic_class_is(uint8_t traffic_class) {
+   traffic_class_ = traffic_class;
+}
+
 inline bool
 policy_map_action_t::operator==(policy_map_action_t const & other) const {
    return action_type_ == other.action_type_ &&
           nexthop_group_name_ == other.nexthop_group_name_ &&
-          nexthops_ == other.nexthops_;
+          nexthops_ == other.nexthops_ &&
+          dscp_ == other.dscp_ &&
+          traffic_class_ == other.traffic_class_;
 }
 
 inline bool
@@ -129,7 +154,28 @@ policy_map_action_t::operator!=(policy_map_action_t const & other) const {
 
 inline bool
 policy_map_action_t::operator<(policy_map_action_t const & other) const {
-   return (nexthop_group_name_ < other.nexthop_group_name_);
+   if(action_type_ != other.action_type_) {
+      return action_type_ < other.action_type_;
+   } else if(nexthop_group_name_ != other.nexthop_group_name_) {
+      return nexthop_group_name_ < other.nexthop_group_name_;
+   } else if(nexthops_ != other.nexthops_) {
+      if(nexthops_.size() != other.nexthops_.size()) {
+         return nexthops_.size() < other.nexthops_.size();
+      }
+      for(auto nh1 = nexthops_.cbegin(), nh2 = other.nexthops_.cbegin();
+          nh1 != nexthops_.cend() || nh2 != other.nexthops_.end();
+          ++nh1, ++nh2) {
+         if(*nh1 < *nh2) {
+            return true;
+         }
+      }
+      return false;
+   } else if(dscp_ != other.dscp_) {
+      return dscp_ < other.dscp_;
+   } else if(traffic_class_ != other.traffic_class_) {
+      return traffic_class_ < other.traffic_class_;
+   }
+   return false;
 }
 
 inline policy_map_rule_t::policy_map_rule_t() :
@@ -223,16 +269,6 @@ policy_map_t::rules() const {
 }
 
 inline void
-policy_map_t::rules_is(std::map<uint32_t, policy_map_rule_t> const & rules) {
-   rules_ = rules;
-}
-
-inline void
-policy_map_t::rule_set(uint32_t key, policy_map_rule_t const & value) {
-   rules_[key] = value;
-}
-
-inline void
 policy_map_t::rule_del(uint32_t key) {
    rules_.erase(key);
 }
@@ -240,7 +276,8 @@ policy_map_t::rule_del(uint32_t key) {
 inline bool
 policy_map_t::operator==(policy_map_t const & other) const {
    return key_ == other.key_ &&
-          rules_ == other.rules_;
+      persistent_ == other.persistent_ &&
+      rules_ == other.rules_;
 }
 
 inline bool
@@ -252,7 +289,7 @@ inline void
 policy_map_t::persistent_is(bool persistent) {
    persistent_ = persistent;
 }
-
+ 
 inline bool
 policy_map_t::persistent() const {
    return persistent_;
