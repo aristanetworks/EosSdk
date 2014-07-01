@@ -72,6 +72,7 @@ class_map_t::rule_del(uint32_t seq) {
 inline bool
 class_map_t::operator==(class_map_t const & other) const {
    return key_ == other.key_ &&
+      persistent_ == other.persistent_ &&
       rules_ == other.rules_;
 }
 
