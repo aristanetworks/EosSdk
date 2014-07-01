@@ -42,7 +42,6 @@ policy_map_key_t::feature_is(policy_feature_t const & feature) {
 inline bool
 policy_map_key_t::operator==(policy_map_key_t const & other) const {
    return name_ == other.name_ &&
-          persistent_ == other.persistent_ &&
           feature_ == other.feature_;
 }
 
