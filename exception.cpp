@@ -76,6 +76,17 @@ internal_vlan_error::internal_vlan_error(vlan_id_t vlan) noexcept
    : configuration_error(internal_vlan_error_msg(vlan)), vlan_(vlan) {
 }
 
+static inline std::string address_overlap_error_msg(ip_addr_mask_t const & addr) {
+   std::stringstream str;
+   str << "Address " << addr.to_string() << " overlaps with an already configured"
+      " address";
+   return str.str();
+}
+
+address_overlap_error::address_overlap_error(ip_addr_mask_t const & addr) noexcept
+   : configuration_error(address_overlap_error_msg(addr)), addr_(addr) {
+}
+
 unsupported_policy_feature_error::unsupported_policy_feature_error(policy_feature_t
                                                                    policy_feature)
    noexcept : unsupported_error(std::string("Unsupported policy feature")),

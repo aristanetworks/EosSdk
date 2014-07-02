@@ -127,6 +127,17 @@ internal_vlan_error::vlan() const noexcept {
    return vlan_;
 }
 
+inline address_overlap_error::~address_overlap_error() noexcept {
+}
+
+inline void address_overlap_error::raise() const {
+   throw *this;
+}
+
+inline ip_addr_mask_t address_overlap_error::addr() const noexcept {
+   return addr_;
+}
+
 inline
 unsupported_error::unsupported_error(std::string const & msg) noexcept : error(msg) {
 }
