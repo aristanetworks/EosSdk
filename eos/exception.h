@@ -130,6 +130,18 @@ class EOS_SDK_PUBLIC internal_vlan_error : public configuration_error {
    vlan_id_t vlan_;
 };
 
+/// The given address with mask overlaps with another configured address
+class EOS_SDK_PUBLIC address_overlap_error : public configuration_error {
+ public:
+   virtual ~address_overlap_error() noexcept;
+   explicit address_overlap_error(ip_addr_mask_t const & addr) noexcept;
+   virtual void raise() const;  ///< Throws this exception.
+   ip_addr_mask_t addr() const noexcept;
+
+ private:
+   ip_addr_mask_t addr_;
+};
+
 /// Base class for "unsupported" errors
 class EOS_SDK_PUBLIC unsupported_error : public error {
  public:
