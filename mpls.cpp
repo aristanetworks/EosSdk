@@ -3,7 +3,6 @@
 
 #include "eos/exception.h"
 #include "eos/mpls.h"
-#include "eos/panic.h"
 
 namespace eos {
 
@@ -13,15 +12,12 @@ mpls_label_t::mpls_label_t() {
    label_ = mpls_label_unset;
 }
 
-mpls_label_t::mpls_label_t(uint32_t label) {
-   if(label == mpls_label_unset) {
-      panic(invalid_argument_error("Cannot use the null mpls label"));
-   }
-   label_ = label;
+invalid_range_error invalid_mpls_label(uint32_t label) {
+   return invalid_range_error("label", mpls_label_t::MIN, mpls_label_t::MAX);
 }
 
 bool mpls_label_t::operator!() const {
-   return (label_ == mpls_label_unset);
+   return label_ == mpls_label_unset;
 }
 
 }
