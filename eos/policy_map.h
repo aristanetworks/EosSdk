@@ -265,7 +265,7 @@ class EOS_SDK_PUBLIC policy_map_rule_t {
    policy_map_rule_t();
    explicit policy_map_rule_t(class_map_key_t const & class_map_key);
 
-   /// Returns the class map key (name is "__mpls_permit_any__" if matching MPLS)
+   /// Returns the class map key (name is CLASS_MAP_MPLS_ANY if matching MPLS)
    class_map_key_t class_map_key() const;
    /// Sets IP traffic match mode to match traffic for the class map.
    void class_map_key_is(class_map_key_t const & class_map_key);
