@@ -138,7 +138,7 @@ class EOS_SDK_PUBLIC acl_port_spec_t {
  public:
    acl_port_spec_t();  // Default port spec; matches any port
    acl_range_operator_t oper() const;
-   std::list<uint16_t> ports() const;
+   std::list<uint16_t> const & ports() const;
 
    void oper_is(acl_range_operator_t a);
    void ports_is(std::list<uint16_t> const & l);

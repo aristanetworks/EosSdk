@@ -65,7 +65,7 @@ inline acl_range_operator_t acl_port_spec_t::oper() const {
    return oper_;
 }
 
-inline std::list<uint16_t> acl_port_spec_t::ports() const{
+inline std::list<uint16_t> const & acl_port_spec_t::ports() const{
   return ports_;
 }
 
@@ -84,8 +84,8 @@ inline acl_port_spec_eq_t::acl_port_spec_eq_t(uint16_t port) {
 
 inline acl_port_spec_eq_t::acl_port_spec_eq_t(std::list<uint16_t> const & ports) {
    oper_ = ACL_RANGE_EQ;
-   for (std::list<uint16_t>::const_iterator pit = ports.begin(); pit != ports.end();
-         ++pit) {
+   for (std::list<uint16_t>::const_iterator pit = ports.cbegin(); 
+        pit != ports.cend(); ++pit) {
       ports_.push_back(*pit);
    }
 }
@@ -97,8 +97,8 @@ inline acl_port_spec_neq_t::acl_port_spec_neq_t(uint16_t port) {
 
 inline acl_port_spec_neq_t::acl_port_spec_neq_t(std::list<uint16_t> const & ports) {
    oper_ = ACL_RANGE_NEQ;
-   for (std::list<uint16_t>::const_iterator pit = ports.begin(); pit != ports.end();
-         ++pit) {
+   for (std::list<uint16_t>::const_iterator pit = ports.cbegin();
+        pit != ports.cend(); ++pit) {
       ports_.push_back(*pit);
    }
 }
