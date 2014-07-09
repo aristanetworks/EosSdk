@@ -32,15 +32,6 @@ class decap_group_mgr_impl : public decap_group_mgr {
        return *nop;  // TODO: No op impl.
     }
 
-    void decap_group_foreach(callback_func_decap_group handler, void *context) {
-       // TODO: No op impl.
-    }
-
-    void decap_group_foreach(callback_func_decap_group handler, void * context,
-                             decap_group_t const &bookmark) {
-       // TODO: No op impl.
-    }
-
     void decap_group_set(decap_group_t const &group) {
        if(group.group_name().empty()) {
           panic("Empty decap group name");

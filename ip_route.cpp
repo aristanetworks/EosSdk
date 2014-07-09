@@ -42,20 +42,6 @@ class ip_route_mgr_impl : public ip_route_mgr {
       return *nop;  // TODO: No op impl.
    }
 
-   void ip_route_foreach(callback_func_route handler, void *context) {
-      // TODO: No op impl.
-   }
-
-   void ip_route_foreach(callback_func_route handler, void *context,
-                         const ip_route_t & bookmark) {
-      // TODO: No op impl.
-   }
-
-   void ip_route_via_foreach(const ip_route_key_t & route_key,
-                             callback_func_via handler, void *context) {
-      // TODO: No op impl.
-   }
-
    bool exists(const ip_route_key_t & route_key) const {
       return false;  // TODO: No op impl.
    }

@@ -49,12 +49,6 @@ class eth_intf_mgr_impl : public eth_intf_mgr {
       return *nop;  // TODO: No op impl.
    }
 
-   void eth_intf_foreach(callback_func_eth_intf, void *) {
-   }
-
-   void eth_intf_foreach(callback_func_eth_intf, void *, intf_id_t) {
-   }
-
    bool exists(intf_id_t) const {
       return false;
    }

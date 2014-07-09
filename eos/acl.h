@@ -464,49 +464,14 @@ class EOS_SDK_PUBLIC acl_mgr : public base_mgr<acl_handler> {
  public:
    virtual ~acl_mgr();
 
-   typedef bool (*acl_cb)(acl_key_t const &, void * context);
-   typedef bool (*acl_rule_ip_cb)(uint32_t seq,
-                                  acl_rule_ip_t const &,
-                                  void * context);
-   typedef bool (*acl_rule_eth_cb)(uint32_t seq,
-                                   acl_rule_eth_t const &,
-                                   void * context);
-
    /// Iterates over all ACLs.
    virtual acl_iter_t acl_iter() const = 0;
-
-   /**
-    * Iterates over all ACLs from the beginning.
-    *
-    * @deprecated Use acl_iter() instead.
-    * @param[in] handler An ACL callback handler.
-    * @param[out] context A pointer to state to pass to the handler when called.
-    */
-   virtual void acl_foreach(acl_cb handler, void * context) EOS_SDK_DEPRECATED = 0;
-   virtual void acl_foreach(acl_cb handler, void * context, acl_key_t bookmark)
-      EOS_SDK_DEPRECATED = 0;
 
    /// Iterates over the rules with an IP ACL.
    virtual acl_rule_ip_iter_t acl_rule_ip_iter(acl_key_t const &) const = 0;
 
-   /**
-    * Iterates over the rules with an IP ACL.
-    * Provide a callback function matching the acl_rule_cb_* definitions above.
-    * @deprecated Use acl_rule_ip_iter() instead.
-    */
-   virtual void acl_rule_ip_foreach(acl_key_t const &, acl_rule_ip_cb,
-                                    void * context) EOS_SDK_DEPRECATED = 0;
-
    /// Iterates over the rules with an Ethernet ACL.
    virtual acl_rule_eth_iter_t acl_rule_eth_iter(acl_key_t const &) const = 0;
-
-   /**
-    * Iterates over the rules with an Ethernet ACL.
-    * Provide a callback function matching the acl_rule_cb_* definitions above.
-    * @deprecated Use acl_rule_eth_iter() instead.
-    */
-   virtual void acl_rule_eth_foreach(acl_key_t const &, acl_rule_eth_cb,
-                                     void * context) EOS_SDK_DEPRECATED = 0;
 
    /**
     * Configuration ACL existance test.
