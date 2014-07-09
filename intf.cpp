@@ -92,15 +92,6 @@ class intf_mgr_impl : public intf_mgr {
       return *nop;  // TODO: No op impl.
    }
 
-   void intf_foreach(bool (*handler)(intf_id_t, void *), void *) {
-      // TODO: No op impl.
-   }
-
-   void intf_foreach(bool (*handler)(intf_id_t, void *), void *,
-                          intf_id_t bookmark) {
-      // TODO: No op impl.
-   }
-
    bool exists(intf_id_t) const {
       return false;  // TODO: No op impl.
    }

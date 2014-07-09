@@ -81,14 +81,7 @@ class EOS_SDK_PUBLIC eth_intf_mgr : public base_mgr<eth_intf_handler, intf_id_t>
 
    // Collection management
    virtual eth_intf_iter_t eth_intf_iter() const = 0;
-   typedef bool (*callback_func_eth_intf)(intf_id_t, void * context);
-   /// @deprecated Use eth_intf_iter() instead.
-   virtual void eth_intf_foreach(callback_func_eth_intf handler, void * context)
-      EOS_SDK_DEPRECATED = 0;
-   /// @deprecated Use eth_intf_iter() instead.
-   virtual void eth_intf_foreach(callback_func_eth_intf handler, void * context,
-                                 intf_id_t bookmark)
-      EOS_SDK_DEPRECATED = 0;  // Use eth_intf_iter() instead.
+
    virtual bool exists(intf_id_t) const = 0;
 
    // Attribute accessors
