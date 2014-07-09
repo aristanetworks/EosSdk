@@ -107,9 +107,9 @@ class EOS_SDK_PUBLIC agent_mgr : public base_mgr<agent_handler> {
      */
     virtual std::string agent_option(std::string const & name) const = 0;
 
-    /// Store agent status under the given key
+    /// Store custom agent status mapped to the given key
     virtual void status_set(std::string const & key,
-                          std::string const & value) = 0;
+                            std::string const & value) = 0;
     /// Delete the stored agent status with the given key
     virtual void status_del(std::string const & key) = 0;
 
