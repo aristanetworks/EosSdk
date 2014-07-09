@@ -79,6 +79,7 @@ typedef uint64_t uint64_be_t;
 #include "eos/sdk.h"
 #include "eos/system.h"
 #include "eos/tracing.h"
+#include "eos/version.h"
 
 using namespace eos;
 
@@ -229,6 +230,7 @@ void throw_py_error(error const& err) {
 %include "eos/sdk.h"
 %include "eos/system.h"
 %include "eos/tracing.h"
+%include "eos/version.h"
 
 %extend eos::error {
    std::string const & __str__() {
