@@ -33,6 +33,7 @@ typedef uint64_t uint64_be_t;
 %feature("director");
 %feature("nodirector") eos::acl_mgr;
 %feature("nodirector") eos::agent_mgr;
+%feature("nodirector") eos::class_map_mgr;
 %feature("nodirector") eos::decap_group_mgr;
 %feature("nodirector") eos::directflow_mgr;
 %feature("nodirector") eos::eth_intf_mgr;
@@ -53,22 +54,23 @@ typedef uint64_t uint64_be_t;
 %feature("nodirector") eos::timeout_mgr;
 
 %{
+#include "eos/acl.h"
 #include "eos/agent.h"
 #include "eos/event_loop.h"
-#include "eos/exception.h"
-#include "eos/fd.h"
-#include "eos/timer.h"
-#include "eos/iterator.h"
-#include "eos/intf.h"
-#include "eos/ip.h"
+#include "eos/class_map.h"
+#include "eos/decap_group.h"
+#include "eos/directflow.h"
 #include "eos/eth.h"
 #include "eos/eth_intf.h"
 #include "eos/eth_lag_intf.h"
 #include "eos/eth_phy_intf.h"
-#include "eos/decap_group.h"
-#include "eos/directflow.h"
+#include "eos/exception.h"
+#include "eos/fd.h"
+#include "eos/intf.h"
+#include "eos/ip.h"
 #include "eos/ip_intf.h"
 #include "eos/ip_route.h"
+#include "eos/iterator.h"
 #include "eos/neighbor_table.h"
 #include "eos/nexthop_group.h"
 #include "eos/mac_table.h"
@@ -78,6 +80,7 @@ typedef uint64_t uint64_be_t;
 #include "eos/policy_map.h"
 #include "eos/sdk.h"
 #include "eos/system.h"
+#include "eos/timer.h"
 #include "eos/tracing.h"
 #include "eos/version.h"
 
@@ -116,6 +119,7 @@ void throw_py_error(error const& err) {
    TRANSLATE_EXCEPTION(invalid_vlan_error)
    TRANSLATE_EXCEPTION(internal_vlan_error)
    TRANSLATE_EXCEPTION(unsupported_policy_feature_error)
+   TRANSLATE_EXCEPTION(address_overlap_error)
    catch(error const & e) {
       misc_error * exc = new misc_error(e.msg());
       PyObject * obj = SWIG_NewPointerObj(exc, SWIGTYPE_p_eos__error,
@@ -184,19 +188,6 @@ void throw_py_error(error const& err) {
 // For vlan_set
 %template(_BitSet4096) std::bitset<4096>;
 
-// Ignore all the old-style iterators.
-%ignore eos::acl_mgr::acl_foreach;
-%ignore eos::acl_mgr::acl_rule_eth_foreach;
-%ignore eos::acl_mgr::acl_rule_ip_foreach;
-%ignore eos::decap_group_mgr::decap_group_foreach;
-%ignore eos::eth_intf_mgr::eth_intf_foreach;
-%ignore eos::eth_phy_intf_mgr::eth_phy_intf_foreach;
-%ignore eos::intf_mgr::intf_foreach;
-%ignore eos::ip_route_mgr::ip_route_foreach;
-%ignore eos::ip_route_mgr::ip_route_via_foreach;
-%ignore eos::mpls_route_mgr::mpls_route_foreach;
-%ignore eos::mpls_route_mgr::mpls_route_via_foreach;
-
 %include "eos/agent.h"
 // Ignore the `raise' method of all exceptions.  `raise' is a Python keyword
 // and also this method is used to throw the exception from C++ and is useless
@@ -206,20 +197,22 @@ void throw_py_error(error const& err) {
 // the `msg' method (it's only provided for "compatibility" with standard
 // exceptions).
 %ignore what;
-%include "eos/exception.h"
-%include "eos/eth.h"
+%include "eos/acl.h"
 %include "eos/event_loop.h"
-%include "eos/fd.h"
-%include "eos/intf.h"
+%include "eos/class_map.h"
+%include "eos/decap_group.h"
+%include "eos/directflow.h"
+%include "eos/eth.h"
 %include "eos/eth_intf.h"
 %include "eos/eth_lag_intf.h"
 %include "eos/eth_phy_intf.h"
+%include "eos/exception.h"
+%include "eos/fd.h"
+%include "eos/intf.h"
 %include "eos/ip.h"
-%include "eos/timer.h"
-%include "eos/decap_group.h"
-%include "eos/directflow.h"
 %include "eos/ip_intf.h"
 %include "eos/ip_route.h"
+%include "eos/iterator.h"
 %include "eos/neighbor_table.h"
 %include "eos/nexthop_group.h"
 %include "eos/mac_table.h"
@@ -229,8 +222,10 @@ void throw_py_error(error const& err) {
 %include "eos/policy_map.h"
 %include "eos/sdk.h"
 %include "eos/system.h"
+%include "eos/timer.h"
 %include "eos/tracing.h"
 %include "eos/version.h"
+
 
 %extend eos::error {
    std::string const & __str__() {
@@ -239,12 +234,16 @@ void throw_py_error(error const& err) {
 };
 
 // Pythonify our iterators.
+wrap_iterator(eos::acl_iter_t, eos::acl_iter_impl, eos::acl_key_t);
+wrap_iterator(eos::acl_rule_ip_iter_t, eos::acl_rule_ip_iter_impl, eos::acl_rule_ip_entry_t);
+wrap_iterator(eos::acl_rule_eth_iter_t, eos::acl_rule_eth_iter_impl, eos::acl_rule_eth_entry_t);
+wrap_iterator(eos::class_map_iter_t, eos::class_map_iter_impl, eos::class_map_key_t);
 wrap_iterator(eos::flow_entry_iter_t, eos::flow_entry_iter_impl, eos::flow_entry_t);
-wrap_iterator(eos::intf_iter_t, eos::intf_iter_impl, eos::intf_id_t);
 wrap_iterator(eos::eth_intf_iter_t, eos::eth_intf_iter_impl, eos::intf_id_t);
 wrap_iterator(eos::eth_lag_intf_iter_t, eos::eth_lag_intf_iter_impl, eos::intf_id_t);
 wrap_iterator(eos::eth_lag_intf_member_iter_t, eos::eth_lag_intf_member_iter_impl, eos::intf_id_t);
 wrap_iterator(eos::eth_phy_intf_iter_t, eos::eth_phy_intf_iter_impl, eos::intf_id_t);
+wrap_iterator(eos::intf_iter_t, eos::intf_iter_impl, eos::intf_id_t);
 wrap_iterator(eos::ip_route_iter_t, eos::ip_route_iter_impl, eos::ip_route_t);
 wrap_iterator(eos::ip_route_via_iter_t, eos::ip_route_via_iter_impl, eos::ip_route_via_t);
 wrap_iterator(eos::decap_group_iter_t, eos::decap_group_iter_impl, eos::decap_group_t);

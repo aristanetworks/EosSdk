@@ -35,7 +35,7 @@ namespace eos {
  *
  * Only one such rule can be set on any one policy map.
  */
-static std::string const CLASS_MAP_MPLS_ANY("__mpls_permit_any__");
+static std::string const CLASS_MAP_MPLS_ANY = "__mpls_permit_any__";
 
 typedef policy_map_key_t class_map_key_t;
 
