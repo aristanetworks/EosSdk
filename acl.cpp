@@ -45,23 +45,9 @@ class acl_mgr_impl : acl_mgr {
       return *nop;  // TODO: No op impl.
    }
 
-   void acl_foreach(acl_cb handle, void * context) {
-   }
-
-   void acl_foreach(acl_cb handle, void * context, acl_key_t bookmark) {
-   }
-
    acl_rule_eth_iter_t acl_rule_eth_iter(acl_key_t const &) const {
       acl_rule_eth_iter_t * nop = 0;
       return *nop;  // TODO: No op impl.
-   }
-
-   void acl_rule_eth_foreach(acl_key_t const &,
-                                 acl_rule_eth_cb handle, void * context) {
-   }
-
-   void acl_rule_ip_foreach(acl_key_t const &,
-                                acl_rule_ip_cb handle, void * context) {
    }
 
    bool acl_exists(acl_key_t const & key) const {

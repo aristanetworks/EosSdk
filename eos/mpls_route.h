@@ -113,30 +113,9 @@ class EOS_SDK_PUBLIC mpls_route_mgr {
    /// Returns an MPLS route iterator.
    virtual mpls_route_iter_t mpls_route_iter() const = 0;
 
-   typedef bool (*callback_func_route)(mpls_route_t const &, void * context);
-   typedef bool (*callback_func_via)(mpls_route_via_t const &, void * context);
-
-   /// Iterate across all MPLS static routes.
-   /// @deprecated Use mpls_route_iter() instead.
-   virtual void mpls_route_foreach(callback_func_route handler, void * context)
-      EOS_SDK_DEPRECATED = 0;
-   /// Iterate across all MPLS static routes from a given bookmark.
-   /// @deprecated Use mpls_route_iter() instead.
-   virtual void mpls_route_foreach(callback_func_route handler, void * context,
-                                   mpls_route_t const & bookmark)
-      EOS_SDK_DEPRECATED = 0;
-
    /// Returns an MPLS via iterator for a given route (key).
    virtual mpls_route_via_iter_t mpls_route_via_iter(mpls_route_key_t const &)
       const = 0;
-   /**
-    * Iterates over configured nexthops for a given MPLS route.
-    * emits all mpls_route_via_t's for a given mpls_route_t.
-    * @deprecated Use mpls_route_iter() instead.
-    */
-   virtual void mpls_route_via_foreach(mpls_route_key_t const &,
-                                       callback_func_via handler, void * context)
-      EOS_SDK_DEPRECATED = 0;
 
    /// Tests for existence of any routes matching the route key in the switch config
    virtual bool exists(mpls_route_key_t const &) const = 0;

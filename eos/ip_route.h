@@ -155,21 +155,11 @@ class EOS_SDK_PUBLIC ip_route_mgr {
    /// Completes any underway resync operation.
    virtual void resync_complete() = 0;
 
-   typedef bool (*callback_func_route)(ip_route_t const &, void * context);
-   typedef bool (*callback_func_via)(ip_route_via_t const &, void * context);
-
    /**
     * Iterates across all configured static routes.
     * If a tag is set, only return routes that have match the current tag.
     */
    virtual ip_route_iter_t ip_route_iter() const = 0;
-   /// @deprecated Use ip_route_iter() instead.
-   virtual void ip_route_foreach(callback_func_route handler, void * context)
-      EOS_SDK_DEPRECATED = 0;
-   /// @deprecated Use ip_route_iter() instead.
-   virtual void ip_route_foreach(callback_func_route handler, void * context,
-                                 ip_route_t const & bookmark)
-      EOS_SDK_DEPRECATED = 0;
 
    /**
     * Iterates across configured nexthops for a given route key,
@@ -177,10 +167,6 @@ class EOS_SDK_PUBLIC ip_route_mgr {
     * is set, only return vias on routes that match the current tag.
     */
    virtual ip_route_via_iter_t ip_route_via_iter(ip_route_key_t const &) const = 0;
-   /// @deprecated Use ip_route_via_iter() instead.
-   virtual void ip_route_via_foreach(ip_route_key_t const &,
-                                     callback_func_via handler, void * context)
-      EOS_SDK_DEPRECATED = 0;
 
    /**
     * Tests for existence of any routes matching the route key in the config.
