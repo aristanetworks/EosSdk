@@ -63,6 +63,19 @@ class agent_mgr_impl : public agent_mgr {
       return "";
    }
 
+   void
+   status_set(std::string const & key, std::string const & value) {
+   }
+
+   void
+   status_del(std::string const & key) {
+   }
+   
+   std::string
+   status(std::string const & key) const {
+      return "";
+   }
+
 };
 
 void handle_agent_initialize(agent_mgr * mgr) {

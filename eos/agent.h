@@ -107,6 +107,20 @@ class EOS_SDK_PUBLIC agent_mgr : public base_mgr<agent_handler> {
      */
     virtual std::string agent_option(std::string const & name) const = 0;
 
+    /// Store agent status under the given key
+    virtual void status_set(std::string const & key,
+                          std::string const & value) = 0;
+    /// Delete the stored agent status with the given key
+    virtual void status_del(std::string const & key) = 0;
+
+    /**
+     * Get the status value stored by the agent under the given key.
+     *
+     * If no value has been stored under the given key, the empty
+     * string is returned.
+     */
+    virtual std::string status(std::string const & key) const = 0;
+
     /**
      * Called when agent graceful shutdown has successfully completed.
      *
