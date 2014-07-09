@@ -1,3 +1,21 @@
+/**
+ * @file
+ * The version module. It provides EosSdk version information.
+ *
+ * This module provides access to EosSdk version information, including
+ * version major number, version minor number and version patch number.
+ *
+ * To access the version information, application will need to include
+ * "eos/version.h", then it can access it directly, as following:
+ *   eos::version_major
+ *   eos::version_minor
+ *   eos::version_patch
+ *   eos::version
+ *
+ *   Note: eos::version is of type "char *" while version_major, version_minor
+ *   and version_patch are of type "uint8_t".
+ */
+
 // Copyright (c) 2013 Arista Networks, Inc.  All rights reserved.
 // Arista Networks, Inc. Confidential and Proprietary.
 

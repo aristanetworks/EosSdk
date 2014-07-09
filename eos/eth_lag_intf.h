@@ -1,3 +1,79 @@
+/**
+ * @file
+ * The eth_lag_intf module manages link aggregation groups (LAGs), also known as
+ * Port Channels.
+ *
+ * LAGs bundle physical interfaces together into a single logical link to provide
+ * combined bandwidth and other benefits. This module provides APIs to provision
+ * LAG interfaces. APIs include LAG creation, deletion, retrieval,  member interface
+ * adding to or removal from LAG interfaces. Two iterators are also provided to
+ * allow iteration through all the LAG interfaces and also all the member interfaces
+ * that are configured on the system.
+ *
+ * The LAG APIs are best working with "intf" module, as shown in the sample code
+ * below.
+ *
+ * @code{.cpp}
+ *
+   #include <eos/agent.h>
+   #include <eos/eth_lag_intf.h>
+   #include <eos/panic.h>
+   #include <eos/sdk.h>
+
+   static eos::eth_lag_intf_mgr *eth_lag_intf_mgr;
+
+   class ApplicationAgent : public eos::agent_handler,
+                                   eos::intf_handler {
+    public:
+      explicit ApplicationAgent(eos::sdk & sdk) :
+                             eos::agent_handler(sdk.get_agent_mgr()),
+                             eos::intf_handler(sdk.get_intf_mgr()) {
+          watch_intf( eos::intf_id_t("Port-Channel23"), true );
+          watch_intf( eos::intf_id_t("Port-Channel24"), true );
+      }
+
+      // Called when all agents are initialized
+      void on_initialized() {
+         // Creates PC 23, no mode specified
+         eth_lag_intf_mgr->eth_lag_intf_is(eos::intf_id_t("Port-Channel23"));
+      }
+
+      // Handler for LAG interface creation
+      void on_intf_create(eos::intf_id_t i) {
+         if (i == eos::intf_id_t("Port-Channel23")) {
+            try {
+               eth_lag_intf_mgr->eth_lag_intf_is(eos::intf_id_t("Port-Channel23"));
+            } catch (eos::invalid_argument_error &ia) {
+               // Expected, since LAG 23 created already in "on_initialized" handler
+               assert(ia.argument_name()=="eth_lag_intf.pc_create");
+            }
+
+            // Application logic goes here, such as creating more LAG interfaces
+            // or adding member interfaces to it.
+            try {
+               eth_lag_intf_mgr->membership_set(intf_id_t("Ethernet1"),
+                                    i,
+                                    eos::ETH_LAG_INTF_MEMBER_LACP_MODE_PASSIVE);
+            } catch (eos::invalid_argument_error &ia) {
+               assert(false);
+            } catch (eos::no_such_interface_error &e) {
+               assert(false);
+            }
+         }
+         return;
+      }
+   }
+
+   int main(int argc, char **argv) {
+      eos::sdk sdk;
+      eth_lag_intf_mgr = sdk.get_eth_lag_intf_mgr();
+      ApplicationAgent agent(sdk);
+      sdk.main_loop("ApplicationAgent", argc, argv);
+   }
+ * @endcode
+ */
+
+
 // Copyright (c) 2014 Arista Networks, Inc.  All rights reserved.
 // Arista Networks, Inc. Confidential and Proprietary.
 
@@ -11,7 +87,7 @@
 
 namespace eos {
 
-/// Eth Lag interface fallback type
+/// LAG interface fallback type
 enum eth_lag_intf_fallback_type_t {
    ETH_LAG_INTF_FALLBACK_NULL,
    ETH_LAG_INTF_FALLBACK_NONE,
@@ -27,7 +103,7 @@ enum eth_lag_intf_member_priority_t {
    ETH_LAG_INTF_PORT_PRIORITY_DEFAULT = 0x8000,
 };
 
-/// Lag member LACP mode
+/// LAG member LACP mode
 enum eth_lag_intf_member_lacp_mode_t {
    ETH_LAG_INTF_MEMBER_LACP_MODE_NULL,
    ETH_LAG_INTF_MEMBER_LACP_MODE_OFF,
@@ -43,7 +119,7 @@ enum eth_lag_intf_member_lacp_timeout_t {
 };
 
 /**
- * This data structure defines an Eth Lag interface, which is also known as LAG,
+ * This data structure defines an LAG interface, which is also known as LAG,
  * Link-Aggregation Group. LAGs bundle physical interfaces together into a single
  * logical link to provide combined bandwidth and other benefits.
  */
@@ -55,24 +131,24 @@ class EOS_SDK_PUBLIC eth_lag_intf_t {
    bool operator==(eth_lag_intf_t const & other) const;
    bool operator!=(eth_lag_intf_t const & other) const;
 
-   // Sets the eth Lag intf
+   // Sets the LAG intf
    void eth_lag_intf_id_is(intf_id_t id);
-   // Returns eth Lag intf id
+   // Returns LAG intf id
    intf_id_t eth_lag_intf_id() const;
-   /// Returns the aggregated capabity (speed) of this Eth Lag interface in megabits
+   /// Returns the aggregated capabity (speed) of this LAG interface in megabits
    double speed() const;
-   /// Sets the aggregated capabity (speed) of this Eth Lag interface in megabits
+   /// Sets the aggregated capabity (speed) of this LAG interface in megabits
    void speed_is(double s);
-   /// Returns the min links required up before bringing up an Eth Lag interface.
+   /// Returns the min links required up before bringing up an LAG interface.
    uint32_t min_links() const;
-   /// Configures the min links required up before bringing up an Eth Lag interface.
+   /// Configures the min links required up before bringing up an LAG interface.
    void min_links_is(uint32_t min_links);
    /**
     * Returns the fallback mode currently configured, it will be one of following:
     * none, static LAG mode or individual ports.
     */
    eth_lag_intf_fallback_type_t fallback_type() const;
-   /// Configures the fallback mode for this Eth Lag interface.
+   /// Configures the fallback mode for this LAG interface.
    void fallback_type_is(eth_lag_intf_fallback_type_t type);
    /// Returns the default LACP active mode timeout value, now it's 90
    uint16_t fallback_timeout_default() const;
@@ -91,20 +167,20 @@ class EOS_SDK_PUBLIC eth_lag_intf_t {
 
 /**
  * This data structure is used to describe the operational status
- * of an intf configured in an Eth Lag interface.
+ * of an intf configured in an LAG interface.
  */
 class EOS_SDK_PUBLIC eth_lag_intf_membership_t {
  public:
    eth_lag_intf_membership_t();
 
-   /// The Eth Lag interface id this intf is configured to be in.
+   /// The LAG interface id this intf is configured to be in.
    intf_id_t eth_lag_intf_id;
-   /// This attribute indicates whether this intf is active in a Lag
+   /// This attribute indicates whether this intf is active in an LAG
    bool active;
    /// If not empty, reason this intf isn't in LAG
    std::string reason;
    /**
-    * The time when this intf became member of a LAG. If never a member,
+    * The time when this intf became member of an LAG. If never a member,
     * then the value is 0; if once was member, but now isn't, then this
     * is the time the intf was removed from member.
     */
@@ -118,7 +194,7 @@ class eth_lag_intf_member_iter_impl;
 
 
 /**
- * An Eth Lag interface iterator iterating through all Eth Lag interfaces
+ * An LAG interface iterator iterating through all LAG interfaces
  * created in the system.
  */
 class EOS_SDK_PUBLIC eth_lag_intf_iter_t : public iter_base< intf_id_t,
@@ -129,8 +205,8 @@ class EOS_SDK_PUBLIC eth_lag_intf_iter_t : public iter_base< intf_id_t,
 };
 
 /**
- * A Lag member iterator iterating through all interfaces configured as a
- * member of one Lag interface in the system.
+ * An LAG member iterator iterating through all interfaces configured as a
+ * member of one LAG interface in the system.
  */
 class EOS_SDK_PUBLIC eth_lag_intf_member_iter_t : public iter_base< intf_id_t,
                                                   eth_lag_intf_member_iter_impl> {
@@ -141,61 +217,61 @@ class EOS_SDK_PUBLIC eth_lag_intf_member_iter_t : public iter_base< intf_id_t,
 };
 
 /**
- * The manager for Lag interface, this is the main entry point for applications
- * to use EosSdk Lag APIs.
+ * The manager for LAG interface, this is the main entry point for applications
+ * to use EosSdk LAG APIs.
  */
 class EOS_SDK_PUBLIC eth_lag_intf_mgr {
  public:
    virtual ~eth_lag_intf_mgr();
 
    /**
-    * Iterate the Lag interfaces in system, intf_id_t pointer is returned for
-    * each Lag interface.
+    * Iterate the LAG interfaces in system, intf_id_t pointer is returned for
+    * each LAG interface.
     */
    virtual eth_lag_intf_iter_t eth_lag_intf_iter() const = 0;
    /**
-    * Iterate the physical interfaces configured as a member of an Eth Lag interface 
-    * in system, note the interface may not be in a Lag interface yet, but still
+    * Iterate the physical interfaces configured as a member of an LAG interface 
+    * in system, note the interface may not be in an LAG interface yet, but still
     * shows up if its priority/mode/timeout set.
     * "intf_id_t *" is returned for each member intf.
     */
    virtual eth_lag_intf_member_iter_t eth_lag_intf_member_iter() const = 0;
    /**
-    * This API creates an Eth Lag interface, when given the Lag id. It may throw
-    * "invalid_argument_error" exception if the Lag exists already.
+    * This API creates an LAG interface, when given the LAG id. It may throw
+    * "invalid_argument_error" exception if the LAG exists already.
     */
    virtual eth_lag_intf_t eth_lag_intf_is(intf_id_t eth_lag_intf_id) = 0;
    /**
-    * This API returns a Lag interface with the specified Lag id. May throw
-    * "invalid_argument_error" exception if the Lag does not exist already.
+    * This API returns an LAG interface with the specified LAG id. May throw
+    * "invalid_argument_error" exception if the LAG does not exist already.
     */
    virtual eth_lag_intf_t eth_lag_intf(intf_id_t eth_lag_intf_id) = 0;
    /**
-    * This API deletes a Lag interface, it will simply return if the specified
-    * Lag interface is not in existance.
+    * This API deletes an LAG interface, it will simply return if the specified
+    * LAG interface is not in existance.
     */
    virtual void eth_lag_intf_del( intf_id_t eth_lag_intf_id) = 0;
    /**
-    * This API adds/removes one eth intf to/from a Lag interface.
+    * This API adds/removes one eth intf to/from an LAG interface.
     * To add an interface, the interface id and its LACP mode are needed.
-    * To remove an interface from a Lag interface, the "intf" needs to be
+    * To remove an interface from an LAG interface, the "intf" needs to be
     * provided, and eth_lag_intf_id needs to be the empty intf with
     * intf_type()==INTF_TYPE_NULL (created by intf_id_t()).
     *
-    * When removing an interface from a Lag interface, this API may throw 
-    * "no_such_interface_error" exception if the specified Lag interface does
+    * When removing an interface from an LAG interface, this API may throw 
+    * "no_such_interface_error" exception if the specified LAG interface does
     * not exist. It may also throw "invalid_argument_error" exception if the
-    * specified "intf" is not in any Lag interface.
+    * specified "intf" is not in any LAG interface.
     *
-    * When adding an interface to a Lag interface, this API may throw "Invalid_
+    * When adding an interface to an LAG interface, this API may throw "Invalid_
     * argument_error" error if the interface's mode is not compatible with
-    * the Lag interface mode.
+    * the LAG interface mode.
     */
    virtual void membership_set(intf_id_t intf,
                                intf_id_t eth_lag_intf_id,
                                eth_lag_intf_member_lacp_mode_t mode) = 0;
    /**
-    * This API returns the Lag interface id to which the physical intf is
+    * This API returns the LAG interface id to which the physical intf is
     * configured to belong.
     * May throw "no_such_interface_error" if the "intf" does not exist.
     */
@@ -211,7 +287,7 @@ class EOS_SDK_PUBLIC eth_lag_intf_mgr {
    /// This API sets the port LACP priority 
    virtual void eth_lag_intf_member_priority_is(intf_id_t intf,
                                uint16_t priority) = 0;
-   /// This API sets the mode of this member in a Lag interface.
+   /// This API sets the mode of this member in an LAG interface.
    virtual void eth_lag_intf_member_mode_is(intf_id_t intf,
                                eth_lag_intf_member_lacp_mode_t mode) = 0;
    /**
