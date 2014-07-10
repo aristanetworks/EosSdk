@@ -2,18 +2,13 @@
 // Arista Networks, Inc. Confidential and Proprietary.
 
 #include "eos/system.h"
+#include "impl.h"
 
 namespace eos {
 
 //
 // system_mgr implementation
 //
-
-system_mgr::system_mgr() {
-}
-
-system_mgr::~system_mgr() {
-}
 
 class system_mgr_impl : public system_mgr {
  public:
@@ -44,6 +39,8 @@ class system_mgr_impl : public system_mgr {
       return "None";
    }
 };
+
+DEFINE_STUB_MGR_CTOR(system_mgr)
 
 system_handler::system_handler(system_mgr * mgr) : 
       base_handler<system_mgr, system_handler>(mgr) {

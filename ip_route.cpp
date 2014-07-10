@@ -2,14 +2,9 @@
 // Arista Networks, Inc. Confidential and Proprietary.
 
 #include "eos/ip_route.h"
+#include "impl.h"
 
 namespace eos {
-
-ip_route_mgr::ip_route_mgr() {
-}
-
-ip_route_mgr::~ip_route_mgr() {
-}
 
 class ip_route_mgr_impl : public ip_route_mgr {
  public:
@@ -70,6 +65,8 @@ class ip_route_mgr_impl : public ip_route_mgr {
    void ip_route_via_del(const ip_route_via_t & route_via) {
       // TODO: No op impl.
    }
-
 };
+
+DEFINE_STUB_MGR_CTOR(ip_route_mgr)
+
 }  // end namespace eos

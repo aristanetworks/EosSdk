@@ -2,6 +2,7 @@
 // Arista Networks, Inc. Confidential and Proprietary.
 
 #include "eos/neighbor_table.h"
+#include "impl.h"
 
 namespace eos {
 
@@ -15,10 +16,6 @@ class neighbor_table_mgr_impl : public neighbor_table_mgr {
    }
 };
 
-neighbor_table_mgr::neighbor_table_mgr() {
-}
-
-neighbor_table_mgr::~neighbor_table_mgr() {
-}
+DEFINE_STUB_MGR_CTOR(neighbor_table_mgr)
 
 }

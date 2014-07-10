@@ -5,14 +5,9 @@
 
 #include "eos/decap_group.h"
 #include "eos/panic.h"
+#include "impl.h"
 
 namespace eos {
-
-decap_group_mgr::decap_group_mgr() {
-}
-
-decap_group_mgr::~decap_group_mgr() {
-}
 
 class decap_group_mgr_impl : public decap_group_mgr {
  public:
@@ -45,5 +40,7 @@ class decap_group_mgr_impl : public decap_group_mgr {
        // TODO: No op impl.
     }
 };
+
+DEFINE_STUB_MGR_CTOR(decap_group_mgr)
 
 };  // end namespace eos

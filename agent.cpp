@@ -82,18 +82,10 @@ void handle_agent_initialize(agent_mgr * mgr) {
    static_cast<agent_mgr_impl*>(mgr)->on_initialized();
 }
 
-agent_mgr * new_agent_mgr() {
-   return new agent_mgr_impl();
-}
+DEFINE_STUB_MGR_CTOR(agent_mgr)
 
 void delete_agent_mgr(agent_mgr * mgr) {
    delete mgr;
-}
-
-agent_mgr::agent_mgr() {
-}
-
-agent_mgr::~agent_mgr() {
 }
 
 void agent_mgr::exit() {

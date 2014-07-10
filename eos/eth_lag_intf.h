@@ -192,7 +192,6 @@ class EOS_SDK_PUBLIC eth_lag_intf_membership_t {
 class eth_lag_intf_iter_impl;
 class eth_lag_intf_member_iter_impl;
 
-
 /**
  * An LAG interface iterator iterating through all LAG interfaces
  * created in the system.
@@ -245,7 +244,7 @@ class EOS_SDK_PUBLIC eth_lag_intf_mgr {
     * This API returns an LAG interface with the specified LAG id. May throw
     * "invalid_argument_error" exception if the LAG does not exist already.
     */
-   virtual eth_lag_intf_t eth_lag_intf(intf_id_t eth_lag_intf_id) = 0;
+   virtual eth_lag_intf_t eth_lag_intf(intf_id_t eth_lag_intf_id) const = 0;
    /**
     * This API deletes an LAG interface, it will simply return if the specified
     * LAG interface is not in existance.

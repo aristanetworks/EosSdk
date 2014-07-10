@@ -2,18 +2,13 @@
 // Arista Networks, Inc. Confidential and Proprietary.
 
 #include "eos/mlag.h"
+#include "impl.h"
 
 namespace eos {
 
 //
 // mlag_mgr implementation
 //
-
-mlag_mgr::mlag_mgr() {
-}
-
-mlag_mgr::~mlag_mgr() {
-}
 
 class mlag_mgr_impl : public mlag_mgr {
  public:
@@ -36,6 +31,8 @@ class mlag_mgr_impl : public mlag_mgr {
    }
 
 };
+
+DEFINE_STUB_MGR_CTOR(mlag_mgr)
 
 mlag_handler::mlag_handler(mlag_mgr *mgr) : 
       base_handler<mlag_mgr, mlag_handler>(mgr) {
