@@ -2,6 +2,7 @@
 // Arista Networks, Inc. Confidential and Proprietary.
 
 #include "eos/acl.h"
+#include "impl.h"
 
 // TODO: an implementation that provides a mock Sysdb view
 // Current implmentation is mostly no-ops
@@ -29,19 +30,18 @@ acl_handler::on_acl_sync_fail(std::string const & linecard,
 
 // acl_mgr methods
 
-acl_mgr::acl_mgr() {
-}
-
-acl_mgr::~acl_mgr() {
-}
-
-class acl_mgr_impl : acl_mgr {
+class acl_mgr_impl : public acl_mgr {
  public:
    acl_mgr_impl() {
    }
 
    acl_iter_t acl_iter() const {
       acl_iter_t * nop = 0;
+      return *nop;  // TODO: No op impl.
+   }
+
+   acl_rule_ip_iter_t acl_rule_ip_iter(acl_key_t const &) const {
+      acl_rule_ip_iter_t * nop = 0;
       return *nop;  // TODO: No op impl.
    }
 
@@ -79,5 +79,7 @@ class acl_mgr_impl : acl_mgr {
    void acl_commit() {
    }
 };
+
+DEFINE_STUB_MGR_CTOR(acl_mgr)
 
 }  // end namespace eos

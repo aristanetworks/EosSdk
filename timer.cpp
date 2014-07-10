@@ -37,9 +37,6 @@ timeout_handler::timeout_time_is(seconds_t timeout) {
    impl.timeout_is(this, timeout);
 }
 
-timeout_mgr::~timeout_mgr() {
-}
-
 class timeout_mgr_impl: public timeout_mgr {
  public:
    timeout_mgr_impl() {
@@ -49,5 +46,7 @@ class timeout_mgr_impl: public timeout_mgr {
       // TODO: No op impl.
    }
 };
+
+DEFINE_STUB_MGR_CTOR(timeout_mgr)
 
 }

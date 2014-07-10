@@ -2,15 +2,9 @@
 // Arista Networks, Inc. Confidential and Proprietary.
 
 #include "eos/fib.h"
-
+#include "impl.h"
 
 namespace eos {
-
-fib_mgr::fib_mgr() {
-}
-
-fib_mgr::~fib_mgr() {
-}
 
 class fib_mgr_impl : public fib_mgr {
  public:
@@ -69,5 +63,7 @@ class fib_mgr_impl : public fib_mgr {
       return *nop;
    }
 };
+
+DEFINE_STUB_MGR_CTOR(fib_mgr)
 
 } // namespace eos

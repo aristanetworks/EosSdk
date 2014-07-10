@@ -2,6 +2,7 @@
 // Arista Networks, Inc. Confidential and Proprietary.
 
 #include "eos/eth_phy_intf.h"
+#include "impl.h"
 
 namespace eos {
 
@@ -29,12 +30,6 @@ eth_phy_intf_handler::on_eth_phy_intf_delete(intf_id_t) {
    // TODO: No op impl.
 }
 
-eth_phy_intf_mgr::eth_phy_intf_mgr() {
-}
-
-eth_phy_intf_mgr::~eth_phy_intf_mgr() {
-}
-
 class eth_phy_intf_mgr_impl : public eth_phy_intf_mgr {
  public:
    eth_phy_intf_mgr_impl() {
@@ -59,5 +54,7 @@ class eth_phy_intf_mgr_impl : public eth_phy_intf_mgr {
    }
 
 };
+
+DEFINE_STUB_MGR_CTOR(eth_phy_intf_mgr)
 
 }

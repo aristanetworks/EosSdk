@@ -2,6 +2,7 @@
 // Arista Networks, Inc. Confidential and Proprietary.
 
 #include "eos/mac_table.h"
+#include "impl.h"
 
 namespace eos {
 
@@ -15,10 +16,6 @@ class mac_table_mgr_impl : public mac_table_mgr {
    }
 };
 
-mac_table_mgr::mac_table_mgr() {
-}
-
-mac_table_mgr::~mac_table_mgr() {
-}
+DEFINE_STUB_MGR_CTOR(mac_table_mgr)
 
 }

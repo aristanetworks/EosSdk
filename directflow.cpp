@@ -2,6 +2,7 @@
 // Arista Networks, Inc. Confidential and Proprietary.
 
 #include "eos/directflow.h"
+#include "impl.h"
 
 namespace eos {
 
@@ -212,13 +213,6 @@ flow_handler::on_flow_status(const std::string & name, flow_status_t status) {
 // directflow_mgr
 //
 
-directflow_mgr::directflow_mgr() {
-   // TODO: No op impl.
-}
-
-directflow_mgr::~directflow_mgr() {
-}
-
 class directflow_mgr_impl : public directflow_mgr {
  public:
    directflow_mgr_impl() {
@@ -256,5 +250,7 @@ class directflow_mgr_impl : public directflow_mgr {
    }
 
 };
+
+DEFINE_STUB_MGR_CTOR(directflow_mgr)
 
 }
