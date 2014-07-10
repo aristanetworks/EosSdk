@@ -2,6 +2,7 @@
 // Arista Networks, Inc. Confidential and Proprietary.
 
 #include "eos/nexthop_group.h"
+#include "impl.h"
 
 namespace eos {
 
@@ -42,10 +43,6 @@ class nexthop_group_mgr_impl : public nexthop_group_mgr {
    }
 };
 
-nexthop_group_mgr::nexthop_group_mgr() {
-}
-
-nexthop_group_mgr::~nexthop_group_mgr() {
-}
+DEFINE_STUB_MGR_CTOR(nexthop_group_mgr)
 
 }

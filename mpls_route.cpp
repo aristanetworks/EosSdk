@@ -2,14 +2,9 @@
 // Arista Networks, Inc. Confidential and Proprietary.
 
 #include "eos/mpls_route.h"
+#include "impl.h"
 
 namespace eos {
-
-mpls_route_mgr::mpls_route_mgr() {
-}
-
-mpls_route_mgr::~mpls_route_mgr() {
-}
 
 class mpls_route_mgr_impl : public mpls_route_mgr {
  public:
@@ -59,5 +54,7 @@ class mpls_route_mgr_impl : public mpls_route_mgr {
    }
 
 };
+
+DEFINE_STUB_MGR_CTOR(mpls_route_mgr)
 
 }  // end namespace eos

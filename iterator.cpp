@@ -6,6 +6,7 @@
 #include "eos/decap_group.h"
 #include "eos/directflow.h"
 #include "eos/eth_intf.h"
+#include "eos/eth_lag_intf.h"
 #include "eos/eth_phy_intf.h"
 #include "eos/intf.h"
 #include "eos/ip_route.h"
@@ -71,6 +72,8 @@ template class iter_base<acl_rule_ip_entry_t, acl_rule_ip_iter_impl>;
 template class iter_base<class_map_key_t, class_map_iter_impl>;
 template class iter_base<intf_id_t, intf_iter_impl>;
 template class iter_base<intf_id_t, eth_intf_iter_impl>;
+template class iter_base<intf_id_t, eth_lag_intf_iter_impl>;
+template class iter_base<intf_id_t, eth_lag_intf_member_iter_impl>;
 template class iter_base<intf_id_t, eth_phy_intf_iter_impl>;
 template class iter_base<ip_route_t, ip_route_iter_impl>;
 template class iter_base<ip_route_via_t, ip_route_via_iter_impl>;

@@ -2,6 +2,7 @@
 // Arista Networks, Inc. Confidential and Proprietary.
 
 #include "eos/intf.h"
+#include "impl.h"
 
 namespace eos {
 
@@ -70,14 +71,6 @@ intf_handler::on_admin_enabled(intf_id_t, bool) {
    // TODO: No op impl.
 }
 
-intf_mgr::intf_mgr() {
-   // TODO: No op impl.
-}
-
-intf_mgr::~intf_mgr() {
-   // TODO: No op impl.
-}
-
 class intf_mgr_impl : public intf_mgr {
  public:
    intf_mgr_impl() {
@@ -113,13 +106,7 @@ class intf_mgr_impl : public intf_mgr {
    }
 };
 
-intf_counter_mgr::intf_counter_mgr() {
-   // TODO: No op impl.
-}
-
-intf_counter_mgr::~intf_counter_mgr() {
-   // TODO: No op impl.
-}
+DEFINE_STUB_MGR_CTOR(intf_mgr)
 
 class intf_counter_mgr_impl : public intf_counter_mgr {
  public:
@@ -134,5 +121,7 @@ class intf_counter_mgr_impl : public intf_counter_mgr {
       return intf_traffic_rates_t();
    }
 };
+
+DEFINE_STUB_MGR_CTOR(intf_counter_mgr)
 
 }

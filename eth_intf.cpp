@@ -3,6 +3,7 @@
 
 #include <cassert>
 #include "eos/eth_intf.h"
+#include "impl.h"
 
 namespace eos {
 
@@ -30,13 +31,6 @@ void eth_intf_handler::on_eth_intf_delete(intf_id_t) {
 
 void eth_intf_handler::on_eth_addr(intf_id_t, eth_addr_t) {
    // No-op impl.
-}
-
-
-eth_intf_mgr::eth_intf_mgr() {
-}
-
-eth_intf_mgr::~eth_intf_mgr() {
 }
 
 class eth_intf_mgr_impl : public eth_intf_mgr {
@@ -98,5 +92,7 @@ class eth_intf_mgr_impl : public eth_intf_mgr {
       // TODO: No-op impl.
    }
 };
+
+DEFINE_STUB_MGR_CTOR(eth_intf_mgr)
 
 }
