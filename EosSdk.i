@@ -188,7 +188,6 @@ void throw_py_error(error const& err) {
 // For vlan_set
 %template(_BitSet4096) std::bitset<4096>;
 
-%include "eos/agent.h"
 // Ignore the `raise' method of all exceptions.  `raise' is a Python keyword
 // and also this method is used to throw the exception from C++ and is useless
 // in Python.
@@ -197,29 +196,31 @@ void throw_py_error(error const& err) {
 // the `msg' method (it's only provided for "compatibility" with standard
 // exceptions).
 %ignore what;
-%include "eos/acl.h"
-%include "eos/event_loop.h"
-%include "eos/class_map.h"
-%include "eos/decap_group.h"
-%include "eos/directflow.h"
+// THIS LIST IS IN A TOPOLOGICAL ORDER. DO NOT ALPHABETIZE.
+%include "eos/agent.h"
 %include "eos/eth.h"
+%include "eos/event_loop.h"
+%include "eos/fd.h"
+%include "eos/iterator.h"
+%include "eos/intf.h"
+%include "eos/ip.h"
+%include "eos/acl.h"
+%include "eos/directflow.h"
+%include "eos/ip_intf.h"
+%include "eos/decap_group.h"
 %include "eos/eth_intf.h"
 %include "eos/eth_lag_intf.h"
 %include "eos/eth_phy_intf.h"
-%include "eos/exception.h"
-%include "eos/fd.h"
-%include "eos/intf.h"
-%include "eos/ip.h"
-%include "eos/ip_intf.h"
-%include "eos/ip_route.h"
-%include "eos/iterator.h"
 %include "eos/neighbor_table.h"
 %include "eos/nexthop_group.h"
 %include "eos/mac_table.h"
 %include "eos/mlag.h"
 %include "eos/mpls.h"
+%include "eos/ip_route.h"
 %include "eos/mpls_route.h"
 %include "eos/policy_map.h"
+%include "eos/class_map.h"
+%include "eos/exception.h"
 %include "eos/sdk.h"
 %include "eos/system.h"
 %include "eos/timer.h"
