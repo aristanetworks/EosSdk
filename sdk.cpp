@@ -1,6 +1,7 @@
 // Copyright (c) 2014 Arista Networks, Inc.  All rights reserved.
 // Arista Networks, Inc. Confidential and Proprietary.
 
+#include "eos/event_loop.h"
 #include "eos/sdk.h"
 #include "impl.h"
 
@@ -19,6 +20,7 @@ sdk::sdk()
      event_loop_(0),
      fib_mgr_(0),
      intf_mgr_(0),
+     intf_counter_mgr_(0),
      ip_intf_mgr_(0),
      ip_route_mgr_(0),
      mac_table_mgr_(0),
@@ -39,104 +41,37 @@ sdk::~sdk() {
    delete_agent_mgr(agent_mgr_);
 }
 
-void sdk::init_acl_mgr() {
-   // TODO: No op impl.
-}
+INIT_STUB_MGR(acl_mgr)
+INIT_STUB_MGR(agent_mgr)
+INIT_STUB_MGR(aresolve_mgr)
+INIT_STUB_MGR(class_map_mgr)
+INIT_STUB_MGR(decap_group_mgr)
+INIT_STUB_MGR(directflow_mgr)
+INIT_STUB_MGR(eth_intf_mgr)
+INIT_STUB_MGR(eth_phy_intf_mgr)
+INIT_STUB_MGR(eth_lag_intf_mgr)
+INIT_STUB_MGR(fib_mgr)
+INIT_STUB_MGR(intf_mgr)
+INIT_STUB_MGR(intf_counter_mgr)
+INIT_STUB_MGR(ip_intf_mgr)
+INIT_STUB_MGR(ip_route_mgr)
+INIT_STUB_MGR(mac_table_mgr)
+INIT_STUB_MGR(mlag_mgr)
+INIT_STUB_MGR(mpls_route_mgr)
+INIT_STUB_MGR(neighbor_table_mgr)
+INIT_STUB_MGR(nexthop_group_mgr)
+INIT_STUB_MGR(policy_map_mgr)
+INIT_STUB_MGR(system_mgr)
+INIT_STUB_MGR(timeout_mgr)
 
-agent_mgr * new_agent_mgr();
-
-void sdk::init_agent_mgr() {
-   if (!agent_mgr_) {
-      agent_mgr_ = new_agent_mgr();
+void sdk::init_event_loop() {
+   if(!event_loop_) {
+      event_loop_ = new event_loop(0);
    }
 }
 
-void sdk::init_aresolve_mgr() {
-   // TODO: No op impl.
-}
-
-void sdk::init_class_map_mgr() {
-   // TODO: No op impl.
-}
-
-void sdk::init_decap_group_mgr() {
-   // TODO: No op impl.
-}
-
-void sdk::init_directflow_mgr() {
-   // TODO: No op impl.
-}
-
-void sdk::init_eth_intf_mgr() {
-   // TODO: No op impl.
-}
-
-void sdk::init_eth_phy_intf_mgr() {
-   // TODO: No op impl.
-}
-
-void sdk::init_eth_lag_intf_mgr() {
-   // TODO: No op impl.
-}
-
-void sdk::init_event_loop() {
-   // TODO: No op impl.
-}
-
-void sdk::init_fib_mgr() {
-   // TODO: No op impl.
-}
-
-void sdk::init_intf_mgr() {
-   // TODO: No op impl.
-}
-
-void sdk::init_intf_counter_mgr() {
-   // TODO: No op impl.
-}
-
-void sdk::init_ip_intf_mgr() {
-   // TODO: No op impl.
-}
-
-void sdk::init_ip_route_mgr() {
-   // TODO: No op impl.
-}
-
-void sdk::init_mac_table_mgr() {
-   // TODO: No op impl.
-}
-
-void sdk::init_mlag_mgr() {
-   // TODO: No op impl.
-}
-
 void sdk::init_mount_mgr() {
-   // TODO: No op impl.
-}
-
-void sdk::init_mpls_route_mgr() {
-   // TODO: No op impl.
-}
-
-void sdk::init_neighbor_table_mgr() {
-   // TODO: No op impl.
-}
-
-void sdk::init_nexthop_group_mgr() {
-   // TODO: No op impl.
-}
-
-void sdk::init_policy_map_mgr() {
-   // TODO: No op impl.
-}
-
-void sdk::init_system_mgr() {
-   // TODO: No op impl.
-}
-
-void sdk::init_timeout_mgr() {
-   // TODO: No op impl.
+   // BUG86400 - Not a public function
 }
 
 }

@@ -17,6 +17,27 @@
 
 namespace eos {
 
+
+#define DEFINE_STUB_MGR_CTOR(stubbed_mgr)           \
+   stubbed_mgr * new_##stubbed_mgr() {              \
+      return new stubbed_mgr##_impl();              \
+   }                                                \
+                                                    \
+   stubbed_mgr::stubbed_mgr() {                     \
+   }                                                \
+   stubbed_mgr::~stubbed_mgr() {                    \
+   }
+
+
+#define INIT_STUB_MGR(stubbed_mgr)                  \
+   stubbed_mgr * new_##stubbed_mgr();               \
+                                                    \
+   void sdk::init_##stubbed_mgr() {                 \
+      if(!stubbed_mgr##_) {                         \
+         stubbed_mgr##_ = new_##stubbed_mgr();      \
+      }                                             \
+   } 
+
 /**
  * Handles all the interests of a particular fd_handler.
  *
