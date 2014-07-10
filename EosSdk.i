@@ -33,6 +33,7 @@ typedef uint64_t uint64_be_t;
 %feature("director");
 %feature("nodirector") eos::acl_mgr;
 %feature("nodirector") eos::agent_mgr;
+%feature("nodirector") eos::aresolve_mgr;
 %feature("nodirector") eos::class_map_mgr;
 %feature("nodirector") eos::decap_group_mgr;
 %feature("nodirector") eos::directflow_mgr;
@@ -56,6 +57,7 @@ typedef uint64_t uint64_be_t;
 %{
 #include "eos/acl.h"
 #include "eos/agent.h"
+#include "eos/aresolve.h"
 #include "eos/event_loop.h"
 #include "eos/class_map.h"
 #include "eos/decap_group.h"
@@ -205,6 +207,7 @@ void throw_py_error(error const& err) {
 %include "eos/intf.h"
 %include "eos/ip.h"
 %include "eos/acl.h"
+%include "eos/aresolve.h"
 %include "eos/directflow.h"
 %include "eos/ip_intf.h"
 %include "eos/decap_group.h"
