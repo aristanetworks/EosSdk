@@ -2,6 +2,7 @@
 // Arista Networks, Inc. Confidential and Proprietary.
 
 #include "eos/aresolve.h"
+#include "impl.h"
 
 namespace eos {
 
@@ -49,7 +50,6 @@ class aresolve_mgr_impl : public aresolve_mgr {
 
 };
 
-aresolve_mgr::~aresolve_mgr() {
-}
+DEFINE_STUB_MGR_CTOR(aresolve_mgr)
 
 }
