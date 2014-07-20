@@ -7,18 +7,18 @@ import eossdk
 class MyIntfHandler( eossdk.AgentHandler, eossdk.IntfHandler ):
    def __init__( self, intfMgr, agentMgr ):
       eossdk.AgentHandler.__init__( self, agentMgr )
-      eossdk.IntfHandler.__init__( self, intfMgr )
+      eossdk.IntfHandler.__init__( self, intfMgr )  # pylint: disable-msg=W0233
       self.numIntfChanges = 0
       print "Initialized"
 
    # Callback provided by AgentHandler when all state is synchronized
    def on_initialized( self ):
       print "We are initialized!"
-      self.watch_all_intfs( True )
+      self.watch_all_intfs( True )  # pylint: disable-msg=E1101
 
    # Callback provided by IntfHandler when an interface's configuration changes
    def on_admin_enabled( self, intfId, operState ):
-      intfState = 'up' if operState == eossdk.INTF_OPER_ENABLED else 'down'
+      intfState = 'up' if operState == eossdk.INTF_OPER_UP else 'down'
       print "The state of", intfId.to_string(), "is now", intfState
       self.numIntfChanges += 1
       print "   We have seen", self.numIntfChanges, "state changes"
