@@ -21,7 +21,7 @@ class MyIntfHandler( eossdk.AgentHandler, eossdk.IntfHandler ):
    def on_oper_status( self, intfId, operState ):
       intfState = 'up' if operState == eossdk.INTF_OPER_UP else 'down'
       print "The state of", intfId.to_string(), "is now", intfState
-      self.numIntfChanges += 1
+      self.numIntfChanges_ += 1
       print "   We have seen", self.numIntfChanges_, "state changes"
       self.intfMgr_.description_is(intfId,
                                    "Changed state [%d]" % self.numIntfChanges_)
