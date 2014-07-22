@@ -130,7 +130,7 @@ flow_match_t::input_intf_del(intf_id_t intf_id) {
    input_intfs_.erase(intf_id);
 }
 
-inline std::set<intf_id_t>
+inline std::set<intf_id_t> const &
 flow_match_t::input_intfs() const {
    return input_intfs_;
 }
@@ -311,7 +311,7 @@ flow_action_t::output_intf_del(intf_id_t intf_id) {
    output_intfs_.erase(intf_id);
 }
 
-inline std::set<intf_id_t>
+inline std::set<intf_id_t> const &
 flow_action_t::output_intfs() const {
    return output_intfs_;
 }
