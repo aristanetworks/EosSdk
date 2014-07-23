@@ -187,6 +187,8 @@ void throw_py_error(error const& err) {
 %template() std::set<eos::intf_id_t>;
 %template() std::set<eos::ip_addr_mask_t>;
 %template() std::list<uint16_t>;
+%template() std::list<eos::mpls_label_t>;
+%template() std::map<uint16_t, eos::nexthop_group_mpls_action_t>;
 
 // For vlan_set
 %template(_BitSet4096) std::bitset<4096>;
