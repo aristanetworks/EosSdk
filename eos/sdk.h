@@ -127,6 +127,8 @@ class EOS_SDK_PUBLIC sdk {
     policy_map_mgr * policy_map_mgr_;
     system_mgr * system_mgr_;
     timeout_mgr * timeout_mgr_;
+
+    friend class mount_mgr;
 };
 
 }
