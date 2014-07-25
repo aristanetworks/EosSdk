@@ -90,6 +90,11 @@ class EOS_SDK_PUBLIC agent_mgr : public base_mgr<agent_handler> {
     static uint32_t id(const char * agent_name);
 
     /**
+     * Return agent name that has been passed to main_loop().
+     */
+    virtual std::string agent_name() const = 0;
+
+    /**
      * Return whether the agent is enabled or not.
      *
      * When enabled is false, as reported by the agent_handler's
