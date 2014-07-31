@@ -10,50 +10,9 @@
 #include <eos/ip.h>
 #include <eos/iterator.h>
 
+#include <eos/types/decap_group.h>
+
 namespace eos {
-
-/**
- * Inner (IP) protocol to match for a decap group.
- *
- * Only the GRE protocol is presently supported
- */
-enum decap_protocol_type_t {
-   PROTOCOL_TYPE_NULL,
-   PROTOCOL_TYPE_GRE,
-};
-
-/**
- * An 'ip decap-group' configuration model.
- *
- * Note that once created, the group_name member cannot be changed
- */
-class EOS_SDK_PUBLIC decap_group_t {
- public:
-   decap_group_t();  // default constructor, sets NULL protocol type
-   decap_group_t(std::string group_name, ip_addr_t const &, decap_protocol_type_t);
-
-   bool operator==(decap_group_t const & other) const;
-   bool operator!=(decap_group_t const & other) const;
-
-   std::string group_name() const;
-   ip_addr_t const & destination_addr() const;
-   void destination_addr_is(ip_addr_t const &);
-   decap_protocol_type_t protocol_type() const;
-   void protocol_type_is(decap_protocol_type_t);
-
-   bool persistent() const;
-   void persistent_is(bool);
- private:
-   // The decap-group name, must be supplied.  Note that the decap
-   // group namespace is per-VRF, that is, the vrf_name scopes the
-   // decap-group name
-   std::string group_name_;
-
-   ip_addr_t destination_addr_;  // Match destination IP on the outermost IP header
-   decap_protocol_type_t protocol_type_;  // Match this outer IP protocol to decap
-
-   bool persistent_; // If true, the decap group is stored in the startup-config
-};
 
 class decap_group_iter_impl;
 
@@ -97,7 +56,5 @@ class EOS_SDK_PUBLIC decap_group_mgr {
 };
 
 }
-
-#include <eos/inline/decap_group.h>
 
 #endif // EOS_DECAP_GROUP_H
