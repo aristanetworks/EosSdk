@@ -85,109 +85,9 @@
 #include <eos/intf.h>
 #include <eos/iterator.h>
 
+#include <eos/types/eth_lag_intf.h>
+
 namespace eos {
-
-/// LAG interface fallback type
-enum eth_lag_intf_fallback_type_t {
-   ETH_LAG_INTF_FALLBACK_NULL,
-   ETH_LAG_INTF_FALLBACK_NONE,
-   ETH_LAG_INTF_FALLBACK_STATIC,
-   ETH_LAG_INTF_FALLBACK_INDIVIDUAL,
-};
-
-enum eth_lag_intf_fallback_timeout_default_t {
-   ETH_LAG_INTF_FALLBACK_TIMEOUT_DEFAULT = 90,
-};
-
-enum eth_lag_intf_member_priority_t {
-   ETH_LAG_INTF_PORT_PRIORITY_DEFAULT = 0x8000,
-};
-
-/// LAG member LACP mode
-enum eth_lag_intf_member_lacp_mode_t {
-   ETH_LAG_INTF_MEMBER_LACP_MODE_NULL,
-   ETH_LAG_INTF_MEMBER_LACP_MODE_OFF,
-   ETH_LAG_INTF_MEMBER_LACP_MODE_PASSIVE,
-   ETH_LAG_INTF_MEMBER_LACP_MODE_ACTIVE,
-};
-
-/// Individual member (link) timeout values
-enum eth_lag_intf_member_lacp_timeout_t {
-   ETH_LAG_INTF_MEMBER_LACP_TIMEOUT_NULL,
-   ETH_LAG_INTF_MEMBER_LACP_TIMEOUT_SHORT,
-   ETH_LAG_INTF_MEMBER_LACP_TIMEOUT_LONG,
-};
-
-/**
- * This data structure defines an LAG interface, which is also known as LAG,
- * Link-Aggregation Group. LAGs bundle physical interfaces together into a single
- * logical link to provide combined bandwidth and other benefits.
- */
-class EOS_SDK_PUBLIC eth_lag_intf_t {
- public:
-   eth_lag_intf_t();
-   eth_lag_intf_t(intf_id_t);
-
-   bool operator==(eth_lag_intf_t const & other) const;
-   bool operator!=(eth_lag_intf_t const & other) const;
-
-   // Sets the LAG intf
-   void eth_lag_intf_id_is(intf_id_t id);
-   // Returns LAG intf id
-   intf_id_t eth_lag_intf_id() const;
-   /// Returns the aggregated capabity (speed) of this LAG interface in megabits
-   double speed() const;
-   /// Sets the aggregated capabity (speed) of this LAG interface in megabits
-   void speed_is(double s);
-   /// Returns the min links required up before bringing up an LAG interface.
-   uint32_t min_links() const;
-   /// Configures the min links required up before bringing up an LAG interface.
-   void min_links_is(uint32_t min_links);
-   /**
-    * Returns the fallback mode currently configured, it will be one of following:
-    * none, static LAG mode or individual ports.
-    */
-   eth_lag_intf_fallback_type_t fallback_type() const;
-   /// Configures the fallback mode for this LAG interface.
-   void fallback_type_is(eth_lag_intf_fallback_type_t type);
-   /// Returns the default LACP active mode timeout value, now it's 90
-   uint16_t fallback_timeout_default() const;
-   /// Configures the LACP active mode timeout value. 
-   void fallback_timeout_is(uint16_t timeout);
-   /// Returns the configured LACP active mode timeout value. 
-   uint16_t fallback_timeout() const;
-
- private:
-   intf_id_t intf_;
-   double speed_;
-   uint32_t min_links_;
-   eth_lag_intf_fallback_type_t fallback_type_;
-   uint16_t fallback_timeout_;
-};
-
-/**
- * This data structure is used to describe the operational status
- * of an intf configured in an LAG interface.
- */
-class EOS_SDK_PUBLIC eth_lag_intf_membership_t {
- public:
-   eth_lag_intf_membership_t();
-
-   /// The LAG interface id this intf is configured to be in.
-   intf_id_t eth_lag_intf_id;
-   /// This attribute indicates whether this intf is active in an LAG
-   bool active;
-   /// If not empty, reason this intf isn't in LAG
-   std::string reason;
-   /**
-    * The time when this intf became member of an LAG. If never a member,
-    * then the value is 0; if once was member, but now isn't, then this
-    * is the time the intf was removed from member.
-    */
-   double memberTime;
-   /// This intf LACP mode
-   eth_lag_intf_member_lacp_mode_t mode;
-};
 
 class eth_lag_intf_iter_impl;
 class eth_lag_intf_member_iter_impl;
@@ -305,7 +205,5 @@ class EOS_SDK_PUBLIC eth_lag_intf_mgr {
 };
 
 } // end namespace eos
-
-#include <eos/inline/eth_lag_intf.h>
 
 #endif // EOS_ETH_LAG_INTF_H
