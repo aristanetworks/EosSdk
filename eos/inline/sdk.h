@@ -4,9 +4,18 @@
 #ifndef EOS_INLINE_SDK_H
 #define EOS_INLINE_SDK_H
 
+#include <eos/panic.h>
+#include <eos/exception.h>
+
 namespace eos {
 
 inline void sdk::main_loop(const char * agent_name, int argc, char ** argv) {
+   if (!name_.empty() and name_ != agent_name) {
+	   panic(invalid_argument_error(
+	                     "sdk",
+	                     "Main_loop cannot reset sdk agent_name after construction."));
+   }
+   name_ = agent_name;
    get_agent_mgr()->main_loop(agent_name, argc, argv);
 }
 
@@ -162,6 +171,10 @@ inline policy_map_mgr * sdk::get_policy_map_mgr() {
       init_policy_map_mgr();
    }
    return policy_map_mgr_;
+}
+
+inline std::string sdk::get_name() {
+   return name_;
 }
 
 inline system_mgr * sdk::get_system_mgr() {

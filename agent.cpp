@@ -44,17 +44,12 @@ class agent_mgr_impl : public agent_mgr {
    void main_loop(const char * agent_name, int argc, char ** argv) {
       assert(agent_name);   // Must not be NULL.
       assert(*agent_name);  // Must be at least one char long.
-      agentName_ = std::string(agent_name);
       impl.agent_name_is(agent_name);
       impl.main_loop();
    }
 
    void on_initialized() {
       handler_foreach(call_on_initialized);
-   }
-
-   std::string agent_name() const {
-      return agentName_;
    }
 
    bool enabled() const {
@@ -81,8 +76,6 @@ class agent_mgr_impl : public agent_mgr {
       return "";
    }
 
- private:
-   std::string agentName_;
 };
 
 void handle_agent_initialize(agent_mgr * mgr) {
