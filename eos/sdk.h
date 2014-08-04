@@ -45,6 +45,7 @@ class timeout_mgr;
 class EOS_SDK_PUBLIC sdk {
  public:
     sdk();
+    explicit sdk(std::string const name);
     ~sdk();
 
     void init_acl_mgr();
@@ -99,6 +100,8 @@ class EOS_SDK_PUBLIC sdk {
     system_mgr * get_system_mgr();
     timeout_mgr * get_timeout_mgr();
 
+    std::string get_name();
+
  private:
     void init_mount_mgr();
 
@@ -127,6 +130,8 @@ class EOS_SDK_PUBLIC sdk {
     policy_map_mgr * policy_map_mgr_;
     system_mgr * system_mgr_;
     timeout_mgr * timeout_mgr_;
+
+    std::string name_;
 
     friend class mount_mgr;
 };
