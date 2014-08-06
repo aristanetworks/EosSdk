@@ -62,14 +62,14 @@ class random_router : public eos::agent_handler,
          // Create a new ip_route for this prefix
          eos::ip_route_key_t key(new_prefix);
          eos::ip_route_t route(key);
-         route.tag = app_id;
-         route.persistent = true;
+         route.tag_is(app_id);
+         route.persistent_is(true);
          route_mgr->ip_route_set(route);
 
          // And set a random interface as its nexthop!
          eos::intf_id_t i = get_intf(last_used_intf);
          eos::ip_route_via_t via(key);
-         via.intf = i;
+         via.intf_is(i);
          route_mgr->ip_route_via_set(via);
          printf( "Set route %s to have nexthop %s\n",
                  new_prefix.to_string().c_str(),
@@ -87,15 +87,15 @@ class random_router : public eos::agent_handler,
 
       eos::intf_id_t next_intf = get_intf(intf);
       for(eos::ip_route_iter_t ri = route_mgr->ip_route_iter(); ri; ++ri) {
-         for(eos::ip_route_via_iter_t vi = route_mgr->ip_route_via_iter((*ri).key);
+         for(eos::ip_route_via_iter_t vi = route_mgr->ip_route_via_iter((*ri).key());
              vi; ++vi) {
-            if((*vi).intf == intf) {
+            if((*vi).intf() == intf) {
                // This via is pointing to the shutdown interface!
                eos::ip_route_via_t new_via(*vi);
-               new_via.intf = next_intf;
+               new_via.intf_is(next_intf);
                printf("Moving route %s to %s\n",
-                      (*vi).route_key.prefix.to_string().c_str(),
-                      new_via.intf.to_string().c_str());
+                      (*vi).route_key().prefix().to_string().c_str(),
+                      new_via.intf().to_string().c_str());
                fflush(stdout);
                route_mgr->ip_route_via_del(*vi);
                route_mgr->ip_route_via_set(new_via);
