@@ -9,91 +9,9 @@
 #include <eos/iterator.h>
 #include <eos/mpls.h>
 
+#include <eos/types/ip_route.h>
+
 namespace eos {
-
-typedef uint32_t ip_route_tag_t;
-typedef uint32_t ip_route_metric_t;
-typedef uint8_t ip_route_preference_t;
-
-/**
- * An IP route key, consisting of a prefix and preference.
- */
-class EOS_SDK_PUBLIC ip_route_key_t {
- public:
-   ip_route_key_t();
-   explicit ip_route_key_t(ip_prefix_t const &);
-   ip_route_key_t(ip_prefix_t const &, ip_route_preference_t);
-
-   bool operator==(ip_route_key_t const & other) const;
-   bool operator!=(ip_route_key_t const & other) const;
-
-   ip_prefix_t prefix;                // IP v4/v6 network prefix
-   ip_route_preference_t preference;  // 0..255 only, defaults to 1
-   ip_route_metric_t metric;
-};
-
-/**
- * An IP v4/v6 static route.
- * "Via", or nexthops, for this route are stored separately and are
- * associated by route key.
- */
-class EOS_SDK_PUBLIC ip_route_t {
- public:
-   ip_route_t();
-   /// Creates an IP static route for the route key
-   explicit ip_route_t(ip_route_key_t const & route_key);
-
-   ip_route_key_t key;  ///< The route's key
-
-   ip_route_tag_t tag;  ///< A numbered tag, used for table segregation
-   /**
-    * Whether this route persists in system configuration.
-    * If true, the route appears in 'show running-config', and will
-    * be saved to startup-config if a 'copy running start' or
-    * 'write memory' CLI command is issued.
-    */
-   bool persistent;
-};
-
-/**
- * A Via describing a particular set of nexthop information.
- *
- * A Via can describe either a nexthop IP address (hop), interface
- * (intf) or nexthop group name to either forward traffic to, or
- * drop traffic if the interface is Null0.
- */
-class EOS_SDK_PUBLIC ip_route_via_t {
- public:
-   ip_route_via_t();
-   /// Creates a route via for a route key
-   explicit ip_route_via_t(ip_route_key_t const & route_key);
-
-   ip_route_key_t route_key; ///< Key for the route this via is attached to
-   ip_addr_t hop;            ///< IP v4/v6 nexthop address
-   /**
-    * Use the named interface if not a default intf_id_t
-    *
-    * Using intf Null0 installs a 'drop' route for the given prefix and preference
-    */
-   intf_id_t intf;
-
-   /**
-    * Name of the next-hop group to use.
-    * If this string is non-empty, the next-hop group of the given name will
-    * be used, and both `hop' and `intf' must be left to their default value
-    * otherwise we will panic().
-    *
-    * Note this is currently only supported for IPv4 routes.
-    */
-   std::string nexthop_group;
-
-   /// Push an MPLS label
-   mpls_label_t mpls_label;
-
-   bool operator==(ip_route_via_t const & other) const;
-   bool operator!=(ip_route_via_t const & other) const;
-};
-
 
 class ip_route_iter_impl;
 
@@ -209,7 +127,5 @@ class EOS_SDK_PUBLIC ip_route_mgr {
 };
 
 }  // end namespace eos
-
-#include <eos/inline/ip_route.h>
 
 #endif // EOS_IP_ROUTE_H

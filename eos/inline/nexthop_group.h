@@ -8,6 +8,7 @@
 
 #include <eos/mpls.h>
 #include <eos/panic.h>
+#include <eos/exception.h>
 
 namespace eos {
 
