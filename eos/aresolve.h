@@ -13,12 +13,61 @@
 #include <eos/ip.h>
 
 /**
- * Aresolve allows asynchronous DNS resolution requests to be made.
+ * @file
+ * Aresolve provides asynchronous DNS host resolution.
  *
  * Aresolve resolves and automatically re-resolves DNS information for
  * requests made via the aresolve_handler's watch_* methods. Whenever
  * resolution information about the watched name changes, the
  * aresolve_handler's on_aresolve_host() function is called.
+ *
+ * For example, an application may wish to track the IP address of a
+ * particular infrastructure hostname (e.g., a syslog receiver we'll
+ * call "loghost"). In this example, an IP address object is created
+ * to track the current address of the loghost:
+ *
+ * @code
+ * #include <assert.h>
+ *
+ * #include <eos/agent.h>
+ * #include <eos/aresolve.h>
+ * #include <eos/ip.h>
+ * #include <eos/sdk.h>
+ *
+ * class Aresolver : public eos::aresolve_handler, public eos::agent_handler {
+ *  public:
+ *    explicit Aresolver(eos::sdk & sdk)
+ *       : eos::aresolve_handler(sdk.get_aresolve_mgr()),
+ *         eos::agent_handler(sdk.get_agent_mgr()) {
+ *    }
+ *
+ *    void on_initialized() {
+ *       // Register our interest in the IP address of "loghost"
+ *       watch_host("loghost", true);
+ *    }
+ *
+ *    virtual void on_aresolve_host(eos::aresolve_record_host const & record) {
+ *       // Called on initial host resolution or updates in host address
+ *       if (record.valid()) {
+ *          // We should only ever see results for "loghost".
+ *          assert(record.qname() == "loghost");
+ *          // Get the IP address; we'll assume there's only one in this case.
+ *          if (record.addr_v4().size() > 0) {  // IPv4
+ *             address = record.addr_v4().front();
+ *          } else if (record.addr_v6().size() > 0) {  // IPv6
+ *             address = record.addr_v6().front();
+ *          }
+ *          // Do something with the new address, like send a syslog message.
+ *       } else {
+ *          // There was a host resolution error. Inspect record.last_error(),
+ *          // which is an EAI_* error from netdb.h.
+ *       }
+ *    }
+ *
+ *  private:
+ *    eos::ip_addr_t address;
+ * };
+ * @endcode
  */
 
 namespace eos {
@@ -34,7 +83,7 @@ class aresolve_internal;  // Internal record helper class
  * is no error, accessors in subclasses of aresolve_record_base
  * contain the latest update for the request.
  *
- * Not instantiated or received by user code.
+ * This class is not instantiated or received by user code.
  */
 class EOS_SDK_PUBLIC aresolve_record_base {
  protected:
@@ -104,8 +153,11 @@ class EOS_SDK_PUBLIC aresolve_handler : public base_handler<aresolve_mgr,
     * method is called. In this way, you need only watch hostnames
     * you're interested in and implement the on_aresolve_host() method
     * to deal with the changes in results.
+    *
+    * @param host The hostname to watch
+    * @param watch If true, start watching the hostname, else stop watching.
     */
-   void watch_host(std::string const &, bool);
+   void watch_host(std::string const & host, bool watch);
 
    /**
     * Callback called by Aresolve when host resolution completes.
@@ -117,8 +169,11 @@ class EOS_SDK_PUBLIC aresolve_handler : public base_handler<aresolve_mgr,
     * the valid or last update time member attributes change. May be
     * called more than once for a given hostname, if DNS had a
     * temporary failure.
+    *
+    * @param record A record containing new or updated information
+    * about a watched host.
     */
-   virtual void on_aresolve_host(aresolve_record_host const &);
+   virtual void on_aresolve_host(aresolve_record_host const & record);
 };
 
 class EOS_SDK_PUBLIC aresolve_mgr : public base_mgr<aresolve_handler, std::string> {
