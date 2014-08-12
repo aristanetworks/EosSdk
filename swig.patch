@@ -2,10 +2,13 @@
 # URL of the second bug: https://sourceforge.net/p/swig/bugs/1370/
 --- eossdk_wrap.cpp-t
 +++ eossdk_wrap.cpp-t
-@@ -1618,6 +1618,7 @@
+@@ -1618,6 +1618,10 @@
    if (!SwigPyObject_Check(next)) {
      return NULL;
    }
++  while (sobj->next && SwigPyObject_Check(sobj->next)) {
++     sobj = (SwigPyObject *)sobj->next;
++  }
 +  ((SwigPyObject *)next)->next = sobj->next;
    sobj->next = next;
    Py_INCREF(next);
