@@ -9,15 +9,9 @@
 #include <eos/base_mgr.h>
 #include <eos/ip.h>
 
-namespace eos {
+#include <eos/types/mlag.h>
 
-enum mlag_state_t {
-   MLAG_STATE_UNKNOWN,
-   MLAG_STATE_DISABLED,
-   MLAG_STATE_INACTIVE,
-   MLAG_STATE_PRIMARY,
-   MLAG_STATE_SECONDARY,
-};
+namespace eos {
 
 class mlag_mgr;
 

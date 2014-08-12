@@ -4,7 +4,7 @@ AM_CXXFLAGS = -fvisibility=hidden -std=gnu++0x
 AM_CXXFLAGS += -Wextra -Wall -Wnon-virtual-dtor -Werror -Wno-unused-parameter
 AM_LDFLAGS = -Wl,--no-undefined
 
-PUBLISHED_HEADER_FILES := $(wildcard eos/*.h) $(wildcard eos/inline/*.h)
+PUBLISHED_HEADER_FILES := $(wildcard eos/*.h) $(wildcard eos/inline/*.h) $(wildcard eos/types/*.h) $(wildcard eos/inline/types/*.h)
 nobase_include_HEADERS = $(PUBLISHED_HEADER_FILES)
 
 libeos_la_SOURCES =

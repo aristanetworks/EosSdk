@@ -8,28 +8,9 @@
 #include <eos/eth.h>
 #include <eos/intf.h>
 
+#include <eos/types/mac_table.h>
+
 namespace eos {
-
-/**
- * An entry from the MAC address table.
- */
-class EOS_SDK_PUBLIC mac_entry_t {
- public:
-   mac_entry_t();
-   mac_entry_t(eth_addr_t address, intf_id_t intf);
-   /// The MAC address that was learned.
-   eth_addr_t eth_addr() const;
-   /// The interface from which the MAC address was learned.
-   intf_id_t intf() const;
-
-   /// Non-existent entries are effectively false (so this returns true).
-   bool operator!() const;
-
- private:
-   eth_addr_t address_;
-   intf_id_t intf_;
-   // TODO: Add entry type, number of moves, last move time.
-};
 
 /**
  * Manager for the MAC address table.
@@ -54,7 +35,5 @@ class EOS_SDK_PUBLIC mac_table_mgr {
 };
 
 }
-
-#include <eos/inline/mac_table.h>
 
 #endif // EOS_MAC_TABLE_H
