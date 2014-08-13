@@ -1,10 +1,6 @@
 // Copyright (c) 2014 Arista Networks, Inc.  All rights reserved.
 // Arista Networks, Inc. Confidential and Proprietary.
 
-// Copyright (c) 2014 Arista Networks, Inc.  All rights reserved.
-// Arista Networks, Inc. Confidential and Proprietary.
-
-
 #include <eos/agent.h>
 #include <eos/directflow.h>
 #include <eos/intf.h>
@@ -47,7 +43,7 @@ class dflow_helper : public eos::intf_handler,
 
    void on_oper_status(eos::intf_id_t intf, eos::oper_status_t status) {
       if(status == eos::INTF_OPER_UP) {
-         printf("Waiting 0.1sec to use primary interface\n");         
+         printf("Waiting 0.1sec to use primary interface\n");
          timeout_time_is( eos::now() + 0.1 );
       } else {
          printf("Bringing up backup interface\n");
