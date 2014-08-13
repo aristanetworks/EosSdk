@@ -73,7 +73,7 @@ class dflow_helper : public eos::intf_handler,
 
       // Now define the flow entry
       eos::flow_priority_t priority = 1;
-      eos::flow_entry_t entry("SwanFlow", match, action, priority);
+      eos::flow_entry_t entry("TunnelFlow", match, action, priority);
 #if USE_REPROGRAMMER
       dflow_reprogrammer.updateFlow(entry);
 #else
