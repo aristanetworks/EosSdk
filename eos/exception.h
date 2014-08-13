@@ -142,6 +142,18 @@ class EOS_SDK_PUBLIC address_overlap_error : public configuration_error {
    ip_addr_mask_t addr_;
 };
 
+/// The given agent has not been configured
+class EOS_SDK_PUBLIC unconfiged_agent_error : public configuration_error {
+ public:
+   virtual ~unconfiged_agent_error() noexcept;
+   explicit unconfiged_agent_error(std::string const & agentName) noexcept;
+   virtual void raise() const;  ///< Throws this exception.
+   std::string agentName() const noexcept;
+
+ private:
+   std::string agentName_;
+};
+
 /// Base class for "unsupported" errors
 class EOS_SDK_PUBLIC unsupported_error : public error {
  public:
