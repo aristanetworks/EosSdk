@@ -5,7 +5,6 @@
 #define EOS_TYPES_MPLS_H
 
 #include <eos/base.h>
-#include <eos/utility.h>
 #include <sstream>
 
 namespace eos {
@@ -31,7 +30,7 @@ enum mpls_ttl_mode_t {
 
 /**
  * The inner payload type.
- *  Used in a similar way to ethertype, as MPLS does not provide this
+ *  Used in a similar way to ethertype,as MPLS does not provide this
  *  in the packet.
  */
 enum mpls_payload_type_t {
@@ -44,10 +43,9 @@ enum mpls_payload_type_t {
 
 
 /**
- * An MPLS label, per RFC 3032. Note: label id 0 (default value) is the explicit
- * null label. LSRs receiving this label are expected to pop it and perform
- * ultimate IP orwarding. MPLS label numbers are 20 bits in size, covering the
- * range 0..1048575.
+ * An MPLS label, per RFC 3032.Note: label id 0 (default value) is theexplicit null
+ * label. LSRs receiving thislabel are expected to pop it and performultimate IP
+ * orwarding. MPLS label numbersare 20 bits in size, covering the range 0..1048575.
  */
 class EOS_SDK_PUBLIC mpls_label_t {
  public:
