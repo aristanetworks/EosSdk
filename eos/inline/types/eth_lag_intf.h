@@ -167,15 +167,15 @@ inline uint32_t
 eth_lag_intf_t::hash() const {
    uint32_t ret = 0;
    ret = hash_mix::mix((uint8_t *)&intf_,
-              sizeof(intf_id_t), ret);
+          sizeof(intf_id_t), ret);
    ret = hash_mix::mix((uint8_t *)&speed_,
-              sizeof(double), ret);
+          sizeof(double), ret);
    ret = hash_mix::mix((uint8_t *)&min_links_,
-              sizeof(uint32_t), ret);
+          sizeof(uint32_t), ret);
    ret = hash_mix::mix((uint8_t *)&fallback_type_,
-              sizeof(eth_lag_intf_fallback_type_t), ret);
+          sizeof(eth_lag_intf_fallback_type_t), ret);
    ret = hash_mix::mix((uint8_t *)&fallback_timeout_,
-              sizeof(uint16_t), ret);
+          sizeof(uint16_t), ret);
    ret = hash_mix::final_mix(ret);
    return ret;
 }

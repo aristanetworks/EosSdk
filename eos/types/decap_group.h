@@ -41,15 +41,12 @@ class EOS_SDK_PUBLIC decap_group_t {
     * header.
     */
    ip_addr_t destination_addr() const;
-   /**
-    * Setter for 'destination_addr': match destination IP on the outermost IP
-    * header.
-    */
+   /** Setter for 'destination_addr'. */
    void destination_addr_is(ip_addr_t const & destination_addr);
 
    /** Getter for 'protocol_type': match this outer IP protocol to decap. */
    decap_protocol_type_t protocol_type() const;
-   /** Setter for 'protocol_type': match this outer IP protocol to decap. */
+   /** Setter for 'protocol_type'. */
    void protocol_type_is(decap_protocol_type_t protocol_type);
 
    /**
@@ -57,10 +54,7 @@ class EOS_SDK_PUBLIC decap_group_t {
     * config.
     */
    bool persistent() const;
-   /**
-    * Setter for 'persistent': if true, the decap group is stored in the startup-
-    * config.
-    */
+   /** Setter for 'persistent'. */
    void persistent_is(bool persistent);
 
    bool operator==(decap_group_t const & other) const;
