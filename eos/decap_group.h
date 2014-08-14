@@ -12,6 +12,34 @@
 
 #include <eos/types/decap_group.h>
 
+/**
+ * @file
+ * Tunnel decapsulation group management.
+ *
+ * This module manages tunnel decapsulation for traffic arriving at
+ * the switch (on any interface). This allows the switch to act as a
+ * tunnel endpoint.
+ *
+ * By configuring a "decap group", the switch will decapsulate traffic
+ * matching the specified outer (tunnel) header destination IP address
+ * and IP protocol. Presnently only GRE traffic (protocol 47) is
+ * supported by decap groups. Traffic arriving at the switch matching
+ * the group's parameters will be decapsulated and forwarded normally
+ * based on the inner protocol headers.
+ *
+ * In this example, a decap group named "gre_tunnel1" is configured
+ * for GRE traffic arriving at the switch with a tunnel destination
+ * address of 172.12.0.1. That address may either be bound to a local
+ * switch interface or announced by the switch in routing protocols.
+ *
+ * @code
+ * // Configures a decapsulation group to unwrap received GRE traffic
+ * eos::decap_group_t tunnel("gre_tunnel1",
+ *                           eos::ip_addr_t("172.12.0.1"),
+ *                           eos::PROTOCOL_TYPE_GRE);
+ * mgr->decap_group_set(tunnel);
+ * @endcode
+ */
 namespace eos {
 
 class decap_group_iter_impl;
