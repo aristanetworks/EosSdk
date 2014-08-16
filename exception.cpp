@@ -87,16 +87,17 @@ address_overlap_error::address_overlap_error(ip_addr_mask_t const & addr) noexce
    : configuration_error(address_overlap_error_msg(addr)), addr_(addr) {
 }
 
-static inline std::string unconfiged_agent_error_msg(std::string const & agentName) {
+static
+inline std::string unconfigured_agent_error_msg(std::string const & agent_name) {
    std::stringstream str;
-   str << "The agent " << agentName.c_str() << " has not been configured. "
+   str << "The agent " << agent_name.c_str() << " has not been configured. "
       "Ensure that the agent has been configured to run from the CLI and "
       "that the executable uses the same agent name.";
    return str.str();
 }
 
-unconfiged_agent_error::unconfiged_agent_error(std::string const & name) noexcept :
-configuration_error(unconfiged_agent_error_msg(name)), agentName_(name) {
+unconfigured_agent_error::unconfigured_agent_error(std::string const & name) noexcept
+   : configuration_error(unconfigured_agent_error_msg(name)), agent_name_(name) {
 }
 
 unsupported_policy_feature_error::unsupported_policy_feature_error(policy_feature_t
