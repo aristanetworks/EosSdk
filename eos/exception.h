@@ -143,15 +143,15 @@ class EOS_SDK_PUBLIC address_overlap_error : public configuration_error {
 };
 
 /// The given agent has not been configured
-class EOS_SDK_PUBLIC unconfiged_agent_error : public configuration_error {
+class EOS_SDK_PUBLIC unconfigured_agent_error : public configuration_error {
  public:
-   virtual ~unconfiged_agent_error() noexcept;
-   explicit unconfiged_agent_error(std::string const & agentName) noexcept;
+   virtual ~unconfigured_agent_error() noexcept;
+   explicit unconfigured_agent_error(std::string const & agent_name) noexcept;
    virtual void raise() const;  ///< Throws this exception.
-   std::string agentName() const noexcept;
+   std::string agent_name() const noexcept;
 
  private:
-   std::string agentName_;
+   std::string agent_name_;
 };
 
 /// Base class for "unsupported" errors

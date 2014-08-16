@@ -138,15 +138,15 @@ inline ip_addr_mask_t address_overlap_error::addr() const noexcept {
    return addr_;
 }
 
-inline unconfiged_agent_error::~unconfiged_agent_error() noexcept {
+inline unconfigured_agent_error::~unconfigured_agent_error() noexcept {
 }
 
-inline void unconfiged_agent_error::raise() const {
+inline void unconfigured_agent_error::raise() const {
    throw *this;
 }
 
-inline std::string unconfiged_agent_error::agentName() const noexcept {
-   return agentName_;
+inline std::string unconfigured_agent_error::agent_name() const noexcept {
+   return agent_name_;
 }
 
 inline
