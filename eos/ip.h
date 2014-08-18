@@ -44,9 +44,9 @@
  *
  * // valid == true, and address is changed to contain the
  * // representation of 1.1.1.1 with its af() == eos::AF_IPV4
- * valid = eos::parse_ip_addr("1.1.1.1", &address));
+ * valid = eos::parse_ip_addr("1.1.1.1", &address);
  * // valid == false, address is unchanged
- * valid = eos::parse_ip_addr("not_an_ip", &address));
+ * valid = eos::parse_ip_addr("not_an_ip", &address);
  *
  * // Parses and validates an IP prefix
  *
