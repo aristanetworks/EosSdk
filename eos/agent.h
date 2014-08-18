@@ -19,15 +19,53 @@
  * infrastructure, including any agent specific cleanup that must be
  * performed prior to ProcMgr terminating the agent when it is disabled.
  *
- * After ProcMgr tells Launcher to start the agent, if the agent is
- * configured to shutdown in EOS, the on_agent_enabled function of
- * agent_handler is called with false. In reaction to this call, if
- * your agent has resources (such as files or sockets) to close prior
- * to being terminated, you must override the implementation of
- * on_agent_enabled() to perform this cleanup. After cleanup, from
- * on_agent_enabled call the agent_mgr function
- * agent_shutdown_complete_is(true) to signal to ProcMgr that your
- * process is finished and can be terminated.
+ * Most agents will inherit from agent_handler to react to the
+ * on_initialized() callback. This callback is important because it
+ * alerts you that all Sysdb state for other managers and handlers has
+ * been synchronized. It is at this point that callbacks to your
+ * agent's other handler methods will commence, and that your agent
+ * may call a mgr's methods.
+ *
+ * @warning Note that the features documented below are only available
+ * in certain releases, or in conjunction with another extension
+ * providing EOS SDK state.
+ *
+ * In order to gracefully shutdown, agents can override the
+ * on_agent_enabled() method provided by the agent_handler in order to
+ * cleanup existing resources, such as files or sockets. When a
+ * shutdown event is triggered, your agent will not be terminated
+ * until it has set the agent_mgr's agent_shutdown_complete_is(true)
+ * method. This method will not always be called before your agent
+ * exits. During supervisor switchover or reload events (or, if your
+ * agent is sent a kil signal), the agent will exit abruptly and this
+ * method will not be called.
+ *
+ * This module also provides a way to handle configuration changes and
+ * publish a status. If this agent is configured via the daemon CLI, a
+ * custom data store is created for this agent in Sysdb. This data
+ * store contains two string-string maps, one for configuration and
+ * one for status.
+ *
+ * Configuration options will be externally set, either via the CLI,
+ * eAPI, or programatically in some other manner. Your agent can read
+ * configuration options via the agent_mgr's agent_option() method,
+ * and should react to options via the agent_handler's
+ * on_agent_option() method. Note that you should manually handle
+ * existing configuration options when initialized. These options will be
+ * reflected in the running configuration so they will persist across
+ * supervisor switchovers, and, if written to the startup config, will
+ * persist after a reboot.
+ *
+ * Status data is meant for external consumption; your agent should
+ * publish key-value status objects to reflect current status, errors,
+ * or other important data that should be monitored. Status can be
+ * monitored via the "show daemon [agent_name]" CLI command, or
+ * retrieved via an off-box script using an eAPI request with that
+ * same command. To publish status, use the agent_mgr's status_set()
+ * methods, or unset a status via status_del().
+ *
+ * To see an example of these methods in use, view
+ * examples/CustomStateAgent.cpp.
  */
 
 namespace eos {
@@ -63,8 +101,9 @@ class EOS_SDK_PUBLIC agent_handler : public base_handler<agent_mgr, agent_handle
    virtual void on_agent_enabled(bool enabled);
 
    /**
-    * Handler called when the configuration options of the agent
-    * have changed.
+    * Handler called when the configuration options of the agent have
+    * changed. If the option was deleted, this will be called with
+    * value set as the empty string.
     */
    virtual void on_agent_option(std::string const & name, std::string const & value);
 };
@@ -114,14 +153,6 @@ class EOS_SDK_PUBLIC agent_mgr : public base_mgr<agent_handler> {
     virtual void status_del(std::string const & key) = 0;
 
     /**
-     * Get the status value stored by the agent under the given key.
-     *
-     * If no value has been stored under the given key, the empty
-     * string is returned.
-     */
-    virtual std::string status(std::string const & key) const = 0;
-
-    /**
      * Called when agent graceful shutdown has successfully completed.
      *
      * If the agent requires special handling to cleanup state when
@@ -135,7 +166,11 @@ class EOS_SDK_PUBLIC agent_mgr : public base_mgr<agent_handler> {
      * of on_agent_enabled when the agent is disabled. If no special
      * cleanup handling is required, then simply do not override
      * on_agent_enabled and the agent will be killed by ProcMgr as
-     * soon as it is administratively disabled.
+     * soon as it is administratively disabled. 
+     *
+     * During supervisor switchover or reload events (or, if your
+     * agent is sent a kil signal), the agent will exit abruptly and this
+     * method will not be called.
      */
     virtual void agent_shutdown_complete_is(bool) = 0;
 
