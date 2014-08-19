@@ -12,7 +12,7 @@ static const std::string AGENT_NAME = "custom_state_agent";
 
 static const std::string CONTROLLER_OPTION_NAME = "controller-ip";
 static const std::string CONTROLLER_STATUS_NAME = "controller-status";
-static const std::string CONTROLLER_HEALTH_STATUS_NAME = "controller-health";
+static const std::string CONTROLLER_STATUS_DETAIL_NAME = "controller-status-detail";
 
 class custom_state_agent : public eos::agent_handler {
  public:
@@ -76,7 +76,7 @@ class custom_state_agent : public eos::agent_handler {
       // <disconnection code would go here>
 
       agent_mgr->status_set(CONTROLLER_STATUS_NAME, "disconnected");
-      agent_mgr->status_del(CONTROLLER_HEALTH_STATUS_NAME);      
+      agent_mgr->status_del(CONTROLLER_STATUS_DETAIL_NAME);      
    }
    
    // Connect to some external server based on
@@ -85,21 +85,22 @@ class custom_state_agent : public eos::agent_handler {
    void connect_to_controller(std::string const & ip_str) {
       eos::ip_addr_t address;
       bool valid = eos::parse_ip_addr(ip_str.c_str(), &address);
-      if(valid) {
+      if(!valid) {
          agent_mgr->status_set(CONTROLLER_STATUS_NAME, "error");
-         agent_mgr->status_set(CONTROLLER_STATUS_NAME, "invalid IP address");
+         agent_mgr->status_set(CONTROLLER_STATUS_DETAIL_NAME, "invalid IP address");
+         return;
       }
       t.trace5("Connecting to controller at %s", address.to_string().c_str());
-      bool success = false;
+      bool success = true;
 
       // <actual connection implementation would go here>
 
       if(success) {
          agent_mgr->status_set(CONTROLLER_STATUS_NAME, "connected");
-         agent_mgr->status_set(CONTROLLER_HEALTH_STATUS_NAME, "healthy");
+         agent_mgr->status_set(CONTROLLER_STATUS_DETAIL_NAME, "healthy");
       } else {
          agent_mgr->status_set(CONTROLLER_STATUS_NAME, "error");
-         agent_mgr->status_set(CONTROLLER_HEALTH_STATUS_NAME, "bad connection");
+         agent_mgr->status_set(CONTROLLER_STATUS_DETAIL_NAME, "bad connection");
       }
    }
 };
