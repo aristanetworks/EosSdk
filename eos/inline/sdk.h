@@ -7,13 +7,12 @@
 #include <eos/panic.h>
 #include <eos/exception.h>
 
-#include <string.h>
-
 namespace eos {
 
 inline void sdk::main_loop(const char * agent_name, int argc, char ** argv) {
-   if (strlen(agent_name) > 0) {
-      if(!name_.empty() && name_ != agent_name) {
+   if (*agent_name) {
+      // They did not pass an agent name
+      if (!name_.empty() && name_ != agent_name) {
          panic(invalid_argument_error(
                      "sdk",
                      "Main_loop cannot reset sdk agent_name after construction."));
