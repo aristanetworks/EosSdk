@@ -20,7 +20,7 @@ inline void sdk::main_loop(const char * agent_name, int argc, char ** argv) {
       }
       name_ = agent_name;
    }
-   get_agent_mgr()->main_loop(agent_name, argc, argv);
+   get_agent_mgr()->main_loop(name_.c_str(), argc, argv);
 }
 
 inline acl_mgr * sdk::get_acl_mgr() {
