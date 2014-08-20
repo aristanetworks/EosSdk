@@ -233,6 +233,7 @@ void throw_py_error(error const& err) {
 %include "eos/mpls.h"
 %include "eos/types/ip_route.h"
 %include "eos/ip_route.h"
+%include "eos/types/mpls_route.h"
 %include "eos/mpls_route.h"
 %include "eos/policy_map.h"
 %include "eos/class_map.h"

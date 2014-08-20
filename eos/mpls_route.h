@@ -4,79 +4,13 @@
 #ifndef EOS_MPLS_ROUTE_H
 #define EOS_MPLS_ROUTE_H
 
+
 #include <eos/base.h>
-#include <eos/intf.h>
-#include <eos/ip.h>
 #include <eos/iterator.h>
-#include <eos/mpls.h>
+
+#include <eos/types/mpls_route.h>
 
 namespace eos {
-
-typedef uint8_t mpls_route_metric_t;  // 1..255; default/null is 0
-
-
-/// An MPLS route key is used for MPLS RIB configuration.
-class EOS_SDK_PUBLIC mpls_route_key_t {
- public:
-   mpls_route_key_t();
-   /**
-    * Constructor taking an ingress MPLS route label and a metric.
-    *
-    * @param mpls_label_t The MPLS label to match on ingress for this route
-    * @param mpls_route_metric_t A metric value between 1 and 255
-    */
-   mpls_route_key_t(mpls_label_t const &, mpls_route_metric_t metric);
-
-   bool operator==(mpls_route_key_t const & other) const;
-   bool operator!=(mpls_route_key_t const & other) const;
-
-   /**
-    * The label to match on ingress route lookup.
-    *
-    * 0 is the null metric; valid MPLS routes must have a metric in range 1..255
-    */
-   mpls_label_t top_label;
-   /// The MPLS route metric. Lower metric routes are preferred.
-   mpls_route_metric_t metric;
-};
-
-/// An MPLS v4/v6 static route.
-class EOS_SDK_PUBLIC mpls_route_t {
- public:
-   /// Default value constructor
-   mpls_route_t();
-   /// MPLS route constructor taking an MPLS route key.
-
-   explicit mpls_route_t(mpls_route_key_t const & route_key);
-
-   bool operator==(mpls_route_t const & other) const;
-   bool operator!=(mpls_route_t const & other) const;
-
-   /// The MPLS route key
-   mpls_route_key_t key;
-
-   /// If true, this route is persisted in the startup-config
-   bool persistent;
-};
-
-/// An MPLS route via, defining the action to take for a given MPLS route.
-class EOS_SDK_PUBLIC mpls_route_via_t {
-  public:
-   mpls_route_via_t();
-   explicit mpls_route_via_t(mpls_route_key_t const & route_key);
-
-   mpls_route_key_t route_key;
-
-   /// Use these fields to determine the nexthop
-
-   ip_addr_t hop;           ///< IP v4/v6 nexthop address
-   intf_id_t intf;          ///< Use the named interface if not a default intf_id_t
-
-   mpls_label_t pushswap_label;  ///< Push or swap this label
-   mpls_action_t label_action;  ///< Perform this MPLS operation
-   mpls_ttl_mode_t ttl_mode;    ///< Applies to push and pop
-   mpls_payload_type_t payload_type;  ///< Used to assign ethertype after final pop
-};
 
 class mpls_route_iter_impl;
 
@@ -146,7 +80,5 @@ class EOS_SDK_PUBLIC mpls_route_mgr {
 };
 
 }
-
-#include <eos/inline/mpls_route.h>
 
 #endif // EOS_MPLS_ROUTE_H
