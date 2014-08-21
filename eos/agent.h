@@ -37,7 +37,7 @@
  * until it has set the agent_mgr's agent_shutdown_complete_is(true)
  * method. This method will not always be called before your agent
  * exits. During supervisor switchover or reload events (or, if your
- * agent is sent a kil signal), the agent will exit abruptly and this
+ * agent is sent a kill signal), the agent will exit abruptly and this
  * method will not be called.
  *
  * This module also provides a way to handle configuration changes and
@@ -169,7 +169,7 @@ class EOS_SDK_PUBLIC agent_mgr : public base_mgr<agent_handler> {
      * soon as it is administratively disabled. 
      *
      * During supervisor switchover or reload events (or, if your
-     * agent is sent a kil signal), the agent will exit abruptly and this
+     * agent is sent a kill signal), the agent will exit abruptly and this
      * method will not be called.
      */
     virtual void agent_shutdown_complete_is(bool) = 0;
