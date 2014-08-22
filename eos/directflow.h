@@ -194,10 +194,7 @@ class EOS_SDK_PUBLIC flow_action_t {
    void output_intf_set(intf_id_t);
    void output_intf_del(intf_id_t);
 
-   /**
-    * Specify the VLAN id
-    * 0 means use configured native VLAN
-    */
+   /// Specify the VLAN id
    void vlan_id_is(vlan_id_t);
    vlan_id_t vlan_id() const;
    /// Specify the cos
