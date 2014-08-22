@@ -43,7 +43,7 @@ enum mpls_payload_type_t {
 
 
 /**
- * An MPLS label, per RFC 3032.Note: label id 0 (default value) is the explicit
+ * An MPLS label, per RFC 3032. Note: label id 0 (default value) is the explicit
  * null label. LSRs receiving this label are expected to pop it and perform
  * ultimate IP orwarding. MPLS label numbers are 20 bits in size, covering the
  * range 0..1048575.
