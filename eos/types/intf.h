@@ -5,7 +5,6 @@
 #define EOS_TYPES_INTF_H
 
 #include <eos/panic.h>
-#include <eos/utility.h>
 #include <sstream>
 
 namespace eos {
@@ -81,7 +80,6 @@ class EOS_SDK_PUBLIC intf_id_t {
 
 /**
  * Interface counter class.
-
  * All of these attributes have the same meanings as the corresponding objects in
  * the Interface MIB (RFC 2863, 'IF-MIB').
  */

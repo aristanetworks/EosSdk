@@ -6,37 +6,6 @@
 
 namespace eos {
 
-intf_id_t::intf_id_t() : intfId_(0) {
-}
-
-intf_id_t::intf_id_t(char const * intfname) : intfId_(0) {
-   // TODO: No op impl.
-}
-
-intf_id_t::intf_id_t(const std::string & intfname) : intfId_(0) {
-   // TODO: No op impl.
-}
-
-bool
-intf_id_t::is_null0() const {
-   return false;
-}
-
-intf_type_t
-intf_id_t::intf_type() const {
-   return INTF_TYPE_OTHER;
-}
-
-bool
-intf_id_t::operator !() const {
-   return intfId_;
-}
-
-std::string
-intf_id_t::to_string() const {
-   return "NotImplemented";  // TODO: No op impl.
-}
-
 intf_handler::intf_handler(intf_mgr * mgr) : 
       base_handler<intf_mgr, intf_handler>(mgr) {
 }
