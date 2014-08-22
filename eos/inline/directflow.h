@@ -4,6 +4,9 @@
 #ifndef EOS_INLINE_DIRECTFLOW_H
 #define EOS_INLINE_DIRECTFLOW_H
 
+#include <eos/panic.h>
+#include <eos/exception.h>
+
 namespace eos {
 
 //
@@ -318,6 +321,12 @@ flow_action_t::output_intfs() const {
 
 inline void
 flow_action_t::vlan_id_is(vlan_id_t vlan_id) {
+   if (vlan_id == 0) {
+      panic(
+            invalid_argument_error(
+                   "vlan_id",
+                   "vlan_id cannot be 0."));
+   }
    vlan_id_ = vlan_id;
 }
 
