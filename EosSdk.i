@@ -208,6 +208,7 @@ void throw_py_error(error const& err) {
 %include "eos/event_loop.h"
 %include "eos/fd.h"
 %include "eos/iterator.h"
+%include "eos/types/intf.h"
 %include "eos/intf.h"
 %include "eos/ip.h"
 %include "eos/acl.h"

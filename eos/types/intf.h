@@ -5,7 +5,6 @@
 #define EOS_TYPES_INTF_H
 
 #include <eos/panic.h>
-#include <eos/utility.h>
 #include <sstream>
 
 namespace eos {
