@@ -22,6 +22,7 @@ libeos_la_SOURCES += event_loop.cpp
 libeos_la_SOURCES += exception.cpp
 libeos_la_SOURCES += fd.cpp
 libeos_la_SOURCES += intf.cpp
+libeos_la_SOURCES += intf_types.cpp
 libeos_la_SOURCES += impl.cpp impl.h
 libeos_la_SOURCES += ip.cpp
 libeos_la_SOURCES += ip_intf.cpp
