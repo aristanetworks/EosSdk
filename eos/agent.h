@@ -82,7 +82,12 @@ class EOS_SDK_PUBLIC agent_handler : public base_handler<agent_mgr, agent_handle
    agent_mgr * get_agent_mgr() const;
 
    /**
-    * Handler called after the agent has been internally initialized.
+    * Handler called after the agent has been internally
+    * initialized. At this point, all managers have synchronized with
+    * Sysdb, and the agent's handlers will begin firing. In the body
+    * of this method, agents should check Sysdb and handle the initial
+    * state of any configuration and status that this agent is
+    * interested in.
     *
     * Accessors and mutators (from _mgr classes) should not be called
     * before this event, and other handlers will not fire before this
@@ -91,19 +96,33 @@ class EOS_SDK_PUBLIC agent_handler : public base_handler<agent_mgr, agent_handle
    virtual void on_initialized();
 
    /**
-    * Handler called when the agent has been enabled/disabled.
+    * Handler called when the agent has been enabled or disabled.
     *
-    * The default implementation will synchronously call the
-    * agent_mgr's agent_shutdown_complete method. If you override
-    * on_agent_enabled, then you are also responsible for calling
-    * agent_shutdown_complete.
+    * The default implementation will immediately call the agent_mgr's
+    * agent_shutdown_complete_is(true) method when it has been
+    * disabled. If on_agent_enabled is enabled, the agent will
+    * continue to run until it callsagent_shutdown_complete_is(true),
+    * which allows the agent to cleanup any relevant state. Note that
+    * the agent configuration may cease to exist, causing the agent to
+    * be disabled. This means the agent should not check any
+    * agent_option during the shutdown flow.
+    *
+    * If called called with enabled=true, the agent should usually
+    * perform a no-op, unless it is in the process of shutting down.
+    * This occurs when the agent was shutdown and quickly enabled
+    * before it had a chance to clean up, and at this point the agent
+    * should cancel any clean up activities it has started and resume
+    * functioning normally. This scenario only happen if the agent is
+    * waiting on the event loop for a notification before calling
+    * shutting down and calling agent_shutdown_complete_is(true).
     */
    virtual void on_agent_enabled(bool enabled);
 
    /**
-    * Handler called when the configuration options of the agent have
+    * Handler called when a configuration option of the agent has
     * changed. If the option was deleted, this will be called with
-    * value set as the empty string.
+    * value set as the empty string. Otherwise, value will contain the
+    * added or altered string corresponding to the option name.
     */
    virtual void on_agent_option(std::string const & name, std::string const & value);
 };
@@ -112,14 +131,8 @@ class EOS_SDK_PUBLIC agent_mgr : public base_mgr<agent_handler> {
  public:
     virtual ~agent_mgr();
 
-    /**
-     * Hands over the main event loop to EOS.
-     * Blocks until the event loop stops.
-     */
+    /// @deprecated main loop which takes an agent name
     virtual void main_loop(const char * agent_name, int argc, char ** argv) = 0;
-
-    /// Stop this agent's execution (after the next pass through the event loop)
-    void exit();
 
     /**
      * Given a name, returns a numeric ID uniquely identifying the agent.
@@ -141,12 +154,12 @@ class EOS_SDK_PUBLIC agent_mgr : public base_mgr<agent_handler> {
     /**
      * Get the configured value for the given agent option.
      *
-     * If no value has been set for the option, the empty string is
+     * If no value has been set for the requested option, the empty string is
      * returned.
      */
     virtual std::string agent_option(std::string const & name) const = 0;
 
-    /// Store custom agent status mapped to the given key
+    /// Publish a status value mapped to the named key. 
     virtual void status_set(std::string const & key,
                             std::string const & value) = 0;
     /// Delete the stored agent status with the given key
@@ -173,6 +186,16 @@ class EOS_SDK_PUBLIC agent_mgr : public base_mgr<agent_handler> {
      * method will not be called.
      */
     virtual void agent_shutdown_complete_is(bool) = 0;
+
+    /**
+     * Stop this agent's execution (after the next pass through the
+     * event loop). Note that if you have configured the agent to run
+     * under ProcMgr's control (i.e. the agent is configured to run
+     * via the daemon CLI), ProcMgr will restart the agent once it
+     * detects the agent has exited. This is most useful for testing
+     * and debugging purposes.
+     */
+    virtual void exit() = 0;
 
  protected:
     agent_mgr() EOS_SDK_PRIVATE;

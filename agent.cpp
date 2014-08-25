@@ -56,6 +56,10 @@ class agent_mgr_impl : public agent_mgr {
       return true;
    }
 
+   void exit() {
+      impl.stop_loop();
+   }
+
    void agent_shutdown_complete_is(bool complete) {
    }
 
@@ -86,10 +90,6 @@ DEFINE_STUB_MGR_CTOR(agent_mgr)
 
 void delete_agent_mgr(agent_mgr * mgr) {
    delete mgr;
-}
-
-void agent_mgr::exit() {
-   impl.stop_loop();
 }
 
 uint32_t agent_mgr::id(const char * agent_name) {
