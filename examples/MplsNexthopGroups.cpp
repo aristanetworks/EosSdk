@@ -69,5 +69,5 @@ class my_agent : public eos::agent_handler {
 int main(int argc, char ** argv) {
    eos::sdk sdk;
    my_agent agent(sdk);
-   sdk.main_loop("MplsNexthopGroupExample", argc, argv);
+   sdk.main_loop(argc, argv);
 }

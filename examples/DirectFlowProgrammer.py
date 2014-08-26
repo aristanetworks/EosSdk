@@ -169,7 +169,7 @@ class DirectFlowProgrammer(eossdk.AgentHandler,
 def main(args):
    sdk = eossdk.Sdk()
    programmer = DirectFlowProgrammer(sdk.get_agent_mgr(), sdk.get_directflow_mgr())
-   sdk.main_loop("DirectFlowProgrammer", sys.argv)
+   sdk.main_loop(sys.argv)
    print "Saw %d flow status changes" % programmer.changes
 
 
