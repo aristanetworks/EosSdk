@@ -1,7 +1,6 @@
 // Copyright (c) 2013 Arista Networks, Inc.  All rights reserved.
 // Arista Networks, Inc. Confidential and Proprietary.
 
-#include <cassert>
 #include <cstdlib>  // for abort()
 #include <functional> // For dummy agent_id impl
 
@@ -39,13 +38,6 @@ static void call_on_initialized(agent_handler* handler) {
 class agent_mgr_impl : public agent_mgr {
  public:
    agent_mgr_impl() {
-   }
-
-   void main_loop(const char * agent_name, int argc, char ** argv) {
-      assert(agent_name);   // Must not be NULL.
-      assert(*agent_name);  // Must be at least one char long.
-      impl.agent_name_is(agent_name);
-      impl.main_loop();
    }
 
    void on_initialized() {

@@ -108,5 +108,5 @@ class custom_state_agent : public eos::agent_handler {
 int main(int argc, char ** argv) {
    eos::sdk sdk(AGENT_NAME);
    custom_state_agent agent(sdk);
-   sdk.main_loop("", argc, argv);
+   sdk.main_loop(argc, argv);
 }

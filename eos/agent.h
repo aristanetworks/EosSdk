@@ -131,9 +131,6 @@ class EOS_SDK_PUBLIC agent_mgr : public base_mgr<agent_handler> {
  public:
     virtual ~agent_mgr();
 
-    /// @deprecated main loop which takes an agent name
-    virtual void main_loop(const char * agent_name, int argc, char ** argv) = 0;
-
     /**
      * Given a name, returns a numeric ID uniquely identifying the agent.
      * This number is guaranteed to remain the same across agent restarts,

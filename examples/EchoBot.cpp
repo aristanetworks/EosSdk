@@ -217,6 +217,6 @@ class echo_bot : public eos::timeout_handler,
 int main(int argc, char ** argv) {
    eos::sdk sdk;
    echo_bot bot(sdk);
-   sdk.main_loop("EchoBot", argc, argv);
+   sdk.main_loop(argc, argv);
 }
 

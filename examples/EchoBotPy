@@ -80,4 +80,4 @@ class EchoBot(eossdk.TimeoutHandler, eossdk.FdHandler):
 
 sdk = eossdk.Sdk()
 echoBot = EchoBot(sdk.get_timeout_mgr())
-sdk.main_loop("EchoBotPy", sys.argv)
+sdk.main_loop(sys.argv)

@@ -68,7 +68,7 @@
       eos::sdk sdk;
       eth_lag_intf_mgr = sdk.get_eth_lag_intf_mgr();
       ApplicationAgent agent(sdk);
-      sdk.main_loop("ApplicationAgent", argc, argv);
+      sdk.main_loop(argc, argv);
    }
  * @endcode
  */

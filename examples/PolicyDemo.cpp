@@ -90,5 +90,5 @@ int main(int argc, char ** argv) {
    policy_demo demo(sdk);
 
    printf("Starting PolicyDemo\n");
-   sdk.main_loop("PolicyDemo", argc, argv);
+   sdk.main_loop(argc, argv);
 }

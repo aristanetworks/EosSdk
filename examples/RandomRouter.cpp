@@ -13,7 +13,6 @@
 #include <unistd.h>
 
 
-#define AGENT_NAME "RandomRouter"
 #define BUF_SIZE 1024
 
 // Our agent! This program listens to stdin, and when a route is
@@ -28,12 +27,12 @@ class random_router : public eos::agent_handler,
  public:
    explicit random_router(eos::sdk & sdk)
       : eos::agent_handler(sdk.get_agent_mgr()),
-        eos::intf_handler(sdk.get_intf_mgr()) {
+        eos::intf_handler(sdk.get_intf_mgr()),
+        tag_id(42) {
       printf("Initializing the Random Router...\n");
       fflush(stdout);
-      app_id = eos::agent_mgr::id(AGENT_NAME);
       route_mgr = sdk.get_ip_route_mgr();
-      route_mgr->tag_is(app_id);
+      route_mgr->tag_is(tag_id);
    }
 
    void on_initialized() {
@@ -62,7 +61,7 @@ class random_router : public eos::agent_handler,
          // Create a new ip_route for this prefix
          eos::ip_route_key_t key(new_prefix);
          eos::ip_route_t route(key);
-         route.tag_is(app_id);
+         route.tag_is(tag_id);
          route.persistent_is(true);
          route_mgr->ip_route_set(route);
 
@@ -120,7 +119,7 @@ class random_router : public eos::agent_handler,
    }
 
  private:
-   uint32_t app_id;
+   uint32_t tag_id;
    eos::intf_id_t last_used_intf;
 
    // EosSdk state managers:
@@ -130,5 +129,5 @@ class random_router : public eos::agent_handler,
 int main(int argc, char ** argv) {
    eos::sdk sdk;
    random_router rr(sdk);
-   sdk.main_loop(AGENT_NAME, argc, argv);
+   sdk.main_loop(argc, argv);
 }
