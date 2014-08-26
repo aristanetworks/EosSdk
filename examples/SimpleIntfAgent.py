@@ -54,7 +54,7 @@ class MyTestAgent(eossdk.AgentHandler, eossdk.FdHandler):
 def main(args):
    sdk = eossdk.Sdk()
    testAgent = MyTestAgent(sdk.get_agent_mgr(), sdk.get_intf_mgr(), "Ethernet1")
-   sdk.main_loop("MyTestAgent", args)
+   sdk.main_loop(args)
    print "Handled %d events" % testAgent.eventCount
 
 

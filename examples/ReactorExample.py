@@ -3,6 +3,7 @@
 # Arista Networks, Inc. Confidential and Proprietary.
 
 import eossdk
+import sys
 
 class MyIntfHandler( eossdk.AgentHandler, eossdk.IntfHandler ):
    def __init__( self, intfMgr, agentMgr ):
@@ -29,4 +30,4 @@ class MyIntfHandler( eossdk.AgentHandler, eossdk.IntfHandler ):
 
 sdk = eossdk.Sdk()
 mta = MyIntfHandler( sdk.get_intf_mgr(), sdk.get_agent_mgr() )
-sdk.main_loop( "MyIntfAgent", [] )
+sdk.main_loop( sys.argv )

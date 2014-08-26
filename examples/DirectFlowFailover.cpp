@@ -87,8 +87,8 @@ class dflow_helper : public eos::intf_handler,
 };
 
 int main(int argc, char ** argv) {
-   eos::sdk sdk;
+   eos::sdk sdk("DflowFailoverAgent");
    dflow_helper demo(sdk);
-   sdk.main_loop("DflowFailoverAgent", argc, argv);
+   sdk.main_loop(argc, argv);
 }
 

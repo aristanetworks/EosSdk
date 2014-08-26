@@ -1,6 +1,8 @@
 // Copyright (c) 2014 Arista Networks, Inc.  All rights reserved.
 // Arista Networks, Inc. Confidential and Proprietary.
 
+#include <cassert>
+
 #include "eos/event_loop.h"
 #include "eos/sdk.h"
 #include "impl.h"
@@ -62,6 +64,14 @@ sdk::sdk(std::string const name)
      timeout_mgr_(0) {
    name_ = name;
    impl.register_sdk(this);
+}
+
+void
+sdk::main_loop(int argc, char ** argv) {
+   assert(!name_.empty() && "No agent name set");
+   impl.agent_name_is(name_.c_str());
+   impl.main_loop();
+
 }
 
 void delete_agent_mgr(agent_mgr *);
