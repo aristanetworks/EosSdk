@@ -214,12 +214,11 @@ fib_fec_t::to_string() const {
    ss << "fec_id=" << fec_id_;
    ss << ", fec_type=" << fec_type_;
    ss << ", via=" <<"'";
-   bool first = true;
-   std::forward_list<fib_via_t>::const_iterator it;
-   for (it=via_.cbegin(); it!=via_.cend(); ++it) {
-      if (first) {
+   bool first_via = true;
+   for (auto it=via_.cbegin(); it!=via_.cend(); ++it) {
+      if (first_via) {
          ss << (*it);
-         first = false;
+         first_via = false;
       } else {
          ss << "," << (*it);
       }

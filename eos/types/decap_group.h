@@ -5,6 +5,7 @@
 #define EOS_TYPES_DECAP_GROUP_H
 
 #include <eos/ip.h>
+#include <eos/utility.h>
 #include <sstream>
 
 namespace eos {
