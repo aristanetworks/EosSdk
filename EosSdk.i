@@ -69,6 +69,7 @@ typedef uint64_t uint64_be_t;
 #include "eos/exception.h"
 #include "eos/fd.h"
 #include "eos/fib.h"
+#include "eos/hash_mix.h"
 #include "eos/intf.h"
 #include "eos/ip.h"
 #include "eos/ip_intf.h"
@@ -85,6 +86,7 @@ typedef uint64_t uint64_be_t;
 #include "eos/system.h"
 #include "eos/timer.h"
 #include "eos/tracing.h"
+#include "eos/utility.h"
 #include "eos/version.h"
 
 using namespace eos;
@@ -204,6 +206,7 @@ void throw_py_error(error const& err) {
 %ignore what;
 // THIS LIST IS IN A TOPOLOGICAL ORDER. DO NOT ALPHABETIZE.
 %include "eos/agent.h"
+%include "eos/hash_mix.h"
 %include "eos/eth.h"
 %include "eos/event_loop.h"
 %include "eos/fd.h"
@@ -243,6 +246,7 @@ void throw_py_error(error const& err) {
 %include "eos/system.h"
 %include "eos/timer.h"
 %include "eos/tracing.h"
+%include "eos/utility.h"
 %include "eos/version.h"
 
 
