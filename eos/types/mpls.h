@@ -5,6 +5,7 @@
 #define EOS_TYPES_MPLS_H
 
 #include <eos/base.h>
+#include <eos/utility.h>
 #include <sstream>
 
 namespace eos {

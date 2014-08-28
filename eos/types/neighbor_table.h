@@ -7,6 +7,7 @@
 #include <eos/eth.h>
 #include <eos/intf.h>
 #include <eos/ip.h>
+#include <eos/utility.h>
 #include <sstream>
 
 namespace eos {
