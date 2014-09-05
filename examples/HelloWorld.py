@@ -46,4 +46,4 @@ if __name__ == "__main__":
    # Assign the agent instance to a variable so it remains in scope and
    # is not deleted:
    _ = HelloWorldAgent(sdk_)
-   sdk.main_loop(sys.argv)
+   sdk_.main_loop(sys.argv)
