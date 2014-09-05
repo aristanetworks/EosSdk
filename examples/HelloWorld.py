@@ -42,8 +42,8 @@ class HelloWorldAgent(eossdk.AgentHandler):
          self.agentMgr.agent_shutdown_complete_is(True)      
 
 if __name__ == "__main__":
-   sdk = eossdk.Sdk()
-   # Assign the agent class to a variable so it remains in scope and
+   sdk_ = eossdk.Sdk()
+   # Assign the agent instance to a variable so it remains in scope and
    # is not deleted:
-   _ = HelloWorldAgent(sdk)
+   _ = HelloWorldAgent(sdk_)
    sdk.main_loop(sys.argv)
