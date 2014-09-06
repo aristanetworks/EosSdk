@@ -99,7 +99,7 @@ class hello_world_agent : public eos::agent_handler {
       if (!enabled) {
          t.trace0("Shutting down");
          agent_mgr->status_set("greeting", "Adios!");
-         get_agent_mgr()->agent_shutdown_complete_is(true);
+         agent_mgr->agent_shutdown_complete_is(true);
       }
    }
 };
