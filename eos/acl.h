@@ -476,7 +476,7 @@ class EOS_SDK_PUBLIC acl_mgr : public base_mgr<acl_handler> {
    /**
     * Configuration ACL existance test.
     *
-    * @returns true if an ACL with the same name and type (i.e., key)
+    * @return true if an ACL with the same name and type (i.e., key)
     * exists in the configuration, else false.
     */
    virtual bool acl_exists(acl_key_t const &) const = 0;
