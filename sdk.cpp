@@ -2,10 +2,13 @@
 // Arista Networks, Inc. Confidential and Proprietary.
 
 #include <cassert>
+#include <cstring>
 
 #include "eos/event_loop.h"
 #include "eos/sdk.h"
 #include "impl.h"
+
+static char DEFAULT_AGENT_PROCESS_NAME[] = "TestAgent";
 
 namespace eos {
 
@@ -34,6 +37,19 @@ sdk::sdk()
      policy_map_mgr_(0),
      system_mgr_(0),
      timeout_mgr_(0) {
+   char * agent_process_name = getenv("AGENT_PROCESS_NAME");
+   if (!agent_process_name) {
+      agent_process_name = DEFAULT_AGENT_PROCESS_NAME;
+   }
+   for (uint16_t i = 0; i < strlen(agent_process_name); i++) {
+      char c = agent_process_name[i];
+      if(!isalnum(c) && c != '-' && c != '_') {
+         panic(configuration_error("Invalid name specified in AGENT_PROCESS_NAME. "
+                                   "Only alphanumeric characters, underscores, "
+                                   "and dashes are permitted."));
+      }
+   }
+   name_ = agent_process_name;
    impl.register_sdk(this);
 }
 
