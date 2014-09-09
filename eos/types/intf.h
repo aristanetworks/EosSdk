@@ -81,6 +81,7 @@ class EOS_SDK_PUBLIC intf_id_t {
 
 /**
  * Interface counter class.
+
  * All of these attributes have the same meanings as the corresponding objects in
  * the Interface MIB (RFC 2863, 'IF-MIB').
  */
