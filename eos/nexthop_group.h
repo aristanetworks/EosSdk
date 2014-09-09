@@ -55,10 +55,6 @@
 #ifndef EOS_NEXTHOP_GROUP_H
 #define EOS_NEXTHOP_GROUP_H
 
-#include <list>
-#include <forward_list>
-#include <map>
-
 #include <eos/intf.h>
 #include <eos/ip.h>
 #include <eos/iterator.h>
