@@ -37,6 +37,7 @@ libeos_la_SOURCES += nexthop_group.cpp
 libeos_la_SOURCES += panic.cpp
 libeos_la_SOURCES += neighbor_table.cpp
 libeos_la_SOURCES += policy_map.cpp
+libeos_la_SOURCES += policy_map_types.cpp
 libeos_la_SOURCES += sdk.cpp
 libeos_la_SOURCES += system.cpp
 libeos_la_SOURCES += timer.cpp
