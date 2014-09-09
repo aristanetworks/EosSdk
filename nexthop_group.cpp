@@ -6,16 +6,6 @@
 
 namespace eos {
 
-void
-nexthop_group_t::destination_ip_set(uint16_t i, ip_addr_t const & addr) {
-   // TODO: no-op impl.
-}
-
-void
-nexthop_group_t::destination_ip_del(uint16_t i) {
-   // TODO: no-op impl.
-}
-
 class nexthop_group_mgr_impl : public nexthop_group_mgr {
  public:
    nexthop_group_mgr_impl() {

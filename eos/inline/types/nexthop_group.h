@@ -323,10 +323,6 @@ nexthop_group_t::operator<(nexthop_group_t const & other) const {
       return source_intf_ < other.source_intf_;
    } else if(size_ != other.size_) {
       return size_ < other.size_;
-   } else if(nexthops_ != other.nexthops_) {
-      return nexthops_ < other.nexthops_;
-   } else if(destination_ips_ != other.destination_ips_) {
-      return destination_ips_ < other.destination_ips_;
    } else if(persistent_ != other.persistent_) {
       return persistent_ < other.persistent_;
    }
