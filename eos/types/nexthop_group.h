@@ -6,12 +6,15 @@
 
 #include <eos/panic.h>
 #include <eos/utility.h>
+#include <forward_list>
+#include <map>
 #include <sstream>
 
 namespace eos {
 
 /**
  * The type of encapsulation to use for this nexthop group.
+
  * The present nexthop group types are all tunnel encapsulations. Each
  * causes a variety of packet headers for packets using the group to
  * be changed to appropriately encapsulate the frame.
@@ -29,6 +32,7 @@ enum nexthop_group_encap_t {
 
 /**
  * An MPLS nexthop group switching operation.
+
  * This structure combines a stack of labels and an MPLS switchingoperation using
  * those labels, such as eos::MPLS_ACTION_PUSH.
  */
@@ -46,6 +50,7 @@ class EOS_SDK_PUBLIC nexthop_group_mpls_action_t {
 
    /**
     * Getter for 'label_stack': The MPLS label stack.
+
     * The first element is the outermost label.
     */
    std::forward_list<mpls_label_t> const & label_stack() const;
@@ -76,6 +81,7 @@ class EOS_SDK_PUBLIC nexthop_group_mpls_action_t {
 
 /**
  * A nexthop group destination entry.
+
  * An entry consists of a nexthop IP address, and optionally an MPLS
  * label switching operation.
  */
@@ -114,6 +120,7 @@ class EOS_SDK_PUBLIC nexthop_group_entry_t {
 
 /**
  * A nexthop group.
+
  * A nexthop group represents encapsulation and IP addressing
  * information to be used with a policy routing application.
  */
