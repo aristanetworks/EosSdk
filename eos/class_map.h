@@ -12,6 +12,7 @@
 #include <eos/policy_map.h>
 
 /**
+ * @file
  * Class map manipulation.
  *
  * This module provides access to the management of class maps.
