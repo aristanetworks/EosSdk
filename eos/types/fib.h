@@ -7,6 +7,7 @@
 #include <eos/ip.h>
 #include <eos/ip_route.h>
 #include <eos/utility.h>
+#include <forward_list>
 #include <sstream>
 
 namespace eos {

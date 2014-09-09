@@ -6,106 +6,6 @@
 
 namespace eos {
 
-inline std::ostream&
-operator<<(std::ostream& os, const acl_type_t & enum_val) {
-   if (enum_val==ACL_TYPE_NULL) {
-      os << "ACL_TYPE_NULL";
-   } else if (enum_val==ACL_TYPE_IPV4) {
-      os << "ACL_TYPE_IPV4";
-   } else if (enum_val==ACL_TYPE_IPV6) {
-      os << "ACL_TYPE_IPV6";
-   } else if (enum_val==ACL_TYPE_ETH) {
-      os << "ACL_TYPE_ETH";
-   } else if (enum_val==ACL_TYPE_MPLS) {
-      os << "ACL_TYPE_MPLS";
-   } else {
-      os << "Unknown value";
-   }
-   return os;
-}
-
-
-
-inline std::ostream&
-operator<<(std::ostream& os, const acl_direction_t & enum_val) {
-   if (enum_val==ACL_DIRECTION_NULL) {
-      os << "ACL_DIRECTION_NULL";
-   } else if (enum_val==ACL_IN) {
-      os << "ACL_IN";
-   } else if (enum_val==ACL_OUT) {
-      os << "ACL_OUT";
-   } else {
-      os << "Unknown value";
-   }
-   return os;
-}
-
-
-
-inline std::ostream&
-operator<<(std::ostream& os, const acl_range_operator_t & enum_val) {
-   if (enum_val==ACL_RANGE_NULL) {
-      os << "ACL_RANGE_NULL";
-   } else if (enum_val==ACL_RANGE_ANY) {
-      os << "ACL_RANGE_ANY";
-   } else if (enum_val==ACL_RANGE_EQ) {
-      os << "ACL_RANGE_EQ";
-   } else if (enum_val==ACL_RANGE_GT) {
-      os << "ACL_RANGE_GT";
-   } else if (enum_val==ACL_RANGE_LT) {
-      os << "ACL_RANGE_LT";
-   } else if (enum_val==ACL_RANGE_NEQ) {
-      os << "ACL_RANGE_NEQ";
-   } else if (enum_val==ACL_RANGE_BETWEEN) {
-      os << "ACL_RANGE_BETWEEN";
-   } else {
-      os << "Unknown value";
-   }
-   return os;
-}
-
-
-
-inline std::ostream&
-operator<<(std::ostream& os, const acl_action_t & enum_val) {
-   if (enum_val==ACL_ACTION_NULL) {
-      os << "ACL_ACTION_NULL";
-   } else if (enum_val==ACL_PERMIT) {
-      os << "ACL_PERMIT";
-   } else if (enum_val==ACL_DENY) {
-      os << "ACL_DENY";
-   } else {
-      os << "Unknown value";
-   }
-   return os;
-}
-
-
-
-inline std::ostream&
-operator<<(std::ostream& os, const acl_tcp_flag_t & enum_val) {
-   if (enum_val==ACL_TCP_NULL) {
-      os << "ACL_TCP_NULL";
-   } else if (enum_val==ACL_TCP_FIN) {
-      os << "ACL_TCP_FIN";
-   } else if (enum_val==ACL_TCP_SYN) {
-      os << "ACL_TCP_SYN";
-   } else if (enum_val==ACL_TCP_RST) {
-      os << "ACL_TCP_RST";
-   } else if (enum_val==ACL_TCP_PSH) {
-      os << "ACL_TCP_PSH";
-   } else if (enum_val==ACL_TCP_ACK) {
-      os << "ACL_TCP_ACK";
-   } else if (enum_val==ACL_TCP_URG) {
-      os << "ACL_TCP_URG";
-   } else {
-      os << "Unknown value";
-   }
-   return os;
-}
-
-
-
 // Default constructor.
 inline acl_ttl_spec_t::acl_ttl_spec_t() :
       oper_(ACL_RANGE_ANY), ttl_(0) {
@@ -171,7 +71,7 @@ inline acl_port_spec_t::acl_port_spec_t() :
 }
 
 inline acl_port_spec_t::acl_port_spec_t(acl_range_operator_t oper, 
-                                        std::list<uint16_t> const & ports) :
+                                 std::list<uint16_t> const & ports) :
       oper_(oper) {
    for (std::list<uint16_t>::const_iterator pit = ports.cbegin();
         pit != ports.cend(); ++pit) {
