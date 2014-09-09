@@ -6,51 +6,13 @@
 
 namespace eos {
 
-inline std::ostream&
-operator<<(std::ostream& os, const nexthop_group_encap_t & enum_val) {
-   if (enum_val==NEXTHOP_GROUP_TYPE_NULL) {
-      os << "NEXTHOP_GROUP_TYPE_NULL";
-   } else if (enum_val==NEXTHOP_GROUP_IP_IN_IP) {
-      os << "NEXTHOP_GROUP_IP_IN_IP";
-   } else if (enum_val==NEXTHOP_GROUP_GRE) {
-      os << "NEXTHOP_GROUP_GRE";
-   } else if (enum_val==NEXTHOP_GROUP_MPLS) {
-      os << "NEXTHOP_GROUP_MPLS";
-   } else {
-      os << "Unknown value";
-   }
-   return os;
-}
-
-
-
-inline std::ostream&
-operator<<(std::ostream& os, const nexthop_group_gre_key_t & enum_val) {
-   if (enum_val==NEXTHOP_GROUP_GRE_KEY_NULL) {
-      os << "NEXTHOP_GROUP_GRE_KEY_NULL";
-   } else if (enum_val==NEXTHOP_GROUP_GRE_KEY_INGRESS_INTF) {
-      os << "NEXTHOP_GROUP_GRE_KEY_INGRESS_INTF";
-   } else {
-      os << "Unknown value";
-   }
-   return os;
-}
-
-
-
 inline nexthop_group_mpls_action_t::nexthop_group_mpls_action_t() :
       action_type_(), label_stack_() {
 }
 
 inline nexthop_group_mpls_action_t::nexthop_group_mpls_action_t(
-                        mpls_action_t action_type) :
+                                                         mpls_action_t action_type) :
       action_type_(action_type), label_stack_() {
-}
-
-inline nexthop_group_mpls_action_t::nexthop_group_mpls_action_t(
-                        mpls_action_t action_type, 
-                        std::forward_list<mpls_label_t> const & label_stack) :
-      action_type_(action_type), label_stack_(label_stack) {
 }
 
 inline mpls_action_t
@@ -205,21 +167,13 @@ operator<<(std::ostream& os, const nexthop_group_entry_t& obj) {
 
 
 inline nexthop_group_t::nexthop_group_t() :
-      name_(), type_(), gre_key_type_(NEXTHOP_GROUP_GRE_KEY_NULL), ttl_(64), 
-      source_ip_(), source_intf_(), nexthops_(), destination_ips_(), persistent_() {
+      name_(), type_(), ttl_(64), source_ip_(), source_intf_(), size_(), nexthops_(), 
+      destination_ips_(), persistent_() {
 }
 
-inline nexthop_group_t::nexthop_group_t(std::string name, 
-                                        nexthop_group_encap_t type) :
-      name_(name), type_(type), gre_key_type_(NEXTHOP_GROUP_GRE_KEY_NULL), ttl_(64), 
-      source_ip_(), source_intf_(), nexthops_(), destination_ips_(), persistent_() {
-}
-
-inline nexthop_group_t::nexthop_group_t(std::string name, 
-                                        nexthop_group_encap_t type, 
-                                        nexthop_group_gre_key_t gre_key_type) :
-      name_(name), type_(type), gre_key_type_(gre_key_type), ttl_(64), source_ip_(), 
-      source_intf_(), nexthops_(), destination_ips_(), persistent_() {
+inline nexthop_group_t::nexthop_group_t(std::string name, nexthop_group_encap_t type) :
+      name_(name), type_(type), ttl_(64), source_ip_(), source_intf_(), size_(), nexthops_(), 
+      destination_ips_(), persistent_() {
 }
 
 inline std::string
@@ -230,11 +184,6 @@ nexthop_group_t::name() const {
 inline nexthop_group_encap_t
 nexthop_group_t::type() const {
    return type_;
-}
-
-inline nexthop_group_gre_key_t
-nexthop_group_t::gre_key_type() const {
-   return gre_key_type_;
 }
 
 inline uint16_t
@@ -346,10 +295,10 @@ inline bool
 nexthop_group_t::operator==(nexthop_group_t const & other) const {
    return name_ == other.name_ &&
           type_ == other.type_ &&
-          gre_key_type_ == other.gre_key_type_ &&
           ttl_ == other.ttl_ &&
           source_ip_ == other.source_ip_ &&
           source_intf_ == other.source_intf_ &&
+          size_ == other.size_ &&
           nexthops_ == other.nexthops_ &&
           destination_ips_ == other.destination_ips_ &&
           persistent_ == other.persistent_;
@@ -366,18 +315,14 @@ nexthop_group_t::operator<(nexthop_group_t const & other) const {
       return name_ < other.name_;
    } else if(type_ != other.type_) {
       return type_ < other.type_;
-   } else if(gre_key_type_ != other.gre_key_type_) {
-      return gre_key_type_ < other.gre_key_type_;
    } else if(ttl_ != other.ttl_) {
       return ttl_ < other.ttl_;
    } else if(source_ip_ != other.source_ip_) {
       return source_ip_ < other.source_ip_;
    } else if(source_intf_ != other.source_intf_) {
       return source_intf_ < other.source_intf_;
-   } else if(nexthops_ != other.nexthops_) {
-      return nexthops_ < other.nexthops_;
-   } else if(destination_ips_ != other.destination_ips_) {
-      return destination_ips_ < other.destination_ips_;
+   } else if(size_ != other.size_) {
+      return size_ < other.size_;
    } else if(persistent_ != other.persistent_) {
       return persistent_ < other.persistent_;
    }
@@ -390,10 +335,10 @@ nexthop_group_t::to_string() const {
    ss << "nexthop_group_t(";
    ss << "name='" << name_ << "'";
    ss << ", type=" << type_;
-   ss << ", gre_key_type=" << gre_key_type_;
    ss << ", ttl=" << ttl_;
    ss << ", source_ip=" << source_ip_.to_string();
    ss << ", source_intf=" << source_intf_.to_string();
+   ss << ", size=" << size_;
    ss << ", nexthops=" <<"'";
    bool first_nexthops = true;
    for (auto it=nexthops_.cbegin(); it!=nexthops_.cend(); ++it) {
