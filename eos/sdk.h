@@ -72,7 +72,7 @@ class EOS_SDK_PUBLIC sdk {
     * log file, as well as the namespace for custom agent
     * configuration and status.
     */
-   std::string get_name();
+   std::string name();
 
    /**
     * Begin the agent's event loop.
