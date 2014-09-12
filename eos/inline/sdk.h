@@ -9,6 +9,10 @@
 
 namespace eos {
 
+inline std::string sdk::name() {
+   return name_;
+}
+
 inline acl_mgr * sdk::get_acl_mgr() {
    if (!acl_mgr_) {
       init_acl_mgr();
@@ -161,10 +165,6 @@ inline policy_map_mgr * sdk::get_policy_map_mgr() {
       init_policy_map_mgr();
    }
    return policy_map_mgr_;
-}
-
-inline std::string sdk::get_name() {
-   return name_;
 }
 
 inline system_mgr * sdk::get_system_mgr() {
