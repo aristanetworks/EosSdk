@@ -10,18 +10,9 @@
 #include <eos/eth.h>
 #include <eos/intf.h>
 #include <eos/iterator.h>
+#include <eos/types/eth_intf.h>
 
 namespace eos {
-
-/// Mode of operation of a switch port.
-enum switchport_mode_t {
-   SWITCHPORT_MODE_ACCESS,        ///< Interface only has access to its access VLAN.
-   SWITCHPORT_MODE_TRUNK,         ///< Interface is in 802.1q mode ("trunk mode").
-   SWITCHPORT_MODE_DOT1Q_TUNNEL,  ///< Interface is in 802.1ad mode ("QinQ mode").
-   SWITCHPORT_MODE_TAP,           ///< Interface is in tap mode ("span mode").
-   SWITCHPORT_MODE_TOOL,          ///< Interface is a tool port (egress for a tap).
-   SWITCHPORT_MODE_ROUTED,        ///< Interface routed ("no switchport").
-};
 
 class eth_intf_mgr;
 
