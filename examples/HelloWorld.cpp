@@ -56,22 +56,20 @@
 
 class hello_world_agent : public eos::agent_handler {
  public:
-   eos::agent_mgr * agent_mgr;
    eos::tracer t;
-   
+
    explicit hello_world_agent(eos::sdk & sdk)
          : eos::agent_handler(sdk.get_agent_mgr()),
-           agent_mgr(sdk.get_agent_mgr()),
            t("HelloWorldCppAgent") {
       t.trace0("Agent constructed");
    }
 
    void on_initialized() {
       t.trace0("Initialized");
-      std::string name = agent_mgr->agent_option("name");
+      std::string name = get_agent_mgr()->agent_option("name");
       if(name.empty()) {
          // No name initially set.
-         agent_mgr->status_set("greeting", "Welcome! What is your name?");
+         get_agent_mgr()->status_set("greeting", "Welcome! What is your name?");
       } else {
          // Handle initial state.
          on_agent_option("name", name);
@@ -84,13 +82,13 @@ class hello_world_agent : public eos::agent_handler {
          if(value.empty()) {
             // User deleted the 'name' option
             t.trace3("Name deleted");
-            agent_mgr->status_set("greeting", "Goodbye!");
+            get_agent_mgr()->status_set("greeting", "Goodbye!");
          } else {
             // Now *this* is what social networking is all
             // about. Somebody set, or changed, the name option. Let's
             // do some salutations!
             t.trace3("Saying hi to %s", value.c_str());
-            agent_mgr->status_set("greeting", "Hello " + value + "!");
+            get_agent_mgr()->status_set("greeting", "Hello " + value + "!");
          }
       }
    }
@@ -98,8 +96,8 @@ class hello_world_agent : public eos::agent_handler {
    void on_agent_enabled(bool enabled) {
       if (!enabled) {
          t.trace0("Shutting down");
-         agent_mgr->status_set("greeting", "Adios!");
-         agent_mgr->agent_shutdown_complete_is(true);
+         get_agent_mgr()->status_set("greeting", "Adios!");
+         get_agent_mgr()->agent_shutdown_complete_is(true);
       }
    }
 };
