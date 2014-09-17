@@ -73,7 +73,7 @@ enum acl_tcp_flag_t {
 
 /**
  * A TTL specifier, used in an IP ACL rule to define TTLs to match.
-
+ *
  * Create an instance of the classes below, such as a acl_ttl_spec_gt_t to specify
  * matching TTLs greater than the value passed.
  */
@@ -111,7 +111,7 @@ class EOS_SDK_PUBLIC acl_ttl_spec_t {
 
 /**
  * A UDP or TCP port specifier.
-
+ *
  * Pick one of either:
  * - acl_port_spec_eq_t : Matches 1-10 port numbers.
  * - acl_port_spec_neq_t : Doesn't match these 1-10 ports.
@@ -208,16 +208,16 @@ class EOS_SDK_PUBLIC acl_key_t {
  * Access lists are sequences of rules specifying per-packet rules filters apply to
  * either IPv4, IPv6 or ETH (layer 2) traffic and are attached to traffic arriving
  * (in) or leaving (out) on zero or more interfaces.
-
+ *
  * To use ACL rules in these libraries, construct the appropriate concrete type of
  * rule you desire, either a:
  *   * acl_rule_ip_t  or a
  *   * acl_rule_eth_t
-
+ *
  * Base parameters common to all filter types are defined on the parent
  * acl_base_filter_t, such as 'log' to enable logging of packets matching the rule,
  * and the action applied to packets matching the rule.
-
+ *
  * Base ACL rule class containing common fields.
  * Instead of this, instantiate one of the concrete rule classes.
  */

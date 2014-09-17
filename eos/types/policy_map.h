@@ -22,7 +22,7 @@ typedef uint32_t policy_map_tag_t;
 
 /**
  * The default match condition for the policy map.
-
+ *
  * At present, the only supported condition is that any rule in the policy-map
  * matching will trigger the action (POLICY_MAP_CONDITION_ANY).
  */
@@ -104,7 +104,7 @@ class EOS_SDK_PUBLIC policy_map_action_t {
    policy_map_action_t();
    /**
     * Constructs a policy map action of a particular type.
-
+    *
     * After construction, set attributes appropriate for the action type using the
     * mutators below; only the action-specific attributes will be considered when
     * the policy is applied. If the action is POLICY_ACTION_DROP, no further
@@ -137,7 +137,7 @@ class EOS_SDK_PUBLIC policy_map_action_t {
    /**
     * Getter for 'dscp': the DiffServ Code Point on matching IPv4/IPv6 packets.
     * This sets the 6-bit IPv4 DSCP or IPv6 traffic class field.
-
+    *
     * @raises eos::invalid_argument_error if value outside range 0..63.
     */
    uint8_t dscp() const;
@@ -148,7 +148,7 @@ class EOS_SDK_PUBLIC policy_map_action_t {
     * Getter for 'traffic_class': the internal EOS traffic class on matching
     * packets.
     * Setting this 3-bit value overrides any interface CoS/DSCP trust mapping.
-
+    *
     * @raises eos::invalid_argument_error if value outside range 0..7.
     */
    uint8_t traffic_class() const;
@@ -178,11 +178,11 @@ class EOS_SDK_PUBLIC policy_map_action_t {
 
 /**
  * A policy map rule, describing a traffic match and actions.
-
+ *
  * A rule can match IP traffic via a class map, or can choose to match all MPLS
  * traffic. To use a class map, use the explicit constructor or create a default
  * policy map rule and set the class map with class_map_key_is().
-
+ *
  * Actions can be set at once or added or removed one at a time.
  */
 class EOS_SDK_PUBLIC policy_map_rule_t {
@@ -230,7 +230,7 @@ class EOS_SDK_PUBLIC policy_map_rule_t {
 
 /**
  * A policy map instance.
-
+ *
  * Once appropriately configured, policy maps are committed and applied to
  * interfaces using the policy_map_mgr.
  */
