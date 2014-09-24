@@ -66,22 +66,38 @@ inline iter_base<T, Impl>::operator bool() const {
    return false;
 }
 
-template class iter_base<acl_key_t, acl_iter_impl>;
-template class iter_base<acl_rule_eth_entry_t, acl_rule_eth_iter_impl>;
-template class iter_base<acl_rule_ip_entry_t, acl_rule_ip_iter_impl>;
-template class iter_base<class_map_key_t, class_map_iter_impl>;
-template class iter_base<intf_id_t, intf_iter_impl>;
-template class iter_base<intf_id_t, eth_intf_iter_impl>;
-template class iter_base<intf_id_t, eth_lag_intf_iter_impl>;
-template class iter_base<intf_id_t, eth_lag_intf_member_iter_impl>;
-template class iter_base<intf_id_t, eth_phy_intf_iter_impl>;
-template class iter_base<ip_route_t, ip_route_iter_impl>;
-template class iter_base<ip_route_via_t, ip_route_via_iter_impl>;
-template class iter_base<decap_group_t, decap_group_iter_impl>;
-template class iter_base<nexthop_group_t, nexthop_group_iter_impl>;
-template class iter_base<flow_entry_t, flow_entry_iter_impl>;
-template class iter_base<mpls_route_t, mpls_route_iter_impl>;
-template class iter_base<mpls_route_via_t, mpls_route_via_iter_impl>;
-template class iter_base<policy_map_key_t, policy_map_iter_impl>;
+
+/**
+ * Helper macro to define iterator classes that wrap our internal iterators.
+ * @param SdkIter Tke name of the SDK iterator (e.g. foo_iter_t).
+ * @param IterClassImpl The name of the SDK wrapper class (e.g. foo_iter_impl).
+ * TODO: Right now in the stubs the impl class is empty because iter_base does
+ * not delegate anything to it yet.  We need to make iter_base delegate calls
+ * to the impl class, and provide a stub implementation.
+ * NOTE: The impl class needs to be marked with EOS_SDK_PUBLIC because as of
+ * GCC 4.6, if a template parameter has hidden visibility, it contaminates the
+ * template class, even if that class was marked as having default visibility.
+ */
+#define INSTANTIATE_ITERATOR(SdkIter, IterClassImpl)    \
+  class EOS_SDK_PUBLIC IterClassImpl {};                \
+  template class iter_base<SdkIter, IterClassImpl>
+
+INSTANTIATE_ITERATOR(acl_key_t, acl_iter_impl);
+INSTANTIATE_ITERATOR(acl_rule_eth_entry_t, acl_rule_eth_iter_impl);
+INSTANTIATE_ITERATOR(acl_rule_ip_entry_t, acl_rule_ip_iter_impl);
+INSTANTIATE_ITERATOR(class_map_key_t, class_map_iter_impl);
+INSTANTIATE_ITERATOR(intf_id_t, intf_iter_impl);
+INSTANTIATE_ITERATOR(intf_id_t, eth_intf_iter_impl);
+INSTANTIATE_ITERATOR(intf_id_t, eth_lag_intf_iter_impl);
+INSTANTIATE_ITERATOR(intf_id_t, eth_lag_intf_member_iter_impl);
+INSTANTIATE_ITERATOR(intf_id_t, eth_phy_intf_iter_impl);
+INSTANTIATE_ITERATOR(ip_route_t, ip_route_iter_impl);
+INSTANTIATE_ITERATOR(ip_route_via_t, ip_route_via_iter_impl);
+INSTANTIATE_ITERATOR(decap_group_t, decap_group_iter_impl);
+INSTANTIATE_ITERATOR(nexthop_group_t, nexthop_group_iter_impl);
+INSTANTIATE_ITERATOR(flow_entry_t, flow_entry_iter_impl);
+INSTANTIATE_ITERATOR(mpls_route_t, mpls_route_iter_impl);
+INSTANTIATE_ITERATOR(mpls_route_via_t, mpls_route_via_iter_impl);
+INSTANTIATE_ITERATOR(policy_map_key_t, policy_map_iter_impl);
 
 }
