@@ -39,7 +39,8 @@ enum fib_route_type_t {
    ROUTE_TYPE_ISIS,
    ROUTE_TYPE_NEXTHOP_GROUP,
 };
-
+/** Appends a string representation of enum fib_route_type_t value to the ostream. */
+std::ostream& operator<<(std::ostream& os, const fib_route_type_t & enum_val);
 
 /**
  * An IP route that goes in FIB.
@@ -90,7 +91,6 @@ class EOS_SDK_PUBLIC fib_route_t {
    uint64_t fec_id_;
 };
 
-
 /** via (nexthop) information. */
 class EOS_SDK_PUBLIC fib_via_t {
  public:
@@ -118,7 +118,6 @@ class EOS_SDK_PUBLIC fib_via_t {
    intf_id_t intf_;
 };
 
-
 enum fib_fec_type_t {
    FEC_TYPE_FORWARD,
    FEC_TYPE_DROP,
@@ -128,7 +127,8 @@ enum fib_fec_type_t {
    FEC_TYPE_NEXTHOP_GROUP,
    FEC_TYPE_KERNEL,
 };
-
+/** Appends a string representation of enum fib_fec_type_t value to the ostream. */
+std::ostream& operator<<(std::ostream& os, const fib_fec_type_t & enum_val);
 
 /**
  * FEC (Forwarding Equivalence Class),
@@ -175,7 +175,6 @@ class EOS_SDK_PUBLIC fib_fec_t {
    fib_fec_type_t fec_type_;
    std::forward_list<fib_via_t> via_;
 };
-
 }
 
 #include <eos/inline/types/fib.h>

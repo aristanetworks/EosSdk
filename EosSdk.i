@@ -17,7 +17,6 @@
 %rename("%(command:python $SRCDIR/SwigRenamer.py --classname <<""<)s", %$isclass) "";
 // Don't do anything for enum values, functions or variables.
 
-
 // Ignored conversions:
 
 #define SWIG_FILE_WITH_INIT
@@ -208,16 +207,21 @@ void throw_py_error(error const& err) {
 // THIS LIST IS IN A TOPOLOGICAL ORDER. DO NOT ALPHABETIZE.
 %include "eos/agent.h"
 %include "eos/hash_mix.h"
+%include "eos/exception.h"
+%include "eos/types/eth.h"
 %include "eos/eth.h"
 %include "eos/event_loop.h"
 %include "eos/fd.h"
 %include "eos/iterator.h"
 %include "eos/types/intf.h"
 %include "eos/intf.h"
+%include "eos/types/ip.h"
 %include "eos/ip.h"
 %include "eos/types/acl.h"
 %include "eos/acl.h"
+%include "eos/types/aresolve.h"
 %include "eos/aresolve.h"
+%include "eos/types/directflow.h"
 %include "eos/directflow.h"
 %include "eos/ip_intf.h"
 %include "eos/types/decap_group.h"
@@ -246,7 +250,6 @@ void throw_py_error(error const& err) {
 %include "eos/policy_map.h"
 %include "eos/types/class_map.h"
 %include "eos/class_map.h"
-%include "eos/exception.h"
 %include "eos/sdk.h"
 %include "eos/system.h"
 %include "eos/timer.h"

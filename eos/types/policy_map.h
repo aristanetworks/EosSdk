@@ -5,6 +5,7 @@
 #define EOS_TYPES_POLICY_MAP_H
 
 #include <eos/acl.h>
+#include <eos/exception.h>
 #include <eos/intf.h>
 #include <eos/ip.h>
 #include <eos/utility.h>
@@ -16,9 +17,7 @@
 namespace eos {
 
 
-
 typedef uint32_t policy_map_tag_t;
-
 
 /**
  * The default match condition for the policy map.
@@ -30,7 +29,12 @@ enum policy_match_condition_t {
    POLICY_MAP_CONDITION_NULL,
    POLICY_MAP_CONDITION_ANY,
 };
-
+/**
+ * Appends a string representation of enum policy_match_condition_t value to the
+ * ostream.
+ */
+std::ostream& operator<<(std::ostream& os, 
+                         const policy_match_condition_t & enum_val);
 
 /** A hardware feature a policy map can be used with. */
 enum policy_feature_t {
@@ -39,7 +43,8 @@ enum policy_feature_t {
    POLICY_FEATURE_QOS,
    POLICY_FEATURE_TAP_AGG,
 };
-
+/** Appends a string representation of enum policy_feature_t value to the ostream. */
+std::ostream& operator<<(std::ostream& os, const policy_feature_t & enum_val);
 
 /** The actions a policy map rule may apply to classified packets. */
 enum policy_action_type_t {
@@ -57,7 +62,12 @@ enum policy_action_type_t {
    /** Set traffic class. */
    POLICY_ACTION_TRAFFIC_CLASS,
 };
-
+/**
+ * Appends a string representation of enum policy_action_type_t value to the
+ * ostream.
+ */
+std::ostream& operator<<(std::ostream& os, 
+                         const policy_action_type_t & enum_val);
 
 /** The key used to uniquely identify both class and policy maps. */
 class EOS_SDK_PUBLIC policy_map_key_t {
@@ -88,9 +98,7 @@ class EOS_SDK_PUBLIC policy_map_key_t {
    policy_feature_t feature_;
 };
 
-
 typedef policy_map_key_t class_map_key_t;
-
 
 /**
  * A single policy map action.
@@ -175,7 +183,6 @@ class EOS_SDK_PUBLIC policy_map_action_t {
    uint8_t traffic_class_;
 };
 
-
 /**
  * A policy map rule, describing a traffic match and actions.
  *
@@ -227,7 +234,6 @@ class EOS_SDK_PUBLIC policy_map_rule_t {
    std::set<policy_map_action_t> actions_;
 };
 
-
 /**
  * A policy map instance.
  *
@@ -272,6 +278,27 @@ class EOS_SDK_PUBLIC policy_map_t {
    bool persistent_;
 };
 
+/** The policy feature requested is unavailable in this SDK release. */
+class EOS_SDK_PUBLIC unsupported_policy_feature_error : public unsupported_error {
+ public:
+   explicit unsupported_policy_feature_error(policy_feature_t policy_feature) noexcept;
+   virtual ~unsupported_policy_feature_error() noexcept;
+
+   policy_feature_t policy_feature() const noexcept;
+
+   virtual void raise() const;
+   /** Returns a string representation of the current object's values. */
+   std::string to_string() const;
+   /**
+    * A utility stream operator that adds a string representation of
+    * unsupported_policy_feature_error to the ostream.
+    */
+   friend std::ostream& operator<<(std::ostream& os, 
+                                   const unsupported_policy_feature_error& obj);
+
+ private:
+   policy_feature_t policy_feature_;
+};
 }
 
 #include <eos/inline/types/policy_map.h>

@@ -6,6 +6,84 @@
 
 namespace eos {
 
+inline std::ostream&
+operator<<(std::ostream& os, const eth_lag_intf_fallback_type_t & enum_val) {
+   if (enum_val==ETH_LAG_INTF_FALLBACK_NULL) {
+      os << "ETH_LAG_INTF_FALLBACK_NULL";
+   } else if (enum_val==ETH_LAG_INTF_FALLBACK_NONE) {
+      os << "ETH_LAG_INTF_FALLBACK_NONE";
+   } else if (enum_val==ETH_LAG_INTF_FALLBACK_STATIC) {
+      os << "ETH_LAG_INTF_FALLBACK_STATIC";
+   } else if (enum_val==ETH_LAG_INTF_FALLBACK_INDIVIDUAL) {
+      os << "ETH_LAG_INTF_FALLBACK_INDIVIDUAL";
+   } else {
+      os << "Unknown value";
+   }
+   return os;
+}
+
+
+
+inline std::ostream&
+operator<<(std::ostream& os, 
+           const eth_lag_intf_fallback_timeout_default_t & enum_val) {
+   if (enum_val==ETH_LAG_INTF_FALLBACK_TIMEOUT_DEFAULT) {
+      os << "ETH_LAG_INTF_FALLBACK_TIMEOUT_DEFAULT";
+   } else {
+      os << "Unknown value";
+   }
+   return os;
+}
+
+
+
+inline std::ostream&
+operator<<(std::ostream& os, const eth_lag_intf_member_priority_t & enum_val) {
+   if (enum_val==ETH_LAG_INTF_PORT_PRIORITY_DEFAULT) {
+      os << "ETH_LAG_INTF_PORT_PRIORITY_DEFAULT";
+   } else {
+      os << "Unknown value";
+   }
+   return os;
+}
+
+
+
+inline std::ostream&
+operator<<(std::ostream& os, const eth_lag_intf_member_lacp_mode_t & enum_val) {
+   if (enum_val==ETH_LAG_INTF_MEMBER_LACP_MODE_NULL) {
+      os << "ETH_LAG_INTF_MEMBER_LACP_MODE_NULL";
+   } else if (enum_val==ETH_LAG_INTF_MEMBER_LACP_MODE_OFF) {
+      os << "ETH_LAG_INTF_MEMBER_LACP_MODE_OFF";
+   } else if (enum_val==ETH_LAG_INTF_MEMBER_LACP_MODE_PASSIVE) {
+      os << "ETH_LAG_INTF_MEMBER_LACP_MODE_PASSIVE";
+   } else if (enum_val==ETH_LAG_INTF_MEMBER_LACP_MODE_ACTIVE) {
+      os << "ETH_LAG_INTF_MEMBER_LACP_MODE_ACTIVE";
+   } else {
+      os << "Unknown value";
+   }
+   return os;
+}
+
+
+
+inline std::ostream&
+operator<<(std::ostream& os, 
+           const eth_lag_intf_member_lacp_timeout_t & enum_val) {
+   if (enum_val==ETH_LAG_INTF_MEMBER_LACP_TIMEOUT_NULL) {
+      os << "ETH_LAG_INTF_MEMBER_LACP_TIMEOUT_NULL";
+   } else if (enum_val==ETH_LAG_INTF_MEMBER_LACP_TIMEOUT_SHORT) {
+      os << "ETH_LAG_INTF_MEMBER_LACP_TIMEOUT_SHORT";
+   } else if (enum_val==ETH_LAG_INTF_MEMBER_LACP_TIMEOUT_LONG) {
+      os << "ETH_LAG_INTF_MEMBER_LACP_TIMEOUT_LONG";
+   } else {
+      os << "Unknown value";
+   }
+   return os;
+}
+
+
+
 // Default constructor.
 inline eth_lag_intf_membership_t::eth_lag_intf_membership_t() :
       eth_lag_intf_id_(intf_id_t()), active_(false), reason_(""), member_time_(0), 

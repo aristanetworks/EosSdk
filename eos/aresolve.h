@@ -4,13 +4,12 @@
 #ifndef EOS_ARESOLVE_H
 #define EOS_ARESOLVE_H
 
-#include <list>
 #include <string>
 
 #include <eos/base.h>
 #include <eos/base_handler.h>
 #include <eos/base_mgr.h>
-#include <eos/ip.h>
+#include <eos/types/aresolve.h>
 
 /**
  * @file
@@ -71,63 +70,6 @@
  */
 
 namespace eos {
-
-class aresolve_internal;  // Internal record helper class
-
-/**
- * A base DNS response class.
- *
- * When receiving an aresolve_record_*, if valid() is false, the
- * last_error() method should be called to receive the EAI_* error
- * (which can be converted to a string with gai_strerror()). If there
- * is no error, accessors in subclasses of aresolve_record_base
- * contain the latest update for the request.
- *
- * This class is not instantiated or received by user code.
- */
-class EOS_SDK_PUBLIC aresolve_record_base {
- protected:
-   aresolve_record_base() EOS_SDK_INTERNAL;
-   virtual ~aresolve_record_base() EOS_SDK_INTERNAL;
-
- public:
-   /// Returns the DNS query (request) name
-   std::string const & qname() const;
-   /// Returns the last refresh time, seconds since boot
-   seconds_t last_refresh() const;
-   /// Was the request successful? If not, last_error() will return a non-zero value
-   bool valid() const;
-   /// Reports the last error (0 = success). Values from EAI_* constants in netdb.h
-   int last_error() const;
- private:
-   std::string qname_;
-   seconds_t last_refresh_;
-   bool valid_;
-   int last_error_;
-
-   friend class aresolve_internal;
-};
-
-/**
- * A DNS response for a hostname query containing resolved IP addresses
- * Received by the on_aresolve_host() receiver method.
- * A host response contains zero or more IPv4 or IPv6 addresses.
- */
-class EOS_SDK_PUBLIC aresolve_record_host : public aresolve_record_base {
- public:
-   aresolve_record_host() EOS_SDK_INTERNAL;
-   virtual ~aresolve_record_host();
-
-   /// Returns any resolved IPv4 addresses for the qname()
-   std::list<ip_addr_t> const & addr_v4() const;
-   /// Returns any resolved IPv6 addresses for the qname()
-   std::list<ip_addr_t> const & addr_v6() const;
- private:
-   std::list<ip_addr_t> addr_v4_;
-   std::list<ip_addr_t> addr_v6_;
-
-   friend class aresolve_internal;
-};
 
 class aresolve_mgr;
 

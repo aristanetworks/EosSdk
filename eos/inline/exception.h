@@ -58,20 +58,6 @@ invalid_range_error::max_valid() const noexcept {
 }
 
 inline
-no_such_interface_error::~no_such_interface_error() noexcept {
-}
-
-inline void
-no_such_interface_error::raise() const {
-   throw *this;
-}
-
-inline intf_id_t
-no_such_interface_error::intf() const noexcept {
-   return intf_;
-}
-
-inline
 configuration_error::configuration_error(std::string const & name) noexcept
    : error(name) {
 }
@@ -83,59 +69,6 @@ configuration_error::~configuration_error() noexcept {
 inline void
 configuration_error::raise() const {
    throw *this;
-}
-
-inline
-not_switchport_eligible_error::~not_switchport_eligible_error() noexcept {
-}
-
-inline void
-not_switchport_eligible_error::raise() const {
-   throw *this;
-}
-
-inline intf_id_t
-not_switchport_eligible_error::intf() const noexcept {
-   return intf_;
-}
-
-inline
-invalid_vlan_error::~invalid_vlan_error() noexcept {
-}
-
-inline void
-invalid_vlan_error::raise() const {
-   throw *this;
-}
-
-inline vlan_id_t
-invalid_vlan_error::vlan() const noexcept {
-   return vlan_;
-}
-
-inline
-internal_vlan_error::~internal_vlan_error() noexcept {
-}
-
-inline void
-internal_vlan_error::raise() const {
-   throw *this;
-}
-
-inline vlan_id_t
-internal_vlan_error::vlan() const noexcept {
-   return vlan_;
-}
-
-inline address_overlap_error::~address_overlap_error() noexcept {
-}
-
-inline void address_overlap_error::raise() const {
-   throw *this;
-}
-
-inline ip_addr_mask_t address_overlap_error::addr() const noexcept {
-   return addr_;
 }
 
 inline unconfigured_agent_error::~unconfigured_agent_error() noexcept {
@@ -160,20 +93,6 @@ unsupported_error::~unsupported_error() noexcept {
 inline void
 unsupported_error::raise() const {
    throw *this;
-}
-
-inline
-unsupported_policy_feature_error::~unsupported_policy_feature_error() noexcept {
-}
-
-inline void
-unsupported_policy_feature_error::raise() const {
-   throw *this;
-}
-
-inline policy_feature_t
-unsupported_policy_feature_error::policy_feature() const noexcept {
-   return policy_feature_;
 }
 
 }

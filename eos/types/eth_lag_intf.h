@@ -22,18 +22,33 @@ enum eth_lag_intf_fallback_type_t {
    /** Fallback to individual mode. */
    ETH_LAG_INTF_FALLBACK_INDIVIDUAL,
 };
-
+/**
+ * Appends a string representation of enum eth_lag_intf_fallback_type_t value to
+ * the ostream.
+ */
+std::ostream& operator<<(std::ostream& os, 
+                         const eth_lag_intf_fallback_type_t & enum_val);
 
 /** How long to wait for LACP before fallback. */
 enum eth_lag_intf_fallback_timeout_default_t {
    ETH_LAG_INTF_FALLBACK_TIMEOUT_DEFAULT = 90,
 };
-
+/**
+ * Appends a string representation of enum eth_lag_intf_fallback_timeout_default_t
+ * value to the ostream.
+ */
+std::ostream& operator<<(std::ostream& os, 
+                         const eth_lag_intf_fallback_timeout_default_t & enum_val);
 
 enum eth_lag_intf_member_priority_t {
    ETH_LAG_INTF_PORT_PRIORITY_DEFAULT = 0x8000,
 };
-
+/**
+ * Appends a string representation of enum eth_lag_intf_member_priority_t value to
+ * the ostream.
+ */
+std::ostream& operator<<(std::ostream& os, 
+                         const eth_lag_intf_member_priority_t & enum_val);
 
 /** LAG interface mebmer LACP mode. */
 enum eth_lag_intf_member_lacp_mode_t {
@@ -42,7 +57,12 @@ enum eth_lag_intf_member_lacp_mode_t {
    ETH_LAG_INTF_MEMBER_LACP_MODE_PASSIVE,
    ETH_LAG_INTF_MEMBER_LACP_MODE_ACTIVE,
 };
-
+/**
+ * Appends a string representation of enum eth_lag_intf_member_lacp_mode_t value to
+ * the ostream.
+ */
+std::ostream& operator<<(std::ostream& os, 
+                         const eth_lag_intf_member_lacp_mode_t & enum_val);
 
 /** LAG interface mebmer timeout values. */
 enum eth_lag_intf_member_lacp_timeout_t {
@@ -50,7 +70,12 @@ enum eth_lag_intf_member_lacp_timeout_t {
    ETH_LAG_INTF_MEMBER_LACP_TIMEOUT_SHORT,
    ETH_LAG_INTF_MEMBER_LACP_TIMEOUT_LONG,
 };
-
+/**
+ * Appends a string representation of enum eth_lag_intf_member_lacp_timeout_t value
+ * to the ostream.
+ */
+std::ostream& operator<<(std::ostream& os, 
+                         const eth_lag_intf_member_lacp_timeout_t & enum_val);
 
 /**
  * This data structure is used to describe the operational status
@@ -111,7 +136,6 @@ class EOS_SDK_PUBLIC eth_lag_intf_membership_t {
    double member_time_;
    eth_lag_intf_member_lacp_mode_t mode_;
 };
-
 
 /**
  * This data structure defines a LAG interface, which is also known
@@ -180,7 +204,6 @@ class EOS_SDK_PUBLIC eth_lag_intf_t {
    eth_lag_intf_fallback_type_t fallback_type_;
    uint16_t fallback_timeout_;
 };
-
 }
 
 #include <eos/inline/types/eth_lag_intf.h>

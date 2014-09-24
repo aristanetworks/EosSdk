@@ -6,12 +6,68 @@
 
 namespace eos {
 
+inline std::ostream&
+operator<<(std::ostream& os, const policy_match_condition_t & enum_val) {
+   if (enum_val==POLICY_MAP_CONDITION_NULL) {
+      os << "POLICY_MAP_CONDITION_NULL";
+   } else if (enum_val==POLICY_MAP_CONDITION_ANY) {
+      os << "POLICY_MAP_CONDITION_ANY";
+   } else {
+      os << "Unknown value";
+   }
+   return os;
+}
+
+
+
+inline std::ostream&
+operator<<(std::ostream& os, const policy_feature_t & enum_val) {
+   if (enum_val==POLICY_FEATURE_NULL) {
+      os << "POLICY_FEATURE_NULL";
+   } else if (enum_val==POLICY_FEATURE_PBR) {
+      os << "POLICY_FEATURE_PBR";
+   } else if (enum_val==POLICY_FEATURE_QOS) {
+      os << "POLICY_FEATURE_QOS";
+   } else if (enum_val==POLICY_FEATURE_TAP_AGG) {
+      os << "POLICY_FEATURE_TAP_AGG";
+   } else {
+      os << "Unknown value";
+   }
+   return os;
+}
+
+
+
+inline std::ostream&
+operator<<(std::ostream& os, const policy_action_type_t & enum_val) {
+   if (enum_val==POLICY_ACTION_NULL) {
+      os << "POLICY_ACTION_NULL";
+   } else if (enum_val==POLICY_ACTION_NONE) {
+      os << "POLICY_ACTION_NONE";
+   } else if (enum_val==POLICY_ACTION_DROP) {
+      os << "POLICY_ACTION_DROP";
+   } else if (enum_val==POLICY_ACTION_NEXTHOP) {
+      os << "POLICY_ACTION_NEXTHOP";
+   } else if (enum_val==POLICY_ACTION_NEXTHOP_GROUP) {
+      os << "POLICY_ACTION_NEXTHOP_GROUP";
+   } else if (enum_val==POLICY_ACTION_DSCP) {
+      os << "POLICY_ACTION_DSCP";
+   } else if (enum_val==POLICY_ACTION_TRAFFIC_CLASS) {
+      os << "POLICY_ACTION_TRAFFIC_CLASS";
+   } else {
+      os << "Unknown value";
+   }
+   return os;
+}
+
+
+
 inline policy_map_key_t::policy_map_key_t() :
       name_(), feature_() {
 }
 
 inline policy_map_key_t::policy_map_key_t(std::string const & name, 
-                                   policy_feature_t const & feature) :
+                                          policy_feature_t const & feature) :
       name_(name), feature_(feature) {
 }
 
@@ -79,7 +135,8 @@ inline policy_map_action_t::policy_map_action_t() :
       action_type_(), nexthop_group_name_(), nexthops_(), dscp_(), traffic_class_() {
 }
 
-inline policy_map_action_t::policy_map_action_t(policy_action_type_t action_type) :
+inline policy_map_action_t::policy_map_action_t(
+        policy_action_type_t action_type) :
       action_type_(action_type), nexthop_group_name_(), nexthops_(), dscp_(), 
       traffic_class_() {
 }
@@ -213,7 +270,8 @@ inline policy_map_rule_t::policy_map_rule_t() :
       class_map_key_(), actions_() {
 }
 
-inline policy_map_rule_t::policy_map_rule_t(class_map_key_t const & class_map_key) :
+inline policy_map_rule_t::policy_map_rule_t(
+                                            class_map_key_t const & class_map_key) :
       class_map_key_(class_map_key), actions_() {
 }
 
@@ -393,6 +451,45 @@ policy_map_t::to_string() const {
 
 inline std::ostream&
 operator<<(std::ostream& os, const policy_map_t& obj) {
+   os << obj.to_string();
+   return os;
+}
+
+
+
+inline unsupported_policy_feature_error::unsupported_policy_feature_error(
+                                  policy_feature_t policy_feature) noexcept :
+      unsupported_error(std::string("Unsupported policy feature")), 
+      policy_feature_(policy_feature) {
+   
+}
+
+inline 
+unsupported_policy_feature_error::~unsupported_policy_feature_error() noexcept {
+   
+}
+
+inline policy_feature_t
+unsupported_policy_feature_error::policy_feature() const noexcept {
+   return policy_feature_;
+}
+
+inline void
+unsupported_policy_feature_error::raise() const {
+   throw *this;
+}
+
+inline std::string
+unsupported_policy_feature_error::to_string() const {
+   std::ostringstream ss;
+   ss << "unsupported_policy_feature_error(";
+   ss << "policy_feature=" << policy_feature_;
+   ss << ")";
+   return ss.str();
+}
+
+inline std::ostream&
+operator<<(std::ostream& os, const unsupported_policy_feature_error& obj) {
    os << obj.to_string();
    return os;
 }

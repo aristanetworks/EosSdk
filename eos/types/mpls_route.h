@@ -15,7 +15,6 @@ namespace eos {
 /** 1..255; default/null is 0. */
 typedef uint8_t mpls_route_metric_t;
 
-
 /** An MPLS route key is used for MPLS RIB configuration. */
 class EOS_SDK_PUBLIC mpls_route_key_t {
  public:
@@ -59,7 +58,6 @@ class EOS_SDK_PUBLIC mpls_route_key_t {
    mpls_route_metric_t metric_;
 };
 
-
 /** An MPLS v4/v6 static route. */
 class EOS_SDK_PUBLIC mpls_route_t {
  public:
@@ -95,7 +93,6 @@ class EOS_SDK_PUBLIC mpls_route_t {
    mpls_route_key_t key_;
    bool persistent_;
 };
-
 
 /** An MPLS route via, defining the action to take for a given MPLS route. */
 class EOS_SDK_PUBLIC mpls_route_via_t {
@@ -159,7 +156,6 @@ class EOS_SDK_PUBLIC mpls_route_via_t {
    mpls_ttl_mode_t ttl_mode_;
    mpls_payload_type_t payload_type_;
 };
-
 }
 
 #include <eos/inline/types/mpls_route.h>

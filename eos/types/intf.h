@@ -4,6 +4,7 @@
 #ifndef EOS_TYPES_INTF_H
 #define EOS_TYPES_INTF_H
 
+#include <eos/exception.h>
 #include <eos/panic.h>
 #include <eos/utility.h>
 #include <sstream>
@@ -16,7 +17,8 @@ enum oper_status_t {
    INTF_OPER_UP,
    INTF_OPER_DOWN,
 };
-
+/** Appends a string representation of enum oper_status_t value to the ostream. */
+std::ostream& operator<<(std::ostream& os, const oper_status_t & enum_val);
 
 /** The interface's type. */
 enum intf_type_t {
@@ -30,7 +32,8 @@ enum intf_type_t {
    INTF_TYPE_NULL0,
    INTF_TYPE_CPU,
 };
-
+/** Appends a string representation of enum intf_type_t value to the ostream. */
+std::ostream& operator<<(std::ostream& os, const intf_type_t & enum_val);
 
 /** Unique identifier for an interface. */
 class EOS_SDK_PUBLIC intf_id_t {
@@ -77,7 +80,6 @@ class EOS_SDK_PUBLIC intf_id_t {
    friend struct IntfIdHelper;
    uint64_t intfId_;
 };
-
 
 /**
  * Interface counter class.
@@ -185,7 +187,6 @@ class EOS_SDK_PUBLIC intf_counters_t {
    seconds_t sample_time_;
 };
 
-
 /** Interface traffic rates class. */
 class EOS_SDK_PUBLIC intf_traffic_rates_t {
  public:
@@ -228,6 +229,52 @@ class EOS_SDK_PUBLIC intf_traffic_rates_t {
    seconds_t sample_time_;
 };
 
+/** Non-existent interface error. */
+class EOS_SDK_PUBLIC no_such_interface_error : public error {
+ public:
+   explicit no_such_interface_error(intf_id_t intf) noexcept;
+   explicit no_such_interface_error(std::string const & intfName) noexcept;
+   virtual ~no_such_interface_error() noexcept;
+
+   intf_id_t intf() const noexcept;
+
+   virtual void raise() const;
+   /** Returns a string representation of the current object's values. */
+   std::string to_string() const;
+   /**
+    * A utility stream operator that adds a string representation of
+    * no_such_interface_error to the ostream.
+    */
+   friend std::ostream& operator<<(std::ostream& os, 
+                                   const no_such_interface_error& obj);
+
+ private:
+   intf_id_t intf_;
+};
+
+/**
+ * Error of configuring an interface as a routed port that cannot be a routed port.
+ */
+class EOS_SDK_PUBLIC not_switchport_eligible_error : public error {
+ public:
+   explicit not_switchport_eligible_error(intf_id_t intf) noexcept;
+   virtual ~not_switchport_eligible_error() noexcept;
+
+   intf_id_t intf() const noexcept;
+
+   virtual void raise() const;
+   /** Returns a string representation of the current object's values. */
+   std::string to_string() const;
+   /**
+    * A utility stream operator that adds a string representation of
+    * not_switchport_eligible_error to the ostream.
+    */
+   friend std::ostream& operator<<(std::ostream& os, 
+                                   const not_switchport_eligible_error& obj);
+
+ private:
+   intf_id_t intf_;
+};
 }
 
 #include <eos/inline/types/intf.h>

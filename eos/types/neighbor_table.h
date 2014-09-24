@@ -17,7 +17,12 @@ enum neighbor_entry_type_t {
    NEIGHBOR_ENTRY_TYPE_DYNAMIC,
    NEIGHBOR_ENTRY_TYPE_STATIC,
 };
-
+/**
+ * Appends a string representation of enum neighbor_entry_type_t value to the
+ * ostream.
+ */
+std::ostream& operator<<(std::ostream& os, 
+                         const neighbor_entry_type_t & enum_val);
 
 /**
  * The neighbor entry class.
@@ -55,7 +60,6 @@ class EOS_SDK_PUBLIC neighbor_entry_t {
    eth_addr_t eth_addr_;
    neighbor_entry_type_t entry_type_;
 };
-
 }
 
 #include <eos/inline/types/neighbor_table.h>

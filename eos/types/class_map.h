@@ -27,9 +27,7 @@ namespace eos {
 
 static std::string const CLASS_MAP_MPLS_ANY = "__mpls_permit_any__";
 
-
 typedef policy_map_key_t class_map_key_t;
-
 
 /**
  * A class map match rule uses an ACL to match classified traffic.
@@ -61,7 +59,6 @@ class EOS_SDK_PUBLIC class_map_rule_t {
  private:
    acl_key_t acl_key_;
 };
-
 
 /**
  * A class map classifies traffic to apply policy features to.
@@ -113,7 +110,6 @@ class EOS_SDK_PUBLIC class_map_t {
    std::map<uint32_t, class_map_rule_t> rules_;
    bool persistent_;
 };
-
 }
 
 #include <eos/inline/types/class_map.h>

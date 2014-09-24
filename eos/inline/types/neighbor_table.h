@@ -6,13 +6,28 @@
 
 namespace eos {
 
+inline std::ostream&
+operator<<(std::ostream& os, const neighbor_entry_type_t & enum_val) {
+   if (enum_val==NEIGHBOR_ENTRY_TYPE_DYNAMIC) {
+      os << "NEIGHBOR_ENTRY_TYPE_DYNAMIC";
+   } else if (enum_val==NEIGHBOR_ENTRY_TYPE_STATIC) {
+      os << "NEIGHBOR_ENTRY_TYPE_STATIC";
+   } else {
+      os << "Unknown value";
+   }
+   return os;
+}
+
+
+
 // Default constructor.
 inline neighbor_entry_t::neighbor_entry_t() :
       ip_addr_(), eth_addr_(), entry_type_(NEIGHBOR_ENTRY_TYPE_DYNAMIC) {
 }
 
-inline neighbor_entry_t::neighbor_entry_t(ip_addr_t ip_addr, eth_addr_t eth_addr, 
-                                   neighbor_entry_type_t entry_type) :
+inline neighbor_entry_t::neighbor_entry_t(ip_addr_t ip_addr, 
+                                          eth_addr_t eth_addr, 
+                                          neighbor_entry_type_t entry_type) :
       ip_addr_(ip_addr), eth_addr_(eth_addr), entry_type_(entry_type) {
 }
 

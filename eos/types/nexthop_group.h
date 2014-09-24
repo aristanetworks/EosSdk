@@ -28,7 +28,12 @@ enum nexthop_group_encap_t {
    /** MPLS encapsulation. */
    NEXTHOP_GROUP_MPLS,
 };
-
+/**
+ * Appends a string representation of enum nexthop_group_encap_t value to the
+ * ostream.
+ */
+std::ostream& operator<<(std::ostream& os, 
+                         const nexthop_group_encap_t & enum_val);
 
 /**
  * An MPLS nexthop group switching operation.
@@ -78,7 +83,6 @@ class EOS_SDK_PUBLIC nexthop_group_mpls_action_t {
    std::forward_list<mpls_label_t> label_stack_;
 };
 
-
 /**
  * A nexthop group destination entry.
  *
@@ -116,7 +120,6 @@ class EOS_SDK_PUBLIC nexthop_group_entry_t {
    nexthop_group_mpls_action_t mpls_action_;
    ip_addr_t nexthop_;
 };
-
 
 /**
  * A nexthop group.
@@ -200,7 +203,6 @@ class EOS_SDK_PUBLIC nexthop_group_t {
    std::map<uint16_t, ip_addr_t> destination_ips_;
    bool persistent_;
 };
-
 }
 
 #include <eos/inline/types/nexthop_group.h>

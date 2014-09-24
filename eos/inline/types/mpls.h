@@ -12,6 +12,60 @@ namespace eos {
 invalid_range_error invalid_mpls_label(uint32_t label) EOS_SDK_INTERNAL;
 
 
+inline std::ostream&
+operator<<(std::ostream& os, const mpls_action_t & enum_val) {
+   if (enum_val==MPLS_ACTION_NULL) {
+      os << "MPLS_ACTION_NULL";
+   } else if (enum_val==MPLS_ACTION_PUSH) {
+      os << "MPLS_ACTION_PUSH";
+   } else if (enum_val==MPLS_ACTION_POP) {
+      os << "MPLS_ACTION_POP";
+   } else if (enum_val==MPLS_ACTION_SWAP) {
+      os << "MPLS_ACTION_SWAP";
+   } else {
+      os << "Unknown value";
+   }
+   return os;
+}
+
+
+
+inline std::ostream&
+operator<<(std::ostream& os, const mpls_ttl_mode_t & enum_val) {
+   if (enum_val==MPLS_TTLMODE_NULL) {
+      os << "MPLS_TTLMODE_NULL";
+   } else if (enum_val==MPLS_TTLMODE_PIPE) {
+      os << "MPLS_TTLMODE_PIPE";
+   } else if (enum_val==MPLS_TTLMODE_UNIFORM) {
+      os << "MPLS_TTLMODE_UNIFORM";
+   } else {
+      os << "Unknown value";
+   }
+   return os;
+}
+
+
+
+inline std::ostream&
+operator<<(std::ostream& os, const mpls_payload_type_t & enum_val) {
+   if (enum_val==MPLS_PAYLOAD_TYPE_NULL) {
+      os << "MPLS_PAYLOAD_TYPE_NULL";
+   } else if (enum_val==MPLS_PAYLOAD_TYPE_MPLS) {
+      os << "MPLS_PAYLOAD_TYPE_MPLS";
+   } else if (enum_val==MPLS_PAYLOAD_TYPE_IPV4) {
+      os << "MPLS_PAYLOAD_TYPE_IPV4";
+   } else if (enum_val==MPLS_PAYLOAD_TYPE_IPV6) {
+      os << "MPLS_PAYLOAD_TYPE_IPV6";
+   } else if (enum_val==MPLS_PAYLOAD_TYPE_GUESS) {
+      os << "MPLS_PAYLOAD_TYPE_GUESS";
+   } else {
+      os << "Unknown value";
+   }
+   return os;
+}
+
+
+
 inline mpls_label_t::mpls_label_t(uint32_t label) :
       label_(label) {
 }

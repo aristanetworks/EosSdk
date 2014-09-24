@@ -6,12 +6,30 @@
 
 namespace eos {
 
+inline std::ostream&
+operator<<(std::ostream& os, const nexthop_group_encap_t & enum_val) {
+   if (enum_val==NEXTHOP_GROUP_TYPE_NULL) {
+      os << "NEXTHOP_GROUP_TYPE_NULL";
+   } else if (enum_val==NEXTHOP_GROUP_IP_IN_IP) {
+      os << "NEXTHOP_GROUP_IP_IN_IP";
+   } else if (enum_val==NEXTHOP_GROUP_GRE) {
+      os << "NEXTHOP_GROUP_GRE";
+   } else if (enum_val==NEXTHOP_GROUP_MPLS) {
+      os << "NEXTHOP_GROUP_MPLS";
+   } else {
+      os << "Unknown value";
+   }
+   return os;
+}
+
+
+
 inline nexthop_group_mpls_action_t::nexthop_group_mpls_action_t() :
       action_type_(), label_stack_() {
 }
 
 inline nexthop_group_mpls_action_t::nexthop_group_mpls_action_t(
-                                                         mpls_action_t action_type) :
+                        mpls_action_t action_type) :
       action_type_(action_type), label_stack_() {
 }
 
@@ -171,7 +189,8 @@ inline nexthop_group_t::nexthop_group_t() :
       destination_ips_(), persistent_() {
 }
 
-inline nexthop_group_t::nexthop_group_t(std::string name, nexthop_group_encap_t type) :
+inline nexthop_group_t::nexthop_group_t(std::string name, 
+                                        nexthop_group_encap_t type) :
       name_(name), type_(type), ttl_(64), source_ip_(), source_intf_(), size_(), nexthops_(), 
       destination_ips_(), persistent_() {
 }
