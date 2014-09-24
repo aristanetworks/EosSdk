@@ -1,6 +1,6 @@
 # hunk 1: multi-inheritance is broken https://sourceforge.net/p/swig/bugs/1379/
-# hunk 2: thread bug on iterators https://sourceforge.net/p/swig/bugs/1370/
-# hunk 3: compilation issue on GCC 4.6 http://sourceforge.net/p/swig/patches/296/
+# hunk 2: compilation issue on GCC 4.6 http://sourceforge.net/p/swig/patches/296/
+# hunk 3: thread bug on iterators https://sourceforge.net/p/swig/bugs/1370/
 --- eossdk_wrap.cpp-t
 +++ eossdk_wrap.cpp-t
 @@ -1618,6 +1618,10 @@
@@ -14,7 +14,15 @@
    sobj->next = next;
    Py_INCREF(next);
    return SWIG_Py_Void();
-@@ -3495,7 +3499,11 @@
+@@ -3480,6 +3484,7 @@
+ 
+ #include <string>
+ #include <stdexcept>
++#include <cstddef>
+ 
+   
+ namespace swig {
+@@ -3496,7 +3501,11 @@
      }
        
    public:
@@ -27,11 +35,3 @@
  
      // Access iterator method, required by Python
      virtual PyObject *value() const = 0;
-@@ -3801,6 +3809,7 @@
- 
- 
- #include <stdexcept>
-+#include <cstddef>
- 
- 
- #include <algorithm>
