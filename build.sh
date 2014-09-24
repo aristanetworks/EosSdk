@@ -24,6 +24,10 @@ for arg; do
          target_32b=false
          shift
          ;;
+      (-force|--force)
+         rm -f Makefile
+         shift
+         ;;
    esac
 done
 
