@@ -15,7 +15,7 @@ inline ip_route_key_t::ip_route_key_t(ip_prefix_t const & prefix) :
 }
 
 inline ip_route_key_t::ip_route_key_t(ip_prefix_t const & prefix, 
-                               ip_route_preference_t preference) :
+                                      ip_route_preference_t preference) :
       prefix_(prefix), preference_(preference), metric_(0) {
 }
 

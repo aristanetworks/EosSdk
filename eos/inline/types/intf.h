@@ -6,6 +6,50 @@
 
 namespace eos {
 
+inline std::ostream&
+operator<<(std::ostream& os, const oper_status_t & enum_val) {
+   if (enum_val==INTF_OPER_NULL) {
+      os << "INTF_OPER_NULL";
+   } else if (enum_val==INTF_OPER_UP) {
+      os << "INTF_OPER_UP";
+   } else if (enum_val==INTF_OPER_DOWN) {
+      os << "INTF_OPER_DOWN";
+   } else {
+      os << "Unknown value";
+   }
+   return os;
+}
+
+
+
+inline std::ostream&
+operator<<(std::ostream& os, const intf_type_t & enum_val) {
+   if (enum_val==INTF_TYPE_NULL) {
+      os << "INTF_TYPE_NULL";
+   } else if (enum_val==INTF_TYPE_OTHER) {
+      os << "INTF_TYPE_OTHER";
+   } else if (enum_val==INTF_TYPE_ETH) {
+      os << "INTF_TYPE_ETH";
+   } else if (enum_val==INTF_TYPE_VLAN) {
+      os << "INTF_TYPE_VLAN";
+   } else if (enum_val==INTF_TYPE_MANAGEMENT) {
+      os << "INTF_TYPE_MANAGEMENT";
+   } else if (enum_val==INTF_TYPE_LOOPBACK) {
+      os << "INTF_TYPE_LOOPBACK";
+   } else if (enum_val==INTF_TYPE_LAG) {
+      os << "INTF_TYPE_LAG";
+   } else if (enum_val==INTF_TYPE_NULL0) {
+      os << "INTF_TYPE_NULL0";
+   } else if (enum_val==INTF_TYPE_CPU) {
+      os << "INTF_TYPE_CPU";
+   } else {
+      os << "Unknown value";
+   }
+   return os;
+}
+
+
+
 inline intf_id_t::intf_id_t(uint64_t id) {
    intfId_ = id;
    if (intf_type() == INTF_TYPE_OTHER) {
@@ -48,15 +92,17 @@ inline intf_counters_t::intf_counters_t() :
 }
 
 inline intf_counters_t::intf_counters_t(uint64_t out_ucast_pkts, 
-                                 uint64_t out_multicast_pkts, 
-                                 uint64_t out_broadcast_pkts, 
-                                 uint64_t in_ucast_pkts, 
-                                 uint64_t in_multicast_pkts, 
-                                 uint64_t in_broadcast_pkts, 
-                                 uint64_t out_octets, uint64_t in_octets, 
-                                 uint64_t out_discards, uint64_t out_errors, 
-                                 uint64_t in_discards, uint64_t in_errors, 
-                                 seconds_t sample_time) :
+                                        uint64_t out_multicast_pkts, 
+                                        uint64_t out_broadcast_pkts, 
+                                        uint64_t in_ucast_pkts, 
+                                        uint64_t in_multicast_pkts, 
+                                        uint64_t in_broadcast_pkts, 
+                                        uint64_t out_octets, uint64_t in_octets, 
+                                        uint64_t out_discards, 
+                                        uint64_t out_errors, 
+                                        uint64_t in_discards, 
+                                        uint64_t in_errors, 
+                                        seconds_t sample_time) :
       out_ucast_pkts_(out_ucast_pkts), out_multicast_pkts_(out_multicast_pkts), 
       out_broadcast_pkts_(out_broadcast_pkts), in_ucast_pkts_(in_ucast_pkts), 
       in_multicast_pkts_(in_multicast_pkts), in_broadcast_pkts_(in_broadcast_pkts), 
@@ -188,10 +234,8 @@ inline intf_traffic_rates_t::intf_traffic_rates_t() :
 }
 
 inline intf_traffic_rates_t::intf_traffic_rates_t(double out_pkts_rate, 
-                                           double in_pkts_rate, 
-                                           double out_bits_rate, 
-                                           double in_bits_rate, 
-                                           seconds_t sample_time) :
+          double in_pkts_rate, double out_bits_rate, double in_bits_rate, 
+          seconds_t sample_time) :
       out_pkts_rate_(out_pkts_rate), in_pkts_rate_(in_pkts_rate), 
       out_bits_rate_(out_bits_rate), in_bits_rate_(in_bits_rate), 
       sample_time_(sample_time) {
@@ -251,6 +295,89 @@ intf_traffic_rates_t::to_string() const {
 
 inline std::ostream&
 operator<<(std::ostream& os, const intf_traffic_rates_t& obj) {
+   os << obj.to_string();
+   return os;
+}
+
+
+
+inline no_such_interface_error::no_such_interface_error(intf_id_t intf) noexcept :
+      error(std::string("No such interface: ") + intf.to_string()), intf_(intf) {
+   
+}
+
+inline no_such_interface_error::no_such_interface_error(
+                std::string const & intfName) noexcept :
+      error(std::string("Bad interface name: ") + intfName), intf_() {
+   
+}
+
+inline 
+no_such_interface_error::~no_such_interface_error() noexcept {
+   
+}
+
+inline intf_id_t
+no_such_interface_error::intf() const noexcept {
+   return intf_;
+}
+
+inline void
+no_such_interface_error::raise() const {
+   throw *this;
+}
+
+inline std::string
+no_such_interface_error::to_string() const {
+   std::ostringstream ss;
+   ss << "no_such_interface_error(";
+   ss << "intf=" << intf_.to_string();
+   ss << ")";
+   return ss.str();
+}
+
+inline std::ostream&
+operator<<(std::ostream& os, const no_such_interface_error& obj) {
+   os << obj.to_string();
+   return os;
+}
+
+
+
+inline not_switchport_eligible_error::not_switchport_eligible_error(
+                            intf_id_t intf) noexcept :
+      
+      error(std::string("Interface cannot be used as a switchport: ") + intf.to_string()), 
+      intf_(intf) {
+   
+}
+
+inline 
+not_switchport_eligible_error::~not_switchport_eligible_error() noexcept {
+   
+}
+
+inline intf_id_t
+not_switchport_eligible_error::intf() const noexcept {
+   return intf_;
+}
+
+inline void
+not_switchport_eligible_error::raise() const {
+   throw *this;
+}
+
+inline std::string
+not_switchport_eligible_error::to_string() const {
+   std::ostringstream ss;
+   ss << "not_switchport_eligible_error(";
+   ss << "intf=" << intf_.to_string();
+   ss << ")";
+   return ss.str();
+}
+
+inline std::ostream&
+operator<<(std::ostream& os, const not_switchport_eligible_error& obj) {
    os << obj.to_string();
    return os;
 }

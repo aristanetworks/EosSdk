@@ -18,7 +18,12 @@ enum decap_protocol_type_t {
    PROTOCOL_TYPE_NULL,
    PROTOCOL_TYPE_GRE,
 };
-
+/**
+ * Appends a string representation of enum decap_protocol_type_t value to the
+ * ostream.
+ */
+std::ostream& operator<<(std::ostream& os, 
+                         const decap_protocol_type_t & enum_val);
 
 /**
  * An ip decap-group configuration model.
@@ -74,7 +79,6 @@ class EOS_SDK_PUBLIC decap_group_t {
    decap_protocol_type_t protocol_type_;
    bool persistent_;
 };
-
 }
 
 #include <eos/inline/types/decap_group.h>

@@ -22,7 +22,12 @@ enum switchport_mode_t {
    /** Interface is routed ("no switchport"). */
    SWITCHPORT_MODE_ROUTED,
 };
-
+/**
+ * Appends a string representation of enum switchport_mode_t value to the ostream.
+ */
+std::ostream& operator<<(std::ostream& os, const switchport_mode_t & enum_val);
 }
+
+#include <eos/inline/types/eth_intf.h>
 
 #endif // EOS_TYPES_ETH_INTF_H

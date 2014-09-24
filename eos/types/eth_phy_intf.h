@@ -17,7 +17,10 @@ enum eth_link_speed_t {
    LINK_SPEED_40GBPS,
    LINK_SPEED_100GBPS,
 };
-
+/** Appends a string representation of enum eth_link_speed_t value to the ostream. */
+std::ostream& operator<<(std::ostream& os, const eth_link_speed_t & enum_val);
 }
+
+#include <eos/inline/types/eth_phy_intf.h>
 
 #endif // EOS_TYPES_ETH_PHY_INTF_H

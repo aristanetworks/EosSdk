@@ -38,8 +38,7 @@ class EOS_SDK_PUBLIC eth_addr_t {
    explicit eth_addr_t(char const * addr);
    /**
     * Constructs an address from a std::string.
-    * Supported formats are xx:xx:xx:xx:xx:xx, xx-xx-xx-xx-xx-xx, or
-    * xxxx.xxxx.xxxx.
+    * Supported formats are xx:xx:xx:xx:xx:xx, xx-xx-xx-xx-xx-xx,or xxxx.xxxx.xxxx.
     */
    explicit eth_addr_t(std::string const & addr);
    /** Constructs an address from the 6 bytes that make it up. */

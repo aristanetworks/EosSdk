@@ -14,9 +14,7 @@ enum  {
    ALL_ICMP = 65535,
 };
 
-
 class acl_internal;
-
 
 /** The ACL type, of which valid types are either IPv4, IPv6, or Ethernet. */
 enum acl_type_t {
@@ -26,7 +24,8 @@ enum acl_type_t {
    ACL_TYPE_ETH,
    ACL_TYPE_MPLS,
 };
-
+/** Appends a string representation of enum acl_type_t value to the ostream. */
+std::ostream& operator<<(std::ostream& os, const acl_type_t & enum_val);
 
 /**
  * The direction in which an ACL is applied.
@@ -37,7 +36,8 @@ enum acl_direction_t {
    ACL_IN,
    ACL_OUT,
 };
-
+/** Appends a string representation of enum acl_direction_t value to the ostream. */
+std::ostream& operator<<(std::ostream& os, const acl_direction_t & enum_val);
 
 /** The type of range operator for TTL and port specifications below. */
 enum acl_range_operator_t {
@@ -49,7 +49,12 @@ enum acl_range_operator_t {
    ACL_RANGE_NEQ,
    ACL_RANGE_BETWEEN,
 };
-
+/**
+ * Appends a string representation of enum acl_range_operator_t value to the
+ * ostream.
+ */
+std::ostream& operator<<(std::ostream& os, 
+                         const acl_range_operator_t & enum_val);
 
 /** The action to take for an individual ACL rule. */
 enum acl_action_t {
@@ -57,7 +62,8 @@ enum acl_action_t {
    ACL_PERMIT,
    ACL_DENY,
 };
-
+/** Appends a string representation of enum acl_action_t value to the ostream. */
+std::ostream& operator<<(std::ostream& os, const acl_action_t & enum_val);
 
 /** TCP flags used in IP rules to specify which TCP flags to match. */
 enum acl_tcp_flag_t {
@@ -69,7 +75,8 @@ enum acl_tcp_flag_t {
    ACL_TCP_ACK = 16,
    ACL_TCP_URG = 32,
 };
-
+/** Appends a string representation of enum acl_tcp_flag_t value to the ostream. */
+std::ostream& operator<<(std::ostream& os, const acl_tcp_flag_t & enum_val);
 
 /**
  * A TTL specifier, used in an IP ACL rule to define TTLs to match.
@@ -107,7 +114,6 @@ class EOS_SDK_PUBLIC acl_ttl_spec_t {
    uint8_t ttl_;
    friend class acl_internal;
 };
-
 
 /**
  * A UDP or TCP port specifier.
@@ -151,30 +157,21 @@ class EOS_SDK_PUBLIC acl_port_spec_t {
    friend class acl_internal;
 };
 
-
 acl_port_spec_t get_acl_port_spec_eq(uint16_t port);
-
 
 acl_port_spec_t get_acl_port_spec_eq(std::list<uint16_t> const & ports);
 
-
 acl_port_spec_t get_acl_port_spec_neq(uint16_t port);
-
 
 acl_port_spec_t get_acl_port_spec_neq(std::list<uint16_t> const & ports);
 
-
 acl_port_spec_t get_acl_port_spec_between(uint16_t low, uint16_t high);
-
 
 acl_port_spec_t get_acl_port_spec_gt(uint16_t port);
 
-
 acl_port_spec_t get_acl_port_spec_lt(uint16_t port);
 
-
 acl_port_spec_t get_acl_port_spec_any();
-
 
 /** An ACL key is the combination of its name and ACL type (IPv4, IPv6 or ETH). */
 class EOS_SDK_PUBLIC acl_key_t {
@@ -201,7 +198,6 @@ class EOS_SDK_PUBLIC acl_key_t {
    std::string acl_name_;
    acl_type_t acl_type_;
 };
-
 
 /**
  * Following are classes that represent access lists (ACLs).
@@ -249,7 +245,6 @@ class EOS_SDK_PUBLIC acl_rule_base_t {
    bool log_;
    bool tracked_;
 };
-
 
 /** An individual ACL rule for IPv4 or IPv6 ACLs. */
 class EOS_SDK_PUBLIC acl_rule_ip_t : public acl_rule_base_t {
@@ -366,7 +361,6 @@ class EOS_SDK_PUBLIC acl_rule_ip_t : public acl_rule_base_t {
    bool match_ip_priority_;
 };
 
-
 /** An Ethernet ACL, which can be applied to Ethernet, Vlan, and MLAG interfaces. */
 class EOS_SDK_PUBLIC acl_rule_eth_t : public acl_rule_base_t {
  public:
@@ -416,7 +410,6 @@ class EOS_SDK_PUBLIC acl_rule_eth_t : public acl_rule_base_t {
    eth_addr_t source_mask_;
    eth_addr_t destination_mask_;
 };
-
 }
 
 #include <eos/inline/types/acl.h>

@@ -6,6 +6,20 @@
 
 namespace eos {
 
+inline std::ostream&
+operator<<(std::ostream& os, const decap_protocol_type_t & enum_val) {
+   if (enum_val==PROTOCOL_TYPE_NULL) {
+      os << "PROTOCOL_TYPE_NULL";
+   } else if (enum_val==PROTOCOL_TYPE_GRE) {
+      os << "PROTOCOL_TYPE_GRE";
+   } else {
+      os << "Unknown value";
+   }
+   return os;
+}
+
+
+
 // Default constructor, sets NULL protocol type.
 inline decap_group_t::decap_group_t() :
       group_name_(), destination_addr_(), protocol_type_(PROTOCOL_TYPE_NULL), 
@@ -13,8 +27,8 @@ inline decap_group_t::decap_group_t() :
 }
 
 inline decap_group_t::decap_group_t(std::string group_name, 
-                             ip_addr_t const & destination_addr, 
-                             decap_protocol_type_t protocol_type) :
+                                    ip_addr_t const & destination_addr, 
+                                    decap_protocol_type_t protocol_type) :
       group_name_(group_name), destination_addr_(destination_addr), 
       protocol_type_(protocol_type), persistent_(false) {
    if(group_name.empty()) {

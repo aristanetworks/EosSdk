@@ -17,7 +17,8 @@ enum mpls_action_t {
    MPLS_ACTION_POP,
    MPLS_ACTION_SWAP,
 };
-
+/** Appends a string representation of enum mpls_action_t value to the ostream. */
+std::ostream& operator<<(std::ostream& os, const mpls_action_t & enum_val);
 
 /** Whether to use the pipe or uniform TTL inheritance mode. */
 enum mpls_ttl_mode_t {
@@ -27,7 +28,8 @@ enum mpls_ttl_mode_t {
    /** uniform" mode, inherit TTL from inner IP. */
    MPLS_TTLMODE_UNIFORM,
 };
-
+/** Appends a string representation of enum mpls_ttl_mode_t value to the ostream. */
+std::ostream& operator<<(std::ostream& os, const mpls_ttl_mode_t & enum_val);
 
 /**
  * The inner payload type.
@@ -41,7 +43,11 @@ enum mpls_payload_type_t {
    MPLS_PAYLOAD_TYPE_IPV6,
    MPLS_PAYLOAD_TYPE_GUESS,
 };
-
+/**
+ * Appends a string representation of enum mpls_payload_type_t value to the
+ * ostream.
+ */
+std::ostream& operator<<(std::ostream& os, const mpls_payload_type_t & enum_val);
 
 /**
  * An MPLS label, per RFC 3032. Note: label id 0 (default value) is the explicit
@@ -80,7 +86,6 @@ class EOS_SDK_PUBLIC mpls_label_t {
    uint32_t label_;
    friend struct MplsLabelHelper;
 };
-
 }
 
 #include <eos/inline/types/mpls.h>

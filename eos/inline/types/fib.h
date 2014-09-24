@@ -6,6 +6,58 @@
 
 namespace eos {
 
+inline std::ostream&
+operator<<(std::ostream& os, const fib_route_type_t & enum_val) {
+   if (enum_val==ROUTE_TYPE_INVALID) {
+      os << "ROUTE_TYPE_INVALID";
+   } else if (enum_val==ROUTE_TYPE_RECEIVE) {
+      os << "ROUTE_TYPE_RECEIVE";
+   } else if (enum_val==ROUTE_TYPE_RECEIVE_BCAST) {
+      os << "ROUTE_TYPE_RECEIVE_BCAST";
+   } else if (enum_val==ROUTE_TYPE_ATTACHED) {
+      os << "ROUTE_TYPE_ATTACHED";
+   } else if (enum_val==ROUTE_TYPE_UNKNOWN) {
+      os << "ROUTE_TYPE_UNKNOWN";
+   } else if (enum_val==ROUTE_TYPE_STATIC_CONFIG) {
+      os << "ROUTE_TYPE_STATIC_CONFIG";
+   } else if (enum_val==ROUTE_TYPE_KERNEL) {
+      os << "ROUTE_TYPE_KERNEL";
+   } else if (enum_val==ROUTE_TYPE_RIP) {
+      os << "ROUTE_TYPE_RIP";
+   } else if (enum_val==ROUTE_TYPE_CONNECTED) {
+      os << "ROUTE_TYPE_CONNECTED";
+   } else if (enum_val==ROUTE_TYPE_BGP_AGGREGATE) {
+      os << "ROUTE_TYPE_BGP_AGGREGATE";
+   } else if (enum_val==ROUTE_TYPE_OSPF_AGGREGATE) {
+      os << "ROUTE_TYPE_OSPF_AGGREGATE";
+   } else if (enum_val==ROUTE_TYPE_OSPF_INTRA_AREA) {
+      os << "ROUTE_TYPE_OSPF_INTRA_AREA";
+   } else if (enum_val==ROUTE_TYPE_OSPF_INTER_AREA) {
+      os << "ROUTE_TYPE_OSPF_INTER_AREA";
+   } else if (enum_val==ROUTE_TYPE_OSPF_EXTERNAL_TYPE1) {
+      os << "ROUTE_TYPE_OSPF_EXTERNAL_TYPE1";
+   } else if (enum_val==ROUTE_TYPE_OSPF_EXTERNAL_TYPE2) {
+      os << "ROUTE_TYPE_OSPF_EXTERNAL_TYPE2";
+   } else if (enum_val==ROUTE_TYPE_OSPF_NSSA_EXTERNAL_TYPE1) {
+      os << "ROUTE_TYPE_OSPF_NSSA_EXTERNAL_TYPE1";
+   } else if (enum_val==ROUTE_TYPE_OSPF_NSSA_EXTERNAL_TYPE2) {
+      os << "ROUTE_TYPE_OSPF_NSSA_EXTERNAL_TYPE2";
+   } else if (enum_val==ROUTE_TYPE_IBGP) {
+      os << "ROUTE_TYPE_IBGP";
+   } else if (enum_val==ROUTE_TYPE_EBGP) {
+      os << "ROUTE_TYPE_EBGP";
+   } else if (enum_val==ROUTE_TYPE_ISIS) {
+      os << "ROUTE_TYPE_ISIS";
+   } else if (enum_val==ROUTE_TYPE_NEXTHOP_GROUP) {
+      os << "ROUTE_TYPE_NEXTHOP_GROUP";
+   } else {
+      os << "Unknown value";
+   }
+   return os;
+}
+
+
+
 // Default constructor.
 inline fib_route_t::fib_route_t() :
       prefix_(), preference_(1), metric_(0), route_type_(), fec_id_(0) {
@@ -153,6 +205,30 @@ fib_via_t::to_string() const {
 inline std::ostream&
 operator<<(std::ostream& os, const fib_via_t& obj) {
    os << obj.to_string();
+   return os;
+}
+
+
+
+inline std::ostream&
+operator<<(std::ostream& os, const fib_fec_type_t & enum_val) {
+   if (enum_val==FEC_TYPE_FORWARD) {
+      os << "FEC_TYPE_FORWARD";
+   } else if (enum_val==FEC_TYPE_DROP) {
+      os << "FEC_TYPE_DROP";
+   } else if (enum_val==FEC_TYPE_RECEIVE) {
+      os << "FEC_TYPE_RECEIVE";
+   } else if (enum_val==FEC_TYPE_ATTACHED) {
+      os << "FEC_TYPE_ATTACHED";
+   } else if (enum_val==FEC_TYPE_RECEIVE_BCAST) {
+      os << "FEC_TYPE_RECEIVE_BCAST";
+   } else if (enum_val==FEC_TYPE_NEXTHOP_GROUP) {
+      os << "FEC_TYPE_NEXTHOP_GROUP";
+   } else if (enum_val==FEC_TYPE_KERNEL) {
+      os << "FEC_TYPE_KERNEL";
+   } else {
+      os << "Unknown value";
+   }
    return os;
 }
 

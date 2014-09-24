@@ -11,7 +11,7 @@ inline mpls_route_key_t::mpls_route_key_t() :
 }
 
 inline mpls_route_key_t::mpls_route_key_t(mpls_label_t const & top_label, 
-                                   mpls_route_metric_t metric) :
+                                          mpls_route_metric_t metric) :
       top_label_(top_label), metric_(metric) {
 }
 

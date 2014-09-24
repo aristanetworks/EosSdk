@@ -41,7 +41,6 @@ class EOS_SDK_PUBLIC mac_entry_t {
    eth_addr_t eth_addr_;
    intf_id_t intf_;
 };
-
 }
 
 #include <eos/inline/types/mac_table.h>

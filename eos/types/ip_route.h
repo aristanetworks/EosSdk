@@ -16,7 +16,6 @@ typedef uint32_t ip_route_tag_t;
 typedef uint8_t ip_route_preference_t;
 typedef uint32_t ip_route_metric_t;
 
-
 /** An IP route key, consisting of a prefix and preference. */
 class EOS_SDK_PUBLIC ip_route_key_t {
  public:
@@ -52,7 +51,6 @@ class EOS_SDK_PUBLIC ip_route_key_t {
    ip_route_preference_t preference_;
    ip_route_metric_t metric_;
 };
-
 
 /**
  * An IP v4/v6 static route.
@@ -100,7 +98,6 @@ class EOS_SDK_PUBLIC ip_route_t {
    ip_route_tag_t tag_;
    bool persistent_;
 };
-
 
 /**
  * A Via describing a particular set of nexthop information. A Via can describe
@@ -166,7 +163,6 @@ class EOS_SDK_PUBLIC ip_route_via_t {
    std::string nexthop_group_;
    mpls_label_t mpls_label_;
 };
-
 }
 
 #include <eos/inline/types/ip_route.h>
