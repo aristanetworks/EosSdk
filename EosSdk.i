@@ -39,6 +39,7 @@ typedef uint64_t uint64_be_t;
 %feature("nodirector") eos::eth_intf_mgr;
 %feature("nodirector") eos::eth_lag_intf_mgr;
 %feature("nodirector") eos::eth_phy_intf_mgr;
+%feature("nodirector") eos::eth_phy_intf_counter_mgr;
 %feature("nodirector") eos::fib_mgr;
 %feature("nodirector") eos::intf_mgr;
 %feature("nodirector") eos::intf_counter_mgr;

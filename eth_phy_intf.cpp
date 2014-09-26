@@ -56,5 +56,22 @@ class eth_phy_intf_mgr_impl : public eth_phy_intf_mgr {
 };
 
 DEFINE_STUB_MGR_CTOR(eth_phy_intf_mgr)
+ 
+class eth_phy_intf_counter_mgr_impl : public eth_phy_intf_counter_mgr {
+ public:
+   eth_phy_intf_counter_mgr_impl() {
+   }
+
+   eth_phy_intf_counters_t counters(intf_id_t) const {
+      return eth_phy_intf_counters_t();
+   }
+   
+   eth_phy_intf_bin_counters_t bin_counters(intf_id_t) const {
+      return eth_phy_intf_bin_counters_t();
+   }
+
+};
+
+DEFINE_STUB_MGR_CTOR(eth_phy_intf_counter_mgr)
 
 }

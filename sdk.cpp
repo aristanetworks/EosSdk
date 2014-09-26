@@ -21,6 +21,7 @@ sdk::sdk()
      directflow_mgr_(0),
      eth_intf_mgr_(0),
      eth_phy_intf_mgr_(0),
+     eth_phy_intf_counter_mgr_(0),
      eth_lag_intf_mgr_(0),
      event_loop_(0),
      fib_mgr_(0),
@@ -62,6 +63,7 @@ sdk::sdk(std::string const name)
      directflow_mgr_(0),
      eth_intf_mgr_(0),
      eth_phy_intf_mgr_(0),
+     eth_phy_intf_counter_mgr_(0),
      eth_lag_intf_mgr_(0),
      event_loop_(0),
      fib_mgr_(0),
@@ -104,6 +106,7 @@ INIT_STUB_MGR(decap_group_mgr)
 INIT_STUB_MGR(directflow_mgr)
 INIT_STUB_MGR(eth_intf_mgr)
 INIT_STUB_MGR(eth_phy_intf_mgr)
+INIT_STUB_MGR(eth_phy_intf_counter_mgr)
 INIT_STUB_MGR(eth_lag_intf_mgr)
 INIT_STUB_MGR(fib_mgr)
 INIT_STUB_MGR(intf_mgr)
