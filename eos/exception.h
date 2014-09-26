@@ -4,6 +4,7 @@
 #ifndef EOS_EXCEPTION_H
 #define EOS_EXCEPTION_H
 
+#include <exception>
 #include <string>
 
 #include <eos/base.h>
@@ -15,12 +16,12 @@
 namespace eos {
 
 /// Base exception type for all SDK-reported exceptions.
-class EOS_SDK_PUBLIC error {
+class EOS_SDK_PUBLIC error : public std::exception {
  public:
    virtual ~error() noexcept;
    explicit error(std::string const & msg) noexcept;
    std::string const & msg() const noexcept;
-   const char * what() const noexcept;
+   virtual const char * what() const noexcept;
    virtual void raise() const EOS_SDK_NORETURN = 0;  ///< Throws this exception.
 
  private:
