@@ -85,6 +85,30 @@ class EOS_SDK_PUBLIC eth_phy_intf_mgr : public base_mgr<eth_phy_intf_handler,
    EOS_SDK_DISALLOW_COPY_CTOR(eth_phy_intf_mgr);
 };
 
+
+/**
+ * The Ethernet interface counter manager.
+ * 
+ * This class inspects ethernet interface counters and statistics.
+ */
+class EOS_SDK_PUBLIC eth_phy_intf_counter_mgr {
+ public:
+   virtual ~eth_phy_intf_counter_mgr();
+   
+   /// Get the current counters of the given ethernet interface.
+   virtual eth_phy_intf_counters_t counters(intf_id_t) const = 0;
+   
+   /// Get the current bin counters of the given ethernet interface.
+   virtual eth_phy_intf_bin_counters_t bin_counters(intf_id_t) const = 0;
+   
+ protected:
+   eth_phy_intf_counter_mgr() EOS_SDK_PRIVATE;
+   
+ private:
+   EOS_SDK_DISALLOW_COPY_CTOR(eth_phy_intf_counter_mgr);
+};
+
+
 }
 
 #include <eos/inline/eth_phy_intf.h>
