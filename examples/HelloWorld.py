@@ -8,6 +8,9 @@ import sys
 # This is the python version of the HelloWorld.cpp program. See the
 # explanation there, or a more detailed walkthrough at the GitHub wiki.
 
+# Pylint does not like SWIG's overriden handlers
+# pylint: disable-msg=W0221 
+
 class HelloWorldAgent(eossdk.AgentHandler):
    def __init__(self, sdk):
       self.agentMgr = sdk.get_agent_mgr()
