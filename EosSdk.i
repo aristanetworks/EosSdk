@@ -17,6 +17,12 @@
 %rename("%(command:python $SRCDIR/SwigRenamer.py --classname <<""<)s", %$isclass) "";
 // Don't do anything for enum values, functions or variables.
 
+// Cause SWIG to produce basic documentation in the generated eossdk.py
+// For functions, the docstrings describe argument type and return types.
+// All constructors are listed in the __init__ function for the type.
+// These docstrings are later examined by sphinx.
+%feature("autodoc", "1");
+
 // Ignored conversions:
 
 #define SWIG_FILE_WITH_INIT
