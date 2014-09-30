@@ -146,7 +146,7 @@ class EOS_SDK_PUBLIC policy_map_action_t {
     * Getter for 'dscp': the DiffServ Code Point on matching IPv4/IPv6 packets.
     * This sets the 6-bit IPv4 DSCP or IPv6 traffic class field.
     *
-    * @raises eos::invalid_argument_error if value outside range 0..63.
+    * @throw eos::invalid_argument_error if value outside range 0..63.
     */
    uint8_t dscp() const;
    /** Setter for 'dscp'. */
@@ -157,7 +157,7 @@ class EOS_SDK_PUBLIC policy_map_action_t {
     * packets.
     * Setting this 3-bit value overrides any interface CoS/DSCP trust mapping.
     *
-    * @raises eos::invalid_argument_error if value outside range 0..7.
+    * @throw eos::invalid_argument_error if value outside range 0..7.
     */
    uint8_t traffic_class() const;
    /** Setter for 'traffic_class'. */
