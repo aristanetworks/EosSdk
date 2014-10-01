@@ -236,6 +236,7 @@ void throw_py_error(error const& err) {
 %include "eos/eth_intf.h"
 %include "eos/types/eth_lag_intf.h"
 %include "eos/eth_lag_intf.h"
+%include "eos/types/eth_phy_intf.h"
 %include "eos/eth_phy_intf.h"
 %include "eos/types/fib.h"
 %include "eos/fib.h"
