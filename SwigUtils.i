@@ -4,7 +4,7 @@
 // Based on http://www.swig.org/Doc2.0/SWIGDocumentation.html#Python_nn60
 %typemap(in) (int argc, char **argv) {
    if (!PyList_Check($input)) {
-      PyErr_SetString(PyExc_TypeError, "Argument 2 must be a list");
+      PyErr_SetString(PyExc_TypeError, "Argument must be a list");
       return NULL;
    }
    $1 = PyList_Size($input);
@@ -13,11 +13,10 @@
    for (i = 0; i < $1; i++) {
       PyObject *o = PyList_GetItem($input, i);
       if (PyString_Check(o)) {
-         $2[i] = PyString_AsString(PyList_GetItem($input, i));
+         $2[i] = PyString_AS_STRING(PyList_GetItem($input, i));
       } else {
-         PyErr_SetString(PyExc_TypeError, "Argument 2 must be a list of strings");
-         free($2);
-         return NULL;
+         PyErr_SetString(PyExc_TypeError, "Argument must be a list of strings");
+         SWIG_fail;
       }
    }
    $2[i] = 0;
