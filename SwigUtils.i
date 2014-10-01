@@ -13,7 +13,13 @@
    for (i = 0; i < $1; i++) {
       PyObject *o = PyList_GetItem($input, i);
       if (PyString_Check(o)) {
-         $2[i] = PyString_AS_STRING(PyList_GetItem($input, i));
+         // We have to make a copy of **argv (technically just the
+         // first) because in the case of main_loop, we end up
+         // scribbling over argv[0]. However this memory is owned by
+         // the PyString object, which doesn't know that it has
+         // changed, and doesn't appropriately resize itself (in the
+         // case that we fill the buffer with null characters).
+         $2[i] = strdup(PyString_AS_STRING(PyList_GetItem($input, i)));
       } else {
          PyErr_SetString(PyExc_TypeError, "Argument must be a list of strings");
          SWIG_fail;
@@ -23,6 +29,12 @@
 }
 
 %typemap(freearg) (int argc, char **argv) {
+  if($2) {
+     int i;
+     for (i = 0; i < $1; i++) {
+        free($2[i]);
+     }
+  }
   free((char *) $2);
 }
 
