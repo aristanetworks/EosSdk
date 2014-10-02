@@ -33,6 +33,12 @@ inline nexthop_group_mpls_action_t::nexthop_group_mpls_action_t(
       action_type_(action_type), label_stack_() {
 }
 
+inline nexthop_group_mpls_action_t::nexthop_group_mpls_action_t(
+                        mpls_action_t action_type, 
+                        std::forward_list<mpls_label_t> const & label_stack) :
+      action_type_(action_type), label_stack_(label_stack) {
+}
+
 inline mpls_action_t
 nexthop_group_mpls_action_t::action_type() const {
    return action_type_;

@@ -3,6 +3,7 @@
 
 #include <eos/agent.h>
 #include <eos/ip.h>
+#include <eos/ip_route.h>
 #include <eos/mpls.h>
 #include <eos/nexthop_group.h>
 #include <eos/sdk.h>
@@ -28,22 +29,22 @@ class my_agent : public eos::agent_handler {
       eos::nexthop_group_t nhg = eos::nexthop_group_t(name,
                                                       eos::NEXTHOP_GROUP_MPLS);
 
+      // Send 2/3rds of traffic to nexthop 10.0.0.33 with the [30, 31]
+      // label stack:
+      eos::nexthop_group_entry_t mplsNh1(eos::ip_addr_t("10.0.0.33"));
       eos::nexthop_group_mpls_action_t mplsActionA(
             eos::MPLS_ACTION_PUSH, {eos::mpls_label_t(30), eos::mpls_label_t(31)});
+      mplsNh1.mpls_action_is(mplsActionA);
+      nhg.nexthop_set(1, mplsNh1);
+      nhg.nexthop_set(2, mplsNh1);
+
+      // Send 1/3rd of traffic to nexthop 10.0.0.44 with the [40, 41]
+      // label stack:
+      eos::nexthop_group_entry_t mplsNh2(eos::ip_addr_t("10.0.0.44"));
       eos::nexthop_group_mpls_action_t mplsActionB(
             eos::MPLS_ACTION_PUSH, {eos::mpls_label_t(40), eos::mpls_label_t(41)});
-
-      // Send 2/3rds of traffic to nexthop 10.0.0.33 with the [30, 31]
-      // label stack:
-      nhg.destination_ip_set(1, eos::ip_addr_t("10.0.0.33"));
-      nhg.mpls_actions_set(1, mplsActionA);
-      nhg.destination_ip_set(2, eos::ip_addr_t("10.0.0.33"));
-      nhg.mpls_actions_set(2, mplsActionA);
-
-      // Send 2/3rds of traffic to nexthop 10.0.0.33 with the [30, 31]
-      // label stack:
-      nhg.destination_ip_set(3, eos::ip_addr_t("10.0.0.44"));
-      nhg.mpls_actions_set(3, mplsActionB);
+      mplsNh2.mpls_action_is(mplsActionB);
+      nhg.nexthop_set(3, mplsNh2);
 
       // And commit it to Sysdb!
       nhgMgr_->nexthop_group_set(nhg);
@@ -53,10 +54,11 @@ class my_agent : public eos::agent_handler {
       printf("Initializing my agent...\n");
 
       create_nexthop_group("MplsNhg1");
-      eos::ip_route_key_t routeKey(eos::ip_prefix_t("172.1.1.4", 32));
+      eos::ip_route_key_t routeKey(
+            eos::ip_prefix_t(eos::ip_addr_t("172.1.1.4"), 32));
       eos::ip_route_t route(routeKey);
       eos::ip_route_via_t via(routeKey);
-      via.nexthop_group = "MplsNhg1";
+      via.nexthop_group_is("MplsNhg1");
       
       ipMgr_->ip_route_set(route);
       ipMgr_->ip_route_via_set(via);
