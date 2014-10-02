@@ -202,7 +202,6 @@ class EOS_SDK_PUBLIC nexthop_group_t {
    uint16_t ttl_;
    ip_addr_t source_ip_;
    intf_id_t source_intf_;
-   uint16_t size_;
    std::map<uint16_t, nexthop_group_entry_t> nexthops_;
    std::map<uint16_t, ip_addr_t> destination_ips_;
    bool persistent_;

@@ -191,13 +191,13 @@ operator<<(std::ostream& os, const nexthop_group_entry_t& obj) {
 
 
 inline nexthop_group_t::nexthop_group_t() :
-      name_(), type_(), ttl_(64), source_ip_(), source_intf_(), size_(), nexthops_(), 
+      name_(), type_(), ttl_(64), source_ip_(), source_intf_(), nexthops_(), 
       destination_ips_(), persistent_() {
 }
 
 inline nexthop_group_t::nexthop_group_t(std::string name, 
                                         nexthop_group_encap_t type) :
-      name_(name), type_(type), ttl_(64), source_ip_(), source_intf_(), size_(), nexthops_(), 
+      name_(name), type_(type), ttl_(64), source_ip_(), source_intf_(), nexthops_(), 
       destination_ips_(), persistent_() {
 }
 
@@ -323,7 +323,6 @@ nexthop_group_t::operator==(nexthop_group_t const & other) const {
           ttl_ == other.ttl_ &&
           source_ip_ == other.source_ip_ &&
           source_intf_ == other.source_intf_ &&
-          size_ == other.size_ &&
           nexthops_ == other.nexthops_ &&
           destination_ips_ == other.destination_ips_ &&
           persistent_ == other.persistent_;
@@ -346,8 +345,6 @@ nexthop_group_t::operator<(nexthop_group_t const & other) const {
       return source_ip_ < other.source_ip_;
    } else if(source_intf_ != other.source_intf_) {
       return source_intf_ < other.source_intf_;
-   } else if(size_ != other.size_) {
-      return size_ < other.size_;
    } else if(nexthops_ != other.nexthops_) {
       return nexthops_ < other.nexthops_;
    } else if(destination_ips_ != other.destination_ips_) {
@@ -367,7 +364,6 @@ nexthop_group_t::to_string() const {
    ss << ", ttl=" << ttl_;
    ss << ", source_ip=" << source_ip_.to_string();
    ss << ", source_intf=" << source_intf_.to_string();
-   ss << ", size=" << size_;
    ss << ", nexthops=" <<"'";
    bool first_nexthops = true;
    for (auto it=nexthops_.cbegin(); it!=nexthops_.cend(); ++it) {
