@@ -47,6 +47,9 @@ class EOS_SDK_PUBLIC nexthop_group_mpls_action_t {
    nexthop_group_mpls_action_t();
    /** Constructs an MPLS action with a specific switching operation. */
    explicit nexthop_group_mpls_action_t(mpls_action_t action_type);
+   /** Constructs a populated MPLS label stack for some switching action. */
+   nexthop_group_mpls_action_t(mpls_action_t action_type, 
+                               std::forward_list<mpls_label_t> const & label_stack);
 
    /** Getter for 'action_type': The MPLS switching operation for this action. */
    mpls_action_t action_type() const;
@@ -153,6 +156,7 @@ class EOS_SDK_PUBLIC nexthop_group_t {
    /** Setter for 'source_intf'. */
    void source_intf_is(intf_id_t const & source_intf);
 
+   /** The maximum size of the nexthop group in entries. */
    uint16_t size() const;
    /** Getter for 'nexthops': Array index to nexthop group entry map. */
    std::map<uint16_t, nexthop_group_entry_t> const & nexthops() const;
