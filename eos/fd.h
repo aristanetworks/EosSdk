@@ -7,6 +7,7 @@
 #include <eos/base.h>
 
 /**
+ * @file
  * File descriptor support module.
  *
  * The handler within this module allows you to react to events

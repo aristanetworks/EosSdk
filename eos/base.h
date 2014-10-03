@@ -7,13 +7,10 @@
 #include <stdint.h> // for uint8_t, uint16_t, uint32_t, uint64_t, etc.
 
 /**
- * @mainpage
- * @section s_intro The Arista EOS Software Development Kit
- */
-
-/**
+ * @file
  * Arista EOS Software Development Kit
  */
+
 namespace eos {
 
 // Big endian (network byte order) hinted forms of uint16_t/uint32_t/uint64_t
