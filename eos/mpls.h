@@ -8,6 +8,7 @@
 #include <eos/types/mpls.h>
 
 /**
+ * @file
  * MPLS related type definitions.
  */
 

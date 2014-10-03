@@ -9,6 +9,7 @@
 #include <eos/base_mgr.h>
 
 /**
+ * @file
  * Periodic timeout support.
  *
  * This module allows timeouts to be set for a callback to be called

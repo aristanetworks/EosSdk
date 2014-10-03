@@ -8,6 +8,7 @@
 #include <cstdarg>
 
 /**
+ * @file
  * Panic handling framework.
  *
  * A 'panic' is raised by the EOS SDK to signal a programming error on
