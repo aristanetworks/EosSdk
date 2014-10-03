@@ -16,7 +16,7 @@ class my_agent : public eos::agent_handler {
    eos::ip_route_mgr * ipMgr_;
    eos::nexthop_group_mgr * nhgMgr_;
 
-   explicit my_agent(eos::sdk & sdk) 
+   explicit my_agent(eos::sdk & sdk)
          : eos::agent_handler(sdk.get_agent_mgr()),
            agentMgr_(sdk.get_agent_mgr()),
            ipMgr_(sdk.get_ip_route_mgr()),
@@ -29,22 +29,26 @@ class my_agent : public eos::agent_handler {
       eos::nexthop_group_t nhg = eos::nexthop_group_t(name,
                                                       eos::NEXTHOP_GROUP_MPLS);
 
-      // Send 2/3rds of traffic to nexthop 10.0.0.33 with the [30, 31]
-      // label stack:
-      eos::nexthop_group_entry_t mplsNh1(eos::ip_addr_t("10.0.0.33"));
       eos::nexthop_group_mpls_action_t mplsActionA(
             eos::MPLS_ACTION_PUSH, {eos::mpls_label_t(30), eos::mpls_label_t(31)});
-      mplsNh1.mpls_action_is(mplsActionA);
-      nhg.nexthop_set(1, mplsNh1);
-      nhg.nexthop_set(2, mplsNh1);
+      eos::nexthop_group_mpls_action_t mplsActionB(
+            eos::MPLS_ACTION_PUSH, {eos::mpls_label_t(40), eos::mpls_label_t(41)});
+
+      // Send 2/3rds of traffic to nexthop 10.0.0.33 with the [30, 31]
+      // label stack:
+
+      eos::nexthop_group_entry_t nhe1(eos::ip_addr_t("10.0.0.33"));
+      nhe1.mpls_action_is(mplsActionA);
+      nhg.nexthop_set(1, nhe1);
+      nhg.nexthop_set(2, nhe1);
 
       // Send 1/3rd of traffic to nexthop 10.0.0.44 with the [40, 41]
       // label stack:
-      eos::nexthop_group_entry_t mplsNh2(eos::ip_addr_t("10.0.0.44"));
-      eos::nexthop_group_mpls_action_t mplsActionB(
-            eos::MPLS_ACTION_PUSH, {eos::mpls_label_t(40), eos::mpls_label_t(41)});
-      mplsNh2.mpls_action_is(mplsActionB);
-      nhg.nexthop_set(3, mplsNh2);
+      eos::nexthop_group_entry_t nhe2(eos::ip_addr_t("10.0.0.44"));
+      nhe2.mpls_action_is(mplsActionB);
+      nhg.nexthop_set(3, nhe2);
+      // Make this persist in the system configuration (not the default)
+      nhg.persistent_is(true);
 
       // And commit it to Sysdb!
       nhgMgr_->nexthop_group_set(nhg);
@@ -59,7 +63,7 @@ class my_agent : public eos::agent_handler {
       eos::ip_route_t route(routeKey);
       eos::ip_route_via_t via(routeKey);
       via.nexthop_group_is("MplsNhg1");
-      
+
       ipMgr_->ip_route_set(route);
       ipMgr_->ip_route_via_set(via);
 
