@@ -26,7 +26,11 @@ typedef double seconds_t;
 
 #if defined(__GNUC__) && !defined(SWIG)
 #define EOS_SDK_PUBLIC __attribute__ ((visibility ("default")))
-#define EOS_SDK_PRIVATE __attribute__ ((visibility ("hidden")))
+#ifdef EOS_SDK_ALLOW_MOCKS // Allows the use of gMock and such.
+# define EOS_SDK_PRIVATE EOS_SDK_PUBLIC
+#else
+# define EOS_SDK_PRIVATE __attribute__ ((visibility ("hidden")))
+#endif
 // Things we need to expose but that aren't part of the API.
 // TODO(tsuna): Why can't we make this visibility protected?
 #define EOS_SDK_INTERNAL __attribute__ ((visibility ("default")))
