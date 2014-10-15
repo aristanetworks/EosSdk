@@ -35,6 +35,23 @@ enum nexthop_group_encap_t {
 std::ostream& operator<<(std::ostream& os, 
                          const nexthop_group_encap_t & enum_val);
 
+/** How the GRE tunnel key is set for GRE nexthop groups. */
+enum nexthop_group_gre_key_t {
+   /** Default value; do not set the GRE tunnel key. */
+   NEXTHOP_GROUP_GRE_KEY_NULL,
+   /**
+    * Use the ingress interface as the tunnel key.
+    * Not supported in this release.
+    */
+   NEXTHOP_GROUP_GRE_KEY_INGRESS_INTF,
+};
+/**
+ * Appends a string representation of enum nexthop_group_gre_key_t value to the
+ * ostream.
+ */
+std::ostream& operator<<(std::ostream& os, 
+                         const nexthop_group_gre_key_t & enum_val);
+
 /**
  * An MPLS nexthop group switching operation.
  *
@@ -134,12 +151,20 @@ class EOS_SDK_PUBLIC nexthop_group_t {
  public:
    nexthop_group_t();
    nexthop_group_t(std::string name, nexthop_group_encap_t type);
+   nexthop_group_t(std::string name, nexthop_group_encap_t type, 
+                   nexthop_group_gre_key_t gre_key_type);
 
    /** Getter for 'name': The unique name of the nexthop group. */
    std::string name() const;
 
    /** Getter for 'type': The type of packet encapsulation used on the group. */
    nexthop_group_encap_t type() const;
+
+   /**
+    * Getter for 'gre_key_type': For GRE nexthop groups, how to set the GRE tunnel
+    * key.
+    */
+   nexthop_group_gre_key_t gre_key_type() const;
 
    /** Getter for 'ttl': The TTL set in frame headers of IP-in-IP or GRE tunnels. */
    uint16_t ttl() const;
@@ -199,6 +224,7 @@ class EOS_SDK_PUBLIC nexthop_group_t {
  private:
    std::string name_;
    nexthop_group_encap_t type_;
+   nexthop_group_gre_key_t gre_key_type_;
    uint16_t ttl_;
    ip_addr_t source_ip_;
    intf_id_t source_intf_;
