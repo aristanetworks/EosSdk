@@ -24,6 +24,20 @@ operator<<(std::ostream& os, const nexthop_group_encap_t & enum_val) {
 
 
 
+inline std::ostream&
+operator<<(std::ostream& os, const nexthop_group_gre_key_t & enum_val) {
+   if (enum_val==NEXTHOP_GROUP_GRE_KEY_NULL) {
+      os << "NEXTHOP_GROUP_GRE_KEY_NULL";
+   } else if (enum_val==NEXTHOP_GROUP_GRE_KEY_INGRESS_INTF) {
+      os << "NEXTHOP_GROUP_GRE_KEY_INGRESS_INTF";
+   } else {
+      os << "Unknown value";
+   }
+   return os;
+}
+
+
+
 inline nexthop_group_mpls_action_t::nexthop_group_mpls_action_t() :
       action_type_(), label_stack_() {
 }
@@ -191,14 +205,21 @@ operator<<(std::ostream& os, const nexthop_group_entry_t& obj) {
 
 
 inline nexthop_group_t::nexthop_group_t() :
-      name_(), type_(), ttl_(64), source_ip_(), source_intf_(), nexthops_(), 
-      destination_ips_(), persistent_() {
+      name_(), type_(), gre_key_type_(NEXTHOP_GROUP_GRE_KEY_NULL), ttl_(64), 
+      source_ip_(), source_intf_(), nexthops_(), destination_ips_(), persistent_() {
 }
 
 inline nexthop_group_t::nexthop_group_t(std::string name, 
                                         nexthop_group_encap_t type) :
-      name_(name), type_(type), ttl_(64), source_ip_(), source_intf_(), nexthops_(), 
-      destination_ips_(), persistent_() {
+      name_(name), type_(type), gre_key_type_(NEXTHOP_GROUP_GRE_KEY_NULL), ttl_(64), 
+      source_ip_(), source_intf_(), nexthops_(), destination_ips_(), persistent_() {
+}
+
+inline nexthop_group_t::nexthop_group_t(std::string name, 
+                                        nexthop_group_encap_t type, 
+                                        nexthop_group_gre_key_t gre_key_type) :
+      name_(name), type_(type), gre_key_type_(gre_key_type), ttl_(64), source_ip_(), 
+      source_intf_(), nexthops_(), destination_ips_(), persistent_() {
 }
 
 inline std::string
@@ -209,6 +230,11 @@ nexthop_group_t::name() const {
 inline nexthop_group_encap_t
 nexthop_group_t::type() const {
    return type_;
+}
+
+inline nexthop_group_gre_key_t
+nexthop_group_t::gre_key_type() const {
+   return gre_key_type_;
 }
 
 inline uint16_t
@@ -320,6 +346,7 @@ inline bool
 nexthop_group_t::operator==(nexthop_group_t const & other) const {
    return name_ == other.name_ &&
           type_ == other.type_ &&
+          gre_key_type_ == other.gre_key_type_ &&
           ttl_ == other.ttl_ &&
           source_ip_ == other.source_ip_ &&
           source_intf_ == other.source_intf_ &&
@@ -339,6 +366,8 @@ nexthop_group_t::operator<(nexthop_group_t const & other) const {
       return name_ < other.name_;
    } else if(type_ != other.type_) {
       return type_ < other.type_;
+   } else if(gre_key_type_ != other.gre_key_type_) {
+      return gre_key_type_ < other.gre_key_type_;
    } else if(ttl_ != other.ttl_) {
       return ttl_ < other.ttl_;
    } else if(source_ip_ != other.source_ip_) {
@@ -361,6 +390,7 @@ nexthop_group_t::to_string() const {
    ss << "nexthop_group_t(";
    ss << "name='" << name_ << "'";
    ss << ", type=" << type_;
+   ss << ", gre_key_type=" << gre_key_type_;
    ss << ", ttl=" << ttl_;
    ss << ", source_ip=" << source_ip_.to_string();
    ss << ", source_intf=" << source_intf_.to_string();
