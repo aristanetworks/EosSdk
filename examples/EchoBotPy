@@ -15,16 +15,22 @@ LISTEN_PORT = 10000
 IDLE_TIMEOUT = 10
 LISTEN_BACKLOG = 5
 MAX_BUF_SIZE = 1024
+DELIMETER = "EOF"
+
+# Pylint is silly about the eossdk and socket modules:
+# pylint: disable-msg=E1101
+# pylint: disable-msg=W0233
 
 class EchoBot(eossdk.TimeoutHandler, eossdk.FdHandler):
    def __init__(self, timeoutMgr):
       print "initializing..."
       eossdk.TimeoutHandler.__init__(self, timeoutMgr)
-      eossdk.FdHandler.__init__(self)  # pylint: disable-msg=W0233
+      eossdk.FdHandler.__init__(self)
       self.server = self._createServer()
-      self.watch_readable(self.server.fileno(), True) # pylint: disable-msg=E1101
+      self.watch_readable(self.server.fileno(), True)
       self.connectedSocket = None
       print "initialized with server=%d" % self.server.fileno()
+      self.msg = ""
 
    def on_readable(self, fd):
       print "onReadable called"
@@ -32,14 +38,24 @@ class EchoBot(eossdk.TimeoutHandler, eossdk.FdHandler):
          assert not self.connectedSocket, ("Should not be readable if we "
                                            "already have a connection")
          self._acceptConnection()
-      elif fd == self.connectedSocket.fileno():  # pylint: disable-msg=E1101
-         data = self.connectedSocket.recv(MAX_BUF_SIZE -  # pylint: disable-msg=E1101
-                                          len(ECHO_MSG))
+      elif fd == self.connectedSocket.fileno():
+         data = self.connectedSocket.recv(MAX_BUF_SIZE - len(ECHO_MSG))
          print "Client said: %r" % data
          if not data:
             self._endConnection()
             return
-         self.connectedSocket.send(ECHO_MSG + data)  # pylint: disable-msg=E1101
+         msgParts = data.split(DELIMETER)
+         if len(msgParts) > 1:
+            # There was an "EOF" in the message!
+            self.connectedSocket.send(ECHO_MSG + self.msg + msgParts[0])
+            self.msg = ""
+            for msgPart in msgParts[1 : -1]:
+               # Send any other complete messages received.
+               self.connectedSocket.send(ECHO_MSG + msgPart)
+         # Save the last part of msgParts until we get an EOF in a
+         # future message. If the message ended in an EOF, this is a
+         # no-op and appends an empty string.
+         self.msg += msgParts[-1]
          self.timeout_time_is(eossdk.now() + IDLE_TIMEOUT)
       else:
          assert False, "Unknown fd %d is readable" % fd
@@ -52,21 +68,21 @@ class EchoBot(eossdk.TimeoutHandler, eossdk.FdHandler):
    def _acceptConnection(self):
       print "Accepting connection"
       assert not self.connectedSocket
-      self.watch_readable(self.server.fileno(), False) # pylint: disable-msg=E1101
+      self.watch_readable(self.server.fileno(), False)
       newFd, _ = self.server.accept()
-      newFd.setblocking(0)  # pylint: disable-msg=E1101
+      newFd.setblocking(0)
       self.connectedSocket = newFd
-      self.watch_readable(newFd.fileno(), True)  # pylint: disable-msg=E1101
+      self.watch_readable(newFd.fileno(), True)
       self.timeout_time_is(eossdk.now() + IDLE_TIMEOUT)
 
    def _endConnection(self):
-      fd = self.connectedSocket.fileno()  # pylint: disable-msg=E1101
+      fd = self.connectedSocket.fileno()
       print "end connection to connected socket %d" % fd
-      self.watch_readable(fd, False) # pylint: disable-msg=E1101
+      self.watch_readable(fd, False)
       self.connectedSocket.close()
       self.connectedSocket = None
       # Start listening for new connections again
-      self.watch_readable(self.server.fileno(), True) # pylint: disable-msg=E1101
+      self.watch_readable(self.server.fileno(), True)
       self.timeout_time_is(eossdk.never)
 
    def _createServer(self):
