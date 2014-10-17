@@ -85,7 +85,7 @@ class DirectFlowReprogrammer : public eos::flow_handler {
       tracer.trace0("Flow %s changed", name.c_str());
       bool tmpEntry = false;
       std::string entryName = name;
-      int suffixSize = TMP_ENTRY_SUFFIX.size();
+      size_t suffixSize = TMP_ENTRY_SUFFIX.size();
       if(name.size() > suffixSize &&
          name.substr(name.size() - suffixSize, suffixSize) == TMP_ENTRY_SUFFIX) {
          // Entry is one of our tmp entries!
