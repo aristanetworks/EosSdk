@@ -26,6 +26,8 @@ operator<<(std::ostream& os, const fib_route_type_t & enum_val) {
       os << "ROUTE_TYPE_RIP";
    } else if (enum_val==ROUTE_TYPE_CONNECTED) {
       os << "ROUTE_TYPE_CONNECTED";
+   } else if (enum_val==ROUTE_TYPE_REDIRECT) {
+      os << "ROUTE_TYPE_REDIRECT";
    } else if (enum_val==ROUTE_TYPE_BGP_AGGREGATE) {
       os << "ROUTE_TYPE_BGP_AGGREGATE";
    } else if (enum_val==ROUTE_TYPE_OSPF_AGGREGATE) {
@@ -42,6 +44,8 @@ operator<<(std::ostream& os, const fib_route_type_t & enum_val) {
       os << "ROUTE_TYPE_OSPF_NSSA_EXTERNAL_TYPE1";
    } else if (enum_val==ROUTE_TYPE_OSPF_NSSA_EXTERNAL_TYPE2) {
       os << "ROUTE_TYPE_OSPF_NSSA_EXTERNAL_TYPE2";
+   } else if (enum_val==ROUTE_TYPE_BGP) {
+      os << "ROUTE_TYPE_BGP";
    } else if (enum_val==ROUTE_TYPE_IBGP) {
       os << "ROUTE_TYPE_IBGP";
    } else if (enum_val==ROUTE_TYPE_EBGP) {
@@ -226,6 +230,8 @@ operator<<(std::ostream& os, const fib_fec_type_t & enum_val) {
       os << "FEC_TYPE_NEXTHOP_GROUP";
    } else if (enum_val==FEC_TYPE_KERNEL) {
       os << "FEC_TYPE_KERNEL";
+   } else if (enum_val==FEC_TYPE_UNKNOWN) {
+      os << "FEC_TYPE_UNKNOWN";
    } else {
       os << "Unknown value";
    }
@@ -236,11 +242,11 @@ operator<<(std::ostream& os, const fib_fec_type_t & enum_val) {
 
 // Default constructor.
 inline fib_fec_t::fib_fec_t() :
-      fec_id_(0), fec_type_(), via_() {
+      fec_id_(0), fec_type_(), nexthop_group_name_(), via_() {
 }
 
 inline fib_fec_t::fib_fec_t(uint64_t const & fec_id) :
-      fec_id_(fec_id), fec_type_(), via_() {
+      fec_id_(fec_id), fec_type_(), nexthop_group_name_(), via_() {
 }
 
 inline uint64_t
@@ -261,6 +267,16 @@ fib_fec_t::fec_type() const {
 inline void
 fib_fec_t::fec_type_is(fib_fec_type_t fec_type) {
    fec_type_ = fec_type;
+}
+
+inline std::string
+fib_fec_t::nexthop_group_name() const {
+   return nexthop_group_name_;
+}
+
+inline void
+fib_fec_t::nexthop_group_name_is(std::string nexthop_group_name) {
+   nexthop_group_name_ = nexthop_group_name;
 }
 
 inline std::forward_list<fib_via_t> const &
@@ -289,6 +305,7 @@ fib_fec_t::to_string() const {
    ss << "fib_fec_t(";
    ss << "fec_id=" << fec_id_;
    ss << ", fec_type=" << fec_type_;
+   ss << ", nexthop_group_name='" << nexthop_group_name_ << "'";
    ss << ", via=" <<"'";
    bool first_via = true;
    for (auto it=via_.cbegin(); it!=via_.cend(); ++it) {

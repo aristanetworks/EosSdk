@@ -108,7 +108,6 @@ INIT_STUB_MGR(eth_intf_mgr)
 INIT_STUB_MGR(eth_phy_intf_mgr)
 INIT_STUB_MGR(eth_phy_intf_counter_mgr)
 INIT_STUB_MGR(eth_lag_intf_mgr)
-INIT_STUB_MGR(fib_mgr)
 INIT_STUB_MGR(intf_mgr)
 INIT_STUB_MGR(intf_counter_mgr)
 INIT_STUB_MGR(ip_intf_mgr)
@@ -130,6 +129,10 @@ void sdk::init_event_loop() {
 
 void sdk::init_mount_mgr() {
    // BUG86400 - Not a public function
+}
+
+void sdk::init_fib_mgr(mgr_mode_type_t mode) {
+   // TODO: No op impl.
 }
 
 }

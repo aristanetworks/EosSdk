@@ -62,8 +62,32 @@ class fib_mgr_impl : public fib_mgr {
       fib_fec_iter_t *nop = 0;
       return *nop;
    }
+
+   mgr_mode_type_t mode_type() const {
+      return MODE_TYPE_READ_ONLY;
+   }
 };
 
-DEFINE_STUB_MGR_CTOR(fib_mgr)
+fib_mgr::fib_mgr() {
+}
+
+fib_mgr::~fib_mgr() {
+}
+
+fib_handler::fib_handler(fib_mgr *mgr) : 
+      base_handler<fib_mgr, fib_handler>(mgr) {
+}
+
+void fib_handler::on_route_set(fib_route_t const&) {
+}
+
+void fib_handler::on_route_del(ip_prefix_t const &) {
+}
+
+void fib_handler::on_fec_set(fib_fec_t const&) {
+}
+
+void fib_handler::on_fec_del(uint64_t const&) {
+}
 
 } // namespace eos
