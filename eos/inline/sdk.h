@@ -90,9 +90,9 @@ inline event_loop * sdk::get_event_loop() {
    return event_loop_;
 }
 
-inline fib_mgr * sdk::get_fib_mgr() {
+inline fib_mgr * sdk::get_fib_mgr(mgr_mode_type_t mode) {
    if (!fib_mgr_) {
-      init_fib_mgr();
+      init_fib_mgr(mode);
    }
    return fib_mgr_;
 }

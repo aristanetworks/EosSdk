@@ -26,6 +26,7 @@ enum fib_route_type_t {
    ROUTE_TYPE_KERNEL,
    ROUTE_TYPE_RIP,
    ROUTE_TYPE_CONNECTED,
+   ROUTE_TYPE_REDIRECT,
    ROUTE_TYPE_BGP_AGGREGATE,
    ROUTE_TYPE_OSPF_AGGREGATE,
    ROUTE_TYPE_OSPF_INTRA_AREA,
@@ -34,6 +35,7 @@ enum fib_route_type_t {
    ROUTE_TYPE_OSPF_EXTERNAL_TYPE2,
    ROUTE_TYPE_OSPF_NSSA_EXTERNAL_TYPE1,
    ROUTE_TYPE_OSPF_NSSA_EXTERNAL_TYPE2,
+   ROUTE_TYPE_BGP,
    ROUTE_TYPE_IBGP,
    ROUTE_TYPE_EBGP,
    ROUTE_TYPE_ISIS,
@@ -126,6 +128,7 @@ enum fib_fec_type_t {
    FEC_TYPE_RECEIVE_BCAST,
    FEC_TYPE_NEXTHOP_GROUP,
    FEC_TYPE_KERNEL,
+   FEC_TYPE_UNKNOWN,
 };
 /** Appends a string representation of enum fib_fec_type_t value to the ostream. */
 std::ostream& operator<<(std::ostream& os, const fib_fec_type_t & enum_val);
@@ -151,6 +154,14 @@ class EOS_SDK_PUBLIC fib_fec_t {
    void fec_type_is(fib_fec_type_t fec_type);
 
    /**
+    * Getter for 'nexthop_group_name': Name of the nexthop group, in case fec_type
+    * is FEC_TYPE_NEXTHOP_GROUP.
+    */
+   std::string nexthop_group_name() const;
+   /** Setter for 'nexthop_group_name'. */
+   void nexthop_group_name_is(std::string nexthop_group_name);
+
+   /**
     * Getter for 'via': A list of vias that traffic will be distributed amongst.
     * Duplicate vias will be weighted heavily.
     */
@@ -173,6 +184,7 @@ class EOS_SDK_PUBLIC fib_fec_t {
  private:
    uint64_t fec_id_;
    fib_fec_type_t fec_type_;
+   std::string nexthop_group_name_;
    std::forward_list<fib_via_t> via_;
 };
 }

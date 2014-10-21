@@ -24,6 +24,15 @@ typedef uint64_t uint64_be_t;
 /// A decimal number of seconds, used for timestamps and durations
 typedef double seconds_t;
 
+enum mgr_mode_type_t {
+   // Reader without notifications
+   MODE_TYPE_READ_ONLY,
+   // Reader with notifications
+   MODE_TYPE_READ_NOTIFYING,
+   // Writer ( Manager can read and write state )
+   MODE_TYPE_WRITE,
+};
+
 #if defined(__GNUC__) && !defined(SWIG)
 #define EOS_SDK_PUBLIC __attribute__ ((visibility ("default")))
 #ifdef EOS_SDK_ALLOW_MOCKS // Allows the use of gMock and such.

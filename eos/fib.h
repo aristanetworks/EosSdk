@@ -30,17 +30,35 @@ class fib_fec_iter_impl;
 
 class EOS_SDK_PUBLIC fib_fec_iter_t {
    // Uncomment when Iterator is defined.
-   //: public iter_base<fib_fec_t, fib_fec_iter_impl> {
+   // : public iter_base<fib_fec_t, fib_fec_iter_impl> {
 
  private:
    friend class fib_fec_iter_impl;
    explicit fib_fec_iter_t(fib_fec_iter_impl * const) EOS_SDK_PRIVATE;
 };
 
+class fib_mgr;
 
+/// This class receives changes route/fec collection
+class EOS_SDK_PUBLIC fib_handler : public base_handler<fib_mgr, fib_handler> {
+ public:
+    // This constructor requires a NOTIFYING_READ or WRITE fib_mgr.
+   explicit fib_handler(fib_mgr *);
+   fib_mgr * get_fib_mgr() const;
+
+   /// Handler called when a route gets added or updated.
+   virtual void on_route_set(fib_route_t const&);
+   /// Handler called when a route gets deleted.
+   virtual void on_route_del(ip_prefix_t const&);
+
+   /// Handler called when a FEC gets added or updated.
+   virtual void on_fec_set(fib_fec_t const&);
+   /// Handler called when a FEC gets deleted.
+   virtual void on_fec_del(uint64_t const&);
+};
 
 /// The FIB Manager
-class EOS_SDK_PUBLIC fib_mgr {
+class EOS_SDK_PUBLIC fib_mgr : public base_mgr<fib_handler> {
  public:
    virtual ~fib_mgr();
 
@@ -60,11 +78,23 @@ class EOS_SDK_PUBLIC fib_mgr {
    virtual bool fib_route_exists(ip_prefix_t const &) = 0;
    virtual fib_route_t fib_route(ip_prefix_t const &) = 0;
 
+   /**
+    * Returns the mode this manager is in.
+    * This mode is set during the construction of the manager, i.e.:
+    * `sdk.get_fib_mgr(MODE_TYPE_READ_NOTIFYING)`.
+    * If MODE_TYPE_READ_ONLY, only the getters and
+    * iterators of this manager will function.
+    */
+   virtual mgr_mode_type_t mode_type() = 0;
+
  protected:
    fib_mgr() EOS_SDK_PRIVATE;
+   friend class fib_handler;
  private:
    EOS_SDK_DISALLOW_COPY_CTOR(fib_mgr);
 };
+
+#include <eos/inline/fib.h>
 
 } // end namespace eos
 

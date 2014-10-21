@@ -100,7 +100,7 @@ class EOS_SDK_PUBLIC sdk {
    void init_eth_phy_intf_mgr();
    void init_eth_phy_intf_counter_mgr();
    void init_event_loop();
-   void init_fib_mgr();
+   void init_fib_mgr(mgr_mode_type_t mode=MODE_TYPE_READ_ONLY);
    void init_intf_mgr();
    void init_intf_counter_mgr();
    void init_ip_intf_mgr();
@@ -125,7 +125,7 @@ class EOS_SDK_PUBLIC sdk {
    eth_phy_intf_mgr * get_eth_phy_intf_mgr();
    eth_phy_intf_counter_mgr * get_eth_phy_intf_counter_mgr();
    event_loop * get_event_loop();
-   fib_mgr * get_fib_mgr();
+   fib_mgr * get_fib_mgr(mgr_mode_type_t mode=MODE_TYPE_READ_ONLY);
    intf_mgr * get_intf_mgr();
    intf_counter_mgr * get_intf_counter_mgr();
    ip_intf_mgr * get_ip_intf_mgr();
