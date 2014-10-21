@@ -7,6 +7,8 @@ AM_LDFLAGS = -Wl,--no-undefined
 PUBLISHED_HEADER_FILES := $(wildcard eos/*.h) $(wildcard eos/inline/*.h) $(wildcard eos/types/*.h) $(wildcard eos/inline/types/*.h)
 nobase_include_HEADERS = $(PUBLISHED_HEADER_FILES)
 
+EXTRA_DIST = $(wildcard examples/*) $(wildcard examples/test/*)
+
 libeos_la_SOURCES =
 libeos_la_SOURCES += agent.cpp
 libeos_la_SOURCES += acl.cpp
@@ -81,7 +83,7 @@ MAINTAINERCLEANFILES = $(BUILT_SOURCES)
 endif
 
 ACLOCAL_AMFLAGS = -I autogen
-EXTRA_DIST = bootstrap build.sh $(SWIG_FILES)
+EXTRA_DIST += bootstrap build.sh $(SWIG_FILES)
 
 dist-hook:
 	chmod -R u+w $(distdir)
