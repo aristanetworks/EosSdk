@@ -55,7 +55,7 @@ std::ostream& operator<<(std::ostream& os,
 /**
  * An MPLS nexthop group switching operation.
  *
- * This structure combines a stack of labels and an MPLS switchingoperation using
+ * This structure combines a stack of labels and an MPLS switching operation using
  * those labels, such as eos::MPLS_ACTION_PUSH.
  */
 class EOS_SDK_PUBLIC nexthop_group_mpls_action_t {
