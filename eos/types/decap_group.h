@@ -55,3 +55,32 @@ class EOS_SDK_PUBLIC decap_group_t {
    /** Setter for 'protocol_type'. */
    void protocol_type_is(decap_protocol_type_t protocol_type);
 
+   /**
+    * Getter for 'persistent': if true, the decap group is captured in the running-
+    * config. Defaults to false.
+    */
+   bool persistent() const;
+   /** Setter for 'persistent'. */
+   void persistent_is(bool persistent);
+
+   bool operator==(decap_group_t const & other) const;
+   bool operator!=(decap_group_t const & other) const;
+   /** Returns a string representation of the current object's values. */
+   std::string to_string() const;
+   /**
+    * A utility stream operator that adds a string representation of decap_group_t
+    * to the ostream.
+    */
+   friend std::ostream& operator<<(std::ostream& os, const decap_group_t& obj);
+
+ private:
+   std::string group_name_;
+   ip_addr_t destination_addr_;
+   decap_protocol_type_t protocol_type_;
+   bool persistent_;
+};
+}
+
+#include <eos/inline/types/decap_group.h>
+
+#endif // EOS_TYPES_DECAP_GROUP_H
