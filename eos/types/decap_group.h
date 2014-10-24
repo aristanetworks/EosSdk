@@ -56,7 +56,7 @@ class EOS_SDK_PUBLIC decap_group_t {
    void protocol_type_is(decap_protocol_type_t protocol_type);
 
    /**
-    * Getter for 'persistent': if true, the decap group is captured in the running-
+    * Getter for 'persistent': if true, the decap group is included in the running-
     * config. Defaults to false.
     */
    bool persistent() const;
