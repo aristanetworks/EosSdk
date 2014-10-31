@@ -7,13 +7,13 @@
 
 namespace eos {
 
-eth_addr_t::eth_addr_t(char const * addr) {
-   bytes_ = {};
+eth_addr_t::eth_addr_t(char const * addr) :
+      bytes_({}) {
    // TODO: No op impl.
 }
 
-eth_addr_t::eth_addr_t(std::string const & addr) {
-   bytes_ = {};
+eth_addr_t::eth_addr_t(std::string const & addr) :
+      bytes_({}) {
    // TODO: No op impl.
 }
 
