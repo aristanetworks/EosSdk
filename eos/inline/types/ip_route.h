@@ -7,16 +7,16 @@
 namespace eos {
 
 inline ip_route_key_t::ip_route_key_t() :
-      prefix_(), preference_(1), metric_(0) {
+      prefix_(), preference_(1) {
 }
 
 inline ip_route_key_t::ip_route_key_t(ip_prefix_t const & prefix) :
-      prefix_(prefix), preference_(1), metric_(0) {
+      prefix_(prefix), preference_(1) {
 }
 
 inline ip_route_key_t::ip_route_key_t(ip_prefix_t const & prefix, 
                                       ip_route_preference_t preference) :
-      prefix_(prefix), preference_(preference), metric_(0) {
+      prefix_(prefix), preference_(preference) {
 }
 
 inline ip_prefix_t
@@ -39,21 +39,10 @@ ip_route_key_t::preference_is(ip_route_preference_t preference) {
    preference_ = preference;
 }
 
-inline ip_route_metric_t
-ip_route_key_t::metric() const {
-   return metric_;
-}
-
-inline void
-ip_route_key_t::metric_is(ip_route_metric_t metric) {
-   metric_ = metric;
-}
-
 inline bool
 ip_route_key_t::operator==(ip_route_key_t const & other) const {
    return prefix_ == other.prefix_ &&
-          preference_ == other.preference_ &&
-          metric_ == other.metric_;
+          preference_ == other.preference_;
 }
 
 inline bool
@@ -67,7 +56,6 @@ ip_route_key_t::to_string() const {
    ss << "ip_route_key_t(";
    ss << "prefix=" << prefix_.to_string();
    ss << ", preference=" << preference_;
-   ss << ", metric=" << metric_;
    ss << ")";
    return ss.str();
 }
