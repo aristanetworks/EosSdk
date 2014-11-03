@@ -35,7 +35,7 @@ class HelloWorldAgent(eossdk.AgentHandler):
             self.agentMgr.status_set("greeting", "Goodbye!")
          else:
             # Time for some social networking!
-            self.tracer.trace3("Saying hi to %s", value)
+            self.tracer.trace3("Saying hi to %s" % value)
             self.agentMgr.status_set("greeting", "Hello %s!" % value)
    
    def on_agent_enabled(self, enabled):
