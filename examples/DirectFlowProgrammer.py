@@ -8,6 +8,10 @@ import re
 import os
 import sys
 
+
+# pylint: disable-msg=W0233
+# pylint: disable-msg=E1101
+
 def createMatch(inputIntfs=None,
                 ethSrc=None,
                 ethSrcMask="ff:ff:ff:ff:ff:ff",
@@ -82,30 +86,17 @@ def createAction(outputIntfs=None,
    action.action_set_is(actionSet)
    return action
 
-class FlowHandlerTrampoline(eossdk.FlowHandler):
-   # Multiple inheritance doesn't work great with our python bindings
-   # at this point, so we have to use a trampoline class
-   # to be notified of changes to flows, instead of just having
-   # the DirectFlowProgrammer also inhering from eossdk.FlowHandler
-
-   def __init__(self, parent, directFlowMgr):
-      self.parent_ = parent
-      eossdk.FlowHandler.__init__(self, directFlowMgr)
-      # Register callback for the status of all flows
-      self.watch_all_flows(True)
-
-   def on_flow_status(self, name, status):        # pylint: disable-msg=W0221
-      self.parent_.on_flow_status(name, status)
 
 class DirectFlowProgrammer(eossdk.AgentHandler,
-                           eossdk.FdHandler):
+                           eossdk.FdHandler,
+                           eossdk.FlowHandler):
 
    def __init__(self, agentMgr, directFlowMgr):
       self.agentMgr_ = agentMgr
       self.directFlowMgr_ = directFlowMgr
-      self.flowHandlerTrampoline_ = None
       eossdk.AgentHandler.__init__(self, agentMgr)
-      eossdk.FdHandler.__init__(self)           # pylint: disable-msg=W0233
+      eossdk.FdHandler.__init__(self)
+      eossdk.FlowHandler.__init__(self, directFlowMgr)
       self.changes = 0
 
    def on_initialized(self):
@@ -122,12 +113,9 @@ class DirectFlowProgrammer(eossdk.AgentHandler,
       # Uncomment once we've added hitless resync support to the API:
       # self.directFlowMgr_.resync_complete()
 
-      # Set up the FlowHandlerTrampoline to be notified of flow
-      # status changes
-      self.flowHandlerTrampoline_ = FlowHandlerTrampoline(self, self.directFlowMgr_)
-
       # Now start accepting input on stdin
-      self.watch_readable(sys.stdin.fileno(), True) # pylint: disable-msg=E1101
+      self.watch_all_flows(True)
+      self.watch_readable(sys.stdin.fileno(), True)
 
    def on_readable(self, fd):
       # Handle input on stdin of the format:
