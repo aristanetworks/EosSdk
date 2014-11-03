@@ -33,9 +33,6 @@ class EOS_SDK_PUBLIC ip_route_key_t {
    /** Setter for 'preference'. */
    void preference_is(ip_route_preference_t preference);
 
-   ip_route_metric_t metric() const;
-   void metric_is(ip_route_metric_t metric);
-
    bool operator==(ip_route_key_t const & other) const;
    bool operator!=(ip_route_key_t const & other) const;
    /** Returns a string representation of the current object's values. */
@@ -49,7 +46,6 @@ class EOS_SDK_PUBLIC ip_route_key_t {
  private:
    ip_prefix_t prefix_;
    ip_route_preference_t preference_;
-   ip_route_metric_t metric_;
 };
 
 /**
