@@ -35,7 +35,7 @@ AC_DEFINE([SDK_VERSION_MINOR], [VERSION_MINOR],
           [Minor version number of the EOS SDK])
 m4_define([VERSION_PATCH],
           [m4_bregexp(_VERSION_, [^[0-9]+[-._][0-9]+[-._]\([0-9]+\)], [\1])])dnl
-AC_DEFINE([[SDK_VERSION_PATCH]], [VERSION_PATCH],
+AC_DEFINE([SDK_VERSION_PATCH], [VERSION_PATCH],
           [Patch version number of the EOS SDK])
 AC_SUBST([SDK_LIBTOOL_VERSION],
          [m4_eval(VERSION_MAJOR + VERSION_MINOR):VERSION_PATCH:VERSION_MINOR])dnl
