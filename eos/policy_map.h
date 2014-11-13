@@ -4,6 +4,8 @@
 #ifndef EOS_POLICY_H
 #define EOS_POLICY_H
 
+#include <functional>
+
 #include <eos/base.h>
 #include <eos/base_handler.h>
 #include <eos/base_mgr.h>
@@ -89,7 +91,7 @@ namespace eos {
 class policy_map_action_t;
 class policy_map_key_t;
 }
- 
+
 namespace std {
 
 template <>
@@ -178,7 +180,7 @@ class EOS_SDK_PUBLIC policy_map_mgr : public base_mgr<policy_map_handler,
    virtual ~policy_map_mgr();
 
    /**
-    * Resync 
+    * Resync
     */
    virtual void resync_init() = 0;
    /// Completes any underway resync operation.
