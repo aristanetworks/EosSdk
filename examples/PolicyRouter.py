@@ -26,7 +26,6 @@ import collections
 import datetime
 import functools
 import os
-import pprint
 import sys
 
 import pyinotify
@@ -137,11 +136,11 @@ def load_apply(d):
 def load_nexthop_group(d):
    g = {}
    for k, v in d.iteritems():
-      g[k] = NexthopGroup(type=d.get('type', 'ipinip'),
-                          src_intf=d.get('src_intf'),
-                          src_ips=d.get('src_ips', []),
-                          dst_ips=d.get('dst_ips', []),
-                          mpls_labels=d.get('mpls_labels', []))
+      g[k] = NexthopGroup(type=v.get('type', 'ipinip'),
+                          src_intf=v.get('src_intf'),
+                          src_ips=v.get('src_ips', []),
+                          dst_ips=v.get('dst_ips', []),
+                          mpls_labels=v.get('mpls_labels', []))
    return g
 
 def load_config(d):
@@ -251,10 +250,11 @@ class PolicyRouter(object):
                else:
                   aclRule.destination_port_is(spec)
 
-         self.acl_mgr.acl_rule_set(key, i, aclRule)
+            self.acl_mgr.acl_rule_set(key, i, aclRule)
       self.acl_mgr.acl_commit()
 
    def _buildPortSpec(self, portspec):
+      # pylint:disable-msg=E1101
       op = portspec.get('op', 'eq').lower()  # default to port equals
       ports = portspec.get('ports', [])
       if op == 'eq':
@@ -301,7 +301,7 @@ class PolicyRouter(object):
             act.nexthop_group_name_is(action.nexthop_group)
          elif action.type == 'nexthop' and action.nexthops:
             act = eossdk.PolicyMapAction(eossdk.POLICY_ACTION_NEXTHOP)
-            for nh in actions.nexthops:
+            for nh in action.nexthops:
                hop = getIpAddr(nh)
                if hop is not None:
                   act.nexthop_set(hop)
@@ -401,7 +401,9 @@ class InotifyPoller(eossdk.TimeoutHandler):
       self.policy_handler_ = policy_handler
       self.poll_interval_ = poll_interval
       self.wm_ = pyinotify.WatchManager()
+      # pylint:disable-msg=E1101
       mask = pyinotify.IN_MODIFY | pyinotify.IN_CREATE | pyinotify.IN_DELETE
+      # pylint:enable-msg=E1101
       handler = functools.partial(InotifyHandler, handler=policy_handler)
       # Allow coalescing, so that delete/recreate (as opposed to modify) doesn't
       # cause us to delete the policy.
@@ -436,9 +438,11 @@ class PolicyHandler(eossdk.AgentHandler, eossdk.PolicyMapHandler, eossdk.AclHand
          self.policy_map_mgr, sdk.get_intf_mgr(), sdk.get_nexthop_group_mgr())
       self.timeout_ = None
       self.watches_ = frozenset()
+      # pylint: disable-msg=W0233
       eossdk.PolicyMapHandler.__init__(self, self.policy_map_mgr)
       eossdk.AclHandler.__init__(self, self.acl_mgr)
       eossdk.AgentHandler.__init__(self, self.agent_mgr)
+      # pylint: enable-msg=W0233
 
    @property
    def config(self):
@@ -452,11 +456,13 @@ class PolicyHandler(eossdk.AgentHandler, eossdk.PolicyMapHandler, eossdk.AclHand
    def watch_policy(self):
       print 'Removing all watches for %s' % self.watches_
       for name in self.watches_:
+         # pylint:disable-msg=E1101
          self.watch_policy_map(
             eossdk.PolicyMapKey(name, eossdk.POLICY_FEATURE_PBR), False)
       self.watches_ = frozenset(self.config_.policy.iterkeys())
       print 'Adding new watches for %s' % self.config_.policy.keys()
       for name in self.config_.policy:
+         # pylint: disable-msg=E1101
          self.watch_policy_map(
             eossdk.PolicyMapKey(name, eossdk.POLICY_FEATURE_PBR), True)
 
@@ -471,12 +477,13 @@ class PolicyHandler(eossdk.AgentHandler, eossdk.PolicyMapHandler, eossdk.AclHand
       print 'Starting Inotify notifier'
       self.timeout_ = InotifyPoller(self.sdk_, self.config_file_, self)
 
+   # pylint: disable-msg=W0221
    def on_agent_option(self, name, value):
       if name == 'config_file':
          config = load_config_file(value)
-         if config != self.handler_.config:
+         if config != self.config:
             self.agent_mgr.status_set('config_changed', datetime.datetime.today())
-            self.handler_.config_is(config)
+            self.config_is(config)
 
    def on_policy_map_sync(self, key):
       self.agent_mgr.status_set('last_policy_map_sync_state', 'PASS')
@@ -489,6 +496,7 @@ class PolicyHandler(eossdk.AgentHandler, eossdk.PolicyMapHandler, eossdk.AclHand
       self.agent_mgr.status_set('last_policy_map_sync_key', str(key))
       self.agent_mgr.status_set('last_policy_map_sync_error_message', message)
 
+   # pylint: disable-msg=W0221
    def on_agent_enabled(self, enabled):
       self.agent_mgr.status_set('enabled', enabled)
 
@@ -502,6 +510,9 @@ class PolicyHandler(eossdk.AgentHandler, eossdk.PolicyMapHandler, eossdk.AclHand
 
 class InotifyHandler(pyinotify.ProcessEvent):
    """Handles inotify events."""
+
+   # satisfy pylint's W0201 warnings
+   handler_ = None
 
    def process_IN_CREATE(self, event):
       print 'Config file created:', event.pathname
@@ -538,7 +549,7 @@ def main():
       # Obtain a reference to the EOS SDK
       sdk = eossdk.Sdk()
       # Instantiate the policy router application
-      policy_router = PolicyHandler(sdk, filename)
+      _ = PolicyHandler(sdk, filename)
       # Run the agent until terminated by a signal
       sdk.main_loop('PolicyRouter')
    else:
