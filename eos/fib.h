@@ -49,12 +49,12 @@ class EOS_SDK_PUBLIC fib_handler : public base_handler<fib_mgr, fib_handler> {
    /// Handler called when a route gets added or updated.
    virtual void on_route_set(fib_route_t const&);
    /// Handler called when a route gets deleted.
-   virtual void on_route_del(ip_prefix_t const&);
+   virtual void on_route_del(fib_route_key_t const&);
 
    /// Handler called when a FEC gets added or updated.
    virtual void on_fec_set(fib_fec_t const&);
    /// Handler called when a FEC gets deleted.
-   virtual void on_fec_del(uint64_t const&);
+   virtual void on_fec_del(fib_fec_key_t const&);
 };
 
 /// The FIB Manager
@@ -68,15 +68,15 @@ class EOS_SDK_PUBLIC fib_mgr : public base_mgr<fib_handler> {
 
    // FEC management
    virtual bool fib_fec_set(fib_fec_t const &) = 0;
-   virtual void fib_fec_del(uint64_t const &) = 0;
-   virtual bool fib_fec_exists(uint64_t const &) = 0;
-   virtual fib_fec_t fib_fec(uint64_t const &) = 0;
+   virtual void fib_fec_del(fib_fec_key_t const &) = 0;
+   virtual bool fib_fec_exists(fib_fec_key_t const &) = 0;
+   virtual fib_fec_t fib_fec(fib_fec_key_t const &) = 0;
 
    // Route Management
    virtual bool fib_route_set(fib_route_t const &) = 0;
-   virtual void fib_route_del(ip_prefix_t const &) = 0;
-   virtual bool fib_route_exists(ip_prefix_t const &) = 0;
-   virtual fib_route_t fib_route(ip_prefix_t const &) = 0;
+   virtual void fib_route_del(fib_route_key_t const &) = 0;
+   virtual bool fib_route_exists(fib_route_key_t const &) = 0;
+   virtual fib_route_t fib_route(fib_route_key_t const &) = 0;
 
    /**
     * Returns the mode this manager is in.

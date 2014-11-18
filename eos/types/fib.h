@@ -12,6 +12,31 @@
 
 namespace eos {
 
+/** An IP route key that goes in FIB. */
+class EOS_SDK_PUBLIC fib_route_key_t {
+ public:
+   fib_route_key_t();
+   explicit fib_route_key_t(ip_prefix_t const & prefix);
+
+   /** Getter for 'prefix': IP v4/v6 network prefix. */
+   ip_prefix_t prefix() const;
+   /** Setter for 'prefix'. */
+   void prefix_is(ip_prefix_t const & prefix);
+
+   bool operator==(fib_route_key_t const & other) const;
+   bool operator!=(fib_route_key_t const & other) const;
+   /** Returns a string representation of the current object's values. */
+   std::string to_string() const;
+   /**
+    * A utility stream operator that adds a string representation of
+    * fib_route_key_t to the ostream.
+    */
+   friend std::ostream& operator<<(std::ostream& os, const fib_route_key_t& obj);
+
+ private:
+   ip_prefix_t prefix_;
+};
+
 /** Enums for host routes and FIB routes. */
 enum fib_route_type_t {
    ROUTE_TYPE_INVALID,
@@ -52,12 +77,12 @@ std::ostream& operator<<(std::ostream& os, const fib_route_type_t & enum_val);
 class EOS_SDK_PUBLIC fib_route_t {
  public:
    fib_route_t();
-   explicit fib_route_t(ip_prefix_t const & prefix);
+   explicit fib_route_t(fib_route_key_t const & route_key);
 
-   /** Getter for 'prefix': IP v4/v6 network prefix. */
-   ip_prefix_t prefix() const;
-   /** Setter for 'prefix'. */
-   void prefix_is(ip_prefix_t const & prefix);
+   /** Getter for 'route_key': IP v4/v6 network route key consisting of prefix. */
+   fib_route_key_t route_key() const;
+   /** Setter for 'route_key'. */
+   void route_key_is(fib_route_key_t const & route_key);
 
    /** Getter for 'preference': 0..255 only, defaults to 1. */
    ip_route_preference_t preference() const;
@@ -86,10 +111,38 @@ class EOS_SDK_PUBLIC fib_route_t {
    friend std::ostream& operator<<(std::ostream& os, const fib_route_t& obj);
 
  private:
-   ip_prefix_t prefix_;
+   fib_route_key_t route_key_;
    ip_route_preference_t preference_;
    ip_route_metric_t metric_;
    fib_route_type_t route_type_;
+   uint64_t fec_id_;
+};
+
+/** FEC key that goes in FIB. */
+class EOS_SDK_PUBLIC fib_fec_key_t {
+ public:
+   fib_fec_key_t();
+   explicit fib_fec_key_t(uint64_t const & fec_id);
+
+   /**
+    * Getter for 'fec_id': fec_id[56:63] denotes the feature, 0: fib Fec, 1 :
+    * resilientEcmp feature, 2: nextHopGroup feature.
+    */
+   uint64_t fec_id() const;
+   /** Setter for 'fec_id'. */
+   void fec_id_is(uint64_t const & fec_id);
+
+   bool operator==(fib_fec_key_t const & other) const;
+   bool operator!=(fib_fec_key_t const & other) const;
+   /** Returns a string representation of the current object's values. */
+   std::string to_string() const;
+   /**
+    * A utility stream operator that adds a string representation of fib_fec_key_t
+    * to the ostream.
+    */
+   friend std::ostream& operator<<(std::ostream& os, const fib_fec_key_t& obj);
+
+ private:
    uint64_t fec_id_;
 };
 
@@ -140,15 +193,12 @@ std::ostream& operator<<(std::ostream& os, const fib_fec_type_t & enum_val);
 class EOS_SDK_PUBLIC fib_fec_t {
  public:
    fib_fec_t();
-   explicit fib_fec_t(uint64_t const & fec_id);
+   explicit fib_fec_t(fib_fec_key_t const & fec_key);
 
-   /**
-    * Getter for 'fec_id': fec_id[56:63] denotes the feature, 0: fib Fec, 1 :
-    * resilientEcmp feature, 2: nextHopGroup feature.
-    */
-   uint64_t fec_id() const;
-   /** Setter for 'fec_id'. */
-   void fec_id_is(uint64_t const & fec_id);
+   /** Getter for 'fec_key': fec_key consisting of fec_id. */
+   fib_fec_key_t fec_key() const;
+   /** Setter for 'fec_key'. */
+   void fec_key_is(fib_fec_key_t const & fec_key);
 
    fib_fec_type_t fec_type() const;
    void fec_type_is(fib_fec_type_t fec_type);
@@ -182,7 +232,7 @@ class EOS_SDK_PUBLIC fib_fec_t {
    friend std::ostream& operator<<(std::ostream& os, const fib_fec_t& obj);
 
  private:
-   uint64_t fec_id_;
+   fib_fec_key_t fec_key_;
    fib_fec_type_t fec_type_;
    std::string nexthop_group_name_;
    std::forward_list<fib_via_t> via_;
