@@ -16,17 +16,17 @@ class fib_mgr_impl : public fib_mgr {
       return true;
    }
 
-   void fib_fec_del(uint64_t const & fec_id) {
+   void fib_fec_del(fib_fec_key_t const & fec_key) {
       // TODO: delete the fec from status
       return;
    }
 
-   bool fib_fec_exists(uint64_t const & fec_id) {
+   bool fib_fec_exists(fib_fec_key_t const & fec_key) {
       // TODO: check if fec exists
       return true;
    }
 
-   fib_fec_t fib_fec(uint64_t const & fec_id) {
+   fib_fec_t fib_fec(fib_fec_key_t const & fec_key) {
       // TODO: return fec from the status
       fib_fec_t fec;
       return fec;
@@ -37,17 +37,17 @@ class fib_mgr_impl : public fib_mgr {
       return true;
    }
 
-   void fib_route_del(ip_prefix_t const & prefix) {
+   void fib_route_del(fib_route_key_t const & route_key) {
       // TODO: delete the route from status
       return;
    }
 
-   bool fib_route_exists(ip_prefix_t const & prefix) {
+   bool fib_route_exists(fib_route_key_t const & route_key) {
       // TODO: check if route exists
       return true;
    }
 
-   fib_route_t fib_route(ip_prefix_t const & prefix) {
+   fib_route_t fib_route(fib_route_key_t const & route_key) {
       // TODO: return route from the status
       fib_route_t route;
       return route;
@@ -81,13 +81,13 @@ fib_handler::fib_handler(fib_mgr *mgr) :
 void fib_handler::on_route_set(fib_route_t const&) {
 }
 
-void fib_handler::on_route_del(ip_prefix_t const &) {
+void fib_handler::on_route_del(fib_route_key_t const &) {
 }
 
 void fib_handler::on_fec_set(fib_fec_t const&) {
 }
 
-void fib_handler::on_fec_del(uint64_t const&) {
+void fib_handler::on_fec_del(fib_fec_key_t const&) {
 }
 
 } // namespace eos

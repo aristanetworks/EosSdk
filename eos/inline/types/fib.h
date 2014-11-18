@@ -6,6 +6,52 @@
 
 namespace eos {
 
+// Default constructor.
+inline fib_route_key_t::fib_route_key_t() :
+      prefix_() {
+}
+
+inline fib_route_key_t::fib_route_key_t(ip_prefix_t const & prefix) :
+      prefix_(prefix) {
+}
+
+inline ip_prefix_t
+fib_route_key_t::prefix() const {
+   return prefix_;
+}
+
+inline void
+fib_route_key_t::prefix_is(ip_prefix_t const & prefix) {
+   prefix_ = prefix;
+}
+
+inline bool
+fib_route_key_t::operator==(fib_route_key_t const & other) const {
+   return prefix_ == other.prefix_;
+}
+
+inline bool
+fib_route_key_t::operator!=(fib_route_key_t const & other) const {
+   return !operator==(other);
+}
+
+inline std::string
+fib_route_key_t::to_string() const {
+   std::ostringstream ss;
+   ss << "fib_route_key_t(";
+   ss << "prefix=" << prefix_.to_string();
+   ss << ")";
+   return ss.str();
+}
+
+inline std::ostream&
+operator<<(std::ostream& os, const fib_route_key_t& obj) {
+   os << obj.to_string();
+   return os;
+}
+
+
+
 inline std::ostream&
 operator<<(std::ostream& os, const fib_route_type_t & enum_val) {
    if (enum_val==ROUTE_TYPE_INVALID) {
@@ -64,21 +110,21 @@ operator<<(std::ostream& os, const fib_route_type_t & enum_val) {
 
 // Default constructor.
 inline fib_route_t::fib_route_t() :
-      prefix_(), preference_(1), metric_(0), route_type_(), fec_id_(0) {
+      route_key_(), preference_(1), metric_(0), route_type_(), fec_id_(0) {
 }
 
-inline fib_route_t::fib_route_t(ip_prefix_t const & prefix) :
-      prefix_(prefix), preference_(1), metric_(0), route_type_(), fec_id_(0) {
+inline fib_route_t::fib_route_t(fib_route_key_t const & route_key) :
+      route_key_(route_key), preference_(1), metric_(0), route_type_(), fec_id_(0) {
 }
 
-inline ip_prefix_t
-fib_route_t::prefix() const {
-   return prefix_;
+inline fib_route_key_t
+fib_route_t::route_key() const {
+   return route_key_;
 }
 
 inline void
-fib_route_t::prefix_is(ip_prefix_t const & prefix) {
-   prefix_ = prefix;
+fib_route_t::route_key_is(fib_route_key_t const & route_key) {
+   route_key_ = route_key;
 }
 
 inline ip_route_preference_t
@@ -123,7 +169,7 @@ fib_route_t::fec_id_is(uint64_t const & fec_id) {
 
 inline bool
 fib_route_t::operator==(fib_route_t const & other) const {
-   return prefix_ == other.prefix_ &&
+   return route_key_ == other.route_key_ &&
           preference_ == other.preference_ &&
           metric_ == other.metric_ &&
           route_type_ == other.route_type_ &&
@@ -139,7 +185,7 @@ inline std::string
 fib_route_t::to_string() const {
    std::ostringstream ss;
    ss << "fib_route_t(";
-   ss << "prefix=" << prefix_.to_string();
+   ss << "route_key=" << route_key_;
    ss << ", preference=" << preference_;
    ss << ", metric=" << metric_;
    ss << ", route_type=" << route_type_;
@@ -150,6 +196,52 @@ fib_route_t::to_string() const {
 
 inline std::ostream&
 operator<<(std::ostream& os, const fib_route_t& obj) {
+   os << obj.to_string();
+   return os;
+}
+
+
+
+// Default constructor.
+inline fib_fec_key_t::fib_fec_key_t() :
+      fec_id_(0) {
+}
+
+inline fib_fec_key_t::fib_fec_key_t(uint64_t const & fec_id) :
+      fec_id_(fec_id) {
+}
+
+inline uint64_t
+fib_fec_key_t::fec_id() const {
+   return fec_id_;
+}
+
+inline void
+fib_fec_key_t::fec_id_is(uint64_t const & fec_id) {
+   fec_id_ = fec_id;
+}
+
+inline bool
+fib_fec_key_t::operator==(fib_fec_key_t const & other) const {
+   return fec_id_ == other.fec_id_;
+}
+
+inline bool
+fib_fec_key_t::operator!=(fib_fec_key_t const & other) const {
+   return !operator==(other);
+}
+
+inline std::string
+fib_fec_key_t::to_string() const {
+   std::ostringstream ss;
+   ss << "fib_fec_key_t(";
+   ss << "fec_id=" << fec_id_;
+   ss << ")";
+   return ss.str();
+}
+
+inline std::ostream&
+operator<<(std::ostream& os, const fib_fec_key_t& obj) {
    os << obj.to_string();
    return os;
 }
@@ -242,21 +334,21 @@ operator<<(std::ostream& os, const fib_fec_type_t & enum_val) {
 
 // Default constructor.
 inline fib_fec_t::fib_fec_t() :
-      fec_id_(0), fec_type_(), nexthop_group_name_(), via_() {
+      fec_key_(), fec_type_(), nexthop_group_name_(), via_() {
 }
 
-inline fib_fec_t::fib_fec_t(uint64_t const & fec_id) :
-      fec_id_(fec_id), fec_type_(), nexthop_group_name_(), via_() {
+inline fib_fec_t::fib_fec_t(fib_fec_key_t const & fec_key) :
+      fec_key_(fec_key), fec_type_(), nexthop_group_name_(), via_() {
 }
 
-inline uint64_t
-fib_fec_t::fec_id() const {
-   return fec_id_;
+inline fib_fec_key_t
+fib_fec_t::fec_key() const {
+   return fec_key_;
 }
 
 inline void
-fib_fec_t::fec_id_is(uint64_t const & fec_id) {
-   fec_id_ = fec_id;
+fib_fec_t::fec_key_is(fib_fec_key_t const & fec_key) {
+   fec_key_ = fec_key;
 }
 
 inline fib_fec_type_t
@@ -303,7 +395,7 @@ inline std::string
 fib_fec_t::to_string() const {
    std::ostringstream ss;
    ss << "fib_fec_t(";
-   ss << "fec_id=" << fec_id_;
+   ss << "fec_key=" << fec_key_;
    ss << ", fec_type=" << fec_type_;
    ss << ", nexthop_group_name='" << nexthop_group_name_ << "'";
    ss << ", via=" <<"'";
