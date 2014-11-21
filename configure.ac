@@ -9,6 +9,28 @@ AC_CONFIG_HEADERS([config.h])
 LT_INIT([disable-static])
 AC_PROG_CXX
 
+# Some old versions of the STL only contain partial support for C++11, and
+# this can lead to puzzling compilation errors.  Try to detect those here
+# and report a more helpful error message.
+AC_CACHE_CHECK([for std::unordered_set::operator==], [eossdk_cv_unordered_set_eq],
+[AC_LANG_PUSH([C++])dnl
+# Detect STL versions that are missing std::unordered_set::operator== (e.g.
+# libstdc++-4.4.7 on CentOS 6.6)
+save_CXXFLAGS=$CXXFLAGS
+CXXFLAGS="$CXXFLAGS -std=gnu++0x"
+AC_COMPILE_IFELSE([AC_LANG_PROGRAM([[
+    #include <unordered_set>
+    std::unordered_set<int> s;
+    bool b = s == s;
+]])], [eossdk_cv_unordered_set_eq=yes], [eossdk_cv_unordered_set_eq=no])
+CXXFLAGS=$save_CXXFLAGS
+AC_LANG_POP([C++])dnl
+])
+if test "x$eossdk_cv_unordered_set_eq" != xyes; then
+   AC_MSG_ERROR([Your version of the STL seems to be missing std::unordered_set::operator==,dnl
+ check config.log for more details])
+fi
+
 AC_ARG_ENABLE([python],
               [AS_HELP_STRING([--enable-python],
                               [compile Python bindings])],
