@@ -11,11 +11,30 @@ class neighbor_table_mgr_impl : public neighbor_table_mgr {
    neighbor_table_mgr_impl() {
    }
 
-   virtual neighbor_entry_t neighbor_entry(intf_id_t intf, ip_addr_t addr) const {
+   virtual neighbor_entry_t neighbor_entry_status(neighbor_key_t const & key) const {
       return neighbor_entry_t();
    }
+
+   virtual void neighbor_entry_set(neighbor_entry_t const & entry) {}
+   virtual void neighbor_entry_del(neighbor_key_t const & key) {}
+
+   virtual neighbor_entry_t neighbor_entry(
+                               neighbor_key_t const & key) const {
+      return neighbor_entry_t();
+   }
+
+
 };
 
 DEFINE_STUB_MGR_CTOR(neighbor_table_mgr)
 
+neighbor_table_handler::neighbor_table_handler(neighbor_table_mgr *mgr) :
+                              base_handler(mgr) {
 }
+
+void neighbor_table_handler::on_neighbor_entry_del(neighbor_key_t const & key) {
+}
+void neighbor_table_handler::on_neighbor_entry_set(neighbor_entry_t const & entry) {
+}
+
+} // end eos namespace
