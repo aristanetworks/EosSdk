@@ -18,12 +18,12 @@ class MyTestAgent(eossdk.AgentHandler, eossdk.FdHandler):
       self.intfMgr_ = intfMgr
       self.intfObj_ = eossdk.IntfId(interfaceName)
       eossdk.AgentHandler.__init__(self, agentMgr)
-      eossdk.FdHandler.__init__(self)  # pylint: disable-msg=W0233
+      eossdk.FdHandler.__init__(self)
       self.eventCount = 0
 
    def on_initialized(self):
       print "Initialized!"
-      self.watch_readable(0, True) # pylint: disable-msg=E1101
+      self.watch_readable(0, True)
       self.intfMgr_.admin_enabled_is(self.intfObj_, True)
       self._printPrompt()
 

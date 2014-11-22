@@ -8,8 +8,6 @@ import sys
 # This is the python version of the HelloWorld.cpp program. See the
 # explanation there, or a more detailed walkthrough at the GitHub wiki.
 
-# Pylint does not like SWIG's overriden handlers
-# pylint: disable-msg=W0221 
 
 class HelloWorldAgent(eossdk.AgentHandler):
    def __init__(self, sdk):
@@ -37,12 +35,12 @@ class HelloWorldAgent(eossdk.AgentHandler):
             # Time for some social networking!
             self.tracer.trace3("Saying hi to %s" % value)
             self.agentMgr.status_set("greeting", "Hello %s!" % value)
-   
+
    def on_agent_enabled(self, enabled):
       if not enabled:
          self.tracer.trace0("Shutting down")
          self.agentMgr.status_set("greeting", "Adios!")
-         self.agentMgr.agent_shutdown_complete_is(True)      
+         self.agentMgr.agent_shutdown_complete_is(True)
 
 if __name__ == "__main__":
    sdk_ = eossdk.Sdk()

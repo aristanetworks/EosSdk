@@ -9,9 +9,6 @@ import os
 import sys
 
 
-# pylint: disable-msg=W0233
-# pylint: disable-msg=E1101
-
 def createMatch(inputIntfs=None,
                 ethSrc=None,
                 ethSrcMask="ff:ff:ff:ff:ff:ff",

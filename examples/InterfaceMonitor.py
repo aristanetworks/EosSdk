@@ -14,8 +14,6 @@ import time
 # agent will update the interface's description with a timestamp of
 # when the interface changed.
 
-# pylint: disable-msg=W0233
-# pylint: disable-msg=E1101
 
 class InterfaceMonitor(eossdk.AgentHandler, eossdk.IntfHandler):
    def __init__(self, intfMgr, agentMgr):
