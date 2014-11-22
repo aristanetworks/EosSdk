@@ -17,9 +17,6 @@ LISTEN_BACKLOG = 5
 MAX_BUF_SIZE = 1024
 DELIMETER = "EOF"
 
-# Pylint is silly about the eossdk and socket modules:
-# pylint: disable-msg=E1101
-# pylint: disable-msg=W0233
 
 class EchoBot(eossdk.TimeoutHandler, eossdk.FdHandler):
    def __init__(self, timeoutMgr):
