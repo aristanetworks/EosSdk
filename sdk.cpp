@@ -12,6 +12,13 @@ static char DEFAULT_AGENT_PROCESS_NAME[] = "TestAgent";
 
 namespace eos {
 
+sdk_scoped_lock::sdk_scoped_lock() {
+}
+
+sdk_scoped_lock::~sdk_scoped_lock() {
+}
+
+
 sdk::sdk()
    : acl_mgr_(0),
      agent_mgr_(0),
