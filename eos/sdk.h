@@ -34,6 +34,39 @@ class policy_map_mgr;
 class system_mgr;
 class timeout_mgr;
 
+
+/**
+ * The following lock lets multiple threads use the SDK
+ * simultaneously. This lock uses the RAII idiom; in multithreaded
+ * environments, instantiate an eos::sdk_scoped_lock before using any
+ * eos::sdk features. Users do not need to grab a lock if they only
+ * have one thread, or if they perform all operations on the SDK from
+ * the thread which owns the `main_loop`, as the SDK grabs the lock
+ * before calling any *_handler callbacks and before performing any
+ * internal bookkeeping. Do note that the lock is not re-entrant, so
+ * attempting to grab the lock twice will cause a deadlock. 
+ * Example usage:
+ *
+ *  Thread 1:
+ *    running sdk.main_loop()
+ *
+ *  Thread 2:
+ *    { // Start a new scope to hold the lock
+ *      eos::sdk_scoped_lock ssl;
+ *      sdk.get_agent_mgr()->status_set("Look", "I can interact with Sysdb!");
+ *    } // End the scope, causing the sdk_scoped_lock to be destructed and released
+ *
+ */
+class EOS_SDK_PUBLIC sdk_scoped_lock {
+  public:
+   sdk_scoped_lock();
+   ~sdk_scoped_lock();
+
+  private:
+   void * lock;
+};
+
+
 /**
  * Manages the differents managers of the SDK. One manager of each
  * type can be linked to a SDK object.
