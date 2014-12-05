@@ -15,6 +15,7 @@
 #include <eos/types/intf.h>
 
 /**
+ * @file
  * Base interface types.
  *
  * A base interface contains non-media or interface type specific information.
