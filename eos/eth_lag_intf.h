@@ -147,7 +147,7 @@ class EOS_SDK_PUBLIC eth_lag_intf_mgr {
    virtual eth_lag_intf_t eth_lag_intf(intf_id_t eth_lag_intf_id) const = 0;
    /**
     * This API deletes an LAG interface, it will simply return if the specified
-    * LAG interface is not in existance.
+    * LAG interface is not in existence.
     */
    virtual void eth_lag_intf_del( intf_id_t eth_lag_intf_id) = 0;
    /**

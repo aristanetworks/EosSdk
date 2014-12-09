@@ -94,7 +94,7 @@ class EOS_SDK_PUBLIC intf_mgr : public base_mgr<intf_handler, intf_id_t> {
     * Creates a copy of the passed in string description.
     */
    virtual void description_is(intf_id_t, char const *) = 0;
-   /// Inspects the curren operational status of the given interface.
+   /// Inspects the current operational status of the given interface.
    virtual oper_status_t oper_status(intf_id_t) const = 0;
 
  protected:

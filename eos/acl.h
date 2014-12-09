@@ -22,7 +22,7 @@ class acl_mgr;
 /**
  * An ACL handler.
  *
- * Derive from this class to react to ACL hardware synchronisation events.
+ * Derive from this class to react to ACL hardware synchronization events.
  */
 class EOS_SDK_PUBLIC acl_handler : public base_handler<acl_mgr, acl_handler> {
  public:
@@ -38,7 +38,7 @@ class EOS_SDK_PUBLIC acl_handler : public base_handler<acl_mgr, acl_handler> {
    void watch_all_acls(bool);
 
    /**
-    * Called upon hardware succesfully committing all pending transactions.
+    * Called upon hardware successfully committing all pending transactions.
     *
     * It may be called more than once for a single transaction, or
     * only once for a whole bunch of separate ACL updates. In fact, if
@@ -48,7 +48,7 @@ class EOS_SDK_PUBLIC acl_handler : public base_handler<acl_mgr, acl_handler> {
    virtual void on_acl_sync();
 
    /**
-    * Called upon a problem stopping ACL configuration from being commited.
+    * Called upon a problem stopping ACL configuration from being committed.
     *
     * This indicates that the ACL config (as stored in Sysdb) cannot
     * be loaded into hardware, ever. It must be changed in some way to
@@ -107,7 +107,7 @@ class EOS_SDK_PUBLIC acl_rule_eth_iter_t : public iter_base<acl_rule_eth_entry_t
  * This manager provides access to current ACL configuration,
  * creation, modification and deletion of ACLs, and functions to
  * commit changes, apply ACLs to interfaces as well as manage
- * fragements mode and enabling counters.
+ * fragments mode and enabling counters.
  *
  * When managing ACLs, you provide give an ACL key to modify, a
  * "sequence number" which starts at 1 and goes up to MAXINT, and for
@@ -116,7 +116,7 @@ class EOS_SDK_PUBLIC acl_rule_eth_iter_t : public iter_base<acl_rule_eth_entry_t
  * have started setting rules, you must call acl_commit() prior to any
  * calls to acl_apply(), else the manager will panic(). Note that
  * extremely large numbers of ACLs or rules per ACL can result in
- * undefined behaviour, including a switch reload.
+ * undefined behavior, including a switch reload.
  */
 class EOS_SDK_PUBLIC acl_mgr : public base_mgr<acl_handler> {
  public:
@@ -132,7 +132,7 @@ class EOS_SDK_PUBLIC acl_mgr : public base_mgr<acl_handler> {
    virtual acl_rule_eth_iter_t acl_rule_eth_iter(acl_key_t const &) const = 0;
 
    /**
-    * Configuration ACL existance test.
+    * Configuration ACL existence test.
     *
     * @return true if an ACL with the same name and type (i.e., key)
     * exists in the configuration, else false.
@@ -197,7 +197,7 @@ class EOS_SDK_PUBLIC acl_mgr : public base_mgr<acl_handler> {
    /**
     * Deletes the ACL.
     *
-    * Removes all rules and unapplies from all
+    * Removes all rules and removes the ACL from all
     * interfaces. Any pending changes to the ACL are discarded.  Is
     * effective immediately (no commit or commit notification).
     */

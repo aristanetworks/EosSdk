@@ -31,7 +31,7 @@ class EOS_SDK_PUBLIC flow_handler : public base_handler<directflow_mgr,
    /**
     * Registers this class to receive updates on changes to
     * flow state. Expects a boolean signifying whether notifications
-    * should be proagated to this instance or not.
+    * should be propagated to this instance or not.
     */
    void watch_all_flows(bool);
 
