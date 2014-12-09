@@ -1,0 +1,26 @@
+# This file integrates our stubs with the Travis CI continuous
+# integration system.
+
+language: cpp
+compiler:
+  - gcc
+
+env:
+  - GCC_VERSION= # use travis's default GCC 4.6
+
+before_install:
+  - mkdir -p autogen
+  - sudo apt-get update -qq
+
+install:
+  - if [ -n "$GCC_VERSION" ] sudo apt-get install -qq gcc-$GCC_VERSION g++-$GCC_VERSION
+  - if [ -n "$GCC_VERSION" ] sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-$GCC_VERSION 90
+  - if [ -n "$GCC_VERSION" ] sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-$GCC_VERSION 90
+  - sudo apt-get install -y g++-multilib libtool
+
+script: ./build.sh && make install
+
+after_failure:
+  - echo "Build failed! Output of ./config.log"
+  - cat config.log
+  - echo "---------"
