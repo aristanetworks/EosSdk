@@ -1,0 +1,15 @@
+eth_lag_intf module reference
+=============================
+
+
+
+
+.. doxygenfile:: eos/eth_lag_intf.h
+   :project: eossdk
+
+eth_lag_intf type definitions
+=============================
+
+.. doxygenfile:: eos/types/eth_lag_intf.h
+   :project: eossdk
+

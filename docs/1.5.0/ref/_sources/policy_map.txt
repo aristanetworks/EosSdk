@@ -1,0 +1,15 @@
+policy_map module reference
+===========================
+
+
+
+
+.. doxygenfile:: eos/policy_map.h
+   :project: eossdk
+
+policy_map type definitions
+===========================
+
+.. doxygenfile:: eos/types/policy_map.h
+   :project: eossdk
+

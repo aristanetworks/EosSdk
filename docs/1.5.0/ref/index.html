@@ -1,0 +1,142 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Arista EOS SDK reference guide &mdash; Arista EOS SDK 1.5.0 reference</title>
+    
+    <link rel="stylesheet" href="_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/breathe.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '1.5.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="Arista EOS SDK 1.5.0 reference" href="#" />
+    <link rel="next" title="acl module reference" href="acl.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="acl.html" title="acl module reference"
+             accesskey="N">next</a> |</li>
+        <li><a href="#">Arista EOS SDK 1.5.0 reference</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="arista-eos-sdk-reference-guide">
+<h1>Arista EOS SDK reference guide<a class="headerlink" href="#arista-eos-sdk-reference-guide" title="Permalink to this headline">¶</a></h1>
+<p>Index:</p>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="acl.html">acl module reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="acl.html#acl-type-definitions">acl type definitions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="aresolve.html">aresolve module reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="aresolve.html#aresolve-type-definitions">aresolve type definitions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="class_map.html">class_map module reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="class_map.html#class-map-type-definitions">class_map type definitions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="decap_group.html">decap_group module reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="decap_group.html#decap-group-type-definitions">decap_group type definitions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="directflow.html">directflow module reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="directflow.html#directflow-type-definitions">directflow type definitions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="eth.html">eth module reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="eth.html#eth-type-definitions">eth type definitions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="eth_intf.html">eth_intf module reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="eth_intf.html#eth-intf-type-definitions">eth_intf type definitions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="eth_lag_intf.html">eth_lag_intf module reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="eth_lag_intf.html#eth-lag-intf-type-definitions">eth_lag_intf type definitions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="eth_phy_intf.html">eth_phy_intf module reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="eth_phy_intf.html#eth-phy-intf-type-definitions">eth_phy_intf type definitions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="fib.html">fib module reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="fib.html#fib-type-definitions">fib type definitions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="intf.html">intf module reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="intf.html#intf-type-definitions">intf type definitions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ip.html">ip module reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ip.html#ip-type-definitions">ip type definitions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ip_route.html">ip_route module reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="ip_route.html#ip-route-type-definitions">ip_route type definitions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mac_table.html">mac_table module reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mac_table.html#mac-table-type-definitions">mac_table type definitions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mlag.html">mlag module reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mlag.html#mlag-type-definitions">mlag type definitions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mpls.html">mpls module reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mpls.html#mpls-type-definitions">mpls type definitions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mpls_route.html">mpls_route module reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="mpls_route.html#mpls-route-type-definitions">mpls_route type definitions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="neighbor_table.html">neighbor_table module reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="neighbor_table.html#neighbor-table-type-definitions">neighbor_table type definitions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="nexthop_group.html">nexthop_group module reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="nexthop_group.html#nexthop-group-type-definitions">nexthop_group type definitions</a></li>
+<li class="toctree-l1"><a class="reference internal" href="policy_map.html">policy_map module reference</a></li>
+<li class="toctree-l1"><a class="reference internal" href="policy_map.html#policy-map-type-definitions">policy_map type definitions</a></li>
+</ul>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h4>Next topic</h4>
+  <p class="topless"><a href="acl.html"
+                        title="next chapter">acl module reference</a></p>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="acl.html" title="acl module reference"
+             >next</a> |</li>
+        <li><a href="#">Arista EOS SDK 1.5.0 reference</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2014, Arista Networks.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

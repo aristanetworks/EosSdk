@@ -1,0 +1,11 @@
+
+Arista EOS SDK reference guide
+==============================
+
+Index:
+
+.. toctree::
+   :maxdepth: 1
+   :glob:
+
+   **

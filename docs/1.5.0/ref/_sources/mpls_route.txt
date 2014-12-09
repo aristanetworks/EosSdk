@@ -1,0 +1,15 @@
+mpls_route module reference
+===========================
+
+
+
+
+.. doxygenfile:: eos/mpls_route.h
+   :project: eossdk
+
+mpls_route type definitions
+===========================
+
+.. doxygenfile:: eos/types/mpls_route.h
+   :project: eossdk
+

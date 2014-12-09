@@ -1,0 +1,15 @@
+eth_intf module reference
+=========================
+
+
+
+
+.. doxygenfile:: eos/eth_intf.h
+   :project: eossdk
+
+eth_intf type definitions
+=========================
+
+.. doxygenfile:: eos/types/eth_intf.h
+   :project: eossdk
+

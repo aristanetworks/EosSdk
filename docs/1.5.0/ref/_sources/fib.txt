@@ -1,0 +1,15 @@
+fib module reference
+====================
+
+
+
+
+.. doxygenfile:: eos/fib.h
+   :project: eossdk
+
+fib type definitions
+====================
+
+.. doxygenfile:: eos/types/fib.h
+   :project: eossdk
+

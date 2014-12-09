@@ -1,0 +1,15 @@
+neighbor_table module reference
+===============================
+
+
+
+
+.. doxygenfile:: eos/neighbor_table.h
+   :project: eossdk
+
+neighbor_table type definitions
+===============================
+
+.. doxygenfile:: eos/types/neighbor_table.h
+   :project: eossdk
+

@@ -1,0 +1,15 @@
+class_map module reference
+==========================
+
+
+
+
+.. doxygenfile:: eos/class_map.h
+   :project: eossdk
+
+class_map type definitions
+==========================
+
+.. doxygenfile:: eos/types/class_map.h
+   :project: eossdk
+

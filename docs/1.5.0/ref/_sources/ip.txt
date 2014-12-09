@@ -1,0 +1,15 @@
+ip module reference
+===================
+
+
+
+
+.. doxygenfile:: eos/ip.h
+   :project: eossdk
+
+ip type definitions
+===================
+
+.. doxygenfile:: eos/types/ip.h
+   :project: eossdk
+

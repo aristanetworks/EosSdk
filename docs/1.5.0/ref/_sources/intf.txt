@@ -1,0 +1,15 @@
+intf module reference
+=====================
+
+
+
+
+.. doxygenfile:: eos/intf.h
+   :project: eossdk
+
+intf type definitions
+=====================
+
+.. doxygenfile:: eos/types/intf.h
+   :project: eossdk
+

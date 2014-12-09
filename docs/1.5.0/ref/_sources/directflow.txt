@@ -1,0 +1,15 @@
+directflow module reference
+===========================
+
+
+
+
+.. doxygenfile:: eos/directflow.h
+   :project: eossdk
+
+directflow type definitions
+===========================
+
+.. doxygenfile:: eos/types/directflow.h
+   :project: eossdk
+

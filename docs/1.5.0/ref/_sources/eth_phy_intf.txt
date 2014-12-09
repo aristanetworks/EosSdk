@@ -1,0 +1,15 @@
+eth_phy_intf module reference
+=============================
+
+
+
+
+.. doxygenfile:: eos/eth_phy_intf.h
+   :project: eossdk
+
+eth_phy_intf type definitions
+=============================
+
+.. doxygenfile:: eos/types/eth_phy_intf.h
+   :project: eossdk
+

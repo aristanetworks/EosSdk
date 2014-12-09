@@ -1,0 +1,15 @@
+mac_table module reference
+==========================
+
+
+
+
+.. doxygenfile:: eos/mac_table.h
+   :project: eossdk
+
+mac_table type definitions
+==========================
+
+.. doxygenfile:: eos/types/mac_table.h
+   :project: eossdk
+

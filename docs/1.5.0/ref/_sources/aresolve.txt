@@ -1,0 +1,15 @@
+aresolve module reference
+=========================
+
+
+
+
+.. doxygenfile:: eos/aresolve.h
+   :project: eossdk
+
+aresolve type definitions
+=========================
+
+.. doxygenfile:: eos/types/aresolve.h
+   :project: eossdk
+

@@ -1,0 +1,237 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>mac_table module reference &mdash; Arista EOS SDK 1.5.0 reference</title>
+    
+    <link rel="stylesheet" href="_static/nature.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/breathe.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '1.5.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="Arista EOS SDK 1.5.0 reference" href="index.html" />
+    <link rel="next" title="mlag module reference" href="mlag.html" />
+    <link rel="prev" title="ip_route module reference" href="ip_route.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="mlag.html" title="mlag module reference"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="ip_route.html" title="ip_route module reference"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">Arista EOS SDK 1.5.0 reference</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="mac-table-module-reference">
+<h1>mac_table module reference<a class="headerlink" href="#mac-table-module-reference" title="Permalink to this headline">¶</a></h1>
+<dl class="namespace">
+<dt>
+<span class="target" id="eossdknamespaceeos"></span><em>namespace</em> <tt class="descname">eos</tt></dt>
+<dd><dl class="class">
+<dt>
+<span class="target" id="eossdkclasseos_1_1mac__table__mgr"></span><em>class</em> <tt class="descname">mac_table_mgr</tt></dt>
+<dd><em>#include &lt;mac_table.h&gt;</em><p>Manager for the MAC address table. </p>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1mac__table__mgr_1a39f32fde4ecba77d67f2b479957ee474"></span>virtual <tt class="descname">~mac_table_mgr</tt><big>(</big><big>)</big></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1mac__table__mgr_1a9a5f0739a0d56e048bce06f85a9aa011"></span>virtual <a class="reference internal" href="#eossdkclasseos_1_1mac__entry__t"><em>mac_entry_t</em></a> <tt class="descname">mac_entry</tt><big>(</big>vlan_id_t <em>vlan</em>, <a class="reference internal" href="eth.html#eossdkclasseos_1_1eth__addr__t"><em>eth_addr_t</em></a> <em>mac</em><big>)</big> const = 0</dt>
+<dd><p>Returns the MAC table entry for the given VLAN and MAC address. If the given MAC is not found, or if the VLAN queried doesn&#8217;t exist, an empty <a class="reference internal" href="#eossdkclasseos_1_1mac__entry__t"><em>mac_entry_t</em></a> is returned (use the operator!() to easily determine whether that is the case). <dl class="docutils">
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><tt class="first docutils literal"><span class="pre">vlan</span></tt> - <p>The VLAN in which to perform the look up. </p>
+</li>
+<li><tt class="first docutils literal"><span class="pre">mac</span></tt> - <p>The MAC address to look up. </p>
+</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Protected Functions</p>
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1mac__table__mgr_1a81186350b7bf7fb56b53f6716b8b5fd5"></span><tt class="descname">mac_table_mgr</tt><big>(</big><big>)</big></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Private Members</p>
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1mac__table__mgr_1a61a6213e9455137cbacbdc4692fb2e21"></span><tt class="descname">mac_table_mgr</tt></dt>
+<dd></dd></dl>
+
+</div>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="section" id="mac-table-type-definitions">
+<h1>mac_table type definitions<a class="headerlink" href="#mac-table-type-definitions" title="Permalink to this headline">¶</a></h1>
+<dl class="namespace">
+<dt>
+<span class="target" id="eossdknamespaceeos"></span><em>namespace</em> <tt class="descname">eos</tt></dt>
+<dd><dl class="class">
+<dt>
+<span class="target" id="eossdkclasseos_1_1mac__entry__t"></span><em>class</em> <tt class="descname">mac_entry_t</tt></dt>
+<dd><em>#include &lt;mac_table.h&gt;</em><p>An entry from the MAC address table. TODO: add entry type, number of moves, last move time. </p>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1mac__entry__t_1a41c2b44f87e4e573e7e59488db06d8ec"></span><tt class="descname">mac_entry_t</tt><big>(</big><big>)</big></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1mac__entry__t_1af9e0539ca354d2d3f6c8abe84d7f3612"></span><tt class="descname">mac_entry_t</tt><big>(</big><a class="reference internal" href="eth.html#eossdkclasseos_1_1eth__addr__t"><em>eth_addr_t</em></a> <em>eth_addr</em>, <a class="reference internal" href="intf.html#eossdkclasseos_1_1intf__id__t"><em>intf_id_t</em></a> <em>intf</em><big>)</big></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1mac__entry__t_1adbe06cb485507fb6d7826452677f7b06"></span><a class="reference internal" href="eth.html#eossdkclasseos_1_1eth__addr__t"><em>eth_addr_t</em></a> <tt class="descname">eth_addr</tt><big>(</big><big>)</big> const</dt>
+<dd><p>Getter for &#8216;eth_addr&#8217;: the MAC address that was learned. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1mac__entry__t_1af0e965b0818f19febbdb99ee0c1b97f9"></span><a class="reference internal" href="intf.html#eossdkclasseos_1_1intf__id__t"><em>intf_id_t</em></a> <tt class="descname">intf</tt><big>(</big><big>)</big> const</dt>
+<dd><p>Getter for &#8216;intf&#8217;: the interface from which the MAC address was learned. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1mac__entry__t_1a09edaacfdea0e9231a908e6d16df6bb4"></span>bool <tt class="descname">operator!</tt><big>(</big><big>)</big> const</dt>
+<dd><p>Non-existent entries are effectively false (so this returns true). </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1mac__entry__t_1a277a2347bd1b2683295e511c9ca6557f"></span>std::string <tt class="descname">to_string</tt><big>(</big><big>)</big> const</dt>
+<dd><p>Returns a string representation of the current object&#8217;s values. </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Private Members</p>
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1mac__entry__t_1a07e6f9a67e66a533b3e405bccae914a0"></span><a class="reference internal" href="eth.html#eossdkclasseos_1_1eth__addr__t"><em>eth_addr_t</em></a> <tt class="descname">eth_addr_</tt></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1mac__entry__t_1adc3eb798d83d28ad86dd074339929637"></span><a class="reference internal" href="intf.html#eossdkclasseos_1_1intf__id__t"><em>intf_id_t</em></a> <tt class="descname">intf_</tt></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Friends</p>
+<dl class="friend">
+<dt>
+<span class="target" id="eossdkclasseos_1_1mac__entry__t_1ac9837cda6d1839eb6096ab023be18b20"></span>friend std::ostream &amp; <tt class="descname">operator&lt;&lt;</tt></dt>
+<dd><p>A utility stream operator that adds a string representation of <a class="reference internal" href="#eossdkclasseos_1_1mac__entry__t"><em>mac_entry_t</em></a> to the ostream. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">mac_table module reference</a></li>
+<li><a class="reference internal" href="#mac-table-type-definitions">mac_table type definitions</a></li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="ip_route.html"
+                        title="previous chapter">ip_route module reference</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="mlag.html"
+                        title="next chapter">mlag module reference</a></p>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="mlag.html" title="mlag module reference"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="ip_route.html" title="ip_route module reference"
+             >previous</a> |</li>
+        <li><a href="index.html">Arista EOS SDK 1.5.0 reference</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2014, Arista Networks.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

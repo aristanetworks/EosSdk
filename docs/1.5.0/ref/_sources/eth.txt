@@ -1,0 +1,15 @@
+eth module reference
+====================
+
+
+
+
+.. doxygenfile:: eos/eth.h
+   :project: eossdk
+
+eth type definitions
+====================
+
+.. doxygenfile:: eos/types/eth.h
+   :project: eossdk
+

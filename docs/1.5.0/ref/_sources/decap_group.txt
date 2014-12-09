@@ -1,0 +1,15 @@
+decap_group module reference
+============================
+
+
+
+
+.. doxygenfile:: eos/decap_group.h
+   :project: eossdk
+
+decap_group type definitions
+============================
+
+.. doxygenfile:: eos/types/decap_group.h
+   :project: eossdk
+

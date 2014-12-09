@@ -1,0 +1,15 @@
+nexthop_group module reference
+==============================
+
+
+
+
+.. doxygenfile:: eos/nexthop_group.h
+   :project: eossdk
+
+nexthop_group type definitions
+==============================
+
+.. doxygenfile:: eos/types/nexthop_group.h
+   :project: eossdk
+

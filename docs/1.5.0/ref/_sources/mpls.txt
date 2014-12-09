@@ -1,0 +1,15 @@
+mpls module reference
+=====================
+
+
+
+
+.. doxygenfile:: eos/mpls.h
+   :project: eossdk
+
+mpls type definitions
+=====================
+
+.. doxygenfile:: eos/types/mpls.h
+   :project: eossdk
+

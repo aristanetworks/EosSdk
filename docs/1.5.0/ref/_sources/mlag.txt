@@ -1,0 +1,15 @@
+mlag module reference
+=====================
+
+
+
+
+.. doxygenfile:: eos/mlag.h
+   :project: eossdk
+
+mlag type definitions
+=====================
+
+.. doxygenfile:: eos/types/mlag.h
+   :project: eossdk
+

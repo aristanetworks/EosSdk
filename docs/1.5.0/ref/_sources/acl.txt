@@ -1,0 +1,15 @@
+acl module reference
+====================
+
+
+
+
+.. doxygenfile:: eos/acl.h
+   :project: eossdk
+
+acl type definitions
+====================
+
+.. doxygenfile:: eos/types/acl.h
+   :project: eossdk
+
