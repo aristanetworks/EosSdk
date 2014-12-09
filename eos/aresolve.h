@@ -134,7 +134,7 @@ class EOS_SDK_PUBLIC aresolve_mgr : public base_mgr<aresolve_handler, std::strin
     * Returns the long timer, or seconds between repeated DNS queries.
     *
     * You will receive at most one notification per DNS query (watched
-    * host) every aresolve_long_time() number of sceonds. (default: 300s)
+    * host) every aresolve_long_time() number of seconds. (default: 300s)
     */
    virtual uint32_t aresolve_long_time() const = 0;
 

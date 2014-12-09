@@ -39,7 +39,7 @@ class EOS_SDK_PUBLIC class_map_iter_t : public iter_base<class_map_key_t,
 /**
  * EOS class map manager.
  *
- * This manager provides access to EOS traffic classifers, or "class
+ * This manager provides access to EOS traffic classifiers, or "class
  * maps". Class maps are referred to by policy maps (policy_map.h) to classify
  * traffic that should be subject to the policy's actions.
  */

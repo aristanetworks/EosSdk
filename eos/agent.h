@@ -15,7 +15,7 @@
  * EOS Agent handler and agent loop management.
  *
  * The agent_handler and agent_mgr provide a means to manage the agent
- * process lifecycle as managed by EOS' ProcMgr/Launcher
+ * process life-cycle as managed by EOS' ProcMgr/Launcher
  * infrastructure, including any agent specific cleanup that must be
  * performed prior to ProcMgr terminating the agent when it is disabled.
  *
@@ -73,7 +73,7 @@ namespace eos {
 class agent_mgr;
 
 /**
- * The agent_handler class handles events in the agent's lifecycle.
+ * The agent_handler class handles events in the agent's life-cycle.
  */
 class EOS_SDK_PUBLIC agent_handler : public base_handler<agent_mgr, agent_handler> {
  public:

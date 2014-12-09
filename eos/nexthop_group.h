@@ -19,7 +19,7 @@
  *
  * Nexthop entries must be manually monitored and maintained by the
  * agent. If a tunnel destination (aka nexthop) becomes unreachable,
- * traffic hashed to that entry will be blackholed in the network
+ * traffic hashed to that entry will be black-holed in the network
  * until a working entry is set in that index of the nexthop group, or
  * the entry is deleted.
  *

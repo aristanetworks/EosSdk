@@ -31,7 +31,7 @@ class EOS_SDK_PUBLIC eth_intf_handler : public base_handler<eth_intf_mgr,
    /**
     * Registers to receive updates on changes to the interface.
     *
-    * @param bool Signifyies whether notifications should be
+    * @param bool Signifies whether notifications should be
     * propagated to this handler instance or not.
     */
    void watch_all_eth_intfs(bool);
@@ -39,8 +39,8 @@ class EOS_SDK_PUBLIC eth_intf_handler : public base_handler<eth_intf_mgr,
   /**
     * Registers this class to receive change updates on the given interface.
     *
-    * @param intf_id_t Signifyies which interface to subscribe to.
-    * @param bool Signifyies whether notifications should be
+    * @param intf_id_t Signifies which interface to subscribe to.
+    * @param bool Signifies whether notifications should be
     * propagated to this handler instance or not.
     */
    void watch_eth_intf(intf_id_t, bool);

@@ -68,7 +68,7 @@ class EOS_SDK_PUBLIC sdk_scoped_lock {
 
 
 /**
- * Manages the differents managers of the SDK. One manager of each
+ * Manages the different managers of the SDK. One manager of each
  * type can be linked to a SDK object.
  *
  * As managers must be initialized at the beginning of the program, the init_*_mgr()

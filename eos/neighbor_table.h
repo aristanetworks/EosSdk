@@ -53,7 +53,7 @@ class EOS_SDK_PUBLIC neighbor_table_handler :
  * off of an L3 interface (aka the ARP table for IPv4 addresses and the Neighbor
  * Discovery table for IPv6 addresses). It also provides APIs to delete/add v4
  * static ARP entry and v6 static neighbor table entries.
-*/
+ */
 class EOS_SDK_PUBLIC neighbor_table_mgr : public base_mgr<neighbor_table_handler> {
  public:
    virtual ~neighbor_table_mgr();
@@ -65,9 +65,9 @@ class EOS_SDK_PUBLIC neighbor_table_mgr : public base_mgr<neighbor_table_handler
                                neighbor_key_t const & key) const = 0;
 
    /**
-    * Programmatically speciy neighbor table entries.
+    * Programmatically specify neighbor table entries.
     *
-    * Note "intf_id" is needed only for v6 case, since the ip/mac pair may not 
+    * Note "intf_id" is needed only for v6 case, since the IP/MAC pair may not 
     * be unique. It's not needed for v4 case.
     */
    virtual void neighbor_entry_set(neighbor_entry_t const & entry) = 0;

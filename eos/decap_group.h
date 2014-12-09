@@ -22,7 +22,7 @@
  *
  * By configuring a "decap group", the switch will decapsulate traffic
  * matching the specified outer (tunnel) header destination IP address
- * and IP protocol. Presnently only GRE traffic (protocol 47) is
+ * and IP protocol. Presently only GRE traffic (protocol 47) is
  * supported by decap groups. Traffic arriving at the switch matching
  * the group's parameters will be decapsulated and forwarded normally
  * based on the inner protocol headers.
