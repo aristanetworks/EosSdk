@@ -39,7 +39,7 @@
  * ratio). For a usage of a nexthop group with policy routing, see the
  * policy_map.h file.
  *
- * @code{.cpp}
+ * @code
  *   eos::nexthop_group_t nhg("nhg1", eos::NEXTHOP_GROUP_GRE);
  *   // Specify two destinations (nexthop group entries) for the traffic
  *   eos::nexthop_group_entry_t nhe1(eos::ip_addr_t("172.12.1.1"));
