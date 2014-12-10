@@ -1,58 +1,6 @@
 // Copyright (c) 2013 Arista Networks, Inc.  All rights reserved.
 // Arista Networks, Inc. Confidential and Proprietary.
 
-/**
- * @file
- * Access Control List (ACL) management module.
- *
- * In EOS, an ACL is a collection of rules ordered by a sequence
- * number. Each rule defines some filter criteria to match and an
- * action determining whether matching traffic will be considered by
- * the ACL.
- *
- * ACLs are defined to match Ethernet, IPv4 or IPv6 headers and can be
- * used with a variety of EOS features, including traffic filters on
- * interfaces (supported by this module) and as traffic classifiers
- * for class maps (eos/class_map.h).
- *
- * This module offers an ACL manager, used to define ACLs in the
- * system configuration and to apply them as traffic filters to
- * network interfaces.
- *
- * To react to the status of traffic filter application, an ACL
- * handler is also provided with callback handlers you can implement
- * to react to the ACL programming status on error or success.
- *
- * Here's an example of the basic workflow for defining and
- * configuring an ACL, then applying it to Ethernet1:
- *
- * @code
- * #include <eos/acl.h>
- * #include <eos/ip.h>
- *
- * // The result of eos::sdk::get_acl_mgr() is in variable
- * // acl_mgr_ within this example.
- *
- * // Deny all web traffic originating at srcaddr
- * eos::ip_addr_mask_t srcaddr(eos::ip_addr_t("192.0.2.1"), 32);
- * eos::ip_addr_mask_t dstaddr(eos::ip_addr_t("10.0.0.0"), 8);
- * eos::acl_key_t acl_key("name_of_acl", eos::ACL_TYPE_IPV4);
- * eos::acl_rule_ip_t rule1;
- *
- * rule1.source_addr_is(srcaddr);
- * rule1.destination_addr_is(dstaddr);
- * rule1.source_port_is(80);
- * rule1.action_is(eos::ACL_DENY);
- *
- * // Configure the ACL and commit it to current configuration
- * acl_mgr_->acl_rule_set(acl_key, 1, rule1);
- * acl_mgr_->acl_commit();
- *
- * // Now apply the ACL for traffic filtering on Ethernet1 inbound
- * acl_mgr_->acl_apply(acl_key, eos::intf_id_t("Ethernet1"), eos::ACL_IN, true);
- * @endcode
- */
-
 #ifndef EOS_ACL_H
 #define EOS_ACL_H
 

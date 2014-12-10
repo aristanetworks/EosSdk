@@ -1,20 +1,20 @@
-// Copyright (c) 2014 Arista Networks, Inc.  All rights reserved.
-// Arista Networks, Inc. Confidential and Proprietary.
-
 /**
  * @file
- * The neighbor_table module manages IP/MAC mapping tables, including
- * IPv4 ARP table and IPv6 neighbor table.
+ * The neighbor_table module manages ip/mac mapping tables, including IPV4 ARP table
+ * and IPV6 neighbor table.
  *
- * This module provides APIs to create and delete static IPv4/IPv6
- * entries. It also provides APIs to query the configured static
- * entries and the learned (both static/dynamic) entries on the system
- * from IPv4 ARP table and IPv6 neighbor table.
+ * This module provides APIs to create and delete static IPV4/IPV6 entries. It also
+ * provides APIs to query the configured static entries and the learned
+ * (both static/dynamic) entries on the system from IPV4 ARP table and IPV6 neighbor
+ * table.
  *
- * Two handler APIs are provided to allow 3rd party agents to react to
- * the addition and deletion of entries in the learned ARP table or
- * neighbor table on the system.
+ * Two handler APIs are provided to allow 3rd party agents to react to the addition
+ * and deletion of entries in the learned ARP table or neighbor table on the system.
  */
+
+
+// Copyright (c) 2014 Arista Networks, Inc.  All rights reserved.
+// Arista Networks, Inc. Confidential and Proprietary.
 
 #ifndef EOS_NEIGHBOR_TABLE_H
 #define EOS_NEIGHBOR_TABLE_H
@@ -34,7 +34,7 @@ class neighbor_table_mgr;
  * The neighbor table handler.
  *
  * This class provides handler APIs to react to neighbor table entry deletion
- * and addition. It works for both the v4 ARP table and v6 neighbor table.
+ * and addition. It works for both v4 ARP table and v6 neighbor table.
  */
 class EOS_SDK_PUBLIC neighbor_table_handler :
               public base_handler<neighbor_table_mgr, neighbor_table_handler> {

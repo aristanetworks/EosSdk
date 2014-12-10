@@ -1,19 +1,6 @@
 // Copyright (c) 2014 Arista Networks, Inc.  All rights reserved.
 // Arista Networks, Inc. Confidential and Proprietary.
 
-/**
- * @file
- * DirectFlow management and status module
- *
- * DirectFlow is a software feature that allows OpenFlow-like rules to
- * be programmed in switch hardware manually. Because a DirectFlow
- * enabled switch allows normal forwarding features to operate, it
- * gives operators a reliable way of building for the exceptional
- * "just this one feature" parts of their network in a flexible
- * manner. This module allows for the management of DirectFlow
- * configuration as well as reactions to changes in status of flows.
- */
-
 #ifndef EOS_DIRECTFLOW_H
 #define EOS_DIRECTFLOW_H
 

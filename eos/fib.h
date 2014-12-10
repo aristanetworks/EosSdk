@@ -1,19 +1,6 @@
 // Copyright (c) 2014 Arista Networks, Inc.  All rights reserved.
 // Arista Networks, Inc. Confidential and Proprietary.
 
-/**
- * @file
- * System Forwarding Information Base (FIB) management
- *
- * The FIB represents the system forwarding tables. In this way, it is
- * generally the result of the programming of any routing agents in
- * the system including static and dynamic routing protocols.
- *
- * This module allows for direct maniuplation of the FIB, as well as a
- * means of reacting to the contents of the table as well as perform
- * queries.
- */
-
 #ifndef EOS_FIB_H
 #define EOS_FIB_H
 
