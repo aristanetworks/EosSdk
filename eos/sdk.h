@@ -33,6 +33,7 @@ class nexthop_group_mgr;
 class policy_map_mgr;
 class system_mgr;
 class timeout_mgr;
+class vrf_mgr;
 
 
 /**
@@ -146,6 +147,7 @@ class EOS_SDK_PUBLIC sdk {
    void init_policy_map_mgr();
    void init_system_mgr();
    void init_timeout_mgr();
+   void init_vrf_mgr();
    
    acl_mgr * get_acl_mgr();
    agent_mgr * get_agent_mgr();
@@ -173,6 +175,7 @@ class EOS_SDK_PUBLIC sdk {
    policy_map_mgr * get_policy_map_mgr();
    system_mgr * get_system_mgr();
    timeout_mgr * get_timeout_mgr();
+   vrf_mgr * get_vrf_mgr();
 
   private:
    void init_mount_mgr();
@@ -203,6 +206,7 @@ class EOS_SDK_PUBLIC sdk {
    policy_map_mgr * policy_map_mgr_;
    system_mgr * system_mgr_;
    timeout_mgr * timeout_mgr_;
+   vrf_mgr * vrf_mgr_;
    
    std::string name_;
    

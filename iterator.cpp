@@ -14,6 +14,7 @@
 #include "eos/mpls_route.h"
 #include "eos/nexthop_group.h"
 #include "eos/policy_map.h"
+#include "eos/vrf.h"
 
 namespace eos {
 
@@ -99,5 +100,6 @@ INSTANTIATE_ITERATOR(flow_entry_t, flow_entry_iter_impl);
 INSTANTIATE_ITERATOR(mpls_route_t, mpls_route_iter_impl);
 INSTANTIATE_ITERATOR(mpls_route_via_t, mpls_route_via_iter_impl);
 INSTANTIATE_ITERATOR(policy_map_key_t, policy_map_iter_impl);
+INSTANTIATE_ITERATOR(vrf_t, vrf_iter_impl);
 
 }

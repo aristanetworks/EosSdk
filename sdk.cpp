@@ -44,7 +44,8 @@ sdk::sdk()
      nexthop_group_mgr_(0),
      policy_map_mgr_(0),
      system_mgr_(0),
-     timeout_mgr_(0) {
+     timeout_mgr_(0),
+     vrf_mgr_(0) {
    char * agent_process_name = getenv("AGENT_PROCESS_NAME");
    if (!agent_process_name) {
       agent_process_name = DEFAULT_AGENT_PROCESS_NAME;
@@ -86,7 +87,8 @@ sdk::sdk(std::string const name)
      nexthop_group_mgr_(0),
      policy_map_mgr_(0),
      system_mgr_(0),
-     timeout_mgr_(0) {
+     timeout_mgr_(0),
+     vrf_mgr_(0) {
    name_ = name;
    impl.register_sdk(this);
 }
@@ -127,6 +129,7 @@ INIT_STUB_MGR(nexthop_group_mgr)
 INIT_STUB_MGR(policy_map_mgr)
 INIT_STUB_MGR(system_mgr)
 INIT_STUB_MGR(timeout_mgr)
+INIT_STUB_MGR(vrf_mgr)
 
 void sdk::init_event_loop() {
    if(!event_loop_) {

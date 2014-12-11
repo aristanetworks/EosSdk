@@ -188,6 +188,13 @@ inline timeout_mgr * sdk::get_timeout_mgr() {
    return timeout_mgr_;
 }
 
+inline vrf_mgr * sdk::get_vrf_mgr() {
+   if (!vrf_mgr_) {
+      init_vrf_mgr();
+   }
+   return vrf_mgr_;
+}
+
 }
 
 #endif // EOS_INLINE_SDK_H

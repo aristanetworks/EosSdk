@@ -59,6 +59,7 @@ typedef uint64_t uint64_be_t;
 %feature("nodirector") eos::policy_map_mgr;
 %feature("nodirector") eos::system_mgr;
 %feature("nodirector") eos::timeout_mgr;
+%feature("nodirector") eos::vrf_mgr;
 
 %{
 #include "eos/acl.h"
@@ -94,6 +95,7 @@ typedef uint64_t uint64_be_t;
 #include "eos/tracing.h"
 #include "eos/utility.h"
 #include "eos/version.h"
+#include "eos/vrf.h"
 
 using namespace eos;
 
@@ -241,6 +243,7 @@ wrap_iterator(eos::mpls_route_iter_t, eos::mpls_route_iter_impl, eos::mpls_route
 wrap_iterator(eos::mpls_route_via_iter_t, eos::mpls_route_via_iter_impl, eos::mpls_route_via_t);
 wrap_iterator(eos::nexthop_group_iter_t, eos::nexthop_group_iter_impl, eos::nexthop_group_t);
 wrap_iterator(eos::policy_map_iter_t, eos::policy_map_iter_impl, eos::policy_map_key_t);
+wrap_iterator(eos::vrf_iter_t, eos::vrf_iter_impl, eos::vrf_t);
 
 // Make managers themselves iterable, when it makes sense:
 default_iterator(eos::directflow_mgr, flow_entry_iter);
