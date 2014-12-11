@@ -527,7 +527,6 @@ def getIpAddr(ip_addr):
       sys.stderr.write('Invalid IP address: %s (%s)' % (ip_addr, e))
 
 
-# Called by the script 'PolicyRouter'
 def main():
    # Config file path has to be provided by the environment variable
    envvar = 'POLICY_ROUTER_CONFIG'
@@ -543,3 +542,9 @@ def main():
    else:
       sys.stderr.write(
          'Usage: %s=<path_to_json_config> %s\n\n' % (envvar, sys.argv[0]))
+      return 1
+
+
+if __name__ == '__main__':
+   sys.exit(main())
+
