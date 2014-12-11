@@ -301,7 +301,7 @@ class PolicyRouter(object):
          elif action.type == 'nexthop' and action.nexthops:
             act = eossdk.PolicyMapAction(eossdk.POLICY_ACTION_NEXTHOP)
             for nh in action.nexthops:
-               hop = getIpAddr(nh)
+               hop = get_ip_addr(nh)
                if hop is not None:
                   act.nexthop_set(hop)
          else:
@@ -318,7 +318,7 @@ class PolicyRouter(object):
          group = eossdk.NexthopGroup(name, NEXTHOP_GROUP_TYPE.get(t))
          # Set common parameters
          for i, dst in enumerate(data.dst_ips):
-            ip = getIpAddr(dst)
+            ip = get_ip_addr(dst)
             if ip is not None:
                print 'Adding IP'
                group.destination_ip_set(i, ip)
@@ -520,7 +520,7 @@ class InotifyHandler(pyinotify.ProcessEvent):
       self.handler_ = kwargs['handler']
 
 
-def getIpAddr(ip_addr):
+def get_ip_addr(ip_addr):
    try:
       return eossdk.IpAddr(ip_addr)
    except eossdk.Error as e:
@@ -547,4 +547,3 @@ def main():
 
 if __name__ == '__main__':
    sys.exit(main())
-
