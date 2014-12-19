@@ -91,7 +91,7 @@ class EOS_SDK_PUBLIC nexthop_group_mgr {
    virtual nexthop_group_iter_t nexthop_group_iter() const = 0;
 
    /** 
-    * Retrieve an existing nexthop_group_t by name, if it exists.
+    * Retrieves an existing nexthop_group_t by name, if it exists.
     * Otherwise this returns an empty `nexthop_group_t()`
     */
    virtual nexthop_group_t nexthop_group(std::string const & 
