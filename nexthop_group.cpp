@@ -24,6 +24,14 @@ class nexthop_group_mgr_impl : public nexthop_group_mgr {
       return *nop;  // TODO: No op impl.
    }
 
+   nexthop_group_t nexthop_group(std::string const & nexthop_group_name) const {
+      return nexthop_group_t();
+   }
+
+   bool exists(std::string const & nexthop_group_name) const {
+      return false;
+   }
+
    void nexthop_group_set(nexthop_group_t const &group) {
       // TODO: No op impl.
    }

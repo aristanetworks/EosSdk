@@ -6,12 +6,12 @@
  * Nexthop groups are a forwarding/tunneling abstraction in EOS.
  *
  * A nexthop group is comprised of a tunneling protocol (IP/GRE or
- * MPLS, for example) and a sparse array of nexthop (aka destination)
+ * MPLS, for example) and a collection of nexthop (aka destination)
  * IP addresses and other forwarding information (such as MPLS stack
  * operations to apply for traffic sent to that nexthop). The same
  * IP address may be specified in more than one entry within the
  * group, allowing for unequal cost load balancing. By using distinct
- * addresses for each entry, equal cost load balancing can be achieved
+ * addresses for each entry, equal cost load balancing can be achieved.
  *
  * The nexthop or destination IP is the tunnel (outer) destination IP
  * address for GRE and IP-in-IP. For MPLS, the nexthop address is used
@@ -89,6 +89,16 @@ class EOS_SDK_PUBLIC nexthop_group_mgr {
 
    /// Iterates over all the nexthop groups currently configured.
    virtual nexthop_group_iter_t nexthop_group_iter() const = 0;
+
+   /** 
+    * Retrieve an existing nexthop_group_t by name, if it exists.
+    * Otherwise this returns an empty `nexthop_group_t()`
+    */
+   virtual nexthop_group_t nexthop_group(std::string const & 
+                                         nexthop_group_name) const = 0;
+
+   /// Returns true if a nexthop group with the given name has been configured.
+   virtual bool exists(std::string const & nexthop_group_name) const = 0;
 
    /// Creates or updates a nexthop group.
    virtual void nexthop_group_set(nexthop_group_t const &) = 0;
