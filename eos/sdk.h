@@ -44,8 +44,8 @@ class vrf_mgr;
  * have one thread, or if they perform all operations on the SDK from
  * the thread which owns the `main_loop`, as the SDK grabs the lock
  * before calling any *_handler callbacks and before performing any
- * internal bookkeeping. Do note that the lock is not re-entrant, so
- * attempting to grab the lock twice will cause a deadlock. 
+ * internal bookkeeping. Do note that the lock is re-entrant, so
+ * attempting to grab the lock twice is fine. 
  * Example usage:
  *
  *  Thread 1:
