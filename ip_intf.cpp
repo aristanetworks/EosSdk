@@ -30,6 +30,7 @@ void ip_intf_handler::watch_ip_intf(intf_id_t i, bool interest) {
 // Dummy implementations for virtual handler methods
 void ip_intf_handler::on_ip_addr_add(intf_id_t, ip_addr_mask_t const &) {}
 void ip_intf_handler::on_ip_addr_del(intf_id_t, ip_addr_mask_t const &) {}
+void ip_intf_handler::on_internal_vlan_id(intf_id_t const &, vlan_id_t new_vlan) {}
 
 class ip_intf_mgr_impl : public ip_intf_mgr {
  public:
@@ -51,6 +52,10 @@ class ip_intf_mgr_impl : public ip_intf_mgr {
    }
 
    void ip_addr_del(intf_id_t, ip_addr_mask_t const &) {
+   }
+
+   vlan_id_t internal_vlan_id(intf_id_t const &) const {
+      return vlan_id_t(123);
    }
 };
 

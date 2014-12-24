@@ -9,6 +9,7 @@
 #include <eos/base.h>
 #include <eos/base_handler.h>
 #include <eos/base_mgr.h>
+#include <eos/eth.h>
 #include <eos/intf.h>
 #include <eos/ip.h>
 
@@ -57,6 +58,9 @@ class EOS_SDK_PUBLIC ip_intf_handler : public base_handler<ip_intf_mgr,
    virtual void on_ip_addr_add(intf_id_t, ip_addr_mask_t const &);
    /// Handler called when an IP address is deleted from the interface.
    virtual void on_ip_addr_del(intf_id_t, ip_addr_mask_t const &);
+
+   /// Handler called when the internal VLAN ID for an interface changes
+   virtual void on_internal_vlan_id(intf_id_t const &, vlan_id_t);
 };
 
 /// The IP address interface manager.
@@ -93,6 +97,17 @@ class EOS_SDK_PUBLIC ip_intf_mgr : public base_mgr<ip_intf_handler, intf_id_t> {
     * @param ip_addr_mask_t The address to delete.
     */
    virtual void ip_addr_del(intf_id_t, ip_addr_mask_t const &) = 0;
+
+   /**
+    * Returns the internal VLAN ID related to a layer 3 interface.
+    * If the interface supplied is a routed interface (i.e., is
+    * configured with "no switchport"), this function will return the
+    * internal VLAN ID for the interface. If the interface is an SVI,
+    * the VLAN ID of the SVI is returned. If the interface is a layer
+    * 2 interface, VLAN ID 0 is returned.
+    * @param intf_id_t An interface ID to query the internal VLAN ID of
+    */
+   virtual vlan_id_t internal_vlan_id(intf_id_t const &) const = 0;
 
  protected:
    ip_intf_mgr() EOS_SDK_PRIVATE;
