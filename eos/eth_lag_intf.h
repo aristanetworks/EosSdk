@@ -136,8 +136,8 @@ class EOS_SDK_PUBLIC eth_lag_intf_mgr {
     */
    virtual eth_lag_intf_member_iter_t eth_lag_intf_member_iter() const = 0;
    /**
-    * This API creates an LAG interface, when given the LAG id. It may throw
-    * "invalid_argument_error" exception if the LAG exists already.
+    * This API creates an LAG interface, when given the LAG id. No action will
+    * be taken if the LAG exists already.
     */
    virtual eth_lag_intf_t eth_lag_intf_is(intf_id_t eth_lag_intf_id) = 0;
    /**
