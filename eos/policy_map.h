@@ -31,7 +31,7 @@
  * a PBR policy named "src-routing-fe", use this code in a handler with
  * access to the policy_map_mgr object as policy_map_mgr() in scope.
  *
- * @code{.cpp}
+ * @code
  *   eos::policy_map_key_t pm_key("src-routing-fe", eos::POLICY_FEATURE_PBR);
  *   eos::acl_key_t acl_key("netblock-fe", eos::ACL_TYPE_IPV4);
  *   eos::class_map_t cm(pm_key);
@@ -55,7 +55,7 @@
  * eos::CLASS_MAP_MPLS_ANY name and skip binding the ACL to the class
  * map entirely:
  *
- * @code{.cpp}
+ * @code
  *   eos::policy_map_key_t pm_key("src-routing-fe", eos::POLICY_FEATURE_PBR);
  *   eos::class_map_key_t cm_key(eos::CLASS_MAP_MPLS_ANY, eos::POLICY_FEATURE_PBR);
  *   eos::class_map_t cm(cm_key);

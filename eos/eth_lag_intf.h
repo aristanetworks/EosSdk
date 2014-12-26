@@ -13,7 +13,7 @@
  * The LAG APIs are best working with "intf" module, as shown in the sample code
  * below.
  *
- * @code{.cpp}
+ * @code
  *
    #include <eos/agent.h>
    #include <eos/eth_lag_intf.h>

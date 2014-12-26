@@ -19,7 +19,7 @@
  * printf. For example, the following lines create a trace facility 
  * called "MyDebugOutput" which can be used to print messages.
  * 
- * @code{.cpp}
+ * @code
  *    eos::tracer t("MyDebugOutput");
  *    t.trace0("%s World", "Hello");
  *    t.trace5("Good bye!%d!", 1);
