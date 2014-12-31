@@ -12,9 +12,6 @@ namespace eos {
 
 class vrf_iter_impl;
 
-/**
- * A VRF iterator iterating through all active VRFs created in the system.
- */
 class EOS_SDK_PUBLIC vrf_iter_t : public iter_base<vrf_t, vrf_iter_impl> {
  private:
    friend class vrf_iter_impl;
@@ -30,24 +27,24 @@ class EOS_SDK_PUBLIC vrf_mgr {
    virtual ~vrf_mgr();
 
    /**
-    * Iterates VRFs in system, vrf_t is returned for each VRF.
+    * Iterates through all VRFs on the system, yielding a vrf_t for each VRF.
     */
    virtual vrf_iter_t vrf_iter() const = 0;
 
    /**
-    * Checks if a VRF specified by 'vrf_name' exists.
+    * Returns the named VRF, or a default VRF object if it does not exist.
     */
-   virtual bool exists(std::string const & vrf_name) const = 0;
+   virtual vrf_t vrf(std::string const & vrf_name) const = 0;
 
    /**
     * Opens a socket inside a VRF specified by 'vrf_name'.
-    * Params:
-    *    domain: a communication domain, same as in socket().
-    *    type: the communication semantics, such as SOCK_STREAM, same as in socket().
-    *    protocol: the protocol to be used with the socket, same as in socket().
-    *    vrf_name: the name of the vrf_name in which the socket will be created.
-    * Return:
-    * fd on success, -1 on error, and errno is set appropriately.
+    *
+    * @param domain A communication domain, same as in socket().
+    * @param type The communication semantics, such as SOCK_STREAM, same as in
+    * socket().
+    * @param protocol The protocol to be used with the socket, same as in socket().
+    * @param vrf_name The name of the vrf_name in which the socket will be created.
+    * @return fd on success, -1 on error, and errno is set appropriately.
     */
    virtual int socket_at(int domain, int type, int protocol,
                          std::string const & vrf_name) = 0;

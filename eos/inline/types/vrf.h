@@ -6,18 +6,43 @@
 
 namespace eos {
 
-// Default constructor.
-inline vrf_t::vrf_t() :
-      name_(""), rd_(0), af_ipv4_(false), af_ipv6_(false) {
+inline std::ostream&
+operator<<(std::ostream& os, const vrf_state_t & enum_val) {
+   if (enum_val==VRF_NULL) {
+      os << "VRF_NULL";
+   } else if (enum_val==VRF_INITIALIZING) {
+      os << "VRF_INITIALIZING";
+   } else if (enum_val==VRF_ACTIVE) {
+      os << "VRF_ACTIVE";
+   } else if (enum_val==VRF_DELETING) {
+      os << "VRF_DELETING";
+   } else if (enum_val==VRF_CONFIGURED) {
+      os << "VRF_CONFIGURED";
+   } else {
+      os << "Unknown value";
+   }
+   return os;
 }
 
-inline vrf_t::vrf_t(std::string name, uint64_t rd, bool af_ipv4, bool af_ipv6) :
-      name_(name), rd_(rd), af_ipv4_(af_ipv4), af_ipv6_(af_ipv6) {
+
+
+// Default constructor.
+inline vrf_t::vrf_t() :
+      name_(""), state_(VRF_NULL), rd_(0) {
+}
+
+inline vrf_t::vrf_t(std::string name, vrf_state_t state, uint64_t rd) :
+      name_(name), state_(state), rd_(rd) {
 }
 
 inline std::string
 vrf_t::name() const {
    return name_;
+}
+
+inline vrf_state_t
+vrf_t::state() const {
+   return state_;
 }
 
 inline uint64_t
@@ -26,21 +51,10 @@ vrf_t::rd() const {
 }
 
 inline bool
-vrf_t::af_ipv4() const {
-   return af_ipv4_;
-}
-
-inline bool
-vrf_t::af_ipv6() const {
-   return af_ipv6_;
-}
-
-inline bool
 vrf_t::operator==(vrf_t const & other) const {
    return name_ == other.name_ &&
-          rd_ == other.rd_ &&
-          af_ipv4_ == other.af_ipv4_ &&
-          af_ipv6_ == other.af_ipv6_;
+          state_ == other.state_ &&
+          rd_ == other.rd_;
 }
 
 inline bool
@@ -53,9 +67,8 @@ vrf_t::to_string() const {
    std::ostringstream ss;
    ss << "vrf_t(";
    ss << "name='" << name_ << "'";
+   ss << ", state=" << state_;
    ss << ", rd=" << rd_;
-   ss << ", af_ipv4=" << af_ipv4_;
-   ss << ", af_ipv6=" << af_ipv6_;
    ss << ")";
    return ss.str();
 }

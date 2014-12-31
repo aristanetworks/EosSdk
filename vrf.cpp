@@ -17,8 +17,8 @@ class vrf_mgr_impl : public vrf_mgr {
       return *nop;
    }
 
-   bool exists(std::string const & vrf) const {
-      return true;
+   vrf_t vrf(std::string const & vrf_name) const {
+      return vrf_t();
    }
 
    int socket_at(int domain, int type, int protocol, std::string const & vrf_name) {

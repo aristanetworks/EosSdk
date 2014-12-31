@@ -9,23 +9,36 @@
 
 namespace eos {
 
+/** VRF state. */
+enum vrf_state_t {
+   /** Not a valid vrf type. */
+   VRF_NULL,
+   /** VRF being initialized. */
+   VRF_INITIALIZING,
+   /** VRF is active. */
+   VRF_ACTIVE,
+   /** VRF is being deleted. */
+   VRF_DELETING,
+   /** VRF is configured. */
+   VRF_CONFIGURED,
+};
+/** Appends a string representation of enum vrf_state_t value to the ostream. */
+std::ostream& operator<<(std::ostream& os, const vrf_state_t & enum_val);
+
 /** This data structure is used to describe an VRF on a switch. */
 class EOS_SDK_PUBLIC vrf_t {
  public:
    vrf_t();
-   vrf_t(std::string name, uint64_t rd, bool af_ipv4, bool af_ipv6);
+   vrf_t(std::string name, vrf_state_t state, uint64_t rd);
 
-   /** Getter for 'name': the name of the vrf. */
+   /** Getter for 'name': the name of the VRF. */
    std::string name() const;
 
-   /** Getter for 'rd': the route distinguisher of the vrf. */
+   /** Getter for 'state': the state of this VRF. */
+   vrf_state_t state() const;
+
+   /** Getter for 'rd': the route distinguisher of the VRF. */
    uint64_t rd() const;
-
-   /** Getter for 'af_ipv4': IPV4 address family. */
-   bool af_ipv4() const;
-
-   /** Getter for 'af_ipv6': IPV6 address family. */
-   bool af_ipv6() const;
 
    bool operator==(vrf_t const & other) const;
    bool operator!=(vrf_t const & other) const;
@@ -39,9 +52,8 @@ class EOS_SDK_PUBLIC vrf_t {
 
  private:
    std::string name_;
+   vrf_state_t state_;
    uint64_t rd_;
-   bool af_ipv4_;
-   bool af_ipv6_;
 };
 }
 
