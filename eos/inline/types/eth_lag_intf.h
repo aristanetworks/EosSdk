@@ -177,11 +177,6 @@ eth_lag_intf_t::intf() const {
    return intf_;
 }
 
-inline void
-eth_lag_intf_t::intf_is(intf_id_t intf) {
-   intf_ = intf;
-}
-
 inline double
 eth_lag_intf_t::speed() const {
    return speed_;

@@ -151,8 +151,6 @@ class EOS_SDK_PUBLIC eth_lag_intf_t {
 
    /** Getter for 'intf': the id of this LAG interface. */
    intf_id_t intf() const;
-   /** Setter for 'intf'. */
-   void intf_is(intf_id_t intf);
 
    /**
     * Getter for 'speed': the aggregated capacity (speed) of this LAG interface in
