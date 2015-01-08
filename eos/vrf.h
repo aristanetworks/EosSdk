@@ -5,10 +5,37 @@
 #ifndef EOS_VRF_H
 #define EOS_VRF_H
 
+#include <eos/base.h>
+#include <eos/base_handler.h>
+#include <eos/base_mgr.h>
 #include <eos/iterator.h>
 #include <eos/types/vrf.h>
 
 namespace eos {
+
+class vrf_mgr;
+
+/**
+ *  The VRF handler.
+ *
+ *  This class provides handler APIs to react to a VRF's operational state change.
+ *
+ **/
+class EOS_SDK_PUBLIC vrf_handler : public base_handler<vrf_mgr, vrf_handler> {
+ public:
+   explicit vrf_handler(vrf_mgr *mgr);
+   vrf_mgr * get_vrf_mgr() const;
+
+   /**
+    * Called when a VRF's state changes. When a VRF:
+    *
+    *  - is created, its state is VRF_INITIALIZING.
+    *  - becomes active, its state is VRF_ACTIVE.
+    *  - is being deleted, its state is VRF_DELETING.
+    *  - is deleted, its state is VRF_NULL.
+    **/
+   virtual void on_vrf_state(std::string vrf_name, vrf_state_t vrf_state);
+};
 
 class vrf_iter_impl;
 
@@ -22,7 +49,7 @@ class EOS_SDK_PUBLIC vrf_iter_t : public iter_base<vrf_t, vrf_iter_impl> {
  * The manager for VRF, this is the main entry point for applications
  * to use EosSdk VRF APIs.
  */
-class EOS_SDK_PUBLIC vrf_mgr {
+class EOS_SDK_PUBLIC vrf_mgr : public base_mgr<vrf_handler> {
  public:
    virtual ~vrf_mgr();
 
@@ -51,10 +78,13 @@ class EOS_SDK_PUBLIC vrf_mgr {
 
  protected:
    vrf_mgr() EOS_SDK_PRIVATE;
+   friend class vrf_handler;
  private:
    EOS_SDK_DISALLOW_COPY_CTOR(vrf_mgr);
 };
 
 } // end namespace eos
+
+#include <eos/inline/vrf.h>
 
 #endif // EOS_VRF_H
