@@ -45,7 +45,7 @@ class vrf_mgr;
  * the thread which owns the `main_loop`, as the SDK grabs the lock
  * before calling any *_handler callbacks and before performing any
  * internal bookkeeping. Do note that the lock is re-entrant, so
- * attempting to grab the lock twice is fine. 
+ * attempting to grab the lock twice is fine.
  * Example usage:
  *
  *  Thread 1:
@@ -97,8 +97,8 @@ class EOS_SDK_PUBLIC sdk {
     * used here must match the name used in the CLI configuration.
     */
    explicit sdk(std::string const agent_name);
-   ~sdk();
-   
+   virtual ~sdk();
+
    /**
     * Return the name of this SDK object.
     *
@@ -107,11 +107,11 @@ class EOS_SDK_PUBLIC sdk {
     * log file, as well as the namespace for custom agent
     * configuration and status.
     */
-   std::string name();
+   virtual std::string name();
 
    /**
     * Begin the agent's event loop.
-    * 
+    *
     * This function initializes the underlying infrastructure for your
     * agent. It first registers itself as an EOS agent, then
     * synchronizes any needed state with Sysdb, and finally starts the
@@ -121,65 +121,65 @@ class EOS_SDK_PUBLIC sdk {
     * running). This function will not return unless the agent is
     * disabled or it explicitly calls the agent_mgr's exit() code.
     */
-   void main_loop(int argc, char ** argv);
-   
-   void init_acl_mgr();
-   void init_agent_mgr();
-   void init_aresolve_mgr();
-   void init_class_map_mgr();
-   void init_decap_group_mgr();
-   void init_directflow_mgr();
-   void init_eth_intf_mgr();
-   void init_eth_lag_intf_mgr();
-   void init_eth_phy_intf_mgr();
-   void init_eth_phy_intf_counter_mgr();
-   void init_event_loop();
-   void init_fib_mgr(mgr_mode_type_t mode=MODE_TYPE_READ_ONLY);
-   void init_intf_mgr();
-   void init_intf_counter_mgr();
-   void init_ip_intf_mgr();
-   void init_ip_route_mgr();
-   void init_mac_table_mgr();
-   void init_mlag_mgr();
-   void init_mpls_route_mgr();
-   void init_neighbor_table_mgr();
-   void init_nexthop_group_mgr();
-   void init_policy_map_mgr();
-   void init_system_mgr();
-   void init_timeout_mgr();
-   void init_vrf_mgr();
-   
-   acl_mgr * get_acl_mgr();
-   agent_mgr * get_agent_mgr();
-   aresolve_mgr * get_aresolve_mgr();
-   class_map_mgr * get_class_map_mgr();
-   decap_group_mgr * get_decap_group_mgr();
-   directflow_mgr * get_directflow_mgr();
-   eth_intf_mgr * get_eth_intf_mgr();
-   eth_lag_intf_mgr * get_eth_lag_intf_mgr();
-   eth_phy_intf_mgr * get_eth_phy_intf_mgr();
-   eth_phy_intf_counter_mgr * get_eth_phy_intf_counter_mgr();
-   event_loop * get_event_loop();
-   fib_mgr * get_fib_mgr(mgr_mode_type_t mode=MODE_TYPE_READ_ONLY);
-   intf_mgr * get_intf_mgr();
-   intf_counter_mgr * get_intf_counter_mgr();
-   ip_intf_mgr * get_ip_intf_mgr();
-   ip_route_mgr * get_ip_route_mgr();
-   mac_table_mgr * get_mac_table_mgr();
-   mlag_mgr * get_mlag_mgr();
-   // TODO: move back to private (BUG86400)
-   mount_mgr * get_mount_mgr();
-   mpls_route_mgr * get_mpls_route_mgr();
-   neighbor_table_mgr * get_neighbor_table_mgr();
-   nexthop_group_mgr * get_nexthop_group_mgr();
-   policy_map_mgr * get_policy_map_mgr();
-   system_mgr * get_system_mgr();
-   timeout_mgr * get_timeout_mgr();
-   vrf_mgr * get_vrf_mgr();
+   virtual void main_loop(int argc, char ** argv);
 
-  private:
+   virtual void init_acl_mgr();
+   virtual void init_agent_mgr();
+   virtual void init_aresolve_mgr();
+   virtual void init_class_map_mgr();
+   virtual void init_decap_group_mgr();
+   virtual void init_directflow_mgr();
+   virtual void init_eth_intf_mgr();
+   virtual void init_eth_lag_intf_mgr();
+   virtual void init_eth_phy_intf_mgr();
+   virtual void init_eth_phy_intf_counter_mgr();
+   virtual void init_event_loop();
+   virtual void init_fib_mgr(mgr_mode_type_t mode=MODE_TYPE_READ_ONLY);
+   virtual void init_intf_mgr();
+   virtual void init_intf_counter_mgr();
+   virtual void init_ip_intf_mgr();
+   virtual void init_ip_route_mgr();
+   virtual void init_mac_table_mgr();
+   virtual void init_mlag_mgr();
+   virtual void init_mpls_route_mgr();
+   virtual void init_neighbor_table_mgr();
+   virtual void init_nexthop_group_mgr();
+   virtual void init_policy_map_mgr();
+   virtual void init_system_mgr();
+   virtual void init_timeout_mgr();
+   virtual void init_vrf_mgr();
+
+   virtual acl_mgr * get_acl_mgr();
+   virtual agent_mgr * get_agent_mgr();
+   virtual aresolve_mgr * get_aresolve_mgr();
+   virtual class_map_mgr * get_class_map_mgr();
+   virtual decap_group_mgr * get_decap_group_mgr();
+   virtual directflow_mgr * get_directflow_mgr();
+   virtual eth_intf_mgr * get_eth_intf_mgr();
+   virtual eth_lag_intf_mgr * get_eth_lag_intf_mgr();
+   virtual eth_phy_intf_mgr * get_eth_phy_intf_mgr();
+   virtual eth_phy_intf_counter_mgr * get_eth_phy_intf_counter_mgr();
+   virtual event_loop * get_event_loop();
+   virtual fib_mgr * get_fib_mgr(mgr_mode_type_t mode=MODE_TYPE_READ_ONLY);
+   virtual intf_mgr * get_intf_mgr();
+   virtual intf_counter_mgr * get_intf_counter_mgr();
+   virtual ip_intf_mgr * get_ip_intf_mgr();
+   virtual ip_route_mgr * get_ip_route_mgr();
+   virtual mac_table_mgr * get_mac_table_mgr();
+   virtual mlag_mgr * get_mlag_mgr();
+   // TODO: move back to private (BUG86400)
+   virtual mount_mgr * get_mount_mgr();
+   virtual mpls_route_mgr * get_mpls_route_mgr();
+   virtual neighbor_table_mgr * get_neighbor_table_mgr();
+   virtual nexthop_group_mgr * get_nexthop_group_mgr();
+   virtual policy_map_mgr * get_policy_map_mgr();
+   virtual system_mgr * get_system_mgr();
+   virtual timeout_mgr * get_timeout_mgr();
+   virtual vrf_mgr * get_vrf_mgr();
+
+ private:
    void init_mount_mgr();
-   
+
    EOS_SDK_DISALLOW_COPY_CTOR(sdk);
    acl_mgr * acl_mgr_;
    agent_mgr * agent_mgr_;
@@ -207,9 +207,9 @@ class EOS_SDK_PUBLIC sdk {
    system_mgr * system_mgr_;
    timeout_mgr * timeout_mgr_;
    vrf_mgr * vrf_mgr_;
-   
+
    std::string name_;
-   
+
    friend class mount_mgr;
 };
 
