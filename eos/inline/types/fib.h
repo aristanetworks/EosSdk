@@ -163,7 +163,7 @@ fib_route_t::fec_id() const {
 }
 
 inline void
-fib_route_t::fec_id_is(uint64_t const & fec_id) {
+fib_route_t::fec_id_is(uint64_t fec_id) {
    fec_id_ = fec_id;
 }
 
@@ -207,7 +207,7 @@ inline fib_fec_key_t::fib_fec_key_t() :
       fec_id_(0) {
 }
 
-inline fib_fec_key_t::fib_fec_key_t(uint64_t const & fec_id) :
+inline fib_fec_key_t::fib_fec_key_t(uint64_t fec_id) :
       fec_id_(fec_id) {
 }
 
@@ -217,7 +217,7 @@ fib_fec_key_t::fec_id() const {
 }
 
 inline void
-fib_fec_key_t::fec_id_is(uint64_t const & fec_id) {
+fib_fec_key_t::fec_id_is(uint64_t fec_id) {
    fec_id_ = fec_id;
 }
 
@@ -253,7 +253,7 @@ inline fib_via_t::fib_via_t() :
       hop_(), intf_() {
 }
 
-inline fib_via_t::fib_via_t(ip_addr_t const & hop, intf_id_t const & intf) :
+inline fib_via_t::fib_via_t(ip_addr_t const & hop, intf_id_t intf) :
       hop_(hop), intf_(intf) {
 }
 
@@ -273,7 +273,7 @@ fib_via_t::intf() const {
 }
 
 inline void
-fib_via_t::intf_is(intf_id_t const & intf) {
+fib_via_t::intf_is(intf_id_t intf) {
    intf_ = intf;
 }
 
@@ -337,7 +337,7 @@ inline fib_fec_t::fib_fec_t() :
       fec_key_(), fec_type_(), nexthop_group_name_(), via_() {
 }
 
-inline fib_fec_t::fib_fec_t(fib_fec_key_t const & fec_key) :
+inline fib_fec_t::fib_fec_t(fib_fec_key_t fec_key) :
       fec_key_(fec_key), fec_type_(), nexthop_group_name_(), via_() {
 }
 
@@ -347,7 +347,7 @@ fib_fec_t::fec_key() const {
 }
 
 inline void
-fib_fec_t::fec_key_is(fib_fec_key_t const & fec_key) {
+fib_fec_t::fec_key_is(fib_fec_key_t fec_key) {
    fec_key_ = fec_key;
 }
 

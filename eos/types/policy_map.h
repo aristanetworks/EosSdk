@@ -73,13 +73,13 @@ std::ostream& operator<<(std::ostream& os,
 class EOS_SDK_PUBLIC policy_map_key_t {
  public:
    policy_map_key_t();
-   policy_map_key_t(std::string const & name, policy_feature_t const & feature);
+   policy_map_key_t(std::string const & name, policy_feature_t feature);
 
    std::string name() const;
    void name_is(std::string const & name);
 
    policy_feature_t feature() const;
-   void feature_is(policy_feature_t const & feature);
+   void feature_is(policy_feature_t feature);
 
    bool operator==(policy_map_key_t const & other) const;
    bool operator!=(policy_map_key_t const & other) const;

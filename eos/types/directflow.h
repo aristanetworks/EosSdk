@@ -66,7 +66,7 @@ class EOS_SDK_PUBLIC flow_match_t {
    /** Getter for 'match_field_set': the fields to match on. */
    flow_match_field_set_t match_field_set() const;
    /** Setter for 'match_field_set'. */
-   void match_field_set_is(flow_match_field_set_t const & match_field_set);
+   void match_field_set_is(flow_match_field_set_t match_field_set);
 
    /** Getter for 'input_intfs': the input interfaces to match on. */
    std::set<intf_id_t> const & input_intfs() const;
@@ -218,7 +218,7 @@ class EOS_SDK_PUBLIC flow_action_t {
    /** Getter for 'action_set': actions that are enabled. */
    flow_action_set_t action_set() const;
    /** Setter for 'action_set'. */
-   void action_set_is(flow_action_set_t const & action_set);
+   void action_set_is(flow_action_set_t action_set);
 
    /**
     * Getter for 'output_intfs': 0 or more the output interfaces, passing in the

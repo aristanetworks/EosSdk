@@ -707,7 +707,7 @@ acl_rule_eth_t::source_addr() const {
 }
 
 inline void
-acl_rule_eth_t::source_addr_is(eth_addr_t const & source_addr) {
+acl_rule_eth_t::source_addr_is(eth_addr_t source_addr) {
    source_addr_ = source_addr;
 }
 
@@ -717,7 +717,7 @@ acl_rule_eth_t::destination_addr() const {
 }
 
 inline void
-acl_rule_eth_t::destination_addr_is(eth_addr_t const & destination_addr) {
+acl_rule_eth_t::destination_addr_is(eth_addr_t destination_addr) {
    destination_addr_ = destination_addr;
 }
 
@@ -727,7 +727,7 @@ acl_rule_eth_t::source_mask() const {
 }
 
 inline void
-acl_rule_eth_t::source_mask_is(eth_addr_t const & source_mask) {
+acl_rule_eth_t::source_mask_is(eth_addr_t source_mask) {
    source_mask_ = source_mask;
 }
 
@@ -737,7 +737,7 @@ acl_rule_eth_t::destination_mask() const {
 }
 
 inline void
-acl_rule_eth_t::destination_mask_is(eth_addr_t const & destination_mask) {
+acl_rule_eth_t::destination_mask_is(eth_addr_t destination_mask) {
    destination_mask_ = destination_mask;
 }
 

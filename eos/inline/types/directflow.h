@@ -57,7 +57,7 @@ flow_match_t::match_field_set() const {
 }
 
 inline void
-flow_match_t::match_field_set_is(flow_match_field_set_t const & match_field_set) {
+flow_match_t::match_field_set_is(flow_match_field_set_t match_field_set) {
    match_field_set_ = match_field_set;
 }
 
@@ -370,7 +370,7 @@ flow_action_t::action_set() const {
 }
 
 inline void
-flow_action_t::action_set_is(flow_action_set_t const & action_set) {
+flow_action_t::action_set_is(flow_action_set_t action_set) {
    action_set_ = action_set;
 }
 

@@ -272,7 +272,7 @@ nexthop_group_t::source_intf() const {
 }
 
 inline void
-nexthop_group_t::source_intf_is(intf_id_t const & source_intf) {
+nexthop_group_t::source_intf_is(intf_id_t source_intf) {
    if (!!source_intf) {
       // If we're setting a source interface, clear any
       // source ip configuration

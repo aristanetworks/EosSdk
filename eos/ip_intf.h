@@ -60,7 +60,7 @@ class EOS_SDK_PUBLIC ip_intf_handler : public base_handler<ip_intf_mgr,
    virtual void on_ip_addr_del(intf_id_t, ip_addr_mask_t const &);
 
    /// Handler called when the internal VLAN ID for an interface changes
-   virtual void on_internal_vlan_id(intf_id_t const &, vlan_id_t);
+   virtual void on_internal_vlan_id(intf_id_t, vlan_id_t);
 };
 
 /// The IP address interface manager.
@@ -107,7 +107,7 @@ class EOS_SDK_PUBLIC ip_intf_mgr : public base_mgr<ip_intf_handler, intf_id_t> {
     * 2 interface, VLAN ID 0 is returned.
     * @param intf_id_t An interface ID to query the internal VLAN ID of
     */
-   virtual vlan_id_t internal_vlan_id(intf_id_t const &) const = 0;
+   virtual vlan_id_t internal_vlan_id(intf_id_t) const = 0;
 
  protected:
    ip_intf_mgr() EOS_SDK_PRIVATE;

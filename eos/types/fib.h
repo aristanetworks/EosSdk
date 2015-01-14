@@ -98,7 +98,7 @@ class EOS_SDK_PUBLIC fib_route_t {
    /** Getter for 'fec_id': id that links prefix to the fec a.k.a Adjacency. */
    uint64_t fec_id() const;
    /** Setter for 'fec_id'. */
-   void fec_id_is(uint64_t const & fec_id);
+   void fec_id_is(uint64_t fec_id);
 
    bool operator==(fib_route_t const & other) const;
    bool operator!=(fib_route_t const & other) const;
@@ -122,7 +122,7 @@ class EOS_SDK_PUBLIC fib_route_t {
 class EOS_SDK_PUBLIC fib_fec_key_t {
  public:
    fib_fec_key_t();
-   explicit fib_fec_key_t(uint64_t const & fec_id);
+   explicit fib_fec_key_t(uint64_t fec_id);
 
    /**
     * Getter for 'fec_id': fec_id[56:63] denotes the feature, 0: fib Fec, 1 :
@@ -130,7 +130,7 @@ class EOS_SDK_PUBLIC fib_fec_key_t {
     */
    uint64_t fec_id() const;
    /** Setter for 'fec_id'. */
-   void fec_id_is(uint64_t const & fec_id);
+   void fec_id_is(uint64_t fec_id);
 
    bool operator==(fib_fec_key_t const & other) const;
    bool operator!=(fib_fec_key_t const & other) const;
@@ -150,13 +150,13 @@ class EOS_SDK_PUBLIC fib_fec_key_t {
 class EOS_SDK_PUBLIC fib_via_t {
  public:
    fib_via_t();
-   fib_via_t(ip_addr_t const & hop, intf_id_t const & intf);
+   fib_via_t(ip_addr_t const & hop, intf_id_t intf);
 
    ip_addr_t hop() const;
    void hop_is(ip_addr_t const & hop);
 
    intf_id_t intf() const;
-   void intf_is(intf_id_t const & intf);
+   void intf_is(intf_id_t intf);
 
    bool operator==(fib_via_t const & other) const;
    bool operator!=(fib_via_t const & other) const;
@@ -193,12 +193,12 @@ std::ostream& operator<<(std::ostream& os, const fib_fec_type_t & enum_val);
 class EOS_SDK_PUBLIC fib_fec_t {
  public:
    fib_fec_t();
-   explicit fib_fec_t(fib_fec_key_t const & fec_key);
+   explicit fib_fec_t(fib_fec_key_t fec_key);
 
    /** Getter for 'fec_key': fec_key consisting of fec_id. */
    fib_fec_key_t fec_key() const;
    /** Setter for 'fec_key'. */
-   void fec_key_is(fib_fec_key_t const & fec_key);
+   void fec_key_is(fib_fec_key_t fec_key);
 
    fib_fec_type_t fec_type() const;
    void fec_type_is(fib_fec_type_t fec_type);

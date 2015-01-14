@@ -211,7 +211,7 @@ class EOS_SDK_PUBLIC acl_key_t {
  *   * acl_rule_eth_t
  *
  * Base parameters common to all filter types are defined on the parent
- * acl_base_filter_t, such as 'log' to enable logging of packets matching the rule,
+ * acl_base_filter_t, such as "log" to enable logging of packets matching the rule,
  * and the action applied to packets matching the rule.
  *
  * Base ACL rule class containing common fields.
@@ -379,16 +379,16 @@ class EOS_SDK_PUBLIC acl_rule_eth_t : public acl_rule_base_t {
    void inner_vlan_mask_is(vlan_id_t inner_vlan_mask);
 
    eth_addr_t source_addr() const;
-   void source_addr_is(eth_addr_t const & source_addr);
+   void source_addr_is(eth_addr_t source_addr);
 
    eth_addr_t destination_addr() const;
-   void destination_addr_is(eth_addr_t const & destination_addr);
+   void destination_addr_is(eth_addr_t destination_addr);
 
    eth_addr_t source_mask() const;
-   void source_mask_is(eth_addr_t const & source_mask);
+   void source_mask_is(eth_addr_t source_mask);
 
    eth_addr_t destination_mask() const;
-   void destination_mask_is(eth_addr_t const & destination_mask);
+   void destination_mask_is(eth_addr_t destination_mask);
 
    bool operator==(acl_rule_eth_t const & other) const;
    bool operator!=(acl_rule_eth_t const & other) const;

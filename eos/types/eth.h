@@ -53,9 +53,9 @@ class EOS_SDK_PUBLIC eth_addr_t {
 
    /** Only the default MAC address (all zeros) evaluates to false. */
    bool operator!() const;
-   bool operator==(eth_addr_t const & other) const;
-   bool operator!=(eth_addr_t const & other) const;
-   bool operator<(eth_addr_t const & other) const;
+   bool operator==(eth_addr_t other) const;
+   bool operator!=(eth_addr_t other) const;
+   bool operator<(eth_addr_t other) const;
    operator bool() const;
 
    /** Returns the given byte from the address. */

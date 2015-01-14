@@ -67,7 +67,7 @@ inline policy_map_key_t::policy_map_key_t() :
 }
 
 inline policy_map_key_t::policy_map_key_t(std::string const & name, 
-                                          policy_feature_t const & feature) :
+                                          policy_feature_t feature) :
       name_(name), feature_(feature) {
 }
 
@@ -87,7 +87,7 @@ policy_map_key_t::feature() const {
 }
 
 inline void
-policy_map_key_t::feature_is(policy_feature_t const & feature) {
+policy_map_key_t::feature_is(policy_feature_t feature) {
    feature_ = feature;
 }
 

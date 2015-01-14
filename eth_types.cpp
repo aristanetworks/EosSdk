@@ -18,7 +18,7 @@ eth_addr_t::eth_addr_t(std::string const & addr) :
 }
 
 bool
-eth_addr_t::operator<(eth_addr_t const & other) const {
+eth_addr_t::operator<(eth_addr_t other) const {
    return memcmp(bytes_, other.bytes_, 6) < 0;
 }
 

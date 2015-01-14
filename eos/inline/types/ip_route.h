@@ -171,7 +171,7 @@ ip_route_via_t::intf() const {
 }
 
 inline void
-ip_route_via_t::intf_is(intf_id_t const & intf) {
+ip_route_via_t::intf_is(intf_id_t intf) {
    intf_ = intf;
 }
 
@@ -191,7 +191,7 @@ ip_route_via_t::mpls_label() const {
 }
 
 inline void
-ip_route_via_t::mpls_label_is(mpls_label_t const & mpls_label) {
+ip_route_via_t::mpls_label_is(mpls_label_t mpls_label) {
    mpls_label_ = mpls_label;
 }
 

@@ -16,7 +16,7 @@ namespace eos {
  *
  * Use as follows when defining a class_map_key_t:
  *
- * @code{.cpp}
+ * @code
  *    eos::class_map_key_t key(eos::CLASS_MAP_MPLS_ANY,
  * eos::POLICY_FEATURE_PBR);
  *    eos::class_map_t cm(key);

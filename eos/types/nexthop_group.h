@@ -179,7 +179,7 @@ class EOS_SDK_PUBLIC nexthop_group_t {
    /** Getter for 'source_intf': The source interface to use. */
    intf_id_t source_intf() const;
    /** Setter for 'source_intf'. */
-   void source_intf_is(intf_id_t const & source_intf);
+   void source_intf_is(intf_id_t source_intf);
 
    /** The maximum size of the nexthop group in entries. */
    uint16_t size() const;

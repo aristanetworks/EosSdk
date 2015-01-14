@@ -24,7 +24,7 @@ class EOS_SDK_PUBLIC mpls_route_key_t {
     *  @param mpls_label_t The MPLS label to match on ingress for this route.
     * @param mpls_route_metric_t A metric value between 1 and 255.
     */
-   mpls_route_key_t(mpls_label_t const & top_label, mpls_route_metric_t metric);
+   mpls_route_key_t(mpls_label_t top_label, mpls_route_metric_t metric);
 
    /**
     * Getter for 'top_label': the label to match on ingress route lookup.
@@ -32,7 +32,7 @@ class EOS_SDK_PUBLIC mpls_route_key_t {
     */
    mpls_label_t top_label() const;
    /** Setter for 'top_label'. */
-   void top_label_is(mpls_label_t const & top_label);
+   void top_label_is(mpls_label_t top_label);
 
    /**
     * Getter for 'metric': the MPLS route metric. Lower metric routes are
@@ -64,12 +64,12 @@ class EOS_SDK_PUBLIC mpls_route_t {
    /** Default value constructor. */
    mpls_route_t();
    /** MPLS route constructor taking an MPLS route key. */
-   explicit mpls_route_t(mpls_route_key_t const & key);
+   explicit mpls_route_t(mpls_route_key_t key);
 
    /** Getter for 'key': the MPLS route key. */
    mpls_route_key_t key() const;
    /** Setter for 'key'. */
-   void key_is(mpls_route_key_t const & key);
+   void key_is(mpls_route_key_t key);
 
    /**
     * Getter for 'persistent': if true, this route is persisted in the startup-
@@ -98,10 +98,10 @@ class EOS_SDK_PUBLIC mpls_route_t {
 class EOS_SDK_PUBLIC mpls_route_via_t {
  public:
    mpls_route_via_t();
-   explicit mpls_route_via_t(mpls_route_key_t const & route_key);
+   explicit mpls_route_via_t(mpls_route_key_t route_key);
 
    mpls_route_key_t route_key() const;
-   void route_key_is(mpls_route_key_t const & route_key);
+   void route_key_is(mpls_route_key_t route_key);
 
    /** Getter for 'hop': IP v4/v6 nexthop address (for decap and IP forward). */
    ip_addr_t hop() const;

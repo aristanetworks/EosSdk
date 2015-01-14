@@ -50,7 +50,7 @@ class EOS_SDK_PUBLIC ip_route_key_t {
 
 /**
  * An IP v4/v6 static route.
- * 'Via', or nexthops, for this route are stored separately and are associated by
+ * "Via", or nexthops, for this route are stored separately and are associated by
  * route key.
  */
 class EOS_SDK_PUBLIC ip_route_t {
@@ -71,8 +71,8 @@ class EOS_SDK_PUBLIC ip_route_t {
 
    /**
     * Getter for 'persistent': indicates whether this route persists in system
-    * configuration. If true, the route appears in 'show running-config', and will
-    * be saved to startup-config if a 'copy running start' or 'write memory' CLI
+    * configuration. If true, the route appears in "show running-config", and will
+    * be saved to startup-config if a "copy running start" or "write memory" CLI
     * command is issued.
     */
    bool persistent() const;
@@ -125,7 +125,7 @@ class EOS_SDK_PUBLIC ip_route_via_t {
     */
    intf_id_t intf() const;
    /** Setter for 'intf'. */
-   void intf_is(intf_id_t const & intf);
+   void intf_is(intf_id_t intf);
 
    /**
     * Getter for 'nexthop_group': name of the next-hop group to use. If this string
@@ -137,10 +137,12 @@ class EOS_SDK_PUBLIC ip_route_via_t {
    /** Setter for 'nexthop_group'. */
    void nexthop_group_is(std::string const & nexthop_group);
 
-   /** Getter for 'mpls_label': Push an MPLS label. */
+   /**
+    * Getter for 'mpls_label': Push this MPLS label onto packets using this route.
+    */
    mpls_label_t mpls_label() const;
    /** Setter for 'mpls_label'. */
-   void mpls_label_is(mpls_label_t const & mpls_label);
+   void mpls_label_is(mpls_label_t mpls_label);
 
    bool operator==(ip_route_via_t const & other) const;
    bool operator!=(ip_route_via_t const & other) const;

@@ -10,7 +10,7 @@ inline mpls_route_key_t::mpls_route_key_t() :
       top_label_(0), metric_(0) {
 }
 
-inline mpls_route_key_t::mpls_route_key_t(mpls_label_t const & top_label, 
+inline mpls_route_key_t::mpls_route_key_t(mpls_label_t top_label, 
                                           mpls_route_metric_t metric) :
       top_label_(top_label), metric_(metric) {
 }
@@ -21,7 +21,7 @@ mpls_route_key_t::top_label() const {
 }
 
 inline void
-mpls_route_key_t::top_label_is(mpls_label_t const & top_label) {
+mpls_route_key_t::top_label_is(mpls_label_t top_label) {
    top_label_ = top_label;
 }
 
@@ -68,7 +68,7 @@ inline mpls_route_t::mpls_route_t() :
       key_(), persistent_(false) {
 }
 
-inline mpls_route_t::mpls_route_t(mpls_route_key_t const & key) :
+inline mpls_route_t::mpls_route_t(mpls_route_key_t key) :
       key_(key), persistent_(false) {
 }
 
@@ -78,7 +78,7 @@ mpls_route_t::key() const {
 }
 
 inline void
-mpls_route_t::key_is(mpls_route_key_t const & key) {
+mpls_route_t::key_is(mpls_route_key_t key) {
    key_ = key;
 }
 
@@ -126,7 +126,7 @@ inline mpls_route_via_t::mpls_route_via_t() :
       ttl_mode_(MPLS_TTLMODE_NULL), payload_type_(MPLS_PAYLOAD_TYPE_NULL) {
 }
 
-inline mpls_route_via_t::mpls_route_via_t(mpls_route_key_t const & route_key) :
+inline mpls_route_via_t::mpls_route_via_t(mpls_route_key_t route_key) :
       route_key_(route_key), hop_(), intf_(), pushswap_label_(0), 
       label_action_(MPLS_ACTION_NULL), ttl_mode_(MPLS_TTLMODE_NULL), 
       payload_type_(MPLS_PAYLOAD_TYPE_NULL) {
@@ -138,7 +138,7 @@ mpls_route_via_t::route_key() const {
 }
 
 inline void
-mpls_route_via_t::route_key_is(mpls_route_key_t const & route_key) {
+mpls_route_via_t::route_key_is(mpls_route_key_t route_key) {
    route_key_ = route_key;
 }
 
