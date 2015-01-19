@@ -30,9 +30,8 @@ namespace eos {
 
 class fib_route_iter_impl;
 
-class EOS_SDK_PUBLIC fib_route_iter_t {
-   // Uncomment when Iterator is defined.
-   // : public iter_base<fib_route_t, fib_route_iter_impl> {
+class EOS_SDK_PUBLIC fib_route_iter_t
+    : public iter_base<fib_route_t, fib_route_iter_impl> {
 
  private:
    friend class fib_route_iter_impl;
@@ -41,9 +40,8 @@ class EOS_SDK_PUBLIC fib_route_iter_t {
 
 class fib_fec_iter_impl;
 
-class EOS_SDK_PUBLIC fib_fec_iter_t {
-   // Uncomment when Iterator is defined.
-   // : public iter_base<fib_fec_t, fib_fec_iter_impl> {
+class EOS_SDK_PUBLIC fib_fec_iter_t
+    : public iter_base<fib_fec_t, fib_fec_iter_impl> {
 
  private:
    friend class fib_fec_iter_impl;
