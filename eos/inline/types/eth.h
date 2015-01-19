@@ -6,19 +6,23 @@
 
 namespace eos {
 
+#ifndef SWIG // BUG109396: SWIG + non parenthesized initializer lists
+
+
 inline eth_addr_t::eth_addr_t() :
-      bytes_({}) {
+      bytes_{} {
 }
 
 inline eth_addr_t::eth_addr_t(uint8_t byte0, uint8_t byte1, uint8_t byte2, 
                               uint8_t byte3, uint8_t byte4, uint8_t byte5) :
-      bytes_({ byte0, byte1, byte2, byte3, byte4, byte5 }) {
+      bytes_{ byte0, byte1, byte2, byte3, byte4, byte5 } {
 }
 
 inline eth_addr_t::eth_addr_t(uint8_t const bytes[6]) :
-      bytes_({ bytes[0], bytes[1], bytes[2], bytes[3], bytes[4], bytes[5] }) {
+      bytes_{ bytes[0], bytes[1], bytes[2], bytes[3], bytes[4], bytes[5] } {
 }
 
+#endif // BUG109396: SWIG + non parenthesized initializer lists
 inline std::string
 eth_addr_t::to_string() const {
    

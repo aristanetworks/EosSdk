@@ -22,6 +22,7 @@ class EOS_SDK_PUBLIC vlan_set : public std::bitset<4096> {
 /** Valid range of 1-4094 (0/4095 are reserved). */
 typedef uint16_t vlan_id_t;
 
+
 /** An Ethernet address. */
 class EOS_SDK_PUBLIC eth_addr_t {
  public:
