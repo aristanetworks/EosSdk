@@ -58,7 +58,7 @@ libeos_la_LDFLAGS = -version-info $(SDK_LIBTOOL_VERSION) -lrt
 # --------- #
 
 if USE_PYTHON
-SWIG_FILES := EosSdk.i SwigUtils.i SwigRenamer.py swig.patch
+SWIG_FILES := EosSdk.i SwigUtils.i Includes.i SwigRenamer.py swig.patch
 python_PYTHON = $(srcdir)/eossdk.py
 pyexec_LTLIBRARIES = _eossdk.la
 _eossdk_la_SOURCES = $(srcdir)/eossdk_wrap.cpp $(srcdir)/eossdk_wrap.h
