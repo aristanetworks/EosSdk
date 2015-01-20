@@ -230,6 +230,8 @@ wrap_iterator(eos::acl_iter_t, eos::acl_iter_impl, eos::acl_key_t);
 wrap_iterator(eos::acl_rule_ip_iter_t, eos::acl_rule_ip_iter_impl, eos::acl_rule_ip_entry_t);
 wrap_iterator(eos::acl_rule_eth_iter_t, eos::acl_rule_eth_iter_impl, eos::acl_rule_eth_entry_t);
 wrap_iterator(eos::class_map_iter_t, eos::class_map_iter_impl, eos::class_map_key_t);
+wrap_iterator(eos::fib_fec_iter_t, eos::fib_fec_iter_impl, eos::fib_fec_t);
+wrap_iterator(eos::fib_route_iter_t, eos::fib_route_iter_impl, eos::fib_route_t);
 wrap_iterator(eos::flow_entry_iter_t, eos::flow_entry_iter_impl, eos::flow_entry_t);
 wrap_iterator(eos::eth_intf_iter_t, eos::eth_intf_iter_impl, eos::intf_id_t);
 wrap_iterator(eos::eth_lag_intf_iter_t, eos::eth_lag_intf_iter_impl, eos::intf_id_t);
