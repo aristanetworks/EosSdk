@@ -202,7 +202,7 @@ void throw_py_error(error const& err) {
 %template() std::map<uint16_t, eos::nexthop_group_mpls_action_t>;
 %template() std::map<uint16_t, eos::nexthop_group_entry_t>;
 
-// For vlan_set
+// For vlan_set_t
 %template(_BitSet4096) std::bitset<4096>;
 
 // Ignore the `raise' method of all exceptions.  `raise' is a Python keyword

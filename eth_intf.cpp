@@ -74,8 +74,8 @@ class eth_intf_mgr_impl : public eth_intf_mgr {
       // TODO: No-op impl.
    }
 
-   vlan_set trunk_vlans(intf_id_t) const {
-      vlan_set vlans;
+   vlan_set_t trunk_vlans(intf_id_t) const {
+      vlan_set_t vlans;
       // TODO: No-op impl.
       return vlans;
    }
@@ -84,7 +84,7 @@ class eth_intf_mgr_impl : public eth_intf_mgr {
       // TODO: No-op impl.
    }
 
-   void trunk_vlan_is(intf_id_t, vlan_set const &) {
+   void trunk_vlan_is(intf_id_t, vlan_set_t const &) {
       // TODO: No-op impl.
    }
 

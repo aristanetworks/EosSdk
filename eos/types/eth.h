@@ -16,8 +16,12 @@
 
 namespace eos {
 
-class EOS_SDK_PUBLIC vlan_set : public std::bitset<4096> {
+/// A bitset representing a collection of VLAN IDs
+class EOS_SDK_PUBLIC vlan_set_t : public std::bitset<4096> {
 };
+
+/// A deprecated alias. Use eos::vlan_set_t instead.
+typedef vlan_set_t vlan_set;
 
 /** Valid range of 1-4094 (0/4095 are reserved). */
 typedef uint16_t vlan_id_t;

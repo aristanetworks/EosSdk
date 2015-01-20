@@ -124,7 +124,7 @@ class EOS_SDK_PUBLIC eth_intf_mgr : public base_mgr<eth_intf_handler, intf_id_t>
     * Returns the set of VLANs trunked on this interface.
     * Note that by default all VLANs are trunked on all interfaces.
     */
-   virtual vlan_set trunk_vlans(intf_id_t) const = 0;
+   virtual vlan_set_t trunk_vlans(intf_id_t) const = 0;
 
    /**
     * Adds a VLAN to the set of allowed VLANs when in trunk mode.
@@ -140,7 +140,7 @@ class EOS_SDK_PUBLIC eth_intf_mgr : public base_mgr<eth_intf_handler, intf_id_t>
     * nevertheless, but the configuration won't take effect until the
     * interface is switched to trunk mode.
     */
-   virtual void trunk_vlan_is(intf_id_t, vlan_set const & vlans) = 0;
+   virtual void trunk_vlan_is(intf_id_t, vlan_set_t const & vlans) = 0;
 
    /**
     * Removes a VLAN to the set of allowed VLANs when in trunk mode.
