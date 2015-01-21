@@ -91,7 +91,10 @@ inline iter_base<T, Impl>::operator bool() const {
  * template class, even if that class was marked as having default visibility.
  */
 #define INSTANTIATE_ITERATOR(SdkIter, IterClassImpl)    \
-  class EOS_SDK_PUBLIC IterClassImpl {};                \
+  struct EOS_SDK_PUBLIC IterClassImpl {                 \
+     virtual ~IterClassImpl() EOS_SDK_PRIVATE;          \
+  };                                                    \
+  IterClassImpl::~IterClassImpl() {}                    \
   template class iter_base<SdkIter, IterClassImpl>
 
 INSTANTIATE_ITERATOR(acl_key_t, acl_iter_impl);
