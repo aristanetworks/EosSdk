@@ -420,6 +420,9 @@ class InotifyPoller(eossdk.TimeoutHandler):
       self.poll()
       self.timeout_time_is(eossdk.now() + self.poll_interval_)
 
+   def cancel(self):
+      self.timeout_time_is(eossdk.never)
+
 
 class PolicyHandler(eossdk.AgentHandler, eossdk.PolicyMapHandler, eossdk.AclHandler):
 
@@ -462,13 +465,10 @@ class PolicyHandler(eossdk.AgentHandler, eossdk.PolicyMapHandler, eossdk.AclHand
    def on_initialized(self):
       print self.__class__.__name__, 'was initialized by the SDK'
       print 'Loading initial config'
-      config = load_config_file(self.config_file_)
-      if config is None:
-         raise Error('Invalid configuration')
-      self.config_is(config)
+      self.on_agent_option('config_file',
+                           self.agent_mgr.agent_option('config_file')
+                           or self.config_file_)
       print 'Finished loading initial config'
-      print 'Starting Inotify notifier'
-      self.timeout_ = InotifyPoller(self.sdk_, self.config_file_, self)
 
    def on_agent_option(self, name, value):
       if name == 'config_file':
@@ -476,6 +476,12 @@ class PolicyHandler(eossdk.AgentHandler, eossdk.PolicyMapHandler, eossdk.AclHand
          if config != self.config:
             self.agent_mgr.status_set('config_changed', datetime.datetime.today())
             self.config_is(config)
+         if self.config_file_ != value:
+            if self.timeout_:
+               self.timeout_.cancel()
+            print 'Starting Inotify notifier'
+            self.timeout_ = InotifyPoller(self.sdk_, self.config_file_, self)
+            self.config_file_ = value
 
    def on_policy_map_sync(self, key):
       self.agent_mgr.status_set('last_policy_map_sync_state', 'PASS')
@@ -528,21 +534,18 @@ def get_ip_addr(ip_addr):
 
 
 def main():
+   # Because we use `print' and we want our stuff to show up in the
+   # agent logs immediately.
+   os.environ['PYTHONUNBUFFERED'] = '1'  # TODO: Use tracing instead.
    # Config file path has to be provided by the environment variable
-   envvar = 'POLICY_ROUTER_CONFIG'
-   filename = os.environ.get(envvar)
+   filename = os.environ.get('POLICY_ROUTER_CONFIG')
 
-   if filename is not None:
-      # Obtain a reference to the EOS SDK
-      sdk = eossdk.Sdk()
-      # Instantiate the policy router application
-      _ = PolicyHandler(sdk, filename)
-      # Run the agent until terminated by a signal
-      sdk.main_loop('PolicyRouter')
-   else:
-      sys.stderr.write(
-         'Usage: %s=<path_to_json_config> %s\n\n' % (envvar, sys.argv[0]))
-      return 1
+   # Obtain a reference to the EOS SDK
+   sdk = eossdk.Sdk()
+   # Instantiate the policy router application
+   _ = PolicyHandler(sdk, filename)
+   # Run the agent until terminated by a signal
+   sdk.main_loop(['PolicyRouter'])
 
 
 if __name__ == '__main__':
