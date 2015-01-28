@@ -86,6 +86,7 @@ endif
 
 ACLOCAL_AMFLAGS = -I autogen
 EXTRA_DIST += bootstrap build.sh $(SWIG_FILES)
+EXTRA_DIST += LICENSE
 
 dist-hook:
 	chmod -R u+w $(distdir)
