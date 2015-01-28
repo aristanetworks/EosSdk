@@ -24,6 +24,11 @@ intf_id_t::is_null0() const {
    return false;
 }
 
+bool
+intf_id_t::is_subintf() const {
+   return false;
+}
+
 intf_type_t
 intf_id_t::intf_type() const {
    return INTF_TYPE_NULL;

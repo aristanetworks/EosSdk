@@ -31,6 +31,7 @@ class mpls_route_mgr;
 class neighbor_table_mgr;
 class nexthop_group_mgr;
 class policy_map_mgr;
+class subintf_mgr;
 class system_mgr;
 class timeout_mgr;
 class vrf_mgr;
@@ -145,6 +146,7 @@ class EOS_SDK_PUBLIC sdk {
    virtual void init_neighbor_table_mgr();
    virtual void init_nexthop_group_mgr();
    virtual void init_policy_map_mgr();
+   virtual void init_subintf_mgr();
    virtual void init_system_mgr();
    virtual void init_timeout_mgr();
    virtual void init_vrf_mgr();
@@ -167,12 +169,12 @@ class EOS_SDK_PUBLIC sdk {
    virtual ip_route_mgr * get_ip_route_mgr();
    virtual mac_table_mgr * get_mac_table_mgr();
    virtual mlag_mgr * get_mlag_mgr();
-   // TODO: move back to private (BUG86400)
    virtual mount_mgr * get_mount_mgr();
    virtual mpls_route_mgr * get_mpls_route_mgr();
    virtual neighbor_table_mgr * get_neighbor_table_mgr();
    virtual nexthop_group_mgr * get_nexthop_group_mgr();
    virtual policy_map_mgr * get_policy_map_mgr();
+   virtual subintf_mgr * get_subintf_mgr();
    virtual system_mgr * get_system_mgr();
    virtual timeout_mgr * get_timeout_mgr();
    virtual vrf_mgr * get_vrf_mgr();
@@ -204,6 +206,7 @@ class EOS_SDK_PUBLIC sdk {
    neighbor_table_mgr * neighbor_table_mgr_;
    nexthop_group_mgr * nexthop_group_mgr_;
    policy_map_mgr * policy_map_mgr_;
+   subintf_mgr * subintf_mgr_;
    system_mgr * system_mgr_;
    timeout_mgr * timeout_mgr_;
    vrf_mgr * vrf_mgr_;

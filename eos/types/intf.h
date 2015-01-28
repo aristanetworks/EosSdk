@@ -56,6 +56,8 @@ class EOS_SDK_PUBLIC intf_id_t {
 
    /** Returns true if the interface is Null0. */
    bool is_null0() const;
+   /** Returns true if the interface is a subinterface. */
+   bool is_subintf() const;
    /** Returns the interface's type. */
    intf_type_t intf_type() const;
 

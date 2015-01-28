@@ -43,6 +43,7 @@ sdk::sdk()
      neighbor_table_mgr_(0),
      nexthop_group_mgr_(0),
      policy_map_mgr_(0),
+     subintf_mgr_(0),
      system_mgr_(0),
      timeout_mgr_(0),
      vrf_mgr_(0) {
@@ -86,6 +87,7 @@ sdk::sdk(std::string const name)
      neighbor_table_mgr_(0),
      nexthop_group_mgr_(0),
      policy_map_mgr_(0),
+     subintf_mgr_(0),
      system_mgr_(0),
      timeout_mgr_(0),
      vrf_mgr_(0) {
@@ -127,6 +129,7 @@ INIT_STUB_MGR(mpls_route_mgr)
 INIT_STUB_MGR(neighbor_table_mgr)
 INIT_STUB_MGR(nexthop_group_mgr)
 INIT_STUB_MGR(policy_map_mgr)
+INIT_STUB_MGR(subintf_mgr)
 INIT_STUB_MGR(system_mgr)
 INIT_STUB_MGR(timeout_mgr)
 INIT_STUB_MGR(vrf_mgr)
@@ -137,12 +140,12 @@ void sdk::init_event_loop() {
    }
 }
 
-void sdk::init_mount_mgr() {
-   // BUG86400 - Not a public function
-}
-
 void sdk::init_fib_mgr(mgr_mode_type_t mode) {
    // TODO: No op impl.
+}
+
+void sdk::init_mount_mgr() {
+   // BUG86400 - Not a public function
 }
 
 }

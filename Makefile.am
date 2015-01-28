@@ -44,6 +44,7 @@ libeos_la_SOURCES += neighbor_table.cpp
 libeos_la_SOURCES += policy_map.cpp
 libeos_la_SOURCES += policy_map_types.cpp
 libeos_la_SOURCES += sdk.cpp
+libeos_la_SOURCES += subintf.cpp
 libeos_la_SOURCES += system.cpp
 libeos_la_SOURCES += timer.cpp
 libeos_la_SOURCES += tracing.cpp
