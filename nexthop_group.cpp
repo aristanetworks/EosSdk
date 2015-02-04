@@ -32,6 +32,10 @@ class nexthop_group_mgr_impl : public nexthop_group_mgr {
       return false;
    }
 
+   bool active(std::string const & nexthop_group_name) const {
+      return true;
+   }
+
    void nexthop_group_set(nexthop_group_t const &group) {
       // TODO: No op impl.
    }
@@ -41,6 +45,27 @@ class nexthop_group_mgr_impl : public nexthop_group_mgr {
    }
 };
 
-DEFINE_STUB_MGR_CTOR(nexthop_group_mgr)
+DEFINE_STUB_MGR_CTOR(nexthop_group_mgr);
+
+nexthop_group_handler::nexthop_group_handler(nexthop_group_mgr * mgr) :
+      base_handler<nexthop_group_mgr, nexthop_group_handler>(mgr) {
+}
+
+void
+nexthop_group_handler::watch_all_nexthop_groups(bool interest) {
+   // TODO: No op impl.
+}
+
+void
+nexthop_group_handler::watch_nexthop_group(std::string const & group_name,
+                                           bool interest) {
+   // TODO: No op impl.
+}
+
+void
+nexthop_group_handler::on_nexthop_group_active(std::string const & group_name,
+                                               bool active) {
+   // TODO: No op impl.
+}
 
 }

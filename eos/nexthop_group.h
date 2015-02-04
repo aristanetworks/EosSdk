@@ -55,6 +55,8 @@
 #ifndef EOS_NEXTHOP_GROUP_H
 #define EOS_NEXTHOP_GROUP_H
 
+#include <eos/base_handler.h>
+#include <eos/base_mgr.h>
 #include <eos/intf.h>
 #include <eos/ip.h>
 #include <eos/iterator.h>
@@ -63,6 +65,37 @@
 #include <eos/types/nexthop_group.h>
 
 namespace eos {
+
+class nexthop_group_mgr;
+
+/// This class handles changes to a nexthop group's status
+class EOS_SDK_PUBLIC nexthop_group_handler :
+      public base_handler<nexthop_group_mgr, nexthop_group_handler> {
+ public:
+   explicit nexthop_group_handler(nexthop_group_mgr *);
+   nexthop_group_mgr * get_nexthop_group_mgr() const;
+
+   /**
+    * Registers this class to receive change updates on all nexthop groups.
+    *
+    * Expects a boolean signifying whether notifications should be
+    * propagated to this instance or not.
+    */
+   void watch_all_nexthop_groups(bool);
+
+  /**
+    * Registers this class to receive change updates on the given nexthop group.
+    *
+    * Expects the name of the corresponding nexthop group and a
+    * boolean signifying whether notifications should be propagated to
+    * this instance or not.
+    */
+   void watch_nexthop_group(std::string const & nexthop_group_name, bool);
+
+   /// Handler called when the active status of a nexthop_group changes
+   virtual void on_nexthop_group_active(std::string const & nexthop_group_name,
+                                        bool active);
+};
 
 class nexthop_group_iter_impl;
 
@@ -80,7 +113,8 @@ class EOS_SDK_PUBLIC nexthop_group_iter_t :
  * When your eos::agent_handler::on_initialized virtual function is called, the
  * manager is valid for use.
  */
-class EOS_SDK_PUBLIC nexthop_group_mgr {
+class EOS_SDK_PUBLIC nexthop_group_mgr :
+      public base_mgr<nexthop_group_handler, std::string> {
  public:
    virtual ~nexthop_group_mgr();
 
@@ -100,16 +134,34 @@ class EOS_SDK_PUBLIC nexthop_group_mgr {
    /// Returns true if a nexthop group with the given name has been configured.
    virtual bool exists(std::string const & nexthop_group_name) const = 0;
 
+   /**
+    * Returns whether or not the given nexthop group is active.
+    *
+    * Nexthop groups are active if the FIB has prefixes using this
+    * group. Deleting an active nexthop group will cause all prefixes
+    * that point to that nexthop group to blackhole their traffic.
+    *
+    * In order to hitlessly delete a nexthop group, first delete all
+    * prefixes that point to it, wait for the nexthop group to no
+    * longer be active (using
+    * nexthop_group_handler::on_nexthop_group_active), and then delete
+    * the nexthop group.
+    */
+   virtual bool active(std::string const & nexthop_group_name) const = 0;
+
    /// Creates or updates a nexthop group.
    virtual void nexthop_group_set(nexthop_group_t const &) = 0;
    /// Removes the named nexthop group from the configuration if it exists
    virtual void nexthop_group_del(std::string const & nexthop_group_name) = 0;
  protected:
    nexthop_group_mgr() EOS_SDK_PRIVATE;
+   friend class nexthop_group_handler;
  private:
    EOS_SDK_DISALLOW_COPY_CTOR(nexthop_group_mgr);
 };
 
 } // end namespace eos
+
+#include <eos/inline/nexthop_group.h>
 
 #endif // EOS_NEXTHOP_GROUP_H
