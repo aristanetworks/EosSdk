@@ -254,7 +254,7 @@ nexthop_group_t::source_ip() const {
 
 inline void
 nexthop_group_t::source_ip_is(ip_addr_t const & source_ip) {
-   if (type_ == NEXTHOP_GROUP_MPLS) {
+   if (type_ == NEXTHOP_GROUP_MPLS && !!source_ip) {
       panic(invalid_argument_error(
                   "source_ip",
                   "MPLS nexthop group cannot specify a source IP"));
