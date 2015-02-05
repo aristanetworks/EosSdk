@@ -2,6 +2,8 @@
 // Arista Networks, Inc. Confidential and Proprietary.
 
 #include <eos/agent.h>
+#include <eos/eth.h>
+#include <eos/eth_intf.h>
 #include <eos/eth_lag_intf.h>
 #include <eos/intf.h>
 #include <eos/sdk.h>
@@ -28,23 +30,30 @@
 static const int TIMEOUT_SCAN_ITERATORS = 30;
 
 class port_channel_watcher : public eos::agent_handler,
+                             public eos::intf_handler,
                              public eos::eth_lag_intf_handler,
+                             public eos::eth_intf_handler,
                              public eos::timeout_handler {
  public:
    explicit port_channel_watcher(eos::sdk & sdk)
          : eos::agent_handler(sdk.get_agent_mgr()),
+           eos::intf_handler(sdk.get_intf_mgr()),
            eos::eth_lag_intf_handler(sdk.get_eth_lag_intf_mgr()),
+           eos::eth_intf_handler(sdk.get_eth_intf_mgr()),
            eos::timeout_handler(sdk.get_timeout_mgr()),
            t("PortChannelWatcher") {
       t.trace0("Agent constructed");
       // This eth_lag_intf_handler receives notifications for all LAGs
+      // as well as Ethernet specific interface state via the eth_intf_handler.
       watch_all_eth_lag_intfs(true);
-      // Kick off the iterator scanner
-      timeout_time_is(eos::now() + 1);
+      watch_all_eth_intfs(true);
+      watch_all_intfs(true);
    }
 
    void on_initialized() {
       t.trace0("Initialized");
+      // Kick off the iterator scanner
+      timeout_time_is(eos::now() + 1);
    }
 
    void on_timeout() {
@@ -79,9 +88,28 @@ class port_channel_watcher : public eos::agent_handler,
 
    void on_oper_status(eos::intf_id_t intf, eos::oper_status_t status) {
       if (intf.intf_type() == eos::INTF_TYPE_LAG) {
-         t.trace2("LAG %s became %s",
+         t.trace2("Interface %s oper status is now %s",
                   intf.to_string().c_str(),
                   status == eos::INTF_OPER_UP ? "up" : "down");
+      }
+   }
+
+   void on_intf_create(eos::intf_id_t intf) {
+      if (intf.intf_type() == eos::INTF_TYPE_LAG) {
+         t.trace2("Interface %s created", intf.to_string().c_str());
+      }
+   }
+
+   void on_intf_delete(eos::intf_id_t intf) {
+      if (intf.intf_type() == eos::INTF_TYPE_LAG) {
+         t.trace2("Interface %s deleted", intf.to_string().c_str());
+      }
+   }
+
+   void on_eth_addr(eos::intf_id_t intf, eos::eth_addr_t mac_addr) {
+      if (intf.intf_type() == eos::INTF_TYPE_LAG) {
+         t.trace2("Interface %s MAC address is now %s",
+                  intf.to_string().c_str(), mac_addr.to_string().c_str());
       }
    }
 
