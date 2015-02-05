@@ -6,6 +6,33 @@
 
 namespace eos {
 
+eth_lag_intf_handler::eth_lag_intf_handler(eth_lag_intf_mgr * mgr) :
+      base_handler<eth_lag_intf_mgr, eth_lag_intf_handler>(mgr) {
+}
+
+eth_lag_intf_handler::~eth_lag_intf_handler() {
+}
+
+void
+eth_lag_intf_handler::watch_all_eth_lag_intfs(bool) {
+   // TODO: No op impl.
+}
+
+void
+eth_lag_intf_handler::watch_eth_lag_intf(intf_id_t, bool) {
+   // TODO: No op impl.
+}
+
+void
+eth_lag_intf_handler::on_lag_member_set(intf_id_t lag, intf_id_t member) {
+   // TODO: No op impl.
+}
+
+void
+eth_lag_intf_handler::on_lag_member_del(intf_id_t lag, intf_id_t member) {
+   // TODO: No op impl.
+}
+
 /// The manager for Lag interface
 class eth_lag_intf_mgr_impl : public eth_lag_intf_mgr {
  public:
