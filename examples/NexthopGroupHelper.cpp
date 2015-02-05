@@ -56,7 +56,14 @@ class NexthopGroupSyncer : public eos::nexthop_group_handler {
    
  private:
    void on_nexthop_group_active(std::string const & nexthop_group_name,
-                                bool active);
+                                bool active) {
+      if(!active && (groups_to_delete_.count(nexthop_group_name))) {
+         // Nexthop group is no longer active, delete it
+         get_nexthop_group_mgr()->nexthop_group_del(nexthop_group_name);
+         groups_to_delete_.erase(nexthop_group_name);
+      }
+   }
+   
    bool in_resync_mode_;
    // Set of nexthop group names we've seen during resync
    std::unordered_set<std::string> seen_groups_;
