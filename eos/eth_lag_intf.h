@@ -62,6 +62,24 @@
          }
          return;
       }
+
+      // Handler called when a physical interface becomes active in a LAG.
+      // In the case of LACP managed interfaces, members do not become
+      // active until LACP negotiation is complete.
+      void on_lag_member_set(eos::intf_id_t lag, eos::intf_id_t member) {
+         // Perform some relevant action, such as reporting to a monitoring
+         // system or provisioning workflow manager.
+      }
+
+      // Handler called when a physical interface is no longer active
+      // in a LAG.
+      void on_lag_member_del(eos::intf_id_t lag, eos::intf_id_t member) {
+         // Custom application code to react to a physical interface
+         // leaving a LAG for any reason. For example, to get the reason:
+         auto stat = get_eth_lag_intf_mgr()->eth_lag_intf_membership_status(member);
+         std::string reason(stat.reason());  // e.g., 'not link up'
+      }
+
    }
 
    int main(int argc, char **argv) {
