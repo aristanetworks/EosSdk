@@ -5,31 +5,66 @@
 #include <eos/eth_lag_intf.h>
 #include <eos/intf.h>
 #include <eos/sdk.h>
+#include <eos/timer.h>
 #include <eos/tracing.h>
 
 /**
  * @file
  * An example agent reacting to PortChannel interface events.
  *
- * Run this agent, and then make changes (in the CLI) to
- * port channels. The agent will react and display messages
- * depending on the types of events received.
+ * Run this agent, and then make configuration changes (in the CLI or
+ * via eAPI) to port channels. The agent will react and display
+ * messages depending on the types of events received.
+ *
+ * In addition, every 30 seconds, the LAG iterators are exercised.
+ * Each configured LAG interface, its configured members and the
+ * current status of each member are traced.
+ *
+ * How to run the example:
+ *
+ * $ TRACE="PortChannelWatcher" ./PortChannelWatcher
  */
 
+static const int TIMEOUT_SCAN_ITERATORS = 30;
+
 class port_channel_watcher : public eos::agent_handler,
-                             eos::eth_lag_intf_handler {
+                             public eos::eth_lag_intf_handler,
+                             public eos::timeout_handler {
  public:
    explicit port_channel_watcher(eos::sdk & sdk)
          : eos::agent_handler(sdk.get_agent_mgr()),
            eos::eth_lag_intf_handler(sdk.get_eth_lag_intf_mgr()),
+           eos::timeout_handler(sdk.get_timeout_mgr()),
            t("PortChannelWatcher") {
       t.trace0("Agent constructed");
       // This eth_lag_intf_handler receives notifications for all LAGs
       watch_all_eth_lag_intfs(true);
+      // Kick off the iterator scanner
+      timeout_time_is(eos::now() + 1);
    }
 
    void on_initialized() {
       t.trace0("Initialized");
+   }
+
+   void on_timeout() {
+      scan_iterators();
+      timeout_time_is(eos::now() + TIMEOUT_SCAN_ITERATORS);
+   }
+
+   void scan_iterators() {
+      auto mgr = get_eth_lag_intf_mgr();
+      for (auto lag = mgr->eth_lag_intf_iter(); lag; ++lag) {
+         t.trace2("Found configured LAG: %s", lag->to_string().c_str());
+         // Emit its member interfaces
+         for (auto memb = mgr->eth_lag_intf_member_iter(*lag);
+              memb; ++memb) {
+            t.trace2("  member: %s", memb->to_string().c_str());
+            t.trace2(
+                  "    %s",
+                  mgr->eth_lag_intf_membership_status(*memb).to_string().c_str());
+         }
+      }
    }
 
    void on_lag_member_set(eos::intf_id_t lag, eos::intf_id_t member) {
