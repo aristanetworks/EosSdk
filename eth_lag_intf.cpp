@@ -22,6 +22,12 @@ class eth_lag_intf_mgr_impl : public eth_lag_intf_mgr {
       return *nop;
    }
 
+   eth_lag_intf_member_iter_t eth_lag_intf_member_iter(
+         intf_id_t eth_lag_intf_id) const {
+      eth_lag_intf_member_iter_t * nop = 0;
+      return *nop;
+   }
+
    eth_lag_intf_t eth_lag_intf_is(intf_id_t eth_lag_intf_id) {
       return eth_lag_intf_t();
    }
