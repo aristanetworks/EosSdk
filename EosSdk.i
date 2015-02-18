@@ -10,6 +10,7 @@
 %include "std_string.i"
 %include "std_vector.i"
 %import "SwigUtils.i"
+%include "typemaps.i"
 
 // Change all some_class_t names to just SomeClass:
  // The <<""< uses automatic string concatination to get around the
@@ -33,6 +34,10 @@ typedef double seconds_t;
 typedef uint16_t uint16_be_t;
 typedef uint32_t uint32_be_t;
 typedef uint64_t uint64_be_t;
+
+%typemap(in) void *eossdk_context {
+   $1 = PyLong_AsVoidPtr($input);
+}
 
 // To make sure instance of EosSdk types are hashable in python, this is important
 // when the objects are used in sets, dicts, etc (as key).

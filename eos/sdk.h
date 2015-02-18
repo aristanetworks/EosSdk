@@ -97,8 +97,10 @@ class EOS_SDK_PUBLIC sdk {
     * an agent using this constructor from the CLI, note that the name
     * used here must match the name used in the CLI configuration.
     */
-   explicit sdk(std::string const agent_name);
+   explicit sdk(std::string const agent_name, void *eossdk_context=NULL);
    virtual ~sdk();
+
+   virtual void initialize_context();
 
    /**
     * Return the name of this SDK object.
@@ -212,6 +214,7 @@ class EOS_SDK_PUBLIC sdk {
    vrf_mgr * vrf_mgr_;
 
    std::string name_;
+   void * eossdk_context_;
 
    friend class mount_mgr;
 };

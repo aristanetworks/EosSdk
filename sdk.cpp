@@ -60,10 +60,11 @@ sdk::sdk()
       }
    }
    name_ = agent_process_name;
+   eossdk_context_ = NULL;
    impl.register_sdk(this);
 }
 
-sdk::sdk(std::string const name)
+sdk::sdk(std::string const name, void *eossdk_context)
    : acl_mgr_(0),
      agent_mgr_(0),
      aresolve_mgr_(0),
@@ -92,6 +93,7 @@ sdk::sdk(std::string const name)
      timeout_mgr_(0),
      vrf_mgr_(0) {
    name_ = name;
+   eossdk_context_ = eossdk_context;
    impl.register_sdk(this);
 }
 
@@ -107,6 +109,9 @@ void delete_agent_mgr(agent_mgr *);
 
 sdk::~sdk() {
    delete_agent_mgr(agent_mgr_);
+}
+
+void sdk::initialize_context() {
 }
 
 INIT_STUB_MGR(acl_mgr)
