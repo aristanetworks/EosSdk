@@ -34,6 +34,12 @@ typedef uint16_t uint16_be_t;
 typedef uint32_t uint32_be_t;
 typedef uint64_t uint64_be_t;
 
+// To make sure instance of EosSdk types are hashable in python, this is important
+// when the objects are used in sets, dicts, etc (as key).
+// Two test cases added for this, one is in EthLagIntfTest.py and the other in 
+// IntfTest.py.
+%rename(__hash__) *::hash;
+
 // generate directors for all classes that have virtual methods, except the managers
 %feature("director");
 %feature("nodirector") eos::acl_mgr;
