@@ -75,6 +75,15 @@ intf_id_t::operator<(intf_id_t const & other) const {
    return false;
 }
 
+inline uint32_t
+intf_id_t::hash() const {
+   uint32_t ret = 0;
+   ret = hash_mix::mix((uint8_t *)&intfId_,
+              sizeof(uint64_t), ret);
+   ret = hash_mix::final_mix(ret);
+   return ret;
+}
+
 inline std::ostream&
 operator<<(std::ostream& os, const intf_id_t& obj) {
    os << obj.to_string();

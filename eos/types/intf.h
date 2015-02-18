@@ -5,6 +5,7 @@
 #define EOS_TYPES_INTF_H
 
 #include <eos/exception.h>
+#include <eos/hash_mix.h>
 #include <eos/panic.h>
 #include <eos/utility.h>
 #include <sstream>
@@ -72,6 +73,8 @@ class EOS_SDK_PUBLIC intf_id_t {
    bool operator==(intf_id_t const & other) const;
    bool operator!=(intf_id_t const & other) const;
    bool operator<(intf_id_t const & other) const;
+   /** The hash function for type intf_id_t. */
+   uint32_t hash() const;
    /**
     * A utility stream operator that adds a string representation of intf_id_t to
     * the ostream.
