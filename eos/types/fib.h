@@ -63,7 +63,10 @@ enum fib_route_type_t {
    ROUTE_TYPE_BGP,
    ROUTE_TYPE_IBGP,
    ROUTE_TYPE_EBGP,
+   /** Unused in EOS 4.15.1, use ROUTE_TYPE_ISIS_LEVEL1/2 instead. */
    ROUTE_TYPE_ISIS,
+   ROUTE_TYPE_ISIS_LEVEL1,
+   ROUTE_TYPE_ISIS_LEVEL2,
    ROUTE_TYPE_NEXTHOP_GROUP,
 };
 /** Appends a string representation of enum fib_route_type_t value to the ostream. */
