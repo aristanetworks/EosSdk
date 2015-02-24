@@ -33,6 +33,11 @@ eth_lag_intf_handler::on_lag_member_del(intf_id_t lag, intf_id_t member) {
    // TODO: No op impl.
 }
 
+void
+eth_lag_intf_handler::on_lag_intf_speed(intf_id_t lag, uint64_t speed) {
+   // TODO: No op impl.
+}
+
 /// The manager for Lag interface
 class eth_lag_intf_mgr_impl : public eth_lag_intf_mgr {
  public:

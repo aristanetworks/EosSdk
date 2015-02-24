@@ -177,13 +177,13 @@ eth_lag_intf_t::intf() const {
    return intf_;
 }
 
-inline double
+inline uint64_t
 eth_lag_intf_t::speed() const {
    return speed_;
 }
 
 inline void
-eth_lag_intf_t::speed_is(double speed) {
+eth_lag_intf_t::speed_is(uint64_t speed) {
    speed_ = speed;
 }
 
@@ -242,7 +242,7 @@ eth_lag_intf_t::hash() const {
    ret = hash_mix::mix((uint8_t *)&intf_,
               sizeof(intf_id_t), ret);
    ret = hash_mix::mix((uint8_t *)&speed_,
-              sizeof(double), ret);
+              sizeof(uint64_t), ret);
    ret = hash_mix::mix((uint8_t *)&min_links_,
               sizeof(uint32_t), ret);
    ret = hash_mix::mix((uint8_t *)&fallback_type_,

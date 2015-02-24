@@ -156,9 +156,9 @@ class EOS_SDK_PUBLIC eth_lag_intf_t {
     * Getter for 'speed': the aggregated capacity (speed) of this LAG interface in
     * megabits.
     */
-   double speed() const;
+   uint64_t speed() const;
    /** Setter for 'speed'. */
-   void speed_is(double speed);
+   void speed_is(uint64_t speed);
 
    /**
     * Getter for 'min_links': the min links required up before bringing up an LAG
@@ -197,7 +197,7 @@ class EOS_SDK_PUBLIC eth_lag_intf_t {
 
  private:
    intf_id_t intf_;
-   double speed_;
+   uint64_t speed_;
    uint32_t min_links_;
    eth_lag_intf_fallback_type_t fallback_type_;
    uint16_t fallback_timeout_;
