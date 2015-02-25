@@ -242,6 +242,8 @@ void throw_py_error(error const& err) {
 wrap_iterator(eos::acl_iter_t, eos::acl_iter_impl, eos::acl_key_t);
 wrap_iterator(eos::acl_rule_ip_iter_t, eos::acl_rule_ip_iter_impl, eos::acl_rule_ip_entry_t);
 wrap_iterator(eos::acl_rule_eth_iter_t, eos::acl_rule_eth_iter_impl, eos::acl_rule_eth_entry_t);
+wrap_iterator(eos::agent_option_iter_t, eos::agent_option_iter_impl, std::string);
+wrap_iterator(eos::agent_status_iter_t, eos::agent_status_iter_impl, std::string);
 wrap_iterator(eos::class_map_iter_t, eos::class_map_iter_impl, eos::class_map_key_t);
 wrap_iterator(eos::fib_fec_iter_t, eos::fib_fec_iter_impl, eos::fib_fec_t);
 wrap_iterator(eos::fib_route_iter_t, eos::fib_route_iter_impl, eos::fib_route_t);

@@ -9,6 +9,7 @@
 #include <eos/base.h>
 #include <eos/base_handler.h>
 #include <eos/base_mgr.h>
+#include <eos/iterator.h>
 
 /**
  * @file
@@ -127,6 +128,25 @@ class EOS_SDK_PUBLIC agent_handler : public base_handler<agent_mgr, agent_handle
    virtual void on_agent_option(std::string const & name, std::string const & value);
 };
 
+class agent_option_iter_impl;
+/// Iterator type for configured options
+class EOS_SDK_PUBLIC agent_option_iter_t :
+      public iter_base<std::string, agent_option_iter_impl> {
+ private:
+   friend class agent_option_iter_impl;
+   explicit agent_option_iter_t(agent_option_iter_impl * const) EOS_SDK_PRIVATE;
+};
+
+class agent_status_iter_impl;
+/// Iterator type for published status keys.
+class EOS_SDK_PUBLIC agent_status_iter_t :
+      public iter_base<std::string, agent_status_iter_impl> {
+ private:
+   friend class agent_status_iter_impl;
+   explicit agent_status_iter_t(agent_status_iter_impl * const) EOS_SDK_PRIVATE;
+};
+
+
 class EOS_SDK_PUBLIC agent_mgr : public base_mgr<agent_handler> {
  public:
     virtual ~agent_mgr();
@@ -156,14 +176,39 @@ class EOS_SDK_PUBLIC agent_mgr : public base_mgr<agent_handler> {
      */
     virtual std::string agent_option(std::string const & name) const = 0;
 
+    /**
+     * Iterate through all configured agent options.
+     *
+     * Yields a string for each option name that has a non-empty value
+     * set.
+     */
+    virtual agent_option_iter_t agent_option_iter() const = 0;
+
+
+    /**
+     * Get last set value for the given status key.
+     *
+     * If no value has been set for the named key, an empty string is
+     * returned.
+     */
+    virtual std::string status(std::string const & key) const = 0;
+
+    /**
+     * Iterate through all status values that this agent has set.
+     *
+     * Yields a string for each key that has a non-empty value set.
+     */
+    virtual agent_status_iter_t status_iter() const = 0;
+
     /// Publish a status value mapped to the named key. 
     virtual void status_set(std::string const & key,
                             std::string const & value) = 0;
     /// Delete the stored agent status with the given key
     virtual void status_del(std::string const & key) = 0;
 
+
     /**
-     * Called when agent graceful shutdown has successfully completed.
+     * Notify the SDK that the agent has successfully shutdown.
      *
      * If the agent requires special handling to cleanup state when
      * the agent is disabled, then an agent_handler must be created

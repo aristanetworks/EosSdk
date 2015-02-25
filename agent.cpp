@@ -59,6 +59,22 @@ class agent_mgr_impl : public agent_mgr {
       return "";
    }
 
+   agent_option_iter_t agent_option_iter() const {
+      agent_option_iter_t * nop = 0;
+      return *nop;  // TODO: No op impl.
+   }
+
+   std::string 
+   status(std::string const & key) const {
+      return "";
+   }
+
+   agent_status_iter_t status_iter() const {
+      agent_status_iter_t * nop = 0;
+      return *nop;  // TODO: No op impl.
+   }
+
+
    void
    status_set(std::string const & key, std::string const & value) {
    }
@@ -67,11 +83,6 @@ class agent_mgr_impl : public agent_mgr {
    status_del(std::string const & key) {
    }
    
-   std::string
-   status(std::string const & key) const {
-      return "";
-   }
-
 };
 
 void handle_agent_initialize(agent_mgr * mgr) {
