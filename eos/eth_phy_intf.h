@@ -47,6 +47,8 @@ class EOS_SDK_PUBLIC eth_phy_intf_handler
    virtual void on_eth_phy_intf_create(intf_id_t);
    /// Handler called when a physical ethernet interface is deleted
    virtual void on_eth_phy_intf_delete(intf_id_t);
+   /// Handler called when the operational link speed changes
+   virtual void on_eth_phy_intf_link_speed(intf_id_t, eth_link_speed_t);
 };
 
 

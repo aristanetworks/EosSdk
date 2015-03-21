@@ -30,6 +30,11 @@ eth_phy_intf_handler::on_eth_phy_intf_delete(intf_id_t) {
    // TODO: No op impl.
 }
 
+void
+eth_phy_intf_handler::on_eth_phy_intf_link_speed(intf_id_t, eth_link_speed_t) {
+   // TODO: No op impl.
+}
+
 class eth_phy_intf_mgr_impl : public eth_phy_intf_mgr {
  public:
    eth_phy_intf_mgr_impl() {
