@@ -58,6 +58,8 @@ class EOS_SDK_PUBLIC intf_handler : public base_handler<intf_mgr, intf_handler> 
    virtual void on_oper_status(intf_id_t, oper_status_t);
    /// Handler called after an interface has been configured to be enabled.
    virtual void on_admin_enabled(intf_id_t, bool);
+   /// Handler called when the configured description of an interface changes.
+   virtual void on_intf_description(intf_id_t, const std::string &);
 };
 
 class intf_iter_impl;
@@ -89,11 +91,15 @@ class EOS_SDK_PUBLIC intf_mgr : public base_mgr<intf_handler, intf_id_t> {
    virtual bool admin_enabled(intf_id_t) const = 0;
    /// Configures the enabled status of the interface
    virtual void admin_enabled_is(intf_id_t, bool) = 0;
+   /// Returns the configured description of the given interface.
+   virtual std::string description(intf_id_t) const = 0;
    /**
     * Configure the description of the given interface.
     * Creates a copy of the passed in string description.
     */
    virtual void description_is(intf_id_t, char const *) = 0;
+   /// Configure the description of the given interface.
+   virtual void description_is(intf_id_t, const std::string &) = 0;
    /// Inspects the current operational status of the given interface.
    virtual oper_status_t oper_status(intf_id_t) const = 0;
 

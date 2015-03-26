@@ -40,6 +40,11 @@ intf_handler::on_admin_enabled(intf_id_t, bool) {
    // TODO: No op impl.
 }
 
+void
+intf_handler::on_intf_description(intf_id_t, const std::string &) {
+   // TODO: No op impl.
+}
+
 class intf_mgr_impl : public intf_mgr {
  public:
    intf_mgr_impl() {
@@ -65,8 +70,17 @@ class intf_mgr_impl : public intf_mgr {
    void admin_enabled_is(intf_id_t id, bool enabled) {
       // TODO: No op impl.
    }
-
+   
+   std::string description(intf_id_t) const {
+      // TODO: No op impl.
+      return "";
+   }
+   
    void description_is(intf_id_t, char const *) {
+      // TODO: No op impl.
+   }
+
+   void description_is(intf_id_t, const std::string &) {
       // TODO: No op impl.
    }
 
