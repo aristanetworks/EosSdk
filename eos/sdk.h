@@ -219,7 +219,34 @@ class EOS_SDK_PUBLIC sdk {
    friend class mount_mgr;
 };
 
+/**
+ * @deprecated This method changes the size of the internal buffer
+ * used for enqueueing state updates.
+ *
+ * It should be used for specific applications that attempt
+ * to do large numbers of updates without yielding to the event
+ * loop. It should only be rarely used, and future versions of EOS
+ * will eliminate the need for this method entirely. At that point,
+ * this method will be removed, so please contact the EOS SDK
+ * developers before using this method.
+ * 
+ * To use, call this method at the beginning of your on_initialized()
+ * callback.
+ * 
+ * This method takes in a number of bytes that the buffer should
+ * be. By default, this buffer size is set to 8.3 MB (which the kernel
+ * doubles to 16.7 MB) - the max kernel buffer size.
+ * 
+ * Unlike setsockopt, the number of bytes you pass to this function is
+ * NOT doubled for setting the actual socket buffer size. Note though
+ * that the new buffer size may not exactly match the requested buffer
+ * size, but we guarantee that it the new size is at least as big as
+ * the requested size.
+ */
+void internal_connection_buffer_size_is(uint32_t bytes) EOS_SDK_PUBLIC;
+
 }
+
 
 #include <eos/inline/sdk.h>
 
