@@ -6,8 +6,10 @@
 %include "stdint.i"
 %include "std_list.i"
 %include "std_map.i"
+%include "std_pair.i"
 %include "std_set.i"
 %include "std_string.i"
+%include "std_unordered_set.i"
 %include "std_vector.i"
 %import "SwigUtils.i"
 %include "typemaps.i"
@@ -214,6 +216,9 @@ void throw_py_error(error const& err) {
 %template() std::list<eos::mpls_label_t>;
 %template() std::map<uint16_t, eos::nexthop_group_mpls_action_t>;
 %template() std::map<uint16_t, eos::nexthop_group_entry_t>;
+%template() std::pair<uint32_t, eos::acl_rule_ip_t>;
+%template() std::pair<uint32_t, eos::acl_rule_eth_t>;
+%template() std::unordered_set<eos::ip_addr_t>;
 
 // For vlan_set_t
 %template(_BitSet4096) std::bitset<4096>;
