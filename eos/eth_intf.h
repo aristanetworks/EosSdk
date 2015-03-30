@@ -49,7 +49,13 @@ class EOS_SDK_PUBLIC eth_intf_handler : public base_handler<eth_intf_mgr,
    virtual void on_eth_intf_create(intf_id_t);
    /// Handler called when an ethernet interface is deleted
    virtual void on_eth_intf_delete(intf_id_t);
-   /// Handler called when the mac address of an interface changes
+   /**
+    * Handler called when the mac address of an interface changes
+    *
+    * Note that for physical interfaces, the on_eth_addr handler
+    * will get called with the default eth_addr_t value when
+    * the hardware for that physical interface is removed.
+    */
    virtual void on_eth_addr(intf_id_t, eth_addr_t);
 };
 
@@ -73,6 +79,14 @@ class EOS_SDK_PUBLIC eth_intf_mgr : public base_mgr<eth_intf_handler, intf_id_t>
    // Collection management
    virtual eth_intf_iter_t eth_intf_iter() const = 0;
 
+   /**
+    * Returns whether the given ethernet interface exists.
+    *
+    * If exists returns true, then this intf_id_t can be successfully
+    * passed into every method of the eth_phy_intf_mgr. If not, then
+    * methods of the eth_phy_intf_mgr can throw a
+    * no_such_interface_error exception.
+    */
    virtual bool exists(intf_id_t) const = 0;
 
    // Attribute accessors

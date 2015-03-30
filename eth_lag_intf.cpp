@@ -24,6 +24,16 @@ eth_lag_intf_handler::watch_eth_lag_intf(intf_id_t, bool) {
 }
 
 void
+eth_lag_intf_handler::on_eth_lag_intf_create(intf_id_t lag) {
+   // TODO: No op impl.
+}
+
+void
+eth_lag_intf_handler::on_eth_lag_intf_delete(intf_id_t lag) {
+   // TODO: No op impl.
+}
+
+void
 eth_lag_intf_handler::on_lag_member_set(intf_id_t lag, intf_id_t member) {
    // TODO: No op impl.
 }
@@ -47,6 +57,10 @@ class eth_lag_intf_mgr_impl : public eth_lag_intf_mgr {
    eth_lag_intf_iter_t eth_lag_intf_iter() const {
       eth_lag_intf_iter_t * nop = 0;
       return *nop;
+   }
+
+   bool exists(intf_id_t intf_id) const {
+      return false;
    }
 
    eth_lag_intf_member_iter_t eth_lag_intf_member_iter() const {

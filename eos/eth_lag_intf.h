@@ -163,6 +163,16 @@ class EOS_SDK_PUBLIC eth_lag_intf_handler : public base_handler<
    void watch_eth_lag_intf(intf_id_t, bool);
 
    /**
+    * Handler called when a LAG ethernet interface is created.
+    */
+   virtual void on_eth_lag_intf_create(intf_id_t);
+   
+   /**
+    * Handler called when a LAG ethernet interface is deleted.
+    */
+   virtual void on_eth_lag_intf_delete(intf_id_t);
+   
+   /**
     * Handler called when a member interface is added to a watched LAG.
     */
    virtual void on_lag_member_set(intf_id_t lag, intf_id_t member);
@@ -192,6 +202,17 @@ class EOS_SDK_PUBLIC eth_lag_intf_mgr
     * each LAG interface.
     */
    virtual eth_lag_intf_iter_t eth_lag_intf_iter() const = 0;
+
+   /**
+    * Returns whether the given ethernet LAG interface exists.
+    *
+    * If exists returns true, then this intf_id_t can be successfully
+    * passed into every method of the eth_lag_intf_mgr. If not, then
+    * methods of the eth_lag_intf_mgr can throw a no_such_interface_error
+    * exception.
+    */
+   virtual bool exists(intf_id_t) const = 0;
+   
    /**
     * Iterate over physical interfaces configured as a member of any
     * LAG interface in system. Note the interface may not be in an LAG

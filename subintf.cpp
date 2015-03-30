@@ -18,6 +18,10 @@ class subintf_mgr_impl : public subintf_mgr {
       return *nop;  // TODO: No op impl.
    }
 
+   bool exists(intf_id_t) const {
+      return false;
+   }
+
    vlan_id_t vlan_tag(intf_id_t) const {
       return 0;  // TODO: No-op impl.
    }

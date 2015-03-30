@@ -54,7 +54,13 @@ class EOS_SDK_PUBLIC intf_handler : public base_handler<intf_mgr, intf_handler> 
    virtual void on_intf_create(intf_id_t);
    /// Handler called when an interface has been removed.
    virtual void on_intf_delete(intf_id_t);
-   /// Handler called when the operational status of an interface changes.
+   /**
+    * Handler called when the operational status of an interface changes.
+    *
+    * Note that for physical interfaces, the on_oper_status handler will
+    * get called with INTF_OPER_NULL when the underlying hardware for
+    * that physical interface is removed.
+    */
    virtual void on_oper_status(intf_id_t, oper_status_t);
    /// Handler called after an interface has been configured to be enabled.
    virtual void on_admin_enabled(intf_id_t, bool);
@@ -83,7 +89,13 @@ class EOS_SDK_PUBLIC intf_mgr : public base_mgr<intf_handler, intf_id_t> {
    /// Iterates over all interfaces currently available in the system.
    virtual intf_iter_t intf_iter() const = 0;
 
-   /// Returns true if the intf_id_t has a corresponding status.
+   /**
+    * Returns whether the given interface exists.
+    *
+    * If exists returns true, then this intf_id_t can be successfully
+    * passed into every method of the intf_mgr. If not, then methods
+    * of the intf_mgr can throw a no_such_interface_error exception.
+    */
    virtual bool exists(intf_id_t) const = 0;
 
    // Attribute accessors

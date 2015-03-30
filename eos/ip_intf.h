@@ -70,7 +70,14 @@ class EOS_SDK_PUBLIC ip_intf_mgr : public base_mgr<ip_intf_handler, intf_id_t> {
  public:
    virtual ~ip_intf_mgr();
 
-   /// Returns whether the interface exists and is able to have IP addresses.
+   /**
+    * Returns whether the given interface exists and is able to have IP addresses.
+    *
+    * If exists returns true, then this intf_id_t can be successfully
+    * passed into every method of the ip_intf_mgr. If not, then
+    * methods of the ip_intf_mgr can throw a no_such_interface_error
+    * exception.
+    */
    virtual bool exists(intf_id_t) const = 0;
 
    // Attribute accessors

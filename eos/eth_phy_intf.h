@@ -47,6 +47,22 @@ class EOS_SDK_PUBLIC eth_phy_intf_handler
    virtual void on_eth_phy_intf_create(intf_id_t);
    /// Handler called when a physical ethernet interface is deleted
    virtual void on_eth_phy_intf_delete(intf_id_t);
+   /**
+    * Handler called when the presence of the underlying hardware for
+    * the physical ethernet interface changes.
+    *
+    * When a physical interface goes from not-present to present, only
+    * on_eth_phy_intf_hardware_present will get called even though
+    * other attributes (like the link_speed) of the eth_phy_intf may
+    * have changed. Similarly, when the physical interface hardware
+    * goes from present to not-present, attributes of the eth_phy_intf
+    * (like the link_speed) that are based on the underlying hardware
+    * will go back to their default values even though their explicit
+    * handlers are not called. It is up to the user to handle the new
+    * values of those attributes within the
+    * on_eth_phy_intf_hardware_present handler.
+    */
+   virtual void on_eth_phy_intf_hardware_present(intf_id_t, bool present);
    /// Handler called when the operational link speed changes
    virtual void on_eth_phy_intf_link_speed(intf_id_t, eth_link_speed_t);
 };
@@ -71,13 +87,34 @@ class EOS_SDK_PUBLIC eth_phy_intf_mgr : public base_mgr<eth_phy_intf_handler,
    // Collection management
    virtual eth_phy_intf_iter_t eth_phy_intf_iter() const = 0;
 
-   /// Returns true if the interface ID passed exists in the system configuration
+   /**
+    * Returns whether the given physical ethernet interface exists.
+    *
+    * If exists returns true, then this intf_id_t can be successfully
+    * passed into every method of the eth_intf_mgr. If not, then
+    * methods of the eth_intf_mgr can throw a no_such_interface_error
+    * exception.
+    */
    virtual bool exists(intf_id_t) const = 0;
 
-   /// Returns the "burned in" address of the interface
+   /// Returns whether the underlying hardware for this interface is present
+   virtual bool hardware_present(intf_id_t) const = 0;
+   
+   /**
+    * Returns the "burned in" address of the interface.
+    *
+    * If the underlying hardware is not present, returns the default
+    * eth_addr_t(). Once hardware_present is true, burned_in_eth_addr
+    * is guaranteed to be available.
+    */
    virtual eth_addr_t burned_in_eth_addr(intf_id_t) const = 0;
 
-   /// Returns the operational link speed
+   /**
+    * Returns the operational link speed.
+    *
+    * If the underlying hardware is not present, returns
+    * LINK_SPEED_UNKNOWN.
+    */
    virtual eth_link_speed_t link_speed(intf_id_t) const = 0;
 
  protected:

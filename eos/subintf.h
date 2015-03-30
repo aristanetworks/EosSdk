@@ -100,6 +100,16 @@ class EOS_SDK_PUBLIC subintf_mgr {
    virtual subintf_iter_t subintf_iter() const = 0;
 
    /**
+    * Returns whether the given subinterface exists.
+    *
+    * If exists returns true, then this intf_id_t can be successfully
+    * passed into every method of the subintf_mgr. If not, then
+    * methods of the subintf_mgr can throw a no_such_interface_error
+    * exception.
+    */
+   virtual bool exists(intf_id_t) const = 0;
+
+   /**
     * Creates a subinterface when given the subinterface ID.
     * No action will be taken if the subinterface exists already.
     * The subinterface will be created even if its parent interface does not exist.
