@@ -220,6 +220,18 @@ class EOS_SDK_PUBLIC sdk {
 };
 
 /**
+ * A reference to the default signal handler.
+ *
+ * This handler is installed for SIGTERM and SIGINT so agents cleanly
+ * exit the event loop upon receiving those signals. This function is
+ * exposed for agents that install their own signal handlers. If
+ * desired, the agent can call this function from its new signal
+ * handler, or re-install this if it no longer wants to use a custom
+ * signal handler.
+ */
+void default_signal_handler(int signal) EOS_SDK_PUBLIC;
+
+/**
  * @deprecated This method changes the size of the internal buffer
  * used for enqueueing state updates.
  *

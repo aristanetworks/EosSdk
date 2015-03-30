@@ -153,6 +153,10 @@ void sdk::init_mount_mgr() {
    // BUG86400 - Not a public function
 }
 
+void default_signal_handler(int signo) {
+   // TODO: No op impl.
+}
+
 void internal_connection_buffer_size_is(uint32_t bytes) {
 }
 
