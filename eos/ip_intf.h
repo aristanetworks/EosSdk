@@ -59,7 +59,11 @@ class EOS_SDK_PUBLIC ip_intf_handler : public base_handler<ip_intf_mgr,
    /// Handler called when an IP address is deleted from the interface.
    virtual void on_ip_addr_del(intf_id_t, ip_addr_mask_t const &);
 
-   /// Handler called when the internal VLAN ID for an interface changes
+   /** 
+    * Handler called when the internal VLAN ID for an interface
+    * changes. If the interface loses its internal vlan id (i.e. is no
+    * longer a routed port), this will be set to 0
+    */
    virtual void on_internal_vlan_id(intf_id_t, vlan_id_t);
 };
 
