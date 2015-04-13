@@ -233,7 +233,7 @@ void default_signal_handler(int signal) EOS_SDK_PUBLIC;
 
 /**
  * @deprecated This method changes the size of the internal buffer
- * used for enqueueing state updates.
+ * used for enqueuing state updates.
  *
  * It should be used for specific applications that attempt
  * to do large numbers of updates without yielding to the event
