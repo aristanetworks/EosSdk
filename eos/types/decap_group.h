@@ -26,31 +26,34 @@ std::ostream& operator<<(std::ostream& os,
                          const decap_protocol_type_t & enum_val);
 
 /**
- * An ip decap-group configuration model.
- * Note that once created, the group_name member cannot be changed.
+ * An IP decap group configuration model. At this time, all decap  groups are
+ * configured in the default VRF.
  */
 class EOS_SDK_PUBLIC decap_group_t {
  public:
    decap_group_t();
-   decap_group_t(std::string group_name, ip_addr_t const & destination_addr, 
+   decap_group_t(std::string const & group_name, 
+                 ip_addr_t const & destination_addr, 
                  decap_protocol_type_t protocol_type);
 
    /**
-    * Getter for 'group_name': the decap-group name, must be supplied.  Note that
-    * the decap group namespace is per-VRF, that is, the vrf_name scopes the decap-
-    * group name.
+    * Getter for 'group_name': the decap group name. Used to uniquely identify this
+    * group.
     */
    std::string group_name() const;
 
    /**
-    * Getter for 'destination_addr': match destination IP on the outermost IP
+    * Getter for 'destination_addr': match this destination IP on the outermost IP
     * header.
     */
    ip_addr_t destination_addr() const;
    /** Setter for 'destination_addr'. */
    void destination_addr_is(ip_addr_t const & destination_addr);
 
-   /** Getter for 'protocol_type': match this outer IP protocol to decap. */
+   /**
+    * Getter for 'protocol_type': decapsulate only packets matching this outer IP
+    * protocol type.
+    */
    decap_protocol_type_t protocol_type() const;
    /** Setter for 'protocol_type'. */
    void protocol_type_is(decap_protocol_type_t protocol_type);
@@ -65,6 +68,7 @@ class EOS_SDK_PUBLIC decap_group_t {
 
    bool operator==(decap_group_t const & other) const;
    bool operator!=(decap_group_t const & other) const;
+   bool operator<(decap_group_t const & other) const;
    /** Returns a string representation of the current object's values. */
    std::string to_string() const;
    /**

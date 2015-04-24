@@ -26,13 +26,13 @@ inline decap_group_t::decap_group_t() :
       persistent_(false) {
 }
 
-inline decap_group_t::decap_group_t(std::string group_name, 
+inline decap_group_t::decap_group_t(std::string const & group_name, 
                                     ip_addr_t const & destination_addr, 
                                     decap_protocol_type_t protocol_type) :
       group_name_(group_name), destination_addr_(destination_addr), 
       protocol_type_(protocol_type), persistent_(false) {
    if(group_name.empty()) {
-      panic("group_name must be a non-empty string");
+      panic(invalid_argument_error("group_name","must be a non-empty string"));
    }
 }
 
@@ -82,6 +82,20 @@ decap_group_t::operator==(decap_group_t const & other) const {
 inline bool
 decap_group_t::operator!=(decap_group_t const & other) const {
    return !operator==(other);
+}
+
+inline bool
+decap_group_t::operator<(decap_group_t const & other) const {
+   if(group_name_ != other.group_name_) {
+      return group_name_ < other.group_name_;
+   } else if(destination_addr_ != other.destination_addr_) {
+      return destination_addr_ < other.destination_addr_;
+   } else if(protocol_type_ != other.protocol_type_) {
+      return protocol_type_ < other.protocol_type_;
+   } else if(persistent_ != other.persistent_) {
+      return persistent_ < other.persistent_;
+   }
+   return false;
 }
 
 inline std::string

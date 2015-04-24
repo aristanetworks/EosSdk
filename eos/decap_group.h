@@ -44,6 +44,7 @@ namespace eos {
 
 class decap_group_iter_impl;
 
+/// An iterator that yields a `decap_group_t` for each configured decap group.
 class EOS_SDK_PUBLIC decap_group_iter_t : public iter_base<decap_group_t,
                                                            decap_group_iter_impl> {
  private:
@@ -62,8 +63,22 @@ class EOS_SDK_PUBLIC decap_group_mgr {
  public:
    virtual ~decap_group_mgr();
 
+   /**
+    * Enter resync mode.
+    *
+    * At this point the decap_group_mgr will start tracking which
+    * groups you've added.
+    */
    virtual void resync_init() = 0;
+
+   /**
+    * Exit resync mode.
+    *
+    * All decap groups in Sysdb that you haven't re-added during this
+    * resync period will now be deleted.
+    */
    virtual void resync_complete() = 0;
+
 
    /**
     * Iterates over all the decap groups currently configured.
@@ -71,11 +86,17 @@ class EOS_SDK_PUBLIC decap_group_mgr {
    virtual decap_group_iter_t decap_group_iter() const = 0;
 
    /**
-    * Adds the specified decap group to the system configuration
-    * Create a new or updates an existing decap group with the same name
+    * Adds the specified decap group to the system configuration.
+    *
+    * Either creates or updates a decap group (keyed by the group name).
     */
    virtual void decap_group_set(decap_group_t const &) = 0;
-   /// Removes the named decap group from the configuration if it exists
+
+   /**
+    * Removes the named decap group from the configuration.
+    *
+    * If the specified group name does not exist, no action is taken.
+    */
    virtual void decap_group_del(std::string const & decap_group_name) = 0;
  protected:
    decap_group_mgr() EOS_SDK_PRIVATE;
