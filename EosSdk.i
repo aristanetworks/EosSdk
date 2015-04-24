@@ -3,6 +3,15 @@
 
 %module(directors="1") eossdk
 
+// Importing this module allows us to produce better stack traces when
+// a Python exception bubbles up into the C++ code.
+%pythonbegin %{
+try:
+   import _Tac
+except ImportError:
+   pass
+%}
+
 %include "stdint.i"
 %include "std_list.i"
 %include "std_map.i"
