@@ -9,15 +9,25 @@
 #include <eos/base_mgr.h>
 #include <string>
 
+/**
+ * @file
+ * Module for system identifying information.
+ *
+ * This module provides access to important identifying information of
+ * the system, similar to what is available from the 'show version'
+ * and 'show hostname' CLI commands.
+ */
+
 namespace eos {
 
 class system_mgr;
 
-/// This class receives changes to system identifying information
+/// Handler class for changes in system identifying information.
 class EOS_SDK_PUBLIC system_handler : public base_handler<system_mgr,
                                                           system_handler> {
  public:
    explicit system_handler(system_mgr *);
+   /// Returns the associated system_mgr
    system_mgr * get_system_mgr() const;
 
    /// Handler called when the hostname changes
