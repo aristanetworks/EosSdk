@@ -42,6 +42,8 @@ operator<<(std::ostream& os, const intf_type_t & enum_val) {
       os << "INTF_TYPE_NULL0";
    } else if (enum_val==INTF_TYPE_CPU) {
       os << "INTF_TYPE_CPU";
+   } else if (enum_val==INTF_TYPE_VXLAN) {
+      os << "INTF_TYPE_VXLAN";
    } else {
       os << "Unknown value";
    }

@@ -32,6 +32,7 @@ enum intf_type_t {
    INTF_TYPE_LAG,
    INTF_TYPE_NULL0,
    INTF_TYPE_CPU,
+   INTF_TYPE_VXLAN,
 };
 /** Appends a string representation of enum intf_type_t value to the ostream. */
 std::ostream& operator<<(std::ostream& os, const intf_type_t & enum_val);
