@@ -15,7 +15,7 @@ struct tracer_internal {
       : name(name_), levelEnabled(9, true) {
    }
 
-   void trace(trace_level level, char const * expression, va_list args) {
+   void trace(trace_level level, char const * expression, va_list args) const {
       char * expandedExpression = NULL;
       if (vasprintf(&expandedExpression, expression, args) != -1) {
          fprintf(stderr, "[%s]\t%s\n", name, expandedExpression);
@@ -34,7 +34,7 @@ tracer::~tracer() {
    delete tracer_;
 }
 
-bool tracer::enabled(trace_level level) {
+bool tracer::enabled(trace_level level) const {
    return tracer_->levelEnabled[level];
 }
 
@@ -42,7 +42,7 @@ void tracer::enabled_is(trace_level level, bool value) {
    tracer_->levelEnabled[level] = value;
 }
 
-void tracer::trace(trace_level level, char const * expression, ...) {
+void tracer::trace(trace_level level, char const * expression, ...) const {
    if (enabled(level)) {
       va_list args;
       va_start(args, expression);
@@ -51,14 +51,15 @@ void tracer::trace(trace_level level, char const * expression, ...) {
    }
 }
 
-#define TRACE(level) void tracer::trace ## level (char const * expression, ...) {  \
-   if (enabled(static_cast<trace_level>(level))) {                                 \
-      va_list args;                                                                \
-      va_start(args, expression);                                                  \
-      tracer_->trace(static_cast<trace_level>(level), expression, args);           \
-      va_end(args);                                                                \
-   }                                                                               \
-}
+#define TRACE(level) void                                               \
+   tracer::trace ## level (char const * expression, ...) const {        \
+      if (enabled(static_cast<trace_level>(level))) {                   \
+         va_list args;                                                  \
+         va_start(args, expression);                                    \
+         tracer_->trace(static_cast<trace_level>(level), expression, args); \
+         va_end(args);                                                  \
+      }                                                                 \
+   }
 
 TRACE(0)
 TRACE(1)

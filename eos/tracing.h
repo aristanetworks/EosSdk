@@ -97,7 +97,7 @@ class EOS_SDK_PUBLIC tracer {
 
    /// Returns true if this tracer will output trace statements at the
    /// given level.
-   bool enabled(trace_level level);
+   bool enabled(trace_level level) const;
    /// Set whether this trace facility should print at the given level.
    void enabled_is(trace_level level, bool value);
 
@@ -106,19 +106,19 @@ class EOS_SDK_PUBLIC tracer {
     * The expression format and extra arguments follow printf's
     * syntax.
     */
-   void trace(trace_level level, char const * expression, ...)
+   void trace(trace_level level, char const * expression, ...) const
       EOS_SDK_FORMAT_STRING_CHECK(3);
 
-   void trace0(char const * expression, ...) EOS_SDK_FORMAT_STRING_CHECK(2);
-   void trace1(char const * expression, ...) EOS_SDK_FORMAT_STRING_CHECK(2);
-   void trace2(char const * expression, ...) EOS_SDK_FORMAT_STRING_CHECK(2);
-   void trace3(char const * expression, ...) EOS_SDK_FORMAT_STRING_CHECK(2);
-   void trace4(char const * expression, ...) EOS_SDK_FORMAT_STRING_CHECK(2);
-   void trace5(char const * expression, ...) EOS_SDK_FORMAT_STRING_CHECK(2);
-   void trace6(char const * expression, ...) EOS_SDK_FORMAT_STRING_CHECK(2);
-   void trace7(char const * expression, ...) EOS_SDK_FORMAT_STRING_CHECK(2);
-   void trace8(char const * expression, ...) EOS_SDK_FORMAT_STRING_CHECK(2);
-   void trace9(char const * expression, ...) EOS_SDK_FORMAT_STRING_CHECK(2);
+   void trace0(char const * expression, ...) const EOS_SDK_FORMAT_STRING_CHECK(2);
+   void trace1(char const * expression, ...) const EOS_SDK_FORMAT_STRING_CHECK(2);
+   void trace2(char const * expression, ...) const EOS_SDK_FORMAT_STRING_CHECK(2);
+   void trace3(char const * expression, ...) const EOS_SDK_FORMAT_STRING_CHECK(2);
+   void trace4(char const * expression, ...) const EOS_SDK_FORMAT_STRING_CHECK(2);
+   void trace5(char const * expression, ...) const EOS_SDK_FORMAT_STRING_CHECK(2);
+   void trace6(char const * expression, ...) const EOS_SDK_FORMAT_STRING_CHECK(2);
+   void trace7(char const * expression, ...) const EOS_SDK_FORMAT_STRING_CHECK(2);
+   void trace8(char const * expression, ...) const EOS_SDK_FORMAT_STRING_CHECK(2);
+   void trace9(char const * expression, ...) const EOS_SDK_FORMAT_STRING_CHECK(2);
  private:
    tracer_internal * tracer_;
 };
