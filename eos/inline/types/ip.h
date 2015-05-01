@@ -128,7 +128,8 @@ operator<<(std::ostream& os, const ip_addr_t& obj) {
 
 
 
-inline ip_prefix_t::ip_prefix_t() {
+inline ip_prefix_t::ip_prefix_t() :
+      prefix_length_() {
    
 }
 
