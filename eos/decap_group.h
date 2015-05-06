@@ -86,6 +86,13 @@ class EOS_SDK_PUBLIC decap_group_mgr {
    virtual decap_group_iter_t decap_group_iter() const = 0;
 
    /**
+    * Returns the current configuration of a decap group
+    *
+    * If no decap group exists, this returns an empty `decap_group_t()`
+    */
+   virtual decap_group_t decap_group(std::string const & decap_group_name) const = 0;
+
+   /**
     * Adds the specified decap group to the system configuration.
     *
     * Either creates or updates a decap group (keyed by the group name).

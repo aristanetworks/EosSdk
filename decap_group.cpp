@@ -27,6 +27,10 @@ class decap_group_mgr_impl : public decap_group_mgr {
        return *nop;  // TODO: No op impl.
     }
 
+   decap_group_t decap_group(std::string const & decap_group_name) const {
+      return decap_group_t();
+   }
+
     void decap_group_set(decap_group_t const &group) {
        if(group.group_name().empty()) {
           panic("Empty decap group name");
