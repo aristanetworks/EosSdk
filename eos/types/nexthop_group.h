@@ -103,6 +103,33 @@ class EOS_SDK_PUBLIC nexthop_group_mpls_action_t {
    std::forward_list<mpls_label_t> label_stack_;
 };
 
+/** Defines counter for a nexthop entry. */
+class EOS_SDK_PUBLIC nexthop_group_entry_counter_t {
+ public:
+   nexthop_group_entry_counter_t();
+   nexthop_group_entry_counter_t(uint64_t packets, uint64_t bytes);
+
+   uint64_t packets() const;
+
+   uint64_t bytes() const;
+
+   bool operator==(nexthop_group_entry_counter_t const & other) const;
+   bool operator!=(nexthop_group_entry_counter_t const & other) const;
+   bool operator<(nexthop_group_entry_counter_t const & other) const;
+   /** Returns a string representation of the current object's values. */
+   std::string to_string() const;
+   /**
+    * A utility stream operator that adds a string representation of
+    * nexthop_group_entry_counter_t to the ostream.
+    */
+   friend std::ostream& operator<<(std::ostream& os, 
+                                   const nexthop_group_entry_counter_t& obj);
+
+ private:
+   uint64_t packets_;
+   uint64_t bytes_;
+};
+
 /**
  * A nexthop group destination entry.
  *

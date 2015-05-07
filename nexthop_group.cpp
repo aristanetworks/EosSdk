@@ -28,6 +28,11 @@ class nexthop_group_mgr_impl : public nexthop_group_mgr {
       return nexthop_group_t();
    }
 
+   nexthop_group_entry_counter_t counter(std::string const & nexthop_group_name, 
+                             uint16_t entry) const {
+      return nexthop_group_entry_counter_t();
+   }
+
    bool exists(std::string const & nexthop_group_name) const {
       return false;
    }

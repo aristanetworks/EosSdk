@@ -131,6 +131,16 @@ class EOS_SDK_PUBLIC nexthop_group_mgr :
    virtual nexthop_group_t nexthop_group(std::string const & 
                                          nexthop_group_name) const = 0;
 
+   /** 
+    * Returns the counter corresponding to the given nexthop group name and 
+    * entry, if it exists. 
+    * Otherwise this returns an empty 'nexthop_group_entry_counter_t()'
+    *
+    * Counters are reset whenever nexthop group entry configuration changes.
+    */
+   virtual nexthop_group_entry_counter_t counter(
+         std::string const & nexthop_group_name, uint16_t entry) const = 0;
+
    /// Returns true if a nexthop group with the given name has been configured.
    virtual bool exists(std::string const & nexthop_group_name) const = 0;
 

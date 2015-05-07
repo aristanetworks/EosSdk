@@ -136,6 +136,67 @@ operator<<(std::ostream& os, const nexthop_group_mpls_action_t& obj) {
 
 
 
+inline nexthop_group_entry_counter_t::nexthop_group_entry_counter_t() :
+      packets_(0), bytes_(0) {
+}
+
+inline nexthop_group_entry_counter_t::nexthop_group_entry_counter_t(
+                            uint64_t packets, uint64_t bytes) :
+      packets_(packets), bytes_(bytes) {
+}
+
+inline uint64_t
+nexthop_group_entry_counter_t::packets() const {
+   return packets_;
+}
+
+inline uint64_t
+nexthop_group_entry_counter_t::bytes() const {
+   return bytes_;
+}
+
+inline bool
+nexthop_group_entry_counter_t::operator==(
+                                          nexthop_group_entry_counter_t const & other) const {
+   return packets_ == other.packets_ &&
+          bytes_ == other.bytes_;
+}
+
+inline bool
+nexthop_group_entry_counter_t::operator!=(
+                                          nexthop_group_entry_counter_t const & other) const {
+   return !operator==(other);
+}
+
+inline bool
+nexthop_group_entry_counter_t::operator<(
+                                         nexthop_group_entry_counter_t const & other) const {
+   if(packets_ != other.packets_) {
+      return packets_ < other.packets_;
+   } else if(bytes_ != other.bytes_) {
+      return bytes_ < other.bytes_;
+   }
+   return false;
+}
+
+inline std::string
+nexthop_group_entry_counter_t::to_string() const {
+   std::ostringstream ss;
+   ss << "nexthop_group_entry_counter_t(";
+   ss << "packets=" << packets_;
+   ss << ", bytes=" << bytes_;
+   ss << ")";
+   return ss.str();
+}
+
+inline std::ostream&
+operator<<(std::ostream& os, const nexthop_group_entry_counter_t& obj) {
+   os << obj.to_string();
+   return os;
+}
+
+
+
 inline nexthop_group_entry_t::nexthop_group_entry_t() :
       mpls_action_(), nexthop_() {
 }
