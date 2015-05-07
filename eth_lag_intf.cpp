@@ -74,8 +74,7 @@ class eth_lag_intf_mgr_impl : public eth_lag_intf_mgr {
       return *nop;
    }
 
-   eth_lag_intf_t eth_lag_intf_is(intf_id_t eth_lag_intf_id) {
-      return eth_lag_intf_t();
+   void eth_lag_intf_is(intf_id_t eth_lag_intf_id) {
    }
 
    eth_lag_intf_t eth_lag_intf(intf_id_t eth_lag_intf_id) const {
@@ -85,27 +84,101 @@ class eth_lag_intf_mgr_impl : public eth_lag_intf_mgr {
    void eth_lag_intf_del(intf_id_t eth_lag_intf_id) {
    }
 
-   void membership_set(intf_id_t intf, intf_id_t eth_lag_intf_id,
+   uint64_t speed(intf_id_t eth_lag_intf_id) const {
+      return 100;
+   }
+
+   void min_links_is(intf_id_t eth_lag_intf_id, uint32_t min_links) {
+      return;
+   }
+
+   uint32_t min_links(intf_id_t eth_lag_intf_id) const {
+      return 8;
+   }
+
+   void fallback_type_is(intf_id_t eth_lag_intf_id,
+                         eth_lag_intf_fallback_type_t fallback_type) {
+      return;
+   }
+
+   eth_lag_intf_fallback_type_t fallback_type(intf_id_t eth_lag_intf_id) const {
+      return ETH_LAG_INTF_FALLBACK_NONE;
+   }
+
+   void fallback_timeout_is(intf_id_t eht_lag_intf_id, uint16_t fallback_timeout) {
+      return;
+   }
+
+   uint16_t fallback_timeout(intf_id_t eth_lag_intf_id) const {
+      return 0;
+   }
+
+   uint16_t fallback_timeout_default(intf_id_t eth_lag_intf_id) const {
+      return ETH_LAG_INTF_FALLBACK_TIMEOUT_DEFAULT;
+   }
+
+   void membership_set(intf_id_t member_intf_id, intf_id_t eth_lag_intf_id,
                        eth_lag_intf_member_lacp_mode_t mode) {
    }
 
-   intf_id_t membership(intf_id_t intf) {
-      return intf_id_t();
-   }
-
-   eth_lag_intf_membership_t eth_lag_intf_membership_status(intf_id_t intf) {
+   eth_lag_intf_membership_t membership_status(intf_id_t member_intf_id) const {
       return eth_lag_intf_membership_t();
    }
 
-   void eth_lag_intf_member_priority_is(intf_id_t intf, uint16_t priority) {
+   intf_id_t membership(intf_id_t member_intf_id) const {
+      return intf_id_t();
    }
 
-   void eth_lag_intf_member_mode_is(intf_id_t intf, 
+   eth_lag_intf_membership_t 
+         eth_lag_intf_membership_status(intf_id_t member_intf_id) const {
+      return eth_lag_intf_membership_t();
+   }
+
+   void member_priority_is(intf_id_t member_intf_id, uint16_t priority) {
+   }
+
+   void eth_lag_intf_member_priority_is(intf_id_t member_intf_id, 
+                                        uint16_t priority) {
+   }
+
+   uint16_t member_priority(intf_id_t member_intf_id) const {
+      return 0;
+   }
+
+   void eth_lag_intf_member_mode_is(intf_id_t member_intf_id, 
                                     eth_lag_intf_member_lacp_mode_t mode) {
    }
+   void member_mode_is(intf_id_t member_intf_id,
+                       eth_lag_intf_member_lacp_mode_t mode) {
+   }
 
-   void eth_lag_intf_member_timeout_is(intf_id_t intf,
+   eth_lag_intf_member_lacp_mode_t member_mode(intf_id_t member_intf_id) const {
+      return ETH_LAG_INTF_MEMBER_LACP_MODE_OFF;
+   }
+
+   void eth_lag_intf_member_timeout_is(intf_id_t member_intf_id,
                              eth_lag_intf_member_lacp_timeout_t timeout) {
+   }
+
+   void member_timeout_is(intf_id_t member_intf_id,
+                          eth_lag_intf_member_lacp_timeout_t timeout) {
+   }
+
+   eth_lag_intf_member_lacp_timeout_t
+         member_timeout(intf_id_t member_intf_id) const {
+      return ETH_LAG_INTF_MEMBER_LACP_TIMEOUT_SHORT;
+   }
+
+   bool member_active(intf_id_t member_intf_id) const {
+      return true;
+   }
+
+   double member_time(intf_id_t member_intf_id) const {
+      return 1.0;
+   }
+
+   std::string member_reason(intf_id_t member_intf_id) const {
+      return "Hello World";
    }
 };
 
