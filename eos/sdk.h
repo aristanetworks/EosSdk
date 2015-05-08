@@ -6,6 +6,7 @@
 
 #include <eos/agent.h>
 #include <eos/base.h>
+#include <eos/types/sdk.h>
 
 namespace eos {
 

@@ -18,7 +18,7 @@
 #define EOS_FIB_H
 
 #include <forward_list>
-#include <eos/base.h>
+#include <eos/types/sdk.h>
 #include <eos/intf.h>
 #include <eos/ip.h>
 #include <eos/ip_route.h>
