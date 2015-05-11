@@ -136,6 +136,14 @@ class EOS_SDK_PUBLIC mpls_route_via_t {
    /** Setter for 'payload_type'. */
    void payload_type_is(mpls_payload_type_t payload_type);
 
+   /**
+    * Getter for 'skip_egress_acl': set if matching packets should ignore the
+    * egress ACL.
+    */
+   bool skip_egress_acl() const;
+   /** Setter for 'skip_egress_acl'. */
+   void skip_egress_acl_is(bool skip_egress_acl);
+
    bool operator==(mpls_route_via_t const & other) const;
    bool operator!=(mpls_route_via_t const & other) const;
    /** Returns a string representation of the current object's values. */
@@ -155,6 +163,7 @@ class EOS_SDK_PUBLIC mpls_route_via_t {
    mpls_action_t label_action_;
    mpls_ttl_mode_t ttl_mode_;
    mpls_payload_type_t payload_type_;
+   bool skip_egress_acl_;
 };
 }
 
