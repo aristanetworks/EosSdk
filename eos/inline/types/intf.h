@@ -54,9 +54,6 @@ operator<<(std::ostream& os, const intf_type_t & enum_val) {
 
 inline intf_id_t::intf_id_t(uint64_t id) {
    intfId_ = id;
-   if (intf_type() == INTF_TYPE_OTHER) {
-      panic("Invalid interface id");
-   }
 }
 
 inline bool
