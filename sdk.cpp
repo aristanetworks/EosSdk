@@ -32,6 +32,7 @@ sdk::sdk()
      eth_lag_intf_mgr_(0),
      event_loop_(0),
      fib_mgr_(0),
+     intf_mgr_helper_(0),
      intf_mgr_(0),
      intf_counter_mgr_(0),
      ip_intf_mgr_(0),
@@ -77,6 +78,7 @@ sdk::sdk(std::string const name, void *eossdk_context)
      eth_lag_intf_mgr_(0),
      event_loop_(0),
      fib_mgr_(0),
+     intf_mgr_helper_(0),     
      intf_mgr_(0),
      intf_counter_mgr_(0),
      ip_intf_mgr_(0),
@@ -150,6 +152,10 @@ void sdk::init_fib_mgr(mgr_mode_type_t mode) {
 }
 
 void sdk::init_mount_mgr() {
+   // BUG86400 - Not a public function
+}
+
+void sdk::init_intf_mgr_helper() {
    // BUG86400 - Not a public function
 }
 

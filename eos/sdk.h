@@ -21,6 +21,7 @@ class eth_phy_intf_mgr;
 class eth_phy_intf_counter_mgr;
 class event_loop;
 class fib_mgr;
+class intf_mgr_helper;
 class intf_mgr;
 class intf_counter_mgr;
 class ip_intf_mgr;
@@ -184,6 +185,9 @@ class EOS_SDK_PUBLIC sdk {
 
  private:
    void init_mount_mgr();
+   
+   void init_intf_mgr_helper();
+   intf_mgr_helper * get_intf_mgr_helper();
 
    EOS_SDK_DISALLOW_COPY_CTOR(sdk);
    acl_mgr * acl_mgr_;
@@ -198,6 +202,7 @@ class EOS_SDK_PUBLIC sdk {
    eth_lag_intf_mgr * eth_lag_intf_mgr_;
    event_loop * event_loop_;
    fib_mgr * fib_mgr_;
+   intf_mgr_helper * intf_mgr_helper_;
    intf_mgr * intf_mgr_;
    intf_counter_mgr * intf_counter_mgr_;
    ip_intf_mgr * ip_intf_mgr_;

@@ -125,6 +125,13 @@ inline ip_route_mgr * sdk::get_ip_route_mgr() {
    return ip_route_mgr_;
 }
 
+inline intf_mgr_helper * sdk::get_intf_mgr_helper() {
+   if (!intf_mgr_helper_) {
+      init_intf_mgr_helper();
+   }
+   return intf_mgr_helper_;
+}
+
 inline mac_table_mgr * sdk::get_mac_table_mgr() {
    if (!mac_table_mgr_) {
       init_mac_table_mgr();

@@ -50,9 +50,28 @@ class EOS_SDK_PUBLIC intf_handler : public base_handler<intf_mgr, intf_handler> 
     */
    void watch_intf(intf_id_t, bool);
 
-   /// Handler called when a new interface is created.
+   /**
+    * Handler called when a new interface is created.
+    *
+    * After any *intf_handler::on_*intf_create method is called,
+    * the given intf_id is valid and will succeed when used within
+    * any of the *intf_mgr classes appropriate for that interface
+    * type.
+    * 
+    * Between the various *intf_handler::on_*intf_create methods,
+    * the on_intf_create method is guaranteed to called first.
+    */
    virtual void on_intf_create(intf_id_t);
-   /// Handler called when an interface has been removed.
+   /**
+    * Handler called when an interface has been removed.
+    *
+    * After any *intf_handler::on_*intf_delete method is called,
+    * the given intf_id is valid and will succeed when used within
+    * all the *intf_mgr classes associated for that interface.
+    * 
+    * Between the various *intf_handler::on_*intf_delete methods,
+    * the on_intf_delete method is guaranteed to called first.
+    */
    virtual void on_intf_delete(intf_id_t);
    /**
     * Handler called when the operational status of an interface changes.
