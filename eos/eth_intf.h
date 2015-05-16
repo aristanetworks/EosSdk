@@ -45,9 +45,33 @@ class EOS_SDK_PUBLIC eth_intf_handler : public base_handler<eth_intf_mgr,
     */
    void watch_eth_intf(intf_id_t, bool);
 
-   /// Handler called when an ethernet interface is created
+   /**
+    * Handler called when an ethernet interface is created.
+    *
+    * After on_eth_intf_create is called, the given intf_id is
+    * guaranteed to exist (ie eth_intf_mgr::exists will return true).
+    * At that point, the intf_id can be used will all methods of the
+    * eth_intf_mgr class.
+    *
+    * This also means that the intf_id can be used with all other
+    * relevant *intf_mgr classes (ie intf_mgr, eth_phy_intf_mgr,
+    * eth_lag_intf_mgr, and subintf_mgr as appropriate based on the
+    * intf_type).
+    */
    virtual void on_eth_intf_create(intf_id_t);
-   /// Handler called when an ethernet interface is deleted
+   /**
+    * Handler called when an ethernet interface is deleted.
+    *
+    * After on_eth_intf_delete is called, the given intf_id is
+    * guaranteed to not exist (ie eth_intf_mgr::exists will return
+    * false). At that point, the intf_id cannot be used will any
+    * methods in the eth_intf_mgr class.
+    *
+    * This also means that the intf_id can no longer be used with all
+    * other relevant *intf_mgr classes (ie intf_mgr, eth_phy_intf_mgr,
+    * eth_lag_intf_mgr, and subintf_mgr as appropriate based on the
+    * intf_type).
+    */
    virtual void on_eth_intf_delete(intf_id_t);
    /**
     * Handler called when the mac address of an interface changes
@@ -83,9 +107,14 @@ class EOS_SDK_PUBLIC eth_intf_mgr : public base_mgr<eth_intf_handler, intf_id_t>
     * Returns whether the given ethernet interface exists.
     *
     * If exists returns true, then this intf_id_t can be successfully
-    * passed into every method of the eth_phy_intf_mgr. If not, then
-    * methods of the eth_phy_intf_mgr can throw a
-    * no_such_interface_error exception.
+    * passed into every method of the eth_intf_mgr. If not, then
+    * methods of the eth_intf_mgr can throw a no_such_interface_error
+    * exception.
+    *
+    * The exists method of all *intf_mgr classes that manage a given
+    * interface (ie intf_mgr, eth_intf_mgr, eth_phy_intf_mgr,
+    * eth_lag_intf_mgr, and/or subintf_mgr) are all guaranteed to
+    * return the same result.
     */
    virtual bool exists(intf_id_t) const = 0;
 

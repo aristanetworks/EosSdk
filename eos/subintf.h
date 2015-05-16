@@ -106,6 +106,10 @@ class EOS_SDK_PUBLIC subintf_mgr {
     * passed into every method of the subintf_mgr. If not, then
     * methods of the subintf_mgr can throw a no_such_interface_error
     * exception.
+    *
+    * The exists method of all *intf_mgr classes that manage a given
+    * interface (ie intf_mgr, eth_intf_mgr, and subintf_mgr for
+    * subinterfaces) are all guaranteed to return the same result.
     */
    virtual bool exists(intf_id_t) const = 0;
 

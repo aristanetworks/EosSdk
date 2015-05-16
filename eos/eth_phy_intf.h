@@ -43,9 +43,29 @@ class EOS_SDK_PUBLIC eth_phy_intf_handler
     */
    void watch_eth_phy_intf(intf_id_t, bool);
 
-   /// Handler called when a physical ethernet interface is created
+   /**
+    * Handler called when a physical ethernet interface is created.
+    *
+    * After on_eth_phy_intf_create is called, the given intf_id is
+    * guaranteed to exist (ie eth_phy_intf_mgr::exists will return
+    * true). At that point, the intf_id can be used will all methods
+    * of the eth_phy_intf_mgr class.
+    *
+    * This also means that the intf_id can be used with all other
+    * relevant *intf_mgr classes (ie intf_mgr and eth_intf_mgr).
+    */
    virtual void on_eth_phy_intf_create(intf_id_t);
-   /// Handler called when a physical ethernet interface is deleted
+   /**
+    * Handler called when a physical ethernet interface is deleted.
+    * 
+    * After on_eth_phy_intf_delete is called, the given intf_id is
+    * guaranteed to not exist (ie eth_phy_intf_mgr::exists will return
+    * false). At that point, the intf_id cannot be used will any
+    * methods in the eth_phy_intf_mgr class.
+    *
+    * This also means that the intf_id can no longer be used with all
+    * other relevant *intf_mgr classes (ie intf_mgr and eth_intf_mgr).
+    */
    virtual void on_eth_phy_intf_delete(intf_id_t);
    /**
     * Handler called when the presence of the underlying hardware for
@@ -94,6 +114,11 @@ class EOS_SDK_PUBLIC eth_phy_intf_mgr : public base_mgr<eth_phy_intf_handler,
     * passed into every method of the eth_intf_mgr. If not, then
     * methods of the eth_intf_mgr can throw a no_such_interface_error
     * exception.
+    *
+    * The exists method of all *intf_mgr classes that manage a given
+    * interface (ie intf_mgr, eth_intf_mgr, and eth_phy_intf_mgr for
+    * physical interfaces) are all guaranteed to return the same
+    * result.
     */
    virtual bool exists(intf_id_t) const = 0;
 

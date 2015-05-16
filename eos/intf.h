@@ -53,24 +53,28 @@ class EOS_SDK_PUBLIC intf_handler : public base_handler<intf_mgr, intf_handler> 
    /**
     * Handler called when a new interface is created.
     *
-    * After any *intf_handler::on_*intf_create method is called,
-    * the given intf_id is valid and will succeed when used within
-    * any of the *intf_mgr classes appropriate for that interface
-    * type.
-    * 
-    * Between the various *intf_handler::on_*intf_create methods,
-    * the on_intf_create method is guaranteed to called first.
+    * After on_intf_create is called, the given intf_id is guaranteed
+    * to exist (ie intf_mgr::exists will return true). At that point,
+    * the intf_id can be used will all methods of the intf_mgr class.
+    *
+    * This also means that the intf_id can be used with all other
+    * relevant *intf_mgr classes (ie eth_intf_mgr, eth_phy_intf_mgr,
+    * eth_lag_intf_mgr, and subintf_mgr as appropriate based on the
+    * intf_type).
     */
    virtual void on_intf_create(intf_id_t);
    /**
     * Handler called when an interface has been removed.
     *
-    * After any *intf_handler::on_*intf_delete method is called,
-    * the given intf_id is valid and will succeed when used within
-    * all the *intf_mgr classes associated for that interface.
-    * 
-    * Between the various *intf_handler::on_*intf_delete methods,
-    * the on_intf_delete method is guaranteed to called first.
+    * After on_intf_delete is called, the given intf_id is guaranteed
+    * to not exist (ie intf_mgr::exists will return false). At that
+    * point, the intf_id cannot be used will any methods in the
+    * intf_mgr class.
+    *
+    * This also means that the intf_id can no longer be used with all
+    * other relevant *intf_mgr classes (ie eth_intf_mgr,
+    * eth_phy_intf_mgr, eth_lag_intf_mgr, and subintf_mgr as
+    * appropriate based on the intf_type).
     */
    virtual void on_intf_delete(intf_id_t);
    /**
@@ -114,6 +118,11 @@ class EOS_SDK_PUBLIC intf_mgr : public base_mgr<intf_handler, intf_id_t> {
     * If exists returns true, then this intf_id_t can be successfully
     * passed into every method of the intf_mgr. If not, then methods
     * of the intf_mgr can throw a no_such_interface_error exception.
+    *
+    * The exists method of all *intf_mgr classes that manage a given
+    * interface (ie intf_mgr, eth_intf_mgr, eth_phy_intf_mgr,
+    * eth_lag_intf_mgr, and/or subintf_mgr) are all guaranteed to
+    * return the same result.
     */
    virtual bool exists(intf_id_t) const = 0;
 

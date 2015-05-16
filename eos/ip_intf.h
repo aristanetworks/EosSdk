@@ -81,6 +81,11 @@ class EOS_SDK_PUBLIC ip_intf_mgr : public base_mgr<ip_intf_handler, intf_id_t> {
     * passed into every method of the ip_intf_mgr. If not, then
     * methods of the ip_intf_mgr can throw a no_such_interface_error
     * exception.
+    *
+    * Note that ip_intf_mgr::exists being true does not guarantee that
+    * the underlying L2 interface, as managed by intf_mgr,
+    * eth_intf_mgr, eth_phy_intf_mgr, eth_lag_intf_mgr, or
+    * subintf_mgr, also exists.
     */
    virtual bool exists(intf_id_t) const = 0;
 
