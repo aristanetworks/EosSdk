@@ -275,7 +275,7 @@ wrap_iterator(eos::mpls_route_via_iter_t, eos::mpls_route_via_iter_impl, eos::mp
 wrap_iterator(eos::nexthop_group_iter_t, eos::nexthop_group_iter_impl, eos::nexthop_group_t);
 wrap_iterator(eos::policy_map_iter_t, eos::policy_map_iter_impl, eos::policy_map_key_t);
 wrap_iterator(eos::subintf_iter_t, eos::subintf_iter_impl, eos::intf_id_t);
-wrap_iterator(eos::vrf_iter_t, eos::vrf_iter_impl, eos::vrf_t);
+wrap_iterator(eos::vrf_iter_t, eos::vrf_iter_impl, std::string);
 
 // Make managers themselves iterable, when it makes sense:
 default_iterator(eos::directflow_mgr, flow_entry_iter);

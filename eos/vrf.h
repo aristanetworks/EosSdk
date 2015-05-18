@@ -1,4 +1,3 @@
-
 // Copyright (c) 2014 Arista Networks, Inc.  All rights reserved.
 // Arista Networks, Inc. Confidential and Proprietary.
 
@@ -10,6 +9,20 @@
 #include <eos/base_mgr.h>
 #include <eos/iterator.h>
 #include <eos/types/vrf.h>
+
+/**
+ * @file
+ * VRF management
+ *
+ * This module manages Virtual Routing & Forwarding instances, known
+ * commonly as VRFs. VRFs let you partition your switch's routing
+ * tables so you can have unique IP domains.
+ *
+ * VRFs are keyed by a unique name across the system, and can be used
+ * in other modules to configure routes and nexthops in different
+ * domains.  If a route is not programmed in a specific VRF, it
+ * belongs to the VRF named "default".
+ */
 
 namespace eos {
 
@@ -27,19 +40,26 @@ class EOS_SDK_PUBLIC vrf_handler : public base_handler<vrf_mgr, vrf_handler> {
    vrf_mgr * get_vrf_mgr() const;
 
    /**
-    * Called when a VRF's state changes. When a VRF:
-    *
-    *  - is created, its state is VRF_INITIALIZING.
-    *  - becomes active, its state is VRF_ACTIVE.
-    *  - is being deleted, its state is VRF_DELETING.
-    *  - is deleted, its state is VRF_NULL.
-    **/
+    * Register to receive notifications when any VRF on the system changes state.
+    */
+   void watch_all_vrfs(bool);
+
+   /**
+    * Register to receive notifications when the specified VRF on the
+    * system changes state.
+    */
+   void watch_vrf(std::string const & vrf_name, bool);
+   
+   /**
+    * Called when a VRF's operational state changes.
+    */
    virtual void on_vrf_state(std::string vrf_name, vrf_state_t vrf_state);
 };
 
-class vrf_iter_impl;
 
-class EOS_SDK_PUBLIC vrf_iter_t : public iter_base<vrf_t, vrf_iter_impl> {
+class vrf_iter_impl;
+/// An iterator that yields a vrf_t for each VRF on the system.
+class EOS_SDK_PUBLIC vrf_iter_t : public iter_base<std::string, vrf_iter_impl> {
  private:
    friend class vrf_iter_impl;
    explicit vrf_iter_t(vrf_iter_impl * const) EOS_SDK_PRIVATE;
@@ -49,19 +69,36 @@ class EOS_SDK_PUBLIC vrf_iter_t : public iter_base<vrf_t, vrf_iter_impl> {
  * The manager for VRF, this is the main entry point for applications
  * to use EosSdk VRF APIs.
  */
-class EOS_SDK_PUBLIC vrf_mgr : public base_mgr<vrf_handler> {
+class EOS_SDK_PUBLIC vrf_mgr : public base_mgr<vrf_handler, std::string> {
  public:
    virtual ~vrf_mgr();
 
    /**
-    * Iterates through all VRFs on the system, yielding a vrf_t for each VRF.
+    * Iterates through all configured VRFs on the system, yielding a
+    * vrf_t for each VRF.
     */
    virtual vrf_iter_t vrf_iter() const = 0;
 
    /**
-    * Returns the named VRF, or a default VRF object if it does not exist.
+    * Returns true if the VRF is currently configured.
     */
-   virtual vrf_t vrf(std::string const & vrf_name) const = 0;
+   virtual bool exists(std::string const & vrf_name) const = 0;
+
+   /**
+    * Returns the configured route distinguisher associated with this VRF.
+    *
+    * If no VRF matches the given name, this returns 0.
+    */
+   virtual uint64_t rd(std::string const & vrf_name) const = 0;
+
+   /**
+    * Returns the operational status of this VRF.
+    *
+    * If the given VRF name does not have a current status (e.g. a
+    * newly configured VRF), or if it does not match any VRFs on the
+    * system, this returns VRF_STATE_NULL.
+    */
+   virtual vrf_state_t state(std::string const & vrf_name) const = 0;
 
    /**
     * Opens a socket inside a VRF specified by 'vrf_name'.
@@ -75,6 +112,15 @@ class EOS_SDK_PUBLIC vrf_mgr : public base_mgr<vrf_handler> {
     */
    virtual int socket_at(int domain, int type, int protocol,
                          std::string const & vrf_name) = 0;
+
+   /**
+    * Returns a composite `vrf_t` for the named VRF, or a
+    * default VRF object if it does not exist.
+    *
+    * @deprecated, please use the state(), exists(), and rd() methods
+    * instead. 
+    */
+   virtual vrf_t vrf(std::string const & vrf_name) const = 0;
 
  protected:
    vrf_mgr() EOS_SDK_PRIVATE;

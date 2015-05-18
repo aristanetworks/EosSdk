@@ -121,6 +121,6 @@ INSTANTIATE_ITERATOR(mpls_route_via_t, mpls_route_via_iter_impl);
 INSTANTIATE_ITERATOR(nexthop_group_t, nexthop_group_iter_impl);
 INSTANTIATE_ITERATOR(policy_map_key_t, policy_map_iter_impl);
 INSTANTIATE_ITERATOR(intf_id_t, subintf_iter_impl);
-INSTANTIATE_ITERATOR(vrf_t, vrf_iter_impl);
+INSTANTIATE_ITERATOR(std::string, vrf_iter_impl);
 
 }

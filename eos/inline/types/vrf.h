@@ -16,8 +16,6 @@ operator<<(std::ostream& os, const vrf_state_t & enum_val) {
       os << "VRF_ACTIVE";
    } else if (enum_val==VRF_DELETING) {
       os << "VRF_DELETING";
-   } else if (enum_val==VRF_CONFIGURED) {
-      os << "VRF_CONFIGURED";
    } else {
       os << "Unknown value";
    }
@@ -60,6 +58,18 @@ vrf_t::operator==(vrf_t const & other) const {
 inline bool
 vrf_t::operator!=(vrf_t const & other) const {
    return !operator==(other);
+}
+
+inline bool
+vrf_t::operator<(vrf_t const & other) const {
+   if(name_ != other.name_) {
+      return name_ < other.name_;
+   } else if(state_ != other.state_) {
+      return state_ < other.state_;
+   } else if(rd_ != other.rd_) {
+      return rd_ < other.rd_;
+   }
+   return false;
 }
 
 inline std::string

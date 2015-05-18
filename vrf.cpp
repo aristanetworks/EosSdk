@@ -17,6 +17,18 @@ class vrf_mgr_impl : public vrf_mgr {
       return *nop;
    }
 
+   bool exists(std::string const & vrf_name) const {
+      return false;
+   }
+
+   vrf_state_t state(std::string const & vrf_name) const {
+      return VRF_NULL;
+   }
+
+   uint64_t rd(std::string const & vrf_name) const {
+      return 0;
+   }
+
    vrf_t vrf(std::string const & vrf_name) const {
       return vrf_t();
    }

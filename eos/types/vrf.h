@@ -11,21 +11,19 @@ namespace eos {
 
 /** VRF state. */
 enum vrf_state_t {
-   /** Not a valid vrf type. */
+   /** VRF does not exist. */
    VRF_NULL,
-   /** VRF being initialized. */
+   /** VRF is being initialized. */
    VRF_INITIALIZING,
    /** VRF is active. */
    VRF_ACTIVE,
    /** VRF is being deleted. */
    VRF_DELETING,
-   /** VRF is configured. */
-   VRF_CONFIGURED,
 };
 /** Appends a string representation of enum vrf_state_t value to the ostream. */
 std::ostream& operator<<(std::ostream& os, const vrf_state_t & enum_val);
 
-/** This data structure is used to describe an VRF on a switch. */
+/** @deprecated. This data structure is used to describe a VRF on a switch. */
 class EOS_SDK_PUBLIC vrf_t {
  public:
    vrf_t();
@@ -42,6 +40,7 @@ class EOS_SDK_PUBLIC vrf_t {
 
    bool operator==(vrf_t const & other) const;
    bool operator!=(vrf_t const & other) const;
+   bool operator<(vrf_t const & other) const;
    /** Returns a string representation of the current object's values. */
    std::string to_string() const;
    /**
