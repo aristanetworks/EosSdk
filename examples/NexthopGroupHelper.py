@@ -21,7 +21,7 @@ class NexthopGroupSyncer( eossdk.NexthopGroupHandler ):
       # are no longer active
       self.groups_to_delete_ = set()
       eossdk.NexthopGroupHandler.__init__( self, nexthop_group_mgr )
-      self.watch_all_groups(True)
+      self.watch_all_nexthop_groups(True)
 
    #
    # Public Methods - see the nexthop_group module for descriptions
