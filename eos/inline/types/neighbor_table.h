@@ -8,7 +8,9 @@ namespace eos {
 
 inline std::ostream&
 operator<<(std::ostream& os, const neighbor_entry_type_t & enum_val) {
-   if (enum_val==NEIGHBOR_ENTRY_TYPE_DYNAMIC) {
+   if (enum_val==NEIGHBOR_ENTRY_TYPE_NULL) {
+      os << "NEIGHBOR_ENTRY_TYPE_NULL";
+   } else if (enum_val==NEIGHBOR_ENTRY_TYPE_DYNAMIC) {
       os << "NEIGHBOR_ENTRY_TYPE_DYNAMIC";
    } else if (enum_val==NEIGHBOR_ENTRY_TYPE_STATIC) {
       os << "NEIGHBOR_ENTRY_TYPE_STATIC";
@@ -48,6 +50,27 @@ neighbor_key_t::operator==(neighbor_key_t const & other) const {
 inline bool
 neighbor_key_t::operator!=(neighbor_key_t const & other) const {
    return !operator==(other);
+}
+
+inline bool
+neighbor_key_t::operator<(neighbor_key_t const & other) const {
+   if(ip_addr_ != other.ip_addr_) {
+      return ip_addr_ < other.ip_addr_;
+   } else if(intf_id_ != other.intf_id_) {
+      return intf_id_ < other.intf_id_;
+   }
+   return false;
+}
+
+inline uint32_t
+neighbor_key_t::hash() const {
+   uint32_t ret = 0;
+   ret = hash_mix::mix((uint8_t *)&ip_addr_,
+              sizeof(ip_addr_t), ret);
+   ret = hash_mix::mix((uint8_t *)&intf_id_,
+              sizeof(intf_id_t), ret);
+   ret = hash_mix::final_mix(ret);
+   return ret;
 }
 
 inline std::string
@@ -104,6 +127,31 @@ neighbor_entry_t::operator==(neighbor_entry_t const & other) const {
 inline bool
 neighbor_entry_t::operator!=(neighbor_entry_t const & other) const {
    return !operator==(other);
+}
+
+inline bool
+neighbor_entry_t::operator<(neighbor_entry_t const & other) const {
+   if(neighbor_key_ != other.neighbor_key_) {
+      return neighbor_key_ < other.neighbor_key_;
+   } else if(eth_addr_ != other.eth_addr_) {
+      return eth_addr_ < other.eth_addr_;
+   } else if(entry_type_ != other.entry_type_) {
+      return entry_type_ < other.entry_type_;
+   }
+   return false;
+}
+
+inline uint32_t
+neighbor_entry_t::hash() const {
+   uint32_t ret = 0;
+   ret = hash_mix::mix((uint8_t *)&neighbor_key_,
+              sizeof(neighbor_key_t), ret);
+   ret = hash_mix::mix((uint8_t *)&eth_addr_,
+              sizeof(eth_addr_t), ret);
+   ret = hash_mix::mix((uint8_t *)&entry_type_,
+              sizeof(neighbor_entry_type_t), ret);
+   ret = hash_mix::final_mix(ret);
+   return ret;
 }
 
 inline std::string

@@ -34,7 +34,7 @@ class neighbor_table_mgr;
  * The neighbor table handler.
  *
  * This class provides handler APIs to react to neighbor table entry deletion
- * and addition. It works for both the v4 ARP table and v6 neighbor table.
+ * and addition. It works for both the IPv4 ARP table and IPv6 neighbor table.
  */
 class EOS_SDK_PUBLIC neighbor_table_handler :
               public base_handler<neighbor_table_mgr, neighbor_table_handler> {
@@ -42,7 +42,24 @@ class EOS_SDK_PUBLIC neighbor_table_handler :
    explicit neighbor_table_handler(neighbor_table_mgr *mgr);
    neighbor_table_mgr * get_neighbor_table_mgr() const;
 
+   /**
+    * Registers this class to receive change updates on all neighbor entries. This
+    * includes both IPv4 ARP table entries and IPv6 Neighbor Discovery table
+    * entries.
+    */
+   void watch_all_neighbor_entries(bool interest);
+
+   /**
+    * Registers this class to receive change updates on a given neighbor entry. This
+    * includes both IPv4 ARP table entries and IPv6 Neighbor Discovery table
+    * entries.
+    */
+   void watch_neighbor_entry(neighbor_key_t const & key, bool interest);
+
+   // Handler when an entry shows up in ARP table or Neighbor Discovery table.
    virtual void on_neighbor_entry_set(neighbor_entry_t const & entry);
+
+   // Handler when an entry disappears from ARP table or Neighbor Discovery table.
    virtual void on_neighbor_entry_del(neighbor_key_t const & key);
 };
 
@@ -54,26 +71,32 @@ class EOS_SDK_PUBLIC neighbor_table_handler :
  * Discovery table for IPv6 addresses). It also provides APIs to delete/add v4
  * static ARP entry and v6 static neighbor table entries.
  */
-class EOS_SDK_PUBLIC neighbor_table_mgr : public base_mgr<neighbor_table_handler> {
+class EOS_SDK_PUBLIC neighbor_table_mgr : public base_mgr<neighbor_table_handler,
+                                                          neighbor_key_t> {
  public:
    virtual ~neighbor_table_mgr();
 
    // Attribute accessors
 
-   /// Lookup a resolved neighbor entry for a given L3 interface and IP address.
+   /// Looks up a resolved neighbor entry for a given L3 interface and IP address.
    virtual neighbor_entry_t neighbor_entry_status(
                                neighbor_key_t const & key) const = 0;
 
    /**
-    * Programmatically specify neighbor table entries.
-    *
-    * Note "intf_id" is needed only for v6 case, since the IP/MAC pair may not 
-    * be unique. It's not needed for v4 case.
+    * Configures a new static entry in either ARP table for IPv4 or Neighbor table
+    * for IPv6.
+    * Note "intf_id" is needed only for v6 case, since the IP/MAC pair may not be
+    * unique. It's not needed for v4 case.
     */
    virtual void neighbor_entry_set(neighbor_entry_t const & entry) = 0;
+   /**
+    * Deletes a static entry in either ARP table (IPv4) or Neighbor table for IPv6.
+    * Note "intf_id" is needed only for v6 case, since the IP/MAC pair may not be
+    * unique. It's not needed for v4 case.
+    */
    virtual void neighbor_entry_del(neighbor_key_t const & key) = 0;
 
-   /// Lookup a configured neighbor entry for a given L3 interface and IP address.
+   /// Looks up a configured neighbor entry for a given L3 interface and IP address.
    virtual neighbor_entry_t neighbor_entry(neighbor_key_t const & key) const = 0;
 
  protected:

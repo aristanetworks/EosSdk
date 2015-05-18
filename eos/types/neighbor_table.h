@@ -5,6 +5,7 @@
 #define EOS_TYPES_NEIGHBOR_TABLE_H
 
 #include <eos/eth.h>
+#include <eos/hash_mix.h>
 #include <eos/intf.h>
 #include <eos/ip.h>
 #include <eos/utility.h>
@@ -14,6 +15,7 @@ namespace eos {
 
 /** Neighbor entry types. */
 enum neighbor_entry_type_t {
+   NEIGHBOR_ENTRY_TYPE_NULL,
    NEIGHBOR_ENTRY_TYPE_DYNAMIC,
    NEIGHBOR_ENTRY_TYPE_STATIC,
 };
@@ -41,6 +43,9 @@ class EOS_SDK_PUBLIC neighbor_key_t {
 
    bool operator==(neighbor_key_t const & other) const;
    bool operator!=(neighbor_key_t const & other) const;
+   bool operator<(neighbor_key_t const & other) const;
+   /** The hash function for type neighbor_key_t. */
+   uint32_t hash() const;
    /** Returns a string representation of the current object's values. */
    std::string to_string() const;
    /**
@@ -75,6 +80,9 @@ class EOS_SDK_PUBLIC neighbor_entry_t {
 
    bool operator==(neighbor_entry_t const & other) const;
    bool operator!=(neighbor_entry_t const & other) const;
+   bool operator<(neighbor_entry_t const & other) const;
+   /** The hash function for type neighbor_entry_t. */
+   uint32_t hash() const;
    /** Returns a string representation of the current object's values. */
    std::string to_string() const;
    /**

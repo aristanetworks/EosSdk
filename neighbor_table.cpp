@@ -31,7 +31,11 @@ DEFINE_STUB_MGR_CTOR(neighbor_table_mgr)
 neighbor_table_handler::neighbor_table_handler(neighbor_table_mgr *mgr) :
                               base_handler(mgr) {
 }
-
+void neighbor_table_handler::watch_all_neighbor_entries(bool interest) {
+}
+void neighbor_table_handler::watch_neighbor_entry(neighbor_key_t const & key,
+                                                   bool interest) {
+}
 void neighbor_table_handler::on_neighbor_entry_del(neighbor_key_t const & key) {
 }
 void neighbor_table_handler::on_neighbor_entry_set(neighbor_entry_t const & entry) {
