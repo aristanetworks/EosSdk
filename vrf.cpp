@@ -44,6 +44,10 @@ DEFINE_STUB_MGR_CTOR(vrf_mgr)
 vrf_handler::vrf_handler(vrf_mgr *mgr) : base_handler(mgr) {
 }
 
+void vrf_handler::watch_all_vrfs(bool) {}
+
+void vrf_handler::watch_vrf(std::string const & vrf_name, bool) {}
+
 void vrf_handler::on_vrf_state(std::string vrf_name, vrf_state_t vrf_state) {
 }
 
