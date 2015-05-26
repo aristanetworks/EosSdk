@@ -21,8 +21,9 @@ class EOS_SDK_PUBLIC mpls_route_key_t {
    mpls_route_key_t();
    /**
     * Constructor taking an ingress MPLS route label and a metric.
-    *  @param mpls_label_t The MPLS label to match on ingress for this route.
-    * @param mpls_route_metric_t A metric value between 1 and 255.
+    * @param mpls_label_t The MPLS label to match on ingress for this route.
+    * @param mpls_route_metric_t A metric value between 0 and 255. If it is set to
+    * 0, the routing agent will assume a default metric value of 100.
     */
    mpls_route_key_t(mpls_label_t top_label, mpls_route_metric_t metric);
 

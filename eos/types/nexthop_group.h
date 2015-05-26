@@ -68,13 +68,13 @@ class EOS_SDK_PUBLIC nexthop_group_mpls_action_t {
    nexthop_group_mpls_action_t(mpls_action_t action_type, 
                                std::forward_list<mpls_label_t> const & label_stack);
 
-   /** Getter for 'action_type': The MPLS switching operation for this action. */
+   /** Getter for 'action_type': the MPLS switching operation for this action. */
    mpls_action_t action_type() const;
    /** Setter for 'action_type'. */
    void action_type_is(mpls_action_t action_type);
 
    /**
-    * Getter for 'label_stack': The MPLS label stack.
+    * Getter for 'label_stack': the MPLS label stack.
     *
     * The first element is the outermost label.
     */
@@ -146,7 +146,7 @@ class EOS_SDK_PUBLIC nexthop_group_entry_t {
    /** Setter for 'mpls_action'. */
    void mpls_action_is(nexthop_group_mpls_action_t const & mpls_action);
 
-   /** Getter for 'nexthop': The next hop IP address for this entry. */
+   /** Getter for 'nexthop': the next hop IP address for this entry. */
    ip_addr_t nexthop() const;
    /** Setter for 'nexthop'. */
    void nexthop_is(ip_addr_t const & nexthop);
@@ -181,36 +181,33 @@ class EOS_SDK_PUBLIC nexthop_group_t {
    nexthop_group_t(std::string name, nexthop_group_encap_t type, 
                    nexthop_group_gre_key_t gre_key_type);
 
-   /** Getter for 'name': The unique name of the nexthop group. */
+   /** Getter for 'name': the unique name of the nexthop group. */
    std::string name() const;
 
-   /** Getter for 'type': The type of packet encapsulation used on the group. */
+   /** Getter for 'type': the type of packet encapsulation used on the group. */
    nexthop_group_encap_t type() const;
 
-   /**
-    * Getter for 'gre_key_type': For GRE nexthop groups, how to set the GRE tunnel
-    * key.
-    */
+   /** Getter for 'gre_key_type': the key of the GRE tunnel. */
    nexthop_group_gre_key_t gre_key_type() const;
 
-   /** Getter for 'ttl': The TTL set in frame headers of IP-in-IP or GRE tunnels. */
+   /** Getter for 'ttl': the TTL set in frame headers of IP-in-IP or GRE tunnels. */
    uint16_t ttl() const;
    /** Setter for 'ttl'. */
    void ttl_is(uint16_t ttl);
 
-   /** Getter for 'source_ip': The source IP used on frames sent on this group. */
+   /** Getter for 'source_ip': the source IP used on frames sent on this group. */
    ip_addr_t source_ip() const;
    /** Setter for 'source_ip'. */
    void source_ip_is(ip_addr_t const & source_ip);
 
-   /** Getter for 'source_intf': The source interface to use. */
+   /** Getter for 'source_intf': the source interface to use. */
    intf_id_t source_intf() const;
    /** Setter for 'source_intf'. */
    void source_intf_is(intf_id_t source_intf);
 
    /** The maximum size of the nexthop group in entries. */
    uint16_t size() const;
-   /** Getter for 'nexthops': Array index to nexthop group entry map. */
+   /** Getter for 'nexthops': array index to nexthop group entry map. */
    std::map<uint16_t, nexthop_group_entry_t> const & nexthops() const;
    /** Setter for 'nexthops'. */
    void nexthops_is(std::map<uint16_t, nexthop_group_entry_t> const & nexthops);
@@ -220,7 +217,7 @@ class EOS_SDK_PUBLIC nexthop_group_t {
    void nexthop_del(uint16_t key);
 
    /**
-    * Getter for 'destination_ips': Array index to IP address map.
+    * Getter for 'destination_ips': array index to IP address map.
     * @deprecated Use 'nexthops' instead.
     */
    std::map<uint16_t, ip_addr_t> const & destination_ips() const;
@@ -232,7 +229,7 @@ class EOS_SDK_PUBLIC nexthop_group_t {
    /** deletes the key/value pair from the map. */
    void destination_ip_del(uint16_t key);
 
-   /** Getter for 'persistent': The source interface to use. */
+   /** Getter for 'persistent': persistent in system configuration. */
    bool persistent() const;
    /** Setter for 'persistent'. */
    void persistent_is(bool persistent);

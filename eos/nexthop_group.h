@@ -46,9 +46,9 @@
  *   eos::nexthop_group_entry_t nhe2(eos::ip_addr_t("172.12.1.2"));
  *   // Set the nexthop group entries on the group with unequal cost load balancing
  *   // Balance traffic 2/3 to 172.12.1.1, 1/3 to 172.12.1.2.
- *   nhg.nexthop_entry_set(0, nhe1);
- *   nhg.nexthop_entry_set(1, nhe1);
- *   nhg.nexthop_entry_set(2, nhe2);
+ *   nhg.nexthop_set(0, nhe1);
+ *   nhg.nexthop_set(1, nhe1);
+ *   nhg.nexthop_set(2, nhe2);
  * @endcode
  */
 
