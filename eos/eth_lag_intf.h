@@ -238,24 +238,24 @@ class EOS_SDK_PUBLIC eth_lag_intf_mgr
    virtual uint16_t fallback_timeout_default(intf_id_t eth_lag_intf_id) const = 0;
 
    /**
-    * This API adds/removes a physical interface to/from a LAG interface.
-    * To add an interface, the interface id and its LACP mode are needed.
-    * To remove an interface from a LAG interface, the "intf" needs to be
-    * provided, and eth_lag_intf_id needs to be the empty intf with
-    * intf_type()==INTF_TYPE_NULL (created by intf_id_t()).
+    * Adds a physical interface to a LAG interface.
     *
-    * When removing an interface from a LAG interface, this API may throw
-    * "no_such_interface_error" exception if the specified LAG interface does
-    * not exist. It may also throw "invalid_argument_error" exception if the
-    * specified "intf" is not in any LAG interface.
-    *
-    * When adding an interface to a LAG interface, this API may throw "Invalid_
-    * argument_error" error if the interface's mode is not compatible with
-    * the LAG interface mode.
+    * This API may throw "Invalid_argument_error" exception if the interface's
+    * mode is not compatible with the LAG interface mode or the LAG interface's 
+    * type is INTF_TYPE_NULL.
     */
    virtual void membership_set(intf_id_t member_intf_id,
                                intf_id_t eth_lag_intf_id,
                                eth_lag_intf_member_lacp_mode_t mode) = 0;
+   
+   /** 
+    * Removes an interface from a LAG interface.
+    *
+    * This API returns directly if the interface is invalid or not in a LAG.
+    */
+   virtual void membership_del(intf_id_t member_intf_id) = 0;
+   
+   
    /**
     * Returns the LAG interface ID to which the physical interface is configured
     * to belong. An empty intf_id_t is returned if the physical interface is not

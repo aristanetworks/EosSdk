@@ -121,6 +121,9 @@ class eth_lag_intf_mgr_impl : public eth_lag_intf_mgr {
                        eth_lag_intf_member_lacp_mode_t mode) {
    }
 
+   void membership_del(intf_id_t member_intf_id) {
+   }
+
    eth_lag_intf_membership_t membership_status(intf_id_t member_intf_id) const {
       return eth_lag_intf_membership_t();
    }
