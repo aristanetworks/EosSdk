@@ -100,6 +100,8 @@ class EOS_SDK_PUBLIC mpls_route_via_t {
  public:
    mpls_route_via_t();
    explicit mpls_route_via_t(mpls_route_key_t route_key);
+   explicit mpls_route_via_t(mpls_route_key_t route_key, 
+                             mpls_action_t label_action);
 
    mpls_route_key_t route_key() const;
    void route_key_is(mpls_route_key_t route_key);

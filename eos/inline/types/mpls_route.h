@@ -133,6 +133,13 @@ inline mpls_route_via_t::mpls_route_via_t(mpls_route_key_t route_key) :
       payload_type_(MPLS_PAYLOAD_TYPE_NULL), skip_egress_acl_(false) {
 }
 
+inline mpls_route_via_t::mpls_route_via_t(mpls_route_key_t route_key, 
+                                          mpls_action_t label_action) :
+      route_key_(route_key), hop_(), intf_(), pushswap_label_(0), 
+      label_action_(label_action), ttl_mode_(MPLS_TTLMODE_NULL), 
+      payload_type_(MPLS_PAYLOAD_TYPE_NULL), skip_egress_acl_(false) {
+}
+
 inline mpls_route_key_t
 mpls_route_via_t::route_key() const {
    return route_key_;
