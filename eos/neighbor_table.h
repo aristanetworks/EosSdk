@@ -23,12 +23,14 @@
 #include <eos/base_handler.h>
 #include <eos/intf.h>
 #include <eos/ip.h>
+#include <eos/iterator.h>
 
 #include <eos/types/neighbor_table.h>
 
 namespace eos {
 
 class neighbor_table_mgr;
+class neighbor_table_iter_impl;
 
 /**
  * The neighbor table handler.
@@ -64,6 +66,16 @@ class EOS_SDK_PUBLIC neighbor_table_handler :
 };
 
 /**
+ * An iterator over the configured ARP and Neighbor Discovery tables.
+ */
+class EOS_SDK_PUBLIC neighbor_table_iter_t : public iter_base< neighbor_key_t, 
+                                                    neighbor_table_iter_impl> {
+ private:
+   friend class neighbor_table_iter_impl;
+   explicit neighbor_table_iter_t(neighbor_table_iter_impl * const) EOS_SDK_PRIVATE;
+};
+
+/**
  * The neighbor table manager.
  *
  * This class provides access to the resolved MAC address for a given IP address
@@ -75,6 +87,12 @@ class EOS_SDK_PUBLIC neighbor_table_mgr : public base_mgr<neighbor_table_handler
                                                           neighbor_key_t> {
  public:
    virtual ~neighbor_table_mgr();
+
+   /**
+    * Iterates through the configured ARP and Neighbor Discovery tables. 
+    * A neighbor_key_t is returned for each entry.
+    */
+   virtual neighbor_table_iter_t neighbor_table_iter() const = 0;
 
    // Attribute accessors
 

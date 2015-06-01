@@ -14,6 +14,7 @@
 #include "eos/ip_route.h"
 #include "eos/iterator.h"
 #include "eos/mpls_route.h"
+#include "eos/neighbor_table.h"
 #include "eos/nexthop_group.h"
 #include "eos/policy_map.h"
 #include "eos/subintf.h"
@@ -118,6 +119,7 @@ INSTANTIATE_ITERATOR(ip_route_t, ip_route_iter_impl);
 INSTANTIATE_ITERATOR(ip_route_via_t, ip_route_via_iter_impl);
 INSTANTIATE_ITERATOR(mpls_route_t, mpls_route_iter_impl);
 INSTANTIATE_ITERATOR(mpls_route_via_t, mpls_route_via_iter_impl);
+INSTANTIATE_ITERATOR(neighbor_key_t, neighbor_table_iter_impl);
 INSTANTIATE_ITERATOR(nexthop_group_t, nexthop_group_iter_impl);
 INSTANTIATE_ITERATOR(policy_map_key_t, policy_map_iter_impl);
 INSTANTIATE_ITERATOR(intf_id_t, subintf_iter_impl);
