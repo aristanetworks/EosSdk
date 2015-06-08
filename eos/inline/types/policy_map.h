@@ -132,11 +132,11 @@ operator<<(std::ostream& os, const policy_map_key_t& obj) {
 
 // Default constructor.
 inline policy_map_action_t::policy_map_action_t() :
-      action_type_(), nexthop_group_name_(), nexthops_(), dscp_(), traffic_class_() {
+      action_type_(), nexthop_group_name_(), nexthops_(), dscp_(), 
+      traffic_class_() {
 }
 
-inline policy_map_action_t::policy_map_action_t(
-        policy_action_type_t action_type) :
+inline policy_map_action_t::policy_map_action_t(policy_action_type_t action_type) :
       action_type_(action_type), nexthop_group_name_(), nexthops_(), dscp_(), 
       traffic_class_() {
 }
@@ -162,8 +162,7 @@ policy_map_action_t::nexthop_group_name() const {
 }
 
 inline void
-policy_map_action_t::nexthop_group_name_is(
-                                           std::string const & nexthop_group_name) {
+policy_map_action_t::nexthop_group_name_is(std::string const & nexthop_group_name) {
    nexthop_group_name_ = nexthop_group_name;
 }
 
@@ -270,8 +269,7 @@ inline policy_map_rule_t::policy_map_rule_t() :
       class_map_key_(), actions_() {
 }
 
-inline policy_map_rule_t::policy_map_rule_t(
-                                            class_map_key_t const & class_map_key) :
+inline policy_map_rule_t::policy_map_rule_t(class_map_key_t const & class_map_key) :
       class_map_key_(class_map_key), actions_() {
 }
 
@@ -458,7 +456,7 @@ operator<<(std::ostream& os, const policy_map_t& obj) {
 
 
 inline unsupported_policy_feature_error::unsupported_policy_feature_error(
-                                  policy_feature_t policy_feature) noexcept :
+         policy_feature_t policy_feature) noexcept :
       unsupported_error(std::string("Unsupported policy feature")), 
       policy_feature_(policy_feature) {
    

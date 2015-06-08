@@ -66,8 +66,7 @@ enum policy_action_type_t {
  * Appends a string representation of enum policy_action_type_t value to the
  * ostream.
  */
-std::ostream& operator<<(std::ostream& os, 
-                         const policy_action_type_t & enum_val);
+std::ostream& operator<<(std::ostream& os, const policy_action_type_t & enum_val);
 
 /** The key used to uniquely identify both class and policy maps. */
 class EOS_SDK_PUBLIC policy_map_key_t {
@@ -90,8 +89,7 @@ class EOS_SDK_PUBLIC policy_map_key_t {
     * A utility stream operator that adds a string representation of
     * policy_map_key_t to the ostream.
     */
-   friend std::ostream& operator<<(std::ostream& os, 
-                                   const policy_map_key_t& obj);
+   friend std::ostream& operator<<(std::ostream& os, const policy_map_key_t& obj);
 
  private:
    std::string name_;
@@ -226,8 +224,7 @@ class EOS_SDK_PUBLIC policy_map_rule_t {
     * A utility stream operator that adds a string representation of
     * policy_map_rule_t to the ostream.
     */
-   friend std::ostream& operator<<(std::ostream& os, 
-                                   const policy_map_rule_t& obj);
+   friend std::ostream& operator<<(std::ostream& os, const policy_map_rule_t& obj);
 
  private:
    class_map_key_t class_map_key_;
@@ -281,7 +278,8 @@ class EOS_SDK_PUBLIC policy_map_t {
 /** The policy feature requested is unavailable in this SDK release. */
 class EOS_SDK_PUBLIC unsupported_policy_feature_error : public unsupported_error {
  public:
-   explicit unsupported_policy_feature_error(policy_feature_t policy_feature) noexcept;
+   explicit unsupported_policy_feature_error(policy_feature_t policy_feature)
+          noexcept;
    virtual ~unsupported_policy_feature_error() noexcept;
 
    policy_feature_t policy_feature() const noexcept;

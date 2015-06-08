@@ -53,8 +53,7 @@ enum acl_range_operator_t {
  * Appends a string representation of enum acl_range_operator_t value to the
  * ostream.
  */
-std::ostream& operator<<(std::ostream& os, 
-                         const acl_range_operator_t & enum_val);
+std::ostream& operator<<(std::ostream& os, const acl_range_operator_t & enum_val);
 
 /** The action to take for an individual ACL rule. */
 enum acl_action_t {
