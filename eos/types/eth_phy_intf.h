@@ -32,19 +32,18 @@ class EOS_SDK_PUBLIC eth_phy_intf_counters_t {
  public:
    eth_phy_intf_counters_t();
    eth_phy_intf_counters_t(uint64_t single_collision_frames, 
-                           uint64_t multiple_collision_frames, 
-                           uint64_t fcs_errors, uint64_t alignment_errors, 
+                           uint64_t multiple_collision_frames, uint64_t fcs_errors, 
+                           uint64_t alignment_errors, 
                            uint64_t deferred_transmissions, 
-                           uint64_t late_collisions, 
-                           uint64_t excessive_collisions, 
+                           uint64_t late_collisions, uint64_t excessive_collisions, 
                            uint64_t internal_mac_transmit_errors, 
                            uint64_t carrier_sense_errors, 
                            uint64_t internal_mac_receive_errors, 
                            uint64_t frame_too_shorts, uint64_t frame_too_longs, 
                            uint64_t sqe_test_errors, uint64_t symbol_errors, 
-                           uint64_t in_unknown_opcodes, 
-                           uint64_t out_pause_frames, uint64_t in_pause_frames, 
-                           uint64_t fragments, uint64_t jabbers);
+                           uint64_t in_unknown_opcodes, uint64_t out_pause_frames, 
+                           uint64_t in_pause_frames, uint64_t fragments, 
+                           uint64_t jabbers);
 
    /**
     * Getter for 'single_collision_frames': Etherlike-MIB singleCollisionFrames

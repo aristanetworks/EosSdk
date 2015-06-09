@@ -43,13 +43,13 @@ inline nexthop_group_mpls_action_t::nexthop_group_mpls_action_t() :
 }
 
 inline nexthop_group_mpls_action_t::nexthop_group_mpls_action_t(
-                        mpls_action_t action_type) :
+         mpls_action_t action_type) :
       action_type_(action_type), label_stack_() {
 }
 
 inline nexthop_group_mpls_action_t::nexthop_group_mpls_action_t(
-                        mpls_action_t action_type, 
-                        std::forward_list<mpls_label_t> const & label_stack) :
+         mpls_action_t action_type, 
+         std::forward_list<mpls_label_t> const & label_stack) :
       action_type_(action_type), label_stack_(label_stack) {
 }
 
@@ -70,7 +70,7 @@ nexthop_group_mpls_action_t::label_stack() const {
 
 inline void
 nexthop_group_mpls_action_t::label_stack_is(
-                                            std::forward_list<mpls_label_t> const & label_stack) {
+         std::forward_list<mpls_label_t> const & label_stack) {
    label_stack_ = label_stack;
 }
 
@@ -85,21 +85,21 @@ nexthop_group_mpls_action_t::label_stack_del(mpls_label_t const & label_stack) {
 }
 
 inline bool
-nexthop_group_mpls_action_t::operator==(
-                                        nexthop_group_mpls_action_t const & other) const {
+nexthop_group_mpls_action_t::operator==(nexthop_group_mpls_action_t const & other)
+       const {
    return action_type_ == other.action_type_ &&
           label_stack_ == other.label_stack_;
 }
 
 inline bool
-nexthop_group_mpls_action_t::operator!=(
-                                        nexthop_group_mpls_action_t const & other) const {
+nexthop_group_mpls_action_t::operator!=(nexthop_group_mpls_action_t const & other)
+       const {
    return !operator==(other);
 }
 
 inline bool
-nexthop_group_mpls_action_t::operator<(
-                                       nexthop_group_mpls_action_t const & other) const {
+nexthop_group_mpls_action_t::operator<(nexthop_group_mpls_action_t const & other)
+       const {
    if(action_type_ != other.action_type_) {
       return action_type_ < other.action_type_;
    } else if(label_stack_ != other.label_stack_) {
@@ -141,7 +141,7 @@ inline nexthop_group_entry_counter_t::nexthop_group_entry_counter_t() :
 }
 
 inline nexthop_group_entry_counter_t::nexthop_group_entry_counter_t(
-                            uint64_t packets, uint64_t bytes) :
+         uint64_t packets, uint64_t bytes) :
       packets_(packets), bytes_(bytes) {
 }
 
@@ -157,20 +157,20 @@ nexthop_group_entry_counter_t::bytes() const {
 
 inline bool
 nexthop_group_entry_counter_t::operator==(
-                                          nexthop_group_entry_counter_t const & other) const {
+         nexthop_group_entry_counter_t const & other) const {
    return packets_ == other.packets_ &&
           bytes_ == other.bytes_;
 }
 
 inline bool
 nexthop_group_entry_counter_t::operator!=(
-                                          nexthop_group_entry_counter_t const & other) const {
+         nexthop_group_entry_counter_t const & other) const {
    return !operator==(other);
 }
 
 inline bool
 nexthop_group_entry_counter_t::operator<(
-                                         nexthop_group_entry_counter_t const & other) const {
+         nexthop_group_entry_counter_t const & other) const {
    if(packets_ != other.packets_) {
       return packets_ < other.packets_;
    } else if(bytes_ != other.bytes_) {
@@ -212,7 +212,7 @@ nexthop_group_entry_t::mpls_action() const {
 
 inline void
 nexthop_group_entry_t::mpls_action_is(
-                                      nexthop_group_mpls_action_t const & mpls_action) {
+         nexthop_group_mpls_action_t const & mpls_action) {
    mpls_action_ = mpls_action;
 }
 
@@ -272,15 +272,16 @@ inline nexthop_group_t::nexthop_group_t() :
 
 inline nexthop_group_t::nexthop_group_t(std::string name, 
                                         nexthop_group_encap_t type) :
-      name_(name), type_(type), gre_key_type_(NEXTHOP_GROUP_GRE_KEY_NULL), ttl_(64), 
-      source_ip_(), source_intf_(), nexthops_(), destination_ips_(), persistent_() {
+      name_(name), type_(type), gre_key_type_(NEXTHOP_GROUP_GRE_KEY_NULL), 
+      ttl_(64), source_ip_(), source_intf_(), nexthops_(), destination_ips_(), 
+      persistent_() {
 }
 
 inline nexthop_group_t::nexthop_group_t(std::string name, 
                                         nexthop_group_encap_t type, 
                                         nexthop_group_gre_key_t gre_key_type) :
-      name_(name), type_(type), gre_key_type_(gre_key_type), ttl_(64), source_ip_(), 
-      source_intf_(), nexthops_(), destination_ips_(), persistent_() {
+      name_(name), type_(type), gre_key_type_(gre_key_type), ttl_(64), 
+      source_ip_(), source_intf_(), nexthops_(), destination_ips_(), persistent_() {
 }
 
 inline std::string
@@ -358,7 +359,7 @@ nexthop_group_t::nexthops() const {
 
 inline void
 nexthop_group_t::nexthops_is(
-                             std::map<uint16_t, nexthop_group_entry_t> const & nexthops) {
+         std::map<uint16_t, nexthop_group_entry_t> const & nexthops) {
    nexthops_ = nexthops;
 }
 
@@ -379,7 +380,7 @@ nexthop_group_t::destination_ips() const {
 
 inline void
 nexthop_group_t::destination_ips_is(
-                                    std::map<uint16_t, ip_addr_t> const & destination_ips) {
+         std::map<uint16_t, ip_addr_t> const & destination_ips) {
    destination_ips_ = destination_ips;
 }
 

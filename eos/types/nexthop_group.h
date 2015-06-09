@@ -32,8 +32,7 @@ enum nexthop_group_encap_t {
  * Appends a string representation of enum nexthop_group_encap_t value to the
  * ostream.
  */
-std::ostream& operator<<(std::ostream& os, 
-                         const nexthop_group_encap_t & enum_val);
+std::ostream& operator<<(std::ostream& os, const nexthop_group_encap_t & enum_val);
 
 /** How the GRE tunnel key is set for GRE nexthop groups. */
 enum nexthop_group_gre_key_t {
@@ -222,8 +221,7 @@ class EOS_SDK_PUBLIC nexthop_group_t {
     */
    std::map<uint16_t, ip_addr_t> const & destination_ips() const;
    /** Setter for 'destination_ips'. */
-   void destination_ips_is(
-                           std::map<uint16_t, ip_addr_t> const & destination_ips);
+   void destination_ips_is(std::map<uint16_t, ip_addr_t> const & destination_ips);
    /** inserts key/value pair to the map. */
    void destination_ip_set(uint16_t key, ip_addr_t const & value);
    /** deletes the key/value pair from the map. */

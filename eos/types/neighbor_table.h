@@ -23,8 +23,7 @@ enum neighbor_entry_type_t {
  * Appends a string representation of enum neighbor_entry_type_t value to the
  * ostream.
  */
-std::ostream& operator<<(std::ostream& os, 
-                         const neighbor_entry_type_t & enum_val);
+std::ostream& operator<<(std::ostream& os, const neighbor_entry_type_t & enum_val);
 
 /**
  * The neighbor entry key class.
@@ -89,8 +88,7 @@ class EOS_SDK_PUBLIC neighbor_entry_t {
     * A utility stream operator that adds a string representation of
     * neighbor_entry_t to the ostream.
     */
-   friend std::ostream& operator<<(std::ostream& os, 
-                                   const neighbor_entry_t& obj);
+   friend std::ostream& operator<<(std::ostream& os, const neighbor_entry_t& obj);
 
  private:
    neighbor_key_t neighbor_key_;

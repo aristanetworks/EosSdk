@@ -68,8 +68,7 @@ operator<<(std::ostream& os, const eth_lag_intf_member_lacp_mode_t & enum_val) {
 
 
 inline std::ostream&
-operator<<(std::ostream& os, 
-           const eth_lag_intf_member_lacp_timeout_t & enum_val) {
+operator<<(std::ostream& os, const eth_lag_intf_member_lacp_timeout_t & enum_val) {
    if (enum_val==ETH_LAG_INTF_MEMBER_LACP_TIMEOUT_NULL) {
       os << "ETH_LAG_INTF_MEMBER_LACP_TIMEOUT_NULL";
    } else if (enum_val==ETH_LAG_INTF_MEMBER_LACP_TIMEOUT_SHORT) {
@@ -91,9 +90,8 @@ inline eth_lag_intf_membership_t::eth_lag_intf_membership_t() :
 }
 
 inline eth_lag_intf_membership_t::eth_lag_intf_membership_t(
-                    intf_id_t eth_lag_intf_id, bool active, 
-                    std::string const & reason, double member_time, 
-                    eth_lag_intf_member_lacp_mode_t mode) :
+         intf_id_t eth_lag_intf_id, bool active, std::string const & reason, 
+         double member_time, eth_lag_intf_member_lacp_mode_t mode) :
       eth_lag_intf_id_(eth_lag_intf_id), active_(active), reason_(reason), 
       member_time_(member_time), mode_(mode) {
 }
@@ -134,7 +132,8 @@ eth_lag_intf_membership_t::mode() const {
 }
 
 inline bool
-eth_lag_intf_membership_t::operator==(eth_lag_intf_membership_t const & other) const {
+eth_lag_intf_membership_t::operator==(eth_lag_intf_membership_t const & other)
+       const {
    return eth_lag_intf_id_ == other.eth_lag_intf_id_ &&
           active_ == other.active_ &&
           reason_ == other.reason_ &&
@@ -143,12 +142,14 @@ eth_lag_intf_membership_t::operator==(eth_lag_intf_membership_t const & other) c
 }
 
 inline bool
-eth_lag_intf_membership_t::operator!=(eth_lag_intf_membership_t const & other) const {
+eth_lag_intf_membership_t::operator!=(eth_lag_intf_membership_t const & other)
+       const {
    return !operator==(other);
 }
 
 inline bool
-eth_lag_intf_membership_t::operator<(eth_lag_intf_membership_t const & other) const {
+eth_lag_intf_membership_t::operator<(eth_lag_intf_membership_t const & other)
+       const {
    if(eth_lag_intf_id_ != other.eth_lag_intf_id_) {
       return eth_lag_intf_id_ < other.eth_lag_intf_id_;
    } else if(active_ != other.active_) {
@@ -215,8 +216,8 @@ inline eth_lag_intf_t::eth_lag_intf_t(intf_id_t intf, uint32_t min_links,
                                       uint64_t speed, 
                                       eth_lag_intf_fallback_type_t fallback_type, 
                                       uint16_t fallback_timeout) :
-      intf_(intf), speed_(speed), min_links_(min_links), fallback_type_(fallback_type), 
-      fallback_timeout_(fallback_timeout) {
+      intf_(intf), speed_(speed), min_links_(min_links), 
+      fallback_type_(fallback_type), fallback_timeout_(fallback_timeout) {
 }
 
 inline intf_id_t

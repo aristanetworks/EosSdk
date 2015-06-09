@@ -42,17 +42,15 @@ inline eth_phy_intf_counters_t::eth_phy_intf_counters_t() :
 }
 
 inline eth_phy_intf_counters_t::eth_phy_intf_counters_t(
-                uint64_t single_collision_frames, 
-                uint64_t multiple_collision_frames, uint64_t fcs_errors, 
-                uint64_t alignment_errors, uint64_t deferred_transmissions, 
-                uint64_t late_collisions, uint64_t excessive_collisions, 
-                uint64_t internal_mac_transmit_errors, 
-                uint64_t carrier_sense_errors, 
-                uint64_t internal_mac_receive_errors, uint64_t frame_too_shorts, 
-                uint64_t frame_too_longs, uint64_t sqe_test_errors, 
-                uint64_t symbol_errors, uint64_t in_unknown_opcodes, 
-                uint64_t out_pause_frames, uint64_t in_pause_frames, 
-                uint64_t fragments, uint64_t jabbers) :
+         uint64_t single_collision_frames, uint64_t multiple_collision_frames, 
+         uint64_t fcs_errors, uint64_t alignment_errors, 
+         uint64_t deferred_transmissions, uint64_t late_collisions, 
+         uint64_t excessive_collisions, uint64_t internal_mac_transmit_errors, 
+         uint64_t carrier_sense_errors, uint64_t internal_mac_receive_errors, 
+         uint64_t frame_too_shorts, uint64_t frame_too_longs, 
+         uint64_t sqe_test_errors, uint64_t symbol_errors, 
+         uint64_t in_unknown_opcodes, uint64_t out_pause_frames, 
+         uint64_t in_pause_frames, uint64_t fragments, uint64_t jabbers) :
       single_collision_frames_(single_collision_frames), 
       multiple_collision_frames_(multiple_collision_frames), 
       fcs_errors_(fcs_errors), alignment_errors_(alignment_errors), 
@@ -238,20 +236,16 @@ inline eth_phy_intf_bin_counters_t::eth_phy_intf_bin_counters_t() :
 }
 
 inline eth_phy_intf_bin_counters_t::eth_phy_intf_bin_counters_t(
-                        uint64_t in_64_octet_frames, 
-                        uint64_t in_65_to_127_octet_frames, 
-                        uint64_t in_128_to_255_octet_frames, 
-                        uint64_t in_256_to_511_octet_frames, 
-                        uint64_t in_512_to_1023_octet_frames, 
-                        uint64_t in_1024_to_1522_octet_frames, 
-                        uint64_t in_1523_to_max_octet_frames, 
-                        uint64_t out_64_octet_frames, 
-                        uint64_t out_65_to_127_octet_frames, 
-                        uint64_t out_128_to_255_octet_frames, 
-                        uint64_t out_256_to_511_octet_frames, 
-                        uint64_t out_512_to_1023_octet_frames, 
-                        uint64_t out_1024_to_1522_octet_frames, 
-                        uint64_t out_1523_to_max_octet_frames) :
+         uint64_t in_64_octet_frames, uint64_t in_65_to_127_octet_frames, 
+         uint64_t in_128_to_255_octet_frames, uint64_t in_256_to_511_octet_frames, 
+         uint64_t in_512_to_1023_octet_frames, 
+         uint64_t in_1024_to_1522_octet_frames, 
+         uint64_t in_1523_to_max_octet_frames, uint64_t out_64_octet_frames, 
+         uint64_t out_65_to_127_octet_frames, uint64_t out_128_to_255_octet_frames, 
+         uint64_t out_256_to_511_octet_frames, 
+         uint64_t out_512_to_1023_octet_frames, 
+         uint64_t out_1024_to_1522_octet_frames, 
+         uint64_t out_1523_to_max_octet_frames) :
       in_64_octet_frames_(in_64_octet_frames), 
       in_65_to_127_octet_frames_(in_65_to_127_octet_frames), 
       in_128_to_255_octet_frames_(in_128_to_255_octet_frames), 
@@ -339,8 +333,8 @@ eth_phy_intf_bin_counters_t::out_1523_to_max_octet_frames() const {
 }
 
 inline bool
-eth_phy_intf_bin_counters_t::operator==(
-                                        eth_phy_intf_bin_counters_t const & other) const {
+eth_phy_intf_bin_counters_t::operator==(eth_phy_intf_bin_counters_t const & other)
+       const {
    return in_64_octet_frames_ == other.in_64_octet_frames_ &&
           in_65_to_127_octet_frames_ == other.in_65_to_127_octet_frames_ &&
           in_128_to_255_octet_frames_ == other.in_128_to_255_octet_frames_ &&
@@ -358,8 +352,8 @@ eth_phy_intf_bin_counters_t::operator==(
 }
 
 inline bool
-eth_phy_intf_bin_counters_t::operator!=(
-                                        eth_phy_intf_bin_counters_t const & other) const {
+eth_phy_intf_bin_counters_t::operator!=(eth_phy_intf_bin_counters_t const & other)
+       const {
    return !operator==(other);
 }
 

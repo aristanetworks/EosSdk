@@ -202,8 +202,7 @@ class EOS_SDK_PUBLIC flow_action_set_t {
     * A utility stream operator that adds a string representation of
     * flow_action_set_t to the ostream.
     */
-   friend std::ostream& operator<<(std::ostream& os, 
-                                   const flow_action_set_t& obj);
+   friend std::ostream& operator<<(std::ostream& os, const flow_action_set_t& obj);
 
  private:
    friend class flow_helper;
@@ -285,8 +284,8 @@ class EOS_SDK_PUBLIC flow_action_t {
 class EOS_SDK_PUBLIC flow_entry_t {
  public:
    flow_entry_t();
-   flow_entry_t(std::string const & name, flow_match_t match, 
-                flow_action_t action, flow_priority_t priority);
+   flow_entry_t(std::string const & name, flow_match_t match, flow_action_t action, 
+                flow_priority_t priority);
 
    std::string name() const;
 
@@ -366,8 +365,7 @@ enum flow_rejected_reason_t {
  * Appends a string representation of enum flow_rejected_reason_t value to the
  * ostream.
  */
-std::ostream& operator<<(std::ostream& os, 
-                         const flow_rejected_reason_t & enum_val);
+std::ostream& operator<<(std::ostream& os, const flow_rejected_reason_t & enum_val);
 }
 
 #include <eos/inline/types/directflow.h>

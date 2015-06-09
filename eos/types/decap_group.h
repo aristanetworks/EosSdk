@@ -22,8 +22,7 @@ enum decap_protocol_type_t {
  * Appends a string representation of enum decap_protocol_type_t value to the
  * ostream.
  */
-std::ostream& operator<<(std::ostream& os, 
-                         const decap_protocol_type_t & enum_val);
+std::ostream& operator<<(std::ostream& os, const decap_protocol_type_t & enum_val);
 
 /**
  * An IP decap group configuration model. At this time, all decap  groups are

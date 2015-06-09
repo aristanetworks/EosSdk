@@ -53,8 +53,7 @@ class EOS_SDK_PUBLIC class_map_rule_t {
     * A utility stream operator that adds a string representation of
     * class_map_rule_t to the ostream.
     */
-   friend std::ostream& operator<<(std::ostream& os, 
-                                   const class_map_rule_t& obj);
+   friend std::ostream& operator<<(std::ostream& os, const class_map_rule_t& obj);
 
  private:
    acl_key_t acl_key_;

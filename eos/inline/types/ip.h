@@ -214,8 +214,7 @@ inline ip_addr_mask_t::ip_addr_mask_t() :
       addr_(ip_addr_t()), mask_length_() {
 }
 
-inline ip_addr_mask_t::ip_addr_mask_t(ip_addr_t const & addr, 
-                                      uint8_t mask_length) {
+inline ip_addr_mask_t::ip_addr_mask_t(ip_addr_t const & addr, uint8_t mask_length) {
    
    addr_ = addr;
    if (mask_length < 129) {

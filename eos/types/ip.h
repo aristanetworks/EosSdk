@@ -205,7 +205,6 @@ class EOS_SDK_PUBLIC ip_addr_mask_t {
  * @return true if the address parsed successfully, false otherwise.
  */
 bool parse_ip_addr(char const * addr, ip_addr_t * result) EOS_SDK_PUBLIC;
-;
 
 /**
  *
@@ -222,7 +221,6 @@ bool parse_ip_addr(char const * addr, ip_addr_t * result) EOS_SDK_PUBLIC;
  * @return true if the route prefix parsed successfully, false otherwise.
  */
 bool parse_ip_prefix(char const * addr, ip_prefix_t * result) EOS_SDK_PUBLIC;
-;
 
 
 /** Tried to configure an internal VLAN on a trunk port. */

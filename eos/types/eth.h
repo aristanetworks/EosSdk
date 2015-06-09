@@ -92,8 +92,7 @@ class EOS_SDK_PUBLIC invalid_vlan_error : public error {
     * A utility stream operator that adds a string representation of
     * invalid_vlan_error to the ostream.
     */
-   friend std::ostream& operator<<(std::ostream& os, 
-                                   const invalid_vlan_error& obj);
+   friend std::ostream& operator<<(std::ostream& os, const invalid_vlan_error& obj);
 
  private:
    vlan_id_t vlan_;

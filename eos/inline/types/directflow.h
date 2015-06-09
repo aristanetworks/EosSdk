@@ -360,8 +360,8 @@ operator<<(std::ostream& os, const flow_action_set_t& obj) {
 
 
 inline flow_action_t::flow_action_t() :
-      action_set_(), output_intfs_(), vlan_id_(), cos_(), eth_src_(), eth_dst_(), ip_src_(), 
-      ip_dst_() {
+      action_set_(), output_intfs_(), vlan_id_(), cos_(), eth_src_(), eth_dst_(), 
+      ip_src_(), ip_dst_() {
 }
 
 inline flow_action_set_t
@@ -516,8 +516,7 @@ inline flow_entry_t::flow_entry_t() :
 }
 
 inline flow_entry_t::flow_entry_t(std::string const & name, flow_match_t match, 
-                                  flow_action_t action, 
-                                  flow_priority_t priority) :
+                                  flow_action_t action, flow_priority_t priority) :
       name_(name), match_(match), action_(action), priority_(priority) {
 }
 

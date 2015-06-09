@@ -122,9 +122,9 @@ operator<<(std::ostream& os, const mpls_route_t& obj) {
 
 
 inline mpls_route_via_t::mpls_route_via_t() :
-      route_key_(), hop_(), intf_(), pushswap_label_(0), label_action_(MPLS_ACTION_NULL), 
-      ttl_mode_(MPLS_TTLMODE_NULL), payload_type_(MPLS_PAYLOAD_TYPE_NULL), 
-      skip_egress_acl_(false) {
+      route_key_(), hop_(), intf_(), pushswap_label_(0), 
+      label_action_(MPLS_ACTION_NULL), ttl_mode_(MPLS_TTLMODE_NULL), 
+      payload_type_(MPLS_PAYLOAD_TYPE_NULL), skip_egress_acl_(false) {
 }
 
 inline mpls_route_via_t::mpls_route_via_t(mpls_route_key_t route_key) :

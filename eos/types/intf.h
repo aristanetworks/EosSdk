@@ -99,9 +99,8 @@ class EOS_SDK_PUBLIC intf_counters_t {
    intf_counters_t(uint64_t out_ucast_pkts, uint64_t out_multicast_pkts, 
                    uint64_t out_broadcast_pkts, uint64_t in_ucast_pkts, 
                    uint64_t in_multicast_pkts, uint64_t in_broadcast_pkts, 
-                   uint64_t out_octets, uint64_t in_octets, 
-                   uint64_t out_discards, uint64_t out_errors, 
-                   uint64_t in_discards, uint64_t in_errors, 
+                   uint64_t out_octets, uint64_t in_octets, uint64_t out_discards, 
+                   uint64_t out_errors, uint64_t in_discards, uint64_t in_errors, 
                    seconds_t sample_time);
 
    /**

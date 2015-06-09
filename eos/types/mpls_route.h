@@ -51,8 +51,7 @@ class EOS_SDK_PUBLIC mpls_route_key_t {
     * A utility stream operator that adds a string representation of
     * mpls_route_key_t to the ostream.
     */
-   friend std::ostream& operator<<(std::ostream& os, 
-                                   const mpls_route_key_t& obj);
+   friend std::ostream& operator<<(std::ostream& os, const mpls_route_key_t& obj);
 
  private:
    mpls_label_t top_label_;
@@ -155,8 +154,7 @@ class EOS_SDK_PUBLIC mpls_route_via_t {
     * A utility stream operator that adds a string representation of
     * mpls_route_via_t to the ostream.
     */
-   friend std::ostream& operator<<(std::ostream& os, 
-                                   const mpls_route_via_t& obj);
+   friend std::ostream& operator<<(std::ostream& os, const mpls_route_via_t& obj);
 
  private:
    mpls_route_key_t route_key_;
