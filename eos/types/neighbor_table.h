@@ -27,12 +27,15 @@ std::ostream& operator<<(std::ostream& os, const neighbor_entry_type_t & enum_va
 
 /**
  * The neighbor entry key class.
- * Maps an IP address to its associated MAC address on a specific interface.
+ * Maps an IP address to its associated MAC address on a specific interface. Note:
+ * the "intf_id" attribute is only relevant for IPv6 neighbors.
  */
 class EOS_SDK_PUBLIC neighbor_key_t {
  public:
    neighbor_key_t();
-   neighbor_key_t(ip_addr_t ip_addr, intf_id_t intf_id);
+   explicit neighbor_key_t(ip_addr_t const & ip_addr);
+   /** IPv6 neighbor keys include an interface ID. */
+   neighbor_key_t(ip_addr_t const & ip_addr, intf_id_t intf_id);
 
    /** Getter for 'ip_addr': the ip address of the neighbor entry. */
    ip_addr_t ip_addr() const;

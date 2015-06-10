@@ -27,7 +27,11 @@ inline neighbor_key_t::neighbor_key_t() :
       ip_addr_(), intf_id_() {
 }
 
-inline neighbor_key_t::neighbor_key_t(ip_addr_t ip_addr, intf_id_t intf_id) :
+inline neighbor_key_t::neighbor_key_t(ip_addr_t const & ip_addr) :
+      ip_addr_(ip_addr), intf_id_() {
+}
+
+inline neighbor_key_t::neighbor_key_t(ip_addr_t const & ip_addr, intf_id_t intf_id) :
       ip_addr_(ip_addr), intf_id_(intf_id) {
 }
 
