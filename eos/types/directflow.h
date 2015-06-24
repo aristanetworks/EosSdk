@@ -72,9 +72,9 @@ class EOS_SDK_PUBLIC flow_match_t {
    std::set<intf_id_t> const & input_intfs() const;
    /** Setter for 'input_intfs'. */
    void input_intfs_is(std::set<intf_id_t> const & input_intfs);
-   /** inserts one input_intf of 'value' to the set. */
+   /** Inserts one input_intf of 'value' to the set. */
    void input_intf_set(intf_id_t const & value);
-   /** deletes one input_intf of 'value' from the set. */
+   /** Deletes one input_intf of 'value' from the set. */
    void input_intf_del(intf_id_t const & value);
 
    /** Getter for 'eth_src': the source Ethernet address to match on. */
@@ -226,9 +226,9 @@ class EOS_SDK_PUBLIC flow_action_t {
    std::set<intf_id_t> const & output_intfs() const;
    /** Setter for 'output_intfs'. */
    void output_intfs_is(std::set<intf_id_t> const & output_intfs);
-   /** inserts one output_intf of 'value' to the set. */
+   /** Inserts one output_intf of 'value' to the set. */
    void output_intf_set(intf_id_t const & value);
-   /** deletes one output_intf of 'value' from the set. */
+   /** Deletes one output_intf of 'value' from the set. */
    void output_intf_del(intf_id_t const & value);
 
    vlan_id_t vlan_id() const;

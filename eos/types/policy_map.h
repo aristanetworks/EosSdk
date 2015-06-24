@@ -135,9 +135,9 @@ class EOS_SDK_PUBLIC policy_map_action_t {
 
    std::unordered_set<ip_addr_t> const & nexthops() const;
    void nexthops_is(std::unordered_set<ip_addr_t> const & nexthops);
-   /** inserts one nexthop of 'value' to the set. */
+   /** Inserts one nexthop of 'value' to the set. */
    void nexthop_set(ip_addr_t const & value);
-   /** deletes one nexthop of 'value' from the set. */
+   /** Deletes one nexthop of 'value' from the set. */
    void nexthop_del(ip_addr_t const & value);
 
    /**
@@ -209,9 +209,9 @@ class EOS_SDK_PUBLIC policy_map_rule_t {
    std::set<policy_map_action_t> const & actions() const;
    /** Setter for 'actions'. */
    void actions_is(std::set<policy_map_action_t> const & actions);
-   /** inserts one action of 'value' to the set. */
+   /** Inserts one action of 'value' to the set. */
    void action_set(policy_map_action_t const & value);
-   /** deletes one action of 'value' from the set. */
+   /** Deletes one action of 'value' from the set. */
    void action_del(policy_map_action_t const & value);
 
    void action_del(policy_action_type_t action_type);
