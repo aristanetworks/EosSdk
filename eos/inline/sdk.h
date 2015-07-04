@@ -209,6 +209,13 @@ inline vrf_mgr * sdk::get_vrf_mgr() {
    return vrf_mgr_;
 }
 
+inline lldp_mgr * sdk::get_lldp_mgr() {
+   if (!lldp_mgr_) {
+      init_lldp_mgr();
+   }
+   return lldp_mgr_;
+}
+
 }
 
 #endif // EOS_INLINE_SDK_H

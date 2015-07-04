@@ -37,6 +37,7 @@ sdk::sdk()
      intf_counter_mgr_(0),
      ip_intf_mgr_(0),
      ip_route_mgr_(0),
+     lldp_mgr_(0),
      mac_table_mgr_(0),
      mlag_mgr_(0),
      mount_mgr_(0),
@@ -83,6 +84,7 @@ sdk::sdk(std::string const name, void *eossdk_context)
      intf_counter_mgr_(0),
      ip_intf_mgr_(0),
      ip_route_mgr_(0),
+     lldp_mgr_(0),
      mac_table_mgr_(0),
      mlag_mgr_(0),
      mount_mgr_(0),
@@ -130,6 +132,7 @@ INIT_STUB_MGR(intf_mgr)
 INIT_STUB_MGR(intf_counter_mgr)
 INIT_STUB_MGR(ip_intf_mgr)
 INIT_STUB_MGR(ip_route_mgr)
+INIT_STUB_MGR(lldp_mgr)
 INIT_STUB_MGR(mac_table_mgr)
 INIT_STUB_MGR(mlag_mgr)
 INIT_STUB_MGR(mpls_route_mgr)

@@ -50,6 +50,7 @@ libeos_la_SOURCES += timer.cpp
 libeos_la_SOURCES += tracing.cpp
 libeos_la_SOURCES += version.cpp
 libeos_la_SOURCES += vrf.cpp
+libeos_la_SOURCES += lldp.cpp
 
 libeos_la_LDFLAGS = -version-info $(SDK_LIBTOOL_VERSION) -lrt
 

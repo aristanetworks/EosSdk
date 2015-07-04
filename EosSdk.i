@@ -73,6 +73,7 @@ typedef uint64_t uint64_be_t;
 %feature("nodirector") eos::intf_counter_mgr;
 %feature("nodirector") eos::ip_intf_mgr;
 %feature("nodirector") eos::ip_route_mgr;
+%feature("nodirector") eos::lldp_mgr;
 %feature("nodirector") eos::mac_table_mgr;
 %feature("nodirector") eos::mlag_mgr;
 %feature("nodirector") eos::mpls_route_mgr;
@@ -105,6 +106,7 @@ typedef uint64_t uint64_be_t;
 #include "eos/ip_intf.h"
 #include "eos/ip_route.h"
 #include "eos/iterator.h"
+#include "eos/lldp.h"
 #include "eos/mac_table.h"
 #include "eos/mlag.h"
 #include "eos/mpls.h"
@@ -228,6 +230,8 @@ void throw_py_error(error const& err) {
 %template() std::pair<uint32_t, eos::acl_rule_ip_t>;
 %template() std::pair<uint32_t, eos::acl_rule_eth_t>;
 %template() std::unordered_set<eos::ip_addr_t>;
+%template() std::map<eos::lldp_tlv_type_t, std::string>;
+%template() std::list<eos::lldp_management_address_t>;
 
 // For vlan_set_t
 %template(_BitSet4096) std::bitset<4096>;
