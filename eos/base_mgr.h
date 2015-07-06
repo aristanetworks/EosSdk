@@ -73,9 +73,13 @@ class EOS_SDK_PRIVATE base_mgr {        // that don't use key-specific notificat
    // We don't allow a handler to be registered both as generic and key-specific.
    // We always favor generic over key-specific.
    virtual void add_handler(Key const & key, T *handler) {
-      if (!watchAllHandlers_.count(handler)) {
-         keySpecificHandlers_[key].insert(std::make_pair(handler, true));
+      auto element = watchAllHandlers_.find(handler);
+      if (element != watchAllHandlers_.end()) {
+         if (element->second == true) {
+            return;
+         }
       }
+      keySpecificHandlers_[key].insert(std::make_pair(handler, true));
    }
 
    virtual void remove_handler(T *handler) {
