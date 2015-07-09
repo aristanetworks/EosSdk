@@ -1,6 +1,34 @@
 // Copyright (c) 2013 Arista Networks, Inc.  All rights reserved.
 // Arista Networks, Inc. Confidential and Proprietary.
 
+/**
+ * @file
+ * Externalized event loop for alternate agent lifecycles.
+ *
+ * This module exposes the SDK's underlying event loop, which enables
+ * programs to be written without using the `sdk.main_loop()`
+ * infrastructure.
+ * 
+ * The first way this module can be used is by writing SDK programs as
+ * scripts (instead of long-running agents), by grabbing an instance
+ * of the loop via `sdk.get_event_loop()`. Then grab any managers
+ * your script needs, and then call `loop->wait_for_initialized()`. At
+ * this point all managers are ready for use. To yield to the event
+ * loop at any time, call `loop->run()`, which gives the SDK time to
+ * synchronize with Sysdb and the rest of the system. When your script
+ * is finished, call `loop->flush()` to make sure all writes you've
+ * performed have been committed to Sysdb. For an example, see
+ * examples/NexthopGroupModifierScript.cpp.
+ *
+ * The other way this can be used is by integrating the
+ * event_loop_handler in an external event loop, for example, by
+ * integrating into a Thrift loop. To do this, the SDK exposes various
+ * file descriptors that should be watched by calling into a
+ * `event_loop_handler` that your program should subclass. For an
+ * example, see examples/Thrift[Client|Server].cpp's interaction with
+ * the `libevent_loop` defined in `libevent.h`.
+ */
+
 #ifndef EOS_EVENT_LOOP_H
 #define EOS_EVENT_LOOP_H
 
@@ -24,6 +52,7 @@ namespace eos {
  * method in a timely fashion for the EOS code to run.
  *
  * The on_*() methods are all non-blocking methods.
+ *
  */
 class EOS_SDK_PUBLIC event_loop_handler {
  public:
@@ -88,6 +117,16 @@ class EOS_SDK_PUBLIC event_loop {
     * be returned to the caller.
     */
    void run(seconds_t duration=0) const;
+
+   /**
+    * Drain the event loop of all outgoing writes.
+    *
+    * This function should be used in conjunction with EOS SDK
+    * scripts, and should be called before your agent exits. This
+    * ensures that all writes your script has performed will have made
+    * it to Sysdb.
+    */
+   void flush() const;
 
    /**
     * Registers an external event loop to use instead of EOS's.

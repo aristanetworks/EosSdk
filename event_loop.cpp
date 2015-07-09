@@ -46,6 +46,12 @@ event_loop::run(seconds_t duration) const {
 }
 
 void
+event_loop::flush() const {
+   impl.main_loop(0);
+}
+
+
+void
 event_loop::external_loop_is(event_loop_handler * loop) {
    if(!loop) {
       panic("The event_loop_handler passed in argument was null");
