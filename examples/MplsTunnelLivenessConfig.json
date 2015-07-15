@@ -1,0 +1,12 @@
+{
+   "vlan": 1,
+   "remote_switches": [
+      {
+         "destination_ip": "20.0.0.2",
+         "tunnels": {
+            "4": {"nexthop_ip": "10.0.0.4", "label": 200}, 
+            "6": {"nexthop_ip": "10.0.0.6", "label": 200}
+         }
+      }
+   ]
+}
