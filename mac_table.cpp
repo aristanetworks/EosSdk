@@ -29,6 +29,10 @@ class mac_table_mgr_impl : public mac_table_mgr {
       return mac_entry_t();
    }
 
+   virtual mac_entry_t mac_entry(vlan_id_t vlan, eth_addr_t mac) const {
+      return mac_entry_t();
+   }
+
    virtual mac_entry_type_t type(mac_key_t const & key) const {
       return mac_entry_type_t();
    }

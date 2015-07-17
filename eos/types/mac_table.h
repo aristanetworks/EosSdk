@@ -80,6 +80,11 @@ class EOS_SDK_PUBLIC mac_entry_t {
    mac_entry_t(mac_key_t const & mac_key, std::set<intf_id_t> const & intfs);
    /** Deprecated constructor. */
    mac_entry_t(vlan_id_t vlan_id, eth_addr_t eth_addr);
+   /**
+    * Deprecated constructor. Default VLAN identifier is 0. Please use method
+    * mac_key_is with a VLAN ID and the eth_addr attribute to set a valid VLAN ID.
+    */
+   mac_entry_t(eth_addr_t eth_addr, intf_id_t intf);
 
    /** Getter for 'mac_key': the key of the MAC entry. */
    mac_key_t mac_key() const;

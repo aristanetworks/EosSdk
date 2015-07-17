@@ -122,6 +122,13 @@ class EOS_SDK_PUBLIC mac_table_mgr : public base_mgr<mac_table_handler, mac_key_
     */
    virtual mac_entry_t mac_entry(mac_key_t const & key) const = 0;
    /**
+    * Returns a mac_entry_t given a VLAN and MAC address from the collection of
+    * configured entries.
+    *
+    * @deprecated, please use mac_entry(mac_key_t const & key) method instead.
+    */
+   virtual mac_entry_t mac_entry(vlan_id_t vlan, eth_addr_t mac) const = 0;
+   /**
     * Retrieves a mac_entry_t given the VLAN and MAC address key from the
     * collection of entries either learned dynamically or explicitly configured. 
     *

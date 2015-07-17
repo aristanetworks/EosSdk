@@ -122,8 +122,7 @@ inline mac_entry_t::mac_entry_t(mac_key_t const & mac_key) :
 }
 
 inline mac_entry_t::mac_entry_t(mac_key_t const & mac_key, intf_id_t intf) :
-      mac_key_(mac_key), intfs_(), persistent_(false) {
-   intfs_ = {intf};
+      mac_key_(mac_key), intfs_{intf}, persistent_(false) {
 }
 
 inline mac_entry_t::mac_entry_t(mac_key_t const & mac_key, 
@@ -133,6 +132,10 @@ inline mac_entry_t::mac_entry_t(mac_key_t const & mac_key,
 
 inline mac_entry_t::mac_entry_t(vlan_id_t vlan_id, eth_addr_t eth_addr) :
       mac_key_(mac_key_t(vlan_id, eth_addr)), intfs_(), persistent_(false) {
+}
+
+inline mac_entry_t::mac_entry_t(eth_addr_t eth_addr, intf_id_t intf) :
+      mac_key_(mac_key_t(vlan_id_t(), eth_addr)), intfs_{intf}, persistent_(false) {
 }
 
 inline mac_key_t
