@@ -1,5 +1,5 @@
 {
-   "vlan": 1,
+   "src_intf": "Loopback1",
    "remote_switches": [
       {
          "destination_ip": "20.0.0.2",

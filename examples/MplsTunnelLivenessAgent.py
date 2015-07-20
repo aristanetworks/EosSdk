@@ -200,14 +200,14 @@ class MplsTunnelLivenessAgent(eossdk_utils.EosSdkAgent,
    MPLS tunnels. """
    def __init__(self, sdk, config_file="MplsTunnelLivenessConfig.json"):
       """ Create the agent. Requires an eossdk handle, as well as the
-      configured SVI vlan and SVI IP address that the interfaces are a
-      part of. """
+      input configuration """
       self.agent_mgr = sdk.get_agent_mgr()
       self.eth_intf_mgr = sdk.get_eth_intf_mgr()
       self.ip_intf_mgr = sdk.get_ip_intf_mgr()
       self.mac_table_mgr = sdk.get_mac_table_mgr()
       self.neighbor_table_mgr = sdk.get_neighbor_table_mgr()
       self.tracer = eossdk.Tracer("MplsTunnelLivenessAgent")
+      eossdk_utils.EosSdkAgent.__init(self)
       eossdk.AgentHandler.__init__(self, self.agent_mgr)
       eossdk.TimeoutHandler.__init__(self, sdk.get_timeout_mgr())
       eossdk.FdHandler.__init__(self)
@@ -215,8 +215,11 @@ class MplsTunnelLivenessAgent(eossdk_utils.EosSdkAgent,
 
       self.initialized = False
       self.pid = os.getpid()
-      self.svi_vlan = None # Read from the config
-      self.svi_ip = None # Resolved after reading from config
+
+      # The l3 interface we should grab our "SRC IP" from. Read from
+      # the config:
+      self.src_intf = None
+      self.src_ip = None # Resolved after reading from config
 
       # A UDP socket that receives liveness packets from other
       # agents. Created during on_initialized
@@ -244,17 +247,17 @@ class MplsTunnelLivenessAgent(eossdk_utils.EosSdkAgent,
       period. Calculate the output interfaces for each tunnel based
       off of that tunnel's nexthop MAC address. """
       self.initialized = True
-      vlan_intf = "Vlan%d" % self.svi_vlan
-      self.tracer.trace2("Looking up the IP address for SVI " + vlan_intf)
-      svi_ips = self.ip_intf_mgr.ip_addrs(eossdk.IntfId(vlan_intf))
-      if not svi_ips:
-         assert False, "No IP addresses assigned to %s" % vlan_intf
-      self.svi_ip = svi_ips[0].addr().to_string()
+      self.tracer.trace2("Looking up the IP address for interface  " + self.src_intf)
+      src_ips = self.ip_intf_mgr.ip_addrs(eossdk.IntfId(self.src_intf))
+      if not src_ips:
+         assert False, "No IP addresses assigned to %s" % self.src_intf
+      self.src_ip = src_ips[0].addr().to_string()
+      self.tracer.trace2("Using src IP address " + self.src_ip)
       
       self.tracer.trace2("Create the socket that receives remote probes")
       self.rx_sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
       self.rx_sock.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
-      self.rx_sock.bind((self.svi_ip, UDP_PORT))
+      self.rx_sock.bind((self.src_ip, UDP_PORT))
       self.rx_sock.setblocking(0)
       self.watch_readable(self.rx_sock.fileno(), True)
       
@@ -398,7 +401,8 @@ class MplsTunnelLivenessAgent(eossdk_utils.EosSdkAgent,
       self.tracer.trace8("Now resolving that MAC entry to an interface.")
       # TODO: Is this necessary if we send it out of the "fabric"
       # interface?
-      mac_entry = self.mac_table_mgr.mac_entry(self.svi_vlan, nexthop_eth_addr)
+      vlan_id = 1
+      mac_entry = self.mac_table_mgr.mac_entry(vlan_id, nexthop_eth_addr)
       if mac_entry.intf() == eossdk.IntfId():
          self.tracer.trace0("Mac entry %r not on any interface" %
                             tunnel.nexthop_eth_addr)
@@ -419,6 +423,7 @@ class MplsTunnelLivenessAgent(eossdk_utils.EosSdkAgent,
                          (intf, egress_eth_addr.to_string()))
       tunnel.egress_intf_eth_addr = egress_eth_addr.to_string()
 
+
    def send_packet(self, dst_ip, tunnel, msg):
       """ Wrap `msg` in a UDP-over-MPLS packet, using `dst_ip` and the tunnel's
       MPLS label, and send the packet out of the tunnel's egress interface."""
@@ -426,10 +431,8 @@ class MplsTunnelLivenessAgent(eossdk_utils.EosSdkAgent,
       payload = msg.serialize()
       pkt = scapy.layers.l2.Ether(src=tunnel.egress_intf_eth_addr,
                                   dst=tunnel.nexthop_eth_addr)
-      if self.svi_vlan > 1:
-         pkt = pkt / scapy.layers.l2.Dot1Q(vlan=self.svi_vlan)
       pkt = (pkt / MPLS(label=tunnel.mpls_label, ttl=64) /
-             scapy.layers.inet.IP(src=self.svi_ip,
+             scapy.layers.inet.IP(src=self.src_ip,
                                   dst=dst_ip) /
              scapy.layers.inet.UDP(dport=UDP_PORT) /
              (payload))
@@ -448,8 +451,8 @@ class MplsTunnelLivenessAgent(eossdk_utils.EosSdkAgent,
          cfg = json.loads(f.read())
          
       if not self.initialized:
-         # Write the svi_vlan only once.
-         self.svi_vlan = cfg["vlan"]
+         # Write the src_intf only once.
+         self.src_intf = cfg["src_intf"]
 
       # Clear out the previous config:
       self.remote_switches = {} 
