@@ -16,7 +16,7 @@ configure_flags=
 configure_flags=''
 for arg; do
    case $arg in
-      (--enable-*|--disable-*|--with-*|--without-*)
+      (--enable-*|--disable-*|--with-*|--without-*|--host=*|--build=*)
          configure_flags="$configure_flags $arg"
          shift
          ;;
