@@ -207,7 +207,7 @@ class MplsTunnelLivenessAgent(eossdk_utils.EosSdkAgent,
       self.mac_table_mgr = sdk.get_mac_table_mgr()
       self.neighbor_table_mgr = sdk.get_neighbor_table_mgr()
       self.tracer = eossdk.Tracer("MplsTunnelLivenessAgent")
-      eossdk_utils.EosSdkAgent.__init(self)
+      eossdk_utils.EosSdkAgent.__init__(self)
       eossdk.AgentHandler.__init__(self, self.agent_mgr)
       eossdk.TimeoutHandler.__init__(self, sdk.get_timeout_mgr())
       eossdk.FdHandler.__init__(self)
