@@ -67,6 +67,12 @@ class EOS_SDK_PUBLIC eth_addr_t {
    uint8_t byte(int index) const;
    /** Copies the bytes of the Ethernet address to the given address. */
    void bytes(void * arr) const;
+   /** Returns true if the Ethernet address is a unicast address. */
+   bool is_unicast() const;
+   /** Returns true if the Ethernet address is a multicast address. */
+   bool is_multicast() const;
+   /** Returns true if the Ethernet address is a broadcast address. */
+   bool is_broadcast() const;
    /**
     * A utility stream operator that adds a string representation of eth_addr_t to
     * the ostream.

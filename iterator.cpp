@@ -13,6 +13,7 @@
 #include "eos/intf.h"
 #include "eos/ip_route.h"
 #include "eos/iterator.h"
+#include "eos/mac_table.h"
 #include "eos/mpls_route.h"
 #include "eos/neighbor_table.h"
 #include "eos/nexthop_group.h"
@@ -117,6 +118,8 @@ INSTANTIATE_ITERATOR(intf_id_t, eth_lag_intf_member_iter_impl);
 INSTANTIATE_ITERATOR(intf_id_t, eth_phy_intf_iter_impl);
 INSTANTIATE_ITERATOR(ip_route_t, ip_route_iter_impl);
 INSTANTIATE_ITERATOR(ip_route_via_t, ip_route_via_iter_impl);
+INSTANTIATE_ITERATOR(mac_key_t, mac_table_iter_impl);
+INSTANTIATE_ITERATOR(mac_key_t, mac_table_status_iter_impl);
 INSTANTIATE_ITERATOR(mpls_route_t, mpls_route_iter_impl);
 INSTANTIATE_ITERATOR(mpls_route_via_t, mpls_route_via_iter_impl);
 INSTANTIATE_ITERATOR(neighbor_key_t, neighbor_table_iter_impl);

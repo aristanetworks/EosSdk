@@ -105,12 +105,12 @@ typedef uint64_t uint64_be_t;
 #include "eos/ip_intf.h"
 #include "eos/ip_route.h"
 #include "eos/iterator.h"
-#include "eos/neighbor_table.h"
-#include "eos/mpls.h"
-#include "eos/nexthop_group.h"
 #include "eos/mac_table.h"
 #include "eos/mlag.h"
+#include "eos/mpls.h"
 #include "eos/mpls_route.h"
+#include "eos/neighbor_table.h"
+#include "eos/nexthop_group.h"
 #include "eos/policy_map.h"
 #include "eos/sdk.h"
 #include "eos/subintf.h"
@@ -270,6 +270,8 @@ wrap_iterator(eos::intf_iter_t, eos::intf_iter_impl, eos::intf_id_t);
 wrap_iterator(eos::ip_route_iter_t, eos::ip_route_iter_impl, eos::ip_route_t);
 wrap_iterator(eos::ip_route_via_iter_t, eos::ip_route_via_iter_impl, eos::ip_route_via_t);
 wrap_iterator(eos::decap_group_iter_t, eos::decap_group_iter_impl, eos::decap_group_t);
+wrap_iterator(eos::mac_table_iter_t, eos::mac_table_iter_impl, eos::mac_key_t);
+wrap_iterator(eos::mac_table_status_iter_t, eos::mac_table_status_iter_impl, eos::mac_key_t);
 wrap_iterator(eos::mpls_route_iter_t, eos::mpls_route_iter_impl, eos::mpls_route_t);
 wrap_iterator(eos::mpls_route_via_iter_t, eos::mpls_route_via_iter_impl, eos::mpls_route_via_t);
 wrap_iterator(eos::neighbor_table_iter_t, eos::neighbor_table_iter_impl, eos::neighbor_key_t);
