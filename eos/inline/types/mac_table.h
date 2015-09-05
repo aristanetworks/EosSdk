@@ -32,6 +32,12 @@ operator<<(std::ostream& os, const mac_entry_type_t & enum_val) {
       os << "MAC_ENTRY_CONFIGURED_REMOTE";
    } else if (enum_val==MAC_ENTRY_RECEIVED_REMOTE) {
       os << "MAC_ENTRY_RECEIVED_REMOTE";
+   } else if (enum_val==MAC_ENTRY_PEER_LEARNED_REMOTE) {
+      os << "MAC_ENTRY_PEER_LEARNED_REMOTE";
+   } else if (enum_val==MAC_ENTRY_PEER_CONFIGURED_REMOTE) {
+      os << "MAC_ENTRY_PEER_CONFIGURED_REMOTE";
+   } else if (enum_val==MAC_ENTRY_PEER_RECEIVED_REMOTE) {
+      os << "MAC_ENTRY_PEER_RECEIVED_REMOTE";
    } else {
       os << "Unknown value";
    }

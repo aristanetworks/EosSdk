@@ -27,6 +27,9 @@ enum mac_entry_type_t {
    MAC_ENTRY_LEARNED_REMOTE,
    MAC_ENTRY_CONFIGURED_REMOTE,
    MAC_ENTRY_RECEIVED_REMOTE,
+   MAC_ENTRY_PEER_LEARNED_REMOTE,
+   MAC_ENTRY_PEER_CONFIGURED_REMOTE,
+   MAC_ENTRY_PEER_RECEIVED_REMOTE,
 };
 /** Appends a string representation of enum mac_entry_type_t value to the ostream. */
 std::ostream& operator<<(std::ostream& os, const mac_entry_type_t & enum_val);
