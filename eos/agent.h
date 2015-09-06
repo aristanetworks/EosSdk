@@ -201,6 +201,8 @@ class EOS_SDK_PUBLIC agent_mgr : public base_mgr<agent_handler> {
     virtual agent_status_iter_t status_iter() const = 0;
 
     /// Publish a status value mapped to the named key. 
+    /// Agent keys have maximum length of 512 characters.
+    /// Agent key values have a maximum length of 10KB.
     virtual void status_set(std::string const & key,
                             std::string const & value) = 0;
     /// Delete the stored agent status with the given key
