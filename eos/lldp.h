@@ -18,6 +18,11 @@
 /**
  * @file
  * Module for LLDP (Link Layer Discovery Protocol).
+ *
+ * This module is in BETA. APIs that we expose here are subject to
+ * change in future minor and patch releases. Feedback is greatly
+ * appreciated.
+ *
  * LLDP is a link layer protocol that sends "TLVs" across the link,
  * allowing devices to advertise their identities and properties over a network.
  * The protocol is uni-directional (no acks).
