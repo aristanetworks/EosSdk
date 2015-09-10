@@ -25,6 +25,7 @@ libeos_la_SOURCES += eth_phy_intf.cpp
 libeos_la_SOURCES += event_loop.cpp
 libeos_la_SOURCES += exception.cpp
 libeos_la_SOURCES += fd.cpp
+libeos_la_SOURCES += hardware_table.cpp
 libeos_la_SOURCES += intf.cpp
 libeos_la_SOURCES += intf_types.cpp
 libeos_la_SOURCES += impl.cpp impl.h

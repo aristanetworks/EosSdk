@@ -69,6 +69,7 @@ typedef uint64_t uint64_be_t;
 %feature("nodirector") eos::eth_phy_intf_mgr;
 %feature("nodirector") eos::eth_phy_intf_counter_mgr;
 %feature("nodirector") eos::fib_mgr;
+%feature("nodirector") eos::hardware_table_mgr;
 %feature("nodirector") eos::intf_mgr;
 %feature("nodirector") eos::intf_counter_mgr;
 %feature("nodirector") eos::ip_intf_mgr;
@@ -100,6 +101,7 @@ typedef uint64_t uint64_be_t;
 #include "eos/exception.h"
 #include "eos/fd.h"
 #include "eos/fib.h"
+#include "eos/hardware_table.h"
 #include "eos/hash_mix.h"
 #include "eos/intf.h"
 #include "eos/ip.h"
@@ -270,6 +272,7 @@ wrap_iterator(eos::eth_intf_iter_t, eos::eth_intf_iter_impl, eos::intf_id_t);
 wrap_iterator(eos::eth_lag_intf_iter_t, eos::eth_lag_intf_iter_impl, eos::intf_id_t);
 wrap_iterator(eos::eth_lag_intf_member_iter_t, eos::eth_lag_intf_member_iter_impl, eos::intf_id_t);
 wrap_iterator(eos::eth_phy_intf_iter_t, eos::eth_phy_intf_iter_impl, eos::intf_id_t);
+wrap_iterator(eos::hardware_table_iter_t, eos::hardware_table_iter_impl, eos::hardware_table_key_t);
 wrap_iterator(eos::intf_iter_t, eos::intf_iter_impl, eos::intf_id_t);
 wrap_iterator(eos::ip_route_iter_t, eos::ip_route_iter_impl, eos::ip_route_t);
 wrap_iterator(eos::ip_route_via_iter_t, eos::ip_route_via_iter_impl, eos::ip_route_via_t);

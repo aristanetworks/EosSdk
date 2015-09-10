@@ -21,6 +21,7 @@ class eth_phy_intf_mgr;
 class eth_phy_intf_counter_mgr;
 class event_loop;
 class fib_mgr;
+class hardware_table_mgr;
 class intf_mgr_helper;
 class intf_mgr;
 class intf_counter_mgr;
@@ -141,6 +142,7 @@ class EOS_SDK_PUBLIC sdk {
    virtual void init_eth_phy_intf_counter_mgr();
    virtual void init_event_loop();
    virtual void init_fib_mgr(mgr_mode_type_t mode=MODE_TYPE_READ_ONLY);
+   virtual void init_hardware_table_mgr();
    virtual void init_intf_mgr();
    virtual void init_intf_counter_mgr();
    virtual void init_ip_intf_mgr();
@@ -169,6 +171,7 @@ class EOS_SDK_PUBLIC sdk {
    virtual eth_phy_intf_counter_mgr * get_eth_phy_intf_counter_mgr();
    virtual event_loop * get_event_loop();
    virtual fib_mgr * get_fib_mgr(mgr_mode_type_t mode=MODE_TYPE_READ_ONLY);
+   virtual hardware_table_mgr * get_hardware_table_mgr();
    virtual intf_mgr * get_intf_mgr();
    virtual intf_counter_mgr * get_intf_counter_mgr();
    virtual ip_intf_mgr * get_ip_intf_mgr();
@@ -205,6 +208,7 @@ class EOS_SDK_PUBLIC sdk {
    eth_lag_intf_mgr * eth_lag_intf_mgr_;
    event_loop * event_loop_;
    fib_mgr * fib_mgr_;
+   hardware_table_mgr * hardware_table_mgr_;
    intf_mgr_helper * intf_mgr_helper_;
    intf_mgr * intf_mgr_;
    intf_counter_mgr * intf_counter_mgr_;

@@ -97,6 +97,14 @@ inline fib_mgr * sdk::get_fib_mgr(mgr_mode_type_t mode) {
    return fib_mgr_;
 }
 
+   
+inline hardware_table_mgr * sdk::get_hardware_table_mgr() {
+   if (!hardware_table_mgr_) {
+      init_hardware_table_mgr();
+   }
+   return hardware_table_mgr_;
+}
+
 inline intf_mgr * sdk::get_intf_mgr() {
    if (!intf_mgr_) {
       init_intf_mgr();
