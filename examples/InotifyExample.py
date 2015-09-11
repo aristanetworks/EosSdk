@@ -57,6 +57,7 @@ class FileWatcher(eossdk_utils.EosSdkAgent,
    def __init__(self, filename):
       self.agent_mgr = sdk.get_agent_mgr()
       self.tracer = eossdk.Tracer("FileWatcher")
+      eossdk_utils.EosSdkAgent.__init__(self)
       eossdk.AgentHandler.__init__(self, self.agent_mgr)
       eossdk.FdHandler.__init__(self)
       self.tracer.trace0("Watching %r" % filename)
