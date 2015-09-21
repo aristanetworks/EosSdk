@@ -6,6 +6,24 @@
 
 namespace eos {
 
+inline std::ostream&
+operator<<(std::ostream& os, const ip_route_action_t & enum_val) {
+   if (enum_val==IP_ROUTE_ACTION_NULL) {
+      os << "IP_ROUTE_ACTION_NULL";
+   } else if (enum_val==IP_ROUTE_ACTION_FORWARD) {
+      os << "IP_ROUTE_ACTION_FORWARD";
+   } else if (enum_val==IP_ROUTE_ACTION_DROP) {
+      os << "IP_ROUTE_ACTION_DROP";
+   } else if (enum_val==IP_ROUTE_ACTION_NEXTHOP_GROUP) {
+      os << "IP_ROUTE_ACTION_NEXTHOP_GROUP";
+   } else {
+      os << "Unknown value";
+   }
+   return os;
+}
+
+
+
 inline ip_route_key_t::ip_route_key_t() :
       prefix_(), preference_(1) {
 }

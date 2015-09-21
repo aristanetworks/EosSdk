@@ -54,6 +54,11 @@ class ip_route_mgr_impl : public ip_route_mgr {
       // TODO: No op impl.
    }
 
+   void ip_route_set(const ip_route_t & route,
+                     ip_route_action_t expected_type) {
+      // TODO: No op impl.
+   }
+
    void ip_route_del(const ip_route_key_t & route_key) {
       // TODO: No op impl.
    }

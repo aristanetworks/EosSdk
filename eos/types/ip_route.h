@@ -16,6 +16,21 @@ typedef uint32_t ip_route_tag_t;
 typedef uint8_t ip_route_preference_t;
 typedef uint32_t ip_route_metric_t;
 
+/**
+ * The type of the ip_route_t. This is determined by the ip_route_via_t's attached
+ * to this route.
+ */
+enum ip_route_action_t {
+   IP_ROUTE_ACTION_NULL,
+   IP_ROUTE_ACTION_FORWARD,
+   IP_ROUTE_ACTION_DROP,
+   IP_ROUTE_ACTION_NEXTHOP_GROUP,
+};
+/**
+ * Appends a string representation of enum ip_route_action_t value to the ostream.
+ */
+std::ostream& operator<<(std::ostream& os, const ip_route_action_t & enum_val);
+
 /** An IP route key, consisting of a prefix and preference. */
 class EOS_SDK_PUBLIC ip_route_key_t {
  public:

@@ -97,17 +97,42 @@ class EOS_SDK_PUBLIC ip_route_mgr {
 
    // Route management functions
 
-   /// Gets a static route, or panics if the route key does not exist.
+   /**
+    * Gets the IP route with the corresponding ip_route_key_t. Returns
+    * an empty ip_route_t() if no matching route is found.
+    */
    virtual ip_route_t ip_route(ip_route_key_t const &) = 0;
-   /// Inserts or updates a static route into the switch configuration.
+   /**
+    * Inserts or updates a static route into the switch configuration.
+    */
    virtual void ip_route_set(ip_route_t const &) = 0;
+   /**
+    * Performs the same operation as `ip_route_set`, but lets an agent
+    * hint what type of vias will be attached to this route. For
+    * example, if the agent knows it will be adding nexthop group vias
+    * to this route, it can pass `eos::IP_ROUTE_ACTION_NEXTHOP_GROUP`,
+    * which allows EOS to more efficiently program routes. Routes are
+    * created by 'forward' routes if no additional information is
+    * provided.
+    */
+   virtual void ip_route_set(ip_route_t const &,
+                             ip_route_action_t expected_type) = 0;
    /// Removes all ECMP vias matching the route key, and the route itself.
    virtual void ip_route_del(ip_route_key_t const &) = 0;
 
    /**
     * Adds a via to an ip_route_t.
-    * Will call panic() if the corresponding route does not match the
-    * currently configured tag.
+    *
+    * A via is associated with an ip_route_t by their `ip_route_key_t`
+    * attributes. If an agent adds multiple vias with a hop or intf set,
+    * EOS will ECMP across these "forward" routes. If it programs a
+    * 'drop' via (by setting the intf attribute to Null0), all other
+    * vias attached to this route will be removed, and all traffic on
+    * this route will be dropped. Similarly, if the nexthop_group
+    * attribute is set, all other vias with the same `ip_route_key_t`
+    * will be removed, and the new nexthop group via will be
+    * programmed in their place. This function will call panic() if the
+    * route does not match the currently configured tag.
     *
     * @throws eos::invalid_argument_error If the passed via has no IP
     * address, interface or nexthop group set.
