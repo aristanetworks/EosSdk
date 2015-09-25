@@ -346,6 +346,8 @@ enum flow_status_t {
    FLOW_DELETED,
    /** Flow not created. */
    FLOW_REJECTED,
+   /** Flow requesting hardware resources. */
+   FLOW_PENDING,
 };
 /** Appends a string representation of enum flow_status_t value to the ostream. */
 std::ostream& operator<<(std::ostream& os, const flow_status_t & enum_val);

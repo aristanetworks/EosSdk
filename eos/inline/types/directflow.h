@@ -626,6 +626,8 @@ operator<<(std::ostream& os, const flow_status_t & enum_val) {
       os << "FLOW_DELETED";
    } else if (enum_val==FLOW_REJECTED) {
       os << "FLOW_REJECTED";
+   } else if (enum_val==FLOW_PENDING) {
+      os << "FLOW_PENDING";
    } else {
       os << "Unknown value";
    }
