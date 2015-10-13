@@ -1,0 +1,197 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>ip &mdash; Arista EOS SDK 1.7.0 reference</title>
+    
+    <link rel="stylesheet" href="_static/eossdk.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/breathe.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '1.7.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="Arista EOS SDK 1.7.0 reference" href="index.html" />
+    <link rel="next" title="ip_intf" href="ip_intf.html" />
+    <link rel="prev" title="intf" href="intf.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="ip_intf.html" title="ip_intf"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="intf.html" title="intf"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">Arista EOS SDK 1.7.0 reference</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="ip">
+<h1><strong>ip</strong><a class="headerlink" href="#ip" title="Permalink to this headline">¶</a></h1>
+<p>IP address and prefix types.</p>
+<p>This module provides definitions of a variety of IP address types used throughout the SDK, including an IPv4 or IPv6 address, an IP prefix (a network address with a prefix length), and an IP address and mask. IPv4 and IPv6 are supported by each of these types, so there are no separate classes for each address family. For example, the eos::ip_addr_t IP address type has an af() accessor to inspect the address family.</p>
+<p>Utility functions are provided to parse or validate string format IP addresses and CIDR-style IP prefixes.</p>
+<p>Some examples of the manipulations available are as follows, see the function descriptions for more information.</p>
+<p> <pre class="literal-block">
+ // Constructs an IPv4 address from a string. Must be a valid IP.
+ eos::ip_addr_t v4(&quot;1.2.3.4&quot;);
+
+ // Constructs an IPv6 address from a string.
+ eos::ip_addr_t v6(&quot;dead:beef::1&quot;);
+
+ // Parses and validates an IP address
+ eos::ip_addr_t address;   // the IPv4/IPv6 address type
+ eos::ip_prefix_t prefix;  // the IPv4/IPv6 prefix type
+ bool valid;
+
+ // valid == true, and address is changed to contain the
+ // representation of 1.1.1.1 with its af() == eos::AF_IPV4
+ valid = eos::parse_ip_addr(&quot;1.1.1.1&quot;, &amp;address);
+ // valid == false, address is unchanged
+ valid = eos::parse_ip_addr(&quot;not_an_ip&quot;, &amp;address);
+
+ // Parses and validates an IP prefix
+
+ // The IP address must be the prefix network address, else the
+ // prefix is invalid. Like parse_ip_address, prefix is updated to
+ // contain the representation of the parsed prefix if and only if
+ // valid == true.
+ valid = eos::parse_ip_prefix(&quot;192.0.2.0/24&quot;, &amp;prefix); // valid == true
+ valid = eos::parse_ip_prefix(&quot;192.0.2.1/24&quot;, &amp;prefix); // valid == false
+ valid = eos::parse_ip_prefix(&quot;192.0.2.1/32&quot;, &amp;prefix); // valid == true
+ valid = eos::parse_ip_prefix(&quot;::1/128&quot;, &amp;prefix); // valid == true
+
+ // Construct an IP address and mask for 192.0.2.200/24 (e.g., used to
+ // plumb a network interface in ip_intf.h)
+ eos::ip_addr_t intf_addr(&quot;192.0.2.200&quot;);
+ eos::ip_addr_mask_t intf_addr_mask(intf_addr, 24);
+</pre>
+</p>
+<dl class="struct">
+<dt>
+<span class="target" id="eossdkstructstd_1_1hash_3_01eos_1_1ip__addr__t_01_4"></span>template &lt;&gt;</dt>
+<dt>
+<em>struct</em> <tt class="descname">ip_addr_t &gt;</tt></dt>
+<dd><div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="function">
+<dt>
+<span class="target" id="eossdkstructstd_1_1hash_3_01eos_1_1ip__addr__t_01_4_1aea8730debda10f0a98e3df3a8bf583a3"></span>size_t <tt class="descname">operator()</tt><big>(</big>eos::ip_addr_t const &amp;<big>)</big> const</dt>
+<dd></dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="namespace">
+<dt>
+<span class="target" id="eossdknamespacestd"></span><em>namespace</em> <tt class="descname">std</tt></dt>
+<dd><p>STL namespace. </p>
+<dl class="struct">
+<dt>
+<span class="target" id="eossdkstructstd_1_1hash_3_01eos_1_1ip__addr__t_01_4"></span>template &lt;&gt;</dt>
+<dt>
+<em>struct</em> <tt class="descname">ip_addr_t &gt;</tt></dt>
+<dd><div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="function">
+<dt>
+<span class="target" id="eossdkstructstd_1_1hash_3_01eos_1_1ip__addr__t_01_4_1aea8730debda10f0a98e3df3a8bf583a3"></span>size_t <tt class="descname">operator()</tt><big>(</big>eos::ip_addr_t const &amp;<big>)</big> const</dt>
+<dd></dd></dl>
+
+</div>
+</dd></dl>
+
+</dd></dl>
+
+<div class="section" id="type-definitions-in-ip">
+<h2>Type definitions in <strong>ip</strong><a class="headerlink" href="#type-definitions-in-ip" title="Permalink to this headline">¶</a></h2>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">doxygenfile: Found multiple matches for file &#8220;eos/types/ip.h </p>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#"><strong>ip</strong></a><ul>
+<li><a class="reference internal" href="#type-definitions-in-ip">Type definitions in <strong>ip</strong></a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="intf.html"
+                        title="previous chapter"><strong>intf</strong></a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="ip_intf.html"
+                        title="next chapter"><strong>ip_intf</strong></a></p>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="ip_intf.html" title="ip_intf"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="intf.html" title="intf"
+             >previous</a> |</li>
+        <li><a href="index.html">Arista EOS SDK 1.7.0 reference</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2014, Arista Networks.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

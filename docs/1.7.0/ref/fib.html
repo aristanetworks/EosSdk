@@ -1,0 +1,309 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>fib &mdash; Arista EOS SDK 1.7.0 reference</title>
+    
+    <link rel="stylesheet" href="_static/eossdk.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/breathe.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '1.7.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="Arista EOS SDK 1.7.0 reference" href="index.html" />
+    <link rel="next" title="hardware_table" href="hardware_table.html" />
+    <link rel="prev" title="fd" href="fd.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="hardware_table.html" title="hardware_table"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="fd.html" title="fd"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">Arista EOS SDK 1.7.0 reference</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="fib">
+<h1><strong>fib</strong><a class="headerlink" href="#fib" title="Permalink to this headline">¶</a></h1>
+<p>System Forwarding Information Base (FIB) management</p>
+<p>The FIB represents the system forwarding tables. In this way, it is generally the result of the programming of any routing agents in the system including static and dynamic routing protocols.</p>
+<p>This module allows for direct maniuplation of the FIB, as well as a means of reacting to the contents of the table as well as perform queries. </p>
+<dl class="namespace">
+<dt>
+<span class="target" id="eossdknamespaceeos"></span><em>namespace</em> <tt class="descname">eos</tt></dt>
+<dd><dl class="class">
+<dt>
+<span class="target" id="eossdkclasseos_1_1fib__route__iter__t"></span><em>class</em> <tt class="descname">fib_route_iter_t</tt></dt>
+<dd><div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Private Functions</p>
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1fib__route__iter__t_1abd2cfb629b17c3b861bc760be65ba80e"></span><tt class="descname">fib_route_iter_t</tt><big>(</big>fib_route_iter_impl * <em>const</em><big>)</big></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Friends</p>
+<dl class="friend">
+<dt>
+<span class="target" id="eossdkclasseos_1_1fib__route__iter__t_1aaac9f24208b6307574886724b8006a2b"></span>friend class <tt class="descname">fib_route_iter_impl</tt></dt>
+<dd></dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="class">
+<dt>
+<span class="target" id="eossdkclasseos_1_1fib__fec__iter__t"></span><em>class</em> <tt class="descname">fib_fec_iter_t</tt></dt>
+<dd><div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Private Functions</p>
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1fib__fec__iter__t_1ae8e154cfe8d48e7a056f7c0708e3777f"></span><tt class="descname">fib_fec_iter_t</tt><big>(</big>fib_fec_iter_impl * <em>const</em><big>)</big></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Friends</p>
+<dl class="friend">
+<dt>
+<span class="target" id="eossdkclasseos_1_1fib__fec__iter__t_1a69b093d05e518b8074304ba0a11087bc"></span>friend class <tt class="descname">fib_fec_iter_impl</tt></dt>
+<dd></dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="class">
+<dt>
+<span class="target" id="eossdkclasseos_1_1fib__handler"></span><em>class</em> <tt class="descname">fib_handler</tt></dt>
+<dd><em>#include &lt;fib.h&gt;</em><p>This class receives changes route/fec collection. </p>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1fib__handler_1a36dd97505fa572667d841546d85d75b7"></span><tt class="descname">fib_handler</tt><big>(</big><a class="reference internal" href="#eossdkclasseos_1_1fib__mgr"><em>fib_mgr</em></a> *<big>)</big></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1fib__handler_1a735e096909c1afed7fc909834f1259bd"></span><a class="reference internal" href="#eossdkclasseos_1_1fib__mgr"><em>fib_mgr</em></a> * <tt class="descname">get_fib_mgr</tt><big>(</big><big>)</big> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1fib__handler_1ad4e0a81382bd7838ab09d68d0172cc45"></span>virtual void <tt class="descname">on_route_set</tt><big>(</big>fib_route_t const &amp;<big>)</big></dt>
+<dd><p>Handler called when a route gets added or updated. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1fib__handler_1ab0d56795ff8643ae72149c8fae8ac878"></span>virtual void <tt class="descname">on_route_del</tt><big>(</big>fib_route_key_t const &amp;<big>)</big></dt>
+<dd><p>Handler called when a route gets deleted. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1fib__handler_1a2f4aec5d7dd1e1633fcf1c5fd861f8bc"></span>virtual void <tt class="descname">on_fec_set</tt><big>(</big>fib_fec_t const &amp;<big>)</big></dt>
+<dd><p>Handler called when a FEC gets added or updated. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1fib__handler_1acada0d4cdcb515611c27f9ac3a490d11"></span>virtual void <tt class="descname">on_fec_del</tt><big>(</big>fib_fec_key_t const &amp;<big>)</big></dt>
+<dd><p>Handler called when a FEC gets deleted. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="class">
+<dt>
+<span class="target" id="eossdkclasseos_1_1fib__mgr"></span><em>class</em> <tt class="descname">fib_mgr</tt></dt>
+<dd><em>#include &lt;fib.h&gt;</em><p>The FIB Manager. </p>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1fib__mgr_1a25e97fe5595eb4587ef9f94bea5721ab"></span>virtual <tt class="descname">~fib_mgr</tt><big>(</big><big>)</big></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1fib__mgr_1ad8f9521decc272dc9c51175ff6d1a62e"></span>virtual <a class="reference internal" href="#eossdkclasseos_1_1fib__route__iter__t"><em>fib_route_iter_t</em></a> <tt class="descname">fib_route_iter</tt><big>(</big><big>)</big> const = 0</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1fib__mgr_1a3ff7150c9cb64d79afce74b749665527"></span>virtual <a class="reference internal" href="#eossdkclasseos_1_1fib__fec__iter__t"><em>fib_fec_iter_t</em></a> <tt class="descname">fib_fec_iter</tt><big>(</big><big>)</big> const = 0</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1fib__mgr_1af50dc1b1422ea327f8dc07a893a67f54"></span>virtual bool <tt class="descname">fib_fec_set</tt><big>(</big>fib_fec_t const &amp;<big>)</big> = 0</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1fib__mgr_1acd149a8f459bc2ade6c96970d6c56198"></span>virtual void <tt class="descname">fib_fec_del</tt><big>(</big>fib_fec_key_t const &amp;<big>)</big> = 0</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1fib__mgr_1ace7ff52c49ba233d4e2b4de277c2d7a8"></span>virtual bool <tt class="descname">fib_fec_exists</tt><big>(</big>fib_fec_key_t const &amp;<big>)</big> = 0</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1fib__mgr_1a1b0a8f97a25a50aaa81b83d0b63ac138"></span>virtual fib_fec_t <tt class="descname">fib_fec</tt><big>(</big>fib_fec_key_t const &amp;<big>)</big> = 0</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1fib__mgr_1aa55c460614eed88af98da429adb74cec"></span>virtual bool <tt class="descname">fib_route_set</tt><big>(</big>fib_route_t const &amp;<big>)</big> = 0</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1fib__mgr_1a9fad77e07390f082596f16d295301061"></span>virtual void <tt class="descname">fib_route_del</tt><big>(</big>fib_route_key_t const &amp;<big>)</big> = 0</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1fib__mgr_1ad42afe150b629eda7025df1050014782"></span>virtual bool <tt class="descname">fib_route_exists</tt><big>(</big>fib_route_key_t const &amp;<big>)</big> = 0</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1fib__mgr_1afd964c6349b5527f030d24f0ca0f79b0"></span>virtual fib_route_t <tt class="descname">fib_route</tt><big>(</big>fib_route_key_t const &amp;<big>)</big> = 0</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1fib__mgr_1a5ffe4a7d76981f4735762c76e15e4045"></span>virtual mgr_mode_type_t <tt class="descname">mode_type</tt><big>(</big><big>)</big> = 0</dt>
+<dd><p>Returns the mode this manager is in. This mode is set during the construction of the manager, i.e.: `sdk.get_fib_mgr(MODE_TYPE_READ_NOTIFYING)`. If MODE_TYPE_READ_ONLY, only the getters and iterators of this manager will function. </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Protected Functions</p>
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1fib__mgr_1ab64e84177cc747c33f5a048d0475a998"></span><tt class="descname">fib_mgr</tt><big>(</big><big>)</big></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Private Members</p>
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1fib__mgr_1a10d3704340c0c0ead2fef181f115464c"></span><tt class="descname">fib_mgr</tt></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Friends</p>
+<dl class="friend">
+<dt>
+<span class="target" id="eossdkclasseos_1_1fib__mgr_1ad2ce1cba5369486554bef2f8f601bb7b"></span>friend class <tt class="descname">fib_handler</tt></dt>
+<dd></dd></dl>
+
+</div>
+</dd></dl>
+
+</dd></dl>
+
+<div class="section" id="type-definitions-in-fib">
+<h2>Type definitions in <strong>fib</strong><a class="headerlink" href="#type-definitions-in-fib" title="Permalink to this headline">¶</a></h2>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">doxygenfile: Found multiple matches for file &#8220;eos/types/fib.h </p>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#"><strong>fib</strong></a><ul>
+<li><a class="reference internal" href="#type-definitions-in-fib">Type definitions in <strong>fib</strong></a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="fd.html"
+                        title="previous chapter"><strong>fd</strong></a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="hardware_table.html"
+                        title="next chapter"><strong>hardware_table</strong></a></p>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="hardware_table.html" title="hardware_table"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="fd.html" title="fd"
+             >previous</a> |</li>
+        <li><a href="index.html">Arista EOS SDK 1.7.0 reference</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2014, Arista Networks.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

@@ -1,0 +1,450 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>acl &mdash; Arista EOS SDK 1.7.0 reference</title>
+    
+    <link rel="stylesheet" href="_static/eossdk.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/breathe.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '1.7.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="Arista EOS SDK 1.7.0 reference" href="index.html" />
+    <link rel="next" title="agent" href="agent.html" />
+    <link rel="prev" title="Arista EOS SDK reference guide" href="index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="agent.html" title="agent"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="Arista EOS SDK reference guide"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">Arista EOS SDK 1.7.0 reference</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="acl">
+<h1><strong>acl</strong><a class="headerlink" href="#acl" title="Permalink to this headline">¶</a></h1>
+<p>Access Control List (ACL) management module.</p>
+<p>In EOS, an ACL is a collection of rules ordered by a sequence number. Each rule defines some filter criteria to match and an action determining whether matching traffic will be considered by the ACL.</p>
+<p>ACLs are defined to match Ethernet, IPv4 or IPv6 headers and can be used with a variety of EOS features, including traffic filters on interfaces (supported by this module) and as traffic classifiers for class maps (eos/class_map.h).</p>
+<p>This module offers an ACL manager, used to define ACLs in the system configuration and to apply them as traffic filters to network interfaces.</p>
+<p>To react to the status of traffic filter application, an ACL handler is also provided with callback handlers you can implement to react to the ACL programming status on error or success.</p>
+<p>Here&#8217;s an example of the basic workflow for defining and configuring an ACL, then applying it to Ethernet1:</p>
+<p> <pre class="literal-block">
+ #include &lt;eos/acl.h&gt;
+ #include &lt;eos/ip.h&gt;
+
+ // The result of eos::sdk::get_acl_mgr() is in variable
+ // acl_mgr_ within this example.
+
+ // Deny all web traffic originating at srcaddr
+ eos::ip_addr_mask_t srcaddr(eos::ip_addr_t(&quot;192.0.2.1&quot;), 32);
+ eos::ip_addr_mask_t dstaddr(eos::ip_addr_t(&quot;10.0.0.0&quot;), 8);
+ eos::acl_key_t acl_key(&quot;name_of_acl&quot;, eos::ACL_TYPE_IPV4);
+ eos::acl_rule_ip_t rule1;
+
+ rule1.source_addr_is(srcaddr);
+ rule1.destination_addr_is(dstaddr);
+ rule1.source_port_is(80);
+ rule1.action_is(eos::ACL_DENY);
+
+ // Configure the ACL and commit it to current configuration
+ acl_mgr_-&gt;acl_rule_set(acl_key, 1, rule1);
+ acl_mgr_-&gt;acl_commit();
+
+ // Now apply the ACL for traffic filtering on Ethernet1 inbound
+ acl_mgr_-&gt;acl_apply(acl_key, eos::intf_id_t(&quot;Ethernet1&quot;), eos::ACL_IN, true);
+</pre>
+</p>
+<dl class="namespace">
+<dt>
+<span class="target" id="eossdknamespaceeos"></span><em>namespace</em> <tt class="descname">eos</tt></dt>
+<dd><div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Typedefs</p>
+<dl class="typedef">
+<dt>
+<span class="target" id="eossdknamespaceeos_1ae0de52bab24be323f0d8cd31febefa5c"></span>typedef std::pair&lt; uint32_t, acl_rule_ip_t &gt; <tt class="descname">acl_rule_ip_entry_t</tt></dt>
+<dd><p>A rule in an IP ACL. </p>
+</dd></dl>
+
+<dl class="typedef">
+<dt>
+<span class="target" id="eossdknamespaceeos_1abf824c33702447c5d4c657449af6b624"></span>typedef std::pair&lt; uint32_t, acl_rule_eth_t &gt; <tt class="descname">acl_rule_eth_entry_t</tt></dt>
+<dd><p>A rule in an Ethernet ACL. </p>
+</dd></dl>
+
+</div>
+<dl class="class">
+<dt>
+<span class="target" id="eossdkclasseos_1_1acl__handler"></span><em>class</em> <tt class="descname">acl_handler</tt></dt>
+<dd><em>#include &lt;acl.h&gt;</em><p>An ACL handler.</p>
+<p>Derive from this class to react to ACL hardware synchronization events. </p>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1acl__handler_1acaf8d750c6e58ab8232c81cff3aac0b0"></span><tt class="descname">acl_handler</tt><big>(</big><a class="reference internal" href="#eossdkclasseos_1_1acl__mgr"><em>acl_mgr</em></a> *<big>)</big></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1acl__handler_1a0bd8e805b093f6f11938a8e168a19f13"></span><a class="reference internal" href="#eossdkclasseos_1_1acl__mgr"><em>acl_mgr</em></a> * <tt class="descname">get_acl_mgr</tt><big>(</big><big>)</big> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1acl__handler_1a524a0ac4f53ecb51307f69bfee881c11"></span>void <tt class="descname">watch_all_acls</tt><big>(</big>bool<big>)</big></dt>
+<dd><p>Watches updates to synchronization status for all ACLs. This defaults to false at handler construction time.</p>
+<p><dl class="docutils">
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><tt class="first docutils literal"><span class="pre">bool</span></tt> - <p>If true, receive ACL sync status notifications, else do not. </p>
+</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1acl__handler_1a3022234a79e6e2407adee1e78c3ecabb"></span>virtual void <tt class="descname">on_acl_sync</tt><big>(</big><big>)</big></dt>
+<dd><p>Called upon hardware successfully committing all pending transactions.</p>
+<p>It may be called more than once for a single transaction, or only once for a whole bunch of separate ACL updates. In fact, if someone updates an ACL in the CLI, this function may get called, i.e., it can get called once for zero transactions. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1acl__handler_1aed89fd9472dbb007e4646e12de4f8d66"></span>virtual void <tt class="descname">on_acl_sync_fail</tt><big>(</big>std::string const &amp; <em>linecard</em>, std::string const &amp; <em>message</em><big>)</big></dt>
+<dd><p>Called upon a problem stopping ACL configuration from being committed.</p>
+<p>This indicates that the ACL config (as stored in Sysdb) cannot be loaded into hardware, ever. It must be changed in some way to get Sysdb and the hardware back in sync. The most common problem, of course, is too many ACLs or ACL entries. It is up to you to find some things to delete, commit those deletions, and then see if things fit once again (<a class="reference internal" href="#eossdkclasseos_1_1acl__handler_1a3022234a79e6e2407adee1e78c3ecabb"><em>on_acl_sync()</em></a> will get called if they do, or <a class="reference internal" href="#eossdkclasseos_1_1acl__handler_1aed89fd9472dbb007e4646e12de4f8d66"><em>on_acl_sync_fail()</em></a> will get called again if they don&#8217;t). Note you may be notified more than once of the same problem, and you may be notified of problems that have nothing to do with you, such as an operator at the CLI doing something unsupported. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="class">
+<dt>
+<span class="target" id="eossdkclasseos_1_1acl__iter__t"></span><em>class</em> <tt class="descname">acl_iter_t</tt></dt>
+<dd><em>#include &lt;acl.h&gt;</em><p>An ACL iterator. </p>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Private Functions</p>
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1acl__iter__t_1a02b0f5482fbe9ed8a2e4f001b9f1fd3c"></span><tt class="descname">acl_iter_t</tt><big>(</big>acl_iter_impl * <em>const</em><big>)</big></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Friends</p>
+<dl class="friend">
+<dt>
+<span class="target" id="eossdkclasseos_1_1acl__iter__t_1a2032db5bc1d285d3fe31163833daa061"></span>friend class <tt class="descname">acl_iter_impl</tt></dt>
+<dd></dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="class">
+<dt>
+<span class="target" id="eossdkclasseos_1_1acl__rule__ip__iter__t"></span><em>class</em> <tt class="descname">acl_rule_ip_iter_t</tt></dt>
+<dd><em>#include &lt;acl.h&gt;</em><p>An IP ACL rule iterator. </p>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Private Functions</p>
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1acl__rule__ip__iter__t_1ad122a408f660a99a02d82d26b2f10e81"></span><tt class="descname">acl_rule_ip_iter_t</tt><big>(</big>acl_rule_ip_iter_impl * <em>const</em><big>)</big></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Friends</p>
+<dl class="friend">
+<dt>
+<span class="target" id="eossdkclasseos_1_1acl__rule__ip__iter__t_1a0315928397447a689db5e7aab703f550"></span>friend class <tt class="descname">acl_rule_ip_iter_impl</tt></dt>
+<dd></dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="class">
+<dt>
+<span class="target" id="eossdkclasseos_1_1acl__rule__eth__iter__t"></span><em>class</em> <tt class="descname">acl_rule_eth_iter_t</tt></dt>
+<dd><em>#include &lt;acl.h&gt;</em><p>An Ethernet ACL rule iterator. </p>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Private Functions</p>
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1acl__rule__eth__iter__t_1a919552bb3f8fcec764b28f537210a7f7"></span><tt class="descname">acl_rule_eth_iter_t</tt><big>(</big>acl_rule_eth_iter_impl * <em>const</em><big>)</big></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Friends</p>
+<dl class="friend">
+<dt>
+<span class="target" id="eossdkclasseos_1_1acl__rule__eth__iter__t_1a7dab1228601eb62edd5790da1f83cd85"></span>friend class <tt class="descname">acl_rule_eth_iter_impl</tt></dt>
+<dd></dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="class">
+<dt>
+<span class="target" id="eossdkclasseos_1_1acl__mgr"></span><em>class</em> <tt class="descname">acl_mgr</tt></dt>
+<dd><em>#include &lt;acl.h&gt;</em><p>The ACL manager.</p>
+<p>This manager provides access to current ACL configuration, creation, modification and deletion of ACLs, and functions to commit changes, apply ACLs to interfaces as well as manage fragments mode and enabling counters.</p>
+<p>When managing ACLs, you provide give an ACL key to modify, a &#8220;sequence number&#8221; which starts at 1 and goes up to MAXINT, and for set operations, the rule to set. Note: you must call commit() for your changes here to get pushed into the hardware, and once you have started setting rules, you must call <a class="reference internal" href="#eossdkclasseos_1_1acl__mgr_1ab960b650788204999f85a34486414c63"><em>acl_commit()</em></a> prior to any calls to <a class="reference internal" href="#eossdkclasseos_1_1acl__mgr_1aef28779af65243f8a33de1e6199624ce"><em>acl_apply()</em></a>, else the manager will panic(). Note that extremely large numbers of ACLs or rules per ACL can result in undefined behavior, including a switch reload. </p>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1acl__mgr_1ad6b7f6227d7095686cb3084c9ce4f951"></span>virtual <tt class="descname">~acl_mgr</tt><big>(</big><big>)</big></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1acl__mgr_1a98cc24a8268273b028e958cccc6fe9b3"></span>virtual <a class="reference internal" href="#eossdkclasseos_1_1acl__iter__t"><em>acl_iter_t</em></a> <tt class="descname">acl_iter</tt><big>(</big><big>)</big> const = 0</dt>
+<dd><p>Iterates over all ACLs. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1acl__mgr_1a7d0183eb9bf22a57cc8c2b392cfc46fa"></span>virtual <a class="reference internal" href="#eossdkclasseos_1_1acl__rule__ip__iter__t"><em>acl_rule_ip_iter_t</em></a> <tt class="descname">acl_rule_ip_iter</tt><big>(</big>acl_key_t const &amp;<big>)</big> const = 0</dt>
+<dd><p>Iterates over the rules with an IP ACL. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1acl__mgr_1a72f9e6db273a608fa3a5c6d79da6a6d8"></span>virtual <a class="reference internal" href="#eossdkclasseos_1_1acl__rule__eth__iter__t"><em>acl_rule_eth_iter_t</em></a> <tt class="descname">acl_rule_eth_iter</tt><big>(</big>acl_key_t const &amp;<big>)</big> const = 0</dt>
+<dd><p>Iterates over the rules with an Ethernet ACL. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1acl__mgr_1acbe4b70d9fa8891e8193f2835c34e679"></span>virtual bool <tt class="descname">acl_exists</tt><big>(</big>acl_key_t const &amp;<big>)</big> const = 0</dt>
+<dd><p>Configuration ACL existence test.</p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>true if an ACL with the same name and type (i.e., key) exists in the configuration, else false. </dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1acl__mgr_1a13cdfca982a91e37fa00247051459cb7"></span>virtual void <tt class="descname">acl_rule_set</tt><big>(</big>acl_key_t const &amp;, uint32_t, acl_rule_ip_t const &amp;<big>)</big> = 0</dt>
+<dd><p>Adds an IP ACL rule to an ACL.</p>
+<p>If the ACL key doesn&#8217;t exist, it will be created. If the ACL type is not the same as the rule type, panic() is called.</p>
+<p><dl class="docutils">
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><tt class="first docutils literal"><span class="pre">acl_key_t</span></tt> - <p>The ACL key to modify (name and ACL type) </p>
+</li>
+<li><tt class="first docutils literal"><span class="pre">uint32_t</span></tt> - <p>ACL sequence number </p>
+</li>
+<li><tt class="first docutils literal"><span class="pre">acl_rule_ip_t</span></tt> - <p>ACL rule to set at sequence number </p>
+</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1acl__mgr_1a31cc904cf5c454c9a36436bbec4cd899"></span>virtual void <tt class="descname">acl_rule_set</tt><big>(</big>acl_key_t const &amp;, uint32_t, acl_rule_eth_t const &amp;<big>)</big> = 0</dt>
+<dd><p>Adds an Ethernet (MAC) ACL rule to an ACL.</p>
+<p>If the ACL doesn&#8217;t exist, it will be created before the rule is added to it: there is no explicit &#8220;create ACL&#8221; operation. If the ACL type is not the same as the rule type (i.e., Ethernet), panic() is called.</p>
+<p><dl class="docutils">
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><tt class="first docutils literal"><span class="pre">acl_key_t</span></tt> - <p>The ACL key to modify (name and ACL type) </p>
+</li>
+<li><tt class="first docutils literal"><span class="pre">uint32_t</span></tt> - <p>ACL sequence number (in the range 1..MAXINT) </p>
+</li>
+<li><tt class="first docutils literal"><span class="pre">acl_rule_eth_t</span></tt> - <p>ACL rule to set at sequence number </p>
+</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1acl__mgr_1a1404aa66749f93a231671d573cbfae0f"></span>virtual void <tt class="descname">acl_rule_del</tt><big>(</big>acl_key_t const &amp;, uint32_t<big>)</big> = 0</dt>
+<dd><p>Removes a rule from an ACL.</p>
+<p>If the ACL key doesn&#8217;t exist, that is a no op. If there is no rule at the sequence number, that is also a no op.</p>
+<p><dl class="docutils">
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><tt class="first docutils literal"><span class="pre">acl_key_t</span></tt> - <p>The ACL key to modify (name and ACL type) </p>
+</li>
+<li><tt class="first docutils literal"><span class="pre">uint32_t</span></tt> - <p>ACL sequence number to remove </p>
+</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1acl__mgr_1ab960b650788204999f85a34486414c63"></span>virtual void <tt class="descname">acl_commit</tt><big>(</big><big>)</big> = 0</dt>
+<dd><p>Commits all rule changes and application changes made above to all ACLs.</p>
+<p>Pushes ACLs into Sysdb&#8217;s active configuration. This commit cannot fail, but it can lead to a state where not all ACLs can be loaded into hardware. You will be notified via on_acl_sync() when this commit and all other outstanding operations such as interface applications are loaded into hardware, or on_acl_sync_fail() if the newly committed configuration can&#8217;t be loaded. If there are no changes pending and you call this function, you will get one of those callbacks depending on whether the current state in Sysdb can be loaded into hardware or not. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1acl__mgr_1ab99c51211ffa916e43f9912cd548ab06"></span>virtual void <tt class="descname">acl_del</tt><big>(</big>acl_key_t const &amp;<big>)</big> = 0</dt>
+<dd><p>Deletes the ACL.</p>
+<p>Removes all rules and removes the ACL from all interfaces. Any pending changes to the ACL are discarded. Is effective immediately (no commit or commit notification). </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1acl__mgr_1aef28779af65243f8a33de1e6199624ce"></span>virtual void <tt class="descname">acl_apply</tt><big>(</big>acl_key_t const &amp;, intf_id_t, acl_direction_t, bool<big>)</big> = 0</dt>
+<dd><p>Requests that an ACL be (un)applied on the given interface and direction.</p>
+<p>ACL is loaded into hardware asynchronously. Like commit(), this function results in a call to your handler when we have applied, or failed to apply, this ACL configuration. That is, you do not get a handler callback per call; you get a handler callback when everything is loaded into hardware, or when we notice problems.</p>
+<p>API call ordering note: any <a class="reference internal" href="#eossdkclasseos_1_1acl__mgr_1a13cdfca982a91e37fa00247051459cb7"><em>acl_rule_set()</em></a> or <a class="reference internal" href="#eossdkclasseos_1_1acl__mgr_1a1404aa66749f93a231671d573cbfae0f"><em>acl_rule_del()</em></a> calls be followed by an <a class="reference internal" href="#eossdkclasseos_1_1acl__mgr_1ab960b650788204999f85a34486414c63"><em>acl_commit()</em></a> prior to calling this function else a panic() will occur. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1acl__mgr_1a2eb1e38de52066ceb21d88ca9addb514"></span>virtual void <tt class="descname">acl_counters_enabled_set</tt><big>(</big>acl_key_t const &amp;, bool<big>)</big> = 0</dt>
+<dd><p>Immediately enable or disable counters for the ACL. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1acl__mgr_1accebf263bec84777b31f1f59ac42b042"></span>virtual void <tt class="descname">acl_fragments_enabled_set</tt><big>(</big>acl_key_t const &amp;, bool<big>)</big> = 0</dt>
+<dd><p>Immediately enable or disable fragments matching on the ACL. </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Protected Functions</p>
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1acl__mgr_1a68cb83e6f5fb16fd2ebf45bf42781d01"></span><tt class="descname">acl_mgr</tt><big>(</big><big>)</big></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Private Members</p>
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1acl__mgr_1abbd2fdcc3258d9e8c05f8ccd15be880d"></span><tt class="descname">acl_mgr</tt></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Friends</p>
+<dl class="friend">
+<dt>
+<span class="target" id="eossdkclasseos_1_1acl__mgr_1a0fc6e2f84c4c0ba29f82c79c88eabe7f"></span>friend class <tt class="descname">acl_handler</tt></dt>
+<dd></dd></dl>
+
+</div>
+</dd></dl>
+
+</dd></dl>
+
+<div class="section" id="type-definitions-in-acl">
+<h2>Type definitions in <strong>acl</strong><a class="headerlink" href="#type-definitions-in-acl" title="Permalink to this headline">¶</a></h2>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">doxygenfile: Found multiple matches for file &#8220;eos/types/acl.h </p>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#"><strong>acl</strong></a><ul>
+<li><a class="reference internal" href="#type-definitions-in-acl">Type definitions in <strong>acl</strong></a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="index.html"
+                        title="previous chapter">Arista EOS SDK reference guide</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="agent.html"
+                        title="next chapter"><strong>agent</strong></a></p>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="agent.html" title="agent"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="Arista EOS SDK reference guide"
+             >previous</a> |</li>
+        <li><a href="index.html">Arista EOS SDK 1.7.0 reference</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2014, Arista Networks.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

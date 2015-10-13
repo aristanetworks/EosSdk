@@ -1,0 +1,460 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>lldp &mdash; Arista EOS SDK 1.7.0 reference</title>
+    
+    <link rel="stylesheet" href="_static/eossdk.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/breathe.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '1.7.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="Arista EOS SDK 1.7.0 reference" href="index.html" />
+    <link rel="next" title="mac_table" href="mac_table.html" />
+    <link rel="prev" title="iterator" href="iterator.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="mac_table.html" title="mac_table"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="iterator.html" title="iterator"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">Arista EOS SDK 1.7.0 reference</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="lldp">
+<h1><strong>lldp</strong><a class="headerlink" href="#lldp" title="Permalink to this headline">¶</a></h1>
+<p>Module for LLDP (Link Layer Discovery Protocol).</p>
+<p>This module is in BETA. APIs that we expose here are subject to change in future minor and patch releases. Feedback is greatly appreciated.</p>
+<p>LLDP is a link layer protocol that sends &#8220;TLVs&#8221; across the link, allowing devices to advertise their identities and properties over a network. The protocol is uni-directional (no acks).</p>
+<p>This module provides access to information learned from neighbors directly connected via Ethernet interfaces. It can also provide proprietary information to those neighbors via &#8220;Organizationally defined TLVs&#8221;. The mandatory info exchanged over the link are the interface&#8217;s name, the chassis ID, the system name and the management port address (over which more information can be gleaned via protocols such as SNMP). The protocol has to be enabled per interface and per direction. On EOS, LLDP is disabled by default, but once enabled (cli: &#8220;lldp run&#8221;), all interfaces are enabled bi-directionally by default.</p>
+<p>The type of an LLDP TLV is composed of a 24 bit organization (vendor/manufacturer) number assigned by IEEE (also called OUI: organizationally unique identifier), and a subtype which is managed by that organization. That&#8217;s the lldp_tlv_type_t. When you add the payload (of 0-507 octets) you get a TLV.</p>
+<p>When enabled, EOS transmits these TLVS on an interface (if they apply)<ul class="simple">
+<li>Chassis ID &amp; Port ID (mandatory)</li>
+<li>Port Description</li>
+<li>System Name</li>
+<li>System Description</li>
+<li>System Capabilities (bridge and router)</li>
+<li>Management Address</li>
+<li>Port Vlan ID (802.1; vlan ID of untagged frames: default/native vlan)</li>
+<li>Maximum Frame Size (802.3)</li>
+<li>Link Aggregation (802.3)</li>
+<li>MAC/Phy config/status info (802.3; speed auto-negotiation) </li>
+</ul>
+</p>
+<dl class="namespace">
+<dt>
+<span class="target" id="eossdknamespaceeos"></span><em>namespace</em> <tt class="descname">eos</tt></dt>
+<dd><dl class="class">
+<dt>
+<span class="target" id="eossdkclasseos_1_1lldp__handler"></span><em>class</em> <tt class="descname">lldp_handler</tt></dt>
+<dd><em>#include &lt;lldp.h&gt;</em><p>Handler class to notify of changes in LLDP. In the handler context, &#8220;tlv&#8221; means received tlv. </p>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1lldp__handler_1a3d3e6eee1fe0c34c71dd2e6654b699ee"></span><tt class="descname">lldp_handler</tt><big>(</big><a class="reference internal" href="#eossdkclasseos_1_1lldp__mgr"><em>lldp_mgr</em></a> *<big>)</big></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1lldp__handler_1ad9dffa0ac658ab837fa4995e472a4abd"></span><a class="reference internal" href="#eossdkclasseos_1_1lldp__mgr"><em>lldp_mgr</em></a> * <tt class="descname">get_lldp_mgr</tt><big>(</big><big>)</big> const</dt>
+<dd><p>Returns the associated <a class="reference internal" href="#eossdkclasseos_1_1lldp__mgr"><em>lldp_mgr</em></a>. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1lldp__handler_1ae297bf5d318e442fced0c5689a05a079"></span>virtual void <tt class="descname">on_lldp_intf_set</tt><big>(</big>intf_id_t <em>intf</em><big>)</big></dt>
+<dd><p>Called when a neighbor starts sending LLDP information. `intf` refers to the local interface that this information was received on. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1lldp__handler_1a9bfdd0e04c6fe6d709d75cb98443ba69"></span>virtual void <tt class="descname">on_lldp_intf_del</tt><big>(</big>intf_id_t <em>intf</em><big>)</big></dt>
+<dd><p>Called when a neighbor&#8217;s LLDP information ages out (or is disconnected). </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1lldp__handler_1af6469c3290c909dff80b4d27a5a1b5b0"></span>virtual void <tt class="descname">on_lldp_intf_change</tt><big>(</big>intf_id_t <em>intf</em><big>)</big></dt>
+<dd><p>Called when the remote information has changed and all has been updated; this can be used as an alternative to reacting to each single callback provided below. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1lldp__handler_1af212f9e2cae04fedfd6d753bde67e7e6"></span>virtual void <tt class="descname">on_lldp_chassis_id</tt><big>(</big>intf_id_t <em>intf</em>, lldp_chassis_id_t <em>name</em><big>)</big></dt>
+<dd><p>Called when the remote&#8217;s &#8220;chassis ID&#8221; changed (mandatory TLV). </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1lldp__handler_1aa773a2513e0ae4ea633b0f7382ec2a93"></span>virtual void <tt class="descname">on_lldp_intf_id</tt><big>(</big>intf_id_t <em>intf</em>, lldp_intf_id_t <em>name</em><big>)</big></dt>
+<dd><p>Called when the remote&#8217;s &#8220;interface ID&#8221; changed (mandatory TLV). </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1lldp__handler_1a4815902d56d67df936c93fd6e3391808"></span>virtual void <tt class="descname">on_lldp_system_name</tt><big>(</big>intf_id_t <em>intf</em>, std::string const &amp; <em>name</em><big>)</big></dt>
+<dd><p>Called when the remote&#8217;s &#8220;system name&#8221; changed. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1lldp__handler_1a614856d15b33728bee92568a4aab47d9"></span>virtual void <tt class="descname">on_lldp_system_description</tt><big>(</big>intf_id_t <em>intf</em>, std::string const &amp; <em>desc</em><big>)</big></dt>
+<dd><p>Called when the remote&#8217;s &#8220;system description&#8221; changed. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1lldp__handler_1a94667669cc13fb50fab8db6dde557ae4"></span>virtual void <tt class="descname">on_lldp_intf_description</tt><big>(</big>intf_id_t <em>intf</em>, std::string const &amp; <em>descr</em><big>)</big></dt>
+<dd><p>Called when the remote&#8217;s &#8220;interface description&#8221; changed. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1lldp__handler_1a83d854ecdf6b98bb5bcdf7a23575acf9"></span>virtual void <tt class="descname">on_lldp_default_vlan</tt><big>(</big>intf_id_t <em>intf</em>, vlan_id_t <em>vlan</em><big>)</big></dt>
+<dd><p>Called when the remote&#8217;s &#8220;default vlan&#8221; changed. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1lldp__handler_1a9d330ed5113e3793a787333d6b538ab2"></span>virtual void <tt class="descname">on_lldp_management_vlan</tt><big>(</big>intf_id_t <em>intf</em>, vlan_id_t <em>vlan</em><big>)</big></dt>
+<dd><p>Called when the remote&#8217;s &#8220;management vlan&#8221; changed. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1lldp__handler_1a6a72f749ee60e7877eff9d893029a9cb"></span>virtual void <tt class="descname">on_lldp_max_frame_size</tt><big>(</big>intf_id_t <em>intf</em>, uint32_t <em>size</em><big>)</big></dt>
+<dd><p>Called when the remote&#8217;s &#8220;maximum transmission unit&#8221; changed. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1lldp__handler_1ae30ab6ceacb4e78a7feb75b08f8267c7"></span>virtual void <tt class="descname">on_lldp_management_address</tt><big>(</big>intf_id_t <em>intf</em>, std::list&lt; lldp_management_address_t &gt; const &amp; <em>info</em><big>)</big></dt>
+<dd><p>Called when the remote&#8217;s &#8220;management address&#8221; changed. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1lldp__handler_1a828d99c53ab7d22e5666d39178c0d6f1"></span>virtual void <tt class="descname">on_lldp_lacp</tt><big>(</big>intf_id_t <em>intf</em>, lldp_lacp_t const &amp; <em>info</em><big>)</big></dt>
+<dd><p>Called when the remote&#8217;s &#8220;link aggregation config/status&#8221; changed. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1lldp__handler_1ac0ff5fc5ae2f2573a95d6de933ef941e"></span>virtual void <tt class="descname">on_lldp_phy</tt><big>(</big>intf_id_t <em>intf</em>, lldp_phy_t const &amp; <em>info</em><big>)</big></dt>
+<dd><p>Called when the remote&#8217;s &#8220;phy negotiation config/status&#8221; changed. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1lldp__handler_1abd627012cfd43d38ed644b29258f56d3"></span>virtual void <tt class="descname">on_lldp_tlv_set</tt><big>(</big>intf_id_t <em>intf</em>, lldp_tlv_type_t <em>type</em>, std::string const &amp; <em>data</em><big>)</big></dt>
+<dd><p>Called when a new TLV type is received, or its content has changed. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1lldp__handler_1abd6e2b60650e079537c98568b242bd82"></span>virtual void <tt class="descname">on_lldp_tlv_del</tt><big>(</big>intf_id_t <em>intf</em>, lldp_tlv_type_t <em>type</em><big>)</big></dt>
+<dd><p>Called when a TLV type previously received is now absent from advertisements. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1lldp__handler_1a8cdbeb981e3c2f081b5b71bb719319d7"></span>virtual void <tt class="descname">on_lldp_tx_timer</tt><big>(</big>uint32_t <em>seconds</em><big>)</big></dt>
+<dd><p>Called when a transmission timer value change became effective. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1lldp__handler_1a567b5760b19ee67538c7d8eff7e31cb5"></span>virtual void <tt class="descname">on_lldp_hold_time</tt><big>(</big>uint32_t <em>seconds</em><big>)</big></dt>
+<dd><p>Called when a hold timer value change became effective. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1lldp__handler_1ad65c8ce4d1a7c41d2c8ca90166a8a182"></span>virtual void <tt class="descname">on_lldp_intf_enabled</tt><big>(</big>intf_id_t <em>intf</em>, lldp_intf_enabled_t <em>status</em><big>)</big></dt>
+<dd><p>Called when an LLDP interface status change became effective. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="class">
+<dt>
+<span class="target" id="eossdkclasseos_1_1lldp__mgr"></span><em>class</em> <tt class="descname">lldp_mgr</tt></dt>
+<dd><em>#include &lt;lldp.h&gt;</em><p>A manager for LLDP information.</p>
+<p>Create one of these via sdk.get_lldp_mgr() prior to starting the agent main loop. When your <a class="reference internal" href="agent.html#eossdkclasseos_1_1agent__handler_1ad558b16ee9a283bd9b153400743c4b1c"><em>eos::agent_handler::on_initialized</em></a> virtual function is called, the manager is valid for use. In manager context, &#8220;tlv&#8221; means received tlv. What is sent it called tx_tlv. </p>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1lldp__mgr_1a2b447944dfb1f254f7d8143fa8a642bc"></span>virtual <tt class="descname">~lldp_mgr</tt><big>(</big><big>)</big></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1lldp__mgr_1a0db33846b5e35ac350d088c8241f1a66"></span>virtual void <tt class="descname">enabled_is</tt><big>(</big>bool<big>)</big> = 0</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1lldp__mgr_1a62051933b9f0416b0301153fd05c7500"></span>virtual bool <tt class="descname">enabled</tt><big>(</big><big>)</big> const = 0</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1lldp__mgr_1aed84e1ee0c09da37e83c2ee280b055da"></span>virtual void <tt class="descname">intf_enabled_is</tt><big>(</big>intf_id_t <em>intf</em>, lldp_intf_enabled_t <em>enable</em><big>)</big> = 0</dt>
+<dd><p>Enable LLDP on an interface &#8211; on by default. LLDP is unidirectional, so enablement can be split by direction. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1lldp__mgr_1a508607d6293cdd551e0759933234c033"></span>virtual lldp_intf_enabled_t <tt class="descname">intf_enabled</tt><big>(</big>intf_id_t <em>intf</em><big>)</big> const = 0</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1lldp__mgr_1afd5c56d81d107563bd4032554d9c449d"></span>virtual void <tt class="descname">tx_timer_is</tt><big>(</big>uint32_t <em>seconds</em><big>)</big> = 0</dt>
+<dd><p>The LLDP transmit timer specifies how often TLVs are sent (aka &#8220;refreshed&#8221;), in seconds, default 30s, range 5-32768 </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1lldp__mgr_1a0fa033afbedacff76aa5efa6219f2291"></span>virtual int <tt class="descname">tx_timer</tt><big>(</big><big>)</big> const = 0</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1lldp__mgr_1a2a2962a813009362558c3924bca45939"></span>virtual int <tt class="descname">hold_time</tt><big>(</big><big>)</big> const = 0</dt>
+<dd><p>The LLDP holding time determines how long the recipient of our TLVs should keep them un-refreshed, in seconds, default 120s, range 10-65535. This is sent to the neighbor as the &#8220;ttl&#8221; value (this holding time limit is imposed on our neighbor, has no effect locally). </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1lldp__mgr_1a2896b64e4da68a80556ff8e697d117df"></span>virtual void <tt class="descname">hold_time_is</tt><big>(</big>uint32_t <em>seconds</em><big>)</big> = 0</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1lldp__mgr_1a2e3185d4032d6148fe59f6776412db87"></span>virtual lldp_chassis_id_t <tt class="descname">chassis_id</tt><big>(</big>intf_id_t <em>intf</em><big>)</big> const = 0</dt>
+<dd><p>Get the chassisID of the remote interface (&lt; 255 octets). </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1lldp__mgr_1a158e04fa39a991ec4a0e5eb3bbbf1543"></span>virtual lldp_intf_id_t <tt class="descname">intf_id</tt><big>(</big>intf_id_t <em>intf</em><big>)</big> const = 0</dt>
+<dd><p>Get the port ID of the remote interface (&lt; 255 octets). </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1lldp__mgr_1a86efa5998e4f0f7165f7f759a7fe7c37"></span>virtual std::string <tt class="descname">intf_description</tt><big>(</big>intf_id_t <em>intf</em><big>)</big> const = 0</dt>
+<dd><p>interface description: max string size 255, empty if not rx-ed </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1lldp__mgr_1ab2be32888334d01955887305f463f0c9"></span>virtual std::string <tt class="descname">system_name</tt><big>(</big>intf_id_t <em>intf</em><big>)</big> const = 0</dt>
+<dd><p>sysname: max string size 255, empty if not rx-ed </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1lldp__mgr_1a91a4413b39bc90fc0ff1fd75209145f5"></span>virtual std::string <tt class="descname">system_description</tt><big>(</big>intf_id_t <em>intf</em><big>)</big> const = 0</dt>
+<dd><p>sysdescr: max string size 255, empty if not rx-ed </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1lldp__mgr_1a2ce760d0673d35e33ea975ecb30df817"></span>virtual lldp_syscap_t <tt class="descname">system_capabilities</tt><big>(</big>intf_id_t <em>intf</em><big>)</big> const = 0</dt>
+<dd><p>system capabilities bitmap, &#8216;other&#8217; if not rx-ed </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1lldp__mgr_1af9ba64bda5cd9f4ab5b0c8d77cc083de"></span>virtual vlan_id_t <tt class="descname">default_vlan</tt><big>(</big>intf_id_t <em>intf</em><big>)</big> const = 0</dt>
+<dd><p>The default vlan ID (vlan-id for untagged packets); 0 if none or not rx-ed. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1lldp__mgr_1a9ae9aef52cf012da6c0914e8fd5ff14b"></span>virtual vlan_id_t <tt class="descname">management_vlan</tt><big>(</big>intf_id_t <em>intf</em><big>)</big> const = 0</dt>
+<dd><p>The vlan-id on which the managment interface is available; 0 if none. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1lldp__mgr_1a46067496eb92667b5c9a391e7c3251f8"></span>virtual uint32_t <tt class="descname">max_frame_size</tt><big>(</big>intf_id_t <em>intf</em><big>)</big> const = 0</dt>
+<dd><p>The max frame size on the link; 0 if not rx-ed. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1lldp__mgr_1afe86d34bccca0b0639af712709986b87"></span>virtual lldp_lacp_t <tt class="descname">lacp</tt><big>(</big>intf_id_t <em>intf</em><big>)</big> const = 0</dt>
+<dd><p>Port-channel this interface is member of (and capability/status) !value returns false if this tlv was not received. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1lldp__mgr_1a892d4682a0145bbe97a4a3a9e116ee09"></span>virtual std::list&lt; lldp_management_address_t &gt; <tt class="descname">management_address</tt><big>(</big>intf_id_t <em>intf</em><big>)</big> const = 0</dt>
+<dd><p>management info (address, snmp-ifindex, sysDescr-oid) !value returns false if this tlv was not received. The type of address (and its encoding) is described using IANA&#8217;s AddressFamilyNumbers, which is available here: <a class="reference external" href="http://www.iana.org/assignments/ianaaddressfamilynumbers-mib/">http://www.iana.org/assignments/ianaaddressfamilynumbers-mib/</a> ianaaddressfamilynumbers-mib. In EOS&#8217;s case, the address family is an IPV4 address. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1lldp__mgr_1a49f20be24f74f0aa685cedc5be2a9e9b"></span>virtual lldp_phy_t <tt class="descname">phy</tt><big>(</big>intf_id_t <em>intf</em><big>)</big> const = 0</dt>
+<dd><p>The mac phy config status info (auto-negotiation) !value returns false if this tlv was not received. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1lldp__mgr_1a4ceee51333415b8e262dae0fadbfe5f9"></span>virtual void <tt class="descname">tx_tlv_set</tt><big>(</big>intf_id_t <em>intf</em>, lldp_tlv_type_t <em>type</em>, std::string const &amp; <em>data</em><big>)</big> = 0</dt>
+<dd><p>Send a/multiple application defined TLV on a interface. Transmission will occur every tx_timer until revoked. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1lldp__mgr_1a65b416e26978933fe24713ca4dec1f5c"></span>virtual void <tt class="descname">tx_tlv_del</tt><big>(</big>intf_id_t <em>intf</em>, lldp_tlv_type_t <em>type</em><big>)</big> = 0</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1lldp__mgr_1a7ef406d54bab165326e709a1b976337e"></span>virtual std::string <tt class="descname">tlv</tt><big>(</big>intf_id_t <em>intf</em>, lldp_tlv_type_t <em>type</em><big>)</big> const = 0</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1lldp__mgr_1ab7f5e657332395d688b5ef740b2404af"></span>virtual bool <tt class="descname">tlv_exists</tt><big>(</big>intf_id_t <em>intf</em>, lldp_tlv_type_t <em>type</em><big>)</big> const = 0</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1lldp__mgr_1af072e29844e11e9b70bed9e86216501e"></span>virtual std::map&lt; lldp_tlv_type_t, std::string &gt; <tt class="descname">tlvs</tt><big>(</big>intf_id_t <em>intf</em><big>)</big> const = 0</dt>
+<dd><p>Get en-block (there is no iterator, cannot be many given mtu limit this includes all &#8220;organizationnally defined TLVs&#8221; (owned by this app or not) </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Protected Functions</p>
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1lldp__mgr_1aae9252900d0b97ba27e9d927a7c683c8"></span><tt class="descname">lldp_mgr</tt><big>(</big><big>)</big></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Private Members</p>
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1lldp__mgr_1a616e517b2b6ba76206cc5b45de2ef532"></span><tt class="descname">lldp_mgr</tt></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Friends</p>
+<dl class="friend">
+<dt>
+<span class="target" id="eossdkclasseos_1_1lldp__mgr_1aedb1000241348b97ec1b1b1ad533b728"></span>friend class <tt class="descname">lldp_handler</tt></dt>
+<dd></dd></dl>
+
+</div>
+</dd></dl>
+
+</dd></dl>
+
+<div class="section" id="type-definitions-in-lldp">
+<h2>Type definitions in <strong>lldp</strong><a class="headerlink" href="#type-definitions-in-lldp" title="Permalink to this headline">¶</a></h2>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">doxygenfile: Found multiple matches for file &#8220;eos/types/lldp.h </p>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#"><strong>lldp</strong></a><ul>
+<li><a class="reference internal" href="#type-definitions-in-lldp">Type definitions in <strong>lldp</strong></a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="iterator.html"
+                        title="previous chapter"><strong>iterator</strong></a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="mac_table.html"
+                        title="next chapter"><strong>mac_table</strong></a></p>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="mac_table.html" title="mac_table"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="iterator.html" title="iterator"
+             >previous</a> |</li>
+        <li><a href="index.html">Arista EOS SDK 1.7.0 reference</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2014, Arista Networks.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

@@ -1,0 +1,227 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>class_map &mdash; Arista EOS SDK 1.7.0 reference</title>
+    
+    <link rel="stylesheet" href="_static/eossdk.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/breathe.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '1.7.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="Arista EOS SDK 1.7.0 reference" href="index.html" />
+    <link rel="next" title="decap_group" href="decap_group.html" />
+    <link rel="prev" title="base_mgr" href="base_mgr.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="decap_group.html" title="decap_group"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="base_mgr.html" title="base_mgr"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">Arista EOS SDK 1.7.0 reference</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="class-map">
+<h1><strong>class_map</strong><a class="headerlink" href="#class-map" title="Permalink to this headline">¶</a></h1>
+<p>Class map manipulation.</p>
+<p>This module provides access to the management of class maps. Classification or &#8220;class&#8221; maps, provide a way for the network operator to classify packets arriving on an interface. Together with the policy_map_mgr in policy_map.h, classified traffic can drive policy features, such as PBR. </p>
+<dl class="namespace">
+<dt>
+<span class="target" id="eossdknamespaceeos"></span><em>namespace</em> <tt class="descname">eos</tt></dt>
+<dd><dl class="class">
+<dt>
+<span class="target" id="eossdkclasseos_1_1class__map__iter__t"></span><em>class</em> <tt class="descname">class_map_iter_t</tt></dt>
+<dd><em>#include &lt;class_map.h&gt;</em><p>An iterator providing forwards only iteration over collections of class maps. </p>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Private Functions</p>
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1class__map__iter__t_1a7fc711aa1720a0205e31b8c1c4209a57"></span><tt class="descname">class_map_iter_t</tt><big>(</big>class_map_iter_impl * <em>const</em><big>)</big></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Friends</p>
+<dl class="friend">
+<dt>
+<span class="target" id="eossdkclasseos_1_1class__map__iter__t_1abb7c1f05eeb93881ee8fb0160d9b261f"></span>friend class <tt class="descname">class_map_iter_impl</tt></dt>
+<dd></dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="class">
+<dt>
+<span class="target" id="eossdkclasseos_1_1class__map__mgr"></span><em>class</em> <tt class="descname">class_map_mgr</tt></dt>
+<dd><em>#include &lt;class_map.h&gt;</em><p>EOS class map manager.</p>
+<p>This manager provides access to EOS traffic classifiers, or &#8220;class
+ maps&#8221;. Class maps are referred to by policy maps (policy_map.h) to classify traffic that should be subject to the policy&#8217;s actions. </p>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1class__map__mgr_1ad774c1cffb6afd9dce2848bf04b3d9da"></span>virtual <tt class="descname">~class_map_mgr</tt><big>(</big><big>)</big></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1class__map__mgr_1a1486cac1f5293ce97353519ff5246fa1"></span>virtual void <tt class="descname">resync_init</tt><big>(</big><big>)</big> = 0</dt>
+<dd><p>Resync mediates class map configuration into a known good state.</p>
+<p>To start a resync, call <a class="reference internal" href="#eossdkclasseos_1_1class__map__mgr_1a1486cac1f5293ce97353519ff5246fa1"><em>resync_init()</em></a> and then use the functions in the module to manipulate class maps like normal, setting them with <a class="reference internal" href="#eossdkclasseos_1_1class__map__mgr_1a11d6407f31872015c3c6a64c5256ee03"><em>class_map_is()</em></a>. After all entries have been set, call <a class="reference internal" href="#eossdkclasseos_1_1class__map__mgr_1afb2987441ec3b9e954c8dd7aa85cd3a5"><em>resync_complete()</em></a>, which will delete existing class_maps that were not added or modified during resync.</p>
+<p>During resync, this manager will act like it is referencing a temporary table that starts off empty. Thus, methods like exist, del, and getters will act only on that temporary table, regardless of the real values in Sysdb. The one exception is iteration; they will traverse the table stored in Sysdb, regardless of whether or not the manager is in resync mode. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1class__map__mgr_1afb2987441ec3b9e954c8dd7aa85cd3a5"></span>virtual void <tt class="descname">resync_complete</tt><big>(</big><big>)</big> = 0</dt>
+<dd><p>Completes any underway resync operation. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1class__map__mgr_1ad97f9833956e1b9183ee3a581acff8f7"></span>virtual bool <tt class="descname">exists</tt><big>(</big>class_map_key_t const &amp; <em>key</em><big>)</big> const = 0</dt>
+<dd><p>Returns true if and only if the provided key exists in the system config. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1class__map__mgr_1ae9fae98a8613816f0da8764c2b1deee5"></span>virtual class_map_t <tt class="descname">class_map</tt><big>(</big>class_map_key_t const &amp; <em>key</em><big>)</big> const = 0</dt>
+<dd><p>Returns the class map for the provided class map key. If there is no class map for the key, returns a default class_map_t </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1class__map__mgr_1a11d6407f31872015c3c6a64c5256ee03"></span>virtual void <tt class="descname">class_map_is</tt><big>(</big>class_map_t const &amp; <em>class_map</em><big>)</big> = 0</dt>
+<dd><p>Sets a class map and commits its configuration. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1class__map__mgr_1a5619f26a374be27d7f8daaa671972db3"></span>virtual <a class="reference internal" href="#eossdkclasseos_1_1class__map__iter__t"><em>class_map_iter_t</em></a> <tt class="descname">class_map_iter</tt><big>(</big>policy_feature_t<big>)</big> const = 0</dt>
+<dd><p>Provides iteration over the configured class maps for a feature. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1class__map__mgr_1ae1d21bf98f47708b8758b34fd90d8e82"></span>virtual void <tt class="descname">class_map_del</tt><big>(</big>class_map_key_t const &amp; <em>key</em><big>)</big> = 0</dt>
+<dd><p>Deletes the class map specified. </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Protected Functions</p>
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1class__map__mgr_1abb2fe18db2a118eefdf9087f3a86e327"></span><tt class="descname">class_map_mgr</tt><big>(</big><big>)</big></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Private Members</p>
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1class__map__mgr_1a8d1bd07dc613ad529e6ad86567e1d90a"></span><tt class="descname">class_map_mgr</tt></dt>
+<dd></dd></dl>
+
+</div>
+</dd></dl>
+
+</dd></dl>
+
+<div class="section" id="type-definitions-in-class-map">
+<h2>Type definitions in <strong>class_map</strong><a class="headerlink" href="#type-definitions-in-class-map" title="Permalink to this headline">¶</a></h2>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">doxygenfile: Found multiple matches for file &#8220;eos/types/class_map.h </p>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#"><strong>class_map</strong></a><ul>
+<li><a class="reference internal" href="#type-definitions-in-class-map">Type definitions in <strong>class_map</strong></a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="base_mgr.html"
+                        title="previous chapter"><strong>base_mgr</strong></a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="decap_group.html"
+                        title="next chapter"><strong>decap_group</strong></a></p>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="decap_group.html" title="decap_group"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="base_mgr.html" title="base_mgr"
+             >previous</a> |</li>
+        <li><a href="index.html">Arista EOS SDK 1.7.0 reference</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2014, Arista Networks.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

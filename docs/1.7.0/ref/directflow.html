@@ -1,0 +1,275 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>directflow &mdash; Arista EOS SDK 1.7.0 reference</title>
+    
+    <link rel="stylesheet" href="_static/eossdk.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/breathe.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '1.7.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="Arista EOS SDK 1.7.0 reference" href="index.html" />
+    <link rel="next" title="eth" href="eth.html" />
+    <link rel="prev" title="decap_group" href="decap_group.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="eth.html" title="eth"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="decap_group.html" title="decap_group"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">Arista EOS SDK 1.7.0 reference</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="directflow">
+<h1><strong>directflow</strong><a class="headerlink" href="#directflow" title="Permalink to this headline">¶</a></h1>
+<p>DirectFlow management and status module</p>
+<p>DirectFlow is a software feature that allows OpenFlow-like rules to be programmed in switch hardware manually. Because a DirectFlow enabled switch allows normal forwarding features to operate, it gives operators a reliable way of building for the exceptional &#8220;just this one feature&#8221; parts of their network in a flexible manner. This module allows for the management of DirectFlow configuration as well as reactions to changes in status of flows. </p>
+<dl class="namespace">
+<dt>
+<span class="target" id="eossdknamespaceeos"></span><em>namespace</em> <tt class="descname">eos</tt></dt>
+<dd><dl class="class">
+<dt>
+<span class="target" id="eossdkclasseos_1_1flow__handler"></span><em>class</em> <tt class="descname">flow_handler</tt></dt>
+<dd><em>#include &lt;directflow.h&gt;</em><p>Flow handler.</p>
+<p>A flow handler is notified when the status of configured flows changes. </p>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1flow__handler_1a3c027232a4c7a427fc0b623266b6dbce"></span><tt class="descname">flow_handler</tt><big>(</big><a class="reference internal" href="#eossdkclasseos_1_1directflow__mgr"><em>directflow_mgr</em></a> *<big>)</big></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1flow__handler_1a9f6e10ce48b748ee2d9e525638247489"></span><a class="reference internal" href="#eossdkclasseos_1_1directflow__mgr"><em>directflow_mgr</em></a> * <tt class="descname">get_directflow_mgr</tt><big>(</big><big>)</big> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1flow__handler_1a3883cb49a326c90ba5915cef6843af6d"></span>void <tt class="descname">watch_all_flows</tt><big>(</big>bool<big>)</big></dt>
+<dd><p>Registers this class to receive updates on changes to flow state. Expects a boolean signifying whether notifications should be propagated to this instance or not. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1flow__handler_1af6bd98260d62ebb4029f94334d11a78f"></span>void <tt class="descname">watch_flow</tt><big>(</big>std::string const &amp;, bool<big>)</big></dt>
+<dd><p>Registers this class to receive updates on changes to flow state for the given flow name. Expects the name of the flow to watch and a boolean signifying whether notifications should be propagated to this instance or not. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1flow__handler_1a101bd781292e5aa5b10a54331a0206e5"></span>virtual void <tt class="descname">on_flow_status</tt><big>(</big>std::string const &amp;, flow_status_t<big>)</big></dt>
+<dd><p>Handler called when flow status changes. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="class">
+<dt>
+<span class="target" id="eossdkclasseos_1_1flow__entry__iter__t"></span><em>class</em> <tt class="descname">flow_entry_iter_t</tt></dt>
+<dd><em>#include &lt;directflow.h&gt;</em><p>An iterator providing forwards iteration through the configured flows. </p>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Private Functions</p>
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1flow__entry__iter__t_1a2f70da1cf8ef469dbcc36ae3ea3cbb99"></span><tt class="descname">flow_entry_iter_t</tt><big>(</big>flow_entry_iter_impl * <em>const</em><big>)</big></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Friends</p>
+<dl class="friend">
+<dt>
+<span class="target" id="eossdkclasseos_1_1flow__entry__iter__t_1adc2239f65dd9971b4c0bd3f1c3d09c6b"></span>friend class <tt class="descname">flow_entry_iter_impl</tt></dt>
+<dd></dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="class">
+<dt>
+<span class="target" id="eossdkclasseos_1_1directflow__mgr"></span><em>class</em> <tt class="descname">directflow_mgr</tt></dt>
+<dd><em>#include &lt;directflow.h&gt;</em><p>DirectFlow configuration and status manager. </p>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1directflow__mgr_1a2f4f974e2105899e47657fe52df950c8"></span>virtual <tt class="descname">~directflow_mgr</tt><big>(</big><big>)</big></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1directflow__mgr_1a6bd7f8459789ec759dd55b6f4251995d"></span>virtual <a class="reference internal" href="#eossdkclasseos_1_1flow__entry__iter__t"><em>flow_entry_iter_t</em></a> <tt class="descname">flow_entry_iter</tt><big>(</big><big>)</big> const = 0</dt>
+<dd><p>Iterate across all configured flows. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1directflow__mgr_1a3b942b48d80ecd9c98620a9c3aa919c9"></span>virtual bool <tt class="descname">exists</tt><big>(</big>std::string const &amp;<big>)</big> const = 0</dt>
+<dd><p>Tests for existence of a flow entry with the given name. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1directflow__mgr_1a859826e061d329149d4c5f6b7863305b"></span>virtual flow_entry_t <tt class="descname">flow_entry</tt><big>(</big>std::string const &amp;<big>)</big> const = 0</dt>
+<dd><p>Return the flow entry with the given name. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1directflow__mgr_1a396b63daefc83aa7f5b7e0beefbcb23c"></span>virtual void <tt class="descname">flow_entry_set</tt><big>(</big>flow_entry_t const &amp;<big>)</big> = 0</dt>
+<dd><p>Insert or update a flow. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1directflow__mgr_1a437898024718f8dabc7a03e1525667e8"></span>virtual void <tt class="descname">flow_entry_del</tt><big>(</big>std::string const &amp;<big>)</big> = 0</dt>
+<dd><p>Delete a flow. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1directflow__mgr_1a42251708939216ec88a43500a00bdded"></span>virtual flow_status_t <tt class="descname">flow_status</tt><big>(</big>std::string const &amp; <em>name</em><big>)</big> const = 0</dt>
+<dd><p>Return the status of the given flow. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1directflow__mgr_1a20df166b4c3dbf9bb3b75ba603d976cb"></span>virtual flow_rejected_reason_t <tt class="descname">flow_rejected_reason</tt><big>(</big>std::string const &amp; <em>name</em><big>)</big> const = 0</dt>
+<dd><p>The reason a flow was not programmed. Only valid if the flow&#8217;s status is FLOW_REJECTED </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1directflow__mgr_1abca8bb4ad11a82b1945ff93d16caca79"></span>virtual flow_counters_t <tt class="descname">flow_counters</tt><big>(</big>std::string const &amp; <em>name</em><big>)</big> const = 0</dt>
+<dd><p>Return the counters for a flow. </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Protected Functions</p>
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1directflow__mgr_1a390437edae6b4f19dac7534014c02e3b"></span><tt class="descname">directflow_mgr</tt><big>(</big><big>)</big></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Private Members</p>
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1directflow__mgr_1a948bcb9e97c540a9a9a211dc5f325f05"></span><tt class="descname">directflow_mgr</tt></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Friends</p>
+<dl class="friend">
+<dt>
+<span class="target" id="eossdkclasseos_1_1directflow__mgr_1a46d2fb7718bcc02b4d35e14e70654931"></span>friend class <tt class="descname">flow_handler</tt></dt>
+<dd></dd></dl>
+
+</div>
+</dd></dl>
+
+</dd></dl>
+
+<div class="section" id="type-definitions-in-directflow">
+<h2>Type definitions in <strong>directflow</strong><a class="headerlink" href="#type-definitions-in-directflow" title="Permalink to this headline">¶</a></h2>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">doxygenfile: Found multiple matches for file &#8220;eos/types/directflow.h </p>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#"><strong>directflow</strong></a><ul>
+<li><a class="reference internal" href="#type-definitions-in-directflow">Type definitions in <strong>directflow</strong></a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="decap_group.html"
+                        title="previous chapter"><strong>decap_group</strong></a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="eth.html"
+                        title="next chapter"><strong>eth</strong></a></p>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="eth.html" title="eth"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="decap_group.html" title="decap_group"
+             >previous</a> |</li>
+        <li><a href="index.html">Arista EOS SDK 1.7.0 reference</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2014, Arista Networks.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

@@ -1,0 +1,269 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>hardware_table &mdash; Arista EOS SDK 1.7.0 reference</title>
+    
+    <link rel="stylesheet" href="_static/eossdk.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/breathe.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '1.7.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="Arista EOS SDK 1.7.0 reference" href="index.html" />
+    <link rel="next" title="hash_mix" href="hash_mix.html" />
+    <link rel="prev" title="fib" href="fib.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="hash_mix.html" title="hash_mix"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="fib.html" title="fib"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">Arista EOS SDK 1.7.0 reference</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="hardware-table">
+<h1><strong>hardware_table</strong><a class="headerlink" href="#hardware-table" title="Permalink to this headline">¶</a></h1>
+<p>Hardware table usage and capacity statistics</p>
+<p>This module exposes the usage statistics for the various hardware tables used by the system. This is useful for agents that want to track how many entries are used or available across the various tables, either for monitoring purposes or so they can take specific actions when a table is close to becomming full. Usage is exposed per unique table, feature, and chip combination. Example tables include &#8216;TCAM&#8217;, &#8216;LEM&#8217;, &#8216;ECMP&#8217;, and &#8216;LPM&#8217; tables, while the features look like &#8220;IPV4&#8221;, &#8220;ACL&#8221;, &#8220;MPLS&#8221;, or even platform-specific features like &#8220;V6Hosts&#8221;.</p>
+<p>The usage statistics include the number of used, free, committed, maximum available entries, and the high watermark which records the maximum number of entries used by this feature so far and the time-stamp when the last high watermark value was hit. The capacity calculation is triggered every 10 seconds.</p>
+<p>For example, hardware table T has 1000 entries, and the allocation block size is 100. Table T is used by feature F1 and F2. 200 entries have been allocated to Feature F1, 101 are in use. 300 entries have been allocated to Feature F2, 299 are in use. 500 entries are still in the shared pool of available entries. Free entries are those that are committed but not used (200-101 for feature F1) and the available entries in the shared pool (500). &#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8211; table_key used free committed max high_watermark &#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8211; (T, F1, &#8211;) 101 99+500 200 1000 (150, 10) (T, F2, &#8211;) 299 1+500 300 1000 (299, 20) &#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8212;&#8211; </p>
+<dl class="namespace">
+<dt>
+<span class="target" id="eossdknamespaceeos"></span><em>namespace</em> <tt class="descname">eos</tt></dt>
+<dd><dl class="class">
+<dt>
+<span class="target" id="eossdkclasseos_1_1hardware__table__handler"></span><em>class</em> <tt class="descname">hardware_table_handler</tt></dt>
+<dd><em>#include &lt;hardware_table.h&gt;</em><p>This class provides handler APIs to receive changes of hardware table. </p>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1hardware__table__handler_1a9b45925413b922f49902af02c3961ed1"></span><tt class="descname">hardware_table_handler</tt><big>(</big><a class="reference internal" href="#eossdkclasseos_1_1hardware__table__mgr"><em>hardware_table_mgr</em></a> * <em>mgr</em><big>)</big></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1hardware__table__handler_1a7e724543f867ecea5a45c3cffcbf4be6"></span><a class="reference internal" href="#eossdkclasseos_1_1hardware__table__mgr"><em>hardware_table_mgr</em></a> * <tt class="descname">get_hardware_table_mgr</tt><big>(</big><big>)</big> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1hardware__table__handler_1a0d6486e744c8ef3b308626e8b483b359"></span>void <tt class="descname">watch_all_hardware_tables</tt><big>(</big>bool <em>enable</em><big>)</big></dt>
+<dd><p>Register this handler to receive usage updates for all features across all tables. To unsubscribe to events, pass &#8216;false&#8217;. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1hardware__table__handler_1a522d0116e2c76900a48acb986533360b"></span>void <tt class="descname">watch_hardware_table</tt><big>(</big>hardware_table_key_t const &amp; <em>key</em>, bool <em>enable</em><big>)</big></dt>
+<dd><p>Register this handler to receive usage updates for a single table/feature/chip combination.</p>
+<p>If &#8216;chip&#8217; is specified as &#8220;*&#8221; in the key, register this handler to receive all updates for the named feature/table combination. If this feature uses different numbers of entries per-chip, the handler will fire for updates on each chip. Otherwise this is equivalent to watching a unique hardware_table_key.</p>
+<p>If &#8216;feature&#8217; is &#8220;*&#8221; in the key, register this handler to receive all updates for the named chip/table combination.</p>
+<p>If &#8216;chip&#8217; and &#8216;feature&#8217; are both &#8220;*&#8221; in the key, register this handler to receive all updates for the specified table. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1hardware__table__handler_1acc5855ead3a1d5b1df52ffaa4bca5bf1"></span>virtual void <tt class="descname">on_hardware_table_entry_set</tt><big>(</big>hardware_table_key_t const &amp; <em>key</em>, hardware_table_entry_t const &amp; <em>entry</em><big>)</big></dt>
+<dd><p>Handler called when a new table key is created or any of the fields in an existing usage entry changes. The capacity calculation is triggered every 10 seconds.</p>
+<p>For example, enabling multicast will allocate space in the TCAM, triggering this callback with the new [&#8216;TCAM&#8217;, &#8216;Multicast&#8217;] table key.</p>
+<p>The handler can also be triggered because the feature is now using more entries (e.g. the &#8216;IPv4&#8217; feature learned and added more routes to hardware), because the feature has been allocated more committed entries (e.g. the &#8216;ACL&#8217; feature now requires a second bank of the TCAM), or because another feature that shares this table has increased it&#8217;s used or committed entries, causing this feature&#8217;s free entries to decrease. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1hardware__table__handler_1a86084f2a5e14fb8b239fbe6724e3e67c"></span>virtual void <tt class="descname">on_hardware_table_entry_del</tt><big>(</big>hardware_table_key_t const &amp; <em>key</em><big>)</big></dt>
+<dd><p>Handler called when a table key is deleted. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="class">
+<dt>
+<span class="target" id="eossdkclasseos_1_1hardware__table__iter__t"></span><em>class</em> <tt class="descname">hardware_table_iter_t</tt></dt>
+<dd><div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Private Functions</p>
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1hardware__table__iter__t_1aa72dafa863022cd247f97a4c0ae6037b"></span><tt class="descname">hardware_table_iter_t</tt><big>(</big>hardware_table_iter_impl * <em>const</em><big>)</big></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Friends</p>
+<dl class="friend">
+<dt>
+<span class="target" id="eossdkclasseos_1_1hardware__table__iter__t_1a43040e21f0d61679c2a1e1bc1bf94843"></span>friend class <tt class="descname">hardware_table_iter_impl</tt></dt>
+<dd></dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="class">
+<dt>
+<span class="target" id="eossdkclasseos_1_1hardware__table__mgr"></span><em>class</em> <tt class="descname">hardware_table_mgr</tt></dt>
+<dd><em>#include &lt;hardware_table.h&gt;</em><p>A manager that exposes information about the hardware table&#8217;s capacity and usage.</p>
+<p>Create one mgr by calling sdk.get_hardware_mgr() prior to starting the agent main loop. The manager can be used once the <a class="reference internal" href="agent.html#eossdkclasseos_1_1agent__handler_1ad558b16ee9a283bd9b153400743c4b1c"><em>agent_handler::on_initialized</em></a> function is called. </p>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1hardware__table__mgr_1af8bb60ad69508cf6c224654456b6c62e"></span>virtual <tt class="descname">~hardware_table_mgr</tt><big>(</big><big>)</big></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1hardware__table__mgr_1af489c43a059ef220766e66d0144fb76e"></span>virtual bool <tt class="descname">exists</tt><big>(</big>hardware_table_key_t const &amp; <em>key</em><big>)</big> const = 0</dt>
+<dd><p>Check whether the hardware table key exists. That is, check whether the specified table key exposes usage data.</p>
+<p>If exists returns true, this hardware_table_key_t can be successfully passed into every method of this <a class="reference internal" href="#eossdkclasseos_1_1hardware__table__mgr"><em>hardware_table_mgr</em></a>. If not, these methods will return default data such as 0 or hardware_table_usage_t(). </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1hardware__table__mgr_1aeb641786497ebd92f03001c105bbb567"></span>virtual <a class="reference internal" href="#eossdkclasseos_1_1hardware__table__iter__t"><em>hardware_table_iter_t</em></a> <tt class="descname">hardware_table_iter</tt><big>(</big><big>)</big> const = 0</dt>
+<dd><p>Get an iterator over the existing tables. Yields a hardware_table_key_t for each table, feature, and chip combination that is being tracked by software. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1hardware__table__mgr_1a27ab20c87943b0ae62712bb2bd9b11cf"></span>virtual hardware_table_usage_t <tt class="descname">usage</tt><big>(</big>hardware_table_key_t const &amp; <em>key</em><big>)</big> const = 0</dt>
+<dd><p>Get the usage statistics for a given hardware_table_key. If the key does not exist, an empty hardware_table_usage_t is returned. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1hardware__table__mgr_1a1ff93d50f741bcb1f83b3f6f21664ba5"></span>virtual uint32_t <tt class="descname">max_entries</tt><big>(</big>hardware_table_key_t const &amp; <em>key</em><big>)</big> const = 0</dt>
+<dd><p>Get the theoretical maximum number of entries available, assuming no other features are using this table. If the key does not exist, 0 is returned. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1hardware__table__mgr_1a959a402d5c60118d57d35872a2516961"></span>virtual hardware_table_high_watermark_t <tt class="descname">high_watermark</tt><big>(</big>hardware_table_key_t const &amp; <em>key</em><big>)</big> const = 0</dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Protected Functions</p>
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1hardware__table__mgr_1a8e5e6e123e4369551fab8e218d42da3c"></span><tt class="descname">hardware_table_mgr</tt><big>(</big><big>)</big></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Private Members</p>
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1hardware__table__mgr_1ad54408f79d76539d31bb2b11f860ab9c"></span><tt class="descname">hardware_table_mgr</tt></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Friends</p>
+<dl class="friend">
+<dt>
+<span class="target" id="eossdkclasseos_1_1hardware__table__mgr_1ab50ebf9ae028823fd29084bf028d05be"></span>friend class <tt class="descname">hardware_table_handler</tt></dt>
+<dd></dd></dl>
+
+</div>
+</dd></dl>
+
+</dd></dl>
+
+<div class="section" id="type-definitions-in-hardware-table">
+<h2>Type definitions in <strong>hardware_table</strong><a class="headerlink" href="#type-definitions-in-hardware-table" title="Permalink to this headline">¶</a></h2>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">doxygenfile: Found multiple matches for file &#8220;eos/types/hardware_table.h </p>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#"><strong>hardware_table</strong></a><ul>
+<li><a class="reference internal" href="#type-definitions-in-hardware-table">Type definitions in <strong>hardware_table</strong></a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="fib.html"
+                        title="previous chapter"><strong>fib</strong></a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="hash_mix.html"
+                        title="next chapter"><strong>hash_mix</strong></a></p>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="hash_mix.html" title="hash_mix"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="fib.html" title="fib"
+             >previous</a> |</li>
+        <li><a href="index.html">Arista EOS SDK 1.7.0 reference</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2014, Arista Networks.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

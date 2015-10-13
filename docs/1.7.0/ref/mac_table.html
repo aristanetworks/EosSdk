@@ -1,0 +1,336 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>mac_table &mdash; Arista EOS SDK 1.7.0 reference</title>
+    
+    <link rel="stylesheet" href="_static/eossdk.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/breathe.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '1.7.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="Arista EOS SDK 1.7.0 reference" href="index.html" />
+    <link rel="next" title="mlag" href="mlag.html" />
+    <link rel="prev" title="lldp" href="lldp.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="mlag.html" title="mlag"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="lldp.html" title="lldp"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">Arista EOS SDK 1.7.0 reference</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="mac-table">
+<h1><strong>mac_table</strong><a class="headerlink" href="#mac-table" title="Permalink to this headline">¶</a></h1>
+<p>MAC address table management module.</p>
+<p>This module offers a MAC address table manager, used to define MAC addresses in system configuration.</p>
+<p>This module also offers a handler that provides notifications when a MAC address has been learned (or forgotten).</p>
+<p>Please refer to examples/SimpleMac.cpp for an example. </p>
+<dl class="namespace">
+<dt>
+<span class="target" id="eossdknamespaceeos"></span><em>namespace</em> <tt class="descname">eos</tt></dt>
+<dd><dl class="class">
+<dt>
+<span class="target" id="eossdkclasseos_1_1mac__table__handler"></span><em>class</em> <tt class="descname">mac_table_handler</tt></dt>
+<dd><em>#include &lt;mac_table.h&gt;</em><p>Handler for the MAC table.</p>
+<p>This handler provides notifications when MAC addresses are learned on or removed from an interface. Note: This handler currently only provides notifications for unicast MAC addresses. </p>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1mac__table__handler_1a48e0b1d8bd0fd18853e07e6c665f3c6a"></span><tt class="descname">mac_table_handler</tt><big>(</big><a class="reference internal" href="#eossdkclasseos_1_1mac__table__mgr"><em>mac_table_mgr</em></a> * <em>mgr</em><big>)</big></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1mac__table__handler_1afafe8d0532e971e9a74bac3ec6fd706d"></span><a class="reference internal" href="#eossdkclasseos_1_1mac__table__mgr"><em>mac_table_mgr</em></a> * <tt class="descname">get_mac_table_mgr</tt><big>(</big><big>)</big> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1mac__table__handler_1a17ead844c01a4c2b11ac6cdf078f21ff"></span>void <tt class="descname">watch_all_mac_entries</tt><big>(</big>bool<big>)</big></dt>
+<dd><p>Registers this class to receive change updates from the MAC table.</p>
+<p>Expects a boolean signifying whether notifications should be propagated to this instance or not. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1mac__table__handler_1a996aa0b0a12d4a10016265118c58d63f"></span>void <tt class="descname">watch_mac_entry</tt><big>(</big>mac_key_t const &amp; <em>key</em>, bool<big>)</big></dt>
+<dd><p>Registers this class to receive change updates on the given MAC entry.</p>
+<p>Expects the key of the corresponding MAC address and a boolean signifying whether notifications should be propagated to this instance or not. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1mac__table__handler_1a21aa4b135606ba7e96624d649eaadc00"></span>virtual void <tt class="descname">on_mac_entry_set</tt><big>(</big>mac_entry_t const &amp; <em>entry</em><big>)</big></dt>
+<dd><p>This handler is called when a unicast MAC entry is learned for the first time, or when a unicast MAC entry has moved to a different interface. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1mac__table__handler_1ac16a7d8340aeea8457a78fefc5cdfd4a"></span>virtual void <tt class="descname">on_mac_entry_del</tt><big>(</big>mac_key_t const &amp; <em>key</em><big>)</big></dt>
+<dd><p>This handler is called when a unicast entry is removed from the MAC address table. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="class">
+<dt>
+<span class="target" id="eossdkclasseos_1_1mac__table__iter__t"></span><em>class</em> <tt class="descname">mac_table_iter_t</tt></dt>
+<dd><div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Private Functions</p>
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1mac__table__iter__t_1a1fe32b0315b178adbc0f8e50ac1107fa"></span><tt class="descname">mac_table_iter_t</tt><big>(</big>mac_table_iter_impl * <em>const</em><big>)</big></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Friends</p>
+<dl class="friend">
+<dt>
+<span class="target" id="eossdkclasseos_1_1mac__table__iter__t_1a6356752b93b77e00c739b470be159464"></span>friend class <tt class="descname">mac_table_iter_impl</tt></dt>
+<dd></dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="class">
+<dt>
+<span class="target" id="eossdkclasseos_1_1mac__table__status__iter__t"></span><em>class</em> <tt class="descname">mac_table_status_iter_t</tt></dt>
+<dd><div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Private Functions</p>
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1mac__table__status__iter__t_1a8e3f432c0c341192c9b8ca20721cfbda"></span><tt class="descname">mac_table_status_iter_t</tt><big>(</big>mac_table_status_iter_impl * <em>const</em><big>)</big></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Friends</p>
+<dl class="friend">
+<dt>
+<span class="target" id="eossdkclasseos_1_1mac__table__status__iter__t_1ad779386c30185d93cfafd311a74b099f"></span>friend class <tt class="descname">mac_table_status_iter_impl</tt></dt>
+<dd></dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="class">
+<dt>
+<span class="target" id="eossdkclasseos_1_1mac__table__mgr"></span><em>class</em> <tt class="descname">mac_table_mgr</tt></dt>
+<dd><em>#include &lt;mac_table.h&gt;</em><p>Manager for the MAC address table. </p>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1mac__table__mgr_1a39f32fde4ecba77d67f2b479957ee474"></span>virtual <tt class="descname">~mac_table_mgr</tt><big>(</big><big>)</big></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1mac__table__mgr_1a318903a51b76995fc0b1df1e5fc94470"></span>virtual <a class="reference internal" href="#eossdkclasseos_1_1mac__table__iter__t"><em>mac_table_iter_t</em></a> <tt class="descname">mac_table_iter</tt><big>(</big><big>)</big> const = 0</dt>
+<dd><p>Iterator for all configured MAC addresses. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1mac__table__mgr_1a247c6d69e89490dcdad87fa90c08313b"></span>virtual <a class="reference internal" href="#eossdkclasseos_1_1mac__table__status__iter__t"><em>mac_table_status_iter_t</em></a> <tt class="descname">mac_table_status_iter</tt><big>(</big><big>)</big> const = 0</dt>
+<dd><p>Iterator for the MAC address table. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1mac__table__mgr_1abdd4015489ea5af7ab3f2cda1b5bcf0b"></span>virtual mac_entry_t <tt class="descname">mac_entry</tt><big>(</big>mac_key_t const &amp; <em>key</em><big>)</big> const = 0</dt>
+<dd><p>Retrieves a mac_entry_t given the VLAN and MAC address key from the collection of configured entries.</p>
+<p>This entry contains the interface (or, for multicast entries, the interfaces) that the given key was configured on. If the entry has not been configured, an empty mac_entry_t() is returned. <dl class="docutils">
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><tt class="first docutils literal"><span class="pre">mac_key_t</span></tt> - <p>The MAC address key object, consisting of a VLAN and a MAC address, which are used to retrieve that unique MAC entry. </p>
+</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1mac__table__mgr_1a9a5f0739a0d56e048bce06f85a9aa011"></span>virtual mac_entry_t <tt class="descname">mac_entry</tt><big>(</big>vlan_id_t <em>vlan</em>, eth_addr_t <em>mac</em><big>)</big> const = 0</dt>
+<dd><p>Returns a mac_entry_t given a VLAN and MAC address from the collection of configured entries.</p>
+<p></p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1mac__table__mgr_1af5abbd0e70c9614c9477721e941f68ce"></span>virtual mac_entry_t <tt class="descname">mac_entry_status</tt><big>(</big>mac_key_t const &amp; <em>key</em><big>)</big> const = 0</dt>
+<dd><p>Retrieves a mac_entry_t given the VLAN and MAC address key from the collection of entries either learned dynamically or explicitly configured.</p>
+<p>This entry contains the interface (or, for multicast entries, the interfaces) that the given key has been learned on. If the entry has not been learned, an empty mac_entry_t() is returned. Note: At this time, a multicast MAC entry&#8217;s status directly mirrors its configuration and does not reflect whether or not the entry has been programmed into hardware. <dl class="docutils">
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><tt class="first docutils literal"><span class="pre">mac_key_t</span></tt> - <p>The MAC address key object, consisting of a VLAN and a MAC address, which are used to retrieve that unique MAC entry. </p>
+</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1mac__table__mgr_1aaae7918fa7cbdbb3986e89c548d6add8"></span>virtual mac_entry_type_t <tt class="descname">type</tt><big>(</big>mac_key_t const &amp; <em>key</em><big>)</big> const = 0</dt>
+<dd><p>Returns the type of the programmed MAC entry. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1mac__table__mgr_1a42298a63af129441fb3cdac10493748d"></span>virtual uint32_t <tt class="descname">moves</tt><big>(</big>mac_key_t const &amp; <em>key</em><big>)</big> const = 0</dt>
+<dd><p>Returns the number of times the MAC entry has moved. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1mac__table__mgr_1a38fa210624f6b6411351dc6c15a08d47"></span>virtual seconds_t <tt class="descname">last_move_time</tt><big>(</big>mac_key_t const &amp; <em>key</em><big>)</big> const = 0</dt>
+<dd><p>Returns the time at which the MAC entry last moved (since boot). </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1mac__table__mgr_1a42221ad6b4e0246ab1d0a6aecc14e715"></span>virtual void <tt class="descname">mac_entry_set</tt><big>(</big>mac_entry_t const &amp; <em>entry</em><big>)</big> = 0</dt>
+<dd><p>Configure a MAC address statically as &#8220;learned&#8221; on a given interface (or set of interfaces for multicast MAC entries). </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1mac__table__mgr_1a83a016278e5fd59102dd9104a98bb4df"></span>virtual void <tt class="descname">mac_entry_del</tt><big>(</big>mac_key_t const &amp; <em>key</em><big>)</big> = 0</dt>
+<dd><p>Remove a MAC entry with the given key from the collection of entries that were either learned dynamically or configured explicitly. </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Protected Functions</p>
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1mac__table__mgr_1a81186350b7bf7fb56b53f6716b8b5fd5"></span><tt class="descname">mac_table_mgr</tt><big>(</big><big>)</big></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Private Members</p>
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1mac__table__mgr_1a61a6213e9455137cbacbdc4692fb2e21"></span><tt class="descname">mac_table_mgr</tt></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Friends</p>
+<dl class="friend">
+<dt>
+<span class="target" id="eossdkclasseos_1_1mac__table__mgr_1aafbb2bb4345b0ef5aff44a64731906ae"></span>friend class <tt class="descname">mac_table_handler</tt></dt>
+<dd></dd></dl>
+
+</div>
+</dd></dl>
+
+</dd></dl>
+
+<div class="section" id="type-definitions-in-mac-table">
+<h2>Type definitions in <strong>mac_table</strong><a class="headerlink" href="#type-definitions-in-mac-table" title="Permalink to this headline">¶</a></h2>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">doxygenfile: Found multiple matches for file &#8220;eos/types/mac_table.h </p>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#"><strong>mac_table</strong></a><ul>
+<li><a class="reference internal" href="#type-definitions-in-mac-table">Type definitions in <strong>mac_table</strong></a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="lldp.html"
+                        title="previous chapter"><strong>lldp</strong></a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="mlag.html"
+                        title="next chapter"><strong>mlag</strong></a></p>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="mlag.html" title="mlag"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="lldp.html" title="lldp"
+             >previous</a> |</li>
+        <li><a href="index.html">Arista EOS SDK 1.7.0 reference</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2014, Arista Networks.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

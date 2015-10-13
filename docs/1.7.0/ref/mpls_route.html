@@ -1,0 +1,262 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>mpls_route &mdash; Arista EOS SDK 1.7.0 reference</title>
+    
+    <link rel="stylesheet" href="_static/eossdk.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/breathe.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '1.7.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="Arista EOS SDK 1.7.0 reference" href="index.html" />
+    <link rel="next" title="neighbor_table" href="neighbor_table.html" />
+    <link rel="prev" title="mpls" href="mpls.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="neighbor_table.html" title="neighbor_table"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="mpls.html" title="mpls"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">Arista EOS SDK 1.7.0 reference</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="mpls-route">
+<h1><strong>mpls_route</strong><a class="headerlink" href="#mpls-route" title="Permalink to this headline">¶</a></h1>
+<dl class="namespace">
+<dt>
+<span class="target" id="eossdknamespaceeos"></span><em>namespace</em> <tt class="descname">eos</tt></dt>
+<dd><dl class="class">
+<dt>
+<span class="target" id="eossdkclasseos_1_1mpls__route__iter__t"></span><em>class</em> <tt class="descname">mpls_route_iter_t</tt></dt>
+<dd><em>#include &lt;mpls_route.h&gt;</em><p>An iterator over MPLS routes. </p>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Private Functions</p>
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1mpls__route__iter__t_1aa274aa5f937bc8af4f9ef393354a46a4"></span><tt class="descname">mpls_route_iter_t</tt><big>(</big>mpls_route_iter_impl * <em>const</em><big>)</big></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Friends</p>
+<dl class="friend">
+<dt>
+<span class="target" id="eossdkclasseos_1_1mpls__route__iter__t_1aeb2d93dfb74b7c260f69f800d6a5d1af"></span>friend class <tt class="descname">mpls_route_iter_impl</tt></dt>
+<dd></dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="class">
+<dt>
+<span class="target" id="eossdkclasseos_1_1mpls__route__via__iter__t"></span><em>class</em> <tt class="descname">mpls_route_via_iter_t</tt></dt>
+<dd><em>#include &lt;mpls_route.h&gt;</em><p>An iterator over MPLS route via. </p>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Private Functions</p>
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1mpls__route__via__iter__t_1a41d67b82f1d73f9ad5a5e3c9215978fa"></span><tt class="descname">mpls_route_via_iter_t</tt><big>(</big>mpls_route_via_iter_impl * <em>const</em><big>)</big></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Friends</p>
+<dl class="friend">
+<dt>
+<span class="target" id="eossdkclasseos_1_1mpls__route__via__iter__t_1ae05155138e499686a67c2d1946707e32"></span>friend class <tt class="descname">mpls_route_via_iter_impl</tt></dt>
+<dd></dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="class">
+<dt>
+<span class="target" id="eossdkclasseos_1_1mpls__route__mgr"></span><em>class</em> <tt class="descname">mpls_route_mgr</tt></dt>
+<dd><em>#include &lt;mpls_route.h&gt;</em><p>The IP static route manager. </p>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1mpls__route__mgr_1a6077f3cfeae96e33d2305565668ba957"></span>virtual <tt class="descname">~mpls_route_mgr</tt><big>(</big><big>)</big></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1mpls__route__mgr_1af3f41c6fa6b628223c325a6b5946be0a"></span>virtual void <tt class="descname">resync_init</tt><big>(</big><big>)</big> = 0</dt>
+<dd><p>Begin resync mode. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1mpls__route__mgr_1affa9c219d3721424975af1204ba548f5"></span>virtual void <tt class="descname">resync_complete</tt><big>(</big><big>)</big> = 0</dt>
+<dd><p>Complete resync mode, ready for regular updates. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1mpls__route__mgr_1acb092c3b6401360b64305085a2e3218c"></span>virtual <a class="reference internal" href="#eossdkclasseos_1_1mpls__route__iter__t"><em>mpls_route_iter_t</em></a> <tt class="descname">mpls_route_iter</tt><big>(</big><big>)</big> const = 0</dt>
+<dd><p>Returns an MPLS route iterator. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1mpls__route__mgr_1a5a945d1d36d2c5e90f1579f5c9de70f1"></span>virtual <a class="reference internal" href="#eossdkclasseos_1_1mpls__route__via__iter__t"><em>mpls_route_via_iter_t</em></a> <tt class="descname">mpls_route_via_iter</tt><big>(</big>mpls_route_key_t const &amp;<big>)</big> const = 0</dt>
+<dd><p>Returns an MPLS via iterator for a given route (key). </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1mpls__route__mgr_1a07a2cf64dc86e6a6463d4c6e92ee020a"></span>virtual bool <tt class="descname">exists</tt><big>(</big>mpls_route_key_t const &amp;<big>)</big> const = 0</dt>
+<dd><p>Tests for existence of any routes matching the route key in the switch config. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1mpls__route__mgr_1aa8b1d91ce7eaa8298c2c88ccb55d8480"></span>virtual bool <tt class="descname">exists</tt><big>(</big>mpls_route_via_t const &amp;<big>)</big> const = 0</dt>
+<dd><p>Tests if the given via exists. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1mpls__route__mgr_1a560a8a54eb95bff9173467f17a25b999"></span>virtual void <tt class="descname">mpls_route_set</tt><big>(</big>mpls_route_t const &amp;<big>)</big> = 0</dt>
+<dd><p>MPLS route management functions. </p>
+<p>Inserts or updates MPLS static route in the switch configuration </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1mpls__route__mgr_1ac989c325ec7ed0a59cccd60dd0e20a7d"></span>virtual void <tt class="descname">mpls_route_del</tt><big>(</big>mpls_route_key_t const &amp;<big>)</big> = 0</dt>
+<dd><p>Removes the MPLS route and all vias matching the route key. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1mpls__route__mgr_1a53db1b597c557ad56787b3386b3a979a"></span>virtual void <tt class="descname">mpls_route_via_set</tt><big>(</big>mpls_route_via_t const &amp;<big>)</big> = 0</dt>
+<dd><p>Adds a via to an mpls_route_t. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1mpls__route__mgr_1a8b067a9fb6e1f6a0d664c73957511335"></span>virtual void <tt class="descname">mpls_route_via_del</tt><big>(</big>mpls_route_via_t const &amp;<big>)</big> = 0</dt>
+<dd><p>Removes a via from an mpls_route_t. When all vias are removed, the route still exists with no nexthop information. </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Protected Functions</p>
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1mpls__route__mgr_1a88fc57cef70c16dda26ff77779c718f7"></span><tt class="descname">mpls_route_mgr</tt><big>(</big><big>)</big></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Private Members</p>
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1mpls__route__mgr_1a34f2448b2d00c3a29a89399819c26fe2"></span><tt class="descname">mpls_route_mgr</tt></dt>
+<dd></dd></dl>
+
+</div>
+</dd></dl>
+
+</dd></dl>
+
+<div class="section" id="type-definitions-in-mpls-route">
+<h2>Type definitions in <strong>mpls_route</strong><a class="headerlink" href="#type-definitions-in-mpls-route" title="Permalink to this headline">¶</a></h2>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">doxygenfile: Found multiple matches for file &#8220;eos/types/mpls_route.h </p>
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#"><strong>mpls_route</strong></a><ul>
+<li><a class="reference internal" href="#type-definitions-in-mpls-route">Type definitions in <strong>mpls_route</strong></a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="mpls.html"
+                        title="previous chapter"><strong>mpls</strong></a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="neighbor_table.html"
+                        title="next chapter"><strong>neighbor_table</strong></a></p>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="neighbor_table.html" title="neighbor_table"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="mpls.html" title="mpls"
+             >previous</a> |</li>
+        <li><a href="index.html">Arista EOS SDK 1.7.0 reference</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2014, Arista Networks.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>
