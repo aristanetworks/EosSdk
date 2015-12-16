@@ -104,6 +104,8 @@ operator<<(std::ostream& os, const fib_route_type_t & enum_val) {
       os << "ROUTE_TYPE_ISIS_LEVEL2";
    } else if (enum_val==ROUTE_TYPE_NEXTHOP_GROUP) {
       os << "ROUTE_TYPE_NEXTHOP_GROUP";
+   } else if (enum_val==ROUTE_TYPE_OSPF3) {
+      os << "ROUTE_TYPE_OSPF3";
    } else {
       os << "Unknown value";
    }

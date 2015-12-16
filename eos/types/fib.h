@@ -68,6 +68,7 @@ enum fib_route_type_t {
    ROUTE_TYPE_ISIS_LEVEL1,
    ROUTE_TYPE_ISIS_LEVEL2,
    ROUTE_TYPE_NEXTHOP_GROUP,
+   ROUTE_TYPE_OSPF3,
 };
 /** Appends a string representation of enum fib_route_type_t value to the ostream. */
 std::ostream& operator<<(std::ostream& os, const fib_route_type_t & enum_val);
