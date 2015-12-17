@@ -21,6 +21,7 @@
 #include "eos/policy_map.h"
 #include "eos/subintf.h"
 #include "eos/vrf.h"
+#include "eos/lldp.h"
 
 namespace eos {
 
@@ -129,5 +130,8 @@ INSTANTIATE_ITERATOR(nexthop_group_t, nexthop_group_iter_impl);
 INSTANTIATE_ITERATOR(policy_map_key_t, policy_map_iter_impl);
 INSTANTIATE_ITERATOR(intf_id_t, subintf_iter_impl);
 INSTANTIATE_ITERATOR(std::string, vrf_iter_impl);
+INSTANTIATE_ITERATOR(lldp_remote_system_t, lldp_remote_system_iter_impl);
+INSTANTIATE_ITERATOR(intf_id_t, lldp_intf_iter_impl);
+INSTANTIATE_ITERATOR(lldp_neighbor_t, lldp_neighbor_iter_impl);
 
 }

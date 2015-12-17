@@ -72,47 +72,54 @@ class EOS_SDK_PUBLIC lldp_handler : public base_handler<lldp_mgr, lldp_handler> 
 
    /// Called when a neighbor starts sending LLDP information. 
    /// `intf` refers to the local interface that this information was received on.
-   virtual void on_lldp_intf_set(intf_id_t intf);
+   virtual void on_lldp_intf_set(lldp_neighbor_t const & peer);
    /// Called when a neighbor's LLDP information ages out (or is disconnected).
-   virtual void on_lldp_intf_del(intf_id_t intf);
+   virtual void on_lldp_intf_del(lldp_neighbor_t const & peer);
    /// Called when the remote information has changed and all has been updated; 
    /// this can be used as an alternative to reacting to each single callback
    /// provided below.
-   virtual void on_lldp_intf_change(intf_id_t intf);
+   virtual void on_lldp_intf_change(lldp_neighbor_t const & peer);
 
    /*** Handlers called when information about the remote port changes ***/
 
    /* Callbacks for well-known TLVs, the 2 first ones are mandatory TLVs. */
    /// Called when the remote's "chassis ID" changed (mandatory TLV).
-   virtual void on_lldp_chassis_id(intf_id_t intf, lldp_chassis_id_t name);
+   virtual void on_lldp_chassis_id(lldp_neighbor_t const & peer,
+                                   lldp_chassis_id_t name);
    /// Called when the remote's "interface ID" changed (mandatory TLV).
-   virtual void on_lldp_intf_id(intf_id_t intf, lldp_intf_id_t name);
+   virtual void on_lldp_intf_id(lldp_neighbor_t const & peer,
+                                lldp_intf_id_t name);
    /// Called when the remote's "system name" changed.
-   virtual void on_lldp_system_name(intf_id_t intf, std::string const & name);
+   virtual void on_lldp_system_name(lldp_neighbor_t const & peer,
+                                    std::string const & name);
    /// Called when the remote's "system description" changed.
-   virtual void on_lldp_system_description(intf_id_t intf, std::string const & desc);
+   virtual void on_lldp_system_description(lldp_neighbor_t const & peer,
+                                           std::string const & desc);
    /// Called when the remote's "interface description" changed.
-   virtual void on_lldp_intf_description(intf_id_t intf, std::string const & descr);
+   virtual void on_lldp_intf_description(lldp_neighbor_t const & peer,
+                                         std::string const & descr);
    /// Called when the remote's "default vlan" changed.
-   virtual void on_lldp_default_vlan(intf_id_t intf, vlan_id_t vlan);
+   virtual void on_lldp_default_vlan(lldp_neighbor_t const & peer,
+                                     vlan_id_t vlan);
    /// Called when the remote's "management vlan" changed.
-   virtual void on_lldp_management_vlan(intf_id_t intf, vlan_id_t vlan);
+   virtual void on_lldp_management_vlan(lldp_neighbor_t const & peer,
+                                        vlan_id_t vlan);
    /// Called when the remote's "maximum transmission unit" changed.
-   virtual void on_lldp_max_frame_size(intf_id_t intf, uint32_t size);
+   virtual void on_lldp_max_frame_size(lldp_neighbor_t const & peer, uint32_t size);
    /// Called when the remote's "management address" changed.
-   virtual void on_lldp_management_address(intf_id_t intf,
+   virtual void on_lldp_management_address(lldp_neighbor_t const & peer,
                                   std::list<lldp_management_address_t> const & info);
    /// Called when the remote's "link aggregation config/status" changed.
-   virtual void on_lldp_lacp(intf_id_t intf, lldp_lacp_t const & info);
+   virtual void on_lldp_lacp(lldp_neighbor_t const & peer, lldp_lacp_t const & info);
    /// Called when the remote's "phy negotiation config/status" changed.
-   virtual void on_lldp_phy(intf_id_t intf, lldp_phy_t const & info);
+   virtual void on_lldp_phy(lldp_neighbor_t const & peer, lldp_phy_t const & info);
 
    /* Called on changes in non standard TLVs (aka organizationally defined TLVs). */
    /// Called when a new TLV type is received, or its content has changed.
-   virtual void on_lldp_tlv_set(intf_id_t intf, lldp_tlv_type_t type,
+   virtual void on_lldp_tlv_set(lldp_neighbor_t const & peer, lldp_tlv_type_t type,
                                 std::string const & data);
    /// Called when a TLV type previously received is now absent from advertisements.
-   virtual void on_lldp_tlv_del(intf_id_t intf, lldp_tlv_type_t type);
+   virtual void on_lldp_tlv_del(lldp_neighbor_t const & peer, lldp_tlv_type_t type);
 
    /*** Configuration change callbacks; when those happen, it means the lldp ***/
    /*** agent has processed the corresponding config you may have set earlier ***/
@@ -128,6 +135,39 @@ class EOS_SDK_PUBLIC lldp_handler : public base_handler<lldp_mgr, lldp_handler> 
 };
 
 
+/**** Begin internal forwards definitions, uninteresting stuff... *****/
+
+class lldp_intf_iter_impl;
+/// An iterator that yields a intf_id_t for each interface with lldp config
+class EOS_SDK_PUBLIC lldp_intf_iter_t : public iter_base<intf_id_t, 
+                                                         lldp_intf_iter_impl> {
+ private:
+   friend class lldp_intf_iter_impl;
+   explicit lldp_intf_iter_t(lldp_intf_iter_impl * const) EOS_SDK_PRIVATE;
+};
+
+class lldp_remote_system_iter_impl;
+/// An iterator that yields a lldp_remote_system_t for each neighbor on an interface
+class EOS_SDK_PUBLIC lldp_remote_system_iter_t : public 
+                      iter_base<lldp_remote_system_t, lldp_remote_system_iter_impl> {
+ private:
+   friend class lldp_remote_system_iter_impl;
+   explicit lldp_remote_system_iter_t(
+                               lldp_remote_system_iter_impl * const) EOS_SDK_PRIVATE;
+};
+
+class lldp_neighbor_iter_impl;
+/// An iterator that yields a lldp_neighbor_t for each neighbor (remote system)
+/// A combination of the lldp-remote-system and lldp-intf iterators.
+class EOS_SDK_PUBLIC lldp_neighbor_iter_t : public iter_base<lldp_neighbor_t, 
+                                                          lldp_neighbor_iter_impl> {
+ private:
+    friend class lldp_neighbor_iter_impl;
+    explicit lldp_neighbor_iter_t(lldp_neighbor_iter_impl * const) EOS_SDK_PRIVATE;
+};
+
+/**** End internal forwards definitions, uninteresting stuff... *****/
+
 /**
  * A manager for LLDP information.
  *
@@ -139,6 +179,17 @@ class EOS_SDK_PUBLIC lldp_handler : public base_handler<lldp_mgr, lldp_handler> 
 class EOS_SDK_PUBLIC lldp_mgr : public base_mgr<lldp_handler> {
  public:
    virtual ~lldp_mgr();
+
+   // Iterator yielding a intf_id_t for every interface with lldp configuration
+   virtual lldp_intf_iter_t lldp_intf_iter() const = 0;
+   // Iterator yielding a lldp_remote_system_t for every remote system on the
+   // specified interface
+   virtual lldp_remote_system_iter_t lldp_remote_system_iter(intf_id_t) const = 0;
+   // Iterator yielding a lldp_neighbor_t for every attached neighbor (all intf)
+   virtual lldp_neighbor_iter_t lldp_neighbor_iter() const = 0;
+   // Iterator yielding a lldp_neighbor_t for every neighbor visible across the
+   // specified local interface
+   virtual lldp_neighbor_iter_t lldp_neighbor_iter(intf_id_t local_intf) const = 0;
 
    // Configuration api so the agent can bootstrap itself: enable lldp if
    // agent needs it and not yet enabled -- off by default.
@@ -163,28 +214,28 @@ class EOS_SDK_PUBLIC lldp_mgr : public base_mgr<lldp_handler> {
 
    /*** mandatory TLVs ***/
    /// Get the chassisID of the remote interface (< 255 octets)
-   virtual lldp_chassis_id_t chassis_id (intf_id_t intf) const = 0;
+   virtual lldp_chassis_id_t chassis_id(lldp_neighbor_t const & peer) const = 0;
    /// Get the port ID of the remote interface (< 255 octets)
-   virtual lldp_intf_id_t intf_id(intf_id_t intf) const = 0;
+   virtual lldp_intf_id_t intf_id(lldp_neighbor_t const & peer) const = 0;
 
    /*** optional TLVs ***/
    /// interface description: max string size 255, empty if not rx-ed
-   virtual std::string intf_description(intf_id_t intf) const = 0;
+   virtual std::string intf_description(lldp_neighbor_t const & peer) const = 0;
    /// sysname: max string size 255, empty if not rx-ed
-   virtual std::string system_name(intf_id_t intf) const = 0;
+   virtual std::string system_name(lldp_neighbor_t const & peer) const = 0;
    /// sysdescr: max string size 255, empty if not rx-ed
-   virtual std::string system_description(intf_id_t intf) const = 0;
+   virtual std::string system_description(lldp_neighbor_t const & peer) const = 0;
    /// system capabilities bitmap, 'other' if not rx-ed
-   virtual lldp_syscap_t system_capabilities(intf_id_t intf) const = 0;
+   virtual lldp_syscap_t system_capabilities(lldp_neighbor_t const & peer) const = 0;
    /// The default vlan ID (vlan-id for untagged packets); 0 if none or not rx-ed
-   virtual vlan_id_t default_vlan(intf_id_t intf) const = 0;
+   virtual vlan_id_t default_vlan(lldp_neighbor_t const & peer) const = 0;
    /// The vlan-id on which the managment interface is available; 0 if none
-   virtual vlan_id_t management_vlan(intf_id_t intf) const = 0;
+   virtual vlan_id_t management_vlan(lldp_neighbor_t const & peer) const = 0;
    /// The max frame size on the link; 0 if not rx-ed
-   virtual uint32_t max_frame_size(intf_id_t intf) const = 0;
+   virtual uint32_t max_frame_size(lldp_neighbor_t const & peer) const = 0;
    /// Port-channel this interface is member of (and capability/status)
    /// !value returns false if this tlv was not received.
-   virtual lldp_lacp_t lacp(intf_id_t intf)  const = 0;
+   virtual lldp_lacp_t lacp(lldp_neighbor_t const & peer)  const = 0;
    /// management info (address, snmp-ifindex, sysDescr-oid)
    /// !value returns false if this tlv was not received.
    /// The type of address (and its encoding) is described using IANA's
@@ -193,23 +244,26 @@ class EOS_SDK_PUBLIC lldp_mgr : public base_mgr<lldp_handler> {
    /// ianaaddressfamilynumbers-mib.
    /// In EOS's case, the address family is an IPV4 address.
    virtual std::list<lldp_management_address_t> management_address(
-                                                           intf_id_t intf) const = 0;
+                                             lldp_neighbor_t const & peer) const = 0;
    /// The mac phy config status info (auto-negotiation)
    /// !value returns false if this tlv was not received.
-   virtual lldp_phy_t phy(intf_id_t intf) const = 0;
+   virtual lldp_phy_t phy(lldp_neighbor_t const & peer) const = 0;
 
    /// Send a/multiple application defined TLV on a interface.
    /// Transmission will occur every tx_timer until revoked.
-   virtual void tx_tlv_set(intf_id_t intf, lldp_tlv_type_t type,
+   virtual void tx_tlv_set(lldp_neighbor_t const & peer, lldp_tlv_type_t type,
                            std::string const & data) = 0;
-   virtual void tx_tlv_del(intf_id_t intf, lldp_tlv_type_t type) = 0;
+   virtual void tx_tlv_del(lldp_neighbor_t const & peer, lldp_tlv_type_t type) = 0;
    // Lookup a TLV received from the remote port.
    // If the TLV can be empty (a boolean), use tlv_exists(type) first
-   virtual std::string tlv(intf_id_t intf, lldp_tlv_type_t type) const = 0;
-   virtual bool tlv_exists(intf_id_t intf, lldp_tlv_type_t type) const = 0;
+   virtual std::string tlv(lldp_neighbor_t const & peer, lldp_tlv_type_t type) 
+                                                                           const = 0;
+   virtual bool tlv_exists(lldp_neighbor_t const & peer, lldp_tlv_type_t type) 
+                                                                           const = 0;
    /// Get en-block (there is no iterator, cannot be many given mtu limit
    /// this includes all "organizationnally defined TLVs" (owned by this app or not)
-   virtual std::map<lldp_tlv_type_t, std::string> tlvs(intf_id_t intf) const = 0;
+   virtual std::map<lldp_tlv_type_t, std::string> tlvs(lldp_neighbor_t const & peer)
+                                                                           const = 0;
 
  protected:
    lldp_mgr() EOS_SDK_PRIVATE;

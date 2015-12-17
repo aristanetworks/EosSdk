@@ -608,12 +608,42 @@ lldp_chassis_id_t::to_str() const {
    }
    /* not a known encoding: just dump as hex */
    int l = sprintf(buf, "%d:", encoding_);
-   for (uint32_t i=0; i<value_.length(); i++) {
+   /* well, unless it is all ascii */
+   uint32_t i;
+   for (i = 0; i < value_.length(); i++) {
+      if (!isalnum(int(value_[i]))) break;
+   }
+   if (i == value_.length()) {
+      snprintf(&buf[l], sizeof(buf)-l, "%s", value_.c_str());
+      return std::string(buf);
+   }
+   for (i = 0; i < value_.length(); i++) {
       if (i) l += snprintf(&buf[l], sizeof(buf)-l, ".");
       l += snprintf(&buf[l], sizeof(buf)-l, "%02x", (uint8_t)value_[i]);
    }
    return std::string(buf);
    
+}
+
+inline bool
+lldp_chassis_id_t::operator==(lldp_chassis_id_t const & other) const {
+   return encoding_ == other.encoding_ &&
+          value_ == other.value_;
+}
+
+inline bool
+lldp_chassis_id_t::operator!=(lldp_chassis_id_t const & other) const {
+   return !operator==(other);
+}
+
+inline bool
+lldp_chassis_id_t::operator<(lldp_chassis_id_t const & other) const {
+   if(encoding_ != other.encoding_) {
+      return encoding_ < other.encoding_;
+   } else if(value_ != other.value_) {
+      return value_ < other.value_;
+   }
+   return false;
 }
 
 inline std::string
@@ -720,12 +750,41 @@ lldp_intf_id_t::to_str() const {
    }
    /* not a known encoding: just dump as hex */
    int l = sprintf(buf, "%d:", encoding_);
+   /* well, unless it is all ascii */
+   for (uint32_t i=0; i<value_.length(); i++) {
+      if (!isalnum(int(value_[i]))) break;
+      if (i+1 == value_.length()) {
+         snprintf(&buf[l], sizeof(buf)-l, "%s", value_.c_str());
+         return std::string(buf);
+      }
+   }
    for (uint32_t i=0; i<value_.length(); i++) {
       if (i) l += snprintf(&buf[l], sizeof(buf)-l, ".");
       l += snprintf(&buf[l], sizeof(buf)-l, "%02x", (uint8_t)value_[i]);
    }
    return std::string(buf);
    
+}
+
+inline bool
+lldp_intf_id_t::operator==(lldp_intf_id_t const & other) const {
+   return encoding_ == other.encoding_ &&
+          value_ == other.value_;
+}
+
+inline bool
+lldp_intf_id_t::operator!=(lldp_intf_id_t const & other) const {
+   return !operator==(other);
+}
+
+inline bool
+lldp_intf_id_t::operator<(lldp_intf_id_t const & other) const {
+   if(encoding_ != other.encoding_) {
+      return encoding_ < other.encoding_;
+   } else if(value_ != other.value_) {
+      return value_ < other.value_;
+   }
+   return false;
 }
 
 inline std::string
@@ -740,6 +799,194 @@ lldp_intf_id_t::to_string() const {
 
 inline std::ostream&
 operator<<(std::ostream& os, const lldp_intf_id_t& obj) {
+   os << obj.to_string();
+   return os;
+}
+
+
+
+// remote system, default constructor.
+inline lldp_remote_system_t::lldp_remote_system_t() :
+      chassis_(lldp_chassis_id_t()), port_(lldp_intf_id_t()) {
+}
+
+// remote system, full constructor.
+inline lldp_remote_system_t::lldp_remote_system_t(lldp_chassis_id_t chassis, 
+                                                  lldp_intf_id_t port) :
+      chassis_(chassis), port_(port) {
+}
+
+inline lldp_chassis_id_t
+lldp_remote_system_t::chassis() const {
+   return chassis_;
+}
+
+inline void
+lldp_remote_system_t::chassis_is(lldp_chassis_id_t chassis) {
+   chassis_ = chassis;
+}
+
+inline lldp_intf_id_t
+lldp_remote_system_t::port() const {
+   return port_;
+}
+
+inline void
+lldp_remote_system_t::port_is(lldp_intf_id_t port) {
+   port_ = port;
+}
+
+inline std::string
+lldp_remote_system_t::to_str() const {
+   
+   char buf[128];
+   snprintf(buf, 128, "%s;%s", chassis_.to_str().c_str(),
+                               port_.to_str().c_str());
+   return std::string(buf);
+   
+}
+
+inline bool
+lldp_remote_system_t::operator==(lldp_remote_system_t const & other) const {
+   return chassis_ == other.chassis_ &&
+          port_ == other.port_;
+}
+
+inline bool
+lldp_remote_system_t::operator!=(lldp_remote_system_t const & other) const {
+   return !operator==(other);
+}
+
+inline bool
+lldp_remote_system_t::operator<(lldp_remote_system_t const & other) const {
+   if(chassis_ != other.chassis_) {
+      return chassis_ < other.chassis_;
+   } else if(port_ != other.port_) {
+      return port_ < other.port_;
+   }
+   return false;
+}
+
+inline uint32_t
+lldp_remote_system_t::hash() const {
+   uint32_t ret = 0;
+   ret = hash_mix::mix((uint8_t *)&chassis_,
+              sizeof(lldp_chassis_id_t), ret);
+   ret = hash_mix::mix((uint8_t *)&port_,
+              sizeof(lldp_intf_id_t), ret);
+   ret = hash_mix::final_mix(ret);
+   return ret;
+}
+
+inline std::string
+lldp_remote_system_t::to_string() const {
+   std::ostringstream ss;
+   ss << "lldp_remote_system_t(";
+   ss << "chassis=" << chassis_;
+   ss << ", port=" << port_;
+   ss << ")";
+   return ss.str();
+}
+
+inline std::ostream&
+operator<<(std::ostream& os, const lldp_remote_system_t& obj) {
+   os << obj.to_string();
+   return os;
+}
+
+
+
+// remote system, default constructor.
+inline lldp_neighbor_t::lldp_neighbor_t() :
+      intf_(), remote_system_() {
+}
+
+// first remote system.
+inline lldp_neighbor_t::lldp_neighbor_t(intf_id_t intf) :
+      intf_(intf), remote_system_() {
+}
+
+// specific remote system.
+inline lldp_neighbor_t::lldp_neighbor_t(intf_id_t intf, 
+                                        lldp_remote_system_t remote_system) :
+      intf_(intf), remote_system_(remote_system) {
+}
+
+inline intf_id_t
+lldp_neighbor_t::intf() const {
+   return intf_;
+}
+
+inline void
+lldp_neighbor_t::intf_is(intf_id_t intf) {
+   intf_ = intf;
+}
+
+inline lldp_remote_system_t
+lldp_neighbor_t::remote_system() const {
+   return remote_system_;
+}
+
+inline void
+lldp_neighbor_t::remote_system_is(lldp_remote_system_t remote_system) {
+   remote_system_ = remote_system;
+}
+
+inline std::string
+lldp_neighbor_t::to_str() const {
+   
+   char buf[128];
+   snprintf(buf, 128, "%s;%s;%s", intf_.to_string().c_str(),
+           remote_system_.chassis().to_str().c_str(),
+           remote_system_.port().to_str().c_str());
+   return std::string(buf);
+   
+}
+
+inline bool
+lldp_neighbor_t::operator==(lldp_neighbor_t const & other) const {
+   return intf_ == other.intf_ &&
+          remote_system_ == other.remote_system_;
+}
+
+inline bool
+lldp_neighbor_t::operator!=(lldp_neighbor_t const & other) const {
+   return !operator==(other);
+}
+
+inline bool
+lldp_neighbor_t::operator<(lldp_neighbor_t const & other) const {
+   if(intf_ != other.intf_) {
+      return intf_ < other.intf_;
+   } else if(remote_system_ != other.remote_system_) {
+      return remote_system_ < other.remote_system_;
+   }
+   return false;
+}
+
+inline uint32_t
+lldp_neighbor_t::hash() const {
+   uint32_t ret = 0;
+   ret = hash_mix::mix((uint8_t *)&intf_,
+              sizeof(intf_id_t), ret);
+   ret = hash_mix::mix((uint8_t *)&remote_system_,
+              sizeof(lldp_remote_system_t), ret);
+   ret = hash_mix::final_mix(ret);
+   return ret;
+}
+
+inline std::string
+lldp_neighbor_t::to_string() const {
+   std::ostringstream ss;
+   ss << "lldp_neighbor_t(";
+   ss << "intf=" << intf_.to_string();
+   ss << ", remote_system=" << remote_system_;
+   ss << ")";
+   return ss.str();
+}
+
+inline std::ostream&
+operator<<(std::ostream& os, const lldp_neighbor_t& obj) {
    os << obj.to_string();
    return os;
 }

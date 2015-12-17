@@ -317,6 +317,9 @@ class EOS_SDK_PUBLIC lldp_chassis_id_t {
 
    /** String representation of a chassisId. */
    std::string to_str() const;
+   bool operator==(lldp_chassis_id_t const & other) const;
+   bool operator!=(lldp_chassis_id_t const & other) const;
+   bool operator<(lldp_chassis_id_t const & other) const;
    /** Returns a string representation of the current object's values. */
    std::string to_string() const;
    /**
@@ -361,6 +364,9 @@ class EOS_SDK_PUBLIC lldp_intf_id_t {
 
    /** String representation of a chassisId. */
    std::string to_str() const;
+   bool operator==(lldp_intf_id_t const & other) const;
+   bool operator!=(lldp_intf_id_t const & other) const;
+   bool operator<(lldp_intf_id_t const & other) const;
    /** Returns a string representation of the current object's values. */
    std::string to_string() const;
    /**
@@ -372,6 +378,83 @@ class EOS_SDK_PUBLIC lldp_intf_id_t {
  private:
    lldp_intf_id_encoding_t encoding_;
    std::string value_;
+};
+
+/** Identifies a remote system as seen across an LLDP interface. */
+class EOS_SDK_PUBLIC lldp_remote_system_t {
+ public:
+   lldp_remote_system_t();
+   lldp_remote_system_t(lldp_chassis_id_t chassis, lldp_intf_id_t port);
+
+   /** Getter for 'chassis': The chassis-id of the remote system. */
+   lldp_chassis_id_t chassis() const;
+   /** Setter for 'chassis'. */
+   void chassis_is(lldp_chassis_id_t chassis);
+
+   /** Getter for 'port': The port-id of the remote system. */
+   lldp_intf_id_t port() const;
+   /** Setter for 'port'. */
+   void port_is(lldp_intf_id_t port);
+
+   /** String representation of a chassisId. */
+   std::string to_str() const;
+   bool operator==(lldp_remote_system_t const & other) const;
+   bool operator!=(lldp_remote_system_t const & other) const;
+   bool operator<(lldp_remote_system_t const & other) const;
+   /** The hash function for type lldp_remote_system_t. */
+   uint32_t hash() const;
+   /** Returns a string representation of the current object's values. */
+   std::string to_string() const;
+   /**
+    * A utility stream operator that adds a string representation of
+    * lldp_remote_system_t to the ostream.
+    */
+   friend std::ostream& operator<<(std::ostream& os, 
+                                   const lldp_remote_system_t& obj);
+
+ private:
+   lldp_chassis_id_t chassis_;
+   lldp_intf_id_t port_;
+};
+
+/** Identifies a remote system seen from the local switch. */
+class EOS_SDK_PUBLIC lldp_neighbor_t {
+ public:
+   lldp_neighbor_t();
+   explicit lldp_neighbor_t(intf_id_t intf);
+   lldp_neighbor_t(intf_id_t intf, lldp_remote_system_t remote_system);
+
+   /** Getter for 'intf': The local interface that sees this neighbor. */
+   intf_id_t intf() const;
+   /** Setter for 'intf'. */
+   void intf_is(intf_id_t intf);
+
+   /**
+    * Getter for 'remote_system': The id of the remote system (an interface can see
+    * more than one).
+    */
+   lldp_remote_system_t remote_system() const;
+   /** Setter for 'remote_system'. */
+   void remote_system_is(lldp_remote_system_t remote_system);
+
+   /** String representation of a chassisId. */
+   std::string to_str() const;
+   bool operator==(lldp_neighbor_t const & other) const;
+   bool operator!=(lldp_neighbor_t const & other) const;
+   bool operator<(lldp_neighbor_t const & other) const;
+   /** The hash function for type lldp_neighbor_t. */
+   uint32_t hash() const;
+   /** Returns a string representation of the current object's values. */
+   std::string to_string() const;
+   /**
+    * A utility stream operator that adds a string representation of
+    * lldp_neighbor_t to the ostream.
+    */
+   friend std::ostream& operator<<(std::ostream& os, const lldp_neighbor_t& obj);
+
+ private:
+   intf_id_t intf_;
+   lldp_remote_system_t remote_system_;
 };
 }
 
