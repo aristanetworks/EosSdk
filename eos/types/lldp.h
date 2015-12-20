@@ -316,7 +316,7 @@ class EOS_SDK_PUBLIC lldp_chassis_id_t {
    std::string value() const;
 
    /** String representation of a chassisId. */
-   std::string to_str() const;
+   std::string repr() const;
    bool operator==(lldp_chassis_id_t const & other) const;
    bool operator!=(lldp_chassis_id_t const & other) const;
    bool operator<(lldp_chassis_id_t const & other) const;
@@ -363,7 +363,7 @@ class EOS_SDK_PUBLIC lldp_intf_id_t {
    std::string value() const;
 
    /** String representation of a chassisId. */
-   std::string to_str() const;
+   std::string repr() const;
    bool operator==(lldp_intf_id_t const & other) const;
    bool operator!=(lldp_intf_id_t const & other) const;
    bool operator<(lldp_intf_id_t const & other) const;
@@ -397,7 +397,7 @@ class EOS_SDK_PUBLIC lldp_remote_system_t {
    void port_is(lldp_intf_id_t port);
 
    /** String representation of a chassisId. */
-   std::string to_str() const;
+   std::string repr() const;
    bool operator==(lldp_remote_system_t const & other) const;
    bool operator!=(lldp_remote_system_t const & other) const;
    bool operator<(lldp_remote_system_t const & other) const;
@@ -438,7 +438,7 @@ class EOS_SDK_PUBLIC lldp_neighbor_t {
    void remote_system_is(lldp_remote_system_t remote_system);
 
    /** String representation of a chassisId. */
-   std::string to_str() const;
+   std::string repr() const;
    bool operator==(lldp_neighbor_t const & other) const;
    bool operator!=(lldp_neighbor_t const & other) const;
    bool operator<(lldp_neighbor_t const & other) const;

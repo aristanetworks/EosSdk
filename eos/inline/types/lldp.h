@@ -571,7 +571,7 @@ lldp_chassis_id_t::value() const {
 }
 
 inline std::string
-lldp_chassis_id_t::to_str() const {
+lldp_chassis_id_t::repr() const {
    
    char buf[128];
    if (encoding_ == LLDP_CHASSIS_INTF_NAME) {
@@ -713,7 +713,7 @@ lldp_intf_id_t::value() const {
 }
 
 inline std::string
-lldp_intf_id_t::to_str() const {
+lldp_intf_id_t::repr() const {
    
    char buf[128];
    if (encoding_ == LLDP_INTF_NAME) {
@@ -837,11 +837,11 @@ lldp_remote_system_t::port_is(lldp_intf_id_t port) {
 }
 
 inline std::string
-lldp_remote_system_t::to_str() const {
+lldp_remote_system_t::repr() const {
    
    char buf[128];
-   snprintf(buf, 128, "%s;%s", chassis_.to_str().c_str(),
-                               port_.to_str().c_str());
+   snprintf(buf, 128, "%s;%s", chassis_.repr().c_str(),
+                               port_.repr().c_str());
    return std::string(buf);
    
 }
@@ -933,12 +933,12 @@ lldp_neighbor_t::remote_system_is(lldp_remote_system_t remote_system) {
 }
 
 inline std::string
-lldp_neighbor_t::to_str() const {
+lldp_neighbor_t::repr() const {
    
    char buf[128];
    snprintf(buf, 128, "%s;%s;%s", intf_.to_string().c_str(),
-           remote_system_.chassis().to_str().c_str(),
-           remote_system_.port().to_str().c_str());
+           remote_system_.chassis().repr().c_str(),
+           remote_system_.port().repr().c_str());
    return std::string(buf);
    
 }
