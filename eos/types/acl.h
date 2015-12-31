@@ -100,6 +100,7 @@ class EOS_SDK_PUBLIC acl_ttl_spec_t {
 
    bool operator==(acl_ttl_spec_t const & other) const;
    bool operator!=(acl_ttl_spec_t const & other) const;
+   bool operator<(acl_ttl_spec_t const & other) const;
    /** Returns a string representation of the current object's values. */
    std::string to_string() const;
    /**
@@ -142,6 +143,7 @@ class EOS_SDK_PUBLIC acl_port_spec_t {
 
    bool operator==(acl_port_spec_t const & other) const;
    bool operator!=(acl_port_spec_t const & other) const;
+   bool operator<(acl_port_spec_t const & other) const;
    /** Returns a string representation of the current object's values. */
    std::string to_string() const;
    /**
@@ -280,6 +282,11 @@ class EOS_SDK_PUBLIC acl_rule_ip_t : public acl_rule_base_t {
    acl_port_spec_t destination_port() const;
    void destination_port_is(acl_port_spec_t destination_port);
 
+   /** Getter for 'nexthop_group': match nexthop-group in the FIB lookup result. */
+   std::string nexthop_group() const;
+   /** Setter for 'nexthop_group'. */
+   void nexthop_group_is(std::string nexthop_group);
+
    /** Getter for 'tcp_flags': bitmask of TCP flags to match, if set. */
    uint16_t tcp_flags() const;
    /** Setter for 'tcp_flags'. */
@@ -331,6 +338,7 @@ class EOS_SDK_PUBLIC acl_rule_ip_t : public acl_rule_base_t {
 
    bool operator==(acl_rule_ip_t const & other) const;
    bool operator!=(acl_rule_ip_t const & other) const;
+   bool operator<(acl_rule_ip_t const & other) const;
    /** Returns a string representation of the current object's values. */
    std::string to_string() const;
    /**
@@ -350,6 +358,7 @@ class EOS_SDK_PUBLIC acl_rule_ip_t : public acl_rule_base_t {
    ip_addr_mask_t destination_addr_;
    acl_port_spec_t source_port_;
    acl_port_spec_t destination_port_;
+   std::string nexthop_group_;
    uint16_t tcp_flags_;
    bool established_;
    uint16_t icmp_type_;

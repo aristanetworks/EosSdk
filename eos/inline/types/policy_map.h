@@ -62,6 +62,22 @@ operator<<(std::ostream& os, const policy_action_type_t & enum_val) {
 
 
 
+inline std::ostream&
+operator<<(std::ostream& os, const policy_map_rule_type_t & enum_val) {
+   if (enum_val==POLICY_RULE_TYPE_CLASSMAP) {
+      os << "POLICY_RULE_TYPE_CLASSMAP";
+   } else if (enum_val==POLICY_RULE_TYPE_IPV4) {
+      os << "POLICY_RULE_TYPE_IPV4";
+   } else if (enum_val==POLICY_RULE_TYPE_IPV6) {
+      os << "POLICY_RULE_TYPE_IPV6";
+   } else {
+      os << "Unknown value";
+   }
+   return os;
+}
+
+
+
 inline policy_map_key_t::policy_map_key_t() :
       name_(), feature_() {
 }
@@ -266,11 +282,12 @@ operator<<(std::ostream& os, const policy_map_action_t& obj) {
 
 
 inline policy_map_rule_t::policy_map_rule_t() :
-      class_map_key_(), actions_() {
+      class_map_key_(), policy_map_rule_type_(), raw_rule_(), actions_() {
 }
 
 inline policy_map_rule_t::policy_map_rule_t(class_map_key_t const & class_map_key) :
-      class_map_key_(class_map_key), actions_() {
+      class_map_key_(class_map_key), policy_map_rule_type_(), raw_rule_(), 
+      actions_() {
 }
 
 inline class_map_key_t
@@ -281,6 +298,27 @@ policy_map_rule_t::class_map_key() const {
 inline void
 policy_map_rule_t::class_map_key_is(class_map_key_t const & class_map_key) {
    class_map_key_ = class_map_key;
+}
+
+inline policy_map_rule_type_t
+policy_map_rule_t::policy_map_rule_type() const {
+   return policy_map_rule_type_;
+}
+
+inline void
+policy_map_rule_t::policy_map_rule_type_is(
+         policy_map_rule_type_t policy_map_rule_type) {
+   policy_map_rule_type_ = policy_map_rule_type;
+}
+
+inline acl_rule_ip_t
+policy_map_rule_t::raw_rule() const {
+   return raw_rule_;
+}
+
+inline void
+policy_map_rule_t::raw_rule_is(acl_rule_ip_t raw_rule) {
+   raw_rule_ = raw_rule;
 }
 
 inline std::set<policy_map_action_t> const &
@@ -315,9 +353,18 @@ policy_map_rule_t::action_del(policy_action_type_t action_type) {
    }
 }
 
+inline void
+policy_map_rule_t::raw_rule_is(acl_rule_ip_t acl_rule, 
+                               policy_map_rule_type_t rule_type) {
+   policy_map_rule_type_is(rule_type);
+   raw_rule_is(acl_rule);
+}
+
 inline bool
 policy_map_rule_t::operator==(policy_map_rule_t const & other) const {
    return class_map_key_ == other.class_map_key_ &&
+          policy_map_rule_type_ == other.policy_map_rule_type_ &&
+          raw_rule_ == other.raw_rule_ &&
           actions_ == other.actions_;
 }
 
@@ -330,6 +377,10 @@ inline bool
 policy_map_rule_t::operator<(policy_map_rule_t const & other) const {
    if(class_map_key_ != other.class_map_key_) {
       return class_map_key_ < other.class_map_key_;
+   } else if(policy_map_rule_type_ != other.policy_map_rule_type_) {
+      return policy_map_rule_type_ < other.policy_map_rule_type_;
+   } else if(raw_rule_ != other.raw_rule_) {
+      return raw_rule_ < other.raw_rule_;
    } else if(actions_ != other.actions_) {
       return actions_ < other.actions_;
    }
@@ -341,6 +392,8 @@ policy_map_rule_t::to_string() const {
    std::ostringstream ss;
    ss << "policy_map_rule_t(";
    ss << "class_map_key=" << class_map_key_;
+   ss << ", policy_map_rule_type=" << policy_map_rule_type_;
+   ss << ", raw_rule=" << raw_rule_;
    ss << ", actions=" <<"'";
    bool first_actions = true;
    for (auto it=actions_.cbegin(); it!=actions_.cend(); ++it) {

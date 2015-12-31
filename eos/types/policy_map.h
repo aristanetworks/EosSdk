@@ -68,6 +68,18 @@ enum policy_action_type_t {
  */
 std::ostream& operator<<(std::ostream& os, const policy_action_type_t & enum_val);
 
+/** The policy map rule type. Valid types are IPV4 IPV6 and CLASSMAP. */
+enum policy_map_rule_type_t {
+   POLICY_RULE_TYPE_CLASSMAP,
+   POLICY_RULE_TYPE_IPV4,
+   POLICY_RULE_TYPE_IPV6,
+};
+/**
+ * Appends a string representation of enum policy_map_rule_type_t value to the
+ * ostream.
+ */
+std::ostream& operator<<(std::ostream& os, const policy_map_rule_type_t & enum_val);
+
 /** The key used to uniquely identify both class and policy maps. */
 class EOS_SDK_PUBLIC policy_map_key_t {
  public:
@@ -184,10 +196,17 @@ class EOS_SDK_PUBLIC policy_map_action_t {
 /**
  * A policy map rule, describing a traffic match and actions.
  *
- * A rule can match IP traffic via a class map, or can choose to match all MPLS
- * traffic. To use a class map, use the explicit constructor or create a default
- * policy map rule and set the class map with class_map_key_is().
+ * A rule works by creating a filter to match only certain types of IP traffic. Any
+ * traffic that passes this filter then has the corresponding `policy_map_action_t`
+ * actions applied. For example, a rule can specify that any traffic on Vlan42
+ * should have its traffic class set to 4 and should be forwarded out of
+ * nexthop_group "foo".
  *
+ * The match portion of a rule can take one of two forms: class maps or raw match
+ * rules. Class maps let you combine various ACLs to decide whether to match or
+ * ignore traffic. These objects are managed by the `class_map_mgr` in
+ * `eos/class_map.h`. Alternatively, you can use a shorthand and specify just a
+ * single `acl_rule_ip_t`, which will match traffic that passes that rule.
  * Actions can be set at once or added or removed one at a time.
  */
 class EOS_SDK_PUBLIC policy_map_rule_t {
@@ -203,6 +222,12 @@ class EOS_SDK_PUBLIC policy_map_rule_t {
    /** Setter for 'class_map_key'. */
    void class_map_key_is(class_map_key_t const & class_map_key);
 
+   policy_map_rule_type_t policy_map_rule_type() const;
+   void policy_map_rule_type_is(policy_map_rule_type_t policy_map_rule_type);
+
+   acl_rule_ip_t raw_rule() const;
+   void raw_rule_is(acl_rule_ip_t raw_rule);
+
    /**
     * Getter for 'actions': the set of actions configured for this particular rule.
     */
@@ -215,6 +240,7 @@ class EOS_SDK_PUBLIC policy_map_rule_t {
    void action_del(policy_map_action_t const & value);
 
    void action_del(policy_action_type_t action_type);
+   void raw_rule_is(acl_rule_ip_t acl_rule, policy_map_rule_type_t rule_type);
    bool operator==(policy_map_rule_t const & other) const;
    bool operator!=(policy_map_rule_t const & other) const;
    bool operator<(policy_map_rule_t const & other) const;
@@ -228,6 +254,8 @@ class EOS_SDK_PUBLIC policy_map_rule_t {
 
  private:
    class_map_key_t class_map_key_;
+   policy_map_rule_type_t policy_map_rule_type_;
+   acl_rule_ip_t raw_rule_;
    std::set<policy_map_action_t> actions_;
 };
 

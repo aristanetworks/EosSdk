@@ -148,6 +148,16 @@ acl_ttl_spec_t::operator!=(acl_ttl_spec_t const & other) const {
    return !operator==(other);
 }
 
+inline bool
+acl_ttl_spec_t::operator<(acl_ttl_spec_t const & other) const {
+   if(oper_ != other.oper_) {
+      return oper_ < other.oper_;
+   } else if(ttl_ != other.ttl_) {
+      return ttl_ < other.ttl_;
+   }
+   return false;
+}
+
 inline std::string
 acl_ttl_spec_t::to_string() const {
    std::ostringstream ss;
@@ -219,6 +229,16 @@ acl_port_spec_t::operator==(acl_port_spec_t const & other) const {
 inline bool
 acl_port_spec_t::operator!=(acl_port_spec_t const & other) const {
    return !operator==(other);
+}
+
+inline bool
+acl_port_spec_t::operator<(acl_port_spec_t const & other) const {
+   if(oper_ != other.oper_) {
+      return oper_ < other.oper_;
+   } else if(ports_ != other.ports_) {
+      return ports_ < other.ports_;
+   }
+   return false;
 }
 
 inline std::string
@@ -411,9 +431,9 @@ operator<<(std::ostream& os, const acl_rule_base_t& obj) {
 inline acl_rule_ip_t::acl_rule_ip_t() :
       vlan_(), vlan_mask_(0xFFF), inner_vlan_(), inner_vlan_mask_(0xFFF), 
       ip_protocol_(), ttl_(), source_addr_(), destination_addr_(), source_port_(), 
-      destination_port_(), tcp_flags_(), established_(), icmp_type_(ALL_ICMP), 
-      icmp_code_(ALL_ICMP), priority_value_(), priority_mask_(), 
-      match_fragments_(), match_ip_priority_() {
+      destination_port_(), nexthop_group_(), tcp_flags_(), established_(), 
+      icmp_type_(ALL_ICMP), icmp_code_(ALL_ICMP), priority_value_(), 
+      priority_mask_(), match_fragments_(), match_ip_priority_() {
 }
 
 inline vlan_id_t
@@ -516,6 +536,16 @@ acl_rule_ip_t::destination_port_is(acl_port_spec_t destination_port) {
    destination_port_ = destination_port;
 }
 
+inline std::string
+acl_rule_ip_t::nexthop_group() const {
+   return nexthop_group_;
+}
+
+inline void
+acl_rule_ip_t::nexthop_group_is(std::string nexthop_group) {
+   nexthop_group_ = nexthop_group;
+}
+
 inline uint16_t
 acl_rule_ip_t::tcp_flags() const {
    return tcp_flags_;
@@ -608,6 +638,7 @@ acl_rule_ip_t::operator==(acl_rule_ip_t const & other) const {
           destination_addr_ == other.destination_addr_ &&
           source_port_ == other.source_port_ &&
           destination_port_ == other.destination_port_ &&
+          nexthop_group_ == other.nexthop_group_ &&
           tcp_flags_ == other.tcp_flags_ &&
           established_ == other.established_ &&
           icmp_type_ == other.icmp_type_ &&
@@ -621,6 +652,50 @@ acl_rule_ip_t::operator==(acl_rule_ip_t const & other) const {
 inline bool
 acl_rule_ip_t::operator!=(acl_rule_ip_t const & other) const {
    return !operator==(other);
+}
+
+inline bool
+acl_rule_ip_t::operator<(acl_rule_ip_t const & other) const {
+   if(vlan_ != other.vlan_) {
+      return vlan_ < other.vlan_;
+   } else if(vlan_mask_ != other.vlan_mask_) {
+      return vlan_mask_ < other.vlan_mask_;
+   } else if(inner_vlan_ != other.inner_vlan_) {
+      return inner_vlan_ < other.inner_vlan_;
+   } else if(inner_vlan_mask_ != other.inner_vlan_mask_) {
+      return inner_vlan_mask_ < other.inner_vlan_mask_;
+   } else if(ip_protocol_ != other.ip_protocol_) {
+      return ip_protocol_ < other.ip_protocol_;
+   } else if(ttl_ != other.ttl_) {
+      return ttl_ < other.ttl_;
+   } else if(source_addr_ != other.source_addr_) {
+      return source_addr_ < other.source_addr_;
+   } else if(destination_addr_ != other.destination_addr_) {
+      return destination_addr_ < other.destination_addr_;
+   } else if(source_port_ != other.source_port_) {
+      return source_port_ < other.source_port_;
+   } else if(destination_port_ != other.destination_port_) {
+      return destination_port_ < other.destination_port_;
+   } else if(nexthop_group_ != other.nexthop_group_) {
+      return nexthop_group_ < other.nexthop_group_;
+   } else if(tcp_flags_ != other.tcp_flags_) {
+      return tcp_flags_ < other.tcp_flags_;
+   } else if(established_ != other.established_) {
+      return established_ < other.established_;
+   } else if(icmp_type_ != other.icmp_type_) {
+      return icmp_type_ < other.icmp_type_;
+   } else if(icmp_code_ != other.icmp_code_) {
+      return icmp_code_ < other.icmp_code_;
+   } else if(priority_value_ != other.priority_value_) {
+      return priority_value_ < other.priority_value_;
+   } else if(priority_mask_ != other.priority_mask_) {
+      return priority_mask_ < other.priority_mask_;
+   } else if(match_fragments_ != other.match_fragments_) {
+      return match_fragments_ < other.match_fragments_;
+   } else if(match_ip_priority_ != other.match_ip_priority_) {
+      return match_ip_priority_ < other.match_ip_priority_;
+   }
+   return false;
 }
 
 inline std::string
@@ -637,6 +712,7 @@ acl_rule_ip_t::to_string() const {
    ss << ", destination_addr=" << destination_addr_.to_string();
    ss << ", source_port=" << source_port_;
    ss << ", destination_port=" << destination_port_;
+   ss << ", nexthop_group='" << nexthop_group_ << "'";
    ss << ", tcp_flags=" << tcp_flags_;
    ss << ", established=" << established_;
    ss << ", icmp_type=" << icmp_type_;

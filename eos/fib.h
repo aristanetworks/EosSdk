@@ -89,6 +89,9 @@ class EOS_SDK_PUBLIC fib_mgr : public base_mgr<fib_handler> {
    virtual bool fib_route_exists(fib_route_key_t const &) = 0;
    virtual fib_route_t fib_route(fib_route_key_t const &) = 0;
 
+   // VRF Management
+   virtual bool register_vrf(std::string const &, bool) = 0;
+
    /**
     * Returns the mode this manager is in.
     * This mode is set during the construction of the manager, i.e.:
