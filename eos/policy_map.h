@@ -162,6 +162,14 @@ class EOS_SDK_PUBLIC policy_map_handler : public base_handler<policy_map_mgr,
     */
    virtual void on_policy_map_sync_fail(policy_map_key_t const &,
                                         std::string const & message);
+
+   /**
+    * Callback fired when policy map configuration changes.
+    *
+    * @param name Policy map name.
+    */
+   virtual void on_policy_map_config_set(policy_map_key_t const &);
+
  protected:
    policy_map_mgr * policy_map_mgr_;
    policy_feature_t feature_;

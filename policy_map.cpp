@@ -44,6 +44,11 @@ policy_map_handler::on_policy_map_sync(policy_map_key_t const & key) {
    // TODO: no op impl.
 }
 
+void
+policy_map_handler::on_policy_map_config_set(policy_map_key_t const & name) {
+   // TODO: no op impl.
+}
+
 class policy_map_mgr_impl : public policy_map_mgr {
  public:
    policy_map_mgr_impl() {
