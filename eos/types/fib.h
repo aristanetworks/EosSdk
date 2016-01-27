@@ -6,6 +6,7 @@
 
 #include <eos/ip.h>
 #include <eos/ip_route.h>
+#include <eos/mpls.h>
 #include <eos/utility.h>
 #include <forward_list>
 #include <sstream>
@@ -162,6 +163,9 @@ class EOS_SDK_PUBLIC fib_via_t {
    intf_id_t intf() const;
    void intf_is(intf_id_t intf);
 
+   mpls_label_t mpls_label() const;
+   void mpls_label_is(mpls_label_t mpls_label);
+
    bool operator==(fib_via_t const & other) const;
    bool operator!=(fib_via_t const & other) const;
    /** Returns a string representation of the current object's values. */
@@ -175,6 +179,7 @@ class EOS_SDK_PUBLIC fib_via_t {
  private:
    ip_addr_t hop_;
    intf_id_t intf_;
+   mpls_label_t mpls_label_;
 };
 
 enum fib_fec_type_t {

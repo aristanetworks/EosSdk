@@ -256,11 +256,11 @@ operator<<(std::ostream& os, const fib_fec_key_t& obj) {
 
 // Default constructor.
 inline fib_via_t::fib_via_t() :
-      hop_(), intf_() {
+      hop_(), intf_(), mpls_label_() {
 }
 
 inline fib_via_t::fib_via_t(ip_addr_t const & hop, intf_id_t intf) :
-      hop_(hop), intf_(intf) {
+      hop_(hop), intf_(intf), mpls_label_() {
 }
 
 inline ip_addr_t
@@ -283,10 +283,21 @@ fib_via_t::intf_is(intf_id_t intf) {
    intf_ = intf;
 }
 
+inline mpls_label_t
+fib_via_t::mpls_label() const {
+   return mpls_label_;
+}
+
+inline void
+fib_via_t::mpls_label_is(mpls_label_t mpls_label) {
+   mpls_label_ = mpls_label;
+}
+
 inline bool
 fib_via_t::operator==(fib_via_t const & other) const {
    return hop_ == other.hop_ &&
-          intf_ == other.intf_;
+          intf_ == other.intf_ &&
+          mpls_label_ == other.mpls_label_;
 }
 
 inline bool
@@ -300,6 +311,7 @@ fib_via_t::to_string() const {
    ss << "fib_via_t(";
    ss << "hop=" << hop_.to_string();
    ss << ", intf=" << intf_.to_string();
+   ss << ", mpls_label=" << mpls_label_.to_string();
    ss << ")";
    return ss.str();
 }
