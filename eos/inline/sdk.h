@@ -34,6 +34,13 @@ inline aresolve_mgr * sdk::get_aresolve_mgr() {
    return aresolve_mgr_;
 }
 
+inline bfd_session_mgr * sdk::get_bfd_session_mgr() {
+   if (!bfd_session_mgr_) {
+      init_bfd_session_mgr();
+   }
+   return bfd_session_mgr_;
+}
+
 inline class_map_mgr * sdk::get_class_map_mgr() {
    if (!class_map_mgr_) {
       init_class_map_mgr();
@@ -216,6 +223,7 @@ inline vrf_mgr * sdk::get_vrf_mgr() {
    }
    return vrf_mgr_;
 }
+
 
 inline lldp_mgr * sdk::get_lldp_mgr() {
    if (!lldp_mgr_) {

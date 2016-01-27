@@ -3,6 +3,7 @@
 
 #include "eos/acl.h"
 #include "eos/agent.h"
+#include "eos/bfd.h"
 #include "eos/class_map.h"
 #include "eos/decap_group.h"
 #include "eos/directflow.h"
@@ -108,6 +109,7 @@ INSTANTIATE_ITERATOR(acl_rule_eth_entry_t, acl_rule_eth_iter_impl);
 INSTANTIATE_ITERATOR(acl_rule_ip_entry_t, acl_rule_ip_iter_impl);
 INSTANTIATE_ITERATOR(std::string, agent_option_iter_impl);
 INSTANTIATE_ITERATOR(std::string, agent_status_iter_impl);
+INSTANTIATE_ITERATOR(bfd_session_key_t, bfd_session_iter_impl);
 INSTANTIATE_ITERATOR(class_map_key_t, class_map_iter_impl);
 INSTANTIATE_ITERATOR(decap_group_t, decap_group_iter_impl);
 INSTANTIATE_ITERATOR(fib_fec_t, fib_fec_iter_impl);

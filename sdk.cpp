@@ -23,6 +23,7 @@ sdk::sdk()
    : acl_mgr_(0),
      agent_mgr_(0),
      aresolve_mgr_(0),
+     bfd_session_mgr_(0),
      class_map_mgr_(0),
      decap_group_mgr_(0),
      directflow_mgr_(0),
@@ -123,6 +124,7 @@ void sdk::initialize_context() {
 INIT_STUB_MGR(acl_mgr)
 INIT_STUB_MGR(agent_mgr)
 INIT_STUB_MGR(aresolve_mgr)
+INIT_STUB_MGR(bfd_session_mgr)
 INIT_STUB_MGR(class_map_mgr)
 INIT_STUB_MGR(decap_group_mgr)
 INIT_STUB_MGR(directflow_mgr)
