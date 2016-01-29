@@ -27,6 +27,8 @@ enum nexthop_group_encap_t {
    NEXTHOP_GROUP_GRE,
    /** MPLS encapsulation. */
    NEXTHOP_GROUP_MPLS,
+   /** MPLS over GRE encapsulation. */
+   NEXTHOP_GROUP_MPLS_OVER_GRE,
 };
 /**
  * Appends a string representation of enum nexthop_group_encap_t value to the

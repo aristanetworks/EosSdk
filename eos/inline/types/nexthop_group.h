@@ -16,6 +16,8 @@ operator<<(std::ostream& os, const nexthop_group_encap_t & enum_val) {
       os << "NEXTHOP_GROUP_GRE";
    } else if (enum_val==NEXTHOP_GROUP_MPLS) {
       os << "NEXTHOP_GROUP_MPLS";
+   } else if (enum_val==NEXTHOP_GROUP_MPLS_OVER_GRE) {
+      os << "NEXTHOP_GROUP_MPLS_OVER_GRE";
    } else {
       os << "Unknown value";
    }

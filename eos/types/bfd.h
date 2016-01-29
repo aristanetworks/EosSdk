@@ -12,11 +12,11 @@ namespace eos {
 
 /** BFD session status. */
 enum bfd_session_status_t {
+   BFD_SESSION_STATUS_NULL,
    BFD_SESSION_STATUS_DOWN,
    BFD_SESSION_STATUS_INIT,
    BFD_SESSION_STATUS_UP,
    BFD_SESSION_STATUS_ADMIN_DOWN,
-   BFD_SESSION_STATUS_NULL,
 };
 /**
  * Appends a string representation of enum bfd_session_status_t value to the
@@ -26,8 +26,10 @@ std::ostream& operator<<(std::ostream& os, const bfd_session_status_t & enum_val
 
 /** BFD session type. */
 enum bfd_session_type_t {
-   BFD_SESSION_TYPE_NORMAL,
    BFD_SESSION_TYPE_NULL,
+   BFD_SESSION_TYPE_NORMAL,
+   BFD_SESSION_TYPE_MICRO,
+   BFD_SESSION_TYPE_VXLANTUNNEL,
 };
 /**
  * Appends a string representation of enum bfd_session_type_t value to the ostream.
@@ -41,16 +43,20 @@ std::ostream& operator<<(std::ostream& os, const bfd_session_type_t & enum_val);
 class EOS_SDK_PUBLIC bfd_session_key_t {
  public:
    bfd_session_key_t();
-   bfd_session_key_t(ip_addr_t ip_addr, intf_id_t intf, bfd_session_type_t type);
+   bfd_session_key_t(ip_addr_t ip_addr, std::string vrf, bfd_session_type_t type, 
+                     intf_id_t intf);
 
    /** Getter for 'ip_addr': IP address of the peer. */
    ip_addr_t ip_addr() const;
 
-   /** Getter for 'intf': local interface associated with the BFD session. */
-   intf_id_t intf() const;
+   /** Getter for 'vrf': vrf associated with the BFD session. */
+   std::string vrf() const;
 
    /** Getter for 'type': type associated with the BFD session. */
    bfd_session_type_t type() const;
+
+   /** Getter for 'intf': local interface associated with the BFD session. */
+   intf_id_t intf() const;
 
    bool operator==(bfd_session_key_t const & other) const;
    bool operator!=(bfd_session_key_t const & other) const;
@@ -67,8 +73,9 @@ class EOS_SDK_PUBLIC bfd_session_key_t {
 
  private:
    ip_addr_t ip_addr_;
-   intf_id_t intf_;
+   std::string vrf_;
    bfd_session_type_t type_;
+   intf_id_t intf_;
 };
 
 /**
