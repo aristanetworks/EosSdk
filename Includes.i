@@ -108,6 +108,7 @@
 %include "eos/inline/directflow.h"
 %include "eos/inline/eth_lag_intf.h"
 %include "eos/inline/mac_table.h"
+%include "eos/inline/mpls_route.h"
 %include "eos/inline/neighbor_table.h"
 %include "eos/inline/types/policy_map.h"
 %include "eos/policy_map.h"

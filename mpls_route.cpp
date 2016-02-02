@@ -24,6 +24,15 @@ class mpls_route_mgr_impl : public mpls_route_mgr {
       return *nop;  // TODO: No op impl.
    }
 
+   mpls_route_status_iter_t mpls_route_status_iter() const {
+      mpls_route_status_iter_t * nop = 0;
+      return *nop;  // TODO: No op impl.
+   }
+
+   mpls_route_status_t mpls_route_status(mpls_label_t key) const {
+      return mpls_route_status_t(key);
+   }
+
    bool exists(mpls_route_key_t const & route_key) const {
       return false;  // TODO: No op impl.
    }
@@ -53,8 +62,38 @@ class mpls_route_mgr_impl : public mpls_route_mgr {
       return *nop;  // TODO: No op impl.
    }
 
+   mpls_route_via_status_iter_t mpls_route_via_status_iter(
+         mpls_route_key_t const & key) const {
+      mpls_route_via_status_iter_t * nop = 0;
+      return *nop;  // TODO: No op impl.
+   }
 };
 
 DEFINE_STUB_MGR_CTOR(mpls_route_mgr)
+
+mpls_route_handler::mpls_route_handler(mpls_route_mgr *mgr) : base_handler(mgr) {
+}
+
+void mpls_route_handler::watch_all_mpls_routes(bool) {}
+
+void mpls_route_handler::watch_mpls_route(mpls_label_t const &label, bool) {}
+
+void mpls_route_handler::on_mpls_route_set(mpls_label_t label) {
+}
+
+void mpls_route_handler::on_mpls_route_del(mpls_label_t label) {
+}
+
+void mpls_route_handler::on_mpls_route_bestmetric(mpls_label_t label, 
+                                                  mpls_route_metric_t) {
+}
+
+void mpls_route_handler::on_mpls_route_adjacency_set(mpls_label_t label,
+                                                     mpls_route_metric_t metric) {
+}
+
+void mpls_route_handler::on_mpls_route_adjacency_del(mpls_label_t label,
+                                                     mpls_route_metric_t metric) {
+}
 
 }  // end namespace eos

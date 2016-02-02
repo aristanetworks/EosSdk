@@ -9,7 +9,7 @@
  * generally the result of the programming of any routing agents in
  * the system including static and dynamic routing protocols.
  *
- * This module allows for direct maniuplation of the FIB, as well as a
+ * This module allows for direct manipulation of the FIB, as well as a
  * means of reacting to the contents of the table as well as perform
  * queries.
  */

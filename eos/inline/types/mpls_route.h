@@ -260,6 +260,80 @@ operator<<(std::ostream& os, const mpls_route_via_t& obj) {
 }
 
 
+
+inline mpls_route_status_t::mpls_route_status_t() :
+      key_(), unprogrammed_(true), adjs_unprogrammed_(true), best_metric_(0) {
+}
+
+inline mpls_route_status_t::mpls_route_status_t(mpls_label_t key) :
+      key_(key), unprogrammed_(true), adjs_unprogrammed_(true), best_metric_(0) {
+}
+
+inline mpls_route_status_t::mpls_route_status_t(mpls_label_t key, 
+                                                bool unprogrammed, 
+                                                bool adjs_unprogrammed, 
+                                                mpls_route_metric_t best_metric) :
+      key_(key), unprogrammed_(unprogrammed), 
+      adjs_unprogrammed_(adjs_unprogrammed), best_metric_(best_metric) {
+}
+
+inline mpls_label_t
+mpls_route_status_t::key() const {
+   return key_;
+}
+
+inline void
+mpls_route_status_t::key_is(mpls_label_t key) {
+   key_ = key;
+}
+
+inline bool
+mpls_route_status_t::unprogrammed() const {
+   return unprogrammed_;
+}
+
+inline bool
+mpls_route_status_t::adjs_unprogrammed() const {
+   return adjs_unprogrammed_;
+}
+
+inline mpls_route_metric_t
+mpls_route_status_t::best_metric() const {
+   return best_metric_;
+}
+
+inline bool
+mpls_route_status_t::operator==(mpls_route_status_t const & other) const {
+   return key_ == other.key_ &&
+          unprogrammed_ == other.unprogrammed_ &&
+          adjs_unprogrammed_ == other.adjs_unprogrammed_ &&
+          best_metric_ == other.best_metric_;
+}
+
+inline bool
+mpls_route_status_t::operator!=(mpls_route_status_t const & other) const {
+   return !operator==(other);
+}
+
+inline std::string
+mpls_route_status_t::to_string() const {
+   std::ostringstream ss;
+   ss << "mpls_route_status_t(";
+   ss << "key=" << key_.to_string();
+   ss << ", unprogrammed=" << unprogrammed_;
+   ss << ", adjs_unprogrammed=" << adjs_unprogrammed_;
+   ss << ", best_metric=" << best_metric_;
+   ss << ")";
+   return ss.str();
+}
+
+inline std::ostream&
+operator<<(std::ostream& os, const mpls_route_status_t& obj) {
+   os << obj.to_string();
+   return os;
+}
+
+
 }
 
 #endif // EOS_INLINE_TYPES_MPLS_ROUTE_H

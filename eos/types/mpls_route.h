@@ -166,6 +166,54 @@ class EOS_SDK_PUBLIC mpls_route_via_t {
    mpls_payload_type_t payload_type_;
    bool skip_egress_acl_;
 };
+
+/** An MPLS route status information. */
+class EOS_SDK_PUBLIC mpls_route_status_t {
+ public:
+   mpls_route_status_t();
+   explicit mpls_route_status_t(mpls_label_t key);
+   /** MPLS route status constructor. */
+   explicit mpls_route_status_t(mpls_label_t key, bool unprogrammed, 
+                                bool adjs_unprogrammed, 
+                                mpls_route_metric_t best_metric);
+
+   /** Getter for 'key': a mpls_label_t used as the MPLS route status key. */
+   mpls_label_t key() const;
+   /** Setter for 'key'. */
+   void key_is(mpls_label_t key);
+
+   /** Getter for 'unprogrammed': whether this route is programmed. */
+   bool unprogrammed() const;
+
+   /**
+    * Getter for 'adjs_unprogrammed': whether the set of adjacencies of this route
+    * is  programmed.
+    */
+   bool adjs_unprogrammed() const;
+
+   /**
+    * Getter for 'best_metric': the lowest metric with resolved next hop in the
+    * programmed adjacency set of this route.
+    */
+   mpls_route_metric_t best_metric() const;
+
+   bool operator==(mpls_route_status_t const & other) const;
+   bool operator!=(mpls_route_status_t const & other) const;
+   /** Returns a string representation of the current object's values. */
+   std::string to_string() const;
+   /**
+    * A utility stream operator that adds a string representation of
+    * mpls_route_status_t to the ostream.
+    */
+   friend std::ostream& operator<<(std::ostream& os, 
+                                   const mpls_route_status_t& obj);
+
+ private:
+   mpls_label_t key_;
+   bool unprogrammed_;
+   bool adjs_unprogrammed_;
+   mpls_route_metric_t best_metric_;
+};
 }
 
 #include <eos/inline/types/mpls_route.h>
