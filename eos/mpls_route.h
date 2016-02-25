@@ -40,32 +40,27 @@ class EOS_SDK_PUBLIC mpls_route_handler : public base_handler<mpls_route_mgr,
    void watch_mpls_route(mpls_label_t const &label, bool);
 
    /**
+    * Handler when a MPLS route is to be programmed into hardware or
+    * when it is assigned a new FEC ID.
+    */
+   virtual void on_mpls_route_set(mpls_label_t label, mpls_fec_id_t fec);
+
+   /**
     * Handler when a MPLS route is deleted from hardware.
     */
    virtual void on_mpls_route_del(mpls_label_t label);
 
    /**
-    * Handler when a MPLS route is added in hardware.
+    * Handler that describes when an MPLS FEC is created or updated in
+    * hardware. This FEC represents a set of vias that one or more
+    * routes points to.
     */
-   virtual void on_mpls_route_set(mpls_label_t label);
+   virtual void on_mpls_fec_set(mpls_fec_id_t fec);
 
    /**
-    * Handler when a MPLS route best metric is changed, due to adjacency change.
-    * The new best metric is returned.
+    * Handler called when an MPLS FEC is removed.
     */
-   virtual void on_mpls_route_bestmetric(mpls_label_t, mpls_route_metric_t);
-
-   /**
-    * Handler when a MPLS route adjacency is added or updated. The adjacency's 
-    * metric is returned.
-    */
-   virtual void on_mpls_route_adjacency_set(mpls_label_t, mpls_route_metric_t);
-
-   /**
-    * Handler when a MPLS route adjacency is removed. The adjacency's metric 
-    * is returned.
-    */
-   virtual void on_mpls_route_adjacency_del(mpls_label_t, mpls_route_metric_t);
+   virtual void on_mpls_fec_del(mpls_fec_id_t fec);
 };
 
 class mpls_route_iter_impl;
@@ -131,16 +126,20 @@ class EOS_SDK_PUBLIC mpls_route_mgr : public base_mgr<mpls_route_handler,
    virtual mpls_route_via_iter_t mpls_route_via_iter(mpls_route_key_t const &)
       const = 0;
 
-   /// Returns an iterator for MPLS vias in hardware for a given route (key).
+   /// Returns an iterator for MPLS vias in hardware for a given route key.
    virtual mpls_route_via_status_iter_t mpls_route_via_status_iter(
-          mpls_route_key_t const &) const = 0;
+          mpls_label_t const) const = 0;
+
+   /// Returns an iterator for MPLS vias in hardware for a given MPLS FEC.
+   /// The vias returned from this iterator are unbound, meaning they have an 
+   /// empty mpls_route_key_t.
+   virtual mpls_route_via_status_iter_t mpls_route_via_status_iter(
+         mpls_fec_id_t) const = 0;
 
    /// Tests for existence of any routes matching the route key in the switch config
    virtual bool exists(mpls_route_key_t const &) const = 0;
    /// Tests if the given via exists in the switch config
    virtual bool exists(mpls_route_via_t const &) const = 0;
-
-   virtual mpls_route_status_t mpls_route_status(mpls_label_t) const = 0;
 
    /// MPLS route management functions
 
@@ -152,12 +151,26 @@ class EOS_SDK_PUBLIC mpls_route_mgr : public base_mgr<mpls_route_handler,
 
    /// Adds a via to an mpls_route_t
    virtual void mpls_route_via_set(mpls_route_via_t const &) = 0;
+
    /**
     * Removes a via from an mpls_route_t.
     * When all vias are removed, the route still exists with no
     * nexthop information.
     */
    virtual void mpls_route_via_del(mpls_route_via_t const &) = 0;
+
+   /**
+    * Returns the FEC ID corresponding to the given MPLS label if this route 
+    * is programmed in hardware, or an empty mpls_fec_id_t otherwise.
+    */
+   virtual mpls_fec_id_t fec_id(mpls_label_t) const = 0;
+
+   /**
+    * Given an MPLS label, this method returns the active metric that
+    * is being used in hardware to forward traffic, or 0 if the given
+    * label does not have any active vias programmed.
+    */
+   virtual mpls_route_metric_t metric(mpls_label_t) const = 0;
 
  protected:
    mpls_route_mgr() EOS_SDK_PRIVATE;

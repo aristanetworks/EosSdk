@@ -4,6 +4,7 @@
 #ifndef EOS_TYPES_MPLS_ROUTE_H
 #define EOS_TYPES_MPLS_ROUTE_H
 
+#include <eos/hash_mix.h>
 #include <eos/intf.h>
 #include <eos/ip.h>
 #include <eos/mpls.h>
@@ -167,52 +168,39 @@ class EOS_SDK_PUBLIC mpls_route_via_t {
    bool skip_egress_acl_;
 };
 
-/** An MPLS route status information. */
-class EOS_SDK_PUBLIC mpls_route_status_t {
+/**
+ * Represents a forward equivalency class (FEC) for an MPLS route. One or more
+ * routes points to a FEC, and the FEC corresponds to a
+ * set of MPLS vias that are programmed into hardware.
+ */
+class EOS_SDK_PUBLIC mpls_fec_id_t {
  public:
-   mpls_route_status_t();
-   explicit mpls_route_status_t(mpls_label_t key);
-   /** MPLS route status constructor. */
-   explicit mpls_route_status_t(mpls_label_t key, bool unprogrammed, 
-                                bool adjs_unprogrammed, 
-                                mpls_route_metric_t best_metric);
-
-   /** Getter for 'key': a mpls_label_t used as the MPLS route status key. */
-   mpls_label_t key() const;
-   /** Setter for 'key'. */
-   void key_is(mpls_label_t key);
-
-   /** Getter for 'unprogrammed': whether this route is programmed. */
-   bool unprogrammed() const;
+   mpls_fec_id_t();
+   explicit mpls_fec_id_t(uint64_t id);
 
    /**
-    * Getter for 'adjs_unprogrammed': whether the set of adjacencies of this route
-    * is  programmed.
+    * Getter for 'id': the internal ID of this FEC.
+    * A value of 0 denotes that the FEC ID is not set.
     */
-   bool adjs_unprogrammed() const;
+   uint64_t id() const;
+   /** Setter for 'id'. */
+   void id_is(uint64_t id);
 
-   /**
-    * Getter for 'best_metric': the lowest metric with resolved next hop in the
-    * programmed adjacency set of this route.
-    */
-   mpls_route_metric_t best_metric() const;
-
-   bool operator==(mpls_route_status_t const & other) const;
-   bool operator!=(mpls_route_status_t const & other) const;
+   bool operator==(mpls_fec_id_t const & other) const;
+   bool operator!=(mpls_fec_id_t const & other) const;
+   bool operator<(mpls_fec_id_t const & other) const;
+   /** The hash function for type mpls_fec_id_t. */
+   uint32_t hash() const;
    /** Returns a string representation of the current object's values. */
    std::string to_string() const;
    /**
-    * A utility stream operator that adds a string representation of
-    * mpls_route_status_t to the ostream.
+    * A utility stream operator that adds a string representation of mpls_fec_id_t
+    * to the ostream.
     */
-   friend std::ostream& operator<<(std::ostream& os, 
-                                   const mpls_route_status_t& obj);
+   friend std::ostream& operator<<(std::ostream& os, const mpls_fec_id_t& obj);
 
  private:
-   mpls_label_t key_;
-   bool unprogrammed_;
-   bool adjs_unprogrammed_;
-   mpls_route_metric_t best_metric_;
+   uint64_t id_;
 };
 }
 
