@@ -148,13 +148,13 @@ operator<<(std::ostream& os, const policy_map_key_t& obj) {
 
 // Default constructor.
 inline policy_map_action_t::policy_map_action_t() :
-      action_type_(), nexthop_group_name_(), nexthops_(), dscp_(), 
+      action_type_(), nexthop_group_name_(), nexthops_(), vrf_(), dscp_(), 
       traffic_class_() {
 }
 
 inline policy_map_action_t::policy_map_action_t(policy_action_type_t action_type) :
-      action_type_(action_type), nexthop_group_name_(), nexthops_(), dscp_(), 
-      traffic_class_() {
+      action_type_(action_type), nexthop_group_name_(), nexthops_(), vrf_(), 
+      dscp_(), traffic_class_() {
 }
 
 inline 
@@ -202,6 +202,16 @@ policy_map_action_t::nexthop_del(ip_addr_t const & value) {
    nexthops_.erase(value);
 }
 
+inline std::string
+policy_map_action_t::vrf() const {
+   return vrf_;
+}
+
+inline void
+policy_map_action_t::vrf_is(std::string const & vrf) {
+   vrf_ = vrf;
+}
+
 inline uint8_t
 policy_map_action_t::dscp() const {
    return dscp_;
@@ -227,6 +237,7 @@ policy_map_action_t::operator==(policy_map_action_t const & other) const {
    return action_type_ == other.action_type_ &&
           nexthop_group_name_ == other.nexthop_group_name_ &&
           nexthops_ == other.nexthops_ &&
+          vrf_ == other.vrf_ &&
           dscp_ == other.dscp_ &&
           traffic_class_ == other.traffic_class_;
 }
@@ -242,6 +253,8 @@ policy_map_action_t::operator<(policy_map_action_t const & other) const {
       return action_type_ < other.action_type_;
    } else if(nexthop_group_name_ != other.nexthop_group_name_) {
       return nexthop_group_name_ < other.nexthop_group_name_;
+   } else if(vrf_ != other.vrf_) {
+      return vrf_ < other.vrf_;
    } else if(dscp_ != other.dscp_) {
       return dscp_ < other.dscp_;
    } else if(traffic_class_ != other.traffic_class_) {
@@ -267,6 +280,7 @@ policy_map_action_t::to_string() const {
       }
    }
    ss << "'";
+   ss << ", vrf='" << vrf_ << "'";
    ss << ", dscp=" << dscp_;
    ss << ", traffic_class=" << traffic_class_;
    ss << ")";
@@ -282,12 +296,13 @@ operator<<(std::ostream& os, const policy_map_action_t& obj) {
 
 
 inline policy_map_rule_t::policy_map_rule_t() :
-      class_map_key_(), policy_map_rule_type_(), raw_rule_(), actions_() {
+      class_map_key_(), policy_map_rule_type_(POLICY_RULE_TYPE_CLASSMAP), 
+      raw_rule_(), actions_() {
 }
 
 inline policy_map_rule_t::policy_map_rule_t(class_map_key_t const & class_map_key) :
-      class_map_key_(class_map_key), policy_map_rule_type_(), raw_rule_(), 
-      actions_() {
+      class_map_key_(class_map_key), 
+      policy_map_rule_type_(POLICY_RULE_TYPE_CLASSMAP), raw_rule_(), actions_() {
 }
 
 inline class_map_key_t

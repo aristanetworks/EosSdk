@@ -152,6 +152,11 @@ class EOS_SDK_PUBLIC policy_map_action_t {
    /** Deletes one nexthop of 'value' from the set. */
    void nexthop_del(ip_addr_t const & value);
 
+   /** Getter for 'vrf': the name of the VRF for nexthop action. */
+   std::string vrf() const;
+   /** Setter for 'vrf'. */
+   void vrf_is(std::string const & vrf);
+
    /**
     * Getter for 'dscp': the DiffServ Code Point on matching IPv4/IPv6 packets.
     * This sets the 6-bit IPv4 DSCP or IPv6 traffic class field.
@@ -189,6 +194,7 @@ class EOS_SDK_PUBLIC policy_map_action_t {
    policy_action_type_t action_type_;
    std::string nexthop_group_name_;
    std::unordered_set<ip_addr_t> nexthops_;
+   std::string vrf_;
    uint8_t dscp_;
    uint8_t traffic_class_;
 };
@@ -222,10 +228,19 @@ class EOS_SDK_PUBLIC policy_map_rule_t {
    /** Setter for 'class_map_key'. */
    void class_map_key_is(class_map_key_t const & class_map_key);
 
+   /**
+    * Getter for 'policy_map_rule_type': the rule type. Set the rule type to
+    * POLICY_RULE_TYPE_CLASSMAP if the rule matches a class. If the rule has the
+    * raw match statement set, the rule type should be set to POLICY_RULE_TYPE_IPV4
+    * or POLICY_RULE_TYPE_IPV6.
+    */
    policy_map_rule_type_t policy_map_rule_type() const;
+   /** Setter for 'policy_map_rule_type'. */
    void policy_map_rule_type_is(policy_map_rule_type_t policy_map_rule_type);
 
+   /** Getter for 'raw_rule': the raw match statement. */
    acl_rule_ip_t raw_rule() const;
+   /** Setter for 'raw_rule'. */
    void raw_rule_is(acl_rule_ip_t raw_rule);
 
    /**
