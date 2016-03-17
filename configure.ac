@@ -67,7 +67,8 @@ AC_DEFINE_UNQUOTED([SDK_BUILD_TIMESTAMP], [`date +%s`UL],
 AC_DEFINE_UNQUOTED([SDK_BUILD_PROJECT], ["${WP-unknown}"],
                    [Arista project from which the EOS SDK was built])
 AC_DEFINE_UNQUOTED([SDK_BUILD_PROJECT_CL],
-                   [`cat /eng/project/$WP/syncpoint 2>/dev/null || echo 0`UL],
+                   [$(sp=$(cat /eng/project/$WP/syncpoint 2>/dev/null);\
+                    test "$sp" == "" && echo "0UL" || echo "${sp}UL")],
                    [Change list number from which the EOS SDK was built])
 AC_DEFINE_UNQUOTED([SDK_BUILD_USER], ["${USER-unknown}"],
                    [User that built the EOS SDK])
