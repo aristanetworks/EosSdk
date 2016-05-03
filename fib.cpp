@@ -8,9 +8,6 @@ namespace eos {
 
 class fib_mgr_impl : public fib_mgr {
  public:
-   fib_mgr_impl() {
-   }
-
    bool fib_fec_set(fib_fec_t const & fec) {
       // TODO: add/replace the fec
       return true;
@@ -53,6 +50,10 @@ class fib_mgr_impl : public fib_mgr {
       return route;
    }
 
+   bool register_vrf(std::string const & vrf_name, bool set_vrf) {
+      return true;
+   }
+
    fib_route_iter_t fib_route_iter() const {
       fib_route_iter_t *nop = 0;
       return *nop;
@@ -63,16 +64,12 @@ class fib_mgr_impl : public fib_mgr {
       return *nop;
    }
 
-   mgr_mode_type_t mode_type() const {
+   mgr_mode_type_t mode_type() {
       return MODE_TYPE_READ_ONLY;
    }
 };
 
-fib_mgr::fib_mgr() {
-}
-
-fib_mgr::~fib_mgr() {
-}
+DEFINE_STUB_MGR_CTOR(fib_mgr)
 
 fib_handler::fib_handler(fib_mgr *mgr) : 
       base_handler<fib_mgr, fib_handler>(mgr) {
