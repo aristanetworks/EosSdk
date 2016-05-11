@@ -42,9 +42,10 @@ if test "x$enable_python" != xyes; then
 else
    AM_PATH_PYTHON([2.6])
 
-   # Debian has a binary for SWIG 2.0 named swig2.0 and they kept swig as
-   # an alias for swig-1.3.  Let's use the former when available.
-   AC_CHECK_PROGS([SWIG], [swig2.0 swig], [swig])
+   AC_CHECK_PROG([SWIG], [swig], [swig])
+   test -z $SWIG && AC_MSG_ERROR([you don't have swig installed]);
+   swig_version=$($SWIG -version |grep "SWIG Version ")
+   test "$swig_version" \< "SWIG Version 3" && AC_MSG_ERROR([your swig version needs to be at least 3.0]);
 fi
 
 m4_define([VERSION_MAJOR],
