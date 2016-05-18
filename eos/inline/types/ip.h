@@ -255,21 +255,12 @@ ip_addr_mask_t::mask() const {
 inline std::string
 ip_addr_mask_t::to_string() const {
    
-   if (addr_.af() == AF_IPV6) {
-      // Emit the address/mask_length for IPv6 addresses
+   if (addr_.af() == AF_IPV6 || addr_.af() == AF_IPV4) {
+      // Emit the address/mask_length for IPV6/IPV4 addresses
       char buf[128];
       int rv;
       rv = snprintf(buf, sizeof(buf), "%s/%d",
                     addr_.to_string().c_str(), mask_length_);
-      assert(rv>0);
-      return std::string(buf);
-   } else if (addr_.af() == AF_IPV4) {
-      char buf[128];
-      int rv;
-      rv = snprintf(buf, sizeof(buf), "%s/%u.%u.%u.%u",
-                    addr_.to_string().c_str(),
-                    (mask() >> 24) & 0xFF, (mask() >> 16) & 0xFF,
-                    (mask() >> 8) & 0xFF, mask() & 0xFF);
       assert(rv>0);
       return std::string(buf);
    } else {
