@@ -83,7 +83,7 @@ inline std::string
 ip_route_key_t::to_string() const {
    std::ostringstream ss;
    ss << "ip_route_key_t(";
-   ss << "prefix=" << prefix_.to_string();
+   ss << "prefix=" << prefix_;
    ss << ", preference=" << preference_;
    ss << ")";
    return ss.str();
@@ -164,7 +164,7 @@ inline std::string
 ip_route_t::to_string() const {
    std::ostringstream ss;
    ss << "ip_route_t(";
-   ss << "key=" << key_.to_string();
+   ss << "key=" << key_;
    ss << ", tag=" << tag_;
    ss << ", persistent=" << persistent_;
    ss << ")";
@@ -271,11 +271,11 @@ inline std::string
 ip_route_via_t::to_string() const {
    std::ostringstream ss;
    ss << "ip_route_via_t(";
-   ss << "route_key=" << route_key_.to_string();
-   ss << ", hop=" << hop_.to_string();
-   ss << ", intf=" << intf_.to_string();
+   ss << "route_key=" << route_key_;
+   ss << ", hop=" << hop_;
+   ss << ", intf=" << intf_;
    ss << ", nexthop_group='" << nexthop_group_ << "'";
-   ss << ", mpls_label=" << mpls_label_.to_string();
+   ss << ", mpls_label=" << mpls_label_;
    ss << ")";
    return ss.str();
 }

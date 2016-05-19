@@ -106,7 +106,7 @@ mac_key_t::to_string() const {
    std::ostringstream ss;
    ss << "mac_key_t(";
    ss << "vlan_id=" << vlan_id_;
-   ss << ", eth_addr=" << eth_addr_.to_string();
+   ss << ", eth_addr=" << eth_addr_;
    ss << ")";
    return ss.str();
 }
@@ -245,10 +245,10 @@ mac_entry_t::to_string() const {
    bool first_intfs = true;
    for (auto it=intfs_.cbegin(); it!=intfs_.cend(); ++it) {
       if (first_intfs) {
-         ss << (*it).to_string();
+         ss << (*it);
          first_intfs = false;
       } else {
-         ss << "," << (*it).to_string();
+         ss << "," << (*it);
       }
    }
    ss << "'";

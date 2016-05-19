@@ -61,7 +61,7 @@ inline std::string
 mpls_route_key_t::to_string() const {
    std::ostringstream ss;
    ss << "mpls_route_key_t(";
-   ss << "top_label=" << top_label_.to_string();
+   ss << "top_label=" << top_label_;
    ss << ", metric=" << metric_;
    ss << ")";
    return ss.str();
@@ -287,9 +287,9 @@ mpls_route_via_t::to_string() const {
    std::ostringstream ss;
    ss << "mpls_route_via_t(";
    ss << "route_key=" << route_key_;
-   ss << ", hop=" << hop_.to_string();
-   ss << ", intf=" << intf_.to_string();
-   ss << ", pushswap_label=" << pushswap_label_.to_string();
+   ss << ", hop=" << hop_;
+   ss << ", intf=" << intf_;
+   ss << ", pushswap_label=" << pushswap_label_;
    ss << ", label_action=" << label_action_;
    ss << ", ttl_mode=" << ttl_mode_;
    ss << ", payload_type=" << payload_type_;

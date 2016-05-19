@@ -799,8 +799,8 @@ acl_rule_ip_t::to_string() const {
    ss << ", inner_vlan_mask=" << inner_vlan_mask_;
    ss << ", ip_protocol=" << ip_protocol_;
    ss << ", ttl=" << ttl_;
-   ss << ", source_addr=" << source_addr_.to_string();
-   ss << ", destination_addr=" << destination_addr_.to_string();
+   ss << ", source_addr=" << source_addr_;
+   ss << ", destination_addr=" << destination_addr_;
    ss << ", source_port=" << source_port_;
    ss << ", destination_port=" << destination_port_;
    ss << ", nexthop_group='" << nexthop_group_ << "'";
@@ -957,10 +957,10 @@ acl_rule_eth_t::to_string() const {
    ss << ", vlan_mask=" << vlan_mask_;
    ss << ", inner_vlan=" << inner_vlan_;
    ss << ", inner_vlan_mask=" << inner_vlan_mask_;
-   ss << ", source_addr=" << source_addr_.to_string();
-   ss << ", destination_addr=" << destination_addr_.to_string();
-   ss << ", source_mask=" << source_mask_.to_string();
-   ss << ", destination_mask=" << destination_mask_.to_string();
+   ss << ", source_addr=" << source_addr_;
+   ss << ", destination_addr=" << destination_addr_;
+   ss << ", source_mask=" << source_mask_;
+   ss << ", destination_mask=" << destination_mask_;
    ss << ")";
    return ss.str();
 }

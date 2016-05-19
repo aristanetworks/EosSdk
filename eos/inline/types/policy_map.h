@@ -302,10 +302,10 @@ policy_map_action_t::to_string() const {
    bool first_nexthops = true;
    for (auto it=nexthops_.cbegin(); it!=nexthops_.cend(); ++it) {
       if (first_nexthops) {
-         ss << (*it).to_string();
+         ss << (*it);
          first_nexthops = false;
       } else {
-         ss << "," << (*it).to_string();
+         ss << "," << (*it);
       }
    }
    ss << "'";
@@ -459,10 +459,10 @@ policy_map_rule_t::to_string() const {
    bool first_actions = true;
    for (auto it=actions_.cbegin(); it!=actions_.cend(); ++it) {
       if (first_actions) {
-         ss << (*it).to_string();
+         ss << (*it);
          first_actions = false;
       } else {
-         ss << "," << (*it).to_string();
+         ss << "," << (*it);
       }
    }
    ss << "'";

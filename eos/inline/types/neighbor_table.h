@@ -81,8 +81,8 @@ inline std::string
 neighbor_key_t::to_string() const {
    std::ostringstream ss;
    ss << "neighbor_key_t(";
-   ss << "ip_addr=" << ip_addr_.to_string();
-   ss << ", intf_id=" << intf_id_.to_string();
+   ss << "ip_addr=" << ip_addr_;
+   ss << ", intf_id=" << intf_id_;
    ss << ")";
    return ss.str();
 }
@@ -163,7 +163,7 @@ neighbor_entry_t::to_string() const {
    std::ostringstream ss;
    ss << "neighbor_entry_t(";
    ss << "neighbor_key=" << neighbor_key_;
-   ss << ", eth_addr=" << eth_addr_.to_string();
+   ss << ", eth_addr=" << eth_addr_;
    ss << ", entry_type=" << entry_type_;
    ss << ")";
    return ss.str();

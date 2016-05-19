@@ -98,10 +98,10 @@ aresolve_record_host::to_string() const {
    bool first_addr_v4 = true;
    for (auto it=addr_v4_.cbegin(); it!=addr_v4_.cend(); ++it) {
       if (first_addr_v4) {
-         ss << (*it).to_string();
+         ss << (*it);
          first_addr_v4 = false;
       } else {
-         ss << "," << (*it).to_string();
+         ss << "," << (*it);
       }
    }
    ss << "'";
@@ -109,10 +109,10 @@ aresolve_record_host::to_string() const {
    bool first_addr_v6 = true;
    for (auto it=addr_v6_.cbegin(); it!=addr_v6_.cend(); ++it) {
       if (first_addr_v6) {
-         ss << (*it).to_string();
+         ss << (*it);
          first_addr_v6 = false;
       } else {
-         ss << "," << (*it).to_string();
+         ss << "," << (*it);
       }
    }
    ss << "'";

@@ -1060,7 +1060,7 @@ inline std::string
 lldp_neighbor_t::to_string() const {
    std::ostringstream ss;
    ss << "lldp_neighbor_t(";
-   ss << "intf=" << intf_.to_string();
+   ss << "intf=" << intf_;
    ss << ", remote_system=" << remote_system_;
    ss << ")";
    return ss.str();

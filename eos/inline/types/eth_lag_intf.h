@@ -184,7 +184,7 @@ inline std::string
 eth_lag_intf_membership_t::to_string() const {
    std::ostringstream ss;
    ss << "eth_lag_intf_membership_t(";
-   ss << "eth_lag_intf_id=" << eth_lag_intf_id_.to_string();
+   ss << "eth_lag_intf_id=" << eth_lag_intf_id_;
    ss << ", active=" << active_;
    ss << ", reason='" << reason_ << "'";
    ss << ", member_time=" << member_time_;
@@ -301,7 +301,7 @@ inline std::string
 eth_lag_intf_t::to_string() const {
    std::ostringstream ss;
    ss << "eth_lag_intf_t(";
-   ss << "intf=" << intf_.to_string();
+   ss << "intf=" << intf_;
    ss << ", speed=" << speed_;
    ss << ", min_links=" << min_links_;
    ss << ", fallback_type=" << fallback_type_;

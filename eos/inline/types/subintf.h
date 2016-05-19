@@ -56,7 +56,7 @@ inline std::string
 subintf_t::to_string() const {
    std::ostringstream ss;
    ss << "subintf_t(";
-   ss << "intf_id=" << intf_id_.to_string();
+   ss << "intf_id=" << intf_id_;
    ss << ", vlan_id=" << vlan_id_;
    ss << ")";
    return ss.str();

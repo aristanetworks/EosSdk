@@ -48,7 +48,7 @@ inline std::string
 fib_route_key_t::to_string() const {
    std::ostringstream ss;
    ss << "fib_route_key_t(";
-   ss << "prefix=" << prefix_.to_string();
+   ss << "prefix=" << prefix_;
    ss << ")";
    return ss.str();
 }
@@ -357,9 +357,9 @@ inline std::string
 fib_via_t::to_string() const {
    std::ostringstream ss;
    ss << "fib_via_t(";
-   ss << "hop=" << hop_.to_string();
-   ss << ", intf=" << intf_.to_string();
-   ss << ", mpls_label=" << mpls_label_.to_string();
+   ss << "hop=" << hop_;
+   ss << ", intf=" << intf_;
+   ss << ", mpls_label=" << mpls_label_;
    ss << ")";
    return ss.str();
 }
@@ -484,10 +484,10 @@ fib_fec_t::to_string() const {
    bool first_via = true;
    for (auto it=via_.cbegin(); it!=via_.cend(); ++it) {
       if (first_via) {
-         ss << (*it).to_string();
+         ss << (*it);
          first_via = false;
       } else {
-         ss << "," << (*it).to_string();
+         ss << "," << (*it);
       }
    }
    ss << "'";

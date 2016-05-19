@@ -117,7 +117,7 @@ decap_group_t::to_string() const {
    std::ostringstream ss;
    ss << "decap_group_t(";
    ss << "group_name='" << group_name_ << "'";
-   ss << ", destination_addr=" << destination_addr_.to_string();
+   ss << ", destination_addr=" << destination_addr_;
    ss << ", protocol_type=" << protocol_type_;
    ss << ", persistent=" << persistent_;
    ss << ")";

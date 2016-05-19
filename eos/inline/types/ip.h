@@ -367,7 +367,7 @@ inline std::string
 address_overlap_error::to_string() const {
    std::ostringstream ss;
    ss << "address_overlap_error(";
-   ss << "addr=" << addr_.to_string();
+   ss << "addr=" << addr_;
    ss << ")";
    return ss.str();
 }

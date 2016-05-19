@@ -398,7 +398,7 @@ inline std::string
 no_such_interface_error::to_string() const {
    std::ostringstream ss;
    ss << "no_such_interface_error(";
-   ss << "intf=" << intf_.to_string();
+   ss << "intf=" << intf_;
    ss << ")";
    return ss.str();
 }
@@ -448,7 +448,7 @@ inline std::string
 not_switchport_eligible_error::to_string() const {
    std::ostringstream ss;
    ss << "not_switchport_eligible_error(";
-   ss << "intf=" << intf_.to_string();
+   ss << "intf=" << intf_;
    ss << ")";
    return ss.str();
 }

@@ -120,10 +120,10 @@ inline std::string
 bfd_session_key_t::to_string() const {
    std::ostringstream ss;
    ss << "bfd_session_key_t(";
-   ss << "ip_addr=" << ip_addr_.to_string();
+   ss << "ip_addr=" << ip_addr_;
    ss << ", vrf='" << vrf_ << "'";
    ss << ", type=" << type_;
-   ss << ", intf=" << intf_.to_string();
+   ss << ", intf=" << intf_;
    ss << ")";
    return ss.str();
 }

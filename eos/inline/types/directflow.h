@@ -343,25 +343,25 @@ flow_match_t::to_string() const {
    bool first_input_intfs = true;
    for (auto it=input_intfs_.cbegin(); it!=input_intfs_.cend(); ++it) {
       if (first_input_intfs) {
-         ss << (*it).to_string();
+         ss << (*it);
          first_input_intfs = false;
       } else {
-         ss << "," << (*it).to_string();
+         ss << "," << (*it);
       }
    }
    ss << "'";
-   ss << ", eth_src=" << eth_src_.to_string();
-   ss << ", eth_src_mask=" << eth_src_mask_.to_string();
-   ss << ", eth_dst=" << eth_dst_.to_string();
-   ss << ", eth_dst_mask=" << eth_dst_mask_.to_string();
+   ss << ", eth_src=" << eth_src_;
+   ss << ", eth_src_mask=" << eth_src_mask_;
+   ss << ", eth_dst=" << eth_dst_;
+   ss << ", eth_dst_mask=" << eth_dst_mask_;
    ss << ", eth_type=" << eth_type_;
    ss << ", vlan_id=" << vlan_id_;
    ss << ", vlan_id_mask=" << vlan_id_mask_;
    ss << ", cos=" << cos_;
-   ss << ", ip_src=" << ip_src_.to_string();
-   ss << ", ip_src_mask=" << ip_src_mask_.to_string();
-   ss << ", ip_dst=" << ip_dst_.to_string();
-   ss << ", ip_dst_mask=" << ip_dst_mask_.to_string();
+   ss << ", ip_src=" << ip_src_;
+   ss << ", ip_src_mask=" << ip_src_mask_;
+   ss << ", ip_dst=" << ip_dst_;
+   ss << ", ip_dst_mask=" << ip_dst_mask_;
    ss << ")";
    return ss.str();
 }
@@ -566,19 +566,19 @@ flow_action_t::to_string() const {
    bool first_output_intfs = true;
    for (auto it=output_intfs_.cbegin(); it!=output_intfs_.cend(); ++it) {
       if (first_output_intfs) {
-         ss << (*it).to_string();
+         ss << (*it);
          first_output_intfs = false;
       } else {
-         ss << "," << (*it).to_string();
+         ss << "," << (*it);
       }
    }
    ss << "'";
    ss << ", vlan_id=" << vlan_id_;
    ss << ", cos=" << cos_;
-   ss << ", eth_src=" << eth_src_.to_string();
-   ss << ", eth_dst=" << eth_dst_.to_string();
-   ss << ", ip_src=" << ip_src_.to_string();
-   ss << ", ip_dst=" << ip_dst_.to_string();
+   ss << ", eth_src=" << eth_src_;
+   ss << ", eth_dst=" << eth_dst_;
+   ss << ", ip_src=" << ip_src_;
+   ss << ", ip_dst=" << ip_dst_;
    ss << ")";
    return ss.str();
 }

@@ -132,10 +132,10 @@ nexthop_group_mpls_action_t::to_string() const {
    bool first_label_stack = true;
    for (auto it=label_stack_.cbegin(); it!=label_stack_.cend(); ++it) {
       if (first_label_stack) {
-         ss << (*it).to_string();
+         ss << (*it);
          first_label_stack = false;
       } else {
-         ss << "," << (*it).to_string();
+         ss << "," << (*it);
       }
    }
    ss << "'";
@@ -289,7 +289,7 @@ nexthop_group_entry_t::to_string() const {
    std::ostringstream ss;
    ss << "nexthop_group_entry_t(";
    ss << "mpls_action=" << mpls_action_;
-   ss << ", nexthop=" << nexthop_.to_string();
+   ss << ", nexthop=" << nexthop_;
    ss << ")";
    return ss.str();
 }
@@ -523,8 +523,8 @@ nexthop_group_t::to_string() const {
    ss << ", type=" << type_;
    ss << ", gre_key_type=" << gre_key_type_;
    ss << ", ttl=" << ttl_;
-   ss << ", source_ip=" << source_ip_.to_string();
-   ss << ", source_intf=" << source_intf_.to_string();
+   ss << ", source_ip=" << source_ip_;
+   ss << ", source_intf=" << source_intf_;
    ss << ", nexthops=" <<"'";
    bool first_nexthops = true;
    for (auto it=nexthops_.cbegin(); it!=nexthops_.cend(); ++it) {
