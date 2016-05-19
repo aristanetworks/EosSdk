@@ -30,6 +30,15 @@ class_map_rule_t::operator!=(class_map_rule_t const & other) const {
    return !operator==(other);
 }
 
+inline uint32_t
+class_map_rule_t::hash() const {
+   uint32_t ret = 0;
+   ret = hash_mix::mix((uint8_t *)&acl_key_,
+              sizeof(acl_key_t), ret);
+   ret = hash_mix::final_mix(ret);
+   return ret;
+}
+
 inline std::string
 class_map_rule_t::to_string() const {
    std::ostringstream ss;
@@ -106,6 +115,23 @@ class_map_t::operator==(class_map_t const & other) const {
 inline bool
 class_map_t::operator!=(class_map_t const & other) const {
    return !operator==(other);
+}
+
+inline uint32_t
+class_map_t::hash() const {
+   uint32_t ret = 0;
+   ret = hash_mix::mix((uint8_t *)&key_,
+              sizeof(class_map_key_t), ret);
+   for (auto it=rules_.cbegin(); it!=rules_.cend(); ++it) {
+      ret = hash_mix::mix((uint8_t *)&it->first,
+                 sizeof(uint32_t), ret);
+      ret = hash_mix::mix((uint8_t *)&it->second,
+                 sizeof(class_map_rule_t), ret);
+   }
+   ret = hash_mix::mix((uint8_t *)&persistent_,
+              sizeof(bool), ret);
+   ret = hash_mix::final_mix(ret);
+   return ret;
 }
 
 inline std::string

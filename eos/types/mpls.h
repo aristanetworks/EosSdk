@@ -5,6 +5,7 @@
 #define EOS_TYPES_MPLS_H
 
 #include <eos/base.h>
+#include <eos/hash_mix.h>
 #include <eos/utility.h>
 #include <sstream>
 
@@ -74,6 +75,8 @@ class EOS_SDK_PUBLIC mpls_label_t {
    bool operator==(mpls_label_t const & other) const;
    bool operator!=(mpls_label_t const & other) const;
    bool operator<(mpls_label_t const & other) const;
+   /** The hash function for type mpls_label_t. */
+   uint32_t hash() const;
    /** Returns a string representation of the current object's values. */
    std::string to_string() const;
    /**

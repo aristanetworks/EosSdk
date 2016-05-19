@@ -46,6 +46,8 @@ class EOS_SDK_PUBLIC mpls_route_key_t {
 
    bool operator==(mpls_route_key_t const & other) const;
    bool operator!=(mpls_route_key_t const & other) const;
+   /** The hash function for type mpls_route_key_t. */
+   uint32_t hash() const;
    /** Returns a string representation of the current object's values. */
    std::string to_string() const;
    /**
@@ -82,6 +84,8 @@ class EOS_SDK_PUBLIC mpls_route_t {
 
    bool operator==(mpls_route_t const & other) const;
    bool operator!=(mpls_route_t const & other) const;
+   /** The hash function for type mpls_route_t. */
+   uint32_t hash() const;
    /** Returns a string representation of the current object's values. */
    std::string to_string() const;
    /**
@@ -149,6 +153,8 @@ class EOS_SDK_PUBLIC mpls_route_via_t {
 
    bool operator==(mpls_route_via_t const & other) const;
    bool operator!=(mpls_route_via_t const & other) const;
+   /** The hash function for type mpls_route_via_t. */
+   uint32_t hash() const;
    /** Returns a string representation of the current object's values. */
    std::string to_string() const;
    /**

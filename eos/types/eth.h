@@ -8,6 +8,7 @@
 #include <bitset>
 #include <eos/base.h>
 #include <eos/exception.h>
+#include <eos/hash_mix.h>
 #include <eos/utility.h>
 #include <netinet/in.h>
 #include <sstream>
@@ -62,6 +63,8 @@ class EOS_SDK_PUBLIC eth_addr_t {
    bool operator!=(eth_addr_t other) const;
    bool operator<(eth_addr_t other) const;
    operator bool() const;
+   /** The hash function for type eth_addr_t. */
+   uint32_t hash() const;
 
    /** Returns the given byte from the address. */
    uint8_t byte(int index) const;
@@ -92,6 +95,8 @@ class EOS_SDK_PUBLIC invalid_vlan_error : public error {
    vlan_id_t vlan() const noexcept;
 
    virtual void raise() const;
+   /** The hash function for type invalid_vlan_error. */
+   uint32_t hash() const;
    /** Returns a string representation of the current object's values. */
    std::string to_string() const;
    /**
@@ -114,6 +119,8 @@ class EOS_SDK_PUBLIC internal_vlan_error : public configuration_error {
    vlan_id_t vlan() const noexcept;
 
    virtual void raise() const;
+   /** The hash function for type internal_vlan_error. */
+   uint32_t hash() const;
    /** Returns a string representation of the current object's values. */
    std::string to_string() const;
    /**

@@ -31,6 +31,20 @@ aresolve_record_base::last_error() const {
    return last_error_;
 }
 
+inline uint32_t
+aresolve_record_base::hash() const {
+   uint32_t ret = 0;
+   ret ^= std::hash<std::string>()(qname_);
+   ret = hash_mix::mix((uint8_t *)&last_refresh_,
+              sizeof(seconds_t), ret);
+   ret = hash_mix::mix((uint8_t *)&valid_,
+              sizeof(bool), ret);
+   ret = hash_mix::mix((uint8_t *)&last_error_,
+              sizeof(int), ret);
+   ret = hash_mix::final_mix(ret);
+   return ret;
+}
+
 inline std::string
 aresolve_record_base::to_string() const {
    std::ostringstream ss;
@@ -59,6 +73,21 @@ aresolve_record_host::addr_v4() const {
 inline std::list<ip_addr_t> const &
 aresolve_record_host::addr_v6() const {
    return addr_v6_;
+}
+
+inline uint32_t
+aresolve_record_host::hash() const {
+   uint32_t ret = 0;
+   for (auto it=addr_v4_.cbegin(); it!=addr_v4_.cend(); ++it) {
+      ret = hash_mix::mix((uint8_t *)&(*it),
+            sizeof(ip_addr_t), ret);
+   }
+   for (auto it=addr_v6_.cbegin(); it!=addr_v6_.cend(); ++it) {
+      ret = hash_mix::mix((uint8_t *)&(*it),
+            sizeof(ip_addr_t), ret);
+   }
+   ret = hash_mix::final_mix(ret);
+   return ret;
 }
 
 inline std::string

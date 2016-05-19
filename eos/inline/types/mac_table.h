@@ -221,6 +221,21 @@ mac_entry_t::operator!=(mac_entry_t const & other) const {
    return !operator==(other);
 }
 
+inline uint32_t
+mac_entry_t::hash() const {
+   uint32_t ret = 0;
+   ret = hash_mix::mix((uint8_t *)&mac_key_,
+              sizeof(mac_key_t), ret);
+   for (auto it=intfs_.cbegin(); it!=intfs_.cend(); ++it) {
+      ret = hash_mix::mix((uint8_t *)&(*it),
+            sizeof(intf_id_t), ret);
+   }
+   ret = hash_mix::mix((uint8_t *)&persistent_,
+              sizeof(bool), ret);
+   ret = hash_mix::final_mix(ret);
+   return ret;
+}
+
 inline std::string
 mac_entry_t::to_string() const {
    std::ostringstream ss;

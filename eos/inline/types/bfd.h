@@ -172,6 +172,19 @@ bfd_interval_t::operator!=(bfd_interval_t const & other) const {
    return !operator==(other);
 }
 
+inline uint32_t
+bfd_interval_t::hash() const {
+   uint32_t ret = 0;
+   ret = hash_mix::mix((uint8_t *)&tx_,
+              sizeof(uint16_t), ret);
+   ret = hash_mix::mix((uint8_t *)&rx_,
+              sizeof(uint16_t), ret);
+   ret = hash_mix::mix((uint8_t *)&mult_,
+              sizeof(uint8_t), ret);
+   ret = hash_mix::final_mix(ret);
+   return ret;
+}
+
 inline std::string
 bfd_interval_t::to_string() const {
    std::ostringstream ss;
@@ -230,6 +243,17 @@ bfd_session_t::operator<(bfd_session_t const & other) const {
       return status_ < other.status_;
    }
    return false;
+}
+
+inline uint32_t
+bfd_session_t::hash() const {
+   uint32_t ret = 0;
+   ret = hash_mix::mix((uint8_t *)&peer_,
+              sizeof(bfd_session_key_t), ret);
+   ret = hash_mix::mix((uint8_t *)&status_,
+              sizeof(bfd_session_status_t), ret);
+   ret = hash_mix::final_mix(ret);
+   return ret;
 }
 
 inline std::string

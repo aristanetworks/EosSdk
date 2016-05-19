@@ -110,6 +110,19 @@ nexthop_group_mpls_action_t::operator<(nexthop_group_mpls_action_t const & other
    return false;
 }
 
+inline uint32_t
+nexthop_group_mpls_action_t::hash() const {
+   uint32_t ret = 0;
+   ret = hash_mix::mix((uint8_t *)&action_type_,
+              sizeof(mpls_action_t), ret);
+   for (auto it=label_stack_.cbegin(); it!=label_stack_.cend(); ++it) {
+      ret = hash_mix::mix((uint8_t *)&(*it),
+            sizeof(mpls_label_t), ret);
+   }
+   ret = hash_mix::final_mix(ret);
+   return ret;
+}
+
 inline std::string
 nexthop_group_mpls_action_t::to_string() const {
    std::ostringstream ss;
@@ -181,6 +194,17 @@ nexthop_group_entry_counter_t::operator<(
    return false;
 }
 
+inline uint32_t
+nexthop_group_entry_counter_t::hash() const {
+   uint32_t ret = 0;
+   ret = hash_mix::mix((uint8_t *)&packets_,
+              sizeof(uint64_t), ret);
+   ret = hash_mix::mix((uint8_t *)&bytes_,
+              sizeof(uint64_t), ret);
+   ret = hash_mix::final_mix(ret);
+   return ret;
+}
+
 inline std::string
 nexthop_group_entry_counter_t::to_string() const {
    std::ostringstream ss;
@@ -247,6 +271,17 @@ nexthop_group_entry_t::operator<(nexthop_group_entry_t const & other) const {
       return nexthop_ < other.nexthop_;
    }
    return false;
+}
+
+inline uint32_t
+nexthop_group_entry_t::hash() const {
+   uint32_t ret = 0;
+   ret = hash_mix::mix((uint8_t *)&mpls_action_,
+              sizeof(nexthop_group_mpls_action_t), ret);
+   ret = hash_mix::mix((uint8_t *)&nexthop_,
+              sizeof(ip_addr_t), ret);
+   ret = hash_mix::final_mix(ret);
+   return ret;
 }
 
 inline std::string
@@ -446,6 +481,38 @@ nexthop_group_t::operator<(nexthop_group_t const & other) const {
       return persistent_ < other.persistent_;
    }
    return false;
+}
+
+inline uint32_t
+nexthop_group_t::hash() const {
+   uint32_t ret = 0;
+   ret ^= std::hash<std::string>()(name_);
+   ret = hash_mix::mix((uint8_t *)&type_,
+              sizeof(nexthop_group_encap_t), ret);
+   ret = hash_mix::mix((uint8_t *)&gre_key_type_,
+              sizeof(nexthop_group_gre_key_t), ret);
+   ret = hash_mix::mix((uint8_t *)&ttl_,
+              sizeof(uint16_t), ret);
+   ret = hash_mix::mix((uint8_t *)&source_ip_,
+              sizeof(ip_addr_t), ret);
+   ret = hash_mix::mix((uint8_t *)&source_intf_,
+              sizeof(intf_id_t), ret);
+   for (auto it=nexthops_.cbegin(); it!=nexthops_.cend(); ++it) {
+      ret = hash_mix::mix((uint8_t *)&it->first,
+                 sizeof(uint16_t), ret);
+      ret = hash_mix::mix((uint8_t *)&it->second,
+                 sizeof(nexthop_group_entry_t), ret);
+   }
+   for (auto it=destination_ips_.cbegin(); it!=destination_ips_.cend(); ++it) {
+      ret = hash_mix::mix((uint8_t *)&it->first,
+                 sizeof(uint16_t), ret);
+      ret = hash_mix::mix((uint8_t *)&it->second,
+                 sizeof(ip_addr_t), ret);
+   }
+   ret = hash_mix::mix((uint8_t *)&persistent_,
+              sizeof(bool), ret);
+   ret = hash_mix::final_mix(ret);
+   return ret;
 }
 
 inline std::string

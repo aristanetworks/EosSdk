@@ -28,6 +28,15 @@ flow_match_field_set_t::operator<(flow_match_field_set_t const & other) const {
    return false;
 }
 
+inline uint32_t
+flow_match_field_set_t::hash() const {
+   uint32_t ret = 0;
+   ret = hash_mix::mix((uint8_t *)&match_bitset_,
+              sizeof(uint32_t), ret);
+   ret = hash_mix::final_mix(ret);
+   return ret;
+}
+
 inline std::string
 flow_match_field_set_t::to_string() const {
    std::ostringstream ss;
@@ -288,6 +297,43 @@ flow_match_t::operator<(flow_match_t const & other) const {
    return false;
 }
 
+inline uint32_t
+flow_match_t::hash() const {
+   uint32_t ret = 0;
+   ret = hash_mix::mix((uint8_t *)&match_field_set_,
+              sizeof(flow_match_field_set_t), ret);
+   for (auto it=input_intfs_.cbegin(); it!=input_intfs_.cend(); ++it) {
+      ret = hash_mix::mix((uint8_t *)&(*it),
+            sizeof(intf_id_t), ret);
+   }
+   ret = hash_mix::mix((uint8_t *)&eth_src_,
+              sizeof(eth_addr_t), ret);
+   ret = hash_mix::mix((uint8_t *)&eth_src_mask_,
+              sizeof(eth_addr_t), ret);
+   ret = hash_mix::mix((uint8_t *)&eth_dst_,
+              sizeof(eth_addr_t), ret);
+   ret = hash_mix::mix((uint8_t *)&eth_dst_mask_,
+              sizeof(eth_addr_t), ret);
+   ret = hash_mix::mix((uint8_t *)&eth_type_,
+              sizeof(eth_type_t), ret);
+   ret = hash_mix::mix((uint8_t *)&vlan_id_,
+              sizeof(vlan_id_t), ret);
+   ret = hash_mix::mix((uint8_t *)&vlan_id_mask_,
+              sizeof(vlan_id_t), ret);
+   ret = hash_mix::mix((uint8_t *)&cos_,
+              sizeof(cos_t), ret);
+   ret = hash_mix::mix((uint8_t *)&ip_src_,
+              sizeof(ip_addr_t), ret);
+   ret = hash_mix::mix((uint8_t *)&ip_src_mask_,
+              sizeof(ip_addr_t), ret);
+   ret = hash_mix::mix((uint8_t *)&ip_dst_,
+              sizeof(ip_addr_t), ret);
+   ret = hash_mix::mix((uint8_t *)&ip_dst_mask_,
+              sizeof(ip_addr_t), ret);
+   ret = hash_mix::final_mix(ret);
+   return ret;
+}
+
 inline std::string
 flow_match_t::to_string() const {
    std::ostringstream ss;
@@ -340,6 +386,15 @@ flow_action_set_t::operator==(flow_action_set_t const & other) const {
 inline bool
 flow_action_set_t::operator!=(flow_action_set_t const & other) const {
    return !operator==(other);
+}
+
+inline uint32_t
+flow_action_set_t::hash() const {
+   uint32_t ret = 0;
+   ret = hash_mix::mix((uint8_t *)&action_bitset_,
+              sizeof(uint32_t), ret);
+   ret = hash_mix::final_mix(ret);
+   return ret;
 }
 
 inline std::string
@@ -477,6 +532,31 @@ flow_action_t::operator!=(flow_action_t const & other) const {
    return !operator==(other);
 }
 
+inline uint32_t
+flow_action_t::hash() const {
+   uint32_t ret = 0;
+   ret = hash_mix::mix((uint8_t *)&action_set_,
+              sizeof(flow_action_set_t), ret);
+   for (auto it=output_intfs_.cbegin(); it!=output_intfs_.cend(); ++it) {
+      ret = hash_mix::mix((uint8_t *)&(*it),
+            sizeof(intf_id_t), ret);
+   }
+   ret = hash_mix::mix((uint8_t *)&vlan_id_,
+              sizeof(vlan_id_t), ret);
+   ret = hash_mix::mix((uint8_t *)&cos_,
+              sizeof(cos_t), ret);
+   ret = hash_mix::mix((uint8_t *)&eth_src_,
+              sizeof(eth_addr_t), ret);
+   ret = hash_mix::mix((uint8_t *)&eth_dst_,
+              sizeof(eth_addr_t), ret);
+   ret = hash_mix::mix((uint8_t *)&ip_src_,
+              sizeof(ip_addr_t), ret);
+   ret = hash_mix::mix((uint8_t *)&ip_dst_,
+              sizeof(ip_addr_t), ret);
+   ret = hash_mix::final_mix(ret);
+   return ret;
+}
+
 inline std::string
 flow_action_t::to_string() const {
    std::ostringstream ss;
@@ -553,6 +633,20 @@ flow_entry_t::operator!=(flow_entry_t const & other) const {
    return !operator==(other);
 }
 
+inline uint32_t
+flow_entry_t::hash() const {
+   uint32_t ret = 0;
+   ret ^= std::hash<std::string>()(name_);
+   ret = hash_mix::mix((uint8_t *)&match_,
+              sizeof(flow_match_t), ret);
+   ret = hash_mix::mix((uint8_t *)&action_,
+              sizeof(flow_action_t), ret);
+   ret = hash_mix::mix((uint8_t *)&priority_,
+              sizeof(flow_priority_t), ret);
+   ret = hash_mix::final_mix(ret);
+   return ret;
+}
+
 inline std::string
 flow_entry_t::to_string() const {
    std::ostringstream ss;
@@ -596,6 +690,17 @@ flow_counters_t::operator==(flow_counters_t const & other) const {
 inline bool
 flow_counters_t::operator!=(flow_counters_t const & other) const {
    return !operator==(other);
+}
+
+inline uint32_t
+flow_counters_t::hash() const {
+   uint32_t ret = 0;
+   ret = hash_mix::mix((uint8_t *)&bytes_,
+              sizeof(uint64_t), ret);
+   ret = hash_mix::mix((uint8_t *)&packets_,
+              sizeof(uint64_t), ret);
+   ret = hash_mix::final_mix(ret);
+   return ret;
 }
 
 inline std::string

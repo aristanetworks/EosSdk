@@ -98,6 +98,8 @@ class EOS_SDK_PUBLIC bfd_interval_t {
 
    bool operator==(bfd_interval_t const & other) const;
    bool operator!=(bfd_interval_t const & other) const;
+   /** The hash function for type bfd_interval_t. */
+   uint32_t hash() const;
    /** Returns a string representation of the current object's values. */
    std::string to_string() const;
    /**
@@ -127,6 +129,8 @@ class EOS_SDK_PUBLIC bfd_session_t {
    bool operator==(bfd_session_t const & other) const;
    bool operator!=(bfd_session_t const & other) const;
    bool operator<(bfd_session_t const & other) const;
+   /** The hash function for type bfd_session_t. */
+   uint32_t hash() const;
    /** Returns a string representation of the current object's values. */
    std::string to_string() const;
    /**

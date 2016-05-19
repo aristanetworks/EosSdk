@@ -233,6 +233,15 @@ lldp_std_tlv_type_t::phy() const {
    return bitset_ & LLDP_TLV_PHY;
 }
 
+inline uint32_t
+lldp_std_tlv_type_t::hash() const {
+   uint32_t ret = 0;
+   ret = hash_mix::mix((uint8_t *)&bitset_,
+              sizeof(lldp_std_tlv_type_bit_t), ret);
+   ret = hash_mix::final_mix(ret);
+   return ret;
+}
+
 inline std::string
 lldp_std_tlv_type_t::to_string() const {
    std::ostringstream ss;
@@ -325,6 +334,15 @@ lldp_syscap_t::station() const {
    return bitset_ & LLDP_SYSCAP_STATION;
 }
 
+inline uint32_t
+lldp_syscap_t::hash() const {
+   uint32_t ret = 0;
+   ret = hash_mix::mix((uint8_t *)&bitset_,
+              sizeof(lldp_syscap_bits_t), ret);
+   ret = hash_mix::final_mix(ret);
+   return ret;
+}
+
 inline std::string
 lldp_syscap_t::to_string() const {
    std::ostringstream ss;
@@ -372,6 +390,19 @@ lldp_management_address_t::snmp_ifindex() const {
 inline std::string
 lldp_management_address_t::oid() const {
    return oid_;
+}
+
+inline uint32_t
+lldp_management_address_t::hash() const {
+   uint32_t ret = 0;
+   ret = hash_mix::mix((uint8_t *)&address_family_,
+              sizeof(uint32_t), ret);
+   ret ^= std::hash<std::string>()(address_);
+   ret = hash_mix::mix((uint8_t *)&snmp_ifindex_,
+              sizeof(uint32_t), ret);
+   ret ^= std::hash<std::string>()(oid_);
+   ret = hash_mix::final_mix(ret);
+   return ret;
 }
 
 inline std::string
@@ -430,6 +461,21 @@ lldp_lacp_t::operator!() const {
    
 }
 
+inline uint32_t
+lldp_lacp_t::hash() const {
+   uint32_t ret = 0;
+   ret = hash_mix::mix((uint8_t *)&capable_,
+              sizeof(bool), ret);
+   ret = hash_mix::mix((uint8_t *)&enabled_,
+              sizeof(bool), ret);
+   ret = hash_mix::mix((uint8_t *)&id_,
+              sizeof(uint32_t), ret);
+   ret = hash_mix::mix((uint8_t *)&valid_,
+              sizeof(bool), ret);
+   ret = hash_mix::final_mix(ret);
+   return ret;
+}
+
 inline std::string
 lldp_lacp_t::to_string() const {
    std::ostringstream ss;
@@ -480,6 +526,21 @@ lldp_phy_t::autonegCapabilitiesBm() const {
 inline bool
 lldp_phy_t::valid() const {
    return valid_;
+}
+
+inline uint32_t
+lldp_phy_t::hash() const {
+   uint32_t ret = 0;
+   ret = hash_mix::mix((uint8_t *)&autonegSupported_,
+              sizeof(bool), ret);
+   ret = hash_mix::mix((uint8_t *)&autonegEnabled_,
+              sizeof(bool), ret);
+   ret = hash_mix::mix((uint8_t *)&autonegCapabilitiesBm_,
+              sizeof(uint16_t), ret);
+   ret = hash_mix::mix((uint8_t *)&valid_,
+              sizeof(bool), ret);
+   ret = hash_mix::final_mix(ret);
+   return ret;
 }
 
 inline std::string
@@ -646,6 +707,16 @@ lldp_chassis_id_t::operator<(lldp_chassis_id_t const & other) const {
    return false;
 }
 
+inline uint32_t
+lldp_chassis_id_t::hash() const {
+   uint32_t ret = 0;
+   ret = hash_mix::mix((uint8_t *)&encoding_,
+              sizeof(lldp_chassis_id_encoding_t), ret);
+   ret ^= std::hash<std::string>()(value_);
+   ret = hash_mix::final_mix(ret);
+   return ret;
+}
+
 inline std::string
 lldp_chassis_id_t::to_string() const {
    std::ostringstream ss;
@@ -785,6 +856,16 @@ lldp_intf_id_t::operator<(lldp_intf_id_t const & other) const {
       return value_ < other.value_;
    }
    return false;
+}
+
+inline uint32_t
+lldp_intf_id_t::hash() const {
+   uint32_t ret = 0;
+   ret = hash_mix::mix((uint8_t *)&encoding_,
+              sizeof(lldp_intf_id_encoding_t), ret);
+   ret ^= std::hash<std::string>()(value_);
+   ret = hash_mix::final_mix(ret);
+   return ret;
 }
 
 inline std::string

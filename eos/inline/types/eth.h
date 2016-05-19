@@ -61,6 +61,15 @@ eth_addr_t::operator bool() const {
    return !!(*this);
 }
 
+inline uint32_t
+eth_addr_t::hash() const {
+   uint32_t ret = 0;
+   ret = hash_mix::mix((uint8_t *)&bytes_,
+            sizeof(bytes_), ret);
+   ret = hash_mix::final_mix(ret);
+   return ret;
+}
+
 inline std::ostream&
 operator<<(std::ostream& os, const eth_addr_t& obj) {
    os << obj.to_string();
@@ -87,6 +96,15 @@ invalid_vlan_error::vlan() const noexcept {
 inline void
 invalid_vlan_error::raise() const {
    throw *this;
+}
+
+inline uint32_t
+invalid_vlan_error::hash() const {
+   uint32_t ret = 0;
+   ret = hash_mix::mix((uint8_t *)&vlan_,
+              sizeof(vlan_id_t), ret);
+   ret = hash_mix::final_mix(ret);
+   return ret;
 }
 
 inline std::string
@@ -119,6 +137,15 @@ internal_vlan_error::vlan() const noexcept {
 inline void
 internal_vlan_error::raise() const {
    throw *this;
+}
+
+inline uint32_t
+internal_vlan_error::hash() const {
+   uint32_t ret = 0;
+   ret = hash_mix::mix((uint8_t *)&vlan_,
+              sizeof(vlan_id_t), ret);
+   ret = hash_mix::final_mix(ret);
+   return ret;
 }
 
 inline std::string

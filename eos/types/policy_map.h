@@ -6,6 +6,7 @@
 
 #include <eos/acl.h>
 #include <eos/exception.h>
+#include <eos/hash_mix.h>
 #include <eos/intf.h>
 #include <eos/ip.h>
 #include <eos/utility.h>
@@ -95,6 +96,8 @@ class EOS_SDK_PUBLIC policy_map_key_t {
    bool operator==(policy_map_key_t const & other) const;
    bool operator!=(policy_map_key_t const & other) const;
    bool operator<(policy_map_key_t const & other) const;
+   /** The hash function for type policy_map_key_t. */
+   uint32_t hash() const;
    /** Returns a string representation of the current object's values. */
    std::string to_string() const;
    /**
@@ -181,6 +184,8 @@ class EOS_SDK_PUBLIC policy_map_action_t {
    bool operator==(policy_map_action_t const & other) const;
    bool operator!=(policy_map_action_t const & other) const;
    bool operator<(policy_map_action_t const & other) const;
+   /** The hash function for type policy_map_action_t. */
+   uint32_t hash() const;
    /** Returns a string representation of the current object's values. */
    std::string to_string() const;
    /**
@@ -259,6 +264,8 @@ class EOS_SDK_PUBLIC policy_map_rule_t {
    bool operator==(policy_map_rule_t const & other) const;
    bool operator!=(policy_map_rule_t const & other) const;
    bool operator<(policy_map_rule_t const & other) const;
+   /** The hash function for type policy_map_rule_t. */
+   uint32_t hash() const;
    /** Returns a string representation of the current object's values. */
    std::string to_string() const;
    /**
@@ -304,6 +311,8 @@ class EOS_SDK_PUBLIC policy_map_t {
    bool operator==(policy_map_t const & other) const;
    bool operator!=(policy_map_t const & other) const;
    bool operator<(policy_map_t const & other) const;
+   /** The hash function for type policy_map_t. */
+   uint32_t hash() const;
    /** Returns a string representation of the current object's values. */
    std::string to_string() const;
    /**
@@ -328,6 +337,8 @@ class EOS_SDK_PUBLIC unsupported_policy_feature_error : public unsupported_error
    policy_feature_t policy_feature() const noexcept;
 
    virtual void raise() const;
+   /** The hash function for type unsupported_policy_feature_error. */
+   uint32_t hash() const;
    /** Returns a string representation of the current object's values. */
    std::string to_string() const;
    /**

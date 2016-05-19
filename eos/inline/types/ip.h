@@ -26,10 +26,12 @@ operator<<(std::ostream& os, const af_t & enum_val) {
 // higher level constructors.
 inline ip_addr_t::ip_addr_t() :
       af_(AF_NULL), addr_() {
+   memset(&addr_, 0, sizeof(addr_));
 }
 
 inline ip_addr_t::ip_addr_t(std::string const & address_string) {
    
+   memset(&addr_, 0, sizeof(addr_));
    if (!parse_ip_addr(address_string.c_str(), this)) {
       panic(invalid_argument_error("ip.ip_addr_t",
                                    "invalid IP address."));
@@ -41,6 +43,7 @@ inline ip_addr_t::ip_addr_t(std::string const & address_string) {
 // invalid, so if user input is provided, first validate with parse_ip_addr().
 inline ip_addr_t::ip_addr_t(char const * address_string) {
    
+   memset(&addr_, 0, sizeof(addr_));
    if (!parse_ip_addr(address_string, this)) {
       panic(invalid_argument_error("ip.ip_addr_t",
                                    "invalid IP address."));
@@ -51,6 +54,8 @@ inline ip_addr_t::ip_addr_t(char const * address_string) {
 // IPv4 address (one word) in network byte order.
 inline ip_addr_t::ip_addr_t(uint32_be_t addr_v4) :
       af_(AF_IPV4) {
+   
+   memset(&addr_, 0, sizeof(addr_));
    addr_.words[0] = addr_v4;
 }
 
@@ -106,7 +111,7 @@ ip_addr_t::to_string() const {
       if (!inet_ntop(addr.sin6_family, addr.sin6_addr.s6_addr,
                      buf, sizeof(buf))) {
          panic(invalid_argument_error("ip.ip_addr_t.to_string",
-                                      "Can't convert IPV5 address to string."));
+                                      "Can't convert IPV6 address to string."));
       }
       return std::string(buf);
    } else {
@@ -118,6 +123,17 @@ ip_addr_t::to_string() const {
 inline 
 ip_addr_t::operator bool() const {
    return (af_ != AF_NULL);
+}
+
+inline uint32_t
+ip_addr_t::hash() const {
+   uint32_t ret = 0;
+   ret = hash_mix::mix((uint8_t *)&af_,
+              sizeof(af_t), ret);
+   ret = hash_mix::mix((uint8_t *)addr_.bytes, 
+              af_ == AF_IPV4 ? 4 : sizeof(addr_.bytes), ret);
+   ret = hash_mix::final_mix(ret);
+   return ret;
 }
 
 inline std::ostream&
@@ -200,6 +216,17 @@ ip_prefix_t::operator==(ip_prefix_t const & other) const {
 inline bool
 ip_prefix_t::operator!=(ip_prefix_t const & other) const {
    return !operator==(other);
+}
+
+inline uint32_t
+ip_prefix_t::hash() const {
+   uint32_t ret = 0;
+   ret = hash_mix::mix((uint8_t *)&addr_,
+              sizeof(ip_addr_t), ret);
+   ret = hash_mix::mix((uint8_t *)&prefix_length_,
+              sizeof(uint8_t), ret);
+   ret = hash_mix::final_mix(ret);
+   return ret;
 }
 
 inline std::ostream&
@@ -293,6 +320,17 @@ ip_addr_mask_t::operator<(ip_addr_mask_t const & other) const {
    return false;
 }
 
+inline uint32_t
+ip_addr_mask_t::hash() const {
+   uint32_t ret = 0;
+   ret = hash_mix::mix((uint8_t *)&addr_,
+              sizeof(ip_addr_t), ret);
+   ret = hash_mix::mix((uint8_t *)&mask_length_,
+              sizeof(uint8_t), ret);
+   ret = hash_mix::final_mix(ret);
+   return ret;
+}
+
 inline std::ostream&
 operator<<(std::ostream& os, const ip_addr_mask_t& obj) {
    os << obj.to_string();
@@ -314,6 +352,15 @@ address_overlap_error::addr() const noexcept {
 inline void
 address_overlap_error::raise() const {
    throw *this;
+}
+
+inline uint32_t
+address_overlap_error::hash() const {
+   uint32_t ret = 0;
+   ret = hash_mix::mix((uint8_t *)&addr_,
+              sizeof(ip_addr_mask_t), ret);
+   ret = hash_mix::final_mix(ret);
+   return ret;
 }
 
 inline std::string

@@ -4,6 +4,7 @@
 #ifndef EOS_TYPES_ETH_PHY_INTF_H
 #define EOS_TYPES_ETH_PHY_INTF_H
 
+#include <eos/hash_mix.h>
 #include <eos/utility.h>
 #include <sstream>
 
@@ -126,6 +127,8 @@ class EOS_SDK_PUBLIC eth_phy_intf_counters_t {
 
    bool operator==(eth_phy_intf_counters_t const & other) const;
    bool operator!=(eth_phy_intf_counters_t const & other) const;
+   /** The hash function for type eth_phy_intf_counters_t. */
+   uint32_t hash() const;
    /** Returns a string representation of the current object's values. */
    std::string to_string() const;
    /**
@@ -261,6 +264,8 @@ class EOS_SDK_PUBLIC eth_phy_intf_bin_counters_t {
 
    bool operator==(eth_phy_intf_bin_counters_t const & other) const;
    bool operator!=(eth_phy_intf_bin_counters_t const & other) const;
+   /** The hash function for type eth_phy_intf_bin_counters_t. */
+   uint32_t hash() const;
    /** Returns a string representation of the current object's values. */
    std::string to_string() const;
    /**

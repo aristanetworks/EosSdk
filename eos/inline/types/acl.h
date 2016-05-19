@@ -158,6 +158,17 @@ acl_ttl_spec_t::operator<(acl_ttl_spec_t const & other) const {
    return false;
 }
 
+inline uint32_t
+acl_ttl_spec_t::hash() const {
+   uint32_t ret = 0;
+   ret = hash_mix::mix((uint8_t *)&oper_,
+              sizeof(acl_range_operator_t), ret);
+   ret = hash_mix::mix((uint8_t *)&ttl_,
+              sizeof(uint8_t), ret);
+   ret = hash_mix::final_mix(ret);
+   return ret;
+}
+
 inline std::string
 acl_ttl_spec_t::to_string() const {
    std::ostringstream ss;
@@ -239,6 +250,19 @@ acl_port_spec_t::operator<(acl_port_spec_t const & other) const {
       return ports_ < other.ports_;
    }
    return false;
+}
+
+inline uint32_t
+acl_port_spec_t::hash() const {
+   uint32_t ret = 0;
+   ret = hash_mix::mix((uint8_t *)&oper_,
+              sizeof(acl_range_operator_t), ret);
+   for (auto it=ports_.cbegin(); it!=ports_.cend(); ++it) {
+      ret = hash_mix::mix((uint8_t *)&(*it),
+            sizeof(uint16_t), ret);
+   }
+   ret = hash_mix::final_mix(ret);
+   return ret;
 }
 
 inline std::string
@@ -356,6 +380,16 @@ acl_key_t::operator!=(acl_key_t const & other) const {
    return !operator==(other);
 }
 
+inline uint32_t
+acl_key_t::hash() const {
+   uint32_t ret = 0;
+   ret ^= std::hash<std::string>()(acl_name_);
+   ret = hash_mix::mix((uint8_t *)&acl_type_,
+              sizeof(acl_type_t), ret);
+   ret = hash_mix::final_mix(ret);
+   return ret;
+}
+
 inline std::string
 acl_key_t::to_string() const {
    std::ostringstream ss;
@@ -406,6 +440,19 @@ acl_rule_base_t::tracked() const {
 inline void
 acl_rule_base_t::tracked_is(bool tracked) {
    tracked_ = tracked;
+}
+
+inline uint32_t
+acl_rule_base_t::hash() const {
+   uint32_t ret = 0;
+   ret = hash_mix::mix((uint8_t *)&action_,
+              sizeof(acl_action_t), ret);
+   ret = hash_mix::mix((uint8_t *)&log_,
+              sizeof(bool), ret);
+   ret = hash_mix::mix((uint8_t *)&tracked_,
+              sizeof(bool), ret);
+   ret = hash_mix::final_mix(ret);
+   return ret;
 }
 
 inline std::string
@@ -698,6 +745,50 @@ acl_rule_ip_t::operator<(acl_rule_ip_t const & other) const {
    return false;
 }
 
+inline uint32_t
+acl_rule_ip_t::hash() const {
+   uint32_t ret = 0;
+   ret = hash_mix::mix((uint8_t *)&vlan_,
+              sizeof(vlan_id_t), ret);
+   ret = hash_mix::mix((uint8_t *)&vlan_mask_,
+              sizeof(vlan_id_t), ret);
+   ret = hash_mix::mix((uint8_t *)&inner_vlan_,
+              sizeof(vlan_id_t), ret);
+   ret = hash_mix::mix((uint8_t *)&inner_vlan_mask_,
+              sizeof(vlan_id_t), ret);
+   ret = hash_mix::mix((uint8_t *)&ip_protocol_,
+              sizeof(uint8_t), ret);
+   ret = hash_mix::mix((uint8_t *)&ttl_,
+              sizeof(acl_ttl_spec_t), ret);
+   ret = hash_mix::mix((uint8_t *)&source_addr_,
+              sizeof(ip_addr_mask_t), ret);
+   ret = hash_mix::mix((uint8_t *)&destination_addr_,
+              sizeof(ip_addr_mask_t), ret);
+   ret = hash_mix::mix((uint8_t *)&source_port_,
+              sizeof(acl_port_spec_t), ret);
+   ret = hash_mix::mix((uint8_t *)&destination_port_,
+              sizeof(acl_port_spec_t), ret);
+   ret ^= std::hash<std::string>()(nexthop_group_);
+   ret = hash_mix::mix((uint8_t *)&tcp_flags_,
+              sizeof(uint16_t), ret);
+   ret = hash_mix::mix((uint8_t *)&established_,
+              sizeof(bool), ret);
+   ret = hash_mix::mix((uint8_t *)&icmp_type_,
+              sizeof(uint16_t), ret);
+   ret = hash_mix::mix((uint8_t *)&icmp_code_,
+              sizeof(uint16_t), ret);
+   ret = hash_mix::mix((uint8_t *)&priority_value_,
+              sizeof(uint8_t), ret);
+   ret = hash_mix::mix((uint8_t *)&priority_mask_,
+              sizeof(uint8_t), ret);
+   ret = hash_mix::mix((uint8_t *)&match_fragments_,
+              sizeof(bool), ret);
+   ret = hash_mix::mix((uint8_t *)&match_ip_priority_,
+              sizeof(bool), ret);
+   ret = hash_mix::final_mix(ret);
+   return ret;
+}
+
 inline std::string
 acl_rule_ip_t::to_string() const {
    std::ostringstream ss;
@@ -833,6 +924,29 @@ acl_rule_eth_t::operator==(acl_rule_eth_t const & other) const {
 inline bool
 acl_rule_eth_t::operator!=(acl_rule_eth_t const & other) const {
    return !operator==(other);
+}
+
+inline uint32_t
+acl_rule_eth_t::hash() const {
+   uint32_t ret = 0;
+   ret = hash_mix::mix((uint8_t *)&vlan_,
+              sizeof(vlan_id_t), ret);
+   ret = hash_mix::mix((uint8_t *)&vlan_mask_,
+              sizeof(vlan_id_t), ret);
+   ret = hash_mix::mix((uint8_t *)&inner_vlan_,
+              sizeof(vlan_id_t), ret);
+   ret = hash_mix::mix((uint8_t *)&inner_vlan_mask_,
+              sizeof(vlan_id_t), ret);
+   ret = hash_mix::mix((uint8_t *)&source_addr_,
+              sizeof(eth_addr_t), ret);
+   ret = hash_mix::mix((uint8_t *)&destination_addr_,
+              sizeof(eth_addr_t), ret);
+   ret = hash_mix::mix((uint8_t *)&source_mask_,
+              sizeof(eth_addr_t), ret);
+   ret = hash_mix::mix((uint8_t *)&destination_mask_,
+              sizeof(eth_addr_t), ret);
+   ret = hash_mix::final_mix(ret);
+   return ret;
 }
 
 inline std::string

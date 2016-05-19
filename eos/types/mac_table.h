@@ -134,6 +134,8 @@ class EOS_SDK_PUBLIC mac_entry_t {
    void intf_is(intf_id_t intf);
    bool operator==(mac_entry_t const & other) const;
    bool operator!=(mac_entry_t const & other) const;
+   /** The hash function for type mac_entry_t. */
+   uint32_t hash() const;
    /** Returns a string representation of the current object's values. */
    std::string to_string() const;
    /**

@@ -4,6 +4,7 @@
 #ifndef EOS_TYPES_DECAP_GROUP_H
 #define EOS_TYPES_DECAP_GROUP_H
 
+#include <eos/hash_mix.h>
 #include <eos/ip.h>
 #include <eos/utility.h>
 #include <sstream>
@@ -68,6 +69,8 @@ class EOS_SDK_PUBLIC decap_group_t {
    bool operator==(decap_group_t const & other) const;
    bool operator!=(decap_group_t const & other) const;
    bool operator<(decap_group_t const & other) const;
+   /** The hash function for type decap_group_t. */
+   uint32_t hash() const;
    /** Returns a string representation of the current object's values. */
    std::string to_string() const;
    /**

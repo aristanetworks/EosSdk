@@ -4,6 +4,7 @@
 #ifndef EOS_TYPES_NEXTHOP_GROUP_H
 #define EOS_TYPES_NEXTHOP_GROUP_H
 
+#include <eos/hash_mix.h>
 #include <eos/panic.h>
 #include <eos/utility.h>
 #include <forward_list>
@@ -90,6 +91,8 @@ class EOS_SDK_PUBLIC nexthop_group_mpls_action_t {
    bool operator==(nexthop_group_mpls_action_t const & other) const;
    bool operator!=(nexthop_group_mpls_action_t const & other) const;
    bool operator<(nexthop_group_mpls_action_t const & other) const;
+   /** The hash function for type nexthop_group_mpls_action_t. */
+   uint32_t hash() const;
    /** Returns a string representation of the current object's values. */
    std::string to_string() const;
    /**
@@ -117,6 +120,8 @@ class EOS_SDK_PUBLIC nexthop_group_entry_counter_t {
    bool operator==(nexthop_group_entry_counter_t const & other) const;
    bool operator!=(nexthop_group_entry_counter_t const & other) const;
    bool operator<(nexthop_group_entry_counter_t const & other) const;
+   /** The hash function for type nexthop_group_entry_counter_t. */
+   uint32_t hash() const;
    /** Returns a string representation of the current object's values. */
    std::string to_string() const;
    /**
@@ -155,6 +160,8 @@ class EOS_SDK_PUBLIC nexthop_group_entry_t {
    bool operator==(nexthop_group_entry_t const & other) const;
    bool operator!=(nexthop_group_entry_t const & other) const;
    bool operator<(nexthop_group_entry_t const & other) const;
+   /** The hash function for type nexthop_group_entry_t. */
+   uint32_t hash() const;
    /** Returns a string representation of the current object's values. */
    std::string to_string() const;
    /**
@@ -237,6 +244,8 @@ class EOS_SDK_PUBLIC nexthop_group_t {
    bool operator==(nexthop_group_t const & other) const;
    bool operator!=(nexthop_group_t const & other) const;
    bool operator<(nexthop_group_t const & other) const;
+   /** The hash function for type nexthop_group_t. */
+   uint32_t hash() const;
    /** Returns a string representation of the current object's values. */
    std::string to_string() const;
    /**

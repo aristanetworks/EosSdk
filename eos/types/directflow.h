@@ -6,6 +6,7 @@
 
 #include <eos/eth.h>
 #include <eos/exception.h>
+#include <eos/hash_mix.h>
 #include <eos/intf.h>
 #include <eos/ip.h>
 #include <eos/utility.h>
@@ -44,6 +45,8 @@ class EOS_SDK_PUBLIC flow_match_field_set_t {
    bool operator==(flow_match_field_set_t const & other) const;
    bool operator!=(flow_match_field_set_t const & other) const;
    bool operator<(flow_match_field_set_t const & other) const;
+   /** The hash function for type flow_match_field_set_t. */
+   uint32_t hash() const;
    /** Returns a string representation of the current object's values. */
    std::string to_string() const;
    /**
@@ -143,6 +146,8 @@ class EOS_SDK_PUBLIC flow_match_t {
    bool operator==(flow_match_t const & other) const;
    bool operator!=(flow_match_t const & other) const;
    bool operator<(flow_match_t const & other) const;
+   /** The hash function for type flow_match_t. */
+   uint32_t hash() const;
    /** Returns a string representation of the current object's values. */
    std::string to_string() const;
    /**
@@ -196,6 +201,8 @@ class EOS_SDK_PUBLIC flow_action_set_t {
 
    bool operator==(flow_action_set_t const & other) const;
    bool operator!=(flow_action_set_t const & other) const;
+   /** The hash function for type flow_action_set_t. */
+   uint32_t hash() const;
    /** Returns a string representation of the current object's values. */
    std::string to_string() const;
    /**
@@ -261,6 +268,8 @@ class EOS_SDK_PUBLIC flow_action_t {
 
    bool operator==(flow_action_t const & other) const;
    bool operator!=(flow_action_t const & other) const;
+   /** The hash function for type flow_action_t. */
+   uint32_t hash() const;
    /** Returns a string representation of the current object's values. */
    std::string to_string() const;
    /**
@@ -297,6 +306,8 @@ class EOS_SDK_PUBLIC flow_entry_t {
 
    bool operator==(flow_entry_t const & other) const;
    bool operator!=(flow_entry_t const & other) const;
+   /** The hash function for type flow_entry_t. */
+   uint32_t hash() const;
    /** Returns a string representation of the current object's values. */
    std::string to_string() const;
    /**
@@ -323,6 +334,8 @@ class EOS_SDK_PUBLIC flow_counters_t {
 
    bool operator==(flow_counters_t const & other) const;
    bool operator!=(flow_counters_t const & other) const;
+   /** The hash function for type flow_counters_t. */
+   uint32_t hash() const;
    /** Returns a string representation of the current object's values. */
    std::string to_string() const;
    /**

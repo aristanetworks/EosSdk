@@ -72,6 +72,18 @@ vrf_t::operator<(vrf_t const & other) const {
    return false;
 }
 
+inline uint32_t
+vrf_t::hash() const {
+   uint32_t ret = 0;
+   ret ^= std::hash<std::string>()(name_);
+   ret = hash_mix::mix((uint8_t *)&state_,
+              sizeof(vrf_state_t), ret);
+   ret = hash_mix::mix((uint8_t *)&rd_,
+              sizeof(uint64_t), ret);
+   ret = hash_mix::final_mix(ret);
+   return ret;
+}
+
 inline std::string
 vrf_t::to_string() const {
    std::ostringstream ss;

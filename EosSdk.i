@@ -52,8 +52,8 @@ typedef uint64_t uint64_be_t;
 
 // To make sure instance of EosSdk types are hashable in python, this is important
 // when the objects are used in sets, dicts, etc (as key).
-// Two test cases added for this, one is in EthLagIntfTest.py and the other in 
-// IntfTest.py.
+// Three test cases added for this, one is in EthLagIntfTest.py, one in IntfTest.py
+// and the third in IpAddrTest.py
 %rename(__hash__) *::hash;
 
 // generate directors for all classes that have virtual methods, except the managers

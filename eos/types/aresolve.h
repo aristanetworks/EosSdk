@@ -4,6 +4,7 @@
 #ifndef EOS_TYPES_ARESOLVE_H
 #define EOS_TYPES_ARESOLVE_H
 
+#include <eos/hash_mix.h>
 #include <eos/ip.h>
 #include <eos/utility.h>
 #include <list>
@@ -45,6 +46,8 @@ class EOS_SDK_PUBLIC aresolve_record_base {
     */
    int last_error() const;
 
+   /** The hash function for type aresolve_record_base. */
+   uint32_t hash() const;
    /** Returns a string representation of the current object's values. */
    std::string to_string() const;
    /**
@@ -82,6 +85,8 @@ class EOS_SDK_PUBLIC aresolve_record_host : public aresolve_record_base {
    /** Getter for 'addr_v6': the resolved IPv6 addresses for the qname(). */
    std::list<ip_addr_t> const & addr_v6() const;
 
+   /** The hash function for type aresolve_record_host. */
+   uint32_t hash() const;
    /** Returns a string representation of the current object's values. */
    std::string to_string() const;
    /**

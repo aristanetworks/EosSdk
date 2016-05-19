@@ -4,6 +4,7 @@
 #ifndef EOS_TYPES_FIB_H
 #define EOS_TYPES_FIB_H
 
+#include <eos/hash_mix.h>
 #include <eos/ip.h>
 #include <eos/ip_route.h>
 #include <eos/mpls.h>
@@ -26,6 +27,8 @@ class EOS_SDK_PUBLIC fib_route_key_t {
 
    bool operator==(fib_route_key_t const & other) const;
    bool operator!=(fib_route_key_t const & other) const;
+   /** The hash function for type fib_route_key_t. */
+   uint32_t hash() const;
    /** Returns a string representation of the current object's values. */
    std::string to_string() const;
    /**
@@ -107,6 +110,8 @@ class EOS_SDK_PUBLIC fib_route_t {
 
    bool operator==(fib_route_t const & other) const;
    bool operator!=(fib_route_t const & other) const;
+   /** The hash function for type fib_route_t. */
+   uint32_t hash() const;
    /** Returns a string representation of the current object's values. */
    std::string to_string() const;
    /**
@@ -139,6 +144,8 @@ class EOS_SDK_PUBLIC fib_fec_key_t {
 
    bool operator==(fib_fec_key_t const & other) const;
    bool operator!=(fib_fec_key_t const & other) const;
+   /** The hash function for type fib_fec_key_t. */
+   uint32_t hash() const;
    /** Returns a string representation of the current object's values. */
    std::string to_string() const;
    /**
@@ -168,6 +175,8 @@ class EOS_SDK_PUBLIC fib_via_t {
 
    bool operator==(fib_via_t const & other) const;
    bool operator!=(fib_via_t const & other) const;
+   /** The hash function for type fib_via_t. */
+   uint32_t hash() const;
    /** Returns a string representation of the current object's values. */
    std::string to_string() const;
    /**
@@ -232,6 +241,8 @@ class EOS_SDK_PUBLIC fib_fec_t {
    /** Remove all matching via elements. */
    void via_del(fib_via_t const & via);
 
+   /** The hash function for type fib_fec_t. */
+   uint32_t hash() const;
    /** Returns a string representation of the current object's values. */
    std::string to_string() const;
    /**

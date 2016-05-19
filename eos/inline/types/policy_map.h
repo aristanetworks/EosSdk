@@ -128,6 +128,16 @@ policy_map_key_t::operator<(policy_map_key_t const & other) const {
    return false;
 }
 
+inline uint32_t
+policy_map_key_t::hash() const {
+   uint32_t ret = 0;
+   ret ^= std::hash<std::string>()(name_);
+   ret = hash_mix::mix((uint8_t *)&feature_,
+              sizeof(policy_feature_t), ret);
+   ret = hash_mix::final_mix(ret);
+   return ret;
+}
+
 inline std::string
 policy_map_key_t::to_string() const {
    std::ostringstream ss;
@@ -261,6 +271,25 @@ policy_map_action_t::operator<(policy_map_action_t const & other) const {
       return traffic_class_ < other.traffic_class_;
    }
    return false;
+}
+
+inline uint32_t
+policy_map_action_t::hash() const {
+   uint32_t ret = 0;
+   ret = hash_mix::mix((uint8_t *)&action_type_,
+              sizeof(policy_action_type_t), ret);
+   ret ^= std::hash<std::string>()(nexthop_group_name_);
+   for (auto it=nexthops_.cbegin(); it!=nexthops_.cend(); ++it) {
+      ret = hash_mix::mix((uint8_t *)&(*it),
+            sizeof(ip_addr_t), ret);
+   }
+   ret ^= std::hash<std::string>()(vrf_);
+   ret = hash_mix::mix((uint8_t *)&dscp_,
+              sizeof(uint8_t), ret);
+   ret = hash_mix::mix((uint8_t *)&traffic_class_,
+              sizeof(uint8_t), ret);
+   ret = hash_mix::final_mix(ret);
+   return ret;
 }
 
 inline std::string
@@ -402,6 +431,23 @@ policy_map_rule_t::operator<(policy_map_rule_t const & other) const {
    return false;
 }
 
+inline uint32_t
+policy_map_rule_t::hash() const {
+   uint32_t ret = 0;
+   ret = hash_mix::mix((uint8_t *)&class_map_key_,
+              sizeof(class_map_key_t), ret);
+   ret = hash_mix::mix((uint8_t *)&policy_map_rule_type_,
+              sizeof(policy_map_rule_type_t), ret);
+   ret = hash_mix::mix((uint8_t *)&raw_rule_,
+              sizeof(acl_rule_ip_t), ret);
+   for (auto it=actions_.cbegin(); it!=actions_.cend(); ++it) {
+      ret = hash_mix::mix((uint8_t *)&(*it),
+            sizeof(policy_map_action_t), ret);
+   }
+   ret = hash_mix::final_mix(ret);
+   return ret;
+}
+
 inline std::string
 policy_map_rule_t::to_string() const {
    std::ostringstream ss;
@@ -413,10 +459,10 @@ policy_map_rule_t::to_string() const {
    bool first_actions = true;
    for (auto it=actions_.cbegin(); it!=actions_.cend(); ++it) {
       if (first_actions) {
-         ss << (*it);
+         ss << (*it).to_string();
          first_actions = false;
       } else {
-         ss << "," << (*it);
+         ss << "," << (*it).to_string();
       }
    }
    ss << "'";
@@ -494,6 +540,23 @@ policy_map_t::operator<(policy_map_t const & other) const {
    return false;
 }
 
+inline uint32_t
+policy_map_t::hash() const {
+   uint32_t ret = 0;
+   ret = hash_mix::mix((uint8_t *)&key_,
+              sizeof(policy_map_key_t), ret);
+   for (auto it=rules_.cbegin(); it!=rules_.cend(); ++it) {
+      ret = hash_mix::mix((uint8_t *)&it->first,
+                 sizeof(uint32_t), ret);
+      ret = hash_mix::mix((uint8_t *)&it->second,
+                 sizeof(policy_map_rule_t), ret);
+   }
+   ret = hash_mix::mix((uint8_t *)&persistent_,
+              sizeof(bool), ret);
+   ret = hash_mix::final_mix(ret);
+   return ret;
+}
+
 inline std::string
 policy_map_t::to_string() const {
    std::ostringstream ss;
@@ -543,6 +606,15 @@ unsupported_policy_feature_error::policy_feature() const noexcept {
 inline void
 unsupported_policy_feature_error::raise() const {
    throw *this;
+}
+
+inline uint32_t
+unsupported_policy_feature_error::hash() const {
+   uint32_t ret = 0;
+   ret = hash_mix::mix((uint8_t *)&policy_feature_,
+              sizeof(policy_feature_t), ret);
+   ret = hash_mix::final_mix(ret);
+   return ret;
 }
 
 inline std::string

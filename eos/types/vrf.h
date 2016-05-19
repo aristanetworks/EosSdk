@@ -4,6 +4,7 @@
 #ifndef EOS_TYPES_VRF_H
 #define EOS_TYPES_VRF_H
 
+#include <eos/hash_mix.h>
 #include <eos/utility.h>
 #include <sstream>
 
@@ -41,6 +42,8 @@ class EOS_SDK_PUBLIC vrf_t {
    bool operator==(vrf_t const & other) const;
    bool operator!=(vrf_t const & other) const;
    bool operator<(vrf_t const & other) const;
+   /** The hash function for type vrf_t. */
+   uint32_t hash() const;
    /** Returns a string representation of the current object's values. */
    std::string to_string() const;
    /**

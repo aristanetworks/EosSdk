@@ -35,6 +35,15 @@ fib_route_key_t::operator!=(fib_route_key_t const & other) const {
    return !operator==(other);
 }
 
+inline uint32_t
+fib_route_key_t::hash() const {
+   uint32_t ret = 0;
+   ret = hash_mix::mix((uint8_t *)&prefix_,
+              sizeof(ip_prefix_t), ret);
+   ret = hash_mix::final_mix(ret);
+   return ret;
+}
+
 inline std::string
 fib_route_key_t::to_string() const {
    std::ostringstream ss;
@@ -187,6 +196,23 @@ fib_route_t::operator!=(fib_route_t const & other) const {
    return !operator==(other);
 }
 
+inline uint32_t
+fib_route_t::hash() const {
+   uint32_t ret = 0;
+   ret = hash_mix::mix((uint8_t *)&route_key_,
+              sizeof(fib_route_key_t), ret);
+   ret = hash_mix::mix((uint8_t *)&preference_,
+              sizeof(ip_route_preference_t), ret);
+   ret = hash_mix::mix((uint8_t *)&metric_,
+              sizeof(ip_route_metric_t), ret);
+   ret = hash_mix::mix((uint8_t *)&route_type_,
+              sizeof(fib_route_type_t), ret);
+   ret = hash_mix::mix((uint8_t *)&fec_id_,
+              sizeof(uint64_t), ret);
+   ret = hash_mix::final_mix(ret);
+   return ret;
+}
+
 inline std::string
 fib_route_t::to_string() const {
    std::ostringstream ss;
@@ -235,6 +261,15 @@ fib_fec_key_t::operator==(fib_fec_key_t const & other) const {
 inline bool
 fib_fec_key_t::operator!=(fib_fec_key_t const & other) const {
    return !operator==(other);
+}
+
+inline uint32_t
+fib_fec_key_t::hash() const {
+   uint32_t ret = 0;
+   ret = hash_mix::mix((uint8_t *)&fec_id_,
+              sizeof(uint64_t), ret);
+   ret = hash_mix::final_mix(ret);
+   return ret;
 }
 
 inline std::string
@@ -303,6 +338,19 @@ fib_via_t::operator==(fib_via_t const & other) const {
 inline bool
 fib_via_t::operator!=(fib_via_t const & other) const {
    return !operator==(other);
+}
+
+inline uint32_t
+fib_via_t::hash() const {
+   uint32_t ret = 0;
+   ret = hash_mix::mix((uint8_t *)&hop_,
+              sizeof(ip_addr_t), ret);
+   ret = hash_mix::mix((uint8_t *)&intf_,
+              sizeof(intf_id_t), ret);
+   ret = hash_mix::mix((uint8_t *)&mpls_label_,
+              sizeof(mpls_label_t), ret);
+   ret = hash_mix::final_mix(ret);
+   return ret;
 }
 
 inline std::string
@@ -409,6 +457,22 @@ fib_fec_t::via_del(fib_via_t const & via) {
    via_.remove(via);
 }
 
+inline uint32_t
+fib_fec_t::hash() const {
+   uint32_t ret = 0;
+   ret = hash_mix::mix((uint8_t *)&fec_key_,
+              sizeof(fib_fec_key_t), ret);
+   ret = hash_mix::mix((uint8_t *)&fec_type_,
+              sizeof(fib_fec_type_t), ret);
+   ret ^= std::hash<std::string>()(nexthop_group_name_);
+   for (auto it=via_.cbegin(); it!=via_.cend(); ++it) {
+      ret = hash_mix::mix((uint8_t *)&(*it),
+            sizeof(fib_via_t), ret);
+   }
+   ret = hash_mix::final_mix(ret);
+   return ret;
+}
+
 inline std::string
 fib_fec_t::to_string() const {
    std::ostringstream ss;
@@ -420,10 +484,10 @@ fib_fec_t::to_string() const {
    bool first_via = true;
    for (auto it=via_.cbegin(); it!=via_.cend(); ++it) {
       if (first_via) {
-         ss << (*it);
+         ss << (*it).to_string();
          first_via = false;
       } else {
-         ss << "," << (*it);
+         ss << "," << (*it).to_string();
       }
    }
    ss << "'";

@@ -5,6 +5,7 @@
 #define EOS_TYPES_CLASS_MAP_H
 
 #include <eos/acl.h>
+#include <eos/hash_mix.h>
 #include <eos/policy_map.h>
 #include <eos/utility.h>
 #include <map>
@@ -47,6 +48,8 @@ class EOS_SDK_PUBLIC class_map_rule_t {
 
    bool operator==(class_map_rule_t const & other) const;
    bool operator!=(class_map_rule_t const & other) const;
+   /** The hash function for type class_map_rule_t. */
+   uint32_t hash() const;
    /** Returns a string representation of the current object's values. */
    std::string to_string() const;
    /**
@@ -96,6 +99,8 @@ class EOS_SDK_PUBLIC class_map_t {
 
    bool operator==(class_map_t const & other) const;
    bool operator!=(class_map_t const & other) const;
+   /** The hash function for type class_map_t. */
+   uint32_t hash() const;
    /** Returns a string representation of the current object's values. */
    std::string to_string() const;
    /**

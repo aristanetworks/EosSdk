@@ -168,6 +168,8 @@ class EOS_SDK_PUBLIC intf_counters_t {
 
    bool operator==(intf_counters_t const & other) const;
    bool operator!=(intf_counters_t const & other) const;
+   /** The hash function for type intf_counters_t. */
+   uint32_t hash() const;
    /** Returns a string representation of the current object's values. */
    std::string to_string() const;
    /**
@@ -217,6 +219,8 @@ class EOS_SDK_PUBLIC intf_traffic_rates_t {
 
    bool operator==(intf_traffic_rates_t const & other) const;
    bool operator!=(intf_traffic_rates_t const & other) const;
+   /** The hash function for type intf_traffic_rates_t. */
+   uint32_t hash() const;
    /** Returns a string representation of the current object's values. */
    std::string to_string() const;
    /**
@@ -244,6 +248,8 @@ class EOS_SDK_PUBLIC no_such_interface_error : public error {
    intf_id_t intf() const noexcept;
 
    virtual void raise() const;
+   /** The hash function for type no_such_interface_error. */
+   uint32_t hash() const;
    /** Returns a string representation of the current object's values. */
    std::string to_string() const;
    /**
@@ -268,6 +274,8 @@ class EOS_SDK_PUBLIC not_switchport_eligible_error : public error {
    intf_id_t intf() const noexcept;
 
    virtual void raise() const;
+   /** The hash function for type not_switchport_eligible_error. */
+   uint32_t hash() const;
    /** Returns a string representation of the current object's values. */
    std::string to_string() const;
    /**

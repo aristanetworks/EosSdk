@@ -204,6 +204,39 @@ intf_counters_t::operator!=(intf_counters_t const & other) const {
    return !operator==(other);
 }
 
+inline uint32_t
+intf_counters_t::hash() const {
+   uint32_t ret = 0;
+   ret = hash_mix::mix((uint8_t *)&out_ucast_pkts_,
+              sizeof(uint64_t), ret);
+   ret = hash_mix::mix((uint8_t *)&out_multicast_pkts_,
+              sizeof(uint64_t), ret);
+   ret = hash_mix::mix((uint8_t *)&out_broadcast_pkts_,
+              sizeof(uint64_t), ret);
+   ret = hash_mix::mix((uint8_t *)&in_ucast_pkts_,
+              sizeof(uint64_t), ret);
+   ret = hash_mix::mix((uint8_t *)&in_multicast_pkts_,
+              sizeof(uint64_t), ret);
+   ret = hash_mix::mix((uint8_t *)&in_broadcast_pkts_,
+              sizeof(uint64_t), ret);
+   ret = hash_mix::mix((uint8_t *)&out_octets_,
+              sizeof(uint64_t), ret);
+   ret = hash_mix::mix((uint8_t *)&in_octets_,
+              sizeof(uint64_t), ret);
+   ret = hash_mix::mix((uint8_t *)&out_discards_,
+              sizeof(uint64_t), ret);
+   ret = hash_mix::mix((uint8_t *)&out_errors_,
+              sizeof(uint64_t), ret);
+   ret = hash_mix::mix((uint8_t *)&in_discards_,
+              sizeof(uint64_t), ret);
+   ret = hash_mix::mix((uint8_t *)&in_errors_,
+              sizeof(uint64_t), ret);
+   ret = hash_mix::mix((uint8_t *)&sample_time_,
+              sizeof(seconds_t), ret);
+   ret = hash_mix::final_mix(ret);
+   return ret;
+}
+
 inline std::string
 intf_counters_t::to_string() const {
    std::ostringstream ss;
@@ -288,6 +321,23 @@ intf_traffic_rates_t::operator!=(intf_traffic_rates_t const & other) const {
    return !operator==(other);
 }
 
+inline uint32_t
+intf_traffic_rates_t::hash() const {
+   uint32_t ret = 0;
+   ret = hash_mix::mix((uint8_t *)&out_pkts_rate_,
+              sizeof(double), ret);
+   ret = hash_mix::mix((uint8_t *)&in_pkts_rate_,
+              sizeof(double), ret);
+   ret = hash_mix::mix((uint8_t *)&out_bits_rate_,
+              sizeof(double), ret);
+   ret = hash_mix::mix((uint8_t *)&in_bits_rate_,
+              sizeof(double), ret);
+   ret = hash_mix::mix((uint8_t *)&sample_time_,
+              sizeof(seconds_t), ret);
+   ret = hash_mix::final_mix(ret);
+   return ret;
+}
+
 inline std::string
 intf_traffic_rates_t::to_string() const {
    std::ostringstream ss;
@@ -335,6 +385,15 @@ no_such_interface_error::raise() const {
    throw *this;
 }
 
+inline uint32_t
+no_such_interface_error::hash() const {
+   uint32_t ret = 0;
+   ret = hash_mix::mix((uint8_t *)&intf_,
+              sizeof(intf_id_t), ret);
+   ret = hash_mix::final_mix(ret);
+   return ret;
+}
+
 inline std::string
 no_such_interface_error::to_string() const {
    std::ostringstream ss;
@@ -374,6 +433,15 @@ not_switchport_eligible_error::intf() const noexcept {
 inline void
 not_switchport_eligible_error::raise() const {
    throw *this;
+}
+
+inline uint32_t
+not_switchport_eligible_error::hash() const {
+   uint32_t ret = 0;
+   ret = hash_mix::mix((uint8_t *)&intf_,
+              sizeof(intf_id_t), ret);
+   ret = hash_mix::final_mix(ret);
+   return ret;
 }
 
 inline std::string

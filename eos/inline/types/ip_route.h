@@ -68,6 +68,17 @@ ip_route_key_t::operator!=(ip_route_key_t const & other) const {
    return !operator==(other);
 }
 
+inline uint32_t
+ip_route_key_t::hash() const {
+   uint32_t ret = 0;
+   ret = hash_mix::mix((uint8_t *)&prefix_,
+              sizeof(ip_prefix_t), ret);
+   ret = hash_mix::mix((uint8_t *)&preference_,
+              sizeof(ip_route_preference_t), ret);
+   ret = hash_mix::final_mix(ret);
+   return ret;
+}
+
 inline std::string
 ip_route_key_t::to_string() const {
    std::ostringstream ss;
@@ -134,6 +145,19 @@ ip_route_t::operator==(ip_route_t const & other) const {
 inline bool
 ip_route_t::operator!=(ip_route_t const & other) const {
    return !operator==(other);
+}
+
+inline uint32_t
+ip_route_t::hash() const {
+   uint32_t ret = 0;
+   ret = hash_mix::mix((uint8_t *)&key_,
+              sizeof(ip_route_key_t), ret);
+   ret = hash_mix::mix((uint8_t *)&tag_,
+              sizeof(ip_route_tag_t), ret);
+   ret = hash_mix::mix((uint8_t *)&persistent_,
+              sizeof(bool), ret);
+   ret = hash_mix::final_mix(ret);
+   return ret;
 }
 
 inline std::string
@@ -225,6 +249,22 @@ ip_route_via_t::operator==(ip_route_via_t const & other) const {
 inline bool
 ip_route_via_t::operator!=(ip_route_via_t const & other) const {
    return !operator==(other);
+}
+
+inline uint32_t
+ip_route_via_t::hash() const {
+   uint32_t ret = 0;
+   ret = hash_mix::mix((uint8_t *)&route_key_,
+              sizeof(ip_route_key_t), ret);
+   ret = hash_mix::mix((uint8_t *)&hop_,
+              sizeof(ip_addr_t), ret);
+   ret = hash_mix::mix((uint8_t *)&intf_,
+              sizeof(intf_id_t), ret);
+   ret ^= std::hash<std::string>()(nexthop_group_);
+   ret = hash_mix::mix((uint8_t *)&mpls_label_,
+              sizeof(mpls_label_t), ret);
+   ret = hash_mix::final_mix(ret);
+   return ret;
 }
 
 inline std::string

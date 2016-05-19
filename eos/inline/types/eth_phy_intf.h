@@ -189,6 +189,51 @@ eth_phy_intf_counters_t::operator!=(eth_phy_intf_counters_t const & other) const
    return !operator==(other);
 }
 
+inline uint32_t
+eth_phy_intf_counters_t::hash() const {
+   uint32_t ret = 0;
+   ret = hash_mix::mix((uint8_t *)&single_collision_frames_,
+              sizeof(uint64_t), ret);
+   ret = hash_mix::mix((uint8_t *)&multiple_collision_frames_,
+              sizeof(uint64_t), ret);
+   ret = hash_mix::mix((uint8_t *)&fcs_errors_,
+              sizeof(uint64_t), ret);
+   ret = hash_mix::mix((uint8_t *)&alignment_errors_,
+              sizeof(uint64_t), ret);
+   ret = hash_mix::mix((uint8_t *)&deferred_transmissions_,
+              sizeof(uint64_t), ret);
+   ret = hash_mix::mix((uint8_t *)&late_collisions_,
+              sizeof(uint64_t), ret);
+   ret = hash_mix::mix((uint8_t *)&excessive_collisions_,
+              sizeof(uint64_t), ret);
+   ret = hash_mix::mix((uint8_t *)&internal_mac_transmit_errors_,
+              sizeof(uint64_t), ret);
+   ret = hash_mix::mix((uint8_t *)&carrier_sense_errors_,
+              sizeof(uint64_t), ret);
+   ret = hash_mix::mix((uint8_t *)&internal_mac_receive_errors_,
+              sizeof(uint64_t), ret);
+   ret = hash_mix::mix((uint8_t *)&frame_too_shorts_,
+              sizeof(uint64_t), ret);
+   ret = hash_mix::mix((uint8_t *)&frame_too_longs_,
+              sizeof(uint64_t), ret);
+   ret = hash_mix::mix((uint8_t *)&sqe_test_errors_,
+              sizeof(uint64_t), ret);
+   ret = hash_mix::mix((uint8_t *)&symbol_errors_,
+              sizeof(uint64_t), ret);
+   ret = hash_mix::mix((uint8_t *)&in_unknown_opcodes_,
+              sizeof(uint64_t), ret);
+   ret = hash_mix::mix((uint8_t *)&out_pause_frames_,
+              sizeof(uint64_t), ret);
+   ret = hash_mix::mix((uint8_t *)&in_pause_frames_,
+              sizeof(uint64_t), ret);
+   ret = hash_mix::mix((uint8_t *)&fragments_,
+              sizeof(uint64_t), ret);
+   ret = hash_mix::mix((uint8_t *)&jabbers_,
+              sizeof(uint64_t), ret);
+   ret = hash_mix::final_mix(ret);
+   return ret;
+}
+
 inline std::string
 eth_phy_intf_counters_t::to_string() const {
    std::ostringstream ss;
@@ -355,6 +400,41 @@ inline bool
 eth_phy_intf_bin_counters_t::operator!=(eth_phy_intf_bin_counters_t const & other)
        const {
    return !operator==(other);
+}
+
+inline uint32_t
+eth_phy_intf_bin_counters_t::hash() const {
+   uint32_t ret = 0;
+   ret = hash_mix::mix((uint8_t *)&in_64_octet_frames_,
+              sizeof(uint64_t), ret);
+   ret = hash_mix::mix((uint8_t *)&in_65_to_127_octet_frames_,
+              sizeof(uint64_t), ret);
+   ret = hash_mix::mix((uint8_t *)&in_128_to_255_octet_frames_,
+              sizeof(uint64_t), ret);
+   ret = hash_mix::mix((uint8_t *)&in_256_to_511_octet_frames_,
+              sizeof(uint64_t), ret);
+   ret = hash_mix::mix((uint8_t *)&in_512_to_1023_octet_frames_,
+              sizeof(uint64_t), ret);
+   ret = hash_mix::mix((uint8_t *)&in_1024_to_1522_octet_frames_,
+              sizeof(uint64_t), ret);
+   ret = hash_mix::mix((uint8_t *)&in_1523_to_max_octet_frames_,
+              sizeof(uint64_t), ret);
+   ret = hash_mix::mix((uint8_t *)&out_64_octet_frames_,
+              sizeof(uint64_t), ret);
+   ret = hash_mix::mix((uint8_t *)&out_65_to_127_octet_frames_,
+              sizeof(uint64_t), ret);
+   ret = hash_mix::mix((uint8_t *)&out_128_to_255_octet_frames_,
+              sizeof(uint64_t), ret);
+   ret = hash_mix::mix((uint8_t *)&out_256_to_511_octet_frames_,
+              sizeof(uint64_t), ret);
+   ret = hash_mix::mix((uint8_t *)&out_512_to_1023_octet_frames_,
+              sizeof(uint64_t), ret);
+   ret = hash_mix::mix((uint8_t *)&out_1024_to_1522_octet_frames_,
+              sizeof(uint64_t), ret);
+   ret = hash_mix::mix((uint8_t *)&out_1523_to_max_octet_frames_,
+              sizeof(uint64_t), ret);
+   ret = hash_mix::final_mix(ret);
+   return ret;
 }
 
 inline std::string

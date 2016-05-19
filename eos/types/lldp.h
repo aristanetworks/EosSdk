@@ -95,6 +95,8 @@ class EOS_SDK_PUBLIC lldp_std_tlv_type_t {
    bool max_frame_size() const;
    bool lacp() const;
    bool phy() const;
+   /** The hash function for type lldp_std_tlv_type_t. */
+   uint32_t hash() const;
    /** Returns a string representation of the current object's values. */
    std::string to_string() const;
    /**
@@ -138,6 +140,8 @@ class EOS_SDK_PUBLIC lldp_syscap_t {
    bool telephone() const;
    bool docsis() const;
    bool station() const;
+   /** The hash function for type lldp_syscap_t. */
+   uint32_t hash() const;
    /** Returns a string representation of the current object's values. */
    std::string to_string() const;
    /**
@@ -181,6 +185,8 @@ class EOS_SDK_PUBLIC lldp_management_address_t {
     */
    std::string oid() const;
 
+   /** The hash function for type lldp_management_address_t. */
+   uint32_t hash() const;
    /** Returns a string representation of the current object's values. */
    std::string to_string() const;
    /**
@@ -223,6 +229,8 @@ class EOS_SDK_PUBLIC lldp_lacp_t {
 
    /** invalid lacp_t returned if no such tlv received. */
    bool operator!() const;
+   /** The hash function for type lldp_lacp_t. */
+   uint32_t hash() const;
    /** Returns a string representation of the current object's values. */
    std::string to_string() const;
    /**
@@ -257,6 +265,8 @@ class EOS_SDK_PUBLIC lldp_phy_t {
    /** Getter for 'valid': if phy-info tlv received from remote. */
    bool valid() const;
 
+   /** The hash function for type lldp_phy_t. */
+   uint32_t hash() const;
    /** Returns a string representation of the current object's values. */
    std::string to_string() const;
    /**
@@ -320,6 +330,8 @@ class EOS_SDK_PUBLIC lldp_chassis_id_t {
    bool operator==(lldp_chassis_id_t const & other) const;
    bool operator!=(lldp_chassis_id_t const & other) const;
    bool operator<(lldp_chassis_id_t const & other) const;
+   /** The hash function for type lldp_chassis_id_t. */
+   uint32_t hash() const;
    /** Returns a string representation of the current object's values. */
    std::string to_string() const;
    /**
@@ -367,6 +379,8 @@ class EOS_SDK_PUBLIC lldp_intf_id_t {
    bool operator==(lldp_intf_id_t const & other) const;
    bool operator!=(lldp_intf_id_t const & other) const;
    bool operator<(lldp_intf_id_t const & other) const;
+   /** The hash function for type lldp_intf_id_t. */
+   uint32_t hash() const;
    /** Returns a string representation of the current object's values. */
    std::string to_string() const;
    /**

@@ -46,6 +46,17 @@ mpls_route_key_t::operator!=(mpls_route_key_t const & other) const {
    return !operator==(other);
 }
 
+inline uint32_t
+mpls_route_key_t::hash() const {
+   uint32_t ret = 0;
+   ret = hash_mix::mix((uint8_t *)&top_label_,
+              sizeof(mpls_label_t), ret);
+   ret = hash_mix::mix((uint8_t *)&metric_,
+              sizeof(mpls_route_metric_t), ret);
+   ret = hash_mix::final_mix(ret);
+   return ret;
+}
+
 inline std::string
 mpls_route_key_t::to_string() const {
    std::ostringstream ss;
@@ -101,6 +112,17 @@ mpls_route_t::operator==(mpls_route_t const & other) const {
 inline bool
 mpls_route_t::operator!=(mpls_route_t const & other) const {
    return !operator==(other);
+}
+
+inline uint32_t
+mpls_route_t::hash() const {
+   uint32_t ret = 0;
+   ret = hash_mix::mix((uint8_t *)&key_,
+              sizeof(mpls_route_key_t), ret);
+   ret = hash_mix::mix((uint8_t *)&persistent_,
+              sizeof(bool), ret);
+   ret = hash_mix::final_mix(ret);
+   return ret;
 }
 
 inline std::string
@@ -235,6 +257,29 @@ mpls_route_via_t::operator==(mpls_route_via_t const & other) const {
 inline bool
 mpls_route_via_t::operator!=(mpls_route_via_t const & other) const {
    return !operator==(other);
+}
+
+inline uint32_t
+mpls_route_via_t::hash() const {
+   uint32_t ret = 0;
+   ret = hash_mix::mix((uint8_t *)&route_key_,
+              sizeof(mpls_route_key_t), ret);
+   ret = hash_mix::mix((uint8_t *)&hop_,
+              sizeof(ip_addr_t), ret);
+   ret = hash_mix::mix((uint8_t *)&intf_,
+              sizeof(intf_id_t), ret);
+   ret = hash_mix::mix((uint8_t *)&pushswap_label_,
+              sizeof(mpls_label_t), ret);
+   ret = hash_mix::mix((uint8_t *)&label_action_,
+              sizeof(mpls_action_t), ret);
+   ret = hash_mix::mix((uint8_t *)&ttl_mode_,
+              sizeof(mpls_ttl_mode_t), ret);
+   ret = hash_mix::mix((uint8_t *)&payload_type_,
+              sizeof(mpls_payload_type_t), ret);
+   ret = hash_mix::mix((uint8_t *)&skip_egress_acl_,
+              sizeof(bool), ret);
+   ret = hash_mix::final_mix(ret);
+   return ret;
 }
 
 inline std::string

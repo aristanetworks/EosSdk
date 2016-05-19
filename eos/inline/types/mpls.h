@@ -101,6 +101,15 @@ mpls_label_t::operator<(mpls_label_t const & other) const {
    return false;
 }
 
+inline uint32_t
+mpls_label_t::hash() const {
+   uint32_t ret = 0;
+   ret = hash_mix::mix((uint8_t *)&label_,
+              sizeof(uint32_t), ret);
+   ret = hash_mix::final_mix(ret);
+   return ret;
+}
+
 inline std::string
 mpls_label_t::to_string() const {
    std::ostringstream ss;

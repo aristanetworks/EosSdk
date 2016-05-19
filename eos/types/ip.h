@@ -8,6 +8,7 @@
 #include <assert.h>
 #include <eos/base.h>
 #include <eos/exception.h>
+#include <eos/hash_mix.h>
 #include <eos/panic.h>
 #include <netinet/in.h>
 #include <sstream>
@@ -83,6 +84,8 @@ class EOS_SDK_PUBLIC ip_addr_t {
    std::string to_string() const;
 
    operator bool() const;
+   /** The hash function for type ip_addr_t. */
+   uint32_t hash() const;
    /**
     * A utility stream operator that adds a string representation of ip_addr_t to
     * the ostream.
@@ -141,6 +144,8 @@ class EOS_SDK_PUBLIC ip_prefix_t {
    std::string to_string() const;
    bool operator==(ip_prefix_t const & other) const;
    bool operator!=(ip_prefix_t const & other) const;
+   /** The hash function for type ip_prefix_t. */
+   uint32_t hash() const;
    /**
     * A utility stream operator that adds a string representation of ip_prefix_t to
     * the ostream.
@@ -184,6 +189,8 @@ class EOS_SDK_PUBLIC ip_addr_mask_t {
    bool operator==(ip_addr_mask_t const & other) const;
    bool operator!=(ip_addr_mask_t const & other) const;
    bool operator<(ip_addr_mask_t const & other) const;
+   /** The hash function for type ip_addr_mask_t. */
+   uint32_t hash() const;
    /**
     * A utility stream operator that adds a string representation of ip_addr_mask_t
     * to the ostream.
@@ -232,6 +239,8 @@ class EOS_SDK_PUBLIC address_overlap_error : public configuration_error {
    ip_addr_mask_t addr() const noexcept;
 
    virtual void raise() const;
+   /** The hash function for type address_overlap_error. */
+   uint32_t hash() const;
    /** Returns a string representation of the current object's values. */
    std::string to_string() const;
    /**
