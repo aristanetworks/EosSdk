@@ -38,6 +38,10 @@ class system_mgr_impl : public system_mgr {
    std::string software_revision() const {
       return "None";
    }
+
+   eth_addr_t system_mac() const {
+      return eth_addr_t();
+   }
 };
 
 DEFINE_STUB_MGR_CTOR(system_mgr)

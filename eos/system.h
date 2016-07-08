@@ -7,6 +7,7 @@
 #include <eos/base.h>
 #include <eos/base_handler.h>
 #include <eos/base_mgr.h>
+#include <eos/eth.h>
 #include <string>
 
 /**
@@ -69,6 +70,8 @@ class EOS_SDK_PUBLIC system_mgr : public base_mgr<system_handler> {
    virtual std::string hardware_revision() const = 0;
    /// Returns the running software version
    virtual std::string software_revision() const = 0;
+   /// Returns the system MAC address
+   virtual eos::eth_addr_t system_mac() const = 0;
    
  protected:
    system_mgr() EOS_SDK_PRIVATE;
