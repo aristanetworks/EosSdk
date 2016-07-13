@@ -36,6 +36,8 @@ operator<<(std::ostream& os, const bfd_session_type_t & enum_val) {
       os << "BFD_SESSION_TYPE_MICRO";
    } else if (enum_val==BFD_SESSION_TYPE_VXLANTUNNEL) {
       os << "BFD_SESSION_TYPE_VXLANTUNNEL";
+   } else if (enum_val==BFD_SESSION_TYPE_MICRORFC7130) {
+      os << "BFD_SESSION_TYPE_MICRORFC7130";
    } else {
       os << "Unknown value";
    }

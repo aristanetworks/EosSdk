@@ -30,6 +30,7 @@ enum bfd_session_type_t {
    BFD_SESSION_TYPE_NORMAL,
    BFD_SESSION_TYPE_MICRO,
    BFD_SESSION_TYPE_VXLANTUNNEL,
+   BFD_SESSION_TYPE_MICRORFC7130,
 };
 /**
  * Appends a string representation of enum bfd_session_type_t value to the ostream.
