@@ -95,6 +95,21 @@ unsupported_error::raise() const {
    throw *this;
 }
 
+inline
+no_scoped_lock_obtained_error::no_scoped_lock_obtained_error() noexcept : 
+   error("eos::sdk_scoped_lock not grabbed when calling an api while "
+         "multithreaded") {
+}
+
+inline
+no_scoped_lock_obtained_error::~no_scoped_lock_obtained_error() noexcept {
+}
+
+inline void
+no_scoped_lock_obtained_error::raise() const {
+   throw *this;
+}
+
 }
 
 #endif // EOS_INLINE_EXCEPTION_H

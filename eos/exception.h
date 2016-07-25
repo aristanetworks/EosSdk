@@ -102,6 +102,14 @@ class EOS_SDK_PUBLIC unsupported_error : public error {
    std::string msg_;
 };
 
+/// The class for "No scoped lock obtained" errors
+class EOS_SDK_PUBLIC no_scoped_lock_obtained_error : public error {
+ public:
+   virtual ~no_scoped_lock_obtained_error() noexcept;
+   explicit no_scoped_lock_obtained_error() noexcept;
+   virtual void raise() const;  ///< Throws this exception.
+};
+
 }
 
 #include <eos/inline/exception.h>
