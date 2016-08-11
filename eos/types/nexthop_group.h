@@ -16,9 +16,9 @@ namespace eos {
 /**
  * The type of encapsulation to use for this nexthop group.
  *
- * The present nexthop group types are all tunnel encapsulations. Each
+ * Each tunnel encapsulation type for Nexthop Groups
  * causes a variety of packet headers for packets using the group to
- * be changed to appropriately encapsulate the frame.
+ * be changed to appropriately encapsulate the frame. IP type has no encapsulation.
  */
 enum nexthop_group_encap_t {
    NEXTHOP_GROUP_TYPE_NULL,
@@ -30,6 +30,8 @@ enum nexthop_group_encap_t {
    NEXTHOP_GROUP_MPLS,
    /** MPLS over GRE encapsulation. */
    NEXTHOP_GROUP_MPLS_OVER_GRE,
+   /** IP no encapsulation. */
+   NEXTHOP_GROUP_IP,
 };
 /**
  * Appends a string representation of enum nexthop_group_encap_t value to the
