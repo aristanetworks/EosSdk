@@ -126,6 +126,18 @@ class EOS_SDK_PUBLIC intf_mgr : public base_mgr<intf_handler, intf_id_t> {
     */
    virtual bool exists(intf_id_t) const = 0;
 
+   /**
+    * Given an intf_id_t, returns the kernel interface name (as a string).
+    * Returns an empty string if matching kernel interface is not found.
+    */
+   virtual std::string kernel_intf_name(intf_id_t) const = 0;
+
+   /**
+    * Given a kernel interface name string, return the EOS interface as an intf_id_t.
+    * Returns an empty intf_id_t() if matching EOS interface is not found.
+    */
+   virtual intf_id_t eos_intf_name(std::string) const = 0;
+
    // Attribute accessors
    /// Returns true if the given interface is configured to be enabled
    virtual bool admin_enabled(intf_id_t) const = 0;

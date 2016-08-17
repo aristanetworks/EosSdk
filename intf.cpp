@@ -63,6 +63,14 @@ class intf_mgr_impl : public intf_mgr {
       return false;  // TODO: No op impl.
    }
 
+   std::string kernel_intf_name(intf_id_t) const {
+      return "";  // TODO: No op impl.
+   }
+
+   intf_id_t eos_intf_name(std::string) const {
+      return intf_id_t();  // TODO: No op impl.
+   }
+
    bool admin_enabled(intf_id_t id) const {
       return false;  // TODO: No op impl.
    }
