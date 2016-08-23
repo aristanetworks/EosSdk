@@ -10,6 +10,7 @@
 #include <eos/policy_map.h>
 #include <eos/sdk.h>
 #include <eos/system.h>
+#include <eos/tracing.h>
 
 #include <cstdio>
 
@@ -17,10 +18,12 @@ class policy_demo : public eos::agent_handler,
                     public eos::acl_handler,
                     public eos::policy_map_handler {
  public:
+   eos::tracer t;
    explicit policy_demo(eos::sdk & sdk)
          : eos::agent_handler(sdk.get_agent_mgr()),
            eos::acl_handler(sdk.get_acl_mgr()),
-           eos::policy_map_handler(sdk.get_policy_map_mgr()) {
+           eos::policy_map_handler(sdk.get_policy_map_mgr()),
+           t("PolicyDemo") {
 
       // Setup manager refs
       class_mgr = sdk.get_class_map_mgr();
@@ -88,7 +91,11 @@ class policy_demo : public eos::agent_handler,
       auto cmkey = eos::class_map_key_t("cm1", eos::POLICY_FEATURE_PBR);
       auto cm = eos::class_map_t(cmkey);
       cm.rule_set(1, eos::class_map_rule_t(acl1));
+      cm.persistent_is(true);
       class_mgr->class_map_is(cm);
+      t.trace0("class map cm input: %s", cm.to_string().c_str());
+      auto cm_res = class_mgr->class_map(cmkey);
+      t.trace0("class map cm outpt: %s", cm_res.to_string().c_str());
 
       // Build a policy map
       auto pmkey = eos::policy_map_key_t("pm1", eos::POLICY_FEATURE_PBR);
@@ -115,7 +122,11 @@ class policy_demo : public eos::agent_handler,
       auto cmkey2 = eos::class_map_key_t("cm2", eos::POLICY_FEATURE_PBR);
       auto cm2 = eos::class_map_t(cmkey2);
       cm2.rule_set(1, eos::class_map_rule_t(acl2));
+      cm2.persistent_is(true);
       class_mgr->class_map_is(cm2);
+      t.trace0("class map cm2 input: %s", cm2.to_string().c_str());
+      auto cm2_res = class_mgr->class_map(cmkey2);
+      t.trace0("class map cm2 outpt: %s", cm2_res.to_string().c_str());
 
       // Add the policy map rule matching our class map and dropping the traffic
       auto pmrule6 = eos::policy_map_rule_t(cmkey2);
@@ -147,6 +158,7 @@ class policy_demo : public eos::agent_handler,
       action.nexthop_group_name_is("nexthopgroup2");
       pmrule_raw_v6.action_set(action);
       pm.rule_set(4, pmrule_raw_v6);
+      pm.persistent_is(true);
 
       // Commit the policy map
       get_policy_map_mgr()->policy_map_is(pm);
