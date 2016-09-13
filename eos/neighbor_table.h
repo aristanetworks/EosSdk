@@ -59,6 +59,10 @@ class EOS_SDK_PUBLIC neighbor_table_handler :
    void watch_neighbor_entry(neighbor_key_t const & key, bool interest);
 
    // Handler when an entry shows up in ARP table or Neighbor Discovery table.
+   // The input parameter 'entry' is the newly created or updated neighbor entry.
+   // Note if neighbor_table_mgr's API neighbor_entry_status() is called in this
+   // function using 'entry.neighbor_key()', it may not return a neighbor_entry
+   // that is the same as 'entry', since the neighbor entry might have changed.
    virtual void on_neighbor_entry_set(neighbor_entry_t const & entry);
 
    // Handler when an entry disappears from ARP table or Neighbor Discovery table.
