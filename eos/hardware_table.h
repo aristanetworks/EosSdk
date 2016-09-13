@@ -20,7 +20,7 @@
  * tables used by the system. This is useful for agents that want to
  * track how many entries are used or available across the various
  * tables, either for monitoring purposes or so they can take specific
- * actions when a table is close to becomming full. Usage is exposed
+ * actions when a table is close to becoming full. Usage is exposed
  * per unique table, feature, and chip combination. Example tables
  * include 'TCAM', 'LEM', 'ECMP', and 'LPM' tables, while the features
  * look like "IPV4", "ACL", "MPLS", or even platform-specific features
