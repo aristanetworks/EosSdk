@@ -7,83 +7,77 @@
 #include <eos/panic.h>
 #include <eos/exception.h>
 
+#define GET_MGR(__mgr__)          \
+   print_profiles::add_profile( #__mgr__ );       \
+   if (! __mgr__ ## _mgr_) {      \
+      init_ ## __mgr__ ## _mgr(); \
+   }                              \
+   return __mgr__ ## _mgr_;       \
+
 namespace eos {
+
+// To facilitate the making of customized sysdb-mount-profiles (in place of the 
+// brute-force one "EosSdk", see /usr/lib/SysdbMountProfiles/EosSdkAll), an app can
+// be started with the env var EOS_PRINT_PROFILES_AND_EXIT pointing to a filename
+// where the profile should be written, then exit.
+class EOS_SDK_PUBLIC print_profiles {
+  public:
+   static void set_print_profiles(const char* name);
+   static void add_profile(const char * profile);
+   static void write_profiles(); // will call exit() after printing
+
+  private:
+   static FILE* print_profiles_fp;
+   static std::map<std::string, bool> profiles_to_print;
+   static const char* eossdk_progname;
+};
 
 inline std::string sdk::name() {
    return name_;
 }
 
 inline acl_mgr * sdk::get_acl_mgr() {
-   if (!acl_mgr_) {
-      init_acl_mgr();
-   }
-   return acl_mgr_;
+   GET_MGR(acl)
 }
 
 inline agent_mgr * sdk::get_agent_mgr() {
-   if (!agent_mgr_) {
-      init_agent_mgr();
-   }
-   return agent_mgr_;
+   GET_MGR(agent)
 }
 
 inline aresolve_mgr * sdk::get_aresolve_mgr() {
-   if (!aresolve_mgr_) {
-      init_aresolve_mgr();
-   }
-   return aresolve_mgr_;
+   GET_MGR(aresolve)
 }
 
 inline bfd_session_mgr * sdk::get_bfd_session_mgr() {
-   if (!bfd_session_mgr_) {
-      init_bfd_session_mgr();
-   }
-   return bfd_session_mgr_;
+   GET_MGR(bfd_session)
 }
 
 inline class_map_mgr * sdk::get_class_map_mgr() {
-   if (!class_map_mgr_) {
-      init_class_map_mgr();
-   }
-   return class_map_mgr_;
+   GET_MGR(class_map)
 }
 
 inline decap_group_mgr * sdk::get_decap_group_mgr() {
-   if (!decap_group_mgr_) {
-      init_decap_group_mgr();
-   }
-   return decap_group_mgr_;
+   GET_MGR(decap_group)
 }
 
 inline directflow_mgr * sdk::get_directflow_mgr() {
-   if (!directflow_mgr_) {
-      init_directflow_mgr();
-   }
-   return directflow_mgr_;
+   GET_MGR(directflow)
 }
 
 inline eth_intf_mgr * sdk::get_eth_intf_mgr() {
-   if (!eth_intf_mgr_) {
-      init_eth_intf_mgr();
-   }
-   return eth_intf_mgr_;
+   GET_MGR(eth_intf)
 }
 
 inline eth_lag_intf_mgr * sdk::get_eth_lag_intf_mgr() {
-   if (!eth_lag_intf_mgr_) {
-      init_eth_lag_intf_mgr();
-   }
-   return eth_lag_intf_mgr_;
+   GET_MGR(eth_lag_intf)
 }
 
 inline eth_phy_intf_mgr * sdk::get_eth_phy_intf_mgr() {
-   if (!eth_phy_intf_mgr_) {
-      init_eth_phy_intf_mgr();
-   }
-   return eth_phy_intf_mgr_;
+   GET_MGR(eth_phy_intf)
 }
 
 inline eth_phy_intf_counter_mgr * sdk::get_eth_phy_intf_counter_mgr() {
+   print_profiles::add_profile("eth_phy_intf");
    if (!eth_phy_intf_counter_mgr_) {
       init_eth_phy_intf_counter_mgr();
    }
@@ -91,6 +85,8 @@ inline eth_phy_intf_counter_mgr * sdk::get_eth_phy_intf_counter_mgr() {
 }
 
 inline event_loop * sdk::get_event_loop() {
+   // if setup (env) to display needed sysdb profiles, this will print them and exit
+   print_profiles::write_profiles();
    if (!event_loop_) {
       init_event_loop();
    }
@@ -98,6 +94,7 @@ inline event_loop * sdk::get_event_loop() {
 }
 
 inline fib_mgr * sdk::get_fib_mgr(mgr_mode_type_t mode) {
+   print_profiles::add_profile("fib");
    if (!fib_mgr_) {
       init_fib_mgr(mode);
    }
@@ -106,20 +103,15 @@ inline fib_mgr * sdk::get_fib_mgr(mgr_mode_type_t mode) {
 
    
 inline hardware_table_mgr * sdk::get_hardware_table_mgr() {
-   if (!hardware_table_mgr_) {
-      init_hardware_table_mgr();
-   }
-   return hardware_table_mgr_;
+   GET_MGR(hardware_table)
 }
 
 inline intf_mgr * sdk::get_intf_mgr() {
-   if (!intf_mgr_) {
-      init_intf_mgr();
-   }
-   return intf_mgr_;
+   GET_MGR(intf)
 }
 
 inline intf_counter_mgr * sdk::get_intf_counter_mgr() {
+   print_profiles::add_profile("intf");
    if (!intf_counter_mgr_) {
       init_intf_counter_mgr();
    }
@@ -127,20 +119,15 @@ inline intf_counter_mgr * sdk::get_intf_counter_mgr() {
 }
 
 inline ip_intf_mgr * sdk::get_ip_intf_mgr() {
-   if (!ip_intf_mgr_) {
-      init_ip_intf_mgr();
-   }
-   return ip_intf_mgr_;
+   GET_MGR(ip_intf)
 }
 
 inline ip_route_mgr * sdk::get_ip_route_mgr() {
-   if (!ip_route_mgr_) {
-      init_ip_route_mgr();
-   }
-   return ip_route_mgr_;
+   GET_MGR(ip_route)
 }
 
 inline intf_mgr_helper * sdk::get_intf_mgr_helper() {
+   print_profiles::add_profile("IntfMgrHelper");
    if (!intf_mgr_helper_) {
       init_intf_mgr_helper();
    }
@@ -148,17 +135,11 @@ inline intf_mgr_helper * sdk::get_intf_mgr_helper() {
 }
 
 inline mac_table_mgr * sdk::get_mac_table_mgr() {
-   if (!mac_table_mgr_) {
-      init_mac_table_mgr();
-   }
-   return mac_table_mgr_;
+   GET_MGR(mac_table)
 }
 
 inline mlag_mgr * sdk::get_mlag_mgr() {
-   if (!mlag_mgr_) {
-      init_mlag_mgr();
-   }
-   return mlag_mgr_;
+   GET_MGR(mlag)
 }
 
 inline mount_mgr * sdk::get_mount_mgr() {
@@ -169,45 +150,27 @@ inline mount_mgr * sdk::get_mount_mgr() {
 }
 
 inline mpls_route_mgr * sdk::get_mpls_route_mgr() {
-   if (!mpls_route_mgr_) {
-      init_mpls_route_mgr();
-   }
-   return mpls_route_mgr_;
+   GET_MGR(mpls_route)
 }
 
 inline neighbor_table_mgr * sdk::get_neighbor_table_mgr() {
-   if (!neighbor_table_mgr_) {
-      init_neighbor_table_mgr();
-   }
-   return neighbor_table_mgr_;
+   GET_MGR(neighbor_table)
 }
 
 inline nexthop_group_mgr * sdk::get_nexthop_group_mgr() {
-   if (!nexthop_group_mgr_) {
-      init_nexthop_group_mgr();
-   }
-   return nexthop_group_mgr_;
+   GET_MGR(nexthop_group)
 }
 
 inline policy_map_mgr * sdk::get_policy_map_mgr() {
-   if (!policy_map_mgr_) {
-      init_policy_map_mgr();
-   }
-   return policy_map_mgr_;
+   GET_MGR(policy_map)
 }
 
 inline subintf_mgr * sdk::get_subintf_mgr() {
-   if (!subintf_mgr_) {
-      init_subintf_mgr();
-   }
-   return subintf_mgr_;
+   GET_MGR(subintf)
 }
 
 inline system_mgr * sdk::get_system_mgr() {
-   if (!system_mgr_) {
-      init_system_mgr();
-   }
-   return system_mgr_;
+   GET_MGR(system)
 }
 
 inline timeout_mgr * sdk::get_timeout_mgr() {
@@ -218,18 +181,12 @@ inline timeout_mgr * sdk::get_timeout_mgr() {
 }
 
 inline vrf_mgr * sdk::get_vrf_mgr() {
-   if (!vrf_mgr_) {
-      init_vrf_mgr();
-   }
-   return vrf_mgr_;
+   GET_MGR(vrf)
 }
 
 
 inline lldp_mgr * sdk::get_lldp_mgr() {
-   if (!lldp_mgr_) {
-      init_lldp_mgr();
-   }
-   return lldp_mgr_;
+   GET_MGR(lldp)
 }
 
 }

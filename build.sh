@@ -38,12 +38,19 @@ fi
 CXXFLAGS=$CFLAGS
 export CXXFLAGS
 
+sysroot=$($(which gcc) --print-sysroot) || sysroot = ""
+[ $sysroot -a ${sysroot%-glibc2.19} != $sysroot ] && {
+  LDFLAGS="-Wl,--dynamic-linker=$sysroot/lib/ld-linux.so.2 -Wl,-rpath,$sysroot/lib:/usr/lib:/lib"
+  export LDFLAGS
+}
+
 set -e
 test -f configure || ./bootstrap
 test -f Makefile || ./configure $configure_flags \
    $configure_flags --program-prefix= \
-   --prefix=/usr --exec-prefix=/usr --bindir=/usr/bin --sbindir=/usr/sbin \
-   --sysconfdir=/etc --datadir=/usr/share --includedir=/usr/include \
-   --libdir=/usr/lib --libexecdir=/usr/libexec --localstatedir=/var \
-   --sharedstatedir=/var/lib --mandir=/usr/share/man --infodir=/usr/share/info
+   #--prefix=/usr --exec-prefix=/usr --bindir=/usr/bin --sbindir=/usr/sbin \
+   #--sysconfdir=/etc --datadir=/usr/share --includedir=/usr/include \
+   #--libdir=/usr/lib --libexecdir=/usr/libexec --localstatedir=/var \
+   #--sharedstatedir=/var/lib --mandir=/usr/share/man --infodir=/usr/share/info
+   --prefix=$sysroot/usr
 exec make "$@"

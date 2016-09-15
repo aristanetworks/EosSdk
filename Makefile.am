@@ -7,7 +7,7 @@ AM_LDFLAGS = -Wl,--no-undefined
 PUBLISHED_HEADER_FILES := $(wildcard eos/*.h) $(wildcard eos/inline/*.h) $(wildcard eos/types/*.h) $(wildcard eos/inline/types/*.h)
 nobase_include_HEADERS = $(PUBLISHED_HEADER_FILES)
 
-EXTRA_DIST = $(wildcard examples/*) $(wildcard examples/test/*)
+EXTRA_DIST = PrintProfilesAndExit.cpp $(wildcard examples/*) $(wildcard examples/test/*)
 
 libeos_la_SOURCES =
 libeos_la_SOURCES += agent.cpp

@@ -3,6 +3,7 @@
 
 #include <cassert>
 #include <cstring>
+#include <unistd.h>
 
 #include "eos/event_loop.h"
 #include "eos/sdk.h"
@@ -66,6 +67,7 @@ sdk::sdk()
    name_ = agent_process_name;
    eossdk_context_ = NULL;
    impl.register_sdk(this);
+   print_profiles::set_print_profiles(name_.c_str());
 }
 
 sdk::sdk(std::string const name, void *eossdk_context)
@@ -102,12 +104,14 @@ sdk::sdk(std::string const name, void *eossdk_context)
    name_ = name;
    eossdk_context_ = eossdk_context;
    impl.register_sdk(this);
+   print_profiles::set_print_profiles(name_.c_str());
 }
 
 void
 sdk::main_loop(int argc, char ** argv) {
    assert(!name_.empty() && "No agent name set");
    impl.agent_name_is(name_.c_str());
+   print_profiles::write_profiles();
    impl.main_loop();
 
 }
@@ -173,5 +177,12 @@ void default_signal_handler(int signo) {
 
 void internal_connection_buffer_size_is(uint32_t bytes) {
 }
+
+// Real functions to facilitate the making of customized sysdb-mount-profiles 
+// (to use in place of the brute-force one called "EosSdk", see 
+// /usr/lib/SysdbMountProfiles/EosSdkAll), an app can be started with the env var 
+// EOS_PRINT_PROFILES_AND_EXIT pointing to a filename where the profile should be 
+// written, then exit.
+#include "PrintProfilesAndExit.cpp"
 
 }
