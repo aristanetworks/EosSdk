@@ -76,6 +76,13 @@ class acl_mgr_impl : public acl_mgr {
    void acl_fragments_enabled_set(acl_key_t const &, bool enabled) {
    }
 
+   bool persistent(acl_key_t const &) const {
+      return false;
+   }
+
+   void persistent_is(acl_key_t const &, bool) {
+   }
+
    void acl_commit() {
    }
 };

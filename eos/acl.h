@@ -276,6 +276,21 @@ class EOS_SDK_PUBLIC acl_mgr : public base_mgr<acl_handler> {
    /// Immediately enable or disable fragments matching on the ACL
    virtual void acl_fragments_enabled_set(acl_key_t const &, bool) = 0;
 
+   /**
+    * Return whether the ACL is persistent or not. ACLs are dynamic by default.
+    * @param acl_key_t The ACL key (name and ACL type)
+    * @return true if ACL appears in the running-config,
+    * false if the ACL is a dynamic ACL.
+    */
+   virtual bool persistent(acl_key_t const &) const = 0;
+
+   /**
+    * @param acl_key_t The ACL key to modify (name and ACL type)
+    * @param bool If true, the ACL should appear in the running-config,
+    * else the ACL is a dynamic ACL.
+    */
+   virtual void persistent_is(acl_key_t const &, bool) = 0;
+
  protected:
    acl_mgr() EOS_SDK_PRIVATE;
    friend class acl_handler;
