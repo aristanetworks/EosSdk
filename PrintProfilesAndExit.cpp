@@ -30,7 +30,7 @@ void print_profiles::set_print_profiles(const char* name) {
       if (!print_profiles_fp) {
          const char* text = 
                     "Error: EOS_PRINT_PROFILES_AND_EXIT must be a writtable file\n";
-         fprintf(stderr, text);
+         fprintf(stderr, "%s", text);
          exit(1); // r+2 because of warnings: discarded fprintf rcode + unused var
       }
       eossdk_progname = name;
@@ -60,7 +60,7 @@ void print_profiles::write_profiles() {
          } else {
             const char* text = 
                  "Warning: couldn't figure out agent name, edit 'TBD' in profile\n";
-            fprintf(stderr, text);
+            fprintf(stderr, "%s", text);
             fprintf(print_profiles_fp, "agentName:!!!TBD!!!\n");
          }
       }
