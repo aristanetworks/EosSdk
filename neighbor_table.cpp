@@ -16,6 +16,11 @@ class neighbor_table_mgr_impl : public neighbor_table_mgr {
       return *nop;
    }
 
+   neighbor_table_status_iter_t neighbor_table_status_iter() const {
+      neighbor_table_status_iter_t * nop = 0;
+      return *nop;
+   }
+
    virtual neighbor_entry_t neighbor_entry_status(neighbor_key_t const & key) const {
       return neighbor_entry_t();
    }

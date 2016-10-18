@@ -31,6 +31,7 @@ namespace eos {
 
 class neighbor_table_mgr;
 class neighbor_table_iter_impl;
+class neighbor_table_status_iter_impl;
 
 /**
  * The neighbor table handler.
@@ -72,11 +73,22 @@ class EOS_SDK_PUBLIC neighbor_table_handler :
 /**
  * An iterator over the configured ARP and Neighbor Discovery tables.
  */
-class EOS_SDK_PUBLIC neighbor_table_iter_t : public iter_base< neighbor_key_t, 
+class EOS_SDK_PUBLIC neighbor_table_iter_t : public iter_base<neighbor_key_t, 
                                                     neighbor_table_iter_impl> {
  private:
    friend class neighbor_table_iter_impl;
    explicit neighbor_table_iter_t(neighbor_table_iter_impl * const) EOS_SDK_PRIVATE;
+};
+
+/**
+ * An iterator over the resolved ARP and Neighbor Discovery tables.
+ */
+class EOS_SDK_PUBLIC neighbor_table_status_iter_t : public iter_base<neighbor_key_t,
+                                                   neighbor_table_status_iter_impl> {
+ private:
+   friend class neighbor_table_status_iter_impl;
+   explicit neighbor_table_status_iter_t(
+               neighbor_table_status_iter_impl * const) EOS_SDK_PRIVATE;
 };
 
 /**
@@ -93,10 +105,16 @@ class EOS_SDK_PUBLIC neighbor_table_mgr : public base_mgr<neighbor_table_handler
    virtual ~neighbor_table_mgr();
 
    /**
-    * Iterates through the configured ARP and Neighbor Discovery tables. 
+    * Iterates through the statically configured ARP and Neighbor Discovery tables.
     * A neighbor_key_t is returned for each entry.
     */
    virtual neighbor_table_iter_t neighbor_table_iter() const = 0;
+
+   /**
+    * Iterates through the resolved ARP and Neighbor Discovery tables. 
+    * A neighbor_key_t is returned for each entry.
+    */
+   virtual neighbor_table_status_iter_t neighbor_table_status_iter() const = 0;
 
    // Attribute accessors
 

@@ -290,6 +290,7 @@ wrap_iterator(eos::mpls_route_status_iter_t, eos::mpls_route_status_iter_impl, e
 wrap_iterator(eos::mpls_route_via_iter_t, eos::mpls_route_via_iter_impl, eos::mpls_route_via_t);
 wrap_iterator(eos::mpls_route_via_status_iter_t, eos::mpls_route_via_status_iter_impl, eos::mpls_route_via_t);
 wrap_iterator(eos::neighbor_table_iter_t, eos::neighbor_table_iter_impl, eos::neighbor_key_t);
+wrap_iterator(eos::neighbor_table_status_iter_t, eos::neighbor_table_status_iter_impl, eos::neighbor_key_t);
 wrap_iterator(eos::nexthop_group_iter_t, eos::nexthop_group_iter_impl, eos::nexthop_group_t);
 wrap_iterator(eos::policy_map_iter_t, eos::policy_map_iter_impl, eos::policy_map_key_t);
 wrap_iterator(eos::subintf_iter_t, eos::subintf_iter_impl, eos::intf_id_t);
