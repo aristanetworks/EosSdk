@@ -1,0 +1,13 @@
+**hardware_table**
+------------------
+
+
+.. doxygenfile:: eos/hardware_table.h
+   :project: eossdk
+
+Type definitions in **hardware_table**
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. doxygenfile:: eos/types/hardware_table.h
+   :project: eossdk
+
