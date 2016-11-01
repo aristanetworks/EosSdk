@@ -30,31 +30,31 @@ inline ip_addr_t::ip_addr_t() :
 }
 
 inline ip_addr_t::ip_addr_t(std::string const & address_string) {
-   
+
    memset(&addr_, 0, sizeof(addr_));
    if (!parse_ip_addr(address_string.c_str(), this)) {
       panic(invalid_argument_error("ip.ip_addr_t",
                                    "invalid IP address."));
    }
-   
+
 }
 
 // Parse the IPv4 or IPv6 address string supplied. Calls panic() if the address is
 // invalid, so if user input is provided, first validate with parse_ip_addr().
 inline ip_addr_t::ip_addr_t(char const * address_string) {
-   
+
    memset(&addr_, 0, sizeof(addr_));
    if (!parse_ip_addr(address_string, this)) {
       panic(invalid_argument_error("ip.ip_addr_t",
                                    "invalid IP address."));
    }
-   
+
 }
 
 // IPv4 address (one word) in network byte order.
 inline ip_addr_t::ip_addr_t(uint32_be_t addr_v4) :
       af_(AF_IPV4) {
-   
+
    memset(&addr_, 0, sizeof(addr_));
    addr_.words[0] = addr_v4;
 }
@@ -66,9 +66,9 @@ ip_addr_t::af() const {
 
 inline bool
 ip_addr_t::operator!=(ip_addr_t const & other) const {
-   
+
    return !(*this == other);
-   
+
 }
 
 // Returns the 16-byte address for the address, in network byte order IPv4
@@ -81,17 +81,17 @@ ip_addr_t::addr() const {
 // The IPv4 address as a word in network byte order.
 inline uint32_be_t
 ip_addr_t::addr_v4() const {
-   
+
    if(af_ != AF_IPV4) {
       panic("cannot call addr_v4() for non AF_IPV4 addresses");
    }
    return addr_.words[0];
-   
+
 }
 
 inline std::string
 ip_addr_t::to_string() const {
-   
+
    if (af_ == AF_IPV4) {
       char buf[128];
       int rv;
@@ -105,7 +105,7 @@ ip_addr_t::to_string() const {
    } else if (af_ == AF_IPV6) {
       struct sockaddr_in6 addr;
       char buf[INET6_ADDRSTRLEN];
-   
+
       addr.sin6_family = AF_INET6;
       memcpy(&addr.sin6_addr.s6_addr, addr_.bytes, 16);
       if (!inet_ntop(addr.sin6_family, addr.sin6_addr.s6_addr,
@@ -117,10 +117,10 @@ ip_addr_t::to_string() const {
    } else {
       return "Unknown IP address type.";
    }
-   
+
 }
 
-inline 
+inline
 ip_addr_t::operator bool() const {
    return (af_ != AF_NULL);
 }
@@ -130,8 +130,8 @@ ip_addr_t::hash() const {
    uint32_t ret = 0;
    ret = hash_mix::mix((uint8_t *)&af_,
               sizeof(af_t), ret);
-   ret = hash_mix::mix((uint8_t *)addr_.bytes, 
-              af_ == AF_IPV4 ? 4 : sizeof(addr_.bytes), ret);
+   ret = hash_mix::mix((uint8_t *)addr_.bytes,
+              af_ == AF_IPV4 ? 4: sizeof(addr_.bytes), ret);
    ret = hash_mix::final_mix(ret);
    return ret;
 }
@@ -146,7 +146,7 @@ operator<<(std::ostream& os, const ip_addr_t& obj) {
 
 inline ip_prefix_t::ip_prefix_t() :
       prefix_length_() {
-   
+
 }
 
 inline ip_prefix_t::ip_prefix_t(ip_addr_t const & addr, uint8_t prefix_length) :
@@ -155,12 +155,12 @@ inline ip_prefix_t::ip_prefix_t(ip_addr_t const & addr, uint8_t prefix_length) :
 
 inline ip_prefix_t::ip_prefix_t(char const * prefix_string) :
       addr_(), prefix_length_() {
-   
+
    if (!parse_ip_prefix(prefix_string, this)) {
       panic(invalid_argument_error("ip_prefix_t",
                                    "input is not an IPv4 or IPV6 prefix"));
    }
-   
+
 }
 
 inline uint8_t
@@ -192,19 +192,19 @@ ip_prefix_t::mask() const {
       addr[word] <<= (8 - prefix_length_ % 8);
    }
    return ip_addr_t(af(), addr);
-   
+
 }
 
 inline std::string
 ip_prefix_t::to_string() const {
-   
+
    char buf[128];
    int rv;
    rv = snprintf(buf, sizeof(buf), "%s/%d",
                  addr_.to_string().c_str(), prefix_length_);
    assert(rv>0);
    return std::string(buf);
-   
+
 }
 
 inline bool
@@ -242,7 +242,7 @@ inline ip_addr_mask_t::ip_addr_mask_t() :
 }
 
 inline ip_addr_mask_t::ip_addr_mask_t(ip_addr_t const & addr, uint8_t mask_length) {
-   
+
    addr_ = addr;
    if (mask_length < 129) {
       mask_length_ = uint8_t(mask_length);
@@ -250,7 +250,7 @@ inline ip_addr_mask_t::ip_addr_mask_t(ip_addr_t const & addr, uint8_t mask_lengt
       panic(invalid_argument_error("ip.ip_addr_mask_t",
                                    "mask_length must be between 0..128."));
    }
-   
+
 }
 
 inline ip_addr_t
@@ -270,18 +270,18 @@ ip_addr_mask_t::af() const {
 
 inline uint32_be_t
 ip_addr_mask_t::mask() const {
-   
+
    if (mask_length_ == 0) {
       return 0;
    }
    uint32_be_t r = (0xFFFFFFFF << (32 - mask_length_)) & 0xFFFFFFFF;
    return r;
-   
+
 }
 
 inline std::string
 ip_addr_mask_t::to_string() const {
-   
+
    if (addr_.af() == AF_IPV6 || addr_.af() == AF_IPV4) {
       // Emit the address/mask_length for IPV6/IPV4 addresses
       char buf[128];
@@ -296,7 +296,7 @@ ip_addr_mask_t::to_string() const {
             "ip.ip_addr_mask_t",
             "Must have a valid address family to convert to string."));
    }
-   
+
 }
 
 inline bool
@@ -339,9 +339,9 @@ operator<<(std::ostream& os, const ip_addr_mask_t& obj) {
 
 
 
-inline 
+inline
 address_overlap_error::~address_overlap_error() noexcept {
-   
+
 }
 
 inline ip_addr_mask_t

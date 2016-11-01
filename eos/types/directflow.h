@@ -53,7 +53,7 @@ class EOS_SDK_PUBLIC flow_match_field_set_t {
     * A utility stream operator that adds a string representation of
     * flow_match_field_set_t to the ostream.
     */
-   friend std::ostream& operator<<(std::ostream& os, 
+   friend std::ostream& operator<<(std::ostream& os,
                                    const flow_match_field_set_t& obj);
 
  private:
@@ -293,7 +293,7 @@ class EOS_SDK_PUBLIC flow_action_t {
 class EOS_SDK_PUBLIC flow_entry_t {
  public:
    flow_entry_t();
-   flow_entry_t(std::string const & name, flow_match_t match, flow_action_t action, 
+   flow_entry_t(std::string const & name, flow_match_t match, flow_action_t action,
                 flow_priority_t priority);
 
    std::string name() const;

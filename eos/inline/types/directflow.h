@@ -55,8 +55,8 @@ operator<<(std::ostream& os, const flow_match_field_set_t& obj) {
 
 
 inline flow_match_t::flow_match_t() :
-      match_field_set_(), input_intfs_(), eth_src_(), eth_src_mask_(), eth_dst_(), 
-      eth_dst_mask_(), eth_type_(), vlan_id_(), vlan_id_mask_(), cos_(), ip_src_(), 
+      match_field_set_(), input_intfs_(), eth_src_(), eth_src_mask_(), eth_dst_(),
+      eth_dst_mask_(), eth_type_(), vlan_id_(), vlan_id_mask_(), cos_(), ip_src_(),
       ip_src_mask_(), ip_dst_(), ip_dst_mask_() {
 }
 
@@ -415,7 +415,7 @@ operator<<(std::ostream& os, const flow_action_set_t& obj) {
 
 
 inline flow_action_t::flow_action_t() :
-      action_set_(), output_intfs_(), vlan_id_(), cos_(), eth_src_(), eth_dst_(), 
+      action_set_(), output_intfs_(), vlan_id_(), cos_(), eth_src_(), eth_dst_(),
       ip_src_(), ip_dst_() {
 }
 
@@ -595,7 +595,7 @@ inline flow_entry_t::flow_entry_t() :
       name_(), match_(), action_(), priority_() {
 }
 
-inline flow_entry_t::flow_entry_t(std::string const & name, flow_match_t match, 
+inline flow_entry_t::flow_entry_t(std::string const & name, flow_match_t match,
                                   flow_action_t action, flow_priority_t priority) :
       name_(name), match_(match), action_(action), priority_(priority) {
 }

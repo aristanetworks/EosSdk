@@ -25,7 +25,7 @@ operator<<(std::ostream& os, const eth_lag_intf_fallback_type_t & enum_val) {
 
 
 inline std::ostream&
-operator<<(std::ostream& os, 
+operator<<(std::ostream& os,
            const eth_lag_intf_fallback_timeout_default_t & enum_val) {
    if (enum_val==ETH_LAG_INTF_FALLBACK_TIMEOUT_DEFAULT) {
       os << "ETH_LAG_INTF_FALLBACK_TIMEOUT_DEFAULT";
@@ -85,14 +85,14 @@ operator<<(std::ostream& os, const eth_lag_intf_member_lacp_timeout_t & enum_val
 
 // Default constructor.
 inline eth_lag_intf_membership_t::eth_lag_intf_membership_t() :
-      eth_lag_intf_id_(intf_id_t()), active_(false), reason_(""), member_time_(0), 
+      eth_lag_intf_id_(intf_id_t()), active_(false), reason_(""), member_time_(0),
       mode_(ETH_LAG_INTF_MEMBER_LACP_MODE_NULL) {
 }
 
 inline eth_lag_intf_membership_t::eth_lag_intf_membership_t(
-         intf_id_t eth_lag_intf_id, bool active, std::string const & reason, 
+         intf_id_t eth_lag_intf_id, bool active, std::string const & reason,
          double member_time, eth_lag_intf_member_lacp_mode_t mode) :
-      eth_lag_intf_id_(eth_lag_intf_id), active_(active), reason_(reason), 
+      eth_lag_intf_id_(eth_lag_intf_id), active_(active), reason_(reason),
       member_time_(member_time), mode_(mode) {
 }
 
@@ -203,20 +203,20 @@ operator<<(std::ostream& os, const eth_lag_intf_membership_t& obj) {
 
 // Default constructor.
 inline eth_lag_intf_t::eth_lag_intf_t() :
-      intf_(intf_id_t()), speed_(0), min_links_(0), 
+      intf_(intf_id_t()), speed_(0), min_links_(0),
       fallback_type_(ETH_LAG_INTF_FALLBACK_NONE), fallback_timeout_(90) {
 }
 
 inline eth_lag_intf_t::eth_lag_intf_t(intf_id_t intf) :
-      intf_(intf), speed_(0), min_links_(0), 
+      intf_(intf), speed_(0), min_links_(0),
       fallback_type_(ETH_LAG_INTF_FALLBACK_NONE), fallback_timeout_(90) {
 }
 
-inline eth_lag_intf_t::eth_lag_intf_t(intf_id_t intf, uint32_t min_links, 
-                                      uint64_t speed, 
-                                      eth_lag_intf_fallback_type_t fallback_type, 
+inline eth_lag_intf_t::eth_lag_intf_t(intf_id_t intf, uint32_t min_links,
+                                      uint64_t speed,
+                                      eth_lag_intf_fallback_type_t fallback_type,
                                       uint16_t fallback_timeout) :
-      intf_(intf), speed_(speed), min_links_(min_links), 
+      intf_(intf), speed_(speed), min_links_(min_links),
       fallback_type_(fallback_type), fallback_timeout_(fallback_timeout) {
 }
 

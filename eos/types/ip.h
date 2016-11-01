@@ -247,7 +247,7 @@ class EOS_SDK_PUBLIC address_overlap_error : public configuration_error {
     * A utility stream operator that adds a string representation of
     * address_overlap_error to the ostream.
     */
-   friend std::ostream& operator<<(std::ostream& os, 
+   friend std::ostream& operator<<(std::ostream& os,
                                    const address_overlap_error& obj);
 
  private:

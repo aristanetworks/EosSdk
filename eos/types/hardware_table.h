@@ -14,9 +14,9 @@ namespace eos {
 class EOS_SDK_PUBLIC hardware_table_key_t {
  public:
    hardware_table_key_t();
-   hardware_table_key_t(std::string const & table_name, 
+   hardware_table_key_t(std::string const & table_name,
                         std::string const & feature, std::string const & chip);
-   hardware_table_key_t(std::string const & table_name, 
+   hardware_table_key_t(std::string const & table_name,
                         std::string const & feature);
    explicit hardware_table_key_t(std::string const & table_name);
 
@@ -49,7 +49,7 @@ class EOS_SDK_PUBLIC hardware_table_key_t {
     * A utility stream operator that adds a string representation of
     * hardware_table_key_t to the ostream.
     */
-   friend std::ostream& operator<<(std::ostream& os, 
+   friend std::ostream& operator<<(std::ostream& os,
                                    const hardware_table_key_t& obj);
 
  private:
@@ -81,7 +81,7 @@ class EOS_SDK_PUBLIC hardware_table_high_watermark_t {
     * A utility stream operator that adds a string representation of
     * hardware_table_high_watermark_t to the ostream.
     */
-   friend std::ostream& operator<<(std::ostream& os, 
+   friend std::ostream& operator<<(std::ostream& os,
                                    const hardware_table_high_watermark_t& obj);
 
  private:
@@ -93,7 +93,7 @@ class EOS_SDK_PUBLIC hardware_table_high_watermark_t {
 class EOS_SDK_PUBLIC hardware_table_usage_t {
  public:
    hardware_table_usage_t();
-   hardware_table_usage_t(uint32_t used_entries, uint32_t free_entries, 
+   hardware_table_usage_t(uint32_t used_entries, uint32_t free_entries,
                           uint32_t committed_entries);
 
    /**
@@ -127,7 +127,7 @@ class EOS_SDK_PUBLIC hardware_table_usage_t {
     * A utility stream operator that adds a string representation of
     * hardware_table_usage_t to the ostream.
     */
-   friend std::ostream& operator<<(std::ostream& os, 
+   friend std::ostream& operator<<(std::ostream& os,
                                    const hardware_table_usage_t& obj);
 
  private:
@@ -140,8 +140,8 @@ class EOS_SDK_PUBLIC hardware_table_usage_t {
 class EOS_SDK_PUBLIC hardware_table_entry_t {
  public:
    hardware_table_entry_t();
-   hardware_table_entry_t(hardware_table_usage_t const & usage, 
-                          uint32_t max_entries, 
+   hardware_table_entry_t(hardware_table_usage_t const & usage,
+                          uint32_t max_entries,
                           hardware_table_high_watermark_t const & high_watermark);
 
    /** Getter for 'usage': the compound usage statistics. */
@@ -167,7 +167,7 @@ class EOS_SDK_PUBLIC hardware_table_entry_t {
     * A utility stream operator that adds a string representation of
     * hardware_table_entry_t to the ostream.
     */
-   friend std::ostream& operator<<(std::ostream& os, 
+   friend std::ostream& operator<<(std::ostream& os,
                                    const hardware_table_entry_t& obj);
 
  private:

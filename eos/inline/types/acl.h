@@ -191,14 +191,14 @@ inline acl_port_spec_t::acl_port_spec_t() :
       oper_(ACL_RANGE_ANY), ports_() {
 }
 
-inline acl_port_spec_t::acl_port_spec_t(acl_range_operator_t oper, 
+inline acl_port_spec_t::acl_port_spec_t(acl_range_operator_t oper,
                                         std::list<uint16_t> const & ports) :
       oper_(oper) {
    for (std::list<uint16_t>::const_iterator pit = ports.cbegin();
         pit != ports.cend(); ++pit) {
         ports_.push_back(*pit);
    }
-   
+
 }
 
 inline acl_range_operator_t
@@ -476,10 +476,10 @@ operator<<(std::ostream& os, const acl_rule_base_t& obj) {
 
 // Constructor for concrete rule ip type passed to acl_add_rule() variants.
 inline acl_rule_ip_t::acl_rule_ip_t() :
-      vlan_(), vlan_mask_(0xFFF), inner_vlan_(), inner_vlan_mask_(0xFFF), 
-      ip_protocol_(), ttl_(), source_addr_(), destination_addr_(), source_port_(), 
-      destination_port_(), nexthop_group_(), tcp_flags_(), established_(), 
-      icmp_type_(ALL_ICMP), icmp_code_(ALL_ICMP), priority_value_(), 
+      vlan_(), vlan_mask_(0xFFF), inner_vlan_(), inner_vlan_mask_(0xFFF),
+      ip_protocol_(), ttl_(), source_addr_(), destination_addr_(), source_port_(),
+      destination_port_(), nexthop_group_(), tcp_flags_(), established_(),
+      icmp_type_(ALL_ICMP), icmp_code_(ALL_ICMP), priority_value_(),
       priority_mask_(), match_fragments_(), match_ip_priority_() {
 }
 
@@ -825,7 +825,7 @@ operator<<(std::ostream& os, const acl_rule_ip_t& obj) {
 
 
 inline acl_rule_eth_t::acl_rule_eth_t() :
-      vlan_(), vlan_mask_(0xFFF), inner_vlan_(), inner_vlan_mask_(0xFFF), 
+      vlan_(), vlan_mask_(0xFFF), inner_vlan_(), inner_vlan_mask_(0xFFF),
       source_addr_(), destination_addr_(), source_mask_(), destination_mask_() {
 }
 

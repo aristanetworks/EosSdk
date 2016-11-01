@@ -32,18 +32,18 @@ std::ostream& operator<<(std::ostream& os, const eth_link_speed_t & enum_val);
 class EOS_SDK_PUBLIC eth_phy_intf_counters_t {
  public:
    eth_phy_intf_counters_t();
-   eth_phy_intf_counters_t(uint64_t single_collision_frames, 
-                           uint64_t multiple_collision_frames, uint64_t fcs_errors, 
-                           uint64_t alignment_errors, 
-                           uint64_t deferred_transmissions, 
-                           uint64_t late_collisions, uint64_t excessive_collisions, 
-                           uint64_t internal_mac_transmit_errors, 
-                           uint64_t carrier_sense_errors, 
-                           uint64_t internal_mac_receive_errors, 
-                           uint64_t frame_too_shorts, uint64_t frame_too_longs, 
-                           uint64_t sqe_test_errors, uint64_t symbol_errors, 
-                           uint64_t in_unknown_opcodes, uint64_t out_pause_frames, 
-                           uint64_t in_pause_frames, uint64_t fragments, 
+   eth_phy_intf_counters_t(uint64_t single_collision_frames,
+                           uint64_t multiple_collision_frames, uint64_t fcs_errors,
+                           uint64_t alignment_errors,
+                           uint64_t deferred_transmissions,
+                           uint64_t late_collisions, uint64_t excessive_collisions,
+                           uint64_t internal_mac_transmit_errors,
+                           uint64_t carrier_sense_errors,
+                           uint64_t internal_mac_receive_errors,
+                           uint64_t frame_too_shorts, uint64_t frame_too_longs,
+                           uint64_t sqe_test_errors, uint64_t symbol_errors,
+                           uint64_t in_unknown_opcodes, uint64_t out_pause_frames,
+                           uint64_t in_pause_frames, uint64_t fragments,
                            uint64_t jabbers);
 
    /**
@@ -135,7 +135,7 @@ class EOS_SDK_PUBLIC eth_phy_intf_counters_t {
     * A utility stream operator that adds a string representation of
     * eth_phy_intf_counters_t to the ostream.
     */
-   friend std::ostream& operator<<(std::ostream& os, 
+   friend std::ostream& operator<<(std::ostream& os,
                                    const eth_phy_intf_counters_t& obj);
 
  private:
@@ -169,19 +169,19 @@ class EOS_SDK_PUBLIC eth_phy_intf_counters_t {
 class EOS_SDK_PUBLIC eth_phy_intf_bin_counters_t {
  public:
    eth_phy_intf_bin_counters_t();
-   eth_phy_intf_bin_counters_t(uint64_t in_64_octet_frames, 
-                               uint64_t in_65_to_127_octet_frames, 
-                               uint64_t in_128_to_255_octet_frames, 
-                               uint64_t in_256_to_511_octet_frames, 
-                               uint64_t in_512_to_1023_octet_frames, 
-                               uint64_t in_1024_to_1522_octet_frames, 
-                               uint64_t in_1523_to_max_octet_frames, 
-                               uint64_t out_64_octet_frames, 
-                               uint64_t out_65_to_127_octet_frames, 
-                               uint64_t out_128_to_255_octet_frames, 
-                               uint64_t out_256_to_511_octet_frames, 
-                               uint64_t out_512_to_1023_octet_frames, 
-                               uint64_t out_1024_to_1522_octet_frames, 
+   eth_phy_intf_bin_counters_t(uint64_t in_64_octet_frames,
+                               uint64_t in_65_to_127_octet_frames,
+                               uint64_t in_128_to_255_octet_frames,
+                               uint64_t in_256_to_511_octet_frames,
+                               uint64_t in_512_to_1023_octet_frames,
+                               uint64_t in_1024_to_1522_octet_frames,
+                               uint64_t in_1523_to_max_octet_frames,
+                               uint64_t out_64_octet_frames,
+                               uint64_t out_65_to_127_octet_frames,
+                               uint64_t out_128_to_255_octet_frames,
+                               uint64_t out_256_to_511_octet_frames,
+                               uint64_t out_512_to_1023_octet_frames,
+                               uint64_t out_1024_to_1522_octet_frames,
                                uint64_t out_1523_to_max_octet_frames);
 
    /** Getter for 'in_64_octet_frames': Input 64 octet frame counter. */
@@ -272,7 +272,7 @@ class EOS_SDK_PUBLIC eth_phy_intf_bin_counters_t {
     * A utility stream operator that adds a string representation of
     * eth_phy_intf_bin_counters_t to the ostream.
     */
-   friend std::ostream& operator<<(std::ostream& os, 
+   friend std::ostream& operator<<(std::ostream& os,
                                    const eth_phy_intf_bin_counters_t& obj);
 
  private:

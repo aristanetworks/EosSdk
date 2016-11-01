@@ -93,27 +93,27 @@ operator<<(std::ostream& os, const intf_id_t& obj) {
 
 // Default constructor.
 inline intf_counters_t::intf_counters_t() :
-      out_ucast_pkts_(0), out_multicast_pkts_(0), out_broadcast_pkts_(0), 
-      in_ucast_pkts_(0), in_multicast_pkts_(0), in_broadcast_pkts_(0), 
-      out_octets_(0), in_octets_(0), out_discards_(0), out_errors_(0), 
+      out_ucast_pkts_(0), out_multicast_pkts_(0), out_broadcast_pkts_(0),
+      in_ucast_pkts_(0), in_multicast_pkts_(0), in_broadcast_pkts_(0),
+      out_octets_(0), in_octets_(0), out_discards_(0), out_errors_(0),
       in_discards_(0), in_errors_(0), sample_time_(0) {
 }
 
-inline intf_counters_t::intf_counters_t(uint64_t out_ucast_pkts, 
-                                        uint64_t out_multicast_pkts, 
-                                        uint64_t out_broadcast_pkts, 
-                                        uint64_t in_ucast_pkts, 
-                                        uint64_t in_multicast_pkts, 
-                                        uint64_t in_broadcast_pkts, 
-                                        uint64_t out_octets, uint64_t in_octets, 
-                                        uint64_t out_discards, uint64_t out_errors, 
-                                        uint64_t in_discards, uint64_t in_errors, 
+inline intf_counters_t::intf_counters_t(uint64_t out_ucast_pkts,
+                                        uint64_t out_multicast_pkts,
+                                        uint64_t out_broadcast_pkts,
+                                        uint64_t in_ucast_pkts,
+                                        uint64_t in_multicast_pkts,
+                                        uint64_t in_broadcast_pkts,
+                                        uint64_t out_octets, uint64_t in_octets,
+                                        uint64_t out_discards, uint64_t out_errors,
+                                        uint64_t in_discards, uint64_t in_errors,
                                         seconds_t sample_time) :
-      out_ucast_pkts_(out_ucast_pkts), out_multicast_pkts_(out_multicast_pkts), 
-      out_broadcast_pkts_(out_broadcast_pkts), in_ucast_pkts_(in_ucast_pkts), 
-      in_multicast_pkts_(in_multicast_pkts), in_broadcast_pkts_(in_broadcast_pkts), 
-      out_octets_(out_octets), in_octets_(in_octets), out_discards_(out_discards), 
-      out_errors_(out_errors), in_discards_(in_discards), in_errors_(in_errors), 
+      out_ucast_pkts_(out_ucast_pkts), out_multicast_pkts_(out_multicast_pkts),
+      out_broadcast_pkts_(out_broadcast_pkts), in_ucast_pkts_(in_ucast_pkts),
+      in_multicast_pkts_(in_multicast_pkts), in_broadcast_pkts_(in_broadcast_pkts),
+      out_octets_(out_octets), in_octets_(in_octets), out_discards_(out_discards),
+      out_errors_(out_errors), in_discards_(in_discards), in_errors_(in_errors),
       sample_time_(sample_time) {
 }
 
@@ -268,17 +268,17 @@ operator<<(std::ostream& os, const intf_counters_t& obj) {
 
 // Default constructor.
 inline intf_traffic_rates_t::intf_traffic_rates_t() :
-      out_pkts_rate_(0), in_pkts_rate_(0), out_bits_rate_(0), in_bits_rate_(0), 
+      out_pkts_rate_(0), in_pkts_rate_(0), out_bits_rate_(0), in_bits_rate_(0),
       sample_time_(0) {
 }
 
-inline intf_traffic_rates_t::intf_traffic_rates_t(double out_pkts_rate, 
-                                                  double in_pkts_rate, 
-                                                  double out_bits_rate, 
-                                                  double in_bits_rate, 
+inline intf_traffic_rates_t::intf_traffic_rates_t(double out_pkts_rate,
+                                                  double in_pkts_rate,
+                                                  double out_bits_rate,
+                                                  double in_bits_rate,
                                                   seconds_t sample_time) :
-      out_pkts_rate_(out_pkts_rate), in_pkts_rate_(in_pkts_rate), 
-      out_bits_rate_(out_bits_rate), in_bits_rate_(in_bits_rate), 
+      out_pkts_rate_(out_pkts_rate), in_pkts_rate_(in_pkts_rate),
+      out_bits_rate_(out_bits_rate), in_bits_rate_(in_bits_rate),
       sample_time_(sample_time) {
 }
 
@@ -361,18 +361,18 @@ operator<<(std::ostream& os, const intf_traffic_rates_t& obj) {
 
 inline no_such_interface_error::no_such_interface_error(intf_id_t intf) noexcept :
       error(std::string("No such interface: ") + intf.to_string()), intf_(intf) {
-   
+
 }
 
 inline no_such_interface_error::no_such_interface_error(
          std::string const & intfName) noexcept :
       error(std::string("Bad interface name: ") + intfName), intf_() {
-   
+
 }
 
-inline 
+inline
 no_such_interface_error::~no_such_interface_error() noexcept {
-   
+
 }
 
 inline intf_id_t
@@ -415,14 +415,14 @@ inline not_switchport_eligible_error::not_switchport_eligible_error(intf_id_t in
        noexcept :
       
       error(std::string("Interface cannot be used as a switchport: ")
-             + intf.to_string()), 
+             + intf.to_string()),
       intf_(intf) {
-   
+
 }
 
-inline 
+inline
 not_switchport_eligible_error::~not_switchport_eligible_error() noexcept {
-   
+
 }
 
 inline intf_id_t

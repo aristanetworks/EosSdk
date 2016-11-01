@@ -51,8 +51,8 @@ inline bfd_session_key_t::bfd_session_key_t() :
       ip_addr_(), vrf_(), type_(), intf_() {
 }
 
-inline bfd_session_key_t::bfd_session_key_t(ip_addr_t ip_addr, std::string vrf, 
-                                            bfd_session_type_t type, 
+inline bfd_session_key_t::bfd_session_key_t(ip_addr_t ip_addr, std::string vrf,
+                                            bfd_session_type_t type,
                                             intf_id_t intf) :
       ip_addr_(ip_addr), vrf_(vrf), type_(type), intf_(intf) {
 }
@@ -211,7 +211,7 @@ inline bfd_session_t::bfd_session_t() :
       peer_(), status_(BFD_SESSION_STATUS_NULL) {
 }
 
-inline bfd_session_t::bfd_session_t(bfd_session_key_t peer, 
+inline bfd_session_t::bfd_session_t(bfd_session_key_t peer,
                                     bfd_session_status_t status) :
       peer_(peer), status_(status) {
 }

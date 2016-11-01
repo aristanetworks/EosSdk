@@ -65,7 +65,7 @@ class EOS_SDK_PUBLIC neighbor_key_t {
 class EOS_SDK_PUBLIC neighbor_entry_t {
  public:
    neighbor_entry_t();
-   neighbor_entry_t(neighbor_key_t const & neighbor_key, eth_addr_t eth_addr, 
+   neighbor_entry_t(neighbor_key_t const & neighbor_key, eth_addr_t eth_addr,
                     neighbor_entry_type_t entry_type);
 
    /** Getter for 'neighbor_key': the key of the neighbor entry. */

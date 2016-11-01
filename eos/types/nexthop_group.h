@@ -53,7 +53,7 @@ enum nexthop_group_gre_key_t {
  * Appends a string representation of enum nexthop_group_gre_key_t value to the
  * ostream.
  */
-std::ostream& operator<<(std::ostream& os, 
+std::ostream& operator<<(std::ostream& os,
                          const nexthop_group_gre_key_t & enum_val);
 
 /**
@@ -69,7 +69,7 @@ class EOS_SDK_PUBLIC nexthop_group_mpls_action_t {
    /** Constructs an MPLS action with a specific switching operation. */
    explicit nexthop_group_mpls_action_t(mpls_action_t action_type);
    /** Constructs a populated MPLS label stack for some switching action. */
-   nexthop_group_mpls_action_t(mpls_action_t action_type, 
+   nexthop_group_mpls_action_t(mpls_action_t action_type,
                                std::forward_list<mpls_label_t> const & label_stack);
 
    /** Getter for 'action_type': the MPLS switching operation for this action. */
@@ -101,7 +101,7 @@ class EOS_SDK_PUBLIC nexthop_group_mpls_action_t {
     * A utility stream operator that adds a string representation of
     * nexthop_group_mpls_action_t to the ostream.
     */
-   friend std::ostream& operator<<(std::ostream& os, 
+   friend std::ostream& operator<<(std::ostream& os,
                                    const nexthop_group_mpls_action_t& obj);
 
  private:
@@ -130,7 +130,7 @@ class EOS_SDK_PUBLIC nexthop_group_entry_counter_t {
     * A utility stream operator that adds a string representation of
     * nexthop_group_entry_counter_t to the ostream.
     */
-   friend std::ostream& operator<<(std::ostream& os, 
+   friend std::ostream& operator<<(std::ostream& os,
                                    const nexthop_group_entry_counter_t& obj);
 
  private:
@@ -170,7 +170,7 @@ class EOS_SDK_PUBLIC nexthop_group_entry_t {
     * A utility stream operator that adds a string representation of
     * nexthop_group_entry_t to the ostream.
     */
-   friend std::ostream& operator<<(std::ostream& os, 
+   friend std::ostream& operator<<(std::ostream& os,
                                    const nexthop_group_entry_t& obj);
 
  private:
@@ -188,7 +188,7 @@ class EOS_SDK_PUBLIC nexthop_group_t {
  public:
    nexthop_group_t();
    nexthop_group_t(std::string name, nexthop_group_encap_t type);
-   nexthop_group_t(std::string name, nexthop_group_encap_t type, 
+   nexthop_group_t(std::string name, nexthop_group_encap_t type,
                    nexthop_group_gre_key_t gre_key_type);
 
    /** Getter for 'name': the unique name of the nexthop group. */

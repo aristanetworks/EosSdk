@@ -32,8 +32,8 @@ std::ostream& operator<<(std::ostream& os, const decap_protocol_type_t & enum_va
 class EOS_SDK_PUBLIC decap_group_t {
  public:
    decap_group_t();
-   decap_group_t(std::string const & group_name, 
-                 ip_addr_t const & destination_addr, 
+   decap_group_t(std::string const & group_name,
+                 ip_addr_t const & destination_addr,
                  decap_protocol_type_t protocol_type);
 
    /**

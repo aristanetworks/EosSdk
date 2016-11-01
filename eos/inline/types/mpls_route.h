@@ -10,7 +10,7 @@ inline mpls_route_key_t::mpls_route_key_t() :
       top_label_(0), metric_(0) {
 }
 
-inline mpls_route_key_t::mpls_route_key_t(mpls_label_t top_label, 
+inline mpls_route_key_t::mpls_route_key_t(mpls_label_t top_label,
                                           mpls_route_metric_t metric) :
       top_label_(top_label), metric_(metric) {
 }
@@ -144,21 +144,21 @@ operator<<(std::ostream& os, const mpls_route_t& obj) {
 
 
 inline mpls_route_via_t::mpls_route_via_t() :
-      route_key_(), hop_(), intf_(), pushswap_label_(0), 
-      label_action_(MPLS_ACTION_NULL), ttl_mode_(MPLS_TTLMODE_NULL), 
+      route_key_(), hop_(), intf_(), pushswap_label_(0),
+      label_action_(MPLS_ACTION_NULL), ttl_mode_(MPLS_TTLMODE_NULL),
       payload_type_(MPLS_PAYLOAD_TYPE_NULL), skip_egress_acl_(false) {
 }
 
 inline mpls_route_via_t::mpls_route_via_t(mpls_route_key_t route_key) :
-      route_key_(route_key), hop_(), intf_(), pushswap_label_(0), 
-      label_action_(MPLS_ACTION_NULL), ttl_mode_(MPLS_TTLMODE_NULL), 
+      route_key_(route_key), hop_(), intf_(), pushswap_label_(0),
+      label_action_(MPLS_ACTION_NULL), ttl_mode_(MPLS_TTLMODE_NULL),
       payload_type_(MPLS_PAYLOAD_TYPE_NULL), skip_egress_acl_(false) {
 }
 
-inline mpls_route_via_t::mpls_route_via_t(mpls_route_key_t route_key, 
+inline mpls_route_via_t::mpls_route_via_t(mpls_route_key_t route_key,
                                           mpls_action_t label_action) :
-      route_key_(route_key), hop_(), intf_(), pushswap_label_(0), 
-      label_action_(label_action), ttl_mode_(MPLS_TTLMODE_NULL), 
+      route_key_(route_key), hop_(), intf_(), pushswap_label_(0),
+      label_action_(label_action), ttl_mode_(MPLS_TTLMODE_NULL),
       payload_type_(MPLS_PAYLOAD_TYPE_NULL), skip_egress_acl_(false) {
 }
 

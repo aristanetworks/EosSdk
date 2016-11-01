@@ -135,7 +135,7 @@ inline mac_entry_t::mac_entry_t(mac_key_t const & mac_key, intf_id_t intf) :
       mac_key_(mac_key), intfs_{intf}, persistent_(false) {
 }
 
-inline mac_entry_t::mac_entry_t(mac_key_t const & mac_key, 
+inline mac_entry_t::mac_entry_t(mac_key_t const & mac_key,
                                 std::set<intf_id_t> const & intfs) :
       mac_key_(mac_key), intfs_(intfs), persistent_(false) {
 }
@@ -205,7 +205,7 @@ mac_entry_t::eth_addr() const {
 
 inline intf_id_t
 mac_entry_t::intf() const {
-   return intfs_.size() ? *intfs_.begin() : intf_id_t();
+   return intfs_.size() ? *intfs_.begin(): intf_id_t();
 }
 
 inline void

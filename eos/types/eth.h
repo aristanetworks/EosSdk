@@ -18,7 +18,7 @@
 namespace eos {
 
 /// A bitset representing a collection of VLAN IDs
-class EOS_SDK_PUBLIC vlan_set_t : public std::bitset<4096> {
+class EOS_SDK_PUBLIC vlan_set_t: public std::bitset<4096> {
 };
 
 /// A deprecated alias. Use eos::vlan_set_t instead.
@@ -49,7 +49,7 @@ class EOS_SDK_PUBLIC eth_addr_t {
     */
    explicit eth_addr_t(std::string const & addr);
    /** Constructs an address from the 6 bytes that make it up. */
-   eth_addr_t(uint8_t byte0, uint8_t byte1, uint8_t byte2, uint8_t byte3, 
+   eth_addr_t(uint8_t byte0, uint8_t byte1, uint8_t byte2, uint8_t byte3,
               uint8_t byte4, uint8_t byte5);
    /** Constructs an address from a byte array. The array will be copied. */
    explicit eth_addr_t(uint8_t const bytes[6]);
@@ -127,7 +127,7 @@ class EOS_SDK_PUBLIC internal_vlan_error : public configuration_error {
     * A utility stream operator that adds a string representation of
     * internal_vlan_error to the ostream.
     */
-   friend std::ostream& operator<<(std::ostream& os, 
+   friend std::ostream& operator<<(std::ostream& os,
                                    const internal_vlan_error& obj);
 
  private:

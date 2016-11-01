@@ -67,7 +67,7 @@ enum lldp_std_tlv_type_bit_t {
  * Appends a string representation of enum lldp_std_tlv_type_bit_t value to the
  * ostream.
  */
-std::ostream& operator<<(std::ostream& os, 
+std::ostream& operator<<(std::ostream& os,
                          const lldp_std_tlv_type_bit_t & enum_val);
 
 /** Defines a set of remote TLVs (for which we have a value for). */
@@ -103,7 +103,7 @@ class EOS_SDK_PUBLIC lldp_std_tlv_type_t {
     * A utility stream operator that adds a string representation of
     * lldp_std_tlv_type_t to the ostream.
     */
-   friend std::ostream& operator<<(std::ostream& os, 
+   friend std::ostream& operator<<(std::ostream& os,
                                    const lldp_std_tlv_type_t& obj);
 
  private:
@@ -158,7 +158,7 @@ class EOS_SDK_PUBLIC lldp_syscap_t {
 class EOS_SDK_PUBLIC lldp_management_address_t {
  public:
    lldp_management_address_t();
-   lldp_management_address_t(uint32_t address_family, std::string address, 
+   lldp_management_address_t(uint32_t address_family, std::string address,
                              uint32_t snmp_ifindex, std::string oid);
 
    /**
@@ -193,7 +193,7 @@ class EOS_SDK_PUBLIC lldp_management_address_t {
     * A utility stream operator that adds a string representation of
     * lldp_management_address_t to the ostream.
     */
-   friend std::ostream& operator<<(std::ostream& os, 
+   friend std::ostream& operator<<(std::ostream& os,
                                    const lldp_management_address_t& obj);
 
  private:
@@ -250,7 +250,7 @@ class EOS_SDK_PUBLIC lldp_lacp_t {
 class EOS_SDK_PUBLIC lldp_phy_t {
  public:
    lldp_phy_t();
-   lldp_phy_t(bool autonegSupported, bool autonegEnabled, 
+   lldp_phy_t(bool autonegSupported, bool autonegEnabled,
               uint16_t autonegCapabilitiesBm, bool valid);
 
    /** Getter for 'autonegSupported': if auto-negotiation supported. */
@@ -312,7 +312,7 @@ enum lldp_chassis_id_encoding_t {
  * Appends a string representation of enum lldp_chassis_id_encoding_t value to the
  * ostream.
  */
-std::ostream& operator<<(std::ostream& os, 
+std::ostream& operator<<(std::ostream& os,
                          const lldp_chassis_id_encoding_t & enum_val);
 
 /** The chassis name, as an encoding plus payload. */
@@ -361,7 +361,7 @@ enum lldp_intf_id_encoding_t {
  * Appends a string representation of enum lldp_intf_id_encoding_t value to the
  * ostream.
  */
-std::ostream& operator<<(std::ostream& os, 
+std::ostream& operator<<(std::ostream& os,
                          const lldp_intf_id_encoding_t & enum_val);
 
 /** The interface name, as an encoding plus payload. */
@@ -423,7 +423,7 @@ class EOS_SDK_PUBLIC lldp_remote_system_t {
     * A utility stream operator that adds a string representation of
     * lldp_remote_system_t to the ostream.
     */
-   friend std::ostream& operator<<(std::ostream& os, 
+   friend std::ostream& operator<<(std::ostream& os,
                                    const lldp_remote_system_t& obj);
 
  private:

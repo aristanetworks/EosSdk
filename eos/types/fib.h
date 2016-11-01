@@ -135,7 +135,7 @@ class EOS_SDK_PUBLIC fib_fec_key_t {
    explicit fib_fec_key_t(uint64_t fec_id);
 
    /**
-    * Getter for 'fec_id': fec_id[56:63] denotes the feature, 0: fib Fec, 1 :
+    * Getter for 'fec_id': fec_id[56:63] denotes the feature, 0: fib Fec, 1:
     * resilientEcmp feature, 2: nextHopGroup feature.
     */
    uint64_t fec_id() const;

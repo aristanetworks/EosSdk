@@ -10,13 +10,13 @@ inline hardware_table_key_t::hardware_table_key_t() :
       table_name_(), feature_(), chip_() {
 }
 
-inline hardware_table_key_t::hardware_table_key_t(std::string const & table_name, 
-                                                  std::string const & feature, 
+inline hardware_table_key_t::hardware_table_key_t(std::string const & table_name,
+                                                  std::string const & feature,
                                                   std::string const & chip) :
       table_name_(table_name), feature_(feature), chip_(chip) {
 }
 
-inline hardware_table_key_t::hardware_table_key_t(std::string const & table_name, 
+inline hardware_table_key_t::hardware_table_key_t(std::string const & table_name,
                                                   std::string const & feature) :
       table_name_(table_name), feature_(feature), chip_() {
 }
@@ -169,10 +169,10 @@ inline hardware_table_usage_t::hardware_table_usage_t() :
       used_entries_(0), free_entries_(0), committed_entries_(0) {
 }
 
-inline hardware_table_usage_t::hardware_table_usage_t(uint32_t used_entries, 
-                                                      uint32_t free_entries, 
+inline hardware_table_usage_t::hardware_table_usage_t(uint32_t used_entries,
+                                                      uint32_t free_entries,
                                                       uint32_t committed_entries) :
-      used_entries_(used_entries), free_entries_(free_entries), 
+      used_entries_(used_entries), free_entries_(free_entries),
       committed_entries_(committed_entries) {
 }
 
@@ -248,12 +248,12 @@ operator<<(std::ostream& os, const hardware_table_usage_t& obj) {
 
 
 inline hardware_table_entry_t::hardware_table_entry_t() :
-      usage_(hardware_table_usage_t()), max_entries_(0), 
+      usage_(hardware_table_usage_t()), max_entries_(0),
       high_watermark_(hardware_table_high_watermark_t()) {
 }
 
 inline hardware_table_entry_t::hardware_table_entry_t(
-         hardware_table_usage_t const & usage, uint32_t max_entries, 
+         hardware_table_usage_t const & usage, uint32_t max_entries,
          hardware_table_high_watermark_t const & high_watermark) :
       usage_(usage), max_entries_(max_entries), high_watermark_(high_watermark) {
 }

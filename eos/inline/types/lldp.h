@@ -14,7 +14,7 @@ inline uint32_t modbit(uint32_t value, uint32_t bit, bool enabled) {
       return (value & ~bit);
    }
 }
-   
+    
 
 
 // TLV Type, default constructor.
@@ -366,9 +366,9 @@ inline lldp_management_address_t::lldp_management_address_t() :
 
 // Managment Info constructor.
 inline lldp_management_address_t::lldp_management_address_t(
-         uint32_t address_family, std::string address, uint32_t snmp_ifindex, 
+         uint32_t address_family, std::string address, uint32_t snmp_ifindex,
          std::string oid) :
-      address_family_(address_family), address_(address), 
+      address_family_(address_family), address_(address),
       snmp_ifindex_(snmp_ifindex), oid_(oid) {
 }
 
@@ -430,7 +430,7 @@ inline lldp_lacp_t::lldp_lacp_t() :
 }
 
 // LACP Info constructor.
-inline lldp_lacp_t::lldp_lacp_t(bool capable, bool enabled, uint32_t id, 
+inline lldp_lacp_t::lldp_lacp_t(bool capable, bool enabled, uint32_t id,
                                 bool valid) :
       capable_(capable), enabled_(enabled), id_(id), valid_(valid) {
 }
@@ -458,7 +458,7 @@ lldp_lacp_t::valid() const {
 inline bool
 lldp_lacp_t::operator!() const {
    return !valid_;
-   
+
 }
 
 inline uint32_t
@@ -497,14 +497,14 @@ operator<<(std::ostream& os, const lldp_lacp_t& obj) {
 
 
 inline lldp_phy_t::lldp_phy_t() :
-      autonegSupported_(), autonegEnabled_(), autonegCapabilitiesBm_(), 
+      autonegSupported_(), autonegEnabled_(), autonegCapabilitiesBm_(),
       valid_(false) {
 }
 
 // PHY Info constructor.
-inline lldp_phy_t::lldp_phy_t(bool autonegSupported, bool autonegEnabled, 
+inline lldp_phy_t::lldp_phy_t(bool autonegSupported, bool autonegEnabled,
                               uint16_t autonegCapabilitiesBm, bool valid) :
-      autonegSupported_(autonegSupported), autonegEnabled_(autonegEnabled), 
+      autonegSupported_(autonegSupported), autonegEnabled_(autonegEnabled),
       autonegCapabilitiesBm_(autonegCapabilitiesBm), valid_(valid) {
 }
 
@@ -616,7 +616,7 @@ inline lldp_chassis_id_t::lldp_chassis_id_t() :
 }
 
 // chassis name, full constructor.
-inline lldp_chassis_id_t::lldp_chassis_id_t(lldp_chassis_id_encoding_t encoding, 
+inline lldp_chassis_id_t::lldp_chassis_id_t(lldp_chassis_id_encoding_t encoding,
                                             std::string value) :
       encoding_(encoding), value_(value) {
 }
@@ -633,7 +633,7 @@ lldp_chassis_id_t::value() const {
 
 inline std::string
 lldp_chassis_id_t::repr() const {
-   
+
    char buf[128];
    if (encoding_ == LLDP_CHASSIS_INTF_NAME) {
       return value_;
@@ -683,7 +683,7 @@ lldp_chassis_id_t::repr() const {
       l += snprintf(&buf[l], sizeof(buf)-l, "%02x", (uint8_t)value_[i]);
    }
    return std::string(buf);
-   
+
 }
 
 inline bool
@@ -768,7 +768,7 @@ inline lldp_intf_id_t::lldp_intf_id_t() :
 }
 
 // interface name, full constructor.
-inline lldp_intf_id_t::lldp_intf_id_t(lldp_intf_id_encoding_t encoding, 
+inline lldp_intf_id_t::lldp_intf_id_t(lldp_intf_id_encoding_t encoding,
                                       std::string value) :
       encoding_(encoding), value_(value) {
 }
@@ -785,7 +785,7 @@ lldp_intf_id_t::value() const {
 
 inline std::string
 lldp_intf_id_t::repr() const {
-   
+
    char buf[128];
    if (encoding_ == LLDP_INTF_NAME) {
       return value_;
@@ -834,7 +834,7 @@ lldp_intf_id_t::repr() const {
       l += snprintf(&buf[l], sizeof(buf)-l, "%02x", (uint8_t)value_[i]);
    }
    return std::string(buf);
-   
+
 }
 
 inline bool
@@ -892,7 +892,7 @@ inline lldp_remote_system_t::lldp_remote_system_t() :
 }
 
 // remote system, full constructor.
-inline lldp_remote_system_t::lldp_remote_system_t(lldp_chassis_id_t chassis, 
+inline lldp_remote_system_t::lldp_remote_system_t(lldp_chassis_id_t chassis,
                                                   lldp_intf_id_t port) :
       chassis_(chassis), port_(port) {
 }
@@ -919,12 +919,12 @@ lldp_remote_system_t::port_is(lldp_intf_id_t port) {
 
 inline std::string
 lldp_remote_system_t::repr() const {
-   
+
    char buf[128];
    snprintf(buf, 128, "%s;%s", chassis_.repr().c_str(),
                                port_.repr().c_str());
    return std::string(buf);
-   
+
 }
 
 inline bool
@@ -988,7 +988,7 @@ inline lldp_neighbor_t::lldp_neighbor_t(intf_id_t intf) :
 }
 
 // specific remote system.
-inline lldp_neighbor_t::lldp_neighbor_t(intf_id_t intf, 
+inline lldp_neighbor_t::lldp_neighbor_t(intf_id_t intf,
                                         lldp_remote_system_t remote_system) :
       intf_(intf), remote_system_(remote_system) {
 }
@@ -1015,13 +1015,13 @@ lldp_neighbor_t::remote_system_is(lldp_remote_system_t remote_system) {
 
 inline std::string
 lldp_neighbor_t::repr() const {
-   
+
    char buf[128];
    snprintf(buf, 128, "%s;%s;%s", intf_.to_string().c_str(),
            remote_system_.chassis().repr().c_str(),
            remote_system_.port().repr().c_str());
    return std::string(buf);
-   
+
 }
 
 inline bool

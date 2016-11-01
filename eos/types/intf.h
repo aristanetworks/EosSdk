@@ -96,11 +96,11 @@ class EOS_SDK_PUBLIC intf_id_t {
 class EOS_SDK_PUBLIC intf_counters_t {
  public:
    intf_counters_t();
-   intf_counters_t(uint64_t out_ucast_pkts, uint64_t out_multicast_pkts, 
-                   uint64_t out_broadcast_pkts, uint64_t in_ucast_pkts, 
-                   uint64_t in_multicast_pkts, uint64_t in_broadcast_pkts, 
-                   uint64_t out_octets, uint64_t in_octets, uint64_t out_discards, 
-                   uint64_t out_errors, uint64_t in_discards, uint64_t in_errors, 
+   intf_counters_t(uint64_t out_ucast_pkts, uint64_t out_multicast_pkts,
+                   uint64_t out_broadcast_pkts, uint64_t in_ucast_pkts,
+                   uint64_t in_multicast_pkts, uint64_t in_broadcast_pkts,
+                   uint64_t out_octets, uint64_t in_octets, uint64_t out_discards,
+                   uint64_t out_errors, uint64_t in_discards, uint64_t in_errors,
                    seconds_t sample_time);
 
    /**
@@ -198,8 +198,8 @@ class EOS_SDK_PUBLIC intf_counters_t {
 class EOS_SDK_PUBLIC intf_traffic_rates_t {
  public:
    intf_traffic_rates_t();
-   intf_traffic_rates_t(double out_pkts_rate, double in_pkts_rate, 
-                        double out_bits_rate, double in_bits_rate, 
+   intf_traffic_rates_t(double out_pkts_rate, double in_pkts_rate,
+                        double out_bits_rate, double in_bits_rate,
                         seconds_t sample_time);
 
    /** Getter for 'out_pkts_rate': output packets per second. */
@@ -227,7 +227,7 @@ class EOS_SDK_PUBLIC intf_traffic_rates_t {
     * A utility stream operator that adds a string representation of
     * intf_traffic_rates_t to the ostream.
     */
-   friend std::ostream& operator<<(std::ostream& os, 
+   friend std::ostream& operator<<(std::ostream& os,
                                    const intf_traffic_rates_t& obj);
 
  private:
@@ -256,7 +256,7 @@ class EOS_SDK_PUBLIC no_such_interface_error : public error {
     * A utility stream operator that adds a string representation of
     * no_such_interface_error to the ostream.
     */
-   friend std::ostream& operator<<(std::ostream& os, 
+   friend std::ostream& operator<<(std::ostream& os,
                                    const no_such_interface_error& obj);
 
  private:
@@ -282,7 +282,7 @@ class EOS_SDK_PUBLIC not_switchport_eligible_error : public error {
     * A utility stream operator that adds a string representation of
     * not_switchport_eligible_error to the ostream.
     */
-   friend std::ostream& operator<<(std::ostream& os, 
+   friend std::ostream& operator<<(std::ostream& os,
                                    const not_switchport_eligible_error& obj);
 
  private:

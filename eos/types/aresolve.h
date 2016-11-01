@@ -54,7 +54,7 @@ class EOS_SDK_PUBLIC aresolve_record_base {
     * A utility stream operator that adds a string representation of
     * aresolve_record_base to the ostream.
     */
-   friend std::ostream& operator<<(std::ostream& os, 
+   friend std::ostream& operator<<(std::ostream& os,
                                    const aresolve_record_base& obj);
 
  protected:
@@ -93,7 +93,7 @@ class EOS_SDK_PUBLIC aresolve_record_host : public aresolve_record_base {
     * A utility stream operator that adds a string representation of
     * aresolve_record_host to the ostream.
     */
-   friend std::ostream& operator<<(std::ostream& os, 
+   friend std::ostream& operator<<(std::ostream& os,
                                    const aresolve_record_host& obj);
 
  private:

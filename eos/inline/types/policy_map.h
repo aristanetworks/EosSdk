@@ -82,7 +82,7 @@ inline policy_map_key_t::policy_map_key_t() :
       name_(), feature_() {
 }
 
-inline policy_map_key_t::policy_map_key_t(std::string const & name, 
+inline policy_map_key_t::policy_map_key_t(std::string const & name,
                                           policy_feature_t feature) :
       name_(name), feature_(feature) {
 }
@@ -158,18 +158,18 @@ operator<<(std::ostream& os, const policy_map_key_t& obj) {
 
 // Default constructor.
 inline policy_map_action_t::policy_map_action_t() :
-      action_type_(), nexthop_group_name_(), nexthops_(), vrf_(), dscp_(), 
+      action_type_(), nexthop_group_name_(), nexthops_(), vrf_(), dscp_(),
       traffic_class_() {
 }
 
 inline policy_map_action_t::policy_map_action_t(policy_action_type_t action_type) :
-      action_type_(action_type), nexthop_group_name_(), nexthops_(), vrf_(), 
+      action_type_(action_type), nexthop_group_name_(), nexthops_(), vrf_(),
       dscp_(), traffic_class_() {
 }
 
-inline 
+inline
 policy_map_action_t::~policy_map_action_t() {
-   
+
 }
 
 inline policy_action_type_t
@@ -325,12 +325,12 @@ operator<<(std::ostream& os, const policy_map_action_t& obj) {
 
 
 inline policy_map_rule_t::policy_map_rule_t() :
-      class_map_key_(), policy_map_rule_type_(POLICY_RULE_TYPE_CLASSMAP), 
+      class_map_key_(), policy_map_rule_type_(POLICY_RULE_TYPE_CLASSMAP),
       raw_rule_(), actions_() {
 }
 
 inline policy_map_rule_t::policy_map_rule_t(class_map_key_t const & class_map_key) :
-      class_map_key_(class_map_key), 
+      class_map_key_(class_map_key),
       policy_map_rule_type_(POLICY_RULE_TYPE_CLASSMAP), raw_rule_(), actions_() {
 }
 
@@ -398,7 +398,7 @@ policy_map_rule_t::action_del(policy_action_type_t action_type) {
 }
 
 inline void
-policy_map_rule_t::raw_rule_is(acl_rule_ip_t acl_rule, 
+policy_map_rule_t::raw_rule_is(acl_rule_ip_t acl_rule,
                                policy_map_rule_type_t rule_type) {
    policy_map_rule_type_is(rule_type);
    raw_rule_is(acl_rule);
@@ -588,14 +588,14 @@ operator<<(std::ostream& os, const policy_map_t& obj) {
 
 inline unsupported_policy_feature_error::unsupported_policy_feature_error(
          policy_feature_t policy_feature) noexcept :
-      unsupported_error(std::string("Unsupported policy feature")), 
+      unsupported_error(std::string("Unsupported policy feature")),
       policy_feature_(policy_feature) {
-   
+
 }
 
-inline 
+inline
 unsupported_policy_feature_error::~unsupported_policy_feature_error() noexcept {
-   
+
 }
 
 inline policy_feature_t

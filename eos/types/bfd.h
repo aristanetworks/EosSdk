@@ -44,7 +44,7 @@ std::ostream& operator<<(std::ostream& os, const bfd_session_type_t & enum_val);
 class EOS_SDK_PUBLIC bfd_session_key_t {
  public:
    bfd_session_key_t();
-   bfd_session_key_t(ip_addr_t ip_addr, std::string vrf, bfd_session_type_t type, 
+   bfd_session_key_t(ip_addr_t ip_addr, std::string vrf, bfd_session_type_t type,
                      intf_id_t intf);
 
    /** Getter for 'ip_addr': IP address of the peer. */

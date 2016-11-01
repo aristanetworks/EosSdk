@@ -100,8 +100,8 @@ inline neighbor_entry_t::neighbor_entry_t() :
       neighbor_key_(), eth_addr_(), entry_type_(NEIGHBOR_ENTRY_TYPE_DYNAMIC) {
 }
 
-inline neighbor_entry_t::neighbor_entry_t(neighbor_key_t const & neighbor_key, 
-                                          eth_addr_t eth_addr, 
+inline neighbor_entry_t::neighbor_entry_t(neighbor_key_t const & neighbor_key,
+                                          eth_addr_t eth_addr,
                                           neighbor_entry_type_t entry_type) :
       neighbor_key_(neighbor_key), eth_addr_(eth_addr), entry_type_(entry_type) {
 }

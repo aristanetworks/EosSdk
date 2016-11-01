@@ -34,7 +34,7 @@ enum policy_match_condition_t {
  * Appends a string representation of enum policy_match_condition_t value to the
  * ostream.
  */
-std::ostream& operator<<(std::ostream& os, 
+std::ostream& operator<<(std::ostream& os,
                          const policy_match_condition_t & enum_val);
 
 /** A hardware feature a policy map can be used with. */
@@ -192,7 +192,7 @@ class EOS_SDK_PUBLIC policy_map_action_t {
     * A utility stream operator that adds a string representation of
     * policy_map_action_t to the ostream.
     */
-   friend std::ostream& operator<<(std::ostream& os, 
+   friend std::ostream& operator<<(std::ostream& os,
                                    const policy_map_action_t& obj);
 
  private:
@@ -345,7 +345,7 @@ class EOS_SDK_PUBLIC unsupported_policy_feature_error : public unsupported_error
     * A utility stream operator that adds a string representation of
     * unsupported_policy_feature_error to the ostream.
     */
-   friend std::ostream& operator<<(std::ostream& os, 
+   friend std::ostream& operator<<(std::ostream& os,
                                    const unsupported_policy_feature_error& obj);
 
  private:

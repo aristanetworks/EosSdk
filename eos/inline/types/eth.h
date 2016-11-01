@@ -13,7 +13,7 @@ inline eth_addr_t::eth_addr_t() :
       bytes_{} {
 }
 
-inline eth_addr_t::eth_addr_t(uint8_t byte0, uint8_t byte1, uint8_t byte2, 
+inline eth_addr_t::eth_addr_t(uint8_t byte0, uint8_t byte1, uint8_t byte2,
                               uint8_t byte3, uint8_t byte4, uint8_t byte5) :
       bytes_{ byte0, byte1, byte2, byte3, byte4, byte5 } {
 }
@@ -25,14 +25,14 @@ inline eth_addr_t::eth_addr_t(uint8_t const bytes[6]) :
 #endif // BUG109396: SWIG + non parenthesized initializer lists
 inline std::string
 eth_addr_t::to_string() const {
-   
+
    char buf[128];
    int rv;
    rv = snprintf(buf, sizeof(buf), "%02x:%02x:%02x:%02x:%02x:%02x",
                  bytes_[0],bytes_[1],bytes_[2],bytes_[3],bytes_[4],bytes_[5]);
    assert(rv>0);
    return std::string(buf);
-   
+
 }
 
 inline bool
@@ -56,7 +56,7 @@ eth_addr_t::operator!=(eth_addr_t other) const {
    return !(*this == other);
 }
 
-inline 
+inline
 eth_addr_t::operator bool() const {
    return !!(*this);
 }
@@ -80,12 +80,12 @@ operator<<(std::ostream& os, const eth_addr_t& obj) {
 
 inline invalid_vlan_error::invalid_vlan_error(vlan_id_t vlan) noexcept :
       error("0 and 4095 are reserved VLAN IDs"), vlan_(vlan) {
-   
+
 }
 
-inline 
+inline
 invalid_vlan_error::~invalid_vlan_error() noexcept {
-   
+
 }
 
 inline vlan_id_t
@@ -124,9 +124,9 @@ operator<<(std::ostream& os, const invalid_vlan_error& obj) {
 
 
 
-inline 
+inline
 internal_vlan_error::~internal_vlan_error() noexcept {
-   
+
 }
 
 inline vlan_id_t

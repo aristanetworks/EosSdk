@@ -26,7 +26,7 @@ enum eth_lag_intf_fallback_type_t {
  * Appends a string representation of enum eth_lag_intf_fallback_type_t value to
  * the ostream.
  */
-std::ostream& operator<<(std::ostream& os, 
+std::ostream& operator<<(std::ostream& os,
                          const eth_lag_intf_fallback_type_t & enum_val);
 
 /** How long to wait for LACP before fallback. */
@@ -37,7 +37,7 @@ enum eth_lag_intf_fallback_timeout_default_t {
  * Appends a string representation of enum eth_lag_intf_fallback_timeout_default_t
  * value to the ostream.
  */
-std::ostream& operator<<(std::ostream& os, 
+std::ostream& operator<<(std::ostream& os,
                          const eth_lag_intf_fallback_timeout_default_t & enum_val);
 
 enum eth_lag_intf_member_priority_t {
@@ -47,7 +47,7 @@ enum eth_lag_intf_member_priority_t {
  * Appends a string representation of enum eth_lag_intf_member_priority_t value to
  * the ostream.
  */
-std::ostream& operator<<(std::ostream& os, 
+std::ostream& operator<<(std::ostream& os,
                          const eth_lag_intf_member_priority_t & enum_val);
 
 /** LAG interface mebmer LACP mode. */
@@ -61,7 +61,7 @@ enum eth_lag_intf_member_lacp_mode_t {
  * Appends a string representation of enum eth_lag_intf_member_lacp_mode_t value to
  * the ostream.
  */
-std::ostream& operator<<(std::ostream& os, 
+std::ostream& operator<<(std::ostream& os,
                          const eth_lag_intf_member_lacp_mode_t & enum_val);
 
 /** LAG interface mebmer timeout values. */
@@ -74,7 +74,7 @@ enum eth_lag_intf_member_lacp_timeout_t {
  * Appends a string representation of enum eth_lag_intf_member_lacp_timeout_t value
  * to the ostream.
  */
-std::ostream& operator<<(std::ostream& os, 
+std::ostream& operator<<(std::ostream& os,
                          const eth_lag_intf_member_lacp_timeout_t & enum_val);
 
 /**
@@ -85,8 +85,8 @@ class EOS_SDK_PUBLIC eth_lag_intf_membership_t {
  public:
    eth_lag_intf_membership_t();
    /** Constructor with paremeters. */
-   eth_lag_intf_membership_t(intf_id_t eth_lag_intf_id, bool active, 
-                             std::string const & reason, double member_time, 
+   eth_lag_intf_membership_t(intf_id_t eth_lag_intf_id, bool active,
+                             std::string const & reason, double member_time,
                              eth_lag_intf_member_lacp_mode_t mode);
 
    /**
@@ -129,7 +129,7 @@ class EOS_SDK_PUBLIC eth_lag_intf_membership_t {
     * A utility stream operator that adds a string representation of
     * eth_lag_intf_membership_t to the ostream.
     */
-   friend std::ostream& operator<<(std::ostream& os, 
+   friend std::ostream& operator<<(std::ostream& os,
                                    const eth_lag_intf_membership_t& obj);
 
  private:
@@ -152,8 +152,8 @@ class EOS_SDK_PUBLIC eth_lag_intf_t {
    /** Constructor with interface id. */
    explicit eth_lag_intf_t(intf_id_t intf);
    /** Constructor with interface id. */
-   eth_lag_intf_t(intf_id_t intf, uint32_t min_links, uint64_t speed, 
-                  eth_lag_intf_fallback_type_t fallback_type, 
+   eth_lag_intf_t(intf_id_t intf, uint32_t min_links, uint64_t speed,
+                  eth_lag_intf_fallback_type_t fallback_type,
                   uint16_t fallback_timeout);
 
    /** Getter for 'intf': the id of this LAG interface. */

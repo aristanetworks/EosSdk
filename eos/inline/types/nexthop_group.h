@@ -52,7 +52,7 @@ inline nexthop_group_mpls_action_t::nexthop_group_mpls_action_t(
 }
 
 inline nexthop_group_mpls_action_t::nexthop_group_mpls_action_t(
-         mpls_action_t action_type, 
+         mpls_action_t action_type,
          std::forward_list<mpls_label_t> const & label_stack) :
       action_type_(action_type), label_stack_(label_stack) {
 }
@@ -305,21 +305,21 @@ operator<<(std::ostream& os, const nexthop_group_entry_t& obj) {
 
 
 inline nexthop_group_t::nexthop_group_t() :
-      name_(), type_(), gre_key_type_(NEXTHOP_GROUP_GRE_KEY_NULL), ttl_(64), 
+      name_(), type_(), gre_key_type_(NEXTHOP_GROUP_GRE_KEY_NULL), ttl_(64),
       source_ip_(), source_intf_(), nexthops_(), destination_ips_(), persistent_() {
 }
 
-inline nexthop_group_t::nexthop_group_t(std::string name, 
+inline nexthop_group_t::nexthop_group_t(std::string name,
                                         nexthop_group_encap_t type) :
-      name_(name), type_(type), gre_key_type_(NEXTHOP_GROUP_GRE_KEY_NULL), 
-      ttl_(64), source_ip_(), source_intf_(), nexthops_(), destination_ips_(), 
+      name_(name), type_(type), gre_key_type_(NEXTHOP_GROUP_GRE_KEY_NULL),
+      ttl_(64), source_ip_(), source_intf_(), nexthops_(), destination_ips_(),
       persistent_() {
 }
 
-inline nexthop_group_t::nexthop_group_t(std::string name, 
-                                        nexthop_group_encap_t type, 
+inline nexthop_group_t::nexthop_group_t(std::string name,
+                                        nexthop_group_encap_t type,
                                         nexthop_group_gre_key_t gre_key_type) :
-      name_(name), type_(type), gre_key_type_(gre_key_type), ttl_(64), 
+      name_(name), type_(type), gre_key_type_(gre_key_type), ttl_(64),
       source_ip_(), source_intf_(), nexthops_(), destination_ips_(), persistent_() {
 }
 
@@ -384,7 +384,7 @@ nexthop_group_t::source_intf_is(intf_id_t source_intf) {
 
 inline uint16_t
 nexthop_group_t::size() const {
-   
+
    if (nexthops_.empty()) {
       return 0;
    }

@@ -22,14 +22,14 @@ operator<<(std::ostream& os, const decap_protocol_type_t & enum_val) {
 
 // Default constructor, sets NULL protocol type.
 inline decap_group_t::decap_group_t() :
-      group_name_(), destination_addr_(), protocol_type_(PROTOCOL_TYPE_NULL), 
+      group_name_(), destination_addr_(), protocol_type_(PROTOCOL_TYPE_NULL),
       persistent_(false) {
 }
 
-inline decap_group_t::decap_group_t(std::string const & group_name, 
-                                    ip_addr_t const & destination_addr, 
+inline decap_group_t::decap_group_t(std::string const & group_name,
+                                    ip_addr_t const & destination_addr,
                                     decap_protocol_type_t protocol_type) :
-      group_name_(group_name), destination_addr_(destination_addr), 
+      group_name_(group_name), destination_addr_(destination_addr),
       protocol_type_(protocol_type), persistent_(false) {
    if(group_name.empty()) {
       panic(invalid_argument_error("group_name","must be a non-empty string"));
