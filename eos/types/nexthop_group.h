@@ -215,6 +215,14 @@ class EOS_SDK_PUBLIC nexthop_group_t {
    /** Setter for 'source_intf'. */
    void source_intf_is(intf_id_t source_intf);
 
+   /**
+    * Getter for 'autosize': Dynamic resizing configuration for the nexthop group.
+    * When set, unresolved entries from the nexthop group are removed.
+    */
+   bool autosize() const;
+   /** Setter for 'autosize'. */
+   void autosize_is(bool autosize);
+
    /** The maximum size of the nexthop group in entries. */
    uint16_t size() const;
    /** Getter for 'nexthops': array index to nexthop group entry map. */
@@ -263,6 +271,7 @@ class EOS_SDK_PUBLIC nexthop_group_t {
    uint16_t ttl_;
    ip_addr_t source_ip_;
    intf_id_t source_intf_;
+   bool autosize_;
    std::map<uint16_t, nexthop_group_entry_t> nexthops_;
    std::map<uint16_t, ip_addr_t> destination_ips_;
    bool persistent_;

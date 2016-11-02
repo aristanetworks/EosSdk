@@ -306,21 +306,23 @@ operator<<(std::ostream& os, const nexthop_group_entry_t& obj) {
 
 inline nexthop_group_t::nexthop_group_t() :
       name_(), type_(), gre_key_type_(NEXTHOP_GROUP_GRE_KEY_NULL), ttl_(64),
-      source_ip_(), source_intf_(), nexthops_(), destination_ips_(), persistent_() {
+      source_ip_(), source_intf_(), autosize_(true), nexthops_(), 
+      destination_ips_(), persistent_() {
 }
 
 inline nexthop_group_t::nexthop_group_t(std::string name,
                                         nexthop_group_encap_t type) :
-      name_(name), type_(type), gre_key_type_(NEXTHOP_GROUP_GRE_KEY_NULL),
-      ttl_(64), source_ip_(), source_intf_(), nexthops_(), destination_ips_(),
-      persistent_() {
+      name_(name), type_(type), gre_key_type_(NEXTHOP_GROUP_GRE_KEY_NULL), 
+      ttl_(64), source_ip_(), source_intf_(), autosize_(true), nexthops_(), 
+      destination_ips_(), persistent_() {
 }
 
 inline nexthop_group_t::nexthop_group_t(std::string name,
                                         nexthop_group_encap_t type,
                                         nexthop_group_gre_key_t gre_key_type) :
       name_(name), type_(type), gre_key_type_(gre_key_type), ttl_(64),
-      source_ip_(), source_intf_(), nexthops_(), destination_ips_(), persistent_() {
+      source_ip_(), source_intf_(), autosize_(true), nexthops_(), 
+      destination_ips_(), persistent_() {
 }
 
 inline std::string
@@ -380,6 +382,16 @@ nexthop_group_t::source_intf_is(intf_id_t source_intf) {
       source_ip_is(ip_addr_t());
    }
    source_intf_ = source_intf;
+}
+
+inline bool
+nexthop_group_t::autosize() const {
+   return autosize_;
+}
+
+inline void
+nexthop_group_t::autosize_is(bool autosize) {
+   autosize_ = autosize;
 }
 
 inline uint16_t
@@ -451,6 +463,7 @@ nexthop_group_t::operator==(nexthop_group_t const & other) const {
           ttl_ == other.ttl_ &&
           source_ip_ == other.source_ip_ &&
           source_intf_ == other.source_intf_ &&
+          autosize_ == other.autosize_ &&
           nexthops_ == other.nexthops_ &&
           destination_ips_ == other.destination_ips_ &&
           persistent_ == other.persistent_;
@@ -475,6 +488,8 @@ nexthop_group_t::operator<(nexthop_group_t const & other) const {
       return source_ip_ < other.source_ip_;
    } else if(source_intf_ != other.source_intf_) {
       return source_intf_ < other.source_intf_;
+   } else if(autosize_ != other.autosize_) {
+      return autosize_ < other.autosize_;
    } else if(nexthops_ != other.nexthops_) {
       return nexthops_ < other.nexthops_;
    } else if(destination_ips_ != other.destination_ips_) {
@@ -499,6 +514,8 @@ nexthop_group_t::hash() const {
               sizeof(ip_addr_t), ret);
    ret = hash_mix::mix((uint8_t *)&source_intf_,
               sizeof(intf_id_t), ret);
+   ret = hash_mix::mix((uint8_t *)&autosize_,
+              sizeof(bool), ret);
    for (auto it=nexthops_.cbegin(); it!=nexthops_.cend(); ++it) {
       ret = hash_mix::mix((uint8_t *)&it->first,
                  sizeof(uint16_t), ret);
@@ -527,6 +544,7 @@ nexthop_group_t::to_string() const {
    ss << ", ttl=" << ttl_;
    ss << ", source_ip=" << source_ip_;
    ss << ", source_intf=" << source_intf_;
+   ss << ", autosize=" << autosize_;
    ss << ", nexthops=" <<"'";
    bool first_nexthops = true;
    for (auto it=nexthops_.cbegin(); it!=nexthops_.cend(); ++it) {
