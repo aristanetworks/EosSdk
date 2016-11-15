@@ -270,10 +270,16 @@ class EOS_SDK_PUBLIC acl_mgr : public base_mgr<acl_handler> {
     */
    virtual void acl_apply(acl_key_t const &, intf_id_t, acl_direction_t, bool) = 0;
 
-   /// Immediately enable or disable counters for the ACL
+   /**
+    * Enable or disable counters for the ACL.
+    * Note: Must call commit() for setting to apply.
+    */
    virtual void acl_counters_enabled_set(acl_key_t const &, bool) = 0;
 
-   /// Immediately enable or disable fragments matching on the ACL
+   /**
+    * Enable or disable fragments matching on the ACL.
+    * Note: Must call commit() for setting to apply.
+    */
    virtual void acl_fragments_enabled_set(acl_key_t const &, bool) = 0;
 
    /**
@@ -288,6 +294,7 @@ class EOS_SDK_PUBLIC acl_mgr : public base_mgr<acl_handler> {
     * @param acl_key_t The ACL key to modify (name and ACL type)
     * @param bool If true, the ACL should appear in the running-config,
     * else the ACL is a dynamic ACL.
+    * Note: Must call commit() for setting to apply.
     */
    virtual void persistent_is(acl_key_t const &, bool) = 0;
 
