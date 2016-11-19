@@ -306,14 +306,14 @@ operator<<(std::ostream& os, const nexthop_group_entry_t& obj) {
 
 inline nexthop_group_t::nexthop_group_t() :
       name_(), type_(), gre_key_type_(NEXTHOP_GROUP_GRE_KEY_NULL), ttl_(64),
-      source_ip_(), source_intf_(), autosize_(true), nexthops_(), 
+      source_ip_(), source_intf_(), autosize_(false), nexthops_(),
       destination_ips_(), persistent_() {
 }
 
 inline nexthop_group_t::nexthop_group_t(std::string name,
                                         nexthop_group_encap_t type) :
-      name_(name), type_(type), gre_key_type_(NEXTHOP_GROUP_GRE_KEY_NULL), 
-      ttl_(64), source_ip_(), source_intf_(), autosize_(true), nexthops_(), 
+      name_(name), type_(type), gre_key_type_(NEXTHOP_GROUP_GRE_KEY_NULL),
+      ttl_(64), source_ip_(), source_intf_(), autosize_(false), nexthops_(),
       destination_ips_(), persistent_() {
 }
 
@@ -321,7 +321,7 @@ inline nexthop_group_t::nexthop_group_t(std::string name,
                                         nexthop_group_encap_t type,
                                         nexthop_group_gre_key_t gre_key_type) :
       name_(name), type_(type), gre_key_type_(gre_key_type), ttl_(64),
-      source_ip_(), source_intf_(), autosize_(true), nexthops_(), 
+      source_ip_(), source_intf_(), autosize_(false), nexthops_(),
       destination_ips_(), persistent_() {
 }
 

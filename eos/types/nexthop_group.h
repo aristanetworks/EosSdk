@@ -217,13 +217,18 @@ class EOS_SDK_PUBLIC nexthop_group_t {
 
    /**
     * Getter for 'autosize': Dynamic resizing configuration for the nexthop group.
-    * When set, unresolved entries from the nexthop group are removed.
+    * When set, unresolved entries from the nexthop group are not programmed into
+    * hardware, and packets will be hashed across the remaining reachable entries
+    * in the group. Disabled (i.e. set to false) by default.
     */
    bool autosize() const;
    /** Setter for 'autosize'. */
    void autosize_is(bool autosize);
 
-   /** The maximum size of the nexthop group in entries. */
+   /**
+    * Utility method to return the number of entries configured in the nexthop
+    * group.
+    */
    uint16_t size() const;
    /** Getter for 'nexthops': array index to nexthop group entry map. */
    std::map<uint16_t, nexthop_group_entry_t> const & nexthops() const;
