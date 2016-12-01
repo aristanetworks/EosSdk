@@ -277,6 +277,10 @@ void internal_connection_buffer_size_is(uint32_t bytes) EOS_SDK_PUBLIC;
 
 }
 
+#define ENSURE_INITIALIZED()                                            \
+   TRACE7(__PRETTY_FUNCTION__);                                         \
+   eos::sdk_scoped_lock ssl;                                            \
+   ensureInitialized();                                                 \
 
 #include <eos/inline/sdk.h>
 
