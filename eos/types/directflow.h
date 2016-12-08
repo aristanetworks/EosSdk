@@ -375,6 +375,8 @@ enum flow_rejected_reason_t {
    FLOW_REJECTED_HW_TABLE_FULL,
    /** Flow not created for some other reason. */
    FLOW_REJECTED_OTHER,
+   /** Flow not created due to unsupported action set. */
+   FLOW_REJECTED_ACTIONS_UNSUPPORTED,
 };
 /**
  * Appends a string representation of enum flow_rejected_reason_t value to the

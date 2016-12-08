@@ -751,6 +751,8 @@ operator<<(std::ostream& os, const flow_rejected_reason_t & enum_val) {
       os << "FLOW_REJECTED_HW_TABLE_FULL";
    } else if (enum_val==FLOW_REJECTED_OTHER) {
       os << "FLOW_REJECTED_OTHER";
+   } else if (enum_val==FLOW_REJECTED_ACTIONS_UNSUPPORTED) {
+      os << "FLOW_REJECTED_ACTIONS_UNSUPPORTED";
    } else {
       os << "Unknown value";
    }
