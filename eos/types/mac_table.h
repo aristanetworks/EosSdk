@@ -30,7 +30,15 @@ enum mac_entry_type_t {
    MAC_ENTRY_PEER_LEARNED_REMOTE,
    MAC_ENTRY_PEER_CONFIGURED_REMOTE,
    MAC_ENTRY_PEER_RECEIVED_REMOTE,
+   MAC_ENTRY_EVPN_DYNAMIC_REMOTE,
+   MAC_ENTRY_EVPN_CONFIGURED_REMOTE,
+   MAC_ENTRY_PEER_EVPN_REMOTE,
+   MAC_ENTRY_CONFIGURED_ROUTER,
+   MAC_ENTRY_PEER_ROUTER,
+   MAC_ENTRY_EVPN_INTF,
+   /** Deprecated. */
    MAC_ENTRY_EVPN_REMOTE_MAC,
+   /** Deprecated. */
    MAC_ENTRY_PEER_EVPN_REMOTE_MAC,
 };
 /** Appends a string representation of enum mac_entry_type_t value to the ostream. */

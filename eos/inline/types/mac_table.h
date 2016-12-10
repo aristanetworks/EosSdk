@@ -38,6 +38,18 @@ operator<<(std::ostream& os, const mac_entry_type_t & enum_val) {
       os << "MAC_ENTRY_PEER_CONFIGURED_REMOTE";
    } else if (enum_val==MAC_ENTRY_PEER_RECEIVED_REMOTE) {
       os << "MAC_ENTRY_PEER_RECEIVED_REMOTE";
+   } else if (enum_val==MAC_ENTRY_EVPN_DYNAMIC_REMOTE) {
+      os << "MAC_ENTRY_EVPN_DYNAMIC_REMOTE";
+   } else if (enum_val==MAC_ENTRY_EVPN_CONFIGURED_REMOTE) {
+      os << "MAC_ENTRY_EVPN_CONFIGURED_REMOTE";
+   } else if (enum_val==MAC_ENTRY_PEER_EVPN_REMOTE) {
+      os << "MAC_ENTRY_PEER_EVPN_REMOTE";
+   } else if (enum_val==MAC_ENTRY_CONFIGURED_ROUTER) {
+      os << "MAC_ENTRY_CONFIGURED_ROUTER";
+   } else if (enum_val==MAC_ENTRY_PEER_ROUTER) {
+      os << "MAC_ENTRY_PEER_ROUTER";
+   } else if (enum_val==MAC_ENTRY_EVPN_INTF) {
+      os << "MAC_ENTRY_EVPN_INTF";
    } else if (enum_val==MAC_ENTRY_EVPN_REMOTE_MAC) {
       os << "MAC_ENTRY_EVPN_REMOTE_MAC";
    } else if (enum_val==MAC_ENTRY_PEER_EVPN_REMOTE_MAC) {
