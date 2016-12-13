@@ -169,8 +169,9 @@ class EOS_SDK_PUBLIC mac_table_mgr : public base_mgr<mac_table_handler, mac_key_
    EOS_SDK_DISALLOW_COPY_CTOR(mac_table_mgr);
 };
 
-#include <eos/inline/mac_table.h>
 
 } // end namespace eos
+
+#include <eos/inline/mac_table.h>
 
 #endif // EOS_MAC_TABLE_H

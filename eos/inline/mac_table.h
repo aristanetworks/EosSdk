@@ -4,8 +4,12 @@
 #ifndef INLINE_MAC_TABLE_H
 #define INLINE_MAC_TABLE_H
 
+namespace eos {
+
 inline mac_table_mgr * mac_table_handler::get_mac_table_mgr() const {
    return mgr_;
+}
+
 }
 
 #endif // INLINE_MAC_TABLE_H
