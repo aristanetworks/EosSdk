@@ -14,6 +14,12 @@
    }                              \
    return __mgr__ ## _mgr_;       \
 
+#define GET_NO_MOUNT_MGR(__mgr__)          \
+   if (! __mgr__ ## _mgr_) {      \
+      init_ ## __mgr__ ## _mgr(); \
+   }                              \
+   return __mgr__ ## _mgr_;       \
+
 namespace eos {
 
 // To facilitate the making of customized sysdb-mount-profiles (in place of the 
@@ -45,7 +51,7 @@ inline agent_mgr * sdk::get_agent_mgr() {
 }
 
 inline aresolve_mgr * sdk::get_aresolve_mgr() {
-   GET_MGR(aresolve)
+   GET_NO_MOUNT_MGR(aresolve)
 }
 
 inline bfd_session_mgr * sdk::get_bfd_session_mgr() {
@@ -65,23 +71,24 @@ inline directflow_mgr * sdk::get_directflow_mgr() {
 }
 
 inline eth_intf_mgr * sdk::get_eth_intf_mgr() {
+   print_profiles::add_profile("IntfMgrHelper");
    GET_MGR(eth_intf)
 }
 
 inline eth_lag_intf_mgr * sdk::get_eth_lag_intf_mgr() {
+   print_profiles::add_profile("IntfMgrHelper");
    GET_MGR(eth_lag_intf)
 }
 
 inline eth_phy_intf_mgr * sdk::get_eth_phy_intf_mgr() {
+   print_profiles::add_profile("IntfMgrHelper");
    GET_MGR(eth_phy_intf)
 }
 
 inline eth_phy_intf_counter_mgr * sdk::get_eth_phy_intf_counter_mgr() {
-   print_profiles::add_profile("eth_phy_intf");
-   if (!eth_phy_intf_counter_mgr_) {
-      init_eth_phy_intf_counter_mgr();
-   }
-   return eth_phy_intf_counter_mgr_;
+   print_profiles::add_profile("IntfMgrHelper");
+   print_profiles::add_profile("eth_phy_intf"); // _counter does not have own profile
+   GET_NO_MOUNT_MGR(eth_phy_intf_counter);
 }
 
 inline event_loop * sdk::get_event_loop() {
@@ -94,6 +101,7 @@ inline event_loop * sdk::get_event_loop() {
 }
 
 inline fib_mgr * sdk::get_fib_mgr(mgr_mode_type_t mode) {
+   // cannot use GET_MGR because init_ takes an arg
    print_profiles::add_profile("fib");
    if (!fib_mgr_) {
       init_fib_mgr(mode);
@@ -107,18 +115,17 @@ inline hardware_table_mgr * sdk::get_hardware_table_mgr() {
 }
 
 inline intf_mgr * sdk::get_intf_mgr() {
+   print_profiles::add_profile("IntfMgrHelper");
    GET_MGR(intf)
 }
 
 inline intf_counter_mgr * sdk::get_intf_counter_mgr() {
    print_profiles::add_profile("intf");
-   if (!intf_counter_mgr_) {
-      init_intf_counter_mgr();
-   }
-   return intf_counter_mgr_;
+   GET_NO_MOUNT_MGR(intf_counter)
 }
 
 inline ip_intf_mgr * sdk::get_ip_intf_mgr() {
+   print_profiles::add_profile("intf");
    GET_MGR(ip_intf)
 }
 
@@ -126,6 +133,9 @@ inline ip_route_mgr * sdk::get_ip_route_mgr() {
    GET_MGR(ip_route)
 }
 
+// Unconventional naming: should be "intf_helper_mgr" and the profile name
+// should be renamed too, except that there might be customers out there 
+// with it in their custom profiles (why not merge it into intf_mgr?).
 inline intf_mgr_helper * sdk::get_intf_mgr_helper() {
    print_profiles::add_profile("IntfMgrHelper");
    if (!intf_mgr_helper_) {
@@ -143,10 +153,7 @@ inline mlag_mgr * sdk::get_mlag_mgr() {
 }
 
 inline mount_mgr * sdk::get_mount_mgr() {
-   if (!mount_mgr_) {
-      init_mount_mgr();
-   }
-   return mount_mgr_;
+   GET_NO_MOUNT_MGR(mount);
 }
 
 inline mpls_route_mgr * sdk::get_mpls_route_mgr() {
@@ -166,6 +173,7 @@ inline policy_map_mgr * sdk::get_policy_map_mgr() {
 }
 
 inline subintf_mgr * sdk::get_subintf_mgr() {
+   print_profiles::add_profile("IntfMgrHelper");
    GET_MGR(subintf)
 }
 
@@ -174,10 +182,7 @@ inline system_mgr * sdk::get_system_mgr() {
 }
 
 inline timeout_mgr * sdk::get_timeout_mgr() {
-   if (!timeout_mgr_) {
-      init_timeout_mgr();
-   }
-   return timeout_mgr_;
+   GET_NO_MOUNT_MGR(timeout);
 }
 
 inline vrf_mgr * sdk::get_vrf_mgr() {
