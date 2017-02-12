@@ -133,9 +133,6 @@ inline ip_route_mgr * sdk::get_ip_route_mgr() {
    GET_MGR(ip_route)
 }
 
-// Unconventional naming: should be "intf_helper_mgr" and the profile name
-// should be renamed too, except that there might be customers out there 
-// with it in their custom profiles (why not merge it into intf_mgr?).
 inline intf_mgr_helper * sdk::get_intf_mgr_helper() {
    print_profiles::add_profile("IntfMgrHelper");
    if (!intf_mgr_helper_) {
