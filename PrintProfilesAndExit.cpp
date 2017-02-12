@@ -1,7 +1,7 @@
 // Copyright (c) 2014 Arista Networks, Inc.  All rights reserved.
 // Arista Networks, Inc. Confidential and Proprietary.
 
-// To facilitate the making of customized sysdb-mount-profiles (in place of the 
+// To facilitate the making of customized sysdb-mount-profiles (in place of the
 // brute-force one "EosSdk", see /usr/lib/SysdbMountProfiles/EosSdkAll), an app can
 // be started with the env var EOS_PRINT_PROFILES_AND_EXIT pointing to a filename
 // where the profile should be written, then exit.
@@ -28,7 +28,7 @@ void print_profiles::set_print_profiles(const char* name) {
    if (getenv("EOS_PRINT_PROFILES_AND_EXIT")) {
       print_profiles_fp = fopen(getenv("EOS_PRINT_PROFILES_AND_EXIT"), "w");
       if (!print_profiles_fp) {
-         const char* text = 
+         const char* text =
                     "Error: EOS_PRINT_PROFILES_AND_EXIT must be a writtable file\n";
          fprintf(stderr, "%s", text);
          exit(1); // r+2 because of warnings: discarded fprintf rcode + unused var
@@ -58,15 +58,15 @@ void print_profiles::write_profiles() {
          if (readlink("/proc/self/exe", myExe, 1000) != -1) {
             fprintf(print_profiles_fp, "agentName:%s\n", basename(myExe));
          } else {
-            const char* text = 
+            const char* text =
                  "Warning: couldn't figure out agent name, edit 'TBD' in profile\n";
             fprintf(stderr, "%s", text);
             fprintf(print_profiles_fp, "agentName:!!!TBD!!!\n");
          }
       }
-      for (std::map<std::string, bool>::iterator it = profiles_to_print.begin(); 
+      for (std::map<std::string, bool>::iterator it = profiles_to_print.begin();
            it != profiles_to_print.end(); it++) {
-         fprintf(print_profiles_fp, "Include: EosSdk_%s.include\n", 
+         fprintf(print_profiles_fp, "Include: EosSdk_%s.include\n",
                                      it->first.c_str());
       }
       fclose(print_profiles_fp);
