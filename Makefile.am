@@ -7,7 +7,8 @@ AM_LDFLAGS = -Wl,--no-undefined
 PUBLISHED_HEADER_FILES := $(wildcard eos/*.h) $(wildcard eos/inline/*.h) $(wildcard eos/types/*.h) $(wildcard eos/inline/types/*.h)
 nobase_include_HEADERS = $(PUBLISHED_HEADER_FILES)
 
-EXTRA_DIST = PrintProfilesAndExit.cpp $(wildcard examples/*) $(wildcard examples/test/*)
+EXTRA_DIST = MaybePrintProfilesAndExit.cpp $(wildcard examples/*) $(wildcard examples/test/*)
+EXTRA_DIST += GetAgentProcessName.cpp
 
 libeos_la_SOURCES =
 libeos_la_SOURCES += agent.cpp
@@ -74,10 +75,10 @@ _eossdk_la_CXXFLAGS = $(AM_CXXFLAGS) -Wno-strict-aliasing -Wno-missing-field-ini
 _eossdk_la_CPPFLAGS = -I/usr/include/python$(PYTHON_VERSION)
 _eossdk_la_LIBADD = libeos.la
 
-$(srcdir)/eossdk_wrap.cpp: $(SWIG_FILES) $(nobase_include_HEADERS)
-	SRCDIR=$(srcdir) $(SWIG) -threads -c++ -python -dirvtable -O -I$(srcdir) -o $@-t $(srcdir)/EosSdk.i
+$(srcdir)/eossdk_wrap.cpp: $(SWIG_FILES) $(nobase_include_HEADERS) $(srcdir)/eossdk_wrap.cpp
+	SRCDIR=$(srcdir) prefix [stubs-swig] $(SWIG) -threads -c++ -python -dirvtable -O -I$(srcdir) -o $@-t $(srcdir)/EosSdk.i
 	patch --batch --no-backup-if-mismatch -p0 <$(srcdir)/swig.patch
-	mv $@-t $@
+	 mv $@-t $@
 
 $(srcdir)/eossdk_wrap.h: $(srcdir)/eossdk_wrap.cpp
 

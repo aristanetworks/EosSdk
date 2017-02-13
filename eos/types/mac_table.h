@@ -35,7 +35,6 @@ enum mac_entry_type_t {
    MAC_ENTRY_PEER_EVPN_REMOTE,
    MAC_ENTRY_CONFIGURED_ROUTER,
    MAC_ENTRY_PEER_ROUTER,
-   MAC_ENTRY_EVPN_INTF,
    /** Deprecated. */
    MAC_ENTRY_EVPN_REMOTE_MAC,
    /** Deprecated. */

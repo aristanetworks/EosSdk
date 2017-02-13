@@ -1,6 +1,8 @@
 // Copyright (c) 2014 Arista Networks, Inc.  All rights reserved.
 // Arista Networks, Inc. Confidential and Proprietary.
 
+#include <string>
+#include <iostream>
 #include <boost/program_options.hpp>
 
 #include <thrift/transport/TSocket.h>

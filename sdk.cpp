@@ -4,12 +4,14 @@
 #include <cassert>
 #include <cstring>
 #include <unistd.h>
+#include <fstream>
+#include <iostream>
 
+#include "eos/exception.h"
+#include "eos/panic.h"
 #include "eos/event_loop.h"
 #include "eos/sdk.h"
 #include "impl.h"
-
-static char DEFAULT_AGENT_PROCESS_NAME[] = "TestAgent";
 
 namespace eos {
 
@@ -19,6 +21,7 @@ sdk_scoped_lock::sdk_scoped_lock() {
 sdk_scoped_lock::~sdk_scoped_lock() {
 }
 
+#include "GetAgentProcessName.cpp"
 
 sdk::sdk()
    : acl_mgr_(0),
@@ -52,19 +55,7 @@ sdk::sdk()
      system_mgr_(0),
      timeout_mgr_(0),
      vrf_mgr_(0) {
-   char * agent_process_name = getenv("AGENT_PROCESS_NAME");
-   if (!agent_process_name) {
-      agent_process_name = DEFAULT_AGENT_PROCESS_NAME;
-   }
-   for (uint16_t i = 0; i < strlen(agent_process_name); i++) {
-      char c = agent_process_name[i];
-      if(!isalnum(c) && c != '-' && c != '_') {
-         panic(configuration_error("Invalid name specified in AGENT_PROCESS_NAME. "
-                                   "Only alphanumeric characters, underscores, "
-                                   "and dashes are permitted."));
-      }
-   }
-   name_ = agent_process_name;
+   name_ = get_agent_process_name();
    eossdk_context_ = NULL;
    impl.register_sdk(this);
    print_profiles::set_print_profiles(name_.c_str());
@@ -183,6 +174,6 @@ void internal_connection_buffer_size_is(uint32_t bytes) {
 // /usr/lib/SysdbMountProfiles/EosSdkAll), an app can be started with the env var 
 // EOS_PRINT_PROFILES_AND_EXIT pointing to a filename where the profile should be 
 // written, then exit.
-#include "PrintProfilesAndExit.cpp"
+#include "MaybePrintProfilesAndExit.cpp"
 
 }

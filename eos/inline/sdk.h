@@ -22,7 +22,7 @@
 
 namespace eos {
 
-// To facilitate the making of customized sysdb-mount-profiles (in place of the
+// To facilitate the making of customized sysdb-mount-profiles (in place of the 
 // brute-force one "EosSdk", see /usr/lib/SysdbMountProfiles/EosSdkAll), an app can
 // be started with the env var EOS_PRINT_PROFILES_AND_EXIT pointing to a filename
 // where the profile should be written, then exit.
@@ -109,7 +109,7 @@ inline fib_mgr * sdk::get_fib_mgr(mgr_mode_type_t mode) {
    return fib_mgr_;
 }
 
-
+   
 inline hardware_table_mgr * sdk::get_hardware_table_mgr() {
    GET_MGR(hardware_table)
 }
@@ -133,6 +133,9 @@ inline ip_route_mgr * sdk::get_ip_route_mgr() {
    GET_MGR(ip_route)
 }
 
+// Unconventional naming: should be "intf_helper_mgr" and the profile name
+// should be renamed too, except that there might be customers out there 
+// with it in their custom profiles (why not merge it into intf_mgr?).
 inline intf_mgr_helper * sdk::get_intf_mgr_helper() {
    print_profiles::add_profile("IntfMgrHelper");
    if (!intf_mgr_helper_) {

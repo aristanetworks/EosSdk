@@ -85,7 +85,12 @@ class EOS_SDK_PUBLIC vrf_mgr : public base_mgr<vrf_handler, std::string> {
    virtual bool exists(std::string const & vrf_name) const = 0;
 
    /**
-    * Returns the configured route distinguisher associated with this VRF.
+    * Returns the route distinguisher associated with this VRF. The
+    * returned value is obtained from status that is the result of the
+    * RD configuration under the 'vrf definition' submode and the RD
+    * configuration under the 'router bgp vrf' submode. When
+    * configuration for the VRF exists in both locations, the value
+    * configured under 'router bgp' takes precedence and is returned.
     *
     * If no VRF matches the given name, this returns 0.
     */
