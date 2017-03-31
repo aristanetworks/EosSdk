@@ -4,6 +4,7 @@
 
 
 import eossdk
+import re
 import sys
 import time
 
@@ -40,7 +41,7 @@ class InterfaceMonitor(eossdk.AgentHandler, eossdk.IntfHandler):
       configuration changes """
       self.numIntfChanges_ += 1
       intfState = 'up' if operState == eossdk.INTF_OPER_UP else 'down'
-      lastChangeTime = time.ctime()
+      lastChangeTime = re.sub( ' +', ' ', time.ctime() )
       self.tracer.trace5("The state of " + intfId.to_string() +
                          " is now " + intfState)
 
