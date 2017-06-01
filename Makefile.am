@@ -56,7 +56,12 @@ libeos_la_SOURCES += bfd.cpp
 libeos_la_SOURCES += lldp.cpp
 
 libeos_la_LDFLAGS = -version-info $(SDK_LIBTOOL_VERSION) -lrt
+libeos_la_LDFLAGS += -soname libeos.so.$(SDK_VERSION_MAJOR).$(SDK_VERSION_MINOR)
 
+
+noinst_PROGRAMS = HelloWorld
+HelloWorld_SOURCES = examples/HelloWorld.cpp
+HelloWorld_LDADD = libeos.la
 
 # --------- #
 # SWIG libs #
@@ -91,6 +96,7 @@ endif
 ACLOCAL_AMFLAGS = -I autogen
 EXTRA_DIST += bootstrap build.sh $(SWIG_FILES)
 EXTRA_DIST += LICENSE
+EXTRA_DIST += ltmain.patch
 
 dist-hook:
 	chmod -R u+w $(distdir)

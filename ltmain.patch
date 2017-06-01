@@ -1,0 +1,15 @@
+--- ./autogen/ltmain.sh.orig	2017-04-26 15:09:03.409119048 -0700
++++ ./autogen/ltmain.sh	2017-04-26 15:09:22.825078726 -0700
+@@ -6939,6 +6939,12 @@
+ 	continue
+ 	;;
+ 
++      # Allow override of soname
++      -soname)
++        prev="soname_spec"
++       continue
++       ;;
++
+       -inst-prefix-dir)
+ 	prev=inst_prefix
+ 	continue

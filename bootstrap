@@ -1,4 +1,5 @@
 #!/bin/sh
 
 set -ex
-exec autoreconf --install --verbose -Wall -Wno-portability
+autoreconf --install --verbose -Wall -Wno-portability
+patch -p0 < ltmain.patch
