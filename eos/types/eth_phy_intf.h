@@ -1,4 +1,4 @@
-// Copyright (c) 2014 Arista Networks, Inc.  All rights reserved.
+// Copyright (c) 2017 Arista Networks, Inc.  All rights reserved.
 // Arista Networks, Inc. Confidential and Proprietary.
 
 #ifndef EOS_TYPES_ETH_PHY_INTF_H
@@ -17,8 +17,11 @@ enum eth_link_speed_t {
    LINK_SPEED_100MBPS,
    LINK_SPEED_1GBPS,
    LINK_SPEED_10GBPS,
+   LINK_SPEED_25GBPS,
    LINK_SPEED_40GBPS,
+   LINK_SPEED_50GBPS,
    LINK_SPEED_100GBPS,
+   LINK_SPEED_UNEXPECTED,
 };
 /** Appends a string representation of enum eth_link_speed_t value to the ostream. */
 std::ostream& operator<<(std::ostream& os, const eth_link_speed_t & enum_val);
