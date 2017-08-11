@@ -2,4 +2,4 @@
 
 set -ex
 autoreconf --install --verbose -Wall -Wno-portability
-patch -p0 < ltmain.patch
+patch -f -p0 < ltmain.patch
