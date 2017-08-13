@@ -39,7 +39,7 @@ CXXFLAGS=$CFLAGS
 export CXXFLAGS
 
 sysroot=$($(which gcc) --print-sysroot) || sysroot = ""
-[ $sysroot -a ${sysroot%-glibc2.19} != $sysroot ] && {
+[ $sysroot -a ${sysroot%fc14-gcc4.9.2-glibc2.19} != $sysroot ] && {
   LDFLAGS="-Wl,--dynamic-linker=$sysroot/lib/ld-linux.so.2 -Wl,-rpath,$sysroot/lib:/usr/lib:/lib"
   export LDFLAGS
 }
