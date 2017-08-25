@@ -283,6 +283,36 @@ class EOS_SDK_PUBLIC acl_mgr : public base_mgr<acl_handler> {
    virtual void acl_fragments_enabled_set(acl_key_t const &, bool) = 0;
 
    /**
+    * Check a connection against any applied ACL to determine if it should be
+    * dropped. For use with SOCK_STREAM or SOCK_DGRAM.
+    *
+    * @param ip_addr_t Source IP address
+    * @param ip_addr_t Destination IP address
+    * @param uint8_t Protocol (optional)
+    * @param uint16_t Source port (optional)
+    * @param uint16_t Destination port (optional)
+    * @return false if connection should be dropped, true otherwise.
+    */
+   virtual bool stream_allowed(ip_addr_t const &, ip_addr_t const &, uint8_t = 0,
+                               uint16_t = 0, uint16_t = 0) = 0;
+
+   /**
+    * Check a packet against any applied ACL to determine if it should be
+    * dropped. For use with SOCK_DGRAM only.
+    *
+    * @param ip_addr_t Source IP address
+    * @param ip_addr_t Destination IP address
+    * @param uint16_t Source port
+    * @param uint16_t Destination port
+    * @param uint8_t Time to live (IPv4) or hop limit (IPv6)
+    * @param uint8_t Type of service (IPv4) or traffic class (IPv6)
+    * @param intf_id_t Recipient interface
+    * @return false if the packet should be dropped, true otherwise.
+    */
+   virtual bool dgram_allowed(ip_addr_t const &, ip_addr_t const &, uint16_t,
+                              uint16_t, uint8_t, uint8_t, intf_id_t const &) = 0;
+
+   /**
     * Return whether the ACL is persistent or not. ACLs are dynamic by default.
     * @param acl_key_t The ACL key (name and ACL type)
     * @return true if ACL appears in the running-config,

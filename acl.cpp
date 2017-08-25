@@ -76,6 +76,16 @@ class acl_mgr_impl : public acl_mgr {
    void acl_fragments_enabled_set(acl_key_t const &, bool enabled) {
    }
 
+   bool dgram_allowed(ip_addr_t const &, ip_addr_t const &, uint16_t, uint16_t,
+                      uint8_t, uint8_t, intf_id_t const &) {
+      return true;
+   }
+
+   bool stream_allowed(ip_addr_t const &, ip_addr_t const &, uint8_t, uint16_t,
+                       uint16_t) {
+      return true;
+   }
+
    bool persistent(acl_key_t const &) const {
       return false;
    }

@@ -12,7 +12,7 @@
  * with the destination qualifier matching each monitored route exists in a
  * V4/V6 ACL. For simplicity, when an ACL update is triggered by a route change
  * all the existing rules in the ACL are purged from the ACL config and a new
- * config is created by iterating the FIB. The new config is then committed 
+ * config is created by iterating the FIB. The new config is then committed
  * to reprogram the ACL in hardware.
  *
  * ACL commit operation is expensive since it involves reprogramming all the
@@ -73,7 +73,7 @@ static const std::string STATUS_ROUTE_TYPES = "Route types to monitor";
 static const std::string STATUS_ACL_UPDATE_TIMER_MIN = "ACL update timer[ min ]";
 static const std::string STATUS_ACL_UPDATE_TIMER_MAX = "ACL update timer[ max ]";
 static const std::string STATUS_ACL_UPDATE_TIMER = "ACL update timer";
-static const std::string STATUS_UPDATE_SUCCESS_COUNTER= 
+static const std::string STATUS_UPDATE_SUCCESS_COUNTER=
                                       "Number of succeeded ACL updates";
 static const std::string STATUS_UPDATE_FAIL_COUNTER= "Number of failed ACL updates";
 static const std::string STATUS_LAST_UPDATE_STATUS = "Status of last ACL update";
@@ -199,7 +199,7 @@ class fib_acl_sync : public eos::agent_handler,
                // User has set an incorrect value.
                // Reset to default value.
                t.trace0("%s: Option %s set to an incorrect value. "
-                        "Assuming default value.", 
+                        "Assuming default value.",
                         __FUNCTION__, CONFIG_ACL_UPDATE_TIMER_MIN.c_str());
                acl_update_timer_min = ACL_UPDATE_TIMER_MIN;
             }
@@ -209,7 +209,7 @@ class fib_acl_sync : public eos::agent_handler,
          update_status(STATUS_ACL_UPDATE_TIMER_MIN, acl_update_timer_min);
 
       } else if (option_name == CONFIG_ACL_UPDATE_TIMER_MAX) {
-         // acl_update_timer_max has changed. No need to schedule ACL update. 
+         // acl_update_timer_max has changed. No need to schedule ACL update.
          // This will be effective when we schedule the next ACL update.
 
          if (value.empty()) {
@@ -266,7 +266,7 @@ class fib_acl_sync : public eos::agent_handler,
          update_acl = true;
 
       } else if (option_name == CONFIG_VRF) {
-         // VRF changed. Schedule ACL update 
+         // VRF changed. Schedule ACL update
 
          if (value.empty()) {
             t.trace0("%s: Removed option %s", __FUNCTION__,
@@ -369,8 +369,8 @@ class fib_acl_sync : public eos::agent_handler,
 
       if (nodelay) {
          // Most likely a config change has occurred. Schedule immediate ACL
-         // update and reset the timeout to acl_update_timer_min. 
-         
+         // update and reset the timeout to acl_update_timer_min.
+
          timeout_time_is(eos::now());
          acl_update_timer = acl_update_timer_min;
          update_status(STATUS_ACL_UPDATE_TIMER, acl_update_timer);
