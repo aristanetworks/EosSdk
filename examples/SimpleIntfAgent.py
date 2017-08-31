@@ -6,6 +6,7 @@ import eossdk
 
 import sys
 
+
 # Listens to standard input and shuts down an interface when it
 # receives a "shutdown" message. To exit, enter a blank line.
 class MyTestAgent(eossdk.AgentHandler, eossdk.FdHandler):

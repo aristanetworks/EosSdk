@@ -51,10 +51,10 @@ PROTOCOLS = {'icmp': 1,
              'ospf': 89}
 
 
-NEXTHOP_GROUP_TYPE = {'ipinip': eossdk.NEXTHOP_GROUP_IP_IN_IP,
-                      'gre': eossdk.NEXTHOP_GROUP_GRE,
-                      }
-                      #'mpls': eossdk.NEXTHOP_GROUP_MPLS} # not yet supported
+NEXTHOP_GROUP_TYPE = {
+    'ipinip': eossdk.NEXTHOP_GROUP_IP_IN_IP,
+    'gre': eossdk.NEXTHOP_GROUP_GRE,
+}  # 'mpls': eossdk.NEXTHOP_GROUP_MPLS} # not yet supported
 
 
 CONFIG_SECTIONS = frozenset(('match',
@@ -96,14 +96,15 @@ def load_match(d):
       acls.setdefault(k, [])
       for v in vs:
          ace = Filter(src_ip=v.get('src_ip'),
-                       dst_ip=v.get('dst_ip'),
-                       src_mac=v.get('src_mac'),
-                       dst_mac=v.get('dst_mac'),
-                       sport=v.get('sport'),
-                       dport=v.get('dport'),
-                       proto=v.get('proto'))
+                      dst_ip=v.get('dst_ip'),
+                      src_mac=v.get('src_mac'),
+                      dst_mac=v.get('dst_mac'),
+                      sport=v.get('sport'),
+                      dport=v.get('dport'),
+                      proto=v.get('proto'))
          acls[k].append(ace)
    return acls
+
 
 def load_classifier(d):
    c = {}
@@ -111,6 +112,7 @@ def load_classifier(d):
       matches = [Match(type=None, acl_name=x.get('match')) for x in v]
       c[k] = Classifier(matches=matches)
    return c
+
 
 def load_action(d):
    a = {}
@@ -121,17 +123,20 @@ def load_action(d):
                     mpls_labels=v.get('mpls_labels'))
    return a
 
+
 def load_policy(d):
    p = {}
    for k, v in d.iteritems():
       p[k] = Policy(**v)
    return p
 
+
 def load_apply(d):
    a = {}
    for k, v in d.iteritems():
       a[k] = Apply(policy=v)
    return a
+
 
 def load_nexthop_group(d):
    g = {}
@@ -142,6 +147,7 @@ def load_nexthop_group(d):
                           dst_ips=v.get('dst_ips', []),
                           mpls_labels=v.get('mpls_labels', []))
    return g
+
 
 def load_config(d):
    for section in MANDATORY_CONFIG_SECTIONS:
@@ -156,6 +162,7 @@ def load_config(d):
       classifiers=load_classifier(d['classifier']))
    return config
 
+
 def load_config_file(filename):
    config = {}
    with open(filename) as f:
@@ -164,6 +171,7 @@ def load_config_file(filename):
       except (TypeError, ValueError, cjson.Error) as e:
          sys.stderr.write('error reading config: %s\n' % e)
    return config
+
 
 def load_config_file_obj(f):
    try:
@@ -218,7 +226,7 @@ class PolicyRouter(object):
                try:
                   srcPfx = eossdk.IpPrefix(rule.src_ip)
                   addr = eossdk.IpAddrMask(srcPfx.network(),
-                                            srcPfx.prefix_length())
+                                           srcPfx.prefix_length())
                   aclRule.source_addr_is(addr)
                except eossdk.Error:
                   sys.stderr.write('bad IP address: %s\n', rule.src_ip)
@@ -228,7 +236,7 @@ class PolicyRouter(object):
                try:
                   dstPfx = eossdk.IpPrefix(rule.dst_ip)
                   addr = eossdk.IpAddrMask(dstPfx.network(),
-                                            dstPfx.prefix_length())
+                                           dstPfx.prefix_length())
                   aclRule.destination_addr_is(addr)
                except eossdk.Error:
                   sys.stderr.write('bad IP address: %s\n', rule.dst_ip)
@@ -466,8 +474,8 @@ class PolicyHandler(eossdk.AgentHandler, eossdk.PolicyMapHandler, eossdk.AclHand
       print self.__class__.__name__, 'was initialized by the SDK'
       print 'Loading initial config'
       self.on_agent_option('config_file',
-                           self.agent_mgr.agent_option('config_file')
-                           or self.config_file_)
+                           self.agent_mgr.agent_option('config_file') or
+                           self.config_file_)
       print 'Finished loading initial config'
 
    def on_agent_option(self, name, value):

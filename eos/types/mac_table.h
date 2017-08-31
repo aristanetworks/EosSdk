@@ -1,4 +1,4 @@
-// Copyright (c) 2014 Arista Networks, Inc.  All rights reserved.
+// Copyright (c) 2017 Arista Networks, Inc.  All rights reserved.
 // Arista Networks, Inc. Confidential and Proprietary.
 
 #ifndef EOS_TYPES_MAC_TABLE_H
@@ -35,6 +35,7 @@ enum mac_entry_type_t {
    MAC_ENTRY_PEER_EVPN_REMOTE,
    MAC_ENTRY_CONFIGURED_ROUTER,
    MAC_ENTRY_PEER_ROUTER,
+   MAC_ENTRY_EVPN_INTF,
    /** Deprecated. */
    MAC_ENTRY_EVPN_REMOTE_MAC,
    /** Deprecated. */

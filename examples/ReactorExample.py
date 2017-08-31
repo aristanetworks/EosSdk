@@ -5,6 +5,7 @@
 import eossdk
 import sys
 
+
 class MyIntfHandler( eossdk.AgentHandler, eossdk.IntfHandler ):
    def __init__( self, intfMgr, agentMgr ):
       eossdk.AgentHandler.__init__( self, agentMgr )
@@ -26,7 +27,7 @@ class MyIntfHandler( eossdk.AgentHandler, eossdk.IntfHandler ):
       print "   We have seen", self.numIntfChanges_, "state changes"
       self.intfMgr_.description_is(intfId,
                                    "Changed state [%d]" % self.numIntfChanges_)
-      
+
 
 sdk = eossdk.Sdk()
 mta = MyIntfHandler( sdk.get_intf_mgr(), sdk.get_agent_mgr() )

@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-# Copyright (c) 2014 Arista Networks, Inc.  All rights reserved.
+# Copyright (c) 2016 Arista Networks, Inc.  All rights reserved.
 # Arista Networks, Inc. Confidential and Proprietary.
 
 
@@ -51,11 +51,11 @@ class InterfaceMonitor(eossdk.AgentHandler, eossdk.IntfHandler):
 
       # Update this agent's status with new statistics:
       self.agentMgr_.status_set("Total intf changes", str(self.numIntfChanges_))
-      self.agentMgr_.status_set("Last change", 
-                                intfId.to_string() + ": " + intfState)
-      self.agentMgr_.status_set("Last change time", lastChangeTime)
-      
-      
+      self.agentMgr_.status_set("Last change of " + intfId.to_string(), intfState)
+      self.agentMgr_.status_set("Last change time of " + intfId.to_string(),
+                                lastChangeTime)
+
+
 if __name__ == "__main__":
    sdk = eossdk.Sdk()
    _ = InterfaceMonitor(sdk.get_intf_mgr(), sdk.get_agent_mgr())

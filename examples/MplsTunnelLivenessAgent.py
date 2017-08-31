@@ -31,16 +31,17 @@ import time
 
 # The main agent is located in the MplsTunnelLivenessAgent class below.
 
-POLL_TIME = 1 # how often to send a liveness packet in seconds
-TIMEOUT_TIME = 5 # seconds before a tunnel is declared dead
-STARTUP_GRACEPERIOD = 0 # seconds after startup before we start checking a tunnel
+POLL_TIME = 1  # how often to send a liveness packet in seconds
+TIMEOUT_TIME = 5  # seconds before a tunnel is declared dead
+STARTUP_GRACEPERIOD = 0  # seconds after startup before we start checking a tunnel
 
 # Make sure your IP tables are up to date on the switch:
 #   > sudo iptables -I INPUT -p UDP --dport 17171 -j ACCEPT
 UDP_PORT = 17171
 
-MAX_PKT_SIZE = 2048 # The maximum payload size of our packet
-MAX_INT = 0xffffffff # The maximum size of a 4 byte unsigned int
+MAX_PKT_SIZE = 2048  # The maximum payload size of our packet
+MAX_INT = 0xffffffff  # The maximum size of a 4 byte unsigned int
+
 
 class Message(object):
    """ A Message is the payload of the health-check packets that this
@@ -55,18 +56,18 @@ class Message(object):
 
    # Header consists of (version, pid, sender's tunnel key, msg id,
    # num status entries), as integers, in little-endian:
-   header_format = '<IIIII' 
+   header_format = '<IIIII'
    header_len = struct.calcsize(header_format)
-   tunnel_entry_format = '<I?' # tunnel_key, bool
+   tunnel_entry_format = '<I?'  # tunnel_key, bool
    tunnel_entry_len = struct.calcsize(tunnel_entry_format)
-   
+
    def __init__(self, pid, egress_tunnel_key, msg_id, tunnel_liveness):
       self.pid = pid
       self.egress_tunnel_key = egress_tunnel_key
       self.msg_id = msg_id
       # Mapping from tunnel_key to boolean whether this is alive or not
       self.tunnel_liveness = tunnel_liveness
-      
+
    def serialize(self):
       # First put the length of this packet
       ret = struct.pack(Message.header_format, 1, self.pid, self.egress_tunnel_key,
@@ -76,11 +77,11 @@ class Message(object):
       if len(ret) > MAX_PKT_SIZE:
          assert False, "Packet %s too large to send!" % self.__str__()
       return ret
-   
+
    def __str__(self):
       return "Message(sender_pid=%d, egress_tunnel_key=%d, id=%d, %r)" % (
          self.pid, self.egress_tunnel_key, self.msg_id, self.tunnel_liveness)
-   
+
    @staticmethod
    def deserialize(buf):
       """ Given a buffer, create and return a Message from the
@@ -96,13 +97,13 @@ class Message(object):
       msg_len = Message.header_len + Message.tunnel_entry_len * num_entries
       if len(buf) < msg_len:
          return None
-      
+
       liveness = {}
       for i in xrange(Message.header_len, msg_len,
                       Message.tunnel_entry_len):
          # Unpack each status entry reported in this packet
          key, is_alive = struct.unpack(Message.tunnel_entry_format,
-                                       buf[i : i + Message.tunnel_entry_len])
+                                       buf[i: i + Message.tunnel_entry_len])
          liveness[key] = is_alive
       return Message(pid, egress_tunnel_key, msg_id, liveness)
 
@@ -117,9 +118,9 @@ class EgressTunnel(object):
 
       # Dynamic attributes:
       # The bridging MAC of the nexthop:
-      self.nexthop_eth_addr = None 
+      self.nexthop_eth_addr = None
       # The interface the nexthop_eth_addr lives on:
-      self.egress_intf = None 
+      self.egress_intf = None
       # ... and the MAC address of that interface:
       self.egress_intf_eth_addr = None
       self.last_update_time = 0
@@ -131,7 +132,8 @@ class RemoteTunnelStatus(object):
    sender is the remote switch). """
    def __init__(self):
       self.last_rx_msg_id = 0
-      self.last_update_time = time.time() 
+      self.last_update_time = time.time()
+
 
 class RemoteSwitch(object):
    """ This object stores the configuration for our outgoing tunnels to
@@ -162,7 +164,7 @@ class RemoteSwitch(object):
       ret = {}
       for key, tunnel_status in self.remote_tunnel_status.items():
          time_delta = cur_time - tunnel_status.last_update_time
-         if time_delta > (TIMEOUT_TIME*10):
+         if time_delta > (TIMEOUT_TIME * 10):
             # Stop sending tunnels that we haven't heard from in a
             # really long time.
             del self.remote_tunnel_status[key]
@@ -186,8 +188,11 @@ scapy.packet.bind_layers(scapy.layers.l2.Ether, MPLS, type=0x8847)
 
 class InotifyHandler(pyinotify.ProcessEvent):
    """ A helper class handles inotify updates """
+   parent = None
+
    def my_init(self, **kwargs):
       self.parent = kwargs['parent']
+
    def process_IN_MODIFY(self, event):
       self.parent.process_config()
 
@@ -219,11 +224,11 @@ class MplsTunnelLivenessAgent(eossdk_utils.EosSdkAgent,
       # The l3 interface we should grab our "SRC IP" from. Read from
       # the config:
       self.src_intf = None
-      self.src_ip = None # Resolved after reading from config
+      self.src_ip = None  # Resolved after reading from config
 
       # A UDP socket that receives liveness packets from other
       # agents. Created during on_initialized
-      self.rx_sock = None 
+      self.rx_sock = None
 
       # A mapping from remote switch IP to RemoteSwitch()
       self.remote_switches = {}
@@ -231,7 +236,9 @@ class MplsTunnelLivenessAgent(eossdk_utils.EosSdkAgent,
       self.config_file = config_file
       self.wm = pyinotify.WatchManager()
       handler = functools.partial(InotifyHandler, parent=self)
+      # pylint: disable-msg=E1101
       self.wm.watch_transient_file(config_file, pyinotify.IN_MODIFY, handler)
+      # pylint: enable-msg=E1101
       self.notifier = pyinotify.AsyncNotifier(self.wm,
                                               InotifyHandler(parent=self))
       self.notifier.coalesce_events(True)
@@ -253,14 +260,14 @@ class MplsTunnelLivenessAgent(eossdk_utils.EosSdkAgent,
          assert False, "No IP addresses assigned to %s" % self.src_intf
       self.src_ip = src_ips[0].addr().to_string()
       self.tracer.trace2("Using src IP address " + self.src_ip)
-      
+
       self.tracer.trace2("Create the socket that receives remote probes")
       self.rx_sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
       self.rx_sock.setsockopt(socket.SOL_SOCKET, socket.SO_REUSEADDR, 1)
       self.rx_sock.bind((self.src_ip, UDP_PORT))
       self.rx_sock.setblocking(0)
       self.watch_readable(self.rx_sock.fileno(), True)
-      
+
       self.resolve_config()
 
    def handle_tunnel_alive(self, dst_ip, tunnel_key, tunnel):
@@ -350,11 +357,10 @@ class MplsTunnelLivenessAgent(eossdk_utils.EosSdkAgent,
 
       # Then inspect the body of the packet that tells me which of
       # my tunnel statuses the remote switch has seen.
-         
 
       if not self.is_new_id(remote_switch.last_rx_msg_id, msg.msg_id):
          # We've already seen newer messages. Ignore the this.
-         self.tracer.trace7("Got old message with id: %d (currently at %d)" 
+         self.tracer.trace7("Got old message with id: %d (currently at %d)"
                             % (msg.msg_id, remote_switch.last_rx_msg_id))
          return
 
@@ -411,7 +417,7 @@ class MplsTunnelLivenessAgent(eossdk_utils.EosSdkAgent,
       # Convert the interface names to the kernel interface names
       intf = intf.replace("Ethernet", "et")
       intf = intf.replace("Port-Channel", "po")
-      self.tracer.trace5("MAC entry %s is learned on inteface %r" % 
+      self.tracer.trace5("MAC entry %s is learned on inteface %r" %
                          (tunnel.nexthop_eth_addr, intf))
       tunnel.egress_intf = intf
 
@@ -419,10 +425,9 @@ class MplsTunnelLivenessAgent(eossdk_utils.EosSdkAgent,
       egress_eth_addr = self.eth_intf_mgr.eth_addr(mac_entry.intf())
       if egress_eth_addr == eossdk.EthAddr():
          assert False, "Interface %s has no MAC address" % intf
-      self.tracer.trace5("Intf %s has MAC address %s" % 
+      self.tracer.trace5("Intf %s has MAC address %s" %
                          (intf, egress_eth_addr.to_string()))
       tunnel.egress_intf_eth_addr = egress_eth_addr.to_string()
-
 
    def send_packet(self, dst_ip, tunnel, msg):
       """ Wrap `msg` in a UDP-over-MPLS packet, using `dst_ip` and the tunnel's
@@ -449,13 +454,13 @@ class MplsTunnelLivenessAgent(eossdk_utils.EosSdkAgent,
                          self.config_file)
       with open(self.config_file) as f:
          cfg = json.loads(f.read())
-         
+
       if not self.initialized:
          # Write the src_intf only once.
          self.src_intf = cfg["src_intf"]
 
       # Clear out the previous config:
-      self.remote_switches = {} 
+      self.remote_switches = {}
       # And signify that we are a new process by changing our
       # advertised pid. It would be preferable to just only update the
       # newly configured tunnels, but that's more complicated for now.
@@ -483,7 +488,7 @@ class MplsTunnelLivenessAgent(eossdk_utils.EosSdkAgent,
    def is_new_id(self, last_seen_id, new_id):
       # Returns True if the new_id is larger than the last_seen_id, or
       # the new_id has wrapped around.
-      return (last_seen_id < new_id) or ((last_seen_id - new_id) > (MAX_INT/2))
+      return (last_seen_id < new_id) or ((last_seen_id - new_id) > (MAX_INT / 2))
 
 
 def main(args):

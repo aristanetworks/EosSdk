@@ -3,6 +3,7 @@
 
 import eossdk
 
+
 class NexthopGroupSyncer( eossdk.NexthopGroupHandler ):
    """
    The NexthopGroupSyncer class helps hitlessly manage nexthop
@@ -10,7 +11,7 @@ class NexthopGroupSyncer( eossdk.NexthopGroupHandler ):
    that is still active. It exposes a similar interface to the
    nexthop_group_mgr for creating and deleting nexthop groups.
    """
-   
+
    def __init__( self, nexthop_group_mgr ):
       self.nexthop_group_mgr_ = nexthop_group_mgr
       # Whether or not we're in resync mode
@@ -26,7 +27,7 @@ class NexthopGroupSyncer( eossdk.NexthopGroupHandler ):
    #
    # Public Methods - see the nexthop_group module for descriptions
    #
-      
+
    def resync_init( self ):
       self.seen_groups_ = set()
       self.in_resync_mode_ = True

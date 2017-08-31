@@ -1,4 +1,4 @@
-// Copyright (c) 2014 Arista Networks, Inc.  All rights reserved.
+// Copyright (c) 2017 Arista Networks, Inc.  All rights reserved.
 // Arista Networks, Inc. Confidential and Proprietary.
 
 #ifndef EOS_INLINE_TYPES_MAC_TABLE_H
@@ -48,6 +48,8 @@ operator<<(std::ostream& os, const mac_entry_type_t & enum_val) {
       os << "MAC_ENTRY_CONFIGURED_ROUTER";
    } else if (enum_val==MAC_ENTRY_PEER_ROUTER) {
       os << "MAC_ENTRY_PEER_ROUTER";
+   } else if (enum_val==MAC_ENTRY_EVPN_INTF) {
+      os << "MAC_ENTRY_EVPN_INTF";
    } else if (enum_val==MAC_ENTRY_EVPN_REMOTE_MAC) {
       os << "MAC_ENTRY_EVPN_REMOTE_MAC";
    } else if (enum_val==MAC_ENTRY_PEER_EVPN_REMOTE_MAC) {

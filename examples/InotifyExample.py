@@ -24,20 +24,21 @@ import sys
 #  2015-06-17 11:53:21.456473 27441 FileWatcher          0 Re-processing config
 #  File changed
 #  2015-06-17 11:53:21.456667 27441 FileWatcher          0 Re-processing config
-#     > rm /tmp/foobar.txt 
+#     > rm /tmp/foobar.txt
 #  File deleted
-#     > touch /tmp/foobar.txt 
+#     > touch /tmp/foobar.txt
 #  File created
 #  2015-06-17 11:55:01.329015 27441 FileWatcher          0 Re-processing config
-#     > echo "test2" >> /tmp/foobar.txt 
+#     > echo "test2" >> /tmp/foobar.txt
 #  File changed
 #  2015-06-17 11:55:39.751967 27441 FileWatcher          0 Re-processing config
 
+
 class InotifyHandler(pyinotify.ProcessEvent):
-   def my_init(self, parent): # pylint: disable-msg=W0221
+   def my_init(self, parent):  # pylint: disable-msg=W0221
       # We have to ignore some pylint messages because the pyinotify
       # library defines classes in a funky manner.
-      self.p = parent # pylint: disable-msg=W0201
+      self.p = parent  # pylint: disable-msg=W0201
 
    def process_IN_MODIFY(self, event):
       print "File changed"
@@ -51,6 +52,7 @@ class InotifyHandler(pyinotify.ProcessEvent):
       # In this example, we don't take an action on file deletion.
       print "File deleted"
 
+
 class FileWatcher(eossdk_utils.EosSdkAgent,
                   eossdk.AgentHandler,
                   eossdk.FdHandler):
@@ -61,13 +63,15 @@ class FileWatcher(eossdk_utils.EosSdkAgent,
       eossdk.AgentHandler.__init__(self, self.agent_mgr)
       eossdk.FdHandler.__init__(self)
       self.tracer.trace0("Watching %r" % filename)
-      
+
       self.wm = pyinotify.WatchManager()
       # Pass the InotifyHandler's that wille be created a pointer to
       # ourselves by wrapping it in functools.partial:
       handler = functools.partial(InotifyHandler, parent=self)
 
-      self.wm.watch_transient_file(filename, pyinotify.IN_MODIFY, handler)      
+      # pylint: disable-msg=E1101
+      self.wm.watch_transient_file(filename, pyinotify.IN_MODIFY, handler)
+      # pylint: enable-msg=E1101
       self.inotifier = pyinotify.AsyncNotifier(self.wm,
                                                InotifyHandler(parent=self))
       # We coalesce events because some editors (or unix operations) cause
@@ -76,7 +80,7 @@ class FileWatcher(eossdk_utils.EosSdkAgent,
 
       # Now that we've set up our inotify watcher and notifier, grab
       # the underlying file descriptor and pass it to the SDK to be
-      # watched. When the OS detects a change to the file, we'll 
+      # watched. When the OS detects a change to the file, we'll
       self.inotify_fd = self.wm.get_fd()
       self.tracer.trace0("Watching inotify fd: %d" % self.inotify_fd)
       self.watch_readable(self.inotify_fd, True)
@@ -87,7 +91,7 @@ class FileWatcher(eossdk_utils.EosSdkAgent,
 
    def process_file(self):
       self.tracer.trace0("Re-processing config")
-      
+
 if __name__ == "__main__":
    sdk = eossdk.Sdk()
    parser = argparse.ArgumentParser(

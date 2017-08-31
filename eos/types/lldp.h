@@ -1,4 +1,4 @@
-// Copyright (c) 2015 Arista Networks, Inc.  All rights reserved.
+// Copyright (c) 2016 Arista Networks, Inc.  All rights reserved.
 // Arista Networks, Inc. Confidential and Proprietary.
 
 #ifndef EOS_TYPES_LLDP_H

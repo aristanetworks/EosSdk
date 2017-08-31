@@ -10,6 +10,7 @@
 #include <cstring>
 #include <stdio.h>
 #include <sys/socket.h>
+#include <unistd.h>
 
 /**
  * This example library provides a custom handler for reading a stream
