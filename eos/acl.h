@@ -284,7 +284,8 @@ class EOS_SDK_PUBLIC acl_mgr : public base_mgr<acl_handler> {
 
    /**
     * Check a connection against any applied ACL to determine if it should be
-    * dropped. For use with SOCK_STREAM or SOCK_DGRAM.
+    * dropped, incrementing the ACL counter if so. For use with SOCK_STREAM or
+    * SOCK_DGRAM.
     *
     * @param ip_addr_t Source IP address
     * @param ip_addr_t Destination IP address
@@ -298,7 +299,7 @@ class EOS_SDK_PUBLIC acl_mgr : public base_mgr<acl_handler> {
 
    /**
     * Check a packet against any applied ACL to determine if it should be
-    * dropped. For use with SOCK_DGRAM only.
+    * dropped, incrementing the ACL counter if so. For use with SOCK_DGRAM only.
     *
     * @param ip_addr_t Source IP address
     * @param ip_addr_t Destination IP address
