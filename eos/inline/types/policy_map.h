@@ -1,4 +1,4 @@
-// Copyright (c) 2016 Arista Networks, Inc.  All rights reserved.
+// Copyright (c) 2017 Arista Networks, Inc.  All rights reserved.
 // Arista Networks, Inc. Confidential and Proprietary.
 
 #ifndef EOS_INLINE_TYPES_POLICY_MAP_H
@@ -479,11 +479,11 @@ operator<<(std::ostream& os, const policy_map_rule_t& obj) {
 
 
 inline policy_map_t::policy_map_t() :
-      key_(), rules_(), persistent_(false) {
+      key_(), rules_() {
 }
 
 inline policy_map_t::policy_map_t(policy_map_key_t const & key) :
-      key_(key), rules_(), persistent_(false) {
+      key_(key), rules_() {
 }
 
 inline policy_map_key_t
@@ -507,20 +507,9 @@ policy_map_t::rule_del(uint32_t key) {
 }
 
 inline bool
-policy_map_t::persistent() const {
-   return persistent_;
-}
-
-inline void
-policy_map_t::persistent_is(bool persistent) {
-   persistent_ = persistent;
-}
-
-inline bool
 policy_map_t::operator==(policy_map_t const & other) const {
    return key_ == other.key_ &&
-          rules_ == other.rules_ &&
-          persistent_ == other.persistent_;
+          rules_ == other.rules_;
 }
 
 inline bool
@@ -534,8 +523,6 @@ policy_map_t::operator<(policy_map_t const & other) const {
       return key_ < other.key_;
    } else if(rules_ != other.rules_) {
       return rules_ < other.rules_;
-   } else if(persistent_ != other.persistent_) {
-      return persistent_ < other.persistent_;
    }
    return false;
 }
@@ -551,8 +538,6 @@ policy_map_t::hash() const {
       ret = hash_mix::mix((uint8_t *)&it->second,
                  sizeof(policy_map_rule_t), ret);
    }
-   ret = hash_mix::mix((uint8_t *)&persistent_,
-              sizeof(bool), ret);
    ret = hash_mix::final_mix(ret);
    return ret;
 }
@@ -573,7 +558,6 @@ policy_map_t::to_string() const {
       }
    }
    ss << "'";
-   ss << ", persistent=" << persistent_;
    ss << ")";
    return ss.str();
 }

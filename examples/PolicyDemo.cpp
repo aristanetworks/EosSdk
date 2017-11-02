@@ -91,7 +91,6 @@ class policy_demo : public eos::agent_handler,
       auto cmkey = eos::class_map_key_t("cm1", eos::POLICY_FEATURE_PBR);
       auto cm = eos::class_map_t(cmkey);
       cm.rule_set(1, eos::class_map_rule_t(acl1));
-      cm.persistent_is(true);
       class_mgr->class_map_is(cm);
       t.trace0("class map cm input: %s", cm.to_string().c_str());
       auto cm_res = class_mgr->class_map(cmkey);
@@ -122,7 +121,6 @@ class policy_demo : public eos::agent_handler,
       auto cmkey2 = eos::class_map_key_t("cm2", eos::POLICY_FEATURE_PBR);
       auto cm2 = eos::class_map_t(cmkey2);
       cm2.rule_set(1, eos::class_map_rule_t(acl2));
-      cm2.persistent_is(true);
       class_mgr->class_map_is(cm2);
       t.trace0("class map cm2 input: %s", cm2.to_string().c_str());
       auto cm2_res = class_mgr->class_map(cmkey2);
@@ -158,7 +156,6 @@ class policy_demo : public eos::agent_handler,
       action.nexthop_group_name_is("nexthopgroup2");
       pmrule_raw_v6.action_set(action);
       pm.rule_set(4, pmrule_raw_v6);
-      pm.persistent_is(true);
 
       // Commit the policy map
       get_policy_map_mgr()->policy_map_is(pm);

@@ -35,11 +35,14 @@ enum mac_entry_type_t {
    MAC_ENTRY_PEER_EVPN_REMOTE,
    MAC_ENTRY_CONFIGURED_ROUTER,
    MAC_ENTRY_PEER_ROUTER,
+   /** Deprecated. */
    MAC_ENTRY_EVPN_INTF,
    /** Deprecated. */
    MAC_ENTRY_EVPN_REMOTE_MAC,
    /** Deprecated. */
    MAC_ENTRY_PEER_EVPN_REMOTE_MAC,
+   MAC_ENTRY_EVPN_INTF_DYNAMIC,
+   MAC_ENTRY_EVPN_INTF_STATIC,
 };
 /** Appends a string representation of enum mac_entry_type_t value to the ostream. */
 std::ostream& operator<<(std::ostream& os, const mac_entry_type_t & enum_val);
@@ -119,14 +122,6 @@ class EOS_SDK_PUBLIC mac_entry_t {
    void intf_del(intf_id_t const & value);
 
    /**
-    * Getter for 'persistent': indicates whether this MAC entry persists in system
-    * configuration. If true, MAC entry appears in "show running-config".
-    */
-   bool persistent() const;
-   /** Setter for 'persistent'. */
-   void persistent_is(bool persistent);
-
-   /**
     * Returns 'true' if this key is "empty", that is if neither the VLAN nor the
     * MAC address is set.
     */
@@ -157,7 +152,6 @@ class EOS_SDK_PUBLIC mac_entry_t {
  private:
    mac_key_t mac_key_;
    std::set<intf_id_t> intfs_;
-   bool persistent_;
 };
 }
 

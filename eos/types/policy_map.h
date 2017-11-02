@@ -1,4 +1,4 @@
-// Copyright (c) 2016 Arista Networks, Inc.  All rights reserved.
+// Copyright (c) 2017 Arista Networks, Inc.  All rights reserved.
 // Arista Networks, Inc. Confidential and Proprietary.
 
 #ifndef EOS_TYPES_POLICY_MAP_H
@@ -300,14 +300,6 @@ class EOS_SDK_PUBLIC policy_map_t {
    void rules_is(std::map<uint32_t, policy_map_rule_t> const & rules);
    void rule_set(uint32_t key, policy_map_rule_t const & value);
    void rule_del(uint32_t key);
-   /**
-    * Getter for 'persistent': the config persistence for this policy map (defaults
-    * to false). Note: not implemented yet.
-    */
-   bool persistent() const;
-   /** Setter for 'persistent'. */
-   void persistent_is(bool persistent);
-
    bool operator==(policy_map_t const & other) const;
    bool operator!=(policy_map_t const & other) const;
    bool operator<(policy_map_t const & other) const;
@@ -324,7 +316,6 @@ class EOS_SDK_PUBLIC policy_map_t {
  private:
    policy_map_key_t key_;
    std::map<uint32_t, policy_map_rule_t> rules_;
-   bool persistent_;
 };
 
 /** The policy feature requested is unavailable in this SDK release. */

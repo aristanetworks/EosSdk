@@ -1,4 +1,4 @@
-// Copyright (c) 2016 Arista Networks, Inc.  All rights reserved.
+// Copyright (c) 2017 Arista Networks, Inc.  All rights reserved.
 // Arista Networks, Inc. Confidential and Proprietary.
 
 #ifndef EOS_TYPES_IP_ROUTE_H
@@ -87,16 +87,6 @@ class EOS_SDK_PUBLIC ip_route_t {
    /** Setter for 'tag'. */
    void tag_is(ip_route_tag_t tag);
 
-   /**
-    * Getter for 'persistent': indicates whether this route persists in system
-    * configuration. If true, the route appears in "show running-config", and will
-    * be saved to startup-config if a "copy running start" or "write memory" CLI
-    * command is issued.
-    */
-   bool persistent() const;
-   /** Setter for 'persistent'. */
-   void persistent_is(bool persistent);
-
    bool operator==(ip_route_t const & other) const;
    bool operator!=(ip_route_t const & other) const;
    /** The hash function for type ip_route_t. */
@@ -112,7 +102,6 @@ class EOS_SDK_PUBLIC ip_route_t {
  private:
    ip_route_key_t key_;
    ip_route_tag_t tag_;
-   bool persistent_;
 };
 
 /**

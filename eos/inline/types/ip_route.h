@@ -1,4 +1,4 @@
-// Copyright (c) 2016 Arista Networks, Inc.  All rights reserved.
+// Copyright (c) 2017 Arista Networks, Inc.  All rights reserved.
 // Arista Networks, Inc. Confidential and Proprietary.
 
 #ifndef EOS_INLINE_TYPES_IP_ROUTE_H
@@ -98,11 +98,11 @@ operator<<(std::ostream& os, const ip_route_key_t& obj) {
 
 
 inline ip_route_t::ip_route_t() :
-      key_(), tag_(0), persistent_(false) {
+      key_(), tag_(0) {
 }
 
 inline ip_route_t::ip_route_t(ip_route_key_t const & key) :
-      key_(key), tag_(0), persistent_(false) {
+      key_(key), tag_(0) {
 }
 
 inline ip_route_key_t
@@ -126,20 +126,9 @@ ip_route_t::tag_is(ip_route_tag_t tag) {
 }
 
 inline bool
-ip_route_t::persistent() const {
-   return persistent_;
-}
-
-inline void
-ip_route_t::persistent_is(bool persistent) {
-   persistent_ = persistent;
-}
-
-inline bool
 ip_route_t::operator==(ip_route_t const & other) const {
    return key_ == other.key_ &&
-          tag_ == other.tag_ &&
-          persistent_ == other.persistent_;
+          tag_ == other.tag_;
 }
 
 inline bool
@@ -154,8 +143,6 @@ ip_route_t::hash() const {
               sizeof(ip_route_key_t), ret);
    ret = hash_mix::mix((uint8_t *)&tag_,
               sizeof(ip_route_tag_t), ret);
-   ret = hash_mix::mix((uint8_t *)&persistent_,
-              sizeof(bool), ret);
    ret = hash_mix::final_mix(ret);
    return ret;
 }
@@ -166,7 +153,6 @@ ip_route_t::to_string() const {
    ss << "ip_route_t(";
    ss << "key=" << key_;
    ss << ", tag=" << tag_;
-   ss << ", persistent=" << persistent_;
    ss << ")";
    return ss.str();
 }

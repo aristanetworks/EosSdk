@@ -16,17 +16,87 @@
 #include <stdio.h>
 #include <unistd.h>
 
+// This agent configures and deletes static MAC entries using daemon
+// configurations. To run the agent, create a mount profile using the steps
+// below.
+// Step 1: Compile the example agent and move the binary to
+// /mnt/flash/SimpleMacTableMgr
 
-#define BUF_SIZE 1024
+// Step 2: Create a mount profile on the router for the agent:
+// # cd /usr/lib/SysdbMountProfiles/
+// # cp EosSdkAll SimpleMacTableMgr
+// # vi SimpleMacTableMgr
+// Change first line to: agentName:SimpleMacTableMgr-%sliceId
 
-// Our agent! This program listens to stdin, and when a MAC entry is
-// entered, applies (or removes) it as a static MAC entry on a given interface (or
-// set of interfaces). Additionally, MAC table handlers will print MAC entry
-// information to stdout whenever a unicast MAC entry is added or removed.
+// Step 3: Create the agent daemon:
+// Enter config mode.
+// To turn on tracing use the command:
+// trace <binary_name>-<daemon_name> setting EosSdk*/*
+// In this case: "trace SimpleMacTableMgr-SimpleMacTableMgr setting EosSdk*/*"
+// (config)# daemon SimpleMacTableMgr
+// (config-daemon-SimpleMacTableMgr)#exec /mnt/flash/SimpleMacTableMgr
+// (config-daemon-SimpleMacTableMgr)#no shut
+// This is an EosSdk application
+// Full agent name is 'SimpleMacTableMgr-SimpleMacTableMgr'
 
+// (config-daemon-SimpleMacTableMgr)#show daemon
+// Agent: SimpleMacTableMgr (running)
+// No configuration options stored.
+//
+// Status:
+// Data               Value
+// ------------------ -----
+// initialized?       yes
+//
+
+// Step 4: Configure a new MAC entry
+// (config-daemon-SimpleMacTableMgr)#option MAC value 10:11:22:33:44:55 1 Ethernet3
+
+// (config-daemon-SimpleMacTableMgr)#show daemon
+// Agent: SimpleMacTableMgr (running)
+// Configuration:
+// Option       Value
+// ------------ -----------------------------
+// MAC          10:11:22:33:44:55 1 Ethernet3
+//
+// Status:
+// Data                    Value
+// ----------------------- -----
+// 10:11:22:33:44:55       1      <--- Status keeps all MAC<->vlan mappings
+// initialized?            yes
+
+// (config-daemon-SimpleMacTableMgr)#show mac address-table static
+//           Mac Address Table
+// ------------------------------------------------------------------
+//
+// Vlan    Mac Address       Type        Ports      Moves   Last Move
+// ----    -----------       ----        -----      -----   ---------
+//    1    1011.2233.4455    STATIC      Et3
+
+// Step 5: Remove an existing MAC entry by configuring an empty vlan and interface.
+// (config-daemon-SimpleMacTableMgr)#option MAC value 10:11:22:33:44:55
+// (config-daemon-SimpleMacTableMgr)#sh daemon
+// Agent: SimpleMacTableMgr (running)
+// Configuration:
+// Option       Value
+// ------------ -----------------
+// MAC          10:11:22:33:44:55    <--- most recent MAC config/un-config
+//
+// Status:
+// Data               Value
+// ------------------ -----------------
+// Deleted MAC        10:11:22:33:44:55
+// initialized?       yes
+//
+// (config-daemon-SimpleMacTableMgr)#sh mac address-table static
+//           Mac Address Table
+// ------------------------------------------------------------------
+//
+// Vlan    Mac Address       Type        Ports      Moves   Last Move
+// ----    -----------       ----        -----      -----   ---------
+// Total Mac Addresses for this criterion: 0
 
 class simple_mac_agent : public eos::agent_handler,
-                   public eos::fd_handler,
                    public eos::acl_handler,
                    public eos::mac_table_handler {
  public:
@@ -42,41 +112,42 @@ class simple_mac_agent : public eos::agent_handler,
 
    void on_initialized() {
       printf("... and we're initialized!\n");
-      printf(
-            "Input format should be: [no] <MAC address> <VLAN ID> [<interface>,]\n");
-      printf("Ctrl-D or \"exit\" to exit\n");
-      fflush(stdout);
-      // All state has been sync'd with Sysdb. We're good to go!
-      // Watch stdin:
-      watch_readable(0, true);
+      agent_mgr_->status_set("initialized?", "no");
+      // Iterate through all the existing MAC entries in this agent's config
+      // and delete them.
+      for (eos::mac_table_iter_t key =
+              get_mac_table_mgr()->mac_table_iter(); key; ++key) {
+         get_mac_table_mgr()->mac_entry_del(*key);
+      }
       watch_all_mac_entries(true);
+      agent_mgr_->status_set("initialized?", "yes");
+      t.trace9(__PRETTY_FUNCTION__);
+      t.trace9("... and we're initialized!\n");
    }
 
    void on_mac_entry_set(eos::mac_entry_t const &entry) {
       t.trace9(__PRETTY_FUNCTION__);
-      printf("Unicast MAC entry set: %s\n", entry.to_string().c_str());
-      fflush(stdout);
+      std::string vlan_id = std::to_string(int(entry.mac_key().vlan_id()));
+      std::string eth_addr = entry.mac_key().eth_addr().to_string();
+      agent_mgr_->status_set(eth_addr.c_str(),
+                             vlan_id.c_str());
    }
 
    void on_mac_entry_del(eos::mac_key_t const &key) {
       t.trace9(__PRETTY_FUNCTION__);
-      printf("Unicast MAC entry with key %s deleted.\n", key.to_string().c_str());
-      fflush(stdout);
+      std::string vlan_id = std::to_string(int(key.vlan_id()));
+      std::string eth_addr = key.eth_addr().to_string();
+      agent_mgr_->status_del(eth_addr.c_str());
+      agent_mgr_->status_set("Deleted MAC", eth_addr.c_str());
    }
 
-   void on_readable(int fd) {
-      printf("Stdin (fd %d) is readable\n", fd);
-      assert(fd == 0);
-      char buf[BUF_SIZE];
-      int bytes = read(0, buf, BUF_SIZE - 1);
-      buf[bytes] = '\0';
-      std::string input(buf, bytes-1);
-      if (bytes <= 0 || next_token(input) == "exit") {
-         printf("Goodbye!\n");
-         agent_mgr_->exit();
-         return;
-      }
-      bool is_add = parse_is_add(input);
+   void on_agent_option(std::string const & name,
+                        std::string const & value) {
+      t.trace9("%s key=%s, value=%s", __PRETTY_FUNCTION__,
+                    name.c_str(), value.c_str());
+
+      std::string input = value;
+      bool is_del = false;
 
       eos::eth_addr_t eth_addr;
       eos::vlan_id_t vlan_id;
@@ -85,23 +156,28 @@ class simple_mac_agent : public eos::agent_handler,
          eth_addr = parse_eth_addr(input);
          vlan_id = parse_vlan_id(input);
          intfs = parse_intf_ids(input);
+
+         std::string vlan_id_str = "";
+         if (!vlan_id) {
+            is_del = true;
+            vlan_id_str = agent_mgr_->status(eth_addr.to_string());
+            vlan_id = eos::vlan_id_t(stoi(vlan_id_str));
+         }
+
       } catch (...) {
          return;
       }
-
       // Build a mac_key_t object from an Ethernet address and a VLAN id.
       eos::mac_key_t mac_key = eos::mac_key_t(vlan_id, eth_addr);
-      if (is_add) {
-         // Add interface (interfaces if multicast).
-         eos::mac_entry_t mac_entry = eos::mac_entry_t(mac_key, intfs);
-         // Set the MAC entry as persistent.
-         mac_entry.persistent_is(true);
 
-         // Add the MAC entry to the table!
-         get_mac_table_mgr()->mac_entry_set(mac_entry);
-      } else {
+      if (is_del) {
          // Remove the MAC entry with this mac_key_t from the table.
          get_mac_table_mgr()->mac_entry_del(mac_key);
+      } else {
+         // Add interface (interfaces if multicast).
+         eos::mac_entry_t mac_entry = eos::mac_entry_t(mac_key, intfs);
+         // Add the MAC entry to the table!
+         get_mac_table_mgr()->mac_entry_set(mac_entry);
       }
    }
 
@@ -135,6 +211,10 @@ class simple_mac_agent : public eos::agent_handler,
 
    eos::vlan_id_t parse_vlan_id(std::string &inputLine) {
       std::string substr = next_token(inputLine);
+      if(substr.empty()) {
+         eos::vlan_id_t vlan_id = eos::vlan_id_t();
+         return vlan_id;
+      }
       try {
          eos::vlan_id_t vlan_id = eos::vlan_id_t(stoi(substr));
          inputLine.erase(0, substr.length() + 1);

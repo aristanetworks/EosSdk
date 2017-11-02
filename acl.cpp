@@ -86,13 +86,6 @@ class acl_mgr_impl : public acl_mgr {
       return true;
    }
 
-   bool persistent(acl_key_t const &) const {
-      return false;
-   }
-
-   void persistent_is(acl_key_t const &, bool) {
-   }
-
    void acl_commit() {
    }
 };

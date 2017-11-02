@@ -47,8 +47,6 @@ class my_agent : public eos::agent_handler {
       eos::nexthop_group_entry_t nhe2(eos::ip_addr_t("10.0.0.44"));
       nhe2.mpls_action_is(mplsActionB);
       nhg.nexthop_set(3, nhe2);
-      // Make this persist in the system configuration (not the default)
-      nhg.persistent_is(true);
 
       // And commit it to Sysdb!
       nhgMgr_->nexthop_group_set(nhg);

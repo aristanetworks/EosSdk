@@ -48,7 +48,7 @@ class echobot_worker : public stream_handler,
    }
 
    void on_message(char * msg, size_t length) {
-      t.trace0("Msg received of length %d", length);
+      t.trace0("Msg received of length %zu", length);
       send_message(GREETING, sizeof(GREETING) - 1);
       send_message(msg, length);
       // Reset the idle timer

@@ -1,4 +1,4 @@
-// Copyright (c) 2016 Arista Networks, Inc.  All rights reserved.
+// Copyright (c) 2017 Arista Networks, Inc.  All rights reserved.
 // Arista Networks, Inc. Confidential and Proprietary.
 
 #ifndef EOS_INLINE_TYPES_BFD_H
@@ -38,6 +38,8 @@ operator<<(std::ostream& os, const bfd_session_type_t & enum_val) {
       os << "BFD_SESSION_TYPE_VXLANTUNNEL";
    } else if (enum_val==BFD_SESSION_TYPE_MICRORFC7130) {
       os << "BFD_SESSION_TYPE_MICRORFC7130";
+   } else if (enum_val==BFD_SESSION_TYPE_MULTIHOP) {
+      os << "BFD_SESSION_TYPE_MULTIHOP";
    } else {
       os << "Unknown value";
    }

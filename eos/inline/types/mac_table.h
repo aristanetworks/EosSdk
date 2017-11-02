@@ -54,6 +54,10 @@ operator<<(std::ostream& os, const mac_entry_type_t & enum_val) {
       os << "MAC_ENTRY_EVPN_REMOTE_MAC";
    } else if (enum_val==MAC_ENTRY_PEER_EVPN_REMOTE_MAC) {
       os << "MAC_ENTRY_PEER_EVPN_REMOTE_MAC";
+   } else if (enum_val==MAC_ENTRY_EVPN_INTF_DYNAMIC) {
+      os << "MAC_ENTRY_EVPN_INTF_DYNAMIC";
+   } else if (enum_val==MAC_ENTRY_EVPN_INTF_STATIC) {
+      os << "MAC_ENTRY_EVPN_INTF_STATIC";
    } else {
       os << "Unknown value";
    }
@@ -136,28 +140,28 @@ operator<<(std::ostream& os, const mac_key_t& obj) {
 
 
 inline mac_entry_t::mac_entry_t() :
-      mac_key_(), intfs_(), persistent_(false) {
+      mac_key_(), intfs_() {
 }
 
 inline mac_entry_t::mac_entry_t(mac_key_t const & mac_key) :
-      mac_key_(mac_key), intfs_(), persistent_(false) {
+      mac_key_(mac_key), intfs_() {
 }
 
 inline mac_entry_t::mac_entry_t(mac_key_t const & mac_key, intf_id_t intf) :
-      mac_key_(mac_key), intfs_{intf}, persistent_(false) {
+      mac_key_(mac_key), intfs_{intf} {
 }
 
 inline mac_entry_t::mac_entry_t(mac_key_t const & mac_key,
                                 std::set<intf_id_t> const & intfs) :
-      mac_key_(mac_key), intfs_(intfs), persistent_(false) {
+      mac_key_(mac_key), intfs_(intfs) {
 }
 
 inline mac_entry_t::mac_entry_t(vlan_id_t vlan_id, eth_addr_t eth_addr) :
-      mac_key_(mac_key_t(vlan_id, eth_addr)), intfs_(), persistent_(false) {
+      mac_key_(mac_key_t(vlan_id, eth_addr)), intfs_() {
 }
 
 inline mac_entry_t::mac_entry_t(eth_addr_t eth_addr, intf_id_t intf) :
-      mac_key_(mac_key_t(vlan_id_t(), eth_addr)), intfs_{intf}, persistent_(false) {
+      mac_key_(mac_key_t(vlan_id_t(), eth_addr)), intfs_{intf} {
 }
 
 inline mac_key_t
@@ -191,16 +195,6 @@ mac_entry_t::intf_del(intf_id_t const & value) {
 }
 
 inline bool
-mac_entry_t::persistent() const {
-   return persistent_;
-}
-
-inline void
-mac_entry_t::persistent_is(bool persistent) {
-   persistent_ = persistent;
-}
-
-inline bool
 mac_entry_t::operator!() const {
    return !mac_key_;
 }
@@ -228,8 +222,7 @@ mac_entry_t::intf_is(intf_id_t intf) {
 inline bool
 mac_entry_t::operator==(mac_entry_t const & other) const {
    return mac_key_ == other.mac_key_ &&
-          intfs_ == other.intfs_ &&
-          persistent_ == other.persistent_;
+          intfs_ == other.intfs_;
 }
 
 inline bool
@@ -246,8 +239,6 @@ mac_entry_t::hash() const {
       ret = hash_mix::mix((uint8_t *)&(*it),
             sizeof(intf_id_t), ret);
    }
-   ret = hash_mix::mix((uint8_t *)&persistent_,
-              sizeof(bool), ret);
    ret = hash_mix::final_mix(ret);
    return ret;
 }
@@ -268,7 +259,6 @@ mac_entry_t::to_string() const {
       }
    }
    ss << "'";
-   ss << ", persistent=" << persistent_;
    ss << ")";
    return ss.str();
 }

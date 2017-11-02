@@ -143,9 +143,18 @@ class EOS_SDK_PUBLIC policy_map_handler : public base_handler<policy_map_mgr,
     * Registers to receive updates on changes to this policy feature.
     *
     * @param key The policy feature to receive notifications for
-    * @param watch Receives notifications if and only if true.
+    * @param interest Receives notifications if and only if true.
     */
    void watch_policy_map(policy_map_key_t const & key, bool interest);
+   /**
+    * Registers to receive updates on changes to this policy feature.
+    *
+    * @param key The policy feature to receive notifications for
+    * @param agent_name The agent which configures the policy being watched
+    * @param interest Receives notifications if and only if true.
+    */
+   void watch_policy_map(policy_map_key_t const & key,
+                         std::string const & agent_name, bool interest);
 
    /**
     * Callback fired upon successful policy map application.

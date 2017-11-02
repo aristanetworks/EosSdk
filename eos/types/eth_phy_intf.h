@@ -17,10 +17,10 @@ enum eth_link_speed_t {
    LINK_SPEED_100MBPS,
    LINK_SPEED_1GBPS,
    LINK_SPEED_10GBPS,
-   LINK_SPEED_40GBPS,
-   LINK_SPEED_100GBPS,
    LINK_SPEED_25GBPS,
+   LINK_SPEED_40GBPS,
    LINK_SPEED_50GBPS,
+   LINK_SPEED_100GBPS,
    LINK_SPEED_UNEXPECTED,
 };
 /** Appends a string representation of enum eth_link_speed_t value to the ostream. */

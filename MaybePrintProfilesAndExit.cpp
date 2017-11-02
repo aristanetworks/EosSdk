@@ -55,7 +55,7 @@ void print_profiles::add_profile(const char * profile) {
 void print_profiles::write_profiles() {
    if (print_profiles_fp) {
       if (eossdk_progname) {
-         fprintf(print_profiles_fp, "agentName:%s\n", eossdk_progname);
+         fprintf(print_profiles_fp, "agentName:%s-%%sliceId\n", eossdk_progname);
       } else {
          // extern const char *__progname; would be to GNU specific...
          char myExe[1000];

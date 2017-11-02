@@ -34,6 +34,13 @@ policy_map_handler::watch_policy_map(policy_map_key_t const & key,
 }
 
 void
+policy_map_handler::watch_policy_map(policy_map_key_t const & key,
+                                     std::string const & name,
+                                     bool interest) {
+   // TODO: no op impl.
+}
+
+void
 policy_map_handler::on_policy_map_sync_fail(policy_map_key_t const & key,
                                             std::string const & message) {
    // TODO: no op impl.
@@ -81,6 +88,9 @@ class policy_map_mgr_impl : public policy_map_mgr {
 
    void policy_map_apply(policy_map_key_t const &, intf_id_t,
                          acl_direction_t, bool apply) {
+   }
+
+   void handleInputConfig(std::string const & name) const {
    }
 };
 

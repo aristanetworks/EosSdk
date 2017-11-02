@@ -1,4 +1,4 @@
-// Copyright (c) 2016 Arista Networks, Inc.  All rights reserved.
+// Copyright (c) 2017 Arista Networks, Inc.  All rights reserved.
 // Arista Networks, Inc. Confidential and Proprietary.
 
 #ifndef EOS_TYPES_CLASS_MAP_H
@@ -87,16 +87,6 @@ class EOS_SDK_PUBLIC class_map_t {
    /** Deletes the key/value pair from the map. */
    void rule_del(uint32_t key);
 
-   /**
-    * Getter for 'persistent': the persistence state for this class map.
-    *
-    * When true, the class map will be stored in the running and startup
-    * configuration.
-    */
-   bool persistent() const;
-   /** Setter for 'persistent'. */
-   void persistent_is(bool persistent);
-
    bool operator==(class_map_t const & other) const;
    bool operator!=(class_map_t const & other) const;
    /** The hash function for type class_map_t. */
@@ -112,7 +102,6 @@ class EOS_SDK_PUBLIC class_map_t {
  private:
    class_map_key_t key_;
    std::map<uint32_t, class_map_rule_t> rules_;
-   bool persistent_;
 };
 }
 

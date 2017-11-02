@@ -43,6 +43,7 @@ inline std::string sdk::name() {
 }
 
 inline acl_mgr * sdk::get_acl_mgr() {
+   print_profiles::add_profile("IntfMgrHelper");
    GET_MGR(acl)
 }
 
@@ -68,6 +69,10 @@ inline decap_group_mgr * sdk::get_decap_group_mgr() {
 
 inline directflow_mgr * sdk::get_directflow_mgr() {
    GET_MGR(directflow)
+}
+
+inline eapi_mgr * sdk::get_eapi_mgr() {
+   GET_NO_MOUNT_MGR(eapi)
 }
 
 inline eth_intf_mgr * sdk::get_eth_intf_mgr() {
@@ -133,6 +138,9 @@ inline ip_route_mgr * sdk::get_ip_route_mgr() {
    GET_MGR(ip_route)
 }
 
+// Unconventional naming: should be "intf_helper_mgr" and the profile name
+// should be renamed too, except that there might be customers out there
+// with it in their custom profiles (why not merge it into intf_mgr?).
 inline intf_mgr_helper * sdk::get_intf_mgr_helper() {
    print_profiles::add_profile("IntfMgrHelper");
    if (!intf_mgr_helper_) {

@@ -1,4 +1,4 @@
-// Copyright (c) 2016 Arista Networks, Inc.  All rights reserved.
+// Copyright (c) 2017 Arista Networks, Inc.  All rights reserved.
 // Arista Networks, Inc. Confidential and Proprietary.
 
 #ifndef EOS_INLINE_TYPES_DECAP_GROUP_H
@@ -22,15 +22,14 @@ operator<<(std::ostream& os, const decap_protocol_type_t & enum_val) {
 
 // Default constructor, sets NULL protocol type.
 inline decap_group_t::decap_group_t() :
-      group_name_(), destination_addr_(), protocol_type_(PROTOCOL_TYPE_NULL),
-      persistent_(false) {
+      group_name_(), destination_addr_(), protocol_type_(PROTOCOL_TYPE_NULL) {
 }
 
 inline decap_group_t::decap_group_t(std::string const & group_name,
                                     ip_addr_t const & destination_addr,
                                     decap_protocol_type_t protocol_type) :
       group_name_(group_name), destination_addr_(destination_addr),
-      protocol_type_(protocol_type), persistent_(false) {
+      protocol_type_(protocol_type) {
    if(group_name.empty()) {
       panic(invalid_argument_error("group_name","must be a non-empty string"));
    }
@@ -62,21 +61,10 @@ decap_group_t::protocol_type_is(decap_protocol_type_t protocol_type) {
 }
 
 inline bool
-decap_group_t::persistent() const {
-   return persistent_;
-}
-
-inline void
-decap_group_t::persistent_is(bool persistent) {
-   persistent_ = persistent;
-}
-
-inline bool
 decap_group_t::operator==(decap_group_t const & other) const {
    return group_name_ == other.group_name_ &&
           destination_addr_ == other.destination_addr_ &&
-          protocol_type_ == other.protocol_type_ &&
-          persistent_ == other.persistent_;
+          protocol_type_ == other.protocol_type_;
 }
 
 inline bool
@@ -92,8 +80,6 @@ decap_group_t::operator<(decap_group_t const & other) const {
       return destination_addr_ < other.destination_addr_;
    } else if(protocol_type_ != other.protocol_type_) {
       return protocol_type_ < other.protocol_type_;
-   } else if(persistent_ != other.persistent_) {
-      return persistent_ < other.persistent_;
    }
    return false;
 }
@@ -106,8 +92,6 @@ decap_group_t::hash() const {
               sizeof(ip_addr_t), ret);
    ret = hash_mix::mix((uint8_t *)&protocol_type_,
               sizeof(decap_protocol_type_t), ret);
-   ret = hash_mix::mix((uint8_t *)&persistent_,
-              sizeof(bool), ret);
    ret = hash_mix::final_mix(ret);
    return ret;
 }
@@ -119,7 +103,6 @@ decap_group_t::to_string() const {
    ss << "group_name='" << group_name_ << "'";
    ss << ", destination_addr=" << destination_addr_;
    ss << ", protocol_type=" << protocol_type_;
-   ss << ", persistent=" << persistent_;
    ss << ")";
    return ss.str();
 }

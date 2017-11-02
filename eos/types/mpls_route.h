@@ -1,4 +1,4 @@
-// Copyright (c) 2016 Arista Networks, Inc.  All rights reserved.
+// Copyright (c) 2017 Arista Networks, Inc.  All rights reserved.
 // Arista Networks, Inc. Confidential and Proprietary.
 
 #ifndef EOS_TYPES_MPLS_ROUTE_H
@@ -74,14 +74,6 @@ class EOS_SDK_PUBLIC mpls_route_t {
    /** Setter for 'key'. */
    void key_is(mpls_route_key_t key);
 
-   /**
-    * Getter for 'persistent': if true, this route is persisted in the startup-
-    * config.
-    */
-   bool persistent() const;
-   /** Setter for 'persistent'. */
-   void persistent_is(bool persistent);
-
    bool operator==(mpls_route_t const & other) const;
    bool operator!=(mpls_route_t const & other) const;
    /** The hash function for type mpls_route_t. */
@@ -96,7 +88,6 @@ class EOS_SDK_PUBLIC mpls_route_t {
 
  private:
    mpls_route_key_t key_;
-   bool persistent_;
 };
 
 /** An MPLS route via, defining the action to take for a given MPLS route. */

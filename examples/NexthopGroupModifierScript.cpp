@@ -79,7 +79,6 @@ int main(int argc, char** argv) {
             nhe.mpls_action_is(mplsActionA);
             nhg.nexthop_set(i, nhe);
          }
-         nhg.persistent_is(true);
 
          std::cout << "Creating nhg " << name.c_str() << " using label "
                    << label << std::endl;
@@ -100,8 +99,6 @@ int main(int argc, char** argv) {
          eos::ip_route_t ip_route(ip_route_key);
          eos::ip_route_via_t ip_route_via(ip_route_key);
          ip_route_via.nexthop_group_is(name);
-         // Let's make this show up on Sysdb
-         ip_route.persistent_is(true);
 
          std::cout << "Creating route " << v6str << std::endl;
          ipMgr->ip_route_set(ip_route);

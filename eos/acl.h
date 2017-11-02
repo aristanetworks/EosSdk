@@ -313,22 +313,6 @@ class EOS_SDK_PUBLIC acl_mgr : public base_mgr<acl_handler> {
    virtual bool dgram_allowed(ip_addr_t const &, ip_addr_t const &, uint16_t,
                               uint16_t, uint8_t, uint8_t, intf_id_t const &) = 0;
 
-   /**
-    * Return whether the ACL is persistent or not. ACLs are dynamic by default.
-    * @param acl_key_t The ACL key (name and ACL type)
-    * @return true if ACL appears in the running-config,
-    * false if the ACL is a dynamic ACL.
-    */
-   virtual bool persistent(acl_key_t const &) const = 0;
-
-   /**
-    * @param acl_key_t The ACL key to modify (name and ACL type)
-    * @param bool If true, the ACL should appear in the running-config,
-    * else the ACL is a dynamic ACL.
-    * Note: Must call commit() for setting to apply.
-    */
-   virtual void persistent_is(acl_key_t const &, bool) = 0;
-
  protected:
    acl_mgr() EOS_SDK_PRIVATE;
    friend class acl_handler;

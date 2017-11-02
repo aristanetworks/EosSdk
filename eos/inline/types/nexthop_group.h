@@ -1,4 +1,4 @@
-// Copyright (c) 2016 Arista Networks, Inc.  All rights reserved.
+// Copyright (c) 2017 Arista Networks, Inc.  All rights reserved.
 // Arista Networks, Inc. Confidential and Proprietary.
 
 #ifndef EOS_INLINE_TYPES_NEXTHOP_GROUP_H
@@ -307,14 +307,14 @@ operator<<(std::ostream& os, const nexthop_group_entry_t& obj) {
 inline nexthop_group_t::nexthop_group_t() :
       name_(), type_(), gre_key_type_(NEXTHOP_GROUP_GRE_KEY_NULL), ttl_(64),
       source_ip_(), source_intf_(), autosize_(false), nexthops_(),
-      destination_ips_(), persistent_() {
+      destination_ips_() {
 }
 
 inline nexthop_group_t::nexthop_group_t(std::string name,
                                         nexthop_group_encap_t type) :
       name_(name), type_(type), gre_key_type_(NEXTHOP_GROUP_GRE_KEY_NULL),
       ttl_(64), source_ip_(), source_intf_(), autosize_(false), nexthops_(),
-      destination_ips_(), persistent_() {
+      destination_ips_() {
 }
 
 inline nexthop_group_t::nexthop_group_t(std::string name,
@@ -322,7 +322,7 @@ inline nexthop_group_t::nexthop_group_t(std::string name,
                                         nexthop_group_gre_key_t gre_key_type) :
       name_(name), type_(type), gre_key_type_(gre_key_type), ttl_(64),
       source_ip_(), source_intf_(), autosize_(false), nexthops_(),
-      destination_ips_(), persistent_() {
+      destination_ips_() {
 }
 
 inline std::string
@@ -446,16 +446,6 @@ nexthop_group_t::destination_ip_del(uint16_t key) {
 }
 
 inline bool
-nexthop_group_t::persistent() const {
-   return persistent_;
-}
-
-inline void
-nexthop_group_t::persistent_is(bool persistent) {
-   persistent_ = persistent;
-}
-
-inline bool
 nexthop_group_t::operator==(nexthop_group_t const & other) const {
    return name_ == other.name_ &&
           type_ == other.type_ &&
@@ -465,8 +455,7 @@ nexthop_group_t::operator==(nexthop_group_t const & other) const {
           source_intf_ == other.source_intf_ &&
           autosize_ == other.autosize_ &&
           nexthops_ == other.nexthops_ &&
-          destination_ips_ == other.destination_ips_ &&
-          persistent_ == other.persistent_;
+          destination_ips_ == other.destination_ips_;
 }
 
 inline bool
@@ -494,8 +483,6 @@ nexthop_group_t::operator<(nexthop_group_t const & other) const {
       return nexthops_ < other.nexthops_;
    } else if(destination_ips_ != other.destination_ips_) {
       return destination_ips_ < other.destination_ips_;
-   } else if(persistent_ != other.persistent_) {
-      return persistent_ < other.persistent_;
    }
    return false;
 }
@@ -528,8 +515,6 @@ nexthop_group_t::hash() const {
       ret = hash_mix::mix((uint8_t *)&it->second,
                  sizeof(ip_addr_t), ret);
    }
-   ret = hash_mix::mix((uint8_t *)&persistent_,
-              sizeof(bool), ret);
    ret = hash_mix::final_mix(ret);
    return ret;
 }
@@ -567,7 +552,6 @@ nexthop_group_t::to_string() const {
       }
    }
    ss << "'";
-   ss << ", persistent=" << persistent_;
    ss << ")";
    return ss.str();
 }

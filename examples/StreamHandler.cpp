@@ -154,7 +154,7 @@ stream_handler::next_message_length_is(size_t length) {
    if(delimiter_length) {
       assert(!"Unable to set a message length when a delimiter is specified");
    }
-   tracer.trace4("Next messsage length set to %d", length);
+   tracer.trace4("Next messsage length set to %zu", length);
    next_message_length = length;
    drain_read_buffer();
 }
@@ -231,7 +231,7 @@ stream_handler::drain_read_buffer() {
    }      
    bytes_read = bytes_read - bytes_passed_to_user;
    if(bytes_read) {
-      tracer.trace7("Saving %d bytes for next message", bytes_read);
+      tracer.trace7("Saving %zu bytes for next message", bytes_read);
    }
    // A circular buffer (like boost::circular_buffer) would make
    // this more efficient, but let's not introduce dependencies for
@@ -246,7 +246,7 @@ stream_handler::send_data(const char * buf, size_t length) {
    int bytes_written = write(fd, buf, length);
    if(bytes_written == -1) {
       if(errno == EAGAIN) {
-         tracer.trace5( "EAGAIN when trying to write %d bytes to fd%d", length, fd);
+         tracer.trace5( "EAGAIN when trying to write %zu bytes to fd%d", length, fd);
          // The file descriptor is backed up! Try again when it
          // becomes writeable in the future.
          watch_writable(fd, true);
@@ -255,7 +255,7 @@ stream_handler::send_data(const char * buf, size_t length) {
       if(errno == ECONNRESET) {
          // Connection closed by the other side while we were
          // busy getting through our buf_.
-         tracer.trace0( "Connection closed when trying to write %d bytes to fd%d",
+         tracer.trace0( "Connection closed when trying to write %zu bytes to fd%d",
                         length, fd);
          on_connection_closed();
          watch_stream(fd, false);
@@ -270,7 +270,7 @@ stream_handler::send_data(const char * buf, size_t length) {
       // it is writable.
       watch_writable(fd, false);
    }
-   tracer.trace8("Sent %d of %d bytes", bytes_written, length);
+   tracer.trace8("Sent %d of %zu bytes", bytes_written, length);
    return length - bytes_written;
 }
 
@@ -307,7 +307,8 @@ stream_handler::on_writable(int notifying_fd) {
       watch_writable(fd, false);
       return;
    }
-   tracer.trace7("Buffer is writable, attempting to send %d bytes", bytes_to_write);
+   tracer.trace7("Buffer is writable, attempting to send %zu bytes",
+                 bytes_to_write);
    int bytes_remaining = send_data(write_buf, bytes_to_write);
    if(bytes_remaining) {
       memmove(write_buf, write_buf + bytes_to_write - bytes_remaining,

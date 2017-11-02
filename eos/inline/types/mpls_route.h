@@ -1,4 +1,4 @@
-// Copyright (c) 2016 Arista Networks, Inc.  All rights reserved.
+// Copyright (c) 2017 Arista Networks, Inc.  All rights reserved.
 // Arista Networks, Inc. Confidential and Proprietary.
 
 #ifndef EOS_INLINE_TYPES_MPLS_ROUTE_H
@@ -76,11 +76,11 @@ operator<<(std::ostream& os, const mpls_route_key_t& obj) {
 
 
 inline mpls_route_t::mpls_route_t() :
-      key_(), persistent_(false) {
+      key_() {
 }
 
 inline mpls_route_t::mpls_route_t(mpls_route_key_t key) :
-      key_(key), persistent_(false) {
+      key_(key) {
 }
 
 inline mpls_route_key_t
@@ -94,19 +94,8 @@ mpls_route_t::key_is(mpls_route_key_t key) {
 }
 
 inline bool
-mpls_route_t::persistent() const {
-   return persistent_;
-}
-
-inline void
-mpls_route_t::persistent_is(bool persistent) {
-   persistent_ = persistent;
-}
-
-inline bool
 mpls_route_t::operator==(mpls_route_t const & other) const {
-   return key_ == other.key_ &&
-          persistent_ == other.persistent_;
+   return key_ == other.key_;
 }
 
 inline bool
@@ -119,8 +108,6 @@ mpls_route_t::hash() const {
    uint32_t ret = 0;
    ret = hash_mix::mix((uint8_t *)&key_,
               sizeof(mpls_route_key_t), ret);
-   ret = hash_mix::mix((uint8_t *)&persistent_,
-              sizeof(bool), ret);
    ret = hash_mix::final_mix(ret);
    return ret;
 }
@@ -130,7 +117,6 @@ mpls_route_t::to_string() const {
    std::ostringstream ss;
    ss << "mpls_route_t(";
    ss << "key=" << key_;
-   ss << ", persistent=" << persistent_;
    ss << ")";
    return ss.str();
 }

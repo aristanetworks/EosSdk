@@ -1,4 +1,4 @@
-// Copyright (c) 2016 Arista Networks, Inc.  All rights reserved.
+// Copyright (c) 2017 Arista Networks, Inc.  All rights reserved.
 // Arista Networks, Inc. Confidential and Proprietary.
 
 #ifndef EOS_TYPES_NEXTHOP_GROUP_H
@@ -251,11 +251,6 @@ class EOS_SDK_PUBLIC nexthop_group_t {
    /** Deletes the key/value pair from the map. */
    void destination_ip_del(uint16_t key);
 
-   /** Getter for 'persistent': persistent in system configuration. */
-   bool persistent() const;
-   /** Setter for 'persistent'. */
-   void persistent_is(bool persistent);
-
    bool operator==(nexthop_group_t const & other) const;
    bool operator!=(nexthop_group_t const & other) const;
    bool operator<(nexthop_group_t const & other) const;
@@ -279,7 +274,6 @@ class EOS_SDK_PUBLIC nexthop_group_t {
    bool autosize_;
    std::map<uint16_t, nexthop_group_entry_t> nexthops_;
    std::map<uint16_t, ip_addr_t> destination_ips_;
-   bool persistent_;
 };
 }
 

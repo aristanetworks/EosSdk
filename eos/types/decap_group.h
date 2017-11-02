@@ -1,4 +1,4 @@
-// Copyright (c) 2016 Arista Networks, Inc.  All rights reserved.
+// Copyright (c) 2017 Arista Networks, Inc.  All rights reserved.
 // Arista Networks, Inc. Confidential and Proprietary.
 
 #ifndef EOS_TYPES_DECAP_GROUP_H
@@ -58,14 +58,6 @@ class EOS_SDK_PUBLIC decap_group_t {
    /** Setter for 'protocol_type'. */
    void protocol_type_is(decap_protocol_type_t protocol_type);
 
-   /**
-    * Getter for 'persistent': if true, the decap group is included in the running-
-    * config. Defaults to false.
-    */
-   bool persistent() const;
-   /** Setter for 'persistent'. */
-   void persistent_is(bool persistent);
-
    bool operator==(decap_group_t const & other) const;
    bool operator!=(decap_group_t const & other) const;
    bool operator<(decap_group_t const & other) const;
@@ -83,7 +75,6 @@ class EOS_SDK_PUBLIC decap_group_t {
    std::string group_name_;
    ip_addr_t destination_addr_;
    decap_protocol_type_t protocol_type_;
-   bool persistent_;
 };
 }
 

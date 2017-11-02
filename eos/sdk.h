@@ -16,6 +16,7 @@ class bfd_session_mgr;
 class class_map_mgr;
 class decap_group_mgr;
 class directflow_mgr;
+class eapi_mgr;
 class eth_intf_mgr;
 class eth_lag_intf_mgr;
 class eth_phy_intf_mgr;
@@ -197,6 +198,8 @@ class EOS_SDK_PUBLIC sdk {
    
    void init_intf_mgr_helper();
    intf_mgr_helper * get_intf_mgr_helper();
+   void init_eapi_mgr();
+   eapi_mgr * get_eapi_mgr();
 
    EOS_SDK_DISALLOW_COPY_CTOR(sdk);
    acl_mgr * acl_mgr_;
@@ -206,6 +209,7 @@ class EOS_SDK_PUBLIC sdk {
    class_map_mgr * class_map_mgr_;
    decap_group_mgr * decap_group_mgr_;
    directflow_mgr * directflow_mgr_;
+   eapi_mgr * eapi_mgr_;
    eth_intf_mgr * eth_intf_mgr_;
    eth_phy_intf_mgr * eth_phy_intf_mgr_;
    eth_phy_intf_counter_mgr * eth_phy_intf_counter_mgr_;

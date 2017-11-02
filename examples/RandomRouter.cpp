@@ -62,7 +62,6 @@ class random_router : public eos::agent_handler,
          eos::ip_route_key_t key(new_prefix);
          eos::ip_route_t route(key);
          route.tag_is(tag_id);
-         route.persistent_is(true);
          route_mgr->ip_route_set(route);
 
          // And set a random interface as its nexthop!
