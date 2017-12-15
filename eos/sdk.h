@@ -30,6 +30,7 @@ class intf_counter_mgr;
 class ip_intf_mgr;
 class ip_route_mgr;
 class lldp_mgr;
+class macsec_mgr;
 class mac_table_mgr;
 class mlag_mgr;
 class mount_mgr;
@@ -151,6 +152,7 @@ class EOS_SDK_PUBLIC sdk {
    virtual void init_ip_intf_mgr();
    virtual void init_ip_route_mgr();
    virtual void init_lldp_mgr();
+   virtual void init_macsec_mgr();
    virtual void init_mac_table_mgr();
    virtual void init_mlag_mgr();
    virtual void init_mpls_route_mgr();
@@ -181,6 +183,7 @@ class EOS_SDK_PUBLIC sdk {
    virtual ip_intf_mgr * get_ip_intf_mgr();
    virtual ip_route_mgr * get_ip_route_mgr();
    virtual lldp_mgr * get_lldp_mgr();
+   virtual macsec_mgr * get_macsec_mgr();
    virtual mac_table_mgr * get_mac_table_mgr();
    virtual mlag_mgr * get_mlag_mgr();
    virtual mount_mgr * get_mount_mgr();
@@ -223,6 +226,7 @@ class EOS_SDK_PUBLIC sdk {
    ip_intf_mgr * ip_intf_mgr_;
    ip_route_mgr * ip_route_mgr_;
    lldp_mgr * lldp_mgr_;
+   macsec_mgr * macsec_mgr_;
    mac_table_mgr * mac_table_mgr_;
    mlag_mgr * mlag_mgr_;
    mount_mgr * mount_mgr_;

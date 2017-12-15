@@ -149,6 +149,10 @@ inline intf_mgr_helper * sdk::get_intf_mgr_helper() {
    return intf_mgr_helper_;
 }
 
+inline macsec_mgr * sdk::get_macsec_mgr() {
+   GET_MGR(macsec)
+}
+
 inline mac_table_mgr * sdk::get_mac_table_mgr() {
    GET_MGR(mac_table)
 }

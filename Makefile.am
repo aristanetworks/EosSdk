@@ -36,6 +36,7 @@ libeos_la_SOURCES += ip_intf.cpp
 libeos_la_SOURCES += ip_route.cpp
 libeos_la_SOURCES += fib.cpp
 libeos_la_SOURCES += iterator.cpp
+libeos_la_SOURCES += macsec.cpp
 libeos_la_SOURCES += mac_table.cpp
 libeos_la_SOURCES += mlag.cpp
 libeos_la_SOURCES += mpls.cpp

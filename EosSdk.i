@@ -76,6 +76,7 @@ typedef uint64_t uint64_be_t;
 %feature("nodirector") eos::ip_intf_mgr;
 %feature("nodirector") eos::ip_route_mgr;
 %feature("nodirector") eos::lldp_mgr;
+%feature("nodirector") eos::macsec_mgr;
 %feature("nodirector") eos::mac_table_mgr;
 %feature("nodirector") eos::mlag_mgr;
 %feature("nodirector") eos::mpls_route_mgr;
@@ -111,6 +112,7 @@ typedef uint64_t uint64_be_t;
 #include "eos/ip_route.h"
 #include "eos/iterator.h"
 #include "eos/lldp.h"
+#include "eos/macsec.h"
 #include "eos/mac_table.h"
 #include "eos/mlag.h"
 #include "eos/mpls.h"
