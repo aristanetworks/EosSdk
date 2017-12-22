@@ -65,6 +65,7 @@ typedef uint64_t uint64_be_t;
 %feature("nodirector") eos::class_map_mgr;
 %feature("nodirector") eos::decap_group_mgr;
 %feature("nodirector") eos::directflow_mgr;
+%feature("nodirector") eos::eapi_mgr;
 %feature("nodirector") eos::eth_intf_mgr;
 %feature("nodirector") eos::eth_lag_intf_mgr;
 %feature("nodirector") eos::eth_phy_intf_mgr;
@@ -97,6 +98,7 @@ typedef uint64_t uint64_be_t;
 #include "eos/class_map.h"
 #include "eos/decap_group.h"
 #include "eos/directflow.h"
+#include "eos/eapi.h"
 #include "eos/eth.h"
 #include "eos/eth_intf.h"
 #include "eos/eth_lag_intf.h"
@@ -238,6 +240,7 @@ void throw_py_error(error const& err) {
 %template() std::unordered_set<eos::ip_addr_t>;
 %template() std::map<eos::lldp_tlv_type_t, std::string>;
 %template() std::list<eos::lldp_management_address_t>;
+%template() std::vector<std::string>;
 
 // For vlan_set_t
 %template(_BitSet4096) std::bitset<4096>;

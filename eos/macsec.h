@@ -11,7 +11,7 @@
  * association key (CAK). Both the CKN and the CAK must be nonzero hex strings,
  * and the CKN of the primary and fallback key cannot be the same.
  *
- * Note: Must have a valid MACsec license configured for these API to work.
+ * Note: Must have a valid MACsec license configured for this API to work.
  *
  * The following is an example of configuring a MACsec profile
  * and attaching it to an interface.
@@ -53,11 +53,36 @@ namespace eos {
 
 class macsec_mgr;
 
+/**
+ * This handler provides notifications when the MACsec status of an interface
+ * changes.
+ */
 class EOS_SDK_PUBLIC macsec_handler :
    public base_handler<macsec_mgr, macsec_handler> {
  public:
    explicit macsec_handler(macsec_mgr*);
    macsec_mgr * get_macsec_mgr() const;
+
+   /**
+    * Registers this class to receive change updates on all interfaces.
+    *
+    * Expects a boolean signifying whether notifications should be
+    * propagated to this instance or not.
+    */
+   void watch_all_intfs(bool);
+
+   /**
+    * Registers this class to receive change updates on the given interface.
+    *
+    * Expects the id of the corresponding interface and a boolean signifying whether
+    * notifications should be propagated to this instance or not.
+    */
+   void watch_intf(intf_id_t, bool);
+
+   /**
+    * Called when the key status of a MACsec interface changes.
+    */
+   virtual void on_intf_status(intf_id_t, macsec_intf_status_t const &);
 
 };
 
@@ -65,7 +90,7 @@ class EOS_SDK_PUBLIC macsec_handler :
  * The MACsec manager.
  * This class inspects and configures MACsec profiles.
  */
-class EOS_SDK_PUBLIC macsec_mgr : public base_mgr<macsec_handler> {
+class EOS_SDK_PUBLIC macsec_mgr : public base_mgr<macsec_handler, intf_id_t> {
  public:
    virtual ~macsec_mgr();
 
@@ -103,7 +128,8 @@ class EOS_SDK_PUBLIC macsec_mgr : public base_mgr<macsec_handler> {
     * Configures the given interface to use the given MACsec profile.
     * An interface can only have one MACsec profile applied at a time.
     * Applying a new profile to an interface which is already associated with
-    * a different profile will overwrite the previous profile.
+    * a different profile will overwrite the previous profile. If an empty
+    * string is provided as profile name, any existing profile will be removed.
     */
    virtual void intf_profile_is(intf_id_t, macsec_profile_name_t const &) = 0;
 

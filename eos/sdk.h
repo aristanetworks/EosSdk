@@ -140,6 +140,7 @@ class EOS_SDK_PUBLIC sdk {
    virtual void init_class_map_mgr();
    virtual void init_decap_group_mgr();
    virtual void init_directflow_mgr();
+   virtual void init_eapi_mgr();
    virtual void init_eth_intf_mgr();
    virtual void init_eth_lag_intf_mgr();
    virtual void init_eth_phy_intf_mgr();
@@ -171,6 +172,7 @@ class EOS_SDK_PUBLIC sdk {
    virtual class_map_mgr * get_class_map_mgr();
    virtual decap_group_mgr * get_decap_group_mgr();
    virtual directflow_mgr * get_directflow_mgr();
+   virtual eapi_mgr * get_eapi_mgr();
    virtual eth_intf_mgr * get_eth_intf_mgr();
    virtual eth_lag_intf_mgr * get_eth_lag_intf_mgr();
    virtual eth_phy_intf_mgr * get_eth_phy_intf_mgr();
@@ -201,8 +203,6 @@ class EOS_SDK_PUBLIC sdk {
    
    void init_intf_mgr_helper();
    intf_mgr_helper * get_intf_mgr_helper();
-   void init_eapi_mgr();
-   eapi_mgr * get_eapi_mgr();
 
    EOS_SDK_DISALLOW_COPY_CTOR(sdk);
    acl_mgr * acl_mgr_;

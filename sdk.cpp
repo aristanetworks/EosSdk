@@ -31,6 +31,7 @@ sdk::sdk()
      class_map_mgr_(0),
      decap_group_mgr_(0),
      directflow_mgr_(0),
+     eapi_mgr_(0),
      eth_intf_mgr_(0),
      eth_phy_intf_mgr_(0),
      eth_phy_intf_counter_mgr_(0),
@@ -69,6 +70,7 @@ sdk::sdk(std::string const name, void *eossdk_context)
      class_map_mgr_(0),
      decap_group_mgr_(0),
      directflow_mgr_(0),
+     eapi_mgr_(0),
      eth_intf_mgr_(0),
      eth_phy_intf_mgr_(0),
      eth_phy_intf_counter_mgr_(0),
@@ -125,6 +127,7 @@ INIT_STUB_MGR(bfd_session_mgr)
 INIT_STUB_MGR(class_map_mgr)
 INIT_STUB_MGR(decap_group_mgr)
 INIT_STUB_MGR(directflow_mgr)
+INIT_STUB_MGR(eapi_mgr)
 INIT_STUB_MGR(eth_intf_mgr)
 INIT_STUB_MGR(eth_phy_intf_mgr)
 INIT_STUB_MGR(eth_phy_intf_counter_mgr)

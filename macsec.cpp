@@ -11,6 +11,18 @@ macsec_handler::macsec_handler(macsec_mgr * mgr) :
       base_handler<macsec_mgr, macsec_handler>(mgr) {
 }
 
+void macsec_handler::watch_all_intfs(bool interest) {
+   // TODO: No op impl.
+}
+
+void macsec_handler::watch_intf(intf_id_t intf_id, bool interest) {
+   // TODO: No op impl.
+}
+
+void macsec_handler::on_intf_status(intf_id_t intf_id,
+                                    macsec_intf_status_t const & status) {
+}
+
 // macsec_mgr methods
 class macsec_mgr_impl : public macsec_mgr {
  public:
@@ -41,12 +53,12 @@ class macsec_mgr_impl : public macsec_mgr {
 
    void intf_profile_is(intf_id_t intf_id,
                         macsec_profile_name_t const & profile_name) {
-      return; //TODO: No op impl
+      return; // TODO: No op impl
    }
 
    macsec_intf_status_t intf_status(intf_id_t intf_id) const {
       macsec_intf_status_t * nop = 0;
-      return *nop; // TODO:No op impl
+      return *nop; // TODO: No op impl
    }
 
 };

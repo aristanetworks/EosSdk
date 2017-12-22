@@ -93,7 +93,7 @@ inline eth_phy_intf_mgr * sdk::get_eth_phy_intf_mgr() {
 inline eth_phy_intf_counter_mgr * sdk::get_eth_phy_intf_counter_mgr() {
    print_profiles::add_profile("IntfMgrHelper");
    print_profiles::add_profile("eth_phy_intf"); // _counter does not have own profile
-   GET_NO_MOUNT_MGR(eth_phy_intf_counter);
+   GET_NO_MOUNT_MGR(eth_phy_intf_counter)
 }
 
 inline event_loop * sdk::get_event_loop() {

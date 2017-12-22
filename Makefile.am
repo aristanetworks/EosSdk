@@ -19,6 +19,7 @@ libeos_la_SOURCES += class_map.cpp
 libeos_la_SOURCES += decap_group.cpp
 libeos_la_SOURCES += directflow.cpp
 libeos_la_SOURCES += directflow_types.cpp
+libeos_la_SOURCES += eapi.cpp
 libeos_la_SOURCES += eth_types.cpp
 libeos_la_SOURCES += eth_intf.cpp
 libeos_la_SOURCES += eth_lag_intf.cpp
