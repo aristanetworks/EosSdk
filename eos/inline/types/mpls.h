@@ -22,6 +22,8 @@ operator<<(std::ostream& os, const mpls_action_t & enum_val) {
       os << "MPLS_ACTION_POP";
    } else if (enum_val==MPLS_ACTION_SWAP) {
       os << "MPLS_ACTION_SWAP";
+   } else if (enum_val==MPLS_ACTION_FORWARD) {
+      os << "MPLS_ACTION_FORWARD";
    } else {
       os << "Unknown value";
    }

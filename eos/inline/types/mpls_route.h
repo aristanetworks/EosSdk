@@ -132,20 +132,23 @@ operator<<(std::ostream& os, const mpls_route_t& obj) {
 inline mpls_route_via_t::mpls_route_via_t() :
       route_key_(), hop_(), intf_(), pushswap_label_(0),
       label_action_(MPLS_ACTION_NULL), ttl_mode_(MPLS_TTLMODE_NULL),
-      payload_type_(MPLS_PAYLOAD_TYPE_NULL), skip_egress_acl_(false) {
+      payload_type_(MPLS_PAYLOAD_TYPE_NULL), skip_egress_acl_(false),
+      nexthop_group_() {
 }
 
 inline mpls_route_via_t::mpls_route_via_t(mpls_route_key_t route_key) :
       route_key_(route_key), hop_(), intf_(), pushswap_label_(0),
       label_action_(MPLS_ACTION_NULL), ttl_mode_(MPLS_TTLMODE_NULL),
-      payload_type_(MPLS_PAYLOAD_TYPE_NULL), skip_egress_acl_(false) {
+      payload_type_(MPLS_PAYLOAD_TYPE_NULL), skip_egress_acl_(false),
+      nexthop_group_() {
 }
 
 inline mpls_route_via_t::mpls_route_via_t(mpls_route_key_t route_key,
                                           mpls_action_t label_action) :
       route_key_(route_key), hop_(), intf_(), pushswap_label_(0),
       label_action_(label_action), ttl_mode_(MPLS_TTLMODE_NULL),
-      payload_type_(MPLS_PAYLOAD_TYPE_NULL), skip_egress_acl_(false) {
+      payload_type_(MPLS_PAYLOAD_TYPE_NULL), skip_egress_acl_(false),
+      nexthop_group_() {
 }
 
 inline mpls_route_key_t
@@ -228,6 +231,16 @@ mpls_route_via_t::skip_egress_acl_is(bool skip_egress_acl) {
    skip_egress_acl_ = skip_egress_acl;
 }
 
+inline std::string
+mpls_route_via_t::nexthop_group() const {
+   return nexthop_group_;
+}
+
+inline void
+mpls_route_via_t::nexthop_group_is(std::string nexthop_group) {
+   nexthop_group_ = nexthop_group;
+}
+
 inline bool
 mpls_route_via_t::operator==(mpls_route_via_t const & other) const {
    return route_key_ == other.route_key_ &&
@@ -237,7 +250,8 @@ mpls_route_via_t::operator==(mpls_route_via_t const & other) const {
           label_action_ == other.label_action_ &&
           ttl_mode_ == other.ttl_mode_ &&
           payload_type_ == other.payload_type_ &&
-          skip_egress_acl_ == other.skip_egress_acl_;
+          skip_egress_acl_ == other.skip_egress_acl_ &&
+          nexthop_group_ == other.nexthop_group_;
 }
 
 inline bool
@@ -264,6 +278,7 @@ mpls_route_via_t::hash() const {
               sizeof(mpls_payload_type_t), ret);
    ret = hash_mix::mix((uint8_t *)&skip_egress_acl_,
               sizeof(bool), ret);
+   ret ^= std::hash<std::string>()(nexthop_group_);
    ret = hash_mix::final_mix(ret);
    return ret;
 }
@@ -280,6 +295,7 @@ mpls_route_via_t::to_string() const {
    ss << ", ttl_mode=" << ttl_mode_;
    ss << ", payload_type=" << payload_type_;
    ss << ", skip_egress_acl=" << skip_egress_acl_;
+   ss << ", nexthop_group='" << nexthop_group_ << "'";
    ss << ")";
    return ss.str();
 }

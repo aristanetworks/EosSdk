@@ -142,6 +142,14 @@ class EOS_SDK_PUBLIC mpls_route_via_t {
    /** Setter for 'skip_egress_acl'. */
    void skip_egress_acl_is(bool skip_egress_acl);
 
+   /**
+    * Getter for 'nexthop_group': set when packets are forwarded into a nexthop-
+    * group.
+    */
+   std::string nexthop_group() const;
+   /** Setter for 'nexthop_group'. */
+   void nexthop_group_is(std::string nexthop_group);
+
    bool operator==(mpls_route_via_t const & other) const;
    bool operator!=(mpls_route_via_t const & other) const;
    /** The hash function for type mpls_route_via_t. */
@@ -163,6 +171,7 @@ class EOS_SDK_PUBLIC mpls_route_via_t {
    mpls_ttl_mode_t ttl_mode_;
    mpls_payload_type_t payload_type_;
    bool skip_egress_acl_;
+   std::string nexthop_group_;
 };
 
 /**

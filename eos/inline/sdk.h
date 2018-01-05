@@ -56,6 +56,7 @@ inline aresolve_mgr * sdk::get_aresolve_mgr() {
 }
 
 inline bfd_session_mgr * sdk::get_bfd_session_mgr() {
+   print_profiles::add_profile("IntfMgrHelper");
    GET_MGR(bfd_session)
 }
 

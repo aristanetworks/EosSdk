@@ -72,6 +72,13 @@ void print_profiles::write_profiles() {
            it != profiles_to_print.end(); it++) {
          fprintf(print_profiles_fp, "Include: EosSdk_%s.include\n",
                                      it->first.c_str());
+         // BUG206337: Workaround lack of recursive include support in
+         // SysdbMountProfiles
+         if (strcmp(it->first.c_str(), "IntfMgrHelper") == 0) {
+            fprintf(print_profiles_fp, "Include: AgentPlugin-IntfCollections-*\n" );
+         } else if (strcmp(it->first.c_str(), "mlag")) {
+            fprintf(print_profiles_fp, "Include: MlagStatus-include\n");
+         }
       }
       fclose(print_profiles_fp);
       exit(0);

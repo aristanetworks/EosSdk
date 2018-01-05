@@ -1,4 +1,4 @@
-// Copyright (c) 2016 Arista Networks, Inc.  All rights reserved.
+// Copyright (c) 2017 Arista Networks, Inc.  All rights reserved.
 // Arista Networks, Inc. Confidential and Proprietary.
 
 #ifndef EOS_TYPES_MPLS_H
@@ -17,6 +17,7 @@ enum mpls_action_t {
    MPLS_ACTION_PUSH,
    MPLS_ACTION_POP,
    MPLS_ACTION_SWAP,
+   MPLS_ACTION_FORWARD,
 };
 /** Appends a string representation of enum mpls_action_t value to the ostream. */
 std::ostream& operator<<(std::ostream& os, const mpls_action_t & enum_val);
