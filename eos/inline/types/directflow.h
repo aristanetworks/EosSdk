@@ -1,4 +1,4 @@
-// Copyright (c) 2016 Arista Networks, Inc.  All rights reserved.
+// Copyright (c) 2018 Arista Networks, Inc.  All rights reserved.
 // Arista Networks, Inc. Confidential and Proprietary.
 
 #ifndef EOS_INLINE_TYPES_DIRECTFLOW_H
@@ -753,6 +753,8 @@ operator<<(std::ostream& os, const flow_rejected_reason_t & enum_val) {
       os << "FLOW_REJECTED_OTHER";
    } else if (enum_val==FLOW_REJECTED_ACTIONS_UNSUPPORTED) {
       os << "FLOW_REJECTED_ACTIONS_UNSUPPORTED";
+   } else if (enum_val==FLOW_REJECTED_TIMEOUT_NOT_SUPPORTED) {
+      os << "FLOW_REJECTED_TIMEOUT_NOT_SUPPORTED";
    } else {
       os << "Unknown value";
    }

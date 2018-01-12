@@ -1,4 +1,4 @@
-// Copyright (c) 2016 Arista Networks, Inc.  All rights reserved.
+// Copyright (c) 2018 Arista Networks, Inc.  All rights reserved.
 // Arista Networks, Inc. Confidential and Proprietary.
 
 #ifndef EOS_TYPES_DIRECTFLOW_H
@@ -377,6 +377,8 @@ enum flow_rejected_reason_t {
    FLOW_REJECTED_OTHER,
    /** Flow not created due to unsupported action set. */
    FLOW_REJECTED_ACTIONS_UNSUPPORTED,
+   /** Flow not created due to unsupported timeouts set. */
+   FLOW_REJECTED_TIMEOUT_NOT_SUPPORTED,
 };
 /**
  * Appends a string representation of enum flow_rejected_reason_t value to the
