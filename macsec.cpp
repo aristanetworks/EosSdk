@@ -61,6 +61,10 @@ class macsec_mgr_impl : public macsec_mgr {
       return *nop; // TODO: No op impl
    }
 
+   bool macsec_capable(intf_id_t intf_id) const {
+      return false; // TODO: No op impl
+   }
+
 };
 
 DEFINE_STUB_MGR_CTOR(macsec_mgr)

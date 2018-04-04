@@ -1,4 +1,4 @@
-// Copyright (c) 2017 Arista Networks, Inc.  All rights reserved.
+// Copyright (c) 2018 Arista Networks, Inc.  All rights reserved.
 // Arista Networks, Inc. Confidential and Proprietary.
 
 #ifndef EOS_INLINE_TYPES_IP_ROUTE_H
@@ -166,11 +166,13 @@ operator<<(std::ostream& os, const ip_route_t& obj) {
 
 
 inline ip_route_via_t::ip_route_via_t() :
-      route_key_(), hop_(), intf_(), nexthop_group_(), mpls_label_() {
+      route_key_(), hop_(), intf_(), nexthop_group_(), mpls_label_(), vni_(),
+      vtep_addr_(), router_mac_() {
 }
 
 inline ip_route_via_t::ip_route_via_t(ip_route_key_t const & route_key) :
-      route_key_(route_key), hop_(), intf_(), nexthop_group_(), mpls_label_() {
+      route_key_(route_key), hop_(), intf_(), nexthop_group_(), mpls_label_(),
+      vni_(), vtep_addr_(), router_mac_() {
 }
 
 inline ip_route_key_t
@@ -223,13 +225,46 @@ ip_route_via_t::mpls_label_is(mpls_label_t mpls_label) {
    mpls_label_ = mpls_label;
 }
 
+inline vni_t
+ip_route_via_t::vni() const {
+   return vni_;
+}
+
+inline void
+ip_route_via_t::vni_is(vni_t vni) {
+   vni_ = vni;
+}
+
+inline ip_addr_t
+ip_route_via_t::vtep_addr() const {
+   return vtep_addr_;
+}
+
+inline void
+ip_route_via_t::vtep_addr_is(ip_addr_t vtep_addr) {
+   vtep_addr_ = vtep_addr;
+}
+
+inline eth_addr_t
+ip_route_via_t::router_mac() const {
+   return router_mac_;
+}
+
+inline void
+ip_route_via_t::router_mac_is(eth_addr_t router_mac) {
+   router_mac_ = router_mac;
+}
+
 inline bool
 ip_route_via_t::operator==(ip_route_via_t const & other) const {
    return route_key_ == other.route_key_ &&
           hop_ == other.hop_ &&
           intf_ == other.intf_ &&
           nexthop_group_ == other.nexthop_group_ &&
-          mpls_label_ == other.mpls_label_;
+          mpls_label_ == other.mpls_label_ &&
+          vni_ == other.vni_ &&
+          vtep_addr_ == other.vtep_addr_ &&
+          router_mac_ == other.router_mac_;
 }
 
 inline bool
@@ -249,6 +284,12 @@ ip_route_via_t::hash() const {
    ret ^= std::hash<std::string>()(nexthop_group_);
    ret = hash_mix::mix((uint8_t *)&mpls_label_,
               sizeof(mpls_label_t), ret);
+   ret = hash_mix::mix((uint8_t *)&vni_,
+              sizeof(vni_t), ret);
+   ret = hash_mix::mix((uint8_t *)&vtep_addr_,
+              sizeof(ip_addr_t), ret);
+   ret = hash_mix::mix((uint8_t *)&router_mac_,
+              sizeof(eth_addr_t), ret);
    ret = hash_mix::final_mix(ret);
    return ret;
 }
@@ -262,6 +303,9 @@ ip_route_via_t::to_string() const {
    ss << ", intf=" << intf_;
    ss << ", nexthop_group='" << nexthop_group_ << "'";
    ss << ", mpls_label=" << mpls_label_;
+   ss << ", vni=" << vni_;
+   ss << ", vtep_addr=" << vtep_addr_;
+   ss << ", router_mac=" << router_mac_;
    ss << ")";
    return ss.str();
 }

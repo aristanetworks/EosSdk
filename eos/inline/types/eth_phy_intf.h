@@ -26,6 +26,10 @@ operator<<(std::ostream& os, const eth_link_speed_t & enum_val) {
       os << "LINK_SPEED_50GBPS";
    } else if (enum_val==LINK_SPEED_100GBPS) {
       os << "LINK_SPEED_100GBPS";
+   } else if (enum_val==LINK_SPEED_200GBPS) {
+      os << "LINK_SPEED_200GBPS";
+   } else if (enum_val==LINK_SPEED_400GBPS) {
+      os << "LINK_SPEED_400GBPS";
    } else if (enum_val==LINK_SPEED_UNEXPECTED) {
       os << "LINK_SPEED_UNEXPECTED";
    } else {

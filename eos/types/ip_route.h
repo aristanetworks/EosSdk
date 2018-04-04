@@ -1,9 +1,10 @@
-// Copyright (c) 2017 Arista Networks, Inc.  All rights reserved.
+// Copyright (c) 2018 Arista Networks, Inc.  All rights reserved.
 // Arista Networks, Inc. Confidential and Proprietary.
 
 #ifndef EOS_TYPES_IP_ROUTE_H
 #define EOS_TYPES_IP_ROUTE_H
 
+#include <eos/eth.h>
 #include <eos/hash_mix.h>
 #include <eos/intf.h>
 #include <eos/ip.h>
@@ -16,6 +17,8 @@ namespace eos {
 typedef uint32_t ip_route_tag_t;
 typedef uint8_t ip_route_preference_t;
 typedef uint32_t ip_route_metric_t;
+/** Valid range of 1 - (2^24)-1, set to 0 if unused. */
+typedef uint32_t vni_t;
 
 /**
  * The type of the ip_route_t. This is determined by the ip_route_via_t's attached
@@ -153,6 +156,23 @@ class EOS_SDK_PUBLIC ip_route_via_t {
    /** Setter for 'mpls_label'. */
    void mpls_label_is(mpls_label_t mpls_label);
 
+   /** Getter for 'vni': the VNI to use in the underlay tunnel vxlan header. */
+   vni_t vni() const;
+   /** Setter for 'vni'. */
+   void vni_is(vni_t vni);
+
+   /**
+    * Getter for 'vtep_addr': IP v4 destination address for the underlay IP header.
+    */
+   ip_addr_t vtep_addr() const;
+   /** Setter for 'vtep_addr'. */
+   void vtep_addr_is(ip_addr_t vtep_addr);
+
+   /** Getter for 'router_mac': DMAC to use in the underlay ethernet header. */
+   eth_addr_t router_mac() const;
+   /** Setter for 'router_mac'. */
+   void router_mac_is(eth_addr_t router_mac);
+
    bool operator==(ip_route_via_t const & other) const;
    bool operator!=(ip_route_via_t const & other) const;
    /** The hash function for type ip_route_via_t. */
@@ -171,6 +191,9 @@ class EOS_SDK_PUBLIC ip_route_via_t {
    intf_id_t intf_;
    std::string nexthop_group_;
    mpls_label_t mpls_label_;
+   vni_t vni_;
+   ip_addr_t vtep_addr_;
+   eth_addr_t router_mac_;
 };
 }
 

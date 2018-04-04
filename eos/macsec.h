@@ -139,6 +139,11 @@ class EOS_SDK_PUBLIC macsec_mgr : public base_mgr<macsec_handler, intf_id_t> {
     */
    virtual macsec_intf_status_t intf_status(intf_id_t) const = 0;
 
+   /**
+    * Returns whether or not an interface supports MACsec.
+    */
+   virtual bool macsec_capable(intf_id_t) const = 0;
+
  protected:
    macsec_mgr() EOS_SDK_PRIVATE;
    friend class macsec_handler;

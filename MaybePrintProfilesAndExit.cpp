@@ -84,4 +84,3 @@ void print_profiles::write_profiles() {
       exit(0);
    }
 }
-

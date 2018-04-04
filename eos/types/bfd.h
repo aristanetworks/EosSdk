@@ -1,4 +1,4 @@
-// Copyright (c) 2016 Arista Networks, Inc.  All rights reserved.
+// Copyright (c) 2018 Arista Networks, Inc.  All rights reserved.
 // Arista Networks, Inc. Confidential and Proprietary.
 
 #ifndef EOS_TYPES_BFD_H
@@ -30,6 +30,7 @@ enum bfd_session_type_t {
    BFD_SESSION_TYPE_NORMAL,
    BFD_SESSION_TYPE_MICRO,
    BFD_SESSION_TYPE_VXLANTUNNEL,
+   BFD_SESSION_TYPE_LAGRFC7130,
    BFD_SESSION_TYPE_MICRORFC7130,
    BFD_SESSION_TYPE_MULTIHOP,
 };
