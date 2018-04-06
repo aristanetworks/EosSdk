@@ -144,6 +144,12 @@ class EOS_SDK_PUBLIC macsec_mgr : public base_mgr<macsec_handler, intf_id_t> {
     */
    virtual bool macsec_capable(intf_id_t) const = 0;
 
+   /*
+    * Returns the current MACsec counters for the given interface. Counters
+    * are only available for interfaces that were up upon EosSdk agent creation.
+    */
+   virtual macsec_intf_counters_t intf_counters(intf_id_t) const = 0;
+
  protected:
    macsec_mgr() EOS_SDK_PRIVATE;
    friend class macsec_handler;

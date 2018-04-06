@@ -1,4 +1,4 @@
-// Copyright (c) 2017 Arista Networks, Inc.  All rights reserved.
+// Copyright (c) 2018 Arista Networks, Inc.  All rights reserved.
 // Arista Networks, Inc. Confidential and Proprietary.
 
 #ifndef EOS_INLINE_TYPES_MACSEC_H
@@ -357,6 +357,115 @@ macsec_intf_status_t::to_string() const {
 
 inline std::ostream&
 operator<<(std::ostream& os, const macsec_intf_status_t& obj) {
+   os << obj.to_string();
+   return os;
+}
+
+
+
+inline macsec_intf_counters_t::macsec_intf_counters_t() :
+      out_pkts_encrypted_(0), out_octets_encrypted_(0), in_pkts_decrypted_(0),
+      in_octets_decrypted_(0), in_pkts_not_valid_(0) {
+}
+
+inline macsec_intf_counters_t::macsec_intf_counters_t(
+         uint64_t out_pkts_encrypted, uint64_t out_octets_encrypted,
+         uint64_t in_pkts_decrypted, uint64_t in_octets_decrypted,
+         uint64_t in_pkts_not_valid) :
+      out_pkts_encrypted_(out_pkts_encrypted),
+      out_octets_encrypted_(out_octets_encrypted),
+      in_pkts_decrypted_(in_pkts_decrypted),
+      in_octets_decrypted_(in_octets_decrypted),
+      in_pkts_not_valid_(in_pkts_not_valid) {
+}
+
+inline uint64_t
+macsec_intf_counters_t::out_pkts_encrypted() const {
+   return out_pkts_encrypted_;
+}
+
+inline uint64_t
+macsec_intf_counters_t::out_octets_encrypted() const {
+   return out_octets_encrypted_;
+}
+
+inline uint64_t
+macsec_intf_counters_t::in_pkts_decrypted() const {
+   return in_pkts_decrypted_;
+}
+
+inline uint64_t
+macsec_intf_counters_t::in_octets_decrypted() const {
+   return in_octets_decrypted_;
+}
+
+inline uint64_t
+macsec_intf_counters_t::in_pkts_not_valid() const {
+   return in_pkts_not_valid_;
+}
+
+inline bool
+macsec_intf_counters_t::operator==(macsec_intf_counters_t const & other) const {
+   return out_pkts_encrypted_ == other.out_pkts_encrypted_ &&
+          out_octets_encrypted_ == other.out_octets_encrypted_ &&
+          in_pkts_decrypted_ == other.in_pkts_decrypted_ &&
+          in_octets_decrypted_ == other.in_octets_decrypted_ &&
+          in_pkts_not_valid_ == other.in_pkts_not_valid_;
+}
+
+inline bool
+macsec_intf_counters_t::operator!=(macsec_intf_counters_t const & other) const {
+   return !operator==(other);
+}
+
+inline bool
+macsec_intf_counters_t::operator<(macsec_intf_counters_t const & other) const {
+   if(out_pkts_encrypted_ != other.out_pkts_encrypted_) {
+      return out_pkts_encrypted_ < other.out_pkts_encrypted_;
+   } else if(out_octets_encrypted_ != other.out_octets_encrypted_) {
+      return out_octets_encrypted_ < other.out_octets_encrypted_;
+   } else if(in_pkts_decrypted_ != other.in_pkts_decrypted_) {
+      return in_pkts_decrypted_ < other.in_pkts_decrypted_;
+   } else if(in_octets_decrypted_ != other.in_octets_decrypted_) {
+      return in_octets_decrypted_ < other.in_octets_decrypted_;
+   } else if(in_pkts_not_valid_ != other.in_pkts_not_valid_) {
+      return in_pkts_not_valid_ < other.in_pkts_not_valid_;
+   }
+   return false;
+}
+
+inline uint32_t
+macsec_intf_counters_t::hash() const {
+   uint32_t ret = 0;
+   ret = hash_mix::mix((uint8_t *)&out_pkts_encrypted_,
+              sizeof(uint64_t), ret);
+   ret = hash_mix::mix((uint8_t *)&out_octets_encrypted_,
+              sizeof(uint64_t), ret);
+   ret = hash_mix::mix((uint8_t *)&in_pkts_decrypted_,
+              sizeof(uint64_t), ret);
+   ret = hash_mix::mix((uint8_t *)&in_octets_decrypted_,
+              sizeof(uint64_t), ret);
+   ret = hash_mix::mix((uint8_t *)&in_pkts_not_valid_,
+              sizeof(uint64_t), ret);
+   ret = hash_mix::final_mix(ret);
+   return ret;
+}
+
+inline std::string
+macsec_intf_counters_t::to_string() const {
+   std::ostringstream ss;
+   ss << "macsec_intf_counters_t(";
+   ss << "out_pkts_encrypted=" << out_pkts_encrypted_;
+   ss << ", out_octets_encrypted=" << out_octets_encrypted_;
+   ss << ", in_pkts_decrypted=" << in_pkts_decrypted_;
+   ss << ", in_octets_decrypted=" << in_octets_decrypted_;
+   ss << ", in_pkts_not_valid=" << in_pkts_not_valid_;
+   ss << ")";
+   return ss.str();
+}
+
+inline std::ostream&
+operator<<(std::ostream& os, const macsec_intf_counters_t& obj) {
    os << obj.to_string();
    return os;
 }

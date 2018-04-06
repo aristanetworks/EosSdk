@@ -1,4 +1,4 @@
-// Copyright (c) 2017 Arista Networks, Inc.  All rights reserved.
+// Copyright (c) 2018 Arista Networks, Inc.  All rights reserved.
 // Arista Networks, Inc. Confidential and Proprietary.
 
 #ifndef EOS_TYPES_MACSEC_H
@@ -191,6 +191,47 @@ class EOS_SDK_PUBLIC macsec_intf_status_t {
 
  private:
    macsec_intf_key_status_t status_;
+};
+
+/** Macsec interface counters class. */
+class EOS_SDK_PUBLIC macsec_intf_counters_t {
+ public:
+   macsec_intf_counters_t();
+   macsec_intf_counters_t(uint64_t out_pkts_encrypted,
+                          uint64_t out_octets_encrypted,
+                          uint64_t in_pkts_decrypted, uint64_t in_octets_decrypted,
+                          uint64_t in_pkts_not_valid);
+
+   uint64_t out_pkts_encrypted() const;
+
+   uint64_t out_octets_encrypted() const;
+
+   uint64_t in_pkts_decrypted() const;
+
+   uint64_t in_octets_decrypted() const;
+
+   uint64_t in_pkts_not_valid() const;
+
+   bool operator==(macsec_intf_counters_t const & other) const;
+   bool operator!=(macsec_intf_counters_t const & other) const;
+   bool operator<(macsec_intf_counters_t const & other) const;
+   /** The hash function for type macsec_intf_counters_t. */
+   uint32_t hash() const;
+   /** Returns a string representation of the current object's values. */
+   std::string to_string() const;
+   /**
+    * A utility stream operator that adds a string representation of
+    * macsec_intf_counters_t to the ostream.
+    */
+   friend std::ostream& operator<<(std::ostream& os,
+                                   const macsec_intf_counters_t& obj);
+
+ private:
+   uint64_t out_pkts_encrypted_;
+   uint64_t out_octets_encrypted_;
+   uint64_t in_pkts_decrypted_;
+   uint64_t in_octets_decrypted_;
+   uint64_t in_pkts_not_valid_;
 };
 }
 

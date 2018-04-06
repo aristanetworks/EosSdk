@@ -65,6 +65,11 @@ class macsec_mgr_impl : public macsec_mgr {
       return false; // TODO: No op impl
    }
 
+   macsec_intf_counters_t intf_counters(intf_id_t intf_id) const {
+      macsec_intf_counters_t * nop = 0;
+      return *nop; // TODO: No op impl
+   }
+
 };
 
 DEFINE_STUB_MGR_CTOR(macsec_mgr)
