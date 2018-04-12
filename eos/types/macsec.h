@@ -193,7 +193,7 @@ class EOS_SDK_PUBLIC macsec_intf_status_t {
    macsec_intf_key_status_t status_;
 };
 
-/** Macsec interface counters class. */
+/** MACsec interface counters class. */
 class EOS_SDK_PUBLIC macsec_intf_counters_t {
  public:
    macsec_intf_counters_t();
