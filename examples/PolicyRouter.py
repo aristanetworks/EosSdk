@@ -265,21 +265,21 @@ class PolicyRouter(object):
       op = portspec.get('op', 'eq').lower()  # default to port equals
       ports = portspec.get('ports', [])
       if op == 'eq':
-         return eossdk.AclPortSpecEq(ports)
+         return eossdk.AclPortSpec(eossdk.ACL_RANGE_EQ, ports)
       elif op == 'neq':
-         return eossdk.AclPortSpecNeq(ports)
+         return eossdk.AclPortSpec(eossdk.ACL_RANGE_NEQ, ports)
       elif op == 'range':
          if len(ports) != 2:
-            raise ConfigError('Must provide exactly two ports for "eq"')
-         return eossdk.AclPortSpecRange(ports[0], ports[1])
+            raise ConfigError('Must provide exactly two ports for "range"')
+         return eossdk.AclPortSpec(eossdk.ACL_RANGE_BETWEEN, ports)
       elif op == 'gt':
          if len(ports) != 1:
             raise ConfigError('Must provide only one port for "gt"')
-         return eossdk.AclPortSpecGt(ports[0])
+         return eossdk.AclPortSpec(eossdk.ACL_RANGE_GT, ports)
       elif op == 'lt':
          if len(ports) != 1:
             raise ConfigError('Must provide only one port for "lt"')
-         return eossdk.AclPortSpecLt(ports[0])
+         return eossdk.AclPortSpec(eossdk.ACL_RANGE_LT, ports)
       else:
          raise ConfigError('Unknown port match operation "%s"' % op)
 
