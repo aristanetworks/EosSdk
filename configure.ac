@@ -17,7 +17,7 @@ AC_CACHE_CHECK([for std::unordered_set::operator==], [eossdk_cv_unordered_set_eq
 # Detect STL versions that are missing std::unordered_set::operator== (e.g.
 # libstdc++-4.4.7 on CentOS 6.6)
 save_CXXFLAGS=$CXXFLAGS
-CXXFLAGS="$CXXFLAGS -std=gnu++0x"
+CXXFLAGS="$CXXFLAGS -std=gnu++14"
 AC_COMPILE_IFELSE([AC_LANG_PROGRAM([[
     #include <unordered_set>
     std::unordered_set<int> s;

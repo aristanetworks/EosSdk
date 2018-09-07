@@ -1,6 +1,6 @@
 lib_LTLIBRARIES = libeos.la
 
-AM_CXXFLAGS = -fvisibility=hidden -std=gnu++0x
+AM_CXXFLAGS = -fvisibility=hidden -std=gnu++14
 AM_CXXFLAGS += -Wextra -Wall -Wnon-virtual-dtor -Werror -Wno-unused-parameter -Wno-error=unused-value
 AM_LDFLAGS = -Wl,--no-undefined
 
@@ -79,6 +79,7 @@ _eossdk_la_LDFLAGS = -avoid-version -module
 # Python version and GCC version, so we turn the problematic ones off here as
 # we build with -Werror:
 _eossdk_la_CXXFLAGS = $(AM_CXXFLAGS) -Wno-strict-aliasing -Wno-missing-field-initializers
+_eossdk_la_CXXFLAGS += -Wno-error=maybe-uninitialized
 _eossdk_la_CPPFLAGS = -I/usr/include/python$(PYTHON_VERSION)
 _eossdk_la_LIBADD = libeos.la
 

@@ -22,7 +22,7 @@
 // Following are the steps to build and run the sample agent.
 //
 // Make the agent using a 32-bit linux build environment:
-//    bash# g++ -leos -std=gnu++0x examples/MplsOverGreNexthopGroups.cpp 
+//    bash# g++ -leos -std=gnu++14 examples/MplsOverGreNexthopGroups.cpp
 //                                           -o MplsOverGreNexthopGroups
 // Now you can transfer the binary to flash: on an EOS instance with
 // EosSdk.i686.rpm installed and run the agent from bash:

@@ -23,7 +23,7 @@
 // programming.
 
 // Build using:
-//    g++ -std=gnu++0x -leos examples/NexthopGroupModifierScript.cpp -o NhgScript
+//    g++ -std=gnu++14 -leos examples/NexthopGroupModifierScript.cpp -o NhgScript
 // Usage: "./NhgScript add" or "./NhgScript delete"
 
 // Number of routes and NHG to add:
