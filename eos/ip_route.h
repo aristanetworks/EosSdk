@@ -85,6 +85,8 @@ class EOS_SDK_PUBLIC ip_route_mgr {
     * is set, only return vias on routes that match the current tag.
     */
    virtual ip_route_via_iter_t ip_route_via_iter(ip_route_key_t const &) const = 0;
+   virtual ip_route_via_iter_t ip_route_via_iter(ip_route_key_t const &,
+                                                 std::string vrfName) const = 0;
 
    /**
     * Tests for existence of any routes matching the route key in the config.
@@ -92,8 +94,10 @@ class EOS_SDK_PUBLIC ip_route_mgr {
     * function returns false.
     */
    virtual bool exists(ip_route_key_t const &) const = 0;
+   virtual bool exists(ip_route_key_t const &, std::string vrfName) const = 0;
    /// Tests if the given via exists.
    virtual bool exists(ip_route_via_t const &) const = 0;
+   virtual bool exists(ip_route_via_t const &, std::string vrfName) const = 0;
 
    // Route management functions
 
@@ -102,6 +106,7 @@ class EOS_SDK_PUBLIC ip_route_mgr {
     * an empty ip_route_t() if no matching route is found.
     */
    virtual ip_route_t ip_route(ip_route_key_t const &) = 0;
+   virtual ip_route_t ip_route(ip_route_key_t const &, std::string vrfName) = 0;
    /**
     * Inserts or updates a static route into the switch configuration.
     */
@@ -117,6 +122,18 @@ class EOS_SDK_PUBLIC ip_route_mgr {
     */
    virtual void ip_route_set(ip_route_t const &,
                              ip_route_action_t expected_type) = 0;
+   /**
+    * Inserts or updates a static route for a given vrf into the
+    * switch configuration.
+    */
+   virtual void ip_route_set(ip_route_t const &,
+                             std::string vrfName) = 0;
+   /**
+    * Delete an existing static route for a given vrf from the
+    * switch configuration.
+    */
+   virtual void ip_route_del(ip_route_key_t const &,
+                             std::string vrfName) = 0;
    /// Removes all ECMP vias matching the route key, and the route itself.
    virtual void ip_route_del(ip_route_key_t const &) = 0;
 
@@ -138,12 +155,14 @@ class EOS_SDK_PUBLIC ip_route_mgr {
     * address, interface or nexthop group set.
     */
    virtual void ip_route_via_set(ip_route_via_t const &) = 0;
+   virtual void ip_route_via_set(ip_route_via_t const &, std::string vrfName) = 0;
    /**
     * Removes a via from an ip_route_t.
     * When all vias are removed, the route still exists with no
     * nexthop information.
     */
    virtual void ip_route_via_del(ip_route_via_t const &) = 0;
+   virtual void ip_route_via_del(ip_route_via_t const &, std::string vrfName) = 0;
 
  protected:
    ip_route_mgr() EOS_SDK_PRIVATE;
