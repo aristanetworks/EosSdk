@@ -1,4 +1,4 @@
-// Copyright (c) 2017 Arista Networks, Inc.  All rights reserved.
+// Copyright (c) 2018 Arista Networks, Inc.  All rights reserved.
 // Arista Networks, Inc. Confidential and Proprietary.
 
 #ifndef EOS_TYPES_MAC_TABLE_H
@@ -43,6 +43,8 @@ enum mac_entry_type_t {
    MAC_ENTRY_PEER_EVPN_REMOTE_MAC,
    MAC_ENTRY_EVPN_INTF_DYNAMIC,
    MAC_ENTRY_EVPN_INTF_STATIC,
+   MAC_ENTRY_AUTHENTICATED,
+   MAC_ENTRY_PEER_AUTHENTICATED,
 };
 /** Appends a string representation of enum mac_entry_type_t value to the ostream. */
 std::ostream& operator<<(std::ostream& os, const mac_entry_type_t & enum_val);

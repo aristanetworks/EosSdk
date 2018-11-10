@@ -1,4 +1,4 @@
-// Copyright (c) 2017 Arista Networks, Inc.  All rights reserved.
+// Copyright (c) 2018 Arista Networks, Inc.  All rights reserved.
 // Arista Networks, Inc. Confidential and Proprietary.
 
 #ifndef EOS_INLINE_TYPES_MAC_TABLE_H
@@ -58,6 +58,10 @@ operator<<(std::ostream& os, const mac_entry_type_t & enum_val) {
       os << "MAC_ENTRY_EVPN_INTF_DYNAMIC";
    } else if (enum_val==MAC_ENTRY_EVPN_INTF_STATIC) {
       os << "MAC_ENTRY_EVPN_INTF_STATIC";
+   } else if (enum_val==MAC_ENTRY_AUTHENTICATED) {
+      os << "MAC_ENTRY_AUTHENTICATED";
+   } else if (enum_val==MAC_ENTRY_PEER_AUTHENTICATED) {
+      os << "MAC_ENTRY_PEER_AUTHENTICATED";
    } else {
       os << "Unknown value";
    }
