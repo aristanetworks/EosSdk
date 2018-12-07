@@ -17,6 +17,7 @@
 #include "eos/iterator.h"
 #include "eos/mac_table.h"
 #include "eos/mpls_route.h"
+#include "eos/mpls_vrf_label.h"
 #include "eos/neighbor_table.h"
 #include "eos/nexthop_group.h"
 #include "eos/policy_map.h"
@@ -129,6 +130,7 @@ INSTANTIATE_ITERATOR(mpls_route_t, mpls_route_iter_impl);
 INSTANTIATE_ITERATOR(mpls_route_key_t, mpls_route_status_iter_impl);
 INSTANTIATE_ITERATOR(mpls_route_via_t, mpls_route_via_iter_impl);
 INSTANTIATE_ITERATOR(mpls_route_via_t, mpls_route_via_status_iter_impl);
+INSTANTIATE_ITERATOR(mpls_vrf_label_t, mpls_vrf_label_iter_impl);
 INSTANTIATE_ITERATOR(neighbor_key_t, neighbor_table_iter_impl);
 INSTANTIATE_ITERATOR(neighbor_key_t, neighbor_table_status_iter_impl);
 INSTANTIATE_ITERATOR(nexthop_group_t, nexthop_group_iter_impl);

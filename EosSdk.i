@@ -81,6 +81,7 @@ typedef uint64_t uint64_be_t;
 %feature("nodirector") eos::mac_table_mgr;
 %feature("nodirector") eos::mlag_mgr;
 %feature("nodirector") eos::mpls_route_mgr;
+%feature("nodirector") eos::mpls_vrf_label_mgr;
 %feature("nodirector") eos::neighbor_table_mgr;
 %feature("nodirector") eos::nexthop_group_mgr;
 %feature("nodirector") eos::policy_map_mgr;
@@ -119,6 +120,7 @@ typedef uint64_t uint64_be_t;
 #include "eos/mlag.h"
 #include "eos/mpls.h"
 #include "eos/mpls_route.h"
+#include "eos/mpls_vrf_label.h"
 #include "eos/neighbor_table.h"
 #include "eos/nexthop_group.h"
 #include "eos/policy_map.h"
@@ -294,6 +296,7 @@ wrap_iterator(eos::mpls_route_iter_t, eos::mpls_route_iter_impl, eos::mpls_route
 wrap_iterator(eos::mpls_route_status_iter_t, eos::mpls_route_status_iter_impl, eos::mpls_route_key_t);
 wrap_iterator(eos::mpls_route_via_iter_t, eos::mpls_route_via_iter_impl, eos::mpls_route_via_t);
 wrap_iterator(eos::mpls_route_via_status_iter_t, eos::mpls_route_via_status_iter_impl, eos::mpls_route_via_t);
+wrap_iterator(eos::mpls_vrf_label_iter_t, eos::mpls_vrf_label_iter_impl, eos::mpls_vrf_label_t);
 wrap_iterator(eos::neighbor_table_iter_t, eos::neighbor_table_iter_impl, eos::neighbor_key_t);
 wrap_iterator(eos::neighbor_table_status_iter_t, eos::neighbor_table_status_iter_impl, eos::neighbor_key_t);
 wrap_iterator(eos::nexthop_group_iter_t, eos::nexthop_group_iter_impl, eos::nexthop_group_t);

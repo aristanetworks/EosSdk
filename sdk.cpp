@@ -50,6 +50,7 @@ sdk::sdk()
      mlag_mgr_(0),
      mount_mgr_(0),
      mpls_route_mgr_(0),
+     mpls_vrf_label_mgr_(0),
      neighbor_table_mgr_(0),
      nexthop_group_mgr_(0),
      policy_map_mgr_(0),
@@ -89,6 +90,7 @@ sdk::sdk(std::string const name, void *eossdk_context)
      mlag_mgr_(0),
      mount_mgr_(0),
      mpls_route_mgr_(0),
+     mpls_vrf_label_mgr_(0),
      neighbor_table_mgr_(0),
      nexthop_group_mgr_(0),
      policy_map_mgr_(0),
@@ -142,6 +144,7 @@ INIT_STUB_MGR(macsec_mgr)
 INIT_STUB_MGR(mac_table_mgr)
 INIT_STUB_MGR(mlag_mgr)
 INIT_STUB_MGR(mpls_route_mgr)
+INIT_STUB_MGR(mpls_vrf_label_mgr)
 INIT_STUB_MGR(neighbor_table_mgr)
 INIT_STUB_MGR(nexthop_group_mgr)
 INIT_STUB_MGR(policy_map_mgr)

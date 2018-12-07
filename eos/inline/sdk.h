@@ -170,6 +170,10 @@ inline mpls_route_mgr * sdk::get_mpls_route_mgr() {
    GET_MGR(mpls_route)
 }
 
+inline mpls_vrf_label_mgr * sdk::get_mpls_vrf_label_mgr() {
+   GET_MGR(mpls_vrf_label)
+}
+
 inline neighbor_table_mgr * sdk::get_neighbor_table_mgr() {
    GET_MGR(neighbor_table)
 }

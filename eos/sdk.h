@@ -35,6 +35,7 @@ class mac_table_mgr;
 class mlag_mgr;
 class mount_mgr;
 class mpls_route_mgr;
+class mpls_vrf_label_mgr;
 class neighbor_table_mgr;
 class nexthop_group_mgr;
 class policy_map_mgr;
@@ -157,6 +158,7 @@ class EOS_SDK_PUBLIC sdk {
    virtual void init_mac_table_mgr();
    virtual void init_mlag_mgr();
    virtual void init_mpls_route_mgr();
+   virtual void init_mpls_vrf_label_mgr();
    virtual void init_neighbor_table_mgr();
    virtual void init_nexthop_group_mgr();
    virtual void init_policy_map_mgr();
@@ -190,6 +192,7 @@ class EOS_SDK_PUBLIC sdk {
    virtual mlag_mgr * get_mlag_mgr();
    virtual mount_mgr * get_mount_mgr();
    virtual mpls_route_mgr * get_mpls_route_mgr();
+   virtual mpls_vrf_label_mgr * get_mpls_vrf_label_mgr();
    virtual neighbor_table_mgr * get_neighbor_table_mgr();
    virtual nexthop_group_mgr * get_nexthop_group_mgr();
    virtual policy_map_mgr * get_policy_map_mgr();
@@ -231,6 +234,7 @@ class EOS_SDK_PUBLIC sdk {
    mlag_mgr * mlag_mgr_;
    mount_mgr * mount_mgr_;
    mpls_route_mgr * mpls_route_mgr_;
+   mpls_vrf_label_mgr * mpls_vrf_label_mgr_;
    neighbor_table_mgr * neighbor_table_mgr_;
    nexthop_group_mgr * nexthop_group_mgr_;
    policy_map_mgr * policy_map_mgr_;
