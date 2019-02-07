@@ -1,4 +1,4 @@
-// Copyright (c) 2016 Arista Networks, Inc.  All rights reserved.
+// Copyright (c) 2018 Arista Networks, Inc.  All rights reserved.
 // Arista Networks, Inc. Confidential and Proprietary.
 
 #ifndef EOS_TYPES_IP_H
@@ -144,6 +144,7 @@ class EOS_SDK_PUBLIC ip_prefix_t {
    std::string to_string() const;
    bool operator==(ip_prefix_t const & other) const;
    bool operator!=(ip_prefix_t const & other) const;
+   bool operator<(ip_prefix_t const & other) const;
    /** The hash function for type ip_prefix_t. */
    uint32_t hash() const;
    /**

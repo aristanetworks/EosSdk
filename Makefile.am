@@ -57,6 +57,7 @@ libeos_la_SOURCES += version.cpp
 libeos_la_SOURCES += vrf.cpp
 libeos_la_SOURCES += bfd.cpp
 libeos_la_SOURCES += lldp.cpp
+libeos_la_SOURCES += nexthop_group_tunnel.cpp
 
 libeos_la_LDFLAGS = -version-info $(SDK_LIBTOOL_VERSION) -lrt
 libeos_la_LDFLAGS += -soname libeos.so.$(SDK_VERSION_MAJOR).$(SDK_VERSION_MINOR)

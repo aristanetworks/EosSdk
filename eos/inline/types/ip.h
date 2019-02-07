@@ -1,4 +1,4 @@
-// Copyright (c) 2016 Arista Networks, Inc.  All rights reserved.
+// Copyright (c) 2018 Arista Networks, Inc.  All rights reserved.
 // Arista Networks, Inc. Confidential and Proprietary.
 
 #ifndef EOS_INLINE_TYPES_IP_H
@@ -216,6 +216,16 @@ ip_prefix_t::operator==(ip_prefix_t const & other) const {
 inline bool
 ip_prefix_t::operator!=(ip_prefix_t const & other) const {
    return !operator==(other);
+}
+
+inline bool
+ip_prefix_t::operator<(ip_prefix_t const & other) const {
+   if(addr_ != other.addr_) {
+      return addr_ < other.addr_;
+   } else if(prefix_length_ != other.prefix_length_) {
+      return prefix_length_ < other.prefix_length_;
+   }
+   return false;
 }
 
 inline uint32_t

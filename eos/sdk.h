@@ -38,6 +38,7 @@ class mpls_route_mgr;
 class mpls_vrf_label_mgr;
 class neighbor_table_mgr;
 class nexthop_group_mgr;
+class nexthop_group_tunnel_mgr;
 class policy_map_mgr;
 class subintf_mgr;
 class system_mgr;
@@ -161,6 +162,7 @@ class EOS_SDK_PUBLIC sdk {
    virtual void init_mpls_vrf_label_mgr();
    virtual void init_neighbor_table_mgr();
    virtual void init_nexthop_group_mgr();
+   virtual void init_nexthop_group_tunnel_mgr();
    virtual void init_policy_map_mgr();
    virtual void init_subintf_mgr();
    virtual void init_system_mgr();
@@ -195,6 +197,7 @@ class EOS_SDK_PUBLIC sdk {
    virtual mpls_vrf_label_mgr * get_mpls_vrf_label_mgr();
    virtual neighbor_table_mgr * get_neighbor_table_mgr();
    virtual nexthop_group_mgr * get_nexthop_group_mgr();
+   virtual nexthop_group_tunnel_mgr * get_nexthop_group_tunnel_mgr();
    virtual policy_map_mgr * get_policy_map_mgr();
    virtual subintf_mgr * get_subintf_mgr();
    virtual system_mgr * get_system_mgr();
@@ -237,6 +240,7 @@ class EOS_SDK_PUBLIC sdk {
    mpls_vrf_label_mgr * mpls_vrf_label_mgr_;
    neighbor_table_mgr * neighbor_table_mgr_;
    nexthop_group_mgr * nexthop_group_mgr_;
+   nexthop_group_tunnel_mgr * nexthop_group_tunnel_mgr_;
    policy_map_mgr * policy_map_mgr_;
    subintf_mgr * subintf_mgr_;
    system_mgr * system_mgr_;

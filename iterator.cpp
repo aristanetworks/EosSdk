@@ -24,6 +24,7 @@
 #include "eos/subintf.h"
 #include "eos/vrf.h"
 #include "eos/lldp.h"
+#include "eos/nexthop_group_tunnel.h"
 
 namespace eos {
 
@@ -140,5 +141,6 @@ INSTANTIATE_ITERATOR(std::string, vrf_iter_impl);
 INSTANTIATE_ITERATOR(lldp_remote_system_t, lldp_remote_system_iter_impl);
 INSTANTIATE_ITERATOR(intf_id_t, lldp_intf_iter_impl);
 INSTANTIATE_ITERATOR(lldp_neighbor_t, lldp_neighbor_iter_impl);
+INSTANTIATE_ITERATOR(nexthop_group_tunnel_t, nexthop_group_tunnel_iter_impl);
 
 }

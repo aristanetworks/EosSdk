@@ -143,6 +143,32 @@ class EOS_SDK_PUBLIC macsec_profile_t {
    /** Setter for 'include_sci'. */
    void include_sci_is(bool include_sci);
 
+   /**
+    * Getter for 'bypass_lldp': if set, transmit/receive LLDP frames without
+    * protection.
+    */
+   bool bypass_lldp() const;
+   /** Setter for 'bypass_lldp'. */
+   void bypass_lldp_is(bool bypass_lldp);
+
+   /**
+    * Getter for 'allow_unprotected': if set, allow transmit/receive without MAC
+    * security protection.
+    */
+   bool allow_unprotected() const;
+   /** Setter for 'allow_unprotected'. */
+   void allow_unprotected_is(bool allow_unprotected);
+
+   /** Getter for 'replay_protection': if set, enable replay protection. */
+   bool replay_protection() const;
+   /** Setter for 'replay_protection'. */
+   void replay_protection_is(bool replay_protection);
+
+   /** Getter for 'replay_protection_window': replay protection window size. */
+   uint32_t replay_protection_window() const;
+   /** Setter for 'replay_protection_window'. */
+   void replay_protection_window_is(uint32_t replay_protection_window);
+
    bool operator==(macsec_profile_t const & other) const;
    bool operator!=(macsec_profile_t const & other) const;
    bool operator<(macsec_profile_t const & other) const;
@@ -165,6 +191,10 @@ class EOS_SDK_PUBLIC macsec_profile_t {
    macsec_cipher_suite_t cipher_;
    bool dot1x_;
    bool include_sci_;
+   bool bypass_lldp_;
+   bool allow_unprotected_;
+   bool replay_protection_;
+   uint32_t replay_protection_window_;
 };
 
 /** Information regarding the MACsec status of an interface. */

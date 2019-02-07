@@ -85,6 +85,8 @@ class EOS_SDK_PUBLIC eth_phy_intf_handler
    virtual void on_eth_phy_intf_hardware_present(intf_id_t, bool present);
    /// Handler called when the operational link speed changes
    virtual void on_eth_phy_intf_link_speed(intf_id_t, eth_link_speed_t);
+   /// Handler called when a transceiver insertion or removal is detected
+   virtual void on_eth_phy_intf_transceiver_present(intf_id_t, bool);
 };
 
 
@@ -141,6 +143,9 @@ class EOS_SDK_PUBLIC eth_phy_intf_mgr : public base_mgr<eth_phy_intf_handler,
     * LINK_SPEED_UNKNOWN.
     */
    virtual eth_link_speed_t link_speed(intf_id_t) const = 0;
+
+   // Returns the presence of transceiver for the given interface
+   virtual bool transceiver_present(intf_id_t) const = 0;
 
  protected:
    eth_phy_intf_mgr() EOS_SDK_PRIVATE;

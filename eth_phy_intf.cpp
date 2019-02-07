@@ -40,6 +40,11 @@ eth_phy_intf_handler::on_eth_phy_intf_link_speed(intf_id_t, eth_link_speed_t) {
    // TODO: No op impl.
 }
 
+void
+eth_phy_intf_handler::on_eth_phy_intf_transceiver_present(intf_id_t, bool) {
+   // TODO: No op impl.
+}
+
 class eth_phy_intf_mgr_impl : public eth_phy_intf_mgr {
  public:
    eth_phy_intf_mgr_impl() {
@@ -65,6 +70,10 @@ class eth_phy_intf_mgr_impl : public eth_phy_intf_mgr {
 
    eth_link_speed_t link_speed(intf_id_t intf_id) const {
       return LINK_SPEED_UNKNOWN;  // TODO: No op impl.
+   }
+
+   bool transceiver_present(intf_id_t intf_id) const {
+      return false;  // TODO: No op impl.
    }
 
 };

@@ -208,6 +208,10 @@ inline lldp_mgr * sdk::get_lldp_mgr() {
    GET_MGR(lldp)
 }
 
+inline nexthop_group_tunnel_mgr * sdk::get_nexthop_group_tunnel_mgr() {
+   GET_MGR(nexthop_group_tunnel)
+}
+
 }
 
 #endif // EOS_INLINE_SDK_H

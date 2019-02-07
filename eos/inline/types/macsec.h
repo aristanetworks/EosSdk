@@ -130,13 +130,16 @@ operator<<(std::ostream& os, const macsec_key_t& obj) {
 
 inline macsec_profile_t::macsec_profile_t() :
       name_(), primary_key_(), fallback_key_(), key_server_priority_(0),
-      rekey_period_(0), cipher_(CIPHER_NULL), dot1x_(false), include_sci_(false) {
+      rekey_period_(0), cipher_(CIPHER_NULL), dot1x_(false), include_sci_(false),
+      bypass_lldp_(false), allow_unprotected_(false), replay_protection_(true),
+      replay_protection_window_(0) {
 }
 
 inline macsec_profile_t::macsec_profile_t(macsec_profile_name_t name) :
       name_(name), primary_key_(), fallback_key_(), key_server_priority_(16),
       rekey_period_(0), cipher_(GCM_AES_XPN_128), dot1x_(false),
-      include_sci_(false) {
+      include_sci_(false), bypass_lldp_(false), allow_unprotected_(false),
+      replay_protection_(true), replay_protection_window_(0) {
 }
 
 inline macsec_profile_name_t
@@ -220,6 +223,46 @@ macsec_profile_t::include_sci_is(bool include_sci) {
 }
 
 inline bool
+macsec_profile_t::bypass_lldp() const {
+   return bypass_lldp_;
+}
+
+inline void
+macsec_profile_t::bypass_lldp_is(bool bypass_lldp) {
+   bypass_lldp_ = bypass_lldp;
+}
+
+inline bool
+macsec_profile_t::allow_unprotected() const {
+   return allow_unprotected_;
+}
+
+inline void
+macsec_profile_t::allow_unprotected_is(bool allow_unprotected) {
+   allow_unprotected_ = allow_unprotected;
+}
+
+inline bool
+macsec_profile_t::replay_protection() const {
+   return replay_protection_;
+}
+
+inline void
+macsec_profile_t::replay_protection_is(bool replay_protection) {
+   replay_protection_ = replay_protection;
+}
+
+inline uint32_t
+macsec_profile_t::replay_protection_window() const {
+   return replay_protection_window_;
+}
+
+inline void
+macsec_profile_t::replay_protection_window_is(uint32_t replay_protection_window) {
+   replay_protection_window_ = replay_protection_window;
+}
+
+inline bool
 macsec_profile_t::operator==(macsec_profile_t const & other) const {
    return name_ == other.name_ &&
           primary_key_ == other.primary_key_ &&
@@ -228,7 +271,11 @@ macsec_profile_t::operator==(macsec_profile_t const & other) const {
           rekey_period_ == other.rekey_period_ &&
           cipher_ == other.cipher_ &&
           dot1x_ == other.dot1x_ &&
-          include_sci_ == other.include_sci_;
+          include_sci_ == other.include_sci_ &&
+          bypass_lldp_ == other.bypass_lldp_ &&
+          allow_unprotected_ == other.allow_unprotected_ &&
+          replay_protection_ == other.replay_protection_ &&
+          replay_protection_window_ == other.replay_protection_window_;
 }
 
 inline bool
@@ -254,6 +301,14 @@ macsec_profile_t::operator<(macsec_profile_t const & other) const {
       return dot1x_ < other.dot1x_;
    } else if(include_sci_ != other.include_sci_) {
       return include_sci_ < other.include_sci_;
+   } else if(bypass_lldp_ != other.bypass_lldp_) {
+      return bypass_lldp_ < other.bypass_lldp_;
+   } else if(allow_unprotected_ != other.allow_unprotected_) {
+      return allow_unprotected_ < other.allow_unprotected_;
+   } else if(replay_protection_ != other.replay_protection_) {
+      return replay_protection_ < other.replay_protection_;
+   } else if(replay_protection_window_ != other.replay_protection_window_) {
+      return replay_protection_window_ < other.replay_protection_window_;
    }
    return false;
 }
@@ -277,6 +332,14 @@ macsec_profile_t::hash() const {
               sizeof(bool), ret);
    ret = hash_mix::mix((uint8_t *)&include_sci_,
               sizeof(bool), ret);
+   ret = hash_mix::mix((uint8_t *)&bypass_lldp_,
+              sizeof(bool), ret);
+   ret = hash_mix::mix((uint8_t *)&allow_unprotected_,
+              sizeof(bool), ret);
+   ret = hash_mix::mix((uint8_t *)&replay_protection_,
+              sizeof(bool), ret);
+   ret = hash_mix::mix((uint8_t *)&replay_protection_window_,
+              sizeof(uint32_t), ret);
    ret = hash_mix::final_mix(ret);
    return ret;
 }
@@ -293,6 +356,10 @@ macsec_profile_t::to_string() const {
    ss << ", cipher=" << cipher_;
    ss << ", dot1x=" << dot1x_;
    ss << ", include_sci=" << include_sci_;
+   ss << ", bypass_lldp=" << bypass_lldp_;
+   ss << ", allow_unprotected=" << allow_unprotected_;
+   ss << ", replay_protection=" << replay_protection_;
+   ss << ", replay_protection_window=" << replay_protection_window_;
    ss << ")";
    return ss.str();
 }
