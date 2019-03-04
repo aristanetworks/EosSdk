@@ -5,9 +5,13 @@ unset DISPLAY
 CFLAGS='-Os -g -pipe -Wall -Wp,-D_FORTIFY_SOURCE=2 -fexceptions -fstack-protector --param=ssp-buffer-size=4 -Wno-unused -Wno-uninitialized -fasynchronous-unwind-tables'
 CFLAGS_32B='-m32 -march=i686 -mtune=atom'
 export CFLAGS
+CXXFLAGS=$CFLAGS
+export CXXFLAGS
+CXXFLAGS_32B="-m32"
+LDFLAGS_32B="-m32"
+export LDFLAGS
 
 target_32b=true
-configure_flags=
 
 # Extract the arguments that we need to forward to `./configure'.
 # Other arguments will be passed to `make'.  This is so that one can
@@ -24,6 +28,10 @@ for arg; do
          target_32b=false
          shift
          ;;
+      (-m32|--m32)
+         target_32b=true
+         shift
+         ;;
       (-force|--force)
          rm -f Makefile
          shift
@@ -33,10 +41,10 @@ done
 
 if $target_32b; then
    CFLAGS="$CFLAGS $CFLAGS_32B"
-   configure_flags='--build=i686-pc-linux-gnu --host=i686-pc-linux-gnu'
+   CXXFLAGS="$CXXFLAGS $CXXFLAGS_32B"
+   LDFLAGS="$LDFLAGS $LDFLAGS_32B"
+   configure_flags='--host=x86_64-pc-linux-gnu'
 fi
-CXXFLAGS=$CFLAGS
-export CXXFLAGS
 
 sysroot=$($(which gcc) --print-sysroot) || sysroot = ""
 [ $sysroot -a ${sysroot%fc14-gcc4.9.2-glibc2.19} != $sysroot ] && {
@@ -46,7 +54,7 @@ sysroot=$($(which gcc) --print-sysroot) || sysroot = ""
 
 set -e
 test -f configure || ./bootstrap
-test -f Makefile || ./configure $configure_flags \
+test -f Makefile || ./configure  \
    $configure_flags --program-prefix= \
    --prefix=$sysroot/usr
 exec make "$@"
