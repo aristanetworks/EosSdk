@@ -1,4 +1,4 @@
-// Copyright (c) 2017 Arista Networks, Inc.  All rights reserved.
+// Copyright (c) 2019 Arista Networks, Inc.  All rights reserved.
 // Arista Networks, Inc. Confidential and Proprietary.
 
 #ifndef EOS_TYPES_NEXTHOP_GROUP_H
@@ -251,6 +251,16 @@ class EOS_SDK_PUBLIC nexthop_group_t {
    /** Deletes the key/value pair from the map. */
    void destination_ip_del(uint16_t key);
 
+   /**
+    * Getter for 'counters_unshared': Defines whether entry counters are unshared
+    * for the nexthop group. When set, do not share counter values between entries
+    * that share the same tunnel destination. Each entry will have its own unique
+    * counter. Disabled (i.e. set to false) by default.
+    */
+   bool counters_unshared() const;
+   /** Setter for 'counters_unshared'. */
+   void counters_unshared_is(bool counters_unshared);
+
    bool operator==(nexthop_group_t const & other) const;
    bool operator!=(nexthop_group_t const & other) const;
    bool operator<(nexthop_group_t const & other) const;
@@ -274,6 +284,7 @@ class EOS_SDK_PUBLIC nexthop_group_t {
    bool autosize_;
    std::map<uint16_t, nexthop_group_entry_t> nexthops_;
    std::map<uint16_t, ip_addr_t> destination_ips_;
+   bool counters_unshared_;
 };
 }
 
