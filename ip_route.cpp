@@ -83,7 +83,7 @@ class ip_route_mgr_impl : public ip_route_mgr {
                      std::string vrfName) {
       // TODO: No op impl.
    }
- 
+
    void ip_route_del(ip_route_key_t const &,
                      std::string vrfName) {
       // TODO: No op impl.
