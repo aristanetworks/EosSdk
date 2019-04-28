@@ -67,6 +67,7 @@ enum fib_route_type_t {
    ROUTE_TYPE_BGP,
    ROUTE_TYPE_IBGP,
    ROUTE_TYPE_EBGP,
+   ROUTE_TYPE_LBGP,
    /** Unused in EOS 4.15.1, use ROUTE_TYPE_ISIS_LEVEL1/2 instead. */
    ROUTE_TYPE_ISIS,
    ROUTE_TYPE_ISIS_LEVEL1,

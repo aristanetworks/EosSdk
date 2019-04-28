@@ -105,6 +105,8 @@ operator<<(std::ostream& os, const fib_route_type_t & enum_val) {
       os << "ROUTE_TYPE_IBGP";
    } else if (enum_val==ROUTE_TYPE_EBGP) {
       os << "ROUTE_TYPE_EBGP";
+   } else if (enum_val==ROUTE_TYPE_LBGP) {
+      os << "ROUTE_TYPE_LBGP";
    } else if (enum_val==ROUTE_TYPE_ISIS) {
       os << "ROUTE_TYPE_ISIS";
    } else if (enum_val==ROUTE_TYPE_ISIS_LEVEL1) {

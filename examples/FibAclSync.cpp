@@ -57,6 +57,7 @@ static const uint32_t ACL_SEQ_INCR = 10;
 static const std::string ROUTE_TYPE_BGP = "bgp";
 static const std::string ROUTE_TYPE_IBGP = "ibgp";
 static const std::string ROUTE_TYPE_EBGP = "ebgp";
+static const std::string ROUTE_TYPE_LBGP = "lbgp";
 static const std::string ROUTE_TYPE_BGP_AGGREGATE = "bgp_aggregate";
 
 // Config options
@@ -312,6 +313,8 @@ class fib_acl_sync : public eos::agent_handler,
                   route_types.insert(eos::ROUTE_TYPE_IBGP);
                } else if (rtype == ROUTE_TYPE_EBGP) {
                   route_types.insert(eos::ROUTE_TYPE_EBGP);
+               } else if (rtype == ROUTE_TYPE_LBGP) {
+                  route_types.insert(eos::ROUTE_TYPE_LBGP);
                } else if (rtype == ROUTE_TYPE_BGP_AGGREGATE) {
                   route_types.insert(eos::ROUTE_TYPE_BGP_AGGREGATE);
                } else if (rtype == ROUTE_TYPE_STATIC_CONFIG ) {
@@ -537,6 +540,9 @@ class fib_acl_sync : public eos::agent_handler,
                break;
             case eos::ROUTE_TYPE_EBGP:
                route_types_str.append(ROUTE_TYPE_EBGP);
+               break;
+            case eos::ROUTE_TYPE_LBGP:
+               route_types_str.append(ROUTE_TYPE_LBGP);
                break;
             case eos::ROUTE_TYPE_BGP_AGGREGATE:
                route_types_str.append(ROUTE_TYPE_BGP_AGGREGATE);
