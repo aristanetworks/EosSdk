@@ -1,4 +1,4 @@
-// Copyright (c) 2017 Arista Networks, Inc.  All rights reserved.
+// Copyright (c) 2019 Arista Networks, Inc.  All rights reserved.
 // Arista Networks, Inc. Confidential and Proprietary.
 
 #ifndef EOS_INLINE_TYPES_MPLS_ROUTE_H
@@ -7,22 +7,45 @@
 namespace eos {
 
 inline mpls_route_key_t::mpls_route_key_t() :
-      top_label_(0), metric_(0) {
+      labels_(std::vector< mpls_label_t >{0}), metric_(0) {
 }
 
 inline mpls_route_key_t::mpls_route_key_t(mpls_label_t top_label,
                                           mpls_route_metric_t metric) :
-      top_label_(top_label), metric_(metric) {
+      labels_(std::vector< mpls_label_t >{top_label}), metric_(metric) {
+   if (top_label.label() > (uint32_t)mpls_label_t::MAX) {
+      panic(invalid_mpls_label(top_label.label()));
+   }
 }
 
-inline mpls_label_t
-mpls_route_key_t::top_label() const {
-   return top_label_;
+inline mpls_route_key_t::mpls_route_key_t(std::vector<mpls_label_t> const & labels,
+                                          mpls_route_metric_t metric) :
+      labels_(labels), metric_(metric) {
+   for (auto label: labels) {
+      if (label.label() > (uint32_t)mpls_label_t::MAX) {
+         panic(invalid_mpls_label(label.label()));
+      }
+   }
+}
+
+inline std::vector<mpls_label_t> const &
+mpls_route_key_t::labels() const {
+   return labels_;
 }
 
 inline void
-mpls_route_key_t::top_label_is(mpls_label_t top_label) {
-   top_label_ = top_label;
+mpls_route_key_t::labels_is(std::vector<mpls_label_t> const & labels) {
+   labels_ = labels;
+}
+
+inline void
+mpls_route_key_t::label_set(uint32_t index, mpls_label_t const & value) {
+   labels_.insert(labels_.begin() + index, value);
+}
+
+inline void
+mpls_route_key_t::label_del(uint32_t index) {
+   labels_.erase(labels_.begin() + index);
 }
 
 inline mpls_route_metric_t
@@ -35,9 +58,27 @@ mpls_route_key_t::metric_is(mpls_route_metric_t metric) {
    metric_ = metric;
 }
 
+inline mpls_label_t
+mpls_route_key_t::top_label() const {
+
+   if (labels_.empty()) {
+      return mpls_label_t();
+   } else {
+      return labels_.front();
+   }
+
+}
+
+inline void
+mpls_route_key_t::top_label_is(mpls_label_t top_label) {
+
+   labels_ = std::vector< mpls_label_t > { top_label };
+
+}
+
 inline bool
 mpls_route_key_t::operator==(mpls_route_key_t const & other) const {
-   return top_label_ == other.top_label_ &&
+   return labels_ == other.labels_ &&
           metric_ == other.metric_;
 }
 
@@ -46,11 +87,23 @@ mpls_route_key_t::operator!=(mpls_route_key_t const & other) const {
    return !operator==(other);
 }
 
+inline bool
+mpls_route_key_t::operator<(mpls_route_key_t const & other) const {
+   if(labels_ != other.labels_) {
+      return labels_ < other.labels_;
+   } else if(metric_ != other.metric_) {
+      return metric_ < other.metric_;
+   }
+   return false;
+}
+
 inline uint32_t
 mpls_route_key_t::hash() const {
    uint32_t ret = 0;
-   ret = hash_mix::mix((uint8_t *)&top_label_,
-              sizeof(mpls_label_t), ret);
+   for (auto it=labels_.cbegin(); it!=labels_.cend(); ++it) {
+      ret = hash_mix::mix((uint8_t *)&(*it),
+            sizeof(mpls_label_t), ret);
+   }
    ret = hash_mix::mix((uint8_t *)&metric_,
               sizeof(mpls_route_metric_t), ret);
    ret = hash_mix::final_mix(ret);
@@ -61,7 +114,17 @@ inline std::string
 mpls_route_key_t::to_string() const {
    std::ostringstream ss;
    ss << "mpls_route_key_t(";
-   ss << "top_label=" << top_label_;
+   ss << "labels=" <<"'";
+   bool first_labels = true;
+   for (auto it=labels_.cbegin(); it!=labels_.cend(); ++it) {
+      if (first_labels) {
+         ss << (*it);
+         first_labels = false;
+      } else {
+         ss << "," << (*it);
+      }
+   }
+   ss << "'";
    ss << ", metric=" << metric_;
    ss << ")";
    return ss.str();

@@ -1,4 +1,4 @@
-// Copyright (c) 2016 Arista Networks, Inc.  All rights reserved.
+// Copyright (c) 2019 Arista Networks, Inc.  All rights reserved.
 // Arista Networks, Inc. Confidential and Proprietary.
 
 #ifndef EOS_INLINE_TYPES_MPLS_H
@@ -70,6 +70,9 @@ operator<<(std::ostream& os, const mpls_payload_type_t & enum_val) {
 
 inline mpls_label_t::mpls_label_t(uint32_t label) :
       label_(label) {
+   if (label > INVALID) {
+      panic(invalid_mpls_label(label));
+   }
 }
 
 inline uint32_t
@@ -79,7 +82,7 @@ mpls_label_t::label() const {
 
 inline void
 mpls_label_t::label_is(uint32_t label) {
-   if (label >= MAX) {
+   if (label > INVALID) {
       panic(invalid_mpls_label(label));
    }
    label_ = label;

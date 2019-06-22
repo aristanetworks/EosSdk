@@ -1,4 +1,4 @@
-// Copyright (c) 2017 Arista Networks, Inc.  All rights reserved.
+// Copyright (c) 2019 Arista Networks, Inc.  All rights reserved.
 // Arista Networks, Inc. Confidential and Proprietary.
 
 #ifndef EOS_TYPES_MPLS_H
@@ -71,6 +71,8 @@ class EOS_SDK_PUBLIC mpls_label_t {
       MIN,
       /** 1048575. */
       MAX = 0xfffff,
+      /** 1048576. */
+      INVALID = 0x100000,
    };
    bool operator!() const;
    bool operator==(mpls_label_t const & other) const;

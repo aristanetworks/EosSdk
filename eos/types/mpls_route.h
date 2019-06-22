@@ -1,4 +1,4 @@
-// Copyright (c) 2017 Arista Networks, Inc.  All rights reserved.
+// Copyright (c) 2019 Arista Networks, Inc.  All rights reserved.
 // Arista Networks, Inc. Confidential and Proprietary.
 
 #ifndef EOS_TYPES_MPLS_ROUTE_H
@@ -10,6 +10,7 @@
 #include <eos/mpls.h>
 #include <eos/utility.h>
 #include <sstream>
+#include <vector>
 
 namespace eos {
 
@@ -27,14 +28,26 @@ class EOS_SDK_PUBLIC mpls_route_key_t {
     * 0, the routing agent will assume a default metric value of 100.
     */
    mpls_route_key_t(mpls_label_t top_label, mpls_route_metric_t metric);
+   /**
+    * Constructor taking a list of ingress MPLS route labels and a metric.
+    * @param const std::vector<mpls_label_t> The MPLS labels to match on ingress
+    * for this route.
+    * @param mpls_route_metric_t A metric value between 0 and 255. If it is set to
+    * 0, the routing agent will assume a default metric value of 100.
+    */
+   mpls_route_key_t(std::vector<mpls_label_t> const & labels,
+                    mpls_route_metric_t metric);
 
    /**
-    * Getter for 'top_label': the label to match on ingress route lookup.
+    * Getter for 'labels': a list of labels ( [ TOP, ..., BOT ] ) to match on
+    * ingress route lookup.
     * 0 is the null metric; valid MPLS routes must have a metric in range 1..255.
     */
-   mpls_label_t top_label() const;
-   /** Setter for 'top_label'. */
-   void top_label_is(mpls_label_t top_label);
+   std::vector<mpls_label_t> const & labels() const;
+   /** Setter for 'labels'. */
+   void labels_is(std::vector<mpls_label_t> const & labels);
+   void label_set(uint32_t index, mpls_label_t const & value);
+   void label_del(uint32_t index);
 
    /**
     * Getter for 'metric': the MPLS route metric. Lower metric routes are
@@ -44,8 +57,19 @@ class EOS_SDK_PUBLIC mpls_route_key_t {
    /** Setter for 'metric'. */
    void metric_is(mpls_route_metric_t metric);
 
+   /**
+    * Getter for the label to match on ingress route lookup. This API exists for
+    * legacy reasons, from when only one label could be matched.
+    */
+   mpls_label_t top_label() const;
+   /**
+    * Replaces the label stack with a new vector only containing the given
+    * top_label.
+    */
+   void top_label_is(mpls_label_t top_label);
    bool operator==(mpls_route_key_t const & other) const;
    bool operator!=(mpls_route_key_t const & other) const;
+   bool operator<(mpls_route_key_t const & other) const;
    /** The hash function for type mpls_route_key_t. */
    uint32_t hash() const;
    /** Returns a string representation of the current object's values. */
@@ -57,7 +81,7 @@ class EOS_SDK_PUBLIC mpls_route_key_t {
    friend std::ostream& operator<<(std::ostream& os, const mpls_route_key_t& obj);
 
  private:
-   mpls_label_t top_label_;
+   std::vector<mpls_label_t> labels_;
    mpls_route_metric_t metric_;
 };
 
