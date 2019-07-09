@@ -1,0 +1,13 @@
+**ip**
+------
+
+
+.. doxygenfile:: eos/ip.h
+   :project: eossdk
+
+Type definitions in **ip**
+^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. doxygenfile:: eos/types/ip.h
+   :project: eossdk
+
