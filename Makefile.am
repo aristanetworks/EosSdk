@@ -10,6 +10,12 @@ nobase_include_HEADERS = $(PUBLISHED_HEADER_FILES)
 EXTRA_DIST = MaybePrintProfilesAndExit.cpp $(wildcard examples/*) $(wildcard examples/test/*)
 EXTRA_DIST += GetAgentProcessName.cpp
 
+if SHIPPING
+SHIPPING_FLAG=-DSHIPPING
+else
+SHIPPING_FLAG=
+endif
+
 libeos_la_SOURCES =
 libeos_la_SOURCES += agent.cpp
 libeos_la_SOURCES += acl.cpp
@@ -59,6 +65,7 @@ libeos_la_SOURCES += bfd.cpp
 libeos_la_SOURCES += lldp.cpp
 libeos_la_SOURCES += nexthop_group_tunnel.cpp
 
+libeos_la_CPPFLAGS = $(AM_CPPFLAGS) $(SHIPPING_FLAG)
 libeos_la_LDFLAGS = -version-info $(SDK_LIBTOOL_VERSION) -lrt
 libeos_la_LDFLAGS += -soname libeos.so.$(SDK_VERSION_MAJOR).$(SDK_VERSION_MINOR)
 

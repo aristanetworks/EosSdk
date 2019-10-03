@@ -295,7 +295,7 @@ class fib_acl_sync : public eos::agent_handler,
             // Clear existing route_types configuration.
             route_types.clear();
 
-            // Need to make a copy since strtok() expects a
+            // Need to make a copy since strtok_r() expects a
             // writable string.
             char rtypes[ROUTE_TYPES_OPTIONS_VALUE_MAX];
             strncpy( rtypes, value.c_str(), sizeof( rtypes));
@@ -304,7 +304,8 @@ class fib_acl_sync : public eos::agent_handler,
             rtypes[ROUTE_TYPES_OPTIONS_VALUE_MAX-1] = '\0';
 
             // Process all the route types configured.
-            char *rtype = strtok(rtypes, ", \t");
+            char* strtok_ctx;
+            char *rtype = strtok_r(rtypes, ", \t", &strtok_ctx);
             while(rtype) {
                t.trace0("%s: rtype=%s", __FUNCTION__, rtype);
                if (rtype == ROUTE_TYPE_BGP) {
@@ -320,7 +321,7 @@ class fib_acl_sync : public eos::agent_handler,
                } else if (rtype == ROUTE_TYPE_STATIC_CONFIG ) {
                   route_types.insert(eos::ROUTE_TYPE_STATIC_CONFIG);
                }
-               rtype = strtok(NULL, ", \t");
+               rtype = strtok_r(NULL, ", \t", &strtok_ctx);
             }
 
             // If no valid route type is found assume static type.

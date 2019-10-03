@@ -31,6 +31,10 @@ if test "x$eossdk_cv_unordered_set_eq" != xyes; then
  check config.log for more details])
 fi
 
+AC_MSG_CHECKING(SHIPPING)
+AM_CONDITIONAL(SHIPPING, test "${SHIPPING:-0}" != 0)
+AM_COND_IF(SHIPPING,AC_MSG_RESULT(yes),AC_MSG_RESULT(no))
+
 AC_ARG_ENABLE([python],
               [AS_HELP_STRING([--enable-python],
                               [compile Python bindings])],

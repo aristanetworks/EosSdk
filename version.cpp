@@ -10,10 +10,18 @@ const char * const version = PACKAGE_VERSION "-stubs";
 const uint8_t version_major = SDK_VERSION_MAJOR;
 const uint8_t version_minor = SDK_VERSION_MINOR;
 const uint8_t version_patch = SDK_VERSION_PATCH;
+#if SHIPPING
 const char * const build_project = SDK_BUILD_PROJECT;
 const char * const build_user = SDK_BUILD_USER;
 const char * const build_path = SDK_BUILD_PATH;
 const uint32_t build_cl = SDK_BUILD_PROJECT_CL;
 const uint64_t build_timestamp = SDK_BUILD_TIMESTAMP;
+#else
+const char * const build_project = "anonymous-dev-build";
+const char * const build_user = "anonymous-dev-user";
+const char * const build_path = "anonymous-dev-path";
+const uint32_t build_cl = 0;
+const uint64_t build_timestamp = 0l;
+#endif
 
 }

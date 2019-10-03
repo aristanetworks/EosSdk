@@ -95,6 +95,12 @@ class EOS_SDK_PUBLIC nexthop_group_handler :
    /// Handler called when the active status of a nexthop_group changes
    virtual void on_nexthop_group_active(std::string const & nexthop_group_name,
                                         bool active);
+
+   /**
+    * Handler called when the nexthop_group is programmed in response to a
+    * configuration change.
+    */
+   virtual void on_nexthop_group_programmed(std::string const & nexthop_group_name);
 };
 
 class nexthop_group_iter_impl;

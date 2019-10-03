@@ -73,4 +73,9 @@ nexthop_group_handler::on_nexthop_group_active(std::string const & group_name,
    // TODO: No op impl.
 }
 
+void
+nexthop_group_handler::on_nexthop_group_programmed(std::string const & group_name) {
+   // TODO: No op impl.
+}
+
 }
