@@ -245,6 +245,7 @@ void throw_py_error(error const& err) {
 %template() std::map<eos::lldp_tlv_type_t, std::string>;
 %template() std::list<eos::lldp_management_address_t>;
 %template() std::vector<std::string>;
+%template() std::vector<eos::mpls_label_t>;
 
 // For vlan_set_t
 %template(_BitSet4096) std::bitset<4096>;
@@ -306,6 +307,7 @@ wrap_iterator(eos::nexthop_group_tunnel_iter_t, eos::nexthop_group_tunnel_iter_i
 wrap_iterator(eos::policy_map_iter_t, eos::policy_map_iter_impl, eos::policy_map_key_t);
 wrap_iterator(eos::subintf_iter_t, eos::subintf_iter_impl, eos::intf_id_t);
 wrap_iterator(eos::vrf_iter_t, eos::vrf_iter_impl, std::string);
+wrap_iterator(eos::programmed_nexthop_group_iter_t, eos::programmed_nexthop_group_iter_impl, std::string);
 
 // Make managers themselves iterable, when it makes sense:
 default_iterator(eos::directflow_mgr, flow_entry_iter);

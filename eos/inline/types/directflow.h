@@ -735,6 +735,8 @@ operator<<(std::ostream& os, const flow_status_t & enum_val) {
       os << "FLOW_PENDING";
    } else if (enum_val==FLOW_HW_TABLE_PENDING) {
       os << "FLOW_HW_TABLE_PENDING";
+   } else if (enum_val==FLOW_REQUEST_ACCEPTED) {
+      os << "FLOW_REQUEST_ACCEPTED";
    } else {
       os << "Unknown value";
    }
@@ -757,8 +759,6 @@ operator<<(std::ostream& os, const flow_rejected_reason_t & enum_val) {
       os << "FLOW_REJECTED_ACTIONS_UNSUPPORTED";
    } else if (enum_val==FLOW_REJECTED_TIMEOUT_NOT_SUPPORTED) {
       os << "FLOW_REJECTED_TIMEOUT_NOT_SUPPORTED";
-   } else if (enum_val==FLOW_HW_TABLE_FAILED) {
-      os << "FLOW_HW_TABLE_FAILED";
    } else {
       os << "Unknown value";
    }

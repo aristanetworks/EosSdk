@@ -142,5 +142,6 @@ INSTANTIATE_ITERATOR(lldp_remote_system_t, lldp_remote_system_iter_impl);
 INSTANTIATE_ITERATOR(intf_id_t, lldp_intf_iter_impl);
 INSTANTIATE_ITERATOR(lldp_neighbor_t, lldp_neighbor_iter_impl);
 INSTANTIATE_ITERATOR(nexthop_group_tunnel_t, nexthop_group_tunnel_iter_impl);
+INSTANTIATE_ITERATOR(std::string, programmed_nexthop_group_iter_impl);
 
 }

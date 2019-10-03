@@ -33,6 +33,8 @@ enum bfd_session_type_t {
    BFD_SESSION_TYPE_LAGRFC7130,
    BFD_SESSION_TYPE_MICRORFC7130,
    BFD_SESSION_TYPE_MULTIHOP,
+   BFD_SESSION_TYPE_SBFD_INITIATOR,
+   BFD_SESSION_TYPE_SBFD_REFLECTOR,
 };
 /**
  * Appends a string representation of enum bfd_session_type_t value to the ostream.

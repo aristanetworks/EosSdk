@@ -363,6 +363,8 @@ enum flow_status_t {
    FLOW_PENDING,
    /** Flow request submitted for tcam resource entry. */
    FLOW_HW_TABLE_PENDING,
+   /** Flow request accepted. */
+   FLOW_REQUEST_ACCEPTED,
 };
 /** Appends a string representation of enum flow_status_t value to the ostream. */
 std::ostream& operator<<(std::ostream& os, const flow_status_t & enum_val);
@@ -381,8 +383,6 @@ enum flow_rejected_reason_t {
    FLOW_REJECTED_ACTIONS_UNSUPPORTED,
    /** Flow not created due to unsupported timeouts set. */
    FLOW_REJECTED_TIMEOUT_NOT_SUPPORTED,
-   /** Flow not created since could not allocate tcamresource entry. */
-   FLOW_HW_TABLE_FAILED,
 };
 /**
  * Appends a string representation of enum flow_rejected_reason_t value to the

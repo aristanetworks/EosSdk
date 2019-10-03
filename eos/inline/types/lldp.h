@@ -1,4 +1,4 @@
-// Copyright (c) 2016 Arista Networks, Inc.  All rights reserved.
+// Copyright (c) 2019 Arista Networks, Inc.  All rights reserved.
 // Arista Networks, Inc. Confidential and Proprietary.
 
 #ifndef EOS_INLINE_TYPES_LLDP_H
@@ -390,6 +390,21 @@ lldp_management_address_t::snmp_ifindex() const {
 inline std::string
 lldp_management_address_t::oid() const {
    return oid_;
+}
+
+inline bool
+lldp_management_address_t::operator<(lldp_management_address_t const & other)
+       const {
+   if(address_family_ != other.address_family_) {
+      return address_family_ < other.address_family_;
+   } else if(address_ != other.address_) {
+      return address_ < other.address_;
+   } else if(snmp_ifindex_ != other.snmp_ifindex_) {
+      return snmp_ifindex_ < other.snmp_ifindex_;
+   } else if(oid_ != other.oid_) {
+      return oid_ < other.oid_;
+   }
+   return false;
 }
 
 inline uint32_t

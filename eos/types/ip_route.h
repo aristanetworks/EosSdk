@@ -1,4 +1,4 @@
-// Copyright (c) 2018 Arista Networks, Inc.  All rights reserved.
+// Copyright (c) 2019 Arista Networks, Inc.  All rights reserved.
 // Arista Networks, Inc. Confidential and Proprietary.
 
 #ifndef EOS_TYPES_IP_ROUTE_H
@@ -173,6 +173,11 @@ class EOS_SDK_PUBLIC ip_route_via_t {
    /** Setter for 'router_mac'. */
    void router_mac_is(eth_addr_t router_mac);
 
+   /** Getter for 'egress_vrf': VRF name in which nexthop IP address is. */
+   std::string egress_vrf() const;
+   /** Setter for 'egress_vrf'. */
+   void egress_vrf_is(std::string const & egress_vrf);
+
    bool operator==(ip_route_via_t const & other) const;
    bool operator!=(ip_route_via_t const & other) const;
    /** The hash function for type ip_route_via_t. */
@@ -194,6 +199,7 @@ class EOS_SDK_PUBLIC ip_route_via_t {
    vni_t vni_;
    ip_addr_t vtep_addr_;
    eth_addr_t router_mac_;
+   std::string egress_vrf_;
 };
 }
 
