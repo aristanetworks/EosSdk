@@ -1,0 +1,10 @@
+--- eossdk.go	2019-03-05 13:25:33.982085134 -0800
++++ eossdk.go	2019-03-05 13:29:10.390894707 -0800
+@@ -2511,6 +2511,7 @@
+ extern uintptr_t _wrap_ClassMapMgr_class_map_iter_eossdk_184315817a81a75b(uintptr_t arg1, swig_intgo arg2);
+ extern void _wrap_ClassMapMgr_class_map_del_eossdk_184315817a81a75b(uintptr_t arg1, uintptr_t arg2);
+ #undef intgo
++#cgo LDFLAGS: -leos
+ */
+ import "C"
+ 
