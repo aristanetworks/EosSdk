@@ -325,6 +325,21 @@ inline nexthop_group_t::nexthop_group_t(std::string name,
       destination_ips_(), counters_unshared_() {
 }
 
+inline nexthop_group_t::nexthop_group_t(std::string name,
+                                        ip_addr_t const & source_ip) :
+      name_(name), type_(), gre_key_type_(), ttl_(), source_ip_(source_ip),
+      source_intf_(), autosize_(), nexthops_(), destination_ips_(),
+      counters_unshared_() {
+}
+
+inline nexthop_group_t::nexthop_group_t(
+         std::string name, ip_addr_t const & source_ip,
+         std::map<uint16_t, nexthop_group_entry_t> const & nexthops) :
+      name_(name), type_(), gre_key_type_(), ttl_(), source_ip_(source_ip),
+      source_intf_(), autosize_(), nexthops_(nexthops), destination_ips_(),
+      counters_unshared_() {
+}
+
 inline std::string
 nexthop_group_t::name() const {
    return name_;

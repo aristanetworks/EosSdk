@@ -186,6 +186,11 @@ class EOS_SDK_PUBLIC nexthop_group_mgr :
    // Iterate over all successfully programmed nexthop groups.
    virtual programmed_nexthop_group_iter_t
       programmed_nexthop_group_iter() const = 0;
+
+   // Returns the programmed nexthop group for a given nexthop group name.
+   virtual nexthop_group_t
+      programmed_nexthop_group(std::string const & nexthop_group_name)
+      const = 0;
  protected:
    nexthop_group_mgr() EOS_SDK_PRIVATE;
    friend class nexthop_group_handler;

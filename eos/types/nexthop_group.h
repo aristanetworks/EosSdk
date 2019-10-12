@@ -190,6 +190,9 @@ class EOS_SDK_PUBLIC nexthop_group_t {
    nexthop_group_t(std::string name, nexthop_group_encap_t type);
    nexthop_group_t(std::string name, nexthop_group_encap_t type,
                    nexthop_group_gre_key_t gre_key_type);
+   nexthop_group_t(std::string name, ip_addr_t const & source_ip);
+   nexthop_group_t(std::string name, ip_addr_t const & source_ip,
+                   std::map<uint16_t, nexthop_group_entry_t> const & nexthops);
 
    /** Getter for 'name': the unique name of the nexthop group. */
    std::string name() const;

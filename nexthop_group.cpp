@@ -54,6 +54,11 @@ class nexthop_group_mgr_impl : public nexthop_group_mgr {
       return *nop;  // TODO: No op impl.
    }
 
+   nexthop_group_t programmed_nexthop_group(
+         std::string const & nexthop_group_name) const {
+      return nexthop_group_t();
+   }
+
 };
 
 DEFINE_STUB_MGR_CTOR(nexthop_group_mgr);
