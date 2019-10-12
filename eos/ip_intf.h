@@ -113,6 +113,22 @@ class EOS_SDK_PUBLIC ip_intf_mgr : public base_mgr<ip_intf_handler, intf_id_t> {
     * @param ip_addr_mask_t The address to delete.
     */
    virtual void ip_addr_del(intf_id_t, ip_addr_mask_t const &) = 0;
+   
+   /**
+    * Whether IP address configuration for a given interface is replaced or
+    * merged with configuration from other agents.
+    * If false, configuration will be replaced by that of higher priority
+    * agents (such as the CLI). If true, configuration will be merged.
+    * Default is false.
+    * @param intf_id_t The interface ID of the interface to set the merge mode of.
+    * @param bool Whether or not IP address configuration should be merged
+    */
+    virtual void ip_addr_merge_mode_is(intf_id_t, bool) = 0;
+
+    /* Returns the IP address merge mode for a given interface.
+     * @param intf_id_t The interface ID of the interface to get the merge mode of.
+     */
+    virtual bool ip_addr_merge_mode(intf_id_t) const = 0;
 
    /**
     * Returns the internal VLAN ID related to a layer 3 interface.

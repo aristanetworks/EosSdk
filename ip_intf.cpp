@@ -54,6 +54,13 @@ class ip_intf_mgr_impl : public ip_intf_mgr {
    void ip_addr_del(intf_id_t, ip_addr_mask_t const &) {
    }
 
+   void ip_addr_merge_mode_is(intf_id_t, bool) {
+   }
+
+   bool ip_addr_merge_mode(intf_id_t) const {
+      return false;
+   }
+
    vlan_id_t internal_vlan_id(intf_id_t) const {
       return vlan_id_t(123);
    }
