@@ -57,4 +57,11 @@ test -f configure || ./bootstrap
 test -f Makefile || ./configure  \
    $configure_flags --program-prefix= \
    --prefix=$sysroot/usr
+
+set -x
+STUBS_DIR=$PWD
+GO_SRCDIR="$STUBS_DIR/go/src/eossdk"
+rm -f "$GO_SRCDIR/eos"
+ln -s "$STUBS_DIR/eos" "$GO_SRCDIR/"
+
 exec make "$@"

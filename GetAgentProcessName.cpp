@@ -1,5 +1,6 @@
 // Copyright (c) 2016 Arista Networks, Inc.  All rights reserved.
 // Arista Networks, Inc. Confidential and Proprietary.
+// +build ignore
 
 // Note: the AGENT_PROCESS_NAME scheme, outside of our test code, is completely
 // obsolete (users cannot set it).

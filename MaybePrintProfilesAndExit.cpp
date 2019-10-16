@@ -1,5 +1,6 @@
 // Copyright (c) 2014 Arista Networks, Inc.  All rights reserved.
 // Arista Networks, Inc. Confidential and Proprietary.
+// +build ignore
 
 // To facilitate the making of customized sysdb-mount-profiles (in place of the
 // brute-force one "EosSdk", see /usr/lib/SysdbMountProfiles/EosSdkAll), an app can

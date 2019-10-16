@@ -88,27 +88,49 @@ _eossdk_la_LDFLAGS = -avoid-version -module
 # Python version and GCC version, so we turn the problematic ones off here as
 # we build with -Werror:
 _eossdk_la_CXXFLAGS = $(AM_CXXFLAGS) -Wno-strict-aliasing -Wno-missing-field-initializers
-_eossdk_la_CXXFLAGS += -Wno-error=maybe-uninitialized
+_eossdk_la_CXXFLAGS += -Wno-error=maybe-uninitialized -Wno-error=unused-function
 _eossdk_la_CPPFLAGS = -I/usr/include/python$(PYTHON_VERSION)
 _eossdk_la_LIBADD = libeos.la
 
 $(srcdir)/eossdk_wrap.cpp: $(SWIG_FILES) $(nobase_include_HEADERS) $(srcdir)/eossdk_wrap.cpp
 	SRCDIR=$(srcdir) prefix [stubs-swig] $(SWIG) -threads -c++ -python -dirvtable -O -I$(srcdir) -o $@-t $(srcdir)/EosSdk.i
 	patch --batch --no-backup-if-mismatch -p0 <$(srcdir)/swig.patch
-	 mv $@-t $@
+	mv $@-t $@
 
 $(srcdir)/eossdk_wrap.h: $(srcdir)/eossdk_wrap.cpp
 
 $(srcdir)/eossdk.py: $(srcdir)/eossdk_wrap.cpp
 
+GO_SWIG_FILES := GoEosSdk.i Includes.i SwigRenamer.py
+
+stubsgosrcdir = $(srcdir)/go/src/eossdk
+$(srcdir)/eossdkgo_wrap.cpp: $(GO_SWIG_FILES) $(nobase_include_HEADERS)
+	SRCDIR=$(srcdir) prefix [stubs-swig] $(SWIG) -c++ -cgo -go -intgosize 32 -O -I$(srcdir) -o $@-go $(srcdir)/GoEosSdk.i
+	mv $(srcdir)/$@-go $@
+
+$(stubsgosrcdir)/eossdkgo_wrap.cpp: $(srcdir)/eossdkgo_wrap.cpp
+	$(MKDIR_P) $(stubsgosrcdir) && mv $< $@
+
+$(stubsgosrcdir)/eossdkgo_wrap.h: $(srcdir)/eossdkgo_wrap.cpp
+	$(MKDIR_P) $(stubsgosrcdir) && mv $(srcdir)/$(@F) $@
+	
+$(stubsgosrcdir)/eossdk.go: $(stubsgosrcdir)/eossdkgo_wrap.cpp
+	patch --batch --no-backup-if-mismatch -p0 <$(srcdir)/swig-go.patch
+	$(MKDIR_P) $(stubsgosrcdir) && mv $(srcdir)/$(@F) $@
+
 BUILT_SOURCES = $(_eossdk_la_SOURCES)
+
+GO_SRC_FILES = $(stubsgosrcdir)/eossdkgo_wrap.cpp $(stubsgosrcdir)/eossdkgo_wrap.h $(stubsgosrcdir)/eossdk.go
 MAINTAINERCLEANFILES = $(BUILT_SOURCES)
 endif
 
+
 ACLOCAL_AMFLAGS = -I autogen
-EXTRA_DIST += bootstrap build.sh $(SWIG_FILES)
+EXTRA_DIST += bootstrap build.sh $(SWIG_FILES) $(GO_SWIG_FILES)
 EXTRA_DIST += LICENSE
 EXTRA_DIST += ltmain.patch
+EXTRA_DIST += $(GO_SRC_FILES)
 
 dist-hook:
 	chmod -R u+w $(distdir)
+	$(MKDIR_P) $(srcdir)/$(stubsgosrcdir)

@@ -24,8 +24,8 @@ except ImportError:
 %include "typemaps.i"
 
 // Change all some_class_t names to just SomeClass:
- // The <<""< uses automatic string concatination to get around the
- // conflict marker limitation.
+// The <<""< uses automatic string concatination to get around the
+// conflict marker limitation.
 %rename("%(command:python $SRCDIR/SwigRenamer.py --classname <<""<)s", %$isclass) "";
 // Don't do anything for enum values, functions or variables.
 
