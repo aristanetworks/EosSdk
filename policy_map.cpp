@@ -89,9 +89,6 @@ class policy_map_mgr_impl : public policy_map_mgr {
    void policy_map_apply(policy_map_key_t const &, intf_id_t,
                          acl_direction_t, bool apply) {
    }
-
-   void handleInputConfig(std::string const & name) const {
-   }
 };
 
 DEFINE_STUB_MGR_CTOR(policy_map_mgr)
