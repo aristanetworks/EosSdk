@@ -1,4 +1,4 @@
-// Copyright (c) 2020 Arista Networks, Inc.  All rights reserved.
+// Copyright (c) 2019 Arista Networks, Inc.  All rights reserved.
 // Arista Networks, Inc. Confidential and Proprietary.
 
 #ifndef EOS_INLINE_TYPES_BGP_PATH_H
@@ -159,6 +159,84 @@ operator<<(std::ostream& os, const bgp_path_options_t& obj) {
 
 
 
+inline bgp_community_list_t::bgp_community_list_t() :
+      community_list_() {
+}
+
+inline bgp_community_list_t::bgp_community_list_t(
+         std::unordered_set<uint32_t> const & community_list) :
+      community_list_(community_list) {
+}
+
+inline std::unordered_set<uint32_t> const &
+bgp_community_list_t::community_list() const {
+   return community_list_;
+}
+
+inline void
+bgp_community_list_t::community_list_is(
+         std::unordered_set<uint32_t> const & community_list) {
+   community_list_ = community_list;
+}
+
+inline void
+bgp_community_list_t::community_list_set(uint32_t const & value) {
+   community_list_.insert(value);
+}
+
+inline void
+bgp_community_list_t::community_list_del(uint32_t const & value) {
+   community_list_.erase(value);
+}
+
+inline bool
+bgp_community_list_t::operator==(bgp_community_list_t const & other) const {
+   return community_list_ == other.community_list_;
+}
+
+inline bool
+bgp_community_list_t::operator!=(bgp_community_list_t const & other) const {
+   return !operator==(other);
+}
+
+inline uint32_t
+bgp_community_list_t::hash() const {
+   uint32_t ret = 0;
+   for (auto it=community_list_.cbegin(); it!=community_list_.cend(); ++it) {
+      ret = hash_mix::mix((uint8_t *)&(*it),
+            sizeof(uint32_t), ret);
+   }
+   ret = hash_mix::final_mix(ret);
+   return ret;
+}
+
+inline std::string
+bgp_community_list_t::to_string() const {
+   std::ostringstream ss;
+   ss << "bgp_community_list_t(";
+   ss << "community_list=" <<"'";
+   bool first_community_list = true;
+   for (auto it=community_list_.cbegin(); it!=community_list_.cend(); ++it) {
+      if (first_community_list) {
+         ss << (*it);
+         first_community_list = false;
+      } else {
+         ss << "," << (*it);
+      }
+   }
+   ss << "'";
+   ss << ")";
+   return ss.str();
+}
+
+inline std::ostream&
+operator<<(std::ostream& os, const bgp_community_list_t& obj) {
+   os << obj.to_string();
+   return os;
+}
+
+
+
 inline bgp_path_attr_t::bgp_path_attr_t() :
       next_hop_(), origin_(), med_(), local_pref_(), community_list_() {
 }
@@ -209,25 +287,14 @@ bgp_path_attr_t::local_pref_is(uint32_t local_pref) {
    local_pref_ = local_pref;
 }
 
-inline std::unordered_set<uint32_t> const &
+inline bgp_community_list_t
 bgp_path_attr_t::community_list() const {
    return community_list_;
 }
 
 inline void
-bgp_path_attr_t::community_list_is(
-         std::unordered_set<uint32_t> const & community_list) {
+bgp_path_attr_t::community_list_is(bgp_community_list_t const & community_list) {
    community_list_ = community_list;
-}
-
-inline void
-bgp_path_attr_t::community_list_set(uint32_t const & value) {
-   community_list_.insert(value);
-}
-
-inline void
-bgp_path_attr_t::community_list_del(uint32_t const & value) {
-   community_list_.erase(value);
 }
 
 inline bool
@@ -255,10 +322,8 @@ bgp_path_attr_t::hash() const {
               sizeof(uint32_t), ret);
    ret = hash_mix::mix((uint8_t *)&local_pref_,
               sizeof(uint32_t), ret);
-   for (auto it=community_list_.cbegin(); it!=community_list_.cend(); ++it) {
-      ret = hash_mix::mix((uint8_t *)&(*it),
-            sizeof(uint32_t), ret);
-   }
+   ret = hash_mix::mix((uint8_t *)&community_list_,
+              sizeof(bgp_community_list_t), ret);
    ret = hash_mix::final_mix(ret);
    return ret;
 }
@@ -271,17 +336,7 @@ bgp_path_attr_t::to_string() const {
    ss << ", origin=" << origin_;
    ss << ", med=" << med_;
    ss << ", local_pref=" << local_pref_;
-   ss << ", community_list=" <<"'";
-   bool first_community_list = true;
-   for (auto it=community_list_.cbegin(); it!=community_list_.cend(); ++it) {
-      if (first_community_list) {
-         ss << (*it);
-         first_community_list = false;
-      } else {
-         ss << "," << (*it);
-      }
-   }
-   ss << "'";
+   ss << ", community_list=" << community_list_;
    ss << ")";
    return ss.str();
 }
