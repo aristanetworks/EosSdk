@@ -62,6 +62,7 @@ typedef uint64_t uint64_be_t;
 %feature("nodirector") eos::agent_mgr;
 %feature("nodirector") eos::aresolve_mgr;
 %feature("nodirector") eos::bfd_session_mgr;
+%feature("nodirector") eos::bgp_path_mgr;
 %feature("nodirector") eos::class_map_mgr;
 %feature("nodirector") eos::decap_group_mgr;
 %feature("nodirector") eos::directflow_mgr;
@@ -96,6 +97,7 @@ typedef uint64_t uint64_be_t;
 #include "eos/agent.h"
 #include "eos/aresolve.h"
 #include "eos/bfd.h"
+#include "eos/bgp_path.h"
 #include "eos/event_loop.h"
 #include "eos/class_map.h"
 #include "eos/decap_group.h"

@@ -13,6 +13,7 @@ namespace eos {
 class acl_mgr;
 class aresolve_mgr;
 class bfd_session_mgr;
+class bgp_path_mgr;
 class class_map_mgr;
 class decap_group_mgr;
 class directflow_mgr;
@@ -139,6 +140,7 @@ class EOS_SDK_PUBLIC sdk {
    virtual void init_agent_mgr();
    virtual void init_aresolve_mgr();
    virtual void init_bfd_session_mgr();
+   virtual void init_bgp_path_mgr();
    virtual void init_class_map_mgr();
    virtual void init_decap_group_mgr();
    virtual void init_directflow_mgr();
@@ -173,6 +175,7 @@ class EOS_SDK_PUBLIC sdk {
    virtual agent_mgr * get_agent_mgr();
    virtual aresolve_mgr * get_aresolve_mgr();
    virtual bfd_session_mgr * get_bfd_session_mgr();
+   virtual bgp_path_mgr * get_bgp_path_mgr();
    virtual class_map_mgr * get_class_map_mgr();
    virtual decap_group_mgr * get_decap_group_mgr();
    virtual directflow_mgr * get_directflow_mgr();
@@ -215,6 +218,7 @@ class EOS_SDK_PUBLIC sdk {
    agent_mgr * agent_mgr_;
    aresolve_mgr * aresolve_mgr_;
    bfd_session_mgr * bfd_session_mgr_;
+   bgp_path_mgr * bgp_path_mgr_;
    class_map_mgr * class_map_mgr_;
    decap_group_mgr * decap_group_mgr_;
    directflow_mgr * directflow_mgr_;

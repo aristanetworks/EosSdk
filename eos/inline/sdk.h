@@ -60,6 +60,10 @@ inline bfd_session_mgr * sdk::get_bfd_session_mgr() {
    GET_MGR(bfd_session)
 }
 
+inline bgp_path_mgr * sdk::get_bgp_path_mgr() {
+   GET_MGR(bgp_path)
+}
+
 inline class_map_mgr * sdk::get_class_map_mgr() {
    GET_MGR(class_map)
 }
