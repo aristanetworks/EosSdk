@@ -2,6 +2,7 @@ agentName:EosSdk-%sliceId
 
 Include: EosSdk_acl.include
 Include: EosSdk_agent.include
+Include: EosSdk_bgp_path.include
 Include: EosSdk_class_map.include
 Include: EosSdk_decap_group.include
 Include: EosSdk_directflow.include
@@ -19,6 +20,7 @@ Include: EosSdk_macsec.include
 Include: EosSdk_mac_table.include
 Include: EosSdk_mlag.include
 Include: EosSdk_mpls_route.include
+Include: EosSdk_mpls_vrf_label.include
 Include: EosSdk_neighbor_table.include
 Include: EosSdk_nexthop_group.include
 Include: EosSdk_policy_map.include
@@ -27,6 +29,7 @@ Include: EosSdk_system.include
 Include: EosSdk_vrf.include
 Include: EosSdk_GOpenFlow.include
 Include: EosSdk_bfd_session.include
+Include: EosSdk_nexthop_group_tunnel.include
 
 # for mlag/status, Mlag::Status, r
 Include: MlagStatus-include
