@@ -327,7 +327,7 @@ class EOS_SDK_PUBLIC acl_rule_ip_t : public acl_rule_base_t {
    /** Setter for 'priority_value'. */
    void priority_value_is(uint8_t priority_value);
 
-   /** Getter for 'priority_mask': supported for IPv6 only. */
+   /** Getter for 'priority_mask': 0..63 for IPv4; 0..255 for IPv6. */
    uint8_t priority_mask() const;
    /** Setter for 'priority_mask'. */
    void priority_mask_is(uint8_t priority_mask);

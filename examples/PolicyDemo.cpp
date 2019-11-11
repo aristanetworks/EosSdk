@@ -83,6 +83,7 @@ class policy_demo : public eos::agent_handler,
       eos::parse_ip_addr("20.20.0.0", &dip);
       rule1.destination_addr_is(eos::ip_addr_mask_t(dip, 16));
       rule1.priority_value_is(32);
+      rule1.priority_mask_is(63);
       rule1.match_ip_priority_is(true);
       get_acl_mgr()->acl_rule_set(acl1, 1, rule1);
       get_acl_mgr()->acl_commit();
@@ -136,6 +137,7 @@ class policy_demo : public eos::agent_handler,
       eos::parse_ip_addr("30.30.0.0", &dip);
       raw_v4.destination_addr_is(eos::ip_addr_mask_t(dip, 16));
       raw_v4.priority_value_is(32);
+      raw_v4.priority_mask_is(63);
       raw_v4.match_ip_priority_is(true);
       auto pmrule_raw_v4 = eos::policy_map_rule_t();
       pmrule_raw_v4.raw_rule_is(raw_v4, eos::POLICY_RULE_TYPE_IPV4);
