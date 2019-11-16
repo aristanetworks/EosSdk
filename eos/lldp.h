@@ -116,11 +116,11 @@ class EOS_SDK_PUBLIC lldp_handler : public base_handler<lldp_mgr, lldp_handler> 
 
    /* Called on changes in non standard TLVs (aka organizationally defined TLVs). */
    /// Called when a new TLV type is received, or its content has changed.
-   virtual void on_lldp_tlv_set(lldp_neighbor_t const & peer, lldp_tlv_type_t type,
-                                std::string const & data);
+   virtual void on_lldp_tlv_set(lldp_neighbor_t const & peer,
+         lldp_tlv_type_t tlv_type, std::string const & data);
    /// Called when a TLV type previously received is now absent from advertisements.
-   virtual void on_lldp_tlv_del(lldp_neighbor_t const & peer, lldp_tlv_type_t type);
-
+   virtual void on_lldp_tlv_del(lldp_neighbor_t const & peer,
+         lldp_tlv_type_t tlv_type); 
    /*** Configuration change callbacks; when those happen, it means the lldp ***/
    /*** agent has processed the corresponding config you may have set earlier ***/
    /*** via the lldp_mgr apis (or a Cli user changed the config). ***/
@@ -251,15 +251,16 @@ class EOS_SDK_PUBLIC lldp_mgr : public base_mgr<lldp_handler> {
 
    /// Send a/multiple application defined TLV on a interface.
    /// Transmission will occur every tx_timer until revoked.
-   virtual void tx_tlv_set(lldp_neighbor_t const & peer, lldp_tlv_type_t type,
-                           std::string const & data) = 0;
-   virtual void tx_tlv_del(lldp_neighbor_t const & peer, lldp_tlv_type_t type) = 0;
+   virtual void tx_tlv_set(lldp_neighbor_t const & peer,
+         lldp_tlv_type_t tlv_type, std::string const & data) = 0;
+   virtual void tx_tlv_del(lldp_neighbor_t const & peer,
+         lldp_tlv_type_t tlv_type) = 0;
    // Lookup a TLV received from the remote port.
    // If the TLV can be empty (a boolean), use tlv_exists(type) first
-   virtual std::string tlv(lldp_neighbor_t const & peer, lldp_tlv_type_t type) 
-                                                                           const = 0;
-   virtual bool tlv_exists(lldp_neighbor_t const & peer, lldp_tlv_type_t type) 
-                                                                           const = 0;
+   virtual std::string tlv(lldp_neighbor_t const & peer,
+         lldp_tlv_type_t tlv_type) const = 0;
+   virtual bool tlv_exists(lldp_neighbor_t const & peer,
+         lldp_tlv_type_t tlv_type) const = 0;
    /// Get en-block (there is no iterator, cannot be many given mtu limit
    /// this includes all "organizationnally defined TLVs" (owned by this app or not)
    virtual std::map<lldp_tlv_type_t, std::string> tlvs(lldp_neighbor_t const & peer)

@@ -112,7 +112,7 @@ typedef uint64_t uint64_be_t;
 #include "eos/ip_intf.h"
 #include "eos/ip_route.h"
 #include "eos/iterator.h"
-//#include "eos/lldp.h"
+#include "eos/lldp.h"
 #include "eos/macsec.h"
 #include "eos/mac_table.h"
 #include "eos/mlag.h"

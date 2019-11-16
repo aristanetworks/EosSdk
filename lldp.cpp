@@ -45,15 +45,17 @@ class lldp_mgr_impl : public lldp_mgr {
    }
 
    void
-   tx_tlv_set(lldp_neighbor_t const & peer,  lldp_tlv_type_t type,
+   tx_tlv_set(lldp_neighbor_t const & peer,  lldp_tlv_type_t tlv_type,
               std::string const & data) {
       return;
    }
-   void tx_tlv_del(lldp_neighbor_t const & peer, lldp_tlv_type_t type) { return; }
-   bool tlv_exists(lldp_neighbor_t const & peer, lldp_tlv_type_t type) const {
+   void tx_tlv_del(lldp_neighbor_t const & peer, lldp_tlv_type_t tlv_type) { 
+      return; 
+   }
+   bool tlv_exists(lldp_neighbor_t const & peer, lldp_tlv_type_t tlv_type) const {
       return 1;
    }
-   std::string tlv(lldp_neighbor_t const & peer, lldp_tlv_type_t type) const {
+   std::string tlv(lldp_neighbor_t const & peer, lldp_tlv_type_t tlv_type) const {
       return "";
    }
 
