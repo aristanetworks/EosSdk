@@ -19,7 +19,13 @@
          // buffer directly to main_loop, we have to ensure that it
          // is never written. See sdk::main_loop for the hoops we
          // go through to ensure this is the case.
-         $2[i] = PyString_AS_STRING(PyList_GetItem($input, i));
+         $2[i] = PyString_AS_STRING(o);
+      } else if (PyUnicode_Check(o)) {
+         // NOTE - This check is added for Python3. In Python2,
+         // "str" is a byte string whereas in Python3 "str" is
+         // a unicode string.
+         PyObject *b = PyUnicode_AsEncodedString(o, "utf-8", "strict");
+         $2[i] = PyBytes_AS_STRING(b);
       } else {
          PyErr_SetString(PyExc_TypeError, "Argument must be a list of strings");
          SWIG_fail;
