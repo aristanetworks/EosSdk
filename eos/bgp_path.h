@@ -11,6 +11,8 @@
  *
  * This module provides APIs to query BGP paths in the Adj-RIB-In.
  *
+ * An example of the API usage is in examples/BgpPathAgent.cpp.
+ *
  */
 
 #ifndef EOS_BGP_PATH_H
