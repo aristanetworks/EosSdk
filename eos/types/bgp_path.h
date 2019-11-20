@@ -105,37 +105,6 @@ class EOS_SDK_PUBLIC bgp_path_options_t {
    bgp_path_attr_fields_t path_attr_fields_;
 };
 
-/** BGP Community list. */
-class EOS_SDK_PUBLIC bgp_community_list_t {
- public:
-   bgp_community_list_t();
-   explicit bgp_community_list_t(
-         std::unordered_set<uint32_t> const & community_list);
-
-   std::unordered_set<uint32_t> const & community_list() const;
-   void community_list_is(std::unordered_set<uint32_t> const & community_list);
-   /** Inserts one community_list of 'value' to the set. */
-   void community_list_set(uint32_t const & value);
-   /** Deletes one community_list of 'value' from the set. */
-   void community_list_del(uint32_t const & value);
-
-   bool operator==(bgp_community_list_t const & other) const;
-   bool operator!=(bgp_community_list_t const & other) const;
-   /** The hash function for type bgp_community_list_t. */
-   uint32_t hash() const;
-   /** Returns a string representation of the current object's values. */
-   std::string to_string() const;
-   /**
-    * A utility stream operator that adds a string representation of
-    * bgp_community_list_t to the ostream.
-    */
-   friend std::ostream& operator<<(std::ostream& os,
-                                   const bgp_community_list_t& obj);
-
- private:
-   std::unordered_set<uint32_t> community_list_;
-};
-
 /** The BGP path attribute entry. */
 class EOS_SDK_PUBLIC bgp_path_attr_t {
  public:
@@ -163,9 +132,13 @@ class EOS_SDK_PUBLIC bgp_path_attr_t {
    void local_pref_is(uint32_t local_pref);
 
    /** Getter for 'community_list': The route community list. */
-   bgp_community_list_t community_list() const;
+   std::unordered_set<uint32_t> const & community_list() const;
    /** Setter for 'community_list'. */
-   void community_list_is(bgp_community_list_t const & community_list);
+   void community_list_is(std::unordered_set<uint32_t> const & community_list);
+   /** Inserts one community_list of 'value' to the set. */
+   void community_list_set(uint32_t const & value);
+   /** Deletes one community_list of 'value' from the set. */
+   void community_list_del(uint32_t const & value);
 
    bool operator==(bgp_path_attr_t const & other) const;
    bool operator!=(bgp_path_attr_t const & other) const;
@@ -184,7 +157,7 @@ class EOS_SDK_PUBLIC bgp_path_attr_t {
    uint8_t origin_;
    uint32_t med_;
    uint32_t local_pref_;
-   bgp_community_list_t community_list_;
+   std::unordered_set<uint32_t> community_list_;
 };
 
 /** The key which uniquely identifies a BGP path. Supports IPV4/IPV6 Unicast. */
