@@ -215,7 +215,16 @@ class EOS_SDK_PUBLIC policy_map_mgr : public base_mgr<policy_map_handler,
     */
    virtual policy_map_iter_t policy_map_iter(policy_feature_t) const = 0;
 
-   /// Applies or unapplies the policy map to an interface in a direction
+   /**
+    * Applies or unapplies a policy map on the given interface and direction.
+    * @param policy_map_key_t Name and type of the policy map to [un]apply
+    * @param intf_id_t The interface ID of the interface to [un]apply
+    *  the policy map.
+    * @param acl_direction_t The direction in which to [un]apply the policy map
+    * @param bool Whether to apply or unapply the policy map. If true,
+    *  policy map is applied on the given interface and direction. If false,
+    *  policy map is removed from the given interface and direction.
+    */
    virtual void policy_map_apply(policy_map_key_t const &, intf_id_t,
                                  acl_direction_t, bool apply) = 0;
 
