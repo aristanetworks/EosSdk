@@ -59,6 +59,10 @@ class agent_mgr_impl : public agent_mgr {
       return "";
    }
 
+   bool agent_option_exists(std::string const & name) const {
+      return false;
+   }
+
    agent_option_iter_t agent_option_iter() const {
       agent_option_iter_t * nop = 0;
       return *nop;  // TODO: No op impl.
@@ -73,7 +77,6 @@ class agent_mgr_impl : public agent_mgr {
       agent_status_iter_t * nop = 0;
       return *nop;  // TODO: No op impl.
    }
-
 
    void
    status_set(std::string const & key, std::string const & value) {

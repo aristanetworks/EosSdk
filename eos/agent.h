@@ -177,13 +177,20 @@ class EOS_SDK_PUBLIC agent_mgr : public base_mgr<agent_handler> {
     virtual std::string agent_option(std::string const & name) const = 0;
 
     /**
+     * This is useful if the option's value is an empty string and the existence of
+     * the option is to be checked.
+     *
+     * If option exists in the config then it returns true, otherwise false.
+     */
+    virtual bool agent_option_exists(std::string const & name) const = 0;
+
+    /**
      * Iterate through all configured agent options.
      *
      * Yields a string for each option name that has a non-empty value
      * set.
      */
     virtual agent_option_iter_t agent_option_iter() const = 0;
-
 
     /**
      * Get last set value for the given status key.
