@@ -262,7 +262,7 @@ stream_handler::send_data(const char * buf, size_t length) {
          return 0;
       }
       tracer.trace0( "Unexpected error code from send(): %d", errno);
-      assert("send unexpectedly failed");
+      assert(false && "send unexpectedly failed");
    } else if((size_t) bytes_written < length) {
       watch_writable(fd, true);
    } else {
