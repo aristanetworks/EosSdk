@@ -174,14 +174,31 @@ class EOS_SDK_PUBLIC acl_mgr : public base_mgr<acl_handler> {
  public:
    virtual ~acl_mgr();
 
-   /// Iterates over all ACLs.
+   /// Iterates over all ACLs created by this application.
    virtual acl_iter_t acl_iter() const = 0;
 
-   /// Iterates over the rules with an IP ACL.
+   /// Iterates over all ACLs.
+   virtual acl_iter_t acl_all_iter() const = 0;
+
+   /// Iterates over the rules with an IP ACL created by this application.
    virtual acl_rule_ip_iter_t acl_rule_ip_iter(acl_key_t const &) const = 0;
 
-   /// Iterates over the rules with an Ethernet ACL.
+   /// Iterates over the rules with an IP ACL.
+   virtual acl_rule_ip_iter_t acl_all_rule_ip_iter(acl_key_t const &) const = 0;
+
+   /// Iterates over the rules with an Ethernet ACL created by this application.
    virtual acl_rule_eth_iter_t acl_rule_eth_iter(acl_key_t const &) const = 0;
+
+   /// Iterates over the rules with an Ethernet ACL.
+   virtual acl_rule_eth_iter_t acl_all_rule_eth_iter(acl_key_t const &) const = 0;
+
+   /**
+    * Configuration ACL existence test.
+    *
+    * @return true if an ACL with the same name and type (i.e., key)
+    * exists in the configuration for this application, else false.
+    */
+   virtual bool acl_exists(acl_key_t const &) const = 0;
 
    /**
     * Configuration ACL existence test.
@@ -189,7 +206,7 @@ class EOS_SDK_PUBLIC acl_mgr : public base_mgr<acl_handler> {
     * @return true if an ACL with the same name and type (i.e., key)
     * exists in the configuration, else false.
     */
-   virtual bool acl_exists(acl_key_t const &) const = 0;
+   virtual bool acl_all_exists(acl_key_t const &) const = 0;
 
    /**
     * Adds an IP ACL rule to an ACL.

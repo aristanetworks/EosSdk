@@ -40,7 +40,17 @@ class acl_mgr_impl : public acl_mgr {
       return *nop;  // TODO: No op impl.
    }
 
+   acl_iter_t acl_all_iter() const {
+      acl_iter_t * nop = 0;
+      return *nop;  // TODO: No op impl.
+   }
+
    acl_rule_ip_iter_t acl_rule_ip_iter(acl_key_t const &) const {
+      acl_rule_ip_iter_t * nop = 0;
+      return *nop;  // TODO: No op impl.
+   }
+
+   acl_rule_ip_iter_t acl_all_rule_ip_iter(acl_key_t const &) const {
       acl_rule_ip_iter_t * nop = 0;
       return *nop;  // TODO: No op impl.
    }
@@ -50,7 +60,16 @@ class acl_mgr_impl : public acl_mgr {
       return *nop;  // TODO: No op impl.
    }
 
+   acl_rule_eth_iter_t acl_all_rule_eth_iter(acl_key_t const &) const {
+      acl_rule_eth_iter_t * nop = 0;
+      return *nop;  // TODO: No op impl.
+   }
+
    bool acl_exists(acl_key_t const & key) const {
+      return true;
+   }
+
+   bool acl_all_exists(acl_key_t const & key) const {
       return true;
    }
 
