@@ -132,14 +132,15 @@ inline macsec_profile_t::macsec_profile_t() :
       name_(), primary_key_(), fallback_key_(), key_server_priority_(0),
       rekey_period_(0), cipher_(CIPHER_NULL), dot1x_(false), include_sci_(false),
       bypass_lldp_(false), allow_unprotected_(false), replay_protection_(true),
-      replay_protection_window_(0) {
+      replay_protection_window_(0), key_retirement_immediate_(false) {
 }
 
 inline macsec_profile_t::macsec_profile_t(macsec_profile_name_t name) :
       name_(name), primary_key_(), fallback_key_(), key_server_priority_(16),
       rekey_period_(0), cipher_(GCM_AES_XPN_128), dot1x_(false),
       include_sci_(false), bypass_lldp_(false), allow_unprotected_(false),
-      replay_protection_(true), replay_protection_window_(0) {
+      replay_protection_(true), replay_protection_window_(0),
+      key_retirement_immediate_(false) {
 }
 
 inline macsec_profile_name_t
@@ -263,6 +264,16 @@ macsec_profile_t::replay_protection_window_is(uint32_t replay_protection_window)
 }
 
 inline bool
+macsec_profile_t::key_retirement_immediate() const {
+   return key_retirement_immediate_;
+}
+
+inline void
+macsec_profile_t::key_retirement_immediate_is(bool key_retirement_immediate) {
+   key_retirement_immediate_ = key_retirement_immediate;
+}
+
+inline bool
 macsec_profile_t::operator==(macsec_profile_t const & other) const {
    return name_ == other.name_ &&
           primary_key_ == other.primary_key_ &&
@@ -275,7 +286,8 @@ macsec_profile_t::operator==(macsec_profile_t const & other) const {
           bypass_lldp_ == other.bypass_lldp_ &&
           allow_unprotected_ == other.allow_unprotected_ &&
           replay_protection_ == other.replay_protection_ &&
-          replay_protection_window_ == other.replay_protection_window_;
+          replay_protection_window_ == other.replay_protection_window_ &&
+          key_retirement_immediate_ == other.key_retirement_immediate_;
 }
 
 inline bool
@@ -309,6 +321,8 @@ macsec_profile_t::operator<(macsec_profile_t const & other) const {
       return replay_protection_ < other.replay_protection_;
    } else if(replay_protection_window_ != other.replay_protection_window_) {
       return replay_protection_window_ < other.replay_protection_window_;
+   } else if(key_retirement_immediate_ != other.key_retirement_immediate_) {
+      return key_retirement_immediate_ < other.key_retirement_immediate_;
    }
    return false;
 }
@@ -340,6 +354,8 @@ macsec_profile_t::hash() const {
               sizeof(bool), ret);
    ret = hash_mix::mix((uint8_t *)&replay_protection_window_,
               sizeof(uint32_t), ret);
+   ret = hash_mix::mix((uint8_t *)&key_retirement_immediate_,
+              sizeof(bool), ret);
    ret = hash_mix::final_mix(ret);
    return ret;
 }
@@ -360,6 +376,7 @@ macsec_profile_t::to_string() const {
    ss << ", allow_unprotected=" << allow_unprotected_;
    ss << ", replay_protection=" << replay_protection_;
    ss << ", replay_protection_window=" << replay_protection_window_;
+   ss << ", key_retirement_immediate=" << key_retirement_immediate_;
    ss << ")";
    return ss.str();
 }

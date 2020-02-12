@@ -169,6 +169,11 @@ class EOS_SDK_PUBLIC macsec_profile_t {
    /** Setter for 'replay_protection_window'. */
    void replay_protection_window_is(uint32_t replay_protection_window);
 
+   /** Getter for 'key_retirement_immediate': if set, enable key retirement. */
+   bool key_retirement_immediate() const;
+   /** Setter for 'key_retirement_immediate'. */
+   void key_retirement_immediate_is(bool key_retirement_immediate);
+
    bool operator==(macsec_profile_t const & other) const;
    bool operator!=(macsec_profile_t const & other) const;
    bool operator<(macsec_profile_t const & other) const;
@@ -195,6 +200,7 @@ class EOS_SDK_PUBLIC macsec_profile_t {
    bool allow_unprotected_;
    bool replay_protection_;
    uint32_t replay_protection_window_;
+   bool key_retirement_immediate_;
 };
 
 /** Information regarding the MACsec status of an interface. */
