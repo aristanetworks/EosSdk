@@ -1,4 +1,4 @@
-// Copyright (c) 2019 Arista Networks, Inc.  All rights reserved.
+// Copyright (c) 2020 Arista Networks, Inc.  All rights reserved.
 // Arista Networks, Inc. Confidential and Proprietary.
 
 #ifndef EOS_INLINE_TYPES_IP_ROUTE_H
@@ -167,12 +167,12 @@ operator<<(std::ostream& os, const ip_route_t& obj) {
 
 inline ip_route_via_t::ip_route_via_t() :
       route_key_(), hop_(), intf_(), nexthop_group_(), mpls_label_(), vni_(),
-      vtep_addr_(), router_mac_(), egress_vrf_() {
+      vtep_addr_(), router_mac_(), egress_vrf_(), metric_(0) {
 }
 
 inline ip_route_via_t::ip_route_via_t(ip_route_key_t const & route_key) :
       route_key_(route_key), hop_(), intf_(), nexthop_group_(), mpls_label_(),
-      vni_(), vtep_addr_(), router_mac_(), egress_vrf_() {
+      vni_(), vtep_addr_(), router_mac_(), egress_vrf_(), metric_(0) {
 }
 
 inline ip_route_key_t
@@ -265,6 +265,16 @@ ip_route_via_t::egress_vrf_is(std::string const & egress_vrf) {
    egress_vrf_ = egress_vrf;
 }
 
+inline ip_via_metric_t
+ip_route_via_t::metric() const {
+   return metric_;
+}
+
+inline void
+ip_route_via_t::metric_is(ip_via_metric_t metric) {
+   metric_ = metric;
+}
+
 inline bool
 ip_route_via_t::operator==(ip_route_via_t const & other) const {
    return route_key_ == other.route_key_ &&
@@ -275,7 +285,8 @@ ip_route_via_t::operator==(ip_route_via_t const & other) const {
           vni_ == other.vni_ &&
           vtep_addr_ == other.vtep_addr_ &&
           router_mac_ == other.router_mac_ &&
-          egress_vrf_ == other.egress_vrf_;
+          egress_vrf_ == other.egress_vrf_ &&
+          metric_ == other.metric_;
 }
 
 inline bool
@@ -302,6 +313,8 @@ ip_route_via_t::hash() const {
    ret = hash_mix::mix((uint8_t *)&router_mac_,
               sizeof(eth_addr_t), ret);
    ret ^= std::hash<std::string>()(egress_vrf_);
+   ret = hash_mix::mix((uint8_t *)&metric_,
+              sizeof(ip_via_metric_t), ret);
    ret = hash_mix::final_mix(ret);
    return ret;
 }
@@ -319,6 +332,7 @@ ip_route_via_t::to_string() const {
    ss << ", vtep_addr=" << vtep_addr_;
    ss << ", router_mac=" << router_mac_;
    ss << ", egress_vrf='" << egress_vrf_ << "'";
+   ss << ", metric=" << metric_;
    ss << ")";
    return ss.str();
 }

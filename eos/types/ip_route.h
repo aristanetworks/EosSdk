@@ -1,4 +1,4 @@
-// Copyright (c) 2019 Arista Networks, Inc.  All rights reserved.
+// Copyright (c) 2020 Arista Networks, Inc.  All rights reserved.
 // Arista Networks, Inc. Confidential and Proprietary.
 
 #ifndef EOS_TYPES_IP_ROUTE_H
@@ -19,6 +19,7 @@ typedef uint8_t ip_route_preference_t;
 typedef uint32_t ip_route_metric_t;
 /** Valid range of 1 - (2^24)-1, set to 0 if unused. */
 typedef uint32_t vni_t;
+typedef uint32_t ip_via_metric_t;
 
 /**
  * The type of the ip_route_t. This is determined by the ip_route_via_t's attached
@@ -178,6 +179,11 @@ class EOS_SDK_PUBLIC ip_route_via_t {
    /** Setter for 'egress_vrf'. */
    void egress_vrf_is(std::string const & egress_vrf);
 
+   /** Getter for 'metric': metric for the via. */
+   ip_via_metric_t metric() const;
+   /** Setter for 'metric'. */
+   void metric_is(ip_via_metric_t metric);
+
    bool operator==(ip_route_via_t const & other) const;
    bool operator!=(ip_route_via_t const & other) const;
    /** The hash function for type ip_route_via_t. */
@@ -200,6 +206,7 @@ class EOS_SDK_PUBLIC ip_route_via_t {
    ip_addr_t vtep_addr_;
    eth_addr_t router_mac_;
    std::string egress_vrf_;
+   ip_via_metric_t metric_;
 };
 }
 
