@@ -1,0 +1,226 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>timer &mdash; Arista EOS SDK 2.11.0 reference</title>
+    
+    <link rel="stylesheet" href="_static/eossdk.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/breathe.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '2.11.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="Arista EOS SDK 2.11.0 reference" href="index.html" />
+    <link rel="next" title="tracing" href="tracing.html" />
+    <link rel="prev" title="system" href="system.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="tracing.html" title="tracing"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="system.html" title="system"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">Arista EOS SDK 2.11.0 reference</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="timer">
+<h1><strong>timer</strong><a class="headerlink" href="#timer" title="Permalink to this headline">¶</a></h1>
+<p>Periodic timeout support.</p>
+<p>This module allows timeouts to be set for a callback to be called as soon as possible after some future time. </p>
+<dl class="namespace">
+<dt>
+<span class="target" id="eossdknamespaceeos"></span><em>namespace</em> <tt class="descname">eos</tt></dt>
+<dd><div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Functions</p>
+<dl class="function">
+<dt>
+<span class="target" id="eossdknamespaceeos_1a26f6edcc0823c54a231f5654959770af"></span>seconds_t <tt class="descname">now</tt><big>(</big><big>)</big></dt>
+<dd><p>Monotonically increasing time in seconds.</p>
+<p>Corresponds to the number of seconds since system boot plus an arbitrary offset. As such, this value does not permit derivation of a wallclock time (use time() from time.h for that).</p>
+<p>Instead, now() provides a monotonically increasing value unaffected by leap seconds. </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Variables</p>
+<dl class="variable">
+<dt>
+<span class="target" id="eossdknamespaceeos_1a8daf10dd06cc92d9f798ae1ebcaad60b"></span>const seconds_t <tt class="descname">never</tt></dt>
+<dd><p>&#8216;never&#8217; represents a future time that now() can never reach. </p>
+</dd></dl>
+
+</div>
+<dl class="class">
+<dt>
+<span class="target" id="eossdkclasseos_1_1timeout__handler"></span><em>class</em> <tt class="descname">timeout_handler</tt></dt>
+<dd><em>#include &lt;timer.h&gt;</em><p>The &#8216;<a class="reference internal" href="#eossdkclasseos_1_1timeout__handler"><em>timeout_handler</em></a>&#8216; class manages a single instance of a timer.</p>
+<p>To schedule a timeout, call <a class="reference internal" href="#eossdkclasseos_1_1timeout__handler_1a2d28ed821ecd2196902b1e9a5ac2b5bc"><em>timeout_time_is()</em></a> using an absolute time greater than now(). When the timeout_time has been exceeded, <a class="reference internal" href="#eossdkclasseos_1_1timeout__handler_1a83181130affd53bbf24c171f5d6ceb6f"><em>on_timeout()</em></a> is called and the timer is unset. To cancel a timer, set the timeout to the &#8216;never&#8217; constant.</p>
+<p>There are no guarantees that <a class="reference internal" href="#eossdkclasseos_1_1timeout__handler_1a83181130affd53bbf24c171f5d6ceb6f"><em>on_timeout()</em></a> will be called exactly at the configured timeout, though we guarantee this will never be called <em>before</em> the configured timeout </p>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1timeout__handler_1aa88af4595ce6326cb3febf0d78e89e65"></span><tt class="descname">timeout_handler</tt><big>(</big><a class="reference internal" href="#eossdkclasseos_1_1timeout__mgr"><em>timeout_mgr</em></a> * <em>mgr</em><big>)</big></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1timeout__handler_1a25274d6cef85ea9cbbc442aad4d76af9"></span>virtual <tt class="descname">~timeout_handler</tt><big>(</big><big>)</big></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1timeout__handler_1a2d28ed821ecd2196902b1e9a5ac2b5bc"></span>void <tt class="descname">timeout_time_is</tt><big>(</big>seconds_t<big>)</big></dt>
+<dd><p>Sets the next time <a class="reference internal" href="#eossdkclasseos_1_1timeout__handler_1a83181130affd53bbf24c171f5d6ceb6f"><em>on_timeout()</em></a> will be called.</p>
+<p>The <a class="reference internal" href="#eossdkclasseos_1_1timeout__handler_1a83181130affd53bbf24c171f5d6ceb6f"><em>on_timeout()</em></a> callback will be called as soon as possible after the provided time. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1timeout__handler_1a83181130affd53bbf24c171f5d6ceb6f"></span>virtual void <tt class="descname">on_timeout</tt><big>(</big><big>)</big> = 0</dt>
+<dd><p>Returns the next timeout value. </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Private Members</p>
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1timeout__handler_1ac54d62ec6d4cf00e8d2b97474bf9e2cb"></span>timer_internal * <tt class="descname">timer_</tt></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Friends</p>
+<dl class="friend">
+<dt>
+<span class="target" id="eossdkclasseos_1_1timeout__handler_1a5f7f5b1ae9b93c043b487f4c816d2112"></span>friend class <tt class="descname">timer_internal</tt></dt>
+<dd></dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="class">
+<dt>
+<span class="target" id="eossdkclasseos_1_1timeout__mgr"></span><em>class</em> <tt class="descname">timeout_mgr</tt></dt>
+<dd><div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1timeout__mgr_1a39a2e32e82fc98dbfc05dfd3f2563d7e"></span>virtual <tt class="descname">~timeout_mgr</tt><big>(</big><big>)</big></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Protected Functions</p>
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1timeout__mgr_1adfbd8e68eb003db4ead44daf023b1662"></span>virtual void <tt class="descname">init_handler</tt><big>(</big><a class="reference internal" href="#eossdkclasseos_1_1timeout__handler"><em>timeout_handler</em></a> *<big>)</big> = 0</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1timeout__mgr_1a149d8b1761b2f69a1843dae0b2c90a16"></span><tt class="descname">timeout_mgr</tt><big>(</big><big>)</big></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Private Members</p>
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1timeout__mgr_1adb3271e4c07a6e88e8df52b5efd0f22b"></span><tt class="descname">timeout_mgr</tt></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Friends</p>
+<dl class="friend">
+<dt>
+<span class="target" id="eossdkclasseos_1_1timeout__mgr_1a6160e9db229afba21ce481e90b376972"></span>friend class <tt class="descname">timeout_handler</tt></dt>
+<dd></dd></dl>
+
+</div>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="system.html"
+                        title="previous chapter"><strong>system</strong></a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="tracing.html"
+                        title="next chapter"><strong>tracing</strong></a></p>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="tracing.html" title="tracing"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="system.html" title="system"
+             >previous</a> |</li>
+        <li><a href="index.html">Arista EOS SDK 2.11.0 reference</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2014, Arista Networks.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

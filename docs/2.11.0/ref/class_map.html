@@ -1,0 +1,418 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>class_map &mdash; Arista EOS SDK 2.11.0 reference</title>
+    
+    <link rel="stylesheet" href="_static/eossdk.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/breathe.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '2.11.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="Arista EOS SDK 2.11.0 reference" href="index.html" />
+    <link rel="next" title="decap_group" href="decap_group.html" />
+    <link rel="prev" title="bgp_path" href="bgp_path.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="decap_group.html" title="decap_group"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="bgp_path.html" title="bgp_path"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">Arista EOS SDK 2.11.0 reference</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="class-map">
+<h1><strong>class_map</strong><a class="headerlink" href="#class-map" title="Permalink to this headline">¶</a></h1>
+<p>Class map manipulation.</p>
+<p>This module provides access to the management of class maps. Classification or &#8220;class&#8221; maps, provide a way for the network operator to classify packets arriving on an interface. Together with the policy_map_mgr in policy_map.h, classified traffic can drive policy features, such as PBR. </p>
+<dl class="namespace">
+<dt>
+<span class="target" id="eossdknamespaceeos"></span><em>namespace</em> <tt class="descname">eos</tt></dt>
+<dd><dl class="class">
+<dt>
+<span class="target" id="eossdkclasseos_1_1class__map__iter__t"></span><em>class</em> <tt class="descname">class_map_iter_t</tt></dt>
+<dd><em>#include &lt;class_map.h&gt;</em><p>An iterator providing forwards only iteration over collections of class maps. </p>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Private Functions</p>
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1class__map__iter__t_1a7fc711aa1720a0205e31b8c1c4209a57"></span><tt class="descname">class_map_iter_t</tt><big>(</big>class_map_iter_impl * <em>const</em><big>)</big></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Friends</p>
+<dl class="friend">
+<dt>
+<span class="target" id="eossdkclasseos_1_1class__map__iter__t_1abb7c1f05eeb93881ee8fb0160d9b261f"></span>friend class <tt class="descname">class_map_iter_impl</tt></dt>
+<dd></dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="class">
+<dt>
+<span class="target" id="eossdkclasseos_1_1class__map__mgr"></span><em>class</em> <tt class="descname">class_map_mgr</tt></dt>
+<dd><em>#include &lt;class_map.h&gt;</em><p>EOS class map manager.</p>
+<p>This manager provides access to EOS traffic classifiers, or &#8220;class
+maps&#8221;. Class maps are referred to by policy maps (policy_map.h) to classify traffic that should be subject to the policy&#8217;s actions. </p>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1class__map__mgr_1ad774c1cffb6afd9dce2848bf04b3d9da"></span>virtual <tt class="descname">~class_map_mgr</tt><big>(</big><big>)</big></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1class__map__mgr_1a1486cac1f5293ce97353519ff5246fa1"></span>virtual void <tt class="descname">resync_init</tt><big>(</big><big>)</big> = 0</dt>
+<dd><p>Resync mediates class map configuration into a known good state.</p>
+<p>To start a resync, call <a class="reference internal" href="#eossdkclasseos_1_1class__map__mgr_1a1486cac1f5293ce97353519ff5246fa1"><em>resync_init()</em></a> and then use the functions in the module to manipulate class maps like normal, setting them with <a class="reference internal" href="#eossdkclasseos_1_1class__map__mgr_1a11d6407f31872015c3c6a64c5256ee03"><em>class_map_is()</em></a>. After all entries have been set, call <a class="reference internal" href="#eossdkclasseos_1_1class__map__mgr_1afb2987441ec3b9e954c8dd7aa85cd3a5"><em>resync_complete()</em></a>, which will delete existing class_maps that were not added or modified during resync.</p>
+<p>During resync, this manager will act like it is referencing a temporary table that starts off empty. Thus, methods like exist, del, and getters will act only on that temporary table, regardless of the real values in Sysdb. The one exception is iteration; they will traverse the table stored in Sysdb, regardless of whether or not the manager is in resync mode. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1class__map__mgr_1afb2987441ec3b9e954c8dd7aa85cd3a5"></span>virtual void <tt class="descname">resync_complete</tt><big>(</big><big>)</big> = 0</dt>
+<dd><p>Completes any underway resync operation. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1class__map__mgr_1ad97f9833956e1b9183ee3a581acff8f7"></span>virtual bool <tt class="descname">exists</tt><big>(</big><a class="reference internal" href="policy_map.html#eossdkclasseos_1_1policy__map__key__t"><em>class_map_key_t</em></a> const &amp; <em>key</em><big>)</big> const = 0</dt>
+<dd><p>Returns true if and only if the provided key exists in the system config. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1class__map__mgr_1ae9fae98a8613816f0da8764c2b1deee5"></span>virtual <a class="reference internal" href="#eossdkclasseos_1_1class__map__t"><em>class_map_t</em></a> <tt class="descname">class_map</tt><big>(</big><a class="reference internal" href="policy_map.html#eossdkclasseos_1_1policy__map__key__t"><em>class_map_key_t</em></a> const &amp; <em>key</em><big>)</big> const = 0</dt>
+<dd><p>Returns the class map for the provided class map key. If there is no class map for the key, returns a default <a class="reference internal" href="#eossdkclasseos_1_1class__map__t"><em>class_map_t</em></a> </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1class__map__mgr_1a11d6407f31872015c3c6a64c5256ee03"></span>virtual void <tt class="descname">class_map_is</tt><big>(</big><a class="reference internal" href="#eossdkclasseos_1_1class__map__t"><em>class_map_t</em></a> const &amp; <em>class_map</em><big>)</big> = 0</dt>
+<dd><p>Sets a class map and commits its configuration. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1class__map__mgr_1a5619f26a374be27d7f8daaa671972db3"></span>virtual <a class="reference internal" href="#eossdkclasseos_1_1class__map__iter__t"><em>class_map_iter_t</em></a> <tt class="descname">class_map_iter</tt><big>(</big>policy_feature_t<big>)</big> const = 0</dt>
+<dd><p>Provides iteration over the configured class maps for a feature. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1class__map__mgr_1ae1d21bf98f47708b8758b34fd90d8e82"></span>virtual void <tt class="descname">class_map_del</tt><big>(</big><a class="reference internal" href="policy_map.html#eossdkclasseos_1_1policy__map__key__t"><em>class_map_key_t</em></a> const &amp; <em>key</em><big>)</big> = 0</dt>
+<dd><p>Deletes the class map specified. </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Protected Functions</p>
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1class__map__mgr_1abb2fe18db2a118eefdf9087f3a86e327"></span><tt class="descname">class_map_mgr</tt><big>(</big><big>)</big></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Private Members</p>
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1class__map__mgr_1a8d1bd07dc613ad529e6ad86567e1d90a"></span><tt class="descname">class_map_mgr</tt></dt>
+<dd></dd></dl>
+
+</div>
+</dd></dl>
+
+</dd></dl>
+
+<div class="section" id="type-definitions-in-class-map">
+<h2>Type definitions in <strong>class_map</strong><a class="headerlink" href="#type-definitions-in-class-map" title="Permalink to this headline">¶</a></h2>
+<dl class="namespace">
+<dt>
+<span class="target" id="eossdknamespaceeos"></span><em>namespace</em> <tt class="descname">eos</tt></dt>
+<dd><div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Typedefs</p>
+<dl class="typedef">
+<dt>
+<span class="target" id="eossdknamespaceeos_1a9edf4629cf4bbd4de34bf5283bc71870"></span>typedef <a class="reference internal" href="policy_map.html#eossdkclasseos_1_1policy__map__key__t"><em>policy_map_key_t</em></a> <tt class="descname">class_map_key_t</tt></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Variables</p>
+<dl class="variable">
+<dt>
+<span class="target" id="eossdknamespaceeos_1a4d4979298330a3884b05b641e63afeda"></span>std::string const <tt class="descname">CLASS_MAP_MPLS_ANY</tt></dt>
+<dd><p>A special class map name which means &#8220;match all MPLS traffic.&#8221;</p>
+<p>Use as follows when defining a class_map_key_t:</p>
+<p><pre class="literal-block">
+*    <a class="reference internal" href="policy_map.html#eossdkclasseos_1_1policy__map__key__t"><em>eos::class_map_key_t</em></a> key(eos::CLASS_MAP_MPLS_ANY,
+* eos::POLICY_FEATURE_PBR);
+*    <a class="reference internal" href="#eossdkclasseos_1_1class__map__t"><em>eos::class_map_t</em></a> cm(key);
+* 
+</pre>
+</p>
+<p>Only one such rule can be set on any one policy map. </p>
+</dd></dl>
+
+</div>
+<dl class="class">
+<dt>
+<span class="target" id="eossdkclasseos_1_1class__map__rule__t"></span><em>class</em> <tt class="descname">class_map_rule_t</tt></dt>
+<dd><em>#include &lt;class_map.h&gt;</em><p>A class map match rule uses an ACL to match classified traffic. Values of this type are returned from the class_map_rule_iter, to program class maps, either supply one of these or the <a class="reference internal" href="acl.html#eossdkclasseos_1_1acl__key__t"><em>acl_key_t</em></a> directly to <a class="reference internal" href="#eossdkclasseos_1_1class__map__mgr"><em>class_map_mgr</em></a>&#8216;s class_map_rule_set(). </p>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1class__map__rule__t_1a4f594444e083b4d60799c29820732c3e"></span><tt class="descname">class_map_rule_t</tt><big>(</big><big>)</big></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1class__map__rule__t_1ac6585f1284e674643505bfe27f7877aa"></span><tt class="descname">class_map_rule_t</tt><big>(</big><a class="reference internal" href="acl.html#eossdkclasseos_1_1acl__key__t"><em>acl_key_t</em></a> const &amp; <em>acl_key</em><big>)</big></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1class__map__rule__t_1a727f2104887222a34ac3b4db5473e9ed"></span><a class="reference internal" href="acl.html#eossdkclasseos_1_1acl__key__t"><em>acl_key_t</em></a> <tt class="descname">acl_key</tt><big>(</big><big>)</big> const</dt>
+<dd><p>Getter for &#8216;acl_key&#8217;: the ACL name and type to use as a class map match rule. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1class__map__rule__t_1a08df58a52a051f4ea002c5cb53cea618"></span>bool <tt class="descname">operator==</tt><big>(</big><a class="reference internal" href="#eossdkclasseos_1_1class__map__rule__t"><em>class_map_rule_t</em></a> const &amp; <em>other</em><big>)</big> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1class__map__rule__t_1ac1b7ace90ef4929269ca12215afbbd76"></span>bool <tt class="descname">operator!=</tt><big>(</big><a class="reference internal" href="#eossdkclasseos_1_1class__map__rule__t"><em>class_map_rule_t</em></a> const &amp; <em>other</em><big>)</big> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1class__map__rule__t_1afe0b29624e2d617648baa87726aeccb5"></span>uint32_t <tt class="descname">hash</tt><big>(</big><big>)</big> const</dt>
+<dd><p>The hash function for type <a class="reference internal" href="#eossdkclasseos_1_1class__map__rule__t"><em>class_map_rule_t</em></a>. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1class__map__rule__t_1a7c7c2957aa53e263b575007d0fe78f1d"></span>std::string <tt class="descname">to_string</tt><big>(</big><big>)</big> const</dt>
+<dd><p>Returns a string representation of the current object&#8217;s values. </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Private Members</p>
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1class__map__rule__t_1af26b77bb188a86c5cad6bcad749c47cf"></span><a class="reference internal" href="acl.html#eossdkclasseos_1_1acl__key__t"><em>acl_key_t</em></a> <tt class="descname">acl_key_</tt></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Friends</p>
+<dl class="friend">
+<dt>
+<span class="target" id="eossdkclasseos_1_1class__map__rule__t_1a88187a1393a018c0f98f514105f2a15b"></span>friend std::ostream &amp; <tt class="descname">operator&lt;&lt;</tt></dt>
+<dd><p>A utility stream operator that adds a string representation of <a class="reference internal" href="#eossdkclasseos_1_1class__map__rule__t"><em>class_map_rule_t</em></a> to the ostream. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="class">
+<dt>
+<span class="target" id="eossdkclasseos_1_1class__map__t"></span><em>class</em> <tt class="descname">class_map_t</tt></dt>
+<dd><em>#include &lt;class_map.h&gt;</em><p>A class map classifies traffic to apply policy features to.</p>
+<p>A class map can match IP or MPLS traffic. To match IP traffic, specify a class map matching one or more IPv4 ACLs (for PBR). </p>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1class__map__t_1ae672dffa0df194b0f118bdf9a9d4b8b3"></span><tt class="descname">class_map_t</tt><big>(</big><big>)</big></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1class__map__t_1a8b62e0af340827787d4d949d8f0357b1"></span><tt class="descname">class_map_t</tt><big>(</big><a class="reference internal" href="policy_map.html#eossdkclasseos_1_1policy__map__key__t"><em>class_map_key_t</em></a> const &amp; <em>key</em><big>)</big></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1class__map__t_1ada092e443d95c6c31be0cbc88a7541b3"></span><a class="reference internal" href="policy_map.html#eossdkclasseos_1_1policy__map__key__t"><em>class_map_key_t</em></a> <tt class="descname">key</tt><big>(</big><big>)</big> const</dt>
+<dd><p>Getter for &#8216;key&#8217;: the class map key. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1class__map__t_1ac88b834ab0e210a3b6d8f157cf86a690"></span>void <tt class="descname">key_is</tt><big>(</big><a class="reference internal" href="policy_map.html#eossdkclasseos_1_1policy__map__key__t"><em>class_map_key_t</em></a> const &amp; <em>key</em><big>)</big></dt>
+<dd><p>Setter for &#8216;key&#8217;. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1class__map__t_1a2d78b9cacd1d6c3830e09d963cc42e2a"></span>std::map&lt; uint32_t, <a class="reference internal" href="#eossdkclasseos_1_1class__map__rule__t"><em>class_map_rule_t</em></a> &gt; const &amp; <tt class="descname">rules</tt><big>(</big><big>)</big> const</dt>
+<dd><p>Getter for &#8216;rules&#8217;: the sequence of class map rules. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1class__map__t_1a8a6c566b6fb9ce56b6d05a3689776ba2"></span>void <tt class="descname">rules_is</tt><big>(</big>std::map&lt; uint32_t, <a class="reference internal" href="#eossdkclasseos_1_1class__map__rule__t"><em>class_map_rule_t</em></a> &gt; const &amp; <em>rules</em><big>)</big></dt>
+<dd><p>Setter for &#8216;rules&#8217;. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1class__map__t_1a5391fe75947aa58dff670d60046e04e6"></span>void <tt class="descname">rule_set</tt><big>(</big>uint32_t <em>key</em>, <a class="reference internal" href="#eossdkclasseos_1_1class__map__rule__t"><em>class_map_rule_t</em></a> const &amp; <em>value</em><big>)</big></dt>
+<dd><p>Inserts key/value pair to the map. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1class__map__t_1aee330f54305e59419233883d71b51087"></span>void <tt class="descname">rule_del</tt><big>(</big>uint32_t <em>key</em><big>)</big></dt>
+<dd><p>Deletes the key/value pair from the map. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1class__map__t_1a922134d0c33ada21bb74a5b677ee4ba2"></span>bool <tt class="descname">operator==</tt><big>(</big><a class="reference internal" href="#eossdkclasseos_1_1class__map__t"><em>class_map_t</em></a> const &amp; <em>other</em><big>)</big> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1class__map__t_1a44992bbfa9cb73673d09773d17c4ac3a"></span>bool <tt class="descname">operator!=</tt><big>(</big><a class="reference internal" href="#eossdkclasseos_1_1class__map__t"><em>class_map_t</em></a> const &amp; <em>other</em><big>)</big> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1class__map__t_1a16d5bb30bf8f55287b2c1855f259d1f3"></span>uint32_t <tt class="descname">hash</tt><big>(</big><big>)</big> const</dt>
+<dd><p>The hash function for type <a class="reference internal" href="#eossdkclasseos_1_1class__map__t"><em>class_map_t</em></a>. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1class__map__t_1aa863176b85b7c234d77e7c1d7bdefcfb"></span>std::string <tt class="descname">to_string</tt><big>(</big><big>)</big> const</dt>
+<dd><p>Returns a string representation of the current object&#8217;s values. </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Private Members</p>
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1class__map__t_1ace607a9eda8f8ab56f459b09c0371c74"></span><a class="reference internal" href="policy_map.html#eossdkclasseos_1_1policy__map__key__t"><em>class_map_key_t</em></a> <tt class="descname">key_</tt></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1class__map__t_1af1c00f047d0a5a60ece96e84877b27c7"></span>std::map&lt; uint32_t, <a class="reference internal" href="#eossdkclasseos_1_1class__map__rule__t"><em>class_map_rule_t</em></a> &gt; <tt class="descname">rules_</tt></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Friends</p>
+<dl class="friend">
+<dt>
+<span class="target" id="eossdkclasseos_1_1class__map__t_1a6bdf9473f6354ca2b5e3f6b283a3cd22"></span>friend std::ostream &amp; <tt class="descname">operator&lt;&lt;</tt></dt>
+<dd><p>A utility stream operator that adds a string representation of <a class="reference internal" href="#eossdkclasseos_1_1class__map__t"><em>class_map_t</em></a> to the ostream. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#"><strong>class_map</strong></a><ul>
+<li><a class="reference internal" href="#type-definitions-in-class-map">Type definitions in <strong>class_map</strong></a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="bgp_path.html"
+                        title="previous chapter"><strong>bgp_path</strong></a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="decap_group.html"
+                        title="next chapter"><strong>decap_group</strong></a></p>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="decap_group.html" title="decap_group"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="bgp_path.html" title="bgp_path"
+             >previous</a> |</li>
+        <li><a href="index.html">Arista EOS SDK 2.11.0 reference</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2014, Arista Networks.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

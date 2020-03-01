@@ -1,0 +1,45 @@
+
+Arista EOS SDK reference guide
+==============================
+
+The Arista EOS SDK allows development of high performance on switch
+agents that react to and interact directly with EOS. These agents can
+bridge feature configuration with existing systems or provide
+automated system maintenance facilities due to the SDK's state based
+programming approach. Refer to the EOS SDK wiki_ for more information
+including example code using the SDK.
+
+Switch management modules
+-------------------------
+
+The SDK is split up into modules that manage one particular part of
+the system, such as the ``intf`` module for generic interface management
+(admin state, description) or the ``acl`` module for configuration of
+Access Control Lists. Each module consists of a module manager class,
+such as ``eos::intf_mgr``. Modules that provide notifications also have
+a handler class, e.g., ``eos::intf_handler``. Handler sub-classes are
+provided by your implementation and provide the notification callbacks
+for notifications from EOS.
+
+| :doc:`acl` | :doc:`bfd` | :doc:`bgp_path` | :doc:`class_map` | :doc:`decap_group` | :doc:`directflow` | :doc:`eapi` | :doc:`eth` | :doc:`eth_intf` | :doc:`eth_lag_intf` | :doc:`eth_phy_intf` | :doc:`fib` | :doc:`hardware_table` | :doc:`intf` | :doc:`ip` | :doc:`ip_intf` | :doc:`ip_route` | :doc:`lldp` | :doc:`mac_table` | :doc:`macsec` | :doc:`mlag` | :doc:`mpls` | :doc:`mpls_route` | :doc:`mpls_vrf_label` | :doc:`neighbor_table` | :doc:`nexthop_group` | :doc:`nexthop_group_tunnel` | :doc:`policy_map` | :doc:`subintf` | :doc:`vrf` 
+
+
+Infrastructure modules
+----------------------
+
+In addition, there are a number of framework modules that provide
+access to the SDK components (``sdk``), offer an asynchronous
+file-descriptor interface for use with asynchronous networking
+libraries (``fd``) and provide debug logging facilities (``tracing``).
+
+| :doc:`agent` | :doc:`aresolve` | :doc:`base` | :doc:`base_handler` | :doc:`base_mgr` | :doc:`event_loop` | :doc:`exception` | :doc:`fd` | :doc:`hash_mix` | :doc:`iterator` | :doc:`panic` | :doc:`sdk` | :doc:`system` | :doc:`timer` | :doc:`tracing` | :doc:`utility` | :doc:`version` 
+
+
+.. toctree::
+   :hidden:
+   :glob:
+
+   **
+
+
+.. _wiki: https://github.com/aristanetworks/EosSdk/wiki
