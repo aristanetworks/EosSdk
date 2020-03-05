@@ -189,7 +189,7 @@ using namespace eos;
 //%ignore what;
 // Python code should use Python exceptions, and not call panic().
 //%ignore panic;
-//%ignore vpanic;
+%ignore vpanic;
 %include "Includes.i"
 
 //%extend eos::error {
