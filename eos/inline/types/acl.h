@@ -1,4 +1,4 @@
-// Copyright (c) 2016 Arista Networks, Inc.  All rights reserved.
+// Copyright (c) 2020 Arista Networks, Inc.  All rights reserved.
 // Arista Networks, Inc. Confidential and Proprietary.
 
 #ifndef EOS_INLINE_TYPES_ACL_H
@@ -826,7 +826,8 @@ operator<<(std::ostream& os, const acl_rule_ip_t& obj) {
 
 inline acl_rule_eth_t::acl_rule_eth_t() :
       vlan_(), vlan_mask_(0xFFF), inner_vlan_(), inner_vlan_mask_(0xFFF),
-      source_addr_(), destination_addr_(), source_mask_(), destination_mask_() {
+      source_addr_(), destination_addr_(), source_mask_(), destination_mask_(),
+      eth_protocol_(0xFFFFFFFF) {
 }
 
 inline vlan_id_t
@@ -909,6 +910,16 @@ acl_rule_eth_t::destination_mask_is(eth_addr_t destination_mask) {
    destination_mask_ = destination_mask;
 }
 
+inline uint32_t
+acl_rule_eth_t::eth_protocol() const {
+   return eth_protocol_;
+}
+
+inline void
+acl_rule_eth_t::eth_protocol_is(uint32_t eth_protocol) {
+   eth_protocol_ = eth_protocol;
+}
+
 inline bool
 acl_rule_eth_t::operator==(acl_rule_eth_t const & other) const {
    return vlan_ == other.vlan_ &&
@@ -918,7 +929,8 @@ acl_rule_eth_t::operator==(acl_rule_eth_t const & other) const {
           source_addr_ == other.source_addr_ &&
           destination_addr_ == other.destination_addr_ &&
           source_mask_ == other.source_mask_ &&
-          destination_mask_ == other.destination_mask_;
+          destination_mask_ == other.destination_mask_ &&
+          eth_protocol_ == other.eth_protocol_;
 }
 
 inline bool
@@ -945,6 +957,8 @@ acl_rule_eth_t::hash() const {
               sizeof(eth_addr_t), ret);
    ret = hash_mix::mix((uint8_t *)&destination_mask_,
               sizeof(eth_addr_t), ret);
+   ret = hash_mix::mix((uint8_t *)&eth_protocol_,
+              sizeof(uint32_t), ret);
    ret = hash_mix::final_mix(ret);
    return ret;
 }
@@ -961,6 +975,7 @@ acl_rule_eth_t::to_string() const {
    ss << ", destination_addr=" << destination_addr_;
    ss << ", source_mask=" << source_mask_;
    ss << ", destination_mask=" << destination_mask_;
+   ss << ", eth_protocol=" << eth_protocol_;
    ss << ")";
    return ss.str();
 }

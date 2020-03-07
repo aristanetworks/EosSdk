@@ -1,4 +1,4 @@
-// Copyright (c) 2016 Arista Networks, Inc.  All rights reserved.
+// Copyright (c) 2020 Arista Networks, Inc.  All rights reserved.
 // Arista Networks, Inc. Confidential and Proprietary.
 
 #ifndef EOS_TYPES_ACL_H
@@ -409,6 +409,9 @@ class EOS_SDK_PUBLIC acl_rule_eth_t : public acl_rule_base_t {
    eth_addr_t destination_mask() const;
    void destination_mask_is(eth_addr_t destination_mask);
 
+   uint32_t eth_protocol() const;
+   void eth_protocol_is(uint32_t eth_protocol);
+
    bool operator==(acl_rule_eth_t const & other) const;
    bool operator!=(acl_rule_eth_t const & other) const;
    /** The hash function for type acl_rule_eth_t. */
@@ -430,6 +433,7 @@ class EOS_SDK_PUBLIC acl_rule_eth_t : public acl_rule_base_t {
    eth_addr_t destination_addr_;
    eth_addr_t source_mask_;
    eth_addr_t destination_mask_;
+   uint32_t eth_protocol_;
 };
 }
 
