@@ -313,6 +313,8 @@ wrap_iterator(eos::policy_map_iter_t, eos::policy_map_iter_impl, eos::policy_map
 wrap_iterator(eos::subintf_iter_t, eos::subintf_iter_impl, eos::intf_id_t);
 wrap_iterator(eos::vrf_iter_t, eos::vrf_iter_impl, std::string);
 wrap_iterator(eos::programmed_nexthop_group_iter_t, eos::programmed_nexthop_group_iter_impl, std::string);
+wrap_iterator(eos::macsec_profile_iter_t, eos::macsec_profile_iter_impl, eos::macsec_profile_name_t);
+wrap_iterator(eos::macsec_intf_status_iter_t, eos::macsec_intf_status_iter_impl, eos::intf_id_t);
 
 // Make managers themselves iterable, when it makes sense:
 default_iterator(eos::directflow_mgr, flow_entry_iter);

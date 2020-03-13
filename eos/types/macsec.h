@@ -1,4 +1,4 @@
-// Copyright (c) 2018 Arista Networks, Inc.  All rights reserved.
+// Copyright (c) 2020 Arista Networks, Inc.  All rights reserved.
 // Arista Networks, Inc. Confidential and Proprietary.
 
 #ifndef EOS_TYPES_MACSEC_H
@@ -8,6 +8,7 @@
 #include <eos/hash_mix.h>
 #include <eos/panic.h>
 #include <eos/utility.h>
+#include <forward_list>
 #include <sstream>
 
 namespace eos {
@@ -174,6 +175,9 @@ class EOS_SDK_PUBLIC macsec_profile_t {
    /** Setter for 'key_retirement_immediate'. */
    void key_retirement_immediate_is(bool key_retirement_immediate);
 
+   /** Getter for 'intfs': Interfaces with this profile configured. */
+   std::forward_list<intf_id_t> const & intfs() const;
+
    bool operator==(macsec_profile_t const & other) const;
    bool operator!=(macsec_profile_t const & other) const;
    bool operator<(macsec_profile_t const & other) const;
@@ -201,6 +205,8 @@ class EOS_SDK_PUBLIC macsec_profile_t {
    bool replay_protection_;
    uint32_t replay_protection_window_;
    bool key_retirement_immediate_;
+   std::forward_list<intf_id_t> intfs_;
+   friend void addIntf( macsec_profile_t &profile, intf_id_t intfId );
 };
 
 /** Information regarding the MACsec status of an interface. */

@@ -1,4 +1,4 @@
-// Copyright (c) 2018 Arista Networks, Inc.  All rights reserved.
+// Copyright (c) 2020 Arista Networks, Inc.  All rights reserved.
 // Arista Networks, Inc. Confidential and Proprietary.
 
 #ifndef EOS_INLINE_TYPES_MACSEC_H
@@ -132,7 +132,7 @@ inline macsec_profile_t::macsec_profile_t() :
       name_(), primary_key_(), fallback_key_(), key_server_priority_(0),
       rekey_period_(0), cipher_(CIPHER_NULL), dot1x_(false), include_sci_(false),
       bypass_lldp_(false), allow_unprotected_(false), replay_protection_(true),
-      replay_protection_window_(0), key_retirement_immediate_(false) {
+      replay_protection_window_(0), key_retirement_immediate_(false), intfs_() {
 }
 
 inline macsec_profile_t::macsec_profile_t(macsec_profile_name_t name) :
@@ -140,7 +140,7 @@ inline macsec_profile_t::macsec_profile_t(macsec_profile_name_t name) :
       rekey_period_(0), cipher_(GCM_AES_XPN_128), dot1x_(false),
       include_sci_(false), bypass_lldp_(false), allow_unprotected_(false),
       replay_protection_(true), replay_protection_window_(0),
-      key_retirement_immediate_(false) {
+      key_retirement_immediate_(false), intfs_() {
 }
 
 inline macsec_profile_name_t
@@ -273,6 +273,11 @@ macsec_profile_t::key_retirement_immediate_is(bool key_retirement_immediate) {
    key_retirement_immediate_ = key_retirement_immediate;
 }
 
+inline std::forward_list<intf_id_t> const &
+macsec_profile_t::intfs() const {
+   return intfs_;
+}
+
 inline bool
 macsec_profile_t::operator==(macsec_profile_t const & other) const {
    return name_ == other.name_ &&
@@ -287,7 +292,8 @@ macsec_profile_t::operator==(macsec_profile_t const & other) const {
           allow_unprotected_ == other.allow_unprotected_ &&
           replay_protection_ == other.replay_protection_ &&
           replay_protection_window_ == other.replay_protection_window_ &&
-          key_retirement_immediate_ == other.key_retirement_immediate_;
+          key_retirement_immediate_ == other.key_retirement_immediate_ &&
+          intfs_ == other.intfs_;
 }
 
 inline bool
@@ -323,6 +329,8 @@ macsec_profile_t::operator<(macsec_profile_t const & other) const {
       return replay_protection_window_ < other.replay_protection_window_;
    } else if(key_retirement_immediate_ != other.key_retirement_immediate_) {
       return key_retirement_immediate_ < other.key_retirement_immediate_;
+   } else if(intfs_ != other.intfs_) {
+      return intfs_ < other.intfs_;
    }
    return false;
 }
@@ -356,6 +364,10 @@ macsec_profile_t::hash() const {
               sizeof(uint32_t), ret);
    ret = hash_mix::mix((uint8_t *)&key_retirement_immediate_,
               sizeof(bool), ret);
+   for (auto it=intfs_.cbegin(); it!=intfs_.cend(); ++it) {
+      ret = hash_mix::mix((uint8_t *)&(*it),
+            sizeof(intf_id_t), ret);
+   }
    ret = hash_mix::final_mix(ret);
    return ret;
 }
@@ -377,6 +389,17 @@ macsec_profile_t::to_string() const {
    ss << ", replay_protection=" << replay_protection_;
    ss << ", replay_protection_window=" << replay_protection_window_;
    ss << ", key_retirement_immediate=" << key_retirement_immediate_;
+   ss << ", intfs=" <<"'";
+   bool first_intfs = true;
+   for (auto it=intfs_.cbegin(); it!=intfs_.cend(); ++it) {
+      if (first_intfs) {
+         ss << (*it);
+         first_intfs = false;
+      } else {
+         ss << "," << (*it);
+      }
+   }
+   ss << "'";
    ss << ")";
    return ss.str();
 }

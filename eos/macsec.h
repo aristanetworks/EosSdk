@@ -46,12 +46,16 @@
 #include <eos/base_handler.h>
 #include <eos/base_mgr.h>
 #include <eos/intf.h>
+#include <eos/iterator.h>
 
 #include <eos/types/macsec.h>
 
 namespace eos {
 
 class macsec_mgr;
+
+class macsec_profile_iter_impl;
+class macsec_intf_status_iter_impl;
 
 /**
  * This handler provides notifications when the MACsec status of an interface
@@ -84,6 +88,22 @@ class EOS_SDK_PUBLIC macsec_handler :
     */
    virtual void on_intf_status(intf_id_t, macsec_intf_status_t const &);
 
+};
+
+class EOS_SDK_PUBLIC macsec_profile_iter_t : public iter_base<macsec_profile_name_t,
+               macsec_profile_iter_impl> {
+   private:
+      friend class macsec_profile_iter_impl;
+      explicit macsec_profile_iter_t( 
+            macsec_profile_iter_impl * const ) EOS_SDK_PRIVATE;
+};
+
+class EOS_SDK_PUBLIC macsec_intf_status_iter_t : public iter_base<intf_id_t,
+               macsec_intf_status_iter_impl> {
+   private:
+      friend class macsec_intf_status_iter_impl;
+      explicit macsec_intf_status_iter_t( 
+            macsec_intf_status_iter_impl * const ) EOS_SDK_PRIVATE;
 };
 
 /**
@@ -148,6 +168,16 @@ class EOS_SDK_PUBLIC macsec_mgr : public base_mgr<macsec_handler, intf_id_t> {
     * Returns the current MACsec counters for the given interface.
     */
    virtual macsec_intf_counters_t intf_counters(intf_id_t) = 0;
+
+   /*
+    * Iterates over macsec profile config.
+    */
+   virtual macsec_profile_iter_t macsec_profile_iter() const = 0;
+
+   /*
+    * Iterates over macsec intf status.
+    */
+   virtual macsec_intf_status_iter_t macsec_intf_status_iter() const = 0;
 
  protected:
    macsec_mgr() EOS_SDK_PRIVATE;

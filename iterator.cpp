@@ -16,16 +16,17 @@
 #include "eos/intf.h"
 #include "eos/ip_route.h"
 #include "eos/iterator.h"
+#include "eos/macsec.h"
 #include "eos/mac_table.h"
 #include "eos/mpls_route.h"
 #include "eos/mpls_vrf_label.h"
 #include "eos/neighbor_table.h"
 #include "eos/nexthop_group.h"
+#include "eos/nexthop_group_tunnel.h"
 #include "eos/policy_map.h"
 #include "eos/subintf.h"
 #include "eos/vrf.h"
 #include "eos/lldp.h"
-#include "eos/nexthop_group_tunnel.h"
 
 namespace eos {
 
@@ -145,5 +146,6 @@ INSTANTIATE_ITERATOR(intf_id_t, lldp_intf_iter_impl);
 INSTANTIATE_ITERATOR(lldp_neighbor_t, lldp_neighbor_iter_impl);
 INSTANTIATE_ITERATOR(nexthop_group_tunnel_t, nexthop_group_tunnel_iter_impl);
 INSTANTIATE_ITERATOR(std::string, programmed_nexthop_group_iter_impl);
-
+INSTANTIATE_ITERATOR(macsec_profile_name_t, macsec_profile_iter_impl);
+INSTANTIATE_ITERATOR(intf_id_t, macsec_intf_status_iter_impl);
 }

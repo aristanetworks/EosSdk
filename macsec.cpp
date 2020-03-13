@@ -70,6 +70,15 @@ class macsec_mgr_impl : public macsec_mgr {
       return *nop; // TODO: No op impl
    }
 
+   macsec_profile_iter_t macsec_profile_iter() const {
+      macsec_profile_iter_t *nop = 0;
+      return *nop; // TODO: No op impl
+   }
+
+   macsec_intf_status_iter_t macsec_intf_status_iter() const {
+      macsec_intf_status_iter_t *nop = 0;
+      return *nop; // TODO: No op impl
+   }
 };
 
 DEFINE_STUB_MGR_CTOR(macsec_mgr)
