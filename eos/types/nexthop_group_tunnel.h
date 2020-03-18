@@ -1,4 +1,4 @@
-// Copyright (c) 2019 Arista Networks, Inc.  All rights reserved.
+// Copyright (c) 2020 Arista Networks, Inc.  All rights reserved.
 // Arista Networks, Inc. Confidential and Proprietary.
 
 #ifndef EOS_TYPES_NEXTHOP_GROUP_TUNNEL_H
@@ -39,6 +39,16 @@ class EOS_SDK_PUBLIC nexthop_group_tunnel_t {
    /** Setter for 'nhg_name'. */
    void nhg_name_is(std::string const & nhg_name);
 
+   /** Getter for 'igp_pref': the IGP preference of the tunnel endpoint. */
+   uint8_t igp_pref() const;
+   /** Setter for 'igp_pref'. */
+   void igp_pref_is(uint8_t igp_pref);
+
+   /** Getter for 'igp_metric': the IGP metric of the tunnel endpoint. */
+   uint32_t igp_metric() const;
+   /** Setter for 'igp_metric'. */
+   void igp_metric_is(uint32_t igp_metric);
+
    bool operator==(nexthop_group_tunnel_t const & other) const;
    bool operator!=(nexthop_group_tunnel_t const & other) const;
    /** The hash function for type nexthop_group_tunnel_t. */
@@ -55,6 +65,8 @@ class EOS_SDK_PUBLIC nexthop_group_tunnel_t {
  private:
    ip_prefix_t tunnel_endpoint_;
    std::string nhg_name_;
+   uint8_t igp_pref_;
+   uint32_t igp_metric_;
 };
 }
 
