@@ -17,6 +17,10 @@ class bgp_path_mgr_impl : public bgp_path_mgr {
                                 bgp_path_options_t & options) {
       return bgp_path_t();
    }
+
+   bool ipv6_unicast_bgp_convergence() {
+      return false;
+   }
 };
 
 DEFINE_STUB_MGR_CTOR(bgp_path_mgr)

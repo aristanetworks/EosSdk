@@ -88,6 +88,12 @@ class EOS_SDK_PUBLIC bgp_path_mgr: public base_mgr<bgp_path_handler,
    virtual bgp_path_t ipv6_unicast_path(bgp_path_key_t const &,
                                         bgp_path_options_t &) = 0;
 
+   /**
+    * Returns true if bgp is converged for IPv6 Unicast address family
+    */
+   virtual bool ipv6_unicast_bgp_convergence() = 0;
+
+
   protected:
    bgp_path_mgr() EOS_SDK_PRIVATE;
    friend class bgp_path_handler;
