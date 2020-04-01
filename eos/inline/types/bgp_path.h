@@ -1,4 +1,4 @@
-// Copyright (c) 2019 Arista Networks, Inc.  All rights reserved.
+// Copyright (c) 2020 Arista Networks, Inc.  All rights reserved.
 // Arista Networks, Inc. Confidential and Proprietary.
 
 #ifndef EOS_INLINE_TYPES_BGP_PATH_H
@@ -344,6 +344,18 @@ bgp_path_key_t::operator==(bgp_path_key_t const & other) const {
 inline bool
 bgp_path_key_t::operator!=(bgp_path_key_t const & other) const {
    return !operator==(other);
+}
+
+inline bool
+bgp_path_key_t::operator<(bgp_path_key_t const & other) const {
+   if(prefix_ != other.prefix_) {
+      return prefix_ < other.prefix_;
+   } else if(peer_addr_ != other.peer_addr_) {
+      return peer_addr_ < other.peer_addr_;
+   } else if(vrf_name_ != other.vrf_name_) {
+      return vrf_name_ < other.vrf_name_;
+   }
+   return false;
 }
 
 inline uint32_t
