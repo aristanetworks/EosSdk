@@ -2,6 +2,7 @@ agentName:EosSdk-%sliceId
 
 Include: EosSdk_acl.include
 Include: EosSdk_agent.include
+Include: EosSdk_bgp.include
 Include: EosSdk_bgp_path.include
 Include: EosSdk_class_map.include
 Include: EosSdk_decap_group.include
