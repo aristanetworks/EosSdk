@@ -62,6 +62,7 @@ libeos_la_SOURCES += tracing.cpp
 libeos_la_SOURCES += version.cpp
 libeos_la_SOURCES += vrf.cpp
 libeos_la_SOURCES += bfd.cpp
+libeos_la_SOURCES += bgp.cpp
 libeos_la_SOURCES += bgp_path.cpp
 libeos_la_SOURCES += lldp.cpp
 libeos_la_SOURCES += nexthop_group_tunnel.cpp
