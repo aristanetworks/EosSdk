@@ -16,20 +16,56 @@
 #ifndef EOS_BGP_H
 #define EOS_BGP_H
 
-#include <eos/types/sdk.h>
+#include <eos/base_handler.h>
+#include <eos/base_mgr.h>
+#include <eos/types/bgp.h>
 #include <eos/iterator.h>
 
 namespace eos {
 
+class bgp_mgr;
+
+/**
+ * The BGP peer handler.
+ *
+ * This class provides handler APIs to react to a BGP peer's session state change.
+ */
+class EOS_SDK_PUBLIC bgp_peer_handler : public base_handler<bgp_mgr,
+                                                            bgp_peer_handler> {
+  public:
+   explicit bgp_peer_handler(bgp_mgr *mgr);
+   bgp_mgr * get_bgp_mgr() const;
+
+
+   /// Register to receive notifications when any peer changes state.
+   void watch_all_peers(bool);
+
+   /// Register to receive notifications when the specified peer changes state.
+   void watch_peer(bgp_peer_key_t const & peer_key, bool);
+
+   /// Called when BGP peer state change
+   virtual void on_peer_state(bgp_peer_key_t peer_key,
+                              bgp_peer_state_t peer_state);
+};
+
 /**
  * A manager of BGP configurations.
  */
-class EOS_SDK_PUBLIC bgp_mgr {
+class EOS_SDK_PUBLIC bgp_mgr : public base_mgr<bgp_peer_handler, bgp_peer_key_t> {
  public:
-    virtual ~bgp_mgr();
+   virtual ~bgp_mgr();
+
+   /**
+    * Returns the state of a peer session.
+    *
+    * If the given peer does not have a valid status or it didn't match any peers
+    * in the system, this would returns PEER_UNKNOWN;
+    */
+   virtual bgp_peer_state_t peer_state(bgp_peer_key_t const & peer_key) const = 0;
 
  protected:
    bgp_mgr() EOS_SDK_PRIVATE;
+   friend class bgp_peer_handler;
 
  private:
    EOS_SDK_DISALLOW_COPY_CTOR(bgp_mgr);
@@ -37,6 +73,8 @@ class EOS_SDK_PUBLIC bgp_mgr {
 };
 
 } // namespace eos
+
+#include <eos/inline/bgp.h>
 
 #endif // EOS_BGP_H
 
