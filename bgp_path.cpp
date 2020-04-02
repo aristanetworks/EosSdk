@@ -8,6 +8,20 @@ namespace eos {
 
 class bgp_path_mgr_impl : public bgp_path_mgr {
  public:
+   bgp_path_iter_t ipv4_unicast_path_iter(bgp_path_options_t & options) const {
+      bgp_path_iter_t *nop = 0;
+      return *nop;
+   }
+
+   bgp_path_t ipv4_unicast_path(bgp_path_key_t const & path_key,
+                                bgp_path_options_t & options) {
+      return bgp_path_t();
+   }
+
+   bool ipv4_unicast_bgp_convergence() {
+      return false;
+   }
+
    bgp_path_iter_t ipv6_unicast_path_iter(bgp_path_options_t & options) const {
       bgp_path_iter_t *nop = 0;
       return *nop;
@@ -30,6 +44,10 @@ bgp_path_handler::bgp_path_handler(bgp_path_mgr * mgr) :
 }
 
 void bgp_path_handler::watch_all_paths(bool) {}
+
+void bgp_path_handler::on_ipv4_unicast_path(bgp_path_key_t path_key) {}
+
+void bgp_path_handler::on_ipv4_unicast_bgp_converged(bool converged) {}
 
 void bgp_path_handler::on_ipv6_unicast_path(bgp_path_key_t path_key) {}
 

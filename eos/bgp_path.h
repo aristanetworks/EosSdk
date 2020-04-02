@@ -55,6 +55,15 @@ class EOS_SDK_PUBLIC bgp_path_handler : public base_handler<bgp_path_mgr,
    /// Register to receive notifications when any path has changed.
    void watch_all_paths(bool);
 
+   /// Handler called when a BGP IPv4 unicast path has changed in Adj-RIB-In.
+   virtual void on_ipv4_unicast_path(bgp_path_key_t path_key);
+
+   /**
+    * Handler called when BGP convergence has changed in
+    * IPv4 unicast address family.
+    */
+   virtual void on_ipv4_unicast_bgp_converged(bool converged);
+
    /// Handler called when a BGP IPv6 unicast path has changed in Adj-RIB-In.
    virtual void on_ipv6_unicast_path(bgp_path_key_t path_key);
 
@@ -73,6 +82,20 @@ class EOS_SDK_PUBLIC bgp_path_mgr: public base_mgr<bgp_path_handler,
                                                    bgp_path_key_t> {
   public:
    virtual ~bgp_path_mgr();
+
+   /**
+    * Returns an iterator over IPv4 Unicast BGP paths in Adj-RIB-In, which
+    * contains unprocessed routing information that has been advertised to the
+    * local BGP speaker by its peers.
+    */
+   virtual bgp_path_iter_t ipv4_unicast_path_iter(bgp_path_options_t &) const = 0;
+
+   /**
+    * Returns an IPv4 Unicast BGP path in Adj-RIB-In with the corresponding
+    * path key. Returns an empty bgp_path_t if no matching path was found.
+    */
+   virtual bgp_path_t ipv4_unicast_path(bgp_path_key_t const &,
+                                        bgp_path_options_t &) = 0;
 
    /**
     * Returns an iterator over IPv6 Unicast BGP paths in Adj-RIB-In, which
