@@ -16,10 +16,11 @@
 #ifndef EOS_BGP_H
 #define EOS_BGP_H
 
+#include <eos/base.h>
 #include <eos/base_handler.h>
 #include <eos/base_mgr.h>
-#include <eos/types/bgp.h>
 #include <eos/iterator.h>
+#include <eos/types/bgp.h>
 
 namespace eos {
 
