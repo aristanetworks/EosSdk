@@ -11,6 +11,8 @@
  *
  * This module provides APIs to query BGP information including BGP peer state.
  *
+ * An example of the API usage is in examples/BgpAgent.cpp
+ *
  */
 
 #ifndef EOS_BGP_H
