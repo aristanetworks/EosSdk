@@ -98,6 +98,11 @@ class EOS_SDK_PUBLIC bgp_path_mgr: public base_mgr<bgp_path_handler,
                                         bgp_path_options_t &) = 0;
 
    /**
+    * Returns true if bgp is converged for IPv4 Unicast address family
+    */
+   virtual bool ipv4_unicast_bgp_convergence() = 0;
+
+   /**
     * Returns an iterator over IPv6 Unicast BGP paths in Adj-RIB-In, which
     * contains unprocessed routing information that has been advertised to the
     * local BGP speaker by its peers.
