@@ -115,7 +115,7 @@ $(stubsgosrcdir)/eossdkgo_wrap.cpp: $(srcdir)/eossdkgo_wrap.cpp
 
 $(stubsgosrcdir)/eossdkgo_wrap.h: $(srcdir)/eossdkgo_wrap.cpp
 	$(MKDIR_P) $(stubsgosrcdir) && mv $(srcdir)/$(@F) $@
-	
+
 $(stubsgosrcdir)/eossdk.go: $(stubsgosrcdir)/eossdkgo_wrap.cpp
 	patch --batch --no-backup-if-mismatch -p0 <$(srcdir)/swig-go.patch
 	$(MKDIR_P) $(stubsgosrcdir) && mv $(srcdir)/$(@F) $@
