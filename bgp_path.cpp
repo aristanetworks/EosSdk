@@ -45,6 +45,10 @@ bgp_path_handler::bgp_path_handler(bgp_path_mgr * mgr) :
 
 void bgp_path_handler::watch_all_paths(bool) {}
 
+void bgp_path_handler::watch_ipv4_unicast_paths(bool) {}
+
+void bgp_path_handler::watch_ipv6_unicast_paths(bool) {}
+
 void bgp_path_handler::on_ipv4_unicast_path(bgp_path_key_t path_key) {}
 
 void bgp_path_handler::on_ipv4_unicast_bgp_converged(bool converged) {}

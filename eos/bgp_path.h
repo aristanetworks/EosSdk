@@ -55,6 +55,12 @@ class EOS_SDK_PUBLIC bgp_path_handler : public base_handler<bgp_path_mgr,
    /// Register to receive notifications when any path has changed.
    void watch_all_paths(bool);
 
+   /// Register to receive notifications when any IPv4 unicast path has changed.
+   void watch_ipv4_unicast_paths(bool);
+
+   /// Register to receive notifications when any IPv6 unicast path has changed.
+   void watch_ipv6_unicast_paths(bool);
+
    /// Handler called when a BGP IPv4 unicast path has changed in Adj-RIB-In.
    virtual void on_ipv4_unicast_path(bgp_path_key_t path_key);
 
@@ -79,7 +85,7 @@ class EOS_SDK_PUBLIC bgp_path_handler : public base_handler<bgp_path_mgr,
  * A manager of BGP RIB paths.
  */
 class EOS_SDK_PUBLIC bgp_path_mgr: public base_mgr<bgp_path_handler,
-                                                   bgp_path_key_t> {
+                                                   bgp_afi_safi_t> {
   public:
    virtual ~bgp_path_mgr();
 

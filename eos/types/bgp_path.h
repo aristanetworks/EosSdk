@@ -12,6 +12,14 @@
 
 namespace eos {
 
+/** BGP Address Family Identifiers and Subsequent Address Family Identifiers. */
+enum bgp_afi_safi_t {
+   BGP_IPV4_UNICAST,
+   BGP_IPV6_UNICAST,
+};
+/** Appends a string representation of enum bgp_afi_safi_t value to the ostream. */
+std::ostream& operator<<(std::ostream& os, const bgp_afi_safi_t & enum_val);
+
 /** The BGP path stage before/after the inbound policies are applied on the route. */
 enum bgp_receive_route_stage_t {
    BGP_PATH_PRE_POLICY,

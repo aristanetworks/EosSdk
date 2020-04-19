@@ -7,6 +7,20 @@
 namespace eos {
 
 inline std::ostream&
+operator<<(std::ostream& os, const bgp_afi_safi_t & enum_val) {
+   if (enum_val==BGP_IPV4_UNICAST) {
+      os << "BGP_IPV4_UNICAST";
+   } else if (enum_val==BGP_IPV6_UNICAST) {
+      os << "BGP_IPV6_UNICAST";
+   } else {
+      os << "Unknown value";
+   }
+   return os;
+}
+
+
+
+inline std::ostream&
 operator<<(std::ostream& os, const bgp_receive_route_stage_t & enum_val) {
    if (enum_val==BGP_PATH_PRE_POLICY) {
       os << "BGP_PATH_PRE_POLICY";
