@@ -18,8 +18,10 @@ typedef std::string macsec_profile_name_t;
 /** Cipher suite used for MACsec. */
 enum macsec_cipher_suite_t {
    CIPHER_NULL,
-   GCM_AES_XPN_128 = 128,
-   GCM_AES_XPN_256 = 256,
+   GCM_AES_128 = 1,
+   GCM_AES_256 = 2,
+   GCM_AES_XPN_128 = 3,
+   GCM_AES_XPN_256 = 4,
 };
 /**
  * Appends a string representation of enum macsec_cipher_suite_t value to the

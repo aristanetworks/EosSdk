@@ -10,6 +10,10 @@ inline std::ostream&
 operator<<(std::ostream& os, const macsec_cipher_suite_t & enum_val) {
    if (enum_val==CIPHER_NULL) {
       os << "CIPHER_NULL";
+   } else if (enum_val==GCM_AES_128) {
+      os << "GCM_AES_128";
+   } else if (enum_val==GCM_AES_256) {
+      os << "GCM_AES_256";
    } else if (enum_val==GCM_AES_XPN_128) {
       os << "GCM_AES_XPN_128";
    } else if (enum_val==GCM_AES_XPN_256) {
