@@ -248,6 +248,11 @@ class EOS_SDK_PUBLIC agent_mgr : public base_mgr<agent_handler> {
      */
     virtual void exit() = 0;
 
+    /**
+     * Returns the time elapsed since the start of this agent.
+     */
+    virtual seconds_t agent_uptime() = 0;
+
  protected:
     agent_mgr() EOS_SDK_PRIVATE;
     friend class agent_handler;

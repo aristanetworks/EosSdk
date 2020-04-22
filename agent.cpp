@@ -85,6 +85,11 @@ class agent_mgr_impl : public agent_mgr {
    void
    status_del(std::string const & key) {
    }
+
+   seconds_t
+   agent_uptime() {
+      return 0;
+   }
    
 };
 
