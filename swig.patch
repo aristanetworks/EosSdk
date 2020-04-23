@@ -1,11 +1,13 @@
 # hunk 1: multi-inheritance is broken https://sourceforge.net/p/swig/bugs/1379/
 # hunk 2: compilation issue on GCC 4.6 http://sourceforge.net/p/swig/patches/296/
 # hunk 3: thread bug on iterators https://sourceforge.net/p/swig/bugs/1370/
-# hunk 4: thread bug on virtual methods https://github.com/swig/swig/issues/306
+# hunk 4: gcc8: clearing an object of non-trivial type [-Werror=class-memaccess]
+# hunk 5: thread bug on virtual methods https://github.com/swig/swig/issues/306
+# hunk 6: gcc8: specified bound depends on the length of the source argument [-Werror=stringop-overflow=]
 --- eossdk_wrap.cpp-t
 +++ eossdk_wrap.cpp-t
-@@ -1618,6 +1618,10 @@
-   if (!SwigPyObject_Check(next)) {
+@@ -1756,6 +1756,10 @@
+     PyErr_SetString(PyExc_TypeError, "Attempt to append a non SwigPyObject");
      return NULL;
    }
 +  while (sobj->next && SwigPyObject_Check(sobj->next)) {
@@ -15,15 +17,15 @@
    sobj->next = next;
    Py_INCREF(next);
    return SWIG_Py_Void();
-@@ -3492,6 +3496,7 @@
+@@ -3749,6 +3753,7 @@
+
  
- #include <string>
  #include <stdexcept>
 +#include <cstddef>
  
-   
+
  namespace swig {
-@@ -3508,7 +3513,11 @@
+@@ -3863,7 +3868,11 @@
      }
        
    public:
@@ -36,7 +38,16 @@
  
      // Access iterator method, required by Python
      virtual PyObject *value() const = 0;
-@@ -33457,11 +33466,13 @@
+@@ -4644,7 +4653,7 @@
+	  SWIG_Error(SWIG_TypeError,  swig::type_name<Type>());
+	}
+	if (throw_error) throw std::invalid_argument("bad type");
+-	memset(v_def,0,sizeof(Type));
++	memset(reinterpret_cast<void*>(v_def),0,sizeof(Type));
+	return *v_def;
+       }
+     }
+@@ -82558,11 +82567,13 @@
    try {
      {
        try {
@@ -50,3 +61,12 @@
        } catch (error const & e) {
          throw_py_error(e);
          SWIG_fail;
+@@ -116430,7 +116441,7 @@
+       size_t size = strlen(name)+1;
+       gv->name = (char *)malloc(size);
+       if (gv->name) {
+-        strncpy(gv->name,name,size);
++        strcpy(gv->name,name);
+         gv->get_attr = get_attr;
+         gv->set_attr = set_attr;
+         gv->next = v->vars;
