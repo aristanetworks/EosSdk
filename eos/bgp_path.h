@@ -44,6 +44,7 @@ class EOS_SDK_PUBLIC bgp_path_iter_t
  * This class provides handler APIs to react to BGP path changes in Adj-RIB-In.
  * New path updates are notified once BGP has converged.
  * An iterator must be used to retreive the existing paths after BGP convergence.
+ * This is only supported under multi-agent mode.
  *
  */
 class EOS_SDK_PUBLIC bgp_path_handler : public base_handler<bgp_path_mgr,
@@ -99,12 +100,14 @@ class EOS_SDK_PUBLIC bgp_path_mgr: public base_mgr<bgp_path_handler,
    /**
     * Returns an IPv4 Unicast BGP path in Adj-RIB-In with the corresponding
     * path key. Returns an empty bgp_path_t if no matching path was found.
+    * This is only supported under multi-agent mode.
     */
    virtual bgp_path_t ipv4_unicast_path(bgp_path_key_t const &,
                                         bgp_path_options_t &) = 0;
 
    /**
     * Returns true if bgp is converged for IPv4 Unicast address family
+    * This is only supported under multi-agent mode.
     */
    virtual bool ipv4_unicast_bgp_convergence() = 0;
 
@@ -118,12 +121,14 @@ class EOS_SDK_PUBLIC bgp_path_mgr: public base_mgr<bgp_path_handler,
    /**
     * Returns an IPv6 Unicast BGP path in Adj-RIB-In with the corresponding
     * path key. Returns an empty bgp_path_t if no matching path was found.
+    * This is only supported under multi-agent mode.
     */
    virtual bgp_path_t ipv6_unicast_path(bgp_path_key_t const &,
                                         bgp_path_options_t &) = 0;
 
    /**
     * Returns true if bgp is converged for IPv6 Unicast address family
+    * This is only supported under multi-agent mode.
     */
    virtual bool ipv6_unicast_bgp_convergence() = 0;
 
