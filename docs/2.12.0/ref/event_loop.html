@@ -1,0 +1,257 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>event_loop &mdash; Arista EOS SDK 2.11.0 reference</title>
+    
+    <link rel="stylesheet" href="_static/eossdk.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/breathe.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '2.11.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="Arista EOS SDK 2.11.0 reference" href="index.html" />
+    <link rel="next" title="exception" href="exception.html" />
+    <link rel="prev" title="eth_phy_intf" href="eth_phy_intf.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="exception.html" title="exception"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="eth_phy_intf.html" title="eth_phy_intf"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">Arista EOS SDK 2.11.0 reference</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="event-loop">
+<h1><strong>event_loop</strong><a class="headerlink" href="#event-loop" title="Permalink to this headline">¶</a></h1>
+<p>Externalized event loop for alternate agent lifecycles.</p>
+<p>This module exposes the SDK&#8217;s underlying event loop, which enables programs to be written without using the <tt class="docutils literal"><span class="pre">sdk.main_loop()</span></tt> infrastructure.</p>
+<p>The first way this module can be used is by writing SDK programs as scripts (instead of long-running agents), by grabbing an instance of the loop via <tt class="docutils literal"><span class="pre">sdk.get_event_loop()</span></tt>. Then grab any managers your script needs, and then call <tt class="docutils literal"><span class="pre">loop-&gt;wait_for_initialized()</span></tt>. At this point all managers are ready for use. To yield to the event loop at any time, call <tt class="docutils literal"><span class="pre">loop-&gt;run()</span></tt>, which gives the SDK time to synchronize with Sysdb and the rest of the system. When your script is finished, call <tt class="docutils literal"><span class="pre">loop-&gt;flush()</span></tt> to make sure all writes you&#8217;ve performed have been committed to Sysdb. For an example, see examples/NexthopGroupModifierScript.cpp.</p>
+<p>The other way this can be used is by integrating the event_loop_handler in an external event loop, for example, by integrating into a Thrift loop. To do this, the SDK exposes various file descriptors that should be watched by calling into a <tt class="docutils literal"><span class="pre">event_loop_handler</span></tt> that your program should subclass. For an example, see examples/Thrift[Client|Server].cpp&#8217;s interaction with the <tt class="docutils literal"><span class="pre">libevent_loop</span></tt> defined in <tt class="docutils literal"><span class="pre">libevent.h</span></tt>. </p>
+<dl class="namespace">
+<dt>
+<span class="target" id="eossdknamespaceeos"></span><em>namespace</em> <tt class="descname">eos</tt></dt>
+<dd><dl class="class">
+<dt>
+<span class="target" id="eossdkclasseos_1_1event__loop__handler"></span><em>class</em> <tt class="descname">event_loop_handler</tt></dt>
+<dd><em>#include &lt;event_loop.h&gt;</em><p>Adapter to integrate the EOS event loop with an external event loop. Subclass this class to be able to handle the file descriptors and timers that the EOS code needs to dispatch to your event loop implementation.</p>
+<p>When you provide your implementation of <a class="reference internal" href="#eossdkclasseos_1_1event__loop__handler"><em>event_loop_handler</em></a> to the <a class="reference internal" href="#eossdkclasseos_1_1event__loop"><em>event_loop</em></a>, EOS code will start calling the watch_* methods to (un)register its interest in various file descriptors, so that you can hook them up into your event loop implementation. When those file descriptors become ready, you must call the corresponding on_*() method in a timely fashion for the EOS code to run.</p>
+<p>The on_*() methods are all non-blocking methods. </p>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1event__loop__handler_1ac6b8d910df508c510af1b66ed3dcfdcf"></span>virtual <tt class="descname">~event_loop_handler</tt><big>(</big><big>)</big></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1event__loop__handler_1a1b55ea61199e01cd01bbc00cee364838"></span>void <tt class="descname">on_readable</tt><big>(</big>int <em>fd</em><big>)</big></dt>
+<dd><p>Notifies the EOS event loop that the file descriptor is readable. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1event__loop__handler_1abdd018ad544b7b3a8b76d46a67511ab7"></span>void <tt class="descname">on_writable</tt><big>(</big>int <em>fd</em><big>)</big></dt>
+<dd><p>Notifies the EOS event loop that the file descriptor is writable. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1event__loop__handler_1aba2b966957fbac9c7268f6a2643340ef"></span>void <tt class="descname">on_exception</tt><big>(</big>int <em>fd</em><big>)</big></dt>
+<dd><p>Notifies the EOS event loop that the file descriptor has exceptions. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1event__loop__handler_1af9bd4b19989a9c8c64a6b0c0f9348bdc"></span>void <tt class="descname">on_timeout</tt><big>(</big><big>)</big></dt>
+<dd><p>Notifies the EOS event loop that its next timer has expired. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1event__loop__handler_1aa347916f6c74320b706c9b46e12dc3eb"></span>virtual void <tt class="descname">watch_readable</tt><big>(</big>int <em>fd</em>, bool <em>interested</em><big>)</big> = 0</dt>
+<dd><p>Called by EOS to (un)register its interest in a fd being readable. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1event__loop__handler_1a7be327e9cb34b9acbce5a0696206f360"></span>virtual void <tt class="descname">watch_writable</tt><big>(</big>int <em>fd</em>, bool <em>interested</em><big>)</big> = 0</dt>
+<dd><p>Called by EOS to (un)register its interest in a fd being writable. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1event__loop__handler_1aabc4689e15506c0c73f711b4f5e2c668"></span>virtual void <tt class="descname">watch_exception</tt><big>(</big>int <em>fd</em>, bool <em>interested</em><big>)</big> = 0</dt>
+<dd><p>Called by EOS to (un)register its interest in a fd having exceptions. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1event__loop__handler_1a4a49df180a2c9a4e575eda56f962b6e2"></span>virtual void <tt class="descname">timeout_time_is</tt><big>(</big>struct timeval <em>deadline</em><big>)</big> = 0</dt>
+<dd><p>Called to register when is the next timeout that EOS code must handle. The deadline passed in argument is relative to now (so for instance if the next timer the EOS code need to handle is in 5 seconds from now, then the deadline will be 5 seconds, not &#8220;now + 5s&#8221;). If this function is called multiple times, subsequent calls should override the timeout set by previous calls. In other words, there is only one timeout associated with this function, instead of each call creating a new timeout. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="class">
+<dt>
+<span class="target" id="eossdkclasseos_1_1event__loop"></span><em>class</em> <tt class="descname">event_loop</tt></dt>
+<dd><em>#include &lt;event_loop.h&gt;</em><p>The EOS event loop.</p>
+<p>This class represents the event loop that is built into EOS code. It can be used to run this loop on demand, or to integrate this event loop with an external event loop, such as that provided by libevent or other third-party code. </p>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1event__loop_1aadaa7396af242b0159b6750c19d05bd3"></span><tt class="descname">~event_loop</tt><big>(</big><big>)</big></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1event__loop_1afe5cbacd28356b9a9a51582427d57082"></span>void <tt class="descname">wait_for_initialized</tt><big>(</big><big>)</big> const</dt>
+<dd><p>Wait for all managers to be initialized. Generally called right after creating the <a class="reference internal" href="#eossdkclasseos_1_1event__loop"><em>event_loop</em></a>, as an alternative to creating an <a class="reference internal" href="agent.html#eossdkclasseos_1_1agent__handler"><em>agent_handler</em></a> and then waiting for on_initialized to be called.</p>
+<p>This method is a blocking method. It may block for any amount of time that is necessary to wait for the initial state sync from Sysdb. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1event__loop_1a5cedf15275eb317271a2ad98c407c312"></span>void <tt class="descname">run</tt><big>(</big>seconds_t <em>duration</em> = 0<big>)</big> const</dt>
+<dd><p>Run the event loop for <tt class="docutils literal"><span class="pre">duration</span></tt> seconds. If no duration is specified, all pending events will be executed and control will be returned to the caller. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1event__loop_1a6a3985b353bf9b22143bebc5c5cf1c17"></span>void <tt class="descname">flush</tt><big>(</big><big>)</big> const</dt>
+<dd><p>Drain the event loop of all outgoing writes.</p>
+<p>This function should be used in conjunction with EOS SDK scripts, and should be called before your agent exits. This ensures that all writes your script has performed will have made it to Sysdb. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1event__loop_1a52dfe898951eba7bcf85b925a92af2a2"></span>void <tt class="descname">external_loop_is</tt><big>(</big><a class="reference internal" href="#eossdkclasseos_1_1event__loop__handler"><em>event_loop_handler</em></a> * <em>loop</em><big>)</big></dt>
+<dd><p>Registers an external event loop to use instead of EOS&#8217;s.</p>
+<p>Upon calling this function, the EOS code will start registering its file descriptors and its next timeout with the given handler, and will start expecting that an external event loop will deliver events to the handler in a timely fashion.</p>
+<p>If <a class="reference internal" href="#eossdkclasseos_1_1event__loop_1afe5cbacd28356b9a9a51582427d57082"><em>wait_for_initialized()</em></a> hasn&#8217;t been called already, this method is a blocking method. It may block for any amount of time that is necessary to wait for the initial state sync from Sysdb. </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Private Functions</p>
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1event__loop_1ad51b8071c626a12583fd278406d511e4"></span><tt class="descname">event_loop</tt><big>(</big>mount_mgr *<big>)</big></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Private Members</p>
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1event__loop_1a15859511bd2faaa6498414bb9f8be202"></span><tt class="descname">event_loop</tt></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1event__loop_1a0d957f5b54b823e07d908e27b6c07480"></span>mount_mgr * <tt class="descname">mount_mgr_</tt></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1event__loop_1a0965adc86613c3230b700547fd8db276"></span><a class="reference internal" href="#eossdkclasseos_1_1event__loop__handler"><em>event_loop_handler</em></a> * <tt class="descname">loop_</tt></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Friends</p>
+<dl class="friend">
+<dt>
+<span class="target" id="eossdkclasseos_1_1event__loop_1aa92709df4b208445a6de98696b83abeb"></span>friend class <tt class="descname">sdk</tt></dt>
+<dd></dd></dl>
+
+</div>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="eth_phy_intf.html"
+                        title="previous chapter"><strong>eth_phy_intf</strong></a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="exception.html"
+                        title="next chapter"><strong>exception</strong></a></p>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="exception.html" title="exception"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="eth_phy_intf.html" title="eth_phy_intf"
+             >previous</a> |</li>
+        <li><a href="index.html">Arista EOS SDK 2.11.0 reference</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2014, Arista Networks.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

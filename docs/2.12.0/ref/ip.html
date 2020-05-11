@@ -1,0 +1,708 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>ip &mdash; Arista EOS SDK 2.11.0 reference</title>
+    
+    <link rel="stylesheet" href="_static/eossdk.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/breathe.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '2.11.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="Arista EOS SDK 2.11.0 reference" href="index.html" />
+    <link rel="next" title="ip_intf" href="ip_intf.html" />
+    <link rel="prev" title="intf" href="intf.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="ip_intf.html" title="ip_intf"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="intf.html" title="intf"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">Arista EOS SDK 2.11.0 reference</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="ip">
+<h1><strong>ip</strong><a class="headerlink" href="#ip" title="Permalink to this headline">¶</a></h1>
+<p>IP address and prefix types.</p>
+<p>This module provides definitions of a variety of IP address types used throughout the SDK, including an IPv4 or IPv6 address, an IP prefix (a network address with a prefix length), and an IP address and mask. IPv4 and IPv6 are supported by each of these types, so there are no separate classes for each address family. For example, the <a class="reference internal" href="#eossdkclasseos_1_1ip__addr__t"><em>eos::ip_addr_t</em></a> IP address type has an af() accessor to inspect the address family.</p>
+<p>Utility functions are provided to parse or validate string format IP addresses and CIDR-style IP prefixes.</p>
+<p>Some examples of the manipulations available are as follows, see the function descriptions for more information.</p>
+<p> <pre class="literal-block">
+* // Constructs an IPv4 address from a string. Must be a valid IP.
+* <a class="reference internal" href="#eossdkclasseos_1_1ip__addr__t"><em>eos::ip_addr_t</em></a> v4(&quot;1.2.3.4&quot;);
+*
+* // Constructs an IPv6 address from a string.
+* <a class="reference internal" href="#eossdkclasseos_1_1ip__addr__t"><em>eos::ip_addr_t</em></a> v6(&quot;dead:beef::1&quot;);
+*
+* // Parses and validates an IP address
+* <a class="reference internal" href="#eossdkclasseos_1_1ip__addr__t"><em>eos::ip_addr_t</em></a> address;   // the IPv4/IPv6 address type
+* <a class="reference internal" href="#eossdkclasseos_1_1ip__prefix__t"><em>eos::ip_prefix_t</em></a> prefix;  // the IPv4/IPv6 prefix type
+* bool valid;
+*
+* // valid == true, and address is changed to contain the
+* // representation of 1.1.1.1 with its af() == eos::AF_IPV4
+* valid = eos::parse_ip_addr(&quot;1.1.1.1&quot;, &amp;address);
+* // valid == false, address is unchanged
+* valid = eos::parse_ip_addr(&quot;not_an_ip&quot;, &amp;address);
+*
+* // Parses and validates an IP prefix
+*
+* // The IP address must be the prefix network address, else the
+* // prefix is invalid. Like parse_ip_address, prefix is updated to
+* // contain the representation of the parsed prefix if and only if
+* // valid == true.
+* valid = eos::parse_ip_prefix(&quot;192.0.2.0/24&quot;, &amp;prefix); // valid == true
+* valid = eos::parse_ip_prefix(&quot;192.0.2.1/24&quot;, &amp;prefix); // valid == false
+* valid = eos::parse_ip_prefix(&quot;192.0.2.1/32&quot;, &amp;prefix); // valid == true
+* valid = eos::parse_ip_prefix(&quot;::1/128&quot;, &amp;prefix); // valid == true
+*
+* // Construct an IP address and mask for 192.0.2.200/24 (e.g., used to
+* // plumb a network interface in ip_intf.h)
+* <a class="reference internal" href="#eossdkclasseos_1_1ip__addr__t"><em>eos::ip_addr_t</em></a> intf_addr(&quot;192.0.2.200&quot;);
+* <a class="reference internal" href="#eossdkclasseos_1_1ip__addr__mask__t"><em>eos::ip_addr_mask_t</em></a> intf_addr_mask(intf_addr, 24);
+* 
+</pre>
+</p>
+<dl class="struct">
+<dt>
+<span class="target" id="eossdkstructstd_1_1hash_3_01eos_1_1ip__addr__t_01_4"></span>template &lt;&gt;</dt>
+<dt>
+<em>struct</em> <tt class="descname">ip_addr_t &gt;</tt></dt>
+<dd><div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="function">
+<dt>
+<span class="target" id="eossdkstructstd_1_1hash_3_01eos_1_1ip__addr__t_01_4_1aea8730debda10f0a98e3df3a8bf583a3"></span>size_t <tt class="descname">operator()</tt><big>(</big><a class="reference internal" href="#eossdkclasseos_1_1ip__addr__t"><em>eos::ip_addr_t</em></a> const &amp;<big>)</big> const</dt>
+<dd></dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="namespace">
+<dt>
+<span class="target" id="eossdknamespacestd"></span><em>namespace</em> <tt class="descname">std</tt></dt>
+<dd><p>STL namespace. </p>
+<dl class="struct">
+<dt>
+<span class="target" id="eossdkstructstd_1_1hash_3_01eos_1_1ip__addr__t_01_4"></span>template &lt;&gt;</dt>
+<dt>
+<em>struct</em> <tt class="descname">ip_addr_t &gt;</tt></dt>
+<dd><div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="function">
+<dt>
+<span class="target" id="eossdkstructstd_1_1hash_3_01eos_1_1ip__addr__t_01_4_1aea8730debda10f0a98e3df3a8bf583a3"></span>size_t <tt class="descname">operator()</tt><big>(</big><a class="reference internal" href="#eossdkclasseos_1_1ip__addr__t"><em>eos::ip_addr_t</em></a> const &amp;<big>)</big> const</dt>
+<dd></dd></dl>
+
+</div>
+</dd></dl>
+
+</dd></dl>
+
+<div class="section" id="type-definitions-in-ip">
+<h2>Type definitions in <strong>ip</strong><a class="headerlink" href="#type-definitions-in-ip" title="Permalink to this headline">¶</a></h2>
+<dl class="namespace">
+<dt>
+<span class="target" id="eossdknamespaceeos"></span><em>namespace</em> <tt class="descname">eos</tt></dt>
+<dd><div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Enums</p>
+<dl class="enum">
+<dt>
+<span class="target" id="eossdknamespaceeos_1a094ddcbf8862547ca5f82c04a2c41e36"></span><strong>af_t enum</strong></dt>
+<dd><p>The address family of an IP address. </p>
+<p><em>Values:</em></p>
+<ul class="breatheenumvalues">
+<li><tt class="first docutils literal"><span class="pre">AF_NULL</span></tt> - <p>Not a valid address family (e.g., the default address). </p>
+</li>
+<li><tt class="first docutils literal"><span class="pre">AF_IPV4</span></tt><tt class="docutils literal"> <span class="pre">=</span> <span class="pre">=</span> <span class="pre">4</span></tt> - <p>An IPv4 address. </p>
+</li>
+<li><tt class="first docutils literal"><span class="pre">AF_IPV6</span></tt><tt class="docutils literal"> <span class="pre">=</span> <span class="pre">=</span> <span class="pre">6</span></tt> - <p>An IPv6 address. </p>
+</li>
+</ul>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Functions</p>
+<dl class="function">
+<dt>
+<span class="target" id="eossdknamespaceeos_1ab98bcdb639c84dfd0a68cc767fc31cf1"></span>bool <tt class="descname">parse_ip_addr</tt><big>(</big>char const * <em>addr</em>, <a class="reference internal" href="#eossdkclasseos_1_1ip__addr__t"><em>ip_addr_t</em></a> * <em>result</em><big>)</big></dt>
+<dd><p>Parses a string IP address, returning true if the address is valid. Supports both IPv4 and IPv6 addresses.</p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>true if the address parsed successfully, false otherwise. </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><tt class="first docutils literal"><span class="pre">addr</span></tt> - <p>Pointer to a C string containing an address to parse. </p>
+</li>
+<li><tt class="first docutils literal"><span class="pre">result</span></tt> - <p>Mutable arugment to place a successfully parsed result into. </p>
+</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdknamespaceeos_1ad5069b0b8625069c2d228e611830ef0a"></span>bool <tt class="descname">parse_ip_prefix</tt><big>(</big>char const * <em>addr</em>, <a class="reference internal" href="#eossdkclasseos_1_1ip__prefix__t"><em>ip_prefix_t</em></a> * <em>result</em><big>)</big></dt>
+<dd><p>Parses an IP route prefix, returns true if the prefix is valid. Supports both IPv4 and IPv6 route prefixes.</p>
+<p>For example, &#8220;10.1.2.0/24&#8221; or &#8220;fffe:abab:1234::/96&#8221; are legal, but &#8220;10.1.2.7/24&#8221; is not, as 10.1.2.7 is not a valid network address for a 24-bit prefix length.</p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>true if the route prefix parsed successfully, false otherwise. </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><tt class="first docutils literal"><span class="pre">addr</span></tt> - <p>Pointer to a C string containing a prefix to parse. </p>
+</li>
+<li><tt class="first docutils literal"><span class="pre">result</span></tt> - <p>Mutable arugment to place a successfully parsed result into. </p>
+</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+</div>
+<dl class="class">
+<dt>
+<span class="target" id="eossdkclasseos_1_1ip__addr__t"></span><em>class</em> <tt class="descname">ip_addr_t</tt></dt>
+<dd><em>#include &lt;ip.h&gt;</em><p>An IP address. Both IPv4 and IPv6 addresses are supported by this class. </p>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1ip__addr__t_1a1ef3f535c2ef460bbb3bfe5784868f15"></span><tt class="descname">ip_addr_t</tt><big>(</big><big>)</big></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1ip__addr__t_1afc217c96d30c212e4145078976c53107"></span><tt class="descname">ip_addr_t</tt><big>(</big>af_t <em>af</em>, uint8_t const * <em>addr</em><big>)</big></dt>
+<dd><p>Creates an address from an address family and a network order array of bytes. Pass exactly 4 bytes for AF_IPV4 address type or 16 bytes for AF_IPV6. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1ip__addr__t_1a75015945c573d218c837f12d59be36a4"></span><tt class="descname">ip_addr_t</tt><big>(</big>in_addr const &amp; <em>addr</em><big>)</big></dt>
+<dd><p>Creates an IP address from a POSIX in_addr (IPv4). </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1ip__addr__t_1afb41c468f4295a0edc1481654fcdd3bd"></span><tt class="descname">ip_addr_t</tt><big>(</big>in6_addr const &amp; <em>addr</em><big>)</big></dt>
+<dd><p>Creates an IP address from a POSIX in6_addr (IPv6). </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1ip__addr__t_1ae58f2a793f201d6965c4d75aa65c4537"></span><tt class="descname">ip_addr_t</tt><big>(</big>std::string const &amp; <em>address_string</em><big>)</big></dt>
+<dd><p>Creates an IP address from the provided string. panic() is called if an invalid (non IPv4 or IPv6) address is supplied. <dl class="docutils">
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><tt class="first docutils literal"><span class="pre">addr</span></tt> - <p>An IPv4 or IPv6 address as a string. </p>
+</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1ip__addr__t_1a0a6398d3dc84a6a36601a5a57b788225"></span><tt class="descname">ip_addr_t</tt><big>(</big>char const * <em>address_string</em><big>)</big></dt>
+<dd><p>Creates an IP address from the provided string. panic() is called if an invalid (non IPv4 or IPv6) address is supplied. <dl class="docutils">
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><tt class="first docutils literal"><span class="pre">addr</span></tt> - <p>An IPv4 or IPv6 address as a string. </p>
+</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1ip__addr__t_1ab200b2c9cf33c387e6260867f93021d7"></span><tt class="descname">ip_addr_t</tt><big>(</big>uint32_be_t <em>addr_v4</em><big>)</big></dt>
+<dd><p>Takes a network order 32-bit unsigned integer as an IPv4 address. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1ip__addr__t_1afa4bb031b09ec67cb6a45c579feefb88"></span>af_t <tt class="descname">af</tt><big>(</big><big>)</big> const</dt>
+<dd><p>Getter for &#8216;af&#8217;: The address family of this IP address. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1ip__addr__t_1aecd30ec79fd4799642e8230b1d0fe950"></span>bool <tt class="descname">operator==</tt><big>(</big><a class="reference internal" href="#eossdkclasseos_1_1ip__addr__t"><em>ip_addr_t</em></a> const &amp; <em>other</em><big>)</big> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1ip__addr__t_1a93e171d8c2ab3f51026f2ac9e6bcdd2e"></span>bool <tt class="descname">operator!=</tt><big>(</big><a class="reference internal" href="#eossdkclasseos_1_1ip__addr__t"><em>ip_addr_t</em></a> const &amp; <em>other</em><big>)</big> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1ip__addr__t_1a27fc24d06b7b37f325fdfd14acc8c3f0"></span>bool <tt class="descname">operator&lt;</tt><big>(</big><a class="reference internal" href="#eossdkclasseos_1_1ip__addr__t"><em>ip_addr_t</em></a> const &amp; <em>other</em><big>)</big> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1ip__addr__t_1ace9384769a67fa19e3a6a1ae1ca03a00"></span>uint8_t const * <tt class="descname">addr</tt><big>(</big><big>)</big> const</dt>
+<dd><p>The IP address as a big endian array of bytes. <dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>A byte array, 4 bytes long if <a class="reference internal" href="#eossdkclasseos_1_1ip__addr__t_1afa4bb031b09ec67cb6a45c579feefb88"><em>af()</em></a> == AF_IPV4 and 16 for AF_IPV6. </dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1ip__addr__t_1aac17aa5169d915e7c13eed0d1fce2dbb"></span>uint32_be_t <tt class="descname">addr_v4</tt><big>(</big><big>)</big> const</dt>
+<dd><p>The IP address as a big endian 32-bit integer.</p>
+<p>Only valid for IPv4 addresses; panic() is called if used on an AF_IPV6 family address. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1ip__addr__t_1ab15457b8d54f4d97888f13ef8c38e5a1"></span>std::string <tt class="descname">to_string</tt><big>(</big><big>)</big> const</dt>
+<dd><p>String representation of the IP address, e.g. &#8220;1.2.3.4&#8221; or &#8220;f00d::1&#8221;. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1ip__addr__t_1ae714822fc1eda5a357c803d500273926"></span><tt class="descname">operator bool</tt><big>(</big><big>)</big> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1ip__addr__t_1a6b8a03e45bad406040c675f0228dcd26"></span>uint32_t <tt class="descname">hash</tt><big>(</big><big>)</big> const</dt>
+<dd><p>The hash function for type <a class="reference internal" href="#eossdkclasseos_1_1ip__addr__t"><em>ip_addr_t</em></a>. </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Public Members</p>
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1ip__addr__t_1a71a69bf0d8329c5e531b153a6a19e835"></span>uint8_t <tt class="descname">bytes</tt>[16]</dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1ip__addr__t_1a170647efcc978e83632feffff231d9c1"></span>uint32_t <tt class="descname">words</tt>[4]</dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Private Members</p>
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1ip__addr__t_1a685a6ab919a603b1b4d3cf75add84a80"></span>af_t <tt class="descname">af_</tt></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1ip__addr__t_1ae729cf3b9ca3f39a4363e75d8df2c355"></span>union eos::ip_addr_t::&#64;1 <tt class="descname">addr_</tt></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Friends</p>
+<dl class="friend">
+<dt>
+<span class="target" id="eossdkclasseos_1_1ip__addr__t_1aaceac88efe457f7fdeb72f2da59e8242"></span>friend std::ostream &amp; <tt class="descname">operator&lt;&lt;</tt></dt>
+<dd><p>A utility stream operator that adds a string representation of <a class="reference internal" href="#eossdkclasseos_1_1ip__addr__t"><em>ip_addr_t</em></a> to the ostream. </p>
+</dd></dl>
+
+<dl class="friend">
+<dt>
+<span class="target" id="eossdkclasseos_1_1ip__addr__t_1ab1df59a53fb3a0db993b25aff06892bc"></span>friend bool <tt class="descname">parse_ip_addr</tt></dt>
+<dd><p>Parses a string IP address, returning true if the address is valid. Supports both IPv4 and IPv6 addresses.</p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>true if the address parsed successfully, false otherwise. </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><tt class="first docutils literal"><span class="pre">addr</span></tt> - <p>Pointer to a C string containing an address to parse. </p>
+</li>
+<li><tt class="first docutils literal"><span class="pre">result</span></tt> - <p>Mutable arugment to place a successfully parsed result into. </p>
+</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="class">
+<dt>
+<span class="target" id="eossdkclasseos_1_1ip__prefix__t"></span><em>class</em> <tt class="descname">ip_prefix_t</tt></dt>
+<dd><em>#include &lt;ip.h&gt;</em><p>An IPv4 or IPv6 route prefix.</p>
+<p>A route prefix combines a network address and a prefix length. A network address has no 1 bits in the host component of the address (i.e., only the first prefix_length bits of the address can be non-zero). </p>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1ip__prefix__t_1a040906d36c866347bb300e555e66a302"></span><tt class="descname">ip_prefix_t</tt><big>(</big><big>)</big></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1ip__prefix__t_1abf1ab72815d9f5c8d23a2fb8aaa38dc2"></span><tt class="descname">ip_prefix_t</tt><big>(</big><a class="reference internal" href="#eossdkclasseos_1_1ip__addr__t"><em>ip_addr_t</em></a> const &amp; <em>addr</em>, uint8_t <em>prefix_length</em><big>)</big></dt>
+<dd><p>Constructs a prefix from an IP network address and prefix length in bits.</p>
+<p>panic() is called if the address provided is not a valid network address given the provided prefix length. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1ip__prefix__t_1a44d2a4b019e5a5ce10f86f0eb6d3c936"></span><tt class="descname">ip_prefix_t</tt><big>(</big>char const * <em>prefix_string</em><big>)</big></dt>
+<dd><p>Constructs a prefix with the provided IP prefix string. Supports IPv4 and IPv6 address prefixes. This constructor will call panic() if the string passed is not a valid network prefix (e.g., &#8220;10.1.2.7/24&#8221; is invalid, while &#8220;10.1.2.0/24&#8221; is OK). </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1ip__prefix__t_1adfbc8fb4dd9b39e29e6b5d3161655de7"></span>uint8_t <tt class="descname">prefix_length</tt><big>(</big><big>)</big> const</dt>
+<dd><p>Getter for &#8216;prefix_length&#8217;: the prefix length in bits. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1ip__prefix__t_1ae5e523a571b4b53f2ef66995735fa0cd"></span>af_t <tt class="descname">af</tt><big>(</big><big>)</big> const</dt>
+<dd><p>The address family of the prefix. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1ip__prefix__t_1ad37541edd421584b71c1e34524bddf25"></span><a class="reference internal" href="#eossdkclasseos_1_1ip__addr__t"><em>ip_addr_t</em></a> <tt class="descname">network</tt><big>(</big><big>)</big> const</dt>
+<dd><p>The prefix&#8217;s network address. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1ip__prefix__t_1a9725e1d44d2279c1b5faf346d8ca44e4"></span><a class="reference internal" href="#eossdkclasseos_1_1ip__addr__t"><em>ip_addr_t</em></a> <tt class="descname">mask</tt><big>(</big><big>)</big> const</dt>
+<dd><p>The prefix as mask. A prefix length of 8 on a v4 address will yield the mask 255.0.0.0. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1ip__prefix__t_1a02e92a633fa3deb2735511d1a767105d"></span>std::string <tt class="descname">to_string</tt><big>(</big><big>)</big> const</dt>
+<dd><p>String representation of the IP prefix, e.g. &#8220;10.2.3.4/24&#8221; or &#8220;cafe::1/218&#8221;. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1ip__prefix__t_1a08b7ceb9696930ae697b0b30b4fd1738"></span>bool <tt class="descname">operator==</tt><big>(</big><a class="reference internal" href="#eossdkclasseos_1_1ip__prefix__t"><em>ip_prefix_t</em></a> const &amp; <em>other</em><big>)</big> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1ip__prefix__t_1a9048aede28bd7bd31b6a9f7c9be30d6e"></span>bool <tt class="descname">operator!=</tt><big>(</big><a class="reference internal" href="#eossdkclasseos_1_1ip__prefix__t"><em>ip_prefix_t</em></a> const &amp; <em>other</em><big>)</big> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1ip__prefix__t_1a465f703ae7413079a4b91927f26ef014"></span>bool <tt class="descname">operator&lt;</tt><big>(</big><a class="reference internal" href="#eossdkclasseos_1_1ip__prefix__t"><em>ip_prefix_t</em></a> const &amp; <em>other</em><big>)</big> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1ip__prefix__t_1a37d9ff16c03f6a223726b8af418305d2"></span>uint32_t <tt class="descname">hash</tt><big>(</big><big>)</big> const</dt>
+<dd><p>The hash function for type <a class="reference internal" href="#eossdkclasseos_1_1ip__prefix__t"><em>ip_prefix_t</em></a>. </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Private Members</p>
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1ip__prefix__t_1a5fb88a1bf2ba1564ddfff737da0ca885"></span><a class="reference internal" href="#eossdkclasseos_1_1ip__addr__t"><em>ip_addr_t</em></a> <tt class="descname">addr_</tt></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1ip__prefix__t_1ae0da4601c1b859a0c0e03d35dc428634"></span>uint8_t <tt class="descname">prefix_length_</tt></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Friends</p>
+<dl class="friend">
+<dt>
+<span class="target" id="eossdkclasseos_1_1ip__prefix__t_1aca3ddb24d46dc8820068aa6f4c631c23"></span>friend std::ostream &amp; <tt class="descname">operator&lt;&lt;</tt></dt>
+<dd><p>A utility stream operator that adds a string representation of <a class="reference internal" href="#eossdkclasseos_1_1ip__prefix__t"><em>ip_prefix_t</em></a> to the ostream. </p>
+</dd></dl>
+
+<dl class="friend">
+<dt>
+<span class="target" id="eossdkclasseos_1_1ip__prefix__t_1a14cba6eab99fe3746013e6e9d2741cea"></span>friend bool <tt class="descname">parse_ip_prefix</tt></dt>
+<dd><p>Parses an IP route prefix, returns true if the prefix is valid. Supports both IPv4 and IPv6 route prefixes.</p>
+<p>For example, &#8220;10.1.2.0/24&#8221; or &#8220;fffe:abab:1234::/96&#8221; are legal, but &#8220;10.1.2.7/24&#8221; is not, as 10.1.2.7 is not a valid network address for a 24-bit prefix length.</p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>true if the route prefix parsed successfully, false otherwise. </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><tt class="first docutils literal"><span class="pre">addr</span></tt> - <p>Pointer to a C string containing a prefix to parse. </p>
+</li>
+<li><tt class="first docutils literal"><span class="pre">result</span></tt> - <p>Mutable arugment to place a successfully parsed result into. </p>
+</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="class">
+<dt>
+<span class="target" id="eossdkclasseos_1_1ip__addr__mask__t"></span><em>class</em> <tt class="descname">ip_addr_mask_t</tt></dt>
+<dd><em>#include &lt;ip.h&gt;</em><p>An IP address with a subnet mask.</p>
+<p>This allows for contiguous subnet masks only for IPv4 and IPv6 addresses.</p>
+<p>IPv6 addresses in EOS only support contiguous masks, so for IPv6 addresses <a class="reference internal" href="#eossdkclasseos_1_1ip__addr__mask__t_1a52e1d8561bdd54e0f3244092d2f4441e"><em>mask()</em></a> provides the same value as <a class="reference internal" href="#eossdkclasseos_1_1ip__addr__mask__t_1a7c9b9e9da1a41328bb28f541b4aee6ef"><em>mask_length()</em></a>. </p>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1ip__addr__mask__t_1a8b648194b061759fce61518959433e4c"></span><tt class="descname">ip_addr_mask_t</tt><big>(</big><big>)</big></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1ip__addr__mask__t_1a1ac5339f06a6dd811655c591d0b7c43a"></span><tt class="descname">ip_addr_mask_t</tt><big>(</big><a class="reference internal" href="#eossdkclasseos_1_1ip__addr__t"><em>ip_addr_t</em></a> const &amp; <em>addr</em>, uint8_t <em>mask_length</em><big>)</big></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1ip__addr__mask__t_1a83273b26c303605fd16da7ab2607bc7e"></span><a class="reference internal" href="#eossdkclasseos_1_1ip__addr__t"><em>ip_addr_t</em></a> <tt class="descname">addr</tt><big>(</big><big>)</big> const</dt>
+<dd><p>Getter for &#8216;addr&#8217;: the address/mask&#8217;s IP address. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1ip__addr__mask__t_1a7c9b9e9da1a41328bb28f541b4aee6ef"></span>uint8_t <tt class="descname">mask_length</tt><big>(</big><big>)</big> const</dt>
+<dd><p>Getter for &#8216;mask_length&#8217;: the bit mask length, e.g., 24. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1ip__addr__mask__t_1ad2162c3c57bd0959d6bfdda0a74d1868"></span>af_t <tt class="descname">af</tt><big>(</big><big>)</big> const</dt>
+<dd><p>The address family of the prefix. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1ip__addr__mask__t_1a52e1d8561bdd54e0f3244092d2f4441e"></span>uint32_be_t <tt class="descname">mask</tt><big>(</big><big>)</big> const</dt>
+<dd><p>The bit mask itself, e.g., 0xFFFFFF00 (IPv4). For IPv6, same as <a class="reference internal" href="#eossdkclasseos_1_1ip__addr__mask__t_1a7c9b9e9da1a41328bb28f541b4aee6ef"><em>mask_length()</em></a>. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1ip__addr__mask__t_1adbea0a3f362b9d5bf5200a1083155dd6"></span>std::string <tt class="descname">to_string</tt><big>(</big><big>)</big> const</dt>
+<dd><p>The IP address and mask as a string, e.g., &#8220;192.0.2.1/0xFFFFFF00&#8221;. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1ip__addr__mask__t_1a7fd50642f7dc0f6a8d85dac303bac2f1"></span>bool <tt class="descname">operator==</tt><big>(</big><a class="reference internal" href="#eossdkclasseos_1_1ip__addr__mask__t"><em>ip_addr_mask_t</em></a> const &amp; <em>other</em><big>)</big> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1ip__addr__mask__t_1ae3c871946047eb38781b671855f1cd28"></span>bool <tt class="descname">operator!=</tt><big>(</big><a class="reference internal" href="#eossdkclasseos_1_1ip__addr__mask__t"><em>ip_addr_mask_t</em></a> const &amp; <em>other</em><big>)</big> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1ip__addr__mask__t_1adee0f45a6178283827497f2f95bb8ba3"></span>bool <tt class="descname">operator&lt;</tt><big>(</big><a class="reference internal" href="#eossdkclasseos_1_1ip__addr__mask__t"><em>ip_addr_mask_t</em></a> const &amp; <em>other</em><big>)</big> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1ip__addr__mask__t_1aae51b79eba3c58e73452e89a9982a620"></span>uint32_t <tt class="descname">hash</tt><big>(</big><big>)</big> const</dt>
+<dd><p>The hash function for type <a class="reference internal" href="#eossdkclasseos_1_1ip__addr__mask__t"><em>ip_addr_mask_t</em></a>. </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Private Members</p>
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1ip__addr__mask__t_1aeecd893645246d1bb3ac5d6c7ecdb1b3"></span><a class="reference internal" href="#eossdkclasseos_1_1ip__addr__t"><em>ip_addr_t</em></a> <tt class="descname">addr_</tt></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1ip__addr__mask__t_1a114d6ec6eb47dffd25a825e48328a69a"></span>uint8_t <tt class="descname">mask_length_</tt></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Friends</p>
+<dl class="friend">
+<dt>
+<span class="target" id="eossdkclasseos_1_1ip__addr__mask__t_1aa90cedd8fee07e3a9ed5f462d789a52d"></span>friend std::ostream &amp; <tt class="descname">operator&lt;&lt;</tt></dt>
+<dd><p>A utility stream operator that adds a string representation of <a class="reference internal" href="#eossdkclasseos_1_1ip__addr__mask__t"><em>ip_addr_mask_t</em></a> to the ostream. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="class">
+<dt>
+<span class="target" id="eossdkclasseos_1_1address__overlap__error"></span><em>class</em> <tt class="descname">address_overlap_error</tt></dt>
+<dd><em>#include &lt;ip.h&gt;</em><p>Tried to configure an internal VLAN on a trunk port. </p>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1address__overlap__error_1a76a40ad61326d5a41bc1ff336b87113d"></span><tt class="descname">address_overlap_error</tt><big>(</big><a class="reference internal" href="#eossdkclasseos_1_1ip__addr__mask__t"><em>ip_addr_mask_t</em></a> const &amp; <em>addr</em><big>)</big></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1address__overlap__error_1aaded0d8fd30af65bf57d7e5baab23f7c"></span>virtual <tt class="descname">~address_overlap_error</tt><big>(</big><big>)</big></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1address__overlap__error_1af04a1351c822e66b77f31cc7c318222c"></span><a class="reference internal" href="#eossdkclasseos_1_1ip__addr__mask__t"><em>ip_addr_mask_t</em></a> <tt class="descname">addr</tt><big>(</big><big>)</big> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1address__overlap__error_1abb8f42ef7ee3e157af68e8e8d50482db"></span>virtual void <tt class="descname">raise</tt><big>(</big><big>)</big> const</dt>
+<dd><p>Throws this exception. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1address__overlap__error_1a396365861a653d8594f41da467c00020"></span>uint32_t <tt class="descname">hash</tt><big>(</big><big>)</big> const</dt>
+<dd><p>The hash function for type <a class="reference internal" href="#eossdkclasseos_1_1address__overlap__error"><em>address_overlap_error</em></a>. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1address__overlap__error_1ad03a7b3cde8947becd1332a74730c895"></span>std::string <tt class="descname">to_string</tt><big>(</big><big>)</big> const</dt>
+<dd><p>Returns a string representation of the current object&#8217;s values. </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Private Members</p>
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1address__overlap__error_1aa98dbaa704b494609da55c4d2ac1b332"></span><a class="reference internal" href="#eossdkclasseos_1_1ip__addr__mask__t"><em>ip_addr_mask_t</em></a> <tt class="descname">addr_</tt></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Friends</p>
+<dl class="friend">
+<dt>
+<span class="target" id="eossdkclasseos_1_1address__overlap__error_1a94aee6bba3528747575bfce70aad1b82"></span>friend std::ostream &amp; <tt class="descname">operator&lt;&lt;</tt></dt>
+<dd><p>A utility stream operator that adds a string representation of <a class="reference internal" href="#eossdkclasseos_1_1address__overlap__error"><em>address_overlap_error</em></a> to the ostream. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#"><strong>ip</strong></a><ul>
+<li><a class="reference internal" href="#type-definitions-in-ip">Type definitions in <strong>ip</strong></a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="intf.html"
+                        title="previous chapter"><strong>intf</strong></a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="ip_intf.html"
+                        title="next chapter"><strong>ip_intf</strong></a></p>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="ip_intf.html" title="ip_intf"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="intf.html" title="intf"
+             >previous</a> |</li>
+        <li><a href="index.html">Arista EOS SDK 2.11.0 reference</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2014, Arista Networks.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

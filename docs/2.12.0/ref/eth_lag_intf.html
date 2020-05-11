@@ -1,0 +1,796 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>eth_lag_intf &mdash; Arista EOS SDK 2.11.0 reference</title>
+    
+    <link rel="stylesheet" href="_static/eossdk.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/breathe.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '2.11.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="Arista EOS SDK 2.11.0 reference" href="index.html" />
+    <link rel="next" title="eth_phy_intf" href="eth_phy_intf.html" />
+    <link rel="prev" title="eth_intf" href="eth_intf.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="eth_phy_intf.html" title="eth_phy_intf"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="eth_intf.html" title="eth_intf"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">Arista EOS SDK 2.11.0 reference</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="eth-lag-intf">
+<h1><strong>eth_lag_intf</strong><a class="headerlink" href="#eth-lag-intf" title="Permalink to this headline">¶</a></h1>
+<p>The eth_lag_intf module manages link aggregation groups (LAGs), also known as Port Channels.</p>
+<p>LAGs bundle physical interfaces together into a single logical link to provide combined bandwidth and other benefits. This module provides APIs to provision LAG interfaces. APIs include LAG creation, deletion, retrieval, member interface adding to or removal from LAG interfaces. Two iterators are also provided to allow iteration through all the LAG interfaces and also all the member interfaces that are configured on the system. </p>
+<dl class="namespace">
+<dt>
+<span class="target" id="eossdknamespaceeos"></span><em>namespace</em> <tt class="descname">eos</tt></dt>
+<dd><dl class="class">
+<dt>
+<span class="target" id="eossdkclasseos_1_1eth__lag__intf__handler"></span><em>class</em> <tt class="descname">eth_lag_intf_handler</tt></dt>
+<dd><em>#include &lt;eth_lag_intf.h&gt;</em><p>The handler for LAG interface events. </p>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1eth__lag__intf__handler_1aaba18e2325e3adddf728f810e3dccbf6"></span><tt class="descname">eth_lag_intf_handler</tt><big>(</big><a class="reference internal" href="#eossdkclasseos_1_1eth__lag__intf__mgr"><em>eth_lag_intf_mgr</em></a> *<big>)</big></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1eth__lag__intf__handler_1acb3a7fc25d97a1e9dd953873dd4c9ed8"></span>virtual <tt class="descname">~eth_lag_intf_handler</tt><big>(</big><big>)</big></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1eth__lag__intf__handler_1ae68db9f2eb538325a0b0de693412dc5e"></span><a class="reference internal" href="#eossdkclasseos_1_1eth__lag__intf__mgr"><em>eth_lag_intf_mgr</em></a> * <tt class="descname">get_eth_lag_intf_mgr</tt><big>(</big><big>)</big> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1eth__lag__intf__handler_1af2b46e9ae2dca40a28a12a0071e68cd1"></span>void <tt class="descname">watch_all_eth_lag_intfs</tt><big>(</big>bool<big>)</big></dt>
+<dd><p>Registers this class to receive change updates on all interfaces.</p>
+<p>Expects a boolean signifying whether notifications should be enabled on all interfaces and propogated to this instance. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1eth__lag__intf__handler_1ac726753cedfcdf98a74e0a9ad7746795"></span>void <tt class="descname">watch_eth_lag_intf</tt><big>(</big><a class="reference internal" href="intf.html#eossdkclasseos_1_1intf__id__t"><em>intf_id_t</em></a>, bool<big>)</big></dt>
+<dd><p>Registers this class to receive change updates on the given interface.</p>
+<p>Expects the ID of the corresponding LAG interface and a boolean signifying whether notifications should be propagated to this instance or not. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1eth__lag__intf__handler_1ad2e0e98a9b75ad53e7ac2484109e4b11"></span>virtual void <tt class="descname">on_eth_lag_intf_create</tt><big>(</big><a class="reference internal" href="intf.html#eossdkclasseos_1_1intf__id__t"><em>intf_id_t</em></a><big>)</big></dt>
+<dd><p>Handler called when a LAG ethernet interface is created.</p>
+<p>After on_eth_lag_intf_create is called, the given intf_id is guaranteed to exist (ie <a class="reference internal" href="#eossdkclasseos_1_1eth__lag__intf__mgr_1ac0de2cadbe579c5c2a77ec867b244905"><em>eth_lag_intf_mgr::exists</em></a> will return true). At that point, the intf_id can be used will all methods of the <a class="reference internal" href="#eossdkclasseos_1_1eth__lag__intf__mgr"><em>eth_lag_intf_mgr</em></a> class.</p>
+<p>This also means that the intf_id can be used with all other relevant *intf_mgr classes (ie <a class="reference internal" href="intf.html#eossdkclasseos_1_1intf__mgr"><em>intf_mgr</em></a> and <a class="reference internal" href="eth_intf.html#eossdkclasseos_1_1eth__intf__mgr"><em>eth_intf_mgr</em></a>). </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1eth__lag__intf__handler_1ac57deaf6faac66438feb12e42603055c"></span>virtual void <tt class="descname">on_eth_lag_intf_delete</tt><big>(</big><a class="reference internal" href="intf.html#eossdkclasseos_1_1intf__id__t"><em>intf_id_t</em></a><big>)</big></dt>
+<dd><p>Handler called when a LAG ethernet interface is deleted.</p>
+<p>After on_eth_lag_intf_delete is called, the given intf_id is guaranteed to not exist (ie <a class="reference internal" href="#eossdkclasseos_1_1eth__lag__intf__mgr_1ac0de2cadbe579c5c2a77ec867b244905"><em>eth_lag_intf_mgr::exists</em></a> will return false). At that point, the intf_id cannot be used will any methods in the <a class="reference internal" href="#eossdkclasseos_1_1eth__lag__intf__mgr"><em>eth_lag_intf_mgr</em></a> class, with the exception of methods used to create new LAG interfaces.</p>
+<p>This also means that the intf_id can no longer be used with all other relevant *intf_mgr classes (ie <a class="reference internal" href="intf.html#eossdkclasseos_1_1intf__mgr"><em>intf_mgr</em></a> and <a class="reference internal" href="eth_intf.html#eossdkclasseos_1_1eth__intf__mgr"><em>eth_intf_mgr</em></a>). </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1eth__lag__intf__handler_1a97600f8990044eb9fd24a7bdd0a78f74"></span>virtual void <tt class="descname">on_lag_member_set</tt><big>(</big><a class="reference internal" href="intf.html#eossdkclasseos_1_1intf__id__t"><em>intf_id_t</em></a> <em>lag</em>, <a class="reference internal" href="intf.html#eossdkclasseos_1_1intf__id__t"><em>intf_id_t</em></a> <em>member</em><big>)</big></dt>
+<dd><p>Handler called when a member interface is added to a watched LAG. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1eth__lag__intf__handler_1a6338bc0c86b9f339ad83e4cc6449fc28"></span>virtual void <tt class="descname">on_lag_member_del</tt><big>(</big><a class="reference internal" href="intf.html#eossdkclasseos_1_1intf__id__t"><em>intf_id_t</em></a> <em>lag</em>, <a class="reference internal" href="intf.html#eossdkclasseos_1_1intf__id__t"><em>intf_id_t</em></a> <em>member</em><big>)</big></dt>
+<dd><p>Handler called when a member interface is removed from a watched LAG. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1eth__lag__intf__handler_1a4f6bda8f08c87b0571d383dce4d62ac7"></span>virtual void <tt class="descname">on_lag_intf_speed</tt><big>(</big><a class="reference internal" href="intf.html#eossdkclasseos_1_1intf__id__t"><em>intf_id_t</em></a> <em>lag</em>, uint64_t <em>speed</em><big>)</big></dt>
+<dd><p>Handler called when a LAG interface&#8217;s speed changes </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="class">
+<dt>
+<span class="target" id="eossdkclasseos_1_1eth__lag__intf__iter__t"></span><em>class</em> <tt class="descname">eth_lag_intf_iter_t</tt></dt>
+<dd><em>#include &lt;eth_lag_intf.h&gt;</em><p>An LAG interface iterator for iterating through all LAG interfaces created in the system. </p>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Private Functions</p>
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1eth__lag__intf__iter__t_1ac0419a335b9a489071761648860eba82"></span><tt class="descname">eth_lag_intf_iter_t</tt><big>(</big>eth_lag_intf_iter_impl * <em>const</em><big>)</big></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Friends</p>
+<dl class="friend">
+<dt>
+<span class="target" id="eossdkclasseos_1_1eth__lag__intf__iter__t_1addb52094bc4354b9f7a2f9e98aa2ad2b"></span>friend class <tt class="descname">eth_lag_intf_iter_impl</tt></dt>
+<dd></dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="class">
+<dt>
+<span class="target" id="eossdkclasseos_1_1eth__lag__intf__member__iter__t"></span><em>class</em> <tt class="descname">eth_lag_intf_member_iter_t</tt></dt>
+<dd><em>#include &lt;eth_lag_intf.h&gt;</em><p>An LAG member iterator for iterating through all interfaces configured as a member of one LAG interface in the system. </p>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Private Functions</p>
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1eth__lag__intf__member__iter__t_1a35b9df006f1f06b877f0578ea80d467b"></span><tt class="descname">eth_lag_intf_member_iter_t</tt><big>(</big>eth_lag_intf_member_iter_impl * <em>const</em><big>)</big></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Friends</p>
+<dl class="friend">
+<dt>
+<span class="target" id="eossdkclasseos_1_1eth__lag__intf__member__iter__t_1ad9121fb292d777f90e297a514a9e7d24"></span>friend class <tt class="descname">eth_lag_intf_member_iter_impl</tt></dt>
+<dd></dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="class">
+<dt>
+<span class="target" id="eossdkclasseos_1_1eth__lag__intf__mgr"></span><em>class</em> <tt class="descname">eth_lag_intf_mgr</tt></dt>
+<dd><em>#include &lt;eth_lag_intf.h&gt;</em><p>The manager for LAG interfaces. This is the main entry point for applications to use EosSdk LAG APIs. </p>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1eth__lag__intf__mgr_1a4b4afacf4c566c008e85897f5166c4ad"></span>virtual <tt class="descname">~eth_lag_intf_mgr</tt><big>(</big><big>)</big></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1eth__lag__intf__mgr_1a97dc174a5f0c5f0e7756a45419a8c3e1"></span>virtual <a class="reference internal" href="#eossdkclasseos_1_1eth__lag__intf__iter__t"><em>eth_lag_intf_iter_t</em></a> <tt class="descname">eth_lag_intf_iter</tt><big>(</big><big>)</big> const = 0</dt>
+<dd><p>Iterates through the LAG interfaces in system. An <a class="reference internal" href="intf.html#eossdkclasseos_1_1intf__id__t"><em>intf_id_t</em></a> pointer is returned for each LAG interface. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1eth__lag__intf__mgr_1ac0de2cadbe579c5c2a77ec867b244905"></span>virtual bool <tt class="descname">exists</tt><big>(</big><a class="reference internal" href="intf.html#eossdkclasseos_1_1intf__id__t"><em>intf_id_t</em></a><big>)</big> const = 0</dt>
+<dd><p>Returns whether the given ethernet LAG interface exists.</p>
+<p>If exists returns true, then this <a class="reference internal" href="intf.html#eossdkclasseos_1_1intf__id__t"><em>intf_id_t</em></a> can be successfully passed into every method of the <a class="reference internal" href="#eossdkclasseos_1_1eth__lag__intf__mgr"><em>eth_lag_intf_mgr</em></a>. If not, then methods of the <a class="reference internal" href="#eossdkclasseos_1_1eth__lag__intf__mgr"><em>eth_lag_intf_mgr</em></a> can throw a <a class="reference internal" href="intf.html#eossdkclasseos_1_1no__such__interface__error"><em>no_such_interface_error</em></a> exception, or return empty data like intf_id_t().</p>
+<p>The exists method of all *intf_mgr classes that manage a given interface (ie <a class="reference internal" href="intf.html#eossdkclasseos_1_1intf__mgr"><em>intf_mgr</em></a>, <a class="reference internal" href="eth_intf.html#eossdkclasseos_1_1eth__intf__mgr"><em>eth_intf_mgr</em></a>, and <a class="reference internal" href="#eossdkclasseos_1_1eth__lag__intf__mgr"><em>eth_lag_intf_mgr</em></a> for LAG interfaces) are all guaranteed to return the same result. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1eth__lag__intf__mgr_1a12e80f4fbb2b716d5d7ff78aaace332e"></span>virtual <a class="reference internal" href="#eossdkclasseos_1_1eth__lag__intf__member__iter__t"><em>eth_lag_intf_member_iter_t</em></a> <tt class="descname">eth_lag_intf_member_iter</tt><big>(</big><big>)</big> const = 0</dt>
+<dd><p>Iterates over physical interfaces configured as a member of any LAG interface in system. Note the interface may not be in a LAG interface yet, but still shows up if its priority/mode/timeout set. Yields an <a class="reference internal" href="intf.html#eossdkclasseos_1_1intf__id__t"><em>intf_id_t</em></a> for each member. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1eth__lag__intf__mgr_1a89cfad32bc997d073b63a9c76ad9686a"></span>virtual <a class="reference internal" href="#eossdkclasseos_1_1eth__lag__intf__member__iter__t"><em>eth_lag_intf_member_iter_t</em></a> <tt class="descname">eth_lag_intf_member_iter</tt><big>(</big><a class="reference internal" href="intf.html#eossdkclasseos_1_1intf__id__t"><em>intf_id_t</em></a> <em>eth_lag_intf_id</em><big>)</big> const = 0</dt>
+<dd><p>Iterates over physical interfaces configured as members of a given LAG interface. Yields an <a class="reference internal" href="intf.html#eossdkclasseos_1_1intf__id__t"><em>intf_id_t</em></a> for each member. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1eth__lag__intf__mgr_1a8ed2fd2adc00cf4d316d86de35f2b9dc"></span>virtual void <tt class="descname">eth_lag_intf_is</tt><big>(</big><a class="reference internal" href="intf.html#eossdkclasseos_1_1intf__id__t"><em>intf_id_t</em></a> <em>eth_lag_intf_id</em><big>)</big> = 0</dt>
+<dd><p>Creates a LAG interface, when given the LAG interface. No action will be taken if the LAG exists already. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1eth__lag__intf__mgr_1ac73b97bccd363a525e11b39e28550042"></span>virtual <a class="reference internal" href="#eossdkclasseos_1_1eth__lag__intf__t"><em>eth_lag_intf_t</em></a> <tt class="descname">eth_lag_intf</tt><big>(</big><a class="reference internal" href="intf.html#eossdkclasseos_1_1intf__id__t"><em>intf_id_t</em></a> <em>eth_lag_intf_id</em><big>)</big> const = 0</dt>
+<dd><p>Returns a LAG interface with the specified LAG interface. Will return an empty <a class="reference internal" href="#eossdkclasseos_1_1eth__lag__intf__t"><em>eth_lag_intf_t</em></a> if the LAG does not exist already. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1eth__lag__intf__mgr_1ada9a51dc8987c308027979d2ef151a20"></span>virtual void <tt class="descname">eth_lag_intf_del</tt><big>(</big><a class="reference internal" href="intf.html#eossdkclasseos_1_1intf__id__t"><em>intf_id_t</em></a> <em>eth_lag_intf_id</em><big>)</big> = 0</dt>
+<dd><p>This API deletes a LAG interface. It is a no-op if the specified LAG interface doesn&#8217;t exist. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1eth__lag__intf__mgr_1a461afd090b5be22bdc812b3c013c8493"></span>virtual uint64_t <tt class="descname">speed</tt><big>(</big><a class="reference internal" href="intf.html#eossdkclasseos_1_1intf__id__t"><em>intf_id_t</em></a> <em>eth_lag_intf_id</em><big>)</big> const = 0</dt>
+<dd><p>Returns the speed of a LAG interface in megabits. If the interface does not exist, 0 is returned. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1eth__lag__intf__mgr_1a4a94445c4fcd088ce7366a3cada39180"></span>virtual void <tt class="descname">min_links_is</tt><big>(</big><a class="reference internal" href="intf.html#eossdkclasseos_1_1intf__id__t"><em>intf_id_t</em></a> <em>eth_lag_intf_id</em>, uint32_t <em>min_links</em><big>)</big> = 0</dt>
+<dd><p>Sets the min links for a LAG interface. It&#8217;s a no-op if the specified LAG interface does not exist. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1eth__lag__intf__mgr_1aadb76a78a1a6582154f461e4fa6d11a3"></span>virtual uint32_t <tt class="descname">min_links</tt><big>(</big><a class="reference internal" href="intf.html#eossdkclasseos_1_1intf__id__t"><em>intf_id_t</em></a> <em>eth_lag_intf_id</em><big>)</big> const = 0</dt>
+<dd><p>Returns the minimum number of member interfaces required to be <tt class="docutils literal"><span class="pre">OPER_STATUS_UP</span></tt> before this LAG interface considered <tt class="docutils literal"><span class="pre">OPER_STATUS_UP</span></tt>. If the LAG interface does not exist, 0 will be returned. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1eth__lag__intf__mgr_1a164686a9d0c08afccee62ea138522d8a"></span>virtual void <tt class="descname">fallback_type_is</tt><big>(</big><a class="reference internal" href="intf.html#eossdkclasseos_1_1intf__id__t"><em>intf_id_t</em></a> <em>eth_lag_intf_id</em>, eth_lag_intf_fallback_type_t <em>fallback_type</em><big>)</big> = 0</dt>
+<dd><p>Sets the fallback type for a LAG interface. It&#8217;s a no-op if the LAG interface does not exist. Throws &#8220;invalid_argument_error&#8221; exception if invalid fallback type is passed in. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1eth__lag__intf__mgr_1aafb2187f3fa145db399aba6a66a6df94"></span>virtual eth_lag_intf_fallback_type_t <tt class="descname">fallback_type</tt><big>(</big><a class="reference internal" href="intf.html#eossdkclasseos_1_1intf__id__t"><em>intf_id_t</em></a> <em>eth_lag_intf_id</em><big>)</big> const = 0</dt>
+<dd><p>Returns the fallback mode for a LAG interface. ETH_LAG_INTF_FALLBACK_NULL is returned if the LAG interface does not exist. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1eth__lag__intf__mgr_1ad396950c60587d1a961bc08d13087ae9"></span>virtual void <tt class="descname">fallback_timeout_is</tt><big>(</big><a class="reference internal" href="intf.html#eossdkclasseos_1_1intf__id__t"><em>intf_id_t</em></a> <em>eth_lag_intf_id</em>, uint16_t <em>fallback_timeout</em><big>)</big> = 0</dt>
+<dd><p>Sets the fallback timeout for a LAG interface. It&#8217;s a no-op if the LAG interface does not exist. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1eth__lag__intf__mgr_1af8a3c40f3e9c7a94ec6e845dfbc997fc"></span>virtual uint16_t <tt class="descname">fallback_timeout</tt><big>(</big><a class="reference internal" href="intf.html#eossdkclasseos_1_1intf__id__t"><em>intf_id_t</em></a> <em>eth_lag_intf_id</em><big>)</big> const = 0</dt>
+<dd><p>Returns the LACP active mode timeout value in seconds. 0 is returned if the LAG interface does not exist. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1eth__lag__intf__mgr_1af1cf4ed1a8ad78c10dd2751af4f54840"></span>virtual uint16_t <tt class="descname">fallback_timeout_default</tt><big>(</big><a class="reference internal" href="intf.html#eossdkclasseos_1_1intf__id__t"><em>intf_id_t</em></a> <em>eth_lag_intf_id</em><big>)</big> const = 0</dt>
+<dd><p>Returns the default fallback timeout value in seconds. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1eth__lag__intf__mgr_1a5f91aa42a3004ffb9723864a36bad460"></span>virtual void <tt class="descname">membership_set</tt><big>(</big><a class="reference internal" href="intf.html#eossdkclasseos_1_1intf__id__t"><em>intf_id_t</em></a> <em>member_intf_id</em>, <a class="reference internal" href="intf.html#eossdkclasseos_1_1intf__id__t"><em>intf_id_t</em></a> <em>eth_lag_intf_id</em>, eth_lag_intf_member_lacp_mode_t <em>mode</em><big>)</big> = 0</dt>
+<dd><p>Adds a physical interface to a LAG interface.</p>
+<p>This API may throw &#8220;Invalid_argument_error&#8221; exception if the interface&#8217;s mode is not compatible with the LAG interface mode or the LAG interface&#8217;s type is INTF_TYPE_NULL. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1eth__lag__intf__mgr_1aced01ce5c993cb0359799ccc6e7c31c6"></span>virtual void <tt class="descname">membership_del</tt><big>(</big><a class="reference internal" href="intf.html#eossdkclasseos_1_1intf__id__t"><em>intf_id_t</em></a> <em>member_intf_id</em><big>)</big> = 0</dt>
+<dd><p>Removes an interface from a LAG interface.</p>
+<p>This API returns directly if the interface is invalid or not in a LAG. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1eth__lag__intf__mgr_1aa0e688e8026c34e0f486a4fbc318dd12"></span>virtual <a class="reference internal" href="intf.html#eossdkclasseos_1_1intf__id__t"><em>intf_id_t</em></a> <tt class="descname">membership</tt><big>(</big><a class="reference internal" href="intf.html#eossdkclasseos_1_1intf__id__t"><em>intf_id_t</em></a> <em>member_intf_id</em><big>)</big> const = 0</dt>
+<dd><p>Returns the LAG interface ID to which the physical interface is configured to belong. An empty <a class="reference internal" href="intf.html#eossdkclasseos_1_1intf__id__t"><em>intf_id_t</em></a> is returned if the physical interface is not configured or is not in a LAG. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1eth__lag__intf__mgr_1a3a32f6aa65e1e51be85812bb6b59e5ed"></span>virtual <a class="reference internal" href="#eossdkclasseos_1_1eth__lag__intf__membership__t"><em>eth_lag_intf_membership_t</em></a> <tt class="descname">membership_status</tt><big>(</big><a class="reference internal" href="intf.html#eossdkclasseos_1_1intf__id__t"><em>intf_id_t</em></a> <em>member_intf_id</em><big>)</big> const = 0</dt>
+<dd><p>Returns the member interface&#8217;s status details. Will return empty <a class="reference internal" href="#eossdkclasseos_1_1eth__lag__intf__membership__t"><em>eth_lag_intf_membership_t</em></a> if the physical interface is not configured, or it&#8217;s not active in a LAG. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1eth__lag__intf__mgr_1aeb55fb83c6e3f2acd8c84c0350dfded8"></span>virtual void <tt class="descname">member_priority_is</tt><big>(</big><a class="reference internal" href="intf.html#eossdkclasseos_1_1intf__id__t"><em>intf_id_t</em></a> <em>member_intf_id</em>, uint16_t <em>priority</em><big>)</big> = 0</dt>
+<dd><p>Sets the port LACP priority. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1eth__lag__intf__mgr_1a5333c94101b281739538298aaefea765"></span>virtual uint16_t <tt class="descname">member_priority</tt><big>(</big><a class="reference internal" href="intf.html#eossdkclasseos_1_1intf__id__t"><em>intf_id_t</em></a> <em>member_intf_id</em><big>)</big> const = 0</dt>
+<dd><p>Gets the interface&#8217;s configured LACP priority. 0 will be returned if the member interface is not existing. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1eth__lag__intf__mgr_1ad9284052356b5460578bb963d2c39d58"></span>virtual void <tt class="descname">member_mode_is</tt><big>(</big><a class="reference internal" href="intf.html#eossdkclasseos_1_1intf__id__t"><em>intf_id_t</em></a> <em>member_intf_id</em>, eth_lag_intf_member_lacp_mode_t <em>mode</em><big>)</big> = 0</dt>
+<dd><p>Sets the mode of this member in a LAG interface. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1eth__lag__intf__mgr_1a82d4d067dee5f79e9e1d953337fcf7da"></span>virtual eth_lag_intf_member_lacp_mode_t <tt class="descname">member_mode</tt><big>(</big><a class="reference internal" href="intf.html#eossdkclasseos_1_1intf__id__t"><em>intf_id_t</em></a> <em>member_intf_id</em><big>)</big> const = 0</dt>
+<dd><p>Returns the mode of this member in a LAG interface. If the member interface is not existing, ETH_LAG_INTF_MEMBER_LACP_MODE_NULL is returned. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1eth__lag__intf__mgr_1ab0d331cd0c6f5812695d0c5d7c30e99c"></span>virtual void <tt class="descname">member_timeout_is</tt><big>(</big><a class="reference internal" href="intf.html#eossdkclasseos_1_1intf__id__t"><em>intf_id_t</em></a> <em>member_intf_id</em>, eth_lag_intf_member_lacp_timeout_t <em>timeout</em><big>)</big> = 0</dt>
+<dd><p>Sets the LACP timeout for a member in a LAG. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1eth__lag__intf__mgr_1aa1e25f4891e3110ca98eb127a77b4ca0"></span>virtual eth_lag_intf_member_lacp_timeout_t <tt class="descname">member_timeout</tt><big>(</big><a class="reference internal" href="intf.html#eossdkclasseos_1_1intf__id__t"><em>intf_id_t</em></a> <em>member_intf_id</em><big>)</big> const = 0</dt>
+<dd><p>Gets the configured LACP timeout for a member in a LAG. If the member interface does not exist, ETH_LAG_INTF_MEMBER_LACP_TIMEOUT_NULL will be returned. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1eth__lag__intf__mgr_1a23c5dde74d19bb90ba5bba0c908bae2d"></span>virtual bool <tt class="descname">member_active</tt><big>(</big><a class="reference internal" href="intf.html#eossdkclasseos_1_1intf__id__t"><em>intf_id_t</em></a> <em>member_intf_id</em><big>)</big> const = 0</dt>
+<dd><p>Returns whether this interface is active in a LAG. False is returned if the member interface does not exist. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1eth__lag__intf__mgr_1ad44da3cdce3d468a906c9a79f6bf0e22"></span>virtual double <tt class="descname">member_time</tt><big>(</big><a class="reference internal" href="intf.html#eossdkclasseos_1_1intf__id__t"><em>intf_id_t</em></a> <em>member_intf_id</em><big>)</big> const = 0</dt>
+<dd><p>Returns the time in seconds since reboot when this interface was last added or removed as a member from a LAG. If this interface has never been a LAG member, this returns 0. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1eth__lag__intf__mgr_1a2d06f99f7bcb2e923dda3a723527385e"></span>virtual std::string <tt class="descname">member_reason</tt><big>(</big><a class="reference internal" href="intf.html#eossdkclasseos_1_1intf__id__t"><em>intf_id_t</em></a> <em>member_intf_id</em><big>)</big> const = 0</dt>
+<dd><p>Returns the reason this interface isn&#8217;t active in LAG. Returns the empty string if the interface is not configured to be in any LAG, or if the interface is active in the LAg. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1eth__lag__intf__mgr_1a799a3e5f871b25f0e43cd2616e6c0221"></span>virtual <a class="reference internal" href="#eossdkclasseos_1_1eth__lag__intf__membership__t"><em>eth_lag_intf_membership_t</em></a> <tt class="descname">eth_lag_intf_membership_status</tt><big>(</big><a class="reference internal" href="intf.html#eossdkclasseos_1_1intf__id__t"><em>intf_id_t</em></a> <em>member_intf_id</em><big>)</big> const = 0</dt>
+<dd><p></p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1eth__lag__intf__mgr_1a7d7c745a80d9bf3a6a06b762587bf156"></span>virtual void <tt class="descname">eth_lag_intf_member_timeout_is</tt><big>(</big><a class="reference internal" href="intf.html#eossdkclasseos_1_1intf__id__t"><em>intf_id_t</em></a> <em>member_intf_id</em>, eth_lag_intf_member_lacp_timeout_t <em>timeout</em><big>)</big> = 0</dt>
+<dd><p></p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1eth__lag__intf__mgr_1afc9e52ef6abef4f0de24a113a47ef1f7"></span>virtual void <tt class="descname">eth_lag_intf_member_priority_is</tt><big>(</big><a class="reference internal" href="intf.html#eossdkclasseos_1_1intf__id__t"><em>intf_id_t</em></a> <em>member_intf_id</em>, uint16_t <em>priority</em><big>)</big> = 0</dt>
+<dd><p></p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1eth__lag__intf__mgr_1af1b98995af339c45b37f2af85876dae7"></span>virtual void <tt class="descname">eth_lag_intf_member_mode_is</tt><big>(</big><a class="reference internal" href="intf.html#eossdkclasseos_1_1intf__id__t"><em>intf_id_t</em></a> <em>member_intf_id</em>, eth_lag_intf_member_lacp_mode_t <em>mode</em><big>)</big> = 0</dt>
+<dd><p></p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Protected Functions</p>
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1eth__lag__intf__mgr_1a2c15cd4a905ec16e33b1fe61f1e4c2b2"></span><tt class="descname">eth_lag_intf_mgr</tt><big>(</big><big>)</big></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Private Members</p>
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1eth__lag__intf__mgr_1a93a463417f321fbfcfa476cd3bdbf1ed"></span><tt class="descname">eth_lag_intf_mgr</tt></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Friends</p>
+<dl class="friend">
+<dt>
+<span class="target" id="eossdkclasseos_1_1eth__lag__intf__mgr_1abb535835688dbb6b97428c7355bbab75"></span>friend class <tt class="descname">eth_lag_intf_handler</tt></dt>
+<dd></dd></dl>
+
+</div>
+</dd></dl>
+
+</dd></dl>
+
+<div class="section" id="type-definitions-in-eth-lag-intf">
+<h2>Type definitions in <strong>eth_lag_intf</strong><a class="headerlink" href="#type-definitions-in-eth-lag-intf" title="Permalink to this headline">¶</a></h2>
+<dl class="namespace">
+<dt>
+<span class="target" id="eossdknamespaceeos"></span><em>namespace</em> <tt class="descname">eos</tt></dt>
+<dd><div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Enums</p>
+<dl class="enum">
+<dt>
+<span class="target" id="eossdknamespaceeos_1ac9a25f4bd97a6e1c726d0f4d3e285dcd"></span><strong>eth_lag_intf_fallback_type_t enum</strong></dt>
+<dd><p>LAG interface fallback type. </p>
+<p><em>Values:</em></p>
+<ul class="breatheenumvalues">
+<li><tt class="first docutils literal"><span class="pre">ETH_LAG_INTF_FALLBACK_NULL</span></tt> - <p>Not a valid fallback type. </p>
+</li>
+<li><tt class="first docutils literal"><span class="pre">ETH_LAG_INTF_FALLBACK_NONE</span></tt> - <p>No fallback if no LACPDUs seen. </p>
+</li>
+<li><tt class="first docutils literal"><span class="pre">ETH_LAG_INTF_FALLBACK_STATIC</span></tt> - <p>Fallback to static mode. </p>
+</li>
+<li><tt class="first docutils literal"><span class="pre">ETH_LAG_INTF_FALLBACK_INDIVIDUAL</span></tt> - <p>Fallback to individual mode. </p>
+</li>
+</ul>
+</dd></dl>
+
+<dl class="enum">
+<dt>
+<span class="target" id="eossdknamespaceeos_1a3a3d7053bcb2b85c1b17002be086063b"></span><strong>eth_lag_intf_fallback_timeout_default_t enum</strong></dt>
+<dd><p>How long to wait for LACP before fallback. </p>
+<p><em>Values:</em></p>
+<ul class="breatheenumvalues">
+<li><tt class="first docutils literal"><span class="pre">ETH_LAG_INTF_FALLBACK_TIMEOUT_DEFAULT</span></tt><tt class="docutils literal"> <span class="pre">=</span> <span class="pre">=</span> <span class="pre">90</span></tt> - </li>
+</ul>
+</dd></dl>
+
+<dl class="enum">
+<dt>
+<span class="target" id="eossdknamespaceeos_1a2fcfb5e341b2abb4087c716fa6839df6"></span><strong>eth_lag_intf_member_priority_t enum</strong></dt>
+<dd><p><em>Values:</em></p>
+<ul class="breatheenumvalues">
+<li><tt class="first docutils literal"><span class="pre">ETH_LAG_INTF_PORT_PRIORITY_DEFAULT</span></tt><tt class="docutils literal"> <span class="pre">=</span> <span class="pre">=</span> <span class="pre">0x8000</span></tt> - </li>
+</ul>
+</dd></dl>
+
+<dl class="enum">
+<dt>
+<span class="target" id="eossdknamespaceeos_1ab6a9a0c49eb6426718a7f2aeebf75bb8"></span><strong>eth_lag_intf_member_lacp_mode_t enum</strong></dt>
+<dd><p>LAG interface mebmer LACP mode. </p>
+<p><em>Values:</em></p>
+<ul class="breatheenumvalues">
+<li><tt class="first docutils literal"><span class="pre">ETH_LAG_INTF_MEMBER_LACP_MODE_NULL</span></tt> - </li>
+<li><tt class="first docutils literal"><span class="pre">ETH_LAG_INTF_MEMBER_LACP_MODE_OFF</span></tt> - </li>
+<li><tt class="first docutils literal"><span class="pre">ETH_LAG_INTF_MEMBER_LACP_MODE_PASSIVE</span></tt> - </li>
+<li><tt class="first docutils literal"><span class="pre">ETH_LAG_INTF_MEMBER_LACP_MODE_ACTIVE</span></tt> - </li>
+</ul>
+</dd></dl>
+
+<dl class="enum">
+<dt>
+<span class="target" id="eossdknamespaceeos_1a073cda72a621c927166367236972e0dc"></span><strong>eth_lag_intf_member_lacp_timeout_t enum</strong></dt>
+<dd><p>LAG interface mebmer timeout values. </p>
+<p><em>Values:</em></p>
+<ul class="breatheenumvalues">
+<li><tt class="first docutils literal"><span class="pre">ETH_LAG_INTF_MEMBER_LACP_TIMEOUT_NULL</span></tt> - </li>
+<li><tt class="first docutils literal"><span class="pre">ETH_LAG_INTF_MEMBER_LACP_TIMEOUT_SHORT</span></tt> - </li>
+<li><tt class="first docutils literal"><span class="pre">ETH_LAG_INTF_MEMBER_LACP_TIMEOUT_LONG</span></tt> - </li>
+</ul>
+</dd></dl>
+
+</div>
+<dl class="class">
+<dt>
+<span class="target" id="eossdkclasseos_1_1eth__lag__intf__membership__t"></span><em>class</em> <tt class="descname">eth_lag_intf_membership_t</tt></dt>
+<dd><em>#include &lt;eth_lag_intf.h&gt;</em><p>This data structure is used to describe the operational status of an interface configured in an LAG interface. </p>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1eth__lag__intf__membership__t_1a742993d46552006cbbff63c0808a0a90"></span><tt class="descname">eth_lag_intf_membership_t</tt><big>(</big><big>)</big></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1eth__lag__intf__membership__t_1ae0e753a75a1ccaf9a790cde24bbabfbf"></span><tt class="descname">eth_lag_intf_membership_t</tt><big>(</big><a class="reference internal" href="intf.html#eossdkclasseos_1_1intf__id__t"><em>intf_id_t</em></a> <em>eth_lag_intf_id</em>, bool <em>active</em>, std::string const &amp; <em>reason</em>, double <em>member_time</em>, eth_lag_intf_member_lacp_mode_t <em>mode</em><big>)</big></dt>
+<dd><p>Constructor with paremeters. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1eth__lag__intf__membership__t_1aaba53ec4ac55690d1a239fb34769473f"></span><a class="reference internal" href="intf.html#eossdkclasseos_1_1intf__id__t"><em>intf_id_t</em></a> <tt class="descname">eth_lag_intf_id</tt><big>(</big><big>)</big> const</dt>
+<dd><p>Getter for &#8216;eth_lag_intf_id&#8217;: the LAG interface id this interface is configured to be in. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1eth__lag__intf__membership__t_1a4f16af197641c78e065d8e1ae4e42eb4"></span>void <tt class="descname">eth_lag_intf_id_is</tt><big>(</big><a class="reference internal" href="intf.html#eossdkclasseos_1_1intf__id__t"><em>intf_id_t</em></a> <em>eth_lag_intf_id</em><big>)</big></dt>
+<dd><p>Setter for &#8216;eth_lag_intf_id&#8217;. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1eth__lag__intf__membership__t_1a8787c2f7ed9d3606568188d30de75a30"></span>bool <tt class="descname">active</tt><big>(</big><big>)</big> const</dt>
+<dd><p>Getter for &#8216;active&#8217;: the attribute indicating whether this interface is active in an LAG. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1eth__lag__intf__membership__t_1a4b0876276f0fa07cf08348645b98f103"></span>std::string <tt class="descname">reason</tt><big>(</big><big>)</big> const</dt>
+<dd><p>Getter for &#8216;reason&#8217;: if populated, reason this interface isn&#8217;t in LAG. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1eth__lag__intf__membership__t_1a6121e967c054905a078aee85d08bfd3b"></span>void <tt class="descname">reason_is</tt><big>(</big>std::string const &amp; <em>reason</em><big>)</big></dt>
+<dd><p>Setter for &#8216;reason&#8217;. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1eth__lag__intf__membership__t_1af477ed29fef41f2ed403ec4db77504d2"></span>double <tt class="descname">member_time</tt><big>(</big><big>)</big> const</dt>
+<dd><p>Getter for &#8216;member_time&#8217;: the time when this interface became member of an LAG. If never a member, then the value is 0; if once was member, but now is not, then this is the time the interface was removed from member. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1eth__lag__intf__membership__t_1a8f2a41f443892746091f17428bbd31b7"></span>eth_lag_intf_member_lacp_mode_t <tt class="descname">mode</tt><big>(</big><big>)</big> const</dt>
+<dd><p>Getter for &#8216;mode&#8217;: the LACP mode this interface is configured. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1eth__lag__intf__membership__t_1ad9d1b84474070d3058ff74b7f1628063"></span>bool <tt class="descname">operator==</tt><big>(</big><a class="reference internal" href="#eossdkclasseos_1_1eth__lag__intf__membership__t"><em>eth_lag_intf_membership_t</em></a> const &amp; <em>other</em><big>)</big> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1eth__lag__intf__membership__t_1a7c448d07b3ff2d549ecd1abcbe22e236"></span>bool <tt class="descname">operator!=</tt><big>(</big><a class="reference internal" href="#eossdkclasseos_1_1eth__lag__intf__membership__t"><em>eth_lag_intf_membership_t</em></a> const &amp; <em>other</em><big>)</big> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1eth__lag__intf__membership__t_1aa5542af546d687f538bf9c23785cb4d7"></span>bool <tt class="descname">operator&lt;</tt><big>(</big><a class="reference internal" href="#eossdkclasseos_1_1eth__lag__intf__membership__t"><em>eth_lag_intf_membership_t</em></a> const &amp; <em>other</em><big>)</big> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1eth__lag__intf__membership__t_1a94ee41a1bb91a6a77cf3bac90e8d3435"></span>uint32_t <tt class="descname">hash</tt><big>(</big><big>)</big> const</dt>
+<dd><p>The hash function for type <a class="reference internal" href="#eossdkclasseos_1_1eth__lag__intf__membership__t"><em>eth_lag_intf_membership_t</em></a>. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1eth__lag__intf__membership__t_1a92fb6cdd7d8225765eb93ea458ff8355"></span>std::string <tt class="descname">to_string</tt><big>(</big><big>)</big> const</dt>
+<dd><p>Returns a string representation of the current object&#8217;s values. </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Private Members</p>
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1eth__lag__intf__membership__t_1a4e6d8f4e33635c991c942ede6dd8e177"></span><a class="reference internal" href="intf.html#eossdkclasseos_1_1intf__id__t"><em>intf_id_t</em></a> <tt class="descname">eth_lag_intf_id_</tt></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1eth__lag__intf__membership__t_1ab39051e0a1bfca2989433617c5b57fe8"></span>bool <tt class="descname">active_</tt></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1eth__lag__intf__membership__t_1a74f33604ec075fb7d85b73b211470c7b"></span>std::string <tt class="descname">reason_</tt></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1eth__lag__intf__membership__t_1a67225fa77cc83584a24c13689da99c67"></span>double <tt class="descname">member_time_</tt></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1eth__lag__intf__membership__t_1a05edb5f48305f621432719e34b174f6e"></span>eth_lag_intf_member_lacp_mode_t <tt class="descname">mode_</tt></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Friends</p>
+<dl class="friend">
+<dt>
+<span class="target" id="eossdkclasseos_1_1eth__lag__intf__membership__t_1a21f5aa6b8297f9261e0d536e5d44a95b"></span>friend std::ostream &amp; <tt class="descname">operator&lt;&lt;</tt></dt>
+<dd><p>A utility stream operator that adds a string representation of <a class="reference internal" href="#eossdkclasseos_1_1eth__lag__intf__membership__t"><em>eth_lag_intf_membership_t</em></a> to the ostream. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="class">
+<dt>
+<span class="target" id="eossdkclasseos_1_1eth__lag__intf__t"></span><em>class</em> <tt class="descname">eth_lag_intf_t</tt></dt>
+<dd><em>#include &lt;eth_lag_intf.h&gt;</em><p>This data structure defines a LAG interface, which is also known as a Link-Aggregation Group, or Port-Channel. LAGs bundle physical interfaces together into a single logical link to provide combined bandwidth and other benefits. </p>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1eth__lag__intf__t_1a75815fd30c4990c55bfbc567243c6c4d"></span><tt class="descname">eth_lag_intf_t</tt><big>(</big><big>)</big></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1eth__lag__intf__t_1a462e916d78ec93bc96825e8a67f5a683"></span><tt class="descname">eth_lag_intf_t</tt><big>(</big><a class="reference internal" href="intf.html#eossdkclasseos_1_1intf__id__t"><em>intf_id_t</em></a> <em>intf</em><big>)</big></dt>
+<dd><p>Constructor with interface id. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1eth__lag__intf__t_1a2a2002fa2aa3de0d9b6cd90674013f87"></span><tt class="descname">eth_lag_intf_t</tt><big>(</big><a class="reference internal" href="intf.html#eossdkclasseos_1_1intf__id__t"><em>intf_id_t</em></a> <em>intf</em>, uint32_t <em>min_links</em>, uint64_t <em>speed</em>, eth_lag_intf_fallback_type_t <em>fallback_type</em>, uint16_t <em>fallback_timeout</em><big>)</big></dt>
+<dd><p>Constructor with interface id. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1eth__lag__intf__t_1a7dcf675ec729ccf423e72fd45a9076f0"></span><a class="reference internal" href="intf.html#eossdkclasseos_1_1intf__id__t"><em>intf_id_t</em></a> <tt class="descname">intf</tt><big>(</big><big>)</big> const</dt>
+<dd><p>Getter for &#8216;intf&#8217;: the id of this LAG interface. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1eth__lag__intf__t_1a55454ec4036bfe996d2c266facebdcf2"></span>uint64_t <tt class="descname">speed</tt><big>(</big><big>)</big> const</dt>
+<dd><p>Getter for &#8216;speed&#8217;: the aggregated capacity (speed) of this LAG interface in megabits. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1eth__lag__intf__t_1aee5f2492770896a8d965191736168fa2"></span>uint32_t <tt class="descname">min_links</tt><big>(</big><big>)</big> const</dt>
+<dd><p>Getter for &#8216;min_links&#8217;: the min links required up before bringing up an LAG interface. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1eth__lag__intf__t_1a1533bbb51d16cf7eec4b29f41b0631ff"></span>eth_lag_intf_fallback_type_t <tt class="descname">fallback_type</tt><big>(</big><big>)</big> const</dt>
+<dd><p>Getter for &#8216;fallback_type&#8217;: the fallback mode for this LAG interface. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1eth__lag__intf__t_1a04e16b967285b452ddff3609a2c35c1a"></span>uint16_t <tt class="descname">fallback_timeout</tt><big>(</big><big>)</big> const</dt>
+<dd><p>Getter for &#8216;fallback_timeout&#8217;: the LACP active mode timeout value in seconds. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1eth__lag__intf__t_1ae1cdea77034e3391e95dd90ee3e84365"></span>uint16_t <tt class="descname">fallback_timeout_default</tt><big>(</big><big>)</big> const</dt>
+<dd><p>Returns the default fallback timeout value in seconds. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1eth__lag__intf__t_1ae346bc8d969ff87148f2fd4af9c43669"></span>bool <tt class="descname">operator==</tt><big>(</big><a class="reference internal" href="#eossdkclasseos_1_1eth__lag__intf__t"><em>eth_lag_intf_t</em></a> const &amp; <em>other</em><big>)</big> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1eth__lag__intf__t_1ad5101c86261ce283cdf5456524acddc7"></span>bool <tt class="descname">operator!=</tt><big>(</big><a class="reference internal" href="#eossdkclasseos_1_1eth__lag__intf__t"><em>eth_lag_intf_t</em></a> const &amp; <em>other</em><big>)</big> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1eth__lag__intf__t_1af0b33abf66585ea3779e49d4f16d4671"></span>bool <tt class="descname">operator&lt;</tt><big>(</big><a class="reference internal" href="#eossdkclasseos_1_1eth__lag__intf__t"><em>eth_lag_intf_t</em></a> const &amp; <em>other</em><big>)</big> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1eth__lag__intf__t_1a68755d68cb6ab26d3c9a7ef35d3f5d5d"></span>uint32_t <tt class="descname">hash</tt><big>(</big><big>)</big> const</dt>
+<dd><p>The hash function for type <a class="reference internal" href="#eossdkclasseos_1_1eth__lag__intf__t"><em>eth_lag_intf_t</em></a>. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1eth__lag__intf__t_1a7bf5cec024061b182fcda8716d0f7622"></span>std::string <tt class="descname">to_string</tt><big>(</big><big>)</big> const</dt>
+<dd><p>Returns a string representation of the current object&#8217;s values. </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Private Members</p>
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1eth__lag__intf__t_1ac66478ff6db6f4633456a4f06a3912a5"></span><a class="reference internal" href="intf.html#eossdkclasseos_1_1intf__id__t"><em>intf_id_t</em></a> <tt class="descname">intf_</tt></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1eth__lag__intf__t_1a2c7140cbc929b2d9fe50298804a24490"></span>uint64_t <tt class="descname">speed_</tt></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1eth__lag__intf__t_1afc6f925c82ea1d507324429c2246cc0a"></span>uint32_t <tt class="descname">min_links_</tt></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1eth__lag__intf__t_1a45a40f6558f2fddccf7e5c46715b0e0a"></span>eth_lag_intf_fallback_type_t <tt class="descname">fallback_type_</tt></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1eth__lag__intf__t_1a03ff1b0e598eafec5e95d56e90578742"></span>uint16_t <tt class="descname">fallback_timeout_</tt></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Friends</p>
+<dl class="friend">
+<dt>
+<span class="target" id="eossdkclasseos_1_1eth__lag__intf__t_1aa598de1e3b1390caa40268e368f2bf6c"></span>friend std::ostream &amp; <tt class="descname">operator&lt;&lt;</tt></dt>
+<dd><p>A utility stream operator that adds a string representation of <a class="reference internal" href="#eossdkclasseos_1_1eth__lag__intf__t"><em>eth_lag_intf_t</em></a> to the ostream. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#"><strong>eth_lag_intf</strong></a><ul>
+<li><a class="reference internal" href="#type-definitions-in-eth-lag-intf">Type definitions in <strong>eth_lag_intf</strong></a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="eth_intf.html"
+                        title="previous chapter"><strong>eth_intf</strong></a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="eth_phy_intf.html"
+                        title="next chapter"><strong>eth_phy_intf</strong></a></p>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="eth_phy_intf.html" title="eth_phy_intf"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="eth_intf.html" title="eth_intf"
+             >previous</a> |</li>
+        <li><a href="index.html">Arista EOS SDK 2.11.0 reference</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2014, Arista Networks.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

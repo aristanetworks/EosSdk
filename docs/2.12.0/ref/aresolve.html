@@ -1,0 +1,460 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>aresolve &mdash; Arista EOS SDK 2.11.0 reference</title>
+    
+    <link rel="stylesheet" href="_static/eossdk.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/breathe.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '2.11.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="Arista EOS SDK 2.11.0 reference" href="index.html" />
+    <link rel="next" title="base" href="base.html" />
+    <link rel="prev" title="agent" href="agent.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="base.html" title="base"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="agent.html" title="agent"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">Arista EOS SDK 2.11.0 reference</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="aresolve">
+<h1><strong>aresolve</strong><a class="headerlink" href="#aresolve" title="Permalink to this headline">¶</a></h1>
+<p>Aresolve provides asynchronous DNS host resolution.</p>
+<p>Aresolve resolves and automatically re-resolves DNS information for requests made via the aresolve_handler&#8217;s watch_* methods. Whenever resolution information about the watched name changes, the aresolve_handler&#8217;s on_aresolve_host() function is called.</p>
+<p>For example, an application may wish to track the IP address of a particular infrastructure hostname (e.g., a syslog receiver we&#8217;ll call &#8220;loghost&#8221;). In this example, an IP address object is created to track the current address of the loghost:</p>
+<p> <pre class="literal-block">
+* #include &lt;assert.h&gt;
+*
+* #include &lt;eos/agent.h&gt;
+* #include &lt;eos/aresolve.h&gt;
+* #include &lt;eos/ip.h&gt;
+* #include &lt;eos/sdk.h&gt;
+*
+* class Aresolver : public <a class="reference internal" href="#eossdkclasseos_1_1aresolve__handler"><em>eos::aresolve_handler</em></a>, public <a class="reference internal" href="agent.html#eossdkclasseos_1_1agent__handler"><em>eos::agent_handler</em></a> {
+*  public:
+*    explicit Aresolver(<a class="reference internal" href="sdk.html#eossdkclasseos_1_1sdk"><em>eos::sdk</em></a> &amp; sdk)
+*       : <a class="reference internal" href="#eossdkclasseos_1_1aresolve__handler"><em>eos::aresolve_handler</em></a>(sdk.get_aresolve_mgr()),
+*         <a class="reference internal" href="agent.html#eossdkclasseos_1_1agent__handler"><em>eos::agent_handler</em></a>(sdk.get_agent_mgr()) {
+*    }
+*
+*    void <a class="reference internal" href="agent.html#eossdkclasseos_1_1agent__handler_1ad558b16ee9a283bd9b153400743c4b1c"><em>on_initialized</em></a>() {
+*       // Register our interest in the IP address of &quot;loghost&quot;
+*       <a class="reference internal" href="#eossdkclasseos_1_1aresolve__handler_1af1781af3890a6f0b3f41a53fe1437105"><em>watch_host</em></a>(&quot;loghost&quot;, true);
+*    }
+*
+*    virtual void <a class="reference internal" href="#eossdkclasseos_1_1aresolve__handler_1a825bb10d3c5c39b7a1a7d023ae07e21e"><em>on_aresolve_host</em></a>(<a class="reference internal" href="#eossdkclasseos_1_1aresolve__record__host"><em>eos::aresolve_record_host</em></a> const &amp; record) {
+*       // Called on initial host resolution or updates in host address
+*       if (record.<a class="reference internal" href="#eossdkclasseos_1_1aresolve__record__base_1a6faa245a9693d04c0fda952e66d59a5d"><em>valid</em></a>()) {
+*          // We should only ever see results for &quot;loghost&quot;.
+*          assert(record.<a class="reference internal" href="#eossdkclasseos_1_1aresolve__record__base_1af74b849053abe078272bf679fd4c3104"><em>qname</em></a>() == &quot;loghost&quot;);
+*          // Get the IP address; we'll assume there's only one in this case.
+*          if (record.<a class="reference internal" href="#eossdkclasseos_1_1aresolve__record__host_1a30ce3b0a376722fb6c316a66782d99f1"><em>addr_v4</em></a>().size() &gt; 0) {  // IPv4
+*             address = record.<a class="reference internal" href="#eossdkclasseos_1_1aresolve__record__host_1a30ce3b0a376722fb6c316a66782d99f1"><em>addr_v4</em></a>().front();
+*          } else if (record.<a class="reference internal" href="#eossdkclasseos_1_1aresolve__record__host_1ae199e156bfdfa821de84e27a85ba4d77"><em>addr_v6</em></a>().size() &gt; 0) {  // IPv6
+*             address = record.<a class="reference internal" href="#eossdkclasseos_1_1aresolve__record__host_1ae199e156bfdfa821de84e27a85ba4d77"><em>addr_v6</em></a>().front();
+*          }
+*          // Do something with the new address, like send a syslog message.
+*       } else {
+*          // There was a host resolution error. Inspect record.last_error(),
+*          // which is an EAI_* error from netdb.h.
+*       }
+*    }
+*
+*  private:
+*    <a class="reference internal" href="ip.html#eossdkclasseos_1_1ip__addr__t"><em>eos::ip_addr_t</em></a> address;
+* };
+* 
+</pre>
+</p>
+<dl class="namespace">
+<dt>
+<span class="target" id="eossdknamespaceeos"></span><em>namespace</em> <tt class="descname">eos</tt></dt>
+<dd><dl class="class">
+<dt>
+<span class="target" id="eossdkclasseos_1_1aresolve__handler"></span><em>class</em> <tt class="descname">aresolve_handler</tt></dt>
+<dd><em>#include &lt;aresolve.h&gt;</em><p>The Aresolve handler.</p>
+<p>This handler receives callback notifications about objects that are being resolved via watch_* calls. </p>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1aresolve__handler_1ac17955267f4aa65fd69c033b1869a7fa"></span><tt class="descname">aresolve_handler</tt><big>(</big><a class="reference internal" href="#eossdkclasseos_1_1aresolve__mgr"><em>aresolve_mgr</em></a> *<big>)</big></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1aresolve__handler_1ac24369ca8e8f760757526a0d38ba3294"></span><a class="reference internal" href="#eossdkclasseos_1_1aresolve__mgr"><em>aresolve_mgr</em></a> * <tt class="descname">get_aresolve_mgr</tt><big>(</big><big>)</big> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1aresolve__handler_1af1781af3890a6f0b3f41a53fe1437105"></span>void <tt class="descname">watch_host</tt><big>(</big>std::string const &amp; <em>host</em>, bool <em>watch</em><big>)</big></dt>
+<dd><p>Starts or stops watching IPv4 and IPv6 addresses for the provided host name.</p>
+<p>When host resolution completes or an error occurs, <a class="reference internal" href="#eossdkclasseos_1_1aresolve__handler_1a825bb10d3c5c39b7a1a7d023ae07e21e"><em>on_aresolve_host()</em></a> is called. After host resolution completes initially, watched hosts will be refreshed automatically. When changes in the result happen, your handler&#8217;s <a class="reference internal" href="#eossdkclasseos_1_1aresolve__handler_1a825bb10d3c5c39b7a1a7d023ae07e21e"><em>on_aresolve_host()</em></a>, method is called. In this way, you need only watch hostnames you&#8217;re interested in and implement the <a class="reference internal" href="#eossdkclasseos_1_1aresolve__handler_1a825bb10d3c5c39b7a1a7d023ae07e21e"><em>on_aresolve_host()</em></a> method to deal with the changes in results.</p>
+<p><dl class="docutils">
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><tt class="first docutils literal"><span class="pre">host</span></tt> - <p>The hostname to watch </p>
+</li>
+<li><tt class="first docutils literal"><span class="pre">watch</span></tt> - <p>If true, start watching the hostname, else stop watching. </p>
+</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1aresolve__handler_1a825bb10d3c5c39b7a1a7d023ae07e21e"></span>virtual void <tt class="descname">on_aresolve_host</tt><big>(</big><a class="reference internal" href="#eossdkclasseos_1_1aresolve__record__host"><em>aresolve_record_host</em></a> const &amp; <em>record</em><big>)</big></dt>
+<dd><p>Callback called by Aresolve when host resolution completes.</p>
+<p>Called by Aresolve when DNS resolution of a host previously watched by <a class="reference internal" href="#eossdkclasseos_1_1aresolve__handler_1af1781af3890a6f0b3f41a53fe1437105"><em>watch_host()</em></a> completes.</p>
+<p>Will be called upon successful updates or otherwise, when either the valid or last update time member attributes change. May be called more than once for a given hostname, if DNS had a temporary failure.</p>
+<p><dl class="docutils">
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><tt class="first docutils literal"><span class="pre">record</span></tt> - <p>A record containing new or updated information about a watched host. </p>
+</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="class">
+<dt>
+<span class="target" id="eossdkclasseos_1_1aresolve__mgr"></span><em>class</em> <tt class="descname">aresolve_mgr</tt></dt>
+<dd><div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1aresolve__mgr_1ac13b4f69423bda0969476377d0e0a4e4"></span>virtual <tt class="descname">~aresolve_mgr</tt><big>(</big><big>)</big></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1aresolve__mgr_1a36a591aad23cddac8bd31780f92ec1ef"></span>virtual uint32_t <tt class="descname">aresolve_short_time</tt><big>(</big><big>)</big> const = 0</dt>
+<dd><p>Aresolve implementation configuration settings.</p>
+<p>The short time defines the minimum period between DNS resolutions. (default: 1s) </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1aresolve__mgr_1a87d1d8be70b4eccc864ab70e47df27eb"></span>virtual uint32_t <tt class="descname">aresolve_long_time</tt><big>(</big><big>)</big> const = 0</dt>
+<dd><p>Returns the long timer, or seconds between repeated DNS queries.</p>
+<p>You will receive at most one notification per DNS query (watched host) every <a class="reference internal" href="#eossdkclasseos_1_1aresolve__mgr_1a87d1d8be70b4eccc864ab70e47df27eb"><em>aresolve_long_time()</em></a> number of seconds. (default: 300s) </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1aresolve__mgr_1a2fe5b0c1b15c36300545484c19a48a77"></span>virtual void <tt class="descname">aresolve_short_time_is</tt><big>(</big>uint32_t<big>)</big> = 0</dt>
+<dd><p>Sets the Aresolve short timer to the value provided. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1aresolve__mgr_1a4529e0d22bcc70108a7f621f6e6dcb32"></span>virtual void <tt class="descname">aresolve_long_time_is</tt><big>(</big>uint32_t<big>)</big> = 0</dt>
+<dd><p>Sets the Aresolve long timer to the value provided. </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Protected Functions</p>
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1aresolve__mgr_1a4617a484da0a77fad43600fecf440130"></span><tt class="descname">aresolve_mgr</tt><big>(</big><big>)</big></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Private Members</p>
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1aresolve__mgr_1af57ad1af6bd059d3a223d473da445c4f"></span><tt class="descname">aresolve_mgr</tt></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Friends</p>
+<dl class="friend">
+<dt>
+<span class="target" id="eossdkclasseos_1_1aresolve__mgr_1a647f38886ece042584edda440cdcb041"></span>friend class <tt class="descname">aresolve_handler</tt></dt>
+<dd></dd></dl>
+
+</div>
+</dd></dl>
+
+</dd></dl>
+
+<div class="section" id="type-definitions-in-aresolve">
+<h2>Type definitions in <strong>aresolve</strong><a class="headerlink" href="#type-definitions-in-aresolve" title="Permalink to this headline">¶</a></h2>
+<dl class="namespace">
+<dt>
+<span class="target" id="eossdknamespaceeos"></span><em>namespace</em> <tt class="descname">eos</tt></dt>
+<dd><dl class="class">
+<dt>
+<span class="target" id="eossdkclasseos_1_1aresolve__record__base"></span><em>class</em> <tt class="descname">aresolve_record_base</tt></dt>
+<dd><em>#include &lt;aresolve.h&gt;</em><p>A base DNS response class.</p>
+<p>When receiving an aresolve_record_*, if <a class="reference internal" href="#eossdkclasseos_1_1aresolve__record__base_1a6faa245a9693d04c0fda952e66d59a5d"><em>valid()</em></a> is false, the <a class="reference internal" href="#eossdkclasseos_1_1aresolve__record__base_1a72b4190990627bc7bb1337b1c44d5af3"><em>last_error()</em></a> method should be called to receive the EAI_* error (which can be converted to a string with gai_strerror()). If there is no error, accessors in subclasses of <a class="reference internal" href="#eossdkclasseos_1_1aresolve__record__base"><em>aresolve_record_base</em></a> contain the latest update for the request.</p>
+<p>This class is not instantiated or received by user code. </p>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1aresolve__record__base_1af74b849053abe078272bf679fd4c3104"></span>std::string <tt class="descname">qname</tt><big>(</big><big>)</big> const</dt>
+<dd><p>Getter for &#8216;qname&#8217;: the DNS query (request) name. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1aresolve__record__base_1a40ef17015a20487c0926641d43933ea1"></span>seconds_t <tt class="descname">last_refresh</tt><big>(</big><big>)</big> const</dt>
+<dd><p>Getter for &#8216;last_refresh&#8217;: the last refresh time, seconds since boot. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1aresolve__record__base_1a6faa245a9693d04c0fda952e66d59a5d"></span>bool <tt class="descname">valid</tt><big>(</big><big>)</big> const</dt>
+<dd><p>Getter for &#8216;valid&#8217;: the flag indicating whether the request was successful. If false, <a class="reference internal" href="#eossdkclasseos_1_1aresolve__record__base_1a72b4190990627bc7bb1337b1c44d5af3"><em>last_error()</em></a> will return a non-zero value. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1aresolve__record__base_1a72b4190990627bc7bb1337b1c44d5af3"></span>int <tt class="descname">last_error</tt><big>(</big><big>)</big> const</dt>
+<dd><p>Getter for &#8216;last_error&#8217;: error code reporting the last error, or 0 if the record was resolved. Values are EAI_* constants in netdb.h. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1aresolve__record__base_1a213b15aa6087b2a4f3f645e0f18bd2e8"></span>uint32_t <tt class="descname">hash</tt><big>(</big><big>)</big> const</dt>
+<dd><p>The hash function for type <a class="reference internal" href="#eossdkclasseos_1_1aresolve__record__base"><em>aresolve_record_base</em></a>. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1aresolve__record__base_1ac64873ff08b5afc5952869f69c734eec"></span>std::string <tt class="descname">to_string</tt><big>(</big><big>)</big> const</dt>
+<dd><p>Returns a string representation of the current object&#8217;s values. </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Protected Functions</p>
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1aresolve__record__base_1a2bd132d2f39340406a8cdd5b00c19205"></span><tt class="descname">aresolve_record_base</tt><big>(</big><big>)</big></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1aresolve__record__base_1a3e127cd9928ae9510902e1edeae738c1"></span>virtual <tt class="descname">~aresolve_record_base</tt><big>(</big><big>)</big></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Private Members</p>
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1aresolve__record__base_1aa914dc792045a8666953acd52fe17327"></span>std::string <tt class="descname">qname_</tt></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1aresolve__record__base_1aa6766c92e3924daf6610a4778cb8bfbe"></span>seconds_t <tt class="descname">last_refresh_</tt></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1aresolve__record__base_1aa82fb1d15163fc95746842e99c6495cc"></span>bool <tt class="descname">valid_</tt></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1aresolve__record__base_1afcab99b831568dd22dcca02eebb5e97a"></span>int <tt class="descname">last_error_</tt></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Friends</p>
+<dl class="friend">
+<dt>
+<span class="target" id="eossdkclasseos_1_1aresolve__record__base_1ad1d0dc165158052731abfed5239def85"></span>friend class <tt class="descname">aresolve_internal</tt></dt>
+<dd></dd></dl>
+
+<dl class="friend">
+<dt>
+<span class="target" id="eossdkclasseos_1_1aresolve__record__base_1a42cce103e40b0a952ca0c0cadb68bc9b"></span>friend std::ostream &amp; <tt class="descname">operator&lt;&lt;</tt></dt>
+<dd><p>A utility stream operator that adds a string representation of <a class="reference internal" href="#eossdkclasseos_1_1aresolve__record__base"><em>aresolve_record_base</em></a> to the ostream. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="class">
+<dt>
+<span class="target" id="eossdkclasseos_1_1aresolve__record__host"></span><em>class</em> <tt class="descname">aresolve_record_host</tt></dt>
+<dd><em>#include &lt;aresolve.h&gt;</em><p>A DNS response for a hostname query containing resolved IP addresses received by the on_aresolve_host() receiver method. A host response contains zero or more IPv4 or IPv6 addresses. </p>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1aresolve__record__host_1a44cf03967523089df907bfda1ccba54a"></span><tt class="descname">aresolve_record_host</tt><big>(</big><big>)</big></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1aresolve__record__host_1a2ff188dbeac0c961578cac72aa930f1c"></span>virtual <tt class="descname">~aresolve_record_host</tt><big>(</big><big>)</big></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1aresolve__record__host_1a30ce3b0a376722fb6c316a66782d99f1"></span>std::list&lt; <a class="reference internal" href="ip.html#eossdkclasseos_1_1ip__addr__t"><em>ip_addr_t</em></a> &gt; const &amp; <tt class="descname">addr_v4</tt><big>(</big><big>)</big> const</dt>
+<dd><p>Getter for &#8216;addr_v4&#8217;: the resolved IPv4 addresses for the <a class="reference internal" href="#eossdkclasseos_1_1aresolve__record__base_1af74b849053abe078272bf679fd4c3104"><em>qname()</em></a>. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1aresolve__record__host_1ae199e156bfdfa821de84e27a85ba4d77"></span>std::list&lt; <a class="reference internal" href="ip.html#eossdkclasseos_1_1ip__addr__t"><em>ip_addr_t</em></a> &gt; const &amp; <tt class="descname">addr_v6</tt><big>(</big><big>)</big> const</dt>
+<dd><p>Getter for &#8216;addr_v6&#8217;: the resolved IPv6 addresses for the <a class="reference internal" href="#eossdkclasseos_1_1aresolve__record__base_1af74b849053abe078272bf679fd4c3104"><em>qname()</em></a>. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1aresolve__record__host_1aaed4b8e5c6eec78df377e411e866fcb5"></span>uint32_t <tt class="descname">hash</tt><big>(</big><big>)</big> const</dt>
+<dd><p>The hash function for type <a class="reference internal" href="#eossdkclasseos_1_1aresolve__record__host"><em>aresolve_record_host</em></a>. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1aresolve__record__host_1a377af3e3f9e1f8b0ed81ae3e8ce30808"></span>std::string <tt class="descname">to_string</tt><big>(</big><big>)</big> const</dt>
+<dd><p>Returns a string representation of the current object&#8217;s values. </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Private Members</p>
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1aresolve__record__host_1aeae0a53349df2263df3c02c4ad3ba7d6"></span>std::list&lt; <a class="reference internal" href="ip.html#eossdkclasseos_1_1ip__addr__t"><em>ip_addr_t</em></a> &gt; <tt class="descname">addr_v4_</tt></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1aresolve__record__host_1af253f5b4964503441bda836170906867"></span>std::list&lt; <a class="reference internal" href="ip.html#eossdkclasseos_1_1ip__addr__t"><em>ip_addr_t</em></a> &gt; <tt class="descname">addr_v6_</tt></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Friends</p>
+<dl class="friend">
+<dt>
+<span class="target" id="eossdkclasseos_1_1aresolve__record__host_1ad1d0dc165158052731abfed5239def85"></span>friend class <tt class="descname">aresolve_internal</tt></dt>
+<dd></dd></dl>
+
+<dl class="friend">
+<dt>
+<span class="target" id="eossdkclasseos_1_1aresolve__record__host_1a749c803879919f0fbe178677dc19cd6c"></span>friend std::ostream &amp; <tt class="descname">operator&lt;&lt;</tt></dt>
+<dd><p>A utility stream operator that adds a string representation of <a class="reference internal" href="#eossdkclasseos_1_1aresolve__record__host"><em>aresolve_record_host</em></a> to the ostream. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#"><strong>aresolve</strong></a><ul>
+<li><a class="reference internal" href="#type-definitions-in-aresolve">Type definitions in <strong>aresolve</strong></a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="agent.html"
+                        title="previous chapter"><strong>agent</strong></a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="base.html"
+                        title="next chapter"><strong>base</strong></a></p>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="base.html" title="base"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="agent.html" title="agent"
+             >previous</a> |</li>
+        <li><a href="index.html">Arista EOS SDK 2.11.0 reference</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2014, Arista Networks.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

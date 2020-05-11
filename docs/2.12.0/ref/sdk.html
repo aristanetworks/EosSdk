@@ -1,0 +1,819 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>sdk &mdash; Arista EOS SDK 2.11.0 reference</title>
+    
+    <link rel="stylesheet" href="_static/eossdk.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/breathe.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '2.11.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="Arista EOS SDK 2.11.0 reference" href="index.html" />
+    <link rel="next" title="subintf" href="subintf.html" />
+    <link rel="prev" title="policy_map" href="policy_map.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="subintf.html" title="subintf"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="policy_map.html" title="policy_map"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">Arista EOS SDK 2.11.0 reference</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="sdk">
+<h1><strong>sdk</strong><a class="headerlink" href="#sdk" title="Permalink to this headline">¶</a></h1>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Defines</p>
+<dl class="define">
+<dt>
+<span class="target" id="eossdksdk_8h_1ae215bbdb8941dd98e5b4aa1f4536f712"></span><strong>ENSURE_INITIALIZED</strong>()</dt>
+<dd></dd></dl>
+
+</div>
+<dl class="namespace">
+<dt>
+<span class="target" id="eossdknamespaceeos"></span><em>namespace</em> <tt class="descname">eos</tt></dt>
+<dd><div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Functions</p>
+<dl class="function">
+<dt>
+<span class="target" id="eossdknamespaceeos_1a0eb94888b634a66920c9c578b200a839"></span>void <tt class="descname">default_signal_handler</tt><big>(</big>int <em>signal</em><big>)</big></dt>
+<dd><p>A reference to the default signal handler.</p>
+<p>This handler is installed for SIGTERM and SIGINT so agents cleanly exit the event loop upon receiving those signals. This function is exposed for agents that install their own signal handlers. If desired, the agent can call this function from its new signal handler, or re-install this if it no longer wants to use a custom signal handler. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdknamespaceeos_1a4be9d901b2777c5d1c1dfdcc9352b865"></span>void <tt class="descname">internal_connection_buffer_size_is</tt><big>(</big>uint32_t <em>bytes</em><big>)</big></dt>
+<dd><p></p>
+<p>It should be used for specific applications that attempt to do large numbers of updates without yielding to the event loop. It should only be rarely used, and future versions of EOS will eliminate the need for this method entirely. At that point, this method will be removed, so please contact the EOS SDK developers before using this method.</p>
+<p>To use, call this method at the beginning of your on_initialized() callback.</p>
+<p>This method takes in a number of bytes that the buffer should be. By default, this buffer size is set to 8.3 MB (which the kernel doubles to 16.7 MB) - the max kernel buffer size.</p>
+<p>Unlike setsockopt, the number of bytes you pass to this function is NOT doubled for setting the actual socket buffer size. Note though that the new buffer size may not exactly match the requested buffer size, but we guarantee that it the new size is at least as big as the requested size. </p>
+</dd></dl>
+
+</div>
+<dl class="class">
+<dt>
+<span class="target" id="eossdkclasseos_1_1sdk__scoped__lock"></span><em>class</em> <tt class="descname">sdk_scoped_lock</tt></dt>
+<dd><em>#include &lt;sdk.h&gt;</em><p>The following lock lets multiple threads use the SDK simultaneously. This lock uses the RAII idiom; in multithreaded environments, instantiate an <a class="reference internal" href="#eossdkclasseos_1_1sdk__scoped__lock"><em>eos::sdk_scoped_lock</em></a> before using any <a class="reference internal" href="#eossdkclasseos_1_1sdk"><em>eos::sdk</em></a> features. Users do not need to grab a lock if they only have one thread, or if they perform all operations on the SDK from the thread which owns the <tt class="docutils literal"><span class="pre">main_loop</span></tt>, as the SDK grabs the lock before calling any *_handler callbacks and before performing any internal bookkeeping. Do note that the lock is re-entrant, so attempting to grab the lock twice is fine. Example usage:</p>
+<p>Thread 1: running <a class="reference internal" href="#eossdkclasseos_1_1sdk_1a64f50ab3f5d0197d07ff706c1ef0d8a3"><em>sdk.main_loop()</em></a></p>
+<p>Thread 2: { // Start a new scope to hold the lock <a class="reference internal" href="#eossdkclasseos_1_1sdk__scoped__lock"><em>eos::sdk_scoped_lock</em></a> ssl; sdk.get_agent_mgr()-&gt;status_set(&#8220;Look&#8221;, &#8220;I can interact with Sysdb!&#8221;); } // End the scope, causing the <a class="reference internal" href="#eossdkclasseos_1_1sdk__scoped__lock"><em>sdk_scoped_lock</em></a> to be destructed and released </p>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1sdk__scoped__lock_1a6ee007cd062d0e24fa7901d76dd9efd4"></span><tt class="descname">sdk_scoped_lock</tt><big>(</big><big>)</big></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1sdk__scoped__lock_1a218903e66472a5ddca472a4d92881a95"></span><tt class="descname">~sdk_scoped_lock</tt><big>(</big><big>)</big></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Private Members</p>
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1sdk__scoped__lock_1a3a7d210d659d066a0119d7449a1fbb92"></span>void * <tt class="descname">lock</tt></dt>
+<dd></dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="class">
+<dt>
+<span class="target" id="eossdkclasseos_1_1sdk"></span><em>class</em> <tt class="descname">sdk</tt></dt>
+<dd><em>#include &lt;sdk.h&gt;</em><p>Manages the different managers of the SDK. One manager of each type can be linked to a SDK object.</p>
+<p>As managers must be initialized at the beginning of the program, the init_*_mgr() functions should be called for any managers you plan to use. Since the get_*_mgr() functions also call their respective init_*_mgr() functions if necessary, accessing the managers at the beginning of the code (before the agent_loop is called) is enough to initialize them. </p>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1sdk_1a778cd7aa316e9240fb80e8acc9bfa9eb"></span><tt class="descname">sdk</tt><big>(</big><big>)</big></dt>
+<dd><p>Constructs a top level SDK object.</p>
+<p>This constructor will read the AGENT_PROCESS_NAME environment variable to determine the operational name of the agent. When running this agent via the CLI, this variable will be set automatically. If running an agent that uses this constructor manually, the AGENT_PROCESS_NAME variable must be set. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1sdk_1a586b1b0959540ea4e681ad560ab34433"></span><tt class="descname">sdk</tt><big>(</big>std::string const <em>agent_name</em>, void * <em>eossdk_context</em> = NULL<big>)</big></dt>
+<dd><p>Construct an SDK object with an explicitly set name. If running an agent using this constructor from the CLI, note that the name used here must match the name used in the CLI configuration. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1sdk_1acf89858ea8091687dbceb3dd943c4a51"></span>virtual <tt class="descname">~sdk</tt><big>(</big><big>)</big></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1sdk_1a0846e68172f9b733ec618a7ca7bb3366"></span>virtual void <tt class="descname">initialize_context</tt><big>(</big><big>)</big></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1sdk_1a0d4e47e5e581a356efbb08125fd15e01"></span>virtual std::string <tt class="descname">name</tt><big>(</big><big>)</big></dt>
+<dd><p>Return the name of this SDK object.</p>
+<p>This variable is used to register the process with EOS&#8217;s various agent services, including the process name, the name used in the log file, as well as the namespace for custom agent configuration and status. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1sdk_1a64f50ab3f5d0197d07ff706c1ef0d8a3"></span>virtual void <tt class="descname">main_loop</tt><big>(</big>int <em>argc</em>, char ** <em>argv</em><big>)</big></dt>
+<dd><p>Begin the agent&#8217;s event loop.</p>
+<p>This function initializes the underlying infrastructure for your agent. It first registers itself as an EOS agent, then synchronizes any needed state with Sysdb, and finally starts the event loop. Before this function is called, no managers are valid (as no state has been synchronized with Sysdb), and no handlers will be triggered (as the event loop is not running). This function will not return unless the agent is disabled or it explicitly calls the <a class="reference internal" href="agent.html#eossdkclasseos_1_1agent__mgr"><em>agent_mgr</em></a>&#8216;s exit() code. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1sdk_1afbd00f2e7ae5485169e9694ff5f7b98f"></span>virtual void <tt class="descname">init_acl_mgr</tt><big>(</big><big>)</big></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1sdk_1af51ea35682094f8ff89aa4b403033dae"></span>virtual void <tt class="descname">init_agent_mgr</tt><big>(</big><big>)</big></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1sdk_1a5e6a551854f3661e9e132442fd8e5036"></span>virtual void <tt class="descname">init_aresolve_mgr</tt><big>(</big><big>)</big></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1sdk_1a657b167754aa60569af2e1e93cb991bc"></span>virtual void <tt class="descname">init_bfd_session_mgr</tt><big>(</big><big>)</big></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1sdk_1a8a122d75655c35ad2c1ca39c1359ef36"></span>virtual void <tt class="descname">init_bgp_path_mgr</tt><big>(</big><big>)</big></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1sdk_1acf39e40d8ab9bfc8c219e3ffeaeb72fd"></span>virtual void <tt class="descname">init_class_map_mgr</tt><big>(</big><big>)</big></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1sdk_1a41b24e253721215c2e047a852830bae3"></span>virtual void <tt class="descname">init_decap_group_mgr</tt><big>(</big><big>)</big></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1sdk_1adeaa404c3aa918b01c47c199ec609f92"></span>virtual void <tt class="descname">init_directflow_mgr</tt><big>(</big><big>)</big></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1sdk_1af122b661be917b56d7f5f6dd3ad47bf9"></span>virtual void <tt class="descname">init_eapi_mgr</tt><big>(</big><big>)</big></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1sdk_1ae478869e80a9c88678bd8bf02bbbc33b"></span>virtual void <tt class="descname">init_eth_intf_mgr</tt><big>(</big><big>)</big></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1sdk_1a01dd9b7d621c5b725c2afcdfd3487d6a"></span>virtual void <tt class="descname">init_eth_lag_intf_mgr</tt><big>(</big><big>)</big></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1sdk_1a7895a10e69d38e09979091f3abed9fdc"></span>virtual void <tt class="descname">init_eth_phy_intf_mgr</tt><big>(</big><big>)</big></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1sdk_1ade93f06410316e06f5483eb5de1b885f"></span>virtual void <tt class="descname">init_eth_phy_intf_counter_mgr</tt><big>(</big><big>)</big></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1sdk_1a7131da000edd9221c6a08eccd1108de5"></span>virtual void <tt class="descname">init_event_loop</tt><big>(</big><big>)</big></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1sdk_1a3af281dfeb7cfa30ab38e42ee4e0912e"></span>virtual void <tt class="descname">init_fib_mgr</tt><big>(</big>mgr_mode_type_t <em>mode</em> = MODE_TYPE_READ_ONLY<big>)</big></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1sdk_1a5b9a0bdc2431c6ba1fa46f08e167880d"></span>virtual void <tt class="descname">init_hardware_table_mgr</tt><big>(</big><big>)</big></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1sdk_1a76e945f7df07d988691f10b4effd36ca"></span>virtual void <tt class="descname">init_intf_mgr</tt><big>(</big><big>)</big></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1sdk_1a81f696ba32ab21e8bcea8b9d3abf79a3"></span>virtual void <tt class="descname">init_intf_counter_mgr</tt><big>(</big><big>)</big></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1sdk_1a7ccbfbdbb0c0d347695341460cea4228"></span>virtual void <tt class="descname">init_ip_intf_mgr</tt><big>(</big><big>)</big></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1sdk_1a60d2ad866f9b75bb65e859f53c3c33e1"></span>virtual void <tt class="descname">init_ip_route_mgr</tt><big>(</big><big>)</big></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1sdk_1a37bd53d03858222462d2a17995ca964b"></span>virtual void <tt class="descname">init_lldp_mgr</tt><big>(</big><big>)</big></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1sdk_1a300fca8566b1ae973ce6087d1c8200c9"></span>virtual void <tt class="descname">init_macsec_mgr</tt><big>(</big><big>)</big></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1sdk_1a7cdc5e6e6fdd1d17c002b459643c3ffa"></span>virtual void <tt class="descname">init_mac_table_mgr</tt><big>(</big><big>)</big></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1sdk_1a7ae221981dccdddf132c8e1353c5e614"></span>virtual void <tt class="descname">init_mlag_mgr</tt><big>(</big><big>)</big></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1sdk_1a7651e779713781db8566ad0563612de6"></span>virtual void <tt class="descname">init_mpls_route_mgr</tt><big>(</big><big>)</big></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1sdk_1aab558460cbffe90ae38d6c19915299bc"></span>virtual void <tt class="descname">init_mpls_vrf_label_mgr</tt><big>(</big><big>)</big></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1sdk_1a45b5301fe35927a6ab322d5da969b3cf"></span>virtual void <tt class="descname">init_neighbor_table_mgr</tt><big>(</big><big>)</big></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1sdk_1afbf4ecc43af5d3c7b0b19f9304f25da1"></span>virtual void <tt class="descname">init_nexthop_group_mgr</tt><big>(</big><big>)</big></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1sdk_1abfaea43766bac1e1aa22aedb717d9597"></span>virtual void <tt class="descname">init_nexthop_group_tunnel_mgr</tt><big>(</big><big>)</big></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1sdk_1a8a92c862bca57e27ecaaa3926f76573b"></span>virtual void <tt class="descname">init_policy_map_mgr</tt><big>(</big><big>)</big></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1sdk_1a84fffbc7a38379acbd4acffddc3036f3"></span>virtual void <tt class="descname">init_subintf_mgr</tt><big>(</big><big>)</big></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1sdk_1a0e1371f8e7444394fbffda3842716049"></span>virtual void <tt class="descname">init_system_mgr</tt><big>(</big><big>)</big></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1sdk_1abef8a580a715b4a2c7533a67254ad7a9"></span>virtual void <tt class="descname">init_timeout_mgr</tt><big>(</big><big>)</big></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1sdk_1a7cd54daa9c1630b6d333fe5aa5a49652"></span>virtual void <tt class="descname">init_vrf_mgr</tt><big>(</big><big>)</big></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1sdk_1a747e7ac7d8d8cb753284ab9a050cfcdb"></span>virtual <a class="reference internal" href="acl.html#eossdkclasseos_1_1acl__mgr"><em>acl_mgr</em></a> * <tt class="descname">get_acl_mgr</tt><big>(</big><big>)</big></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1sdk_1aa1645ba0e6ef60d6984e909d94c30ade"></span>virtual <a class="reference internal" href="agent.html#eossdkclasseos_1_1agent__mgr"><em>agent_mgr</em></a> * <tt class="descname">get_agent_mgr</tt><big>(</big><big>)</big></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1sdk_1a691e2af8455076f444df00dc8ce8218d"></span>virtual <a class="reference internal" href="aresolve.html#eossdkclasseos_1_1aresolve__mgr"><em>aresolve_mgr</em></a> * <tt class="descname">get_aresolve_mgr</tt><big>(</big><big>)</big></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1sdk_1abb1e4e2c50cb4ab4fb5766d424f7fe51"></span>virtual <a class="reference internal" href="bfd.html#eossdkclasseos_1_1bfd__session__mgr"><em>bfd_session_mgr</em></a> * <tt class="descname">get_bfd_session_mgr</tt><big>(</big><big>)</big></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1sdk_1a649d3127a2172e3b72f085fdca70b957"></span>virtual <a class="reference internal" href="bgp_path.html#eossdkclasseos_1_1bgp__path__mgr"><em>bgp_path_mgr</em></a> * <tt class="descname">get_bgp_path_mgr</tt><big>(</big><big>)</big></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1sdk_1a8145abc3cd7f303fe4b2e96fb9baa20f"></span>virtual <a class="reference internal" href="class_map.html#eossdkclasseos_1_1class__map__mgr"><em>class_map_mgr</em></a> * <tt class="descname">get_class_map_mgr</tt><big>(</big><big>)</big></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1sdk_1a1cc3932d57748ff0cb47391acf0fd088"></span>virtual <a class="reference internal" href="decap_group.html#eossdkclasseos_1_1decap__group__mgr"><em>decap_group_mgr</em></a> * <tt class="descname">get_decap_group_mgr</tt><big>(</big><big>)</big></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1sdk_1a5abd9f3e5a076880f951c02f98c3c468"></span>virtual <a class="reference internal" href="directflow.html#eossdkclasseos_1_1directflow__mgr"><em>directflow_mgr</em></a> * <tt class="descname">get_directflow_mgr</tt><big>(</big><big>)</big></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1sdk_1a1d2c2a9a8d7602b003a60fc9ccd37fd8"></span>virtual <a class="reference internal" href="eapi.html#eossdkclasseos_1_1eapi__mgr"><em>eapi_mgr</em></a> * <tt class="descname">get_eapi_mgr</tt><big>(</big><big>)</big></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1sdk_1a149c6da889c1732263a09ecfb00efe31"></span>virtual <a class="reference internal" href="eth_intf.html#eossdkclasseos_1_1eth__intf__mgr"><em>eth_intf_mgr</em></a> * <tt class="descname">get_eth_intf_mgr</tt><big>(</big><big>)</big></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1sdk_1a525131c695342bde00f15172a90e243a"></span>virtual <a class="reference internal" href="eth_lag_intf.html#eossdkclasseos_1_1eth__lag__intf__mgr"><em>eth_lag_intf_mgr</em></a> * <tt class="descname">get_eth_lag_intf_mgr</tt><big>(</big><big>)</big></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1sdk_1af22f426540624abb1faecbf54ed6069a"></span>virtual <a class="reference internal" href="eth_phy_intf.html#eossdkclasseos_1_1eth__phy__intf__mgr"><em>eth_phy_intf_mgr</em></a> * <tt class="descname">get_eth_phy_intf_mgr</tt><big>(</big><big>)</big></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1sdk_1a32a87614d90a7c9c3aa0d0e3098ef33a"></span>virtual <a class="reference internal" href="eth_phy_intf.html#eossdkclasseos_1_1eth__phy__intf__counter__mgr"><em>eth_phy_intf_counter_mgr</em></a> * <tt class="descname">get_eth_phy_intf_counter_mgr</tt><big>(</big><big>)</big></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1sdk_1ab8474e6a73f14f765e57ec7f41841cbe"></span>virtual <a class="reference internal" href="event_loop.html#eossdkclasseos_1_1event__loop"><em>event_loop</em></a> * <tt class="descname">get_event_loop</tt><big>(</big><big>)</big></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1sdk_1add7d598db878b5e04177deaa978385b2"></span>virtual <a class="reference internal" href="fib.html#eossdkclasseos_1_1fib__mgr"><em>fib_mgr</em></a> * <tt class="descname">get_fib_mgr</tt><big>(</big>mgr_mode_type_t <em>mode</em> = MODE_TYPE_READ_ONLY<big>)</big></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1sdk_1a8be44e98b760ba2723296c348e3a4bf5"></span>virtual <a class="reference internal" href="hardware_table.html#eossdkclasseos_1_1hardware__table__mgr"><em>hardware_table_mgr</em></a> * <tt class="descname">get_hardware_table_mgr</tt><big>(</big><big>)</big></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1sdk_1a5f32a996afca9db3d63f73984b2b4b32"></span>virtual <a class="reference internal" href="intf.html#eossdkclasseos_1_1intf__mgr"><em>intf_mgr</em></a> * <tt class="descname">get_intf_mgr</tt><big>(</big><big>)</big></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1sdk_1a65a7adee2cf443909016eae13762737c"></span>virtual <a class="reference internal" href="intf.html#eossdkclasseos_1_1intf__counter__mgr"><em>intf_counter_mgr</em></a> * <tt class="descname">get_intf_counter_mgr</tt><big>(</big><big>)</big></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1sdk_1a6d1125f696762edc4a0ee84a0b745b9c"></span>virtual <a class="reference internal" href="ip_intf.html#eossdkclasseos_1_1ip__intf__mgr"><em>ip_intf_mgr</em></a> * <tt class="descname">get_ip_intf_mgr</tt><big>(</big><big>)</big></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1sdk_1a26c042cd5a18c80f9fb1776d30fc1845"></span>virtual <a class="reference internal" href="ip_route.html#eossdkclasseos_1_1ip__route__mgr"><em>ip_route_mgr</em></a> * <tt class="descname">get_ip_route_mgr</tt><big>(</big><big>)</big></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1sdk_1a9c5662c56a7656d75a1def297ddf91a0"></span>virtual <a class="reference internal" href="lldp.html#eossdkclasseos_1_1lldp__mgr"><em>lldp_mgr</em></a> * <tt class="descname">get_lldp_mgr</tt><big>(</big><big>)</big></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1sdk_1afa1f40bda2ab620dbbc63612242c64bb"></span>virtual <a class="reference internal" href="macsec.html#eossdkclasseos_1_1macsec__mgr"><em>macsec_mgr</em></a> * <tt class="descname">get_macsec_mgr</tt><big>(</big><big>)</big></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1sdk_1afff9db12a15739409f16bcef1293e7b4"></span>virtual <a class="reference internal" href="mac_table.html#eossdkclasseos_1_1mac__table__mgr"><em>mac_table_mgr</em></a> * <tt class="descname">get_mac_table_mgr</tt><big>(</big><big>)</big></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1sdk_1a0d3c8646869cadebd1b62ab61e02f5df"></span>virtual <a class="reference internal" href="mlag.html#eossdkclasseos_1_1mlag__mgr"><em>mlag_mgr</em></a> * <tt class="descname">get_mlag_mgr</tt><big>(</big><big>)</big></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1sdk_1a822475d78b9b03199b88a920f7476b80"></span>virtual mount_mgr * <tt class="descname">get_mount_mgr</tt><big>(</big><big>)</big></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1sdk_1ac0bc2de7e6f5bf03f3c51e6c7fe22dfa"></span>virtual <a class="reference internal" href="mpls_route.html#eossdkclasseos_1_1mpls__route__mgr"><em>mpls_route_mgr</em></a> * <tt class="descname">get_mpls_route_mgr</tt><big>(</big><big>)</big></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1sdk_1ab49c96fed87ff8e1f2925f37a587524c"></span>virtual <a class="reference internal" href="mpls_vrf_label.html#eossdkclasseos_1_1mpls__vrf__label__mgr"><em>mpls_vrf_label_mgr</em></a> * <tt class="descname">get_mpls_vrf_label_mgr</tt><big>(</big><big>)</big></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1sdk_1aa1c5a062a5f9ac9fcdd3e2153bd1b074"></span>virtual <a class="reference internal" href="neighbor_table.html#eossdkclasseos_1_1neighbor__table__mgr"><em>neighbor_table_mgr</em></a> * <tt class="descname">get_neighbor_table_mgr</tt><big>(</big><big>)</big></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1sdk_1aa772658ff846102ca46af53edfec59ad"></span>virtual <a class="reference internal" href="nexthop_group.html#eossdkclasseos_1_1nexthop__group__mgr"><em>nexthop_group_mgr</em></a> * <tt class="descname">get_nexthop_group_mgr</tt><big>(</big><big>)</big></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1sdk_1ae39da166616d32765f03fd982e340b2e"></span>virtual <a class="reference internal" href="nexthop_group_tunnel.html#eossdkclasseos_1_1nexthop__group__tunnel__mgr"><em>nexthop_group_tunnel_mgr</em></a> * <tt class="descname">get_nexthop_group_tunnel_mgr</tt><big>(</big><big>)</big></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1sdk_1a01f7b282e167f9cf0f9d1c4f37c64a86"></span>virtual <a class="reference internal" href="policy_map.html#eossdkclasseos_1_1policy__map__mgr"><em>policy_map_mgr</em></a> * <tt class="descname">get_policy_map_mgr</tt><big>(</big><big>)</big></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1sdk_1a0847bf53bfb797cea8db1311377cdf72"></span>virtual <a class="reference internal" href="subintf.html#eossdkclasseos_1_1subintf__mgr"><em>subintf_mgr</em></a> * <tt class="descname">get_subintf_mgr</tt><big>(</big><big>)</big></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1sdk_1af483a88709a307820ab294288f348197"></span>virtual <a class="reference internal" href="system.html#eossdkclasseos_1_1system__mgr"><em>system_mgr</em></a> * <tt class="descname">get_system_mgr</tt><big>(</big><big>)</big></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1sdk_1ab02d654d3a41fccd74899e2077d8855c"></span>virtual <a class="reference internal" href="timer.html#eossdkclasseos_1_1timeout__mgr"><em>timeout_mgr</em></a> * <tt class="descname">get_timeout_mgr</tt><big>(</big><big>)</big></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1sdk_1a17f8946ba2fcc90abaf0c95e2e139ade"></span>virtual <a class="reference internal" href="vrf.html#eossdkclasseos_1_1vrf__mgr"><em>vrf_mgr</em></a> * <tt class="descname">get_vrf_mgr</tt><big>(</big><big>)</big></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Private Functions</p>
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1sdk_1a59c79b4f45dfa3b330087a4b1ae2e767"></span>void <tt class="descname">init_mount_mgr</tt><big>(</big><big>)</big></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1sdk_1a875d20167dd1be14f17807ec2385d89e"></span>void <tt class="descname">init_intf_mgr_helper</tt><big>(</big><big>)</big></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1sdk_1a70f45665ca5060521256b1e7c95ece8f"></span>intf_mgr_helper * <tt class="descname">get_intf_mgr_helper</tt><big>(</big><big>)</big></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Private Members</p>
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1sdk_1a84f55da8081f7b8126700f6b09bf4523"></span><tt class="descname">sdk</tt></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1sdk_1af79b61986596db6c280c53f103bf2b9e"></span><a class="reference internal" href="acl.html#eossdkclasseos_1_1acl__mgr"><em>acl_mgr</em></a> * <tt class="descname">acl_mgr_</tt></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1sdk_1a6ad08cec6e5db37bbf6e5f7a52424c97"></span><a class="reference internal" href="agent.html#eossdkclasseos_1_1agent__mgr"><em>agent_mgr</em></a> * <tt class="descname">agent_mgr_</tt></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1sdk_1a59fc2b0058e142bca24234e0fa341d08"></span><a class="reference internal" href="aresolve.html#eossdkclasseos_1_1aresolve__mgr"><em>aresolve_mgr</em></a> * <tt class="descname">aresolve_mgr_</tt></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1sdk_1a2fd042a1e6b26d9cabe24a9a47cee254"></span><a class="reference internal" href="bfd.html#eossdkclasseos_1_1bfd__session__mgr"><em>bfd_session_mgr</em></a> * <tt class="descname">bfd_session_mgr_</tt></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1sdk_1acd4c885f33814041cf4f5c6d0517b764"></span><a class="reference internal" href="bgp_path.html#eossdkclasseos_1_1bgp__path__mgr"><em>bgp_path_mgr</em></a> * <tt class="descname">bgp_path_mgr_</tt></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1sdk_1aa1c558c3d9206db4ba342ebe80358a14"></span><a class="reference internal" href="class_map.html#eossdkclasseos_1_1class__map__mgr"><em>class_map_mgr</em></a> * <tt class="descname">class_map_mgr_</tt></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1sdk_1a084d0e11ddda88c7feff95d6a2de0537"></span><a class="reference internal" href="decap_group.html#eossdkclasseos_1_1decap__group__mgr"><em>decap_group_mgr</em></a> * <tt class="descname">decap_group_mgr_</tt></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1sdk_1af0aa14b603916378cb906749396df9e9"></span><a class="reference internal" href="directflow.html#eossdkclasseos_1_1directflow__mgr"><em>directflow_mgr</em></a> * <tt class="descname">directflow_mgr_</tt></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1sdk_1a674f5821864eec8b11f8ad7f1396a0df"></span><a class="reference internal" href="eapi.html#eossdkclasseos_1_1eapi__mgr"><em>eapi_mgr</em></a> * <tt class="descname">eapi_mgr_</tt></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1sdk_1a76a067afd29709351a653bcbbe7f4db2"></span><a class="reference internal" href="eth_intf.html#eossdkclasseos_1_1eth__intf__mgr"><em>eth_intf_mgr</em></a> * <tt class="descname">eth_intf_mgr_</tt></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1sdk_1a227649b26d15c99be6a4d40aa1f76a3c"></span><a class="reference internal" href="eth_phy_intf.html#eossdkclasseos_1_1eth__phy__intf__mgr"><em>eth_phy_intf_mgr</em></a> * <tt class="descname">eth_phy_intf_mgr_</tt></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1sdk_1a0d2572b3e04865a90b7bf677e866e9f3"></span><a class="reference internal" href="eth_phy_intf.html#eossdkclasseos_1_1eth__phy__intf__counter__mgr"><em>eth_phy_intf_counter_mgr</em></a> * <tt class="descname">eth_phy_intf_counter_mgr_</tt></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1sdk_1a4d4f814b6560350a2b9bcc3aac5f5dfe"></span><a class="reference internal" href="eth_lag_intf.html#eossdkclasseos_1_1eth__lag__intf__mgr"><em>eth_lag_intf_mgr</em></a> * <tt class="descname">eth_lag_intf_mgr_</tt></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1sdk_1aad86cf202bb132abba2307fa7477a463"></span><a class="reference internal" href="event_loop.html#eossdkclasseos_1_1event__loop"><em>event_loop</em></a> * <tt class="descname">event_loop_</tt></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1sdk_1a83db4703758d2c75db6902d0685a6877"></span><a class="reference internal" href="fib.html#eossdkclasseos_1_1fib__mgr"><em>fib_mgr</em></a> * <tt class="descname">fib_mgr_</tt></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1sdk_1a1b934e7babe854c1f7da01424bc64e92"></span><a class="reference internal" href="hardware_table.html#eossdkclasseos_1_1hardware__table__mgr"><em>hardware_table_mgr</em></a> * <tt class="descname">hardware_table_mgr_</tt></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1sdk_1a04b32ea24f273dca8fd6e5072bae0770"></span>intf_mgr_helper * <tt class="descname">intf_mgr_helper_</tt></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1sdk_1a7a4ee322055ff42c6594369be81045ec"></span><a class="reference internal" href="intf.html#eossdkclasseos_1_1intf__mgr"><em>intf_mgr</em></a> * <tt class="descname">intf_mgr_</tt></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1sdk_1a6b5cfa6859eca19aa526fac191fd5fd7"></span><a class="reference internal" href="intf.html#eossdkclasseos_1_1intf__counter__mgr"><em>intf_counter_mgr</em></a> * <tt class="descname">intf_counter_mgr_</tt></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1sdk_1a09a986a13c1cbf5d3dfbb1d73bd2546f"></span><a class="reference internal" href="ip_intf.html#eossdkclasseos_1_1ip__intf__mgr"><em>ip_intf_mgr</em></a> * <tt class="descname">ip_intf_mgr_</tt></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1sdk_1a8c09a2450ba2f1b9b7f2602bd9fa7b20"></span><a class="reference internal" href="ip_route.html#eossdkclasseos_1_1ip__route__mgr"><em>ip_route_mgr</em></a> * <tt class="descname">ip_route_mgr_</tt></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1sdk_1af858bf7dba4a191a5d755d7d9d881c7f"></span><a class="reference internal" href="lldp.html#eossdkclasseos_1_1lldp__mgr"><em>lldp_mgr</em></a> * <tt class="descname">lldp_mgr_</tt></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1sdk_1a01d0784c524333788c9d374b38e6e8b5"></span><a class="reference internal" href="macsec.html#eossdkclasseos_1_1macsec__mgr"><em>macsec_mgr</em></a> * <tt class="descname">macsec_mgr_</tt></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1sdk_1a100ff03fe97fcde96b61c7917439e43e"></span><a class="reference internal" href="mac_table.html#eossdkclasseos_1_1mac__table__mgr"><em>mac_table_mgr</em></a> * <tt class="descname">mac_table_mgr_</tt></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1sdk_1a1d435809db963f0c7d7d77aade5bccc8"></span><a class="reference internal" href="mlag.html#eossdkclasseos_1_1mlag__mgr"><em>mlag_mgr</em></a> * <tt class="descname">mlag_mgr_</tt></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1sdk_1a3f5a29e5ad79150327e702733c9197d4"></span>mount_mgr * <tt class="descname">mount_mgr_</tt></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1sdk_1a2f2026425e8211fe4606a5ed6d4ba33b"></span><a class="reference internal" href="mpls_route.html#eossdkclasseos_1_1mpls__route__mgr"><em>mpls_route_mgr</em></a> * <tt class="descname">mpls_route_mgr_</tt></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1sdk_1a4d96ce037d9032265be730cd145fe5f3"></span><a class="reference internal" href="mpls_vrf_label.html#eossdkclasseos_1_1mpls__vrf__label__mgr"><em>mpls_vrf_label_mgr</em></a> * <tt class="descname">mpls_vrf_label_mgr_</tt></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1sdk_1adc39912962117748df516134b888cf08"></span><a class="reference internal" href="neighbor_table.html#eossdkclasseos_1_1neighbor__table__mgr"><em>neighbor_table_mgr</em></a> * <tt class="descname">neighbor_table_mgr_</tt></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1sdk_1a145ec9d3da443f68ef776bec5d667bb4"></span><a class="reference internal" href="nexthop_group.html#eossdkclasseos_1_1nexthop__group__mgr"><em>nexthop_group_mgr</em></a> * <tt class="descname">nexthop_group_mgr_</tt></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1sdk_1a2787b4f9a5c4364dcd54767a3444fbfb"></span><a class="reference internal" href="nexthop_group_tunnel.html#eossdkclasseos_1_1nexthop__group__tunnel__mgr"><em>nexthop_group_tunnel_mgr</em></a> * <tt class="descname">nexthop_group_tunnel_mgr_</tt></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1sdk_1a3d2ba4d63d5640010ad9cb6fca55bb83"></span><a class="reference internal" href="policy_map.html#eossdkclasseos_1_1policy__map__mgr"><em>policy_map_mgr</em></a> * <tt class="descname">policy_map_mgr_</tt></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1sdk_1acf1873e46502fef8fd34fc8f73f402a9"></span><a class="reference internal" href="subintf.html#eossdkclasseos_1_1subintf__mgr"><em>subintf_mgr</em></a> * <tt class="descname">subintf_mgr_</tt></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1sdk_1a559b9bc56b52589dfcc5443a520ed4a0"></span><a class="reference internal" href="system.html#eossdkclasseos_1_1system__mgr"><em>system_mgr</em></a> * <tt class="descname">system_mgr_</tt></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1sdk_1a9f1c08a56f51923e82cf595c4edf1d97"></span><a class="reference internal" href="timer.html#eossdkclasseos_1_1timeout__mgr"><em>timeout_mgr</em></a> * <tt class="descname">timeout_mgr_</tt></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1sdk_1acc649b4ff81ff1869cd0acfa4cc524e0"></span><a class="reference internal" href="vrf.html#eossdkclasseos_1_1vrf__mgr"><em>vrf_mgr</em></a> * <tt class="descname">vrf_mgr_</tt></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1sdk_1a7281a5e8203a711e89281109f726aabd"></span>std::string <tt class="descname">name_</tt></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1sdk_1aedbd4f0899ab4158855bb51b2fd9c1d9"></span>void * <tt class="descname">eossdk_context_</tt></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Friends</p>
+<dl class="friend">
+<dt>
+<span class="target" id="eossdkclasseos_1_1sdk_1a2d62eaddee6d9be10be9623516b2bfc1"></span>friend class <tt class="descname">mount_mgr</tt></dt>
+<dd></dd></dl>
+
+</div>
+</dd></dl>
+
+</dd></dl>
+
+<div class="section" id="type-definitions-in-sdk">
+<h2>Type definitions in <strong>sdk</strong><a class="headerlink" href="#type-definitions-in-sdk" title="Permalink to this headline">¶</a></h2>
+<dl class="namespace">
+<dt>
+<span class="target" id="eossdknamespaceeos"></span><em>namespace</em> <tt class="descname">eos</tt></dt>
+<dd><div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Enums</p>
+<dl class="enum">
+<dt>
+<span class="target" id="eossdknamespaceeos_1a759658f14077931593154c41fb928230"></span><strong>mgr_mode_type_t enum</strong></dt>
+<dd><p>Enums for Manager mode type. </p>
+<p><em>Values:</em></p>
+<ul class="breatheenumvalues">
+<li><tt class="first docutils literal"><span class="pre">MODE_TYPE_READ_ONLY</span></tt> - <p>Reader without notifications. </p>
+</li>
+<li><tt class="first docutils literal"><span class="pre">MODE_TYPE_READ_NOTIFYING</span></tt> - <p>Reader with notifications. </p>
+</li>
+<li><tt class="first docutils literal"><span class="pre">MODE_TYPE_WRITE</span></tt> - <p>Writer, manager can read and write state. </p>
+</li>
+</ul>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#"><strong>sdk</strong></a><ul>
+<li><a class="reference internal" href="#type-definitions-in-sdk">Type definitions in <strong>sdk</strong></a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="policy_map.html"
+                        title="previous chapter"><strong>policy_map</strong></a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="subintf.html"
+                        title="next chapter"><strong>subintf</strong></a></p>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="subintf.html" title="subintf"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="policy_map.html" title="policy_map"
+             >previous</a> |</li>
+        <li><a href="index.html">Arista EOS SDK 2.11.0 reference</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2014, Arista Networks.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

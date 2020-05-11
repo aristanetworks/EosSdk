@@ -1,0 +1,386 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>vrf &mdash; Arista EOS SDK 2.11.0 reference</title>
+    
+    <link rel="stylesheet" href="_static/eossdk.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/breathe.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '2.11.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="Arista EOS SDK 2.11.0 reference" href="index.html" />
+    <link rel="prev" title="version" href="version.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="version.html" title="version"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">Arista EOS SDK 2.11.0 reference</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="vrf">
+<h1><strong>vrf</strong><a class="headerlink" href="#vrf" title="Permalink to this headline">¶</a></h1>
+<p>VRF management</p>
+<p>This module manages Virtual Routing &amp; Forwarding instances, known commonly as VRFs. VRFs let you partition your switch&#8217;s routing tables so you can have unique IP domains.</p>
+<p>VRFs are keyed by a unique name across the system, and can be used in other modules to configure routes and nexthops in different domains. If a route is not programmed in a specific VRF, it belongs to the VRF named &#8220;default&#8221;. </p>
+<dl class="namespace">
+<dt>
+<span class="target" id="eossdknamespaceeos"></span><em>namespace</em> <tt class="descname">eos</tt></dt>
+<dd><dl class="class">
+<dt>
+<span class="target" id="eossdkclasseos_1_1vrf__handler"></span><em>class</em> <tt class="descname">vrf_handler</tt></dt>
+<dd><em>#include &lt;vrf.h&gt;</em><p>The VRF handler.</p>
+<p>This class provides handler APIs to react to a VRF&#8217;s operational state change. </p>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1vrf__handler_1ad3987c59c01970c1ed0111b77a04c514"></span><tt class="descname">vrf_handler</tt><big>(</big><a class="reference internal" href="#eossdkclasseos_1_1vrf__mgr"><em>vrf_mgr</em></a> * <em>mgr</em><big>)</big></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1vrf__handler_1a1ea560243378c42ee9eb2a2482ce4c8a"></span><a class="reference internal" href="#eossdkclasseos_1_1vrf__mgr"><em>vrf_mgr</em></a> * <tt class="descname">get_vrf_mgr</tt><big>(</big><big>)</big> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1vrf__handler_1a358b8cd13e5126ea0a383dc9d8708e06"></span>void <tt class="descname">watch_all_vrfs</tt><big>(</big>bool<big>)</big></dt>
+<dd><p>Register to receive notifications when any VRF on the system changes state. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1vrf__handler_1a034368cc1f0ec037c27c26472efe091e"></span>void <tt class="descname">watch_vrf</tt><big>(</big>std::string const &amp; <em>vrf_name</em>, bool<big>)</big></dt>
+<dd><p>Register to receive notifications when the specified VRF on the system changes state. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1vrf__handler_1afab6d46316501241b768916d6df2e6bc"></span>virtual void <tt class="descname">on_vrf_state</tt><big>(</big>std::string <em>vrf_name</em>, vrf_state_t <em>vrf_state</em><big>)</big></dt>
+<dd><p>Called when a VRF&#8217;s operational state changes. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="class">
+<dt>
+<span class="target" id="eossdkclasseos_1_1vrf__iter__t"></span><em>class</em> <tt class="descname">vrf_iter_t</tt></dt>
+<dd><em>#include &lt;vrf.h&gt;</em><p>An iterator that yields a <a class="reference internal" href="#eossdkclasseos_1_1vrf__t"><em>vrf_t</em></a> for each VRF on the system. </p>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Private Functions</p>
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1vrf__iter__t_1af98344f62083c0cac4400ff49d4aa03a"></span><tt class="descname">vrf_iter_t</tt><big>(</big>vrf_iter_impl * <em>const</em><big>)</big></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Friends</p>
+<dl class="friend">
+<dt>
+<span class="target" id="eossdkclasseos_1_1vrf__iter__t_1afb595ca7e3c31e309925240c8eee35ea"></span>friend class <tt class="descname">vrf_iter_impl</tt></dt>
+<dd></dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="class">
+<dt>
+<span class="target" id="eossdkclasseos_1_1vrf__mgr"></span><em>class</em> <tt class="descname">vrf_mgr</tt></dt>
+<dd><em>#include &lt;vrf.h&gt;</em><p>The manager for VRF, this is the main entry point for applications to use EosSdk VRF APIs. </p>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1vrf__mgr_1a0bb283b4eee4aa5d535c48af643d777b"></span>virtual <tt class="descname">~vrf_mgr</tt><big>(</big><big>)</big></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1vrf__mgr_1ac37b50c47aa7242c7ea56166fa4b2939"></span>virtual <a class="reference internal" href="#eossdkclasseos_1_1vrf__iter__t"><em>vrf_iter_t</em></a> <tt class="descname">vrf_iter</tt><big>(</big><big>)</big> const = 0</dt>
+<dd><p>Iterates through all configured VRFs on the system, yielding a <a class="reference internal" href="#eossdkclasseos_1_1vrf__t"><em>vrf_t</em></a> for each VRF. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1vrf__mgr_1af10d2893ae30f9adbbc94396ad3d7d8a"></span>virtual bool <tt class="descname">exists</tt><big>(</big>std::string const &amp; <em>vrf_name</em><big>)</big> const = 0</dt>
+<dd><p>Returns true if the VRF is currently configured. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1vrf__mgr_1a7fe62f776b1a1d77c50909b9e1fb3232"></span>virtual uint64_t <tt class="descname">rd</tt><big>(</big>std::string const &amp; <em>vrf_name</em><big>)</big> const = 0</dt>
+<dd><p>Returns the route distinguisher associated with this VRF. The returned value is obtained from status that is the result of the RD configuration under the &#8216;vrf definition&#8217; submode and the RD configuration under the &#8216;router bgp vrf&#8217; submode. When configuration for the VRF exists in both locations, the value configured under &#8216;router bgp&#8217; takes precedence and is returned.</p>
+<p>If no VRF matches the given name, this returns 0. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1vrf__mgr_1a64f366ee4c5344364f03bd92b5c3e8e2"></span>virtual vrf_state_t <tt class="descname">state</tt><big>(</big>std::string const &amp; <em>vrf_name</em><big>)</big> const = 0</dt>
+<dd><p>Returns the operational status of this VRF.</p>
+<p>If the given VRF name does not have a current status (e.g. a newly configured VRF), or if it does not match any VRFs on the system, this returns VRF_STATE_NULL. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1vrf__mgr_1a2d771486d8c9dd6cf0da9208022a6880"></span>virtual int <tt class="descname">socket_at</tt><big>(</big>int <em>domain</em>, int <em>type</em>, int <em>protocol</em>, std::string const &amp; <em>vrf_name</em><big>)</big> = 0</dt>
+<dd><p>Opens a socket inside a VRF specified by &#8216;vrf_name&#8217;.</p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>fd on success, -1 on error, and errno is set appropriately. </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><tt class="first docutils literal"><span class="pre">domain</span></tt> - <p>A communication domain, same as in socket(). </p>
+</li>
+<li><tt class="first docutils literal"><span class="pre">type</span></tt> - <p>The communication semantics, such as SOCK_STREAM, same as in socket(). </p>
+</li>
+<li><tt class="first docutils literal"><span class="pre">protocol</span></tt> - <p>The protocol to be used with the socket, same as in socket(). </p>
+</li>
+<li><tt class="first docutils literal"><span class="pre">vrf_name</span></tt> - <p>The name of the vrf_name in which the socket will be created. </p>
+</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1vrf__mgr_1a799e57beebf8cefc8d605b63a9a2802a"></span>virtual <a class="reference internal" href="#eossdkclasseos_1_1vrf__t"><em>vrf_t</em></a> <tt class="descname">vrf</tt><big>(</big>std::string const &amp; <em>vrf_name</em><big>)</big> const = 0</dt>
+<dd><p>Returns a composite <tt class="docutils literal"><a class="reference internal" href="#eossdkclasseos_1_1vrf__t"><em><span class="pre">vrf_t</span></em></a></tt> for the named VRF, or a default VRF object if it does not exist.</p>
+<p></p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Protected Functions</p>
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1vrf__mgr_1a72a52bfcdb82fcb36d01b735ea92b330"></span><tt class="descname">vrf_mgr</tt><big>(</big><big>)</big></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Private Members</p>
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1vrf__mgr_1a7060454791c4c10580ecea74b9354d25"></span><tt class="descname">vrf_mgr</tt></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Friends</p>
+<dl class="friend">
+<dt>
+<span class="target" id="eossdkclasseos_1_1vrf__mgr_1a183b8b950a5fde1c86ad53d6e2da100f"></span>friend class <tt class="descname">vrf_handler</tt></dt>
+<dd></dd></dl>
+
+</div>
+</dd></dl>
+
+</dd></dl>
+
+<div class="section" id="type-definitions-in-vrf">
+<h2>Type definitions in <strong>vrf</strong><a class="headerlink" href="#type-definitions-in-vrf" title="Permalink to this headline">¶</a></h2>
+<dl class="namespace">
+<dt>
+<span class="target" id="eossdknamespaceeos"></span><em>namespace</em> <tt class="descname">eos</tt></dt>
+<dd><div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Enums</p>
+<dl class="enum">
+<dt>
+<span class="target" id="eossdknamespaceeos_1a0f717c5a4f87d4674f57a498e7a63429"></span><strong>vrf_state_t enum</strong></dt>
+<dd><p>VRF state. </p>
+<p><em>Values:</em></p>
+<ul class="breatheenumvalues">
+<li><tt class="first docutils literal"><span class="pre">VRF_NULL</span></tt> - <p>VRF does not exist. </p>
+</li>
+<li><tt class="first docutils literal"><span class="pre">VRF_INITIALIZING</span></tt> - <p>VRF is being initialized. </p>
+</li>
+<li><tt class="first docutils literal"><span class="pre">VRF_ACTIVE</span></tt> - <p>VRF is active. </p>
+</li>
+<li><tt class="first docutils literal"><span class="pre">VRF_DELETING</span></tt> - <p>VRF is being deleted. </p>
+</li>
+</ul>
+</dd></dl>
+
+</div>
+<dl class="class">
+<dt>
+<span class="target" id="eossdkclasseos_1_1vrf__t"></span><em>class</em> <tt class="descname">vrf_t</tt></dt>
+<dd><em>#include &lt;vrf.h&gt;</em><p></p>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1vrf__t_1aa5f592430838bbbb57d5703efb4449c9"></span><tt class="descname">vrf_t</tt><big>(</big><big>)</big></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1vrf__t_1adad3ac6f171aa468d7f3dc1fb26fc757"></span><tt class="descname">vrf_t</tt><big>(</big>std::string <em>name</em>, vrf_state_t <em>state</em>, uint64_t <em>rd</em><big>)</big></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1vrf__t_1a68e4a2f77de45a4f8bf40679a47dcc0c"></span>std::string <tt class="descname">name</tt><big>(</big><big>)</big> const</dt>
+<dd><p>Getter for &#8216;name&#8217;: the name of the VRF. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1vrf__t_1a2d45b34ef65042df15933ce2fcc1b029"></span>vrf_state_t <tt class="descname">state</tt><big>(</big><big>)</big> const</dt>
+<dd><p>Getter for &#8216;state&#8217;: the state of this VRF. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1vrf__t_1a50342267a83aee52ef16e7d47efb0bf7"></span>uint64_t <tt class="descname">rd</tt><big>(</big><big>)</big> const</dt>
+<dd><p>Getter for &#8216;rd&#8217;: the route distinguisher of the VRF. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1vrf__t_1add1a8de79e9e9cf6ee25ad9a20330365"></span>bool <tt class="descname">operator==</tt><big>(</big><a class="reference internal" href="#eossdkclasseos_1_1vrf__t"><em>vrf_t</em></a> const &amp; <em>other</em><big>)</big> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1vrf__t_1adee2a69f08eb06282765d5501f9be84f"></span>bool <tt class="descname">operator!=</tt><big>(</big><a class="reference internal" href="#eossdkclasseos_1_1vrf__t"><em>vrf_t</em></a> const &amp; <em>other</em><big>)</big> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1vrf__t_1a6a22e27e44078af0ea5965b467a7d768"></span>bool <tt class="descname">operator&lt;</tt><big>(</big><a class="reference internal" href="#eossdkclasseos_1_1vrf__t"><em>vrf_t</em></a> const &amp; <em>other</em><big>)</big> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1vrf__t_1adaccb6256192de7ca6c2dc7d0c23ef97"></span>uint32_t <tt class="descname">hash</tt><big>(</big><big>)</big> const</dt>
+<dd><p>The hash function for type <a class="reference internal" href="#eossdkclasseos_1_1vrf__t"><em>vrf_t</em></a>. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1vrf__t_1a5b06c6ba68af6ceb108d7ecc3b7ae53e"></span>std::string <tt class="descname">to_string</tt><big>(</big><big>)</big> const</dt>
+<dd><p>Returns a string representation of the current object&#8217;s values. </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Private Members</p>
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1vrf__t_1a46125203a8863406900e043b8bbaeffc"></span>std::string <tt class="descname">name_</tt></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1vrf__t_1ad8207797b8424316a9063bda1ca038f1"></span>vrf_state_t <tt class="descname">state_</tt></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1vrf__t_1ad7fc37d684e8d430036d3799014ad272"></span>uint64_t <tt class="descname">rd_</tt></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Friends</p>
+<dl class="friend">
+<dt>
+<span class="target" id="eossdkclasseos_1_1vrf__t_1adf17bd5ce317f270525c6455b33eb918"></span>friend std::ostream &amp; <tt class="descname">operator&lt;&lt;</tt></dt>
+<dd><p>A utility stream operator that adds a string representation of <a class="reference internal" href="#eossdkclasseos_1_1vrf__t"><em>vrf_t</em></a> to the ostream. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#"><strong>vrf</strong></a><ul>
+<li><a class="reference internal" href="#type-definitions-in-vrf">Type definitions in <strong>vrf</strong></a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="version.html"
+                        title="previous chapter"><strong>version</strong></a></p>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="version.html" title="version"
+             >previous</a> |</li>
+        <li><a href="index.html">Arista EOS SDK 2.11.0 reference</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2014, Arista Networks.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>
