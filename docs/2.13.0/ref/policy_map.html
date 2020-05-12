@@ -1,0 +1,1137 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>policy_map &mdash; Arista EOS SDK 2.13.0 reference</title>
+    
+    <link rel="stylesheet" href="_static/eossdk.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/breathe.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '2.13.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="Arista EOS SDK 2.13.0 reference" href="index.html" />
+    <link rel="next" title="sdk" href="sdk.html" />
+    <link rel="prev" title="panic" href="panic.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="sdk.html" title="sdk"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="panic.html" title="panic"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">Arista EOS SDK 2.13.0 reference</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="policy-map">
+<h1><strong>policy_map</strong><a class="headerlink" href="#policy-map" title="Permalink to this headline">¶</a></h1>
+<p>Policy map manipulation.</p>
+<p>This module permits the manipulation of policy maps used in the creation of service policies that can be applied to one or more types of hardware features, beginning with Policy Based Routing (PBR).</p>
+<p>Policy maps for PBR (policy based routing) can match rules of either an IPv4 access list (including both source, destination addresses and all normal ACL flags) or any MPLS traffic.</p>
+<p>Policy maps are constructed by key (consisting of a name and a feature, only eos::POLICY_FEATURE_PBR is presently supported), and the above rules are configured using the policy_map_mgr. For example, to source route traffic matching the existing ACL &#8220;netblock-fe&#8221; for a PBR policy named &#8220;src-routing-fe&#8221;, use this code in a handler with access to the policy_map_mgr object as policy_map_mgr() in scope.</p>
+<p><pre class="literal-block">
+*   <a class="reference internal" href="#eossdkclasseos_1_1policy__map__key__t"><em>eos::policy_map_key_t</em></a> pm_key(&quot;src-routing-fe&quot;, eos::POLICY_FEATURE_PBR);
+*   <a class="reference internal" href="acl.html#eossdkclasseos_1_1acl__key__t"><em>eos::acl_key_t</em></a> acl_key(&quot;netblock-fe&quot;, eos::ACL_TYPE_IPV4);
+*   <a class="reference internal" href="class_map.html#eossdkclasseos_1_1class__map__t"><em>eos::class_map_t</em></a> cm(pm_key);
+*   <a class="reference internal" href="class_map.html#eossdkclasseos_1_1class__map__rule__t"><em>eos::class_map_rule_t</em></a> cm_rule(acl_key);
+*   <a class="reference internal" href="#eossdkclasseos_1_1policy__map__t"><em>eos::policy_map_t</em></a> pm(pm_key);
+*   <a class="reference internal" href="#eossdkclasseos_1_1policy__map__rule__t"><em>eos::policy_map_rule_t</em></a> pm_rule(pm_key);
+*   <a class="reference internal" href="#eossdkclasseos_1_1policy__map__action__t"><em>eos::policy_map_action_t</em></a> action(eos::POLICY_ACTION_NEXTHOP_GROUP);
+*   action.nexthop_group_name_is(&quot;nhg-fe&quot;);
+*   pm_rule.action_set(action);
+*   cm.rule_set(1, cm_rule);
+*   pm.rule_set(1, pm_rule);
+*   policy_map_mgr()-&gt;policy_map_is(pm);
+*   // Apply to Ethernet3/1 (PBR policies are always applied ACL_IN (inbound).
+*   policy_map_mgr()-&gt;policy_map_apply(pm_key, <a class="reference internal" href="intf.html#eossdkclasseos_1_1intf__id__t"><em>eos::intf_id_t</em></a>(&quot;Ethernet3/1&quot;),
+*                                      eos::ACL_IN, true);
+* 
+</pre>
+</p>
+<p>To instead program that same policy matching MPLS traffic instead of an IPv4 ACL, use the following pattern, noting that we explicitly supply a new class map key referring to the special eos::CLASS_MAP_MPLS_ANY name and skip binding the ACL to the class map entirely:</p>
+<p><pre class="literal-block">
+*   <a class="reference internal" href="#eossdkclasseos_1_1policy__map__key__t"><em>eos::policy_map_key_t</em></a> pm_key(&quot;src-routing-fe&quot;, eos::POLICY_FEATURE_PBR);
+*   <a class="reference internal" href="#eossdkclasseos_1_1policy__map__key__t"><em>eos::class_map_key_t</em></a> cm_key(eos::CLASS_MAP_MPLS_ANY, eos::POLICY_FEATURE_PBR);
+*   <a class="reference internal" href="class_map.html#eossdkclasseos_1_1class__map__t"><em>eos::class_map_t</em></a> cm(cm_key);
+*   <a class="reference internal" href="#eossdkclasseos_1_1policy__map__rule__t"><em>eos::policy_map_rule_t</em></a> pm_rule(cm_key);
+*   <a class="reference internal" href="#eossdkclasseos_1_1policy__map__action__t"><em>eos::policy_map_action_t</em></a> action(eos::POLICY_ACTION_NEXTHOP_GROUP);
+*   action.nexthop_group_name_is(&quot;nhg-fe&quot;);
+*   pm_rule.action_set(action);
+*   cm.rule_set(1, cm_rule);
+*   pm.rule_set(1, pm_rule);
+*   policy_map_mgr()-&gt;policy_map_is(pm);
+*   // Finally, apply the policy as before
+* 
+</pre>
+</p>
+<p>A valid policy map may have either:</p>
+<p><ol class="arabic simple">
+<li>One or more rules matching class maps matching one or more IPv4 ACLs.</li>
+<li>A single policy map rule matching eos::CLASS_MAP_MPLS_ANY class, which itself may have only a single action</li>
+</ol>
+</p>
+<p>Using both &#8220;IP ACL&#8221; and &#8220;MPLS any&#8221; modes in the same policy map is not supported, and a <a class="reference internal" href="exception.html#eossdkclasseos_1_1configuration__error"><em>eos::configuration_error</em></a> will be thrown by the policy map when attempting to set both rules, or attempting to set more than one eos::CLASS_MAP_MPLS_ANY class map match rule per policy map. </p>
+<dl class="struct">
+<dt>
+<span class="target" id="eossdkstructstd_1_1hash_3_01eos_1_1policy__map__action__t_01_4"></span>template &lt;&gt;</dt>
+<dt>
+<em>struct</em> <tt class="descname">policy_map_action_t &gt;</tt></dt>
+<dd><div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="function">
+<dt>
+<span class="target" id="eossdkstructstd_1_1hash_3_01eos_1_1policy__map__action__t_01_4_1aa5f5719f16b8da5901b26de7117cf22c"></span>size_t <tt class="descname">operator()</tt><big>(</big><a class="reference internal" href="#eossdkclasseos_1_1policy__map__action__t"><em>eos::policy_map_action_t</em></a> const &amp;<big>)</big> const</dt>
+<dd></dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="struct">
+<dt>
+<span class="target" id="eossdkstructstd_1_1hash_3_01eos_1_1policy__map__key__t_01_4"></span>template &lt;&gt;</dt>
+<dt>
+<em>struct</em> <tt class="descname">policy_map_key_t &gt;</tt></dt>
+<dd><div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="function">
+<dt>
+<span class="target" id="eossdkstructstd_1_1hash_3_01eos_1_1policy__map__key__t_01_4_1a1a00bc1beb13845f0cacc2e9eff0ae20"></span>size_t <tt class="descname">operator()</tt><big>(</big><a class="reference internal" href="#eossdkclasseos_1_1policy__map__key__t"><em>eos::policy_map_key_t</em></a> const &amp;<big>)</big> const</dt>
+<dd></dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="namespace">
+<dt>
+<span class="target" id="eossdknamespaceeos"></span><em>namespace</em> <tt class="descname">eos</tt></dt>
+<dd><dl class="class">
+<dt>
+<span class="target" id="eossdkclasseos_1_1policy__map__iter__t"></span><em>class</em> <tt class="descname">policy_map_iter_t</tt></dt>
+<dd><em>#include &lt;policy_map.h&gt;</em><p>An iterator providing forwards only iteration over collections of policy maps. </p>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Private Functions</p>
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1policy__map__iter__t_1a4945d8b15fdaacbf15f80422f57a9d8d"></span><tt class="descname">policy_map_iter_t</tt><big>(</big>policy_map_iter_impl * <em>const</em><big>)</big></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Friends</p>
+<dl class="friend">
+<dt>
+<span class="target" id="eossdkclasseos_1_1policy__map__iter__t_1a1bd9d39d52119ffb6132dd74dc169397"></span>friend class <tt class="descname">policy_map_iter_impl</tt></dt>
+<dd></dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="class">
+<dt>
+<span class="target" id="eossdkclasseos_1_1policy__map__handler"></span><em>class</em> <tt class="descname">policy_map_handler</tt></dt>
+<dd><em>#include &lt;policy_map.h&gt;</em><p>Event handler for policy feature specific events.</p>
+<p>Callbacks about failures to program policy features into hardware are reported via this handler. </p>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1policy__map__handler_1a5f0a7bae3884c8fdd426766b76948b46"></span><tt class="descname">policy_map_handler</tt><big>(</big><a class="reference internal" href="#eossdkclasseos_1_1policy__map__mgr"><em>policy_map_mgr</em></a> *<big>)</big></dt>
+<dd><p>Constructs a policy map handler for the supplied policy hardware feature. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1policy__map__handler_1a854075b54d5a0310d32c4c6f37c6336c"></span><a class="reference internal" href="#eossdkclasseos_1_1policy__map__mgr"><em>policy_map_mgr</em></a> * <tt class="descname">get_policy_map_mgr</tt><big>(</big><big>)</big> const</dt>
+<dd><p>Returns a pointer to the policy map manager for use in a derived handler. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1policy__map__handler_1aab69ac7d64862286e230a1363ad8ea53"></span>void <tt class="descname">watch_policy_map</tt><big>(</big><a class="reference internal" href="#eossdkclasseos_1_1policy__map__key__t"><em>policy_map_key_t</em></a> const &amp; <em>key</em>, bool <em>interest</em><big>)</big></dt>
+<dd><p>Registers to receive updates on changes to this policy feature.</p>
+<p><dl class="docutils">
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><tt class="first docutils literal"><span class="pre">key</span></tt> - <p>The policy feature to receive notifications for </p>
+</li>
+<li><tt class="first docutils literal"><span class="pre">interest</span></tt> - <p>Receives notifications if and only if true. </p>
+</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1policy__map__handler_1a6db44ab3e462460eb11a1bb0864621ca"></span>void <tt class="descname">watch_policy_map</tt><big>(</big><a class="reference internal" href="#eossdkclasseos_1_1policy__map__key__t"><em>policy_map_key_t</em></a> const &amp; <em>key</em>, std::string const &amp; <em>agent_name</em>, bool <em>interest</em><big>)</big></dt>
+<dd><p>Registers to receive updates on changes to this policy feature.</p>
+<p><dl class="docutils">
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><tt class="first docutils literal"><span class="pre">key</span></tt> - <p>The policy feature to receive notifications for </p>
+</li>
+<li><tt class="first docutils literal"><span class="pre">agent_name</span></tt> - <p>The agent which configures the policy being watched </p>
+</li>
+<li><tt class="first docutils literal"><span class="pre">interest</span></tt> - <p>Receives notifications if and only if true. </p>
+</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1policy__map__handler_1aa3c1498e8a1c1fa00779ff1b0ee7b5e9"></span>virtual void <tt class="descname">on_policy_map_sync</tt><big>(</big><a class="reference internal" href="#eossdkclasseos_1_1policy__map__key__t"><em>policy_map_key_t</em></a> const &amp;<big>)</big></dt>
+<dd><p>Callback fired upon successful policy map application.</p>
+<p><dl class="docutils">
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><tt class="first docutils literal"><a class="reference internal" href="#eossdkclasseos_1_1policy__map__key__t"><em><span class="pre">policy_map_key_t</span></em></a></tt> - <p>The key identifying the updated policy map. </p>
+</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1policy__map__handler_1a5e57c05780ffc843fdab5d8aec227466"></span>virtual void <tt class="descname">on_policy_map_sync_fail</tt><big>(</big><a class="reference internal" href="#eossdkclasseos_1_1policy__map__key__t"><em>policy_map_key_t</em></a> const &amp;, std::string const &amp; <em>message</em><big>)</big></dt>
+<dd><p>Callback fired when policy map commit or apply operations failed.</p>
+<p><dl class="docutils">
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><tt class="first docutils literal"><a class="reference internal" href="#eossdkclasseos_1_1policy__map__key__t"><em><span class="pre">policy_map_key_t</span></em></a></tt> - <p>The policy map which failed to update. </p>
+</li>
+<li><tt class="first docutils literal"><span class="pre">message</span></tt> - <p>An error message which may be the empty string. </p>
+</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1policy__map__handler_1ad00f9de04943473b91c88eed8510b727"></span>virtual void <tt class="descname">on_policy_map_config_set</tt><big>(</big><a class="reference internal" href="#eossdkclasseos_1_1policy__map__key__t"><em>policy_map_key_t</em></a> const &amp;<big>)</big></dt>
+<dd><p>Callback fired when policy map configuration changes.</p>
+<p><dl class="docutils">
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><tt class="first docutils literal"><span class="pre">name</span></tt> - <p>Policy map name. </p>
+</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Protected Attributes</p>
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1policy__map__handler_1a1bfe54436bd50cfd89a11bc77a37385c"></span><a class="reference internal" href="#eossdkclasseos_1_1policy__map__mgr"><em>policy_map_mgr</em></a> * <tt class="descname">policy_map_mgr_</tt></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1policy__map__handler_1a405d054adc374ab6a474a20e93ae7dcb"></span>policy_feature_t <tt class="descname">feature_</tt></dt>
+<dd></dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="class">
+<dt>
+<span class="target" id="eossdkclasseos_1_1policy__map__mgr"></span><em>class</em> <tt class="descname">policy_map_mgr</tt></dt>
+<dd><em>#include &lt;policy_map.h&gt;</em><p>EOS policy map manager.</p>
+<p>The policy manager provides access to policy-map management, as well as policy map application to interfaces. </p>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1policy__map__mgr_1a171bfdc7e6791672ac28baa834787450"></span>virtual <tt class="descname">~policy_map_mgr</tt><big>(</big><big>)</big></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1policy__map__mgr_1a3772ba4a70c70d44835972f483cd2a2b"></span>virtual void <tt class="descname">resync_init</tt><big>(</big><big>)</big> = 0</dt>
+<dd><p>Resync </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1policy__map__mgr_1aea8826f5df37ce2efaf3daa93294b38d"></span>virtual void <tt class="descname">resync_complete</tt><big>(</big><big>)</big> = 0</dt>
+<dd><p>Completes any underway resync operation. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1policy__map__mgr_1aa7646ca09491085c2c3e1687d18059c5"></span>virtual bool <tt class="descname">exists</tt><big>(</big><a class="reference internal" href="#eossdkclasseos_1_1policy__map__key__t"><em>policy_map_key_t</em></a> const &amp; <em>key</em><big>)</big> const = 0</dt>
+<dd><p>Returns true if and only if the provided policy map key is configured. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1policy__map__mgr_1a9c80582845de2840cb4f26fd8efc95c9"></span>virtual <a class="reference internal" href="#eossdkclasseos_1_1policy__map__t"><em>policy_map_t</em></a> <tt class="descname">policy_map</tt><big>(</big><a class="reference internal" href="#eossdkclasseos_1_1policy__map__key__t"><em>policy_map_key_t</em></a> const &amp; <em>key</em><big>)</big> const = 0</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1policy__map__mgr_1ab8f7005b3349fcc091f03e597750c18f"></span>virtual void <tt class="descname">policy_map_is</tt><big>(</big><a class="reference internal" href="#eossdkclasseos_1_1policy__map__t"><em>policy_map_t</em></a> const &amp; <em>policy_map</em><big>)</big> = 0</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1policy__map__mgr_1afaeda0dfc6b581fb0d2a17adcb7e1331"></span>virtual void <tt class="descname">policy_map_del</tt><big>(</big><a class="reference internal" href="#eossdkclasseos_1_1policy__map__key__t"><em>policy_map_key_t</em></a> const &amp; <em>key</em><big>)</big> = 0</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1policy__map__mgr_1a0731955f7931a911d1df3f0f8c9fb41e"></span>virtual <a class="reference internal" href="#eossdkclasseos_1_1policy__map__iter__t"><em>policy_map_iter_t</em></a> <tt class="descname">policy_map_iter</tt><big>(</big>policy_feature_t<big>)</big> const = 0</dt>
+<dd><p>Provides iteration over the configured policy maps for a feature. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1policy__map__mgr_1ae52cb621483585bfbc993bd893d1f223"></span>virtual void <tt class="descname">policy_map_apply</tt><big>(</big><a class="reference internal" href="#eossdkclasseos_1_1policy__map__key__t"><em>policy_map_key_t</em></a> const &amp;, <a class="reference internal" href="intf.html#eossdkclasseos_1_1intf__id__t"><em>intf_id_t</em></a>, acl_direction_t, bool <em>apply</em><big>)</big> = 0</dt>
+<dd><p>Applies or unapplies a policy map on the given interface and direction. <dl class="docutils">
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><tt class="first docutils literal"><a class="reference internal" href="#eossdkclasseos_1_1policy__map__key__t"><em><span class="pre">policy_map_key_t</span></em></a></tt> - <p>Name and type of the policy map to [un]apply </p>
+</li>
+<li><tt class="first docutils literal"><a class="reference internal" href="intf.html#eossdkclasseos_1_1intf__id__t"><em><span class="pre">intf_id_t</span></em></a></tt> - <p>The interface ID of the interface to [un]apply the policy map. </p>
+</li>
+<li><tt class="first docutils literal"><span class="pre">acl_direction_t</span></tt> - <p>The direction in which to [un]apply the policy map </p>
+</li>
+<li><tt class="first docutils literal"><span class="pre">bool</span></tt> - <p>Whether to apply or unapply the policy map. If true, policy map is applied on the given interface and direction. If false, policy map is removed from the given interface and direction. </p>
+</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Protected Functions</p>
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1policy__map__mgr_1aad10ce3748c28df573657d235dbfe4ad"></span><tt class="descname">policy_map_mgr</tt><big>(</big><big>)</big></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Private Members</p>
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1policy__map__mgr_1a0845eb3c70d3bf2dfd7c0c58f748412c"></span><tt class="descname">policy_map_mgr</tt></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Friends</p>
+<dl class="friend">
+<dt>
+<span class="target" id="eossdkclasseos_1_1policy__map__mgr_1ae5d3fcb310a8862b41820e1f6e23174a"></span>friend class <tt class="descname">policy_map_handler</tt></dt>
+<dd></dd></dl>
+
+</div>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="namespace">
+<dt>
+<span class="target" id="eossdknamespacestd"></span><em>namespace</em> <tt class="descname">std</tt></dt>
+<dd><p>STL namespace. </p>
+<dl class="struct">
+<dt>
+<span class="target" id="eossdkstructstd_1_1hash_3_01eos_1_1policy__map__action__t_01_4"></span>template &lt;&gt;</dt>
+<dt>
+<em>struct</em> <tt class="descname">policy_map_action_t &gt;</tt></dt>
+<dd><div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="function">
+<dt>
+<span class="target" id="eossdkstructstd_1_1hash_3_01eos_1_1policy__map__action__t_01_4_1aa5f5719f16b8da5901b26de7117cf22c"></span>size_t <tt class="descname">operator()</tt><big>(</big><a class="reference internal" href="#eossdkclasseos_1_1policy__map__action__t"><em>eos::policy_map_action_t</em></a> const &amp;<big>)</big> const</dt>
+<dd></dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="struct">
+<dt>
+<span class="target" id="eossdkstructstd_1_1hash_3_01eos_1_1policy__map__key__t_01_4"></span>template &lt;&gt;</dt>
+<dt>
+<em>struct</em> <tt class="descname">policy_map_key_t &gt;</tt></dt>
+<dd><div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="function">
+<dt>
+<span class="target" id="eossdkstructstd_1_1hash_3_01eos_1_1policy__map__key__t_01_4_1a1a00bc1beb13845f0cacc2e9eff0ae20"></span>size_t <tt class="descname">operator()</tt><big>(</big><a class="reference internal" href="#eossdkclasseos_1_1policy__map__key__t"><em>eos::policy_map_key_t</em></a> const &amp;<big>)</big> const</dt>
+<dd></dd></dl>
+
+</div>
+</dd></dl>
+
+</dd></dl>
+
+<div class="section" id="type-definitions-in-policy-map">
+<h2>Type definitions in <strong>policy_map</strong><a class="headerlink" href="#type-definitions-in-policy-map" title="Permalink to this headline">¶</a></h2>
+<dl class="namespace">
+<dt>
+<span class="target" id="eossdknamespaceeos"></span><em>namespace</em> <tt class="descname">eos</tt></dt>
+<dd><div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Typedefs</p>
+<dl class="typedef">
+<dt>
+<span class="target" id="eossdknamespaceeos_1ac3cc7cebcfdc19e9c158fb5d3aac0098"></span>typedef uint32_t <tt class="descname">policy_map_tag_t</tt></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Enums</p>
+<dl class="enum">
+<dt>
+<span class="target" id="eossdknamespaceeos_1ad91cfbebf829a793b93e45726aee2f5a"></span><strong>policy_match_condition_t enum</strong></dt>
+<dd><p>The default match condition for the policy map.</p>
+<p>At present, the only supported condition is that any rule in the policy-map matching will trigger the action (POLICY_MAP_CONDITION_ANY). </p>
+<p><em>Values:</em></p>
+<ul class="breatheenumvalues">
+<li><tt class="first docutils literal"><span class="pre">POLICY_MAP_CONDITION_NULL</span></tt> - </li>
+<li><tt class="first docutils literal"><span class="pre">POLICY_MAP_CONDITION_ANY</span></tt> - </li>
+</ul>
+</dd></dl>
+
+<dl class="enum">
+<dt>
+<span class="target" id="eossdknamespaceeos_1ab8046bbe0f06f07a0eabbeb18c9d720f"></span><strong>policy_feature_t enum</strong></dt>
+<dd><p>A hardware feature a policy map can be used with. </p>
+<p><em>Values:</em></p>
+<ul class="breatheenumvalues">
+<li><tt class="first docutils literal"><span class="pre">POLICY_FEATURE_NULL</span></tt> - </li>
+<li><tt class="first docutils literal"><span class="pre">POLICY_FEATURE_PBR</span></tt> - </li>
+<li><tt class="first docutils literal"><span class="pre">POLICY_FEATURE_QOS</span></tt> - </li>
+<li><tt class="first docutils literal"><span class="pre">POLICY_FEATURE_TAP_AGG</span></tt> - </li>
+</ul>
+</dd></dl>
+
+<dl class="enum">
+<dt>
+<span class="target" id="eossdknamespaceeos_1adb4098066c906bbb40cb780a86d73517"></span><strong>policy_action_type_t enum</strong></dt>
+<dd><p>The actions a policy map rule may apply to classified packets. </p>
+<p><em>Values:</em></p>
+<ul class="breatheenumvalues">
+<li><tt class="first docutils literal"><span class="pre">POLICY_ACTION_NULL</span></tt> - </li>
+<li><tt class="first docutils literal"><span class="pre">POLICY_ACTION_NONE</span></tt> - <p>Perform no action. </p>
+</li>
+<li><tt class="first docutils literal"><span class="pre">POLICY_ACTION_DROP</span></tt> - <p>Drop traffic for this policy. </p>
+</li>
+<li><tt class="first docutils literal"><span class="pre">POLICY_ACTION_NEXTHOP</span></tt> - <p>Forward to one or more IP nexthops. </p>
+</li>
+<li><tt class="first docutils literal"><span class="pre">POLICY_ACTION_NEXTHOP_GROUP</span></tt> - <p>Forward to named group of nexthops/interfaces. </p>
+</li>
+<li><tt class="first docutils literal"><span class="pre">POLICY_ACTION_DSCP</span></tt> - <p>Set DSCP bits. </p>
+</li>
+<li><tt class="first docutils literal"><span class="pre">POLICY_ACTION_TRAFFIC_CLASS</span></tt> - <p>Set traffic class. </p>
+</li>
+</ul>
+</dd></dl>
+
+<dl class="enum">
+<dt>
+<span class="target" id="eossdknamespaceeos_1a6370757119f8025b79c7865f575d8969"></span><strong>policy_map_rule_type_t enum</strong></dt>
+<dd><p>The policy map rule type. Valid types are IPV4 IPV6 and CLASSMAP. </p>
+<p><em>Values:</em></p>
+<ul class="breatheenumvalues">
+<li><tt class="first docutils literal"><span class="pre">POLICY_RULE_TYPE_CLASSMAP</span></tt> - </li>
+<li><tt class="first docutils literal"><span class="pre">POLICY_RULE_TYPE_IPV4</span></tt> - </li>
+<li><tt class="first docutils literal"><span class="pre">POLICY_RULE_TYPE_IPV6</span></tt> - </li>
+</ul>
+</dd></dl>
+
+</div>
+<dl class="class">
+<dt>
+<span class="target" id="eossdkclasseos_1_1policy__map__key__t"></span><em>class</em> <tt class="descname">policy_map_key_t</tt></dt>
+<dd><em>#include &lt;policy_map.h&gt;</em><p>The key used to uniquely identify both class and policy maps. </p>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1policy__map__key__t_1a8e76aad144fffae8188a444a8bb42b99"></span><tt class="descname">policy_map_key_t</tt><big>(</big><big>)</big></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1policy__map__key__t_1ad7c0185243ed6c5caaeaabe2d25b4621"></span><tt class="descname">policy_map_key_t</tt><big>(</big>std::string const &amp; <em>name</em>, policy_feature_t <em>feature</em><big>)</big></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1policy__map__key__t_1a6e933c6b2d4619c36d7c15560c2816d7"></span>std::string <tt class="descname">name</tt><big>(</big><big>)</big> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1policy__map__key__t_1ae92d002cbd5ffe15b97ecaed32a62b90"></span>void <tt class="descname">name_is</tt><big>(</big>std::string const &amp; <em>name</em><big>)</big></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1policy__map__key__t_1a3a98f7c47400a0c86906d365b3c6337d"></span>policy_feature_t <tt class="descname">feature</tt><big>(</big><big>)</big> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1policy__map__key__t_1a3a9ea8ea88062b5f0b95352465151208"></span>void <tt class="descname">feature_is</tt><big>(</big>policy_feature_t <em>feature</em><big>)</big></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1policy__map__key__t_1a389841a69dcdac26d03cba2d81205d12"></span>bool <tt class="descname">operator==</tt><big>(</big><a class="reference internal" href="#eossdkclasseos_1_1policy__map__key__t"><em>policy_map_key_t</em></a> const &amp; <em>other</em><big>)</big> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1policy__map__key__t_1a7e6d9880ae42430e6b0155b728cd2a6e"></span>bool <tt class="descname">operator!=</tt><big>(</big><a class="reference internal" href="#eossdkclasseos_1_1policy__map__key__t"><em>policy_map_key_t</em></a> const &amp; <em>other</em><big>)</big> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1policy__map__key__t_1afb92a8f52d34287a36ac0a2e42cd2e89"></span>bool <tt class="descname">operator&lt;</tt><big>(</big><a class="reference internal" href="#eossdkclasseos_1_1policy__map__key__t"><em>policy_map_key_t</em></a> const &amp; <em>other</em><big>)</big> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1policy__map__key__t_1a2fb01552df367a4c59e9e93e589ecca2"></span>uint32_t <tt class="descname">hash</tt><big>(</big><big>)</big> const</dt>
+<dd><p>The hash function for type <a class="reference internal" href="#eossdkclasseos_1_1policy__map__key__t"><em>policy_map_key_t</em></a>. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1policy__map__key__t_1ad8139ecd38243119c3c94390820488f5"></span>std::string <tt class="descname">to_string</tt><big>(</big><big>)</big> const</dt>
+<dd><p>Returns a string representation of the current object&#8217;s values. </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Private Members</p>
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1policy__map__key__t_1af15fabf5896595f7d9f64ff38760a6d0"></span>std::string <tt class="descname">name_</tt></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1policy__map__key__t_1a13f4c7b6a58651a4666dd27918a48bd1"></span>policy_feature_t <tt class="descname">feature_</tt></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Friends</p>
+<dl class="friend">
+<dt>
+<span class="target" id="eossdkclasseos_1_1policy__map__key__t_1a2f05178f8d483be0b970f9800e5974cd"></span>friend std::ostream &amp; <tt class="descname">operator&lt;&lt;</tt></dt>
+<dd><p>A utility stream operator that adds a string representation of <a class="reference internal" href="#eossdkclasseos_1_1policy__map__key__t"><em>policy_map_key_t</em></a> to the ostream. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="class">
+<dt>
+<span class="target" id="eossdkclasseos_1_1policy__map__action__t"></span><em>class</em> <tt class="descname">policy_map_action_t</tt></dt>
+<dd><em>#include &lt;policy_map.h&gt;</em><p>A single policy map action. Each action defines a single type of action to be performed,presently supporting: &#8220;set nexthop&#8221;, &#8220;set nexthop group&#8221; and &#8220;drop&#8221;. It is illegal to set both nexthop and nexthop group or dropoperations in a single policy map rule. </p>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1policy__map__action__t_1af0abf7b22d2abac34ebaf4b27d62872e"></span><tt class="descname">policy_map_action_t</tt><big>(</big><big>)</big></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1policy__map__action__t_1a155ff12540c052d88794946d8333dd5c"></span><tt class="descname">policy_map_action_t</tt><big>(</big>policy_action_type_t <em>action_type</em><big>)</big></dt>
+<dd><p>Constructs a policy map action of a particular type.</p>
+<p>After construction, set attributes appropriate for the action type using the mutators below; only the action-specific attributes will be considered when the policy is applied. If the action is POLICY_ACTION_DROP, no further attributes require being set. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1policy__map__action__t_1a3782d8aed1ddb955afd10e67ed2d326a"></span>virtual <tt class="descname">~policy_map_action_t</tt><big>(</big><big>)</big></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1policy__map__action__t_1aea08b059916634c76bfd0cacffac34bb"></span>policy_action_type_t <tt class="descname">action_type</tt><big>(</big><big>)</big> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1policy__map__action__t_1a9e07ac987b1f0dd56ade317aad4d0951"></span>void <tt class="descname">action_type_is</tt><big>(</big>policy_action_type_t <em>action_type</em><big>)</big></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1policy__map__action__t_1a6dad9dc8bf5884f6b897fd7c78b731c8"></span>std::string <tt class="descname">nexthop_group_name</tt><big>(</big><big>)</big> const</dt>
+<dd><p>Getter for &#8216;nexthop_group_name&#8217;: the name of the nexthop group to be used when the action is POLICY_ACTION_NEXTHOP_GROUP. If the nexthop group does not yet exist when calling policy_map_is() on the <a class="reference internal" href="#eossdkclasseos_1_1policy__map__mgr"><em>policy_map_mgr</em></a>, that action will complete successfully but FIB entries for the nextop group will not be programmed until the group is configured. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1policy__map__action__t_1a903cc36750118d1a05a7b7be89bd0428"></span>void <tt class="descname">nexthop_group_name_is</tt><big>(</big>std::string const &amp; <em>nexthop_group_name</em><big>)</big></dt>
+<dd><p>Setter for &#8216;nexthop_group_name&#8217;. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1policy__map__action__t_1a1c7f7fbd7715d760457ad4dea0b90a79"></span>std::unordered_set&lt; <a class="reference internal" href="ip.html#eossdkclasseos_1_1ip__addr__t"><em>ip_addr_t</em></a> &gt; const &amp; <tt class="descname">nexthops</tt><big>(</big><big>)</big> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1policy__map__action__t_1a4cf301395fdd498d756b3093397a017c"></span>void <tt class="descname">nexthops_is</tt><big>(</big>std::unordered_set&lt; <a class="reference internal" href="ip.html#eossdkclasseos_1_1ip__addr__t"><em>ip_addr_t</em></a> &gt; const &amp; <em>nexthops</em><big>)</big></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1policy__map__action__t_1a47775976f2ca8bb4db65ba9aa53c516c"></span>void <tt class="descname">nexthop_set</tt><big>(</big><a class="reference internal" href="ip.html#eossdkclasseos_1_1ip__addr__t"><em>ip_addr_t</em></a> const &amp; <em>value</em><big>)</big></dt>
+<dd><p>Inserts one nexthop of &#8216;value&#8217; to the set. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1policy__map__action__t_1a70a0c59caf26666111bef3506669c002"></span>void <tt class="descname">nexthop_del</tt><big>(</big><a class="reference internal" href="ip.html#eossdkclasseos_1_1ip__addr__t"><em>ip_addr_t</em></a> const &amp; <em>value</em><big>)</big></dt>
+<dd><p>Deletes one nexthop of &#8216;value&#8217; from the set. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1policy__map__action__t_1adc0f3903962268ff29d20eafb21f022d"></span>std::string <tt class="descname">vrf</tt><big>(</big><big>)</big> const</dt>
+<dd><p>Getter for &#8216;vrf&#8217;: the name of the VRF for nexthop action. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1policy__map__action__t_1a9f5b9632c50cd10816d876817f9c2ea0"></span>void <tt class="descname">vrf_is</tt><big>(</big>std::string const &amp; <em>vrf</em><big>)</big></dt>
+<dd><p>Setter for &#8216;vrf&#8217;. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1policy__map__action__t_1a9c3b93788fda32c5ddf1e1141b569730"></span>uint8_t <tt class="descname">dscp</tt><big>(</big><big>)</big> const</dt>
+<dd><p>Getter for &#8216;dscp&#8217;: the DiffServ Code Point on matching IPv4/IPv6 packets. This sets the 6-bit IPv4 DSCP or IPv6 traffic class field.</p>
+<p><dl class="docutils">
+<dt><strong>Exceptions</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><tt class="first docutils literal"><a class="reference internal" href="exception.html#eossdkclasseos_1_1invalid__argument__error"><em><span class="pre">eos::invalid_argument_error</span></em></a></tt> - <p>if value outside range 0..63. </p>
+</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1policy__map__action__t_1a755f76193eb73f84f934233f0879bb4a"></span>void <tt class="descname">dscp_is</tt><big>(</big>uint8_t <em>dscp</em><big>)</big></dt>
+<dd><p>Setter for &#8216;dscp&#8217;. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1policy__map__action__t_1ac0b27060f266793862a4a16fe6cc40ca"></span>uint8_t <tt class="descname">traffic_class</tt><big>(</big><big>)</big> const</dt>
+<dd><p>Getter for &#8216;traffic_class&#8217;: the internal EOS traffic class on matching packets. Setting this 3-bit value overrides any interface CoS/DSCP trust mapping.</p>
+<p><dl class="docutils">
+<dt><strong>Exceptions</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><tt class="first docutils literal"><a class="reference internal" href="exception.html#eossdkclasseos_1_1invalid__argument__error"><em><span class="pre">eos::invalid_argument_error</span></em></a></tt> - <p>if value outside range 0..7. </p>
+</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1policy__map__action__t_1a473bb091bb68051ea18335d0deff3513"></span>void <tt class="descname">traffic_class_is</tt><big>(</big>uint8_t <em>traffic_class</em><big>)</big></dt>
+<dd><p>Setter for &#8216;traffic_class&#8217;. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1policy__map__action__t_1a9296c11a8d2f62123c22470908f614bf"></span>bool <tt class="descname">operator==</tt><big>(</big><a class="reference internal" href="#eossdkclasseos_1_1policy__map__action__t"><em>policy_map_action_t</em></a> const &amp; <em>other</em><big>)</big> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1policy__map__action__t_1a6a7317d15e1cd3860201cf985b284d9e"></span>bool <tt class="descname">operator!=</tt><big>(</big><a class="reference internal" href="#eossdkclasseos_1_1policy__map__action__t"><em>policy_map_action_t</em></a> const &amp; <em>other</em><big>)</big> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1policy__map__action__t_1afd594264cd536839acc35d8dfb6faa71"></span>bool <tt class="descname">operator&lt;</tt><big>(</big><a class="reference internal" href="#eossdkclasseos_1_1policy__map__action__t"><em>policy_map_action_t</em></a> const &amp; <em>other</em><big>)</big> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1policy__map__action__t_1a289e4da92990625b3f4295116c4ce371"></span>uint32_t <tt class="descname">hash</tt><big>(</big><big>)</big> const</dt>
+<dd><p>The hash function for type <a class="reference internal" href="#eossdkclasseos_1_1policy__map__action__t"><em>policy_map_action_t</em></a>. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1policy__map__action__t_1a69c727994ab53a9b4322ef648ae8dd34"></span>std::string <tt class="descname">to_string</tt><big>(</big><big>)</big> const</dt>
+<dd><p>Returns a string representation of the current object&#8217;s values. </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Private Members</p>
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1policy__map__action__t_1a08473cf065fb58786e0e10e5ce0aa6e9"></span>policy_action_type_t <tt class="descname">action_type_</tt></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1policy__map__action__t_1a6a1ad88fbe556dcea4afbb9a461d28db"></span>std::string <tt class="descname">nexthop_group_name_</tt></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1policy__map__action__t_1ae6e387341d589bcdd6a074108715a151"></span>std::unordered_set&lt; <a class="reference internal" href="ip.html#eossdkclasseos_1_1ip__addr__t"><em>ip_addr_t</em></a> &gt; <tt class="descname">nexthops_</tt></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1policy__map__action__t_1a97dd7068002319e7c9baddf0c4624b48"></span>std::string <tt class="descname">vrf_</tt></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1policy__map__action__t_1a7fe17a5ee6d3bc6777282dea351f7633"></span>uint8_t <tt class="descname">dscp_</tt></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1policy__map__action__t_1a05bf78b0b35edd0c32339506fc162171"></span>uint8_t <tt class="descname">traffic_class_</tt></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Friends</p>
+<dl class="friend">
+<dt>
+<span class="target" id="eossdkclasseos_1_1policy__map__action__t_1aa7fd609e28396b835f6048a6b57f96be"></span>friend std::ostream &amp; <tt class="descname">operator&lt;&lt;</tt></dt>
+<dd><p>A utility stream operator that adds a string representation of <a class="reference internal" href="#eossdkclasseos_1_1policy__map__action__t"><em>policy_map_action_t</em></a> to the ostream. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="class">
+<dt>
+<span class="target" id="eossdkclasseos_1_1policy__map__rule__t"></span><em>class</em> <tt class="descname">policy_map_rule_t</tt></dt>
+<dd><em>#include &lt;policy_map.h&gt;</em><p>A policy map rule, describing a traffic match and actions.</p>
+<p>A rule works by creating a filter to match only certain types of IP traffic. Any traffic that passes this filter then has the corresponding <tt class="docutils literal"><a class="reference internal" href="#eossdkclasseos_1_1policy__map__action__t"><em><span class="pre">policy_map_action_t</span></em></a></tt> actions applied. For example, a rule can specify that any traffic on Vlan42 should have its traffic class set to 4 and should be forwarded out of nexthop_group &#8220;foo&#8221;.</p>
+<p>The match portion of a rule can take one of two forms: class maps or raw match rules. Class maps let you combine various ACLs to decide whether to match or ignore traffic. These objects are managed by the <tt class="docutils literal"><a class="reference internal" href="class_map.html#eossdkclasseos_1_1class__map__mgr"><em><span class="pre">class_map_mgr</span></em></a></tt> in <tt class="docutils literal"><span class="pre">eos/class_map.h</span></tt>. Alternatively, you can use a shorthand and specify just a single <tt class="docutils literal"><a class="reference internal" href="acl.html#eossdkclasseos_1_1acl__rule__ip__t"><em><span class="pre">acl_rule_ip_t</span></em></a></tt>, which will match traffic that passes that rule. Actions can be set at once or added or removed one at a time. </p>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1policy__map__rule__t_1a0ab10d60a7ec9d215efae98cfcee5adc"></span><tt class="descname">policy_map_rule_t</tt><big>(</big><big>)</big></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1policy__map__rule__t_1a2695aa9b7d05c8ccb22190705dd77630"></span><tt class="descname">policy_map_rule_t</tt><big>(</big><a class="reference internal" href="#eossdkclasseos_1_1policy__map__key__t"><em>class_map_key_t</em></a> const &amp; <em>class_map_key</em><big>)</big></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1policy__map__rule__t_1a03136763948d47ca581274dfe05aa7f1"></span><a class="reference internal" href="#eossdkclasseos_1_1policy__map__key__t"><em>class_map_key_t</em></a> <tt class="descname">class_map_key</tt><big>(</big><big>)</big> const</dt>
+<dd><p>Getter for &#8216;class_map_key&#8217;: the class map key (name is CLASS_MAP_MPLS_ANY if matching MPLS). </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1policy__map__rule__t_1a5d805ba5bc45577dad864f55e1abd747"></span>void <tt class="descname">class_map_key_is</tt><big>(</big><a class="reference internal" href="#eossdkclasseos_1_1policy__map__key__t"><em>class_map_key_t</em></a> const &amp; <em>class_map_key</em><big>)</big></dt>
+<dd><p>Setter for &#8216;class_map_key&#8217;. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1policy__map__rule__t_1ac8d2567b5ddc635f11a0434fd1920426"></span>policy_map_rule_type_t <tt class="descname">policy_map_rule_type</tt><big>(</big><big>)</big> const</dt>
+<dd><p>Getter for &#8216;policy_map_rule_type&#8217;: the rule type. Set the rule type to POLICY_RULE_TYPE_CLASSMAP if the rule matches a class. If the rule has the raw match statement set, the rule type should be set to POLICY_RULE_TYPE_IPV4 or POLICY_RULE_TYPE_IPV6. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1policy__map__rule__t_1a8f165ded43d83a9770b278f0d40b46be"></span>void <tt class="descname">policy_map_rule_type_is</tt><big>(</big>policy_map_rule_type_t <em>policy_map_rule_type</em><big>)</big></dt>
+<dd><p>Setter for &#8216;policy_map_rule_type&#8217;. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1policy__map__rule__t_1a2c4b6854a161e128e5626cfcace9e85b"></span><a class="reference internal" href="acl.html#eossdkclasseos_1_1acl__rule__ip__t"><em>acl_rule_ip_t</em></a> <tt class="descname">raw_rule</tt><big>(</big><big>)</big> const</dt>
+<dd><p>Getter for &#8216;raw_rule&#8217;: the raw match statement. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1policy__map__rule__t_1adf67c79c581dffdb66b5d753707519d1"></span>void <tt class="descname">raw_rule_is</tt><big>(</big><a class="reference internal" href="acl.html#eossdkclasseos_1_1acl__rule__ip__t"><em>acl_rule_ip_t</em></a> <em>raw_rule</em><big>)</big></dt>
+<dd><p>Setter for &#8216;raw_rule&#8217;. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1policy__map__rule__t_1a3bcbf3efc51a8bf73edaf8094aec8f07"></span>std::set&lt; <a class="reference internal" href="#eossdkclasseos_1_1policy__map__action__t"><em>policy_map_action_t</em></a> &gt; const &amp; <tt class="descname">actions</tt><big>(</big><big>)</big> const</dt>
+<dd><p>Getter for &#8216;actions&#8217;: the set of actions configured for this particular rule. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1policy__map__rule__t_1a37b68f8e8ef79d6f4f3b1287d1c5c1c8"></span>void <tt class="descname">actions_is</tt><big>(</big>std::set&lt; <a class="reference internal" href="#eossdkclasseos_1_1policy__map__action__t"><em>policy_map_action_t</em></a> &gt; const &amp; <em>actions</em><big>)</big></dt>
+<dd><p>Setter for &#8216;actions&#8217;. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1policy__map__rule__t_1aa9f003f2ec21eb75984297e044bef362"></span>void <tt class="descname">action_set</tt><big>(</big><a class="reference internal" href="#eossdkclasseos_1_1policy__map__action__t"><em>policy_map_action_t</em></a> const &amp; <em>value</em><big>)</big></dt>
+<dd><p>Inserts one action of &#8216;value&#8217; to the set. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1policy__map__rule__t_1ae4e3c87ef82c1c1b0a082aca198127fd"></span>void <tt class="descname">action_del</tt><big>(</big><a class="reference internal" href="#eossdkclasseos_1_1policy__map__action__t"><em>policy_map_action_t</em></a> const &amp; <em>value</em><big>)</big></dt>
+<dd><p>Deletes one action of &#8216;value&#8217; from the set. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1policy__map__rule__t_1a4c2f2f551fef94db2bc7dd054f92e9ec"></span>void <tt class="descname">action_del</tt><big>(</big>policy_action_type_t <em>action_type</em><big>)</big></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1policy__map__rule__t_1a9e8090ee61553260da68e7601c77b37b"></span>void <tt class="descname">raw_rule_is</tt><big>(</big><a class="reference internal" href="acl.html#eossdkclasseos_1_1acl__rule__ip__t"><em>acl_rule_ip_t</em></a> <em>acl_rule</em>, policy_map_rule_type_t <em>rule_type</em><big>)</big></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1policy__map__rule__t_1ac44a62043ece55cf8d9cf31d06cd7503"></span>bool <tt class="descname">operator==</tt><big>(</big><a class="reference internal" href="#eossdkclasseos_1_1policy__map__rule__t"><em>policy_map_rule_t</em></a> const &amp; <em>other</em><big>)</big> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1policy__map__rule__t_1ac9b1083c0938003fd4db8aa3f4110477"></span>bool <tt class="descname">operator!=</tt><big>(</big><a class="reference internal" href="#eossdkclasseos_1_1policy__map__rule__t"><em>policy_map_rule_t</em></a> const &amp; <em>other</em><big>)</big> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1policy__map__rule__t_1aa2f019dce925502682d0eaf6d0cd020e"></span>bool <tt class="descname">operator&lt;</tt><big>(</big><a class="reference internal" href="#eossdkclasseos_1_1policy__map__rule__t"><em>policy_map_rule_t</em></a> const &amp; <em>other</em><big>)</big> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1policy__map__rule__t_1a53275b60e3be9a3ab2cd4f5e6c4e0aa6"></span>uint32_t <tt class="descname">hash</tt><big>(</big><big>)</big> const</dt>
+<dd><p>The hash function for type <a class="reference internal" href="#eossdkclasseos_1_1policy__map__rule__t"><em>policy_map_rule_t</em></a>. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1policy__map__rule__t_1a888409904be7f1e9db70acd2b0171150"></span>std::string <tt class="descname">to_string</tt><big>(</big><big>)</big> const</dt>
+<dd><p>Returns a string representation of the current object&#8217;s values. </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Private Members</p>
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1policy__map__rule__t_1a2c5c8d8fe643538a8fff4cde48aa2457"></span><a class="reference internal" href="#eossdkclasseos_1_1policy__map__key__t"><em>class_map_key_t</em></a> <tt class="descname">class_map_key_</tt></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1policy__map__rule__t_1a94e4fe5f13bf9dad3aca381a7d2e8048"></span>policy_map_rule_type_t <tt class="descname">policy_map_rule_type_</tt></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1policy__map__rule__t_1a3d72894965cf8bc7166c9caa5a6b9c23"></span><a class="reference internal" href="acl.html#eossdkclasseos_1_1acl__rule__ip__t"><em>acl_rule_ip_t</em></a> <tt class="descname">raw_rule_</tt></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1policy__map__rule__t_1af2e5c4cc32a32466acee34d67ca3ebee"></span>std::set&lt; <a class="reference internal" href="#eossdkclasseos_1_1policy__map__action__t"><em>policy_map_action_t</em></a> &gt; <tt class="descname">actions_</tt></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Friends</p>
+<dl class="friend">
+<dt>
+<span class="target" id="eossdkclasseos_1_1policy__map__rule__t_1afcd0170842dcb7fe1b2f6f22859b7aeb"></span>friend std::ostream &amp; <tt class="descname">operator&lt;&lt;</tt></dt>
+<dd><p>A utility stream operator that adds a string representation of <a class="reference internal" href="#eossdkclasseos_1_1policy__map__rule__t"><em>policy_map_rule_t</em></a> to the ostream. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="class">
+<dt>
+<span class="target" id="eossdkclasseos_1_1policy__map__t"></span><em>class</em> <tt class="descname">policy_map_t</tt></dt>
+<dd><em>#include &lt;policy_map.h&gt;</em><p>A policy map instance.</p>
+<p>Once appropriately configured, policy maps are committed and applied to interfaces using the <a class="reference internal" href="#eossdkclasseos_1_1policy__map__mgr"><em>policy_map_mgr</em></a>. </p>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1policy__map__t_1a538432c0b2a2450783f0f10079d46e3e"></span><tt class="descname">policy_map_t</tt><big>(</big><big>)</big></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1policy__map__t_1a807dff3ba4e22aee19cb5821f3d09e44"></span><tt class="descname">policy_map_t</tt><big>(</big><a class="reference internal" href="#eossdkclasseos_1_1policy__map__key__t"><em>policy_map_key_t</em></a> const &amp; <em>key</em><big>)</big></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1policy__map__t_1a1ccdf0672b723d0614783996cbe7c2f2"></span><a class="reference internal" href="#eossdkclasseos_1_1policy__map__key__t"><em>policy_map_key_t</em></a> <tt class="descname">key</tt><big>(</big><big>)</big> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1policy__map__t_1a54dbc51273601eecb33fd66c6b438a8f"></span>void <tt class="descname">key_is</tt><big>(</big><a class="reference internal" href="#eossdkclasseos_1_1policy__map__key__t"><em>policy_map_key_t</em></a> const &amp; <em>key</em><big>)</big></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1policy__map__t_1a4c1125ae67cf6f435f086310cde12618"></span>std::map&lt; uint32_t, <a class="reference internal" href="#eossdkclasseos_1_1policy__map__rule__t"><em>policy_map_rule_t</em></a> &gt; const &amp; <tt class="descname">rules</tt><big>(</big><big>)</big> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1policy__map__t_1a4e4b0bce0227f44024ab178619010d7f"></span>void <tt class="descname">rules_is</tt><big>(</big>std::map&lt; uint32_t, <a class="reference internal" href="#eossdkclasseos_1_1policy__map__rule__t"><em>policy_map_rule_t</em></a> &gt; const &amp; <em>rules</em><big>)</big></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1policy__map__t_1ad3ac5c91dadb62ef15d05a7e4a9ac66c"></span>void <tt class="descname">rule_set</tt><big>(</big>uint32_t <em>key</em>, <a class="reference internal" href="#eossdkclasseos_1_1policy__map__rule__t"><em>policy_map_rule_t</em></a> const &amp; <em>value</em><big>)</big></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1policy__map__t_1a8120b6fc44ff3aea0ad2369ad7ba1741"></span>void <tt class="descname">rule_del</tt><big>(</big>uint32_t <em>key</em><big>)</big></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1policy__map__t_1a92af69dd7d36e6a9465ab09ee1048b09"></span>bool <tt class="descname">operator==</tt><big>(</big><a class="reference internal" href="#eossdkclasseos_1_1policy__map__t"><em>policy_map_t</em></a> const &amp; <em>other</em><big>)</big> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1policy__map__t_1aa9e117108e8495d32e6cb9d0ee8a956a"></span>bool <tt class="descname">operator!=</tt><big>(</big><a class="reference internal" href="#eossdkclasseos_1_1policy__map__t"><em>policy_map_t</em></a> const &amp; <em>other</em><big>)</big> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1policy__map__t_1a9addfab60fdc5c567d94aafe9e6c9464"></span>bool <tt class="descname">operator&lt;</tt><big>(</big><a class="reference internal" href="#eossdkclasseos_1_1policy__map__t"><em>policy_map_t</em></a> const &amp; <em>other</em><big>)</big> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1policy__map__t_1a2f521d70d5acae67c6e9234e20f44351"></span>uint32_t <tt class="descname">hash</tt><big>(</big><big>)</big> const</dt>
+<dd><p>The hash function for type <a class="reference internal" href="#eossdkclasseos_1_1policy__map__t"><em>policy_map_t</em></a>. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1policy__map__t_1ab1f9f35c28c9db011839a1ffd90463f8"></span>std::string <tt class="descname">to_string</tt><big>(</big><big>)</big> const</dt>
+<dd><p>Returns a string representation of the current object&#8217;s values. </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Private Members</p>
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1policy__map__t_1af1efa5cb8286fff5598e3c227d0224a3"></span><a class="reference internal" href="#eossdkclasseos_1_1policy__map__key__t"><em>policy_map_key_t</em></a> <tt class="descname">key_</tt></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1policy__map__t_1a0a9b38fe2aaff99102cbf27d7cf1b015"></span>std::map&lt; uint32_t, <a class="reference internal" href="#eossdkclasseos_1_1policy__map__rule__t"><em>policy_map_rule_t</em></a> &gt; <tt class="descname">rules_</tt></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Friends</p>
+<dl class="friend">
+<dt>
+<span class="target" id="eossdkclasseos_1_1policy__map__t_1a7a777c33d4dc26bbadefefcbca94a7ed"></span>friend std::ostream &amp; <tt class="descname">operator&lt;&lt;</tt></dt>
+<dd><p>A utility stream operator that adds a string representation of <a class="reference internal" href="#eossdkclasseos_1_1policy__map__t"><em>policy_map_t</em></a> to the ostream. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="class">
+<dt>
+<span class="target" id="eossdkclasseos_1_1unsupported__policy__feature__error"></span><em>class</em> <tt class="descname">unsupported_policy_feature_error</tt></dt>
+<dd><em>#include &lt;policy_map.h&gt;</em><p>The policy feature requested is unavailable in this SDK release. </p>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1unsupported__policy__feature__error_1a546d1c94e7cfc169a95e20374f2c4f58"></span><tt class="descname">unsupported_policy_feature_error</tt><big>(</big>policy_feature_t <em>policy_feature</em><big>)</big></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1unsupported__policy__feature__error_1a912775b72a93cb57a91a2d01ad3268f7"></span>virtual <tt class="descname">~unsupported_policy_feature_error</tt><big>(</big><big>)</big></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1unsupported__policy__feature__error_1ac1b25fc9a1f250093840225bfc79f63c"></span>policy_feature_t <tt class="descname">policy_feature</tt><big>(</big><big>)</big> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1unsupported__policy__feature__error_1a42bf6ac094219c38d2c1e553c32a11a3"></span>virtual void <tt class="descname">raise</tt><big>(</big><big>)</big> const</dt>
+<dd><p>Throws this exception. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1unsupported__policy__feature__error_1a1a0e79301d8f8e0b8ce0953df40f77e4"></span>uint32_t <tt class="descname">hash</tt><big>(</big><big>)</big> const</dt>
+<dd><p>The hash function for type <a class="reference internal" href="#eossdkclasseos_1_1unsupported__policy__feature__error"><em>unsupported_policy_feature_error</em></a>. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1unsupported__policy__feature__error_1a59bb16eb904a8581cb628f70f4948108"></span>std::string <tt class="descname">to_string</tt><big>(</big><big>)</big> const</dt>
+<dd><p>Returns a string representation of the current object&#8217;s values. </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Private Members</p>
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1unsupported__policy__feature__error_1aee2a1c28f9d527b0e5662de6af9b99ce"></span>policy_feature_t <tt class="descname">policy_feature_</tt></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Friends</p>
+<dl class="friend">
+<dt>
+<span class="target" id="eossdkclasseos_1_1unsupported__policy__feature__error_1a7c892546db64e7f44d67fcde762d59ce"></span>friend std::ostream &amp; <tt class="descname">operator&lt;&lt;</tt></dt>
+<dd><p>A utility stream operator that adds a string representation of <a class="reference internal" href="#eossdkclasseos_1_1unsupported__policy__feature__error"><em>unsupported_policy_feature_error</em></a> to the ostream. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#"><strong>policy_map</strong></a><ul>
+<li><a class="reference internal" href="#type-definitions-in-policy-map">Type definitions in <strong>policy_map</strong></a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="panic.html"
+                        title="previous chapter"><strong>panic</strong></a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="sdk.html"
+                        title="next chapter"><strong>sdk</strong></a></p>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="sdk.html" title="sdk"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="panic.html" title="panic"
+             >previous</a> |</li>
+        <li><a href="index.html">Arista EOS SDK 2.13.0 reference</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2014, Arista Networks.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

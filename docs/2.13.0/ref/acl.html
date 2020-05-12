@@ -1,0 +1,1495 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>acl &mdash; Arista EOS SDK 2.13.0 reference</title>
+    
+    <link rel="stylesheet" href="_static/eossdk.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/breathe.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '2.13.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="Arista EOS SDK 2.13.0 reference" href="index.html" />
+    <link rel="next" title="agent" href="agent.html" />
+    <link rel="prev" title="Arista EOS SDK reference guide" href="index.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="agent.html" title="agent"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="Arista EOS SDK reference guide"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">Arista EOS SDK 2.13.0 reference</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="acl">
+<h1><strong>acl</strong><a class="headerlink" href="#acl" title="Permalink to this headline">¶</a></h1>
+<p>Access Control List (ACL) management module.</p>
+<p>In EOS, an ACL is a collection of rules ordered by a sequence number. Each rule defines some filter criteria to match and an action determining whether matching traffic will be considered by the ACL.</p>
+<p>ACLs are defined to match Ethernet, IPv4 or IPv6 headers and can be used with a variety of EOS features, including traffic filters on interfaces (supported by this module) and as traffic classifiers for class maps (eos/class_map.h).</p>
+<p>This module offers an ACL manager, used to define ACLs in the system configuration and to apply them as traffic filters to network interfaces.</p>
+<p>To react to the status of traffic filter application, an ACL handler is also provided with callback handlers you can implement to react to the ACL programming status on error or success.</p>
+<p>Here&#8217;s an example of the basic workflow for defining and configuring an ACL, then applying it to Ethernet1:</p>
+<p> <pre class="literal-block">
+* #include &lt;eos/acl.h&gt;
+* #include &lt;eos/ip.h&gt;
+*
+* // The result of eos::sdk::get_acl_mgr() is in variable
+* // acl_mgr_ within this example.
+*
+* // Deny all web traffic originating at srcaddr
+* <a class="reference internal" href="ip.html#eossdkclasseos_1_1ip__addr__mask__t"><em>eos::ip_addr_mask_t</em></a> srcaddr(<a class="reference internal" href="ip.html#eossdkclasseos_1_1ip__addr__t"><em>eos::ip_addr_t</em></a>(&quot;192.0.2.1&quot;), 32);
+* <a class="reference internal" href="ip.html#eossdkclasseos_1_1ip__addr__mask__t"><em>eos::ip_addr_mask_t</em></a> dstaddr(<a class="reference internal" href="ip.html#eossdkclasseos_1_1ip__addr__t"><em>eos::ip_addr_t</em></a>(&quot;10.0.0.0&quot;), 8);
+* <a class="reference internal" href="#eossdkclasseos_1_1acl__key__t"><em>eos::acl_key_t</em></a> acl_key(&quot;name_of_acl&quot;, eos::ACL_TYPE_IPV4);
+* <a class="reference internal" href="#eossdkclasseos_1_1acl__rule__ip__t"><em>eos::acl_rule_ip_t</em></a> rule1;
+*
+* rule1.source_addr_is(srcaddr);
+* rule1.destination_addr_is(dstaddr);
+* rule1.source_port_is(80);
+* rule1.action_is(eos::ACL_DENY);
+*
+* // Configure the ACL and commit it to current configuration
+* acl_mgr_-&gt;acl_rule_set(acl_key, 1, rule1);
+* acl_mgr_-&gt;acl_commit();
+*
+* // Now apply the ACL for traffic filtering on Ethernet1 inbound
+* acl_mgr_-&gt;acl_apply(acl_key, <a class="reference internal" href="intf.html#eossdkclasseos_1_1intf__id__t"><em>eos::intf_id_t</em></a>(&quot;Ethernet1&quot;), eos::ACL_IN, true);
+* 
+</pre>
+</p>
+<dl class="namespace">
+<dt>
+<span class="target" id="eossdknamespaceeos"></span><em>namespace</em> <tt class="descname">eos</tt></dt>
+<dd><div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Typedefs</p>
+<dl class="typedef">
+<dt>
+<span class="target" id="eossdknamespaceeos_1ae0de52bab24be323f0d8cd31febefa5c"></span>typedef std::pair&lt; uint32_t, <a class="reference internal" href="#eossdkclasseos_1_1acl__rule__ip__t"><em>acl_rule_ip_t</em></a> &gt; <tt class="descname">acl_rule_ip_entry_t</tt></dt>
+<dd><p>A rule in an IP ACL. </p>
+</dd></dl>
+
+<dl class="typedef">
+<dt>
+<span class="target" id="eossdknamespaceeos_1abf824c33702447c5d4c657449af6b624"></span>typedef std::pair&lt; uint32_t, <a class="reference internal" href="#eossdkclasseos_1_1acl__rule__eth__t"><em>acl_rule_eth_t</em></a> &gt; <tt class="descname">acl_rule_eth_entry_t</tt></dt>
+<dd><p>A rule in an Ethernet ACL. </p>
+</dd></dl>
+
+</div>
+<dl class="class">
+<dt>
+<span class="target" id="eossdkclasseos_1_1acl__handler"></span><em>class</em> <tt class="descname">acl_handler</tt></dt>
+<dd><em>#include &lt;acl.h&gt;</em><p>An ACL handler.</p>
+<p>Derive from this class to react to ACL hardware synchronization events. </p>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1acl__handler_1acaf8d750c6e58ab8232c81cff3aac0b0"></span><tt class="descname">acl_handler</tt><big>(</big><a class="reference internal" href="#eossdkclasseos_1_1acl__mgr"><em>acl_mgr</em></a> *<big>)</big></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1acl__handler_1a0bd8e805b093f6f11938a8e168a19f13"></span><a class="reference internal" href="#eossdkclasseos_1_1acl__mgr"><em>acl_mgr</em></a> * <tt class="descname">get_acl_mgr</tt><big>(</big><big>)</big> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1acl__handler_1a524a0ac4f53ecb51307f69bfee881c11"></span>void <tt class="descname">watch_all_acls</tt><big>(</big>bool<big>)</big></dt>
+<dd><p>Watches updates to synchronization status for all ACLs. This defaults to false at handler construction time.</p>
+<p><dl class="docutils">
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><tt class="first docutils literal"><span class="pre">bool</span></tt> - <p>If true, receive ACL sync status notifications, else do not. </p>
+</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1acl__handler_1a3022234a79e6e2407adee1e78c3ecabb"></span>virtual void <tt class="descname">on_acl_sync</tt><big>(</big><big>)</big></dt>
+<dd><p>Called upon hardware successfully committing all pending transactions.</p>
+<p>It may be called more than once for a single transaction, or only once for a whole bunch of separate ACL updates. In fact, if someone updates an ACL in the CLI, this function may get called, i.e., it can get called once for zero transactions. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1acl__handler_1aed89fd9472dbb007e4646e12de4f8d66"></span>virtual void <tt class="descname">on_acl_sync_fail</tt><big>(</big>std::string const &amp; <em>linecard</em>, std::string const &amp; <em>message</em><big>)</big></dt>
+<dd><p>Called upon a problem stopping ACL configuration from being committed.</p>
+<p>This indicates that the ACL config (as stored in Sysdb) cannot be loaded into hardware, ever. It must be changed in some way to get Sysdb and the hardware back in sync. The most common problem, of course, is too many ACLs or ACL entries. It is up to you to find some things to delete, commit those deletions, and then see if things fit once again (<a class="reference internal" href="#eossdkclasseos_1_1acl__handler_1a3022234a79e6e2407adee1e78c3ecabb"><em>on_acl_sync()</em></a> will get called if they do, or <a class="reference internal" href="#eossdkclasseos_1_1acl__handler_1aed89fd9472dbb007e4646e12de4f8d66"><em>on_acl_sync_fail()</em></a> will get called again if they don&#8217;t). Note you may be notified more than once of the same problem, and you may be notified of problems that have nothing to do with you, such as an operator at the CLI doing something unsupported. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="class">
+<dt>
+<span class="target" id="eossdkclasseos_1_1acl__iter__t"></span><em>class</em> <tt class="descname">acl_iter_t</tt></dt>
+<dd><em>#include &lt;acl.h&gt;</em><p>An ACL iterator. </p>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Private Functions</p>
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1acl__iter__t_1a02b0f5482fbe9ed8a2e4f001b9f1fd3c"></span><tt class="descname">acl_iter_t</tt><big>(</big>acl_iter_impl * <em>const</em><big>)</big></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Friends</p>
+<dl class="friend">
+<dt>
+<span class="target" id="eossdkclasseos_1_1acl__iter__t_1a2032db5bc1d285d3fe31163833daa061"></span>friend class <tt class="descname">acl_iter_impl</tt></dt>
+<dd></dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="class">
+<dt>
+<span class="target" id="eossdkclasseos_1_1acl__rule__ip__iter__t"></span><em>class</em> <tt class="descname">acl_rule_ip_iter_t</tt></dt>
+<dd><em>#include &lt;acl.h&gt;</em><p>An IP ACL rule iterator. </p>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Private Functions</p>
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1acl__rule__ip__iter__t_1ad122a408f660a99a02d82d26b2f10e81"></span><tt class="descname">acl_rule_ip_iter_t</tt><big>(</big>acl_rule_ip_iter_impl * <em>const</em><big>)</big></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Friends</p>
+<dl class="friend">
+<dt>
+<span class="target" id="eossdkclasseos_1_1acl__rule__ip__iter__t_1a0315928397447a689db5e7aab703f550"></span>friend class <tt class="descname">acl_rule_ip_iter_impl</tt></dt>
+<dd></dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="class">
+<dt>
+<span class="target" id="eossdkclasseos_1_1acl__rule__eth__iter__t"></span><em>class</em> <tt class="descname">acl_rule_eth_iter_t</tt></dt>
+<dd><em>#include &lt;acl.h&gt;</em><p>An Ethernet ACL rule iterator. </p>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Private Functions</p>
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1acl__rule__eth__iter__t_1a919552bb3f8fcec764b28f537210a7f7"></span><tt class="descname">acl_rule_eth_iter_t</tt><big>(</big>acl_rule_eth_iter_impl * <em>const</em><big>)</big></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Friends</p>
+<dl class="friend">
+<dt>
+<span class="target" id="eossdkclasseos_1_1acl__rule__eth__iter__t_1a7dab1228601eb62edd5790da1f83cd85"></span>friend class <tt class="descname">acl_rule_eth_iter_impl</tt></dt>
+<dd></dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="class">
+<dt>
+<span class="target" id="eossdkclasseos_1_1acl__mgr"></span><em>class</em> <tt class="descname">acl_mgr</tt></dt>
+<dd><em>#include &lt;acl.h&gt;</em><p>The ACL manager.</p>
+<p>This manager provides access to current ACL configuration, creation, modification and deletion of ACLs, and functions to commit changes, apply ACLs to interfaces as well as manage fragments mode and enabling counters.</p>
+<p>When managing ACLs, you provide give an ACL key to modify, a &#8220;sequence number&#8221; which starts at 1 and goes up to MAXINT, and for set operations, the rule to set. Note: you must call commit() for your changes here to get pushed into the hardware, and once you have started setting rules, you must call <a class="reference internal" href="#eossdkclasseos_1_1acl__mgr_1ab960b650788204999f85a34486414c63"><em>acl_commit()</em></a> prior to any calls to <a class="reference internal" href="#eossdkclasseos_1_1acl__mgr_1aef28779af65243f8a33de1e6199624ce"><em>acl_apply()</em></a>, else the manager will panic(). Note that extremely large numbers of ACLs or rules per ACL can result in undefined behavior, including a switch reload. </p>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1acl__mgr_1ad6b7f6227d7095686cb3084c9ce4f951"></span>virtual <tt class="descname">~acl_mgr</tt><big>(</big><big>)</big></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1acl__mgr_1a98cc24a8268273b028e958cccc6fe9b3"></span>virtual <a class="reference internal" href="#eossdkclasseos_1_1acl__iter__t"><em>acl_iter_t</em></a> <tt class="descname">acl_iter</tt><big>(</big><big>)</big> const = 0</dt>
+<dd><p>Iterates over all ACLs. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1acl__mgr_1a7d0183eb9bf22a57cc8c2b392cfc46fa"></span>virtual <a class="reference internal" href="#eossdkclasseos_1_1acl__rule__ip__iter__t"><em>acl_rule_ip_iter_t</em></a> <tt class="descname">acl_rule_ip_iter</tt><big>(</big><a class="reference internal" href="#eossdkclasseos_1_1acl__key__t"><em>acl_key_t</em></a> const &amp;<big>)</big> const = 0</dt>
+<dd><p>Iterates over the rules with an IP ACL. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1acl__mgr_1a72f9e6db273a608fa3a5c6d79da6a6d8"></span>virtual <a class="reference internal" href="#eossdkclasseos_1_1acl__rule__eth__iter__t"><em>acl_rule_eth_iter_t</em></a> <tt class="descname">acl_rule_eth_iter</tt><big>(</big><a class="reference internal" href="#eossdkclasseos_1_1acl__key__t"><em>acl_key_t</em></a> const &amp;<big>)</big> const = 0</dt>
+<dd><p>Iterates over the rules with an Ethernet ACL. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1acl__mgr_1acbe4b70d9fa8891e8193f2835c34e679"></span>virtual bool <tt class="descname">acl_exists</tt><big>(</big><a class="reference internal" href="#eossdkclasseos_1_1acl__key__t"><em>acl_key_t</em></a> const &amp;<big>)</big> const = 0</dt>
+<dd><p>Configuration ACL existence test.</p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>true if an ACL with the same name and type (i.e., key) exists in the configuration, else false. </dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1acl__mgr_1a13cdfca982a91e37fa00247051459cb7"></span>virtual void <tt class="descname">acl_rule_set</tt><big>(</big><a class="reference internal" href="#eossdkclasseos_1_1acl__key__t"><em>acl_key_t</em></a> const &amp;, uint32_t, <a class="reference internal" href="#eossdkclasseos_1_1acl__rule__ip__t"><em>acl_rule_ip_t</em></a> const &amp;<big>)</big> = 0</dt>
+<dd><p>Adds an IP ACL rule to an ACL.</p>
+<p>If the ACL key doesn&#8217;t exist, it will be created. If the ACL type is not the same as the rule type, panic() is called.</p>
+<p><dl class="docutils">
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><tt class="first docutils literal"><a class="reference internal" href="#eossdkclasseos_1_1acl__key__t"><em><span class="pre">acl_key_t</span></em></a></tt> - <p>The ACL key to modify (name and ACL type) </p>
+</li>
+<li><tt class="first docutils literal"><span class="pre">uint32_t</span></tt> - <p>ACL sequence number </p>
+</li>
+<li><tt class="first docutils literal"><a class="reference internal" href="#eossdkclasseos_1_1acl__rule__ip__t"><em><span class="pre">acl_rule_ip_t</span></em></a></tt> - <p>ACL rule to set at sequence number </p>
+</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1acl__mgr_1a31cc904cf5c454c9a36436bbec4cd899"></span>virtual void <tt class="descname">acl_rule_set</tt><big>(</big><a class="reference internal" href="#eossdkclasseos_1_1acl__key__t"><em>acl_key_t</em></a> const &amp;, uint32_t, <a class="reference internal" href="#eossdkclasseos_1_1acl__rule__eth__t"><em>acl_rule_eth_t</em></a> const &amp;<big>)</big> = 0</dt>
+<dd><p>Adds an Ethernet (MAC) ACL rule to an ACL.</p>
+<p>If the ACL doesn&#8217;t exist, it will be created before the rule is added to it: there is no explicit &#8220;create ACL&#8221; operation. If the ACL type is not the same as the rule type (i.e., Ethernet), panic() is called.</p>
+<p><dl class="docutils">
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><tt class="first docutils literal"><a class="reference internal" href="#eossdkclasseos_1_1acl__key__t"><em><span class="pre">acl_key_t</span></em></a></tt> - <p>The ACL key to modify (name and ACL type) </p>
+</li>
+<li><tt class="first docutils literal"><span class="pre">uint32_t</span></tt> - <p>ACL sequence number (in the range 1..MAXINT) </p>
+</li>
+<li><tt class="first docutils literal"><a class="reference internal" href="#eossdkclasseos_1_1acl__rule__eth__t"><em><span class="pre">acl_rule_eth_t</span></em></a></tt> - <p>ACL rule to set at sequence number </p>
+</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1acl__mgr_1a1404aa66749f93a231671d573cbfae0f"></span>virtual void <tt class="descname">acl_rule_del</tt><big>(</big><a class="reference internal" href="#eossdkclasseos_1_1acl__key__t"><em>acl_key_t</em></a> const &amp;, uint32_t<big>)</big> = 0</dt>
+<dd><p>Removes a rule from an ACL.</p>
+<p>If the ACL key doesn&#8217;t exist, that is a no op. If there is no rule at the sequence number, that is also a no op.</p>
+<p><dl class="docutils">
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><tt class="first docutils literal"><a class="reference internal" href="#eossdkclasseos_1_1acl__key__t"><em><span class="pre">acl_key_t</span></em></a></tt> - <p>The ACL key to modify (name and ACL type) </p>
+</li>
+<li><tt class="first docutils literal"><span class="pre">uint32_t</span></tt> - <p>ACL sequence number to remove </p>
+</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1acl__mgr_1ab960b650788204999f85a34486414c63"></span>virtual void <tt class="descname">acl_commit</tt><big>(</big><big>)</big> = 0</dt>
+<dd><p>Commits all rule changes and application changes made above to all ACLs.</p>
+<p>Pushes ACLs into Sysdb&#8217;s active configuration. This commit cannot fail, but it can lead to a state where not all ACLs can be loaded into hardware. You will be notified via on_acl_sync() when this commit and all other outstanding operations such as interface applications are loaded into hardware, or on_acl_sync_fail() if the newly committed configuration can&#8217;t be loaded. If there are no changes pending and you call this function, you will get one of those callbacks depending on whether the current state in Sysdb can be loaded into hardware or not. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1acl__mgr_1ab99c51211ffa916e43f9912cd548ab06"></span>virtual void <tt class="descname">acl_del</tt><big>(</big><a class="reference internal" href="#eossdkclasseos_1_1acl__key__t"><em>acl_key_t</em></a> const &amp;<big>)</big> = 0</dt>
+<dd><p>Deletes the ACL.</p>
+<p>Removes all rules and removes the ACL from all interfaces. Any pending changes to the ACL are discarded. Is effective immediately (no commit or commit notification). </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1acl__mgr_1aef28779af65243f8a33de1e6199624ce"></span>virtual void <tt class="descname">acl_apply</tt><big>(</big><a class="reference internal" href="#eossdkclasseos_1_1acl__key__t"><em>acl_key_t</em></a> const &amp;, <a class="reference internal" href="intf.html#eossdkclasseos_1_1intf__id__t"><em>intf_id_t</em></a>, acl_direction_t, bool<big>)</big> = 0</dt>
+<dd><p>Requests that an ACL be (un)applied on the given interface and direction.</p>
+<p>ACL is loaded into hardware asynchronously. Like commit(), this function results in a call to your handler when we have applied, or failed to apply, this ACL configuration. That is, you do not get a handler callback per call; you get a handler callback when everything is loaded into hardware, or when we notice problems.</p>
+<p>API call ordering note: any <a class="reference internal" href="#eossdkclasseos_1_1acl__mgr_1a13cdfca982a91e37fa00247051459cb7"><em>acl_rule_set()</em></a> or <a class="reference internal" href="#eossdkclasseos_1_1acl__mgr_1a1404aa66749f93a231671d573cbfae0f"><em>acl_rule_del()</em></a> calls be followed by an <a class="reference internal" href="#eossdkclasseos_1_1acl__mgr_1ab960b650788204999f85a34486414c63"><em>acl_commit()</em></a> prior to calling this function else a panic() will occur. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1acl__mgr_1a2eb1e38de52066ceb21d88ca9addb514"></span>virtual void <tt class="descname">acl_counters_enabled_set</tt><big>(</big><a class="reference internal" href="#eossdkclasseos_1_1acl__key__t"><em>acl_key_t</em></a> const &amp;, bool<big>)</big> = 0</dt>
+<dd><p>Enable or disable counters for the ACL. Note: Must call commit() for setting to apply. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1acl__mgr_1accebf263bec84777b31f1f59ac42b042"></span>virtual void <tt class="descname">acl_fragments_enabled_set</tt><big>(</big><a class="reference internal" href="#eossdkclasseos_1_1acl__key__t"><em>acl_key_t</em></a> const &amp;, bool<big>)</big> = 0</dt>
+<dd><p>Enable or disable fragments matching on the ACL. Note: Must call commit() for setting to apply. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1acl__mgr_1ae7ed3f089ab6c68bfe5f1c00625b996e"></span>virtual bool <tt class="descname">stream_allowed</tt><big>(</big><a class="reference internal" href="ip.html#eossdkclasseos_1_1ip__addr__t"><em>ip_addr_t</em></a> const &amp;, <a class="reference internal" href="ip.html#eossdkclasseos_1_1ip__addr__t"><em>ip_addr_t</em></a> const &amp;, uint8_t = 0, uint16_t = 0, uint16_t = 0<big>)</big> = 0</dt>
+<dd><p>Check a connection against any applied ACL to determine if it should be dropped, incrementing the ACL counter if so. For use with SOCK_STREAM or SOCK_DGRAM.</p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>false if connection should be dropped, true otherwise. </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><tt class="first docutils literal"><a class="reference internal" href="ip.html#eossdkclasseos_1_1ip__addr__t"><em><span class="pre">ip_addr_t</span></em></a></tt> - <p>Source IP address </p>
+</li>
+<li><tt class="first docutils literal"><a class="reference internal" href="ip.html#eossdkclasseos_1_1ip__addr__t"><em><span class="pre">ip_addr_t</span></em></a></tt> - <p>Destination IP address </p>
+</li>
+<li><tt class="first docutils literal"><span class="pre">uint8_t</span></tt> - <p>Protocol (optional) </p>
+</li>
+<li><tt class="first docutils literal"><span class="pre">uint16_t</span></tt> - <p>Source port (optional) </p>
+</li>
+<li><tt class="first docutils literal"><span class="pre">uint16_t</span></tt> - <p>Destination port (optional) </p>
+</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1acl__mgr_1a16d0bb82efe825957cfe8a915897fb10"></span>virtual bool <tt class="descname">dgram_allowed</tt><big>(</big><a class="reference internal" href="ip.html#eossdkclasseos_1_1ip__addr__t"><em>ip_addr_t</em></a> const &amp;, <a class="reference internal" href="ip.html#eossdkclasseos_1_1ip__addr__t"><em>ip_addr_t</em></a> const &amp;, uint16_t, uint16_t, uint8_t, uint8_t, <a class="reference internal" href="intf.html#eossdkclasseos_1_1intf__id__t"><em>intf_id_t</em></a> const &amp;<big>)</big> = 0</dt>
+<dd><p>Check a packet against any applied ACL to determine if it should be dropped, incrementing the ACL counter if so. For use with SOCK_DGRAM only.</p>
+<p><dl class="docutils">
+<dt><strong>Return</strong></dt>
+<dd>false if the packet should be dropped, true otherwise. </dd>
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><tt class="first docutils literal"><a class="reference internal" href="ip.html#eossdkclasseos_1_1ip__addr__t"><em><span class="pre">ip_addr_t</span></em></a></tt> - <p>Source IP address </p>
+</li>
+<li><tt class="first docutils literal"><a class="reference internal" href="ip.html#eossdkclasseos_1_1ip__addr__t"><em><span class="pre">ip_addr_t</span></em></a></tt> - <p>Destination IP address </p>
+</li>
+<li><tt class="first docutils literal"><span class="pre">uint16_t</span></tt> - <p>Source port </p>
+</li>
+<li><tt class="first docutils literal"><span class="pre">uint16_t</span></tt> - <p>Destination port </p>
+</li>
+<li><tt class="first docutils literal"><span class="pre">uint8_t</span></tt> - <p>Time to live (IPv4) or hop limit (IPv6) </p>
+</li>
+<li><tt class="first docutils literal"><span class="pre">uint8_t</span></tt> - <p>Type of service (IPv4) or traffic class (IPv6) </p>
+</li>
+<li><tt class="first docutils literal"><a class="reference internal" href="intf.html#eossdkclasseos_1_1intf__id__t"><em><span class="pre">intf_id_t</span></em></a></tt> - <p>Recipient interface </p>
+</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Protected Functions</p>
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1acl__mgr_1a68cb83e6f5fb16fd2ebf45bf42781d01"></span><tt class="descname">acl_mgr</tt><big>(</big><big>)</big></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Private Members</p>
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1acl__mgr_1abbd2fdcc3258d9e8c05f8ccd15be880d"></span><tt class="descname">acl_mgr</tt></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Friends</p>
+<dl class="friend">
+<dt>
+<span class="target" id="eossdkclasseos_1_1acl__mgr_1a0fc6e2f84c4c0ba29f82c79c88eabe7f"></span>friend class <tt class="descname">acl_handler</tt></dt>
+<dd></dd></dl>
+
+</div>
+</dd></dl>
+
+</dd></dl>
+
+<div class="section" id="type-definitions-in-acl">
+<h2>Type definitions in <strong>acl</strong><a class="headerlink" href="#type-definitions-in-acl" title="Permalink to this headline">¶</a></h2>
+<dl class="namespace">
+<dt>
+<span class="target" id="eossdknamespaceeos"></span><em>namespace</em> <tt class="descname">eos</tt></dt>
+<dd><div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Enums</p>
+<dl class="enum">
+<dt>
+<span class="target" id="eossdknamespaceeos_1a78944d123d42bcc97a9b76e4d01c22fa"></span><strong>Anonymous enum</strong></dt>
+<dd><p><em>Values:</em></p>
+<ul class="breatheenumvalues">
+<li><tt class="first docutils literal"><span class="pre">ALL_ICMP</span></tt><tt class="docutils literal"> <span class="pre">=</span> <span class="pre">=</span> <span class="pre">65535</span></tt> - </li>
+</ul>
+</dd></dl>
+
+<dl class="enum">
+<dt>
+<span class="target" id="eossdknamespaceeos_1aa14d24429a4d913f52bc13477487f6f3"></span><strong>acl_type_t enum</strong></dt>
+<dd><p>The ACL type, of which valid types are either IPv4, IPv6, or Ethernet. </p>
+<p><em>Values:</em></p>
+<ul class="breatheenumvalues">
+<li><tt class="first docutils literal"><span class="pre">ACL_TYPE_NULL</span></tt> - </li>
+<li><tt class="first docutils literal"><span class="pre">ACL_TYPE_IPV4</span></tt> - </li>
+<li><tt class="first docutils literal"><span class="pre">ACL_TYPE_IPV6</span></tt> - </li>
+<li><tt class="first docutils literal"><span class="pre">ACL_TYPE_ETH</span></tt> - </li>
+<li><tt class="first docutils literal"><span class="pre">ACL_TYPE_MPLS</span></tt> - </li>
+</ul>
+</dd></dl>
+
+<dl class="enum">
+<dt>
+<span class="target" id="eossdknamespaceeos_1a3024989970c5f9e0eb55a5963d283eaf"></span><strong>acl_direction_t enum</strong></dt>
+<dd><p>The direction in which an ACL is applied. To apply in both directions, use both operations in order. </p>
+<p><em>Values:</em></p>
+<ul class="breatheenumvalues">
+<li><tt class="first docutils literal"><span class="pre">ACL_DIRECTION_NULL</span></tt> - </li>
+<li><tt class="first docutils literal"><span class="pre">ACL_IN</span></tt> - </li>
+<li><tt class="first docutils literal"><span class="pre">ACL_OUT</span></tt> - </li>
+</ul>
+</dd></dl>
+
+<dl class="enum">
+<dt>
+<span class="target" id="eossdknamespaceeos_1aa1d98bad165adb813e5057d725f83183"></span><strong>acl_range_operator_t enum</strong></dt>
+<dd><p>The type of range operator for TTL and port specifications below. </p>
+<p><em>Values:</em></p>
+<ul class="breatheenumvalues">
+<li><tt class="first docutils literal"><span class="pre">ACL_RANGE_NULL</span></tt> - </li>
+<li><tt class="first docutils literal"><span class="pre">ACL_RANGE_ANY</span></tt> - </li>
+<li><tt class="first docutils literal"><span class="pre">ACL_RANGE_EQ</span></tt> - </li>
+<li><tt class="first docutils literal"><span class="pre">ACL_RANGE_GT</span></tt> - </li>
+<li><tt class="first docutils literal"><span class="pre">ACL_RANGE_LT</span></tt> - </li>
+<li><tt class="first docutils literal"><span class="pre">ACL_RANGE_NEQ</span></tt> - </li>
+<li><tt class="first docutils literal"><span class="pre">ACL_RANGE_BETWEEN</span></tt> - </li>
+</ul>
+</dd></dl>
+
+<dl class="enum">
+<dt>
+<span class="target" id="eossdknamespaceeos_1a4f9d3cd027493eb553bf2ea19d08d6b1"></span><strong>acl_action_t enum</strong></dt>
+<dd><p>The action to take for an individual ACL rule. </p>
+<p><em>Values:</em></p>
+<ul class="breatheenumvalues">
+<li><tt class="first docutils literal"><span class="pre">ACL_ACTION_NULL</span></tt> - </li>
+<li><tt class="first docutils literal"><span class="pre">ACL_PERMIT</span></tt> - </li>
+<li><tt class="first docutils literal"><span class="pre">ACL_DENY</span></tt> - </li>
+</ul>
+</dd></dl>
+
+<dl class="enum">
+<dt>
+<span class="target" id="eossdknamespaceeos_1a6b232d59a0534f6772efa1b5f71d7d35"></span><strong>acl_tcp_flag_t enum</strong></dt>
+<dd><p>TCP flags used in IP rules to specify which TCP flags to match. </p>
+<p><em>Values:</em></p>
+<ul class="breatheenumvalues">
+<li><tt class="first docutils literal"><span class="pre">ACL_TCP_NULL</span></tt> - </li>
+<li><tt class="first docutils literal"><span class="pre">ACL_TCP_FIN</span></tt><tt class="docutils literal"> <span class="pre">=</span> <span class="pre">=</span> <span class="pre">1</span></tt> - </li>
+<li><tt class="first docutils literal"><span class="pre">ACL_TCP_SYN</span></tt><tt class="docutils literal"> <span class="pre">=</span> <span class="pre">=</span> <span class="pre">2</span></tt> - </li>
+<li><tt class="first docutils literal"><span class="pre">ACL_TCP_RST</span></tt><tt class="docutils literal"> <span class="pre">=</span> <span class="pre">=</span> <span class="pre">4</span></tt> - </li>
+<li><tt class="first docutils literal"><span class="pre">ACL_TCP_PSH</span></tt><tt class="docutils literal"> <span class="pre">=</span> <span class="pre">=</span> <span class="pre">8</span></tt> - </li>
+<li><tt class="first docutils literal"><span class="pre">ACL_TCP_ACK</span></tt><tt class="docutils literal"> <span class="pre">=</span> <span class="pre">=</span> <span class="pre">16</span></tt> - </li>
+<li><tt class="first docutils literal"><span class="pre">ACL_TCP_URG</span></tt><tt class="docutils literal"> <span class="pre">=</span> <span class="pre">=</span> <span class="pre">32</span></tt> - </li>
+</ul>
+</dd></dl>
+
+</div>
+<dl class="class">
+<dt>
+<span class="target" id="eossdkclasseos_1_1acl__ttl__spec__t"></span><em>class</em> <tt class="descname">acl_ttl_spec_t</tt></dt>
+<dd><em>#include &lt;acl.h&gt;</em><p>A TTL specifier, used in an IP ACL rule to define TTLs to match.</p>
+<p>Create an instance of the classes below, such as a acl_ttl_spec_gt_t to specify matching TTLs greater than the value passed. </p>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1acl__ttl__spec__t_1ac3d74ed88c0c371985320181de558a33"></span><tt class="descname">acl_ttl_spec_t</tt><big>(</big><big>)</big></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1acl__ttl__spec__t_1af770a2369428337a94445ba048965415"></span><tt class="descname">acl_ttl_spec_t</tt><big>(</big>acl_range_operator_t <em>oper</em>, uint8_t <em>ttl</em><big>)</big></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1acl__ttl__spec__t_1a6a18f2c7aa989a0b96debb9389e55b7b"></span>acl_range_operator_t <tt class="descname">oper</tt><big>(</big><big>)</big> const</dt>
+<dd><p>Getter for &#8216;oper&#8217;: the type of range, note, BETWEEN is not supported. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1acl__ttl__spec__t_1a49a441d8daca27ca361aa3bde87870f2"></span>void <tt class="descname">oper_is</tt><big>(</big>acl_range_operator_t <em>oper</em><big>)</big></dt>
+<dd><p>Setter for &#8216;oper&#8217;. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1acl__ttl__spec__t_1a3d10d8d5d8b44c27dc53925e11f1ee9d"></span>uint8_t <tt class="descname">ttl</tt><big>(</big><big>)</big> const</dt>
+<dd><p>Getter for &#8216;ttl&#8217;: the type of range, note, BETWEEN is not supported. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1acl__ttl__spec__t_1a9931af09563597ed358e860434ce9d0b"></span>void <tt class="descname">ttl_is</tt><big>(</big>uint8_t <em>ttl</em><big>)</big></dt>
+<dd><p>Setter for &#8216;ttl&#8217;. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1acl__ttl__spec__t_1ae80adca1c88ea4d62dd95f59dbf6f958"></span>bool <tt class="descname">operator==</tt><big>(</big><a class="reference internal" href="#eossdkclasseos_1_1acl__ttl__spec__t"><em>acl_ttl_spec_t</em></a> const &amp; <em>other</em><big>)</big> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1acl__ttl__spec__t_1a6fa7cd637cc49e814a1651e2a66cf943"></span>bool <tt class="descname">operator!=</tt><big>(</big><a class="reference internal" href="#eossdkclasseos_1_1acl__ttl__spec__t"><em>acl_ttl_spec_t</em></a> const &amp; <em>other</em><big>)</big> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1acl__ttl__spec__t_1a6f6424d885040d0a12e52b9c98295da2"></span>bool <tt class="descname">operator&lt;</tt><big>(</big><a class="reference internal" href="#eossdkclasseos_1_1acl__ttl__spec__t"><em>acl_ttl_spec_t</em></a> const &amp; <em>other</em><big>)</big> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1acl__ttl__spec__t_1a8751a0820dcaa3063ca41fe661639409"></span>uint32_t <tt class="descname">hash</tt><big>(</big><big>)</big> const</dt>
+<dd><p>The hash function for type <a class="reference internal" href="#eossdkclasseos_1_1acl__ttl__spec__t"><em>acl_ttl_spec_t</em></a>. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1acl__ttl__spec__t_1a564e8bc374bbf00855a1b24d66b62b09"></span>std::string <tt class="descname">to_string</tt><big>(</big><big>)</big> const</dt>
+<dd><p>Returns a string representation of the current object&#8217;s values. </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Protected Attributes</p>
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1acl__ttl__spec__t_1af6ffad388f9c2b4070cac82b040e942e"></span>acl_range_operator_t <tt class="descname">oper_</tt></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1acl__ttl__spec__t_1a7cc30d5cdffa42d713877eab6b413469"></span>uint8_t <tt class="descname">ttl_</tt></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Friends</p>
+<dl class="friend">
+<dt>
+<span class="target" id="eossdkclasseos_1_1acl__ttl__spec__t_1a6963598e52737668ba25acaf7e4594aa"></span>friend class <tt class="descname">acl_internal</tt></dt>
+<dd></dd></dl>
+
+<dl class="friend">
+<dt>
+<span class="target" id="eossdkclasseos_1_1acl__ttl__spec__t_1afde8275c7d21feff6a134b0d1444c656"></span>friend std::ostream &amp; <tt class="descname">operator&lt;&lt;</tt></dt>
+<dd><p>A utility stream operator that adds a string representation of <a class="reference internal" href="#eossdkclasseos_1_1acl__ttl__spec__t"><em>acl_ttl_spec_t</em></a> to the ostream. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="class">
+<dt>
+<span class="target" id="eossdkclasseos_1_1acl__port__spec__t"></span><em>class</em> <tt class="descname">acl_port_spec_t</tt></dt>
+<dd><em>#include &lt;acl.h&gt;</em><p>A UDP or TCP port specifier.</p>
+<p>Pick one of either:<ul class="simple">
+<li>acl_port_spec_eq_t : Matches 1-10 port numbers.</li>
+<li>acl_port_spec_neq_t : Doesn&#8217;t match these 1-10 ports.</li>
+<li>acl_port_spec_lt_t : Matches ports less than the value.</li>
+<li>acl_port_spec_gt_t : Matches ports greater than the value.</li>
+<li>acl_port_spec_between_t : Matches ports between the two values. </li>
+</ul>
+</p>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1acl__port__spec__t_1a89c99ddaf3d4e236d2d678e837cc6ec5"></span><tt class="descname">acl_port_spec_t</tt><big>(</big><big>)</big></dt>
+<dd><p>Default constructor, matches any port. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1acl__port__spec__t_1a81912fb3f20e3afda877f4496028e6a3"></span><tt class="descname">acl_port_spec_t</tt><big>(</big>acl_range_operator_t <em>oper</em>, std::list&lt; uint16_t &gt; const &amp; <em>ports</em><big>)</big></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1acl__port__spec__t_1a6c87a15291158fc874c5effa65a661bf"></span>acl_range_operator_t <tt class="descname">oper</tt><big>(</big><big>)</big> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1acl__port__spec__t_1a966851232009361599dd737562d15bbc"></span>void <tt class="descname">oper_is</tt><big>(</big>acl_range_operator_t <em>oper</em><big>)</big></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1acl__port__spec__t_1ae53c6d62c15388cf728d97e397b6e62c"></span>std::list&lt; uint16_t &gt; const &amp; <tt class="descname">ports</tt><big>(</big><big>)</big> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1acl__port__spec__t_1a641b35fe465f71f5542637fcb3dfc84c"></span>void <tt class="descname">ports_is</tt><big>(</big>std::list&lt; uint16_t &gt; const &amp; <em>ports</em><big>)</big></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1acl__port__spec__t_1ab2cd5759eec8172cc3d448e3b084afba"></span>void <tt class="descname">port_set</tt><big>(</big>uint16_t const &amp; <em>ports</em><big>)</big></dt>
+<dd><p>Prepend one port to the list. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1acl__port__spec__t_1ae1fe356c5a54ce197a5ac7ce9c993930"></span>void <tt class="descname">port_del</tt><big>(</big>uint16_t const &amp; <em>ports</em><big>)</big></dt>
+<dd><p>Remove all matching port elements. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1acl__port__spec__t_1a61a8dffb726704238a0fc9c641d5f902"></span>bool <tt class="descname">operator==</tt><big>(</big><a class="reference internal" href="#eossdkclasseos_1_1acl__port__spec__t"><em>acl_port_spec_t</em></a> const &amp; <em>other</em><big>)</big> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1acl__port__spec__t_1aefe39dd45f9ee0ecf42c5d945a3e8110"></span>bool <tt class="descname">operator!=</tt><big>(</big><a class="reference internal" href="#eossdkclasseos_1_1acl__port__spec__t"><em>acl_port_spec_t</em></a> const &amp; <em>other</em><big>)</big> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1acl__port__spec__t_1a7ff4ef0152209c9c104d79ddee498030"></span>bool <tt class="descname">operator&lt;</tt><big>(</big><a class="reference internal" href="#eossdkclasseos_1_1acl__port__spec__t"><em>acl_port_spec_t</em></a> const &amp; <em>other</em><big>)</big> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1acl__port__spec__t_1a18b2de582c3941d1d03652555d5723f4"></span>uint32_t <tt class="descname">hash</tt><big>(</big><big>)</big> const</dt>
+<dd><p>The hash function for type <a class="reference internal" href="#eossdkclasseos_1_1acl__port__spec__t"><em>acl_port_spec_t</em></a>. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1acl__port__spec__t_1ad53d540042d4e6410f7752fb5daf9e19"></span>std::string <tt class="descname">to_string</tt><big>(</big><big>)</big> const</dt>
+<dd><p>Returns a string representation of the current object&#8217;s values. </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Protected Attributes</p>
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1acl__port__spec__t_1a0d6aedfae3ec2994cb7494caa1dff3d1"></span>acl_range_operator_t <tt class="descname">oper_</tt></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1acl__port__spec__t_1aa14e97e04721b1e872fee3d6c65f5914"></span>std::list&lt; uint16_t &gt; <tt class="descname">ports_</tt></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Friends</p>
+<dl class="friend">
+<dt>
+<span class="target" id="eossdkclasseos_1_1acl__port__spec__t_1a6963598e52737668ba25acaf7e4594aa"></span>friend class <tt class="descname">acl_internal</tt></dt>
+<dd></dd></dl>
+
+<dl class="friend">
+<dt>
+<span class="target" id="eossdkclasseos_1_1acl__port__spec__t_1a0f6a651014f626e4335eabf8928b9ae0"></span>friend std::ostream &amp; <tt class="descname">operator&lt;&lt;</tt></dt>
+<dd><p>A utility stream operator that adds a string representation of <a class="reference internal" href="#eossdkclasseos_1_1acl__port__spec__t"><em>acl_port_spec_t</em></a> to the ostream. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="class">
+<dt>
+<span class="target" id="eossdkclasseos_1_1acl__key__t"></span><em>class</em> <tt class="descname">acl_key_t</tt></dt>
+<dd><em>#include &lt;acl.h&gt;</em><p>An ACL key is the combination of its name and ACL type (IPv4, IPv6 or ETH). </p>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1acl__key__t_1a6f4616e7080b41a4ca3f20bedfa8ac83"></span><tt class="descname">acl_key_t</tt><big>(</big><big>)</big></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1acl__key__t_1aa6845cf15109d06a343ba0e1e146e5e8"></span><tt class="descname">acl_key_t</tt><big>(</big>std::string const &amp; <em>acl_name</em>, acl_type_t <em>acl_type</em><big>)</big></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1acl__key__t_1afc7577f9a0be7f3ea50b08db2fa52d41"></span>std::string <tt class="descname">acl_name</tt><big>(</big><big>)</big> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1acl__key__t_1a8a2ae246bced32557ffcd480eb20e57f"></span>acl_type_t <tt class="descname">acl_type</tt><big>(</big><big>)</big> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1acl__key__t_1a30fb04e600be94c376cae20da7d4d5b7"></span>bool <tt class="descname">operator()</tt><big>(</big><a class="reference internal" href="#eossdkclasseos_1_1acl__key__t"><em>acl_key_t</em></a> const &amp; <em>lhs</em>, <a class="reference internal" href="#eossdkclasseos_1_1acl__key__t"><em>acl_key_t</em></a> const &amp; <em>rhs</em><big>)</big> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1acl__key__t_1afe154d8e5feef729ab5c6aa59d70ff76"></span>bool <tt class="descname">operator==</tt><big>(</big><a class="reference internal" href="#eossdkclasseos_1_1acl__key__t"><em>acl_key_t</em></a> const &amp; <em>other</em><big>)</big> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1acl__key__t_1a5d13b804615c6d3448206b264ea6adcd"></span>bool <tt class="descname">operator!=</tt><big>(</big><a class="reference internal" href="#eossdkclasseos_1_1acl__key__t"><em>acl_key_t</em></a> const &amp; <em>other</em><big>)</big> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1acl__key__t_1a82acb836b28ac7c9d31a2810d9d880e0"></span>uint32_t <tt class="descname">hash</tt><big>(</big><big>)</big> const</dt>
+<dd><p>The hash function for type <a class="reference internal" href="#eossdkclasseos_1_1acl__key__t"><em>acl_key_t</em></a>. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1acl__key__t_1ae31a029ebc865e7284d22eca108b74b1"></span>std::string <tt class="descname">to_string</tt><big>(</big><big>)</big> const</dt>
+<dd><p>Returns a string representation of the current object&#8217;s values. </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Private Members</p>
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1acl__key__t_1a24a2de9924f131813fa7563f252441c2"></span>std::string <tt class="descname">acl_name_</tt></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1acl__key__t_1a44d5d29d1b3c37dff4baf4d7b3c566d2"></span>acl_type_t <tt class="descname">acl_type_</tt></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Friends</p>
+<dl class="friend">
+<dt>
+<span class="target" id="eossdkclasseos_1_1acl__key__t_1ac592394b970679ce68ecc9138dbdab60"></span>friend std::ostream &amp; <tt class="descname">operator&lt;&lt;</tt></dt>
+<dd><p>A utility stream operator that adds a string representation of <a class="reference internal" href="#eossdkclasseos_1_1acl__key__t"><em>acl_key_t</em></a> to the ostream. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="class">
+<dt>
+<span class="target" id="eossdkclasseos_1_1acl__rule__base__t"></span><em>class</em> <tt class="descname">acl_rule_base_t</tt></dt>
+<dd><em>#include &lt;acl.h&gt;</em><p>Following are classes that represent access lists (ACLs). Access lists are sequences of rules specifying per-packet rules filters apply to either IPv4, IPv6 or ETH (layer 2) traffic and are attached to traffic arriving (in) or leaving (out) on zero or more interfaces.</p>
+<p>To use ACL rules in these libraries, construct the appropriate concrete type of rule you desire, either a:<ul class="simple">
+<li><a class="reference internal" href="#eossdkclasseos_1_1acl__rule__ip__t"><em>acl_rule_ip_t</em></a> or a</li>
+<li><a class="reference internal" href="#eossdkclasseos_1_1acl__rule__eth__t"><em>acl_rule_eth_t</em></a></li>
+</ul>
+</p>
+<p>Base parameters common to all filter types are defined on the parent acl_base_filter_t, such as &#8220;log&#8221; to enable logging of packets matching the rule, and the action applied to packets matching the rule.</p>
+<p>Base ACL rule class containing common fields. Instead of this, instantiate one of the concrete rule classes. </p>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1acl__rule__base__t_1a8062b8b32259e6e6058bcbb3a68e041a"></span>acl_action_t <tt class="descname">action</tt><big>(</big><big>)</big> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1acl__rule__base__t_1ab84ef9450b8196caf4080cabea2ecbda"></span>void <tt class="descname">action_is</tt><big>(</big>acl_action_t <em>action</em><big>)</big></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1acl__rule__base__t_1a44f03ebdf16ab26c3b3ac34ec4eeef48"></span>bool <tt class="descname">log</tt><big>(</big><big>)</big> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1acl__rule__base__t_1a7bbe59f18946aabc1a24d924cdeb47a8"></span>void <tt class="descname">log_is</tt><big>(</big>bool <em>log</em><big>)</big></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1acl__rule__base__t_1a169c7befb0347ae86c4c86ea405d455a"></span>bool <tt class="descname">tracked</tt><big>(</big><big>)</big> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1acl__rule__base__t_1a272c68e021fbc30cf08cb6b5e1868f96"></span>void <tt class="descname">tracked_is</tt><big>(</big>bool <em>tracked</em><big>)</big></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1acl__rule__base__t_1af1a67571705624cd43879567f5b0f2f4"></span>uint32_t <tt class="descname">hash</tt><big>(</big><big>)</big> const</dt>
+<dd><p>The hash function for type <a class="reference internal" href="#eossdkclasseos_1_1acl__rule__base__t"><em>acl_rule_base_t</em></a>. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1acl__rule__base__t_1af56ca366c5c6a37af9446ffb551f5f4d"></span>std::string <tt class="descname">to_string</tt><big>(</big><big>)</big> const</dt>
+<dd><p>Returns a string representation of the current object&#8217;s values. </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Protected Functions</p>
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1acl__rule__base__t_1a6b7d43f734bb983bd72aabdc55bfd1e9"></span><tt class="descname">acl_rule_base_t</tt><big>(</big><big>)</big></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Private Members</p>
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1acl__rule__base__t_1a5fb81e8ede1f75037941ab6bb4fef39e"></span>acl_action_t <tt class="descname">action_</tt></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1acl__rule__base__t_1a0cda851b2f4762f5caeba887b5d8c16b"></span>bool <tt class="descname">log_</tt></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1acl__rule__base__t_1aff9d2a4d623d586c0c3b28a3ab1fb110"></span>bool <tt class="descname">tracked_</tt></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Friends</p>
+<dl class="friend">
+<dt>
+<span class="target" id="eossdkclasseos_1_1acl__rule__base__t_1aeafc1d88bdb0c260ed2aad19c2df12e3"></span>friend std::ostream &amp; <tt class="descname">operator&lt;&lt;</tt></dt>
+<dd><p>A utility stream operator that adds a string representation of <a class="reference internal" href="#eossdkclasseos_1_1acl__rule__base__t"><em>acl_rule_base_t</em></a> to the ostream. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="class">
+<dt>
+<span class="target" id="eossdkclasseos_1_1acl__rule__ip__t"></span><em>class</em> <tt class="descname">acl_rule_ip_t</tt></dt>
+<dd><em>#include &lt;acl.h&gt;</em><p>An individual ACL rule for IPv4 or IPv6 ACLs. </p>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1acl__rule__ip__t_1a86e2b87cf97acb6bab9e0b09d4fa64fc"></span><tt class="descname">acl_rule_ip_t</tt><big>(</big><big>)</big></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1acl__rule__ip__t_1a74625d3ae8d37319b0d65d934c835e11"></span>vlan_id_t <tt class="descname">vlan</tt><big>(</big><big>)</big> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1acl__rule__ip__t_1a5d62d6f19b6919b0873730673160a9a1"></span>void <tt class="descname">vlan_is</tt><big>(</big>vlan_id_t <em>vlan</em><big>)</big></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1acl__rule__ip__t_1a75b9b136190bc55c383881f59cd9b8fa"></span>vlan_id_t <tt class="descname">vlan_mask</tt><big>(</big><big>)</big> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1acl__rule__ip__t_1ac174cf696eaa36da0ce991d8870b1576"></span>void <tt class="descname">vlan_mask_is</tt><big>(</big>vlan_id_t <em>vlan_mask</em><big>)</big></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1acl__rule__ip__t_1a5c432bf551ac1e0188e03a38a53c6e20"></span>vlan_id_t <tt class="descname">inner_vlan</tt><big>(</big><big>)</big> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1acl__rule__ip__t_1a8c2760036cb7a5f715c4436c158549cf"></span>void <tt class="descname">inner_vlan_is</tt><big>(</big>vlan_id_t <em>inner_vlan</em><big>)</big></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1acl__rule__ip__t_1a0a15b6b5fd4377e5a500145aab4bde5a"></span>vlan_id_t <tt class="descname">inner_vlan_mask</tt><big>(</big><big>)</big> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1acl__rule__ip__t_1adcf25c9712ba1f95c94cb08659d4a6e3"></span>void <tt class="descname">inner_vlan_mask_is</tt><big>(</big>vlan_id_t <em>inner_vlan_mask</em><big>)</big></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1acl__rule__ip__t_1a7d60cbfba02a7d4daf59bac66d0cec97"></span>uint8_t <tt class="descname">ip_protocol</tt><big>(</big><big>)</big> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1acl__rule__ip__t_1ab31d83c1eb81039ef5cff2b956964c7a"></span>void <tt class="descname">ip_protocol_is</tt><big>(</big>uint8_t <em>ip_protocol</em><big>)</big></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1acl__rule__ip__t_1aef69634adf6311e5b0093b63880fab12"></span><a class="reference internal" href="#eossdkclasseos_1_1acl__ttl__spec__t"><em>acl_ttl_spec_t</em></a> <tt class="descname">ttl</tt><big>(</big><big>)</big> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1acl__rule__ip__t_1a305fdadbf3a1e928f26577e21e792ef6"></span>void <tt class="descname">ttl_is</tt><big>(</big><a class="reference internal" href="#eossdkclasseos_1_1acl__ttl__spec__t"><em>acl_ttl_spec_t</em></a> <em>ttl</em><big>)</big></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1acl__rule__ip__t_1a873fd0fda91cfdd8e074a7bfe4a7a4b4"></span><a class="reference internal" href="ip.html#eossdkclasseos_1_1ip__addr__mask__t"><em>ip_addr_mask_t</em></a> <tt class="descname">source_addr</tt><big>(</big><big>)</big> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1acl__rule__ip__t_1a6c8af20b93fa9aef68012b6178780f4f"></span>void <tt class="descname">source_addr_is</tt><big>(</big><a class="reference internal" href="ip.html#eossdkclasseos_1_1ip__addr__mask__t"><em>ip_addr_mask_t</em></a> const &amp; <em>source_addr</em><big>)</big></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1acl__rule__ip__t_1ae34a3fb114f07d7fa07fd28948c3c752"></span><a class="reference internal" href="ip.html#eossdkclasseos_1_1ip__addr__mask__t"><em>ip_addr_mask_t</em></a> <tt class="descname">destination_addr</tt><big>(</big><big>)</big> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1acl__rule__ip__t_1a77e2d76b647fdb9f65743f6ad9e7bdff"></span>void <tt class="descname">destination_addr_is</tt><big>(</big><a class="reference internal" href="ip.html#eossdkclasseos_1_1ip__addr__mask__t"><em>ip_addr_mask_t</em></a> const &amp; <em>destination_addr</em><big>)</big></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1acl__rule__ip__t_1ad5c909e2f4f2d8193a1b6c1051117dcf"></span><a class="reference internal" href="#eossdkclasseos_1_1acl__port__spec__t"><em>acl_port_spec_t</em></a> <tt class="descname">source_port</tt><big>(</big><big>)</big> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1acl__rule__ip__t_1ab41663020e81c0cb863fbb157874bef7"></span>void <tt class="descname">source_port_is</tt><big>(</big><a class="reference internal" href="#eossdkclasseos_1_1acl__port__spec__t"><em>acl_port_spec_t</em></a> <em>source_port</em><big>)</big></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1acl__rule__ip__t_1a09b70b1b12424eaa74dd8054a75ce22f"></span><a class="reference internal" href="#eossdkclasseos_1_1acl__port__spec__t"><em>acl_port_spec_t</em></a> <tt class="descname">destination_port</tt><big>(</big><big>)</big> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1acl__rule__ip__t_1a6996b9e44885af129dca4574d503f510"></span>void <tt class="descname">destination_port_is</tt><big>(</big><a class="reference internal" href="#eossdkclasseos_1_1acl__port__spec__t"><em>acl_port_spec_t</em></a> <em>destination_port</em><big>)</big></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1acl__rule__ip__t_1abf5f1ce3e8acb85a6da29fe0a97b834d"></span>std::string <tt class="descname">nexthop_group</tt><big>(</big><big>)</big> const</dt>
+<dd><p>Getter for &#8216;nexthop_group&#8217;: match nexthop-group in the FIB lookup result. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1acl__rule__ip__t_1ae15671100b3c50b71412b1c4f5374358"></span>void <tt class="descname">nexthop_group_is</tt><big>(</big>std::string <em>nexthop_group</em><big>)</big></dt>
+<dd><p>Setter for &#8216;nexthop_group&#8217;. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1acl__rule__ip__t_1a671c277f5e99a8186e75c550ddb5a749"></span>uint16_t <tt class="descname">tcp_flags</tt><big>(</big><big>)</big> const</dt>
+<dd><p>Getter for &#8216;tcp_flags&#8217;: bitmask of TCP flags to match, if set. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1acl__rule__ip__t_1a018355b22e1ec0059536d6ca0d0bc0fa"></span>void <tt class="descname">tcp_flags_is</tt><big>(</big>uint16_t <em>tcp_flags</em><big>)</big></dt>
+<dd><p>Setter for &#8216;tcp_flags&#8217;. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1acl__rule__ip__t_1aa745fd6b2097f11beab8b6d1231a3818"></span>bool <tt class="descname">established</tt><big>(</big><big>)</big> const</dt>
+<dd><p>Getter for &#8216;established&#8217;: match &#8220;established&#8221; connections. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1acl__rule__ip__t_1ab779527560fc3872eb410f20fea25648"></span>void <tt class="descname">established_is</tt><big>(</big>bool <em>established</em><big>)</big></dt>
+<dd><p>Setter for &#8216;established&#8217;. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1acl__rule__ip__t_1aca469647a8ea526ae83f84dfce1e9d44"></span>uint16_t <tt class="descname">icmp_type</tt><big>(</big><big>)</big> const</dt>
+<dd><p>Getter for &#8216;icmp_type&#8217;: match a specific ICMP type and code, the default value 0xFFFF matches all types or codes. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1acl__rule__ip__t_1a4db714437025748b5f29e473181dabd7"></span>void <tt class="descname">icmp_type_is</tt><big>(</big>uint16_t <em>icmp_type</em><big>)</big></dt>
+<dd><p>Setter for &#8216;icmp_type&#8217;. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1acl__rule__ip__t_1ac9e97451162931aee32cf56c6bce0d0f"></span>uint16_t <tt class="descname">icmp_code</tt><big>(</big><big>)</big> const</dt>
+<dd><p>Getter for &#8216;icmp_code&#8217;: match a specific ICMP type and code. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1acl__rule__ip__t_1aa0d5a82c568d8bc3e9fa315a8c08eff1"></span>void <tt class="descname">icmp_code_is</tt><big>(</big>uint16_t <em>icmp_code</em><big>)</big></dt>
+<dd><p>Setter for &#8216;icmp_code&#8217;. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1acl__rule__ip__t_1ac8ab145036dc275aff5c5de0a52b10ba"></span>uint8_t <tt class="descname">priority_value</tt><big>(</big><big>)</big> const</dt>
+<dd><p>Getter for &#8216;priority_value&#8217;: 0..63, DSCP match to value (IPv4); traffic class (IPv6). </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1acl__rule__ip__t_1a21b57e720f2229408cf66c5ea30e76de"></span>void <tt class="descname">priority_value_is</tt><big>(</big>uint8_t <em>priority_value</em><big>)</big></dt>
+<dd><p>Setter for &#8216;priority_value&#8217;. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1acl__rule__ip__t_1a23cf3cb0f7e55270c9b26d734baa8a1e"></span>uint8_t <tt class="descname">priority_mask</tt><big>(</big><big>)</big> const</dt>
+<dd><p>Getter for &#8216;priority_mask&#8217;: 0..63 for IPv4; 0..255 for IPv6. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1acl__rule__ip__t_1a1cf7974329fe4deb370c2d945ec6335d"></span>void <tt class="descname">priority_mask_is</tt><big>(</big>uint8_t <em>priority_mask</em><big>)</big></dt>
+<dd><p>Setter for &#8216;priority_mask&#8217;. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1acl__rule__ip__t_1a96e1ffcf8bb1748bf41cc6ef1d62c6b3"></span>bool <tt class="descname">match_fragments</tt><big>(</big><big>)</big> const</dt>
+<dd><p>Getter for &#8216;match_fragments&#8217;: match IP fragments. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1acl__rule__ip__t_1af68862b2c9e2224b5d03eda0c0145081"></span>void <tt class="descname">match_fragments_is</tt><big>(</big>bool <em>match_fragments</em><big>)</big></dt>
+<dd><p>Setter for &#8216;match_fragments&#8217;. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1acl__rule__ip__t_1a47d3179572234d09a1c5140be4dd27d5"></span>bool <tt class="descname">match_ip_priority</tt><big>(</big><big>)</big> const</dt>
+<dd><p>Getter for &#8216;match_ip_priority&#8217;: match DSCP (IPv4) or TE (IPv6) data provided in priority_{value,mask}. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1acl__rule__ip__t_1a039a1541563066513b050510d417d2da"></span>void <tt class="descname">match_ip_priority_is</tt><big>(</big>bool <em>match_ip_priority</em><big>)</big></dt>
+<dd><p>Setter for &#8216;match_ip_priority&#8217;. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1acl__rule__ip__t_1aba730c7244a231c241cac7134b644fb3"></span>bool <tt class="descname">operator==</tt><big>(</big><a class="reference internal" href="#eossdkclasseos_1_1acl__rule__ip__t"><em>acl_rule_ip_t</em></a> const &amp; <em>other</em><big>)</big> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1acl__rule__ip__t_1afb8b1ba53ff97d604d0bf24ee83bcbed"></span>bool <tt class="descname">operator!=</tt><big>(</big><a class="reference internal" href="#eossdkclasseos_1_1acl__rule__ip__t"><em>acl_rule_ip_t</em></a> const &amp; <em>other</em><big>)</big> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1acl__rule__ip__t_1ad7b9ada700bca7d22594da8ff352e884"></span>bool <tt class="descname">operator&lt;</tt><big>(</big><a class="reference internal" href="#eossdkclasseos_1_1acl__rule__ip__t"><em>acl_rule_ip_t</em></a> const &amp; <em>other</em><big>)</big> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1acl__rule__ip__t_1a458b26c2baf9bee5537418b691877014"></span>uint32_t <tt class="descname">hash</tt><big>(</big><big>)</big> const</dt>
+<dd><p>The hash function for type <a class="reference internal" href="#eossdkclasseos_1_1acl__rule__ip__t"><em>acl_rule_ip_t</em></a>. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1acl__rule__ip__t_1a2911c10e65f361565c94046e3bf98613"></span>std::string <tt class="descname">to_string</tt><big>(</big><big>)</big> const</dt>
+<dd><p>Returns a string representation of the current object&#8217;s values. </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Private Members</p>
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1acl__rule__ip__t_1a0a6bfe9e4633003ea6e73c6110d4eba4"></span>vlan_id_t <tt class="descname">vlan_</tt></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1acl__rule__ip__t_1a38bd0b583d9d2e8c28e5e6921629096e"></span>vlan_id_t <tt class="descname">vlan_mask_</tt></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1acl__rule__ip__t_1a963ec282d72821ae73a80f58881be88d"></span>vlan_id_t <tt class="descname">inner_vlan_</tt></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1acl__rule__ip__t_1a6d986c05362541f161934982d69707b7"></span>vlan_id_t <tt class="descname">inner_vlan_mask_</tt></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1acl__rule__ip__t_1ae4f95a2ab279020cca98906a71e0bce3"></span>uint8_t <tt class="descname">ip_protocol_</tt></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1acl__rule__ip__t_1a346b422b58d44bec1d92732fa75d7d4a"></span><a class="reference internal" href="#eossdkclasseos_1_1acl__ttl__spec__t"><em>acl_ttl_spec_t</em></a> <tt class="descname">ttl_</tt></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1acl__rule__ip__t_1a9b38a51c5ba1eb7567ef3ee7674eb41d"></span><a class="reference internal" href="ip.html#eossdkclasseos_1_1ip__addr__mask__t"><em>ip_addr_mask_t</em></a> <tt class="descname">source_addr_</tt></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1acl__rule__ip__t_1abb621ca0d65e0130bed474481c0200ed"></span><a class="reference internal" href="ip.html#eossdkclasseos_1_1ip__addr__mask__t"><em>ip_addr_mask_t</em></a> <tt class="descname">destination_addr_</tt></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1acl__rule__ip__t_1a5065b7173bd2d2c907f7fa9659f6e821"></span><a class="reference internal" href="#eossdkclasseos_1_1acl__port__spec__t"><em>acl_port_spec_t</em></a> <tt class="descname">source_port_</tt></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1acl__rule__ip__t_1a2393c462ba829b080095747ba8e9b6e7"></span><a class="reference internal" href="#eossdkclasseos_1_1acl__port__spec__t"><em>acl_port_spec_t</em></a> <tt class="descname">destination_port_</tt></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1acl__rule__ip__t_1aa256ec3857c481555a29026585f10155"></span>std::string <tt class="descname">nexthop_group_</tt></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1acl__rule__ip__t_1a7fd7b73f1f1cfc023c7fafa755669185"></span>uint16_t <tt class="descname">tcp_flags_</tt></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1acl__rule__ip__t_1ad1cd02f358f35ba5c36104a23f584129"></span>bool <tt class="descname">established_</tt></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1acl__rule__ip__t_1acfa00c74f8834252a481f48521649b70"></span>uint16_t <tt class="descname">icmp_type_</tt></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1acl__rule__ip__t_1a14ea6c7844efee33226824ec856948f5"></span>uint16_t <tt class="descname">icmp_code_</tt></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1acl__rule__ip__t_1a4efeb067d738545af1dd050bf30b503a"></span>uint8_t <tt class="descname">priority_value_</tt></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1acl__rule__ip__t_1a71219ac4b5c083a8c722549db5b31d0d"></span>uint8_t <tt class="descname">priority_mask_</tt></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1acl__rule__ip__t_1acb7090c6d8300c769d65a783db648654"></span>bool <tt class="descname">match_fragments_</tt></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1acl__rule__ip__t_1ab605a1dec0ae94f94ae17df13a6514b0"></span>bool <tt class="descname">match_ip_priority_</tt></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Friends</p>
+<dl class="friend">
+<dt>
+<span class="target" id="eossdkclasseos_1_1acl__rule__ip__t_1aab3110636599d43ce7cd574019b3c047"></span>friend std::ostream &amp; <tt class="descname">operator&lt;&lt;</tt></dt>
+<dd><p>A utility stream operator that adds a string representation of <a class="reference internal" href="#eossdkclasseos_1_1acl__rule__ip__t"><em>acl_rule_ip_t</em></a> to the ostream. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="class">
+<dt>
+<span class="target" id="eossdkclasseos_1_1acl__rule__eth__t"></span><em>class</em> <tt class="descname">acl_rule_eth_t</tt></dt>
+<dd><em>#include &lt;acl.h&gt;</em><p>An Ethernet ACL, which can be applied to Ethernet, Vlan, and MLAG interfaces. </p>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1acl__rule__eth__t_1acce960417642180970059dc1ca784bc8"></span><tt class="descname">acl_rule_eth_t</tt><big>(</big><big>)</big></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1acl__rule__eth__t_1a761ddbf2a4683c07b74a0cd389de217b"></span>vlan_id_t <tt class="descname">vlan</tt><big>(</big><big>)</big> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1acl__rule__eth__t_1a07fc872bcfd4b617a8a2a074667ec209"></span>void <tt class="descname">vlan_is</tt><big>(</big>vlan_id_t <em>vlan</em><big>)</big></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1acl__rule__eth__t_1a36a6a81596e07c264621721ca55a2458"></span>vlan_id_t <tt class="descname">vlan_mask</tt><big>(</big><big>)</big> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1acl__rule__eth__t_1a234edff4f95a2895d24f50d7e7932f6f"></span>void <tt class="descname">vlan_mask_is</tt><big>(</big>vlan_id_t <em>vlan_mask</em><big>)</big></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1acl__rule__eth__t_1a9bba3a7aea1f33c3f294640912dd8b5e"></span>vlan_id_t <tt class="descname">inner_vlan</tt><big>(</big><big>)</big> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1acl__rule__eth__t_1ab4bb171b6396c50cd3c0d1ad04bdb9c7"></span>void <tt class="descname">inner_vlan_is</tt><big>(</big>vlan_id_t <em>inner_vlan</em><big>)</big></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1acl__rule__eth__t_1a3d2a9bd75e2267b17d0a5da306fc00bb"></span>vlan_id_t <tt class="descname">inner_vlan_mask</tt><big>(</big><big>)</big> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1acl__rule__eth__t_1a36e9d556e17b3bc722533439e69ab09d"></span>void <tt class="descname">inner_vlan_mask_is</tt><big>(</big>vlan_id_t <em>inner_vlan_mask</em><big>)</big></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1acl__rule__eth__t_1ada9c823b65085ab0717f4663d32765de"></span><a class="reference internal" href="eth.html#eossdkclasseos_1_1eth__addr__t"><em>eth_addr_t</em></a> <tt class="descname">source_addr</tt><big>(</big><big>)</big> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1acl__rule__eth__t_1ae04feb8e75b25a1393c4f5b5925eec4a"></span>void <tt class="descname">source_addr_is</tt><big>(</big><a class="reference internal" href="eth.html#eossdkclasseos_1_1eth__addr__t"><em>eth_addr_t</em></a> <em>source_addr</em><big>)</big></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1acl__rule__eth__t_1a272ceb347c7178385b1e70b7117728aa"></span><a class="reference internal" href="eth.html#eossdkclasseos_1_1eth__addr__t"><em>eth_addr_t</em></a> <tt class="descname">destination_addr</tt><big>(</big><big>)</big> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1acl__rule__eth__t_1ab2765cb82f6eabb3300296ca37695fb6"></span>void <tt class="descname">destination_addr_is</tt><big>(</big><a class="reference internal" href="eth.html#eossdkclasseos_1_1eth__addr__t"><em>eth_addr_t</em></a> <em>destination_addr</em><big>)</big></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1acl__rule__eth__t_1ae63e178a158189cda8d3c49c92903e65"></span><a class="reference internal" href="eth.html#eossdkclasseos_1_1eth__addr__t"><em>eth_addr_t</em></a> <tt class="descname">source_mask</tt><big>(</big><big>)</big> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1acl__rule__eth__t_1aca4e6dd7e3efd49061b41dd10326bbe8"></span>void <tt class="descname">source_mask_is</tt><big>(</big><a class="reference internal" href="eth.html#eossdkclasseos_1_1eth__addr__t"><em>eth_addr_t</em></a> <em>source_mask</em><big>)</big></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1acl__rule__eth__t_1a6b16dedc87c3d643a93c0d984234881a"></span><a class="reference internal" href="eth.html#eossdkclasseos_1_1eth__addr__t"><em>eth_addr_t</em></a> <tt class="descname">destination_mask</tt><big>(</big><big>)</big> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1acl__rule__eth__t_1a8f2563045a3fa7e95cf185a9da90addf"></span>void <tt class="descname">destination_mask_is</tt><big>(</big><a class="reference internal" href="eth.html#eossdkclasseos_1_1eth__addr__t"><em>eth_addr_t</em></a> <em>destination_mask</em><big>)</big></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1acl__rule__eth__t_1a0fd951421c33789134d73807eb4bf11f"></span>bool <tt class="descname">operator==</tt><big>(</big><a class="reference internal" href="#eossdkclasseos_1_1acl__rule__eth__t"><em>acl_rule_eth_t</em></a> const &amp; <em>other</em><big>)</big> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1acl__rule__eth__t_1a9f1782ec572ce157d82cbfadf882ab8c"></span>bool <tt class="descname">operator!=</tt><big>(</big><a class="reference internal" href="#eossdkclasseos_1_1acl__rule__eth__t"><em>acl_rule_eth_t</em></a> const &amp; <em>other</em><big>)</big> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1acl__rule__eth__t_1af337b7a117a57d827982b87bc76bf87d"></span>uint32_t <tt class="descname">hash</tt><big>(</big><big>)</big> const</dt>
+<dd><p>The hash function for type <a class="reference internal" href="#eossdkclasseos_1_1acl__rule__eth__t"><em>acl_rule_eth_t</em></a>. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1acl__rule__eth__t_1a0b2629f3d1e53afa05987981deb93cbd"></span>std::string <tt class="descname">to_string</tt><big>(</big><big>)</big> const</dt>
+<dd><p>Returns a string representation of the current object&#8217;s values. </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Private Members</p>
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1acl__rule__eth__t_1a26eeae374b14f02da01dca28bb8157b1"></span>vlan_id_t <tt class="descname">vlan_</tt></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1acl__rule__eth__t_1a8542b0f874b948924b181d4b75deadc1"></span>vlan_id_t <tt class="descname">vlan_mask_</tt></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1acl__rule__eth__t_1a49044bf76e8903fa8a33642e17372cd3"></span>vlan_id_t <tt class="descname">inner_vlan_</tt></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1acl__rule__eth__t_1a813ccbe6505831c3c4eb750469dae02b"></span>vlan_id_t <tt class="descname">inner_vlan_mask_</tt></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1acl__rule__eth__t_1aca8ea12db69957883fbdbeec2bb46764"></span><a class="reference internal" href="eth.html#eossdkclasseos_1_1eth__addr__t"><em>eth_addr_t</em></a> <tt class="descname">source_addr_</tt></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1acl__rule__eth__t_1acd2d255059a9e4da3361582ad71d052f"></span><a class="reference internal" href="eth.html#eossdkclasseos_1_1eth__addr__t"><em>eth_addr_t</em></a> <tt class="descname">destination_addr_</tt></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1acl__rule__eth__t_1a395debdd49e0af5243619e6fa951a28f"></span><a class="reference internal" href="eth.html#eossdkclasseos_1_1eth__addr__t"><em>eth_addr_t</em></a> <tt class="descname">source_mask_</tt></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1acl__rule__eth__t_1a1ec248b5ce7331ab9d3659cbdd569a62"></span><a class="reference internal" href="eth.html#eossdkclasseos_1_1eth__addr__t"><em>eth_addr_t</em></a> <tt class="descname">destination_mask_</tt></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Friends</p>
+<dl class="friend">
+<dt>
+<span class="target" id="eossdkclasseos_1_1acl__rule__eth__t_1aa45813bc0b2a9c02e522cfe22f3add21"></span>friend std::ostream &amp; <tt class="descname">operator&lt;&lt;</tt></dt>
+<dd><p>A utility stream operator that adds a string representation of <a class="reference internal" href="#eossdkclasseos_1_1acl__rule__eth__t"><em>acl_rule_eth_t</em></a> to the ostream. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#"><strong>acl</strong></a><ul>
+<li><a class="reference internal" href="#type-definitions-in-acl">Type definitions in <strong>acl</strong></a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="index.html"
+                        title="previous chapter">Arista EOS SDK reference guide</a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="agent.html"
+                        title="next chapter"><strong>agent</strong></a></p>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="agent.html" title="agent"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="index.html" title="Arista EOS SDK reference guide"
+             >previous</a> |</li>
+        <li><a href="index.html">Arista EOS SDK 2.13.0 reference</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2014, Arista Networks.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

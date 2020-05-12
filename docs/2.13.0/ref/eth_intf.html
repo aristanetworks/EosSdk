@@ -1,0 +1,376 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>eth_intf &mdash; Arista EOS SDK 2.13.0 reference</title>
+    
+    <link rel="stylesheet" href="_static/eossdk.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/breathe.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '2.13.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="Arista EOS SDK 2.13.0 reference" href="index.html" />
+    <link rel="next" title="eth_lag_intf" href="eth_lag_intf.html" />
+    <link rel="prev" title="eth" href="eth.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="eth_lag_intf.html" title="eth_lag_intf"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="eth.html" title="eth"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">Arista EOS SDK 2.13.0 reference</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="eth-intf">
+<h1><strong>eth_intf</strong><a class="headerlink" href="#eth-intf" title="Permalink to this headline">¶</a></h1>
+<dl class="namespace">
+<dt>
+<span class="target" id="eossdknamespaceeos"></span><em>namespace</em> <tt class="descname">eos</tt></dt>
+<dd><dl class="class">
+<dt>
+<span class="target" id="eossdkclasseos_1_1eth__intf__handler"></span><em>class</em> <tt class="descname">eth_intf_handler</tt></dt>
+<dd><em>#include &lt;eth_intf.h&gt;</em><p>Event handler for ethernet interface specific events.</p>
+<p>Handles events on ethernet interfaces. Includes physical interfaces and LAGs (port-channels) among other interface types. </p>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1eth__intf__handler_1a81bb7f03521db1a0a12d59bb547a7b95"></span><tt class="descname">eth_intf_handler</tt><big>(</big><a class="reference internal" href="#eossdkclasseos_1_1eth__intf__mgr"><em>eth_intf_mgr</em></a> *<big>)</big></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1eth__intf__handler_1ad738c1a143f89bdb77017f21e23e3bc9"></span><a class="reference internal" href="#eossdkclasseos_1_1eth__intf__mgr"><em>eth_intf_mgr</em></a> * <tt class="descname">get_eth_intf_mgr</tt><big>(</big><big>)</big> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1eth__intf__handler_1a04d3856d552f0e675a8e6c7442a8b70d"></span>void <tt class="descname">watch_all_eth_intfs</tt><big>(</big>bool<big>)</big></dt>
+<dd><p>Registers to receive updates on changes to the interface.</p>
+<p><dl class="docutils">
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><tt class="first docutils literal"><span class="pre">bool</span></tt> - <p>Signifies whether notifications should be propagated to this handler instance or not. </p>
+</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1eth__intf__handler_1a8cc4fea37d80bfe2843f74699e7edc68"></span>void <tt class="descname">watch_eth_intf</tt><big>(</big><a class="reference internal" href="intf.html#eossdkclasseos_1_1intf__id__t"><em>intf_id_t</em></a>, bool<big>)</big></dt>
+<dd><p>Registers this class to receive change updates on the given interface.</p>
+<p><dl class="docutils">
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><tt class="first docutils literal"><a class="reference internal" href="intf.html#eossdkclasseos_1_1intf__id__t"><em><span class="pre">intf_id_t</span></em></a></tt> - <p>Signifies which interface to subscribe to. </p>
+</li>
+<li><tt class="first docutils literal"><span class="pre">bool</span></tt> - <p>Signifies whether notifications should be propagated to this handler instance or not. </p>
+</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1eth__intf__handler_1ac94e5e35fcca23d98aee7bd703b63af2"></span>virtual void <tt class="descname">on_eth_intf_create</tt><big>(</big><a class="reference internal" href="intf.html#eossdkclasseos_1_1intf__id__t"><em>intf_id_t</em></a><big>)</big></dt>
+<dd><p>Handler called when an ethernet interface is created.</p>
+<p>After on_eth_intf_create is called, the given intf_id is guaranteed to exist (ie <a class="reference internal" href="#eossdkclasseos_1_1eth__intf__mgr_1ae37879fd40ac5b39cce04a7cc1e6da3e"><em>eth_intf_mgr::exists</em></a> will return true). At that point, the intf_id can be used will all methods of the <a class="reference internal" href="#eossdkclasseos_1_1eth__intf__mgr"><em>eth_intf_mgr</em></a> class.</p>
+<p>This also means that the intf_id can be used with all other relevant *intf_mgr classes (ie <a class="reference internal" href="intf.html#eossdkclasseos_1_1intf__mgr"><em>intf_mgr</em></a>, <a class="reference internal" href="eth_phy_intf.html#eossdkclasseos_1_1eth__phy__intf__mgr"><em>eth_phy_intf_mgr</em></a>, <a class="reference internal" href="eth_lag_intf.html#eossdkclasseos_1_1eth__lag__intf__mgr"><em>eth_lag_intf_mgr</em></a>, and <a class="reference internal" href="subintf.html#eossdkclasseos_1_1subintf__mgr"><em>subintf_mgr</em></a> as appropriate based on the intf_type). </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1eth__intf__handler_1a89c037464c7cce849241d2905e446553"></span>virtual void <tt class="descname">on_eth_intf_delete</tt><big>(</big><a class="reference internal" href="intf.html#eossdkclasseos_1_1intf__id__t"><em>intf_id_t</em></a><big>)</big></dt>
+<dd><p>Handler called when an ethernet interface is deleted.</p>
+<p>After on_eth_intf_delete is called, the given intf_id is guaranteed to not exist (ie <a class="reference internal" href="#eossdkclasseos_1_1eth__intf__mgr_1ae37879fd40ac5b39cce04a7cc1e6da3e"><em>eth_intf_mgr::exists</em></a> will return false). At that point, the intf_id cannot be used will any methods in the <a class="reference internal" href="#eossdkclasseos_1_1eth__intf__mgr"><em>eth_intf_mgr</em></a> class.</p>
+<p>This also means that the intf_id can no longer be used with all other relevant *intf_mgr classes (ie <a class="reference internal" href="intf.html#eossdkclasseos_1_1intf__mgr"><em>intf_mgr</em></a>, <a class="reference internal" href="eth_phy_intf.html#eossdkclasseos_1_1eth__phy__intf__mgr"><em>eth_phy_intf_mgr</em></a>, <a class="reference internal" href="eth_lag_intf.html#eossdkclasseos_1_1eth__lag__intf__mgr"><em>eth_lag_intf_mgr</em></a>, and <a class="reference internal" href="subintf.html#eossdkclasseos_1_1subintf__mgr"><em>subintf_mgr</em></a> as appropriate based on the intf_type). </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1eth__intf__handler_1a898bc7164d0bdccfbcdeef395c60048e"></span>virtual void <tt class="descname">on_eth_addr</tt><big>(</big><a class="reference internal" href="intf.html#eossdkclasseos_1_1intf__id__t"><em>intf_id_t</em></a>, <a class="reference internal" href="eth.html#eossdkclasseos_1_1eth__addr__t"><em>eth_addr_t</em></a><big>)</big></dt>
+<dd><p>Handler called when the mac address of an interface changes</p>
+<p>Note that for physical interfaces, the on_eth_addr handler will get called with the default <a class="reference internal" href="eth.html#eossdkclasseos_1_1eth__addr__t"><em>eth_addr_t</em></a> value when the hardware for that physical interface is removed. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="class">
+<dt>
+<span class="target" id="eossdkclasseos_1_1eth__intf__iter__t"></span><em>class</em> <tt class="descname">eth_intf_iter_t</tt></dt>
+<dd><em>#include &lt;eth_intf.h&gt;</em><p>Iterator type for ethernet interfaces. </p>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Private Functions</p>
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1eth__intf__iter__t_1a991e83921171c1c83cb508ab475e1c33"></span><tt class="descname">eth_intf_iter_t</tt><big>(</big>eth_intf_iter_impl * <em>const</em><big>)</big></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Friends</p>
+<dl class="friend">
+<dt>
+<span class="target" id="eossdkclasseos_1_1eth__intf__iter__t_1a1e9ed30f4e71bbbcb28a90a5e7badcba"></span>friend class <tt class="descname">eth_intf_iter_impl</tt></dt>
+<dd></dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="class">
+<dt>
+<span class="target" id="eossdkclasseos_1_1eth__intf__mgr"></span><em>class</em> <tt class="descname">eth_intf_mgr</tt></dt>
+<dd><em>#include &lt;eth_intf.h&gt;</em><p>The ethernet interface manager. </p>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1eth__intf__mgr_1a09a9565a5d1a1ba698d5ab6dc33905a8"></span>virtual <tt class="descname">~eth_intf_mgr</tt><big>(</big><big>)</big></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1eth__intf__mgr_1ae3e375546395c42fad9d7923ff22b74c"></span>virtual <a class="reference internal" href="#eossdkclasseos_1_1eth__intf__iter__t"><em>eth_intf_iter_t</em></a> <tt class="descname">eth_intf_iter</tt><big>(</big><big>)</big> const = 0</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1eth__intf__mgr_1ae37879fd40ac5b39cce04a7cc1e6da3e"></span>virtual bool <tt class="descname">exists</tt><big>(</big><a class="reference internal" href="intf.html#eossdkclasseos_1_1intf__id__t"><em>intf_id_t</em></a><big>)</big> const = 0</dt>
+<dd><p>Returns whether the given ethernet interface exists.</p>
+<p>If exists returns true, then this <a class="reference internal" href="intf.html#eossdkclasseos_1_1intf__id__t"><em>intf_id_t</em></a> can be successfully passed into every method of the <a class="reference internal" href="#eossdkclasseos_1_1eth__intf__mgr"><em>eth_intf_mgr</em></a>. If not, then methods of the <a class="reference internal" href="#eossdkclasseos_1_1eth__intf__mgr"><em>eth_intf_mgr</em></a> can throw a <a class="reference internal" href="intf.html#eossdkclasseos_1_1no__such__interface__error"><em>no_such_interface_error</em></a> exception.</p>
+<p>The exists method of all *intf_mgr classes that manage a given interface (ie <a class="reference internal" href="intf.html#eossdkclasseos_1_1intf__mgr"><em>intf_mgr</em></a>, <a class="reference internal" href="#eossdkclasseos_1_1eth__intf__mgr"><em>eth_intf_mgr</em></a>, <a class="reference internal" href="eth_phy_intf.html#eossdkclasseos_1_1eth__phy__intf__mgr"><em>eth_phy_intf_mgr</em></a>, <a class="reference internal" href="eth_lag_intf.html#eossdkclasseos_1_1eth__lag__intf__mgr"><em>eth_lag_intf_mgr</em></a>, and/or <a class="reference internal" href="subintf.html#eossdkclasseos_1_1subintf__mgr"><em>subintf_mgr</em></a>) are all guaranteed to return the same result. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1eth__intf__mgr_1a1a488b8bdc1a4929d94c84d7ef150256"></span>virtual <a class="reference internal" href="eth.html#eossdkclasseos_1_1eth__addr__t"><em>eth_addr_t</em></a> <tt class="descname">eth_addr</tt><big>(</big><a class="reference internal" href="intf.html#eossdkclasseos_1_1intf__id__t"><em>intf_id_t</em></a><big>)</big> const = 0</dt>
+<dd><p>Returns the operational ethernet address of the interface. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1eth__intf__mgr_1a26a8ace2f866fdd40d7d76c77744e572"></span>virtual <a class="reference internal" href="eth.html#eossdkclasseos_1_1eth__addr__t"><em>eth_addr_t</em></a> <tt class="descname">configured_eth_addr</tt><big>(</big><a class="reference internal" href="intf.html#eossdkclasseos_1_1intf__id__t"><em>intf_id_t</em></a><big>)</big> const = 0</dt>
+<dd><p>Returns the currently configured ethernet address. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1eth__intf__mgr_1aea224621c9444f12dcb53fbb9cc0c5bc"></span>virtual void <tt class="descname">eth_addr_is</tt><big>(</big><a class="reference internal" href="intf.html#eossdkclasseos_1_1intf__id__t"><em>intf_id_t</em></a>, <a class="reference internal" href="eth.html#eossdkclasseos_1_1eth__addr__t"><em>eth_addr_t</em></a><big>)</big> = 0</dt>
+<dd><p>Configures the ethernet address of the interface <dl class="docutils">
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><tt class="first docutils literal"><a class="reference internal" href="intf.html#eossdkclasseos_1_1intf__id__t"><em><span class="pre">intf_id_t</span></em></a></tt> - <p>The interface ID of the interface to change the address of </p>
+</li>
+<li><tt class="first docutils literal"><a class="reference internal" href="eth.html#eossdkclasseos_1_1eth__addr__t"><em><span class="pre">eth_addr_t</span></em></a></tt> - <p>The address to set </p>
+</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1eth__intf__mgr_1a78c90800e79ccd46a17a23b2e396c59f"></span>virtual switchport_mode_t <tt class="descname">switchport_mode</tt><big>(</big><a class="reference internal" href="intf.html#eossdkclasseos_1_1intf__id__t"><em>intf_id_t</em></a><big>)</big> const = 0</dt>
+<dd><p>Returns the currently configured mode of operation of a given interface. Note that only Ethernet and Port-Channel interfaces can be switchports, using any other type of interface will lead to a panic. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1eth__intf__mgr_1af0e77e38bef27c40ee53978d7cac996d"></span>virtual void <tt class="descname">switchport_mode_is</tt><big>(</big><a class="reference internal" href="intf.html#eossdkclasseos_1_1intf__id__t"><em>intf_id_t</em></a>, switchport_mode_t<big>)</big> = 0</dt>
+<dd><p>Configures the mode of operation of a given interface. Note that only Ethernet and Port-Channel interfaces can be switchports, using any other type of interface will lead to a panic. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1eth__intf__mgr_1af66620f156caf4c2ff33074a76127378"></span>virtual vlan_id_t <tt class="descname">default_vlan</tt><big>(</big><a class="reference internal" href="intf.html#eossdkclasseos_1_1intf__id__t"><em>intf_id_t</em></a><big>)</big> const = 0</dt>
+<dd><p>Returns the &#8216;default&#8217; VLAN of a given interface. The &#8216;default&#8217; VLAN depends on the switchport mode of the interface. If the interface is in access mode, then the access VLAN is returned. If the interface is in tap or trunk mode, then the native VLAN is returned. If no native VLAN is configured, then 0 is returned. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1eth__intf__mgr_1a95202b800f34879da34cf6014ed7e878"></span>virtual void <tt class="descname">default_vlan_is</tt><big>(</big><a class="reference internal" href="intf.html#eossdkclasseos_1_1intf__id__t"><em>intf_id_t</em></a>, vlan_id_t<big>)</big> = 0</dt>
+<dd><p>Configures the &#8216;default&#8217; VLAN of a given interface. The &#8216;default&#8217; VLAN depends on the switchport mode of the interface. If the interface is in access mode, then the access VLAN is configured. If the interface is in tap or trunk mode, then the native VLAN is configured. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1eth__intf__mgr_1a9b88f0a1f138fefc74e304ab13f2d0bf"></span>virtual <a class="reference internal" href="eth.html#eossdkclasseos_1_1vlan__set__t"><em>vlan_set_t</em></a> <tt class="descname">trunk_vlans</tt><big>(</big><a class="reference internal" href="intf.html#eossdkclasseos_1_1intf__id__t"><em>intf_id_t</em></a><big>)</big> const = 0</dt>
+<dd><p>Returns the set of VLANs trunked on this interface. Note that by default all VLANs are trunked on all interfaces. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1eth__intf__mgr_1a11351836ff1a05209ca3487eb6f0e368"></span>virtual void <tt class="descname">trunk_vlan_set</tt><big>(</big><a class="reference internal" href="intf.html#eossdkclasseos_1_1intf__id__t"><em>intf_id_t</em></a>, vlan_id_t<big>)</big> = 0</dt>
+<dd><p>Adds a VLAN to the set of allowed VLANs when in trunk mode. If the interface isn&#8217;t in trunk mode, then the configuration is changed nevertheless, but the configuration won&#8217;t take effect until the interface is switched to trunk mode. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1eth__intf__mgr_1a06d4ac3792bc1556c3cc9c7c0b70b53d"></span>virtual void <tt class="descname">trunk_vlan_is</tt><big>(</big><a class="reference internal" href="intf.html#eossdkclasseos_1_1intf__id__t"><em>intf_id_t</em></a>, <a class="reference internal" href="eth.html#eossdkclasseos_1_1vlan__set__t"><em>vlan_set_t</em></a> const &amp; <em>vlans</em><big>)</big> = 0</dt>
+<dd><p>Configures the set of allowed VLANs when in trunk mode. If the interface isn&#8217;t in trunk mode, then the configuration is changed nevertheless, but the configuration won&#8217;t take effect until the interface is switched to trunk mode. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1eth__intf__mgr_1a8164bb071bc6e93dab2e1758dab62cc4"></span>virtual void <tt class="descname">trunk_vlan_del</tt><big>(</big><a class="reference internal" href="intf.html#eossdkclasseos_1_1intf__id__t"><em>intf_id_t</em></a>, vlan_id_t<big>)</big> = 0</dt>
+<dd><p>Removes a VLAN to the set of allowed VLANs when in trunk mode. If the interface isn&#8217;t in trunk mode, then the configuration is changed nevertheless, but the configuration won&#8217;t take effect until the interface is switched to trunk mode. </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Protected Functions</p>
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1eth__intf__mgr_1ab60e8dc7bc3c8ca31e33df0d438a2aa4"></span><tt class="descname">eth_intf_mgr</tt><big>(</big><big>)</big></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Private Members</p>
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1eth__intf__mgr_1ad0e30f559a7cfa2fda63220c1db87c5f"></span><tt class="descname">eth_intf_mgr</tt></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Friends</p>
+<dl class="friend">
+<dt>
+<span class="target" id="eossdkclasseos_1_1eth__intf__mgr_1a7e897bc4dfb5202fad5b5e6541cec314"></span>friend class <tt class="descname">eth_intf_handler</tt></dt>
+<dd></dd></dl>
+
+</div>
+</dd></dl>
+
+</dd></dl>
+
+<div class="section" id="type-definitions-in-eth-intf">
+<h2>Type definitions in <strong>eth_intf</strong><a class="headerlink" href="#type-definitions-in-eth-intf" title="Permalink to this headline">¶</a></h2>
+<dl class="namespace">
+<dt>
+<span class="target" id="eossdknamespaceeos"></span><em>namespace</em> <tt class="descname">eos</tt></dt>
+<dd><div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Enums</p>
+<dl class="enum">
+<dt>
+<span class="target" id="eossdknamespaceeos_1a49aed978d7f0717ad759c03bf240db60"></span><strong>switchport_mode_t enum</strong></dt>
+<dd><p>The mode of operation of a switch port. </p>
+<p><em>Values:</em></p>
+<ul class="breatheenumvalues">
+<li><tt class="first docutils literal"><span class="pre">SWITCHPORT_MODE_ACCESS</span></tt> - <p>Interface only has access to its access VLAN. </p>
+</li>
+<li><tt class="first docutils literal"><span class="pre">SWITCHPORT_MODE_TRUNK</span></tt> - <p>Interface is in 802.1q mode (&#8220;trunk mode&#8221;). </p>
+</li>
+<li><tt class="first docutils literal"><span class="pre">SWITCHPORT_MODE_DOT1Q_TUNNEL</span></tt> - <p>Interface is in 802.1ad mode (&#8220;QinQ mode&#8221;). </p>
+</li>
+<li><tt class="first docutils literal"><span class="pre">SWITCHPORT_MODE_TAP</span></tt> - <p>Interface is in tap mode (&#8220;span mode&#8221;). </p>
+</li>
+<li><tt class="first docutils literal"><span class="pre">SWITCHPORT_MODE_TOOL</span></tt> - <p>Interface is a tool port (egress for a tap). </p>
+</li>
+<li><tt class="first docutils literal"><span class="pre">SWITCHPORT_MODE_ROUTED</span></tt> - <p>Interface is routed (&#8220;no switchport&#8221;). </p>
+</li>
+</ul>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#"><strong>eth_intf</strong></a><ul>
+<li><a class="reference internal" href="#type-definitions-in-eth-intf">Type definitions in <strong>eth_intf</strong></a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="eth.html"
+                        title="previous chapter"><strong>eth</strong></a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="eth_lag_intf.html"
+                        title="next chapter"><strong>eth_lag_intf</strong></a></p>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="eth_lag_intf.html" title="eth_lag_intf"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="eth.html" title="eth"
+             >previous</a> |</li>
+        <li><a href="index.html">Arista EOS SDK 2.13.0 reference</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2014, Arista Networks.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

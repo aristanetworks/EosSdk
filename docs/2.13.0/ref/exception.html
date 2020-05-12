@@ -1,0 +1,376 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>exception &mdash; Arista EOS SDK 2.13.0 reference</title>
+    
+    <link rel="stylesheet" href="_static/eossdk.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/breathe.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '2.13.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="Arista EOS SDK 2.13.0 reference" href="index.html" />
+    <link rel="next" title="fd" href="fd.html" />
+    <link rel="prev" title="event_loop" href="event_loop.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="fd.html" title="fd"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="event_loop.html" title="event_loop"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">Arista EOS SDK 2.13.0 reference</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="exception">
+<h1><strong>exception</strong><a class="headerlink" href="#exception" title="Permalink to this headline">¶</a></h1>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Defines</p>
+<dl class="define">
+<dt>
+<span class="target" id="eossdkexception_8h_1a189faadd7f99f6c354db09acbb2aafcd"></span><strong>noexcept</strong></dt>
+<dd></dd></dl>
+
+</div>
+<dl class="namespace">
+<dt>
+<span class="target" id="eossdknamespaceeos"></span><em>namespace</em> <tt class="descname">eos</tt></dt>
+<dd><dl class="class">
+<dt>
+<span class="target" id="eossdkclasseos_1_1error"></span><em>class</em> <tt class="descname">error</tt></dt>
+<dd><em>#include &lt;exception.h&gt;</em><p>Base exception type for all SDK-reported exceptions. </p>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1error_1a400e81ba2868ec404fd0d247ba2fdbbe"></span>virtual <tt class="descname">~error</tt><big>(</big><big>)</big></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1error_1a8328a2fc08bfd41ae3fe6f9fb08e95c2"></span><tt class="descname">error</tt><big>(</big>std::string const &amp; <em>msg</em><big>)</big></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1error_1a5a0ca87b25d06fd7321192fca964e647"></span>std::string const &amp; <tt class="descname">msg</tt><big>(</big><big>)</big> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1error_1acfd6d237df1cf458c762c8c8c0a96f2b"></span>virtual const char * <tt class="descname">what</tt><big>(</big><big>)</big> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1error_1ad2ea117997e427ecb62b53d38bf4e0c3"></span>virtual void <tt class="descname">raise</tt><big>(</big><big>)</big> const = 0</dt>
+<dd><p>Throws this exception. </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Private Members</p>
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1error_1a0a211389cce4598d4bc62664dffca0d9"></span>std::string <tt class="descname">msg_</tt></dt>
+<dd></dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="class">
+<dt>
+<span class="target" id="eossdkclasseos_1_1invalid__argument__error"></span><em>class</em> <tt class="descname">invalid_argument_error</tt></dt>
+<dd><em>#include &lt;exception.h&gt;</em><p>Base exception for all cases where an attempt was made to configure the system with completely invalid arguments  for example, an out-of-range VLAN ID (&gt;4095). </p>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1invalid__argument__error_1a7bb5ff3e41909cf1cf76517e46e5bded"></span>virtual <tt class="descname">~invalid_argument_error</tt><big>(</big><big>)</big></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1invalid__argument__error_1af04d2ddb440a2b2717dc1082c1d3ba5d"></span><tt class="descname">invalid_argument_error</tt><big>(</big>std::string const &amp; <em>argument_name</em><big>)</big></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1invalid__argument__error_1ade9c6503e181905fd6326710b0cab736"></span><tt class="descname">invalid_argument_error</tt><big>(</big>std::string const &amp; <em>argument_name</em>, std::string const &amp; <em>error_details</em><big>)</big></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1invalid__argument__error_1afc0e1664057e4764d0dc507484130d75"></span>virtual void <tt class="descname">raise</tt><big>(</big><big>)</big> const</dt>
+<dd><p>Throws this exception. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1invalid__argument__error_1a0aa6870c8b32eaf5a25174659904e441"></span>std::string <tt class="descname">argument_name</tt><big>(</big><big>)</big> const</dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Private Members</p>
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1invalid__argument__error_1a06a153b11036fa0bf259542b40b480b2"></span>std::string <tt class="descname">argument_name_</tt></dt>
+<dd></dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="class">
+<dt>
+<span class="target" id="eossdkclasseos_1_1invalid__range__error"></span><em>class</em> <tt class="descname">invalid_range_error</tt></dt>
+<dd><em>#include &lt;exception.h&gt;</em><p>The given argument was outside of the legal range of values for that argument (e.g., VLAN IDs must be between 1 and 4094). </p>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1invalid__range__error_1ad4b06d6a6e0458d8e5612c31266da867"></span>virtual <tt class="descname">~invalid_range_error</tt><big>(</big><big>)</big></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1invalid__range__error_1ac79d872baf41075d014f2cf7c4e94d31"></span><tt class="descname">invalid_range_error</tt><big>(</big>std::string const &amp; <em>argument_name</em>, uint32_t <em>min_valid</em>, uint32_t <em>max_valid</em><big>)</big></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1invalid__range__error_1ac8f89bab1bd2dbcbda711bd11024a957"></span>virtual void <tt class="descname">raise</tt><big>(</big><big>)</big> const</dt>
+<dd><p>Throws this exception. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1invalid__range__error_1a72f2bdf5e1de836beb6bc10ad157f13e"></span>uint32_t <tt class="descname">min_valid</tt><big>(</big><big>)</big> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1invalid__range__error_1ac7d1eb4bd5485b1d56df208ddfb5dd67"></span>uint32_t <tt class="descname">max_valid</tt><big>(</big><big>)</big> const</dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Private Members</p>
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1invalid__range__error_1a5f9de69619bf34ca64350ccc8ad1fa17"></span>uint32_t <tt class="descname">min_valid_</tt></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1invalid__range__error_1a7eee7f5ff2a19114631d57a21518b1ce"></span>uint32_t <tt class="descname">max_valid_</tt></dt>
+<dd></dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="class">
+<dt>
+<span class="target" id="eossdkclasseos_1_1configuration__error"></span><em>class</em> <tt class="descname">configuration_error</tt></dt>
+<dd><em>#include &lt;exception.h&gt;</em><p>Base exception type for all cases where the configuration requested could not be accepted because it&#8217;s impossible or invalid.</p>
+<p>The configuration may be invalid because of other conflicting configuration. For instance if a VLAN ID is already used as an internal VLAN on a routed port, trying to manually configure this VLAN ID on a trunk port would fail until the requested VLAN ID is no longer used as an internal VLAN on the routed port. </p>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1configuration__error_1a114229d96f27cd4d00c0cfccdfe2e37c"></span>virtual <tt class="descname">~configuration_error</tt><big>(</big><big>)</big></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1configuration__error_1a7e3f15e7feb6fe8f0d5197b835d6ee31"></span><tt class="descname">configuration_error</tt><big>(</big>std::string const &amp; <em>msg</em><big>)</big></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1configuration__error_1a51973a8f8fa5408b9df14c32f3a366f0"></span>virtual void <tt class="descname">raise</tt><big>(</big><big>)</big> const</dt>
+<dd><p>Throws this exception. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="class">
+<dt>
+<span class="target" id="eossdkclasseos_1_1unconfigured__agent__error"></span><em>class</em> <tt class="descname">unconfigured_agent_error</tt></dt>
+<dd><em>#include &lt;exception.h&gt;</em><p>The given agent has not been configured. </p>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1unconfigured__agent__error_1aaad3996f85f34c0399d89d0f0869fc5b"></span>virtual <tt class="descname">~unconfigured_agent_error</tt><big>(</big><big>)</big></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1unconfigured__agent__error_1aea639e3f0bd7ef953b24ebc495c50f91"></span><tt class="descname">unconfigured_agent_error</tt><big>(</big>std::string const &amp; <em>agent_name</em><big>)</big></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1unconfigured__agent__error_1a0a061430cb764d4396f9c392712be3e7"></span>virtual void <tt class="descname">raise</tt><big>(</big><big>)</big> const</dt>
+<dd><p>Throws this exception. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1unconfigured__agent__error_1a1138844028e5a2bf19b78cba59edfb8f"></span>std::string <tt class="descname">agent_name</tt><big>(</big><big>)</big> const</dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Private Members</p>
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1unconfigured__agent__error_1a87a48f268f0fdcbbdcef3387727980b9"></span>std::string <tt class="descname">agent_name_</tt></dt>
+<dd></dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="class">
+<dt>
+<span class="target" id="eossdkclasseos_1_1unsupported__error"></span><em>class</em> <tt class="descname">unsupported_error</tt></dt>
+<dd><em>#include &lt;exception.h&gt;</em><p>Base class for &#8220;unsupported&#8221; errors. </p>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1unsupported__error_1a71ec37bfb7e558b273447b9f6ba2879b"></span>virtual <tt class="descname">~unsupported_error</tt><big>(</big><big>)</big></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1unsupported__error_1aae50895a175a18a07101cf40e9235189"></span><tt class="descname">unsupported_error</tt><big>(</big>std::string const &amp; <em>msg</em><big>)</big></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1unsupported__error_1ab95ccbedfa0b7507611ea1b8fc10901f"></span>virtual void <tt class="descname">raise</tt><big>(</big><big>)</big> const</dt>
+<dd><p>Throws this exception. </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Private Members</p>
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1unsupported__error_1a9f9c4ff90d4c44dfd4d498c3caaed404"></span>std::string <tt class="descname">msg_</tt></dt>
+<dd></dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="class">
+<dt>
+<span class="target" id="eossdkclasseos_1_1no__scoped__lock__obtained__error"></span><em>class</em> <tt class="descname">no_scoped_lock_obtained_error</tt></dt>
+<dd><em>#include &lt;exception.h&gt;</em><p>The class for &#8220;No scoped lock obtained&#8221; errors. </p>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1no__scoped__lock__obtained__error_1addb3686eb8cb325a0c01407b3bd8c193"></span>virtual <tt class="descname">~no_scoped_lock_obtained_error</tt><big>(</big><big>)</big></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1no__scoped__lock__obtained__error_1a03146614a2de5c52356fa89b448db34d"></span><tt class="descname">no_scoped_lock_obtained_error</tt><big>(</big><big>)</big></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1no__scoped__lock__obtained__error_1a513018e1aa561b163b52dc920e31c0e5"></span>virtual void <tt class="descname">raise</tt><big>(</big><big>)</big> const</dt>
+<dd><p>Throws this exception. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="event_loop.html"
+                        title="previous chapter"><strong>event_loop</strong></a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="fd.html"
+                        title="next chapter"><strong>fd</strong></a></p>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="fd.html" title="fd"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="event_loop.html" title="event_loop"
+             >previous</a> |</li>
+        <li><a href="index.html">Arista EOS SDK 2.13.0 reference</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2014, Arista Networks.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

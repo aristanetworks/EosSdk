@@ -1,0 +1,1289 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>directflow &mdash; Arista EOS SDK 2.13.0 reference</title>
+    
+    <link rel="stylesheet" href="_static/eossdk.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/breathe.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '2.13.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="Arista EOS SDK 2.13.0 reference" href="index.html" />
+    <link rel="next" title="eapi" href="eapi.html" />
+    <link rel="prev" title="decap_group" href="decap_group.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="eapi.html" title="eapi"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="decap_group.html" title="decap_group"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">Arista EOS SDK 2.13.0 reference</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="directflow">
+<h1><strong>directflow</strong><a class="headerlink" href="#directflow" title="Permalink to this headline">¶</a></h1>
+<p>DirectFlow management and status module</p>
+<p>DirectFlow is a software feature that allows OpenFlow-like rules to be programmed in switch hardware manually. Because a DirectFlow enabled switch allows normal forwarding features to operate, it gives operators a reliable way of building for the exceptional &#8220;just this one feature&#8221; parts of their network in a flexible manner. This module allows for the management of DirectFlow configuration as well as reactions to changes in status of flows. </p>
+<dl class="namespace">
+<dt>
+<span class="target" id="eossdknamespaceeos"></span><em>namespace</em> <tt class="descname">eos</tt></dt>
+<dd><dl class="class">
+<dt>
+<span class="target" id="eossdkclasseos_1_1flow__handler"></span><em>class</em> <tt class="descname">flow_handler</tt></dt>
+<dd><em>#include &lt;directflow.h&gt;</em><p>Flow handler.</p>
+<p>A flow handler is notified when the status of configured flows changes. </p>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1flow__handler_1a3c027232a4c7a427fc0b623266b6dbce"></span><tt class="descname">flow_handler</tt><big>(</big><a class="reference internal" href="#eossdkclasseos_1_1directflow__mgr"><em>directflow_mgr</em></a> *<big>)</big></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1flow__handler_1a9f6e10ce48b748ee2d9e525638247489"></span><a class="reference internal" href="#eossdkclasseos_1_1directflow__mgr"><em>directflow_mgr</em></a> * <tt class="descname">get_directflow_mgr</tt><big>(</big><big>)</big> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1flow__handler_1a3883cb49a326c90ba5915cef6843af6d"></span>void <tt class="descname">watch_all_flows</tt><big>(</big>bool<big>)</big></dt>
+<dd><p>Registers this class to receive updates on changes to flow state. Expects a boolean signifying whether notifications should be propagated to this instance or not. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1flow__handler_1af6bd98260d62ebb4029f94334d11a78f"></span>void <tt class="descname">watch_flow</tt><big>(</big>std::string const &amp;, bool<big>)</big></dt>
+<dd><p>Registers this class to receive updates on changes to flow state for the given flow name. Expects the name of the flow to watch and a boolean signifying whether notifications should be propagated to this instance or not. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1flow__handler_1a101bd781292e5aa5b10a54331a0206e5"></span>virtual void <tt class="descname">on_flow_status</tt><big>(</big>std::string const &amp;, flow_status_t<big>)</big></dt>
+<dd><p>Handler called when flow status changes. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="class">
+<dt>
+<span class="target" id="eossdkclasseos_1_1flow__entry__iter__t"></span><em>class</em> <tt class="descname">flow_entry_iter_t</tt></dt>
+<dd><em>#include &lt;directflow.h&gt;</em><p>An iterator providing forwards iteration through the configured flows. </p>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Private Functions</p>
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1flow__entry__iter__t_1a2f70da1cf8ef469dbcc36ae3ea3cbb99"></span><tt class="descname">flow_entry_iter_t</tt><big>(</big>flow_entry_iter_impl * <em>const</em><big>)</big></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Friends</p>
+<dl class="friend">
+<dt>
+<span class="target" id="eossdkclasseos_1_1flow__entry__iter__t_1adc2239f65dd9971b4c0bd3f1c3d09c6b"></span>friend class <tt class="descname">flow_entry_iter_impl</tt></dt>
+<dd></dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="class">
+<dt>
+<span class="target" id="eossdkclasseos_1_1directflow__mgr"></span><em>class</em> <tt class="descname">directflow_mgr</tt></dt>
+<dd><em>#include &lt;directflow.h&gt;</em><p>DirectFlow configuration and status manager. </p>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1directflow__mgr_1a2f4f974e2105899e47657fe52df950c8"></span>virtual <tt class="descname">~directflow_mgr</tt><big>(</big><big>)</big></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1directflow__mgr_1a6bd7f8459789ec759dd55b6f4251995d"></span>virtual <a class="reference internal" href="#eossdkclasseos_1_1flow__entry__iter__t"><em>flow_entry_iter_t</em></a> <tt class="descname">flow_entry_iter</tt><big>(</big><big>)</big> const = 0</dt>
+<dd><p>Iterate across all configured flows. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1directflow__mgr_1a3b942b48d80ecd9c98620a9c3aa919c9"></span>virtual bool <tt class="descname">exists</tt><big>(</big>std::string const &amp;<big>)</big> const = 0</dt>
+<dd><p>Tests for existence of a flow entry with the given name. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1directflow__mgr_1a859826e061d329149d4c5f6b7863305b"></span>virtual <a class="reference internal" href="#eossdkclasseos_1_1flow__entry__t"><em>flow_entry_t</em></a> <tt class="descname">flow_entry</tt><big>(</big>std::string const &amp;<big>)</big> const = 0</dt>
+<dd><p>Return the flow entry with the given name. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1directflow__mgr_1a396b63daefc83aa7f5b7e0beefbcb23c"></span>virtual void <tt class="descname">flow_entry_set</tt><big>(</big><a class="reference internal" href="#eossdkclasseos_1_1flow__entry__t"><em>flow_entry_t</em></a> const &amp;<big>)</big> = 0</dt>
+<dd><p>Insert or update a flow. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1directflow__mgr_1a437898024718f8dabc7a03e1525667e8"></span>virtual void <tt class="descname">flow_entry_del</tt><big>(</big>std::string const &amp;<big>)</big> = 0</dt>
+<dd><p>Delete a flow. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1directflow__mgr_1a42251708939216ec88a43500a00bdded"></span>virtual flow_status_t <tt class="descname">flow_status</tt><big>(</big>std::string const &amp; <em>name</em><big>)</big> const = 0</dt>
+<dd><p>Return the status of the given flow. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1directflow__mgr_1a20df166b4c3dbf9bb3b75ba603d976cb"></span>virtual flow_rejected_reason_t <tt class="descname">flow_rejected_reason</tt><big>(</big>std::string const &amp; <em>name</em><big>)</big> const = 0</dt>
+<dd><p>The reason a flow was not programmed. Only valid if the flow&#8217;s status is FLOW_REJECTED </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1directflow__mgr_1abca8bb4ad11a82b1945ff93d16caca79"></span>virtual <a class="reference internal" href="#eossdkclasseos_1_1flow__counters__t"><em>flow_counters_t</em></a> <tt class="descname">flow_counters</tt><big>(</big>std::string const &amp; <em>name</em><big>)</big> const = 0</dt>
+<dd><p>Return the counters for a flow. </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Protected Functions</p>
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1directflow__mgr_1a390437edae6b4f19dac7534014c02e3b"></span><tt class="descname">directflow_mgr</tt><big>(</big><big>)</big></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Private Members</p>
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1directflow__mgr_1a948bcb9e97c540a9a9a211dc5f325f05"></span><tt class="descname">directflow_mgr</tt></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Friends</p>
+<dl class="friend">
+<dt>
+<span class="target" id="eossdkclasseos_1_1directflow__mgr_1a46d2fb7718bcc02b4d35e14e70654931"></span>friend class <tt class="descname">flow_handler</tt></dt>
+<dd></dd></dl>
+
+</div>
+</dd></dl>
+
+</dd></dl>
+
+<div class="section" id="type-definitions-in-directflow">
+<h2>Type definitions in <strong>directflow</strong><a class="headerlink" href="#type-definitions-in-directflow" title="Permalink to this headline">¶</a></h2>
+<dl class="namespace">
+<dt>
+<span class="target" id="eossdknamespaceeos"></span><em>namespace</em> <tt class="descname">eos</tt></dt>
+<dd><div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Typedefs</p>
+<dl class="typedef">
+<dt>
+<span class="target" id="eossdknamespaceeos_1a917aeadcaebc34823e4809ac4014d452"></span>typedef uint16_t <tt class="descname">flow_priority_t</tt></dt>
+<dd></dd></dl>
+
+<dl class="typedef">
+<dt>
+<span class="target" id="eossdknamespaceeos_1a39b92feac90918df189b2e867ece3059"></span>typedef uint16_t <tt class="descname">eth_type_t</tt></dt>
+<dd></dd></dl>
+
+<dl class="typedef">
+<dt>
+<span class="target" id="eossdknamespaceeos_1acd6ad59f6483e0c4daed04b2a023d5f4"></span>typedef uint8_t <tt class="descname">cos_t</tt></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Enums</p>
+<dl class="enum">
+<dt>
+<span class="target" id="eossdknamespaceeos_1ae24b73fa92de869d726f4af798e005f9"></span><strong>flow_status_t enum</strong></dt>
+<dd><p>Flow entry status. </p>
+<p><em>Values:</em></p>
+<ul class="breatheenumvalues">
+<li><tt class="first docutils literal"><span class="pre">FLOW_STATUS_UNKNOWN</span></tt> - </li>
+<li><tt class="first docutils literal"><span class="pre">FLOW_CREATED</span></tt> - <p>Flow created or modified in hardware. </p>
+</li>
+<li><tt class="first docutils literal"><span class="pre">FLOW_DELETED</span></tt> - <p>Flow removed from hardware. </p>
+</li>
+<li><tt class="first docutils literal"><span class="pre">FLOW_REJECTED</span></tt> - <p>Flow not created. </p>
+</li>
+<li><tt class="first docutils literal"><span class="pre">FLOW_PENDING</span></tt> - <p>Flow requesting hardware resources. </p>
+</li>
+<li><tt class="first docutils literal"><span class="pre">FLOW_HW_TABLE_PENDING</span></tt> - <p>Flow request submitted for tcam resource entry. </p>
+</li>
+<li><tt class="first docutils literal"><span class="pre">FLOW_REQUEST_ACCEPTED</span></tt> - <p>Flow request accepted. </p>
+</li>
+</ul>
+</dd></dl>
+
+<dl class="enum">
+<dt>
+<span class="target" id="eossdknamespaceeos_1a8882a5abb72c595db631c656ae1e5ffd"></span><strong>flow_rejected_reason_t enum</strong></dt>
+<dd><p>Reason why a flow was not successfully created in hardware. </p>
+<p><em>Values:</em></p>
+<ul class="breatheenumvalues">
+<li><tt class="first docutils literal"><span class="pre">FLOW_REJECTED_BAD_MATCH</span></tt> - <p>Flow not created due to bad match criteria. </p>
+</li>
+<li><tt class="first docutils literal"><span class="pre">FLOW_REJECTED_BAD_ACTION</span></tt> - <p>Flow not created due to bad action criteria. </p>
+</li>
+<li><tt class="first docutils literal"><span class="pre">FLOW_REJECTED_HW_TABLE_FULL</span></tt> - <p>Flow not created due to insufficient resources. </p>
+</li>
+<li><tt class="first docutils literal"><span class="pre">FLOW_REJECTED_OTHER</span></tt> - <p>Flow not created for some other reason. </p>
+</li>
+<li><tt class="first docutils literal"><span class="pre">FLOW_REJECTED_ACTIONS_UNSUPPORTED</span></tt> - <p>Flow not created due to unsupported action set. </p>
+</li>
+<li><tt class="first docutils literal"><span class="pre">FLOW_REJECTED_TIMEOUT_NOT_SUPPORTED</span></tt> - <p>Flow not created due to unsupported timeouts set. </p>
+</li>
+</ul>
+</dd></dl>
+
+</div>
+<dl class="class">
+<dt>
+<span class="target" id="eossdkclasseos_1_1flow__match__field__set__t"></span><em>class</em> <tt class="descname">flow_match_field_set_t</tt></dt>
+<dd><em>#include &lt;directflow.h&gt;</em><p>Defines the set of fields to match on flow. </p>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1flow__match__field__set__t_1a0a56c98c3ecbe27f72bb854886e0a5ec"></span><tt class="descname">flow_match_field_set_t</tt><big>(</big><big>)</big></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1flow__match__field__set__t_1aa13a2eb930c25ad6655ee1da27c6ecdf"></span>void <tt class="descname">input_intfs_is</tt><big>(</big>bool <em>enabled</em><big>)</big></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1flow__match__field__set__t_1af637926f8965b590e8ea3c79109a867a"></span>bool <tt class="descname">input_intfs</tt><big>(</big><big>)</big> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1flow__match__field__set__t_1a218180a90498449698f34dc5edf877c2"></span>void <tt class="descname">eth_src_is</tt><big>(</big>bool <em>enabled</em><big>)</big></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1flow__match__field__set__t_1a54896ad8f9c13de0e855924709978627"></span>bool <tt class="descname">eth_src</tt><big>(</big><big>)</big> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1flow__match__field__set__t_1a1623cd425ec46ad0a30f80d45f8988f8"></span>void <tt class="descname">eth_dst_is</tt><big>(</big>bool <em>enabled</em><big>)</big></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1flow__match__field__set__t_1a0e69b43e72feffd17ede41a8356f7d9c"></span>bool <tt class="descname">eth_dst</tt><big>(</big><big>)</big> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1flow__match__field__set__t_1a0baea7dcc660462eaedd54e70e8b11ff"></span>void <tt class="descname">eth_type_is</tt><big>(</big>bool <em>enabled</em><big>)</big></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1flow__match__field__set__t_1aa3ac722e1a5ca34f30f19ec1a3c95bf8"></span>bool <tt class="descname">eth_type</tt><big>(</big><big>)</big> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1flow__match__field__set__t_1aa1e19f651035fdb1ddce23903189d8fb"></span>void <tt class="descname">vlan_id_is</tt><big>(</big>bool <em>enabled</em><big>)</big></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1flow__match__field__set__t_1a513b0ca4e0641461394571a7d8399b36"></span>bool <tt class="descname">vlan_id</tt><big>(</big><big>)</big> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1flow__match__field__set__t_1a2812e5655cb573fafe8e7dbafe68e051"></span>void <tt class="descname">cos_is</tt><big>(</big>bool <em>enabled</em><big>)</big></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1flow__match__field__set__t_1a4014ca69fc3560ccba3f7ae0b482396c"></span>bool <tt class="descname">cos</tt><big>(</big><big>)</big> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1flow__match__field__set__t_1a9720f095cc06c8903401877911791d13"></span>void <tt class="descname">ip_src_is</tt><big>(</big>bool <em>enabled</em><big>)</big></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1flow__match__field__set__t_1ac25e559fefdd55d72f1965da632045b6"></span>bool <tt class="descname">ip_src</tt><big>(</big><big>)</big> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1flow__match__field__set__t_1a95abbfec17b3a208e4b0719eed947bd2"></span>void <tt class="descname">ip_dst_is</tt><big>(</big>bool <em>enabled</em><big>)</big></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1flow__match__field__set__t_1a759bf3cae95db284e29229a684fd5ad6"></span>bool <tt class="descname">ip_dst</tt><big>(</big><big>)</big> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1flow__match__field__set__t_1a5b47fde57dda457de3984068f5803472"></span>bool <tt class="descname">operator==</tt><big>(</big><a class="reference internal" href="#eossdkclasseos_1_1flow__match__field__set__t"><em>flow_match_field_set_t</em></a> const &amp; <em>other</em><big>)</big> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1flow__match__field__set__t_1a1004cf6094e94a478abe2cc19f7716f7"></span>bool <tt class="descname">operator!=</tt><big>(</big><a class="reference internal" href="#eossdkclasseos_1_1flow__match__field__set__t"><em>flow_match_field_set_t</em></a> const &amp; <em>other</em><big>)</big> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1flow__match__field__set__t_1abf0e9f99ea85668b4e25c78e4a1875c8"></span>bool <tt class="descname">operator&lt;</tt><big>(</big><a class="reference internal" href="#eossdkclasseos_1_1flow__match__field__set__t"><em>flow_match_field_set_t</em></a> const &amp; <em>other</em><big>)</big> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1flow__match__field__set__t_1a64f684e8e58284c719148a16ff3d8e71"></span>uint32_t <tt class="descname">hash</tt><big>(</big><big>)</big> const</dt>
+<dd><p>The hash function for type <a class="reference internal" href="#eossdkclasseos_1_1flow__match__field__set__t"><em>flow_match_field_set_t</em></a>. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1flow__match__field__set__t_1a24a554b07b1d26308485f5435897a182"></span>std::string <tt class="descname">to_string</tt><big>(</big><big>)</big> const</dt>
+<dd><p>Returns a string representation of the current object&#8217;s values. </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Private Members</p>
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1flow__match__field__set__t_1a746c249e2f54c2f25583c2a1c9bd6e88"></span>uint32_t <tt class="descname">match_bitset_</tt></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Friends</p>
+<dl class="friend">
+<dt>
+<span class="target" id="eossdkclasseos_1_1flow__match__field__set__t_1ae43db58f5ae8d4ffcae6889be7d336a5"></span>friend class <tt class="descname">flow_helper</tt></dt>
+<dd></dd></dl>
+
+<dl class="friend">
+<dt>
+<span class="target" id="eossdkclasseos_1_1flow__match__field__set__t_1a1f39649b170b8b375d3f6597d5664e00"></span>friend std::ostream &amp; <tt class="descname">operator&lt;&lt;</tt></dt>
+<dd><p>A utility stream operator that adds a string representation of <a class="reference internal" href="#eossdkclasseos_1_1flow__match__field__set__t"><em>flow_match_field_set_t</em></a> to the ostream. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="class">
+<dt>
+<span class="target" id="eossdkclasseos_1_1flow__match__t"></span><em>class</em> <tt class="descname">flow_match_t</tt></dt>
+<dd><em>#include &lt;directflow.h&gt;</em><p>Match criteria for a flow. </p>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1flow__match__t_1a692638dbb0d097715042a981ab71de0b"></span><tt class="descname">flow_match_t</tt><big>(</big><big>)</big></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1flow__match__t_1a79fb99e55cbc2375cf1fba62f65b9585"></span><a class="reference internal" href="#eossdkclasseos_1_1flow__match__field__set__t"><em>flow_match_field_set_t</em></a> <tt class="descname">match_field_set</tt><big>(</big><big>)</big> const</dt>
+<dd><p>Getter for &#8216;match_field_set&#8217;: the fields to match on. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1flow__match__t_1a6f2fbf5998d26f666749714d0950ec68"></span>void <tt class="descname">match_field_set_is</tt><big>(</big><a class="reference internal" href="#eossdkclasseos_1_1flow__match__field__set__t"><em>flow_match_field_set_t</em></a> <em>match_field_set</em><big>)</big></dt>
+<dd><p>Setter for &#8216;match_field_set&#8217;. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1flow__match__t_1ab60671ac11fc95c8dabe371782654db0"></span>std::set&lt; <a class="reference internal" href="intf.html#eossdkclasseos_1_1intf__id__t"><em>intf_id_t</em></a> &gt; const &amp; <tt class="descname">input_intfs</tt><big>(</big><big>)</big> const</dt>
+<dd><p>Getter for &#8216;input_intfs&#8217;: the input interfaces to match on. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1flow__match__t_1a94409eda0faa1f0423a83eedaf6c38f1"></span>void <tt class="descname">input_intfs_is</tt><big>(</big>std::set&lt; <a class="reference internal" href="intf.html#eossdkclasseos_1_1intf__id__t"><em>intf_id_t</em></a> &gt; const &amp; <em>input_intfs</em><big>)</big></dt>
+<dd><p>Setter for &#8216;input_intfs&#8217;. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1flow__match__t_1aa94f3156369adfebbaa2ed1fab9e29a2"></span>void <tt class="descname">input_intf_set</tt><big>(</big><a class="reference internal" href="intf.html#eossdkclasseos_1_1intf__id__t"><em>intf_id_t</em></a> const &amp; <em>value</em><big>)</big></dt>
+<dd><p>Inserts one input_intf of &#8216;value&#8217; to the set. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1flow__match__t_1ae3fcf39680256eb144f69f7821d594c6"></span>void <tt class="descname">input_intf_del</tt><big>(</big><a class="reference internal" href="intf.html#eossdkclasseos_1_1intf__id__t"><em>intf_id_t</em></a> const &amp; <em>value</em><big>)</big></dt>
+<dd><p>Deletes one input_intf of &#8216;value&#8217; from the set. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1flow__match__t_1afc13f7a54117ca8566a7013bb6015bc6"></span><a class="reference internal" href="eth.html#eossdkclasseos_1_1eth__addr__t"><em>eth_addr_t</em></a> <tt class="descname">eth_src</tt><big>(</big><big>)</big> const</dt>
+<dd><p>Getter for &#8216;eth_src&#8217;: the source Ethernet address to match on. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1flow__match__t_1ae0ac375b27ea6aabc8cad13269e2d7ae"></span>void <tt class="descname">eth_src_is</tt><big>(</big><a class="reference internal" href="eth.html#eossdkclasseos_1_1eth__addr__t"><em>eth_addr_t</em></a> <em>eth_src</em><big>)</big></dt>
+<dd><p>Setter for &#8216;eth_src&#8217;. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1flow__match__t_1a772565420ad17407b7826cc70005e26b"></span>void <tt class="descname">eth_src_is</tt><big>(</big><a class="reference internal" href="eth.html#eossdkclasseos_1_1eth__addr__t"><em>eth_addr_t</em></a> <em>src</em>, <a class="reference internal" href="eth.html#eossdkclasseos_1_1eth__addr__t"><em>eth_addr_t</em></a> <em>mask</em><big>)</big></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1flow__match__t_1a2c9ebeb70cc2242c3b0150626abd0274"></span><a class="reference internal" href="eth.html#eossdkclasseos_1_1eth__addr__t"><em>eth_addr_t</em></a> <tt class="descname">eth_src_mask</tt><big>(</big><big>)</big> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1flow__match__t_1a6ded974b9a8fa4aed28f7aef7a6e266d"></span>void <tt class="descname">eth_src_mask_is</tt><big>(</big><a class="reference internal" href="eth.html#eossdkclasseos_1_1eth__addr__t"><em>eth_addr_t</em></a> <em>eth_src_mask</em><big>)</big></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1flow__match__t_1abc5d9909b0aece5e65883462e4eb9c41"></span><a class="reference internal" href="eth.html#eossdkclasseos_1_1eth__addr__t"><em>eth_addr_t</em></a> <tt class="descname">eth_dst</tt><big>(</big><big>)</big> const</dt>
+<dd><p>Getter for &#8216;eth_dst&#8217;: the destination Ethernet address to match on. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1flow__match__t_1ac82de563928c27f71a407a257bc3f70a"></span>void <tt class="descname">eth_dst_is</tt><big>(</big><a class="reference internal" href="eth.html#eossdkclasseos_1_1eth__addr__t"><em>eth_addr_t</em></a> <em>eth_dst</em><big>)</big></dt>
+<dd><p>Setter for &#8216;eth_dst&#8217;. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1flow__match__t_1a44698b559331c1e89e3772fff005ae6a"></span>void <tt class="descname">eth_dst_is</tt><big>(</big><a class="reference internal" href="eth.html#eossdkclasseos_1_1eth__addr__t"><em>eth_addr_t</em></a> <em>dst</em>, <a class="reference internal" href="eth.html#eossdkclasseos_1_1eth__addr__t"><em>eth_addr_t</em></a> <em>mask</em><big>)</big></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1flow__match__t_1aba8b54318e732699262aa5bba4012229"></span><a class="reference internal" href="eth.html#eossdkclasseos_1_1eth__addr__t"><em>eth_addr_t</em></a> <tt class="descname">eth_dst_mask</tt><big>(</big><big>)</big> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1flow__match__t_1a69235fcc0f4f8c93371809a3ae936769"></span>void <tt class="descname">eth_dst_mask_is</tt><big>(</big><a class="reference internal" href="eth.html#eossdkclasseos_1_1eth__addr__t"><em>eth_addr_t</em></a> <em>eth_dst_mask</em><big>)</big></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1flow__match__t_1ad1a6a51e7d30cf8b7b943d33d4b689fd"></span>eth_type_t <tt class="descname">eth_type</tt><big>(</big><big>)</big> const</dt>
+<dd><p>Getter for &#8216;eth_type&#8217;: the Ethernet type to match on. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1flow__match__t_1ae204c7bcf532b6afcebc4a7417c003e0"></span>void <tt class="descname">eth_type_is</tt><big>(</big>eth_type_t <em>eth_type</em><big>)</big></dt>
+<dd><p>Setter for &#8216;eth_type&#8217;. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1flow__match__t_1a0a91cd101b241cebbe1746840112cb1b"></span>vlan_id_t <tt class="descname">vlan_id</tt><big>(</big><big>)</big> const</dt>
+<dd><p>Getter for &#8216;vlan_id&#8217;: the VLAN id to match. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1flow__match__t_1ab63de94e9257356fddb25eb9dc622653"></span>void <tt class="descname">vlan_id_is</tt><big>(</big>vlan_id_t <em>vlan_id</em><big>)</big></dt>
+<dd><p>Setter for &#8216;vlan_id&#8217;. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1flow__match__t_1a802a7b37a8c7a16c369f7ac6abcd6a21"></span>void <tt class="descname">vlan_id_is</tt><big>(</big>vlan_id_t <em>vlan_id</em>, uint16_t <em>mask</em><big>)</big></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1flow__match__t_1acb8e38f6b16b8d6890863ee07ea41b36"></span>vlan_id_t <tt class="descname">vlan_id_mask</tt><big>(</big><big>)</big> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1flow__match__t_1a8c70063d955134dcb230d3addb4570b7"></span>void <tt class="descname">vlan_id_mask_is</tt><big>(</big>vlan_id_t <em>vlan_id_mask</em><big>)</big></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1flow__match__t_1a360560deeddf54dd0162d6c329ff1da8"></span>cos_t <tt class="descname">cos</tt><big>(</big><big>)</big> const</dt>
+<dd><p>Getter for &#8216;cos&#8217;: the class of service to match on, only used if vlan_id is set to something other than 0. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1flow__match__t_1a736bf2c93114f8d43690ce474b04be67"></span>void <tt class="descname">cos_is</tt><big>(</big>cos_t <em>cos</em><big>)</big></dt>
+<dd><p>Setter for &#8216;cos&#8217;. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1flow__match__t_1a8a56242183276b672efef93296648366"></span><a class="reference internal" href="ip.html#eossdkclasseos_1_1ip__addr__t"><em>ip_addr_t</em></a> <tt class="descname">ip_src</tt><big>(</big><big>)</big> const</dt>
+<dd><p>Getter for &#8216;ip_src&#8217;: the source IPv4 address to match on. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1flow__match__t_1a34b58f2ca44bd0d17439c40f0720062f"></span>void <tt class="descname">ip_src_is</tt><big>(</big><a class="reference internal" href="ip.html#eossdkclasseos_1_1ip__addr__t"><em>ip_addr_t</em></a> const &amp; <em>ip_src</em><big>)</big></dt>
+<dd><p>Setter for &#8216;ip_src&#8217;. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1flow__match__t_1a0984c724fcf2a73d0c58b7fc88424785"></span>void <tt class="descname">ip_src_is</tt><big>(</big><a class="reference internal" href="ip.html#eossdkclasseos_1_1ip__addr__t"><em>ip_addr_t</em></a> const &amp; <em>src</em>, <a class="reference internal" href="ip.html#eossdkclasseos_1_1ip__addr__t"><em>ip_addr_t</em></a> const &amp; <em>mask</em><big>)</big></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1flow__match__t_1a95cade319628f3611402398fae858b69"></span><a class="reference internal" href="ip.html#eossdkclasseos_1_1ip__addr__t"><em>ip_addr_t</em></a> <tt class="descname">ip_src_mask</tt><big>(</big><big>)</big> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1flow__match__t_1a88c5b826b2c4b028cd4d13d3e0546712"></span>void <tt class="descname">ip_src_mask_is</tt><big>(</big><a class="reference internal" href="ip.html#eossdkclasseos_1_1ip__addr__t"><em>ip_addr_t</em></a> const &amp; <em>ip_src_mask</em><big>)</big></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1flow__match__t_1ae5b9bc63ffebfd0eaae6709f8aa52d78"></span><a class="reference internal" href="ip.html#eossdkclasseos_1_1ip__addr__t"><em>ip_addr_t</em></a> <tt class="descname">ip_dst</tt><big>(</big><big>)</big> const</dt>
+<dd><p>Getter for &#8216;ip_dst&#8217;: the destination IPv4 address to match on. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1flow__match__t_1a767efaca2fb444797f7732386ba6b621"></span>void <tt class="descname">ip_dst_is</tt><big>(</big><a class="reference internal" href="ip.html#eossdkclasseos_1_1ip__addr__t"><em>ip_addr_t</em></a> const &amp; <em>ip_dst</em><big>)</big></dt>
+<dd><p>Setter for &#8216;ip_dst&#8217;. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1flow__match__t_1a7b4e6f50c03d561ed86fb123090c9833"></span>void <tt class="descname">ip_dst_is</tt><big>(</big><a class="reference internal" href="ip.html#eossdkclasseos_1_1ip__addr__t"><em>ip_addr_t</em></a> const &amp; <em>dst</em>, <a class="reference internal" href="ip.html#eossdkclasseos_1_1ip__addr__t"><em>ip_addr_t</em></a> const &amp; <em>mask</em><big>)</big></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1flow__match__t_1a4a31f71672b52099d9e5e0426ee94f85"></span><a class="reference internal" href="ip.html#eossdkclasseos_1_1ip__addr__t"><em>ip_addr_t</em></a> <tt class="descname">ip_dst_mask</tt><big>(</big><big>)</big> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1flow__match__t_1a376813431b5bacc976216afa45dd8c11"></span>void <tt class="descname">ip_dst_mask_is</tt><big>(</big><a class="reference internal" href="ip.html#eossdkclasseos_1_1ip__addr__t"><em>ip_addr_t</em></a> const &amp; <em>ip_dst_mask</em><big>)</big></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1flow__match__t_1a605b6b3c1b5e87251528328a2cbac02c"></span>bool <tt class="descname">operator==</tt><big>(</big><a class="reference internal" href="#eossdkclasseos_1_1flow__match__t"><em>flow_match_t</em></a> const &amp; <em>other</em><big>)</big> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1flow__match__t_1a7b63fefbda245576e63a13aebccb9cd8"></span>bool <tt class="descname">operator!=</tt><big>(</big><a class="reference internal" href="#eossdkclasseos_1_1flow__match__t"><em>flow_match_t</em></a> const &amp; <em>other</em><big>)</big> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1flow__match__t_1a1fb5e8b262b12a1507a7dae284a40dc0"></span>bool <tt class="descname">operator&lt;</tt><big>(</big><a class="reference internal" href="#eossdkclasseos_1_1flow__match__t"><em>flow_match_t</em></a> const &amp; <em>other</em><big>)</big> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1flow__match__t_1a44d6eaad23899889d5149e9512cee477"></span>uint32_t <tt class="descname">hash</tt><big>(</big><big>)</big> const</dt>
+<dd><p>The hash function for type <a class="reference internal" href="#eossdkclasseos_1_1flow__match__t"><em>flow_match_t</em></a>. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1flow__match__t_1a53a7d4aea8bbec8f9f2337519f3371cb"></span>std::string <tt class="descname">to_string</tt><big>(</big><big>)</big> const</dt>
+<dd><p>Returns a string representation of the current object&#8217;s values. </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Private Members</p>
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1flow__match__t_1a07c353f4c846da68210b824bd80d96fb"></span><a class="reference internal" href="#eossdkclasseos_1_1flow__match__field__set__t"><em>flow_match_field_set_t</em></a> <tt class="descname">match_field_set_</tt></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1flow__match__t_1a04fb887b6fd5ace710713ab075e9bd7f"></span>std::set&lt; <a class="reference internal" href="intf.html#eossdkclasseos_1_1intf__id__t"><em>intf_id_t</em></a> &gt; <tt class="descname">input_intfs_</tt></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1flow__match__t_1a227a4ca7e4a3a7a15c2b76a6027db5a1"></span><a class="reference internal" href="eth.html#eossdkclasseos_1_1eth__addr__t"><em>eth_addr_t</em></a> <tt class="descname">eth_src_</tt></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1flow__match__t_1a5ce27264677016be1ab69e32ef5c6232"></span><a class="reference internal" href="eth.html#eossdkclasseos_1_1eth__addr__t"><em>eth_addr_t</em></a> <tt class="descname">eth_src_mask_</tt></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1flow__match__t_1a80c6fde559eed21c39791c7b266eebe0"></span><a class="reference internal" href="eth.html#eossdkclasseos_1_1eth__addr__t"><em>eth_addr_t</em></a> <tt class="descname">eth_dst_</tt></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1flow__match__t_1a97736188075d041af9aae68b8252b0b3"></span><a class="reference internal" href="eth.html#eossdkclasseos_1_1eth__addr__t"><em>eth_addr_t</em></a> <tt class="descname">eth_dst_mask_</tt></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1flow__match__t_1aaa3b084a9ef327b2a519f088a9b59a83"></span>eth_type_t <tt class="descname">eth_type_</tt></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1flow__match__t_1aead1b1718e38c7213ef3c5a3b8770d77"></span>vlan_id_t <tt class="descname">vlan_id_</tt></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1flow__match__t_1ab135ba1b770348bb771b516edb293e48"></span>vlan_id_t <tt class="descname">vlan_id_mask_</tt></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1flow__match__t_1aeb4fb16e5dfc92d76298b6eb7db6bd58"></span>cos_t <tt class="descname">cos_</tt></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1flow__match__t_1a54c2879bcb2a8708b846f8d87ac4d11b"></span><a class="reference internal" href="ip.html#eossdkclasseos_1_1ip__addr__t"><em>ip_addr_t</em></a> <tt class="descname">ip_src_</tt></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1flow__match__t_1a7fd67ab585a08748f241e51b5840aad4"></span><a class="reference internal" href="ip.html#eossdkclasseos_1_1ip__addr__t"><em>ip_addr_t</em></a> <tt class="descname">ip_src_mask_</tt></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1flow__match__t_1a069afdb921775e082d3c9baf5fc81623"></span><a class="reference internal" href="ip.html#eossdkclasseos_1_1ip__addr__t"><em>ip_addr_t</em></a> <tt class="descname">ip_dst_</tt></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1flow__match__t_1a5ad17eaf981d9d2c5b93477056ac3d81"></span><a class="reference internal" href="ip.html#eossdkclasseos_1_1ip__addr__t"><em>ip_addr_t</em></a> <tt class="descname">ip_dst_mask_</tt></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Friends</p>
+<dl class="friend">
+<dt>
+<span class="target" id="eossdkclasseos_1_1flow__match__t_1a1dac9b1e4509683851c6e814d7e3cdc0"></span>friend std::ostream &amp; <tt class="descname">operator&lt;&lt;</tt></dt>
+<dd><p>A utility stream operator that adds a string representation of <a class="reference internal" href="#eossdkclasseos_1_1flow__match__t"><em>flow_match_t</em></a> to the ostream. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="class">
+<dt>
+<span class="target" id="eossdkclasseos_1_1flow__action__set__t"></span><em>class</em> <tt class="descname">flow_action_set_t</tt></dt>
+<dd><em>#include &lt;directflow.h&gt;</em><p>Defines the set of enabled actions. </p>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1flow__action__set__t_1ab78135b021804341ed7bed22c3cebe9e"></span><tt class="descname">flow_action_set_t</tt><big>(</big><big>)</big></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1flow__action__set__t_1a6c834282449921fb496bfbf1ed864ce4"></span>void <tt class="descname">set_output_intfs_is</tt><big>(</big>bool <em>enabled</em><big>)</big></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1flow__action__set__t_1a9140b8eb8aebcead3f614eb7a07cb1df"></span>bool <tt class="descname">set_output_intfs</tt><big>(</big><big>)</big> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1flow__action__set__t_1a9ff3cdffe0830cd00c939b23960edfc6"></span>void <tt class="descname">set_vlan_id_is</tt><big>(</big>bool <em>enabled</em><big>)</big></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1flow__action__set__t_1a0400a4324461a68b7a52347ac3706b77"></span>bool <tt class="descname">set_vlan_id</tt><big>(</big><big>)</big> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1flow__action__set__t_1ace6d9ab3f750eaa7070ff321a96c8843"></span>void <tt class="descname">set_cos_is</tt><big>(</big>bool <em>enabled</em><big>)</big></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1flow__action__set__t_1a0e11851a2c53ac460cd164405e8e8271"></span>bool <tt class="descname">set_cos</tt><big>(</big><big>)</big> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1flow__action__set__t_1ace553d6b8d0ddb80134e83784d9957bf"></span>void <tt class="descname">set_eth_src_is</tt><big>(</big>bool <em>enabled</em><big>)</big></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1flow__action__set__t_1ad2bec200a1e36c425cf4a51ca2249d80"></span>bool <tt class="descname">set_eth_src</tt><big>(</big><big>)</big> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1flow__action__set__t_1a77f460bea1deff5a8b16f2b90ea58b43"></span>void <tt class="descname">set_eth_dst_is</tt><big>(</big>bool <em>enabled</em><big>)</big></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1flow__action__set__t_1a380c6babf8cd91d5ced87a3b578ae025"></span>bool <tt class="descname">set_eth_dst</tt><big>(</big><big>)</big> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1flow__action__set__t_1abb5988a6cdbdb91fc16999f4a4319142"></span>void <tt class="descname">set_ip_src_is</tt><big>(</big>bool <em>enabled</em><big>)</big></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1flow__action__set__t_1a9e10d4cd2a1a1844173d8da79e9f2e15"></span>bool <tt class="descname">set_ip_src</tt><big>(</big><big>)</big> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1flow__action__set__t_1a6a8ca5b8bbda393ae5ceae734c4b7b91"></span>void <tt class="descname">set_ip_dst_is</tt><big>(</big>bool <em>enabled</em><big>)</big></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1flow__action__set__t_1ad5ad4b683277910605ee299f9ffade2b"></span>bool <tt class="descname">set_ip_dst</tt><big>(</big><big>)</big> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1flow__action__set__t_1a9106726aa7dba4adf388ec84aa619b10"></span>bool <tt class="descname">operator==</tt><big>(</big><a class="reference internal" href="#eossdkclasseos_1_1flow__action__set__t"><em>flow_action_set_t</em></a> const &amp; <em>other</em><big>)</big> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1flow__action__set__t_1a071387b10afb714b9307286ffa614a85"></span>bool <tt class="descname">operator!=</tt><big>(</big><a class="reference internal" href="#eossdkclasseos_1_1flow__action__set__t"><em>flow_action_set_t</em></a> const &amp; <em>other</em><big>)</big> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1flow__action__set__t_1a62a311fc750476e5b447ed01ad163d5a"></span>uint32_t <tt class="descname">hash</tt><big>(</big><big>)</big> const</dt>
+<dd><p>The hash function for type <a class="reference internal" href="#eossdkclasseos_1_1flow__action__set__t"><em>flow_action_set_t</em></a>. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1flow__action__set__t_1a1260b67f8ebb2dd6d29ab7910a73eb5d"></span>std::string <tt class="descname">to_string</tt><big>(</big><big>)</big> const</dt>
+<dd><p>Returns a string representation of the current object&#8217;s values. </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Private Members</p>
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1flow__action__set__t_1a4a06d90f4da6f05bb09754fc29f05ad8"></span>uint32_t <tt class="descname">action_bitset_</tt></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Friends</p>
+<dl class="friend">
+<dt>
+<span class="target" id="eossdkclasseos_1_1flow__action__set__t_1ae43db58f5ae8d4ffcae6889be7d336a5"></span>friend class <tt class="descname">flow_helper</tt></dt>
+<dd></dd></dl>
+
+<dl class="friend">
+<dt>
+<span class="target" id="eossdkclasseos_1_1flow__action__set__t_1a916a5f225dfeb755ed06d1a452a9def3"></span>friend std::ostream &amp; <tt class="descname">operator&lt;&lt;</tt></dt>
+<dd><p>A utility stream operator that adds a string representation of <a class="reference internal" href="#eossdkclasseos_1_1flow__action__set__t"><em>flow_action_set_t</em></a> to the ostream. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="class">
+<dt>
+<span class="target" id="eossdkclasseos_1_1flow__action__t"></span><em>class</em> <tt class="descname">flow_action_t</tt></dt>
+<dd><em>#include &lt;directflow.h&gt;</em><p>Defines the actions to take on a matching flow. </p>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1flow__action__t_1a04bb6341f91f54da817ced1738005035"></span><tt class="descname">flow_action_t</tt><big>(</big><big>)</big></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1flow__action__t_1a67db37776f56957f675c8586f36e6662"></span><a class="reference internal" href="#eossdkclasseos_1_1flow__action__set__t"><em>flow_action_set_t</em></a> <tt class="descname">action_set</tt><big>(</big><big>)</big> const</dt>
+<dd><p>Getter for &#8216;action_set&#8217;: actions that are enabled. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1flow__action__t_1ac29357154ba78abb4c27a743b8c922dd"></span>void <tt class="descname">action_set_is</tt><big>(</big><a class="reference internal" href="#eossdkclasseos_1_1flow__action__set__t"><em>flow_action_set_t</em></a> <em>action_set</em><big>)</big></dt>
+<dd><p>Setter for &#8216;action_set&#8217;. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1flow__action__t_1a2f4b930fd7d76a86fcab2488256665d5"></span>std::set&lt; <a class="reference internal" href="intf.html#eossdkclasseos_1_1intf__id__t"><em>intf_id_t</em></a> &gt; const &amp; <tt class="descname">output_intfs</tt><big>(</big><big>)</big> const</dt>
+<dd><p>Getter for &#8216;output_intfs&#8217;: 0 or more the output interfaces, passing in the empty set will cause the packet to be dropped. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1flow__action__t_1a66b56b5834d809daae262a8d55c4e5e3"></span>void <tt class="descname">output_intfs_is</tt><big>(</big>std::set&lt; <a class="reference internal" href="intf.html#eossdkclasseos_1_1intf__id__t"><em>intf_id_t</em></a> &gt; const &amp; <em>output_intfs</em><big>)</big></dt>
+<dd><p>Setter for &#8216;output_intfs&#8217;. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1flow__action__t_1a1b66474052b0441265f027cfebeb5b0c"></span>void <tt class="descname">output_intf_set</tt><big>(</big><a class="reference internal" href="intf.html#eossdkclasseos_1_1intf__id__t"><em>intf_id_t</em></a> const &amp; <em>value</em><big>)</big></dt>
+<dd><p>Inserts one output_intf of &#8216;value&#8217; to the set. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1flow__action__t_1acc566e0a4130280b7e76ba593223529b"></span>void <tt class="descname">output_intf_del</tt><big>(</big><a class="reference internal" href="intf.html#eossdkclasseos_1_1intf__id__t"><em>intf_id_t</em></a> const &amp; <em>value</em><big>)</big></dt>
+<dd><p>Deletes one output_intf of &#8216;value&#8217; from the set. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1flow__action__t_1ad3326a3cafac929bec21a669fe5ca7f8"></span>vlan_id_t <tt class="descname">vlan_id</tt><big>(</big><big>)</big> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1flow__action__t_1a9f59cd9f766c774a2147c4a1fd036d1d"></span>void <tt class="descname">vlan_id_is</tt><big>(</big>vlan_id_t <em>vlan_id</em><big>)</big></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1flow__action__t_1ab52afaa08d282d680545cc8d075ff21a"></span>cos_t <tt class="descname">cos</tt><big>(</big><big>)</big> const</dt>
+<dd><p>Getter for &#8216;cos&#8217;: the class of service. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1flow__action__t_1a4216b30953a8bf572b437f894f933f25"></span>void <tt class="descname">cos_is</tt><big>(</big>cos_t <em>cos</em><big>)</big></dt>
+<dd><p>Setter for &#8216;cos&#8217;. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1flow__action__t_1a56a43268837d93ff8112af2c7e447ea0"></span><a class="reference internal" href="eth.html#eossdkclasseos_1_1eth__addr__t"><em>eth_addr_t</em></a> <tt class="descname">eth_src</tt><big>(</big><big>)</big> const</dt>
+<dd><p>Getter for &#8216;eth_src&#8217;: the source Ethernet address. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1flow__action__t_1a554be215fff3813cd1054cdbd8de06c1"></span>void <tt class="descname">eth_src_is</tt><big>(</big><a class="reference internal" href="eth.html#eossdkclasseos_1_1eth__addr__t"><em>eth_addr_t</em></a> <em>eth_src</em><big>)</big></dt>
+<dd><p>Setter for &#8216;eth_src&#8217;. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1flow__action__t_1afb6c28c162f94f41a48d7a25b8f0b9f6"></span><a class="reference internal" href="eth.html#eossdkclasseos_1_1eth__addr__t"><em>eth_addr_t</em></a> <tt class="descname">eth_dst</tt><big>(</big><big>)</big> const</dt>
+<dd><p>Getter for &#8216;eth_dst&#8217;: the destination Ethernet address. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1flow__action__t_1ace9fa6fb4a7a62444b35b98e309414e5"></span>void <tt class="descname">eth_dst_is</tt><big>(</big><a class="reference internal" href="eth.html#eossdkclasseos_1_1eth__addr__t"><em>eth_addr_t</em></a> <em>eth_dst</em><big>)</big></dt>
+<dd><p>Setter for &#8216;eth_dst&#8217;. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1flow__action__t_1a91a8d0186b38ddc6e4c85e27b8b20751"></span><a class="reference internal" href="ip.html#eossdkclasseos_1_1ip__addr__t"><em>ip_addr_t</em></a> <tt class="descname">ip_src</tt><big>(</big><big>)</big> const</dt>
+<dd><p>Getter for &#8216;ip_src&#8217;: the source IPv4 address. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1flow__action__t_1a6c92f6f84ce51f337c3d764d091db34b"></span>void <tt class="descname">ip_src_is</tt><big>(</big><a class="reference internal" href="ip.html#eossdkclasseos_1_1ip__addr__t"><em>ip_addr_t</em></a> const &amp; <em>ip_src</em><big>)</big></dt>
+<dd><p>Setter for &#8216;ip_src&#8217;. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1flow__action__t_1aff63595ed825473cb13bb11ab9e248f2"></span><a class="reference internal" href="ip.html#eossdkclasseos_1_1ip__addr__t"><em>ip_addr_t</em></a> <tt class="descname">ip_dst</tt><big>(</big><big>)</big> const</dt>
+<dd><p>Getter for &#8216;ip_dst&#8217;: the destination IPv4 address. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1flow__action__t_1a978d1316ebfb0c25c8e6c1906ead9f99"></span>void <tt class="descname">ip_dst_is</tt><big>(</big><a class="reference internal" href="ip.html#eossdkclasseos_1_1ip__addr__t"><em>ip_addr_t</em></a> const &amp; <em>ip_dst</em><big>)</big></dt>
+<dd><p>Setter for &#8216;ip_dst&#8217;. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1flow__action__t_1aef59855eb5e0f7e42d9cf3737660e544"></span>bool <tt class="descname">operator==</tt><big>(</big><a class="reference internal" href="#eossdkclasseos_1_1flow__action__t"><em>flow_action_t</em></a> const &amp; <em>other</em><big>)</big> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1flow__action__t_1aa6bae0ca700472e452d350ff7b8c0a23"></span>bool <tt class="descname">operator!=</tt><big>(</big><a class="reference internal" href="#eossdkclasseos_1_1flow__action__t"><em>flow_action_t</em></a> const &amp; <em>other</em><big>)</big> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1flow__action__t_1ab4369854af246b0e5cb4678ce9a8da7c"></span>uint32_t <tt class="descname">hash</tt><big>(</big><big>)</big> const</dt>
+<dd><p>The hash function for type <a class="reference internal" href="#eossdkclasseos_1_1flow__action__t"><em>flow_action_t</em></a>. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1flow__action__t_1a8c5c9ee816144081c59557262789da0e"></span>std::string <tt class="descname">to_string</tt><big>(</big><big>)</big> const</dt>
+<dd><p>Returns a string representation of the current object&#8217;s values. </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Private Members</p>
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1flow__action__t_1a0dcb5f16ea8c796b7a4da723efe55f1b"></span><a class="reference internal" href="#eossdkclasseos_1_1flow__action__set__t"><em>flow_action_set_t</em></a> <tt class="descname">action_set_</tt></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1flow__action__t_1aa3ca5ef0505cb82f1863c92286307da3"></span>std::set&lt; <a class="reference internal" href="intf.html#eossdkclasseos_1_1intf__id__t"><em>intf_id_t</em></a> &gt; <tt class="descname">output_intfs_</tt></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1flow__action__t_1ad2866bd6d73877d1a9e67b65498f3f73"></span>vlan_id_t <tt class="descname">vlan_id_</tt></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1flow__action__t_1a45600cff540c04108bb87d5730124014"></span>cos_t <tt class="descname">cos_</tt></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1flow__action__t_1a549886d1b2c7d7ee87737686fafffc2e"></span><a class="reference internal" href="eth.html#eossdkclasseos_1_1eth__addr__t"><em>eth_addr_t</em></a> <tt class="descname">eth_src_</tt></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1flow__action__t_1a6be4ec8f9e411a7a53ee6307bcabb074"></span><a class="reference internal" href="eth.html#eossdkclasseos_1_1eth__addr__t"><em>eth_addr_t</em></a> <tt class="descname">eth_dst_</tt></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1flow__action__t_1a2306ef253fafcf231968782890362528"></span><a class="reference internal" href="ip.html#eossdkclasseos_1_1ip__addr__t"><em>ip_addr_t</em></a> <tt class="descname">ip_src_</tt></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1flow__action__t_1aeee991db8e18ffebdb2ef10c91920753"></span><a class="reference internal" href="ip.html#eossdkclasseos_1_1ip__addr__t"><em>ip_addr_t</em></a> <tt class="descname">ip_dst_</tt></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Friends</p>
+<dl class="friend">
+<dt>
+<span class="target" id="eossdkclasseos_1_1flow__action__t_1a100fb22c0da275a1ddc37c3d19033999"></span>friend std::ostream &amp; <tt class="descname">operator&lt;&lt;</tt></dt>
+<dd><p>A utility stream operator that adds a string representation of <a class="reference internal" href="#eossdkclasseos_1_1flow__action__t"><em>flow_action_t</em></a> to the ostream. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="class">
+<dt>
+<span class="target" id="eossdkclasseos_1_1flow__entry__t"></span><em>class</em> <tt class="descname">flow_entry_t</tt></dt>
+<dd><em>#include &lt;directflow.h&gt;</em><p>Defines a flow entry. </p>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1flow__entry__t_1adb689dc105748b39a326307e3ad4925d"></span><tt class="descname">flow_entry_t</tt><big>(</big><big>)</big></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1flow__entry__t_1a0716fa3a44fb74d61b4941732ab8046b"></span><tt class="descname">flow_entry_t</tt><big>(</big>std::string const &amp; <em>name</em>, <a class="reference internal" href="#eossdkclasseos_1_1flow__match__t"><em>flow_match_t</em></a> <em>match</em>, <a class="reference internal" href="#eossdkclasseos_1_1flow__action__t"><em>flow_action_t</em></a> <em>action</em>, flow_priority_t <em>priority</em><big>)</big></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1flow__entry__t_1a58c956196902fa6bcd5997cb81f0f362"></span>std::string <tt class="descname">name</tt><big>(</big><big>)</big> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1flow__entry__t_1a54c90d19257cf26af4ce4a10b0952702"></span><a class="reference internal" href="#eossdkclasseos_1_1flow__match__t"><em>flow_match_t</em></a> <tt class="descname">match</tt><big>(</big><big>)</big> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1flow__entry__t_1a292ac737cb853b32dc867a5b8b6dfc06"></span><a class="reference internal" href="#eossdkclasseos_1_1flow__action__t"><em>flow_action_t</em></a> <tt class="descname">action</tt><big>(</big><big>)</big> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1flow__entry__t_1a759daa80d9c16a2244fb4bb2db4bf74a"></span>flow_priority_t <tt class="descname">priority</tt><big>(</big><big>)</big> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1flow__entry__t_1a2b68252c90c627fe51f05bf4da39c608"></span>bool <tt class="descname">operator==</tt><big>(</big><a class="reference internal" href="#eossdkclasseos_1_1flow__entry__t"><em>flow_entry_t</em></a> const &amp; <em>other</em><big>)</big> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1flow__entry__t_1adf8e3a603a18039437ff4efc549d005d"></span>bool <tt class="descname">operator!=</tt><big>(</big><a class="reference internal" href="#eossdkclasseos_1_1flow__entry__t"><em>flow_entry_t</em></a> const &amp; <em>other</em><big>)</big> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1flow__entry__t_1a6563a691011f4886690c20289bc29204"></span>uint32_t <tt class="descname">hash</tt><big>(</big><big>)</big> const</dt>
+<dd><p>The hash function for type <a class="reference internal" href="#eossdkclasseos_1_1flow__entry__t"><em>flow_entry_t</em></a>. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1flow__entry__t_1a4e6497e830dfa72805242be26e93211f"></span>std::string <tt class="descname">to_string</tt><big>(</big><big>)</big> const</dt>
+<dd><p>Returns a string representation of the current object&#8217;s values. </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Private Members</p>
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1flow__entry__t_1a2819997fe9bdc1ef69841c9e1b6222cd"></span>std::string <tt class="descname">name_</tt></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1flow__entry__t_1ad9e9b56f3063b698209b736515a6f7c5"></span><a class="reference internal" href="#eossdkclasseos_1_1flow__match__t"><em>flow_match_t</em></a> <tt class="descname">match_</tt></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1flow__entry__t_1af00bc9b74574450c2fa3d7eec25bc71c"></span><a class="reference internal" href="#eossdkclasseos_1_1flow__action__t"><em>flow_action_t</em></a> <tt class="descname">action_</tt></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1flow__entry__t_1acd09b717e74b45a9ad52cfadc93050f9"></span>flow_priority_t <tt class="descname">priority_</tt></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Friends</p>
+<dl class="friend">
+<dt>
+<span class="target" id="eossdkclasseos_1_1flow__entry__t_1a47adbd60575cdc8256a9530ad5e7c980"></span>friend std::ostream &amp; <tt class="descname">operator&lt;&lt;</tt></dt>
+<dd><p>A utility stream operator that adds a string representation of <a class="reference internal" href="#eossdkclasseos_1_1flow__entry__t"><em>flow_entry_t</em></a> to the ostream. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="class">
+<dt>
+<span class="target" id="eossdkclasseos_1_1flow__counters__t"></span><em>class</em> <tt class="descname">flow_counters_t</tt></dt>
+<dd><em>#include &lt;directflow.h&gt;</em><p>Defines counters for a flow. </p>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1flow__counters__t_1a6e9ae4a0c68b7d34f43f43745c7917a6"></span><tt class="descname">flow_counters_t</tt><big>(</big><big>)</big></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1flow__counters__t_1a7ad2b7aceb90860f8582b0897bdce491"></span>uint64_t <tt class="descname">bytes</tt><big>(</big><big>)</big> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1flow__counters__t_1a1eb0b3bb26035c915314152e5baf87c2"></span>uint64_t <tt class="descname">packets</tt><big>(</big><big>)</big> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1flow__counters__t_1a78e2f60fde95c83a20aa7e470ea4ad45"></span>bool <tt class="descname">operator==</tt><big>(</big><a class="reference internal" href="#eossdkclasseos_1_1flow__counters__t"><em>flow_counters_t</em></a> const &amp; <em>other</em><big>)</big> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1flow__counters__t_1a293045a1ee5c25c01eebe76cef96e464"></span>bool <tt class="descname">operator!=</tt><big>(</big><a class="reference internal" href="#eossdkclasseos_1_1flow__counters__t"><em>flow_counters_t</em></a> const &amp; <em>other</em><big>)</big> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1flow__counters__t_1a7ea258473ca5486177800bbf93e1b855"></span>uint32_t <tt class="descname">hash</tt><big>(</big><big>)</big> const</dt>
+<dd><p>The hash function for type <a class="reference internal" href="#eossdkclasseos_1_1flow__counters__t"><em>flow_counters_t</em></a>. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1flow__counters__t_1adec38fe95e164bfed5e17fd8fb9ef482"></span>std::string <tt class="descname">to_string</tt><big>(</big><big>)</big> const</dt>
+<dd><p>Returns a string representation of the current object&#8217;s values. </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Private Members</p>
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1flow__counters__t_1aec222a3aef3f5aa1d58ebcec8a8f546e"></span>uint64_t <tt class="descname">bytes_</tt></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1flow__counters__t_1a3b3bc02adc4def47067cd6a87509acbe"></span>uint64_t <tt class="descname">packets_</tt></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Friends</p>
+<dl class="friend">
+<dt>
+<span class="target" id="eossdkclasseos_1_1flow__counters__t_1ae43db58f5ae8d4ffcae6889be7d336a5"></span>friend class <tt class="descname">flow_helper</tt></dt>
+<dd></dd></dl>
+
+<dl class="friend">
+<dt>
+<span class="target" id="eossdkclasseos_1_1flow__counters__t_1a4eea3c77860cb240f8e921e8bc9aa192"></span>friend std::ostream &amp; <tt class="descname">operator&lt;&lt;</tt></dt>
+<dd><p>A utility stream operator that adds a string representation of <a class="reference internal" href="#eossdkclasseos_1_1flow__counters__t"><em>flow_counters_t</em></a> to the ostream. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#"><strong>directflow</strong></a><ul>
+<li><a class="reference internal" href="#type-definitions-in-directflow">Type definitions in <strong>directflow</strong></a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="decap_group.html"
+                        title="previous chapter"><strong>decap_group</strong></a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="eapi.html"
+                        title="next chapter"><strong>eapi</strong></a></p>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="eapi.html" title="eapi"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="decap_group.html" title="decap_group"
+             >previous</a> |</li>
+        <li><a href="index.html">Arista EOS SDK 2.13.0 reference</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2014, Arista Networks.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

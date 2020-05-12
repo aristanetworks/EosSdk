@@ -1,0 +1,863 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>macsec &mdash; Arista EOS SDK 2.13.0 reference</title>
+    
+    <link rel="stylesheet" href="_static/eossdk.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/breathe.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '2.13.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="Arista EOS SDK 2.13.0 reference" href="index.html" />
+    <link rel="next" title="mlag" href="mlag.html" />
+    <link rel="prev" title="mac_table" href="mac_table.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="mlag.html" title="mlag"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="mac_table.html" title="mac_table"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">Arista EOS SDK 2.13.0 reference</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="macsec">
+<h1><strong>macsec</strong><a class="headerlink" href="#macsec" title="Permalink to this headline">¶</a></h1>
+<p>MACsec management module.</p>
+<p>A MACsec profile contains the configuration required to setup a MACsec session. A profile contains a primary key and a fallback key. Each key contains a connectivity association key name (CKN) and a connectivity association key (CAK). Both the CKN and the CAK must be nonzero hex strings, and the CKN of the primary and fallback key cannot be the same.</p>
+<p>Note: Must have a valid MACsec license configured for this API to work.</p>
+<p>The following is an example of configuring a MACsec profile and attaching it to an interface.</p>
+<p> <pre class="literal-block">
+* // Creating profile &quot;test1&quot; with a primary and fallback key
+* // and a rekey period of 300s
+* <a class="reference internal" href="#eossdkclasseos_1_1macsec__profile__t"><em>eos::macsec_profile_t</em></a> profile(&quot;test1&quot;);
+* <a class="reference internal" href="#eossdkclasseos_1_1macsec__key__t"><em>eos::macsec_key_t</em></a> primary;
+* primary.<a class="reference internal" href="#eossdkclasseos_1_1macsec__key__t_1a90b195be9f203b5a89a04bc7bf0b0b2a"><em>ckn_is</em></a>(&quot;aaaa&quot;);
+* primary.<a class="reference internal" href="#eossdkclasseos_1_1macsec__key__t_1ade96c6b0d3943b0a2666b8469e84b021"><em>cak_is</em></a>(&quot;123&quot;);
+* <a class="reference internal" href="#eossdkclasseos_1_1macsec__key__t"><em>eos::macsec_key_t</em></a> fallback;
+* fallback.<a class="reference internal" href="#eossdkclasseos_1_1macsec__key__t_1a90b195be9f203b5a89a04bc7bf0b0b2a"><em>ckn_is</em></a>(&quot;bbbb&quot;);
+* fallback.<a class="reference internal" href="#eossdkclasseos_1_1macsec__key__t_1ade96c6b0d3943b0a2666b8469e84b021"><em>cak_is</em></a>(&quot;234&quot;);
+* profile.primary_key_is(primary);
+* profile.fallback_key_is(fallback);
+* profile.rekey_period_is(300);
+*
+* // writing profile 'test1'
+* get_macsec_mgr()-&gt;profile_set(profile);
+* 
+* // attaching the new profile 'test1' to interface Ethernet1/1
+* <a class="reference internal" href="intf.html#eossdkclasseos_1_1intf__id__t"><em>eos::intf_id_t</em></a> intfId(&quot;Ethernet1/1&quot;);
+* get_macsec_mgr()-&gt;intf_profile_is(intfId, &quot;test1&quot;);  
+* 
+</pre>
+</p>
+<dl class="namespace">
+<dt>
+<span class="target" id="eossdknamespaceeos"></span><em>namespace</em> <tt class="descname">eos</tt></dt>
+<dd><dl class="class">
+<dt>
+<span class="target" id="eossdkclasseos_1_1macsec__handler"></span><em>class</em> <tt class="descname">macsec_handler</tt></dt>
+<dd><em>#include &lt;macsec.h&gt;</em><p>This handler provides notifications when the MACsec status of an interface changes. </p>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1macsec__handler_1aa74cd0e0d73c0e96bc11c9aac8071f58"></span><tt class="descname">macsec_handler</tt><big>(</big><a class="reference internal" href="#eossdkclasseos_1_1macsec__mgr"><em>macsec_mgr</em></a> *<big>)</big></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1macsec__handler_1a08c5efc71b1cb822f07d87d9231a3d44"></span><a class="reference internal" href="#eossdkclasseos_1_1macsec__mgr"><em>macsec_mgr</em></a> * <tt class="descname">get_macsec_mgr</tt><big>(</big><big>)</big> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1macsec__handler_1ac8acc4e87f6ebaca3a61e2eeb5bd4655"></span>void <tt class="descname">watch_all_intfs</tt><big>(</big>bool<big>)</big></dt>
+<dd><p>Registers this class to receive change updates on all interfaces.</p>
+<p>Expects a boolean signifying whether notifications should be propagated to this instance or not. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1macsec__handler_1a8f73641cda98329c1a563a801f2e5211"></span>void <tt class="descname">watch_intf</tt><big>(</big><a class="reference internal" href="intf.html#eossdkclasseos_1_1intf__id__t"><em>intf_id_t</em></a>, bool<big>)</big></dt>
+<dd><p>Registers this class to receive change updates on the given interface.</p>
+<p>Expects the id of the corresponding interface and a boolean signifying whether notifications should be propagated to this instance or not. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1macsec__handler_1ac282f27cce88fb0c823ace566dfafb5e"></span>virtual void <tt class="descname">on_intf_status</tt><big>(</big><a class="reference internal" href="intf.html#eossdkclasseos_1_1intf__id__t"><em>intf_id_t</em></a>, <a class="reference internal" href="#eossdkclasseos_1_1macsec__intf__status__t"><em>macsec_intf_status_t</em></a> const &amp;<big>)</big></dt>
+<dd><p>Called when the key status of a MACsec interface changes. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="class">
+<dt>
+<span class="target" id="eossdkclasseos_1_1macsec__mgr"></span><em>class</em> <tt class="descname">macsec_mgr</tt></dt>
+<dd><em>#include &lt;macsec.h&gt;</em><p>The MACsec manager. This class inspects and configures MACsec profiles. </p>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1macsec__mgr_1ae638aa374ce7ddbd321e1b28b30b2bcc"></span>virtual <tt class="descname">~macsec_mgr</tt><big>(</big><big>)</big></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1macsec__mgr_1ae0e8ce9f30ec60a49b3d4fb4827ba82d"></span>virtual bool <tt class="descname">exists</tt><big>(</big>macsec_profile_name_t const &amp;<big>)</big> const = 0</dt>
+<dd><p>Returns whether or not a profile with the given name exists. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1macsec__mgr_1aacdbb4baf0d686f8e2402c69c1e222bb"></span>virtual <a class="reference internal" href="#eossdkclasseos_1_1macsec__profile__t"><em>macsec_profile_t</em></a> <tt class="descname">profile</tt><big>(</big>macsec_profile_name_t const &amp;<big>)</big> const = 0</dt>
+<dd><p>Returns the <a class="reference internal" href="#eossdkclasseos_1_1macsec__profile__t"><em>macsec_profile_t</em></a> with the given name. If no such profile exists, then return an empty profile with nothing configured. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1macsec__mgr_1a2f8786f6aa0e7c720c5a4a714dc72de2"></span>virtual void <tt class="descname">profile_set</tt><big>(</big><a class="reference internal" href="#eossdkclasseos_1_1macsec__profile__t"><em>macsec_profile_t</em></a> const &amp;<big>)</big> = 0</dt>
+<dd><p>Writes the given profile to MACsec config. If a profile with the given name already exists, update it with the configuration from the given <a class="reference internal" href="#eossdkclasseos_1_1macsec__profile__t"><em>macsec_profile_t</em></a>. An unencoded input CAK will be encoded if the <a class="reference internal" href="#eossdkclasseos_1_1macsec__key__t"><em>macsec_key_t</em></a>&#8216;s encoded attribute is set to false. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1macsec__mgr_1a622f0047ef1baa7c1d80cc054431bb4f"></span>virtual void <tt class="descname">profile_del</tt><big>(</big>macsec_profile_name_t const &amp;<big>)</big> = 0</dt>
+<dd><p>Deletes the profile with the given name if such a profile exists. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1macsec__mgr_1a6a3aa35ec673997bbac38688fb271ff8"></span>virtual macsec_profile_name_t <tt class="descname">intf_profile</tt><big>(</big><a class="reference internal" href="intf.html#eossdkclasseos_1_1intf__id__t"><em>intf_id_t</em></a><big>)</big> const = 0</dt>
+<dd><p>Returns the profile name of the profile attached to the interface. If there is no profile configured, return an empty string. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1macsec__mgr_1a8400c875581560971d5eb5e295bc6a95"></span>virtual void <tt class="descname">intf_profile_is</tt><big>(</big><a class="reference internal" href="intf.html#eossdkclasseos_1_1intf__id__t"><em>intf_id_t</em></a>, macsec_profile_name_t const &amp;<big>)</big> = 0</dt>
+<dd><p>Configures the given interface to use the given MACsec profile. An interface can only have one MACsec profile applied at a time. Applying a new profile to an interface which is already associated with a different profile will overwrite the previous profile. If an empty string is provided as profile name, any existing profile will be removed. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1macsec__mgr_1a3b15e17be18c84f6c5086fcf3bdca1e5"></span>virtual <a class="reference internal" href="#eossdkclasseos_1_1macsec__intf__status__t"><em>macsec_intf_status_t</em></a> <tt class="descname">intf_status</tt><big>(</big><a class="reference internal" href="intf.html#eossdkclasseos_1_1intf__id__t"><em>intf_id_t</em></a><big>)</big> const = 0</dt>
+<dd><p>Returns an object containing MACsec related status information of the given interface. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1macsec__mgr_1a1eaad626f783c95c7b2a3327fe4a98ff"></span>virtual bool <tt class="descname">macsec_capable</tt><big>(</big><a class="reference internal" href="intf.html#eossdkclasseos_1_1intf__id__t"><em>intf_id_t</em></a><big>)</big> const = 0</dt>
+<dd><p>Returns whether or not an interface supports MACsec. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1macsec__mgr_1a5aeecf769289c6b551e014e9a15bc8a4"></span>virtual <a class="reference internal" href="#eossdkclasseos_1_1macsec__intf__counters__t"><em>macsec_intf_counters_t</em></a> <tt class="descname">intf_counters</tt><big>(</big><a class="reference internal" href="intf.html#eossdkclasseos_1_1intf__id__t"><em>intf_id_t</em></a><big>)</big> = 0</dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Protected Functions</p>
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1macsec__mgr_1acd47c0b8746a5de93044bc40ceba4aa0"></span><tt class="descname">macsec_mgr</tt><big>(</big><big>)</big></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Private Members</p>
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1macsec__mgr_1a50054dd822d448ca2edab49aa9572b34"></span><tt class="descname">macsec_mgr</tt></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Friends</p>
+<dl class="friend">
+<dt>
+<span class="target" id="eossdkclasseos_1_1macsec__mgr_1aeb7cbaa8f0c2fa5882d215b0246f0986"></span>friend class <tt class="descname">macsec_handler</tt></dt>
+<dd></dd></dl>
+
+</div>
+</dd></dl>
+
+</dd></dl>
+
+<div class="section" id="type-definitions-in-macsec">
+<h2>Type definitions in <strong>macsec</strong><a class="headerlink" href="#type-definitions-in-macsec" title="Permalink to this headline">¶</a></h2>
+<dl class="namespace">
+<dt>
+<span class="target" id="eossdknamespaceeos"></span><em>namespace</em> <tt class="descname">eos</tt></dt>
+<dd><div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Typedefs</p>
+<dl class="typedef">
+<dt>
+<span class="target" id="eossdknamespaceeos_1a706ec1924a169a609d055ca2095c4bdb"></span>typedef std::string <tt class="descname">macsec_profile_name_t</tt></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Enums</p>
+<dl class="enum">
+<dt>
+<span class="target" id="eossdknamespaceeos_1acf7a7d2be7fd986b722216eb89df202a"></span><strong>macsec_cipher_suite_t enum</strong></dt>
+<dd><p>Cipher suite used for MACsec. </p>
+<p><em>Values:</em></p>
+<ul class="breatheenumvalues">
+<li><tt class="first docutils literal"><span class="pre">CIPHER_NULL</span></tt> - </li>
+<li><tt class="first docutils literal"><span class="pre">GCM_AES_XPN_128</span></tt><tt class="docutils literal"> <span class="pre">=</span> <span class="pre">=</span> <span class="pre">128</span></tt> - </li>
+<li><tt class="first docutils literal"><span class="pre">GCM_AES_XPN_256</span></tt><tt class="docutils literal"> <span class="pre">=</span> <span class="pre">=</span> <span class="pre">256</span></tt> - </li>
+</ul>
+</dd></dl>
+
+<dl class="enum">
+<dt>
+<span class="target" id="eossdknamespaceeos_1a3e951fc05e55939716358b5ae4b2cfd5"></span><strong>macsec_intf_key_status_t enum</strong></dt>
+<dd><p>Which key an interface is using if a profile is configured. </p>
+<p><em>Values:</em></p>
+<ul class="breatheenumvalues">
+<li><tt class="first docutils literal"><span class="pre">MACSEC_NO_PROFILE</span></tt> - </li>
+<li><tt class="first docutils literal"><span class="pre">MACSEC_KEY_NONE</span></tt> - </li>
+<li><tt class="first docutils literal"><span class="pre">MACSEC_KEY_PRIMARY</span></tt> - </li>
+<li><tt class="first docutils literal"><span class="pre">MACSEC_KEY_FALLBACK</span></tt> - </li>
+</ul>
+</dd></dl>
+
+</div>
+<dl class="class">
+<dt>
+<span class="target" id="eossdkclasseos_1_1macsec__key__t"></span><em>class</em> <tt class="descname">macsec_key_t</tt></dt>
+<dd><em>#include &lt;macsec.h&gt;</em><p>A connectivity association key. </p>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1macsec__key__t_1aa06208d0904943b396a557ea6f142627"></span><tt class="descname">macsec_key_t</tt><big>(</big><big>)</big></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1macsec__key__t_1aec84739e3533da5b000cb8153b66ba72"></span>std::string <tt class="descname">cak</tt><big>(</big><big>)</big> const</dt>
+<dd><p>Getter for &#8216;cak&#8217;: connectivity association key (CAK). CAK is a hex string. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1macsec__key__t_1ade96c6b0d3943b0a2666b8469e84b021"></span>void <tt class="descname">cak_is</tt><big>(</big>std::string <em>cak</em><big>)</big></dt>
+<dd><p>Setter for &#8216;cak&#8217;. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1macsec__key__t_1af8bcb497723d3c30e3cfc52b4577f3c1"></span>std::string <tt class="descname">ckn</tt><big>(</big><big>)</big> const</dt>
+<dd><p>Getter for &#8216;ckn&#8217;: connectivity association key name (CKN). CKN is a hex string. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1macsec__key__t_1a90b195be9f203b5a89a04bc7bf0b0b2a"></span>void <tt class="descname">ckn_is</tt><big>(</big>std::string <em>ckn</em><big>)</big></dt>
+<dd><p>Setter for &#8216;ckn&#8217;. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1macsec__key__t_1a78449e6f500686795ab2d3e585d6a4a4"></span>bool <tt class="descname">encoded</tt><big>(</big><big>)</big> const</dt>
+<dd><p>Getter for &#8216;encoded&#8217;: whether or not the CAK has been encoded. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1macsec__key__t_1ab66d24491f8d46d4d6618b2ef8df2cba"></span>void <tt class="descname">encoded_is</tt><big>(</big>bool <em>encoded</em><big>)</big></dt>
+<dd><p>Setter for &#8216;encoded&#8217;. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1macsec__key__t_1ad43f6ae1f6f62893efc5d1f358139b21"></span>bool <tt class="descname">operator==</tt><big>(</big><a class="reference internal" href="#eossdkclasseos_1_1macsec__key__t"><em>macsec_key_t</em></a> const &amp; <em>other</em><big>)</big> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1macsec__key__t_1a91165ccd055b541fa421189ac62fdb93"></span>bool <tt class="descname">operator!=</tt><big>(</big><a class="reference internal" href="#eossdkclasseos_1_1macsec__key__t"><em>macsec_key_t</em></a> const &amp; <em>other</em><big>)</big> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1macsec__key__t_1a6f7b27627e8157051d64accba9649cc2"></span>bool <tt class="descname">operator&lt;</tt><big>(</big><a class="reference internal" href="#eossdkclasseos_1_1macsec__key__t"><em>macsec_key_t</em></a> const &amp; <em>other</em><big>)</big> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1macsec__key__t_1a30d26f5a341569e320d3168e3ff02f59"></span>uint32_t <tt class="descname">hash</tt><big>(</big><big>)</big> const</dt>
+<dd><p>The hash function for type <a class="reference internal" href="#eossdkclasseos_1_1macsec__key__t"><em>macsec_key_t</em></a>. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1macsec__key__t_1aa519363777cdb0411ae26089404c0547"></span>std::string <tt class="descname">to_string</tt><big>(</big><big>)</big> const</dt>
+<dd><p>Returns a string representation of the current object&#8217;s values. </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Private Members</p>
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1macsec__key__t_1a772a6fd0860707e7946a94d646d51818"></span>std::string <tt class="descname">cak_</tt></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1macsec__key__t_1ab4084e48bbf87e540efdada190064afd"></span>std::string <tt class="descname">ckn_</tt></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1macsec__key__t_1a77314c5cb2152eb61ac13b591db6bf55"></span>bool <tt class="descname">encoded_</tt></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Friends</p>
+<dl class="friend">
+<dt>
+<span class="target" id="eossdkclasseos_1_1macsec__key__t_1afab9b64e4c267ded94393ed475b4013f"></span>friend std::ostream &amp; <tt class="descname">operator&lt;&lt;</tt></dt>
+<dd><p>A utility stream operator that adds a string representation of <a class="reference internal" href="#eossdkclasseos_1_1macsec__key__t"><em>macsec_key_t</em></a> to the ostream. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="class">
+<dt>
+<span class="target" id="eossdkclasseos_1_1macsec__profile__t"></span><em>class</em> <tt class="descname">macsec_profile_t</tt></dt>
+<dd><em>#include &lt;macsec.h&gt;</em><p>A MACsec profile which can be attached to an interface. </p>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1macsec__profile__t_1a4c029183de7fbe0a3489d70c169787dd"></span><tt class="descname">macsec_profile_t</tt><big>(</big><big>)</big></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1macsec__profile__t_1a89a154b5fe1272fe10a0e3693397bf9c"></span><tt class="descname">macsec_profile_t</tt><big>(</big>macsec_profile_name_t <em>name</em><big>)</big></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1macsec__profile__t_1acc87be88b609a250abfb1e2b8e730028"></span>macsec_profile_name_t <tt class="descname">name</tt><big>(</big><big>)</big> const</dt>
+<dd><p>Getter for &#8216;name&#8217;: the name of the profile. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1macsec__profile__t_1a13323bc9d432c0496421bae20a18d36d"></span>void <tt class="descname">name_is</tt><big>(</big>macsec_profile_name_t <em>name</em><big>)</big></dt>
+<dd><p>Setter for &#8216;name&#8217;. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1macsec__profile__t_1a4736de23e4135c126899f725ccef0dfe"></span><a class="reference internal" href="#eossdkclasseos_1_1macsec__key__t"><em>macsec_key_t</em></a> <tt class="descname">primary_key</tt><big>(</big><big>)</big> const</dt>
+<dd><p>Getter for &#8216;primary_key&#8217;: the primary key, which is represented by a CKN and an associated CAK. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1macsec__profile__t_1a92621eddecef33a41a65f58c9f65828a"></span>void <tt class="descname">primary_key_is</tt><big>(</big><a class="reference internal" href="#eossdkclasseos_1_1macsec__key__t"><em>macsec_key_t</em></a> <em>primary_key</em><big>)</big></dt>
+<dd><p>Setter for &#8216;primary_key&#8217;. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1macsec__profile__t_1a80946321e90fbd85768d98a3bbf87c21"></span><a class="reference internal" href="#eossdkclasseos_1_1macsec__key__t"><em>macsec_key_t</em></a> <tt class="descname">fallback_key</tt><big>(</big><big>)</big> const</dt>
+<dd><p>Getter for &#8216;fallback_key&#8217;: the fallback, or default, key, which is used when the primary is not successful. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1macsec__profile__t_1a3a47c1245a2d9681a0c2eaab63af26d6"></span>void <tt class="descname">fallback_key_is</tt><big>(</big><a class="reference internal" href="#eossdkclasseos_1_1macsec__key__t"><em>macsec_key_t</em></a> <em>fallback_key</em><big>)</big></dt>
+<dd><p>Setter for &#8216;fallback_key&#8217;. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1macsec__profile__t_1a6f0d1da253a253cd8d8d3b98ac5d5a5a"></span>uint8_t <tt class="descname">key_server_priority</tt><big>(</big><big>)</big> const</dt>
+<dd><p>Getter for &#8216;key_server_priority&#8217;: MACsec Key Agreement (MKA) protocol key server priority. 255 is the highest priority. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1macsec__profile__t_1a81de401301b288f786b36789780fc4ce"></span>void <tt class="descname">key_server_priority_is</tt><big>(</big>uint8_t <em>key_server_priority</em><big>)</big></dt>
+<dd><p>Setter for &#8216;key_server_priority&#8217;. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1macsec__profile__t_1ae5a369be3b25f8571e1590085a961744"></span>uint32_t <tt class="descname">rekey_period</tt><big>(</big><big>)</big> const</dt>
+<dd><p>Getter for &#8216;rekey_period&#8217;: MKA session re-key period in seconds. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1macsec__profile__t_1a9591c3101337bd55c8e857b9b32b2709"></span>void <tt class="descname">rekey_period_is</tt><big>(</big>uint32_t <em>rekey_period</em><big>)</big></dt>
+<dd><p>Setter for &#8216;rekey_period&#8217;. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1macsec__profile__t_1a0c32360b8a25cf7e3dd610ece297135e"></span>macsec_cipher_suite_t <tt class="descname">cipher</tt><big>(</big><big>)</big> const</dt>
+<dd><p>Getter for &#8216;cipher&#8217;: which encryption standard to use. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1macsec__profile__t_1aaa18cf3a572a80b7887c1f1f47411225"></span>void <tt class="descname">cipher_is</tt><big>(</big>macsec_cipher_suite_t <em>cipher</em><big>)</big></dt>
+<dd><p>Setter for &#8216;cipher&#8217;. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1macsec__profile__t_1a8b3cda3f0ae03e5263413e29c4767fe3"></span>bool <tt class="descname">dot1x</tt><big>(</big><big>)</big> const</dt>
+<dd><p>Getter for &#8216;dot1x&#8217;: if set, derive MAC security keys from IEEE 802.1X based port authentication. This will be disabled if a key is provided manually. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1macsec__profile__t_1a6665f96e8603e433202bcde47db49503"></span>void <tt class="descname">dot1x_is</tt><big>(</big>bool <em>dot1x</em><big>)</big></dt>
+<dd><p>Setter for &#8216;dot1x&#8217;. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1macsec__profile__t_1a8c10ebc87a0ffbe2e053f9eec7f3058f"></span>bool <tt class="descname">include_sci</tt><big>(</big><big>)</big> const</dt>
+<dd><p>Getter for &#8216;include_sci&#8217;: if set, include secure channel identifier (SCI) in data packets. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1macsec__profile__t_1a852164b8a48c6bee9f0fbc2080cb9d72"></span>void <tt class="descname">include_sci_is</tt><big>(</big>bool <em>include_sci</em><big>)</big></dt>
+<dd><p>Setter for &#8216;include_sci&#8217;. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1macsec__profile__t_1a81f5dfb236b82127f6feec8141ad7ca4"></span>bool <tt class="descname">bypass_lldp</tt><big>(</big><big>)</big> const</dt>
+<dd><p>Getter for &#8216;bypass_lldp&#8217;: if set, transmit/receive LLDP frames without protection. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1macsec__profile__t_1a9713b7972a4f67cf2b94af0e6c5c5e05"></span>void <tt class="descname">bypass_lldp_is</tt><big>(</big>bool <em>bypass_lldp</em><big>)</big></dt>
+<dd><p>Setter for &#8216;bypass_lldp&#8217;. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1macsec__profile__t_1a1ec4e55af46df8b432b5662033e8cca4"></span>bool <tt class="descname">allow_unprotected</tt><big>(</big><big>)</big> const</dt>
+<dd><p>Getter for &#8216;allow_unprotected&#8217;: if set, allow transmit/receive without MAC security protection. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1macsec__profile__t_1a80292297ac13e788eec0bd92884e5163"></span>void <tt class="descname">allow_unprotected_is</tt><big>(</big>bool <em>allow_unprotected</em><big>)</big></dt>
+<dd><p>Setter for &#8216;allow_unprotected&#8217;. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1macsec__profile__t_1a4c76f32b3f2c7212201051435d275b2c"></span>bool <tt class="descname">replay_protection</tt><big>(</big><big>)</big> const</dt>
+<dd><p>Getter for &#8216;replay_protection&#8217;: if set, enable replay protection. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1macsec__profile__t_1af561cbe31df95e52e67d1e9fd29f1c2f"></span>void <tt class="descname">replay_protection_is</tt><big>(</big>bool <em>replay_protection</em><big>)</big></dt>
+<dd><p>Setter for &#8216;replay_protection&#8217;. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1macsec__profile__t_1a89c68e33d07bcda4bf3213f81c1754ba"></span>uint32_t <tt class="descname">replay_protection_window</tt><big>(</big><big>)</big> const</dt>
+<dd><p>Getter for &#8216;replay_protection_window&#8217;: replay protection window size. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1macsec__profile__t_1af65f762f7b090cbb0d5794ffc8517af5"></span>void <tt class="descname">replay_protection_window_is</tt><big>(</big>uint32_t <em>replay_protection_window</em><big>)</big></dt>
+<dd><p>Setter for &#8216;replay_protection_window&#8217;. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1macsec__profile__t_1ae537a662cabe188ae78a282880744210"></span>bool <tt class="descname">operator==</tt><big>(</big><a class="reference internal" href="#eossdkclasseos_1_1macsec__profile__t"><em>macsec_profile_t</em></a> const &amp; <em>other</em><big>)</big> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1macsec__profile__t_1adb64b5adf5d4a2b64f6154b0af9359e8"></span>bool <tt class="descname">operator!=</tt><big>(</big><a class="reference internal" href="#eossdkclasseos_1_1macsec__profile__t"><em>macsec_profile_t</em></a> const &amp; <em>other</em><big>)</big> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1macsec__profile__t_1a7076e5fc9b1e80451c008eabdfd1e2f1"></span>bool <tt class="descname">operator&lt;</tt><big>(</big><a class="reference internal" href="#eossdkclasseos_1_1macsec__profile__t"><em>macsec_profile_t</em></a> const &amp; <em>other</em><big>)</big> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1macsec__profile__t_1ab929fc6e4356306228b2c0889e3478c7"></span>uint32_t <tt class="descname">hash</tt><big>(</big><big>)</big> const</dt>
+<dd><p>The hash function for type <a class="reference internal" href="#eossdkclasseos_1_1macsec__profile__t"><em>macsec_profile_t</em></a>. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1macsec__profile__t_1a8a664923b6018d2ee286b51b57d6a9cb"></span>std::string <tt class="descname">to_string</tt><big>(</big><big>)</big> const</dt>
+<dd><p>Returns a string representation of the current object&#8217;s values. </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Private Members</p>
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1macsec__profile__t_1ad6cc072aa18eb418cf5dec4a79bb8ff9"></span>macsec_profile_name_t <tt class="descname">name_</tt></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1macsec__profile__t_1a56bbcdd661063e73ad63699890b398ac"></span><a class="reference internal" href="#eossdkclasseos_1_1macsec__key__t"><em>macsec_key_t</em></a> <tt class="descname">primary_key_</tt></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1macsec__profile__t_1a835a1e7ce47dc14f3f7568969d5bd79f"></span><a class="reference internal" href="#eossdkclasseos_1_1macsec__key__t"><em>macsec_key_t</em></a> <tt class="descname">fallback_key_</tt></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1macsec__profile__t_1aca7dbd5a7db8d5d763f776585b36f33c"></span>uint8_t <tt class="descname">key_server_priority_</tt></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1macsec__profile__t_1a6e8d55bd7bc33931950d005114b1ba6f"></span>uint32_t <tt class="descname">rekey_period_</tt></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1macsec__profile__t_1a0846bfb0260d8759cbe753333c801f68"></span>macsec_cipher_suite_t <tt class="descname">cipher_</tt></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1macsec__profile__t_1a32a129f0f3e97dd9ace98b319b3cd65a"></span>bool <tt class="descname">dot1x_</tt></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1macsec__profile__t_1ae35a8fa795cb44308cd61a88d5ddece5"></span>bool <tt class="descname">include_sci_</tt></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1macsec__profile__t_1a8f921b85a6af66f06fc546908f5178ed"></span>bool <tt class="descname">bypass_lldp_</tt></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1macsec__profile__t_1af0e339ac1422b6e6a951016acbbe42b1"></span>bool <tt class="descname">allow_unprotected_</tt></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1macsec__profile__t_1a4f69050bd58b95345fe2058147245f09"></span>bool <tt class="descname">replay_protection_</tt></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1macsec__profile__t_1acf1fe925eb54c8099ab5123c9cd41a70"></span>uint32_t <tt class="descname">replay_protection_window_</tt></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Friends</p>
+<dl class="friend">
+<dt>
+<span class="target" id="eossdkclasseos_1_1macsec__profile__t_1ab86821ac9c99a483e5b9bbe56a254292"></span>friend std::ostream &amp; <tt class="descname">operator&lt;&lt;</tt></dt>
+<dd><p>A utility stream operator that adds a string representation of <a class="reference internal" href="#eossdkclasseos_1_1macsec__profile__t"><em>macsec_profile_t</em></a> to the ostream. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="class">
+<dt>
+<span class="target" id="eossdkclasseos_1_1macsec__intf__status__t"></span><em>class</em> <tt class="descname">macsec_intf_status_t</tt></dt>
+<dd><em>#include &lt;macsec.h&gt;</em><p>Information regarding the MACsec status of an interface. </p>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1macsec__intf__status__t_1a47c0f5e2dc9d68f61ff2f2fb9ebf360e"></span><tt class="descname">macsec_intf_status_t</tt><big>(</big><big>)</big></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1macsec__intf__status__t_1a60a2445bbcf0c50af3c4f55a63d37d62"></span>macsec_intf_key_status_t <tt class="descname">status</tt><big>(</big><big>)</big> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1macsec__intf__status__t_1a3665854fd3613edde35c8ef7c15a28e3"></span>void <tt class="descname">status_is</tt><big>(</big>macsec_intf_key_status_t <em>status</em><big>)</big></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1macsec__intf__status__t_1ab69c5c8d138335b30713eb436cafebd9"></span>bool <tt class="descname">operator==</tt><big>(</big><a class="reference internal" href="#eossdkclasseos_1_1macsec__intf__status__t"><em>macsec_intf_status_t</em></a> const &amp; <em>other</em><big>)</big> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1macsec__intf__status__t_1a2c3ef10ffa9205246ae63a6f9c2b89da"></span>bool <tt class="descname">operator!=</tt><big>(</big><a class="reference internal" href="#eossdkclasseos_1_1macsec__intf__status__t"><em>macsec_intf_status_t</em></a> const &amp; <em>other</em><big>)</big> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1macsec__intf__status__t_1adaa848c8da75e32e1d60464580f4f5b3"></span>bool <tt class="descname">operator&lt;</tt><big>(</big><a class="reference internal" href="#eossdkclasseos_1_1macsec__intf__status__t"><em>macsec_intf_status_t</em></a> const &amp; <em>other</em><big>)</big> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1macsec__intf__status__t_1a1394152dbef9738b4ba35a2c15055818"></span>uint32_t <tt class="descname">hash</tt><big>(</big><big>)</big> const</dt>
+<dd><p>The hash function for type <a class="reference internal" href="#eossdkclasseos_1_1macsec__intf__status__t"><em>macsec_intf_status_t</em></a>. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1macsec__intf__status__t_1a7322eeef5ed828bbc81d8329cf9adee3"></span>std::string <tt class="descname">to_string</tt><big>(</big><big>)</big> const</dt>
+<dd><p>Returns a string representation of the current object&#8217;s values. </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Private Members</p>
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1macsec__intf__status__t_1a879d185da3b6ebdfb4960017258a442d"></span>macsec_intf_key_status_t <tt class="descname">status_</tt></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Friends</p>
+<dl class="friend">
+<dt>
+<span class="target" id="eossdkclasseos_1_1macsec__intf__status__t_1a3e0e18c308ece4d114b254967a74ba50"></span>friend std::ostream &amp; <tt class="descname">operator&lt;&lt;</tt></dt>
+<dd><p>A utility stream operator that adds a string representation of <a class="reference internal" href="#eossdkclasseos_1_1macsec__intf__status__t"><em>macsec_intf_status_t</em></a> to the ostream. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="class">
+<dt>
+<span class="target" id="eossdkclasseos_1_1macsec__intf__counters__t"></span><em>class</em> <tt class="descname">macsec_intf_counters_t</tt></dt>
+<dd><em>#include &lt;macsec.h&gt;</em><p>MACsec interface counters class. </p>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1macsec__intf__counters__t_1aa42ed56b137b8906df30507248c84727"></span><tt class="descname">macsec_intf_counters_t</tt><big>(</big><big>)</big></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1macsec__intf__counters__t_1a7a7288400b6158ddf617a9fbce6e1410"></span><tt class="descname">macsec_intf_counters_t</tt><big>(</big>uint64_t <em>out_pkts_encrypted</em>, uint64_t <em>out_octets_encrypted</em>, uint64_t <em>in_pkts_decrypted</em>, uint64_t <em>in_octets_decrypted</em>, uint64_t <em>in_pkts_not_valid</em><big>)</big></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1macsec__intf__counters__t_1a2ee0def4c979452801d9bfcb0b473ac0"></span>uint64_t <tt class="descname">out_pkts_encrypted</tt><big>(</big><big>)</big> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1macsec__intf__counters__t_1a0f16ef8cda135cd7af70eb45a4ae151b"></span>uint64_t <tt class="descname">out_octets_encrypted</tt><big>(</big><big>)</big> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1macsec__intf__counters__t_1ab11cdbe0928652d05c018728e88f40ac"></span>uint64_t <tt class="descname">in_pkts_decrypted</tt><big>(</big><big>)</big> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1macsec__intf__counters__t_1a6854c17cde7123a8819be90a965e588b"></span>uint64_t <tt class="descname">in_octets_decrypted</tt><big>(</big><big>)</big> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1macsec__intf__counters__t_1a85d6944741528f222cb4ea0452c40094"></span>uint64_t <tt class="descname">in_pkts_not_valid</tt><big>(</big><big>)</big> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1macsec__intf__counters__t_1a8a24077d6bb537d595ae62d0023560a0"></span>bool <tt class="descname">operator==</tt><big>(</big><a class="reference internal" href="#eossdkclasseos_1_1macsec__intf__counters__t"><em>macsec_intf_counters_t</em></a> const &amp; <em>other</em><big>)</big> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1macsec__intf__counters__t_1a19671c6a95a3f4a441aa3db145bcc5f6"></span>bool <tt class="descname">operator!=</tt><big>(</big><a class="reference internal" href="#eossdkclasseos_1_1macsec__intf__counters__t"><em>macsec_intf_counters_t</em></a> const &amp; <em>other</em><big>)</big> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1macsec__intf__counters__t_1a1e59360c0831e1ec7a53793b16d5735f"></span>bool <tt class="descname">operator&lt;</tt><big>(</big><a class="reference internal" href="#eossdkclasseos_1_1macsec__intf__counters__t"><em>macsec_intf_counters_t</em></a> const &amp; <em>other</em><big>)</big> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1macsec__intf__counters__t_1a8cb9931c0dc8517b61b14f8c140b16ef"></span>uint32_t <tt class="descname">hash</tt><big>(</big><big>)</big> const</dt>
+<dd><p>The hash function for type <a class="reference internal" href="#eossdkclasseos_1_1macsec__intf__counters__t"><em>macsec_intf_counters_t</em></a>. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1macsec__intf__counters__t_1a91936d1af89766ca91b8a80a810ff73a"></span>std::string <tt class="descname">to_string</tt><big>(</big><big>)</big> const</dt>
+<dd><p>Returns a string representation of the current object&#8217;s values. </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Private Members</p>
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1macsec__intf__counters__t_1a58a568168b93a401cad6713c03939f4d"></span>uint64_t <tt class="descname">out_pkts_encrypted_</tt></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1macsec__intf__counters__t_1ad0c618dc4d2157c097ba9c2bbaf57842"></span>uint64_t <tt class="descname">out_octets_encrypted_</tt></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1macsec__intf__counters__t_1aa8d1f3dcbfd6f1359f094bdcf74c6f22"></span>uint64_t <tt class="descname">in_pkts_decrypted_</tt></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1macsec__intf__counters__t_1a0b2d6b2e834bae97ef1652fff5e1055d"></span>uint64_t <tt class="descname">in_octets_decrypted_</tt></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1macsec__intf__counters__t_1aea30d5bed44f6946815dd2c1ce3594ee"></span>uint64_t <tt class="descname">in_pkts_not_valid_</tt></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Friends</p>
+<dl class="friend">
+<dt>
+<span class="target" id="eossdkclasseos_1_1macsec__intf__counters__t_1a0143bf1184d24b1f9436e4521a43b012"></span>friend std::ostream &amp; <tt class="descname">operator&lt;&lt;</tt></dt>
+<dd><p>A utility stream operator that adds a string representation of <a class="reference internal" href="#eossdkclasseos_1_1macsec__intf__counters__t"><em>macsec_intf_counters_t</em></a> to the ostream. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#"><strong>macsec</strong></a><ul>
+<li><a class="reference internal" href="#type-definitions-in-macsec">Type definitions in <strong>macsec</strong></a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="mac_table.html"
+                        title="previous chapter"><strong>mac_table</strong></a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="mlag.html"
+                        title="next chapter"><strong>mlag</strong></a></p>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="mlag.html" title="mlag"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="mac_table.html" title="mac_table"
+             >previous</a> |</li>
+        <li><a href="index.html">Arista EOS SDK 2.13.0 reference</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2014, Arista Networks.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

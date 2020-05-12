@@ -1,0 +1,228 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>mlag &mdash; Arista EOS SDK 2.13.0 reference</title>
+    
+    <link rel="stylesheet" href="_static/eossdk.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/breathe.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '2.13.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="Arista EOS SDK 2.13.0 reference" href="index.html" />
+    <link rel="next" title="mpls" href="mpls.html" />
+    <link rel="prev" title="macsec" href="macsec.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="mpls.html" title="mpls"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="macsec.html" title="macsec"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">Arista EOS SDK 2.13.0 reference</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="mlag">
+<h1><strong>mlag</strong><a class="headerlink" href="#mlag" title="Permalink to this headline">¶</a></h1>
+<dl class="namespace">
+<dt>
+<span class="target" id="eossdknamespaceeos"></span><em>namespace</em> <tt class="descname">eos</tt></dt>
+<dd><dl class="class">
+<dt>
+<span class="target" id="eossdkclasseos_1_1mlag__handler"></span><em>class</em> <tt class="descname">mlag_handler</tt></dt>
+<dd><div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1mlag__handler_1aacbb7a4ddf7863746e6deb148f879212"></span><tt class="descname">mlag_handler</tt><big>(</big><a class="reference internal" href="#eossdkclasseos_1_1mlag__mgr"><em>mlag_mgr</em></a> * <em>mgr</em><big>)</big></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1mlag__handler_1a341ea3116044427e13c07f6ab627e212"></span><a class="reference internal" href="#eossdkclasseos_1_1mlag__mgr"><em>mlag_mgr</em></a> * <tt class="descname">get_mlag_mgr</tt><big>(</big><big>)</big> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1mlag__handler_1aed1af36c75ae5456b4782112caee6956"></span>virtual void <tt class="descname">on_mlag_state</tt><big>(</big>mlag_state_t<big>)</big></dt>
+<dd></dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="class">
+<dt>
+<span class="target" id="eossdkclasseos_1_1mlag__mgr"></span><em>class</em> <tt class="descname">mlag_mgr</tt></dt>
+<dd><div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1mlag__mgr_1a83beb60d738de81c984a9a0ac1bf954e"></span>virtual <tt class="descname">~mlag_mgr</tt><big>(</big><big>)</big></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1mlag__mgr_1a8cbcfae11ad7a65080cd55601254c9b2"></span>virtual bool <tt class="descname">enabled</tt><big>(</big><big>)</big> const = 0</dt>
+<dd><p>Returns whether or not MLAG is configured on this system. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1mlag__mgr_1afb1ae084f4791eba04932fb7b7449515"></span>virtual void <tt class="descname">enabled_is</tt><big>(</big>bool<big>)</big> = 0</dt>
+<dd><p>Configures whether MLAG is enabled. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1mlag__mgr_1a45c2b6bf7e9fdf6544fd74224fb8afe4"></span>virtual <a class="reference internal" href="ip.html#eossdkclasseos_1_1ip__addr__t"><em>ip_addr_t</em></a> <tt class="descname">peer_address</tt><big>(</big><big>)</big> const = 0</dt>
+<dd><p>Returns the configured IP address of our MLAG peer. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1mlag__mgr_1a33d338c699b03114072115dd2cc62765"></span>virtual mlag_state_t <tt class="descname">state</tt><big>(</big><big>)</big> const = 0</dt>
+<dd><p>Returns the current operational state of our MLAG relationship. </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Protected Functions</p>
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1mlag__mgr_1acc242c00101845d39945c6ac013a3a8e"></span><tt class="descname">mlag_mgr</tt><big>(</big><big>)</big></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Private Members</p>
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1mlag__mgr_1ab10e7844ddfe2d04699a2089a2f6c175"></span><tt class="descname">mlag_mgr</tt></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Friends</p>
+<dl class="friend">
+<dt>
+<span class="target" id="eossdkclasseos_1_1mlag__mgr_1ae90b6a54920bf10d343e7ba6d1e4c004"></span>friend class <tt class="descname">mlag_handler</tt></dt>
+<dd></dd></dl>
+
+</div>
+</dd></dl>
+
+</dd></dl>
+
+<div class="section" id="type-definitions-in-mlag">
+<h2>Type definitions in <strong>mlag</strong><a class="headerlink" href="#type-definitions-in-mlag" title="Permalink to this headline">¶</a></h2>
+<dl class="namespace">
+<dt>
+<span class="target" id="eossdknamespaceeos"></span><em>namespace</em> <tt class="descname">eos</tt></dt>
+<dd><div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Enums</p>
+<dl class="enum">
+<dt>
+<span class="target" id="eossdknamespaceeos_1a93cf67537acae4620af96d47b2baeae3"></span><strong>mlag_state_t enum</strong></dt>
+<dd><p><em>Values:</em></p>
+<ul class="breatheenumvalues">
+<li><tt class="first docutils literal"><span class="pre">MLAG_STATE_UNKNOWN</span></tt> - </li>
+<li><tt class="first docutils literal"><span class="pre">MLAG_STATE_DISABLED</span></tt> - </li>
+<li><tt class="first docutils literal"><span class="pre">MLAG_STATE_INACTIVE</span></tt> - </li>
+<li><tt class="first docutils literal"><span class="pre">MLAG_STATE_PRIMARY</span></tt> - </li>
+<li><tt class="first docutils literal"><span class="pre">MLAG_STATE_SECONDARY</span></tt> - </li>
+</ul>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#"><strong>mlag</strong></a><ul>
+<li><a class="reference internal" href="#type-definitions-in-mlag">Type definitions in <strong>mlag</strong></a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="macsec.html"
+                        title="previous chapter"><strong>macsec</strong></a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="mpls.html"
+                        title="next chapter"><strong>mpls</strong></a></p>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="mpls.html" title="mpls"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="macsec.html" title="macsec"
+             >previous</a> |</li>
+        <li><a href="index.html">Arista EOS SDK 2.13.0 reference</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2014, Arista Networks.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

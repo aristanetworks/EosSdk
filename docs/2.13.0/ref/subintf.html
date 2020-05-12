@@ -1,0 +1,363 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>subintf &mdash; Arista EOS SDK 2.13.0 reference</title>
+    
+    <link rel="stylesheet" href="_static/eossdk.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/breathe.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '2.13.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="Arista EOS SDK 2.13.0 reference" href="index.html" />
+    <link rel="next" title="system" href="system.html" />
+    <link rel="prev" title="sdk" href="sdk.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="system.html" title="system"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="sdk.html" title="sdk"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">Arista EOS SDK 2.13.0 reference</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="subintf">
+<h1><strong>subintf</strong><a class="headerlink" href="#subintf" title="Permalink to this headline">¶</a></h1>
+<p>The subintf module manages subinterfaces.</p>
+<p>Subinterfaces are multiple logical routed interfaces under an Ethernet or LAG routed interface (also referred to as the parent interface). Each subinterface is assigned a VLAN tag that is unique to the subinterface (among all its sibling subinterfaces under the same parent interface). The VLAN tag is used for mux/demux of data traffic from/to all subinterfaces under the parent interface.</p>
+<p>This module provides APIs to provision subinterfaces. APIs include subinterface creation, deletion, retrieval and getter/setter for the subinterface VLAN tag. An iterator is also provided to iterate through all the subinterfaces that are configured in the system.</p>
+<p>The subinterface APIs can be used with the ones in &#8220;intf&#8221; module, as shown in the sample code below. For example, the <a class="reference internal" href="intf.html#eossdkclasseos_1_1intf__handler"><em>eos::intf_handler</em></a>&#8216;s on_intf_create() API can be used to react to the creation of new subinterfaces.</p>
+<p> <pre class="literal-block">
+*
+  #include &lt;eos/agent.h&gt;
+  #include &lt;eos/subintf.h&gt;
+  #include &lt;eos/panic.h&gt;
+  #include &lt;eos/sdk.h&gt;
+
+  static <a class="reference internal" href="#eossdkclasseos_1_1subintf__mgr"><em>eos::subintf_mgr</em></a> *subintf_mgr;
+
+  class ApplicationAgent : public <a class="reference internal" href="agent.html#eossdkclasseos_1_1agent__handler"><em>eos::agent_handler</em></a>, <a class="reference internal" href="intf.html#eossdkclasseos_1_1intf__handler"><em>eos::intf_handler</em></a> {
+   public:
+     explicit ApplicationAgent(<a class="reference internal" href="sdk.html#eossdkclasseos_1_1sdk"><em>eos::sdk</em></a> &amp; sdk) :
+                               eos::agent_handler(sdk.get_agent_mgr()),
+                               eos::intf_handler(sdk.get_intf_mgr()) {
+         <a class="reference internal" href="intf.html#eossdkclasseos_1_1intf__handler_1adbe2e50b873d666837f8ca61a93379bc"><em>watch_intf</em></a>(<a class="reference internal" href="intf.html#eossdkclasseos_1_1intf__id__t"><em>eos::intf_id_t</em></a>(&quot;Ethernet1.1&quot;), true);
+     }
+
+     // Called when all agents are initialized
+     void <a class="reference internal" href="agent.html#eossdkclasseos_1_1agent__handler_1ad558b16ee9a283bd9b153400743c4b1c"><em>on_initialized</em></a>() {
+        // Creates subinterface
+        subintf_mgr-&gt;<a class="reference internal" href="#eossdkclasseos_1_1subintf__mgr_1a526a634048600a97e97a9fd79666e88d"><em>subintf_is</em></a>(<a class="reference internal" href="intf.html#eossdkclasseos_1_1intf__id__t"><em>eos::intf_id_t</em></a>(&quot;Ethernet1.1&quot;));
+     }
+
+     // Handler for subinterface creation
+     void <a class="reference internal" href="intf.html#eossdkclasseos_1_1intf__handler_1a32ce1a451e82c6963b8f6699eee1c571"><em>on_intf_create</em></a>(<a class="reference internal" href="intf.html#eossdkclasseos_1_1intf__id__t"><em>eos::intf_id_t</em></a> i) {
+        if (i == <a class="reference internal" href="intf.html#eossdkclasseos_1_1intf__id__t"><em>eos::intf_id_t</em></a>(&quot;Ethernet1.1&quot;)) {
+           // Ethernet1.1 is now usable.
+           // Other application logic goes here, such as creating more subinterfaces
+        }
+        return;
+     }
+  }
+
+  int main(int argc, char **argv) {
+     <a class="reference internal" href="sdk.html#eossdkclasseos_1_1sdk"><em>eos::sdk</em></a> sdk;
+     subintf_mgr = sdk.get_subintf_mgr();
+     ApplicationAgent agent(sdk);
+     sdk.<a class="reference internal" href="sdk.html#eossdkclasseos_1_1sdk_1a64f50ab3f5d0197d07ff706c1ef0d8a3"><em>main_loop</em></a>(argc, argv);
+  }
+* 
+</pre>
+</p>
+<dl class="namespace">
+<dt>
+<span class="target" id="eossdknamespaceeos"></span><em>namespace</em> <tt class="descname">eos</tt></dt>
+<dd><dl class="class">
+<dt>
+<span class="target" id="eossdkclasseos_1_1subintf__iter__t"></span><em>class</em> <tt class="descname">subintf_iter_t</tt></dt>
+<dd><em>#include &lt;subintf.h&gt;</em><p>An iterator over all subinterfaces in the system. </p>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Private Functions</p>
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1subintf__iter__t_1add9f2827e306b223301515839274f717"></span><tt class="descname">subintf_iter_t</tt><big>(</big>subintf_iter_impl * <em>const</em><big>)</big></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Friends</p>
+<dl class="friend">
+<dt>
+<span class="target" id="eossdkclasseos_1_1subintf__iter__t_1a7442c8196f124abb243ff8224cef5ed8"></span>friend class <tt class="descname">subintf_iter_impl</tt></dt>
+<dd></dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="class">
+<dt>
+<span class="target" id="eossdkclasseos_1_1subintf__mgr"></span><em>class</em> <tt class="descname">subintf_mgr</tt></dt>
+<dd><em>#include &lt;subintf.h&gt;</em><p>The manager for subinterfaces. This is the main entry point for applications to use EosSdk subintf APIs. </p>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1subintf__mgr_1a38ef1bc8248f3fd0f04c574b9b08cfa1"></span>virtual <tt class="descname">~subintf_mgr</tt><big>(</big><big>)</big></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1subintf__mgr_1aab970b061ccb85499bdbc8014908bd44"></span>virtual <a class="reference internal" href="#eossdkclasseos_1_1subintf__iter__t"><em>subintf_iter_t</em></a> <tt class="descname">subintf_iter</tt><big>(</big><big>)</big> const = 0</dt>
+<dd><p>Returns an iterator for iterating over the subinterfaces in the system. The iterator yields an <a class="reference internal" href="intf.html#eossdkclasseos_1_1intf__id__t"><em>intf_id_t</em></a> for each configured subinterface. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1subintf__mgr_1a3cd0b9ec351fcb0d7c5a91ab7408574a"></span>virtual bool <tt class="descname">exists</tt><big>(</big><a class="reference internal" href="intf.html#eossdkclasseos_1_1intf__id__t"><em>intf_id_t</em></a><big>)</big> const = 0</dt>
+<dd><p>Returns whether the given subinterface exists.</p>
+<p>If exists returns true, then this <a class="reference internal" href="intf.html#eossdkclasseos_1_1intf__id__t"><em>intf_id_t</em></a> can be successfully passed into every method of the <a class="reference internal" href="#eossdkclasseos_1_1subintf__mgr"><em>subintf_mgr</em></a>. If not, then methods of the <a class="reference internal" href="#eossdkclasseos_1_1subintf__mgr"><em>subintf_mgr</em></a> can throw a <a class="reference internal" href="intf.html#eossdkclasseos_1_1no__such__interface__error"><em>no_such_interface_error</em></a> exception.</p>
+<p>The exists method of all *intf_mgr classes that manage a given interface (ie <a class="reference internal" href="intf.html#eossdkclasseos_1_1intf__mgr"><em>intf_mgr</em></a>, <a class="reference internal" href="eth_intf.html#eossdkclasseos_1_1eth__intf__mgr"><em>eth_intf_mgr</em></a>, and <a class="reference internal" href="#eossdkclasseos_1_1subintf__mgr"><em>subintf_mgr</em></a> for subinterfaces) are all guaranteed to return the same result. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1subintf__mgr_1a526a634048600a97e97a9fd79666e88d"></span>virtual void <tt class="descname">subintf_is</tt><big>(</big><a class="reference internal" href="intf.html#eossdkclasseos_1_1intf__id__t"><em>intf_id_t</em></a><big>)</big> = 0</dt>
+<dd><p>Creates a subinterface when given the subinterface ID. No action will be taken if the subinterface exists already. The subinterface will be created even if its parent interface does not exist. But the subinterface will become operationally up on only after its parent interface becomes operationally up and is in routed mode. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1subintf__mgr_1ab45dc3baaa95ee01aa46971a3894cd94"></span>virtual void <tt class="descname">subintf_is</tt><big>(</big><a class="reference internal" href="intf.html#eossdkclasseos_1_1intf__id__t"><em>intf_id_t</em></a>, vlan_id_t<big>)</big> = 0</dt>
+<dd><p>Creates a subinterface and sets its VLAN tag. If the subinterface already exists, its VLAN tag will be updated. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1subintf__mgr_1a7ccd238a0ebfd8a16ffa493fe5602a84"></span>virtual <a class="reference internal" href="#eossdkclasseos_1_1subintf__t"><em>subintf_t</em></a> <tt class="descname">subintf</tt><big>(</big><a class="reference internal" href="intf.html#eossdkclasseos_1_1intf__id__t"><em>intf_id_t</em></a><big>)</big> const = 0</dt>
+<dd><p>Returns the subinterface with the given ID. Will return an empty <a class="reference internal" href="#eossdkclasseos_1_1subintf__t"><em>subintf_t</em></a> if the subinterface does not exist. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1subintf__mgr_1a189e7bc3bb440ec02e9f855ec21dfb6e"></span>virtual void <tt class="descname">subintf_del</tt><big>(</big><a class="reference internal" href="intf.html#eossdkclasseos_1_1intf__id__t"><em>intf_id_t</em></a><big>)</big> = 0</dt>
+<dd><p>Deletes a subinterface. It will simply return if the given subinterface does not exist. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1subintf__mgr_1a8085804c21c0e75e67262bfef0d441fc"></span>virtual vlan_id_t <tt class="descname">vlan_tag</tt><big>(</big><a class="reference internal" href="intf.html#eossdkclasseos_1_1intf__id__t"><em>intf_id_t</em></a><big>)</big> const = 0</dt>
+<dd><p>Returns the configured VLAN tag of a given subinterface. Returns zero if the subinterface does not exist or if no VLAN tag is configured for the subinterface. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1subintf__mgr_1a22a42405599a3cb0b49a57c93dac7cc0"></span>virtual void <tt class="descname">vlan_tag_is</tt><big>(</big><a class="reference internal" href="intf.html#eossdkclasseos_1_1intf__id__t"><em>intf_id_t</em></a>, vlan_id_t<big>)</big> = 0</dt>
+<dd><p>Configures the VLAN tag of a given subinterface. Throws <a class="reference internal" href="exception.html#eossdkclasseos_1_1invalid__argument__error"><em>invalid_argument_error</em></a> exception if the subinterface does not exist. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1subintf__mgr_1a51239bb517d4e192475bfe9cd9e1ce49"></span>virtual <a class="reference internal" href="intf.html#eossdkclasseos_1_1intf__id__t"><em>intf_id_t</em></a> <tt class="descname">parent_intf</tt><big>(</big><a class="reference internal" href="intf.html#eossdkclasseos_1_1intf__id__t"><em>intf_id_t</em></a><big>)</big> const = 0</dt>
+<dd><p>Returns the parent interface ID for a given subinterface. The parent interface will be an Ethernet or a LAG interface. Returns an empty <a class="reference internal" href="intf.html#eossdkclasseos_1_1intf__id__t"><em>intf_id_t</em></a> (with intf_type as INTF_TYPE_NULL), if the given interface is not a subinterface. </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Protected Functions</p>
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1subintf__mgr_1acabcc01ce7eb538e9989dabf131acec3"></span><tt class="descname">subintf_mgr</tt><big>(</big><big>)</big></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Private Members</p>
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1subintf__mgr_1aa23ec5efe2c330cceb319e938432caf1"></span><tt class="descname">subintf_mgr</tt></dt>
+<dd></dd></dl>
+
+</div>
+</dd></dl>
+
+</dd></dl>
+
+<div class="section" id="type-definitions-in-subintf">
+<h2>Type definitions in <strong>subintf</strong><a class="headerlink" href="#type-definitions-in-subintf" title="Permalink to this headline">¶</a></h2>
+<dl class="namespace">
+<dt>
+<span class="target" id="eossdknamespaceeos"></span><em>namespace</em> <tt class="descname">eos</tt></dt>
+<dd><dl class="class">
+<dt>
+<span class="target" id="eossdkclasseos_1_1subintf__t"></span><em>class</em> <tt class="descname">subintf_t</tt></dt>
+<dd><em>#include &lt;subintf.h&gt;</em><p>This data structure defines a subinterface. </p>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1subintf__t_1a27a4220ef491da564c2694cf1f9a6c7a"></span><tt class="descname">subintf_t</tt><big>(</big><big>)</big></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1subintf__t_1a13d7a53b7bef03fdf351bccf924736d5"></span><tt class="descname">subintf_t</tt><big>(</big><a class="reference internal" href="intf.html#eossdkclasseos_1_1intf__id__t"><em>intf_id_t</em></a> <em>intf_id</em>, vlan_id_t <em>vlan_id</em><big>)</big></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1subintf__t_1a13c4dd49eecd85763703eb9a72a53809"></span><a class="reference internal" href="intf.html#eossdkclasseos_1_1intf__id__t"><em>intf_id_t</em></a> <tt class="descname">intf_id</tt><big>(</big><big>)</big> const</dt>
+<dd><p>Getter for &#8216;intf_id&#8217;: the interface ID of this subinterface. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1subintf__t_1a5ab5b9c67cc82f0dfd29ac8e36d83033"></span>vlan_id_t <tt class="descname">vlan_id</tt><big>(</big><big>)</big> const</dt>
+<dd><p>Getter for &#8216;vlan_id&#8217;: the VLAN tag of this subinterface. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1subintf__t_1ac377871c01dad084d95b63d1669e5d17"></span>void <tt class="descname">vlan_id_is</tt><big>(</big>vlan_id_t <em>vlan_id</em><big>)</big></dt>
+<dd><p>Setter for &#8216;vlan_id&#8217;. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1subintf__t_1ac7c7d6b0207b7f0b5aa7712804c4a4f7"></span>bool <tt class="descname">operator==</tt><big>(</big><a class="reference internal" href="#eossdkclasseos_1_1subintf__t"><em>subintf_t</em></a> const &amp; <em>other</em><big>)</big> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1subintf__t_1af18d1b2b72eee57a805b0c5bb4945338"></span>bool <tt class="descname">operator!=</tt><big>(</big><a class="reference internal" href="#eossdkclasseos_1_1subintf__t"><em>subintf_t</em></a> const &amp; <em>other</em><big>)</big> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1subintf__t_1a375ccfedbb15796e5ec2853d3280764c"></span>uint32_t <tt class="descname">hash</tt><big>(</big><big>)</big> const</dt>
+<dd><p>The hash function for type <a class="reference internal" href="#eossdkclasseos_1_1subintf__t"><em>subintf_t</em></a>. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1subintf__t_1aea5573edbc3d5713d2091b65e976bdf7"></span>std::string <tt class="descname">to_string</tt><big>(</big><big>)</big> const</dt>
+<dd><p>Returns a string representation of the current object&#8217;s values. </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Private Members</p>
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1subintf__t_1ae2eabddb6a23b77d408bf9e34918e23c"></span><a class="reference internal" href="intf.html#eossdkclasseos_1_1intf__id__t"><em>intf_id_t</em></a> <tt class="descname">intf_id_</tt></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1subintf__t_1ae43a6575cfd581992f515b2b4e73a560"></span>vlan_id_t <tt class="descname">vlan_id_</tt></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Friends</p>
+<dl class="friend">
+<dt>
+<span class="target" id="eossdkclasseos_1_1subintf__t_1a9db3d049c64c8cea57bab955386a53e1"></span>friend std::ostream &amp; <tt class="descname">operator&lt;&lt;</tt></dt>
+<dd><p>A utility stream operator that adds a string representation of <a class="reference internal" href="#eossdkclasseos_1_1subintf__t"><em>subintf_t</em></a> to the ostream. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#"><strong>subintf</strong></a><ul>
+<li><a class="reference internal" href="#type-definitions-in-subintf">Type definitions in <strong>subintf</strong></a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="sdk.html"
+                        title="previous chapter"><strong>sdk</strong></a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="system.html"
+                        title="next chapter"><strong>system</strong></a></p>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="system.html" title="system"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="sdk.html" title="sdk"
+             >previous</a> |</li>
+        <li><a href="index.html">Arista EOS SDK 2.13.0 reference</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2014, Arista Networks.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

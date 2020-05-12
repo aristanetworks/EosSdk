@@ -1,0 +1,285 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>eapi &mdash; Arista EOS SDK 2.13.0 reference</title>
+    
+    <link rel="stylesheet" href="_static/eossdk.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/breathe.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '2.13.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="Arista EOS SDK 2.13.0 reference" href="index.html" />
+    <link rel="next" title="eth" href="eth.html" />
+    <link rel="prev" title="directflow" href="directflow.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="eth.html" title="eth"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="directflow.html" title="directflow"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">Arista EOS SDK 2.13.0 reference</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="eapi">
+<h1><strong>eapi</strong><a class="headerlink" href="#eapi" title="Permalink to this headline">¶</a></h1>
+<p>EOS eAPI interaction module. This module allows interaction with the CLI via eAPI command requests. This allows EOS SDK applications access to configuration and status of EOS state for which EOS SDK APIs do not yet exist. Note that each method is a synchronous call, and opens a unix-domain socket. Therefore, this is not intended to be a replacement for other EosSdk modules.</p>
+<p>For more information about eAPI, please visit <a class="reference external" href="https://eos.arista.com/arista-eapi-101/">https://eos.arista.com/arista-eapi-101/</a></p>
+<p>The following snippet shows how to load an eAPI response into a json_t object from the jansson library, although any json library to convert from json-formatted text will do. Based on the jansson library documentation: <a class="reference external" href="https://jansson.readthedocs.io/en/2.10/tutorial.html">https://jansson.readthedocs.io/en/2.10/tutorial.html</a>  <pre class="literal-block">
+* eapi_response_t show_interfaces = eapiMgr-&gt;run_show_cmd(&quot;show interfaces&quot;);
+* json_t* root;
+* json_error_t error;
+* if (show_interfaces.success()) {
+*    root = json_loads(show_interfaces.responses()[0], 0, &amp;error);
+* }
+* if (!root) {
+*    fprintf(stderr, &quot;error: on line %d: %s\n&quot;, error.line, error.text);
+* }
+* json_t* interfaces = json_object_get(root, &quot;interfaces&quot;);
+* json_t* intf1 = json_object_get(interfaces, &quot;Ethernet1&quot;);
+* json_t* desc1 = json_object_get(intf1, &quot;description&quot;);
+*
+* printf(&quot;Ethernet1's description: &quot; &lt;&lt; json_string_value(desc1));
+* ...
+* 
+</pre>
+</p>
+<dl class="namespace">
+<dt>
+<span class="target" id="eossdknamespaceeos"></span><em>namespace</em> <tt class="descname">eos</tt></dt>
+<dd><dl class="class">
+<dt>
+<span class="target" id="eossdkclasseos_1_1eapi__mgr"></span><em>class</em> <tt class="descname">eapi_mgr</tt></dt>
+<dd><em>#include &lt;eapi.h&gt;</em><p>eAPI manager. </p>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1eapi__mgr_1ad85f2c1eecfb862c66314f2e036350b1"></span>virtual <tt class="descname">~eapi_mgr</tt><big>(</big><big>)</big></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1eapi__mgr_1a39ae8ccafb8c5041ed792c8dfd58c97a"></span>virtual <a class="reference internal" href="#eossdkclasseos_1_1eapi__response__t"><em>eapi_response_t</em></a> <tt class="descname">run_show_cmd</tt><big>(</big>std::string const &amp;<big>)</big> const = 0</dt>
+<dd><p>Executes a &#8220;show&#8221; CLI command in enable mode. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1eapi__mgr_1a41897a491a87242b36d369fcaef04e2f"></span>virtual <a class="reference internal" href="#eossdkclasseos_1_1eapi__response__t"><em>eapi_response_t</em></a> <tt class="descname">run_config_cmds</tt><big>(</big>std::vector&lt; std::string &gt; const &amp;<big>)</big> const = 0</dt>
+<dd><p>Executes one or many CLI commands in configuration mode. </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Protected Functions</p>
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1eapi__mgr_1a481e31cf6ad904edd3feb0c941f8ca46"></span><tt class="descname">eapi_mgr</tt><big>(</big><big>)</big></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Private Members</p>
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1eapi__mgr_1af4db9732606cdc1bde01e06d1b272dd0"></span><tt class="descname">eapi_mgr</tt></dt>
+<dd></dd></dl>
+
+</div>
+</dd></dl>
+
+</dd></dl>
+
+<div class="section" id="type-definitions-in-eapi">
+<h2>Type definitions in <strong>eapi</strong><a class="headerlink" href="#type-definitions-in-eapi" title="Permalink to this headline">¶</a></h2>
+<dl class="namespace">
+<dt>
+<span class="target" id="eossdknamespaceeos"></span><em>namespace</em> <tt class="descname">eos</tt></dt>
+<dd><dl class="class">
+<dt>
+<span class="target" id="eossdkclasseos_1_1eapi__response__t"></span><em>class</em> <tt class="descname">eapi_response_t</tt></dt>
+<dd><em>#include &lt;eapi.h&gt;</em><p>An eAPI response from the Cli server. </p>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1eapi__response__t_1a01faf62702ea072302de3637ffde9664"></span><tt class="descname">eapi_response_t</tt><big>(</big><big>)</big></dt>
+<dd><p>Default constructor. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1eapi__response__t_1a0f310f846e1424a1c7f29cdc5dc0542e"></span><tt class="descname">eapi_response_t</tt><big>(</big>bool <em>success</em>, uint32_t <em>error_code</em>, std::string const &amp; <em>error_message</em>, std::vector&lt; std::string &gt; const &amp; <em>responses</em><big>)</big></dt>
+<dd><p>Full constructor. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1eapi__response__t_1a888e6db2c7347577f1724c45fa41927a"></span>bool <tt class="descname">success</tt><big>(</big><big>)</big> const</dt>
+<dd><p>Getter for &#8216;success&#8217;: indicates if a response was received. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1eapi__response__t_1a092dde2a7e4774fbb74bcbf46ac7e9a4"></span>uint32_t <tt class="descname">error_code</tt><big>(</big><big>)</big> const</dt>
+<dd><p>Getter for &#8216;error_code&#8217;: error code from eAPI response. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1eapi__response__t_1af789ea0638b438822968f5b7afc7747b"></span>std::string <tt class="descname">error_message</tt><big>(</big><big>)</big> const</dt>
+<dd><p>Getter for &#8216;error_message&#8217;: error message from response. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1eapi__response__t_1abac91b756c1d486e508a6779af06eb08"></span>std::vector&lt; std::string &gt; const &amp; <tt class="descname">responses</tt><big>(</big><big>)</big> const</dt>
+<dd><p>Getter for &#8216;responses&#8217;: the set of strings that constitute an eAPI response. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1eapi__response__t_1acf90078fce75e85726ceb2cbaadaf141"></span>std::string <tt class="descname">raw_response</tt><big>(</big><big>)</big> const</dt>
+<dd><p>Getter for &#8216;raw_response&#8217;: raw eAPI response (if requested). </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1eapi__response__t_1a2023ab0a9690cf9757964f46d4da82eb"></span>std::string <tt class="descname">to_string</tt><big>(</big><big>)</big> const</dt>
+<dd><p>Returns a string representation of the current object&#8217;s values. </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Private Members</p>
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1eapi__response__t_1a5129a7ef5bb9f73ab727434829bf446f"></span>bool <tt class="descname">success_</tt></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1eapi__response__t_1a1d958186f9d4e902cc48562484d56424"></span>uint32_t <tt class="descname">error_code_</tt></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1eapi__response__t_1a7674616c44585bf660e422d6ebdb0e2f"></span>std::string <tt class="descname">error_message_</tt></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1eapi__response__t_1a993de3e5e2503ba82c2649bbc80a35ad"></span>std::vector&lt; std::string &gt; <tt class="descname">responses_</tt></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1eapi__response__t_1acdae6989b2fcde9e466683d7021f7947"></span>std::string <tt class="descname">raw_response_</tt></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Friends</p>
+<dl class="friend">
+<dt>
+<span class="target" id="eossdkclasseos_1_1eapi__response__t_1abb5c159fc1d07ad3d4f9b6d6c5aa4081"></span>friend std::ostream &amp; <tt class="descname">operator&lt;&lt;</tt></dt>
+<dd><p>A utility stream operator that adds a string representation of <a class="reference internal" href="#eossdkclasseos_1_1eapi__response__t"><em>eapi_response_t</em></a> to the ostream. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#"><strong>eapi</strong></a><ul>
+<li><a class="reference internal" href="#type-definitions-in-eapi">Type definitions in <strong>eapi</strong></a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="directflow.html"
+                        title="previous chapter"><strong>directflow</strong></a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="eth.html"
+                        title="next chapter"><strong>eth</strong></a></p>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="eth.html" title="eth"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="directflow.html" title="directflow"
+             >previous</a> |</li>
+        <li><a href="index.html">Arista EOS SDK 2.13.0 reference</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2014, Arista Networks.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>
