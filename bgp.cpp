@@ -11,6 +11,10 @@ class bgp_mgr_impl : public bgp_mgr {
    ~bgp_mgr_impl() {
    }
 
+   bool exists(bgp_peer_key_t const & peer_key) const {
+      return false;
+   }
+
    bgp_peer_state_t peer_state(bgp_peer_key_t const & peer_key) const {
       bgp_peer_state_t *nop = 0;
       return *nop;
@@ -27,7 +31,10 @@ void bgp_peer_handler::watch_all_peers(bool) {}
 
 void bgp_peer_handler::watch_peer(bgp_peer_key_t const & peer_key, bool) {}
 
-void bgp_peer_handler::on_peer_state(bgp_peer_key_t peer_key,
+void bgp_peer_handler::on_peer_state(bgp_peer_key_t const & peer_key,
                                      bgp_peer_state_t peer_state) {}
+void bgp_peer_handler::on_peer_set(bgp_peer_key_t const & peer_key) {}
+void bgp_peer_handler::on_peer_del(bgp_peer_key_t const & peer_key) {}
+
 
 } // namespace eos

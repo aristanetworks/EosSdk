@@ -47,8 +47,14 @@ class EOS_SDK_PUBLIC bgp_peer_handler : public base_handler<bgp_mgr,
    void watch_peer(bgp_peer_key_t const & peer_key, bool);
 
    /// Called when BGP peer state change
-   virtual void on_peer_state(bgp_peer_key_t peer_key,
+   virtual void on_peer_state(bgp_peer_key_t const & peer_key,
                               bgp_peer_state_t peer_state);
+
+   /// Called when a BGP peer is created
+   virtual void on_peer_set(bgp_peer_key_t const & peer_key);
+
+   /// Called when a BGP peer is deleted
+   virtual void on_peer_del(bgp_peer_key_t const & peer_key);
 };
 
 /**
@@ -57,6 +63,11 @@ class EOS_SDK_PUBLIC bgp_peer_handler : public base_handler<bgp_mgr,
 class EOS_SDK_PUBLIC bgp_mgr : public base_mgr<bgp_peer_handler, bgp_peer_key_t> {
  public:
    virtual ~bgp_mgr();
+
+   /**
+    * Test for existence of a BGP peer.
+    */
+   virtual bool exists(bgp_peer_key_t const & peer_key) const = 0;
 
    /**
     * Returns the state of a peer session.
