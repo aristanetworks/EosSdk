@@ -45,6 +45,7 @@ enum mac_entry_type_t {
    MAC_ENTRY_EVPN_INTF_STATIC,
    MAC_ENTRY_AUTHENTICATED,
    MAC_ENTRY_PEER_AUTHENTICATED,
+   MAC_ENTRY_PENDING_SECURE,
 };
 /** Appends a string representation of enum mac_entry_type_t value to the ostream. */
 std::ostream& operator<<(std::ostream& os, const mac_entry_type_t & enum_val);
