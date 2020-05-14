@@ -36,6 +36,26 @@ operator<<(std::ostream& os, const macsec_intf_key_status_t & enum_val) {
       os << "MACSEC_KEY_PRIMARY";
    } else if (enum_val==MACSEC_KEY_FALLBACK) {
       os << "MACSEC_KEY_FALLBACK";
+   } else if (enum_val==MACSEC_KEY_PRIMARY_CACHED) {
+      os << "MACSEC_KEY_PRIMARY_CACHED";
+   } else if (enum_val==MACSEC_KEY_FALLBACK_CACHED) {
+      os << "MACSEC_KEY_FALLBACK_CACHED";
+   } else {
+      os << "Unknown value";
+   }
+   return os;
+}
+
+
+
+inline std::ostream&
+operator<<(std::ostream& os, const macsec_intf_traffic_status_t & enum_val) {
+   if (enum_val==MACSEC_TRAFFIC_PROTECTED) {
+      os << "MACSEC_TRAFFIC_PROTECTED";
+   } else if (enum_val==MACSEC_TRAFFIC_UNPROTECTED) {
+      os << "MACSEC_TRAFFIC_UNPROTECTED";
+   } else if (enum_val==MACSEC_TRAFFIC_BLOCKED) {
+      os << "MACSEC_TRAFFIC_BLOCKED";
    } else {
       os << "Unknown value";
    }
@@ -417,12 +437,18 @@ operator<<(std::ostream& os, const macsec_profile_t& obj) {
 
 
 inline macsec_intf_status_t::macsec_intf_status_t() :
-      status_(MACSEC_NO_PROFILE) {
+      status_(MACSEC_NO_PROFILE), key_status_(MACSEC_NO_PROFILE),
+      traffic_status_(MACSEC_TRAFFIC_BLOCKED) {
 }
 
 inline macsec_intf_key_status_t
-macsec_intf_status_t::status() const {
-   return status_;
+macsec_intf_status_t::key_status() const {
+   return key_status_;
+}
+
+inline macsec_intf_traffic_status_t
+macsec_intf_status_t::traffic_status() const {
+   return traffic_status_;
 }
 
 inline void
@@ -430,9 +456,16 @@ macsec_intf_status_t::status_is(macsec_intf_key_status_t status) {
    status_ = status;
 }
 
+inline macsec_intf_key_status_t
+macsec_intf_status_t::status() const {
+   return status_;
+}
+
 inline bool
 macsec_intf_status_t::operator==(macsec_intf_status_t const & other) const {
-   return status_ == other.status_;
+   return status_ == other.status_ &&
+          key_status_ == other.key_status_ &&
+          traffic_status_ == other.traffic_status_;
 }
 
 inline bool
@@ -444,6 +477,10 @@ inline bool
 macsec_intf_status_t::operator<(macsec_intf_status_t const & other) const {
    if(status_ != other.status_) {
       return status_ < other.status_;
+   } else if(key_status_ != other.key_status_) {
+      return key_status_ < other.key_status_;
+   } else if(traffic_status_ != other.traffic_status_) {
+      return traffic_status_ < other.traffic_status_;
    }
    return false;
 }
@@ -453,6 +490,10 @@ macsec_intf_status_t::hash() const {
    uint32_t ret = 0;
    ret = hash_mix::mix((uint8_t *)&status_,
               sizeof(macsec_intf_key_status_t), ret);
+   ret = hash_mix::mix((uint8_t *)&key_status_,
+              sizeof(macsec_intf_key_status_t), ret);
+   ret = hash_mix::mix((uint8_t *)&traffic_status_,
+              sizeof(macsec_intf_traffic_status_t), ret);
    ret = hash_mix::final_mix(ret);
    return ret;
 }
@@ -462,6 +503,8 @@ macsec_intf_status_t::to_string() const {
    std::ostringstream ss;
    ss << "macsec_intf_status_t(";
    ss << "status=" << status_;
+   ss << ", key_status=" << key_status_;
+   ss << ", traffic_status=" << traffic_status_;
    ss << ")";
    return ss.str();
 }

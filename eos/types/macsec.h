@@ -31,10 +31,18 @@ std::ostream& operator<<(std::ostream& os, const macsec_cipher_suite_t & enum_va
 
 /** Which key an interface is using if a profile is configured. */
 enum macsec_intf_key_status_t {
+   /** MacSec is not configured on the interface. */
    MACSEC_NO_PROFILE,
+   /** None of the CAK/CKN could be selected as principal. */
    MACSEC_KEY_NONE,
+   /** Configured primary CAK/CKN is selected as principal. */
    MACSEC_KEY_PRIMARY,
+   /** Configured fallback CAK/CKN is selected as principal. */
    MACSEC_KEY_FALLBACK,
+   /** Previously configured primary CAK/CKN is selected as principal. */
+   MACSEC_KEY_PRIMARY_CACHED,
+   /** Previously configured fallback CAK/CKN is selected as principal. */
+   MACSEC_KEY_FALLBACK_CACHED,
 };
 /**
  * Appends a string representation of enum macsec_intf_key_status_t value to the
@@ -42,6 +50,22 @@ enum macsec_intf_key_status_t {
  */
 std::ostream& operator<<(std::ostream& os,
                          const macsec_intf_key_status_t & enum_val);
+
+/** Traffic status on an interface. */
+enum macsec_intf_traffic_status_t {
+   /** Traffic through the interface is protected. */
+   MACSEC_TRAFFIC_PROTECTED,
+   /** Traffic through the interface is unprotected. */
+   MACSEC_TRAFFIC_UNPROTECTED,
+   /** Traffic through the interface is blocked. */
+   MACSEC_TRAFFIC_BLOCKED,
+};
+/**
+ * Appends a string representation of enum macsec_intf_traffic_status_t value to
+ * the ostream.
+ */
+std::ostream& operator<<(std::ostream& os,
+                         const macsec_intf_traffic_status_t & enum_val);
 
 /** A connectivity association key. */
 class EOS_SDK_PUBLIC macsec_key_t {
@@ -208,7 +232,7 @@ class EOS_SDK_PUBLIC macsec_profile_t {
    uint32_t replay_protection_window_;
    bool key_retirement_immediate_;
    std::forward_list<intf_id_t> intfs_;
-   friend void addIntf( macsec_profile_t &profile, intf_id_t intfId );
+   friend void addIntf(macsec_profile_t &profile, intf_id_t intfId);
 };
 
 /** Information regarding the MACsec status of an interface. */
@@ -216,9 +240,14 @@ class EOS_SDK_PUBLIC macsec_intf_status_t {
  public:
    macsec_intf_status_t();
 
-   macsec_intf_key_status_t status() const;
-   void status_is(macsec_intf_key_status_t status);
+   macsec_intf_key_status_t key_status() const;
 
+   macsec_intf_traffic_status_t traffic_status() const;
+
+   /** Deprecated: Setter for 'status'. */
+   void status_is(macsec_intf_key_status_t status);
+   /** Deprecated: Getter for 'status'. */
+   macsec_intf_key_status_t status() const;
    bool operator==(macsec_intf_status_t const & other) const;
    bool operator!=(macsec_intf_status_t const & other) const;
    bool operator<(macsec_intf_status_t const & other) const;
@@ -235,6 +264,11 @@ class EOS_SDK_PUBLIC macsec_intf_status_t {
 
  private:
    macsec_intf_key_status_t status_;
+   macsec_intf_key_status_t key_status_;
+   macsec_intf_traffic_status_t traffic_status_;
+   friend void status_is(macsec_intf_status_t &status,
+      macsec_intf_key_status_t keyStatus,
+      macsec_intf_traffic_status_t trafficStatus);
 };
 
 /** MACsec interface counters class. */

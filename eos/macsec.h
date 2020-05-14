@@ -84,7 +84,7 @@ class EOS_SDK_PUBLIC macsec_handler :
    void watch_intf(intf_id_t, bool);
 
    /**
-    * Called when the key status of a MACsec interface changes.
+    * Called when the key or traffic status of a MACsec interface changes.
     */
    virtual void on_intf_status(intf_id_t, macsec_intf_status_t const &);
 
