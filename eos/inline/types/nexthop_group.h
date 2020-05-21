@@ -1,4 +1,4 @@
-// Copyright (c) 2019 Arista Networks, Inc.  All rights reserved.
+// Copyright (c) 2020 Arista Networks, Inc.  All rights reserved.
 // Arista Networks, Inc. Confidential and Proprietary.
 
 #ifndef EOS_INLINE_TYPES_NEXTHOP_GROUP_H
@@ -226,11 +226,16 @@ operator<<(std::ostream& os, const nexthop_group_entry_counter_t& obj) {
 
 
 inline nexthop_group_entry_t::nexthop_group_entry_t() :
-      mpls_action_(), nexthop_() {
+      mpls_action_(), nexthop_(), intf_() {
 }
 
 inline nexthop_group_entry_t::nexthop_group_entry_t(ip_addr_t const & nexthop) :
-      mpls_action_(), nexthop_(nexthop) {
+      mpls_action_(), nexthop_(nexthop), intf_() {
+}
+
+inline nexthop_group_entry_t::nexthop_group_entry_t(ip_addr_t const & nexthop,
+                                                    intf_id_t const & intf) :
+      mpls_action_(), nexthop_(nexthop), intf_(intf) {
 }
 
 inline nexthop_group_mpls_action_t
@@ -254,10 +259,21 @@ nexthop_group_entry_t::nexthop_is(ip_addr_t const & nexthop) {
    nexthop_ = nexthop;
 }
 
+inline intf_id_t
+nexthop_group_entry_t::intf() const {
+   return intf_;
+}
+
+inline void
+nexthop_group_entry_t::intf_is(intf_id_t const & intf) {
+   intf_ = intf;
+}
+
 inline bool
 nexthop_group_entry_t::operator==(nexthop_group_entry_t const & other) const {
    return mpls_action_ == other.mpls_action_ &&
-          nexthop_ == other.nexthop_;
+          nexthop_ == other.nexthop_ &&
+          intf_ == other.intf_;
 }
 
 inline bool
@@ -271,6 +287,8 @@ nexthop_group_entry_t::operator<(nexthop_group_entry_t const & other) const {
       return mpls_action_ < other.mpls_action_;
    } else if(nexthop_ != other.nexthop_) {
       return nexthop_ < other.nexthop_;
+   } else if(intf_ != other.intf_) {
+      return intf_ < other.intf_;
    }
    return false;
 }
@@ -282,6 +300,8 @@ nexthop_group_entry_t::hash() const {
               sizeof(nexthop_group_mpls_action_t), ret);
    ret = hash_mix::mix((uint8_t *)&nexthop_,
               sizeof(ip_addr_t), ret);
+   ret = hash_mix::mix((uint8_t *)&intf_,
+              sizeof(intf_id_t), ret);
    ret = hash_mix::final_mix(ret);
    return ret;
 }
@@ -292,6 +312,7 @@ nexthop_group_entry_t::to_string() const {
    ss << "nexthop_group_entry_t(";
    ss << "mpls_action=" << mpls_action_;
    ss << ", nexthop=" << nexthop_;
+   ss << ", intf=" << intf_;
    ss << ")";
    return ss.str();
 }

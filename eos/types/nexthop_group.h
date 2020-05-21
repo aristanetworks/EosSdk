@@ -1,4 +1,4 @@
-// Copyright (c) 2019 Arista Networks, Inc.  All rights reserved.
+// Copyright (c) 2020 Arista Networks, Inc.  All rights reserved.
 // Arista Networks, Inc. Confidential and Proprietary.
 
 #ifndef EOS_TYPES_NEXTHOP_GROUP_H
@@ -148,6 +148,7 @@ class EOS_SDK_PUBLIC nexthop_group_entry_t {
  public:
    nexthop_group_entry_t();
    explicit nexthop_group_entry_t(ip_addr_t const & nexthop);
+   nexthop_group_entry_t(ip_addr_t const & nexthop, intf_id_t const & intf);
 
    /** Getter for 'mpls_action': MPLS label switching stack for this entry. */
    nexthop_group_mpls_action_t mpls_action() const;
@@ -158,6 +159,11 @@ class EOS_SDK_PUBLIC nexthop_group_entry_t {
    ip_addr_t nexthop() const;
    /** Setter for 'nexthop'. */
    void nexthop_is(ip_addr_t const & nexthop);
+
+   /** Getter for 'intf': the next hop egress interface. */
+   intf_id_t intf() const;
+   /** Setter for 'intf'. */
+   void intf_is(intf_id_t const & intf);
 
    bool operator==(nexthop_group_entry_t const & other) const;
    bool operator!=(nexthop_group_entry_t const & other) const;
@@ -176,6 +182,7 @@ class EOS_SDK_PUBLIC nexthop_group_entry_t {
  private:
    nexthop_group_mpls_action_t mpls_action_;
    ip_addr_t nexthop_;
+   intf_id_t intf_;
 };
 
 /**
