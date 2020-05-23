@@ -63,7 +63,7 @@ class EOS_SDK_PUBLIC bgp_path_handler : public base_handler<bgp_path_mgr,
    void watch_ipv6_unicast_paths(bool);
 
    /// Handler called when a BGP IPv4 unicast path has changed in Adj-RIB-In.
-   virtual void on_ipv4_unicast_path(bgp_path_key_t path_key);
+   virtual void on_ipv4_unicast_path(bgp_path_key_t const & path_key);
 
    /**
     * Handler called when BGP convergence has changed in
@@ -72,7 +72,7 @@ class EOS_SDK_PUBLIC bgp_path_handler : public base_handler<bgp_path_mgr,
    virtual void on_ipv4_unicast_bgp_converged(bool converged);
 
    /// Handler called when a BGP IPv6 unicast path has changed in Adj-RIB-In.
-   virtual void on_ipv6_unicast_path(bgp_path_key_t path_key);
+   virtual void on_ipv6_unicast_path(bgp_path_key_t const & path_key);
 
    /**
     * Handler called when BGP convergence has changed in
