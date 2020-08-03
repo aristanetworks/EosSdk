@@ -1,0 +1,920 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>nexthop_group &mdash; Arista EOS SDK 2.14.0 reference</title>
+    
+    <link rel="stylesheet" href="_static/eossdk.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/breathe.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '2.14.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="Arista EOS SDK 2.14.0 reference" href="index.html" />
+    <link rel="next" title="nexthop_group_tunnel" href="nexthop_group_tunnel.html" />
+    <link rel="prev" title="neighbor_table" href="neighbor_table.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="nexthop_group_tunnel.html" title="nexthop_group_tunnel"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="neighbor_table.html" title="neighbor_table"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">Arista EOS SDK 2.14.0 reference</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="nexthop-group">
+<h1><strong>nexthop_group</strong><a class="headerlink" href="#nexthop-group" title="Permalink to this headline">¶</a></h1>
+<p>Nexthop groups are a forwarding/tunneling abstraction in EOS.</p>
+<p>A nexthop group is comprised of a tunneling protocol (IP/GRE or MPLS, for example) and a collection of nexthop (aka destination) IP addresses and other forwarding information (such as MPLS stack operations to apply for traffic sent to that nexthop). The same IP address may be specified in more than one entry within the group, allowing for unequal cost load balancing. By using distinct addresses for each entry, equal cost load balancing can be achieved.</p>
+<p>The nexthop or destination IP is the tunnel (outer) destination IP address for GRE and IP-in-IP. For MPLS, the nexthop address is used to find (via ARP/ND) a MAC address for the MPLS next hop.</p>
+<p>Nexthop entries must be manually monitored and maintained by the agent. If a tunnel destination (aka nexthop) becomes unreachable, traffic hashed to that entry will be black-holed in the network until a working entry is set in that index of the nexthop group, or the entry is deleted.</p>
+<p>Presently, all nexthop groups encapsulate traffic directed to them, either as an IP-in-IP (IP protocol 4) tunnel, a GRE (IP protocol 47) tunnel encapsulating either IPv4, IPv6 or MPLS traffic, or as pure MPLS frames. MPLS label switching operations are also supported, see the nexthop_group_entry_t class for more information.</p>
+<p>Presently, MPLS switching actions are only only supported when used with PBR and cannot be used with IP routes.</p>
+<p>The following example creates a nexthop group called &#8220;nhg1&#8221; which performs GRE encapsulation of traffic sent to it, sending traffic to two different nexthop IP addresses unequally (at a 2/3 to 1/3 ratio). For a usage of a nexthop group with policy routing, see the policy_map.h file.</p>
+<p> <pre class="literal-block">
+*   <a class="reference internal" href="#eossdkclasseos_1_1nexthop__group__t"><em>eos::nexthop_group_t</em></a> nhg(&quot;nhg1&quot;, eos::NEXTHOP_GROUP_GRE);
+*   // Specify two destinations (nexthop group entries) for the traffic
+*   <a class="reference internal" href="#eossdkclasseos_1_1nexthop__group__entry__t"><em>eos::nexthop_group_entry_t</em></a> nhe1(<a class="reference internal" href="ip.html#eossdkclasseos_1_1ip__addr__t"><em>eos::ip_addr_t</em></a>(&quot;172.12.1.1&quot;));
+*   <a class="reference internal" href="#eossdkclasseos_1_1nexthop__group__entry__t"><em>eos::nexthop_group_entry_t</em></a> nhe2(<a class="reference internal" href="ip.html#eossdkclasseos_1_1ip__addr__t"><em>eos::ip_addr_t</em></a>(&quot;172.12.1.2&quot;));
+*   // Set the nexthop group entries on the group with unequal cost load balancing
+*   // Balance traffic 2/3 to 172.12.1.1, 1/3 to 172.12.1.2.
+*   nhg.nexthop_set(0, nhe1);
+*   nhg.nexthop_set(1, nhe1);
+*   nhg.nexthop_set(2, nhe2);
+* 
+</pre>
+</p>
+<dl class="namespace">
+<dt>
+<span class="target" id="eossdknamespaceeos"></span><em>namespace</em> <tt class="descname">eos</tt></dt>
+<dd><dl class="class">
+<dt>
+<span class="target" id="eossdkclasseos_1_1nexthop__group__handler"></span><em>class</em> <tt class="descname">nexthop_group_handler</tt></dt>
+<dd><em>#include &lt;nexthop_group.h&gt;</em><p>This class handles changes to a nexthop group&#8217;s status. </p>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1nexthop__group__handler_1a812d2fd53d4ecb11ecd59f069eb10101"></span><tt class="descname">nexthop_group_handler</tt><big>(</big><a class="reference internal" href="#eossdkclasseos_1_1nexthop__group__mgr"><em>nexthop_group_mgr</em></a> *<big>)</big></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1nexthop__group__handler_1afac72cdb6e18d31db7c626d94bae1ef2"></span><a class="reference internal" href="#eossdkclasseos_1_1nexthop__group__mgr"><em>nexthop_group_mgr</em></a> * <tt class="descname">get_nexthop_group_mgr</tt><big>(</big><big>)</big> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1nexthop__group__handler_1a06648c64f49c7db1c1862cf02d26a63c"></span>void <tt class="descname">watch_all_nexthop_groups</tt><big>(</big>bool<big>)</big></dt>
+<dd><p>Registers this class to receive change updates on all nexthop groups.</p>
+<p>Expects a boolean signifying whether notifications should be propagated to this instance or not. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1nexthop__group__handler_1ab52e4a77a231fd62abc2692bab79406c"></span>void <tt class="descname">watch_nexthop_group</tt><big>(</big>std::string const &amp; <em>nexthop_group_name</em>, bool<big>)</big></dt>
+<dd><p>Registers this class to receive change updates on the given nexthop group.</p>
+<p>Expects the name of the corresponding nexthop group and a boolean signifying whether notifications should be propagated to this instance or not. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1nexthop__group__handler_1a77feba081dffb352dcf54ac79cbe8141"></span>virtual void <tt class="descname">on_nexthop_group_active</tt><big>(</big>std::string const &amp; <em>nexthop_group_name</em>, bool <em>active</em><big>)</big></dt>
+<dd><p>Handler called when the active status of a nexthop_group changes. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1nexthop__group__handler_1a8d9377fc09f9ccfb5b5f5c22e9919f86"></span>virtual void <tt class="descname">on_nexthop_group_programmed</tt><big>(</big>std::string const &amp; <em>nexthop_group_name</em><big>)</big></dt>
+<dd><p>Handler called when the nexthop_group is programmed in response to a configuration change. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="class">
+<dt>
+<span class="target" id="eossdkclasseos_1_1nexthop__group__iter__t"></span><em>class</em> <tt class="descname">nexthop_group_iter_t</tt></dt>
+<dd><div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Private Functions</p>
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1nexthop__group__iter__t_1a52fcf6dba61fa24ebfba56d11ece5e0e"></span><tt class="descname">nexthop_group_iter_t</tt><big>(</big>nexthop_group_iter_impl * <em>const</em><big>)</big></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Friends</p>
+<dl class="friend">
+<dt>
+<span class="target" id="eossdkclasseos_1_1nexthop__group__iter__t_1ad05f411fce498237dd425063db19de9f"></span>friend class <tt class="descname">nexthop_group_iter_impl</tt></dt>
+<dd></dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="class">
+<dt>
+<span class="target" id="eossdkclasseos_1_1programmed__nexthop__group__iter__t"></span><em>class</em> <tt class="descname">programmed_nexthop_group_iter_t</tt></dt>
+<dd><div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Private Functions</p>
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1programmed__nexthop__group__iter__t_1af41e0b6c1629da277beb3f4b28f58d76"></span><tt class="descname">programmed_nexthop_group_iter_t</tt><big>(</big>programmed_nexthop_group_iter_impl * <em>const</em><big>)</big></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Friends</p>
+<dl class="friend">
+<dt>
+<span class="target" id="eossdkclasseos_1_1programmed__nexthop__group__iter__t_1aaa81261c2218e71fffb7a4407de9797b"></span>friend class <tt class="descname">programmed_nexthop_group_iter_impl</tt></dt>
+<dd></dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="class">
+<dt>
+<span class="target" id="eossdkclasseos_1_1nexthop__group__mgr"></span><em>class</em> <tt class="descname">nexthop_group_mgr</tt></dt>
+<dd><em>#include &lt;nexthop_group.h&gt;</em><p>A manager of &#8216;nexthop-group&#8217; configurations.</p>
+<p>Create one of these via an sdk object prior to starting the agent main loop. When your <a class="reference internal" href="agent.html#eossdkclasseos_1_1agent__handler_1ad558b16ee9a283bd9b153400743c4b1c"><em>eos::agent_handler::on_initialized</em></a> virtual function is called, the manager is valid for use. </p>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1nexthop__group__mgr_1a37828552f20babf3c11c9b5f7a85c30e"></span>virtual <tt class="descname">~nexthop_group_mgr</tt><big>(</big><big>)</big></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1nexthop__group__mgr_1af51ae749aacff2920fa29240f99e411a"></span>virtual void <tt class="descname">resync_init</tt><big>(</big><big>)</big> = 0</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1nexthop__group__mgr_1a0753783cad6e367350846ed6cda71dd3"></span>virtual void <tt class="descname">resync_complete</tt><big>(</big><big>)</big> = 0</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1nexthop__group__mgr_1a0448c7647348bf67657472d4952afcf3"></span>virtual <a class="reference internal" href="#eossdkclasseos_1_1nexthop__group__iter__t"><em>nexthop_group_iter_t</em></a> <tt class="descname">nexthop_group_iter</tt><big>(</big><big>)</big> const = 0</dt>
+<dd><p>Iterates over all the nexthop groups currently configured. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1nexthop__group__mgr_1a7e1fb0130df5c161696c67147975882b"></span>virtual <a class="reference internal" href="#eossdkclasseos_1_1nexthop__group__t"><em>nexthop_group_t</em></a> <tt class="descname">nexthop_group</tt><big>(</big>std::string const &amp; <em>nexthop_group_name</em><big>)</big> const = 0</dt>
+<dd><p>Retrieves an existing <a class="reference internal" href="#eossdkclasseos_1_1nexthop__group__t"><em>nexthop_group_t</em></a> by name, if it exists. Otherwise this returns an empty <tt class="docutils literal"><span class="pre">nexthop_group_t()</span></tt> </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1nexthop__group__mgr_1a494c94b733f21cdf88008e3bf8483163"></span>virtual <a class="reference internal" href="#eossdkclasseos_1_1nexthop__group__entry__counter__t"><em>nexthop_group_entry_counter_t</em></a> <tt class="descname">counter</tt><big>(</big>std::string const &amp; <em>nexthop_group_name</em>, uint16_t <em>entry</em><big>)</big> const = 0</dt>
+<dd><p>Returns the counter corresponding to the given nexthop group name and entry, if it exists. Otherwise this returns an empty &#8216;nexthop_group_entry_counter_t()&#8217;</p>
+<p>Counters are reset whenever nexthop group entry configuration changes. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1nexthop__group__mgr_1a1b04c643b557e3254f74f0f160d09b8e"></span>virtual bool <tt class="descname">exists</tt><big>(</big>std::string const &amp; <em>nexthop_group_name</em><big>)</big> const = 0</dt>
+<dd><p>Returns true if a nexthop group with the given name has been configured. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1nexthop__group__mgr_1af69675c2dd4e52b3fa55f18ea58f3e44"></span>virtual bool <tt class="descname">active</tt><big>(</big>std::string const &amp; <em>nexthop_group_name</em><big>)</big> const = 0</dt>
+<dd><p>Returns whether or not the given nexthop group is active.</p>
+<p>Nexthop groups are active if the FIB has prefixes using this group. Deleting an active nexthop group will cause all prefixes that point to that nexthop group to blackhole their traffic.</p>
+<p>In order to hitlessly delete a nexthop group, first delete all prefixes that point to it, wait for the nexthop group to no longer be active (using <a class="reference internal" href="#eossdkclasseos_1_1nexthop__group__handler_1a77feba081dffb352dcf54ac79cbe8141"><em>nexthop_group_handler::on_nexthop_group_active</em></a>), and then delete the nexthop group. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1nexthop__group__mgr_1a72892109f3262f1c0b31124ab8d517d4"></span>virtual void <tt class="descname">nexthop_group_set</tt><big>(</big><a class="reference internal" href="#eossdkclasseos_1_1nexthop__group__t"><em>nexthop_group_t</em></a> const &amp;<big>)</big> = 0</dt>
+<dd><p>Creates or updates a nexthop group. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1nexthop__group__mgr_1a608cc8d6621f40779281d5ee87ca88e0"></span>virtual void <tt class="descname">nexthop_group_del</tt><big>(</big>std::string const &amp; <em>nexthop_group_name</em><big>)</big> = 0</dt>
+<dd><p>Removes the named nexthop group from the configuration if it exists. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1nexthop__group__mgr_1a11c69163eef96ada2c7ef60e3656c32a"></span>virtual <a class="reference internal" href="#eossdkclasseos_1_1programmed__nexthop__group__iter__t"><em>programmed_nexthop_group_iter_t</em></a> <tt class="descname">programmed_nexthop_group_iter</tt><big>(</big><big>)</big> const = 0</dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Public Members</p>
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1nexthop__group__mgr_1a51fba8480f95da38dacc9a8949ba11a7"></span><a class="reference internal" href="#eossdkclasseos_1_1nexthop__group__t"><em>nexthop_group_t</em></a> <tt class="descname">const</tt></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Protected Functions</p>
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1nexthop__group__mgr_1ab81cf47efc619bf9f8b4ec1abcf5a1cc"></span><tt class="descname">nexthop_group_mgr</tt><big>(</big><big>)</big></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Private Members</p>
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1nexthop__group__mgr_1a8e35e3264aff34acc1fcad7aa88c2ec6"></span><tt class="descname">nexthop_group_mgr</tt></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Friends</p>
+<dl class="friend">
+<dt>
+<span class="target" id="eossdkclasseos_1_1nexthop__group__mgr_1a1f65fc8b1251d23fef20a58ecf13beb5"></span>friend class <tt class="descname">nexthop_group_handler</tt></dt>
+<dd></dd></dl>
+
+</div>
+</dd></dl>
+
+</dd></dl>
+
+<div class="section" id="type-definitions-in-nexthop-group">
+<h2>Type definitions in <strong>nexthop_group</strong><a class="headerlink" href="#type-definitions-in-nexthop-group" title="Permalink to this headline">¶</a></h2>
+<dl class="namespace">
+<dt>
+<span class="target" id="eossdknamespaceeos"></span><em>namespace</em> <tt class="descname">eos</tt></dt>
+<dd><div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Enums</p>
+<dl class="enum">
+<dt>
+<span class="target" id="eossdknamespaceeos_1abd877d20efe71f6f9f8c78ca1329899b"></span><strong>nexthop_group_encap_t enum</strong></dt>
+<dd><p>The type of encapsulation to use for this nexthop group.</p>
+<p>Each tunnel encapsulation type for Nexthop Groups causes a variety of packet headers for packets using the group to be changed to appropriately encapsulate the frame. IP type has no encapsulation. </p>
+<p><em>Values:</em></p>
+<ul class="breatheenumvalues">
+<li><tt class="first docutils literal"><span class="pre">NEXTHOP_GROUP_TYPE_NULL</span></tt> - </li>
+<li><tt class="first docutils literal"><span class="pre">NEXTHOP_GROUP_IP_IN_IP</span></tt> - <p>IP in IP encapsulation. </p>
+</li>
+<li><tt class="first docutils literal"><span class="pre">NEXTHOP_GROUP_GRE</span></tt> - <p>GRE encapsulation. </p>
+</li>
+<li><tt class="first docutils literal"><span class="pre">NEXTHOP_GROUP_MPLS</span></tt> - <p>MPLS encapsulation. </p>
+</li>
+<li><tt class="first docutils literal"><span class="pre">NEXTHOP_GROUP_MPLS_OVER_GRE</span></tt> - <p>MPLS over GRE encapsulation. </p>
+</li>
+<li><tt class="first docutils literal"><span class="pre">NEXTHOP_GROUP_IP</span></tt> - <p>IP no encapsulation. </p>
+</li>
+</ul>
+</dd></dl>
+
+<dl class="enum">
+<dt>
+<span class="target" id="eossdknamespaceeos_1a72c1d81bbce03542a0765356a2ff8ea8"></span><strong>nexthop_group_gre_key_t enum</strong></dt>
+<dd><p>How the GRE tunnel key is set for GRE nexthop groups. </p>
+<p><em>Values:</em></p>
+<ul class="breatheenumvalues">
+<li><tt class="first docutils literal"><span class="pre">NEXTHOP_GROUP_GRE_KEY_NULL</span></tt> - <p>Default value; do not set the GRE tunnel key. </p>
+</li>
+<li><tt class="first docutils literal"><span class="pre">NEXTHOP_GROUP_GRE_KEY_INGRESS_INTF</span></tt> - <p>Use the ingress interface as the tunnel key. Not supported in this release. </p>
+</li>
+</ul>
+</dd></dl>
+
+</div>
+<dl class="class">
+<dt>
+<span class="target" id="eossdkclasseos_1_1nexthop__group__mpls__action__t"></span><em>class</em> <tt class="descname">nexthop_group_mpls_action_t</tt></dt>
+<dd><em>#include &lt;nexthop_group.h&gt;</em><p>An MPLS nexthop group switching operation.</p>
+<p>This structure combines a stack of labels and an MPLS switching operation using those labels, such as eos::MPLS_ACTION_PUSH. </p>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1nexthop__group__mpls__action__t_1aa0519f56d5031185ce5d8c4e8b693e6e"></span><tt class="descname">nexthop_group_mpls_action_t</tt><big>(</big><big>)</big></dt>
+<dd><p>Default constructor. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1nexthop__group__mpls__action__t_1a015de6afceda05602f559c2cb412edfd"></span><tt class="descname">nexthop_group_mpls_action_t</tt><big>(</big>mpls_action_t <em>action_type</em><big>)</big></dt>
+<dd><p>Constructs an MPLS action with a specific switching operation. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1nexthop__group__mpls__action__t_1aa3bcfacaa420ab18b797a91111f2cc6a"></span><tt class="descname">nexthop_group_mpls_action_t</tt><big>(</big>mpls_action_t <em>action_type</em>, std::forward_list&lt; <a class="reference internal" href="mpls.html#eossdkclasseos_1_1mpls__label__t"><em>mpls_label_t</em></a> &gt; const &amp; <em>label_stack</em><big>)</big></dt>
+<dd><p>Constructs a populated MPLS label stack for some switching action. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1nexthop__group__mpls__action__t_1af5dfabf81c6fcdcb6bec462d147b6cce"></span>mpls_action_t <tt class="descname">action_type</tt><big>(</big><big>)</big> const</dt>
+<dd><p>Getter for &#8216;action_type&#8217;: the MPLS switching operation for this action. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1nexthop__group__mpls__action__t_1af5ee940dbc35366eef0570c2f842c6f4"></span>void <tt class="descname">action_type_is</tt><big>(</big>mpls_action_t <em>action_type</em><big>)</big></dt>
+<dd><p>Setter for &#8216;action_type&#8217;. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1nexthop__group__mpls__action__t_1a50c8b59459db550dae2af23b365b8fa0"></span>std::forward_list&lt; <a class="reference internal" href="mpls.html#eossdkclasseos_1_1mpls__label__t"><em>mpls_label_t</em></a> &gt; const &amp; <tt class="descname">label_stack</tt><big>(</big><big>)</big> const</dt>
+<dd><p>Getter for &#8216;label_stack&#8217;: the MPLS label stack.</p>
+<p>The first element is the outermost label. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1nexthop__group__mpls__action__t_1a4001d5155c886d8ce5e87b641eb89227"></span>void <tt class="descname">label_stack_is</tt><big>(</big>std::forward_list&lt; <a class="reference internal" href="mpls.html#eossdkclasseos_1_1mpls__label__t"><em>mpls_label_t</em></a> &gt; const &amp; <em>label_stack</em><big>)</big></dt>
+<dd><p>Setter for &#8216;label_stack&#8217;. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1nexthop__group__mpls__action__t_1a0276b14c23dc6459ba4015c57e5c9d9c"></span>void <tt class="descname">label_stack_set</tt><big>(</big><a class="reference internal" href="mpls.html#eossdkclasseos_1_1mpls__label__t"><em>mpls_label_t</em></a> const &amp; <em>label_stack</em><big>)</big></dt>
+<dd><p>Prepend one label_stack to the list. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1nexthop__group__mpls__action__t_1a71d0b8624faf9feb5bdcea1e8ae53e11"></span>void <tt class="descname">label_stack_del</tt><big>(</big><a class="reference internal" href="mpls.html#eossdkclasseos_1_1mpls__label__t"><em>mpls_label_t</em></a> const &amp; <em>label_stack</em><big>)</big></dt>
+<dd><p>Remove all matching label_stack elements. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1nexthop__group__mpls__action__t_1ac87c357df1bc8dd1bb6e3dd8c44431bb"></span>bool <tt class="descname">operator==</tt><big>(</big><a class="reference internal" href="#eossdkclasseos_1_1nexthop__group__mpls__action__t"><em>nexthop_group_mpls_action_t</em></a> const &amp; <em>other</em><big>)</big> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1nexthop__group__mpls__action__t_1aab0128d5bb803e78b178bd2ef060716c"></span>bool <tt class="descname">operator!=</tt><big>(</big><a class="reference internal" href="#eossdkclasseos_1_1nexthop__group__mpls__action__t"><em>nexthop_group_mpls_action_t</em></a> const &amp; <em>other</em><big>)</big> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1nexthop__group__mpls__action__t_1a21f4ab74a7c4064506fff9cb64d5d3d8"></span>bool <tt class="descname">operator&lt;</tt><big>(</big><a class="reference internal" href="#eossdkclasseos_1_1nexthop__group__mpls__action__t"><em>nexthop_group_mpls_action_t</em></a> const &amp; <em>other</em><big>)</big> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1nexthop__group__mpls__action__t_1a101154ab53dddde27a6cd5d9cf0acb1d"></span>uint32_t <tt class="descname">hash</tt><big>(</big><big>)</big> const</dt>
+<dd><p>The hash function for type <a class="reference internal" href="#eossdkclasseos_1_1nexthop__group__mpls__action__t"><em>nexthop_group_mpls_action_t</em></a>. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1nexthop__group__mpls__action__t_1a81767db5987493cef1928308e96c3284"></span>std::string <tt class="descname">to_string</tt><big>(</big><big>)</big> const</dt>
+<dd><p>Returns a string representation of the current object&#8217;s values. </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Private Members</p>
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1nexthop__group__mpls__action__t_1abdeb201850607630d9fa8e7c3c5f7ee0"></span>mpls_action_t <tt class="descname">action_type_</tt></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1nexthop__group__mpls__action__t_1affecf130be2a4e665e3a342d69bee628"></span>std::forward_list&lt; <a class="reference internal" href="mpls.html#eossdkclasseos_1_1mpls__label__t"><em>mpls_label_t</em></a> &gt; <tt class="descname">label_stack_</tt></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Friends</p>
+<dl class="friend">
+<dt>
+<span class="target" id="eossdkclasseos_1_1nexthop__group__mpls__action__t_1acc3c2295ade8b8bf6eac573e08f1e2ce"></span>friend std::ostream &amp; <tt class="descname">operator&lt;&lt;</tt></dt>
+<dd><p>A utility stream operator that adds a string representation of <a class="reference internal" href="#eossdkclasseos_1_1nexthop__group__mpls__action__t"><em>nexthop_group_mpls_action_t</em></a> to the ostream. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="class">
+<dt>
+<span class="target" id="eossdkclasseos_1_1nexthop__group__entry__counter__t"></span><em>class</em> <tt class="descname">nexthop_group_entry_counter_t</tt></dt>
+<dd><em>#include &lt;nexthop_group.h&gt;</em><p>Defines counter for a nexthop entry. </p>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1nexthop__group__entry__counter__t_1ac5228f27968bf90beef5358133bf13b1"></span><tt class="descname">nexthop_group_entry_counter_t</tt><big>(</big><big>)</big></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1nexthop__group__entry__counter__t_1a68ef72c9306dc86d0391a7a3f19b4398"></span><tt class="descname">nexthop_group_entry_counter_t</tt><big>(</big>uint64_t <em>packets</em>, uint64_t <em>bytes</em><big>)</big></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1nexthop__group__entry__counter__t_1a663525591340db98860ea732011913f7"></span>uint64_t <tt class="descname">packets</tt><big>(</big><big>)</big> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1nexthop__group__entry__counter__t_1ab79e535597dbb499abc504fa9ece5775"></span>uint64_t <tt class="descname">bytes</tt><big>(</big><big>)</big> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1nexthop__group__entry__counter__t_1a12a7ad0392b82ef880f68c92753958c4"></span>bool <tt class="descname">operator==</tt><big>(</big><a class="reference internal" href="#eossdkclasseos_1_1nexthop__group__entry__counter__t"><em>nexthop_group_entry_counter_t</em></a> const &amp; <em>other</em><big>)</big> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1nexthop__group__entry__counter__t_1a19158f3b1c5a4fa979c10e1ef5f065d1"></span>bool <tt class="descname">operator!=</tt><big>(</big><a class="reference internal" href="#eossdkclasseos_1_1nexthop__group__entry__counter__t"><em>nexthop_group_entry_counter_t</em></a> const &amp; <em>other</em><big>)</big> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1nexthop__group__entry__counter__t_1a86a98ae27ed62a1af5398b2afb541514"></span>bool <tt class="descname">operator&lt;</tt><big>(</big><a class="reference internal" href="#eossdkclasseos_1_1nexthop__group__entry__counter__t"><em>nexthop_group_entry_counter_t</em></a> const &amp; <em>other</em><big>)</big> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1nexthop__group__entry__counter__t_1a309b64e212e41cbb54840780ce7b00b0"></span>uint32_t <tt class="descname">hash</tt><big>(</big><big>)</big> const</dt>
+<dd><p>The hash function for type <a class="reference internal" href="#eossdkclasseos_1_1nexthop__group__entry__counter__t"><em>nexthop_group_entry_counter_t</em></a>. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1nexthop__group__entry__counter__t_1afa74970f1a796bbb92a4be688fe4b215"></span>std::string <tt class="descname">to_string</tt><big>(</big><big>)</big> const</dt>
+<dd><p>Returns a string representation of the current object&#8217;s values. </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Private Members</p>
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1nexthop__group__entry__counter__t_1afb3105c2ca9962cbf58acee43cacb70b"></span>uint64_t <tt class="descname">packets_</tt></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1nexthop__group__entry__counter__t_1a1231340625e84b59f587eb01f3b3746d"></span>uint64_t <tt class="descname">bytes_</tt></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Friends</p>
+<dl class="friend">
+<dt>
+<span class="target" id="eossdkclasseos_1_1nexthop__group__entry__counter__t_1a6c1ebe7da2692f05ac4970d6e5dc72db"></span>friend std::ostream &amp; <tt class="descname">operator&lt;&lt;</tt></dt>
+<dd><p>A utility stream operator that adds a string representation of <a class="reference internal" href="#eossdkclasseos_1_1nexthop__group__entry__counter__t"><em>nexthop_group_entry_counter_t</em></a> to the ostream. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="class">
+<dt>
+<span class="target" id="eossdkclasseos_1_1nexthop__group__entry__t"></span><em>class</em> <tt class="descname">nexthop_group_entry_t</tt></dt>
+<dd><em>#include &lt;nexthop_group.h&gt;</em><p>A nexthop group destination entry.</p>
+<p>An entry consists of a nexthop IP address, and optionally an MPLS label switching operation. </p>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1nexthop__group__entry__t_1a9edf4f3d9f7df8f06ba4970070c1b59e"></span><tt class="descname">nexthop_group_entry_t</tt><big>(</big><big>)</big></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1nexthop__group__entry__t_1a92c4e7fa1d8fef3fc10bdc4eebc4c158"></span><tt class="descname">nexthop_group_entry_t</tt><big>(</big><a class="reference internal" href="ip.html#eossdkclasseos_1_1ip__addr__t"><em>ip_addr_t</em></a> const &amp; <em>nexthop</em><big>)</big></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1nexthop__group__entry__t_1ae83c25e709624a60329030f35ef8c2a7"></span><a class="reference internal" href="#eossdkclasseos_1_1nexthop__group__mpls__action__t"><em>nexthop_group_mpls_action_t</em></a> <tt class="descname">mpls_action</tt><big>(</big><big>)</big> const</dt>
+<dd><p>Getter for &#8216;mpls_action&#8217;: MPLS label switching stack for this entry. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1nexthop__group__entry__t_1a6283806e87530768a07fe243c00a9882"></span>void <tt class="descname">mpls_action_is</tt><big>(</big><a class="reference internal" href="#eossdkclasseos_1_1nexthop__group__mpls__action__t"><em>nexthop_group_mpls_action_t</em></a> const &amp; <em>mpls_action</em><big>)</big></dt>
+<dd><p>Setter for &#8216;mpls_action&#8217;. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1nexthop__group__entry__t_1aa1667d947720915c42cabcaea9090db3"></span><a class="reference internal" href="ip.html#eossdkclasseos_1_1ip__addr__t"><em>ip_addr_t</em></a> <tt class="descname">nexthop</tt><big>(</big><big>)</big> const</dt>
+<dd><p>Getter for &#8216;nexthop&#8217;: the next hop IP address for this entry. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1nexthop__group__entry__t_1a9b4ae190f90171ba875e8b22941c9625"></span>void <tt class="descname">nexthop_is</tt><big>(</big><a class="reference internal" href="ip.html#eossdkclasseos_1_1ip__addr__t"><em>ip_addr_t</em></a> const &amp; <em>nexthop</em><big>)</big></dt>
+<dd><p>Setter for &#8216;nexthop&#8217;. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1nexthop__group__entry__t_1a415a3661439ca8022a85c7ce4fa2334d"></span>bool <tt class="descname">operator==</tt><big>(</big><a class="reference internal" href="#eossdkclasseos_1_1nexthop__group__entry__t"><em>nexthop_group_entry_t</em></a> const &amp; <em>other</em><big>)</big> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1nexthop__group__entry__t_1a91e30c5512d3db95ab1aaa63c2c337a0"></span>bool <tt class="descname">operator!=</tt><big>(</big><a class="reference internal" href="#eossdkclasseos_1_1nexthop__group__entry__t"><em>nexthop_group_entry_t</em></a> const &amp; <em>other</em><big>)</big> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1nexthop__group__entry__t_1af21c849726fe78c2179f4315147dddcb"></span>bool <tt class="descname">operator&lt;</tt><big>(</big><a class="reference internal" href="#eossdkclasseos_1_1nexthop__group__entry__t"><em>nexthop_group_entry_t</em></a> const &amp; <em>other</em><big>)</big> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1nexthop__group__entry__t_1ad7ed8f93d035d523539a9c68ed51b6d1"></span>uint32_t <tt class="descname">hash</tt><big>(</big><big>)</big> const</dt>
+<dd><p>The hash function for type <a class="reference internal" href="#eossdkclasseos_1_1nexthop__group__entry__t"><em>nexthop_group_entry_t</em></a>. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1nexthop__group__entry__t_1af9e979919e99773a1d6901f4e0af36bb"></span>std::string <tt class="descname">to_string</tt><big>(</big><big>)</big> const</dt>
+<dd><p>Returns a string representation of the current object&#8217;s values. </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Private Members</p>
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1nexthop__group__entry__t_1a8de845fd9744253f06164ddc92bf0091"></span><a class="reference internal" href="#eossdkclasseos_1_1nexthop__group__mpls__action__t"><em>nexthop_group_mpls_action_t</em></a> <tt class="descname">mpls_action_</tt></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1nexthop__group__entry__t_1a59ba05166e60ed0e96ba14d49906d4fc"></span><a class="reference internal" href="ip.html#eossdkclasseos_1_1ip__addr__t"><em>ip_addr_t</em></a> <tt class="descname">nexthop_</tt></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Friends</p>
+<dl class="friend">
+<dt>
+<span class="target" id="eossdkclasseos_1_1nexthop__group__entry__t_1a9c21d4559d5f5e46fb72f1523acee181"></span>friend std::ostream &amp; <tt class="descname">operator&lt;&lt;</tt></dt>
+<dd><p>A utility stream operator that adds a string representation of <a class="reference internal" href="#eossdkclasseos_1_1nexthop__group__entry__t"><em>nexthop_group_entry_t</em></a> to the ostream. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="class">
+<dt>
+<span class="target" id="eossdkclasseos_1_1nexthop__group__t"></span><em>class</em> <tt class="descname">nexthop_group_t</tt></dt>
+<dd><em>#include &lt;nexthop_group.h&gt;</em><p>A nexthop group.</p>
+<p>A nexthop group represents encapsulation and IP addressing information to be used with a policy routing application. </p>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1nexthop__group__t_1aa4ad3411ef146ee6c44128c06d1067fc"></span><tt class="descname">nexthop_group_t</tt><big>(</big><big>)</big></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1nexthop__group__t_1a14b3bf3f9239bdb2568a13d71bb3d91d"></span><tt class="descname">nexthop_group_t</tt><big>(</big>std::string <em>name</em>, nexthop_group_encap_t <em>type</em><big>)</big></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1nexthop__group__t_1a3e5e3cc0a1fb250d0b1098b415b8549a"></span><tt class="descname">nexthop_group_t</tt><big>(</big>std::string <em>name</em>, nexthop_group_encap_t <em>type</em>, nexthop_group_gre_key_t <em>gre_key_type</em><big>)</big></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1nexthop__group__t_1a7d9dd33f98b2c5cfc6834fff89d38a36"></span><tt class="descname">nexthop_group_t</tt><big>(</big>std::string <em>name</em>, <a class="reference internal" href="ip.html#eossdkclasseos_1_1ip__addr__t"><em>ip_addr_t</em></a> const &amp; <em>source_ip</em><big>)</big></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1nexthop__group__t_1a9fbbbf1b9d8a934963bee6530a66f3c1"></span><tt class="descname">nexthop_group_t</tt><big>(</big>std::string <em>name</em>, <a class="reference internal" href="ip.html#eossdkclasseos_1_1ip__addr__t"><em>ip_addr_t</em></a> const &amp; <em>source_ip</em>, std::map&lt; uint16_t, <a class="reference internal" href="#eossdkclasseos_1_1nexthop__group__entry__t"><em>nexthop_group_entry_t</em></a> &gt; const &amp; <em>nexthops</em><big>)</big></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1nexthop__group__t_1a2edb669bf2b2087fe5a5de583de93633"></span>std::string <tt class="descname">name</tt><big>(</big><big>)</big> const</dt>
+<dd><p>Getter for &#8216;name&#8217;: the unique name of the nexthop group. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1nexthop__group__t_1ab0af5706d01b787065faddd34b49c7e7"></span>nexthop_group_encap_t <tt class="descname">type</tt><big>(</big><big>)</big> const</dt>
+<dd><p>Getter for &#8216;type&#8217;: the type of packet encapsulation used on the group. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1nexthop__group__t_1a917df99e50895f20e5a852690833f1aa"></span>nexthop_group_gre_key_t <tt class="descname">gre_key_type</tt><big>(</big><big>)</big> const</dt>
+<dd><p>Getter for &#8216;gre_key_type&#8217;: the key of the GRE tunnel. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1nexthop__group__t_1a358e1a2828e9c4d467c6a9de88c0d6d8"></span>uint16_t <tt class="descname">ttl</tt><big>(</big><big>)</big> const</dt>
+<dd><p>Getter for &#8216;ttl&#8217;: the TTL set in frame headers of IP-in-IP or GRE tunnels. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1nexthop__group__t_1a6b70a293c955c320f43ea53ed57ced86"></span>void <tt class="descname">ttl_is</tt><big>(</big>uint16_t <em>ttl</em><big>)</big></dt>
+<dd><p>Setter for &#8216;ttl&#8217;. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1nexthop__group__t_1a7de8a6b3b708ab49518cc50b819014de"></span><a class="reference internal" href="ip.html#eossdkclasseos_1_1ip__addr__t"><em>ip_addr_t</em></a> <tt class="descname">source_ip</tt><big>(</big><big>)</big> const</dt>
+<dd><p>Getter for &#8216;source_ip&#8217;: the source IP used on frames sent on this group. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1nexthop__group__t_1a1532f8441db4fd1549577246d9a653cf"></span>void <tt class="descname">source_ip_is</tt><big>(</big><a class="reference internal" href="ip.html#eossdkclasseos_1_1ip__addr__t"><em>ip_addr_t</em></a> const &amp; <em>source_ip</em><big>)</big></dt>
+<dd><p>Setter for &#8216;source_ip&#8217;. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1nexthop__group__t_1ab29414a08309a7fe11ffb8686cdb6e94"></span><a class="reference internal" href="intf.html#eossdkclasseos_1_1intf__id__t"><em>intf_id_t</em></a> <tt class="descname">source_intf</tt><big>(</big><big>)</big> const</dt>
+<dd><p>Getter for &#8216;source_intf&#8217;: the source interface to use. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1nexthop__group__t_1a8d22eb299607cb641337c540a532d2d1"></span>void <tt class="descname">source_intf_is</tt><big>(</big><a class="reference internal" href="intf.html#eossdkclasseos_1_1intf__id__t"><em>intf_id_t</em></a> <em>source_intf</em><big>)</big></dt>
+<dd><p>Setter for &#8216;source_intf&#8217;. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1nexthop__group__t_1a5d39e887e0373d8bbfb30610fffd51d9"></span>bool <tt class="descname">autosize</tt><big>(</big><big>)</big> const</dt>
+<dd><p>Getter for &#8216;autosize&#8217;: Dynamic resizing configuration for the nexthop group. When set, unresolved entries from the nexthop group are not programmed into hardware, and packets will be hashed across the remaining reachable entries in the group. Disabled (i.e. set to false) by default. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1nexthop__group__t_1ab6fda349804a7c2e6ec96860b90814ab"></span>void <tt class="descname">autosize_is</tt><big>(</big>bool <em>autosize</em><big>)</big></dt>
+<dd><p>Setter for &#8216;autosize&#8217;. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1nexthop__group__t_1ad4f2a658de752e9fa2134dce23469504"></span>uint16_t <tt class="descname">size</tt><big>(</big><big>)</big> const</dt>
+<dd><p>Utility method to return the number of entries configured in the nexthop group. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1nexthop__group__t_1a564034f8bf3e967de1f21af5fe23a7d4"></span>std::map&lt; uint16_t, <a class="reference internal" href="#eossdkclasseos_1_1nexthop__group__entry__t"><em>nexthop_group_entry_t</em></a> &gt; const &amp; <tt class="descname">nexthops</tt><big>(</big><big>)</big> const</dt>
+<dd><p>Getter for &#8216;nexthops&#8217;: array index to nexthop group entry map. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1nexthop__group__t_1a02d217abb6483489017be2f95ed11d57"></span>void <tt class="descname">nexthops_is</tt><big>(</big>std::map&lt; uint16_t, <a class="reference internal" href="#eossdkclasseos_1_1nexthop__group__entry__t"><em>nexthop_group_entry_t</em></a> &gt; const &amp; <em>nexthops</em><big>)</big></dt>
+<dd><p>Setter for &#8216;nexthops&#8217;. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1nexthop__group__t_1a88c1eff7bda14b691f15c86e0ab594b8"></span>void <tt class="descname">nexthop_set</tt><big>(</big>uint16_t <em>key</em>, <a class="reference internal" href="#eossdkclasseos_1_1nexthop__group__entry__t"><em>nexthop_group_entry_t</em></a> const &amp; <em>value</em><big>)</big></dt>
+<dd><p>Inserts key/value pair to the map. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1nexthop__group__t_1ae6130d15ab385f0c72fbf9aba0ac8140"></span>void <tt class="descname">nexthop_del</tt><big>(</big>uint16_t <em>key</em><big>)</big></dt>
+<dd><p>Deletes the key/value pair from the map. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1nexthop__group__t_1a67a58f098eda98fd4b4a96a44fad7b1a"></span>std::map&lt; uint16_t, <a class="reference internal" href="ip.html#eossdkclasseos_1_1ip__addr__t"><em>ip_addr_t</em></a> &gt; const &amp; <tt class="descname">destination_ips</tt><big>(</big><big>)</big> const</dt>
+<dd><p>Getter for &#8216;destination_ips&#8217;: array index to IP address map. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1nexthop__group__t_1aae74c6fc72b9e409effc319c074f1345"></span>void <tt class="descname">destination_ips_is</tt><big>(</big>std::map&lt; uint16_t, <a class="reference internal" href="ip.html#eossdkclasseos_1_1ip__addr__t"><em>ip_addr_t</em></a> &gt; const &amp; <em>destination_ips</em><big>)</big></dt>
+<dd><p>Setter for &#8216;destination_ips&#8217;. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1nexthop__group__t_1ae700ad9f3c80fddaaa51f8e0e0383698"></span>void <tt class="descname">destination_ip_set</tt><big>(</big>uint16_t <em>key</em>, <a class="reference internal" href="ip.html#eossdkclasseos_1_1ip__addr__t"><em>ip_addr_t</em></a> const &amp; <em>value</em><big>)</big></dt>
+<dd><p>Inserts key/value pair to the map. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1nexthop__group__t_1a4e445ed1aa0669e9a76b5bf3c1a94632"></span>void <tt class="descname">destination_ip_del</tt><big>(</big>uint16_t <em>key</em><big>)</big></dt>
+<dd><p>Deletes the key/value pair from the map. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1nexthop__group__t_1a2278fef2c85ae282f5617ddbdf64453b"></span>bool <tt class="descname">counters_unshared</tt><big>(</big><big>)</big> const</dt>
+<dd><p>Getter for &#8216;counters_unshared&#8217;: Defines whether entry counters are unshared for the nexthop group. When set, do not share counter values between entries that share the same tunnel destination. Each entry will have its own unique counter. Disabled (i.e. set to false) by default. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1nexthop__group__t_1a16cb340b58da0995d4f399697f190ddf"></span>void <tt class="descname">counters_unshared_is</tt><big>(</big>bool <em>counters_unshared</em><big>)</big></dt>
+<dd><p>Setter for &#8216;counters_unshared&#8217;. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1nexthop__group__t_1a4c411b1244416974b242d710ed24f9bd"></span>bool <tt class="descname">operator==</tt><big>(</big><a class="reference internal" href="#eossdkclasseos_1_1nexthop__group__t"><em>nexthop_group_t</em></a> const &amp; <em>other</em><big>)</big> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1nexthop__group__t_1a8f4adb3ed4850c81534310122b6a2123"></span>bool <tt class="descname">operator!=</tt><big>(</big><a class="reference internal" href="#eossdkclasseos_1_1nexthop__group__t"><em>nexthop_group_t</em></a> const &amp; <em>other</em><big>)</big> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1nexthop__group__t_1a48dfd135a5b49480339642ccffe1e124"></span>bool <tt class="descname">operator&lt;</tt><big>(</big><a class="reference internal" href="#eossdkclasseos_1_1nexthop__group__t"><em>nexthop_group_t</em></a> const &amp; <em>other</em><big>)</big> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1nexthop__group__t_1a7266622017898b119c98b2d450ad064b"></span>uint32_t <tt class="descname">hash</tt><big>(</big><big>)</big> const</dt>
+<dd><p>The hash function for type <a class="reference internal" href="#eossdkclasseos_1_1nexthop__group__t"><em>nexthop_group_t</em></a>. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1nexthop__group__t_1ad8243bdb1231ca6dc6e61d53a21d58e7"></span>std::string <tt class="descname">to_string</tt><big>(</big><big>)</big> const</dt>
+<dd><p>Returns a string representation of the current object&#8217;s values. </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Private Members</p>
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1nexthop__group__t_1a4679a2c939c2d933041ac0e1aeb322a9"></span>std::string <tt class="descname">name_</tt></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1nexthop__group__t_1aa1e6e01ce1c252fd6a17107f456afb94"></span>nexthop_group_encap_t <tt class="descname">type_</tt></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1nexthop__group__t_1a2b3bdf1a883c7b020b037cb260b83a2d"></span>nexthop_group_gre_key_t <tt class="descname">gre_key_type_</tt></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1nexthop__group__t_1ae67991045713e53c2514504b01e3c5f8"></span>uint16_t <tt class="descname">ttl_</tt></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1nexthop__group__t_1a18223a5f337da86da1959a9e9da97c78"></span><a class="reference internal" href="ip.html#eossdkclasseos_1_1ip__addr__t"><em>ip_addr_t</em></a> <tt class="descname">source_ip_</tt></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1nexthop__group__t_1a9deb17f35526c074b0754ed2a050e996"></span><a class="reference internal" href="intf.html#eossdkclasseos_1_1intf__id__t"><em>intf_id_t</em></a> <tt class="descname">source_intf_</tt></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1nexthop__group__t_1a096a89d9329ea83e40f7322e928eb940"></span>bool <tt class="descname">autosize_</tt></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1nexthop__group__t_1a7db8820213badd735ebc62d551e55b72"></span>std::map&lt; uint16_t, <a class="reference internal" href="#eossdkclasseos_1_1nexthop__group__entry__t"><em>nexthop_group_entry_t</em></a> &gt; <tt class="descname">nexthops_</tt></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1nexthop__group__t_1a594eecc3bbc10b71d81306eaec0d54b5"></span>std::map&lt; uint16_t, <a class="reference internal" href="ip.html#eossdkclasseos_1_1ip__addr__t"><em>ip_addr_t</em></a> &gt; <tt class="descname">destination_ips_</tt></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1nexthop__group__t_1aed533c9e08992e44ba397c73f993c7e3"></span>bool <tt class="descname">counters_unshared_</tt></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Friends</p>
+<dl class="friend">
+<dt>
+<span class="target" id="eossdkclasseos_1_1nexthop__group__t_1a58b1ebe411477776d238ac02eee0ce58"></span>friend std::ostream &amp; <tt class="descname">operator&lt;&lt;</tt></dt>
+<dd><p>A utility stream operator that adds a string representation of <a class="reference internal" href="#eossdkclasseos_1_1nexthop__group__t"><em>nexthop_group_t</em></a> to the ostream. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#"><strong>nexthop_group</strong></a><ul>
+<li><a class="reference internal" href="#type-definitions-in-nexthop-group">Type definitions in <strong>nexthop_group</strong></a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="neighbor_table.html"
+                        title="previous chapter"><strong>neighbor_table</strong></a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="nexthop_group_tunnel.html"
+                        title="next chapter"><strong>nexthop_group_tunnel</strong></a></p>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="nexthop_group_tunnel.html" title="nexthop_group_tunnel"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="neighbor_table.html" title="neighbor_table"
+             >previous</a> |</li>
+        <li><a href="index.html">Arista EOS SDK 2.14.0 reference</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2014, Arista Networks.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

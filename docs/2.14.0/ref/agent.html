@@ -1,0 +1,324 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>agent &mdash; Arista EOS SDK 2.14.0 reference</title>
+    
+    <link rel="stylesheet" href="_static/eossdk.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/breathe.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '2.14.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="Arista EOS SDK 2.14.0 reference" href="index.html" />
+    <link rel="next" title="aresolve" href="aresolve.html" />
+    <link rel="prev" title="acl" href="acl.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="aresolve.html" title="aresolve"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="acl.html" title="acl"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">Arista EOS SDK 2.14.0 reference</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="agent">
+<h1><strong>agent</strong><a class="headerlink" href="#agent" title="Permalink to this headline">¶</a></h1>
+<p>EOS Agent handler and agent loop management.</p>
+<p>The agent_handler and agent_mgr provide a means to manage the agent process life-cycle as managed by EOS&#8217; ProcMgr/Launcher infrastructure, including any agent specific cleanup that must be performed prior to ProcMgr terminating the agent when it is disabled.</p>
+<p>Most agents will inherit from agent_handler to react to the on_initialized() callback. This callback is important because it alerts you that all Sysdb state for other managers and handlers has been synchronized. It is at this point that callbacks to your agent&#8217;s other handler methods will commence, and that your agent may call a mgr&#8217;s methods.</p>
+<p>
+In order to gracefully shutdown, agents can override the on_agent_enabled() method provided by the agent_handler in order to cleanup existing resources, such as files or sockets. When a shutdown event is triggered, your agent will not be terminated until it has set the agent_mgr&#8217;s agent_shutdown_complete_is(true) method. This method will not always be called before your agent exits. During supervisor switchover or reload events (or, if your agent is sent a kill signal), the agent will exit abruptly and this method will not be called.<dl class="docutils">
+<dt><strong>Warning</strong></dt>
+<dd>Note that the features documented below are only available in certain releases, or in conjunction with another extension providing EOS SDK state.</dd>
+</dl>
+</p>
+<p>This module also provides a way to handle configuration changes and publish a status. If this agent is configured via the daemon CLI, a custom data store is created for this agent in Sysdb. This data store contains two string-string maps, one for configuration and one for status.</p>
+<p>Configuration options will be externally set, either via the CLI, eAPI, or programatically in some other manner. Your agent can read configuration options via the agent_mgr&#8217;s agent_option() method, and should react to options via the agent_handler&#8217;s on_agent_option() method. Note that you should manually handle existing configuration options when initialized. These options will be reflected in the running configuration so they will persist across supervisor switchovers, and, if written to the startup config, will persist after a reboot.</p>
+<p>Status data is meant for external consumption; your agent should publish key-value status objects to reflect current status, errors, or other important data that should be monitored. Status can be monitored via the &#8220;show daemon [agent_name]&#8221; CLI command, or retrieved via an off-box script using an eAPI request with that same command. To publish status, use the agent_mgr&#8217;s status_set() methods, or unset a status via status_del().</p>
+<p>To see an example of these methods in use, view examples/CustomStateAgent.cpp. </p>
+<dl class="namespace">
+<dt>
+<span class="target" id="eossdknamespaceeos"></span><em>namespace</em> <tt class="descname">eos</tt></dt>
+<dd><dl class="class">
+<dt>
+<span class="target" id="eossdkclasseos_1_1agent__handler"></span><em>class</em> <tt class="descname">agent_handler</tt></dt>
+<dd><em>#include &lt;agent.h&gt;</em><p>The <a class="reference internal" href="#eossdkclasseos_1_1agent__handler"><em>agent_handler</em></a> class handles events in the agent&#8217;s life-cycle. </p>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1agent__handler_1a26486f51b4c66596d748a04c1336b2c2"></span><tt class="descname">agent_handler</tt><big>(</big><a class="reference internal" href="#eossdkclasseos_1_1agent__mgr"><em>agent_mgr</em></a> *<big>)</big></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1agent__handler_1a680e047a440916363f2c11623f2d2e82"></span><a class="reference internal" href="#eossdkclasseos_1_1agent__mgr"><em>agent_mgr</em></a> * <tt class="descname">get_agent_mgr</tt><big>(</big><big>)</big> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1agent__handler_1ad558b16ee9a283bd9b153400743c4b1c"></span>virtual void <tt class="descname">on_initialized</tt><big>(</big><big>)</big></dt>
+<dd><p>Handler called after the agent has been internally initialized. At this point, all managers have synchronized with Sysdb, and the agent&#8217;s handlers will begin firing. In the body of this method, agents should check Sysdb and handle the initial state of any configuration and status that this agent is interested in.</p>
+<p>Accessors and mutators (from _mgr classes) should not be called before this event, and other handlers will not fire before this event. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1agent__handler_1a2e2f1f274a6b067e364c1f4f65722d3b"></span>virtual void <tt class="descname">on_agent_enabled</tt><big>(</big>bool <em>enabled</em><big>)</big></dt>
+<dd><p>Handler called when the agent has been enabled or disabled.</p>
+<p>The default implementation will immediately call the <a class="reference internal" href="#eossdkclasseos_1_1agent__mgr"><em>agent_mgr</em></a>&#8216;s agent_shutdown_complete_is(true) method when it has been disabled. If on_agent_enabled is enabled, the agent will continue to run until it callsagent_shutdown_complete_is(true), which allows the agent to cleanup any relevant state. Note that the agent configuration may cease to exist, causing the agent to be disabled. This means the agent should not check any agent_option during the shutdown flow.</p>
+<p>If called called with enabled=true, the agent should usually perform a no-op, unless it is in the process of shutting down. This occurs when the agent was shutdown and quickly enabled before it had a chance to clean up, and at this point the agent should cancel any clean up activities it has started and resume functioning normally. This scenario only happen if the agent is waiting on the event loop for a notification before calling shutting down and calling agent_shutdown_complete_is(true). </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1agent__handler_1aa25d8f2359f85839c6f1459e002421aa"></span>virtual void <tt class="descname">on_agent_option</tt><big>(</big>std::string const &amp; <em>name</em>, std::string const &amp; <em>value</em><big>)</big></dt>
+<dd><p>Handler called when a configuration option of the agent has changed. If the option was deleted, this will be called with value set as the empty string. Otherwise, value will contain the added or altered string corresponding to the option name. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="class">
+<dt>
+<span class="target" id="eossdkclasseos_1_1agent__option__iter__t"></span><em>class</em> <tt class="descname">agent_option_iter_t</tt></dt>
+<dd><em>#include &lt;agent.h&gt;</em><p>Iterator type for configured options. </p>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Private Functions</p>
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1agent__option__iter__t_1a7b2c394aa63c832dc92f021afde4ccc2"></span><tt class="descname">agent_option_iter_t</tt><big>(</big>agent_option_iter_impl * <em>const</em><big>)</big></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Friends</p>
+<dl class="friend">
+<dt>
+<span class="target" id="eossdkclasseos_1_1agent__option__iter__t_1a8ef0098b8a3d5edbec20f427921a5424"></span>friend class <tt class="descname">agent_option_iter_impl</tt></dt>
+<dd></dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="class">
+<dt>
+<span class="target" id="eossdkclasseos_1_1agent__status__iter__t"></span><em>class</em> <tt class="descname">agent_status_iter_t</tt></dt>
+<dd><em>#include &lt;agent.h&gt;</em><p>Iterator type for published status keys. </p>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Private Functions</p>
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1agent__status__iter__t_1aa0546e296b7e5e6f78d7295a6bcf3a6b"></span><tt class="descname">agent_status_iter_t</tt><big>(</big>agent_status_iter_impl * <em>const</em><big>)</big></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Friends</p>
+<dl class="friend">
+<dt>
+<span class="target" id="eossdkclasseos_1_1agent__status__iter__t_1a65f322de387895a99188d93520b81bb0"></span>friend class <tt class="descname">agent_status_iter_impl</tt></dt>
+<dd></dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="class">
+<dt>
+<span class="target" id="eossdkclasseos_1_1agent__mgr"></span><em>class</em> <tt class="descname">agent_mgr</tt></dt>
+<dd><div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1agent__mgr_1a81776d95c2160abcbe8b67eab15cf628"></span>virtual <tt class="descname">~agent_mgr</tt><big>(</big><big>)</big></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1agent__mgr_1af2519c3a429c4a9cf76c6d8c689f3199"></span>virtual bool <tt class="descname">enabled</tt><big>(</big><big>)</big> const = 0</dt>
+<dd><p>Return whether the agent is enabled or not.</p>
+<p>When enabled is false, as reported by the <a class="reference internal" href="#eossdkclasseos_1_1agent__handler"><em>agent_handler</em></a>&#8216;s on_agent_enabled() callback, the agent is responsible for cleaning itself up as necessary and then calling agent_shutdown_complete_is(false). </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1agent__mgr_1a60d1842a185460586edbaa0b3ebfc4cc"></span>virtual std::string <tt class="descname">agent_option</tt><big>(</big>std::string const &amp; <em>name</em><big>)</big> const = 0</dt>
+<dd><p>Get the configured value for the given agent option.</p>
+<p>If no value has been set for the requested option, the empty string is returned. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1agent__mgr_1a115d86b4ea162a15fcb5659472cb5752"></span>virtual bool <tt class="descname">agent_option_exists</tt><big>(</big>std::string const &amp; <em>name</em><big>)</big> const = 0</dt>
+<dd><p>This is useful if the option&#8217;s value is an empty string and the existence of the option is to be checked.</p>
+<p>If option exists in the config then it returns true, otherwise false. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1agent__mgr_1a71c9b0acdc200bd1601b3cc76c735e63"></span>virtual <a class="reference internal" href="#eossdkclasseos_1_1agent__option__iter__t"><em>agent_option_iter_t</em></a> <tt class="descname">agent_option_iter</tt><big>(</big><big>)</big> const = 0</dt>
+<dd><p>Iterate through all configured agent options.</p>
+<p>Yields a string for each option name that has a non-empty value set. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1agent__mgr_1a0c5e91fcd8b5bcbf95739c8fdb36fcc2"></span>virtual std::string <tt class="descname">status</tt><big>(</big>std::string const &amp; <em>key</em><big>)</big> const = 0</dt>
+<dd><p>Get last set value for the given status key.</p>
+<p>If no value has been set for the named key, an empty string is returned. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1agent__mgr_1af8b6aef3ccbbed928c42d9788835a5af"></span>virtual <a class="reference internal" href="#eossdkclasseos_1_1agent__status__iter__t"><em>agent_status_iter_t</em></a> <tt class="descname">status_iter</tt><big>(</big><big>)</big> const = 0</dt>
+<dd><p>Iterate through all status values that this agent has set.</p>
+<p>Yields a string for each key that has a non-empty value set. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1agent__mgr_1a74a5b4c9edf233a42344055faac46610"></span>virtual void <tt class="descname">status_set</tt><big>(</big>std::string const &amp; <em>key</em>, std::string const &amp; <em>value</em><big>)</big> = 0</dt>
+<dd><p>Publish a status value mapped to the named key. Agent keys have maximum length of 512 characters. Agent key values have a maximum length of 10KB. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1agent__mgr_1a4331932177ea1ce19663e7241b55fd62"></span>virtual void <tt class="descname">status_del</tt><big>(</big>std::string const &amp; <em>key</em><big>)</big> = 0</dt>
+<dd><p>Delete the stored agent status with the given key. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1agent__mgr_1a569fcb261b7aaeb0bc2bc4bb9abad491"></span>virtual void <tt class="descname">agent_shutdown_complete_is</tt><big>(</big>bool<big>)</big> = 0</dt>
+<dd><p>Notify the SDK that the agent has successfully shutdown.</p>
+<p>If the agent requires special handling to cleanup state when the agent is disabled, then an <a class="reference internal" href="#eossdkclasseos_1_1agent__handler"><em>agent_handler</em></a> must be created that overrides the on_agent_enabled method and appropriately cleans up when the agent is disabled. Once the agent is ready to be killed, it must call agent_shutdown_complete_is(true), after which it will be killed by ProcMgr.</p>
+<p>This method is called automatically by the default implementation of on_agent_enabled when the agent is disabled. If no special cleanup handling is required, then simply do not override on_agent_enabled and the agent will be killed by ProcMgr as soon as it is administratively disabled.</p>
+<p>During supervisor switchover or reload events (or, if your agent is sent a kill signal), the agent will exit abruptly and this method will not be called. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1agent__mgr_1a6016f23cab986a1c6efcbcf91a805bdd"></span>virtual void <tt class="descname">exit</tt><big>(</big><big>)</big> = 0</dt>
+<dd><p>Stop this agent&#8217;s execution (after the next pass through the event loop). Note that if you have configured the agent to run under ProcMgr&#8217;s control (i.e. the agent is configured to run via the daemon CLI), ProcMgr will restart the agent once it detects the agent has exited. This is most useful for testing and debugging purposes. </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Public Static Functions</p>
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1agent__mgr_1a08b53802f525b42d1d0ea60e80cb4287"></span>uint32_t <tt class="descname">id</tt><big>(</big>const char * <em>agent_name</em><big>)</big></dt>
+<dd><p>Given a name, returns a numeric ID uniquely identifying the agent. This number is guaranteed to remain the same across agent restarts, though not across reboots. </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Protected Functions</p>
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1agent__mgr_1a2fd3383ca9bb487f514689b1ba2843de"></span><tt class="descname">agent_mgr</tt><big>(</big><big>)</big></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Private Members</p>
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1agent__mgr_1a244ea65ae8d17036177af0ff7b85cac5"></span><tt class="descname">agent_mgr</tt></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Friends</p>
+<dl class="friend">
+<dt>
+<span class="target" id="eossdkclasseos_1_1agent__mgr_1a1f13d1f575a3a272d01bb77fe63593cf"></span>friend class <tt class="descname">agent_handler</tt></dt>
+<dd></dd></dl>
+
+</div>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="acl.html"
+                        title="previous chapter"><strong>acl</strong></a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="aresolve.html"
+                        title="next chapter"><strong>aresolve</strong></a></p>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="aresolve.html" title="aresolve"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="acl.html" title="acl"
+             >previous</a> |</li>
+        <li><a href="index.html">Arista EOS SDK 2.14.0 reference</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2014, Arista Networks.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

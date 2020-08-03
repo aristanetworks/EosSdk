@@ -1,0 +1,170 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>panic &mdash; Arista EOS SDK 2.14.0 reference</title>
+    
+    <link rel="stylesheet" href="_static/eossdk.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/breathe.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '2.14.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="Arista EOS SDK 2.14.0 reference" href="index.html" />
+    <link rel="next" title="policy_map" href="policy_map.html" />
+    <link rel="prev" title="nexthop_group_tunnel" href="nexthop_group_tunnel.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="policy_map.html" title="policy_map"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="nexthop_group_tunnel.html" title="nexthop_group_tunnel"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">Arista EOS SDK 2.14.0 reference</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="panic">
+<h1><strong>panic</strong><a class="headerlink" href="#panic" title="Permalink to this headline">¶</a></h1>
+<p>Panic handling framework.</p>
+<p>A &#8216;panic&#8217; is raised by the EOS SDK to signal a programming error on behalf of the SDK user. A regular &#8216;assert&#8217; is used by the SDK to signal an Arista error which should be reported for correction.</p>
+<p>Panics occur under a number of conditions, such as an invalid string format for an IP address when using ip_addr_t&#8217;s constructor to checks of incompatible type attributes during manager calls. The panic exception passed to the exception_handler_t callback describes the fault condition observed.</p>
+<p>During a panic call, any panic handler set with exception_handler_is is called with the message, and then the panic message is also written to stderr and a SIGABRT raised. The SIGABRT will also cause a stack trace to be dumped. </p>
+<dl class="namespace">
+<dt>
+<span class="target" id="eossdknamespaceeos"></span><em>namespace</em> <tt class="descname">eos</tt></dt>
+<dd><div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Typedefs</p>
+<dl class="typedef">
+<dt>
+<span class="target" id="eossdknamespaceeos_1ab12031a2fb28afc79055e941ee6ad318"></span>typedef void(* <tt class="descname">exception_handler_t</tt>)(error const &amp;exception)</dt>
+<dd><p>The exception handler callback definition.</p>
+<p><dl class="docutils">
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><tt class="first docutils literal"><span class="pre">exception</span></tt> - <p>The exception that needs to be handled. </p>
+</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Functions</p>
+<dl class="function">
+<dt>
+<span class="target" id="eossdknamespaceeos_1a19da919b3c5802bfbb561e7f16c7d8ce"></span>void <tt class="descname">panic</tt><big>(</big><a class="reference internal" href="exception.html#eossdkclasseos_1_1error"><em>error</em></a> const &amp; <em>exception</em><big>)</big></dt>
+<dd><p>Reports an exception from the SDK. Internal errors and programming errors are reported via subclasses of exception. See eos/exception.h for possible exceptions. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdknamespaceeos_1a3f727e7b93cbd1ff1ab7a700c9bf7730"></span>void <tt class="descname">panic</tt><big>(</big>char const * <em>fmt</em>, ...<big>)</big></dt>
+<dd><p></p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdknamespaceeos_1a0ce4fd969b77989c4f1c135329fdc568"></span>void <tt class="descname">vpanic</tt><big>(</big>char const * <em>fmt</em>, va_list <em>ap</em><big>)</big></dt>
+<dd><p></p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdknamespaceeos_1a37da5c25b7e22799c13ce0e6b018151e"></span>void <tt class="descname">exception_handler_is</tt><big>(</big>exception_handler_t<big>)</big></dt>
+<dd><p>Sets a custom panic handler.</p>
+<p><dl class="docutils">
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><tt class="first docutils literal"><span class="pre">exception_handler_t</span></tt> - <p>An exception handler callback </p>
+</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="nexthop_group_tunnel.html"
+                        title="previous chapter"><strong>nexthop_group_tunnel</strong></a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="policy_map.html"
+                        title="next chapter"><strong>policy_map</strong></a></p>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="policy_map.html" title="policy_map"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="nexthop_group_tunnel.html" title="nexthop_group_tunnel"
+             >previous</a> |</li>
+        <li><a href="index.html">Arista EOS SDK 2.14.0 reference</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2014, Arista Networks.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

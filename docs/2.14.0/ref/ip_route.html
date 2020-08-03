@@ -1,0 +1,790 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>ip_route &mdash; Arista EOS SDK 2.14.0 reference</title>
+    
+    <link rel="stylesheet" href="_static/eossdk.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/breathe.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '2.14.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="Arista EOS SDK 2.14.0 reference" href="index.html" />
+    <link rel="next" title="iterator" href="iterator.html" />
+    <link rel="prev" title="ip_intf" href="ip_intf.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="iterator.html" title="iterator"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="ip_intf.html" title="ip_intf"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">Arista EOS SDK 2.14.0 reference</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="ip-route">
+<h1><strong>ip_route</strong><a class="headerlink" href="#ip-route" title="Permalink to this headline">¶</a></h1>
+<dl class="namespace">
+<dt>
+<span class="target" id="eossdknamespaceeos"></span><em>namespace</em> <tt class="descname">eos</tt></dt>
+<dd><dl class="class">
+<dt>
+<span class="target" id="eossdkclasseos_1_1ip__route__iter__t"></span><em>class</em> <tt class="descname">ip_route_iter_t</tt></dt>
+<dd><em>#include &lt;ip_route.h&gt;</em><p>An IP route iterator. </p>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Private Functions</p>
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1ip__route__iter__t_1a1423c2ca53e0968ee166f7cce72841c5"></span><tt class="descname">ip_route_iter_t</tt><big>(</big>ip_route_iter_impl * <em>const</em><big>)</big></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Friends</p>
+<dl class="friend">
+<dt>
+<span class="target" id="eossdkclasseos_1_1ip__route__iter__t_1ab49aba477e1d7c45339ec06ba901accf"></span>friend class <tt class="descname">ip_route_iter_impl</tt></dt>
+<dd></dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="class">
+<dt>
+<span class="target" id="eossdkclasseos_1_1ip__route__via__iter__t"></span><em>class</em> <tt class="descname">ip_route_via_iter_t</tt></dt>
+<dd><em>#include &lt;ip_route.h&gt;</em><p>A route via iterator. </p>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Private Functions</p>
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1ip__route__via__iter__t_1aabb5f9b3c11a957c4b210eb52f4b37c5"></span><tt class="descname">ip_route_via_iter_t</tt><big>(</big>ip_route_via_iter_impl * <em>const</em><big>)</big></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Friends</p>
+<dl class="friend">
+<dt>
+<span class="target" id="eossdkclasseos_1_1ip__route__via__iter__t_1a92a18fb4444af1fa65b5a23a40eea595"></span>friend class <tt class="descname">ip_route_via_iter_impl</tt></dt>
+<dd></dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="class">
+<dt>
+<span class="target" id="eossdkclasseos_1_1ip__route__mgr"></span><em>class</em> <tt class="descname">ip_route_mgr</tt></dt>
+<dd><em>#include &lt;ip_route.h&gt;</em><p>The manager for IP static route configuration. </p>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1ip__route__mgr_1a8aeeff213bd047c0422ce61899dba16a"></span>virtual <tt class="descname">~ip_route_mgr</tt><big>(</big><big>)</big></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1ip__route__mgr_1a8faf0b8e5c0c7766a9573b31fd1c5d30"></span>virtual void <tt class="descname">tag_is</tt><big>(</big>uint32_t<big>)</big> = 0</dt>
+<dd><p>Set the manager to only interact with routes with the given tag.</p>
+<p>If this tag is set to a non-zero number, then methods on this class will only affect or expose routes with the given tag. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1ip__route__mgr_1ab98e3a2fbdaa7ce929528f98acc80d38"></span>virtual uint32_t <tt class="descname">tag</tt><big>(</big><big>)</big> const = 0</dt>
+<dd><p>Returns the current tag, or 0 if no tag is set. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1ip__route__mgr_1aa3ef1ffe1b6a8770b7c324237b8908a4"></span>virtual void <tt class="descname">resync_init</tt><big>(</big><big>)</big> = 0</dt>
+<dd><p>Resync provides a mechanism to set routes to a known state.</p>
+<p>To start a resync, call <a class="reference internal" href="#eossdkclasseos_1_1ip__route__mgr_1aa3ef1ffe1b6a8770b7c324237b8908a4"><em>resync_init()</em></a> and then use <a class="reference internal" href="#eossdkclasseos_1_1ip__route__mgr_1a228e33a9dc1b8089c4ce98b69624de50"><em>ip_route_set()</em></a> and <a class="reference internal" href="#eossdkclasseos_1_1ip__route__mgr_1a57c88c6b97cd608fe1c565d53f14c680"><em>ip_route_via_set()</em></a> to populate the static routing table with the known entries. After all entries have been set, call <a class="reference internal" href="#eossdkclasseos_1_1ip__route__mgr_1a3f4eccfc9727fc6e43c9d19682441ac6"><em>resync_complete()</em></a>, which will delete all existing routes and vias that were not added or modified during resync. If a tag is set, resync will only delete routes and vias corresponding to the current tag.</p>
+<p>During resync, this manager will act like it is referencing a temporary table that starts off empty. Thus, methods like exist, del, and getters will act only on that temporary table, regardless of the real values in Sysdb. The one exception is iteration; they will traverse the table stored in Sysdb, regardless of whether or not the manager is in resync mode. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1ip__route__mgr_1a3f4eccfc9727fc6e43c9d19682441ac6"></span>virtual void <tt class="descname">resync_complete</tt><big>(</big><big>)</big> = 0</dt>
+<dd><p>Completes any underway resync operation. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1ip__route__mgr_1a805cc0958b4a18e60a2d9bb7a5051a87"></span>virtual <a class="reference internal" href="#eossdkclasseos_1_1ip__route__iter__t"><em>ip_route_iter_t</em></a> <tt class="descname">ip_route_iter</tt><big>(</big><big>)</big> const = 0</dt>
+<dd><p>Iterates across all configured static routes. If a tag is set, only return routes that have match the current tag. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1ip__route__mgr_1a4c645cca6f77e716a3115dedc1be839d"></span>virtual <a class="reference internal" href="#eossdkclasseos_1_1ip__route__via__iter__t"><em>ip_route_via_iter_t</em></a> <tt class="descname">ip_route_via_iter</tt><big>(</big><a class="reference internal" href="#eossdkclasseos_1_1ip__route__key__t"><em>ip_route_key_t</em></a> const &amp;<big>)</big> const = 0</dt>
+<dd><p>Iterates across configured nexthops for a given route key, i.e., emit all <a class="reference internal" href="#eossdkclasseos_1_1ip__route__via__t"><em>ip_route_via_t</em></a>&#8216;s for a given route key. If a tag is set, only return vias on routes that match the current tag. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1ip__route__mgr_1a9cd913b3754d5418669dd234aa23f2dc"></span>virtual <a class="reference internal" href="#eossdkclasseos_1_1ip__route__via__iter__t"><em>ip_route_via_iter_t</em></a> <tt class="descname">ip_route_via_iter</tt><big>(</big><a class="reference internal" href="#eossdkclasseos_1_1ip__route__key__t"><em>ip_route_key_t</em></a> const &amp;, std::string <em>vrfName</em><big>)</big> const = 0</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1ip__route__mgr_1a38c3ddd9b4b69d0dbcd0b9b9ba6616cd"></span>virtual bool <tt class="descname">exists</tt><big>(</big><a class="reference internal" href="#eossdkclasseos_1_1ip__route__key__t"><em>ip_route_key_t</em></a> const &amp;<big>)</big> const = 0</dt>
+<dd><p>Tests for existence of any routes matching the route key in the config. If a tag is set and the route belongs to a different tag, this function returns false. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1ip__route__mgr_1a2daaae673978762512e56354de8b5c27"></span>virtual bool <tt class="descname">exists</tt><big>(</big><a class="reference internal" href="#eossdkclasseos_1_1ip__route__key__t"><em>ip_route_key_t</em></a> const &amp;, std::string <em>vrfName</em><big>)</big> const = 0</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1ip__route__mgr_1af5701368553a7639c6a1198a628d9995"></span>virtual bool <tt class="descname">exists</tt><big>(</big><a class="reference internal" href="#eossdkclasseos_1_1ip__route__via__t"><em>ip_route_via_t</em></a> const &amp;<big>)</big> const = 0</dt>
+<dd><p>Tests if the given via exists. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1ip__route__mgr_1aa84d005dee5c0e380ca0f2143782cc77"></span>virtual bool <tt class="descname">exists</tt><big>(</big><a class="reference internal" href="#eossdkclasseos_1_1ip__route__via__t"><em>ip_route_via_t</em></a> const &amp;, std::string <em>vrfName</em><big>)</big> const = 0</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1ip__route__mgr_1a539b1961b4c97c035e7af408765389fb"></span>virtual <a class="reference internal" href="#eossdkclasseos_1_1ip__route__t"><em>ip_route_t</em></a> <tt class="descname">ip_route</tt><big>(</big><a class="reference internal" href="#eossdkclasseos_1_1ip__route__key__t"><em>ip_route_key_t</em></a> const &amp;<big>)</big> = 0</dt>
+<dd><p>Gets the IP route with the corresponding <a class="reference internal" href="#eossdkclasseos_1_1ip__route__key__t"><em>ip_route_key_t</em></a>. Returns an empty ip_route_t() if no matching route is found. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1ip__route__mgr_1aa57428b41505c7b01ce5729576cf4aeb"></span>virtual <a class="reference internal" href="#eossdkclasseos_1_1ip__route__t"><em>ip_route_t</em></a> <tt class="descname">ip_route</tt><big>(</big><a class="reference internal" href="#eossdkclasseos_1_1ip__route__key__t"><em>ip_route_key_t</em></a> const &amp;, std::string <em>vrfName</em><big>)</big> = 0</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1ip__route__mgr_1a228e33a9dc1b8089c4ce98b69624de50"></span>virtual void <tt class="descname">ip_route_set</tt><big>(</big><a class="reference internal" href="#eossdkclasseos_1_1ip__route__t"><em>ip_route_t</em></a> const &amp;<big>)</big> = 0</dt>
+<dd><p>Inserts or updates a static route into the switch configuration. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1ip__route__mgr_1af948587f51f13062638a6cea30671a46"></span>virtual void <tt class="descname">ip_route_set</tt><big>(</big><a class="reference internal" href="#eossdkclasseos_1_1ip__route__t"><em>ip_route_t</em></a> const &amp;, ip_route_action_t <em>expected_type</em><big>)</big> = 0</dt>
+<dd><p>Performs the same operation as <tt class="docutils literal"><span class="pre">ip_route_set</span></tt>, but lets an agent hint what type of vias will be attached to this route. For example, if the agent knows it will be adding nexthop group vias to this route, it can pass <tt class="docutils literal"><span class="pre">eos::IP_ROUTE_ACTION_NEXTHOP_GROUP</span></tt>, which allows EOS to more efficiently program routes. Routes are created by &#8216;forward&#8217; routes if no additional information is provided. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1ip__route__mgr_1aca3a862e8ddda95269cbb3b6c5d2cd66"></span>virtual void <tt class="descname">ip_route_set</tt><big>(</big><a class="reference internal" href="#eossdkclasseos_1_1ip__route__t"><em>ip_route_t</em></a> const &amp;, std::string <em>vrfName</em><big>)</big> = 0</dt>
+<dd><p>Inserts or updates a static route for a given vrf into the switch configuration. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1ip__route__mgr_1adba0c245ca2a6d2eb967ed03408fe5c2"></span>virtual void <tt class="descname">ip_route_del</tt><big>(</big><a class="reference internal" href="#eossdkclasseos_1_1ip__route__key__t"><em>ip_route_key_t</em></a> const &amp;, std::string <em>vrfName</em><big>)</big> = 0</dt>
+<dd><p>Delete an existing static route for a given vrf from the switch configuration. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1ip__route__mgr_1ad26a6311f644f0d53dc52fff33348bfb"></span>virtual void <tt class="descname">ip_route_del</tt><big>(</big><a class="reference internal" href="#eossdkclasseos_1_1ip__route__key__t"><em>ip_route_key_t</em></a> const &amp;<big>)</big> = 0</dt>
+<dd><p>Removes all ECMP vias matching the route key, and the route itself. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1ip__route__mgr_1a57c88c6b97cd608fe1c565d53f14c680"></span>virtual void <tt class="descname">ip_route_via_set</tt><big>(</big><a class="reference internal" href="#eossdkclasseos_1_1ip__route__via__t"><em>ip_route_via_t</em></a> const &amp;<big>)</big> = 0</dt>
+<dd><p>Adds a via to an <a class="reference internal" href="#eossdkclasseos_1_1ip__route__t"><em>ip_route_t</em></a>.</p>
+<p>A via is associated with an <a class="reference internal" href="#eossdkclasseos_1_1ip__route__t"><em>ip_route_t</em></a> by their <tt class="docutils literal"><a class="reference internal" href="#eossdkclasseos_1_1ip__route__key__t"><em><span class="pre">ip_route_key_t</span></em></a></tt> attributes. If an agent adds multiple vias with a hop or intf set, EOS will ECMP across these &#8220;forward&#8221; routes. If it programs a &#8216;drop&#8217; via (by setting the intf attribute to Null0), all other vias attached to this route will be removed, and all traffic on this route will be dropped. Similarly, if the nexthop_group attribute is set, all other vias with the same <tt class="docutils literal"><a class="reference internal" href="#eossdkclasseos_1_1ip__route__key__t"><em><span class="pre">ip_route_key_t</span></em></a></tt> will be removed, and the new nexthop group via will be programmed in their place. This function will call panic() if the route does not match the currently configured tag.</p>
+<p><dl class="docutils">
+<dt><strong>Exceptions</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><tt class="first docutils literal"><a class="reference internal" href="exception.html#eossdkclasseos_1_1invalid__argument__error"><em><span class="pre">eos::invalid_argument_error</span></em></a></tt> - <p>If the passed via has no IP address, interface or nexthop group set. </p>
+</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1ip__route__mgr_1ae7e4969fb939242c492986327aa8b779"></span>virtual void <tt class="descname">ip_route_via_set</tt><big>(</big><a class="reference internal" href="#eossdkclasseos_1_1ip__route__via__t"><em>ip_route_via_t</em></a> const &amp;, std::string <em>vrfName</em><big>)</big> = 0</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1ip__route__mgr_1af5c77e93a3940dec9059f3ebf99fdc52"></span>virtual void <tt class="descname">ip_route_via_del</tt><big>(</big><a class="reference internal" href="#eossdkclasseos_1_1ip__route__via__t"><em>ip_route_via_t</em></a> const &amp;<big>)</big> = 0</dt>
+<dd><p>Removes a via from an <a class="reference internal" href="#eossdkclasseos_1_1ip__route__t"><em>ip_route_t</em></a>. When all vias are removed, the route still exists with no nexthop information. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1ip__route__mgr_1a7b8b267f881e7e8908a14516fb4b5fc1"></span>virtual void <tt class="descname">ip_route_via_del</tt><big>(</big><a class="reference internal" href="#eossdkclasseos_1_1ip__route__via__t"><em>ip_route_via_t</em></a> const &amp;, std::string <em>vrfName</em><big>)</big> = 0</dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Protected Functions</p>
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1ip__route__mgr_1ae7e7d13e9436d6b567f0a91c08bcddeb"></span><tt class="descname">ip_route_mgr</tt><big>(</big><big>)</big></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Private Members</p>
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1ip__route__mgr_1a1cdf667acfd6f2cd4601a9d52a8fabbc"></span><tt class="descname">ip_route_mgr</tt></dt>
+<dd></dd></dl>
+
+</div>
+</dd></dl>
+
+</dd></dl>
+
+<div class="section" id="type-definitions-in-ip-route">
+<h2>Type definitions in <strong>ip_route</strong><a class="headerlink" href="#type-definitions-in-ip-route" title="Permalink to this headline">¶</a></h2>
+<dl class="namespace">
+<dt>
+<span class="target" id="eossdknamespaceeos"></span><em>namespace</em> <tt class="descname">eos</tt></dt>
+<dd><div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Typedefs</p>
+<dl class="typedef">
+<dt>
+<span class="target" id="eossdknamespaceeos_1aa1021bc3b14f65603b18ee460a0b5ddb"></span>typedef uint32_t <tt class="descname">ip_route_tag_t</tt></dt>
+<dd></dd></dl>
+
+<dl class="typedef">
+<dt>
+<span class="target" id="eossdknamespaceeos_1a2f754bc228f59f8192b341fdb92b5f27"></span>typedef uint8_t <tt class="descname">ip_route_preference_t</tt></dt>
+<dd></dd></dl>
+
+<dl class="typedef">
+<dt>
+<span class="target" id="eossdknamespaceeos_1afa9cf454d9ad07ec32b06b534badea9e"></span>typedef uint32_t <tt class="descname">ip_route_metric_t</tt></dt>
+<dd></dd></dl>
+
+<dl class="typedef">
+<dt>
+<span class="target" id="eossdknamespaceeos_1a2938f9f2edf91e04d91a8f566233cabd"></span>typedef uint32_t <tt class="descname">vni_t</tt></dt>
+<dd><p>Valid range of 1 - (2^24)-1, set to 0 if unused. </p>
+</dd></dl>
+
+<dl class="typedef">
+<dt>
+<span class="target" id="eossdknamespaceeos_1a92f6263e6144e1d9496bc89b127e7f0b"></span>typedef uint32_t <tt class="descname">ip_via_metric_t</tt></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Enums</p>
+<dl class="enum">
+<dt>
+<span class="target" id="eossdknamespaceeos_1a479d04a6d6e98111ff7164759c45edff"></span><strong>ip_route_action_t enum</strong></dt>
+<dd><p>The type of the <a class="reference internal" href="#eossdkclasseos_1_1ip__route__t"><em>ip_route_t</em></a>. This is determined by the <a class="reference internal" href="#eossdkclasseos_1_1ip__route__via__t"><em>ip_route_via_t</em></a>&#8216;s attached to this route. </p>
+<p><em>Values:</em></p>
+<ul class="breatheenumvalues">
+<li><tt class="first docutils literal"><span class="pre">IP_ROUTE_ACTION_NULL</span></tt> - </li>
+<li><tt class="first docutils literal"><span class="pre">IP_ROUTE_ACTION_FORWARD</span></tt> - </li>
+<li><tt class="first docutils literal"><span class="pre">IP_ROUTE_ACTION_DROP</span></tt> - </li>
+<li><tt class="first docutils literal"><span class="pre">IP_ROUTE_ACTION_NEXTHOP_GROUP</span></tt> - </li>
+</ul>
+</dd></dl>
+
+</div>
+<dl class="class">
+<dt>
+<span class="target" id="eossdkclasseos_1_1ip__route__key__t"></span><em>class</em> <tt class="descname">ip_route_key_t</tt></dt>
+<dd><em>#include &lt;ip_route.h&gt;</em><p>An IP route key, consisting of a prefix and preference. </p>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1ip__route__key__t_1ae74a11846568a40f708bdec10587f08a"></span><tt class="descname">ip_route_key_t</tt><big>(</big><big>)</big></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1ip__route__key__t_1a22e3bf32a604f8ff656d337e6455f252"></span><tt class="descname">ip_route_key_t</tt><big>(</big><a class="reference internal" href="ip.html#eossdkclasseos_1_1ip__prefix__t"><em>ip_prefix_t</em></a> const &amp; <em>prefix</em><big>)</big></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1ip__route__key__t_1a67a59c7b03c20354b51294157b332bc1"></span><tt class="descname">ip_route_key_t</tt><big>(</big><a class="reference internal" href="ip.html#eossdkclasseos_1_1ip__prefix__t"><em>ip_prefix_t</em></a> const &amp; <em>prefix</em>, ip_route_preference_t <em>preference</em><big>)</big></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1ip__route__key__t_1aab13e1baee0a7e08d584723b0355b926"></span><a class="reference internal" href="ip.html#eossdkclasseos_1_1ip__prefix__t"><em>ip_prefix_t</em></a> <tt class="descname">prefix</tt><big>(</big><big>)</big> const</dt>
+<dd><p>Getter for &#8216;prefix&#8217;: the IP v4/v6 network prefix. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1ip__route__key__t_1a54dea4e92106d91fff513447d4f94138"></span>void <tt class="descname">prefix_is</tt><big>(</big><a class="reference internal" href="ip.html#eossdkclasseos_1_1ip__prefix__t"><em>ip_prefix_t</em></a> const &amp; <em>prefix</em><big>)</big></dt>
+<dd><p>Setter for &#8216;prefix&#8217;. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1ip__route__key__t_1a3bbc0b82411c1a630f418e5bf9190f79"></span>ip_route_preference_t <tt class="descname">preference</tt><big>(</big><big>)</big> const</dt>
+<dd><p>Getter for &#8216;preference&#8217;: a value 0..255, defaults to 1. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1ip__route__key__t_1a7a9e2263c43ab4046db328be24f1d052"></span>void <tt class="descname">preference_is</tt><big>(</big>ip_route_preference_t <em>preference</em><big>)</big></dt>
+<dd><p>Setter for &#8216;preference&#8217;. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1ip__route__key__t_1aac9183e48bcebdb0dae6a3f2ef2c0857"></span>bool <tt class="descname">operator==</tt><big>(</big><a class="reference internal" href="#eossdkclasseos_1_1ip__route__key__t"><em>ip_route_key_t</em></a> const &amp; <em>other</em><big>)</big> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1ip__route__key__t_1ab9c6839f41bd2e8e3fbb0ce950c78037"></span>bool <tt class="descname">operator!=</tt><big>(</big><a class="reference internal" href="#eossdkclasseos_1_1ip__route__key__t"><em>ip_route_key_t</em></a> const &amp; <em>other</em><big>)</big> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1ip__route__key__t_1a3f131c2368ae6994257b871f2bf4b3e9"></span>uint32_t <tt class="descname">hash</tt><big>(</big><big>)</big> const</dt>
+<dd><p>The hash function for type <a class="reference internal" href="#eossdkclasseos_1_1ip__route__key__t"><em>ip_route_key_t</em></a>. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1ip__route__key__t_1a85e2d9f8fdacc326873394ed15b2757e"></span>std::string <tt class="descname">to_string</tt><big>(</big><big>)</big> const</dt>
+<dd><p>Returns a string representation of the current object&#8217;s values. </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Private Members</p>
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1ip__route__key__t_1a5631014c5f3348b722ce1bed545fed66"></span><a class="reference internal" href="ip.html#eossdkclasseos_1_1ip__prefix__t"><em>ip_prefix_t</em></a> <tt class="descname">prefix_</tt></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1ip__route__key__t_1a95a515b46147e84f38ea467803380d21"></span>ip_route_preference_t <tt class="descname">preference_</tt></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Friends</p>
+<dl class="friend">
+<dt>
+<span class="target" id="eossdkclasseos_1_1ip__route__key__t_1ab651f30a836b767562d196e772334678"></span>friend std::ostream &amp; <tt class="descname">operator&lt;&lt;</tt></dt>
+<dd><p>A utility stream operator that adds a string representation of <a class="reference internal" href="#eossdkclasseos_1_1ip__route__key__t"><em>ip_route_key_t</em></a> to the ostream. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="class">
+<dt>
+<span class="target" id="eossdkclasseos_1_1ip__route__t"></span><em>class</em> <tt class="descname">ip_route_t</tt></dt>
+<dd><em>#include &lt;ip_route.h&gt;</em><p>An IP v4/v6 static route. &#8220;Via&#8221;, or nexthops, for this route are stored separately and are associated by route key. </p>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1ip__route__t_1ae84dbadeca160f55a433f5f3430b1fd5"></span><tt class="descname">ip_route_t</tt><big>(</big><big>)</big></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1ip__route__t_1af2957a9b9b9ab9988a186895d12cf688"></span><tt class="descname">ip_route_t</tt><big>(</big><a class="reference internal" href="#eossdkclasseos_1_1ip__route__key__t"><em>ip_route_key_t</em></a> const &amp; <em>key</em><big>)</big></dt>
+<dd><p>Creates an IP static route for the route key. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1ip__route__t_1ae0e3d1e9c4040547accc586c929615aa"></span><a class="reference internal" href="#eossdkclasseos_1_1ip__route__key__t"><em>ip_route_key_t</em></a> <tt class="descname">key</tt><big>(</big><big>)</big> const</dt>
+<dd><p>Getter for &#8216;key&#8217;: the route&#8217;s key. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1ip__route__t_1a288134a79151eb60d31d05873343f793"></span>void <tt class="descname">key_is</tt><big>(</big><a class="reference internal" href="#eossdkclasseos_1_1ip__route__key__t"><em>ip_route_key_t</em></a> const &amp; <em>key</em><big>)</big></dt>
+<dd><p>Setter for &#8216;key&#8217;. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1ip__route__t_1a82b87b7064154890801244530e99c1e0"></span>ip_route_tag_t <tt class="descname">tag</tt><big>(</big><big>)</big> const</dt>
+<dd><p>Getter for &#8216;tag&#8217;: a numbered tag, used for table segregation. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1ip__route__t_1ac9352ec9ff1df07e99cf2650800e3837"></span>void <tt class="descname">tag_is</tt><big>(</big>ip_route_tag_t <em>tag</em><big>)</big></dt>
+<dd><p>Setter for &#8216;tag&#8217;. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1ip__route__t_1a216c95a8979d33d9f77f62b6477e425e"></span>bool <tt class="descname">operator==</tt><big>(</big><a class="reference internal" href="#eossdkclasseos_1_1ip__route__t"><em>ip_route_t</em></a> const &amp; <em>other</em><big>)</big> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1ip__route__t_1a038d123e443ff3b9f9993d78c6aedebf"></span>bool <tt class="descname">operator!=</tt><big>(</big><a class="reference internal" href="#eossdkclasseos_1_1ip__route__t"><em>ip_route_t</em></a> const &amp; <em>other</em><big>)</big> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1ip__route__t_1af2a03a4b2cf64f402b6e30d660648d81"></span>uint32_t <tt class="descname">hash</tt><big>(</big><big>)</big> const</dt>
+<dd><p>The hash function for type <a class="reference internal" href="#eossdkclasseos_1_1ip__route__t"><em>ip_route_t</em></a>. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1ip__route__t_1a55fe24e60d7575c1bc9078d100c1b158"></span>std::string <tt class="descname">to_string</tt><big>(</big><big>)</big> const</dt>
+<dd><p>Returns a string representation of the current object&#8217;s values. </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Private Members</p>
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1ip__route__t_1a7a218c2b547666170da552ad9e5d172f"></span><a class="reference internal" href="#eossdkclasseos_1_1ip__route__key__t"><em>ip_route_key_t</em></a> <tt class="descname">key_</tt></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1ip__route__t_1af171327085b923f5a6a82d95c2e7ca75"></span>ip_route_tag_t <tt class="descname">tag_</tt></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Friends</p>
+<dl class="friend">
+<dt>
+<span class="target" id="eossdkclasseos_1_1ip__route__t_1a35535286179bf6edd9e95372c93e08bc"></span>friend std::ostream &amp; <tt class="descname">operator&lt;&lt;</tt></dt>
+<dd><p>A utility stream operator that adds a string representation of <a class="reference internal" href="#eossdkclasseos_1_1ip__route__t"><em>ip_route_t</em></a> to the ostream. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="class">
+<dt>
+<span class="target" id="eossdkclasseos_1_1ip__route__via__t"></span><em>class</em> <tt class="descname">ip_route_via_t</tt></dt>
+<dd><em>#include &lt;ip_route.h&gt;</em><p>A Via describing a particular set of nexthop information. A Via can describe either a nexthop group name to either forward traffic to, or drop traffic if the interface is Null0. </p>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1ip__route__via__t_1a8354d1434893e604d0b9e084e90ecbca"></span><tt class="descname">ip_route_via_t</tt><big>(</big><big>)</big></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1ip__route__via__t_1a7604d063a8de858c920d130208ed8ebb"></span><tt class="descname">ip_route_via_t</tt><big>(</big><a class="reference internal" href="#eossdkclasseos_1_1ip__route__key__t"><em>ip_route_key_t</em></a> const &amp; <em>route_key</em><big>)</big></dt>
+<dd><p>Creates a route via for a route key. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1ip__route__via__t_1a684206b4aa4a91055fe2a25369873eb7"></span><a class="reference internal" href="#eossdkclasseos_1_1ip__route__key__t"><em>ip_route_key_t</em></a> <tt class="descname">route_key</tt><big>(</big><big>)</big> const</dt>
+<dd><p>Getter for &#8216;route_key&#8217;: key for the route that this via is attached to. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1ip__route__via__t_1a654422fcb04de8ca68b65200d2d3d104"></span>void <tt class="descname">route_key_is</tt><big>(</big><a class="reference internal" href="#eossdkclasseos_1_1ip__route__key__t"><em>ip_route_key_t</em></a> const &amp; <em>route_key</em><big>)</big></dt>
+<dd><p>Setter for &#8216;route_key&#8217;. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1ip__route__via__t_1a870d0462f5a2f96a49759735d610f8fb"></span><a class="reference internal" href="ip.html#eossdkclasseos_1_1ip__addr__t"><em>ip_addr_t</em></a> <tt class="descname">hop</tt><big>(</big><big>)</big> const</dt>
+<dd><p>Getter for &#8216;hop&#8217;: IP v4/v6 nexthop address, or a default <a class="reference internal" href="ip.html#eossdkclasseos_1_1ip__addr__t"><em>ip_addr_t</em></a> if not set. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1ip__route__via__t_1abe49e26435e9186d8ecf60ac4f055e03"></span>void <tt class="descname">hop_is</tt><big>(</big><a class="reference internal" href="ip.html#eossdkclasseos_1_1ip__addr__t"><em>ip_addr_t</em></a> const &amp; <em>hop</em><big>)</big></dt>
+<dd><p>Setter for &#8216;hop&#8217;. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1ip__route__via__t_1a5a1457ed4bb369e436c3c98f69004348"></span><a class="reference internal" href="intf.html#eossdkclasseos_1_1intf__id__t"><em>intf_id_t</em></a> <tt class="descname">intf</tt><big>(</big><big>)</big> const</dt>
+<dd><p>Getter for &#8216;intf&#8217;: use the named interface if not a default <a class="reference internal" href="intf.html#eossdkclasseos_1_1intf__id__t"><em>intf_id_t</em></a>. Using intf Null0 installs a &#8220;drop&#8221; route for the given prefix and preference. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1ip__route__via__t_1a1cacc3ffa3cd028b085d8dbd5b80e66c"></span>void <tt class="descname">intf_is</tt><big>(</big><a class="reference internal" href="intf.html#eossdkclasseos_1_1intf__id__t"><em>intf_id_t</em></a> <em>intf</em><big>)</big></dt>
+<dd><p>Setter for &#8216;intf&#8217;. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1ip__route__via__t_1a865e79354617d0468c1b368249f17e78"></span>std::string <tt class="descname">nexthop_group</tt><big>(</big><big>)</big> const</dt>
+<dd><p>Getter for &#8216;nexthop_group&#8217;: name of the next-hop group to use. If this string is non-empty, the next-hop group of the given name will be used, and both &#8220;hop&#8221; and &#8220;intf&#8221; must be left to their default value otherwise we will panic(). Note this is currently only supported for IPv4 routes. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1ip__route__via__t_1aff2dda691f5cc9e4140a2eeb615ec734"></span>void <tt class="descname">nexthop_group_is</tt><big>(</big>std::string const &amp; <em>nexthop_group</em><big>)</big></dt>
+<dd><p>Setter for &#8216;nexthop_group&#8217;. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1ip__route__via__t_1ab468dadee531c943e4b6a59132ed979b"></span><a class="reference internal" href="mpls.html#eossdkclasseos_1_1mpls__label__t"><em>mpls_label_t</em></a> <tt class="descname">mpls_label</tt><big>(</big><big>)</big> const</dt>
+<dd><p>Getter for &#8216;mpls_label&#8217;: Push this MPLS label onto packets using this route. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1ip__route__via__t_1a37491bb5a13fd27a36a2a22718506c91"></span>void <tt class="descname">mpls_label_is</tt><big>(</big><a class="reference internal" href="mpls.html#eossdkclasseos_1_1mpls__label__t"><em>mpls_label_t</em></a> <em>mpls_label</em><big>)</big></dt>
+<dd><p>Setter for &#8216;mpls_label&#8217;. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1ip__route__via__t_1a390b05f80c274cfaa0280a6089a0e076"></span>vni_t <tt class="descname">vni</tt><big>(</big><big>)</big> const</dt>
+<dd><p>Getter for &#8216;vni&#8217;: the VNI to use in the underlay tunnel vxlan header. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1ip__route__via__t_1a834554dc439a389f3abd5ab71eb179db"></span>void <tt class="descname">vni_is</tt><big>(</big>vni_t <em>vni</em><big>)</big></dt>
+<dd><p>Setter for &#8216;vni&#8217;. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1ip__route__via__t_1a783d1a122d25ae180bc782147f5e6487"></span><a class="reference internal" href="ip.html#eossdkclasseos_1_1ip__addr__t"><em>ip_addr_t</em></a> <tt class="descname">vtep_addr</tt><big>(</big><big>)</big> const</dt>
+<dd><p>Getter for &#8216;vtep_addr&#8217;: IP v4 destination address for the underlay IP header. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1ip__route__via__t_1a0634f4eac6ae0ecdc701d264c321f5ff"></span>void <tt class="descname">vtep_addr_is</tt><big>(</big><a class="reference internal" href="ip.html#eossdkclasseos_1_1ip__addr__t"><em>ip_addr_t</em></a> <em>vtep_addr</em><big>)</big></dt>
+<dd><p>Setter for &#8216;vtep_addr&#8217;. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1ip__route__via__t_1ac290ce4e33d48feb10bfd37a62e99bb3"></span><a class="reference internal" href="eth.html#eossdkclasseos_1_1eth__addr__t"><em>eth_addr_t</em></a> <tt class="descname">router_mac</tt><big>(</big><big>)</big> const</dt>
+<dd><p>Getter for &#8216;router_mac&#8217;: DMAC to use in the underlay ethernet header. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1ip__route__via__t_1accbabf28f9a86744f915cebb99f734f1"></span>void <tt class="descname">router_mac_is</tt><big>(</big><a class="reference internal" href="eth.html#eossdkclasseos_1_1eth__addr__t"><em>eth_addr_t</em></a> <em>router_mac</em><big>)</big></dt>
+<dd><p>Setter for &#8216;router_mac&#8217;. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1ip__route__via__t_1a671e2449ee68cf52b53bf8243f48fed9"></span>std::string <tt class="descname">egress_vrf</tt><big>(</big><big>)</big> const</dt>
+<dd><p>Getter for &#8216;egress_vrf&#8217;: VRF name in which nexthop IP address is. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1ip__route__via__t_1a5e33dc59257e7f88698822d2e0dccf2e"></span>void <tt class="descname">egress_vrf_is</tt><big>(</big>std::string const &amp; <em>egress_vrf</em><big>)</big></dt>
+<dd><p>Setter for &#8216;egress_vrf&#8217;. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1ip__route__via__t_1a9a64aa1d907945e967ca9fc154eeb03c"></span>ip_via_metric_t <tt class="descname">metric</tt><big>(</big><big>)</big> const</dt>
+<dd><p>Getter for &#8216;metric&#8217;: metric for the via. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1ip__route__via__t_1a53c04b30b23999d7ebc278540deed185"></span>void <tt class="descname">metric_is</tt><big>(</big>ip_via_metric_t <em>metric</em><big>)</big></dt>
+<dd><p>Setter for &#8216;metric&#8217;. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1ip__route__via__t_1ad0e79e9d0582deba453bacb3357f380b"></span>bool <tt class="descname">operator==</tt><big>(</big><a class="reference internal" href="#eossdkclasseos_1_1ip__route__via__t"><em>ip_route_via_t</em></a> const &amp; <em>other</em><big>)</big> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1ip__route__via__t_1a37218ddb935492300a3cea7b8350ec78"></span>bool <tt class="descname">operator!=</tt><big>(</big><a class="reference internal" href="#eossdkclasseos_1_1ip__route__via__t"><em>ip_route_via_t</em></a> const &amp; <em>other</em><big>)</big> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1ip__route__via__t_1a5a9e65023bb502de12044a268d3488af"></span>uint32_t <tt class="descname">hash</tt><big>(</big><big>)</big> const</dt>
+<dd><p>The hash function for type <a class="reference internal" href="#eossdkclasseos_1_1ip__route__via__t"><em>ip_route_via_t</em></a>. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1ip__route__via__t_1a15ccb609f80b8dc50865887ae63f23a1"></span>std::string <tt class="descname">to_string</tt><big>(</big><big>)</big> const</dt>
+<dd><p>Returns a string representation of the current object&#8217;s values. </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Private Members</p>
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1ip__route__via__t_1a2c089d4eae2c17dab6de2588a13e5fb4"></span><a class="reference internal" href="#eossdkclasseos_1_1ip__route__key__t"><em>ip_route_key_t</em></a> <tt class="descname">route_key_</tt></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1ip__route__via__t_1a45fd239a63b6075d2090c141e23e52f7"></span><a class="reference internal" href="ip.html#eossdkclasseos_1_1ip__addr__t"><em>ip_addr_t</em></a> <tt class="descname">hop_</tt></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1ip__route__via__t_1ad38fc3c6d71f9a699254172c22d80e1f"></span><a class="reference internal" href="intf.html#eossdkclasseos_1_1intf__id__t"><em>intf_id_t</em></a> <tt class="descname">intf_</tt></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1ip__route__via__t_1acd804e70f00079971642e9f330b84547"></span>std::string <tt class="descname">nexthop_group_</tt></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1ip__route__via__t_1a8c6eea3ae06775fa01a9e7f5a68b0538"></span><a class="reference internal" href="mpls.html#eossdkclasseos_1_1mpls__label__t"><em>mpls_label_t</em></a> <tt class="descname">mpls_label_</tt></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1ip__route__via__t_1aec3b1a003419fbc32fceab0b1b703f53"></span>vni_t <tt class="descname">vni_</tt></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1ip__route__via__t_1aa84b38d9224548d87a5a17796cdd1afd"></span><a class="reference internal" href="ip.html#eossdkclasseos_1_1ip__addr__t"><em>ip_addr_t</em></a> <tt class="descname">vtep_addr_</tt></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1ip__route__via__t_1a6e36abe5a70f36fe0445bfd7f173b115"></span><a class="reference internal" href="eth.html#eossdkclasseos_1_1eth__addr__t"><em>eth_addr_t</em></a> <tt class="descname">router_mac_</tt></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1ip__route__via__t_1abcf3eb295f6d3200e66210735f8604ce"></span>std::string <tt class="descname">egress_vrf_</tt></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1ip__route__via__t_1a2a5a9a8511018481382e0c1a90224f1e"></span>ip_via_metric_t <tt class="descname">metric_</tt></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Friends</p>
+<dl class="friend">
+<dt>
+<span class="target" id="eossdkclasseos_1_1ip__route__via__t_1a62f1dbeede6ef9734017954fc12684cb"></span>friend std::ostream &amp; <tt class="descname">operator&lt;&lt;</tt></dt>
+<dd><p>A utility stream operator that adds a string representation of <a class="reference internal" href="#eossdkclasseos_1_1ip__route__via__t"><em>ip_route_via_t</em></a> to the ostream. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#"><strong>ip_route</strong></a><ul>
+<li><a class="reference internal" href="#type-definitions-in-ip-route">Type definitions in <strong>ip_route</strong></a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="ip_intf.html"
+                        title="previous chapter"><strong>ip_intf</strong></a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="iterator.html"
+                        title="next chapter"><strong>iterator</strong></a></p>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="iterator.html" title="iterator"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="ip_intf.html" title="ip_intf"
+             >previous</a> |</li>
+        <li><a href="index.html">Arista EOS SDK 2.14.0 reference</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2014, Arista Networks.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

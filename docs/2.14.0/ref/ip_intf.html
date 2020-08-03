@@ -1,0 +1,319 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>ip_intf &mdash; Arista EOS SDK 2.14.0 reference</title>
+    
+    <link rel="stylesheet" href="_static/eossdk.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/breathe.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '2.14.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="Arista EOS SDK 2.14.0 reference" href="index.html" />
+    <link rel="next" title="ip_route" href="ip_route.html" />
+    <link rel="prev" title="ip" href="ip.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="ip_route.html" title="ip_route"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="ip.html" title="ip"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">Arista EOS SDK 2.14.0 reference</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="ip-intf">
+<h1><strong>ip_intf</strong><a class="headerlink" href="#ip-intf" title="Permalink to this headline">¶</a></h1>
+<p>Network Interface IP addressing module.</p>
+<p>Changes to IP addresses bound to network interfaces can be reacted to using this module, providing a callback that can be used to trigger server socket binding or reconfiguration events. </p>
+<dl class="namespace">
+<dt>
+<span class="target" id="eossdknamespaceeos"></span><em>namespace</em> <tt class="descname">eos</tt></dt>
+<dd><dl class="class">
+<dt>
+<span class="target" id="eossdkclasseos_1_1ip__intf__handler"></span><em>class</em> <tt class="descname">ip_intf_handler</tt></dt>
+<dd><em>#include &lt;ip_intf.h&gt;</em><p>Event handler for interfaces with IP addresses specific events.</p>
+<p>By default, no interfaces are watched. </p>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1ip__intf__handler_1ab2b9c5394d55246a45c64b49b11f9c5f"></span><tt class="descname">ip_intf_handler</tt><big>(</big><a class="reference internal" href="#eossdkclasseos_1_1ip__intf__mgr"><em>ip_intf_mgr</em></a> *<big>)</big></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1ip__intf__handler_1a3087b380a0268112d27a98e42c00f114"></span><a class="reference internal" href="#eossdkclasseos_1_1ip__intf__mgr"><em>ip_intf_mgr</em></a> * <tt class="descname">get_ip_intf_mgr</tt><big>(</big><big>)</big> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1ip__intf__handler_1a80a635c5248cb56a5efe49b7b21a2b07"></span>void <tt class="descname">watch_all_ip_intfs</tt><big>(</big>bool<big>)</big></dt>
+<dd><p>Registers to receive updates on changes to any interface.</p>
+<p><dl class="docutils">
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><tt class="first docutils literal"><span class="pre">bool</span></tt> - <p>Whether or not this handler should be notified of IP address assignment changes on any interface. </p>
+</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1ip__intf__handler_1a6f52aefd7704387128e27aa36de7789c"></span>void <tt class="descname">watch_ip_intf</tt><big>(</big><a class="reference internal" href="intf.html#eossdkclasseos_1_1intf__id__t"><em>intf_id_t</em></a>, bool<big>)</big></dt>
+<dd><p>Registers this class to receive change updates on the given interface.</p>
+<p><dl class="docutils">
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><tt class="first docutils literal"><a class="reference internal" href="intf.html#eossdkclasseos_1_1intf__id__t"><em><span class="pre">intf_id_t</span></em></a></tt> - <p>Which interface to subscribe to. </p>
+</li>
+<li><tt class="first docutils literal"><span class="pre">bool</span></tt> - <p>Whether or not this handler should be notified of IP address assignment changes on the given interface. </p>
+</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1ip__intf__handler_1a7bd8c7a265f20ef69e33b8cd8c3cff58"></span>virtual void <tt class="descname">on_ip_addr_add</tt><big>(</big><a class="reference internal" href="intf.html#eossdkclasseos_1_1intf__id__t"><em>intf_id_t</em></a>, <a class="reference internal" href="ip.html#eossdkclasseos_1_1ip__addr__mask__t"><em>ip_addr_mask_t</em></a> const &amp;<big>)</big></dt>
+<dd><p>Handler called when an IP address is added to the interface. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1ip__intf__handler_1a491cc6243985a30c5552655d13808f73"></span>virtual void <tt class="descname">on_ip_addr_del</tt><big>(</big><a class="reference internal" href="intf.html#eossdkclasseos_1_1intf__id__t"><em>intf_id_t</em></a>, <a class="reference internal" href="ip.html#eossdkclasseos_1_1ip__addr__mask__t"><em>ip_addr_mask_t</em></a> const &amp;<big>)</big></dt>
+<dd><p>Handler called when an IP address is deleted from the interface. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1ip__intf__handler_1a18c66848de9dfa7996ca66dadd5fafa4"></span>virtual void <tt class="descname">on_internal_vlan_id</tt><big>(</big><a class="reference internal" href="intf.html#eossdkclasseos_1_1intf__id__t"><em>intf_id_t</em></a>, vlan_id_t<big>)</big></dt>
+<dd><p>Handler called when the internal VLAN ID for an interface changes. If the interface loses its internal vlan id (i.e. is no longer a routed port), this will be set to 0 </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="class">
+<dt>
+<span class="target" id="eossdkclasseos_1_1ip__intf__mgr"></span><em>class</em> <tt class="descname">ip_intf_mgr</tt></dt>
+<dd><em>#include &lt;ip_intf.h&gt;</em><p>The IP address interface manager. For the changes to be visible, the interface may have to be passed in routed mode (see switchport_mode in eth_intf.h). </p>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1ip__intf__mgr_1ac418e11687db42997276bf00d64f0eb0"></span>virtual <tt class="descname">~ip_intf_mgr</tt><big>(</big><big>)</big></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1ip__intf__mgr_1a019b3ea76ccae8e897034612701a06c3"></span>virtual bool <tt class="descname">exists</tt><big>(</big><a class="reference internal" href="intf.html#eossdkclasseos_1_1intf__id__t"><em>intf_id_t</em></a><big>)</big> const = 0</dt>
+<dd><p>Returns whether the given interface exists and is able to have IP addresses.</p>
+<p>If exists returns true, then this <a class="reference internal" href="intf.html#eossdkclasseos_1_1intf__id__t"><em>intf_id_t</em></a> can be successfully passed into every method of the <a class="reference internal" href="#eossdkclasseos_1_1ip__intf__mgr"><em>ip_intf_mgr</em></a>. If not, then methods of the <a class="reference internal" href="#eossdkclasseos_1_1ip__intf__mgr"><em>ip_intf_mgr</em></a> can throw a <a class="reference internal" href="intf.html#eossdkclasseos_1_1no__such__interface__error"><em>no_such_interface_error</em></a> exception.</p>
+<p>Note that <a class="reference internal" href="#eossdkclasseos_1_1ip__intf__mgr_1a019b3ea76ccae8e897034612701a06c3"><em>ip_intf_mgr::exists</em></a> being true does not guarantee that the underlying L2 interface, as managed by <a class="reference internal" href="intf.html#eossdkclasseos_1_1intf__mgr"><em>intf_mgr</em></a>, <a class="reference internal" href="eth_intf.html#eossdkclasseos_1_1eth__intf__mgr"><em>eth_intf_mgr</em></a>, <a class="reference internal" href="eth_phy_intf.html#eossdkclasseos_1_1eth__phy__intf__mgr"><em>eth_phy_intf_mgr</em></a>, <a class="reference internal" href="eth_lag_intf.html#eossdkclasseos_1_1eth__lag__intf__mgr"><em>eth_lag_intf_mgr</em></a>, or <a class="reference internal" href="subintf.html#eossdkclasseos_1_1subintf__mgr"><em>subintf_mgr</em></a>, also exists. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1ip__intf__mgr_1ac299eac9e91eaa76bf42d23a1ba77853"></span>virtual std::set&lt; <a class="reference internal" href="ip.html#eossdkclasseos_1_1ip__addr__mask__t"><em>ip_addr_mask_t</em></a> &gt; <tt class="descname">ip_addrs</tt><big>(</big><a class="reference internal" href="intf.html#eossdkclasseos_1_1intf__id__t"><em>intf_id_t</em></a><big>)</big> const = 0</dt>
+<dd><p>Returns the operational set of IP addresses of the interface. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1ip__intf__mgr_1a72a225f38bc7f8e8da8d0da91cd1ad33"></span>virtual void <tt class="descname">ip_addrs_is</tt><big>(</big><a class="reference internal" href="intf.html#eossdkclasseos_1_1intf__id__t"><em>intf_id_t</em></a>, std::set&lt; <a class="reference internal" href="ip.html#eossdkclasseos_1_1ip__addr__mask__t"><em>ip_addr_mask_t</em></a> &gt; const &amp;<big>)</big> = 0</dt>
+<dd><p>Configures the IP addresses of the interface. <dl class="docutils">
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><tt class="first docutils literal"><a class="reference internal" href="intf.html#eossdkclasseos_1_1intf__id__t"><em><span class="pre">intf_id_t</span></em></a></tt> - <p>The interface ID of the interface to change the addresses of. </p>
+</li>
+<li><tt class="first docutils literal"><span class="pre">std::set&lt;ip_addr_mask_t&gt;</span></tt> - <p>The set of addresses to set. </p>
+</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1ip__intf__mgr_1acb26b181417d3a0215c70203cfa34053"></span>virtual void <tt class="descname">ip_addr_add</tt><big>(</big><a class="reference internal" href="intf.html#eossdkclasseos_1_1intf__id__t"><em>intf_id_t</em></a>, <a class="reference internal" href="ip.html#eossdkclasseos_1_1ip__addr__mask__t"><em>ip_addr_mask_t</em></a> const &amp;<big>)</big> = 0</dt>
+<dd><p>Adds an IP address to the interface. <dl class="docutils">
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><tt class="first docutils literal"><a class="reference internal" href="intf.html#eossdkclasseos_1_1intf__id__t"><em><span class="pre">intf_id_t</span></em></a></tt> - <p>The interface ID of the interface to add the address in. </p>
+</li>
+<li><tt class="first docutils literal"><a class="reference internal" href="ip.html#eossdkclasseos_1_1ip__addr__mask__t"><em><span class="pre">ip_addr_mask_t</span></em></a></tt> - <p>The address to add. </p>
+</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1ip__intf__mgr_1a13f88e1c91d67cb79535cdbd65b46c33"></span>virtual void <tt class="descname">ip_addr_del</tt><big>(</big><a class="reference internal" href="intf.html#eossdkclasseos_1_1intf__id__t"><em>intf_id_t</em></a>, <a class="reference internal" href="ip.html#eossdkclasseos_1_1ip__addr__mask__t"><em>ip_addr_mask_t</em></a> const &amp;<big>)</big> = 0</dt>
+<dd><p>Deletes an IP address of the interface. <dl class="docutils">
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><tt class="first docutils literal"><a class="reference internal" href="intf.html#eossdkclasseos_1_1intf__id__t"><em><span class="pre">intf_id_t</span></em></a></tt> - <p>The interface ID of the interface to delete the address in. </p>
+</li>
+<li><tt class="first docutils literal"><a class="reference internal" href="ip.html#eossdkclasseos_1_1ip__addr__mask__t"><em><span class="pre">ip_addr_mask_t</span></em></a></tt> - <p>The address to delete. </p>
+</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1ip__intf__mgr_1ae5d889b23f2f819a67d7ce51092899d7"></span>virtual void <tt class="descname">ip_addr_merge_mode_is</tt><big>(</big><a class="reference internal" href="intf.html#eossdkclasseos_1_1intf__id__t"><em>intf_id_t</em></a>, bool<big>)</big> = 0</dt>
+<dd><p>Whether IP address configuration for a given interface is replaced or merged with configuration from other agents. If false, configuration will be replaced by that of higher priority agents (such as the CLI). If true, configuration will be merged. Default is false. <dl class="docutils">
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><tt class="first docutils literal"><a class="reference internal" href="intf.html#eossdkclasseos_1_1intf__id__t"><em><span class="pre">intf_id_t</span></em></a></tt> - <p>The interface ID of the interface to set the merge mode of. </p>
+</li>
+<li><tt class="first docutils literal"><span class="pre">bool</span></tt> - <p>Whether or not IP address configuration should be merged </p>
+</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1ip__intf__mgr_1a2c12b5c2860b586e9de1e5a9f3b777e4"></span>virtual bool <tt class="descname">ip_addr_merge_mode</tt><big>(</big><a class="reference internal" href="intf.html#eossdkclasseos_1_1intf__id__t"><em>intf_id_t</em></a><big>)</big> const = 0</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1ip__intf__mgr_1aa7473e530b62610fe73daa26503a1705"></span>virtual vlan_id_t <tt class="descname">internal_vlan_id</tt><big>(</big><a class="reference internal" href="intf.html#eossdkclasseos_1_1intf__id__t"><em>intf_id_t</em></a><big>)</big> const = 0</dt>
+<dd><p>Returns the internal VLAN ID related to a layer 3 interface. If the interface supplied is a routed interface (i.e., is configured with &#8220;no switchport&#8221;), this function will return the internal VLAN ID for the interface. If the interface is an SVI, the VLAN ID of the SVI is returned. If the interface is a layer 2 interface, VLAN ID 0 is returned. <dl class="docutils">
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><tt class="first docutils literal"><a class="reference internal" href="intf.html#eossdkclasseos_1_1intf__id__t"><em><span class="pre">intf_id_t</span></em></a></tt> - <p>An interface ID to query the internal VLAN ID of </p>
+</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Protected Functions</p>
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1ip__intf__mgr_1ab31b823852431c40c4743ffed07e9c80"></span><tt class="descname">ip_intf_mgr</tt><big>(</big><big>)</big></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Private Members</p>
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1ip__intf__mgr_1a7a0568acdebe9e87870c346b8c3562d3"></span><tt class="descname">ip_intf_mgr</tt></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Friends</p>
+<dl class="friend">
+<dt>
+<span class="target" id="eossdkclasseos_1_1ip__intf__mgr_1adfb4228f56386252de9fc37b38bb2e61"></span>friend class <tt class="descname">ip_intf_handler</tt></dt>
+<dd></dd></dl>
+
+</div>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="ip.html"
+                        title="previous chapter"><strong>ip</strong></a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="ip_route.html"
+                        title="next chapter"><strong>ip_route</strong></a></p>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="ip_route.html" title="ip_route"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="ip.html" title="ip"
+             >previous</a> |</li>
+        <li><a href="index.html">Arista EOS SDK 2.14.0 reference</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2014, Arista Networks.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

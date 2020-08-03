@@ -1,0 +1,234 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>system &mdash; Arista EOS SDK 2.14.0 reference</title>
+    
+    <link rel="stylesheet" href="_static/eossdk.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/breathe.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '2.14.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="Arista EOS SDK 2.14.0 reference" href="index.html" />
+    <link rel="next" title="timer" href="timer.html" />
+    <link rel="prev" title="subintf" href="subintf.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="timer.html" title="timer"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="subintf.html" title="subintf"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">Arista EOS SDK 2.14.0 reference</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="system">
+<h1><strong>system</strong><a class="headerlink" href="#system" title="Permalink to this headline">¶</a></h1>
+<p>Module for system identifying information.</p>
+<p>This module provides access to important identifying information of the system, similar to what is available from the &#8216;show version&#8217; and &#8216;show hostname&#8217; CLI commands. </p>
+<dl class="namespace">
+<dt>
+<span class="target" id="eossdknamespaceeos"></span><em>namespace</em> <tt class="descname">eos</tt></dt>
+<dd><dl class="class">
+<dt>
+<span class="target" id="eossdkclasseos_1_1system__handler"></span><em>class</em> <tt class="descname">system_handler</tt></dt>
+<dd><em>#include &lt;system.h&gt;</em><p>Handler class for changes in system identifying information. </p>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1system__handler_1aed0863f1d235b4a62940e0b9a4e2ab5b"></span><tt class="descname">system_handler</tt><big>(</big><a class="reference internal" href="#eossdkclasseos_1_1system__mgr"><em>system_mgr</em></a> *<big>)</big></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1system__handler_1a8b3e282540cc9e91188e4f128de7a9e1"></span><a class="reference internal" href="#eossdkclasseos_1_1system__mgr"><em>system_mgr</em></a> * <tt class="descname">get_system_mgr</tt><big>(</big><big>)</big> const</dt>
+<dd><p>Returns the associated <a class="reference internal" href="#eossdkclasseos_1_1system__mgr"><em>system_mgr</em></a>. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1system__handler_1a0f71cb85cf70f585c2d184e84d397499"></span>virtual void <tt class="descname">on_hostname</tt><big>(</big>std::string const &amp;<big>)</big></dt>
+<dd><p>Handler called when the hostname changes. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1system__handler_1ac0716af439ef9ea37e99d8becd0811f9"></span>virtual void <tt class="descname">on_fqdn</tt><big>(</big>std::string const &amp;<big>)</big></dt>
+<dd><p>Handler called when the fully qualified domain name changes. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1system__handler_1aca6e83f76348926e5cb049c3c96749d2"></span>virtual void <tt class="descname">on_system_info_initialized</tt><big>(</big><big>)</big></dt>
+<dd><p>Handler called once the system identifying information is set.</p>
+<p>The <a class="reference internal" href="#eossdkclasseos_1_1system__handler_1aca6e83f76348926e5cb049c3c96749d2"><em>on_system_info_initialized()</em></a> method will be called when the serial_number and model_name have been discovered and are accessible via the <a class="reference internal" href="#eossdkclasseos_1_1system__mgr"><em>system_mgr</em></a> class. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="class">
+<dt>
+<span class="target" id="eossdkclasseos_1_1system__mgr"></span><em>class</em> <tt class="descname">system_mgr</tt></dt>
+<dd><em>#include &lt;system.h&gt;</em><p>A manager for identifying information of the system.</p>
+<p>Create one of these via eos::get_system_mgr() prior to starting the agent main loop. When your <a class="reference internal" href="agent.html#eossdkclasseos_1_1agent__handler_1ad558b16ee9a283bd9b153400743c4b1c"><em>eos::agent_handler::on_initialized</em></a> virtual function is called, the manager is valid for use. </p>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1system__mgr_1a6ddeb4b881d78558e94f91f477ca8817"></span>virtual <tt class="descname">~system_mgr</tt><big>(</big><big>)</big></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1system__mgr_1aff5ba50647816a04d7ae5a887b37d972"></span>virtual std::string <tt class="descname">hostname</tt><big>(</big><big>)</big> const = 0</dt>
+<dd><p>Returns the system hostname. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1system__mgr_1a2bc2b7f958d3579462b772092284128c"></span>virtual std::string <tt class="descname">fqdn</tt><big>(</big><big>)</big> const = 0</dt>
+<dd><p>Returns the system fully qualified domain name. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1system__mgr_1a3002d9f99f50c17ea0e2620204d13097"></span>virtual std::string <tt class="descname">serial_number</tt><big>(</big><big>)</big> const = 0</dt>
+<dd><p>Returns the system serial number. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1system__mgr_1ad6694417a004666748bd04f15dbbfbec"></span>virtual std::string <tt class="descname">model_name</tt><big>(</big><big>)</big> const = 0</dt>
+<dd><p>Returns the system model name. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1system__mgr_1a4e3780b267e524a81c1bb6a6e8e6d33c"></span>virtual std::string <tt class="descname">hardware_revision</tt><big>(</big><big>)</big> const = 0</dt>
+<dd><p>Returns the hardware revision. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1system__mgr_1a598cb924e6a267830898d22f70dd912d"></span>virtual std::string <tt class="descname">software_revision</tt><big>(</big><big>)</big> const = 0</dt>
+<dd><p>Returns the running software version. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1system__mgr_1afd3923b16fada7dfe75a9e10916cba49"></span>virtual <a class="reference internal" href="eth.html#eossdkclasseos_1_1eth__addr__t"><em>eos::eth_addr_t</em></a> <tt class="descname">system_mac</tt><big>(</big><big>)</big> const = 0</dt>
+<dd><p>Returns the system MAC address. </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Protected Functions</p>
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1system__mgr_1a25d7e240dbdc6a5d3e671839aa063e69"></span><tt class="descname">system_mgr</tt><big>(</big><big>)</big></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Private Members</p>
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1system__mgr_1afe23e10b75103c78afd120e550f01392"></span><tt class="descname">system_mgr</tt></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Friends</p>
+<dl class="friend">
+<dt>
+<span class="target" id="eossdkclasseos_1_1system__mgr_1a4ece192f1a5950527944d23b8d92f988"></span>friend class <tt class="descname">system_handler</tt></dt>
+<dd></dd></dl>
+
+</div>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="subintf.html"
+                        title="previous chapter"><strong>subintf</strong></a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="timer.html"
+                        title="next chapter"><strong>timer</strong></a></p>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="timer.html" title="timer"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="subintf.html" title="subintf"
+             >previous</a> |</li>
+        <li><a href="index.html">Arista EOS SDK 2.14.0 reference</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2014, Arista Networks.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

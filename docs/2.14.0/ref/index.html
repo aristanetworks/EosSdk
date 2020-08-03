@@ -1,0 +1,140 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>Arista EOS SDK reference guide &mdash; Arista EOS SDK 2.14.0 reference</title>
+    
+    <link rel="stylesheet" href="_static/eossdk.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/breathe.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '2.14.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="Arista EOS SDK 2.14.0 reference" href="#" />
+    <link rel="next" title="acl" href="acl.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="acl.html" title="acl"
+             accesskey="N">next</a> |</li>
+        <li><a href="#">Arista EOS SDK 2.14.0 reference</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="arista-eos-sdk-reference-guide">
+<h1>Arista EOS SDK reference guide<a class="headerlink" href="#arista-eos-sdk-reference-guide" title="Permalink to this headline">¶</a></h1>
+<p>The Arista EOS SDK allows development of high performance on switch
+agents that react to and interact directly with EOS. These agents can
+bridge feature configuration with existing systems or provide
+automated system maintenance facilities due to the SDK&#8217;s state based
+programming approach. Refer to the EOS SDK <a class="reference external" href="https://github.com/aristanetworks/EosSdk/wiki">wiki</a> for more information
+including example code using the SDK.</p>
+<div class="section" id="switch-management-modules">
+<h2>Switch management modules<a class="headerlink" href="#switch-management-modules" title="Permalink to this headline">¶</a></h2>
+<p>The SDK is split up into modules that manage one particular part of
+the system, such as the <tt class="docutils literal"><span class="pre">intf</span></tt> module for generic interface management
+(admin state, description) or the <tt class="docutils literal"><span class="pre">acl</span></tt> module for configuration of
+Access Control Lists. Each module consists of a module manager class,
+such as <tt class="docutils literal"><span class="pre">eos::intf_mgr</span></tt>. Modules that provide notifications also have
+a handler class, e.g., <tt class="docutils literal"><span class="pre">eos::intf_handler</span></tt>. Handler sub-classes are
+provided by your implementation and provide the notification callbacks
+for notifications from EOS.</p>
+<div class="line-block">
+<div class="line"><a class="reference internal" href="acl.html"><em>acl</em></a> | <a class="reference internal" href="bfd.html"><em>bfd</em></a> | <a class="reference internal" href="bgp_path.html"><em>bgp_path</em></a> | <a class="reference internal" href="class_map.html"><em>class_map</em></a> | <a class="reference internal" href="decap_group.html"><em>decap_group</em></a> | <a class="reference internal" href="directflow.html"><em>directflow</em></a> | <a class="reference internal" href="eapi.html"><em>eapi</em></a> | <a class="reference internal" href="eth.html"><em>eth</em></a> | <a class="reference internal" href="eth_intf.html"><em>eth_intf</em></a> | <a class="reference internal" href="eth_lag_intf.html"><em>eth_lag_intf</em></a> | <a class="reference internal" href="eth_phy_intf.html"><em>eth_phy_intf</em></a> | <a class="reference internal" href="fib.html"><em>fib</em></a> | <a class="reference internal" href="hardware_table.html"><em>hardware_table</em></a> | <a class="reference internal" href="intf.html"><em>intf</em></a> | <a class="reference internal" href="ip.html"><em>ip</em></a> | <a class="reference internal" href="ip_intf.html"><em>ip_intf</em></a> | <a class="reference internal" href="ip_route.html"><em>ip_route</em></a> | <a class="reference internal" href="lldp.html"><em>lldp</em></a> | <a class="reference internal" href="mac_table.html"><em>mac_table</em></a> | <a class="reference internal" href="macsec.html"><em>macsec</em></a> | <a class="reference internal" href="mlag.html"><em>mlag</em></a> | <a class="reference internal" href="mpls.html"><em>mpls</em></a> | <a class="reference internal" href="mpls_route.html"><em>mpls_route</em></a> | <a class="reference internal" href="mpls_vrf_label.html"><em>mpls_vrf_label</em></a> | <a class="reference internal" href="neighbor_table.html"><em>neighbor_table</em></a> | <a class="reference internal" href="nexthop_group.html"><em>nexthop_group</em></a> | <a class="reference internal" href="nexthop_group_tunnel.html"><em>nexthop_group_tunnel</em></a> | <a class="reference internal" href="policy_map.html"><em>policy_map</em></a> | <a class="reference internal" href="subintf.html"><em>subintf</em></a> | <a class="reference internal" href="vrf.html"><em>vrf</em></a></div>
+</div>
+</div>
+<div class="section" id="infrastructure-modules">
+<h2>Infrastructure modules<a class="headerlink" href="#infrastructure-modules" title="Permalink to this headline">¶</a></h2>
+<p>In addition, there are a number of framework modules that provide
+access to the SDK components (<tt class="docutils literal"><span class="pre">sdk</span></tt>), offer an asynchronous
+file-descriptor interface for use with asynchronous networking
+libraries (<tt class="docutils literal"><span class="pre">fd</span></tt>) and provide debug logging facilities (<tt class="docutils literal"><span class="pre">tracing</span></tt>).</p>
+<div class="line-block">
+<div class="line"><a class="reference internal" href="agent.html"><em>agent</em></a> | <a class="reference internal" href="aresolve.html"><em>aresolve</em></a> | <a class="reference internal" href="base.html"><em>base</em></a> | <a class="reference internal" href="base_handler.html"><em>base_handler</em></a> | <a class="reference internal" href="base_mgr.html"><em>base_mgr</em></a> | <a class="reference internal" href="event_loop.html"><em>event_loop</em></a> | <a class="reference internal" href="exception.html"><em>exception</em></a> | <a class="reference internal" href="fd.html"><em>fd</em></a> | <a class="reference internal" href="hash_mix.html"><em>hash_mix</em></a> | <a class="reference internal" href="iterator.html"><em>iterator</em></a> | <a class="reference internal" href="panic.html"><em>panic</em></a> | <a class="reference internal" href="sdk.html"><em>sdk</em></a> | <a class="reference internal" href="system.html"><em>system</em></a> | <a class="reference internal" href="timer.html"><em>timer</em></a> | <a class="reference internal" href="tracing.html"><em>tracing</em></a> | <a class="reference internal" href="utility.html"><em>utility</em></a> | <a class="reference internal" href="version.html"><em>version</em></a></div>
+</div>
+<div class="toctree-wrapper compound">
+</div>
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="#">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Arista EOS SDK reference guide</a><ul>
+<li><a class="reference internal" href="#switch-management-modules">Switch management modules</a></li>
+<li><a class="reference internal" href="#infrastructure-modules">Infrastructure modules</a><ul>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+  <h4>Next topic</h4>
+  <p class="topless"><a href="acl.html"
+                        title="next chapter"><strong>acl</strong></a></p>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="acl.html" title="acl"
+             >next</a> |</li>
+        <li><a href="#">Arista EOS SDK 2.14.0 reference</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2014, Arista Networks.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

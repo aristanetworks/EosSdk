@@ -1,0 +1,180 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>fd &mdash; Arista EOS SDK 2.14.0 reference</title>
+    
+    <link rel="stylesheet" href="_static/eossdk.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/breathe.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '2.14.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="Arista EOS SDK 2.14.0 reference" href="index.html" />
+    <link rel="next" title="fib" href="fib.html" />
+    <link rel="prev" title="exception" href="exception.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="fib.html" title="fib"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="exception.html" title="exception"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">Arista EOS SDK 2.14.0 reference</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="fd">
+<h1><strong>fd</strong><a class="headerlink" href="#fd" title="Permalink to this headline">¶</a></h1>
+<p>File descriptor support module.</p>
+<p>The handler within this module allows you to react to events on file descriptors created in your application. Set up a network socket and then watch the fd number with the watch_* methods of the fd_handler. Watched sockets cause reaction events within the EOS agent asynchronous event loop. </p>
+<dl class="namespace">
+<dt>
+<span class="target" id="eossdknamespaceeos"></span><em>namespace</em> <tt class="descname">eos</tt></dt>
+<dd><dl class="class">
+<dt>
+<span class="target" id="eossdkclasseos_1_1fd__handler"></span><em>class</em> <tt class="descname">fd_handler</tt></dt>
+<dd><em>#include &lt;fd.h&gt;</em><p>This class manages file descriptors within the event loop context.</p>
+<p>There are two main components to handling file* descriptors. The &#8216;watch_*()&#8217; register a file descriptor to react to events on the descriptor state. The &#8216;on_*()&#8217; methods should be overridden to actually handle these changes to the file descriptor&#8217;s state. For example if you&#8217;re managing a network connection with a client, invoking &#8216;watch_readable(fd, true)&#8217; will cause &#8216;on_readable(fd)&#8217; to be called whenever data has been received.</p>
+<p>Note that it is not necessary to always watch_*() attributes of a file descriptor, that is, you are free to write to a socket even if watch_writeable has not been set. Continuing with the network connection example, on_writeable will be continuously called when &#8216;watch_writeable(fd, true)&#8217; is set, as the descriptor is almost always writeable. If the other side of the connection overruns its TCP backlog, though, your descriptor will return an error on write, indicating that the socket is no longer writeable, and it is at that point that &#8216;watch_writeable(fd, true)&#8217; should be invoked. When the other end of the connection </p>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1fd__handler_1aa67391a5286b289c940429d0340f6322"></span><tt class="descname">fd_handler</tt><big>(</big><big>)</big></dt>
+<dd><p>Creates a file descriptor handler, which can react to any number of FDs. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1fd__handler_1aae3d05a6ae5c9aabe7ca572cfd3beecd"></span>virtual <tt class="descname">~fd_handler</tt><big>(</big><big>)</big></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1fd__handler_1a7fcd4f42338a54572d9556ede049338a"></span>virtual void <tt class="descname">on_readable</tt><big>(</big>int <em>fd</em><big>)</big></dt>
+<dd><p>Called when the file descriptor number is readable. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1fd__handler_1a883cbca0a63088129c6617d15ff3150d"></span>virtual void <tt class="descname">on_writable</tt><big>(</big>int <em>fd</em><big>)</big></dt>
+<dd><p>Called when the file descriptor number is writable. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1fd__handler_1a47c4a164b3c25b19b2bfd6d258e22e23"></span>virtual void <tt class="descname">on_exception</tt><big>(</big>int <em>fd</em><big>)</big></dt>
+<dd><p>Called when the file descriptor number has exceptions. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1fd__handler_1aa072f72d630d725762da9f806fc87e08"></span>void <tt class="descname">watch_readable</tt><big>(</big>int <em>fd</em>, bool<big>)</big></dt>
+<dd><p>Notifies this handler when the passed file descriptor is readable. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1fd__handler_1ad5c16e3a7dfb4ba8cf5f752b14fe4904"></span>void <tt class="descname">watch_writable</tt><big>(</big>int <em>fd</em>, bool<big>)</big></dt>
+<dd><p>Notifies this handler when the passed file descriptor is writable. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1fd__handler_1ab2e9b5a36ab6c87bc4c5d977250cc322"></span>void <tt class="descname">watch_exception</tt><big>(</big>int <em>fd</em>, bool<big>)</big></dt>
+<dd><p>Notifies this handler when the passed file descriptor has exceptions. </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Private Members</p>
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1fd__handler_1a58e2a64c00bfae6a5f7f1297918d389e"></span>fd_internal * <tt class="descname">fd_</tt></dt>
+<dd></dd></dl>
+
+</div>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="exception.html"
+                        title="previous chapter"><strong>exception</strong></a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="fib.html"
+                        title="next chapter"><strong>fib</strong></a></p>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="fib.html" title="fib"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="exception.html" title="exception"
+             >previous</a> |</li>
+        <li><a href="index.html">Arista EOS SDK 2.14.0 reference</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2014, Arista Networks.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

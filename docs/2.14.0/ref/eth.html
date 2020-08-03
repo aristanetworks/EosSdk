@@ -1,0 +1,386 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>eth &mdash; Arista EOS SDK 2.14.0 reference</title>
+    
+    <link rel="stylesheet" href="_static/eossdk.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/breathe.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '2.14.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="Arista EOS SDK 2.14.0 reference" href="index.html" />
+    <link rel="next" title="eth_intf" href="eth_intf.html" />
+    <link rel="prev" title="eapi" href="eapi.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="eth_intf.html" title="eth_intf"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="eapi.html" title="eapi"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">Arista EOS SDK 2.14.0 reference</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="eth">
+<h1><strong>eth</strong><a class="headerlink" href="#eth" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="type-definitions-in-eth">
+<h2>Type definitions in <strong>eth</strong><a class="headerlink" href="#type-definitions-in-eth" title="Permalink to this headline">¶</a></h2>
+<dl class="namespace">
+<dt>
+<span class="target" id="eossdknamespaceeos"></span><em>namespace</em> <tt class="descname">eos</tt></dt>
+<dd><div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Typedefs</p>
+<dl class="typedef">
+<dt>
+<span class="target" id="eossdknamespaceeos_1a4be71fc1c9db7d61cf74dc3b97d7cb5c"></span>typedef <a class="reference internal" href="#eossdkclasseos_1_1vlan__set__t"><em>vlan_set_t</em></a> <tt class="descname">vlan_set</tt></dt>
+<dd><p>A deprecated alias. Use <a class="reference internal" href="#eossdkclasseos_1_1vlan__set__t"><em>eos::vlan_set_t</em></a> instead. </p>
+</dd></dl>
+
+<dl class="typedef">
+<dt>
+<span class="target" id="eossdknamespaceeos_1a6da249f9fdf1d5b4651bb73921dae47b"></span>typedef uint16_t <tt class="descname">vlan_id_t</tt></dt>
+<dd><p>Valid range of 1-4094 (0/4095 are reserved). </p>
+</dd></dl>
+
+</div>
+<dl class="class">
+<dt>
+<span class="target" id="eossdkclasseos_1_1vlan__set__t"></span><em>class</em> <tt class="descname">vlan_set_t</tt></dt>
+<dd><em>#include &lt;eth.h&gt;</em><p>A bitset representing a collection of VLAN IDs. </p>
+</dd></dl>
+
+<dl class="class">
+<dt>
+<span class="target" id="eossdkclasseos_1_1eth__addr__t"></span><em>class</em> <tt class="descname">eth_addr_t</tt></dt>
+<dd><em>#include &lt;eth.h&gt;</em><p>An Ethernet address. </p>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1eth__addr__t_1a6b9d9963478e4d3c59d41c2b81cd2db4"></span><tt class="descname">eth_addr_t</tt><big>(</big><big>)</big></dt>
+<dd><p>Default constructor. Copy constructor and assignment operator implicitly declared. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1eth__addr__t_1a24a821f8b8010fb421251a518b0b2c62"></span><tt class="descname">eth_addr_t</tt><big>(</big>char const * <em>addr</em><big>)</big></dt>
+<dd><p>Constructs an address from a char *. Supported formats are xx:xx:xx:xx:xx:xx, xx-xx-xx-xx-xx-xx, or xxxx.xxxx.xxxx. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1eth__addr__t_1a075300cede5157a9bb3f93c0337a4f9d"></span><tt class="descname">eth_addr_t</tt><big>(</big>std::string const &amp; <em>addr</em><big>)</big></dt>
+<dd><p>Constructs an address from a std::string. Supported formats are xx:xx:xx:xx:xx:xx, xx-xx-xx-xx-xx-xx, or xxxx.xxxx.xxxx. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1eth__addr__t_1a351a30b336d45a932d25de6dde1125cb"></span><tt class="descname">eth_addr_t</tt><big>(</big>uint8_t <em>byte0</em>, uint8_t <em>byte1</em>, uint8_t <em>byte2</em>, uint8_t <em>byte3</em>, uint8_t <em>byte4</em>, uint8_t <em>byte5</em><big>)</big></dt>
+<dd><p>Constructs an address from the 6 bytes that make it up. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1eth__addr__t_1a549c14fa8a9a5d3605e077a5ce72fdf1"></span><tt class="descname">eth_addr_t</tt><big>(</big>uint8_t const <em>bytes</em>[6]<big>)</big></dt>
+<dd><p>Constructs an address from a byte array. The array will be copied. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1eth__addr__t_1a69631159b040f58934fe33f4aea07f19"></span>std::string <tt class="descname">to_string</tt><big>(</big><big>)</big> const</dt>
+<dd><p>String representation of a Ethernet address, e.g &#8220;xx:xx:xx:xx:xx:xx&#8221;. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1eth__addr__t_1ae988cd221c65be36ca00a0050f0ea471"></span>bool <tt class="descname">operator!</tt><big>(</big><big>)</big> const</dt>
+<dd><p>Only the default MAC address (all zeros) evaluates to false. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1eth__addr__t_1a14df43f8437a3687d3f0955a6349ab7c"></span>bool <tt class="descname">operator==</tt><big>(</big><a class="reference internal" href="#eossdkclasseos_1_1eth__addr__t"><em>eth_addr_t</em></a> <em>other</em><big>)</big> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1eth__addr__t_1aeb0fac25ac43c5cafca14c98df8f0cd3"></span>bool <tt class="descname">operator!=</tt><big>(</big><a class="reference internal" href="#eossdkclasseos_1_1eth__addr__t"><em>eth_addr_t</em></a> <em>other</em><big>)</big> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1eth__addr__t_1a901be98392be7c35f19562939a5805c3"></span>bool <tt class="descname">operator&lt;</tt><big>(</big><a class="reference internal" href="#eossdkclasseos_1_1eth__addr__t"><em>eth_addr_t</em></a> <em>other</em><big>)</big> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1eth__addr__t_1a7cd44c2a8160e9e2b2bba429e9268dc3"></span><tt class="descname">operator bool</tt><big>(</big><big>)</big> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1eth__addr__t_1a4386c6c2dca5b091557d315d55f8d760"></span>uint32_t <tt class="descname">hash</tt><big>(</big><big>)</big> const</dt>
+<dd><p>The hash function for type <a class="reference internal" href="#eossdkclasseos_1_1eth__addr__t"><em>eth_addr_t</em></a>. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1eth__addr__t_1a66ebfbff9d8a1e913369755644ada988"></span>uint8_t <tt class="descname">byte</tt><big>(</big>int <em>index</em><big>)</big> const</dt>
+<dd><p>Returns the given byte from the address. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1eth__addr__t_1abe29f7c75749aeb559231aa9aaa8d2b9"></span>void <tt class="descname">bytes</tt><big>(</big>void * <em>arr</em><big>)</big> const</dt>
+<dd><p>Copies the bytes of the Ethernet address to the given address. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1eth__addr__t_1ad4c3f43d7158c318e72e565d3ea9e7b3"></span>bool <tt class="descname">is_unicast</tt><big>(</big><big>)</big> const</dt>
+<dd><p>Returns true if the Ethernet address is a unicast address. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1eth__addr__t_1aa477c97b0189464677b8ce4dad28144c"></span>bool <tt class="descname">is_multicast</tt><big>(</big><big>)</big> const</dt>
+<dd><p>Returns true if the Ethernet address is a multicast address. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1eth__addr__t_1aab51f61b7567629056d24e02c0b5969b"></span>bool <tt class="descname">is_broadcast</tt><big>(</big><big>)</big> const</dt>
+<dd><p>Returns true if the Ethernet address is a broadcast address. </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Private Members</p>
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1eth__addr__t_1a9f9af6dd8235d587a8f825a8f73cecd5"></span>uint8_t <tt class="descname">bytes_</tt>[6]</dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Friends</p>
+<dl class="friend">
+<dt>
+<span class="target" id="eossdkclasseos_1_1eth__addr__t_1a203970138b83b039358deafdfa8e8689"></span>friend std::ostream &amp; <tt class="descname">operator&lt;&lt;</tt></dt>
+<dd><p>A utility stream operator that adds a string representation of <a class="reference internal" href="#eossdkclasseos_1_1eth__addr__t"><em>eth_addr_t</em></a> to the ostream. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="class">
+<dt>
+<span class="target" id="eossdkclasseos_1_1invalid__vlan__error"></span><em>class</em> <tt class="descname">invalid_vlan_error</tt></dt>
+<dd><em>#include &lt;eth.h&gt;</em><p>The given VLAN number was invalid (for example 0 or 4095). </p>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1invalid__vlan__error_1a9fcf6f57e568c5f058550fde7c8eded9"></span><tt class="descname">invalid_vlan_error</tt><big>(</big>vlan_id_t <em>vlan</em><big>)</big></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1invalid__vlan__error_1ac4bea1a21ad20def53e5cd29cb70975c"></span>virtual <tt class="descname">~invalid_vlan_error</tt><big>(</big><big>)</big></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1invalid__vlan__error_1aade5619a327446531c37863aca52afbe"></span>vlan_id_t <tt class="descname">vlan</tt><big>(</big><big>)</big> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1invalid__vlan__error_1a068a780637aa572f3a3556ece817c6b8"></span>virtual void <tt class="descname">raise</tt><big>(</big><big>)</big> const</dt>
+<dd><p>Throws this exception. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1invalid__vlan__error_1a85139a039e19be848e22b1be5806dea1"></span>uint32_t <tt class="descname">hash</tt><big>(</big><big>)</big> const</dt>
+<dd><p>The hash function for type <a class="reference internal" href="#eossdkclasseos_1_1invalid__vlan__error"><em>invalid_vlan_error</em></a>. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1invalid__vlan__error_1a6e37da78ee6a7072dffacabd5347fc1d"></span>std::string <tt class="descname">to_string</tt><big>(</big><big>)</big> const</dt>
+<dd><p>Returns a string representation of the current object&#8217;s values. </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Private Members</p>
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1invalid__vlan__error_1aff54fd79fe1970c382ccb48fbfa0795f"></span>vlan_id_t <tt class="descname">vlan_</tt></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Friends</p>
+<dl class="friend">
+<dt>
+<span class="target" id="eossdkclasseos_1_1invalid__vlan__error_1a7a0680fc2d2ab227afe4eb3a1154a899"></span>friend std::ostream &amp; <tt class="descname">operator&lt;&lt;</tt></dt>
+<dd><p>A utility stream operator that adds a string representation of <a class="reference internal" href="#eossdkclasseos_1_1invalid__vlan__error"><em>invalid_vlan_error</em></a> to the ostream. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="class">
+<dt>
+<span class="target" id="eossdkclasseos_1_1internal__vlan__error"></span><em>class</em> <tt class="descname">internal_vlan_error</tt></dt>
+<dd><em>#include &lt;eth.h&gt;</em><p>Tried to configure an internal VLAN on a trunk port. </p>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1internal__vlan__error_1ac94aac7372a079a097ab37b07e28c895"></span><tt class="descname">internal_vlan_error</tt><big>(</big>vlan_id_t <em>vlan</em><big>)</big></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1internal__vlan__error_1a426c01bbe3686cdfa64d2db42192853f"></span>virtual <tt class="descname">~internal_vlan_error</tt><big>(</big><big>)</big></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1internal__vlan__error_1a98f0d767472b8aa5e77eb27997202608"></span>vlan_id_t <tt class="descname">vlan</tt><big>(</big><big>)</big> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1internal__vlan__error_1a6f9be23f6596e3a61fdd5fabb8b4205c"></span>virtual void <tt class="descname">raise</tt><big>(</big><big>)</big> const</dt>
+<dd><p>Throws this exception. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1internal__vlan__error_1a60ad9ea93092b7c347b3dbe3cded9f7f"></span>uint32_t <tt class="descname">hash</tt><big>(</big><big>)</big> const</dt>
+<dd><p>The hash function for type <a class="reference internal" href="#eossdkclasseos_1_1internal__vlan__error"><em>internal_vlan_error</em></a>. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1internal__vlan__error_1a9889d57ff82c5469964bd241354cf920"></span>std::string <tt class="descname">to_string</tt><big>(</big><big>)</big> const</dt>
+<dd><p>Returns a string representation of the current object&#8217;s values. </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Private Members</p>
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1internal__vlan__error_1a779958ccd081ce13b0613a67816f44ba"></span>vlan_id_t <tt class="descname">vlan_</tt></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Friends</p>
+<dl class="friend">
+<dt>
+<span class="target" id="eossdkclasseos_1_1internal__vlan__error_1af2f5a9d3f7a5e7d7d3c1e41996f226e4"></span>friend std::ostream &amp; <tt class="descname">operator&lt;&lt;</tt></dt>
+<dd><p>A utility stream operator that adds a string representation of <a class="reference internal" href="#eossdkclasseos_1_1internal__vlan__error"><em>internal_vlan_error</em></a> to the ostream. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#"><strong>eth</strong></a><ul>
+<li><a class="reference internal" href="#type-definitions-in-eth">Type definitions in <strong>eth</strong></a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="eapi.html"
+                        title="previous chapter"><strong>eapi</strong></a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="eth_intf.html"
+                        title="next chapter"><strong>eth_intf</strong></a></p>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="eth_intf.html" title="eth_intf"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="eapi.html" title="eapi"
+             >previous</a> |</li>
+        <li><a href="index.html">Arista EOS SDK 2.14.0 reference</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2014, Arista Networks.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>
