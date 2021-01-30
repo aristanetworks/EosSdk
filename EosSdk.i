@@ -78,6 +78,7 @@ typedef uint64_t uint64_be_t;
 %feature("nodirector") eos::intf_counter_mgr;
 %feature("nodirector") eos::ip_intf_mgr;
 %feature("nodirector") eos::ip_route_mgr;
+%feature("nodirector") eos::l1_source_mgr;
 %feature("nodirector") eos::lldp_mgr;
 %feature("nodirector") eos::macsec_mgr;
 %feature("nodirector") eos::mac_table_mgr;
@@ -119,6 +120,7 @@ typedef uint64_t uint64_be_t;
 #include "eos/ip_intf.h"
 #include "eos/ip_route.h"
 #include "eos/iterator.h"
+#include "eos/l1_source.h"
 #include "eos/lldp.h"
 #include "eos/macsec.h"
 #include "eos/mac_table.h"
@@ -297,6 +299,7 @@ wrap_iterator(eos::intf_iter_t, eos::intf_iter_impl, eos::intf_id_t);
 wrap_iterator(eos::ip_route_iter_t, eos::ip_route_iter_impl, eos::ip_route_t);
 wrap_iterator(eos::ip_route_via_iter_t, eos::ip_route_via_iter_impl, eos::ip_route_via_t);
 wrap_iterator(eos::decap_group_iter_t, eos::decap_group_iter_impl, eos::decap_group_t);
+wrap_iterator(eos::l1_source_iter_t, eos::l1_source_iter_impl, eos::intf_id_t);
 wrap_iterator(eos::lldp_remote_system_iter_t, eos::lldp_remote_system_iter_impl, lldp_remote_system_t);
 wrap_iterator(eos::lldp_intf_iter_t, eos::lldp_intf_iter_impl, intf_id_t);
 wrap_iterator(eos::lldp_neighbor_iter_t, eos::lldp_neighbor_iter_impl, lldp_neighbor_t);

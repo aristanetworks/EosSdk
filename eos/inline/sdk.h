@@ -158,6 +158,10 @@ inline intf_mgr_helper * sdk::get_intf_mgr_helper() {
    return intf_mgr_helper_;
 }
 
+inline l1_source_mgr * sdk::get_l1_source_mgr() {
+   GET_MGR(l1_source)
+}
+
 inline macsec_mgr * sdk::get_macsec_mgr() {
    GET_MGR(macsec)
 }

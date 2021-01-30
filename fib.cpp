@@ -8,6 +8,23 @@ namespace eos {
 
 class fib_mgr_impl : public fib_mgr {
  public:
+
+   void set_routeinit_task( int const ratio ) {
+      return;
+   }
+
+   void set_route6init_task( int const ratio ) {
+      return;
+   }
+
+   void set_fecinit_task( int const ratio ) {
+      return;
+   }
+
+   void set_fec6init_task( int const ratio ) {
+      return;
+   }
+
    bool fib_fec_set(fib_fec_t const & fec) {
       // TODO: add/replace the fec
       return true;
