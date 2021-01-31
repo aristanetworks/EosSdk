@@ -1,0 +1,13 @@
+**sdk**
+-------
+
+
+.. doxygenfile:: eos/sdk.h
+   :project: eossdk
+
+Type definitions in **sdk**
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. doxygenfile:: eos/types/sdk.h
+   :project: eossdk
+
