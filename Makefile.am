@@ -1,20 +1,25 @@
 lib_LTLIBRARIES = libeos.la
 
-AM_CXXFLAGS = -fvisibility=hidden -std=gnu++14
+AM_CXXFLAGS = -fvisibility=hidden
 AM_CXXFLAGS += -Wextra -Wall -Wnon-virtual-dtor -Werror -Wno-unused-parameter -Wno-error=unused-value
 AM_LDFLAGS = -Wl,--no-undefined
 
-PUBLISHED_HEADER_FILES := $(wildcard eos/*.h) $(wildcard eos/inline/*.h) $(wildcard eos/types/*.h) $(wildcard eos/inline/types/*.h)
+PUBLISHED_HEADER_FILES := $(wildcard eos/*.h) $(wildcard eos/inline/*.h) $(wildcard eos/types/*.h) $(wildcard eos/inline/types/*.h) eos/version.h
 nobase_include_HEADERS = $(PUBLISHED_HEADER_FILES)
 
 EXTRA_DIST = MaybePrintProfilesAndExit.cpp $(wildcard examples/*) $(wildcard examples/test/*)
 EXTRA_DIST += GetAgentProcessName.cpp
+EXTRA_DIST += eos/version.h.template
 
 if SHIPPING
 SHIPPING_FLAG=-DSHIPPING
 else
 SHIPPING_FLAG=
 endif
+
+eos/version.h: eos/version.h.template
+	cpp -traditional -I. -I/src/EosSdk $< $@.pp
+	cat $@.pp | sed 's#@@@@#/**#' | sed 's#@@@#*/#' | sed 's#@@#//#' | grep "^_-_" | sed 's/^_-_ //' | sed 's/^_-_//' | sed 's/pounddefine/#define/' > $@
 
 libeos_la_SOURCES =
 libeos_la_SOURCES += agent.cpp
@@ -55,6 +60,7 @@ libeos_la_SOURCES += panic.cpp
 libeos_la_SOURCES += neighbor_table.cpp
 libeos_la_SOURCES += policy_map.cpp
 libeos_la_SOURCES += policy_map_types.cpp
+libeos_la_SOURCES += route_map.cpp
 libeos_la_SOURCES += sdk.cpp
 libeos_la_SOURCES += subintf.cpp
 libeos_la_SOURCES += system.cpp

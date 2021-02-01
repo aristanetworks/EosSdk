@@ -43,6 +43,7 @@ class neighbor_table_mgr;
 class nexthop_group_mgr;
 class nexthop_group_tunnel_mgr;
 class policy_map_mgr;
+class route_map_mgr;
 class subintf_mgr;
 class system_mgr;
 class timeout_mgr;
@@ -212,6 +213,8 @@ class EOS_SDK_PUBLIC sdk {
    virtual system_mgr * get_system_mgr();
    virtual timeout_mgr * get_timeout_mgr();
    virtual vrf_mgr * get_vrf_mgr();
+   virtual void init_route_map_mgr();
+   virtual route_map_mgr * get_route_map_mgr();
 
  private:
    void init_mount_mgr();
@@ -263,6 +266,7 @@ class EOS_SDK_PUBLIC sdk {
    void * eossdk_context_;
 
    friend class mount_mgr;
+   route_map_mgr * route_map_mgr_;
 };
 
 /**

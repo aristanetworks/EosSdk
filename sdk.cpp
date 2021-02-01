@@ -61,7 +61,8 @@ sdk::sdk()
      subintf_mgr_(0),
      system_mgr_(0),
      timeout_mgr_(0),
-     vrf_mgr_(0) {
+     vrf_mgr_(0),
+     route_map_mgr_(0) {
    name_ = get_agent_process_name();
    eossdk_context_ = NULL;
    impl.register_sdk(this);
@@ -72,6 +73,7 @@ sdk::sdk(std::string const name, void *eossdk_context)
    : acl_mgr_(0),
      agent_mgr_(0),
      aresolve_mgr_(0),
+     bgp_path_mgr_(0),
      class_map_mgr_(0),
      decap_group_mgr_(0),
      directflow_mgr_(0),
@@ -103,7 +105,8 @@ sdk::sdk(std::string const name, void *eossdk_context)
      subintf_mgr_(0),
      system_mgr_(0),
      timeout_mgr_(0),
-     vrf_mgr_(0) {
+     vrf_mgr_(0),
+     route_map_mgr_(0) {
    name_ = name;
    eossdk_context_ = eossdk_context;
    impl.register_sdk(this);
@@ -158,6 +161,7 @@ INIT_STUB_MGR(neighbor_table_mgr)
 INIT_STUB_MGR(nexthop_group_mgr)
 INIT_STUB_MGR(nexthop_group_tunnel_mgr)
 INIT_STUB_MGR(policy_map_mgr)
+INIT_STUB_MGR(route_map_mgr)
 INIT_STUB_MGR(subintf_mgr)
 INIT_STUB_MGR(system_mgr)
 INIT_STUB_MGR(timeout_mgr)

@@ -320,14 +320,19 @@ class EOS_SDK_PUBLIC acl_rule_ip_t : public acl_rule_base_t {
    void icmp_code_is(uint16_t icmp_code);
 
    /**
-    * Getter for 'priority_value': 0..63, DSCP match to value (IPv4); traffic class
-    * (IPv6).
+    * Getter for 'priority_value': IPv4: 0..63: DSCP value to match; IPv6: 0..255:
+    * DSCP + ECN bits (traffic class byte). Warning: for IPv6 the DSCP value must
+    * be shifted (ipv4_dscp<<2). Warning: for IPV4 also need to call
+    * match_ip_priority. Warning: mask default is 0 (all bits are wildcarded).
     */
    uint8_t priority_value() const;
    /** Setter for 'priority_value'. */
    void priority_value_is(uint8_t priority_value);
 
-   /** Getter for 'priority_mask': 0..63 for IPv4; 0..255 for IPv6. */
+   /**
+    * Getter for 'priority_mask': 0..63 for IPv4; 0..255 for IPv6. Warning: the
+    * default mask is 0: any dscp will match.
+    */
    uint8_t priority_mask() const;
    /** Setter for 'priority_mask'. */
    void priority_mask_is(uint8_t priority_mask);
@@ -338,8 +343,8 @@ class EOS_SDK_PUBLIC acl_rule_ip_t : public acl_rule_base_t {
    void match_fragments_is(bool match_fragments);
 
    /**
-    * Getter for 'match_ip_priority': match DSCP (IPv4) or TE (IPv6) data provided
-    * in priority_{value,mask}.
+    * Getter for 'match_ip_priority': IPv4: enable for priority_{value,mask} to be
+    * effective; IPv6: dont care (not needed for match to happen).
     */
    bool match_ip_priority() const;
    /** Setter for 'match_ip_priority'. */

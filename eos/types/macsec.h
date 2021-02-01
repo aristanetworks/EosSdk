@@ -67,6 +67,26 @@ enum macsec_intf_traffic_status_t {
 std::ostream& operator<<(std::ostream& os,
                          const macsec_intf_traffic_status_t & enum_val);
 
+/** Traffic policy on a profile. */
+enum macsec_profile_traffic_policy_t {
+   TRAFFIC_POLICY_NULL,
+   /**
+    * Allow transmit/receive of encrypted traffic using operational SAK and block
+    * otherwise.
+    */
+   TRAFFIC_POLICY_ACTIVE_SAK,
+   /** Allow transmit/receive of unprotected traffic. */
+   TRAFFIC_POLICY_UNPROTECTED,
+   /** Block transmit/receive of unprotected traffic. */
+   TRAFFIC_POLICY_BLOCKED,
+};
+/**
+ * Appends a string representation of enum macsec_profile_traffic_policy_t value to
+ * the ostream.
+ */
+std::ostream& operator<<(std::ostream& os,
+                         const macsec_profile_traffic_policy_t & enum_val);
+
 /** A connectivity association key. */
 class EOS_SDK_PUBLIC macsec_key_t {
  public:
@@ -178,14 +198,15 @@ class EOS_SDK_PUBLIC macsec_profile_t {
    /** Setter for 'bypass_lldp'. */
    void bypass_lldp_is(bool bypass_lldp);
 
-   /**
-    * Getter for 'allow_unprotected': if set, allow transmit/receive without MAC
-    * security protection.
-    */
-   bool allow_unprotected() const;
-   /** Setter for 'allow_unprotected'. */
-   void allow_unprotected_is(bool allow_unprotected);
+   /** Getter for 'traffic_policy': traffic policy to be used by an interface. */
+   macsec_profile_traffic_policy_t traffic_policy() const;
+   /** Setter for 'traffic_policy'. */
+   void traffic_policy_is(macsec_profile_traffic_policy_t traffic_policy);
 
+   /** Getter for 'allow_unprotected': deprecated in favour of traffic_policy. */
+   bool allow_unprotected() const;
+   /** Setter for 'allow_unprotected': deprecated in favour of traffic_policy. */
+   void allow_unprotected_is(bool allow_unprotected);
    /** Getter for 'replay_protection': if set, enable replay protection. */
    bool replay_protection() const;
    /** Setter for 'replay_protection'. */
@@ -227,6 +248,7 @@ class EOS_SDK_PUBLIC macsec_profile_t {
    bool dot1x_;
    bool include_sci_;
    bool bypass_lldp_;
+   macsec_profile_traffic_policy_t traffic_policy_;
    bool allow_unprotected_;
    bool replay_protection_;
    uint32_t replay_protection_window_;

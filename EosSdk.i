@@ -89,6 +89,7 @@ typedef uint64_t uint64_be_t;
 %feature("nodirector") eos::nexthop_group_mgr;
 %feature("nodirector") eos::nexthop_group_tunnel_mgr;
 %feature("nodirector") eos::policy_map_mgr;
+%feature("nodirector") eos::route_map_mgr;
 %feature("nodirector") eos::subintf_mgr;
 %feature("nodirector") eos::system_mgr;
 %feature("nodirector") eos::timeout_mgr;
@@ -132,6 +133,7 @@ typedef uint64_t uint64_be_t;
 #include "eos/nexthop_group.h"
 #include "eos/nexthop_group_tunnel.h"
 #include "eos/policy_map.h"
+#include "eos/route_map.h"
 #include "eos/sdk.h"
 #include "eos/subintf.h"
 #include "eos/system.h"

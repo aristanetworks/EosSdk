@@ -11,6 +11,8 @@
 
 namespace eos {
 
+typedef uint32_t bgp_asn_t;
+
 /** The BGP peer key which consists of the peer address and the VRF itresides in. */
 class EOS_SDK_PUBLIC bgp_peer_key_t {
  public:

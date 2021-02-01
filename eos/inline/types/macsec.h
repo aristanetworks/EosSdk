@@ -64,6 +64,24 @@ operator<<(std::ostream& os, const macsec_intf_traffic_status_t & enum_val) {
 
 
 
+inline std::ostream&
+operator<<(std::ostream& os, const macsec_profile_traffic_policy_t & enum_val) {
+   if (enum_val==TRAFFIC_POLICY_NULL) {
+      os << "TRAFFIC_POLICY_NULL";
+   } else if (enum_val==TRAFFIC_POLICY_ACTIVE_SAK) {
+      os << "TRAFFIC_POLICY_ACTIVE_SAK";
+   } else if (enum_val==TRAFFIC_POLICY_UNPROTECTED) {
+      os << "TRAFFIC_POLICY_UNPROTECTED";
+   } else if (enum_val==TRAFFIC_POLICY_BLOCKED) {
+      os << "TRAFFIC_POLICY_BLOCKED";
+   } else {
+      os << "Unknown value";
+   }
+   return os;
+}
+
+
+
 inline macsec_key_t::macsec_key_t() :
       cak_(), ckn_(), encoded_(false) {
 }
@@ -155,14 +173,16 @@ operator<<(std::ostream& os, const macsec_key_t& obj) {
 inline macsec_profile_t::macsec_profile_t() :
       name_(), primary_key_(), fallback_key_(), key_server_priority_(0),
       rekey_period_(0), cipher_(CIPHER_NULL), dot1x_(false), include_sci_(false),
-      bypass_lldp_(false), allow_unprotected_(false), replay_protection_(true),
+      bypass_lldp_(false), traffic_policy_(TRAFFIC_POLICY_NULL),
+      allow_unprotected_(false), replay_protection_(true),
       replay_protection_window_(0), key_retirement_immediate_(false), intfs_() {
 }
 
 inline macsec_profile_t::macsec_profile_t(macsec_profile_name_t name) :
       name_(name), primary_key_(), fallback_key_(), key_server_priority_(16),
       rekey_period_(0), cipher_(GCM_AES_XPN_128), dot1x_(false),
-      include_sci_(false), bypass_lldp_(false), allow_unprotected_(false),
+      include_sci_(false), bypass_lldp_(false),
+      traffic_policy_(TRAFFIC_POLICY_ACTIVE_SAK), allow_unprotected_(false),
       replay_protection_(true), replay_protection_window_(0),
       key_retirement_immediate_(false), intfs_() {
 }
@@ -257,14 +277,26 @@ macsec_profile_t::bypass_lldp_is(bool bypass_lldp) {
    bypass_lldp_ = bypass_lldp;
 }
 
+inline macsec_profile_traffic_policy_t
+macsec_profile_t::traffic_policy() const {
+   return traffic_policy_;
+}
+
+inline void
+macsec_profile_t::traffic_policy_is(macsec_profile_traffic_policy_t traffic_policy)
+       {
+   traffic_policy_ = traffic_policy;
+}
+
 inline bool
 macsec_profile_t::allow_unprotected() const {
-   return allow_unprotected_;
+   return traffic_policy() == TRAFFIC_POLICY_UNPROTECTED;
 }
 
 inline void
 macsec_profile_t::allow_unprotected_is(bool allow_unprotected) {
-   allow_unprotected_ = allow_unprotected;
+   traffic_policy_is(allow_unprotected ? TRAFFIC_POLICY_UNPROTECTED :
+                                         TRAFFIC_POLICY_ACTIVE_SAK);
 }
 
 inline bool
@@ -313,6 +345,7 @@ macsec_profile_t::operator==(macsec_profile_t const & other) const {
           dot1x_ == other.dot1x_ &&
           include_sci_ == other.include_sci_ &&
           bypass_lldp_ == other.bypass_lldp_ &&
+          traffic_policy_ == other.traffic_policy_ &&
           allow_unprotected_ == other.allow_unprotected_ &&
           replay_protection_ == other.replay_protection_ &&
           replay_protection_window_ == other.replay_protection_window_ &&
@@ -345,6 +378,8 @@ macsec_profile_t::operator<(macsec_profile_t const & other) const {
       return include_sci_ < other.include_sci_;
    } else if(bypass_lldp_ != other.bypass_lldp_) {
       return bypass_lldp_ < other.bypass_lldp_;
+   } else if(traffic_policy_ != other.traffic_policy_) {
+      return traffic_policy_ < other.traffic_policy_;
    } else if(allow_unprotected_ != other.allow_unprotected_) {
       return allow_unprotected_ < other.allow_unprotected_;
    } else if(replay_protection_ != other.replay_protection_) {
@@ -380,6 +415,8 @@ macsec_profile_t::hash() const {
               sizeof(bool), ret);
    ret = hash_mix::mix((uint8_t *)&bypass_lldp_,
               sizeof(bool), ret);
+   ret = hash_mix::mix((uint8_t *)&traffic_policy_,
+              sizeof(macsec_profile_traffic_policy_t), ret);
    ret = hash_mix::mix((uint8_t *)&allow_unprotected_,
               sizeof(bool), ret);
    ret = hash_mix::mix((uint8_t *)&replay_protection_,
@@ -409,6 +446,7 @@ macsec_profile_t::to_string() const {
    ss << ", dot1x=" << dot1x_;
    ss << ", include_sci=" << include_sci_;
    ss << ", bypass_lldp=" << bypass_lldp_;
+   ss << ", traffic_policy=" << traffic_policy_;
    ss << ", allow_unprotected=" << allow_unprotected_;
    ss << ", replay_protection=" << replay_protection_;
    ss << ", replay_protection_window=" << replay_protection_window_;

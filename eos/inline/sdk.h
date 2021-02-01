@@ -198,6 +198,10 @@ inline policy_map_mgr * sdk::get_policy_map_mgr() {
    GET_MGR(policy_map)
 }
 
+inline route_map_mgr * sdk::get_route_map_mgr() {
+   GET_MGR(route_map)
+}
+
 inline subintf_mgr * sdk::get_subintf_mgr() {
    print_profiles::add_profile("IntfMgrHelper");
    GET_MGR(subintf)

@@ -12,6 +12,7 @@ LDFLAGS_32B="-m32"
 export LDFLAGS
 
 target_32b=true
+libdir="lib"
 
 # Extract the arguments that we need to forward to `./configure'.
 # Other arguments will be passed to `make'.  This is so that one can
@@ -26,10 +27,12 @@ for arg; do
          ;;
       (-m64|--m64)
          target_32b=false
+         libdir="lib64"
          shift
          ;;
       (-m32|--m32)
          target_32b=true
+         libdir="lib"
          shift
          ;;
       (-force|--force)
@@ -56,7 +59,8 @@ set -e
 test -f configure || ./bootstrap
 test -f Makefile || ./configure  \
    $configure_flags --program-prefix= \
-   --prefix=$sysroot/usr
+   --prefix=$sysroot/usr \
+   --libdir=$sysroot/usr/$libdir \
 
 set -x
 STUBS_DIR=$PWD
