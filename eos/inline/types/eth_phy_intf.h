@@ -1,4 +1,4 @@
-// Copyright (c) 2017 Arista Networks, Inc.  All rights reserved.
+// Copyright (c) 2020 Arista Networks, Inc.  All rights reserved.
 // Arista Networks, Inc. Confidential and Proprietary.
 
 #ifndef EOS_INLINE_TYPES_ETH_PHY_INTF_H
@@ -34,6 +34,8 @@ operator<<(std::ostream& os, const eth_link_speed_t & enum_val) {
       os << "LINK_SPEED_200GBPS";
    } else if (enum_val==LINK_SPEED_400GBPS) {
       os << "LINK_SPEED_400GBPS";
+   } else if (enum_val==LINK_SPEED_800GBPS) {
+      os << "LINK_SPEED_800GBPS";
    } else if (enum_val==LINK_SPEED_UNEXPECTED) {
       os << "LINK_SPEED_UNEXPECTED";
    } else {

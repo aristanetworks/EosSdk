@@ -1,4 +1,4 @@
-// Copyright (c) 2017 Arista Networks, Inc.  All rights reserved.
+// Copyright (c) 2020 Arista Networks, Inc.  All rights reserved.
 // Arista Networks, Inc. Confidential and Proprietary.
 
 #ifndef EOS_TYPES_ETH_PHY_INTF_H
@@ -25,6 +25,7 @@ enum eth_link_speed_t {
    LINK_SPEED_100GBPS,
    LINK_SPEED_200GBPS,
    LINK_SPEED_400GBPS,
+   LINK_SPEED_800GBPS,
    LINK_SPEED_UNEXPECTED,
 };
 /** Appends a string representation of enum eth_link_speed_t value to the ostream. */

@@ -9,7 +9,7 @@
 
 namespace eos {
 
-agent_handler::agent_handler(agent_mgr * mgr) : 
+agent_handler::agent_handler(agent_mgr * mgr) :
       base_handler<agent_mgr, agent_handler>(mgr) {
    mgr_->add_handler(this);
 }

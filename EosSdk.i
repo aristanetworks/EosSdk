@@ -241,6 +241,7 @@ void throw_py_error(error const& err) {
 %template() std::map<uint32_t, eos::class_map_rule_t>;
 %template() std::map<uint32_t, eos::policy_map_rule_t>;
 %template() std::map<uint16_t, eos::ip_addr_t>;
+%template() std::map<uint32_t, eos::route_map_entry_t>;
 %template() std::set<eos::intf_id_t>;
 %template() std::set<eos::ip_addr_mask_t>;
 %template() std::list<uint16_t>;

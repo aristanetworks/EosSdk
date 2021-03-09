@@ -24,9 +24,9 @@
 
 #include <eos/base.h>
 
-#define EOSSDK_VERSION "2.17.0"
+#define EOSSDK_VERSION "2.18.0"
 #define EOSSDK_MAJOR 2
-#define EOSSDK_MINOR 17
+#define EOSSDK_MINOR 18
 #define EOSSDK_PATCH 0
 
 namespace eos {

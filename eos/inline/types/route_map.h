@@ -99,13 +99,13 @@ operator<<(std::ostream& os, const link_bandwidth_t& obj) {
 
 
 inline std::ostream&
-operator<<(std::ostream& os, const route_map_link_bandwidth_action_t & enum_val) {
-   if (enum_val==ROUTE_MAP_LINK_BANDWIDTH_ACTION_NONE) {
-      os << "ROUTE_MAP_LINK_BANDWIDTH_ACTION_NONE";
-   } else if (enum_val==ROUTE_MAP_LINK_BANDWIDTH_ACTION_SET) {
-      os << "ROUTE_MAP_LINK_BANDWIDTH_ACTION_SET";
-   } else if (enum_val==ROUTE_MAP_LINK_BANDWIDTH_ACTION_DELETE) {
-      os << "ROUTE_MAP_LINK_BANDWIDTH_ACTION_DELETE";
+operator<<(std::ostream& os, const route_map_operation_type_t & enum_val) {
+   if (enum_val==OPERATION_TYPE_NONE) {
+      os << "OPERATION_TYPE_NONE";
+   } else if (enum_val==OPERATION_TYPE_SET) {
+      os << "OPERATION_TYPE_SET";
+   } else if (enum_val==OPERATION_TYPE_DELETE) {
+      os << "OPERATION_TYPE_DELETE";
    } else {
       os << "Unknown value";
    }
@@ -115,12 +115,12 @@ operator<<(std::ostream& os, const route_map_link_bandwidth_action_t & enum_val)
 
 
 inline route_map_link_bandwidth_t::route_map_link_bandwidth_t() :
-      action_(), asn_(), bandwidth_() {
+      operation_(), asn_(), bandwidth_() {
 }
 
-inline route_map_link_bandwidth_action_t
-route_map_link_bandwidth_t::action() const {
-   return action_;
+inline route_map_operation_type_t
+route_map_link_bandwidth_t::operation() const {
+   return operation_;
 }
 
 inline bgp_asn_t
@@ -133,10 +133,38 @@ route_map_link_bandwidth_t::bandwidth() const {
    return bandwidth_;
 }
 
+inline void
+route_map_link_bandwidth_t::route_map_operation_type_set_is(
+         link_bandwidth_t bandwidth) {
+   operation_ = OPERATION_TYPE_SET;
+   bandwidth_ = bandwidth;
+   asn_ = 0;
+}
+
+inline void
+route_map_link_bandwidth_t::route_map_operation_type_delete_is(
+         link_bandwidth_t bandwidth, bgp_asn_t asn) {
+   operation_ = OPERATION_TYPE_DELETE;
+   bandwidth_ = bandwidth;
+   asn_ = asn;
+}
+
+inline uint32_t
+route_map_link_bandwidth_t::hash() const {
+   uint32_t ret = 0;
+   ret = hash_mix::mix((uint8_t *)&operation_,
+              sizeof(route_map_operation_type_t), ret);
+   ret = hash_mix::mix((uint8_t *)&asn_,
+              sizeof(bgp_asn_t), ret);
+   ret ^= bandwidth_.hash();
+   ret = hash_mix::final_mix(ret);
+   return ret;
+}
+
 inline bool
 route_map_link_bandwidth_t::operator==(route_map_link_bandwidth_t const & other)
        const {
-   return action_ == other.action_ &&
+   return operation_ == other.operation_ &&
           asn_ == other.asn_ &&
           bandwidth_ == other.bandwidth_;
 }
@@ -150,8 +178,8 @@ route_map_link_bandwidth_t::operator!=(route_map_link_bandwidth_t const & other)
 inline bool
 route_map_link_bandwidth_t::operator<(route_map_link_bandwidth_t const & other)
        const {
-   if(action_ != other.action_) {
-      return action_ < other.action_;
+   if(operation_ != other.operation_) {
+      return operation_ < other.operation_;
    } else if(asn_ != other.asn_) {
       return asn_ < other.asn_;
    } else if(bandwidth_ != other.bandwidth_) {
@@ -160,24 +188,11 @@ route_map_link_bandwidth_t::operator<(route_map_link_bandwidth_t const & other)
    return false;
 }
 
-inline uint32_t
-route_map_link_bandwidth_t::hash() const {
-   uint32_t ret = 0;
-   ret = hash_mix::mix((uint8_t *)&action_,
-              sizeof(route_map_link_bandwidth_action_t), ret);
-   ret = hash_mix::mix((uint8_t *)&asn_,
-              sizeof(bgp_asn_t), ret);
-   ret = hash_mix::mix((uint8_t *)&bandwidth_,
-              sizeof(link_bandwidth_t), ret);
-   ret = hash_mix::final_mix(ret);
-   return ret;
-}
-
 inline std::string
 route_map_link_bandwidth_t::to_string() const {
    std::ostringstream ss;
    ss << "route_map_link_bandwidth_t(";
-   ss << "action=" << action_;
+   ss << "operation=" << operation_;
    ss << ", asn=" << asn_;
    ss << ", bandwidth=" << bandwidth_;
    ss << ")";
@@ -237,6 +252,23 @@ route_map_entry_t::link_bandwidth_is(
    link_bandwidth_ = link_bandwidth;
 }
 
+inline void
+route_map_entry_t::link_bandwidth_del() {
+   link_bandwidth_ = route_map_link_bandwidth_t();
+}
+
+inline uint32_t
+route_map_entry_t::hash() const {
+   uint32_t ret = 0;
+   ret = hash_mix::mix((uint8_t *)&sequence_number_,
+               sizeof(route_map_sequence_number_t), ret);
+   ret = hash_mix::mix((uint8_t *)&permit_,
+               sizeof(bool), ret);
+   ret ^= link_bandwidth_.hash();
+   ret = hash_mix::final_mix(ret);
+   return ret;
+}
+
 inline bool
 route_map_entry_t::operator==(route_map_entry_t const & other) const {
    return sequence_number_ == other.sequence_number_ &&
@@ -259,19 +291,6 @@ route_map_entry_t::operator<(route_map_entry_t const & other) const {
       return link_bandwidth_ < other.link_bandwidth_;
    }
    return false;
-}
-
-inline uint32_t
-route_map_entry_t::hash() const {
-   uint32_t ret = 0;
-   ret = hash_mix::mix((uint8_t *)&sequence_number_,
-              sizeof(route_map_sequence_number_t), ret);
-   ret = hash_mix::mix((uint8_t *)&permit_,
-              sizeof(bool), ret);
-   ret = hash_mix::mix((uint8_t *)&link_bandwidth_,
-              sizeof(route_map_link_bandwidth_t), ret);
-   ret = hash_mix::final_mix(ret);
-   return ret;
 }
 
 inline std::string

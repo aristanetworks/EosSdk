@@ -307,6 +307,19 @@ void default_signal_handler(int signal) EOS_SDK_PUBLIC;
  */
 void internal_connection_buffer_size_is(uint32_t bytes) EOS_SDK_PUBLIC;
 
+/**
+ * This function enables (default) or disables API Tracing. Tracing
+ * begins once an sdk object is created; to avoid all tracing, use this
+ * before instantiating an sdk object.
+ */
+void api_trace_enable_is(bool new_api_trace) EOS_SDK_PUBLIC;
+
+/**
+ * Change the size of quick trace ring buffers, per level. Default 10kb
+ * per level. If this is used before sdk object constructor, the constructor
+ * will reset the buffers to default size.
+ */
+void api_trace_buffer_sizes_is(int(&size_spec)[10]) EOS_SDK_PUBLIC;
 }
 
 #define ENSURE_INITIALIZED()                                            \

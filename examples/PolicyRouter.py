@@ -21,6 +21,7 @@ To install this on a switch build an RPM also containing pyinotify and
 install that using the EOS extension manager.
 """
 
+from __future__ import absolute_import, division, print_function
 import cjson
 import collections
 import datetime
@@ -290,14 +291,14 @@ class PolicyRouter(object):
          class_map = eossdk.ClassMap(key)
 
          for rule_index, match in enumerate(classifier.matches):
-            print 'Adding to class map:', name, 'seq:', str(rule_index + 1), match
+            print( 'Adding to class map:', name, 'seq:', str(rule_index + 1), match )
             rule_key = eossdk.AclKey(match.acl_name, eossdk.ACL_TYPE_IPV4)
             rule = eossdk.ClassMapRule(rule_key)
             # Set the action for the rule
             class_map.rule_set(rule_index + 1, rule)
          self.class_map_mgr.class_map_is(class_map)
          cm = self.class_map_mgr.class_map(key)
-         print 'Set class map:', name, 'now with', len(cm.rules()), 'rules'
+         print( 'Set class map:', name, 'now with', len(cm.rules()), 'rules' )
 
    def _buildActions(self):
       for name, action in self.config_.actions.iteritems():
@@ -328,7 +329,7 @@ class PolicyRouter(object):
          for i, dst in enumerate(data.dst_ips):
             ip = get_ip_addr(dst)
             if ip is not None:
-               print 'Adding IP'
+               print( 'Adding IP' )
                group.destination_ip_set(i, ip)
 
          if t == 'ipinip' or t == 'gre':
@@ -340,7 +341,7 @@ class PolicyRouter(object):
          elif t == 'mpls':
             sys.stderr.write('MPLS nexthop-groups are not yet supported\n')
          # Set the nexthop group
-         print 'Setting nexthop group:', name
+         print( 'Setting nexthop group:', name )
          self.nexthop_group_mgr.nexthop_group_set(group)
 
    def _buildPolicyMaps(self):
@@ -366,30 +367,30 @@ class PolicyRouter(object):
          policy_map_key = eossdk.PolicyMapKey(data.policy, eossdk.POLICY_FEATURE_PBR)
          intf_id = eossdk.IntfId(intf_name)
          if self.intf_mgr.exists(intf_id):
-            print 'Interface %s exists, applying policy' % intf_id.to_string()
+            print( 'Interface %s exists, applying policy' % intf_id.to_string() )
             self.policy_map_mgr.policy_map_apply(
                policy_map_key, intf_id, eossdk.ACL_IN, True)
          else:
-            print 'Interface %s does not exist' % intf_id.to_string()
-      print 'Finished applying policy'
+            print( 'Interface %s does not exist' % intf_id.to_string() )
+      print( 'Finished applying policy' )
 
    def buildPolicy(self):
       assert self.config_
       self.built_ = False
-      print 'Building ACLs'
+      print( 'Building ACLs' )
       self._buildAcls()
-      print 'Building class maps'
+      print( 'Building class maps' )
       self._buildClassMaps()
-      print 'Building actions for policy maps'
+      print( 'Building actions for policy maps' )
       self._buildActions()
-      print 'Building nexthop groups'
+      print( 'Building nexthop groups' )
       self._buildNexthopGroups()
-      print 'Building policy maps'
+      print( 'Building policy maps' )
       self._buildPolicyMaps()
-      print 'Applying policy to interfaces'
+      print( 'Applying policy to interfaces' )
       self._applyToInterfaces()
       self.built_ = True
-      print 'Finished building policy'
+      print( 'Finished building policy' )
 
    @property
    def built(self):
@@ -460,23 +461,23 @@ class PolicyHandler(eossdk.AgentHandler, eossdk.PolicyMapHandler, eossdk.AclHand
       self.watch_policy()
 
    def watch_policy(self):
-      print 'Removing all watches for %s' % self.watches_
+      print( 'Removing all watches for %s' % self.watches_ )
       for name in self.watches_:
          self.watch_policy_map(
             eossdk.PolicyMapKey(name, eossdk.POLICY_FEATURE_PBR), False)
       self.watches_ = frozenset(self.config_.policy.iterkeys())
-      print 'Adding new watches for %s' % self.config_.policy.keys()
+      print( 'Adding new watches for %s' % self.config_.policy.keys() )
       for name in self.config_.policy:
          self.watch_policy_map(
             eossdk.PolicyMapKey(name, eossdk.POLICY_FEATURE_PBR), True)
 
    def on_initialized(self):
-      print self.__class__.__name__, 'was initialized by the SDK'
-      print 'Loading initial config'
+      print( self.__class__.__name__, 'was initialized by the SDK' )
+      print( 'Loading initial config' )
       self.on_agent_option('config_file',
                            self.agent_mgr.agent_option('config_file') or
                            self.config_file_)
-      print 'Finished loading initial config'
+      print( 'Finished loading initial config' )
 
    def on_agent_option(self, name, value):
       if name == 'config_file':
@@ -487,7 +488,7 @@ class PolicyHandler(eossdk.AgentHandler, eossdk.PolicyMapHandler, eossdk.AclHand
          if self.config_file_ != value:
             if self.timeout_:
                self.timeout_.cancel()
-            print 'Starting Inotify notifier'
+            print( 'Starting Inotify notifier' )
             self.timeout_ = InotifyPoller(self.sdk_, self.config_file_, self)
             self.config_file_ = value
 
@@ -517,7 +518,7 @@ class InotifyHandler(pyinotify.ProcessEvent):
    """Handles inotify events."""
 
    def process_IN_CREATE(self, event):
-      print 'Config file created:', event.pathname
+      print( 'Config file created:', event.pathname )
       config = load_config_file(event.pathname)
       if config:
          self.handler_.config_is(config)
@@ -525,9 +526,9 @@ class InotifyHandler(pyinotify.ProcessEvent):
    def process_IN_MODIFY(self, event):
       config = load_config_file(event.pathname)
       if config == self.handler_.config:
-         print 'Config file modified but not changed: ', event.pathname
+         print( 'Config file modified but not changed: ', event.pathname )
       else:
-         print 'Config file updated:', event.pathname
+         print( 'Config file updated:', event.pathname )
          self.handler_.config_is(config)
 
    def my_init(self, **kwargs):

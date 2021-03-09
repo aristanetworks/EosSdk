@@ -192,6 +192,12 @@ void default_signal_handler(int signo) {
 void internal_connection_buffer_size_is(uint32_t bytes) {
 }
 
+void api_trace_enable_is(bool new_api_trace) {
+}
+
+void api_trace_buffer_sizes_is(int(&size_spec)[10]) {
+}
+
 // Real functions to facilitate the making of customized sysdb-mount-profiles 
 // (to use in place of the brute-force one called "EosSdk", see 
 // /usr/lib/SysdbMountProfiles/EosSdkAll), an app can be started with the env var 
