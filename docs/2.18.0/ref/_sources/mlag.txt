@@ -1,0 +1,13 @@
+**mlag**
+--------
+
+
+.. doxygenfile:: eos/mlag.h
+   :project: eossdk
+
+Type definitions in **mlag**
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. doxygenfile:: eos/types/mlag.h
+   :project: eossdk
+

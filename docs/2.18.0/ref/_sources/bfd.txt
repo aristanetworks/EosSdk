@@ -1,0 +1,13 @@
+**bfd**
+-------
+
+
+.. doxygenfile:: eos/bfd.h
+   :project: eossdk
+
+Type definitions in **bfd**
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. doxygenfile:: eos/types/bfd.h
+   :project: eossdk
+

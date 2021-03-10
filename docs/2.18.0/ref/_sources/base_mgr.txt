@@ -1,0 +1,7 @@
+**base_mgr**
+------------
+
+
+.. doxygenfile:: eos/base_mgr.h
+   :project: eossdk
+

@@ -1,0 +1,7 @@
+**utility**
+-----------
+
+
+.. doxygenfile:: eos/utility.h
+   :project: eossdk
+
