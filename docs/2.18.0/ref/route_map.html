@@ -1,0 +1,600 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>route_map &mdash; Arista EOS SDK 2.18.0 reference</title>
+    
+    <link rel="stylesheet" href="_static/eossdk.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/breathe.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '2.18.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="Arista EOS SDK 2.18.0 reference" href="index.html" />
+    <link rel="next" title="sdk" href="sdk.html" />
+    <link rel="prev" title="policy_map" href="policy_map.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="sdk.html" title="sdk"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="policy_map.html" title="policy_map"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">Arista EOS SDK 2.18.0 reference</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="route-map">
+<h1><strong>route_map</strong><a class="headerlink" href="#route-map" title="Permalink to this headline">¶</a></h1>
+<p>Route Map management module.</p>
+<p>Route map is a ordered set of route map entry statement that manage the redistribution of IP routes into the protocol domain and modify the attrbutes of routes.</p>
+<p>This module provides APIs to query Route Map information. </p>
+<dl class="namespace">
+<dt>
+<span class="target" id="eossdknamespaceeos"></span><em>namespace</em> <tt class="descname">eos</tt></dt>
+<dd><dl class="class">
+<dt>
+<span class="target" id="eossdkclasseos_1_1route__map__mgr"></span><em>class</em> <tt class="descname">route_map_mgr</tt></dt>
+<dd><em>#include &lt;route_map.h&gt;</em><p>A manager of route map configurations.</p>
+<p>A example of the API usage is in example/RouteMapAgent.cpp </p>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1route__map__mgr_1a7df23da6ac2e0c3a21614474ed3bc801"></span>virtual <tt class="descname">~route_map_mgr</tt><big>(</big><big>)</big></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Protected Functions</p>
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1route__map__mgr_1a970d55fe1f4e790ec72177ca57e14ffd"></span><tt class="descname">route_map_mgr</tt><big>(</big><big>)</big></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Private Members</p>
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1route__map__mgr_1ae869f6cbb47252bbadcf48307b50971a"></span><tt class="descname">route_map_mgr</tt></dt>
+<dd></dd></dl>
+
+</div>
+</dd></dl>
+
+</dd></dl>
+
+<div class="section" id="type-definitions-in-route-map">
+<h2>Type definitions in <strong>route_map</strong><a class="headerlink" href="#type-definitions-in-route-map" title="Permalink to this headline">¶</a></h2>
+<dl class="namespace">
+<dt>
+<span class="target" id="eossdknamespaceeos"></span><em>namespace</em> <tt class="descname">eos</tt></dt>
+<dd><div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Typedefs</p>
+<dl class="typedef">
+<dt>
+<span class="target" id="eossdknamespaceeos_1a7d5a9782ae87b2905d41fc5c5bd33e09"></span>typedef std::string <tt class="descname">route_map_name_t</tt></dt>
+<dd></dd></dl>
+
+<dl class="typedef">
+<dt>
+<span class="target" id="eossdknamespaceeos_1a6002f7959ed4605a8b2fe8e040e9ebf0"></span>typedef uint32_t <tt class="descname">route_map_sequence_number_t</tt></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Enums</p>
+<dl class="enum">
+<dt>
+<span class="target" id="eossdknamespaceeos_1af2f13d2a03440ecff4115d3e39fbed81"></span><strong>bandwidth_unit_t enum</strong></dt>
+<dd><p><em>Values:</em></p>
+<ul class="breatheenumvalues">
+<li><tt class="first docutils literal"><span class="pre">BIT</span></tt> - </li>
+<li><tt class="first docutils literal"><span class="pre">KILOBIT</span></tt> - </li>
+<li><tt class="first docutils literal"><span class="pre">MEGABIT</span></tt> - </li>
+<li><tt class="first docutils literal"><span class="pre">GIGABIT</span></tt> - </li>
+</ul>
+</dd></dl>
+
+<dl class="enum">
+<dt>
+<span class="target" id="eossdknamespaceeos_1a6c2cf658c45a521a7549dd113a60b649"></span><strong>route_map_operation_type_t enum</strong></dt>
+<dd><p>Route map extended community link bandwidth operation type. </p>
+<p><em>Values:</em></p>
+<ul class="breatheenumvalues">
+<li><tt class="first docutils literal"><span class="pre">OPERATION_TYPE_NONE</span></tt> - </li>
+<li><tt class="first docutils literal"><span class="pre">OPERATION_TYPE_SET</span></tt> - </li>
+<li><tt class="first docutils literal"><span class="pre">OPERATION_TYPE_DELETE</span></tt> - </li>
+</ul>
+</dd></dl>
+
+</div>
+<dl class="class">
+<dt>
+<span class="target" id="eossdkclasseos_1_1link__bandwidth__t"></span><em>class</em> <tt class="descname">link_bandwidth_t</tt></dt>
+<dd><em>#include &lt;route_map.h&gt;</em><p>Extended community link bandwidth value. </p>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1link__bandwidth__t_1a205ff711f25606e96188a93c3dc8a1bf"></span><tt class="descname">link_bandwidth_t</tt><big>(</big><big>)</big></dt>
+<dd><p>Create link bandwidth value. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1link__bandwidth__t_1a430d362f7d36280736d893f56bc33c5c"></span>float <tt class="descname">value</tt><big>(</big><big>)</big> const</dt>
+<dd><p>Getter for &#8216;value&#8217;: The link bandwidth value. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1link__bandwidth__t_1a5761cc110b43010baa6b0cd50ab986fe"></span>void <tt class="descname">value_is</tt><big>(</big>float <em>value</em><big>)</big></dt>
+<dd><p>Setter for &#8216;value&#8217;. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1link__bandwidth__t_1ab29172daa2361cb86b0bdc0744f376c3"></span>bandwidth_unit_t <tt class="descname">unit</tt><big>(</big><big>)</big> const</dt>
+<dd><p>Getter for &#8216;unit&#8217;: The link bandwidth bitrate unit. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1link__bandwidth__t_1a966382c98c4d7ffebc48abe350fd5c44"></span>void <tt class="descname">unit_is</tt><big>(</big>bandwidth_unit_t <em>unit</em><big>)</big></dt>
+<dd><p>Setter for &#8216;unit&#8217;. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1link__bandwidth__t_1ab078925809c6fa1900db3e9b7d95fec4"></span>bool <tt class="descname">operator==</tt><big>(</big><a class="reference internal" href="#eossdkclasseos_1_1link__bandwidth__t"><em>link_bandwidth_t</em></a> const &amp; <em>other</em><big>)</big> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1link__bandwidth__t_1a7dec1d5f1f8b4b3e88a7e8736fbf85a7"></span>bool <tt class="descname">operator!=</tt><big>(</big><a class="reference internal" href="#eossdkclasseos_1_1link__bandwidth__t"><em>link_bandwidth_t</em></a> const &amp; <em>other</em><big>)</big> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1link__bandwidth__t_1aa6bcd4c0eda1349db048cc16cd0fb3d2"></span>bool <tt class="descname">operator&lt;</tt><big>(</big><a class="reference internal" href="#eossdkclasseos_1_1link__bandwidth__t"><em>link_bandwidth_t</em></a> const &amp; <em>other</em><big>)</big> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1link__bandwidth__t_1a3f301e80411bf8ba5600000432ac39e0"></span>uint32_t <tt class="descname">hash</tt><big>(</big><big>)</big> const</dt>
+<dd><p>The hash function for type <a class="reference internal" href="#eossdkclasseos_1_1link__bandwidth__t"><em>link_bandwidth_t</em></a>. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1link__bandwidth__t_1a77d57698e3a40dc5f0691c96c9c734f5"></span>std::string <tt class="descname">to_string</tt><big>(</big><big>)</big> const</dt>
+<dd><p>Returns a string representation of the current object&#8217;s values. </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Private Members</p>
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1link__bandwidth__t_1abfe1a4a7f623bb6aaa8b13fb50d9ab5a"></span>float <tt class="descname">value_</tt></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1link__bandwidth__t_1ab2b573579729708b896220821ecd6793"></span>bandwidth_unit_t <tt class="descname">unit_</tt></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Friends</p>
+<dl class="friend">
+<dt>
+<span class="target" id="eossdkclasseos_1_1link__bandwidth__t_1a186ab040333057e20e570c942d79e23c"></span>friend std::ostream &amp; <tt class="descname">operator&lt;&lt;</tt></dt>
+<dd><p>A utility stream operator that adds a string representation of <a class="reference internal" href="#eossdkclasseos_1_1link__bandwidth__t"><em>link_bandwidth_t</em></a> to the ostream. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="class">
+<dt>
+<span class="target" id="eossdkclasseos_1_1route__map__link__bandwidth__t"></span><em>class</em> <tt class="descname">route_map_link_bandwidth_t</tt></dt>
+<dd><em>#include &lt;route_map.h&gt;</em><p>Route map link bandwidth operation attribute information. </p>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1route__map__link__bandwidth__t_1a09c1327d8a91866bc86b92806c588f4d"></span><tt class="descname">route_map_link_bandwidth_t</tt><big>(</big><big>)</big></dt>
+<dd><p>Create route map link bandwidth. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1route__map__link__bandwidth__t_1a53acbacc727c4ab7d36a9342d3661530"></span>route_map_operation_type_t <tt class="descname">operation</tt><big>(</big><big>)</big> const</dt>
+<dd><p>Getter for &#8216;operation&#8217;: Operation type. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1route__map__link__bandwidth__t_1ae61cd1c45adb8e7cb76f10a58cd0d294"></span>bgp_asn_t <tt class="descname">asn</tt><big>(</big><big>)</big> const</dt>
+<dd><p>Getter for &#8216;asn&#8217;: Peer AS number. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1route__map__link__bandwidth__t_1a40a5457a0fd7a0589a8195fda0f75edb"></span><a class="reference internal" href="#eossdkclasseos_1_1link__bandwidth__t"><em>link_bandwidth_t</em></a> <tt class="descname">bandwidth</tt><big>(</big><big>)</big> const</dt>
+<dd><p>Getter for &#8216;bandwidth&#8217;: Link bandwidth value. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1route__map__link__bandwidth__t_1a8719f2863d81685491c94dd849acdf82"></span>void <tt class="descname">route_map_operation_type_set_is</tt><big>(</big><a class="reference internal" href="#eossdkclasseos_1_1link__bandwidth__t"><em>link_bandwidth_t</em></a> <em>bandwidth</em><big>)</big></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1route__map__link__bandwidth__t_1ab39ced573dcfce905f3e2e3b49d71f8b"></span>void <tt class="descname">route_map_operation_type_delete_is</tt><big>(</big><a class="reference internal" href="#eossdkclasseos_1_1link__bandwidth__t"><em>link_bandwidth_t</em></a> <em>bandwidth</em>, bgp_asn_t <em>asn</em><big>)</big></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1route__map__link__bandwidth__t_1a4d6fd9b9a3a364bb33067ac17757b441"></span>uint32_t <tt class="descname">hash</tt><big>(</big><big>)</big> const</dt>
+<dd><p>The hash function for type <a class="reference internal" href="#eossdkclasseos_1_1route__map__link__bandwidth__t"><em>route_map_link_bandwidth_t</em></a>. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1route__map__link__bandwidth__t_1afc4aa25edbfefa97a958bf0c08a9c055"></span>bool <tt class="descname">operator==</tt><big>(</big><a class="reference internal" href="#eossdkclasseos_1_1route__map__link__bandwidth__t"><em>route_map_link_bandwidth_t</em></a> const &amp; <em>other</em><big>)</big> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1route__map__link__bandwidth__t_1ad4b529599f8f87578a0268ac8ffef253"></span>bool <tt class="descname">operator!=</tt><big>(</big><a class="reference internal" href="#eossdkclasseos_1_1route__map__link__bandwidth__t"><em>route_map_link_bandwidth_t</em></a> const &amp; <em>other</em><big>)</big> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1route__map__link__bandwidth__t_1ac81ec0dbce2aa2db107baadeda4f79ee"></span>bool <tt class="descname">operator&lt;</tt><big>(</big><a class="reference internal" href="#eossdkclasseos_1_1route__map__link__bandwidth__t"><em>route_map_link_bandwidth_t</em></a> const &amp; <em>other</em><big>)</big> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1route__map__link__bandwidth__t_1ae63b2c853117ddec3691ea8e2ae4b71c"></span>std::string <tt class="descname">to_string</tt><big>(</big><big>)</big> const</dt>
+<dd><p>Returns a string representation of the current object&#8217;s values. </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Private Members</p>
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1route__map__link__bandwidth__t_1ab006d4fc9beb73de4e667c5d44b8a8b3"></span>route_map_operation_type_t <tt class="descname">operation_</tt></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1route__map__link__bandwidth__t_1a0b9096b601681017bbd12456315d39d6"></span>bgp_asn_t <tt class="descname">asn_</tt></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1route__map__link__bandwidth__t_1a16ca4525e6aa835b1d042ee1507dc9aa"></span><a class="reference internal" href="#eossdkclasseos_1_1link__bandwidth__t"><em>link_bandwidth_t</em></a> <tt class="descname">bandwidth_</tt></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Friends</p>
+<dl class="friend">
+<dt>
+<span class="target" id="eossdkclasseos_1_1route__map__link__bandwidth__t_1ac2bdf904a82e65c842ac3168ae9d2069"></span>friend std::ostream &amp; <tt class="descname">operator&lt;&lt;</tt></dt>
+<dd><p>A utility stream operator that adds a string representation of <a class="reference internal" href="#eossdkclasseos_1_1route__map__link__bandwidth__t"><em>route_map_link_bandwidth_t</em></a> to the ostream. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="class">
+<dt>
+<span class="target" id="eossdkclasseos_1_1route__map__entry__t"></span><em>class</em> <tt class="descname">route_map_entry_t</tt></dt>
+<dd><em>#include &lt;route_map.h&gt;</em><p>Route map entry sequence. </p>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1route__map__entry__t_1a9156ae2e793a74597051470bb7754794"></span><tt class="descname">route_map_entry_t</tt><big>(</big><big>)</big></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1route__map__entry__t_1a4a17e88ff048260e92dcda9ad87cb204"></span><tt class="descname">route_map_entry_t</tt><big>(</big>route_map_sequence_number_t <em>sequence_number</em><big>)</big></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1route__map__entry__t_1aefe1e4e7dcd57fdf5edbe7a3416d3d1b"></span><tt class="descname">route_map_entry_t</tt><big>(</big>route_map_sequence_number_t <em>sequence_number</em>, bool <em>permit</em><big>)</big></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1route__map__entry__t_1abd6d8febaba2833716a78670c015d392"></span>route_map_sequence_number_t <tt class="descname">sequence_number</tt><big>(</big><big>)</big> const</dt>
+<dd><p>Getter for &#8216;sequence_number&#8217;: Map entry sequence number. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1route__map__entry__t_1a06163eebb4d065c848e74b03d3be8210"></span>void <tt class="descname">sequence_number_is</tt><big>(</big>route_map_sequence_number_t <em>sequence_number</em><big>)</big></dt>
+<dd><p>Setter for &#8216;sequence_number&#8217;. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1route__map__entry__t_1a5ee6c3c51ca391a18924dfd6ae880a16"></span>bool <tt class="descname">permit</tt><big>(</big><big>)</big> const</dt>
+<dd><p>Getter for &#8216;permit&#8217;: Permit sequence entry when true, deny otherwise. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1route__map__entry__t_1a74cdf6b0b304905ea24c6de5d4233b20"></span>void <tt class="descname">permit_is</tt><big>(</big>bool <em>permit</em><big>)</big></dt>
+<dd><p>Setter for &#8216;permit&#8217;. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1route__map__entry__t_1a1c0d0605a14d179620ea3eca0afd100d"></span><a class="reference internal" href="#eossdkclasseos_1_1route__map__link__bandwidth__t"><em>route_map_link_bandwidth_t</em></a> <tt class="descname">link_bandwidth</tt><big>(</big><big>)</big> const</dt>
+<dd><p>Getter for &#8216;link_bandwidth&#8217;: BGP extended community link bandwidth attribute. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1route__map__entry__t_1ad392dcda3c6d7639a7a0ea3c6ec331c1"></span>void <tt class="descname">link_bandwidth_is</tt><big>(</big><a class="reference internal" href="#eossdkclasseos_1_1route__map__link__bandwidth__t"><em>route_map_link_bandwidth_t</em></a> const &amp; <em>link_bandwidth</em><big>)</big></dt>
+<dd><p>Setter for &#8216;link_bandwidth&#8217;. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1route__map__entry__t_1abed556cf7f75b080489ad5442d4ba389"></span>void <tt class="descname">link_bandwidth_del</tt><big>(</big><big>)</big></dt>
+<dd><p>Remove the link bandwidth configuration. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1route__map__entry__t_1af962b9f090cb5e6635a4489f47838c10"></span>uint32_t <tt class="descname">hash</tt><big>(</big><big>)</big> const</dt>
+<dd><p>The hash function for type <a class="reference internal" href="#eossdkclasseos_1_1route__map__entry__t"><em>route_map_entry_t</em></a>. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1route__map__entry__t_1a3850ecdff75f4358b8c504906af80549"></span>bool <tt class="descname">operator==</tt><big>(</big><a class="reference internal" href="#eossdkclasseos_1_1route__map__entry__t"><em>route_map_entry_t</em></a> const &amp; <em>other</em><big>)</big> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1route__map__entry__t_1a59c3fcdca2e0fee78079a6038683e401"></span>bool <tt class="descname">operator!=</tt><big>(</big><a class="reference internal" href="#eossdkclasseos_1_1route__map__entry__t"><em>route_map_entry_t</em></a> const &amp; <em>other</em><big>)</big> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1route__map__entry__t_1ad96a8372178cbcb7f5483546f2e963ee"></span>bool <tt class="descname">operator&lt;</tt><big>(</big><a class="reference internal" href="#eossdkclasseos_1_1route__map__entry__t"><em>route_map_entry_t</em></a> const &amp; <em>other</em><big>)</big> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1route__map__entry__t_1a8c07241c96d489913527fd9d8d103b5b"></span>std::string <tt class="descname">to_string</tt><big>(</big><big>)</big> const</dt>
+<dd><p>Returns a string representation of the current object&#8217;s values. </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Private Members</p>
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1route__map__entry__t_1ac6cdd9aa499112c6a3f3c56e9a74a194"></span>route_map_sequence_number_t <tt class="descname">sequence_number_</tt></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1route__map__entry__t_1a52332e3edf3635d16db9d33b538b5eb9"></span>bool <tt class="descname">permit_</tt></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1route__map__entry__t_1a43951ef82e722f04dab530e73a943e66"></span><a class="reference internal" href="#eossdkclasseos_1_1route__map__link__bandwidth__t"><em>route_map_link_bandwidth_t</em></a> <tt class="descname">link_bandwidth_</tt></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Friends</p>
+<dl class="friend">
+<dt>
+<span class="target" id="eossdkclasseos_1_1route__map__entry__t_1afa4de19a0141f54ac4cf3d237a1eb67d"></span>friend std::ostream &amp; <tt class="descname">operator&lt;&lt;</tt></dt>
+<dd><p>A utility stream operator that adds a string representation of <a class="reference internal" href="#eossdkclasseos_1_1route__map__entry__t"><em>route_map_entry_t</em></a> to the ostream. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="class">
+<dt>
+<span class="target" id="eossdkclasseos_1_1route__map__t"></span><em>class</em> <tt class="descname">route_map_t</tt></dt>
+<dd><div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1route__map__t_1a09648af8041553fcd23b6a654868fc5a"></span>route_map_name_t <tt class="descname">name</tt><big>(</big><big>)</big> const</dt>
+<dd><p>Getter for &#8216;name&#8217;: Route map name. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1route__map__t_1af23a74b03137adb005fc0b7108ac8c19"></span>void <tt class="descname">name_is</tt><big>(</big>route_map_name_t const &amp; <em>name</em><big>)</big></dt>
+<dd><p>Setter for &#8216;name&#8217;. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1route__map__t_1a271d4c7153567d03bcbe8845ad0ea705"></span>std::map&lt; route_map_sequence_number_t, <a class="reference internal" href="#eossdkclasseos_1_1route__map__entry__t"><em>route_map_entry_t</em></a> &gt; const &amp; <tt class="descname">map_entry</tt><big>(</big><big>)</big> const</dt>
+<dd><p>Getter for &#8216;map_entry&#8217;: A map of route map entries, keyed by sequence number. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1route__map__t_1a6f4ac4389c933ab222c6b2905528fb4a"></span>void <tt class="descname">map_entry_is</tt><big>(</big>std::map&lt; route_map_sequence_number_t, <a class="reference internal" href="#eossdkclasseos_1_1route__map__entry__t"><em>route_map_entry_t</em></a> &gt; const &amp; <em>map_entry</em><big>)</big></dt>
+<dd><p>Setter for &#8216;map_entry&#8217;. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1route__map__t_1a2dcc3bcc09cccefe5c184948bf79a5f1"></span>void <tt class="descname">map_entry_set</tt><big>(</big>route_map_sequence_number_t const &amp; <em>key</em>, <a class="reference internal" href="#eossdkclasseos_1_1route__map__entry__t"><em>route_map_entry_t</em></a> const &amp; <em>value</em><big>)</big></dt>
+<dd><p>Inserts key/value pair to the map. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1route__map__t_1ab9ec722a5667a06bb6d385982d7af385"></span>void <tt class="descname">map_entry_del</tt><big>(</big>route_map_sequence_number_t const &amp; <em>key</em><big>)</big></dt>
+<dd><p>Deletes the key/value pair from the map. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1route__map__t_1a3155793c21b81cf5131829baef32974d"></span>bool <tt class="descname">operator==</tt><big>(</big><a class="reference internal" href="#eossdkclasseos_1_1route__map__t"><em>route_map_t</em></a> const &amp; <em>other</em><big>)</big> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1route__map__t_1af406543ffc0907c29c93b554030318b5"></span>bool <tt class="descname">operator!=</tt><big>(</big><a class="reference internal" href="#eossdkclasseos_1_1route__map__t"><em>route_map_t</em></a> const &amp; <em>other</em><big>)</big> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1route__map__t_1a837d18de208e9e59a8e30505983e5333"></span>bool <tt class="descname">operator&lt;</tt><big>(</big><a class="reference internal" href="#eossdkclasseos_1_1route__map__t"><em>route_map_t</em></a> const &amp; <em>other</em><big>)</big> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1route__map__t_1ac913b044721957bec465a9d7b143cfcc"></span>uint32_t <tt class="descname">hash</tt><big>(</big><big>)</big> const</dt>
+<dd><p>The hash function for type <a class="reference internal" href="#eossdkclasseos_1_1route__map__t"><em>route_map_t</em></a>. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1route__map__t_1a02a08b738876135dca293f561d2e43ae"></span>std::string <tt class="descname">to_string</tt><big>(</big><big>)</big> const</dt>
+<dd><p>Returns a string representation of the current object&#8217;s values. </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Private Members</p>
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1route__map__t_1a830469d7145191236472722a6120fecd"></span>route_map_name_t <tt class="descname">name_</tt></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1route__map__t_1a7c0975dbfd0ecf7ea86662a8e46a859f"></span>std::map&lt; route_map_sequence_number_t, <a class="reference internal" href="#eossdkclasseos_1_1route__map__entry__t"><em>route_map_entry_t</em></a> &gt; <tt class="descname">map_entry_</tt></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Friends</p>
+<dl class="friend">
+<dt>
+<span class="target" id="eossdkclasseos_1_1route__map__t_1a4a3286d165e927b5dd9defc5dd2c99b8"></span>friend std::ostream &amp; <tt class="descname">operator&lt;&lt;</tt></dt>
+<dd><p>A utility stream operator that adds a string representation of <a class="reference internal" href="#eossdkclasseos_1_1route__map__t"><em>route_map_t</em></a> to the ostream. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#"><strong>route_map</strong></a><ul>
+<li><a class="reference internal" href="#type-definitions-in-route-map">Type definitions in <strong>route_map</strong></a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="policy_map.html"
+                        title="previous chapter"><strong>policy_map</strong></a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="sdk.html"
+                        title="next chapter"><strong>sdk</strong></a></p>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="sdk.html" title="sdk"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="policy_map.html" title="policy_map"
+             >previous</a> |</li>
+        <li><a href="index.html">Arista EOS SDK 2.18.0 reference</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2014, Arista Networks.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>

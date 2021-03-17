@@ -1,0 +1,352 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    
+    <title>bgp &mdash; Arista EOS SDK 2.18.0 reference</title>
+    
+    <link rel="stylesheet" href="_static/eossdk.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/breathe.css" type="text/css" />
+    
+    <script type="text/javascript">
+      var DOCUMENTATION_OPTIONS = {
+        URL_ROOT:    '',
+        VERSION:     '2.18.0',
+        COLLAPSE_INDEX: false,
+        FILE_SUFFIX: '.html',
+        HAS_SOURCE:  true
+      };
+    </script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <link rel="top" title="Arista EOS SDK 2.18.0 reference" href="index.html" />
+    <link rel="next" title="bgp_path" href="bgp_path.html" />
+    <link rel="prev" title="bfd" href="bfd.html" /> 
+  </head>
+  <body>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="bgp_path.html" title="bgp_path"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="bfd.html" title="bfd"
+             accesskey="P">previous</a> |</li>
+        <li><a href="index.html">Arista EOS SDK 2.18.0 reference</a> &raquo;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body">
+            
+  <div class="section" id="bgp">
+<h1><strong>bgp</strong><a class="headerlink" href="#bgp" title="Permalink to this headline">¶</a></h1>
+<p>BGP management module.</p>
+<p>Border Gateway Protocol (BGP) is a standardized exterior gateway routing protocol designed to exchange routing and reachability information among autonomous systems (AS). In EOS, BGP follows RFC4271.</p>
+<p>This module provides APIs to query BGP information including BGP peer state.</p>
+<p>An example of the API usage is in examples/BgpAgent.cpp </p>
+<dl class="namespace">
+<dt>
+<span class="target" id="eossdknamespaceeos"></span><em>namespace</em> <tt class="descname">eos</tt></dt>
+<dd><dl class="class">
+<dt>
+<span class="target" id="eossdkclasseos_1_1bgp__peer__handler"></span><em>class</em> <tt class="descname">bgp_peer_handler</tt></dt>
+<dd><em>#include &lt;bgp.h&gt;</em><p>The BGP peer handler.</p>
+<p>This class provides handler APIs to react to a BGP peer&#8217;s session state change. </p>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1bgp__peer__handler_1aac2e69cf5a8759a7d822c5821aa07379"></span><tt class="descname">bgp_peer_handler</tt><big>(</big><a class="reference internal" href="#eossdkclasseos_1_1bgp__mgr"><em>bgp_mgr</em></a> * <em>mgr</em><big>)</big></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1bgp__peer__handler_1a6bca4b5b4f679dac85ea17c39c153808"></span><a class="reference internal" href="#eossdkclasseos_1_1bgp__mgr"><em>bgp_mgr</em></a> * <tt class="descname">get_bgp_mgr</tt><big>(</big><big>)</big> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1bgp__peer__handler_1ac1ab019d3baf16871af290ad801857b0"></span>void <tt class="descname">watch_all_peers</tt><big>(</big>bool<big>)</big></dt>
+<dd><p>Register to receive notifications when any peer changes state. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1bgp__peer__handler_1a5ebc1d23225f7c4e6023ed6581803d50"></span>void <tt class="descname">watch_peer</tt><big>(</big><a class="reference internal" href="#eossdkclasseos_1_1bgp__peer__key__t"><em>bgp_peer_key_t</em></a> const &amp; <em>peer_key</em>, bool<big>)</big></dt>
+<dd><p>Register to receive notifications when the specified peer changes state. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1bgp__peer__handler_1ab741131ff7ef48c5c46c43f3df5aeb89"></span>virtual void <tt class="descname">on_peer_state</tt><big>(</big><a class="reference internal" href="#eossdkclasseos_1_1bgp__peer__key__t"><em>bgp_peer_key_t</em></a> const &amp; <em>peer_key</em>, bgp_peer_state_t <em>peer_state</em><big>)</big></dt>
+<dd><p>Called when BGP peer state change. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1bgp__peer__handler_1ad1c5315079968b8c6217679b3118509f"></span>virtual void <tt class="descname">on_peer_set</tt><big>(</big><a class="reference internal" href="#eossdkclasseos_1_1bgp__peer__key__t"><em>bgp_peer_key_t</em></a> const &amp; <em>peer_key</em><big>)</big></dt>
+<dd><p>Called when a BGP peer is created. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1bgp__peer__handler_1a0633d3bdd14a92e490b96d931a789dd1"></span>virtual void <tt class="descname">on_peer_del</tt><big>(</big><a class="reference internal" href="#eossdkclasseos_1_1bgp__peer__key__t"><em>bgp_peer_key_t</em></a> const &amp; <em>peer_key</em><big>)</big></dt>
+<dd><p>Called when a BGP peer is deleted. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="class">
+<dt>
+<span class="target" id="eossdkclasseos_1_1bgp__mgr"></span><em>class</em> <tt class="descname">bgp_mgr</tt></dt>
+<dd><em>#include &lt;bgp.h&gt;</em><p>A manager of BGP configurations. </p>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1bgp__mgr_1a3e43aa757cae4826f4f23e9125fb9eab"></span>virtual <tt class="descname">~bgp_mgr</tt><big>(</big><big>)</big></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1bgp__mgr_1a43c332e1cabb7baaafc114459b44a069"></span>virtual bool <tt class="descname">exists</tt><big>(</big><a class="reference internal" href="#eossdkclasseos_1_1bgp__peer__key__t"><em>bgp_peer_key_t</em></a> const &amp; <em>peer_key</em><big>)</big> const = 0</dt>
+<dd><p>Test for existence of a BGP peer. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1bgp__mgr_1a828ebdead62d53b0a6732709a2c25044"></span>virtual bgp_peer_state_t <tt class="descname">peer_state</tt><big>(</big><a class="reference internal" href="#eossdkclasseos_1_1bgp__peer__key__t"><em>bgp_peer_key_t</em></a> const &amp; <em>peer_key</em><big>)</big> const = 0</dt>
+<dd><p>Returns the state of a peer session.</p>
+<p>If the given peer does not have a valid status or it didn&#8217;t match any peers in the system, this would returns PEER_UNKNOWN; </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Protected Functions</p>
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1bgp__mgr_1ac32185ce0639b745492f5dccf7dac5fc"></span><tt class="descname">bgp_mgr</tt><big>(</big><big>)</big></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Private Members</p>
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1bgp__mgr_1abd9a16e80fb07dc0c964ce6abc6ffafb"></span><tt class="descname">bgp_mgr</tt></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Friends</p>
+<dl class="friend">
+<dt>
+<span class="target" id="eossdkclasseos_1_1bgp__mgr_1a9146ce42ada985891f3106d4b3f7865e"></span>friend class <tt class="descname">bgp_peer_handler</tt></dt>
+<dd></dd></dl>
+
+</div>
+</dd></dl>
+
+</dd></dl>
+
+<div class="section" id="type-definitions-in-bgp">
+<h2>Type definitions in <strong>bgp</strong><a class="headerlink" href="#type-definitions-in-bgp" title="Permalink to this headline">¶</a></h2>
+<dl class="namespace">
+<dt>
+<span class="target" id="eossdknamespaceeos"></span><em>namespace</em> <tt class="descname">eos</tt></dt>
+<dd><div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Typedefs</p>
+<dl class="typedef">
+<dt>
+<span class="target" id="eossdknamespaceeos_1ad3b92c71e28d7bcae57f0914b56133b2"></span>typedef uint32_t <tt class="descname">bgp_asn_t</tt></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Enums</p>
+<dl class="enum">
+<dt>
+<span class="target" id="eossdknamespaceeos_1a5bc6746c994026e493cc5830ce0a60d8"></span><strong>bgp_peer_state_t enum</strong></dt>
+<dd><p>The operational state of a BGP peer session. </p>
+<p><em>Values:</em></p>
+<ul class="breatheenumvalues">
+<li><tt class="first docutils literal"><span class="pre">PEER_UNKNOWN</span></tt> - </li>
+<li><tt class="first docutils literal"><span class="pre">PEER_IDLE</span></tt> - </li>
+<li><tt class="first docutils literal"><span class="pre">PEER_CONNECT</span></tt> - </li>
+<li><tt class="first docutils literal"><span class="pre">PEER_ACTIVE</span></tt> - </li>
+<li><tt class="first docutils literal"><span class="pre">PEER_OPENSENT</span></tt> - </li>
+<li><tt class="first docutils literal"><span class="pre">PEER_OPENCONFIRM</span></tt> - </li>
+<li><tt class="first docutils literal"><span class="pre">PEER_ESTABLISHED</span></tt> - </li>
+</ul>
+</dd></dl>
+
+</div>
+<dl class="class">
+<dt>
+<span class="target" id="eossdkclasseos_1_1bgp__peer__key__t"></span><em>class</em> <tt class="descname">bgp_peer_key_t</tt></dt>
+<dd><em>#include &lt;bgp.h&gt;</em><p>The BGP peer key which consists of the peer address and the VRF itresides in. </p>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1bgp__peer__key__t_1af4259e766f8898a6f603522c86b71b07"></span><tt class="descname">bgp_peer_key_t</tt><big>(</big><big>)</big></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1bgp__peer__key__t_1a74b7cde4011f93755e670d988a1d8e0e"></span><tt class="descname">bgp_peer_key_t</tt><big>(</big>std::string const &amp; <em>vrf_name</em>, <a class="reference internal" href="ip.html#eossdkclasseos_1_1ip__addr__t"><em>ip_addr_t</em></a> const &amp; <em>peer_addr</em><big>)</big></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1bgp__peer__key__t_1abf16d71c3d5204a8ab62b022d0a16a69"></span>std::string <tt class="descname">vrf_name</tt><big>(</big><big>)</big> const</dt>
+<dd><p>Getter for &#8216;vrf_name&#8217;: VRF name. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1bgp__peer__key__t_1a19f7779038d9e27cbefb443531daa4bc"></span>void <tt class="descname">vrf_name_is</tt><big>(</big>std::string const &amp; <em>vrf_name</em><big>)</big></dt>
+<dd><p>Setter for &#8216;vrf_name&#8217;. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1bgp__peer__key__t_1aa49306b3330412ec82a78ecf442951b2"></span><a class="reference internal" href="ip.html#eossdkclasseos_1_1ip__addr__t"><em>ip_addr_t</em></a> <tt class="descname">peer_addr</tt><big>(</big><big>)</big> const</dt>
+<dd><p>Getter for &#8216;peer_addr&#8217;: BGP peer address. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1bgp__peer__key__t_1ada4e136383168d38017c81d54083d3db"></span>void <tt class="descname">peer_addr_is</tt><big>(</big><a class="reference internal" href="ip.html#eossdkclasseos_1_1ip__addr__t"><em>ip_addr_t</em></a> const &amp; <em>peer_addr</em><big>)</big></dt>
+<dd><p>Setter for &#8216;peer_addr&#8217;. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1bgp__peer__key__t_1a68aba893a03d22aef3a4e1fb55657be4"></span>bool <tt class="descname">operator==</tt><big>(</big><a class="reference internal" href="#eossdkclasseos_1_1bgp__peer__key__t"><em>bgp_peer_key_t</em></a> const &amp; <em>other</em><big>)</big> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1bgp__peer__key__t_1ac848d8080230664ca050681dbce368ce"></span>bool <tt class="descname">operator!=</tt><big>(</big><a class="reference internal" href="#eossdkclasseos_1_1bgp__peer__key__t"><em>bgp_peer_key_t</em></a> const &amp; <em>other</em><big>)</big> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1bgp__peer__key__t_1a10fc129f0bd2d25eb71c3ce640681f98"></span>bool <tt class="descname">operator&lt;</tt><big>(</big><a class="reference internal" href="#eossdkclasseos_1_1bgp__peer__key__t"><em>bgp_peer_key_t</em></a> const &amp; <em>other</em><big>)</big> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1bgp__peer__key__t_1a1a25fccb6fcea674b8632d200121c9e6"></span>uint32_t <tt class="descname">hash</tt><big>(</big><big>)</big> const</dt>
+<dd><p>The hash function for type <a class="reference internal" href="#eossdkclasseos_1_1bgp__peer__key__t"><em>bgp_peer_key_t</em></a>. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1bgp__peer__key__t_1ae3f344d5fe5f9eb3451c846d55ed9717"></span>std::string <tt class="descname">to_string</tt><big>(</big><big>)</big> const</dt>
+<dd><p>Returns a string representation of the current object&#8217;s values. </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Private Members</p>
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1bgp__peer__key__t_1a3326dcd9d5382cbe1406fef9c1cd24e3"></span>std::string <tt class="descname">vrf_name_</tt></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1bgp__peer__key__t_1aa15eaa99e452731ef5869081e6832222"></span><a class="reference internal" href="ip.html#eossdkclasseos_1_1ip__addr__t"><em>ip_addr_t</em></a> <tt class="descname">peer_addr_</tt></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef container">
+<p class="breathe-sectiondef-title rubric">Friends</p>
+<dl class="friend">
+<dt>
+<span class="target" id="eossdkclasseos_1_1bgp__peer__key__t_1a70699951c0bf2d6f0c0233e7ecb79575"></span>friend std::ostream &amp; <tt class="descname">operator&lt;&lt;</tt></dt>
+<dd><p>A utility stream operator that adds a string representation of <a class="reference internal" href="#eossdkclasseos_1_1bgp__peer__key__t"><em>bgp_peer_key_t</em></a> to the ostream. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table Of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#"><strong>bgp</strong></a><ul>
+<li><a class="reference internal" href="#type-definitions-in-bgp">Type definitions in <strong>bgp</strong></a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="bfd.html"
+                        title="previous chapter"><strong>bfd</strong></a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="bgp_path.html"
+                        title="next chapter"><strong>bgp_path</strong></a></p>
+<div id="searchbox" style="display: none">
+  <h3>Quick search</h3>
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    <p class="searchtip" style="font-size: 90%">
+    Enter search terms or a module, class or function name.
+    </p>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="bgp_path.html" title="bgp_path"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="bfd.html" title="bfd"
+             >previous</a> |</li>
+        <li><a href="index.html">Arista EOS SDK 2.18.0 reference</a> &raquo;</li> 
+      </ul>
+    </div>
+    <div class="footer">
+        &copy; Copyright 2014, Arista Networks.
+      Created using <a href="http://sphinx.pocoo.org/">Sphinx</a> 1.1.3.
+    </div>
+  </body>
+</html>
