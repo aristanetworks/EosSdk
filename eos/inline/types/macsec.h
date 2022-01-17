@@ -1,4 +1,4 @@
-// Copyright (c) 2020 Arista Networks, Inc.  All rights reserved.
+// Copyright (c) 2021 Arista Networks, Inc.  All rights reserved.
 // Arista Networks, Inc. Confidential and Proprietary.
 
 #ifndef EOS_INLINE_TYPES_MACSEC_H
@@ -56,6 +56,22 @@ operator<<(std::ostream& os, const macsec_intf_traffic_status_t & enum_val) {
       os << "MACSEC_TRAFFIC_UNPROTECTED";
    } else if (enum_val==MACSEC_TRAFFIC_BLOCKED) {
       os << "MACSEC_TRAFFIC_BLOCKED";
+   } else {
+      os << "Unknown value";
+   }
+   return os;
+}
+
+
+
+inline std::ostream&
+operator<<(std::ostream& os, const macsec_bypass_t & enum_val) {
+   if (enum_val==BYPASS_NULL) {
+      os << "BYPASS_NULL";
+   } else if (enum_val==BYPASS_AUTHORIZED) {
+      os << "BYPASS_AUTHORIZED";
+   } else if (enum_val==BYPASS_UNAUTHORIZED) {
+      os << "BYPASS_UNAUTHORIZED";
    } else {
       os << "Unknown value";
    }
@@ -142,13 +158,16 @@ macsec_key_t::operator<(macsec_key_t const & other) const {
 
 inline uint32_t
 macsec_key_t::hash() const {
-   uint32_t ret = 0;
-   ret ^= std::hash<std::string>()(cak_);
-   ret ^= std::hash<std::string>()(ckn_);
-   ret = hash_mix::mix((uint8_t *)&encoded_,
-              sizeof(bool), ret);
-   ret = hash_mix::final_mix(ret);
-   return ret;
+   hash_mix h;
+   mix_me(h);
+   return h.result();
+}
+
+inline void
+macsec_key_t::mix_me(hash_mix & h) const {
+   h.mix(cak_); // std::string
+   h.mix(ckn_); // std::string
+   h.mix(encoded_); // bool
 }
 
 inline std::string
@@ -173,15 +192,16 @@ operator<<(std::ostream& os, const macsec_key_t& obj) {
 inline macsec_profile_t::macsec_profile_t() :
       name_(), primary_key_(), fallback_key_(), key_server_priority_(0),
       rekey_period_(0), cipher_(CIPHER_NULL), dot1x_(false), include_sci_(false),
-      bypass_lldp_(false), traffic_policy_(TRAFFIC_POLICY_NULL),
-      allow_unprotected_(false), replay_protection_(true),
-      replay_protection_window_(0), key_retirement_immediate_(false), intfs_() {
+      bypass_lldp_(false), lldp_bypass_level_(BYPASS_NULL),
+      traffic_policy_(TRAFFIC_POLICY_NULL), allow_unprotected_(false),
+      replay_protection_(true), replay_protection_window_(0),
+      key_retirement_immediate_(false), intfs_() {
 }
 
 inline macsec_profile_t::macsec_profile_t(macsec_profile_name_t name) :
       name_(name), primary_key_(), fallback_key_(), key_server_priority_(16),
       rekey_period_(0), cipher_(GCM_AES_XPN_128), dot1x_(false),
-      include_sci_(false), bypass_lldp_(false),
+      include_sci_(false), bypass_lldp_(false), lldp_bypass_level_(BYPASS_NULL),
       traffic_policy_(TRAFFIC_POLICY_ACTIVE_SAK), allow_unprotected_(false),
       replay_protection_(true), replay_protection_window_(0),
       key_retirement_immediate_(false), intfs_() {
@@ -269,12 +289,22 @@ macsec_profile_t::include_sci_is(bool include_sci) {
 
 inline bool
 macsec_profile_t::bypass_lldp() const {
-   return bypass_lldp_;
+                return !(lldp_bypass_level() == BYPASS_NULL);
 }
 
 inline void
 macsec_profile_t::bypass_lldp_is(bool bypass_lldp) {
-   bypass_lldp_ = bypass_lldp;
+                lldp_bypass_level_is(bypass_lldp ? BYPASS_AUTHORIZED : BYPASS_NULL);
+}
+
+inline macsec_bypass_t
+macsec_profile_t::lldp_bypass_level() const {
+   return lldp_bypass_level_;
+}
+
+inline void
+macsec_profile_t::lldp_bypass_level_is(macsec_bypass_t lldp_bypass_level) {
+   lldp_bypass_level_ = lldp_bypass_level;
 }
 
 inline macsec_profile_traffic_policy_t
@@ -345,6 +375,7 @@ macsec_profile_t::operator==(macsec_profile_t const & other) const {
           dot1x_ == other.dot1x_ &&
           include_sci_ == other.include_sci_ &&
           bypass_lldp_ == other.bypass_lldp_ &&
+          lldp_bypass_level_ == other.lldp_bypass_level_ &&
           traffic_policy_ == other.traffic_policy_ &&
           allow_unprotected_ == other.allow_unprotected_ &&
           replay_protection_ == other.replay_protection_ &&
@@ -378,6 +409,8 @@ macsec_profile_t::operator<(macsec_profile_t const & other) const {
       return include_sci_ < other.include_sci_;
    } else if(bypass_lldp_ != other.bypass_lldp_) {
       return bypass_lldp_ < other.bypass_lldp_;
+   } else if(lldp_bypass_level_ != other.lldp_bypass_level_) {
+      return lldp_bypass_level_ < other.lldp_bypass_level_;
    } else if(traffic_policy_ != other.traffic_policy_) {
       return traffic_policy_ < other.traffic_policy_;
    } else if(allow_unprotected_ != other.allow_unprotected_) {
@@ -396,41 +429,31 @@ macsec_profile_t::operator<(macsec_profile_t const & other) const {
 
 inline uint32_t
 macsec_profile_t::hash() const {
-   uint32_t ret = 0;
-   ret = hash_mix::mix((uint8_t *)&name_,
-              sizeof(macsec_profile_name_t), ret);
-   ret = hash_mix::mix((uint8_t *)&primary_key_,
-              sizeof(macsec_key_t), ret);
-   ret = hash_mix::mix((uint8_t *)&fallback_key_,
-              sizeof(macsec_key_t), ret);
-   ret = hash_mix::mix((uint8_t *)&key_server_priority_,
-              sizeof(uint8_t), ret);
-   ret = hash_mix::mix((uint8_t *)&rekey_period_,
-              sizeof(uint32_t), ret);
-   ret = hash_mix::mix((uint8_t *)&cipher_,
-              sizeof(macsec_cipher_suite_t), ret);
-   ret = hash_mix::mix((uint8_t *)&dot1x_,
-              sizeof(bool), ret);
-   ret = hash_mix::mix((uint8_t *)&include_sci_,
-              sizeof(bool), ret);
-   ret = hash_mix::mix((uint8_t *)&bypass_lldp_,
-              sizeof(bool), ret);
-   ret = hash_mix::mix((uint8_t *)&traffic_policy_,
-              sizeof(macsec_profile_traffic_policy_t), ret);
-   ret = hash_mix::mix((uint8_t *)&allow_unprotected_,
-              sizeof(bool), ret);
-   ret = hash_mix::mix((uint8_t *)&replay_protection_,
-              sizeof(bool), ret);
-   ret = hash_mix::mix((uint8_t *)&replay_protection_window_,
-              sizeof(uint32_t), ret);
-   ret = hash_mix::mix((uint8_t *)&key_retirement_immediate_,
-              sizeof(bool), ret);
+   hash_mix h;
+   mix_me(h);
+   return h.result();
+}
+
+inline void
+macsec_profile_t::mix_me(hash_mix & h) const {
+   h.mix(name_); // macsec_profile_name_t
+   h.mix(primary_key_); // macsec_key_t
+   h.mix(fallback_key_); // macsec_key_t
+   h.mix(key_server_priority_); // uint8_t
+   h.mix(rekey_period_); // uint32_t
+   h.mix(cipher_); // macsec_cipher_suite_t
+   h.mix(dot1x_); // bool
+   h.mix(include_sci_); // bool
+   h.mix(bypass_lldp_); // bool
+   h.mix(lldp_bypass_level_); // macsec_bypass_t
+   h.mix(traffic_policy_); // macsec_profile_traffic_policy_t
+   h.mix(allow_unprotected_); // bool
+   h.mix(replay_protection_); // bool
+   h.mix(replay_protection_window_); // uint32_t
+   h.mix(key_retirement_immediate_); // bool
    for (auto it=intfs_.cbegin(); it!=intfs_.cend(); ++it) {
-      ret = hash_mix::mix((uint8_t *)&(*it),
-            sizeof(intf_id_t), ret);
+      h.mix(*it); // intf_id_t
    }
-   ret = hash_mix::final_mix(ret);
-   return ret;
 }
 
 inline std::string
@@ -446,6 +469,7 @@ macsec_profile_t::to_string() const {
    ss << ", dot1x=" << dot1x_;
    ss << ", include_sci=" << include_sci_;
    ss << ", bypass_lldp=" << bypass_lldp_;
+   ss << ", lldp_bypass_level=" << lldp_bypass_level_;
    ss << ", traffic_policy=" << traffic_policy_;
    ss << ", allow_unprotected=" << allow_unprotected_;
    ss << ", replay_protection=" << replay_protection_;
@@ -525,15 +549,16 @@ macsec_intf_status_t::operator<(macsec_intf_status_t const & other) const {
 
 inline uint32_t
 macsec_intf_status_t::hash() const {
-   uint32_t ret = 0;
-   ret = hash_mix::mix((uint8_t *)&status_,
-              sizeof(macsec_intf_key_status_t), ret);
-   ret = hash_mix::mix((uint8_t *)&key_status_,
-              sizeof(macsec_intf_key_status_t), ret);
-   ret = hash_mix::mix((uint8_t *)&traffic_status_,
-              sizeof(macsec_intf_traffic_status_t), ret);
-   ret = hash_mix::final_mix(ret);
-   return ret;
+   hash_mix h;
+   mix_me(h);
+   return h.result();
+}
+
+inline void
+macsec_intf_status_t::mix_me(hash_mix & h) const {
+   h.mix(status_); // macsec_intf_key_status_t
+   h.mix(key_status_); // macsec_intf_key_status_t
+   h.mix(traffic_status_); // macsec_intf_traffic_status_t
 }
 
 inline std::string
@@ -628,19 +653,18 @@ macsec_intf_counters_t::operator<(macsec_intf_counters_t const & other) const {
 
 inline uint32_t
 macsec_intf_counters_t::hash() const {
-   uint32_t ret = 0;
-   ret = hash_mix::mix((uint8_t *)&out_pkts_encrypted_,
-              sizeof(uint64_t), ret);
-   ret = hash_mix::mix((uint8_t *)&out_octets_encrypted_,
-              sizeof(uint64_t), ret);
-   ret = hash_mix::mix((uint8_t *)&in_pkts_decrypted_,
-              sizeof(uint64_t), ret);
-   ret = hash_mix::mix((uint8_t *)&in_octets_decrypted_,
-              sizeof(uint64_t), ret);
-   ret = hash_mix::mix((uint8_t *)&in_pkts_not_valid_,
-              sizeof(uint64_t), ret);
-   ret = hash_mix::final_mix(ret);
-   return ret;
+   hash_mix h;
+   mix_me(h);
+   return h.result();
+}
+
+inline void
+macsec_intf_counters_t::mix_me(hash_mix & h) const {
+   h.mix(out_pkts_encrypted_); // uint64_t
+   h.mix(out_octets_encrypted_); // uint64_t
+   h.mix(in_pkts_decrypted_); // uint64_t
+   h.mix(in_octets_decrypted_); // uint64_t
+   h.mix(in_pkts_not_valid_); // uint64_t
 }
 
 inline std::string

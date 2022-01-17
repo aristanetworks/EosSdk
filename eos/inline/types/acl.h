@@ -160,13 +160,15 @@ acl_ttl_spec_t::operator<(acl_ttl_spec_t const & other) const {
 
 inline uint32_t
 acl_ttl_spec_t::hash() const {
-   uint32_t ret = 0;
-   ret = hash_mix::mix((uint8_t *)&oper_,
-              sizeof(acl_range_operator_t), ret);
-   ret = hash_mix::mix((uint8_t *)&ttl_,
-              sizeof(uint8_t), ret);
-   ret = hash_mix::final_mix(ret);
-   return ret;
+   hash_mix h;
+   mix_me(h);
+   return h.result();
+}
+
+inline void
+acl_ttl_spec_t::mix_me(hash_mix & h) const {
+   h.mix(oper_); // acl_range_operator_t
+   h.mix(ttl_); // uint8_t
 }
 
 inline std::string
@@ -254,15 +256,17 @@ acl_port_spec_t::operator<(acl_port_spec_t const & other) const {
 
 inline uint32_t
 acl_port_spec_t::hash() const {
-   uint32_t ret = 0;
-   ret = hash_mix::mix((uint8_t *)&oper_,
-              sizeof(acl_range_operator_t), ret);
+   hash_mix h;
+   mix_me(h);
+   return h.result();
+}
+
+inline void
+acl_port_spec_t::mix_me(hash_mix & h) const {
+   h.mix(oper_); // acl_range_operator_t
    for (auto it=ports_.cbegin(); it!=ports_.cend(); ++it) {
-      ret = hash_mix::mix((uint8_t *)&(*it),
-            sizeof(uint16_t), ret);
+      h.mix(*it); // uint16_t
    }
-   ret = hash_mix::final_mix(ret);
-   return ret;
 }
 
 inline std::string
@@ -382,12 +386,15 @@ acl_key_t::operator!=(acl_key_t const & other) const {
 
 inline uint32_t
 acl_key_t::hash() const {
-   uint32_t ret = 0;
-   ret ^= std::hash<std::string>()(acl_name_);
-   ret = hash_mix::mix((uint8_t *)&acl_type_,
-              sizeof(acl_type_t), ret);
-   ret = hash_mix::final_mix(ret);
-   return ret;
+   hash_mix h;
+   mix_me(h);
+   return h.result();
+}
+
+inline void
+acl_key_t::mix_me(hash_mix & h) const {
+   h.mix(acl_name_); // std::string
+   h.mix(acl_type_); // acl_type_t
 }
 
 inline std::string
@@ -444,15 +451,16 @@ acl_rule_base_t::tracked_is(bool tracked) {
 
 inline uint32_t
 acl_rule_base_t::hash() const {
-   uint32_t ret = 0;
-   ret = hash_mix::mix((uint8_t *)&action_,
-              sizeof(acl_action_t), ret);
-   ret = hash_mix::mix((uint8_t *)&log_,
-              sizeof(bool), ret);
-   ret = hash_mix::mix((uint8_t *)&tracked_,
-              sizeof(bool), ret);
-   ret = hash_mix::final_mix(ret);
-   return ret;
+   hash_mix h;
+   mix_me(h);
+   return h.result();
+}
+
+inline void
+acl_rule_base_t::mix_me(hash_mix & h) const {
+   h.mix(action_); // acl_action_t
+   h.mix(log_); // bool
+   h.mix(tracked_); // bool
 }
 
 inline std::string
@@ -747,46 +755,32 @@ acl_rule_ip_t::operator<(acl_rule_ip_t const & other) const {
 
 inline uint32_t
 acl_rule_ip_t::hash() const {
-   uint32_t ret = 0;
-   ret = hash_mix::mix((uint8_t *)&vlan_,
-              sizeof(vlan_id_t), ret);
-   ret = hash_mix::mix((uint8_t *)&vlan_mask_,
-              sizeof(vlan_id_t), ret);
-   ret = hash_mix::mix((uint8_t *)&inner_vlan_,
-              sizeof(vlan_id_t), ret);
-   ret = hash_mix::mix((uint8_t *)&inner_vlan_mask_,
-              sizeof(vlan_id_t), ret);
-   ret = hash_mix::mix((uint8_t *)&ip_protocol_,
-              sizeof(uint8_t), ret);
-   ret = hash_mix::mix((uint8_t *)&ttl_,
-              sizeof(acl_ttl_spec_t), ret);
-   ret = hash_mix::mix((uint8_t *)&source_addr_,
-              sizeof(ip_addr_mask_t), ret);
-   ret = hash_mix::mix((uint8_t *)&destination_addr_,
-              sizeof(ip_addr_mask_t), ret);
-   ret = hash_mix::mix((uint8_t *)&source_port_,
-              sizeof(acl_port_spec_t), ret);
-   ret = hash_mix::mix((uint8_t *)&destination_port_,
-              sizeof(acl_port_spec_t), ret);
-   ret ^= std::hash<std::string>()(nexthop_group_);
-   ret = hash_mix::mix((uint8_t *)&tcp_flags_,
-              sizeof(uint16_t), ret);
-   ret = hash_mix::mix((uint8_t *)&established_,
-              sizeof(bool), ret);
-   ret = hash_mix::mix((uint8_t *)&icmp_type_,
-              sizeof(uint16_t), ret);
-   ret = hash_mix::mix((uint8_t *)&icmp_code_,
-              sizeof(uint16_t), ret);
-   ret = hash_mix::mix((uint8_t *)&priority_value_,
-              sizeof(uint8_t), ret);
-   ret = hash_mix::mix((uint8_t *)&priority_mask_,
-              sizeof(uint8_t), ret);
-   ret = hash_mix::mix((uint8_t *)&match_fragments_,
-              sizeof(bool), ret);
-   ret = hash_mix::mix((uint8_t *)&match_ip_priority_,
-              sizeof(bool), ret);
-   ret = hash_mix::final_mix(ret);
-   return ret;
+   hash_mix h;
+   mix_me(h);
+   return h.result();
+}
+
+inline void
+acl_rule_ip_t::mix_me(hash_mix & h) const {
+   h.mix(vlan_); // vlan_id_t
+   h.mix(vlan_mask_); // vlan_id_t
+   h.mix(inner_vlan_); // vlan_id_t
+   h.mix(inner_vlan_mask_); // vlan_id_t
+   h.mix(ip_protocol_); // uint8_t
+   h.mix(ttl_); // acl_ttl_spec_t
+   h.mix(source_addr_); // ip_addr_mask_t
+   h.mix(destination_addr_); // ip_addr_mask_t
+   h.mix(source_port_); // acl_port_spec_t
+   h.mix(destination_port_); // acl_port_spec_t
+   h.mix(nexthop_group_); // std::string
+   h.mix(tcp_flags_); // uint16_t
+   h.mix(established_); // bool
+   h.mix(icmp_type_); // uint16_t
+   h.mix(icmp_code_); // uint16_t
+   h.mix(priority_value_); // uint8_t
+   h.mix(priority_mask_); // uint8_t
+   h.mix(match_fragments_); // bool
+   h.mix(match_ip_priority_); // bool
 }
 
 inline std::string
@@ -940,27 +934,22 @@ acl_rule_eth_t::operator!=(acl_rule_eth_t const & other) const {
 
 inline uint32_t
 acl_rule_eth_t::hash() const {
-   uint32_t ret = 0;
-   ret = hash_mix::mix((uint8_t *)&vlan_,
-              sizeof(vlan_id_t), ret);
-   ret = hash_mix::mix((uint8_t *)&vlan_mask_,
-              sizeof(vlan_id_t), ret);
-   ret = hash_mix::mix((uint8_t *)&inner_vlan_,
-              sizeof(vlan_id_t), ret);
-   ret = hash_mix::mix((uint8_t *)&inner_vlan_mask_,
-              sizeof(vlan_id_t), ret);
-   ret = hash_mix::mix((uint8_t *)&source_addr_,
-              sizeof(eth_addr_t), ret);
-   ret = hash_mix::mix((uint8_t *)&destination_addr_,
-              sizeof(eth_addr_t), ret);
-   ret = hash_mix::mix((uint8_t *)&source_mask_,
-              sizeof(eth_addr_t), ret);
-   ret = hash_mix::mix((uint8_t *)&destination_mask_,
-              sizeof(eth_addr_t), ret);
-   ret = hash_mix::mix((uint8_t *)&eth_protocol_,
-              sizeof(uint32_t), ret);
-   ret = hash_mix::final_mix(ret);
-   return ret;
+   hash_mix h;
+   mix_me(h);
+   return h.result();
+}
+
+inline void
+acl_rule_eth_t::mix_me(hash_mix & h) const {
+   h.mix(vlan_); // vlan_id_t
+   h.mix(vlan_mask_); // vlan_id_t
+   h.mix(inner_vlan_); // vlan_id_t
+   h.mix(inner_vlan_mask_); // vlan_id_t
+   h.mix(source_addr_); // eth_addr_t
+   h.mix(destination_addr_); // eth_addr_t
+   h.mix(source_mask_); // eth_addr_t
+   h.mix(destination_mask_); // eth_addr_t
+   h.mix(eth_protocol_); // uint32_t
 }
 
 inline std::string

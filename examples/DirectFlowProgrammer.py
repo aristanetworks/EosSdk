@@ -126,7 +126,7 @@ class DirectFlowProgrammer(eossdk.AgentHandler,
       for line in buf.split("\n"):
          if not line:
             continue
-         m = re.search("(\S+) (add|delete) (\d+.\d+.\d+.\d+) +(\S+)", line)
+         m = re.search(r"(\S+) (add|delete) (\d+.\d+.\d+.\d+) +(\S+)", line)
          if not m:
             print "Could not match line:", line
             continue

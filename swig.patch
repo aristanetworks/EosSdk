@@ -47,20 +47,6 @@
 	return *v_def;
        }
      }
-@@ -82558,11 +82567,13 @@
-   try {
-     {
-       try {
-+        SWIG_PYTHON_THREAD_BEGIN_ALLOW;
-         if (upcall) {
-           (arg1)->eos::sdk::main_loop(arg2,arg3);
-         } else {
-           (arg1)->main_loop(arg2,arg3);
-         }
-+        SWIG_PYTHON_THREAD_END_ALLOW;
-       } catch (error const & e) {
-         throw_py_error(e);
-         SWIG_fail;
 @@ -116430,7 +116441,7 @@
        size_t size = strlen(name)+1;
        gv->name = (char *)malloc(size);

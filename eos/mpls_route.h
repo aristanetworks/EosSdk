@@ -126,7 +126,7 @@ class EOS_SDK_PUBLIC mpls_route_via_status_iter_t :
     friend class mpls_route_via_status_iter_impl;
     explicit mpls_route_via_status_iter_t(
           mpls_route_via_status_iter_impl * const) EOS_SDK_PRIVATE;
- };
+};
 
 /// The IP static route manager
 class EOS_SDK_PUBLIC mpls_route_mgr : public base_mgr<mpls_route_handler, 

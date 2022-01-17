@@ -14,9 +14,18 @@
 #include "eos/agent.h"
 #include "eos/fd.h"
 #include "eos/timer.h"
+#include "SdkImpl.h"
+#include "eos/types/intf.h"
 
 namespace eos {
 
+void eth_addr_t_to_bytes(char const* str, uint8_t* bytes);
+
+uint64_t intf_id_t_ctor(char const * name);
+bool intf_id_t_is_null0(uint64_t intfId_) ;
+bool intf_id_t_is_subintf(uint64_t intfId_) ;
+intf_type_t intf_id_t_intf_type(uint64_t intfId_) ;
+std::string intf_id_t_to_string(uint64_t intfId_) ;
 
 #define DEFINE_STUB_MGR_CTOR(stubbed_mgr)           \
    stubbed_mgr * new_##stubbed_mgr() {              \
@@ -32,7 +41,7 @@ namespace eos {
 #define INIT_STUB_MGR(stubbed_mgr)                  \
    stubbed_mgr * new_##stubbed_mgr();               \
                                                     \
-   void sdk::init_##stubbed_mgr() {                 \
+   void sdk::SdkImpl::init_##stubbed_mgr() {        \
       if(!stubbed_mgr##_) {                         \
          stubbed_mgr##_ = new_##stubbed_mgr();      \
       }                                             \
@@ -158,7 +167,6 @@ class timer_queue : public std::priority_queue<timer *,
    EOS_SDK_DISALLOW_COPY_CTOR(timer_queue);
 };
 
-class sdk;
 
 /**
  * Provides a basic implementation for various EOS SDK primitives.
@@ -173,7 +181,7 @@ class Impl {
    Impl() {
    }
 
-   void register_sdk(sdk * sdk) {
+   void register_sdk(sdk::SdkImpl * sdk) {
       sdk_ = sdk;
    }
 
@@ -217,7 +225,7 @@ class Impl {
    // Whether the loop should be running
    bool running_;
 
-   sdk * sdk_;
+   sdk::SdkImpl * sdk_;
 
    // Min-heap for all outstanding timers.
    timer_queue timers_;

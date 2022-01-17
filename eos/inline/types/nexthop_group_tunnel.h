@@ -71,16 +71,17 @@ nexthop_group_tunnel_t::operator!=(nexthop_group_tunnel_t const & other) const {
 
 inline uint32_t
 nexthop_group_tunnel_t::hash() const {
-   uint32_t ret = 0;
-   ret = hash_mix::mix((uint8_t *)&tunnel_endpoint_,
-              sizeof(ip_prefix_t), ret);
-   ret ^= std::hash<std::string>()(nhg_name_);
-   ret = hash_mix::mix((uint8_t *)&igp_pref_,
-              sizeof(uint8_t), ret);
-   ret = hash_mix::mix((uint8_t *)&igp_metric_,
-              sizeof(uint32_t), ret);
-   ret = hash_mix::final_mix(ret);
-   return ret;
+   hash_mix h;
+   mix_me(h);
+   return h.result();
+}
+
+inline void
+nexthop_group_tunnel_t::mix_me(hash_mix & h) const {
+   h.mix(tunnel_endpoint_); // ip_prefix_t
+   h.mix(nhg_name_); // std::string
+   h.mix(igp_pref_); // uint8_t
+   h.mix(igp_metric_); // uint32_t
 }
 
 inline std::string

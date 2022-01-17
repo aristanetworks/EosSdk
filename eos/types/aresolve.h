@@ -1,4 +1,4 @@
-// Copyright (c) 2016 Arista Networks, Inc.  All rights reserved.
+// Copyright (c) 2020 Arista Networks, Inc.  All rights reserved.
 // Arista Networks, Inc. Confidential and Proprietary.
 
 #ifndef EOS_TYPES_ARESOLVE_H
@@ -48,6 +48,8 @@ class EOS_SDK_PUBLIC aresolve_record_base {
 
    /** The hash function for type aresolve_record_base. */
    uint32_t hash() const;
+   /** The hash mix function for type aresolve_record_base. */
+   void mix_me(hash_mix & h) const;
    /** Returns a string representation of the current object's values. */
    std::string to_string() const;
    /**
@@ -87,6 +89,8 @@ class EOS_SDK_PUBLIC aresolve_record_host : public aresolve_record_base {
 
    /** The hash function for type aresolve_record_host. */
    uint32_t hash() const;
+   /** The hash mix function for type aresolve_record_host. */
+   void mix_me(hash_mix & h) const;
    /** Returns a string representation of the current object's values. */
    std::string to_string() const;
    /**

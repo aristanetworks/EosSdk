@@ -1,4 +1,4 @@
-// Copyright (c) 2016 Arista Networks, Inc.  All rights reserved.
+// Copyright (c) 2020 Arista Networks, Inc.  All rights reserved.
 // Arista Networks, Inc. Confidential and Proprietary.
 
 #ifndef EOS_INLINE_TYPES_NEIGHBOR_TABLE_H
@@ -68,13 +68,15 @@ neighbor_key_t::operator<(neighbor_key_t const & other) const {
 
 inline uint32_t
 neighbor_key_t::hash() const {
-   uint32_t ret = 0;
-   ret = hash_mix::mix((uint8_t *)&ip_addr_,
-              sizeof(ip_addr_t), ret);
-   ret = hash_mix::mix((uint8_t *)&intf_id_,
-              sizeof(intf_id_t), ret);
-   ret = hash_mix::final_mix(ret);
-   return ret;
+   hash_mix h;
+   mix_me(h);
+   return h.result();
+}
+
+inline void
+neighbor_key_t::mix_me(hash_mix & h) const {
+   h.mix(ip_addr_); // ip_addr_t
+   h.mix(intf_id_); // intf_id_t
 }
 
 inline std::string
@@ -147,15 +149,16 @@ neighbor_entry_t::operator<(neighbor_entry_t const & other) const {
 
 inline uint32_t
 neighbor_entry_t::hash() const {
-   uint32_t ret = 0;
-   ret = hash_mix::mix((uint8_t *)&neighbor_key_,
-              sizeof(neighbor_key_t), ret);
-   ret = hash_mix::mix((uint8_t *)&eth_addr_,
-              sizeof(eth_addr_t), ret);
-   ret = hash_mix::mix((uint8_t *)&entry_type_,
-              sizeof(neighbor_entry_type_t), ret);
-   ret = hash_mix::final_mix(ret);
-   return ret;
+   hash_mix h;
+   mix_me(h);
+   return h.result();
+}
+
+inline void
+neighbor_entry_t::mix_me(hash_mix & h) const {
+   h.mix(neighbor_key_); // neighbor_key_t
+   h.mix(eth_addr_); // eth_addr_t
+   h.mix(entry_type_); // neighbor_entry_type_t
 }
 
 inline std::string

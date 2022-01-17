@@ -1,4 +1,4 @@
-// Copyright (c) 2016 Arista Networks, Inc.  All rights reserved.
+// Copyright (c) 2020 Arista Networks, Inc.  All rights reserved.
 // Arista Networks, Inc. Confidential and Proprietary.
 
 #ifndef EOS_INLINE_TYPES_FIB_H
@@ -37,11 +37,14 @@ fib_route_key_t::operator!=(fib_route_key_t const & other) const {
 
 inline uint32_t
 fib_route_key_t::hash() const {
-   uint32_t ret = 0;
-   ret = hash_mix::mix((uint8_t *)&prefix_,
-              sizeof(ip_prefix_t), ret);
-   ret = hash_mix::final_mix(ret);
-   return ret;
+   hash_mix h;
+   mix_me(h);
+   return h.result();
+}
+
+inline void
+fib_route_key_t::mix_me(hash_mix & h) const {
+   h.mix(prefix_); // ip_prefix_t
 }
 
 inline std::string
@@ -200,19 +203,18 @@ fib_route_t::operator!=(fib_route_t const & other) const {
 
 inline uint32_t
 fib_route_t::hash() const {
-   uint32_t ret = 0;
-   ret = hash_mix::mix((uint8_t *)&route_key_,
-              sizeof(fib_route_key_t), ret);
-   ret = hash_mix::mix((uint8_t *)&preference_,
-              sizeof(ip_route_preference_t), ret);
-   ret = hash_mix::mix((uint8_t *)&metric_,
-              sizeof(ip_route_metric_t), ret);
-   ret = hash_mix::mix((uint8_t *)&route_type_,
-              sizeof(fib_route_type_t), ret);
-   ret = hash_mix::mix((uint8_t *)&fec_id_,
-              sizeof(uint64_t), ret);
-   ret = hash_mix::final_mix(ret);
-   return ret;
+   hash_mix h;
+   mix_me(h);
+   return h.result();
+}
+
+inline void
+fib_route_t::mix_me(hash_mix & h) const {
+   h.mix(route_key_); // fib_route_key_t
+   h.mix(preference_); // ip_route_preference_t
+   h.mix(metric_); // ip_route_metric_t
+   h.mix(route_type_); // fib_route_type_t
+   h.mix(fec_id_); // uint64_t
 }
 
 inline std::string
@@ -267,11 +269,14 @@ fib_fec_key_t::operator!=(fib_fec_key_t const & other) const {
 
 inline uint32_t
 fib_fec_key_t::hash() const {
-   uint32_t ret = 0;
-   ret = hash_mix::mix((uint8_t *)&fec_id_,
-              sizeof(uint64_t), ret);
-   ret = hash_mix::final_mix(ret);
-   return ret;
+   hash_mix h;
+   mix_me(h);
+   return h.result();
+}
+
+inline void
+fib_fec_key_t::mix_me(hash_mix & h) const {
+   h.mix(fec_id_); // uint64_t
 }
 
 inline std::string
@@ -344,15 +349,16 @@ fib_via_t::operator!=(fib_via_t const & other) const {
 
 inline uint32_t
 fib_via_t::hash() const {
-   uint32_t ret = 0;
-   ret = hash_mix::mix((uint8_t *)&hop_,
-              sizeof(ip_addr_t), ret);
-   ret = hash_mix::mix((uint8_t *)&intf_,
-              sizeof(intf_id_t), ret);
-   ret = hash_mix::mix((uint8_t *)&mpls_label_,
-              sizeof(mpls_label_t), ret);
-   ret = hash_mix::final_mix(ret);
-   return ret;
+   hash_mix h;
+   mix_me(h);
+   return h.result();
+}
+
+inline void
+fib_via_t::mix_me(hash_mix & h) const {
+   h.mix(hop_); // ip_addr_t
+   h.mix(intf_); // intf_id_t
+   h.mix(mpls_label_); // mpls_label_t
 }
 
 inline std::string
@@ -461,18 +467,19 @@ fib_fec_t::via_del(fib_via_t const & via) {
 
 inline uint32_t
 fib_fec_t::hash() const {
-   uint32_t ret = 0;
-   ret = hash_mix::mix((uint8_t *)&fec_key_,
-              sizeof(fib_fec_key_t), ret);
-   ret = hash_mix::mix((uint8_t *)&fec_type_,
-              sizeof(fib_fec_type_t), ret);
-   ret ^= std::hash<std::string>()(nexthop_group_name_);
+   hash_mix h;
+   mix_me(h);
+   return h.result();
+}
+
+inline void
+fib_fec_t::mix_me(hash_mix & h) const {
+   h.mix(fec_key_); // fib_fec_key_t
+   h.mix(fec_type_); // fib_fec_type_t
+   h.mix(nexthop_group_name_); // std::string
    for (auto it=via_.cbegin(); it!=via_.cend(); ++it) {
-      ret = hash_mix::mix((uint8_t *)&(*it),
-            sizeof(fib_via_t), ret);
+      h.mix(*it); // fib_via_t
    }
-   ret = hash_mix::final_mix(ret);
-   return ret;
 }
 
 inline std::string

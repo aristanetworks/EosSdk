@@ -1,4 +1,4 @@
-// Copyright (c) 2019 Arista Networks, Inc.  All rights reserved.
+// Copyright (c) 2020 Arista Networks, Inc.  All rights reserved.
 // Arista Networks, Inc. Confidential and Proprietary.
 
 #ifndef EOS_TYPES_DIRECTFLOW_H
@@ -47,6 +47,8 @@ class EOS_SDK_PUBLIC flow_match_field_set_t {
    bool operator<(flow_match_field_set_t const & other) const;
    /** The hash function for type flow_match_field_set_t. */
    uint32_t hash() const;
+   /** The hash mix function for type flow_match_field_set_t. */
+   void mix_me(hash_mix & h) const;
    /** Returns a string representation of the current object's values. */
    std::string to_string() const;
    /**
@@ -148,6 +150,8 @@ class EOS_SDK_PUBLIC flow_match_t {
    bool operator<(flow_match_t const & other) const;
    /** The hash function for type flow_match_t. */
    uint32_t hash() const;
+   /** The hash mix function for type flow_match_t. */
+   void mix_me(hash_mix & h) const;
    /** Returns a string representation of the current object's values. */
    std::string to_string() const;
    /**
@@ -203,6 +207,8 @@ class EOS_SDK_PUBLIC flow_action_set_t {
    bool operator!=(flow_action_set_t const & other) const;
    /** The hash function for type flow_action_set_t. */
    uint32_t hash() const;
+   /** The hash mix function for type flow_action_set_t. */
+   void mix_me(hash_mix & h) const;
    /** Returns a string representation of the current object's values. */
    std::string to_string() const;
    /**
@@ -270,6 +276,8 @@ class EOS_SDK_PUBLIC flow_action_t {
    bool operator!=(flow_action_t const & other) const;
    /** The hash function for type flow_action_t. */
    uint32_t hash() const;
+   /** The hash mix function for type flow_action_t. */
+   void mix_me(hash_mix & h) const;
    /** Returns a string representation of the current object's values. */
    std::string to_string() const;
    /**
@@ -308,6 +316,8 @@ class EOS_SDK_PUBLIC flow_entry_t {
    bool operator!=(flow_entry_t const & other) const;
    /** The hash function for type flow_entry_t. */
    uint32_t hash() const;
+   /** The hash mix function for type flow_entry_t. */
+   void mix_me(hash_mix & h) const;
    /** Returns a string representation of the current object's values. */
    std::string to_string() const;
    /**
@@ -336,6 +346,8 @@ class EOS_SDK_PUBLIC flow_counters_t {
    bool operator!=(flow_counters_t const & other) const;
    /** The hash function for type flow_counters_t. */
    uint32_t hash() const;
+   /** The hash mix function for type flow_counters_t. */
+   void mix_me(hash_mix & h) const;
    /** Returns a string representation of the current object's values. */
    std::string to_string() const;
    /**

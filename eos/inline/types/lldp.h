@@ -1,4 +1,4 @@
-// Copyright (c) 2019 Arista Networks, Inc.  All rights reserved.
+// Copyright (c) 2020 Arista Networks, Inc.  All rights reserved.
 // Arista Networks, Inc. Confidential and Proprietary.
 
 #ifndef EOS_INLINE_TYPES_LLDP_H
@@ -70,13 +70,15 @@ lldp_tlv_type_t::operator<(lldp_tlv_type_t const & other) const {
 
 inline uint32_t
 lldp_tlv_type_t::hash() const {
-   uint32_t ret = 0;
-   ret = hash_mix::mix((uint8_t *)&organization_,
-              sizeof(uint32_t), ret);
-   ret = hash_mix::mix((uint8_t *)&subtype_,
-              sizeof(uint8_t), ret);
-   ret = hash_mix::final_mix(ret);
-   return ret;
+   hash_mix h;
+   mix_me(h);
+   return h.result();
+}
+
+inline void
+lldp_tlv_type_t::mix_me(hash_mix & h) const {
+   h.mix(organization_); // uint32_t
+   h.mix(subtype_); // uint8_t
 }
 
 inline std::string
@@ -235,11 +237,14 @@ lldp_std_tlv_type_t::phy() const {
 
 inline uint32_t
 lldp_std_tlv_type_t::hash() const {
-   uint32_t ret = 0;
-   ret = hash_mix::mix((uint8_t *)&bitset_,
-              sizeof(lldp_std_tlv_type_bit_t), ret);
-   ret = hash_mix::final_mix(ret);
-   return ret;
+   hash_mix h;
+   mix_me(h);
+   return h.result();
+}
+
+inline void
+lldp_std_tlv_type_t::mix_me(hash_mix & h) const {
+   h.mix(bitset_); // lldp_std_tlv_type_bit_t
 }
 
 inline std::string
@@ -336,11 +341,14 @@ lldp_syscap_t::station() const {
 
 inline uint32_t
 lldp_syscap_t::hash() const {
-   uint32_t ret = 0;
-   ret = hash_mix::mix((uint8_t *)&bitset_,
-              sizeof(lldp_syscap_bits_t), ret);
-   ret = hash_mix::final_mix(ret);
-   return ret;
+   hash_mix h;
+   mix_me(h);
+   return h.result();
+}
+
+inline void
+lldp_syscap_t::mix_me(hash_mix & h) const {
+   h.mix(bitset_); // lldp_syscap_bits_t
 }
 
 inline std::string
@@ -409,15 +417,17 @@ lldp_management_address_t::operator<(lldp_management_address_t const & other)
 
 inline uint32_t
 lldp_management_address_t::hash() const {
-   uint32_t ret = 0;
-   ret = hash_mix::mix((uint8_t *)&address_family_,
-              sizeof(uint32_t), ret);
-   ret ^= std::hash<std::string>()(address_);
-   ret = hash_mix::mix((uint8_t *)&snmp_ifindex_,
-              sizeof(uint32_t), ret);
-   ret ^= std::hash<std::string>()(oid_);
-   ret = hash_mix::final_mix(ret);
-   return ret;
+   hash_mix h;
+   mix_me(h);
+   return h.result();
+}
+
+inline void
+lldp_management_address_t::mix_me(hash_mix & h) const {
+   h.mix(address_family_); // uint32_t
+   h.mix(address_); // std::string
+   h.mix(snmp_ifindex_); // uint32_t
+   h.mix(oid_); // std::string
 }
 
 inline std::string
@@ -478,17 +488,17 @@ lldp_lacp_t::operator!() const {
 
 inline uint32_t
 lldp_lacp_t::hash() const {
-   uint32_t ret = 0;
-   ret = hash_mix::mix((uint8_t *)&capable_,
-              sizeof(bool), ret);
-   ret = hash_mix::mix((uint8_t *)&enabled_,
-              sizeof(bool), ret);
-   ret = hash_mix::mix((uint8_t *)&id_,
-              sizeof(uint32_t), ret);
-   ret = hash_mix::mix((uint8_t *)&valid_,
-              sizeof(bool), ret);
-   ret = hash_mix::final_mix(ret);
-   return ret;
+   hash_mix h;
+   mix_me(h);
+   return h.result();
+}
+
+inline void
+lldp_lacp_t::mix_me(hash_mix & h) const {
+   h.mix(capable_); // bool
+   h.mix(enabled_); // bool
+   h.mix(id_); // uint32_t
+   h.mix(valid_); // bool
 }
 
 inline std::string
@@ -545,17 +555,17 @@ lldp_phy_t::valid() const {
 
 inline uint32_t
 lldp_phy_t::hash() const {
-   uint32_t ret = 0;
-   ret = hash_mix::mix((uint8_t *)&autonegSupported_,
-              sizeof(bool), ret);
-   ret = hash_mix::mix((uint8_t *)&autonegEnabled_,
-              sizeof(bool), ret);
-   ret = hash_mix::mix((uint8_t *)&autonegCapabilitiesBm_,
-              sizeof(uint16_t), ret);
-   ret = hash_mix::mix((uint8_t *)&valid_,
-              sizeof(bool), ret);
-   ret = hash_mix::final_mix(ret);
-   return ret;
+   hash_mix h;
+   mix_me(h);
+   return h.result();
+}
+
+inline void
+lldp_phy_t::mix_me(hash_mix & h) const {
+   h.mix(autonegSupported_); // bool
+   h.mix(autonegEnabled_); // bool
+   h.mix(autonegCapabilitiesBm_); // uint16_t
+   h.mix(valid_); // bool
 }
 
 inline std::string
@@ -724,12 +734,15 @@ lldp_chassis_id_t::operator<(lldp_chassis_id_t const & other) const {
 
 inline uint32_t
 lldp_chassis_id_t::hash() const {
-   uint32_t ret = 0;
-   ret = hash_mix::mix((uint8_t *)&encoding_,
-              sizeof(lldp_chassis_id_encoding_t), ret);
-   ret ^= std::hash<std::string>()(value_);
-   ret = hash_mix::final_mix(ret);
-   return ret;
+   hash_mix h;
+   mix_me(h);
+   return h.result();
+}
+
+inline void
+lldp_chassis_id_t::mix_me(hash_mix & h) const {
+   h.mix(encoding_); // lldp_chassis_id_encoding_t
+   h.mix(value_); // std::string
 }
 
 inline std::string
@@ -875,12 +888,15 @@ lldp_intf_id_t::operator<(lldp_intf_id_t const & other) const {
 
 inline uint32_t
 lldp_intf_id_t::hash() const {
-   uint32_t ret = 0;
-   ret = hash_mix::mix((uint8_t *)&encoding_,
-              sizeof(lldp_intf_id_encoding_t), ret);
-   ret ^= std::hash<std::string>()(value_);
-   ret = hash_mix::final_mix(ret);
-   return ret;
+   hash_mix h;
+   mix_me(h);
+   return h.result();
+}
+
+inline void
+lldp_intf_id_t::mix_me(hash_mix & h) const {
+   h.mix(encoding_); // lldp_intf_id_encoding_t
+   h.mix(value_); // std::string
 }
 
 inline std::string
@@ -965,13 +981,15 @@ lldp_remote_system_t::operator<(lldp_remote_system_t const & other) const {
 
 inline uint32_t
 lldp_remote_system_t::hash() const {
-   uint32_t ret = 0;
-   ret = hash_mix::mix((uint8_t *)&chassis_,
-              sizeof(lldp_chassis_id_t), ret);
-   ret = hash_mix::mix((uint8_t *)&port_,
-              sizeof(lldp_intf_id_t), ret);
-   ret = hash_mix::final_mix(ret);
-   return ret;
+   hash_mix h;
+   mix_me(h);
+   return h.result();
+}
+
+inline void
+lldp_remote_system_t::mix_me(hash_mix & h) const {
+   h.mix(chassis_); // lldp_chassis_id_t
+   h.mix(port_); // lldp_intf_id_t
 }
 
 inline std::string
@@ -1062,13 +1080,15 @@ lldp_neighbor_t::operator<(lldp_neighbor_t const & other) const {
 
 inline uint32_t
 lldp_neighbor_t::hash() const {
-   uint32_t ret = 0;
-   ret = hash_mix::mix((uint8_t *)&intf_,
-              sizeof(intf_id_t), ret);
-   ret = hash_mix::mix((uint8_t *)&remote_system_,
-              sizeof(lldp_remote_system_t), ret);
-   ret = hash_mix::final_mix(ret);
-   return ret;
+   hash_mix h;
+   mix_me(h);
+   return h.result();
+}
+
+inline void
+lldp_neighbor_t::mix_me(hash_mix & h) const {
+   h.mix(intf_); // intf_id_t
+   h.mix(remote_system_); // lldp_remote_system_t
 }
 
 inline std::string

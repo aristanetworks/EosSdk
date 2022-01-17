@@ -1,4 +1,4 @@
-// Copyright (c) 2019 Arista Networks, Inc.  All rights reserved.
+// Copyright (c) 2020 Arista Networks, Inc.  All rights reserved.
 // Arista Networks, Inc. Confidential and Proprietary.
 
 #ifndef EOS_TYPES_LLDP_H
@@ -36,6 +36,8 @@ class EOS_SDK_PUBLIC lldp_tlv_type_t {
    bool operator<(lldp_tlv_type_t const & other) const;
    /** The hash function for type lldp_tlv_type_t. */
    uint32_t hash() const;
+   /** The hash mix function for type lldp_tlv_type_t. */
+   void mix_me(hash_mix & h) const;
    /** Returns a string representation of the current object's values. */
    std::string to_string() const;
    /**
@@ -97,6 +99,8 @@ class EOS_SDK_PUBLIC lldp_std_tlv_type_t {
    bool phy() const;
    /** The hash function for type lldp_std_tlv_type_t. */
    uint32_t hash() const;
+   /** The hash mix function for type lldp_std_tlv_type_t. */
+   void mix_me(hash_mix & h) const;
    /** Returns a string representation of the current object's values. */
    std::string to_string() const;
    /**
@@ -142,6 +146,8 @@ class EOS_SDK_PUBLIC lldp_syscap_t {
    bool station() const;
    /** The hash function for type lldp_syscap_t. */
    uint32_t hash() const;
+   /** The hash mix function for type lldp_syscap_t. */
+   void mix_me(hash_mix & h) const;
    /** Returns a string representation of the current object's values. */
    std::string to_string() const;
    /**
@@ -188,6 +194,8 @@ class EOS_SDK_PUBLIC lldp_management_address_t {
    bool operator<(lldp_management_address_t const & other) const;
    /** The hash function for type lldp_management_address_t. */
    uint32_t hash() const;
+   /** The hash mix function for type lldp_management_address_t. */
+   void mix_me(hash_mix & h) const;
    /** Returns a string representation of the current object's values. */
    std::string to_string() const;
    /**
@@ -232,6 +240,8 @@ class EOS_SDK_PUBLIC lldp_lacp_t {
    bool operator!() const;
    /** The hash function for type lldp_lacp_t. */
    uint32_t hash() const;
+   /** The hash mix function for type lldp_lacp_t. */
+   void mix_me(hash_mix & h) const;
    /** Returns a string representation of the current object's values. */
    std::string to_string() const;
    /**
@@ -268,6 +278,8 @@ class EOS_SDK_PUBLIC lldp_phy_t {
 
    /** The hash function for type lldp_phy_t. */
    uint32_t hash() const;
+   /** The hash mix function for type lldp_phy_t. */
+   void mix_me(hash_mix & h) const;
    /** Returns a string representation of the current object's values. */
    std::string to_string() const;
    /**
@@ -333,6 +345,8 @@ class EOS_SDK_PUBLIC lldp_chassis_id_t {
    bool operator<(lldp_chassis_id_t const & other) const;
    /** The hash function for type lldp_chassis_id_t. */
    uint32_t hash() const;
+   /** The hash mix function for type lldp_chassis_id_t. */
+   void mix_me(hash_mix & h) const;
    /** Returns a string representation of the current object's values. */
    std::string to_string() const;
    /**
@@ -382,6 +396,8 @@ class EOS_SDK_PUBLIC lldp_intf_id_t {
    bool operator<(lldp_intf_id_t const & other) const;
    /** The hash function for type lldp_intf_id_t. */
    uint32_t hash() const;
+   /** The hash mix function for type lldp_intf_id_t. */
+   void mix_me(hash_mix & h) const;
    /** Returns a string representation of the current object's values. */
    std::string to_string() const;
    /**
@@ -418,6 +434,8 @@ class EOS_SDK_PUBLIC lldp_remote_system_t {
    bool operator<(lldp_remote_system_t const & other) const;
    /** The hash function for type lldp_remote_system_t. */
    uint32_t hash() const;
+   /** The hash mix function for type lldp_remote_system_t. */
+   void mix_me(hash_mix & h) const;
    /** Returns a string representation of the current object's values. */
    std::string to_string() const;
    /**
@@ -459,6 +477,8 @@ class EOS_SDK_PUBLIC lldp_neighbor_t {
    bool operator<(lldp_neighbor_t const & other) const;
    /** The hash function for type lldp_neighbor_t. */
    uint32_t hash() const;
+   /** The hash mix function for type lldp_neighbor_t. */
+   void mix_me(hash_mix & h) const;
    /** Returns a string representation of the current object's values. */
    std::string to_string() const;
    /**

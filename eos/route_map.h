@@ -52,13 +52,15 @@ class EOS_SDK_PUBLIC route_map_mgr {
     */
    virtual route_map_entry_t
       route_map_entry(route_map_name_t const &,
-                      route_map_sequence_number_t const &) const = 0;
+                      route_map_sequence_number_t) const = 0;
 
    /// Creates or updates a route map.
-   virtual void route_map_set(route_map_t const &) = 0;
+   virtual void route_map_set(route_map_name_t const &,
+                              route_map_t const &) = 0;
 
    /// Creates or updates a route map entry in corresponding route map.
    virtual void route_map_entry_set(route_map_name_t const &,
+                                    route_map_sequence_number_t,
                                     route_map_entry_t const &) = 0;
 
    /// Removes the corresponding route map from the configuration if exists.
@@ -66,7 +68,7 @@ class EOS_SDK_PUBLIC route_map_mgr {
 
    /// Removes the corresponding route map entry from a given route map.
    virtual void route_map_entry_del(route_map_name_t const &,
-                                    route_map_sequence_number_t const &) = 0;
+                                    route_map_sequence_number_t) = 0;
 #endif
 
  protected:

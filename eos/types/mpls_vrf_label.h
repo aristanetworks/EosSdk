@@ -1,4 +1,4 @@
-// Copyright (c) 2018 Arista Networks, Inc.  All rights reserved.
+// Copyright (c) 2020 Arista Networks, Inc.  All rights reserved.
 // Arista Networks, Inc. Confidential and Proprietary.
 
 #ifndef EOS_TYPES_MPLS_VRF_LABEL_H
@@ -27,6 +27,8 @@ class EOS_SDK_PUBLIC mpls_vrf_label_t {
    bool operator<(mpls_vrf_label_t const & other) const;
    /** The hash function for type mpls_vrf_label_t. */
    uint32_t hash() const;
+   /** The hash mix function for type mpls_vrf_label_t. */
+   void mix_me(hash_mix & h) const;
    /** Returns a string representation of the current object's values. */
    std::string to_string() const;
    /**

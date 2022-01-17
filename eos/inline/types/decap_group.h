@@ -1,4 +1,4 @@
-// Copyright (c) 2017 Arista Networks, Inc.  All rights reserved.
+// Copyright (c) 2020 Arista Networks, Inc.  All rights reserved.
 // Arista Networks, Inc. Confidential and Proprietary.
 
 #ifndef EOS_INLINE_TYPES_DECAP_GROUP_H
@@ -86,14 +86,16 @@ decap_group_t::operator<(decap_group_t const & other) const {
 
 inline uint32_t
 decap_group_t::hash() const {
-   uint32_t ret = 0;
-   ret ^= std::hash<std::string>()(group_name_);
-   ret = hash_mix::mix((uint8_t *)&destination_addr_,
-              sizeof(ip_addr_t), ret);
-   ret = hash_mix::mix((uint8_t *)&protocol_type_,
-              sizeof(decap_protocol_type_t), ret);
-   ret = hash_mix::final_mix(ret);
-   return ret;
+   hash_mix h;
+   mix_me(h);
+   return h.result();
+}
+
+inline void
+decap_group_t::mix_me(hash_mix & h) const {
+   h.mix(group_name_); // std::string
+   h.mix(destination_addr_); // ip_addr_t
+   h.mix(protocol_type_); // decap_protocol_type_t
 }
 
 inline std::string

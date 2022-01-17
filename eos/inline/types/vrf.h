@@ -1,4 +1,4 @@
-// Copyright (c) 2016 Arista Networks, Inc.  All rights reserved.
+// Copyright (c) 2020 Arista Networks, Inc.  All rights reserved.
 // Arista Networks, Inc. Confidential and Proprietary.
 
 #ifndef EOS_INLINE_TYPES_VRF_H
@@ -74,14 +74,16 @@ vrf_t::operator<(vrf_t const & other) const {
 
 inline uint32_t
 vrf_t::hash() const {
-   uint32_t ret = 0;
-   ret ^= std::hash<std::string>()(name_);
-   ret = hash_mix::mix((uint8_t *)&state_,
-              sizeof(vrf_state_t), ret);
-   ret = hash_mix::mix((uint8_t *)&rd_,
-              sizeof(uint64_t), ret);
-   ret = hash_mix::final_mix(ret);
-   return ret;
+   hash_mix h;
+   mix_me(h);
+   return h.result();
+}
+
+inline void
+vrf_t::mix_me(hash_mix & h) const {
+   h.mix(name_); // std::string
+   h.mix(state_); // vrf_state_t
+   h.mix(rd_); // uint64_t
 }
 
 inline std::string

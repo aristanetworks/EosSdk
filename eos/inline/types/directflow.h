@@ -1,4 +1,4 @@
-// Copyright (c) 2019 Arista Networks, Inc.  All rights reserved.
+// Copyright (c) 2020 Arista Networks, Inc.  All rights reserved.
 // Arista Networks, Inc. Confidential and Proprietary.
 
 #ifndef EOS_INLINE_TYPES_DIRECTFLOW_H
@@ -30,11 +30,14 @@ flow_match_field_set_t::operator<(flow_match_field_set_t const & other) const {
 
 inline uint32_t
 flow_match_field_set_t::hash() const {
-   uint32_t ret = 0;
-   ret = hash_mix::mix((uint8_t *)&match_bitset_,
-              sizeof(uint32_t), ret);
-   ret = hash_mix::final_mix(ret);
-   return ret;
+   hash_mix h;
+   mix_me(h);
+   return h.result();
+}
+
+inline void
+flow_match_field_set_t::mix_me(hash_mix & h) const {
+   h.mix(match_bitset_); // uint32_t
 }
 
 inline std::string
@@ -299,39 +302,29 @@ flow_match_t::operator<(flow_match_t const & other) const {
 
 inline uint32_t
 flow_match_t::hash() const {
-   uint32_t ret = 0;
-   ret = hash_mix::mix((uint8_t *)&match_field_set_,
-              sizeof(flow_match_field_set_t), ret);
+   hash_mix h;
+   mix_me(h);
+   return h.result();
+}
+
+inline void
+flow_match_t::mix_me(hash_mix & h) const {
+   h.mix(match_field_set_); // flow_match_field_set_t
    for (auto it=input_intfs_.cbegin(); it!=input_intfs_.cend(); ++it) {
-      ret = hash_mix::mix((uint8_t *)&(*it),
-            sizeof(intf_id_t), ret);
+      h.mix(*it); // intf_id_t
    }
-   ret = hash_mix::mix((uint8_t *)&eth_src_,
-              sizeof(eth_addr_t), ret);
-   ret = hash_mix::mix((uint8_t *)&eth_src_mask_,
-              sizeof(eth_addr_t), ret);
-   ret = hash_mix::mix((uint8_t *)&eth_dst_,
-              sizeof(eth_addr_t), ret);
-   ret = hash_mix::mix((uint8_t *)&eth_dst_mask_,
-              sizeof(eth_addr_t), ret);
-   ret = hash_mix::mix((uint8_t *)&eth_type_,
-              sizeof(eth_type_t), ret);
-   ret = hash_mix::mix((uint8_t *)&vlan_id_,
-              sizeof(vlan_id_t), ret);
-   ret = hash_mix::mix((uint8_t *)&vlan_id_mask_,
-              sizeof(vlan_id_t), ret);
-   ret = hash_mix::mix((uint8_t *)&cos_,
-              sizeof(cos_t), ret);
-   ret = hash_mix::mix((uint8_t *)&ip_src_,
-              sizeof(ip_addr_t), ret);
-   ret = hash_mix::mix((uint8_t *)&ip_src_mask_,
-              sizeof(ip_addr_t), ret);
-   ret = hash_mix::mix((uint8_t *)&ip_dst_,
-              sizeof(ip_addr_t), ret);
-   ret = hash_mix::mix((uint8_t *)&ip_dst_mask_,
-              sizeof(ip_addr_t), ret);
-   ret = hash_mix::final_mix(ret);
-   return ret;
+   h.mix(eth_src_); // eth_addr_t
+   h.mix(eth_src_mask_); // eth_addr_t
+   h.mix(eth_dst_); // eth_addr_t
+   h.mix(eth_dst_mask_); // eth_addr_t
+   h.mix(eth_type_); // eth_type_t
+   h.mix(vlan_id_); // vlan_id_t
+   h.mix(vlan_id_mask_); // vlan_id_t
+   h.mix(cos_); // cos_t
+   h.mix(ip_src_); // ip_addr_t
+   h.mix(ip_src_mask_); // ip_addr_t
+   h.mix(ip_dst_); // ip_addr_t
+   h.mix(ip_dst_mask_); // ip_addr_t
 }
 
 inline std::string
@@ -390,11 +383,14 @@ flow_action_set_t::operator!=(flow_action_set_t const & other) const {
 
 inline uint32_t
 flow_action_set_t::hash() const {
-   uint32_t ret = 0;
-   ret = hash_mix::mix((uint8_t *)&action_bitset_,
-              sizeof(uint32_t), ret);
-   ret = hash_mix::final_mix(ret);
-   return ret;
+   hash_mix h;
+   mix_me(h);
+   return h.result();
+}
+
+inline void
+flow_action_set_t::mix_me(hash_mix & h) const {
+   h.mix(action_bitset_); // uint32_t
 }
 
 inline std::string
@@ -534,27 +530,23 @@ flow_action_t::operator!=(flow_action_t const & other) const {
 
 inline uint32_t
 flow_action_t::hash() const {
-   uint32_t ret = 0;
-   ret = hash_mix::mix((uint8_t *)&action_set_,
-              sizeof(flow_action_set_t), ret);
+   hash_mix h;
+   mix_me(h);
+   return h.result();
+}
+
+inline void
+flow_action_t::mix_me(hash_mix & h) const {
+   h.mix(action_set_); // flow_action_set_t
    for (auto it=output_intfs_.cbegin(); it!=output_intfs_.cend(); ++it) {
-      ret = hash_mix::mix((uint8_t *)&(*it),
-            sizeof(intf_id_t), ret);
+      h.mix(*it); // intf_id_t
    }
-   ret = hash_mix::mix((uint8_t *)&vlan_id_,
-              sizeof(vlan_id_t), ret);
-   ret = hash_mix::mix((uint8_t *)&cos_,
-              sizeof(cos_t), ret);
-   ret = hash_mix::mix((uint8_t *)&eth_src_,
-              sizeof(eth_addr_t), ret);
-   ret = hash_mix::mix((uint8_t *)&eth_dst_,
-              sizeof(eth_addr_t), ret);
-   ret = hash_mix::mix((uint8_t *)&ip_src_,
-              sizeof(ip_addr_t), ret);
-   ret = hash_mix::mix((uint8_t *)&ip_dst_,
-              sizeof(ip_addr_t), ret);
-   ret = hash_mix::final_mix(ret);
-   return ret;
+   h.mix(vlan_id_); // vlan_id_t
+   h.mix(cos_); // cos_t
+   h.mix(eth_src_); // eth_addr_t
+   h.mix(eth_dst_); // eth_addr_t
+   h.mix(ip_src_); // ip_addr_t
+   h.mix(ip_dst_); // ip_addr_t
 }
 
 inline std::string
@@ -635,16 +627,17 @@ flow_entry_t::operator!=(flow_entry_t const & other) const {
 
 inline uint32_t
 flow_entry_t::hash() const {
-   uint32_t ret = 0;
-   ret ^= std::hash<std::string>()(name_);
-   ret = hash_mix::mix((uint8_t *)&match_,
-              sizeof(flow_match_t), ret);
-   ret = hash_mix::mix((uint8_t *)&action_,
-              sizeof(flow_action_t), ret);
-   ret = hash_mix::mix((uint8_t *)&priority_,
-              sizeof(flow_priority_t), ret);
-   ret = hash_mix::final_mix(ret);
-   return ret;
+   hash_mix h;
+   mix_me(h);
+   return h.result();
+}
+
+inline void
+flow_entry_t::mix_me(hash_mix & h) const {
+   h.mix(name_); // std::string
+   h.mix(match_); // flow_match_t
+   h.mix(action_); // flow_action_t
+   h.mix(priority_); // flow_priority_t
 }
 
 inline std::string
@@ -694,13 +687,15 @@ flow_counters_t::operator!=(flow_counters_t const & other) const {
 
 inline uint32_t
 flow_counters_t::hash() const {
-   uint32_t ret = 0;
-   ret = hash_mix::mix((uint8_t *)&bytes_,
-              sizeof(uint64_t), ret);
-   ret = hash_mix::mix((uint8_t *)&packets_,
-              sizeof(uint64_t), ret);
-   ret = hash_mix::final_mix(ret);
-   return ret;
+   hash_mix h;
+   mix_me(h);
+   return h.result();
+}
+
+inline void
+flow_counters_t::mix_me(hash_mix & h) const {
+   h.mix(bytes_); // uint64_t
+   h.mix(packets_); // uint64_t
 }
 
 inline std::string

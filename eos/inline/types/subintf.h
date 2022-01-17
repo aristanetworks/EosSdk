@@ -1,4 +1,4 @@
-// Copyright (c) 2016 Arista Networks, Inc.  All rights reserved.
+// Copyright (c) 2020 Arista Networks, Inc.  All rights reserved.
 // Arista Networks, Inc. Confidential and Proprietary.
 
 #ifndef EOS_INLINE_TYPES_SUBINTF_H
@@ -43,13 +43,15 @@ subintf_t::operator!=(subintf_t const & other) const {
 
 inline uint32_t
 subintf_t::hash() const {
-   uint32_t ret = 0;
-   ret = hash_mix::mix((uint8_t *)&intf_id_,
-              sizeof(intf_id_t), ret);
-   ret = hash_mix::mix((uint8_t *)&vlan_id_,
-              sizeof(vlan_id_t), ret);
-   ret = hash_mix::final_mix(ret);
-   return ret;
+   hash_mix h;
+   mix_me(h);
+   return h.result();
+}
+
+inline void
+subintf_t::mix_me(hash_mix & h) const {
+   h.mix(intf_id_); // intf_id_t
+   h.mix(vlan_id_); // vlan_id_t
 }
 
 inline std::string

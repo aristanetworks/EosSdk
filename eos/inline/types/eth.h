@@ -1,4 +1,4 @@
-// Copyright (c) 2016 Arista Networks, Inc.  All rights reserved.
+// Copyright (c) 2020 Arista Networks, Inc.  All rights reserved.
 // Arista Networks, Inc. Confidential and Proprietary.
 
 #ifndef EOS_INLINE_TYPES_ETH_H
@@ -63,11 +63,14 @@ eth_addr_t::operator bool() const {
 
 inline uint32_t
 eth_addr_t::hash() const {
-   uint32_t ret = 0;
-   ret = hash_mix::mix((uint8_t *)&bytes_,
-            sizeof(bytes_), ret);
-   ret = hash_mix::final_mix(ret);
-   return ret;
+   hash_mix h;
+   mix_me(h);
+   return h.result();
+}
+
+inline void
+eth_addr_t::mix_me(hash_mix & h) const {
+   h.mix_bytes((uint8_t const*)&bytes_[0], sizeof(bytes_));
 }
 
 inline std::ostream&
@@ -100,11 +103,14 @@ invalid_vlan_error::raise() const {
 
 inline uint32_t
 invalid_vlan_error::hash() const {
-   uint32_t ret = 0;
-   ret = hash_mix::mix((uint8_t *)&vlan_,
-              sizeof(vlan_id_t), ret);
-   ret = hash_mix::final_mix(ret);
-   return ret;
+   hash_mix h;
+   mix_me(h);
+   return h.result();
+}
+
+inline void
+invalid_vlan_error::mix_me(hash_mix & h) const {
+   h.mix(vlan_); // vlan_id_t
 }
 
 inline std::string
@@ -141,11 +147,14 @@ internal_vlan_error::raise() const {
 
 inline uint32_t
 internal_vlan_error::hash() const {
-   uint32_t ret = 0;
-   ret = hash_mix::mix((uint8_t *)&vlan_,
-              sizeof(vlan_id_t), ret);
-   ret = hash_mix::final_mix(ret);
-   return ret;
+   hash_mix h;
+   mix_me(h);
+   return h.result();
+}
+
+inline void
+internal_vlan_error::mix_me(hash_mix & h) const {
+   h.mix(vlan_); // vlan_id_t
 }
 
 inline std::string

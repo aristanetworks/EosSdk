@@ -35,6 +35,8 @@ class EOS_SDK_PUBLIC bgp_peer_key_t {
    bool operator<(bgp_peer_key_t const & other) const;
    /** The hash function for type bgp_peer_key_t. */
    uint32_t hash() const;
+   /** The hash mix function for type bgp_peer_key_t. */
+   void mix_me(hash_mix & h) const;
    /** Returns a string representation of the current object's values. */
    std::string to_string() const;
    /**

@@ -4,6 +4,8 @@
 #ifndef EOS_ITERATOR_H
 #define EOS_ITERATOR_H
 
+#include <string>
+#include <list>
 #include <iterator>
 #include <eos/base.h>
 
@@ -28,6 +30,26 @@ class EOS_SDK_PUBLIC iter_base : public std::iterator<std::input_iterator_tag, T
    Impl * impl;
    explicit iter_base(Impl * const) EOS_SDK_PRIVATE;
    iter_base() EOS_SDK_PRIVATE;
+};
+
+template <typename V>
+class mocked_iter : public std::iterator<std::input_iterator_tag, V>
+{
+ private:
+   std::list<V> li;
+   typename std::list<V>::iterator it;
+   int count = 0; // it != li.end() does not work!
+   int max;
+ public:
+   mocked_iter(std::list<V> l) : li(l) { it = li.begin(); max = li.size(); }
+   operator bool() const { return it != li.end() && count < max; }
+   mocked_iter operator ++() { auto i = *this; it++; count++; return i; }
+   mocked_iter operator ++(int dummy) { it++; count++; return *this; }
+   V operator*() { return *it; }
+   V const * operator->() const { return &(*it); }
+   V * operator->() { return &(*it); }
+   bool operator==(const mocked_iter& rhs) const { return *it==*rhs.it; }
+   bool operator!=(const mocked_iter& rhs) const { return *it!=*rhs.it; }
 };
 
 }

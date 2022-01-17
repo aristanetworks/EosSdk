@@ -1,4 +1,4 @@
-// Copyright (c) 2020 Arista Networks, Inc.  All rights reserved.
+// Copyright (c) 2021 Arista Networks, Inc.  All rights reserved.
 // Arista Networks, Inc. Confidential and Proprietary.
 
 #ifndef EOS_TYPES_MACSEC_H
@@ -67,6 +67,21 @@ enum macsec_intf_traffic_status_t {
 std::ostream& operator<<(std::ostream& os,
                          const macsec_intf_traffic_status_t & enum_val);
 
+/** Bypass level for a protocol. */
+enum macsec_bypass_t {
+   /** Allow transmit/receive of protocol with MACsec encryption only. */
+   BYPASS_NULL,
+   /** Allow transmit/receive of protocol packets when port is authorized. */
+   BYPASS_AUTHORIZED,
+   /**
+    * Allow transmit/receive of protocol packets when port is authorized or
+    * unauthorized.
+    */
+   BYPASS_UNAUTHORIZED,
+};
+/** Appends a string representation of enum macsec_bypass_t value to the ostream. */
+std::ostream& operator<<(std::ostream& os, const macsec_bypass_t & enum_val);
+
 /** Traffic policy on a profile. */
 enum macsec_profile_traffic_policy_t {
    TRAFFIC_POLICY_NULL,
@@ -115,6 +130,8 @@ class EOS_SDK_PUBLIC macsec_key_t {
    bool operator<(macsec_key_t const & other) const;
    /** The hash function for type macsec_key_t. */
    uint32_t hash() const;
+   /** The hash mix function for type macsec_key_t. */
+   void mix_me(hash_mix & h) const;
    /** Returns a string representation of the current object's values. */
    std::string to_string() const;
    /**
@@ -192,11 +209,18 @@ class EOS_SDK_PUBLIC macsec_profile_t {
 
    /**
     * Getter for 'bypass_lldp': if set, transmit/receive LLDP frames without
-    * protection.
+    * protection : deprecated in favour of lldp_bypass_level.
     */
    bool bypass_lldp() const;
-   /** Setter for 'bypass_lldp'. */
+   /** Setter for 'bypass_lldp': deprecated in favour of lldp_bypass_level_is. */
    void bypass_lldp_is(bool bypass_lldp);
+   /**
+    * Getter for 'lldp_bypass_level': If set, transmit/receive LLDP frames without
+    * Macsec encryption when port is authorized/unauthorized.
+    */
+   macsec_bypass_t lldp_bypass_level() const;
+   /** Setter for 'lldp_bypass_level'. */
+   void lldp_bypass_level_is(macsec_bypass_t lldp_bypass_level);
 
    /** Getter for 'traffic_policy': traffic policy to be used by an interface. */
    macsec_profile_traffic_policy_t traffic_policy() const;
@@ -230,6 +254,8 @@ class EOS_SDK_PUBLIC macsec_profile_t {
    bool operator<(macsec_profile_t const & other) const;
    /** The hash function for type macsec_profile_t. */
    uint32_t hash() const;
+   /** The hash mix function for type macsec_profile_t. */
+   void mix_me(hash_mix & h) const;
    /** Returns a string representation of the current object's values. */
    std::string to_string() const;
    /**
@@ -248,6 +274,7 @@ class EOS_SDK_PUBLIC macsec_profile_t {
    bool dot1x_;
    bool include_sci_;
    bool bypass_lldp_;
+   macsec_bypass_t lldp_bypass_level_;
    macsec_profile_traffic_policy_t traffic_policy_;
    bool allow_unprotected_;
    bool replay_protection_;
@@ -275,6 +302,8 @@ class EOS_SDK_PUBLIC macsec_intf_status_t {
    bool operator<(macsec_intf_status_t const & other) const;
    /** The hash function for type macsec_intf_status_t. */
    uint32_t hash() const;
+   /** The hash mix function for type macsec_intf_status_t. */
+   void mix_me(hash_mix & h) const;
    /** Returns a string representation of the current object's values. */
    std::string to_string() const;
    /**
@@ -317,6 +346,8 @@ class EOS_SDK_PUBLIC macsec_intf_counters_t {
    bool operator<(macsec_intf_counters_t const & other) const;
    /** The hash function for type macsec_intf_counters_t. */
    uint32_t hash() const;
+   /** The hash mix function for type macsec_intf_counters_t. */
+   void mix_me(hash_mix & h) const;
    /** Returns a string representation of the current object's values. */
    std::string to_string() const;
    /**

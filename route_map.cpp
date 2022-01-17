@@ -16,14 +16,16 @@ class route_map_mgr_impl : public route_map_mgr {
    }
 
    route_map_entry_t route_map_entry(route_map_name_t const & name,
-                                     route_map_sequence_number_t const & key) const {
+                                     route_map_sequence_number_t sequence) const {
       return route_map_entry_t(); // TODO: No op impl.
    }
 
-   void route_map_set(route_map_t const & map) {
+   void route_map_set(route_map_name_t const & name,
+                      route_map_t const & map) {
       // TODO: No op impl.
    }
    void route_map_entry_set(route_map_name_t const & name,
+                            route_map_sequence_number_t sequence,
                             route_map_entry_t const & entry) {
       // TODO: No op impl.
    }
@@ -33,7 +35,7 @@ class route_map_mgr_impl : public route_map_mgr {
    }
 
    void route_map_entry_del(route_map_name_t const & name,
-                            route_map_sequence_number_t const & key) {
+                            route_map_sequence_number_t sequence) {
       // TODO: No op impl.
    }
 

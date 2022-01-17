@@ -1,4 +1,4 @@
-// Copyright (c) 2017 Arista Networks, Inc.  All rights reserved.
+// Copyright (c) 2020 Arista Networks, Inc.  All rights reserved.
 // Arista Networks, Inc. Confidential and Proprietary.
 
 #ifndef EOS_INLINE_TYPES_CLASS_MAP_H
@@ -32,11 +32,14 @@ class_map_rule_t::operator!=(class_map_rule_t const & other) const {
 
 inline uint32_t
 class_map_rule_t::hash() const {
-   uint32_t ret = 0;
-   ret = hash_mix::mix((uint8_t *)&acl_key_,
-              sizeof(acl_key_t), ret);
-   ret = hash_mix::final_mix(ret);
-   return ret;
+   hash_mix h;
+   mix_me(h);
+   return h.result();
+}
+
+inline void
+class_map_rule_t::mix_me(hash_mix & h) const {
+   h.mix(acl_key_); // acl_key_t
 }
 
 inline std::string
@@ -108,17 +111,18 @@ class_map_t::operator!=(class_map_t const & other) const {
 
 inline uint32_t
 class_map_t::hash() const {
-   uint32_t ret = 0;
-   ret = hash_mix::mix((uint8_t *)&key_,
-              sizeof(class_map_key_t), ret);
+   hash_mix h;
+   mix_me(h);
+   return h.result();
+}
+
+inline void
+class_map_t::mix_me(hash_mix & h) const {
+   h.mix(key_); // class_map_key_t
    for (auto it=rules_.cbegin(); it!=rules_.cend(); ++it) {
-      ret = hash_mix::mix((uint8_t *)&it->first,
-                 sizeof(uint32_t), ret);
-      ret = hash_mix::mix((uint8_t *)&it->second,
-                 sizeof(class_map_rule_t), ret);
+      h.mix(it->first); // uint32_t
+      h.mix(it->second); // class_map_rule_t
    }
-   ret = hash_mix::final_mix(ret);
-   return ret;
 }
 
 inline std::string

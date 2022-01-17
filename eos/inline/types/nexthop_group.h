@@ -114,15 +114,17 @@ nexthop_group_mpls_action_t::operator<(nexthop_group_mpls_action_t const & other
 
 inline uint32_t
 nexthop_group_mpls_action_t::hash() const {
-   uint32_t ret = 0;
-   ret = hash_mix::mix((uint8_t *)&action_type_,
-              sizeof(mpls_action_t), ret);
+   hash_mix h;
+   mix_me(h);
+   return h.result();
+}
+
+inline void
+nexthop_group_mpls_action_t::mix_me(hash_mix & h) const {
+   h.mix(action_type_); // mpls_action_t
    for (auto it=label_stack_.cbegin(); it!=label_stack_.cend(); ++it) {
-      ret = hash_mix::mix((uint8_t *)&(*it),
-            sizeof(mpls_label_t), ret);
+      h.mix(*it); // mpls_label_t
    }
-   ret = hash_mix::final_mix(ret);
-   return ret;
 }
 
 inline std::string
@@ -198,13 +200,15 @@ nexthop_group_entry_counter_t::operator<(
 
 inline uint32_t
 nexthop_group_entry_counter_t::hash() const {
-   uint32_t ret = 0;
-   ret = hash_mix::mix((uint8_t *)&packets_,
-              sizeof(uint64_t), ret);
-   ret = hash_mix::mix((uint8_t *)&bytes_,
-              sizeof(uint64_t), ret);
-   ret = hash_mix::final_mix(ret);
-   return ret;
+   hash_mix h;
+   mix_me(h);
+   return h.result();
+}
+
+inline void
+nexthop_group_entry_counter_t::mix_me(hash_mix & h) const {
+   h.mix(packets_); // uint64_t
+   h.mix(bytes_); // uint64_t
 }
 
 inline std::string
@@ -295,15 +299,16 @@ nexthop_group_entry_t::operator<(nexthop_group_entry_t const & other) const {
 
 inline uint32_t
 nexthop_group_entry_t::hash() const {
-   uint32_t ret = 0;
-   ret = hash_mix::mix((uint8_t *)&mpls_action_,
-              sizeof(nexthop_group_mpls_action_t), ret);
-   ret = hash_mix::mix((uint8_t *)&nexthop_,
-              sizeof(ip_addr_t), ret);
-   ret = hash_mix::mix((uint8_t *)&intf_,
-              sizeof(intf_id_t), ret);
-   ret = hash_mix::final_mix(ret);
-   return ret;
+   hash_mix h;
+   mix_me(h);
+   return h.result();
+}
+
+inline void
+nexthop_group_entry_t::mix_me(hash_mix & h) const {
+   h.mix(mpls_action_); // nexthop_group_mpls_action_t
+   h.mix(nexthop_); // ip_addr_t
+   h.mix(intf_); // intf_id_t
 }
 
 inline std::string
@@ -538,36 +543,29 @@ nexthop_group_t::operator<(nexthop_group_t const & other) const {
 
 inline uint32_t
 nexthop_group_t::hash() const {
-   uint32_t ret = 0;
-   ret ^= std::hash<std::string>()(name_);
-   ret = hash_mix::mix((uint8_t *)&type_,
-              sizeof(nexthop_group_encap_t), ret);
-   ret = hash_mix::mix((uint8_t *)&gre_key_type_,
-              sizeof(nexthop_group_gre_key_t), ret);
-   ret = hash_mix::mix((uint8_t *)&ttl_,
-              sizeof(uint16_t), ret);
-   ret = hash_mix::mix((uint8_t *)&source_ip_,
-              sizeof(ip_addr_t), ret);
-   ret = hash_mix::mix((uint8_t *)&source_intf_,
-              sizeof(intf_id_t), ret);
-   ret = hash_mix::mix((uint8_t *)&autosize_,
-              sizeof(bool), ret);
+   hash_mix h;
+   mix_me(h);
+   return h.result();
+}
+
+inline void
+nexthop_group_t::mix_me(hash_mix & h) const {
+   h.mix(name_); // std::string
+   h.mix(type_); // nexthop_group_encap_t
+   h.mix(gre_key_type_); // nexthop_group_gre_key_t
+   h.mix(ttl_); // uint16_t
+   h.mix(source_ip_); // ip_addr_t
+   h.mix(source_intf_); // intf_id_t
+   h.mix(autosize_); // bool
    for (auto it=nexthops_.cbegin(); it!=nexthops_.cend(); ++it) {
-      ret = hash_mix::mix((uint8_t *)&it->first,
-                 sizeof(uint16_t), ret);
-      ret = hash_mix::mix((uint8_t *)&it->second,
-                 sizeof(nexthop_group_entry_t), ret);
+      h.mix(it->first); // uint16_t
+      h.mix(it->second); // nexthop_group_entry_t
    }
    for (auto it=destination_ips_.cbegin(); it!=destination_ips_.cend(); ++it) {
-      ret = hash_mix::mix((uint8_t *)&it->first,
-                 sizeof(uint16_t), ret);
-      ret = hash_mix::mix((uint8_t *)&it->second,
-                 sizeof(ip_addr_t), ret);
+      h.mix(it->first); // uint16_t
+      h.mix(it->second); // ip_addr_t
    }
-   ret = hash_mix::mix((uint8_t *)&counters_unshared_,
-              sizeof(bool), ret);
-   ret = hash_mix::final_mix(ret);
-   return ret;
+   h.mix(counters_unshared_); // bool
 }
 
 inline std::string

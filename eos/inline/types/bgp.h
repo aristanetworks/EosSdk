@@ -58,12 +58,15 @@ bgp_peer_key_t::operator<(bgp_peer_key_t const & other) const {
 
 inline uint32_t
 bgp_peer_key_t::hash() const {
-   uint32_t ret = 0;
-   ret ^= std::hash<std::string>()(vrf_name_);
-   ret = hash_mix::mix((uint8_t *)&peer_addr_,
-              sizeof(ip_addr_t), ret);
-   ret = hash_mix::final_mix(ret);
-   return ret;
+   hash_mix h;
+   mix_me(h);
+   return h.result();
+}
+
+inline void
+bgp_peer_key_t::mix_me(hash_mix & h) const {
+   h.mix(vrf_name_); // std::string
+   h.mix(peer_addr_); // ip_addr_t
 }
 
 inline std::string

@@ -5,6 +5,7 @@
 #define EOS_MPLS_H
 
 #include <eos/base.h>
+#include <eos/utility.h>
 #include <eos/types/mpls.h>
 
 /**

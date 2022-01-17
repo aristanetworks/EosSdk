@@ -1,4 +1,4 @@
-// Copyright (c) 2019 Arista Networks, Inc.  All rights reserved.
+// Copyright (c) 2021 Arista Networks, Inc.  All rights reserved.
 // Arista Networks, Inc. Confidential and Proprietary.
 
 #ifndef EOS_TYPES_MPLS_H
@@ -6,8 +6,6 @@
 
 #include <eos/base.h>
 #include <eos/hash_mix.h>
-#include <eos/utility.h>
-#include <sstream>
 
 namespace eos {
 
@@ -75,13 +73,15 @@ class EOS_SDK_PUBLIC mpls_label_t {
       INVALID = 0x100000,
    };
    bool operator!() const;
+   /** Returns a string representation of the MPLS label. */
+   std::string to_string() const;
    bool operator==(mpls_label_t const & other) const;
    bool operator!=(mpls_label_t const & other) const;
    bool operator<(mpls_label_t const & other) const;
    /** The hash function for type mpls_label_t. */
    uint32_t hash() const;
-   /** Returns a string representation of the current object's values. */
-   std::string to_string() const;
+   /** The hash mix function for type mpls_label_t. */
+   void mix_me(hash_mix & h) const;
    /**
     * A utility stream operator that adds a string representation of mpls_label_t
     * to the ostream.

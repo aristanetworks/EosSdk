@@ -59,6 +59,8 @@ class EOS_SDK_PUBLIC bgp_path_attr_fields_t {
    bool operator!=(bgp_path_attr_fields_t const & other) const;
    /** The hash function for type bgp_path_attr_fields_t. */
    uint32_t hash() const;
+   /** The hash mix function for type bgp_path_attr_fields_t. */
+   void mix_me(hash_mix & h) const;
    /** Returns a string representation of the current object's values. */
    std::string to_string() const;
    /**
@@ -100,6 +102,8 @@ class EOS_SDK_PUBLIC bgp_path_options_t {
    bool operator!=(bgp_path_options_t const & other) const;
    /** The hash function for type bgp_path_options_t. */
    uint32_t hash() const;
+   /** The hash mix function for type bgp_path_options_t. */
+   void mix_me(hash_mix & h) const;
    /** Returns a string representation of the current object's values. */
    std::string to_string() const;
    /**
@@ -152,6 +156,8 @@ class EOS_SDK_PUBLIC bgp_path_attr_t {
    bool operator!=(bgp_path_attr_t const & other) const;
    /** The hash function for type bgp_path_attr_t. */
    uint32_t hash() const;
+   /** The hash mix function for type bgp_path_attr_t. */
+   void mix_me(hash_mix & h) const;
    /** Returns a string representation of the current object's values. */
    std::string to_string() const;
    /**
@@ -196,6 +202,8 @@ class EOS_SDK_PUBLIC bgp_path_key_t {
    bool operator<(bgp_path_key_t const & other) const;
    /** The hash function for type bgp_path_key_t. */
    uint32_t hash() const;
+   /** The hash mix function for type bgp_path_key_t. */
+   void mix_me(hash_mix & h) const;
    /** Returns a string representation of the current object's values. */
    std::string to_string() const;
    /**
@@ -230,6 +238,8 @@ class EOS_SDK_PUBLIC bgp_path_t {
    bool operator!=(bgp_path_t const & other) const;
    /** The hash function for type bgp_path_t. */
    uint32_t hash() const;
+   /** The hash mix function for type bgp_path_t. */
+   void mix_me(hash_mix & h) const;
    /** Returns a string representation of the current object's values. */
    std::string to_string() const;
    /**

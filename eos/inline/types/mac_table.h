@@ -118,13 +118,15 @@ mac_key_t::operator<(mac_key_t const & other) const {
 
 inline uint32_t
 mac_key_t::hash() const {
-   uint32_t ret = 0;
-   ret = hash_mix::mix((uint8_t *)&vlan_id_,
-              sizeof(vlan_id_t), ret);
-   ret = hash_mix::mix((uint8_t *)&eth_addr_,
-              sizeof(eth_addr_t), ret);
-   ret = hash_mix::final_mix(ret);
-   return ret;
+   hash_mix h;
+   mix_me(h);
+   return h.result();
+}
+
+inline void
+mac_key_t::mix_me(hash_mix & h) const {
+   h.mix(vlan_id_); // vlan_id_t
+   h.mix(eth_addr_); // eth_addr_t
 }
 
 inline std::string
@@ -238,15 +240,17 @@ mac_entry_t::operator!=(mac_entry_t const & other) const {
 
 inline uint32_t
 mac_entry_t::hash() const {
-   uint32_t ret = 0;
-   ret = hash_mix::mix((uint8_t *)&mac_key_,
-              sizeof(mac_key_t), ret);
+   hash_mix h;
+   mix_me(h);
+   return h.result();
+}
+
+inline void
+mac_entry_t::mix_me(hash_mix & h) const {
+   h.mix(mac_key_); // mac_key_t
    for (auto it=intfs_.cbegin(); it!=intfs_.cend(); ++it) {
-      ret = hash_mix::mix((uint8_t *)&(*it),
-            sizeof(intf_id_t), ret);
+      h.mix(*it); // intf_id_t
    }
-   ret = hash_mix::final_mix(ret);
-   return ret;
 }
 
 inline std::string

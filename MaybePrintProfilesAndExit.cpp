@@ -55,32 +55,9 @@ void print_profiles::add_profile(const char * profile) {
 // have been instantiated, so print the collected profiles and exit.
 void print_profiles::write_profiles() {
    if (print_profiles_fp) {
-      if (eossdk_progname) {
-         fprintf(print_profiles_fp, "agentName:%s-%%sliceId\n", eossdk_progname);
-      } else {
-         // extern const char *__progname; would be to GNU specific...
-         char myExe[1000];
-         if (readlink("/proc/self/exe", myExe, 1000) != -1) {
-            fprintf(print_profiles_fp, "agentName:%s\n", basename(myExe));
-         } else {
-            const char* text =
-                 "Warning: couldn't figure out agent name, edit 'TBD' in profile\n";
-            fprintf(stderr, "%s", text);
-            fprintf(print_profiles_fp, "agentName:!!!TBD!!!\n");
-         }
-      }
-      for (std::map<std::string, bool>::iterator it = profiles_to_print.begin();
-           it != profiles_to_print.end(); it++) {
-         fprintf(print_profiles_fp, "Include: EosSdk_%s.include\n",
-                                     it->first.c_str());
-         // BUG206337: Workaround lack of recursive include support in
-         // SysdbMountProfiles
-         if (strcmp(it->first.c_str(), "IntfMgrHelper") == 0) {
-            fprintf(print_profiles_fp, "Include: AgentPlugin-IntfCollections-*\n" );
-         } else if (strcmp(it->first.c_str(), "mlag")) {
-            fprintf(print_profiles_fp, "Include: MlagStatus-include\n");
-         }
-      }
+      fprintf(print_profiles_fp,
+         "# This file is deprecated, i.e., mount profile is not necessary anymore.\n"
+         "# Please stop generating it.\n" );
       fclose(print_profiles_fp);
       exit(0);
    }

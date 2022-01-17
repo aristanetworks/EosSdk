@@ -47,6 +47,8 @@ class EOS_SDK_PUBLIC l1_source_t {
    bool operator<(l1_source_t const & other) const;
    /** The hash function for type l1_source_t. */
    uint32_t hash() const;
+   /** The hash mix function for type l1_source_t. */
+   void mix_me(hash_mix & h) const;
    /** Returns a string representation of the current object's values. */
    std::string to_string() const;
    /**

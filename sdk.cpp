@@ -1,6 +1,11 @@
 // Copyright (c) 2014 Arista Networks, Inc.  All rights reserved.
 // Arista Networks, Inc. Confidential and Proprietary.
 
+#include "eos/sdk.h"
+#include "SdkImpl.h"
+#include "eos/event_loop.h"
+#include "eos/panic.h"
+
 #include <cassert>
 #include <cstring>
 #include <unistd.h>
@@ -15,194 +20,194 @@
 
 namespace eos {
 
-sdk_scoped_lock::sdk_scoped_lock() {
+sdk::sdk() :
+   sdkImpl{std::make_unique<SdkImpl>()}
+{}
+
+sdk::sdk(std::string const name, void *eossdk_context) :
+   sdkImpl{std::make_unique<SdkImpl>(name, eossdk_context)}
+{}
+
+sdk::~sdk() {
+   //delete sdkImpl;
 }
 
-sdk_scoped_lock::~sdk_scoped_lock() {
-}
-
-#include "GetAgentProcessName.cpp"
-
-sdk::sdk()
-   : acl_mgr_(0),
-     agent_mgr_(0),
-     aresolve_mgr_(0),
-     bfd_session_mgr_(0),
-     bgp_mgr_(0),
-     bgp_path_mgr_(0),
-     class_map_mgr_(0),
-     decap_group_mgr_(0),
-     directflow_mgr_(0),
-     eapi_mgr_(0),
-     eth_intf_mgr_(0),
-     eth_phy_intf_mgr_(0),
-     eth_phy_intf_counter_mgr_(0),
-     eth_lag_intf_mgr_(0),
-     event_loop_(0),
-     fib_mgr_(0),
-     hardware_table_mgr_(0),
-     intf_mgr_helper_(0),
-     intf_mgr_(0),
-     intf_counter_mgr_(0),
-     ip_intf_mgr_(0),
-     ip_route_mgr_(0),
-     l1_source_mgr_(0),
-     lldp_mgr_(0),
-     macsec_mgr_(0),
-     mac_table_mgr_(0),
-     mlag_mgr_(0),
-     mount_mgr_(0),
-     mpls_route_mgr_(0),
-     mpls_vrf_label_mgr_(0),
-     neighbor_table_mgr_(0),
-     nexthop_group_mgr_(0),
-     nexthop_group_tunnel_mgr_(0),
-     policy_map_mgr_(0),
-     subintf_mgr_(0),
-     system_mgr_(0),
-     timeout_mgr_(0),
-     vrf_mgr_(0),
-     route_map_mgr_(0) {
-   name_ = get_agent_process_name();
-   eossdk_context_ = NULL;
-   impl.register_sdk(this);
-   print_profiles::set_print_profiles(name_.c_str());
-}
-
-sdk::sdk(std::string const name, void *eossdk_context)
-   : acl_mgr_(0),
-     agent_mgr_(0),
-     aresolve_mgr_(0),
-     bgp_path_mgr_(0),
-     class_map_mgr_(0),
-     decap_group_mgr_(0),
-     directflow_mgr_(0),
-     eapi_mgr_(0),
-     eth_intf_mgr_(0),
-     eth_phy_intf_mgr_(0),
-     eth_phy_intf_counter_mgr_(0),
-     eth_lag_intf_mgr_(0),
-     event_loop_(0),
-     fib_mgr_(0),
-     hardware_table_mgr_(0),
-     intf_mgr_helper_(0),     
-     intf_mgr_(0),
-     intf_counter_mgr_(0),
-     ip_intf_mgr_(0),
-     ip_route_mgr_(0),
-     l1_source_mgr_(0),
-     lldp_mgr_(0),
-     macsec_mgr_(0),
-     mac_table_mgr_(0),
-     mlag_mgr_(0),
-     mount_mgr_(0),
-     mpls_route_mgr_(0),
-     mpls_vrf_label_mgr_(0),
-     neighbor_table_mgr_(0),
-     nexthop_group_mgr_(0),
-     nexthop_group_tunnel_mgr_(0),
-     policy_map_mgr_(0),
-     subintf_mgr_(0),
-     system_mgr_(0),
-     timeout_mgr_(0),
-     vrf_mgr_(0),
-     route_map_mgr_(0) {
-   name_ = name;
-   eossdk_context_ = eossdk_context;
-   impl.register_sdk(this);
-   print_profiles::set_print_profiles(name_.c_str());
+void sdk::initialize_context() {
+   sdkImpl->initialize_context();
 }
 
 void
 sdk::main_loop(int argc, char ** argv) {
-   assert(!name_.empty() && "No agent name set");
-   impl.agent_name_is(name_.c_str());
-   print_profiles::write_profiles();
-   impl.main_loop();
-
+   sdkImpl->main_loop(argc, argv);
 }
 
-void delete_agent_mgr(agent_mgr *);
-
-sdk::~sdk() {
-   delete_agent_mgr(agent_mgr_);
+std::string sdk::name() {
+   return sdkImpl->name();
 }
 
-void sdk::initialize_context() {
+
+
+
+acl_mgr * sdk::get_acl_mgr() {
+   return sdkImpl->get_acl_mgr();
 }
 
-INIT_STUB_MGR(acl_mgr)
-INIT_STUB_MGR(agent_mgr)
-INIT_STUB_MGR(aresolve_mgr)
-INIT_STUB_MGR(bfd_session_mgr)
-INIT_STUB_MGR(bgp_mgr)
-INIT_STUB_MGR(bgp_path_mgr)
-INIT_STUB_MGR(class_map_mgr)
-INIT_STUB_MGR(decap_group_mgr)
-INIT_STUB_MGR(directflow_mgr)
-INIT_STUB_MGR(eapi_mgr)
-INIT_STUB_MGR(eth_intf_mgr)
-INIT_STUB_MGR(eth_phy_intf_mgr)
-INIT_STUB_MGR(eth_phy_intf_counter_mgr)
-INIT_STUB_MGR(eth_lag_intf_mgr)
-INIT_STUB_MGR(hardware_table_mgr)
-INIT_STUB_MGR(intf_mgr)
-INIT_STUB_MGR(intf_counter_mgr)
-INIT_STUB_MGR(ip_intf_mgr)
-INIT_STUB_MGR(ip_route_mgr)
-INIT_STUB_MGR(l1_source_mgr)
-INIT_STUB_MGR(lldp_mgr)
-INIT_STUB_MGR(macsec_mgr)
-INIT_STUB_MGR(mac_table_mgr)
-INIT_STUB_MGR(mlag_mgr)
-INIT_STUB_MGR(mpls_route_mgr)
-INIT_STUB_MGR(mpls_vrf_label_mgr)
-INIT_STUB_MGR(neighbor_table_mgr)
-INIT_STUB_MGR(nexthop_group_mgr)
-INIT_STUB_MGR(nexthop_group_tunnel_mgr)
-INIT_STUB_MGR(policy_map_mgr)
-INIT_STUB_MGR(route_map_mgr)
-INIT_STUB_MGR(subintf_mgr)
-INIT_STUB_MGR(system_mgr)
-INIT_STUB_MGR(timeout_mgr)
-INIT_STUB_MGR(vrf_mgr)
-
-void sdk::init_event_loop() {
-   if(!event_loop_) {
-      event_loop_ = new event_loop(0);
-   }
+agent_mgr * sdk::get_agent_mgr() {
+   return sdkImpl->get_agent_mgr();
 }
 
-void sdk::init_fib_mgr(mgr_mode_type_t mode) {
-   // TODO: No op impl.
+aresolve_mgr * sdk::get_aresolve_mgr() {
+   return sdkImpl->get_aresolve_mgr();
 }
 
-void sdk::init_mount_mgr() {
-   // BUG86400 - Not a public function
+bfd_session_mgr * sdk::get_bfd_session_mgr() {
+   return sdkImpl->get_bfd_session_mgr();
 }
 
-void sdk::init_intf_mgr_helper() {
-   // BUG86400 - Not a public function
+bgp_mgr * sdk::get_bgp_mgr() {
+   return sdkImpl->get_bgp_mgr();
 }
 
-void default_signal_handler(int signo) {
-   // TODO: No op impl.
+bgp_path_mgr * sdk::get_bgp_path_mgr() {
+   return sdkImpl->get_bgp_path_mgr();
 }
 
-void internal_connection_buffer_size_is(uint32_t bytes) {
+class_map_mgr * sdk::get_class_map_mgr() {
+   return sdkImpl->get_class_map_mgr();
 }
 
-void api_trace_enable_is(bool new_api_trace) {
+decap_group_mgr * sdk::get_decap_group_mgr() {
+   return sdkImpl->get_decap_group_mgr();
 }
 
-void api_trace_buffer_sizes_is(int(&size_spec)[10]) {
+directflow_mgr * sdk::get_directflow_mgr() {
+   return sdkImpl->get_directflow_mgr();
 }
 
-// Real functions to facilitate the making of customized sysdb-mount-profiles 
-// (to use in place of the brute-force one called "EosSdk", see 
-// /usr/lib/SysdbMountProfiles/EosSdkAll), an app can be started with the env var 
-// EOS_PRINT_PROFILES_AND_EXIT pointing to a filename where the profile should be 
-// written, then exit.
-#include "MaybePrintProfilesAndExit.cpp"
+eapi_mgr * sdk::get_eapi_mgr() {
+   return sdkImpl->get_eapi_mgr();
+}
+
+eth_intf_mgr * sdk::get_eth_intf_mgr() {
+   return sdkImpl->get_eth_intf_mgr();
+}
+
+eth_lag_intf_mgr * sdk::get_eth_lag_intf_mgr() {
+   return sdkImpl->get_eth_lag_intf_mgr();
+}
+
+eth_phy_intf_mgr * sdk::get_eth_phy_intf_mgr() {
+   return sdkImpl->get_eth_phy_intf_mgr();
+}
+
+eth_phy_intf_counter_mgr * sdk::get_eth_phy_intf_counter_mgr() {
+   return sdkImpl->get_eth_phy_intf_counter_mgr();
+}
+
+event_loop * sdk::get_event_loop() {
+   return sdkImpl->get_event_loop();
+}
+
+fib_mgr * sdk::get_fib_mgr(mgr_mode_type_t mode) {
+   return sdkImpl->get_fib_mgr(mode);
+}
+
+fpga_mgr * sdk::get_fpga_mgr() {
+   return sdkImpl->get_fpga_mgr();
+}
+
+hardware_table_mgr * sdk::get_hardware_table_mgr() {
+   return sdkImpl->get_hardware_table_mgr();
+}
+
+intf_mgr * sdk::get_intf_mgr() {
+   return sdkImpl->get_intf_mgr();
+}
+
+intf_counter_mgr * sdk::get_intf_counter_mgr() {
+   return sdkImpl->get_intf_counter_mgr();
+}
+
+ip_intf_mgr * sdk::get_ip_intf_mgr() {
+   return sdkImpl->get_ip_intf_mgr();
+}
+
+ip_route_mgr * sdk::get_ip_route_mgr() {
+   return sdkImpl->get_ip_route_mgr();
+}
+
+#if 0
+intf_mgr_helper * sdk::get_intf_mgr_helper() {
+   return sdkImpl->get_intf_mgr_helper() {
+}
+#endif
+
+l1_source_mgr * sdk::get_l1_source_mgr() {
+   return sdkImpl->get_l1_source_mgr();
+}
+
+macsec_mgr * sdk::get_macsec_mgr() {
+   return sdkImpl->get_macsec_mgr();
+}
+
+mac_table_mgr * sdk::get_mac_table_mgr() {
+   return sdkImpl->get_mac_table_mgr();
+}
+
+mlag_mgr * sdk::get_mlag_mgr() {
+   return sdkImpl->get_mlag_mgr();
+}
+
+mount_mgr * sdk::get_mount_mgr() {
+   return sdkImpl->get_mount_mgr();
+}
+
+mpls_route_mgr * sdk::get_mpls_route_mgr() {
+   return sdkImpl->get_mpls_route_mgr();
+}
+
+mpls_vrf_label_mgr * sdk::get_mpls_vrf_label_mgr() {
+   return sdkImpl->get_mpls_vrf_label_mgr();
+}
+
+neighbor_table_mgr * sdk::get_neighbor_table_mgr() {
+   return sdkImpl->get_neighbor_table_mgr();
+}
+
+nexthop_group_mgr * sdk::get_nexthop_group_mgr() {
+   return sdkImpl->get_nexthop_group_mgr();
+}
+
+policy_map_mgr * sdk::get_policy_map_mgr() {
+   return sdkImpl->get_policy_map_mgr();
+}
+
+route_map_mgr * sdk::get_route_map_mgr() {
+   return sdkImpl->get_route_map_mgr();
+}
+
+subintf_mgr * sdk::get_subintf_mgr() {
+   return sdkImpl->get_subintf_mgr();
+}
+
+system_mgr * sdk::get_system_mgr() {
+   return sdkImpl->get_system_mgr();
+}
+
+timeout_mgr * sdk::get_timeout_mgr() {
+   return sdkImpl->get_timeout_mgr();
+}
+
+vrf_mgr * sdk::get_vrf_mgr() {
+   return sdkImpl->get_vrf_mgr();
+}
+
+lldp_mgr * sdk::get_lldp_mgr() {
+   return sdkImpl->get_lldp_mgr();
+}
+
+nexthop_group_tunnel_mgr * sdk::get_nexthop_group_tunnel_mgr() {
+   return sdkImpl->get_nexthop_group_tunnel_mgr();
+}
 
 }

@@ -1,4 +1,4 @@
-// Copyright (c) 2019 Arista Networks, Inc.  All rights reserved.
+// Copyright (c) 2021 Arista Networks, Inc.  All rights reserved.
 // Arista Networks, Inc. Confidential and Proprietary.
 
 #ifndef EOS_INLINE_TYPES_MPLS_H
@@ -88,6 +88,11 @@ mpls_label_t::label_is(uint32_t label) {
    label_ = label;
 }
 
+inline std::string
+mpls_label_t::to_string() const {
+   return std::to_string(label_);
+}
+
 inline bool
 mpls_label_t::operator==(mpls_label_t const & other) const {
    return label_ == other.label_;
@@ -108,20 +113,14 @@ mpls_label_t::operator<(mpls_label_t const & other) const {
 
 inline uint32_t
 mpls_label_t::hash() const {
-   uint32_t ret = 0;
-   ret = hash_mix::mix((uint8_t *)&label_,
-              sizeof(uint32_t), ret);
-   ret = hash_mix::final_mix(ret);
-   return ret;
+   hash_mix h;
+   mix_me(h);
+   return h.result();
 }
 
-inline std::string
-mpls_label_t::to_string() const {
-   std::ostringstream ss;
-   ss << "mpls_label_t(";
-   ss << "label=" << label_;
-   ss << ")";
-   return ss.str();
+inline void
+mpls_label_t::mix_me(hash_mix & h) const {
+   h.mix(label_); // uint32_t
 }
 
 inline std::ostream&

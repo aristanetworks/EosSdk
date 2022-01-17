@@ -31,6 +31,7 @@
 #include <eos/intf.h>
 #include <eos/ip.h>
 #include <eos/iterator.h>
+#include <eos/mpls.h>
 
 #include <eos/types/bfd.h>
 
@@ -90,11 +91,66 @@ class EOS_SDK_PUBLIC bfd_session_handler :
     * Handler called when a BFD session is created
     */
    virtual void on_bfd_session_set(bfd_session_key_t const &);
-   
+
    /**
     * Handler called when a BFD session is deleted
     */
    virtual void on_bfd_session_del(bfd_session_key_t const &);
+
+   /**
+    * Registers this class to receive change updates on all sBFD echo
+    * sessions created by EosSdk.
+    *
+    * Expects a boolean signifying whether notifications should be generated
+    * for all sBFD echo sessions created by EosSdk or not.
+    *
+    * This controls notifications on:
+    *  - on_sbfd_echo_session_status()
+    *  - on_sbfd_echo_session_set()
+    *  - on_sbfd_echo_session_del()
+    */
+   void watch_all_sbfd_echo_sessions(bool);
+
+   /**
+    * Registers this class to receive change updates on the given sBFD
+    * echo session.
+    *
+    * Expects the session key of the corresponding sBFD echo session.
+    * and a boolean signifying whether notifications should be
+    * propagated to this sBFD echo session or not.
+    */
+   void watch_sbfd_echo_session(sbfd_echo_session_key_t const &, bool);
+
+   /**
+    * Handler called when the status of a sBFD echo session status changes.
+    *
+    * Possible status are:
+    *   BFD_SESSION_STATUS_NULL
+    *   BFD_SESSION_STATUS_DOWN
+    *   BFD_SESSION_STATUS_INIT
+    *   BFD_SESSION_STATUS_UP
+    *   BFD_SESSION_STATUS_ADMIN_DOWN
+    *
+    */
+   virtual void on_sbfd_echo_session_status(sbfd_echo_session_key_t const &,
+                                            bfd_session_status_t);
+
+   /**
+    * Handler called when a sBFD echo session is created.
+    */
+   virtual void on_sbfd_echo_session_set(sbfd_echo_session_key_t const &);
+
+   /**
+    * Handler called when a sBFD echo session is deleted.
+    */
+   virtual void on_sbfd_echo_session_del(sbfd_echo_session_key_t const &);
+
+   /**
+    * Handler called periodically for sBFD echo sessions where RTT
+    * statistics have been enabled with sbfd_echo_rtt_enabled_set.
+    */
+   virtual void on_sbfd_echo_session_rtt(sbfd_echo_session_key_t const &,
+                                         sbfd_echo_session_rtt_stats_t const &);
 };
 
 class bfd_session_iter_impl;
@@ -107,6 +163,20 @@ class EOS_SDK_PUBLIC bfd_session_iter_t:
  private:
    friend class bfd_session_iter_impl;
    explicit bfd_session_iter_t(bfd_session_iter_impl * const) EOS_SDK_PRIVATE;
+};
+
+class sbfd_echo_session_iter_impl;
+
+/**
+ * An iterator that yields an sbfd_echo_session_key_t for each
+ * configured sBFD echo session
+ */
+class EOS_SDK_PUBLIC sbfd_echo_session_iter_t
+      : public iter_base< sbfd_echo_session_key_t, sbfd_echo_session_iter_impl > {
+ private:
+   friend class sbfd_echo_session_iter_impl;
+   explicit sbfd_echo_session_iter_t( sbfd_echo_session_iter_impl * const )
+      EOS_SDK_PRIVATE;
 };
 
 /**
@@ -184,7 +254,91 @@ class EOS_SDK_PUBLIC bfd_session_mgr :
    /**
     * Return the BFD status given a BFD session key.
     */
-   virtual bfd_session_status_t session_status( bfd_session_key_t const &) const = 0;
+   virtual bfd_session_status_t session_status(bfd_session_key_t const &) const = 0;
+
+   /**
+    * sBFD echo sessions.
+    *
+    * Only a single EosSdk application can use the sbfd_echo_* APIs,
+    * if a second application attempts to use them, it will result in
+    * a panic / exception.
+    */
+
+   /**
+    * Returns an iterator over all sBFD echo sessions configured
+    * through EosSdk on the system.
+    */
+   virtual sbfd_echo_session_iter_t sbfd_echo_session_iter() const = 0;
+
+   /**
+    * Return true if the sBFD echo session is configured.
+    */
+   virtual bool sbfd_echo_session_exists(sbfd_echo_session_key_t const &) const = 0;
+
+   /**
+    * Create a sBFD echo session.
+    */
+   virtual void sbfd_echo_session_set(sbfd_echo_session_key_t const &) = 0;
+
+   /**
+    * Remove a sBFD echo session if it exists. It is a no-op if the
+    * specified sBFD session does not exist.
+    */
+   virtual void sbfd_echo_session_del(sbfd_echo_session_key_t const &) = 0;
+
+   /**
+    * Set sBFD echo session default interval value. It will be applied
+    * to all sBFD echo session.
+    */
+   virtual void sbfd_echo_default_interval_set(sbfd_interval_t const &) = 0;
+
+   /**
+    * Get global sBFD echo session interval configuration.
+    */
+   virtual sbfd_interval_t sbfd_echo_default_interval() const = 0;
+
+   /**
+    * Set sBFD echo session interval value per session
+    */
+   virtual void sbfd_echo_interval_set(sbfd_echo_session_key_t const &,
+                                       sbfd_interval_t const &) = 0;
+
+   /**
+    * Get sBFD echo session interval configuration.
+    */
+   virtual sbfd_interval_t
+      sbfd_echo_interval(sbfd_echo_session_key_t const &) const = 0;
+
+   /**
+    * Reset sBFD echo session interval configuration on a session back to
+    * value configured by sbfd_echo_default_interval_set(). If
+    * sbfd_echo_default_interval_set() has not been explicitly called
+    * to configure a default interval, the interval will be reset to
+    * tx=300ms and mult=3.
+    */
+   virtual void sbfd_echo_interval_reset(sbfd_echo_session_key_t const &) = 0;
+
+   /**
+    * Request RTT measurements for the sBFD probe packets.
+    *
+    * RTTs will be reported via the on_sbfd_echo_session_rtt at
+    * intervals configured by
+    *
+    * router bfd
+    *  session stats snapshot interval ((dangerous <1-9>)|<10-3600 seconds>)
+    */
+   virtual void sbfd_echo_rtt_enabled_set(sbfd_echo_session_key_t const &, bool) = 0;
+
+   /**
+    * Is sBFD RTT measurements enabled?
+    */
+   virtual bool sbfd_echo_rtt_enabled(sbfd_echo_session_key_t const &) const = 0;
+
+   /**
+    * Return the BFD status given a sBFD echo session key.
+    */
+   virtual bfd_session_status_t sbfd_echo_session_status(
+      sbfd_echo_session_key_t const &) const = 0;
 
  protected:
    bfd_session_mgr() EOS_SDK_PRIVATE;

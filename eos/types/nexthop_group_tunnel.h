@@ -53,6 +53,8 @@ class EOS_SDK_PUBLIC nexthop_group_tunnel_t {
    bool operator!=(nexthop_group_tunnel_t const & other) const;
    /** The hash function for type nexthop_group_tunnel_t. */
    uint32_t hash() const;
+   /** The hash mix function for type nexthop_group_tunnel_t. */
+   void mix_me(hash_mix & h) const;
    /** Returns a string representation of the current object's values. */
    std::string to_string() const;
    /**

@@ -1,4 +1,4 @@
-// Copyright (c) 2018 Arista Networks, Inc.  All rights reserved.
+// Copyright (c) 2020 Arista Networks, Inc.  All rights reserved.
 // Arista Networks, Inc. Confidential and Proprietary.
 
 #ifndef EOS_TYPES_IP_H
@@ -86,6 +86,8 @@ class EOS_SDK_PUBLIC ip_addr_t {
    operator bool() const;
    /** The hash function for type ip_addr_t. */
    uint32_t hash() const;
+   /** The hash mix function for type ip_addr_t. */
+   void mix_me(hash_mix & h) const;
    /**
     * A utility stream operator that adds a string representation of ip_addr_t to
     * the ostream.
@@ -147,6 +149,8 @@ class EOS_SDK_PUBLIC ip_prefix_t {
    bool operator<(ip_prefix_t const & other) const;
    /** The hash function for type ip_prefix_t. */
    uint32_t hash() const;
+   /** The hash mix function for type ip_prefix_t. */
+   void mix_me(hash_mix & h) const;
    /**
     * A utility stream operator that adds a string representation of ip_prefix_t to
     * the ostream.
@@ -192,6 +196,8 @@ class EOS_SDK_PUBLIC ip_addr_mask_t {
    bool operator<(ip_addr_mask_t const & other) const;
    /** The hash function for type ip_addr_mask_t. */
    uint32_t hash() const;
+   /** The hash mix function for type ip_addr_mask_t. */
+   void mix_me(hash_mix & h) const;
    /**
     * A utility stream operator that adds a string representation of ip_addr_mask_t
     * to the ostream.
@@ -242,6 +248,8 @@ class EOS_SDK_PUBLIC address_overlap_error : public configuration_error {
    virtual void raise() const;
    /** The hash function for type address_overlap_error. */
    uint32_t hash() const;
+   /** The hash mix function for type address_overlap_error. */
+   void mix_me(hash_mix & h) const;
    /** Returns a string representation of the current object's values. */
    std::string to_string() const;
    /**

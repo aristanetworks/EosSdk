@@ -73,6 +73,7 @@ typedef uint64_t uint64_be_t;
 %feature("nodirector") eos::eth_phy_intf_mgr;
 %feature("nodirector") eos::eth_phy_intf_counter_mgr;
 %feature("nodirector") eos::fib_mgr;
+%feature("nodirector") eos::fpga_mgr;
 %feature("nodirector") eos::hardware_table_mgr;
 %feature("nodirector") eos::intf_mgr;
 %feature("nodirector") eos::intf_counter_mgr;
@@ -114,6 +115,7 @@ typedef uint64_t uint64_be_t;
 #include "eos/exception.h"
 #include "eos/fd.h"
 #include "eos/fib.h"
+#include "eos/fpga.h"
 #include "eos/hardware_table.h"
 #include "eos/hash_mix.h"
 #include "eos/intf.h"
@@ -293,6 +295,7 @@ wrap_iterator(eos::class_map_iter_t, eos::class_map_iter_impl, eos::class_map_ke
 wrap_iterator(eos::fib_fec_iter_t, eos::fib_fec_iter_impl, eos::fib_fec_t);
 wrap_iterator(eos::fib_route_iter_t, eos::fib_route_iter_impl, eos::fib_route_t);
 wrap_iterator(eos::flow_entry_iter_t, eos::flow_entry_iter_impl, eos::flow_entry_t);
+wrap_iterator(eos::fpga_iter_t, eos::fpga_iter_impl, eos::fpga_t);
 wrap_iterator(eos::eth_intf_iter_t, eos::eth_intf_iter_impl, eos::intf_id_t);
 wrap_iterator(eos::eth_lag_intf_iter_t, eos::eth_lag_intf_iter_impl, eos::intf_id_t);
 wrap_iterator(eos::eth_lag_intf_member_iter_t, eos::eth_lag_intf_member_iter_impl, eos::intf_id_t);
@@ -323,6 +326,7 @@ wrap_iterator(eos::vrf_iter_t, eos::vrf_iter_impl, std::string);
 wrap_iterator(eos::programmed_nexthop_group_iter_t, eos::programmed_nexthop_group_iter_impl, std::string);
 wrap_iterator(eos::macsec_profile_iter_t, eos::macsec_profile_iter_impl, eos::macsec_profile_name_t);
 wrap_iterator(eos::macsec_intf_status_iter_t, eos::macsec_intf_status_iter_impl, eos::intf_id_t);
+wrap_iterator(eos::sbfd_echo_session_iter_t, eos::sbfd_echo_session_iter_impl, eos::sbfd_echo_session_key_t);
 
 // Make managers themselves iterable, when it makes sense:
 default_iterator(eos::directflow_mgr, flow_entry_iter);

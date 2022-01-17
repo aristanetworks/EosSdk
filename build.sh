@@ -50,10 +50,6 @@ if $target_32b; then
 fi
 
 sysroot=$($(which gcc) --print-sysroot) || sysroot = ""
-[ $sysroot -a ${sysroot%fc14-gcc4.9.2-glibc2.19} != $sysroot ] && {
-  LDFLAGS="-Wl,--dynamic-linker=$sysroot/lib/ld-linux.so.2 -Wl,-rpath,$sysroot/lib:/usr/lib:/lib"
-  export LDFLAGS
-}
 
 set -e
 test -f configure || ./bootstrap
@@ -65,8 +61,9 @@ test -f Makefile || ./configure  \
 set -x
 STUBS_DIR=$PWD
 GO_SRCDIR="$STUBS_DIR/go/src/eossdk"
-rm -f "$GO_SRCDIR/eos"
 mkdir -p "$GO_SRCDIR"
-ln -s "$STUBS_DIR/eos" "$GO_SRCDIR/"
-
+if [ -d $GO_SRCDIR/eos ]; then
+   rm -f "$GO_SRCDIR/eos"
+   ln -s "$STUBS_DIR/eos" "$GO_SRCDIR/"
+fi
 exec make "$@"

@@ -1,4 +1,4 @@
-// Copyright (c) 2016 Arista Networks, Inc.  All rights reserved.
+// Copyright (c) 2020 Arista Networks, Inc.  All rights reserved.
 // Arista Networks, Inc. Confidential and Proprietary.
 
 #ifndef EOS_INLINE_TYPES_ETH_LAG_INTF_H
@@ -166,18 +166,18 @@ eth_lag_intf_membership_t::operator<(eth_lag_intf_membership_t const & other)
 
 inline uint32_t
 eth_lag_intf_membership_t::hash() const {
-   uint32_t ret = 0;
-   ret = hash_mix::mix((uint8_t *)&eth_lag_intf_id_,
-              sizeof(intf_id_t), ret);
-   ret = hash_mix::mix((uint8_t *)&active_,
-              sizeof(bool), ret);
-   ret ^= std::hash<std::string>()(reason_);
-   ret = hash_mix::mix((uint8_t *)&member_time_,
-              sizeof(double), ret);
-   ret = hash_mix::mix((uint8_t *)&mode_,
-              sizeof(eth_lag_intf_member_lacp_mode_t), ret);
-   ret = hash_mix::final_mix(ret);
-   return ret;
+   hash_mix h;
+   mix_me(h);
+   return h.result();
+}
+
+inline void
+eth_lag_intf_membership_t::mix_me(hash_mix & h) const {
+   h.mix(eth_lag_intf_id_); // intf_id_t
+   h.mix(active_); // bool
+   h.mix(reason_); // std::string
+   h.mix(member_time_); // double
+   h.mix(mode_); // eth_lag_intf_member_lacp_mode_t
 }
 
 inline std::string
@@ -282,19 +282,18 @@ eth_lag_intf_t::operator<(eth_lag_intf_t const & other) const {
 
 inline uint32_t
 eth_lag_intf_t::hash() const {
-   uint32_t ret = 0;
-   ret = hash_mix::mix((uint8_t *)&intf_,
-              sizeof(intf_id_t), ret);
-   ret = hash_mix::mix((uint8_t *)&speed_,
-              sizeof(uint64_t), ret);
-   ret = hash_mix::mix((uint8_t *)&min_links_,
-              sizeof(uint32_t), ret);
-   ret = hash_mix::mix((uint8_t *)&fallback_type_,
-              sizeof(eth_lag_intf_fallback_type_t), ret);
-   ret = hash_mix::mix((uint8_t *)&fallback_timeout_,
-              sizeof(uint16_t), ret);
-   ret = hash_mix::final_mix(ret);
-   return ret;
+   hash_mix h;
+   mix_me(h);
+   return h.result();
+}
+
+inline void
+eth_lag_intf_t::mix_me(hash_mix & h) const {
+   h.mix(intf_); // intf_id_t
+   h.mix(speed_); // uint64_t
+   h.mix(min_links_); // uint32_t
+   h.mix(fallback_type_); // eth_lag_intf_fallback_type_t
+   h.mix(fallback_timeout_); // uint16_t
 }
 
 inline std::string

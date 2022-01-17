@@ -1,4 +1,4 @@
-// Copyright (c) 2017 Arista Networks, Inc.  All rights reserved.
+// Copyright (c) 2020 Arista Networks, Inc.  All rights reserved.
 // Arista Networks, Inc. Confidential and Proprietary.
 
 #ifndef EOS_TYPES_DECAP_GROUP_H
@@ -63,6 +63,8 @@ class EOS_SDK_PUBLIC decap_group_t {
    bool operator<(decap_group_t const & other) const;
    /** The hash function for type decap_group_t. */
    uint32_t hash() const;
+   /** The hash mix function for type decap_group_t. */
+   void mix_me(hash_mix & h) const;
    /** Returns a string representation of the current object's values. */
    std::string to_string() const;
    /**

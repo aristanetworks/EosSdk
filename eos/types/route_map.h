@@ -1,4 +1,4 @@
-// Copyright (c) 2020 Arista Networks, Inc.  All rights reserved.
+// Copyright (c) 2021 Arista Networks, Inc.  All rights reserved.
 // Arista Networks, Inc. Confidential and Proprietary.
 
 #ifndef EOS_TYPES_ROUTE_MAP_H
@@ -13,10 +13,10 @@
 namespace eos {
 
 enum bandwidth_unit_t {
-   BIT,
-   KILOBIT,
-   MEGABIT,
-   GIGABIT,
+   LINK_BANDWIDTH_UNIT_BIT,
+   LINK_BANDWIDTH_UNIT_KILOBIT,
+   LINK_BANDWIDTH_UNIT_MEGABIT,
+   LINK_BANDWIDTH_UNIT_GIGABIT,
 };
 /** Appends a string representation of enum bandwidth_unit_t value to the ostream. */
 std::ostream& operator<<(std::ostream& os, const bandwidth_unit_t & enum_val);
@@ -24,7 +24,8 @@ std::ostream& operator<<(std::ostream& os, const bandwidth_unit_t & enum_val);
 /** Extended community link bandwidth value. */
 class EOS_SDK_PUBLIC link_bandwidth_t {
  public:
-   /** Create link bandwidth value. */
+   link_bandwidth_t(float value, bandwidth_unit_t unit);
+   explicit link_bandwidth_t(float value);
    link_bandwidth_t();
 
    /** Getter for 'value': The link bandwidth value. */
@@ -42,6 +43,8 @@ class EOS_SDK_PUBLIC link_bandwidth_t {
    bool operator<(link_bandwidth_t const & other) const;
    /** The hash function for type link_bandwidth_t. */
    uint32_t hash() const;
+   /** The hash mix function for type link_bandwidth_t. */
+   void mix_me(hash_mix & h) const;
    /** Returns a string representation of the current object's values. */
    std::string to_string() const;
    /**
@@ -90,11 +93,13 @@ class EOS_SDK_PUBLIC route_map_link_bandwidth_t {
    void route_map_operation_type_set_is(link_bandwidth_t bandwidth);
    void route_map_operation_type_delete_is(link_bandwidth_t bandwidth,
                                            bgp_asn_t asn);
-   /** The hash function for type route_map_link_bandwidth_t. */
-   uint32_t hash() const;
    bool operator==(route_map_link_bandwidth_t const & other) const;
    bool operator!=(route_map_link_bandwidth_t const & other) const;
    bool operator<(route_map_link_bandwidth_t const & other) const;
+   /** The hash function for type route_map_link_bandwidth_t. */
+   uint32_t hash() const;
+   /** The hash mix function for type route_map_link_bandwidth_t. */
+   void mix_me(hash_mix & h) const;
    /** Returns a string representation of the current object's values. */
    std::string to_string() const;
    /**
@@ -114,19 +119,20 @@ class EOS_SDK_PUBLIC route_map_link_bandwidth_t {
 class EOS_SDK_PUBLIC route_map_entry_t {
  public:
    route_map_entry_t();
-   explicit route_map_entry_t(route_map_sequence_number_t sequence_number);
-   explicit route_map_entry_t(route_map_sequence_number_t sequence_number,
-                              bool permit);
-
-   /** Getter for 'sequence_number': Map entry sequence number. */
-   route_map_sequence_number_t sequence_number() const;
-   /** Setter for 'sequence_number'. */
-   void sequence_number_is(route_map_sequence_number_t sequence_number);
+   explicit route_map_entry_t(bool permit);
 
    /** Getter for 'permit': Permit sequence entry when true, deny otherwise. */
    bool permit() const;
    /** Setter for 'permit'. */
    void permit_is(bool permit);
+
+   /**
+    * Getter for 'continue_sequence': Continue to a different map entry. Set to 0
+    * for deletion.
+    */
+   route_map_sequence_number_t continue_sequence() const;
+   /** Setter for 'continue_sequence'. */
+   void continue_sequence_is(route_map_sequence_number_t continue_sequence);
 
    /**
     * Getter for 'link_bandwidth': BGP extended community link bandwidth attribute.
@@ -137,11 +143,12 @@ class EOS_SDK_PUBLIC route_map_entry_t {
 
    /** Remove the link bandwidth configuration. */
    void link_bandwidth_del();
-   /** The hash function for type route_map_entry_t. */
-   uint32_t hash() const;
    bool operator==(route_map_entry_t const & other) const;
    bool operator!=(route_map_entry_t const & other) const;
-   bool operator<(route_map_entry_t const & other) const;
+   /** The hash function for type route_map_entry_t. */
+   uint32_t hash() const;
+   /** The hash mix function for type route_map_entry_t. */
+   void mix_me(hash_mix & h) const;
    /** Returns a string representation of the current object's values. */
    std::string to_string() const;
    /**
@@ -151,18 +158,13 @@ class EOS_SDK_PUBLIC route_map_entry_t {
    friend std::ostream& operator<<(std::ostream& os, const route_map_entry_t& obj);
 
  private:
-   route_map_sequence_number_t sequence_number_;
    bool permit_;
+   route_map_sequence_number_t continue_sequence_;
    route_map_link_bandwidth_t link_bandwidth_;
 };
 
 class EOS_SDK_PUBLIC route_map_t {
  public:
-
-   /** Getter for 'name': Route map name. */
-   route_map_name_t name() const;
-   /** Setter for 'name'. */
-   void name_is(route_map_name_t const & name);
 
    /**
     * Getter for 'map_entry': A map of route map entries, keyed by sequence number.
@@ -182,9 +184,10 @@ class EOS_SDK_PUBLIC route_map_t {
 
    bool operator==(route_map_t const & other) const;
    bool operator!=(route_map_t const & other) const;
-   bool operator<(route_map_t const & other) const;
    /** The hash function for type route_map_t. */
    uint32_t hash() const;
+   /** The hash mix function for type route_map_t. */
+   void mix_me(hash_mix & h) const;
    /** Returns a string representation of the current object's values. */
    std::string to_string() const;
    /**
@@ -194,7 +197,6 @@ class EOS_SDK_PUBLIC route_map_t {
    friend std::ostream& operator<<(std::ostream& os, const route_map_t& obj);
 
  private:
-   route_map_name_t name_;
    std::map<route_map_sequence_number_t, route_map_entry_t> map_entry_;
 };
 }

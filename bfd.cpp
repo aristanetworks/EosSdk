@@ -51,6 +51,36 @@ class bfd_session_mgr_impl : public bfd_session_mgr {
    bfd_session_status_t session_status(bfd_session_key_t const & key) const {
       return eos::BFD_SESSION_STATUS_NULL;
    }
+
+   sbfd_echo_session_iter_t sbfd_echo_session_iter() const {
+      sbfd_echo_session_iter_t * nop = nullptr;
+      return *nop;
+   }
+   bool sbfd_echo_session_exists( sbfd_echo_session_key_t const & ) const {
+      return false;
+   }
+   void sbfd_echo_session_set( sbfd_echo_session_key_t const & ) {}
+   void sbfd_echo_session_del( sbfd_echo_session_key_t const & ) {}
+   void sbfd_echo_default_interval_set( sbfd_interval_t const & ) {}
+   sbfd_interval_t sbfd_echo_default_interval() const {
+      return sbfd_interval_t();
+   }
+   void sbfd_echo_interval_set( sbfd_echo_session_key_t const &,
+                                sbfd_interval_t const & ) {}
+   sbfd_interval_t
+   sbfd_echo_interval( sbfd_echo_session_key_t const & ) const {
+      return sbfd_interval_t();
+   }
+   void sbfd_echo_interval_reset( sbfd_echo_session_key_t const & ) {}
+   void sbfd_echo_rtt_enabled_set( sbfd_echo_session_key_t const &, bool ) {
+   }
+   bool sbfd_echo_rtt_enabled( sbfd_echo_session_key_t const & ) const {
+      return false;
+   }
+   bfd_session_status_t
+   sbfd_echo_session_status( sbfd_echo_session_key_t const & ) const {
+      return eos::BFD_SESSION_STATUS_NULL;
+   }
 };
 
 DEFINE_STUB_MGR_CTOR(bfd_session_mgr)
@@ -65,5 +95,21 @@ void bfd_session_handler::on_bfd_session_status(bfd_session_key_t const & key,
                                                 bfd_session_status_t new_status) {}
 void bfd_session_handler::on_bfd_session_set(bfd_session_key_t const & key) {}
 void bfd_session_handler::on_bfd_session_del(bfd_session_key_t const & key) {}
+
+void
+bfd_session_handler::watch_all_sbfd_echo_sessions( bool ) {}
+void
+bfd_session_handler::watch_sbfd_echo_session( sbfd_echo_session_key_t const &,
+                                              bool ) {}
+void
+bfd_session_handler::on_sbfd_echo_session_status( sbfd_echo_session_key_t const &,
+                                                  bfd_session_status_t ) {}
+void
+bfd_session_handler::on_sbfd_echo_session_set( sbfd_echo_session_key_t const & ) {}
+void
+bfd_session_handler::on_sbfd_echo_session_del( sbfd_echo_session_key_t const & ) {}
+void
+bfd_session_handler::on_sbfd_echo_session_rtt(
+   sbfd_echo_session_key_t const &, sbfd_echo_session_rtt_stats_t const & ) {}
 
 } // end namespace eos

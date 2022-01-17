@@ -1,4 +1,4 @@
-// Copyright (c) 2016 Arista Networks, Inc.  All rights reserved.
+// Copyright (c) 2020 Arista Networks, Inc.  All rights reserved.
 // Arista Networks, Inc. Confidential and Proprietary.
 
 #ifndef EOS_TYPES_INTF_H
@@ -76,6 +76,8 @@ class EOS_SDK_PUBLIC intf_id_t {
    bool operator<(intf_id_t const & other) const;
    /** The hash function for type intf_id_t. */
    uint32_t hash() const;
+   /** The hash mix function for type intf_id_t. */
+   void mix_me(hash_mix & h) const;
    /**
     * A utility stream operator that adds a string representation of intf_id_t to
     * the ostream.
@@ -170,6 +172,8 @@ class EOS_SDK_PUBLIC intf_counters_t {
    bool operator!=(intf_counters_t const & other) const;
    /** The hash function for type intf_counters_t. */
    uint32_t hash() const;
+   /** The hash mix function for type intf_counters_t. */
+   void mix_me(hash_mix & h) const;
    /** Returns a string representation of the current object's values. */
    std::string to_string() const;
    /**
@@ -221,6 +225,8 @@ class EOS_SDK_PUBLIC intf_traffic_rates_t {
    bool operator!=(intf_traffic_rates_t const & other) const;
    /** The hash function for type intf_traffic_rates_t. */
    uint32_t hash() const;
+   /** The hash mix function for type intf_traffic_rates_t. */
+   void mix_me(hash_mix & h) const;
    /** Returns a string representation of the current object's values. */
    std::string to_string() const;
    /**
@@ -250,6 +256,8 @@ class EOS_SDK_PUBLIC no_such_interface_error : public error {
    virtual void raise() const;
    /** The hash function for type no_such_interface_error. */
    uint32_t hash() const;
+   /** The hash mix function for type no_such_interface_error. */
+   void mix_me(hash_mix & h) const;
    /** Returns a string representation of the current object's values. */
    std::string to_string() const;
    /**
@@ -276,6 +284,8 @@ class EOS_SDK_PUBLIC not_switchport_eligible_error : public error {
    virtual void raise() const;
    /** The hash function for type not_switchport_eligible_error. */
    uint32_t hash() const;
+   /** The hash mix function for type not_switchport_eligible_error. */
+   void mix_me(hash_mix & h) const;
    /** Returns a string representation of the current object's values. */
    std::string to_string() const;
    /**

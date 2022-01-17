@@ -110,6 +110,16 @@ class EOS_SDK_PUBLIC l1_source_mgr : public base_mgr<l1_source_handler, intf_id_
        */
       virtual l1_source_iter_t l1_source_status_iter() const = 0;
 
+      /**
+       * Configures the description of an application interface.
+       */
+      virtual void app_description_is(intf_id_t, std::string) = 0;
+
+      /**
+       * Remove the description of an application interface.
+       */
+      virtual void app_description_del(intf_id_t) = 0;
+
    protected:
       l1_source_mgr() EOS_SDK_PRIVATE;
       friend class l1_source_handler;

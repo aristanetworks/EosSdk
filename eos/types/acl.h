@@ -104,6 +104,8 @@ class EOS_SDK_PUBLIC acl_ttl_spec_t {
    bool operator<(acl_ttl_spec_t const & other) const;
    /** The hash function for type acl_ttl_spec_t. */
    uint32_t hash() const;
+   /** The hash mix function for type acl_ttl_spec_t. */
+   void mix_me(hash_mix & h) const;
    /** Returns a string representation of the current object's values. */
    std::string to_string() const;
    /**
@@ -149,6 +151,8 @@ class EOS_SDK_PUBLIC acl_port_spec_t {
    bool operator<(acl_port_spec_t const & other) const;
    /** The hash function for type acl_port_spec_t. */
    uint32_t hash() const;
+   /** The hash mix function for type acl_port_spec_t. */
+   void mix_me(hash_mix & h) const;
    /** Returns a string representation of the current object's values. */
    std::string to_string() const;
    /**
@@ -194,6 +198,8 @@ class EOS_SDK_PUBLIC acl_key_t {
    bool operator!=(acl_key_t const & other) const;
    /** The hash function for type acl_key_t. */
    uint32_t hash() const;
+   /** The hash mix function for type acl_key_t. */
+   void mix_me(hash_mix & h) const;
    /** Returns a string representation of the current object's values. */
    std::string to_string() const;
    /**
@@ -239,6 +245,8 @@ class EOS_SDK_PUBLIC acl_rule_base_t {
 
    /** The hash function for type acl_rule_base_t. */
    uint32_t hash() const;
+   /** The hash mix function for type acl_rule_base_t. */
+   void mix_me(hash_mix & h) const;
    /** Returns a string representation of the current object's values. */
    std::string to_string() const;
    /**
@@ -355,6 +363,8 @@ class EOS_SDK_PUBLIC acl_rule_ip_t : public acl_rule_base_t {
    bool operator<(acl_rule_ip_t const & other) const;
    /** The hash function for type acl_rule_ip_t. */
    uint32_t hash() const;
+   /** The hash mix function for type acl_rule_ip_t. */
+   void mix_me(hash_mix & h) const;
    /** Returns a string representation of the current object's values. */
    std::string to_string() const;
    /**
@@ -421,6 +431,8 @@ class EOS_SDK_PUBLIC acl_rule_eth_t : public acl_rule_base_t {
    bool operator!=(acl_rule_eth_t const & other) const;
    /** The hash function for type acl_rule_eth_t. */
    uint32_t hash() const;
+   /** The hash mix function for type acl_rule_eth_t. */
+   void mix_me(hash_mix & h) const;
    /** Returns a string representation of the current object's values. */
    std::string to_string() const;
    /**

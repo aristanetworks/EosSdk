@@ -1,4 +1,4 @@
-// Copyright (c) 2013 Arista Networks, Inc.  All rights reserved.
+// Copyright (c) 2020 Arista Networks, Inc.  All rights reserved.
 // Arista Networks, Inc. Confidential and Proprietary.
 
 %module(directors="1") eossdk
@@ -13,7 +13,17 @@
 %include "std_vector.i"
 //%import "GoSwigUtils.i"
 %include "typemaps.i"
+%allowexception;
+%include exception.i
 
+%exceptionclass error;
+%exception {
+    try {
+        $action;
+    } catch (error const & e) {
+        _swig_gopanic(e.what());
+    }
+}
 // Change all some_class_t names to just SomeClass:
 // The <<""< uses automatic string concatination to get around the
 // conflict marker limitation.
@@ -70,6 +80,7 @@ typedef uint64_t uint64_be_t;
 %feature("nodirector") eos::eth_phy_intf_mgr;
 %feature("nodirector") eos::eth_phy_intf_counter_mgr;
 %feature("nodirector") eos::fib_mgr;
+%feature("nodirector") eos::fpga_mgr;
 %feature("nodirector") eos::hardware_table_mgr;
 %feature("nodirector") eos::intf_mgr;
 %feature("nodirector") eos::intf_counter_mgr;
@@ -86,6 +97,7 @@ typedef uint64_t uint64_be_t;
 %feature("nodirector") eos::nexthop_group_mgr;
 %feature("nodirector") eos::nexthop_group_tunnel_mgr;
 %feature("nodirector") eos::policy_map_mgr;
+%feature("nodirector") eos::route_map_mgr;
 %feature("nodirector") eos::subintf_mgr;
 %feature("nodirector") eos::system_mgr;
 %feature("nodirector") eos::timeout_mgr;
@@ -110,6 +122,7 @@ typedef uint64_t uint64_be_t;
 #include "eos/exception.h"
 #include "eos/fd.h"
 #include "eos/fib.h"
+#include "eos/fpga.h"
 #include "eos/hardware_table.h"
 #include "eos/hash_mix.h"
 #include "eos/intf.h"
@@ -129,6 +142,7 @@ typedef uint64_t uint64_be_t;
 #include "eos/nexthop_group.h"
 #include "eos/nexthop_group_tunnel.h"
 #include "eos/policy_map.h"
+#include "eos/route_map.h"
 #include "eos/sdk.h"
 #include "eos/subintf.h"
 #include "eos/system.h"
@@ -217,6 +231,7 @@ wrap_iterator(eos::class_map_iter_t, eos::class_map_iter_impl, eos::class_map_ke
 wrap_iterator(eos::fib_fec_iter_t, eos::fib_fec_iter_impl, eos::fib_fec_t);
 wrap_iterator(eos::fib_route_iter_t, eos::fib_route_iter_impl, eos::fib_route_t);
 wrap_iterator(eos::flow_entry_iter_t, eos::flow_entry_iter_impl, eos::flow_entry_t);
+wrap_iterator(eos::fpga_iter_t, eos::fpga_iter_impl, eos::fpga_t);
 wrap_iterator(eos::eth_intf_iter_t, eos::eth_intf_iter_impl, eos::intf_id_t);
 wrap_iterator(eos::eth_lag_intf_iter_t, eos::eth_lag_intf_iter_impl, eos::intf_id_t);
 wrap_iterator(eos::eth_lag_intf_member_iter_t, eos::eth_lag_intf_member_iter_impl, eos::intf_id_t);

@@ -1,4 +1,4 @@
-// Copyright (c) 2019 Arista Networks, Inc.  All rights reserved.
+// Copyright (c) 2020 Arista Networks, Inc.  All rights reserved.
 // Arista Networks, Inc. Confidential and Proprietary.
 
 #ifndef EOS_INLINE_TYPES_MPLS_ROUTE_H
@@ -99,15 +99,17 @@ mpls_route_key_t::operator<(mpls_route_key_t const & other) const {
 
 inline uint32_t
 mpls_route_key_t::hash() const {
-   uint32_t ret = 0;
+   hash_mix h;
+   mix_me(h);
+   return h.result();
+}
+
+inline void
+mpls_route_key_t::mix_me(hash_mix & h) const {
    for (auto it=labels_.cbegin(); it!=labels_.cend(); ++it) {
-      ret = hash_mix::mix((uint8_t *)&(*it),
-            sizeof(mpls_label_t), ret);
+      h.mix(*it); // mpls_label_t
    }
-   ret = hash_mix::mix((uint8_t *)&metric_,
-              sizeof(mpls_route_metric_t), ret);
-   ret = hash_mix::final_mix(ret);
-   return ret;
+   h.mix(metric_); // mpls_route_metric_t
 }
 
 inline std::string
@@ -168,11 +170,14 @@ mpls_route_t::operator!=(mpls_route_t const & other) const {
 
 inline uint32_t
 mpls_route_t::hash() const {
-   uint32_t ret = 0;
-   ret = hash_mix::mix((uint8_t *)&key_,
-              sizeof(mpls_route_key_t), ret);
-   ret = hash_mix::final_mix(ret);
-   return ret;
+   hash_mix h;
+   mix_me(h);
+   return h.result();
+}
+
+inline void
+mpls_route_t::mix_me(hash_mix & h) const {
+   h.mix(key_); // mpls_route_key_t
 }
 
 inline std::string
@@ -324,26 +329,22 @@ mpls_route_via_t::operator!=(mpls_route_via_t const & other) const {
 
 inline uint32_t
 mpls_route_via_t::hash() const {
-   uint32_t ret = 0;
-   ret = hash_mix::mix((uint8_t *)&route_key_,
-              sizeof(mpls_route_key_t), ret);
-   ret = hash_mix::mix((uint8_t *)&hop_,
-              sizeof(ip_addr_t), ret);
-   ret = hash_mix::mix((uint8_t *)&intf_,
-              sizeof(intf_id_t), ret);
-   ret = hash_mix::mix((uint8_t *)&pushswap_label_,
-              sizeof(mpls_label_t), ret);
-   ret = hash_mix::mix((uint8_t *)&label_action_,
-              sizeof(mpls_action_t), ret);
-   ret = hash_mix::mix((uint8_t *)&ttl_mode_,
-              sizeof(mpls_ttl_mode_t), ret);
-   ret = hash_mix::mix((uint8_t *)&payload_type_,
-              sizeof(mpls_payload_type_t), ret);
-   ret = hash_mix::mix((uint8_t *)&skip_egress_acl_,
-              sizeof(bool), ret);
-   ret ^= std::hash<std::string>()(nexthop_group_);
-   ret = hash_mix::final_mix(ret);
-   return ret;
+   hash_mix h;
+   mix_me(h);
+   return h.result();
+}
+
+inline void
+mpls_route_via_t::mix_me(hash_mix & h) const {
+   h.mix(route_key_); // mpls_route_key_t
+   h.mix(hop_); // ip_addr_t
+   h.mix(intf_); // intf_id_t
+   h.mix(pushswap_label_); // mpls_label_t
+   h.mix(label_action_); // mpls_action_t
+   h.mix(ttl_mode_); // mpls_ttl_mode_t
+   h.mix(payload_type_); // mpls_payload_type_t
+   h.mix(skip_egress_acl_); // bool
+   h.mix(nexthop_group_); // std::string
 }
 
 inline std::string
@@ -409,11 +410,14 @@ mpls_fec_id_t::operator<(mpls_fec_id_t const & other) const {
 
 inline uint32_t
 mpls_fec_id_t::hash() const {
-   uint32_t ret = 0;
-   ret = hash_mix::mix((uint8_t *)&id_,
-              sizeof(uint64_t), ret);
-   ret = hash_mix::final_mix(ret);
-   return ret;
+   hash_mix h;
+   mix_me(h);
+   return h.result();
+}
+
+inline void
+mpls_fec_id_t::mix_me(hash_mix & h) const {
+   h.mix(id_); // uint64_t
 }
 
 inline std::string

@@ -60,6 +60,12 @@ class l1_source_mgr_impl : public l1_source_mgr {
          l1_source_iter_t * nop = 0;
          return *nop;
       }
+
+      void app_description_is(intf_id_t intf_id, std::string description) {
+      }
+
+      void app_description_del(intf_id_t intf_id) {
+      }
 };
 
 DEFINE_STUB_MGR_CTOR(l1_source_mgr)

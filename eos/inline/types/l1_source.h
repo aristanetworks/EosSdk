@@ -81,13 +81,15 @@ l1_source_t::operator<(l1_source_t const & other) const {
 
 inline uint32_t
 l1_source_t::hash() const {
-   uint32_t ret = 0;
-   ret = hash_mix::mix((uint8_t *)&l1_source_type_,
-              sizeof(l1_source_type_t), ret);
-   ret = hash_mix::mix((uint8_t *)&port_,
-              sizeof(intf_id_t), ret);
-   ret = hash_mix::final_mix(ret);
-   return ret;
+   hash_mix h;
+   mix_me(h);
+   return h.result();
+}
+
+inline void
+l1_source_t::mix_me(hash_mix & h) const {
+   h.mix(l1_source_type_); // l1_source_type_t
+   h.mix(port_); // intf_id_t
 }
 
 inline std::string

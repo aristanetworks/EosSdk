@@ -1,4 +1,4 @@
-// Copyright (c) 2018 Arista Networks, Inc.  All rights reserved.
+// Copyright (c) 2020 Arista Networks, Inc.  All rights reserved.
 // Arista Networks, Inc. Confidential and Proprietary.
 
 #ifndef EOS_INLINE_TYPES_IP_H
@@ -127,13 +127,16 @@ ip_addr_t::operator bool() const {
 
 inline uint32_t
 ip_addr_t::hash() const {
-   uint32_t ret = 0;
-   ret = hash_mix::mix((uint8_t *)&af_,
-              sizeof(af_t), ret);
-   ret = hash_mix::mix((uint8_t *)addr_.bytes,
-              af_ == AF_IPV4 ? 4: sizeof(addr_.bytes), ret);
-   ret = hash_mix::final_mix(ret);
-   return ret;
+   hash_mix h;
+   mix_me(h);
+   return h.result();
+}
+
+inline void
+ip_addr_t::mix_me(hash_mix & h) const {
+   h.mix(af_); // af_t
+   h.mix_bytes((uint8_t const*)addr_.bytes,
+               af_ == AF_IPV4 ? 4 : 16);
 }
 
 inline std::ostream&
@@ -230,13 +233,15 @@ ip_prefix_t::operator<(ip_prefix_t const & other) const {
 
 inline uint32_t
 ip_prefix_t::hash() const {
-   uint32_t ret = 0;
-   ret = hash_mix::mix((uint8_t *)&addr_,
-              sizeof(ip_addr_t), ret);
-   ret = hash_mix::mix((uint8_t *)&prefix_length_,
-              sizeof(uint8_t), ret);
-   ret = hash_mix::final_mix(ret);
-   return ret;
+   hash_mix h;
+   mix_me(h);
+   return h.result();
+}
+
+inline void
+ip_prefix_t::mix_me(hash_mix & h) const {
+   h.mix(addr_); // ip_addr_t
+   h.mix(prefix_length_); // uint8_t
 }
 
 inline std::ostream&
@@ -332,13 +337,15 @@ ip_addr_mask_t::operator<(ip_addr_mask_t const & other) const {
 
 inline uint32_t
 ip_addr_mask_t::hash() const {
-   uint32_t ret = 0;
-   ret = hash_mix::mix((uint8_t *)&addr_,
-              sizeof(ip_addr_t), ret);
-   ret = hash_mix::mix((uint8_t *)&mask_length_,
-              sizeof(uint8_t), ret);
-   ret = hash_mix::final_mix(ret);
-   return ret;
+   hash_mix h;
+   mix_me(h);
+   return h.result();
+}
+
+inline void
+ip_addr_mask_t::mix_me(hash_mix & h) const {
+   h.mix(addr_); // ip_addr_t
+   h.mix(mask_length_); // uint8_t
 }
 
 inline std::ostream&
@@ -366,11 +373,14 @@ address_overlap_error::raise() const {
 
 inline uint32_t
 address_overlap_error::hash() const {
-   uint32_t ret = 0;
-   ret = hash_mix::mix((uint8_t *)&addr_,
-              sizeof(ip_addr_mask_t), ret);
-   ret = hash_mix::final_mix(ret);
-   return ret;
+   hash_mix h;
+   mix_me(h);
+   return h.result();
+}
+
+inline void
+address_overlap_error::mix_me(hash_mix & h) const {
+   h.mix(addr_); // ip_addr_mask_t
 }
 
 inline std::string

@@ -16,6 +16,7 @@ Include: EosSdk_intf.include
 Include: EosSdk_IntfMgrHelper.include
 Include: EosSdk_ip_intf.include
 Include: EosSdk_ip_route.include
+Include: EosSdk_l1_source.include
 Include: EosSdk_lldp.include
 Include: EosSdk_macsec.include
 Include: EosSdk_mac_table.include
@@ -25,6 +26,7 @@ Include: EosSdk_mpls_vrf_label.include
 Include: EosSdk_neighbor_table.include
 Include: EosSdk_nexthop_group.include
 Include: EosSdk_policy_map.include
+Include: EosSdk_route_map.include
 Include: EosSdk_subintf.include
 Include: EosSdk_system.include
 Include: EosSdk_vrf.include

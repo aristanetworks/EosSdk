@@ -70,13 +70,15 @@ ip_route_key_t::operator!=(ip_route_key_t const & other) const {
 
 inline uint32_t
 ip_route_key_t::hash() const {
-   uint32_t ret = 0;
-   ret = hash_mix::mix((uint8_t *)&prefix_,
-              sizeof(ip_prefix_t), ret);
-   ret = hash_mix::mix((uint8_t *)&preference_,
-              sizeof(ip_route_preference_t), ret);
-   ret = hash_mix::final_mix(ret);
-   return ret;
+   hash_mix h;
+   mix_me(h);
+   return h.result();
+}
+
+inline void
+ip_route_key_t::mix_me(hash_mix & h) const {
+   h.mix(prefix_); // ip_prefix_t
+   h.mix(preference_); // ip_route_preference_t
 }
 
 inline std::string
@@ -138,13 +140,15 @@ ip_route_t::operator!=(ip_route_t const & other) const {
 
 inline uint32_t
 ip_route_t::hash() const {
-   uint32_t ret = 0;
-   ret = hash_mix::mix((uint8_t *)&key_,
-              sizeof(ip_route_key_t), ret);
-   ret = hash_mix::mix((uint8_t *)&tag_,
-              sizeof(ip_route_tag_t), ret);
-   ret = hash_mix::final_mix(ret);
-   return ret;
+   hash_mix h;
+   mix_me(h);
+   return h.result();
+}
+
+inline void
+ip_route_t::mix_me(hash_mix & h) const {
+   h.mix(key_); // ip_route_key_t
+   h.mix(tag_); // ip_route_tag_t
 }
 
 inline std::string
@@ -296,27 +300,23 @@ ip_route_via_t::operator!=(ip_route_via_t const & other) const {
 
 inline uint32_t
 ip_route_via_t::hash() const {
-   uint32_t ret = 0;
-   ret = hash_mix::mix((uint8_t *)&route_key_,
-              sizeof(ip_route_key_t), ret);
-   ret = hash_mix::mix((uint8_t *)&hop_,
-              sizeof(ip_addr_t), ret);
-   ret = hash_mix::mix((uint8_t *)&intf_,
-              sizeof(intf_id_t), ret);
-   ret ^= std::hash<std::string>()(nexthop_group_);
-   ret = hash_mix::mix((uint8_t *)&mpls_label_,
-              sizeof(mpls_label_t), ret);
-   ret = hash_mix::mix((uint8_t *)&vni_,
-              sizeof(vni_t), ret);
-   ret = hash_mix::mix((uint8_t *)&vtep_addr_,
-              sizeof(ip_addr_t), ret);
-   ret = hash_mix::mix((uint8_t *)&router_mac_,
-              sizeof(eth_addr_t), ret);
-   ret ^= std::hash<std::string>()(egress_vrf_);
-   ret = hash_mix::mix((uint8_t *)&metric_,
-              sizeof(ip_via_metric_t), ret);
-   ret = hash_mix::final_mix(ret);
-   return ret;
+   hash_mix h;
+   mix_me(h);
+   return h.result();
+}
+
+inline void
+ip_route_via_t::mix_me(hash_mix & h) const {
+   h.mix(route_key_); // ip_route_key_t
+   h.mix(hop_); // ip_addr_t
+   h.mix(intf_); // intf_id_t
+   h.mix(nexthop_group_); // std::string
+   h.mix(mpls_label_); // mpls_label_t
+   h.mix(vni_); // vni_t
+   h.mix(vtep_addr_); // ip_addr_t
+   h.mix(router_mac_); // eth_addr_t
+   h.mix(egress_vrf_); // std::string
+   h.mix(metric_); // ip_via_metric_t
 }
 
 inline std::string

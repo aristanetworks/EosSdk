@@ -75,13 +75,15 @@ bgp_path_attr_fields_t::operator!=(bgp_path_attr_fields_t const & other) const {
 
 inline uint32_t
 bgp_path_attr_fields_t::hash() const {
-   uint32_t ret = 0;
-   ret = hash_mix::mix((uint8_t *)&next_hop_,
-              sizeof(bool), ret);
-   ret = hash_mix::mix((uint8_t *)&community_list_,
-              sizeof(bool), ret);
-   ret = hash_mix::final_mix(ret);
-   return ret;
+   hash_mix h;
+   mix_me(h);
+   return h.result();
+}
+
+inline void
+bgp_path_attr_fields_t::mix_me(hash_mix & h) const {
+   h.mix(next_hop_); // bool
+   h.mix(community_list_); // bool
 }
 
 inline std::string
@@ -146,13 +148,15 @@ bgp_path_options_t::operator!=(bgp_path_options_t const & other) const {
 
 inline uint32_t
 bgp_path_options_t::hash() const {
-   uint32_t ret = 0;
-   ret = hash_mix::mix((uint8_t *)&receive_route_stage_,
-              sizeof(bgp_receive_route_stage_t), ret);
-   ret = hash_mix::mix((uint8_t *)&path_attr_fields_,
-              sizeof(bgp_path_attr_fields_t), ret);
-   ret = hash_mix::final_mix(ret);
-   return ret;
+   hash_mix h;
+   mix_me(h);
+   return h.result();
+}
+
+inline void
+bgp_path_options_t::mix_me(hash_mix & h) const {
+   h.mix(receive_route_stage_); // bgp_receive_route_stage_t
+   h.mix(path_attr_fields_); // bgp_path_attr_fields_t
 }
 
 inline std::string
@@ -260,21 +264,20 @@ bgp_path_attr_t::operator!=(bgp_path_attr_t const & other) const {
 
 inline uint32_t
 bgp_path_attr_t::hash() const {
-   uint32_t ret = 0;
-   ret = hash_mix::mix((uint8_t *)&next_hop_,
-              sizeof(ip_addr_t), ret);
-   ret = hash_mix::mix((uint8_t *)&origin_,
-              sizeof(uint8_t), ret);
-   ret = hash_mix::mix((uint8_t *)&med_,
-              sizeof(uint32_t), ret);
-   ret = hash_mix::mix((uint8_t *)&local_pref_,
-              sizeof(uint32_t), ret);
+   hash_mix h;
+   mix_me(h);
+   return h.result();
+}
+
+inline void
+bgp_path_attr_t::mix_me(hash_mix & h) const {
+   h.mix(next_hop_); // ip_addr_t
+   h.mix(origin_); // uint8_t
+   h.mix(med_); // uint32_t
+   h.mix(local_pref_); // uint32_t
    for (auto it=community_list_.cbegin(); it!=community_list_.cend(); ++it) {
-      ret = hash_mix::mix((uint8_t *)&(*it),
-            sizeof(uint32_t), ret);
+      h.mix(*it); // uint32_t
    }
-   ret = hash_mix::final_mix(ret);
-   return ret;
 }
 
 inline std::string
@@ -374,14 +377,16 @@ bgp_path_key_t::operator<(bgp_path_key_t const & other) const {
 
 inline uint32_t
 bgp_path_key_t::hash() const {
-   uint32_t ret = 0;
-   ret = hash_mix::mix((uint8_t *)&prefix_,
-              sizeof(ip_prefix_t), ret);
-   ret = hash_mix::mix((uint8_t *)&peer_addr_,
-              sizeof(ip_addr_t), ret);
-   ret ^= std::hash<std::string>()(vrf_name_);
-   ret = hash_mix::final_mix(ret);
-   return ret;
+   hash_mix h;
+   mix_me(h);
+   return h.result();
+}
+
+inline void
+bgp_path_key_t::mix_me(hash_mix & h) const {
+   h.mix(prefix_); // ip_prefix_t
+   h.mix(peer_addr_); // ip_addr_t
+   h.mix(vrf_name_); // std::string
 }
 
 inline std::string
@@ -444,13 +449,15 @@ bgp_path_t::operator!=(bgp_path_t const & other) const {
 
 inline uint32_t
 bgp_path_t::hash() const {
-   uint32_t ret = 0;
-   ret = hash_mix::mix((uint8_t *)&path_key_,
-              sizeof(bgp_path_key_t), ret);
-   ret = hash_mix::mix((uint8_t *)&path_attr_,
-              sizeof(bgp_path_attr_t), ret);
-   ret = hash_mix::final_mix(ret);
-   return ret;
+   hash_mix h;
+   mix_me(h);
+   return h.result();
+}
+
+inline void
+bgp_path_t::mix_me(hash_mix & h) const {
+   h.mix(path_key_); // bgp_path_key_t
+   h.mix(path_attr_); // bgp_path_attr_t
 }
 
 inline std::string

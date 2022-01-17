@@ -6,10 +6,16 @@
 #include <ctime>  // for time_t
 #include <sys/select.h>
 #include <sys/time.h>  // for struct timeval
+#include <cstring>  // strlen
 
 #include "impl.h"
 #include "eos/panic.h"
 #include "eos/sdk.h"
+
+#include "eos/intf.h"
+#include <stdint.h>
+#include <iterator>
+#include <map>
 
 namespace eos {
 
@@ -102,6 +108,7 @@ void Impl::stop_loop() {
 void Impl::main_loop(seconds_t duration) {
    if(!initialized_) {
       do_initialize();
+      return;
       initialized_ = true;
    }
 
@@ -220,5 +227,119 @@ void Impl::main_loop(seconds_t duration) {
       }
    }
 }
+
+// convert mac address string to byte array
+void eth_addr_t_to_bytes(char const* str, uint8_t* bytes) {
+   int i = 0; // index in str
+   int len = strlen(str);
+   bool firstNibble = true; // 2 nibbles for a byte
+   int nibble;
+   int byte;
+   for (int j=0; j<len; j++) {
+      if (str[j] == ':' || str[j] == '.') {
+         continue;
+      }
+      if (str[j] >= '0' && str[j] <= '9') {
+         nibble = str[j] - '0';
+      } else if (str[j] >= 'a' && str[j] <= 'f') {
+         nibble = str[j] - 'a' + 10;
+      } else if (str[j] >= 'A' && str[j] <= 'F') {
+         nibble = str[j] - 'A' + 10;
+      } else {
+        panic(invalid_argument_error("Not a MAC address"));
+        break;
+      }
+      if (firstNibble) {
+         byte = nibble;
+         firstNibble = false;
+      } else {
+         byte = byte*16 + nibble;
+         if (i >=6 ) {
+            panic(invalid_argument_error("Not a MAC address"));
+         }
+         bytes[i] = byte;
+         i++;
+         firstNibble = true;
+      }
+   }
+   if (!firstNibble || i != 6) {
+      panic(invalid_argument_error("Not a MAC address"));
+   }
+}
+
+
+// Minimal implementation of intf_id_t. We use a global counter for the ID and we
+// will not bother if that counter wraps. We store interface-name to interface-id
+// mapping and vice-versa in 2 maps.
+// The ID is a unit64_t stored in the class's private intfId_.
+uint64_t intfId_counter = 0;
+std::map<std::string, uint64_t> intfId_from_string;
+std::map<uint64_t, std::string> intfString_from_id;
+
+uint64_t intf_id_t_ctor(char const * name);
+bool intf_id_t_is_null0(uint64_t intfId_) ;
+bool intf_id_t_is_subintf(uint64_t intfId_) ;
+intf_type_t intf_id_t_intf_type(uint64_t intfId_) ;
+std::string intf_id_t_to_string(uint64_t intfId_) ;
+
+static intf_type_t intf_name_to_type( std::string const & name) {
+   if (name.find("Ethernet") == 0) return INTF_TYPE_ETH;
+   if (name.find("Vlan") == 0) return INTF_TYPE_VLAN;
+   if (name.find("Management") == 0) return INTF_TYPE_MANAGEMENT;
+   if (name.find("Loopback") == 0) return INTF_TYPE_LOOPBACK;
+   if (name.find("Port-Channel") == 0) return INTF_TYPE_LAG;
+   if (name.find("Vxlan") == 0) return INTF_TYPE_VXLAN;
+   if (name.find("Cpu") == 0) return INTF_TYPE_CPU;
+   if (name.find("Null0") == 0) return INTF_TYPE_NULL0;
+   return INTF_TYPE_OTHER;
+}
+
+// Construction (from string)
+// We are not validating much, but some panics can be generated.
+uint64_t intf_id_t_ctor(char const * name) {
+   if (intf_name_to_type(name) == INTF_TYPE_OTHER) {
+      panic(no_such_interface_error(name));
+   }
+   try {
+      return intfId_from_string.at( name ); // already exists
+   } catch ( std::out_of_range & e ) {
+      intfId_counter++;
+      intfId_from_string[ name ] = intfId_counter;
+      intfString_from_id[ intfId_counter ] = name;
+   }
+   return intfId_counter;
+}
+
+bool
+intf_id_t_is_null0(uint64_t intfId_) {
+   if (intfId_ == 0) return false;
+   auto name = intfString_from_id.at( intfId_ );
+   return !strcmp(name.c_str(), "Null0");
+}
+
+bool
+intf_id_t_is_subintf(uint64_t intfId_) {
+   if (intfId_ == 0) return false;
+   auto name = intfString_from_id.at( intfId_ );
+   size_t pos = name.find( "." );
+   if (pos == std::string::npos) {
+      return false;
+   }
+   return true;
+}
+
+intf_type_t
+intf_id_t_intf_type(uint64_t intfId_) {
+   if (intfId_ == 0) return INTF_TYPE_NULL;
+   auto name = intfString_from_id.at( intfId_ );
+   return intf_name_to_type(name);
+}
+
+std::string
+intf_id_t_to_string(uint64_t intfId_) {
+   if (intfId_ == 0) return "(None)";
+   return intfString_from_id[ intfId_ ];
+}
+
 
 }

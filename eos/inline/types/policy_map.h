@@ -1,4 +1,4 @@
-// Copyright (c) 2017 Arista Networks, Inc.  All rights reserved.
+// Copyright (c) 2020 Arista Networks, Inc.  All rights reserved.
 // Arista Networks, Inc. Confidential and Proprietary.
 
 #ifndef EOS_INLINE_TYPES_POLICY_MAP_H
@@ -130,12 +130,15 @@ policy_map_key_t::operator<(policy_map_key_t const & other) const {
 
 inline uint32_t
 policy_map_key_t::hash() const {
-   uint32_t ret = 0;
-   ret ^= std::hash<std::string>()(name_);
-   ret = hash_mix::mix((uint8_t *)&feature_,
-              sizeof(policy_feature_t), ret);
-   ret = hash_mix::final_mix(ret);
-   return ret;
+   hash_mix h;
+   mix_me(h);
+   return h.result();
+}
+
+inline void
+policy_map_key_t::mix_me(hash_mix & h) const {
+   h.mix(name_); // std::string
+   h.mix(feature_); // policy_feature_t
 }
 
 inline std::string
@@ -275,21 +278,21 @@ policy_map_action_t::operator<(policy_map_action_t const & other) const {
 
 inline uint32_t
 policy_map_action_t::hash() const {
-   uint32_t ret = 0;
-   ret = hash_mix::mix((uint8_t *)&action_type_,
-              sizeof(policy_action_type_t), ret);
-   ret ^= std::hash<std::string>()(nexthop_group_name_);
+   hash_mix h;
+   mix_me(h);
+   return h.result();
+}
+
+inline void
+policy_map_action_t::mix_me(hash_mix & h) const {
+   h.mix(action_type_); // policy_action_type_t
+   h.mix(nexthop_group_name_); // std::string
    for (auto it=nexthops_.cbegin(); it!=nexthops_.cend(); ++it) {
-      ret = hash_mix::mix((uint8_t *)&(*it),
-            sizeof(ip_addr_t), ret);
+      h.mix(*it); // ip_addr_t
    }
-   ret ^= std::hash<std::string>()(vrf_);
-   ret = hash_mix::mix((uint8_t *)&dscp_,
-              sizeof(uint8_t), ret);
-   ret = hash_mix::mix((uint8_t *)&traffic_class_,
-              sizeof(uint8_t), ret);
-   ret = hash_mix::final_mix(ret);
-   return ret;
+   h.mix(vrf_); // std::string
+   h.mix(dscp_); // uint8_t
+   h.mix(traffic_class_); // uint8_t
 }
 
 inline std::string
@@ -433,19 +436,19 @@ policy_map_rule_t::operator<(policy_map_rule_t const & other) const {
 
 inline uint32_t
 policy_map_rule_t::hash() const {
-   uint32_t ret = 0;
-   ret = hash_mix::mix((uint8_t *)&class_map_key_,
-              sizeof(class_map_key_t), ret);
-   ret = hash_mix::mix((uint8_t *)&policy_map_rule_type_,
-              sizeof(policy_map_rule_type_t), ret);
-   ret = hash_mix::mix((uint8_t *)&raw_rule_,
-              sizeof(acl_rule_ip_t), ret);
+   hash_mix h;
+   mix_me(h);
+   return h.result();
+}
+
+inline void
+policy_map_rule_t::mix_me(hash_mix & h) const {
+   h.mix(class_map_key_); // class_map_key_t
+   h.mix(policy_map_rule_type_); // policy_map_rule_type_t
+   h.mix(raw_rule_); // acl_rule_ip_t
    for (auto it=actions_.cbegin(); it!=actions_.cend(); ++it) {
-      ret = hash_mix::mix((uint8_t *)&(*it),
-            sizeof(policy_map_action_t), ret);
+      h.mix(*it); // policy_map_action_t
    }
-   ret = hash_mix::final_mix(ret);
-   return ret;
 }
 
 inline std::string
@@ -529,17 +532,18 @@ policy_map_t::operator<(policy_map_t const & other) const {
 
 inline uint32_t
 policy_map_t::hash() const {
-   uint32_t ret = 0;
-   ret = hash_mix::mix((uint8_t *)&key_,
-              sizeof(policy_map_key_t), ret);
+   hash_mix h;
+   mix_me(h);
+   return h.result();
+}
+
+inline void
+policy_map_t::mix_me(hash_mix & h) const {
+   h.mix(key_); // policy_map_key_t
    for (auto it=rules_.cbegin(); it!=rules_.cend(); ++it) {
-      ret = hash_mix::mix((uint8_t *)&it->first,
-                 sizeof(uint32_t), ret);
-      ret = hash_mix::mix((uint8_t *)&it->second,
-                 sizeof(policy_map_rule_t), ret);
+      h.mix(it->first); // uint32_t
+      h.mix(it->second); // policy_map_rule_t
    }
-   ret = hash_mix::final_mix(ret);
-   return ret;
 }
 
 inline std::string
@@ -594,11 +598,14 @@ unsupported_policy_feature_error::raise() const {
 
 inline uint32_t
 unsupported_policy_feature_error::hash() const {
-   uint32_t ret = 0;
-   ret = hash_mix::mix((uint8_t *)&policy_feature_,
-              sizeof(policy_feature_t), ret);
-   ret = hash_mix::final_mix(ret);
-   return ret;
+   hash_mix h;
+   mix_me(h);
+   return h.result();
+}
+
+inline void
+unsupported_policy_feature_error::mix_me(hash_mix & h) const {
+   h.mix(policy_feature_); // policy_feature_t
 }
 
 inline std::string

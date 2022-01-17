@@ -57,6 +57,8 @@ class EOS_SDK_PUBLIC ip_route_key_t {
    bool operator!=(ip_route_key_t const & other) const;
    /** The hash function for type ip_route_key_t. */
    uint32_t hash() const;
+   /** The hash mix function for type ip_route_key_t. */
+   void mix_me(hash_mix & h) const;
    /** Returns a string representation of the current object's values. */
    std::string to_string() const;
    /**
@@ -95,6 +97,8 @@ class EOS_SDK_PUBLIC ip_route_t {
    bool operator!=(ip_route_t const & other) const;
    /** The hash function for type ip_route_t. */
    uint32_t hash() const;
+   /** The hash mix function for type ip_route_t. */
+   void mix_me(hash_mix & h) const;
    /** Returns a string representation of the current object's values. */
    std::string to_string() const;
    /**
@@ -188,6 +192,8 @@ class EOS_SDK_PUBLIC ip_route_via_t {
    bool operator!=(ip_route_via_t const & other) const;
    /** The hash function for type ip_route_via_t. */
    uint32_t hash() const;
+   /** The hash mix function for type ip_route_via_t. */
+   void mix_me(hash_mix & h) const;
    /** Returns a string representation of the current object's values. */
    std::string to_string() const;
    /**

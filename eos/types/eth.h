@@ -1,4 +1,4 @@
-// Copyright (c) 2016 Arista Networks, Inc.  All rights reserved.
+// Copyright (c) 2020 Arista Networks, Inc.  All rights reserved.
 // Arista Networks, Inc. Confidential and Proprietary.
 
 #ifndef EOS_TYPES_ETH_H
@@ -65,6 +65,8 @@ class EOS_SDK_PUBLIC eth_addr_t {
    operator bool() const;
    /** The hash function for type eth_addr_t. */
    uint32_t hash() const;
+   /** The hash mix function for type eth_addr_t. */
+   void mix_me(hash_mix & h) const;
 
    /** Returns the given byte from the address. */
    uint8_t byte(int index) const;
@@ -97,6 +99,8 @@ class EOS_SDK_PUBLIC invalid_vlan_error : public error {
    virtual void raise() const;
    /** The hash function for type invalid_vlan_error. */
    uint32_t hash() const;
+   /** The hash mix function for type invalid_vlan_error. */
+   void mix_me(hash_mix & h) const;
    /** Returns a string representation of the current object's values. */
    std::string to_string() const;
    /**
@@ -121,6 +125,8 @@ class EOS_SDK_PUBLIC internal_vlan_error : public configuration_error {
    virtual void raise() const;
    /** The hash function for type internal_vlan_error. */
    uint32_t hash() const;
+   /** The hash mix function for type internal_vlan_error. */
+   void mix_me(hash_mix & h) const;
    /** Returns a string representation of the current object's values. */
    std::string to_string() const;
    /**

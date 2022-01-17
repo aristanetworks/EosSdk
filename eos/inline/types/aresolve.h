@@ -1,4 +1,4 @@
-// Copyright (c) 2016 Arista Networks, Inc.  All rights reserved.
+// Copyright (c) 2020 Arista Networks, Inc.  All rights reserved.
 // Arista Networks, Inc. Confidential and Proprietary.
 
 #ifndef EOS_INLINE_TYPES_ARESOLVE_H
@@ -33,16 +33,17 @@ aresolve_record_base::last_error() const {
 
 inline uint32_t
 aresolve_record_base::hash() const {
-   uint32_t ret = 0;
-   ret ^= std::hash<std::string>()(qname_);
-   ret = hash_mix::mix((uint8_t *)&last_refresh_,
-              sizeof(seconds_t), ret);
-   ret = hash_mix::mix((uint8_t *)&valid_,
-              sizeof(bool), ret);
-   ret = hash_mix::mix((uint8_t *)&last_error_,
-              sizeof(int), ret);
-   ret = hash_mix::final_mix(ret);
-   return ret;
+   hash_mix h;
+   mix_me(h);
+   return h.result();
+}
+
+inline void
+aresolve_record_base::mix_me(hash_mix & h) const {
+   h.mix(qname_); // std::string
+   h.mix(last_refresh_); // seconds_t
+   h.mix(valid_); // bool
+   h.mix(last_error_); // int
 }
 
 inline std::string
@@ -77,17 +78,19 @@ aresolve_record_host::addr_v6() const {
 
 inline uint32_t
 aresolve_record_host::hash() const {
-   uint32_t ret = 0;
+   hash_mix h;
+   mix_me(h);
+   return h.result();
+}
+
+inline void
+aresolve_record_host::mix_me(hash_mix & h) const {
    for (auto it=addr_v4_.cbegin(); it!=addr_v4_.cend(); ++it) {
-      ret = hash_mix::mix((uint8_t *)&(*it),
-            sizeof(ip_addr_t), ret);
+      h.mix(*it); // ip_addr_t
    }
    for (auto it=addr_v6_.cbegin(); it!=addr_v6_.cend(); ++it) {
-      ret = hash_mix::mix((uint8_t *)&(*it),
-            sizeof(ip_addr_t), ret);
+      h.mix(*it); // ip_addr_t
    }
-   ret = hash_mix::final_mix(ret);
-   return ret;
 }
 
 inline std::string

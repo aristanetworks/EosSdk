@@ -1,4 +1,4 @@
-// Copyright (c) 2016 Arista Networks, Inc.  All rights reserved.
+// Copyright (c) 2020 Arista Networks, Inc.  All rights reserved.
 // Arista Networks, Inc. Confidential and Proprietary.
 
 #ifndef EOS_INLINE_TYPES_HARDWARE_TABLE_H
@@ -66,12 +66,16 @@ hardware_table_key_t::operator<(hardware_table_key_t const & other) const {
 
 inline uint32_t
 hardware_table_key_t::hash() const {
-   uint32_t ret = 0;
-   ret ^= std::hash<std::string>()(table_name_);
-   ret ^= std::hash<std::string>()(feature_);
-   ret ^= std::hash<std::string>()(chip_);
-   ret = hash_mix::final_mix(ret);
-   return ret;
+   hash_mix h;
+   mix_me(h);
+   return h.result();
+}
+
+inline void
+hardware_table_key_t::mix_me(hash_mix & h) const {
+   h.mix(table_name_); // std::string
+   h.mix(feature_); // std::string
+   h.mix(chip_); // std::string
 }
 
 inline std::string
@@ -138,13 +142,15 @@ hardware_table_high_watermark_t::operator<(
 
 inline uint32_t
 hardware_table_high_watermark_t::hash() const {
-   uint32_t ret = 0;
-   ret = hash_mix::mix((uint8_t *)&max_entries_,
-              sizeof(uint32_t), ret);
-   ret = hash_mix::mix((uint8_t *)&timestamp_,
-              sizeof(time_t), ret);
-   ret = hash_mix::final_mix(ret);
-   return ret;
+   hash_mix h;
+   mix_me(h);
+   return h.result();
+}
+
+inline void
+hardware_table_high_watermark_t::mix_me(hash_mix & h) const {
+   h.mix(max_entries_); // uint32_t
+   h.mix(timestamp_); // time_t
 }
 
 inline std::string
@@ -217,15 +223,16 @@ hardware_table_usage_t::operator<(hardware_table_usage_t const & other) const {
 
 inline uint32_t
 hardware_table_usage_t::hash() const {
-   uint32_t ret = 0;
-   ret = hash_mix::mix((uint8_t *)&used_entries_,
-              sizeof(uint32_t), ret);
-   ret = hash_mix::mix((uint8_t *)&free_entries_,
-              sizeof(uint32_t), ret);
-   ret = hash_mix::mix((uint8_t *)&committed_entries_,
-              sizeof(uint32_t), ret);
-   ret = hash_mix::final_mix(ret);
-   return ret;
+   hash_mix h;
+   mix_me(h);
+   return h.result();
+}
+
+inline void
+hardware_table_usage_t::mix_me(hash_mix & h) const {
+   h.mix(used_entries_); // uint32_t
+   h.mix(free_entries_); // uint32_t
+   h.mix(committed_entries_); // uint32_t
 }
 
 inline std::string
@@ -299,15 +306,16 @@ hardware_table_entry_t::operator<(hardware_table_entry_t const & other) const {
 
 inline uint32_t
 hardware_table_entry_t::hash() const {
-   uint32_t ret = 0;
-   ret = hash_mix::mix((uint8_t *)&usage_,
-              sizeof(hardware_table_usage_t), ret);
-   ret = hash_mix::mix((uint8_t *)&max_entries_,
-              sizeof(uint32_t), ret);
-   ret = hash_mix::mix((uint8_t *)&high_watermark_,
-              sizeof(hardware_table_high_watermark_t), ret);
-   ret = hash_mix::final_mix(ret);
-   return ret;
+   hash_mix h;
+   mix_me(h);
+   return h.result();
+}
+
+inline void
+hardware_table_entry_t::mix_me(hash_mix & h) const {
+   h.mix(usage_); // hardware_table_usage_t
+   h.mix(max_entries_); // uint32_t
+   h.mix(high_watermark_); // hardware_table_high_watermark_t
 }
 
 inline std::string

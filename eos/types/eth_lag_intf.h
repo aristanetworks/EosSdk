@@ -1,4 +1,4 @@
-// Copyright (c) 2016 Arista Networks, Inc.  All rights reserved.
+// Copyright (c) 2020 Arista Networks, Inc.  All rights reserved.
 // Arista Networks, Inc. Confidential and Proprietary.
 
 #ifndef EOS_TYPES_ETH_LAG_INTF_H
@@ -123,6 +123,8 @@ class EOS_SDK_PUBLIC eth_lag_intf_membership_t {
    bool operator<(eth_lag_intf_membership_t const & other) const;
    /** The hash function for type eth_lag_intf_membership_t. */
    uint32_t hash() const;
+   /** The hash mix function for type eth_lag_intf_membership_t. */
+   void mix_me(hash_mix & h) const;
    /** Returns a string representation of the current object's values. */
    std::string to_string() const;
    /**
@@ -187,6 +189,8 @@ class EOS_SDK_PUBLIC eth_lag_intf_t {
    bool operator<(eth_lag_intf_t const & other) const;
    /** The hash function for type eth_lag_intf_t. */
    uint32_t hash() const;
+   /** The hash mix function for type eth_lag_intf_t. */
+   void mix_me(hash_mix & h) const;
    /** Returns a string representation of the current object's values. */
    std::string to_string() const;
    /**

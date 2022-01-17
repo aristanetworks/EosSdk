@@ -1,4 +1,4 @@
-// Copyright (c) 2019 Arista Networks, Inc.  All rights reserved.
+// Copyright (c) 2020 Arista Networks, Inc.  All rights reserved.
 // Arista Networks, Inc. Confidential and Proprietary.
 
 #ifndef EOS_TYPES_MPLS_ROUTE_H
@@ -72,6 +72,8 @@ class EOS_SDK_PUBLIC mpls_route_key_t {
    bool operator<(mpls_route_key_t const & other) const;
    /** The hash function for type mpls_route_key_t. */
    uint32_t hash() const;
+   /** The hash mix function for type mpls_route_key_t. */
+   void mix_me(hash_mix & h) const;
    /** Returns a string representation of the current object's values. */
    std::string to_string() const;
    /**
@@ -102,6 +104,8 @@ class EOS_SDK_PUBLIC mpls_route_t {
    bool operator!=(mpls_route_t const & other) const;
    /** The hash function for type mpls_route_t. */
    uint32_t hash() const;
+   /** The hash mix function for type mpls_route_t. */
+   void mix_me(hash_mix & h) const;
    /** Returns a string representation of the current object's values. */
    std::string to_string() const;
    /**
@@ -178,6 +182,8 @@ class EOS_SDK_PUBLIC mpls_route_via_t {
    bool operator!=(mpls_route_via_t const & other) const;
    /** The hash function for type mpls_route_via_t. */
    uint32_t hash() const;
+   /** The hash mix function for type mpls_route_via_t. */
+   void mix_me(hash_mix & h) const;
    /** Returns a string representation of the current object's values. */
    std::string to_string() const;
    /**
@@ -221,6 +227,8 @@ class EOS_SDK_PUBLIC mpls_fec_id_t {
    bool operator<(mpls_fec_id_t const & other) const;
    /** The hash function for type mpls_fec_id_t. */
    uint32_t hash() const;
+   /** The hash mix function for type mpls_fec_id_t. */
+   void mix_me(hash_mix & h) const;
    /** Returns a string representation of the current object's values. */
    std::string to_string() const;
    /**

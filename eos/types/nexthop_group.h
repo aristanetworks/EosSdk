@@ -80,7 +80,11 @@ class EOS_SDK_PUBLIC nexthop_group_mpls_action_t {
    /**
     * Getter for 'label_stack': the MPLS label stack.
     *
-    * The first element is the outermost label.
+    * The first element in iteration order is the innermost label, the last element
+    * in iteration order is the outermost label.
+    * When using std::forward_list< eos::mpls_label_t >::push_front to build the
+    * label stack, the first element pushed will be the outermost label, also known
+    * as top of stack.
     */
    std::forward_list<mpls_label_t> const & label_stack() const;
    /** Setter for 'label_stack'. */
@@ -95,6 +99,8 @@ class EOS_SDK_PUBLIC nexthop_group_mpls_action_t {
    bool operator<(nexthop_group_mpls_action_t const & other) const;
    /** The hash function for type nexthop_group_mpls_action_t. */
    uint32_t hash() const;
+   /** The hash mix function for type nexthop_group_mpls_action_t. */
+   void mix_me(hash_mix & h) const;
    /** Returns a string representation of the current object's values. */
    std::string to_string() const;
    /**
@@ -124,6 +130,8 @@ class EOS_SDK_PUBLIC nexthop_group_entry_counter_t {
    bool operator<(nexthop_group_entry_counter_t const & other) const;
    /** The hash function for type nexthop_group_entry_counter_t. */
    uint32_t hash() const;
+   /** The hash mix function for type nexthop_group_entry_counter_t. */
+   void mix_me(hash_mix & h) const;
    /** Returns a string representation of the current object's values. */
    std::string to_string() const;
    /**
@@ -170,6 +178,8 @@ class EOS_SDK_PUBLIC nexthop_group_entry_t {
    bool operator<(nexthop_group_entry_t const & other) const;
    /** The hash function for type nexthop_group_entry_t. */
    uint32_t hash() const;
+   /** The hash mix function for type nexthop_group_entry_t. */
+   void mix_me(hash_mix & h) const;
    /** Returns a string representation of the current object's values. */
    std::string to_string() const;
    /**
@@ -276,6 +286,8 @@ class EOS_SDK_PUBLIC nexthop_group_t {
    bool operator<(nexthop_group_t const & other) const;
    /** The hash function for type nexthop_group_t. */
    uint32_t hash() const;
+   /** The hash mix function for type nexthop_group_t. */
+   void mix_me(hash_mix & h) const;
    /** Returns a string representation of the current object's values. */
    std::string to_string() const;
    /**

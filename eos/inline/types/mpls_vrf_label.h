@@ -1,4 +1,4 @@
-// Copyright (c) 2018 Arista Networks, Inc.  All rights reserved.
+// Copyright (c) 2020 Arista Networks, Inc.  All rights reserved.
 // Arista Networks, Inc. Confidential and Proprietary.
 
 #ifndef EOS_INLINE_TYPES_MPLS_VRF_LABEL_H
@@ -48,12 +48,15 @@ mpls_vrf_label_t::operator<(mpls_vrf_label_t const & other) const {
 
 inline uint32_t
 mpls_vrf_label_t::hash() const {
-   uint32_t ret = 0;
-   ret = hash_mix::mix((uint8_t *)&label_,
-              sizeof(mpls_label_t), ret);
-   ret ^= std::hash<std::string>()(vrf_name_);
-   ret = hash_mix::final_mix(ret);
-   return ret;
+   hash_mix h;
+   mix_me(h);
+   return h.result();
+}
+
+inline void
+mpls_vrf_label_t::mix_me(hash_mix & h) const {
+   h.mix(label_); // mpls_label_t
+   h.mix(vrf_name_); // std::string
 }
 
 inline std::string
