@@ -1,0 +1,857 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>bgp_path &#8212; Arista EOS SDK 2.19.0 reference</title>
+    <link rel="stylesheet" href="_static/eossdk.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/breathe.css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/language_data.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="class_map" href="class_map.html" />
+    <link rel="prev" title="bgp" href="bgp.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="class_map.html" title="class_map"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="bgp.html" title="bgp"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Arista EOS SDK 2.19.0 reference</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="bgp-path">
+<h1><strong>bgp_path</strong><a class="headerlink" href="#bgp-path" title="Permalink to this headline">¶</a></h1>
+<p>BGP path management module.</p>
+<p>Border Gateway Protocol (BGP) is a standardized exterior gateway routing protocol designed to exchange routing and reachability information among autonomous systems (AS). In EOS, BGP follows RFC4271.</p>
+<p>This module provides APIs to query BGP paths in the Adj-RIB-In.</p>
+<p>An example of the API usage is in examples/BgpPathAgent.cpp. </p>
+<dl class="namespace">
+<dt>
+<span class="target" id="eossdknamespaceeos"></span><em>namespace</em> <code class="descname">eos</code></dt>
+<dd><dl class="class">
+<dt>
+<span class="target" id="eossdkclasseos_1_1bgp__path__iter__t"></span><em>class</em> <code class="descname">bgp_path_iter_t</code></dt>
+<dd><em>#include &lt;bgp_path.h&gt;</em><p>An iterator that yields an <a class="reference internal" href="#eossdkclasseos_1_1bgp__path__t"><span class="std std-ref">bgp_path_t</span></a> for each BGP path in Adj-RIB-In. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Private Functions</p>
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1bgp__path__iter__t_1aee23ff6b51bcc7b3a810c9ee089bfb60"></span><code class="descname">bgp_path_iter_t</code><span class="sig-paren">(</span>bgp_path_iter_impl * <em>const</em><span class="sig-paren">)</span></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Friends</p>
+<dl class="friend">
+<dt>
+<span class="target" id="eossdkclasseos_1_1bgp__path__iter__t_1acda0d5c015b21e446366bbd70919ae0c"></span>friend class <code class="descname">bgp_path_iter_impl</code></dt>
+<dd></dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="class">
+<dt>
+<span class="target" id="eossdkclasseos_1_1bgp__path__handler"></span><em>class</em> <code class="descname">bgp_path_handler</code></dt>
+<dd><em>#include &lt;bgp_path.h&gt;</em><p>The BGP path handler.</p>
+<p>This class provides handler APIs to react to BGP path changes in Adj-RIB-In. New path updates are notified once BGP has converged. An iterator must be used to retreive the existing paths after BGP convergence. This is only supported under multi-agent mode. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1bgp__path__handler_1ae48578fb4262b1866af88fe511f8eedf"></span><code class="descname">bgp_path_handler</code><span class="sig-paren">(</span><a class="reference internal" href="#eossdkclasseos_1_1bgp__path__mgr"><span class="std std-ref">bgp_path_mgr</span></a> * <em>mgr</em><span class="sig-paren">)</span></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1bgp__path__handler_1a9b581e5c86e49f3d61fc02ff189f0a80"></span><a class="reference internal" href="#eossdkclasseos_1_1bgp__path__mgr"><span class="std std-ref">bgp_path_mgr</span></a> * <code class="descname">get_bgp_path_mgr</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1bgp__path__handler_1a5b2381659002f6c5a240219efc528f97"></span>void <code class="descname">watch_all_paths</code><span class="sig-paren">(</span>bool<span class="sig-paren">)</span></dt>
+<dd><p>Register to receive notifications when any path has changed. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1bgp__path__handler_1a669c061e9e283bd835cc8956cf0cc9f5"></span>void <code class="descname">watch_ipv4_unicast_paths</code><span class="sig-paren">(</span>bool<span class="sig-paren">)</span></dt>
+<dd><p>Register to receive notifications when any IPv4 unicast path has changed. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1bgp__path__handler_1acc9f09b16cce5c6accb87e774954ac7c"></span>void <code class="descname">watch_ipv6_unicast_paths</code><span class="sig-paren">(</span>bool<span class="sig-paren">)</span></dt>
+<dd><p>Register to receive notifications when any IPv6 unicast path has changed. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1bgp__path__handler_1a72c401ef55e67a99baaf4fca7d453c24"></span>virtual void <code class="descname">on_ipv4_unicast_path</code><span class="sig-paren">(</span><a class="reference internal" href="#eossdkclasseos_1_1bgp__path__key__t"><span class="std std-ref">bgp_path_key_t</span></a> const &amp; <em>path_key</em><span class="sig-paren">)</span></dt>
+<dd><p>Handler called when a BGP IPv4 unicast path has changed in Adj-RIB-In. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1bgp__path__handler_1a7a4d7e5264c3809f801949da0d2ccf4f"></span>virtual void <code class="descname">on_ipv4_unicast_bgp_converged</code><span class="sig-paren">(</span>bool <em>converged</em><span class="sig-paren">)</span></dt>
+<dd><p>Handler called when BGP convergence has changed in IPv4 unicast address family. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1bgp__path__handler_1a1f9d9e6bd3635d57d4f4caefd6412a95"></span>virtual void <code class="descname">on_ipv6_unicast_path</code><span class="sig-paren">(</span><a class="reference internal" href="#eossdkclasseos_1_1bgp__path__key__t"><span class="std std-ref">bgp_path_key_t</span></a> const &amp; <em>path_key</em><span class="sig-paren">)</span></dt>
+<dd><p>Handler called when a BGP IPv6 unicast path has changed in Adj-RIB-In. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1bgp__path__handler_1a5ea2cb6da50bc36c4e3c8e96777cea39"></span>virtual void <code class="descname">on_ipv6_unicast_bgp_converged</code><span class="sig-paren">(</span>bool <em>converged</em><span class="sig-paren">)</span></dt>
+<dd><p>Handler called when BGP convergence has changed in IPv6 unicast address family. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="class">
+<dt>
+<span class="target" id="eossdkclasseos_1_1bgp__path__mgr"></span><em>class</em> <code class="descname">bgp_path_mgr</code></dt>
+<dd><em>#include &lt;bgp_path.h&gt;</em><p>A manager of BGP RIB paths. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1bgp__path__mgr_1a7f87899fed570c9339833d7fb967ee57"></span>virtual <code class="descname">~bgp_path_mgr</code><span class="sig-paren">(</span><span class="sig-paren">)</span></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1bgp__path__mgr_1a58dfc7e2f5a74fd9b95fea09223a66ad"></span>virtual <a class="reference internal" href="#eossdkclasseos_1_1bgp__path__iter__t"><span class="std std-ref">bgp_path_iter_t</span></a> <code class="descname">ipv4_unicast_path_iter</code><span class="sig-paren">(</span><a class="reference internal" href="#eossdkclasseos_1_1bgp__path__options__t"><span class="std std-ref">bgp_path_options_t</span></a> &amp;<span class="sig-paren">)</span> const = 0</dt>
+<dd><p>Returns an iterator over IPv4 Unicast BGP paths in Adj-RIB-In, which contains unprocessed routing information that has been advertised to the local BGP speaker by its peers. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1bgp__path__mgr_1abfcf2ffdb0bb3cc5cf1e978342025e1b"></span>virtual <a class="reference internal" href="#eossdkclasseos_1_1bgp__path__t"><span class="std std-ref">bgp_path_t</span></a> <code class="descname">ipv4_unicast_path</code><span class="sig-paren">(</span><a class="reference internal" href="#eossdkclasseos_1_1bgp__path__key__t"><span class="std std-ref">bgp_path_key_t</span></a> const &amp;, <a class="reference internal" href="#eossdkclasseos_1_1bgp__path__options__t"><span class="std std-ref">bgp_path_options_t</span></a> &amp;<span class="sig-paren">)</span> = 0</dt>
+<dd><p>Returns an IPv4 Unicast BGP path in Adj-RIB-In with the corresponding path key. Returns an empty <a class="reference internal" href="#eossdkclasseos_1_1bgp__path__t"><span class="std std-ref">bgp_path_t</span></a> if no matching path was found. This is only supported under multi-agent mode. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1bgp__path__mgr_1a96e6100a443873ac35fb597ee94ec965"></span>virtual bool <code class="descname">ipv4_unicast_bgp_convergence</code><span class="sig-paren">(</span><span class="sig-paren">)</span> = 0</dt>
+<dd><p>Returns true if bgp is converged for IPv4 Unicast address family This is only supported under multi-agent mode. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1bgp__path__mgr_1a48e5f5a48f8e3f7f5fc2c6728c358234"></span>virtual <a class="reference internal" href="#eossdkclasseos_1_1bgp__path__iter__t"><span class="std std-ref">bgp_path_iter_t</span></a> <code class="descname">ipv6_unicast_path_iter</code><span class="sig-paren">(</span><a class="reference internal" href="#eossdkclasseos_1_1bgp__path__options__t"><span class="std std-ref">bgp_path_options_t</span></a> &amp;<span class="sig-paren">)</span> const = 0</dt>
+<dd><p>Returns an iterator over IPv6 Unicast BGP paths in Adj-RIB-In, which contains unprocessed routing information that has been advertised to the local BGP speaker by its peers. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1bgp__path__mgr_1a01ed59faa84bfee7686e570d13bb3831"></span>virtual <a class="reference internal" href="#eossdkclasseos_1_1bgp__path__t"><span class="std std-ref">bgp_path_t</span></a> <code class="descname">ipv6_unicast_path</code><span class="sig-paren">(</span><a class="reference internal" href="#eossdkclasseos_1_1bgp__path__key__t"><span class="std std-ref">bgp_path_key_t</span></a> const &amp;, <a class="reference internal" href="#eossdkclasseos_1_1bgp__path__options__t"><span class="std std-ref">bgp_path_options_t</span></a> &amp;<span class="sig-paren">)</span> = 0</dt>
+<dd><p>Returns an IPv6 Unicast BGP path in Adj-RIB-In with the corresponding path key. Returns an empty <a class="reference internal" href="#eossdkclasseos_1_1bgp__path__t"><span class="std std-ref">bgp_path_t</span></a> if no matching path was found. This is only supported under multi-agent mode. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1bgp__path__mgr_1af446822e40377ccfd7a7ac1ae165b3f0"></span>virtual bool <code class="descname">ipv6_unicast_bgp_convergence</code><span class="sig-paren">(</span><span class="sig-paren">)</span> = 0</dt>
+<dd><p>Returns true if bgp is converged for IPv6 Unicast address family This is only supported under multi-agent mode. </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Protected Functions</p>
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1bgp__path__mgr_1acd8cf8289281926aa81af565a6ba4f2d"></span><code class="descname">bgp_path_mgr</code><span class="sig-paren">(</span><span class="sig-paren">)</span></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Private Members</p>
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1bgp__path__mgr_1a71a753babfff3b2b652cde19ea9a0a55"></span><code class="descname">bgp_path_mgr</code></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Friends</p>
+<dl class="friend">
+<dt>
+<span class="target" id="eossdkclasseos_1_1bgp__path__mgr_1a9bdda9142fae9b631d3ad85fb44266ec"></span>friend class <code class="descname">bgp_path_handler</code></dt>
+<dd></dd></dl>
+
+</div>
+</dd></dl>
+
+</dd></dl>
+
+<div class="section" id="type-definitions-in-bgp-path">
+<h2>Type definitions in <strong>bgp_path</strong><a class="headerlink" href="#type-definitions-in-bgp-path" title="Permalink to this headline">¶</a></h2>
+<dl class="namespace">
+<dt>
+<span class="target" id="eossdknamespaceeos"></span><em>namespace</em> <code class="descname">eos</code></dt>
+<dd><div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Enums</p>
+<dl class="enum">
+<dt>
+<span class="target" id="eossdknamespaceeos_1a6a5f96eeac55601a0f434663820b377e"></span><strong>bgp_afi_safi_t enum</strong></dt>
+<dd><p>BGP Address Family Identifiers and Subsequent Address Family Identifiers. </p>
+<p><em>Values:</em></p>
+<ul class="breatheenumvalues">
+<li><code class="first docutils literal notranslate"><span class="pre">BGP_IPV4_UNICAST</span></code> - </li>
+<li><code class="first docutils literal notranslate"><span class="pre">BGP_IPV6_UNICAST</span></code> - </li>
+</ul>
+</dd></dl>
+
+<dl class="enum">
+<dt>
+<span class="target" id="eossdknamespaceeos_1a81d13cf5cb40350cb3cbfbe710b696b4"></span><strong>bgp_receive_route_stage_t enum</strong></dt>
+<dd><p>The BGP path stage before/after the inbound policies are applied on the route. </p>
+<p><em>Values:</em></p>
+<ul class="breatheenumvalues">
+<li><code class="first docutils literal notranslate"><span class="pre">BGP_PATH_PRE_POLICY</span></code> - </li>
+<li><code class="first docutils literal notranslate"><span class="pre">BGP_PATH_POST_POLICY</span></code> - </li>
+</ul>
+</dd></dl>
+
+</div>
+<dl class="class">
+<dt>
+<span class="target" id="eossdkclasseos_1_1bgp__path__attr__fields__t"></span><em>class</em> <code class="descname">bgp_path_attr_fields_t</code></dt>
+<dd><em>#include &lt;bgp_path.h&gt;</em><p>The BGP path option to enable lookup of additional path attributes fields. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1bgp__path__attr__fields__t_1a21e05e6e910a0d3c18dfbb5c56517210"></span><code class="descname">bgp_path_attr_fields_t</code><span class="sig-paren">(</span><span class="sig-paren">)</span></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1bgp__path__attr__fields__t_1accc2898d8143533a4203e9df1e813d94"></span><code class="descname">bgp_path_attr_fields_t</code><span class="sig-paren">(</span>bool <em>next_hop</em><span class="sig-paren">)</span></dt>
+<dd><p>Create BGP path attribute field options. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1bgp__path__attr__fields__t_1af955bf4f9990fde80dec8c885705204b"></span>bool <code class="descname">next_hop</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dd><p>Getter for ‘next_hop’: true if these path attribute options enable next hop lookup, false otherwise. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1bgp__path__attr__fields__t_1ad5853d7ad17b9d2be37aa55908bc1e5f"></span>void <code class="descname">next_hop_is</code><span class="sig-paren">(</span>bool <em>next_hop</em><span class="sig-paren">)</span></dt>
+<dd><p>Setter for ‘next_hop’. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1bgp__path__attr__fields__t_1a492e8f052786335b52033ed1261040f0"></span>bool <code class="descname">community_list</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dd><p>Getter for ‘community_list’: true if these path attribute options enable community list lookup, false otherwise. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1bgp__path__attr__fields__t_1aeb14f7eb90fb37270713bcbbf0ac33d6"></span>void <code class="descname">community_list_is</code><span class="sig-paren">(</span>bool <em>community_list</em><span class="sig-paren">)</span></dt>
+<dd><p>Setter for ‘community_list’. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1bgp__path__attr__fields__t_1a471121127a082bba8859a56a4c94869f"></span>bool <code class="descname">operator==</code><span class="sig-paren">(</span><a class="reference internal" href="#eossdkclasseos_1_1bgp__path__attr__fields__t"><span class="std std-ref">bgp_path_attr_fields_t</span></a> const &amp; <em>other</em><span class="sig-paren">)</span> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1bgp__path__attr__fields__t_1a3d676f16bf76e482313b7f09a9088c68"></span>bool <code class="descname">operator!=</code><span class="sig-paren">(</span><a class="reference internal" href="#eossdkclasseos_1_1bgp__path__attr__fields__t"><span class="std std-ref">bgp_path_attr_fields_t</span></a> const &amp; <em>other</em><span class="sig-paren">)</span> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1bgp__path__attr__fields__t_1aa09b5df25c5fe5bde5f2371d9e2d24f8"></span>uint32_t <code class="descname">hash</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dd><p>The hash function for type <a class="reference internal" href="#eossdkclasseos_1_1bgp__path__attr__fields__t"><span class="std std-ref">bgp_path_attr_fields_t</span></a>. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1bgp__path__attr__fields__t_1a754bf0c5a71eaea9b2162a3a5686b8c6"></span>void <code class="descname">mix_me</code><span class="sig-paren">(</span><a class="reference internal" href="hash_mix.html#eossdkclasseos_1_1hash__mix"><span class="std std-ref">hash_mix</span></a> &amp; <em>h</em><span class="sig-paren">)</span> const</dt>
+<dd><p>The hash mix function for type <a class="reference internal" href="#eossdkclasseos_1_1bgp__path__attr__fields__t"><span class="std std-ref">bgp_path_attr_fields_t</span></a>. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1bgp__path__attr__fields__t_1ae9723153d7f39d8e13206d2ebe5e2c2a"></span>std::string <code class="descname">to_string</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dd><p>Returns a string representation of the current object’s values. </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Private Members</p>
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1bgp__path__attr__fields__t_1a17ce18201b557b448b054816b2906bab"></span>bool <code class="descname">next_hop_</code></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1bgp__path__attr__fields__t_1ace61cbeb309f489be25c5d6b610483d0"></span>bool <code class="descname">community_list_</code></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Friends</p>
+<dl class="friend">
+<dt>
+<span class="target" id="eossdkclasseos_1_1bgp__path__attr__fields__t_1ad25a3186395235816e2189bec3bef8be"></span>friend std::ostream &amp; <code class="descname">operator&lt;&lt;</code></dt>
+<dd><p>A utility stream operator that adds a string representation of <a class="reference internal" href="#eossdkclasseos_1_1bgp__path__attr__fields__t"><span class="std std-ref">bgp_path_attr_fields_t</span></a> to the ostream. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="class">
+<dt>
+<span class="target" id="eossdkclasseos_1_1bgp__path__options__t"></span><em>class</em> <code class="descname">bgp_path_options_t</code></dt>
+<dd><em>#include &lt;bgp_path.h&gt;</em><p>The BGP path lookup options. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1bgp__path__options__t_1aff1454ad7cd077a8f971cc9423a7bf06"></span><code class="descname">bgp_path_options_t</code><span class="sig-paren">(</span><span class="sig-paren">)</span></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1bgp__path__options__t_1abaeee8ba484df3bd64501f095c4e5c43"></span><code class="descname">bgp_path_options_t</code><span class="sig-paren">(</span>bgp_receive_route_stage_t <em>receive_route_stage</em><span class="sig-paren">)</span></dt>
+<dd><p>Create BGP path options. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1bgp__path__options__t_1aba619fc8f95e2707a5769dfc6020cfca"></span>bgp_receive_route_stage_t <code class="descname">receive_route_stage</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dd><p>Getter for ‘receive_route_stage’: The received routes stage of a path to lookup when retrieving the path entry. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1bgp__path__options__t_1adcc48bf0071e912e5013af537858fcdb"></span>void <code class="descname">receive_route_stage_is</code><span class="sig-paren">(</span>bgp_receive_route_stage_t <em>receive_route_stage</em><span class="sig-paren">)</span></dt>
+<dd><p>Setter for ‘receive_route_stage’. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1bgp__path__options__t_1a66b636483c2d03bb99ad06425bbc4854"></span><a class="reference internal" href="#eossdkclasseos_1_1bgp__path__attr__fields__t"><span class="std std-ref">bgp_path_attr_fields_t</span></a> <code class="descname">path_attr_fields</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dd><p>Getter for ‘path_attr_fields’: The additional path attributes to populate when retrieving the path entry. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1bgp__path__options__t_1a0533599d2d87569120011f9f689b2738"></span>void <code class="descname">path_attr_fields_is</code><span class="sig-paren">(</span><a class="reference internal" href="#eossdkclasseos_1_1bgp__path__attr__fields__t"><span class="std std-ref">bgp_path_attr_fields_t</span></a> const &amp; <em>path_attr_fields</em><span class="sig-paren">)</span></dt>
+<dd><p>Setter for ‘path_attr_fields’. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1bgp__path__options__t_1a507126b120af3866094daa085f641977"></span>bool <code class="descname">operator==</code><span class="sig-paren">(</span><a class="reference internal" href="#eossdkclasseos_1_1bgp__path__options__t"><span class="std std-ref">bgp_path_options_t</span></a> const &amp; <em>other</em><span class="sig-paren">)</span> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1bgp__path__options__t_1a54beeff1b051206a23e21b491e1daf76"></span>bool <code class="descname">operator!=</code><span class="sig-paren">(</span><a class="reference internal" href="#eossdkclasseos_1_1bgp__path__options__t"><span class="std std-ref">bgp_path_options_t</span></a> const &amp; <em>other</em><span class="sig-paren">)</span> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1bgp__path__options__t_1a944e7ee75bbf7d8959277bd051089d13"></span>uint32_t <code class="descname">hash</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dd><p>The hash function for type <a class="reference internal" href="#eossdkclasseos_1_1bgp__path__options__t"><span class="std std-ref">bgp_path_options_t</span></a>. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1bgp__path__options__t_1a86c0d7e764ed0af6463e998e1bacf5a3"></span>void <code class="descname">mix_me</code><span class="sig-paren">(</span><a class="reference internal" href="hash_mix.html#eossdkclasseos_1_1hash__mix"><span class="std std-ref">hash_mix</span></a> &amp; <em>h</em><span class="sig-paren">)</span> const</dt>
+<dd><p>The hash mix function for type <a class="reference internal" href="#eossdkclasseos_1_1bgp__path__options__t"><span class="std std-ref">bgp_path_options_t</span></a>. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1bgp__path__options__t_1a40259f8975574d50f885b1bca39ecf70"></span>std::string <code class="descname">to_string</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dd><p>Returns a string representation of the current object’s values. </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Private Members</p>
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1bgp__path__options__t_1a701a50d3988a2fd8d7f1e8e5b5e53e1c"></span>bgp_receive_route_stage_t <code class="descname">receive_route_stage_</code></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1bgp__path__options__t_1a122f9b02e92f74f141dc9df85f8d8f7c"></span><a class="reference internal" href="#eossdkclasseos_1_1bgp__path__attr__fields__t"><span class="std std-ref">bgp_path_attr_fields_t</span></a> <code class="descname">path_attr_fields_</code></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Friends</p>
+<dl class="friend">
+<dt>
+<span class="target" id="eossdkclasseos_1_1bgp__path__options__t_1a58028e0c8a4ce3bd264da9935f938e36"></span>friend std::ostream &amp; <code class="descname">operator&lt;&lt;</code></dt>
+<dd><p>A utility stream operator that adds a string representation of <a class="reference internal" href="#eossdkclasseos_1_1bgp__path__options__t"><span class="std std-ref">bgp_path_options_t</span></a> to the ostream. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="class">
+<dt>
+<span class="target" id="eossdkclasseos_1_1bgp__path__attr__t"></span><em>class</em> <code class="descname">bgp_path_attr_t</code></dt>
+<dd><em>#include &lt;bgp_path.h&gt;</em><p>The BGP path attribute entry. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1bgp__path__attr__t_1ada70c03247bbd1c3942ef9b6dc8c89fb"></span><code class="descname">bgp_path_attr_t</code><span class="sig-paren">(</span><span class="sig-paren">)</span></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1bgp__path__attr__t_1ad1f83b7645d6a6eb74083c2b2877979f"></span><code class="descname">bgp_path_attr_t</code><span class="sig-paren">(</span>uint8_t <em>origin</em>, uint32_t <em>med</em>, uint32_t <em>local_pref</em><span class="sig-paren">)</span></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1bgp__path__attr__t_1a454da4d752dfff43c5c23f964784de05"></span><a class="reference internal" href="ip.html#eossdkclasseos_1_1ip__addr__t"><span class="std std-ref">ip_addr_t</span></a> <code class="descname">next_hop</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dd><p>Getter for ‘next_hop’: The nexthop address for the route. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1bgp__path__attr__t_1a7170e7671ee8f06f94ba807817a1a652"></span>void <code class="descname">next_hop_is</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#eossdkclasseos_1_1ip__addr__t"><span class="std std-ref">ip_addr_t</span></a> const &amp; <em>next_hop</em><span class="sig-paren">)</span></dt>
+<dd><p>Setter for ‘next_hop’. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1bgp__path__attr__t_1a600f0ee7969401f30a62e3e924136fad"></span>uint8_t <code class="descname">origin</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dd><p>Getter for ‘origin’: The route origin. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1bgp__path__attr__t_1acda3974ea55db161e43b5daf196a8aa0"></span>void <code class="descname">origin_is</code><span class="sig-paren">(</span>uint8_t <em>origin</em><span class="sig-paren">)</span></dt>
+<dd><p>Setter for ‘origin’. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1bgp__path__attr__t_1a87c60693de7a417e53b6560cda1256ff"></span>uint32_t <code class="descname">med</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dd><p>Getter for ‘med’: The Multi Exit Discriminator for the route. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1bgp__path__attr__t_1adedc92835a06e6ea612c17df1c77a078"></span>void <code class="descname">med_is</code><span class="sig-paren">(</span>uint32_t <em>med</em><span class="sig-paren">)</span></dt>
+<dd><p>Setter for ‘med’. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1bgp__path__attr__t_1a0b1c5ba5cbea56591c294753ad4efb72"></span>uint32_t <code class="descname">local_pref</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dd><p>Getter for ‘local_pref’: The I-BGP Local preference indicator. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1bgp__path__attr__t_1a32d1e371c0d5723be5796d7d1528a400"></span>void <code class="descname">local_pref_is</code><span class="sig-paren">(</span>uint32_t <em>local_pref</em><span class="sig-paren">)</span></dt>
+<dd><p>Setter for ‘local_pref’. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1bgp__path__attr__t_1a0f320d32e65fda201a2c913a70fb4ee7"></span>std::unordered_set&lt; uint32_t &gt; const &amp; <code class="descname">community_list</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dd><p>Getter for ‘community_list’: The route community list. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1bgp__path__attr__t_1abd6a9e5d4e3ab4b12d549358bef870a1"></span>void <code class="descname">community_list_is</code><span class="sig-paren">(</span>std::unordered_set&lt; uint32_t &gt; const &amp; <em>community_list</em><span class="sig-paren">)</span></dt>
+<dd><p>Setter for ‘community_list’. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1bgp__path__attr__t_1ad8f4869f0e2a9c007c39620e3a2f7995"></span>void <code class="descname">community_list_set</code><span class="sig-paren">(</span>uint32_t const &amp; <em>value</em><span class="sig-paren">)</span></dt>
+<dd><p>Inserts one community_list of ‘value’ to the set. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1bgp__path__attr__t_1aab2302a8e74d6884a383edb2f0924b8c"></span>void <code class="descname">community_list_del</code><span class="sig-paren">(</span>uint32_t const &amp; <em>value</em><span class="sig-paren">)</span></dt>
+<dd><p>Deletes one community_list of ‘value’ from the set. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1bgp__path__attr__t_1a90d681531aa084fa93a9eeb21c1d6b81"></span>bool <code class="descname">operator==</code><span class="sig-paren">(</span><a class="reference internal" href="#eossdkclasseos_1_1bgp__path__attr__t"><span class="std std-ref">bgp_path_attr_t</span></a> const &amp; <em>other</em><span class="sig-paren">)</span> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1bgp__path__attr__t_1a5c7d87c76da659eb9081c61d5ae2eaeb"></span>bool <code class="descname">operator!=</code><span class="sig-paren">(</span><a class="reference internal" href="#eossdkclasseos_1_1bgp__path__attr__t"><span class="std std-ref">bgp_path_attr_t</span></a> const &amp; <em>other</em><span class="sig-paren">)</span> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1bgp__path__attr__t_1a5128e6bd97901ffac61aa680e7713b71"></span>uint32_t <code class="descname">hash</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dd><p>The hash function for type <a class="reference internal" href="#eossdkclasseos_1_1bgp__path__attr__t"><span class="std std-ref">bgp_path_attr_t</span></a>. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1bgp__path__attr__t_1a8259aeb2a5ae2225d0a8e5783d63d08e"></span>void <code class="descname">mix_me</code><span class="sig-paren">(</span><a class="reference internal" href="hash_mix.html#eossdkclasseos_1_1hash__mix"><span class="std std-ref">hash_mix</span></a> &amp; <em>h</em><span class="sig-paren">)</span> const</dt>
+<dd><p>The hash mix function for type <a class="reference internal" href="#eossdkclasseos_1_1bgp__path__attr__t"><span class="std std-ref">bgp_path_attr_t</span></a>. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1bgp__path__attr__t_1aeb36d18bb973e9ef99e71518efa055fc"></span>std::string <code class="descname">to_string</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dd><p>Returns a string representation of the current object’s values. </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Private Members</p>
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1bgp__path__attr__t_1aade1cdea25d2bb6d22d304f2b07f8cc9"></span><a class="reference internal" href="ip.html#eossdkclasseos_1_1ip__addr__t"><span class="std std-ref">ip_addr_t</span></a> <code class="descname">next_hop_</code></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1bgp__path__attr__t_1ab450f5634ddcbc991039ae56a08bf12a"></span>uint8_t <code class="descname">origin_</code></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1bgp__path__attr__t_1af650178a400529c7707235a7d94e3a6a"></span>uint32_t <code class="descname">med_</code></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1bgp__path__attr__t_1a4692b4e21b5c43e1a068a386261b846d"></span>uint32_t <code class="descname">local_pref_</code></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1bgp__path__attr__t_1a2485efb733ddbd784f1e0ad1bd1c92a1"></span>std::unordered_set&lt; uint32_t &gt; <code class="descname">community_list_</code></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Friends</p>
+<dl class="friend">
+<dt>
+<span class="target" id="eossdkclasseos_1_1bgp__path__attr__t_1a91a74a0fd152eb7b8195a7af66cd0f2f"></span>friend std::ostream &amp; <code class="descname">operator&lt;&lt;</code></dt>
+<dd><p>A utility stream operator that adds a string representation of <a class="reference internal" href="#eossdkclasseos_1_1bgp__path__attr__t"><span class="std std-ref">bgp_path_attr_t</span></a> to the ostream. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="class">
+<dt>
+<span class="target" id="eossdkclasseos_1_1bgp__path__key__t"></span><em>class</em> <code class="descname">bgp_path_key_t</code></dt>
+<dd><em>#include &lt;bgp_path.h&gt;</em><p>The key which uniquely identifies a BGP path. Supports IPV4/IPV6 Unicast. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1bgp__path__key__t_1a63ba78d7a9180c1cde30b21314dddcc3"></span><code class="descname">bgp_path_key_t</code><span class="sig-paren">(</span><span class="sig-paren">)</span></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1bgp__path__key__t_1aaaf570efa0c3bd172e87e62a67004099"></span><code class="descname">bgp_path_key_t</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#eossdkclasseos_1_1ip__prefix__t"><span class="std std-ref">ip_prefix_t</span></a> const &amp; <em>prefix</em>, <a class="reference internal" href="ip.html#eossdkclasseos_1_1ip__addr__t"><span class="std std-ref">ip_addr_t</span></a> const &amp; <em>peer_addr</em>, std::string const &amp; <em>vrf_name</em><span class="sig-paren">)</span></dt>
+<dd><p>Create BGP path key. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1bgp__path__key__t_1ac17b1649bd95742d67f68f70bc1c6f47"></span><a class="reference internal" href="ip.html#eossdkclasseos_1_1ip__prefix__t"><span class="std std-ref">ip_prefix_t</span></a> <code class="descname">prefix</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dd><p>Getter for ‘prefix’: IPv4/IPv6 network prefix. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1bgp__path__key__t_1ab10bb9a4a46ae3dd1577fe0918b5bbf5"></span>void <code class="descname">prefix_is</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#eossdkclasseos_1_1ip__prefix__t"><span class="std std-ref">ip_prefix_t</span></a> const &amp; <em>prefix</em><span class="sig-paren">)</span></dt>
+<dd><p>Setter for ‘prefix’. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1bgp__path__key__t_1a0f5a82fd9cd638f10c5f795d020f6461"></span><a class="reference internal" href="ip.html#eossdkclasseos_1_1ip__addr__t"><span class="std std-ref">ip_addr_t</span></a> <code class="descname">peer_addr</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dd><p>Getter for ‘peer_addr’: BGP peer address. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1bgp__path__key__t_1aa527cad62c54e084b4cf68ea78133c28"></span>void <code class="descname">peer_addr_is</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#eossdkclasseos_1_1ip__addr__t"><span class="std std-ref">ip_addr_t</span></a> const &amp; <em>peer_addr</em><span class="sig-paren">)</span></dt>
+<dd><p>Setter for ‘peer_addr’. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1bgp__path__key__t_1a849b19cc41ab9c73cabae667109ba305"></span>std::string <code class="descname">vrf_name</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dd><p>Getter for ‘vrf_name’: VRF name. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1bgp__path__key__t_1a3c8d15aa6ba1703606e9bfdfbf43339d"></span>void <code class="descname">vrf_name_is</code><span class="sig-paren">(</span>std::string const &amp; <em>vrf_name</em><span class="sig-paren">)</span></dt>
+<dd><p>Setter for ‘vrf_name’. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1bgp__path__key__t_1ace556e596aa38d67c04ab579355ba9a9"></span>bool <code class="descname">operator==</code><span class="sig-paren">(</span><a class="reference internal" href="#eossdkclasseos_1_1bgp__path__key__t"><span class="std std-ref">bgp_path_key_t</span></a> const &amp; <em>other</em><span class="sig-paren">)</span> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1bgp__path__key__t_1abad773a00cfb3e4cf764d7cad1fff4e1"></span>bool <code class="descname">operator!=</code><span class="sig-paren">(</span><a class="reference internal" href="#eossdkclasseos_1_1bgp__path__key__t"><span class="std std-ref">bgp_path_key_t</span></a> const &amp; <em>other</em><span class="sig-paren">)</span> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1bgp__path__key__t_1a992800315b5ecad5d1584d8be6793836"></span>bool <code class="descname">operator&lt;</code><span class="sig-paren">(</span><a class="reference internal" href="#eossdkclasseos_1_1bgp__path__key__t"><span class="std std-ref">bgp_path_key_t</span></a> const &amp; <em>other</em><span class="sig-paren">)</span> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1bgp__path__key__t_1ac02d2f1866690b735fdad7170241d2c9"></span>uint32_t <code class="descname">hash</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dd><p>The hash function for type <a class="reference internal" href="#eossdkclasseos_1_1bgp__path__key__t"><span class="std std-ref">bgp_path_key_t</span></a>. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1bgp__path__key__t_1a2f291a4cf6f53c9f421ac13548912c71"></span>void <code class="descname">mix_me</code><span class="sig-paren">(</span><a class="reference internal" href="hash_mix.html#eossdkclasseos_1_1hash__mix"><span class="std std-ref">hash_mix</span></a> &amp; <em>h</em><span class="sig-paren">)</span> const</dt>
+<dd><p>The hash mix function for type <a class="reference internal" href="#eossdkclasseos_1_1bgp__path__key__t"><span class="std std-ref">bgp_path_key_t</span></a>. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1bgp__path__key__t_1a5a6c3bedc962faaf1cea14b27d8701dd"></span>std::string <code class="descname">to_string</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dd><p>Returns a string representation of the current object’s values. </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Private Members</p>
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1bgp__path__key__t_1a5cd2acc662116c619a79dc0b45b2b16a"></span><a class="reference internal" href="ip.html#eossdkclasseos_1_1ip__prefix__t"><span class="std std-ref">ip_prefix_t</span></a> <code class="descname">prefix_</code></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1bgp__path__key__t_1aa394705d8e800c252a021e7a32b145dc"></span><a class="reference internal" href="ip.html#eossdkclasseos_1_1ip__addr__t"><span class="std std-ref">ip_addr_t</span></a> <code class="descname">peer_addr_</code></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1bgp__path__key__t_1a0f864e104bdc7f7a7919edf915343aef"></span>std::string <code class="descname">vrf_name_</code></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Friends</p>
+<dl class="friend">
+<dt>
+<span class="target" id="eossdkclasseos_1_1bgp__path__key__t_1ac269f5f6c840b909dc9f43d3cb62b5cd"></span>friend std::ostream &amp; <code class="descname">operator&lt;&lt;</code></dt>
+<dd><p>A utility stream operator that adds a string representation of <a class="reference internal" href="#eossdkclasseos_1_1bgp__path__key__t"><span class="std std-ref">bgp_path_key_t</span></a> to the ostream. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="class">
+<dt>
+<span class="target" id="eossdkclasseos_1_1bgp__path__t"></span><em>class</em> <code class="descname">bgp_path_t</code></dt>
+<dd><em>#include &lt;bgp_path.h&gt;</em><p>The BGP path entry. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1bgp__path__t_1a6f8371c3c4b6d22fc63c04ba7e08a82f"></span><code class="descname">bgp_path_t</code><span class="sig-paren">(</span><span class="sig-paren">)</span></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1bgp__path__t_1a035a98824fe3d321a941ecc27aab3209"></span><code class="descname">bgp_path_t</code><span class="sig-paren">(</span><a class="reference internal" href="#eossdkclasseos_1_1bgp__path__key__t"><span class="std std-ref">bgp_path_key_t</span></a> const &amp; <em>path_key</em><span class="sig-paren">)</span></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1bgp__path__t_1a74b0faf0d037bec187d8265e5c6ec28d"></span><a class="reference internal" href="#eossdkclasseos_1_1bgp__path__key__t"><span class="std std-ref">bgp_path_key_t</span></a> <code class="descname">path_key</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dd><p>Getter for ‘path_key’: The BGP path key. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1bgp__path__t_1af8b2d5c130e87b381faa167ba1a99e9f"></span>void <code class="descname">path_key_is</code><span class="sig-paren">(</span><a class="reference internal" href="#eossdkclasseos_1_1bgp__path__key__t"><span class="std std-ref">bgp_path_key_t</span></a> const &amp; <em>path_key</em><span class="sig-paren">)</span></dt>
+<dd><p>Setter for ‘path_key’. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1bgp__path__t_1a1a2aaf67cbdb9d93a44494e19e77f21f"></span><a class="reference internal" href="#eossdkclasseos_1_1bgp__path__attr__t"><span class="std std-ref">bgp_path_attr_t</span></a> <code class="descname">path_attr</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dd><p>Getter for ‘path_attr’: The BGP path attributes. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1bgp__path__t_1ab81c3f91ba79c9251fcc60939603e11a"></span>void <code class="descname">path_attr_is</code><span class="sig-paren">(</span><a class="reference internal" href="#eossdkclasseos_1_1bgp__path__attr__t"><span class="std std-ref">bgp_path_attr_t</span></a> const &amp; <em>path_attr</em><span class="sig-paren">)</span></dt>
+<dd><p>Setter for ‘path_attr’. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1bgp__path__t_1a3552684f2825bb3ac6fc31a95c9ef095"></span>bool <code class="descname">operator==</code><span class="sig-paren">(</span><a class="reference internal" href="#eossdkclasseos_1_1bgp__path__t"><span class="std std-ref">bgp_path_t</span></a> const &amp; <em>other</em><span class="sig-paren">)</span> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1bgp__path__t_1afe30c3c6d63e0e166bc6a6a96d833d9b"></span>bool <code class="descname">operator!=</code><span class="sig-paren">(</span><a class="reference internal" href="#eossdkclasseos_1_1bgp__path__t"><span class="std std-ref">bgp_path_t</span></a> const &amp; <em>other</em><span class="sig-paren">)</span> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1bgp__path__t_1ab7b576952cad4bab06b05a4f58510d0b"></span>uint32_t <code class="descname">hash</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dd><p>The hash function for type <a class="reference internal" href="#eossdkclasseos_1_1bgp__path__t"><span class="std std-ref">bgp_path_t</span></a>. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1bgp__path__t_1a33cc2c14a8702995b37c008fcfee7072"></span>void <code class="descname">mix_me</code><span class="sig-paren">(</span><a class="reference internal" href="hash_mix.html#eossdkclasseos_1_1hash__mix"><span class="std std-ref">hash_mix</span></a> &amp; <em>h</em><span class="sig-paren">)</span> const</dt>
+<dd><p>The hash mix function for type <a class="reference internal" href="#eossdkclasseos_1_1bgp__path__t"><span class="std std-ref">bgp_path_t</span></a>. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1bgp__path__t_1a526ad1af222d4cfce9c9750c5d22deed"></span>std::string <code class="descname">to_string</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dd><p>Returns a string representation of the current object’s values. </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Private Members</p>
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1bgp__path__t_1a3c6c6f7c6b3fe52403e98bf0215e713c"></span><a class="reference internal" href="#eossdkclasseos_1_1bgp__path__key__t"><span class="std std-ref">bgp_path_key_t</span></a> <code class="descname">path_key_</code></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1bgp__path__t_1ab9eb6fe25b3ca31878309b4c42ea6434"></span><a class="reference internal" href="#eossdkclasseos_1_1bgp__path__attr__t"><span class="std std-ref">bgp_path_attr_t</span></a> <code class="descname">path_attr_</code></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Friends</p>
+<dl class="friend">
+<dt>
+<span class="target" id="eossdkclasseos_1_1bgp__path__t_1ad6775dcec67906f1ff2a7edc7d086697"></span>friend std::ostream &amp; <code class="descname">operator&lt;&lt;</code></dt>
+<dd><p>A utility stream operator that adds a string representation of <a class="reference internal" href="#eossdkclasseos_1_1bgp__path__t"><span class="std std-ref">bgp_path_t</span></a> to the ostream. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#"><strong>bgp_path</strong></a><ul>
+<li><a class="reference internal" href="#type-definitions-in-bgp-path">Type definitions in <strong>bgp_path</strong></a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="bgp.html"
+                        title="previous chapter"><strong>bgp</strong></a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="class_map.html"
+                        title="next chapter"><strong>class_map</strong></a></p>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="class_map.html" title="class_map"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="bgp.html" title="bgp"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Arista EOS SDK 2.19.0 reference</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2014, Arista Networks.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.4.
+    </div>
+  </body>
+</html>

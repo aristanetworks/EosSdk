@@ -1,0 +1,485 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>neighbor_table &#8212; Arista EOS SDK 2.19.0 reference</title>
+    <link rel="stylesheet" href="_static/eossdk.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/breathe.css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/language_data.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="nexthop_group" href="nexthop_group.html" />
+    <link rel="prev" title="mpls_vrf_label" href="mpls_vrf_label.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="nexthop_group.html" title="nexthop_group"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="mpls_vrf_label.html" title="mpls_vrf_label"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Arista EOS SDK 2.19.0 reference</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="neighbor-table">
+<h1><strong>neighbor_table</strong><a class="headerlink" href="#neighbor-table" title="Permalink to this headline">¶</a></h1>
+<p>The neighbor_table module manages IP/MAC mapping tables, including IPv4 ARP table and IPv6 neighbor table.</p>
+<p>This module provides APIs to create and delete static IPv4/IPv6 entries. It also provides APIs to query the configured static entries and the learned (both static/dynamic) entries on the system from IPv4 ARP table and IPv6 neighbor table.</p>
+<p>Two handler APIs are provided to allow 3rd party agents to react to the addition and deletion of entries in the learned ARP table or neighbor table on the system. </p>
+<dl class="namespace">
+<dt>
+<span class="target" id="eossdknamespaceeos"></span><em>namespace</em> <code class="descname">eos</code></dt>
+<dd><dl class="class">
+<dt>
+<span class="target" id="eossdkclasseos_1_1neighbor__table__handler"></span><em>class</em> <code class="descname">neighbor_table_handler</code></dt>
+<dd><em>#include &lt;neighbor_table.h&gt;</em><p>The neighbor table handler.</p>
+<p>This class provides handler APIs to react to neighbor table entry deletion and addition. It works for both the IPv4 ARP table and IPv6 neighbor table. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1neighbor__table__handler_1a569db262bc0cdebe534c739773647169"></span><code class="descname">neighbor_table_handler</code><span class="sig-paren">(</span><a class="reference internal" href="#eossdkclasseos_1_1neighbor__table__mgr"><span class="std std-ref">neighbor_table_mgr</span></a> * <em>mgr</em><span class="sig-paren">)</span></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1neighbor__table__handler_1ae4c6425a36c16c916aaadd13b688d97b"></span><a class="reference internal" href="#eossdkclasseos_1_1neighbor__table__mgr"><span class="std std-ref">neighbor_table_mgr</span></a> * <code class="descname">get_neighbor_table_mgr</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1neighbor__table__handler_1a1b372991fa41c0e3b468b0bba7faf587"></span>void <code class="descname">watch_all_neighbor_entries</code><span class="sig-paren">(</span>bool <em>interest</em><span class="sig-paren">)</span></dt>
+<dd><p>Registers this class to receive change updates on all neighbor entries. This includes both IPv4 ARP table entries and IPv6 Neighbor Discovery table entries. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1neighbor__table__handler_1adc3c130fba6b8afb25b1666a73a0a462"></span>void <code class="descname">watch_neighbor_entry</code><span class="sig-paren">(</span><a class="reference internal" href="#eossdkclasseos_1_1neighbor__key__t"><span class="std std-ref">neighbor_key_t</span></a> const &amp; <em>key</em>, bool <em>interest</em><span class="sig-paren">)</span></dt>
+<dd><p>Registers this class to receive change updates on a given neighbor entry. This includes both IPv4 ARP table entries and IPv6 Neighbor Discovery table entries. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1neighbor__table__handler_1ac9ff6c17c8a8a3ce7ea895203d59c6bb"></span>virtual void <code class="descname">on_neighbor_entry_set</code><span class="sig-paren">(</span><a class="reference internal" href="#eossdkclasseos_1_1neighbor__entry__t"><span class="std std-ref">neighbor_entry_t</span></a> const &amp; <em>entry</em><span class="sig-paren">)</span></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1neighbor__table__handler_1ab37803ea3cdf6ebad15d10ce15b61d06"></span>virtual void <code class="descname">on_neighbor_entry_del</code><span class="sig-paren">(</span><a class="reference internal" href="#eossdkclasseos_1_1neighbor__key__t"><span class="std std-ref">neighbor_key_t</span></a> const &amp; <em>key</em><span class="sig-paren">)</span></dt>
+<dd></dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="class">
+<dt>
+<span class="target" id="eossdkclasseos_1_1neighbor__table__iter__t"></span><em>class</em> <code class="descname">neighbor_table_iter_t</code></dt>
+<dd><em>#include &lt;neighbor_table.h&gt;</em><p>An iterator over the configured ARP and Neighbor Discovery tables. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Private Functions</p>
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1neighbor__table__iter__t_1a0ff73b133a2f0658f8aaa5aaf4df1eb2"></span><code class="descname">neighbor_table_iter_t</code><span class="sig-paren">(</span>neighbor_table_iter_impl * <em>const</em><span class="sig-paren">)</span></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Friends</p>
+<dl class="friend">
+<dt>
+<span class="target" id="eossdkclasseos_1_1neighbor__table__iter__t_1a68fb5ea46dfe35552be6f269ed1e51e9"></span>friend class <code class="descname">neighbor_table_iter_impl</code></dt>
+<dd></dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="class">
+<dt>
+<span class="target" id="eossdkclasseos_1_1neighbor__table__status__iter__t"></span><em>class</em> <code class="descname">neighbor_table_status_iter_t</code></dt>
+<dd><em>#include &lt;neighbor_table.h&gt;</em><p>An iterator over the resolved ARP and Neighbor Discovery tables. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Private Functions</p>
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1neighbor__table__status__iter__t_1ac04b0cd6e81c9c3cf112c4b4f754de8e"></span><code class="descname">neighbor_table_status_iter_t</code><span class="sig-paren">(</span>neighbor_table_status_iter_impl * <em>const</em><span class="sig-paren">)</span></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Friends</p>
+<dl class="friend">
+<dt>
+<span class="target" id="eossdkclasseos_1_1neighbor__table__status__iter__t_1a4b7e82c17e8e63a6d607db13617adbe8"></span>friend class <code class="descname">neighbor_table_status_iter_impl</code></dt>
+<dd></dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="class">
+<dt>
+<span class="target" id="eossdkclasseos_1_1neighbor__table__mgr"></span><em>class</em> <code class="descname">neighbor_table_mgr</code></dt>
+<dd><em>#include &lt;neighbor_table.h&gt;</em><p>The neighbor table manager.</p>
+<p>This class provides access to the resolved MAC address for a given IP address off of an L3 interface (aka the ARP table for IPv4 addresses and the Neighbor Discovery table for IPv6 addresses). It also provides APIs to delete/add v4 static ARP entry and v6 static neighbor table entries. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1neighbor__table__mgr_1aca308436bc2235cd0c6a75c81b3282da"></span>virtual <code class="descname">~neighbor_table_mgr</code><span class="sig-paren">(</span><span class="sig-paren">)</span></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1neighbor__table__mgr_1a9cfcd224e08a5bd7b45605c373ed1abf"></span>virtual <a class="reference internal" href="#eossdkclasseos_1_1neighbor__table__iter__t"><span class="std std-ref">neighbor_table_iter_t</span></a> <code class="descname">neighbor_table_iter</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const = 0</dt>
+<dd><p>Iterates through the statically configured ARP and Neighbor Discovery tables. A <a class="reference internal" href="#eossdkclasseos_1_1neighbor__key__t"><span class="std std-ref">neighbor_key_t</span></a> is returned for each entry. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1neighbor__table__mgr_1a9fd965c3d0090882c094ce55122fceb7"></span>virtual <a class="reference internal" href="#eossdkclasseos_1_1neighbor__table__status__iter__t"><span class="std std-ref">neighbor_table_status_iter_t</span></a> <code class="descname">neighbor_table_status_iter</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const = 0</dt>
+<dd><p>Iterates through the resolved ARP and Neighbor Discovery tables. A <a class="reference internal" href="#eossdkclasseos_1_1neighbor__key__t"><span class="std std-ref">neighbor_key_t</span></a> is returned for each entry. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1neighbor__table__mgr_1adf64306229a7635cb718500ed57fcaa7"></span>virtual <a class="reference internal" href="#eossdkclasseos_1_1neighbor__entry__t"><span class="std std-ref">neighbor_entry_t</span></a> <code class="descname">neighbor_entry_status</code><span class="sig-paren">(</span><a class="reference internal" href="#eossdkclasseos_1_1neighbor__key__t"><span class="std std-ref">neighbor_key_t</span></a> const &amp; <em>key</em><span class="sig-paren">)</span> const = 0</dt>
+<dd><p>Looks up a resolved neighbor entry for a given L3 interface and IP address. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1neighbor__table__mgr_1a70d17dcf4fd888843ec8e80d6116f330"></span>virtual void <code class="descname">neighbor_entry_set</code><span class="sig-paren">(</span><a class="reference internal" href="#eossdkclasseos_1_1neighbor__entry__t"><span class="std std-ref">neighbor_entry_t</span></a> const &amp; <em>entry</em><span class="sig-paren">)</span> = 0</dt>
+<dd><p>Configures a new static entry in either ARP table for IPv4 or Neighbor table for IPv6. Note “intf_id” is needed only for v6 case, since the IP/MAC pair may not be unique. It’s not needed for v4 case. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1neighbor__table__mgr_1a0cdcbe078356d601a070bedcb445ae74"></span>virtual void <code class="descname">neighbor_entry_del</code><span class="sig-paren">(</span><a class="reference internal" href="#eossdkclasseos_1_1neighbor__key__t"><span class="std std-ref">neighbor_key_t</span></a> const &amp; <em>key</em><span class="sig-paren">)</span> = 0</dt>
+<dd><p>Deletes a static entry in either ARP table (IPv4) or Neighbor table for IPv6. Note “intf_id” is needed only for v6 case, since the IP/MAC pair may not be unique. It’s not needed for v4 case. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1neighbor__table__mgr_1a14e18abaa9f4ac47fc7d37fd332e3937"></span>virtual <a class="reference internal" href="#eossdkclasseos_1_1neighbor__entry__t"><span class="std std-ref">neighbor_entry_t</span></a> <code class="descname">neighbor_entry</code><span class="sig-paren">(</span><a class="reference internal" href="#eossdkclasseos_1_1neighbor__key__t"><span class="std std-ref">neighbor_key_t</span></a> const &amp; <em>key</em><span class="sig-paren">)</span> const = 0</dt>
+<dd><p>Looks up a configured neighbor entry for a given L3 interface and IP address. </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Protected Functions</p>
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1neighbor__table__mgr_1a6ea34037e5219e64281e7ba83152bd82"></span><code class="descname">neighbor_table_mgr</code><span class="sig-paren">(</span><span class="sig-paren">)</span></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Private Members</p>
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1neighbor__table__mgr_1ad777a099142dab6cacee2a2d1169ee0e"></span><code class="descname">neighbor_table_mgr</code></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Friends</p>
+<dl class="friend">
+<dt>
+<span class="target" id="eossdkclasseos_1_1neighbor__table__mgr_1a4d0421f10eb1de915c0edd5779bc8301"></span>friend class <code class="descname">neighbor_table_handler</code></dt>
+<dd></dd></dl>
+
+</div>
+</dd></dl>
+
+</dd></dl>
+
+<div class="section" id="type-definitions-in-neighbor-table">
+<h2>Type definitions in <strong>neighbor_table</strong><a class="headerlink" href="#type-definitions-in-neighbor-table" title="Permalink to this headline">¶</a></h2>
+<dl class="namespace">
+<dt>
+<span class="target" id="eossdknamespaceeos"></span><em>namespace</em> <code class="descname">eos</code></dt>
+<dd><div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Enums</p>
+<dl class="enum">
+<dt>
+<span class="target" id="eossdknamespaceeos_1a4ac071df32b979cd14974d6aebfed5a5"></span><strong>neighbor_entry_type_t enum</strong></dt>
+<dd><p>Neighbor entry types. </p>
+<p><em>Values:</em></p>
+<ul class="breatheenumvalues">
+<li><code class="first docutils literal notranslate"><span class="pre">NEIGHBOR_ENTRY_TYPE_NULL</span></code> - </li>
+<li><code class="first docutils literal notranslate"><span class="pre">NEIGHBOR_ENTRY_TYPE_DYNAMIC</span></code> - </li>
+<li><code class="first docutils literal notranslate"><span class="pre">NEIGHBOR_ENTRY_TYPE_STATIC</span></code> - </li>
+</ul>
+</dd></dl>
+
+</div>
+<dl class="class">
+<dt>
+<span class="target" id="eossdkclasseos_1_1neighbor__key__t"></span><em>class</em> <code class="descname">neighbor_key_t</code></dt>
+<dd><em>#include &lt;neighbor_table.h&gt;</em><p>The neighbor entry key class. Maps an IP address to its associated MAC address on a specific interface. Note: the “intf_id” attribute is only relevant for IPv6 neighbors. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1neighbor__key__t_1a196cbb5bdaa8dcb0853d7cb28c16b914"></span><code class="descname">neighbor_key_t</code><span class="sig-paren">(</span><span class="sig-paren">)</span></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1neighbor__key__t_1a64fc00b85934a485c4028b585d4b9919"></span><code class="descname">neighbor_key_t</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#eossdkclasseos_1_1ip__addr__t"><span class="std std-ref">ip_addr_t</span></a> const &amp; <em>ip_addr</em><span class="sig-paren">)</span></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1neighbor__key__t_1a837c60cfe3d8f7e90d090e51328ee3f5"></span><code class="descname">neighbor_key_t</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#eossdkclasseos_1_1ip__addr__t"><span class="std std-ref">ip_addr_t</span></a> const &amp; <em>ip_addr</em>, <a class="reference internal" href="intf.html#eossdkclasseos_1_1intf__id__t"><span class="std std-ref">intf_id_t</span></a> <em>intf_id</em><span class="sig-paren">)</span></dt>
+<dd><p>IPv6 neighbor keys include an interface ID. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1neighbor__key__t_1a36c991ab76bf1b361060de89343c173c"></span><a class="reference internal" href="ip.html#eossdkclasseos_1_1ip__addr__t"><span class="std std-ref">ip_addr_t</span></a> <code class="descname">ip_addr</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dd><p>Getter for ‘ip_addr’: the ip address of the neighbor entry. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1neighbor__key__t_1ad91b55e4b37e109705a33caeee6bcb7c"></span><a class="reference internal" href="intf.html#eossdkclasseos_1_1intf__id__t"><span class="std std-ref">intf_id_t</span></a> <code class="descname">intf_id</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dd><p>Getter for ‘intf_id’: the interface of the neighbor entry. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1neighbor__key__t_1a7dd125f0d3b4d9d15c5c3e13f25bb4a0"></span>bool <code class="descname">operator==</code><span class="sig-paren">(</span><a class="reference internal" href="#eossdkclasseos_1_1neighbor__key__t"><span class="std std-ref">neighbor_key_t</span></a> const &amp; <em>other</em><span class="sig-paren">)</span> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1neighbor__key__t_1a3318dd09a6afbe948d716abe9d88644d"></span>bool <code class="descname">operator!=</code><span class="sig-paren">(</span><a class="reference internal" href="#eossdkclasseos_1_1neighbor__key__t"><span class="std std-ref">neighbor_key_t</span></a> const &amp; <em>other</em><span class="sig-paren">)</span> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1neighbor__key__t_1a0493677059a8ca281814ac393eb9976e"></span>bool <code class="descname">operator&lt;</code><span class="sig-paren">(</span><a class="reference internal" href="#eossdkclasseos_1_1neighbor__key__t"><span class="std std-ref">neighbor_key_t</span></a> const &amp; <em>other</em><span class="sig-paren">)</span> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1neighbor__key__t_1aa310e7d1fafb8358f096940dda432882"></span>uint32_t <code class="descname">hash</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dd><p>The hash function for type <a class="reference internal" href="#eossdkclasseos_1_1neighbor__key__t"><span class="std std-ref">neighbor_key_t</span></a>. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1neighbor__key__t_1a8c98fbce2491261d217bd2ae39dff567"></span>void <code class="descname">mix_me</code><span class="sig-paren">(</span><a class="reference internal" href="hash_mix.html#eossdkclasseos_1_1hash__mix"><span class="std std-ref">hash_mix</span></a> &amp; <em>h</em><span class="sig-paren">)</span> const</dt>
+<dd><p>The hash mix function for type <a class="reference internal" href="#eossdkclasseos_1_1neighbor__key__t"><span class="std std-ref">neighbor_key_t</span></a>. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1neighbor__key__t_1adf39d92ad801c1e43ec59e07898190f9"></span>std::string <code class="descname">to_string</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dd><p>Returns a string representation of the current object’s values. </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Private Members</p>
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1neighbor__key__t_1a0828d5ca4b963caca63f20a6261ba89c"></span><a class="reference internal" href="ip.html#eossdkclasseos_1_1ip__addr__t"><span class="std std-ref">ip_addr_t</span></a> <code class="descname">ip_addr_</code></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1neighbor__key__t_1a4cf809e5ffc3d93a81de74b5a35c6dc7"></span><a class="reference internal" href="intf.html#eossdkclasseos_1_1intf__id__t"><span class="std std-ref">intf_id_t</span></a> <code class="descname">intf_id_</code></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Friends</p>
+<dl class="friend">
+<dt>
+<span class="target" id="eossdkclasseos_1_1neighbor__key__t_1a0bcf808fc47bdb0d63f853720b8caafd"></span>friend std::ostream &amp; <code class="descname">operator&lt;&lt;</code></dt>
+<dd><p>A utility stream operator that adds a string representation of <a class="reference internal" href="#eossdkclasseos_1_1neighbor__key__t"><span class="std std-ref">neighbor_key_t</span></a> to the ostream. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="class">
+<dt>
+<span class="target" id="eossdkclasseos_1_1neighbor__entry__t"></span><em>class</em> <code class="descname">neighbor_entry_t</code></dt>
+<dd><em>#include &lt;neighbor_table.h&gt;</em><p>The neighbor entry class. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1neighbor__entry__t_1a9dd23fad6ccf484064622bfb436270db"></span><code class="descname">neighbor_entry_t</code><span class="sig-paren">(</span><span class="sig-paren">)</span></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1neighbor__entry__t_1a1f44def262de6113f5e4c8d2481d4a89"></span><code class="descname">neighbor_entry_t</code><span class="sig-paren">(</span><a class="reference internal" href="#eossdkclasseos_1_1neighbor__key__t"><span class="std std-ref">neighbor_key_t</span></a> const &amp; <em>neighbor_key</em>, <a class="reference internal" href="eth.html#eossdkclasseos_1_1eth__addr__t"><span class="std std-ref">eth_addr_t</span></a> <em>eth_addr</em>, neighbor_entry_type_t <em>entry_type</em><span class="sig-paren">)</span></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1neighbor__entry__t_1a81dd81a940508d78f0f0a2733fab0964"></span><a class="reference internal" href="#eossdkclasseos_1_1neighbor__key__t"><span class="std std-ref">neighbor_key_t</span></a> <code class="descname">neighbor_key</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dd><p>Getter for ‘neighbor_key’: the key of the neighbor entry. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1neighbor__entry__t_1a309432b51411a5eec8084641616547f3"></span><a class="reference internal" href="eth.html#eossdkclasseos_1_1eth__addr__t"><span class="std std-ref">eth_addr_t</span></a> <code class="descname">eth_addr</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dd><p>Getter for ‘eth_addr’: the Ethernet address of the neighbor entry. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1neighbor__entry__t_1ad22849ce1d8aff70b018e180bbd80582"></span>neighbor_entry_type_t <code class="descname">entry_type</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dd><p>Getter for ‘entry_type’: the type of neighbor entry, it will be either STATIC or DYNAMIC. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1neighbor__entry__t_1ab5b8f898d66071ef6195d768e14e923b"></span>bool <code class="descname">operator==</code><span class="sig-paren">(</span><a class="reference internal" href="#eossdkclasseos_1_1neighbor__entry__t"><span class="std std-ref">neighbor_entry_t</span></a> const &amp; <em>other</em><span class="sig-paren">)</span> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1neighbor__entry__t_1a08366eb8182f5468e4f4e91c8905880b"></span>bool <code class="descname">operator!=</code><span class="sig-paren">(</span><a class="reference internal" href="#eossdkclasseos_1_1neighbor__entry__t"><span class="std std-ref">neighbor_entry_t</span></a> const &amp; <em>other</em><span class="sig-paren">)</span> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1neighbor__entry__t_1a5358c788bbbc643b47b775513ba1eced"></span>bool <code class="descname">operator&lt;</code><span class="sig-paren">(</span><a class="reference internal" href="#eossdkclasseos_1_1neighbor__entry__t"><span class="std std-ref">neighbor_entry_t</span></a> const &amp; <em>other</em><span class="sig-paren">)</span> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1neighbor__entry__t_1a9969e193b30dd1060aaf27b208d9d26e"></span>uint32_t <code class="descname">hash</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dd><p>The hash function for type <a class="reference internal" href="#eossdkclasseos_1_1neighbor__entry__t"><span class="std std-ref">neighbor_entry_t</span></a>. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1neighbor__entry__t_1a2bc4970c6b2445e2bf29b37754ef050b"></span>void <code class="descname">mix_me</code><span class="sig-paren">(</span><a class="reference internal" href="hash_mix.html#eossdkclasseos_1_1hash__mix"><span class="std std-ref">hash_mix</span></a> &amp; <em>h</em><span class="sig-paren">)</span> const</dt>
+<dd><p>The hash mix function for type <a class="reference internal" href="#eossdkclasseos_1_1neighbor__entry__t"><span class="std std-ref">neighbor_entry_t</span></a>. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1neighbor__entry__t_1ae9271faa39c562906670f0d95c63a99a"></span>std::string <code class="descname">to_string</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dd><p>Returns a string representation of the current object’s values. </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Private Members</p>
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1neighbor__entry__t_1a5d4e523208c69a2943f1298874c68213"></span><a class="reference internal" href="#eossdkclasseos_1_1neighbor__key__t"><span class="std std-ref">neighbor_key_t</span></a> <code class="descname">neighbor_key_</code></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1neighbor__entry__t_1a9a3fc594964401810db81044f0b1386d"></span><a class="reference internal" href="eth.html#eossdkclasseos_1_1eth__addr__t"><span class="std std-ref">eth_addr_t</span></a> <code class="descname">eth_addr_</code></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1neighbor__entry__t_1ab579b1a2ff3d6edcee092c4f50a2c72c"></span>neighbor_entry_type_t <code class="descname">entry_type_</code></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Friends</p>
+<dl class="friend">
+<dt>
+<span class="target" id="eossdkclasseos_1_1neighbor__entry__t_1adc516d699b1e159e77ef57af60e1a5c0"></span>friend std::ostream &amp; <code class="descname">operator&lt;&lt;</code></dt>
+<dd><p>A utility stream operator that adds a string representation of <a class="reference internal" href="#eossdkclasseos_1_1neighbor__entry__t"><span class="std std-ref">neighbor_entry_t</span></a> to the ostream. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#"><strong>neighbor_table</strong></a><ul>
+<li><a class="reference internal" href="#type-definitions-in-neighbor-table">Type definitions in <strong>neighbor_table</strong></a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="mpls_vrf_label.html"
+                        title="previous chapter"><strong>mpls_vrf_label</strong></a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="nexthop_group.html"
+                        title="next chapter"><strong>nexthop_group</strong></a></p>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="nexthop_group.html" title="nexthop_group"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="mpls_vrf_label.html" title="mpls_vrf_label"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Arista EOS SDK 2.19.0 reference</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2014, Arista Networks.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.4.
+    </div>
+  </body>
+</html>

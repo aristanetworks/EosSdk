@@ -1,0 +1,176 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>version &#8212; Arista EOS SDK 2.19.0 reference</title>
+    <link rel="stylesheet" href="_static/eossdk.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/breathe.css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/language_data.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="vrf" href="vrf.html" />
+    <link rel="prev" title="utility" href="utility.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="vrf.html" title="vrf"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="utility.html" title="utility"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Arista EOS SDK 2.19.0 reference</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="version">
+<h1><strong>version</strong><a class="headerlink" href="#version" title="Permalink to this headline">¶</a></h1>
+<p>The version module. It provides EosSdk version information.</p>
+<p>This module provides access to EosSdk version information, including version major number, version minor number and version patch number.</p>
+<p>To access the version information, application will need to include “eos/version.h”, then it can access it directly, as following: eos::version_major eos::version_minor eos::version_patch eos::version</p>
+<p>Note: eos::version is of type “char *” while version_major, version_minor and version_patch are of type “uint8_t”. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Defines</p>
+<dl class="define">
+<dt>
+<span class="target" id="eossdkversion_8h_1aa09f65cda4f2165655447740d7adb847"></span><strong>EOSSDK_VERSION</strong></dt>
+<dd></dd></dl>
+
+<dl class="define">
+<dt>
+<span class="target" id="eossdkversion_8h_1a83154e8726565eb9944c202adfe1c1fd"></span><strong>EOSSDK_MAJOR</strong></dt>
+<dd></dd></dl>
+
+<dl class="define">
+<dt>
+<span class="target" id="eossdkversion_8h_1ad2bb02582a2b6b253141c87bf1d18db0"></span><strong>EOSSDK_MINOR</strong></dt>
+<dd></dd></dl>
+
+<dl class="define">
+<dt>
+<span class="target" id="eossdkversion_8h_1a5099db22d876c3be1ac2f6641c762437"></span><strong>EOSSDK_PATCH</strong></dt>
+<dd></dd></dl>
+
+</div>
+<dl class="namespace">
+<dt>
+<span class="target" id="eossdknamespaceeos"></span><em>namespace</em> <code class="descname">eos</code></dt>
+<dd><div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Variables</p>
+<dl class="variable">
+<dt>
+<span class="target" id="eossdknamespaceeos_1a685204fd661bb1b3a88c286ed17b8f23"></span>const char *const <code class="descname">version</code></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdknamespaceeos_1ab22c0079489d55381ccd282527fe59c8"></span>const uint8_t <code class="descname">version_major</code></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdknamespaceeos_1ad568c56a164bea8b4e4aa7298dd913cf"></span>const uint8_t <code class="descname">version_minor</code></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdknamespaceeos_1ae2e09bafeeedf990afbbabe5e9e9d3b4"></span>const uint8_t <code class="descname">version_patch</code></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdknamespaceeos_1a5a34c73d06a4a4c65635a40c7fa1f0e4"></span>const char *const <code class="descname">build_project</code></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdknamespaceeos_1a3922f1eed2a5a6b8f8f244638038eb8f"></span>const char *const <code class="descname">build_user</code></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdknamespaceeos_1a267a3d322a6f054c41f389fff4ea5c72"></span>const char *const <code class="descname">build_path</code></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdknamespaceeos_1a717e08601a955fe22b1fed61474709d8"></span>const uint32_t <code class="descname">build_cl</code></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdknamespaceeos_1ae96d0f5ef6587a04c9973470359f567b"></span>const uint64_t <code class="descname">build_timestamp</code></dt>
+<dd></dd></dl>
+
+</div>
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="utility.html"
+                        title="previous chapter"><strong>utility</strong></a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="vrf.html"
+                        title="next chapter"><strong>vrf</strong></a></p>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="vrf.html" title="vrf"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="utility.html" title="utility"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Arista EOS SDK 2.19.0 reference</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2014, Arista Networks.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.4.
+    </div>
+  </body>
+</html>

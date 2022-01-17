@@ -1,0 +1,1153 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>bfd &#8212; Arista EOS SDK 2.19.0 reference</title>
+    <link rel="stylesheet" href="_static/eossdk.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/breathe.css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/language_data.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="bgp" href="bgp.html" />
+    <link rel="prev" title="base_mgr" href="base_mgr.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="bgp.html" title="bgp"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="base_mgr.html" title="base_mgr"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Arista EOS SDK 2.19.0 reference</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="bfd">
+<h1><strong>bfd</strong><a class="headerlink" href="#bfd" title="Permalink to this headline">¶</a></h1>
+<p>The bfd module manages BFD sessions</p>
+<p>Bi-directional Forwarding Detection (BFD) is a low-latency protocol designed to detect faults between two forwarding planes. The protocol itself is independent from media, link and routing protocols. In EOS, BFD is implemented on top of IP encapuslations, conforming to RFC5881.</p>
+<p>This module provides APIs to provision BFD. APIs include<ul class="simple">
+<li>BFD session creation</li>
+<li>BFD session getter</li>
+<li>BFD session deletion</li>
+<li>BFD global interval timers setter/getter</li>
+<li>BFD interface timers setter/getter</li>
+<li>BFD session status getter</li>
+</ul>
+</p>
+<p>An iterator is also provided to iterate through all BFD sessions that are configured via EosSdk in the system. </p>
+<dl class="namespace">
+<dt>
+<span class="target" id="eossdknamespaceeos"></span><em>namespace</em> <code class="descname">eos</code></dt>
+<dd><dl class="class">
+<dt>
+<span class="target" id="eossdkclasseos_1_1bfd__session__handler"></span><em>class</em> <code class="descname">bfd_session_handler</code></dt>
+<dd><em>#include &lt;bfd.h&gt;</em><p>The BFD handler.</p>
+<p>This class provides handler APIs to react to a BFD’s session state change. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1bfd__session__handler_1a388da87175ba9389c147088b7cfa70bb"></span><code class="descname">bfd_session_handler</code><span class="sig-paren">(</span><a class="reference internal" href="#eossdkclasseos_1_1bfd__session__mgr"><span class="std std-ref">bfd_session_mgr</span></a> * <em>mgr</em><span class="sig-paren">)</span></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1bfd__session__handler_1ab294900f506e8eb2964d79d8e4003ce5"></span><a class="reference internal" href="#eossdkclasseos_1_1bfd__session__mgr"><span class="std std-ref">bfd_session_mgr</span></a> * <code class="descname">get_bfd_session_mgr</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1bfd__session__handler_1a8826c6016f0ea2be0c5e2d089ae38323"></span>void <code class="descname">watch_all_bfd_sessions</code><span class="sig-paren">(</span>bool<span class="sig-paren">)</span></dt>
+<dd><p>Registers this class to receive change updates on all BFD sessions.</p>
+<p>Expects a boolean signifying whether notifications should be generated for all BFD sessions created by EosSdk or not.</p>
+<p>This controls notifications on:<ul class="simple">
+<li><a class="reference internal" href="#eossdkclasseos_1_1bfd__session__handler_1ae5142267cede4db98edc9d3c509853e1"><span class="std std-ref">on_bfd_session_status()</span></a></li>
+<li><a class="reference internal" href="#eossdkclasseos_1_1bfd__session__handler_1a2aa871aaa7aabc86dcd17761e8a8569e"><span class="std std-ref">on_bfd_session_set()</span></a></li>
+<li><a class="reference internal" href="#eossdkclasseos_1_1bfd__session__handler_1a585b7309b912021cde7f288dd0511bed"><span class="std std-ref">on_bfd_session_del()</span></a> </li>
+</ul>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1bfd__session__handler_1a8b50b9c49c04f0d99ca7533d0e016ab6"></span>void <code class="descname">watch_bfd_session</code><span class="sig-paren">(</span><a class="reference internal" href="#eossdkclasseos_1_1bfd__session__key__t"><span class="std std-ref">bfd_session_key_t</span></a> const &amp;, bool<span class="sig-paren">)</span></dt>
+<dd><p>Registers this class to receive change updates on the given BFD session.</p>
+<p>Expects the session key of the corresponding BFD session and a boolean signifying whether notifications should be propagated to this BFD session or not. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1bfd__session__handler_1ae5142267cede4db98edc9d3c509853e1"></span>virtual void <code class="descname">on_bfd_session_status</code><span class="sig-paren">(</span><a class="reference internal" href="#eossdkclasseos_1_1bfd__session__key__t"><span class="std std-ref">bfd_session_key_t</span></a> const &amp;, bfd_session_status_t<span class="sig-paren">)</span></dt>
+<dd><p>Handler called when the status of a BFD session status changes.</p>
+<p>Possible status are: BFD_SESSION_STATUS_NULL BFD_SESSION_STATUS_DOWN BFD_SESSION_STATUS_INIT BFD_SESSION_STATUS_UP BFD_SESSION_STATUS_ADMIN_DOWN </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1bfd__session__handler_1a2aa871aaa7aabc86dcd17761e8a8569e"></span>virtual void <code class="descname">on_bfd_session_set</code><span class="sig-paren">(</span><a class="reference internal" href="#eossdkclasseos_1_1bfd__session__key__t"><span class="std std-ref">bfd_session_key_t</span></a> const &amp;<span class="sig-paren">)</span></dt>
+<dd><p>Handler called when a BFD session is created </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1bfd__session__handler_1a585b7309b912021cde7f288dd0511bed"></span>virtual void <code class="descname">on_bfd_session_del</code><span class="sig-paren">(</span><a class="reference internal" href="#eossdkclasseos_1_1bfd__session__key__t"><span class="std std-ref">bfd_session_key_t</span></a> const &amp;<span class="sig-paren">)</span></dt>
+<dd><p>Handler called when a BFD session is deleted </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1bfd__session__handler_1aa5bff26bb05a5bd46500c9ff1c75d917"></span>void <code class="descname">watch_all_sbfd_echo_sessions</code><span class="sig-paren">(</span>bool<span class="sig-paren">)</span></dt>
+<dd><p>Registers this class to receive change updates on all sBFD echo sessions created by EosSdk.</p>
+<p>Expects a boolean signifying whether notifications should be generated for all sBFD echo sessions created by EosSdk or not.</p>
+<p>This controls notifications on:<ul class="simple">
+<li><a class="reference internal" href="#eossdkclasseos_1_1bfd__session__handler_1aefe3fa15167451f07076cfcba11f1a1f"><span class="std std-ref">on_sbfd_echo_session_status()</span></a></li>
+<li><a class="reference internal" href="#eossdkclasseos_1_1bfd__session__handler_1a8646e3343b09779f5e87420f7fd1d1d1"><span class="std std-ref">on_sbfd_echo_session_set()</span></a></li>
+<li><a class="reference internal" href="#eossdkclasseos_1_1bfd__session__handler_1a58fdfb0bab47b6f14de87ea5e36a0032"><span class="std std-ref">on_sbfd_echo_session_del()</span></a> </li>
+</ul>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1bfd__session__handler_1aaa64cf2ddf7cc71e79198a4f9f061b36"></span>void <code class="descname">watch_sbfd_echo_session</code><span class="sig-paren">(</span><a class="reference internal" href="#eossdkclasseos_1_1sbfd__echo__session__key__t"><span class="std std-ref">sbfd_echo_session_key_t</span></a> const &amp;, bool<span class="sig-paren">)</span></dt>
+<dd><p>Registers this class to receive change updates on the given sBFD echo session.</p>
+<p>Expects the session key of the corresponding sBFD echo session. and a boolean signifying whether notifications should be propagated to this sBFD echo session or not. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1bfd__session__handler_1aefe3fa15167451f07076cfcba11f1a1f"></span>virtual void <code class="descname">on_sbfd_echo_session_status</code><span class="sig-paren">(</span><a class="reference internal" href="#eossdkclasseos_1_1sbfd__echo__session__key__t"><span class="std std-ref">sbfd_echo_session_key_t</span></a> const &amp;, bfd_session_status_t<span class="sig-paren">)</span></dt>
+<dd><p>Handler called when the status of a sBFD echo session status changes.</p>
+<p>Possible status are: BFD_SESSION_STATUS_NULL BFD_SESSION_STATUS_DOWN BFD_SESSION_STATUS_INIT BFD_SESSION_STATUS_UP BFD_SESSION_STATUS_ADMIN_DOWN </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1bfd__session__handler_1a8646e3343b09779f5e87420f7fd1d1d1"></span>virtual void <code class="descname">on_sbfd_echo_session_set</code><span class="sig-paren">(</span><a class="reference internal" href="#eossdkclasseos_1_1sbfd__echo__session__key__t"><span class="std std-ref">sbfd_echo_session_key_t</span></a> const &amp;<span class="sig-paren">)</span></dt>
+<dd><p>Handler called when a sBFD echo session is created. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1bfd__session__handler_1a58fdfb0bab47b6f14de87ea5e36a0032"></span>virtual void <code class="descname">on_sbfd_echo_session_del</code><span class="sig-paren">(</span><a class="reference internal" href="#eossdkclasseos_1_1sbfd__echo__session__key__t"><span class="std std-ref">sbfd_echo_session_key_t</span></a> const &amp;<span class="sig-paren">)</span></dt>
+<dd><p>Handler called when a sBFD echo session is deleted. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1bfd__session__handler_1a66fd471770dcfc797bc462bf3377d8b4"></span>virtual void <code class="descname">on_sbfd_echo_session_rtt</code><span class="sig-paren">(</span><a class="reference internal" href="#eossdkclasseos_1_1sbfd__echo__session__key__t"><span class="std std-ref">sbfd_echo_session_key_t</span></a> const &amp;, <a class="reference internal" href="#eossdkclasseos_1_1sbfd__echo__session__rtt__stats__t"><span class="std std-ref">sbfd_echo_session_rtt_stats_t</span></a> const &amp;<span class="sig-paren">)</span></dt>
+<dd><p>Handler called periodically for sBFD echo sessions where RTT statistics have been enabled with sbfd_echo_rtt_enabled_set. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="class">
+<dt>
+<span class="target" id="eossdkclasseos_1_1bfd__session__iter__t"></span><em>class</em> <code class="descname">bfd_session_iter_t</code></dt>
+<dd><em>#include &lt;bfd.h&gt;</em><p>An iterator that yields an <a class="reference internal" href="#eossdkclasseos_1_1bfd__session__key__t"><span class="std std-ref">bfd_session_key_t</span></a> for each configured BFD session </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Private Functions</p>
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1bfd__session__iter__t_1af616ee8039d2e3f6bac2101d7310fd0f"></span><code class="descname">bfd_session_iter_t</code><span class="sig-paren">(</span>bfd_session_iter_impl * <em>const</em><span class="sig-paren">)</span></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Friends</p>
+<dl class="friend">
+<dt>
+<span class="target" id="eossdkclasseos_1_1bfd__session__iter__t_1a95f525fc2ef937d99a6cfad19c4a89f6"></span>friend class <code class="descname">bfd_session_iter_impl</code></dt>
+<dd></dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="class">
+<dt>
+<span class="target" id="eossdkclasseos_1_1sbfd__echo__session__iter__t"></span><em>class</em> <code class="descname">sbfd_echo_session_iter_t</code></dt>
+<dd><em>#include &lt;bfd.h&gt;</em><p>An iterator that yields an <a class="reference internal" href="#eossdkclasseos_1_1sbfd__echo__session__key__t"><span class="std std-ref">sbfd_echo_session_key_t</span></a> for each configured sBFD echo session </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Private Functions</p>
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1sbfd__echo__session__iter__t_1a1905dbe0118233e2e03da44aa9239945"></span><code class="descname">sbfd_echo_session_iter_t</code><span class="sig-paren">(</span>sbfd_echo_session_iter_impl * <em>const</em><span class="sig-paren">)</span></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Friends</p>
+<dl class="friend">
+<dt>
+<span class="target" id="eossdkclasseos_1_1sbfd__echo__session__iter__t_1a03e8c10691beadac16179dc1ed222767"></span>friend class <code class="descname">sbfd_echo_session_iter_impl</code></dt>
+<dd></dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="class">
+<dt>
+<span class="target" id="eossdkclasseos_1_1bfd__session__mgr"></span><em>class</em> <code class="descname">bfd_session_mgr</code></dt>
+<dd><em>#include &lt;bfd.h&gt;</em><p>A manager of BFD session configurations for EosSdk client</p>
+<p>Create one of these via an sdk object prior to starting the agent main loop. When your <a class="reference internal" href="agent.html#eossdkclasseos_1_1agent__handler_1ad558b16ee9a283bd9b153400743c4b1c"><span class="std std-ref">eos::agent_handler::on_initialized</span></a> virtual function is called, the manager is valid for use. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1bfd__session__mgr_1ae8bd674608f3d2c4324650692fb304ed"></span>virtual <code class="descname">~bfd_session_mgr</code><span class="sig-paren">(</span><span class="sig-paren">)</span></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1bfd__session__mgr_1a3ee8b0672df12a30ddd14cb9348581ed"></span>virtual <a class="reference internal" href="#eossdkclasseos_1_1bfd__session__iter__t"><span class="std std-ref">bfd_session_iter_t</span></a> <code class="descname">session_iter</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const = 0</dt>
+<dd><p>Returns an iterator over all BFD sessions configured through EosSdk on the system. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1bfd__session__mgr_1ae73b829970abac4417fbdeaee3bb823f"></span>virtual bool <code class="descname">exists</code><span class="sig-paren">(</span><a class="reference internal" href="#eossdkclasseos_1_1bfd__session__key__t"><span class="std std-ref">bfd_session_key_t</span></a> const &amp;<span class="sig-paren">)</span> const = 0</dt>
+<dd><p>Return true if the BFD session is configured. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1bfd__session__mgr_1afb45e7e980221287e43f254d94126d9e"></span>virtual void <code class="descname">session_set</code><span class="sig-paren">(</span><a class="reference internal" href="#eossdkclasseos_1_1bfd__session__key__t"><span class="std std-ref">bfd_session_key_t</span></a> const &amp;<span class="sig-paren">)</span> = 0</dt>
+<dd><p>Creates a BFD session. If an existing session has already been created by other client (i.e. BGP, OSPF), no new BFD session will be created. Instead, EsoSdk will be added to the list of clients that will receive BFD session status change notifications. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1bfd__session__mgr_1a211d1e6be882387f0f58e0bcb4fe8769"></span>virtual <a class="reference internal" href="#eossdkclasseos_1_1bfd__session__t"><span class="std std-ref">bfd_session_t</span></a> <code class="descname">session</code><span class="sig-paren">(</span><a class="reference internal" href="#eossdkclasseos_1_1bfd__session__key__t"><span class="std std-ref">bfd_session_key_t</span></a> const &amp;<span class="sig-paren">)</span> const = 0</dt>
+<dd><p>Returns the BFD session with the specified key. Will return an empty <a class="reference internal" href="#eossdkclasseos_1_1bfd__session__t"><span class="std std-ref">bfd_session_t</span></a> if the BFD session does not exist already. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1bfd__session__mgr_1a600dc4bc28c1c82836ca1940bca1e2e5"></span>virtual void <code class="descname">session_del</code><span class="sig-paren">(</span><a class="reference internal" href="#eossdkclasseos_1_1bfd__session__key__t"><span class="std std-ref">bfd_session_key_t</span></a> const &amp;<span class="sig-paren">)</span> = 0</dt>
+<dd><p>Remove a BFD session if it exists. It is a no-op if the specified BFD session does not exist. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1bfd__session__mgr_1a00e452eb6e42dfa335abc70b5e436102"></span>virtual void <code class="descname">default_interval_is</code><span class="sig-paren">(</span><a class="reference internal" href="#eossdkclasseos_1_1bfd__interval__t"><span class="std std-ref">bfd_interval_t</span></a> const &amp;<span class="sig-paren">)</span> = 0</dt>
+<dd><p>Set BFD default interval value. It will be applied to all interface unless overridden by per-interface interval configuration. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1bfd__session__mgr_1ae669099a74f3e38613bada435885b465"></span>virtual <a class="reference internal" href="#eossdkclasseos_1_1bfd__interval__t"><span class="std std-ref">bfd_interval_t</span></a> <code class="descname">default_interval</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const = 0</dt>
+<dd><p>Get global BFD interval configuration. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1bfd__session__mgr_1a29a50636151423adee9b7031fcf60e17"></span>virtual void <code class="descname">interval_is</code><span class="sig-paren">(</span><a class="reference internal" href="intf.html#eossdkclasseos_1_1intf__id__t"><span class="std std-ref">intf_id_t</span></a> <em>intf</em>, <a class="reference internal" href="#eossdkclasseos_1_1bfd__interval__t"><span class="std std-ref">bfd_interval_t</span></a> const &amp;<span class="sig-paren">)</span> = 0</dt>
+<dd><p>Set BFD interval on an interface. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1bfd__session__mgr_1a77fae10c05b7d83b3618ba3c6c0904da"></span>virtual <a class="reference internal" href="#eossdkclasseos_1_1bfd__interval__t"><span class="std std-ref">bfd_interval_t</span></a> <code class="descname">interval</code><span class="sig-paren">(</span><a class="reference internal" href="intf.html#eossdkclasseos_1_1intf__id__t"><span class="std std-ref">intf_id_t</span></a> <em>intf</em><span class="sig-paren">)</span> const = 0</dt>
+<dd><p>Get BFD interval configuration on an interface. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1bfd__session__mgr_1aad5267cf9c5a4dc2eabb2fa3dfb430e9"></span>virtual void <code class="descname">interval_reset</code><span class="sig-paren">(</span><a class="reference internal" href="intf.html#eossdkclasseos_1_1intf__id__t"><span class="std std-ref">intf_id_t</span></a> <em>intf</em><span class="sig-paren">)</span> = 0</dt>
+<dd><p>Reset BFD interval configuration on an interface back to value configured by bfd_default_interval_is(). If bfd_default_interval_is() has not been explicitly called to configure a default interval, the interval will be reset to tx=300ms, rx=300ms and mult=3. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1bfd__session__mgr_1a4d703760e0507f636c442787e314c3e1"></span>virtual bfd_session_status_t <code class="descname">session_status</code><span class="sig-paren">(</span><a class="reference internal" href="#eossdkclasseos_1_1bfd__session__key__t"><span class="std std-ref">bfd_session_key_t</span></a> const &amp;<span class="sig-paren">)</span> const = 0</dt>
+<dd><p>Return the BFD status given a BFD session key. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1bfd__session__mgr_1a2b6a3a7e7f2c098dd848b2b7796c2a48"></span>virtual <a class="reference internal" href="#eossdkclasseos_1_1sbfd__echo__session__iter__t"><span class="std std-ref">sbfd_echo_session_iter_t</span></a> <code class="descname">sbfd_echo_session_iter</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const = 0</dt>
+<dd><p>sBFD echo sessions.</p>
+<p>Only a single EosSdk application can use the sbfd_echo_* APIs, if a second application attempts to use them, it will result in a panic / exception. Returns an iterator over all sBFD echo sessions configured through EosSdk on the system. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1bfd__session__mgr_1aa10d6ff1bfe7db57ecab7f11a9cdf2b8"></span>virtual bool <code class="descname">sbfd_echo_session_exists</code><span class="sig-paren">(</span><a class="reference internal" href="#eossdkclasseos_1_1sbfd__echo__session__key__t"><span class="std std-ref">sbfd_echo_session_key_t</span></a> const &amp;<span class="sig-paren">)</span> const = 0</dt>
+<dd><p>Return true if the sBFD echo session is configured. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1bfd__session__mgr_1af0d02db7178f2a3b38b6fdd3fbe6e3c2"></span>virtual void <code class="descname">sbfd_echo_session_set</code><span class="sig-paren">(</span><a class="reference internal" href="#eossdkclasseos_1_1sbfd__echo__session__key__t"><span class="std std-ref">sbfd_echo_session_key_t</span></a> const &amp;<span class="sig-paren">)</span> = 0</dt>
+<dd><p>Create a sBFD echo session. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1bfd__session__mgr_1a0fdfc3b47895fec870f061c58f0ee542"></span>virtual void <code class="descname">sbfd_echo_session_del</code><span class="sig-paren">(</span><a class="reference internal" href="#eossdkclasseos_1_1sbfd__echo__session__key__t"><span class="std std-ref">sbfd_echo_session_key_t</span></a> const &amp;<span class="sig-paren">)</span> = 0</dt>
+<dd><p>Remove a sBFD echo session if it exists. It is a no-op if the specified sBFD session does not exist. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1bfd__session__mgr_1a666cf43d688cb089221b7e941eebc5ce"></span>virtual void <code class="descname">sbfd_echo_default_interval_set</code><span class="sig-paren">(</span><a class="reference internal" href="#eossdkclasseos_1_1sbfd__interval__t"><span class="std std-ref">sbfd_interval_t</span></a> const &amp;<span class="sig-paren">)</span> = 0</dt>
+<dd><p>Set sBFD echo session default interval value. It will be applied to all sBFD echo session. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1bfd__session__mgr_1a0c4dd300529d251063385c7bd9515f13"></span>virtual <a class="reference internal" href="#eossdkclasseos_1_1sbfd__interval__t"><span class="std std-ref">sbfd_interval_t</span></a> <code class="descname">sbfd_echo_default_interval</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const = 0</dt>
+<dd><p>Get global sBFD echo session interval configuration. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1bfd__session__mgr_1a7e0a99abe13b63d654473ad8e8420cfb"></span>virtual void <code class="descname">sbfd_echo_interval_set</code><span class="sig-paren">(</span><a class="reference internal" href="#eossdkclasseos_1_1sbfd__echo__session__key__t"><span class="std std-ref">sbfd_echo_session_key_t</span></a> const &amp;, <a class="reference internal" href="#eossdkclasseos_1_1sbfd__interval__t"><span class="std std-ref">sbfd_interval_t</span></a> const &amp;<span class="sig-paren">)</span> = 0</dt>
+<dd><p>Set sBFD echo session interval value per session </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1bfd__session__mgr_1ae971ad0504f44b0e64ec76fa1982f106"></span>virtual <a class="reference internal" href="#eossdkclasseos_1_1sbfd__interval__t"><span class="std std-ref">sbfd_interval_t</span></a> <code class="descname">sbfd_echo_interval</code><span class="sig-paren">(</span><a class="reference internal" href="#eossdkclasseos_1_1sbfd__echo__session__key__t"><span class="std std-ref">sbfd_echo_session_key_t</span></a> const &amp;<span class="sig-paren">)</span> const = 0</dt>
+<dd><p>Get sBFD echo session interval configuration. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1bfd__session__mgr_1a957ead5b7e7a7be9538ac559bace670a"></span>virtual void <code class="descname">sbfd_echo_interval_reset</code><span class="sig-paren">(</span><a class="reference internal" href="#eossdkclasseos_1_1sbfd__echo__session__key__t"><span class="std std-ref">sbfd_echo_session_key_t</span></a> const &amp;<span class="sig-paren">)</span> = 0</dt>
+<dd><p>Reset sBFD echo session interval configuration on a session back to value configured by <a class="reference internal" href="#eossdkclasseos_1_1bfd__session__mgr_1a666cf43d688cb089221b7e941eebc5ce"><span class="std std-ref">sbfd_echo_default_interval_set()</span></a>. If <a class="reference internal" href="#eossdkclasseos_1_1bfd__session__mgr_1a666cf43d688cb089221b7e941eebc5ce"><span class="std std-ref">sbfd_echo_default_interval_set()</span></a> has not been explicitly called to configure a default interval, the interval will be reset to tx=300ms and mult=3. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1bfd__session__mgr_1a288c7f6295664a91c1dfbe4cfb682bb0"></span>virtual void <code class="descname">sbfd_echo_rtt_enabled_set</code><span class="sig-paren">(</span><a class="reference internal" href="#eossdkclasseos_1_1sbfd__echo__session__key__t"><span class="std std-ref">sbfd_echo_session_key_t</span></a> const &amp;, bool<span class="sig-paren">)</span> = 0</dt>
+<dd><p>Request RTT measurements for the sBFD probe packets.</p>
+<p>RTTs will be reported via the on_sbfd_echo_session_rtt at intervals configured by</p>
+<p>router bfd session stats snapshot interval ((dangerous &lt;1-9&gt;)|&lt;10-3600 seconds&gt;) </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1bfd__session__mgr_1a8b298d3e4222a73b2fb5670074ee44da"></span>virtual bool <code class="descname">sbfd_echo_rtt_enabled</code><span class="sig-paren">(</span><a class="reference internal" href="#eossdkclasseos_1_1sbfd__echo__session__key__t"><span class="std std-ref">sbfd_echo_session_key_t</span></a> const &amp;<span class="sig-paren">)</span> const = 0</dt>
+<dd><p>Is sBFD RTT measurements enabled? </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1bfd__session__mgr_1a9ca236b090c276d7eb25d144c58b65a3"></span>virtual bfd_session_status_t <code class="descname">sbfd_echo_session_status</code><span class="sig-paren">(</span><a class="reference internal" href="#eossdkclasseos_1_1sbfd__echo__session__key__t"><span class="std std-ref">sbfd_echo_session_key_t</span></a> const &amp;<span class="sig-paren">)</span> const = 0</dt>
+<dd><p>Return the BFD status given a sBFD echo session key. </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Protected Functions</p>
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1bfd__session__mgr_1a3f681a17c8063b603e88ef6c02d0f7c6"></span><code class="descname">bfd_session_mgr</code><span class="sig-paren">(</span><span class="sig-paren">)</span></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Private Members</p>
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1bfd__session__mgr_1a37f2b96a8c97531bc08091e4f837eeca"></span><code class="descname">bfd_session_mgr</code></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Friends</p>
+<dl class="friend">
+<dt>
+<span class="target" id="eossdkclasseos_1_1bfd__session__mgr_1a1839ea452e20f28cbd343500874b3949"></span>friend class <code class="descname">bfd_session_handler</code></dt>
+<dd></dd></dl>
+
+</div>
+</dd></dl>
+
+</dd></dl>
+
+<div class="section" id="type-definitions-in-bfd">
+<h2>Type definitions in <strong>bfd</strong><a class="headerlink" href="#type-definitions-in-bfd" title="Permalink to this headline">¶</a></h2>
+<dl class="namespace">
+<dt>
+<span class="target" id="eossdknamespaceeos"></span><em>namespace</em> <code class="descname">eos</code></dt>
+<dd><div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Enums</p>
+<dl class="enum">
+<dt>
+<span class="target" id="eossdknamespaceeos_1a34211e7ff756ec5b99c82f4e26be104c"></span><strong>bfd_session_status_t enum</strong></dt>
+<dd><p>BFD session status. </p>
+<p><em>Values:</em></p>
+<ul class="breatheenumvalues">
+<li><code class="first docutils literal notranslate"><span class="pre">BFD_SESSION_STATUS_NULL</span></code> - </li>
+<li><code class="first docutils literal notranslate"><span class="pre">BFD_SESSION_STATUS_DOWN</span></code> - </li>
+<li><code class="first docutils literal notranslate"><span class="pre">BFD_SESSION_STATUS_INIT</span></code> - </li>
+<li><code class="first docutils literal notranslate"><span class="pre">BFD_SESSION_STATUS_UP</span></code> - </li>
+<li><code class="first docutils literal notranslate"><span class="pre">BFD_SESSION_STATUS_ADMIN_DOWN</span></code> - </li>
+</ul>
+</dd></dl>
+
+<dl class="enum">
+<dt>
+<span class="target" id="eossdknamespaceeos_1a387fa9843d2b742ebbf129e21d3190e2"></span><strong>bfd_session_type_t enum</strong></dt>
+<dd><p>BFD session type. </p>
+<p><em>Values:</em></p>
+<ul class="breatheenumvalues">
+<li><code class="first docutils literal notranslate"><span class="pre">BFD_SESSION_TYPE_NULL</span></code> - </li>
+<li><code class="first docutils literal notranslate"><span class="pre">BFD_SESSION_TYPE_NORMAL</span></code> - </li>
+<li><code class="first docutils literal notranslate"><span class="pre">BFD_SESSION_TYPE_MICRO</span></code> - </li>
+<li><code class="first docutils literal notranslate"><span class="pre">BFD_SESSION_TYPE_VXLANTUNNEL</span></code> - </li>
+<li><code class="first docutils literal notranslate"><span class="pre">BFD_SESSION_TYPE_LAGRFC7130</span></code> - </li>
+<li><code class="first docutils literal notranslate"><span class="pre">BFD_SESSION_TYPE_MICRORFC7130</span></code> - </li>
+<li><code class="first docutils literal notranslate"><span class="pre">BFD_SESSION_TYPE_MULTIHOP</span></code> - </li>
+<li><code class="first docutils literal notranslate"><span class="pre">BFD_SESSION_TYPE_SBFD_INITIATOR</span></code> - </li>
+<li><code class="first docutils literal notranslate"><span class="pre">BFD_SESSION_TYPE_SBFD_REFLECTOR</span></code> - </li>
+</ul>
+</dd></dl>
+
+</div>
+<dl class="class">
+<dt>
+<span class="target" id="eossdkclasseos_1_1bfd__session__key__t"></span><em>class</em> <code class="descname">bfd_session_key_t</code></dt>
+<dd><em>#include &lt;bfd.h&gt;</em><p>BFD session key class. Used to identify a BFD session on a switch. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1bfd__session__key__t_1a9a476bfaf336f5fc4bf4259a29b9c3e4"></span><code class="descname">bfd_session_key_t</code><span class="sig-paren">(</span><span class="sig-paren">)</span></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1bfd__session__key__t_1aa11f5d57e8785980408e895113f3cb07"></span><code class="descname">bfd_session_key_t</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#eossdkclasseos_1_1ip__addr__t"><span class="std std-ref">ip_addr_t</span></a> <em>ip_addr</em>, std::string <em>vrf</em>, bfd_session_type_t <em>type</em>, <a class="reference internal" href="intf.html#eossdkclasseos_1_1intf__id__t"><span class="std std-ref">intf_id_t</span></a> <em>intf</em><span class="sig-paren">)</span></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1bfd__session__key__t_1adb57276eae5dbbc801a05ab2754cbd8f"></span><code class="descname">bfd_session_key_t</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#eossdkclasseos_1_1ip__addr__t"><span class="std std-ref">ip_addr_t</span></a> <em>ip_addr</em>, std::string <em>vrf</em>, bfd_session_type_t <em>type</em>, <a class="reference internal" href="intf.html#eossdkclasseos_1_1intf__id__t"><span class="std std-ref">intf_id_t</span></a> <em>intf</em>, <a class="reference internal" href="ip.html#eossdkclasseos_1_1ip__addr__t"><span class="std std-ref">ip_addr_t</span></a> <em>src_ip_addr</em><span class="sig-paren">)</span></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1bfd__session__key__t_1a436423ef120ff32d769cfb6fea5aa57f"></span><code class="descname">bfd_session_key_t</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#eossdkclasseos_1_1ip__addr__t"><span class="std std-ref">ip_addr_t</span></a> <em>ip_addr</em>, std::string <em>vrf</em>, bfd_session_type_t <em>type</em>, uint64_t <em>tunnel_id</em><span class="sig-paren">)</span></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1bfd__session__key__t_1a435367cd0a4f53cdcd192753d11e0873"></span><code class="descname">bfd_session_key_t</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#eossdkclasseos_1_1ip__addr__t"><span class="std std-ref">ip_addr_t</span></a> <em>ip_addr</em>, std::string <em>vrf</em>, bfd_session_type_t <em>type</em>, <a class="reference internal" href="intf.html#eossdkclasseos_1_1intf__id__t"><span class="std std-ref">intf_id_t</span></a> <em>intf</em>, <a class="reference internal" href="ip.html#eossdkclasseos_1_1ip__addr__t"><span class="std std-ref">ip_addr_t</span></a> <em>src_ip_addr</em>, uint64_t <em>tunnel_id</em><span class="sig-paren">)</span></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1bfd__session__key__t_1ae98e6babfd7b823b03282effbaf89841"></span><a class="reference internal" href="ip.html#eossdkclasseos_1_1ip__addr__t"><span class="std std-ref">ip_addr_t</span></a> <code class="descname">ip_addr</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dd><p>Getter for ‘ip_addr’: IP address of the peer. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1bfd__session__key__t_1a6c8c80a678d57e7e3b87d647232c6dda"></span>std::string <code class="descname">vrf</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dd><p>Getter for ‘vrf’: vrf associated with the BFD session. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1bfd__session__key__t_1a7cf3fcbf7c98dec84ef7417fb3bdb463"></span>bfd_session_type_t <code class="descname">type</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dd><p>Getter for ‘type’: type associated with the BFD session. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1bfd__session__key__t_1a8e3251f7efd82e11c06517f0e8854b39"></span><a class="reference internal" href="intf.html#eossdkclasseos_1_1intf__id__t"><span class="std std-ref">intf_id_t</span></a> <code class="descname">intf</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dd><p>Getter for ‘intf’: local interface associated with the BFD session. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1bfd__session__key__t_1afa2b1e218ed9043b0675c6249129141b"></span><a class="reference internal" href="ip.html#eossdkclasseos_1_1ip__addr__t"><span class="std std-ref">ip_addr_t</span></a> <code class="descname">src_ip_addr</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dd><p>Getter for ‘src_ip_addr’: Src IP address associated with the BFD session. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1bfd__session__key__t_1a4808f34b1c2a58d2693509d49f4a5f81"></span>uint64_t <code class="descname">tunnel_id</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dd><p>Getter for ‘tunnel_id’: Tunnel Id associated with the BFD session. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1bfd__session__key__t_1ad5db8c173f2f7d1a55d9a2f56a8a1b1b"></span>bool <code class="descname">operator==</code><span class="sig-paren">(</span><a class="reference internal" href="#eossdkclasseos_1_1bfd__session__key__t"><span class="std std-ref">bfd_session_key_t</span></a> const &amp; <em>other</em><span class="sig-paren">)</span> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1bfd__session__key__t_1ae0c5897efd091ec34596c53cb4fe1e71"></span>bool <code class="descname">operator!=</code><span class="sig-paren">(</span><a class="reference internal" href="#eossdkclasseos_1_1bfd__session__key__t"><span class="std std-ref">bfd_session_key_t</span></a> const &amp; <em>other</em><span class="sig-paren">)</span> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1bfd__session__key__t_1a97e7c61eed71e299fe8659368495d99d"></span>bool <code class="descname">operator&lt;</code><span class="sig-paren">(</span><a class="reference internal" href="#eossdkclasseos_1_1bfd__session__key__t"><span class="std std-ref">bfd_session_key_t</span></a> const &amp; <em>other</em><span class="sig-paren">)</span> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1bfd__session__key__t_1a9217de80f95bfa2205d06e78d8e7f10e"></span>uint32_t <code class="descname">hash</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dd><p>The hash function for type <a class="reference internal" href="#eossdkclasseos_1_1bfd__session__key__t"><span class="std std-ref">bfd_session_key_t</span></a>. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1bfd__session__key__t_1a7eb78f3b75590f95cff09fcfb9ac2a8f"></span>void <code class="descname">mix_me</code><span class="sig-paren">(</span><a class="reference internal" href="hash_mix.html#eossdkclasseos_1_1hash__mix"><span class="std std-ref">hash_mix</span></a> &amp; <em>h</em><span class="sig-paren">)</span> const</dt>
+<dd><p>The hash mix function for type <a class="reference internal" href="#eossdkclasseos_1_1bfd__session__key__t"><span class="std std-ref">bfd_session_key_t</span></a>. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1bfd__session__key__t_1af0334baa4061ac814ad69dd54e5272b4"></span>std::string <code class="descname">to_string</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dd><p>Returns a string representation of the current object’s values. </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Private Members</p>
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1bfd__session__key__t_1ac080282bbd13b37734d7381cfb103cce"></span><a class="reference internal" href="ip.html#eossdkclasseos_1_1ip__addr__t"><span class="std std-ref">ip_addr_t</span></a> <code class="descname">ip_addr_</code></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1bfd__session__key__t_1ac3985eb32f04b1618d41a69913360e7d"></span>std::string <code class="descname">vrf_</code></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1bfd__session__key__t_1ac34b4b613e57683f2ced27e4932408f1"></span>bfd_session_type_t <code class="descname">type_</code></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1bfd__session__key__t_1add9514b1f67849b65fdca39438b72c76"></span><a class="reference internal" href="intf.html#eossdkclasseos_1_1intf__id__t"><span class="std std-ref">intf_id_t</span></a> <code class="descname">intf_</code></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1bfd__session__key__t_1aa24865e875857aab9deaf0c345c682d6"></span><a class="reference internal" href="ip.html#eossdkclasseos_1_1ip__addr__t"><span class="std std-ref">ip_addr_t</span></a> <code class="descname">src_ip_addr_</code></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1bfd__session__key__t_1adcb12fbfe9d442b1966e88a55f90f87d"></span>uint64_t <code class="descname">tunnel_id_</code></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Friends</p>
+<dl class="friend">
+<dt>
+<span class="target" id="eossdkclasseos_1_1bfd__session__key__t_1a3affc740be3cd411b1c33463c1c4ab02"></span>friend std::ostream &amp; <code class="descname">operator&lt;&lt;</code></dt>
+<dd><p>A utility stream operator that adds a string representation of <a class="reference internal" href="#eossdkclasseos_1_1bfd__session__key__t"><span class="std std-ref">bfd_session_key_t</span></a> to the ostream. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="class">
+<dt>
+<span class="target" id="eossdkclasseos_1_1bfd__interval__t"></span><em>class</em> <code class="descname">bfd_interval_t</code></dt>
+<dd><em>#include &lt;bfd.h&gt;</em><p>BFD interval configuration class. Used to specify BFD timer interval. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1bfd__interval__t_1aaab62e69d714ed713ce35a99c2d4f71f"></span><code class="descname">bfd_interval_t</code><span class="sig-paren">(</span><span class="sig-paren">)</span></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1bfd__interval__t_1a751c20451911a698a1f2a8c38d98695c"></span><code class="descname">bfd_interval_t</code><span class="sig-paren">(</span>uint16_t <em>tx</em>, uint16_t <em>rx</em>, uint8_t <em>mult</em><span class="sig-paren">)</span></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1bfd__interval__t_1a1cc8d8ef5304611901e9893c6fc749d4"></span>uint16_t <code class="descname">tx</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dd><p>Getter for ‘tx’: desired minimum tx interval. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1bfd__interval__t_1a547913fc6dc13b4268c4af80b465669e"></span>uint16_t <code class="descname">rx</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dd><p>Getter for ‘rx’: required minimum rx interval. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1bfd__interval__t_1aeb29d4cd186deb004e7357ebc367d410"></span>uint8_t <code class="descname">mult</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dd><p>Getter for ‘mult’: detection multiplier. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1bfd__interval__t_1a6241354c6c16129e6311e7b2da2a73bf"></span>bool <code class="descname">operator==</code><span class="sig-paren">(</span><a class="reference internal" href="#eossdkclasseos_1_1bfd__interval__t"><span class="std std-ref">bfd_interval_t</span></a> const &amp; <em>other</em><span class="sig-paren">)</span> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1bfd__interval__t_1acc31d22f4808977b83f3ab6455d48c8a"></span>bool <code class="descname">operator!=</code><span class="sig-paren">(</span><a class="reference internal" href="#eossdkclasseos_1_1bfd__interval__t"><span class="std std-ref">bfd_interval_t</span></a> const &amp; <em>other</em><span class="sig-paren">)</span> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1bfd__interval__t_1a56cca0a1415ea92c8c1f2b3d6b85f457"></span>uint32_t <code class="descname">hash</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dd><p>The hash function for type <a class="reference internal" href="#eossdkclasseos_1_1bfd__interval__t"><span class="std std-ref">bfd_interval_t</span></a>. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1bfd__interval__t_1a92e2ba833a4c0eeb96b4bf565656df0e"></span>void <code class="descname">mix_me</code><span class="sig-paren">(</span><a class="reference internal" href="hash_mix.html#eossdkclasseos_1_1hash__mix"><span class="std std-ref">hash_mix</span></a> &amp; <em>h</em><span class="sig-paren">)</span> const</dt>
+<dd><p>The hash mix function for type <a class="reference internal" href="#eossdkclasseos_1_1bfd__interval__t"><span class="std std-ref">bfd_interval_t</span></a>. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1bfd__interval__t_1a31c31333584a7edd9bdb7d97fa408b4c"></span>std::string <code class="descname">to_string</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dd><p>Returns a string representation of the current object’s values. </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Private Members</p>
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1bfd__interval__t_1a3d32b2e65582968f34e8d5a8bf8086ec"></span>uint16_t <code class="descname">tx_</code></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1bfd__interval__t_1a85749b267696a487d75bf8d5b3bb9d04"></span>uint16_t <code class="descname">rx_</code></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1bfd__interval__t_1aeadbbe266b26c4ed0421529fc4910c47"></span>uint8_t <code class="descname">mult_</code></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Friends</p>
+<dl class="friend">
+<dt>
+<span class="target" id="eossdkclasseos_1_1bfd__interval__t_1ae9588cbb2e7e526be84d5a31caa9af56"></span>friend std::ostream &amp; <code class="descname">operator&lt;&lt;</code></dt>
+<dd><p>A utility stream operator that adds a string representation of <a class="reference internal" href="#eossdkclasseos_1_1bfd__interval__t"><span class="std std-ref">bfd_interval_t</span></a> to the ostream. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="class">
+<dt>
+<span class="target" id="eossdkclasseos_1_1bfd__session__t"></span><em>class</em> <code class="descname">bfd_session_t</code></dt>
+<dd><em>#include &lt;bfd.h&gt;</em><p>This data structure is used to describe a BFD session. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1bfd__session__t_1a9ca0b0cc995178b2581107dab46c322d"></span><code class="descname">bfd_session_t</code><span class="sig-paren">(</span><span class="sig-paren">)</span></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1bfd__session__t_1a41e3af25d72b57f842c1609f18cfd8b8"></span><code class="descname">bfd_session_t</code><span class="sig-paren">(</span><a class="reference internal" href="#eossdkclasseos_1_1bfd__session__key__t"><span class="std std-ref">bfd_session_key_t</span></a> <em>peer</em>, bfd_session_status_t <em>status</em><span class="sig-paren">)</span></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1bfd__session__t_1a44080e4317a095b0df76c71ae96143df"></span><a class="reference internal" href="#eossdkclasseos_1_1bfd__session__key__t"><span class="std std-ref">bfd_session_key_t</span></a> <code class="descname">peer</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dd><p>Getter for ‘peer’: the peer for this BFD session. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1bfd__session__t_1a4870c6069bd1f4fcbed6683f008216d3"></span>bfd_session_status_t <code class="descname">status</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dd><p>Getter for ‘status’: the status of the BFD session. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1bfd__session__t_1a2a82fbb1f66ec6b598bdb448179724cb"></span>bool <code class="descname">operator==</code><span class="sig-paren">(</span><a class="reference internal" href="#eossdkclasseos_1_1bfd__session__t"><span class="std std-ref">bfd_session_t</span></a> const &amp; <em>other</em><span class="sig-paren">)</span> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1bfd__session__t_1a3090fd143b9df8be69f51ee994050a5e"></span>bool <code class="descname">operator!=</code><span class="sig-paren">(</span><a class="reference internal" href="#eossdkclasseos_1_1bfd__session__t"><span class="std std-ref">bfd_session_t</span></a> const &amp; <em>other</em><span class="sig-paren">)</span> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1bfd__session__t_1a7750ba55458152472feaca96a0a18b28"></span>bool <code class="descname">operator&lt;</code><span class="sig-paren">(</span><a class="reference internal" href="#eossdkclasseos_1_1bfd__session__t"><span class="std std-ref">bfd_session_t</span></a> const &amp; <em>other</em><span class="sig-paren">)</span> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1bfd__session__t_1abdef80dde69c10e8e5847d29ab784460"></span>uint32_t <code class="descname">hash</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dd><p>The hash function for type <a class="reference internal" href="#eossdkclasseos_1_1bfd__session__t"><span class="std std-ref">bfd_session_t</span></a>. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1bfd__session__t_1a4c17da35683958bfdc3c7244f73381dc"></span>void <code class="descname">mix_me</code><span class="sig-paren">(</span><a class="reference internal" href="hash_mix.html#eossdkclasseos_1_1hash__mix"><span class="std std-ref">hash_mix</span></a> &amp; <em>h</em><span class="sig-paren">)</span> const</dt>
+<dd><p>The hash mix function for type <a class="reference internal" href="#eossdkclasseos_1_1bfd__session__t"><span class="std std-ref">bfd_session_t</span></a>. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1bfd__session__t_1ab4bc72bf36800f80d63ab1694b87ce98"></span>std::string <code class="descname">to_string</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dd><p>Returns a string representation of the current object’s values. </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Private Members</p>
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1bfd__session__t_1ac544bcb8c239884260095a17cb8b9667"></span><a class="reference internal" href="#eossdkclasseos_1_1bfd__session__key__t"><span class="std std-ref">bfd_session_key_t</span></a> <code class="descname">peer_</code></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1bfd__session__t_1a8833377c9cdf3efd7b7f24f5024ddf2d"></span>bfd_session_status_t <code class="descname">status_</code></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Friends</p>
+<dl class="friend">
+<dt>
+<span class="target" id="eossdkclasseos_1_1bfd__session__t_1a8e7f479a6487bd66415db92622a1d3ee"></span>friend std::ostream &amp; <code class="descname">operator&lt;&lt;</code></dt>
+<dd><p>A utility stream operator that adds a string representation of <a class="reference internal" href="#eossdkclasseos_1_1bfd__session__t"><span class="std std-ref">bfd_session_t</span></a> to the ostream. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="class">
+<dt>
+<span class="target" id="eossdkclasseos_1_1sbfd__echo__session__key__t"></span><em>class</em> <code class="descname">sbfd_echo_session_key_t</code></dt>
+<dd><em>#include &lt;bfd.h&gt;</em><p>sBFD echo session key class. Used to identify a sBFD echo session on a switch. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1sbfd__echo__session__key__t_1a1394ea14539fe364a4ae725538c88417"></span><code class="descname">sbfd_echo_session_key_t</code><span class="sig-paren">(</span><span class="sig-paren">)</span></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1sbfd__echo__session__key__t_1af9e17f0f41baca8e869e1cacf210b604"></span><code class="descname">sbfd_echo_session_key_t</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#eossdkclasseos_1_1ip__addr__t"><span class="std std-ref">ip_addr_t</span></a> <em>nexthop</em>, <a class="reference internal" href="intf.html#eossdkclasseos_1_1intf__id__t"><span class="std std-ref">intf_id_t</span></a> <em>nexthop_intf</em>, std::forward_list&lt; <a class="reference internal" href="mpls.html#eossdkclasseos_1_1mpls__label__t"><span class="std std-ref">mpls_label_t</span></a> &gt; const &amp; <em>labels</em>, uint8_t <em>ip_dscp</em>, uint8_t <em>mpls_exp</em><span class="sig-paren">)</span></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1sbfd__echo__session__key__t_1a2888ee8bdbafb5f5f9b96c88631d16ac"></span><code class="descname">sbfd_echo_session_key_t</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#eossdkclasseos_1_1ip__addr__t"><span class="std std-ref">ip_addr_t</span></a> <em>nexthop</em>, <a class="reference internal" href="intf.html#eossdkclasseos_1_1intf__id__t"><span class="std std-ref">intf_id_t</span></a> <em>nexthop_intf</em>, std::forward_list&lt; <a class="reference internal" href="mpls.html#eossdkclasseos_1_1mpls__label__t"><span class="std std-ref">mpls_label_t</span></a> &gt; const &amp; <em>labels</em><span class="sig-paren">)</span></dt>
+<dd><p>ip_dscp &amp; mpls_exp defaults to CS6 and 6 respectively. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1sbfd__echo__session__key__t_1a6bbb737c63a57dfd329485fea795c005"></span><a class="reference internal" href="ip.html#eossdkclasseos_1_1ip__addr__t"><span class="std std-ref">ip_addr_t</span></a> <code class="descname">nexthop</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dd><p>Getter for ‘nexthop’: nexthop IP address to send the probes to. If the nexthop is an IPv4 address, the probes will be IPv4 packets, if the nexthop is an IPv6 packet, the probes will be IPv6 packets. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1sbfd__echo__session__key__t_1a534a099df33abe749d138ee24889e562"></span><a class="reference internal" href="intf.html#eossdkclasseos_1_1intf__id__t"><span class="std std-ref">intf_id_t</span></a> <code class="descname">nexthop_intf</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dd><p>Getter for ‘nexthop_intf’: local interface to send probes on. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1sbfd__echo__session__key__t_1a5f80ee64fc7584a7b2ac1e6ec0526892"></span>std::forward_list&lt; <a class="reference internal" href="mpls.html#eossdkclasseos_1_1mpls__label__t"><span class="std std-ref">mpls_label_t</span></a> &gt; const &amp; <code class="descname">labels</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dd><p>Getter for ‘labels’: MPLS labels to impose on the probes.</p>
+<p>The first element in iteration order is the outermost label, the last element in iteration order is the innermost label. When using std::forward_list&lt; eos::mpls_label_t &gt;::push_front to build the label stack, the first element pushed will be the innermost label, also known as bottom of stack. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1sbfd__echo__session__key__t_1a3ab7a0c1aa5f43d1775d9ac0c256955c"></span>uint8_t <code class="descname">ip_dscp</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dd><p>Getter for ‘ip_dscp’: IPv4/IPv6 DSCP value of the probe. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1sbfd__echo__session__key__t_1ac0884009a5d166888795adaa609169e1"></span>uint8_t <code class="descname">mpls_exp</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dd><p>Getter for ‘mpls_exp’: MPLS exp value of the probe. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1sbfd__echo__session__key__t_1a756ac8c33083ee19010da19b9a72d257"></span>bool <code class="descname">operator==</code><span class="sig-paren">(</span><a class="reference internal" href="#eossdkclasseos_1_1sbfd__echo__session__key__t"><span class="std std-ref">sbfd_echo_session_key_t</span></a> const &amp; <em>other</em><span class="sig-paren">)</span> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1sbfd__echo__session__key__t_1a0ed055e00d862dd24d3a1e69041289f5"></span>bool <code class="descname">operator!=</code><span class="sig-paren">(</span><a class="reference internal" href="#eossdkclasseos_1_1sbfd__echo__session__key__t"><span class="std std-ref">sbfd_echo_session_key_t</span></a> const &amp; <em>other</em><span class="sig-paren">)</span> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1sbfd__echo__session__key__t_1a8ef5a901e0e6ca2f27ef7f1b21ba508f"></span>bool <code class="descname">operator&lt;</code><span class="sig-paren">(</span><a class="reference internal" href="#eossdkclasseos_1_1sbfd__echo__session__key__t"><span class="std std-ref">sbfd_echo_session_key_t</span></a> const &amp; <em>other</em><span class="sig-paren">)</span> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1sbfd__echo__session__key__t_1a7218785d5ba026bb8225eb626b01fe10"></span>uint32_t <code class="descname">hash</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dd><p>The hash function for type <a class="reference internal" href="#eossdkclasseos_1_1sbfd__echo__session__key__t"><span class="std std-ref">sbfd_echo_session_key_t</span></a>. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1sbfd__echo__session__key__t_1a751d447b907aa547792c38a992168cf3"></span>void <code class="descname">mix_me</code><span class="sig-paren">(</span><a class="reference internal" href="hash_mix.html#eossdkclasseos_1_1hash__mix"><span class="std std-ref">hash_mix</span></a> &amp; <em>h</em><span class="sig-paren">)</span> const</dt>
+<dd><p>The hash mix function for type <a class="reference internal" href="#eossdkclasseos_1_1sbfd__echo__session__key__t"><span class="std std-ref">sbfd_echo_session_key_t</span></a>. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1sbfd__echo__session__key__t_1a0d7df812433f320ff8eb9c18bab6d9fc"></span>std::string <code class="descname">to_string</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dd><p>Returns a string representation of the current object’s values. </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Private Members</p>
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1sbfd__echo__session__key__t_1a80e3454ffacc810b4edd988cb648389b"></span><a class="reference internal" href="ip.html#eossdkclasseos_1_1ip__addr__t"><span class="std std-ref">ip_addr_t</span></a> <code class="descname">nexthop_</code></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1sbfd__echo__session__key__t_1a54ec97b7a2559ac7bc09e8665c33f053"></span><a class="reference internal" href="intf.html#eossdkclasseos_1_1intf__id__t"><span class="std std-ref">intf_id_t</span></a> <code class="descname">nexthop_intf_</code></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1sbfd__echo__session__key__t_1ab6182ad2ca4bb3effa528bcf6e4d93df"></span>std::forward_list&lt; <a class="reference internal" href="mpls.html#eossdkclasseos_1_1mpls__label__t"><span class="std std-ref">mpls_label_t</span></a> &gt; <code class="descname">labels_</code></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1sbfd__echo__session__key__t_1ae692ef820dd978c7650bd332214a9cc6"></span>uint8_t <code class="descname">ip_dscp_</code></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1sbfd__echo__session__key__t_1afa3acf20fc7aca4d05ed4095bb981605"></span>uint8_t <code class="descname">mpls_exp_</code></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Friends</p>
+<dl class="friend">
+<dt>
+<span class="target" id="eossdkclasseos_1_1sbfd__echo__session__key__t_1ae1d6a1e0ee0c1751e4b9efdfd4c7c491"></span>friend std::ostream &amp; <code class="descname">operator&lt;&lt;</code></dt>
+<dd><p>A utility stream operator that adds a string representation of <a class="reference internal" href="#eossdkclasseos_1_1sbfd__echo__session__key__t"><span class="std std-ref">sbfd_echo_session_key_t</span></a> to the ostream. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="class">
+<dt>
+<span class="target" id="eossdkclasseos_1_1sbfd__interval__t"></span><em>class</em> <code class="descname">sbfd_interval_t</code></dt>
+<dd><em>#include &lt;bfd.h&gt;</em><p>sBFD echo interval configuration class. Used to specify sBFD echo timer interval. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1sbfd__interval__t_1addd383a4c0d9c3e24a2958ed9eeee89d"></span><code class="descname">sbfd_interval_t</code><span class="sig-paren">(</span><span class="sig-paren">)</span></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1sbfd__interval__t_1a21f6cb3b82872ab1b652f63cbe4bf017"></span><code class="descname">sbfd_interval_t</code><span class="sig-paren">(</span>uint16_t <em>tx</em>, uint8_t <em>mult</em><span class="sig-paren">)</span></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1sbfd__interval__t_1a73a5e5b8b20e05af0a780570b525b639"></span>uint16_t <code class="descname">tx</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dd><p>Getter for ‘tx’: desired minimum tx interval, in milliseconds. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1sbfd__interval__t_1aa4228fc1cd1d7cfcfa78a1603c065b53"></span>uint8_t <code class="descname">mult</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dd><p>Getter for ‘mult’: detection multiplier. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1sbfd__interval__t_1abd0e15e6d55cb4fce485aec89cee47cf"></span>bool <code class="descname">operator==</code><span class="sig-paren">(</span><a class="reference internal" href="#eossdkclasseos_1_1sbfd__interval__t"><span class="std std-ref">sbfd_interval_t</span></a> const &amp; <em>other</em><span class="sig-paren">)</span> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1sbfd__interval__t_1afe86ecf244f7c857164abc550ce53953"></span>bool <code class="descname">operator!=</code><span class="sig-paren">(</span><a class="reference internal" href="#eossdkclasseos_1_1sbfd__interval__t"><span class="std std-ref">sbfd_interval_t</span></a> const &amp; <em>other</em><span class="sig-paren">)</span> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1sbfd__interval__t_1a397268481ef5071aacba88b249a72bd5"></span>uint32_t <code class="descname">hash</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dd><p>The hash function for type <a class="reference internal" href="#eossdkclasseos_1_1sbfd__interval__t"><span class="std std-ref">sbfd_interval_t</span></a>. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1sbfd__interval__t_1a4a787ae02a1eb860d68d1e2157128791"></span>void <code class="descname">mix_me</code><span class="sig-paren">(</span><a class="reference internal" href="hash_mix.html#eossdkclasseos_1_1hash__mix"><span class="std std-ref">hash_mix</span></a> &amp; <em>h</em><span class="sig-paren">)</span> const</dt>
+<dd><p>The hash mix function for type <a class="reference internal" href="#eossdkclasseos_1_1sbfd__interval__t"><span class="std std-ref">sbfd_interval_t</span></a>. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1sbfd__interval__t_1ad08dd578cb52f28137285d9dc83549e6"></span>std::string <code class="descname">to_string</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dd><p>Returns a string representation of the current object’s values. </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Private Members</p>
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1sbfd__interval__t_1a7b8928ec8bcd09eb65ef689d7f5ef68e"></span>uint16_t <code class="descname">tx_</code></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1sbfd__interval__t_1a9f7d7b5f1bc77e74a7f20d70c5f0a4ec"></span>uint8_t <code class="descname">mult_</code></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Friends</p>
+<dl class="friend">
+<dt>
+<span class="target" id="eossdkclasseos_1_1sbfd__interval__t_1acc1413eca2186dc70be6c2a6a75252f3"></span>friend std::ostream &amp; <code class="descname">operator&lt;&lt;</code></dt>
+<dd><p>A utility stream operator that adds a string representation of <a class="reference internal" href="#eossdkclasseos_1_1sbfd__interval__t"><span class="std std-ref">sbfd_interval_t</span></a> to the ostream. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="class">
+<dt>
+<span class="target" id="eossdkclasseos_1_1sbfd__echo__session__rtt__stats__t"></span><em>class</em> <code class="descname">sbfd_echo_session_rtt_stats_t</code></dt>
+<dd><em>#include &lt;bfd.h&gt;</em><p>sBFD RTT statistics class. Used to report RTT statistics. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1sbfd__echo__session__rtt__stats__t_1aed088350e1dff71fa3b25d407fa866fe"></span><code class="descname">sbfd_echo_session_rtt_stats_t</code><span class="sig-paren">(</span>uint32_t <em>last_rtt</em>, uint32_t <em>min_rtt</em>, uint32_t <em>avg_rtt</em>, uint32_t <em>max_rtt</em>, uint32_t <em>snapshot_min_rtt</em>, uint32_t <em>snapshot_avg_rtt</em>, uint32_t <em>snapshot_max_rtt</em><span class="sig-paren">)</span></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1sbfd__echo__session__rtt__stats__t_1a3de534664bd6a4d0016454d0f63ec03f"></span>uint32_t <code class="descname">last_rtt</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dd><p>Getter for ‘last_rtt’: RTT of the last received probe, in microseconds. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1sbfd__echo__session__rtt__stats__t_1a6510e8d09ec2af39a6363c9b087dbf65"></span>uint32_t <code class="descname">min_rtt</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dd><p>Getter for ‘min_rtt’: Minimum RTT for lifetime of session, in microseconds. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1sbfd__echo__session__rtt__stats__t_1a8f399a6042d0105d5634d8dec0e2d29c"></span>uint32_t <code class="descname">avg_rtt</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dd><p>Getter for ‘avg_rtt’: Average RTT for lifetime of session, in microseconds. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1sbfd__echo__session__rtt__stats__t_1a6999ef9c80a8a4ec82491ff9e0d3342c"></span>uint32_t <code class="descname">max_rtt</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dd><p>Getter for ‘max_rtt’: Maximum RTT for lifetime of session, in microseconds. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1sbfd__echo__session__rtt__stats__t_1aa61c404acc560f615735fd17c2accde6"></span>uint32_t <code class="descname">snapshot_min_rtt</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dd><p>Getter for ‘snapshot_min_rtt’: Minimum RTT since last RTT report, in microseconds. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1sbfd__echo__session__rtt__stats__t_1a3d28dc3ef7c38bdc33e9c967f522bdce"></span>uint32_t <code class="descname">snapshot_avg_rtt</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dd><p>Getter for ‘snapshot_avg_rtt’: Average RTT since last RTT report, in microseconds. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1sbfd__echo__session__rtt__stats__t_1a63fc2cb3bcada3dfdbe77ab3b9d78d2a"></span>uint32_t <code class="descname">snapshot_max_rtt</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dd><p>Getter for ‘snapshot_max_rtt’: Maximum RTT since last RTT report, in microseconds. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1sbfd__echo__session__rtt__stats__t_1a8ad2a9e5afc3d5e754b1ebda7fe4309f"></span>bool <code class="descname">operator==</code><span class="sig-paren">(</span><a class="reference internal" href="#eossdkclasseos_1_1sbfd__echo__session__rtt__stats__t"><span class="std std-ref">sbfd_echo_session_rtt_stats_t</span></a> const &amp; <em>other</em><span class="sig-paren">)</span> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1sbfd__echo__session__rtt__stats__t_1a31270675625d5297e40265dbb5eb5ba3"></span>bool <code class="descname">operator!=</code><span class="sig-paren">(</span><a class="reference internal" href="#eossdkclasseos_1_1sbfd__echo__session__rtt__stats__t"><span class="std std-ref">sbfd_echo_session_rtt_stats_t</span></a> const &amp; <em>other</em><span class="sig-paren">)</span> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1sbfd__echo__session__rtt__stats__t_1a852b309a65b8186e67821014cea68178"></span>uint32_t <code class="descname">hash</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dd><p>The hash function for type <a class="reference internal" href="#eossdkclasseos_1_1sbfd__echo__session__rtt__stats__t"><span class="std std-ref">sbfd_echo_session_rtt_stats_t</span></a>. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1sbfd__echo__session__rtt__stats__t_1ab03d1c19ba0cae6a6c74298ddd73d9d8"></span>void <code class="descname">mix_me</code><span class="sig-paren">(</span><a class="reference internal" href="hash_mix.html#eossdkclasseos_1_1hash__mix"><span class="std std-ref">hash_mix</span></a> &amp; <em>h</em><span class="sig-paren">)</span> const</dt>
+<dd><p>The hash mix function for type <a class="reference internal" href="#eossdkclasseos_1_1sbfd__echo__session__rtt__stats__t"><span class="std std-ref">sbfd_echo_session_rtt_stats_t</span></a>. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1sbfd__echo__session__rtt__stats__t_1a8cae18040c021816664cc616e809123c"></span>std::string <code class="descname">to_string</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dd><p>Returns a string representation of the current object’s values. </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Private Members</p>
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1sbfd__echo__session__rtt__stats__t_1aff029e1791bd474c440a86cbe1d907a4"></span>uint32_t <code class="descname">last_rtt_</code></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1sbfd__echo__session__rtt__stats__t_1a64d783a9933bbb5276354df6f0c4a414"></span>uint32_t <code class="descname">min_rtt_</code></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1sbfd__echo__session__rtt__stats__t_1a584f5c0c0b61a5a1320741733e229602"></span>uint32_t <code class="descname">avg_rtt_</code></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1sbfd__echo__session__rtt__stats__t_1acc2da1e985117d186602ca1e96b22f25"></span>uint32_t <code class="descname">max_rtt_</code></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1sbfd__echo__session__rtt__stats__t_1a297c67cc772ed8e517f4f847b73f9c20"></span>uint32_t <code class="descname">snapshot_min_rtt_</code></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1sbfd__echo__session__rtt__stats__t_1a6b52ea7a4893c4f3019239240a85ac90"></span>uint32_t <code class="descname">snapshot_avg_rtt_</code></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1sbfd__echo__session__rtt__stats__t_1a1d39664a72e4d20454bb14fadcfec3dc"></span>uint32_t <code class="descname">snapshot_max_rtt_</code></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Friends</p>
+<dl class="friend">
+<dt>
+<span class="target" id="eossdkclasseos_1_1sbfd__echo__session__rtt__stats__t_1aa8bfacbed4c6dd03815caab2c327ce2f"></span>friend std::ostream &amp; <code class="descname">operator&lt;&lt;</code></dt>
+<dd><p>A utility stream operator that adds a string representation of <a class="reference internal" href="#eossdkclasseos_1_1sbfd__echo__session__rtt__stats__t"><span class="std std-ref">sbfd_echo_session_rtt_stats_t</span></a> to the ostream. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#"><strong>bfd</strong></a><ul>
+<li><a class="reference internal" href="#type-definitions-in-bfd">Type definitions in <strong>bfd</strong></a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="base_mgr.html"
+                        title="previous chapter"><strong>base_mgr</strong></a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="bgp.html"
+                        title="next chapter"><strong>bgp</strong></a></p>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="bgp.html" title="bgp"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="base_mgr.html" title="base_mgr"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Arista EOS SDK 2.19.0 reference</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2014, Arista Networks.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.4.
+    </div>
+  </body>
+</html>
