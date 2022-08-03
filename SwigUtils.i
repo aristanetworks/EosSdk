@@ -115,3 +115,52 @@ namespace std {
 
 STD_FORWARD_LIST(fib_via_t)
 STD_FORWARD_LIST(mpls_label_t)
+
+// policy_map_hw_status_t::intf_statuses_is() conversion from Python to C++
+%typemap(in) std::map<eos::policy_map_hw_status_key_t, eos::policy_map_status_t> const & {
+   PyObject *t = $input;
+   if (PyDict_Check(t) != true) {
+      PyErr_SetString(PyExc_TypeError, "argument must be a dictionary");
+      return NULL;
+   }
+   std::map<eos::policy_map_hw_status_key_t, policy_map_status_t> *a =
+         new std::map<eos::policy_map_hw_status_key_t, eos::policy_map_status_t>();
+   // Get hw status key and value
+   Py_ssize_t pos = 0;
+   PyObject *k;
+   PyObject *v;
+   while(PyDict_Next(t, &pos, &k, &v)) {
+      eos::policy_map_hw_status_key_t *k_c;
+      if (SWIG_ConvertPtr(k, (void **)&k_c,
+               SWIGTYPE_p_eos__policy_map_hw_status_key_t,
+               SWIG_POINTER_EXCEPTION) == -1) {
+         char buf[256];
+         delete a;
+         snprintf(buf, 256, "expected data type is eos::policy_map_hw_status_key_t.");
+         SWIG_exception(SWIG_TypeError, buf);
+         return NULL;
+      } else {
+         eos::policy_map_status_t v_c = static_cast<eos::policy_map_status_t>(PyInt_AsLong(v));
+         a->insert(std::pair<eos::policy_map_hw_status_key_t, eos::policy_map_status_t>(*k_c, v_c));
+      }
+   }
+   $1 = a;
+}
+
+%typemap(freearg) std::map<eos::policy_map_hw_status_key_t, eos::policy_map_status_t> const & {
+   delete $1;
+}
+
+// policy_map_hw_status_t::intf_statuses() conversion from C++ to Python
+%typemap(out) std::map<eos::policy_map_hw_status_key_t, eos::policy_map_status_t> const & {
+   std::map<eos::policy_map_hw_status_key_t, eos::policy_map_status_t> *a = $1;
+   std::map<eos::policy_map_hw_status_key_t, eos::policy_map_status_t>::const_iterator it;
+   PyObject *t = PyDict_New();
+   for (it=a->cbegin(); it!=a->cend(); ++it) {
+      PyObject *status_key = SWIG_NewPointerObj((void*)&(it->first),
+                                         SWIGTYPE_p_eos__policy_map_hw_status_key_t, 0);
+      PyObject *st = PyInt_FromLong(it->second);
+      PyDict_SetItem(t, status_key, st);
+   }
+   $result = t;
+}

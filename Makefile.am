@@ -38,6 +38,7 @@ libeos_la_SOURCES += eth_phy_intf.cpp
 libeos_la_SOURCES += event_loop.cpp
 libeos_la_SOURCES += exception.cpp
 libeos_la_SOURCES += fd.cpp
+libeos_la_SOURCES += ham.cpp
 libeos_la_SOURCES += hardware_table.cpp
 libeos_la_SOURCES += intf.cpp
 libeos_la_SOURCES += intf_types.cpp
@@ -141,6 +142,7 @@ EXTRA_DIST += bootstrap build.sh $(SWIG_FILES) $(GO_SWIG_FILES)
 EXTRA_DIST += LICENSE
 EXTRA_DIST += ltmain.patch
 EXTRA_DIST += $(GO_SRC_FILES)
+EXTRA_DIST += Dockerfile
 
 dist-hook:
 	chmod -R u+w $(distdir)

@@ -10,7 +10,7 @@
 #include <eos/base_handler.h>
 #include <eos/base_mgr.h>
 #include <eos/iterator.h>
-
+#include <eos/types/policy_map.h>
 /**
  * @file
  * Policy map manipulation.
@@ -111,14 +111,27 @@ struct EOS_SDK_PUBLIC hash<eos::policy_map_key_t> {
 namespace eos {
 
 class policy_map_iter_impl;
+class policy_map_hw_status_iter_impl;
+//class policy_map_hw_status_iter_t;
 
 /// An iterator providing forwards only iteration over collections of policy maps
 class EOS_SDK_PUBLIC policy_map_iter_t : public iter_base<policy_map_key_t,
                                                           policy_map_iter_impl> {
  private:
    friend class policy_map_iter_impl;
-   explicit policy_map_iter_t(policy_map_iter_impl * const) EOS_SDK_PRIVATE;
+   explicit policy_map_iter_t(policy_map_iter_impl *) EOS_SDK_PRIVATE;
 };
+
+/// An iterator providing forwards only iteration over collections of policy maps
+class EOS_SDK_PUBLIC
+policy_map_hw_status_iter_t : public iter_base<policy_map_key_t,
+                                               policy_map_hw_status_iter_impl> {
+ private:
+   friend class policy_map_hw_status_iter_impl;
+   explicit policy_map_hw_status_iter_t(
+         policy_map_hw_status_iter_impl*const) EOS_SDK_PRIVATE;
+};
+
 
 
 // Forward declaration for policy_map_handler
@@ -227,7 +240,16 @@ class EOS_SDK_PUBLIC policy_map_mgr : public base_mgr<policy_map_handler,
     */
    virtual void policy_map_apply(policy_map_key_t const &, intf_id_t,
                                  acl_direction_t, bool apply) = 0;
+   /**
+    * Provides iteration over the policy maps in hardware for a feature.
+    */
+   virtual policy_map_hw_status_iter_t policy_map_hw_status_iter(
+         policy_feature_t) const = 0;
 
+   /**
+    * Returns the hardware status for a policy map key.
+    */
+   virtual policy_map_hw_statuses_t hw_status(policy_map_key_t const &key) const = 0;
  protected:
    policy_map_mgr() EOS_SDK_PRIVATE;
    friend class policy_map_handler;
@@ -235,6 +257,7 @@ class EOS_SDK_PUBLIC policy_map_mgr : public base_mgr<policy_map_handler,
  private:
    EOS_SDK_DISALLOW_COPY_CTOR(policy_map_mgr);
 };
+
 
 } // end namespace eos
 

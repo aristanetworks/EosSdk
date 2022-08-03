@@ -190,17 +190,17 @@ operator<<(std::ostream& os, const macsec_key_t& obj) {
 
 
 inline macsec_profile_t::macsec_profile_t() :
-      name_(), primary_key_(), fallback_key_(), key_server_priority_(0),
-      rekey_period_(0), cipher_(CIPHER_NULL), dot1x_(false), include_sci_(false),
-      bypass_lldp_(false), lldp_bypass_level_(BYPASS_NULL),
-      traffic_policy_(TRAFFIC_POLICY_NULL), allow_unprotected_(false),
+      name_(), primary_key_(), fallback_key_(), key_server_priority_(16),
+      rekey_period_(0), mka_life_time_(6), cipher_(GCM_AES_XPN_128), dot1x_(false),
+      include_sci_(false), bypass_lldp_(false), lldp_bypass_level_(BYPASS_NULL),
+      traffic_policy_(TRAFFIC_POLICY_ACTIVE_SAK), allow_unprotected_(false),
       replay_protection_(true), replay_protection_window_(0),
       key_retirement_immediate_(false), intfs_() {
 }
 
 inline macsec_profile_t::macsec_profile_t(macsec_profile_name_t name) :
       name_(name), primary_key_(), fallback_key_(), key_server_priority_(16),
-      rekey_period_(0), cipher_(GCM_AES_XPN_128), dot1x_(false),
+      rekey_period_(0), mka_life_time_(6), cipher_(GCM_AES_XPN_128), dot1x_(false),
       include_sci_(false), bypass_lldp_(false), lldp_bypass_level_(BYPASS_NULL),
       traffic_policy_(TRAFFIC_POLICY_ACTIVE_SAK), allow_unprotected_(false),
       replay_protection_(true), replay_protection_window_(0),
@@ -255,6 +255,16 @@ macsec_profile_t::rekey_period() const {
 inline void
 macsec_profile_t::rekey_period_is(uint32_t rekey_period) {
    rekey_period_ = rekey_period;
+}
+
+inline uint32_t
+macsec_profile_t::mka_life_time() const {
+   return mka_life_time_;
+}
+
+inline void
+macsec_profile_t::mka_life_time_is(uint32_t mka_life_time) {
+   mka_life_time_ = mka_life_time;
 }
 
 inline macsec_cipher_suite_t
@@ -371,6 +381,7 @@ macsec_profile_t::operator==(macsec_profile_t const & other) const {
           fallback_key_ == other.fallback_key_ &&
           key_server_priority_ == other.key_server_priority_ &&
           rekey_period_ == other.rekey_period_ &&
+          mka_life_time_ == other.mka_life_time_ &&
           cipher_ == other.cipher_ &&
           dot1x_ == other.dot1x_ &&
           include_sci_ == other.include_sci_ &&
@@ -401,6 +412,8 @@ macsec_profile_t::operator<(macsec_profile_t const & other) const {
       return key_server_priority_ < other.key_server_priority_;
    } else if(rekey_period_ != other.rekey_period_) {
       return rekey_period_ < other.rekey_period_;
+   } else if(mka_life_time_ != other.mka_life_time_) {
+      return mka_life_time_ < other.mka_life_time_;
    } else if(cipher_ != other.cipher_) {
       return cipher_ < other.cipher_;
    } else if(dot1x_ != other.dot1x_) {
@@ -441,6 +454,7 @@ macsec_profile_t::mix_me(hash_mix & h) const {
    h.mix(fallback_key_); // macsec_key_t
    h.mix(key_server_priority_); // uint8_t
    h.mix(rekey_period_); // uint32_t
+   h.mix(mka_life_time_); // uint32_t
    h.mix(cipher_); // macsec_cipher_suite_t
    h.mix(dot1x_); // bool
    h.mix(include_sci_); // bool
@@ -465,6 +479,7 @@ macsec_profile_t::to_string() const {
    ss << ", fallback_key=" << fallback_key_;
    ss << ", key_server_priority=" << key_server_priority_;
    ss << ", rekey_period=" << rekey_period_;
+   ss << ", mka_life_time=" << mka_life_time_;
    ss << ", cipher=" << cipher_;
    ss << ", dot1x=" << dot1x_;
    ss << ", include_sci=" << include_sci_;

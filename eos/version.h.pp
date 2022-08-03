@@ -155,9 +155,9 @@ _-_ #define EOSSDK_VERSION_H
 _-_
 _-_ #include <eos/base.h>
 _-_
-_-_ pounddefine EOSSDK_VERSION "2.19.0"
+_-_ pounddefine EOSSDK_VERSION "2.20.0"
 _-_ pounddefine EOSSDK_MAJOR 2
-_-_ pounddefine EOSSDK_MINOR 19
+_-_ pounddefine EOSSDK_MINOR 20
 _-_ pounddefine EOSSDK_PATCH 0
 _-_
 _-_ namespace eos {

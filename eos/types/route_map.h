@@ -174,8 +174,8 @@ class EOS_SDK_PUBLIC route_map_t {
    /** Setter for 'map_entry'. */
    void map_entry_is(
 
-         std::map<route_map_sequence_number_t, route_map_entry_t> const & map_entry)
-         ;
+         std::map<route_map_sequence_number_t, route_map_entry_t> const &
+         map_entry);
    /** Inserts key/value pair to the map. */
    void map_entry_set(route_map_sequence_number_t const & key,
                       route_map_entry_t const & value);

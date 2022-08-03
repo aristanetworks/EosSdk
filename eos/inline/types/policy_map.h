@@ -1,4 +1,4 @@
-// Copyright (c) 2020 Arista Networks, Inc.  All rights reserved.
+// Copyright (c) 2021 Arista Networks, Inc.  All rights reserved.
 // Arista Networks, Inc. Confidential and Proprietary.
 
 #ifndef EOS_INLINE_TYPES_POLICY_MAP_H
@@ -619,6 +619,203 @@ unsupported_policy_feature_error::to_string() const {
 
 inline std::ostream&
 operator<<(std::ostream& os, const unsupported_policy_feature_error& obj) {
+   os << obj.to_string();
+   return os;
+}
+
+
+
+inline std::ostream&
+operator<<(std::ostream& os, const policy_map_status_t & enum_val) {
+   if (enum_val==POLICY_STATUS_NOT_FOUND) {
+      os << "POLICY_STATUS_NOT_FOUND";
+   } else if (enum_val==POLICY_STATUS_IN_PROGRESS) {
+      os << "POLICY_STATUS_IN_PROGRESS";
+   } else if (enum_val==POLICY_STATUS_FAILED) {
+      os << "POLICY_STATUS_FAILED";
+   } else if (enum_val==POLICY_STATUS_SUCCESS) {
+      os << "POLICY_STATUS_SUCCESS";
+   } else {
+      os << "Unknown value";
+   }
+   return os;
+}
+
+
+
+inline policy_map_hw_status_key_t::policy_map_hw_status_key_t() :
+      intf_id_(), direction_() {
+}
+
+inline policy_map_hw_status_key_t::policy_map_hw_status_key_t(
+         intf_id_t intf_id, acl_direction_t direction) :
+      intf_id_(intf_id), direction_(direction) {
+}
+
+inline intf_id_t
+policy_map_hw_status_key_t::intf_id() const {
+   return intf_id_;
+}
+
+inline void
+policy_map_hw_status_key_t::intf_id_is(intf_id_t intf_id) {
+   intf_id_ = intf_id;
+}
+
+inline acl_direction_t
+policy_map_hw_status_key_t::direction() const {
+   return direction_;
+}
+
+inline void
+policy_map_hw_status_key_t::direction_is(acl_direction_t direction) {
+   direction_ = direction;
+}
+
+inline bool
+policy_map_hw_status_key_t::operator==(policy_map_hw_status_key_t const & other)
+       const {
+   return intf_id_ == other.intf_id_ &&
+          direction_ == other.direction_;
+}
+
+inline bool
+policy_map_hw_status_key_t::operator!=(policy_map_hw_status_key_t const & other)
+       const {
+   return !operator==(other);
+}
+
+inline bool
+policy_map_hw_status_key_t::operator<(policy_map_hw_status_key_t const & other)
+       const {
+   if(intf_id_ != other.intf_id_) {
+      return intf_id_ < other.intf_id_;
+   } else if(direction_ != other.direction_) {
+      return direction_ < other.direction_;
+   }
+   return false;
+}
+
+inline uint32_t
+policy_map_hw_status_key_t::hash() const {
+   hash_mix h;
+   mix_me(h);
+   return h.result();
+}
+
+inline void
+policy_map_hw_status_key_t::mix_me(hash_mix & h) const {
+   h.mix(intf_id_); // intf_id_t
+   h.mix(direction_); // acl_direction_t
+}
+
+inline std::string
+policy_map_hw_status_key_t::to_string() const {
+   std::ostringstream ss;
+   ss << "policy_map_hw_status_key_t(";
+   ss << "intf_id=" << intf_id_;
+   ss << ", direction=" << direction_;
+   ss << ")";
+   return ss.str();
+}
+
+inline std::ostream&
+operator<<(std::ostream& os, const policy_map_hw_status_key_t& obj) {
+   os << obj.to_string();
+   return os;
+}
+
+
+
+inline policy_map_hw_statuses_t::policy_map_hw_statuses_t() :
+      intf_statuses_() {
+}
+
+inline policy_map_hw_statuses_t::policy_map_hw_statuses_t(
+
+         std::map<policy_map_hw_status_key_t, policy_map_status_t> const &
+         intf_statuses) :
+      intf_statuses_(intf_statuses) {
+}
+
+inline std::map<policy_map_hw_status_key_t, policy_map_status_t> const &
+policy_map_hw_statuses_t::intf_statuses() const {
+   return intf_statuses_;
+}
+
+inline void
+policy_map_hw_statuses_t::intf_statuses_is(
+
+         std::map<policy_map_hw_status_key_t, policy_map_status_t> const &
+         intf_statuses) {
+   intf_statuses_ = intf_statuses;
+}
+
+inline void
+policy_map_hw_statuses_t::intf_statuse_set(policy_map_hw_status_key_t const & key,
+                                           policy_map_status_t const & value) {
+   intf_statuses_[key] = value;
+}
+
+inline void
+policy_map_hw_statuses_t::intf_statuse_del(policy_map_hw_status_key_t const & key) {
+   intf_statuses_.erase(key);
+}
+
+inline bool
+policy_map_hw_statuses_t::operator==(policy_map_hw_statuses_t const & other) const {
+   return intf_statuses_ == other.intf_statuses_;
+}
+
+inline bool
+policy_map_hw_statuses_t::operator!=(policy_map_hw_statuses_t const & other) const {
+   return !operator==(other);
+}
+
+inline bool
+policy_map_hw_statuses_t::operator<(policy_map_hw_statuses_t const & other) const {
+   if(intf_statuses_ != other.intf_statuses_) {
+      return intf_statuses_ < other.intf_statuses_;
+   }
+   return false;
+}
+
+inline uint32_t
+policy_map_hw_statuses_t::hash() const {
+   hash_mix h;
+   mix_me(h);
+   return h.result();
+}
+
+inline void
+policy_map_hw_statuses_t::mix_me(hash_mix & h) const {
+   for (auto it=intf_statuses_.cbegin(); it!=intf_statuses_.cend(); ++it) {
+      h.mix(it->first); // policy_map_hw_status_key_t
+      h.mix(it->second); // policy_map_status_t
+   }
+}
+
+inline std::string
+policy_map_hw_statuses_t::to_string() const {
+   std::ostringstream ss;
+   ss << "policy_map_hw_statuses_t(";
+   ss << "intf_statuses=" <<"'";
+   bool first_intf_statuses = true;
+   for (auto it=intf_statuses_.cbegin(); it!=intf_statuses_.cend(); ++it) {
+      if (first_intf_statuses) {
+         ss << it->first << "=" << it->second;
+         first_intf_statuses = false;
+      } else {
+         ss << "," << it->first << "=" << it->second;
+      }
+   }
+   ss << "'";
+   ss << ")";
+   return ss.str();
+}
+
+inline std::ostream&
+operator<<(std::ostream& os, const policy_map_hw_statuses_t& obj) {
    os << obj.to_string();
    return os;
 }

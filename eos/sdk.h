@@ -27,6 +27,7 @@ class eth_phy_intf_counter_mgr;
 class event_loop;
 class fib_mgr;
 class fpga_mgr;
+class ham_mgr;
 class hardware_table_mgr;
 class intf_mgr_helper;
 class intf_mgr;
@@ -158,6 +159,7 @@ class EOS_SDK_PUBLIC sdk {
    event_loop * get_event_loop();
    fib_mgr * get_fib_mgr(mgr_mode_type_t mode=MODE_TYPE_READ_ONLY);
    fpga_mgr * get_fpga_mgr();
+   ham_mgr * get_ham_mgr();
    hardware_table_mgr * get_hardware_table_mgr();
    intf_mgr * get_intf_mgr();
    intf_counter_mgr * get_intf_counter_mgr();

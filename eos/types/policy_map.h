@@ -1,4 +1,4 @@
-// Copyright (c) 2020 Arista Networks, Inc.  All rights reserved.
+// Copyright (c) 2021 Arista Networks, Inc.  All rights reserved.
 // Arista Networks, Inc. Confidential and Proprietary.
 
 #ifndef EOS_TYPES_POLICY_MAP_H
@@ -351,6 +351,103 @@ class EOS_SDK_PUBLIC unsupported_policy_feature_error : public unsupported_error
 
  private:
    policy_feature_t policy_feature_;
+};
+
+/** The policy map hardware status type. */
+enum policy_map_status_t {
+   POLICY_STATUS_NOT_FOUND,
+   POLICY_STATUS_IN_PROGRESS,
+   POLICY_STATUS_FAILED,
+   POLICY_STATUS_SUCCESS,
+};
+/**
+ * Appends a string representation of enum policy_map_status_t value to the
+ * ostream.
+ */
+std::ostream& operator<<(std::ostream& os, const policy_map_status_t & enum_val);
+
+/** policy map hardware interface key. */
+class EOS_SDK_PUBLIC policy_map_hw_status_key_t {
+ public:
+   policy_map_hw_status_key_t();
+   policy_map_hw_status_key_t(intf_id_t intf_id, acl_direction_t direction);
+
+   /**
+    * Getter for 'intf_id': Interface ID at with a policy map is applied.
+    * If the feature type is POLICY_FEATURE_QOS,
+    *  intf_id will be the default interface ID.
+    */
+   intf_id_t intf_id() const;
+   /** Setter for 'intf_id'. */
+   void intf_id_is(intf_id_t intf_id);
+
+   /** Getter for 'direction': Direction in which a policy map is applied. */
+   acl_direction_t direction() const;
+   /** Setter for 'direction'. */
+   void direction_is(acl_direction_t direction);
+
+   bool operator==(policy_map_hw_status_key_t const & other) const;
+   bool operator!=(policy_map_hw_status_key_t const & other) const;
+   bool operator<(policy_map_hw_status_key_t const & other) const;
+   /** The hash function for type policy_map_hw_status_key_t. */
+   uint32_t hash() const;
+   /** The hash mix function for type policy_map_hw_status_key_t. */
+   void mix_me(hash_mix & h) const;
+   /** Returns a string representation of the current object's values. */
+   std::string to_string() const;
+   /**
+    * A utility stream operator that adds a string representation of
+    * policy_map_hw_status_key_t to the ostream.
+    */
+   friend std::ostream& operator<<(std::ostream& os,
+                                   const policy_map_hw_status_key_t& obj);
+
+ private:
+   intf_id_t intf_id_;
+   acl_direction_t direction_;
+};
+
+/** policy map hardware statuses. */
+class EOS_SDK_PUBLIC policy_map_hw_statuses_t {
+ public:
+   policy_map_hw_statuses_t();
+   explicit policy_map_hw_statuses_t(
+
+         std::map<policy_map_hw_status_key_t, policy_map_status_t> const &
+         intf_statuses);
+
+   /** Getter for 'intf_statuses': A map of interface key and policy map status. */
+   std::map<policy_map_hw_status_key_t, policy_map_status_t> const & intf_statuses()
+          const;
+   /** Setter for 'intf_statuses'. */
+   void intf_statuses_is(
+
+         std::map<policy_map_hw_status_key_t, policy_map_status_t> const &
+         intf_statuses);
+   /** Inserts key/value pair to the map. */
+   void intf_statuse_set(policy_map_hw_status_key_t const & key,
+                         policy_map_status_t const & value);
+   /** Deletes the key/value pair from the map. */
+   void intf_statuse_del(policy_map_hw_status_key_t const & key);
+
+   bool operator==(policy_map_hw_statuses_t const & other) const;
+   bool operator!=(policy_map_hw_statuses_t const & other) const;
+   bool operator<(policy_map_hw_statuses_t const & other) const;
+   /** The hash function for type policy_map_hw_statuses_t. */
+   uint32_t hash() const;
+   /** The hash mix function for type policy_map_hw_statuses_t. */
+   void mix_me(hash_mix & h) const;
+   /** Returns a string representation of the current object's values. */
+   std::string to_string() const;
+   /**
+    * A utility stream operator that adds a string representation of
+    * policy_map_hw_statuses_t to the ostream.
+    */
+   friend std::ostream& operator<<(std::ostream& os,
+                                   const policy_map_hw_statuses_t& obj);
+
+ private:
+   std::map<policy_map_hw_status_key_t, policy_map_status_t> intf_statuses_;
 };
 }
 

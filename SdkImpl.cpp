@@ -34,6 +34,7 @@ namespace eos {
    event_loop_(0),                              \
    fib_mgr_(0),                                 \
    fpga_mgr_(0),                                \
+   ham_mgr_(0),                                 \
    hardware_table_mgr_(0),                      \
    intf_mgr_helper_(0),                         \
    intf_mgr_(0),                                \
@@ -111,6 +112,7 @@ INIT_STUB_MGR(eth_phy_intf_mgr)
 INIT_STUB_MGR(eth_phy_intf_counter_mgr)
 INIT_STUB_MGR(eth_lag_intf_mgr)
 INIT_STUB_MGR(fpga_mgr)
+INIT_STUB_MGR(ham_mgr)
 INIT_STUB_MGR(hardware_table_mgr)
 INIT_STUB_MGR(intf_mgr)
 INIT_STUB_MGR(intf_counter_mgr)

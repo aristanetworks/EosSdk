@@ -1,4 +1,4 @@
-// Copyright (c) 2020 Arista Networks, Inc.  All rights reserved.
+// Copyright (c) 2021 Arista Networks, Inc.  All rights reserved.
 // Arista Networks, Inc. Confidential and Proprietary.
 
 #ifndef EOS_INLINE_TYPES_NEXTHOP_GROUP_H
@@ -156,12 +156,12 @@ operator<<(std::ostream& os, const nexthop_group_mpls_action_t& obj) {
 
 
 inline nexthop_group_entry_counter_t::nexthop_group_entry_counter_t() :
-      packets_(0), bytes_(0) {
+      packets_(0), bytes_(0), valid_(false) {
 }
 
 inline nexthop_group_entry_counter_t::nexthop_group_entry_counter_t(
-         uint64_t packets, uint64_t bytes) :
-      packets_(packets), bytes_(bytes) {
+         uint64_t packets, uint64_t bytes, bool valid) :
+      packets_(packets), bytes_(bytes), valid_(valid) {
 }
 
 inline uint64_t
@@ -175,10 +175,16 @@ nexthop_group_entry_counter_t::bytes() const {
 }
 
 inline bool
+nexthop_group_entry_counter_t::valid() const {
+   return valid_;
+}
+
+inline bool
 nexthop_group_entry_counter_t::operator==(
          nexthop_group_entry_counter_t const & other) const {
    return packets_ == other.packets_ &&
-          bytes_ == other.bytes_;
+          bytes_ == other.bytes_ &&
+          valid_ == other.valid_;
 }
 
 inline bool
@@ -194,6 +200,8 @@ nexthop_group_entry_counter_t::operator<(
       return packets_ < other.packets_;
    } else if(bytes_ != other.bytes_) {
       return bytes_ < other.bytes_;
+   } else if(valid_ != other.valid_) {
+      return valid_ < other.valid_;
    }
    return false;
 }
@@ -209,6 +217,7 @@ inline void
 nexthop_group_entry_counter_t::mix_me(hash_mix & h) const {
    h.mix(packets_); // uint64_t
    h.mix(bytes_); // uint64_t
+   h.mix(valid_); // bool
 }
 
 inline std::string
@@ -217,6 +226,7 @@ nexthop_group_entry_counter_t::to_string() const {
    ss << "nexthop_group_entry_counter_t(";
    ss << "packets=" << packets_;
    ss << ", bytes=" << bytes_;
+   ss << ", valid=" << valid_;
    ss << ")";
    return ss.str();
 }

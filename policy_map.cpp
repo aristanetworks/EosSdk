@@ -89,6 +89,16 @@ class policy_map_mgr_impl : public policy_map_mgr {
    void policy_map_apply(policy_map_key_t const &, intf_id_t,
                          acl_direction_t, bool apply) {
    }
+
+   policy_map_hw_status_iter_t policy_map_hw_status_iter(policy_feature_t) const {
+      policy_map_hw_status_iter_t *nop = 0;
+      return *nop;
+   }
+
+   policy_map_hw_statuses_t hw_status(policy_map_key_t const &key) const {
+      return policy_map_hw_statuses_t();
+   }
+
 };
 
 DEFINE_STUB_MGR_CTOR(policy_map_mgr)

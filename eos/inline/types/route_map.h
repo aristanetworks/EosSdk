@@ -317,8 +317,8 @@ route_map_t::map_entry() const {
 inline void
 route_map_t::map_entry_is(
 
-         std::map<route_map_sequence_number_t, route_map_entry_t> const & map_entry)
-       {
+         std::map<route_map_sequence_number_t, route_map_entry_t> const &
+         map_entry) {
    map_entry_ = map_entry;
 }
 

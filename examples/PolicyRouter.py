@@ -22,7 +22,7 @@ install that using the EOS extension manager.
 """
 
 from __future__ import absolute_import, division, print_function
-import cjson
+import simplejson as json
 import collections
 import datetime
 import functools
@@ -168,16 +168,16 @@ def load_config_file(filename):
    config = {}
    with open(filename) as f:
       try:
-         config = load_config(cjson.decode(f.read()))
-      except (TypeError, ValueError, cjson.Error) as e:
+         config = load_config(json.load(f))
+      except (TypeError, ValueError, json.JSONDecodeError) as e:
          sys.stderr.write('error reading config: %s\n' % e)
    return config
 
 
 def load_config_file_obj(f):
    try:
-      return load_config(cjson.decode(f.read()))
-   except (TypeError, ValueError, cjson.Error) as e:
+      return load_config(json.load(f))
+   except (TypeError, ValueError, json.JSONDecodeError) as e:
       sys.stderr.write('error reading config: %s\n' % e)
       return None
 

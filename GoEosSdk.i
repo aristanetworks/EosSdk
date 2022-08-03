@@ -81,6 +81,7 @@ typedef uint64_t uint64_be_t;
 %feature("nodirector") eos::eth_phy_intf_counter_mgr;
 %feature("nodirector") eos::fib_mgr;
 %feature("nodirector") eos::fpga_mgr;
+%feature("nodirector") eos::ham_mgr;
 %feature("nodirector") eos::hardware_table_mgr;
 %feature("nodirector") eos::intf_mgr;
 %feature("nodirector") eos::intf_counter_mgr;
@@ -123,6 +124,7 @@ typedef uint64_t uint64_be_t;
 #include "eos/fd.h"
 #include "eos/fib.h"
 #include "eos/fpga.h"
+#include "eos/ham.h"
 #include "eos/hardware_table.h"
 #include "eos/hash_mix.h"
 #include "eos/intf.h"
@@ -148,6 +150,7 @@ typedef uint64_t uint64_be_t;
 #include "eos/system.h"
 #include "eos/timer.h"
 #include "eos/tracing.h"
+#include "eos/types/policy_map.h"
 #include "eos/utility.h"
 #include "eos/version.h"
 #include "eos/vrf.h"
@@ -212,6 +215,7 @@ using namespace eos;
 //%ignore panic;
 %ignore vpanic;
 %include "Includes.i"
+%include "eos/types/policy_map.h"
 
 //%extend eos::error {
 //   std::string const & __str__() {
@@ -257,6 +261,7 @@ wrap_iterator(eos::neighbor_table_status_iter_t, eos::neighbor_table_status_iter
 wrap_iterator(eos::nexthop_group_iter_t, eos::nexthop_group_iter_impl, eos::nexthop_group_t);
 wrap_iterator(eos::nexthop_group_tunnel_iter_t, eos::nexthop_group_tunnel_iter_impl, eos::nexthop_group_tunnel_t);
 wrap_iterator(eos::policy_map_iter_t, eos::policy_map_iter_impl, eos::policy_map_key_t);
+wrap_iterator(eos::policy_map_hw_status_iter_t, eos::policy_map_hw_status_iter_impl, eos::policy_map_key_t);
 wrap_iterator(eos::subintf_iter_t, eos::subintf_iter_impl, eos::intf_id_t);
 wrap_iterator(eos::vrf_iter_t, eos::vrf_iter_impl, std::string);
 wrap_iterator(eos::programmed_nexthop_group_iter_t, eos::programmed_nexthop_group_iter_impl, std::string);

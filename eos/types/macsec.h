@@ -186,6 +186,11 @@ class EOS_SDK_PUBLIC macsec_profile_t {
    /** Setter for 'rekey_period'. */
    void rekey_period_is(uint32_t rekey_period);
 
+   /** Getter for 'mka_life_time': MKA session lifetime in seconds. */
+   uint32_t mka_life_time() const;
+   /** Setter for 'mka_life_time'. */
+   void mka_life_time_is(uint32_t mka_life_time);
+
    /** Getter for 'cipher': which encryption standard to use. */
    macsec_cipher_suite_t cipher() const;
    /** Setter for 'cipher'. */
@@ -270,6 +275,7 @@ class EOS_SDK_PUBLIC macsec_profile_t {
    macsec_key_t fallback_key_;
    uint8_t key_server_priority_;
    uint32_t rekey_period_;
+   uint32_t mka_life_time_;
    macsec_cipher_suite_t cipher_;
    bool dot1x_;
    bool include_sci_;

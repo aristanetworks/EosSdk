@@ -116,6 +116,10 @@ fpga_mgr * sdk::get_fpga_mgr() {
    return sdkImpl->get_fpga_mgr();
 }
 
+ham_mgr * sdk::get_ham_mgr() {
+   return sdkImpl->get_ham_mgr();
+}
+
 hardware_table_mgr * sdk::get_hardware_table_mgr() {
    return sdkImpl->get_hardware_table_mgr();
 }

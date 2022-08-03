@@ -153,4 +153,5 @@ INSTANTIATE_ITERATOR(std::string, programmed_nexthop_group_iter_impl);
 INSTANTIATE_ITERATOR(macsec_profile_name_t, macsec_profile_iter_impl);
 INSTANTIATE_ITERATOR(intf_id_t, macsec_intf_status_iter_impl);
 INSTANTIATE_ITERATOR(sbfd_echo_session_key_t, sbfd_echo_session_iter_impl);
+INSTANTIATE_ITERATOR(policy_map_key_t, policy_map_hw_status_iter_impl);
 }

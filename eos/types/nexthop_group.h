@@ -1,4 +1,4 @@
-// Copyright (c) 2020 Arista Networks, Inc.  All rights reserved.
+// Copyright (c) 2021 Arista Networks, Inc.  All rights reserved.
 // Arista Networks, Inc. Confidential and Proprietary.
 
 #ifndef EOS_TYPES_NEXTHOP_GROUP_H
@@ -119,11 +119,13 @@ class EOS_SDK_PUBLIC nexthop_group_mpls_action_t {
 class EOS_SDK_PUBLIC nexthop_group_entry_counter_t {
  public:
    nexthop_group_entry_counter_t();
-   nexthop_group_entry_counter_t(uint64_t packets, uint64_t bytes);
+   nexthop_group_entry_counter_t(uint64_t packets, uint64_t bytes, bool valid);
 
    uint64_t packets() const;
 
    uint64_t bytes() const;
+
+   bool valid() const;
 
    bool operator==(nexthop_group_entry_counter_t const & other) const;
    bool operator!=(nexthop_group_entry_counter_t const & other) const;
@@ -144,6 +146,7 @@ class EOS_SDK_PUBLIC nexthop_group_entry_counter_t {
  private:
    uint64_t packets_;
    uint64_t bytes_;
+   bool valid_;
 };
 
 /**
