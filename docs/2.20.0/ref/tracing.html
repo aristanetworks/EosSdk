@@ -1,0 +1,238 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>tracing &#8212; Arista EOS SDK 2.20.0 reference</title>
+    <link rel="stylesheet" href="_static/eossdk.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/breathe.css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/language_data.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="utility" href="utility.html" />
+    <link rel="prev" title="timer" href="timer.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="utility.html" title="utility"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="timer.html" title="timer"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Arista EOS SDK 2.20.0 reference</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="tracing">
+<h1><strong>tracing</strong><a class="headerlink" href="#tracing" title="Permalink to this headline">¶</a></h1>
+<p>Tracing facilities.</p>
+<p>This modules allows SDK programs to integrate with EOS’s tracing mechanisms. Tracing is useful for logging and debugging purposes, and can be selectively enabled at various levels to gain insight on a programs runtime behavior.</p>
+<p>Trace statements are formatted using a similar syntax to printf. For example, the following lines create a trace facility called “MyDebugOutput” which can be used to print messages.</p>
+<p><div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">eos</span><span class="p">::</span><span class="n">tracer</span> <span class="n">t</span><span class="p">(</span><span class="s2">&quot;MyDebugOutput&quot;</span><span class="p">);</span>
+<span class="n">t</span><span class="o">.</span><span class="n">trace0</span><span class="p">(</span><span class="s2">&quot;</span><span class="si">%s</span><span class="s2"> World&quot;</span><span class="p">,</span> <span class="s2">&quot;Hello&quot;</span><span class="p">);</span>
+<span class="n">t</span><span class="o">.</span><span class="n">trace5</span><span class="p">(</span><span class="s2">&quot;Good bye!</span><span class="si">%d</span><span class="s2">!&quot;</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+</pre></div>
+</div>
+</p>
+<p>When running this program, you would now see the following output: 2014-01-01 17:16:15.432110 26910 MyDebugOutput 0 Hello World 2014-01-01 17:16:15.818181 26910 MyDebugOutput 5 Good bye!1!</p>
+<p>Tracing can be enabled via two main mechanisms. If running your program under ProcMgr’s control, using the daemon CLI, the following CLI command will instantly enable tracing output for your agent: switch(conf)# trace &lt;AGENT_NAME&gt; setting &lt;TRACE_NAME&gt;/&lt;0-9&gt;</p>
+<p>Traditionally, lower trace numbers are reserved for more important events, while higher numbers are used for events that happen frequently, or are not particularly notable.</p>
+<p>This will cause tracing output to appear in the /var/log/agents/AGENT_NAME-### file. More information about the trace command can be found in the EOS manual.</p>
+<p>You can also control tracing using the TRACE environment variable, which is useful when running your agent manually: bash# TRACE=MyDebugOutput/0-9 ./myAgentExecutable</p>
+<p>This results in tracing output to be sent directly to stdout.</p>
+<p>Multiple tracers can be used in the same agent, and you can control multiple trace facilities using comma separated entries. For example, TRACE=MyDebugOutput/0-3,MyLogging* ./myAgentExecutable results in all tracing from facilities whose name starts with “MyLogging”, as well as trace messages from MyDebugOutput at levels 0, 1, 2, and 3.</p>
+<p>You can view tracing for the SDK module by tracing EosSdk* </p>
+<dl class="namespace">
+<dt>
+<span class="target" id="eossdknamespaceeos"></span><em>namespace</em> <code class="descname">eos</code></dt>
+<dd><div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Enums</p>
+<dl class="enum">
+<dt>
+<span class="target" id="eossdknamespaceeos_1ad82d26d2cbb736370a1326db95927d88"></span><strong>trace_level enum</strong></dt>
+<dd><p>The level of the trace statement.</p>
+<p>Lower numbers should be used for more important events, while higher numbers should be used for events which occur frequently, or which aren’t as important. </p>
+<p><em>Values:</em></p>
+<ul class="breatheenumvalues">
+<li><code class="first docutils literal notranslate"><span class="pre">Level0</span></code> - </li>
+<li><code class="first docutils literal notranslate"><span class="pre">Level1</span></code> - </li>
+<li><code class="first docutils literal notranslate"><span class="pre">Level2</span></code> - </li>
+<li><code class="first docutils literal notranslate"><span class="pre">Level3</span></code> - </li>
+<li><code class="first docutils literal notranslate"><span class="pre">Level4</span></code> - </li>
+<li><code class="first docutils literal notranslate"><span class="pre">Level5</span></code> - </li>
+<li><code class="first docutils literal notranslate"><span class="pre">Level6</span></code> - </li>
+<li><code class="first docutils literal notranslate"><span class="pre">Level7</span></code> - </li>
+<li><code class="first docutils literal notranslate"><span class="pre">Level8</span></code> - </li>
+<li><code class="first docutils literal notranslate"><span class="pre">Level9</span></code> - </li>
+</ul>
+</dd></dl>
+
+</div>
+<dl class="class">
+<dt>
+<span class="target" id="eossdkclasseos_1_1tracer"></span><em>class</em> <code class="descname">tracer</code></dt>
+<dd><em>#include &lt;tracing.h&gt;</em><p>A tracer object.</p>
+<p>The traceN functions are just shortcuts for trace(N, expression, …). The supported formats are those of printf. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1tracer_1aeb8fb2addd60a62adbeeaa8f8b095188"></span><code class="descname">tracer</code><span class="sig-paren">(</span>char const * <em>name</em><span class="sig-paren">)</span></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1tracer_1a10a97576993f0a00de0be027b5151427"></span><code class="descname">~tracer</code><span class="sig-paren">(</span><span class="sig-paren">)</span></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1tracer_1aa071cbf126974376a229d6dfbcc966fe"></span>bool <code class="descname">enabled</code><span class="sig-paren">(</span>trace_level <em>level</em><span class="sig-paren">)</span> const</dt>
+<dd><p>Returns true if this tracer will output trace statements at the given level. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1tracer_1a89110623cb24589eaa5c86ce4c99eb7f"></span>void <code class="descname">enabled_is</code><span class="sig-paren">(</span>trace_level <em>level</em>, bool <em>value</em><span class="sig-paren">)</span></dt>
+<dd><p>Set whether this trace facility should print at the given level. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1tracer_1a1d979f7c4dddf70b25f60fa0bdde82aa"></span>void <code class="descname">trace</code><span class="sig-paren">(</span>trace_level <em>level</em>, char const * <em>expression</em>, ...<span class="sig-paren">)</span> const</dt>
+<dd><p>Trace a statement at the given level.</p>
+<p>The expression format and extra arguments follow printf’s syntax. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1tracer_1af8647701046ace2a8856755da0839474"></span>void <code class="descname">trace0</code><span class="sig-paren">(</span>char const * <em>expression</em>, ...<span class="sig-paren">)</span> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1tracer_1af663ac19df1a6dc4ce0a4143ccc252f9"></span>void <code class="descname">trace1</code><span class="sig-paren">(</span>char const * <em>expression</em>, ...<span class="sig-paren">)</span> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1tracer_1aff42070973ac1d22ac7b786efd3865b1"></span>void <code class="descname">trace2</code><span class="sig-paren">(</span>char const * <em>expression</em>, ...<span class="sig-paren">)</span> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1tracer_1aca4aa68668538b07b66e6fcc4a034e2d"></span>void <code class="descname">trace3</code><span class="sig-paren">(</span>char const * <em>expression</em>, ...<span class="sig-paren">)</span> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1tracer_1a8266dc8c9a17695859c815bf5d977667"></span>void <code class="descname">trace4</code><span class="sig-paren">(</span>char const * <em>expression</em>, ...<span class="sig-paren">)</span> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1tracer_1ac3255aa9c2da3274031a404aabba6e1e"></span>void <code class="descname">trace5</code><span class="sig-paren">(</span>char const * <em>expression</em>, ...<span class="sig-paren">)</span> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1tracer_1a6cd372dccbd99ed4ebd21d11453973d0"></span>void <code class="descname">trace6</code><span class="sig-paren">(</span>char const * <em>expression</em>, ...<span class="sig-paren">)</span> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1tracer_1ad1894ad1ff70415164fea21df5109eb5"></span>void <code class="descname">trace7</code><span class="sig-paren">(</span>char const * <em>expression</em>, ...<span class="sig-paren">)</span> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1tracer_1aaf0b5b7bf5dc68bb3dea8de3d747f402"></span>void <code class="descname">trace8</code><span class="sig-paren">(</span>char const * <em>expression</em>, ...<span class="sig-paren">)</span> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1tracer_1a742dce1749c79c3b1608d2128bfc5ea4"></span>void <code class="descname">trace9</code><span class="sig-paren">(</span>char const * <em>expression</em>, ...<span class="sig-paren">)</span> const</dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Private Members</p>
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1tracer_1a5cd16dccd39d9dc7a5a3825d27c945f6"></span>tracer_internal * <code class="descname">tracer_</code></dt>
+<dd></dd></dl>
+
+</div>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="timer.html"
+                        title="previous chapter"><strong>timer</strong></a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="utility.html"
+                        title="next chapter"><strong>utility</strong></a></p>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="utility.html" title="utility"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="timer.html" title="timer"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Arista EOS SDK 2.20.0 reference</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2014, Arista Networks.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.4.
+    </div>
+  </body>
+</html>
