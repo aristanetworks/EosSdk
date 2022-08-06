@@ -1,4 +1,4 @@
-// Copyright (c) 2021 Arista Networks, Inc.  All rights reserved.
+// Copyright (c) 2022 Arista Networks, Inc.  All rights reserved.
 // Arista Networks, Inc. Confidential and Proprietary.
 
 #ifndef EOS_INLINE_TYPES_NEXTHOP_GROUP_H
@@ -6,7 +6,7 @@
 
 namespace eos {
 
-inline std::ostream&
+EOS_SDK_PUBLIC std::ostream&
 operator<<(std::ostream& os, const nexthop_group_encap_t & enum_val) {
    if (enum_val==NEXTHOP_GROUP_TYPE_NULL) {
       os << "NEXTHOP_GROUP_TYPE_NULL";
@@ -27,8 +27,7 @@ operator<<(std::ostream& os, const nexthop_group_encap_t & enum_val) {
 }
 
 
-
-inline std::ostream&
+EOS_SDK_PUBLIC std::ostream&
 operator<<(std::ostream& os, const nexthop_group_gre_key_t & enum_val) {
    if (enum_val==NEXTHOP_GROUP_GRE_KEY_NULL) {
       os << "NEXTHOP_GROUP_GRE_KEY_NULL";
@@ -41,587 +40,446 @@ operator<<(std::ostream& os, const nexthop_group_gre_key_t & enum_val) {
 }
 
 
-
-inline nexthop_group_mpls_action_t::nexthop_group_mpls_action_t() :
-      action_type_(), label_stack_() {
+nexthop_group_mpls_action_t::nexthop_group_mpls_action_t() {
+   pimpl = std::shared_ptr<nexthop_group_mpls_action_impl_t>(
+      new nexthop_group_mpls_action_impl_t()
+   );
 }
-
-inline nexthop_group_mpls_action_t::nexthop_group_mpls_action_t(
-         mpls_action_t action_type) :
-      action_type_(action_type), label_stack_() {
+nexthop_group_mpls_action_t::nexthop_group_mpls_action_t(
+         mpls_action_t action_type) {
+   pimpl = std::shared_ptr<nexthop_group_mpls_action_impl_t>(
+      new nexthop_group_mpls_action_impl_t(
+         action_type
+      )
+   );
 }
-
-inline nexthop_group_mpls_action_t::nexthop_group_mpls_action_t(
+nexthop_group_mpls_action_t::nexthop_group_mpls_action_t(
          mpls_action_t action_type,
-         std::forward_list<mpls_label_t> const & label_stack) :
-      action_type_(action_type), label_stack_(label_stack) {
+         std::forward_list<mpls_label_t> const & label_stack) {
+   pimpl = std::shared_ptr<nexthop_group_mpls_action_impl_t>(
+      new nexthop_group_mpls_action_impl_t(
+         action_type,
+         label_stack
+      )
+   );
+}
+nexthop_group_mpls_action_t::nexthop_group_mpls_action_t(
+   const nexthop_group_mpls_action_t& other)
+{
+   pimpl = std::make_unique<nexthop_group_mpls_action_impl_t>(
+      nexthop_group_mpls_action_impl_t(*other.pimpl));
+}
+nexthop_group_mpls_action_t&
+nexthop_group_mpls_action_t::operator=(
+   nexthop_group_mpls_action_t const & other)
+{
+   pimpl = std::shared_ptr<nexthop_group_mpls_action_impl_t>(
+      new nexthop_group_mpls_action_impl_t(*other.pimpl));
+   return *this;
 }
 
-inline mpls_action_t
+mpls_action_t
 nexthop_group_mpls_action_t::action_type() const {
-   return action_type_;
+   return pimpl->action_type();
 }
-
-inline void
+void
 nexthop_group_mpls_action_t::action_type_is(mpls_action_t action_type) {
-   action_type_ = action_type;
+   pimpl->action_type_is(action_type);
 }
-
-inline std::forward_list<mpls_label_t> const &
+std::forward_list<mpls_label_t> const &
 nexthop_group_mpls_action_t::label_stack() const {
-   return label_stack_;
+   return pimpl->label_stack();
 }
-
-inline void
+void
 nexthop_group_mpls_action_t::label_stack_is(
          std::forward_list<mpls_label_t> const & label_stack) {
-   label_stack_ = label_stack;
+   pimpl->label_stack_is(label_stack);
 }
-
-inline void
+void
 nexthop_group_mpls_action_t::label_stack_set(mpls_label_t const & label_stack) {
-   label_stack_.push_front(label_stack);
+   pimpl->label_stack_set(label_stack);
 }
-
-inline void
+void
 nexthop_group_mpls_action_t::label_stack_del(mpls_label_t const & label_stack) {
-   label_stack_.remove(label_stack);
+   pimpl->label_stack_del(label_stack);
 }
-
-inline bool
+bool
 nexthop_group_mpls_action_t::operator==(nexthop_group_mpls_action_t const & other)
        const {
-   return action_type_ == other.action_type_ &&
-          label_stack_ == other.label_stack_;
+   return pimpl->operator==(*other.pimpl);
 }
-
-inline bool
+bool
 nexthop_group_mpls_action_t::operator!=(nexthop_group_mpls_action_t const & other)
        const {
-   return !operator==(other);
+   return pimpl->operator!=(*other.pimpl);
 }
-
-inline bool
+bool
 nexthop_group_mpls_action_t::operator<(nexthop_group_mpls_action_t const & other)
        const {
-   if(action_type_ != other.action_type_) {
-      return action_type_ < other.action_type_;
-   } else if(label_stack_ != other.label_stack_) {
-      return label_stack_ < other.label_stack_;
-   }
-   return false;
+   return pimpl->operator<(*other.pimpl);
 }
-
-inline uint32_t
+uint32_t
 nexthop_group_mpls_action_t::hash() const {
-   hash_mix h;
-   mix_me(h);
-   return h.result();
+   return pimpl->hash();
 }
-
-inline void
+void
 nexthop_group_mpls_action_t::mix_me(hash_mix & h) const {
-   h.mix(action_type_); // mpls_action_t
-   for (auto it=label_stack_.cbegin(); it!=label_stack_.cend(); ++it) {
-      h.mix(*it); // mpls_label_t
-   }
+   pimpl->mix_me(h);
 }
-
-inline std::string
+std::string
 nexthop_group_mpls_action_t::to_string() const {
-   std::ostringstream ss;
-   ss << "nexthop_group_mpls_action_t(";
-   ss << "action_type=" << action_type_;
-   ss << ", label_stack=" <<"'";
-   bool first_label_stack = true;
-   for (auto it=label_stack_.cbegin(); it!=label_stack_.cend(); ++it) {
-      if (first_label_stack) {
-         ss << (*it);
-         first_label_stack = false;
-      } else {
-         ss << "," << (*it);
-      }
-   }
-   ss << "'";
-   ss << ")";
-   return ss.str();
+   return pimpl->to_string();
 }
-
-inline std::ostream&
+std::ostream&
 operator<<(std::ostream& os, const nexthop_group_mpls_action_t& obj) {
-   os << obj.to_string();
-   return os;
+   return operator<<(os, *obj.pimpl);
 }
 
 
-
-inline nexthop_group_entry_counter_t::nexthop_group_entry_counter_t() :
-      packets_(0), bytes_(0), valid_(false) {
+nexthop_group_entry_counter_t::nexthop_group_entry_counter_t() {
+   pimpl = std::shared_ptr<nexthop_group_entry_counter_impl_t>(
+      new nexthop_group_entry_counter_impl_t()
+   );
+}
+nexthop_group_entry_counter_t::nexthop_group_entry_counter_t(
+         uint64_t packets, uint64_t bytes, bool valid) {
+   pimpl = std::shared_ptr<nexthop_group_entry_counter_impl_t>(
+      new nexthop_group_entry_counter_impl_t(
+         packets,
+         bytes,
+         valid
+      )
+   );
+}
+nexthop_group_entry_counter_t::nexthop_group_entry_counter_t(
+   const nexthop_group_entry_counter_t& other)
+{
+   pimpl = std::make_unique<nexthop_group_entry_counter_impl_t>(
+      nexthop_group_entry_counter_impl_t(*other.pimpl));
+}
+nexthop_group_entry_counter_t&
+nexthop_group_entry_counter_t::operator=(
+   nexthop_group_entry_counter_t const & other)
+{
+   pimpl = std::shared_ptr<nexthop_group_entry_counter_impl_t>(
+      new nexthop_group_entry_counter_impl_t(*other.pimpl));
+   return *this;
 }
 
-inline nexthop_group_entry_counter_t::nexthop_group_entry_counter_t(
-         uint64_t packets, uint64_t bytes, bool valid) :
-      packets_(packets), bytes_(bytes), valid_(valid) {
-}
-
-inline uint64_t
+uint64_t
 nexthop_group_entry_counter_t::packets() const {
-   return packets_;
+   return pimpl->packets();
 }
-
-inline uint64_t
+uint64_t
 nexthop_group_entry_counter_t::bytes() const {
-   return bytes_;
+   return pimpl->bytes();
 }
-
-inline bool
+bool
 nexthop_group_entry_counter_t::valid() const {
-   return valid_;
+   return pimpl->valid();
 }
-
-inline bool
+bool
 nexthop_group_entry_counter_t::operator==(
          nexthop_group_entry_counter_t const & other) const {
-   return packets_ == other.packets_ &&
-          bytes_ == other.bytes_ &&
-          valid_ == other.valid_;
+   return pimpl->operator==(*other.pimpl);
 }
-
-inline bool
+bool
 nexthop_group_entry_counter_t::operator!=(
          nexthop_group_entry_counter_t const & other) const {
-   return !operator==(other);
+   return pimpl->operator!=(*other.pimpl);
 }
-
-inline bool
+bool
 nexthop_group_entry_counter_t::operator<(
          nexthop_group_entry_counter_t const & other) const {
-   if(packets_ != other.packets_) {
-      return packets_ < other.packets_;
-   } else if(bytes_ != other.bytes_) {
-      return bytes_ < other.bytes_;
-   } else if(valid_ != other.valid_) {
-      return valid_ < other.valid_;
-   }
-   return false;
+   return pimpl->operator<(*other.pimpl);
 }
-
-inline uint32_t
+uint32_t
 nexthop_group_entry_counter_t::hash() const {
-   hash_mix h;
-   mix_me(h);
-   return h.result();
+   return pimpl->hash();
 }
-
-inline void
+void
 nexthop_group_entry_counter_t::mix_me(hash_mix & h) const {
-   h.mix(packets_); // uint64_t
-   h.mix(bytes_); // uint64_t
-   h.mix(valid_); // bool
+   pimpl->mix_me(h);
 }
-
-inline std::string
+std::string
 nexthop_group_entry_counter_t::to_string() const {
-   std::ostringstream ss;
-   ss << "nexthop_group_entry_counter_t(";
-   ss << "packets=" << packets_;
-   ss << ", bytes=" << bytes_;
-   ss << ", valid=" << valid_;
-   ss << ")";
-   return ss.str();
+   return pimpl->to_string();
 }
-
-inline std::ostream&
+std::ostream&
 operator<<(std::ostream& os, const nexthop_group_entry_counter_t& obj) {
-   os << obj.to_string();
-   return os;
+   return operator<<(os, *obj.pimpl);
 }
 
 
-
-inline nexthop_group_entry_t::nexthop_group_entry_t() :
-      mpls_action_(), nexthop_(), intf_() {
+nexthop_group_entry_t::nexthop_group_entry_t() {
+   pimpl = std::shared_ptr<nexthop_group_entry_impl_t>(
+      new nexthop_group_entry_impl_t()
+   );
+}
+nexthop_group_entry_t::nexthop_group_entry_t(ip_addr_t const & nexthop) {
+   pimpl = std::shared_ptr<nexthop_group_entry_impl_t>(
+      new nexthop_group_entry_impl_t(
+         nexthop
+      )
+   );
+}
+nexthop_group_entry_t::nexthop_group_entry_t(ip_addr_t const & nexthop,
+                                                    intf_id_t const & intf) {
+   pimpl = std::shared_ptr<nexthop_group_entry_impl_t>(
+      new nexthop_group_entry_impl_t(
+         nexthop,
+         intf
+      )
+   );
+}
+nexthop_group_entry_t::nexthop_group_entry_t(
+   const nexthop_group_entry_t& other)
+{
+   pimpl = std::make_unique<nexthop_group_entry_impl_t>(
+      nexthop_group_entry_impl_t(*other.pimpl));
+}
+nexthop_group_entry_t&
+nexthop_group_entry_t::operator=(
+   nexthop_group_entry_t const & other)
+{
+   pimpl = std::shared_ptr<nexthop_group_entry_impl_t>(
+      new nexthop_group_entry_impl_t(*other.pimpl));
+   return *this;
 }
 
-inline nexthop_group_entry_t::nexthop_group_entry_t(ip_addr_t const & nexthop) :
-      mpls_action_(), nexthop_(nexthop), intf_() {
-}
-
-inline nexthop_group_entry_t::nexthop_group_entry_t(ip_addr_t const & nexthop,
-                                                    intf_id_t const & intf) :
-      mpls_action_(), nexthop_(nexthop), intf_(intf) {
-}
-
-inline nexthop_group_mpls_action_t
+nexthop_group_mpls_action_t
 nexthop_group_entry_t::mpls_action() const {
-   return mpls_action_;
+   return pimpl->mpls_action();
 }
-
-inline void
+void
 nexthop_group_entry_t::mpls_action_is(
          nexthop_group_mpls_action_t const & mpls_action) {
-   mpls_action_ = mpls_action;
+   pimpl->mpls_action_is(mpls_action);
 }
-
-inline ip_addr_t
+ip_addr_t
 nexthop_group_entry_t::nexthop() const {
-   return nexthop_;
+   return pimpl->nexthop();
 }
-
-inline void
+void
 nexthop_group_entry_t::nexthop_is(ip_addr_t const & nexthop) {
-   nexthop_ = nexthop;
+   pimpl->nexthop_is(nexthop);
 }
-
-inline intf_id_t
+intf_id_t
 nexthop_group_entry_t::intf() const {
-   return intf_;
+   return pimpl->intf();
 }
-
-inline void
+void
 nexthop_group_entry_t::intf_is(intf_id_t const & intf) {
-   intf_ = intf;
+   pimpl->intf_is(intf);
 }
-
-inline bool
+bool
 nexthop_group_entry_t::operator==(nexthop_group_entry_t const & other) const {
-   return mpls_action_ == other.mpls_action_ &&
-          nexthop_ == other.nexthop_ &&
-          intf_ == other.intf_;
+   return pimpl->operator==(*other.pimpl);
 }
-
-inline bool
+bool
 nexthop_group_entry_t::operator!=(nexthop_group_entry_t const & other) const {
-   return !operator==(other);
+   return pimpl->operator!=(*other.pimpl);
 }
-
-inline bool
+bool
 nexthop_group_entry_t::operator<(nexthop_group_entry_t const & other) const {
-   if(mpls_action_ != other.mpls_action_) {
-      return mpls_action_ < other.mpls_action_;
-   } else if(nexthop_ != other.nexthop_) {
-      return nexthop_ < other.nexthop_;
-   } else if(intf_ != other.intf_) {
-      return intf_ < other.intf_;
-   }
-   return false;
+   return pimpl->operator<(*other.pimpl);
 }
-
-inline uint32_t
+uint32_t
 nexthop_group_entry_t::hash() const {
-   hash_mix h;
-   mix_me(h);
-   return h.result();
+   return pimpl->hash();
 }
-
-inline void
+void
 nexthop_group_entry_t::mix_me(hash_mix & h) const {
-   h.mix(mpls_action_); // nexthop_group_mpls_action_t
-   h.mix(nexthop_); // ip_addr_t
-   h.mix(intf_); // intf_id_t
+   pimpl->mix_me(h);
 }
-
-inline std::string
+std::string
 nexthop_group_entry_t::to_string() const {
-   std::ostringstream ss;
-   ss << "nexthop_group_entry_t(";
-   ss << "mpls_action=" << mpls_action_;
-   ss << ", nexthop=" << nexthop_;
-   ss << ", intf=" << intf_;
-   ss << ")";
-   return ss.str();
+   return pimpl->to_string();
 }
-
-inline std::ostream&
+std::ostream&
 operator<<(std::ostream& os, const nexthop_group_entry_t& obj) {
-   os << obj.to_string();
-   return os;
+   return operator<<(os, *obj.pimpl);
 }
 
 
-
-inline nexthop_group_t::nexthop_group_t() :
-      name_(), type_(), gre_key_type_(NEXTHOP_GROUP_GRE_KEY_NULL), ttl_(64),
-      source_ip_(), source_intf_(), autosize_(false), nexthops_(),
-      destination_ips_(), counters_unshared_() {
+nexthop_group_t::nexthop_group_t() {
+   pimpl = std::shared_ptr<nexthop_group_impl_t>(
+      new nexthop_group_impl_t()
+   );
 }
-
-inline nexthop_group_t::nexthop_group_t(std::string name,
-                                        nexthop_group_encap_t type) :
-      name_(name), type_(type), gre_key_type_(NEXTHOP_GROUP_GRE_KEY_NULL),
-      ttl_(64), source_ip_(), source_intf_(), autosize_(false), nexthops_(),
-      destination_ips_(), counters_unshared_() {
+nexthop_group_t::nexthop_group_t(std::string name,
+                                        nexthop_group_encap_t type) {
+   pimpl = std::shared_ptr<nexthop_group_impl_t>(
+      new nexthop_group_impl_t(
+         name,
+         type
+      )
+   );
 }
-
-inline nexthop_group_t::nexthop_group_t(std::string name,
+nexthop_group_t::nexthop_group_t(std::string name,
                                         nexthop_group_encap_t type,
-                                        nexthop_group_gre_key_t gre_key_type) :
-      name_(name), type_(type), gre_key_type_(gre_key_type), ttl_(64),
-      source_ip_(), source_intf_(), autosize_(false), nexthops_(),
-      destination_ips_(), counters_unshared_() {
+                                        nexthop_group_gre_key_t gre_key_type) {
+   pimpl = std::shared_ptr<nexthop_group_impl_t>(
+      new nexthop_group_impl_t(
+         name,
+         type,
+         gre_key_type
+      )
+   );
 }
-
-inline nexthop_group_t::nexthop_group_t(std::string name,
-                                        ip_addr_t const & source_ip) :
-      name_(name), type_(), gre_key_type_(), ttl_(), source_ip_(source_ip),
-      source_intf_(), autosize_(), nexthops_(), destination_ips_(),
-      counters_unshared_() {
+nexthop_group_t::nexthop_group_t(std::string name,
+                                        ip_addr_t const & source_ip) {
+   pimpl = std::shared_ptr<nexthop_group_impl_t>(
+      new nexthop_group_impl_t(
+         name,
+         source_ip
+      )
+   );
 }
-
-inline nexthop_group_t::nexthop_group_t(
+nexthop_group_t::nexthop_group_t(
          std::string name, ip_addr_t const & source_ip,
-         std::map<uint16_t, nexthop_group_entry_t> const & nexthops) :
-      name_(name), type_(), gre_key_type_(), ttl_(), source_ip_(source_ip),
-      source_intf_(), autosize_(), nexthops_(nexthops), destination_ips_(),
-      counters_unshared_() {
+         std::map<uint16_t, nexthop_group_entry_t> const & nexthops) {
+   pimpl = std::shared_ptr<nexthop_group_impl_t>(
+      new nexthop_group_impl_t(
+         name,
+         source_ip,
+         nexthops
+      )
+   );
+}
+nexthop_group_t::nexthop_group_t(
+   const nexthop_group_t& other)
+{
+   pimpl = std::make_unique<nexthop_group_impl_t>(
+      nexthop_group_impl_t(*other.pimpl));
+}
+nexthop_group_t&
+nexthop_group_t::operator=(
+   nexthop_group_t const & other)
+{
+   pimpl = std::shared_ptr<nexthop_group_impl_t>(
+      new nexthop_group_impl_t(*other.pimpl));
+   return *this;
 }
 
-inline std::string
+std::string
 nexthop_group_t::name() const {
-   return name_;
+   return pimpl->name();
 }
-
-inline nexthop_group_encap_t
+nexthop_group_encap_t
 nexthop_group_t::type() const {
-   return type_;
+   return pimpl->type();
 }
-
-inline nexthop_group_gre_key_t
+nexthop_group_gre_key_t
 nexthop_group_t::gre_key_type() const {
-   return gre_key_type_;
+   return pimpl->gre_key_type();
 }
-
-inline uint16_t
+uint16_t
 nexthop_group_t::ttl() const {
-   return ttl_;
+   return pimpl->ttl();
 }
-
-inline void
+void
 nexthop_group_t::ttl_is(uint16_t ttl) {
-   ttl_ = ttl;
+   pimpl->ttl_is(ttl);
 }
-
-inline ip_addr_t
+ip_addr_t
 nexthop_group_t::source_ip() const {
-   return source_ip_;
+   return pimpl->source_ip();
 }
-
-inline void
+void
 nexthop_group_t::source_ip_is(ip_addr_t const & source_ip) {
-   if (type_ == NEXTHOP_GROUP_MPLS && !!source_ip) {
-      panic(invalid_argument_error(
-                  "source_ip",
-                  "MPLS nexthop group cannot specify a source IP"));
-   } else if (!!source_ip) {
-      // If we're setting a source ip, clear any
-      // source interface configuration
-      source_intf_is(intf_id_t());
-   }
-   source_ip_ = source_ip;
+   pimpl->source_ip_is(source_ip);
 }
-
-inline intf_id_t
+intf_id_t
 nexthop_group_t::source_intf() const {
-   return source_intf_;
+   return pimpl->source_intf();
 }
-
-inline void
+void
 nexthop_group_t::source_intf_is(intf_id_t source_intf) {
-   if (!!source_intf) {
-      // If we're setting a source interface, clear any
-      // source ip configuration
-      source_ip_is(ip_addr_t());
-   }
-   source_intf_ = source_intf;
+   pimpl->source_intf_is(source_intf);
 }
-
-inline bool
+bool
 nexthop_group_t::autosize() const {
-   return autosize_;
+   return pimpl->autosize();
 }
-
-inline void
+void
 nexthop_group_t::autosize_is(bool autosize) {
-   autosize_ = autosize;
+   pimpl->autosize_is(autosize);
 }
-
-inline uint16_t
+uint16_t
 nexthop_group_t::size() const {
-
-   if (nexthops_.empty()) {
-      return 0;
-   }
-   return nexthops_.rbegin()->first + 1;
+   return pimpl->size();
 }
-
-inline std::map<uint16_t, nexthop_group_entry_t> const &
+std::map<uint16_t, nexthop_group_entry_t> const &
 nexthop_group_t::nexthops() const {
-   return nexthops_;
+   return pimpl->nexthops();
 }
-
-inline void
+void
 nexthop_group_t::nexthops_is(
          std::map<uint16_t, nexthop_group_entry_t> const & nexthops) {
-   nexthops_ = nexthops;
+   pimpl->nexthops_is(nexthops);
 }
-
-inline void
+void
 nexthop_group_t::nexthop_set(uint16_t key, nexthop_group_entry_t const & value) {
-   nexthops_[key] = value;
+   pimpl->nexthop_set(key, value);
 }
-
-inline void
+void
 nexthop_group_t::nexthop_del(uint16_t key) {
-   nexthops_.erase(key);
+   pimpl->nexthop_del(key);
 }
-
-inline std::map<uint16_t, ip_addr_t> const &
+std::map<uint16_t, ip_addr_t> const &
 nexthop_group_t::destination_ips() const {
-   return destination_ips_;
+   return pimpl->destination_ips();
 }
-
-inline void
+void
 nexthop_group_t::destination_ips_is(
          std::map<uint16_t, ip_addr_t> const & destination_ips) {
-   destination_ips_ = destination_ips;
+   pimpl->destination_ips_is(destination_ips);
 }
-
-inline void
+void
 nexthop_group_t::destination_ip_set(uint16_t key, ip_addr_t const & value) {
-   destination_ips_[key] = value;
+   pimpl->destination_ip_set(key, value);
 }
-
-inline void
+void
 nexthop_group_t::destination_ip_del(uint16_t key) {
-   destination_ips_.erase(key);
+   pimpl->destination_ip_del(key);
 }
-
-inline bool
+bool
 nexthop_group_t::counters_unshared() const {
-   return counters_unshared_;
+   return pimpl->counters_unshared();
 }
-
-inline void
+void
 nexthop_group_t::counters_unshared_is(bool counters_unshared) {
-   counters_unshared_ = counters_unshared;
+   pimpl->counters_unshared_is(counters_unshared);
 }
-
-inline bool
+bool
 nexthop_group_t::operator==(nexthop_group_t const & other) const {
-   return name_ == other.name_ &&
-          type_ == other.type_ &&
-          gre_key_type_ == other.gre_key_type_ &&
-          ttl_ == other.ttl_ &&
-          source_ip_ == other.source_ip_ &&
-          source_intf_ == other.source_intf_ &&
-          autosize_ == other.autosize_ &&
-          nexthops_ == other.nexthops_ &&
-          destination_ips_ == other.destination_ips_ &&
-          counters_unshared_ == other.counters_unshared_;
+   return pimpl->operator==(*other.pimpl);
 }
-
-inline bool
+bool
 nexthop_group_t::operator!=(nexthop_group_t const & other) const {
-   return !operator==(other);
+   return pimpl->operator!=(*other.pimpl);
 }
-
-inline bool
+bool
 nexthop_group_t::operator<(nexthop_group_t const & other) const {
-   if(name_ != other.name_) {
-      return name_ < other.name_;
-   } else if(type_ != other.type_) {
-      return type_ < other.type_;
-   } else if(gre_key_type_ != other.gre_key_type_) {
-      return gre_key_type_ < other.gre_key_type_;
-   } else if(ttl_ != other.ttl_) {
-      return ttl_ < other.ttl_;
-   } else if(source_ip_ != other.source_ip_) {
-      return source_ip_ < other.source_ip_;
-   } else if(source_intf_ != other.source_intf_) {
-      return source_intf_ < other.source_intf_;
-   } else if(autosize_ != other.autosize_) {
-      return autosize_ < other.autosize_;
-   } else if(nexthops_ != other.nexthops_) {
-      return nexthops_ < other.nexthops_;
-   } else if(destination_ips_ != other.destination_ips_) {
-      return destination_ips_ < other.destination_ips_;
-   } else if(counters_unshared_ != other.counters_unshared_) {
-      return counters_unshared_ < other.counters_unshared_;
-   }
-   return false;
+   return pimpl->operator<(*other.pimpl);
 }
-
-inline uint32_t
+uint32_t
 nexthop_group_t::hash() const {
-   hash_mix h;
-   mix_me(h);
-   return h.result();
+   return pimpl->hash();
 }
-
-inline void
+void
 nexthop_group_t::mix_me(hash_mix & h) const {
-   h.mix(name_); // std::string
-   h.mix(type_); // nexthop_group_encap_t
-   h.mix(gre_key_type_); // nexthop_group_gre_key_t
-   h.mix(ttl_); // uint16_t
-   h.mix(source_ip_); // ip_addr_t
-   h.mix(source_intf_); // intf_id_t
-   h.mix(autosize_); // bool
-   for (auto it=nexthops_.cbegin(); it!=nexthops_.cend(); ++it) {
-      h.mix(it->first); // uint16_t
-      h.mix(it->second); // nexthop_group_entry_t
-   }
-   for (auto it=destination_ips_.cbegin(); it!=destination_ips_.cend(); ++it) {
-      h.mix(it->first); // uint16_t
-      h.mix(it->second); // ip_addr_t
-   }
-   h.mix(counters_unshared_); // bool
+   pimpl->mix_me(h);
 }
-
-inline std::string
+std::string
 nexthop_group_t::to_string() const {
-   std::ostringstream ss;
-   ss << "nexthop_group_t(";
-   ss << "name='" << name_ << "'";
-   ss << ", type=" << type_;
-   ss << ", gre_key_type=" << gre_key_type_;
-   ss << ", ttl=" << ttl_;
-   ss << ", source_ip=" << source_ip_;
-   ss << ", source_intf=" << source_intf_;
-   ss << ", autosize=" << autosize_;
-   ss << ", nexthops=" <<"'";
-   bool first_nexthops = true;
-   for (auto it=nexthops_.cbegin(); it!=nexthops_.cend(); ++it) {
-      if (first_nexthops) {
-         ss << it->first << "=" << it->second;
-         first_nexthops = false;
-      } else {
-         ss << "," << it->first << "=" << it->second;
-      }
-   }
-   ss << "'";
-   ss << ", destination_ips=" <<"'";
-   bool first_destination_ips = true;
-   for (auto it=destination_ips_.cbegin(); it!=destination_ips_.cend(); ++it) {
-      if (first_destination_ips) {
-         ss << it->first << "=" << it->second;
-         first_destination_ips = false;
-      } else {
-         ss << "," << it->first << "=" << it->second;
-      }
-   }
-   ss << "'";
-   ss << ", counters_unshared=" << counters_unshared_;
-   ss << ")";
-   return ss.str();
+   return pimpl->to_string();
 }
-
-inline std::ostream&
+std::ostream&
 operator<<(std::ostream& os, const nexthop_group_t& obj) {
-   os << obj.to_string();
-   return os;
+   return operator<<(os, *obj.pimpl);
 }
-
 
 }
 

@@ -57,7 +57,8 @@ namespace eos {
    subintf_mgr_(0),                             \
    system_mgr_(0),                              \
    timeout_mgr_(0),                             \
-   vrf_mgr_(0)                                  \
+   vrf_mgr_(0),                                 \
+   xcvr_mgr_(0)                                 \
 
 // this is code we share with the stubs, used to figure out the name of the agent
 // based on /proc/self/cmdline (at that point we no longer have access to argv), and
@@ -71,7 +72,7 @@ sdk::SdkImpl::SdkImpl() : SDK_INITIALIZATION_LIST {
    print_profiles::set_print_profiles(name_.c_str());
 }
 
-sdk::SdkImpl::SdkImpl(std::string const name, void *eossdk_context)
+sdk::SdkImpl::SdkImpl(std::string const name, void *eossdk_context) 
    : SDK_INITIALIZATION_LIST {
    name_ = name;
    eossdk_context_ = eossdk_context;
@@ -134,6 +135,7 @@ INIT_STUB_MGR(subintf_mgr)
 INIT_STUB_MGR(system_mgr)
 INIT_STUB_MGR(timeout_mgr)
 INIT_STUB_MGR(vrf_mgr)
+INIT_STUB_MGR(xcvr_mgr)
 
 void sdk::SdkImpl::init_event_loop() {
    if(!event_loop_) {
@@ -169,10 +171,10 @@ void param_trace_enable_is(bool new_param_trace) {
 void api_trace_buffer_sizes_is(int(&size_spec)[10]) {
 }
 
-// Real functions to facilitate the making of customized sysdb-mount-profiles
-// (to use in place of the brute-force one called "EosSdk", see
-// /usr/lib/SysdbMountProfiles/EosSdkAll), an app can be started with the env var
-// EOS_PRINT_PROFILES_AND_EXIT pointing to a filename where the profile should be
+// Real functions to facilitate the making of customized sysdb-mount-profiles 
+// (to use in place of the brute-force one called "EosSdk", see 
+// /usr/lib/SysdbMountProfiles/EosSdkAll), an app can be started with the env var 
+// EOS_PRINT_PROFILES_AND_EXIT pointing to a filename where the profile should be 
 // written, then exit.
 #include "MaybePrintProfilesAndExit.cpp"
 

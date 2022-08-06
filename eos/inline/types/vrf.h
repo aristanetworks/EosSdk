@@ -1,4 +1,4 @@
-// Copyright (c) 2020 Arista Networks, Inc.  All rights reserved.
+// Copyright (c) 2022 Arista Networks, Inc.  All rights reserved.
 // Arista Networks, Inc. Confidential and Proprietary.
 
 #ifndef EOS_INLINE_TYPES_VRF_H
@@ -6,7 +6,7 @@
 
 namespace eos {
 
-inline std::ostream&
+EOS_SDK_PUBLIC std::ostream&
 operator<<(std::ostream& os, const vrf_state_t & enum_val) {
    if (enum_val==VRF_NULL) {
       os << "VRF_NULL";
@@ -23,86 +23,76 @@ operator<<(std::ostream& os, const vrf_state_t & enum_val) {
 }
 
 
-
 // Default constructor.
-inline vrf_t::vrf_t() :
-      name_(""), state_(VRF_NULL), rd_(0) {
+vrf_t::vrf_t() {
+   pimpl = std::shared_ptr<vrf_impl_t>(
+      new vrf_impl_t()
+   );
+}
+vrf_t::vrf_t(std::string name, vrf_state_t state, uint64_t rd) {
+   pimpl = std::shared_ptr<vrf_impl_t>(
+      new vrf_impl_t(
+         name,
+         state,
+         rd
+      )
+   );
+}
+vrf_t::vrf_t(
+   const vrf_t& other)
+{
+   pimpl = std::make_unique<vrf_impl_t>(
+      vrf_impl_t(*other.pimpl));
+}
+vrf_t&
+vrf_t::operator=(
+   vrf_t const & other)
+{
+   pimpl = std::shared_ptr<vrf_impl_t>(
+      new vrf_impl_t(*other.pimpl));
+   return *this;
 }
 
-inline vrf_t::vrf_t(std::string name, vrf_state_t state, uint64_t rd) :
-      name_(name), state_(state), rd_(rd) {
-}
-
-inline std::string
+std::string
 vrf_t::name() const {
-   return name_;
+   return pimpl->name();
 }
-
-inline vrf_state_t
+vrf_state_t
 vrf_t::state() const {
-   return state_;
+   return pimpl->state();
 }
-
-inline uint64_t
+uint64_t
 vrf_t::rd() const {
-   return rd_;
+   return pimpl->rd();
 }
-
-inline bool
+bool
 vrf_t::operator==(vrf_t const & other) const {
-   return name_ == other.name_ &&
-          state_ == other.state_ &&
-          rd_ == other.rd_;
+   return pimpl->operator==(*other.pimpl);
 }
-
-inline bool
+bool
 vrf_t::operator!=(vrf_t const & other) const {
-   return !operator==(other);
+   return pimpl->operator!=(*other.pimpl);
 }
-
-inline bool
+bool
 vrf_t::operator<(vrf_t const & other) const {
-   if(name_ != other.name_) {
-      return name_ < other.name_;
-   } else if(state_ != other.state_) {
-      return state_ < other.state_;
-   } else if(rd_ != other.rd_) {
-      return rd_ < other.rd_;
-   }
-   return false;
+   return pimpl->operator<(*other.pimpl);
 }
-
-inline uint32_t
+uint32_t
 vrf_t::hash() const {
-   hash_mix h;
-   mix_me(h);
-   return h.result();
+   return pimpl->hash();
 }
-
-inline void
+void
 vrf_t::mix_me(hash_mix & h) const {
-   h.mix(name_); // std::string
-   h.mix(state_); // vrf_state_t
-   h.mix(rd_); // uint64_t
+   pimpl->mix_me(h);
 }
-
-inline std::string
+std::string
 vrf_t::to_string() const {
-   std::ostringstream ss;
-   ss << "vrf_t(";
-   ss << "name='" << name_ << "'";
-   ss << ", state=" << state_;
-   ss << ", rd=" << rd_;
-   ss << ")";
-   return ss.str();
+   return pimpl->to_string();
 }
-
-inline std::ostream&
+std::ostream&
 operator<<(std::ostream& os, const vrf_t& obj) {
-   os << obj.to_string();
-   return os;
+   return operator<<(os, *obj.pimpl);
 }
-
 
 }
 

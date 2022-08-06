@@ -1,4 +1,4 @@
-// Copyright (c) 2020 Arista Networks, Inc.  All rights reserved.
+// Copyright (c) 2022 Arista Networks, Inc.  All rights reserved.
 // Arista Networks, Inc. Confidential and Proprietary.
 
 #ifndef EOS_TYPES_VRF_H
@@ -6,6 +6,7 @@
 
 #include <eos/hash_mix.h>
 #include <eos/utility.h>
+#include <memory>
 #include <sstream>
 
 namespace eos {
@@ -22,13 +23,19 @@ enum vrf_state_t {
    VRF_DELETING,
 };
 /** Appends a string representation of enum vrf_state_t value to the ostream. */
-std::ostream& operator<<(std::ostream& os, const vrf_state_t & enum_val);
+EOS_SDK_PUBLIC std::ostream& operator<<(std::ostream& os,
+                                        const vrf_state_t & enum_val);
 
+class vrf_impl_t;
 /** @deprecated. This data structure is used to describe a VRF on a switch. */
 class EOS_SDK_PUBLIC vrf_t {
  public:
    vrf_t();
    vrf_t(std::string name, vrf_state_t state, uint64_t rd);
+   vrf_t(const vrf_t& other);
+   vrf_t& operator=(
+      vrf_t const & other);
+
 
    /** Getter for 'name': the name of the VRF. */
    std::string name() const;
@@ -55,12 +62,11 @@ class EOS_SDK_PUBLIC vrf_t {
    friend std::ostream& operator<<(std::ostream& os, const vrf_t& obj);
 
  private:
-   std::string name_;
-   vrf_state_t state_;
-   uint64_t rd_;
+   std::shared_ptr<vrf_impl_t> pimpl;
 };
-}
 
-#include <eos/inline/types/vrf.h>
+EOS_SDK_PUBLIC
+std::ostream& operator<<(std::ostream& os, const vrf_t& obj);
+}
 
 #endif // EOS_TYPES_VRF_H

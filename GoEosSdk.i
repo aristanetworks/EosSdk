@@ -103,6 +103,7 @@ typedef uint64_t uint64_be_t;
 %feature("nodirector") eos::system_mgr;
 %feature("nodirector") eos::timeout_mgr;
 %feature("nodirector") eos::vrf_mgr;
+%feature("nodirector") eos::xcvr_mgr;
 
 %{
 //#include "eos/acl.h"
@@ -154,6 +155,7 @@ typedef uint64_t uint64_be_t;
 #include "eos/utility.h"
 #include "eos/version.h"
 #include "eos/vrf.h"
+#include "eos/xcvr.h"
 
 using namespace std;
 using namespace eos;

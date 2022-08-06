@@ -34,8 +34,8 @@ class EOS_SDK_PUBLIC route_map_mgr {
 #if !GUARD_ROUTE_MAP_SUPPORT
    /// Returns the priority value of eossdk route map configuration.
    virtual uint8_t priority() const = 0;
-
-   /// Configures the priority value of eossdk route map configuration.
+   
+   /// Configures the priority value of eossdk route map configuration. 
    virtual void priority_is(uint8_t) = 0;
 
    /**
@@ -81,3 +81,4 @@ class EOS_SDK_PUBLIC route_map_mgr {
 } // namespace eos
 
 #endif // EOS_ROUTE_MAP_H
+

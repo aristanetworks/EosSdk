@@ -1,4 +1,4 @@
-// Copyright (c) 2020 Arista Networks, Inc.  All rights reserved.
+// Copyright (c) 2022 Arista Networks, Inc.  All rights reserved.
 // Arista Networks, Inc. Confidential and Proprietary.
 
 #ifndef EOS_TYPES_MPLS_VRF_LABEL_H
@@ -6,15 +6,21 @@
 
 #include <eos/hash_mix.h>
 #include <eos/utility.h>
+#include <memory>
 #include <sstream>
 
 namespace eos {
 
+class mpls_vrf_label_impl_t;
 /** A static VRF label decap route configuration model. */
 class EOS_SDK_PUBLIC mpls_vrf_label_t {
  public:
    mpls_vrf_label_t();
    mpls_vrf_label_t(mpls_label_t label, std::string vrf_name);
+   mpls_vrf_label_t(const mpls_vrf_label_t& other);
+   mpls_vrf_label_t& operator=(
+      mpls_vrf_label_t const & other);
+
 
    /** Getter for 'label': the decap label. */
    mpls_label_t label() const;
@@ -38,11 +44,11 @@ class EOS_SDK_PUBLIC mpls_vrf_label_t {
    friend std::ostream& operator<<(std::ostream& os, const mpls_vrf_label_t& obj);
 
  private:
-   mpls_label_t label_;
-   std::string vrf_name_;
+   std::shared_ptr<mpls_vrf_label_impl_t> pimpl;
 };
-}
 
-#include <eos/inline/types/mpls_vrf_label.h>
+EOS_SDK_PUBLIC
+std::ostream& operator<<(std::ostream& os, const mpls_vrf_label_t& obj);
+}
 
 #endif // EOS_TYPES_MPLS_VRF_LABEL_H

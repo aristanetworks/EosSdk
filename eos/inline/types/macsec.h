@@ -1,4 +1,4 @@
-// Copyright (c) 2021 Arista Networks, Inc.  All rights reserved.
+// Copyright (c) 2022 Arista Networks, Inc.  All rights reserved.
 // Arista Networks, Inc. Confidential and Proprietary.
 
 #ifndef EOS_INLINE_TYPES_MACSEC_H
@@ -6,7 +6,7 @@
 
 namespace eos {
 
-inline std::ostream&
+EOS_SDK_PUBLIC std::ostream&
 operator<<(std::ostream& os, const macsec_cipher_suite_t & enum_val) {
    if (enum_val==CIPHER_NULL) {
       os << "CIPHER_NULL";
@@ -25,8 +25,7 @@ operator<<(std::ostream& os, const macsec_cipher_suite_t & enum_val) {
 }
 
 
-
-inline std::ostream&
+EOS_SDK_PUBLIC std::ostream&
 operator<<(std::ostream& os, const macsec_intf_key_status_t & enum_val) {
    if (enum_val==MACSEC_NO_PROFILE) {
       os << "MACSEC_NO_PROFILE";
@@ -47,8 +46,7 @@ operator<<(std::ostream& os, const macsec_intf_key_status_t & enum_val) {
 }
 
 
-
-inline std::ostream&
+EOS_SDK_PUBLIC std::ostream&
 operator<<(std::ostream& os, const macsec_intf_traffic_status_t & enum_val) {
    if (enum_val==MACSEC_TRAFFIC_PROTECTED) {
       os << "MACSEC_TRAFFIC_PROTECTED";
@@ -63,8 +61,7 @@ operator<<(std::ostream& os, const macsec_intf_traffic_status_t & enum_val) {
 }
 
 
-
-inline std::ostream&
+EOS_SDK_PUBLIC std::ostream&
 operator<<(std::ostream& os, const macsec_bypass_t & enum_val) {
    if (enum_val==BYPASS_NULL) {
       os << "BYPASS_NULL";
@@ -79,8 +76,7 @@ operator<<(std::ostream& os, const macsec_bypass_t & enum_val) {
 }
 
 
-
-inline std::ostream&
+EOS_SDK_PUBLIC std::ostream&
 operator<<(std::ostream& os, const macsec_profile_traffic_policy_t & enum_val) {
    if (enum_val==TRAFFIC_POLICY_NULL) {
       os << "TRAFFIC_POLICY_NULL";
@@ -97,610 +93,418 @@ operator<<(std::ostream& os, const macsec_profile_traffic_policy_t & enum_val) {
 }
 
 
-
-inline macsec_key_t::macsec_key_t() :
-      cak_(), ckn_(), encoded_(false) {
+macsec_key_t::macsec_key_t() {
+   pimpl = std::shared_ptr<macsec_key_impl_t>(
+      new macsec_key_impl_t()
+   );
+}
+macsec_key_t::macsec_key_t(
+   const macsec_key_t& other)
+{
+   pimpl = std::make_unique<macsec_key_impl_t>(
+      macsec_key_impl_t(*other.pimpl));
+}
+macsec_key_t&
+macsec_key_t::operator=(
+   macsec_key_t const & other)
+{
+   pimpl = std::shared_ptr<macsec_key_impl_t>(
+      new macsec_key_impl_t(*other.pimpl));
+   return *this;
 }
 
-inline std::string
+std::string
 macsec_key_t::cak() const {
-   return cak_;
+   return pimpl->cak();
 }
-
-inline void
+void
 macsec_key_t::cak_is(std::string cak) {
-   cak_ = cak;
+   pimpl->cak_is(cak);
 }
-
-inline std::string
+std::string
 macsec_key_t::ckn() const {
-   return ckn_;
+   return pimpl->ckn();
 }
-
-inline void
+void
 macsec_key_t::ckn_is(std::string ckn) {
-   ckn_ = ckn;
+   pimpl->ckn_is(ckn);
 }
-
-inline bool
+bool
 macsec_key_t::encoded() const {
-   return encoded_;
+   return pimpl->encoded();
 }
-
-inline void
+void
 macsec_key_t::encoded_is(bool encoded) {
-   encoded_ = encoded;
+   pimpl->encoded_is(encoded);
 }
-
-inline bool
+bool
 macsec_key_t::operator==(macsec_key_t const & other) const {
-   return cak_ == other.cak_ &&
-          ckn_ == other.ckn_ &&
-          encoded_ == other.encoded_;
+   return pimpl->operator==(*other.pimpl);
 }
-
-inline bool
+bool
 macsec_key_t::operator!=(macsec_key_t const & other) const {
-   return !operator==(other);
+   return pimpl->operator!=(*other.pimpl);
 }
-
-inline bool
+bool
 macsec_key_t::operator<(macsec_key_t const & other) const {
-   if(cak_ != other.cak_) {
-      return cak_ < other.cak_;
-   } else if(ckn_ != other.ckn_) {
-      return ckn_ < other.ckn_;
-   } else if(encoded_ != other.encoded_) {
-      return encoded_ < other.encoded_;
-   }
-   return false;
+   return pimpl->operator<(*other.pimpl);
 }
-
-inline uint32_t
+uint32_t
 macsec_key_t::hash() const {
-   hash_mix h;
-   mix_me(h);
-   return h.result();
+   return pimpl->hash();
 }
-
-inline void
+void
 macsec_key_t::mix_me(hash_mix & h) const {
-   h.mix(cak_); // std::string
-   h.mix(ckn_); // std::string
-   h.mix(encoded_); // bool
+   pimpl->mix_me(h);
 }
-
-inline std::string
+std::string
 macsec_key_t::to_string() const {
-   std::ostringstream ss;
-   ss << "macsec_key_t(";
-   ss << "cak='" << cak_ << "'";
-   ss << ", ckn='" << ckn_ << "'";
-   ss << ", encoded=" << encoded_;
-   ss << ")";
-   return ss.str();
+   return pimpl->to_string();
 }
-
-inline std::ostream&
+std::ostream&
 operator<<(std::ostream& os, const macsec_key_t& obj) {
-   os << obj.to_string();
-   return os;
+   return operator<<(os, *obj.pimpl);
 }
 
 
-
-inline macsec_profile_t::macsec_profile_t() :
-      name_(), primary_key_(), fallback_key_(), key_server_priority_(16),
-      rekey_period_(0), mka_life_time_(6), cipher_(GCM_AES_XPN_128), dot1x_(false),
-      include_sci_(false), bypass_lldp_(false), lldp_bypass_level_(BYPASS_NULL),
-      traffic_policy_(TRAFFIC_POLICY_ACTIVE_SAK), allow_unprotected_(false),
-      replay_protection_(true), replay_protection_window_(0),
-      key_retirement_immediate_(false), intfs_() {
+macsec_profile_t::macsec_profile_t() {
+   pimpl = std::shared_ptr<macsec_profile_impl_t>(
+      new macsec_profile_impl_t()
+   );
+}
+macsec_profile_t::macsec_profile_t(macsec_profile_name_t name) {
+   pimpl = std::shared_ptr<macsec_profile_impl_t>(
+      new macsec_profile_impl_t(
+         name
+      )
+   );
+}
+macsec_profile_t::macsec_profile_t(
+   const macsec_profile_t& other)
+{
+   pimpl = std::make_unique<macsec_profile_impl_t>(
+      macsec_profile_impl_t(*other.pimpl));
+}
+macsec_profile_t&
+macsec_profile_t::operator=(
+   macsec_profile_t const & other)
+{
+   pimpl = std::shared_ptr<macsec_profile_impl_t>(
+      new macsec_profile_impl_t(*other.pimpl));
+   return *this;
 }
 
-inline macsec_profile_t::macsec_profile_t(macsec_profile_name_t name) :
-      name_(name), primary_key_(), fallback_key_(), key_server_priority_(16),
-      rekey_period_(0), mka_life_time_(6), cipher_(GCM_AES_XPN_128), dot1x_(false),
-      include_sci_(false), bypass_lldp_(false), lldp_bypass_level_(BYPASS_NULL),
-      traffic_policy_(TRAFFIC_POLICY_ACTIVE_SAK), allow_unprotected_(false),
-      replay_protection_(true), replay_protection_window_(0),
-      key_retirement_immediate_(false), intfs_() {
-}
-
-inline macsec_profile_name_t
+macsec_profile_name_t
 macsec_profile_t::name() const {
-   return name_;
+   return pimpl->name();
 }
-
-inline void
+void
 macsec_profile_t::name_is(macsec_profile_name_t name) {
-   name_ = name;
+   pimpl->name_is(name);
 }
-
-inline macsec_key_t
+macsec_key_t
 macsec_profile_t::primary_key() const {
-   return primary_key_;
+   return pimpl->primary_key();
 }
-
-inline void
+void
 macsec_profile_t::primary_key_is(macsec_key_t primary_key) {
-   primary_key_ = primary_key;
+   pimpl->primary_key_is(primary_key);
 }
-
-inline macsec_key_t
+macsec_key_t
 macsec_profile_t::fallback_key() const {
-   return fallback_key_;
+   return pimpl->fallback_key();
 }
-
-inline void
+void
 macsec_profile_t::fallback_key_is(macsec_key_t fallback_key) {
-   fallback_key_ = fallback_key;
+   pimpl->fallback_key_is(fallback_key);
 }
-
-inline uint8_t
+uint8_t
 macsec_profile_t::key_server_priority() const {
-   return key_server_priority_;
+   return pimpl->key_server_priority();
 }
-
-inline void
+void
 macsec_profile_t::key_server_priority_is(uint8_t key_server_priority) {
-   key_server_priority_ = key_server_priority;
+   pimpl->key_server_priority_is(key_server_priority);
 }
-
-inline uint32_t
+uint32_t
 macsec_profile_t::rekey_period() const {
-   return rekey_period_;
+   return pimpl->rekey_period();
 }
-
-inline void
+void
 macsec_profile_t::rekey_period_is(uint32_t rekey_period) {
-   rekey_period_ = rekey_period;
+   pimpl->rekey_period_is(rekey_period);
 }
-
-inline uint32_t
+uint32_t
 macsec_profile_t::mka_life_time() const {
-   return mka_life_time_;
+   return pimpl->mka_life_time();
 }
-
-inline void
+void
 macsec_profile_t::mka_life_time_is(uint32_t mka_life_time) {
-   mka_life_time_ = mka_life_time;
+   pimpl->mka_life_time_is(mka_life_time);
 }
-
-inline macsec_cipher_suite_t
+macsec_cipher_suite_t
 macsec_profile_t::cipher() const {
-   return cipher_;
+   return pimpl->cipher();
 }
-
-inline void
+void
 macsec_profile_t::cipher_is(macsec_cipher_suite_t cipher) {
-   cipher_ = cipher;
+   pimpl->cipher_is(cipher);
 }
-
-inline bool
+bool
 macsec_profile_t::dot1x() const {
-   return dot1x_;
+   return pimpl->dot1x();
 }
-
-inline void
+void
 macsec_profile_t::dot1x_is(bool dot1x) {
-   dot1x_ = dot1x;
+   pimpl->dot1x_is(dot1x);
 }
-
-inline bool
+bool
 macsec_profile_t::include_sci() const {
-   return include_sci_;
+   return pimpl->include_sci();
 }
-
-inline void
+void
 macsec_profile_t::include_sci_is(bool include_sci) {
-   include_sci_ = include_sci;
+   pimpl->include_sci_is(include_sci);
 }
-
-inline bool
+bool
 macsec_profile_t::bypass_lldp() const {
-                return !(lldp_bypass_level() == BYPASS_NULL);
+   return pimpl->bypass_lldp();
 }
-
-inline void
+void
 macsec_profile_t::bypass_lldp_is(bool bypass_lldp) {
-                lldp_bypass_level_is(bypass_lldp ? BYPASS_AUTHORIZED : BYPASS_NULL);
+   pimpl->bypass_lldp_is(bypass_lldp);
 }
-
-inline macsec_bypass_t
+macsec_bypass_t
 macsec_profile_t::lldp_bypass_level() const {
-   return lldp_bypass_level_;
+   return pimpl->lldp_bypass_level();
 }
-
-inline void
+void
 macsec_profile_t::lldp_bypass_level_is(macsec_bypass_t lldp_bypass_level) {
-   lldp_bypass_level_ = lldp_bypass_level;
+   pimpl->lldp_bypass_level_is(lldp_bypass_level);
 }
-
-inline macsec_profile_traffic_policy_t
+macsec_profile_traffic_policy_t
 macsec_profile_t::traffic_policy() const {
-   return traffic_policy_;
+   return pimpl->traffic_policy();
 }
-
-inline void
+void
 macsec_profile_t::traffic_policy_is(macsec_profile_traffic_policy_t traffic_policy)
        {
-   traffic_policy_ = traffic_policy;
+   pimpl->traffic_policy_is(traffic_policy);
 }
-
-inline bool
+bool
 macsec_profile_t::allow_unprotected() const {
-   return traffic_policy() == TRAFFIC_POLICY_UNPROTECTED;
+   return pimpl->allow_unprotected();
 }
-
-inline void
+void
 macsec_profile_t::allow_unprotected_is(bool allow_unprotected) {
-   traffic_policy_is(allow_unprotected ? TRAFFIC_POLICY_UNPROTECTED :
-                                         TRAFFIC_POLICY_ACTIVE_SAK);
+   pimpl->allow_unprotected_is(allow_unprotected);
 }
-
-inline bool
+bool
 macsec_profile_t::replay_protection() const {
-   return replay_protection_;
+   return pimpl->replay_protection();
 }
-
-inline void
+void
 macsec_profile_t::replay_protection_is(bool replay_protection) {
-   replay_protection_ = replay_protection;
+   pimpl->replay_protection_is(replay_protection);
 }
-
-inline uint32_t
+uint32_t
 macsec_profile_t::replay_protection_window() const {
-   return replay_protection_window_;
+   return pimpl->replay_protection_window();
 }
-
-inline void
+void
 macsec_profile_t::replay_protection_window_is(uint32_t replay_protection_window) {
-   replay_protection_window_ = replay_protection_window;
+   pimpl->replay_protection_window_is(replay_protection_window);
 }
-
-inline bool
+bool
 macsec_profile_t::key_retirement_immediate() const {
-   return key_retirement_immediate_;
+   return pimpl->key_retirement_immediate();
 }
-
-inline void
+void
 macsec_profile_t::key_retirement_immediate_is(bool key_retirement_immediate) {
-   key_retirement_immediate_ = key_retirement_immediate;
+   pimpl->key_retirement_immediate_is(key_retirement_immediate);
 }
-
-inline std::forward_list<intf_id_t> const &
+std::forward_list<intf_id_t> const &
 macsec_profile_t::intfs() const {
-   return intfs_;
+   return pimpl->intfs();
 }
-
-inline bool
+bool
 macsec_profile_t::operator==(macsec_profile_t const & other) const {
-   return name_ == other.name_ &&
-          primary_key_ == other.primary_key_ &&
-          fallback_key_ == other.fallback_key_ &&
-          key_server_priority_ == other.key_server_priority_ &&
-          rekey_period_ == other.rekey_period_ &&
-          mka_life_time_ == other.mka_life_time_ &&
-          cipher_ == other.cipher_ &&
-          dot1x_ == other.dot1x_ &&
-          include_sci_ == other.include_sci_ &&
-          bypass_lldp_ == other.bypass_lldp_ &&
-          lldp_bypass_level_ == other.lldp_bypass_level_ &&
-          traffic_policy_ == other.traffic_policy_ &&
-          allow_unprotected_ == other.allow_unprotected_ &&
-          replay_protection_ == other.replay_protection_ &&
-          replay_protection_window_ == other.replay_protection_window_ &&
-          key_retirement_immediate_ == other.key_retirement_immediate_ &&
-          intfs_ == other.intfs_;
+   return pimpl->operator==(*other.pimpl);
 }
-
-inline bool
+bool
 macsec_profile_t::operator!=(macsec_profile_t const & other) const {
-   return !operator==(other);
+   return pimpl->operator!=(*other.pimpl);
 }
-
-inline bool
+bool
 macsec_profile_t::operator<(macsec_profile_t const & other) const {
-   if(name_ != other.name_) {
-      return name_ < other.name_;
-   } else if(primary_key_ != other.primary_key_) {
-      return primary_key_ < other.primary_key_;
-   } else if(fallback_key_ != other.fallback_key_) {
-      return fallback_key_ < other.fallback_key_;
-   } else if(key_server_priority_ != other.key_server_priority_) {
-      return key_server_priority_ < other.key_server_priority_;
-   } else if(rekey_period_ != other.rekey_period_) {
-      return rekey_period_ < other.rekey_period_;
-   } else if(mka_life_time_ != other.mka_life_time_) {
-      return mka_life_time_ < other.mka_life_time_;
-   } else if(cipher_ != other.cipher_) {
-      return cipher_ < other.cipher_;
-   } else if(dot1x_ != other.dot1x_) {
-      return dot1x_ < other.dot1x_;
-   } else if(include_sci_ != other.include_sci_) {
-      return include_sci_ < other.include_sci_;
-   } else if(bypass_lldp_ != other.bypass_lldp_) {
-      return bypass_lldp_ < other.bypass_lldp_;
-   } else if(lldp_bypass_level_ != other.lldp_bypass_level_) {
-      return lldp_bypass_level_ < other.lldp_bypass_level_;
-   } else if(traffic_policy_ != other.traffic_policy_) {
-      return traffic_policy_ < other.traffic_policy_;
-   } else if(allow_unprotected_ != other.allow_unprotected_) {
-      return allow_unprotected_ < other.allow_unprotected_;
-   } else if(replay_protection_ != other.replay_protection_) {
-      return replay_protection_ < other.replay_protection_;
-   } else if(replay_protection_window_ != other.replay_protection_window_) {
-      return replay_protection_window_ < other.replay_protection_window_;
-   } else if(key_retirement_immediate_ != other.key_retirement_immediate_) {
-      return key_retirement_immediate_ < other.key_retirement_immediate_;
-   } else if(intfs_ != other.intfs_) {
-      return intfs_ < other.intfs_;
-   }
-   return false;
+   return pimpl->operator<(*other.pimpl);
 }
-
-inline uint32_t
+uint32_t
 macsec_profile_t::hash() const {
-   hash_mix h;
-   mix_me(h);
-   return h.result();
+   return pimpl->hash();
 }
-
-inline void
+void
 macsec_profile_t::mix_me(hash_mix & h) const {
-   h.mix(name_); // macsec_profile_name_t
-   h.mix(primary_key_); // macsec_key_t
-   h.mix(fallback_key_); // macsec_key_t
-   h.mix(key_server_priority_); // uint8_t
-   h.mix(rekey_period_); // uint32_t
-   h.mix(mka_life_time_); // uint32_t
-   h.mix(cipher_); // macsec_cipher_suite_t
-   h.mix(dot1x_); // bool
-   h.mix(include_sci_); // bool
-   h.mix(bypass_lldp_); // bool
-   h.mix(lldp_bypass_level_); // macsec_bypass_t
-   h.mix(traffic_policy_); // macsec_profile_traffic_policy_t
-   h.mix(allow_unprotected_); // bool
-   h.mix(replay_protection_); // bool
-   h.mix(replay_protection_window_); // uint32_t
-   h.mix(key_retirement_immediate_); // bool
-   for (auto it=intfs_.cbegin(); it!=intfs_.cend(); ++it) {
-      h.mix(*it); // intf_id_t
-   }
+   pimpl->mix_me(h);
 }
-
-inline std::string
+std::string
 macsec_profile_t::to_string() const {
-   std::ostringstream ss;
-   ss << "macsec_profile_t(";
-   ss << "name=" << name_;
-   ss << ", primary_key=" << primary_key_;
-   ss << ", fallback_key=" << fallback_key_;
-   ss << ", key_server_priority=" << key_server_priority_;
-   ss << ", rekey_period=" << rekey_period_;
-   ss << ", mka_life_time=" << mka_life_time_;
-   ss << ", cipher=" << cipher_;
-   ss << ", dot1x=" << dot1x_;
-   ss << ", include_sci=" << include_sci_;
-   ss << ", bypass_lldp=" << bypass_lldp_;
-   ss << ", lldp_bypass_level=" << lldp_bypass_level_;
-   ss << ", traffic_policy=" << traffic_policy_;
-   ss << ", allow_unprotected=" << allow_unprotected_;
-   ss << ", replay_protection=" << replay_protection_;
-   ss << ", replay_protection_window=" << replay_protection_window_;
-   ss << ", key_retirement_immediate=" << key_retirement_immediate_;
-   ss << ", intfs=" <<"'";
-   bool first_intfs = true;
-   for (auto it=intfs_.cbegin(); it!=intfs_.cend(); ++it) {
-      if (first_intfs) {
-         ss << (*it);
-         first_intfs = false;
-      } else {
-         ss << "," << (*it);
-      }
-   }
-   ss << "'";
-   ss << ")";
-   return ss.str();
+   return pimpl->to_string();
 }
-
-inline std::ostream&
+std::ostream&
 operator<<(std::ostream& os, const macsec_profile_t& obj) {
-   os << obj.to_string();
-   return os;
+   return operator<<(os, *obj.pimpl);
 }
 
 
-
-inline macsec_intf_status_t::macsec_intf_status_t() :
-      status_(MACSEC_NO_PROFILE), key_status_(MACSEC_NO_PROFILE),
-      traffic_status_(MACSEC_TRAFFIC_BLOCKED) {
+macsec_intf_status_t::macsec_intf_status_t() {
+   pimpl = std::shared_ptr<macsec_intf_status_impl_t>(
+      new macsec_intf_status_impl_t()
+   );
+}
+macsec_intf_status_t::macsec_intf_status_t(
+   const macsec_intf_status_t& other)
+{
+   pimpl = std::make_unique<macsec_intf_status_impl_t>(
+      macsec_intf_status_impl_t(*other.pimpl));
+}
+macsec_intf_status_t&
+macsec_intf_status_t::operator=(
+   macsec_intf_status_t const & other)
+{
+   pimpl = std::shared_ptr<macsec_intf_status_impl_t>(
+      new macsec_intf_status_impl_t(*other.pimpl));
+   return *this;
 }
 
-inline macsec_intf_key_status_t
+macsec_intf_key_status_t
 macsec_intf_status_t::key_status() const {
-   return key_status_;
+   return pimpl->key_status();
 }
-
-inline macsec_intf_traffic_status_t
+macsec_intf_traffic_status_t
 macsec_intf_status_t::traffic_status() const {
-   return traffic_status_;
+   return pimpl->traffic_status();
 }
-
-inline void
+void
 macsec_intf_status_t::status_is(macsec_intf_key_status_t status) {
-   status_ = status;
+   pimpl->status_is(status);
 }
-
-inline macsec_intf_key_status_t
+macsec_intf_key_status_t
 macsec_intf_status_t::status() const {
-   return status_;
+   return pimpl->status();
 }
-
-inline bool
+bool
 macsec_intf_status_t::operator==(macsec_intf_status_t const & other) const {
-   return status_ == other.status_ &&
-          key_status_ == other.key_status_ &&
-          traffic_status_ == other.traffic_status_;
+   return pimpl->operator==(*other.pimpl);
 }
-
-inline bool
+bool
 macsec_intf_status_t::operator!=(macsec_intf_status_t const & other) const {
-   return !operator==(other);
+   return pimpl->operator!=(*other.pimpl);
 }
-
-inline bool
+bool
 macsec_intf_status_t::operator<(macsec_intf_status_t const & other) const {
-   if(status_ != other.status_) {
-      return status_ < other.status_;
-   } else if(key_status_ != other.key_status_) {
-      return key_status_ < other.key_status_;
-   } else if(traffic_status_ != other.traffic_status_) {
-      return traffic_status_ < other.traffic_status_;
-   }
-   return false;
+   return pimpl->operator<(*other.pimpl);
 }
-
-inline uint32_t
+uint32_t
 macsec_intf_status_t::hash() const {
-   hash_mix h;
-   mix_me(h);
-   return h.result();
+   return pimpl->hash();
 }
-
-inline void
+void
 macsec_intf_status_t::mix_me(hash_mix & h) const {
-   h.mix(status_); // macsec_intf_key_status_t
-   h.mix(key_status_); // macsec_intf_key_status_t
-   h.mix(traffic_status_); // macsec_intf_traffic_status_t
+   pimpl->mix_me(h);
 }
-
-inline std::string
+std::string
 macsec_intf_status_t::to_string() const {
-   std::ostringstream ss;
-   ss << "macsec_intf_status_t(";
-   ss << "status=" << status_;
-   ss << ", key_status=" << key_status_;
-   ss << ", traffic_status=" << traffic_status_;
-   ss << ")";
-   return ss.str();
+   return pimpl->to_string();
 }
-
-inline std::ostream&
+std::ostream&
 operator<<(std::ostream& os, const macsec_intf_status_t& obj) {
-   os << obj.to_string();
-   return os;
+   return operator<<(os, *obj.pimpl);
 }
 
 
-
-inline macsec_intf_counters_t::macsec_intf_counters_t() :
-      out_pkts_encrypted_(0), out_octets_encrypted_(0), in_pkts_decrypted_(0),
-      in_octets_decrypted_(0), in_pkts_not_valid_(0) {
+macsec_intf_counters_t::macsec_intf_counters_t() {
+   pimpl = std::shared_ptr<macsec_intf_counters_impl_t>(
+      new macsec_intf_counters_impl_t()
+   );
 }
-
-inline macsec_intf_counters_t::macsec_intf_counters_t(
+macsec_intf_counters_t::macsec_intf_counters_t(
          uint64_t out_pkts_encrypted, uint64_t out_octets_encrypted,
          uint64_t in_pkts_decrypted, uint64_t in_octets_decrypted,
-         uint64_t in_pkts_not_valid) :
-      out_pkts_encrypted_(out_pkts_encrypted),
-      out_octets_encrypted_(out_octets_encrypted),
-      in_pkts_decrypted_(in_pkts_decrypted),
-      in_octets_decrypted_(in_octets_decrypted),
-      in_pkts_not_valid_(in_pkts_not_valid) {
+         uint64_t in_pkts_not_valid) {
+   pimpl = std::shared_ptr<macsec_intf_counters_impl_t>(
+      new macsec_intf_counters_impl_t(
+         out_pkts_encrypted,
+         out_octets_encrypted,
+         in_pkts_decrypted,
+         in_octets_decrypted,
+         in_pkts_not_valid
+      )
+   );
+}
+macsec_intf_counters_t::macsec_intf_counters_t(
+   const macsec_intf_counters_t& other)
+{
+   pimpl = std::make_unique<macsec_intf_counters_impl_t>(
+      macsec_intf_counters_impl_t(*other.pimpl));
+}
+macsec_intf_counters_t&
+macsec_intf_counters_t::operator=(
+   macsec_intf_counters_t const & other)
+{
+   pimpl = std::shared_ptr<macsec_intf_counters_impl_t>(
+      new macsec_intf_counters_impl_t(*other.pimpl));
+   return *this;
 }
 
-inline uint64_t
+uint64_t
 macsec_intf_counters_t::out_pkts_encrypted() const {
-   return out_pkts_encrypted_;
+   return pimpl->out_pkts_encrypted();
 }
-
-inline uint64_t
+uint64_t
 macsec_intf_counters_t::out_octets_encrypted() const {
-   return out_octets_encrypted_;
+   return pimpl->out_octets_encrypted();
 }
-
-inline uint64_t
+uint64_t
 macsec_intf_counters_t::in_pkts_decrypted() const {
-   return in_pkts_decrypted_;
+   return pimpl->in_pkts_decrypted();
 }
-
-inline uint64_t
+uint64_t
 macsec_intf_counters_t::in_octets_decrypted() const {
-   return in_octets_decrypted_;
+   return pimpl->in_octets_decrypted();
 }
-
-inline uint64_t
+uint64_t
 macsec_intf_counters_t::in_pkts_not_valid() const {
-   return in_pkts_not_valid_;
+   return pimpl->in_pkts_not_valid();
 }
-
-inline bool
+bool
 macsec_intf_counters_t::operator==(macsec_intf_counters_t const & other) const {
-   return out_pkts_encrypted_ == other.out_pkts_encrypted_ &&
-          out_octets_encrypted_ == other.out_octets_encrypted_ &&
-          in_pkts_decrypted_ == other.in_pkts_decrypted_ &&
-          in_octets_decrypted_ == other.in_octets_decrypted_ &&
-          in_pkts_not_valid_ == other.in_pkts_not_valid_;
+   return pimpl->operator==(*other.pimpl);
 }
-
-inline bool
+bool
 macsec_intf_counters_t::operator!=(macsec_intf_counters_t const & other) const {
-   return !operator==(other);
+   return pimpl->operator!=(*other.pimpl);
 }
-
-inline bool
+bool
 macsec_intf_counters_t::operator<(macsec_intf_counters_t const & other) const {
-   if(out_pkts_encrypted_ != other.out_pkts_encrypted_) {
-      return out_pkts_encrypted_ < other.out_pkts_encrypted_;
-   } else if(out_octets_encrypted_ != other.out_octets_encrypted_) {
-      return out_octets_encrypted_ < other.out_octets_encrypted_;
-   } else if(in_pkts_decrypted_ != other.in_pkts_decrypted_) {
-      return in_pkts_decrypted_ < other.in_pkts_decrypted_;
-   } else if(in_octets_decrypted_ != other.in_octets_decrypted_) {
-      return in_octets_decrypted_ < other.in_octets_decrypted_;
-   } else if(in_pkts_not_valid_ != other.in_pkts_not_valid_) {
-      return in_pkts_not_valid_ < other.in_pkts_not_valid_;
-   }
-   return false;
+   return pimpl->operator<(*other.pimpl);
 }
-
-inline uint32_t
+uint32_t
 macsec_intf_counters_t::hash() const {
-   hash_mix h;
-   mix_me(h);
-   return h.result();
+   return pimpl->hash();
 }
-
-inline void
+void
 macsec_intf_counters_t::mix_me(hash_mix & h) const {
-   h.mix(out_pkts_encrypted_); // uint64_t
-   h.mix(out_octets_encrypted_); // uint64_t
-   h.mix(in_pkts_decrypted_); // uint64_t
-   h.mix(in_octets_decrypted_); // uint64_t
-   h.mix(in_pkts_not_valid_); // uint64_t
+   pimpl->mix_me(h);
 }
-
-inline std::string
+std::string
 macsec_intf_counters_t::to_string() const {
-   std::ostringstream ss;
-   ss << "macsec_intf_counters_t(";
-   ss << "out_pkts_encrypted=" << out_pkts_encrypted_;
-   ss << ", out_octets_encrypted=" << out_octets_encrypted_;
-   ss << ", in_pkts_decrypted=" << in_pkts_decrypted_;
-   ss << ", in_octets_decrypted=" << in_octets_decrypted_;
-   ss << ", in_pkts_not_valid=" << in_pkts_not_valid_;
-   ss << ")";
-   return ss.str();
+   return pimpl->to_string();
 }
-
-inline std::ostream&
+std::ostream&
 operator<<(std::ostream& os, const macsec_intf_counters_t& obj) {
-   os << obj.to_string();
-   return os;
+   return operator<<(os, *obj.pimpl);
 }
-
 
 }
 

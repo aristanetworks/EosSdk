@@ -123,13 +123,13 @@ STD_FORWARD_LIST(mpls_label_t)
       PyErr_SetString(PyExc_TypeError, "argument must be a dictionary");
       return NULL;
    }
-   std::map<eos::policy_map_hw_status_key_t, policy_map_status_t> *a =
+   std::map<eos::policy_map_hw_status_key_t, policy_map_status_t> *a = 
          new std::map<eos::policy_map_hw_status_key_t, eos::policy_map_status_t>();
    // Get hw status key and value
    Py_ssize_t pos = 0;
    PyObject *k;
    PyObject *v;
-   while(PyDict_Next(t, &pos, &k, &v)) {
+   while(PyDict_Next(t, &pos, &k, &v)) { 
       eos::policy_map_hw_status_key_t *k_c;
       if (SWIG_ConvertPtr(k, (void **)&k_c,
                SWIGTYPE_p_eos__policy_map_hw_status_key_t,
@@ -159,7 +159,7 @@ STD_FORWARD_LIST(mpls_label_t)
    for (it=a->cbegin(); it!=a->cend(); ++it) {
       PyObject *status_key = SWIG_NewPointerObj((void*)&(it->first),
                                          SWIGTYPE_p_eos__policy_map_hw_status_key_t, 0);
-      PyObject *st = PyInt_FromLong(it->second);
+      PyObject *st = PyInt_FromLong(it->second); 
       PyDict_SetItem(t, status_key, st);
    }
    $result = t;

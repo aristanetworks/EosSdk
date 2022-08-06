@@ -1,4 +1,4 @@
-// Copyright (c) 2021 Arista Networks, Inc.  All rights reserved.
+// Copyright (c) 2022 Arista Networks, Inc.  All rights reserved.
 // Arista Networks, Inc. Confidential and Proprietary.
 
 #ifndef EOS_TYPES_IP_ROUTE_H
@@ -10,6 +10,7 @@
 #include <eos/ip.h>
 #include <eos/mpls.h>
 #include <eos/utility.h>
+#include <memory>
 #include <sstream>
 
 namespace eos {
@@ -34,14 +35,20 @@ enum ip_route_action_t {
 /**
  * Appends a string representation of enum ip_route_action_t value to the ostream.
  */
-std::ostream& operator<<(std::ostream& os, const ip_route_action_t & enum_val);
+EOS_SDK_PUBLIC std::ostream& operator<<(std::ostream& os,
+                                        const ip_route_action_t & enum_val);
 
+class ip_route_key_impl_t;
 /** An IP route key, consisting of a prefix and preference. */
 class EOS_SDK_PUBLIC ip_route_key_t {
  public:
    ip_route_key_t();
    explicit ip_route_key_t(ip_prefix_t const & prefix);
    ip_route_key_t(ip_prefix_t const & prefix, ip_route_preference_t preference);
+   ip_route_key_t(const ip_route_key_t& other);
+   ip_route_key_t& operator=(
+      ip_route_key_t const & other);
+
 
    /** Getter for 'prefix': the IP v4/v6 network prefix. */
    ip_prefix_t prefix() const;
@@ -68,10 +75,13 @@ class EOS_SDK_PUBLIC ip_route_key_t {
    friend std::ostream& operator<<(std::ostream& os, const ip_route_key_t& obj);
 
  private:
-   ip_prefix_t prefix_;
-   ip_route_preference_t preference_;
+   std::shared_ptr<ip_route_key_impl_t> pimpl;
 };
 
+EOS_SDK_PUBLIC
+std::ostream& operator<<(std::ostream& os, const ip_route_key_t& obj);
+
+class ip_route_impl_t;
 /**
  * An IP v4/v6 static route.
  * "Via", or nexthops, for this route are stored separately and are associated by
@@ -82,6 +92,10 @@ class EOS_SDK_PUBLIC ip_route_t {
    ip_route_t();
    /** Creates an IP static route for the route key. */
    explicit ip_route_t(ip_route_key_t const & key);
+   ip_route_t(const ip_route_t& other);
+   ip_route_t& operator=(
+      ip_route_t const & other);
+
 
    /** Getter for 'key': the route's key. */
    ip_route_key_t key() const;
@@ -108,10 +122,13 @@ class EOS_SDK_PUBLIC ip_route_t {
    friend std::ostream& operator<<(std::ostream& os, const ip_route_t& obj);
 
  private:
-   ip_route_key_t key_;
-   ip_route_tag_t tag_;
+   std::shared_ptr<ip_route_impl_t> pimpl;
 };
 
+EOS_SDK_PUBLIC
+std::ostream& operator<<(std::ostream& os, const ip_route_t& obj);
+
+class ip_route_via_impl_t;
 /**
  * A Via describing a particular set of nexthop information. A Via can describe
  * either a nexthop group name to either forward traffic to, or drop traffic if the
@@ -122,6 +139,10 @@ class EOS_SDK_PUBLIC ip_route_via_t {
    ip_route_via_t();
    /** Creates a route via for a route key. */
    explicit ip_route_via_t(ip_route_key_t const & route_key);
+   ip_route_via_t(const ip_route_via_t& other);
+   ip_route_via_t& operator=(
+      ip_route_via_t const & other);
+
 
    /** Getter for 'route_key': key for the route that this via is attached to. */
    ip_route_key_t route_key() const;
@@ -203,19 +224,11 @@ class EOS_SDK_PUBLIC ip_route_via_t {
    friend std::ostream& operator<<(std::ostream& os, const ip_route_via_t& obj);
 
  private:
-   ip_route_key_t route_key_;
-   ip_addr_t hop_;
-   intf_id_t intf_;
-   std::string nexthop_group_;
-   mpls_label_t mpls_label_;
-   vni_t vni_;
-   ip_addr_t vtep_addr_;
-   eth_addr_t router_mac_;
-   std::string egress_vrf_;
-   ip_via_metric_t metric_;
+   std::shared_ptr<ip_route_via_impl_t> pimpl;
 };
-}
 
-#include <eos/inline/types/ip_route.h>
+EOS_SDK_PUBLIC
+std::ostream& operator<<(std::ostream& os, const ip_route_via_t& obj);
+}
 
 #endif // EOS_TYPES_IP_ROUTE_H

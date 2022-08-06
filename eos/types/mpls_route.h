@@ -1,4 +1,4 @@
-// Copyright (c) 2021 Arista Networks, Inc.  All rights reserved.
+// Copyright (c) 2022 Arista Networks, Inc.  All rights reserved.
 // Arista Networks, Inc. Confidential and Proprietary.
 
 #ifndef EOS_TYPES_MPLS_ROUTE_H
@@ -9,6 +9,7 @@
 #include <eos/ip.h>
 #include <eos/mpls.h>
 #include <eos/utility.h>
+#include <memory>
 #include <sstream>
 #include <vector>
 
@@ -17,6 +18,7 @@ namespace eos {
 /** 1..255; default/null is 0. */
 typedef uint8_t mpls_route_metric_t;
 
+class mpls_route_key_impl_t;
 /** An MPLS route key is used for MPLS RIB configuration. */
 class EOS_SDK_PUBLIC mpls_route_key_t {
  public:
@@ -37,6 +39,10 @@ class EOS_SDK_PUBLIC mpls_route_key_t {
     */
    mpls_route_key_t(std::vector<mpls_label_t> const & labels,
                     mpls_route_metric_t metric);
+   mpls_route_key_t(const mpls_route_key_t& other);
+   mpls_route_key_t& operator=(
+      mpls_route_key_t const & other);
+
 
    /**
     * Getter for 'labels': a list of labels ( [ TOP, ..., BOT ] ) to match on
@@ -83,10 +89,13 @@ class EOS_SDK_PUBLIC mpls_route_key_t {
    friend std::ostream& operator<<(std::ostream& os, const mpls_route_key_t& obj);
 
  private:
-   std::vector<mpls_label_t> labels_;
-   mpls_route_metric_t metric_;
+   std::shared_ptr<mpls_route_key_impl_t> pimpl;
 };
 
+EOS_SDK_PUBLIC
+std::ostream& operator<<(std::ostream& os, const mpls_route_key_t& obj);
+
+class mpls_route_impl_t;
 /** An MPLS v4/v6 static route. */
 class EOS_SDK_PUBLIC mpls_route_t {
  public:
@@ -94,6 +103,10 @@ class EOS_SDK_PUBLIC mpls_route_t {
    mpls_route_t();
    /** MPLS route constructor taking an MPLS route key. */
    explicit mpls_route_t(mpls_route_key_t key);
+   mpls_route_t(const mpls_route_t& other);
+   mpls_route_t& operator=(
+      mpls_route_t const & other);
+
 
    /** Getter for 'key': the MPLS route key. */
    mpls_route_key_t key() const;
@@ -115,9 +128,13 @@ class EOS_SDK_PUBLIC mpls_route_t {
    friend std::ostream& operator<<(std::ostream& os, const mpls_route_t& obj);
 
  private:
-   mpls_route_key_t key_;
+   std::shared_ptr<mpls_route_impl_t> pimpl;
 };
 
+EOS_SDK_PUBLIC
+std::ostream& operator<<(std::ostream& os, const mpls_route_t& obj);
+
+class mpls_route_via_impl_t;
 /** An MPLS route via, defining the action to take for a given MPLS route. */
 class EOS_SDK_PUBLIC mpls_route_via_t {
  public:
@@ -125,6 +142,10 @@ class EOS_SDK_PUBLIC mpls_route_via_t {
    explicit mpls_route_via_t(mpls_route_key_t route_key);
    explicit mpls_route_via_t(mpls_route_key_t route_key,
                              mpls_action_t label_action);
+   mpls_route_via_t(const mpls_route_via_t& other);
+   mpls_route_via_t& operator=(
+      mpls_route_via_t const & other);
+
 
    mpls_route_key_t route_key() const;
    void route_key_is(mpls_route_key_t route_key);
@@ -193,17 +214,13 @@ class EOS_SDK_PUBLIC mpls_route_via_t {
    friend std::ostream& operator<<(std::ostream& os, const mpls_route_via_t& obj);
 
  private:
-   mpls_route_key_t route_key_;
-   ip_addr_t hop_;
-   intf_id_t intf_;
-   mpls_label_t pushswap_label_;
-   mpls_action_t label_action_;
-   mpls_ttl_mode_t ttl_mode_;
-   mpls_payload_type_t payload_type_;
-   bool skip_egress_acl_;
-   std::string nexthop_group_;
+   std::shared_ptr<mpls_route_via_impl_t> pimpl;
 };
 
+EOS_SDK_PUBLIC
+std::ostream& operator<<(std::ostream& os, const mpls_route_via_t& obj);
+
+class mpls_fec_id_impl_t;
 /**
  * Represents a forward equivalency class (FEC) for an MPLS route. One or more
  * routes points to a FEC, and the FEC corresponds to a
@@ -213,6 +230,10 @@ class EOS_SDK_PUBLIC mpls_fec_id_t {
  public:
    mpls_fec_id_t();
    explicit mpls_fec_id_t(uint64_t id);
+   mpls_fec_id_t(const mpls_fec_id_t& other);
+   mpls_fec_id_t& operator=(
+      mpls_fec_id_t const & other);
+
 
    /**
     * Getter for 'id': the internal ID of this FEC.
@@ -238,10 +259,11 @@ class EOS_SDK_PUBLIC mpls_fec_id_t {
    friend std::ostream& operator<<(std::ostream& os, const mpls_fec_id_t& obj);
 
  private:
-   uint64_t id_;
+   std::shared_ptr<mpls_fec_id_impl_t> pimpl;
 };
-}
 
-#include <eos/inline/types/mpls_route.h>
+EOS_SDK_PUBLIC
+std::ostream& operator<<(std::ostream& os, const mpls_fec_id_t& obj);
+}
 
 #endif // EOS_TYPES_MPLS_ROUTE_H

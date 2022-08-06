@@ -1,4 +1,4 @@
-// Copyright (c) 2020 Arista Networks, Inc.  All rights reserved.
+// Copyright (c) 2022 Arista Networks, Inc.  All rights reserved.
 // Arista Networks, Inc. Confidential and Proprietary.
 
 #ifndef EOS_TYPES_HARDWARE_TABLE_H
@@ -6,10 +6,12 @@
 
 #include <eos/hash_mix.h>
 #include <eos/utility.h>
+#include <memory>
 #include <sstream>
 
 namespace eos {
 
+class hardware_table_key_impl_t;
 /** The unique identifier for a hardware table. */
 class EOS_SDK_PUBLIC hardware_table_key_t {
  public:
@@ -19,6 +21,10 @@ class EOS_SDK_PUBLIC hardware_table_key_t {
    hardware_table_key_t(std::string const & table_name,
                         std::string const & feature);
    explicit hardware_table_key_t(std::string const & table_name);
+   hardware_table_key_t(const hardware_table_key_t& other);
+   hardware_table_key_t& operator=(
+      hardware_table_key_t const & other);
+
 
    /**
     * Getter for 'table_name': the name of the hardware resource. For example, this
@@ -55,16 +61,22 @@ class EOS_SDK_PUBLIC hardware_table_key_t {
                                    const hardware_table_key_t& obj);
 
  private:
-   std::string table_name_;
-   std::string feature_;
-   std::string chip_;
+   std::shared_ptr<hardware_table_key_impl_t> pimpl;
 };
 
+EOS_SDK_PUBLIC
+std::ostream& operator<<(std::ostream& os, const hardware_table_key_t& obj);
+
+class hardware_table_high_watermark_impl_t;
 /** The compound high watermark statistics. */
 class EOS_SDK_PUBLIC hardware_table_high_watermark_t {
  public:
    hardware_table_high_watermark_t();
    hardware_table_high_watermark_t(uint32_t max_entries, time_t timestamp);
+   hardware_table_high_watermark_t(const hardware_table_high_watermark_t& other);
+   hardware_table_high_watermark_t& operator=(
+      hardware_table_high_watermark_t const & other);
+
 
    /** Getter for 'max_entries': the maximum number of entries used so far. */
    uint32_t max_entries() const;
@@ -89,16 +101,24 @@ class EOS_SDK_PUBLIC hardware_table_high_watermark_t {
                                    const hardware_table_high_watermark_t& obj);
 
  private:
-   uint32_t max_entries_;
-   time_t timestamp_;
+   std::shared_ptr<hardware_table_high_watermark_impl_t> pimpl;
 };
 
+EOS_SDK_PUBLIC
+std::ostream& operator<<(std::ostream& os,
+                         const hardware_table_high_watermark_t& obj);
+
+class hardware_table_usage_impl_t;
 /** The usage statistics for a given table (or partition of a table). */
 class EOS_SDK_PUBLIC hardware_table_usage_t {
  public:
    hardware_table_usage_t();
    hardware_table_usage_t(uint32_t used_entries, uint32_t free_entries,
                           uint32_t committed_entries);
+   hardware_table_usage_t(const hardware_table_usage_t& other);
+   hardware_table_usage_t& operator=(
+      hardware_table_usage_t const & other);
+
 
    /**
     * Getter for 'used_entries': number of entries used by this feature on this
@@ -137,11 +157,13 @@ class EOS_SDK_PUBLIC hardware_table_usage_t {
                                    const hardware_table_usage_t& obj);
 
  private:
-   uint32_t used_entries_;
-   uint32_t free_entries_;
-   uint32_t committed_entries_;
+   std::shared_ptr<hardware_table_usage_impl_t> pimpl;
 };
 
+EOS_SDK_PUBLIC
+std::ostream& operator<<(std::ostream& os, const hardware_table_usage_t& obj);
+
+class hardware_table_entry_impl_t;
 /** The hardware table entry for a given table key. */
 class EOS_SDK_PUBLIC hardware_table_entry_t {
  public:
@@ -149,6 +171,10 @@ class EOS_SDK_PUBLIC hardware_table_entry_t {
    hardware_table_entry_t(hardware_table_usage_t const & usage,
                           uint32_t max_entries,
                           hardware_table_high_watermark_t const & high_watermark);
+   hardware_table_entry_t(const hardware_table_entry_t& other);
+   hardware_table_entry_t& operator=(
+      hardware_table_entry_t const & other);
+
 
    /** Getter for 'usage': the compound usage statistics. */
    hardware_table_usage_t usage() const;
@@ -179,12 +205,11 @@ class EOS_SDK_PUBLIC hardware_table_entry_t {
                                    const hardware_table_entry_t& obj);
 
  private:
-   hardware_table_usage_t usage_;
-   uint32_t max_entries_;
-   hardware_table_high_watermark_t high_watermark_;
+   std::shared_ptr<hardware_table_entry_impl_t> pimpl;
 };
-}
 
-#include <eos/inline/types/hardware_table.h>
+EOS_SDK_PUBLIC
+std::ostream& operator<<(std::ostream& os, const hardware_table_entry_t& obj);
+}
 
 #endif // EOS_TYPES_HARDWARE_TABLE_H

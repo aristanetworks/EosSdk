@@ -1,4 +1,4 @@
-// Copyright (c) 2020 Arista Networks, Inc.  All rights reserved.
+// Copyright (c) 2022 Arista Networks, Inc.  All rights reserved.
 // Arista Networks, Inc. Confidential and Proprietary.
 
 #ifndef EOS_TYPES_SUBINTF_H
@@ -8,15 +8,21 @@
 #include <eos/types/eth.h>
 #include <eos/types/intf.h>
 #include <eos/utility.h>
+#include <memory>
 #include <sstream>
 
 namespace eos {
 
+class subintf_impl_t;
 /** This data structure defines a subinterface. */
 class EOS_SDK_PUBLIC subintf_t {
  public:
    subintf_t();
    subintf_t(intf_id_t intf_id, vlan_id_t vlan_id);
+   subintf_t(const subintf_t& other);
+   subintf_t& operator=(
+      subintf_t const & other);
+
 
    /** Getter for 'intf_id': the interface ID of this subinterface. */
    intf_id_t intf_id() const;
@@ -41,11 +47,11 @@ class EOS_SDK_PUBLIC subintf_t {
    friend std::ostream& operator<<(std::ostream& os, const subintf_t& obj);
 
  private:
-   intf_id_t intf_id_;
-   vlan_id_t vlan_id_;
+   std::shared_ptr<subintf_impl_t> pimpl;
 };
-}
 
-#include <eos/inline/types/subintf.h>
+EOS_SDK_PUBLIC
+std::ostream& operator<<(std::ostream& os, const subintf_t& obj);
+}
 
 #endif // EOS_TYPES_SUBINTF_H

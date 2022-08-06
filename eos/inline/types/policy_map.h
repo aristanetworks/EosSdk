@@ -1,4 +1,4 @@
-// Copyright (c) 2021 Arista Networks, Inc.  All rights reserved.
+// Copyright (c) 2022 Arista Networks, Inc.  All rights reserved.
 // Arista Networks, Inc. Confidential and Proprietary.
 
 #ifndef EOS_INLINE_TYPES_POLICY_MAP_H
@@ -6,7 +6,7 @@
 
 namespace eos {
 
-inline std::ostream&
+EOS_SDK_PUBLIC std::ostream&
 operator<<(std::ostream& os, const policy_match_condition_t & enum_val) {
    if (enum_val==POLICY_MAP_CONDITION_NULL) {
       os << "POLICY_MAP_CONDITION_NULL";
@@ -19,8 +19,7 @@ operator<<(std::ostream& os, const policy_match_condition_t & enum_val) {
 }
 
 
-
-inline std::ostream&
+EOS_SDK_PUBLIC std::ostream&
 operator<<(std::ostream& os, const policy_feature_t & enum_val) {
    if (enum_val==POLICY_FEATURE_NULL) {
       os << "POLICY_FEATURE_NULL";
@@ -37,8 +36,7 @@ operator<<(std::ostream& os, const policy_feature_t & enum_val) {
 }
 
 
-
-inline std::ostream&
+EOS_SDK_PUBLIC std::ostream&
 operator<<(std::ostream& os, const policy_action_type_t & enum_val) {
    if (enum_val==POLICY_ACTION_NULL) {
       os << "POLICY_ACTION_NULL";
@@ -61,8 +59,7 @@ operator<<(std::ostream& os, const policy_action_type_t & enum_val) {
 }
 
 
-
-inline std::ostream&
+EOS_SDK_PUBLIC std::ostream&
 operator<<(std::ostream& os, const policy_map_rule_type_t & enum_val) {
    if (enum_val==POLICY_RULE_TYPE_CLASSMAP) {
       os << "POLICY_RULE_TYPE_CLASSMAP";
@@ -77,538 +74,422 @@ operator<<(std::ostream& os, const policy_map_rule_type_t & enum_val) {
 }
 
 
-
-inline policy_map_key_t::policy_map_key_t() :
-      name_(), feature_() {
+policy_map_key_t::policy_map_key_t() {
+   pimpl = std::shared_ptr<policy_map_key_impl_t>(
+      new policy_map_key_impl_t()
+   );
+}
+policy_map_key_t::policy_map_key_t(std::string const & name,
+                                          policy_feature_t feature) {
+   pimpl = std::shared_ptr<policy_map_key_impl_t>(
+      new policy_map_key_impl_t(
+         name,
+         feature
+      )
+   );
+}
+policy_map_key_t::policy_map_key_t(
+   const policy_map_key_t& other)
+{
+   pimpl = std::make_unique<policy_map_key_impl_t>(
+      policy_map_key_impl_t(*other.pimpl));
+}
+policy_map_key_t&
+policy_map_key_t::operator=(
+   policy_map_key_t const & other)
+{
+   pimpl = std::shared_ptr<policy_map_key_impl_t>(
+      new policy_map_key_impl_t(*other.pimpl));
+   return *this;
 }
 
-inline policy_map_key_t::policy_map_key_t(std::string const & name,
-                                          policy_feature_t feature) :
-      name_(name), feature_(feature) {
-}
-
-inline std::string
+std::string
 policy_map_key_t::name() const {
-   return name_;
+   return pimpl->name();
 }
-
-inline void
+void
 policy_map_key_t::name_is(std::string const & name) {
-   name_ = name;
+   pimpl->name_is(name);
 }
-
-inline policy_feature_t
+policy_feature_t
 policy_map_key_t::feature() const {
-   return feature_;
+   return pimpl->feature();
 }
-
-inline void
+void
 policy_map_key_t::feature_is(policy_feature_t feature) {
-   feature_ = feature;
+   pimpl->feature_is(feature);
 }
-
-inline bool
+bool
 policy_map_key_t::operator==(policy_map_key_t const & other) const {
-   return name_ == other.name_ &&
-          feature_ == other.feature_;
+   return pimpl->operator==(*other.pimpl);
 }
-
-inline bool
+bool
 policy_map_key_t::operator!=(policy_map_key_t const & other) const {
-   return !operator==(other);
+   return pimpl->operator!=(*other.pimpl);
 }
-
-inline bool
+bool
 policy_map_key_t::operator<(policy_map_key_t const & other) const {
-   if(name_ != other.name_) {
-      return name_ < other.name_;
-   } else if(feature_ != other.feature_) {
-      return feature_ < other.feature_;
-   }
-   return false;
+   return pimpl->operator<(*other.pimpl);
 }
-
-inline uint32_t
+uint32_t
 policy_map_key_t::hash() const {
-   hash_mix h;
-   mix_me(h);
-   return h.result();
+   return pimpl->hash();
 }
-
-inline void
+void
 policy_map_key_t::mix_me(hash_mix & h) const {
-   h.mix(name_); // std::string
-   h.mix(feature_); // policy_feature_t
+   pimpl->mix_me(h);
 }
-
-inline std::string
+std::string
 policy_map_key_t::to_string() const {
-   std::ostringstream ss;
-   ss << "policy_map_key_t(";
-   ss << "name='" << name_ << "'";
-   ss << ", feature=" << feature_;
-   ss << ")";
-   return ss.str();
+   return pimpl->to_string();
 }
-
-inline std::ostream&
+std::ostream&
 operator<<(std::ostream& os, const policy_map_key_t& obj) {
-   os << obj.to_string();
-   return os;
+   return operator<<(os, *obj.pimpl);
 }
-
 
 
 // Default constructor.
-inline policy_map_action_t::policy_map_action_t() :
-      action_type_(), nexthop_group_name_(), nexthops_(), vrf_(), dscp_(),
-      traffic_class_() {
+policy_map_action_t::policy_map_action_t() {
+   pimpl = std::shared_ptr<policy_map_action_impl_t>(
+      new policy_map_action_impl_t()
+   );
+}
+policy_map_action_t::policy_map_action_t(policy_action_type_t action_type) {
+   pimpl = std::shared_ptr<policy_map_action_impl_t>(
+      new policy_map_action_impl_t(
+         action_type
+      )
+   );
+}
+policy_map_action_t::policy_map_action_t(
+   const policy_map_action_t& other)
+{
+   pimpl = std::make_unique<policy_map_action_impl_t>(
+      policy_map_action_impl_t(*other.pimpl));
+}
+policy_map_action_t&
+policy_map_action_t::operator=(
+   policy_map_action_t const & other)
+{
+   pimpl = std::shared_ptr<policy_map_action_impl_t>(
+      new policy_map_action_impl_t(*other.pimpl));
+   return *this;
 }
 
-inline policy_map_action_t::policy_map_action_t(policy_action_type_t action_type) :
-      action_type_(action_type), nexthop_group_name_(), nexthops_(), vrf_(),
-      dscp_(), traffic_class_() {
-}
 
-inline
 policy_map_action_t::~policy_map_action_t() {
 
 }
-
-inline policy_action_type_t
+policy_action_type_t
 policy_map_action_t::action_type() const {
-   return action_type_;
+   return pimpl->action_type();
 }
-
-inline void
+void
 policy_map_action_t::action_type_is(policy_action_type_t action_type) {
-   action_type_ = action_type;
+   pimpl->action_type_is(action_type);
 }
-
-inline std::string
+std::string
 policy_map_action_t::nexthop_group_name() const {
-   return nexthop_group_name_;
+   return pimpl->nexthop_group_name();
 }
-
-inline void
+void
 policy_map_action_t::nexthop_group_name_is(std::string const & nexthop_group_name) {
-   nexthop_group_name_ = nexthop_group_name;
+   pimpl->nexthop_group_name_is(nexthop_group_name);
 }
-
-inline std::unordered_set<ip_addr_t> const &
+std::unordered_set<ip_addr_t> const &
 policy_map_action_t::nexthops() const {
-   return nexthops_;
+   return pimpl->nexthops();
 }
-
-inline void
+void
 policy_map_action_t::nexthops_is(std::unordered_set<ip_addr_t> const & nexthops) {
-   nexthops_ = nexthops;
+   pimpl->nexthops_is(nexthops);
 }
-
-inline void
+void
 policy_map_action_t::nexthop_set(ip_addr_t const & value) {
-   nexthops_.insert(value);
+   pimpl->nexthop_set(value);
 }
-
-inline void
+void
 policy_map_action_t::nexthop_del(ip_addr_t const & value) {
-   nexthops_.erase(value);
+   pimpl->nexthop_del(value);
 }
-
-inline std::string
+std::string
 policy_map_action_t::vrf() const {
-   return vrf_;
+   return pimpl->vrf();
 }
-
-inline void
+void
 policy_map_action_t::vrf_is(std::string const & vrf) {
-   vrf_ = vrf;
+   pimpl->vrf_is(vrf);
 }
-
-inline uint8_t
+uint8_t
 policy_map_action_t::dscp() const {
-   return dscp_;
+   return pimpl->dscp();
 }
-
-inline void
+void
 policy_map_action_t::dscp_is(uint8_t dscp) {
-   dscp_ = dscp;
+   pimpl->dscp_is(dscp);
 }
-
-inline uint8_t
+uint8_t
 policy_map_action_t::traffic_class() const {
-   return traffic_class_;
+   return pimpl->traffic_class();
 }
-
-inline void
+void
 policy_map_action_t::traffic_class_is(uint8_t traffic_class) {
-   traffic_class_ = traffic_class;
+   pimpl->traffic_class_is(traffic_class);
 }
-
-inline bool
+bool
 policy_map_action_t::operator==(policy_map_action_t const & other) const {
-   return action_type_ == other.action_type_ &&
-          nexthop_group_name_ == other.nexthop_group_name_ &&
-          nexthops_ == other.nexthops_ &&
-          vrf_ == other.vrf_ &&
-          dscp_ == other.dscp_ &&
-          traffic_class_ == other.traffic_class_;
+   return pimpl->operator==(*other.pimpl);
 }
-
-inline bool
+bool
 policy_map_action_t::operator!=(policy_map_action_t const & other) const {
-   return !operator==(other);
+   return pimpl->operator!=(*other.pimpl);
 }
-
-inline bool
+bool
 policy_map_action_t::operator<(policy_map_action_t const & other) const {
-   if(action_type_ != other.action_type_) {
-      return action_type_ < other.action_type_;
-   } else if(nexthop_group_name_ != other.nexthop_group_name_) {
-      return nexthop_group_name_ < other.nexthop_group_name_;
-   } else if(vrf_ != other.vrf_) {
-      return vrf_ < other.vrf_;
-   } else if(dscp_ != other.dscp_) {
-      return dscp_ < other.dscp_;
-   } else if(traffic_class_ != other.traffic_class_) {
-      return traffic_class_ < other.traffic_class_;
-   }
-   return false;
+   return pimpl->operator<(*other.pimpl);
 }
-
-inline uint32_t
+uint32_t
 policy_map_action_t::hash() const {
-   hash_mix h;
-   mix_me(h);
-   return h.result();
+   return pimpl->hash();
 }
-
-inline void
+void
 policy_map_action_t::mix_me(hash_mix & h) const {
-   h.mix(action_type_); // policy_action_type_t
-   h.mix(nexthop_group_name_); // std::string
-   for (auto it=nexthops_.cbegin(); it!=nexthops_.cend(); ++it) {
-      h.mix(*it); // ip_addr_t
-   }
-   h.mix(vrf_); // std::string
-   h.mix(dscp_); // uint8_t
-   h.mix(traffic_class_); // uint8_t
+   pimpl->mix_me(h);
 }
-
-inline std::string
+std::string
 policy_map_action_t::to_string() const {
-   std::ostringstream ss;
-   ss << "policy_map_action_t(";
-   ss << "action_type=" << action_type_;
-   ss << ", nexthop_group_name='" << nexthop_group_name_ << "'";
-   ss << ", nexthops=" <<"'";
-   bool first_nexthops = true;
-   for (auto it=nexthops_.cbegin(); it!=nexthops_.cend(); ++it) {
-      if (first_nexthops) {
-         ss << (*it);
-         first_nexthops = false;
-      } else {
-         ss << "," << (*it);
-      }
-   }
-   ss << "'";
-   ss << ", vrf='" << vrf_ << "'";
-   ss << ", dscp=" << dscp_;
-   ss << ", traffic_class=" << traffic_class_;
-   ss << ")";
-   return ss.str();
+   return pimpl->to_string();
 }
-
-inline std::ostream&
+std::ostream&
 operator<<(std::ostream& os, const policy_map_action_t& obj) {
-   os << obj.to_string();
-   return os;
+   return operator<<(os, *obj.pimpl);
 }
 
 
-
-inline policy_map_rule_t::policy_map_rule_t() :
-      class_map_key_(), policy_map_rule_type_(POLICY_RULE_TYPE_CLASSMAP),
-      raw_rule_(), actions_() {
+policy_map_rule_t::policy_map_rule_t() {
+   pimpl = std::shared_ptr<policy_map_rule_impl_t>(
+      new policy_map_rule_impl_t()
+   );
+}
+policy_map_rule_t::policy_map_rule_t(class_map_key_t const & class_map_key) {
+   pimpl = std::shared_ptr<policy_map_rule_impl_t>(
+      new policy_map_rule_impl_t(
+         class_map_key
+      )
+   );
+}
+policy_map_rule_t::policy_map_rule_t(
+   const policy_map_rule_t& other)
+{
+   pimpl = std::make_unique<policy_map_rule_impl_t>(
+      policy_map_rule_impl_t(*other.pimpl));
+}
+policy_map_rule_t&
+policy_map_rule_t::operator=(
+   policy_map_rule_t const & other)
+{
+   pimpl = std::shared_ptr<policy_map_rule_impl_t>(
+      new policy_map_rule_impl_t(*other.pimpl));
+   return *this;
 }
 
-inline policy_map_rule_t::policy_map_rule_t(class_map_key_t const & class_map_key) :
-      class_map_key_(class_map_key),
-      policy_map_rule_type_(POLICY_RULE_TYPE_CLASSMAP), raw_rule_(), actions_() {
-}
-
-inline class_map_key_t
+class_map_key_t
 policy_map_rule_t::class_map_key() const {
-   return class_map_key_;
+   return pimpl->class_map_key();
 }
-
-inline void
+void
 policy_map_rule_t::class_map_key_is(class_map_key_t const & class_map_key) {
-   class_map_key_ = class_map_key;
+   pimpl->class_map_key_is(class_map_key);
 }
-
-inline policy_map_rule_type_t
+policy_map_rule_type_t
 policy_map_rule_t::policy_map_rule_type() const {
-   return policy_map_rule_type_;
+   return pimpl->policy_map_rule_type();
 }
-
-inline void
+void
 policy_map_rule_t::policy_map_rule_type_is(
          policy_map_rule_type_t policy_map_rule_type) {
-   policy_map_rule_type_ = policy_map_rule_type;
+   pimpl->policy_map_rule_type_is(policy_map_rule_type);
 }
-
-inline acl_rule_ip_t
+acl_rule_ip_t
 policy_map_rule_t::raw_rule() const {
-   return raw_rule_;
+   return pimpl->raw_rule();
 }
-
-inline void
+void
 policy_map_rule_t::raw_rule_is(acl_rule_ip_t raw_rule) {
-   raw_rule_ = raw_rule;
+   pimpl->raw_rule_is(raw_rule);
 }
-
-inline std::set<policy_map_action_t> const &
+std::set<policy_map_action_t> const &
 policy_map_rule_t::actions() const {
-   return actions_;
+   return pimpl->actions();
 }
-
-inline void
+void
 policy_map_rule_t::actions_is(std::set<policy_map_action_t> const & actions) {
-   actions_ = actions;
+   pimpl->actions_is(actions);
 }
-
-inline void
+void
 policy_map_rule_t::action_set(policy_map_action_t const & value) {
-   actions_.insert(value);
+   pimpl->action_set(value);
 }
-
-inline void
+void
 policy_map_rule_t::action_del(policy_map_action_t const & value) {
-   actions_.erase(value);
+   pimpl->action_del(value);
 }
-
-inline void
+void
 policy_map_rule_t::action_del(policy_action_type_t action_type) {
-   auto act = actions_.begin();
-   while(act != actions_.end()) {
-      if(act->action_type() == action_type) {
-         act = actions_.erase(act);
-      } else {
-         ++act;
-      }
-   }
+   pimpl->action_del(action_type);
 }
-
-inline void
+void
 policy_map_rule_t::raw_rule_is(acl_rule_ip_t acl_rule,
                                policy_map_rule_type_t rule_type) {
-   policy_map_rule_type_is(rule_type);
-   raw_rule_is(acl_rule);
+   pimpl->raw_rule_is(acl_rule, rule_type);
 }
-
-inline bool
+bool
 policy_map_rule_t::operator==(policy_map_rule_t const & other) const {
-   return class_map_key_ == other.class_map_key_ &&
-          policy_map_rule_type_ == other.policy_map_rule_type_ &&
-          raw_rule_ == other.raw_rule_ &&
-          actions_ == other.actions_;
+   return pimpl->operator==(*other.pimpl);
 }
-
-inline bool
+bool
 policy_map_rule_t::operator!=(policy_map_rule_t const & other) const {
-   return !operator==(other);
+   return pimpl->operator!=(*other.pimpl);
 }
-
-inline bool
+bool
 policy_map_rule_t::operator<(policy_map_rule_t const & other) const {
-   if(class_map_key_ != other.class_map_key_) {
-      return class_map_key_ < other.class_map_key_;
-   } else if(policy_map_rule_type_ != other.policy_map_rule_type_) {
-      return policy_map_rule_type_ < other.policy_map_rule_type_;
-   } else if(raw_rule_ != other.raw_rule_) {
-      return raw_rule_ < other.raw_rule_;
-   } else if(actions_ != other.actions_) {
-      return actions_ < other.actions_;
-   }
-   return false;
+   return pimpl->operator<(*other.pimpl);
 }
-
-inline uint32_t
+uint32_t
 policy_map_rule_t::hash() const {
-   hash_mix h;
-   mix_me(h);
-   return h.result();
+   return pimpl->hash();
 }
-
-inline void
+void
 policy_map_rule_t::mix_me(hash_mix & h) const {
-   h.mix(class_map_key_); // class_map_key_t
-   h.mix(policy_map_rule_type_); // policy_map_rule_type_t
-   h.mix(raw_rule_); // acl_rule_ip_t
-   for (auto it=actions_.cbegin(); it!=actions_.cend(); ++it) {
-      h.mix(*it); // policy_map_action_t
-   }
+   pimpl->mix_me(h);
 }
-
-inline std::string
+std::string
 policy_map_rule_t::to_string() const {
-   std::ostringstream ss;
-   ss << "policy_map_rule_t(";
-   ss << "class_map_key=" << class_map_key_;
-   ss << ", policy_map_rule_type=" << policy_map_rule_type_;
-   ss << ", raw_rule=" << raw_rule_;
-   ss << ", actions=" <<"'";
-   bool first_actions = true;
-   for (auto it=actions_.cbegin(); it!=actions_.cend(); ++it) {
-      if (first_actions) {
-         ss << (*it);
-         first_actions = false;
-      } else {
-         ss << "," << (*it);
-      }
-   }
-   ss << "'";
-   ss << ")";
-   return ss.str();
+   return pimpl->to_string();
 }
-
-inline std::ostream&
+std::ostream&
 operator<<(std::ostream& os, const policy_map_rule_t& obj) {
-   os << obj.to_string();
-   return os;
+   return operator<<(os, *obj.pimpl);
 }
 
 
-
-inline policy_map_t::policy_map_t() :
-      key_(), rules_() {
+policy_map_t::policy_map_t() {
+   pimpl = std::shared_ptr<policy_map_impl_t>(
+      new policy_map_impl_t()
+   );
+}
+policy_map_t::policy_map_t(policy_map_key_t const & key) {
+   pimpl = std::shared_ptr<policy_map_impl_t>(
+      new policy_map_impl_t(
+         key
+      )
+   );
+}
+policy_map_t::policy_map_t(
+   const policy_map_t& other)
+{
+   pimpl = std::make_unique<policy_map_impl_t>(
+      policy_map_impl_t(*other.pimpl));
+}
+policy_map_t&
+policy_map_t::operator=(
+   policy_map_t const & other)
+{
+   pimpl = std::shared_ptr<policy_map_impl_t>(
+      new policy_map_impl_t(*other.pimpl));
+   return *this;
 }
 
-inline policy_map_t::policy_map_t(policy_map_key_t const & key) :
-      key_(key), rules_() {
-}
-
-inline policy_map_key_t
+policy_map_key_t
 policy_map_t::key() const {
-   return key_;
+   return pimpl->key();
 }
-
-inline void
+void
 policy_map_t::key_is(policy_map_key_t const & key) {
-   key_ = key;
+   pimpl->key_is(key);
 }
-
-inline std::map<uint32_t, policy_map_rule_t> const &
+std::map<uint32_t, policy_map_rule_t> const &
 policy_map_t::rules() const {
-   return rules_;
+   return pimpl->rules();
 }
-
-inline void
+void
+policy_map_t::rules_is(std::map<uint32_t, policy_map_rule_t> const & rules) {
+   pimpl->rules_is(rules);
+}
+void
+policy_map_t::rule_set(uint32_t key, policy_map_rule_t const & value) {
+   pimpl->rule_set(key, value);
+}
+void
 policy_map_t::rule_del(uint32_t key) {
-   rules_.erase(key);
+   pimpl->rule_del(key);
 }
-
-inline bool
+bool
 policy_map_t::operator==(policy_map_t const & other) const {
-   return key_ == other.key_ &&
-          rules_ == other.rules_;
+   return pimpl->operator==(*other.pimpl);
 }
-
-inline bool
+bool
 policy_map_t::operator!=(policy_map_t const & other) const {
-   return !operator==(other);
+   return pimpl->operator!=(*other.pimpl);
 }
-
-inline bool
+bool
 policy_map_t::operator<(policy_map_t const & other) const {
-   if(key_ != other.key_) {
-      return key_ < other.key_;
-   } else if(rules_ != other.rules_) {
-      return rules_ < other.rules_;
-   }
-   return false;
+   return pimpl->operator<(*other.pimpl);
 }
-
-inline uint32_t
+uint32_t
 policy_map_t::hash() const {
-   hash_mix h;
-   mix_me(h);
-   return h.result();
+   return pimpl->hash();
 }
-
-inline void
+void
 policy_map_t::mix_me(hash_mix & h) const {
-   h.mix(key_); // policy_map_key_t
-   for (auto it=rules_.cbegin(); it!=rules_.cend(); ++it) {
-      h.mix(it->first); // uint32_t
-      h.mix(it->second); // policy_map_rule_t
-   }
+   pimpl->mix_me(h);
 }
-
-inline std::string
+std::string
 policy_map_t::to_string() const {
-   std::ostringstream ss;
-   ss << "policy_map_t(";
-   ss << "key=" << key_;
-   ss << ", rules=" <<"'";
-   bool first_rules = true;
-   for (auto it=rules_.cbegin(); it!=rules_.cend(); ++it) {
-      if (first_rules) {
-         ss << it->first << "=" << it->second;
-         first_rules = false;
-      } else {
-         ss << "," << it->first << "=" << it->second;
-      }
-   }
-   ss << "'";
-   ss << ")";
-   return ss.str();
+   return pimpl->to_string();
 }
-
-inline std::ostream&
+std::ostream&
 operator<<(std::ostream& os, const policy_map_t& obj) {
-   os << obj.to_string();
-   return os;
+   return operator<<(os, *obj.pimpl);
 }
 
 
-
-inline unsupported_policy_feature_error::unsupported_policy_feature_error(
+unsupported_policy_feature_error::unsupported_policy_feature_error(
          policy_feature_t policy_feature) noexcept :
       unsupported_error(std::string("Unsupported policy feature")),
       policy_feature_(policy_feature) {
 
 }
 
-inline
+
 unsupported_policy_feature_error::~unsupported_policy_feature_error() noexcept {
 
 }
 
-inline policy_feature_t
+policy_feature_t
 unsupported_policy_feature_error::policy_feature() const noexcept {
    return policy_feature_;
 }
 
-inline void
+void
 unsupported_policy_feature_error::raise() const {
    throw *this;
 }
 
-inline uint32_t
+uint32_t
 unsupported_policy_feature_error::hash() const {
    hash_mix h;
    mix_me(h);
    return h.result();
 }
 
-inline void
+void
 unsupported_policy_feature_error::mix_me(hash_mix & h) const {
    h.mix(policy_feature_); // policy_feature_t
 }
 
-inline std::string
+std::string
 unsupported_policy_feature_error::to_string() const {
    std::ostringstream ss;
    ss << "unsupported_policy_feature_error(";
@@ -617,7 +498,7 @@ unsupported_policy_feature_error::to_string() const {
    return ss.str();
 }
 
-inline std::ostream&
+std::ostream&
 operator<<(std::ostream& os, const unsupported_policy_feature_error& obj) {
    os << obj.to_string();
    return os;
@@ -625,7 +506,7 @@ operator<<(std::ostream& os, const unsupported_policy_feature_error& obj) {
 
 
 
-inline std::ostream&
+EOS_SDK_PUBLIC std::ostream&
 operator<<(std::ostream& os, const policy_map_status_t & enum_val) {
    if (enum_val==POLICY_STATUS_NOT_FOUND) {
       os << "POLICY_STATUS_NOT_FOUND";
@@ -642,184 +523,162 @@ operator<<(std::ostream& os, const policy_map_status_t & enum_val) {
 }
 
 
-
-inline policy_map_hw_status_key_t::policy_map_hw_status_key_t() :
-      intf_id_(), direction_() {
+policy_map_hw_status_key_t::policy_map_hw_status_key_t() {
+   pimpl = std::shared_ptr<policy_map_hw_status_key_impl_t>(
+      new policy_map_hw_status_key_impl_t()
+   );
+}
+policy_map_hw_status_key_t::policy_map_hw_status_key_t(
+         intf_id_t intf_id, acl_direction_t direction) {
+   pimpl = std::shared_ptr<policy_map_hw_status_key_impl_t>(
+      new policy_map_hw_status_key_impl_t(
+         intf_id,
+         direction
+      )
+   );
+}
+policy_map_hw_status_key_t::policy_map_hw_status_key_t(
+   const policy_map_hw_status_key_t& other)
+{
+   pimpl = std::make_unique<policy_map_hw_status_key_impl_t>(
+      policy_map_hw_status_key_impl_t(*other.pimpl));
+}
+policy_map_hw_status_key_t&
+policy_map_hw_status_key_t::operator=(
+   policy_map_hw_status_key_t const & other)
+{
+   pimpl = std::shared_ptr<policy_map_hw_status_key_impl_t>(
+      new policy_map_hw_status_key_impl_t(*other.pimpl));
+   return *this;
 }
 
-inline policy_map_hw_status_key_t::policy_map_hw_status_key_t(
-         intf_id_t intf_id, acl_direction_t direction) :
-      intf_id_(intf_id), direction_(direction) {
-}
-
-inline intf_id_t
+intf_id_t
 policy_map_hw_status_key_t::intf_id() const {
-   return intf_id_;
+   return pimpl->intf_id();
 }
-
-inline void
+void
 policy_map_hw_status_key_t::intf_id_is(intf_id_t intf_id) {
-   intf_id_ = intf_id;
+   pimpl->intf_id_is(intf_id);
 }
-
-inline acl_direction_t
+acl_direction_t
 policy_map_hw_status_key_t::direction() const {
-   return direction_;
+   return pimpl->direction();
 }
-
-inline void
+void
 policy_map_hw_status_key_t::direction_is(acl_direction_t direction) {
-   direction_ = direction;
+   pimpl->direction_is(direction);
 }
-
-inline bool
+bool
 policy_map_hw_status_key_t::operator==(policy_map_hw_status_key_t const & other)
        const {
-   return intf_id_ == other.intf_id_ &&
-          direction_ == other.direction_;
+   return pimpl->operator==(*other.pimpl);
 }
-
-inline bool
+bool
 policy_map_hw_status_key_t::operator!=(policy_map_hw_status_key_t const & other)
        const {
-   return !operator==(other);
+   return pimpl->operator!=(*other.pimpl);
 }
-
-inline bool
+bool
 policy_map_hw_status_key_t::operator<(policy_map_hw_status_key_t const & other)
        const {
-   if(intf_id_ != other.intf_id_) {
-      return intf_id_ < other.intf_id_;
-   } else if(direction_ != other.direction_) {
-      return direction_ < other.direction_;
-   }
-   return false;
+   return pimpl->operator<(*other.pimpl);
 }
-
-inline uint32_t
+uint32_t
 policy_map_hw_status_key_t::hash() const {
-   hash_mix h;
-   mix_me(h);
-   return h.result();
+   return pimpl->hash();
 }
-
-inline void
+void
 policy_map_hw_status_key_t::mix_me(hash_mix & h) const {
-   h.mix(intf_id_); // intf_id_t
-   h.mix(direction_); // acl_direction_t
+   pimpl->mix_me(h);
 }
-
-inline std::string
+std::string
 policy_map_hw_status_key_t::to_string() const {
-   std::ostringstream ss;
-   ss << "policy_map_hw_status_key_t(";
-   ss << "intf_id=" << intf_id_;
-   ss << ", direction=" << direction_;
-   ss << ")";
-   return ss.str();
+   return pimpl->to_string();
 }
-
-inline std::ostream&
+std::ostream&
 operator<<(std::ostream& os, const policy_map_hw_status_key_t& obj) {
-   os << obj.to_string();
-   return os;
+   return operator<<(os, *obj.pimpl);
 }
 
 
-
-inline policy_map_hw_statuses_t::policy_map_hw_statuses_t() :
-      intf_statuses_() {
+policy_map_hw_statuses_t::policy_map_hw_statuses_t() {
+   pimpl = std::shared_ptr<policy_map_hw_statuses_impl_t>(
+      new policy_map_hw_statuses_impl_t()
+   );
 }
-
-inline policy_map_hw_statuses_t::policy_map_hw_statuses_t(
-
-         std::map<policy_map_hw_status_key_t, policy_map_status_t> const &
-         intf_statuses) :
-      intf_statuses_(intf_statuses) {
-}
-
-inline std::map<policy_map_hw_status_key_t, policy_map_status_t> const &
-policy_map_hw_statuses_t::intf_statuses() const {
-   return intf_statuses_;
-}
-
-inline void
-policy_map_hw_statuses_t::intf_statuses_is(
-
+policy_map_hw_statuses_t::policy_map_hw_statuses_t(
+         
          std::map<policy_map_hw_status_key_t, policy_map_status_t> const &
          intf_statuses) {
-   intf_statuses_ = intf_statuses;
+   pimpl = std::shared_ptr<policy_map_hw_statuses_impl_t>(
+      new policy_map_hw_statuses_impl_t(
+         intf_statuses
+      )
+   );
+}
+policy_map_hw_statuses_t::policy_map_hw_statuses_t(
+   const policy_map_hw_statuses_t& other)
+{
+   pimpl = std::make_unique<policy_map_hw_statuses_impl_t>(
+      policy_map_hw_statuses_impl_t(*other.pimpl));
+}
+policy_map_hw_statuses_t&
+policy_map_hw_statuses_t::operator=(
+   policy_map_hw_statuses_t const & other)
+{
+   pimpl = std::shared_ptr<policy_map_hw_statuses_impl_t>(
+      new policy_map_hw_statuses_impl_t(*other.pimpl));
+   return *this;
 }
 
-inline void
+std::map<policy_map_hw_status_key_t, policy_map_status_t> const &
+policy_map_hw_statuses_t::intf_statuses() const {
+   return pimpl->intf_statuses();
+}
+void
+policy_map_hw_statuses_t::intf_statuses_is(
+         
+         std::map<policy_map_hw_status_key_t, policy_map_status_t> const &
+         intf_statuses) {
+   pimpl->intf_statuses_is(intf_statuses);
+}
+void
 policy_map_hw_statuses_t::intf_statuse_set(policy_map_hw_status_key_t const & key,
                                            policy_map_status_t const & value) {
-   intf_statuses_[key] = value;
+   pimpl->intf_statuse_set(key, value);
 }
-
-inline void
+void
 policy_map_hw_statuses_t::intf_statuse_del(policy_map_hw_status_key_t const & key) {
-   intf_statuses_.erase(key);
+   pimpl->intf_statuse_del(key);
 }
-
-inline bool
+bool
 policy_map_hw_statuses_t::operator==(policy_map_hw_statuses_t const & other) const {
-   return intf_statuses_ == other.intf_statuses_;
+   return pimpl->operator==(*other.pimpl);
 }
-
-inline bool
+bool
 policy_map_hw_statuses_t::operator!=(policy_map_hw_statuses_t const & other) const {
-   return !operator==(other);
+   return pimpl->operator!=(*other.pimpl);
 }
-
-inline bool
+bool
 policy_map_hw_statuses_t::operator<(policy_map_hw_statuses_t const & other) const {
-   if(intf_statuses_ != other.intf_statuses_) {
-      return intf_statuses_ < other.intf_statuses_;
-   }
-   return false;
+   return pimpl->operator<(*other.pimpl);
 }
-
-inline uint32_t
+uint32_t
 policy_map_hw_statuses_t::hash() const {
-   hash_mix h;
-   mix_me(h);
-   return h.result();
+   return pimpl->hash();
 }
-
-inline void
+void
 policy_map_hw_statuses_t::mix_me(hash_mix & h) const {
-   for (auto it=intf_statuses_.cbegin(); it!=intf_statuses_.cend(); ++it) {
-      h.mix(it->first); // policy_map_hw_status_key_t
-      h.mix(it->second); // policy_map_status_t
-   }
+   pimpl->mix_me(h);
 }
-
-inline std::string
+std::string
 policy_map_hw_statuses_t::to_string() const {
-   std::ostringstream ss;
-   ss << "policy_map_hw_statuses_t(";
-   ss << "intf_statuses=" <<"'";
-   bool first_intf_statuses = true;
-   for (auto it=intf_statuses_.cbegin(); it!=intf_statuses_.cend(); ++it) {
-      if (first_intf_statuses) {
-         ss << it->first << "=" << it->second;
-         first_intf_statuses = false;
-      } else {
-         ss << "," << it->first << "=" << it->second;
-      }
-   }
-   ss << "'";
-   ss << ")";
-   return ss.str();
+   return pimpl->to_string();
 }
-
-inline std::ostream&
+std::ostream&
 operator<<(std::ostream& os, const policy_map_hw_statuses_t& obj) {
-   os << obj.to_string();
-   return os;
+   return operator<<(os, *obj.pimpl);
 }
-
 
 }
 

@@ -1,4 +1,4 @@
-// Copyright (c) 2021 Arista Networks, Inc.  All rights reserved.
+// Copyright (c) 2022 Arista Networks, Inc.  All rights reserved.
 // Arista Networks, Inc. Confidential and Proprietary.
 
 #ifndef EOS_INLINE_TYPES_IP_H
@@ -6,7 +6,7 @@
 
 namespace eos {
 
-inline std::ostream&
+EOS_SDK_PUBLIC std::ostream&
 operator<<(std::ostream& os, const af_t & enum_val) {
    if (enum_val==AF_NULL) {
       os << "AF_NULL";
@@ -21,15 +21,14 @@ operator<<(std::ostream& os, const af_t & enum_val) {
 }
 
 
-
 // default constructor produces has AF_NULL, making it invalid to pass to many
 // higher level constructors.
-inline ip_addr_t::ip_addr_t() :
+ip_addr_t::ip_addr_t() :
       af_(AF_NULL), addr_() {
    memset(&addr_, 0, sizeof(addr_));
 }
 
-inline ip_addr_t::ip_addr_t(std::string const & address_string) {
+ip_addr_t::ip_addr_t(std::string const & address_string) {
 
    memset(&addr_, 0, sizeof(addr_));
    if (!parse_ip_addr(address_string.c_str(), this)) {
@@ -41,7 +40,7 @@ inline ip_addr_t::ip_addr_t(std::string const & address_string) {
 
 // Parse the IPv4 or IPv6 address string supplied. Calls panic() if the address is
 // invalid, so if user input is provided, first validate with parse_ip_addr().
-inline ip_addr_t::ip_addr_t(char const * address_string) {
+ip_addr_t::ip_addr_t(char const * address_string) {
 
    memset(&addr_, 0, sizeof(addr_));
    if (!parse_ip_addr(address_string, this)) {
@@ -52,19 +51,19 @@ inline ip_addr_t::ip_addr_t(char const * address_string) {
 }
 
 // IPv4 address (one word) in network byte order.
-inline ip_addr_t::ip_addr_t(uint32_be_t addr_v4) :
+ip_addr_t::ip_addr_t(uint32_be_t addr_v4) :
       af_(AF_IPV4) {
 
    memset(&addr_, 0, sizeof(addr_));
    addr_.words[0] = addr_v4;
 }
 
-inline af_t
+af_t
 ip_addr_t::af() const {
    return af_;
 }
 
-inline bool
+bool
 ip_addr_t::operator!=(ip_addr_t const & other) const {
 
    return !(*this == other);
@@ -73,13 +72,13 @@ ip_addr_t::operator!=(ip_addr_t const & other) const {
 
 // Returns the 16-byte address for the address, in network byte order IPv4
 // addresses occupy the first word only; words 2-4 are empty.
-inline uint8_t const *
+uint8_t const *
 ip_addr_t::addr() const {
    return static_cast<uint8_t const *>(addr_.bytes);
 }
 
 // The IPv4 address as a word in network byte order.
-inline uint32_be_t
+uint32_be_t
 ip_addr_t::addr_v4() const {
 
    if(af_ != AF_IPV4) {
@@ -89,7 +88,7 @@ ip_addr_t::addr_v4() const {
 
 }
 
-inline std::string
+std::string
 ip_addr_t::to_string() const {
 
    if (af_ == AF_IPV4) {
@@ -120,26 +119,26 @@ ip_addr_t::to_string() const {
 
 }
 
-inline
+
 ip_addr_t::operator bool() const {
    return (af_ != AF_NULL);
 }
 
-inline uint32_t
+uint32_t
 ip_addr_t::hash() const {
    hash_mix h;
    mix_me(h);
    return h.result();
 }
 
-inline void
+void
 ip_addr_t::mix_me(hash_mix & h) const {
    h.mix(af_); // af_t
    h.mix_bytes((uint8_t const*)addr_.bytes,
                af_ == AF_IPV4 ? 4 : 16);
 }
 
-inline std::ostream&
+std::ostream&
 operator<<(std::ostream& os, const ip_addr_t& obj) {
    os << obj.to_string();
    return os;
@@ -147,16 +146,16 @@ operator<<(std::ostream& os, const ip_addr_t& obj) {
 
 
 
-inline ip_prefix_t::ip_prefix_t() :
+ip_prefix_t::ip_prefix_t() :
       prefix_length_() {
 
 }
 
-inline ip_prefix_t::ip_prefix_t(ip_addr_t const & addr, uint8_t prefix_length) :
+ip_prefix_t::ip_prefix_t(ip_addr_t const & addr, uint8_t prefix_length) :
       addr_(addr), prefix_length_(prefix_length) {
 }
 
-inline ip_prefix_t::ip_prefix_t(char const * prefix_string) :
+ip_prefix_t::ip_prefix_t(char const * prefix_string) :
       addr_(), prefix_length_() {
 
    if (!parse_ip_prefix(prefix_string, this)) {
@@ -166,22 +165,22 @@ inline ip_prefix_t::ip_prefix_t(char const * prefix_string) :
 
 }
 
-inline uint8_t
+uint8_t
 ip_prefix_t::prefix_length() const {
    return prefix_length_;
 }
 
-inline af_t
+af_t
 ip_prefix_t::af() const {
    return addr_.af();
 }
 
-inline ip_addr_t
+ip_addr_t
 ip_prefix_t::network() const {
    return addr_;
 }
 
-inline ip_addr_t
+ip_addr_t
 ip_prefix_t::mask() const {
    uint8_t addr[16] = {};
    int word;
@@ -198,7 +197,7 @@ ip_prefix_t::mask() const {
 
 }
 
-inline std::string
+std::string
 ip_prefix_t::to_string() const {
 
    char buf[128];
@@ -210,18 +209,18 @@ ip_prefix_t::to_string() const {
 
 }
 
-inline bool
+bool
 ip_prefix_t::operator==(ip_prefix_t const & other) const {
    return addr_ == other.addr_ &&
           prefix_length_ == other.prefix_length_;
 }
 
-inline bool
+bool
 ip_prefix_t::operator!=(ip_prefix_t const & other) const {
    return !operator==(other);
 }
 
-inline bool
+bool
 ip_prefix_t::operator<(ip_prefix_t const & other) const {
    if(addr_ != other.addr_) {
       return addr_ < other.addr_;
@@ -231,20 +230,20 @@ ip_prefix_t::operator<(ip_prefix_t const & other) const {
    return false;
 }
 
-inline uint32_t
+uint32_t
 ip_prefix_t::hash() const {
    hash_mix h;
    mix_me(h);
    return h.result();
 }
 
-inline void
+void
 ip_prefix_t::mix_me(hash_mix & h) const {
    h.mix(addr_); // ip_addr_t
    h.mix(prefix_length_); // uint8_t
 }
 
-inline std::ostream&
+std::ostream&
 operator<<(std::ostream& os, const ip_prefix_t& obj) {
    os << obj.to_string();
    return os;
@@ -252,138 +251,108 @@ operator<<(std::ostream& os, const ip_prefix_t& obj) {
 
 
 
-inline ip_addr_mask_t::ip_addr_mask_t() :
-      addr_(ip_addr_t()), mask_length_() {
+ip_addr_mask_t::ip_addr_mask_t() {
+   pimpl = std::shared_ptr<ip_addr_mask_impl_t>(
+      new ip_addr_mask_impl_t()
+   );
+}
+ip_addr_mask_t::ip_addr_mask_t(ip_addr_t const & addr, uint8_t mask_length) {
+   pimpl = std::shared_ptr<ip_addr_mask_impl_t>(
+      new ip_addr_mask_impl_t(
+         addr,
+         mask_length
+      )
+   );
+}
+ip_addr_mask_t::ip_addr_mask_t(
+   const ip_addr_mask_t& other)
+{
+   pimpl = std::make_unique<ip_addr_mask_impl_t>(
+      ip_addr_mask_impl_t(*other.pimpl));
+}
+ip_addr_mask_t&
+ip_addr_mask_t::operator=(
+   ip_addr_mask_t const & other)
+{
+   pimpl = std::shared_ptr<ip_addr_mask_impl_t>(
+      new ip_addr_mask_impl_t(*other.pimpl));
+   return *this;
 }
 
-inline ip_addr_mask_t::ip_addr_mask_t(ip_addr_t const & addr, uint8_t mask_length) {
-
-   addr_ = addr;
-   if (mask_length < 129) {
-      mask_length_ = uint8_t(mask_length);
-   } else {
-      panic(invalid_argument_error("ip.ip_addr_mask_t",
-                                   "mask_length must be between 0..128."));
-   }
-
-}
-
-inline ip_addr_t
+ip_addr_t
 ip_addr_mask_t::addr() const {
-   return addr_;
+   return pimpl->addr();
 }
-
-inline uint8_t
+uint8_t
 ip_addr_mask_t::mask_length() const {
-   return mask_length_;
+   return pimpl->mask_length();
 }
-
-inline af_t
+af_t
 ip_addr_mask_t::af() const {
-   return addr_.af();
+   return pimpl->af();
 }
-
-inline uint32_be_t
+uint32_be_t
 ip_addr_mask_t::mask() const {
-
-   if (mask_length_ == 0) {
-      return 0;
-   }
-   uint32_be_t r = (0xFFFFFFFF << (32 - mask_length_)) & 0xFFFFFFFF;
-   return r;
-
+   return pimpl->mask();
 }
-
-inline std::string
+std::string
 ip_addr_mask_t::to_string() const {
-
-   if (addr_.af() == AF_IPV6 || addr_.af() == AF_IPV4) {
-      // Emit the address/mask_length for IPV6/IPV4 addresses
-      char buf[128];
-      int rv;
-      rv = snprintf(buf, sizeof(buf), "%s/%d",
-                    addr_.to_string().c_str(), mask_length_);
-      assert(rv>0);
-      return std::string(buf);
-   } else {
-      panic(
-         invalid_argument_error(
-            "ip.ip_addr_mask_t",
-            "Must have a valid address family to convert to string."));
-   }
-
+   return pimpl->to_string();
 }
-
-inline bool
+bool
 ip_addr_mask_t::operator==(ip_addr_mask_t const & other) const {
-   return addr_ == other.addr_ &&
-          mask_length_ == other.mask_length_;
+   return pimpl->operator==(*other.pimpl);
 }
-
-inline bool
+bool
 ip_addr_mask_t::operator!=(ip_addr_mask_t const & other) const {
-   return !operator==(other);
+   return pimpl->operator!=(*other.pimpl);
 }
-
-inline bool
+bool
 ip_addr_mask_t::operator<(ip_addr_mask_t const & other) const {
-   if(addr_ != other.addr_) {
-      return addr_ < other.addr_;
-   } else if(mask_length_ != other.mask_length_) {
-      return mask_length_ < other.mask_length_;
-   }
-   return false;
+   return pimpl->operator<(*other.pimpl);
 }
-
-inline uint32_t
+uint32_t
 ip_addr_mask_t::hash() const {
-   hash_mix h;
-   mix_me(h);
-   return h.result();
+   return pimpl->hash();
 }
-
-inline void
+void
 ip_addr_mask_t::mix_me(hash_mix & h) const {
-   h.mix(addr_); // ip_addr_t
-   h.mix(mask_length_); // uint8_t
+   pimpl->mix_me(h);
 }
-
-inline std::ostream&
+std::ostream&
 operator<<(std::ostream& os, const ip_addr_mask_t& obj) {
-   os << obj.to_string();
-   return os;
+   return operator<<(os, *obj.pimpl);
 }
 
 
 
-inline
 address_overlap_error::~address_overlap_error() noexcept {
 
 }
 
-inline ip_addr_mask_t
+ip_addr_mask_t
 address_overlap_error::addr() const noexcept {
    return addr_;
 }
 
-inline void
+void
 address_overlap_error::raise() const {
    throw *this;
 }
 
-inline uint32_t
+uint32_t
 address_overlap_error::hash() const {
    hash_mix h;
    mix_me(h);
    return h.result();
 }
 
-inline void
+void
 address_overlap_error::mix_me(hash_mix & h) const {
    h.mix(addr_); // ip_addr_mask_t
 }
 
-inline std::string
+std::string
 address_overlap_error::to_string() const {
    std::ostringstream ss;
    ss << "address_overlap_error(";
@@ -392,7 +361,7 @@ address_overlap_error::to_string() const {
    return ss.str();
 }
 
-inline std::ostream&
+std::ostream&
 operator<<(std::ostream& os, const address_overlap_error& obj) {
    os << obj.to_string();
    return os;

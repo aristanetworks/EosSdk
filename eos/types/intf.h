@@ -1,4 +1,4 @@
-// Copyright (c) 2020 Arista Networks, Inc.  All rights reserved.
+// Copyright (c) 2022 Arista Networks, Inc.  All rights reserved.
 // Arista Networks, Inc. Confidential and Proprietary.
 
 #ifndef EOS_TYPES_INTF_H
@@ -8,6 +8,7 @@
 #include <eos/hash_mix.h>
 #include <eos/panic.h>
 #include <eos/utility.h>
+#include <memory>
 #include <sstream>
 
 namespace eos {
@@ -19,7 +20,8 @@ enum oper_status_t {
    INTF_OPER_DOWN,
 };
 /** Appends a string representation of enum oper_status_t value to the ostream. */
-std::ostream& operator<<(std::ostream& os, const oper_status_t & enum_val);
+EOS_SDK_PUBLIC std::ostream& operator<<(std::ostream& os,
+                                        const oper_status_t & enum_val);
 
 /** The interface's type. */
 enum intf_type_t {
@@ -35,7 +37,8 @@ enum intf_type_t {
    INTF_TYPE_VXLAN,
 };
 /** Appends a string representation of enum intf_type_t value to the ostream. */
-std::ostream& operator<<(std::ostream& os, const intf_type_t & enum_val);
+EOS_SDK_PUBLIC std::ostream& operator<<(std::ostream& os,
+                                        const intf_type_t & enum_val);
 
 /** Unique identifier for an interface. */
 class EOS_SDK_PUBLIC intf_id_t {
@@ -89,6 +92,10 @@ class EOS_SDK_PUBLIC intf_id_t {
    uint64_t intfId_;
 };
 
+EOS_SDK_PUBLIC
+std::ostream& operator<<(std::ostream& os, const intf_id_t& obj);
+
+class intf_counters_impl_t;
 /**
  * Interface counter class.
  *
@@ -104,6 +111,10 @@ class EOS_SDK_PUBLIC intf_counters_t {
                    uint64_t out_octets, uint64_t in_octets, uint64_t out_discards,
                    uint64_t out_errors, uint64_t in_discards, uint64_t in_errors,
                    seconds_t sample_time);
+   intf_counters_t(const intf_counters_t& other);
+   intf_counters_t& operator=(
+      intf_counters_t const & other);
+
 
    /**
     * Getter for 'out_ucast_pkts': IF-MIB ifOutUcastPkts.
@@ -183,21 +194,13 @@ class EOS_SDK_PUBLIC intf_counters_t {
    friend std::ostream& operator<<(std::ostream& os, const intf_counters_t& obj);
 
  private:
-   uint64_t out_ucast_pkts_;
-   uint64_t out_multicast_pkts_;
-   uint64_t out_broadcast_pkts_;
-   uint64_t in_ucast_pkts_;
-   uint64_t in_multicast_pkts_;
-   uint64_t in_broadcast_pkts_;
-   uint64_t out_octets_;
-   uint64_t in_octets_;
-   uint64_t out_discards_;
-   uint64_t out_errors_;
-   uint64_t in_discards_;
-   uint64_t in_errors_;
-   seconds_t sample_time_;
+   std::shared_ptr<intf_counters_impl_t> pimpl;
 };
 
+EOS_SDK_PUBLIC
+std::ostream& operator<<(std::ostream& os, const intf_counters_t& obj);
+
+class intf_traffic_rates_impl_t;
 /** Interface traffic rates class. */
 class EOS_SDK_PUBLIC intf_traffic_rates_t {
  public:
@@ -205,6 +208,10 @@ class EOS_SDK_PUBLIC intf_traffic_rates_t {
    intf_traffic_rates_t(double out_pkts_rate, double in_pkts_rate,
                         double out_bits_rate, double in_bits_rate,
                         seconds_t sample_time);
+   intf_traffic_rates_t(const intf_traffic_rates_t& other);
+   intf_traffic_rates_t& operator=(
+      intf_traffic_rates_t const & other);
+
 
    /** Getter for 'out_pkts_rate': output packets per second. */
    double out_pkts_rate() const;
@@ -237,12 +244,11 @@ class EOS_SDK_PUBLIC intf_traffic_rates_t {
                                    const intf_traffic_rates_t& obj);
 
  private:
-   double out_pkts_rate_;
-   double in_pkts_rate_;
-   double out_bits_rate_;
-   double in_bits_rate_;
-   seconds_t sample_time_;
+   std::shared_ptr<intf_traffic_rates_impl_t> pimpl;
 };
+
+EOS_SDK_PUBLIC
+std::ostream& operator<<(std::ostream& os, const intf_traffic_rates_t& obj);
 
 /** Non-existent interface error. */
 class EOS_SDK_PUBLIC no_such_interface_error : public error {
@@ -271,6 +277,9 @@ class EOS_SDK_PUBLIC no_such_interface_error : public error {
    intf_id_t intf_;
 };
 
+EOS_SDK_PUBLIC
+std::ostream& operator<<(std::ostream& os, const no_such_interface_error& obj);
+
 /**
  * Error of configuring an interface as a routed port that cannot be a routed port.
  */
@@ -298,8 +307,10 @@ class EOS_SDK_PUBLIC not_switchport_eligible_error : public error {
  private:
    intf_id_t intf_;
 };
-}
 
-#include <eos/inline/types/intf.h>
+EOS_SDK_PUBLIC
+std::ostream& operator<<(std::ostream& os,
+                         const not_switchport_eligible_error& obj);
+}
 
 #endif // EOS_TYPES_INTF_H

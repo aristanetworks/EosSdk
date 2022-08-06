@@ -1,4 +1,4 @@
-// Copyright (c) 2020 Arista Networks, Inc.  All rights reserved.
+// Copyright (c) 2022 Arista Networks, Inc.  All rights reserved.
 // Arista Networks, Inc. Confidential and Proprietary.
 
 #ifndef EOS_TYPES_NEXTHOP_GROUP_TUNNEL_H
@@ -8,10 +8,12 @@
 #include <eos/intf.h>
 #include <eos/ip.h>
 #include <eos/utility.h>
+#include <memory>
 #include <sstream>
 
 namespace eos {
 
+class nexthop_group_tunnel_impl_t;
 /**
  * An IP nexthop group tunnel.
  *
@@ -28,6 +30,10 @@ class EOS_SDK_PUBLIC nexthop_group_tunnel_t {
     */
    explicit nexthop_group_tunnel_t(ip_prefix_t const & tunnel_endpoint,
                                    std::string const & nhg_name);
+   nexthop_group_tunnel_t(const nexthop_group_tunnel_t& other);
+   nexthop_group_tunnel_t& operator=(
+      nexthop_group_tunnel_t const & other);
+
 
    /** Getter for 'tunnel_endpoint': IP v4/v6 prefix. */
    ip_prefix_t tunnel_endpoint() const;
@@ -65,13 +71,11 @@ class EOS_SDK_PUBLIC nexthop_group_tunnel_t {
                                    const nexthop_group_tunnel_t& obj);
 
  private:
-   ip_prefix_t tunnel_endpoint_;
-   std::string nhg_name_;
-   uint8_t igp_pref_;
-   uint32_t igp_metric_;
+   std::shared_ptr<nexthop_group_tunnel_impl_t> pimpl;
 };
-}
 
-#include <eos/inline/types/nexthop_group_tunnel.h>
+EOS_SDK_PUBLIC
+std::ostream& operator<<(std::ostream& os, const nexthop_group_tunnel_t& obj);
+}
 
 #endif // EOS_TYPES_NEXTHOP_GROUP_TUNNEL_H

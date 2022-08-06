@@ -1,4 +1,4 @@
-// Copyright (c) 2020 Arista Networks, Inc.  All rights reserved.
+// Copyright (c) 2022 Arista Networks, Inc.  All rights reserved.
 // Arista Networks, Inc. Confidential and Proprietary.
 
 #ifndef EOS_TYPES_ETH_PHY_INTF_H
@@ -6,6 +6,7 @@
 
 #include <eos/hash_mix.h>
 #include <eos/utility.h>
+#include <memory>
 #include <sstream>
 
 namespace eos {
@@ -29,8 +30,10 @@ enum eth_link_speed_t {
    LINK_SPEED_UNEXPECTED,
 };
 /** Appends a string representation of enum eth_link_speed_t value to the ostream. */
-std::ostream& operator<<(std::ostream& os, const eth_link_speed_t & enum_val);
+EOS_SDK_PUBLIC std::ostream& operator<<(std::ostream& os,
+                                        const eth_link_speed_t & enum_val);
 
+class eth_phy_intf_counters_impl_t;
 /**
  * Ethernet interface counter class.
  *
@@ -53,6 +56,10 @@ class EOS_SDK_PUBLIC eth_phy_intf_counters_t {
                            uint64_t in_unknown_opcodes, uint64_t out_pause_frames,
                            uint64_t in_pause_frames, uint64_t fragments,
                            uint64_t jabbers);
+   eth_phy_intf_counters_t(const eth_phy_intf_counters_t& other);
+   eth_phy_intf_counters_t& operator=(
+      eth_phy_intf_counters_t const & other);
+
 
    /**
     * Getter for 'single_collision_frames': Etherlike-MIB singleCollisionFrames
@@ -149,27 +156,13 @@ class EOS_SDK_PUBLIC eth_phy_intf_counters_t {
                                    const eth_phy_intf_counters_t& obj);
 
  private:
-   uint64_t single_collision_frames_;
-   uint64_t multiple_collision_frames_;
-   uint64_t fcs_errors_;
-   uint64_t alignment_errors_;
-   uint64_t deferred_transmissions_;
-   uint64_t late_collisions_;
-   uint64_t excessive_collisions_;
-   uint64_t internal_mac_transmit_errors_;
-   uint64_t carrier_sense_errors_;
-   uint64_t internal_mac_receive_errors_;
-   uint64_t frame_too_shorts_;
-   uint64_t frame_too_longs_;
-   uint64_t sqe_test_errors_;
-   uint64_t symbol_errors_;
-   uint64_t in_unknown_opcodes_;
-   uint64_t out_pause_frames_;
-   uint64_t in_pause_frames_;
-   uint64_t fragments_;
-   uint64_t jabbers_;
+   std::shared_ptr<eth_phy_intf_counters_impl_t> pimpl;
 };
 
+EOS_SDK_PUBLIC
+std::ostream& operator<<(std::ostream& os, const eth_phy_intf_counters_t& obj);
+
+class eth_phy_intf_bin_counters_impl_t;
 /**
  * Ethernet interface bin counters class.
  *
@@ -193,6 +186,10 @@ class EOS_SDK_PUBLIC eth_phy_intf_bin_counters_t {
                                uint64_t out_512_to_1023_octet_frames,
                                uint64_t out_1024_to_1522_octet_frames,
                                uint64_t out_1523_to_max_octet_frames);
+   eth_phy_intf_bin_counters_t(const eth_phy_intf_bin_counters_t& other);
+   eth_phy_intf_bin_counters_t& operator=(
+      eth_phy_intf_bin_counters_t const & other);
+
 
    /** Getter for 'in_64_octet_frames': Input 64 octet frame counter. */
    uint64_t in_64_octet_frames() const;
@@ -288,23 +285,11 @@ class EOS_SDK_PUBLIC eth_phy_intf_bin_counters_t {
                                    const eth_phy_intf_bin_counters_t& obj);
 
  private:
-   uint64_t in_64_octet_frames_;
-   uint64_t in_65_to_127_octet_frames_;
-   uint64_t in_128_to_255_octet_frames_;
-   uint64_t in_256_to_511_octet_frames_;
-   uint64_t in_512_to_1023_octet_frames_;
-   uint64_t in_1024_to_1522_octet_frames_;
-   uint64_t in_1523_to_max_octet_frames_;
-   uint64_t out_64_octet_frames_;
-   uint64_t out_65_to_127_octet_frames_;
-   uint64_t out_128_to_255_octet_frames_;
-   uint64_t out_256_to_511_octet_frames_;
-   uint64_t out_512_to_1023_octet_frames_;
-   uint64_t out_1024_to_1522_octet_frames_;
-   uint64_t out_1523_to_max_octet_frames_;
+   std::shared_ptr<eth_phy_intf_bin_counters_impl_t> pimpl;
 };
-}
 
-#include <eos/inline/types/eth_phy_intf.h>
+EOS_SDK_PUBLIC
+std::ostream& operator<<(std::ostream& os, const eth_phy_intf_bin_counters_t& obj);
+}
 
 #endif // EOS_TYPES_ETH_PHY_INTF_H

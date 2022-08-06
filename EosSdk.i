@@ -96,6 +96,7 @@ typedef uint64_t uint64_be_t;
 %feature("nodirector") eos::system_mgr;
 %feature("nodirector") eos::timeout_mgr;
 %feature("nodirector") eos::vrf_mgr;
+%feature("nodirector") eos::xcvr_mgr;
 
 %{
 #include "eos/acl.h"
@@ -146,6 +147,7 @@ typedef uint64_t uint64_be_t;
 #include "eos/utility.h"
 #include "eos/version.h"
 #include "eos/vrf.h"
+#include "eos/xcvr.h"
 
 using namespace eos;
 
@@ -277,6 +279,8 @@ void throw_py_error(error const& err) {
 // Python code should use Python exceptions, and not call panic().
 %ignore panic;
 %ignore vpanic;
+%ignore modbit;
+%ignore invalid_mpls_label;
 %include "Includes.i"
 
 

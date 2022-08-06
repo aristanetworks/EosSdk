@@ -1,7 +1,8 @@
-// Copyright (c) 2014 Arista Networks, Inc.  All rights reserved.
+// Copyright (c) 2020 Arista Networks, Inc.  All rights reserved.
 // Arista Networks, Inc. Confidential and Proprietary.
 
 #include "eos/ip.h"
+#include <arpa/inet.h>
 #include <string.h>
 
 namespace eos {
@@ -51,14 +52,57 @@ ip_addr_t::operator<(ip_addr_t const & other) const {
 
 bool
 parse_ip_addr(char const * addr, ip_addr_t * result) {
-   return true;  // TODO: No op impl.
+   
+   struct in_addr ipv4;
+   struct in6_addr ipv6;
+   if (!inet_pton(AF_INET, addr, &ipv4)) {
+      if (!inet_pton(AF_INET6, addr, &ipv6)) {
+         return false;
+      }  else {
+         result->af_ = AF_IPV6;
+         for (int i=0; i < 16; i++) {
+            result->addr_.bytes[i] = uint32_t(ipv6.s6_addr[i]);
+         }
+      }
+   } else {
+      result->af_ = AF_IPV4;
+      result->addr_.words[0] = ipv4.s_addr;
+   }
+   return true;
+   
 }
 
 
 
 bool
 parse_ip_prefix(char const * addr, ip_prefix_t * result) {
-   return true;  // TODO: No op impl.
+   
+   char* str = strdupa(addr);
+   char* slash = strchr(str, '/');
+   if (!slash) {
+      return false;
+   }
+   ip_addr_t ipa;
+   *slash = 0;
+   if (!parse_ip_addr(str, &ipa)) {
+      panic(invalid_argument_error("ip_prefix_t",
+                                   "found no IPv4 or IPV6 address"));
+   }
+   switch (ipa.af()) {
+    case AF_IPV4:
+      result->addr_ = ip_addr_t(AF_IPV4, ipa.addr());
+      result->prefix_length_ = atoi(slash+1);
+      break;
+    case AF_IPV6:
+      result->addr_ = ip_addr_t(AF_IPV6, ipa.addr());
+      result->prefix_length_ = atoi(slash+1);
+     break;
+     default:
+        panic(invalid_argument_error("ip_prefix_t",
+                                     "found ipv7 ;-)"));
+   }
+   return true;
+   
 }
 
 

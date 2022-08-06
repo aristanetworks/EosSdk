@@ -1,4 +1,4 @@
-// Copyright (c) 2020 Arista Networks, Inc.  All rights reserved.
+// Copyright (c) 2022 Arista Networks, Inc.  All rights reserved.
 // Arista Networks, Inc. Confidential and Proprietary.
 
 #ifndef EOS_TYPES_ARESOLVE_H
@@ -8,6 +8,7 @@
 #include <eos/ip.h>
 #include <eos/utility.h>
 #include <list>
+#include <memory>
 #include <sstream>
 
 namespace eos {
@@ -71,6 +72,9 @@ class EOS_SDK_PUBLIC aresolve_record_base {
    friend class aresolve_internal;
 };
 
+EOS_SDK_PUBLIC
+std::ostream& operator<<(std::ostream& os, const aresolve_record_base& obj);
+
 /**
  * A DNS response for a hostname query containing resolved IP addresses received by
  * the on_aresolve_host() receiver method.
@@ -105,8 +109,9 @@ class EOS_SDK_PUBLIC aresolve_record_host : public aresolve_record_base {
    std::list<ip_addr_t> addr_v6_;
    friend class aresolve_internal;
 };
-}
 
-#include <eos/inline/types/aresolve.h>
+EOS_SDK_PUBLIC
+std::ostream& operator<<(std::ostream& os, const aresolve_record_host& obj);
+}
 
 #endif // EOS_TYPES_ARESOLVE_H

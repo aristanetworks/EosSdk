@@ -56,3 +56,4 @@ class EOS_SDK_PUBLIC fpga_mgr : public base_mgr<fpga_handler, fpga_t> {
 #include <eos/inline/fpga.h>
 
 #endif // EOS_FPGA_H
+

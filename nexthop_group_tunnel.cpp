@@ -45,7 +45,7 @@ class nexthop_group_tunnel_mgr_impl : public nexthop_group_tunnel_mgr {
 DEFINE_STUB_MGR_CTOR(nexthop_group_tunnel_mgr);
 
 nexthop_group_tunnel_handler::nexthop_group_tunnel_handler(
-                                             nexthop_group_tunnel_mgr *mgr) :
+                                             nexthop_group_tunnel_mgr *mgr) : 
    base_handler(mgr) {
 }
 

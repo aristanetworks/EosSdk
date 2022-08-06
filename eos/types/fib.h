@@ -1,4 +1,4 @@
-// Copyright (c) 2020 Arista Networks, Inc.  All rights reserved.
+// Copyright (c) 2022 Arista Networks, Inc.  All rights reserved.
 // Arista Networks, Inc. Confidential and Proprietary.
 
 #ifndef EOS_TYPES_FIB_H
@@ -10,15 +10,21 @@
 #include <eos/mpls.h>
 #include <eos/utility.h>
 #include <forward_list>
+#include <memory>
 #include <sstream>
 
 namespace eos {
 
+class fib_route_key_impl_t;
 /** An IP route key that goes in FIB. */
 class EOS_SDK_PUBLIC fib_route_key_t {
  public:
    fib_route_key_t();
    explicit fib_route_key_t(ip_prefix_t const & prefix);
+   fib_route_key_t(const fib_route_key_t& other);
+   fib_route_key_t& operator=(
+      fib_route_key_t const & other);
+
 
    /** Getter for 'prefix': IP v4/v6 network prefix. */
    ip_prefix_t prefix() const;
@@ -40,8 +46,11 @@ class EOS_SDK_PUBLIC fib_route_key_t {
    friend std::ostream& operator<<(std::ostream& os, const fib_route_key_t& obj);
 
  private:
-   ip_prefix_t prefix_;
+   std::shared_ptr<fib_route_key_impl_t> pimpl;
 };
+
+EOS_SDK_PUBLIC
+std::ostream& operator<<(std::ostream& os, const fib_route_key_t& obj);
 
 /** Enums for host routes and FIB routes. */
 enum fib_route_type_t {
@@ -78,8 +87,10 @@ enum fib_route_type_t {
    ROUTE_TYPE_OSPF3,
 };
 /** Appends a string representation of enum fib_route_type_t value to the ostream. */
-std::ostream& operator<<(std::ostream& os, const fib_route_type_t & enum_val);
+EOS_SDK_PUBLIC std::ostream& operator<<(std::ostream& os,
+                                        const fib_route_type_t & enum_val);
 
+class fib_route_impl_t;
 /**
  * An IP route that goes in FIB.
  * The "fec_id" represents the fec a.k.a adjacency associated with
@@ -89,6 +100,10 @@ class EOS_SDK_PUBLIC fib_route_t {
  public:
    fib_route_t();
    explicit fib_route_t(fib_route_key_t const & route_key);
+   fib_route_t(const fib_route_t& other);
+   fib_route_t& operator=(
+      fib_route_t const & other);
+
 
    /** Getter for 'route_key': IP v4/v6 network route key consisting of prefix. */
    fib_route_key_t route_key() const;
@@ -126,18 +141,22 @@ class EOS_SDK_PUBLIC fib_route_t {
    friend std::ostream& operator<<(std::ostream& os, const fib_route_t& obj);
 
  private:
-   fib_route_key_t route_key_;
-   ip_route_preference_t preference_;
-   ip_route_metric_t metric_;
-   fib_route_type_t route_type_;
-   uint64_t fec_id_;
+   std::shared_ptr<fib_route_impl_t> pimpl;
 };
 
+EOS_SDK_PUBLIC
+std::ostream& operator<<(std::ostream& os, const fib_route_t& obj);
+
+class fib_fec_key_impl_t;
 /** FEC key that goes in FIB. */
 class EOS_SDK_PUBLIC fib_fec_key_t {
  public:
    fib_fec_key_t();
    explicit fib_fec_key_t(uint64_t fec_id);
+   fib_fec_key_t(const fib_fec_key_t& other);
+   fib_fec_key_t& operator=(
+      fib_fec_key_t const & other);
+
 
    /**
     * Getter for 'fec_id': fec_id[56:63] denotes the feature, 0: fib Fec, 1:
@@ -162,14 +181,22 @@ class EOS_SDK_PUBLIC fib_fec_key_t {
    friend std::ostream& operator<<(std::ostream& os, const fib_fec_key_t& obj);
 
  private:
-   uint64_t fec_id_;
+   std::shared_ptr<fib_fec_key_impl_t> pimpl;
 };
 
+EOS_SDK_PUBLIC
+std::ostream& operator<<(std::ostream& os, const fib_fec_key_t& obj);
+
+class fib_via_impl_t;
 /** via (nexthop) information. */
 class EOS_SDK_PUBLIC fib_via_t {
  public:
    fib_via_t();
    fib_via_t(ip_addr_t const & hop, intf_id_t intf);
+   fib_via_t(const fib_via_t& other);
+   fib_via_t& operator=(
+      fib_via_t const & other);
+
 
    ip_addr_t hop() const;
    void hop_is(ip_addr_t const & hop);
@@ -195,10 +222,11 @@ class EOS_SDK_PUBLIC fib_via_t {
    friend std::ostream& operator<<(std::ostream& os, const fib_via_t& obj);
 
  private:
-   ip_addr_t hop_;
-   intf_id_t intf_;
-   mpls_label_t mpls_label_;
+   std::shared_ptr<fib_via_impl_t> pimpl;
 };
+
+EOS_SDK_PUBLIC
+std::ostream& operator<<(std::ostream& os, const fib_via_t& obj);
 
 enum fib_fec_type_t {
    FEC_TYPE_FORWARD,
@@ -211,8 +239,10 @@ enum fib_fec_type_t {
    FEC_TYPE_UNKNOWN,
 };
 /** Appends a string representation of enum fib_fec_type_t value to the ostream. */
-std::ostream& operator<<(std::ostream& os, const fib_fec_type_t & enum_val);
+EOS_SDK_PUBLIC std::ostream& operator<<(std::ostream& os,
+                                        const fib_fec_type_t & enum_val);
 
+class fib_fec_impl_t;
 /**
  * FEC (Forwarding Equivalence Class),
  * consists of collection (one or more) vias.
@@ -221,6 +251,10 @@ class EOS_SDK_PUBLIC fib_fec_t {
  public:
    fib_fec_t();
    explicit fib_fec_t(fib_fec_key_t fec_key);
+   fib_fec_t(const fib_fec_t& other);
+   fib_fec_t& operator=(
+      fib_fec_t const & other);
+
 
    /** Getter for 'fec_key': fec_key consisting of fec_id. */
    fib_fec_key_t fec_key() const;
@@ -263,13 +297,11 @@ class EOS_SDK_PUBLIC fib_fec_t {
    friend std::ostream& operator<<(std::ostream& os, const fib_fec_t& obj);
 
  private:
-   fib_fec_key_t fec_key_;
-   fib_fec_type_t fec_type_;
-   std::string nexthop_group_name_;
-   std::forward_list<fib_via_t> via_;
+   std::shared_ptr<fib_fec_impl_t> pimpl;
 };
-}
 
-#include <eos/inline/types/fib.h>
+EOS_SDK_PUBLIC
+std::ostream& operator<<(std::ostream& os, const fib_fec_t& obj);
+}
 
 #endif // EOS_TYPES_FIB_H

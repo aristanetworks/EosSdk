@@ -1,4 +1,4 @@
-// Copyright (c) 2016 Arista Networks, Inc.  All rights reserved.
+// Copyright (c) 2022 Arista Networks, Inc.  All rights reserved.
 // Arista Networks, Inc. Confidential and Proprietary.
 
 #ifndef EOS_INLINE_TYPES_ETH_INTF_H
@@ -6,7 +6,7 @@
 
 namespace eos {
 
-inline std::ostream&
+EOS_SDK_PUBLIC std::ostream&
 operator<<(std::ostream& os, const switchport_mode_t & enum_val) {
    if (enum_val==SWITCHPORT_MODE_ACCESS) {
       os << "SWITCHPORT_MODE_ACCESS";
@@ -25,7 +25,6 @@ operator<<(std::ostream& os, const switchport_mode_t & enum_val) {
    }
    return os;
 }
-
 
 }
 

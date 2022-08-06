@@ -25,6 +25,10 @@ class fib_mgr_impl : public fib_mgr {
       return;
    }
 
+   void set_fecGeninit_task( int const ratio ) {
+      return;
+   }
+
    bool fib_fec_set(fib_fec_t const & fec) {
       // TODO: add/replace the fec
       return true;

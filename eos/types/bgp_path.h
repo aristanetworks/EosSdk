@@ -1,4 +1,4 @@
-// Copyright (c) 2020 Arista Networks, Inc.  All rights reserved.
+// Copyright (c) 2022 Arista Networks, Inc.  All rights reserved.
 // Arista Networks, Inc. Confidential and Proprietary.
 
 #ifndef EOS_TYPES_BGP_PATH_H
@@ -7,6 +7,7 @@
 #include <eos/hash_mix.h>
 #include <eos/ip.h>
 #include <eos/utility.h>
+#include <memory>
 #include <sstream>
 #include <unordered_set>
 
@@ -18,7 +19,8 @@ enum bgp_afi_safi_t {
    BGP_IPV6_UNICAST,
 };
 /** Appends a string representation of enum bgp_afi_safi_t value to the ostream. */
-std::ostream& operator<<(std::ostream& os, const bgp_afi_safi_t & enum_val);
+EOS_SDK_PUBLIC std::ostream& operator<<(std::ostream& os,
+                                        const bgp_afi_safi_t & enum_val);
 
 /** The BGP path stage before/after the inbound policies are applied on the route. */
 enum bgp_receive_route_stage_t {
@@ -29,15 +31,20 @@ enum bgp_receive_route_stage_t {
  * Appends a string representation of enum bgp_receive_route_stage_t value to the
  * ostream.
  */
-std::ostream& operator<<(std::ostream& os,
-                         const bgp_receive_route_stage_t & enum_val);
+EOS_SDK_PUBLIC std::ostream& operator<<(std::ostream& os,
+                                        const bgp_receive_route_stage_t & enum_val);
 
+class bgp_path_attr_fields_impl_t;
 /** The BGP path option to enable lookup of additional path attributes fields. */
 class EOS_SDK_PUBLIC bgp_path_attr_fields_t {
  public:
    bgp_path_attr_fields_t();
    /** Create BGP path attribute field options. */
    explicit bgp_path_attr_fields_t(bool next_hop);
+   bgp_path_attr_fields_t(const bgp_path_attr_fields_t& other);
+   bgp_path_attr_fields_t& operator=(
+      bgp_path_attr_fields_t const & other);
+
 
    /**
     * Getter for 'next_hop': true if these path attribute options enable next hop
@@ -71,16 +78,23 @@ class EOS_SDK_PUBLIC bgp_path_attr_fields_t {
                                    const bgp_path_attr_fields_t& obj);
 
  private:
-   bool next_hop_;
-   bool community_list_;
+   std::shared_ptr<bgp_path_attr_fields_impl_t> pimpl;
 };
 
+EOS_SDK_PUBLIC
+std::ostream& operator<<(std::ostream& os, const bgp_path_attr_fields_t& obj);
+
+class bgp_path_options_impl_t;
 /** The BGP path lookup options. */
 class EOS_SDK_PUBLIC bgp_path_options_t {
  public:
    bgp_path_options_t();
    /** Create BGP path options. */
    explicit bgp_path_options_t(bgp_receive_route_stage_t receive_route_stage);
+   bgp_path_options_t(const bgp_path_options_t& other);
+   bgp_path_options_t& operator=(
+      bgp_path_options_t const & other);
+
 
    /**
     * Getter for 'receive_route_stage': The received routes stage of a path to
@@ -113,15 +127,22 @@ class EOS_SDK_PUBLIC bgp_path_options_t {
    friend std::ostream& operator<<(std::ostream& os, const bgp_path_options_t& obj);
 
  private:
-   bgp_receive_route_stage_t receive_route_stage_;
-   bgp_path_attr_fields_t path_attr_fields_;
+   std::shared_ptr<bgp_path_options_impl_t> pimpl;
 };
 
+EOS_SDK_PUBLIC
+std::ostream& operator<<(std::ostream& os, const bgp_path_options_t& obj);
+
+class bgp_path_attr_impl_t;
 /** The BGP path attribute entry. */
 class EOS_SDK_PUBLIC bgp_path_attr_t {
  public:
    bgp_path_attr_t();
    explicit bgp_path_attr_t(uint8_t origin, uint32_t med, uint32_t local_pref);
+   bgp_path_attr_t(const bgp_path_attr_t& other);
+   bgp_path_attr_t& operator=(
+      bgp_path_attr_t const & other);
+
 
    /** Getter for 'next_hop': The nexthop address for the route. */
    ip_addr_t next_hop() const;
@@ -167,13 +188,13 @@ class EOS_SDK_PUBLIC bgp_path_attr_t {
    friend std::ostream& operator<<(std::ostream& os, const bgp_path_attr_t& obj);
 
  private:
-   ip_addr_t next_hop_;
-   uint8_t origin_;
-   uint32_t med_;
-   uint32_t local_pref_;
-   std::unordered_set<uint32_t> community_list_;
+   std::shared_ptr<bgp_path_attr_impl_t> pimpl;
 };
 
+EOS_SDK_PUBLIC
+std::ostream& operator<<(std::ostream& os, const bgp_path_attr_t& obj);
+
+class bgp_path_key_impl_t;
 /** The key which uniquely identifies a BGP path. Supports IPV4/IPV6 Unicast. */
 class EOS_SDK_PUBLIC bgp_path_key_t {
  public:
@@ -181,6 +202,10 @@ class EOS_SDK_PUBLIC bgp_path_key_t {
    /** Create BGP path key. */
    explicit bgp_path_key_t(ip_prefix_t const & prefix, ip_addr_t const & peer_addr,
                            std::string const & vrf_name);
+   bgp_path_key_t(const bgp_path_key_t& other);
+   bgp_path_key_t& operator=(
+      bgp_path_key_t const & other);
+
 
    /** Getter for 'prefix': IPv4/IPv6 network prefix. */
    ip_prefix_t prefix() const;
@@ -213,16 +238,22 @@ class EOS_SDK_PUBLIC bgp_path_key_t {
    friend std::ostream& operator<<(std::ostream& os, const bgp_path_key_t& obj);
 
  private:
-   ip_prefix_t prefix_;
-   ip_addr_t peer_addr_;
-   std::string vrf_name_;
+   std::shared_ptr<bgp_path_key_impl_t> pimpl;
 };
 
+EOS_SDK_PUBLIC
+std::ostream& operator<<(std::ostream& os, const bgp_path_key_t& obj);
+
+class bgp_path_impl_t;
 /** The BGP path entry. */
 class EOS_SDK_PUBLIC bgp_path_t {
  public:
    bgp_path_t();
    explicit bgp_path_t(bgp_path_key_t const & path_key);
+   bgp_path_t(const bgp_path_t& other);
+   bgp_path_t& operator=(
+      bgp_path_t const & other);
+
 
    /** Getter for 'path_key': The BGP path key. */
    bgp_path_key_t path_key() const;
@@ -249,11 +280,11 @@ class EOS_SDK_PUBLIC bgp_path_t {
    friend std::ostream& operator<<(std::ostream& os, const bgp_path_t& obj);
 
  private:
-   bgp_path_key_t path_key_;
-   bgp_path_attr_t path_attr_;
+   std::shared_ptr<bgp_path_impl_t> pimpl;
 };
-}
 
-#include <eos/inline/types/bgp_path.h>
+EOS_SDK_PUBLIC
+std::ostream& operator<<(std::ostream& os, const bgp_path_t& obj);
+}
 
 #endif // EOS_TYPES_BGP_PATH_H

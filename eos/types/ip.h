@@ -1,4 +1,4 @@
-// Copyright (c) 2021 Arista Networks, Inc.  All rights reserved.
+// Copyright (c) 2022 Arista Networks, Inc.  All rights reserved.
 // Arista Networks, Inc. Confidential and Proprietary.
 
 #ifndef EOS_TYPES_IP_H
@@ -10,6 +10,7 @@
 #include <eos/exception.h>
 #include <eos/hash_mix.h>
 #include <eos/panic.h>
+#include <memory>
 #include <netinet/in.h>
 #include <sstream>
 #include <stddef.h>
@@ -28,7 +29,7 @@ enum af_t {
    AF_IPV6 = 6,
 };
 /** Appends a string representation of enum af_t value to the ostream. */
-std::ostream& operator<<(std::ostream& os, const af_t & enum_val);
+EOS_SDK_PUBLIC std::ostream& operator<<(std::ostream& os, const af_t & enum_val);
 
 /**
  * An IP address.
@@ -103,6 +104,9 @@ class EOS_SDK_PUBLIC ip_addr_t {
    friend bool parse_ip_addr(char const *, ip_addr_t * result);
 };
 
+EOS_SDK_PUBLIC
+std::ostream& operator<<(std::ostream& os, const ip_addr_t& obj);
+
 /**
  *  An IPv4 or IPv6 route prefix.
  *
@@ -163,6 +167,10 @@ class EOS_SDK_PUBLIC ip_prefix_t {
    friend bool parse_ip_prefix(char const *, ip_prefix_t * result);
 };
 
+EOS_SDK_PUBLIC
+std::ostream& operator<<(std::ostream& os, const ip_prefix_t& obj);
+
+class ip_addr_mask_impl_t;
 /**
  * An IP address with a subnet mask.
  *
@@ -175,6 +183,10 @@ class EOS_SDK_PUBLIC ip_addr_mask_t {
  public:
    ip_addr_mask_t();
    ip_addr_mask_t(ip_addr_t const & addr, uint8_t mask_length);
+   ip_addr_mask_t(const ip_addr_mask_t& other);
+   ip_addr_mask_t& operator=(
+      ip_addr_mask_t const & other);
+
 
    /** Getter for 'addr': the address/mask's IP address. */
    ip_addr_t addr() const;
@@ -205,9 +217,11 @@ class EOS_SDK_PUBLIC ip_addr_mask_t {
    friend std::ostream& operator<<(std::ostream& os, const ip_addr_mask_t& obj);
 
  private:
-   ip_addr_t addr_;
-   uint8_t mask_length_;
+   std::shared_ptr<ip_addr_mask_impl_t> pimpl;
 };
+
+EOS_SDK_PUBLIC
+std::ostream& operator<<(std::ostream& os, const ip_addr_mask_t& obj);
 
 /**
  *
@@ -262,8 +276,9 @@ class EOS_SDK_PUBLIC address_overlap_error : public configuration_error {
  private:
    ip_addr_mask_t addr_;
 };
-}
 
-#include <eos/inline/types/ip.h>
+EOS_SDK_PUBLIC
+std::ostream& operator<<(std::ostream& os, const address_overlap_error& obj);
+}
 
 #endif // EOS_TYPES_IP_H

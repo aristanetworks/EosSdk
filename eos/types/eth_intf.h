@@ -1,9 +1,10 @@
-// Copyright (c) 2016 Arista Networks, Inc.  All rights reserved.
+// Copyright (c) 2022 Arista Networks, Inc.  All rights reserved.
 // Arista Networks, Inc. Confidential and Proprietary.
 
 #ifndef EOS_TYPES_ETH_INTF_H
 #define EOS_TYPES_ETH_INTF_H
 
+#include <memory>
 
 namespace eos {
 
@@ -25,9 +26,8 @@ enum switchport_mode_t {
 /**
  * Appends a string representation of enum switchport_mode_t value to the ostream.
  */
-std::ostream& operator<<(std::ostream& os, const switchport_mode_t & enum_val);
+EOS_SDK_PUBLIC std::ostream& operator<<(std::ostream& os,
+                                        const switchport_mode_t & enum_val);
 }
-
-#include <eos/inline/types/eth_intf.h>
 
 #endif // EOS_TYPES_ETH_INTF_H

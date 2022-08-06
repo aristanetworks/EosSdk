@@ -1,4 +1,4 @@
-// Copyright (c) 2021 Arista Networks, Inc.  All rights reserved.
+// Copyright (c) 2022 Arista Networks, Inc.  All rights reserved.
 // Arista Networks, Inc. Confidential and Proprietary.
 
 #ifndef EOS_TYPES_NEXTHOP_GROUP_H
@@ -9,6 +9,7 @@
 #include <eos/utility.h>
 #include <forward_list>
 #include <map>
+#include <memory>
 #include <sstream>
 
 namespace eos {
@@ -37,7 +38,8 @@ enum nexthop_group_encap_t {
  * Appends a string representation of enum nexthop_group_encap_t value to the
  * ostream.
  */
-std::ostream& operator<<(std::ostream& os, const nexthop_group_encap_t & enum_val);
+EOS_SDK_PUBLIC std::ostream& operator<<(std::ostream& os,
+                                        const nexthop_group_encap_t & enum_val);
 
 /** How the GRE tunnel key is set for GRE nexthop groups. */
 enum nexthop_group_gre_key_t {
@@ -53,9 +55,10 @@ enum nexthop_group_gre_key_t {
  * Appends a string representation of enum nexthop_group_gre_key_t value to the
  * ostream.
  */
-std::ostream& operator<<(std::ostream& os,
-                         const nexthop_group_gre_key_t & enum_val);
+EOS_SDK_PUBLIC std::ostream& operator<<(std::ostream& os,
+                                        const nexthop_group_gre_key_t & enum_val);
 
+class nexthop_group_mpls_action_impl_t;
 /**
  * An MPLS nexthop group switching operation.
  *
@@ -71,6 +74,10 @@ class EOS_SDK_PUBLIC nexthop_group_mpls_action_t {
    /** Constructs a populated MPLS label stack for some switching action. */
    nexthop_group_mpls_action_t(mpls_action_t action_type,
                                std::forward_list<mpls_label_t> const & label_stack);
+   nexthop_group_mpls_action_t(const nexthop_group_mpls_action_t& other);
+   nexthop_group_mpls_action_t& operator=(
+      nexthop_group_mpls_action_t const & other);
+
 
    /** Getter for 'action_type': the MPLS switching operation for this action. */
    mpls_action_t action_type() const;
@@ -111,15 +118,22 @@ class EOS_SDK_PUBLIC nexthop_group_mpls_action_t {
                                    const nexthop_group_mpls_action_t& obj);
 
  private:
-   mpls_action_t action_type_;
-   std::forward_list<mpls_label_t> label_stack_;
+   std::shared_ptr<nexthop_group_mpls_action_impl_t> pimpl;
 };
 
+EOS_SDK_PUBLIC
+std::ostream& operator<<(std::ostream& os, const nexthop_group_mpls_action_t& obj);
+
+class nexthop_group_entry_counter_impl_t;
 /** Defines counter for a nexthop entry. */
 class EOS_SDK_PUBLIC nexthop_group_entry_counter_t {
  public:
    nexthop_group_entry_counter_t();
    nexthop_group_entry_counter_t(uint64_t packets, uint64_t bytes, bool valid);
+   nexthop_group_entry_counter_t(const nexthop_group_entry_counter_t& other);
+   nexthop_group_entry_counter_t& operator=(
+      nexthop_group_entry_counter_t const & other);
+
 
    uint64_t packets() const;
 
@@ -144,11 +158,14 @@ class EOS_SDK_PUBLIC nexthop_group_entry_counter_t {
                                    const nexthop_group_entry_counter_t& obj);
 
  private:
-   uint64_t packets_;
-   uint64_t bytes_;
-   bool valid_;
+   std::shared_ptr<nexthop_group_entry_counter_impl_t> pimpl;
 };
 
+EOS_SDK_PUBLIC
+std::ostream& operator<<(std::ostream& os,
+                         const nexthop_group_entry_counter_t& obj);
+
+class nexthop_group_entry_impl_t;
 /**
  * A nexthop group destination entry.
  *
@@ -160,6 +177,10 @@ class EOS_SDK_PUBLIC nexthop_group_entry_t {
    nexthop_group_entry_t();
    explicit nexthop_group_entry_t(ip_addr_t const & nexthop);
    nexthop_group_entry_t(ip_addr_t const & nexthop, intf_id_t const & intf);
+   nexthop_group_entry_t(const nexthop_group_entry_t& other);
+   nexthop_group_entry_t& operator=(
+      nexthop_group_entry_t const & other);
+
 
    /** Getter for 'mpls_action': MPLS label switching stack for this entry. */
    nexthop_group_mpls_action_t mpls_action() const;
@@ -193,11 +214,13 @@ class EOS_SDK_PUBLIC nexthop_group_entry_t {
                                    const nexthop_group_entry_t& obj);
 
  private:
-   nexthop_group_mpls_action_t mpls_action_;
-   ip_addr_t nexthop_;
-   intf_id_t intf_;
+   std::shared_ptr<nexthop_group_entry_impl_t> pimpl;
 };
 
+EOS_SDK_PUBLIC
+std::ostream& operator<<(std::ostream& os, const nexthop_group_entry_t& obj);
+
+class nexthop_group_impl_t;
 /**
  * A nexthop group.
  *
@@ -213,6 +236,10 @@ class EOS_SDK_PUBLIC nexthop_group_t {
    nexthop_group_t(std::string name, ip_addr_t const & source_ip);
    nexthop_group_t(std::string name, ip_addr_t const & source_ip,
                    std::map<uint16_t, nexthop_group_entry_t> const & nexthops);
+   nexthop_group_t(const nexthop_group_t& other);
+   nexthop_group_t& operator=(
+      nexthop_group_t const & other);
+
 
    /** Getter for 'name': the unique name of the nexthop group. */
    std::string name() const;
@@ -300,19 +327,11 @@ class EOS_SDK_PUBLIC nexthop_group_t {
    friend std::ostream& operator<<(std::ostream& os, const nexthop_group_t& obj);
 
  private:
-   std::string name_;
-   nexthop_group_encap_t type_;
-   nexthop_group_gre_key_t gre_key_type_;
-   uint16_t ttl_;
-   ip_addr_t source_ip_;
-   intf_id_t source_intf_;
-   bool autosize_;
-   std::map<uint16_t, nexthop_group_entry_t> nexthops_;
-   std::map<uint16_t, ip_addr_t> destination_ips_;
-   bool counters_unshared_;
+   std::shared_ptr<nexthop_group_impl_t> pimpl;
 };
-}
 
-#include <eos/inline/types/nexthop_group.h>
+EOS_SDK_PUBLIC
+std::ostream& operator<<(std::ostream& os, const nexthop_group_t& obj);
+}
 
 #endif // EOS_TYPES_NEXTHOP_GROUP_H

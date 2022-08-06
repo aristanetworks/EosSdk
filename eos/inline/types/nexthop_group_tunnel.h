@@ -1,4 +1,4 @@
-// Copyright (c) 2021 Arista Networks, Inc.  All rights reserved.
+// Copyright (c) 2022 Arista Networks, Inc.  All rights reserved.
 // Arista Networks, Inc. Confidential and Proprietary.
 
 #ifndef EOS_INLINE_TYPES_NEXTHOP_GROUP_TUNNEL_H
@@ -6,102 +6,91 @@
 
 namespace eos {
 
-inline nexthop_group_tunnel_t::nexthop_group_tunnel_t() :
-      tunnel_endpoint_(), nhg_name_(), igp_pref_(), igp_metric_() {
+nexthop_group_tunnel_t::nexthop_group_tunnel_t() {
+   pimpl = std::shared_ptr<nexthop_group_tunnel_impl_t>(
+      new nexthop_group_tunnel_impl_t()
+   );
+}
+nexthop_group_tunnel_t::nexthop_group_tunnel_t(
+         ip_prefix_t const & tunnel_endpoint, std::string const & nhg_name) {
+   pimpl = std::shared_ptr<nexthop_group_tunnel_impl_t>(
+      new nexthop_group_tunnel_impl_t(
+         tunnel_endpoint,
+         nhg_name
+      )
+   );
+}
+nexthop_group_tunnel_t::nexthop_group_tunnel_t(
+   const nexthop_group_tunnel_t& other)
+{
+   pimpl = std::make_unique<nexthop_group_tunnel_impl_t>(
+      nexthop_group_tunnel_impl_t(*other.pimpl));
+}
+nexthop_group_tunnel_t&
+nexthop_group_tunnel_t::operator=(
+   nexthop_group_tunnel_t const & other)
+{
+   pimpl = std::shared_ptr<nexthop_group_tunnel_impl_t>(
+      new nexthop_group_tunnel_impl_t(*other.pimpl));
+   return *this;
 }
 
-inline nexthop_group_tunnel_t::nexthop_group_tunnel_t(
-         ip_prefix_t const & tunnel_endpoint, std::string const & nhg_name) :
-      tunnel_endpoint_(tunnel_endpoint), nhg_name_(nhg_name), igp_pref_(),
-      igp_metric_() {
-}
-
-inline ip_prefix_t
+ip_prefix_t
 nexthop_group_tunnel_t::tunnel_endpoint() const {
-   return tunnel_endpoint_;
+   return pimpl->tunnel_endpoint();
 }
-
-inline void
+void
 nexthop_group_tunnel_t::tunnel_endpoint_is(ip_prefix_t const & tunnel_endpoint) {
-   tunnel_endpoint_ = tunnel_endpoint;
+   pimpl->tunnel_endpoint_is(tunnel_endpoint);
 }
-
-inline std::string
+std::string
 nexthop_group_tunnel_t::nhg_name() const {
-   return nhg_name_;
+   return pimpl->nhg_name();
 }
-
-inline void
+void
 nexthop_group_tunnel_t::nhg_name_is(std::string const & nhg_name) {
-   nhg_name_ = nhg_name;
+   pimpl->nhg_name_is(nhg_name);
 }
-
-inline uint8_t
+uint8_t
 nexthop_group_tunnel_t::igp_pref() const {
-   return igp_pref_;
+   return pimpl->igp_pref();
 }
-
-inline void
+void
 nexthop_group_tunnel_t::igp_pref_is(uint8_t igp_pref) {
-   igp_pref_ = igp_pref;
+   pimpl->igp_pref_is(igp_pref);
 }
-
-inline uint32_t
+uint32_t
 nexthop_group_tunnel_t::igp_metric() const {
-   return igp_metric_;
+   return pimpl->igp_metric();
 }
-
-inline void
+void
 nexthop_group_tunnel_t::igp_metric_is(uint32_t igp_metric) {
-   igp_metric_ = igp_metric;
+   pimpl->igp_metric_is(igp_metric);
 }
-
-inline bool
+bool
 nexthop_group_tunnel_t::operator==(nexthop_group_tunnel_t const & other) const {
-   return tunnel_endpoint_ == other.tunnel_endpoint_ &&
-          nhg_name_ == other.nhg_name_ &&
-          igp_pref_ == other.igp_pref_ &&
-          igp_metric_ == other.igp_metric_;
+   return pimpl->operator==(*other.pimpl);
 }
-
-inline bool
+bool
 nexthop_group_tunnel_t::operator!=(nexthop_group_tunnel_t const & other) const {
-   return !operator==(other);
+   return pimpl->operator!=(*other.pimpl);
 }
-
-inline uint32_t
+uint32_t
 nexthop_group_tunnel_t::hash() const {
-   hash_mix h;
-   mix_me(h);
-   return h.result();
+   return pimpl->hash();
 }
-
-inline void
+void
 nexthop_group_tunnel_t::mix_me(hash_mix & h) const {
-   h.mix(tunnel_endpoint_); // ip_prefix_t
-   h.mix(nhg_name_); // std::string
-   h.mix(igp_pref_); // uint8_t
-   h.mix(igp_metric_); // uint32_t
+   pimpl->mix_me(h);
 }
-
-inline std::string
+std::string
 nexthop_group_tunnel_t::to_string() const {
-   std::ostringstream ss;
-   ss << "nexthop_group_tunnel_t(";
-   ss << "tunnel_endpoint=" << tunnel_endpoint_;
-   ss << ", nhg_name='" << nhg_name_ << "'";
-   ss << ", igp_pref=" << igp_pref_;
-   ss << ", igp_metric=" << igp_metric_;
-   ss << ")";
-   return ss.str();
+   return pimpl->to_string();
 }
-
-inline std::ostream&
+std::ostream&
 operator<<(std::ostream& os, const nexthop_group_tunnel_t& obj) {
-   os << obj.to_string();
-   return os;
+   return operator<<(os, *obj.pimpl);
 }
-
 
 }
 

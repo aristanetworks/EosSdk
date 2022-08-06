@@ -1,4 +1,4 @@
-// Copyright (c) 2020 Arista Networks, Inc.  All rights reserved.
+// Copyright (c) 2022 Arista Networks, Inc.  All rights reserved.
 // Arista Networks, Inc. Confidential and Proprietary.
 
 #ifndef EOS_INLINE_TYPES_IP_ROUTE_H
@@ -6,7 +6,7 @@
 
 namespace eos {
 
-inline std::ostream&
+EOS_SDK_PUBLIC std::ostream&
 operator<<(std::ostream& os, const ip_route_action_t & enum_val) {
    if (enum_val==IP_ROUTE_ACTION_NULL) {
       os << "IP_ROUTE_ACTION_NULL";
@@ -23,326 +23,284 @@ operator<<(std::ostream& os, const ip_route_action_t & enum_val) {
 }
 
 
-
-inline ip_route_key_t::ip_route_key_t() :
-      prefix_(), preference_(1) {
+ip_route_key_t::ip_route_key_t() {
+   pimpl = std::shared_ptr<ip_route_key_impl_t>(
+      new ip_route_key_impl_t()
+   );
+}
+ip_route_key_t::ip_route_key_t(ip_prefix_t const & prefix) {
+   pimpl = std::shared_ptr<ip_route_key_impl_t>(
+      new ip_route_key_impl_t(
+         prefix
+      )
+   );
+}
+ip_route_key_t::ip_route_key_t(ip_prefix_t const & prefix,
+                                      ip_route_preference_t preference) {
+   pimpl = std::shared_ptr<ip_route_key_impl_t>(
+      new ip_route_key_impl_t(
+         prefix,
+         preference
+      )
+   );
+}
+ip_route_key_t::ip_route_key_t(
+   const ip_route_key_t& other)
+{
+   pimpl = std::make_unique<ip_route_key_impl_t>(
+      ip_route_key_impl_t(*other.pimpl));
+}
+ip_route_key_t&
+ip_route_key_t::operator=(
+   ip_route_key_t const & other)
+{
+   pimpl = std::shared_ptr<ip_route_key_impl_t>(
+      new ip_route_key_impl_t(*other.pimpl));
+   return *this;
 }
 
-inline ip_route_key_t::ip_route_key_t(ip_prefix_t const & prefix) :
-      prefix_(prefix), preference_(1) {
-}
-
-inline ip_route_key_t::ip_route_key_t(ip_prefix_t const & prefix,
-                                      ip_route_preference_t preference) :
-      prefix_(prefix), preference_(preference) {
-}
-
-inline ip_prefix_t
+ip_prefix_t
 ip_route_key_t::prefix() const {
-   return prefix_;
+   return pimpl->prefix();
 }
-
-inline void
+void
 ip_route_key_t::prefix_is(ip_prefix_t const & prefix) {
-   prefix_ = prefix;
+   pimpl->prefix_is(prefix);
 }
-
-inline ip_route_preference_t
+ip_route_preference_t
 ip_route_key_t::preference() const {
-   return preference_;
+   return pimpl->preference();
 }
-
-inline void
+void
 ip_route_key_t::preference_is(ip_route_preference_t preference) {
-   preference_ = preference;
+   pimpl->preference_is(preference);
 }
-
-inline bool
+bool
 ip_route_key_t::operator==(ip_route_key_t const & other) const {
-   return prefix_ == other.prefix_ &&
-          preference_ == other.preference_;
+   return pimpl->operator==(*other.pimpl);
 }
-
-inline bool
+bool
 ip_route_key_t::operator!=(ip_route_key_t const & other) const {
-   return !operator==(other);
+   return pimpl->operator!=(*other.pimpl);
 }
-
-inline uint32_t
+uint32_t
 ip_route_key_t::hash() const {
-   hash_mix h;
-   mix_me(h);
-   return h.result();
+   return pimpl->hash();
 }
-
-inline void
+void
 ip_route_key_t::mix_me(hash_mix & h) const {
-   h.mix(prefix_); // ip_prefix_t
-   h.mix(preference_); // ip_route_preference_t
+   pimpl->mix_me(h);
 }
-
-inline std::string
+std::string
 ip_route_key_t::to_string() const {
-   std::ostringstream ss;
-   ss << "ip_route_key_t(";
-   ss << "prefix=" << prefix_;
-   ss << ", preference=" << preference_;
-   ss << ")";
-   return ss.str();
+   return pimpl->to_string();
 }
-
-inline std::ostream&
+std::ostream&
 operator<<(std::ostream& os, const ip_route_key_t& obj) {
-   os << obj.to_string();
-   return os;
+   return operator<<(os, *obj.pimpl);
 }
 
 
-
-inline ip_route_t::ip_route_t() :
-      key_(), tag_(0) {
+ip_route_t::ip_route_t() {
+   pimpl = std::shared_ptr<ip_route_impl_t>(
+      new ip_route_impl_t()
+   );
+}
+ip_route_t::ip_route_t(ip_route_key_t const & key) {
+   pimpl = std::shared_ptr<ip_route_impl_t>(
+      new ip_route_impl_t(
+         key
+      )
+   );
+}
+ip_route_t::ip_route_t(
+   const ip_route_t& other)
+{
+   pimpl = std::make_unique<ip_route_impl_t>(
+      ip_route_impl_t(*other.pimpl));
+}
+ip_route_t&
+ip_route_t::operator=(
+   ip_route_t const & other)
+{
+   pimpl = std::shared_ptr<ip_route_impl_t>(
+      new ip_route_impl_t(*other.pimpl));
+   return *this;
 }
 
-inline ip_route_t::ip_route_t(ip_route_key_t const & key) :
-      key_(key), tag_(0) {
-}
-
-inline ip_route_key_t
+ip_route_key_t
 ip_route_t::key() const {
-   return key_;
+   return pimpl->key();
 }
-
-inline void
+void
 ip_route_t::key_is(ip_route_key_t const & key) {
-   key_ = key;
+   pimpl->key_is(key);
 }
-
-inline ip_route_tag_t
+ip_route_tag_t
 ip_route_t::tag() const {
-   return tag_;
+   return pimpl->tag();
 }
-
-inline void
+void
 ip_route_t::tag_is(ip_route_tag_t tag) {
-   tag_ = tag;
+   pimpl->tag_is(tag);
 }
-
-inline bool
+bool
 ip_route_t::operator==(ip_route_t const & other) const {
-   return key_ == other.key_ &&
-          tag_ == other.tag_;
+   return pimpl->operator==(*other.pimpl);
 }
-
-inline bool
+bool
 ip_route_t::operator!=(ip_route_t const & other) const {
-   return !operator==(other);
+   return pimpl->operator!=(*other.pimpl);
 }
-
-inline uint32_t
+uint32_t
 ip_route_t::hash() const {
-   hash_mix h;
-   mix_me(h);
-   return h.result();
+   return pimpl->hash();
 }
-
-inline void
+void
 ip_route_t::mix_me(hash_mix & h) const {
-   h.mix(key_); // ip_route_key_t
-   h.mix(tag_); // ip_route_tag_t
+   pimpl->mix_me(h);
 }
-
-inline std::string
+std::string
 ip_route_t::to_string() const {
-   std::ostringstream ss;
-   ss << "ip_route_t(";
-   ss << "key=" << key_;
-   ss << ", tag=" << tag_;
-   ss << ")";
-   return ss.str();
+   return pimpl->to_string();
 }
-
-inline std::ostream&
+std::ostream&
 operator<<(std::ostream& os, const ip_route_t& obj) {
-   os << obj.to_string();
-   return os;
+   return operator<<(os, *obj.pimpl);
 }
 
 
-
-inline ip_route_via_t::ip_route_via_t() :
-      route_key_(), hop_(), intf_(), nexthop_group_(), mpls_label_(), vni_(),
-      vtep_addr_(), router_mac_(), egress_vrf_(), metric_(0) {
+ip_route_via_t::ip_route_via_t() {
+   pimpl = std::shared_ptr<ip_route_via_impl_t>(
+      new ip_route_via_impl_t()
+   );
+}
+ip_route_via_t::ip_route_via_t(ip_route_key_t const & route_key) {
+   pimpl = std::shared_ptr<ip_route_via_impl_t>(
+      new ip_route_via_impl_t(
+         route_key
+      )
+   );
+}
+ip_route_via_t::ip_route_via_t(
+   const ip_route_via_t& other)
+{
+   pimpl = std::make_unique<ip_route_via_impl_t>(
+      ip_route_via_impl_t(*other.pimpl));
+}
+ip_route_via_t&
+ip_route_via_t::operator=(
+   ip_route_via_t const & other)
+{
+   pimpl = std::shared_ptr<ip_route_via_impl_t>(
+      new ip_route_via_impl_t(*other.pimpl));
+   return *this;
 }
 
-inline ip_route_via_t::ip_route_via_t(ip_route_key_t const & route_key) :
-      route_key_(route_key), hop_(), intf_(), nexthop_group_(), mpls_label_(),
-      vni_(), vtep_addr_(), router_mac_(), egress_vrf_(), metric_(0) {
-}
-
-inline ip_route_key_t
+ip_route_key_t
 ip_route_via_t::route_key() const {
-   return route_key_;
+   return pimpl->route_key();
 }
-
-inline void
+void
 ip_route_via_t::route_key_is(ip_route_key_t const & route_key) {
-   route_key_ = route_key;
+   pimpl->route_key_is(route_key);
 }
-
-inline ip_addr_t
+ip_addr_t
 ip_route_via_t::hop() const {
-   return hop_;
+   return pimpl->hop();
 }
-
-inline void
+void
 ip_route_via_t::hop_is(ip_addr_t const & hop) {
-   hop_ = hop;
+   pimpl->hop_is(hop);
 }
-
-inline intf_id_t
+intf_id_t
 ip_route_via_t::intf() const {
-   return intf_;
+   return pimpl->intf();
 }
-
-inline void
+void
 ip_route_via_t::intf_is(intf_id_t intf) {
-   intf_ = intf;
+   pimpl->intf_is(intf);
 }
-
-inline std::string
+std::string
 ip_route_via_t::nexthop_group() const {
-   return nexthop_group_;
+   return pimpl->nexthop_group();
 }
-
-inline void
+void
 ip_route_via_t::nexthop_group_is(std::string const & nexthop_group) {
-   nexthop_group_ = nexthop_group;
+   pimpl->nexthop_group_is(nexthop_group);
 }
-
-inline mpls_label_t
+mpls_label_t
 ip_route_via_t::mpls_label() const {
-   return mpls_label_;
+   return pimpl->mpls_label();
 }
-
-inline void
+void
 ip_route_via_t::mpls_label_is(mpls_label_t mpls_label) {
-   mpls_label_ = mpls_label;
+   pimpl->mpls_label_is(mpls_label);
 }
-
-inline vni_t
+vni_t
 ip_route_via_t::vni() const {
-   return vni_;
+   return pimpl->vni();
 }
-
-inline void
+void
 ip_route_via_t::vni_is(vni_t vni) {
-   vni_ = vni;
+   pimpl->vni_is(vni);
 }
-
-inline ip_addr_t
+ip_addr_t
 ip_route_via_t::vtep_addr() const {
-   return vtep_addr_;
+   return pimpl->vtep_addr();
 }
-
-inline void
+void
 ip_route_via_t::vtep_addr_is(ip_addr_t vtep_addr) {
-   vtep_addr_ = vtep_addr;
+   pimpl->vtep_addr_is(vtep_addr);
 }
-
-inline eth_addr_t
+eth_addr_t
 ip_route_via_t::router_mac() const {
-   return router_mac_;
+   return pimpl->router_mac();
 }
-
-inline void
+void
 ip_route_via_t::router_mac_is(eth_addr_t router_mac) {
-   router_mac_ = router_mac;
+   pimpl->router_mac_is(router_mac);
 }
-
-inline std::string
+std::string
 ip_route_via_t::egress_vrf() const {
-   return egress_vrf_;
+   return pimpl->egress_vrf();
 }
-
-inline void
+void
 ip_route_via_t::egress_vrf_is(std::string const & egress_vrf) {
-   egress_vrf_ = egress_vrf;
+   pimpl->egress_vrf_is(egress_vrf);
 }
-
-inline ip_via_metric_t
+ip_via_metric_t
 ip_route_via_t::metric() const {
-   return metric_;
+   return pimpl->metric();
 }
-
-inline void
+void
 ip_route_via_t::metric_is(ip_via_metric_t metric) {
-   metric_ = metric;
+   pimpl->metric_is(metric);
 }
-
-inline bool
+bool
 ip_route_via_t::operator==(ip_route_via_t const & other) const {
-   return route_key_ == other.route_key_ &&
-          hop_ == other.hop_ &&
-          intf_ == other.intf_ &&
-          nexthop_group_ == other.nexthop_group_ &&
-          mpls_label_ == other.mpls_label_ &&
-          vni_ == other.vni_ &&
-          vtep_addr_ == other.vtep_addr_ &&
-          router_mac_ == other.router_mac_ &&
-          egress_vrf_ == other.egress_vrf_ &&
-          metric_ == other.metric_;
+   return pimpl->operator==(*other.pimpl);
 }
-
-inline bool
+bool
 ip_route_via_t::operator!=(ip_route_via_t const & other) const {
-   return !operator==(other);
+   return pimpl->operator!=(*other.pimpl);
 }
-
-inline uint32_t
+uint32_t
 ip_route_via_t::hash() const {
-   hash_mix h;
-   mix_me(h);
-   return h.result();
+   return pimpl->hash();
 }
-
-inline void
+void
 ip_route_via_t::mix_me(hash_mix & h) const {
-   h.mix(route_key_); // ip_route_key_t
-   h.mix(hop_); // ip_addr_t
-   h.mix(intf_); // intf_id_t
-   h.mix(nexthop_group_); // std::string
-   h.mix(mpls_label_); // mpls_label_t
-   h.mix(vni_); // vni_t
-   h.mix(vtep_addr_); // ip_addr_t
-   h.mix(router_mac_); // eth_addr_t
-   h.mix(egress_vrf_); // std::string
-   h.mix(metric_); // ip_via_metric_t
+   pimpl->mix_me(h);
 }
-
-inline std::string
+std::string
 ip_route_via_t::to_string() const {
-   std::ostringstream ss;
-   ss << "ip_route_via_t(";
-   ss << "route_key=" << route_key_;
-   ss << ", hop=" << hop_;
-   ss << ", intf=" << intf_;
-   ss << ", nexthop_group='" << nexthop_group_ << "'";
-   ss << ", mpls_label=" << mpls_label_;
-   ss << ", vni=" << vni_;
-   ss << ", vtep_addr=" << vtep_addr_;
-   ss << ", router_mac=" << router_mac_;
-   ss << ", egress_vrf='" << egress_vrf_ << "'";
-   ss << ", metric=" << metric_;
-   ss << ")";
-   return ss.str();
+   return pimpl->to_string();
 }
-
-inline std::ostream&
+std::ostream&
 operator<<(std::ostream& os, const ip_route_via_t& obj) {
-   os << obj.to_string();
-   return os;
+   return operator<<(os, *obj.pimpl);
 }
-
 
 }
 

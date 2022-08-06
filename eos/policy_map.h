@@ -112,7 +112,7 @@ namespace eos {
 
 class policy_map_iter_impl;
 class policy_map_hw_status_iter_impl;
-//class policy_map_hw_status_iter_t;
+//class policy_map_hw_status_iter_t; 
 
 /// An iterator providing forwards only iteration over collections of policy maps
 class EOS_SDK_PUBLIC policy_map_iter_t : public iter_base<policy_map_key_t,
@@ -123,7 +123,7 @@ class EOS_SDK_PUBLIC policy_map_iter_t : public iter_base<policy_map_key_t,
 };
 
 /// An iterator providing forwards only iteration over collections of policy maps
-class EOS_SDK_PUBLIC
+class EOS_SDK_PUBLIC 
 policy_map_hw_status_iter_t : public iter_base<policy_map_key_t,
                                                policy_map_hw_status_iter_impl> {
  private:

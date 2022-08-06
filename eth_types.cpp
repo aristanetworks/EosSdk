@@ -1,20 +1,21 @@
-// Copyright (c) 2014 Arista Networks, Inc.  All rights reserved.
+// Copyright (c) 2020 Arista Networks, Inc.  All rights reserved.
 // Arista Networks, Inc. Confidential and Proprietary.
 
 #include "eos/eth.h"
 #include <assert.h>
+#include <impl.h>
 #include <string.h>
 
 namespace eos {
 
 eth_addr_t::eth_addr_t(char const * addr) :
       bytes_{} {
-   // TODO: No op impl.
+   eos::eth_addr_t_to_bytes(addr, bytes_);
 }
 
 eth_addr_t::eth_addr_t(std::string const & addr) :
       bytes_{} {
-   // TODO: No op impl.
+   eos::eth_addr_t_to_bytes(addr.c_str(), bytes_);
 }
 
 bool
@@ -35,6 +36,24 @@ eth_addr_t::byte(int index) const {
 void
 eth_addr_t::bytes(void * arr) const {
    memcpy(arr, bytes_, sizeof(bytes_));
+}
+
+bool
+eth_addr_t::is_unicast() const {
+   return ((bytes_[0] & 0x01) == 0);
+}
+
+bool
+eth_addr_t::is_multicast() const {
+   return (!is_unicast() && !is_broadcast());
+}
+
+bool
+eth_addr_t::is_broadcast() const {
+   
+   return (bytes_[0] == 0xff && bytes_[1] == 0xff &&
+           bytes_[2] == 0xff && bytes_[3] == 0xff &&
+           bytes_[4] == 0xff && bytes_[5] == 0xff);
 }
 
 

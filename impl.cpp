@@ -13,9 +13,9 @@
 #include "eos/sdk.h"
 
 #include "eos/intf.h"
-#include <stdint.h>
-#include <iterator>
-#include <map>
+#include <stdint.h> 
+#include <iterator> 
+#include <map> 
 
 namespace eos {
 
@@ -268,9 +268,9 @@ void eth_addr_t_to_bytes(char const* str, uint8_t* bytes) {
 }
 
 
-// Minimal implementation of intf_id_t. We use a global counter for the ID and we
-// will not bother if that counter wraps. We store interface-name to interface-id
-// mapping and vice-versa in 2 maps.
+// Minimal implementation of intf_id_t. We use a global counter for the ID and we 
+// will not bother if that counter wraps. We store interface-name to interface-id 
+// mapping and vice-versa in 2 maps. 
 // The ID is a unit64_t stored in the class's private intfId_.
 uint64_t intfId_counter = 0;
 std::map<std::string, uint64_t> intfId_from_string;
@@ -303,8 +303,8 @@ uint64_t intf_id_t_ctor(char const * name) {
    try {
       return intfId_from_string.at( name ); // already exists
    } catch ( std::out_of_range & e ) {
-      intfId_counter++;
-      intfId_from_string[ name ] = intfId_counter;
+      intfId_counter++; 
+      intfId_from_string[ name ] = intfId_counter; 
       intfString_from_id[ intfId_counter ] = name;
    }
    return intfId_counter;
@@ -321,7 +321,7 @@ bool
 intf_id_t_is_subintf(uint64_t intfId_) {
    if (intfId_ == 0) return false;
    auto name = intfString_from_id.at( intfId_ );
-   size_t pos = name.find( "." );
+   size_t pos = name.find( "." ); 
    if (pos == std::string::npos) {
       return false;
    }

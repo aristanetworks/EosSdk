@@ -1,9 +1,11 @@
-// Copyright (c) 2016 Arista Networks, Inc.  All rights reserved.
+// Copyright (c) 2022 Arista Networks, Inc.  All rights reserved.
 // Arista Networks, Inc. Confidential and Proprietary.
 
 #ifndef EOS_TYPES_SDK_H
 #define EOS_TYPES_SDK_H
 
+#include <eos/base.h>
+#include <memory>
 #include <sstream>
 
 namespace eos {
@@ -18,9 +20,8 @@ enum mgr_mode_type_t {
    MODE_TYPE_WRITE,
 };
 /** Appends a string representation of enum mgr_mode_type_t value to the ostream. */
-std::ostream& operator<<(std::ostream& os, const mgr_mode_type_t & enum_val);
+EOS_SDK_PUBLIC std::ostream& operator<<(std::ostream& os,
+                                        const mgr_mode_type_t & enum_val);
 }
-
-#include <eos/inline/types/sdk.h>
 
 #endif // EOS_TYPES_SDK_H

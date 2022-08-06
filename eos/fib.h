@@ -77,6 +77,7 @@ class EOS_SDK_PUBLIC fib_mgr : public base_mgr<fib_handler> {
    virtual void set_route6init_task(int const ) = 0;
    virtual void set_fecinit_task(int const) = 0;
    virtual void set_fec6init_task(int const) = 0;
+   virtual void set_fecGeninit_task(int const) = 0;
 
    // Iterators
    virtual fib_route_iter_t fib_route_iter() const = 0;

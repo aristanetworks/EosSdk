@@ -1,4 +1,4 @@
-// Copyright (c) 2020 Arista Networks, Inc.  All rights reserved.
+// Copyright (c) 2022 Arista Networks, Inc.  All rights reserved.
 // Arista Networks, Inc. Confidential and Proprietary.
 
 #ifndef EOS_INLINE_TYPES_NEIGHBOR_TABLE_H
@@ -6,7 +6,7 @@
 
 namespace eos {
 
-inline std::ostream&
+EOS_SDK_PUBLIC std::ostream&
 operator<<(std::ostream& os, const neighbor_entry_type_t & enum_val) {
    if (enum_val==NEIGHBOR_ENTRY_TYPE_NULL) {
       os << "NEIGHBOR_ENTRY_TYPE_NULL";
@@ -21,163 +21,152 @@ operator<<(std::ostream& os, const neighbor_entry_type_t & enum_val) {
 }
 
 
-
 // Default constructor.
-inline neighbor_key_t::neighbor_key_t() :
-      ip_addr_(), intf_id_() {
+neighbor_key_t::neighbor_key_t() {
+   pimpl = std::shared_ptr<neighbor_key_impl_t>(
+      new neighbor_key_impl_t()
+   );
+}
+neighbor_key_t::neighbor_key_t(ip_addr_t const & ip_addr) {
+   pimpl = std::shared_ptr<neighbor_key_impl_t>(
+      new neighbor_key_impl_t(
+         ip_addr
+      )
+   );
+}
+neighbor_key_t::neighbor_key_t(ip_addr_t const & ip_addr, intf_id_t intf_id) {
+   pimpl = std::shared_ptr<neighbor_key_impl_t>(
+      new neighbor_key_impl_t(
+         ip_addr,
+         intf_id
+      )
+   );
+}
+neighbor_key_t::neighbor_key_t(
+   const neighbor_key_t& other)
+{
+   pimpl = std::make_unique<neighbor_key_impl_t>(
+      neighbor_key_impl_t(*other.pimpl));
+}
+neighbor_key_t&
+neighbor_key_t::operator=(
+   neighbor_key_t const & other)
+{
+   pimpl = std::shared_ptr<neighbor_key_impl_t>(
+      new neighbor_key_impl_t(*other.pimpl));
+   return *this;
 }
 
-inline neighbor_key_t::neighbor_key_t(ip_addr_t const & ip_addr) :
-      ip_addr_(ip_addr), intf_id_() {
-}
-
-inline neighbor_key_t::neighbor_key_t(ip_addr_t const & ip_addr, intf_id_t intf_id) :
-      ip_addr_(ip_addr), intf_id_(intf_id) {
-}
-
-inline ip_addr_t
+ip_addr_t
 neighbor_key_t::ip_addr() const {
-   return ip_addr_;
+   return pimpl->ip_addr();
 }
-
-inline intf_id_t
+intf_id_t
 neighbor_key_t::intf_id() const {
-   return intf_id_;
+   return pimpl->intf_id();
 }
-
-inline bool
+bool
 neighbor_key_t::operator==(neighbor_key_t const & other) const {
-   return ip_addr_ == other.ip_addr_ &&
-          intf_id_ == other.intf_id_;
+   return pimpl->operator==(*other.pimpl);
 }
-
-inline bool
+bool
 neighbor_key_t::operator!=(neighbor_key_t const & other) const {
-   return !operator==(other);
+   return pimpl->operator!=(*other.pimpl);
 }
-
-inline bool
+bool
 neighbor_key_t::operator<(neighbor_key_t const & other) const {
-   if(ip_addr_ != other.ip_addr_) {
-      return ip_addr_ < other.ip_addr_;
-   } else if(intf_id_ != other.intf_id_) {
-      return intf_id_ < other.intf_id_;
-   }
-   return false;
+   return pimpl->operator<(*other.pimpl);
 }
-
-inline uint32_t
+uint32_t
 neighbor_key_t::hash() const {
-   hash_mix h;
-   mix_me(h);
-   return h.result();
+   return pimpl->hash();
 }
-
-inline void
+void
 neighbor_key_t::mix_me(hash_mix & h) const {
-   h.mix(ip_addr_); // ip_addr_t
-   h.mix(intf_id_); // intf_id_t
+   pimpl->mix_me(h);
 }
-
-inline std::string
+std::string
 neighbor_key_t::to_string() const {
-   std::ostringstream ss;
-   ss << "neighbor_key_t(";
-   ss << "ip_addr=" << ip_addr_;
-   ss << ", intf_id=" << intf_id_;
-   ss << ")";
-   return ss.str();
+   return pimpl->to_string();
 }
-
-inline std::ostream&
+std::ostream&
 operator<<(std::ostream& os, const neighbor_key_t& obj) {
-   os << obj.to_string();
-   return os;
+   return operator<<(os, *obj.pimpl);
 }
-
 
 
 // Default constructor.
-inline neighbor_entry_t::neighbor_entry_t() :
-      neighbor_key_(), eth_addr_(), entry_type_(NEIGHBOR_ENTRY_TYPE_DYNAMIC) {
+neighbor_entry_t::neighbor_entry_t() {
+   pimpl = std::shared_ptr<neighbor_entry_impl_t>(
+      new neighbor_entry_impl_t()
+   );
 }
-
-inline neighbor_entry_t::neighbor_entry_t(neighbor_key_t const & neighbor_key,
+neighbor_entry_t::neighbor_entry_t(neighbor_key_t const & neighbor_key,
                                           eth_addr_t eth_addr,
-                                          neighbor_entry_type_t entry_type) :
-      neighbor_key_(neighbor_key), eth_addr_(eth_addr), entry_type_(entry_type) {
+                                          neighbor_entry_type_t entry_type) {
+   pimpl = std::shared_ptr<neighbor_entry_impl_t>(
+      new neighbor_entry_impl_t(
+         neighbor_key,
+         eth_addr,
+         entry_type
+      )
+   );
+}
+neighbor_entry_t::neighbor_entry_t(
+   const neighbor_entry_t& other)
+{
+   pimpl = std::make_unique<neighbor_entry_impl_t>(
+      neighbor_entry_impl_t(*other.pimpl));
+}
+neighbor_entry_t&
+neighbor_entry_t::operator=(
+   neighbor_entry_t const & other)
+{
+   pimpl = std::shared_ptr<neighbor_entry_impl_t>(
+      new neighbor_entry_impl_t(*other.pimpl));
+   return *this;
 }
 
-inline neighbor_key_t
+neighbor_key_t
 neighbor_entry_t::neighbor_key() const {
-   return neighbor_key_;
+   return pimpl->neighbor_key();
 }
-
-inline eth_addr_t
+eth_addr_t
 neighbor_entry_t::eth_addr() const {
-   return eth_addr_;
+   return pimpl->eth_addr();
 }
-
-inline neighbor_entry_type_t
+neighbor_entry_type_t
 neighbor_entry_t::entry_type() const {
-   return entry_type_;
+   return pimpl->entry_type();
 }
-
-inline bool
+bool
 neighbor_entry_t::operator==(neighbor_entry_t const & other) const {
-   return neighbor_key_ == other.neighbor_key_ &&
-          eth_addr_ == other.eth_addr_ &&
-          entry_type_ == other.entry_type_;
+   return pimpl->operator==(*other.pimpl);
 }
-
-inline bool
+bool
 neighbor_entry_t::operator!=(neighbor_entry_t const & other) const {
-   return !operator==(other);
+   return pimpl->operator!=(*other.pimpl);
 }
-
-inline bool
+bool
 neighbor_entry_t::operator<(neighbor_entry_t const & other) const {
-   if(neighbor_key_ != other.neighbor_key_) {
-      return neighbor_key_ < other.neighbor_key_;
-   } else if(eth_addr_ != other.eth_addr_) {
-      return eth_addr_ < other.eth_addr_;
-   } else if(entry_type_ != other.entry_type_) {
-      return entry_type_ < other.entry_type_;
-   }
-   return false;
+   return pimpl->operator<(*other.pimpl);
 }
-
-inline uint32_t
+uint32_t
 neighbor_entry_t::hash() const {
-   hash_mix h;
-   mix_me(h);
-   return h.result();
+   return pimpl->hash();
 }
-
-inline void
+void
 neighbor_entry_t::mix_me(hash_mix & h) const {
-   h.mix(neighbor_key_); // neighbor_key_t
-   h.mix(eth_addr_); // eth_addr_t
-   h.mix(entry_type_); // neighbor_entry_type_t
+   pimpl->mix_me(h);
 }
-
-inline std::string
+std::string
 neighbor_entry_t::to_string() const {
-   std::ostringstream ss;
-   ss << "neighbor_entry_t(";
-   ss << "neighbor_key=" << neighbor_key_;
-   ss << ", eth_addr=" << eth_addr_;
-   ss << ", entry_type=" << entry_type_;
-   ss << ")";
-   return ss.str();
+   return pimpl->to_string();
 }
-
-inline std::ostream&
+std::ostream&
 operator<<(std::ostream& os, const neighbor_entry_t& obj) {
-   os << obj.to_string();
-   return os;
+   return operator<<(os, *obj.pimpl);
 }
-
 
 }
 

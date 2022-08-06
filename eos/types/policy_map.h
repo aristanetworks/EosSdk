@@ -1,4 +1,4 @@
-// Copyright (c) 2021 Arista Networks, Inc.  All rights reserved.
+// Copyright (c) 2022 Arista Networks, Inc.  All rights reserved.
 // Arista Networks, Inc. Confidential and Proprietary.
 
 #ifndef EOS_TYPES_POLICY_MAP_H
@@ -11,6 +11,7 @@
 #include <eos/ip.h>
 #include <eos/utility.h>
 #include <map>
+#include <memory>
 #include <set>
 #include <sstream>
 #include <unordered_set>
@@ -34,8 +35,8 @@ enum policy_match_condition_t {
  * Appends a string representation of enum policy_match_condition_t value to the
  * ostream.
  */
-std::ostream& operator<<(std::ostream& os,
-                         const policy_match_condition_t & enum_val);
+EOS_SDK_PUBLIC std::ostream& operator<<(std::ostream& os,
+                                        const policy_match_condition_t & enum_val);
 
 /** A hardware feature a policy map can be used with. */
 enum policy_feature_t {
@@ -45,7 +46,8 @@ enum policy_feature_t {
    POLICY_FEATURE_TAP_AGG,
 };
 /** Appends a string representation of enum policy_feature_t value to the ostream. */
-std::ostream& operator<<(std::ostream& os, const policy_feature_t & enum_val);
+EOS_SDK_PUBLIC std::ostream& operator<<(std::ostream& os,
+                                        const policy_feature_t & enum_val);
 
 /** The actions a policy map rule may apply to classified packets. */
 enum policy_action_type_t {
@@ -67,7 +69,8 @@ enum policy_action_type_t {
  * Appends a string representation of enum policy_action_type_t value to the
  * ostream.
  */
-std::ostream& operator<<(std::ostream& os, const policy_action_type_t & enum_val);
+EOS_SDK_PUBLIC std::ostream& operator<<(std::ostream& os,
+                                        const policy_action_type_t & enum_val);
 
 /** The policy map rule type. Valid types are IPV4 IPV6 and CLASSMAP. */
 enum policy_map_rule_type_t {
@@ -79,13 +82,19 @@ enum policy_map_rule_type_t {
  * Appends a string representation of enum policy_map_rule_type_t value to the
  * ostream.
  */
-std::ostream& operator<<(std::ostream& os, const policy_map_rule_type_t & enum_val);
+EOS_SDK_PUBLIC std::ostream& operator<<(std::ostream& os,
+                                        const policy_map_rule_type_t & enum_val);
 
+class policy_map_key_impl_t;
 /** The key used to uniquely identify both class and policy maps. */
 class EOS_SDK_PUBLIC policy_map_key_t {
  public:
    policy_map_key_t();
    policy_map_key_t(std::string const & name, policy_feature_t feature);
+   policy_map_key_t(const policy_map_key_t& other);
+   policy_map_key_t& operator=(
+      policy_map_key_t const & other);
+
 
    std::string name() const;
    void name_is(std::string const & name);
@@ -109,12 +118,15 @@ class EOS_SDK_PUBLIC policy_map_key_t {
    friend std::ostream& operator<<(std::ostream& os, const policy_map_key_t& obj);
 
  private:
-   std::string name_;
-   policy_feature_t feature_;
+   std::shared_ptr<policy_map_key_impl_t> pimpl;
 };
+
+EOS_SDK_PUBLIC
+std::ostream& operator<<(std::ostream& os, const policy_map_key_t& obj);
 
 typedef policy_map_key_t class_map_key_t;
 
+class policy_map_action_impl_t;
 /**
  * A single policy map action.
  * Each action defines a single type of action to be performed,presently
@@ -134,6 +146,10 @@ class EOS_SDK_PUBLIC policy_map_action_t {
     * attributes require being set.
     */
    explicit policy_map_action_t(policy_action_type_t action_type);
+   policy_map_action_t(const policy_map_action_t& other);
+   policy_map_action_t& operator=(
+      policy_map_action_t const & other);
+
    virtual ~policy_map_action_t();
 
    policy_action_type_t action_type() const;
@@ -200,14 +216,13 @@ class EOS_SDK_PUBLIC policy_map_action_t {
                                    const policy_map_action_t& obj);
 
  private:
-   policy_action_type_t action_type_;
-   std::string nexthop_group_name_;
-   std::unordered_set<ip_addr_t> nexthops_;
-   std::string vrf_;
-   uint8_t dscp_;
-   uint8_t traffic_class_;
+   std::shared_ptr<policy_map_action_impl_t> pimpl;
 };
 
+EOS_SDK_PUBLIC
+std::ostream& operator<<(std::ostream& os, const policy_map_action_t& obj);
+
+class policy_map_rule_impl_t;
 /**
  * A policy map rule, describing a traffic match and actions.
  *
@@ -228,6 +243,10 @@ class EOS_SDK_PUBLIC policy_map_rule_t {
  public:
    policy_map_rule_t();
    explicit policy_map_rule_t(class_map_key_t const & class_map_key);
+   policy_map_rule_t(const policy_map_rule_t& other);
+   policy_map_rule_t& operator=(
+      policy_map_rule_t const & other);
+
 
    /**
     * Getter for 'class_map_key': the class map key (name is CLASS_MAP_MPLS_ANY if
@@ -281,12 +300,13 @@ class EOS_SDK_PUBLIC policy_map_rule_t {
    friend std::ostream& operator<<(std::ostream& os, const policy_map_rule_t& obj);
 
  private:
-   class_map_key_t class_map_key_;
-   policy_map_rule_type_t policy_map_rule_type_;
-   acl_rule_ip_t raw_rule_;
-   std::set<policy_map_action_t> actions_;
+   std::shared_ptr<policy_map_rule_impl_t> pimpl;
 };
 
+EOS_SDK_PUBLIC
+std::ostream& operator<<(std::ostream& os, const policy_map_rule_t& obj);
+
+class policy_map_impl_t;
 /**
  * A policy map instance.
  *
@@ -297,6 +317,10 @@ class EOS_SDK_PUBLIC policy_map_t {
  public:
    policy_map_t();
    explicit policy_map_t(policy_map_key_t const & key);
+   policy_map_t(const policy_map_t& other);
+   policy_map_t& operator=(
+      policy_map_t const & other);
+
 
    policy_map_key_t key() const;
    void key_is(policy_map_key_t const & key);
@@ -322,9 +346,11 @@ class EOS_SDK_PUBLIC policy_map_t {
    friend std::ostream& operator<<(std::ostream& os, const policy_map_t& obj);
 
  private:
-   policy_map_key_t key_;
-   std::map<uint32_t, policy_map_rule_t> rules_;
+   std::shared_ptr<policy_map_impl_t> pimpl;
 };
+
+EOS_SDK_PUBLIC
+std::ostream& operator<<(std::ostream& os, const policy_map_t& obj);
 
 /** The policy feature requested is unavailable in this SDK release. */
 class EOS_SDK_PUBLIC unsupported_policy_feature_error : public unsupported_error {
@@ -353,6 +379,10 @@ class EOS_SDK_PUBLIC unsupported_policy_feature_error : public unsupported_error
    policy_feature_t policy_feature_;
 };
 
+EOS_SDK_PUBLIC
+std::ostream& operator<<(std::ostream& os,
+                         const unsupported_policy_feature_error& obj);
+
 /** The policy map hardware status type. */
 enum policy_map_status_t {
    POLICY_STATUS_NOT_FOUND,
@@ -364,13 +394,19 @@ enum policy_map_status_t {
  * Appends a string representation of enum policy_map_status_t value to the
  * ostream.
  */
-std::ostream& operator<<(std::ostream& os, const policy_map_status_t & enum_val);
+EOS_SDK_PUBLIC std::ostream& operator<<(std::ostream& os,
+                                        const policy_map_status_t & enum_val);
 
+class policy_map_hw_status_key_impl_t;
 /** policy map hardware interface key. */
 class EOS_SDK_PUBLIC policy_map_hw_status_key_t {
  public:
    policy_map_hw_status_key_t();
    policy_map_hw_status_key_t(intf_id_t intf_id, acl_direction_t direction);
+   policy_map_hw_status_key_t(const policy_map_hw_status_key_t& other);
+   policy_map_hw_status_key_t& operator=(
+      policy_map_hw_status_key_t const & other);
+
 
    /**
     * Getter for 'intf_id': Interface ID at with a policy map is applied.
@@ -403,25 +439,32 @@ class EOS_SDK_PUBLIC policy_map_hw_status_key_t {
                                    const policy_map_hw_status_key_t& obj);
 
  private:
-   intf_id_t intf_id_;
-   acl_direction_t direction_;
+   std::shared_ptr<policy_map_hw_status_key_impl_t> pimpl;
 };
 
+EOS_SDK_PUBLIC
+std::ostream& operator<<(std::ostream& os, const policy_map_hw_status_key_t& obj);
+
+class policy_map_hw_statuses_impl_t;
 /** policy map hardware statuses. */
 class EOS_SDK_PUBLIC policy_map_hw_statuses_t {
  public:
    policy_map_hw_statuses_t();
    explicit policy_map_hw_statuses_t(
-
+         
          std::map<policy_map_hw_status_key_t, policy_map_status_t> const &
          intf_statuses);
+   policy_map_hw_statuses_t(const policy_map_hw_statuses_t& other);
+   policy_map_hw_statuses_t& operator=(
+      policy_map_hw_statuses_t const & other);
+
 
    /** Getter for 'intf_statuses': A map of interface key and policy map status. */
    std::map<policy_map_hw_status_key_t, policy_map_status_t> const & intf_statuses()
           const;
    /** Setter for 'intf_statuses'. */
    void intf_statuses_is(
-
+         
          std::map<policy_map_hw_status_key_t, policy_map_status_t> const &
          intf_statuses);
    /** Inserts key/value pair to the map. */
@@ -447,10 +490,11 @@ class EOS_SDK_PUBLIC policy_map_hw_statuses_t {
                                    const policy_map_hw_statuses_t& obj);
 
  private:
-   std::map<policy_map_hw_status_key_t, policy_map_status_t> intf_statuses_;
+   std::shared_ptr<policy_map_hw_statuses_impl_t> pimpl;
 };
-}
 
-#include <eos/inline/types/policy_map.h>
+EOS_SDK_PUBLIC
+std::ostream& operator<<(std::ostream& os, const policy_map_hw_statuses_t& obj);
+}
 
 #endif // EOS_TYPES_POLICY_MAP_H

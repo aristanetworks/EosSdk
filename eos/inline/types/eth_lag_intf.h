@@ -1,4 +1,4 @@
-// Copyright (c) 2021 Arista Networks, Inc.  All rights reserved.
+// Copyright (c) 2022 Arista Networks, Inc.  All rights reserved.
 // Arista Networks, Inc. Confidential and Proprietary.
 
 #ifndef EOS_INLINE_TYPES_ETH_LAG_INTF_H
@@ -6,7 +6,7 @@
 
 namespace eos {
 
-inline std::ostream&
+EOS_SDK_PUBLIC std::ostream&
 operator<<(std::ostream& os, const eth_lag_intf_fallback_type_t & enum_val) {
    if (enum_val==ETH_LAG_INTF_FALLBACK_NULL) {
       os << "ETH_LAG_INTF_FALLBACK_NULL";
@@ -23,8 +23,7 @@ operator<<(std::ostream& os, const eth_lag_intf_fallback_type_t & enum_val) {
 }
 
 
-
-inline std::ostream&
+EOS_SDK_PUBLIC std::ostream&
 operator<<(std::ostream& os,
            const eth_lag_intf_fallback_timeout_default_t & enum_val) {
    if (enum_val==ETH_LAG_INTF_FALLBACK_TIMEOUT_DEFAULT) {
@@ -36,8 +35,7 @@ operator<<(std::ostream& os,
 }
 
 
-
-inline std::ostream&
+EOS_SDK_PUBLIC std::ostream&
 operator<<(std::ostream& os, const eth_lag_intf_member_priority_t & enum_val) {
    if (enum_val==ETH_LAG_INTF_PORT_PRIORITY_DEFAULT) {
       os << "ETH_LAG_INTF_PORT_PRIORITY_DEFAULT";
@@ -48,8 +46,7 @@ operator<<(std::ostream& os, const eth_lag_intf_member_priority_t & enum_val) {
 }
 
 
-
-inline std::ostream&
+EOS_SDK_PUBLIC std::ostream&
 operator<<(std::ostream& os, const eth_lag_intf_member_lacp_mode_t & enum_val) {
    if (enum_val==ETH_LAG_INTF_MEMBER_LACP_MODE_NULL) {
       os << "ETH_LAG_INTF_MEMBER_LACP_MODE_NULL";
@@ -66,8 +63,7 @@ operator<<(std::ostream& os, const eth_lag_intf_member_lacp_mode_t & enum_val) {
 }
 
 
-
-inline std::ostream&
+EOS_SDK_PUBLIC std::ostream&
 operator<<(std::ostream& os, const eth_lag_intf_member_lacp_timeout_t & enum_val) {
    if (enum_val==ETH_LAG_INTF_MEMBER_LACP_TIMEOUT_NULL) {
       os << "ETH_LAG_INTF_MEMBER_LACP_TIMEOUT_NULL";
@@ -82,239 +78,195 @@ operator<<(std::ostream& os, const eth_lag_intf_member_lacp_timeout_t & enum_val
 }
 
 
-
 // Default constructor.
-inline eth_lag_intf_membership_t::eth_lag_intf_membership_t() :
-      eth_lag_intf_id_(intf_id_t()), active_(false), reason_(""), member_time_(0),
-      mode_(ETH_LAG_INTF_MEMBER_LACP_MODE_NULL) {
+eth_lag_intf_membership_t::eth_lag_intf_membership_t() {
+   pimpl = std::shared_ptr<eth_lag_intf_membership_impl_t>(
+      new eth_lag_intf_membership_impl_t()
+   );
 }
-
-inline eth_lag_intf_membership_t::eth_lag_intf_membership_t(
+eth_lag_intf_membership_t::eth_lag_intf_membership_t(
          intf_id_t eth_lag_intf_id, bool active, std::string const & reason,
-         double member_time, eth_lag_intf_member_lacp_mode_t mode) :
-      eth_lag_intf_id_(eth_lag_intf_id), active_(active), reason_(reason),
-      member_time_(member_time), mode_(mode) {
+         double member_time, eth_lag_intf_member_lacp_mode_t mode) {
+   pimpl = std::shared_ptr<eth_lag_intf_membership_impl_t>(
+      new eth_lag_intf_membership_impl_t(
+         eth_lag_intf_id,
+         active,
+         reason,
+         member_time,
+         mode
+      )
+   );
+}
+eth_lag_intf_membership_t::eth_lag_intf_membership_t(
+   const eth_lag_intf_membership_t& other)
+{
+   pimpl = std::make_unique<eth_lag_intf_membership_impl_t>(
+      eth_lag_intf_membership_impl_t(*other.pimpl));
+}
+eth_lag_intf_membership_t&
+eth_lag_intf_membership_t::operator=(
+   eth_lag_intf_membership_t const & other)
+{
+   pimpl = std::shared_ptr<eth_lag_intf_membership_impl_t>(
+      new eth_lag_intf_membership_impl_t(*other.pimpl));
+   return *this;
 }
 
-inline intf_id_t
+intf_id_t
 eth_lag_intf_membership_t::eth_lag_intf_id() const {
-   return eth_lag_intf_id_;
+   return pimpl->eth_lag_intf_id();
 }
-
-inline void
+void
 eth_lag_intf_membership_t::eth_lag_intf_id_is(intf_id_t eth_lag_intf_id) {
-   eth_lag_intf_id_ = eth_lag_intf_id;
+   pimpl->eth_lag_intf_id_is(eth_lag_intf_id);
 }
-
-inline bool
+bool
 eth_lag_intf_membership_t::active() const {
-   return active_;
+   return pimpl->active();
 }
-
-inline std::string
+std::string
 eth_lag_intf_membership_t::reason() const {
-   return reason_;
+   return pimpl->reason();
 }
-
-inline void
+void
 eth_lag_intf_membership_t::reason_is(std::string const & reason) {
-   reason_ = reason;
+   pimpl->reason_is(reason);
 }
-
-inline double
+double
 eth_lag_intf_membership_t::member_time() const {
-   return member_time_;
+   return pimpl->member_time();
 }
-
-inline eth_lag_intf_member_lacp_mode_t
+eth_lag_intf_member_lacp_mode_t
 eth_lag_intf_membership_t::mode() const {
-   return mode_;
+   return pimpl->mode();
 }
-
-inline bool
+bool
 eth_lag_intf_membership_t::operator==(eth_lag_intf_membership_t const & other)
        const {
-   return eth_lag_intf_id_ == other.eth_lag_intf_id_ &&
-          active_ == other.active_ &&
-          reason_ == other.reason_ &&
-          member_time_ == other.member_time_ &&
-          mode_ == other.mode_;
+   return pimpl->operator==(*other.pimpl);
 }
-
-inline bool
+bool
 eth_lag_intf_membership_t::operator!=(eth_lag_intf_membership_t const & other)
        const {
-   return !operator==(other);
+   return pimpl->operator!=(*other.pimpl);
 }
-
-inline bool
+bool
 eth_lag_intf_membership_t::operator<(eth_lag_intf_membership_t const & other)
        const {
-   if(eth_lag_intf_id_ != other.eth_lag_intf_id_) {
-      return eth_lag_intf_id_ < other.eth_lag_intf_id_;
-   } else if(active_ != other.active_) {
-      return active_ < other.active_;
-   } else if(reason_ != other.reason_) {
-      return reason_ < other.reason_;
-   } else if(member_time_ != other.member_time_) {
-      return member_time_ < other.member_time_;
-   } else if(mode_ != other.mode_) {
-      return mode_ < other.mode_;
-   }
-   return false;
+   return pimpl->operator<(*other.pimpl);
 }
-
-inline uint32_t
+uint32_t
 eth_lag_intf_membership_t::hash() const {
-   hash_mix h;
-   mix_me(h);
-   return h.result();
+   return pimpl->hash();
 }
-
-inline void
+void
 eth_lag_intf_membership_t::mix_me(hash_mix & h) const {
-   h.mix(eth_lag_intf_id_); // intf_id_t
-   h.mix(active_); // bool
-   h.mix(reason_); // std::string
-   h.mix(member_time_); // double
-   h.mix(mode_); // eth_lag_intf_member_lacp_mode_t
+   pimpl->mix_me(h);
 }
-
-inline std::string
+std::string
 eth_lag_intf_membership_t::to_string() const {
-   std::ostringstream ss;
-   ss << "eth_lag_intf_membership_t(";
-   ss << "eth_lag_intf_id=" << eth_lag_intf_id_;
-   ss << ", active=" << active_;
-   ss << ", reason='" << reason_ << "'";
-   ss << ", member_time=" << member_time_;
-   ss << ", mode=" << mode_;
-   ss << ")";
-   return ss.str();
+   return pimpl->to_string();
 }
-
-inline std::ostream&
+std::ostream&
 operator<<(std::ostream& os, const eth_lag_intf_membership_t& obj) {
-   os << obj.to_string();
-   return os;
+   return operator<<(os, *obj.pimpl);
 }
-
 
 
 // Default constructor.
-inline eth_lag_intf_t::eth_lag_intf_t() :
-      intf_(intf_id_t()), speed_(0), min_links_(0),
-      fallback_type_(ETH_LAG_INTF_FALLBACK_NONE), fallback_timeout_(90) {
+eth_lag_intf_t::eth_lag_intf_t() {
+   pimpl = std::shared_ptr<eth_lag_intf_impl_t>(
+      new eth_lag_intf_impl_t()
+   );
 }
-
-inline eth_lag_intf_t::eth_lag_intf_t(intf_id_t intf) :
-      intf_(intf), speed_(0), min_links_(0),
-      fallback_type_(ETH_LAG_INTF_FALLBACK_NONE), fallback_timeout_(90) {
+eth_lag_intf_t::eth_lag_intf_t(intf_id_t intf) {
+   pimpl = std::shared_ptr<eth_lag_intf_impl_t>(
+      new eth_lag_intf_impl_t(
+         intf
+      )
+   );
 }
-
-inline eth_lag_intf_t::eth_lag_intf_t(intf_id_t intf, uint32_t min_links,
+eth_lag_intf_t::eth_lag_intf_t(intf_id_t intf, uint32_t min_links,
                                       uint64_t speed,
                                       eth_lag_intf_fallback_type_t fallback_type,
-                                      uint16_t fallback_timeout) :
-      intf_(intf), speed_(speed), min_links_(min_links),
-      fallback_type_(fallback_type), fallback_timeout_(fallback_timeout) {
+                                      uint16_t fallback_timeout) {
+   pimpl = std::shared_ptr<eth_lag_intf_impl_t>(
+      new eth_lag_intf_impl_t(
+         intf,
+         min_links,
+         speed,
+         fallback_type,
+         fallback_timeout
+      )
+   );
+}
+eth_lag_intf_t::eth_lag_intf_t(
+   const eth_lag_intf_t& other)
+{
+   pimpl = std::make_unique<eth_lag_intf_impl_t>(
+      eth_lag_intf_impl_t(*other.pimpl));
+}
+eth_lag_intf_t&
+eth_lag_intf_t::operator=(
+   eth_lag_intf_t const & other)
+{
+   pimpl = std::shared_ptr<eth_lag_intf_impl_t>(
+      new eth_lag_intf_impl_t(*other.pimpl));
+   return *this;
 }
 
-inline intf_id_t
+intf_id_t
 eth_lag_intf_t::intf() const {
-   return intf_;
+   return pimpl->intf();
 }
-
-inline uint64_t
+uint64_t
 eth_lag_intf_t::speed() const {
-   return speed_;
+   return pimpl->speed();
 }
-
-inline uint32_t
+uint32_t
 eth_lag_intf_t::min_links() const {
-   return min_links_;
+   return pimpl->min_links();
 }
-
-inline eth_lag_intf_fallback_type_t
+eth_lag_intf_fallback_type_t
 eth_lag_intf_t::fallback_type() const {
-   return fallback_type_;
+   return pimpl->fallback_type();
 }
-
-inline uint16_t
+uint16_t
 eth_lag_intf_t::fallback_timeout() const {
-   return fallback_timeout_;
+   return pimpl->fallback_timeout();
 }
-
-inline uint16_t
+uint16_t
 eth_lag_intf_t::fallback_timeout_default() const {
-   return ETH_LAG_INTF_FALLBACK_TIMEOUT_DEFAULT;
+   return pimpl->fallback_timeout_default();
 }
-
-inline bool
+bool
 eth_lag_intf_t::operator==(eth_lag_intf_t const & other) const {
-   return intf_ == other.intf_ &&
-          speed_ == other.speed_ &&
-          min_links_ == other.min_links_ &&
-          fallback_type_ == other.fallback_type_ &&
-          fallback_timeout_ == other.fallback_timeout_;
+   return pimpl->operator==(*other.pimpl);
 }
-
-inline bool
+bool
 eth_lag_intf_t::operator!=(eth_lag_intf_t const & other) const {
-   return !operator==(other);
+   return pimpl->operator!=(*other.pimpl);
 }
-
-inline bool
+bool
 eth_lag_intf_t::operator<(eth_lag_intf_t const & other) const {
-   if(intf_ != other.intf_) {
-      return intf_ < other.intf_;
-   } else if(speed_ != other.speed_) {
-      return speed_ < other.speed_;
-   } else if(min_links_ != other.min_links_) {
-      return min_links_ < other.min_links_;
-   } else if(fallback_type_ != other.fallback_type_) {
-      return fallback_type_ < other.fallback_type_;
-   } else if(fallback_timeout_ != other.fallback_timeout_) {
-      return fallback_timeout_ < other.fallback_timeout_;
-   }
-   return false;
+   return pimpl->operator<(*other.pimpl);
 }
-
-inline uint32_t
+uint32_t
 eth_lag_intf_t::hash() const {
-   hash_mix h;
-   mix_me(h);
-   return h.result();
+   return pimpl->hash();
 }
-
-inline void
+void
 eth_lag_intf_t::mix_me(hash_mix & h) const {
-   h.mix(intf_); // intf_id_t
-   h.mix(speed_); // uint64_t
-   h.mix(min_links_); // uint32_t
-   h.mix(fallback_type_); // eth_lag_intf_fallback_type_t
-   h.mix(fallback_timeout_); // uint16_t
+   pimpl->mix_me(h);
 }
-
-inline std::string
+std::string
 eth_lag_intf_t::to_string() const {
-   std::ostringstream ss;
-   ss << "eth_lag_intf_t(";
-   ss << "intf=" << intf_;
-   ss << ", speed=" << speed_;
-   ss << ", min_links=" << min_links_;
-   ss << ", fallback_type=" << fallback_type_;
-   ss << ", fallback_timeout=" << fallback_timeout_;
-   ss << ")";
-   return ss.str();
+   return pimpl->to_string();
 }
-
-inline std::ostream&
+std::ostream&
 operator<<(std::ostream& os, const eth_lag_intf_t& obj) {
-   os << obj.to_string();
-   return os;
+   return operator<<(os, *obj.pimpl);
 }
-
 
 }
 

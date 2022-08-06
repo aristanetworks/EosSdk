@@ -7,8 +7,8 @@ CFLAGS_32B='-m32 -march=i686 -mtune=atom'
 export CFLAGS
 CXXFLAGS=$CFLAGS
 export CXXFLAGS
-CXXFLAGS_32B="-m32"
-LDFLAGS_32B="-m32"
+CXXFLAGS_32B="-m32" 
+LDFLAGS_32B="-m32" 
 export LDFLAGS
 
 target_32b=true
@@ -61,9 +61,9 @@ test -f Makefile || ./configure  \
 set -x
 STUBS_DIR=$PWD
 GO_SRCDIR="$STUBS_DIR/go/src/eossdk"
-mkdir -p "$GO_SRCDIR"
 if [ -d $GO_SRCDIR/eos ]; then
    rm -f "$GO_SRCDIR/eos"
    ln -s "$STUBS_DIR/eos" "$GO_SRCDIR/"
 fi
+
 exec make "$@"

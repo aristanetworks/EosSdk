@@ -1,4 +1,4 @@
-// Copyright (c) 2017 Arista Networks, Inc.  All rights reserved.
+// Copyright (c) 2022 Arista Networks, Inc.  All rights reserved.
 // Arista Networks, Inc. Confidential and Proprietary.
 
 #ifndef EOS_INLINE_TYPES_EAPI_H
@@ -6,72 +6,66 @@
 
 namespace eos {
 
-inline eapi_response_t::eapi_response_t() :
-      success_(false), error_code_(0), error_message_(), responses_(),
-      raw_response_() {
+eapi_response_t::eapi_response_t() {
+   pimpl = std::shared_ptr<eapi_response_impl_t>(
+      new eapi_response_impl_t()
+   );
 }
-
-inline eapi_response_t::eapi_response_t(bool success, uint32_t error_code,
+eapi_response_t::eapi_response_t(bool success, uint32_t error_code,
                                         std::string const & error_message,
-                                        std::vector<std::string> const & responses) :
-      success_(success), error_code_(error_code), error_message_(error_message),
-      responses_(responses), raw_response_() {
+                                        std::vector<std::string> const & responses) {
+   pimpl = std::shared_ptr<eapi_response_impl_t>(
+      new eapi_response_impl_t(
+         success,
+         error_code,
+         error_message,
+         responses
+      )
+   );
+}
+eapi_response_t::eapi_response_t(
+   const eapi_response_t& other)
+{
+   pimpl = std::make_unique<eapi_response_impl_t>(
+      eapi_response_impl_t(*other.pimpl));
+}
+eapi_response_t&
+eapi_response_t::operator=(
+   eapi_response_t const & other)
+{
+   pimpl = std::shared_ptr<eapi_response_impl_t>(
+      new eapi_response_impl_t(*other.pimpl));
+   return *this;
 }
 
-inline bool
+bool
 eapi_response_t::success() const {
-   return success_;
+   return pimpl->success();
 }
-
-inline uint32_t
+uint32_t
 eapi_response_t::error_code() const {
-   return error_code_;
+   return pimpl->error_code();
 }
-
-inline std::string
+std::string
 eapi_response_t::error_message() const {
-   return error_message_;
+   return pimpl->error_message();
 }
-
-inline std::vector<std::string> const &
+std::vector<std::string> const &
 eapi_response_t::responses() const {
-   return responses_;
+   return pimpl->responses();
 }
-
-inline std::string
+std::string
 eapi_response_t::raw_response() const {
-   return raw_response_;
+   return pimpl->raw_response();
 }
-
-inline std::string
+std::string
 eapi_response_t::to_string() const {
-   std::ostringstream ss;
-   ss << "eapi_response_t(";
-   ss << "success=" << success_;
-   ss << ", error_code=" << error_code_;
-   ss << ", error_message='" << error_message_ << "'";
-   ss << ", responses=" <<"'";
-   bool first_responses = true;
-   for (auto it=responses_.cbegin(); it!=responses_.cend(); ++it) {
-      if (first_responses) {
-         ss << (*it);
-         first_responses = false;
-      } else {
-         ss << "," << (*it);
-      }
-   }
-   ss << "'";
-   ss << ", raw_response='" << raw_response_ << "'";
-   ss << ")";
-   return ss.str();
+   return pimpl->to_string();
 }
-
-inline std::ostream&
+std::ostream&
 operator<<(std::ostream& os, const eapi_response_t& obj) {
-   os << obj.to_string();
-   return os;
+   return operator<<(os, *obj.pimpl);
 }
-
 
 }
 

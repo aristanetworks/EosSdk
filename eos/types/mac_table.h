@@ -1,4 +1,4 @@
-// Copyright (c) 2020 Arista Networks, Inc.  All rights reserved.
+// Copyright (c) 2022 Arista Networks, Inc.  All rights reserved.
 // Arista Networks, Inc. Confidential and Proprietary.
 
 #ifndef EOS_TYPES_MAC_TABLE_H
@@ -8,6 +8,7 @@
 #include <eos/hash_mix.h>
 #include <eos/intf.h>
 #include <eos/utility.h>
+#include <memory>
 #include <set>
 #include <sstream>
 
@@ -48,8 +49,10 @@ enum mac_entry_type_t {
    MAC_ENTRY_PENDING_SECURE,
 };
 /** Appends a string representation of enum mac_entry_type_t value to the ostream. */
-std::ostream& operator<<(std::ostream& os, const mac_entry_type_t & enum_val);
+EOS_SDK_PUBLIC std::ostream& operator<<(std::ostream& os,
+                                        const mac_entry_type_t & enum_val);
 
+class mac_key_impl_t;
 /**
  * The MAC entry key class.
  * Maps a MAC address with a specific VLAN ID to an interface.
@@ -59,6 +62,10 @@ class EOS_SDK_PUBLIC mac_key_t {
    /** Default constructor. */
    mac_key_t();
    mac_key_t(vlan_id_t vlan_id, eth_addr_t const & eth_addr);
+   mac_key_t(const mac_key_t& other);
+   mac_key_t& operator=(
+      mac_key_t const & other);
+
 
    /** Getter for 'vlan_id': the VLAN subdomain identifier. */
    vlan_id_t vlan_id() const;
@@ -84,10 +91,13 @@ class EOS_SDK_PUBLIC mac_key_t {
    friend std::ostream& operator<<(std::ostream& os, const mac_key_t& obj);
 
  private:
-   vlan_id_t vlan_id_;
-   eth_addr_t eth_addr_;
+   std::shared_ptr<mac_key_impl_t> pimpl;
 };
 
+EOS_SDK_PUBLIC
+std::ostream& operator<<(std::ostream& os, const mac_key_t& obj);
+
+class mac_entry_impl_t;
 /** An entry from the MAC address table. */
 class EOS_SDK_PUBLIC mac_entry_t {
  public:
@@ -106,6 +116,10 @@ class EOS_SDK_PUBLIC mac_entry_t {
     * mac_key_is with a VLAN ID and the eth_addr attribute to set a valid VLAN ID.
     */
    mac_entry_t(eth_addr_t eth_addr, intf_id_t intf);
+   mac_entry_t(const mac_entry_t& other);
+   mac_entry_t& operator=(
+      mac_entry_t const & other);
+
 
    /** Getter for 'mac_key': the key of the MAC entry. */
    mac_key_t mac_key() const;
@@ -157,11 +171,11 @@ class EOS_SDK_PUBLIC mac_entry_t {
    friend std::ostream& operator<<(std::ostream& os, const mac_entry_t& obj);
 
  private:
-   mac_key_t mac_key_;
-   std::set<intf_id_t> intfs_;
+   std::shared_ptr<mac_entry_impl_t> pimpl;
 };
-}
 
-#include <eos/inline/types/mac_table.h>
+EOS_SDK_PUBLIC
+std::ostream& operator<<(std::ostream& os, const mac_entry_t& obj);
+}
 
 #endif // EOS_TYPES_MAC_TABLE_H

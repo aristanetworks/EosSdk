@@ -1,4 +1,4 @@
-// Copyright (c) 2020 Arista Networks, Inc.  All rights reserved.
+// Copyright (c) 2022 Arista Networks, Inc.  All rights reserved.
 // Arista Networks, Inc. Confidential and Proprietary.
 
 #ifndef EOS_INLINE_TYPES_CLASS_MAP_H
@@ -7,150 +7,139 @@
 namespace eos {
 
 // Default constructor.
-inline class_map_rule_t::class_map_rule_t() :
-      acl_key_() {
+class_map_rule_t::class_map_rule_t() {
+   pimpl = std::shared_ptr<class_map_rule_impl_t>(
+      new class_map_rule_impl_t()
+   );
+}
+class_map_rule_t::class_map_rule_t(acl_key_t const & acl_key) {
+   pimpl = std::shared_ptr<class_map_rule_impl_t>(
+      new class_map_rule_impl_t(
+         acl_key
+      )
+   );
+}
+class_map_rule_t::class_map_rule_t(
+   const class_map_rule_t& other)
+{
+   pimpl = std::make_unique<class_map_rule_impl_t>(
+      class_map_rule_impl_t(*other.pimpl));
+}
+class_map_rule_t&
+class_map_rule_t::operator=(
+   class_map_rule_t const & other)
+{
+   pimpl = std::shared_ptr<class_map_rule_impl_t>(
+      new class_map_rule_impl_t(*other.pimpl));
+   return *this;
 }
 
-inline class_map_rule_t::class_map_rule_t(acl_key_t const & acl_key) :
-      acl_key_(acl_key) {
-}
-
-inline acl_key_t
+acl_key_t
 class_map_rule_t::acl_key() const {
-   return acl_key_;
+   return pimpl->acl_key();
 }
-
-inline bool
+bool
 class_map_rule_t::operator==(class_map_rule_t const & other) const {
-   return acl_key_ == other.acl_key_;
+   return pimpl->operator==(*other.pimpl);
 }
-
-inline bool
+bool
 class_map_rule_t::operator!=(class_map_rule_t const & other) const {
-   return !operator==(other);
+   return pimpl->operator!=(*other.pimpl);
 }
-
-inline uint32_t
+uint32_t
 class_map_rule_t::hash() const {
-   hash_mix h;
-   mix_me(h);
-   return h.result();
+   return pimpl->hash();
 }
-
-inline void
+void
 class_map_rule_t::mix_me(hash_mix & h) const {
-   h.mix(acl_key_); // acl_key_t
+   pimpl->mix_me(h);
 }
-
-inline std::string
+std::string
 class_map_rule_t::to_string() const {
-   std::ostringstream ss;
-   ss << "class_map_rule_t(";
-   ss << "acl_key=" << acl_key_;
-   ss << ")";
-   return ss.str();
+   return pimpl->to_string();
 }
-
-inline std::ostream&
+std::ostream&
 operator<<(std::ostream& os, const class_map_rule_t& obj) {
-   os << obj.to_string();
-   return os;
+   return operator<<(os, *obj.pimpl);
 }
-
 
 
 // Default constructor.
-inline class_map_t::class_map_t() :
-      key_(), rules_() {
+class_map_t::class_map_t() {
+   pimpl = std::shared_ptr<class_map_impl_t>(
+      new class_map_impl_t()
+   );
+}
+class_map_t::class_map_t(class_map_key_t const & key) {
+   pimpl = std::shared_ptr<class_map_impl_t>(
+      new class_map_impl_t(
+         key
+      )
+   );
+}
+class_map_t::class_map_t(
+   const class_map_t& other)
+{
+   pimpl = std::make_unique<class_map_impl_t>(
+      class_map_impl_t(*other.pimpl));
+}
+class_map_t&
+class_map_t::operator=(
+   class_map_t const & other)
+{
+   pimpl = std::shared_ptr<class_map_impl_t>(
+      new class_map_impl_t(*other.pimpl));
+   return *this;
 }
 
-inline class_map_t::class_map_t(class_map_key_t const & key) :
-      key_(key), rules_() {
-}
-
-inline class_map_key_t
+class_map_key_t
 class_map_t::key() const {
-   return key_;
+   return pimpl->key();
 }
-
-inline void
+void
 class_map_t::key_is(class_map_key_t const & key) {
-   key_ = key;
+   pimpl->key_is(key);
 }
-
-inline std::map<uint32_t, class_map_rule_t> const &
+std::map<uint32_t, class_map_rule_t> const &
 class_map_t::rules() const {
-   return rules_;
+   return pimpl->rules();
 }
-
-inline void
+void
 class_map_t::rules_is(std::map<uint32_t, class_map_rule_t> const & rules) {
-   rules_ = rules;
+   pimpl->rules_is(rules);
 }
-
-inline void
+void
 class_map_t::rule_set(uint32_t key, class_map_rule_t const & value) {
-   rules_[key] = value;
+   pimpl->rule_set(key, value);
 }
-
-inline void
+void
 class_map_t::rule_del(uint32_t key) {
-   rules_.erase(key);
+   pimpl->rule_del(key);
 }
-
-inline bool
+bool
 class_map_t::operator==(class_map_t const & other) const {
-   return key_ == other.key_ &&
-          rules_ == other.rules_;
+   return pimpl->operator==(*other.pimpl);
 }
-
-inline bool
+bool
 class_map_t::operator!=(class_map_t const & other) const {
-   return !operator==(other);
+   return pimpl->operator!=(*other.pimpl);
 }
-
-inline uint32_t
+uint32_t
 class_map_t::hash() const {
-   hash_mix h;
-   mix_me(h);
-   return h.result();
+   return pimpl->hash();
 }
-
-inline void
+void
 class_map_t::mix_me(hash_mix & h) const {
-   h.mix(key_); // class_map_key_t
-   for (auto it=rules_.cbegin(); it!=rules_.cend(); ++it) {
-      h.mix(it->first); // uint32_t
-      h.mix(it->second); // class_map_rule_t
-   }
+   pimpl->mix_me(h);
 }
-
-inline std::string
+std::string
 class_map_t::to_string() const {
-   std::ostringstream ss;
-   ss << "class_map_t(";
-   ss << "key=" << key_;
-   ss << ", rules=" <<"'";
-   bool first_rules = true;
-   for (auto it=rules_.cbegin(); it!=rules_.cend(); ++it) {
-      if (first_rules) {
-         ss << it->first << "=" << it->second;
-         first_rules = false;
-      } else {
-         ss << "," << it->first << "=" << it->second;
-      }
-   }
-   ss << "'";
-   ss << ")";
-   return ss.str();
+   return pimpl->to_string();
 }
-
-inline std::ostream&
+std::ostream&
 operator<<(std::ostream& os, const class_map_t& obj) {
-   os << obj.to_string();
-   return os;
+   return operator<<(os, *obj.pimpl);
 }
-
 
 }
 

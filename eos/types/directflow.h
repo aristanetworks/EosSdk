@@ -1,4 +1,4 @@
-// Copyright (c) 2021 Arista Networks, Inc.  All rights reserved.
+// Copyright (c) 2022 Arista Networks, Inc.  All rights reserved.
 // Arista Networks, Inc. Confidential and Proprietary.
 
 #ifndef EOS_TYPES_DIRECTFLOW_H
@@ -10,6 +10,7 @@
 #include <eos/intf.h>
 #include <eos/ip.h>
 #include <eos/utility.h>
+#include <memory>
 #include <set>
 #include <sstream>
 
@@ -63,10 +64,18 @@ class EOS_SDK_PUBLIC flow_match_field_set_t {
    uint32_t match_bitset_;
 };
 
+EOS_SDK_PUBLIC
+std::ostream& operator<<(std::ostream& os, const flow_match_field_set_t& obj);
+
+class flow_match_impl_t;
 /** Match criteria for a flow. */
 class EOS_SDK_PUBLIC flow_match_t {
  public:
    flow_match_t();
+   flow_match_t(const flow_match_t& other);
+   flow_match_t& operator=(
+      flow_match_t const & other);
+
 
    /** Getter for 'match_field_set': the fields to match on. */
    flow_match_field_set_t match_field_set() const;
@@ -161,21 +170,11 @@ class EOS_SDK_PUBLIC flow_match_t {
    friend std::ostream& operator<<(std::ostream& os, const flow_match_t& obj);
 
  private:
-   flow_match_field_set_t match_field_set_;
-   std::set<intf_id_t> input_intfs_;
-   eth_addr_t eth_src_;
-   eth_addr_t eth_src_mask_;
-   eth_addr_t eth_dst_;
-   eth_addr_t eth_dst_mask_;
-   eth_type_t eth_type_;
-   vlan_id_t vlan_id_;
-   vlan_id_t vlan_id_mask_;
-   cos_t cos_;
-   ip_addr_t ip_src_;
-   ip_addr_t ip_src_mask_;
-   ip_addr_t ip_dst_;
-   ip_addr_t ip_dst_mask_;
+   std::shared_ptr<flow_match_impl_t> pimpl;
 };
+
+EOS_SDK_PUBLIC
+std::ostream& operator<<(std::ostream& os, const flow_match_t& obj);
 
 /** Defines the set of enabled actions. */
 class EOS_SDK_PUBLIC flow_action_set_t {
@@ -222,10 +221,18 @@ class EOS_SDK_PUBLIC flow_action_set_t {
    uint32_t action_bitset_;
 };
 
+EOS_SDK_PUBLIC
+std::ostream& operator<<(std::ostream& os, const flow_action_set_t& obj);
+
+class flow_action_impl_t;
 /** Defines the actions to take on a matching flow. */
 class EOS_SDK_PUBLIC flow_action_t {
  public:
    flow_action_t();
+   flow_action_t(const flow_action_t& other);
+   flow_action_t& operator=(
+      flow_action_t const & other);
+
 
    /** Getter for 'action_set': actions that are enabled. */
    flow_action_set_t action_set() const;
@@ -287,22 +294,23 @@ class EOS_SDK_PUBLIC flow_action_t {
    friend std::ostream& operator<<(std::ostream& os, const flow_action_t& obj);
 
  private:
-   flow_action_set_t action_set_;
-   std::set<intf_id_t> output_intfs_;
-   vlan_id_t vlan_id_;
-   cos_t cos_;
-   eth_addr_t eth_src_;
-   eth_addr_t eth_dst_;
-   ip_addr_t ip_src_;
-   ip_addr_t ip_dst_;
+   std::shared_ptr<flow_action_impl_t> pimpl;
 };
 
+EOS_SDK_PUBLIC
+std::ostream& operator<<(std::ostream& os, const flow_action_t& obj);
+
+class flow_entry_impl_t;
 /** Defines a flow entry. */
 class EOS_SDK_PUBLIC flow_entry_t {
  public:
    flow_entry_t();
    flow_entry_t(std::string const & name, flow_match_t match, flow_action_t action,
                 flow_priority_t priority);
+   flow_entry_t(const flow_entry_t& other);
+   flow_entry_t& operator=(
+      flow_entry_t const & other);
+
 
    std::string name() const;
 
@@ -327,16 +335,21 @@ class EOS_SDK_PUBLIC flow_entry_t {
    friend std::ostream& operator<<(std::ostream& os, const flow_entry_t& obj);
 
  private:
-   std::string name_;
-   flow_match_t match_;
-   flow_action_t action_;
-   flow_priority_t priority_;
+   std::shared_ptr<flow_entry_impl_t> pimpl;
 };
 
+EOS_SDK_PUBLIC
+std::ostream& operator<<(std::ostream& os, const flow_entry_t& obj);
+
+class flow_counters_impl_t;
 /** Defines counters for a flow. */
 class EOS_SDK_PUBLIC flow_counters_t {
  public:
    flow_counters_t();
+   flow_counters_t(const flow_counters_t& other);
+   flow_counters_t& operator=(
+      flow_counters_t const & other);
+
 
    uint64_t bytes() const;
 
@@ -357,10 +370,12 @@ class EOS_SDK_PUBLIC flow_counters_t {
    friend std::ostream& operator<<(std::ostream& os, const flow_counters_t& obj);
 
  private:
+   std::shared_ptr<flow_counters_impl_t> pimpl;
    friend class flow_helper;
-   uint64_t bytes_;
-   uint64_t packets_;
 };
+
+EOS_SDK_PUBLIC
+std::ostream& operator<<(std::ostream& os, const flow_counters_t& obj);
 
 /** Flow entry status. */
 enum flow_status_t {
@@ -379,7 +394,8 @@ enum flow_status_t {
    FLOW_REQUEST_ACCEPTED,
 };
 /** Appends a string representation of enum flow_status_t value to the ostream. */
-std::ostream& operator<<(std::ostream& os, const flow_status_t & enum_val);
+EOS_SDK_PUBLIC std::ostream& operator<<(std::ostream& os,
+                                        const flow_status_t & enum_val);
 
 /** Reason why a flow was not successfully created in hardware. */
 enum flow_rejected_reason_t {
@@ -400,9 +416,8 @@ enum flow_rejected_reason_t {
  * Appends a string representation of enum flow_rejected_reason_t value to the
  * ostream.
  */
-std::ostream& operator<<(std::ostream& os, const flow_rejected_reason_t & enum_val);
+EOS_SDK_PUBLIC std::ostream& operator<<(std::ostream& os,
+                                        const flow_rejected_reason_t & enum_val);
 }
-
-#include <eos/inline/types/directflow.h>
 
 #endif // EOS_TYPES_DIRECTFLOW_H

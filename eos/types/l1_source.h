@@ -1,4 +1,4 @@
-// Copyright (c) 2020 Arista Networks, Inc.  All rights reserved.
+// Copyright (c) 2022 Arista Networks, Inc.  All rights reserved.
 // Arista Networks, Inc. Confidential and Proprietary.
 
 #ifndef EOS_TYPES_L1_SOURCE_H
@@ -7,6 +7,7 @@
 #include <eos/hash_mix.h>
 #include <eos/intf.h>
 #include <eos/utility.h>
+#include <memory>
 #include <sstream>
 
 namespace eos {
@@ -20,8 +21,10 @@ enum l1_source_type_t {
    switchPort,
 };
 /** Appends a string representation of enum l1_source_type_t value to the ostream. */
-std::ostream& operator<<(std::ostream& os, const l1_source_type_t & enum_val);
+EOS_SDK_PUBLIC std::ostream& operator<<(std::ostream& os,
+                                        const l1_source_type_t & enum_val);
 
+class l1_source_impl_t;
 /**
  * L1 source class.
  *
@@ -35,6 +38,10 @@ class EOS_SDK_PUBLIC l1_source_t {
    explicit l1_source_t(l1_source_type_t l1_source_type);
    /** Constructor specifying both l1 source type and interface id. */
    l1_source_t(l1_source_type_t l1_source_type, intf_id_t port);
+   l1_source_t(const l1_source_t& other);
+   l1_source_t& operator=(
+      l1_source_t const & other);
+
 
    l1_source_type_t l1_source_type() const;
    void l1_source_type_is(l1_source_type_t l1_source_type);
@@ -58,11 +65,11 @@ class EOS_SDK_PUBLIC l1_source_t {
    friend std::ostream& operator<<(std::ostream& os, const l1_source_t& obj);
 
  private:
-   l1_source_type_t l1_source_type_;
-   intf_id_t port_;
+   std::shared_ptr<l1_source_impl_t> pimpl;
 };
-}
 
-#include <eos/inline/types/l1_source.h>
+EOS_SDK_PUBLIC
+std::ostream& operator<<(std::ostream& os, const l1_source_t& obj);
+}
 
 #endif // EOS_TYPES_L1_SOURCE_H

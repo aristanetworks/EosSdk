@@ -1,4 +1,4 @@
-// Copyright (c) 2020 Arista Networks, Inc.  All rights reserved.
+// Copyright (c) 2022 Arista Networks, Inc.  All rights reserved.
 // Arista Networks, Inc. Confidential and Proprietary.
 
 #ifndef EOS_INLINE_TYPES_SUBINTF_H
@@ -7,69 +7,70 @@
 namespace eos {
 
 // Default constructor.
-inline subintf_t::subintf_t() :
-      intf_id_(intf_id_t()), vlan_id_(vlan_id_t()) {
+subintf_t::subintf_t() {
+   pimpl = std::shared_ptr<subintf_impl_t>(
+      new subintf_impl_t()
+   );
+}
+subintf_t::subintf_t(intf_id_t intf_id, vlan_id_t vlan_id) {
+   pimpl = std::shared_ptr<subintf_impl_t>(
+      new subintf_impl_t(
+         intf_id,
+         vlan_id
+      )
+   );
+}
+subintf_t::subintf_t(
+   const subintf_t& other)
+{
+   pimpl = std::make_unique<subintf_impl_t>(
+      subintf_impl_t(*other.pimpl));
+}
+subintf_t&
+subintf_t::operator=(
+   subintf_t const & other)
+{
+   pimpl = std::shared_ptr<subintf_impl_t>(
+      new subintf_impl_t(*other.pimpl));
+   return *this;
 }
 
-inline subintf_t::subintf_t(intf_id_t intf_id, vlan_id_t vlan_id) :
-      intf_id_(intf_id), vlan_id_(vlan_id) {
-}
-
-inline intf_id_t
+intf_id_t
 subintf_t::intf_id() const {
-   return intf_id_;
+   return pimpl->intf_id();
 }
-
-inline vlan_id_t
+vlan_id_t
 subintf_t::vlan_id() const {
-   return vlan_id_;
+   return pimpl->vlan_id();
 }
-
-inline void
+void
 subintf_t::vlan_id_is(vlan_id_t vlan_id) {
-   vlan_id_ = vlan_id;
+   pimpl->vlan_id_is(vlan_id);
 }
-
-inline bool
+bool
 subintf_t::operator==(subintf_t const & other) const {
-   return intf_id_ == other.intf_id_ &&
-          vlan_id_ == other.vlan_id_;
+   return pimpl->operator==(*other.pimpl);
 }
-
-inline bool
+bool
 subintf_t::operator!=(subintf_t const & other) const {
-   return !operator==(other);
+   return pimpl->operator!=(*other.pimpl);
 }
-
-inline uint32_t
+uint32_t
 subintf_t::hash() const {
-   hash_mix h;
-   mix_me(h);
-   return h.result();
+   return pimpl->hash();
 }
-
-inline void
+void
 subintf_t::mix_me(hash_mix & h) const {
-   h.mix(intf_id_); // intf_id_t
-   h.mix(vlan_id_); // vlan_id_t
+   pimpl->mix_me(h);
 }
-
-inline std::string
+std::string
 subintf_t::to_string() const {
-   std::ostringstream ss;
-   ss << "subintf_t(";
-   ss << "intf_id=" << intf_id_;
-   ss << ", vlan_id=" << vlan_id_;
-   ss << ")";
-   return ss.str();
+   return pimpl->to_string();
 }
-
-inline std::ostream&
+std::ostream&
 operator<<(std::ostream& os, const subintf_t& obj) {
-   os << obj.to_string();
-   return os;
+   return operator<<(os, *obj.pimpl);
 }
-
 
 }
 

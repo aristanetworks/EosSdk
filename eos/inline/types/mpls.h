@@ -1,4 +1,4 @@
-// Copyright (c) 2021 Arista Networks, Inc.  All rights reserved.
+// Copyright (c) 2022 Arista Networks, Inc.  All rights reserved.
 // Arista Networks, Inc. Confidential and Proprietary.
 
 #ifndef EOS_INLINE_TYPES_MPLS_H
@@ -9,10 +9,9 @@
 
 namespace eos {
 
-invalid_range_error invalid_mpls_label(uint32_t label) EOS_SDK_INTERNAL;
 
 
-inline std::ostream&
+EOS_SDK_PUBLIC std::ostream&
 operator<<(std::ostream& os, const mpls_action_t & enum_val) {
    if (enum_val==MPLS_ACTION_NULL) {
       os << "MPLS_ACTION_NULL";
@@ -31,8 +30,7 @@ operator<<(std::ostream& os, const mpls_action_t & enum_val) {
 }
 
 
-
-inline std::ostream&
+EOS_SDK_PUBLIC std::ostream&
 operator<<(std::ostream& os, const mpls_ttl_mode_t & enum_val) {
    if (enum_val==MPLS_TTLMODE_NULL) {
       os << "MPLS_TTLMODE_NULL";
@@ -47,8 +45,7 @@ operator<<(std::ostream& os, const mpls_ttl_mode_t & enum_val) {
 }
 
 
-
-inline std::ostream&
+EOS_SDK_PUBLIC std::ostream&
 operator<<(std::ostream& os, const mpls_payload_type_t & enum_val) {
    if (enum_val==MPLS_PAYLOAD_TYPE_NULL) {
       os << "MPLS_PAYLOAD_TYPE_NULL";
@@ -67,20 +64,19 @@ operator<<(std::ostream& os, const mpls_payload_type_t & enum_val) {
 }
 
 
-
-inline mpls_label_t::mpls_label_t(uint32_t label) :
+mpls_label_t::mpls_label_t(uint32_t label) :
       label_(label) {
    if (label > INVALID) {
       panic(invalid_mpls_label(label));
    }
 }
 
-inline uint32_t
+uint32_t
 mpls_label_t::label() const {
    return label_;
 }
 
-inline void
+void
 mpls_label_t::label_is(uint32_t label) {
    if (label > INVALID) {
       panic(invalid_mpls_label(label));
@@ -88,22 +84,22 @@ mpls_label_t::label_is(uint32_t label) {
    label_ = label;
 }
 
-inline std::string
+std::string
 mpls_label_t::to_string() const {
    return std::to_string(label_);
 }
 
-inline bool
+bool
 mpls_label_t::operator==(mpls_label_t const & other) const {
    return label_ == other.label_;
 }
 
-inline bool
+bool
 mpls_label_t::operator!=(mpls_label_t const & other) const {
    return !operator==(other);
 }
 
-inline bool
+bool
 mpls_label_t::operator<(mpls_label_t const & other) const {
    if(label_ != other.label_) {
       return label_ < other.label_;
@@ -111,19 +107,19 @@ mpls_label_t::operator<(mpls_label_t const & other) const {
    return false;
 }
 
-inline uint32_t
+uint32_t
 mpls_label_t::hash() const {
    hash_mix h;
    mix_me(h);
    return h.result();
 }
 
-inline void
+void
 mpls_label_t::mix_me(hash_mix & h) const {
    h.mix(label_); // uint32_t
 }
 
-inline std::ostream&
+std::ostream&
 operator<<(std::ostream& os, const mpls_label_t& obj) {
    os << obj.to_string();
    return os;

@@ -1,4 +1,4 @@
-// Copyright (c) 2020 Arista Networks, Inc.  All rights reserved.
+// Copyright (c) 2022 Arista Networks, Inc.  All rights reserved.
 // Arista Networks, Inc. Confidential and Proprietary.
 
 #ifndef EOS_INLINE_TYPES_L1_SOURCE_H
@@ -6,7 +6,7 @@
 
 namespace eos {
 
-inline std::ostream&
+EOS_SDK_PUBLIC std::ostream&
 operator<<(std::ostream& os, const l1_source_type_t & enum_val) {
    if (enum_val==unknown) {
       os << "unknown";
@@ -25,89 +25,85 @@ operator<<(std::ostream& os, const l1_source_type_t & enum_val) {
 }
 
 
-
-inline l1_source_t::l1_source_t() :
-      l1_source_type_(), port_() {
+l1_source_t::l1_source_t() {
+   pimpl = std::shared_ptr<l1_source_impl_t>(
+      new l1_source_impl_t()
+   );
+}
+l1_source_t::l1_source_t(l1_source_type_t l1_source_type) {
+   pimpl = std::shared_ptr<l1_source_impl_t>(
+      new l1_source_impl_t(
+         l1_source_type
+      )
+   );
+}
+l1_source_t::l1_source_t(l1_source_type_t l1_source_type, intf_id_t port) {
+   pimpl = std::shared_ptr<l1_source_impl_t>(
+      new l1_source_impl_t(
+         l1_source_type,
+         port
+      )
+   );
+}
+l1_source_t::l1_source_t(
+   const l1_source_t& other)
+{
+   pimpl = std::make_unique<l1_source_impl_t>(
+      l1_source_impl_t(*other.pimpl));
+}
+l1_source_t&
+l1_source_t::operator=(
+   l1_source_t const & other)
+{
+   pimpl = std::shared_ptr<l1_source_impl_t>(
+      new l1_source_impl_t(*other.pimpl));
+   return *this;
 }
 
-inline l1_source_t::l1_source_t(l1_source_type_t l1_source_type) :
-      l1_source_type_(l1_source_type), port_() {
-}
-
-inline l1_source_t::l1_source_t(l1_source_type_t l1_source_type, intf_id_t port) :
-      l1_source_type_(l1_source_type), port_(port) {
-}
-
-inline l1_source_type_t
+l1_source_type_t
 l1_source_t::l1_source_type() const {
-   return l1_source_type_;
+   return pimpl->l1_source_type();
 }
-
-inline void
+void
 l1_source_t::l1_source_type_is(l1_source_type_t l1_source_type) {
-   l1_source_type_ = l1_source_type;
+   pimpl->l1_source_type_is(l1_source_type);
 }
-
-inline intf_id_t
+intf_id_t
 l1_source_t::port() const {
-   return port_;
+   return pimpl->port();
 }
-
-inline void
+void
 l1_source_t::port_is(intf_id_t port) {
-   port_ = port;
+   pimpl->port_is(port);
 }
-
-inline bool
+bool
 l1_source_t::operator==(l1_source_t const & other) const {
-   return l1_source_type_ == other.l1_source_type_ &&
-          port_ == other.port_;
+   return pimpl->operator==(*other.pimpl);
 }
-
-inline bool
+bool
 l1_source_t::operator!=(l1_source_t const & other) const {
-   return !operator==(other);
+   return pimpl->operator!=(*other.pimpl);
 }
-
-inline bool
+bool
 l1_source_t::operator<(l1_source_t const & other) const {
-   if(l1_source_type_ != other.l1_source_type_) {
-      return l1_source_type_ < other.l1_source_type_;
-   } else if(port_ != other.port_) {
-      return port_ < other.port_;
-   }
-   return false;
+   return pimpl->operator<(*other.pimpl);
 }
-
-inline uint32_t
+uint32_t
 l1_source_t::hash() const {
-   hash_mix h;
-   mix_me(h);
-   return h.result();
+   return pimpl->hash();
 }
-
-inline void
+void
 l1_source_t::mix_me(hash_mix & h) const {
-   h.mix(l1_source_type_); // l1_source_type_t
-   h.mix(port_); // intf_id_t
+   pimpl->mix_me(h);
 }
-
-inline std::string
+std::string
 l1_source_t::to_string() const {
-   std::ostringstream ss;
-   ss << "l1_source_t(";
-   ss << "l1_source_type=" << l1_source_type_;
-   ss << ", port=" << port_;
-   ss << ")";
-   return ss.str();
+   return pimpl->to_string();
 }
-
-inline std::ostream&
+std::ostream&
 operator<<(std::ostream& os, const l1_source_t& obj) {
-   os << obj.to_string();
-   return os;
+   return operator<<(os, *obj.pimpl);
 }
-
 
 }
 

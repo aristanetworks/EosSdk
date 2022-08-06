@@ -14,3 +14,4 @@ nexthop_group_tunnel_handler::get_nexthop_group_tunnel_mgr() const {
 }
 
 #endif // INLINE_NEXTHOP_GROUP_TUNNEL_H
+

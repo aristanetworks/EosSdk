@@ -13,3 +13,4 @@ inline bgp_path_mgr * bgp_path_handler::get_bgp_path_mgr() const {
 }  // end namespace eos
 
 #endif // INLINE_BGP_PATH_H
+

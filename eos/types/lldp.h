@@ -1,4 +1,4 @@
-// Copyright (c) 2020 Arista Networks, Inc.  All rights reserved.
+// Copyright (c) 2022 Arista Networks, Inc.  All rights reserved.
 // Arista Networks, Inc. Confidential and Proprietary.
 
 #ifndef EOS_TYPES_LLDP_H
@@ -7,16 +7,22 @@
 #include <arpa/inet.h>
 #include <eos/hash_mix.h>
 #include <eos/utility.h>
+#include <memory>
 #include <netinet/ether.h>
 #include <sstream>
 
 namespace eos {
 
+class lldp_tlv_type_impl_t;
 /** An LLDP organizationally defined TLV type. */
 class EOS_SDK_PUBLIC lldp_tlv_type_t {
  public:
    lldp_tlv_type_t();
    lldp_tlv_type_t(uint32_t organization, uint8_t subtype);
+   lldp_tlv_type_t(const lldp_tlv_type_t& other);
+   lldp_tlv_type_t& operator=(
+      lldp_tlv_type_t const & other);
+
 
    /**
     * Getter for 'organization': IEEE assigned Organizationally Unique Identifier
@@ -47,9 +53,11 @@ class EOS_SDK_PUBLIC lldp_tlv_type_t {
    friend std::ostream& operator<<(std::ostream& os, const lldp_tlv_type_t& obj);
 
  private:
-   uint32_t organization_;
-   uint8_t subtype_;
+   std::shared_ptr<lldp_tlv_type_impl_t> pimpl;
 };
+
+EOS_SDK_PUBLIC
+std::ostream& operator<<(std::ostream& os, const lldp_tlv_type_t& obj);
 
 /** Set of standard TLVs (as a bitmask). */
 enum lldp_std_tlv_type_bit_t {
@@ -69,13 +77,18 @@ enum lldp_std_tlv_type_bit_t {
  * Appends a string representation of enum lldp_std_tlv_type_bit_t value to the
  * ostream.
  */
-std::ostream& operator<<(std::ostream& os,
-                         const lldp_std_tlv_type_bit_t & enum_val);
+EOS_SDK_PUBLIC std::ostream& operator<<(std::ostream& os,
+                                        const lldp_std_tlv_type_bit_t & enum_val);
 
+class lldp_std_tlv_type_impl_t;
 /** Defines a set of remote TLVs (for which we have a value for). */
 class EOS_SDK_PUBLIC lldp_std_tlv_type_t {
  public:
    lldp_std_tlv_type_t();
+   lldp_std_tlv_type_t(const lldp_std_tlv_type_t& other);
+   lldp_std_tlv_type_t& operator=(
+      lldp_std_tlv_type_t const & other);
+
 
    void chassis_id_is(bool enabled);
    void intf_id_is(bool enabled);
@@ -111,8 +124,11 @@ class EOS_SDK_PUBLIC lldp_std_tlv_type_t {
                                    const lldp_std_tlv_type_t& obj);
 
  private:
-   lldp_std_tlv_type_bit_t bitset_;
+   std::shared_ptr<lldp_std_tlv_type_impl_t> pimpl;
 };
+
+EOS_SDK_PUBLIC
+std::ostream& operator<<(std::ostream& os, const lldp_std_tlv_type_t& obj);
 
 /** Set of system capabilities. */
 enum lldp_syscap_bits_t {
@@ -128,13 +144,19 @@ enum lldp_syscap_bits_t {
 /**
  * Appends a string representation of enum lldp_syscap_bits_t value to the ostream.
  */
-std::ostream& operator<<(std::ostream& os, const lldp_syscap_bits_t & enum_val);
+EOS_SDK_PUBLIC std::ostream& operator<<(std::ostream& os,
+                                        const lldp_syscap_bits_t & enum_val);
 
+class lldp_syscap_impl_t;
 /** Defines a set of remote system capabilities. */
 class EOS_SDK_PUBLIC lldp_syscap_t {
  public:
    lldp_syscap_t();
    explicit lldp_syscap_t(lldp_syscap_bits_t bitset);
+   lldp_syscap_t(const lldp_syscap_t& other);
+   lldp_syscap_t& operator=(
+      lldp_syscap_t const & other);
+
 
    bool other() const;
    bool repeater() const;
@@ -157,15 +179,23 @@ class EOS_SDK_PUBLIC lldp_syscap_t {
    friend std::ostream& operator<<(std::ostream& os, const lldp_syscap_t& obj);
 
  private:
-   lldp_syscap_bits_t bitset_;
+   std::shared_ptr<lldp_syscap_impl_t> pimpl;
 };
 
+EOS_SDK_PUBLIC
+std::ostream& operator<<(std::ostream& os, const lldp_syscap_t& obj);
+
+class lldp_management_address_impl_t;
 /** Management information of the switch across the link. */
 class EOS_SDK_PUBLIC lldp_management_address_t {
  public:
    lldp_management_address_t();
    lldp_management_address_t(uint32_t address_family, std::string address,
                              uint32_t snmp_ifindex, std::string oid);
+   lldp_management_address_t(const lldp_management_address_t& other);
+   lldp_management_address_t& operator=(
+      lldp_management_address_t const & other);
+
 
    /**
     * Getter for 'address_family': Type of address encoded in address field (see
@@ -206,17 +236,22 @@ class EOS_SDK_PUBLIC lldp_management_address_t {
                                    const lldp_management_address_t& obj);
 
  private:
-   uint32_t address_family_;
-   std::string address_;
-   uint32_t snmp_ifindex_;
-   std::string oid_;
+   std::shared_ptr<lldp_management_address_impl_t> pimpl;
 };
 
+EOS_SDK_PUBLIC
+std::ostream& operator<<(std::ostream& os, const lldp_management_address_t& obj);
+
+class lldp_lacp_impl_t;
 /** LACP information from the peer. */
 class EOS_SDK_PUBLIC lldp_lacp_t {
  public:
    lldp_lacp_t();
    lldp_lacp_t(bool capable, bool enabled, uint32_t id, bool valid);
+   lldp_lacp_t(const lldp_lacp_t& other);
+   lldp_lacp_t& operator=(
+      lldp_lacp_t const & other);
+
 
    /** Getter for 'capable': if port can become a member of a port-channel. */
    bool capable() const;
@@ -251,18 +286,23 @@ class EOS_SDK_PUBLIC lldp_lacp_t {
    friend std::ostream& operator<<(std::ostream& os, const lldp_lacp_t& obj);
 
  private:
-   bool capable_;
-   bool enabled_;
-   uint32_t id_;
-   bool valid_;
+   std::shared_ptr<lldp_lacp_impl_t> pimpl;
 };
 
+EOS_SDK_PUBLIC
+std::ostream& operator<<(std::ostream& os, const lldp_lacp_t& obj);
+
+class lldp_phy_impl_t;
 /** PHY information from the peer (related to speed auto-negotiation). */
 class EOS_SDK_PUBLIC lldp_phy_t {
  public:
    lldp_phy_t();
    lldp_phy_t(bool autonegSupported, bool autonegEnabled,
               uint16_t autonegCapabilitiesBm, bool valid);
+   lldp_phy_t(const lldp_phy_t& other);
+   lldp_phy_t& operator=(
+      lldp_phy_t const & other);
+
 
    /** Getter for 'autonegSupported': if auto-negotiation supported. */
    bool autonegSupported() const;
@@ -289,11 +329,11 @@ class EOS_SDK_PUBLIC lldp_phy_t {
    friend std::ostream& operator<<(std::ostream& os, const lldp_phy_t& obj);
 
  private:
-   bool autonegSupported_;
-   bool autonegEnabled_;
-   uint16_t autonegCapabilitiesBm_;
-   bool valid_;
+   std::shared_ptr<lldp_phy_impl_t> pimpl;
 };
+
+EOS_SDK_PUBLIC
+std::ostream& operator<<(std::ostream& os, const lldp_phy_t& obj);
 
 /** The lldp administrative status of an interface. */
 enum lldp_intf_enabled_t {
@@ -307,7 +347,8 @@ enum lldp_intf_enabled_t {
  * Appends a string representation of enum lldp_intf_enabled_t value to the
  * ostream.
  */
-std::ostream& operator<<(std::ostream& os, const lldp_intf_enabled_t & enum_val);
+EOS_SDK_PUBLIC std::ostream& operator<<(std::ostream& os,
+                                        const lldp_intf_enabled_t & enum_val);
 
 /** encoding format of the chassis name. */
 enum lldp_chassis_id_encoding_t {
@@ -325,14 +366,19 @@ enum lldp_chassis_id_encoding_t {
  * Appends a string representation of enum lldp_chassis_id_encoding_t value to the
  * ostream.
  */
-std::ostream& operator<<(std::ostream& os,
-                         const lldp_chassis_id_encoding_t & enum_val);
+EOS_SDK_PUBLIC std::ostream& operator<<(
+         std::ostream& os, const lldp_chassis_id_encoding_t & enum_val);
 
+class lldp_chassis_id_impl_t;
 /** The chassis name, as an encoding plus payload. */
 class EOS_SDK_PUBLIC lldp_chassis_id_t {
  public:
    lldp_chassis_id_t();
    lldp_chassis_id_t(lldp_chassis_id_encoding_t encoding, std::string value);
+   lldp_chassis_id_t(const lldp_chassis_id_t& other);
+   lldp_chassis_id_t& operator=(
+      lldp_chassis_id_t const & other);
+
 
    lldp_chassis_id_encoding_t encoding() const;
 
@@ -356,9 +402,11 @@ class EOS_SDK_PUBLIC lldp_chassis_id_t {
    friend std::ostream& operator<<(std::ostream& os, const lldp_chassis_id_t& obj);
 
  private:
-   lldp_chassis_id_encoding_t encoding_;
-   std::string value_;
+   std::shared_ptr<lldp_chassis_id_impl_t> pimpl;
 };
+
+EOS_SDK_PUBLIC
+std::ostream& operator<<(std::ostream& os, const lldp_chassis_id_t& obj);
 
 /** encoding format of the chassis name. */
 enum lldp_intf_id_encoding_t {
@@ -376,14 +424,19 @@ enum lldp_intf_id_encoding_t {
  * Appends a string representation of enum lldp_intf_id_encoding_t value to the
  * ostream.
  */
-std::ostream& operator<<(std::ostream& os,
-                         const lldp_intf_id_encoding_t & enum_val);
+EOS_SDK_PUBLIC std::ostream& operator<<(std::ostream& os,
+                                        const lldp_intf_id_encoding_t & enum_val);
 
+class lldp_intf_id_impl_t;
 /** The interface name, as an encoding plus payload. */
 class EOS_SDK_PUBLIC lldp_intf_id_t {
  public:
    lldp_intf_id_t();
    lldp_intf_id_t(lldp_intf_id_encoding_t encoding, std::string value);
+   lldp_intf_id_t(const lldp_intf_id_t& other);
+   lldp_intf_id_t& operator=(
+      lldp_intf_id_t const & other);
+
 
    lldp_intf_id_encoding_t encoding() const;
 
@@ -407,15 +460,22 @@ class EOS_SDK_PUBLIC lldp_intf_id_t {
    friend std::ostream& operator<<(std::ostream& os, const lldp_intf_id_t& obj);
 
  private:
-   lldp_intf_id_encoding_t encoding_;
-   std::string value_;
+   std::shared_ptr<lldp_intf_id_impl_t> pimpl;
 };
 
+EOS_SDK_PUBLIC
+std::ostream& operator<<(std::ostream& os, const lldp_intf_id_t& obj);
+
+class lldp_remote_system_impl_t;
 /** Identifies a remote system as seen across an LLDP interface. */
 class EOS_SDK_PUBLIC lldp_remote_system_t {
  public:
    lldp_remote_system_t();
    lldp_remote_system_t(lldp_chassis_id_t chassis, lldp_intf_id_t port);
+   lldp_remote_system_t(const lldp_remote_system_t& other);
+   lldp_remote_system_t& operator=(
+      lldp_remote_system_t const & other);
+
 
    /** Getter for 'chassis': The chassis-id of the remote system. */
    lldp_chassis_id_t chassis() const;
@@ -446,16 +506,23 @@ class EOS_SDK_PUBLIC lldp_remote_system_t {
                                    const lldp_remote_system_t& obj);
 
  private:
-   lldp_chassis_id_t chassis_;
-   lldp_intf_id_t port_;
+   std::shared_ptr<lldp_remote_system_impl_t> pimpl;
 };
 
+EOS_SDK_PUBLIC
+std::ostream& operator<<(std::ostream& os, const lldp_remote_system_t& obj);
+
+class lldp_neighbor_impl_t;
 /** Identifies a remote system seen from the local switch. */
 class EOS_SDK_PUBLIC lldp_neighbor_t {
  public:
    lldp_neighbor_t();
    explicit lldp_neighbor_t(intf_id_t intf);
    lldp_neighbor_t(intf_id_t intf, lldp_remote_system_t remote_system);
+   lldp_neighbor_t(const lldp_neighbor_t& other);
+   lldp_neighbor_t& operator=(
+      lldp_neighbor_t const & other);
+
 
    /** Getter for 'intf': The local interface that sees this neighbor. */
    intf_id_t intf() const;
@@ -488,11 +555,11 @@ class EOS_SDK_PUBLIC lldp_neighbor_t {
    friend std::ostream& operator<<(std::ostream& os, const lldp_neighbor_t& obj);
 
  private:
-   intf_id_t intf_;
-   lldp_remote_system_t remote_system_;
+   std::shared_ptr<lldp_neighbor_impl_t> pimpl;
 };
-}
 
-#include <eos/inline/types/lldp.h>
+EOS_SDK_PUBLIC
+std::ostream& operator<<(std::ostream& os, const lldp_neighbor_t& obj);
+}
 
 #endif // EOS_TYPES_LLDP_H

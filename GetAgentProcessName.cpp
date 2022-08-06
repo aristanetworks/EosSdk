@@ -54,7 +54,7 @@ std::string get_agent_process_name(void) {
       std::string arg0 = line.substr(0, arg_break);
       // Strip off the path
       program_name = arg0.substr(arg0.find_last_of('/') + 1);
-      if(program_name == "python") {
+      if (program_name.find("python") != std::string::npos) {
          // Running a python agent (i.e. 'python xxx.py' or '/usr/bin/python xxx.py')
          arg0 = line.substr(arg_break + 1, line.find_first_of('\0', arg_break + 1));
          program_name = arg0.substr(arg0.find_last_of('/') + 1);

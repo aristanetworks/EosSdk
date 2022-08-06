@@ -1,4 +1,4 @@
-// Copyright (c) 2021 Arista Networks, Inc.  All rights reserved.
+// Copyright (c) 2022 Arista Networks, Inc.  All rights reserved.
 // Arista Networks, Inc. Confidential and Proprietary.
 
 #ifndef EOS_TYPES_BGP_H
@@ -7,18 +7,24 @@
 #include <eos/hash_mix.h>
 #include <eos/ip.h>
 #include <eos/utility.h>
+#include <memory>
 #include <sstream>
 
 namespace eos {
 
 typedef uint32_t bgp_asn_t;
 
+class bgp_peer_key_impl_t;
 /** The BGP peer key which consists of the peer address and the VRF itresides in. */
 class EOS_SDK_PUBLIC bgp_peer_key_t {
  public:
    bgp_peer_key_t();
    explicit bgp_peer_key_t(std::string const & vrf_name,
                            ip_addr_t const & peer_addr);
+   bgp_peer_key_t(const bgp_peer_key_t& other);
+   bgp_peer_key_t& operator=(
+      bgp_peer_key_t const & other);
+
 
    /** Getter for 'vrf_name': VRF name. */
    std::string vrf_name() const;
@@ -46,9 +52,11 @@ class EOS_SDK_PUBLIC bgp_peer_key_t {
    friend std::ostream& operator<<(std::ostream& os, const bgp_peer_key_t& obj);
 
  private:
-   std::string vrf_name_;
-   ip_addr_t peer_addr_;
+   std::shared_ptr<bgp_peer_key_impl_t> pimpl;
 };
+
+EOS_SDK_PUBLIC
+std::ostream& operator<<(std::ostream& os, const bgp_peer_key_t& obj);
 
 /** The operational state of a BGP peer session. */
 enum bgp_peer_state_t {
@@ -61,9 +69,8 @@ enum bgp_peer_state_t {
    PEER_ESTABLISHED,
 };
 /** Appends a string representation of enum bgp_peer_state_t value to the ostream. */
-std::ostream& operator<<(std::ostream& os, const bgp_peer_state_t & enum_val);
+EOS_SDK_PUBLIC std::ostream& operator<<(std::ostream& os,
+                                        const bgp_peer_state_t & enum_val);
 }
-
-#include <eos/inline/types/bgp.h>
 
 #endif // EOS_TYPES_BGP_H

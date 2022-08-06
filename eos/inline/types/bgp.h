@@ -1,4 +1,4 @@
-// Copyright (c) 2020 Arista Networks, Inc.  All rights reserved.
+// Copyright (c) 2022 Arista Networks, Inc.  All rights reserved.
 // Arista Networks, Inc. Confidential and Proprietary.
 
 #ifndef EOS_INLINE_TYPES_BGP_H
@@ -6,88 +6,82 @@
 
 namespace eos {
 
-inline bgp_peer_key_t::bgp_peer_key_t() :
-      vrf_name_(), peer_addr_() {
+bgp_peer_key_t::bgp_peer_key_t() {
+   pimpl = std::shared_ptr<bgp_peer_key_impl_t>(
+      new bgp_peer_key_impl_t()
+   );
+}
+bgp_peer_key_t::bgp_peer_key_t(std::string const & vrf_name,
+                                      ip_addr_t const & peer_addr) {
+   pimpl = std::shared_ptr<bgp_peer_key_impl_t>(
+      new bgp_peer_key_impl_t(
+         vrf_name,
+         peer_addr
+      )
+   );
+}
+bgp_peer_key_t::bgp_peer_key_t(
+   const bgp_peer_key_t& other)
+{
+   pimpl = std::make_unique<bgp_peer_key_impl_t>(
+      bgp_peer_key_impl_t(*other.pimpl));
+}
+bgp_peer_key_t&
+bgp_peer_key_t::operator=(
+   bgp_peer_key_t const & other)
+{
+   pimpl = std::shared_ptr<bgp_peer_key_impl_t>(
+      new bgp_peer_key_impl_t(*other.pimpl));
+   return *this;
 }
 
-inline bgp_peer_key_t::bgp_peer_key_t(std::string const & vrf_name,
-                                      ip_addr_t const & peer_addr) :
-      vrf_name_(vrf_name), peer_addr_(peer_addr) {
-}
-
-inline std::string
+std::string
 bgp_peer_key_t::vrf_name() const {
-   return vrf_name_;
+   return pimpl->vrf_name();
 }
-
-inline void
+void
 bgp_peer_key_t::vrf_name_is(std::string const & vrf_name) {
-   vrf_name_ = vrf_name;
+   pimpl->vrf_name_is(vrf_name);
 }
-
-inline ip_addr_t
+ip_addr_t
 bgp_peer_key_t::peer_addr() const {
-   return peer_addr_;
+   return pimpl->peer_addr();
 }
-
-inline void
+void
 bgp_peer_key_t::peer_addr_is(ip_addr_t const & peer_addr) {
-   peer_addr_ = peer_addr;
+   pimpl->peer_addr_is(peer_addr);
 }
-
-inline bool
+bool
 bgp_peer_key_t::operator==(bgp_peer_key_t const & other) const {
-   return vrf_name_ == other.vrf_name_ &&
-          peer_addr_ == other.peer_addr_;
+   return pimpl->operator==(*other.pimpl);
 }
-
-inline bool
+bool
 bgp_peer_key_t::operator!=(bgp_peer_key_t const & other) const {
-   return !operator==(other);
+   return pimpl->operator!=(*other.pimpl);
 }
-
-inline bool
+bool
 bgp_peer_key_t::operator<(bgp_peer_key_t const & other) const {
-   if(vrf_name_ != other.vrf_name_) {
-      return vrf_name_ < other.vrf_name_;
-   } else if(peer_addr_ != other.peer_addr_) {
-      return peer_addr_ < other.peer_addr_;
-   }
-   return false;
+   return pimpl->operator<(*other.pimpl);
 }
-
-inline uint32_t
+uint32_t
 bgp_peer_key_t::hash() const {
-   hash_mix h;
-   mix_me(h);
-   return h.result();
+   return pimpl->hash();
 }
-
-inline void
+void
 bgp_peer_key_t::mix_me(hash_mix & h) const {
-   h.mix(vrf_name_); // std::string
-   h.mix(peer_addr_); // ip_addr_t
+   pimpl->mix_me(h);
 }
-
-inline std::string
+std::string
 bgp_peer_key_t::to_string() const {
-   std::ostringstream ss;
-   ss << "bgp_peer_key_t(";
-   ss << "vrf_name='" << vrf_name_ << "'";
-   ss << ", peer_addr=" << peer_addr_;
-   ss << ")";
-   return ss.str();
+   return pimpl->to_string();
 }
-
-inline std::ostream&
+std::ostream&
 operator<<(std::ostream& os, const bgp_peer_key_t& obj) {
-   os << obj.to_string();
-   return os;
+   return operator<<(os, *obj.pimpl);
 }
 
 
-
-inline std::ostream&
+EOS_SDK_PUBLIC std::ostream&
 operator<<(std::ostream& os, const bgp_peer_state_t & enum_val) {
    if (enum_val==PEER_UNKNOWN) {
       os << "PEER_UNKNOWN";
@@ -108,7 +102,6 @@ operator<<(std::ostream& os, const bgp_peer_state_t & enum_val) {
    }
    return os;
 }
-
 
 }
 

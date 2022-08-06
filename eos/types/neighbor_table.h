@@ -1,4 +1,4 @@
-// Copyright (c) 2020 Arista Networks, Inc.  All rights reserved.
+// Copyright (c) 2022 Arista Networks, Inc.  All rights reserved.
 // Arista Networks, Inc. Confidential and Proprietary.
 
 #ifndef EOS_TYPES_NEIGHBOR_TABLE_H
@@ -9,6 +9,7 @@
 #include <eos/intf.h>
 #include <eos/ip.h>
 #include <eos/utility.h>
+#include <memory>
 #include <sstream>
 
 namespace eos {
@@ -23,8 +24,10 @@ enum neighbor_entry_type_t {
  * Appends a string representation of enum neighbor_entry_type_t value to the
  * ostream.
  */
-std::ostream& operator<<(std::ostream& os, const neighbor_entry_type_t & enum_val);
+EOS_SDK_PUBLIC std::ostream& operator<<(std::ostream& os,
+                                        const neighbor_entry_type_t & enum_val);
 
+class neighbor_key_impl_t;
 /**
  * The neighbor entry key class.
  * Maps an IP address to its associated MAC address on a specific interface. Note:
@@ -36,6 +39,10 @@ class EOS_SDK_PUBLIC neighbor_key_t {
    explicit neighbor_key_t(ip_addr_t const & ip_addr);
    /** IPv6 neighbor keys include an interface ID. */
    neighbor_key_t(ip_addr_t const & ip_addr, intf_id_t intf_id);
+   neighbor_key_t(const neighbor_key_t& other);
+   neighbor_key_t& operator=(
+      neighbor_key_t const & other);
+
 
    /** Getter for 'ip_addr': the ip address of the neighbor entry. */
    ip_addr_t ip_addr() const;
@@ -59,16 +66,23 @@ class EOS_SDK_PUBLIC neighbor_key_t {
    friend std::ostream& operator<<(std::ostream& os, const neighbor_key_t& obj);
 
  private:
-   ip_addr_t ip_addr_;
-   intf_id_t intf_id_;
+   std::shared_ptr<neighbor_key_impl_t> pimpl;
 };
 
+EOS_SDK_PUBLIC
+std::ostream& operator<<(std::ostream& os, const neighbor_key_t& obj);
+
+class neighbor_entry_impl_t;
 /** The neighbor entry class. */
 class EOS_SDK_PUBLIC neighbor_entry_t {
  public:
    neighbor_entry_t();
    neighbor_entry_t(neighbor_key_t const & neighbor_key, eth_addr_t eth_addr,
                     neighbor_entry_type_t entry_type);
+   neighbor_entry_t(const neighbor_entry_t& other);
+   neighbor_entry_t& operator=(
+      neighbor_entry_t const & other);
+
 
    /** Getter for 'neighbor_key': the key of the neighbor entry. */
    neighbor_key_t neighbor_key() const;
@@ -98,12 +112,11 @@ class EOS_SDK_PUBLIC neighbor_entry_t {
    friend std::ostream& operator<<(std::ostream& os, const neighbor_entry_t& obj);
 
  private:
-   neighbor_key_t neighbor_key_;
-   eth_addr_t eth_addr_;
-   neighbor_entry_type_t entry_type_;
+   std::shared_ptr<neighbor_entry_impl_t> pimpl;
 };
-}
 
-#include <eos/inline/types/neighbor_table.h>
+EOS_SDK_PUBLIC
+std::ostream& operator<<(std::ostream& os, const neighbor_entry_t& obj);
+}
 
 #endif // EOS_TYPES_NEIGHBOR_TABLE_H

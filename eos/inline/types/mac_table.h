@@ -1,4 +1,4 @@
-// Copyright (c) 2020 Arista Networks, Inc.  All rights reserved.
+// Copyright (c) 2022 Arista Networks, Inc.  All rights reserved.
 // Arista Networks, Inc. Confidential and Proprietary.
 
 #ifndef EOS_INLINE_TYPES_MAC_TABLE_H
@@ -6,7 +6,7 @@
 
 namespace eos {
 
-inline std::ostream&
+EOS_SDK_PUBLIC std::ostream&
 operator<<(std::ostream& os, const mac_entry_type_t & enum_val) {
    if (enum_val==MAC_ENTRY_NULL) {
       os << "MAC_ENTRY_NULL";
@@ -71,214 +71,204 @@ operator<<(std::ostream& os, const mac_entry_type_t & enum_val) {
 }
 
 
-
-inline mac_key_t::mac_key_t() :
-      vlan_id_(), eth_addr_() {
+mac_key_t::mac_key_t() {
+   pimpl = std::shared_ptr<mac_key_impl_t>(
+      new mac_key_impl_t()
+   );
+}
+mac_key_t::mac_key_t(vlan_id_t vlan_id, eth_addr_t const & eth_addr) {
+   pimpl = std::shared_ptr<mac_key_impl_t>(
+      new mac_key_impl_t(
+         vlan_id,
+         eth_addr
+      )
+   );
+}
+mac_key_t::mac_key_t(
+   const mac_key_t& other)
+{
+   pimpl = std::make_unique<mac_key_impl_t>(
+      mac_key_impl_t(*other.pimpl));
+}
+mac_key_t&
+mac_key_t::operator=(
+   mac_key_t const & other)
+{
+   pimpl = std::shared_ptr<mac_key_impl_t>(
+      new mac_key_impl_t(*other.pimpl));
+   return *this;
 }
 
-inline mac_key_t::mac_key_t(vlan_id_t vlan_id, eth_addr_t const & eth_addr) :
-      vlan_id_(vlan_id), eth_addr_(eth_addr) {
-}
-
-inline vlan_id_t
+vlan_id_t
 mac_key_t::vlan_id() const {
-   return vlan_id_;
+   return pimpl->vlan_id();
 }
-
-inline eth_addr_t
+eth_addr_t
 mac_key_t::eth_addr() const {
-   return eth_addr_;
+   return pimpl->eth_addr();
 }
-
-inline bool
+bool
 mac_key_t::operator!() const {
-   return !vlan_id_ && !eth_addr_;
+   return pimpl->operator!();
 }
-
-inline bool
+bool
 mac_key_t::operator==(mac_key_t const & other) const {
-   return vlan_id_ == other.vlan_id_ &&
-          eth_addr_ == other.eth_addr_;
+   return pimpl->operator==(*other.pimpl);
 }
-
-inline bool
+bool
 mac_key_t::operator!=(mac_key_t const & other) const {
-   return !operator==(other);
+   return pimpl->operator!=(*other.pimpl);
 }
-
-inline bool
+bool
 mac_key_t::operator<(mac_key_t const & other) const {
-   if(vlan_id_ != other.vlan_id_) {
-      return vlan_id_ < other.vlan_id_;
-   } else if(eth_addr_ != other.eth_addr_) {
-      return eth_addr_ < other.eth_addr_;
-   }
-   return false;
+   return pimpl->operator<(*other.pimpl);
 }
-
-inline uint32_t
+uint32_t
 mac_key_t::hash() const {
-   hash_mix h;
-   mix_me(h);
-   return h.result();
+   return pimpl->hash();
 }
-
-inline void
+void
 mac_key_t::mix_me(hash_mix & h) const {
-   h.mix(vlan_id_); // vlan_id_t
-   h.mix(eth_addr_); // eth_addr_t
+   pimpl->mix_me(h);
 }
-
-inline std::string
+std::string
 mac_key_t::to_string() const {
-   std::ostringstream ss;
-   ss << "mac_key_t(";
-   ss << "vlan_id=" << vlan_id_;
-   ss << ", eth_addr=" << eth_addr_;
-   ss << ")";
-   return ss.str();
+   return pimpl->to_string();
 }
-
-inline std::ostream&
+std::ostream&
 operator<<(std::ostream& os, const mac_key_t& obj) {
-   os << obj.to_string();
-   return os;
+   return operator<<(os, *obj.pimpl);
 }
 
 
-
-inline mac_entry_t::mac_entry_t() :
-      mac_key_(), intfs_() {
+mac_entry_t::mac_entry_t() {
+   pimpl = std::shared_ptr<mac_entry_impl_t>(
+      new mac_entry_impl_t()
+   );
+}
+mac_entry_t::mac_entry_t(mac_key_t const & mac_key) {
+   pimpl = std::shared_ptr<mac_entry_impl_t>(
+      new mac_entry_impl_t(
+         mac_key
+      )
+   );
+}
+mac_entry_t::mac_entry_t(mac_key_t const & mac_key, intf_id_t intf) {
+   pimpl = std::shared_ptr<mac_entry_impl_t>(
+      new mac_entry_impl_t(
+         mac_key,
+         intf
+      )
+   );
+}
+mac_entry_t::mac_entry_t(mac_key_t const & mac_key,
+                                std::set<intf_id_t> const & intfs) {
+   pimpl = std::shared_ptr<mac_entry_impl_t>(
+      new mac_entry_impl_t(
+         mac_key,
+         intfs
+      )
+   );
+}
+mac_entry_t::mac_entry_t(vlan_id_t vlan_id, eth_addr_t eth_addr) {
+   pimpl = std::shared_ptr<mac_entry_impl_t>(
+      new mac_entry_impl_t(
+         vlan_id,
+         eth_addr
+      )
+   );
+}
+mac_entry_t::mac_entry_t(eth_addr_t eth_addr, intf_id_t intf) {
+   pimpl = std::shared_ptr<mac_entry_impl_t>(
+      new mac_entry_impl_t(
+         eth_addr,
+         intf
+      )
+   );
+}
+mac_entry_t::mac_entry_t(
+   const mac_entry_t& other)
+{
+   pimpl = std::make_unique<mac_entry_impl_t>(
+      mac_entry_impl_t(*other.pimpl));
+}
+mac_entry_t&
+mac_entry_t::operator=(
+   mac_entry_t const & other)
+{
+   pimpl = std::shared_ptr<mac_entry_impl_t>(
+      new mac_entry_impl_t(*other.pimpl));
+   return *this;
 }
 
-inline mac_entry_t::mac_entry_t(mac_key_t const & mac_key) :
-      mac_key_(mac_key), intfs_() {
-}
-
-inline mac_entry_t::mac_entry_t(mac_key_t const & mac_key, intf_id_t intf) :
-      mac_key_(mac_key), intfs_{intf} {
-}
-
-inline mac_entry_t::mac_entry_t(mac_key_t const & mac_key,
-                                std::set<intf_id_t> const & intfs) :
-      mac_key_(mac_key), intfs_(intfs) {
-}
-
-inline mac_entry_t::mac_entry_t(vlan_id_t vlan_id, eth_addr_t eth_addr) :
-      mac_key_(mac_key_t(vlan_id, eth_addr)), intfs_() {
-}
-
-inline mac_entry_t::mac_entry_t(eth_addr_t eth_addr, intf_id_t intf) :
-      mac_key_(mac_key_t(vlan_id_t(), eth_addr)), intfs_{intf} {
-}
-
-inline mac_key_t
+mac_key_t
 mac_entry_t::mac_key() const {
-   return mac_key_;
+   return pimpl->mac_key();
 }
-
-inline void
+void
 mac_entry_t::mac_key_is(mac_key_t const & mac_key) {
-   mac_key_ = mac_key;
+   pimpl->mac_key_is(mac_key);
 }
-
-inline std::set<intf_id_t> const &
+std::set<intf_id_t> const &
 mac_entry_t::intfs() const {
-   return intfs_;
+   return pimpl->intfs();
 }
-
-inline void
+void
 mac_entry_t::intfs_is(std::set<intf_id_t> const & intfs) {
-   intfs_ = intfs;
+   pimpl->intfs_is(intfs);
 }
-
-inline void
+void
 mac_entry_t::intf_set(intf_id_t const & value) {
-   intfs_.insert(value);
+   pimpl->intf_set(value);
 }
-
-inline void
+void
 mac_entry_t::intf_del(intf_id_t const & value) {
-   intfs_.erase(value);
+   pimpl->intf_del(value);
 }
-
-inline bool
+bool
 mac_entry_t::operator!() const {
-   return !mac_key_;
+   return pimpl->operator!();
 }
-
-inline vlan_id_t
+vlan_id_t
 mac_entry_t::vlan_id() const {
-   return mac_key_.vlan_id();
+   return pimpl->vlan_id();
 }
-
-inline eth_addr_t
+eth_addr_t
 mac_entry_t::eth_addr() const {
-   return mac_key_.eth_addr();
+   return pimpl->eth_addr();
 }
-
-inline intf_id_t
+intf_id_t
 mac_entry_t::intf() const {
-   return intfs_.size() ? *intfs_.begin(): intf_id_t();
+   return pimpl->intf();
 }
-
-inline void
+void
 mac_entry_t::intf_is(intf_id_t intf) {
-   intfs_ = {intf};
+   pimpl->intf_is(intf);
 }
-
-inline bool
+bool
 mac_entry_t::operator==(mac_entry_t const & other) const {
-   return mac_key_ == other.mac_key_ &&
-          intfs_ == other.intfs_;
+   return pimpl->operator==(*other.pimpl);
 }
-
-inline bool
+bool
 mac_entry_t::operator!=(mac_entry_t const & other) const {
-   return !operator==(other);
+   return pimpl->operator!=(*other.pimpl);
 }
-
-inline uint32_t
+uint32_t
 mac_entry_t::hash() const {
-   hash_mix h;
-   mix_me(h);
-   return h.result();
+   return pimpl->hash();
 }
-
-inline void
+void
 mac_entry_t::mix_me(hash_mix & h) const {
-   h.mix(mac_key_); // mac_key_t
-   for (auto it=intfs_.cbegin(); it!=intfs_.cend(); ++it) {
-      h.mix(*it); // intf_id_t
-   }
+   pimpl->mix_me(h);
 }
-
-inline std::string
+std::string
 mac_entry_t::to_string() const {
-   std::ostringstream ss;
-   ss << "mac_entry_t(";
-   ss << "mac_key=" << mac_key_;
-   ss << ", intfs=" <<"'";
-   bool first_intfs = true;
-   for (auto it=intfs_.cbegin(); it!=intfs_.cend(); ++it) {
-      if (first_intfs) {
-         ss << (*it);
-         first_intfs = false;
-      } else {
-         ss << "," << (*it);
-      }
-   }
-   ss << "'";
-   ss << ")";
-   return ss.str();
+   return pimpl->to_string();
 }
-
-inline std::ostream&
+std::ostream&
 operator<<(std::ostream& os, const mac_entry_t& obj) {
-   os << obj.to_string();
-   return os;
+   return operator<<(os, *obj.pimpl);
 }
-
 
 }
 

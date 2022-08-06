@@ -1,4 +1,4 @@
-// Copyright (c) 2020 Arista Networks, Inc.  All rights reserved.
+// Copyright (c) 2022 Arista Networks, Inc.  All rights reserved.
 // Arista Networks, Inc. Confidential and Proprietary.
 
 #ifndef EOS_TYPES_ACL_H
@@ -7,6 +7,7 @@
 #include <eos/hash_mix.h>
 #include <eos/utility.h>
 #include <list>
+#include <memory>
 #include <sstream>
 
 namespace eos {
@@ -26,7 +27,8 @@ enum acl_type_t {
    ACL_TYPE_MPLS,
 };
 /** Appends a string representation of enum acl_type_t value to the ostream. */
-std::ostream& operator<<(std::ostream& os, const acl_type_t & enum_val);
+EOS_SDK_PUBLIC std::ostream& operator<<(std::ostream& os,
+                                        const acl_type_t & enum_val);
 
 /**
  * The direction in which an ACL is applied.
@@ -38,7 +40,8 @@ enum acl_direction_t {
    ACL_OUT,
 };
 /** Appends a string representation of enum acl_direction_t value to the ostream. */
-std::ostream& operator<<(std::ostream& os, const acl_direction_t & enum_val);
+EOS_SDK_PUBLIC std::ostream& operator<<(std::ostream& os,
+                                        const acl_direction_t & enum_val);
 
 /** The type of range operator for TTL and port specifications below. */
 enum acl_range_operator_t {
@@ -54,7 +57,8 @@ enum acl_range_operator_t {
  * Appends a string representation of enum acl_range_operator_t value to the
  * ostream.
  */
-std::ostream& operator<<(std::ostream& os, const acl_range_operator_t & enum_val);
+EOS_SDK_PUBLIC std::ostream& operator<<(std::ostream& os,
+                                        const acl_range_operator_t & enum_val);
 
 /** The action to take for an individual ACL rule. */
 enum acl_action_t {
@@ -63,7 +67,8 @@ enum acl_action_t {
    ACL_DENY,
 };
 /** Appends a string representation of enum acl_action_t value to the ostream. */
-std::ostream& operator<<(std::ostream& os, const acl_action_t & enum_val);
+EOS_SDK_PUBLIC std::ostream& operator<<(std::ostream& os,
+                                        const acl_action_t & enum_val);
 
 /** TCP flags used in IP rules to specify which TCP flags to match. */
 enum acl_tcp_flag_t {
@@ -76,8 +81,10 @@ enum acl_tcp_flag_t {
    ACL_TCP_URG = 32,
 };
 /** Appends a string representation of enum acl_tcp_flag_t value to the ostream. */
-std::ostream& operator<<(std::ostream& os, const acl_tcp_flag_t & enum_val);
+EOS_SDK_PUBLIC std::ostream& operator<<(std::ostream& os,
+                                        const acl_tcp_flag_t & enum_val);
 
+class acl_ttl_spec_impl_t;
 /**
  * A TTL specifier, used in an IP ACL rule to define TTLs to match.
  *
@@ -88,6 +95,10 @@ class EOS_SDK_PUBLIC acl_ttl_spec_t {
  public:
    acl_ttl_spec_t();
    acl_ttl_spec_t(acl_range_operator_t oper, uint8_t ttl);
+   acl_ttl_spec_t(const acl_ttl_spec_t& other);
+   acl_ttl_spec_t& operator=(
+      acl_ttl_spec_t const & other);
+
 
    /** Getter for 'oper': the type of range, note, BETWEEN is not supported. */
    acl_range_operator_t oper() const;
@@ -114,12 +125,14 @@ class EOS_SDK_PUBLIC acl_ttl_spec_t {
     */
    friend std::ostream& operator<<(std::ostream& os, const acl_ttl_spec_t& obj);
 
- protected:
-   acl_range_operator_t oper_;
-   uint8_t ttl_;
-   friend class acl_internal;
+ private:
+   std::shared_ptr<acl_ttl_spec_impl_t> pimpl;
 };
 
+EOS_SDK_PUBLIC
+std::ostream& operator<<(std::ostream& os, const acl_ttl_spec_t& obj);
+
+class acl_port_spec_impl_t;
 /**
  * A UDP or TCP port specifier.
  *
@@ -135,6 +148,10 @@ class EOS_SDK_PUBLIC acl_port_spec_t {
    /** Default constructor, matches any port. */
    acl_port_spec_t();
    acl_port_spec_t(acl_range_operator_t oper, std::list<uint16_t> const & ports);
+   acl_port_spec_t(const acl_port_spec_t& other);
+   acl_port_spec_t& operator=(
+      acl_port_spec_t const & other);
+
 
    acl_range_operator_t oper() const;
    void oper_is(acl_range_operator_t oper);
@@ -161,26 +178,35 @@ class EOS_SDK_PUBLIC acl_port_spec_t {
     */
    friend std::ostream& operator<<(std::ostream& os, const acl_port_spec_t& obj);
 
- protected:
-   acl_range_operator_t oper_;
-   std::list<uint16_t> ports_;
-   friend class acl_internal;
+ private:
+   std::shared_ptr<acl_port_spec_impl_t> pimpl;
 };
 
+EOS_SDK_PUBLIC
+std::ostream& operator<<(std::ostream& os, const acl_port_spec_t& obj);
+
+EOS_SDK_PUBLIC
 acl_port_spec_t get_acl_port_spec_eq(uint16_t port);
 
+EOS_SDK_PUBLIC
 acl_port_spec_t get_acl_port_spec_eq(std::list<uint16_t> const & ports);
 
+EOS_SDK_PUBLIC
 acl_port_spec_t get_acl_port_spec_neq(uint16_t port);
 
+EOS_SDK_PUBLIC
 acl_port_spec_t get_acl_port_spec_neq(std::list<uint16_t> const & ports);
 
+EOS_SDK_PUBLIC
 acl_port_spec_t get_acl_port_spec_between(uint16_t low, uint16_t high);
 
+EOS_SDK_PUBLIC
 acl_port_spec_t get_acl_port_spec_gt(uint16_t port);
 
+EOS_SDK_PUBLIC
 acl_port_spec_t get_acl_port_spec_lt(uint16_t port);
 
+EOS_SDK_PUBLIC
 acl_port_spec_t get_acl_port_spec_any();
 
 /** An ACL key is the combination of its name and ACL type (IPv4, IPv6 or ETH). */
@@ -213,6 +239,10 @@ class EOS_SDK_PUBLIC acl_key_t {
    acl_type_t acl_type_;
 };
 
+EOS_SDK_PUBLIC
+std::ostream& operator<<(std::ostream& os, const acl_key_t& obj);
+
+class acl_rule_base_impl_t;
 /**
  * Following are classes that represent access lists (ACLs).
  * Access lists are sequences of rules specifying per-packet rules filters apply to
@@ -233,6 +263,13 @@ class EOS_SDK_PUBLIC acl_key_t {
  */
 class EOS_SDK_PUBLIC acl_rule_base_t {
  public:
+ protected:
+   acl_rule_base_t();
+ public:
+   acl_rule_base_t(const acl_rule_base_t& other);
+   acl_rule_base_t& operator=(
+      acl_rule_base_t const & other);
+
 
    acl_action_t action() const;
    void action_is(acl_action_t action);
@@ -255,19 +292,22 @@ class EOS_SDK_PUBLIC acl_rule_base_t {
     */
    friend std::ostream& operator<<(std::ostream& os, const acl_rule_base_t& obj);
 
- protected:
-   acl_rule_base_t() EOS_SDK_PRIVATE;
-
  private:
-   acl_action_t action_;
-   bool log_;
-   bool tracked_;
+   std::shared_ptr<acl_rule_base_impl_t> pimpl;
 };
 
+EOS_SDK_PUBLIC
+std::ostream& operator<<(std::ostream& os, const acl_rule_base_t& obj);
+
+class acl_rule_ip_impl_t;
 /** An individual ACL rule for IPv4 or IPv6 ACLs. */
 class EOS_SDK_PUBLIC acl_rule_ip_t : public acl_rule_base_t {
  public:
    acl_rule_ip_t();
+   acl_rule_ip_t(const acl_rule_ip_t& other);
+   acl_rule_ip_t& operator=(
+      acl_rule_ip_t const & other);
+
 
    vlan_id_t vlan() const;
    void vlan_is(vlan_id_t vlan);
@@ -374,31 +414,21 @@ class EOS_SDK_PUBLIC acl_rule_ip_t : public acl_rule_base_t {
    friend std::ostream& operator<<(std::ostream& os, const acl_rule_ip_t& obj);
 
  private:
-   vlan_id_t vlan_;
-   vlan_id_t vlan_mask_;
-   vlan_id_t inner_vlan_;
-   vlan_id_t inner_vlan_mask_;
-   uint8_t ip_protocol_;
-   acl_ttl_spec_t ttl_;
-   ip_addr_mask_t source_addr_;
-   ip_addr_mask_t destination_addr_;
-   acl_port_spec_t source_port_;
-   acl_port_spec_t destination_port_;
-   std::string nexthop_group_;
-   uint16_t tcp_flags_;
-   bool established_;
-   uint16_t icmp_type_;
-   uint16_t icmp_code_;
-   uint8_t priority_value_;
-   uint8_t priority_mask_;
-   bool match_fragments_;
-   bool match_ip_priority_;
+   std::shared_ptr<acl_rule_ip_impl_t> pimpl;
 };
 
+EOS_SDK_PUBLIC
+std::ostream& operator<<(std::ostream& os, const acl_rule_ip_t& obj);
+
+class acl_rule_eth_impl_t;
 /** An Ethernet ACL, which can be applied to Ethernet, Vlan, and MLAG interfaces. */
 class EOS_SDK_PUBLIC acl_rule_eth_t : public acl_rule_base_t {
  public:
    acl_rule_eth_t();
+   acl_rule_eth_t(const acl_rule_eth_t& other);
+   acl_rule_eth_t& operator=(
+      acl_rule_eth_t const & other);
+
 
    vlan_id_t vlan() const;
    void vlan_is(vlan_id_t vlan);
@@ -442,18 +472,11 @@ class EOS_SDK_PUBLIC acl_rule_eth_t : public acl_rule_base_t {
    friend std::ostream& operator<<(std::ostream& os, const acl_rule_eth_t& obj);
 
  private:
-   vlan_id_t vlan_;
-   vlan_id_t vlan_mask_;
-   vlan_id_t inner_vlan_;
-   vlan_id_t inner_vlan_mask_;
-   eth_addr_t source_addr_;
-   eth_addr_t destination_addr_;
-   eth_addr_t source_mask_;
-   eth_addr_t destination_mask_;
-   uint32_t eth_protocol_;
+   std::shared_ptr<acl_rule_eth_impl_t> pimpl;
 };
-}
 
-#include <eos/inline/types/acl.h>
+EOS_SDK_PUBLIC
+std::ostream& operator<<(std::ostream& os, const acl_rule_eth_t& obj);
+}
 
 #endif // EOS_TYPES_ACL_H

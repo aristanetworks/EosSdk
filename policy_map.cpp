@@ -94,7 +94,7 @@ class policy_map_mgr_impl : public policy_map_mgr {
       policy_map_hw_status_iter_t *nop = 0;
       return *nop;
    }
-
+   
    policy_map_hw_statuses_t hw_status(policy_map_key_t const &key) const {
       return policy_map_hw_statuses_t();
    }

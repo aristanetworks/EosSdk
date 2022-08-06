@@ -1,4 +1,4 @@
-// Copyright (c) 2021 Arista Networks, Inc.  All rights reserved.
+// Copyright (c) 2022 Arista Networks, Inc.  All rights reserved.
 // Arista Networks, Inc. Confidential and Proprietary.
 
 #ifndef EOS_INLINE_TYPES_LLDP_H
@@ -7,99 +7,84 @@
 namespace eos {
 
 
-inline uint32_t modbit(uint32_t value, uint32_t bit, bool enabled) {
-   if (enabled) {
-      return (value | bit);
-   } else {
-      return (value & ~bit);
-   }
-}
-    
-
 
 // TLV Type, default constructor.
-inline lldp_tlv_type_t::lldp_tlv_type_t() :
-      organization_(0), subtype_(0) {
+lldp_tlv_type_t::lldp_tlv_type_t() {
+   pimpl = std::shared_ptr<lldp_tlv_type_impl_t>(
+      new lldp_tlv_type_impl_t()
+   );
 }
-
 // TLV Type, full constructor.
-inline lldp_tlv_type_t::lldp_tlv_type_t(uint32_t organization, uint8_t subtype) :
-      organization_(organization), subtype_(subtype) {
+lldp_tlv_type_t::lldp_tlv_type_t(uint32_t organization, uint8_t subtype) {
+   pimpl = std::shared_ptr<lldp_tlv_type_impl_t>(
+      new lldp_tlv_type_impl_t(
+         organization,
+         subtype
+      )
+   );
+}
+lldp_tlv_type_t::lldp_tlv_type_t(
+   const lldp_tlv_type_t& other)
+{
+   pimpl = std::make_unique<lldp_tlv_type_impl_t>(
+      lldp_tlv_type_impl_t(*other.pimpl));
+}
+lldp_tlv_type_t&
+lldp_tlv_type_t::operator=(
+   lldp_tlv_type_t const & other)
+{
+   pimpl = std::shared_ptr<lldp_tlv_type_impl_t>(
+      new lldp_tlv_type_impl_t(*other.pimpl));
+   return *this;
 }
 
-inline uint32_t
+uint32_t
 lldp_tlv_type_t::organization() const {
-   return organization_;
+   return pimpl->organization();
 }
-
-inline void
+void
 lldp_tlv_type_t::organization_is(uint32_t organization) {
-   organization_ = organization;
+   pimpl->organization_is(organization);
 }
-
-inline uint8_t
+uint8_t
 lldp_tlv_type_t::subtype() const {
-   return subtype_;
+   return pimpl->subtype();
 }
-
-inline void
+void
 lldp_tlv_type_t::subtype_is(uint8_t subtype) {
-   subtype_ = subtype;
+   pimpl->subtype_is(subtype);
 }
-
-inline bool
+bool
 lldp_tlv_type_t::operator==(lldp_tlv_type_t const & other) const {
-   return organization_ == other.organization_ &&
-          subtype_ == other.subtype_;
+   return pimpl->operator==(*other.pimpl);
 }
-
-inline bool
+bool
 lldp_tlv_type_t::operator!=(lldp_tlv_type_t const & other) const {
-   return !operator==(other);
+   return pimpl->operator!=(*other.pimpl);
 }
-
-inline bool
+bool
 lldp_tlv_type_t::operator<(lldp_tlv_type_t const & other) const {
-   if(organization_ != other.organization_) {
-      return organization_ < other.organization_;
-   } else if(subtype_ != other.subtype_) {
-      return subtype_ < other.subtype_;
-   }
-   return false;
+   return pimpl->operator<(*other.pimpl);
 }
-
-inline uint32_t
+uint32_t
 lldp_tlv_type_t::hash() const {
-   hash_mix h;
-   mix_me(h);
-   return h.result();
+   return pimpl->hash();
 }
-
-inline void
+void
 lldp_tlv_type_t::mix_me(hash_mix & h) const {
-   h.mix(organization_); // uint32_t
-   h.mix(subtype_); // uint8_t
+   pimpl->mix_me(h);
 }
-
-inline std::string
+std::string
 lldp_tlv_type_t::to_string() const {
-   std::ostringstream ss;
-   ss << "lldp_tlv_type_t(";
-   ss << "organization=" << organization_;
-   ss << ", subtype=" << subtype_;
-   ss << ")";
-   return ss.str();
+   return pimpl->to_string();
 }
-
-inline std::ostream&
+std::ostream&
 operator<<(std::ostream& os, const lldp_tlv_type_t& obj) {
-   os << obj.to_string();
-   return os;
+   return operator<<(os, *obj.pimpl);
 }
 
 
-
-inline std::ostream&
+EOS_SDK_PUBLIC std::ostream&
 operator<<(std::ostream& os, const lldp_std_tlv_type_bit_t & enum_val) {
    if (enum_val==LLDP_TLV_NONE) {
       os << "LLDP_TLV_NONE";
@@ -130,141 +115,125 @@ operator<<(std::ostream& os, const lldp_std_tlv_type_bit_t & enum_val) {
 }
 
 
-
-inline lldp_std_tlv_type_t::lldp_std_tlv_type_t() :
-      bitset_(LLDP_TLV_NONE) {
+lldp_std_tlv_type_t::lldp_std_tlv_type_t() {
+   pimpl = std::shared_ptr<lldp_std_tlv_type_impl_t>(
+      new lldp_std_tlv_type_impl_t()
+   );
+}
+lldp_std_tlv_type_t::lldp_std_tlv_type_t(
+   const lldp_std_tlv_type_t& other)
+{
+   pimpl = std::make_unique<lldp_std_tlv_type_impl_t>(
+      lldp_std_tlv_type_impl_t(*other.pimpl));
+}
+lldp_std_tlv_type_t&
+lldp_std_tlv_type_t::operator=(
+   lldp_std_tlv_type_t const & other)
+{
+   pimpl = std::shared_ptr<lldp_std_tlv_type_impl_t>(
+      new lldp_std_tlv_type_impl_t(*other.pimpl));
+   return *this;
 }
 
-inline void
+void
 lldp_std_tlv_type_t::chassis_id_is(bool enabled) {
-   modbit(bitset_, LLDP_TLV_CHASSIS_ID, enabled);
+   pimpl->chassis_id_is(enabled);
 }
-
-inline void
+void
 lldp_std_tlv_type_t::intf_id_is(bool enabled) {
-   modbit(bitset_, LLDP_TLV_INTF_ID, enabled);
+   pimpl->intf_id_is(enabled);
 }
-
-inline void
+void
 lldp_std_tlv_type_t::intf_description_is(bool enabled) {
-   modbit(bitset_, LLDP_TLV_INTF_DESCR, enabled);
+   pimpl->intf_description_is(enabled);
 }
-
-inline void
+void
 lldp_std_tlv_type_t::system_capabilities_is(bool enabled) {
-   modbit(bitset_, LLDP_TLV_SYSTEM_CAP, enabled);
+   pimpl->system_capabilities_is(enabled);
 }
-
-inline void
+void
 lldp_std_tlv_type_t::management_address_is(bool enabled) {
-   modbit(bitset_, LLDP_TLV_MANAGEMENT, enabled);
+   pimpl->management_address_is(enabled);
 }
-
-inline void
+void
 lldp_std_tlv_type_t::default_vlan_is(bool enabled) {
-   modbit(bitset_, LLDP_TLV_VLAN, enabled);
+   pimpl->default_vlan_is(enabled);
 }
-
-inline void
+void
 lldp_std_tlv_type_t::management_vlan_is(bool enabled) {
-   modbit(bitset_, LLDP_TLV_MANAGMENT_VLAN, enabled);
+   pimpl->management_vlan_is(enabled);
 }
-
-inline void
+void
 lldp_std_tlv_type_t::max_frame_size_is(bool enabled) {
-   modbit(bitset_, LLDP_TLV_MAX_FRAME_SIZE, enabled);
+   pimpl->max_frame_size_is(enabled);
 }
-
-inline void
+void
 lldp_std_tlv_type_t::lacp_is(bool enabled) {
-   modbit(bitset_, LLDP_TLV_LACP, enabled);
+   pimpl->lacp_is(enabled);
 }
-
-inline void
+void
 lldp_std_tlv_type_t::phy_is(bool enabled) {
-   modbit(bitset_, LLDP_TLV_PHY, enabled);
+   pimpl->phy_is(enabled);
 }
-
-inline bool
+bool
 lldp_std_tlv_type_t::chassis_id() const {
-   return bitset_ & LLDP_TLV_CHASSIS_ID;
+   return pimpl->chassis_id();
 }
-
-inline bool
+bool
 lldp_std_tlv_type_t::intf_id() const {
-   return bitset_ & LLDP_TLV_INTF_ID;
+   return pimpl->intf_id();
 }
-
-inline bool
+bool
 lldp_std_tlv_type_t::intf_description() const {
-   return bitset_ & LLDP_TLV_INTF_DESCR;
+   return pimpl->intf_description();
 }
-
-inline bool
+bool
 lldp_std_tlv_type_t::system_capabilities() const {
-   return bitset_ & LLDP_TLV_SYSTEM_CAP;
+   return pimpl->system_capabilities();
 }
-
-inline bool
+bool
 lldp_std_tlv_type_t::management_address() const {
-   return bitset_ & LLDP_TLV_MANAGEMENT;
+   return pimpl->management_address();
 }
-
-inline bool
+bool
 lldp_std_tlv_type_t::default_vlan() const {
-   return bitset_ & LLDP_TLV_VLAN;
+   return pimpl->default_vlan();
 }
-
-inline bool
+bool
 lldp_std_tlv_type_t::management_vlan() const {
-   return bitset_ & LLDP_TLV_MANAGMENT_VLAN;
+   return pimpl->management_vlan();
 }
-
-inline bool
+bool
 lldp_std_tlv_type_t::max_frame_size() const {
-   return bitset_ & LLDP_TLV_MAX_FRAME_SIZE;
+   return pimpl->max_frame_size();
 }
-
-inline bool
+bool
 lldp_std_tlv_type_t::lacp() const {
-   return bitset_ & LLDP_TLV_LACP;
+   return pimpl->lacp();
 }
-
-inline bool
+bool
 lldp_std_tlv_type_t::phy() const {
-   return bitset_ & LLDP_TLV_PHY;
+   return pimpl->phy();
 }
-
-inline uint32_t
+uint32_t
 lldp_std_tlv_type_t::hash() const {
-   hash_mix h;
-   mix_me(h);
-   return h.result();
+   return pimpl->hash();
 }
-
-inline void
+void
 lldp_std_tlv_type_t::mix_me(hash_mix & h) const {
-   h.mix(bitset_); // lldp_std_tlv_type_bit_t
+   pimpl->mix_me(h);
 }
-
-inline std::string
+std::string
 lldp_std_tlv_type_t::to_string() const {
-   std::ostringstream ss;
-   ss << "lldp_std_tlv_type_t(";
-   ss << "bitset=" << bitset_;
-   ss << ")";
-   return ss.str();
+   return pimpl->to_string();
 }
-
-inline std::ostream&
+std::ostream&
 operator<<(std::ostream& os, const lldp_std_tlv_type_t& obj) {
-   os << obj.to_string();
-   return os;
+   return operator<<(os, *obj.pimpl);
 }
 
 
-
-inline std::ostream&
+EOS_SDK_PUBLIC std::ostream&
 operator<<(std::ostream& os, const lldp_syscap_bits_t & enum_val) {
    if (enum_val==LLDP_SYSCAP_OTHER) {
       os << "LLDP_SYSCAP_OTHER";
@@ -289,306 +258,293 @@ operator<<(std::ostream& os, const lldp_syscap_bits_t & enum_val) {
 }
 
 
-
-inline lldp_syscap_t::lldp_syscap_t() :
-      bitset_(LLDP_SYSCAP_OTHER) {
+lldp_syscap_t::lldp_syscap_t() {
+   pimpl = std::shared_ptr<lldp_syscap_impl_t>(
+      new lldp_syscap_impl_t()
+   );
 }
-
 // syscap, full constructor.
-inline lldp_syscap_t::lldp_syscap_t(lldp_syscap_bits_t bitset) :
-      bitset_(bitset) {
+lldp_syscap_t::lldp_syscap_t(lldp_syscap_bits_t bitset) {
+   pimpl = std::shared_ptr<lldp_syscap_impl_t>(
+      new lldp_syscap_impl_t(
+         bitset
+      )
+   );
+}
+lldp_syscap_t::lldp_syscap_t(
+   const lldp_syscap_t& other)
+{
+   pimpl = std::make_unique<lldp_syscap_impl_t>(
+      lldp_syscap_impl_t(*other.pimpl));
+}
+lldp_syscap_t&
+lldp_syscap_t::operator=(
+   lldp_syscap_t const & other)
+{
+   pimpl = std::shared_ptr<lldp_syscap_impl_t>(
+      new lldp_syscap_impl_t(*other.pimpl));
+   return *this;
 }
 
-inline bool
+bool
 lldp_syscap_t::other() const {
-   return bitset_ & LLDP_SYSCAP_OTHER;
+   return pimpl->other();
 }
-
-inline bool
+bool
 lldp_syscap_t::repeater() const {
-   return bitset_ & LLDP_SYSCAP_REPEATER;
+   return pimpl->repeater();
 }
-
-inline bool
+bool
 lldp_syscap_t::bridge() const {
-   return bitset_ & LLDP_SYSCAP_BRIDGE;
+   return pimpl->bridge();
 }
-
-inline bool
+bool
 lldp_syscap_t::vlan_ap() const {
-   return bitset_ & LLDP_SYSCAP_VLAN_AP;
+   return pimpl->vlan_ap();
 }
-
-inline bool
+bool
 lldp_syscap_t::router() const {
-   return bitset_ & LLDP_SYSCAP_ROUTER;
+   return pimpl->router();
 }
-
-inline bool
+bool
 lldp_syscap_t::telephone() const {
-   return bitset_ & LLDP_SYSCAP_TELEPONE;
+   return pimpl->telephone();
 }
-
-inline bool
+bool
 lldp_syscap_t::docsis() const {
-   return bitset_ & LLDP_SYSCAP_DOCSIS;
+   return pimpl->docsis();
 }
-
-inline bool
+bool
 lldp_syscap_t::station() const {
-   return bitset_ & LLDP_SYSCAP_STATION;
+   return pimpl->station();
 }
-
-inline uint32_t
+uint32_t
 lldp_syscap_t::hash() const {
-   hash_mix h;
-   mix_me(h);
-   return h.result();
+   return pimpl->hash();
 }
-
-inline void
+void
 lldp_syscap_t::mix_me(hash_mix & h) const {
-   h.mix(bitset_); // lldp_syscap_bits_t
+   pimpl->mix_me(h);
 }
-
-inline std::string
+std::string
 lldp_syscap_t::to_string() const {
-   std::ostringstream ss;
-   ss << "lldp_syscap_t(";
-   ss << "bitset=" << bitset_;
-   ss << ")";
-   return ss.str();
+   return pimpl->to_string();
 }
-
-inline std::ostream&
+std::ostream&
 operator<<(std::ostream& os, const lldp_syscap_t& obj) {
-   os << obj.to_string();
-   return os;
+   return operator<<(os, *obj.pimpl);
 }
 
 
-
-inline lldp_management_address_t::lldp_management_address_t() :
-      address_family_(0), address_(), snmp_ifindex_(), oid_() {
+lldp_management_address_t::lldp_management_address_t() {
+   pimpl = std::shared_ptr<lldp_management_address_impl_t>(
+      new lldp_management_address_impl_t()
+   );
 }
-
 // Managment Info constructor.
-inline lldp_management_address_t::lldp_management_address_t(
+lldp_management_address_t::lldp_management_address_t(
          uint32_t address_family, std::string address, uint32_t snmp_ifindex,
-         std::string oid) :
-      address_family_(address_family), address_(address),
-      snmp_ifindex_(snmp_ifindex), oid_(oid) {
+         std::string oid) {
+   pimpl = std::shared_ptr<lldp_management_address_impl_t>(
+      new lldp_management_address_impl_t(
+         address_family,
+         address,
+         snmp_ifindex,
+         oid
+      )
+   );
+}
+lldp_management_address_t::lldp_management_address_t(
+   const lldp_management_address_t& other)
+{
+   pimpl = std::make_unique<lldp_management_address_impl_t>(
+      lldp_management_address_impl_t(*other.pimpl));
+}
+lldp_management_address_t&
+lldp_management_address_t::operator=(
+   lldp_management_address_t const & other)
+{
+   pimpl = std::shared_ptr<lldp_management_address_impl_t>(
+      new lldp_management_address_impl_t(*other.pimpl));
+   return *this;
 }
 
-inline uint32_t
+uint32_t
 lldp_management_address_t::address_family() const {
-   return address_family_;
+   return pimpl->address_family();
 }
-
-inline std::string
+std::string
 lldp_management_address_t::address() const {
-   return address_;
+   return pimpl->address();
 }
-
-inline uint32_t
+uint32_t
 lldp_management_address_t::snmp_ifindex() const {
-   return snmp_ifindex_;
+   return pimpl->snmp_ifindex();
 }
-
-inline std::string
+std::string
 lldp_management_address_t::oid() const {
-   return oid_;
+   return pimpl->oid();
 }
-
-inline bool
+bool
 lldp_management_address_t::operator<(lldp_management_address_t const & other)
        const {
-   if(address_family_ != other.address_family_) {
-      return address_family_ < other.address_family_;
-   } else if(address_ != other.address_) {
-      return address_ < other.address_;
-   } else if(snmp_ifindex_ != other.snmp_ifindex_) {
-      return snmp_ifindex_ < other.snmp_ifindex_;
-   } else if(oid_ != other.oid_) {
-      return oid_ < other.oid_;
-   }
-   return false;
+   return pimpl->operator<(*other.pimpl);
 }
-
-inline uint32_t
+uint32_t
 lldp_management_address_t::hash() const {
-   hash_mix h;
-   mix_me(h);
-   return h.result();
+   return pimpl->hash();
 }
-
-inline void
+void
 lldp_management_address_t::mix_me(hash_mix & h) const {
-   h.mix(address_family_); // uint32_t
-   h.mix(address_); // std::string
-   h.mix(snmp_ifindex_); // uint32_t
-   h.mix(oid_); // std::string
+   pimpl->mix_me(h);
 }
-
-inline std::string
+std::string
 lldp_management_address_t::to_string() const {
-   std::ostringstream ss;
-   ss << "lldp_management_address_t(";
-   ss << "address_family=" << address_family_;
-   ss << ", address='" << address_ << "'";
-   ss << ", snmp_ifindex=" << snmp_ifindex_;
-   ss << ", oid='" << oid_ << "'";
-   ss << ")";
-   return ss.str();
+   return pimpl->to_string();
 }
-
-inline std::ostream&
+std::ostream&
 operator<<(std::ostream& os, const lldp_management_address_t& obj) {
-   os << obj.to_string();
-   return os;
+   return operator<<(os, *obj.pimpl);
 }
 
 
-
-inline lldp_lacp_t::lldp_lacp_t() :
-      capable_(), enabled_(), id_(), valid_(false) {
+lldp_lacp_t::lldp_lacp_t() {
+   pimpl = std::shared_ptr<lldp_lacp_impl_t>(
+      new lldp_lacp_impl_t()
+   );
 }
-
 // LACP Info constructor.
-inline lldp_lacp_t::lldp_lacp_t(bool capable, bool enabled, uint32_t id,
-                                bool valid) :
-      capable_(capable), enabled_(enabled), id_(id), valid_(valid) {
+lldp_lacp_t::lldp_lacp_t(bool capable, bool enabled, uint32_t id,
+                                bool valid) {
+   pimpl = std::shared_ptr<lldp_lacp_impl_t>(
+      new lldp_lacp_impl_t(
+         capable,
+         enabled,
+         id,
+         valid
+      )
+   );
+}
+lldp_lacp_t::lldp_lacp_t(
+   const lldp_lacp_t& other)
+{
+   pimpl = std::make_unique<lldp_lacp_impl_t>(
+      lldp_lacp_impl_t(*other.pimpl));
+}
+lldp_lacp_t&
+lldp_lacp_t::operator=(
+   lldp_lacp_t const & other)
+{
+   pimpl = std::shared_ptr<lldp_lacp_impl_t>(
+      new lldp_lacp_impl_t(*other.pimpl));
+   return *this;
 }
 
-inline bool
+bool
 lldp_lacp_t::capable() const {
-   return capable_;
+   return pimpl->capable();
 }
-
-inline bool
+bool
 lldp_lacp_t::enabled() const {
-   return enabled_;
+   return pimpl->enabled();
 }
-
-inline uint32_t
+uint32_t
 lldp_lacp_t::id() const {
-   return id_;
+   return pimpl->id();
 }
-
-inline bool
+bool
 lldp_lacp_t::valid() const {
-   return valid_;
+   return pimpl->valid();
 }
-
-inline bool
+bool
 lldp_lacp_t::operator!() const {
-   return !valid_;
-
+   return pimpl->operator!();
 }
-
-inline uint32_t
+uint32_t
 lldp_lacp_t::hash() const {
-   hash_mix h;
-   mix_me(h);
-   return h.result();
+   return pimpl->hash();
 }
-
-inline void
+void
 lldp_lacp_t::mix_me(hash_mix & h) const {
-   h.mix(capable_); // bool
-   h.mix(enabled_); // bool
-   h.mix(id_); // uint32_t
-   h.mix(valid_); // bool
+   pimpl->mix_me(h);
 }
-
-inline std::string
+std::string
 lldp_lacp_t::to_string() const {
-   std::ostringstream ss;
-   ss << "lldp_lacp_t(";
-   ss << "capable=" << capable_;
-   ss << ", enabled=" << enabled_;
-   ss << ", id=" << id_;
-   ss << ", valid=" << valid_;
-   ss << ")";
-   return ss.str();
+   return pimpl->to_string();
 }
-
-inline std::ostream&
+std::ostream&
 operator<<(std::ostream& os, const lldp_lacp_t& obj) {
-   os << obj.to_string();
-   return os;
+   return operator<<(os, *obj.pimpl);
 }
 
 
-
-inline lldp_phy_t::lldp_phy_t() :
-      autonegSupported_(), autonegEnabled_(), autonegCapabilitiesBm_(),
-      valid_(false) {
+lldp_phy_t::lldp_phy_t() {
+   pimpl = std::shared_ptr<lldp_phy_impl_t>(
+      new lldp_phy_impl_t()
+   );
 }
-
 // PHY Info constructor.
-inline lldp_phy_t::lldp_phy_t(bool autonegSupported, bool autonegEnabled,
-                              uint16_t autonegCapabilitiesBm, bool valid) :
-      autonegSupported_(autonegSupported), autonegEnabled_(autonegEnabled),
-      autonegCapabilitiesBm_(autonegCapabilitiesBm), valid_(valid) {
+lldp_phy_t::lldp_phy_t(bool autonegSupported, bool autonegEnabled,
+                              uint16_t autonegCapabilitiesBm, bool valid) {
+   pimpl = std::shared_ptr<lldp_phy_impl_t>(
+      new lldp_phy_impl_t(
+         autonegSupported,
+         autonegEnabled,
+         autonegCapabilitiesBm,
+         valid
+      )
+   );
+}
+lldp_phy_t::lldp_phy_t(
+   const lldp_phy_t& other)
+{
+   pimpl = std::make_unique<lldp_phy_impl_t>(
+      lldp_phy_impl_t(*other.pimpl));
+}
+lldp_phy_t&
+lldp_phy_t::operator=(
+   lldp_phy_t const & other)
+{
+   pimpl = std::shared_ptr<lldp_phy_impl_t>(
+      new lldp_phy_impl_t(*other.pimpl));
+   return *this;
 }
 
-inline bool
+bool
 lldp_phy_t::autonegSupported() const {
-   return autonegSupported_;
+   return pimpl->autonegSupported();
 }
-
-inline bool
+bool
 lldp_phy_t::autonegEnabled() const {
-   return autonegEnabled_;
+   return pimpl->autonegEnabled();
 }
-
-inline uint16_t
+uint16_t
 lldp_phy_t::autonegCapabilitiesBm() const {
-   return autonegCapabilitiesBm_;
+   return pimpl->autonegCapabilitiesBm();
 }
-
-inline bool
+bool
 lldp_phy_t::valid() const {
-   return valid_;
+   return pimpl->valid();
 }
-
-inline uint32_t
+uint32_t
 lldp_phy_t::hash() const {
-   hash_mix h;
-   mix_me(h);
-   return h.result();
+   return pimpl->hash();
 }
-
-inline void
+void
 lldp_phy_t::mix_me(hash_mix & h) const {
-   h.mix(autonegSupported_); // bool
-   h.mix(autonegEnabled_); // bool
-   h.mix(autonegCapabilitiesBm_); // uint16_t
-   h.mix(valid_); // bool
+   pimpl->mix_me(h);
 }
-
-inline std::string
+std::string
 lldp_phy_t::to_string() const {
-   std::ostringstream ss;
-   ss << "lldp_phy_t(";
-   ss << "autonegSupported=" << autonegSupported_;
-   ss << ", autonegEnabled=" << autonegEnabled_;
-   ss << ", autonegCapabilitiesBm=" << autonegCapabilitiesBm_;
-   ss << ", valid=" << valid_;
-   ss << ")";
-   return ss.str();
+   return pimpl->to_string();
 }
-
-inline std::ostream&
+std::ostream&
 operator<<(std::ostream& os, const lldp_phy_t& obj) {
-   os << obj.to_string();
-   return os;
+   return operator<<(os, *obj.pimpl);
 }
 
 
-
-inline std::ostream&
+EOS_SDK_PUBLIC std::ostream&
 operator<<(std::ostream& os, const lldp_intf_enabled_t & enum_val) {
    if (enum_val==LLDP_INTF_STATUS_NULL) {
       os << "LLDP_INTF_STATUS_NULL";
@@ -607,8 +563,7 @@ operator<<(std::ostream& os, const lldp_intf_enabled_t & enum_val) {
 }
 
 
-
-inline std::ostream&
+EOS_SDK_PUBLIC std::ostream&
 operator<<(std::ostream& os, const lldp_chassis_id_encoding_t & enum_val) {
    if (enum_val==LLDP_CHASSIS_RESERVED) {
       os << "LLDP_CHASSIS_RESERVED";
@@ -635,135 +590,79 @@ operator<<(std::ostream& os, const lldp_chassis_id_encoding_t & enum_val) {
 }
 
 
-
-inline lldp_chassis_id_t::lldp_chassis_id_t() :
-      encoding_(LLDP_CHASSIS_NULL), value_() {
+lldp_chassis_id_t::lldp_chassis_id_t() {
+   pimpl = std::shared_ptr<lldp_chassis_id_impl_t>(
+      new lldp_chassis_id_impl_t()
+   );
 }
-
 // chassis name, full constructor.
-inline lldp_chassis_id_t::lldp_chassis_id_t(lldp_chassis_id_encoding_t encoding,
-                                            std::string value) :
-      encoding_(encoding), value_(value) {
+lldp_chassis_id_t::lldp_chassis_id_t(lldp_chassis_id_encoding_t encoding,
+                                            std::string value) {
+   pimpl = std::shared_ptr<lldp_chassis_id_impl_t>(
+      new lldp_chassis_id_impl_t(
+         encoding,
+         value
+      )
+   );
+}
+lldp_chassis_id_t::lldp_chassis_id_t(
+   const lldp_chassis_id_t& other)
+{
+   pimpl = std::make_unique<lldp_chassis_id_impl_t>(
+      lldp_chassis_id_impl_t(*other.pimpl));
+}
+lldp_chassis_id_t&
+lldp_chassis_id_t::operator=(
+   lldp_chassis_id_t const & other)
+{
+   pimpl = std::shared_ptr<lldp_chassis_id_impl_t>(
+      new lldp_chassis_id_impl_t(*other.pimpl));
+   return *this;
 }
 
-inline lldp_chassis_id_encoding_t
+lldp_chassis_id_encoding_t
 lldp_chassis_id_t::encoding() const {
-   return encoding_;
+   return pimpl->encoding();
 }
-
-inline std::string
+std::string
 lldp_chassis_id_t::value() const {
-   return value_;
+   return pimpl->value();
 }
-
-inline std::string
+std::string
 lldp_chassis_id_t::repr() const {
-
-   char buf[128];
-   if (encoding_ == LLDP_CHASSIS_INTF_NAME) {
-      return value_;
-   }
-   if (encoding_ == LLDP_CHASSIS_MAC_ADDR) {
-      if (value_.length() == 6) {
-         sprintf(buf, "MAC:");
-         ether_ntoa_r((const ether_addr*)&value_[0], buf+4);
-         return std::string(buf);
-      } else {
-         return std::string("invalidMac");
-      }
-   }
-   if (encoding_ == LLDP_CHASSIS_NET_ADDR) {
-      if (value_[0] == 1) {
-        if (value_.length() == 5) {
-            sprintf(buf, "IPV4:");
-            inet_ntop(AF_INET, &value_[1], buf+5, 100);
-            return std::string(buf);
-        } else {
-           return std::string("invalidIpV4");
-        }
-      }
-      if (value_[0] == 2) {
-        if (value_.length() == 17) {
-            sprintf(buf, "IPV6:");
-            inet_ntop(AF_INET6, &value_[1], buf+5, 100) ;
-            return std::string(buf);
-        } else {
-           return std::string("invalidIpV6");
-        }
-      }
-   }
-   /* not a known encoding: just dump as hex */
-   int l = sprintf(buf, "%d:", encoding_);
-   /* well, unless it is all ascii */
-   uint32_t i;
-   for (i = 0; i < value_.length(); i++) {
-      if (!isalnum(int(value_[i]))) break;
-   }
-   if (i == value_.length()) {
-      snprintf(&buf[l], sizeof(buf)-l, "%s", value_.c_str());
-      return std::string(buf);
-   }
-   for (i = 0; i < value_.length(); i++) {
-      if (i) l += snprintf(&buf[l], sizeof(buf)-l, ".");
-      l += snprintf(&buf[l], sizeof(buf)-l, "%02x", (uint8_t)value_[i]);
-   }
-   return std::string(buf);
-
+   return pimpl->repr();
 }
-
-inline bool
+bool
 lldp_chassis_id_t::operator==(lldp_chassis_id_t const & other) const {
-   return encoding_ == other.encoding_ &&
-          value_ == other.value_;
+   return pimpl->operator==(*other.pimpl);
 }
-
-inline bool
+bool
 lldp_chassis_id_t::operator!=(lldp_chassis_id_t const & other) const {
-   return !operator==(other);
+   return pimpl->operator!=(*other.pimpl);
 }
-
-inline bool
+bool
 lldp_chassis_id_t::operator<(lldp_chassis_id_t const & other) const {
-   if(encoding_ != other.encoding_) {
-      return encoding_ < other.encoding_;
-   } else if(value_ != other.value_) {
-      return value_ < other.value_;
-   }
-   return false;
+   return pimpl->operator<(*other.pimpl);
 }
-
-inline uint32_t
+uint32_t
 lldp_chassis_id_t::hash() const {
-   hash_mix h;
-   mix_me(h);
-   return h.result();
+   return pimpl->hash();
 }
-
-inline void
+void
 lldp_chassis_id_t::mix_me(hash_mix & h) const {
-   h.mix(encoding_); // lldp_chassis_id_encoding_t
-   h.mix(value_); // std::string
+   pimpl->mix_me(h);
 }
-
-inline std::string
+std::string
 lldp_chassis_id_t::to_string() const {
-   std::ostringstream ss;
-   ss << "lldp_chassis_id_t(";
-   ss << "encoding=" << encoding_;
-   ss << ", value='" << value_ << "'";
-   ss << ")";
-   return ss.str();
+   return pimpl->to_string();
 }
-
-inline std::ostream&
+std::ostream&
 operator<<(std::ostream& os, const lldp_chassis_id_t& obj) {
-   os << obj.to_string();
-   return os;
+   return operator<<(os, *obj.pimpl);
 }
 
 
-
-inline std::ostream&
+EOS_SDK_PUBLIC std::ostream&
 operator<<(std::ostream& os, const lldp_intf_id_encoding_t & enum_val) {
    if (enum_val==LLDP_INTF_RESERVED) {
       os << "LLDP_INTF_RESERVED";
@@ -790,323 +689,246 @@ operator<<(std::ostream& os, const lldp_intf_id_encoding_t & enum_val) {
 }
 
 
-
-inline lldp_intf_id_t::lldp_intf_id_t() :
-      encoding_(LLDP_INTF_NULL), value_() {
+lldp_intf_id_t::lldp_intf_id_t() {
+   pimpl = std::shared_ptr<lldp_intf_id_impl_t>(
+      new lldp_intf_id_impl_t()
+   );
 }
-
 // interface name, full constructor.
-inline lldp_intf_id_t::lldp_intf_id_t(lldp_intf_id_encoding_t encoding,
-                                      std::string value) :
-      encoding_(encoding), value_(value) {
+lldp_intf_id_t::lldp_intf_id_t(lldp_intf_id_encoding_t encoding,
+                                      std::string value) {
+   pimpl = std::shared_ptr<lldp_intf_id_impl_t>(
+      new lldp_intf_id_impl_t(
+         encoding,
+         value
+      )
+   );
+}
+lldp_intf_id_t::lldp_intf_id_t(
+   const lldp_intf_id_t& other)
+{
+   pimpl = std::make_unique<lldp_intf_id_impl_t>(
+      lldp_intf_id_impl_t(*other.pimpl));
+}
+lldp_intf_id_t&
+lldp_intf_id_t::operator=(
+   lldp_intf_id_t const & other)
+{
+   pimpl = std::shared_ptr<lldp_intf_id_impl_t>(
+      new lldp_intf_id_impl_t(*other.pimpl));
+   return *this;
 }
 
-inline lldp_intf_id_encoding_t
+lldp_intf_id_encoding_t
 lldp_intf_id_t::encoding() const {
-   return encoding_;
+   return pimpl->encoding();
 }
-
-inline std::string
+std::string
 lldp_intf_id_t::value() const {
-   return value_;
+   return pimpl->value();
 }
-
-inline std::string
+std::string
 lldp_intf_id_t::repr() const {
-
-   char buf[128];
-   if (encoding_ == LLDP_INTF_NAME) {
-      return value_;
-   }
-   if (encoding_ == LLDP_INTF_MAC_ADDR) {
-      if (value_.length() == 6) {
-         sprintf(buf, "MAC:");
-         ether_ntoa_r((const ether_addr*)&value_[0], buf+4);
-         return std::string(buf);
-      } else {
-         return std::string("invalidMac");
-      }
-   }
-   if (encoding_ == LLDP_INTF_NET_ADDR) {
-      if (value_[0] == 1) {
-        if (value_.length() == 5) {
-            sprintf(buf, "IPV4:");
-            inet_ntop(AF_INET, &value_[1], buf+5, 100);
-            return std::string(buf);
-        } else {
-           return std::string("invalidIpV4");
-        }
-      }
-      if (value_[0] == 2) {
-        if (value_.length() == 17) {
-            sprintf(buf, "IPV6:");
-            inet_ntop(AF_INET6, &value_[1], buf+5, 100) ;
-            return std::string(buf);
-        } else {
-           return std::string("invalidIpV6");
-        }
-      }
-   }
-   /* not a known encoding: just dump as hex */
-   int l = sprintf(buf, "%d:", encoding_);
-   /* well, unless it is all ascii */
-   for (uint32_t i=0; i<value_.length(); i++) {
-      if (!isalnum(int(value_[i]))) break;
-      if (i+1 == value_.length()) {
-         snprintf(&buf[l], sizeof(buf)-l, "%s", value_.c_str());
-         return std::string(buf);
-      }
-   }
-   for (uint32_t i=0; i<value_.length(); i++) {
-      if (i) l += snprintf(&buf[l], sizeof(buf)-l, ".");
-      l += snprintf(&buf[l], sizeof(buf)-l, "%02x", (uint8_t)value_[i]);
-   }
-   return std::string(buf);
-
+   return pimpl->repr();
 }
-
-inline bool
+bool
 lldp_intf_id_t::operator==(lldp_intf_id_t const & other) const {
-   return encoding_ == other.encoding_ &&
-          value_ == other.value_;
+   return pimpl->operator==(*other.pimpl);
 }
-
-inline bool
+bool
 lldp_intf_id_t::operator!=(lldp_intf_id_t const & other) const {
-   return !operator==(other);
+   return pimpl->operator!=(*other.pimpl);
 }
-
-inline bool
+bool
 lldp_intf_id_t::operator<(lldp_intf_id_t const & other) const {
-   if(encoding_ != other.encoding_) {
-      return encoding_ < other.encoding_;
-   } else if(value_ != other.value_) {
-      return value_ < other.value_;
-   }
-   return false;
+   return pimpl->operator<(*other.pimpl);
 }
-
-inline uint32_t
+uint32_t
 lldp_intf_id_t::hash() const {
-   hash_mix h;
-   mix_me(h);
-   return h.result();
+   return pimpl->hash();
 }
-
-inline void
+void
 lldp_intf_id_t::mix_me(hash_mix & h) const {
-   h.mix(encoding_); // lldp_intf_id_encoding_t
-   h.mix(value_); // std::string
+   pimpl->mix_me(h);
 }
-
-inline std::string
+std::string
 lldp_intf_id_t::to_string() const {
-   std::ostringstream ss;
-   ss << "lldp_intf_id_t(";
-   ss << "encoding=" << encoding_;
-   ss << ", value='" << value_ << "'";
-   ss << ")";
-   return ss.str();
+   return pimpl->to_string();
 }
-
-inline std::ostream&
+std::ostream&
 operator<<(std::ostream& os, const lldp_intf_id_t& obj) {
-   os << obj.to_string();
-   return os;
+   return operator<<(os, *obj.pimpl);
 }
-
 
 
 // remote system, default constructor.
-inline lldp_remote_system_t::lldp_remote_system_t() :
-      chassis_(lldp_chassis_id_t()), port_(lldp_intf_id_t()) {
+lldp_remote_system_t::lldp_remote_system_t() {
+   pimpl = std::shared_ptr<lldp_remote_system_impl_t>(
+      new lldp_remote_system_impl_t()
+   );
 }
-
 // remote system, full constructor.
-inline lldp_remote_system_t::lldp_remote_system_t(lldp_chassis_id_t chassis,
-                                                  lldp_intf_id_t port) :
-      chassis_(chassis), port_(port) {
+lldp_remote_system_t::lldp_remote_system_t(lldp_chassis_id_t chassis,
+                                                  lldp_intf_id_t port) {
+   pimpl = std::shared_ptr<lldp_remote_system_impl_t>(
+      new lldp_remote_system_impl_t(
+         chassis,
+         port
+      )
+   );
+}
+lldp_remote_system_t::lldp_remote_system_t(
+   const lldp_remote_system_t& other)
+{
+   pimpl = std::make_unique<lldp_remote_system_impl_t>(
+      lldp_remote_system_impl_t(*other.pimpl));
+}
+lldp_remote_system_t&
+lldp_remote_system_t::operator=(
+   lldp_remote_system_t const & other)
+{
+   pimpl = std::shared_ptr<lldp_remote_system_impl_t>(
+      new lldp_remote_system_impl_t(*other.pimpl));
+   return *this;
 }
 
-inline lldp_chassis_id_t
+lldp_chassis_id_t
 lldp_remote_system_t::chassis() const {
-   return chassis_;
+   return pimpl->chassis();
 }
-
-inline void
+void
 lldp_remote_system_t::chassis_is(lldp_chassis_id_t chassis) {
-   chassis_ = chassis;
+   pimpl->chassis_is(chassis);
 }
-
-inline lldp_intf_id_t
+lldp_intf_id_t
 lldp_remote_system_t::port() const {
-   return port_;
+   return pimpl->port();
 }
-
-inline void
+void
 lldp_remote_system_t::port_is(lldp_intf_id_t port) {
-   port_ = port;
+   pimpl->port_is(port);
 }
-
-inline std::string
+std::string
 lldp_remote_system_t::repr() const {
-
-   char buf[128];
-   snprintf(buf, 128, "%s;%s", chassis_.repr().c_str(),
-                               port_.repr().c_str());
-   return std::string(buf);
-
+   return pimpl->repr();
 }
-
-inline bool
+bool
 lldp_remote_system_t::operator==(lldp_remote_system_t const & other) const {
-   return chassis_ == other.chassis_ &&
-          port_ == other.port_;
+   return pimpl->operator==(*other.pimpl);
 }
-
-inline bool
+bool
 lldp_remote_system_t::operator!=(lldp_remote_system_t const & other) const {
-   return !operator==(other);
+   return pimpl->operator!=(*other.pimpl);
 }
-
-inline bool
+bool
 lldp_remote_system_t::operator<(lldp_remote_system_t const & other) const {
-   if(chassis_ != other.chassis_) {
-      return chassis_ < other.chassis_;
-   } else if(port_ != other.port_) {
-      return port_ < other.port_;
-   }
-   return false;
+   return pimpl->operator<(*other.pimpl);
 }
-
-inline uint32_t
+uint32_t
 lldp_remote_system_t::hash() const {
-   hash_mix h;
-   mix_me(h);
-   return h.result();
+   return pimpl->hash();
 }
-
-inline void
+void
 lldp_remote_system_t::mix_me(hash_mix & h) const {
-   h.mix(chassis_); // lldp_chassis_id_t
-   h.mix(port_); // lldp_intf_id_t
+   pimpl->mix_me(h);
 }
-
-inline std::string
+std::string
 lldp_remote_system_t::to_string() const {
-   std::ostringstream ss;
-   ss << "lldp_remote_system_t(";
-   ss << "chassis=" << chassis_;
-   ss << ", port=" << port_;
-   ss << ")";
-   return ss.str();
+   return pimpl->to_string();
 }
-
-inline std::ostream&
+std::ostream&
 operator<<(std::ostream& os, const lldp_remote_system_t& obj) {
-   os << obj.to_string();
-   return os;
+   return operator<<(os, *obj.pimpl);
 }
-
 
 
 // remote system, default constructor.
-inline lldp_neighbor_t::lldp_neighbor_t() :
-      intf_(), remote_system_() {
+lldp_neighbor_t::lldp_neighbor_t() {
+   pimpl = std::shared_ptr<lldp_neighbor_impl_t>(
+      new lldp_neighbor_impl_t()
+   );
 }
-
 // first remote system.
-inline lldp_neighbor_t::lldp_neighbor_t(intf_id_t intf) :
-      intf_(intf), remote_system_() {
+lldp_neighbor_t::lldp_neighbor_t(intf_id_t intf) {
+   pimpl = std::shared_ptr<lldp_neighbor_impl_t>(
+      new lldp_neighbor_impl_t(
+         intf
+      )
+   );
 }
-
 // specific remote system.
-inline lldp_neighbor_t::lldp_neighbor_t(intf_id_t intf,
-                                        lldp_remote_system_t remote_system) :
-      intf_(intf), remote_system_(remote_system) {
+lldp_neighbor_t::lldp_neighbor_t(intf_id_t intf,
+                                        lldp_remote_system_t remote_system) {
+   pimpl = std::shared_ptr<lldp_neighbor_impl_t>(
+      new lldp_neighbor_impl_t(
+         intf,
+         remote_system
+      )
+   );
+}
+lldp_neighbor_t::lldp_neighbor_t(
+   const lldp_neighbor_t& other)
+{
+   pimpl = std::make_unique<lldp_neighbor_impl_t>(
+      lldp_neighbor_impl_t(*other.pimpl));
+}
+lldp_neighbor_t&
+lldp_neighbor_t::operator=(
+   lldp_neighbor_t const & other)
+{
+   pimpl = std::shared_ptr<lldp_neighbor_impl_t>(
+      new lldp_neighbor_impl_t(*other.pimpl));
+   return *this;
 }
 
-inline intf_id_t
+intf_id_t
 lldp_neighbor_t::intf() const {
-   return intf_;
+   return pimpl->intf();
 }
-
-inline void
+void
 lldp_neighbor_t::intf_is(intf_id_t intf) {
-   intf_ = intf;
+   pimpl->intf_is(intf);
 }
-
-inline lldp_remote_system_t
+lldp_remote_system_t
 lldp_neighbor_t::remote_system() const {
-   return remote_system_;
+   return pimpl->remote_system();
 }
-
-inline void
+void
 lldp_neighbor_t::remote_system_is(lldp_remote_system_t remote_system) {
-   remote_system_ = remote_system;
+   pimpl->remote_system_is(remote_system);
 }
-
-inline std::string
+std::string
 lldp_neighbor_t::repr() const {
-
-   char buf[128];
-   snprintf(buf, 128, "%s;%s;%s", intf_.to_string().c_str(),
-           remote_system_.chassis().repr().c_str(),
-           remote_system_.port().repr().c_str());
-   return std::string(buf);
-
+   return pimpl->repr();
 }
-
-inline bool
+bool
 lldp_neighbor_t::operator==(lldp_neighbor_t const & other) const {
-   return intf_ == other.intf_ &&
-          remote_system_ == other.remote_system_;
+   return pimpl->operator==(*other.pimpl);
 }
-
-inline bool
+bool
 lldp_neighbor_t::operator!=(lldp_neighbor_t const & other) const {
-   return !operator==(other);
+   return pimpl->operator!=(*other.pimpl);
 }
-
-inline bool
+bool
 lldp_neighbor_t::operator<(lldp_neighbor_t const & other) const {
-   if(intf_ != other.intf_) {
-      return intf_ < other.intf_;
-   } else if(remote_system_ != other.remote_system_) {
-      return remote_system_ < other.remote_system_;
-   }
-   return false;
+   return pimpl->operator<(*other.pimpl);
 }
-
-inline uint32_t
+uint32_t
 lldp_neighbor_t::hash() const {
-   hash_mix h;
-   mix_me(h);
-   return h.result();
+   return pimpl->hash();
 }
-
-inline void
+void
 lldp_neighbor_t::mix_me(hash_mix & h) const {
-   h.mix(intf_); // intf_id_t
-   h.mix(remote_system_); // lldp_remote_system_t
+   pimpl->mix_me(h);
 }
-
-inline std::string
+std::string
 lldp_neighbor_t::to_string() const {
-   std::ostringstream ss;
-   ss << "lldp_neighbor_t(";
-   ss << "intf=" << intf_;
-   ss << ", remote_system=" << remote_system_;
-   ss << ")";
-   return ss.str();
+   return pimpl->to_string();
 }
-
-inline std::ostream&
+std::ostream&
 operator<<(std::ostream& os, const lldp_neighbor_t& obj) {
-   os << obj.to_string();
-   return os;
+   return operator<<(os, *obj.pimpl);
 }
-
 
 }
 

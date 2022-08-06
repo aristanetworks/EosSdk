@@ -51,6 +51,7 @@ class subintf_mgr;
 class system_mgr;
 class timeout_mgr;
 class vrf_mgr;
+class xcvr_mgr;
 
 
 /**
@@ -182,6 +183,7 @@ class EOS_SDK_PUBLIC sdk {
    system_mgr * get_system_mgr();
    timeout_mgr * get_timeout_mgr();
    vrf_mgr * get_vrf_mgr();
+   xcvr_mgr * get_xcvr_mgr();
 
    class SdkImpl;
  private:

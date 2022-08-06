@@ -55,7 +55,7 @@ void print_profiles::add_profile(const char * profile) {
 // have been instantiated, so print the collected profiles and exit.
 void print_profiles::write_profiles() {
    if (print_profiles_fp) {
-      fprintf(print_profiles_fp,
+      fprintf(print_profiles_fp, 
          "# This file is deprecated, i.e., mount profile is not necessary anymore.\n"
          "# Please stop generating it.\n" );
       fclose(print_profiles_fp);

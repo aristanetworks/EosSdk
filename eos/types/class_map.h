@@ -1,4 +1,4 @@
-// Copyright (c) 2021 Arista Networks, Inc.  All rights reserved.
+// Copyright (c) 2022 Arista Networks, Inc.  All rights reserved.
 // Arista Networks, Inc. Confidential and Proprietary.
 
 #ifndef EOS_TYPES_CLASS_MAP_H
@@ -9,6 +9,7 @@
 #include <eos/policy_map.h>
 #include <eos/utility.h>
 #include <map>
+#include <memory>
 #include <sstream>
 
 namespace eos {
@@ -30,6 +31,7 @@ static std::string const CLASS_MAP_MPLS_ANY = "__mpls_permit_any__";
 
 typedef policy_map_key_t class_map_key_t;
 
+class class_map_rule_impl_t;
 /**
  * A class map match rule uses an ACL to match classified traffic.
  * Values of this type are returned from the class_map_rule_iter, to program class
@@ -40,6 +42,10 @@ class EOS_SDK_PUBLIC class_map_rule_t {
  public:
    class_map_rule_t();
    explicit class_map_rule_t(acl_key_t const & acl_key);
+   class_map_rule_t(const class_map_rule_t& other);
+   class_map_rule_t& operator=(
+      class_map_rule_t const & other);
+
 
    /**
     * Getter for 'acl_key': the ACL name and type to use as a class map match rule.
@@ -61,9 +67,13 @@ class EOS_SDK_PUBLIC class_map_rule_t {
    friend std::ostream& operator<<(std::ostream& os, const class_map_rule_t& obj);
 
  private:
-   acl_key_t acl_key_;
+   std::shared_ptr<class_map_rule_impl_t> pimpl;
 };
 
+EOS_SDK_PUBLIC
+std::ostream& operator<<(std::ostream& os, const class_map_rule_t& obj);
+
+class class_map_impl_t;
 /**
  * A class map classifies traffic to apply policy features to.
  *
@@ -74,6 +84,10 @@ class EOS_SDK_PUBLIC class_map_t {
  public:
    class_map_t();
    explicit class_map_t(class_map_key_t const & key);
+   class_map_t(const class_map_t& other);
+   class_map_t& operator=(
+      class_map_t const & other);
+
 
    /** Getter for 'key': the class map key. */
    class_map_key_t key() const;
@@ -104,11 +118,11 @@ class EOS_SDK_PUBLIC class_map_t {
    friend std::ostream& operator<<(std::ostream& os, const class_map_t& obj);
 
  private:
-   class_map_key_t key_;
-   std::map<uint32_t, class_map_rule_t> rules_;
+   std::shared_ptr<class_map_impl_t> pimpl;
 };
-}
 
-#include <eos/inline/types/class_map.h>
+EOS_SDK_PUBLIC
+std::ostream& operator<<(std::ostream& os, const class_map_t& obj);
+}
 
 #endif // EOS_TYPES_CLASS_MAP_H

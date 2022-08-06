@@ -39,10 +39,10 @@ class EOS_SDK_PUBLIC bgp_peer_handler : public base_handler<bgp_mgr,
    explicit bgp_peer_handler(bgp_mgr *mgr);
    bgp_mgr * get_bgp_mgr() const;
 
-
+   
    /// Register to receive notifications when any peer changes state.
    void watch_all_peers(bool);
-
+  
    /// Register to receive notifications when the specified peer changes state.
    void watch_peer(bgp_peer_key_t const & peer_key, bool);
 
@@ -68,7 +68,7 @@ class EOS_SDK_PUBLIC bgp_mgr : public base_mgr<bgp_peer_handler, bgp_peer_key_t>
     * Test for existence of a BGP peer.
     */
    virtual bool exists(bgp_peer_key_t const & peer_key) const = 0;
-
+   
    /**
     * Returns the state of a peer session.
     *

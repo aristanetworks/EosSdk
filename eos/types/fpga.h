@@ -1,4 +1,4 @@
-// Copyright (c) 2020 Arista Networks, Inc.  All rights reserved.
+// Copyright (c) 2022 Arista Networks, Inc.  All rights reserved.
 // Arista Networks, Inc. Confidential and Proprietary.
 
 #ifndef EOS_TYPES_FPGA_H
@@ -6,10 +6,12 @@
 
 #include <eos/hash_mix.h>
 #include <eos/utility.h>
+#include <memory>
 #include <sstream>
 
 namespace eos {
 
+class fpga_impl_t;
 /**
  * This data structure is used to describe
  * an application FPGA on a switch.
@@ -19,6 +21,10 @@ class EOS_SDK_PUBLIC fpga_t {
    /** Default constructor. */
    fpga_t();
    fpga_t(std::string board_standard, std::string part_number);
+   fpga_t(const fpga_t& other);
+   fpga_t& operator=(
+      fpga_t const & other);
+
 
    /** Getter for 'board_standard': The board standard of the FPGA. */
    std::string board_standard() const;
@@ -42,11 +48,11 @@ class EOS_SDK_PUBLIC fpga_t {
    friend std::ostream& operator<<(std::ostream& os, const fpga_t& obj);
 
  private:
-   std::string board_standard_;
-   std::string part_number_;
+   std::shared_ptr<fpga_impl_t> pimpl;
 };
-}
 
-#include <eos/inline/types/fpga.h>
+EOS_SDK_PUBLIC
+std::ostream& operator<<(std::ostream& os, const fpga_t& obj);
+}
 
 #endif // EOS_TYPES_FPGA_H

@@ -1,4 +1,4 @@
-// Copyright (c) 2021 Arista Networks, Inc.  All rights reserved.
+// Copyright (c) 2022 Arista Networks, Inc.  All rights reserved.
 // Arista Networks, Inc. Confidential and Proprietary.
 
 #ifndef EOS_TYPES_ROUTE_MAP_H
@@ -8,6 +8,7 @@
 #include <eos/hash_mix.h>
 #include <eos/utility.h>
 #include <map>
+#include <memory>
 #include <sstream>
 
 namespace eos {
@@ -19,14 +20,20 @@ enum bandwidth_unit_t {
    LINK_BANDWIDTH_UNIT_GIGABIT,
 };
 /** Appends a string representation of enum bandwidth_unit_t value to the ostream. */
-std::ostream& operator<<(std::ostream& os, const bandwidth_unit_t & enum_val);
+EOS_SDK_PUBLIC std::ostream& operator<<(std::ostream& os,
+                                        const bandwidth_unit_t & enum_val);
 
+class link_bandwidth_impl_t;
 /** Extended community link bandwidth value. */
 class EOS_SDK_PUBLIC link_bandwidth_t {
  public:
    link_bandwidth_t(float value, bandwidth_unit_t unit);
    explicit link_bandwidth_t(float value);
    link_bandwidth_t();
+   link_bandwidth_t(const link_bandwidth_t& other);
+   link_bandwidth_t& operator=(
+      link_bandwidth_t const & other);
+
 
    /** Getter for 'value': The link bandwidth value. */
    float value() const;
@@ -54,9 +61,11 @@ class EOS_SDK_PUBLIC link_bandwidth_t {
    friend std::ostream& operator<<(std::ostream& os, const link_bandwidth_t& obj);
 
  private:
-   float value_;
-   bandwidth_unit_t unit_;
+   std::shared_ptr<link_bandwidth_impl_t> pimpl;
 };
+
+EOS_SDK_PUBLIC
+std::ostream& operator<<(std::ostream& os, const link_bandwidth_t& obj);
 
 typedef std::string route_map_name_t;
 
@@ -72,14 +81,19 @@ enum route_map_operation_type_t {
  * Appends a string representation of enum route_map_operation_type_t value to the
  * ostream.
  */
-std::ostream& operator<<(std::ostream& os,
-                         const route_map_operation_type_t & enum_val);
+EOS_SDK_PUBLIC std::ostream& operator<<(
+         std::ostream& os, const route_map_operation_type_t & enum_val);
 
+class route_map_link_bandwidth_impl_t;
 /** Route map link bandwidth operation attribute information. */
 class EOS_SDK_PUBLIC route_map_link_bandwidth_t {
  public:
    /** Create route map link bandwidth. */
    route_map_link_bandwidth_t();
+   route_map_link_bandwidth_t(const route_map_link_bandwidth_t& other);
+   route_map_link_bandwidth_t& operator=(
+      route_map_link_bandwidth_t const & other);
+
 
    /** Getter for 'operation': Operation type. */
    route_map_operation_type_t operation() const;
@@ -110,16 +124,22 @@ class EOS_SDK_PUBLIC route_map_link_bandwidth_t {
                                    const route_map_link_bandwidth_t& obj);
 
  private:
-   route_map_operation_type_t operation_;
-   bgp_asn_t asn_;
-   link_bandwidth_t bandwidth_;
+   std::shared_ptr<route_map_link_bandwidth_impl_t> pimpl;
 };
 
+EOS_SDK_PUBLIC
+std::ostream& operator<<(std::ostream& os, const route_map_link_bandwidth_t& obj);
+
+class route_map_entry_impl_t;
 /** Route map entry sequence. */
 class EOS_SDK_PUBLIC route_map_entry_t {
  public:
    route_map_entry_t();
    explicit route_map_entry_t(bool permit);
+   route_map_entry_t(const route_map_entry_t& other);
+   route_map_entry_t& operator=(
+      route_map_entry_t const & other);
+
 
    /** Getter for 'permit': Permit sequence entry when true, deny otherwise. */
    bool permit() const;
@@ -158,13 +178,20 @@ class EOS_SDK_PUBLIC route_map_entry_t {
    friend std::ostream& operator<<(std::ostream& os, const route_map_entry_t& obj);
 
  private:
-   bool permit_;
-   route_map_sequence_number_t continue_sequence_;
-   route_map_link_bandwidth_t link_bandwidth_;
+   std::shared_ptr<route_map_entry_impl_t> pimpl;
 };
 
+EOS_SDK_PUBLIC
+std::ostream& operator<<(std::ostream& os, const route_map_entry_t& obj);
+
+class route_map_impl_t;
 class EOS_SDK_PUBLIC route_map_t {
  public:
+   route_map_t();
+   route_map_t(const route_map_t& other);
+   route_map_t& operator=(
+      route_map_t const & other);
+
 
    /**
     * Getter for 'map_entry': A map of route map entries, keyed by sequence number.
@@ -173,7 +200,7 @@ class EOS_SDK_PUBLIC route_map_t {
           const;
    /** Setter for 'map_entry'. */
    void map_entry_is(
-
+         
          std::map<route_map_sequence_number_t, route_map_entry_t> const &
          map_entry);
    /** Inserts key/value pair to the map. */
@@ -197,10 +224,11 @@ class EOS_SDK_PUBLIC route_map_t {
    friend std::ostream& operator<<(std::ostream& os, const route_map_t& obj);
 
  private:
-   std::map<route_map_sequence_number_t, route_map_entry_t> map_entry_;
+   std::shared_ptr<route_map_impl_t> pimpl;
 };
-}
 
-#include <eos/inline/types/route_map.h>
+EOS_SDK_PUBLIC
+std::ostream& operator<<(std::ostream& os, const route_map_t& obj);
+}
 
 #endif // EOS_TYPES_ROUTE_MAP_H

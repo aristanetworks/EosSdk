@@ -1,17 +1,19 @@
-// Copyright (c) 2017 Arista Networks, Inc.  All rights reserved.
+// Copyright (c) 2022 Arista Networks, Inc.  All rights reserved.
 // Arista Networks, Inc. Confidential and Proprietary.
 
 #ifndef EOS_TYPES_EAPI_H
 #define EOS_TYPES_EAPI_H
 
 #include <eos/utility.h>
+#include <memory>
 #include <sstream>
 #include <vector>
 
 namespace eos {
 
+class eapi_response_impl_t;
 /** An eAPI response from the Cli server. */
-class eapi_response_t {
+class EOS_SDK_PUBLIC eapi_response_t {
  public:
    /** Default constructor. */
    eapi_response_t();
@@ -19,6 +21,10 @@ class eapi_response_t {
    eapi_response_t(bool success, uint32_t error_code,
                    std::string const & error_message,
                    std::vector<std::string> const & responses);
+   eapi_response_t(const eapi_response_t& other);
+   eapi_response_t& operator=(
+      eapi_response_t const & other);
+
 
    /** Getter for 'success': indicates if a response was received. */
    bool success() const;
@@ -46,14 +52,11 @@ class eapi_response_t {
    friend std::ostream& operator<<(std::ostream& os, const eapi_response_t& obj);
 
  private:
-   bool success_;
-   uint32_t error_code_;
-   std::string error_message_;
-   std::vector<std::string> responses_;
-   std::string raw_response_;
+   std::shared_ptr<eapi_response_impl_t> pimpl;
 };
-}
 
-#include <eos/inline/types/eapi.h>
+EOS_SDK_PUBLIC
+std::ostream& operator<<(std::ostream& os, const eapi_response_t& obj);
+}
 
 #endif // EOS_TYPES_EAPI_H

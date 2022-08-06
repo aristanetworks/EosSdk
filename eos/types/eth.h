@@ -1,4 +1,4 @@
-// Copyright (c) 2021 Arista Networks, Inc.  All rights reserved.
+// Copyright (c) 2022 Arista Networks, Inc.  All rights reserved.
 // Arista Networks, Inc. Confidential and Proprietary.
 
 #ifndef EOS_TYPES_ETH_H
@@ -10,6 +10,7 @@
 #include <eos/exception.h>
 #include <eos/hash_mix.h>
 #include <eos/utility.h>
+#include <memory>
 #include <netinet/in.h>
 #include <sstream>
 #include <stddef.h>
@@ -88,6 +89,10 @@ class EOS_SDK_PUBLIC eth_addr_t {
    uint8_t bytes_[6];
 };
 
+EOS_SDK_PUBLIC
+std::ostream& operator<<(std::ostream& os, const eth_addr_t& obj);
+
+
 /** The given VLAN number was invalid (for example 0 or 4095). */
 class EOS_SDK_PUBLIC invalid_vlan_error : public error {
  public:
@@ -112,6 +117,9 @@ class EOS_SDK_PUBLIC invalid_vlan_error : public error {
  private:
    vlan_id_t vlan_;
 };
+
+EOS_SDK_PUBLIC
+std::ostream& operator<<(std::ostream& os, const invalid_vlan_error& obj);
 
 
 /** Tried to configure an internal VLAN on a trunk port. */
@@ -139,8 +147,9 @@ class EOS_SDK_PUBLIC internal_vlan_error : public configuration_error {
  private:
    vlan_id_t vlan_;
 };
-}
 
-#include <eos/inline/types/eth.h>
+EOS_SDK_PUBLIC
+std::ostream& operator<<(std::ostream& os, const internal_vlan_error& obj);
+}
 
 #endif // EOS_TYPES_ETH_H

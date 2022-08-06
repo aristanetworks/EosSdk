@@ -28,6 +28,7 @@ import datetime
 import functools
 import os
 import sys
+import six
 
 import pyinotify
 
@@ -93,7 +94,7 @@ Config = collections.namedtuple('Config',
 
 def load_match(d):
    acls = {}
-   for k, vs in sorted(d.iteritems()):
+   for k, vs in sorted(six.iteritems(d)):
       acls.setdefault(k, [])
       for v in vs:
          ace = Filter(src_ip=v.get('src_ip'),
@@ -109,7 +110,7 @@ def load_match(d):
 
 def load_classifier(d):
    c = {}
-   for k, v in d.iteritems():
+   for k, v in six.iteritems(d):
       matches = [Match(type=None, acl_name=x.get('match')) for x in v]
       c[k] = Classifier(matches=matches)
    return c
@@ -117,7 +118,7 @@ def load_classifier(d):
 
 def load_action(d):
    a = {}
-   for k, v in d.iteritems():
+   for k, v in six.iteritems(d):
       a[k] = Action(v.get('type'),
                     nexthop_group=v.get('nexthop_group'),
                     nexthops=v.get('nexthops'),
@@ -127,21 +128,21 @@ def load_action(d):
 
 def load_policy(d):
    p = {}
-   for k, v in d.iteritems():
+   for k, v in six.iteritems(d):
       p[k] = Policy(**v)
    return p
 
 
 def load_apply(d):
    a = {}
-   for k, v in d.iteritems():
+   for k, v in six.iteritems(d):
       a[k] = Apply(policy=v)
    return a
 
 
 def load_nexthop_group(d):
    g = {}
-   for k, v in d.iteritems():
+   for k, v in six.iteritems(d):
       g[k] = NexthopGroup(type=v.get('type', 'ipinip'),
                           src_intf=v.get('src_intf'),
                           src_ips=v.get('src_ips', []),
@@ -209,7 +210,7 @@ class PolicyRouter(object):
          self.buildPolicy()
 
    def _buildAcls(self):
-      for aclname, aclrules in self.config.match.iteritems():
+      for aclname, aclrules in six.iteritems(self.config.match):
          key = eossdk.AclKey(aclname, eossdk.ACL_TYPE_IPV4)
 
          # todo support ipv6 also
@@ -286,7 +287,7 @@ class PolicyRouter(object):
 
    def _buildClassMaps(self):
       classifiers = self.config_.classifiers
-      for name, classifier in classifiers.iteritems():
+      for name, classifier in six.iteritems(classifiers):
          key = eossdk.PolicyMapKey(name, eossdk.POLICY_FEATURE_PBR)
          class_map = eossdk.ClassMap(key)
 
@@ -301,7 +302,7 @@ class PolicyRouter(object):
          print( 'Set class map:', name, 'now with', len(cm.rules()), 'rules' )
 
    def _buildActions(self):
-      for name, action in self.config_.actions.iteritems():
+      for name, action in six.iteritems(self.config_.actions):
          if action.type == 'drop':
             act = eossdk.PolicyMapAction(eossdk.POLICY_ACTION_DROP)
          elif action.type == 'nexthop_group' and action.nexthop_group:
@@ -319,7 +320,7 @@ class PolicyRouter(object):
 
    def _buildNexthopGroups(self):
       groups = self.config_.nexthop_groups
-      for name, data in groups.iteritems():
+      for name, data in six.iteritems(groups):
          if data.type not in NEXTHOP_GROUP_TYPE:
             sys.stderr.write('Unknown nexthop group type="%s"' % data.type)
             continue
@@ -346,7 +347,7 @@ class PolicyRouter(object):
 
    def _buildPolicyMaps(self):
       policies = self.config_.policy
-      for name, data in policies.iteritems():
+      for name, data in six.iteritems(policies):
          # add the class map
          rule_key = eossdk.PolicyMapKey(data.classifier,
                                         eossdk.POLICY_FEATURE_PBR)
@@ -363,7 +364,7 @@ class PolicyRouter(object):
 
    def _applyToInterfaces(self):
       interface_policy = self.config_.interface_policy
-      for intf_name, data in interface_policy.iteritems():
+      for intf_name, data in six.iteritems(interface_policy):
          policy_map_key = eossdk.PolicyMapKey(data.policy, eossdk.POLICY_FEATURE_PBR)
          intf_id = eossdk.IntfId(intf_name)
          if self.intf_mgr.exists(intf_id):
@@ -465,8 +466,8 @@ class PolicyHandler(eossdk.AgentHandler, eossdk.PolicyMapHandler, eossdk.AclHand
       for name in self.watches_:
          self.watch_policy_map(
             eossdk.PolicyMapKey(name, eossdk.POLICY_FEATURE_PBR), False)
-      self.watches_ = frozenset(self.config_.policy.iterkeys())
-      print( 'Adding new watches for %s' % self.config_.policy.keys() )
+      self.watches_ = frozenset(six.iterkeys(self.config_.policy))
+      print( 'Adding new watches for %s' % list(self.config_.policy) )
       for name in self.config_.policy:
          self.watch_policy_map(
             eossdk.PolicyMapKey(name, eossdk.POLICY_FEATURE_PBR), True)

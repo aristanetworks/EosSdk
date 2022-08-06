@@ -13,10 +13,10 @@
 /**
  * @file
  * L1 source management module.
- *
+ * 
  * On platforms with a crosspoint, interfaces can configure their source using a
  * config.
- *
+ * 
  * This module provides APIs to set and delete source configs, watch for
  * config changes, get source configs and source statuses, and iterate through
  * source configs and source statuses.
@@ -32,7 +32,7 @@ class EOS_SDK_PUBLIC l1_source_handler : public base_handler<l1_source_mgr,
       explicit l1_source_handler(l1_source_mgr *);
       l1_source_mgr * get_l1_source_mgr() const;
 
-      /**
+      /** 
        * Register to receive notification when l1 source config for any interface
        * changes.
        */
@@ -72,17 +72,17 @@ class EOS_SDK_PUBLIC l1_source_iter_t : public iter_base<intf_id_t,
 class EOS_SDK_PUBLIC l1_source_mgr : public base_mgr<l1_source_handler, intf_id_t> {
    public:
       virtual ~l1_source_mgr();
-
+      
       /**
        * Configures l1 source of an interface.
        */
       virtual void l1_source_is(intf_id_t, l1_source_t source) = 0;
-
+      
       /**
        * Remove the l1 source of an interface.
        */
       virtual void l1_source_del(intf_id_t) = 0;
-
+      
       /**
        * Returns whether a l1 source config exists for the interface.
        */
@@ -114,7 +114,7 @@ class EOS_SDK_PUBLIC l1_source_mgr : public base_mgr<l1_source_handler, intf_id_
        * Configures the description of an application interface.
        */
       virtual void app_description_is(intf_id_t, std::string) = 0;
-
+      
       /**
        * Remove the description of an application interface.
        */

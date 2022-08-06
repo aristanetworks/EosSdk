@@ -13,3 +13,4 @@ inline bgp_mgr * bgp_peer_handler::get_bgp_mgr() const {
 }  // end namespace eos
 
 #endif // INLINE_BGP_H
+

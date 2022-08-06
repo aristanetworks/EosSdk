@@ -1,4 +1,4 @@
-// Copyright (c) 2021 Arista Networks, Inc.  All rights reserved.
+// Copyright (c) 2022 Arista Networks, Inc.  All rights reserved.
 // Arista Networks, Inc. Confidential and Proprietary.
 
 #ifndef EOS_TYPES_BFD_H
@@ -7,6 +7,7 @@
 #include <eos/hash_mix.h>
 #include <eos/utility.h>
 #include <forward_list>
+#include <memory>
 #include <sstream>
 
 namespace eos {
@@ -23,7 +24,8 @@ enum bfd_session_status_t {
  * Appends a string representation of enum bfd_session_status_t value to the
  * ostream.
  */
-std::ostream& operator<<(std::ostream& os, const bfd_session_status_t & enum_val);
+EOS_SDK_PUBLIC std::ostream& operator<<(std::ostream& os,
+                                        const bfd_session_status_t & enum_val);
 
 /** BFD session type. */
 enum bfd_session_type_t {
@@ -40,8 +42,10 @@ enum bfd_session_type_t {
 /**
  * Appends a string representation of enum bfd_session_type_t value to the ostream.
  */
-std::ostream& operator<<(std::ostream& os, const bfd_session_type_t & enum_val);
+EOS_SDK_PUBLIC std::ostream& operator<<(std::ostream& os,
+                                        const bfd_session_type_t & enum_val);
 
+class bfd_session_key_impl_t;
 /**
  * BFD session key class.
  * Used to identify a BFD session on a switch.
@@ -57,6 +61,10 @@ class EOS_SDK_PUBLIC bfd_session_key_t {
                      uint64_t tunnel_id);
    bfd_session_key_t(ip_addr_t ip_addr, std::string vrf, bfd_session_type_t type,
                      intf_id_t intf, ip_addr_t src_ip_addr, uint64_t tunnel_id);
+   bfd_session_key_t(const bfd_session_key_t& other);
+   bfd_session_key_t& operator=(
+      bfd_session_key_t const & other);
+
 
    /** Getter for 'ip_addr': IP address of the peer. */
    ip_addr_t ip_addr() const;
@@ -92,14 +100,13 @@ class EOS_SDK_PUBLIC bfd_session_key_t {
    friend std::ostream& operator<<(std::ostream& os, const bfd_session_key_t& obj);
 
  private:
-   ip_addr_t ip_addr_;
-   std::string vrf_;
-   bfd_session_type_t type_;
-   intf_id_t intf_;
-   ip_addr_t src_ip_addr_;
-   uint64_t tunnel_id_;
+   std::shared_ptr<bfd_session_key_impl_t> pimpl;
 };
 
+EOS_SDK_PUBLIC
+std::ostream& operator<<(std::ostream& os, const bfd_session_key_t& obj);
+
+class bfd_interval_impl_t;
 /**
  * BFD interval configuration class.
  * Used to specify BFD timer interval.
@@ -108,6 +115,10 @@ class EOS_SDK_PUBLIC bfd_interval_t {
  public:
    bfd_interval_t();
    bfd_interval_t(uint16_t tx, uint16_t rx, uint8_t mult);
+   bfd_interval_t(const bfd_interval_t& other);
+   bfd_interval_t& operator=(
+      bfd_interval_t const & other);
+
 
    /** Getter for 'tx': desired minimum tx interval. */
    uint16_t tx() const;
@@ -133,16 +144,22 @@ class EOS_SDK_PUBLIC bfd_interval_t {
    friend std::ostream& operator<<(std::ostream& os, const bfd_interval_t& obj);
 
  private:
-   uint16_t tx_;
-   uint16_t rx_;
-   uint8_t mult_;
+   std::shared_ptr<bfd_interval_impl_t> pimpl;
 };
 
+EOS_SDK_PUBLIC
+std::ostream& operator<<(std::ostream& os, const bfd_interval_t& obj);
+
+class bfd_session_impl_t;
 /** This data structure is used to describe a BFD session. */
 class EOS_SDK_PUBLIC bfd_session_t {
  public:
    bfd_session_t();
    bfd_session_t(bfd_session_key_t peer, bfd_session_status_t status);
+   bfd_session_t(const bfd_session_t& other);
+   bfd_session_t& operator=(
+      bfd_session_t const & other);
+
 
    /** Getter for 'peer': the peer for this BFD session. */
    bfd_session_key_t peer() const;
@@ -166,10 +183,13 @@ class EOS_SDK_PUBLIC bfd_session_t {
    friend std::ostream& operator<<(std::ostream& os, const bfd_session_t& obj);
 
  private:
-   bfd_session_key_t peer_;
-   bfd_session_status_t status_;
+   std::shared_ptr<bfd_session_impl_t> pimpl;
 };
 
+EOS_SDK_PUBLIC
+std::ostream& operator<<(std::ostream& os, const bfd_session_t& obj);
+
+class sbfd_echo_session_key_impl_t;
 /**
  * sBFD echo session key class.
  * Used to identify a sBFD echo session on a switch.
@@ -183,6 +203,10 @@ class EOS_SDK_PUBLIC sbfd_echo_session_key_t {
    /** ip_dscp & mpls_exp defaults to CS6 and 6 respectively. */
    sbfd_echo_session_key_t(ip_addr_t nexthop, intf_id_t nexthop_intf,
                            std::forward_list<mpls_label_t> const & labels);
+   sbfd_echo_session_key_t(const sbfd_echo_session_key_t& other);
+   sbfd_echo_session_key_t& operator=(
+      sbfd_echo_session_key_t const & other);
+
 
    /**
     * Getter for 'nexthop': nexthop IP address to send the probes to.
@@ -228,13 +252,13 @@ class EOS_SDK_PUBLIC sbfd_echo_session_key_t {
                                    const sbfd_echo_session_key_t& obj);
 
  private:
-   ip_addr_t nexthop_;
-   intf_id_t nexthop_intf_;
-   std::forward_list<mpls_label_t> labels_;
-   uint8_t ip_dscp_;
-   uint8_t mpls_exp_;
+   std::shared_ptr<sbfd_echo_session_key_impl_t> pimpl;
 };
 
+EOS_SDK_PUBLIC
+std::ostream& operator<<(std::ostream& os, const sbfd_echo_session_key_t& obj);
+
+class sbfd_interval_impl_t;
 /**
  * sBFD echo interval configuration class.
  * Used to specify sBFD echo timer interval.
@@ -243,6 +267,10 @@ class EOS_SDK_PUBLIC sbfd_interval_t {
  public:
    sbfd_interval_t();
    sbfd_interval_t(uint16_t tx, uint8_t mult);
+   sbfd_interval_t(const sbfd_interval_t& other);
+   sbfd_interval_t& operator=(
+      sbfd_interval_t const & other);
+
 
    /** Getter for 'tx': desired minimum tx interval, in milliseconds. */
    uint16_t tx() const;
@@ -265,10 +293,13 @@ class EOS_SDK_PUBLIC sbfd_interval_t {
    friend std::ostream& operator<<(std::ostream& os, const sbfd_interval_t& obj);
 
  private:
-   uint16_t tx_;
-   uint8_t mult_;
+   std::shared_ptr<sbfd_interval_impl_t> pimpl;
 };
 
+EOS_SDK_PUBLIC
+std::ostream& operator<<(std::ostream& os, const sbfd_interval_t& obj);
+
+class sbfd_echo_session_rtt_stats_impl_t;
 /**
  * sBFD RTT statistics class.
  * Used to report RTT statistics.
@@ -280,6 +311,10 @@ class EOS_SDK_PUBLIC sbfd_echo_session_rtt_stats_t {
                                  uint32_t snapshot_min_rtt,
                                  uint32_t snapshot_avg_rtt,
                                  uint32_t snapshot_max_rtt);
+   sbfd_echo_session_rtt_stats_t(const sbfd_echo_session_rtt_stats_t& other);
+   sbfd_echo_session_rtt_stats_t& operator=(
+      sbfd_echo_session_rtt_stats_t const & other);
+
 
    /** Getter for 'last_rtt': RTT of the last received probe, in microseconds. */
    uint32_t last_rtt() const;
@@ -327,16 +362,12 @@ class EOS_SDK_PUBLIC sbfd_echo_session_rtt_stats_t {
                                    const sbfd_echo_session_rtt_stats_t& obj);
 
  private:
-   uint32_t last_rtt_;
-   uint32_t min_rtt_;
-   uint32_t avg_rtt_;
-   uint32_t max_rtt_;
-   uint32_t snapshot_min_rtt_;
-   uint32_t snapshot_avg_rtt_;
-   uint32_t snapshot_max_rtt_;
+   std::shared_ptr<sbfd_echo_session_rtt_stats_impl_t> pimpl;
 };
-}
 
-#include <eos/inline/types/bfd.h>
+EOS_SDK_PUBLIC
+std::ostream& operator<<(std::ostream& os,
+                         const sbfd_echo_session_rtt_stats_t& obj);
+}
 
 #endif // EOS_TYPES_BFD_H

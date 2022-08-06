@@ -1,4 +1,4 @@
-// Copyright (c) 2021 Arista Networks, Inc.  All rights reserved.
+// Copyright (c) 2022 Arista Networks, Inc.  All rights reserved.
 // Arista Networks, Inc. Confidential and Proprietary.
 
 #ifndef EOS_TYPES_MPLS_H
@@ -6,6 +6,7 @@
 
 #include <eos/base.h>
 #include <eos/hash_mix.h>
+#include <memory>
 
 namespace eos {
 
@@ -18,7 +19,8 @@ enum mpls_action_t {
    MPLS_ACTION_FORWARD,
 };
 /** Appends a string representation of enum mpls_action_t value to the ostream. */
-std::ostream& operator<<(std::ostream& os, const mpls_action_t & enum_val);
+EOS_SDK_PUBLIC std::ostream& operator<<(std::ostream& os,
+                                        const mpls_action_t & enum_val);
 
 /** Whether to use the pipe or uniform TTL inheritance mode. */
 enum mpls_ttl_mode_t {
@@ -29,7 +31,8 @@ enum mpls_ttl_mode_t {
    MPLS_TTLMODE_UNIFORM,
 };
 /** Appends a string representation of enum mpls_ttl_mode_t value to the ostream. */
-std::ostream& operator<<(std::ostream& os, const mpls_ttl_mode_t & enum_val);
+EOS_SDK_PUBLIC std::ostream& operator<<(std::ostream& os,
+                                        const mpls_ttl_mode_t & enum_val);
 
 /**
  * The inner payload type.
@@ -47,7 +50,8 @@ enum mpls_payload_type_t {
  * Appends a string representation of enum mpls_payload_type_t value to the
  * ostream.
  */
-std::ostream& operator<<(std::ostream& os, const mpls_payload_type_t & enum_val);
+EOS_SDK_PUBLIC std::ostream& operator<<(std::ostream& os,
+                                        const mpls_payload_type_t & enum_val);
 
 /**
  * An MPLS label, per RFC 3032. Note: label id 0 (default value) is the explicit
@@ -92,8 +96,9 @@ class EOS_SDK_PUBLIC mpls_label_t {
    uint32_t label_;
    friend struct MplsLabelHelper;
 };
-}
 
-#include <eos/inline/types/mpls.h>
+EOS_SDK_PUBLIC
+std::ostream& operator<<(std::ostream& os, const mpls_label_t& obj);
+}
 
 #endif // EOS_TYPES_MPLS_H

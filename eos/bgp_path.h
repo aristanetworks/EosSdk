@@ -42,7 +42,7 @@ class EOS_SDK_PUBLIC bgp_path_iter_t
  * The BGP path handler.
  *
  * This class provides handler APIs to react to BGP path changes in Adj-RIB-In.
- * New path updates are notified once BGP has converged.
+ * New path updates are notified once BGP has converged. 
  * An iterator must be used to retreive the existing paths after BGP convergence.
  * This is only supported under multi-agent mode.
  *

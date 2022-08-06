@@ -1,4 +1,4 @@
-// Copyright (c) 2021 Arista Networks, Inc.  All rights reserved.
+// Copyright (c) 2022 Arista Networks, Inc.  All rights reserved.
 // Arista Networks, Inc. Confidential and Proprietary.
 
 #ifndef EOS_TYPES_MACSEC_H
@@ -9,6 +9,7 @@
 #include <eos/panic.h>
 #include <eos/utility.h>
 #include <forward_list>
+#include <memory>
 #include <sstream>
 
 namespace eos {
@@ -27,7 +28,8 @@ enum macsec_cipher_suite_t {
  * Appends a string representation of enum macsec_cipher_suite_t value to the
  * ostream.
  */
-std::ostream& operator<<(std::ostream& os, const macsec_cipher_suite_t & enum_val);
+EOS_SDK_PUBLIC std::ostream& operator<<(std::ostream& os,
+                                        const macsec_cipher_suite_t & enum_val);
 
 /** Which key an interface is using if a profile is configured. */
 enum macsec_intf_key_status_t {
@@ -48,8 +50,8 @@ enum macsec_intf_key_status_t {
  * Appends a string representation of enum macsec_intf_key_status_t value to the
  * ostream.
  */
-std::ostream& operator<<(std::ostream& os,
-                         const macsec_intf_key_status_t & enum_val);
+EOS_SDK_PUBLIC std::ostream& operator<<(std::ostream& os,
+                                        const macsec_intf_key_status_t & enum_val);
 
 /** Traffic status on an interface. */
 enum macsec_intf_traffic_status_t {
@@ -64,8 +66,8 @@ enum macsec_intf_traffic_status_t {
  * Appends a string representation of enum macsec_intf_traffic_status_t value to
  * the ostream.
  */
-std::ostream& operator<<(std::ostream& os,
-                         const macsec_intf_traffic_status_t & enum_val);
+EOS_SDK_PUBLIC std::ostream& operator<<(
+         std::ostream& os, const macsec_intf_traffic_status_t & enum_val);
 
 /** Bypass level for a protocol. */
 enum macsec_bypass_t {
@@ -80,7 +82,8 @@ enum macsec_bypass_t {
    BYPASS_UNAUTHORIZED,
 };
 /** Appends a string representation of enum macsec_bypass_t value to the ostream. */
-std::ostream& operator<<(std::ostream& os, const macsec_bypass_t & enum_val);
+EOS_SDK_PUBLIC std::ostream& operator<<(std::ostream& os,
+                                        const macsec_bypass_t & enum_val);
 
 /** Traffic policy on a profile. */
 enum macsec_profile_traffic_policy_t {
@@ -99,13 +102,18 @@ enum macsec_profile_traffic_policy_t {
  * Appends a string representation of enum macsec_profile_traffic_policy_t value to
  * the ostream.
  */
-std::ostream& operator<<(std::ostream& os,
-                         const macsec_profile_traffic_policy_t & enum_val);
+EOS_SDK_PUBLIC std::ostream& operator<<(
+         std::ostream& os, const macsec_profile_traffic_policy_t & enum_val);
 
+class macsec_key_impl_t;
 /** A connectivity association key. */
 class EOS_SDK_PUBLIC macsec_key_t {
  public:
    macsec_key_t();
+   macsec_key_t(const macsec_key_t& other);
+   macsec_key_t& operator=(
+      macsec_key_t const & other);
+
 
    /** Getter for 'cak': connectivity association key (CAK). CAK is a hex string. */
    std::string cak() const;
@@ -141,16 +149,22 @@ class EOS_SDK_PUBLIC macsec_key_t {
    friend std::ostream& operator<<(std::ostream& os, const macsec_key_t& obj);
 
  private:
-   std::string cak_;
-   std::string ckn_;
-   bool encoded_;
+   std::shared_ptr<macsec_key_impl_t> pimpl;
 };
 
+EOS_SDK_PUBLIC
+std::ostream& operator<<(std::ostream& os, const macsec_key_t& obj);
+
+class macsec_profile_impl_t;
 /** A MACsec profile which can be attached to an interface. */
 class EOS_SDK_PUBLIC macsec_profile_t {
  public:
    macsec_profile_t();
    explicit macsec_profile_t(macsec_profile_name_t name);
+   macsec_profile_t(const macsec_profile_t& other);
+   macsec_profile_t& operator=(
+      macsec_profile_t const & other);
+
 
    /** Getter for 'name': the name of the profile. */
    macsec_profile_name_t name() const;
@@ -270,30 +284,22 @@ class EOS_SDK_PUBLIC macsec_profile_t {
    friend std::ostream& operator<<(std::ostream& os, const macsec_profile_t& obj);
 
  private:
-   macsec_profile_name_t name_;
-   macsec_key_t primary_key_;
-   macsec_key_t fallback_key_;
-   uint8_t key_server_priority_;
-   uint32_t rekey_period_;
-   uint32_t mka_life_time_;
-   macsec_cipher_suite_t cipher_;
-   bool dot1x_;
-   bool include_sci_;
-   bool bypass_lldp_;
-   macsec_bypass_t lldp_bypass_level_;
-   macsec_profile_traffic_policy_t traffic_policy_;
-   bool allow_unprotected_;
-   bool replay_protection_;
-   uint32_t replay_protection_window_;
-   bool key_retirement_immediate_;
-   std::forward_list<intf_id_t> intfs_;
+   std::shared_ptr<macsec_profile_impl_t> pimpl;
    friend void addIntf(macsec_profile_t &profile, intf_id_t intfId);
 };
 
+EOS_SDK_PUBLIC
+std::ostream& operator<<(std::ostream& os, const macsec_profile_t& obj);
+
+class macsec_intf_status_impl_t;
 /** Information regarding the MACsec status of an interface. */
 class EOS_SDK_PUBLIC macsec_intf_status_t {
  public:
    macsec_intf_status_t();
+   macsec_intf_status_t(const macsec_intf_status_t& other);
+   macsec_intf_status_t& operator=(
+      macsec_intf_status_t const & other);
+
 
    macsec_intf_key_status_t key_status() const;
 
@@ -320,14 +326,16 @@ class EOS_SDK_PUBLIC macsec_intf_status_t {
                                    const macsec_intf_status_t& obj);
 
  private:
-   macsec_intf_key_status_t status_;
-   macsec_intf_key_status_t key_status_;
-   macsec_intf_traffic_status_t traffic_status_;
+   std::shared_ptr<macsec_intf_status_impl_t> pimpl;
    friend void status_is(macsec_intf_status_t &status,
       macsec_intf_key_status_t keyStatus,
       macsec_intf_traffic_status_t trafficStatus);
 };
 
+EOS_SDK_PUBLIC
+std::ostream& operator<<(std::ostream& os, const macsec_intf_status_t& obj);
+
+class macsec_intf_counters_impl_t;
 /** MACsec interface counters class. */
 class EOS_SDK_PUBLIC macsec_intf_counters_t {
  public:
@@ -336,6 +344,10 @@ class EOS_SDK_PUBLIC macsec_intf_counters_t {
                           uint64_t out_octets_encrypted,
                           uint64_t in_pkts_decrypted, uint64_t in_octets_decrypted,
                           uint64_t in_pkts_not_valid);
+   macsec_intf_counters_t(const macsec_intf_counters_t& other);
+   macsec_intf_counters_t& operator=(
+      macsec_intf_counters_t const & other);
+
 
    uint64_t out_pkts_encrypted() const;
 
@@ -364,14 +376,11 @@ class EOS_SDK_PUBLIC macsec_intf_counters_t {
                                    const macsec_intf_counters_t& obj);
 
  private:
-   uint64_t out_pkts_encrypted_;
-   uint64_t out_octets_encrypted_;
-   uint64_t in_pkts_decrypted_;
-   uint64_t in_octets_decrypted_;
-   uint64_t in_pkts_not_valid_;
+   std::shared_ptr<macsec_intf_counters_impl_t> pimpl;
 };
-}
 
-#include <eos/inline/types/macsec.h>
+EOS_SDK_PUBLIC
+std::ostream& operator<<(std::ostream& os, const macsec_intf_counters_t& obj);
+}
 
 #endif // EOS_TYPES_MACSEC_H
