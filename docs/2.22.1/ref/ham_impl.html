@@ -1,0 +1,665 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>ham_impl &#8212; Arista EOS SDK 2.22.1 reference</title>
+    <link rel="stylesheet" href="_static/eossdk.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/breathe.css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/language_data.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="hardware_table" href="hardware_table.html" />
+    <link rel="prev" title="ham" href="ham.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="hardware_table.html" title="hardware_table"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="ham.html" title="ham"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Arista EOS SDK 2.22.1 reference</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="ham-impl">
+<h1><strong>ham_impl</strong><a class="headerlink" href="#ham-impl" title="Permalink to this headline">¶</a></h1>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">doxygenfile: Cannot find file “eos/ham_impl.h </p>
+</div>
+<div class="section" id="type-definitions-in-ham-impl">
+<h2>Type definitions in <strong>ham_impl</strong><a class="headerlink" href="#type-definitions-in-ham-impl" title="Permalink to this headline">¶</a></h2>
+<dl class="namespace">
+<dt>
+<span class="target" id="eossdknamespaceeos"></span><em>namespace</em> <code class="descname">eos</code></dt>
+<dd><dl class="class">
+<dt>
+<span class="target" id="eossdkclasseos_1_1device__impl__t"></span><em>class</em> <code class="descname">device_impl_t</code></dt>
+<dd><em>#include &lt;ham_impl.h&gt;</em><p>The <a class="reference internal" href="ham.html#eossdkclasseos_1_1device__t"><span class="std std-ref">device_t</span></a> type is passed to the ctor of the <a class="reference internal" href="ham.html#eossdkclasseos_1_1eossdk__ham__t"><span class="std std-ref">eossdk_ham_t</span></a> type. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1device__impl__t_1ad695fe00387dded88009d184c55e72aa"></span><code class="descname">device_impl_t</code><span class="sig-paren">(</span><span class="sig-paren">)</span></dt>
+<dd><p>Default constructor. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1device__impl__t_1aeadf52d1184b6b51c05a309e3b3304f9"></span>std::string <code class="descname">driver</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dd><p>Getter for ‘driver’: Driver name. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1device__impl__t_1ac6514b2e91f8f327b2cbb977279c7042"></span>void <code class="descname">driver_is</code><span class="sig-paren">(</span>std::string <em>driver</em><span class="sig-paren">)</span></dt>
+<dd><p>Setter for ‘driver’. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1device__impl__t_1a0e22274e39edd9311d9fd85292266317"></span>uint32_t <code class="descname">uid</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dd><p>Getter for ‘uid’: The unique ID for the component. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1device__impl__t_1aae6cbb267eaa6b1de188ff2161b3641c"></span>void <code class="descname">uid_is</code><span class="sig-paren">(</span>uint32_t <em>uid</em><span class="sig-paren">)</span></dt>
+<dd><p>Setter for ‘uid’. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1device__impl__t_1acfb825bcc532fc444fb960a5bf36e0c0"></span>uint32_t <code class="descname">did</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dd><p>Getter for ‘did’: The unique topology ID for the device. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1device__impl__t_1a0aab1ce13cbf8aec6e2e0d089b27fc96"></span>void <code class="descname">did_is</code><span class="sig-paren">(</span>uint32_t <em>did</em><span class="sig-paren">)</span></dt>
+<dd><p>Setter for ‘did’. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1device__impl__t_1a8f6eb0789eb83bdc10b91b6c35cdc7eb"></span>uint32_t <code class="descname">bus</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dd><p>Getter for ‘bus’: The Bus ID attribute. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1device__impl__t_1afce2cc1ae18eafee9af2554149d4f714"></span>void <code class="descname">bus_is</code><span class="sig-paren">(</span>uint32_t <em>bus</em><span class="sig-paren">)</span></dt>
+<dd><p>Setter for ‘bus’. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1device__impl__t_1acb33d6170ac26a67ce35e12c8a2a62b4"></span>uint32_t <code class="descname">accelerator</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dd><p>Getter for ‘accelerator’: The accelerator attribute. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1device__impl__t_1a49bdfe9798f0068ca27292d198f9fc75"></span>void <code class="descname">accelerator_is</code><span class="sig-paren">(</span>uint32_t <em>accelerator</em><span class="sig-paren">)</span></dt>
+<dd><p>Setter for ‘accelerator’. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1device__impl__t_1ac81076692452be4e3bb4e3b993209036"></span>bool <code class="descname">operator==</code><span class="sig-paren">(</span><a class="reference internal" href="#eossdkclasseos_1_1device__impl__t"><span class="std std-ref">device_impl_t</span></a> const &amp; <em>other</em><span class="sig-paren">)</span> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1device__impl__t_1a5da56c5c17c8815d4201db6bbface213"></span>bool <code class="descname">operator!=</code><span class="sig-paren">(</span><a class="reference internal" href="#eossdkclasseos_1_1device__impl__t"><span class="std std-ref">device_impl_t</span></a> const &amp; <em>other</em><span class="sig-paren">)</span> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1device__impl__t_1aad339e3e8c601b3348cceefe8bf8f0e0"></span>bool <code class="descname">operator&lt;</code><span class="sig-paren">(</span><a class="reference internal" href="#eossdkclasseos_1_1device__impl__t"><span class="std std-ref">device_impl_t</span></a> const &amp; <em>other</em><span class="sig-paren">)</span> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1device__impl__t_1ad152decd0a9b297925c6b11c9308fc16"></span>uint32_t <code class="descname">hash</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dd><p>The hash function for type <a class="reference internal" href="ham.html#eossdkclasseos_1_1device__t"><span class="std std-ref">device_t</span></a>. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1device__impl__t_1a4d3a0c1a827eb456e021dcac3abb6b9e"></span>void <code class="descname">mix_me</code><span class="sig-paren">(</span><a class="reference internal" href="hash_mix.html#eossdkclasseos_1_1hash__mix"><span class="std std-ref">hash_mix</span></a> &amp; <em>h</em><span class="sig-paren">)</span> const</dt>
+<dd><p>The hash mix function for type <a class="reference internal" href="ham.html#eossdkclasseos_1_1device__t"><span class="std std-ref">device_t</span></a>. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1device__impl__t_1a9cb5412854b616e3bbc5c3ddd6ca22cc"></span>std::string <code class="descname">to_string</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dd><p>Returns a string representation of the current object’s values. </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Private Members</p>
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1device__impl__t_1a8638e4387c7ea8a62acde02ee4d55957"></span>std::string <code class="descname">driver_</code></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1device__impl__t_1a46eb5cb8f8e126c3933248fc9ee7e0a5"></span>uint32_t <code class="descname">uid_</code></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1device__impl__t_1a15677f90a3acd01a15c457ce17d195a9"></span>uint32_t <code class="descname">did_</code></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1device__impl__t_1ad4adfb6ca6231d2caa52a1cc3868f643"></span>uint32_t <code class="descname">bus_</code></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1device__impl__t_1ab6f7a00468f050a8a943812151948e7a"></span>uint32_t <code class="descname">accelerator_</code></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Friends</p>
+<dl class="friend">
+<dt>
+<span class="target" id="eossdkclasseos_1_1device__impl__t_1a48fe0dae4f33807b686f4d5e07a0e2c1"></span>friend std::ostream &amp; <code class="descname">operator&lt;&lt;</code></dt>
+<dd><p>A utility stream operator that adds a string representation of <a class="reference internal" href="ham.html#eossdkclasseos_1_1device__t"><span class="std std-ref">device_t</span></a> to the ostream. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="class">
+<dt>
+<span class="target" id="eossdkclasseos_1_1pci__address__impl__t"></span><em>class</em> <code class="descname">pci_address_impl_t</code></dt>
+<dd><em>#include &lt;ham_impl.h&gt;</em><p>The <a class="reference internal" href="ham.html#eossdkclasseos_1_1pci__address__t"><span class="std std-ref">pci_address_t</span></a> type is passed to the ctor of the <a class="reference internal" href="ham.html#eossdkclasseos_1_1eossdk__ham__t"><span class="std std-ref">eossdk_ham_t</span></a> type. The HAM should use the PCI address of the SCD. If zero, the CPUs SMBuses are used. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1pci__address__impl__t_1a6cb6afff007334aa15e1b88e8d077dd0"></span><code class="descname">pci_address_impl_t</code><span class="sig-paren">(</span><span class="sig-paren">)</span></dt>
+<dd><p>Default constructor. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1pci__address__impl__t_1af3838ae3ce5baa17990ec73084ea3bff"></span>uint32_t <code class="descname">domain</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dd><p>Getter for ‘domain’: Domain of the pci address. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1pci__address__impl__t_1a8a79f363a5d9f2dd3e87544891320e76"></span>void <code class="descname">domain_is</code><span class="sig-paren">(</span>uint32_t <em>domain</em><span class="sig-paren">)</span></dt>
+<dd><p>Setter for ‘domain’. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1pci__address__impl__t_1a687cd8c036a0d60985ad88a358e6500a"></span>uint32_t <code class="descname">bus</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dd><p>Getter for ‘bus’: Bus identifier for pci address. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1pci__address__impl__t_1a6299fa5c3982bf79ab59a3c01a8cca2f"></span>void <code class="descname">bus_is</code><span class="sig-paren">(</span>uint32_t <em>bus</em><span class="sig-paren">)</span></dt>
+<dd><p>Setter for ‘bus’. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1pci__address__impl__t_1a2d0ec4d19b87fc6bfe7f041a1c21ad0c"></span>uint32_t <code class="descname">device</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dd><p>Getter for ‘device’: Device identifier for pci address. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1pci__address__impl__t_1a7f4061f763b22ff9b559910ad944ca39"></span>void <code class="descname">device_is</code><span class="sig-paren">(</span>uint32_t <em>device</em><span class="sig-paren">)</span></dt>
+<dd><p>Setter for ‘device’. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1pci__address__impl__t_1a33cc5ff0a3a52762d43b55d977a13758"></span>uint32_t <code class="descname">function</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dd><p>Getter for ‘function’: Function identifier for pci address. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1pci__address__impl__t_1a92d16cae3a7e29dd2dfb074ec0dd9c8e"></span>void <code class="descname">function_is</code><span class="sig-paren">(</span>uint32_t <em>function</em><span class="sig-paren">)</span></dt>
+<dd><p>Setter for ‘function’. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1pci__address__impl__t_1a9f6352ea436d23429af9f536b507f807"></span>bool <code class="descname">operator==</code><span class="sig-paren">(</span><a class="reference internal" href="#eossdkclasseos_1_1pci__address__impl__t"><span class="std std-ref">pci_address_impl_t</span></a> const &amp; <em>other</em><span class="sig-paren">)</span> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1pci__address__impl__t_1a375c49f472bf63086db17c6661f81668"></span>bool <code class="descname">operator!=</code><span class="sig-paren">(</span><a class="reference internal" href="#eossdkclasseos_1_1pci__address__impl__t"><span class="std std-ref">pci_address_impl_t</span></a> const &amp; <em>other</em><span class="sig-paren">)</span> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1pci__address__impl__t_1a155728505fe18050e2377888dd859c94"></span>bool <code class="descname">operator&lt;</code><span class="sig-paren">(</span><a class="reference internal" href="#eossdkclasseos_1_1pci__address__impl__t"><span class="std std-ref">pci_address_impl_t</span></a> const &amp; <em>other</em><span class="sig-paren">)</span> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1pci__address__impl__t_1a385736ff05f8658460478fcc388cf4c0"></span>uint32_t <code class="descname">hash</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dd><p>The hash function for type <a class="reference internal" href="ham.html#eossdkclasseos_1_1pci__address__t"><span class="std std-ref">pci_address_t</span></a>. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1pci__address__impl__t_1a03d27b903019ca91574fae374f1da83a"></span>void <code class="descname">mix_me</code><span class="sig-paren">(</span><a class="reference internal" href="hash_mix.html#eossdkclasseos_1_1hash__mix"><span class="std std-ref">hash_mix</span></a> &amp; <em>h</em><span class="sig-paren">)</span> const</dt>
+<dd><p>The hash mix function for type <a class="reference internal" href="ham.html#eossdkclasseos_1_1pci__address__t"><span class="std std-ref">pci_address_t</span></a>. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1pci__address__impl__t_1a31db0bd23aaa7f3c0086a611daa3286f"></span>std::string <code class="descname">to_string</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dd><p>Returns a string representation of the current object’s values. </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Private Members</p>
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1pci__address__impl__t_1a323aba443db51825376ea189d29c6b00"></span>uint32_t <code class="descname">domain_</code></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1pci__address__impl__t_1a4f53356d370159e302c8b5661603028e"></span>uint32_t <code class="descname">bus_</code></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1pci__address__impl__t_1a3c560e91ae4b5f31d0dc2b58155b8efc"></span>uint32_t <code class="descname">device_</code></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1pci__address__impl__t_1a6dcea0f18bfe58783d8c7051194905ca"></span>uint32_t <code class="descname">function_</code></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Friends</p>
+<dl class="friend">
+<dt>
+<span class="target" id="eossdkclasseos_1_1pci__address__impl__t_1aacf351296bfdc2374c41ff369e3b814d"></span>friend std::ostream &amp; <code class="descname">operator&lt;&lt;</code></dt>
+<dd><p>A utility stream operator that adds a string representation of <a class="reference internal" href="ham.html#eossdkclasseos_1_1pci__address__t"><span class="std std-ref">pci_address_t</span></a> to the ostream. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="class">
+<dt>
+<span class="target" id="eossdkclasseos_1_1aham__address__impl__t"></span><em>class</em> <code class="descname">aham_address_impl_t</code></dt>
+<dd><em>#include &lt;ham_impl.h&gt;</em><p>The <a class="reference internal" href="ham.html#eossdkclasseos_1_1aham__address__t"><span class="std std-ref">aham_address_t</span></a> type is passed to the ctor of the <a class="reference internal" href="ham.html#eossdkclasseos_1_1eossdk__ham__t"><span class="std std-ref">eossdk_ham_t</span></a> type. It holds the bus Id, the accelerator,and the endpoint address. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1aham__address__impl__t_1a25aecee0f4982f3d31e6761b2efedc42"></span><code class="descname">aham_address_impl_t</code><span class="sig-paren">(</span><span class="sig-paren">)</span></dt>
+<dd><p>Default constructor. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1aham__address__impl__t_1a8f08941ca2bf9a03f1a0fd7fe8ad30b8"></span>uint32_t <code class="descname">bus</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dd><p>Getter for ‘bus’: Bus attribute for aham address. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1aham__address__impl__t_1acef62a92a1531be6aade642d05ef96c1"></span>void <code class="descname">bus_is</code><span class="sig-paren">(</span>uint32_t <em>bus</em><span class="sig-paren">)</span></dt>
+<dd><p>Setter for ‘bus’. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1aham__address__impl__t_1a3f328815af62f0d529dd584e3756e689"></span>uint32_t <code class="descname">accelerator</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dd><p>Getter for ‘accelerator’: Accelerator for ahamaddress. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1aham__address__impl__t_1ac942bca8d047798d5f5536273bb70f0e"></span>void <code class="descname">accelerator_is</code><span class="sig-paren">(</span>uint32_t <em>accelerator</em><span class="sig-paren">)</span></dt>
+<dd><p>Setter for ‘accelerator’. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1aham__address__impl__t_1a17b7c07fb416f4dcccfcc6a11affe8ef"></span>uint32_t <code class="descname">address</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dd><p>Getter for ‘address’: Address field of the aham addressobject. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1aham__address__impl__t_1aec3901192f453f0aa349530064be89e3"></span>void <code class="descname">address_is</code><span class="sig-paren">(</span>uint32_t <em>address</em><span class="sig-paren">)</span></dt>
+<dd><p>Setter for ‘address’. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1aham__address__impl__t_1afdb27ff5855dd764874355c42655c1ec"></span>bool <code class="descname">operator==</code><span class="sig-paren">(</span><a class="reference internal" href="#eossdkclasseos_1_1aham__address__impl__t"><span class="std std-ref">aham_address_impl_t</span></a> const &amp; <em>other</em><span class="sig-paren">)</span> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1aham__address__impl__t_1a2e6a07e1edd70ced5c722009b8b55466"></span>bool <code class="descname">operator!=</code><span class="sig-paren">(</span><a class="reference internal" href="#eossdkclasseos_1_1aham__address__impl__t"><span class="std std-ref">aham_address_impl_t</span></a> const &amp; <em>other</em><span class="sig-paren">)</span> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1aham__address__impl__t_1a0e981ea6305e83bf60fada976d731672"></span>bool <code class="descname">operator&lt;</code><span class="sig-paren">(</span><a class="reference internal" href="#eossdkclasseos_1_1aham__address__impl__t"><span class="std std-ref">aham_address_impl_t</span></a> const &amp; <em>other</em><span class="sig-paren">)</span> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1aham__address__impl__t_1a80fc3c1e86b5d321fd0ae63dccee97d9"></span>uint32_t <code class="descname">hash</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dd><p>The hash function for type <a class="reference internal" href="ham.html#eossdkclasseos_1_1aham__address__t"><span class="std std-ref">aham_address_t</span></a>. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1aham__address__impl__t_1ac227810f8ef1c22a8661399f0d2b2eba"></span>void <code class="descname">mix_me</code><span class="sig-paren">(</span><a class="reference internal" href="hash_mix.html#eossdkclasseos_1_1hash__mix"><span class="std std-ref">hash_mix</span></a> &amp; <em>h</em><span class="sig-paren">)</span> const</dt>
+<dd><p>The hash mix function for type <a class="reference internal" href="ham.html#eossdkclasseos_1_1aham__address__t"><span class="std std-ref">aham_address_t</span></a>. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1aham__address__impl__t_1ad1039ffcbee566c782c6c475e5a1b20d"></span>std::string <code class="descname">to_string</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dd><p>Returns a string representation of the current object’s values. </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Private Members</p>
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1aham__address__impl__t_1a9fad332a4160ab08918654de7ab19e0e"></span>uint32_t <code class="descname">bus_</code></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1aham__address__impl__t_1a025962e242bf49ad85be58b936b2a54e"></span>uint32_t <code class="descname">accelerator_</code></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1aham__address__impl__t_1a11888b38f2a4c3fcfc98f61db2745ed6"></span>uint32_t <code class="descname">address_</code></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Friends</p>
+<dl class="friend">
+<dt>
+<span class="target" id="eossdkclasseos_1_1aham__address__impl__t_1ab4f07ec9dff715d4766a1869a31595c1"></span>friend std::ostream &amp; <code class="descname">operator&lt;&lt;</code></dt>
+<dd><p>A utility stream operator that adds a string representation of <a class="reference internal" href="ham.html#eossdkclasseos_1_1aham__address__t"><span class="std std-ref">aham_address_t</span></a> to the ostream. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="class">
+<dt>
+<span class="target" id="eossdkclasseos_1_1eossdk__ham__impl__t"></span><em>class</em> <code class="descname">eossdk_ham_impl_t</code></dt>
+<dd><em>#include &lt;ham_impl.h&gt;</em><p>Hardware access method. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1eossdk__ham__impl__t_1a0ade26d9a35da63cda5e41f3fce23432"></span><code class="descname">eossdk_ham_impl_t</code><span class="sig-paren">(</span><a class="reference internal" href="ham.html#eossdkclasseos_1_1device__t"><span class="std std-ref">device_t</span></a> <em>device_Args</em>, uint32_t <em>endpoint_Addr</em><span class="sig-paren">)</span></dt>
+<dd><p>Default constructor, where deviceArgs and endpointAddr are passed in from the EosSdk FPGA module. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1eossdk__ham__impl__t_1aea0d653abef57409c0e4f0fdbd1f415f"></span><code class="descname">eossdk_ham_impl_t</code><span class="sig-paren">(</span><a class="reference internal" href="ham.html#eossdkclasseos_1_1aham__address__t"><span class="std std-ref">aham_address_t</span></a> <em>aham_address</em>, <a class="reference internal" href="ham.html#eossdkclasseos_1_1pci__address__t"><span class="std std-ref">pci_address_t</span></a> <em>pci_address</em><span class="sig-paren">)</span></dt>
+<dd><p>Constructor specifying the AhamAddress for the ham device, where the AhamAddress contains the endpoint address, the bus Id, and the accelerator for the ham. Also specifies PCI Address. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1eossdk__ham__impl__t_1a99d76fc0879f1224178ff36838975231"></span><a class="reference internal" href="ham.html#eossdkclasseos_1_1device__t"><span class="std std-ref">device_t</span></a> <code class="descname">device_Args</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1eossdk__ham__impl__t_1a53a0b9e0a7a751825eca0f0a375eddde"></span>uint32_t <code class="descname">endpoint_Addr</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1eossdk__ham__impl__t_1afc3669bb00db107665558a96cb6b307a"></span><a class="reference internal" href="ham.html#eossdkclasseos_1_1aham__address__t"><span class="std std-ref">aham_address_t</span></a> <code class="descname">aham_address</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1eossdk__ham__impl__t_1a6746287a0676478077bf55e220c5cee5"></span><a class="reference internal" href="ham.html#eossdkclasseos_1_1pci__address__t"><span class="std std-ref">pci_address_t</span></a> <code class="descname">pci_address</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1eossdk__ham__impl__t_1a463a02bd2eb38d8a6148cec17e93b4f1"></span>uint32_t <code class="descname">hash</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dd><p>The hash function for type <a class="reference internal" href="ham.html#eossdkclasseos_1_1eossdk__ham__t"><span class="std std-ref">eossdk_ham_t</span></a>. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1eossdk__ham__impl__t_1a70cb60a628705736ff290d6e41ce461d"></span>void <code class="descname">mix_me</code><span class="sig-paren">(</span><a class="reference internal" href="hash_mix.html#eossdkclasseos_1_1hash__mix"><span class="std std-ref">hash_mix</span></a> &amp; <em>h</em><span class="sig-paren">)</span> const</dt>
+<dd><p>The hash mix function for type <a class="reference internal" href="ham.html#eossdkclasseos_1_1eossdk__ham__t"><span class="std std-ref">eossdk_ham_t</span></a>. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1eossdk__ham__impl__t_1aab23900cb16b6fee0aa4a44d997d0808"></span>std::string <code class="descname">to_string</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dd><p>Returns a string representation of the current object’s values. </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Private Members</p>
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1eossdk__ham__impl__t_1abf61e5900602df31774c82a2768a08c0"></span><a class="reference internal" href="ham.html#eossdkclasseos_1_1device__t"><span class="std std-ref">device_t</span></a> <code class="descname">device_Args_</code></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1eossdk__ham__impl__t_1adc1a501fe6efc0deeafd8617c3eafbef"></span>uint32_t <code class="descname">endpoint_Addr_</code></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1eossdk__ham__impl__t_1a7ed552ac9ed1e0a19cdc519a06f9b265"></span><a class="reference internal" href="ham.html#eossdkclasseos_1_1aham__address__t"><span class="std std-ref">aham_address_t</span></a> <code class="descname">aham_address_</code></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1eossdk__ham__impl__t_1ae300587810eaa1ca7bb16c6c669678b1"></span><a class="reference internal" href="ham.html#eossdkclasseos_1_1pci__address__t"><span class="std std-ref">pci_address_t</span></a> <code class="descname">pci_address_</code></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Friends</p>
+<dl class="friend">
+<dt>
+<span class="target" id="eossdkclasseos_1_1eossdk__ham__impl__t_1a552321f3bd3e075d382912402431b5c1"></span>friend std::ostream &amp; <code class="descname">operator&lt;&lt;</code></dt>
+<dd><p>A utility stream operator that adds a string representation of <a class="reference internal" href="ham.html#eossdkclasseos_1_1eossdk__ham__t"><span class="std std-ref">eossdk_ham_t</span></a> to the ostream. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="class">
+<dt>
+<span class="target" id="eossdkclasseos_1_1register__impl__t"></span><em>class</em> <code class="descname">register_impl_t</code></dt>
+<dd><em>#include &lt;ham_impl.h&gt;</em><p>Register type, from which the HAM will read from/write to. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1register__impl__t_1ad40358191dd6ae66a19a25d151f58f81"></span><code class="descname">register_impl_t</code><span class="sig-paren">(</span><span class="sig-paren">)</span></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1register__impl__t_1aaf89ba41ec4bc049de05946e5d42cbe9"></span>uint32_t <code class="descname">reg</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1register__impl__t_1a33af1d94493b3f0290d280f44abdfbb0"></span>void <code class="descname">reg_is</code><span class="sig-paren">(</span>uint32_t <em>reg</em><span class="sig-paren">)</span></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1register__impl__t_1a016e6e7df7b05c4fb4af92bd8df2c6bf"></span>bool <code class="descname">operator==</code><span class="sig-paren">(</span><a class="reference internal" href="#eossdkclasseos_1_1register__impl__t"><span class="std std-ref">register_impl_t</span></a> const &amp; <em>other</em><span class="sig-paren">)</span> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1register__impl__t_1a178ef366478b7241fc6f6383fa052072"></span>bool <code class="descname">operator!=</code><span class="sig-paren">(</span><a class="reference internal" href="#eossdkclasseos_1_1register__impl__t"><span class="std std-ref">register_impl_t</span></a> const &amp; <em>other</em><span class="sig-paren">)</span> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1register__impl__t_1a97b42c36ef0f63b675d0afb333d7a283"></span>bool <code class="descname">operator&lt;</code><span class="sig-paren">(</span><a class="reference internal" href="#eossdkclasseos_1_1register__impl__t"><span class="std std-ref">register_impl_t</span></a> const &amp; <em>other</em><span class="sig-paren">)</span> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1register__impl__t_1acf1965efa223d9cb61f236f6733c52f5"></span>uint32_t <code class="descname">hash</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dd><p>The hash function for type <a class="reference internal" href="ham.html#eossdkclasseos_1_1register__t"><span class="std std-ref">register_t</span></a>. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1register__impl__t_1ad2104b79d0cfd9f4eac522473bb78adc"></span>void <code class="descname">mix_me</code><span class="sig-paren">(</span><a class="reference internal" href="hash_mix.html#eossdkclasseos_1_1hash__mix"><span class="std std-ref">hash_mix</span></a> &amp; <em>h</em><span class="sig-paren">)</span> const</dt>
+<dd><p>The hash mix function for type <a class="reference internal" href="ham.html#eossdkclasseos_1_1register__t"><span class="std std-ref">register_t</span></a>. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1register__impl__t_1a3903ef73c27f201ef71932c79901eb1f"></span>std::string <code class="descname">to_string</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dd><p>Returns a string representation of the current object’s values. </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Private Members</p>
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1register__impl__t_1a8361a4853dc6bc3fcd4dee984588b946"></span>uint32_t <code class="descname">reg_</code></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Friends</p>
+<dl class="friend">
+<dt>
+<span class="target" id="eossdkclasseos_1_1register__impl__t_1af1db3a7f725d5747a3c8db33624fef10"></span>friend std::ostream &amp; <code class="descname">operator&lt;&lt;</code></dt>
+<dd><p>A utility stream operator that adds a string representation of <a class="reference internal" href="ham.html#eossdkclasseos_1_1register__t"><span class="std std-ref">register_t</span></a> to the ostream. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#"><strong>ham_impl</strong></a><ul>
+<li><a class="reference internal" href="#type-definitions-in-ham-impl">Type definitions in <strong>ham_impl</strong></a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="ham.html"
+                        title="previous chapter"><strong>ham</strong></a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="hardware_table.html"
+                        title="next chapter"><strong>hardware_table</strong></a></p>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="hardware_table.html" title="hardware_table"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="ham.html" title="ham"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Arista EOS SDK 2.22.1 reference</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2014, Arista Networks.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.4.
+    </div>
+  </body>
+</html>
