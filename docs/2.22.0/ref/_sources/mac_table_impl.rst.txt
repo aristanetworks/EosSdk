@@ -1,0 +1,13 @@
+**mac_table_impl**
+------------------
+
+
+.. doxygenfile:: eos/mac_table_impl.h
+   :project: eossdk
+
+Type definitions in **mac_table_impl**
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. doxygenfile:: eos/types/mac_table_impl.h
+   :project: eossdk
+

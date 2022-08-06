@@ -1,0 +1,225 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>decap_group_impl &#8212; Arista EOS SDK 2.22.0 reference</title>
+    <link rel="stylesheet" href="_static/eossdk.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/breathe.css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/language_data.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="directflow" href="directflow.html" />
+    <link rel="prev" title="decap_group" href="decap_group.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="directflow.html" title="directflow"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="decap_group.html" title="decap_group"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Arista EOS SDK 2.22.0 reference</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="decap-group-impl">
+<h1><strong>decap_group_impl</strong><a class="headerlink" href="#decap-group-impl" title="Permalink to this headline">¶</a></h1>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">doxygenfile: Cannot find file “eos/decap_group_impl.h </p>
+</div>
+<div class="section" id="type-definitions-in-decap-group-impl">
+<h2>Type definitions in <strong>decap_group_impl</strong><a class="headerlink" href="#type-definitions-in-decap-group-impl" title="Permalink to this headline">¶</a></h2>
+<dl class="namespace">
+<dt>
+<span class="target" id="eossdknamespaceeos"></span><em>namespace</em> <code class="descname">eos</code></dt>
+<dd><dl class="class">
+<dt>
+<span class="target" id="eossdkclasseos_1_1decap__group__impl__t"></span><em>class</em> <code class="descname">decap_group_impl_t</code></dt>
+<dd><em>#include &lt;decap_group_impl.h&gt;</em><p>An IP decap group configuration model. At this time, all decap groups are configured in the default VRF. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1decap__group__impl__t_1add0affd151352de8d9ff38b60c5a9a73"></span><code class="descname">decap_group_impl_t</code><span class="sig-paren">(</span><span class="sig-paren">)</span></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1decap__group__impl__t_1a50d31486b9e74708002aa7eb66e13fae"></span><code class="descname">decap_group_impl_t</code><span class="sig-paren">(</span>std::string const &amp; <em>group_name</em>, <a class="reference internal" href="ip.html#eossdkclasseos_1_1ip__addr__t"><span class="std std-ref">ip_addr_t</span></a> const &amp; <em>destination_addr</em>, decap_protocol_type_t <em>protocol_type</em><span class="sig-paren">)</span></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1decap__group__impl__t_1ad546a4bdf00a8b9f626b03170b8e7d05"></span>std::string <code class="descname">group_name</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dd><p>Getter for ‘group_name’: the decap group name. Used to uniquely identify this group. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1decap__group__impl__t_1aefae2b8cd164e71678947b421cc1136a"></span><a class="reference internal" href="ip.html#eossdkclasseos_1_1ip__addr__t"><span class="std std-ref">ip_addr_t</span></a> <code class="descname">destination_addr</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dd><p>Getter for ‘destination_addr’: match this destination IP on the outermost IP header. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1decap__group__impl__t_1ab8e892be75655c6dd2cd8918e63fad89"></span>void <code class="descname">destination_addr_is</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#eossdkclasseos_1_1ip__addr__t"><span class="std std-ref">ip_addr_t</span></a> const &amp; <em>destination_addr</em><span class="sig-paren">)</span></dt>
+<dd><p>Setter for ‘destination_addr’. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1decap__group__impl__t_1a8b3ea086622889628d266c9d3d14657d"></span>decap_protocol_type_t <code class="descname">protocol_type</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dd><p>Getter for ‘protocol_type’: decapsulate only packets matching this outer IP protocol type. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1decap__group__impl__t_1ab8e38c23fb02c97a4e06bcb79e98179a"></span>void <code class="descname">protocol_type_is</code><span class="sig-paren">(</span>decap_protocol_type_t <em>protocol_type</em><span class="sig-paren">)</span></dt>
+<dd><p>Setter for ‘protocol_type’. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1decap__group__impl__t_1ab5580d60737f5f092af90bd8ab886e6a"></span>bool <code class="descname">operator==</code><span class="sig-paren">(</span><a class="reference internal" href="#eossdkclasseos_1_1decap__group__impl__t"><span class="std std-ref">decap_group_impl_t</span></a> const &amp; <em>other</em><span class="sig-paren">)</span> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1decap__group__impl__t_1a295aa5f2d6bdea468d11ae437ff2bb63"></span>bool <code class="descname">operator!=</code><span class="sig-paren">(</span><a class="reference internal" href="#eossdkclasseos_1_1decap__group__impl__t"><span class="std std-ref">decap_group_impl_t</span></a> const &amp; <em>other</em><span class="sig-paren">)</span> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1decap__group__impl__t_1a133060f2a2485eaae94868a904795bc4"></span>bool <code class="descname">operator&lt;</code><span class="sig-paren">(</span><a class="reference internal" href="#eossdkclasseos_1_1decap__group__impl__t"><span class="std std-ref">decap_group_impl_t</span></a> const &amp; <em>other</em><span class="sig-paren">)</span> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1decap__group__impl__t_1a5b1b8ee5affe3168cc1859ade5cc9f4f"></span>uint32_t <code class="descname">hash</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dd><p>The hash function for type <a class="reference internal" href="decap_group.html#eossdkclasseos_1_1decap__group__t"><span class="std std-ref">decap_group_t</span></a>. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1decap__group__impl__t_1ab01a3d45b8b31c201b17e1a8e6e239e2"></span>void <code class="descname">mix_me</code><span class="sig-paren">(</span><a class="reference internal" href="hash_mix.html#eossdkclasseos_1_1hash__mix"><span class="std std-ref">hash_mix</span></a> &amp; <em>h</em><span class="sig-paren">)</span> const</dt>
+<dd><p>The hash mix function for type <a class="reference internal" href="decap_group.html#eossdkclasseos_1_1decap__group__t"><span class="std std-ref">decap_group_t</span></a>. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1decap__group__impl__t_1a0d7978c7db4b0cd5befaeffc527df19e"></span>std::string <code class="descname">to_string</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dd><p>Returns a string representation of the current object’s values. </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Private Members</p>
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1decap__group__impl__t_1ac683adf99b8b50d024463a190c408e50"></span>std::string <code class="descname">group_name_</code></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1decap__group__impl__t_1a0a8a013e2af9cf6679d295861fe36551"></span><a class="reference internal" href="ip.html#eossdkclasseos_1_1ip__addr__t"><span class="std std-ref">ip_addr_t</span></a> <code class="descname">destination_addr_</code></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1decap__group__impl__t_1a05db8a1fdfb3f8d19b0df56f3f5d658c"></span>decap_protocol_type_t <code class="descname">protocol_type_</code></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Friends</p>
+<dl class="friend">
+<dt>
+<span class="target" id="eossdkclasseos_1_1decap__group__impl__t_1acd391a08f439c631a27f5780860f5eef"></span>friend std::ostream &amp; <code class="descname">operator&lt;&lt;</code></dt>
+<dd><p>A utility stream operator that adds a string representation of <a class="reference internal" href="decap_group.html#eossdkclasseos_1_1decap__group__t"><span class="std std-ref">decap_group_t</span></a> to the ostream. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#"><strong>decap_group_impl</strong></a><ul>
+<li><a class="reference internal" href="#type-definitions-in-decap-group-impl">Type definitions in <strong>decap_group_impl</strong></a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="decap_group.html"
+                        title="previous chapter"><strong>decap_group</strong></a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="directflow.html"
+                        title="next chapter"><strong>directflow</strong></a></p>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="directflow.html" title="directflow"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="decap_group.html" title="decap_group"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Arista EOS SDK 2.22.0 reference</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2014, Arista Networks.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.4.
+    </div>
+  </body>
+</html>

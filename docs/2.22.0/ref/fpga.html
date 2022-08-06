@@ -1,0 +1,315 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>fpga &#8212; Arista EOS SDK 2.22.0 reference</title>
+    <link rel="stylesheet" href="_static/eossdk.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/breathe.css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/language_data.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="fpga_impl" href="fpga_impl.html" />
+    <link rel="prev" title="fib_impl" href="fib_impl.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="fpga_impl.html" title="fpga_impl"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="fib_impl.html" title="fib_impl"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Arista EOS SDK 2.22.0 reference</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="fpga">
+<h1><strong>fpga</strong><a class="headerlink" href="#fpga" title="Permalink to this headline">¶</a></h1>
+<dl class="namespace">
+<dt>
+<span class="target" id="eossdknamespaceeos"></span><em>namespace</em> <code class="descname">eos</code></dt>
+<dd><dl class="class">
+<dt>
+<span class="target" id="eossdkclasseos_1_1fpga__handler"></span><em>class</em> <code class="descname">fpga_handler</code></dt>
+<dd><div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1fpga__handler_1a2999d1cb0378c70000e23687d8166128"></span><code class="descname">fpga_handler</code><span class="sig-paren">(</span><a class="reference internal" href="#eossdkclasseos_1_1fpga__mgr"><span class="std std-ref">fpga_mgr</span></a> *<span class="sig-paren">)</span></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1fpga__handler_1ae5bd98975bc860f9747c69b73a24593a"></span><a class="reference internal" href="#eossdkclasseos_1_1fpga__mgr"><span class="std std-ref">fpga_mgr</span></a> * <code class="descname">get_fpga_mgr</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1fpga__handler_1aed4e91b15905dd83d0856d2a6e3ff6e7"></span>void <code class="descname">watch_all_fpga</code><span class="sig-paren">(</span>bool<span class="sig-paren">)</span></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1fpga__handler_1ad6355f967e41d4a853dd124cb5168e21"></span>void <code class="descname">watch_fpga</code><span class="sig-paren">(</span>const <a class="reference internal" href="#eossdkclasseos_1_1fpga__t"><span class="std std-ref">fpga_t</span></a> &amp;, bool<span class="sig-paren">)</span></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1fpga__handler_1aa555b008907343f16e8759c48ab43a2e"></span>virtual void <code class="descname">on_fpga_load_image</code><span class="sig-paren">(</span>const <a class="reference internal" href="#eossdkclasseos_1_1fpga__t"><span class="std std-ref">fpga_t</span></a> &amp;<span class="sig-paren">)</span></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1fpga__handler_1a2fafd92cc7c9d269958eeddd00773823"></span>virtual void <code class="descname">on_fpga_load_image_failed</code><span class="sig-paren">(</span>const <a class="reference internal" href="#eossdkclasseos_1_1fpga__t"><span class="std std-ref">fpga_t</span></a> &amp;<span class="sig-paren">)</span></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1fpga__handler_1aca09b1a9be668f40ca0b49771623a56b"></span>virtual void <code class="descname">on_fpga_unload_image</code><span class="sig-paren">(</span>const <a class="reference internal" href="#eossdkclasseos_1_1fpga__t"><span class="std std-ref">fpga_t</span></a> &amp;<span class="sig-paren">)</span></dt>
+<dd></dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="class">
+<dt>
+<span class="target" id="eossdkclasseos_1_1fpga__iter__t"></span><em>class</em> <code class="descname">fpga_iter_t</code></dt>
+<dd><div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Private Functions</p>
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1fpga__iter__t_1a3a727fe9d978aac85055c85b0a08b285"></span><code class="descname">fpga_iter_t</code><span class="sig-paren">(</span>fpga_iter_impl * <em>const</em><span class="sig-paren">)</span></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Friends</p>
+<dl class="friend">
+<dt>
+<span class="target" id="eossdkclasseos_1_1fpga__iter__t_1a18a8371382d0d51d4638d6eca11c7b52"></span>friend class <code class="descname">fpga_iter_impl</code></dt>
+<dd></dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="class">
+<dt>
+<span class="target" id="eossdkclasseos_1_1fpga__mgr"></span><em>class</em> <code class="descname">fpga_mgr</code></dt>
+<dd><div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1fpga__mgr_1a5ca9e578f18f48aae101c63eb30ff6de"></span>virtual <code class="descname">~fpga_mgr</code><span class="sig-paren">(</span><span class="sig-paren">)</span></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1fpga__mgr_1a3e494a6339ed4442c5ce0a4452290426"></span>virtual <a class="reference internal" href="#eossdkclasseos_1_1fpga__iter__t"><span class="std std-ref">fpga_iter_t</span></a> <code class="descname">fpga_status_iter</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const = 0</dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Protected Functions</p>
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1fpga__mgr_1a0269d1cc29c2b5ffb11ee1ead007ddd9"></span><code class="descname">fpga_mgr</code><span class="sig-paren">(</span><span class="sig-paren">)</span></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Private Members</p>
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1fpga__mgr_1a1600816ff4c0c27d6d879eddb6c0bb54"></span><code class="descname">fpga_mgr</code></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Friends</p>
+<dl class="friend">
+<dt>
+<span class="target" id="eossdkclasseos_1_1fpga__mgr_1ab5302733472eca8cc393e85f0c051cdd"></span>friend class <code class="descname">fpga_handler</code></dt>
+<dd></dd></dl>
+
+</div>
+</dd></dl>
+
+</dd></dl>
+
+<div class="section" id="type-definitions-in-fpga">
+<h2>Type definitions in <strong>fpga</strong><a class="headerlink" href="#type-definitions-in-fpga" title="Permalink to this headline">¶</a></h2>
+<dl class="namespace">
+<dt>
+<span class="target" id="eossdknamespaceeos"></span><em>namespace</em> <code class="descname">eos</code></dt>
+<dd><dl class="class">
+<dt>
+<span class="target" id="eossdkclasseos_1_1fpga__t"></span><em>class</em> <code class="descname">fpga_t</code></dt>
+<dd><em>#include &lt;fpga.h&gt;</em><p>This data structure is used to describe an application FPGA on a switch. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1fpga__t_1aab40bdc3b8862eeb30b02191c8834c2d"></span><code class="descname">fpga_t</code><span class="sig-paren">(</span><span class="sig-paren">)</span></dt>
+<dd><p>Default constructor. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1fpga__t_1add4cd8157094d7ea9abe99095dfbf1ec"></span><code class="descname">fpga_t</code><span class="sig-paren">(</span>std::string <em>board_standard</em>, std::string <em>part_number</em><span class="sig-paren">)</span></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1fpga__t_1abf260229b43c1d6cfac77bbb7f83dee5"></span><code class="descname">fpga_t</code><span class="sig-paren">(</span>const <a class="reference internal" href="#eossdkclasseos_1_1fpga__t"><span class="std std-ref">fpga_t</span></a> &amp; <em>other</em><span class="sig-paren">)</span></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1fpga__t_1a35310182f3ad38f77e0ce482b90e068b"></span><a class="reference internal" href="#eossdkclasseos_1_1fpga__t"><span class="std std-ref">fpga_t</span></a> &amp; <code class="descname">operator=</code><span class="sig-paren">(</span><a class="reference internal" href="#eossdkclasseos_1_1fpga__t"><span class="std std-ref">fpga_t</span></a> const &amp; <em>other</em><span class="sig-paren">)</span></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1fpga__t_1a2f26fae332f4a6546ad2f7552891e21b"></span>std::string <code class="descname">board_standard</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dd><p>Getter for ‘board_standard’: The board standard of the FPGA. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1fpga__t_1af064d2c82ac02d024147127c66ec6fa4"></span>std::string <code class="descname">part_number</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dd><p>Getter for ‘part_number’: The part number of the FPGA. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1fpga__t_1a7c0b2d87e18db7d89ce94aed077b6095"></span>bool <code class="descname">operator==</code><span class="sig-paren">(</span><a class="reference internal" href="#eossdkclasseos_1_1fpga__t"><span class="std std-ref">fpga_t</span></a> const &amp; <em>other</em><span class="sig-paren">)</span> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1fpga__t_1a0a3cf5de14092e4322d07335fe3438bb"></span>bool <code class="descname">operator!=</code><span class="sig-paren">(</span><a class="reference internal" href="#eossdkclasseos_1_1fpga__t"><span class="std std-ref">fpga_t</span></a> const &amp; <em>other</em><span class="sig-paren">)</span> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1fpga__t_1a409b9a8fd0d9591cee0566a529f227cb"></span>bool <code class="descname">operator&lt;</code><span class="sig-paren">(</span><a class="reference internal" href="#eossdkclasseos_1_1fpga__t"><span class="std std-ref">fpga_t</span></a> const &amp; <em>other</em><span class="sig-paren">)</span> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1fpga__t_1a427820e1b89d761dac84ba026f0fd5ff"></span>uint32_t <code class="descname">hash</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dd><p>The hash function for type <a class="reference internal" href="#eossdkclasseos_1_1fpga__t"><span class="std std-ref">fpga_t</span></a>. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1fpga__t_1a87ace3dd0154c070336fc972b460ded1"></span>void <code class="descname">mix_me</code><span class="sig-paren">(</span><a class="reference internal" href="hash_mix.html#eossdkclasseos_1_1hash__mix"><span class="std std-ref">hash_mix</span></a> &amp; <em>h</em><span class="sig-paren">)</span> const</dt>
+<dd><p>The hash mix function for type <a class="reference internal" href="#eossdkclasseos_1_1fpga__t"><span class="std std-ref">fpga_t</span></a>. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1fpga__t_1a8413d6c4e0de735f2827b17353c18358"></span>std::string <code class="descname">to_string</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dd><p>Returns a string representation of the current object’s values. </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Private Members</p>
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1fpga__t_1a4d2b123347bafe3c22929067957c2cf4"></span>std::shared_ptr&lt; <a class="reference internal" href="fpga_impl.html#eossdkclasseos_1_1fpga__impl__t"><span class="std std-ref">fpga_impl_t</span></a> &gt; <code class="descname">pimpl</code></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Friends</p>
+<dl class="friend">
+<dt>
+<span class="target" id="eossdkclasseos_1_1fpga__t_1af8da24d83ab209957dd70ffd8aad3fc9"></span>friend std::ostream &amp; <code class="descname">operator&lt;&lt;</code></dt>
+<dd><p>A utility stream operator that adds a string representation of <a class="reference internal" href="#eossdkclasseos_1_1fpga__t"><span class="std std-ref">fpga_t</span></a> to the ostream. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#"><strong>fpga</strong></a><ul>
+<li><a class="reference internal" href="#type-definitions-in-fpga">Type definitions in <strong>fpga</strong></a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="fib_impl.html"
+                        title="previous chapter"><strong>fib_impl</strong></a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="fpga_impl.html"
+                        title="next chapter"><strong>fpga_impl</strong></a></p>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="fpga_impl.html" title="fpga_impl"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="fib_impl.html" title="fib_impl"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Arista EOS SDK 2.22.0 reference</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2014, Arista Networks.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.4.
+    </div>
+  </body>
+</html>

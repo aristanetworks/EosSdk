@@ -1,0 +1,202 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>mpls_vrf_label_impl &#8212; Arista EOS SDK 2.22.0 reference</title>
+    <link rel="stylesheet" href="_static/eossdk.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/breathe.css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/language_data.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="neighbor_table" href="neighbor_table.html" />
+    <link rel="prev" title="mpls_vrf_label" href="mpls_vrf_label.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="neighbor_table.html" title="neighbor_table"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="mpls_vrf_label.html" title="mpls_vrf_label"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Arista EOS SDK 2.22.0 reference</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="mpls-vrf-label-impl">
+<h1><strong>mpls_vrf_label_impl</strong><a class="headerlink" href="#mpls-vrf-label-impl" title="Permalink to this headline">¶</a></h1>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">doxygenfile: Cannot find file “eos/mpls_vrf_label_impl.h </p>
+</div>
+<div class="section" id="type-definitions-in-mpls-vrf-label-impl">
+<h2>Type definitions in <strong>mpls_vrf_label_impl</strong><a class="headerlink" href="#type-definitions-in-mpls-vrf-label-impl" title="Permalink to this headline">¶</a></h2>
+<dl class="namespace">
+<dt>
+<span class="target" id="eossdknamespaceeos"></span><em>namespace</em> <code class="descname">eos</code></dt>
+<dd><dl class="class">
+<dt>
+<span class="target" id="eossdkclasseos_1_1mpls__vrf__label__impl__t"></span><em>class</em> <code class="descname">mpls_vrf_label_impl_t</code></dt>
+<dd><em>#include &lt;mpls_vrf_label_impl.h&gt;</em><p>A static VRF label decap route configuration model. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1mpls__vrf__label__impl__t_1afc732bd69b7136988fede4f7baa535ea"></span><code class="descname">mpls_vrf_label_impl_t</code><span class="sig-paren">(</span><span class="sig-paren">)</span></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1mpls__vrf__label__impl__t_1a2ce39ba919b7fed8a9716fdec42c889a"></span><code class="descname">mpls_vrf_label_impl_t</code><span class="sig-paren">(</span><a class="reference internal" href="mpls.html#eossdkclasseos_1_1mpls__label__t"><span class="std std-ref">mpls_label_t</span></a> <em>label</em>, std::string <em>vrf_name</em><span class="sig-paren">)</span></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1mpls__vrf__label__impl__t_1aa60c80a680a616fc59f96ea628703905"></span><a class="reference internal" href="mpls.html#eossdkclasseos_1_1mpls__label__t"><span class="std std-ref">mpls_label_t</span></a> <code class="descname">label</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dd><p>Getter for ‘label’: the decap label. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1mpls__vrf__label__impl__t_1a4e81ffacd518532bf300b2b2d982703c"></span>std::string <code class="descname">vrf_name</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dd><p>Getter for ‘vrf_name’: the name of the VRF. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1mpls__vrf__label__impl__t_1a13ef466a316896b8859fe860ef54cabc"></span>bool <code class="descname">operator==</code><span class="sig-paren">(</span><a class="reference internal" href="#eossdkclasseos_1_1mpls__vrf__label__impl__t"><span class="std std-ref">mpls_vrf_label_impl_t</span></a> const &amp; <em>other</em><span class="sig-paren">)</span> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1mpls__vrf__label__impl__t_1a6d662efdef46a0b1762e91ee83768413"></span>bool <code class="descname">operator!=</code><span class="sig-paren">(</span><a class="reference internal" href="#eossdkclasseos_1_1mpls__vrf__label__impl__t"><span class="std std-ref">mpls_vrf_label_impl_t</span></a> const &amp; <em>other</em><span class="sig-paren">)</span> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1mpls__vrf__label__impl__t_1a7fb1cb42642cfa20b88d877eb6e17933"></span>bool <code class="descname">operator&lt;</code><span class="sig-paren">(</span><a class="reference internal" href="#eossdkclasseos_1_1mpls__vrf__label__impl__t"><span class="std std-ref">mpls_vrf_label_impl_t</span></a> const &amp; <em>other</em><span class="sig-paren">)</span> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1mpls__vrf__label__impl__t_1ac4e39cbdfaa2ffa1cc5b81aedf3ac321"></span>uint32_t <code class="descname">hash</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dd><p>The hash function for type <a class="reference internal" href="mpls_vrf_label.html#eossdkclasseos_1_1mpls__vrf__label__t"><span class="std std-ref">mpls_vrf_label_t</span></a>. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1mpls__vrf__label__impl__t_1ac9a06d935e9f317f774e73b753dd38cc"></span>void <code class="descname">mix_me</code><span class="sig-paren">(</span><a class="reference internal" href="hash_mix.html#eossdkclasseos_1_1hash__mix"><span class="std std-ref">hash_mix</span></a> &amp; <em>h</em><span class="sig-paren">)</span> const</dt>
+<dd><p>The hash mix function for type <a class="reference internal" href="mpls_vrf_label.html#eossdkclasseos_1_1mpls__vrf__label__t"><span class="std std-ref">mpls_vrf_label_t</span></a>. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1mpls__vrf__label__impl__t_1ab3c22860656220d96141863e11331d89"></span>std::string <code class="descname">to_string</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dd><p>Returns a string representation of the current object’s values. </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Private Members</p>
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1mpls__vrf__label__impl__t_1aa2329be26d14ebf5c5eea5bf70f839f1"></span><a class="reference internal" href="mpls.html#eossdkclasseos_1_1mpls__label__t"><span class="std std-ref">mpls_label_t</span></a> <code class="descname">label_</code></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1mpls__vrf__label__impl__t_1a50088f76a529dd2f9424a3ba00ccaf35"></span>std::string <code class="descname">vrf_name_</code></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Friends</p>
+<dl class="friend">
+<dt>
+<span class="target" id="eossdkclasseos_1_1mpls__vrf__label__impl__t_1a75b54bcc2c00575ed6ae417c22cb8c55"></span>friend std::ostream &amp; <code class="descname">operator&lt;&lt;</code></dt>
+<dd><p>A utility stream operator that adds a string representation of <a class="reference internal" href="mpls_vrf_label.html#eossdkclasseos_1_1mpls__vrf__label__t"><span class="std std-ref">mpls_vrf_label_t</span></a> to the ostream. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#"><strong>mpls_vrf_label_impl</strong></a><ul>
+<li><a class="reference internal" href="#type-definitions-in-mpls-vrf-label-impl">Type definitions in <strong>mpls_vrf_label_impl</strong></a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="mpls_vrf_label.html"
+                        title="previous chapter"><strong>mpls_vrf_label</strong></a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="neighbor_table.html"
+                        title="next chapter"><strong>neighbor_table</strong></a></p>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="neighbor_table.html" title="neighbor_table"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="mpls_vrf_label.html" title="mpls_vrf_label"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Arista EOS SDK 2.22.0 reference</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2014, Arista Networks.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.4.
+    </div>
+  </body>
+</html>

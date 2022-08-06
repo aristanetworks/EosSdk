@@ -1,0 +1,13 @@
+**neighbor_table_impl**
+-----------------------
+
+
+.. doxygenfile:: eos/neighbor_table_impl.h
+   :project: eossdk
+
+Type definitions in **neighbor_table_impl**
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. doxygenfile:: eos/types/neighbor_table_impl.h
+   :project: eossdk
+

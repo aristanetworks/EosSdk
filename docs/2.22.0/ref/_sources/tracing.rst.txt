@@ -1,0 +1,7 @@
+**tracing**
+-----------
+
+
+.. doxygenfile:: eos/tracing.h
+   :project: eossdk
+

@@ -1,0 +1,777 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>bfd_impl &#8212; Arista EOS SDK 2.22.0 reference</title>
+    <link rel="stylesheet" href="_static/eossdk.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/breathe.css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/language_data.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="bgp" href="bgp.html" />
+    <link rel="prev" title="bfd" href="bfd.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="bgp.html" title="bgp"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="bfd.html" title="bfd"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Arista EOS SDK 2.22.0 reference</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="bfd-impl">
+<h1><strong>bfd_impl</strong><a class="headerlink" href="#bfd-impl" title="Permalink to this headline">¶</a></h1>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">doxygenfile: Cannot find file “eos/bfd_impl.h </p>
+</div>
+<div class="section" id="type-definitions-in-bfd-impl">
+<h2>Type definitions in <strong>bfd_impl</strong><a class="headerlink" href="#type-definitions-in-bfd-impl" title="Permalink to this headline">¶</a></h2>
+<dl class="namespace">
+<dt>
+<span class="target" id="eossdknamespaceeos"></span><em>namespace</em> <code class="descname">eos</code></dt>
+<dd><dl class="class">
+<dt>
+<span class="target" id="eossdkclasseos_1_1bfd__session__key__impl__t"></span><em>class</em> <code class="descname">bfd_session_key_impl_t</code></dt>
+<dd><em>#include &lt;bfd_impl.h&gt;</em><p>BFD session key class. Used to identify a BFD session on a switch. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1bfd__session__key__impl__t_1ac9dae0ec7a4e9ccc616ffa254ef13a8f"></span><code class="descname">bfd_session_key_impl_t</code><span class="sig-paren">(</span><span class="sig-paren">)</span></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1bfd__session__key__impl__t_1a6e627f914130c63441ab85a16dbc6ea5"></span><code class="descname">bfd_session_key_impl_t</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#eossdkclasseos_1_1ip__addr__t"><span class="std std-ref">ip_addr_t</span></a> <em>ip_addr</em>, std::string <em>vrf</em>, bfd_session_type_t <em>type</em>, <a class="reference internal" href="intf.html#eossdkclasseos_1_1intf__id__t"><span class="std std-ref">intf_id_t</span></a> <em>intf</em><span class="sig-paren">)</span></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1bfd__session__key__impl__t_1aa5682a5cf29002c29cca8609abf7ff68"></span><code class="descname">bfd_session_key_impl_t</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#eossdkclasseos_1_1ip__addr__t"><span class="std std-ref">ip_addr_t</span></a> <em>ip_addr</em>, std::string <em>vrf</em>, bfd_session_type_t <em>type</em>, <a class="reference internal" href="intf.html#eossdkclasseos_1_1intf__id__t"><span class="std std-ref">intf_id_t</span></a> <em>intf</em>, <a class="reference internal" href="ip.html#eossdkclasseos_1_1ip__addr__t"><span class="std std-ref">ip_addr_t</span></a> <em>src_ip_addr</em><span class="sig-paren">)</span></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1bfd__session__key__impl__t_1a535836d4bc3fbb7e0e15c4e221ab1071"></span><code class="descname">bfd_session_key_impl_t</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#eossdkclasseos_1_1ip__addr__t"><span class="std std-ref">ip_addr_t</span></a> <em>ip_addr</em>, std::string <em>vrf</em>, bfd_session_type_t <em>type</em>, uint64_t <em>tunnel_id</em><span class="sig-paren">)</span></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1bfd__session__key__impl__t_1abc6345f4dc7a61a27152f6c521dcf5f6"></span><code class="descname">bfd_session_key_impl_t</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#eossdkclasseos_1_1ip__addr__t"><span class="std std-ref">ip_addr_t</span></a> <em>ip_addr</em>, std::string <em>vrf</em>, bfd_session_type_t <em>type</em>, <a class="reference internal" href="intf.html#eossdkclasseos_1_1intf__id__t"><span class="std std-ref">intf_id_t</span></a> <em>intf</em>, <a class="reference internal" href="ip.html#eossdkclasseos_1_1ip__addr__t"><span class="std std-ref">ip_addr_t</span></a> <em>src_ip_addr</em>, uint64_t <em>tunnel_id</em><span class="sig-paren">)</span></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1bfd__session__key__impl__t_1a865f7b59186253d5708c67c86c1fa0f7"></span><a class="reference internal" href="ip.html#eossdkclasseos_1_1ip__addr__t"><span class="std std-ref">ip_addr_t</span></a> <code class="descname">ip_addr</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dd><p>Getter for ‘ip_addr’: IP address of the peer. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1bfd__session__key__impl__t_1a27cdf6110e8e3e7a0be01119a23e5787"></span>std::string <code class="descname">vrf</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dd><p>Getter for ‘vrf’: vrf associated with the BFD session. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1bfd__session__key__impl__t_1aff32776fe0d5b966b0aa73562a0c3f06"></span>bfd_session_type_t <code class="descname">type</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dd><p>Getter for ‘type’: type associated with the BFD session. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1bfd__session__key__impl__t_1abfe2abe6cfe5baba7640cf82d8b0dbbe"></span><a class="reference internal" href="intf.html#eossdkclasseos_1_1intf__id__t"><span class="std std-ref">intf_id_t</span></a> <code class="descname">intf</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dd><p>Getter for ‘intf’: local interface associated with the BFD session. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1bfd__session__key__impl__t_1aa53557fa2d5c7b73b9d0b8380f19be88"></span><a class="reference internal" href="ip.html#eossdkclasseos_1_1ip__addr__t"><span class="std std-ref">ip_addr_t</span></a> <code class="descname">src_ip_addr</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dd><p>Getter for ‘src_ip_addr’: Src IP address associated with the BFD session. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1bfd__session__key__impl__t_1a1e3e96a12c2ce13558ef69fce29d16f4"></span>uint64_t <code class="descname">tunnel_id</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dd><p>Getter for ‘tunnel_id’: Tunnel Id associated with the BFD session. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1bfd__session__key__impl__t_1a0d68a9d9f55673be16491553ce825e2e"></span>bool <code class="descname">operator==</code><span class="sig-paren">(</span><a class="reference internal" href="#eossdkclasseos_1_1bfd__session__key__impl__t"><span class="std std-ref">bfd_session_key_impl_t</span></a> const &amp; <em>other</em><span class="sig-paren">)</span> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1bfd__session__key__impl__t_1a186b3bf3622bdeda66d361b19b11d463"></span>bool <code class="descname">operator!=</code><span class="sig-paren">(</span><a class="reference internal" href="#eossdkclasseos_1_1bfd__session__key__impl__t"><span class="std std-ref">bfd_session_key_impl_t</span></a> const &amp; <em>other</em><span class="sig-paren">)</span> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1bfd__session__key__impl__t_1a15e10c9c0dc5df0507831e0a963fe73a"></span>bool <code class="descname">operator&lt;</code><span class="sig-paren">(</span><a class="reference internal" href="#eossdkclasseos_1_1bfd__session__key__impl__t"><span class="std std-ref">bfd_session_key_impl_t</span></a> const &amp; <em>other</em><span class="sig-paren">)</span> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1bfd__session__key__impl__t_1a8d3f08707580e6b94ff15854f8a2a08c"></span>uint32_t <code class="descname">hash</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dd><p>The hash function for type <a class="reference internal" href="bfd.html#eossdkclasseos_1_1bfd__session__key__t"><span class="std std-ref">bfd_session_key_t</span></a>. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1bfd__session__key__impl__t_1a517e846785b4f754f1c804b2b63a3158"></span>void <code class="descname">mix_me</code><span class="sig-paren">(</span><a class="reference internal" href="hash_mix.html#eossdkclasseos_1_1hash__mix"><span class="std std-ref">hash_mix</span></a> &amp; <em>h</em><span class="sig-paren">)</span> const</dt>
+<dd><p>The hash mix function for type <a class="reference internal" href="bfd.html#eossdkclasseos_1_1bfd__session__key__t"><span class="std std-ref">bfd_session_key_t</span></a>. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1bfd__session__key__impl__t_1aa3d13a62143a037964897933846fc414"></span>std::string <code class="descname">to_string</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dd><p>Returns a string representation of the current object’s values. </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Private Members</p>
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1bfd__session__key__impl__t_1a3561c4406babe3d36f4e9291ec86b888"></span><a class="reference internal" href="ip.html#eossdkclasseos_1_1ip__addr__t"><span class="std std-ref">ip_addr_t</span></a> <code class="descname">ip_addr_</code></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1bfd__session__key__impl__t_1a6b24a3cd716b9c92432e362438c9ed52"></span>std::string <code class="descname">vrf_</code></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1bfd__session__key__impl__t_1aef070a718178b9a7871c9db0141f1ca5"></span>bfd_session_type_t <code class="descname">type_</code></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1bfd__session__key__impl__t_1a2601e1fa08fe616adfb5217cdf998a40"></span><a class="reference internal" href="intf.html#eossdkclasseos_1_1intf__id__t"><span class="std std-ref">intf_id_t</span></a> <code class="descname">intf_</code></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1bfd__session__key__impl__t_1a7e0a55bdd833c2da4c5117777e58d151"></span><a class="reference internal" href="ip.html#eossdkclasseos_1_1ip__addr__t"><span class="std std-ref">ip_addr_t</span></a> <code class="descname">src_ip_addr_</code></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1bfd__session__key__impl__t_1ae60d8bf1a2d1b7e8acf0f822091b0404"></span>uint64_t <code class="descname">tunnel_id_</code></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Friends</p>
+<dl class="friend">
+<dt>
+<span class="target" id="eossdkclasseos_1_1bfd__session__key__impl__t_1a5dc113815381eeb4d4d5b3a2f8324897"></span>friend std::ostream &amp; <code class="descname">operator&lt;&lt;</code></dt>
+<dd><p>A utility stream operator that adds a string representation of <a class="reference internal" href="bfd.html#eossdkclasseos_1_1bfd__session__key__t"><span class="std std-ref">bfd_session_key_t</span></a> to the ostream. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="class">
+<dt>
+<span class="target" id="eossdkclasseos_1_1bfd__interval__impl__t"></span><em>class</em> <code class="descname">bfd_interval_impl_t</code></dt>
+<dd><em>#include &lt;bfd_impl.h&gt;</em><p>BFD interval configuration class. Used to specify BFD timer interval. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1bfd__interval__impl__t_1a9b839db448225dc9b751f6fd90934178"></span><code class="descname">bfd_interval_impl_t</code><span class="sig-paren">(</span><span class="sig-paren">)</span></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1bfd__interval__impl__t_1a05aaa95f5c5cd90066d322d410cf6af7"></span><code class="descname">bfd_interval_impl_t</code><span class="sig-paren">(</span>uint16_t <em>tx</em>, uint16_t <em>rx</em>, uint8_t <em>mult</em><span class="sig-paren">)</span></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1bfd__interval__impl__t_1a44b0100f6db3bb435e1faa6b71ab619d"></span>uint16_t <code class="descname">tx</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dd><p>Getter for ‘tx’: desired minimum tx interval. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1bfd__interval__impl__t_1a8a15cb5ab42746abc0079053aeef4667"></span>uint16_t <code class="descname">rx</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dd><p>Getter for ‘rx’: required minimum rx interval. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1bfd__interval__impl__t_1a17aa6e8e6c4802b61fddd8c0d3bd0520"></span>uint8_t <code class="descname">mult</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dd><p>Getter for ‘mult’: detection multiplier. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1bfd__interval__impl__t_1a3e384dd8ccedc1f9b88758187caef177"></span>bool <code class="descname">operator==</code><span class="sig-paren">(</span><a class="reference internal" href="#eossdkclasseos_1_1bfd__interval__impl__t"><span class="std std-ref">bfd_interval_impl_t</span></a> const &amp; <em>other</em><span class="sig-paren">)</span> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1bfd__interval__impl__t_1abf17bc62d329fe428db4913481770573"></span>bool <code class="descname">operator!=</code><span class="sig-paren">(</span><a class="reference internal" href="#eossdkclasseos_1_1bfd__interval__impl__t"><span class="std std-ref">bfd_interval_impl_t</span></a> const &amp; <em>other</em><span class="sig-paren">)</span> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1bfd__interval__impl__t_1a9e7975fd40e891683ea1f47b16d58f74"></span>uint32_t <code class="descname">hash</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dd><p>The hash function for type <a class="reference internal" href="bfd.html#eossdkclasseos_1_1bfd__interval__t"><span class="std std-ref">bfd_interval_t</span></a>. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1bfd__interval__impl__t_1ad12afc3027b94527d1083db4fd0c518a"></span>void <code class="descname">mix_me</code><span class="sig-paren">(</span><a class="reference internal" href="hash_mix.html#eossdkclasseos_1_1hash__mix"><span class="std std-ref">hash_mix</span></a> &amp; <em>h</em><span class="sig-paren">)</span> const</dt>
+<dd><p>The hash mix function for type <a class="reference internal" href="bfd.html#eossdkclasseos_1_1bfd__interval__t"><span class="std std-ref">bfd_interval_t</span></a>. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1bfd__interval__impl__t_1a1dcb729303427c1f8a96a386f666976c"></span>std::string <code class="descname">to_string</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dd><p>Returns a string representation of the current object’s values. </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Private Members</p>
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1bfd__interval__impl__t_1a2361abeca38fcbed889b2411a64bce28"></span>uint16_t <code class="descname">tx_</code></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1bfd__interval__impl__t_1a4c9282f25901ceacf80043faacbb9381"></span>uint16_t <code class="descname">rx_</code></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1bfd__interval__impl__t_1acc52b802bcecb44dee60d026781a3789"></span>uint8_t <code class="descname">mult_</code></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Friends</p>
+<dl class="friend">
+<dt>
+<span class="target" id="eossdkclasseos_1_1bfd__interval__impl__t_1aa0bc4c989c0481ec37427bc4e6b988f6"></span>friend std::ostream &amp; <code class="descname">operator&lt;&lt;</code></dt>
+<dd><p>A utility stream operator that adds a string representation of <a class="reference internal" href="bfd.html#eossdkclasseos_1_1bfd__interval__t"><span class="std std-ref">bfd_interval_t</span></a> to the ostream. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="class">
+<dt>
+<span class="target" id="eossdkclasseos_1_1bfd__session__impl__t"></span><em>class</em> <code class="descname">bfd_session_impl_t</code></dt>
+<dd><em>#include &lt;bfd_impl.h&gt;</em><p>This data structure is used to describe a BFD session. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1bfd__session__impl__t_1a4345c3fd0f202dd05ecb50153d85e57f"></span><code class="descname">bfd_session_impl_t</code><span class="sig-paren">(</span><span class="sig-paren">)</span></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1bfd__session__impl__t_1aa8497198a7b5b96e7c4fa6e9476d5ba7"></span><code class="descname">bfd_session_impl_t</code><span class="sig-paren">(</span><a class="reference internal" href="bfd.html#eossdkclasseos_1_1bfd__session__key__t"><span class="std std-ref">bfd_session_key_t</span></a> <em>peer</em>, bfd_session_status_t <em>status</em><span class="sig-paren">)</span></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1bfd__session__impl__t_1a46e015cfbddec5cf96bfafa293f879aa"></span><a class="reference internal" href="bfd.html#eossdkclasseos_1_1bfd__session__key__t"><span class="std std-ref">bfd_session_key_t</span></a> <code class="descname">peer</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dd><p>Getter for ‘peer’: the peer for this BFD session. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1bfd__session__impl__t_1a15e47e4624d31a9e1232916410b0d619"></span>bfd_session_status_t <code class="descname">status</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dd><p>Getter for ‘status’: the status of the BFD session. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1bfd__session__impl__t_1af594a7ef70028fed8bd18b017a59f937"></span>bool <code class="descname">operator==</code><span class="sig-paren">(</span><a class="reference internal" href="#eossdkclasseos_1_1bfd__session__impl__t"><span class="std std-ref">bfd_session_impl_t</span></a> const &amp; <em>other</em><span class="sig-paren">)</span> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1bfd__session__impl__t_1ac0df1136ca97abdf1f521c018c67bb5f"></span>bool <code class="descname">operator!=</code><span class="sig-paren">(</span><a class="reference internal" href="#eossdkclasseos_1_1bfd__session__impl__t"><span class="std std-ref">bfd_session_impl_t</span></a> const &amp; <em>other</em><span class="sig-paren">)</span> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1bfd__session__impl__t_1ac9481cf75c53f1b8ab8ef6f3dd77356b"></span>bool <code class="descname">operator&lt;</code><span class="sig-paren">(</span><a class="reference internal" href="#eossdkclasseos_1_1bfd__session__impl__t"><span class="std std-ref">bfd_session_impl_t</span></a> const &amp; <em>other</em><span class="sig-paren">)</span> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1bfd__session__impl__t_1a50c13fe645ba4e029db9b88b94e0137b"></span>uint32_t <code class="descname">hash</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dd><p>The hash function for type <a class="reference internal" href="bfd.html#eossdkclasseos_1_1bfd__session__t"><span class="std std-ref">bfd_session_t</span></a>. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1bfd__session__impl__t_1aa1248b9a67f83941c6066ae194dcdc13"></span>void <code class="descname">mix_me</code><span class="sig-paren">(</span><a class="reference internal" href="hash_mix.html#eossdkclasseos_1_1hash__mix"><span class="std std-ref">hash_mix</span></a> &amp; <em>h</em><span class="sig-paren">)</span> const</dt>
+<dd><p>The hash mix function for type <a class="reference internal" href="bfd.html#eossdkclasseos_1_1bfd__session__t"><span class="std std-ref">bfd_session_t</span></a>. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1bfd__session__impl__t_1a8aa7b9e929981e89d4611b9fa146758c"></span>std::string <code class="descname">to_string</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dd><p>Returns a string representation of the current object’s values. </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Private Members</p>
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1bfd__session__impl__t_1aa797afe564f305b0fbef8af16ea4fb4e"></span><a class="reference internal" href="bfd.html#eossdkclasseos_1_1bfd__session__key__t"><span class="std std-ref">bfd_session_key_t</span></a> <code class="descname">peer_</code></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1bfd__session__impl__t_1a075f4d7bbba70481b027fe215c39cf12"></span>bfd_session_status_t <code class="descname">status_</code></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Friends</p>
+<dl class="friend">
+<dt>
+<span class="target" id="eossdkclasseos_1_1bfd__session__impl__t_1a6358069070c241bbdc4e41addbf837ce"></span>friend std::ostream &amp; <code class="descname">operator&lt;&lt;</code></dt>
+<dd><p>A utility stream operator that adds a string representation of <a class="reference internal" href="bfd.html#eossdkclasseos_1_1bfd__session__t"><span class="std std-ref">bfd_session_t</span></a> to the ostream. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="class">
+<dt>
+<span class="target" id="eossdkclasseos_1_1sbfd__echo__session__key__impl__t"></span><em>class</em> <code class="descname">sbfd_echo_session_key_impl_t</code></dt>
+<dd><em>#include &lt;bfd_impl.h&gt;</em><p>sBFD echo session key class. Used to identify a sBFD echo session on a switch. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1sbfd__echo__session__key__impl__t_1aa7d5a8e8a20d65b53a7e998ecabd0096"></span><code class="descname">sbfd_echo_session_key_impl_t</code><span class="sig-paren">(</span><span class="sig-paren">)</span></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1sbfd__echo__session__key__impl__t_1a0efb9997ca1027b7103a0a0038f5d77d"></span><code class="descname">sbfd_echo_session_key_impl_t</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#eossdkclasseos_1_1ip__addr__t"><span class="std std-ref">ip_addr_t</span></a> <em>nexthop</em>, <a class="reference internal" href="intf.html#eossdkclasseos_1_1intf__id__t"><span class="std std-ref">intf_id_t</span></a> <em>nexthop_intf</em>, std::forward_list&lt; <a class="reference internal" href="mpls.html#eossdkclasseos_1_1mpls__label__t"><span class="std std-ref">mpls_label_t</span></a> &gt; const &amp; <em>labels</em>, uint8_t <em>ip_dscp</em>, uint8_t <em>mpls_exp</em><span class="sig-paren">)</span></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1sbfd__echo__session__key__impl__t_1ab571da3b53e2be7dac4a06571f1dfc55"></span><code class="descname">sbfd_echo_session_key_impl_t</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#eossdkclasseos_1_1ip__addr__t"><span class="std std-ref">ip_addr_t</span></a> <em>nexthop</em>, <a class="reference internal" href="intf.html#eossdkclasseos_1_1intf__id__t"><span class="std std-ref">intf_id_t</span></a> <em>nexthop_intf</em>, std::forward_list&lt; <a class="reference internal" href="mpls.html#eossdkclasseos_1_1mpls__label__t"><span class="std std-ref">mpls_label_t</span></a> &gt; const &amp; <em>labels</em><span class="sig-paren">)</span></dt>
+<dd><p>ip_dscp &amp; mpls_exp defaults to CS6 and 6 respectively. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1sbfd__echo__session__key__impl__t_1a682163eec717f86fe966c6bb604d64cc"></span><a class="reference internal" href="ip.html#eossdkclasseos_1_1ip__addr__t"><span class="std std-ref">ip_addr_t</span></a> <code class="descname">nexthop</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dd><p>Getter for ‘nexthop’: nexthop IP address to send the probes to. If the nexthop is an IPv4 address, the probes will be IPv4 packets, if the nexthop is an IPv6 packet, the probes will be IPv6 packets. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1sbfd__echo__session__key__impl__t_1a58ec13476708d692927684752ff0b694"></span><a class="reference internal" href="intf.html#eossdkclasseos_1_1intf__id__t"><span class="std std-ref">intf_id_t</span></a> <code class="descname">nexthop_intf</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dd><p>Getter for ‘nexthop_intf’: local interface to send probes on. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1sbfd__echo__session__key__impl__t_1aee954c436e568da9c5bc33f099309c55"></span>std::forward_list&lt; <a class="reference internal" href="mpls.html#eossdkclasseos_1_1mpls__label__t"><span class="std std-ref">mpls_label_t</span></a> &gt; const &amp; <code class="descname">labels</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dd><p>Getter for ‘labels’: MPLS labels to impose on the probes.</p>
+<p>The first element in iteration order is the outermost label, the last element in iteration order is the innermost label. When using std::forward_list&lt; eos::mpls_label_t &gt;::push_front to build the label stack, the first element pushed will be the innermost label, also known as bottom of stack. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1sbfd__echo__session__key__impl__t_1a586b2103f304ac0f737a5bda313484f9"></span>uint8_t <code class="descname">ip_dscp</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dd><p>Getter for ‘ip_dscp’: IPv4/IPv6 DSCP value of the probe. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1sbfd__echo__session__key__impl__t_1a884ed4edbccf022a2688b75556a7225f"></span>uint8_t <code class="descname">mpls_exp</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dd><p>Getter for ‘mpls_exp’: MPLS exp value of the probe. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1sbfd__echo__session__key__impl__t_1a7bf63f416bca1c0ee7c0f712f2404049"></span>bool <code class="descname">operator==</code><span class="sig-paren">(</span><a class="reference internal" href="#eossdkclasseos_1_1sbfd__echo__session__key__impl__t"><span class="std std-ref">sbfd_echo_session_key_impl_t</span></a> const &amp; <em>other</em><span class="sig-paren">)</span> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1sbfd__echo__session__key__impl__t_1a1b8b36496ca22c38cdf23c8834fb122b"></span>bool <code class="descname">operator!=</code><span class="sig-paren">(</span><a class="reference internal" href="#eossdkclasseos_1_1sbfd__echo__session__key__impl__t"><span class="std std-ref">sbfd_echo_session_key_impl_t</span></a> const &amp; <em>other</em><span class="sig-paren">)</span> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1sbfd__echo__session__key__impl__t_1abe578cf1ae64e9ca82c2dbe6e816a813"></span>bool <code class="descname">operator&lt;</code><span class="sig-paren">(</span><a class="reference internal" href="#eossdkclasseos_1_1sbfd__echo__session__key__impl__t"><span class="std std-ref">sbfd_echo_session_key_impl_t</span></a> const &amp; <em>other</em><span class="sig-paren">)</span> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1sbfd__echo__session__key__impl__t_1ab5fa5cfbad8f8a6c06656de494a49812"></span>uint32_t <code class="descname">hash</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dd><p>The hash function for type <a class="reference internal" href="bfd.html#eossdkclasseos_1_1sbfd__echo__session__key__t"><span class="std std-ref">sbfd_echo_session_key_t</span></a>. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1sbfd__echo__session__key__impl__t_1ae502d30cd74b2913502036af71951268"></span>void <code class="descname">mix_me</code><span class="sig-paren">(</span><a class="reference internal" href="hash_mix.html#eossdkclasseos_1_1hash__mix"><span class="std std-ref">hash_mix</span></a> &amp; <em>h</em><span class="sig-paren">)</span> const</dt>
+<dd><p>The hash mix function for type <a class="reference internal" href="bfd.html#eossdkclasseos_1_1sbfd__echo__session__key__t"><span class="std std-ref">sbfd_echo_session_key_t</span></a>. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1sbfd__echo__session__key__impl__t_1a144ac831caf8315c039c2b4ae49f1ac1"></span>std::string <code class="descname">to_string</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dd><p>Returns a string representation of the current object’s values. </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Private Members</p>
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1sbfd__echo__session__key__impl__t_1a18c712292422144704e28ba40804094d"></span><a class="reference internal" href="ip.html#eossdkclasseos_1_1ip__addr__t"><span class="std std-ref">ip_addr_t</span></a> <code class="descname">nexthop_</code></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1sbfd__echo__session__key__impl__t_1a469d63822660e2ae49539d8c427d1d01"></span><a class="reference internal" href="intf.html#eossdkclasseos_1_1intf__id__t"><span class="std std-ref">intf_id_t</span></a> <code class="descname">nexthop_intf_</code></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1sbfd__echo__session__key__impl__t_1a63dcc5aeb19d22df139d115c507e36f3"></span>std::forward_list&lt; <a class="reference internal" href="mpls.html#eossdkclasseos_1_1mpls__label__t"><span class="std std-ref">mpls_label_t</span></a> &gt; <code class="descname">labels_</code></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1sbfd__echo__session__key__impl__t_1af0e310cb6227501db315fc6003b47288"></span>uint8_t <code class="descname">ip_dscp_</code></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1sbfd__echo__session__key__impl__t_1ab1abcf4c76b8a3a782e97e1206ebc2b5"></span>uint8_t <code class="descname">mpls_exp_</code></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Friends</p>
+<dl class="friend">
+<dt>
+<span class="target" id="eossdkclasseos_1_1sbfd__echo__session__key__impl__t_1a469784ca8cbdc02b5b569dd4280b6996"></span>friend std::ostream &amp; <code class="descname">operator&lt;&lt;</code></dt>
+<dd><p>A utility stream operator that adds a string representation of <a class="reference internal" href="bfd.html#eossdkclasseos_1_1sbfd__echo__session__key__t"><span class="std std-ref">sbfd_echo_session_key_t</span></a> to the ostream. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="class">
+<dt>
+<span class="target" id="eossdkclasseos_1_1sbfd__interval__impl__t"></span><em>class</em> <code class="descname">sbfd_interval_impl_t</code></dt>
+<dd><em>#include &lt;bfd_impl.h&gt;</em><p>sBFD echo interval configuration class. Used to specify sBFD echo timer interval. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1sbfd__interval__impl__t_1a70c9ece99b80ab728e72453e514daa5a"></span><code class="descname">sbfd_interval_impl_t</code><span class="sig-paren">(</span><span class="sig-paren">)</span></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1sbfd__interval__impl__t_1a31ffcf35c4b0e7f7f822c99b05a2b195"></span><code class="descname">sbfd_interval_impl_t</code><span class="sig-paren">(</span>uint16_t <em>tx</em>, uint8_t <em>mult</em><span class="sig-paren">)</span></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1sbfd__interval__impl__t_1a1693997b773fab9ab5d04dfa50bedb5a"></span>uint16_t <code class="descname">tx</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dd><p>Getter for ‘tx’: desired minimum tx interval, in milliseconds. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1sbfd__interval__impl__t_1ab68021ba367d96e77eab7ca878625849"></span>uint8_t <code class="descname">mult</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dd><p>Getter for ‘mult’: detection multiplier. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1sbfd__interval__impl__t_1a9115bdce27d7c28c5f78669f3c834682"></span>bool <code class="descname">operator==</code><span class="sig-paren">(</span><a class="reference internal" href="#eossdkclasseos_1_1sbfd__interval__impl__t"><span class="std std-ref">sbfd_interval_impl_t</span></a> const &amp; <em>other</em><span class="sig-paren">)</span> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1sbfd__interval__impl__t_1a6efe8b3501591ee99ea532375a2f14e8"></span>bool <code class="descname">operator!=</code><span class="sig-paren">(</span><a class="reference internal" href="#eossdkclasseos_1_1sbfd__interval__impl__t"><span class="std std-ref">sbfd_interval_impl_t</span></a> const &amp; <em>other</em><span class="sig-paren">)</span> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1sbfd__interval__impl__t_1a7c5a22676d441fe9b627412c8cf1eda6"></span>uint32_t <code class="descname">hash</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dd><p>The hash function for type <a class="reference internal" href="bfd.html#eossdkclasseos_1_1sbfd__interval__t"><span class="std std-ref">sbfd_interval_t</span></a>. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1sbfd__interval__impl__t_1a4f8ad7cddc8ecaec4f433ce033a771c0"></span>void <code class="descname">mix_me</code><span class="sig-paren">(</span><a class="reference internal" href="hash_mix.html#eossdkclasseos_1_1hash__mix"><span class="std std-ref">hash_mix</span></a> &amp; <em>h</em><span class="sig-paren">)</span> const</dt>
+<dd><p>The hash mix function for type <a class="reference internal" href="bfd.html#eossdkclasseos_1_1sbfd__interval__t"><span class="std std-ref">sbfd_interval_t</span></a>. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1sbfd__interval__impl__t_1a3f8830dbf1e6fb7097317f136ec9a959"></span>std::string <code class="descname">to_string</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dd><p>Returns a string representation of the current object’s values. </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Private Members</p>
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1sbfd__interval__impl__t_1a3d462e27baa2784d51c5e34aa611afe4"></span>uint16_t <code class="descname">tx_</code></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1sbfd__interval__impl__t_1a1d399182c8fd670096b71fad55f24164"></span>uint8_t <code class="descname">mult_</code></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Friends</p>
+<dl class="friend">
+<dt>
+<span class="target" id="eossdkclasseos_1_1sbfd__interval__impl__t_1aae4824c14f37a531a3702b1a57dbbcb5"></span>friend std::ostream &amp; <code class="descname">operator&lt;&lt;</code></dt>
+<dd><p>A utility stream operator that adds a string representation of <a class="reference internal" href="bfd.html#eossdkclasseos_1_1sbfd__interval__t"><span class="std std-ref">sbfd_interval_t</span></a> to the ostream. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="class">
+<dt>
+<span class="target" id="eossdkclasseos_1_1sbfd__echo__session__rtt__stats__impl__t"></span><em>class</em> <code class="descname">sbfd_echo_session_rtt_stats_impl_t</code></dt>
+<dd><em>#include &lt;bfd_impl.h&gt;</em><p>sBFD RTT statistics class. Used to report RTT statistics. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1sbfd__echo__session__rtt__stats__impl__t_1add335c8cbf7a62acabb4e15786c01567"></span><code class="descname">sbfd_echo_session_rtt_stats_impl_t</code><span class="sig-paren">(</span>uint32_t <em>last_rtt</em>, uint32_t <em>min_rtt</em>, uint32_t <em>avg_rtt</em>, uint32_t <em>max_rtt</em>, uint32_t <em>snapshot_min_rtt</em>, uint32_t <em>snapshot_avg_rtt</em>, uint32_t <em>snapshot_max_rtt</em><span class="sig-paren">)</span></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1sbfd__echo__session__rtt__stats__impl__t_1a2e24d8cc6d21df4d28c93fd07a4592c1"></span>uint32_t <code class="descname">last_rtt</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dd><p>Getter for ‘last_rtt’: RTT of the last received probe, in microseconds. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1sbfd__echo__session__rtt__stats__impl__t_1a925ad479350f3eae401101f8c9901807"></span>uint32_t <code class="descname">min_rtt</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dd><p>Getter for ‘min_rtt’: Minimum RTT for lifetime of session, in microseconds. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1sbfd__echo__session__rtt__stats__impl__t_1a56cb3e26394b45fe0325885410d7a161"></span>uint32_t <code class="descname">avg_rtt</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dd><p>Getter for ‘avg_rtt’: Average RTT for lifetime of session, in microseconds. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1sbfd__echo__session__rtt__stats__impl__t_1aa1cfb236f55983bcacb7ecddb2711bfb"></span>uint32_t <code class="descname">max_rtt</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dd><p>Getter for ‘max_rtt’: Maximum RTT for lifetime of session, in microseconds. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1sbfd__echo__session__rtt__stats__impl__t_1a56669a2a204881f850a797af3015826c"></span>uint32_t <code class="descname">snapshot_min_rtt</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dd><p>Getter for ‘snapshot_min_rtt’: Minimum RTT since last RTT report, in microseconds. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1sbfd__echo__session__rtt__stats__impl__t_1af2892213c910f9fd3d9020afb07ae0b4"></span>uint32_t <code class="descname">snapshot_avg_rtt</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dd><p>Getter for ‘snapshot_avg_rtt’: Average RTT since last RTT report, in microseconds. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1sbfd__echo__session__rtt__stats__impl__t_1a8dba8afd4f58a24f8ae6b19d7798ce62"></span>uint32_t <code class="descname">snapshot_max_rtt</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dd><p>Getter for ‘snapshot_max_rtt’: Maximum RTT since last RTT report, in microseconds. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1sbfd__echo__session__rtt__stats__impl__t_1a91ff71734e97624317bc293a67c650d4"></span>bool <code class="descname">operator==</code><span class="sig-paren">(</span><a class="reference internal" href="#eossdkclasseos_1_1sbfd__echo__session__rtt__stats__impl__t"><span class="std std-ref">sbfd_echo_session_rtt_stats_impl_t</span></a> const &amp; <em>other</em><span class="sig-paren">)</span> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1sbfd__echo__session__rtt__stats__impl__t_1a378a538983dba44c11baece6dd854ec9"></span>bool <code class="descname">operator!=</code><span class="sig-paren">(</span><a class="reference internal" href="#eossdkclasseos_1_1sbfd__echo__session__rtt__stats__impl__t"><span class="std std-ref">sbfd_echo_session_rtt_stats_impl_t</span></a> const &amp; <em>other</em><span class="sig-paren">)</span> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1sbfd__echo__session__rtt__stats__impl__t_1a6fc411acfe49742d01305522018e9107"></span>uint32_t <code class="descname">hash</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dd><p>The hash function for type <a class="reference internal" href="bfd.html#eossdkclasseos_1_1sbfd__echo__session__rtt__stats__t"><span class="std std-ref">sbfd_echo_session_rtt_stats_t</span></a>. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1sbfd__echo__session__rtt__stats__impl__t_1aee555fb57c6a6dca0cbaf28e7c4cd22d"></span>void <code class="descname">mix_me</code><span class="sig-paren">(</span><a class="reference internal" href="hash_mix.html#eossdkclasseos_1_1hash__mix"><span class="std std-ref">hash_mix</span></a> &amp; <em>h</em><span class="sig-paren">)</span> const</dt>
+<dd><p>The hash mix function for type <a class="reference internal" href="bfd.html#eossdkclasseos_1_1sbfd__echo__session__rtt__stats__t"><span class="std std-ref">sbfd_echo_session_rtt_stats_t</span></a>. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1sbfd__echo__session__rtt__stats__impl__t_1a263e3a3d6c8cd429fa8e7243e7f75cff"></span>std::string <code class="descname">to_string</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dd><p>Returns a string representation of the current object’s values. </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Private Members</p>
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1sbfd__echo__session__rtt__stats__impl__t_1a9689a253f6717adb4fc63825b52efa1a"></span>uint32_t <code class="descname">last_rtt_</code></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1sbfd__echo__session__rtt__stats__impl__t_1a1c0efe6f16ade28a807ede9aa2cc4522"></span>uint32_t <code class="descname">min_rtt_</code></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1sbfd__echo__session__rtt__stats__impl__t_1aa1f15871c6b906749eae85a899579676"></span>uint32_t <code class="descname">avg_rtt_</code></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1sbfd__echo__session__rtt__stats__impl__t_1aafe551949b5ba8902ca84362c16e0389"></span>uint32_t <code class="descname">max_rtt_</code></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1sbfd__echo__session__rtt__stats__impl__t_1af37fa99c015f43a67fc575f04be2a86b"></span>uint32_t <code class="descname">snapshot_min_rtt_</code></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1sbfd__echo__session__rtt__stats__impl__t_1a7e98913dfbc85b00590679386b94d661"></span>uint32_t <code class="descname">snapshot_avg_rtt_</code></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1sbfd__echo__session__rtt__stats__impl__t_1a56f398749c28da1fbf756b37ee2b3b8f"></span>uint32_t <code class="descname">snapshot_max_rtt_</code></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Friends</p>
+<dl class="friend">
+<dt>
+<span class="target" id="eossdkclasseos_1_1sbfd__echo__session__rtt__stats__impl__t_1acb2d86882816a522132b520da0f5edb8"></span>friend std::ostream &amp; <code class="descname">operator&lt;&lt;</code></dt>
+<dd><p>A utility stream operator that adds a string representation of <a class="reference internal" href="bfd.html#eossdkclasseos_1_1sbfd__echo__session__rtt__stats__t"><span class="std std-ref">sbfd_echo_session_rtt_stats_t</span></a> to the ostream. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#"><strong>bfd_impl</strong></a><ul>
+<li><a class="reference internal" href="#type-definitions-in-bfd-impl">Type definitions in <strong>bfd_impl</strong></a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="bfd.html"
+                        title="previous chapter"><strong>bfd</strong></a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="bgp.html"
+                        title="next chapter"><strong>bgp</strong></a></p>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="bgp.html" title="bgp"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="bfd.html" title="bfd"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Arista EOS SDK 2.22.0 reference</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2014, Arista Networks.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.4.
+    </div>
+  </body>
+</html>

@@ -1,0 +1,178 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>xcvr &#8212; Arista EOS SDK 2.22.0 reference</title>
+    <link rel="stylesheet" href="_static/eossdk.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/breathe.css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/language_data.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="prev" title="vrf_impl" href="vrf_impl.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="vrf_impl.html" title="vrf_impl"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Arista EOS SDK 2.22.0 reference</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="xcvr">
+<h1><strong>xcvr</strong><a class="headerlink" href="#xcvr" title="Permalink to this headline">¶</a></h1>
+<p>Xcvr management module.</p>
+<p>This module provide APIs to set and get transceiver transmit and receive laser frequencies. </p>
+<dl class="namespace">
+<dt>
+<span class="target" id="eossdknamespaceeos"></span><em>namespace</em> <code class="descname">eos</code></dt>
+<dd><dl class="class">
+<dt>
+<span class="target" id="eossdkclasseos_1_1xcvr__mgr"></span><em>class</em> <code class="descname">xcvr_mgr</code></dt>
+<dd><em>#include &lt;xcvr.h&gt;</em><p>The xcvr manager. This class configures a transceiver for an interface. If this is a multilane interface, the configuration must be specified for the first lane (eg, Ethernet1/1). </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1xcvr__mgr_1a6996eb15e02b602710578f958b5d0235"></span>virtual <code class="descname">~xcvr_mgr</code><span class="sig-paren">(</span><span class="sig-paren">)</span></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1xcvr__mgr_1a1737060a638614e37fff14aa6b9cdad9"></span>virtual void <code class="descname">frequency_is</code><span class="sig-paren">(</span><a class="reference internal" href="intf.html#eossdkclasseos_1_1intf__id__t"><span class="std std-ref">intf_id_t</span></a> <em>intf_id</em>, uint32_t <em>tx</em>, uint32_t <em>rx</em><span class="sig-paren">)</span> = 0</dt>
+<dd><p>Configures both transmit and receive laser frequencies. For modules which support concurrent tuning, using this call will cause the module to tune rx and tx lasers concurrently. The frequency is specified in GHz.</p>
+<p>For modules which do not support concurrent tuning, the rx tuning is done first, then the tx. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1xcvr__mgr_1afd4575b8f888dccdb481f73adf49d0ad"></span>virtual void <code class="descname">rx_fine_frequency_is</code><span class="sig-paren">(</span><a class="reference internal" href="intf.html#eossdkclasseos_1_1intf__id__t"><span class="std std-ref">intf_id_t</span></a> <em>intf_id</em>, float <em>freq</em><span class="sig-paren">)</span> = 0</dt>
+<dd><p>Configures the receive laser fine frequency. The frequency is specified in GHz. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1xcvr__mgr_1ab0b35fe45da43e25df892a7664663893"></span>virtual void <code class="descname">rx_frequency_is</code><span class="sig-paren">(</span><a class="reference internal" href="intf.html#eossdkclasseos_1_1intf__id__t"><span class="std std-ref">intf_id_t</span></a> <em>intf_id</em>, uint32_t <em>freq</em><span class="sig-paren">)</span> = 0</dt>
+<dd><p>Configures the receive laser frequency. The frequency is specified in GHz. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1xcvr__mgr_1a28cf580a9ca512badddb6b63be666441"></span>virtual void <code class="descname">tx_frequency_is</code><span class="sig-paren">(</span><a class="reference internal" href="intf.html#eossdkclasseos_1_1intf__id__t"><span class="std std-ref">intf_id_t</span></a> <em>intf_id</em>, uint32_t <em>freq</em><span class="sig-paren">)</span> = 0</dt>
+<dd><p>Configures the transmit laser frequency. The frequency is specified in GHz. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1xcvr__mgr_1a9ab2d85b0a11354e89a24f8fe580dd2c"></span>virtual void <code class="descname">tx_disabled_is</code><span class="sig-paren">(</span><a class="reference internal" href="intf.html#eossdkclasseos_1_1intf__id__t"><span class="std std-ref">intf_id_t</span></a> <em>intf_id</em>, bool <em>disable</em><span class="sig-paren">)</span> = 0</dt>
+<dd><p>Configures the transmit laser disable. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1xcvr__mgr_1a9fdaf30a957649da599edfbbc6f2d7cd"></span>virtual float <code class="descname">rx_fine_frequency</code><span class="sig-paren">(</span><a class="reference internal" href="intf.html#eossdkclasseos_1_1intf__id__t"><span class="std std-ref">intf_id_t</span></a> <em>intf_id</em><span class="sig-paren">)</span> const = 0</dt>
+<dd><p>Returns the currently active receive laser fine frequency. The frequency is in GHz. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1xcvr__mgr_1a8b20428999d94de4d6b4ebe8ee65f823"></span>virtual uint32_t <code class="descname">rx_frequency</code><span class="sig-paren">(</span><a class="reference internal" href="intf.html#eossdkclasseos_1_1intf__id__t"><span class="std std-ref">intf_id_t</span></a> <em>intf_id</em><span class="sig-paren">)</span> const = 0</dt>
+<dd><p>Returns the currently active receive laser frequency. The frequency is in GHz. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1xcvr__mgr_1a3ba6dbbd35c9b6b442821a2caf91daea"></span>virtual uint32_t <code class="descname">tx_frequency</code><span class="sig-paren">(</span><a class="reference internal" href="intf.html#eossdkclasseos_1_1intf__id__t"><span class="std std-ref">intf_id_t</span></a> <em>intf_id</em><span class="sig-paren">)</span> const = 0</dt>
+<dd><p>Returns the currently active transmit laser frequency. The frequency is in GHz. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1xcvr__mgr_1a77d0b6ad23cf28130af9f47fdcf062c4"></span>virtual bool <code class="descname">tx_disabled</code><span class="sig-paren">(</span><a class="reference internal" href="intf.html#eossdkclasseos_1_1intf__id__t"><span class="std std-ref">intf_id_t</span></a> <em>intf_id</em><span class="sig-paren">)</span> const = 0</dt>
+<dd><p>Returns the transmit laser disable. </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Protected Functions</p>
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1xcvr__mgr_1a1277782eaadf71de3de234408f5c026d"></span><code class="descname">xcvr_mgr</code><span class="sig-paren">(</span><span class="sig-paren">)</span></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Private Members</p>
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1xcvr__mgr_1a9b7b412d921499effa3a6249cc93c56a"></span><code class="descname">xcvr_mgr</code></dt>
+<dd></dd></dl>
+
+</div>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="vrf_impl.html"
+                        title="previous chapter"><strong>vrf_impl</strong></a></p>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="vrf_impl.html" title="vrf_impl"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Arista EOS SDK 2.22.0 reference</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2014, Arista Networks.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.4.
+    </div>
+  </body>
+</html>

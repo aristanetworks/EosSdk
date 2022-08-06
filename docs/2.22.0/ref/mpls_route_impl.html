@@ -1,0 +1,637 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>mpls_route_impl &#8212; Arista EOS SDK 2.22.0 reference</title>
+    <link rel="stylesheet" href="_static/eossdk.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/breathe.css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/language_data.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="mpls_vrf_label" href="mpls_vrf_label.html" />
+    <link rel="prev" title="mpls_route" href="mpls_route.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="mpls_vrf_label.html" title="mpls_vrf_label"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="mpls_route.html" title="mpls_route"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Arista EOS SDK 2.22.0 reference</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="mpls-route-impl">
+<h1><strong>mpls_route_impl</strong><a class="headerlink" href="#mpls-route-impl" title="Permalink to this headline">¶</a></h1>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">doxygenfile: Cannot find file “eos/mpls_route_impl.h </p>
+</div>
+<div class="section" id="type-definitions-in-mpls-route-impl">
+<h2>Type definitions in <strong>mpls_route_impl</strong><a class="headerlink" href="#type-definitions-in-mpls-route-impl" title="Permalink to this headline">¶</a></h2>
+<dl class="namespace">
+<dt>
+<span class="target" id="eossdknamespaceeos"></span><em>namespace</em> <code class="descname">eos</code></dt>
+<dd><dl class="class">
+<dt>
+<span class="target" id="eossdkclasseos_1_1mpls__route__key__impl__t"></span><em>class</em> <code class="descname">mpls_route_key_impl_t</code></dt>
+<dd><em>#include &lt;mpls_route_impl.h&gt;</em><p>An MPLS route key is used for MPLS RIB configuration. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1mpls__route__key__impl__t_1acf4d281e43396b9683559a4ebd1a5c17"></span><code class="descname">mpls_route_key_impl_t</code><span class="sig-paren">(</span><span class="sig-paren">)</span></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1mpls__route__key__impl__t_1a40573807d8b47162091ece14a4e6bdc5"></span><code class="descname">mpls_route_key_impl_t</code><span class="sig-paren">(</span><a class="reference internal" href="mpls.html#eossdkclasseos_1_1mpls__label__t"><span class="std std-ref">mpls_label_t</span></a> <em>top_label</em>, mpls_route_metric_t <em>metric</em><span class="sig-paren">)</span></dt>
+<dd><p>Constructor taking an ingress MPLS route label and a metric. <dl class="docutils">
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><code class="first docutils literal notranslate"><a class="reference internal" href="mpls.html#eossdkclasseos_1_1mpls__label__t"><span class="std std-ref"><span class="pre">mpls_label_t</span></span></a></code> - <p>The MPLS label to match on ingress for this route. </p>
+</li>
+<li><code class="first docutils literal notranslate"><span class="pre">mpls_route_metric_t</span></code> - <p>A metric value between 0 and 255. If it is set to 0, the routing agent will assume a default metric value of 100. </p>
+</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1mpls__route__key__impl__t_1a590c737f5c6a88a7102ae76272173827"></span><code class="descname">mpls_route_key_impl_t</code><span class="sig-paren">(</span>std::vector&lt; <a class="reference internal" href="mpls.html#eossdkclasseos_1_1mpls__label__t"><span class="std std-ref">mpls_label_t</span></a> &gt; const &amp; <em>labels</em>, mpls_route_metric_t <em>metric</em><span class="sig-paren">)</span></dt>
+<dd><p>Constructor taking a list of ingress MPLS route labels and a metric. <dl class="docutils">
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last">
+<li><code class="first docutils literal notranslate"><span class="pre">const</span></code> - <p>std::vector&lt;mpls_label_t&gt; The MPLS labels to match on ingress for this route. </p>
+</li>
+<li><code class="first docutils literal notranslate"><span class="pre">mpls_route_metric_t</span></code> - <p>A metric value between 0 and 255. If it is set to 0, the routing agent will assume a default metric value of 100. </p>
+</li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1mpls__route__key__impl__t_1ab4dae6a605ca70f0cd469f81f4c92ddb"></span>std::vector&lt; <a class="reference internal" href="mpls.html#eossdkclasseos_1_1mpls__label__t"><span class="std std-ref">mpls_label_t</span></a> &gt; const &amp; <code class="descname">labels</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dd><p>Getter for ‘labels’: a list of labels ( [ TOP, …, BOT ] ) to match on ingress route lookup. 0 is the null metric; valid MPLS routes must have a metric in range 1..255. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1mpls__route__key__impl__t_1a4979eddbfa7135f8236293d95e24b7e0"></span>void <code class="descname">labels_is</code><span class="sig-paren">(</span>std::vector&lt; <a class="reference internal" href="mpls.html#eossdkclasseos_1_1mpls__label__t"><span class="std std-ref">mpls_label_t</span></a> &gt; const &amp; <em>labels</em><span class="sig-paren">)</span></dt>
+<dd><p>Setter for ‘labels’. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1mpls__route__key__impl__t_1a63d4e0f116a62867718a1a3ad30419a5"></span>void <code class="descname">label_set</code><span class="sig-paren">(</span>uint32_t <em>index</em>, <a class="reference internal" href="mpls.html#eossdkclasseos_1_1mpls__label__t"><span class="std std-ref">mpls_label_t</span></a> const &amp; <em>value</em><span class="sig-paren">)</span></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1mpls__route__key__impl__t_1a3f6f2bb45ff31f5b15c39ec8ace28ca9"></span>void <code class="descname">label_del</code><span class="sig-paren">(</span>uint32_t <em>index</em><span class="sig-paren">)</span></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1mpls__route__key__impl__t_1a1e66a879f7609b386520af39d9a5c080"></span>mpls_route_metric_t <code class="descname">metric</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dd><p>Getter for ‘metric’: the MPLS route metric. Lower metric routes are preferred. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1mpls__route__key__impl__t_1a0175b124282faf6d09a4cbdc1fd15ee3"></span>void <code class="descname">metric_is</code><span class="sig-paren">(</span>mpls_route_metric_t <em>metric</em><span class="sig-paren">)</span></dt>
+<dd><p>Setter for ‘metric’. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1mpls__route__key__impl__t_1a9502ff7eb4dbf730273b52cfe5d9c337"></span><a class="reference internal" href="mpls.html#eossdkclasseos_1_1mpls__label__t"><span class="std std-ref">mpls_label_t</span></a> <code class="descname">top_label</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dd><p>Getter for the label to match on ingress route lookup. This API exists for legacy reasons, from when only one label could be matched. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1mpls__route__key__impl__t_1a69ce85b0c5879eb017064040856f5fe9"></span>void <code class="descname">top_label_is</code><span class="sig-paren">(</span><a class="reference internal" href="mpls.html#eossdkclasseos_1_1mpls__label__t"><span class="std std-ref">mpls_label_t</span></a> <em>top_label</em><span class="sig-paren">)</span></dt>
+<dd><p>Replaces the label stack with a new vector only containing the given top_label. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1mpls__route__key__impl__t_1a9c5c88978cecc2d8e3590bccc1b226eb"></span>bool <code class="descname">operator==</code><span class="sig-paren">(</span><a class="reference internal" href="#eossdkclasseos_1_1mpls__route__key__impl__t"><span class="std std-ref">mpls_route_key_impl_t</span></a> const &amp; <em>other</em><span class="sig-paren">)</span> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1mpls__route__key__impl__t_1ad57365bbb5ca05450da4a3fe666fa6b1"></span>bool <code class="descname">operator!=</code><span class="sig-paren">(</span><a class="reference internal" href="#eossdkclasseos_1_1mpls__route__key__impl__t"><span class="std std-ref">mpls_route_key_impl_t</span></a> const &amp; <em>other</em><span class="sig-paren">)</span> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1mpls__route__key__impl__t_1a3fcfb73e4eb5158bcd9b0fb64175ea53"></span>bool <code class="descname">operator&lt;</code><span class="sig-paren">(</span><a class="reference internal" href="#eossdkclasseos_1_1mpls__route__key__impl__t"><span class="std std-ref">mpls_route_key_impl_t</span></a> const &amp; <em>other</em><span class="sig-paren">)</span> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1mpls__route__key__impl__t_1a5af3d6ee59b0cb472191d2854a45f068"></span>uint32_t <code class="descname">hash</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dd><p>The hash function for type <a class="reference internal" href="mpls_route.html#eossdkclasseos_1_1mpls__route__key__t"><span class="std std-ref">mpls_route_key_t</span></a>. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1mpls__route__key__impl__t_1a6e736f4396d7002276a459c38cf33e86"></span>void <code class="descname">mix_me</code><span class="sig-paren">(</span><a class="reference internal" href="hash_mix.html#eossdkclasseos_1_1hash__mix"><span class="std std-ref">hash_mix</span></a> &amp; <em>h</em><span class="sig-paren">)</span> const</dt>
+<dd><p>The hash mix function for type <a class="reference internal" href="mpls_route.html#eossdkclasseos_1_1mpls__route__key__t"><span class="std std-ref">mpls_route_key_t</span></a>. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1mpls__route__key__impl__t_1a45276ef7812e8c9762f7f95a37ba34a1"></span>std::string <code class="descname">to_string</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dd><p>Returns a string representation of the current object’s values. </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Private Members</p>
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1mpls__route__key__impl__t_1a45aeb8622d7664392bd18b2de6f4e8fc"></span>std::vector&lt; <a class="reference internal" href="mpls.html#eossdkclasseos_1_1mpls__label__t"><span class="std std-ref">mpls_label_t</span></a> &gt; <code class="descname">labels_</code></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1mpls__route__key__impl__t_1abee953525aa2baf06e918206ec5d38f3"></span>mpls_route_metric_t <code class="descname">metric_</code></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Friends</p>
+<dl class="friend">
+<dt>
+<span class="target" id="eossdkclasseos_1_1mpls__route__key__impl__t_1ab78df2b6e9129e4d0c37ee22bd08d637"></span>friend std::ostream &amp; <code class="descname">operator&lt;&lt;</code></dt>
+<dd><p>A utility stream operator that adds a string representation of <a class="reference internal" href="mpls_route.html#eossdkclasseos_1_1mpls__route__key__t"><span class="std std-ref">mpls_route_key_t</span></a> to the ostream. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="class">
+<dt>
+<span class="target" id="eossdkclasseos_1_1mpls__route__impl__t"></span><em>class</em> <code class="descname">mpls_route_impl_t</code></dt>
+<dd><em>#include &lt;mpls_route_impl.h&gt;</em><p>An MPLS v4/v6 static route. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1mpls__route__impl__t_1a27edae4cead6b78ef06e8194e0b61d2c"></span><code class="descname">mpls_route_impl_t</code><span class="sig-paren">(</span><span class="sig-paren">)</span></dt>
+<dd><p>Default value constructor. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1mpls__route__impl__t_1afe36a033fa26e31130947855f8c14a24"></span><code class="descname">mpls_route_impl_t</code><span class="sig-paren">(</span><a class="reference internal" href="mpls_route.html#eossdkclasseos_1_1mpls__route__key__t"><span class="std std-ref">mpls_route_key_t</span></a> <em>key</em><span class="sig-paren">)</span></dt>
+<dd><p>MPLS route constructor taking an MPLS route key. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1mpls__route__impl__t_1a39b72d251685bd8582a5a74ae41b3f38"></span><a class="reference internal" href="mpls_route.html#eossdkclasseos_1_1mpls__route__key__t"><span class="std std-ref">mpls_route_key_t</span></a> <code class="descname">key</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dd><p>Getter for ‘key’: the MPLS route key. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1mpls__route__impl__t_1aa70016c42aae758aeb2c8dc113aab0f5"></span>void <code class="descname">key_is</code><span class="sig-paren">(</span><a class="reference internal" href="mpls_route.html#eossdkclasseos_1_1mpls__route__key__t"><span class="std std-ref">mpls_route_key_t</span></a> <em>key</em><span class="sig-paren">)</span></dt>
+<dd><p>Setter for ‘key’. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1mpls__route__impl__t_1a90c7d1fa7d705ce4f982ffc362c48b46"></span>bool <code class="descname">operator==</code><span class="sig-paren">(</span><a class="reference internal" href="#eossdkclasseos_1_1mpls__route__impl__t"><span class="std std-ref">mpls_route_impl_t</span></a> const &amp; <em>other</em><span class="sig-paren">)</span> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1mpls__route__impl__t_1a649f66c8fe464333c53fb059ad25cb68"></span>bool <code class="descname">operator!=</code><span class="sig-paren">(</span><a class="reference internal" href="#eossdkclasseos_1_1mpls__route__impl__t"><span class="std std-ref">mpls_route_impl_t</span></a> const &amp; <em>other</em><span class="sig-paren">)</span> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1mpls__route__impl__t_1ae85e86d6399021cf480c00a090153cc4"></span>uint32_t <code class="descname">hash</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dd><p>The hash function for type <a class="reference internal" href="mpls_route.html#eossdkclasseos_1_1mpls__route__t"><span class="std std-ref">mpls_route_t</span></a>. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1mpls__route__impl__t_1a414d6adc3a6da4f4e77d4630f1b4e5e0"></span>void <code class="descname">mix_me</code><span class="sig-paren">(</span><a class="reference internal" href="hash_mix.html#eossdkclasseos_1_1hash__mix"><span class="std std-ref">hash_mix</span></a> &amp; <em>h</em><span class="sig-paren">)</span> const</dt>
+<dd><p>The hash mix function for type <a class="reference internal" href="mpls_route.html#eossdkclasseos_1_1mpls__route__t"><span class="std std-ref">mpls_route_t</span></a>. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1mpls__route__impl__t_1a3291b63863261ef954fea01870ba54b6"></span>std::string <code class="descname">to_string</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dd><p>Returns a string representation of the current object’s values. </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Private Members</p>
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1mpls__route__impl__t_1a26a2be0550550a3fb873fa49ebb58b92"></span><a class="reference internal" href="mpls_route.html#eossdkclasseos_1_1mpls__route__key__t"><span class="std std-ref">mpls_route_key_t</span></a> <code class="descname">key_</code></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Friends</p>
+<dl class="friend">
+<dt>
+<span class="target" id="eossdkclasseos_1_1mpls__route__impl__t_1a02c404f565c00e6ecc568006de948b2a"></span>friend std::ostream &amp; <code class="descname">operator&lt;&lt;</code></dt>
+<dd><p>A utility stream operator that adds a string representation of <a class="reference internal" href="mpls_route.html#eossdkclasseos_1_1mpls__route__t"><span class="std std-ref">mpls_route_t</span></a> to the ostream. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="class">
+<dt>
+<span class="target" id="eossdkclasseos_1_1mpls__route__via__impl__t"></span><em>class</em> <code class="descname">mpls_route_via_impl_t</code></dt>
+<dd><em>#include &lt;mpls_route_impl.h&gt;</em><p>An MPLS route via, defining the action to take for a given MPLS route. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1mpls__route__via__impl__t_1a4dba28f3936371291241d91d4cb901d3"></span><code class="descname">mpls_route_via_impl_t</code><span class="sig-paren">(</span><span class="sig-paren">)</span></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1mpls__route__via__impl__t_1a4ddc1d2c6ecb3eb6f38db50af55643a7"></span><code class="descname">mpls_route_via_impl_t</code><span class="sig-paren">(</span><a class="reference internal" href="mpls_route.html#eossdkclasseos_1_1mpls__route__key__t"><span class="std std-ref">mpls_route_key_t</span></a> <em>route_key</em><span class="sig-paren">)</span></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1mpls__route__via__impl__t_1a2a975eaab88e1cfd0e0510d473e95351"></span><code class="descname">mpls_route_via_impl_t</code><span class="sig-paren">(</span><a class="reference internal" href="mpls_route.html#eossdkclasseos_1_1mpls__route__key__t"><span class="std std-ref">mpls_route_key_t</span></a> <em>route_key</em>, mpls_action_t <em>label_action</em><span class="sig-paren">)</span></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1mpls__route__via__impl__t_1aad71cb8ebba07ba1792eb9a7aed99ca7"></span><a class="reference internal" href="mpls_route.html#eossdkclasseos_1_1mpls__route__key__t"><span class="std std-ref">mpls_route_key_t</span></a> <code class="descname">route_key</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1mpls__route__via__impl__t_1ae6a7afba4236bba0004fa224a2240d3d"></span>void <code class="descname">route_key_is</code><span class="sig-paren">(</span><a class="reference internal" href="mpls_route.html#eossdkclasseos_1_1mpls__route__key__t"><span class="std std-ref">mpls_route_key_t</span></a> <em>route_key</em><span class="sig-paren">)</span></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1mpls__route__via__impl__t_1abb90cb22ed85418007e337f444c7248a"></span><a class="reference internal" href="ip.html#eossdkclasseos_1_1ip__addr__t"><span class="std std-ref">ip_addr_t</span></a> <code class="descname">hop</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dd><p>Getter for ‘hop’: IP v4/v6 nexthop address (for decap and IP forward). </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1mpls__route__via__impl__t_1ae483ec1ef6507ce75edac5731dc13961"></span>void <code class="descname">hop_is</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#eossdkclasseos_1_1ip__addr__t"><span class="std std-ref">ip_addr_t</span></a> const &amp; <em>hop</em><span class="sig-paren">)</span></dt>
+<dd><p>Setter for ‘hop’. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1mpls__route__via__impl__t_1a54ae9cc651ceb99e55cbbc4b7e29472c"></span><a class="reference internal" href="intf.html#eossdkclasseos_1_1intf__id__t"><span class="std std-ref">intf_id_t</span></a> <code class="descname">intf</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dd><p>Getter for ‘intf’: sets the nexthop interface. Use the named interface if not a default <a class="reference internal" href="intf.html#eossdkclasseos_1_1intf__id__t"><span class="std std-ref">intf_id_t</span></a>. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1mpls__route__via__impl__t_1a138abec43a28add29e98ff3974cd0137"></span>void <code class="descname">intf_is</code><span class="sig-paren">(</span><a class="reference internal" href="intf.html#eossdkclasseos_1_1intf__id__t"><span class="std std-ref">intf_id_t</span></a> const &amp; <em>intf</em><span class="sig-paren">)</span></dt>
+<dd><p>Setter for ‘intf’. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1mpls__route__via__impl__t_1af9290e8f9b9b6c2f3a21b5d9b21b8ba4"></span><a class="reference internal" href="mpls.html#eossdkclasseos_1_1mpls__label__t"><span class="std std-ref">mpls_label_t</span></a> <code class="descname">pushswap_label</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dd><p>Getter for ‘pushswap_label’: push or swap this label. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1mpls__route__via__impl__t_1a7301ad249965da040d1563fdc5eb69a0"></span>void <code class="descname">pushswap_label_is</code><span class="sig-paren">(</span><a class="reference internal" href="mpls.html#eossdkclasseos_1_1mpls__label__t"><span class="std std-ref">mpls_label_t</span></a> <em>pushswap_label</em><span class="sig-paren">)</span></dt>
+<dd><p>Setter for ‘pushswap_label’. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1mpls__route__via__impl__t_1a76f29742c8b7631486eb11a75536bc1a"></span>mpls_action_t <code class="descname">label_action</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dd><p>Getter for ‘label_action’: perform this MPLS operation. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1mpls__route__via__impl__t_1ab35db22ec5c24f04ec257c7b33564c93"></span>void <code class="descname">label_action_is</code><span class="sig-paren">(</span>mpls_action_t <em>label_action</em><span class="sig-paren">)</span></dt>
+<dd><p>Setter for ‘label_action’. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1mpls__route__via__impl__t_1a3a5bb5fed3f030c0a043f8f405967f6c"></span>mpls_ttl_mode_t <code class="descname">ttl_mode</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dd><p>Getter for ‘ttl_mode’: applies to push and pop. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1mpls__route__via__impl__t_1a91ae1dfd8d69f5a454dbcee311b11db5"></span>void <code class="descname">ttl_mode_is</code><span class="sig-paren">(</span>mpls_ttl_mode_t <em>ttl_mode</em><span class="sig-paren">)</span></dt>
+<dd><p>Setter for ‘ttl_mode’. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1mpls__route__via__impl__t_1a4399fc0dde8526a3b3cddb73e94695a8"></span>mpls_payload_type_t <code class="descname">payload_type</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dd><p>Getter for ‘payload_type’: used to assign ethertype after final pop. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1mpls__route__via__impl__t_1a9e101e2c27c1eb1b017aa65f2cea835e"></span>void <code class="descname">payload_type_is</code><span class="sig-paren">(</span>mpls_payload_type_t <em>payload_type</em><span class="sig-paren">)</span></dt>
+<dd><p>Setter for ‘payload_type’. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1mpls__route__via__impl__t_1afed3cab4f7b192ad61be2b42d25d3ef6"></span>bool <code class="descname">skip_egress_acl</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dd><p>Getter for ‘skip_egress_acl’: set if matching packets should ignore the egress ACL. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1mpls__route__via__impl__t_1ac653e83aa0ce87a7529b644c9278469f"></span>void <code class="descname">skip_egress_acl_is</code><span class="sig-paren">(</span>bool <em>skip_egress_acl</em><span class="sig-paren">)</span></dt>
+<dd><p>Setter for ‘skip_egress_acl’. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1mpls__route__via__impl__t_1a40cde07d012e28e83a94a07726346041"></span>std::string <code class="descname">nexthop_group</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dd><p>Getter for ‘nexthop_group’: set when packets are forwarded into a nexthop- group. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1mpls__route__via__impl__t_1a7cea382603371baf5cb558eacadda9dd"></span>void <code class="descname">nexthop_group_is</code><span class="sig-paren">(</span>std::string <em>nexthop_group</em><span class="sig-paren">)</span></dt>
+<dd><p>Setter for ‘nexthop_group’. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1mpls__route__via__impl__t_1a711eb94cf219055b3dea8808abcbea89"></span>bool <code class="descname">operator==</code><span class="sig-paren">(</span><a class="reference internal" href="#eossdkclasseos_1_1mpls__route__via__impl__t"><span class="std std-ref">mpls_route_via_impl_t</span></a> const &amp; <em>other</em><span class="sig-paren">)</span> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1mpls__route__via__impl__t_1a59d4f4f93a4015c975b7efcba5f16928"></span>bool <code class="descname">operator!=</code><span class="sig-paren">(</span><a class="reference internal" href="#eossdkclasseos_1_1mpls__route__via__impl__t"><span class="std std-ref">mpls_route_via_impl_t</span></a> const &amp; <em>other</em><span class="sig-paren">)</span> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1mpls__route__via__impl__t_1a8a74e19e560138e78df153c00965deff"></span>uint32_t <code class="descname">hash</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dd><p>The hash function for type <a class="reference internal" href="mpls_route.html#eossdkclasseos_1_1mpls__route__via__t"><span class="std std-ref">mpls_route_via_t</span></a>. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1mpls__route__via__impl__t_1a943815717d4885cd48f60460059680bc"></span>void <code class="descname">mix_me</code><span class="sig-paren">(</span><a class="reference internal" href="hash_mix.html#eossdkclasseos_1_1hash__mix"><span class="std std-ref">hash_mix</span></a> &amp; <em>h</em><span class="sig-paren">)</span> const</dt>
+<dd><p>The hash mix function for type <a class="reference internal" href="mpls_route.html#eossdkclasseos_1_1mpls__route__via__t"><span class="std std-ref">mpls_route_via_t</span></a>. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1mpls__route__via__impl__t_1a2cec8916567ef4510d3359190347ab1d"></span>std::string <code class="descname">to_string</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dd><p>Returns a string representation of the current object’s values. </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Private Members</p>
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1mpls__route__via__impl__t_1a47471330a7a90547caa146eee7be55fa"></span><a class="reference internal" href="mpls_route.html#eossdkclasseos_1_1mpls__route__key__t"><span class="std std-ref">mpls_route_key_t</span></a> <code class="descname">route_key_</code></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1mpls__route__via__impl__t_1a49f7d5631e419e9acfaa5c04ab1bfe1e"></span><a class="reference internal" href="ip.html#eossdkclasseos_1_1ip__addr__t"><span class="std std-ref">ip_addr_t</span></a> <code class="descname">hop_</code></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1mpls__route__via__impl__t_1a384b94be20b1db02b4fbe7c335a98655"></span><a class="reference internal" href="intf.html#eossdkclasseos_1_1intf__id__t"><span class="std std-ref">intf_id_t</span></a> <code class="descname">intf_</code></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1mpls__route__via__impl__t_1a898f94d9c70c91a17091479c8fdb8082"></span><a class="reference internal" href="mpls.html#eossdkclasseos_1_1mpls__label__t"><span class="std std-ref">mpls_label_t</span></a> <code class="descname">pushswap_label_</code></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1mpls__route__via__impl__t_1a1e52a5ff329470bb37b8d5aeac2000fd"></span>mpls_action_t <code class="descname">label_action_</code></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1mpls__route__via__impl__t_1a2234e4fca4adb0d363ece908d589161a"></span>mpls_ttl_mode_t <code class="descname">ttl_mode_</code></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1mpls__route__via__impl__t_1acb74d088c737048a6fefd5834d884841"></span>mpls_payload_type_t <code class="descname">payload_type_</code></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1mpls__route__via__impl__t_1acd2d3ba721a83925002d5bc68b1a3be7"></span>bool <code class="descname">skip_egress_acl_</code></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1mpls__route__via__impl__t_1ab48bece929a4d0a580b497b697d54de8"></span>std::string <code class="descname">nexthop_group_</code></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Friends</p>
+<dl class="friend">
+<dt>
+<span class="target" id="eossdkclasseos_1_1mpls__route__via__impl__t_1ab6775b6fba4675bf2947c98202203a26"></span>friend std::ostream &amp; <code class="descname">operator&lt;&lt;</code></dt>
+<dd><p>A utility stream operator that adds a string representation of <a class="reference internal" href="mpls_route.html#eossdkclasseos_1_1mpls__route__via__t"><span class="std std-ref">mpls_route_via_t</span></a> to the ostream. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="class">
+<dt>
+<span class="target" id="eossdkclasseos_1_1mpls__fec__id__impl__t"></span><em>class</em> <code class="descname">mpls_fec_id_impl_t</code></dt>
+<dd><em>#include &lt;mpls_route_impl.h&gt;</em><p>Represents a forward equivalency class (FEC) for an MPLS route. One or more routes points to a FEC, and the FEC corresponds to a set of MPLS vias that are programmed into hardware. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1mpls__fec__id__impl__t_1a5183eecd3aa96767abbbf3486aa92e7b"></span><code class="descname">mpls_fec_id_impl_t</code><span class="sig-paren">(</span><span class="sig-paren">)</span></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1mpls__fec__id__impl__t_1abe33ec61d8c4be9af8ce4380cc9d5af9"></span><code class="descname">mpls_fec_id_impl_t</code><span class="sig-paren">(</span>uint64_t <em>id</em><span class="sig-paren">)</span></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1mpls__fec__id__impl__t_1ab25b9e430dc9a990d02392d82453d2ec"></span>uint64_t <code class="descname">id</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dd><p>Getter for ‘id’: the internal ID of this FEC. A value of 0 denotes that the FEC ID is not set. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1mpls__fec__id__impl__t_1af153aaa655a0f009bd27590daa1eea27"></span>void <code class="descname">id_is</code><span class="sig-paren">(</span>uint64_t <em>id</em><span class="sig-paren">)</span></dt>
+<dd><p>Setter for ‘id’. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1mpls__fec__id__impl__t_1a56bdfa6b7257270818a3f42e5af49a7c"></span>bool <code class="descname">operator==</code><span class="sig-paren">(</span><a class="reference internal" href="#eossdkclasseos_1_1mpls__fec__id__impl__t"><span class="std std-ref">mpls_fec_id_impl_t</span></a> const &amp; <em>other</em><span class="sig-paren">)</span> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1mpls__fec__id__impl__t_1a88c1de521ab8b360344ede474533bfd8"></span>bool <code class="descname">operator!=</code><span class="sig-paren">(</span><a class="reference internal" href="#eossdkclasseos_1_1mpls__fec__id__impl__t"><span class="std std-ref">mpls_fec_id_impl_t</span></a> const &amp; <em>other</em><span class="sig-paren">)</span> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1mpls__fec__id__impl__t_1ad5b6c165c17f03f16c874b5bba4f4612"></span>bool <code class="descname">operator&lt;</code><span class="sig-paren">(</span><a class="reference internal" href="#eossdkclasseos_1_1mpls__fec__id__impl__t"><span class="std std-ref">mpls_fec_id_impl_t</span></a> const &amp; <em>other</em><span class="sig-paren">)</span> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1mpls__fec__id__impl__t_1ae28732e73645ecd648c4de29e28af988"></span>uint32_t <code class="descname">hash</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dd><p>The hash function for type <a class="reference internal" href="mpls_route.html#eossdkclasseos_1_1mpls__fec__id__t"><span class="std std-ref">mpls_fec_id_t</span></a>. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1mpls__fec__id__impl__t_1ab957d8b98072ccdb48b210c585340fff"></span>void <code class="descname">mix_me</code><span class="sig-paren">(</span><a class="reference internal" href="hash_mix.html#eossdkclasseos_1_1hash__mix"><span class="std std-ref">hash_mix</span></a> &amp; <em>h</em><span class="sig-paren">)</span> const</dt>
+<dd><p>The hash mix function for type <a class="reference internal" href="mpls_route.html#eossdkclasseos_1_1mpls__fec__id__t"><span class="std std-ref">mpls_fec_id_t</span></a>. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1mpls__fec__id__impl__t_1a92e7b290e761b968269f431f266f6f6d"></span>std::string <code class="descname">to_string</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dd><p>Returns a string representation of the current object’s values. </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Private Members</p>
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1mpls__fec__id__impl__t_1ad995cecfdff579ab1b4878debcc8aca9"></span>uint64_t <code class="descname">id_</code></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Friends</p>
+<dl class="friend">
+<dt>
+<span class="target" id="eossdkclasseos_1_1mpls__fec__id__impl__t_1ad6995fd4cbbcc73686ecfe9cb1dd16c5"></span>friend std::ostream &amp; <code class="descname">operator&lt;&lt;</code></dt>
+<dd><p>A utility stream operator that adds a string representation of <a class="reference internal" href="mpls_route.html#eossdkclasseos_1_1mpls__fec__id__t"><span class="std std-ref">mpls_fec_id_t</span></a> to the ostream. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#"><strong>mpls_route_impl</strong></a><ul>
+<li><a class="reference internal" href="#type-definitions-in-mpls-route-impl">Type definitions in <strong>mpls_route_impl</strong></a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="mpls_route.html"
+                        title="previous chapter"><strong>mpls_route</strong></a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="mpls_vrf_label.html"
+                        title="next chapter"><strong>mpls_vrf_label</strong></a></p>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="mpls_vrf_label.html" title="mpls_vrf_label"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="mpls_route.html" title="mpls_route"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Arista EOS SDK 2.22.0 reference</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2014, Arista Networks.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.4.
+    </div>
+  </body>
+</html>

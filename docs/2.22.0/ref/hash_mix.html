@@ -1,0 +1,214 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>hash_mix &#8212; Arista EOS SDK 2.22.0 reference</title>
+    <link rel="stylesheet" href="_static/eossdk.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/breathe.css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/language_data.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="intf" href="intf.html" />
+    <link rel="prev" title="hardware_table_impl" href="hardware_table_impl.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="intf.html" title="intf"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="hardware_table_impl.html" title="hardware_table_impl"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Arista EOS SDK 2.22.0 reference</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="hash-mix">
+<h1><strong>hash_mix</strong><a class="headerlink" href="#hash-mix" title="Permalink to this headline">¶</a></h1>
+<dl class="namespace">
+<dt>
+<span class="target" id="eossdknamespaceeos"></span><em>namespace</em> <code class="descname">eos</code></dt>
+<dd><dl class="class">
+<dt>
+<span class="target" id="eossdkclasseos_1_1hash__mix"></span><em>class</em> <code class="descname">hash_mix</code></dt>
+<dd><em>#include &lt;hash_mix.h&gt;</em><p>This is a helper class for incrementally-computed implementation of Bob Jenkins’ one-at-a-time hash, in C++. It’s needed in hash function. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1hash__mix_1a31e2fd6ca437b015c7af0b3da11c20ef"></span><code class="descname">hash_mix</code><span class="sig-paren">(</span><span class="sig-paren">)</span></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1hash__mix_1a5d096dd161fbfe5ea07f162ef3d68ccb"></span>uint32_t <code class="descname">result</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1hash__mix_1ab9d4db87842f4393270fcff6305ffe16"></span>void <code class="descname">mix</code><span class="sig-paren">(</span>bool <em>val</em><span class="sig-paren">)</span></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1hash__mix_1ab84f5feb6ef3b83d5dc9e344192a6ddc"></span>void <code class="descname">mix</code><span class="sig-paren">(</span>double <em>val</em><span class="sig-paren">)</span></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1hash__mix_1a704cdeac998db5abfbfa0a41b1f2f5eb"></span>void <code class="descname">mix</code><span class="sig-paren">(</span>float <em>val</em><span class="sig-paren">)</span></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1hash__mix_1aac217e9699dcd8f9a44490a181c81c94"></span>void <code class="descname">mix</code><span class="sig-paren">(</span>uint8_t <em>val</em><span class="sig-paren">)</span></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1hash__mix_1a1452791830dbc2587b88f938df373236"></span>void <code class="descname">mix</code><span class="sig-paren">(</span>uint16_t <em>val</em><span class="sig-paren">)</span></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1hash__mix_1a9db543b3637b6490ee4c7f3412c064f3"></span>void <code class="descname">mix</code><span class="sig-paren">(</span>uint32_t <em>val</em><span class="sig-paren">)</span></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1hash__mix_1a019e794af87c8b6c38158fe7d249fdec"></span>void <code class="descname">mix</code><span class="sig-paren">(</span>uint64_t <em>val</em><span class="sig-paren">)</span></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1hash__mix_1aec4b9a46efb0d7b4aa5c43a7ebf3b6fc"></span>void <code class="descname">mix</code><span class="sig-paren">(</span>int8_t <em>val</em><span class="sig-paren">)</span></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1hash__mix_1aa96974ba8b6d1624c7dca80e6a1d79e9"></span>void <code class="descname">mix</code><span class="sig-paren">(</span>int16_t <em>val</em><span class="sig-paren">)</span></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1hash__mix_1a5a526888c7e2d75704d13ec817b980d9"></span>void <code class="descname">mix</code><span class="sig-paren">(</span>int32_t <em>val</em><span class="sig-paren">)</span></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1hash__mix_1a37cbd02efa7149842093889bea0d36af"></span>void <code class="descname">mix</code><span class="sig-paren">(</span>int64_t <em>val</em><span class="sig-paren">)</span></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1hash__mix_1a605ef37978bae44877673dc1c22bc6eb"></span>void <code class="descname">mix</code><span class="sig-paren">(</span>std::string const &amp; <em>val</em><span class="sig-paren">)</span></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1hash__mix_1a70fb2ec2ce320b9beb7f94194b94c015"></span>template &lt;typename T&gt; </dt>
+<dt>
+std::enable_if&lt; std::is_enum&lt; T &gt;::value &gt;::type <code class="descname">mix</code><span class="sig-paren">(</span>T const &amp; <em>t</em><span class="sig-paren">)</span></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1hash__mix_1a5f291da1d36d7a31723a5062b73bb65c"></span>template &lt;typename T&gt; </dt>
+<dt>
+std::enable_if&lt; std::is_integral&lt; T &gt;::value &gt;::type <code class="descname">mix</code><span class="sig-paren">(</span>T const &amp; <em>t</em><span class="sig-paren">)</span></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1hash__mix_1ab66838eb04ed4a7948658c668cbd30ed"></span>template &lt;typename T&gt; </dt>
+<dt>
+std::enable_if&lt; !std::is_integral&lt; T &gt;::value &amp;&amp;!std::is_enum&lt; T &gt;::value &gt;::type <code class="descname">mix</code><span class="sig-paren">(</span>T const &amp; <em>t</em><span class="sig-paren">)</span></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1hash__mix_1af4e6259ea0791198c4e5ab8228c48741"></span>void <code class="descname">mix_bytes</code><span class="sig-paren">(</span>uint8_t const * <em>key</em>, int <em>len</em><span class="sig-paren">)</span></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Private Members</p>
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1hash__mix_1a613e564d12d405cf5d0c36b8c19fb653"></span>uint32_t <code class="descname">val_</code></dt>
+<dd></dd></dl>
+
+</div>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="hardware_table_impl.html"
+                        title="previous chapter"><strong>hardware_table_impl</strong></a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="intf.html"
+                        title="next chapter"><strong>intf</strong></a></p>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="intf.html" title="intf"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="hardware_table_impl.html" title="hardware_table_impl"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Arista EOS SDK 2.22.0 reference</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2014, Arista Networks.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.4.
+    </div>
+  </body>
+</html>

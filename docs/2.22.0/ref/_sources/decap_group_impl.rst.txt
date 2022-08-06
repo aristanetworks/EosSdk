@@ -1,0 +1,13 @@
+**decap_group_impl**
+--------------------
+
+
+.. doxygenfile:: eos/decap_group_impl.h
+   :project: eossdk
+
+Type definitions in **decap_group_impl**
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. doxygenfile:: eos/types/decap_group_impl.h
+   :project: eossdk
+
