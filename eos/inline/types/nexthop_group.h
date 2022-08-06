@@ -1,4 +1,4 @@
-// Copyright (c) 2022 Arista Networks, Inc.  All rights reserved.
+// Copyright (c) 2021 Arista Networks, Inc.  All rights reserved.
 // Arista Networks, Inc. Confidential and Proprietary.
 
 #ifndef EOS_INLINE_TYPES_NEXTHOP_GROUP_H
@@ -233,6 +233,14 @@ nexthop_group_entry_t::nexthop_group_entry_t(ip_addr_t const & nexthop,
    );
 }
 nexthop_group_entry_t::nexthop_group_entry_t(
+         std::string const & child_nexthop_group) {
+   pimpl = std::shared_ptr<nexthop_group_entry_impl_t>(
+      new nexthop_group_entry_impl_t(
+         child_nexthop_group
+      )
+   );
+}
+nexthop_group_entry_t::nexthop_group_entry_t(
    const nexthop_group_entry_t& other)
 {
    pimpl = std::make_unique<nexthop_group_entry_impl_t>(
@@ -271,6 +279,15 @@ nexthop_group_entry_t::intf() const {
 void
 nexthop_group_entry_t::intf_is(intf_id_t const & intf) {
    pimpl->intf_is(intf);
+}
+std::string
+nexthop_group_entry_t::child_nexthop_group() const {
+   return pimpl->child_nexthop_group();
+}
+void
+nexthop_group_entry_t::child_nexthop_group_is(
+         std::string const & child_nexthop_group) {
+   pimpl->child_nexthop_group_is(child_nexthop_group);
 }
 bool
 nexthop_group_entry_t::operator==(nexthop_group_entry_t const & other) const {
@@ -451,6 +468,14 @@ nexthop_group_t::counters_unshared() const {
 void
 nexthop_group_t::counters_unshared_is(bool counters_unshared) {
    pimpl->counters_unshared_is(counters_unshared);
+}
+bool
+nexthop_group_t::hierarchical_fecs_enabled() const {
+   return pimpl->hierarchical_fecs_enabled();
+}
+void
+nexthop_group_t::hierarchical_fecs_enabled_is(bool hierarchical_fecs_enabled) {
+   pimpl->hierarchical_fecs_enabled_is(hierarchical_fecs_enabled);
 }
 bool
 nexthop_group_t::operator==(nexthop_group_t const & other) const {

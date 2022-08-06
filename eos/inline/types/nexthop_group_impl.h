@@ -1,4 +1,4 @@
-// Copyright (c) 2022 Arista Networks, Inc.  All rights reserved.
+// Copyright (c) 2021 Arista Networks, Inc.  All rights reserved.
 // Arista Networks, Inc. Confidential and Proprietary.
 
 #ifndef EOS_INLINE_TYPES_NEXTHOP_GROUP_IMPL_H
@@ -210,17 +210,23 @@ operator<<(std::ostream& os, const nexthop_group_entry_counter_impl_t& obj) {
 
 
 nexthop_group_entry_impl_t::nexthop_group_entry_impl_t() :
-      mpls_action_(), nexthop_(), intf_() {
+      mpls_action_(), nexthop_(), intf_(), child_nexthop_group_() {
 }
 
 nexthop_group_entry_impl_t::nexthop_group_entry_impl_t(
          ip_addr_t const & nexthop) :
-      mpls_action_(), nexthop_(nexthop), intf_() {
+      mpls_action_(), nexthop_(nexthop), intf_(), child_nexthop_group_() {
 }
 
 nexthop_group_entry_impl_t::nexthop_group_entry_impl_t(
          ip_addr_t const & nexthop, intf_id_t const & intf) :
-      mpls_action_(), nexthop_(nexthop), intf_(intf) {
+      mpls_action_(), nexthop_(nexthop), intf_(intf), child_nexthop_group_() {
+}
+
+nexthop_group_entry_impl_t::nexthop_group_entry_impl_t(
+         std::string const & child_nexthop_group) :
+      mpls_action_(), nexthop_(), intf_(),
+      child_nexthop_group_(child_nexthop_group) {
 }
 
 nexthop_group_mpls_action_t
@@ -241,6 +247,12 @@ nexthop_group_entry_impl_t::nexthop() const {
 
 void
 nexthop_group_entry_impl_t::nexthop_is(ip_addr_t const & nexthop) {
+   if (!!nexthop && !child_nexthop_group_.empty()) {
+      panic(invalid_argument_error(
+        "child_nexthop_group", 
+        "Next level nexthop group name and nexthop ip "
+        "cannot be set together"));
+   }
    nexthop_ = nexthop;
 }
 
@@ -251,7 +263,30 @@ nexthop_group_entry_impl_t::intf() const {
 
 void
 nexthop_group_entry_impl_t::intf_is(intf_id_t const & intf) {
+   if (!!intf && !child_nexthop_group_.empty()) {
+      panic(invalid_argument_error(
+        "child_nexthop_group", 
+        "Next level nexthop group name and interface "
+        "cannot be set together"));
+   }
    intf_ = intf;
+}
+
+std::string
+nexthop_group_entry_impl_t::child_nexthop_group() const {
+   return child_nexthop_group_;
+}
+
+void
+nexthop_group_entry_impl_t::child_nexthop_group_is(
+         std::string const & child_nexthop_group) {
+   if ((!!nexthop_ || !!intf_) && !child_nexthop_group.empty()) {
+      panic(invalid_argument_error(
+        "child_nexthop_group", 
+        "Next level nexthop group name and nexthop ip "
+        "(or interface) cannot be set together"));
+   }
+   child_nexthop_group_ = child_nexthop_group;
 }
 
 bool
@@ -259,7 +294,8 @@ nexthop_group_entry_impl_t::operator==(nexthop_group_entry_impl_t const & other)
        const {
    return mpls_action_ == other.mpls_action_ &&
           nexthop_ == other.nexthop_ &&
-          intf_ == other.intf_;
+          intf_ == other.intf_ &&
+          child_nexthop_group_ == other.child_nexthop_group_;
 }
 
 bool
@@ -277,6 +313,8 @@ nexthop_group_entry_impl_t::operator<(nexthop_group_entry_impl_t const & other)
       return nexthop_ < other.nexthop_;
    } else if(intf_ != other.intf_) {
       return intf_ < other.intf_;
+   } else if(child_nexthop_group_ != other.child_nexthop_group_) {
+      return child_nexthop_group_ < other.child_nexthop_group_;
    }
    return false;
 }
@@ -293,6 +331,7 @@ nexthop_group_entry_impl_t::mix_me(hash_mix & h) const {
    h.mix(mpls_action_); // nexthop_group_mpls_action_t
    h.mix(nexthop_); // ip_addr_t
    h.mix(intf_); // intf_id_t
+   h.mix(child_nexthop_group_); // std::string
 }
 
 std::string
@@ -302,6 +341,7 @@ nexthop_group_entry_impl_t::to_string() const {
    ss << "mpls_action=" << mpls_action_;
    ss << ", nexthop=" << nexthop_;
    ss << ", intf=" << intf_;
+   ss << ", child_nexthop_group='" << child_nexthop_group_ << "'";
    ss << ")";
    return ss.str();
 }
@@ -317,14 +357,14 @@ operator<<(std::ostream& os, const nexthop_group_entry_impl_t& obj) {
 nexthop_group_impl_t::nexthop_group_impl_t() :
       name_(), type_(), gre_key_type_(NEXTHOP_GROUP_GRE_KEY_NULL), ttl_(64),
       source_ip_(), source_intf_(), autosize_(false), nexthops_(),
-      destination_ips_(), counters_unshared_() {
+      destination_ips_(), counters_unshared_(), hierarchical_fecs_enabled_(false) {
 }
 
 nexthop_group_impl_t::nexthop_group_impl_t(std::string name,
                                                   nexthop_group_encap_t type) :
       name_(name), type_(type), gre_key_type_(NEXTHOP_GROUP_GRE_KEY_NULL),
       ttl_(64), source_ip_(), source_intf_(), autosize_(false), nexthops_(),
-      destination_ips_(), counters_unshared_() {
+      destination_ips_(), counters_unshared_(), hierarchical_fecs_enabled_(false) {
 }
 
 nexthop_group_impl_t::nexthop_group_impl_t(
@@ -332,14 +372,14 @@ nexthop_group_impl_t::nexthop_group_impl_t(
          nexthop_group_gre_key_t gre_key_type) :
       name_(name), type_(type), gre_key_type_(gre_key_type), ttl_(64),
       source_ip_(), source_intf_(), autosize_(false), nexthops_(),
-      destination_ips_(), counters_unshared_() {
+      destination_ips_(), counters_unshared_(), hierarchical_fecs_enabled_(false) {
 }
 
 nexthop_group_impl_t::nexthop_group_impl_t(std::string name,
                                                   ip_addr_t const & source_ip) :
       name_(name), type_(), gre_key_type_(), ttl_(), source_ip_(source_ip),
       source_intf_(), autosize_(), nexthops_(), destination_ips_(),
-      counters_unshared_() {
+      counters_unshared_(), hierarchical_fecs_enabled_(false) {
 }
 
 nexthop_group_impl_t::nexthop_group_impl_t(
@@ -347,7 +387,7 @@ nexthop_group_impl_t::nexthop_group_impl_t(
          std::map<uint16_t, nexthop_group_entry_t> const & nexthops) :
       name_(name), type_(), gre_key_type_(), ttl_(), source_ip_(source_ip),
       source_intf_(), autosize_(), nexthops_(nexthops), destination_ips_(),
-      counters_unshared_() {
+      counters_unshared_(), hierarchical_fecs_enabled_(false) {
 }
 
 std::string
@@ -482,6 +522,16 @@ nexthop_group_impl_t::counters_unshared_is(bool counters_unshared) {
 }
 
 bool
+nexthop_group_impl_t::hierarchical_fecs_enabled() const {
+   return hierarchical_fecs_enabled_;
+}
+
+void
+nexthop_group_impl_t::hierarchical_fecs_enabled_is(bool hierarchical_fecs_enabled) {
+   hierarchical_fecs_enabled_ = hierarchical_fecs_enabled;
+}
+
+bool
 nexthop_group_impl_t::operator==(nexthop_group_impl_t const & other) const {
    return name_ == other.name_ &&
           type_ == other.type_ &&
@@ -492,7 +542,8 @@ nexthop_group_impl_t::operator==(nexthop_group_impl_t const & other) const {
           autosize_ == other.autosize_ &&
           nexthops_ == other.nexthops_ &&
           destination_ips_ == other.destination_ips_ &&
-          counters_unshared_ == other.counters_unshared_;
+          counters_unshared_ == other.counters_unshared_ &&
+          hierarchical_fecs_enabled_ == other.hierarchical_fecs_enabled_;
 }
 
 bool
@@ -522,6 +573,8 @@ nexthop_group_impl_t::operator<(nexthop_group_impl_t const & other) const {
       return destination_ips_ < other.destination_ips_;
    } else if(counters_unshared_ != other.counters_unshared_) {
       return counters_unshared_ < other.counters_unshared_;
+   } else if(hierarchical_fecs_enabled_ != other.hierarchical_fecs_enabled_) {
+      return hierarchical_fecs_enabled_ < other.hierarchical_fecs_enabled_;
    }
    return false;
 }
@@ -551,6 +604,7 @@ nexthop_group_impl_t::mix_me(hash_mix & h) const {
       h.mix(it->second); // ip_addr_t
    }
    h.mix(counters_unshared_); // bool
+   h.mix(hierarchical_fecs_enabled_); // bool
 }
 
 std::string
@@ -587,6 +641,7 @@ nexthop_group_impl_t::to_string() const {
    }
    ss << "'";
    ss << ", counters_unshared=" << counters_unshared_;
+   ss << ", hierarchical_fecs_enabled=" << hierarchical_fecs_enabled_;
    ss << ")";
    return ss.str();
 }

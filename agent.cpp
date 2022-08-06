@@ -31,6 +31,12 @@ void agent_handler::on_agent_option(std::string const & name,
    // Default implementation: do nothing.
 }
 
+std::string
+agent_handler::on_agent_rpc(std::string const & command) {
+   // Default implementation: do nothing.
+   return "";
+}
+
 static void call_on_initialized(agent_handler* handler) {
    handler->on_initialized();
 }

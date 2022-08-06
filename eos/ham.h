@@ -65,6 +65,25 @@ class EOS_SDK_PUBLIC ham_mgr : public base_mgr<ham_handler> {
    virtual eos::response_enum_t read32( register_t reg, std::string * result ) = 0;
 
    /**
+    * Called to issue an I2C variable-sized/block read from given register.
+    * Reads up to 'size' amount of bytes of data from given register, and
+    * stores the bytes that were read within 'result'. Uses the HAM created
+    * in the ham_is API.
+    */
+   virtual eos::response_enum_t read( register_t reg, std::string * result,
+                                      size_t size ) = 0;
+
+   /**
+    * Called to issue am Smbus block read from given register, stores the bytes
+    * that were read within 'result', using the HAM created in
+    * the ham_is API. Reads up to a max of 32 bytes from register.
+    * Uses string ptr to store result because underlying pluto
+    * call requires a string pointer for this call.
+    */
+   virtual eos::response_enum_t readBlock( register_t reg,
+                                           std::string * result ) = 0;
+
+   /**
     * Called to write 8 bytes that are stored in 'data' to register 'reg',
     * using the HAM created in the ham_is API. 'reliable' represents if the
     * data transfer was reliable/successful or not.
@@ -87,6 +106,24 @@ class EOS_SDK_PUBLIC ham_mgr : public base_mgr<ham_handler> {
     */
    virtual  eos::response_enum_t write32( register_t reg, uint32_t data,
                                           bool reliable = false ) = 0;
+
+   /**
+    * Called to issue an I2C variable-sized/block write call, writes a block of data
+    * of a given size to register 'reg', using the HAM created in the ham_is API.
+    * Stores the result in 'data'. 'reliable' represents if the data transfer was
+    * reliable/successful or not.
+    */
+   virtual eos::response_enum_t write( register_t reg, uint32_t data,
+                                       size_t size, bool reliable ) = 0;
+
+   /**
+    * Called to issue an Smbus write block call, writes a block of data of a
+    * given size to register 'reg',  using the HAM created in the ham_is API.
+    * Stores the result in 'data'.
+    * 'reliable' represents if the data transfer was reliable/successful or not.
+    */
+   virtual  eos::response_enum_t writeBlock( register_t reg, uint32_t data,
+                                             size_t size, bool reliable ) = 0;
 
   protected:
    ham_mgr() EOS_SDK_PRIVATE;

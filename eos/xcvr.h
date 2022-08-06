@@ -35,8 +35,8 @@ class EOS_SDK_PUBLIC xcvr_mgr {
        * For modules which do not support concurrent tuning, the rx tuning is done
        * first, then the tx.
        */
-      virtual void frequency_is( intf_id_t intf_id, uint32_t tx,
-                                 uint32_t rx ) = 0;
+      virtual void frequency_is( intf_id_t intf_id, uint32_t rx,
+                                 uint32_t tx ) = 0;
       /**
        * Configures the receive laser fine frequency.  The frequency is specified
        * in GHz.

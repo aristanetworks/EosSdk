@@ -126,6 +126,20 @@ class EOS_SDK_PUBLIC agent_handler : public base_handler<agent_mgr, agent_handle
     * added or altered string corresponding to the option name.
     */
    virtual void on_agent_option(std::string const & name, std::string const & value);
+
+   /**
+    * Handler called when the agent receives an RPC request. The return value of this
+    * handler is sent to the caller. The command is the command requested
+    * by the caller. Parameters are not supported and should be encoded into the
+    * command string itself.
+    *
+    * Only the CLI can create an agent RPC call using a CliExtension:
+    * result = CliExtension.agentRpc( ctx, <daemonName>, <command> )
+    *
+    * Only a response size of 1MB is allowed. Responses sizes of over 1MB
+    * will be truncated. 
+    */
+   virtual std::string on_agent_rpc(std::string const & command);
 };
 
 class agent_option_iter_impl;

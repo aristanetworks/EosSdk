@@ -21,11 +21,10 @@ class EOS_SDK_PUBLIC fpga_handler : public base_handler<fpga_mgr, fpga_handler> 
       explicit fpga_handler(fpga_mgr *);
       fpga_mgr * get_fpga_mgr() const;
 
-      void watch_all_fpga(bool);
-      void watch_fpga(const fpga_t&, bool);
-      virtual void on_fpga_load_image(const fpga_t&);
-      virtual void on_fpga_load_image_failed(const fpga_t&);
-      virtual void on_fpga_unload_image(const fpga_t&);
+      void watch_all_fpga_reservation_status(bool);
+      void watch_fpga_reservation_status(const std::string&, bool);
+      virtual void on_fpga_reservation_status_set(std::string);
+      virtual void on_fpga_reservation_status_del(std::string);
 };
 
 class fpga_iter_impl;
@@ -38,11 +37,43 @@ class EOS_SDK_PUBLIC fpga_iter_t : public iter_base<fpga_t,
 
 };
 
-class EOS_SDK_PUBLIC fpga_mgr : public base_mgr<fpga_handler, fpga_t> {
+class fpga_reservation_iter_impl;
+
+class EOS_SDK_PUBLIC fpga_reservation_iter_t
+               : public iter_base<fpga_reservation_t, fpga_reservation_iter_impl> {
+   private:
+      friend class fpga_reservation_iter_impl;
+      explicit fpga_reservation_iter_t(
+                            fpga_reservation_iter_impl * const) EOS_SDK_PRIVATE;
+
+};
+
+class fpga_reservation_status_iter_impl;
+
+class EOS_SDK_PUBLIC fpga_reservation_status_iter_t
+               : public iter_base<fpga_reservation_status_t,
+                                  fpga_reservation_status_iter_impl> {
+   private:
+      friend class fpga_reservation_status_iter_impl;
+      explicit fpga_reservation_status_iter_t(
+                         fpga_reservation_status_iter_impl * const) EOS_SDK_PRIVATE;
+
+};
+
+class EOS_SDK_PUBLIC fpga_mgr : public base_mgr<fpga_handler, std::string> {
    public:
       virtual ~fpga_mgr();
 
       virtual fpga_iter_t fpga_status_iter() const = 0;
+      virtual fpga_reservation_iter_t reservation_iter() const = 0;
+      virtual fpga_reservation_status_iter_t reservation_status_iter() const = 0;
+      virtual bool reservation_exists(const std::string&) const = 0;
+      virtual bool reservation_status_exists(const std::string&) const = 0;
+      virtual fpga_reservation_t reservation(const std::string&) const = 0;
+      virtual fpga_reservation_status_t reservation_status(const std::string&)
+                                                                 const = 0;
+      virtual void reservation_set(const fpga_reservation_t&) = 0;
+      virtual void reservation_del(const std::string&) = 0;
    protected:
       fpga_mgr() EOS_SDK_PRIVATE;
       friend class fpga_handler;

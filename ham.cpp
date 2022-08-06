@@ -38,6 +38,16 @@ class ham_mgr_impl : public ham_mgr {
       return *nop;
    }
 
+   response_enum_t read( register_t reg, std::string * result, size_t size ){
+      response_enum_t * nop = 0;
+      return *nop;
+   }
+
+   response_enum_t readBlock( register_t reg, std::string * result ){
+      response_enum_t * nop = 0;
+      return *nop;
+   }
+
    response_enum_t write8( register_t reg, uint8_t data,
                                 bool reliable = false ){
       response_enum_t * nop = 0;
@@ -52,6 +62,18 @@ class ham_mgr_impl : public ham_mgr {
 
    response_enum_t write32( register_t reg, uint32_t data,
                                  bool reliable = false ){
+      response_enum_t * nop = 0;
+      return *nop;
+   }
+
+   response_enum_t write( register_t reg, uint32_t data,
+                          size_t size, bool reliable ){
+      response_enum_t * nop = 0;
+      return *nop;
+   }
+
+   response_enum_t writeBlock( register_t reg, uint32_t data,
+                               size_t size, bool reliable ){
       response_enum_t * nop = 0;
       return *nop;
    }

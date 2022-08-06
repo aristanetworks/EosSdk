@@ -17,6 +17,7 @@ else
 SHIPPING_FLAG=
 endif
 
+version.cpp: eos/version.h
 eos/version.h: eos/version.h.template
 	cpp -traditional -I. -I/src/EosSdk $< $@.pp
 	cat $@.pp | sed 's#@@@@#/**#' | sed 's#@@@#*/#' | sed 's#@@#//#' | grep "^_-_" | sed 's/^_-_ //' | sed 's/^_-_//' | sed 's/pounddefine/#define/' > $@

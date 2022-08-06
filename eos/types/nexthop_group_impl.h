@@ -1,4 +1,4 @@
-// Copyright (c) 2022 Arista Networks, Inc.  All rights reserved.
+// Copyright (c) 2021 Arista Networks, Inc.  All rights reserved.
 // Arista Networks, Inc. Confidential and Proprietary.
 
 #ifndef EOS_TYPES_NEXTHOP_GROUP_IMPL_H
@@ -119,6 +119,7 @@ class EOS_SDK_PUBLIC nexthop_group_entry_impl_t {
    nexthop_group_entry_impl_t();
    explicit nexthop_group_entry_impl_t(ip_addr_t const & nexthop);
    nexthop_group_entry_impl_t(ip_addr_t const & nexthop, intf_id_t const & intf);
+   explicit nexthop_group_entry_impl_t(std::string const & child_nexthop_group);
 
    /** Getter for 'mpls_action': MPLS label switching stack for this entry. */
    nexthop_group_mpls_action_t mpls_action() const;
@@ -134,6 +135,11 @@ class EOS_SDK_PUBLIC nexthop_group_entry_impl_t {
    intf_id_t intf() const;
    /** Setter for 'intf'. */
    void intf_is(intf_id_t const & intf);
+
+   /** Getter for 'child_nexthop_group': the name of next level nexthop-group. */
+   std::string child_nexthop_group() const;
+   /** Setter for 'child_nexthop_group'. */
+   void child_nexthop_group_is(std::string const & child_nexthop_group);
 
    bool operator==(nexthop_group_entry_impl_t const & other) const;
    bool operator!=(nexthop_group_entry_impl_t const & other) const;
@@ -155,6 +161,7 @@ class EOS_SDK_PUBLIC nexthop_group_entry_impl_t {
    nexthop_group_mpls_action_t mpls_action_;
    ip_addr_t nexthop_;
    intf_id_t intf_;
+   std::string child_nexthop_group_;
 };
 
 /**
@@ -243,6 +250,23 @@ class EOS_SDK_PUBLIC nexthop_group_impl_t {
    /** Setter for 'counters_unshared'. */
    void counters_unshared_is(bool counters_unshared);
 
+   /**
+    * Getter for 'hierarchical_fecs_enabled': Enableing hierarchical fec resolution
+    * for programming nexthop group entries. If this flag is true, the entry
+    * resolved over a remote nexthop will be programmed hierarchically in the
+    * hardware, i.e., the entry is pointing to another FEC which resolves over
+    * other nexthops. If the flag is false, the entry resolved over a remote
+    * nexthop will be programmed with the final resolved nexthop directly. In case
+    * the remote nexthop is resolved over ECMP of nexthops one of the ECMP nexthops
+    * is chosen to be programmed for the entry, in order to maintain the size of
+    * the nexthop group. This flag is also required to be set to true in order to
+    * configure entries resolving over other nexthop groups. The flag is disabled
+    * (i.e set to false)  by default.
+    */
+   bool hierarchical_fecs_enabled() const;
+   /** Setter for 'hierarchical_fecs_enabled'. */
+   void hierarchical_fecs_enabled_is(bool hierarchical_fecs_enabled);
+
    bool operator==(nexthop_group_impl_t const & other) const;
    bool operator!=(nexthop_group_impl_t const & other) const;
    bool operator<(nexthop_group_impl_t const & other) const;
@@ -270,6 +294,7 @@ class EOS_SDK_PUBLIC nexthop_group_impl_t {
    std::map<uint16_t, nexthop_group_entry_t> nexthops_;
    std::map<uint16_t, ip_addr_t> destination_ips_;
    bool counters_unshared_;
+   bool hierarchical_fecs_enabled_;
 };
 }
 

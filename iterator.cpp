@@ -123,6 +123,8 @@ INSTANTIATE_ITERATOR(fib_fec_t, fib_fec_iter_impl);
 INSTANTIATE_ITERATOR(fib_route_t, fib_route_iter_impl);
 INSTANTIATE_ITERATOR(flow_entry_t, flow_entry_iter_impl);
 INSTANTIATE_ITERATOR(fpga_t, fpga_iter_impl);
+INSTANTIATE_ITERATOR(fpga_reservation_t, fpga_reservation_iter_impl);
+INSTANTIATE_ITERATOR(fpga_reservation_status_t, fpga_reservation_status_iter_impl);
 INSTANTIATE_ITERATOR(hardware_table_key_t, hardware_table_iter_impl);
 INSTANTIATE_ITERATOR(intf_id_t, intf_iter_impl);
 INSTANTIATE_ITERATOR(intf_id_t, eth_intf_iter_impl);

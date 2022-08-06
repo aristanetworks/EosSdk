@@ -1,4 +1,4 @@
-// Copyright (c) 2022 Arista Networks, Inc.  All rights reserved.
+// Copyright (c) 2021 Arista Networks, Inc.  All rights reserved.
 // Arista Networks, Inc. Confidential and Proprietary.
 
 #ifndef EOS_INLINE_TYPES_MAC_TABLE_H
@@ -64,6 +64,8 @@ operator<<(std::ostream& os, const mac_entry_type_t & enum_val) {
       os << "MAC_ENTRY_PEER_AUTHENTICATED";
    } else if (enum_val==MAC_ENTRY_PENDING_SECURE) {
       os << "MAC_ENTRY_PENDING_SECURE";
+   } else if (enum_val==MAC_ENTRY_VPLS_DYNAMIC_REMOTE) {
+      os << "MAC_ENTRY_VPLS_DYNAMIC_REMOTE";
    } else {
       os << "Unknown value";
    }

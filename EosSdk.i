@@ -303,6 +303,8 @@ wrap_iterator(eos::fib_fec_iter_t, eos::fib_fec_iter_impl, eos::fib_fec_t);
 wrap_iterator(eos::fib_route_iter_t, eos::fib_route_iter_impl, eos::fib_route_t);
 wrap_iterator(eos::flow_entry_iter_t, eos::flow_entry_iter_impl, eos::flow_entry_t);
 wrap_iterator(eos::fpga_iter_t, eos::fpga_iter_impl, eos::fpga_t);
+wrap_iterator(eos::fpga_reservation_iter_t, eos::fpga_reservation_iter_impl, eos::fpga_reservation_t);
+wrap_iterator(eos::fpga_reservation_status_iter_t, eos::fpga_reservation_status_iter_impl, eos::fpga_reservation_status_t);
 wrap_iterator(eos::eth_intf_iter_t, eos::eth_intf_iter_impl, eos::intf_id_t);
 wrap_iterator(eos::eth_lag_intf_iter_t, eos::eth_lag_intf_iter_impl, eos::intf_id_t);
 wrap_iterator(eos::eth_lag_intf_member_iter_t, eos::eth_lag_intf_member_iter_impl, eos::intf_id_t);
