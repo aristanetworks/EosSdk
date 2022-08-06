@@ -1,4 +1,4 @@
-lib_LTLIBRARIES = libeos.la libeosgopenflow.la
+lib_LTLIBRARIES = libeos.la
 
 AM_CXXFLAGS = -fvisibility=hidden
 AM_CXXFLAGS += -Wextra -Wall -Wnon-virtual-dtor -Werror -Wno-unused-parameter -Wno-error=unused-value
@@ -81,9 +81,6 @@ libeos_la_SOURCES += nexthop_group_tunnel.cpp
 libeos_la_CPPFLAGS = $(AM_CPPFLAGS) $(SHIPPING_FLAG)
 libeos_la_LDFLAGS = -version-info $(SDK_LIBTOOL_VERSION) -lrt
 libeos_la_LDFLAGS += -soname libeos.so.$(SDK_VERSION_MAJOR).$(SDK_VERSION_MINOR)
-
-libeosgopenflow_la_SOURCES = gopenflow.cpp
-libeosgopenflow_la_LDFLAGS = -version-info $(SDK_LIBTOOL_VERSION)
 
 noinst_PROGRAMS = HelloWorld
 HelloWorld_SOURCES = examples/HelloWorld.cpp
