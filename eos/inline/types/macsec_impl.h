@@ -1,4 +1,4 @@
-// Copyright (c) 2021 Arista Networks, Inc.  All rights reserved.
+// Copyright (c) 2022 Arista Networks, Inc.  All rights reserved.
 // Arista Networks, Inc. Confidential and Proprietary.
 
 #ifndef EOS_INLINE_TYPES_MACSEC_IMPL_H
@@ -111,18 +111,16 @@ macsec_profile_impl_t::macsec_profile_impl_t() :
       name_(), primary_key_(), fallback_key_(), key_server_priority_(16),
       rekey_period_(0), mka_life_time_(6), cipher_(GCM_AES_XPN_128), dot1x_(false),
       include_sci_(false), bypass_lldp_(false), lldp_bypass_level_(BYPASS_NULL),
-      traffic_policy_(TRAFFIC_POLICY_ACTIVE_SAK), allow_unprotected_(false),
-      replay_protection_(true), replay_protection_window_(0),
-      key_retirement_immediate_(false), intfs_() {
+      traffic_policy_(TRAFFIC_POLICY_ACTIVE_SAK), replay_protection_(true),
+      replay_protection_window_(0), key_retirement_immediate_(false), intfs_() {
 }
 
 macsec_profile_impl_t::macsec_profile_impl_t(macsec_profile_name_t name) :
       name_(name), primary_key_(), fallback_key_(), key_server_priority_(16),
       rekey_period_(0), mka_life_time_(6), cipher_(GCM_AES_XPN_128), dot1x_(false),
       include_sci_(false), bypass_lldp_(false), lldp_bypass_level_(BYPASS_NULL),
-      traffic_policy_(TRAFFIC_POLICY_ACTIVE_SAK), allow_unprotected_(false),
-      replay_protection_(true), replay_protection_window_(0),
-      key_retirement_immediate_(false), intfs_() {
+      traffic_policy_(TRAFFIC_POLICY_ACTIVE_SAK), replay_protection_(true),
+      replay_protection_window_(0), key_retirement_immediate_(false), intfs_() {
 }
 
 macsec_profile_name_t
@@ -307,7 +305,6 @@ macsec_profile_impl_t::operator==(macsec_profile_impl_t const & other) const {
           bypass_lldp_ == other.bypass_lldp_ &&
           lldp_bypass_level_ == other.lldp_bypass_level_ &&
           traffic_policy_ == other.traffic_policy_ &&
-          allow_unprotected_ == other.allow_unprotected_ &&
           replay_protection_ == other.replay_protection_ &&
           replay_protection_window_ == other.replay_protection_window_ &&
           key_retirement_immediate_ == other.key_retirement_immediate_ &&
@@ -345,8 +342,6 @@ macsec_profile_impl_t::operator<(macsec_profile_impl_t const & other) const {
       return lldp_bypass_level_ < other.lldp_bypass_level_;
    } else if(traffic_policy_ != other.traffic_policy_) {
       return traffic_policy_ < other.traffic_policy_;
-   } else if(allow_unprotected_ != other.allow_unprotected_) {
-      return allow_unprotected_ < other.allow_unprotected_;
    } else if(replay_protection_ != other.replay_protection_) {
       return replay_protection_ < other.replay_protection_;
    } else if(replay_protection_window_ != other.replay_protection_window_) {
@@ -380,7 +375,6 @@ macsec_profile_impl_t::mix_me(hash_mix & h) const {
    h.mix(bypass_lldp_); // bool
    h.mix(lldp_bypass_level_); // macsec_bypass_t
    h.mix(traffic_policy_); // macsec_profile_traffic_policy_t
-   h.mix(allow_unprotected_); // bool
    h.mix(replay_protection_); // bool
    h.mix(replay_protection_window_); // uint32_t
    h.mix(key_retirement_immediate_); // bool
@@ -405,7 +399,6 @@ macsec_profile_impl_t::to_string() const {
    ss << ", bypass_lldp=" << bypass_lldp_;
    ss << ", lldp_bypass_level=" << lldp_bypass_level_;
    ss << ", traffic_policy=" << traffic_policy_;
-   ss << ", allow_unprotected=" << allow_unprotected_;
    ss << ", replay_protection=" << replay_protection_;
    ss << ", replay_protection_window=" << replay_protection_window_;
    ss << ", key_retirement_immediate=" << key_retirement_immediate_;

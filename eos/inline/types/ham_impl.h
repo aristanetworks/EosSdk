@@ -1,4 +1,4 @@
-// Copyright (c) 2021 Arista Networks, Inc.  All rights reserved.
+// Copyright (c) 2022 Arista Networks, Inc.  All rights reserved.
 // Arista Networks, Inc. Confidential and Proprietary.
 
 #ifndef EOS_INLINE_TYPES_HAM_IMPL_H
@@ -389,6 +389,207 @@ eossdk_ham_impl_t::to_string() const {
 
 std::ostream&
 operator<<(std::ostream& os, const eossdk_ham_impl_t& obj) {
+   os << obj.to_string();
+   return os;
+}
+
+
+
+read8_result_impl_t::read8_result_impl_t(response_enum_t status,
+                                                uint8_t result) :
+      status_(status), result_(result) {
+}
+
+response_enum_t
+read8_result_impl_t::status() const {
+   return status_;
+}
+
+void
+read8_result_impl_t::status_is(response_enum_t status) {
+   status_ = status;
+}
+
+uint8_t
+read8_result_impl_t::result() const {
+   return result_;
+}
+
+void
+read8_result_impl_t::result_is(uint8_t result) {
+   result_ = result;
+}
+
+bool
+read8_result_impl_t::operator==(read8_result_impl_t const & other) const {
+   return status_ == other.status_ &&
+          result_ == other.result_;
+}
+
+bool
+read8_result_impl_t::operator!=(read8_result_impl_t const & other) const {
+   return !operator==(other);
+}
+
+uint32_t
+read8_result_impl_t::hash() const {
+   hash_mix h;
+   mix_me(h);
+   return h.result();
+}
+
+void
+read8_result_impl_t::mix_me(hash_mix & h) const {
+   h.mix(status_); // response_enum_t
+   h.mix(result_); // uint8_t
+}
+
+std::string
+read8_result_impl_t::to_string() const {
+   std::ostringstream ss;
+   ss << "read8_result_t(";
+   ss << "status=" << status_;
+   ss << ", result=" << result_;
+   ss << ")";
+   return ss.str();
+}
+
+std::ostream&
+operator<<(std::ostream& os, const read8_result_impl_t& obj) {
+   os << obj.to_string();
+   return os;
+}
+
+
+
+read16_result_impl_t::read16_result_impl_t(response_enum_t status,
+                                                  uint16_t result) :
+      status_(status), result_(result) {
+}
+
+response_enum_t
+read16_result_impl_t::status() const {
+   return status_;
+}
+
+void
+read16_result_impl_t::status_is(response_enum_t status) {
+   status_ = status;
+}
+
+uint16_t
+read16_result_impl_t::result() const {
+   return result_;
+}
+
+void
+read16_result_impl_t::result_is(uint16_t result) {
+   result_ = result;
+}
+
+bool
+read16_result_impl_t::operator==(read16_result_impl_t const & other) const {
+   return status_ == other.status_ &&
+          result_ == other.result_;
+}
+
+bool
+read16_result_impl_t::operator!=(read16_result_impl_t const & other) const {
+   return !operator==(other);
+}
+
+uint32_t
+read16_result_impl_t::hash() const {
+   hash_mix h;
+   mix_me(h);
+   return h.result();
+}
+
+void
+read16_result_impl_t::mix_me(hash_mix & h) const {
+   h.mix(status_); // response_enum_t
+   h.mix(result_); // uint16_t
+}
+
+std::string
+read16_result_impl_t::to_string() const {
+   std::ostringstream ss;
+   ss << "read16_result_t(";
+   ss << "status=" << status_;
+   ss << ", result=" << result_;
+   ss << ")";
+   return ss.str();
+}
+
+std::ostream&
+operator<<(std::ostream& os, const read16_result_impl_t& obj) {
+   os << obj.to_string();
+   return os;
+}
+
+
+
+read_result_impl_t::read_result_impl_t(response_enum_t status,
+                                              std::string result) :
+      status_(status), result_(result) {
+}
+
+response_enum_t
+read_result_impl_t::status() const {
+   return status_;
+}
+
+void
+read_result_impl_t::status_is(response_enum_t status) {
+   status_ = status;
+}
+
+std::string
+read_result_impl_t::result() const {
+   return result_;
+}
+
+void
+read_result_impl_t::result_is(std::string result) {
+   result_ = result;
+}
+
+bool
+read_result_impl_t::operator==(read_result_impl_t const & other) const {
+   return status_ == other.status_ &&
+          result_ == other.result_;
+}
+
+bool
+read_result_impl_t::operator!=(read_result_impl_t const & other) const {
+   return !operator==(other);
+}
+
+uint32_t
+read_result_impl_t::hash() const {
+   hash_mix h;
+   mix_me(h);
+   return h.result();
+}
+
+void
+read_result_impl_t::mix_me(hash_mix & h) const {
+   h.mix(status_); // response_enum_t
+   h.mix(result_); // std::string
+}
+
+std::string
+read_result_impl_t::to_string() const {
+   std::ostringstream ss;
+   ss << "read_result_t(";
+   ss << "status=" << status_;
+   ss << ", result='" << result_ << "'";
+   ss << ")";
+   return ss.str();
+}
+
+std::ostream&
+operator<<(std::ostream& os, const read_result_impl_t& obj) {
    os << obj.to_string();
    return os;
 }

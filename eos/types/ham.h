@@ -1,4 +1,4 @@
-// Copyright (c) 2021 Arista Networks, Inc.  All rights reserved.
+// Copyright (c) 2022 Arista Networks, Inc.  All rights reserved.
 // Arista Networks, Inc. Confidential and Proprietary.
 
 #ifndef EOS_TYPES_HAM_H
@@ -243,6 +243,120 @@ class EOS_SDK_PUBLIC eossdk_ham_t {
 
 EOS_SDK_PUBLIC
 std::ostream& operator<<(std::ostream& os, const eossdk_ham_t& obj);
+
+class read8_result_impl_t;
+/** Stores the status and result of read8 calls. */
+class EOS_SDK_PUBLIC read8_result_t {
+ public:
+   /** Default constructor. */
+   read8_result_t(response_enum_t status, uint8_t result);
+   read8_result_t(const read8_result_t& other);
+   read8_result_t& operator=(
+      read8_result_t const & other);
+
+
+   response_enum_t status() const;
+   void status_is(response_enum_t status);
+
+   uint8_t result() const;
+   void result_is(uint8_t result);
+
+   bool operator==(read8_result_t const & other) const;
+   bool operator!=(read8_result_t const & other) const;
+   /** The hash function for type read8_result_t. */
+   uint32_t hash() const;
+   /** The hash mix function for type read8_result_t. */
+   void mix_me(hash_mix & h) const;
+   /** Returns a string representation of the current object's values. */
+   std::string to_string() const;
+   /**
+    * A utility stream operator that adds a string representation of read8_result_t
+    * to the ostream.
+    */
+   friend std::ostream& operator<<(std::ostream& os, const read8_result_t& obj);
+
+ private:
+   std::shared_ptr<read8_result_impl_t> pimpl;
+};
+
+EOS_SDK_PUBLIC
+std::ostream& operator<<(std::ostream& os, const read8_result_t& obj);
+
+class read16_result_impl_t;
+/** Stores the status and result of read16 calls. */
+class EOS_SDK_PUBLIC read16_result_t {
+ public:
+   /** Default constructor. */
+   read16_result_t(response_enum_t status, uint16_t result);
+   read16_result_t(const read16_result_t& other);
+   read16_result_t& operator=(
+      read16_result_t const & other);
+
+
+   response_enum_t status() const;
+   void status_is(response_enum_t status);
+
+   uint16_t result() const;
+   void result_is(uint16_t result);
+
+   bool operator==(read16_result_t const & other) const;
+   bool operator!=(read16_result_t const & other) const;
+   /** The hash function for type read16_result_t. */
+   uint32_t hash() const;
+   /** The hash mix function for type read16_result_t. */
+   void mix_me(hash_mix & h) const;
+   /** Returns a string representation of the current object's values. */
+   std::string to_string() const;
+   /**
+    * A utility stream operator that adds a string representation of
+    * read16_result_t to the ostream.
+    */
+   friend std::ostream& operator<<(std::ostream& os, const read16_result_t& obj);
+
+ private:
+   std::shared_ptr<read16_result_impl_t> pimpl;
+};
+
+EOS_SDK_PUBLIC
+std::ostream& operator<<(std::ostream& os, const read16_result_t& obj);
+
+class read_result_impl_t;
+/** Stores the status and result of read calls that readup to 32 bytes. */
+class EOS_SDK_PUBLIC read_result_t {
+ public:
+   /** Default constructor. */
+   read_result_t(response_enum_t status, std::string result);
+   read_result_t(const read_result_t& other);
+   read_result_t& operator=(
+      read_result_t const & other);
+
+
+   response_enum_t status() const;
+   void status_is(response_enum_t status);
+
+   std::string result() const;
+   void result_is(std::string result);
+
+   bool operator==(read_result_t const & other) const;
+   bool operator!=(read_result_t const & other) const;
+   /** The hash function for type read_result_t. */
+   uint32_t hash() const;
+   /** The hash mix function for type read_result_t. */
+   void mix_me(hash_mix & h) const;
+   /** Returns a string representation of the current object's values. */
+   std::string to_string() const;
+   /**
+    * A utility stream operator that adds a string representation of read_result_t
+    * to the ostream.
+    */
+   friend std::ostream& operator<<(std::ostream& os, const read_result_t& obj);
+
+ private:
+   std::shared_ptr<read_result_impl_t> pimpl;
+};
+
+EOS_SDK_PUBLIC
+std::ostream& operator<<(std::ostream& os, const read_result_t& obj);
 
 class register_impl_t;
 /** Register type, from which the HAM will read from/write to. */

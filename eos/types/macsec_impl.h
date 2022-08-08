@@ -1,4 +1,4 @@
-// Copyright (c) 2021 Arista Networks, Inc.  All rights reserved.
+// Copyright (c) 2022 Arista Networks, Inc.  All rights reserved.
 // Arista Networks, Inc. Confidential and Proprietary.
 
 #ifndef EOS_TYPES_MACSEC_IMPL_H
@@ -195,7 +195,6 @@ class EOS_SDK_PUBLIC macsec_profile_impl_t {
    bool bypass_lldp_;
    macsec_bypass_t lldp_bypass_level_;
    macsec_profile_traffic_policy_t traffic_policy_;
-   bool allow_unprotected_;
    bool replay_protection_;
    uint32_t replay_protection_window_;
    bool key_retirement_immediate_;

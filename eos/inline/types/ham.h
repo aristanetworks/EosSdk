@@ -1,4 +1,4 @@
-// Copyright (c) 2021 Arista Networks, Inc.  All rights reserved.
+// Copyright (c) 2022 Arista Networks, Inc.  All rights reserved.
 // Arista Networks, Inc. Confidential and Proprietary.
 
 #ifndef EOS_INLINE_TYPES_HAM_H
@@ -337,6 +337,201 @@ eossdk_ham_t::to_string() const {
 }
 std::ostream&
 operator<<(std::ostream& os, const eossdk_ham_t& obj) {
+   return operator<<(os, *obj.pimpl);
+}
+
+
+read8_result_t::read8_result_t(response_enum_t status, uint8_t result) {
+   pimpl = std::shared_ptr<read8_result_impl_t>(
+      new read8_result_impl_t(
+         status,
+         result
+      )
+   );
+}
+read8_result_t::read8_result_t(
+   const read8_result_t& other)
+{
+   pimpl = std::make_unique<read8_result_impl_t>(
+      read8_result_impl_t(*other.pimpl));
+}
+read8_result_t&
+read8_result_t::operator=(
+   read8_result_t const & other)
+{
+   pimpl = std::shared_ptr<read8_result_impl_t>(
+      new read8_result_impl_t(*other.pimpl));
+   return *this;
+}
+
+response_enum_t
+read8_result_t::status() const {
+   return pimpl->status();
+}
+void
+read8_result_t::status_is(response_enum_t status) {
+   pimpl->status_is(status);
+}
+uint8_t
+read8_result_t::result() const {
+   return pimpl->result();
+}
+void
+read8_result_t::result_is(uint8_t result) {
+   pimpl->result_is(result);
+}
+bool
+read8_result_t::operator==(read8_result_t const & other) const {
+   return pimpl->operator==(*other.pimpl);
+}
+bool
+read8_result_t::operator!=(read8_result_t const & other) const {
+   return pimpl->operator!=(*other.pimpl);
+}
+uint32_t
+read8_result_t::hash() const {
+   return pimpl->hash();
+}
+void
+read8_result_t::mix_me(hash_mix & h) const {
+   pimpl->mix_me(h);
+}
+std::string
+read8_result_t::to_string() const {
+   return pimpl->to_string();
+}
+std::ostream&
+operator<<(std::ostream& os, const read8_result_t& obj) {
+   return operator<<(os, *obj.pimpl);
+}
+
+
+read16_result_t::read16_result_t(response_enum_t status, uint16_t result) {
+   pimpl = std::shared_ptr<read16_result_impl_t>(
+      new read16_result_impl_t(
+         status,
+         result
+      )
+   );
+}
+read16_result_t::read16_result_t(
+   const read16_result_t& other)
+{
+   pimpl = std::make_unique<read16_result_impl_t>(
+      read16_result_impl_t(*other.pimpl));
+}
+read16_result_t&
+read16_result_t::operator=(
+   read16_result_t const & other)
+{
+   pimpl = std::shared_ptr<read16_result_impl_t>(
+      new read16_result_impl_t(*other.pimpl));
+   return *this;
+}
+
+response_enum_t
+read16_result_t::status() const {
+   return pimpl->status();
+}
+void
+read16_result_t::status_is(response_enum_t status) {
+   pimpl->status_is(status);
+}
+uint16_t
+read16_result_t::result() const {
+   return pimpl->result();
+}
+void
+read16_result_t::result_is(uint16_t result) {
+   pimpl->result_is(result);
+}
+bool
+read16_result_t::operator==(read16_result_t const & other) const {
+   return pimpl->operator==(*other.pimpl);
+}
+bool
+read16_result_t::operator!=(read16_result_t const & other) const {
+   return pimpl->operator!=(*other.pimpl);
+}
+uint32_t
+read16_result_t::hash() const {
+   return pimpl->hash();
+}
+void
+read16_result_t::mix_me(hash_mix & h) const {
+   pimpl->mix_me(h);
+}
+std::string
+read16_result_t::to_string() const {
+   return pimpl->to_string();
+}
+std::ostream&
+operator<<(std::ostream& os, const read16_result_t& obj) {
+   return operator<<(os, *obj.pimpl);
+}
+
+
+read_result_t::read_result_t(response_enum_t status, std::string result) {
+   pimpl = std::shared_ptr<read_result_impl_t>(
+      new read_result_impl_t(
+         status,
+         result
+      )
+   );
+}
+read_result_t::read_result_t(
+   const read_result_t& other)
+{
+   pimpl = std::make_unique<read_result_impl_t>(
+      read_result_impl_t(*other.pimpl));
+}
+read_result_t&
+read_result_t::operator=(
+   read_result_t const & other)
+{
+   pimpl = std::shared_ptr<read_result_impl_t>(
+      new read_result_impl_t(*other.pimpl));
+   return *this;
+}
+
+response_enum_t
+read_result_t::status() const {
+   return pimpl->status();
+}
+void
+read_result_t::status_is(response_enum_t status) {
+   pimpl->status_is(status);
+}
+std::string
+read_result_t::result() const {
+   return pimpl->result();
+}
+void
+read_result_t::result_is(std::string result) {
+   pimpl->result_is(result);
+}
+bool
+read_result_t::operator==(read_result_t const & other) const {
+   return pimpl->operator==(*other.pimpl);
+}
+bool
+read_result_t::operator!=(read_result_t const & other) const {
+   return pimpl->operator!=(*other.pimpl);
+}
+uint32_t
+read_result_t::hash() const {
+   return pimpl->hash();
+}
+void
+read_result_t::mix_me(hash_mix & h) const {
+   pimpl->mix_me(h);
+}
+std::string
+read_result_t::to_string() const {
+   return pimpl->to_string();
+}
+std::ostream&
+operator<<(std::ostream& os, const read_result_t& obj) {
    return operator<<(os, *obj.pimpl);
 }
 
