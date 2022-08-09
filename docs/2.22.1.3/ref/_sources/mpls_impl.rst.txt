@@ -1,0 +1,13 @@
+**mpls_impl**
+-------------
+
+
+.. doxygenfile:: eos/mpls_impl.h
+   :project: eossdk
+
+Type definitions in **mpls_impl**
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. doxygenfile:: eos/types/mpls_impl.h
+   :project: eossdk
+

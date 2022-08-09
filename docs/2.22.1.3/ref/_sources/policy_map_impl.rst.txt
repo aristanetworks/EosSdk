@@ -1,0 +1,13 @@
+**policy_map_impl**
+-------------------
+
+
+.. doxygenfile:: eos/policy_map_impl.h
+   :project: eossdk
+
+Type definitions in **policy_map_impl**
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. doxygenfile:: eos/types/policy_map_impl.h
+   :project: eossdk
+
