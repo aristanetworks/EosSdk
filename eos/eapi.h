@@ -53,6 +53,8 @@ class EOS_SDK_PUBLIC eapi_mgr {
 
    /// Executes a "show" CLI command in enable mode.
    virtual eapi_response_t run_show_cmd(std::string const &) const = 0;
+   /// As above, but request "text" formatted output (instead of json)
+   virtual eapi_response_t run_show_cmd_text(std::string const &) const = 0;
 
    /// Executes one or many CLI commands in configuration mode.
    virtual eapi_response_t run_config_cmds(

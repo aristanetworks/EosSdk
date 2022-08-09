@@ -15,6 +15,10 @@ class eapi_mgr_impl : public eapi_mgr {
       return eapi_response_t();
    }
 
+   eapi_response_t run_show_cmd_text(std::string const &) const {
+      return eapi_response_t();
+   }
+
    eapi_response_t run_config_cmds(std::vector<std::string> const &) const {
       return eapi_response_t();
    }

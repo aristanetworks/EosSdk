@@ -61,6 +61,11 @@ class EOS_SDK_PUBLIC xcvr_mgr {
       virtual void tx_disabled_is( intf_id_t intf_id, bool disable ) = 0;
 
       /**
+       * Configures the transmit laser output power.
+       */
+      virtual void tx_output_power_is( intf_id_t intf_id, float power ) = 0;
+
+      /**
        * Returns the currently active receive laser fine frequency.  The frequency
        * is in GHz.
        */
@@ -82,6 +87,11 @@ class EOS_SDK_PUBLIC xcvr_mgr {
        * Returns the transmit laser disable.
        */
       virtual bool tx_disabled( intf_id_t intf_id ) const = 0;
+
+      /**
+       * Returns the transmit laser power.
+       */
+      virtual float tx_output_power( intf_id_t intf_id ) const = 0;
    protected:
       xcvr_mgr() EOS_SDK_PRIVATE;
 

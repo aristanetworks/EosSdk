@@ -107,9 +107,11 @@ _eossdk_la_CPPFLAGS = -I/usr/include/python$(PYTHON_VERSION)
 _eossdk_la_LIBADD = libeos.la
 
 $(srcdir)/eossdk_wrap.cpp: $(SWIG_FILES) $(nobase_include_HEADERS) $(srcdir)/eossdk_wrap.cpp
+	echo ./build_eossdk_wrap_py2 # built in python2 virtual-env
 	SRCDIR=$(srcdir) prefix [stubs-swig] $(SWIG) -threads -c++ -python -dirvtable -O -I$(srcdir) -o $@-t $(srcdir)/EosSdk.i
 	patch --batch --no-backup-if-mismatch -p0 <$(srcdir)/swig.patch
 	mv $@-t $@
+	sed 's/#define PyString_AS_STRING.x. PyUnicode_AS_STRING.x./#define PyString_AS_STRING(x) PyBytes_AS_STRING(x)/' -i eossdk_wrap.cpp
 
 $(srcdir)/eossdk_wrap.h: $(srcdir)/eossdk_wrap.cpp
 

@@ -26,6 +26,9 @@ class xcvr_mgr_impl : public xcvr_mgr {
       void tx_disabled_is( intf_id_t intf_id, bool disabled ) {
       }
 
+      void tx_output_power_is( intf_id_t intf_id, float power ) {
+      }
+
       float rx_fine_frequency( intf_id_t intf_id ) const {
          return 0.0;
       }
@@ -37,6 +40,9 @@ class xcvr_mgr_impl : public xcvr_mgr {
       }
       bool tx_disabled( intf_id_t intf_id ) const {
          return false;
+      }
+      float tx_output_power( intf_id_t intf_id ) const {
+         return 0.0;
       }
 
 };
