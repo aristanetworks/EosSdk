@@ -1,0 +1,639 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>fib_impl &#8212; Arista EOS SDK 2.22.1 reference</title>
+    <link rel="stylesheet" href="_static/eossdk.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/breathe.css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/language_data.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="fpga" href="fpga.html" />
+    <link rel="prev" title="fib" href="fib.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="fpga.html" title="fpga"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="fib.html" title="fib"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Arista EOS SDK 2.22.1 reference</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="fib-impl">
+<h1><strong>fib_impl</strong><a class="headerlink" href="#fib-impl" title="Permalink to this headline">¶</a></h1>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">doxygenfile: Cannot find file “eos/fib_impl.h </p>
+</div>
+<div class="section" id="type-definitions-in-fib-impl">
+<h2>Type definitions in <strong>fib_impl</strong><a class="headerlink" href="#type-definitions-in-fib-impl" title="Permalink to this headline">¶</a></h2>
+<dl class="namespace">
+<dt>
+<span class="target" id="eossdknamespaceeos"></span><em>namespace</em> <code class="descname">eos</code></dt>
+<dd><dl class="class">
+<dt>
+<span class="target" id="eossdkclasseos_1_1fib__route__key__impl__t"></span><em>class</em> <code class="descname">fib_route_key_impl_t</code></dt>
+<dd><em>#include &lt;fib_impl.h&gt;</em><p>An IP route key that goes in FIB. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1fib__route__key__impl__t_1a95df9188f43eac6418a646135c4bbd4a"></span><code class="descname">fib_route_key_impl_t</code><span class="sig-paren">(</span><span class="sig-paren">)</span></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1fib__route__key__impl__t_1ab6e0cc8848ec194f2e00a132209b9350"></span><code class="descname">fib_route_key_impl_t</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#eossdkclasseos_1_1ip__prefix__t"><span class="std std-ref">ip_prefix_t</span></a> const &amp; <em>prefix</em><span class="sig-paren">)</span></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1fib__route__key__impl__t_1a71910ce8bccf9b5837b6a98382b91d68"></span><a class="reference internal" href="ip.html#eossdkclasseos_1_1ip__prefix__t"><span class="std std-ref">ip_prefix_t</span></a> <code class="descname">prefix</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dd><p>Getter for ‘prefix’: IP v4/v6 network prefix. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1fib__route__key__impl__t_1a71c4bd89804b24d3992ffac10f477914"></span>void <code class="descname">prefix_is</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#eossdkclasseos_1_1ip__prefix__t"><span class="std std-ref">ip_prefix_t</span></a> const &amp; <em>prefix</em><span class="sig-paren">)</span></dt>
+<dd><p>Setter for ‘prefix’. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1fib__route__key__impl__t_1a1198e8e5c7886f030e6074e219d71d56"></span>bool <code class="descname">operator==</code><span class="sig-paren">(</span><a class="reference internal" href="#eossdkclasseos_1_1fib__route__key__impl__t"><span class="std std-ref">fib_route_key_impl_t</span></a> const &amp; <em>other</em><span class="sig-paren">)</span> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1fib__route__key__impl__t_1ab363648cef1eafc04a530eb6991fc3b6"></span>bool <code class="descname">operator!=</code><span class="sig-paren">(</span><a class="reference internal" href="#eossdkclasseos_1_1fib__route__key__impl__t"><span class="std std-ref">fib_route_key_impl_t</span></a> const &amp; <em>other</em><span class="sig-paren">)</span> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1fib__route__key__impl__t_1a47182dde62d10d4359a9f5617c4e4ba0"></span>uint32_t <code class="descname">hash</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dd><p>The hash function for type <a class="reference internal" href="fib.html#eossdkclasseos_1_1fib__route__key__t"><span class="std std-ref">fib_route_key_t</span></a>. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1fib__route__key__impl__t_1af605df5cacaa2c5d10b338a5d4e1d7b5"></span>void <code class="descname">mix_me</code><span class="sig-paren">(</span><a class="reference internal" href="hash_mix.html#eossdkclasseos_1_1hash__mix"><span class="std std-ref">hash_mix</span></a> &amp; <em>h</em><span class="sig-paren">)</span> const</dt>
+<dd><p>The hash mix function for type <a class="reference internal" href="fib.html#eossdkclasseos_1_1fib__route__key__t"><span class="std std-ref">fib_route_key_t</span></a>. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1fib__route__key__impl__t_1a1a5974930da80c8501ad524dc2cb70cd"></span>std::string <code class="descname">to_string</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dd><p>Returns a string representation of the current object’s values. </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Private Members</p>
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1fib__route__key__impl__t_1acae5bdf9dac04ffd545349b4bb163f7f"></span><a class="reference internal" href="ip.html#eossdkclasseos_1_1ip__prefix__t"><span class="std std-ref">ip_prefix_t</span></a> <code class="descname">prefix_</code></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Friends</p>
+<dl class="friend">
+<dt>
+<span class="target" id="eossdkclasseos_1_1fib__route__key__impl__t_1ab5563b7f49bd3b664ab0da298c310973"></span>friend std::ostream &amp; <code class="descname">operator&lt;&lt;</code></dt>
+<dd><p>A utility stream operator that adds a string representation of <a class="reference internal" href="fib.html#eossdkclasseos_1_1fib__route__key__t"><span class="std std-ref">fib_route_key_t</span></a> to the ostream. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="class">
+<dt>
+<span class="target" id="eossdkclasseos_1_1fib__route__impl__t"></span><em>class</em> <code class="descname">fib_route_impl_t</code></dt>
+<dd><em>#include &lt;fib_impl.h&gt;</em><p>An IP route that goes in FIB. The “fec_id” represents the fec a.k.a adjacency associated with the route. Note FEC stands for Forwarding Equivalence Class. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1fib__route__impl__t_1aa395c6bd31781b4b23670203fc05d078"></span><code class="descname">fib_route_impl_t</code><span class="sig-paren">(</span><span class="sig-paren">)</span></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1fib__route__impl__t_1a424aa2e79bf17c32a94124dcc6218682"></span><code class="descname">fib_route_impl_t</code><span class="sig-paren">(</span><a class="reference internal" href="fib.html#eossdkclasseos_1_1fib__route__key__t"><span class="std std-ref">fib_route_key_t</span></a> const &amp; <em>route_key</em><span class="sig-paren">)</span></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1fib__route__impl__t_1a7a7d8c5e88b5380b66d60448f3591ab9"></span><a class="reference internal" href="fib.html#eossdkclasseos_1_1fib__route__key__t"><span class="std std-ref">fib_route_key_t</span></a> <code class="descname">route_key</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dd><p>Getter for ‘route_key’: IP v4/v6 network route key consisting of prefix. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1fib__route__impl__t_1aa34dff328dd7ebbbc5b92e253d8ae19c"></span>void <code class="descname">route_key_is</code><span class="sig-paren">(</span><a class="reference internal" href="fib.html#eossdkclasseos_1_1fib__route__key__t"><span class="std std-ref">fib_route_key_t</span></a> const &amp; <em>route_key</em><span class="sig-paren">)</span></dt>
+<dd><p>Setter for ‘route_key’. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1fib__route__impl__t_1a02ae0855b941e6c974c3d2fb44229671"></span>ip_route_preference_t <code class="descname">preference</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dd><p>Getter for ‘preference’: 0..255 only, defaults to 1. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1fib__route__impl__t_1a0904e3fb9f980bb0d3f7c050f593821c"></span>void <code class="descname">preference_is</code><span class="sig-paren">(</span>ip_route_preference_t <em>preference</em><span class="sig-paren">)</span></dt>
+<dd><p>Setter for ‘preference’. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1fib__route__impl__t_1a138d2829347989319bbe4c5a5ab49fe9"></span>ip_route_metric_t <code class="descname">metric</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1fib__route__impl__t_1ace62b1d42fd7a189c1ca4978461a933f"></span>void <code class="descname">metric_is</code><span class="sig-paren">(</span>ip_route_metric_t <em>metric</em><span class="sig-paren">)</span></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1fib__route__impl__t_1a24661bd58228c4b417da1d9789ff1e81"></span>fib_route_type_t <code class="descname">route_type</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1fib__route__impl__t_1a2d3347e523328e0e66d3ede17d8ee179"></span>void <code class="descname">route_type_is</code><span class="sig-paren">(</span>fib_route_type_t <em>route_type</em><span class="sig-paren">)</span></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1fib__route__impl__t_1ad85978c4d8d3f1373665f0bf7492fcf4"></span>uint64_t <code class="descname">fec_id</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dd><p>Getter for ‘fec_id’: id that links prefix to the fec a.k.a Adjacency. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1fib__route__impl__t_1a54a75161e9a6294565b32e435d7395db"></span>void <code class="descname">fec_id_is</code><span class="sig-paren">(</span>uint64_t <em>fec_id</em><span class="sig-paren">)</span></dt>
+<dd><p>Setter for ‘fec_id’. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1fib__route__impl__t_1a99dcbeb2a0a51d5a3401f2bec40b3d1f"></span>bool <code class="descname">operator==</code><span class="sig-paren">(</span><a class="reference internal" href="#eossdkclasseos_1_1fib__route__impl__t"><span class="std std-ref">fib_route_impl_t</span></a> const &amp; <em>other</em><span class="sig-paren">)</span> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1fib__route__impl__t_1a7a8fa0125b88d9cf6c8ed8085e820b4a"></span>bool <code class="descname">operator!=</code><span class="sig-paren">(</span><a class="reference internal" href="#eossdkclasseos_1_1fib__route__impl__t"><span class="std std-ref">fib_route_impl_t</span></a> const &amp; <em>other</em><span class="sig-paren">)</span> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1fib__route__impl__t_1a33d0e1c3a58b7adc110411e869aee6c6"></span>uint32_t <code class="descname">hash</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dd><p>The hash function for type <a class="reference internal" href="fib.html#eossdkclasseos_1_1fib__route__t"><span class="std std-ref">fib_route_t</span></a>. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1fib__route__impl__t_1a3de419be54091741d7a22535b9eca8db"></span>void <code class="descname">mix_me</code><span class="sig-paren">(</span><a class="reference internal" href="hash_mix.html#eossdkclasseos_1_1hash__mix"><span class="std std-ref">hash_mix</span></a> &amp; <em>h</em><span class="sig-paren">)</span> const</dt>
+<dd><p>The hash mix function for type <a class="reference internal" href="fib.html#eossdkclasseos_1_1fib__route__t"><span class="std std-ref">fib_route_t</span></a>. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1fib__route__impl__t_1acee67cc0fbf10c39b25214b69205eb70"></span>std::string <code class="descname">to_string</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dd><p>Returns a string representation of the current object’s values. </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Private Members</p>
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1fib__route__impl__t_1a7acad6ba5fef79249713c3f45706a19e"></span><a class="reference internal" href="fib.html#eossdkclasseos_1_1fib__route__key__t"><span class="std std-ref">fib_route_key_t</span></a> <code class="descname">route_key_</code></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1fib__route__impl__t_1a1783b46c0a3279f7b514bb8107186d4d"></span>ip_route_preference_t <code class="descname">preference_</code></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1fib__route__impl__t_1acd0b046ba82a8002f0250d613dc4ebc2"></span>ip_route_metric_t <code class="descname">metric_</code></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1fib__route__impl__t_1af20616ea9ddc55bab6552bf75bc4750a"></span>fib_route_type_t <code class="descname">route_type_</code></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1fib__route__impl__t_1a2c90a53be4fcee51840f0fad4fd99fe4"></span>uint64_t <code class="descname">fec_id_</code></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Friends</p>
+<dl class="friend">
+<dt>
+<span class="target" id="eossdkclasseos_1_1fib__route__impl__t_1a1369e21b43d0b59ba30c71c3af62e318"></span>friend std::ostream &amp; <code class="descname">operator&lt;&lt;</code></dt>
+<dd><p>A utility stream operator that adds a string representation of <a class="reference internal" href="fib.html#eossdkclasseos_1_1fib__route__t"><span class="std std-ref">fib_route_t</span></a> to the ostream. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="class">
+<dt>
+<span class="target" id="eossdkclasseos_1_1fib__fec__key__impl__t"></span><em>class</em> <code class="descname">fib_fec_key_impl_t</code></dt>
+<dd><em>#include &lt;fib_impl.h&gt;</em><p>FEC key that goes in FIB. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1fib__fec__key__impl__t_1a0b72397230006633edb219ccdb032cfb"></span><code class="descname">fib_fec_key_impl_t</code><span class="sig-paren">(</span><span class="sig-paren">)</span></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1fib__fec__key__impl__t_1aefbd5948b2ef2a76ec8819bde9a815e8"></span><code class="descname">fib_fec_key_impl_t</code><span class="sig-paren">(</span>uint64_t <em>fec_id</em><span class="sig-paren">)</span></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1fib__fec__key__impl__t_1a630f67954f73cb05c848fe4d0c590741"></span>uint64_t <code class="descname">fec_id</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dd><p>Getter for ‘fec_id’: fec_id[56:63] denotes the feature, 0: fib Fec, 1: resilientEcmp feature, 2: nextHopGroup feature. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1fib__fec__key__impl__t_1aef313a21d1da4390d259c227a53237d9"></span>void <code class="descname">fec_id_is</code><span class="sig-paren">(</span>uint64_t <em>fec_id</em><span class="sig-paren">)</span></dt>
+<dd><p>Setter for ‘fec_id’. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1fib__fec__key__impl__t_1ade040196c971b350b95f3c10314434dc"></span>bool <code class="descname">operator==</code><span class="sig-paren">(</span><a class="reference internal" href="#eossdkclasseos_1_1fib__fec__key__impl__t"><span class="std std-ref">fib_fec_key_impl_t</span></a> const &amp; <em>other</em><span class="sig-paren">)</span> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1fib__fec__key__impl__t_1a6e5cfd6d0b32fd52c4b947578d317a5d"></span>bool <code class="descname">operator!=</code><span class="sig-paren">(</span><a class="reference internal" href="#eossdkclasseos_1_1fib__fec__key__impl__t"><span class="std std-ref">fib_fec_key_impl_t</span></a> const &amp; <em>other</em><span class="sig-paren">)</span> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1fib__fec__key__impl__t_1a397da6a103a9b093a72cd22b40b11663"></span>uint32_t <code class="descname">hash</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dd><p>The hash function for type <a class="reference internal" href="fib.html#eossdkclasseos_1_1fib__fec__key__t"><span class="std std-ref">fib_fec_key_t</span></a>. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1fib__fec__key__impl__t_1a946c24ace4da323c18753d7bd78cc8f2"></span>void <code class="descname">mix_me</code><span class="sig-paren">(</span><a class="reference internal" href="hash_mix.html#eossdkclasseos_1_1hash__mix"><span class="std std-ref">hash_mix</span></a> &amp; <em>h</em><span class="sig-paren">)</span> const</dt>
+<dd><p>The hash mix function for type <a class="reference internal" href="fib.html#eossdkclasseos_1_1fib__fec__key__t"><span class="std std-ref">fib_fec_key_t</span></a>. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1fib__fec__key__impl__t_1a4dc8c290cea5593f954d240f9fd3e0eb"></span>std::string <code class="descname">to_string</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dd><p>Returns a string representation of the current object’s values. </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Private Members</p>
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1fib__fec__key__impl__t_1a31011ec5d2ffd03becb146f7bbcb373f"></span>uint64_t <code class="descname">fec_id_</code></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Friends</p>
+<dl class="friend">
+<dt>
+<span class="target" id="eossdkclasseos_1_1fib__fec__key__impl__t_1ad64a6f07b04334e65e95b05676427631"></span>friend std::ostream &amp; <code class="descname">operator&lt;&lt;</code></dt>
+<dd><p>A utility stream operator that adds a string representation of <a class="reference internal" href="fib.html#eossdkclasseos_1_1fib__fec__key__t"><span class="std std-ref">fib_fec_key_t</span></a> to the ostream. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="class">
+<dt>
+<span class="target" id="eossdkclasseos_1_1fib__via__impl__t"></span><em>class</em> <code class="descname">fib_via_impl_t</code></dt>
+<dd><em>#include &lt;fib_impl.h&gt;</em><p>via (nexthop) information. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1fib__via__impl__t_1a9fe583be4f57e2aa1c852d7e9043c9b0"></span><code class="descname">fib_via_impl_t</code><span class="sig-paren">(</span><span class="sig-paren">)</span></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1fib__via__impl__t_1ae958a5bca98685787d5887012fd654f5"></span><code class="descname">fib_via_impl_t</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#eossdkclasseos_1_1ip__addr__t"><span class="std std-ref">ip_addr_t</span></a> const &amp; <em>hop</em>, <a class="reference internal" href="intf.html#eossdkclasseos_1_1intf__id__t"><span class="std std-ref">intf_id_t</span></a> <em>intf</em><span class="sig-paren">)</span></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1fib__via__impl__t_1a9ec0d29534d1cfd0bd145b60a9f45fd2"></span><a class="reference internal" href="ip.html#eossdkclasseos_1_1ip__addr__t"><span class="std std-ref">ip_addr_t</span></a> <code class="descname">hop</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1fib__via__impl__t_1ab4895607c5c186e75b1e00373eebf0ea"></span>void <code class="descname">hop_is</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#eossdkclasseos_1_1ip__addr__t"><span class="std std-ref">ip_addr_t</span></a> const &amp; <em>hop</em><span class="sig-paren">)</span></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1fib__via__impl__t_1ad2feda093cd2b8a7ea473cbaf1746741"></span><a class="reference internal" href="intf.html#eossdkclasseos_1_1intf__id__t"><span class="std std-ref">intf_id_t</span></a> <code class="descname">intf</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1fib__via__impl__t_1a8f0a105f0d12b77b21c483e8c3b2472b"></span>void <code class="descname">intf_is</code><span class="sig-paren">(</span><a class="reference internal" href="intf.html#eossdkclasseos_1_1intf__id__t"><span class="std std-ref">intf_id_t</span></a> <em>intf</em><span class="sig-paren">)</span></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1fib__via__impl__t_1a09ab20c917d33044936aefa6bf4b04d5"></span><a class="reference internal" href="mpls.html#eossdkclasseos_1_1mpls__label__t"><span class="std std-ref">mpls_label_t</span></a> <code class="descname">mpls_label</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1fib__via__impl__t_1acfb27e3fd5a7a136c2e2109f6c893a9a"></span>void <code class="descname">mpls_label_is</code><span class="sig-paren">(</span><a class="reference internal" href="mpls.html#eossdkclasseos_1_1mpls__label__t"><span class="std std-ref">mpls_label_t</span></a> <em>mpls_label</em><span class="sig-paren">)</span></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1fib__via__impl__t_1ae61661467d104d7814551f0067a605ed"></span>bool <code class="descname">operator==</code><span class="sig-paren">(</span><a class="reference internal" href="#eossdkclasseos_1_1fib__via__impl__t"><span class="std std-ref">fib_via_impl_t</span></a> const &amp; <em>other</em><span class="sig-paren">)</span> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1fib__via__impl__t_1a21df89453366e99b5131c342731b3483"></span>bool <code class="descname">operator!=</code><span class="sig-paren">(</span><a class="reference internal" href="#eossdkclasseos_1_1fib__via__impl__t"><span class="std std-ref">fib_via_impl_t</span></a> const &amp; <em>other</em><span class="sig-paren">)</span> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1fib__via__impl__t_1a84795c2d975cd2a5955ec6f6f1f14b1f"></span>uint32_t <code class="descname">hash</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dd><p>The hash function for type <a class="reference internal" href="fib.html#eossdkclasseos_1_1fib__via__t"><span class="std std-ref">fib_via_t</span></a>. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1fib__via__impl__t_1aeb71762c3f071aa1aff430bbfc1f5bf2"></span>void <code class="descname">mix_me</code><span class="sig-paren">(</span><a class="reference internal" href="hash_mix.html#eossdkclasseos_1_1hash__mix"><span class="std std-ref">hash_mix</span></a> &amp; <em>h</em><span class="sig-paren">)</span> const</dt>
+<dd><p>The hash mix function for type <a class="reference internal" href="fib.html#eossdkclasseos_1_1fib__via__t"><span class="std std-ref">fib_via_t</span></a>. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1fib__via__impl__t_1ac54df8ca20654c7068c749c2c0729f14"></span>std::string <code class="descname">to_string</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dd><p>Returns a string representation of the current object’s values. </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Private Members</p>
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1fib__via__impl__t_1a5f10c629a407a600b4ca3bf273446e62"></span><a class="reference internal" href="ip.html#eossdkclasseos_1_1ip__addr__t"><span class="std std-ref">ip_addr_t</span></a> <code class="descname">hop_</code></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1fib__via__impl__t_1abcac6eb2bb726a243f14232f92ef0b17"></span><a class="reference internal" href="intf.html#eossdkclasseos_1_1intf__id__t"><span class="std std-ref">intf_id_t</span></a> <code class="descname">intf_</code></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1fib__via__impl__t_1a5d7bde569932a5bec0d98f9a84a08f36"></span><a class="reference internal" href="mpls.html#eossdkclasseos_1_1mpls__label__t"><span class="std std-ref">mpls_label_t</span></a> <code class="descname">mpls_label_</code></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Friends</p>
+<dl class="friend">
+<dt>
+<span class="target" id="eossdkclasseos_1_1fib__via__impl__t_1afdcd2fedcb61fc5ed493016782e69f1b"></span>friend std::ostream &amp; <code class="descname">operator&lt;&lt;</code></dt>
+<dd><p>A utility stream operator that adds a string representation of <a class="reference internal" href="fib.html#eossdkclasseos_1_1fib__via__t"><span class="std std-ref">fib_via_t</span></a> to the ostream. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="class">
+<dt>
+<span class="target" id="eossdkclasseos_1_1fib__fec__impl__t"></span><em>class</em> <code class="descname">fib_fec_impl_t</code></dt>
+<dd><em>#include &lt;fib_impl.h&gt;</em><p>FEC (Forwarding Equivalence Class), consists of collection (one or more) vias. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1fib__fec__impl__t_1a7daefdc3cf808856ffedbbfbe5314d4a"></span><code class="descname">fib_fec_impl_t</code><span class="sig-paren">(</span><span class="sig-paren">)</span></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1fib__fec__impl__t_1a8eea14f90910e3ec8e97ff38173707e0"></span><code class="descname">fib_fec_impl_t</code><span class="sig-paren">(</span><a class="reference internal" href="fib.html#eossdkclasseos_1_1fib__fec__key__t"><span class="std std-ref">fib_fec_key_t</span></a> <em>fec_key</em><span class="sig-paren">)</span></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1fib__fec__impl__t_1ae345dfa24a28e92727a3d975314004c0"></span><a class="reference internal" href="fib.html#eossdkclasseos_1_1fib__fec__key__t"><span class="std std-ref">fib_fec_key_t</span></a> <code class="descname">fec_key</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dd><p>Getter for ‘fec_key’: fec_key consisting of fec_id. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1fib__fec__impl__t_1aaa5ab6e97ef694b0de066d89f65fdf4f"></span>void <code class="descname">fec_key_is</code><span class="sig-paren">(</span><a class="reference internal" href="fib.html#eossdkclasseos_1_1fib__fec__key__t"><span class="std std-ref">fib_fec_key_t</span></a> <em>fec_key</em><span class="sig-paren">)</span></dt>
+<dd><p>Setter for ‘fec_key’. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1fib__fec__impl__t_1a535cbb2c8df08d489fe56ce83fd423c3"></span>fib_fec_type_t <code class="descname">fec_type</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1fib__fec__impl__t_1a6d8697370576de00f9cfb37cb77448ca"></span>void <code class="descname">fec_type_is</code><span class="sig-paren">(</span>fib_fec_type_t <em>fec_type</em><span class="sig-paren">)</span></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1fib__fec__impl__t_1a3d008d5fca66ca03a65fbd9441c4c20e"></span>std::string <code class="descname">nexthop_group_name</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dd><p>Getter for ‘nexthop_group_name’: Name of the nexthop group, in case fec_type is FEC_TYPE_NEXTHOP_GROUP. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1fib__fec__impl__t_1a0c1cde72d04ba9d76f6ba7ad25d1aedc"></span>void <code class="descname">nexthop_group_name_is</code><span class="sig-paren">(</span>std::string <em>nexthop_group_name</em><span class="sig-paren">)</span></dt>
+<dd><p>Setter for ‘nexthop_group_name’. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1fib__fec__impl__t_1ac1514b0c714c4eb871234b893e185775"></span>std::forward_list&lt; <a class="reference internal" href="fib.html#eossdkclasseos_1_1fib__via__t"><span class="std std-ref">fib_via_t</span></a> &gt; const &amp; <code class="descname">via</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dd><p>Getter for ‘via’: A list of vias that traffic will be distributed amongst. Duplicate vias will be weighted heavily. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1fib__fec__impl__t_1a3765b68810abaf6327ce74174b0e51b7"></span>void <code class="descname">via_is</code><span class="sig-paren">(</span>std::forward_list&lt; <a class="reference internal" href="fib.html#eossdkclasseos_1_1fib__via__t"><span class="std std-ref">fib_via_t</span></a> &gt; const &amp; <em>via</em><span class="sig-paren">)</span></dt>
+<dd><p>Setter for ‘via’. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1fib__fec__impl__t_1a9872657b3c0108fd4dd892d6fc483155"></span>void <code class="descname">via_set</code><span class="sig-paren">(</span><a class="reference internal" href="fib.html#eossdkclasseos_1_1fib__via__t"><span class="std std-ref">fib_via_t</span></a> const &amp; <em>via</em><span class="sig-paren">)</span></dt>
+<dd><p>Prepend one via to the list. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1fib__fec__impl__t_1abe0f0d8de6dd08fe066abf55bcc56447"></span>void <code class="descname">via_del</code><span class="sig-paren">(</span><a class="reference internal" href="fib.html#eossdkclasseos_1_1fib__via__t"><span class="std std-ref">fib_via_t</span></a> const &amp; <em>via</em><span class="sig-paren">)</span></dt>
+<dd><p>Remove all matching via elements. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1fib__fec__impl__t_1a6508fbda43eb91012863dea99007a8ab"></span>uint32_t <code class="descname">hash</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dd><p>The hash function for type <a class="reference internal" href="fib.html#eossdkclasseos_1_1fib__fec__t"><span class="std std-ref">fib_fec_t</span></a>. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1fib__fec__impl__t_1a0623ffcfa20f33b97fec58c5e4983140"></span>void <code class="descname">mix_me</code><span class="sig-paren">(</span><a class="reference internal" href="hash_mix.html#eossdkclasseos_1_1hash__mix"><span class="std std-ref">hash_mix</span></a> &amp; <em>h</em><span class="sig-paren">)</span> const</dt>
+<dd><p>The hash mix function for type <a class="reference internal" href="fib.html#eossdkclasseos_1_1fib__fec__t"><span class="std std-ref">fib_fec_t</span></a>. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1fib__fec__impl__t_1a8cd1c8552982193b1ef7c2c7fe7323a1"></span>std::string <code class="descname">to_string</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dd><p>Returns a string representation of the current object’s values. </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Private Members</p>
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1fib__fec__impl__t_1a23d21a18c13f0e92ba0dc6b2ff9ca66a"></span><a class="reference internal" href="fib.html#eossdkclasseos_1_1fib__fec__key__t"><span class="std std-ref">fib_fec_key_t</span></a> <code class="descname">fec_key_</code></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1fib__fec__impl__t_1afc3f234cae6691011a056e8664187d16"></span>fib_fec_type_t <code class="descname">fec_type_</code></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1fib__fec__impl__t_1a2b82efde55562722ee73816f48350d14"></span>std::string <code class="descname">nexthop_group_name_</code></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1fib__fec__impl__t_1a6513e5751f600c10af998221de511030"></span>std::forward_list&lt; <a class="reference internal" href="fib.html#eossdkclasseos_1_1fib__via__t"><span class="std std-ref">fib_via_t</span></a> &gt; <code class="descname">via_</code></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Friends</p>
+<dl class="friend">
+<dt>
+<span class="target" id="eossdkclasseos_1_1fib__fec__impl__t_1aeb4469f4f665695204a9a7739abf49b2"></span>friend std::ostream &amp; <code class="descname">operator&lt;&lt;</code></dt>
+<dd><p>A utility stream operator that adds a string representation of <a class="reference internal" href="fib.html#eossdkclasseos_1_1fib__fec__t"><span class="std std-ref">fib_fec_t</span></a> to the ostream. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#"><strong>fib_impl</strong></a><ul>
+<li><a class="reference internal" href="#type-definitions-in-fib-impl">Type definitions in <strong>fib_impl</strong></a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="fib.html"
+                        title="previous chapter"><strong>fib</strong></a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="fpga.html"
+                        title="next chapter"><strong>fpga</strong></a></p>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="fpga.html" title="fpga"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="fib.html" title="fib"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Arista EOS SDK 2.22.1 reference</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2014, Arista Networks.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.4.
+    </div>
+  </body>
+</html>

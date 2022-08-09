@@ -1,0 +1,13 @@
+**macsec_impl**
+---------------
+
+
+.. doxygenfile:: eos/macsec_impl.h
+   :project: eossdk
+
+Type definitions in **macsec_impl**
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. doxygenfile:: eos/types/macsec_impl.h
+   :project: eossdk
+

@@ -1,0 +1,13 @@
+**vrf_impl**
+------------
+
+
+.. doxygenfile:: eos/vrf_impl.h
+   :project: eossdk
+
+Type definitions in **vrf_impl**
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. doxygenfile:: eos/types/vrf_impl.h
+   :project: eossdk
+

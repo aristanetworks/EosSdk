@@ -1,0 +1,13 @@
+**fib_impl**
+------------
+
+
+.. doxygenfile:: eos/fib_impl.h
+   :project: eossdk
+
+Type definitions in **fib_impl**
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. doxygenfile:: eos/types/fib_impl.h
+   :project: eossdk
+

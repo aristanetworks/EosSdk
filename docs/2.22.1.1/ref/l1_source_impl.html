@@ -1,0 +1,219 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>l1_source_impl &#8212; Arista EOS SDK 2.22.1 reference</title>
+    <link rel="stylesheet" href="_static/eossdk.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/breathe.css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/language_data.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="lldp" href="lldp.html" />
+    <link rel="prev" title="l1_source" href="l1_source.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="lldp.html" title="lldp"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="l1_source.html" title="l1_source"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Arista EOS SDK 2.22.1 reference</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="l1-source-impl">
+<h1><strong>l1_source_impl</strong><a class="headerlink" href="#l1-source-impl" title="Permalink to this headline">¶</a></h1>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">doxygenfile: Cannot find file “eos/l1_source_impl.h </p>
+</div>
+<div class="section" id="type-definitions-in-l1-source-impl">
+<h2>Type definitions in <strong>l1_source_impl</strong><a class="headerlink" href="#type-definitions-in-l1-source-impl" title="Permalink to this headline">¶</a></h2>
+<dl class="namespace">
+<dt>
+<span class="target" id="eossdknamespaceeos"></span><em>namespace</em> <code class="descname">eos</code></dt>
+<dd><dl class="class">
+<dt>
+<span class="target" id="eossdkclasseos_1_1l1__source__impl__t"></span><em>class</em> <code class="descname">l1_source_impl_t</code></dt>
+<dd><em>#include &lt;l1_source_impl.h&gt;</em><p>L1 source class.</p>
+<p>The interface id “port” should be defined only if l1 source type is port. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1l1__source__impl__t_1a9ee81b4a621bf437f3b7ab974748f4d8"></span><code class="descname">l1_source_impl_t</code><span class="sig-paren">(</span><span class="sig-paren">)</span></dt>
+<dd><p>Default constructor. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1l1__source__impl__t_1a1a158ab25566768bbc07217dbb1534fd"></span><code class="descname">l1_source_impl_t</code><span class="sig-paren">(</span>l1_source_type_t <em>l1_source_type</em><span class="sig-paren">)</span></dt>
+<dd><p>Constructor specifying only l1 source type. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1l1__source__impl__t_1af254fd1d2b9fe86d50e742f0ef2a2df5"></span><code class="descname">l1_source_impl_t</code><span class="sig-paren">(</span>l1_source_type_t <em>l1_source_type</em>, <a class="reference internal" href="intf.html#eossdkclasseos_1_1intf__id__t"><span class="std std-ref">intf_id_t</span></a> <em>port</em><span class="sig-paren">)</span></dt>
+<dd><p>Constructor specifying both l1 source type and interface id. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1l1__source__impl__t_1a7843d0810bbef83bed99d1e019fe215b"></span>l1_source_type_t <code class="descname">l1_source_type</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1l1__source__impl__t_1a33364b51a5845b9213c8024d3ebdaf37"></span>void <code class="descname">l1_source_type_is</code><span class="sig-paren">(</span>l1_source_type_t <em>l1_source_type</em><span class="sig-paren">)</span></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1l1__source__impl__t_1ad456466c988bf72bbca9173b3d91615f"></span><a class="reference internal" href="intf.html#eossdkclasseos_1_1intf__id__t"><span class="std std-ref">intf_id_t</span></a> <code class="descname">port</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1l1__source__impl__t_1a81817005d0d30dcf4787a26c7b940ec5"></span>void <code class="descname">port_is</code><span class="sig-paren">(</span><a class="reference internal" href="intf.html#eossdkclasseos_1_1intf__id__t"><span class="std std-ref">intf_id_t</span></a> <em>port</em><span class="sig-paren">)</span></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1l1__source__impl__t_1a60840a925156d928ef6902f51142f2c2"></span>bool <code class="descname">operator==</code><span class="sig-paren">(</span><a class="reference internal" href="#eossdkclasseos_1_1l1__source__impl__t"><span class="std std-ref">l1_source_impl_t</span></a> const &amp; <em>other</em><span class="sig-paren">)</span> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1l1__source__impl__t_1ac11fa5916d4068b91d00b20b10a542d6"></span>bool <code class="descname">operator!=</code><span class="sig-paren">(</span><a class="reference internal" href="#eossdkclasseos_1_1l1__source__impl__t"><span class="std std-ref">l1_source_impl_t</span></a> const &amp; <em>other</em><span class="sig-paren">)</span> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1l1__source__impl__t_1a1486c43c73f896fbfec4101b380c0fab"></span>bool <code class="descname">operator&lt;</code><span class="sig-paren">(</span><a class="reference internal" href="#eossdkclasseos_1_1l1__source__impl__t"><span class="std std-ref">l1_source_impl_t</span></a> const &amp; <em>other</em><span class="sig-paren">)</span> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1l1__source__impl__t_1ab4fb9562fe40e7dbd79efc9ec317c429"></span>uint32_t <code class="descname">hash</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dd><p>The hash function for type <a class="reference internal" href="l1_source.html#eossdkclasseos_1_1l1__source__t"><span class="std std-ref">l1_source_t</span></a>. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1l1__source__impl__t_1ad5d1fda6a0367e1b5944b22e932b691a"></span>void <code class="descname">mix_me</code><span class="sig-paren">(</span><a class="reference internal" href="hash_mix.html#eossdkclasseos_1_1hash__mix"><span class="std std-ref">hash_mix</span></a> &amp; <em>h</em><span class="sig-paren">)</span> const</dt>
+<dd><p>The hash mix function for type <a class="reference internal" href="l1_source.html#eossdkclasseos_1_1l1__source__t"><span class="std std-ref">l1_source_t</span></a>. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1l1__source__impl__t_1a52f78d55d5a3c6ff1f2a4bcc72ed04c8"></span>std::string <code class="descname">to_string</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dd><p>Returns a string representation of the current object’s values. </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Private Members</p>
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1l1__source__impl__t_1a01515e39c917ddd30b9b00c6d5be96f3"></span>l1_source_type_t <code class="descname">l1_source_type_</code></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1l1__source__impl__t_1a5d44c1d44949bcc54da8c9b8740cba87"></span><a class="reference internal" href="intf.html#eossdkclasseos_1_1intf__id__t"><span class="std std-ref">intf_id_t</span></a> <code class="descname">port_</code></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Friends</p>
+<dl class="friend">
+<dt>
+<span class="target" id="eossdkclasseos_1_1l1__source__impl__t_1ab47084628bcaf061556e3be20b36386b"></span>friend std::ostream &amp; <code class="descname">operator&lt;&lt;</code></dt>
+<dd><p>A utility stream operator that adds a string representation of <a class="reference internal" href="l1_source.html#eossdkclasseos_1_1l1__source__t"><span class="std std-ref">l1_source_t</span></a> to the ostream. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#"><strong>l1_source_impl</strong></a><ul>
+<li><a class="reference internal" href="#type-definitions-in-l1-source-impl">Type definitions in <strong>l1_source_impl</strong></a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="l1_source.html"
+                        title="previous chapter"><strong>l1_source</strong></a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="lldp.html"
+                        title="next chapter"><strong>lldp</strong></a></p>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="lldp.html" title="lldp"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="l1_source.html" title="l1_source"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Arista EOS SDK 2.22.1 reference</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2014, Arista Networks.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.4.
+    </div>
+  </body>
+</html>

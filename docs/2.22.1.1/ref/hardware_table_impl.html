@@ -1,0 +1,503 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>hardware_table_impl &#8212; Arista EOS SDK 2.22.1 reference</title>
+    <link rel="stylesheet" href="_static/eossdk.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/breathe.css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/language_data.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="hash_mix" href="hash_mix.html" />
+    <link rel="prev" title="hardware_table" href="hardware_table.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="hash_mix.html" title="hash_mix"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="hardware_table.html" title="hardware_table"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Arista EOS SDK 2.22.1 reference</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="hardware-table-impl">
+<h1><strong>hardware_table_impl</strong><a class="headerlink" href="#hardware-table-impl" title="Permalink to this headline">¶</a></h1>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">doxygenfile: Cannot find file “eos/hardware_table_impl.h </p>
+</div>
+<div class="section" id="type-definitions-in-hardware-table-impl">
+<h2>Type definitions in <strong>hardware_table_impl</strong><a class="headerlink" href="#type-definitions-in-hardware-table-impl" title="Permalink to this headline">¶</a></h2>
+<dl class="namespace">
+<dt>
+<span class="target" id="eossdknamespaceeos"></span><em>namespace</em> <code class="descname">eos</code></dt>
+<dd><dl class="class">
+<dt>
+<span class="target" id="eossdkclasseos_1_1hardware__table__key__impl__t"></span><em>class</em> <code class="descname">hardware_table_key_impl_t</code></dt>
+<dd><em>#include &lt;hardware_table_impl.h&gt;</em><p>The unique identifier for a hardware table. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1hardware__table__key__impl__t_1a50bff6b5d5c2c0f5595f42cfa276f0e0"></span><code class="descname">hardware_table_key_impl_t</code><span class="sig-paren">(</span><span class="sig-paren">)</span></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1hardware__table__key__impl__t_1a6c2177d4e1d6a7cc491a2f7e41c0298f"></span><code class="descname">hardware_table_key_impl_t</code><span class="sig-paren">(</span>std::string const &amp; <em>table_name</em>, std::string const &amp; <em>feature</em>, std::string const &amp; <em>chip</em><span class="sig-paren">)</span></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1hardware__table__key__impl__t_1a482d9def98eb381b2c5a448034d8dd99"></span><code class="descname">hardware_table_key_impl_t</code><span class="sig-paren">(</span>std::string const &amp; <em>table_name</em>, std::string const &amp; <em>feature</em><span class="sig-paren">)</span></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1hardware__table__key__impl__t_1a69e71ab9fd87f05ef82fc016561d5118"></span><code class="descname">hardware_table_key_impl_t</code><span class="sig-paren">(</span>std::string const &amp; <em>table_name</em><span class="sig-paren">)</span></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1hardware__table__key__impl__t_1a32da2f0d2eb90593ff184608c8417f39"></span>std::string <code class="descname">table_name</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dd><p>Getter for ‘table_name’: the name of the hardware resource. For example, this value could be ‘TCAM’, ‘LEM’, ‘ECMP’, ‘LPM’ etc. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1hardware__table__key__impl__t_1a8dfc1093df88cf558bd252cdd9e5b4e1"></span>std::string <code class="descname">feature</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dd><p>Getter for ‘feature’: the name of the feature using the table, such as ‘Multicast’, ‘IPv6’ or ‘MPLS’. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1hardware__table__key__impl__t_1a03f89a27e3f832fc3c3dc1f75fc1a0db"></span>std::string <code class="descname">chip</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dd><p>Getter for ‘chip’: which chip this table is located on. If empty, then this feature’s usage is identical across chips. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1hardware__table__key__impl__t_1aa9cd310ad6f56bc0f6b1545d023d2c10"></span>bool <code class="descname">operator==</code><span class="sig-paren">(</span><a class="reference internal" href="#eossdkclasseos_1_1hardware__table__key__impl__t"><span class="std std-ref">hardware_table_key_impl_t</span></a> const &amp; <em>other</em><span class="sig-paren">)</span> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1hardware__table__key__impl__t_1addb9cf1a04a489052c7d427a5313b026"></span>bool <code class="descname">operator!=</code><span class="sig-paren">(</span><a class="reference internal" href="#eossdkclasseos_1_1hardware__table__key__impl__t"><span class="std std-ref">hardware_table_key_impl_t</span></a> const &amp; <em>other</em><span class="sig-paren">)</span> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1hardware__table__key__impl__t_1a89e10fcad3a8fce6da3df87427301cc8"></span>bool <code class="descname">operator&lt;</code><span class="sig-paren">(</span><a class="reference internal" href="#eossdkclasseos_1_1hardware__table__key__impl__t"><span class="std std-ref">hardware_table_key_impl_t</span></a> const &amp; <em>other</em><span class="sig-paren">)</span> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1hardware__table__key__impl__t_1a45c443eeff9417cb1af0e1bc000e90f5"></span>uint32_t <code class="descname">hash</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dd><p>The hash function for type <a class="reference internal" href="hardware_table.html#eossdkclasseos_1_1hardware__table__key__t"><span class="std std-ref">hardware_table_key_t</span></a>. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1hardware__table__key__impl__t_1aad72c6c8b2c8c6d433139ba83fa55518"></span>void <code class="descname">mix_me</code><span class="sig-paren">(</span><a class="reference internal" href="hash_mix.html#eossdkclasseos_1_1hash__mix"><span class="std std-ref">hash_mix</span></a> &amp; <em>h</em><span class="sig-paren">)</span> const</dt>
+<dd><p>The hash mix function for type <a class="reference internal" href="hardware_table.html#eossdkclasseos_1_1hardware__table__key__t"><span class="std std-ref">hardware_table_key_t</span></a>. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1hardware__table__key__impl__t_1a69321ffe248e6de61f0dd33745ceff58"></span>std::string <code class="descname">to_string</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dd><p>Returns a string representation of the current object’s values. </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Private Members</p>
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1hardware__table__key__impl__t_1a05db6eb7e2cd4459c6a25739963b0616"></span>std::string <code class="descname">table_name_</code></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1hardware__table__key__impl__t_1a19a6f203f9277bc8b53975eb0dc1b8fa"></span>std::string <code class="descname">feature_</code></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1hardware__table__key__impl__t_1af18b4f2cb6c6efefdd741747d6512275"></span>std::string <code class="descname">chip_</code></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Friends</p>
+<dl class="friend">
+<dt>
+<span class="target" id="eossdkclasseos_1_1hardware__table__key__impl__t_1ab7fcc669c6a3bca33f504a9718d62e82"></span>friend std::ostream &amp; <code class="descname">operator&lt;&lt;</code></dt>
+<dd><p>A utility stream operator that adds a string representation of <a class="reference internal" href="hardware_table.html#eossdkclasseos_1_1hardware__table__key__t"><span class="std std-ref">hardware_table_key_t</span></a> to the ostream. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="class">
+<dt>
+<span class="target" id="eossdkclasseos_1_1hardware__table__high__watermark__impl__t"></span><em>class</em> <code class="descname">hardware_table_high_watermark_impl_t</code></dt>
+<dd><em>#include &lt;hardware_table_impl.h&gt;</em><p>The compound high watermark statistics. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1hardware__table__high__watermark__impl__t_1ab237ff92c50449729b15186587c49e27"></span><code class="descname">hardware_table_high_watermark_impl_t</code><span class="sig-paren">(</span><span class="sig-paren">)</span></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1hardware__table__high__watermark__impl__t_1a91a612d285365e875def31cff0267b99"></span><code class="descname">hardware_table_high_watermark_impl_t</code><span class="sig-paren">(</span>uint32_t <em>max_entries</em>, time_t <em>timestamp</em><span class="sig-paren">)</span></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1hardware__table__high__watermark__impl__t_1a1a4a2dabfc3e583129441791597a7242"></span>uint32_t <code class="descname">max_entries</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dd><p>Getter for ‘max_entries’: the maximum number of entries used so far. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1hardware__table__high__watermark__impl__t_1aa027dc6d74a2b2d1f94241db1f8da123"></span>time_t <code class="descname">timestamp</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dd><p>Getter for ‘timestamp’: the last time when high watermark reached. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1hardware__table__high__watermark__impl__t_1aed64cb2c186598251b5bcc42457ceed0"></span>bool <code class="descname">operator==</code><span class="sig-paren">(</span><a class="reference internal" href="#eossdkclasseos_1_1hardware__table__high__watermark__impl__t"><span class="std std-ref">hardware_table_high_watermark_impl_t</span></a> const &amp; <em>other</em><span class="sig-paren">)</span> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1hardware__table__high__watermark__impl__t_1a2fe903868b277271748096bbf474b226"></span>bool <code class="descname">operator!=</code><span class="sig-paren">(</span><a class="reference internal" href="#eossdkclasseos_1_1hardware__table__high__watermark__impl__t"><span class="std std-ref">hardware_table_high_watermark_impl_t</span></a> const &amp; <em>other</em><span class="sig-paren">)</span> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1hardware__table__high__watermark__impl__t_1a910aba4385f824743d9f708c5b2af280"></span>bool <code class="descname">operator&lt;</code><span class="sig-paren">(</span><a class="reference internal" href="#eossdkclasseos_1_1hardware__table__high__watermark__impl__t"><span class="std std-ref">hardware_table_high_watermark_impl_t</span></a> const &amp; <em>other</em><span class="sig-paren">)</span> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1hardware__table__high__watermark__impl__t_1a630130f35f40880d151aab5a786dc85e"></span>uint32_t <code class="descname">hash</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dd><p>The hash function for type <a class="reference internal" href="hardware_table.html#eossdkclasseos_1_1hardware__table__high__watermark__t"><span class="std std-ref">hardware_table_high_watermark_t</span></a>. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1hardware__table__high__watermark__impl__t_1a9178bc3076ae1b746e1747eb83f3dfae"></span>void <code class="descname">mix_me</code><span class="sig-paren">(</span><a class="reference internal" href="hash_mix.html#eossdkclasseos_1_1hash__mix"><span class="std std-ref">hash_mix</span></a> &amp; <em>h</em><span class="sig-paren">)</span> const</dt>
+<dd><p>The hash mix function for type <a class="reference internal" href="hardware_table.html#eossdkclasseos_1_1hardware__table__high__watermark__t"><span class="std std-ref">hardware_table_high_watermark_t</span></a>. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1hardware__table__high__watermark__impl__t_1a89bde4d1a9d2e9d86c2bfc4804aa5085"></span>std::string <code class="descname">to_string</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dd><p>Returns a string representation of the current object’s values. </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Private Members</p>
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1hardware__table__high__watermark__impl__t_1a3b7574d92fee11a6e3acfaf347e85785"></span>uint32_t <code class="descname">max_entries_</code></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1hardware__table__high__watermark__impl__t_1a88c367fd288900119234d8a62cc06ba4"></span>time_t <code class="descname">timestamp_</code></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Friends</p>
+<dl class="friend">
+<dt>
+<span class="target" id="eossdkclasseos_1_1hardware__table__high__watermark__impl__t_1a9c137e12583c2f43a06ff23bf78619fa"></span>friend std::ostream &amp; <code class="descname">operator&lt;&lt;</code></dt>
+<dd><p>A utility stream operator that adds a string representation of <a class="reference internal" href="hardware_table.html#eossdkclasseos_1_1hardware__table__high__watermark__t"><span class="std std-ref">hardware_table_high_watermark_t</span></a> to the ostream. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="class">
+<dt>
+<span class="target" id="eossdkclasseos_1_1hardware__table__usage__impl__t"></span><em>class</em> <code class="descname">hardware_table_usage_impl_t</code></dt>
+<dd><em>#include &lt;hardware_table_impl.h&gt;</em><p>The usage statistics for a given table (or partition of a table). </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1hardware__table__usage__impl__t_1a1c333f3837c6497c4c83c43423dcb584"></span><code class="descname">hardware_table_usage_impl_t</code><span class="sig-paren">(</span><span class="sig-paren">)</span></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1hardware__table__usage__impl__t_1a403cfd5afad98d67b84ae13b1f06f19a"></span><code class="descname">hardware_table_usage_impl_t</code><span class="sig-paren">(</span>uint32_t <em>used_entries</em>, uint32_t <em>free_entries</em>, uint32_t <em>committed_entries</em><span class="sig-paren">)</span></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1hardware__table__usage__impl__t_1afba0b546b439498e18f78f9cb89698f1"></span>uint32_t <code class="descname">used_entries</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dd><p>Getter for ‘used_entries’: number of entries used by this feature on this table. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1hardware__table__usage__impl__t_1a665526a288ee505b992d96bb33d103a4"></span>uint32_t <code class="descname">free_entries</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dd><p>Getter for ‘free_entries’: the number of free entries available for this feature to use. For features that share a table, if a feature increases its used or committed entries, all other features’ free entries will decrease. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1hardware__table__usage__impl__t_1a79c2970c6c4bd6029cc5ade91ba0a9be"></span>uint32_t <code class="descname">committed_entries</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dd><p>Getter for ‘committed_entries’: the number of entries currently allocated for this feature. For tables that have no explicit partitions, this value will be 0. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1hardware__table__usage__impl__t_1ad7c08b2a05a96a1e17a3eac77148826f"></span>bool <code class="descname">operator==</code><span class="sig-paren">(</span><a class="reference internal" href="#eossdkclasseos_1_1hardware__table__usage__impl__t"><span class="std std-ref">hardware_table_usage_impl_t</span></a> const &amp; <em>other</em><span class="sig-paren">)</span> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1hardware__table__usage__impl__t_1a321d272fdef978bb1f8ac476e60ffa55"></span>bool <code class="descname">operator!=</code><span class="sig-paren">(</span><a class="reference internal" href="#eossdkclasseos_1_1hardware__table__usage__impl__t"><span class="std std-ref">hardware_table_usage_impl_t</span></a> const &amp; <em>other</em><span class="sig-paren">)</span> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1hardware__table__usage__impl__t_1a270ee26aa45dc03d8503fbb0f03d6c50"></span>bool <code class="descname">operator&lt;</code><span class="sig-paren">(</span><a class="reference internal" href="#eossdkclasseos_1_1hardware__table__usage__impl__t"><span class="std std-ref">hardware_table_usage_impl_t</span></a> const &amp; <em>other</em><span class="sig-paren">)</span> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1hardware__table__usage__impl__t_1a19bc677b3af3baaa1b1a0a04f44586cb"></span>uint32_t <code class="descname">hash</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dd><p>The hash function for type <a class="reference internal" href="hardware_table.html#eossdkclasseos_1_1hardware__table__usage__t"><span class="std std-ref">hardware_table_usage_t</span></a>. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1hardware__table__usage__impl__t_1a3fb942cfd1664cdc9e2d5eeaac844540"></span>void <code class="descname">mix_me</code><span class="sig-paren">(</span><a class="reference internal" href="hash_mix.html#eossdkclasseos_1_1hash__mix"><span class="std std-ref">hash_mix</span></a> &amp; <em>h</em><span class="sig-paren">)</span> const</dt>
+<dd><p>The hash mix function for type <a class="reference internal" href="hardware_table.html#eossdkclasseos_1_1hardware__table__usage__t"><span class="std std-ref">hardware_table_usage_t</span></a>. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1hardware__table__usage__impl__t_1aad78ed0b375c3288921dedeec6a2fbc2"></span>std::string <code class="descname">to_string</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dd><p>Returns a string representation of the current object’s values. </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Private Members</p>
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1hardware__table__usage__impl__t_1a802db2f9b1d9010b70e1e9b67d03fe1f"></span>uint32_t <code class="descname">used_entries_</code></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1hardware__table__usage__impl__t_1aed802b71ddba660e404cdac96b898624"></span>uint32_t <code class="descname">free_entries_</code></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1hardware__table__usage__impl__t_1a0d3420d394a2b5b18b16b81dedf9e6d3"></span>uint32_t <code class="descname">committed_entries_</code></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Friends</p>
+<dl class="friend">
+<dt>
+<span class="target" id="eossdkclasseos_1_1hardware__table__usage__impl__t_1ad352544286842c29bec6d047cc6d4a27"></span>friend std::ostream &amp; <code class="descname">operator&lt;&lt;</code></dt>
+<dd><p>A utility stream operator that adds a string representation of <a class="reference internal" href="hardware_table.html#eossdkclasseos_1_1hardware__table__usage__t"><span class="std std-ref">hardware_table_usage_t</span></a> to the ostream. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="class">
+<dt>
+<span class="target" id="eossdkclasseos_1_1hardware__table__entry__impl__t"></span><em>class</em> <code class="descname">hardware_table_entry_impl_t</code></dt>
+<dd><em>#include &lt;hardware_table_impl.h&gt;</em><p>The hardware table entry for a given table key. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1hardware__table__entry__impl__t_1a842b87e40d0c9ca9c73406067f53a541"></span><code class="descname">hardware_table_entry_impl_t</code><span class="sig-paren">(</span><span class="sig-paren">)</span></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1hardware__table__entry__impl__t_1abbfa4e34a012e395b4e53fbb6b59547c"></span><code class="descname">hardware_table_entry_impl_t</code><span class="sig-paren">(</span><a class="reference internal" href="hardware_table.html#eossdkclasseos_1_1hardware__table__usage__t"><span class="std std-ref">hardware_table_usage_t</span></a> const &amp; <em>usage</em>, uint32_t <em>max_entries</em>, <a class="reference internal" href="hardware_table.html#eossdkclasseos_1_1hardware__table__high__watermark__t"><span class="std std-ref">hardware_table_high_watermark_t</span></a> const &amp; <em>high_watermark</em><span class="sig-paren">)</span></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1hardware__table__entry__impl__t_1af60d9e01a075b774e01e9a23dbfac742"></span><a class="reference internal" href="hardware_table.html#eossdkclasseos_1_1hardware__table__usage__t"><span class="std std-ref">hardware_table_usage_t</span></a> <code class="descname">usage</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dd><p>Getter for ‘usage’: the compound usage statistics. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1hardware__table__entry__impl__t_1a63805492d59fb798b5376ac7ee825264"></span>uint32_t <code class="descname">max_entries</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dd><p>Getter for ‘max_entries’: the theoretical maximum number of entries available. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1hardware__table__entry__impl__t_1ae5e6dbddbc5cd494cf2b259169403e50"></span><a class="reference internal" href="hardware_table.html#eossdkclasseos_1_1hardware__table__high__watermark__t"><span class="std std-ref">hardware_table_high_watermark_t</span></a> <code class="descname">high_watermark</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dd><p>Getter for ‘high_watermark’: the compound high watermark statistics. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1hardware__table__entry__impl__t_1aad974ebabc6dc11c208d7bfe8630378c"></span>bool <code class="descname">operator==</code><span class="sig-paren">(</span><a class="reference internal" href="#eossdkclasseos_1_1hardware__table__entry__impl__t"><span class="std std-ref">hardware_table_entry_impl_t</span></a> const &amp; <em>other</em><span class="sig-paren">)</span> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1hardware__table__entry__impl__t_1a58bdf255fab5bac26d203bbcabb8f740"></span>bool <code class="descname">operator!=</code><span class="sig-paren">(</span><a class="reference internal" href="#eossdkclasseos_1_1hardware__table__entry__impl__t"><span class="std std-ref">hardware_table_entry_impl_t</span></a> const &amp; <em>other</em><span class="sig-paren">)</span> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1hardware__table__entry__impl__t_1a018ddfe8abf3ef2313681f926504a3c9"></span>bool <code class="descname">operator&lt;</code><span class="sig-paren">(</span><a class="reference internal" href="#eossdkclasseos_1_1hardware__table__entry__impl__t"><span class="std std-ref">hardware_table_entry_impl_t</span></a> const &amp; <em>other</em><span class="sig-paren">)</span> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1hardware__table__entry__impl__t_1aff031c2ab467a9a24622f1aa546f4fd8"></span>uint32_t <code class="descname">hash</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dd><p>The hash function for type <a class="reference internal" href="hardware_table.html#eossdkclasseos_1_1hardware__table__entry__t"><span class="std std-ref">hardware_table_entry_t</span></a>. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1hardware__table__entry__impl__t_1a2e390112cd76cb9ab99ae1c8c62527da"></span>void <code class="descname">mix_me</code><span class="sig-paren">(</span><a class="reference internal" href="hash_mix.html#eossdkclasseos_1_1hash__mix"><span class="std std-ref">hash_mix</span></a> &amp; <em>h</em><span class="sig-paren">)</span> const</dt>
+<dd><p>The hash mix function for type <a class="reference internal" href="hardware_table.html#eossdkclasseos_1_1hardware__table__entry__t"><span class="std std-ref">hardware_table_entry_t</span></a>. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1hardware__table__entry__impl__t_1a0a16d9fd14252428b4357560be78ad74"></span>std::string <code class="descname">to_string</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dd><p>Returns a string representation of the current object’s values. </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Private Members</p>
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1hardware__table__entry__impl__t_1ab9b81ef99dcb1466dd145c13484bfc91"></span><a class="reference internal" href="hardware_table.html#eossdkclasseos_1_1hardware__table__usage__t"><span class="std std-ref">hardware_table_usage_t</span></a> <code class="descname">usage_</code></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1hardware__table__entry__impl__t_1a46b17e66c2c76eaca260716bbeb60d04"></span>uint32_t <code class="descname">max_entries_</code></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1hardware__table__entry__impl__t_1af218c12ec407e1c74ea77683e96da4b1"></span><a class="reference internal" href="hardware_table.html#eossdkclasseos_1_1hardware__table__high__watermark__t"><span class="std std-ref">hardware_table_high_watermark_t</span></a> <code class="descname">high_watermark_</code></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Friends</p>
+<dl class="friend">
+<dt>
+<span class="target" id="eossdkclasseos_1_1hardware__table__entry__impl__t_1a48bac6a02a47cddcc906fed60e604745"></span>friend std::ostream &amp; <code class="descname">operator&lt;&lt;</code></dt>
+<dd><p>A utility stream operator that adds a string representation of <a class="reference internal" href="hardware_table.html#eossdkclasseos_1_1hardware__table__entry__t"><span class="std std-ref">hardware_table_entry_t</span></a> to the ostream. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#"><strong>hardware_table_impl</strong></a><ul>
+<li><a class="reference internal" href="#type-definitions-in-hardware-table-impl">Type definitions in <strong>hardware_table_impl</strong></a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="hardware_table.html"
+                        title="previous chapter"><strong>hardware_table</strong></a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="hash_mix.html"
+                        title="next chapter"><strong>hash_mix</strong></a></p>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="hash_mix.html" title="hash_mix"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="hardware_table.html" title="hardware_table"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Arista EOS SDK 2.22.1 reference</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2014, Arista Networks.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.4.
+    </div>
+  </body>
+</html>

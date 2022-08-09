@@ -1,0 +1,599 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>eth_phy_intf_impl &#8212; Arista EOS SDK 2.22.1 reference</title>
+    <link rel="stylesheet" href="_static/eossdk.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/breathe.css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/language_data.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="event_loop" href="event_loop.html" />
+    <link rel="prev" title="eth_phy_intf" href="eth_phy_intf.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="event_loop.html" title="event_loop"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="eth_phy_intf.html" title="eth_phy_intf"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Arista EOS SDK 2.22.1 reference</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="eth-phy-intf-impl">
+<h1><strong>eth_phy_intf_impl</strong><a class="headerlink" href="#eth-phy-intf-impl" title="Permalink to this headline">¶</a></h1>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">doxygenfile: Cannot find file “eos/eth_phy_intf_impl.h </p>
+</div>
+<div class="section" id="type-definitions-in-eth-phy-intf-impl">
+<h2>Type definitions in <strong>eth_phy_intf_impl</strong><a class="headerlink" href="#type-definitions-in-eth-phy-intf-impl" title="Permalink to this headline">¶</a></h2>
+<dl class="namespace">
+<dt>
+<span class="target" id="eossdknamespaceeos"></span><em>namespace</em> <code class="descname">eos</code></dt>
+<dd><dl class="class">
+<dt>
+<span class="target" id="eossdkclasseos_1_1eth__phy__intf__counters__impl__t"></span><em>class</em> <code class="descname">eth_phy_intf_counters_impl_t</code></dt>
+<dd><em>#include &lt;eth_phy_intf_impl.h&gt;</em><p>Ethernet interface counter class.</p>
+<p>All of these attributes have the same meanings as the corresponding objects in the Ethernetlike (RFC3635) and RMON (RFC2819) MIBs. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1eth__phy__intf__counters__impl__t_1a6f6007e7e96d435971d60dc8da28bef9"></span><code class="descname">eth_phy_intf_counters_impl_t</code><span class="sig-paren">(</span><span class="sig-paren">)</span></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1eth__phy__intf__counters__impl__t_1a9f3345064dffd248df1186b41d8f5a99"></span><code class="descname">eth_phy_intf_counters_impl_t</code><span class="sig-paren">(</span>uint64_t <em>single_collision_frames</em>, uint64_t <em>multiple_collision_frames</em>, uint64_t <em>fcs_errors</em>, uint64_t <em>alignment_errors</em>, uint64_t <em>deferred_transmissions</em>, uint64_t <em>late_collisions</em>, uint64_t <em>excessive_collisions</em>, uint64_t <em>internal_mac_transmit_errors</em>, uint64_t <em>carrier_sense_errors</em>, uint64_t <em>internal_mac_receive_errors</em>, uint64_t <em>frame_too_shorts</em>, uint64_t <em>frame_too_longs</em>, uint64_t <em>sqe_test_errors</em>, uint64_t <em>symbol_errors</em>, uint64_t <em>in_unknown_opcodes</em>, uint64_t <em>out_pause_frames</em>, uint64_t <em>in_pause_frames</em>, uint64_t <em>fragments</em>, uint64_t <em>jabbers</em><span class="sig-paren">)</span></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1eth__phy__intf__counters__impl__t_1a2690cb989e867e22a4c576199c4ea522"></span>uint64_t <code class="descname">single_collision_frames</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dd><p>Getter for ‘single_collision_frames’: Etherlike-MIB singleCollisionFrames counter. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1eth__phy__intf__counters__impl__t_1a0c808d42831ab84918c2b196c6aafff7"></span>uint64_t <code class="descname">multiple_collision_frames</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dd><p>Getter for ‘multiple_collision_frames’: Etherlike-MIB multipleCollisionFrames counter. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1eth__phy__intf__counters__impl__t_1ac48cf1ee3dc1d5851e2613f82068074b"></span>uint64_t <code class="descname">fcs_errors</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dd><p>Getter for ‘fcs_errors’: Etherlike-MIB fcsErrors counter. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1eth__phy__intf__counters__impl__t_1a9a35e92d5408ffcde87ac2c4d827498d"></span>uint64_t <code class="descname">alignment_errors</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dd><p>Getter for ‘alignment_errors’: Etherlike-MIB alignmentErrors counter. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1eth__phy__intf__counters__impl__t_1a6ff1f1bd2bc070953abba36b5e5147f3"></span>uint64_t <code class="descname">deferred_transmissions</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dd><p>Getter for ‘deferred_transmissions’: Etherlike-MIB deferredTransmissions counter. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1eth__phy__intf__counters__impl__t_1ae7c0c331cfc2359124a053f5809b4fbf"></span>uint64_t <code class="descname">late_collisions</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dd><p>Getter for ‘late_collisions’: Etherlike-MIB lateCollisions counter. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1eth__phy__intf__counters__impl__t_1ab6d3f1a02367f88320cbc17890ec80a6"></span>uint64_t <code class="descname">excessive_collisions</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dd><p>Getter for ‘excessive_collisions’: Etherlike-MIB excessiveCollisions counter. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1eth__phy__intf__counters__impl__t_1acb7ea6a0e34dccde11989ba187bbaabf"></span>uint64_t <code class="descname">internal_mac_transmit_errors</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dd><p>Getter for ‘internal_mac_transmit_errors’: Etherlike-MIB internalMacTransmitErrors counter. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1eth__phy__intf__counters__impl__t_1a58af4ce3ffb8b14815309a1f4dc8453d"></span>uint64_t <code class="descname">carrier_sense_errors</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dd><p>Getter for ‘carrier_sense_errors’: Etherlike-MIB carrierSenseErrors counter. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1eth__phy__intf__counters__impl__t_1ac48e32ff32b0f8d23be99aaafbdca8cf"></span>uint64_t <code class="descname">internal_mac_receive_errors</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dd><p>Getter for ‘internal_mac_receive_errors’: Etherlike-MIB internalMacReceiveErrors counter. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1eth__phy__intf__counters__impl__t_1a00f2f6aabc2124bd0558e8459e53df11"></span>uint64_t <code class="descname">frame_too_shorts</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dd><p>Getter for ‘frame_too_shorts’: Etherlike-MIB frameTooShorts counter. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1eth__phy__intf__counters__impl__t_1adef457eab261a5cacc23d0a082a21113"></span>uint64_t <code class="descname">frame_too_longs</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dd><p>Getter for ‘frame_too_longs’: Etherlike-MIB frameTooLongs counter. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1eth__phy__intf__counters__impl__t_1a0b414b5896f2b04cf1065f2031a27609"></span>uint64_t <code class="descname">sqe_test_errors</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dd><p>Getter for ‘sqe_test_errors’: Etherlike-MIB sqeTestErrors counter. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1eth__phy__intf__counters__impl__t_1aa43ac1964563bae8770f4a9d63461bec"></span>uint64_t <code class="descname">symbol_errors</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dd><p>Getter for ‘symbol_errors’: Etherlike-MIB symbolErrors counter. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1eth__phy__intf__counters__impl__t_1ae5c05d34556f08cbea19e61a8d17fe0b"></span>uint64_t <code class="descname">in_unknown_opcodes</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dd><p>Getter for ‘in_unknown_opcodes’: Etherlike-MIB inUnknownOpcodes counter. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1eth__phy__intf__counters__impl__t_1a49e831f395e74bdbf523fbf9917f63b5"></span>uint64_t <code class="descname">out_pause_frames</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dd><p>Getter for ‘out_pause_frames’: Etherlike-MIB outPauseFrames counter. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1eth__phy__intf__counters__impl__t_1a011abe569d0976db208ca06c8908d5f2"></span>uint64_t <code class="descname">in_pause_frames</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dd><p>Getter for ‘in_pause_frames’: Etherlike-MIB inPauseFrames counter. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1eth__phy__intf__counters__impl__t_1a74eb84dc13ad83e395e3a377c7533b9d"></span>uint64_t <code class="descname">fragments</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dd><p>Getter for ‘fragments’: RMON-MIB fragments counter. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1eth__phy__intf__counters__impl__t_1afe98ed42d412e28055f5422f785d398a"></span>uint64_t <code class="descname">jabbers</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dd><p>Getter for ‘jabbers’: RMON-MIB jabbers counter. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1eth__phy__intf__counters__impl__t_1a8ecd1ad3263d6d8bd0baed68027c24b4"></span>bool <code class="descname">operator==</code><span class="sig-paren">(</span><a class="reference internal" href="#eossdkclasseos_1_1eth__phy__intf__counters__impl__t"><span class="std std-ref">eth_phy_intf_counters_impl_t</span></a> const &amp; <em>other</em><span class="sig-paren">)</span> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1eth__phy__intf__counters__impl__t_1af8158ea83a53c573271a763f61b8bb27"></span>bool <code class="descname">operator!=</code><span class="sig-paren">(</span><a class="reference internal" href="#eossdkclasseos_1_1eth__phy__intf__counters__impl__t"><span class="std std-ref">eth_phy_intf_counters_impl_t</span></a> const &amp; <em>other</em><span class="sig-paren">)</span> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1eth__phy__intf__counters__impl__t_1ac1f85c15b26b47af2fa2fd64ffe9958b"></span>uint32_t <code class="descname">hash</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dd><p>The hash function for type <a class="reference internal" href="eth_phy_intf.html#eossdkclasseos_1_1eth__phy__intf__counters__t"><span class="std std-ref">eth_phy_intf_counters_t</span></a>. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1eth__phy__intf__counters__impl__t_1adda8724424c575a09a9d653cafc41a60"></span>void <code class="descname">mix_me</code><span class="sig-paren">(</span><a class="reference internal" href="hash_mix.html#eossdkclasseos_1_1hash__mix"><span class="std std-ref">hash_mix</span></a> &amp; <em>h</em><span class="sig-paren">)</span> const</dt>
+<dd><p>The hash mix function for type <a class="reference internal" href="eth_phy_intf.html#eossdkclasseos_1_1eth__phy__intf__counters__t"><span class="std std-ref">eth_phy_intf_counters_t</span></a>. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1eth__phy__intf__counters__impl__t_1a863ff2126defb7fa5bfc27657dde2bb5"></span>std::string <code class="descname">to_string</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dd><p>Returns a string representation of the current object’s values. </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Private Members</p>
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1eth__phy__intf__counters__impl__t_1a512b2199cb52af617f946bd31a4392bc"></span>uint64_t <code class="descname">single_collision_frames_</code></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1eth__phy__intf__counters__impl__t_1a2e9900778382e5d8a70b787623320f22"></span>uint64_t <code class="descname">multiple_collision_frames_</code></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1eth__phy__intf__counters__impl__t_1a61c8fff64a2a4848b4ac2bd21b9f469b"></span>uint64_t <code class="descname">fcs_errors_</code></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1eth__phy__intf__counters__impl__t_1ad43e729752ad04b0824c483026bbe1d8"></span>uint64_t <code class="descname">alignment_errors_</code></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1eth__phy__intf__counters__impl__t_1a4c1bc6b339b0c33c0a156b04fd6f00eb"></span>uint64_t <code class="descname">deferred_transmissions_</code></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1eth__phy__intf__counters__impl__t_1a38f3acf9eed3eb5bb63e34f0a0f9f594"></span>uint64_t <code class="descname">late_collisions_</code></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1eth__phy__intf__counters__impl__t_1a091dc625be7d1b900f768c9e13160b39"></span>uint64_t <code class="descname">excessive_collisions_</code></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1eth__phy__intf__counters__impl__t_1a7877a85ac5abb31fea9e430ebdb176ba"></span>uint64_t <code class="descname">internal_mac_transmit_errors_</code></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1eth__phy__intf__counters__impl__t_1a1a36629f6e014b5da425334f7e655559"></span>uint64_t <code class="descname">carrier_sense_errors_</code></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1eth__phy__intf__counters__impl__t_1a6dca50b345ef12f4053ca20ed6191839"></span>uint64_t <code class="descname">internal_mac_receive_errors_</code></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1eth__phy__intf__counters__impl__t_1a3e21cd3e31726a7bb32ae37856a45d26"></span>uint64_t <code class="descname">frame_too_shorts_</code></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1eth__phy__intf__counters__impl__t_1af92c623d3f08fa841dca2f1c0ca15874"></span>uint64_t <code class="descname">frame_too_longs_</code></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1eth__phy__intf__counters__impl__t_1adc45fc0e077bc434af34685bae41822e"></span>uint64_t <code class="descname">sqe_test_errors_</code></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1eth__phy__intf__counters__impl__t_1a78ed68a08d4f91e88cc40e025f6ed021"></span>uint64_t <code class="descname">symbol_errors_</code></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1eth__phy__intf__counters__impl__t_1af78bd568a467c96e3124de337aef861a"></span>uint64_t <code class="descname">in_unknown_opcodes_</code></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1eth__phy__intf__counters__impl__t_1a2bf8180170350a9d59e579c08a71f220"></span>uint64_t <code class="descname">out_pause_frames_</code></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1eth__phy__intf__counters__impl__t_1a06b6db02a07fc881693d89fc23cbf5fb"></span>uint64_t <code class="descname">in_pause_frames_</code></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1eth__phy__intf__counters__impl__t_1a19f1c134d6b2d56b80cba39d7582831f"></span>uint64_t <code class="descname">fragments_</code></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1eth__phy__intf__counters__impl__t_1adc370f2f36a5d982bb309f9fe69362bb"></span>uint64_t <code class="descname">jabbers_</code></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Friends</p>
+<dl class="friend">
+<dt>
+<span class="target" id="eossdkclasseos_1_1eth__phy__intf__counters__impl__t_1a2bb6464fc920649d250338f372c31bbd"></span>friend std::ostream &amp; <code class="descname">operator&lt;&lt;</code></dt>
+<dd><p>A utility stream operator that adds a string representation of <a class="reference internal" href="eth_phy_intf.html#eossdkclasseos_1_1eth__phy__intf__counters__t"><span class="std std-ref">eth_phy_intf_counters_t</span></a> to the ostream. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="class">
+<dt>
+<span class="target" id="eossdkclasseos_1_1eth__phy__intf__bin__counters__impl__t"></span><em>class</em> <code class="descname">eth_phy_intf_bin_counters_impl_t</code></dt>
+<dd><em>#include &lt;eth_phy_intf_impl.h&gt;</em><p>Ethernet interface bin counters class.</p>
+<p>All of these attributes have the same meanings as the corresponding objects in the RMON MIB (RFC2819). </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1eth__phy__intf__bin__counters__impl__t_1ae5163f742272fc5191369354563b2667"></span><code class="descname">eth_phy_intf_bin_counters_impl_t</code><span class="sig-paren">(</span><span class="sig-paren">)</span></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1eth__phy__intf__bin__counters__impl__t_1a3d609872d80de6271366fb5850474ca5"></span><code class="descname">eth_phy_intf_bin_counters_impl_t</code><span class="sig-paren">(</span>uint64_t <em>in_64_octet_frames</em>, uint64_t <em>in_65_to_127_octet_frames</em>, uint64_t <em>in_128_to_255_octet_frames</em>, uint64_t <em>in_256_to_511_octet_frames</em>, uint64_t <em>in_512_to_1023_octet_frames</em>, uint64_t <em>in_1024_to_1522_octet_frames</em>, uint64_t <em>in_1523_to_max_octet_frames</em>, uint64_t <em>out_64_octet_frames</em>, uint64_t <em>out_65_to_127_octet_frames</em>, uint64_t <em>out_128_to_255_octet_frames</em>, uint64_t <em>out_256_to_511_octet_frames</em>, uint64_t <em>out_512_to_1023_octet_frames</em>, uint64_t <em>out_1024_to_1522_octet_frames</em>, uint64_t <em>out_1523_to_max_octet_frames</em><span class="sig-paren">)</span></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1eth__phy__intf__bin__counters__impl__t_1a682bbdb785ef741d8ede070280376d1d"></span>uint64_t <code class="descname">in_64_octet_frames</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dd><p>Getter for ‘in_64_octet_frames’: Input 64 octet frame counter. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1eth__phy__intf__bin__counters__impl__t_1a71e2671084bc1fdf25ae7f15e929f914"></span>uint64_t <code class="descname">in_65_to_127_octet_frames</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dd><p>Getter for ‘in_65_to_127_octet_frames’: Input 65 to 127 octet frame counter. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1eth__phy__intf__bin__counters__impl__t_1acdb8c89f9312b98e89f3a2ed4b62d7b5"></span>uint64_t <code class="descname">in_128_to_255_octet_frames</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dd><p>Getter for ‘in_128_to_255_octet_frames’: Input 128 to 255 octet frame counter. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1eth__phy__intf__bin__counters__impl__t_1ae7476369777940cd2bd1d94f723c95b6"></span>uint64_t <code class="descname">in_256_to_511_octet_frames</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dd><p>Getter for ‘in_256_to_511_octet_frames’: Input 256 to 511 octet frame counter. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1eth__phy__intf__bin__counters__impl__t_1a34e1c250066689b5707d24b85772f4be"></span>uint64_t <code class="descname">in_512_to_1023_octet_frames</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dd><p>Getter for ‘in_512_to_1023_octet_frames’: Input 512 to 1023 octet frame counter. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1eth__phy__intf__bin__counters__impl__t_1a8cdd896a83db41087d9e6725af908945"></span>uint64_t <code class="descname">in_1024_to_1522_octet_frames</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dd><p>Getter for ‘in_1024_to_1522_octet_frames’: Input 1024 to 1522 octet frame counter. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1eth__phy__intf__bin__counters__impl__t_1a0a7b8b9f33fca197eb27aff82dfebf06"></span>uint64_t <code class="descname">in_1523_to_max_octet_frames</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dd><p>Getter for ‘in_1523_to_max_octet_frames’: Input 1523 to max octet frame counter. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1eth__phy__intf__bin__counters__impl__t_1ac3c374787b3b455ae6514ceb9d057a4e"></span>uint64_t <code class="descname">out_64_octet_frames</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dd><p>Getter for ‘out_64_octet_frames’: Output 64 octet frame counter. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1eth__phy__intf__bin__counters__impl__t_1ae0f80b512160a183c5e51051c1ef38a8"></span>uint64_t <code class="descname">out_65_to_127_octet_frames</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dd><p>Getter for ‘out_65_to_127_octet_frames’: Output 65 to 127 octet frame counter. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1eth__phy__intf__bin__counters__impl__t_1a32be723b0cbb05a55d18c097a46088e6"></span>uint64_t <code class="descname">out_128_to_255_octet_frames</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dd><p>Getter for ‘out_128_to_255_octet_frames’: Output 128 to 255 octet frame counter. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1eth__phy__intf__bin__counters__impl__t_1aa63b1551051ebaeaa6692ce9ec4c1942"></span>uint64_t <code class="descname">out_256_to_511_octet_frames</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dd><p>Getter for ‘out_256_to_511_octet_frames’: Output 256 to 511 octet frame counter. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1eth__phy__intf__bin__counters__impl__t_1a5ca8626ef8bb8b8bfe04b41c33ffc402"></span>uint64_t <code class="descname">out_512_to_1023_octet_frames</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dd><p>Getter for ‘out_512_to_1023_octet_frames’: Output 512 to 1023 octet frame counter. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1eth__phy__intf__bin__counters__impl__t_1a50d583b79bf08fd51d54560ed2c53118"></span>uint64_t <code class="descname">out_1024_to_1522_octet_frames</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dd><p>Getter for ‘out_1024_to_1522_octet_frames’: Output 1024 to 1522 octet frame counter. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1eth__phy__intf__bin__counters__impl__t_1a7d5b323dea6d3602ce6bc7f7d6434eb4"></span>uint64_t <code class="descname">out_1523_to_max_octet_frames</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dd><p>Getter for ‘out_1523_to_max_octet_frames’: Output 1523 to max octet frame counter. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1eth__phy__intf__bin__counters__impl__t_1a2592a637b09f6b61f3e757b9de727cf8"></span>bool <code class="descname">operator==</code><span class="sig-paren">(</span><a class="reference internal" href="#eossdkclasseos_1_1eth__phy__intf__bin__counters__impl__t"><span class="std std-ref">eth_phy_intf_bin_counters_impl_t</span></a> const &amp; <em>other</em><span class="sig-paren">)</span> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1eth__phy__intf__bin__counters__impl__t_1a4a3e39933b128a9f0124967c45833425"></span>bool <code class="descname">operator!=</code><span class="sig-paren">(</span><a class="reference internal" href="#eossdkclasseos_1_1eth__phy__intf__bin__counters__impl__t"><span class="std std-ref">eth_phy_intf_bin_counters_impl_t</span></a> const &amp; <em>other</em><span class="sig-paren">)</span> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1eth__phy__intf__bin__counters__impl__t_1a995ce35cb92eb8be116e3f8a703d90cc"></span>uint32_t <code class="descname">hash</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dd><p>The hash function for type <a class="reference internal" href="eth_phy_intf.html#eossdkclasseos_1_1eth__phy__intf__bin__counters__t"><span class="std std-ref">eth_phy_intf_bin_counters_t</span></a>. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1eth__phy__intf__bin__counters__impl__t_1a8c29464fed1089d42c43d857663255a6"></span>void <code class="descname">mix_me</code><span class="sig-paren">(</span><a class="reference internal" href="hash_mix.html#eossdkclasseos_1_1hash__mix"><span class="std std-ref">hash_mix</span></a> &amp; <em>h</em><span class="sig-paren">)</span> const</dt>
+<dd><p>The hash mix function for type <a class="reference internal" href="eth_phy_intf.html#eossdkclasseos_1_1eth__phy__intf__bin__counters__t"><span class="std std-ref">eth_phy_intf_bin_counters_t</span></a>. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1eth__phy__intf__bin__counters__impl__t_1a9758269266014cc7d8e96f2a5fafb04b"></span>std::string <code class="descname">to_string</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dd><p>Returns a string representation of the current object’s values. </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Private Members</p>
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1eth__phy__intf__bin__counters__impl__t_1a7d5d8c2f0014f60fcf9fb3cbc7f62cec"></span>uint64_t <code class="descname">in_64_octet_frames_</code></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1eth__phy__intf__bin__counters__impl__t_1a143f7b6b4520582ada48d6701cac2665"></span>uint64_t <code class="descname">in_65_to_127_octet_frames_</code></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1eth__phy__intf__bin__counters__impl__t_1a8c358a71cb561b19cb51b38b3d743e15"></span>uint64_t <code class="descname">in_128_to_255_octet_frames_</code></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1eth__phy__intf__bin__counters__impl__t_1a4c35afd06a5ba9c913811d2b0dc67d54"></span>uint64_t <code class="descname">in_256_to_511_octet_frames_</code></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1eth__phy__intf__bin__counters__impl__t_1a986de4fd02f2638971f6d705c7bb5cb0"></span>uint64_t <code class="descname">in_512_to_1023_octet_frames_</code></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1eth__phy__intf__bin__counters__impl__t_1a7b356e3302ac16eaa00eb003eb73993c"></span>uint64_t <code class="descname">in_1024_to_1522_octet_frames_</code></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1eth__phy__intf__bin__counters__impl__t_1a6e8196c021883dcb253edddf94cc9643"></span>uint64_t <code class="descname">in_1523_to_max_octet_frames_</code></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1eth__phy__intf__bin__counters__impl__t_1ab46ff622624717c5a7c42e16eb8fdb4b"></span>uint64_t <code class="descname">out_64_octet_frames_</code></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1eth__phy__intf__bin__counters__impl__t_1af747a11c9fde7d0ff77d5fc90e19bdb4"></span>uint64_t <code class="descname">out_65_to_127_octet_frames_</code></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1eth__phy__intf__bin__counters__impl__t_1a8fb049769067d858d1679acefe6d71f1"></span>uint64_t <code class="descname">out_128_to_255_octet_frames_</code></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1eth__phy__intf__bin__counters__impl__t_1a02f5cfb41592007b297ab6e626627491"></span>uint64_t <code class="descname">out_256_to_511_octet_frames_</code></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1eth__phy__intf__bin__counters__impl__t_1a6b72fb5d8c5379ee6a75233f42ca9761"></span>uint64_t <code class="descname">out_512_to_1023_octet_frames_</code></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1eth__phy__intf__bin__counters__impl__t_1a17d04e6dd35bda2c9606110ca929f7a2"></span>uint64_t <code class="descname">out_1024_to_1522_octet_frames_</code></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1eth__phy__intf__bin__counters__impl__t_1a338ff07ce9fbd301fd3d261629c06270"></span>uint64_t <code class="descname">out_1523_to_max_octet_frames_</code></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Friends</p>
+<dl class="friend">
+<dt>
+<span class="target" id="eossdkclasseos_1_1eth__phy__intf__bin__counters__impl__t_1a1c06811e61931dc2c8bb1863becca900"></span>friend std::ostream &amp; <code class="descname">operator&lt;&lt;</code></dt>
+<dd><p>A utility stream operator that adds a string representation of <a class="reference internal" href="eth_phy_intf.html#eossdkclasseos_1_1eth__phy__intf__bin__counters__t"><span class="std std-ref">eth_phy_intf_bin_counters_t</span></a> to the ostream. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#"><strong>eth_phy_intf_impl</strong></a><ul>
+<li><a class="reference internal" href="#type-definitions-in-eth-phy-intf-impl">Type definitions in <strong>eth_phy_intf_impl</strong></a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="eth_phy_intf.html"
+                        title="previous chapter"><strong>eth_phy_intf</strong></a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="event_loop.html"
+                        title="next chapter"><strong>event_loop</strong></a></p>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="event_loop.html" title="event_loop"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="eth_phy_intf.html" title="eth_phy_intf"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Arista EOS SDK 2.22.1 reference</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2014, Arista Networks.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.4.
+    </div>
+  </body>
+</html>

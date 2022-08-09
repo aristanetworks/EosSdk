@@ -1,0 +1,433 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>intf_impl &#8212; Arista EOS SDK 2.22.1 reference</title>
+    <link rel="stylesheet" href="_static/eossdk.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/breathe.css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/language_data.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="ip" href="ip.html" />
+    <link rel="prev" title="intf" href="intf.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="ip.html" title="ip"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="intf.html" title="intf"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Arista EOS SDK 2.22.1 reference</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="intf-impl">
+<h1><strong>intf_impl</strong><a class="headerlink" href="#intf-impl" title="Permalink to this headline">¶</a></h1>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">doxygenfile: Cannot find file “eos/intf_impl.h </p>
+</div>
+<div class="section" id="type-definitions-in-intf-impl">
+<h2>Type definitions in <strong>intf_impl</strong><a class="headerlink" href="#type-definitions-in-intf-impl" title="Permalink to this headline">¶</a></h2>
+<dl class="namespace">
+<dt>
+<span class="target" id="eossdknamespaceeos"></span><em>namespace</em> <code class="descname">eos</code></dt>
+<dd><dl class="class">
+<dt>
+<span class="target" id="eossdkclasseos_1_1intf__counters__impl__t"></span><em>class</em> <code class="descname">intf_counters_impl_t</code></dt>
+<dd><em>#include &lt;intf_impl.h&gt;</em><p>Interface counter class.</p>
+<p>All of these attributes have the same meanings as the corresponding objects in the Interface MIB (RFC 2863, ‘IF-MIB’). </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1intf__counters__impl__t_1ac686d111723c44aaa5489e2460ad1179"></span><code class="descname">intf_counters_impl_t</code><span class="sig-paren">(</span><span class="sig-paren">)</span></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1intf__counters__impl__t_1a6cd5099ed06f97dd866d476ea18ff0a1"></span><code class="descname">intf_counters_impl_t</code><span class="sig-paren">(</span>uint64_t <em>out_ucast_pkts</em>, uint64_t <em>out_multicast_pkts</em>, uint64_t <em>out_broadcast_pkts</em>, uint64_t <em>in_ucast_pkts</em>, uint64_t <em>in_multicast_pkts</em>, uint64_t <em>in_broadcast_pkts</em>, uint64_t <em>out_octets</em>, uint64_t <em>in_octets</em>, uint64_t <em>out_discards</em>, uint64_t <em>out_errors</em>, uint64_t <em>in_discards</em>, uint64_t <em>in_errors</em>, seconds_t <em>sample_time</em><span class="sig-paren">)</span></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1intf__counters__impl__t_1a474597317370c4e9468e4d15612f47a9"></span>uint64_t <code class="descname">out_ucast_pkts</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dd><p>Getter for ‘out_ucast_pkts’: IF-MIB ifOutUcastPkts. Note that IF-MIB specifies that ifOutUcastPkts should include packets that were dropped due to excessive collisions, as if they were successfully transmitted. We count these as out_errors. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1intf__counters__impl__t_1a43d8d8940b32b5066fc3fff7a36d0db6"></span>uint64_t <code class="descname">out_multicast_pkts</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dd><p>Getter for ‘out_multicast_pkts’: IF-MIB ifOutMulticastPkts counter. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1intf__counters__impl__t_1afe544a1bfcfd1ddf78694334dd68d33d"></span>uint64_t <code class="descname">out_broadcast_pkts</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dd><p>Getter for ‘out_broadcast_pkts’: IF-MIB ifOutBroadcastPkts counter. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1intf__counters__impl__t_1a85bf55706656ddb1a7c6f16af16691e6"></span>uint64_t <code class="descname">in_ucast_pkts</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dd><p>Getter for ‘in_ucast_pkts’: IF-MIB ifInUcastPkts. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1intf__counters__impl__t_1a6efd09243dc68787b7ef2e15a3a0f077"></span>uint64_t <code class="descname">in_multicast_pkts</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dd><p>Getter for ‘in_multicast_pkts’: IF-MIB ifInMulticastPkts counter. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1intf__counters__impl__t_1a51cb6942a757df0f8c35791037ab0fa7"></span>uint64_t <code class="descname">in_broadcast_pkts</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dd><p>Getter for ‘in_broadcast_pkts’: IF-MIB ifInBroadcastPkts counter. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1intf__counters__impl__t_1a183d0b033d9d14dcd7138044af0a14c8"></span>uint64_t <code class="descname">out_octets</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dd><p>Getter for ‘out_octets’: IF-MIB ifOutOctets counter. Note that for Ethernet interfaces, the octet counters include the MAC header and FCS (but not the preamble or SFD). This is different to the IEEE 802.3 counters (which do not include MAC header and FCS). See RFC 3635. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1intf__counters__impl__t_1aa92d594ed0e01422a7ff27a565ba0238"></span>uint64_t <code class="descname">in_octets</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dd><p>Getter for ‘in_octets’: IF-MIB ifInOctets counter. Note that for Ethernet interfaces, the octet counters include the MAC header and FCS (but not the preamble or SFD). This is different to the IEEE 802.3 counters (which do not include MAC header and FCS). See RFC 3635. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1intf__counters__impl__t_1a759e581122fa2fb7212864f29198a1c7"></span>uint64_t <code class="descname">out_discards</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dd><p>Getter for ‘out_discards’: IF-MIB ifOutDiscards counter. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1intf__counters__impl__t_1ad58fb582da10386ff977940a80520405"></span>uint64_t <code class="descname">out_errors</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dd><p>Getter for ‘out_errors’: IF-MIB ifOutErrors counter. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1intf__counters__impl__t_1aee8fc80d259da6eacf957ac4c5314611"></span>uint64_t <code class="descname">in_discards</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dd><p>Getter for ‘in_discards’: IF-MIB ifInDiscards counter. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1intf__counters__impl__t_1a3cf780d90f049eab36123dc6dfdb4704"></span>uint64_t <code class="descname">in_errors</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dd><p>Getter for ‘in_errors’: IF-MIB ifInErrors counter. The IF-MIB specifies that CRC errors should not get counted at all!, and that inErrors should include IP header checksum errors. We do not do this. We count CRC errors as inErrors, and IP header checksum errors as good packets at this level (in_ucast_pkts). </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1intf__counters__impl__t_1a02dd9e8117413068696829b40cf35280"></span>seconds_t <code class="descname">sample_time</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dd><p>Getter for ‘sample_time’: time when the counters were updated. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1intf__counters__impl__t_1a793a802bef22413f08c6bf5265d950ed"></span>bool <code class="descname">operator==</code><span class="sig-paren">(</span><a class="reference internal" href="#eossdkclasseos_1_1intf__counters__impl__t"><span class="std std-ref">intf_counters_impl_t</span></a> const &amp; <em>other</em><span class="sig-paren">)</span> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1intf__counters__impl__t_1ae7985952702e94dfac363246e331eb74"></span>bool <code class="descname">operator!=</code><span class="sig-paren">(</span><a class="reference internal" href="#eossdkclasseos_1_1intf__counters__impl__t"><span class="std std-ref">intf_counters_impl_t</span></a> const &amp; <em>other</em><span class="sig-paren">)</span> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1intf__counters__impl__t_1afb6fd1cbb00d527310a602059b07b82e"></span>uint32_t <code class="descname">hash</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dd><p>The hash function for type <a class="reference internal" href="intf.html#eossdkclasseos_1_1intf__counters__t"><span class="std std-ref">intf_counters_t</span></a>. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1intf__counters__impl__t_1a108a10706839d1ad9ee3a2978b99aa2b"></span>void <code class="descname">mix_me</code><span class="sig-paren">(</span><a class="reference internal" href="hash_mix.html#eossdkclasseos_1_1hash__mix"><span class="std std-ref">hash_mix</span></a> &amp; <em>h</em><span class="sig-paren">)</span> const</dt>
+<dd><p>The hash mix function for type <a class="reference internal" href="intf.html#eossdkclasseos_1_1intf__counters__t"><span class="std std-ref">intf_counters_t</span></a>. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1intf__counters__impl__t_1aba230d9383f722b3209362636459d180"></span>std::string <code class="descname">to_string</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dd><p>Returns a string representation of the current object’s values. </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Private Members</p>
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1intf__counters__impl__t_1ae861a4532ddb2423b75fe63b231183d7"></span>uint64_t <code class="descname">out_ucast_pkts_</code></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1intf__counters__impl__t_1afcd6a87d704dc93aea9501f00c1b05f6"></span>uint64_t <code class="descname">out_multicast_pkts_</code></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1intf__counters__impl__t_1a84eca3a07e6b0b43299f1cefa18bfef3"></span>uint64_t <code class="descname">out_broadcast_pkts_</code></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1intf__counters__impl__t_1a2ce7bc7f10dce4d8f9d7d70b45d36363"></span>uint64_t <code class="descname">in_ucast_pkts_</code></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1intf__counters__impl__t_1a1727ca9bfa20720bbed4f2a1c5ab827c"></span>uint64_t <code class="descname">in_multicast_pkts_</code></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1intf__counters__impl__t_1aa79983b34deb613608eb6a162684fdea"></span>uint64_t <code class="descname">in_broadcast_pkts_</code></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1intf__counters__impl__t_1a40d0a7dba1d55f009f7ebd906b5708c5"></span>uint64_t <code class="descname">out_octets_</code></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1intf__counters__impl__t_1a94719ee9548fe1be9729e8b90c3f5a64"></span>uint64_t <code class="descname">in_octets_</code></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1intf__counters__impl__t_1a6a3d0feff67d6d35ea8652ff62fa1c45"></span>uint64_t <code class="descname">out_discards_</code></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1intf__counters__impl__t_1a462e274050e71320c6ca0d7670386656"></span>uint64_t <code class="descname">out_errors_</code></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1intf__counters__impl__t_1a3ce1ad230d13ac0de4d5641708c30fc2"></span>uint64_t <code class="descname">in_discards_</code></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1intf__counters__impl__t_1ae4f21d9930d29413ce8420e77adb7bfe"></span>uint64_t <code class="descname">in_errors_</code></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1intf__counters__impl__t_1a6f872b3d342cdb38f251938698feddcc"></span>seconds_t <code class="descname">sample_time_</code></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Friends</p>
+<dl class="friend">
+<dt>
+<span class="target" id="eossdkclasseos_1_1intf__counters__impl__t_1a6744dbdf8a27fb45970964cd9f5df5cc"></span>friend std::ostream &amp; <code class="descname">operator&lt;&lt;</code></dt>
+<dd><p>A utility stream operator that adds a string representation of <a class="reference internal" href="intf.html#eossdkclasseos_1_1intf__counters__t"><span class="std std-ref">intf_counters_t</span></a> to the ostream. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="class">
+<dt>
+<span class="target" id="eossdkclasseos_1_1intf__traffic__rates__impl__t"></span><em>class</em> <code class="descname">intf_traffic_rates_impl_t</code></dt>
+<dd><em>#include &lt;intf_impl.h&gt;</em><p>Interface traffic rates class. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1intf__traffic__rates__impl__t_1a6af831a27db0f045ca0cf8dd70c82e2b"></span><code class="descname">intf_traffic_rates_impl_t</code><span class="sig-paren">(</span><span class="sig-paren">)</span></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1intf__traffic__rates__impl__t_1a9ab00a47b23c5b08cc194c6f37972acb"></span><code class="descname">intf_traffic_rates_impl_t</code><span class="sig-paren">(</span>double <em>out_pkts_rate</em>, double <em>in_pkts_rate</em>, double <em>out_bits_rate</em>, double <em>in_bits_rate</em>, seconds_t <em>sample_time</em><span class="sig-paren">)</span></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1intf__traffic__rates__impl__t_1ab22e21a9f64f8f9521a713ccc1937c78"></span>double <code class="descname">out_pkts_rate</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dd><p>Getter for ‘out_pkts_rate’: output packets per second. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1intf__traffic__rates__impl__t_1a37743d71574e0d91e778f87376e9c238"></span>double <code class="descname">in_pkts_rate</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dd><p>Getter for ‘in_pkts_rate’: input packets per second. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1intf__traffic__rates__impl__t_1a2140fb26229e9a2eaaaba7bfce678202"></span>double <code class="descname">out_bits_rate</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dd><p>Getter for ‘out_bits_rate’: output bits per second. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1intf__traffic__rates__impl__t_1a0d9d3abdfab42ff5f548984003c86626"></span>double <code class="descname">in_bits_rate</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dd><p>Getter for ‘in_bits_rate’: input bits per second. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1intf__traffic__rates__impl__t_1a248d54ece9c614482140cf64decd8d05"></span>seconds_t <code class="descname">sample_time</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dd><p>Getter for ‘sample_time’: time when the rates were updated. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1intf__traffic__rates__impl__t_1a878e3d0aadddd9ebf7798c23395165ae"></span>bool <code class="descname">operator==</code><span class="sig-paren">(</span><a class="reference internal" href="#eossdkclasseos_1_1intf__traffic__rates__impl__t"><span class="std std-ref">intf_traffic_rates_impl_t</span></a> const &amp; <em>other</em><span class="sig-paren">)</span> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1intf__traffic__rates__impl__t_1ab1124e1ab01837f1b2b02882b7435041"></span>bool <code class="descname">operator!=</code><span class="sig-paren">(</span><a class="reference internal" href="#eossdkclasseos_1_1intf__traffic__rates__impl__t"><span class="std std-ref">intf_traffic_rates_impl_t</span></a> const &amp; <em>other</em><span class="sig-paren">)</span> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1intf__traffic__rates__impl__t_1a6af570e6f8ef84e7e1797627f6224f76"></span>uint32_t <code class="descname">hash</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dd><p>The hash function for type <a class="reference internal" href="intf.html#eossdkclasseos_1_1intf__traffic__rates__t"><span class="std std-ref">intf_traffic_rates_t</span></a>. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1intf__traffic__rates__impl__t_1a3a22c2fca9f473ffa4e670b920473179"></span>void <code class="descname">mix_me</code><span class="sig-paren">(</span><a class="reference internal" href="hash_mix.html#eossdkclasseos_1_1hash__mix"><span class="std std-ref">hash_mix</span></a> &amp; <em>h</em><span class="sig-paren">)</span> const</dt>
+<dd><p>The hash mix function for type <a class="reference internal" href="intf.html#eossdkclasseos_1_1intf__traffic__rates__t"><span class="std std-ref">intf_traffic_rates_t</span></a>. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1intf__traffic__rates__impl__t_1a6d196b0f7b49f50df0567136259ca7f5"></span>std::string <code class="descname">to_string</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dd><p>Returns a string representation of the current object’s values. </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Private Members</p>
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1intf__traffic__rates__impl__t_1abbecafdf4252822e565109be680dd022"></span>double <code class="descname">out_pkts_rate_</code></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1intf__traffic__rates__impl__t_1a607206cc10be29d4a5720738737e4768"></span>double <code class="descname">in_pkts_rate_</code></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1intf__traffic__rates__impl__t_1af1f2a31800bf27eb34ef2a1a7a56e330"></span>double <code class="descname">out_bits_rate_</code></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1intf__traffic__rates__impl__t_1a8dfa4c65b2665e343c41a2feb11e6e15"></span>double <code class="descname">in_bits_rate_</code></dt>
+<dd></dd></dl>
+
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1intf__traffic__rates__impl__t_1a97a7d8aba0f504c57f07beb62ff8c588"></span>seconds_t <code class="descname">sample_time_</code></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Friends</p>
+<dl class="friend">
+<dt>
+<span class="target" id="eossdkclasseos_1_1intf__traffic__rates__impl__t_1a1b5467d60b4c3a7c2b69a645f464f036"></span>friend std::ostream &amp; <code class="descname">operator&lt;&lt;</code></dt>
+<dd><p>A utility stream operator that adds a string representation of <a class="reference internal" href="intf.html#eossdkclasseos_1_1intf__traffic__rates__t"><span class="std std-ref">intf_traffic_rates_t</span></a> to the ostream. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#"><strong>intf_impl</strong></a><ul>
+<li><a class="reference internal" href="#type-definitions-in-intf-impl">Type definitions in <strong>intf_impl</strong></a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="intf.html"
+                        title="previous chapter"><strong>intf</strong></a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="ip.html"
+                        title="next chapter"><strong>ip</strong></a></p>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="ip.html" title="ip"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="intf.html" title="intf"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Arista EOS SDK 2.22.1 reference</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2014, Arista Networks.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.4.
+    </div>
+  </body>
+</html>

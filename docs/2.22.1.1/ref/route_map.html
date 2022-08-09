@@ -1,0 +1,658 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>route_map &#8212; Arista EOS SDK 2.22.1 reference</title>
+    <link rel="stylesheet" href="_static/eossdk.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/breathe.css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/language_data.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="route_map_impl" href="route_map_impl.html" />
+    <link rel="prev" title="policy_map_impl" href="policy_map_impl.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="route_map_impl.html" title="route_map_impl"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="policy_map_impl.html" title="policy_map_impl"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Arista EOS SDK 2.22.1 reference</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="route-map">
+<h1><strong>route_map</strong><a class="headerlink" href="#route-map" title="Permalink to this headline">¶</a></h1>
+<p>Route Map management module.</p>
+<p>Route map is a ordered set of route map entry statement that manage the redistribution of IP routes into the protocol domain and modify the attrbutes of routes.</p>
+<p>This module provides APIs to query Route Map information. </p>
+<dl class="namespace">
+<dt>
+<span class="target" id="eossdknamespaceeos"></span><em>namespace</em> <code class="descname">eos</code></dt>
+<dd><dl class="class">
+<dt>
+<span class="target" id="eossdkclasseos_1_1route__map__mgr"></span><em>class</em> <code class="descname">route_map_mgr</code></dt>
+<dd><em>#include &lt;route_map.h&gt;</em><p>A manager of route map configurations.</p>
+<p>A example of the API usage is in example/RouteMapAgent.cpp </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1route__map__mgr_1a7df23da6ac2e0c3a21614474ed3bc801"></span>virtual <code class="descname">~route_map_mgr</code><span class="sig-paren">(</span><span class="sig-paren">)</span></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1route__map__mgr_1a1c75646b21abaab3f55d43b3e6324578"></span>virtual uint8_t <code class="descname">priority</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const = 0</dt>
+<dd><p>Returns the priority value of eossdk route map configuration. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1route__map__mgr_1a5200114c352b6dd58f345a61f087f413"></span>virtual void <code class="descname">priority_is</code><span class="sig-paren">(</span>uint8_t<span class="sig-paren">)</span> = 0</dt>
+<dd><p>Configures the priority value of eossdk route map configuration. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1route__map__mgr_1a2b0ce6167a1229d5fde0401013e12270"></span>virtual <a class="reference internal" href="#eossdkclasseos_1_1route__map__t"><span class="std std-ref">route_map_t</span></a> <code class="descname">route_map</code><span class="sig-paren">(</span>route_map_name_t const &amp;<span class="sig-paren">)</span> const = 0</dt>
+<dd><p>Returns a eossdk route map with corresponding route map name, which contains route map entries. Returns an empty <a class="reference internal" href="#eossdkclasseos_1_1route__map__t"><span class="std std-ref">route_map_t</span></a> if no matching route map was found. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1route__map__mgr_1a41f53b61212f43c7f57c6661a5419f29"></span>virtual <a class="reference internal" href="#eossdkclasseos_1_1route__map__entry__t"><span class="std std-ref">route_map_entry_t</span></a> <code class="descname">route_map_entry</code><span class="sig-paren">(</span>route_map_name_t const &amp;, route_map_sequence_number_t<span class="sig-paren">)</span> const = 0</dt>
+<dd><p>Returns a route map entry with the corresponding sequence number in corresponding route map. Returns an empty <a class="reference internal" href="#eossdkclasseos_1_1route__map__entry__t"><span class="std std-ref">route_map_entry_t</span></a> if no matching route map entry was found. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1route__map__mgr_1a8e713ab664824ddc5a35345f855eadf8"></span>virtual void <code class="descname">route_map_set</code><span class="sig-paren">(</span>route_map_name_t const &amp;, <a class="reference internal" href="#eossdkclasseos_1_1route__map__t"><span class="std std-ref">route_map_t</span></a> const &amp;<span class="sig-paren">)</span> = 0</dt>
+<dd><p>Creates or updates a route map. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1route__map__mgr_1ab77dc80267a23f0c43f36d9d35714cdd"></span>virtual void <code class="descname">route_map_entry_set</code><span class="sig-paren">(</span>route_map_name_t const &amp;, route_map_sequence_number_t, <a class="reference internal" href="#eossdkclasseos_1_1route__map__entry__t"><span class="std std-ref">route_map_entry_t</span></a> const &amp;<span class="sig-paren">)</span> = 0</dt>
+<dd><p>Creates or updates a route map entry in corresponding route map. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1route__map__mgr_1a9a69230ce1f479935cadfc25e9dd8890"></span>virtual void <code class="descname">route_map_del</code><span class="sig-paren">(</span>route_map_name_t const &amp;<span class="sig-paren">)</span> = 0</dt>
+<dd><p>Removes the corresponding route map from the configuration if exists. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1route__map__mgr_1a8151abbd33b43cafe5d78f13413cef30"></span>virtual void <code class="descname">route_map_entry_del</code><span class="sig-paren">(</span>route_map_name_t const &amp;, route_map_sequence_number_t<span class="sig-paren">)</span> = 0</dt>
+<dd><p>Removes the corresponding route map entry from a given route map. </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Protected Functions</p>
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1route__map__mgr_1a970d55fe1f4e790ec72177ca57e14ffd"></span><code class="descname">route_map_mgr</code><span class="sig-paren">(</span><span class="sig-paren">)</span></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Private Members</p>
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1route__map__mgr_1ae869f6cbb47252bbadcf48307b50971a"></span><code class="descname">route_map_mgr</code></dt>
+<dd></dd></dl>
+
+</div>
+</dd></dl>
+
+</dd></dl>
+
+<div class="section" id="type-definitions-in-route-map">
+<h2>Type definitions in <strong>route_map</strong><a class="headerlink" href="#type-definitions-in-route-map" title="Permalink to this headline">¶</a></h2>
+<dl class="namespace">
+<dt>
+<span class="target" id="eossdknamespaceeos"></span><em>namespace</em> <code class="descname">eos</code></dt>
+<dd><div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Typedefs</p>
+<dl class="typedef">
+<dt>
+<span class="target" id="eossdknamespaceeos_1a7d5a9782ae87b2905d41fc5c5bd33e09"></span>typedef std::string <code class="descname">route_map_name_t</code></dt>
+<dd></dd></dl>
+
+<dl class="typedef">
+<dt>
+<span class="target" id="eossdknamespaceeos_1a6002f7959ed4605a8b2fe8e040e9ebf0"></span>typedef uint32_t <code class="descname">route_map_sequence_number_t</code></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Enums</p>
+<dl class="enum">
+<dt>
+<span class="target" id="eossdknamespaceeos_1af2f13d2a03440ecff4115d3e39fbed81"></span><strong>bandwidth_unit_t enum</strong></dt>
+<dd><p><em>Values:</em></p>
+<ul class="breatheenumvalues">
+<li><code class="first docutils literal notranslate"><span class="pre">LINK_BANDWIDTH_UNIT_BIT</span></code> - </li>
+<li><code class="first docutils literal notranslate"><span class="pre">LINK_BANDWIDTH_UNIT_KILOBIT</span></code> - </li>
+<li><code class="first docutils literal notranslate"><span class="pre">LINK_BANDWIDTH_UNIT_MEGABIT</span></code> - </li>
+<li><code class="first docutils literal notranslate"><span class="pre">LINK_BANDWIDTH_UNIT_GIGABIT</span></code> - </li>
+</ul>
+</dd></dl>
+
+<dl class="enum">
+<dt>
+<span class="target" id="eossdknamespaceeos_1a6c2cf658c45a521a7549dd113a60b649"></span><strong>route_map_operation_type_t enum</strong></dt>
+<dd><p>Route map extended community link bandwidth operation type. </p>
+<p><em>Values:</em></p>
+<ul class="breatheenumvalues">
+<li><code class="first docutils literal notranslate"><span class="pre">OPERATION_TYPE_NONE</span></code> - </li>
+<li><code class="first docutils literal notranslate"><span class="pre">OPERATION_TYPE_SET</span></code> - </li>
+<li><code class="first docutils literal notranslate"><span class="pre">OPERATION_TYPE_DELETE</span></code> - </li>
+</ul>
+</dd></dl>
+
+</div>
+<dl class="class">
+<dt>
+<span class="target" id="eossdkclasseos_1_1link__bandwidth__t"></span><em>class</em> <code class="descname">link_bandwidth_t</code></dt>
+<dd><em>#include &lt;route_map.h&gt;</em><p>Extended community link bandwidth value. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1link__bandwidth__t_1a27bfa7b71a98d112f9be232a3c95f083"></span><code class="descname">link_bandwidth_t</code><span class="sig-paren">(</span>float <em>value</em>, bandwidth_unit_t <em>unit</em><span class="sig-paren">)</span></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1link__bandwidth__t_1a86d41bb987c7495a749b7db4cc3f9fe0"></span><code class="descname">link_bandwidth_t</code><span class="sig-paren">(</span>float <em>value</em><span class="sig-paren">)</span></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1link__bandwidth__t_1a205ff711f25606e96188a93c3dc8a1bf"></span><code class="descname">link_bandwidth_t</code><span class="sig-paren">(</span><span class="sig-paren">)</span></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1link__bandwidth__t_1ac6563ac804291c3b41fdd7b9d63f1fed"></span><code class="descname">link_bandwidth_t</code><span class="sig-paren">(</span>const <a class="reference internal" href="#eossdkclasseos_1_1link__bandwidth__t"><span class="std std-ref">link_bandwidth_t</span></a> &amp; <em>other</em><span class="sig-paren">)</span></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1link__bandwidth__t_1ac45046ee9e12a248ca513282cf402490"></span><a class="reference internal" href="#eossdkclasseos_1_1link__bandwidth__t"><span class="std std-ref">link_bandwidth_t</span></a> &amp; <code class="descname">operator=</code><span class="sig-paren">(</span><a class="reference internal" href="#eossdkclasseos_1_1link__bandwidth__t"><span class="std std-ref">link_bandwidth_t</span></a> const &amp; <em>other</em><span class="sig-paren">)</span></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1link__bandwidth__t_1a430d362f7d36280736d893f56bc33c5c"></span>float <code class="descname">value</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dd><p>Getter for ‘value’: The link bandwidth value. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1link__bandwidth__t_1a5761cc110b43010baa6b0cd50ab986fe"></span>void <code class="descname">value_is</code><span class="sig-paren">(</span>float <em>value</em><span class="sig-paren">)</span></dt>
+<dd><p>Setter for ‘value’. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1link__bandwidth__t_1ab29172daa2361cb86b0bdc0744f376c3"></span>bandwidth_unit_t <code class="descname">unit</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dd><p>Getter for ‘unit’: The link bandwidth bitrate unit. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1link__bandwidth__t_1a966382c98c4d7ffebc48abe350fd5c44"></span>void <code class="descname">unit_is</code><span class="sig-paren">(</span>bandwidth_unit_t <em>unit</em><span class="sig-paren">)</span></dt>
+<dd><p>Setter for ‘unit’. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1link__bandwidth__t_1ab078925809c6fa1900db3e9b7d95fec4"></span>bool <code class="descname">operator==</code><span class="sig-paren">(</span><a class="reference internal" href="#eossdkclasseos_1_1link__bandwidth__t"><span class="std std-ref">link_bandwidth_t</span></a> const &amp; <em>other</em><span class="sig-paren">)</span> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1link__bandwidth__t_1a7dec1d5f1f8b4b3e88a7e8736fbf85a7"></span>bool <code class="descname">operator!=</code><span class="sig-paren">(</span><a class="reference internal" href="#eossdkclasseos_1_1link__bandwidth__t"><span class="std std-ref">link_bandwidth_t</span></a> const &amp; <em>other</em><span class="sig-paren">)</span> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1link__bandwidth__t_1aa6bcd4c0eda1349db048cc16cd0fb3d2"></span>bool <code class="descname">operator&lt;</code><span class="sig-paren">(</span><a class="reference internal" href="#eossdkclasseos_1_1link__bandwidth__t"><span class="std std-ref">link_bandwidth_t</span></a> const &amp; <em>other</em><span class="sig-paren">)</span> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1link__bandwidth__t_1a3f301e80411bf8ba5600000432ac39e0"></span>uint32_t <code class="descname">hash</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dd><p>The hash function for type <a class="reference internal" href="#eossdkclasseos_1_1link__bandwidth__t"><span class="std std-ref">link_bandwidth_t</span></a>. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1link__bandwidth__t_1aea9acba72e99cfd40c08d6e1c307ecf3"></span>void <code class="descname">mix_me</code><span class="sig-paren">(</span><a class="reference internal" href="hash_mix.html#eossdkclasseos_1_1hash__mix"><span class="std std-ref">hash_mix</span></a> &amp; <em>h</em><span class="sig-paren">)</span> const</dt>
+<dd><p>The hash mix function for type <a class="reference internal" href="#eossdkclasseos_1_1link__bandwidth__t"><span class="std std-ref">link_bandwidth_t</span></a>. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1link__bandwidth__t_1a77d57698e3a40dc5f0691c96c9c734f5"></span>std::string <code class="descname">to_string</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dd><p>Returns a string representation of the current object’s values. </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Private Members</p>
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1link__bandwidth__t_1a02e8d887d508821029407dbbb495a83c"></span>std::shared_ptr&lt; <a class="reference internal" href="route_map_impl.html#eossdkclasseos_1_1link__bandwidth__impl__t"><span class="std std-ref">link_bandwidth_impl_t</span></a> &gt; <code class="descname">pimpl</code></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Friends</p>
+<dl class="friend">
+<dt>
+<span class="target" id="eossdkclasseos_1_1link__bandwidth__t_1a186ab040333057e20e570c942d79e23c"></span>friend std::ostream &amp; <code class="descname">operator&lt;&lt;</code></dt>
+<dd><p>A utility stream operator that adds a string representation of <a class="reference internal" href="#eossdkclasseos_1_1link__bandwidth__t"><span class="std std-ref">link_bandwidth_t</span></a> to the ostream. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="class">
+<dt>
+<span class="target" id="eossdkclasseos_1_1route__map__link__bandwidth__t"></span><em>class</em> <code class="descname">route_map_link_bandwidth_t</code></dt>
+<dd><em>#include &lt;route_map.h&gt;</em><p>Route map link bandwidth operation attribute information. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1route__map__link__bandwidth__t_1a09c1327d8a91866bc86b92806c588f4d"></span><code class="descname">route_map_link_bandwidth_t</code><span class="sig-paren">(</span><span class="sig-paren">)</span></dt>
+<dd><p>Create route map link bandwidth. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1route__map__link__bandwidth__t_1a2814b47b35b88c21a49361af95be57a6"></span><code class="descname">route_map_link_bandwidth_t</code><span class="sig-paren">(</span>const <a class="reference internal" href="#eossdkclasseos_1_1route__map__link__bandwidth__t"><span class="std std-ref">route_map_link_bandwidth_t</span></a> &amp; <em>other</em><span class="sig-paren">)</span></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1route__map__link__bandwidth__t_1a29ab656b4b9a454f5cc159992d1f8833"></span><a class="reference internal" href="#eossdkclasseos_1_1route__map__link__bandwidth__t"><span class="std std-ref">route_map_link_bandwidth_t</span></a> &amp; <code class="descname">operator=</code><span class="sig-paren">(</span><a class="reference internal" href="#eossdkclasseos_1_1route__map__link__bandwidth__t"><span class="std std-ref">route_map_link_bandwidth_t</span></a> const &amp; <em>other</em><span class="sig-paren">)</span></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1route__map__link__bandwidth__t_1a53acbacc727c4ab7d36a9342d3661530"></span>route_map_operation_type_t <code class="descname">operation</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dd><p>Getter for ‘operation’: Operation type. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1route__map__link__bandwidth__t_1ae61cd1c45adb8e7cb76f10a58cd0d294"></span>bgp_asn_t <code class="descname">asn</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dd><p>Getter for ‘asn’: Peer AS number. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1route__map__link__bandwidth__t_1a40a5457a0fd7a0589a8195fda0f75edb"></span><a class="reference internal" href="#eossdkclasseos_1_1link__bandwidth__t"><span class="std std-ref">link_bandwidth_t</span></a> <code class="descname">bandwidth</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dd><p>Getter for ‘bandwidth’: Link bandwidth value. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1route__map__link__bandwidth__t_1a8719f2863d81685491c94dd849acdf82"></span>void <code class="descname">route_map_operation_type_set_is</code><span class="sig-paren">(</span><a class="reference internal" href="#eossdkclasseos_1_1link__bandwidth__t"><span class="std std-ref">link_bandwidth_t</span></a> <em>bandwidth</em><span class="sig-paren">)</span></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1route__map__link__bandwidth__t_1ab39ced573dcfce905f3e2e3b49d71f8b"></span>void <code class="descname">route_map_operation_type_delete_is</code><span class="sig-paren">(</span><a class="reference internal" href="#eossdkclasseos_1_1link__bandwidth__t"><span class="std std-ref">link_bandwidth_t</span></a> <em>bandwidth</em>, bgp_asn_t <em>asn</em><span class="sig-paren">)</span></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1route__map__link__bandwidth__t_1afc4aa25edbfefa97a958bf0c08a9c055"></span>bool <code class="descname">operator==</code><span class="sig-paren">(</span><a class="reference internal" href="#eossdkclasseos_1_1route__map__link__bandwidth__t"><span class="std std-ref">route_map_link_bandwidth_t</span></a> const &amp; <em>other</em><span class="sig-paren">)</span> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1route__map__link__bandwidth__t_1ad4b529599f8f87578a0268ac8ffef253"></span>bool <code class="descname">operator!=</code><span class="sig-paren">(</span><a class="reference internal" href="#eossdkclasseos_1_1route__map__link__bandwidth__t"><span class="std std-ref">route_map_link_bandwidth_t</span></a> const &amp; <em>other</em><span class="sig-paren">)</span> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1route__map__link__bandwidth__t_1ac81ec0dbce2aa2db107baadeda4f79ee"></span>bool <code class="descname">operator&lt;</code><span class="sig-paren">(</span><a class="reference internal" href="#eossdkclasseos_1_1route__map__link__bandwidth__t"><span class="std std-ref">route_map_link_bandwidth_t</span></a> const &amp; <em>other</em><span class="sig-paren">)</span> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1route__map__link__bandwidth__t_1a4d6fd9b9a3a364bb33067ac17757b441"></span>uint32_t <code class="descname">hash</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dd><p>The hash function for type <a class="reference internal" href="#eossdkclasseos_1_1route__map__link__bandwidth__t"><span class="std std-ref">route_map_link_bandwidth_t</span></a>. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1route__map__link__bandwidth__t_1adb29ce86dabf3cc6479917e97d5ee651"></span>void <code class="descname">mix_me</code><span class="sig-paren">(</span><a class="reference internal" href="hash_mix.html#eossdkclasseos_1_1hash__mix"><span class="std std-ref">hash_mix</span></a> &amp; <em>h</em><span class="sig-paren">)</span> const</dt>
+<dd><p>The hash mix function for type <a class="reference internal" href="#eossdkclasseos_1_1route__map__link__bandwidth__t"><span class="std std-ref">route_map_link_bandwidth_t</span></a>. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1route__map__link__bandwidth__t_1ae63b2c853117ddec3691ea8e2ae4b71c"></span>std::string <code class="descname">to_string</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dd><p>Returns a string representation of the current object’s values. </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Private Members</p>
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1route__map__link__bandwidth__t_1a7c70e17a0a518c92765c4e77cad55446"></span>std::shared_ptr&lt; <a class="reference internal" href="route_map_impl.html#eossdkclasseos_1_1route__map__link__bandwidth__impl__t"><span class="std std-ref">route_map_link_bandwidth_impl_t</span></a> &gt; <code class="descname">pimpl</code></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Friends</p>
+<dl class="friend">
+<dt>
+<span class="target" id="eossdkclasseos_1_1route__map__link__bandwidth__t_1ac2bdf904a82e65c842ac3168ae9d2069"></span>friend std::ostream &amp; <code class="descname">operator&lt;&lt;</code></dt>
+<dd><p>A utility stream operator that adds a string representation of <a class="reference internal" href="#eossdkclasseos_1_1route__map__link__bandwidth__t"><span class="std std-ref">route_map_link_bandwidth_t</span></a> to the ostream. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="class">
+<dt>
+<span class="target" id="eossdkclasseos_1_1route__map__entry__t"></span><em>class</em> <code class="descname">route_map_entry_t</code></dt>
+<dd><em>#include &lt;route_map.h&gt;</em><p>Route map entry sequence. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1route__map__entry__t_1a9156ae2e793a74597051470bb7754794"></span><code class="descname">route_map_entry_t</code><span class="sig-paren">(</span><span class="sig-paren">)</span></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1route__map__entry__t_1a248b965e71df702a96ec6741982c6603"></span><code class="descname">route_map_entry_t</code><span class="sig-paren">(</span>bool <em>permit</em><span class="sig-paren">)</span></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1route__map__entry__t_1a436cb6dbca3b356e7513b0a81795c2e3"></span><code class="descname">route_map_entry_t</code><span class="sig-paren">(</span>const <a class="reference internal" href="#eossdkclasseos_1_1route__map__entry__t"><span class="std std-ref">route_map_entry_t</span></a> &amp; <em>other</em><span class="sig-paren">)</span></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1route__map__entry__t_1a1b09e51bb828b399ea879a5d7e414abf"></span><a class="reference internal" href="#eossdkclasseos_1_1route__map__entry__t"><span class="std std-ref">route_map_entry_t</span></a> &amp; <code class="descname">operator=</code><span class="sig-paren">(</span><a class="reference internal" href="#eossdkclasseos_1_1route__map__entry__t"><span class="std std-ref">route_map_entry_t</span></a> const &amp; <em>other</em><span class="sig-paren">)</span></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1route__map__entry__t_1a5ee6c3c51ca391a18924dfd6ae880a16"></span>bool <code class="descname">permit</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dd><p>Getter for ‘permit’: Permit sequence entry when true, deny otherwise. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1route__map__entry__t_1a74cdf6b0b304905ea24c6de5d4233b20"></span>void <code class="descname">permit_is</code><span class="sig-paren">(</span>bool <em>permit</em><span class="sig-paren">)</span></dt>
+<dd><p>Setter for ‘permit’. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1route__map__entry__t_1a1276f44d81dc7aec75b39c1e9f988189"></span>route_map_sequence_number_t <code class="descname">continue_sequence</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dd><p>Getter for ‘continue_sequence’: Continue to a different map entry. Set to 0 for deletion. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1route__map__entry__t_1a991356a17a5c8d405fe34594163d712b"></span>void <code class="descname">continue_sequence_is</code><span class="sig-paren">(</span>route_map_sequence_number_t <em>continue_sequence</em><span class="sig-paren">)</span></dt>
+<dd><p>Setter for ‘continue_sequence’. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1route__map__entry__t_1a1c0d0605a14d179620ea3eca0afd100d"></span><a class="reference internal" href="#eossdkclasseos_1_1route__map__link__bandwidth__t"><span class="std std-ref">route_map_link_bandwidth_t</span></a> <code class="descname">link_bandwidth</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dd><p>Getter for ‘link_bandwidth’: BGP extended community link bandwidth attribute. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1route__map__entry__t_1ad392dcda3c6d7639a7a0ea3c6ec331c1"></span>void <code class="descname">link_bandwidth_is</code><span class="sig-paren">(</span><a class="reference internal" href="#eossdkclasseos_1_1route__map__link__bandwidth__t"><span class="std std-ref">route_map_link_bandwidth_t</span></a> const &amp; <em>link_bandwidth</em><span class="sig-paren">)</span></dt>
+<dd><p>Setter for ‘link_bandwidth’. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1route__map__entry__t_1abed556cf7f75b080489ad5442d4ba389"></span>void <code class="descname">link_bandwidth_del</code><span class="sig-paren">(</span><span class="sig-paren">)</span></dt>
+<dd><p>Remove the link bandwidth configuration. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1route__map__entry__t_1a3850ecdff75f4358b8c504906af80549"></span>bool <code class="descname">operator==</code><span class="sig-paren">(</span><a class="reference internal" href="#eossdkclasseos_1_1route__map__entry__t"><span class="std std-ref">route_map_entry_t</span></a> const &amp; <em>other</em><span class="sig-paren">)</span> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1route__map__entry__t_1a59c3fcdca2e0fee78079a6038683e401"></span>bool <code class="descname">operator!=</code><span class="sig-paren">(</span><a class="reference internal" href="#eossdkclasseos_1_1route__map__entry__t"><span class="std std-ref">route_map_entry_t</span></a> const &amp; <em>other</em><span class="sig-paren">)</span> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1route__map__entry__t_1af962b9f090cb5e6635a4489f47838c10"></span>uint32_t <code class="descname">hash</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dd><p>The hash function for type <a class="reference internal" href="#eossdkclasseos_1_1route__map__entry__t"><span class="std std-ref">route_map_entry_t</span></a>. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1route__map__entry__t_1a32977b12f4e1e9f60fad48410e47947a"></span>void <code class="descname">mix_me</code><span class="sig-paren">(</span><a class="reference internal" href="hash_mix.html#eossdkclasseos_1_1hash__mix"><span class="std std-ref">hash_mix</span></a> &amp; <em>h</em><span class="sig-paren">)</span> const</dt>
+<dd><p>The hash mix function for type <a class="reference internal" href="#eossdkclasseos_1_1route__map__entry__t"><span class="std std-ref">route_map_entry_t</span></a>. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1route__map__entry__t_1a8c07241c96d489913527fd9d8d103b5b"></span>std::string <code class="descname">to_string</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dd><p>Returns a string representation of the current object’s values. </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Private Members</p>
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1route__map__entry__t_1a384d2476ba7b0a84741cd9a9240c6210"></span>std::shared_ptr&lt; <a class="reference internal" href="route_map_impl.html#eossdkclasseos_1_1route__map__entry__impl__t"><span class="std std-ref">route_map_entry_impl_t</span></a> &gt; <code class="descname">pimpl</code></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Friends</p>
+<dl class="friend">
+<dt>
+<span class="target" id="eossdkclasseos_1_1route__map__entry__t_1afa4de19a0141f54ac4cf3d237a1eb67d"></span>friend std::ostream &amp; <code class="descname">operator&lt;&lt;</code></dt>
+<dd><p>A utility stream operator that adds a string representation of <a class="reference internal" href="#eossdkclasseos_1_1route__map__entry__t"><span class="std std-ref">route_map_entry_t</span></a> to the ostream. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="class">
+<dt>
+<span class="target" id="eossdkclasseos_1_1route__map__t"></span><em>class</em> <code class="descname">route_map_t</code></dt>
+<dd><div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1route__map__t_1a128f13d3ef8625cf5cba3522098262b1"></span><code class="descname">route_map_t</code><span class="sig-paren">(</span><span class="sig-paren">)</span></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1route__map__t_1a88230b7cf4419e90164c1d02ecc8221f"></span><code class="descname">route_map_t</code><span class="sig-paren">(</span>const <a class="reference internal" href="#eossdkclasseos_1_1route__map__t"><span class="std std-ref">route_map_t</span></a> &amp; <em>other</em><span class="sig-paren">)</span></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1route__map__t_1a5c2668f9c81826ee5b90e7527f646921"></span><a class="reference internal" href="#eossdkclasseos_1_1route__map__t"><span class="std std-ref">route_map_t</span></a> &amp; <code class="descname">operator=</code><span class="sig-paren">(</span><a class="reference internal" href="#eossdkclasseos_1_1route__map__t"><span class="std std-ref">route_map_t</span></a> const &amp; <em>other</em><span class="sig-paren">)</span></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1route__map__t_1a271d4c7153567d03bcbe8845ad0ea705"></span>std::map&lt; route_map_sequence_number_t, <a class="reference internal" href="#eossdkclasseos_1_1route__map__entry__t"><span class="std std-ref">route_map_entry_t</span></a> &gt; const &amp; <code class="descname">map_entry</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dd><p>Getter for ‘map_entry’: A map of route map entries, keyed by sequence number. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1route__map__t_1a6f4ac4389c933ab222c6b2905528fb4a"></span>void <code class="descname">map_entry_is</code><span class="sig-paren">(</span>std::map&lt; route_map_sequence_number_t, <a class="reference internal" href="#eossdkclasseos_1_1route__map__entry__t"><span class="std std-ref">route_map_entry_t</span></a> &gt; const &amp; <em>map_entry</em><span class="sig-paren">)</span></dt>
+<dd><p>Setter for ‘map_entry’. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1route__map__t_1a2dcc3bcc09cccefe5c184948bf79a5f1"></span>void <code class="descname">map_entry_set</code><span class="sig-paren">(</span>route_map_sequence_number_t const &amp; <em>key</em>, <a class="reference internal" href="#eossdkclasseos_1_1route__map__entry__t"><span class="std std-ref">route_map_entry_t</span></a> const &amp; <em>value</em><span class="sig-paren">)</span></dt>
+<dd><p>Inserts key/value pair to the map. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1route__map__t_1ab9ec722a5667a06bb6d385982d7af385"></span>void <code class="descname">map_entry_del</code><span class="sig-paren">(</span>route_map_sequence_number_t const &amp; <em>key</em><span class="sig-paren">)</span></dt>
+<dd><p>Deletes the key/value pair from the map. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1route__map__t_1a3155793c21b81cf5131829baef32974d"></span>bool <code class="descname">operator==</code><span class="sig-paren">(</span><a class="reference internal" href="#eossdkclasseos_1_1route__map__t"><span class="std std-ref">route_map_t</span></a> const &amp; <em>other</em><span class="sig-paren">)</span> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1route__map__t_1af406543ffc0907c29c93b554030318b5"></span>bool <code class="descname">operator!=</code><span class="sig-paren">(</span><a class="reference internal" href="#eossdkclasseos_1_1route__map__t"><span class="std std-ref">route_map_t</span></a> const &amp; <em>other</em><span class="sig-paren">)</span> const</dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1route__map__t_1ac913b044721957bec465a9d7b143cfcc"></span>uint32_t <code class="descname">hash</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dd><p>The hash function for type <a class="reference internal" href="#eossdkclasseos_1_1route__map__t"><span class="std std-ref">route_map_t</span></a>. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1route__map__t_1a96efdee05c3aabd5d0cdc871e1bf8b25"></span>void <code class="descname">mix_me</code><span class="sig-paren">(</span><a class="reference internal" href="hash_mix.html#eossdkclasseos_1_1hash__mix"><span class="std std-ref">hash_mix</span></a> &amp; <em>h</em><span class="sig-paren">)</span> const</dt>
+<dd><p>The hash mix function for type <a class="reference internal" href="#eossdkclasseos_1_1route__map__t"><span class="std std-ref">route_map_t</span></a>. </p>
+</dd></dl>
+
+<dl class="function">
+<dt>
+<span class="target" id="eossdkclasseos_1_1route__map__t_1a02a08b738876135dca293f561d2e43ae"></span>std::string <code class="descname">to_string</code><span class="sig-paren">(</span><span class="sig-paren">)</span> const</dt>
+<dd><p>Returns a string representation of the current object’s values. </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Private Members</p>
+<dl class="variable">
+<dt>
+<span class="target" id="eossdkclasseos_1_1route__map__t_1a2e6071904678fd9ba8dc013b92c071f4"></span>std::shared_ptr&lt; <a class="reference internal" href="route_map_impl.html#eossdkclasseos_1_1route__map__impl__t"><span class="std std-ref">route_map_impl_t</span></a> &gt; <code class="descname">pimpl</code></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Friends</p>
+<dl class="friend">
+<dt>
+<span class="target" id="eossdkclasseos_1_1route__map__t_1a4a3286d165e927b5dd9defc5dd2c99b8"></span>friend std::ostream &amp; <code class="descname">operator&lt;&lt;</code></dt>
+<dd><p>A utility stream operator that adds a string representation of <a class="reference internal" href="#eossdkclasseos_1_1route__map__t"><span class="std std-ref">route_map_t</span></a> to the ostream. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#"><strong>route_map</strong></a><ul>
+<li><a class="reference internal" href="#type-definitions-in-route-map">Type definitions in <strong>route_map</strong></a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="policy_map_impl.html"
+                        title="previous chapter"><strong>policy_map_impl</strong></a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="route_map_impl.html"
+                        title="next chapter"><strong>route_map_impl</strong></a></p>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="route_map_impl.html" title="route_map_impl"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="policy_map_impl.html" title="policy_map_impl"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Arista EOS SDK 2.22.1 reference</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2014, Arista Networks.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.4.
+    </div>
+  </body>
+</html>
