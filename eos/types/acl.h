@@ -84,6 +84,25 @@ enum acl_tcp_flag_t {
 EOS_SDK_PUBLIC std::ostream& operator<<(std::ostream& os,
                                         const acl_tcp_flag_t & enum_val);
 
+/**
+ * IP traffic type to be matched. This value is parsed from the Ethernet header's
+ * EtherType field.
+ */
+enum acl_ip_type_t {
+   /**
+    * Match any IP traffic. This is the default value when it is not explicitly
+    * set.
+    */
+   ACL_IP_TYPE_ANY,
+   /** Match IPv4/IPv6 over Ethernet traffic. */
+   ACL_IP_TYPE_IP,
+   /** Match IPv4/IPv6 over MPLS traffic. */
+   ACL_IP_TYPE_MPLS,
+};
+/** Appends a string representation of enum acl_ip_type_t value to the ostream. */
+EOS_SDK_PUBLIC std::ostream& operator<<(std::ostream& os,
+                                        const acl_ip_type_t & enum_val);
+
 class acl_ttl_spec_impl_t;
 /**
  * A TTL specifier, used in an IP ACL rule to define TTLs to match.
@@ -348,6 +367,11 @@ class EOS_SDK_PUBLIC acl_rule_ip_t : public acl_rule_base_t {
    uint16_t tcp_flags() const;
    /** Setter for 'tcp_flags'. */
    void tcp_flags_is(uint16_t tcp_flags);
+
+   /** Getter for 'ip_type': EtherType value in the Ethernet header. */
+   acl_ip_type_t ip_type() const;
+   /** Setter for 'ip_type'. */
+   void ip_type_is(acl_ip_type_t ip_type);
 
    /** Getter for 'established': match "established" connections. */
    bool established() const;

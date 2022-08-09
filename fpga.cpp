@@ -36,6 +36,11 @@ class fpga_mgr_impl : public fpga_mgr {
          return *nop;
       }
 
+      fpga_t fpga(const std::string&) const {
+         fpga_t * nop = 0;
+         return *nop;
+      }
+
       fpga_reservation_iter_t reservation_iter() const {
          fpga_reservation_iter_t * nop = 0;
          return *nop;
@@ -68,6 +73,11 @@ class fpga_mgr_impl : public fpga_mgr {
       }
 
       void reservation_del(const std::string&) {
+      }
+
+      eossdk_ham_t ham(const fpga_t&, size_t) const {
+         eossdk_ham_t * nop = 0;
+         return *nop;
       }
 };
 

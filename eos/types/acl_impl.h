@@ -201,6 +201,11 @@ class EOS_SDK_PUBLIC acl_rule_ip_impl_t {
    /** Setter for 'tcp_flags'. */
    void tcp_flags_is(uint16_t tcp_flags);
 
+   /** Getter for 'ip_type': EtherType value in the Ethernet header. */
+   acl_ip_type_t ip_type() const;
+   /** Setter for 'ip_type'. */
+   void ip_type_is(acl_ip_type_t ip_type);
+
    /** Getter for 'established': match "established" connections. */
    bool established() const;
    /** Setter for 'established'. */
@@ -278,6 +283,7 @@ class EOS_SDK_PUBLIC acl_rule_ip_impl_t {
    acl_port_spec_t destination_port_;
    std::string nexthop_group_;
    uint16_t tcp_flags_;
+   acl_ip_type_t ip_type_;
    bool established_;
    uint16_t icmp_type_;
    uint16_t icmp_code_;

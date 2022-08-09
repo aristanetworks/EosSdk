@@ -9,6 +9,7 @@
 #include <eos/base_mgr.h>
 #include <eos/iterator.h>
 
+#include "eos/types/ham.h"
 #include <eos/types/fpga.h>
 
 namespace eos {
@@ -65,6 +66,7 @@ class EOS_SDK_PUBLIC fpga_mgr : public base_mgr<fpga_handler, std::string> {
       virtual ~fpga_mgr();
 
       virtual fpga_iter_t fpga_status_iter() const = 0;
+      virtual fpga_t fpga(const std::string&) const = 0;
       virtual fpga_reservation_iter_t reservation_iter() const = 0;
       virtual fpga_reservation_status_iter_t reservation_status_iter() const = 0;
       virtual bool reservation_exists(const std::string&) const = 0;
@@ -74,6 +76,7 @@ class EOS_SDK_PUBLIC fpga_mgr : public base_mgr<fpga_handler, std::string> {
                                                                  const = 0;
       virtual void reservation_set(const fpga_reservation_t&) = 0;
       virtual void reservation_del(const std::string&) = 0;
+      virtual eossdk_ham_t ham(const fpga_t&, size_t) const = 0;
    protected:
       fpga_mgr() EOS_SDK_PRIVATE;
       friend class fpga_handler;

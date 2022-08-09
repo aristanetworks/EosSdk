@@ -16,6 +16,8 @@ namespace eos {
 
 
 
+
+
 // Default constructor.
 acl_ttl_spec_impl_t::acl_ttl_spec_impl_t() :
       oper_(ACL_RANGE_ANY), ttl_(0) {
@@ -334,9 +336,10 @@ operator<<(std::ostream& os, const acl_rule_base_impl_t& obj) {
 acl_rule_ip_impl_t::acl_rule_ip_impl_t() :
       vlan_(), vlan_mask_(0xFFF), inner_vlan_(), inner_vlan_mask_(0xFFF),
       ip_protocol_(), ttl_(), source_addr_(), destination_addr_(), source_port_(),
-      destination_port_(), nexthop_group_(), tcp_flags_(), established_(),
-      icmp_type_(ALL_ICMP), icmp_code_(ALL_ICMP), priority_value_(),
-      priority_mask_(), match_fragments_(), match_ip_priority_() {
+      destination_port_(), nexthop_group_(), tcp_flags_(),
+      ip_type_(ACL_IP_TYPE_ANY), established_(), icmp_type_(ALL_ICMP),
+      icmp_code_(ALL_ICMP), priority_value_(), priority_mask_(),
+      match_fragments_(), match_ip_priority_() {
 }
 
 vlan_id_t
@@ -459,6 +462,16 @@ acl_rule_ip_impl_t::tcp_flags_is(uint16_t tcp_flags) {
    tcp_flags_ = tcp_flags;
 }
 
+acl_ip_type_t
+acl_rule_ip_impl_t::ip_type() const {
+   return ip_type_;
+}
+
+void
+acl_rule_ip_impl_t::ip_type_is(acl_ip_type_t ip_type) {
+   ip_type_ = ip_type;
+}
+
 bool
 acl_rule_ip_impl_t::established() const {
    return established_;
@@ -543,6 +556,7 @@ acl_rule_ip_impl_t::operator==(acl_rule_ip_impl_t const & other) const {
           destination_port_ == other.destination_port_ &&
           nexthop_group_ == other.nexthop_group_ &&
           tcp_flags_ == other.tcp_flags_ &&
+          ip_type_ == other.ip_type_ &&
           established_ == other.established_ &&
           icmp_type_ == other.icmp_type_ &&
           icmp_code_ == other.icmp_code_ &&
@@ -583,6 +597,8 @@ acl_rule_ip_impl_t::operator<(acl_rule_ip_impl_t const & other) const {
       return nexthop_group_ < other.nexthop_group_;
    } else if(tcp_flags_ != other.tcp_flags_) {
       return tcp_flags_ < other.tcp_flags_;
+   } else if(ip_type_ != other.ip_type_) {
+      return ip_type_ < other.ip_type_;
    } else if(established_ != other.established_) {
       return established_ < other.established_;
    } else if(icmp_type_ != other.icmp_type_) {
@@ -622,6 +638,7 @@ acl_rule_ip_impl_t::mix_me(hash_mix & h) const {
    h.mix(destination_port_); // acl_port_spec_t
    h.mix(nexthop_group_); // std::string
    h.mix(tcp_flags_); // uint16_t
+   h.mix(ip_type_); // acl_ip_type_t
    h.mix(established_); // bool
    h.mix(icmp_type_); // uint16_t
    h.mix(icmp_code_); // uint16_t
@@ -647,6 +664,7 @@ acl_rule_ip_impl_t::to_string() const {
    ss << ", destination_port=" << destination_port_;
    ss << ", nexthop_group='" << nexthop_group_ << "'";
    ss << ", tcp_flags=" << tcp_flags_;
+   ss << ", ip_type=" << ip_type_;
    ss << ", established=" << established_;
    ss << ", icmp_type=" << icmp_type_;
    ss << ", icmp_code=" << icmp_code_;

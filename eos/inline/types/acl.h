@@ -101,6 +101,21 @@ operator<<(std::ostream& os, const acl_tcp_flag_t & enum_val) {
 }
 
 
+EOS_SDK_PUBLIC std::ostream&
+operator<<(std::ostream& os, const acl_ip_type_t & enum_val) {
+   if (enum_val==ACL_IP_TYPE_ANY) {
+      os << "ACL_IP_TYPE_ANY";
+   } else if (enum_val==ACL_IP_TYPE_IP) {
+      os << "ACL_IP_TYPE_IP";
+   } else if (enum_val==ACL_IP_TYPE_MPLS) {
+      os << "ACL_IP_TYPE_MPLS";
+   } else {
+      os << "Unknown value";
+   }
+   return os;
+}
+
+
 // Default constructor.
 acl_ttl_spec_t::acl_ttl_spec_t() {
    pimpl = std::shared_ptr<acl_ttl_spec_impl_t>(
@@ -521,6 +536,14 @@ acl_rule_ip_t::tcp_flags() const {
 void
 acl_rule_ip_t::tcp_flags_is(uint16_t tcp_flags) {
    pimpl->tcp_flags_is(tcp_flags);
+}
+acl_ip_type_t
+acl_rule_ip_t::ip_type() const {
+   return pimpl->ip_type();
+}
+void
+acl_rule_ip_t::ip_type_is(acl_ip_type_t ip_type) {
+   pimpl->ip_type_is(ip_type);
 }
 bool
 acl_rule_ip_t::established() const {

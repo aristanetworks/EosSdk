@@ -83,6 +83,7 @@ libeos_la_CPPFLAGS = $(AM_CPPFLAGS) $(SHIPPING_FLAG)
 libeos_la_LDFLAGS = -version-info $(SDK_LIBTOOL_VERSION) -lrt
 libeos_la_LDFLAGS += -soname libeos.so.$(SDK_VERSION_MAJOR).$(SDK_VERSION_MINOR)
 
+
 noinst_PROGRAMS = HelloWorld
 HelloWorld_SOURCES = examples/HelloWorld.cpp
 HelloWorld_LDADD = libeos.la
