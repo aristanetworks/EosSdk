@@ -1,0 +1,13 @@
+**ham_impl**
+------------
+
+
+.. doxygenfile:: eos/ham_impl.h
+   :project: eossdk
+
+Type definitions in **ham_impl**
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. doxygenfile:: eos/types/ham_impl.h
+   :project: eossdk
+

@@ -1,0 +1,1443 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>policy_map &#8212; Arista EOS SDK 2.22.1 reference</title>
+    <link rel="stylesheet" href="_static/eossdk.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/language_data.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="policy_map_impl" href="policy_map_impl.html" />
+    <link rel="prev" title="panic" href="panic.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="policy_map_impl.html" title="policy_map_impl"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="panic.html" title="panic"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Arista EOS SDK 2.22.1 reference</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="policy-map">
+<h1><strong>policy_map</strong><a class="headerlink" href="#policy-map" title="Permalink to this headline">¶</a></h1>
+<p>Policy map manipulation.</p>
+<p>This module permits the manipulation of policy maps used in the creation of service policies that can be applied to one or more types of hardware features, beginning with Policy Based Routing (PBR).</p>
+<p>Policy maps for PBR (policy based routing) can match rules of either an IPv4 access list (including both source, destination addresses and all normal ACL flags) or any MPLS traffic.</p>
+<p>Policy maps are constructed by key (consisting of a name and a feature, only eos::POLICY_FEATURE_PBR is presently supported), and the above rules are configured using the policy_map_mgr. For example, to source route traffic matching the existing ACL “netblock-fe” for a PBR policy named “src-routing-fe”, use this code in a handler with access to the policy_map_mgr object as policy_map_mgr() in scope.</p>
+<p><div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">eos</span><span class="p">::</span><span class="n">policy_map_key_t</span> <span class="n">pm_key</span><span class="p">(</span><span class="s2">&quot;src-routing-fe&quot;</span><span class="p">,</span> <span class="n">eos</span><span class="p">::</span><span class="n">POLICY_FEATURE_PBR</span><span class="p">);</span>
+<span class="n">eos</span><span class="p">::</span><span class="n">acl_key_t</span> <span class="n">acl_key</span><span class="p">(</span><span class="s2">&quot;netblock-fe&quot;</span><span class="p">,</span> <span class="n">eos</span><span class="p">::</span><span class="n">ACL_TYPE_IPV4</span><span class="p">);</span>
+<span class="n">eos</span><span class="p">::</span><span class="n">class_map_t</span> <span class="n">cm</span><span class="p">(</span><span class="n">pm_key</span><span class="p">);</span>
+<span class="n">eos</span><span class="p">::</span><span class="n">class_map_rule_t</span> <span class="n">cm_rule</span><span class="p">(</span><span class="n">acl_key</span><span class="p">);</span>
+<span class="n">eos</span><span class="p">::</span><span class="n">policy_map_t</span> <span class="n">pm</span><span class="p">(</span><span class="n">pm_key</span><span class="p">);</span>
+<span class="n">eos</span><span class="p">::</span><span class="n">policy_map_rule_t</span> <span class="n">pm_rule</span><span class="p">(</span><span class="n">pm_key</span><span class="p">);</span>
+<span class="n">eos</span><span class="p">::</span><span class="n">policy_map_action_t</span> <span class="n">action</span><span class="p">(</span><span class="n">eos</span><span class="p">::</span><span class="n">POLICY_ACTION_NEXTHOP_GROUP</span><span class="p">);</span>
+<span class="n">action</span><span class="o">.</span><span class="n">nexthop_group_name_is</span><span class="p">(</span><span class="s2">&quot;nhg-fe&quot;</span><span class="p">);</span>
+<span class="n">pm_rule</span><span class="o">.</span><span class="n">action_set</span><span class="p">(</span><span class="n">action</span><span class="p">);</span>
+<span class="n">cm</span><span class="o">.</span><span class="n">rule_set</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">cm_rule</span><span class="p">);</span>
+<span class="n">pm</span><span class="o">.</span><span class="n">rule_set</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">pm_rule</span><span class="p">);</span>
+<span class="n">policy_map_mgr</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">policy_map_is</span><span class="p">(</span><span class="n">pm</span><span class="p">);</span>
+<span class="o">//</span> <span class="n">Apply</span> <span class="n">to</span> <span class="n">Ethernet3</span><span class="o">/</span><span class="mi">1</span> <span class="p">(</span><span class="n">PBR</span> <span class="n">policies</span> <span class="n">are</span> <span class="n">always</span> <span class="n">applied</span> <span class="n">ACL_IN</span> <span class="p">(</span><span class="n">inbound</span><span class="p">)</span><span class="o">.</span>
+<span class="n">policy_map_mgr</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">policy_map_apply</span><span class="p">(</span><span class="n">pm_key</span><span class="p">,</span> <span class="n">eos</span><span class="p">::</span><span class="n">intf_id_t</span><span class="p">(</span><span class="s2">&quot;Ethernet3/1&quot;</span><span class="p">),</span>
+                                   <span class="n">eos</span><span class="p">::</span><span class="n">ACL_IN</span><span class="p">,</span> <span class="n">true</span><span class="p">);</span>
+</pre></div>
+</div>
+</p>
+<p>To instead program that same policy matching MPLS traffic instead of an IPv4 ACL, use the following pattern, noting that we explicitly supply a new class map key referring to the special eos::CLASS_MAP_MPLS_ANY name and skip binding the ACL to the class map entirely:</p>
+<p><div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">eos</span><span class="p">::</span><span class="n">policy_map_key_t</span> <span class="n">pm_key</span><span class="p">(</span><span class="s2">&quot;src-routing-fe&quot;</span><span class="p">,</span> <span class="n">eos</span><span class="p">::</span><span class="n">POLICY_FEATURE_PBR</span><span class="p">);</span>
+<span class="n">eos</span><span class="p">::</span><span class="n">class_map_key_t</span> <span class="n">cm_key</span><span class="p">(</span><span class="n">eos</span><span class="p">::</span><span class="n">CLASS_MAP_MPLS_ANY</span><span class="p">,</span> <span class="n">eos</span><span class="p">::</span><span class="n">POLICY_FEATURE_PBR</span><span class="p">);</span>
+<span class="n">eos</span><span class="p">::</span><span class="n">class_map_t</span> <span class="n">cm</span><span class="p">(</span><span class="n">cm_key</span><span class="p">);</span>
+<span class="n">eos</span><span class="p">::</span><span class="n">policy_map_rule_t</span> <span class="n">pm_rule</span><span class="p">(</span><span class="n">cm_key</span><span class="p">);</span>
+<span class="n">eos</span><span class="p">::</span><span class="n">policy_map_action_t</span> <span class="n">action</span><span class="p">(</span><span class="n">eos</span><span class="p">::</span><span class="n">POLICY_ACTION_NEXTHOP_GROUP</span><span class="p">);</span>
+<span class="n">action</span><span class="o">.</span><span class="n">nexthop_group_name_is</span><span class="p">(</span><span class="s2">&quot;nhg-fe&quot;</span><span class="p">);</span>
+<span class="n">pm_rule</span><span class="o">.</span><span class="n">action_set</span><span class="p">(</span><span class="n">action</span><span class="p">);</span>
+<span class="n">cm</span><span class="o">.</span><span class="n">rule_set</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">cm_rule</span><span class="p">);</span>
+<span class="n">pm</span><span class="o">.</span><span class="n">rule_set</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="n">pm_rule</span><span class="p">);</span>
+<span class="n">policy_map_mgr</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">policy_map_is</span><span class="p">(</span><span class="n">pm</span><span class="p">);</span>
+<span class="o">//</span> <span class="n">Finally</span><span class="p">,</span> <span class="n">apply</span> <span class="n">the</span> <span class="n">policy</span> <span class="k">as</span> <span class="n">before</span>
+</pre></div>
+</div>
+</p>
+<p>A valid policy map may have either:</p>
+<p><ol class="arabic simple">
+<li>One or more rules matching class maps matching one or more IPv4 ACLs.</li>
+<li>A single policy map rule matching eos::CLASS_MAP_MPLS_ANY class, which itself may have only a single action</li>
+</ol>
+</p>
+<p>Using both “IP ACL” and “MPLS any” modes in the same policy map is not supported, and a <a class="reference internal" href="exception.html#classeos_1_1configuration__error"><span class="std std-ref">eos::configuration_error</span></a> will be thrown by the policy map when attempting to set both rules, or attempting to set more than one eos::CLASS_MAP_MPLS_ANY class map match rule per policy map. </p>
+<dl class="class">
+<dt id="_CPPv4IENSt4hashIN3eos19policy_map_action_tEEE">
+<span id="_CPPv3IENSt4hashIN3eos19policy_map_action_tEEE"></span><span id="_CPPv2IENSt4hashIN3eos19policy_map_action_tEEE"></span><span class="target" id="structstd_1_1hash_3_01eos_1_1policy__map__action__t_01_4"></span>template&lt;&gt;<br /><em class="property">struct </em><code class="descname">hash</code>&lt;<a class="reference internal" href="acl.html#_CPPv43eos" title="eos">eos</a>::<a class="reference internal" href="#_CPPv4N3eos19policy_map_action_tE" title="eos::policy_map_action_t">policy_map_action_t</a>&gt;<a class="headerlink" href="#_CPPv4IENSt4hashIN3eos19policy_map_action_tEEE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="function">
+<dt id="_CPPv4NKSt4hashclERKN3eos19policy_map_action_tE">
+<span id="_CPPv3NKSt4hashclERKN3eos19policy_map_action_tE"></span><span id="_CPPv2NKSt4hashclERKN3eos19policy_map_action_tE"></span><span id="std::hash::call-operator__eos::policy_map_action_tCRC"></span><span class="target" id="structstd_1_1hash_3_01eos_1_1policy__map__action__t_01_4_1aa5f5719f16b8da5901b26de7117cf22c"></span>size_t <code class="descname">operator()</code><span class="sig-paren">(</span><a class="reference internal" href="acl.html#_CPPv43eos" title="eos">eos</a>::<a class="reference internal" href="#_CPPv4N3eos19policy_map_action_tE" title="eos::policy_map_action_t">policy_map_action_t</a> <em class="property">const</em>&amp;<span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NKSt4hashclERKN3eos19policy_map_action_tE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="class">
+<dt id="_CPPv4IENSt4hashIN3eos16policy_map_key_tEEE">
+<span id="_CPPv3IENSt4hashIN3eos16policy_map_key_tEEE"></span><span id="_CPPv2IENSt4hashIN3eos16policy_map_key_tEEE"></span><span class="target" id="structstd_1_1hash_3_01eos_1_1policy__map__key__t_01_4"></span>template&lt;&gt;<br /><em class="property">struct </em><code class="descname">hash</code>&lt;<a class="reference internal" href="acl.html#_CPPv43eos" title="eos">eos</a>::<a class="reference internal" href="#_CPPv4N3eos16policy_map_key_tE" title="eos::policy_map_key_t">policy_map_key_t</a>&gt;<a class="headerlink" href="#_CPPv4IENSt4hashIN3eos16policy_map_key_tEEE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="function">
+<dt id="_CPPv4NKSt4hashclERKN3eos16policy_map_key_tE">
+<span id="_CPPv3NKSt4hashclERKN3eos16policy_map_key_tE"></span><span id="_CPPv2NKSt4hashclERKN3eos16policy_map_key_tE"></span><span id="std::hash::call-operator__eos::policy_map_key_tCRC"></span><span class="target" id="structstd_1_1hash_3_01eos_1_1policy__map__key__t_01_4_1a1a00bc1beb13845f0cacc2e9eff0ae20"></span>size_t <code class="descname">operator()</code><span class="sig-paren">(</span><a class="reference internal" href="acl.html#_CPPv43eos" title="eos">eos</a>::<a class="reference internal" href="#_CPPv4N3eos16policy_map_key_tE" title="eos::policy_map_key_t">policy_map_key_t</a> <em class="property">const</em>&amp;<span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NKSt4hashclERKN3eos16policy_map_key_tE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="type">
+<dt id="_CPPv43eos">
+<span id="_CPPv33eos"></span><span id="_CPPv23eos"></span><span id="eos"></span><span class="target" id="namespaceeos"></span><em class="property">namespace </em><code class="descname">eos</code><br /></dt>
+<dd><dl class="class">
+<dt id="_CPPv4N3eos17policy_map_iter_tE">
+<span id="_CPPv3N3eos17policy_map_iter_tE"></span><span id="_CPPv2N3eos17policy_map_iter_tE"></span><span id="eos::policy_map_iter_t"></span><span class="target" id="classeos_1_1policy__map__iter__t"></span><em class="property">class </em><code class="descname">policy_map_iter_t</code> : <em class="property">public</em> <a class="reference internal" href="acl.html#_CPPv43eos" title="eos">eos</a>::iter_base&lt;<a class="reference internal" href="#_CPPv4N3eos16policy_map_key_tE" title="eos::policy_map_key_t">policy_map_key_t</a>, policy_map_iter_impl&gt;<a class="headerlink" href="#_CPPv4N3eos17policy_map_iter_tE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><em>#include &lt;policy_map.h&gt;</em><p>An iterator providing forwards only iteration over collections of policy maps. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Private Functions</p>
+<dl class="function">
+<dt id="_CPPv4N3eos17policy_map_iter_t17policy_map_iter_tEP20policy_map_iter_impl">
+<span id="_CPPv3N3eos17policy_map_iter_t17policy_map_iter_tEP20policy_map_iter_impl"></span><span id="_CPPv2N3eos17policy_map_iter_t17policy_map_iter_tEP20policy_map_iter_impl"></span><span id="eos::policy_map_iter_t::policy_map_iter_t__policy_map_iter_implP"></span><span class="target" id="classeos_1_1policy__map__iter__t_1a9c3bf7848f90f16b71f79d10fb68f7d2"></span><code class="descname">policy_map_iter_t</code><span class="sig-paren">(</span>policy_map_iter_impl *<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos17policy_map_iter_t17policy_map_iter_tEP20policy_map_iter_impl" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Friends</p>
+<dl class="function">
+<dt>
+<span class="target" id="classeos_1_1policy__map__iter__t_1a1bd9d39d52119ffb6132dd74dc169397"></span><em class="property">friend </em><code class="descname">eos::policy_map_iter_impl</code></dt>
+<dd></dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="class">
+<dt id="_CPPv4N3eos27policy_map_hw_status_iter_tE">
+<span id="_CPPv3N3eos27policy_map_hw_status_iter_tE"></span><span id="_CPPv2N3eos27policy_map_hw_status_iter_tE"></span><span id="eos::policy_map_hw_status_iter_t"></span><span class="target" id="classeos_1_1policy__map__hw__status__iter__t"></span><em class="property">class </em><code class="descname">policy_map_hw_status_iter_t</code> : <em class="property">public</em> <a class="reference internal" href="acl.html#_CPPv43eos" title="eos">eos</a>::iter_base&lt;<a class="reference internal" href="#_CPPv4N3eos16policy_map_key_tE" title="eos::policy_map_key_t">policy_map_key_t</a>, policy_map_hw_status_iter_impl&gt;<a class="headerlink" href="#_CPPv4N3eos27policy_map_hw_status_iter_tE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><em>#include &lt;policy_map.h&gt;</em><p>An iterator providing forwards only iteration over collections of policy maps. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Private Functions</p>
+<dl class="function">
+<dt id="_CPPv4N3eos27policy_map_hw_status_iter_t27policy_map_hw_status_iter_tEPC30policy_map_hw_status_iter_impl">
+<span id="_CPPv3N3eos27policy_map_hw_status_iter_t27policy_map_hw_status_iter_tEPC30policy_map_hw_status_iter_impl"></span><span id="_CPPv2N3eos27policy_map_hw_status_iter_t27policy_map_hw_status_iter_tEPC30policy_map_hw_status_iter_impl"></span><span id="eos::policy_map_hw_status_iter_t::policy_map_hw_status_iter_t__policy_map_hw_status_iter_implPC"></span><span class="target" id="classeos_1_1policy__map__hw__status__iter__t_1ad33fcb3fd7511bb4c010245b1976278a"></span><code class="descname">policy_map_hw_status_iter_t</code><span class="sig-paren">(</span>policy_map_hw_status_iter_impl *<em class="property">const</em> <span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos27policy_map_hw_status_iter_t27policy_map_hw_status_iter_tEPC30policy_map_hw_status_iter_impl" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Friends</p>
+<dl class="function">
+<dt>
+<span class="target" id="classeos_1_1policy__map__hw__status__iter__t_1ada421cae8a12190a442423b70061ab83"></span><em class="property">friend </em><code class="descname">eos::policy_map_hw_status_iter_impl</code></dt>
+<dd></dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="class">
+<dt id="_CPPv4N3eos18policy_map_handlerE">
+<span id="_CPPv3N3eos18policy_map_handlerE"></span><span id="_CPPv2N3eos18policy_map_handlerE"></span><span id="eos::policy_map_handler"></span><span class="target" id="classeos_1_1policy__map__handler"></span><em class="property">class </em><code class="descname">policy_map_handler</code> : <em class="property">public</em> <a class="reference internal" href="acl.html#_CPPv43eos" title="eos">eos</a>::base_handler&lt;<a class="reference internal" href="#_CPPv4N3eos14policy_map_mgrE" title="eos::policy_map_mgr">policy_map_mgr</a>, <a class="reference internal" href="#_CPPv4N3eos18policy_map_handlerE" title="eos::policy_map_handler">policy_map_handler</a>&gt;<a class="headerlink" href="#_CPPv4N3eos18policy_map_handlerE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><em>#include &lt;policy_map.h&gt;</em><p>Event handler for policy feature specific events.</p>
+<p>Callbacks about failures to program policy features into hardware are reported via this handler. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="function">
+<dt id="_CPPv4N3eos18policy_map_handler18policy_map_handlerEP14policy_map_mgr">
+<span id="_CPPv3N3eos18policy_map_handler18policy_map_handlerEP14policy_map_mgr"></span><span id="_CPPv2N3eos18policy_map_handler18policy_map_handlerEP14policy_map_mgr"></span><span id="eos::policy_map_handler::policy_map_handler__policy_map_mgrP"></span><span class="target" id="classeos_1_1policy__map__handler_1a5f0a7bae3884c8fdd426766b76948b46"></span><code class="descname">policy_map_handler</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos14policy_map_mgrE" title="eos::policy_map_mgr">policy_map_mgr</a> *<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos18policy_map_handler18policy_map_handlerEP14policy_map_mgr" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Constructs a policy map handler for the supplied policy hardware feature. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4NK3eos18policy_map_handler18get_policy_map_mgrEv">
+<span id="_CPPv3NK3eos18policy_map_handler18get_policy_map_mgrEv"></span><span id="_CPPv2NK3eos18policy_map_handler18get_policy_map_mgrEv"></span><span id="eos::policy_map_handler::get_policy_map_mgrC"></span><span class="target" id="classeos_1_1policy__map__handler_1a854075b54d5a0310d32c4c6f37c6336c"></span><a class="reference internal" href="#_CPPv4N3eos14policy_map_mgrE" title="eos::policy_map_mgr">policy_map_mgr</a> *<code class="descname">get_policy_map_mgr</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos18policy_map_handler18get_policy_map_mgrEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Returns a pointer to the policy map manager for use in a derived handler. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N3eos18policy_map_handler16watch_policy_mapERK16policy_map_key_tb">
+<span id="_CPPv3N3eos18policy_map_handler16watch_policy_mapERK16policy_map_key_tb"></span><span id="_CPPv2N3eos18policy_map_handler16watch_policy_mapERK16policy_map_key_tb"></span><span id="eos::policy_map_handler::watch_policy_map__policy_map_key_tCR.b"></span><span class="target" id="classeos_1_1policy__map__handler_1aab69ac7d64862286e230a1363ad8ea53"></span>void <code class="descname">watch_policy_map</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos16policy_map_key_tE" title="eos::policy_map_key_t">policy_map_key_t</a> <em class="property">const</em> &amp;<em>key</em>, bool <em>interest</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos18policy_map_handler16watch_policy_mapERK16policy_map_key_tb" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Registers to receive updates on changes to this policy feature.</p>
+<p><dl class="docutils">
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal notranslate"><span class="pre">key</span></code>: The policy feature to receive notifications for </li>
+<li><code class="docutils literal notranslate"><span class="pre">interest</span></code>: Receives notifications if and only if true. </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N3eos18policy_map_handler16watch_policy_mapERK16policy_map_key_tRKNSt6stringEb">
+<span id="_CPPv3N3eos18policy_map_handler16watch_policy_mapERK16policy_map_key_tRKNSt6stringEb"></span><span id="_CPPv2N3eos18policy_map_handler16watch_policy_mapERK16policy_map_key_tRKNSt6stringEb"></span><span id="eos::policy_map_handler::watch_policy_map__policy_map_key_tCR.ssCR.b"></span><span class="target" id="classeos_1_1policy__map__handler_1a6db44ab3e462460eb11a1bb0864621ca"></span>void <code class="descname">watch_policy_map</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos16policy_map_key_tE" title="eos::policy_map_key_t">policy_map_key_t</a> <em class="property">const</em> &amp;<em>key</em>, <a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::string <em class="property">const</em> &amp;<em>agent_name</em>, bool <em>interest</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos18policy_map_handler16watch_policy_mapERK16policy_map_key_tRKNSt6stringEb" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Registers to receive updates on changes to this policy feature.</p>
+<p><dl class="docutils">
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal notranslate"><span class="pre">key</span></code>: The policy feature to receive notifications for </li>
+<li><code class="docutils literal notranslate"><span class="pre">agent_name</span></code>: The agent which configures the policy being watched </li>
+<li><code class="docutils literal notranslate"><span class="pre">interest</span></code>: Receives notifications if and only if true. </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N3eos18policy_map_handler18on_policy_map_syncERK16policy_map_key_t">
+<span id="_CPPv3N3eos18policy_map_handler18on_policy_map_syncERK16policy_map_key_t"></span><span id="_CPPv2N3eos18policy_map_handler18on_policy_map_syncERK16policy_map_key_t"></span><span id="eos::policy_map_handler::on_policy_map_sync__policy_map_key_tCR"></span><span class="target" id="classeos_1_1policy__map__handler_1aa3c1498e8a1c1fa00779ff1b0ee7b5e9"></span><em class="property">virtual</em> void <code class="descname">on_policy_map_sync</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos16policy_map_key_tE" title="eos::policy_map_key_t">policy_map_key_t</a> <em class="property">const</em>&amp;<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos18policy_map_handler18on_policy_map_syncERK16policy_map_key_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Callback fired upon successful policy map application.</p>
+<p><dl class="docutils">
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal notranslate"><a class="reference internal" href="#classeos_1_1policy__map__key__t"><span class="std std-ref"><span class="pre">policy_map_key_t</span></span></a></code>: The key identifying the updated policy map. </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N3eos18policy_map_handler23on_policy_map_sync_failERK16policy_map_key_tRKNSt6stringE">
+<span id="_CPPv3N3eos18policy_map_handler23on_policy_map_sync_failERK16policy_map_key_tRKNSt6stringE"></span><span id="_CPPv2N3eos18policy_map_handler23on_policy_map_sync_failERK16policy_map_key_tRKNSt6stringE"></span><span id="eos::policy_map_handler::on_policy_map_sync_fail__policy_map_key_tCR.ssCR"></span><span class="target" id="classeos_1_1policy__map__handler_1a5e57c05780ffc843fdab5d8aec227466"></span><em class="property">virtual</em> void <code class="descname">on_policy_map_sync_fail</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos16policy_map_key_tE" title="eos::policy_map_key_t">policy_map_key_t</a> <em class="property">const</em>&amp;, <a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::string <em class="property">const</em> &amp;<em>message</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos18policy_map_handler23on_policy_map_sync_failERK16policy_map_key_tRKNSt6stringE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Callback fired when policy map commit or apply operations failed.</p>
+<p><dl class="docutils">
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal notranslate"><a class="reference internal" href="#classeos_1_1policy__map__key__t"><span class="std std-ref"><span class="pre">policy_map_key_t</span></span></a></code>: The policy map which failed to update. </li>
+<li><code class="docutils literal notranslate"><span class="pre">message</span></code>: An error message which may be the empty string. </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N3eos18policy_map_handler24on_policy_map_config_setERK16policy_map_key_t">
+<span id="_CPPv3N3eos18policy_map_handler24on_policy_map_config_setERK16policy_map_key_t"></span><span id="_CPPv2N3eos18policy_map_handler24on_policy_map_config_setERK16policy_map_key_t"></span><span id="eos::policy_map_handler::on_policy_map_config_set__policy_map_key_tCR"></span><span class="target" id="classeos_1_1policy__map__handler_1ad00f9de04943473b91c88eed8510b727"></span><em class="property">virtual</em> void <code class="descname">on_policy_map_config_set</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos16policy_map_key_tE" title="eos::policy_map_key_t">policy_map_key_t</a> <em class="property">const</em>&amp;<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos18policy_map_handler24on_policy_map_config_setERK16policy_map_key_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Callback fired when policy map configuration changes.</p>
+<p><dl class="docutils">
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal notranslate"><span class="pre">name</span></code>: Policy map name. </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Protected Attributes</p>
+<dl class="member">
+<dt id="_CPPv4N3eos18policy_map_handler15policy_map_mgr_E">
+<span id="_CPPv3N3eos18policy_map_handler15policy_map_mgr_E"></span><span id="_CPPv2N3eos18policy_map_handler15policy_map_mgr_E"></span><span id="eos::policy_map_handler::policy_map_mgr___policy_map_mgrP"></span><span class="target" id="classeos_1_1policy__map__handler_1a1bfe54436bd50cfd89a11bc77a37385c"></span><a class="reference internal" href="#_CPPv4N3eos14policy_map_mgrE" title="eos::policy_map_mgr">policy_map_mgr</a> *<code class="descname">policy_map_mgr_</code><a class="headerlink" href="#_CPPv4N3eos18policy_map_handler15policy_map_mgr_E" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N3eos18policy_map_handler8feature_E">
+<span id="_CPPv3N3eos18policy_map_handler8feature_E"></span><span id="_CPPv2N3eos18policy_map_handler8feature_E"></span><span id="eos::policy_map_handler::feature___policy_feature_t"></span><span class="target" id="classeos_1_1policy__map__handler_1a405d054adc374ab6a474a20e93ae7dcb"></span><a class="reference internal" href="#_CPPv4N3eos16policy_feature_tE" title="eos::policy_feature_t">policy_feature_t</a> <code class="descname">feature_</code><a class="headerlink" href="#_CPPv4N3eos18policy_map_handler8feature_E" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="class">
+<dt id="_CPPv4N3eos14policy_map_mgrE">
+<span id="_CPPv3N3eos14policy_map_mgrE"></span><span id="_CPPv2N3eos14policy_map_mgrE"></span><span id="eos::policy_map_mgr"></span><span class="target" id="classeos_1_1policy__map__mgr"></span><em class="property">class </em><code class="descname">policy_map_mgr</code> : <em class="property">public</em> <a class="reference internal" href="acl.html#_CPPv43eos" title="eos">eos</a>::base_mgr&lt;<a class="reference internal" href="#_CPPv4N3eos18policy_map_handlerE" title="eos::policy_map_handler">policy_map_handler</a>, <a class="reference internal" href="#_CPPv4N3eos16policy_map_key_tE" title="eos::policy_map_key_t">policy_map_key_t</a>&gt;<a class="headerlink" href="#_CPPv4N3eos14policy_map_mgrE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><em>#include &lt;policy_map.h&gt;</em><p>EOS policy map manager.</p>
+<p>The policy manager provides access to policy-map management, as well as policy map application to interfaces. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="function">
+<dt id="_CPPv4N3eos14policy_map_mgrD0Ev">
+<span id="_CPPv3N3eos14policy_map_mgrD0Ev"></span><span id="_CPPv2N3eos14policy_map_mgrD0Ev"></span><span id="eos::policy_map_mgr::~policy_map_mgr"></span><span class="target" id="classeos_1_1policy__map__mgr_1a171bfdc7e6791672ac28baa834787450"></span><em class="property">virtual</em> <code class="descname">~policy_map_mgr</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos14policy_map_mgrD0Ev" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N3eos14policy_map_mgr11resync_initEv">
+<span id="_CPPv3N3eos14policy_map_mgr11resync_initEv"></span><span id="_CPPv2N3eos14policy_map_mgr11resync_initEv"></span><span id="eos::policy_map_mgr::resync_init"></span><span class="target" id="classeos_1_1policy__map__mgr_1a3772ba4a70c70d44835972f483cd2a2b"></span><em class="property">virtual</em> void <code class="descname">resync_init</code><span class="sig-paren">(</span><span class="sig-paren">)</span> = 0<a class="headerlink" href="#_CPPv4N3eos14policy_map_mgr11resync_initEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Resync </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N3eos14policy_map_mgr15resync_completeEv">
+<span id="_CPPv3N3eos14policy_map_mgr15resync_completeEv"></span><span id="_CPPv2N3eos14policy_map_mgr15resync_completeEv"></span><span id="eos::policy_map_mgr::resync_complete"></span><span class="target" id="classeos_1_1policy__map__mgr_1aea8826f5df37ce2efaf3daa93294b38d"></span><em class="property">virtual</em> void <code class="descname">resync_complete</code><span class="sig-paren">(</span><span class="sig-paren">)</span> = 0<a class="headerlink" href="#_CPPv4N3eos14policy_map_mgr15resync_completeEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Completes any underway resync operation. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4NK3eos14policy_map_mgr6existsERK16policy_map_key_t">
+<span id="_CPPv3NK3eos14policy_map_mgr6existsERK16policy_map_key_t"></span><span id="_CPPv2NK3eos14policy_map_mgr6existsERK16policy_map_key_t"></span><span id="eos::policy_map_mgr::exists__policy_map_key_tCRC"></span><span class="target" id="classeos_1_1policy__map__mgr_1aa7646ca09491085c2c3e1687d18059c5"></span><em class="property">virtual</em> bool <code class="descname">exists</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos16policy_map_key_tE" title="eos::policy_map_key_t">policy_map_key_t</a> <em class="property">const</em> &amp;<em>key</em><span class="sig-paren">)</span> <em class="property">const</em> = 0<a class="headerlink" href="#_CPPv4NK3eos14policy_map_mgr6existsERK16policy_map_key_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Returns true if and only if the provided policy map key is configured. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4NK3eos14policy_map_mgr10policy_mapERK16policy_map_key_t">
+<span id="_CPPv3NK3eos14policy_map_mgr10policy_mapERK16policy_map_key_t"></span><span id="_CPPv2NK3eos14policy_map_mgr10policy_mapERK16policy_map_key_t"></span><span id="eos::policy_map_mgr::policy_map__policy_map_key_tCRC"></span><span class="target" id="classeos_1_1policy__map__mgr_1a9c80582845de2840cb4f26fd8efc95c9"></span><em class="property">virtual</em> <a class="reference internal" href="#_CPPv4N3eos12policy_map_tE" title="eos::policy_map_t">policy_map_t</a> <code class="descname">policy_map</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos16policy_map_key_tE" title="eos::policy_map_key_t">policy_map_key_t</a> <em class="property">const</em> &amp;<em>key</em><span class="sig-paren">)</span> <em class="property">const</em> = 0<a class="headerlink" href="#_CPPv4NK3eos14policy_map_mgr10policy_mapERK16policy_map_key_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N3eos14policy_map_mgr13policy_map_isERK12policy_map_t">
+<span id="_CPPv3N3eos14policy_map_mgr13policy_map_isERK12policy_map_t"></span><span id="_CPPv2N3eos14policy_map_mgr13policy_map_isERK12policy_map_t"></span><span id="eos::policy_map_mgr::policy_map_is__policy_map_tCR"></span><span class="target" id="classeos_1_1policy__map__mgr_1ab8f7005b3349fcc091f03e597750c18f"></span><em class="property">virtual</em> void <code class="descname">policy_map_is</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos12policy_map_tE" title="eos::policy_map_t">policy_map_t</a> <em class="property">const</em> &amp;<em>policy_map</em><span class="sig-paren">)</span> = 0<a class="headerlink" href="#_CPPv4N3eos14policy_map_mgr13policy_map_isERK12policy_map_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N3eos14policy_map_mgr14policy_map_delERK16policy_map_key_t">
+<span id="_CPPv3N3eos14policy_map_mgr14policy_map_delERK16policy_map_key_t"></span><span id="_CPPv2N3eos14policy_map_mgr14policy_map_delERK16policy_map_key_t"></span><span id="eos::policy_map_mgr::policy_map_del__policy_map_key_tCR"></span><span class="target" id="classeos_1_1policy__map__mgr_1afaeda0dfc6b581fb0d2a17adcb7e1331"></span><em class="property">virtual</em> void <code class="descname">policy_map_del</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos16policy_map_key_tE" title="eos::policy_map_key_t">policy_map_key_t</a> <em class="property">const</em> &amp;<em>key</em><span class="sig-paren">)</span> = 0<a class="headerlink" href="#_CPPv4N3eos14policy_map_mgr14policy_map_delERK16policy_map_key_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4NK3eos14policy_map_mgr15policy_map_iterE16policy_feature_t">
+<span id="_CPPv3NK3eos14policy_map_mgr15policy_map_iterE16policy_feature_t"></span><span id="_CPPv2NK3eos14policy_map_mgr15policy_map_iterE16policy_feature_t"></span><span id="eos::policy_map_mgr::policy_map_iter__policy_feature_tC"></span><span class="target" id="classeos_1_1policy__map__mgr_1a0731955f7931a911d1df3f0f8c9fb41e"></span><em class="property">virtual</em> <a class="reference internal" href="#_CPPv4N3eos17policy_map_iter_tE" title="eos::policy_map_iter_t">policy_map_iter_t</a> <code class="descname">policy_map_iter</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos16policy_feature_tE" title="eos::policy_feature_t">policy_feature_t</a><span class="sig-paren">)</span> <em class="property">const</em> = 0<a class="headerlink" href="#_CPPv4NK3eos14policy_map_mgr15policy_map_iterE16policy_feature_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Provides iteration over the configured policy maps for a feature. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N3eos14policy_map_mgr16policy_map_applyERK16policy_map_key_t9intf_id_t15acl_direction_tb">
+<span id="_CPPv3N3eos14policy_map_mgr16policy_map_applyERK16policy_map_key_t9intf_id_t15acl_direction_tb"></span><span id="_CPPv2N3eos14policy_map_mgr16policy_map_applyERK16policy_map_key_t9intf_id_t15acl_direction_tb"></span><span id="eos::policy_map_mgr::policy_map_apply__policy_map_key_tCR.intf_id_t.acl_direction_t.b"></span><span class="target" id="classeos_1_1policy__map__mgr_1ae52cb621483585bfbc993bd893d1f223"></span><em class="property">virtual</em> void <code class="descname">policy_map_apply</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos16policy_map_key_tE" title="eos::policy_map_key_t">policy_map_key_t</a> <em class="property">const</em>&amp;, <a class="reference internal" href="intf.html#_CPPv4N3eos9intf_id_tE" title="eos::intf_id_t">intf_id_t</a>, <a class="reference internal" href="acl.html#_CPPv4N3eos15acl_direction_tE" title="eos::acl_direction_t">acl_direction_t</a>, bool <em>apply</em><span class="sig-paren">)</span> = 0<a class="headerlink" href="#_CPPv4N3eos14policy_map_mgr16policy_map_applyERK16policy_map_key_t9intf_id_t15acl_direction_tb" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Applies or unapplies a policy map on the given interface and direction. <dl class="docutils">
+<dt><strong>Parameters</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal notranslate"><a class="reference internal" href="#classeos_1_1policy__map__key__t"><span class="std std-ref"><span class="pre">policy_map_key_t</span></span></a></code>: Name and type of the policy map to [un]apply </li>
+<li><code class="docutils literal notranslate"><a class="reference internal" href="intf.html#classeos_1_1intf__id__t"><span class="std std-ref"><span class="pre">intf_id_t</span></span></a></code>: The interface ID of the interface to [un]apply the policy map. </li>
+<li><code class="docutils literal notranslate"><span class="pre">acl_direction_t</span></code>: The direction in which to [un]apply the policy map </li>
+<li><code class="docutils literal notranslate"><span class="pre">bool</span></code>: Whether to apply or unapply the policy map. If true, policy map is applied on the given interface and direction. If false, policy map is removed from the given interface and direction. </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4NK3eos14policy_map_mgr25policy_map_hw_status_iterE16policy_feature_t">
+<span id="_CPPv3NK3eos14policy_map_mgr25policy_map_hw_status_iterE16policy_feature_t"></span><span id="_CPPv2NK3eos14policy_map_mgr25policy_map_hw_status_iterE16policy_feature_t"></span><span id="eos::policy_map_mgr::policy_map_hw_status_iter__policy_feature_tC"></span><span class="target" id="classeos_1_1policy__map__mgr_1a149d43844b0740349e30f7621d56a3d0"></span><em class="property">virtual</em> <a class="reference internal" href="#_CPPv4N3eos27policy_map_hw_status_iter_tE" title="eos::policy_map_hw_status_iter_t">policy_map_hw_status_iter_t</a> <code class="descname">policy_map_hw_status_iter</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos16policy_feature_tE" title="eos::policy_feature_t">policy_feature_t</a><span class="sig-paren">)</span> <em class="property">const</em> = 0<a class="headerlink" href="#_CPPv4NK3eos14policy_map_mgr25policy_map_hw_status_iterE16policy_feature_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Provides iteration over the policy maps in hardware for a feature. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4NK3eos14policy_map_mgr9hw_statusERK16policy_map_key_t">
+<span id="_CPPv3NK3eos14policy_map_mgr9hw_statusERK16policy_map_key_t"></span><span id="_CPPv2NK3eos14policy_map_mgr9hw_statusERK16policy_map_key_t"></span><span id="eos::policy_map_mgr::hw_status__policy_map_key_tCRC"></span><span class="target" id="classeos_1_1policy__map__mgr_1a40b0dc7198437c9fda46e8d4cbd2e635"></span><em class="property">virtual</em> <a class="reference internal" href="#_CPPv4N3eos24policy_map_hw_statuses_tE" title="eos::policy_map_hw_statuses_t">policy_map_hw_statuses_t</a> <code class="descname">hw_status</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos16policy_map_key_tE" title="eos::policy_map_key_t">policy_map_key_t</a> <em class="property">const</em> &amp;<em>key</em><span class="sig-paren">)</span> <em class="property">const</em> = 0<a class="headerlink" href="#_CPPv4NK3eos14policy_map_mgr9hw_statusERK16policy_map_key_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Returns the hardware status for a policy map key. </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Protected Functions</p>
+<dl class="function">
+<dt id="_CPPv4N3eos14policy_map_mgr14policy_map_mgrEv">
+<span id="_CPPv3N3eos14policy_map_mgr14policy_map_mgrEv"></span><span id="_CPPv2N3eos14policy_map_mgr14policy_map_mgrEv"></span><span id="eos::policy_map_mgr::policy_map_mgr"></span><span class="target" id="classeos_1_1policy__map__mgr_1aad10ce3748c28df573657d235dbfe4ad"></span><code class="descname">policy_map_mgr</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos14policy_map_mgr14policy_map_mgrEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Private Members</p>
+<dl class="member">
+<dt>
+<span class="target" id="classeos_1_1policy__map__mgr_1a0845eb3c70d3bf2dfd7c0c58f748412c"></span><code class="descname">eos::policy_map_mgr::policy_map_mgr</code></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Friends</p>
+<dl class="function">
+<dt>
+<span class="target" id="classeos_1_1policy__map__mgr_1ae5d3fcb310a8862b41820e1f6e23174a"></span><em class="property">friend </em><code class="descname">eos::policy_map_handler</code></dt>
+<dd></dd></dl>
+
+</div>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="type">
+<dt id="_CPPv4St">
+<span id="_CPPv3St"></span><span id="_CPPv2St"></span><span id="std"></span><span class="target" id="namespacestd"></span><em class="property">namespace </em><code class="descname">std</code><br /></dt>
+<dd><p>STL namespace. </p>
+<dl class="class">
+<dt id="_CPPv4IENSt4hashIN3eos19policy_map_action_tEEE">
+<span id="_CPPv3IENSt4hashIN3eos19policy_map_action_tEEE"></span><span class="target" id="structstd_1_1hash_3_01eos_1_1policy__map__action__t_01_4"></span>template&lt;&gt;<br /><em class="property">struct </em><code class="descname">hash</code>&lt;<a class="reference internal" href="acl.html#_CPPv43eos" title="eos">eos</a>::<a class="reference internal" href="#_CPPv4N3eos19policy_map_action_tE" title="eos::policy_map_action_t">policy_map_action_t</a>&gt;<br /></dt>
+<dd><div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="function">
+<dt id="_CPPv4NKSt4hashclERKN3eos19policy_map_action_tE">
+<span id="_CPPv3NKSt4hashclERKN3eos19policy_map_action_tE"></span><span id="_CPPv2NKSt4hashclERKN3eos19policy_map_action_tE"></span><span class="target" id="structstd_1_1hash_3_01eos_1_1policy__map__action__t_01_4_1aa5f5719f16b8da5901b26de7117cf22c"></span>size_t <code class="descname">operator()</code><span class="sig-paren">(</span><a class="reference internal" href="acl.html#_CPPv43eos" title="eos">eos</a>::<a class="reference internal" href="#_CPPv4N3eos19policy_map_action_tE" title="eos::policy_map_action_t">policy_map_action_t</a> <em class="property">const</em>&amp;<span class="sig-paren">)</span> <em class="property">const</em><br /></dt>
+<dd></dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="class">
+<dt id="_CPPv4IENSt4hashIN3eos16policy_map_key_tEEE">
+<span id="_CPPv3IENSt4hashIN3eos16policy_map_key_tEEE"></span><span class="target" id="structstd_1_1hash_3_01eos_1_1policy__map__key__t_01_4"></span>template&lt;&gt;<br /><em class="property">struct </em><code class="descname">hash</code>&lt;<a class="reference internal" href="acl.html#_CPPv43eos" title="eos">eos</a>::<a class="reference internal" href="#_CPPv4N3eos16policy_map_key_tE" title="eos::policy_map_key_t">policy_map_key_t</a>&gt;<br /></dt>
+<dd><div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="function">
+<dt id="_CPPv4NKSt4hashclERKN3eos16policy_map_key_tE">
+<span id="_CPPv3NKSt4hashclERKN3eos16policy_map_key_tE"></span><span id="_CPPv2NKSt4hashclERKN3eos16policy_map_key_tE"></span><span class="target" id="structstd_1_1hash_3_01eos_1_1policy__map__key__t_01_4_1a1a00bc1beb13845f0cacc2e9eff0ae20"></span>size_t <code class="descname">operator()</code><span class="sig-paren">(</span><a class="reference internal" href="acl.html#_CPPv43eos" title="eos">eos</a>::<a class="reference internal" href="#_CPPv4N3eos16policy_map_key_tE" title="eos::policy_map_key_t">policy_map_key_t</a> <em class="property">const</em>&amp;<span class="sig-paren">)</span> <em class="property">const</em><br /></dt>
+<dd></dd></dl>
+
+</div>
+</dd></dl>
+
+</dd></dl>
+
+<div class="section" id="type-definitions-in-policy-map">
+<h2>Type definitions in <strong>policy_map</strong><a class="headerlink" href="#type-definitions-in-policy-map" title="Permalink to this headline">¶</a></h2>
+<dl class="type">
+<dt id="_CPPv43eos">
+<span id="_CPPv33eos"></span><span id="_CPPv23eos"></span><span class="target" id="namespaceeos"></span><em class="property">namespace </em><code class="descname">eos</code><br /></dt>
+<dd><div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Typedefs</p>
+<dl class="type">
+<dt id="_CPPv4N3eos16policy_map_tag_tE">
+<span id="_CPPv3N3eos16policy_map_tag_tE"></span><span id="_CPPv2N3eos16policy_map_tag_tE"></span><span id="eos::policy_map_tag_t"></span><span class="target" id="namespaceeos_1ac3cc7cebcfdc19e9c158fb5d3aac0098"></span><em class="property">typedef </em>uint32_t <code class="descname">policy_map_tag_t</code><a class="headerlink" href="#_CPPv4N3eos16policy_map_tag_tE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Enums</p>
+<dl class="enum">
+<dt id="_CPPv4N3eos24policy_match_condition_tE">
+<span id="_CPPv3N3eos24policy_match_condition_tE"></span><span id="_CPPv2N3eos24policy_match_condition_tE"></span><span class="target" id="namespaceeos_1ad91cfbebf829a793b93e45726aee2f5a"></span><em class="property">enum </em><code class="descname">policy_match_condition_t</code><a class="headerlink" href="#_CPPv4N3eos24policy_match_condition_tE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>The default match condition for the policy map.</p>
+<p>At present, the only supported condition is that any rule in the policy-map matching will trigger the action (POLICY_MAP_CONDITION_ANY). </p>
+<p><em>Values:</em></p>
+<dl class="enumerator">
+<dt id="_CPPv4N3eos25POLICY_MAP_CONDITION_NULLE">
+<span id="_CPPv3N3eos25POLICY_MAP_CONDITION_NULLE"></span><span id="_CPPv2N3eos25POLICY_MAP_CONDITION_NULLE"></span><span class="target" id="namespaceeos_1ad91cfbebf829a793b93e45726aee2f5aa5408de41c0c9e6a83cb477ff81a74d2d"></span><code class="descname">POLICY_MAP_CONDITION_NULL</code><a class="headerlink" href="#_CPPv4N3eos25POLICY_MAP_CONDITION_NULLE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="enumerator">
+<dt id="_CPPv4N3eos24POLICY_MAP_CONDITION_ANYE">
+<span id="_CPPv3N3eos24POLICY_MAP_CONDITION_ANYE"></span><span id="_CPPv2N3eos24POLICY_MAP_CONDITION_ANYE"></span><span class="target" id="namespaceeos_1ad91cfbebf829a793b93e45726aee2f5aaa6d665a8c3f389468e198ca8bee84f16"></span><code class="descname">POLICY_MAP_CONDITION_ANY</code><a class="headerlink" href="#_CPPv4N3eos24POLICY_MAP_CONDITION_ANYE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="enum">
+<dt id="_CPPv4N3eos16policy_feature_tE">
+<span id="_CPPv3N3eos16policy_feature_tE"></span><span id="_CPPv2N3eos16policy_feature_tE"></span><span class="target" id="namespaceeos_1ab8046bbe0f06f07a0eabbeb18c9d720f"></span><em class="property">enum </em><code class="descname">policy_feature_t</code><a class="headerlink" href="#_CPPv4N3eos16policy_feature_tE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>A hardware feature a policy map can be used with. </p>
+<p><em>Values:</em></p>
+<dl class="enumerator">
+<dt id="_CPPv4N3eos19POLICY_FEATURE_NULLE">
+<span id="_CPPv3N3eos19POLICY_FEATURE_NULLE"></span><span id="_CPPv2N3eos19POLICY_FEATURE_NULLE"></span><span class="target" id="namespaceeos_1ab8046bbe0f06f07a0eabbeb18c9d720fabae4be7ae828b6c7250ee510b6783cca"></span><code class="descname">POLICY_FEATURE_NULL</code><a class="headerlink" href="#_CPPv4N3eos19POLICY_FEATURE_NULLE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="enumerator">
+<dt id="_CPPv4N3eos18POLICY_FEATURE_PBRE">
+<span id="_CPPv3N3eos18POLICY_FEATURE_PBRE"></span><span id="_CPPv2N3eos18POLICY_FEATURE_PBRE"></span><span class="target" id="namespaceeos_1ab8046bbe0f06f07a0eabbeb18c9d720faf9749f8152c14487cc0506bb55ebfaa2"></span><code class="descname">POLICY_FEATURE_PBR</code><a class="headerlink" href="#_CPPv4N3eos18POLICY_FEATURE_PBRE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="enumerator">
+<dt id="_CPPv4N3eos18POLICY_FEATURE_QOSE">
+<span id="_CPPv3N3eos18POLICY_FEATURE_QOSE"></span><span id="_CPPv2N3eos18POLICY_FEATURE_QOSE"></span><span class="target" id="namespaceeos_1ab8046bbe0f06f07a0eabbeb18c9d720fa08d0e4b617a54de5a705a024f1c9a612"></span><code class="descname">POLICY_FEATURE_QOS</code><a class="headerlink" href="#_CPPv4N3eos18POLICY_FEATURE_QOSE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="enumerator">
+<dt id="_CPPv4N3eos22POLICY_FEATURE_TAP_AGGE">
+<span id="_CPPv3N3eos22POLICY_FEATURE_TAP_AGGE"></span><span id="_CPPv2N3eos22POLICY_FEATURE_TAP_AGGE"></span><span class="target" id="namespaceeos_1ab8046bbe0f06f07a0eabbeb18c9d720fa65d2364edd955a66be9dc1950c4dbda6"></span><code class="descname">POLICY_FEATURE_TAP_AGG</code><a class="headerlink" href="#_CPPv4N3eos22POLICY_FEATURE_TAP_AGGE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="enum">
+<dt id="_CPPv4N3eos20policy_action_type_tE">
+<span id="_CPPv3N3eos20policy_action_type_tE"></span><span id="_CPPv2N3eos20policy_action_type_tE"></span><span class="target" id="namespaceeos_1adb4098066c906bbb40cb780a86d73517"></span><em class="property">enum </em><code class="descname">policy_action_type_t</code><a class="headerlink" href="#_CPPv4N3eos20policy_action_type_tE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>The actions a policy map rule may apply to classified packets. </p>
+<p><em>Values:</em></p>
+<dl class="enumerator">
+<dt id="_CPPv4N3eos18POLICY_ACTION_NULLE">
+<span id="_CPPv3N3eos18POLICY_ACTION_NULLE"></span><span id="_CPPv2N3eos18POLICY_ACTION_NULLE"></span><span class="target" id="namespaceeos_1adb4098066c906bbb40cb780a86d73517a1237389e28d177ad0f0d8b8141ffbdf3"></span><code class="descname">POLICY_ACTION_NULL</code><a class="headerlink" href="#_CPPv4N3eos18POLICY_ACTION_NULLE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="enumerator">
+<dt id="_CPPv4N3eos18POLICY_ACTION_NONEE">
+<span id="_CPPv3N3eos18POLICY_ACTION_NONEE"></span><span id="_CPPv2N3eos18POLICY_ACTION_NONEE"></span><span class="target" id="namespaceeos_1adb4098066c906bbb40cb780a86d73517a5ab58b70eaa1911be44cf489bc6ce98c"></span><code class="descname">POLICY_ACTION_NONE</code><a class="headerlink" href="#_CPPv4N3eos18POLICY_ACTION_NONEE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Perform no action. </p>
+</dd></dl>
+
+<dl class="enumerator">
+<dt id="_CPPv4N3eos18POLICY_ACTION_DROPE">
+<span id="_CPPv3N3eos18POLICY_ACTION_DROPE"></span><span id="_CPPv2N3eos18POLICY_ACTION_DROPE"></span><span class="target" id="namespaceeos_1adb4098066c906bbb40cb780a86d73517a2981aa344555b4144e47e5f6ffaf605d"></span><code class="descname">POLICY_ACTION_DROP</code><a class="headerlink" href="#_CPPv4N3eos18POLICY_ACTION_DROPE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Drop traffic for this policy. </p>
+</dd></dl>
+
+<dl class="enumerator">
+<dt id="_CPPv4N3eos21POLICY_ACTION_NEXTHOPE">
+<span id="_CPPv3N3eos21POLICY_ACTION_NEXTHOPE"></span><span id="_CPPv2N3eos21POLICY_ACTION_NEXTHOPE"></span><span class="target" id="namespaceeos_1adb4098066c906bbb40cb780a86d73517a4da0a72f0ee161063d4a41056404bc69"></span><code class="descname">POLICY_ACTION_NEXTHOP</code><a class="headerlink" href="#_CPPv4N3eos21POLICY_ACTION_NEXTHOPE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Forward to one or more IP nexthops. </p>
+</dd></dl>
+
+<dl class="enumerator">
+<dt id="_CPPv4N3eos27POLICY_ACTION_NEXTHOP_GROUPE">
+<span id="_CPPv3N3eos27POLICY_ACTION_NEXTHOP_GROUPE"></span><span id="_CPPv2N3eos27POLICY_ACTION_NEXTHOP_GROUPE"></span><span class="target" id="namespaceeos_1adb4098066c906bbb40cb780a86d73517a67a829a4249b0c93453e23867871ba75"></span><code class="descname">POLICY_ACTION_NEXTHOP_GROUP</code><a class="headerlink" href="#_CPPv4N3eos27POLICY_ACTION_NEXTHOP_GROUPE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Forward to named group of nexthops/interfaces. </p>
+</dd></dl>
+
+<dl class="enumerator">
+<dt id="_CPPv4N3eos18POLICY_ACTION_DSCPE">
+<span id="_CPPv3N3eos18POLICY_ACTION_DSCPE"></span><span id="_CPPv2N3eos18POLICY_ACTION_DSCPE"></span><span class="target" id="namespaceeos_1adb4098066c906bbb40cb780a86d73517abda62f40d3be5c0f012b1af0f066cb4a"></span><code class="descname">POLICY_ACTION_DSCP</code><a class="headerlink" href="#_CPPv4N3eos18POLICY_ACTION_DSCPE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Set DSCP bits. </p>
+</dd></dl>
+
+<dl class="enumerator">
+<dt id="_CPPv4N3eos27POLICY_ACTION_TRAFFIC_CLASSE">
+<span id="_CPPv3N3eos27POLICY_ACTION_TRAFFIC_CLASSE"></span><span id="_CPPv2N3eos27POLICY_ACTION_TRAFFIC_CLASSE"></span><span class="target" id="namespaceeos_1adb4098066c906bbb40cb780a86d73517a028b1b3d1a5bb5986c27f0819c247327"></span><code class="descname">POLICY_ACTION_TRAFFIC_CLASS</code><a class="headerlink" href="#_CPPv4N3eos27POLICY_ACTION_TRAFFIC_CLASSE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Set traffic class. </p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="enum">
+<dt id="_CPPv4N3eos22policy_map_rule_type_tE">
+<span id="_CPPv3N3eos22policy_map_rule_type_tE"></span><span id="_CPPv2N3eos22policy_map_rule_type_tE"></span><span class="target" id="namespaceeos_1a6370757119f8025b79c7865f575d8969"></span><em class="property">enum </em><code class="descname">policy_map_rule_type_t</code><a class="headerlink" href="#_CPPv4N3eos22policy_map_rule_type_tE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>The policy map rule type. Valid types are IPV4 IPV6 and CLASSMAP. </p>
+<p><em>Values:</em></p>
+<dl class="enumerator">
+<dt id="_CPPv4N3eos25POLICY_RULE_TYPE_CLASSMAPE">
+<span id="_CPPv3N3eos25POLICY_RULE_TYPE_CLASSMAPE"></span><span id="_CPPv2N3eos25POLICY_RULE_TYPE_CLASSMAPE"></span><span class="target" id="namespaceeos_1a6370757119f8025b79c7865f575d8969ac7255bd3237a5425ecceef205a841bbf"></span><code class="descname">POLICY_RULE_TYPE_CLASSMAP</code><a class="headerlink" href="#_CPPv4N3eos25POLICY_RULE_TYPE_CLASSMAPE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="enumerator">
+<dt id="_CPPv4N3eos21POLICY_RULE_TYPE_IPV4E">
+<span id="_CPPv3N3eos21POLICY_RULE_TYPE_IPV4E"></span><span id="_CPPv2N3eos21POLICY_RULE_TYPE_IPV4E"></span><span class="target" id="namespaceeos_1a6370757119f8025b79c7865f575d8969a0e4c8d6c940b93a942ee97e993d17dcf"></span><code class="descname">POLICY_RULE_TYPE_IPV4</code><a class="headerlink" href="#_CPPv4N3eos21POLICY_RULE_TYPE_IPV4E" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="enumerator">
+<dt id="_CPPv4N3eos21POLICY_RULE_TYPE_IPV6E">
+<span id="_CPPv3N3eos21POLICY_RULE_TYPE_IPV6E"></span><span id="_CPPv2N3eos21POLICY_RULE_TYPE_IPV6E"></span><span class="target" id="namespaceeos_1a6370757119f8025b79c7865f575d8969a9cfbee1382ae0d46869129d2addd47eb"></span><code class="descname">POLICY_RULE_TYPE_IPV6</code><a class="headerlink" href="#_CPPv4N3eos21POLICY_RULE_TYPE_IPV6E" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="enum">
+<dt id="_CPPv4N3eos19policy_map_status_tE">
+<span id="_CPPv3N3eos19policy_map_status_tE"></span><span id="_CPPv2N3eos19policy_map_status_tE"></span><span class="target" id="namespaceeos_1ade91d164d2ef4ff470f5cd2401ebc709"></span><em class="property">enum </em><code class="descname">policy_map_status_t</code><a class="headerlink" href="#_CPPv4N3eos19policy_map_status_tE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>The policy map hardware status type. </p>
+<p><em>Values:</em></p>
+<dl class="enumerator">
+<dt id="_CPPv4N3eos23POLICY_STATUS_NOT_FOUNDE">
+<span id="_CPPv3N3eos23POLICY_STATUS_NOT_FOUNDE"></span><span id="_CPPv2N3eos23POLICY_STATUS_NOT_FOUNDE"></span><span class="target" id="namespaceeos_1ade91d164d2ef4ff470f5cd2401ebc709ac2707abd49a2ef027aa72afb8e588e04"></span><code class="descname">POLICY_STATUS_NOT_FOUND</code><a class="headerlink" href="#_CPPv4N3eos23POLICY_STATUS_NOT_FOUNDE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="enumerator">
+<dt id="_CPPv4N3eos25POLICY_STATUS_IN_PROGRESSE">
+<span id="_CPPv3N3eos25POLICY_STATUS_IN_PROGRESSE"></span><span id="_CPPv2N3eos25POLICY_STATUS_IN_PROGRESSE"></span><span class="target" id="namespaceeos_1ade91d164d2ef4ff470f5cd2401ebc709a7493c09f472ac327bfc5a5c99e579b6c"></span><code class="descname">POLICY_STATUS_IN_PROGRESS</code><a class="headerlink" href="#_CPPv4N3eos25POLICY_STATUS_IN_PROGRESSE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="enumerator">
+<dt id="_CPPv4N3eos20POLICY_STATUS_FAILEDE">
+<span id="_CPPv3N3eos20POLICY_STATUS_FAILEDE"></span><span id="_CPPv2N3eos20POLICY_STATUS_FAILEDE"></span><span class="target" id="namespaceeos_1ade91d164d2ef4ff470f5cd2401ebc709a6991d5123764ca1a5d105c7ffba1d81a"></span><code class="descname">POLICY_STATUS_FAILED</code><a class="headerlink" href="#_CPPv4N3eos20POLICY_STATUS_FAILEDE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="enumerator">
+<dt id="_CPPv4N3eos21POLICY_STATUS_SUCCESSE">
+<span id="_CPPv3N3eos21POLICY_STATUS_SUCCESSE"></span><span id="_CPPv2N3eos21POLICY_STATUS_SUCCESSE"></span><span class="target" id="namespaceeos_1ade91d164d2ef4ff470f5cd2401ebc709abcf958bb014216ccd4a504aca5082cb9"></span><code class="descname">POLICY_STATUS_SUCCESS</code><a class="headerlink" href="#_CPPv4N3eos21POLICY_STATUS_SUCCESSE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<dl class="class">
+<dt id="_CPPv4N3eos16policy_map_key_tE">
+<span id="_CPPv3N3eos16policy_map_key_tE"></span><span id="_CPPv2N3eos16policy_map_key_tE"></span><span id="eos::policy_map_key_t"></span><span class="target" id="classeos_1_1policy__map__key__t"></span><em class="property">class </em><code class="descname">policy_map_key_t</code><a class="headerlink" href="#_CPPv4N3eos16policy_map_key_tE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><em>#include &lt;policy_map.h&gt;</em><p>The key used to uniquely identify both class and policy maps. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="function">
+<dt id="_CPPv4N3eos16policy_map_key_t16policy_map_key_tEv">
+<span id="_CPPv3N3eos16policy_map_key_t16policy_map_key_tEv"></span><span id="_CPPv2N3eos16policy_map_key_t16policy_map_key_tEv"></span><span id="eos::policy_map_key_t::policy_map_key_t"></span><span class="target" id="classeos_1_1policy__map__key__t_1a8e76aad144fffae8188a444a8bb42b99"></span><code class="descname">policy_map_key_t</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos16policy_map_key_t16policy_map_key_tEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N3eos16policy_map_key_t16policy_map_key_tERKNSt6stringE16policy_feature_t">
+<span id="_CPPv3N3eos16policy_map_key_t16policy_map_key_tERKNSt6stringE16policy_feature_t"></span><span id="_CPPv2N3eos16policy_map_key_t16policy_map_key_tERKNSt6stringE16policy_feature_t"></span><span id="eos::policy_map_key_t::policy_map_key_t__ssCR.policy_feature_t"></span><span class="target" id="classeos_1_1policy__map__key__t_1ad7c0185243ed6c5caaeaabe2d25b4621"></span><code class="descname">policy_map_key_t</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::string <em class="property">const</em> &amp;<em>name</em>, <a class="reference internal" href="#_CPPv4N3eos16policy_feature_tE" title="eos::policy_feature_t">policy_feature_t</a> <em>feature</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos16policy_map_key_t16policy_map_key_tERKNSt6stringE16policy_feature_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N3eos16policy_map_key_t16policy_map_key_tERK16policy_map_key_t">
+<span id="_CPPv3N3eos16policy_map_key_t16policy_map_key_tERK16policy_map_key_t"></span><span id="_CPPv2N3eos16policy_map_key_t16policy_map_key_tERK16policy_map_key_t"></span><span id="eos::policy_map_key_t::policy_map_key_t__policy_map_key_tCR"></span><span class="target" id="classeos_1_1policy__map__key__t_1a06ab235298d2f1be1cf4d9eedb777079"></span><code class="descname">policy_map_key_t</code><span class="sig-paren">(</span><em class="property">const</em> <a class="reference internal" href="#_CPPv4N3eos16policy_map_key_t16policy_map_key_tEv" title="eos::policy_map_key_t::policy_map_key_t">policy_map_key_t</a> &amp;<em>other</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos16policy_map_key_t16policy_map_key_tERK16policy_map_key_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N3eos16policy_map_key_taSERK16policy_map_key_t">
+<span id="_CPPv3N3eos16policy_map_key_taSERK16policy_map_key_t"></span><span id="_CPPv2N3eos16policy_map_key_taSERK16policy_map_key_t"></span><span id="eos::policy_map_key_t::assign-operator__policy_map_key_tCR"></span><span class="target" id="classeos_1_1policy__map__key__t_1a2fea4ec72e32beb09782f603325f6497"></span><a class="reference internal" href="#_CPPv4N3eos16policy_map_key_tE" title="eos::policy_map_key_t">policy_map_key_t</a> &amp;<code class="descname">operator=</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos16policy_map_key_tE" title="eos::policy_map_key_t">policy_map_key_t</a> <em class="property">const</em> &amp;<em>other</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos16policy_map_key_taSERK16policy_map_key_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4NK3eos16policy_map_key_t4nameEv">
+<span id="_CPPv3NK3eos16policy_map_key_t4nameEv"></span><span id="_CPPv2NK3eos16policy_map_key_t4nameEv"></span><span id="eos::policy_map_key_t::nameC"></span><span class="target" id="classeos_1_1policy__map__key__t_1a6e933c6b2d4619c36d7c15560c2816d7"></span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::string <code class="descname">name</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos16policy_map_key_t4nameEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N3eos16policy_map_key_t7name_isERKNSt6stringE">
+<span id="_CPPv3N3eos16policy_map_key_t7name_isERKNSt6stringE"></span><span id="_CPPv2N3eos16policy_map_key_t7name_isERKNSt6stringE"></span><span id="eos::policy_map_key_t::name_is__ssCR"></span><span class="target" id="classeos_1_1policy__map__key__t_1ae92d002cbd5ffe15b97ecaed32a62b90"></span>void <code class="descname">name_is</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::string <em class="property">const</em> &amp;<em>name</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos16policy_map_key_t7name_isERKNSt6stringE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4NK3eos16policy_map_key_t7featureEv">
+<span id="_CPPv3NK3eos16policy_map_key_t7featureEv"></span><span id="_CPPv2NK3eos16policy_map_key_t7featureEv"></span><span id="eos::policy_map_key_t::featureC"></span><span class="target" id="classeos_1_1policy__map__key__t_1a3a98f7c47400a0c86906d365b3c6337d"></span><a class="reference internal" href="#_CPPv4N3eos16policy_feature_tE" title="eos::policy_feature_t">policy_feature_t</a> <code class="descname">feature</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos16policy_map_key_t7featureEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N3eos16policy_map_key_t10feature_isE16policy_feature_t">
+<span id="_CPPv3N3eos16policy_map_key_t10feature_isE16policy_feature_t"></span><span id="_CPPv2N3eos16policy_map_key_t10feature_isE16policy_feature_t"></span><span id="eos::policy_map_key_t::feature_is__policy_feature_t"></span><span class="target" id="classeos_1_1policy__map__key__t_1a3a9ea8ea88062b5f0b95352465151208"></span>void <code class="descname">feature_is</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos16policy_feature_tE" title="eos::policy_feature_t">policy_feature_t</a> <em>feature</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos16policy_map_key_t10feature_isE16policy_feature_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4NK3eos16policy_map_key_teqERK16policy_map_key_t">
+<span id="_CPPv3NK3eos16policy_map_key_teqERK16policy_map_key_t"></span><span id="_CPPv2NK3eos16policy_map_key_teqERK16policy_map_key_t"></span><span id="eos::policy_map_key_t::eq-operator__policy_map_key_tCRC"></span><span class="target" id="classeos_1_1policy__map__key__t_1a389841a69dcdac26d03cba2d81205d12"></span>bool <code class="descname">operator==</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos16policy_map_key_tE" title="eos::policy_map_key_t">policy_map_key_t</a> <em class="property">const</em> &amp;<em>other</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos16policy_map_key_teqERK16policy_map_key_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4NK3eos16policy_map_key_tneERK16policy_map_key_t">
+<span id="_CPPv3NK3eos16policy_map_key_tneERK16policy_map_key_t"></span><span id="_CPPv2NK3eos16policy_map_key_tneERK16policy_map_key_t"></span><span id="eos::policy_map_key_t::neq-operator__policy_map_key_tCRC"></span><span class="target" id="classeos_1_1policy__map__key__t_1a7e6d9880ae42430e6b0155b728cd2a6e"></span>bool <code class="descname">operator!=</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos16policy_map_key_tE" title="eos::policy_map_key_t">policy_map_key_t</a> <em class="property">const</em> &amp;<em>other</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos16policy_map_key_tneERK16policy_map_key_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4NK3eos16policy_map_key_tltERK16policy_map_key_t">
+<span id="_CPPv3NK3eos16policy_map_key_tltERK16policy_map_key_t"></span><span id="_CPPv2NK3eos16policy_map_key_tltERK16policy_map_key_t"></span><span id="eos::policy_map_key_t::lt-operator__policy_map_key_tCRC"></span><span class="target" id="classeos_1_1policy__map__key__t_1afb92a8f52d34287a36ac0a2e42cd2e89"></span>bool <code class="descname">operator&lt;</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos16policy_map_key_tE" title="eos::policy_map_key_t">policy_map_key_t</a> <em class="property">const</em> &amp;<em>other</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos16policy_map_key_tltERK16policy_map_key_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4NK3eos16policy_map_key_t4hashEv">
+<span id="_CPPv3NK3eos16policy_map_key_t4hashEv"></span><span id="_CPPv2NK3eos16policy_map_key_t4hashEv"></span><span id="eos::policy_map_key_t::hashC"></span><span class="target" id="classeos_1_1policy__map__key__t_1a2fb01552df367a4c59e9e93e589ecca2"></span>uint32_t <code class="descname">hash</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos16policy_map_key_t4hashEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>The hash function for type <a class="reference internal" href="#classeos_1_1policy__map__key__t"><span class="std std-ref">policy_map_key_t</span></a>. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4NK3eos16policy_map_key_t6mix_meER8hash_mix">
+<span id="_CPPv3NK3eos16policy_map_key_t6mix_meER8hash_mix"></span><span id="_CPPv2NK3eos16policy_map_key_t6mix_meER8hash_mix"></span><span id="eos::policy_map_key_t::mix_me__hash_mixRC"></span><span class="target" id="classeos_1_1policy__map__key__t_1acf138d0de493e7dbe7d046f66d7bed17"></span>void <code class="descname">mix_me</code><span class="sig-paren">(</span><a class="reference internal" href="hash_mix.html#_CPPv4N3eos8hash_mixE" title="eos::hash_mix">hash_mix</a> &amp;<em>h</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos16policy_map_key_t6mix_meER8hash_mix" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>The hash mix function for type <a class="reference internal" href="#classeos_1_1policy__map__key__t"><span class="std std-ref">policy_map_key_t</span></a>. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4NK3eos16policy_map_key_t9to_stringEv">
+<span id="_CPPv3NK3eos16policy_map_key_t9to_stringEv"></span><span id="_CPPv2NK3eos16policy_map_key_t9to_stringEv"></span><span id="eos::policy_map_key_t::to_stringC"></span><span class="target" id="classeos_1_1policy__map__key__t_1ad8139ecd38243119c3c94390820488f5"></span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::string <code class="descname">to_string</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos16policy_map_key_t9to_stringEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Returns a string representation of the current object’s values. </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Private Members</p>
+<dl class="member">
+<dt id="_CPPv4N3eos16policy_map_key_t5pimplE">
+<span id="_CPPv3N3eos16policy_map_key_t5pimplE"></span><span id="_CPPv2N3eos16policy_map_key_t5pimplE"></span><span id="eos::policy_map_key_t::pimpl__std::shared_ptr:policy_map_key_impl_t:"></span><span class="target" id="classeos_1_1policy__map__key__t_1ae3e804e12e307294417dc65c3d084af4"></span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::shared_ptr&lt;<a class="reference internal" href="policy_map_impl.html#_CPPv4N3eos21policy_map_key_impl_tE" title="eos::policy_map_key_impl_t">policy_map_key_impl_t</a>&gt; <code class="descname">pimpl</code><a class="headerlink" href="#_CPPv4N3eos16policy_map_key_t5pimplE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Friends</p>
+<dl class="function">
+<dt id="_CPPv4lsRNSt7ostreamERK16policy_map_key_t">
+<span id="_CPPv3lsRNSt7ostreamERK16policy_map_key_t"></span><span id="_CPPv2lsRNSt7ostreamERK16policy_map_key_t"></span><span id="lshift-operator__osR.policy_map_key_tCR"></span><span class="target" id="classeos_1_1policy__map__key__t_1a2f05178f8d483be0b970f9800e5974cd"></span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::ostream &amp;<code class="descname">operator&lt;&lt;</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::ostream &amp;<em>os</em>, <em class="property">const</em> policy_map_key_t &amp;<em>obj</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4lsRNSt7ostreamERK16policy_map_key_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>A utility stream operator that adds a string representation of <a class="reference internal" href="#classeos_1_1policy__map__key__t"><span class="std std-ref">policy_map_key_t</span></a> to the ostream. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="class">
+<dt id="_CPPv4N3eos19policy_map_action_tE">
+<span id="_CPPv3N3eos19policy_map_action_tE"></span><span id="_CPPv2N3eos19policy_map_action_tE"></span><span id="eos::policy_map_action_t"></span><span class="target" id="classeos_1_1policy__map__action__t"></span><em class="property">class </em><code class="descname">policy_map_action_t</code><a class="headerlink" href="#_CPPv4N3eos19policy_map_action_tE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><em>#include &lt;policy_map.h&gt;</em><p>A single policy map action. Each action defines a single type of action to be performed,presently supporting: “set nexthop”, “set nexthop group” and “drop”. It is illegal to set both nexthop and nexthop group or dropoperations in a single policy map rule. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="function">
+<dt id="_CPPv4N3eos19policy_map_action_t19policy_map_action_tEv">
+<span id="_CPPv3N3eos19policy_map_action_t19policy_map_action_tEv"></span><span id="_CPPv2N3eos19policy_map_action_t19policy_map_action_tEv"></span><span id="eos::policy_map_action_t::policy_map_action_t"></span><span class="target" id="classeos_1_1policy__map__action__t_1af0abf7b22d2abac34ebaf4b27d62872e"></span><code class="descname">policy_map_action_t</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos19policy_map_action_t19policy_map_action_tEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N3eos19policy_map_action_t19policy_map_action_tE20policy_action_type_t">
+<span id="_CPPv3N3eos19policy_map_action_t19policy_map_action_tE20policy_action_type_t"></span><span id="_CPPv2N3eos19policy_map_action_t19policy_map_action_tE20policy_action_type_t"></span><span id="eos::policy_map_action_t::policy_map_action_t__policy_action_type_t"></span><span class="target" id="classeos_1_1policy__map__action__t_1a155ff12540c052d88794946d8333dd5c"></span><code class="descname">policy_map_action_t</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos20policy_action_type_tE" title="eos::policy_action_type_t">policy_action_type_t</a> <em>action_type</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos19policy_map_action_t19policy_map_action_tE20policy_action_type_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Constructs a policy map action of a particular type.</p>
+<p>After construction, set attributes appropriate for the action type using the mutators below; only the action-specific attributes will be considered when the policy is applied. If the action is POLICY_ACTION_DROP, no further attributes require being set. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N3eos19policy_map_action_t19policy_map_action_tERK19policy_map_action_t">
+<span id="_CPPv3N3eos19policy_map_action_t19policy_map_action_tERK19policy_map_action_t"></span><span id="_CPPv2N3eos19policy_map_action_t19policy_map_action_tERK19policy_map_action_t"></span><span id="eos::policy_map_action_t::policy_map_action_t__policy_map_action_tCR"></span><span class="target" id="classeos_1_1policy__map__action__t_1a884fdbd5945cce056d09c5387a83a825"></span><code class="descname">policy_map_action_t</code><span class="sig-paren">(</span><em class="property">const</em> <a class="reference internal" href="#_CPPv4N3eos19policy_map_action_t19policy_map_action_tEv" title="eos::policy_map_action_t::policy_map_action_t">policy_map_action_t</a> &amp;<em>other</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos19policy_map_action_t19policy_map_action_tERK19policy_map_action_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N3eos19policy_map_action_taSERK19policy_map_action_t">
+<span id="_CPPv3N3eos19policy_map_action_taSERK19policy_map_action_t"></span><span id="_CPPv2N3eos19policy_map_action_taSERK19policy_map_action_t"></span><span id="eos::policy_map_action_t::assign-operator__policy_map_action_tCR"></span><span class="target" id="classeos_1_1policy__map__action__t_1aa989f5a7f985290aa87a3f40e661753b"></span><a class="reference internal" href="#_CPPv4N3eos19policy_map_action_tE" title="eos::policy_map_action_t">policy_map_action_t</a> &amp;<code class="descname">operator=</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos19policy_map_action_tE" title="eos::policy_map_action_t">policy_map_action_t</a> <em class="property">const</em> &amp;<em>other</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos19policy_map_action_taSERK19policy_map_action_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N3eos19policy_map_action_tD0Ev">
+<span id="_CPPv3N3eos19policy_map_action_tD0Ev"></span><span id="_CPPv2N3eos19policy_map_action_tD0Ev"></span><span id="eos::policy_map_action_t::~policy_map_action_t"></span><span class="target" id="classeos_1_1policy__map__action__t_1a3782d8aed1ddb955afd10e67ed2d326a"></span><code class="descname">~policy_map_action_t</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos19policy_map_action_tD0Ev" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4NK3eos19policy_map_action_t11action_typeEv">
+<span id="_CPPv3NK3eos19policy_map_action_t11action_typeEv"></span><span id="_CPPv2NK3eos19policy_map_action_t11action_typeEv"></span><span id="eos::policy_map_action_t::action_typeC"></span><span class="target" id="classeos_1_1policy__map__action__t_1aea08b059916634c76bfd0cacffac34bb"></span><a class="reference internal" href="#_CPPv4N3eos20policy_action_type_tE" title="eos::policy_action_type_t">policy_action_type_t</a> <code class="descname">action_type</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos19policy_map_action_t11action_typeEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N3eos19policy_map_action_t14action_type_isE20policy_action_type_t">
+<span id="_CPPv3N3eos19policy_map_action_t14action_type_isE20policy_action_type_t"></span><span id="_CPPv2N3eos19policy_map_action_t14action_type_isE20policy_action_type_t"></span><span id="eos::policy_map_action_t::action_type_is__policy_action_type_t"></span><span class="target" id="classeos_1_1policy__map__action__t_1a9e07ac987b1f0dd56ade317aad4d0951"></span>void <code class="descname">action_type_is</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos20policy_action_type_tE" title="eos::policy_action_type_t">policy_action_type_t</a> <em>action_type</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos19policy_map_action_t14action_type_isE20policy_action_type_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4NK3eos19policy_map_action_t18nexthop_group_nameEv">
+<span id="_CPPv3NK3eos19policy_map_action_t18nexthop_group_nameEv"></span><span id="_CPPv2NK3eos19policy_map_action_t18nexthop_group_nameEv"></span><span id="eos::policy_map_action_t::nexthop_group_nameC"></span><span class="target" id="classeos_1_1policy__map__action__t_1a6dad9dc8bf5884f6b897fd7c78b731c8"></span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::string <code class="descname">nexthop_group_name</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos19policy_map_action_t18nexthop_group_nameEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Getter for ‘nexthop_group_name’: the name of the nexthop group to be used when the action is POLICY_ACTION_NEXTHOP_GROUP. If the nexthop group does not yet exist when calling policy_map_is() on the <a class="reference internal" href="#classeos_1_1policy__map__mgr"><span class="std std-ref">policy_map_mgr</span></a>, that action will complete successfully but FIB entries for the nextop group will not be programmed until the group is configured. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N3eos19policy_map_action_t21nexthop_group_name_isERKNSt6stringE">
+<span id="_CPPv3N3eos19policy_map_action_t21nexthop_group_name_isERKNSt6stringE"></span><span id="_CPPv2N3eos19policy_map_action_t21nexthop_group_name_isERKNSt6stringE"></span><span id="eos::policy_map_action_t::nexthop_group_name_is__ssCR"></span><span class="target" id="classeos_1_1policy__map__action__t_1a903cc36750118d1a05a7b7be89bd0428"></span>void <code class="descname">nexthop_group_name_is</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::string <em class="property">const</em> &amp;<em>nexthop_group_name</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos19policy_map_action_t21nexthop_group_name_isERKNSt6stringE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Setter for ‘nexthop_group_name’. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4NK3eos19policy_map_action_t8nexthopsEv">
+<span id="_CPPv3NK3eos19policy_map_action_t8nexthopsEv"></span><span id="_CPPv2NK3eos19policy_map_action_t8nexthopsEv"></span><span id="eos::policy_map_action_t::nexthopsC"></span><span class="target" id="classeos_1_1policy__map__action__t_1a1c7f7fbd7715d760457ad4dea0b90a79"></span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::unordered_set&lt;<a class="reference internal" href="ip.html#_CPPv4N3eos9ip_addr_tE" title="eos::ip_addr_t">ip_addr_t</a>&gt; <em class="property">const</em> &amp;<code class="descname">nexthops</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos19policy_map_action_t8nexthopsEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N3eos19policy_map_action_t11nexthops_isERKNSt13unordered_setI9ip_addr_tEE">
+<span id="_CPPv3N3eos19policy_map_action_t11nexthops_isERKNSt13unordered_setI9ip_addr_tEE"></span><span id="_CPPv2N3eos19policy_map_action_t11nexthops_isERKNSt13unordered_setI9ip_addr_tEE"></span><span id="eos::policy_map_action_t::nexthops_is__std::unordered_set:ip_addr_t:CR"></span><span class="target" id="classeos_1_1policy__map__action__t_1a4cf301395fdd498d756b3093397a017c"></span>void <code class="descname">nexthops_is</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::unordered_set&lt;<a class="reference internal" href="ip.html#_CPPv4N3eos9ip_addr_tE" title="eos::ip_addr_t">ip_addr_t</a>&gt; <em class="property">const</em> &amp;<em>nexthops</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos19policy_map_action_t11nexthops_isERKNSt13unordered_setI9ip_addr_tEE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N3eos19policy_map_action_t11nexthop_setERK9ip_addr_t">
+<span id="_CPPv3N3eos19policy_map_action_t11nexthop_setERK9ip_addr_t"></span><span id="_CPPv2N3eos19policy_map_action_t11nexthop_setERK9ip_addr_t"></span><span id="eos::policy_map_action_t::nexthop_set__ip_addr_tCR"></span><span class="target" id="classeos_1_1policy__map__action__t_1a47775976f2ca8bb4db65ba9aa53c516c"></span>void <code class="descname">nexthop_set</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#_CPPv4N3eos9ip_addr_tE" title="eos::ip_addr_t">ip_addr_t</a> <em class="property">const</em> &amp;<em>value</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos19policy_map_action_t11nexthop_setERK9ip_addr_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Inserts one nexthop of ‘value’ to the set. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N3eos19policy_map_action_t11nexthop_delERK9ip_addr_t">
+<span id="_CPPv3N3eos19policy_map_action_t11nexthop_delERK9ip_addr_t"></span><span id="_CPPv2N3eos19policy_map_action_t11nexthop_delERK9ip_addr_t"></span><span id="eos::policy_map_action_t::nexthop_del__ip_addr_tCR"></span><span class="target" id="classeos_1_1policy__map__action__t_1a70a0c59caf26666111bef3506669c002"></span>void <code class="descname">nexthop_del</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#_CPPv4N3eos9ip_addr_tE" title="eos::ip_addr_t">ip_addr_t</a> <em class="property">const</em> &amp;<em>value</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos19policy_map_action_t11nexthop_delERK9ip_addr_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Deletes one nexthop of ‘value’ from the set. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4NK3eos19policy_map_action_t3vrfEv">
+<span id="_CPPv3NK3eos19policy_map_action_t3vrfEv"></span><span id="_CPPv2NK3eos19policy_map_action_t3vrfEv"></span><span id="eos::policy_map_action_t::vrfC"></span><span class="target" id="classeos_1_1policy__map__action__t_1adc0f3903962268ff29d20eafb21f022d"></span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::string <code class="descname">vrf</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos19policy_map_action_t3vrfEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Getter for ‘vrf’: the name of the VRF for nexthop action. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N3eos19policy_map_action_t6vrf_isERKNSt6stringE">
+<span id="_CPPv3N3eos19policy_map_action_t6vrf_isERKNSt6stringE"></span><span id="_CPPv2N3eos19policy_map_action_t6vrf_isERKNSt6stringE"></span><span id="eos::policy_map_action_t::vrf_is__ssCR"></span><span class="target" id="classeos_1_1policy__map__action__t_1a9f5b9632c50cd10816d876817f9c2ea0"></span>void <code class="descname">vrf_is</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::string <em class="property">const</em> &amp;<em>vrf</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos19policy_map_action_t6vrf_isERKNSt6stringE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Setter for ‘vrf’. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4NK3eos19policy_map_action_t4dscpEv">
+<span id="_CPPv3NK3eos19policy_map_action_t4dscpEv"></span><span id="_CPPv2NK3eos19policy_map_action_t4dscpEv"></span><span id="eos::policy_map_action_t::dscpC"></span><span class="target" id="classeos_1_1policy__map__action__t_1a9c3b93788fda32c5ddf1e1141b569730"></span>uint8_t <code class="descname">dscp</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos19policy_map_action_t4dscpEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Getter for ‘dscp’: the DiffServ Code Point on matching IPv4/IPv6 packets. This sets the 6-bit IPv4 DSCP or IPv6 traffic class field.</p>
+<p><dl class="docutils">
+<dt><strong>Exceptions</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal notranslate"><a class="reference internal" href="exception.html#classeos_1_1invalid__argument__error"><span class="std std-ref"><span class="pre">eos::invalid_argument_error</span></span></a></code>: if value outside range 0..63. </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N3eos19policy_map_action_t7dscp_isE7uint8_t">
+<span id="_CPPv3N3eos19policy_map_action_t7dscp_isE7uint8_t"></span><span id="_CPPv2N3eos19policy_map_action_t7dscp_isE7uint8_t"></span><span id="eos::policy_map_action_t::dscp_is__uint8_t"></span><span class="target" id="classeos_1_1policy__map__action__t_1a755f76193eb73f84f934233f0879bb4a"></span>void <code class="descname">dscp_is</code><span class="sig-paren">(</span>uint8_t <em>dscp</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos19policy_map_action_t7dscp_isE7uint8_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Setter for ‘dscp’. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4NK3eos19policy_map_action_t13traffic_classEv">
+<span id="_CPPv3NK3eos19policy_map_action_t13traffic_classEv"></span><span id="_CPPv2NK3eos19policy_map_action_t13traffic_classEv"></span><span id="eos::policy_map_action_t::traffic_classC"></span><span class="target" id="classeos_1_1policy__map__action__t_1ac0b27060f266793862a4a16fe6cc40ca"></span>uint8_t <code class="descname">traffic_class</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos19policy_map_action_t13traffic_classEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Getter for ‘traffic_class’: the internal EOS traffic class on matching packets. Setting this 3-bit value overrides any interface CoS/DSCP trust mapping.</p>
+<p><dl class="docutils">
+<dt><strong>Exceptions</strong></dt>
+<dd><ul class="breatheparameterlist first last simple">
+<li><code class="docutils literal notranslate"><a class="reference internal" href="exception.html#classeos_1_1invalid__argument__error"><span class="std std-ref"><span class="pre">eos::invalid_argument_error</span></span></a></code>: if value outside range 0..7. </li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N3eos19policy_map_action_t16traffic_class_isE7uint8_t">
+<span id="_CPPv3N3eos19policy_map_action_t16traffic_class_isE7uint8_t"></span><span id="_CPPv2N3eos19policy_map_action_t16traffic_class_isE7uint8_t"></span><span id="eos::policy_map_action_t::traffic_class_is__uint8_t"></span><span class="target" id="classeos_1_1policy__map__action__t_1a473bb091bb68051ea18335d0deff3513"></span>void <code class="descname">traffic_class_is</code><span class="sig-paren">(</span>uint8_t <em>traffic_class</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos19policy_map_action_t16traffic_class_isE7uint8_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Setter for ‘traffic_class’. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4NK3eos19policy_map_action_teqERK19policy_map_action_t">
+<span id="_CPPv3NK3eos19policy_map_action_teqERK19policy_map_action_t"></span><span id="_CPPv2NK3eos19policy_map_action_teqERK19policy_map_action_t"></span><span id="eos::policy_map_action_t::eq-operator__policy_map_action_tCRC"></span><span class="target" id="classeos_1_1policy__map__action__t_1a9296c11a8d2f62123c22470908f614bf"></span>bool <code class="descname">operator==</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos19policy_map_action_tE" title="eos::policy_map_action_t">policy_map_action_t</a> <em class="property">const</em> &amp;<em>other</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos19policy_map_action_teqERK19policy_map_action_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4NK3eos19policy_map_action_tneERK19policy_map_action_t">
+<span id="_CPPv3NK3eos19policy_map_action_tneERK19policy_map_action_t"></span><span id="_CPPv2NK3eos19policy_map_action_tneERK19policy_map_action_t"></span><span id="eos::policy_map_action_t::neq-operator__policy_map_action_tCRC"></span><span class="target" id="classeos_1_1policy__map__action__t_1a6a7317d15e1cd3860201cf985b284d9e"></span>bool <code class="descname">operator!=</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos19policy_map_action_tE" title="eos::policy_map_action_t">policy_map_action_t</a> <em class="property">const</em> &amp;<em>other</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos19policy_map_action_tneERK19policy_map_action_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4NK3eos19policy_map_action_tltERK19policy_map_action_t">
+<span id="_CPPv3NK3eos19policy_map_action_tltERK19policy_map_action_t"></span><span id="_CPPv2NK3eos19policy_map_action_tltERK19policy_map_action_t"></span><span id="eos::policy_map_action_t::lt-operator__policy_map_action_tCRC"></span><span class="target" id="classeos_1_1policy__map__action__t_1afd594264cd536839acc35d8dfb6faa71"></span>bool <code class="descname">operator&lt;</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos19policy_map_action_tE" title="eos::policy_map_action_t">policy_map_action_t</a> <em class="property">const</em> &amp;<em>other</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos19policy_map_action_tltERK19policy_map_action_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4NK3eos19policy_map_action_t4hashEv">
+<span id="_CPPv3NK3eos19policy_map_action_t4hashEv"></span><span id="_CPPv2NK3eos19policy_map_action_t4hashEv"></span><span id="eos::policy_map_action_t::hashC"></span><span class="target" id="classeos_1_1policy__map__action__t_1a289e4da92990625b3f4295116c4ce371"></span>uint32_t <code class="descname">hash</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos19policy_map_action_t4hashEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>The hash function for type <a class="reference internal" href="#classeos_1_1policy__map__action__t"><span class="std std-ref">policy_map_action_t</span></a>. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4NK3eos19policy_map_action_t6mix_meER8hash_mix">
+<span id="_CPPv3NK3eos19policy_map_action_t6mix_meER8hash_mix"></span><span id="_CPPv2NK3eos19policy_map_action_t6mix_meER8hash_mix"></span><span id="eos::policy_map_action_t::mix_me__hash_mixRC"></span><span class="target" id="classeos_1_1policy__map__action__t_1a7d6c4349f5fa5186ef2e26bc6454a251"></span>void <code class="descname">mix_me</code><span class="sig-paren">(</span><a class="reference internal" href="hash_mix.html#_CPPv4N3eos8hash_mixE" title="eos::hash_mix">hash_mix</a> &amp;<em>h</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos19policy_map_action_t6mix_meER8hash_mix" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>The hash mix function for type <a class="reference internal" href="#classeos_1_1policy__map__action__t"><span class="std std-ref">policy_map_action_t</span></a>. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4NK3eos19policy_map_action_t9to_stringEv">
+<span id="_CPPv3NK3eos19policy_map_action_t9to_stringEv"></span><span id="_CPPv2NK3eos19policy_map_action_t9to_stringEv"></span><span id="eos::policy_map_action_t::to_stringC"></span><span class="target" id="classeos_1_1policy__map__action__t_1a69c727994ab53a9b4322ef648ae8dd34"></span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::string <code class="descname">to_string</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos19policy_map_action_t9to_stringEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Returns a string representation of the current object’s values. </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Private Members</p>
+<dl class="member">
+<dt id="_CPPv4N3eos19policy_map_action_t5pimplE">
+<span id="_CPPv3N3eos19policy_map_action_t5pimplE"></span><span id="_CPPv2N3eos19policy_map_action_t5pimplE"></span><span id="eos::policy_map_action_t::pimpl__std::shared_ptr:policy_map_action_impl_t:"></span><span class="target" id="classeos_1_1policy__map__action__t_1a8ce18e9e988d7eefc5040e9238b81846"></span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::shared_ptr&lt;<a class="reference internal" href="policy_map_impl.html#_CPPv4N3eos24policy_map_action_impl_tE" title="eos::policy_map_action_impl_t">policy_map_action_impl_t</a>&gt; <code class="descname">pimpl</code><a class="headerlink" href="#_CPPv4N3eos19policy_map_action_t5pimplE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Friends</p>
+<dl class="function">
+<dt id="_CPPv4lsRNSt7ostreamERK19policy_map_action_t">
+<span id="_CPPv3lsRNSt7ostreamERK19policy_map_action_t"></span><span id="_CPPv2lsRNSt7ostreamERK19policy_map_action_t"></span><span id="lshift-operator__osR.policy_map_action_tCR"></span><span class="target" id="classeos_1_1policy__map__action__t_1aa7fd609e28396b835f6048a6b57f96be"></span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::ostream &amp;<code class="descname">operator&lt;&lt;</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::ostream &amp;<em>os</em>, <em class="property">const</em> policy_map_action_t &amp;<em>obj</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4lsRNSt7ostreamERK19policy_map_action_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>A utility stream operator that adds a string representation of <a class="reference internal" href="#classeos_1_1policy__map__action__t"><span class="std std-ref">policy_map_action_t</span></a> to the ostream. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="class">
+<dt id="_CPPv4N3eos17policy_map_rule_tE">
+<span id="_CPPv3N3eos17policy_map_rule_tE"></span><span id="_CPPv2N3eos17policy_map_rule_tE"></span><span id="eos::policy_map_rule_t"></span><span class="target" id="classeos_1_1policy__map__rule__t"></span><em class="property">class </em><code class="descname">policy_map_rule_t</code><a class="headerlink" href="#_CPPv4N3eos17policy_map_rule_tE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><em>#include &lt;policy_map.h&gt;</em><p>A policy map rule, describing a traffic match and actions.</p>
+<p>A rule works by creating a filter to match only certain types of IP traffic. Any traffic that passes this filter then has the corresponding <code class="docutils literal notranslate"><a class="reference internal" href="#classeos_1_1policy__map__action__t"><span class="std std-ref"><span class="pre">policy_map_action_t</span></span></a></code> actions applied. For example, a rule can specify that any traffic on Vlan42 should have its traffic class set to 4 and should be forwarded out of nexthop_group “foo”.</p>
+<p>The match portion of a rule can take one of two forms: class maps or raw match rules. Class maps let you combine various ACLs to decide whether to match or ignore traffic. These objects are managed by the <code class="docutils literal notranslate"><a class="reference internal" href="class_map.html#classeos_1_1class__map__mgr"><span class="std std-ref"><span class="pre">class_map_mgr</span></span></a></code> in <code class="docutils literal notranslate"><span class="pre">eos/class_map.h</span></code>. Alternatively, you can use a shorthand and specify just a single <code class="docutils literal notranslate"><a class="reference internal" href="acl.html#classeos_1_1acl__rule__ip__t"><span class="std std-ref"><span class="pre">acl_rule_ip_t</span></span></a></code>, which will match traffic that passes that rule. Actions can be set at once or added or removed one at a time. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="function">
+<dt id="_CPPv4N3eos17policy_map_rule_t17policy_map_rule_tEv">
+<span id="_CPPv3N3eos17policy_map_rule_t17policy_map_rule_tEv"></span><span id="_CPPv2N3eos17policy_map_rule_t17policy_map_rule_tEv"></span><span id="eos::policy_map_rule_t::policy_map_rule_t"></span><span class="target" id="classeos_1_1policy__map__rule__t_1a0ab10d60a7ec9d215efae98cfcee5adc"></span><code class="descname">policy_map_rule_t</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos17policy_map_rule_t17policy_map_rule_tEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N3eos17policy_map_rule_t17policy_map_rule_tERK15class_map_key_t">
+<span id="_CPPv3N3eos17policy_map_rule_t17policy_map_rule_tERK15class_map_key_t"></span><span id="_CPPv2N3eos17policy_map_rule_t17policy_map_rule_tERK15class_map_key_t"></span><span id="eos::policy_map_rule_t::policy_map_rule_t__class_map_key_tCR"></span><span class="target" id="classeos_1_1policy__map__rule__t_1a2695aa9b7d05c8ccb22190705dd77630"></span><code class="descname">policy_map_rule_t</code><span class="sig-paren">(</span><a class="reference internal" href="class_map.html#_CPPv4N3eos15class_map_key_tE" title="eos::class_map_key_t">class_map_key_t</a> <em class="property">const</em> &amp;<em>class_map_key</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos17policy_map_rule_t17policy_map_rule_tERK15class_map_key_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N3eos17policy_map_rule_t17policy_map_rule_tERK17policy_map_rule_t">
+<span id="_CPPv3N3eos17policy_map_rule_t17policy_map_rule_tERK17policy_map_rule_t"></span><span id="_CPPv2N3eos17policy_map_rule_t17policy_map_rule_tERK17policy_map_rule_t"></span><span id="eos::policy_map_rule_t::policy_map_rule_t__policy_map_rule_tCR"></span><span class="target" id="classeos_1_1policy__map__rule__t_1aeee104db4af14cfc98cdbad7278d2e66"></span><code class="descname">policy_map_rule_t</code><span class="sig-paren">(</span><em class="property">const</em> <a class="reference internal" href="#_CPPv4N3eos17policy_map_rule_t17policy_map_rule_tEv" title="eos::policy_map_rule_t::policy_map_rule_t">policy_map_rule_t</a> &amp;<em>other</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos17policy_map_rule_t17policy_map_rule_tERK17policy_map_rule_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N3eos17policy_map_rule_taSERK17policy_map_rule_t">
+<span id="_CPPv3N3eos17policy_map_rule_taSERK17policy_map_rule_t"></span><span id="_CPPv2N3eos17policy_map_rule_taSERK17policy_map_rule_t"></span><span id="eos::policy_map_rule_t::assign-operator__policy_map_rule_tCR"></span><span class="target" id="classeos_1_1policy__map__rule__t_1a93cd741a27670a3b0280614198a34634"></span><a class="reference internal" href="#_CPPv4N3eos17policy_map_rule_tE" title="eos::policy_map_rule_t">policy_map_rule_t</a> &amp;<code class="descname">operator=</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos17policy_map_rule_tE" title="eos::policy_map_rule_t">policy_map_rule_t</a> <em class="property">const</em> &amp;<em>other</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos17policy_map_rule_taSERK17policy_map_rule_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4NK3eos17policy_map_rule_t13class_map_keyEv">
+<span id="_CPPv3NK3eos17policy_map_rule_t13class_map_keyEv"></span><span id="_CPPv2NK3eos17policy_map_rule_t13class_map_keyEv"></span><span id="eos::policy_map_rule_t::class_map_keyC"></span><span class="target" id="classeos_1_1policy__map__rule__t_1a03136763948d47ca581274dfe05aa7f1"></span><a class="reference internal" href="class_map.html#_CPPv4N3eos15class_map_key_tE" title="eos::class_map_key_t">class_map_key_t</a> <code class="descname">class_map_key</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos17policy_map_rule_t13class_map_keyEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Getter for ‘class_map_key’: the class map key (name is CLASS_MAP_MPLS_ANY if matching MPLS). </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N3eos17policy_map_rule_t16class_map_key_isERK15class_map_key_t">
+<span id="_CPPv3N3eos17policy_map_rule_t16class_map_key_isERK15class_map_key_t"></span><span id="_CPPv2N3eos17policy_map_rule_t16class_map_key_isERK15class_map_key_t"></span><span id="eos::policy_map_rule_t::class_map_key_is__class_map_key_tCR"></span><span class="target" id="classeos_1_1policy__map__rule__t_1a5d805ba5bc45577dad864f55e1abd747"></span>void <code class="descname">class_map_key_is</code><span class="sig-paren">(</span><a class="reference internal" href="class_map.html#_CPPv4N3eos15class_map_key_tE" title="eos::class_map_key_t">class_map_key_t</a> <em class="property">const</em> &amp;<em>class_map_key</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos17policy_map_rule_t16class_map_key_isERK15class_map_key_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Setter for ‘class_map_key’. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4NK3eos17policy_map_rule_t20policy_map_rule_typeEv">
+<span id="_CPPv3NK3eos17policy_map_rule_t20policy_map_rule_typeEv"></span><span id="_CPPv2NK3eos17policy_map_rule_t20policy_map_rule_typeEv"></span><span id="eos::policy_map_rule_t::policy_map_rule_typeC"></span><span class="target" id="classeos_1_1policy__map__rule__t_1ac8d2567b5ddc635f11a0434fd1920426"></span><a class="reference internal" href="#_CPPv4N3eos22policy_map_rule_type_tE" title="eos::policy_map_rule_type_t">policy_map_rule_type_t</a> <code class="descname">policy_map_rule_type</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos17policy_map_rule_t20policy_map_rule_typeEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Getter for ‘policy_map_rule_type’: the rule type. Set the rule type to POLICY_RULE_TYPE_CLASSMAP if the rule matches a class. If the rule has the raw match statement set, the rule type should be set to POLICY_RULE_TYPE_IPV4 or POLICY_RULE_TYPE_IPV6. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N3eos17policy_map_rule_t23policy_map_rule_type_isE22policy_map_rule_type_t">
+<span id="_CPPv3N3eos17policy_map_rule_t23policy_map_rule_type_isE22policy_map_rule_type_t"></span><span id="_CPPv2N3eos17policy_map_rule_t23policy_map_rule_type_isE22policy_map_rule_type_t"></span><span id="eos::policy_map_rule_t::policy_map_rule_type_is__policy_map_rule_type_t"></span><span class="target" id="classeos_1_1policy__map__rule__t_1a8f165ded43d83a9770b278f0d40b46be"></span>void <code class="descname">policy_map_rule_type_is</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos22policy_map_rule_type_tE" title="eos::policy_map_rule_type_t">policy_map_rule_type_t</a> <em>policy_map_rule_type</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos17policy_map_rule_t23policy_map_rule_type_isE22policy_map_rule_type_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Setter for ‘policy_map_rule_type’. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4NK3eos17policy_map_rule_t8raw_ruleEv">
+<span id="_CPPv3NK3eos17policy_map_rule_t8raw_ruleEv"></span><span id="_CPPv2NK3eos17policy_map_rule_t8raw_ruleEv"></span><span id="eos::policy_map_rule_t::raw_ruleC"></span><span class="target" id="classeos_1_1policy__map__rule__t_1a2c4b6854a161e128e5626cfcace9e85b"></span><a class="reference internal" href="acl.html#_CPPv4N3eos13acl_rule_ip_tE" title="eos::acl_rule_ip_t">acl_rule_ip_t</a> <code class="descname">raw_rule</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos17policy_map_rule_t8raw_ruleEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Getter for ‘raw_rule’: the raw match statement. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N3eos17policy_map_rule_t11raw_rule_isE13acl_rule_ip_t">
+<span id="_CPPv3N3eos17policy_map_rule_t11raw_rule_isE13acl_rule_ip_t"></span><span id="_CPPv2N3eos17policy_map_rule_t11raw_rule_isE13acl_rule_ip_t"></span><span id="eos::policy_map_rule_t::raw_rule_is__acl_rule_ip_t"></span><span class="target" id="classeos_1_1policy__map__rule__t_1adf67c79c581dffdb66b5d753707519d1"></span>void <code class="descname">raw_rule_is</code><span class="sig-paren">(</span><a class="reference internal" href="acl.html#_CPPv4N3eos13acl_rule_ip_tE" title="eos::acl_rule_ip_t">acl_rule_ip_t</a> <em>raw_rule</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos17policy_map_rule_t11raw_rule_isE13acl_rule_ip_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Setter for ‘raw_rule’. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4NK3eos17policy_map_rule_t7actionsEv">
+<span id="_CPPv3NK3eos17policy_map_rule_t7actionsEv"></span><span id="_CPPv2NK3eos17policy_map_rule_t7actionsEv"></span><span id="eos::policy_map_rule_t::actionsC"></span><span class="target" id="classeos_1_1policy__map__rule__t_1a3bcbf3efc51a8bf73edaf8094aec8f07"></span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::set&lt;<a class="reference internal" href="#_CPPv4N3eos19policy_map_action_tE" title="eos::policy_map_action_t">policy_map_action_t</a>&gt; <em class="property">const</em> &amp;<code class="descname">actions</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos17policy_map_rule_t7actionsEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Getter for ‘actions’: the set of actions configured for this particular rule. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N3eos17policy_map_rule_t10actions_isERKNSt3setI19policy_map_action_tEE">
+<span id="_CPPv3N3eos17policy_map_rule_t10actions_isERKNSt3setI19policy_map_action_tEE"></span><span id="_CPPv2N3eos17policy_map_rule_t10actions_isERKNSt3setI19policy_map_action_tEE"></span><span id="eos::policy_map_rule_t::actions_is__std::set:policy_map_action_t:CR"></span><span class="target" id="classeos_1_1policy__map__rule__t_1a37b68f8e8ef79d6f4f3b1287d1c5c1c8"></span>void <code class="descname">actions_is</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::set&lt;<a class="reference internal" href="#_CPPv4N3eos19policy_map_action_tE" title="eos::policy_map_action_t">policy_map_action_t</a>&gt; <em class="property">const</em> &amp;<em>actions</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos17policy_map_rule_t10actions_isERKNSt3setI19policy_map_action_tEE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Setter for ‘actions’. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N3eos17policy_map_rule_t10action_setERK19policy_map_action_t">
+<span id="_CPPv3N3eos17policy_map_rule_t10action_setERK19policy_map_action_t"></span><span id="_CPPv2N3eos17policy_map_rule_t10action_setERK19policy_map_action_t"></span><span id="eos::policy_map_rule_t::action_set__policy_map_action_tCR"></span><span class="target" id="classeos_1_1policy__map__rule__t_1aa9f003f2ec21eb75984297e044bef362"></span>void <code class="descname">action_set</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos19policy_map_action_tE" title="eos::policy_map_action_t">policy_map_action_t</a> <em class="property">const</em> &amp;<em>value</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos17policy_map_rule_t10action_setERK19policy_map_action_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Inserts one action of ‘value’ to the set. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N3eos17policy_map_rule_t10action_delERK19policy_map_action_t">
+<span id="_CPPv3N3eos17policy_map_rule_t10action_delERK19policy_map_action_t"></span><span id="_CPPv2N3eos17policy_map_rule_t10action_delERK19policy_map_action_t"></span><span id="eos::policy_map_rule_t::action_del__policy_map_action_tCR"></span><span class="target" id="classeos_1_1policy__map__rule__t_1ae4e3c87ef82c1c1b0a082aca198127fd"></span>void <code class="descname">action_del</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos19policy_map_action_tE" title="eos::policy_map_action_t">policy_map_action_t</a> <em class="property">const</em> &amp;<em>value</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos17policy_map_rule_t10action_delERK19policy_map_action_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Deletes one action of ‘value’ from the set. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N3eos17policy_map_rule_t10action_delE20policy_action_type_t">
+<span id="_CPPv3N3eos17policy_map_rule_t10action_delE20policy_action_type_t"></span><span id="_CPPv2N3eos17policy_map_rule_t10action_delE20policy_action_type_t"></span><span id="eos::policy_map_rule_t::action_del__policy_action_type_t"></span><span class="target" id="classeos_1_1policy__map__rule__t_1a4c2f2f551fef94db2bc7dd054f92e9ec"></span>void <code class="descname">action_del</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos20policy_action_type_tE" title="eos::policy_action_type_t">policy_action_type_t</a> <em>action_type</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos17policy_map_rule_t10action_delE20policy_action_type_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N3eos17policy_map_rule_t11raw_rule_isE13acl_rule_ip_t22policy_map_rule_type_t">
+<span id="_CPPv3N3eos17policy_map_rule_t11raw_rule_isE13acl_rule_ip_t22policy_map_rule_type_t"></span><span id="_CPPv2N3eos17policy_map_rule_t11raw_rule_isE13acl_rule_ip_t22policy_map_rule_type_t"></span><span id="eos::policy_map_rule_t::raw_rule_is__acl_rule_ip_t.policy_map_rule_type_t"></span><span class="target" id="classeos_1_1policy__map__rule__t_1a9e8090ee61553260da68e7601c77b37b"></span>void <code class="descname">raw_rule_is</code><span class="sig-paren">(</span><a class="reference internal" href="acl.html#_CPPv4N3eos13acl_rule_ip_tE" title="eos::acl_rule_ip_t">acl_rule_ip_t</a> <em>acl_rule</em>, <a class="reference internal" href="#_CPPv4N3eos22policy_map_rule_type_tE" title="eos::policy_map_rule_type_t">policy_map_rule_type_t</a> <em>rule_type</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos17policy_map_rule_t11raw_rule_isE13acl_rule_ip_t22policy_map_rule_type_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4NK3eos17policy_map_rule_teqERK17policy_map_rule_t">
+<span id="_CPPv3NK3eos17policy_map_rule_teqERK17policy_map_rule_t"></span><span id="_CPPv2NK3eos17policy_map_rule_teqERK17policy_map_rule_t"></span><span id="eos::policy_map_rule_t::eq-operator__policy_map_rule_tCRC"></span><span class="target" id="classeos_1_1policy__map__rule__t_1ac44a62043ece55cf8d9cf31d06cd7503"></span>bool <code class="descname">operator==</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos17policy_map_rule_tE" title="eos::policy_map_rule_t">policy_map_rule_t</a> <em class="property">const</em> &amp;<em>other</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos17policy_map_rule_teqERK17policy_map_rule_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4NK3eos17policy_map_rule_tneERK17policy_map_rule_t">
+<span id="_CPPv3NK3eos17policy_map_rule_tneERK17policy_map_rule_t"></span><span id="_CPPv2NK3eos17policy_map_rule_tneERK17policy_map_rule_t"></span><span id="eos::policy_map_rule_t::neq-operator__policy_map_rule_tCRC"></span><span class="target" id="classeos_1_1policy__map__rule__t_1ac9b1083c0938003fd4db8aa3f4110477"></span>bool <code class="descname">operator!=</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos17policy_map_rule_tE" title="eos::policy_map_rule_t">policy_map_rule_t</a> <em class="property">const</em> &amp;<em>other</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos17policy_map_rule_tneERK17policy_map_rule_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4NK3eos17policy_map_rule_tltERK17policy_map_rule_t">
+<span id="_CPPv3NK3eos17policy_map_rule_tltERK17policy_map_rule_t"></span><span id="_CPPv2NK3eos17policy_map_rule_tltERK17policy_map_rule_t"></span><span id="eos::policy_map_rule_t::lt-operator__policy_map_rule_tCRC"></span><span class="target" id="classeos_1_1policy__map__rule__t_1aa2f019dce925502682d0eaf6d0cd020e"></span>bool <code class="descname">operator&lt;</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos17policy_map_rule_tE" title="eos::policy_map_rule_t">policy_map_rule_t</a> <em class="property">const</em> &amp;<em>other</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos17policy_map_rule_tltERK17policy_map_rule_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4NK3eos17policy_map_rule_t4hashEv">
+<span id="_CPPv3NK3eos17policy_map_rule_t4hashEv"></span><span id="_CPPv2NK3eos17policy_map_rule_t4hashEv"></span><span id="eos::policy_map_rule_t::hashC"></span><span class="target" id="classeos_1_1policy__map__rule__t_1a53275b60e3be9a3ab2cd4f5e6c4e0aa6"></span>uint32_t <code class="descname">hash</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos17policy_map_rule_t4hashEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>The hash function for type <a class="reference internal" href="#classeos_1_1policy__map__rule__t"><span class="std std-ref">policy_map_rule_t</span></a>. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4NK3eos17policy_map_rule_t6mix_meER8hash_mix">
+<span id="_CPPv3NK3eos17policy_map_rule_t6mix_meER8hash_mix"></span><span id="_CPPv2NK3eos17policy_map_rule_t6mix_meER8hash_mix"></span><span id="eos::policy_map_rule_t::mix_me__hash_mixRC"></span><span class="target" id="classeos_1_1policy__map__rule__t_1a285dc6c38e1046ffdd03e0349e69ca4d"></span>void <code class="descname">mix_me</code><span class="sig-paren">(</span><a class="reference internal" href="hash_mix.html#_CPPv4N3eos8hash_mixE" title="eos::hash_mix">hash_mix</a> &amp;<em>h</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos17policy_map_rule_t6mix_meER8hash_mix" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>The hash mix function for type <a class="reference internal" href="#classeos_1_1policy__map__rule__t"><span class="std std-ref">policy_map_rule_t</span></a>. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4NK3eos17policy_map_rule_t9to_stringEv">
+<span id="_CPPv3NK3eos17policy_map_rule_t9to_stringEv"></span><span id="_CPPv2NK3eos17policy_map_rule_t9to_stringEv"></span><span id="eos::policy_map_rule_t::to_stringC"></span><span class="target" id="classeos_1_1policy__map__rule__t_1a888409904be7f1e9db70acd2b0171150"></span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::string <code class="descname">to_string</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos17policy_map_rule_t9to_stringEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Returns a string representation of the current object’s values. </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Private Members</p>
+<dl class="member">
+<dt id="_CPPv4N3eos17policy_map_rule_t5pimplE">
+<span id="_CPPv3N3eos17policy_map_rule_t5pimplE"></span><span id="_CPPv2N3eos17policy_map_rule_t5pimplE"></span><span id="eos::policy_map_rule_t::pimpl__std::shared_ptr:policy_map_rule_impl_t:"></span><span class="target" id="classeos_1_1policy__map__rule__t_1a718b40deed2cf4ae30a1f6a5a9a8570a"></span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::shared_ptr&lt;<a class="reference internal" href="policy_map_impl.html#_CPPv4N3eos22policy_map_rule_impl_tE" title="eos::policy_map_rule_impl_t">policy_map_rule_impl_t</a>&gt; <code class="descname">pimpl</code><a class="headerlink" href="#_CPPv4N3eos17policy_map_rule_t5pimplE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Friends</p>
+<dl class="function">
+<dt id="_CPPv4lsRNSt7ostreamERK17policy_map_rule_t">
+<span id="_CPPv3lsRNSt7ostreamERK17policy_map_rule_t"></span><span id="_CPPv2lsRNSt7ostreamERK17policy_map_rule_t"></span><span id="lshift-operator__osR.policy_map_rule_tCR"></span><span class="target" id="classeos_1_1policy__map__rule__t_1afcd0170842dcb7fe1b2f6f22859b7aeb"></span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::ostream &amp;<code class="descname">operator&lt;&lt;</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::ostream &amp;<em>os</em>, <em class="property">const</em> policy_map_rule_t &amp;<em>obj</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4lsRNSt7ostreamERK17policy_map_rule_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>A utility stream operator that adds a string representation of <a class="reference internal" href="#classeos_1_1policy__map__rule__t"><span class="std std-ref">policy_map_rule_t</span></a> to the ostream. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="class">
+<dt id="_CPPv4N3eos12policy_map_tE">
+<span id="_CPPv3N3eos12policy_map_tE"></span><span id="_CPPv2N3eos12policy_map_tE"></span><span id="eos::policy_map_t"></span><span class="target" id="classeos_1_1policy__map__t"></span><em class="property">class </em><code class="descname">policy_map_t</code><a class="headerlink" href="#_CPPv4N3eos12policy_map_tE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><em>#include &lt;policy_map.h&gt;</em><p>A policy map instance.</p>
+<p>Once appropriately configured, policy maps are committed and applied to interfaces using the <a class="reference internal" href="#classeos_1_1policy__map__mgr"><span class="std std-ref">policy_map_mgr</span></a>. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="function">
+<dt id="_CPPv4N3eos12policy_map_t12policy_map_tEv">
+<span id="_CPPv3N3eos12policy_map_t12policy_map_tEv"></span><span id="_CPPv2N3eos12policy_map_t12policy_map_tEv"></span><span id="eos::policy_map_t::policy_map_t"></span><span class="target" id="classeos_1_1policy__map__t_1a538432c0b2a2450783f0f10079d46e3e"></span><code class="descname">policy_map_t</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos12policy_map_t12policy_map_tEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N3eos12policy_map_t12policy_map_tERK16policy_map_key_t">
+<span id="_CPPv3N3eos12policy_map_t12policy_map_tERK16policy_map_key_t"></span><span id="_CPPv2N3eos12policy_map_t12policy_map_tERK16policy_map_key_t"></span><span id="eos::policy_map_t::policy_map_t__policy_map_key_tCR"></span><span class="target" id="classeos_1_1policy__map__t_1a807dff3ba4e22aee19cb5821f3d09e44"></span><code class="descname">policy_map_t</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos16policy_map_key_tE" title="eos::policy_map_key_t">policy_map_key_t</a> <em class="property">const</em> &amp;<em>key</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos12policy_map_t12policy_map_tERK16policy_map_key_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N3eos12policy_map_t12policy_map_tERK12policy_map_t">
+<span id="_CPPv3N3eos12policy_map_t12policy_map_tERK12policy_map_t"></span><span id="_CPPv2N3eos12policy_map_t12policy_map_tERK12policy_map_t"></span><span id="eos::policy_map_t::policy_map_t__policy_map_tCR"></span><span class="target" id="classeos_1_1policy__map__t_1a555003dfd8a20364c9141f90b3407346"></span><code class="descname">policy_map_t</code><span class="sig-paren">(</span><em class="property">const</em> <a class="reference internal" href="#_CPPv4N3eos12policy_map_t12policy_map_tEv" title="eos::policy_map_t::policy_map_t">policy_map_t</a> &amp;<em>other</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos12policy_map_t12policy_map_tERK12policy_map_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N3eos12policy_map_taSERK12policy_map_t">
+<span id="_CPPv3N3eos12policy_map_taSERK12policy_map_t"></span><span id="_CPPv2N3eos12policy_map_taSERK12policy_map_t"></span><span id="eos::policy_map_t::assign-operator__policy_map_tCR"></span><span class="target" id="classeos_1_1policy__map__t_1aaad6fe94f17bc7923c44af15fb301e41"></span><a class="reference internal" href="#_CPPv4N3eos12policy_map_tE" title="eos::policy_map_t">policy_map_t</a> &amp;<code class="descname">operator=</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos12policy_map_tE" title="eos::policy_map_t">policy_map_t</a> <em class="property">const</em> &amp;<em>other</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos12policy_map_taSERK12policy_map_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4NK3eos12policy_map_t3keyEv">
+<span id="_CPPv3NK3eos12policy_map_t3keyEv"></span><span id="_CPPv2NK3eos12policy_map_t3keyEv"></span><span id="eos::policy_map_t::keyC"></span><span class="target" id="classeos_1_1policy__map__t_1a1ccdf0672b723d0614783996cbe7c2f2"></span><a class="reference internal" href="#_CPPv4N3eos16policy_map_key_tE" title="eos::policy_map_key_t">policy_map_key_t</a> <code class="descname">key</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos12policy_map_t3keyEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N3eos12policy_map_t6key_isERK16policy_map_key_t">
+<span id="_CPPv3N3eos12policy_map_t6key_isERK16policy_map_key_t"></span><span id="_CPPv2N3eos12policy_map_t6key_isERK16policy_map_key_t"></span><span id="eos::policy_map_t::key_is__policy_map_key_tCR"></span><span class="target" id="classeos_1_1policy__map__t_1a54dbc51273601eecb33fd66c6b438a8f"></span>void <code class="descname">key_is</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos16policy_map_key_tE" title="eos::policy_map_key_t">policy_map_key_t</a> <em class="property">const</em> &amp;<em>key</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos12policy_map_t6key_isERK16policy_map_key_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4NK3eos12policy_map_t5rulesEv">
+<span id="_CPPv3NK3eos12policy_map_t5rulesEv"></span><span id="_CPPv2NK3eos12policy_map_t5rulesEv"></span><span id="eos::policy_map_t::rulesC"></span><span class="target" id="classeos_1_1policy__map__t_1a4c1125ae67cf6f435f086310cde12618"></span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::map&lt;uint32_t, <a class="reference internal" href="#_CPPv4N3eos17policy_map_rule_tE" title="eos::policy_map_rule_t">policy_map_rule_t</a>&gt; <em class="property">const</em> &amp;<code class="descname">rules</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos12policy_map_t5rulesEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N3eos12policy_map_t8rules_isERKNSt3mapI8uint32_t17policy_map_rule_tEE">
+<span id="_CPPv3N3eos12policy_map_t8rules_isERKNSt3mapI8uint32_t17policy_map_rule_tEE"></span><span id="_CPPv2N3eos12policy_map_t8rules_isERKNSt3mapI8uint32_t17policy_map_rule_tEE"></span><span id="eos::policy_map_t::rules_is__std::map:uint32_t.policy_map_rule_t:CR"></span><span class="target" id="classeos_1_1policy__map__t_1a4e4b0bce0227f44024ab178619010d7f"></span>void <code class="descname">rules_is</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::map&lt;uint32_t, <a class="reference internal" href="#_CPPv4N3eos17policy_map_rule_tE" title="eos::policy_map_rule_t">policy_map_rule_t</a>&gt; <em class="property">const</em> &amp;<em>rules</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos12policy_map_t8rules_isERKNSt3mapI8uint32_t17policy_map_rule_tEE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N3eos12policy_map_t8rule_setE8uint32_tRK17policy_map_rule_t">
+<span id="_CPPv3N3eos12policy_map_t8rule_setE8uint32_tRK17policy_map_rule_t"></span><span id="_CPPv2N3eos12policy_map_t8rule_setE8uint32_tRK17policy_map_rule_t"></span><span id="eos::policy_map_t::rule_set__uint32_t.policy_map_rule_tCR"></span><span class="target" id="classeos_1_1policy__map__t_1ad3ac5c91dadb62ef15d05a7e4a9ac66c"></span>void <code class="descname">rule_set</code><span class="sig-paren">(</span>uint32_t <em>key</em>, <a class="reference internal" href="#_CPPv4N3eos17policy_map_rule_tE" title="eos::policy_map_rule_t">policy_map_rule_t</a> <em class="property">const</em> &amp;<em>value</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos12policy_map_t8rule_setE8uint32_tRK17policy_map_rule_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N3eos12policy_map_t8rule_delE8uint32_t">
+<span id="_CPPv3N3eos12policy_map_t8rule_delE8uint32_t"></span><span id="_CPPv2N3eos12policy_map_t8rule_delE8uint32_t"></span><span id="eos::policy_map_t::rule_del__uint32_t"></span><span class="target" id="classeos_1_1policy__map__t_1a8120b6fc44ff3aea0ad2369ad7ba1741"></span>void <code class="descname">rule_del</code><span class="sig-paren">(</span>uint32_t <em>key</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos12policy_map_t8rule_delE8uint32_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4NK3eos12policy_map_teqERK12policy_map_t">
+<span id="_CPPv3NK3eos12policy_map_teqERK12policy_map_t"></span><span id="_CPPv2NK3eos12policy_map_teqERK12policy_map_t"></span><span id="eos::policy_map_t::eq-operator__policy_map_tCRC"></span><span class="target" id="classeos_1_1policy__map__t_1a92af69dd7d36e6a9465ab09ee1048b09"></span>bool <code class="descname">operator==</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos12policy_map_tE" title="eos::policy_map_t">policy_map_t</a> <em class="property">const</em> &amp;<em>other</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos12policy_map_teqERK12policy_map_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4NK3eos12policy_map_tneERK12policy_map_t">
+<span id="_CPPv3NK3eos12policy_map_tneERK12policy_map_t"></span><span id="_CPPv2NK3eos12policy_map_tneERK12policy_map_t"></span><span id="eos::policy_map_t::neq-operator__policy_map_tCRC"></span><span class="target" id="classeos_1_1policy__map__t_1aa9e117108e8495d32e6cb9d0ee8a956a"></span>bool <code class="descname">operator!=</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos12policy_map_tE" title="eos::policy_map_t">policy_map_t</a> <em class="property">const</em> &amp;<em>other</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos12policy_map_tneERK12policy_map_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4NK3eos12policy_map_tltERK12policy_map_t">
+<span id="_CPPv3NK3eos12policy_map_tltERK12policy_map_t"></span><span id="_CPPv2NK3eos12policy_map_tltERK12policy_map_t"></span><span id="eos::policy_map_t::lt-operator__policy_map_tCRC"></span><span class="target" id="classeos_1_1policy__map__t_1a9addfab60fdc5c567d94aafe9e6c9464"></span>bool <code class="descname">operator&lt;</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos12policy_map_tE" title="eos::policy_map_t">policy_map_t</a> <em class="property">const</em> &amp;<em>other</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos12policy_map_tltERK12policy_map_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4NK3eos12policy_map_t4hashEv">
+<span id="_CPPv3NK3eos12policy_map_t4hashEv"></span><span id="_CPPv2NK3eos12policy_map_t4hashEv"></span><span id="eos::policy_map_t::hashC"></span><span class="target" id="classeos_1_1policy__map__t_1a2f521d70d5acae67c6e9234e20f44351"></span>uint32_t <code class="descname">hash</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos12policy_map_t4hashEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>The hash function for type <a class="reference internal" href="#classeos_1_1policy__map__t"><span class="std std-ref">policy_map_t</span></a>. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4NK3eos12policy_map_t6mix_meER8hash_mix">
+<span id="_CPPv3NK3eos12policy_map_t6mix_meER8hash_mix"></span><span id="_CPPv2NK3eos12policy_map_t6mix_meER8hash_mix"></span><span id="eos::policy_map_t::mix_me__hash_mixRC"></span><span class="target" id="classeos_1_1policy__map__t_1a52e0d84708447e4be232fed9b955d750"></span>void <code class="descname">mix_me</code><span class="sig-paren">(</span><a class="reference internal" href="hash_mix.html#_CPPv4N3eos8hash_mixE" title="eos::hash_mix">hash_mix</a> &amp;<em>h</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos12policy_map_t6mix_meER8hash_mix" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>The hash mix function for type <a class="reference internal" href="#classeos_1_1policy__map__t"><span class="std std-ref">policy_map_t</span></a>. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4NK3eos12policy_map_t9to_stringEv">
+<span id="_CPPv3NK3eos12policy_map_t9to_stringEv"></span><span id="_CPPv2NK3eos12policy_map_t9to_stringEv"></span><span id="eos::policy_map_t::to_stringC"></span><span class="target" id="classeos_1_1policy__map__t_1ab1f9f35c28c9db011839a1ffd90463f8"></span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::string <code class="descname">to_string</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos12policy_map_t9to_stringEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Returns a string representation of the current object’s values. </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Private Members</p>
+<dl class="member">
+<dt id="_CPPv4N3eos12policy_map_t5pimplE">
+<span id="_CPPv3N3eos12policy_map_t5pimplE"></span><span id="_CPPv2N3eos12policy_map_t5pimplE"></span><span id="eos::policy_map_t::pimpl__std::shared_ptr:policy_map_impl_t:"></span><span class="target" id="classeos_1_1policy__map__t_1aa9c29e6a951934b04b51c36e5ea64470"></span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::shared_ptr&lt;<a class="reference internal" href="policy_map_impl.html#_CPPv4N3eos17policy_map_impl_tE" title="eos::policy_map_impl_t">policy_map_impl_t</a>&gt; <code class="descname">pimpl</code><a class="headerlink" href="#_CPPv4N3eos12policy_map_t5pimplE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Friends</p>
+<dl class="function">
+<dt id="_CPPv4lsRNSt7ostreamERK12policy_map_t">
+<span id="_CPPv3lsRNSt7ostreamERK12policy_map_t"></span><span id="_CPPv2lsRNSt7ostreamERK12policy_map_t"></span><span id="lshift-operator__osR.policy_map_tCR"></span><span class="target" id="classeos_1_1policy__map__t_1a7a777c33d4dc26bbadefefcbca94a7ed"></span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::ostream &amp;<code class="descname">operator&lt;&lt;</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::ostream &amp;<em>os</em>, <em class="property">const</em> policy_map_t &amp;<em>obj</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4lsRNSt7ostreamERK12policy_map_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>A utility stream operator that adds a string representation of <a class="reference internal" href="#classeos_1_1policy__map__t"><span class="std std-ref">policy_map_t</span></a> to the ostream. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="class">
+<dt id="_CPPv4N3eos32unsupported_policy_feature_errorE">
+<span id="_CPPv3N3eos32unsupported_policy_feature_errorE"></span><span id="_CPPv2N3eos32unsupported_policy_feature_errorE"></span><span id="eos::unsupported_policy_feature_error"></span><span class="target" id="classeos_1_1unsupported__policy__feature__error"></span><em class="property">class </em><code class="descname">unsupported_policy_feature_error</code> : <em class="property">public</em> <a class="reference internal" href="acl.html#_CPPv43eos" title="eos">eos</a>::<a class="reference internal" href="exception.html#_CPPv4N3eos17unsupported_errorE" title="eos::unsupported_error">unsupported_error</a><a class="headerlink" href="#_CPPv4N3eos32unsupported_policy_feature_errorE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><em>#include &lt;policy_map.h&gt;</em><p>The policy feature requested is unavailable in this SDK release. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="function">
+<dt id="_CPPv4N3eos32unsupported_policy_feature_error32unsupported_policy_feature_errorE16policy_feature_t">
+<span id="_CPPv3N3eos32unsupported_policy_feature_error32unsupported_policy_feature_errorE16policy_feature_t"></span><span id="_CPPv2N3eos32unsupported_policy_feature_error32unsupported_policy_feature_errorE16policy_feature_t"></span><span id="eos::unsupported_policy_feature_error::unsupported_policy_feature_error__policy_feature_t"></span><span class="target" id="classeos_1_1unsupported__policy__feature__error_1a546d1c94e7cfc169a95e20374f2c4f58"></span><code class="descname">unsupported_policy_feature_error</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos16policy_feature_tE" title="eos::policy_feature_t">policy_feature_t</a> <em>policy_feature</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos32unsupported_policy_feature_error32unsupported_policy_feature_errorE16policy_feature_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N3eos32unsupported_policy_feature_errorD0Ev">
+<span id="_CPPv3N3eos32unsupported_policy_feature_errorD0Ev"></span><span id="_CPPv2N3eos32unsupported_policy_feature_errorD0Ev"></span><span id="eos::unsupported_policy_feature_error::~unsupported_policy_feature_error"></span><span class="target" id="classeos_1_1unsupported__policy__feature__error_1a912775b72a93cb57a91a2d01ad3268f7"></span><code class="descname">~unsupported_policy_feature_error</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos32unsupported_policy_feature_errorD0Ev" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4NK3eos32unsupported_policy_feature_error14policy_featureEv">
+<span id="_CPPv3NK3eos32unsupported_policy_feature_error14policy_featureEv"></span><span id="_CPPv2NK3eos32unsupported_policy_feature_error14policy_featureEv"></span><span id="eos::unsupported_policy_feature_error::policy_featureC"></span><span class="target" id="classeos_1_1unsupported__policy__feature__error_1ac1b25fc9a1f250093840225bfc79f63c"></span><a class="reference internal" href="#_CPPv4N3eos16policy_feature_tE" title="eos::policy_feature_t">policy_feature_t</a> <code class="descname">policy_feature</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos32unsupported_policy_feature_error14policy_featureEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4NK3eos32unsupported_policy_feature_error5raiseEv">
+<span id="_CPPv3NK3eos32unsupported_policy_feature_error5raiseEv"></span><span id="_CPPv2NK3eos32unsupported_policy_feature_error5raiseEv"></span><span id="eos::unsupported_policy_feature_error::raiseC"></span><span class="target" id="classeos_1_1unsupported__policy__feature__error_1a42bf6ac094219c38d2c1e553c32a11a3"></span>void <code class="descname">raise</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos32unsupported_policy_feature_error5raiseEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Throws this exception. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4NK3eos32unsupported_policy_feature_error4hashEv">
+<span id="_CPPv3NK3eos32unsupported_policy_feature_error4hashEv"></span><span id="_CPPv2NK3eos32unsupported_policy_feature_error4hashEv"></span><span id="eos::unsupported_policy_feature_error::hashC"></span><span class="target" id="classeos_1_1unsupported__policy__feature__error_1a1a0e79301d8f8e0b8ce0953df40f77e4"></span>uint32_t <code class="descname">hash</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos32unsupported_policy_feature_error4hashEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>The hash function for type <a class="reference internal" href="#classeos_1_1unsupported__policy__feature__error"><span class="std std-ref">unsupported_policy_feature_error</span></a>. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4NK3eos32unsupported_policy_feature_error6mix_meER8hash_mix">
+<span id="_CPPv3NK3eos32unsupported_policy_feature_error6mix_meER8hash_mix"></span><span id="_CPPv2NK3eos32unsupported_policy_feature_error6mix_meER8hash_mix"></span><span id="eos::unsupported_policy_feature_error::mix_me__hash_mixRC"></span><span class="target" id="classeos_1_1unsupported__policy__feature__error_1a4482cfd015f6e801f0e59707e6e71998"></span>void <code class="descname">mix_me</code><span class="sig-paren">(</span><a class="reference internal" href="hash_mix.html#_CPPv4N3eos8hash_mixE" title="eos::hash_mix">hash_mix</a> &amp;<em>h</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos32unsupported_policy_feature_error6mix_meER8hash_mix" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>The hash mix function for type <a class="reference internal" href="#classeos_1_1unsupported__policy__feature__error"><span class="std std-ref">unsupported_policy_feature_error</span></a>. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4NK3eos32unsupported_policy_feature_error9to_stringEv">
+<span id="_CPPv3NK3eos32unsupported_policy_feature_error9to_stringEv"></span><span id="_CPPv2NK3eos32unsupported_policy_feature_error9to_stringEv"></span><span id="eos::unsupported_policy_feature_error::to_stringC"></span><span class="target" id="classeos_1_1unsupported__policy__feature__error_1a59bb16eb904a8581cb628f70f4948108"></span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::string <code class="descname">to_string</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos32unsupported_policy_feature_error9to_stringEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Returns a string representation of the current object’s values. </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Private Members</p>
+<dl class="member">
+<dt id="_CPPv4N3eos32unsupported_policy_feature_error15policy_feature_E">
+<span id="_CPPv3N3eos32unsupported_policy_feature_error15policy_feature_E"></span><span id="_CPPv2N3eos32unsupported_policy_feature_error15policy_feature_E"></span><span id="eos::unsupported_policy_feature_error::policy_feature___policy_feature_t"></span><span class="target" id="classeos_1_1unsupported__policy__feature__error_1aee2a1c28f9d527b0e5662de6af9b99ce"></span><a class="reference internal" href="#_CPPv4N3eos16policy_feature_tE" title="eos::policy_feature_t">policy_feature_t</a> <code class="descname">policy_feature_</code><a class="headerlink" href="#_CPPv4N3eos32unsupported_policy_feature_error15policy_feature_E" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Friends</p>
+<dl class="function">
+<dt id="_CPPv4lsRNSt7ostreamERK32unsupported_policy_feature_error">
+<span id="_CPPv3lsRNSt7ostreamERK32unsupported_policy_feature_error"></span><span id="_CPPv2lsRNSt7ostreamERK32unsupported_policy_feature_error"></span><span id="lshift-operator__osR.unsupported_policy_feature_errorCR"></span><span class="target" id="classeos_1_1unsupported__policy__feature__error_1a7c892546db64e7f44d67fcde762d59ce"></span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::ostream &amp;<code class="descname">operator&lt;&lt;</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::ostream &amp;<em>os</em>, <em class="property">const</em> unsupported_policy_feature_error &amp;<em>obj</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4lsRNSt7ostreamERK32unsupported_policy_feature_error" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>A utility stream operator that adds a string representation of <a class="reference internal" href="#classeos_1_1unsupported__policy__feature__error"><span class="std std-ref">unsupported_policy_feature_error</span></a> to the ostream. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="class">
+<dt id="_CPPv4N3eos26policy_map_hw_status_key_tE">
+<span id="_CPPv3N3eos26policy_map_hw_status_key_tE"></span><span id="_CPPv2N3eos26policy_map_hw_status_key_tE"></span><span id="eos::policy_map_hw_status_key_t"></span><span class="target" id="classeos_1_1policy__map__hw__status__key__t"></span><em class="property">class </em><code class="descname">policy_map_hw_status_key_t</code><a class="headerlink" href="#_CPPv4N3eos26policy_map_hw_status_key_tE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><em>#include &lt;policy_map.h&gt;</em><p>policy map hardware interface key. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="function">
+<dt id="_CPPv4N3eos26policy_map_hw_status_key_t26policy_map_hw_status_key_tEv">
+<span id="_CPPv3N3eos26policy_map_hw_status_key_t26policy_map_hw_status_key_tEv"></span><span id="_CPPv2N3eos26policy_map_hw_status_key_t26policy_map_hw_status_key_tEv"></span><span id="eos::policy_map_hw_status_key_t::policy_map_hw_status_key_t"></span><span class="target" id="classeos_1_1policy__map__hw__status__key__t_1a22fb49a5a9124ca10ad1e0ec53d83849"></span><code class="descname">policy_map_hw_status_key_t</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos26policy_map_hw_status_key_t26policy_map_hw_status_key_tEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N3eos26policy_map_hw_status_key_t26policy_map_hw_status_key_tE9intf_id_t15acl_direction_t">
+<span id="_CPPv3N3eos26policy_map_hw_status_key_t26policy_map_hw_status_key_tE9intf_id_t15acl_direction_t"></span><span id="_CPPv2N3eos26policy_map_hw_status_key_t26policy_map_hw_status_key_tE9intf_id_t15acl_direction_t"></span><span id="eos::policy_map_hw_status_key_t::policy_map_hw_status_key_t__intf_id_t.acl_direction_t"></span><span class="target" id="classeos_1_1policy__map__hw__status__key__t_1aa3099cf2cf566a074f202d9744ff6081"></span><code class="descname">policy_map_hw_status_key_t</code><span class="sig-paren">(</span><a class="reference internal" href="intf.html#_CPPv4N3eos9intf_id_tE" title="eos::intf_id_t">intf_id_t</a> <em>intf_id</em>, <a class="reference internal" href="acl.html#_CPPv4N3eos15acl_direction_tE" title="eos::acl_direction_t">acl_direction_t</a> <em>direction</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos26policy_map_hw_status_key_t26policy_map_hw_status_key_tE9intf_id_t15acl_direction_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N3eos26policy_map_hw_status_key_t26policy_map_hw_status_key_tERK26policy_map_hw_status_key_t">
+<span id="_CPPv3N3eos26policy_map_hw_status_key_t26policy_map_hw_status_key_tERK26policy_map_hw_status_key_t"></span><span id="_CPPv2N3eos26policy_map_hw_status_key_t26policy_map_hw_status_key_tERK26policy_map_hw_status_key_t"></span><span id="eos::policy_map_hw_status_key_t::policy_map_hw_status_key_t__policy_map_hw_status_key_tCR"></span><span class="target" id="classeos_1_1policy__map__hw__status__key__t_1a44e955bf99443938c5b317399a36ad71"></span><code class="descname">policy_map_hw_status_key_t</code><span class="sig-paren">(</span><em class="property">const</em> <a class="reference internal" href="#_CPPv4N3eos26policy_map_hw_status_key_t26policy_map_hw_status_key_tEv" title="eos::policy_map_hw_status_key_t::policy_map_hw_status_key_t">policy_map_hw_status_key_t</a> &amp;<em>other</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos26policy_map_hw_status_key_t26policy_map_hw_status_key_tERK26policy_map_hw_status_key_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N3eos26policy_map_hw_status_key_taSERK26policy_map_hw_status_key_t">
+<span id="_CPPv3N3eos26policy_map_hw_status_key_taSERK26policy_map_hw_status_key_t"></span><span id="_CPPv2N3eos26policy_map_hw_status_key_taSERK26policy_map_hw_status_key_t"></span><span id="eos::policy_map_hw_status_key_t::assign-operator__policy_map_hw_status_key_tCR"></span><span class="target" id="classeos_1_1policy__map__hw__status__key__t_1aabb89a3a787bd3e4d89da3c22cbfa6d3"></span><a class="reference internal" href="#_CPPv4N3eos26policy_map_hw_status_key_tE" title="eos::policy_map_hw_status_key_t">policy_map_hw_status_key_t</a> &amp;<code class="descname">operator=</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos26policy_map_hw_status_key_tE" title="eos::policy_map_hw_status_key_t">policy_map_hw_status_key_t</a> <em class="property">const</em> &amp;<em>other</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos26policy_map_hw_status_key_taSERK26policy_map_hw_status_key_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4NK3eos26policy_map_hw_status_key_t7intf_idEv">
+<span id="_CPPv3NK3eos26policy_map_hw_status_key_t7intf_idEv"></span><span id="_CPPv2NK3eos26policy_map_hw_status_key_t7intf_idEv"></span><span id="eos::policy_map_hw_status_key_t::intf_idC"></span><span class="target" id="classeos_1_1policy__map__hw__status__key__t_1a21776e875efd6223a2b95eaed7036b3f"></span><a class="reference internal" href="intf.html#_CPPv4N3eos9intf_id_tE" title="eos::intf_id_t">intf_id_t</a> <code class="descname">intf_id</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos26policy_map_hw_status_key_t7intf_idEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Getter for ‘intf_id’: Interface ID at with a policy map is applied. If the feature type is POLICY_FEATURE_QOS, intf_id will be the default interface ID. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N3eos26policy_map_hw_status_key_t10intf_id_isE9intf_id_t">
+<span id="_CPPv3N3eos26policy_map_hw_status_key_t10intf_id_isE9intf_id_t"></span><span id="_CPPv2N3eos26policy_map_hw_status_key_t10intf_id_isE9intf_id_t"></span><span id="eos::policy_map_hw_status_key_t::intf_id_is__intf_id_t"></span><span class="target" id="classeos_1_1policy__map__hw__status__key__t_1a16c380a43b303483e7c1b57cca54c8c2"></span>void <code class="descname">intf_id_is</code><span class="sig-paren">(</span><a class="reference internal" href="intf.html#_CPPv4N3eos9intf_id_tE" title="eos::intf_id_t">intf_id_t</a> <em>intf_id</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos26policy_map_hw_status_key_t10intf_id_isE9intf_id_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Setter for ‘intf_id’. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4NK3eos26policy_map_hw_status_key_t9directionEv">
+<span id="_CPPv3NK3eos26policy_map_hw_status_key_t9directionEv"></span><span id="_CPPv2NK3eos26policy_map_hw_status_key_t9directionEv"></span><span id="eos::policy_map_hw_status_key_t::directionC"></span><span class="target" id="classeos_1_1policy__map__hw__status__key__t_1ac7098d7ffd554b78ab7247ef97a0ecb3"></span><a class="reference internal" href="acl.html#_CPPv4N3eos15acl_direction_tE" title="eos::acl_direction_t">acl_direction_t</a> <code class="descname">direction</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos26policy_map_hw_status_key_t9directionEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Getter for ‘direction’: Direction in which a policy map is applied. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N3eos26policy_map_hw_status_key_t12direction_isE15acl_direction_t">
+<span id="_CPPv3N3eos26policy_map_hw_status_key_t12direction_isE15acl_direction_t"></span><span id="_CPPv2N3eos26policy_map_hw_status_key_t12direction_isE15acl_direction_t"></span><span id="eos::policy_map_hw_status_key_t::direction_is__acl_direction_t"></span><span class="target" id="classeos_1_1policy__map__hw__status__key__t_1a7a83c6e5db9b07bd82ebc2c3727aa894"></span>void <code class="descname">direction_is</code><span class="sig-paren">(</span><a class="reference internal" href="acl.html#_CPPv4N3eos15acl_direction_tE" title="eos::acl_direction_t">acl_direction_t</a> <em>direction</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos26policy_map_hw_status_key_t12direction_isE15acl_direction_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Setter for ‘direction’. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4NK3eos26policy_map_hw_status_key_teqERK26policy_map_hw_status_key_t">
+<span id="_CPPv3NK3eos26policy_map_hw_status_key_teqERK26policy_map_hw_status_key_t"></span><span id="_CPPv2NK3eos26policy_map_hw_status_key_teqERK26policy_map_hw_status_key_t"></span><span id="eos::policy_map_hw_status_key_t::eq-operator__policy_map_hw_status_key_tCRC"></span><span class="target" id="classeos_1_1policy__map__hw__status__key__t_1a2e6daf8b9692310a625774d184aed795"></span>bool <code class="descname">operator==</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos26policy_map_hw_status_key_tE" title="eos::policy_map_hw_status_key_t">policy_map_hw_status_key_t</a> <em class="property">const</em> &amp;<em>other</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos26policy_map_hw_status_key_teqERK26policy_map_hw_status_key_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4NK3eos26policy_map_hw_status_key_tneERK26policy_map_hw_status_key_t">
+<span id="_CPPv3NK3eos26policy_map_hw_status_key_tneERK26policy_map_hw_status_key_t"></span><span id="_CPPv2NK3eos26policy_map_hw_status_key_tneERK26policy_map_hw_status_key_t"></span><span id="eos::policy_map_hw_status_key_t::neq-operator__policy_map_hw_status_key_tCRC"></span><span class="target" id="classeos_1_1policy__map__hw__status__key__t_1a29c7747408abf1fc186e4f416a699c82"></span>bool <code class="descname">operator!=</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos26policy_map_hw_status_key_tE" title="eos::policy_map_hw_status_key_t">policy_map_hw_status_key_t</a> <em class="property">const</em> &amp;<em>other</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos26policy_map_hw_status_key_tneERK26policy_map_hw_status_key_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4NK3eos26policy_map_hw_status_key_tltERK26policy_map_hw_status_key_t">
+<span id="_CPPv3NK3eos26policy_map_hw_status_key_tltERK26policy_map_hw_status_key_t"></span><span id="_CPPv2NK3eos26policy_map_hw_status_key_tltERK26policy_map_hw_status_key_t"></span><span id="eos::policy_map_hw_status_key_t::lt-operator__policy_map_hw_status_key_tCRC"></span><span class="target" id="classeos_1_1policy__map__hw__status__key__t_1a5cd4c70c44957b9fa9f8d60b06c94dd8"></span>bool <code class="descname">operator&lt;</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos26policy_map_hw_status_key_tE" title="eos::policy_map_hw_status_key_t">policy_map_hw_status_key_t</a> <em class="property">const</em> &amp;<em>other</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos26policy_map_hw_status_key_tltERK26policy_map_hw_status_key_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4NK3eos26policy_map_hw_status_key_t4hashEv">
+<span id="_CPPv3NK3eos26policy_map_hw_status_key_t4hashEv"></span><span id="_CPPv2NK3eos26policy_map_hw_status_key_t4hashEv"></span><span id="eos::policy_map_hw_status_key_t::hashC"></span><span class="target" id="classeos_1_1policy__map__hw__status__key__t_1a9f273fd41a33b04150e3ae703d0ea7c0"></span>uint32_t <code class="descname">hash</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos26policy_map_hw_status_key_t4hashEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>The hash function for type <a class="reference internal" href="#classeos_1_1policy__map__hw__status__key__t"><span class="std std-ref">policy_map_hw_status_key_t</span></a>. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4NK3eos26policy_map_hw_status_key_t6mix_meER8hash_mix">
+<span id="_CPPv3NK3eos26policy_map_hw_status_key_t6mix_meER8hash_mix"></span><span id="_CPPv2NK3eos26policy_map_hw_status_key_t6mix_meER8hash_mix"></span><span id="eos::policy_map_hw_status_key_t::mix_me__hash_mixRC"></span><span class="target" id="classeos_1_1policy__map__hw__status__key__t_1a06aa7066323e63321629569a275519b6"></span>void <code class="descname">mix_me</code><span class="sig-paren">(</span><a class="reference internal" href="hash_mix.html#_CPPv4N3eos8hash_mixE" title="eos::hash_mix">hash_mix</a> &amp;<em>h</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos26policy_map_hw_status_key_t6mix_meER8hash_mix" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>The hash mix function for type <a class="reference internal" href="#classeos_1_1policy__map__hw__status__key__t"><span class="std std-ref">policy_map_hw_status_key_t</span></a>. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4NK3eos26policy_map_hw_status_key_t9to_stringEv">
+<span id="_CPPv3NK3eos26policy_map_hw_status_key_t9to_stringEv"></span><span id="_CPPv2NK3eos26policy_map_hw_status_key_t9to_stringEv"></span><span id="eos::policy_map_hw_status_key_t::to_stringC"></span><span class="target" id="classeos_1_1policy__map__hw__status__key__t_1aa68a77e85383f7f34029fabdd285c8c3"></span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::string <code class="descname">to_string</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos26policy_map_hw_status_key_t9to_stringEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Returns a string representation of the current object’s values. </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Private Members</p>
+<dl class="member">
+<dt id="_CPPv4N3eos26policy_map_hw_status_key_t5pimplE">
+<span id="_CPPv3N3eos26policy_map_hw_status_key_t5pimplE"></span><span id="_CPPv2N3eos26policy_map_hw_status_key_t5pimplE"></span><span id="eos::policy_map_hw_status_key_t::pimpl__std::shared_ptr:policy_map_hw_status_key_impl_t:"></span><span class="target" id="classeos_1_1policy__map__hw__status__key__t_1aa8901e14d56d8fdaaceadd899ce40a32"></span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::shared_ptr&lt;<a class="reference internal" href="policy_map_impl.html#_CPPv4N3eos31policy_map_hw_status_key_impl_tE" title="eos::policy_map_hw_status_key_impl_t">policy_map_hw_status_key_impl_t</a>&gt; <code class="descname">pimpl</code><a class="headerlink" href="#_CPPv4N3eos26policy_map_hw_status_key_t5pimplE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Friends</p>
+<dl class="function">
+<dt id="_CPPv4lsRNSt7ostreamERK26policy_map_hw_status_key_t">
+<span id="_CPPv3lsRNSt7ostreamERK26policy_map_hw_status_key_t"></span><span id="_CPPv2lsRNSt7ostreamERK26policy_map_hw_status_key_t"></span><span id="lshift-operator__osR.policy_map_hw_status_key_tCR"></span><span class="target" id="classeos_1_1policy__map__hw__status__key__t_1a73480244d8198703e9b0561daf46d375"></span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::ostream &amp;<code class="descname">operator&lt;&lt;</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::ostream &amp;<em>os</em>, <em class="property">const</em> policy_map_hw_status_key_t &amp;<em>obj</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4lsRNSt7ostreamERK26policy_map_hw_status_key_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>A utility stream operator that adds a string representation of <a class="reference internal" href="#classeos_1_1policy__map__hw__status__key__t"><span class="std std-ref">policy_map_hw_status_key_t</span></a> to the ostream. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="class">
+<dt id="_CPPv4N3eos24policy_map_hw_statuses_tE">
+<span id="_CPPv3N3eos24policy_map_hw_statuses_tE"></span><span id="_CPPv2N3eos24policy_map_hw_statuses_tE"></span><span id="eos::policy_map_hw_statuses_t"></span><span class="target" id="classeos_1_1policy__map__hw__statuses__t"></span><em class="property">class </em><code class="descname">policy_map_hw_statuses_t</code><a class="headerlink" href="#_CPPv4N3eos24policy_map_hw_statuses_tE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><em>#include &lt;policy_map.h&gt;</em><p>policy map hardware statuses. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="function">
+<dt id="_CPPv4N3eos24policy_map_hw_statuses_t24policy_map_hw_statuses_tEv">
+<span id="_CPPv3N3eos24policy_map_hw_statuses_t24policy_map_hw_statuses_tEv"></span><span id="_CPPv2N3eos24policy_map_hw_statuses_t24policy_map_hw_statuses_tEv"></span><span id="eos::policy_map_hw_statuses_t::policy_map_hw_statuses_t"></span><span class="target" id="classeos_1_1policy__map__hw__statuses__t_1a72bf1ea13e5ac7daf234639ea83323ff"></span><code class="descname">policy_map_hw_statuses_t</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos24policy_map_hw_statuses_t24policy_map_hw_statuses_tEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N3eos24policy_map_hw_statuses_t24policy_map_hw_statuses_tERKNSt3mapI26policy_map_hw_status_key_t19policy_map_status_tEE">
+<span id="_CPPv3N3eos24policy_map_hw_statuses_t24policy_map_hw_statuses_tERKNSt3mapI26policy_map_hw_status_key_t19policy_map_status_tEE"></span><span id="_CPPv2N3eos24policy_map_hw_statuses_t24policy_map_hw_statuses_tERKNSt3mapI26policy_map_hw_status_key_t19policy_map_status_tEE"></span><span id="eos::policy_map_hw_statuses_t::policy_map_hw_statuses_t__std::map:policy_map_hw_status_key_t.policy_map_status_t:CR"></span><span class="target" id="classeos_1_1policy__map__hw__statuses__t_1a415005b211498b4442344fe73da4ede0"></span><code class="descname">policy_map_hw_statuses_t</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::map&lt;<a class="reference internal" href="#_CPPv4N3eos26policy_map_hw_status_key_tE" title="eos::policy_map_hw_status_key_t">policy_map_hw_status_key_t</a>, <a class="reference internal" href="#_CPPv4N3eos19policy_map_status_tE" title="eos::policy_map_status_t">policy_map_status_t</a>&gt; <em class="property">const</em> &amp;<em>intf_statuses</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos24policy_map_hw_statuses_t24policy_map_hw_statuses_tERKNSt3mapI26policy_map_hw_status_key_t19policy_map_status_tEE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N3eos24policy_map_hw_statuses_t24policy_map_hw_statuses_tERK24policy_map_hw_statuses_t">
+<span id="_CPPv3N3eos24policy_map_hw_statuses_t24policy_map_hw_statuses_tERK24policy_map_hw_statuses_t"></span><span id="_CPPv2N3eos24policy_map_hw_statuses_t24policy_map_hw_statuses_tERK24policy_map_hw_statuses_t"></span><span id="eos::policy_map_hw_statuses_t::policy_map_hw_statuses_t__policy_map_hw_statuses_tCR"></span><span class="target" id="classeos_1_1policy__map__hw__statuses__t_1a4cc82275467ee661416ad5ea69658109"></span><code class="descname">policy_map_hw_statuses_t</code><span class="sig-paren">(</span><em class="property">const</em> <a class="reference internal" href="#_CPPv4N3eos24policy_map_hw_statuses_t24policy_map_hw_statuses_tEv" title="eos::policy_map_hw_statuses_t::policy_map_hw_statuses_t">policy_map_hw_statuses_t</a> &amp;<em>other</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos24policy_map_hw_statuses_t24policy_map_hw_statuses_tERK24policy_map_hw_statuses_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N3eos24policy_map_hw_statuses_taSERK24policy_map_hw_statuses_t">
+<span id="_CPPv3N3eos24policy_map_hw_statuses_taSERK24policy_map_hw_statuses_t"></span><span id="_CPPv2N3eos24policy_map_hw_statuses_taSERK24policy_map_hw_statuses_t"></span><span id="eos::policy_map_hw_statuses_t::assign-operator__policy_map_hw_statuses_tCR"></span><span class="target" id="classeos_1_1policy__map__hw__statuses__t_1aa6dd7e482c3b3f2d817e52b6e2f19106"></span><a class="reference internal" href="#_CPPv4N3eos24policy_map_hw_statuses_tE" title="eos::policy_map_hw_statuses_t">policy_map_hw_statuses_t</a> &amp;<code class="descname">operator=</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos24policy_map_hw_statuses_tE" title="eos::policy_map_hw_statuses_t">policy_map_hw_statuses_t</a> <em class="property">const</em> &amp;<em>other</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos24policy_map_hw_statuses_taSERK24policy_map_hw_statuses_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4NK3eos24policy_map_hw_statuses_t13intf_statusesEv">
+<span id="_CPPv3NK3eos24policy_map_hw_statuses_t13intf_statusesEv"></span><span id="_CPPv2NK3eos24policy_map_hw_statuses_t13intf_statusesEv"></span><span id="eos::policy_map_hw_statuses_t::intf_statusesC"></span><span class="target" id="classeos_1_1policy__map__hw__statuses__t_1aac55ec39ec7cc1ad60f770b75b0a5b71"></span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::map&lt;<a class="reference internal" href="#_CPPv4N3eos26policy_map_hw_status_key_tE" title="eos::policy_map_hw_status_key_t">policy_map_hw_status_key_t</a>, <a class="reference internal" href="#_CPPv4N3eos19policy_map_status_tE" title="eos::policy_map_status_t">policy_map_status_t</a>&gt; <em class="property">const</em> &amp;<code class="descname">intf_statuses</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos24policy_map_hw_statuses_t13intf_statusesEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Getter for ‘intf_statuses’: A map of interface key and policy map status. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N3eos24policy_map_hw_statuses_t16intf_statuses_isERKNSt3mapI26policy_map_hw_status_key_t19policy_map_status_tEE">
+<span id="_CPPv3N3eos24policy_map_hw_statuses_t16intf_statuses_isERKNSt3mapI26policy_map_hw_status_key_t19policy_map_status_tEE"></span><span id="_CPPv2N3eos24policy_map_hw_statuses_t16intf_statuses_isERKNSt3mapI26policy_map_hw_status_key_t19policy_map_status_tEE"></span><span id="eos::policy_map_hw_statuses_t::intf_statuses_is__std::map:policy_map_hw_status_key_t.policy_map_status_t:CR"></span><span class="target" id="classeos_1_1policy__map__hw__statuses__t_1a897bff4dfe443d22fd0863afcb6eb864"></span>void <code class="descname">intf_statuses_is</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::map&lt;<a class="reference internal" href="#_CPPv4N3eos26policy_map_hw_status_key_tE" title="eos::policy_map_hw_status_key_t">policy_map_hw_status_key_t</a>, <a class="reference internal" href="#_CPPv4N3eos19policy_map_status_tE" title="eos::policy_map_status_t">policy_map_status_t</a>&gt; <em class="property">const</em> &amp;<em>intf_statuses</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos24policy_map_hw_statuses_t16intf_statuses_isERKNSt3mapI26policy_map_hw_status_key_t19policy_map_status_tEE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Setter for ‘intf_statuses’. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N3eos24policy_map_hw_statuses_t16intf_statuse_setERK26policy_map_hw_status_key_tRK19policy_map_status_t">
+<span id="_CPPv3N3eos24policy_map_hw_statuses_t16intf_statuse_setERK26policy_map_hw_status_key_tRK19policy_map_status_t"></span><span id="_CPPv2N3eos24policy_map_hw_statuses_t16intf_statuse_setERK26policy_map_hw_status_key_tRK19policy_map_status_t"></span><span id="eos::policy_map_hw_statuses_t::intf_statuse_set__policy_map_hw_status_key_tCR.policy_map_status_tCR"></span><span class="target" id="classeos_1_1policy__map__hw__statuses__t_1afbe5220f4ffa83d6a6be0dc5df244af0"></span>void <code class="descname">intf_statuse_set</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos26policy_map_hw_status_key_tE" title="eos::policy_map_hw_status_key_t">policy_map_hw_status_key_t</a> <em class="property">const</em> &amp;<em>key</em>, <a class="reference internal" href="#_CPPv4N3eos19policy_map_status_tE" title="eos::policy_map_status_t">policy_map_status_t</a> <em class="property">const</em> &amp;<em>value</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos24policy_map_hw_statuses_t16intf_statuse_setERK26policy_map_hw_status_key_tRK19policy_map_status_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Inserts key/value pair to the map. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N3eos24policy_map_hw_statuses_t16intf_statuse_delERK26policy_map_hw_status_key_t">
+<span id="_CPPv3N3eos24policy_map_hw_statuses_t16intf_statuse_delERK26policy_map_hw_status_key_t"></span><span id="_CPPv2N3eos24policy_map_hw_statuses_t16intf_statuse_delERK26policy_map_hw_status_key_t"></span><span id="eos::policy_map_hw_statuses_t::intf_statuse_del__policy_map_hw_status_key_tCR"></span><span class="target" id="classeos_1_1policy__map__hw__statuses__t_1ac750c51b96d78bf7ebc22122fa8bde8a"></span>void <code class="descname">intf_statuse_del</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos26policy_map_hw_status_key_tE" title="eos::policy_map_hw_status_key_t">policy_map_hw_status_key_t</a> <em class="property">const</em> &amp;<em>key</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos24policy_map_hw_statuses_t16intf_statuse_delERK26policy_map_hw_status_key_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Deletes the key/value pair from the map. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4NK3eos24policy_map_hw_statuses_teqERK24policy_map_hw_statuses_t">
+<span id="_CPPv3NK3eos24policy_map_hw_statuses_teqERK24policy_map_hw_statuses_t"></span><span id="_CPPv2NK3eos24policy_map_hw_statuses_teqERK24policy_map_hw_statuses_t"></span><span id="eos::policy_map_hw_statuses_t::eq-operator__policy_map_hw_statuses_tCRC"></span><span class="target" id="classeos_1_1policy__map__hw__statuses__t_1aa5435165aca159e206e3d02df3f78ec1"></span>bool <code class="descname">operator==</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos24policy_map_hw_statuses_tE" title="eos::policy_map_hw_statuses_t">policy_map_hw_statuses_t</a> <em class="property">const</em> &amp;<em>other</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos24policy_map_hw_statuses_teqERK24policy_map_hw_statuses_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4NK3eos24policy_map_hw_statuses_tneERK24policy_map_hw_statuses_t">
+<span id="_CPPv3NK3eos24policy_map_hw_statuses_tneERK24policy_map_hw_statuses_t"></span><span id="_CPPv2NK3eos24policy_map_hw_statuses_tneERK24policy_map_hw_statuses_t"></span><span id="eos::policy_map_hw_statuses_t::neq-operator__policy_map_hw_statuses_tCRC"></span><span class="target" id="classeos_1_1policy__map__hw__statuses__t_1a399d4c18d1f3cb1b1dbb487a10294ec4"></span>bool <code class="descname">operator!=</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos24policy_map_hw_statuses_tE" title="eos::policy_map_hw_statuses_t">policy_map_hw_statuses_t</a> <em class="property">const</em> &amp;<em>other</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos24policy_map_hw_statuses_tneERK24policy_map_hw_statuses_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4NK3eos24policy_map_hw_statuses_tltERK24policy_map_hw_statuses_t">
+<span id="_CPPv3NK3eos24policy_map_hw_statuses_tltERK24policy_map_hw_statuses_t"></span><span id="_CPPv2NK3eos24policy_map_hw_statuses_tltERK24policy_map_hw_statuses_t"></span><span id="eos::policy_map_hw_statuses_t::lt-operator__policy_map_hw_statuses_tCRC"></span><span class="target" id="classeos_1_1policy__map__hw__statuses__t_1a04fa9a7ac90d36b3166c4bdcc2f20d9f"></span>bool <code class="descname">operator&lt;</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos24policy_map_hw_statuses_tE" title="eos::policy_map_hw_statuses_t">policy_map_hw_statuses_t</a> <em class="property">const</em> &amp;<em>other</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos24policy_map_hw_statuses_tltERK24policy_map_hw_statuses_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4NK3eos24policy_map_hw_statuses_t4hashEv">
+<span id="_CPPv3NK3eos24policy_map_hw_statuses_t4hashEv"></span><span id="_CPPv2NK3eos24policy_map_hw_statuses_t4hashEv"></span><span id="eos::policy_map_hw_statuses_t::hashC"></span><span class="target" id="classeos_1_1policy__map__hw__statuses__t_1a46d3479cc91db0d3a6637e46c5f52c66"></span>uint32_t <code class="descname">hash</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos24policy_map_hw_statuses_t4hashEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>The hash function for type <a class="reference internal" href="#classeos_1_1policy__map__hw__statuses__t"><span class="std std-ref">policy_map_hw_statuses_t</span></a>. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4NK3eos24policy_map_hw_statuses_t6mix_meER8hash_mix">
+<span id="_CPPv3NK3eos24policy_map_hw_statuses_t6mix_meER8hash_mix"></span><span id="_CPPv2NK3eos24policy_map_hw_statuses_t6mix_meER8hash_mix"></span><span id="eos::policy_map_hw_statuses_t::mix_me__hash_mixRC"></span><span class="target" id="classeos_1_1policy__map__hw__statuses__t_1ad84e98f3418a0d307bdb4bd150523c72"></span>void <code class="descname">mix_me</code><span class="sig-paren">(</span><a class="reference internal" href="hash_mix.html#_CPPv4N3eos8hash_mixE" title="eos::hash_mix">hash_mix</a> &amp;<em>h</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos24policy_map_hw_statuses_t6mix_meER8hash_mix" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>The hash mix function for type <a class="reference internal" href="#classeos_1_1policy__map__hw__statuses__t"><span class="std std-ref">policy_map_hw_statuses_t</span></a>. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4NK3eos24policy_map_hw_statuses_t9to_stringEv">
+<span id="_CPPv3NK3eos24policy_map_hw_statuses_t9to_stringEv"></span><span id="_CPPv2NK3eos24policy_map_hw_statuses_t9to_stringEv"></span><span id="eos::policy_map_hw_statuses_t::to_stringC"></span><span class="target" id="classeos_1_1policy__map__hw__statuses__t_1aaeddb75d7249b6127bdc4c3666a4b6d1"></span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::string <code class="descname">to_string</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos24policy_map_hw_statuses_t9to_stringEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Returns a string representation of the current object’s values. </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Private Members</p>
+<dl class="member">
+<dt id="_CPPv4N3eos24policy_map_hw_statuses_t5pimplE">
+<span id="_CPPv3N3eos24policy_map_hw_statuses_t5pimplE"></span><span id="_CPPv2N3eos24policy_map_hw_statuses_t5pimplE"></span><span id="eos::policy_map_hw_statuses_t::pimpl__std::shared_ptr:policy_map_hw_statuses_impl_t:"></span><span class="target" id="classeos_1_1policy__map__hw__statuses__t_1a7fbf90a556cc859bbbe361049fb0b501"></span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::shared_ptr&lt;<a class="reference internal" href="policy_map_impl.html#_CPPv4N3eos29policy_map_hw_statuses_impl_tE" title="eos::policy_map_hw_statuses_impl_t">policy_map_hw_statuses_impl_t</a>&gt; <code class="descname">pimpl</code><a class="headerlink" href="#_CPPv4N3eos24policy_map_hw_statuses_t5pimplE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Friends</p>
+<dl class="function">
+<dt id="_CPPv4lsRNSt7ostreamERK24policy_map_hw_statuses_t">
+<span id="_CPPv3lsRNSt7ostreamERK24policy_map_hw_statuses_t"></span><span id="_CPPv2lsRNSt7ostreamERK24policy_map_hw_statuses_t"></span><span id="lshift-operator__osR.policy_map_hw_statuses_tCR"></span><span class="target" id="classeos_1_1policy__map__hw__statuses__t_1a82fa2312c7856e6131534f476bbd3f92"></span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::ostream &amp;<code class="descname">operator&lt;&lt;</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::ostream &amp;<em>os</em>, <em class="property">const</em> policy_map_hw_statuses_t &amp;<em>obj</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4lsRNSt7ostreamERK24policy_map_hw_statuses_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>A utility stream operator that adds a string representation of <a class="reference internal" href="#classeos_1_1policy__map__hw__statuses__t"><span class="std std-ref">policy_map_hw_statuses_t</span></a> to the ostream. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#"><strong>policy_map</strong></a><ul>
+<li><a class="reference internal" href="#type-definitions-in-policy-map">Type definitions in <strong>policy_map</strong></a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="panic.html"
+                        title="previous chapter"><strong>panic</strong></a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="policy_map_impl.html"
+                        title="next chapter"><strong>policy_map_impl</strong></a></p>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="policy_map_impl.html" title="policy_map_impl"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="panic.html" title="panic"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Arista EOS SDK 2.22.1 reference</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2014, Arista Networks.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.4.
+    </div>
+  </body>
+</html>

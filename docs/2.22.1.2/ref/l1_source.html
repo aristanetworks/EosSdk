@@ -1,0 +1,418 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>l1_source &#8212; Arista EOS SDK 2.22.1 reference</title>
+    <link rel="stylesheet" href="_static/eossdk.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/language_data.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="l1_source_impl" href="l1_source_impl.html" />
+    <link rel="prev" title="iterator" href="iterator.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="l1_source_impl.html" title="l1_source_impl"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="iterator.html" title="iterator"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Arista EOS SDK 2.22.1 reference</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="l1-source">
+<h1><strong>l1_source</strong><a class="headerlink" href="#l1-source" title="Permalink to this headline">¶</a></h1>
+<p>L1 source management module.</p>
+<p>On platforms with a crosspoint, interfaces can configure their source using a config.</p>
+<p>This module provides APIs to set and delete source configs, watch for config changes, get source configs and source statuses, and iterate through source configs and source statuses. </p>
+<dl class="type">
+<dt id="_CPPv43eos">
+<span id="_CPPv33eos"></span><span id="_CPPv23eos"></span><span id="eos"></span><span class="target" id="namespaceeos"></span><em class="property">namespace </em><code class="descname">eos</code><br /></dt>
+<dd><dl class="class">
+<dt id="_CPPv4N3eos17l1_source_handlerE">
+<span id="_CPPv3N3eos17l1_source_handlerE"></span><span id="_CPPv2N3eos17l1_source_handlerE"></span><span id="eos::l1_source_handler"></span><span class="target" id="classeos_1_1l1__source__handler"></span><em class="property">class </em><code class="descname">l1_source_handler</code> : <em class="property">public</em> <a class="reference internal" href="acl.html#_CPPv43eos" title="eos">eos</a>::base_handler&lt;<a class="reference internal" href="#_CPPv4N3eos13l1_source_mgrE" title="eos::l1_source_mgr">l1_source_mgr</a>, <a class="reference internal" href="#_CPPv4N3eos17l1_source_handlerE" title="eos::l1_source_handler">l1_source_handler</a>&gt;<a class="headerlink" href="#_CPPv4N3eos17l1_source_handlerE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="function">
+<dt id="_CPPv4N3eos17l1_source_handler17l1_source_handlerEP13l1_source_mgr">
+<span id="_CPPv3N3eos17l1_source_handler17l1_source_handlerEP13l1_source_mgr"></span><span id="_CPPv2N3eos17l1_source_handler17l1_source_handlerEP13l1_source_mgr"></span><span id="eos::l1_source_handler::l1_source_handler__l1_source_mgrP"></span><span class="target" id="classeos_1_1l1__source__handler_1adb31ae88e1f526704a9437b985fcf0e2"></span><code class="descname">l1_source_handler</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos13l1_source_mgrE" title="eos::l1_source_mgr">l1_source_mgr</a> *<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos17l1_source_handler17l1_source_handlerEP13l1_source_mgr" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4NK3eos17l1_source_handler17get_l1_source_mgrEv">
+<span id="_CPPv3NK3eos17l1_source_handler17get_l1_source_mgrEv"></span><span id="_CPPv2NK3eos17l1_source_handler17get_l1_source_mgrEv"></span><span id="eos::l1_source_handler::get_l1_source_mgrC"></span><span class="target" id="classeos_1_1l1__source__handler_1a511a017ef67cd1bc50b7fcc1611c9ca0"></span><a class="reference internal" href="#_CPPv4N3eos13l1_source_mgrE" title="eos::l1_source_mgr">l1_source_mgr</a> *<code class="descname">get_l1_source_mgr</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos17l1_source_handler17get_l1_source_mgrEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N3eos17l1_source_handler19watch_all_l1_sourceEb">
+<span id="_CPPv3N3eos17l1_source_handler19watch_all_l1_sourceEb"></span><span id="_CPPv2N3eos17l1_source_handler19watch_all_l1_sourceEb"></span><span id="eos::l1_source_handler::watch_all_l1_source__b"></span><span class="target" id="classeos_1_1l1__source__handler_1ac5234a782ab705aead107d294d431ab4"></span>void <code class="descname">watch_all_l1_source</code><span class="sig-paren">(</span>bool<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos17l1_source_handler19watch_all_l1_sourceEb" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Register to receive notification when l1 source config for any interface changes. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N3eos17l1_source_handler15watch_l1_sourceE9intf_id_tb">
+<span id="_CPPv3N3eos17l1_source_handler15watch_l1_sourceE9intf_id_tb"></span><span id="_CPPv2N3eos17l1_source_handler15watch_l1_sourceE9intf_id_tb"></span><span id="eos::l1_source_handler::watch_l1_source__intf_id_t.b"></span><span class="target" id="classeos_1_1l1__source__handler_1a1ecf43463d7abaa0b9f5ddee0964a456"></span>void <code class="descname">watch_l1_source</code><span class="sig-paren">(</span><a class="reference internal" href="intf.html#_CPPv4N3eos9intf_id_tE" title="eos::intf_id_t">intf_id_t</a>, bool<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos17l1_source_handler15watch_l1_sourceE9intf_id_tb" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Register to receive notification when l1 source config of an interface changes. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N3eos17l1_source_handler16on_l1_source_setE9intf_id_t">
+<span id="_CPPv3N3eos17l1_source_handler16on_l1_source_setE9intf_id_t"></span><span id="_CPPv2N3eos17l1_source_handler16on_l1_source_setE9intf_id_t"></span><span id="eos::l1_source_handler::on_l1_source_set__intf_id_t"></span><span class="target" id="classeos_1_1l1__source__handler_1a3b51487f30a530cfc527ce70e449240b"></span><em class="property">virtual</em> void <code class="descname">on_l1_source_set</code><span class="sig-paren">(</span><a class="reference internal" href="intf.html#_CPPv4N3eos9intf_id_tE" title="eos::intf_id_t">intf_id_t</a><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos17l1_source_handler16on_l1_source_setE9intf_id_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Called when l1 source of an interface is set. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N3eos17l1_source_handler16on_l1_source_delE9intf_id_t">
+<span id="_CPPv3N3eos17l1_source_handler16on_l1_source_delE9intf_id_t"></span><span id="_CPPv2N3eos17l1_source_handler16on_l1_source_delE9intf_id_t"></span><span id="eos::l1_source_handler::on_l1_source_del__intf_id_t"></span><span class="target" id="classeos_1_1l1__source__handler_1a128bc9161b9f8e37b84fb85eff966f95"></span><em class="property">virtual</em> void <code class="descname">on_l1_source_del</code><span class="sig-paren">(</span><a class="reference internal" href="intf.html#_CPPv4N3eos9intf_id_tE" title="eos::intf_id_t">intf_id_t</a><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos17l1_source_handler16on_l1_source_delE9intf_id_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Called when l1 source of an interface is removed. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="class">
+<dt id="_CPPv4N3eos16l1_source_iter_tE">
+<span id="_CPPv3N3eos16l1_source_iter_tE"></span><span id="_CPPv2N3eos16l1_source_iter_tE"></span><span id="eos::l1_source_iter_t"></span><span class="target" id="classeos_1_1l1__source__iter__t"></span><em class="property">class </em><code class="descname">l1_source_iter_t</code> : <em class="property">public</em> <a class="reference internal" href="acl.html#_CPPv43eos" title="eos">eos</a>::iter_base&lt;<a class="reference internal" href="intf.html#_CPPv4N3eos9intf_id_tE" title="eos::intf_id_t">intf_id_t</a>, l1_source_iter_impl&gt;<a class="headerlink" href="#_CPPv4N3eos16l1_source_iter_tE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><em>#include &lt;l1_source.h&gt;</em><p>An iterator that yields a <a class="reference internal" href="intf.html#classeos_1_1intf__id__t"><span class="std std-ref">intf_id_t</span></a> for each l1 source config/status. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Private Functions</p>
+<dl class="function">
+<dt id="_CPPv4N3eos16l1_source_iter_t16l1_source_iter_tEPC19l1_source_iter_impl">
+<span id="_CPPv3N3eos16l1_source_iter_t16l1_source_iter_tEPC19l1_source_iter_impl"></span><span id="_CPPv2N3eos16l1_source_iter_t16l1_source_iter_tEPC19l1_source_iter_impl"></span><span id="eos::l1_source_iter_t::l1_source_iter_t__l1_source_iter_implPC"></span><span class="target" id="classeos_1_1l1__source__iter__t_1a4aa3816900b8f758dd4674482f4fba0f"></span><code class="descname">l1_source_iter_t</code><span class="sig-paren">(</span>l1_source_iter_impl *<em class="property">const</em> <span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos16l1_source_iter_t16l1_source_iter_tEPC19l1_source_iter_impl" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Friends</p>
+<dl class="function">
+<dt>
+<span class="target" id="classeos_1_1l1__source__iter__t_1ab5e492e5bf8d12723e57554f8388319f"></span><em class="property">friend </em><code class="descname">eos::l1_source_iter_impl</code></dt>
+<dd></dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="class">
+<dt id="_CPPv4N3eos13l1_source_mgrE">
+<span id="_CPPv3N3eos13l1_source_mgrE"></span><span id="_CPPv2N3eos13l1_source_mgrE"></span><span id="eos::l1_source_mgr"></span><span class="target" id="classeos_1_1l1__source__mgr"></span><em class="property">class </em><code class="descname">l1_source_mgr</code> : <em class="property">public</em> <a class="reference internal" href="acl.html#_CPPv43eos" title="eos">eos</a>::base_mgr&lt;<a class="reference internal" href="#_CPPv4N3eos17l1_source_handlerE" title="eos::l1_source_handler">l1_source_handler</a>, <a class="reference internal" href="intf.html#_CPPv4N3eos9intf_id_tE" title="eos::intf_id_t">intf_id_t</a>&gt;<a class="headerlink" href="#_CPPv4N3eos13l1_source_mgrE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><em>#include &lt;l1_source.h&gt;</em><p>The l1 source manager. This class inspects and configures l1 source for an interface. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="function">
+<dt id="_CPPv4N3eos13l1_source_mgrD0Ev">
+<span id="_CPPv3N3eos13l1_source_mgrD0Ev"></span><span id="_CPPv2N3eos13l1_source_mgrD0Ev"></span><span id="eos::l1_source_mgr::~l1_source_mgr"></span><span class="target" id="classeos_1_1l1__source__mgr_1a090b5f99e404155ebc6a77506bc23a20"></span><em class="property">virtual</em> <code class="descname">~l1_source_mgr</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos13l1_source_mgrD0Ev" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N3eos13l1_source_mgr12l1_source_isE9intf_id_t11l1_source_t">
+<span id="_CPPv3N3eos13l1_source_mgr12l1_source_isE9intf_id_t11l1_source_t"></span><span id="_CPPv2N3eos13l1_source_mgr12l1_source_isE9intf_id_t11l1_source_t"></span><span id="eos::l1_source_mgr::l1_source_is__intf_id_t.l1_source_t"></span><span class="target" id="classeos_1_1l1__source__mgr_1ad49a8cd7d10238a57043a98a8fa706c2"></span><em class="property">virtual</em> void <code class="descname">l1_source_is</code><span class="sig-paren">(</span><a class="reference internal" href="intf.html#_CPPv4N3eos9intf_id_tE" title="eos::intf_id_t">intf_id_t</a>, <a class="reference internal" href="#_CPPv4N3eos11l1_source_tE" title="eos::l1_source_t">l1_source_t</a> <em>source</em><span class="sig-paren">)</span> = 0<a class="headerlink" href="#_CPPv4N3eos13l1_source_mgr12l1_source_isE9intf_id_t11l1_source_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Configures l1 source of an interface. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N3eos13l1_source_mgr13l1_source_delE9intf_id_t">
+<span id="_CPPv3N3eos13l1_source_mgr13l1_source_delE9intf_id_t"></span><span id="_CPPv2N3eos13l1_source_mgr13l1_source_delE9intf_id_t"></span><span id="eos::l1_source_mgr::l1_source_del__intf_id_t"></span><span class="target" id="classeos_1_1l1__source__mgr_1abbe9d7d3b9d4d4ca3ca588aa52bb8b7c"></span><em class="property">virtual</em> void <code class="descname">l1_source_del</code><span class="sig-paren">(</span><a class="reference internal" href="intf.html#_CPPv4N3eos9intf_id_tE" title="eos::intf_id_t">intf_id_t</a><span class="sig-paren">)</span> = 0<a class="headerlink" href="#_CPPv4N3eos13l1_source_mgr13l1_source_delE9intf_id_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Remove the l1 source of an interface. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4NK3eos13l1_source_mgr6existsE9intf_id_t">
+<span id="_CPPv3NK3eos13l1_source_mgr6existsE9intf_id_t"></span><span id="_CPPv2NK3eos13l1_source_mgr6existsE9intf_id_t"></span><span id="eos::l1_source_mgr::exists__intf_id_tC"></span><span class="target" id="classeos_1_1l1__source__mgr_1a94924ece548b7ee48f74551397f14bf3"></span><em class="property">virtual</em> bool <code class="descname">exists</code><span class="sig-paren">(</span><a class="reference internal" href="intf.html#_CPPv4N3eos9intf_id_tE" title="eos::intf_id_t">intf_id_t</a><span class="sig-paren">)</span> <em class="property">const</em> = 0<a class="headerlink" href="#_CPPv4NK3eos13l1_source_mgr6existsE9intf_id_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Returns whether a l1 source config exists for the interface. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N3eos13l1_source_mgr16l1_source_configE9intf_id_t">
+<span id="_CPPv3N3eos13l1_source_mgr16l1_source_configE9intf_id_t"></span><span id="_CPPv2N3eos13l1_source_mgr16l1_source_configE9intf_id_t"></span><span id="eos::l1_source_mgr::l1_source_config__intf_id_t"></span><span class="target" id="classeos_1_1l1__source__mgr_1a9614901541e26abf23759f0ec3c9c327"></span><em class="property">virtual</em> <a class="reference internal" href="#_CPPv4N3eos11l1_source_tE" title="eos::l1_source_t">l1_source_t</a> <code class="descname">l1_source_config</code><span class="sig-paren">(</span><a class="reference internal" href="intf.html#_CPPv4N3eos9intf_id_tE" title="eos::intf_id_t">intf_id_t</a><span class="sig-paren">)</span> = 0<a class="headerlink" href="#_CPPv4N3eos13l1_source_mgr16l1_source_configE9intf_id_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Returns the source config for an interface. If no source config is set, returns the default source config. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N3eos13l1_source_mgr16l1_source_statusE9intf_id_t">
+<span id="_CPPv3N3eos13l1_source_mgr16l1_source_statusE9intf_id_t"></span><span id="_CPPv2N3eos13l1_source_mgr16l1_source_statusE9intf_id_t"></span><span id="eos::l1_source_mgr::l1_source_status__intf_id_t"></span><span class="target" id="classeos_1_1l1__source__mgr_1ae215c9917afb0245fdeec44bafd0b8e7"></span><em class="property">virtual</em> <a class="reference internal" href="#_CPPv4N3eos11l1_source_tE" title="eos::l1_source_t">l1_source_t</a> <code class="descname">l1_source_status</code><span class="sig-paren">(</span><a class="reference internal" href="intf.html#_CPPv4N3eos9intf_id_tE" title="eos::intf_id_t">intf_id_t</a><span class="sig-paren">)</span> = 0<a class="headerlink" href="#_CPPv4N3eos13l1_source_mgr16l1_source_statusE9intf_id_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Returns the source status for an interface. If no source status exists, returns the default source status. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4NK3eos13l1_source_mgr21l1_source_config_iterEv">
+<span id="_CPPv3NK3eos13l1_source_mgr21l1_source_config_iterEv"></span><span id="_CPPv2NK3eos13l1_source_mgr21l1_source_config_iterEv"></span><span id="eos::l1_source_mgr::l1_source_config_iterC"></span><span class="target" id="classeos_1_1l1__source__mgr_1a3136351af7660e8e9212128ff472f0a9"></span><em class="property">virtual</em> <a class="reference internal" href="#_CPPv4N3eos16l1_source_iter_tE" title="eos::l1_source_iter_t">l1_source_iter_t</a> <code class="descname">l1_source_config_iter</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em> = 0<a class="headerlink" href="#_CPPv4NK3eos13l1_source_mgr21l1_source_config_iterEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Iterator for l1 source configuration. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4NK3eos13l1_source_mgr21l1_source_status_iterEv">
+<span id="_CPPv3NK3eos13l1_source_mgr21l1_source_status_iterEv"></span><span id="_CPPv2NK3eos13l1_source_mgr21l1_source_status_iterEv"></span><span id="eos::l1_source_mgr::l1_source_status_iterC"></span><span class="target" id="classeos_1_1l1__source__mgr_1a5eeeffa3fdd53ff452f40b86dae87ee7"></span><em class="property">virtual</em> <a class="reference internal" href="#_CPPv4N3eos16l1_source_iter_tE" title="eos::l1_source_iter_t">l1_source_iter_t</a> <code class="descname">l1_source_status_iter</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em> = 0<a class="headerlink" href="#_CPPv4NK3eos13l1_source_mgr21l1_source_status_iterEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Iterator for l1 source status. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N3eos13l1_source_mgr18app_description_isE9intf_id_tNSt6stringE">
+<span id="_CPPv3N3eos13l1_source_mgr18app_description_isE9intf_id_tNSt6stringE"></span><span id="_CPPv2N3eos13l1_source_mgr18app_description_isE9intf_id_tNSt6stringE"></span><span id="eos::l1_source_mgr::app_description_is__intf_id_t.ss"></span><span class="target" id="classeos_1_1l1__source__mgr_1a0ac8fbd6a653bf9a8ad37f1bf2438da8"></span><em class="property">virtual</em> void <code class="descname">app_description_is</code><span class="sig-paren">(</span><a class="reference internal" href="intf.html#_CPPv4N3eos9intf_id_tE" title="eos::intf_id_t">intf_id_t</a>, <a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::string<span class="sig-paren">)</span> = 0<a class="headerlink" href="#_CPPv4N3eos13l1_source_mgr18app_description_isE9intf_id_tNSt6stringE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Configures the description of an application interface. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N3eos13l1_source_mgr19app_description_delE9intf_id_t">
+<span id="_CPPv3N3eos13l1_source_mgr19app_description_delE9intf_id_t"></span><span id="_CPPv2N3eos13l1_source_mgr19app_description_delE9intf_id_t"></span><span id="eos::l1_source_mgr::app_description_del__intf_id_t"></span><span class="target" id="classeos_1_1l1__source__mgr_1a2ea71bc0ca0a69b802ad238d73524f99"></span><em class="property">virtual</em> void <code class="descname">app_description_del</code><span class="sig-paren">(</span><a class="reference internal" href="intf.html#_CPPv4N3eos9intf_id_tE" title="eos::intf_id_t">intf_id_t</a><span class="sig-paren">)</span> = 0<a class="headerlink" href="#_CPPv4N3eos13l1_source_mgr19app_description_delE9intf_id_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Remove the description of an application interface. </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Protected Functions</p>
+<dl class="function">
+<dt id="_CPPv4N3eos13l1_source_mgr13l1_source_mgrEv">
+<span id="_CPPv3N3eos13l1_source_mgr13l1_source_mgrEv"></span><span id="_CPPv2N3eos13l1_source_mgr13l1_source_mgrEv"></span><span id="eos::l1_source_mgr::l1_source_mgr"></span><span class="target" id="classeos_1_1l1__source__mgr_1aaf9e3ca7ba797e3430dc7c910414bf98"></span><code class="descname">l1_source_mgr</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos13l1_source_mgr13l1_source_mgrEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Private Members</p>
+<dl class="member">
+<dt>
+<span class="target" id="classeos_1_1l1__source__mgr_1aa5ebb5d756e4bc97ae3839837c8271d1"></span><code class="descname">eos::l1_source_mgr::l1_source_mgr</code></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Friends</p>
+<dl class="function">
+<dt>
+<span class="target" id="classeos_1_1l1__source__mgr_1a1ff042beb3e7fbecb88965d88b6577c0"></span><em class="property">friend </em><code class="descname">eos::l1_source_handler</code></dt>
+<dd></dd></dl>
+
+</div>
+</dd></dl>
+
+</dd></dl>
+
+<div class="section" id="type-definitions-in-l1-source">
+<h2>Type definitions in <strong>l1_source</strong><a class="headerlink" href="#type-definitions-in-l1-source" title="Permalink to this headline">¶</a></h2>
+<dl class="type">
+<dt id="_CPPv43eos">
+<span id="_CPPv33eos"></span><span id="_CPPv23eos"></span><span class="target" id="namespaceeos"></span><em class="property">namespace </em><code class="descname">eos</code><br /></dt>
+<dd><div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Enums</p>
+<dl class="enum">
+<dt id="_CPPv4N3eos16l1_source_type_tE">
+<span id="_CPPv3N3eos16l1_source_type_tE"></span><span id="_CPPv2N3eos16l1_source_type_tE"></span><span class="target" id="namespaceeos_1a4fa0c42d994b0839cef137f2c720c68f"></span><em class="property">enum </em><code class="descname">l1_source_type_t</code><a class="headerlink" href="#_CPPv4N3eos16l1_source_type_tE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>The type of an l1 source. </p>
+<p><em>Values:</em></p>
+<dl class="enumerator">
+<dt id="_CPPv4N3eos7unknownE">
+<span id="_CPPv3N3eos7unknownE"></span><span id="_CPPv2N3eos7unknownE"></span><span class="target" id="namespaceeos_1a4fa0c42d994b0839cef137f2c720c68faf38bc357f6e68b08e91407d970abb39c"></span><code class="descname">unknown</code><a class="headerlink" href="#_CPPv4N3eos7unknownE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="enumerator">
+<dt id="_CPPv4N3eos4noneE">
+<span id="_CPPv3N3eos4noneE"></span><span id="_CPPv2N3eos4noneE"></span><span class="target" id="namespaceeos_1a4fa0c42d994b0839cef137f2c720c68fa53e397f99c9f668605a6730386921ae6"></span><code class="descname">none</code><a class="headerlink" href="#_CPPv4N3eos4noneE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="enumerator">
+<dt id="_CPPv4N3eos4portE">
+<span id="_CPPv3N3eos4portE"></span><span id="_CPPv2N3eos4portE"></span><span class="target" id="namespaceeos_1a4fa0c42d994b0839cef137f2c720c68fa4667d14f5d2ac86c8310929c8e16eb48"></span><code class="descname">port</code><a class="headerlink" href="#_CPPv4N3eos4portE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="enumerator">
+<dt id="_CPPv4N3eos3macE">
+<span id="_CPPv3N3eos3macE"></span><span id="_CPPv2N3eos3macE"></span><span class="target" id="namespaceeos_1a4fa0c42d994b0839cef137f2c720c68fa34fd997568b14f87d4cb3c18c9c4541b"></span><code class="descname">mac</code><a class="headerlink" href="#_CPPv4N3eos3macE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="enumerator">
+<dt id="_CPPv4N3eos10switchPortE">
+<span id="_CPPv3N3eos10switchPortE"></span><span id="_CPPv2N3eos10switchPortE"></span><span class="target" id="namespaceeos_1a4fa0c42d994b0839cef137f2c720c68fa012950295c81c191e7c92feb93d457f1"></span><code class="descname">switchPort</code><a class="headerlink" href="#_CPPv4N3eos10switchPortE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<dl class="class">
+<dt id="_CPPv4N3eos11l1_source_tE">
+<span id="_CPPv3N3eos11l1_source_tE"></span><span id="_CPPv2N3eos11l1_source_tE"></span><span id="eos::l1_source_t"></span><span class="target" id="classeos_1_1l1__source__t"></span><em class="property">class </em><code class="descname">l1_source_t</code><a class="headerlink" href="#_CPPv4N3eos11l1_source_tE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><em>#include &lt;l1_source.h&gt;</em><p>L1 source class.</p>
+<p>The interface id “port” should be defined only if l1 source type is port. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="function">
+<dt id="_CPPv4N3eos11l1_source_t11l1_source_tEv">
+<span id="_CPPv3N3eos11l1_source_t11l1_source_tEv"></span><span id="_CPPv2N3eos11l1_source_t11l1_source_tEv"></span><span id="eos::l1_source_t::l1_source_t"></span><span class="target" id="classeos_1_1l1__source__t_1a828027cf194d86bd3092d9da657f4d69"></span><code class="descname">l1_source_t</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos11l1_source_t11l1_source_tEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Default constructor. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N3eos11l1_source_t11l1_source_tE16l1_source_type_t">
+<span id="_CPPv3N3eos11l1_source_t11l1_source_tE16l1_source_type_t"></span><span id="_CPPv2N3eos11l1_source_t11l1_source_tE16l1_source_type_t"></span><span id="eos::l1_source_t::l1_source_t__l1_source_type_t"></span><span class="target" id="classeos_1_1l1__source__t_1a05e8ea414e8f08327911f7c8864acde9"></span><code class="descname">l1_source_t</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos16l1_source_type_tE" title="eos::l1_source_type_t">l1_source_type_t</a> <em>l1_source_type</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos11l1_source_t11l1_source_tE16l1_source_type_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Constructor specifying only l1 source type. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N3eos11l1_source_t11l1_source_tE16l1_source_type_t9intf_id_t">
+<span id="_CPPv3N3eos11l1_source_t11l1_source_tE16l1_source_type_t9intf_id_t"></span><span id="_CPPv2N3eos11l1_source_t11l1_source_tE16l1_source_type_t9intf_id_t"></span><span id="eos::l1_source_t::l1_source_t__l1_source_type_t.intf_id_t"></span><span class="target" id="classeos_1_1l1__source__t_1a9381fa8b7a79908c4c5252a540750611"></span><code class="descname">l1_source_t</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos16l1_source_type_tE" title="eos::l1_source_type_t">l1_source_type_t</a> <em>l1_source_type</em>, <a class="reference internal" href="intf.html#_CPPv4N3eos9intf_id_tE" title="eos::intf_id_t">intf_id_t</a> <em>port</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos11l1_source_t11l1_source_tE16l1_source_type_t9intf_id_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Constructor specifying both l1 source type and interface id. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N3eos11l1_source_t11l1_source_tERK11l1_source_t">
+<span id="_CPPv3N3eos11l1_source_t11l1_source_tERK11l1_source_t"></span><span id="_CPPv2N3eos11l1_source_t11l1_source_tERK11l1_source_t"></span><span id="eos::l1_source_t::l1_source_t__l1_source_tCR"></span><span class="target" id="classeos_1_1l1__source__t_1a4305f504a1b4c6524a5f4324aa3a6cf4"></span><code class="descname">l1_source_t</code><span class="sig-paren">(</span><em class="property">const</em> <a class="reference internal" href="#_CPPv4N3eos11l1_source_t11l1_source_tEv" title="eos::l1_source_t::l1_source_t">l1_source_t</a> &amp;<em>other</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos11l1_source_t11l1_source_tERK11l1_source_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N3eos11l1_source_taSERK11l1_source_t">
+<span id="_CPPv3N3eos11l1_source_taSERK11l1_source_t"></span><span id="_CPPv2N3eos11l1_source_taSERK11l1_source_t"></span><span id="eos::l1_source_t::assign-operator__l1_source_tCR"></span><span class="target" id="classeos_1_1l1__source__t_1ac84eae170d8d8fe39b7346809175f4bf"></span><a class="reference internal" href="#_CPPv4N3eos11l1_source_tE" title="eos::l1_source_t">l1_source_t</a> &amp;<code class="descname">operator=</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos11l1_source_tE" title="eos::l1_source_t">l1_source_t</a> <em class="property">const</em> &amp;<em>other</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos11l1_source_taSERK11l1_source_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4NK3eos11l1_source_t14l1_source_typeEv">
+<span id="_CPPv3NK3eos11l1_source_t14l1_source_typeEv"></span><span id="_CPPv2NK3eos11l1_source_t14l1_source_typeEv"></span><span id="eos::l1_source_t::l1_source_typeC"></span><span class="target" id="classeos_1_1l1__source__t_1a96aa21b855b46f66243f5b27c76e8e7c"></span><a class="reference internal" href="#_CPPv4N3eos16l1_source_type_tE" title="eos::l1_source_type_t">l1_source_type_t</a> <code class="descname">l1_source_type</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos11l1_source_t14l1_source_typeEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N3eos11l1_source_t17l1_source_type_isE16l1_source_type_t">
+<span id="_CPPv3N3eos11l1_source_t17l1_source_type_isE16l1_source_type_t"></span><span id="_CPPv2N3eos11l1_source_t17l1_source_type_isE16l1_source_type_t"></span><span id="eos::l1_source_t::l1_source_type_is__l1_source_type_t"></span><span class="target" id="classeos_1_1l1__source__t_1a9709cb1663072cee8bc57dac59a636ff"></span>void <code class="descname">l1_source_type_is</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos16l1_source_type_tE" title="eos::l1_source_type_t">l1_source_type_t</a> <em>l1_source_type</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos11l1_source_t17l1_source_type_isE16l1_source_type_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4NK3eos11l1_source_t4portEv">
+<span id="_CPPv3NK3eos11l1_source_t4portEv"></span><span id="_CPPv2NK3eos11l1_source_t4portEv"></span><span id="eos::l1_source_t::portC"></span><span class="target" id="classeos_1_1l1__source__t_1a1906c74d6e5ce3a1519121ea186237da"></span><a class="reference internal" href="intf.html#_CPPv4N3eos9intf_id_tE" title="eos::intf_id_t">intf_id_t</a> <code class="descname">port</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos11l1_source_t4portEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N3eos11l1_source_t7port_isE9intf_id_t">
+<span id="_CPPv3N3eos11l1_source_t7port_isE9intf_id_t"></span><span id="_CPPv2N3eos11l1_source_t7port_isE9intf_id_t"></span><span id="eos::l1_source_t::port_is__intf_id_t"></span><span class="target" id="classeos_1_1l1__source__t_1af84a646e944d36dc293d7b4561139086"></span>void <code class="descname">port_is</code><span class="sig-paren">(</span><a class="reference internal" href="intf.html#_CPPv4N3eos9intf_id_tE" title="eos::intf_id_t">intf_id_t</a> <em>port</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos11l1_source_t7port_isE9intf_id_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4NK3eos11l1_source_teqERK11l1_source_t">
+<span id="_CPPv3NK3eos11l1_source_teqERK11l1_source_t"></span><span id="_CPPv2NK3eos11l1_source_teqERK11l1_source_t"></span><span id="eos::l1_source_t::eq-operator__l1_source_tCRC"></span><span class="target" id="classeos_1_1l1__source__t_1a15eaa18edc38932b7f4381c0ee45071e"></span>bool <code class="descname">operator==</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos11l1_source_tE" title="eos::l1_source_t">l1_source_t</a> <em class="property">const</em> &amp;<em>other</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos11l1_source_teqERK11l1_source_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4NK3eos11l1_source_tneERK11l1_source_t">
+<span id="_CPPv3NK3eos11l1_source_tneERK11l1_source_t"></span><span id="_CPPv2NK3eos11l1_source_tneERK11l1_source_t"></span><span id="eos::l1_source_t::neq-operator__l1_source_tCRC"></span><span class="target" id="classeos_1_1l1__source__t_1a66883fbc0fb4f0090e143d067685f243"></span>bool <code class="descname">operator!=</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos11l1_source_tE" title="eos::l1_source_t">l1_source_t</a> <em class="property">const</em> &amp;<em>other</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos11l1_source_tneERK11l1_source_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4NK3eos11l1_source_tltERK11l1_source_t">
+<span id="_CPPv3NK3eos11l1_source_tltERK11l1_source_t"></span><span id="_CPPv2NK3eos11l1_source_tltERK11l1_source_t"></span><span id="eos::l1_source_t::lt-operator__l1_source_tCRC"></span><span class="target" id="classeos_1_1l1__source__t_1a13c3edb1fee6d49c38eb95346921d234"></span>bool <code class="descname">operator&lt;</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos11l1_source_tE" title="eos::l1_source_t">l1_source_t</a> <em class="property">const</em> &amp;<em>other</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos11l1_source_tltERK11l1_source_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4NK3eos11l1_source_t4hashEv">
+<span id="_CPPv3NK3eos11l1_source_t4hashEv"></span><span id="_CPPv2NK3eos11l1_source_t4hashEv"></span><span id="eos::l1_source_t::hashC"></span><span class="target" id="classeos_1_1l1__source__t_1a0d2006fd5088031dbf0fbe344d192946"></span>uint32_t <code class="descname">hash</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos11l1_source_t4hashEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>The hash function for type <a class="reference internal" href="#classeos_1_1l1__source__t"><span class="std std-ref">l1_source_t</span></a>. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4NK3eos11l1_source_t6mix_meER8hash_mix">
+<span id="_CPPv3NK3eos11l1_source_t6mix_meER8hash_mix"></span><span id="_CPPv2NK3eos11l1_source_t6mix_meER8hash_mix"></span><span id="eos::l1_source_t::mix_me__hash_mixRC"></span><span class="target" id="classeos_1_1l1__source__t_1ac9eeb60043104bed7f6fb40af175aa79"></span>void <code class="descname">mix_me</code><span class="sig-paren">(</span><a class="reference internal" href="hash_mix.html#_CPPv4N3eos8hash_mixE" title="eos::hash_mix">hash_mix</a> &amp;<em>h</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos11l1_source_t6mix_meER8hash_mix" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>The hash mix function for type <a class="reference internal" href="#classeos_1_1l1__source__t"><span class="std std-ref">l1_source_t</span></a>. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4NK3eos11l1_source_t9to_stringEv">
+<span id="_CPPv3NK3eos11l1_source_t9to_stringEv"></span><span id="_CPPv2NK3eos11l1_source_t9to_stringEv"></span><span id="eos::l1_source_t::to_stringC"></span><span class="target" id="classeos_1_1l1__source__t_1aa8afd800651e010edce6ee81d4c9a09b"></span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::string <code class="descname">to_string</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos11l1_source_t9to_stringEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Returns a string representation of the current object’s values. </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Private Members</p>
+<dl class="member">
+<dt id="_CPPv4N3eos11l1_source_t5pimplE">
+<span id="_CPPv3N3eos11l1_source_t5pimplE"></span><span id="_CPPv2N3eos11l1_source_t5pimplE"></span><span id="eos::l1_source_t::pimpl__std::shared_ptr:l1_source_impl_t:"></span><span class="target" id="classeos_1_1l1__source__t_1ad859401569c2a8c190bc1e07b555c087"></span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::shared_ptr&lt;<a class="reference internal" href="l1_source_impl.html#_CPPv4N3eos16l1_source_impl_tE" title="eos::l1_source_impl_t">l1_source_impl_t</a>&gt; <code class="descname">pimpl</code><a class="headerlink" href="#_CPPv4N3eos11l1_source_t5pimplE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Friends</p>
+<dl class="function">
+<dt id="_CPPv4lsRNSt7ostreamERK11l1_source_t">
+<span id="_CPPv3lsRNSt7ostreamERK11l1_source_t"></span><span id="_CPPv2lsRNSt7ostreamERK11l1_source_t"></span><span id="lshift-operator__osR.l1_source_tCR"></span><span class="target" id="classeos_1_1l1__source__t_1a7065d6ece1c94cec32a0525a72d78955"></span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::ostream &amp;<code class="descname">operator&lt;&lt;</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::ostream &amp;<em>os</em>, <em class="property">const</em> l1_source_t &amp;<em>obj</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4lsRNSt7ostreamERK11l1_source_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>A utility stream operator that adds a string representation of <a class="reference internal" href="#classeos_1_1l1__source__t"><span class="std std-ref">l1_source_t</span></a> to the ostream. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#"><strong>l1_source</strong></a><ul>
+<li><a class="reference internal" href="#type-definitions-in-l1-source">Type definitions in <strong>l1_source</strong></a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="iterator.html"
+                        title="previous chapter"><strong>iterator</strong></a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="l1_source_impl.html"
+                        title="next chapter"><strong>l1_source_impl</strong></a></p>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="l1_source_impl.html" title="l1_source_impl"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="iterator.html" title="iterator"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Arista EOS SDK 2.22.1 reference</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2014, Arista Networks.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.4.
+    </div>
+  </body>
+</html>

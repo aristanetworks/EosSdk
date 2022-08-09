@@ -1,0 +1,45 @@
+
+Arista EOS SDK reference guide
+==============================
+
+The Arista EOS SDK allows development of high performance on switch
+agents that react to and interact directly with EOS. These agents can
+bridge feature configuration with existing systems or provide
+automated system maintenance facilities due to the SDK's state based
+programming approach. Refer to the EOS SDK wiki_ for more information
+including example code using the SDK.
+
+Switch management modules
+-------------------------
+
+The SDK is split up into modules that manage one particular part of
+the system, such as the ``intf`` module for generic interface management
+(admin state, description) or the ``acl`` module for configuration of
+Access Control Lists. Each module consists of a module manager class,
+such as ``eos::intf_mgr``. Modules that provide notifications also have
+a handler class, e.g., ``eos::intf_handler``. Handler sub-classes are
+provided by your implementation and provide the notification callbacks
+for notifications from EOS.
+
+| :doc:`acl` | :doc:`acl_impl` | :doc:`aresolve_impl` | :doc:`bfd` | :doc:`bfd_impl` | :doc:`bgp` | :doc:`bgp_impl` | :doc:`bgp_path` | :doc:`bgp_path_impl` | :doc:`class_map` | :doc:`class_map_impl` | :doc:`decap_group` | :doc:`decap_group_impl` | :doc:`directflow` | :doc:`directflow_impl` | :doc:`eapi` | :doc:`eapi_impl` | :doc:`eth` | :doc:`eth_impl` | :doc:`eth_intf` | :doc:`eth_intf_impl` | :doc:`eth_lag_intf` | :doc:`eth_lag_intf_impl` | :doc:`eth_phy_intf` | :doc:`eth_phy_intf_impl` | :doc:`fib` | :doc:`fib_impl` | :doc:`fpga` | :doc:`fpga_impl` | :doc:`ham` | :doc:`ham_impl` | :doc:`hardware_table` | :doc:`hardware_table_impl` | :doc:`intf` | :doc:`intf_impl` | :doc:`ip` | :doc:`ip_impl` | :doc:`ip_intf` | :doc:`ip_route` | :doc:`ip_route_impl` | :doc:`l1_source` | :doc:`l1_source_impl` | :doc:`lldp` | :doc:`lldp_impl` | :doc:`mac_table` | :doc:`mac_table_impl` | :doc:`macsec` | :doc:`macsec_impl` | :doc:`mlag` | :doc:`mlag_impl` | :doc:`mpls` | :doc:`mpls_impl` | :doc:`mpls_route` | :doc:`mpls_route_impl` | :doc:`mpls_vrf_label` | :doc:`mpls_vrf_label_impl` | :doc:`neighbor_table` | :doc:`neighbor_table_impl` | :doc:`nexthop_group` | :doc:`nexthop_group_impl` | :doc:`nexthop_group_tunnel` | :doc:`nexthop_group_tunnel_impl` | :doc:`policy_map` | :doc:`policy_map_impl` | :doc:`route_map` | :doc:`route_map_impl` | :doc:`sdk_impl` | :doc:`subintf` | :doc:`subintf_impl` | :doc:`vrf` | :doc:`vrf_impl` | :doc:`xcvr` 
+
+
+Infrastructure modules
+----------------------
+
+In addition, there are a number of framework modules that provide
+access to the SDK components (``sdk``), offer an asynchronous
+file-descriptor interface for use with asynchronous networking
+libraries (``fd``) and provide debug logging facilities (``tracing``).
+
+| :doc:`agent` | :doc:`aresolve` | :doc:`base` | :doc:`base_handler` | :doc:`base_mgr` | :doc:`event_loop` | :doc:`exception` | :doc:`fd` | :doc:`hash_mix` | :doc:`iterator` | :doc:`panic` | :doc:`sdk` | :doc:`system` | :doc:`timer` | :doc:`tracing` | :doc:`utility` | :doc:`version` 
+
+
+.. toctree::
+   :hidden:
+   :glob:
+
+   **
+
+
+.. _wiki: https://github.com/aristanetworks/EosSdk/wiki

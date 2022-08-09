@@ -1,0 +1,13 @@
+**acl**
+-------
+
+
+.. doxygenfile:: eos/acl.h
+   :project: eossdk
+
+Type definitions in **acl**
+^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. doxygenfile:: eos/types/acl.h
+   :project: eossdk
+
