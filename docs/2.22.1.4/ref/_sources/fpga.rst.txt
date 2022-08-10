@@ -1,0 +1,13 @@
+**fpga**
+--------
+
+
+.. doxygenfile:: eos/fpga.h
+   :project: eossdk
+
+Type definitions in **fpga**
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. doxygenfile:: eos/types/fpga.h
+   :project: eossdk
+

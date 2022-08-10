@@ -1,0 +1,13 @@
+**route_map_impl**
+------------------
+
+
+.. doxygenfile:: eos/route_map_impl.h
+   :project: eossdk
+
+Type definitions in **route_map_impl**
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. doxygenfile:: eos/types/route_map_impl.h
+   :project: eossdk
+

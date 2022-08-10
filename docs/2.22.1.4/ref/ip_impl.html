@@ -1,0 +1,215 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>ip_impl &#8212; Arista EOS SDK 2.22.1 reference</title>
+    <link rel="stylesheet" href="_static/eossdk.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/language_data.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="ip_intf" href="ip_intf.html" />
+    <link rel="prev" title="ip" href="ip.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="ip_intf.html" title="ip_intf"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="ip.html" title="ip"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Arista EOS SDK 2.22.1 reference</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="ip-impl">
+<h1><strong>ip_impl</strong><a class="headerlink" href="#ip-impl" title="Permalink to this headline">¶</a></h1>
+<div class="admonition warning">
+<p class="first admonition-title">Warning</p>
+<p class="last">doxygenfile: Cannot find file “eos/ip_impl.h </p>
+</div>
+<div class="section" id="type-definitions-in-ip-impl">
+<h2>Type definitions in <strong>ip_impl</strong><a class="headerlink" href="#type-definitions-in-ip-impl" title="Permalink to this headline">¶</a></h2>
+<dl class="type">
+<dt id="_CPPv43eos">
+<span id="_CPPv33eos"></span><span id="_CPPv23eos"></span><span id="eos"></span><span class="target" id="namespaceeos"></span><em class="property">namespace </em><code class="descname">eos</code><br /></dt>
+<dd><dl class="class">
+<dt id="_CPPv4N3eos19ip_addr_mask_impl_tE">
+<span id="_CPPv3N3eos19ip_addr_mask_impl_tE"></span><span id="_CPPv2N3eos19ip_addr_mask_impl_tE"></span><span id="eos::ip_addr_mask_impl_t"></span><span class="target" id="classeos_1_1ip__addr__mask__impl__t"></span><em class="property">class </em><code class="descname">ip_addr_mask_impl_t</code><a class="headerlink" href="#_CPPv4N3eos19ip_addr_mask_impl_tE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><em>#include &lt;ip_impl.h&gt;</em><p>An IP address with a subnet mask.</p>
+<p>This allows for contiguous subnet masks only for IPv4 and IPv6 addresses.</p>
+<p>IPv6 addresses in EOS only support contiguous masks, so for IPv6 addresses <a class="reference internal" href="#classeos_1_1ip__addr__mask__impl__t_1a26d550919326d2e7d0102b753739223c"><span class="std std-ref">mask()</span></a> provides the same value as <a class="reference internal" href="#classeos_1_1ip__addr__mask__impl__t_1a9f1e8054ef6e405b8241668c04183422"><span class="std std-ref">mask_length()</span></a>. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="function">
+<dt id="_CPPv4N3eos19ip_addr_mask_impl_t19ip_addr_mask_impl_tEv">
+<span id="_CPPv3N3eos19ip_addr_mask_impl_t19ip_addr_mask_impl_tEv"></span><span id="_CPPv2N3eos19ip_addr_mask_impl_t19ip_addr_mask_impl_tEv"></span><span id="eos::ip_addr_mask_impl_t::ip_addr_mask_impl_t"></span><span class="target" id="classeos_1_1ip__addr__mask__impl__t_1a0dd54d53f7edd334bacc8945e3a22dd3"></span><code class="descname">ip_addr_mask_impl_t</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos19ip_addr_mask_impl_t19ip_addr_mask_impl_tEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N3eos19ip_addr_mask_impl_t19ip_addr_mask_impl_tERK9ip_addr_t7uint8_t">
+<span id="_CPPv3N3eos19ip_addr_mask_impl_t19ip_addr_mask_impl_tERK9ip_addr_t7uint8_t"></span><span id="_CPPv2N3eos19ip_addr_mask_impl_t19ip_addr_mask_impl_tERK9ip_addr_t7uint8_t"></span><span id="eos::ip_addr_mask_impl_t::ip_addr_mask_impl_t__ip_addr_tCR.uint8_t"></span><span class="target" id="classeos_1_1ip__addr__mask__impl__t_1a7397c8bda2e0ec48e96af8b7ed13284c"></span><code class="descname">ip_addr_mask_impl_t</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#_CPPv4N3eos9ip_addr_tE" title="eos::ip_addr_t">ip_addr_t</a> <em class="property">const</em> &amp;<em>addr</em>, uint8_t <em>mask_length</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos19ip_addr_mask_impl_t19ip_addr_mask_impl_tERK9ip_addr_t7uint8_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4NK3eos19ip_addr_mask_impl_t4addrEv">
+<span id="_CPPv3NK3eos19ip_addr_mask_impl_t4addrEv"></span><span id="_CPPv2NK3eos19ip_addr_mask_impl_t4addrEv"></span><span id="eos::ip_addr_mask_impl_t::addrC"></span><span class="target" id="classeos_1_1ip__addr__mask__impl__t_1a4005f055731a66683091664b3333819c"></span><a class="reference internal" href="ip.html#_CPPv4N3eos9ip_addr_tE" title="eos::ip_addr_t">ip_addr_t</a> <code class="descname">addr</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos19ip_addr_mask_impl_t4addrEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Getter for ‘addr’: the address/mask’s IP address. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4NK3eos19ip_addr_mask_impl_t11mask_lengthEv">
+<span id="_CPPv3NK3eos19ip_addr_mask_impl_t11mask_lengthEv"></span><span id="_CPPv2NK3eos19ip_addr_mask_impl_t11mask_lengthEv"></span><span id="eos::ip_addr_mask_impl_t::mask_lengthC"></span><span class="target" id="classeos_1_1ip__addr__mask__impl__t_1a9f1e8054ef6e405b8241668c04183422"></span>uint8_t <code class="descname">mask_length</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos19ip_addr_mask_impl_t11mask_lengthEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Getter for ‘mask_length’: the bit mask length, e.g., 24. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4NK3eos19ip_addr_mask_impl_t2afEv">
+<span id="_CPPv3NK3eos19ip_addr_mask_impl_t2afEv"></span><span id="_CPPv2NK3eos19ip_addr_mask_impl_t2afEv"></span><span id="eos::ip_addr_mask_impl_t::afC"></span><span class="target" id="classeos_1_1ip__addr__mask__impl__t_1ae841407f9a85cad9325a31ac24e17dc9"></span><a class="reference internal" href="ip.html#_CPPv4N3eos4af_tE" title="eos::af_t">af_t</a> <code class="descname">af</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos19ip_addr_mask_impl_t2afEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>The address family of the prefix. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4NK3eos19ip_addr_mask_impl_t4maskEv">
+<span id="_CPPv3NK3eos19ip_addr_mask_impl_t4maskEv"></span><span id="_CPPv2NK3eos19ip_addr_mask_impl_t4maskEv"></span><span id="eos::ip_addr_mask_impl_t::maskC"></span><span class="target" id="classeos_1_1ip__addr__mask__impl__t_1a26d550919326d2e7d0102b753739223c"></span><a class="reference internal" href="base.html#_CPPv4N3eos11uint32_be_tE" title="eos::uint32_be_t">uint32_be_t</a> <code class="descname">mask</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos19ip_addr_mask_impl_t4maskEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>The bit mask itself, e.g., 0xFFFFFF00 (IPv4). For IPv6, same as <a class="reference internal" href="#classeos_1_1ip__addr__mask__impl__t_1a9f1e8054ef6e405b8241668c04183422"><span class="std std-ref">mask_length()</span></a>. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4NK3eos19ip_addr_mask_impl_t9to_stringEv">
+<span id="_CPPv3NK3eos19ip_addr_mask_impl_t9to_stringEv"></span><span id="_CPPv2NK3eos19ip_addr_mask_impl_t9to_stringEv"></span><span id="eos::ip_addr_mask_impl_t::to_stringC"></span><span class="target" id="classeos_1_1ip__addr__mask__impl__t_1a56e832271aca361a5c4865e16364f919"></span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::string <code class="descname">to_string</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos19ip_addr_mask_impl_t9to_stringEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>The IP address and mask as a string, e.g., “192.0.2.1/0xFFFFFF00”. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4NK3eos19ip_addr_mask_impl_teqERK19ip_addr_mask_impl_t">
+<span id="_CPPv3NK3eos19ip_addr_mask_impl_teqERK19ip_addr_mask_impl_t"></span><span id="_CPPv2NK3eos19ip_addr_mask_impl_teqERK19ip_addr_mask_impl_t"></span><span id="eos::ip_addr_mask_impl_t::eq-operator__ip_addr_mask_impl_tCRC"></span><span class="target" id="classeos_1_1ip__addr__mask__impl__t_1a0d78915a6edb0125252ac42b02edc73b"></span>bool <code class="descname">operator==</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos19ip_addr_mask_impl_tE" title="eos::ip_addr_mask_impl_t">ip_addr_mask_impl_t</a> <em class="property">const</em> &amp;<em>other</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos19ip_addr_mask_impl_teqERK19ip_addr_mask_impl_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4NK3eos19ip_addr_mask_impl_tneERK19ip_addr_mask_impl_t">
+<span id="_CPPv3NK3eos19ip_addr_mask_impl_tneERK19ip_addr_mask_impl_t"></span><span id="_CPPv2NK3eos19ip_addr_mask_impl_tneERK19ip_addr_mask_impl_t"></span><span id="eos::ip_addr_mask_impl_t::neq-operator__ip_addr_mask_impl_tCRC"></span><span class="target" id="classeos_1_1ip__addr__mask__impl__t_1a12d44d3a8f9038a659f05e99bf9ad93b"></span>bool <code class="descname">operator!=</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos19ip_addr_mask_impl_tE" title="eos::ip_addr_mask_impl_t">ip_addr_mask_impl_t</a> <em class="property">const</em> &amp;<em>other</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos19ip_addr_mask_impl_tneERK19ip_addr_mask_impl_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4NK3eos19ip_addr_mask_impl_tltERK19ip_addr_mask_impl_t">
+<span id="_CPPv3NK3eos19ip_addr_mask_impl_tltERK19ip_addr_mask_impl_t"></span><span id="_CPPv2NK3eos19ip_addr_mask_impl_tltERK19ip_addr_mask_impl_t"></span><span id="eos::ip_addr_mask_impl_t::lt-operator__ip_addr_mask_impl_tCRC"></span><span class="target" id="classeos_1_1ip__addr__mask__impl__t_1a9cd7f39e8a5a31f4da69b959975f0cf5"></span>bool <code class="descname">operator&lt;</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos19ip_addr_mask_impl_tE" title="eos::ip_addr_mask_impl_t">ip_addr_mask_impl_t</a> <em class="property">const</em> &amp;<em>other</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos19ip_addr_mask_impl_tltERK19ip_addr_mask_impl_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4NK3eos19ip_addr_mask_impl_t4hashEv">
+<span id="_CPPv3NK3eos19ip_addr_mask_impl_t4hashEv"></span><span id="_CPPv2NK3eos19ip_addr_mask_impl_t4hashEv"></span><span id="eos::ip_addr_mask_impl_t::hashC"></span><span class="target" id="classeos_1_1ip__addr__mask__impl__t_1ad41a9e4b5f6ad5eafdbec7eb50516272"></span>uint32_t <code class="descname">hash</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos19ip_addr_mask_impl_t4hashEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>The hash function for type <a class="reference internal" href="ip.html#classeos_1_1ip__addr__mask__t"><span class="std std-ref">ip_addr_mask_t</span></a>. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4NK3eos19ip_addr_mask_impl_t6mix_meER8hash_mix">
+<span id="_CPPv3NK3eos19ip_addr_mask_impl_t6mix_meER8hash_mix"></span><span id="_CPPv2NK3eos19ip_addr_mask_impl_t6mix_meER8hash_mix"></span><span id="eos::ip_addr_mask_impl_t::mix_me__hash_mixRC"></span><span class="target" id="classeos_1_1ip__addr__mask__impl__t_1a1e2282340a080e7f58ed8c12e4a37ccb"></span>void <code class="descname">mix_me</code><span class="sig-paren">(</span><a class="reference internal" href="hash_mix.html#_CPPv4N3eos8hash_mixE" title="eos::hash_mix">hash_mix</a> &amp;<em>h</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos19ip_addr_mask_impl_t6mix_meER8hash_mix" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>The hash mix function for type <a class="reference internal" href="ip.html#classeos_1_1ip__addr__mask__t"><span class="std std-ref">ip_addr_mask_t</span></a>. </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Private Members</p>
+<dl class="member">
+<dt id="_CPPv4N3eos19ip_addr_mask_impl_t5addr_E">
+<span id="_CPPv3N3eos19ip_addr_mask_impl_t5addr_E"></span><span id="_CPPv2N3eos19ip_addr_mask_impl_t5addr_E"></span><span id="eos::ip_addr_mask_impl_t::addr___ip_addr_t"></span><span class="target" id="classeos_1_1ip__addr__mask__impl__t_1a0847a2f4b532e1b328aecd2dfc0ee602"></span><a class="reference internal" href="ip.html#_CPPv4N3eos9ip_addr_tE" title="eos::ip_addr_t">ip_addr_t</a> <code class="descname">addr_</code><a class="headerlink" href="#_CPPv4N3eos19ip_addr_mask_impl_t5addr_E" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="member">
+<dt id="_CPPv4N3eos19ip_addr_mask_impl_t12mask_length_E">
+<span id="_CPPv3N3eos19ip_addr_mask_impl_t12mask_length_E"></span><span id="_CPPv2N3eos19ip_addr_mask_impl_t12mask_length_E"></span><span id="eos::ip_addr_mask_impl_t::mask_length___uint8_t"></span><span class="target" id="classeos_1_1ip__addr__mask__impl__t_1a1d45e6d845b96ad96025eee14907e62b"></span>uint8_t <code class="descname">mask_length_</code><a class="headerlink" href="#_CPPv4N3eos19ip_addr_mask_impl_t12mask_length_E" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Friends</p>
+<dl class="function">
+<dt id="_CPPv4lsRNSt7ostreamERK19ip_addr_mask_impl_t">
+<span id="_CPPv3lsRNSt7ostreamERK19ip_addr_mask_impl_t"></span><span id="_CPPv2lsRNSt7ostreamERK19ip_addr_mask_impl_t"></span><span id="lshift-operator__osR.ip_addr_mask_impl_tCR"></span><span class="target" id="classeos_1_1ip__addr__mask__impl__t_1a5cc918ea3cdc30cc3e5c29d4c0d5233f"></span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::ostream &amp;<code class="descname">operator&lt;&lt;</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::ostream &amp;<em>os</em>, <em class="property">const</em> ip_addr_mask_impl_t &amp;<em>obj</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4lsRNSt7ostreamERK19ip_addr_mask_impl_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>A utility stream operator that adds a string representation of <a class="reference internal" href="ip.html#classeos_1_1ip__addr__mask__t"><span class="std std-ref">ip_addr_mask_t</span></a> to the ostream. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#"><strong>ip_impl</strong></a><ul>
+<li><a class="reference internal" href="#type-definitions-in-ip-impl">Type definitions in <strong>ip_impl</strong></a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="ip.html"
+                        title="previous chapter"><strong>ip</strong></a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="ip_intf.html"
+                        title="next chapter"><strong>ip_intf</strong></a></p>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="ip_intf.html" title="ip_intf"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="ip.html" title="ip"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Arista EOS SDK 2.22.1 reference</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2014, Arista Networks.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.4.
+    </div>
+  </body>
+</html>
