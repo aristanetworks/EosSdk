@@ -466,7 +466,7 @@ class PolicyHandler(eossdk.AgentHandler, eossdk.PolicyMapHandler, eossdk.AclHand
       for name in self.watches_:
          self.watch_policy_map(
             eossdk.PolicyMapKey(name, eossdk.POLICY_FEATURE_PBR), False)
-      self.watches_ = frozenset(six.iterkeys(self.config_.policy))
+      self.watches_ = frozenset(self.config_.policy)
       print( 'Adding new watches for %s' % list(self.config_.policy) )
       for name in self.config_.policy:
          self.watch_policy_map(

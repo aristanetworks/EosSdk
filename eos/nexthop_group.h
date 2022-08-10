@@ -103,6 +103,29 @@ class EOS_SDK_PUBLIC nexthop_group_handler :
    virtual void on_nexthop_group_programmed(std::string const & nexthop_group_name);
 };
 
+/**
+ * This class handles changes to a nexthop group's status and provides its version
+ * ID in the programmed callback.
+ */
+class EOS_SDK_PUBLIC nexthop_group_handler_v2 : public nexthop_group_handler {
+ public:
+   explicit nexthop_group_handler_v2(nexthop_group_mgr *);
+
+   /**
+    * Do not override this function. Instead override the alternative programmed
+    * handler.
+    */
+   virtual void on_nexthop_group_programmed(std::string const & nexthop_group_name)
+      override final {}
+
+    /**
+     * Alternative handler called when a nexthop group is programmed in response to
+     * a configuration change. Provides the nexthop group's version ID.
+     */
+   virtual void on_nexthop_group_programmed(std::string const & nexthop_group_name,
+                                            uint16_t version_id);
+};
+
 class nexthop_group_iter_impl;
 
 // An iterator that yields nexthop group for each configured nexthop group
@@ -196,6 +219,10 @@ class EOS_SDK_PUBLIC nexthop_group_mgr :
    friend class nexthop_group_handler;
  private:
    EOS_SDK_DISALLOW_COPY_CTOR(nexthop_group_mgr);
+ public:
+   // Creates or updates a nexthop group and provides its version ID.
+   virtual void nexthop_group_set(nexthop_group_t const & group,
+                                  uint16_t * version_id) = 0;
 };
 
 } // end namespace eos

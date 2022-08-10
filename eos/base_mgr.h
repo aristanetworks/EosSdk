@@ -57,7 +57,7 @@ class EOS_SDK_PRIVATE base_mgr {        // that don't use key-specific notificat
 
    virtual void add_handler(T *handler) {
       // no specific ordering
-      watchAllHandlers_.insert(std::make_pair(handler, true));
+      watchAllHandlers_[handler] = true;
 
       // The handler is now registered in the "watchAll" set. The key-specific
       // registration needs to be cleaned to avoid calling the handler twice.
@@ -79,7 +79,7 @@ class EOS_SDK_PRIVATE base_mgr {        // that don't use key-specific notificat
             return;
          }
       }
-      keySpecificHandlers_[key].insert(std::make_pair(handler, true));
+      keySpecificHandlers_[key][handler] = true;
    }
 
    virtual void remove_handler(T *handler) {

@@ -28,6 +28,11 @@ policy_map_handler::policy_map_handler(policy_map_mgr * mgr) :
 }
 
 void
+policy_map_handler::watch_all_policy_maps(bool interest) {
+   // TODO: no op impl.
+}
+
+void
 policy_map_handler::watch_policy_map(policy_map_key_t const & key,
                                          bool interest) {
    // TODO: no op impl.

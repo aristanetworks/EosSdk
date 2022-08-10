@@ -12,6 +12,7 @@ except ImportError:
    pass
 %}
 
+%include "cpointer.i"
 %include "stdint.i"
 %include "std_list.i"
 %include "std_map.i"
@@ -97,6 +98,11 @@ typedef uint64_t uint64_be_t;
 %feature("nodirector") eos::timeout_mgr;
 %feature("nodirector") eos::vrf_mgr;
 %feature("nodirector") eos::xcvr_mgr;
+
+// Do not generate Python bindings for the old programmed callback in the extended
+// nexthop group handler class
+%feature("nodirector") eos::nexthop_group_handler_v2::on_nexthop_group_programmed(
+      std::string const &);
 
 %{
 #include "eos/acl.h"
@@ -289,6 +295,10 @@ void throw_py_error(error const& err) {
       return $self->msg();
    }
 };
+
+// This is required to get the version ID when calling nexthop_group_set as it is
+// returned in a uint16_t pointer.
+%pointer_functions(uint16_t, uint16_t_p);
 
 // Pythonify our iterators.
 wrap_iterator(eos::acl_iter_t, eos::acl_iter_impl, eos::acl_key_t);

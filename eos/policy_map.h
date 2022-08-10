@@ -153,17 +153,29 @@ class EOS_SDK_PUBLIC policy_map_handler : public base_handler<policy_map_mgr,
    policy_map_mgr * get_policy_map_mgr() const;
 
    /**
-    * Registers to receive updates on changes to this policy feature.
+    * Registers to receive updates on changes to all policy maps.
     *
-    * @param key The policy feature to receive notifications for
+    * @param interest Receives notifications if and only if true.
+    */
+   void watch_all_policy_maps(bool interest);
+
+   /**
+    * Registers to receive updates on changes to the specified policy map.
+    *
+    * @param key The key identifying the policy map to receive notifications for.
     * @param interest Receives notifications if and only if true.
     */
    void watch_policy_map(policy_map_key_t const & key, bool interest);
+
    /**
-    * Registers to receive updates on changes to this policy feature.
+    * Registers to receive updates on changes to the specified policy map.
     *
-    * @param key The policy feature to receive notifications for
-    * @param agent_name The agent which configures the policy being watched
+    * @deprecated Please use watch_policy_map(policy_map_key_t const & key,
+    * bool interest) instead.
+    *
+    * @param key The key identifying the policy map to receive notifications for.
+    * @param agent_name The agent which configures the policy being watched.
+    *  No longer used.
     * @param interest Receives notifications if and only if true.
     */
    void watch_policy_map(policy_map_key_t const & key,
@@ -230,7 +242,10 @@ class EOS_SDK_PUBLIC policy_map_mgr : public base_mgr<policy_map_handler,
 
    /**
     * Applies or unapplies a policy map on the given interface and direction.
-    * @param policy_map_key_t Name and type of the policy map to [un]apply
+    * @param policy_map_key_t Name and type of the policy map to [un]apply.
+    *  Note: When unapplying a PBR policy map, the specified interface's policy map
+    *  will be unapplied regardless of whether it matches the specified policy map
+    *  name.
     * @param intf_id_t The interface ID of the interface to [un]apply
     *  the policy map.
     * @param acl_direction_t The direction in which to [un]apply the policy map

@@ -41,7 +41,11 @@ class nexthop_group_mgr_impl : public nexthop_group_mgr {
       return true;
    }
 
-   void nexthop_group_set(nexthop_group_t const &group) {
+   void nexthop_group_set(nexthop_group_t const & group) {
+      // TODO: No op impl.
+   }
+
+   void nexthop_group_set(nexthop_group_t const & group, uint16_t * version_id) {
       // TODO: No op impl.
    }
 
@@ -86,6 +90,16 @@ nexthop_group_handler::on_nexthop_group_active(std::string const & group_name,
 
 void
 nexthop_group_handler::on_nexthop_group_programmed(std::string const & group_name) {
+   // TODO: No op impl.
+}
+
+nexthop_group_handler_v2::nexthop_group_handler_v2(nexthop_group_mgr * mgr) :
+      nexthop_group_handler(mgr) {
+}
+
+void
+nexthop_group_handler_v2::on_nexthop_group_programmed(std::string const & group_name,
+                                                      uint16_t version_id) {
    // TODO: No op impl.
 }
 
