@@ -1,20 +1,21 @@
-#!/usr/bin/env python
+#!/usr/bin/env pychooser
 # Copyright (c) 2014 Arista Networks, Inc.  All rights reserved.
 # Arista Networks, Inc. Confidential and Proprietary.
 
-import eossdk
-
+from __future__ import absolute_import, division, print_function
 import sys
+
+import eossdk
 
 
 # Listens to standard input and shuts down an interface when it
 # receives a "shutdown" message. To exit, enter a blank line.
 class MyTestAgent(eossdk.AgentHandler, eossdk.FdHandler):
    def __init__(self, agentMgr, intfMgr, interfaceName):
-      print "This program controls the admin enabled state of the given interface"
-      print " - 'shutdown' will disable the interface"
-      print " - any other text will enable the interface"
-      print " - an empty line will quit this program"
+      print( "This program controls the admin enabled state of the given interface" )
+      print( " - 'shutdown' will disable the interface" )
+      print( " - any other text will enable the interface" )
+      print( " - an empty line will quit this program" )
       self.agentMgr_ = agentMgr
       self.intfMgr_ = intfMgr
       self.intfObj_ = eossdk.IntfId(interfaceName)
@@ -23,32 +24,32 @@ class MyTestAgent(eossdk.AgentHandler, eossdk.FdHandler):
       self.eventCount = 0
 
    def on_initialized(self):
-      print "Initialized!"
+      print( "Initialized!" )
       self.watch_readable(0, True)
       self.intfMgr_.admin_enabled_is(self.intfObj_, True)
       self._printPrompt()
 
    def on_readable(self, fd):
-      print "- Fd %d is readable" % fd
+      print( "- Fd %d is readable" % fd )
       curEnabledStatus = ("enabled" if self.intfMgr_.admin_enabled(self.intfObj_)
                           else "disabled")
-      print "- %s is currently %s" % (self.intfObj_.to_string(), curEnabledStatus)
+      print( "- %s is currently %s" % (self.intfObj_.to_string(), curEnabledStatus) )
       msg = sys.stdin.readline()
       if msg.startswith("shut"):
-         print "Shutting down %s" % self.intfObj_.to_string()
+         print( "Shutting down %s" % self.intfObj_.to_string() )
          self.intfMgr_.admin_enabled_is(self.intfObj_, False)
          self.eventCount += 1
       elif msg.strip():
-         print "Enabling %s" % self.intfObj_.to_string()
+         print( "Enabling %s" % self.intfObj_.to_string() )
          self.intfMgr_.admin_enabled_is(self.intfObj_, True)
          self.eventCount += 1
       else:
-         print "Exiting!"
+         print( "Exiting!" )
          self.agentMgr_.exit()
       self._printPrompt()
 
    def _printPrompt(self):
-      print '> ',
+      print( '> ', end=" " )
       sys.stdout.flush()
 
 
@@ -56,8 +57,7 @@ def main(args):
    sdk = eossdk.Sdk()
    testAgent = MyTestAgent(sdk.get_agent_mgr(), sdk.get_intf_mgr(), "Ethernet1")
    sdk.main_loop(args)
-   print "Handled %d events" % testAgent.eventCount
-
+   print( "Handled %d events" % testAgent.eventCount )
 
 if __name__ == '__main__':
    sys.exit(main(sys.argv))

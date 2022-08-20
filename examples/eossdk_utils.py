@@ -42,18 +42,19 @@ def debug_fn(func):
          raise e
    return wrapped_fn
 
+
 class SdkAgentMetaClass(type):
-   def __new__(meta, classname, bases, classDict):
+   def __new__(mcs, classname, bases, classDict):
       """ Wraps all functions in this class that start with "on_" with
       the above debug_fn """
       newClassDict = {}
       for attributeName, attribute in classDict.items():
-         if (type(attribute) == types.FunctionType
-             and attributeName.startswith("on_")):
+         if (isinstance(attribute, types.FunctionType) and
+                 attributeName.startswith("on_")):
             # Wrap all "on_" handler functions with debugging helper code.
             attribute = debug_fn(attribute)
          newClassDict[attributeName] = attribute
-      return type.__new__(meta, classname, bases, newClassDict)
+      return type.__new__(mcs, classname, bases, newClassDict)
 
 
 # Class to inherit from:

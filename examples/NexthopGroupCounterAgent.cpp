@@ -34,12 +34,14 @@
 static int nexthop_counter_interval = 2;
 
 class nexthop_counter_agent : public eos::agent_handler,
-                              public eos::timeout_handler {
+                              public eos::timeout_handler,
+                              public eos::nexthop_group_handler {
  public:
    explicit nexthop_counter_agent(eos::sdk & sdk)
          : eos::agent_handler(sdk.get_agent_mgr()),
            eos::timeout_handler(sdk.get_timeout_mgr()),
            nhgMgr(sdk.get_nexthop_group_mgr()),
+           eos::nexthop_group_handler(sdk.get_nexthop_group_mgr()),
            t("NexthopCounterAgent") {
       t.trace0("Agent constructed");
    }
@@ -47,6 +49,7 @@ class nexthop_counter_agent : public eos::agent_handler,
    void on_initialized() {
       t.trace0("Initialized");
       timeout_time_is(eos::now() + nexthop_counter_interval);
+      watch_all_nexthop_groups(true);
    }
 
    void display_counters() {
@@ -74,7 +77,23 @@ class nexthop_counter_agent : public eos::agent_handler,
       }
    }
 
+   void display_programmed_nexthop_groups() {
+      // Print programmed nexthop groups
+      for (auto nhIter = nhgMgr->programmed_nexthop_group_iter(); nhIter; ++nhIter) {
+         t.trace0("programmed nexthop group: %s", (*nhIter).c_str());
+         auto nhgrp = nhgMgr->programmed_nexthop_group(*nhIter);
+         auto nexthops = nhgrp.nexthops();
+         for (auto it = nexthops.begin(); it != nexthops.end(); ++it) {
+            if (it->second.nexthop() != eos::ip_addr_t()) {
+                  t.trace0(" %d: nexthop addr %s", it->first, 
+                        it->second.nexthop().to_string().c_str());
+            }
+         }
+      }
+   }
+
    void on_timeout() {
+      display_programmed_nexthop_groups();
       display_counters();
       timeout_time_is(eos::now() + nexthop_counter_interval);
    }
@@ -85,6 +104,10 @@ class nexthop_counter_agent : public eos::agent_handler,
       if (option_name == "timeout" && !value.empty()) {
          nexthop_counter_interval = atoi(value.c_str());
       }
+   }
+   
+   void on_nexthop_group_programmed(std::string const & nexthop_group_name ) {
+      t.trace0("Next hop group programmed:%s", nexthop_group_name.c_str());
    }
 
  private:

@@ -15,7 +15,7 @@
 // Program a bunch of routes, and then reprogram over them using resync.
 //
 // Make the agent using a 32-bit linux build environment:
-//    bash# g++ -leos -std=gnu++0x examples/RibToFibProfiler.cpp -o RouteProfiler
+//    bash# g++ -leos -std=gnu++14 examples/RibToFibProfiler.cpp -o RouteProfiler
 // Now you can transfer the binary to flash: on an EOS instance with
 // EosSdk.i686.rpm installed and run the agent from bash:
 //    bash# TRACE=EosSdk*/0-5,RouteProfiler/* /mnt/flash/RouteProfiler
