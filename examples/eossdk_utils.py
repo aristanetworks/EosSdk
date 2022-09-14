@@ -34,7 +34,7 @@ def debug_fn(func):
    @wraps(func)
    def wrapped_fn(*args, **kwargs):
       try:
-         func(*args, **kwargs)
+         return func(*args, **kwargs)
       except Exception as e:
          traceback.print_exc()
          if sys.stdout.isatty():
