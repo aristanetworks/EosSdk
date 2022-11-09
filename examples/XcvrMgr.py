@@ -10,7 +10,7 @@ import sys
 
 class XcvrAgent( eossdk.AgentHandler ):
    def __init__( self, agentMgr, xcvrMgr, interfaceNames,
-                 rxFreq, rxFineFreq, txFreq, txDisabled, txOutputPower ):
+                 rxFreq, rxFineFreq, txFreq, txDisabled, txOutputPower, addr ):
       self.agentMgr_ = agentMgr
       self.xcvrMgr_ = xcvrMgr
       self.intfs_ = interfaceNames
@@ -20,6 +20,7 @@ class XcvrAgent( eossdk.AgentHandler ):
       self.txFreq = txFreq
       self.txDisabled = txDisabled
       self.txOutputPower = txOutputPower
+      self.addr = addr
 
    def on_initialized( self ):
       for intf in self.intfs_:
@@ -43,6 +44,11 @@ class XcvrAgent( eossdk.AgentHandler ):
          print( "   tx frequency: %d" % self.xcvrMgr_.tx_frequency( intfId ) )
          print( "   tx disabled: %s" % self.xcvrMgr_.tx_disabled( intfId ) )
          print( "   tx output power: %s" % self.xcvrMgr_.tx_output_power( intfId ) )
+         print( "   tx turnup: 0x%X" % self.xcvrMgr_.tx_turnup_state( intfId ) )
+         print( "   rx turnup: 0x%X" % self.xcvrMgr_.rx_turnup_state( intfId ) )
+         if self.addr is not None:
+            print( "   Addr: 0x%X Data: 0x%X" % (
+               self.addr, self.xcvrMgr_.register_read( intfId, self.addr ) ) )
 
       self.agentMgr_.exit()
 
@@ -62,11 +68,14 @@ def main( args ):
                         default=False, help="Disable transmitter (omit to enable)" )
    parser.add_argument( "-p", "--txOutputPower", dest="txOutputPower", type=float,
                         default=False, help="Set transmitter output power" )
+   parser.add_argument( "-g", "--getRegister", dest="addr",
+                        type=lambda x: int( x, 0 ),
+                        default=None, help="Get register value at given address" )
    parseArgs = parser.parse_args()
    sdk = eossdk.Sdk( 'XcvrMgr' )
    _ = XcvrAgent( sdk.get_agent_mgr(), sdk.get_xcvr_mgr(), parseArgs.intfs,
                   parseArgs.rxFreq, parseArgs.rxFineFreq, parseArgs.txFreq,
-                  parseArgs.txDisabled, parseArgs.txOutputPower )
+                  parseArgs.txDisabled, parseArgs.txOutputPower, parseArgs.addr )
    sdk.main_loop( [ 'XcvrMgr' ] )
 
 if __name__ == '__main__':

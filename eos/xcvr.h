@@ -61,11 +61,6 @@ class EOS_SDK_PUBLIC xcvr_mgr {
       virtual void tx_disabled_is( intf_id_t intf_id, bool disable ) = 0;
 
       /**
-       * Configures the transmit laser output power.
-       */
-      virtual void tx_output_power_is( intf_id_t intf_id, float power ) = 0;
-
-      /**
        * Returns the currently active receive laser fine frequency.  The frequency
        * is in GHz.
        */
@@ -89,9 +84,55 @@ class EOS_SDK_PUBLIC xcvr_mgr {
       virtual bool tx_disabled( intf_id_t intf_id ) const = 0;
 
       /**
+       * Configures the transmit laser output power.
+       */
+      virtual void tx_output_power_is( intf_id_t intf_id, float power ) = 0;
+
+      /**
        * Returns the transmit laser power.
        */
       virtual float tx_output_power( intf_id_t intf_id ) const = 0;
+
+      /**
+       * Get the turn up state of a coherent transmit laser. Note that currently,
+       * only CFP2 transceivers are supported.
+       * Parameters:
+       *    intf_id: The name of an Ethernet interface associated with the
+       * Returns: The value of the turnUp state as of the last polling interval.  If
+       *    the transceiver is not a supported type, or the transceiver is not a
+       *    coherent optic, returns -1.
+       */
+      virtual int32_t tx_turnup_state( intf_id_t intf_id ) const = 0;
+
+      /**
+       * Get the turn up state of a coherent transmit laser. Note that currently,
+       * only CFP2 transceivers are supported.
+       * Parameters:
+       *    intf_id: The name of an Ethernet interface associated with the
+       * Returns: The value of the turnUp state as of the last polling interval.  If
+       *    the transceiver is not a supported type, or the transceiver is not a
+       *    coherent optic, returns -1.
+       */
+      virtual int32_t rx_turnup_state( intf_id_t intf_id ) const = 0;
+
+      /**
+       * Returns the data in the register/EEPROM address space of the transceiver.
+       * Note that currently, only CFP2 transceivers are supported.
+       * Parameters:
+       *    intf_id: The name of an Ethernet interface associated with the
+       *       transceiver.
+       *    addr: Specifies the address of the register if the transceiver has
+       *       a flat address space (such as CFP2).  Specifies the offset of
+       *       the register if the transceiver has a paged address space.
+       *    location: Specifies the technology specific page/bank of the register if
+       *       the transceiver has a paged address space.  Not used if the
+       *       transceiver has a flat address space.
+       * Returns: The value of the register as of the last polling interval.  If the
+       *    transceiver is not a supported type, or the register requested is not
+       *    available, returns -1.
+       */
+      virtual int32_t register_read( intf_id_t intf_id, uint16_t addr,
+                                     std::string location = "" ) const = 0;
    protected:
       xcvr_mgr() EOS_SDK_PRIVATE;
 

@@ -52,13 +52,13 @@ int main(int argc, char** argv) {
    int size = 8;
    int labelstart = 1000000;
    std::string name;
-   std::string nh[4] = {
+   constexpr size_t nhlen = 4;
+   std::string nh[nhlen] = {
       "2000:10:13::1",
       "2000:10:13::3",
       "2000:10:13::5",
       "2000:10:13::7",
    };
-   size_t nhlen = sizeof(nh)/sizeof(0);
    std::string v6start = "2500::";
 
    char v6pfx[128];

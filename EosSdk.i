@@ -51,6 +51,101 @@ typedef uint64_t uint64_be_t;
    $1 = PyLong_AsVoidPtr($input);
 }
 
+%typemap(in) eos::ByteString (char *cstr, Py_ssize_t len, std::string temp) {
+   // If the input Python object is a unicode object then we should convert it
+   // to UTF-8 before turning it into a bytestring
+   if (PyUnicode_Check($input)) {
+      // NB(toma): This may need a check for the unicode -> bytes conversion
+      // although it should never fail
+      if (
+%#if PY_VERSION_HEX>=0x03000000
+         PyBytes_AsStringAndSize(
+%#else
+         PyString_AsStringAndSize(
+%#endif
+            PyUnicode_AsUTF8String($input),
+            &cstr,
+            &len
+         ) == -1
+      ) {
+         PyErr_SetString(PyExc_ValueError, "Expected a Unicode object");
+         SWIG_fail;
+      }
+   } else {
+      // Not unicode, we can just convert
+      if (
+%#if PY_VERSION_HEX>=0x03000000
+         PyBytes_AsStringAndSize(
+%#else
+         PyString_AsStringAndSize(
+%#endif
+            $input,
+            &cstr,
+            &len
+         ) == -1
+      ) {
+         PyErr_SetString(PyExc_ValueError, "Expected a Bytes object");
+         SWIG_fail;
+      }
+   }
+   $1 = std::string(cstr);
+}
+
+%typemap(in) eos::ByteString& (char *cstr, Py_ssize_t len, std::string temp, int res) {
+   // If the input Python object is a unicode object then we should convert it
+   // to UTF-8 before turning it into a bytestring
+   res = 0;
+   if (PyUnicode_Check($input)) {
+      // NB(toma): This may need a check for the unicode -> bytes conversion
+      // although it should never fail
+      if (
+%#if PY_VERSION_HEX>=0x03000000
+         PyBytes_AsStringAndSize(
+%#else
+         PyString_AsStringAndSize(
+%#endif
+            PyUnicode_AsUTF8String($input),
+            &cstr,
+            &len
+         ) == -1
+      ) {
+         PyErr_SetString(PyExc_ValueError, "Expected a Unicode object");
+         SWIG_fail;
+      }
+   } else {
+      // Not unicode, we can just convert
+      if (
+%#if PY_VERSION_HEX>=0x03000000
+         PyBytes_AsStringAndSize(
+%#else
+         PyString_AsStringAndSize(
+%#endif
+            $input,
+            &cstr,
+            &len
+         ) == -1
+      ) {
+         PyErr_SetString(PyExc_ValueError, "Expected a Bytes value");
+         SWIG_fail;
+      }
+   }
+   temp = std::string(cstr);
+   $1 = &temp;
+}
+
+%typemap(typecheck) eos::ByteString, eos::ByteString& {
+   $1 = (PyString_Check($input) || PyUnicode_Check($input)) ? 1 : 0;
+}
+
+%typemap(out) eos::ByteString {
+   // This should only return bytes
+%#if PY_VERSION_HEX>=0x03000000
+   $result = PyBytes_FromStringAndSize($1.c_str(), %numeric_cast($1.size(), Py_ssize_t));
+%#else
+   $result = PyString_FromStringAndSize($1.c_str(), %numeric_cast($1.size(), Py_ssize_t));
+%#endif
+}
+
 // To make sure instance of EosSdk types are hashable in python, this is important
 // when the objects are used in sets, dicts, etc (as key).
 // Three test cases added for this, one is in EthLagIntfTest.py, one in IntfTest.py

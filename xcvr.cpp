@@ -29,6 +29,17 @@ class xcvr_mgr_impl : public xcvr_mgr {
       void tx_output_power_is( intf_id_t intf_id, float power ) {
       }
 
+      int32_t tx_turnup_state( intf_id_t intf_id ) const {
+         return 0;
+      }
+      int32_t rx_turnup_state( intf_id_t intf_id ) const {
+         return 0;
+      }
+       int32_t register_read( intf_id_t intf_id, uint16_t addr,
+                              std::string location = "" ) const {
+         return 0;
+      }
+
       float rx_fine_frequency( intf_id_t intf_id ) const {
          return 0.0;
       }

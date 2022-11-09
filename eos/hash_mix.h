@@ -4,6 +4,7 @@
 #ifndef EOS_SDK_HASH_MIX
 #define EOS_SDK_HASH_MIX
 
+#include <string>
 #include <eos/base.h>
 
 namespace eos {

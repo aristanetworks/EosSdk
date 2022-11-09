@@ -8,6 +8,7 @@
 #include <eos/base.h>
 #include <eos/base_mgr.h>
 #include <eos/types/ham.h>
+#include <eos/utility.h>
 
 
 /**
@@ -110,7 +111,7 @@ class EOS_SDK_PUBLIC ham_mgr : public base_mgr<ham_handler> {
     * reliable/successful or not.
     */
    virtual eos::response_enum_t write( eossdk_ham_t ham, register_t reg,
-                                       std::string const & data,
+                                       eos::ByteString const & data,
                                        bool reliable = false ) = 0;
 
    /**
@@ -120,7 +121,7 @@ class EOS_SDK_PUBLIC ham_mgr : public base_mgr<ham_handler> {
     * 'reliable' represents if the data transfer was reliable/successful or not.
     */
    virtual  eos::response_enum_t writeBlock( eossdk_ham_t ham, register_t reg,
-                                             std::string const & data,
+                                             eos::ByteString const & data,
                                              bool reliable = false ) = 0;
 
   protected:

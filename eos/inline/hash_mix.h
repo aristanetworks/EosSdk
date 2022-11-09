@@ -4,6 +4,8 @@
 #ifndef INLINE_HASH_MIX_H
 #define INLINE_HASH_MIX_H
 
+#include <string>
+
 namespace eos {
 
 inline hash_mix::hash_mix() : val_(0) {}

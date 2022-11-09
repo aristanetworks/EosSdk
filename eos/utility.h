@@ -8,6 +8,8 @@
 
 namespace eos {
 
+typedef std::string ByteString;
+
 /**
  * Overwriting "<<" operator for uint8_t. The default behavior is to
  * print the value out as "char" (sometimes even invisible). What we
