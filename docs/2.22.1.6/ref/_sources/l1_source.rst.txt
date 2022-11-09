@@ -1,0 +1,13 @@
+**l1_source**
+-------------
+
+
+.. doxygenfile:: eos/l1_source.h
+   :project: eossdk
+
+Type definitions in **l1_source**
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. doxygenfile:: eos/types/l1_source.h
+   :project: eossdk
+

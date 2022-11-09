@@ -1,0 +1,13 @@
+**eapi_impl**
+-------------
+
+
+.. doxygenfile:: eos/eapi_impl.h
+   :project: eossdk
+
+Type definitions in **eapi_impl**
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. doxygenfile:: eos/types/eapi_impl.h
+   :project: eossdk
+

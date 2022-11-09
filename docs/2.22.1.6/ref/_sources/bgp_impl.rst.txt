@@ -1,0 +1,13 @@
+**bgp_impl**
+------------
+
+
+.. doxygenfile:: eos/bgp_impl.h
+   :project: eossdk
+
+Type definitions in **bgp_impl**
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. doxygenfile:: eos/types/bgp_impl.h
+   :project: eossdk
+

@@ -1,0 +1,207 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>hash_mix &#8212; Arista EOS SDK 2.22.1 reference</title>
+    <link rel="stylesheet" href="_static/eossdk.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/language_data.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="intf" href="intf.html" />
+    <link rel="prev" title="hardware_table_impl" href="hardware_table_impl.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="intf.html" title="intf"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="hardware_table_impl.html" title="hardware_table_impl"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Arista EOS SDK 2.22.1 reference</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="hash-mix">
+<h1><strong>hash_mix</strong><a class="headerlink" href="#hash-mix" title="Permalink to this headline">¶</a></h1>
+<dl class="type">
+<dt id="_CPPv43eos">
+<span id="_CPPv33eos"></span><span id="_CPPv23eos"></span><span id="eos"></span><span class="target" id="namespaceeos"></span><em class="property">namespace </em><code class="descname">eos</code><br /></dt>
+<dd><dl class="class">
+<dt id="_CPPv4N3eos8hash_mixE">
+<span id="_CPPv3N3eos8hash_mixE"></span><span id="_CPPv2N3eos8hash_mixE"></span><span id="eos::hash_mix"></span><span class="target" id="classeos_1_1hash__mix"></span><em class="property">class </em><code class="descname">hash_mix</code><a class="headerlink" href="#_CPPv4N3eos8hash_mixE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><em>#include &lt;hash_mix.h&gt;</em><p>This is a helper class for incrementally-computed implementation of Bob Jenkins’ one-at-a-time hash, in C++. It’s needed in hash function. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="function">
+<dt id="_CPPv4N3eos8hash_mix8hash_mixEv">
+<span id="_CPPv3N3eos8hash_mix8hash_mixEv"></span><span id="_CPPv2N3eos8hash_mix8hash_mixEv"></span><span id="eos::hash_mix::hash_mix"></span><span class="target" id="classeos_1_1hash__mix_1a31e2fd6ca437b015c7af0b3da11c20ef"></span><code class="descname">hash_mix</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos8hash_mix8hash_mixEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4NK3eos8hash_mix6resultEv">
+<span id="_CPPv3NK3eos8hash_mix6resultEv"></span><span id="_CPPv2NK3eos8hash_mix6resultEv"></span><span id="eos::hash_mix::resultC"></span><span class="target" id="classeos_1_1hash__mix_1a5d096dd161fbfe5ea07f162ef3d68ccb"></span>uint32_t <code class="descname">result</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos8hash_mix6resultEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N3eos8hash_mix3mixEb">
+<span id="_CPPv3N3eos8hash_mix3mixEb"></span><span id="_CPPv2N3eos8hash_mix3mixEb"></span><span id="eos::hash_mix::mix__b"></span><span class="target" id="classeos_1_1hash__mix_1ab9d4db87842f4393270fcff6305ffe16"></span>void <code class="descname">mix</code><span class="sig-paren">(</span>bool <em>val</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos8hash_mix3mixEb" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N3eos8hash_mix3mixEd">
+<span id="_CPPv3N3eos8hash_mix3mixEd"></span><span id="_CPPv2N3eos8hash_mix3mixEd"></span><span id="eos::hash_mix::mix__double"></span><span class="target" id="classeos_1_1hash__mix_1ab84f5feb6ef3b83d5dc9e344192a6ddc"></span>void <code class="descname">mix</code><span class="sig-paren">(</span>double <em>val</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos8hash_mix3mixEd" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N3eos8hash_mix3mixEf">
+<span id="_CPPv3N3eos8hash_mix3mixEf"></span><span id="_CPPv2N3eos8hash_mix3mixEf"></span><span id="eos::hash_mix::mix__float"></span><span class="target" id="classeos_1_1hash__mix_1a704cdeac998db5abfbfa0a41b1f2f5eb"></span>void <code class="descname">mix</code><span class="sig-paren">(</span>float <em>val</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos8hash_mix3mixEf" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N3eos8hash_mix3mixE7uint8_t">
+<span id="_CPPv3N3eos8hash_mix3mixE7uint8_t"></span><span id="_CPPv2N3eos8hash_mix3mixE7uint8_t"></span><span id="eos::hash_mix::mix__uint8_t"></span><span class="target" id="classeos_1_1hash__mix_1aac217e9699dcd8f9a44490a181c81c94"></span>void <code class="descname">mix</code><span class="sig-paren">(</span>uint8_t <em>val</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos8hash_mix3mixE7uint8_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N3eos8hash_mix3mixE8uint16_t">
+<span id="_CPPv3N3eos8hash_mix3mixE8uint16_t"></span><span id="_CPPv2N3eos8hash_mix3mixE8uint16_t"></span><span id="eos::hash_mix::mix__uint16_t"></span><span class="target" id="classeos_1_1hash__mix_1a1452791830dbc2587b88f938df373236"></span>void <code class="descname">mix</code><span class="sig-paren">(</span>uint16_t <em>val</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos8hash_mix3mixE8uint16_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N3eos8hash_mix3mixE8uint32_t">
+<span id="_CPPv3N3eos8hash_mix3mixE8uint32_t"></span><span id="_CPPv2N3eos8hash_mix3mixE8uint32_t"></span><span id="eos::hash_mix::mix__uint32_t"></span><span class="target" id="classeos_1_1hash__mix_1a9db543b3637b6490ee4c7f3412c064f3"></span>void <code class="descname">mix</code><span class="sig-paren">(</span>uint32_t <em>val</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos8hash_mix3mixE8uint32_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N3eos8hash_mix3mixE8uint64_t">
+<span id="_CPPv3N3eos8hash_mix3mixE8uint64_t"></span><span id="_CPPv2N3eos8hash_mix3mixE8uint64_t"></span><span id="eos::hash_mix::mix__uint64_t"></span><span class="target" id="classeos_1_1hash__mix_1a019e794af87c8b6c38158fe7d249fdec"></span>void <code class="descname">mix</code><span class="sig-paren">(</span>uint64_t <em>val</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos8hash_mix3mixE8uint64_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N3eos8hash_mix3mixE6int8_t">
+<span id="_CPPv3N3eos8hash_mix3mixE6int8_t"></span><span id="_CPPv2N3eos8hash_mix3mixE6int8_t"></span><span id="eos::hash_mix::mix__int8_t"></span><span class="target" id="classeos_1_1hash__mix_1aec4b9a46efb0d7b4aa5c43a7ebf3b6fc"></span>void <code class="descname">mix</code><span class="sig-paren">(</span>int8_t <em>val</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos8hash_mix3mixE6int8_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N3eos8hash_mix3mixE7int16_t">
+<span id="_CPPv3N3eos8hash_mix3mixE7int16_t"></span><span id="_CPPv2N3eos8hash_mix3mixE7int16_t"></span><span id="eos::hash_mix::mix__int16_t"></span><span class="target" id="classeos_1_1hash__mix_1aa96974ba8b6d1624c7dca80e6a1d79e9"></span>void <code class="descname">mix</code><span class="sig-paren">(</span>int16_t <em>val</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos8hash_mix3mixE7int16_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N3eos8hash_mix3mixE7int32_t">
+<span id="_CPPv3N3eos8hash_mix3mixE7int32_t"></span><span id="_CPPv2N3eos8hash_mix3mixE7int32_t"></span><span id="eos::hash_mix::mix__int32_t"></span><span class="target" id="classeos_1_1hash__mix_1a5a526888c7e2d75704d13ec817b980d9"></span>void <code class="descname">mix</code><span class="sig-paren">(</span>int32_t <em>val</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos8hash_mix3mixE7int32_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N3eos8hash_mix3mixE7int64_t">
+<span id="_CPPv3N3eos8hash_mix3mixE7int64_t"></span><span id="_CPPv2N3eos8hash_mix3mixE7int64_t"></span><span id="eos::hash_mix::mix__int64_t"></span><span class="target" id="classeos_1_1hash__mix_1a37cbd02efa7149842093889bea0d36af"></span>void <code class="descname">mix</code><span class="sig-paren">(</span>int64_t <em>val</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos8hash_mix3mixE7int64_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N3eos8hash_mix3mixERKNSt6stringE">
+<span id="_CPPv3N3eos8hash_mix3mixERKNSt6stringE"></span><span id="_CPPv2N3eos8hash_mix3mixERKNSt6stringE"></span><span id="eos::hash_mix::mix__ssCR"></span><span class="target" id="classeos_1_1hash__mix_1a605ef37978bae44877673dc1c22bc6eb"></span>void <code class="descname">mix</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::string <em class="property">const</em> &amp;<em>val</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos8hash_mix3mixERKNSt6stringE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4I0EN3eos8hash_mix3mixENSt9enable_ifINSt7is_enumI1TE5valueEE4typeERK1T">
+<span id="_CPPv3I0EN3eos8hash_mix3mixERK1T"></span><span id="_CPPv2I0EN3eos8hash_mix3mixERK1T"></span><span class="target" id="classeos_1_1hash__mix_1a70fb2ec2ce320b9beb7f94194b94c015"></span>template&lt;typename <code class="descname">T</code>&gt;<br /><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::enable_if&lt;<a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::is_enum&lt;<a class="reference internal" href="#_CPPv4I0EN3eos8hash_mix3mixENSt9enable_ifINSt7is_enumI1TE5valueEE4typeERK1T" title="eos::hash_mix::mix::T">T</a>&gt;::value&gt;::type <code class="descname">mix</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4I0EN3eos8hash_mix3mixENSt9enable_ifINSt7is_enumI1TE5valueEE4typeERK1T" title="eos::hash_mix::mix::T">T</a> <em class="property">const</em> &amp;<em>t</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4I0EN3eos8hash_mix3mixENSt9enable_ifINSt7is_enumI1TE5valueEE4typeERK1T" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4I0EN3eos8hash_mix3mixENSt9enable_ifINSt11is_integralI1TE5valueEE4typeERK1T">
+<span id="_CPPv3I0EN3eos8hash_mix3mixERK1T"></span><span class="target" id="classeos_1_1hash__mix_1a5f291da1d36d7a31723a5062b73bb65c"></span>template&lt;typename <code class="descname">T</code>&gt;<br /><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::enable_if&lt;<a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::is_integral&lt;<a class="reference internal" href="#_CPPv4I0EN3eos8hash_mix3mixENSt9enable_ifINSt7is_enumI1TE5valueEE4typeERK1T" title="eos::hash_mix::mix::T">T</a>&gt;::value&gt;::type <code class="descname">mix</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4I0EN3eos8hash_mix3mixENSt9enable_ifINSt7is_enumI1TE5valueEE4typeERK1T" title="eos::hash_mix::mix::T">T</a> <em class="property">const</em> &amp;<em>t</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4I0EN3eos8hash_mix3mixENSt9enable_ifINSt11is_integralI1TE5valueEE4typeERK1T" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4I0EN3eos8hash_mix3mixENSt9enable_ifIXaantNSt11is_integralI1TE5valueEntNSt7is_enumI1TE5valueEEE4typeERK1T">
+<span class="target" id="classeos_1_1hash__mix_1ab66838eb04ed4a7948658c668cbd30ed"></span>template&lt;typename <code class="descname">T</code>&gt;<br /><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::enable_if&lt;!<a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::is_integral&lt;<a class="reference internal" href="#_CPPv4I0EN3eos8hash_mix3mixENSt9enable_ifINSt7is_enumI1TE5valueEE4typeERK1T" title="eos::hash_mix::mix::T">T</a>&gt;::value &amp;&amp; !<a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::is_enum&lt;<a class="reference internal" href="#_CPPv4I0EN3eos8hash_mix3mixENSt9enable_ifINSt7is_enumI1TE5valueEE4typeERK1T" title="eos::hash_mix::mix::T">T</a>&gt;::value&gt;::type <code class="descname">mix</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4I0EN3eos8hash_mix3mixENSt9enable_ifINSt7is_enumI1TE5valueEE4typeERK1T" title="eos::hash_mix::mix::T">T</a> <em class="property">const</em> &amp;<em>t</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4I0EN3eos8hash_mix3mixENSt9enable_ifIXaantNSt11is_integralI1TE5valueEntNSt7is_enumI1TE5valueEEE4typeERK1T" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N3eos8hash_mix9mix_bytesEPK7uint8_ti">
+<span id="_CPPv3N3eos8hash_mix9mix_bytesEPK7uint8_ti"></span><span id="_CPPv2N3eos8hash_mix9mix_bytesEPK7uint8_ti"></span><span id="eos::hash_mix::mix_bytes__uint8_tCP.i"></span><span class="target" id="classeos_1_1hash__mix_1af4e6259ea0791198c4e5ab8228c48741"></span>void <code class="descname">mix_bytes</code><span class="sig-paren">(</span>uint8_t <em class="property">const</em> *<em>key</em>, int <em>len</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos8hash_mix9mix_bytesEPK7uint8_ti" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Private Members</p>
+<dl class="member">
+<dt id="_CPPv4N3eos8hash_mix4val_E">
+<span id="_CPPv3N3eos8hash_mix4val_E"></span><span id="_CPPv2N3eos8hash_mix4val_E"></span><span id="eos::hash_mix::val___uint32_t"></span><span class="target" id="classeos_1_1hash__mix_1a613e564d12d405cf5d0c36b8c19fb653"></span>uint32_t <code class="descname">val_</code><a class="headerlink" href="#_CPPv4N3eos8hash_mix4val_E" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="hardware_table_impl.html"
+                        title="previous chapter"><strong>hardware_table_impl</strong></a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="intf.html"
+                        title="next chapter"><strong>intf</strong></a></p>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="intf.html" title="intf"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="hardware_table_impl.html" title="hardware_table_impl"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Arista EOS SDK 2.22.1 reference</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2014, Arista Networks.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.4.
+    </div>
+  </body>
+</html>
