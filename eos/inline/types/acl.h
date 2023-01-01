@@ -94,6 +94,10 @@ operator<<(std::ostream& os, const acl_tcp_flag_t & enum_val) {
       os << "ACL_TCP_ACK";
    } else if (enum_val==ACL_TCP_URG) {
       os << "ACL_TCP_URG";
+   } else if (enum_val==ACL_TCP_ECE) {
+      os << "ACL_TCP_ECE";
+   } else if (enum_val==ACL_TCP_CWR) {
+      os << "ACL_TCP_CWR";
    } else {
       os << "Unknown value";
    }

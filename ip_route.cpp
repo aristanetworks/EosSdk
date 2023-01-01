@@ -32,6 +32,11 @@ class ip_route_mgr_impl : public ip_route_mgr {
       return *nop;  // TODO: No op impl.
    }
 
+   virtual ip_route_iter_t ip_route_iter(std::string const & vrfName) const {
+      ip_route_iter_t * nop = 0;
+      return *nop;  // TODO: No op impl.
+   }
+
    ip_route_via_iter_t ip_route_via_iter(ip_route_key_t const & key) const {
       ip_route_via_iter_t * nop = 0;
       return *nop;  // TODO: No op impl.
@@ -114,5 +119,10 @@ class ip_route_mgr_impl : public ip_route_mgr {
 };
 
 DEFINE_STUB_MGR_CTOR(ip_route_mgr)
+
+ip_route_iter_t
+ip_route_mgr::ip_route_iter( std::string vrf ) const {
+   return static_cast<const ip_route_mgr_impl * >( this )->ip_route_iter( vrf );
+}
 
 }  // end namespace eos

@@ -53,9 +53,9 @@ class EOS_SDK_PUBLIC policy_map_key_impl_t {
 
 /**
  * A single policy map action.
- * Each action defines a single type of action to be performed,presently
+ * Each action defines a single type of action to be performed, presently
  * supporting: "set nexthop", "set nexthop group" and "drop".
- * It is illegal to set both nexthop and nexthop group or dropoperations in a
+ * It is illegal to set both nexthop and nexthop group or drop operations in a
  * single policy map rule.
  */
 class EOS_SDK_PUBLIC policy_map_action_impl_t {

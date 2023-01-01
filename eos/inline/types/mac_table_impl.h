@@ -186,7 +186,8 @@ mac_entry_impl_t::hash() const {
 void
 mac_entry_impl_t::mix_me(hash_mix & h) const {
    h.mix(mac_key_); // mac_key_t
-   for (auto it=intfs_.cbegin(); it!=intfs_.cend(); ++it) {
+   for (auto it=intfs_.cbegin();
+        it!=intfs_.cend(); ++it) {
       h.mix(*it); // intf_id_t
    }
 }
@@ -198,7 +199,8 @@ mac_entry_impl_t::to_string() const {
    ss << "mac_key=" << mac_key_;
    ss << ", intfs=" <<"'";
    bool first_intfs = true;
-   for (auto it=intfs_.cbegin(); it!=intfs_.cend(); ++it) {
+   for (auto it=intfs_.cbegin();
+        it!=intfs_.cend(); ++it) {
       if (first_intfs) {
          ss << (*it);
          first_intfs = false;

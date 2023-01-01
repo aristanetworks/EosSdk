@@ -325,7 +325,7 @@ class read_result_impl_t;
 class EOS_SDK_PUBLIC read_result_t {
  public:
    /** Default constructor. */
-   read_result_t(response_enum_t status, std::string result);
+   read_result_t(response_enum_t status, ByteString result);
    read_result_t(const read_result_t& other);
    read_result_t& operator=(
       read_result_t const & other);
@@ -334,8 +334,8 @@ class EOS_SDK_PUBLIC read_result_t {
    response_enum_t status() const;
    void status_is(response_enum_t status);
 
-   std::string result() const;
-   void result_is(std::string result);
+   ByteString result() const;
+   void result_is(ByteString result);
 
    bool operator==(read_result_t const & other) const;
    bool operator!=(read_result_t const & other) const;

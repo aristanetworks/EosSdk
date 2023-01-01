@@ -28,9 +28,7 @@ class EOS_SDK_PUBLIC acl_ttl_spec_impl_t {
    /** Setter for 'oper'. */
    void oper_is(acl_range_operator_t oper);
 
-   /** Getter for 'ttl': the type of range, note, BETWEEN is not supported. */
    uint8_t ttl() const;
-   /** Setter for 'ttl'. */
    void ttl_is(uint8_t ttl);
 
    bool operator==(acl_ttl_spec_impl_t const & other) const;
@@ -115,7 +113,7 @@ class EOS_SDK_PUBLIC acl_port_spec_impl_t {
  *   * acl_rule_eth_t
  *
  * Base parameters common to all filter types are defined on the parent
- * acl_base_filter_t, such as "log" to enable logging of packets matching the rule,
+ * acl_rule_base_t, such as "log" to enable logging of packets matching the rule,
  * and the action applied to packets matching the rule.
  *
  * Base ACL rule class containing common fields.

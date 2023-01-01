@@ -92,7 +92,8 @@ nexthop_group_mpls_action_impl_t::hash() const {
 void
 nexthop_group_mpls_action_impl_t::mix_me(hash_mix & h) const {
    h.mix(action_type_); // mpls_action_t
-   for (auto it=label_stack_.cbegin(); it!=label_stack_.cend(); ++it) {
+   for (auto it=label_stack_.cbegin();
+        it!=label_stack_.cend(); ++it) {
       h.mix(*it); // mpls_label_t
    }
 }
@@ -104,7 +105,8 @@ nexthop_group_mpls_action_impl_t::to_string() const {
    ss << "action_type=" << action_type_;
    ss << ", label_stack=" <<"'";
    bool first_label_stack = true;
-   for (auto it=label_stack_.cbegin(); it!=label_stack_.cend(); ++it) {
+   for (auto it=label_stack_.cbegin();
+        it!=label_stack_.cend(); ++it) {
       if (first_label_stack) {
          ss << (*it);
          first_label_stack = false;
@@ -357,14 +359,16 @@ operator<<(std::ostream& os, const nexthop_group_entry_impl_t& obj) {
 nexthop_group_impl_t::nexthop_group_impl_t() :
       name_(), type_(), gre_key_type_(NEXTHOP_GROUP_GRE_KEY_NULL), ttl_(64),
       source_ip_(), source_intf_(), autosize_(false), nexthops_(),
-      destination_ips_(), counters_unshared_(), hierarchical_fecs_enabled_(false) {
+      destination_ips_(), counters_unshared_(), hierarchical_fecs_enabled_(false),
+      counters_persistent_() {
 }
 
 nexthop_group_impl_t::nexthop_group_impl_t(std::string name,
                                                   nexthop_group_encap_t type) :
       name_(name), type_(type), gre_key_type_(NEXTHOP_GROUP_GRE_KEY_NULL),
       ttl_(64), source_ip_(), source_intf_(), autosize_(false), nexthops_(),
-      destination_ips_(), counters_unshared_(), hierarchical_fecs_enabled_(false) {
+      destination_ips_(), counters_unshared_(), hierarchical_fecs_enabled_(false),
+      counters_persistent_() {
 }
 
 nexthop_group_impl_t::nexthop_group_impl_t(
@@ -372,14 +376,16 @@ nexthop_group_impl_t::nexthop_group_impl_t(
          nexthop_group_gre_key_t gre_key_type) :
       name_(name), type_(type), gre_key_type_(gre_key_type), ttl_(64),
       source_ip_(), source_intf_(), autosize_(false), nexthops_(),
-      destination_ips_(), counters_unshared_(), hierarchical_fecs_enabled_(false) {
+      destination_ips_(), counters_unshared_(), hierarchical_fecs_enabled_(false),
+      counters_persistent_() {
 }
 
 nexthop_group_impl_t::nexthop_group_impl_t(std::string name,
                                                   ip_addr_t const & source_ip) :
       name_(name), type_(), gre_key_type_(), ttl_(), source_ip_(source_ip),
       source_intf_(), autosize_(), nexthops_(), destination_ips_(),
-      counters_unshared_(), hierarchical_fecs_enabled_(false) {
+      counters_unshared_(), hierarchical_fecs_enabled_(false),
+      counters_persistent_() {
 }
 
 nexthop_group_impl_t::nexthop_group_impl_t(
@@ -387,7 +393,8 @@ nexthop_group_impl_t::nexthop_group_impl_t(
          std::map<uint16_t, nexthop_group_entry_t> const & nexthops) :
       name_(name), type_(), gre_key_type_(), ttl_(), source_ip_(source_ip),
       source_intf_(), autosize_(), nexthops_(nexthops), destination_ips_(),
-      counters_unshared_(), hierarchical_fecs_enabled_(false) {
+      counters_unshared_(), hierarchical_fecs_enabled_(false),
+      counters_persistent_() {
 }
 
 std::string
@@ -532,6 +539,16 @@ nexthop_group_impl_t::hierarchical_fecs_enabled_is(bool hierarchical_fecs_enable
 }
 
 bool
+nexthop_group_impl_t::counters_persistent() const {
+   return counters_persistent_;
+}
+
+void
+nexthop_group_impl_t::counters_persistent_is(bool counters_persistent) {
+   counters_persistent_ = counters_persistent;
+}
+
+bool
 nexthop_group_impl_t::operator==(nexthop_group_impl_t const & other) const {
    return name_ == other.name_ &&
           type_ == other.type_ &&
@@ -543,7 +560,8 @@ nexthop_group_impl_t::operator==(nexthop_group_impl_t const & other) const {
           nexthops_ == other.nexthops_ &&
           destination_ips_ == other.destination_ips_ &&
           counters_unshared_ == other.counters_unshared_ &&
-          hierarchical_fecs_enabled_ == other.hierarchical_fecs_enabled_;
+          hierarchical_fecs_enabled_ == other.hierarchical_fecs_enabled_ &&
+          counters_persistent_ == other.counters_persistent_;
 }
 
 bool
@@ -575,6 +593,8 @@ nexthop_group_impl_t::operator<(nexthop_group_impl_t const & other) const {
       return counters_unshared_ < other.counters_unshared_;
    } else if(hierarchical_fecs_enabled_ != other.hierarchical_fecs_enabled_) {
       return hierarchical_fecs_enabled_ < other.hierarchical_fecs_enabled_;
+   } else if(counters_persistent_ != other.counters_persistent_) {
+      return counters_persistent_ < other.counters_persistent_;
    }
    return false;
 }
@@ -595,16 +615,19 @@ nexthop_group_impl_t::mix_me(hash_mix & h) const {
    h.mix(source_ip_); // ip_addr_t
    h.mix(source_intf_); // intf_id_t
    h.mix(autosize_); // bool
-   for (auto it=nexthops_.cbegin(); it!=nexthops_.cend(); ++it) {
+   for (auto it=nexthops_.cbegin();
+        it!=nexthops_.cend(); ++it) {
       h.mix(it->first); // uint16_t
       h.mix(it->second); // nexthop_group_entry_t
    }
-   for (auto it=destination_ips_.cbegin(); it!=destination_ips_.cend(); ++it) {
+   for (auto it=destination_ips_.cbegin();
+        it!=destination_ips_.cend(); ++it) {
       h.mix(it->first); // uint16_t
       h.mix(it->second); // ip_addr_t
    }
    h.mix(counters_unshared_); // bool
    h.mix(hierarchical_fecs_enabled_); // bool
+   h.mix(counters_persistent_); // bool
 }
 
 std::string
@@ -620,7 +643,8 @@ nexthop_group_impl_t::to_string() const {
    ss << ", autosize=" << autosize_;
    ss << ", nexthops=" <<"'";
    bool first_nexthops = true;
-   for (auto it=nexthops_.cbegin(); it!=nexthops_.cend(); ++it) {
+   for (auto it=nexthops_.cbegin();
+        it!=nexthops_.cend(); ++it) {
       if (first_nexthops) {
          ss << it->first << "=" << it->second;
          first_nexthops = false;
@@ -631,7 +655,8 @@ nexthop_group_impl_t::to_string() const {
    ss << "'";
    ss << ", destination_ips=" <<"'";
    bool first_destination_ips = true;
-   for (auto it=destination_ips_.cbegin(); it!=destination_ips_.cend(); ++it) {
+   for (auto it=destination_ips_.cbegin();
+        it!=destination_ips_.cend(); ++it) {
       if (first_destination_ips) {
          ss << it->first << "=" << it->second;
          first_destination_ips = false;
@@ -642,6 +667,7 @@ nexthop_group_impl_t::to_string() const {
    ss << "'";
    ss << ", counters_unshared=" << counters_unshared_;
    ss << ", hierarchical_fecs_enabled=" << hierarchical_fecs_enabled_;
+   ss << ", counters_persistent=" << counters_persistent_;
    ss << ")";
    return ss.str();
 }

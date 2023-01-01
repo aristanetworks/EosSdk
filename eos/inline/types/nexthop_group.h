@@ -478,6 +478,14 @@ nexthop_group_t::hierarchical_fecs_enabled_is(bool hierarchical_fecs_enabled) {
    pimpl->hierarchical_fecs_enabled_is(hierarchical_fecs_enabled);
 }
 bool
+nexthop_group_t::counters_persistent() const {
+   return pimpl->counters_persistent();
+}
+void
+nexthop_group_t::counters_persistent_is(bool counters_persistent) {
+   pimpl->counters_persistent_is(counters_persistent);
+}
+bool
 nexthop_group_t::operator==(nexthop_group_t const & other) const {
    return pimpl->operator==(*other.pimpl);
 }

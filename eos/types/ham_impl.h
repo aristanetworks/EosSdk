@@ -272,13 +272,13 @@ class EOS_SDK_PUBLIC read16_result_impl_t {
 class EOS_SDK_PUBLIC read_result_impl_t {
  public:
    /** Default constructor. */
-   read_result_impl_t(response_enum_t status, std::string result);
+   read_result_impl_t(response_enum_t status, ByteString result);
 
    response_enum_t status() const;
    void status_is(response_enum_t status);
 
-   std::string result() const;
-   void result_is(std::string result);
+   ByteString result() const;
+   void result_is(ByteString result);
 
    bool operator==(read_result_impl_t const & other) const;
    bool operator!=(read_result_impl_t const & other) const;
@@ -296,7 +296,7 @@ class EOS_SDK_PUBLIC read_result_impl_t {
 
  private:
    response_enum_t status_;
-   std::string result_;
+   ByteString result_;
 };
 
 /** Register type, from which the HAM will read from/write to. */

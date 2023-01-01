@@ -471,7 +471,7 @@ operator<<(std::ostream& os, const read16_result_t& obj) {
 }
 
 
-read_result_t::read_result_t(response_enum_t status, std::string result) {
+read_result_t::read_result_t(response_enum_t status, ByteString result) {
    pimpl = std::shared_ptr<read_result_impl_t>(
       new read_result_impl_t(
          status,
@@ -502,12 +502,12 @@ void
 read_result_t::status_is(response_enum_t status) {
    pimpl->status_is(status);
 }
-std::string
+ByteString
 read_result_t::result() const {
    return pimpl->result();
 }
 void
-read_result_t::result_is(std::string result) {
+read_result_t::result_is(ByteString result) {
    pimpl->result_is(result);
 }
 bool

@@ -267,6 +267,17 @@ class EOS_SDK_PUBLIC nexthop_group_impl_t {
    /** Setter for 'hierarchical_fecs_enabled'. */
    void hierarchical_fecs_enabled_is(bool hierarchical_fecs_enabled);
 
+   /**
+    * Getter for 'counters_persistent': Defines whether entry counters are
+    * persistent or reset by changes to nexthop group entry. When set,
+    * modifications to nexthop group entry will not reset the counter. This mode is
+    * only available when counter is unshared. Disabled (i.e. set to false) by
+    * default.
+    */
+   bool counters_persistent() const;
+   /** Setter for 'counters_persistent'. */
+   void counters_persistent_is(bool counters_persistent);
+
    bool operator==(nexthop_group_impl_t const & other) const;
    bool operator!=(nexthop_group_impl_t const & other) const;
    bool operator<(nexthop_group_impl_t const & other) const;
@@ -295,6 +306,7 @@ class EOS_SDK_PUBLIC nexthop_group_impl_t {
    std::map<uint16_t, ip_addr_t> destination_ips_;
    bool counters_unshared_;
    bool hierarchical_fecs_enabled_;
+   bool counters_persistent_;
 };
 }
 

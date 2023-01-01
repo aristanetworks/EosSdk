@@ -4,7 +4,7 @@ AM_CXXFLAGS = -fvisibility=hidden
 AM_CXXFLAGS += -Wextra -Wall -Wnon-virtual-dtor -Werror -Wno-unused-parameter -Wno-error=unused-value
 AM_LDFLAGS = -Wl,--no-undefined
 
-PUBLISHED_HEADER_FILES := $(wildcard eos/*.h) $(wildcard eos/inline/*.h) $(wildcard eos/types/*.h) $(wildcard eos/inline/types/*.h) eos/version.h
+PUBLISHED_HEADER_FILES := $(wildcard eos/*.h) $(wildcard eos/inline/*.h) $(wildcard eos/types/*.h) $(wildcard eos/inline/types/*.h)
 nobase_include_HEADERS = $(PUBLISHED_HEADER_FILES)
 
 EXTRA_DIST = MaybePrintProfilesAndExit.cpp $(wildcard examples/*) $(wildcard examples/test/*)
@@ -83,7 +83,6 @@ libeos_la_CPPFLAGS = $(AM_CPPFLAGS) $(SHIPPING_FLAG)
 libeos_la_LDFLAGS = -version-info $(SDK_LIBTOOL_VERSION) -lrt
 libeos_la_LDFLAGS += -soname libeos.so.$(SDK_VERSION_MAJOR).$(SDK_VERSION_MINOR)
 
-
 noinst_PROGRAMS = HelloWorld
 HelloWorld_SOURCES = examples/HelloWorld.cpp
 HelloWorld_LDADD = libeos.la
@@ -151,3 +150,7 @@ EXTRA_DIST += Dockerfile
 dist-hook:
 	chmod -R u+w $(distdir)
 	$(MKDIR_P) $(srcdir)/$(stubsgosrcdir)
+
+install-exec-hook:
+	-echo "add major.minor link for stubbed libeos"
+	cd .libs; ln -sf libeos.so.$(SDK_VERSION_MAJOR).$(SDK_VERSION_MINOR).$(SDK_VERSION_PATCH) libeos.so.$(SDK_VERSION_MAJOR).$(SDK_VERSION_MINOR);

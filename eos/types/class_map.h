@@ -34,9 +34,9 @@ typedef policy_map_key_t class_map_key_t;
 class class_map_rule_impl_t;
 /**
  * A class map match rule uses an ACL to match classified traffic.
- * Values of this type are returned from the class_map_rule_iter, to program class
- * maps, either supply one of these or the acl_key_t directly to class_map_mgr's
- * class_map_rule_set().
+ * Values of this type are returned from the class map's rules() function. To
+ * program class map rules first add them to a class map and then add that to EOS
+ * SDK using class_map_mgr's class_map_is().
  */
 class EOS_SDK_PUBLIC class_map_rule_t {
  public:

@@ -145,6 +145,14 @@ ip_route_t::tag_is(ip_route_tag_t tag) {
    pimpl->tag_is(tag);
 }
 bool
+ip_route_t::rib_bypass() const {
+   return pimpl->rib_bypass();
+}
+void
+ip_route_t::rib_bypass_is(bool rib_bypass) {
+   pimpl->rib_bypass_is(rib_bypass);
+}
+bool
 ip_route_t::operator==(ip_route_t const & other) const {
    return pimpl->operator==(*other.pimpl);
 }
@@ -276,6 +284,22 @@ ip_route_via_t::metric() const {
 void
 ip_route_via_t::metric_is(ip_via_metric_t metric) {
    pimpl->metric_is(metric);
+}
+intf_id_t
+ip_route_via_t::vxlan_intf() const {
+   return pimpl->vxlan_intf();
+}
+void
+ip_route_via_t::vxlan_intf_is(intf_id_t vxlan_intf) {
+   pimpl->vxlan_intf_is(vxlan_intf);
+}
+bool
+ip_route_via_t::vtep_sip_validation() const {
+   return pimpl->vtep_sip_validation();
+}
+void
+ip_route_via_t::vtep_sip_validation_is(bool vtep_sip_validation) {
+   pimpl->vtep_sip_validation_is(vtep_sip_validation);
 }
 bool
 ip_route_via_t::operator==(ip_route_via_t const & other) const {

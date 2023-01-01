@@ -378,7 +378,8 @@ macsec_profile_impl_t::mix_me(hash_mix & h) const {
    h.mix(replay_protection_); // bool
    h.mix(replay_protection_window_); // uint32_t
    h.mix(key_retirement_immediate_); // bool
-   for (auto it=intfs_.cbegin(); it!=intfs_.cend(); ++it) {
+   for (auto it=intfs_.cbegin();
+        it!=intfs_.cend(); ++it) {
       h.mix(*it); // intf_id_t
    }
 }
@@ -404,7 +405,8 @@ macsec_profile_impl_t::to_string() const {
    ss << ", key_retirement_immediate=" << key_retirement_immediate_;
    ss << ", intfs=" <<"'";
    bool first_intfs = true;
-   for (auto it=intfs_.cbegin(); it!=intfs_.cend(); ++it) {
+   for (auto it=intfs_.cbegin();
+        it!=intfs_.cend(); ++it) {
       if (first_intfs) {
          ss << (*it);
          first_intfs = false;

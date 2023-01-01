@@ -161,7 +161,7 @@ class EOS_SDK_PUBLIC acl_rule_eth_iter_t : public iter_base<acl_rule_eth_entry_t
  * commit changes, apply ACLs to interfaces as well as manage
  * fragments mode and enabling counters.
  *
- * When managing ACLs, you provide give an ACL key to modify, a
+ * When managing ACLs, you provide an ACL key to modify, a
  * "sequence number" which starts at 1 and goes up to MAXINT, and for
  * set operations, the rule to set. Note: you must call commit() for
  * your changes here to get pushed into the hardware, and once you
@@ -282,20 +282,20 @@ class EOS_SDK_PUBLIC acl_mgr : public base_mgr<acl_handler> {
     * everything is loaded into hardware, or when we notice problems.
     *
     * API call ordering note: any acl_rule_set() or acl_rule_del()
-    * calls be followed by an acl_commit() prior to calling this
+    * calls must be followed by an acl_commit() prior to calling this
     * function else a panic() will occur.
     */
    virtual void acl_apply(acl_key_t const &, intf_id_t, acl_direction_t, bool) = 0;
 
    /**
     * Enable or disable counters for the ACL.
-    * Note: Must call commit() for setting to apply.
+    * Note: Must call commit() for this setting to apply.
     */
    virtual void acl_counters_enabled_set(acl_key_t const &, bool) = 0;
 
    /**
     * Enable or disable fragments matching on the ACL.
-    * Note: Must call commit() for setting to apply.
+    * Note: Must call commit() for this setting to apply.
     */
    virtual void acl_fragments_enabled_set(acl_key_t const &, bool) = 0;
 

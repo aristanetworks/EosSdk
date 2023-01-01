@@ -85,10 +85,12 @@ aresolve_record_host::hash() const {
 
 void
 aresolve_record_host::mix_me(hash_mix & h) const {
-   for (auto it=addr_v4_.cbegin(); it!=addr_v4_.cend(); ++it) {
+   for (auto it=addr_v4_.cbegin();
+        it!=addr_v4_.cend(); ++it) {
       h.mix(*it); // ip_addr_t
    }
-   for (auto it=addr_v6_.cbegin(); it!=addr_v6_.cend(); ++it) {
+   for (auto it=addr_v6_.cbegin();
+        it!=addr_v6_.cend(); ++it) {
       h.mix(*it); // ip_addr_t
    }
 }
@@ -99,7 +101,8 @@ aresolve_record_host::to_string() const {
    ss << "aresolve_record_host(";
    ss << "addr_v4=" <<"'";
    bool first_addr_v4 = true;
-   for (auto it=addr_v4_.cbegin(); it!=addr_v4_.cend(); ++it) {
+   for (auto it=addr_v4_.cbegin();
+        it!=addr_v4_.cend(); ++it) {
       if (first_addr_v4) {
          ss << (*it);
          first_addr_v4 = false;
@@ -110,7 +113,8 @@ aresolve_record_host::to_string() const {
    ss << "'";
    ss << ", addr_v6=" <<"'";
    bool first_addr_v6 = true;
-   for (auto it=addr_v6_.cbegin(); it!=addr_v6_.cend(); ++it) {
+   for (auto it=addr_v6_.cbegin();
+        it!=addr_v6_.cend(); ++it) {
       if (first_addr_v6) {
          ss << (*it);
          first_addr_v6 = false;

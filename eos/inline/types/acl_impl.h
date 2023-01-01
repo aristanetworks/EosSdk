@@ -177,7 +177,8 @@ acl_port_spec_impl_t::hash() const {
 void
 acl_port_spec_impl_t::mix_me(hash_mix & h) const {
    h.mix(oper_); // acl_range_operator_t
-   for (auto it=ports_.cbegin(); it!=ports_.cend(); ++it) {
+   for (auto it=ports_.cbegin();
+        it!=ports_.cend(); ++it) {
       h.mix(*it); // uint16_t
    }
 }
@@ -189,7 +190,8 @@ acl_port_spec_impl_t::to_string() const {
    ss << "oper=" << oper_;
    ss << ", ports=" <<"'";
    bool first_ports = true;
-   for (auto it=ports_.cbegin(); it!=ports_.cend(); ++it) {
+   for (auto it=ports_.cbegin();
+        it!=ports_.cend(); ++it) {
       if (first_ports) {
          ss << (*it);
          first_ports = false;

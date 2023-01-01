@@ -79,6 +79,8 @@ enum acl_tcp_flag_t {
    ACL_TCP_PSH = 8,
    ACL_TCP_ACK = 16,
    ACL_TCP_URG = 32,
+   ACL_TCP_ECE = 64,
+   ACL_TCP_CWR = 128,
 };
 /** Appends a string representation of enum acl_tcp_flag_t value to the ostream. */
 EOS_SDK_PUBLIC std::ostream& operator<<(std::ostream& os,
@@ -124,9 +126,7 @@ class EOS_SDK_PUBLIC acl_ttl_spec_t {
    /** Setter for 'oper'. */
    void oper_is(acl_range_operator_t oper);
 
-   /** Getter for 'ttl': the type of range, note, BETWEEN is not supported. */
    uint8_t ttl() const;
-   /** Setter for 'ttl'. */
    void ttl_is(uint8_t ttl);
 
    bool operator==(acl_ttl_spec_t const & other) const;
@@ -274,7 +274,7 @@ class acl_rule_base_impl_t;
  *   * acl_rule_eth_t
  *
  * Base parameters common to all filter types are defined on the parent
- * acl_base_filter_t, such as "log" to enable logging of packets matching the rule,
+ * acl_rule_base_t, such as "log" to enable logging of packets matching the rule,
  * and the action applied to packets matching the rule.
  *
  * Base ACL rule class containing common fields.

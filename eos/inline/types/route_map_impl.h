@@ -327,7 +327,8 @@ route_map_impl_t::hash() const {
 
 void
 route_map_impl_t::mix_me(hash_mix & h) const {
-   for (auto it=map_entry_.cbegin(); it!=map_entry_.cend(); ++it) {
+   for (auto it=map_entry_.cbegin();
+        it!=map_entry_.cend(); ++it) {
       h.mix(it->first); // route_map_sequence_number_t
       h.mix(it->second); // route_map_entry_t
    }
@@ -339,7 +340,8 @@ route_map_impl_t::to_string() const {
    ss << "route_map_t(";
    ss << "map_entry=" <<"'";
    bool first_map_entry = true;
-   for (auto it=map_entry_.cbegin(); it!=map_entry_.cend(); ++it) {
+   for (auto it=map_entry_.cbegin();
+        it!=map_entry_.cend(); ++it) {
       if (first_map_entry) {
          ss << it->first << "=" << it->second;
          first_map_entry = false;

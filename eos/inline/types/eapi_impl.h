@@ -52,7 +52,8 @@ eapi_response_impl_t::to_string() const {
    ss << ", error_message='" << error_message_ << "'";
    ss << ", responses=" <<"'";
    bool first_responses = true;
-   for (auto it=responses_.cbegin(); it!=responses_.cend(); ++it) {
+   for (auto it=responses_.cbegin();
+        it!=responses_.cend(); ++it) {
       if (first_responses) {
          ss << (*it);
          first_responses = false;

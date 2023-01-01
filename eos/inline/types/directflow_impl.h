@@ -261,7 +261,8 @@ flow_match_impl_t::hash() const {
 void
 flow_match_impl_t::mix_me(hash_mix & h) const {
    h.mix(match_field_set_); // flow_match_field_set_t
-   for (auto it=input_intfs_.cbegin(); it!=input_intfs_.cend(); ++it) {
+   for (auto it=input_intfs_.cbegin();
+        it!=input_intfs_.cend(); ++it) {
       h.mix(*it); // intf_id_t
    }
    h.mix(eth_src_); // eth_addr_t
@@ -285,7 +286,8 @@ flow_match_impl_t::to_string() const {
    ss << "match_field_set=" << match_field_set_;
    ss << ", input_intfs=" <<"'";
    bool first_input_intfs = true;
-   for (auto it=input_intfs_.cbegin(); it!=input_intfs_.cend(); ++it) {
+   for (auto it=input_intfs_.cbegin();
+        it!=input_intfs_.cend(); ++it) {
       if (first_input_intfs) {
          ss << (*it);
          first_input_intfs = false;
@@ -448,7 +450,8 @@ flow_action_impl_t::hash() const {
 void
 flow_action_impl_t::mix_me(hash_mix & h) const {
    h.mix(action_set_); // flow_action_set_t
-   for (auto it=output_intfs_.cbegin(); it!=output_intfs_.cend(); ++it) {
+   for (auto it=output_intfs_.cbegin();
+        it!=output_intfs_.cend(); ++it) {
       h.mix(*it); // intf_id_t
    }
    h.mix(vlan_id_); // vlan_id_t
@@ -466,7 +469,8 @@ flow_action_impl_t::to_string() const {
    ss << "action_set=" << action_set_;
    ss << ", output_intfs=" <<"'";
    bool first_output_intfs = true;
-   for (auto it=output_intfs_.cbegin(); it!=output_intfs_.cend(); ++it) {
+   for (auto it=output_intfs_.cbegin();
+        it!=output_intfs_.cend(); ++it) {
       if (first_output_intfs) {
          ss << (*it);
          first_output_intfs = false;

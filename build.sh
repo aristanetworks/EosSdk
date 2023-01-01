@@ -21,7 +21,7 @@ libdir="lib"
 configure_flags=''
 for arg; do
    case $arg in
-      (--enable-*|--disable-*|--with-*|--without-*|--host=*|--build=*)
+      (--enable-*|--disable-*|--with-*|--without-*|--host=*|--build=*|--prefix=*|--libdir=*)
          configure_flags="$configure_flags $arg"
          shift
          ;;
@@ -50,13 +50,22 @@ if $target_32b; then
 fi
 
 sysroot=$($(which gcc) --print-sysroot) || sysroot = ""
+inst_prefix="--prefix=$sysroot/usr"
+inst_libdir="--libdir=$sysroot/usr/$libdir"
+# if prefix already set in configure_flags, skip sysroot one
+if grep -q -- "--prefix=" <<< "$configure_flags"; then
+  inst_prefix=""
+fi
+if grep -q -- "--libdir=" <<< "$configure_flags"; then
+  inst_libdir=""
+fi
 
 set -e
 test -f configure || ./bootstrap
 test -f Makefile || ./configure  \
    $configure_flags --program-prefix= \
-   --prefix=$sysroot/usr \
-   --libdir=$sysroot/usr/$libdir \
+   $inst_prefix \
+   $inst_libdir \
 
 set -x
 STUBS_DIR=$PWD

@@ -391,7 +391,8 @@ fib_fec_impl_t::mix_me(hash_mix & h) const {
    h.mix(fec_key_); // fib_fec_key_t
    h.mix(fec_type_); // fib_fec_type_t
    h.mix(nexthop_group_name_); // std::string
-   for (auto it=via_.cbegin(); it!=via_.cend(); ++it) {
+   for (auto it=via_.cbegin();
+        it!=via_.cend(); ++it) {
       h.mix(*it); // fib_via_t
    }
 }
@@ -405,7 +406,8 @@ fib_fec_impl_t::to_string() const {
    ss << ", nexthop_group_name='" << nexthop_group_name_ << "'";
    ss << ", via=" <<"'";
    bool first_via = true;
-   for (auto it=via_.cbegin(); it!=via_.cend(); ++it) {
+   for (auto it=via_.cbegin();
+        it!=via_.cend(); ++it) {
       if (first_via) {
          ss << (*it);
          first_via = false;

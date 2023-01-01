@@ -253,7 +253,8 @@ bgp_path_attr_impl_t::mix_me(hash_mix & h) const {
    h.mix(origin_); // uint8_t
    h.mix(med_); // uint32_t
    h.mix(local_pref_); // uint32_t
-   for (auto it=community_list_.cbegin(); it!=community_list_.cend(); ++it) {
+   for (auto it=community_list_.cbegin();
+        it!=community_list_.cend(); ++it) {
       h.mix(*it); // uint32_t
    }
 }
@@ -268,7 +269,8 @@ bgp_path_attr_impl_t::to_string() const {
    ss << ", local_pref=" << local_pref_;
    ss << ", community_list=" <<"'";
    bool first_community_list = true;
-   for (auto it=community_list_.cbegin(); it!=community_list_.cend(); ++it) {
+   for (auto it=community_list_.cbegin();
+        it!=community_list_.cend(); ++it) {
       if (first_community_list) {
          ss << (*it);
          first_community_list = false;

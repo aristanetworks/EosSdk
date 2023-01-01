@@ -107,6 +107,14 @@ class EOS_SDK_PUBLIC ip_route_t {
    /** Setter for 'tag'. */
    void tag_is(ip_route_tag_t tag);
 
+   /**
+    * Getter for 'rib_bypass': Enables EVPN routes to bypass IpRib and be handled
+    * by RouteCache instead.
+    */
+   bool rib_bypass() const;
+   /** Setter for 'rib_bypass'. */
+   void rib_bypass_is(bool rib_bypass);
+
    bool operator==(ip_route_t const & other) const;
    bool operator!=(ip_route_t const & other) const;
    /** The hash function for type ip_route_t. */
@@ -208,6 +216,16 @@ class EOS_SDK_PUBLIC ip_route_via_t {
    ip_via_metric_t metric() const;
    /** Setter for 'metric'. */
    void metric_is(ip_via_metric_t metric);
+
+   /** Getter for 'vxlan_intf': VXLAN source interface. */
+   intf_id_t vxlan_intf() const;
+   /** Setter for 'vxlan_intf'. */
+   void vxlan_intf_is(intf_id_t vxlan_intf);
+
+   /** Getter for 'vtep_sip_validation': Enables VTEP SIP validation for this via. */
+   bool vtep_sip_validation() const;
+   /** Setter for 'vtep_sip_validation'. */
+   void vtep_sip_validation_is(bool vtep_sip_validation);
 
    bool operator==(ip_route_via_t const & other) const;
    bool operator!=(ip_route_via_t const & other) const;

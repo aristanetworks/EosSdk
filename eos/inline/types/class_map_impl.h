@@ -119,7 +119,8 @@ class_map_impl_t::hash() const {
 void
 class_map_impl_t::mix_me(hash_mix & h) const {
    h.mix(key_); // class_map_key_t
-   for (auto it=rules_.cbegin(); it!=rules_.cend(); ++it) {
+   for (auto it=rules_.cbegin();
+        it!=rules_.cend(); ++it) {
       h.mix(it->first); // uint32_t
       h.mix(it->second); // class_map_rule_t
    }
@@ -132,7 +133,8 @@ class_map_impl_t::to_string() const {
    ss << "key=" << key_;
    ss << ", rules=" <<"'";
    bool first_rules = true;
-   for (auto it=rules_.cbegin(); it!=rules_.cend(); ++it) {
+   for (auto it=rules_.cbegin();
+        it!=rules_.cend(); ++it) {
       if (first_rules) {
          ss << it->first << "=" << it->second;
          first_rules = false;

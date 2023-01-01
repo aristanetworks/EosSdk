@@ -226,7 +226,8 @@ void
 policy_map_action_impl_t::mix_me(hash_mix & h) const {
    h.mix(action_type_); // policy_action_type_t
    h.mix(nexthop_group_name_); // std::string
-   for (auto it=nexthops_.cbegin(); it!=nexthops_.cend(); ++it) {
+   for (auto it=nexthops_.cbegin();
+        it!=nexthops_.cend(); ++it) {
       h.mix(*it); // ip_addr_t
    }
    h.mix(vrf_); // std::string
@@ -242,7 +243,8 @@ policy_map_action_impl_t::to_string() const {
    ss << ", nexthop_group_name='" << nexthop_group_name_ << "'";
    ss << ", nexthops=" <<"'";
    bool first_nexthops = true;
-   for (auto it=nexthops_.cbegin(); it!=nexthops_.cend(); ++it) {
+   for (auto it=nexthops_.cbegin();
+        it!=nexthops_.cend(); ++it) {
       if (first_nexthops) {
          ss << (*it);
          first_nexthops = false;
@@ -386,7 +388,8 @@ policy_map_rule_impl_t::mix_me(hash_mix & h) const {
    h.mix(class_map_key_); // class_map_key_t
    h.mix(policy_map_rule_type_); // policy_map_rule_type_t
    h.mix(raw_rule_); // acl_rule_ip_t
-   for (auto it=actions_.cbegin(); it!=actions_.cend(); ++it) {
+   for (auto it=actions_.cbegin();
+        it!=actions_.cend(); ++it) {
       h.mix(*it); // policy_map_action_t
    }
 }
@@ -400,7 +403,8 @@ policy_map_rule_impl_t::to_string() const {
    ss << ", raw_rule=" << raw_rule_;
    ss << ", actions=" <<"'";
    bool first_actions = true;
-   for (auto it=actions_.cbegin(); it!=actions_.cend(); ++it) {
+   for (auto it=actions_.cbegin();
+        it!=actions_.cend(); ++it) {
       if (first_actions) {
          ss << (*it);
          first_actions = false;
@@ -552,7 +556,8 @@ policy_map_impl_t::hash() const {
 void
 policy_map_impl_t::mix_me(hash_mix & h) const {
    h.mix(key_); // policy_map_key_t
-   for (auto it=rules_.cbegin(); it!=rules_.cend(); ++it) {
+   for (auto it=rules_.cbegin();
+        it!=rules_.cend(); ++it) {
       h.mix(it->first); // uint32_t
       h.mix(it->second); // policy_map_rule_t
    }
@@ -565,7 +570,8 @@ policy_map_impl_t::to_string() const {
    ss << "key=" << key_;
    ss << ", rules=" <<"'";
    bool first_rules = true;
-   for (auto it=rules_.cbegin(); it!=rules_.cend(); ++it) {
+   for (auto it=rules_.cbegin();
+        it!=rules_.cend(); ++it) {
       if (first_rules) {
          ss << it->first << "=" << it->second;
          first_rules = false;
@@ -741,7 +747,8 @@ policy_map_hw_statuses_impl_t::hash() const {
 
 void
 policy_map_hw_statuses_impl_t::mix_me(hash_mix & h) const {
-   for (auto it=intf_statuses_.cbegin(); it!=intf_statuses_.cend(); ++it) {
+   for (auto it=intf_statuses_.cbegin();
+        it!=intf_statuses_.cend(); ++it) {
       h.mix(it->first); // policy_map_hw_status_key_t
       h.mix(it->second); // policy_map_status_t
    }
@@ -753,7 +760,8 @@ policy_map_hw_statuses_impl_t::to_string() const {
    ss << "policy_map_hw_statuses_t(";
    ss << "intf_statuses=" <<"'";
    bool first_intf_statuses = true;
-   for (auto it=intf_statuses_.cbegin(); it!=intf_statuses_.cend(); ++it) {
+   for (auto it=intf_statuses_.cbegin();
+        it!=intf_statuses_.cend(); ++it) {
       if (first_intf_statuses) {
          ss << it->first << "=" << it->second;
          first_intf_statuses = false;

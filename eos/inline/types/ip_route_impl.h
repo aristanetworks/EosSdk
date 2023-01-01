@@ -84,11 +84,11 @@ operator<<(std::ostream& os, const ip_route_key_impl_t& obj) {
 
 
 ip_route_impl_t::ip_route_impl_t() :
-      key_(), tag_(0) {
+      key_(), tag_(0), rib_bypass_() {
 }
 
 ip_route_impl_t::ip_route_impl_t(ip_route_key_t const & key) :
-      key_(key), tag_(0) {
+      key_(key), tag_(0), rib_bypass_() {
 }
 
 ip_route_key_t
@@ -112,9 +112,20 @@ ip_route_impl_t::tag_is(ip_route_tag_t tag) {
 }
 
 bool
+ip_route_impl_t::rib_bypass() const {
+   return rib_bypass_;
+}
+
+void
+ip_route_impl_t::rib_bypass_is(bool rib_bypass) {
+   rib_bypass_ = rib_bypass;
+}
+
+bool
 ip_route_impl_t::operator==(ip_route_impl_t const & other) const {
    return key_ == other.key_ &&
-          tag_ == other.tag_;
+          tag_ == other.tag_ &&
+          rib_bypass_ == other.rib_bypass_;
 }
 
 bool
@@ -133,6 +144,7 @@ void
 ip_route_impl_t::mix_me(hash_mix & h) const {
    h.mix(key_); // ip_route_key_t
    h.mix(tag_); // ip_route_tag_t
+   h.mix(rib_bypass_); // bool
 }
 
 std::string
@@ -141,6 +153,7 @@ ip_route_impl_t::to_string() const {
    ss << "ip_route_t(";
    ss << "key=" << key_;
    ss << ", tag=" << tag_;
+   ss << ", rib_bypass=" << rib_bypass_;
    ss << ")";
    return ss.str();
 }
@@ -155,12 +168,14 @@ operator<<(std::ostream& os, const ip_route_impl_t& obj) {
 
 ip_route_via_impl_t::ip_route_via_impl_t() :
       route_key_(), hop_(), intf_(), nexthop_group_(), mpls_label_(), vni_(),
-      vtep_addr_(), router_mac_(), egress_vrf_(), metric_(0) {
+      vtep_addr_(), router_mac_(), egress_vrf_(), metric_(0), vxlan_intf_(),
+      vtep_sip_validation_() {
 }
 
 ip_route_via_impl_t::ip_route_via_impl_t(ip_route_key_t const & route_key) :
       route_key_(route_key), hop_(), intf_(), nexthop_group_(), mpls_label_(),
-      vni_(), vtep_addr_(), router_mac_(), egress_vrf_(), metric_(0) {
+      vni_(), vtep_addr_(), router_mac_(), egress_vrf_(), metric_(0),
+      vxlan_intf_(), vtep_sip_validation_() {
 }
 
 ip_route_key_t
@@ -263,6 +278,26 @@ ip_route_via_impl_t::metric_is(ip_via_metric_t metric) {
    metric_ = metric;
 }
 
+intf_id_t
+ip_route_via_impl_t::vxlan_intf() const {
+   return vxlan_intf_;
+}
+
+void
+ip_route_via_impl_t::vxlan_intf_is(intf_id_t vxlan_intf) {
+   vxlan_intf_ = vxlan_intf;
+}
+
+bool
+ip_route_via_impl_t::vtep_sip_validation() const {
+   return vtep_sip_validation_;
+}
+
+void
+ip_route_via_impl_t::vtep_sip_validation_is(bool vtep_sip_validation) {
+   vtep_sip_validation_ = vtep_sip_validation;
+}
+
 bool
 ip_route_via_impl_t::operator==(ip_route_via_impl_t const & other) const {
    return route_key_ == other.route_key_ &&
@@ -274,7 +309,9 @@ ip_route_via_impl_t::operator==(ip_route_via_impl_t const & other) const {
           vtep_addr_ == other.vtep_addr_ &&
           router_mac_ == other.router_mac_ &&
           egress_vrf_ == other.egress_vrf_ &&
-          metric_ == other.metric_;
+          metric_ == other.metric_ &&
+          vxlan_intf_ == other.vxlan_intf_ &&
+          vtep_sip_validation_ == other.vtep_sip_validation_;
 }
 
 bool
@@ -301,6 +338,8 @@ ip_route_via_impl_t::mix_me(hash_mix & h) const {
    h.mix(router_mac_); // eth_addr_t
    h.mix(egress_vrf_); // std::string
    h.mix(metric_); // ip_via_metric_t
+   h.mix(vxlan_intf_); // intf_id_t
+   h.mix(vtep_sip_validation_); // bool
 }
 
 std::string
@@ -317,6 +356,8 @@ ip_route_via_impl_t::to_string() const {
    ss << ", router_mac=" << router_mac_;
    ss << ", egress_vrf='" << egress_vrf_ << "'";
    ss << ", metric=" << metric_;
+   ss << ", vxlan_intf=" << vxlan_intf_;
+   ss << ", vtep_sip_validation=" << vtep_sip_validation_;
    ss << ")";
    return ss.str();
 }

@@ -34,7 +34,6 @@ class EOS_SDK_PUBLIC ip_route_via_iter_t : public iter_base<ip_route_via_t,
    explicit ip_route_via_iter_t(ip_route_via_iter_impl * const) EOS_SDK_PRIVATE;
 };
 
-
 /// The manager for IP static route configuration
 class EOS_SDK_PUBLIC ip_route_mgr {
  public:
@@ -75,9 +74,16 @@ class EOS_SDK_PUBLIC ip_route_mgr {
 
    /**
     * Iterates across all configured static routes.
-    * If a tag is set, only return routes that have match the current tag.
+    * If a tag is set, only return routes that match the current tag.
     */
    virtual ip_route_iter_t ip_route_iter() const = 0;
+
+   /**
+    * Iterates across configured static routes in the specified VRF.
+    * returns empty iterator if the VRF does not exist.
+    * If a tag is set, only return routes that match the current tag.
+    */
+   ip_route_iter_t ip_route_iter( std::string vrf ) const;
 
    /**
     * Iterates across configured nexthops for a given route key,

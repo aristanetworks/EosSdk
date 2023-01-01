@@ -106,7 +106,8 @@ mpls_route_key_impl_t::hash() const {
 
 void
 mpls_route_key_impl_t::mix_me(hash_mix & h) const {
-   for (auto it=labels_.cbegin(); it!=labels_.cend(); ++it) {
+   for (auto it=labels_.cbegin();
+        it!=labels_.cend(); ++it) {
       h.mix(*it); // mpls_label_t
    }
    h.mix(metric_); // mpls_route_metric_t
@@ -118,7 +119,8 @@ mpls_route_key_impl_t::to_string() const {
    ss << "mpls_route_key_t(";
    ss << "labels=" <<"'";
    bool first_labels = true;
-   for (auto it=labels_.cbegin(); it!=labels_.cend(); ++it) {
+   for (auto it=labels_.cbegin();
+        it!=labels_.cend(); ++it) {
       if (first_labels) {
          ss << (*it);
          first_labels = false;

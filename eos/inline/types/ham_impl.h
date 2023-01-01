@@ -530,7 +530,7 @@ operator<<(std::ostream& os, const read16_result_impl_t& obj) {
 
 
 read_result_impl_t::read_result_impl_t(response_enum_t status,
-                                              std::string result) :
+                                              ByteString result) :
       status_(status), result_(result) {
 }
 
@@ -544,13 +544,13 @@ read_result_impl_t::status_is(response_enum_t status) {
    status_ = status;
 }
 
-std::string
+ByteString
 read_result_impl_t::result() const {
    return result_;
 }
 
 void
-read_result_impl_t::result_is(std::string result) {
+read_result_impl_t::result_is(ByteString result) {
    result_ = result;
 }
 
@@ -575,7 +575,7 @@ read_result_impl_t::hash() const {
 void
 read_result_impl_t::mix_me(hash_mix & h) const {
    h.mix(status_); // response_enum_t
-   h.mix(result_); // std::string
+   h.mix(result_); // ByteString
 }
 
 std::string
@@ -583,7 +583,7 @@ read_result_impl_t::to_string() const {
    std::ostringstream ss;
    ss << "read_result_t(";
    ss << "status=" << status_;
-   ss << ", result='" << result_ << "'";
+   ss << ", result=" << result_;
    ss << ")";
    return ss.str();
 }

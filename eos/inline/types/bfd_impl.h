@@ -386,7 +386,8 @@ void
 sbfd_echo_session_key_impl_t::mix_me(hash_mix & h) const {
    h.mix(nexthop_); // ip_addr_t
    h.mix(nexthop_intf_); // intf_id_t
-   for (auto it=labels_.cbegin(); it!=labels_.cend(); ++it) {
+   for (auto it=labels_.cbegin();
+        it!=labels_.cend(); ++it) {
       h.mix(*it); // mpls_label_t
    }
    h.mix(ip_dscp_); // uint8_t
@@ -401,7 +402,8 @@ sbfd_echo_session_key_impl_t::to_string() const {
    ss << ", nexthop_intf=" << nexthop_intf_;
    ss << ", labels=" <<"'";
    bool first_labels = true;
-   for (auto it=labels_.cbegin(); it!=labels_.cend(); ++it) {
+   for (auto it=labels_.cbegin();
+        it!=labels_.cend(); ++it) {
       if (first_labels) {
          ss << (*it);
          first_labels = false;
