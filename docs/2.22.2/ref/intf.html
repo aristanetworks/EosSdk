@@ -1,0 +1,936 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>intf &#8212; Arista EOS SDK 2.22.2 reference</title>
+    <link rel="stylesheet" href="_static/eossdk.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/language_data.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="ip" href="ip.html" />
+    <link rel="prev" title="hash_mix" href="hash_mix.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="ip.html" title="ip"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="hash_mix.html" title="hash_mix"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Arista EOS SDK 2.22.2 reference</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="intf">
+<h1><strong>intf</strong><a class="headerlink" href="#intf" title="Permalink to this headline">¶</a></h1>
+<p>Base interface types.</p>
+<p>A base interface contains non-media or interface type specific information. Also included in this module is the interface ID type intf_id_t, used to uniquely identify any interface in the system of any type, as well as common enumerates. </p>
+<dl class="type">
+<dt id="_CPPv43eos">
+<span id="_CPPv33eos"></span><span id="_CPPv23eos"></span><span id="eos"></span><span class="target" id="namespaceeos"></span><em class="property">namespace </em><code class="descname">eos</code><br /></dt>
+<dd><dl class="class">
+<dt id="_CPPv4N3eos12intf_handlerE">
+<span id="_CPPv3N3eos12intf_handlerE"></span><span id="_CPPv2N3eos12intf_handlerE"></span><span id="eos::intf_handler"></span><span class="target" id="classeos_1_1intf__handler"></span><em class="property">class </em><code class="descname">intf_handler</code> : <em class="property">public</em> <a class="reference internal" href="acl.html#_CPPv43eos" title="eos">eos</a>::base_handler&lt;<a class="reference internal" href="#_CPPv4N3eos8intf_mgrE" title="eos::intf_mgr">intf_mgr</a>, <a class="reference internal" href="#_CPPv4N3eos12intf_handlerE" title="eos::intf_handler">intf_handler</a>&gt;<a class="headerlink" href="#_CPPv4N3eos12intf_handlerE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><em>#include &lt;intf.h&gt;</em><p>This class receives changes to base interface attributes. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="function">
+<dt id="_CPPv4N3eos12intf_handler12intf_handlerEP8intf_mgr">
+<span id="_CPPv3N3eos12intf_handler12intf_handlerEP8intf_mgr"></span><span id="_CPPv2N3eos12intf_handler12intf_handlerEP8intf_mgr"></span><span id="eos::intf_handler::intf_handler__intf_mgrP"></span><span class="target" id="classeos_1_1intf__handler_1a01e4a9b93a6a4ee129726d1a71f20265"></span><code class="descname">intf_handler</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos8intf_mgrE" title="eos::intf_mgr">intf_mgr</a> *<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos12intf_handler12intf_handlerEP8intf_mgr" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4NK3eos12intf_handler12get_intf_mgrEv">
+<span id="_CPPv3NK3eos12intf_handler12get_intf_mgrEv"></span><span id="_CPPv2NK3eos12intf_handler12get_intf_mgrEv"></span><span id="eos::intf_handler::get_intf_mgrC"></span><span class="target" id="classeos_1_1intf__handler_1a3b70271d2185ecac6de2f6dea7d0d83f"></span><a class="reference internal" href="#_CPPv4N3eos8intf_mgrE" title="eos::intf_mgr">intf_mgr</a> *<code class="descname">get_intf_mgr</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos12intf_handler12get_intf_mgrEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N3eos12intf_handler15watch_all_intfsEb">
+<span id="_CPPv3N3eos12intf_handler15watch_all_intfsEb"></span><span id="_CPPv2N3eos12intf_handler15watch_all_intfsEb"></span><span id="eos::intf_handler::watch_all_intfs__b"></span><span class="target" id="classeos_1_1intf__handler_1a2145a9c0ed91d9bd13688d8a99c1290f"></span>void <code class="descname">watch_all_intfs</code><span class="sig-paren">(</span>bool<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos12intf_handler15watch_all_intfsEb" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Registers this class to receive change updates on the interface.</p>
+<p>Expects a boolean signifying whether notifications should be propagated to this instance or not. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N3eos12intf_handler10watch_intfE9intf_id_tb">
+<span id="_CPPv3N3eos12intf_handler10watch_intfE9intf_id_tb"></span><span id="_CPPv2N3eos12intf_handler10watch_intfE9intf_id_tb"></span><span id="eos::intf_handler::watch_intf__intf_id_t.b"></span><span class="target" id="classeos_1_1intf__handler_1adbe2e50b873d666837f8ca61a93379bc"></span>void <code class="descname">watch_intf</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos9intf_id_tE" title="eos::intf_id_t">intf_id_t</a>, bool<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos12intf_handler10watch_intfE9intf_id_tb" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Registers this class to receive change updates on the given interface.</p>
+<p>Expects the id of the corresponding interface and a boolean signifying whether notifications should be propagated to this instance or not. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N3eos12intf_handler14on_intf_createE9intf_id_t">
+<span id="_CPPv3N3eos12intf_handler14on_intf_createE9intf_id_t"></span><span id="_CPPv2N3eos12intf_handler14on_intf_createE9intf_id_t"></span><span id="eos::intf_handler::on_intf_create__intf_id_t"></span><span class="target" id="classeos_1_1intf__handler_1a32ce1a451e82c6963b8f6699eee1c571"></span><em class="property">virtual</em> void <code class="descname">on_intf_create</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos9intf_id_tE" title="eos::intf_id_t">intf_id_t</a><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos12intf_handler14on_intf_createE9intf_id_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Handler called when a new interface is created.</p>
+<p>After on_intf_create is called, the given intf_id is guaranteed to exist (ie <a class="reference internal" href="#classeos_1_1intf__mgr_1a3da6e69e381557c5f7ea6911d6f076b1"><span class="std std-ref">intf_mgr::exists</span></a> will return true). At that point, the intf_id can be used will all methods of the <a class="reference internal" href="#classeos_1_1intf__mgr"><span class="std std-ref">intf_mgr</span></a> class.</p>
+<p>This also means that the intf_id can be used with all other relevant *intf_mgr classes (ie <a class="reference internal" href="eth_intf.html#classeos_1_1eth__intf__mgr"><span class="std std-ref">eth_intf_mgr</span></a>, <a class="reference internal" href="eth_phy_intf.html#classeos_1_1eth__phy__intf__mgr"><span class="std std-ref">eth_phy_intf_mgr</span></a>, <a class="reference internal" href="eth_lag_intf.html#classeos_1_1eth__lag__intf__mgr"><span class="std std-ref">eth_lag_intf_mgr</span></a>, and <a class="reference internal" href="subintf.html#classeos_1_1subintf__mgr"><span class="std std-ref">subintf_mgr</span></a> as appropriate based on the intf_type). </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N3eos12intf_handler14on_intf_deleteE9intf_id_t">
+<span id="_CPPv3N3eos12intf_handler14on_intf_deleteE9intf_id_t"></span><span id="_CPPv2N3eos12intf_handler14on_intf_deleteE9intf_id_t"></span><span id="eos::intf_handler::on_intf_delete__intf_id_t"></span><span class="target" id="classeos_1_1intf__handler_1a3449927da0cc59ee7d1195961d0d2873"></span><em class="property">virtual</em> void <code class="descname">on_intf_delete</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos9intf_id_tE" title="eos::intf_id_t">intf_id_t</a><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos12intf_handler14on_intf_deleteE9intf_id_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Handler called when an interface has been removed.</p>
+<p>After on_intf_delete is called, the given intf_id is guaranteed to not exist (ie <a class="reference internal" href="#classeos_1_1intf__mgr_1a3da6e69e381557c5f7ea6911d6f076b1"><span class="std std-ref">intf_mgr::exists</span></a> will return false). At that point, the intf_id cannot be used will any methods in the <a class="reference internal" href="#classeos_1_1intf__mgr"><span class="std std-ref">intf_mgr</span></a> class.</p>
+<p>This also means that the intf_id can no longer be used with all other relevant *intf_mgr classes (ie <a class="reference internal" href="eth_intf.html#classeos_1_1eth__intf__mgr"><span class="std std-ref">eth_intf_mgr</span></a>, <a class="reference internal" href="eth_phy_intf.html#classeos_1_1eth__phy__intf__mgr"><span class="std std-ref">eth_phy_intf_mgr</span></a>, <a class="reference internal" href="eth_lag_intf.html#classeos_1_1eth__lag__intf__mgr"><span class="std std-ref">eth_lag_intf_mgr</span></a>, and <a class="reference internal" href="subintf.html#classeos_1_1subintf__mgr"><span class="std std-ref">subintf_mgr</span></a> as appropriate based on the intf_type). </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N3eos12intf_handler14on_oper_statusE9intf_id_t13oper_status_t">
+<span id="_CPPv3N3eos12intf_handler14on_oper_statusE9intf_id_t13oper_status_t"></span><span id="_CPPv2N3eos12intf_handler14on_oper_statusE9intf_id_t13oper_status_t"></span><span id="eos::intf_handler::on_oper_status__intf_id_t.oper_status_t"></span><span class="target" id="classeos_1_1intf__handler_1af9bb6065f883548ad5f7746ccfe32170"></span><em class="property">virtual</em> void <code class="descname">on_oper_status</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos9intf_id_tE" title="eos::intf_id_t">intf_id_t</a>, <a class="reference internal" href="#_CPPv4N3eos13oper_status_tE" title="eos::oper_status_t">oper_status_t</a><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos12intf_handler14on_oper_statusE9intf_id_t13oper_status_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Handler called when the operational status of an interface changes.</p>
+<p>Note that for physical interfaces, the on_oper_status handler will get called with INTF_OPER_NULL when the underlying hardware for that physical interface is removed. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N3eos12intf_handler16on_admin_enabledE9intf_id_tb">
+<span id="_CPPv3N3eos12intf_handler16on_admin_enabledE9intf_id_tb"></span><span id="_CPPv2N3eos12intf_handler16on_admin_enabledE9intf_id_tb"></span><span id="eos::intf_handler::on_admin_enabled__intf_id_t.b"></span><span class="target" id="classeos_1_1intf__handler_1afd570629b68b5f525b8753d19447748b"></span><em class="property">virtual</em> void <code class="descname">on_admin_enabled</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos9intf_id_tE" title="eos::intf_id_t">intf_id_t</a>, bool<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos12intf_handler16on_admin_enabledE9intf_id_tb" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Handler called after an interface has been configured to be enabled. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N3eos12intf_handler19on_intf_descriptionE9intf_id_tRKNSt6stringE">
+<span id="_CPPv3N3eos12intf_handler19on_intf_descriptionE9intf_id_tRKNSt6stringE"></span><span id="_CPPv2N3eos12intf_handler19on_intf_descriptionE9intf_id_tRKNSt6stringE"></span><span id="eos::intf_handler::on_intf_description__intf_id_t.ssCR"></span><span class="target" id="classeos_1_1intf__handler_1aa92f0001bf0860b651fc868165cffeb8"></span><em class="property">virtual</em> void <code class="descname">on_intf_description</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos9intf_id_tE" title="eos::intf_id_t">intf_id_t</a>, <em class="property">const</em> <a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::string&amp;<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos12intf_handler19on_intf_descriptionE9intf_id_tRKNSt6stringE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Handler called when the configured description of an interface changes. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="class">
+<dt id="_CPPv4N3eos11intf_iter_tE">
+<span id="_CPPv3N3eos11intf_iter_tE"></span><span id="_CPPv2N3eos11intf_iter_tE"></span><span id="eos::intf_iter_t"></span><span class="target" id="classeos_1_1intf__iter__t"></span><em class="property">class </em><code class="descname">intf_iter_t</code> : <em class="property">public</em> <a class="reference internal" href="acl.html#_CPPv43eos" title="eos">eos</a>::iter_base&lt;<a class="reference internal" href="#_CPPv4N3eos9intf_id_tE" title="eos::intf_id_t">intf_id_t</a>, intf_iter_impl&gt;<a class="headerlink" href="#_CPPv4N3eos11intf_iter_tE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><em>#include &lt;intf.h&gt;</em><p>An interface iterator. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Private Functions</p>
+<dl class="function">
+<dt id="_CPPv4N3eos11intf_iter_t11intf_iter_tEPC14intf_iter_impl">
+<span id="_CPPv3N3eos11intf_iter_t11intf_iter_tEPC14intf_iter_impl"></span><span id="_CPPv2N3eos11intf_iter_t11intf_iter_tEPC14intf_iter_impl"></span><span id="eos::intf_iter_t::intf_iter_t__intf_iter_implPC"></span><span class="target" id="classeos_1_1intf__iter__t_1a29da502a26a07ef520a94d67f3fcd8ea"></span><code class="descname">intf_iter_t</code><span class="sig-paren">(</span>intf_iter_impl *<em class="property">const</em> <span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos11intf_iter_t11intf_iter_tEPC14intf_iter_impl" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Friends</p>
+<dl class="function">
+<dt>
+<span class="target" id="classeos_1_1intf__iter__t_1a482ba060a03019601193a8f98000d1c5"></span><em class="property">friend </em><code class="descname">eos::intf_iter_impl</code></dt>
+<dd></dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="class">
+<dt id="_CPPv4N3eos8intf_mgrE">
+<span id="_CPPv3N3eos8intf_mgrE"></span><span id="_CPPv2N3eos8intf_mgrE"></span><span id="eos::intf_mgr"></span><span class="target" id="classeos_1_1intf__mgr"></span><em class="property">class </em><code class="descname">intf_mgr</code> : <em class="property">public</em> <a class="reference internal" href="acl.html#_CPPv43eos" title="eos">eos</a>::base_mgr&lt;<a class="reference internal" href="#_CPPv4N3eos12intf_handlerE" title="eos::intf_handler">intf_handler</a>, <a class="reference internal" href="#_CPPv4N3eos9intf_id_tE" title="eos::intf_id_t">intf_id_t</a>&gt;<a class="headerlink" href="#_CPPv4N3eos8intf_mgrE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><em>#include &lt;intf.h&gt;</em><p>The interface manager. This class inspects and configures base interface attributes. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="function">
+<dt id="_CPPv4N3eos8intf_mgrD0Ev">
+<span id="_CPPv3N3eos8intf_mgrD0Ev"></span><span id="_CPPv2N3eos8intf_mgrD0Ev"></span><span id="eos::intf_mgr::~intf_mgr"></span><span class="target" id="classeos_1_1intf__mgr_1aa4f11e0d0256cf7a1c5a994a881e09d1"></span><em class="property">virtual</em> <code class="descname">~intf_mgr</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos8intf_mgrD0Ev" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4NK3eos8intf_mgr9intf_iterEv">
+<span id="_CPPv3NK3eos8intf_mgr9intf_iterEv"></span><span id="_CPPv2NK3eos8intf_mgr9intf_iterEv"></span><span id="eos::intf_mgr::intf_iterC"></span><span class="target" id="classeos_1_1intf__mgr_1a71239518e8059668fa79e2f6cfe0bfe7"></span><em class="property">virtual</em> <a class="reference internal" href="#_CPPv4N3eos11intf_iter_tE" title="eos::intf_iter_t">intf_iter_t</a> <code class="descname">intf_iter</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em> = 0<a class="headerlink" href="#_CPPv4NK3eos8intf_mgr9intf_iterEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Iterates over all interfaces currently available in the system. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4NK3eos8intf_mgr6existsE9intf_id_t">
+<span id="_CPPv3NK3eos8intf_mgr6existsE9intf_id_t"></span><span id="_CPPv2NK3eos8intf_mgr6existsE9intf_id_t"></span><span id="eos::intf_mgr::exists__intf_id_tC"></span><span class="target" id="classeos_1_1intf__mgr_1a3da6e69e381557c5f7ea6911d6f076b1"></span><em class="property">virtual</em> bool <code class="descname">exists</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos9intf_id_tE" title="eos::intf_id_t">intf_id_t</a><span class="sig-paren">)</span> <em class="property">const</em> = 0<a class="headerlink" href="#_CPPv4NK3eos8intf_mgr6existsE9intf_id_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Returns whether the given interface exists.</p>
+<p>If exists returns true, then this <a class="reference internal" href="#classeos_1_1intf__id__t"><span class="std std-ref">intf_id_t</span></a> can be successfully passed into every method of the <a class="reference internal" href="#classeos_1_1intf__mgr"><span class="std std-ref">intf_mgr</span></a>. If not, then methods of the <a class="reference internal" href="#classeos_1_1intf__mgr"><span class="std std-ref">intf_mgr</span></a> can throw a <a class="reference internal" href="#classeos_1_1no__such__interface__error"><span class="std std-ref">no_such_interface_error</span></a> exception.</p>
+<p>The exists method of all *intf_mgr classes that manage a given interface (ie <a class="reference internal" href="#classeos_1_1intf__mgr"><span class="std std-ref">intf_mgr</span></a>, <a class="reference internal" href="eth_intf.html#classeos_1_1eth__intf__mgr"><span class="std std-ref">eth_intf_mgr</span></a>, <a class="reference internal" href="eth_phy_intf.html#classeos_1_1eth__phy__intf__mgr"><span class="std std-ref">eth_phy_intf_mgr</span></a>, <a class="reference internal" href="eth_lag_intf.html#classeos_1_1eth__lag__intf__mgr"><span class="std std-ref">eth_lag_intf_mgr</span></a>, and/or <a class="reference internal" href="subintf.html#classeos_1_1subintf__mgr"><span class="std std-ref">subintf_mgr</span></a>) are all guaranteed to return the same result. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4NK3eos8intf_mgr16kernel_intf_nameE9intf_id_t">
+<span id="_CPPv3NK3eos8intf_mgr16kernel_intf_nameE9intf_id_t"></span><span id="_CPPv2NK3eos8intf_mgr16kernel_intf_nameE9intf_id_t"></span><span id="eos::intf_mgr::kernel_intf_name__intf_id_tC"></span><span class="target" id="classeos_1_1intf__mgr_1a2049ce6a37841c0453760429bdfae422"></span><em class="property">virtual</em> <a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::string <code class="descname">kernel_intf_name</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos9intf_id_tE" title="eos::intf_id_t">intf_id_t</a><span class="sig-paren">)</span> <em class="property">const</em> = 0<a class="headerlink" href="#_CPPv4NK3eos8intf_mgr16kernel_intf_nameE9intf_id_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Given an <a class="reference internal" href="#classeos_1_1intf__id__t"><span class="std std-ref">intf_id_t</span></a>, returns the kernel interface name (as a string). Returns an empty string if matching kernel interface is not found. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4NK3eos8intf_mgr13eos_intf_nameENSt6stringE">
+<span id="_CPPv3NK3eos8intf_mgr13eos_intf_nameENSt6stringE"></span><span id="_CPPv2NK3eos8intf_mgr13eos_intf_nameENSt6stringE"></span><span id="eos::intf_mgr::eos_intf_name__ssC"></span><span class="target" id="classeos_1_1intf__mgr_1a7e3fb00a1afd6c604d581b6e05538655"></span><em class="property">virtual</em> <a class="reference internal" href="#_CPPv4N3eos9intf_id_tE" title="eos::intf_id_t">intf_id_t</a> <code class="descname">eos_intf_name</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::string<span class="sig-paren">)</span> <em class="property">const</em> = 0<a class="headerlink" href="#_CPPv4NK3eos8intf_mgr13eos_intf_nameENSt6stringE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Given a kernel interface name string, return the EOS interface as an <a class="reference internal" href="#classeos_1_1intf__id__t"><span class="std std-ref">intf_id_t</span></a>. Returns an empty intf_id_t() if matching EOS interface is not found. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4NK3eos8intf_mgr13admin_enabledE9intf_id_t">
+<span id="_CPPv3NK3eos8intf_mgr13admin_enabledE9intf_id_t"></span><span id="_CPPv2NK3eos8intf_mgr13admin_enabledE9intf_id_t"></span><span id="eos::intf_mgr::admin_enabled__intf_id_tC"></span><span class="target" id="classeos_1_1intf__mgr_1a3d7b04d4b7e879452388d2515538bc6e"></span><em class="property">virtual</em> bool <code class="descname">admin_enabled</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos9intf_id_tE" title="eos::intf_id_t">intf_id_t</a><span class="sig-paren">)</span> <em class="property">const</em> = 0<a class="headerlink" href="#_CPPv4NK3eos8intf_mgr13admin_enabledE9intf_id_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Returns true if the given interface is configured to be enabled. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N3eos8intf_mgr16admin_enabled_isE9intf_id_tb">
+<span id="_CPPv3N3eos8intf_mgr16admin_enabled_isE9intf_id_tb"></span><span id="_CPPv2N3eos8intf_mgr16admin_enabled_isE9intf_id_tb"></span><span id="eos::intf_mgr::admin_enabled_is__intf_id_t.b"></span><span class="target" id="classeos_1_1intf__mgr_1af1aa38f33d8197a5de07e2424fc60246"></span><em class="property">virtual</em> void <code class="descname">admin_enabled_is</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos9intf_id_tE" title="eos::intf_id_t">intf_id_t</a>, bool<span class="sig-paren">)</span> = 0<a class="headerlink" href="#_CPPv4N3eos8intf_mgr16admin_enabled_isE9intf_id_tb" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Configures the enabled status of the interface. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4NK3eos8intf_mgr11descriptionE9intf_id_t">
+<span id="_CPPv3NK3eos8intf_mgr11descriptionE9intf_id_t"></span><span id="_CPPv2NK3eos8intf_mgr11descriptionE9intf_id_t"></span><span id="eos::intf_mgr::description__intf_id_tC"></span><span class="target" id="classeos_1_1intf__mgr_1ac453f33298b30a11b746faf4e4ad8c23"></span><em class="property">virtual</em> <a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::string <code class="descname">description</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos9intf_id_tE" title="eos::intf_id_t">intf_id_t</a><span class="sig-paren">)</span> <em class="property">const</em> = 0<a class="headerlink" href="#_CPPv4NK3eos8intf_mgr11descriptionE9intf_id_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Returns the configured description of the given interface. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N3eos8intf_mgr14description_isE9intf_id_tPKc">
+<span id="_CPPv3N3eos8intf_mgr14description_isE9intf_id_tPKc"></span><span id="_CPPv2N3eos8intf_mgr14description_isE9intf_id_tPKc"></span><span id="eos::intf_mgr::description_is__intf_id_t.cCP"></span><span class="target" id="classeos_1_1intf__mgr_1af5e55dd463b90a32edb5127a289ef6f6"></span><em class="property">virtual</em> void <code class="descname">description_is</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos9intf_id_tE" title="eos::intf_id_t">intf_id_t</a>, char <em class="property">const</em> *<span class="sig-paren">)</span> = 0<a class="headerlink" href="#_CPPv4N3eos8intf_mgr14description_isE9intf_id_tPKc" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Configure the description of the given interface. Creates a copy of the passed in string description. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N3eos8intf_mgr14description_isE9intf_id_tRKNSt6stringE">
+<span id="_CPPv3N3eos8intf_mgr14description_isE9intf_id_tRKNSt6stringE"></span><span id="_CPPv2N3eos8intf_mgr14description_isE9intf_id_tRKNSt6stringE"></span><span id="eos::intf_mgr::description_is__intf_id_t.ssCR"></span><span class="target" id="classeos_1_1intf__mgr_1aa972a3ce06afc5f594455493ae268b1c"></span><em class="property">virtual</em> void <code class="descname">description_is</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos9intf_id_tE" title="eos::intf_id_t">intf_id_t</a>, <em class="property">const</em> <a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::string&amp;<span class="sig-paren">)</span> = 0<a class="headerlink" href="#_CPPv4N3eos8intf_mgr14description_isE9intf_id_tRKNSt6stringE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Configure the description of the given interface. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4NK3eos8intf_mgr11oper_statusE9intf_id_t">
+<span id="_CPPv3NK3eos8intf_mgr11oper_statusE9intf_id_t"></span><span id="_CPPv2NK3eos8intf_mgr11oper_statusE9intf_id_t"></span><span id="eos::intf_mgr::oper_status__intf_id_tC"></span><span class="target" id="classeos_1_1intf__mgr_1a78332902a60f892b568a2102ffa20b5b"></span><em class="property">virtual</em> <a class="reference internal" href="#_CPPv4N3eos13oper_status_tE" title="eos::oper_status_t">oper_status_t</a> <code class="descname">oper_status</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos9intf_id_tE" title="eos::intf_id_t">intf_id_t</a><span class="sig-paren">)</span> <em class="property">const</em> = 0<a class="headerlink" href="#_CPPv4NK3eos8intf_mgr11oper_statusE9intf_id_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Inspects the current operational status of the given interface. </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Protected Functions</p>
+<dl class="function">
+<dt id="_CPPv4N3eos8intf_mgr8intf_mgrEv">
+<span id="_CPPv3N3eos8intf_mgr8intf_mgrEv"></span><span id="_CPPv2N3eos8intf_mgr8intf_mgrEv"></span><span id="eos::intf_mgr::intf_mgr"></span><span class="target" id="classeos_1_1intf__mgr_1a974b585de74572a36c3ac9fdfdf6971d"></span><code class="descname">intf_mgr</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos8intf_mgr8intf_mgrEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Private Members</p>
+<dl class="member">
+<dt>
+<span class="target" id="classeos_1_1intf__mgr_1aad085536cf2e6e1589d6dcdf0b0d9535"></span><code class="descname">eos::intf_mgr::intf_mgr</code></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Friends</p>
+<dl class="function">
+<dt>
+<span class="target" id="classeos_1_1intf__mgr_1a26eb1211da684b70ef052b1c3d799996"></span><em class="property">friend </em><code class="descname">eos::intf_handler</code></dt>
+<dd></dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="class">
+<dt id="_CPPv4N3eos16intf_counter_mgrE">
+<span id="_CPPv3N3eos16intf_counter_mgrE"></span><span id="_CPPv2N3eos16intf_counter_mgrE"></span><span id="eos::intf_counter_mgr"></span><span class="target" id="classeos_1_1intf__counter__mgr"></span><em class="property">class </em><code class="descname">intf_counter_mgr</code><a class="headerlink" href="#_CPPv4N3eos16intf_counter_mgrE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><em>#include &lt;intf.h&gt;</em><p>The interface counter manager. This class inspects base interface counters and statistics. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="function">
+<dt id="_CPPv4N3eos16intf_counter_mgrD0Ev">
+<span id="_CPPv3N3eos16intf_counter_mgrD0Ev"></span><span id="_CPPv2N3eos16intf_counter_mgrD0Ev"></span><span id="eos::intf_counter_mgr::~intf_counter_mgr"></span><span class="target" id="classeos_1_1intf__counter__mgr_1ace5b78661a273408de8267eccdc61eb7"></span><em class="property">virtual</em> <code class="descname">~intf_counter_mgr</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos16intf_counter_mgrD0Ev" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4NK3eos16intf_counter_mgr8countersE9intf_id_t">
+<span id="_CPPv3NK3eos16intf_counter_mgr8countersE9intf_id_t"></span><span id="_CPPv2NK3eos16intf_counter_mgr8countersE9intf_id_t"></span><span id="eos::intf_counter_mgr::counters__intf_id_tC"></span><span class="target" id="classeos_1_1intf__counter__mgr_1a1b877262c758db40953b12b0f3a62037"></span><em class="property">virtual</em> <a class="reference internal" href="#_CPPv4N3eos15intf_counters_tE" title="eos::intf_counters_t">intf_counters_t</a> <code class="descname">counters</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos9intf_id_tE" title="eos::intf_id_t">intf_id_t</a><span class="sig-paren">)</span> <em class="property">const</em> = 0<a class="headerlink" href="#_CPPv4NK3eos16intf_counter_mgr8countersE9intf_id_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Get the current counters of the given interface. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4NK3eos16intf_counter_mgr13traffic_ratesE9intf_id_t">
+<span id="_CPPv3NK3eos16intf_counter_mgr13traffic_ratesE9intf_id_t"></span><span id="_CPPv2NK3eos16intf_counter_mgr13traffic_ratesE9intf_id_t"></span><span id="eos::intf_counter_mgr::traffic_rates__intf_id_tC"></span><span class="target" id="classeos_1_1intf__counter__mgr_1a97bcba1407d6513e6b98c94dca82fa3d"></span><em class="property">virtual</em> <a class="reference internal" href="#_CPPv4N3eos20intf_traffic_rates_tE" title="eos::intf_traffic_rates_t">intf_traffic_rates_t</a> <code class="descname">traffic_rates</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos9intf_id_tE" title="eos::intf_id_t">intf_id_t</a><span class="sig-paren">)</span> <em class="property">const</em> = 0<a class="headerlink" href="#_CPPv4NK3eos16intf_counter_mgr13traffic_ratesE9intf_id_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Get the current traffic rates of the given interface. </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Protected Functions</p>
+<dl class="function">
+<dt id="_CPPv4N3eos16intf_counter_mgr16intf_counter_mgrEv">
+<span id="_CPPv3N3eos16intf_counter_mgr16intf_counter_mgrEv"></span><span id="_CPPv2N3eos16intf_counter_mgr16intf_counter_mgrEv"></span><span id="eos::intf_counter_mgr::intf_counter_mgr"></span><span class="target" id="classeos_1_1intf__counter__mgr_1a5c5948d0b5a32059012b75785a161e99"></span><code class="descname">intf_counter_mgr</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos16intf_counter_mgr16intf_counter_mgrEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Private Members</p>
+<dl class="member">
+<dt>
+<span class="target" id="classeos_1_1intf__counter__mgr_1afa16f81a7c9407bfcf92546f9f6090fa"></span><code class="descname">eos::intf_counter_mgr::intf_counter_mgr</code></dt>
+<dd></dd></dl>
+
+</div>
+</dd></dl>
+
+</dd></dl>
+
+<div class="section" id="type-definitions-in-intf">
+<h2>Type definitions in <strong>intf</strong><a class="headerlink" href="#type-definitions-in-intf" title="Permalink to this headline">¶</a></h2>
+<dl class="type">
+<dt id="_CPPv43eos">
+<span id="_CPPv33eos"></span><span id="_CPPv23eos"></span><span class="target" id="namespaceeos"></span><em class="property">namespace </em><code class="descname">eos</code><br /></dt>
+<dd><div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Enums</p>
+<dl class="enum">
+<dt id="_CPPv4N3eos13oper_status_tE">
+<span id="_CPPv3N3eos13oper_status_tE"></span><span id="_CPPv2N3eos13oper_status_tE"></span><span class="target" id="namespaceeos_1a84a0017d168054a1143f4b655437aa50"></span><em class="property">enum </em><code class="descname">oper_status_t</code><a class="headerlink" href="#_CPPv4N3eos13oper_status_tE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>The operational status of an interface. </p>
+<p><em>Values:</em></p>
+<dl class="enumerator">
+<dt id="_CPPv4N3eos14INTF_OPER_NULLE">
+<span id="_CPPv3N3eos14INTF_OPER_NULLE"></span><span id="_CPPv2N3eos14INTF_OPER_NULLE"></span><span class="target" id="namespaceeos_1a84a0017d168054a1143f4b655437aa50aa28c694e981eae283eeaa838cd714bd2"></span><code class="descname">INTF_OPER_NULL</code><a class="headerlink" href="#_CPPv4N3eos14INTF_OPER_NULLE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="enumerator">
+<dt id="_CPPv4N3eos12INTF_OPER_UPE">
+<span id="_CPPv3N3eos12INTF_OPER_UPE"></span><span id="_CPPv2N3eos12INTF_OPER_UPE"></span><span class="target" id="namespaceeos_1a84a0017d168054a1143f4b655437aa50adf1b636a15bc8eccab67170e11c59178"></span><code class="descname">INTF_OPER_UP</code><a class="headerlink" href="#_CPPv4N3eos12INTF_OPER_UPE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="enumerator">
+<dt id="_CPPv4N3eos14INTF_OPER_DOWNE">
+<span id="_CPPv3N3eos14INTF_OPER_DOWNE"></span><span id="_CPPv2N3eos14INTF_OPER_DOWNE"></span><span class="target" id="namespaceeos_1a84a0017d168054a1143f4b655437aa50a92570590e66270cc1662721338902f1d"></span><code class="descname">INTF_OPER_DOWN</code><a class="headerlink" href="#_CPPv4N3eos14INTF_OPER_DOWNE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="enum">
+<dt id="_CPPv4N3eos11intf_type_tE">
+<span id="_CPPv3N3eos11intf_type_tE"></span><span id="_CPPv2N3eos11intf_type_tE"></span><span class="target" id="namespaceeos_1a21d5fc25b1e82f4fa969cd924ac5918e"></span><em class="property">enum </em><code class="descname">intf_type_t</code><a class="headerlink" href="#_CPPv4N3eos11intf_type_tE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>The interface’s type. </p>
+<p><em>Values:</em></p>
+<dl class="enumerator">
+<dt id="_CPPv4N3eos14INTF_TYPE_NULLE">
+<span id="_CPPv3N3eos14INTF_TYPE_NULLE"></span><span id="_CPPv2N3eos14INTF_TYPE_NULLE"></span><span class="target" id="namespaceeos_1a21d5fc25b1e82f4fa969cd924ac5918ea13b6ff4e4060643a95b76e7efab10a6b"></span><code class="descname">INTF_TYPE_NULL</code><a class="headerlink" href="#_CPPv4N3eos14INTF_TYPE_NULLE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="enumerator">
+<dt id="_CPPv4N3eos15INTF_TYPE_OTHERE">
+<span id="_CPPv3N3eos15INTF_TYPE_OTHERE"></span><span id="_CPPv2N3eos15INTF_TYPE_OTHERE"></span><span class="target" id="namespaceeos_1a21d5fc25b1e82f4fa969cd924ac5918ea47c0f8b214e653e5a2001171eb05df42"></span><code class="descname">INTF_TYPE_OTHER</code><a class="headerlink" href="#_CPPv4N3eos15INTF_TYPE_OTHERE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="enumerator">
+<dt id="_CPPv4N3eos13INTF_TYPE_ETHE">
+<span id="_CPPv3N3eos13INTF_TYPE_ETHE"></span><span id="_CPPv2N3eos13INTF_TYPE_ETHE"></span><span class="target" id="namespaceeos_1a21d5fc25b1e82f4fa969cd924ac5918ea8c5479f508b752c07e039216a6aac042"></span><code class="descname">INTF_TYPE_ETH</code><a class="headerlink" href="#_CPPv4N3eos13INTF_TYPE_ETHE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="enumerator">
+<dt id="_CPPv4N3eos14INTF_TYPE_VLANE">
+<span id="_CPPv3N3eos14INTF_TYPE_VLANE"></span><span id="_CPPv2N3eos14INTF_TYPE_VLANE"></span><span class="target" id="namespaceeos_1a21d5fc25b1e82f4fa969cd924ac5918ea047a0e7994d003e45d415a247dead7ea"></span><code class="descname">INTF_TYPE_VLAN</code><a class="headerlink" href="#_CPPv4N3eos14INTF_TYPE_VLANE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="enumerator">
+<dt id="_CPPv4N3eos20INTF_TYPE_MANAGEMENTE">
+<span id="_CPPv3N3eos20INTF_TYPE_MANAGEMENTE"></span><span id="_CPPv2N3eos20INTF_TYPE_MANAGEMENTE"></span><span class="target" id="namespaceeos_1a21d5fc25b1e82f4fa969cd924ac5918ea526335eda37f01fc7395271b4c7be809"></span><code class="descname">INTF_TYPE_MANAGEMENT</code><a class="headerlink" href="#_CPPv4N3eos20INTF_TYPE_MANAGEMENTE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="enumerator">
+<dt id="_CPPv4N3eos18INTF_TYPE_LOOPBACKE">
+<span id="_CPPv3N3eos18INTF_TYPE_LOOPBACKE"></span><span id="_CPPv2N3eos18INTF_TYPE_LOOPBACKE"></span><span class="target" id="namespaceeos_1a21d5fc25b1e82f4fa969cd924ac5918ea0d891c249372025dd2b0c007e2477302"></span><code class="descname">INTF_TYPE_LOOPBACK</code><a class="headerlink" href="#_CPPv4N3eos18INTF_TYPE_LOOPBACKE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="enumerator">
+<dt id="_CPPv4N3eos13INTF_TYPE_LAGE">
+<span id="_CPPv3N3eos13INTF_TYPE_LAGE"></span><span id="_CPPv2N3eos13INTF_TYPE_LAGE"></span><span class="target" id="namespaceeos_1a21d5fc25b1e82f4fa969cd924ac5918ea9c27e3bea0722df2e93b1835962b453c"></span><code class="descname">INTF_TYPE_LAG</code><a class="headerlink" href="#_CPPv4N3eos13INTF_TYPE_LAGE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="enumerator">
+<dt id="_CPPv4N3eos15INTF_TYPE_NULL0E">
+<span id="_CPPv3N3eos15INTF_TYPE_NULL0E"></span><span id="_CPPv2N3eos15INTF_TYPE_NULL0E"></span><span class="target" id="namespaceeos_1a21d5fc25b1e82f4fa969cd924ac5918ead85045e3d64d7671e0f8777dd8b79577"></span><code class="descname">INTF_TYPE_NULL0</code><a class="headerlink" href="#_CPPv4N3eos15INTF_TYPE_NULL0E" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="enumerator">
+<dt id="_CPPv4N3eos13INTF_TYPE_CPUE">
+<span id="_CPPv3N3eos13INTF_TYPE_CPUE"></span><span id="_CPPv2N3eos13INTF_TYPE_CPUE"></span><span class="target" id="namespaceeos_1a21d5fc25b1e82f4fa969cd924ac5918eabba2cbcb3008ba5844a1c58336edaecf"></span><code class="descname">INTF_TYPE_CPU</code><a class="headerlink" href="#_CPPv4N3eos13INTF_TYPE_CPUE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="enumerator">
+<dt id="_CPPv4N3eos15INTF_TYPE_VXLANE">
+<span id="_CPPv3N3eos15INTF_TYPE_VXLANE"></span><span id="_CPPv2N3eos15INTF_TYPE_VXLANE"></span><span class="target" id="namespaceeos_1a21d5fc25b1e82f4fa969cd924ac5918ea5960e8c16358fdc5c2b8d5babd051ddd"></span><code class="descname">INTF_TYPE_VXLAN</code><a class="headerlink" href="#_CPPv4N3eos15INTF_TYPE_VXLANE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<dl class="class">
+<dt id="_CPPv4N3eos9intf_id_tE">
+<span id="_CPPv3N3eos9intf_id_tE"></span><span id="_CPPv2N3eos9intf_id_tE"></span><span id="eos::intf_id_t"></span><span class="target" id="classeos_1_1intf__id__t"></span><em class="property">class </em><code class="descname">intf_id_t</code><a class="headerlink" href="#_CPPv4N3eos9intf_id_tE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><em>#include &lt;intf.h&gt;</em><p>Unique identifier for an interface. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="function">
+<dt id="_CPPv4N3eos9intf_id_t9intf_id_tEv">
+<span id="_CPPv3N3eos9intf_id_t9intf_id_tEv"></span><span id="_CPPv2N3eos9intf_id_t9intf_id_tEv"></span><span id="eos::intf_id_t::intf_id_t"></span><span class="target" id="classeos_1_1intf__id__t_1a7ecc1cfbf8eed63fdc7d5b4d046db469"></span><code class="descname">intf_id_t</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos9intf_id_t9intf_id_tEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Default constructor. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N3eos9intf_id_t9intf_id_tEPKc">
+<span id="_CPPv3N3eos9intf_id_t9intf_id_tEPKc"></span><span id="_CPPv2N3eos9intf_id_t9intf_id_tEPKc"></span><span id="eos::intf_id_t::intf_id_t__cCP"></span><span class="target" id="classeos_1_1intf__id__t_1a6c56bd1e34b00ab207aa66364f3283aa"></span><code class="descname">intf_id_t</code><span class="sig-paren">(</span>char <em class="property">const</em> *<em>name</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos9intf_id_t9intf_id_tEPKc" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Constructor based on an interface name, i.e. ‘Ethernet3/1’, or ‘Management1’. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N3eos9intf_id_t9intf_id_tERKNSt6stringE">
+<span id="_CPPv3N3eos9intf_id_t9intf_id_tERKNSt6stringE"></span><span id="_CPPv2N3eos9intf_id_t9intf_id_tERKNSt6stringE"></span><span id="eos::intf_id_t::intf_id_t__ssCR"></span><span class="target" id="classeos_1_1intf__id__t_1aa3f06b2fe7137e2d9cecd9517311e5c4"></span><code class="descname">intf_id_t</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::string <em class="property">const</em> &amp;<em>name</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos9intf_id_t9intf_id_tERKNSt6stringE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Constructor based on an interface name, i.e. ‘Ethernet3/1’, or ‘Management1’. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N3eos9intf_id_t9intf_id_tE8uint64_t">
+<span id="_CPPv3N3eos9intf_id_t9intf_id_tE8uint64_t"></span><span id="_CPPv2N3eos9intf_id_t9intf_id_tE8uint64_t"></span><span id="eos::intf_id_t::intf_id_t__uint64_t"></span><span class="target" id="classeos_1_1intf__id__t_1abe73e846eab47296fcdd03cd04baa6f5"></span><code class="descname">intf_id_t</code><span class="sig-paren">(</span>uint64_t <em>id</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos9intf_id_t9intf_id_tE8uint64_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Constructor based on internal id representation, not part of the public API. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4NK3eos9intf_id_t8is_null0Ev">
+<span id="_CPPv3NK3eos9intf_id_t8is_null0Ev"></span><span id="_CPPv2NK3eos9intf_id_t8is_null0Ev"></span><span id="eos::intf_id_t::is_null0C"></span><span class="target" id="classeos_1_1intf__id__t_1a5e10595a5ca8864a71d7ea682a647deb"></span>bool <code class="descname">is_null0</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos9intf_id_t8is_null0Ev" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Returns true if the interface is Null0. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4NK3eos9intf_id_t10is_subintfEv">
+<span id="_CPPv3NK3eos9intf_id_t10is_subintfEv"></span><span id="_CPPv2NK3eos9intf_id_t10is_subintfEv"></span><span id="eos::intf_id_t::is_subintfC"></span><span class="target" id="classeos_1_1intf__id__t_1a99c385dcb922167bc34391b5fdbf6937"></span>bool <code class="descname">is_subintf</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos9intf_id_t10is_subintfEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Returns true if the interface is a subinterface. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4NK3eos9intf_id_t9intf_typeEv">
+<span id="_CPPv3NK3eos9intf_id_t9intf_typeEv"></span><span id="_CPPv2NK3eos9intf_id_t9intf_typeEv"></span><span id="eos::intf_id_t::intf_typeC"></span><span class="target" id="classeos_1_1intf__id__t_1a01532e489f91d04b13c1d5cb046ccb9c"></span><a class="reference internal" href="#_CPPv4N3eos11intf_type_tE" title="eos::intf_type_t">intf_type_t</a> <code class="descname">intf_type</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos9intf_id_t9intf_typeEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Returns the interface’s type. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4NK3eos9intf_id_t9to_stringEv">
+<span id="_CPPv3NK3eos9intf_id_t9to_stringEv"></span><span id="_CPPv2NK3eos9intf_id_t9to_stringEv"></span><span id="eos::intf_id_t::to_stringC"></span><span class="target" id="classeos_1_1intf__id__t_1a7da585927e06afc6e53930ca65ac37e6"></span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::string <code class="descname">to_string</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos9intf_id_t9to_stringEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Returns the interface name as a string, e.g., ‘Ethernet3/1’. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4NK3eos9intf_id_tntEv">
+<span id="_CPPv3NK3eos9intf_id_tntEv"></span><span id="_CPPv2NK3eos9intf_id_tntEv"></span><span id="eos::intf_id_t::not-operatorC"></span><span class="target" id="classeos_1_1intf__id__t_1ab9421dd68f96b686d9e82113b90e7e18"></span>bool <code class="descname">operator!</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos9intf_id_tntEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Only the ‘default interface’ provided by the default constructor evaluates to false. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4NK3eos9intf_id_teqERK9intf_id_t">
+<span id="_CPPv3NK3eos9intf_id_teqERK9intf_id_t"></span><span id="_CPPv2NK3eos9intf_id_teqERK9intf_id_t"></span><span id="eos::intf_id_t::eq-operator__intf_id_tCRC"></span><span class="target" id="classeos_1_1intf__id__t_1addb324d4c74e1c6ca4c86b275bc72824"></span>bool <code class="descname">operator==</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos9intf_id_tE" title="eos::intf_id_t">intf_id_t</a> <em class="property">const</em> &amp;<em>other</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos9intf_id_teqERK9intf_id_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4NK3eos9intf_id_tneERK9intf_id_t">
+<span id="_CPPv3NK3eos9intf_id_tneERK9intf_id_t"></span><span id="_CPPv2NK3eos9intf_id_tneERK9intf_id_t"></span><span id="eos::intf_id_t::neq-operator__intf_id_tCRC"></span><span class="target" id="classeos_1_1intf__id__t_1a15e9111945abbd2105d5917a98b13ca9"></span>bool <code class="descname">operator!=</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos9intf_id_tE" title="eos::intf_id_t">intf_id_t</a> <em class="property">const</em> &amp;<em>other</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos9intf_id_tneERK9intf_id_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4NK3eos9intf_id_tltERK9intf_id_t">
+<span id="_CPPv3NK3eos9intf_id_tltERK9intf_id_t"></span><span id="_CPPv2NK3eos9intf_id_tltERK9intf_id_t"></span><span id="eos::intf_id_t::lt-operator__intf_id_tCRC"></span><span class="target" id="classeos_1_1intf__id__t_1aa53501bac6244a4651f557dba7c01449"></span>bool <code class="descname">operator&lt;</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos9intf_id_tE" title="eos::intf_id_t">intf_id_t</a> <em class="property">const</em> &amp;<em>other</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos9intf_id_tltERK9intf_id_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4NK3eos9intf_id_t4hashEv">
+<span id="_CPPv3NK3eos9intf_id_t4hashEv"></span><span id="_CPPv2NK3eos9intf_id_t4hashEv"></span><span id="eos::intf_id_t::hashC"></span><span class="target" id="classeos_1_1intf__id__t_1af06ca183ded5384bbb6e1b641db3f6ae"></span>uint32_t <code class="descname">hash</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos9intf_id_t4hashEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>The hash function for type <a class="reference internal" href="#classeos_1_1intf__id__t"><span class="std std-ref">intf_id_t</span></a>. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4NK3eos9intf_id_t6mix_meER8hash_mix">
+<span id="_CPPv3NK3eos9intf_id_t6mix_meER8hash_mix"></span><span id="_CPPv2NK3eos9intf_id_t6mix_meER8hash_mix"></span><span id="eos::intf_id_t::mix_me__hash_mixRC"></span><span class="target" id="classeos_1_1intf__id__t_1aa58e60327c6f11d8e7ff5c4a5a0a8ca1"></span>void <code class="descname">mix_me</code><span class="sig-paren">(</span><a class="reference internal" href="hash_mix.html#_CPPv4N3eos8hash_mixE" title="eos::hash_mix">hash_mix</a> &amp;<em>h</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos9intf_id_t6mix_meER8hash_mix" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>The hash mix function for type <a class="reference internal" href="#classeos_1_1intf__id__t"><span class="std std-ref">intf_id_t</span></a>. </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Private Members</p>
+<dl class="member">
+<dt id="_CPPv4N3eos9intf_id_t7intfId_E">
+<span id="_CPPv3N3eos9intf_id_t7intfId_E"></span><span id="_CPPv2N3eos9intf_id_t7intfId_E"></span><span id="eos::intf_id_t::intfId___uint64_t"></span><span class="target" id="classeos_1_1intf__id__t_1ae78f129abe9b38f65be15ee6938f684f"></span>uint64_t <code class="descname">intfId_</code><a class="headerlink" href="#_CPPv4N3eos9intf_id_t7intfId_E" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Friends</p>
+<dl class="function">
+<dt>
+<span class="target" id="classeos_1_1intf__id__t_1a9d93bafd063fb788467c1387aadcb3e4"></span><em class="property">friend </em><code class="descname">eos::IntfIdHelper</code></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4lsRNSt7ostreamERK9intf_id_t">
+<span id="_CPPv3lsRNSt7ostreamERK9intf_id_t"></span><span id="_CPPv2lsRNSt7ostreamERK9intf_id_t"></span><span id="lshift-operator__osR.intf_id_tCR"></span><span class="target" id="classeos_1_1intf__id__t_1a68d5f248c87a230e628e37dc2094289d"></span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::ostream &amp;<code class="descname">operator&lt;&lt;</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::ostream &amp;<em>os</em>, <em class="property">const</em> intf_id_t &amp;<em>obj</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4lsRNSt7ostreamERK9intf_id_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>A utility stream operator that adds a string representation of <a class="reference internal" href="#classeos_1_1intf__id__t"><span class="std std-ref">intf_id_t</span></a> to the ostream. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="class">
+<dt id="_CPPv4N3eos15intf_counters_tE">
+<span id="_CPPv3N3eos15intf_counters_tE"></span><span id="_CPPv2N3eos15intf_counters_tE"></span><span id="eos::intf_counters_t"></span><span class="target" id="classeos_1_1intf__counters__t"></span><em class="property">class </em><code class="descname">intf_counters_t</code><a class="headerlink" href="#_CPPv4N3eos15intf_counters_tE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><em>#include &lt;intf.h&gt;</em><p>Interface counter class.</p>
+<p>All of these attributes have the same meanings as the corresponding objects in the Interface MIB (RFC 2863, ‘IF-MIB’). </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="function">
+<dt id="_CPPv4N3eos15intf_counters_t15intf_counters_tEv">
+<span id="_CPPv3N3eos15intf_counters_t15intf_counters_tEv"></span><span id="_CPPv2N3eos15intf_counters_t15intf_counters_tEv"></span><span id="eos::intf_counters_t::intf_counters_t"></span><span class="target" id="classeos_1_1intf__counters__t_1a419cbb95ce252f3778f3c819dc718ab1"></span><code class="descname">intf_counters_t</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos15intf_counters_t15intf_counters_tEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N3eos15intf_counters_t15intf_counters_tE8uint64_t8uint64_t8uint64_t8uint64_t8uint64_t8uint64_t8uint64_t8uint64_t8uint64_t8uint64_t8uint64_t8uint64_t9seconds_t">
+<span id="_CPPv3N3eos15intf_counters_t15intf_counters_tE8uint64_t8uint64_t8uint64_t8uint64_t8uint64_t8uint64_t8uint64_t8uint64_t8uint64_t8uint64_t8uint64_t8uint64_t9seconds_t"></span><span id="_CPPv2N3eos15intf_counters_t15intf_counters_tE8uint64_t8uint64_t8uint64_t8uint64_t8uint64_t8uint64_t8uint64_t8uint64_t8uint64_t8uint64_t8uint64_t8uint64_t9seconds_t"></span><span id="eos::intf_counters_t::intf_counters_t__uint64_t.uint64_t.uint64_t.uint64_t.uint64_t.uint64_t.uint64_t.uint64_t.uint64_t.uint64_t.uint64_t.uint64_t.seconds_t"></span><span class="target" id="classeos_1_1intf__counters__t_1a0ec21c8cbf6e412db9ac22857bc503dc"></span><code class="descname">intf_counters_t</code><span class="sig-paren">(</span>uint64_t <em>out_ucast_pkts</em>, uint64_t <em>out_multicast_pkts</em>, uint64_t <em>out_broadcast_pkts</em>, uint64_t <em>in_ucast_pkts</em>, uint64_t <em>in_multicast_pkts</em>, uint64_t <em>in_broadcast_pkts</em>, uint64_t <em>out_octets</em>, uint64_t <em>in_octets</em>, uint64_t <em>out_discards</em>, uint64_t <em>out_errors</em>, uint64_t <em>in_discards</em>, uint64_t <em>in_errors</em>, <a class="reference internal" href="base.html#_CPPv4N3eos9seconds_tE" title="eos::seconds_t">seconds_t</a> <em>sample_time</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos15intf_counters_t15intf_counters_tE8uint64_t8uint64_t8uint64_t8uint64_t8uint64_t8uint64_t8uint64_t8uint64_t8uint64_t8uint64_t8uint64_t8uint64_t9seconds_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N3eos15intf_counters_t15intf_counters_tERK15intf_counters_t">
+<span id="_CPPv3N3eos15intf_counters_t15intf_counters_tERK15intf_counters_t"></span><span id="_CPPv2N3eos15intf_counters_t15intf_counters_tERK15intf_counters_t"></span><span id="eos::intf_counters_t::intf_counters_t__intf_counters_tCR"></span><span class="target" id="classeos_1_1intf__counters__t_1a54c1efcdd48eeb0971c53dad206c8f50"></span><code class="descname">intf_counters_t</code><span class="sig-paren">(</span><em class="property">const</em> <a class="reference internal" href="#_CPPv4N3eos15intf_counters_t15intf_counters_tEv" title="eos::intf_counters_t::intf_counters_t">intf_counters_t</a> &amp;<em>other</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos15intf_counters_t15intf_counters_tERK15intf_counters_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N3eos15intf_counters_taSERK15intf_counters_t">
+<span id="_CPPv3N3eos15intf_counters_taSERK15intf_counters_t"></span><span id="_CPPv2N3eos15intf_counters_taSERK15intf_counters_t"></span><span id="eos::intf_counters_t::assign-operator__intf_counters_tCR"></span><span class="target" id="classeos_1_1intf__counters__t_1a36d61d60e7270d4a4b240058c65a8a57"></span><a class="reference internal" href="#_CPPv4N3eos15intf_counters_tE" title="eos::intf_counters_t">intf_counters_t</a> &amp;<code class="descname">operator=</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos15intf_counters_tE" title="eos::intf_counters_t">intf_counters_t</a> <em class="property">const</em> &amp;<em>other</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos15intf_counters_taSERK15intf_counters_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4NK3eos15intf_counters_t14out_ucast_pktsEv">
+<span id="_CPPv3NK3eos15intf_counters_t14out_ucast_pktsEv"></span><span id="_CPPv2NK3eos15intf_counters_t14out_ucast_pktsEv"></span><span id="eos::intf_counters_t::out_ucast_pktsC"></span><span class="target" id="classeos_1_1intf__counters__t_1afdd9780dc6126becb1d62dc313072bba"></span>uint64_t <code class="descname">out_ucast_pkts</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos15intf_counters_t14out_ucast_pktsEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Getter for ‘out_ucast_pkts’: IF-MIB ifOutUcastPkts. Note that IF-MIB specifies that ifOutUcastPkts should include packets that were dropped due to excessive collisions, as if they were successfully transmitted. We count these as out_errors. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4NK3eos15intf_counters_t18out_multicast_pktsEv">
+<span id="_CPPv3NK3eos15intf_counters_t18out_multicast_pktsEv"></span><span id="_CPPv2NK3eos15intf_counters_t18out_multicast_pktsEv"></span><span id="eos::intf_counters_t::out_multicast_pktsC"></span><span class="target" id="classeos_1_1intf__counters__t_1acc25142ba69acb7ac032c4f41f4b94fb"></span>uint64_t <code class="descname">out_multicast_pkts</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos15intf_counters_t18out_multicast_pktsEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Getter for ‘out_multicast_pkts’: IF-MIB ifOutMulticastPkts counter. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4NK3eos15intf_counters_t18out_broadcast_pktsEv">
+<span id="_CPPv3NK3eos15intf_counters_t18out_broadcast_pktsEv"></span><span id="_CPPv2NK3eos15intf_counters_t18out_broadcast_pktsEv"></span><span id="eos::intf_counters_t::out_broadcast_pktsC"></span><span class="target" id="classeos_1_1intf__counters__t_1ae3b1bf0b06c56aef966eb4b0d91b4ef5"></span>uint64_t <code class="descname">out_broadcast_pkts</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos15intf_counters_t18out_broadcast_pktsEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Getter for ‘out_broadcast_pkts’: IF-MIB ifOutBroadcastPkts counter. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4NK3eos15intf_counters_t13in_ucast_pktsEv">
+<span id="_CPPv3NK3eos15intf_counters_t13in_ucast_pktsEv"></span><span id="_CPPv2NK3eos15intf_counters_t13in_ucast_pktsEv"></span><span id="eos::intf_counters_t::in_ucast_pktsC"></span><span class="target" id="classeos_1_1intf__counters__t_1aff45560b2b6d3f7fd130a5e23165e62a"></span>uint64_t <code class="descname">in_ucast_pkts</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos15intf_counters_t13in_ucast_pktsEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Getter for ‘in_ucast_pkts’: IF-MIB ifInUcastPkts. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4NK3eos15intf_counters_t17in_multicast_pktsEv">
+<span id="_CPPv3NK3eos15intf_counters_t17in_multicast_pktsEv"></span><span id="_CPPv2NK3eos15intf_counters_t17in_multicast_pktsEv"></span><span id="eos::intf_counters_t::in_multicast_pktsC"></span><span class="target" id="classeos_1_1intf__counters__t_1a09eb2c0d273163ee17cf273b6aa07dd0"></span>uint64_t <code class="descname">in_multicast_pkts</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos15intf_counters_t17in_multicast_pktsEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Getter for ‘in_multicast_pkts’: IF-MIB ifInMulticastPkts counter. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4NK3eos15intf_counters_t17in_broadcast_pktsEv">
+<span id="_CPPv3NK3eos15intf_counters_t17in_broadcast_pktsEv"></span><span id="_CPPv2NK3eos15intf_counters_t17in_broadcast_pktsEv"></span><span id="eos::intf_counters_t::in_broadcast_pktsC"></span><span class="target" id="classeos_1_1intf__counters__t_1a4b383046c8d2feecaec72b651b680040"></span>uint64_t <code class="descname">in_broadcast_pkts</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos15intf_counters_t17in_broadcast_pktsEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Getter for ‘in_broadcast_pkts’: IF-MIB ifInBroadcastPkts counter. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4NK3eos15intf_counters_t10out_octetsEv">
+<span id="_CPPv3NK3eos15intf_counters_t10out_octetsEv"></span><span id="_CPPv2NK3eos15intf_counters_t10out_octetsEv"></span><span id="eos::intf_counters_t::out_octetsC"></span><span class="target" id="classeos_1_1intf__counters__t_1a5286a5b58b9cd9b5b8b2a4995ec12c1a"></span>uint64_t <code class="descname">out_octets</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos15intf_counters_t10out_octetsEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Getter for ‘out_octets’: IF-MIB ifOutOctets counter. Note that for Ethernet interfaces, the octet counters include the MAC header and FCS (but not the preamble or SFD). This is different to the IEEE 802.3 counters (which do not include MAC header and FCS). See RFC 3635. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4NK3eos15intf_counters_t9in_octetsEv">
+<span id="_CPPv3NK3eos15intf_counters_t9in_octetsEv"></span><span id="_CPPv2NK3eos15intf_counters_t9in_octetsEv"></span><span id="eos::intf_counters_t::in_octetsC"></span><span class="target" id="classeos_1_1intf__counters__t_1ac89a7dc27bb274ab7d90450da1dc2ec8"></span>uint64_t <code class="descname">in_octets</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos15intf_counters_t9in_octetsEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Getter for ‘in_octets’: IF-MIB ifInOctets counter. Note that for Ethernet interfaces, the octet counters include the MAC header and FCS (but not the preamble or SFD). This is different to the IEEE 802.3 counters (which do not include MAC header and FCS). See RFC 3635. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4NK3eos15intf_counters_t12out_discardsEv">
+<span id="_CPPv3NK3eos15intf_counters_t12out_discardsEv"></span><span id="_CPPv2NK3eos15intf_counters_t12out_discardsEv"></span><span id="eos::intf_counters_t::out_discardsC"></span><span class="target" id="classeos_1_1intf__counters__t_1a27d7accf35afae9e2b6a3a9804cd7461"></span>uint64_t <code class="descname">out_discards</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos15intf_counters_t12out_discardsEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Getter for ‘out_discards’: IF-MIB ifOutDiscards counter. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4NK3eos15intf_counters_t10out_errorsEv">
+<span id="_CPPv3NK3eos15intf_counters_t10out_errorsEv"></span><span id="_CPPv2NK3eos15intf_counters_t10out_errorsEv"></span><span id="eos::intf_counters_t::out_errorsC"></span><span class="target" id="classeos_1_1intf__counters__t_1afc09d117b940612791715dac3c4d9fc3"></span>uint64_t <code class="descname">out_errors</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos15intf_counters_t10out_errorsEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Getter for ‘out_errors’: IF-MIB ifOutErrors counter. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4NK3eos15intf_counters_t11in_discardsEv">
+<span id="_CPPv3NK3eos15intf_counters_t11in_discardsEv"></span><span id="_CPPv2NK3eos15intf_counters_t11in_discardsEv"></span><span id="eos::intf_counters_t::in_discardsC"></span><span class="target" id="classeos_1_1intf__counters__t_1ac68b6e63210c87a8275391baae9130f6"></span>uint64_t <code class="descname">in_discards</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos15intf_counters_t11in_discardsEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Getter for ‘in_discards’: IF-MIB ifInDiscards counter. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4NK3eos15intf_counters_t9in_errorsEv">
+<span id="_CPPv3NK3eos15intf_counters_t9in_errorsEv"></span><span id="_CPPv2NK3eos15intf_counters_t9in_errorsEv"></span><span id="eos::intf_counters_t::in_errorsC"></span><span class="target" id="classeos_1_1intf__counters__t_1a419aa5a81ef87ec84affaec693e4274f"></span>uint64_t <code class="descname">in_errors</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos15intf_counters_t9in_errorsEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Getter for ‘in_errors’: IF-MIB ifInErrors counter. The IF-MIB specifies that CRC errors should not get counted at all!, and that inErrors should include IP header checksum errors. We do not do this. We count CRC errors as inErrors, and IP header checksum errors as good packets at this level (in_ucast_pkts). </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4NK3eos15intf_counters_t11sample_timeEv">
+<span id="_CPPv3NK3eos15intf_counters_t11sample_timeEv"></span><span id="_CPPv2NK3eos15intf_counters_t11sample_timeEv"></span><span id="eos::intf_counters_t::sample_timeC"></span><span class="target" id="classeos_1_1intf__counters__t_1a92b68b24cbf22cf2ee17be994f6883e1"></span><a class="reference internal" href="base.html#_CPPv4N3eos9seconds_tE" title="eos::seconds_t">seconds_t</a> <code class="descname">sample_time</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos15intf_counters_t11sample_timeEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Getter for ‘sample_time’: time when the counters were updated. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4NK3eos15intf_counters_teqERK15intf_counters_t">
+<span id="_CPPv3NK3eos15intf_counters_teqERK15intf_counters_t"></span><span id="_CPPv2NK3eos15intf_counters_teqERK15intf_counters_t"></span><span id="eos::intf_counters_t::eq-operator__intf_counters_tCRC"></span><span class="target" id="classeos_1_1intf__counters__t_1acd577fa9b967833e289c2372a533bc66"></span>bool <code class="descname">operator==</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos15intf_counters_tE" title="eos::intf_counters_t">intf_counters_t</a> <em class="property">const</em> &amp;<em>other</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos15intf_counters_teqERK15intf_counters_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4NK3eos15intf_counters_tneERK15intf_counters_t">
+<span id="_CPPv3NK3eos15intf_counters_tneERK15intf_counters_t"></span><span id="_CPPv2NK3eos15intf_counters_tneERK15intf_counters_t"></span><span id="eos::intf_counters_t::neq-operator__intf_counters_tCRC"></span><span class="target" id="classeos_1_1intf__counters__t_1a4eae33209afa27e63b0ca48ab5c097d6"></span>bool <code class="descname">operator!=</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos15intf_counters_tE" title="eos::intf_counters_t">intf_counters_t</a> <em class="property">const</em> &amp;<em>other</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos15intf_counters_tneERK15intf_counters_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4NK3eos15intf_counters_t4hashEv">
+<span id="_CPPv3NK3eos15intf_counters_t4hashEv"></span><span id="_CPPv2NK3eos15intf_counters_t4hashEv"></span><span id="eos::intf_counters_t::hashC"></span><span class="target" id="classeos_1_1intf__counters__t_1a1c2388ec0c921d7c7732ac7bab9501b8"></span>uint32_t <code class="descname">hash</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos15intf_counters_t4hashEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>The hash function for type <a class="reference internal" href="#classeos_1_1intf__counters__t"><span class="std std-ref">intf_counters_t</span></a>. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4NK3eos15intf_counters_t6mix_meER8hash_mix">
+<span id="_CPPv3NK3eos15intf_counters_t6mix_meER8hash_mix"></span><span id="_CPPv2NK3eos15intf_counters_t6mix_meER8hash_mix"></span><span id="eos::intf_counters_t::mix_me__hash_mixRC"></span><span class="target" id="classeos_1_1intf__counters__t_1a626f345772f6c94e878e4dcaf317111d"></span>void <code class="descname">mix_me</code><span class="sig-paren">(</span><a class="reference internal" href="hash_mix.html#_CPPv4N3eos8hash_mixE" title="eos::hash_mix">hash_mix</a> &amp;<em>h</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos15intf_counters_t6mix_meER8hash_mix" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>The hash mix function for type <a class="reference internal" href="#classeos_1_1intf__counters__t"><span class="std std-ref">intf_counters_t</span></a>. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4NK3eos15intf_counters_t9to_stringEv">
+<span id="_CPPv3NK3eos15intf_counters_t9to_stringEv"></span><span id="_CPPv2NK3eos15intf_counters_t9to_stringEv"></span><span id="eos::intf_counters_t::to_stringC"></span><span class="target" id="classeos_1_1intf__counters__t_1a98f5beee724cc3c78fe04d919b563da9"></span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::string <code class="descname">to_string</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos15intf_counters_t9to_stringEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Returns a string representation of the current object’s values. </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Private Members</p>
+<dl class="member">
+<dt id="_CPPv4N3eos15intf_counters_t5pimplE">
+<span id="_CPPv3N3eos15intf_counters_t5pimplE"></span><span id="_CPPv2N3eos15intf_counters_t5pimplE"></span><span id="eos::intf_counters_t::pimpl__std::shared_ptr:intf_counters_impl_t:"></span><span class="target" id="classeos_1_1intf__counters__t_1ae9dfebba0dbb344951b99cd7b95579b7"></span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::shared_ptr&lt;intf_counters_impl_t&gt; <code class="descname">pimpl</code><a class="headerlink" href="#_CPPv4N3eos15intf_counters_t5pimplE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Friends</p>
+<dl class="function">
+<dt id="_CPPv4lsRNSt7ostreamERK15intf_counters_t">
+<span id="_CPPv3lsRNSt7ostreamERK15intf_counters_t"></span><span id="_CPPv2lsRNSt7ostreamERK15intf_counters_t"></span><span id="lshift-operator__osR.intf_counters_tCR"></span><span class="target" id="classeos_1_1intf__counters__t_1a9bb87933a842da0d58a4dd2ef29cbd64"></span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::ostream &amp;<code class="descname">operator&lt;&lt;</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::ostream &amp;<em>os</em>, <em class="property">const</em> intf_counters_t &amp;<em>obj</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4lsRNSt7ostreamERK15intf_counters_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>A utility stream operator that adds a string representation of <a class="reference internal" href="#classeos_1_1intf__counters__t"><span class="std std-ref">intf_counters_t</span></a> to the ostream. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="class">
+<dt id="_CPPv4N3eos20intf_traffic_rates_tE">
+<span id="_CPPv3N3eos20intf_traffic_rates_tE"></span><span id="_CPPv2N3eos20intf_traffic_rates_tE"></span><span id="eos::intf_traffic_rates_t"></span><span class="target" id="classeos_1_1intf__traffic__rates__t"></span><em class="property">class </em><code class="descname">intf_traffic_rates_t</code><a class="headerlink" href="#_CPPv4N3eos20intf_traffic_rates_tE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><em>#include &lt;intf.h&gt;</em><p>Interface traffic rates class. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="function">
+<dt id="_CPPv4N3eos20intf_traffic_rates_t20intf_traffic_rates_tEv">
+<span id="_CPPv3N3eos20intf_traffic_rates_t20intf_traffic_rates_tEv"></span><span id="_CPPv2N3eos20intf_traffic_rates_t20intf_traffic_rates_tEv"></span><span id="eos::intf_traffic_rates_t::intf_traffic_rates_t"></span><span class="target" id="classeos_1_1intf__traffic__rates__t_1a8f74fe9add1327845b223d3b3cb74be8"></span><code class="descname">intf_traffic_rates_t</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos20intf_traffic_rates_t20intf_traffic_rates_tEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N3eos20intf_traffic_rates_t20intf_traffic_rates_tEdddd9seconds_t">
+<span id="_CPPv3N3eos20intf_traffic_rates_t20intf_traffic_rates_tEdddd9seconds_t"></span><span id="_CPPv2N3eos20intf_traffic_rates_t20intf_traffic_rates_tEdddd9seconds_t"></span><span id="eos::intf_traffic_rates_t::intf_traffic_rates_t__double.double.double.double.seconds_t"></span><span class="target" id="classeos_1_1intf__traffic__rates__t_1a1cdce9ba1dee393f4a8bbee9c7e9e313"></span><code class="descname">intf_traffic_rates_t</code><span class="sig-paren">(</span>double <em>out_pkts_rate</em>, double <em>in_pkts_rate</em>, double <em>out_bits_rate</em>, double <em>in_bits_rate</em>, <a class="reference internal" href="base.html#_CPPv4N3eos9seconds_tE" title="eos::seconds_t">seconds_t</a> <em>sample_time</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos20intf_traffic_rates_t20intf_traffic_rates_tEdddd9seconds_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N3eos20intf_traffic_rates_t20intf_traffic_rates_tERK20intf_traffic_rates_t">
+<span id="_CPPv3N3eos20intf_traffic_rates_t20intf_traffic_rates_tERK20intf_traffic_rates_t"></span><span id="_CPPv2N3eos20intf_traffic_rates_t20intf_traffic_rates_tERK20intf_traffic_rates_t"></span><span id="eos::intf_traffic_rates_t::intf_traffic_rates_t__intf_traffic_rates_tCR"></span><span class="target" id="classeos_1_1intf__traffic__rates__t_1a2657363e67a7dc48b5141c6e847b2d0d"></span><code class="descname">intf_traffic_rates_t</code><span class="sig-paren">(</span><em class="property">const</em> <a class="reference internal" href="#_CPPv4N3eos20intf_traffic_rates_t20intf_traffic_rates_tEv" title="eos::intf_traffic_rates_t::intf_traffic_rates_t">intf_traffic_rates_t</a> &amp;<em>other</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos20intf_traffic_rates_t20intf_traffic_rates_tERK20intf_traffic_rates_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N3eos20intf_traffic_rates_taSERK20intf_traffic_rates_t">
+<span id="_CPPv3N3eos20intf_traffic_rates_taSERK20intf_traffic_rates_t"></span><span id="_CPPv2N3eos20intf_traffic_rates_taSERK20intf_traffic_rates_t"></span><span id="eos::intf_traffic_rates_t::assign-operator__intf_traffic_rates_tCR"></span><span class="target" id="classeos_1_1intf__traffic__rates__t_1aeebfefdfc763c507ab2789e00a0152b5"></span><a class="reference internal" href="#_CPPv4N3eos20intf_traffic_rates_tE" title="eos::intf_traffic_rates_t">intf_traffic_rates_t</a> &amp;<code class="descname">operator=</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos20intf_traffic_rates_tE" title="eos::intf_traffic_rates_t">intf_traffic_rates_t</a> <em class="property">const</em> &amp;<em>other</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos20intf_traffic_rates_taSERK20intf_traffic_rates_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4NK3eos20intf_traffic_rates_t13out_pkts_rateEv">
+<span id="_CPPv3NK3eos20intf_traffic_rates_t13out_pkts_rateEv"></span><span id="_CPPv2NK3eos20intf_traffic_rates_t13out_pkts_rateEv"></span><span id="eos::intf_traffic_rates_t::out_pkts_rateC"></span><span class="target" id="classeos_1_1intf__traffic__rates__t_1a8258f81a5a2af7548d5e6c98583a8360"></span>double <code class="descname">out_pkts_rate</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos20intf_traffic_rates_t13out_pkts_rateEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Getter for ‘out_pkts_rate’: output packets per second. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4NK3eos20intf_traffic_rates_t12in_pkts_rateEv">
+<span id="_CPPv3NK3eos20intf_traffic_rates_t12in_pkts_rateEv"></span><span id="_CPPv2NK3eos20intf_traffic_rates_t12in_pkts_rateEv"></span><span id="eos::intf_traffic_rates_t::in_pkts_rateC"></span><span class="target" id="classeos_1_1intf__traffic__rates__t_1a330d054389494c42ce1f70bba194788e"></span>double <code class="descname">in_pkts_rate</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos20intf_traffic_rates_t12in_pkts_rateEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Getter for ‘in_pkts_rate’: input packets per second. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4NK3eos20intf_traffic_rates_t13out_bits_rateEv">
+<span id="_CPPv3NK3eos20intf_traffic_rates_t13out_bits_rateEv"></span><span id="_CPPv2NK3eos20intf_traffic_rates_t13out_bits_rateEv"></span><span id="eos::intf_traffic_rates_t::out_bits_rateC"></span><span class="target" id="classeos_1_1intf__traffic__rates__t_1a77829370aaebd348517e8a03409ede06"></span>double <code class="descname">out_bits_rate</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos20intf_traffic_rates_t13out_bits_rateEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Getter for ‘out_bits_rate’: output bits per second. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4NK3eos20intf_traffic_rates_t12in_bits_rateEv">
+<span id="_CPPv3NK3eos20intf_traffic_rates_t12in_bits_rateEv"></span><span id="_CPPv2NK3eos20intf_traffic_rates_t12in_bits_rateEv"></span><span id="eos::intf_traffic_rates_t::in_bits_rateC"></span><span class="target" id="classeos_1_1intf__traffic__rates__t_1a5e14e37db48dc26c23edb765890fc159"></span>double <code class="descname">in_bits_rate</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos20intf_traffic_rates_t12in_bits_rateEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Getter for ‘in_bits_rate’: input bits per second. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4NK3eos20intf_traffic_rates_t11sample_timeEv">
+<span id="_CPPv3NK3eos20intf_traffic_rates_t11sample_timeEv"></span><span id="_CPPv2NK3eos20intf_traffic_rates_t11sample_timeEv"></span><span id="eos::intf_traffic_rates_t::sample_timeC"></span><span class="target" id="classeos_1_1intf__traffic__rates__t_1aa6dde68318de8fabb98497233db00755"></span><a class="reference internal" href="base.html#_CPPv4N3eos9seconds_tE" title="eos::seconds_t">seconds_t</a> <code class="descname">sample_time</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos20intf_traffic_rates_t11sample_timeEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Getter for ‘sample_time’: time when the rates were updated. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4NK3eos20intf_traffic_rates_teqERK20intf_traffic_rates_t">
+<span id="_CPPv3NK3eos20intf_traffic_rates_teqERK20intf_traffic_rates_t"></span><span id="_CPPv2NK3eos20intf_traffic_rates_teqERK20intf_traffic_rates_t"></span><span id="eos::intf_traffic_rates_t::eq-operator__intf_traffic_rates_tCRC"></span><span class="target" id="classeos_1_1intf__traffic__rates__t_1aa0726c727ad1c4216a8bfcaee55c7324"></span>bool <code class="descname">operator==</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos20intf_traffic_rates_tE" title="eos::intf_traffic_rates_t">intf_traffic_rates_t</a> <em class="property">const</em> &amp;<em>other</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos20intf_traffic_rates_teqERK20intf_traffic_rates_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4NK3eos20intf_traffic_rates_tneERK20intf_traffic_rates_t">
+<span id="_CPPv3NK3eos20intf_traffic_rates_tneERK20intf_traffic_rates_t"></span><span id="_CPPv2NK3eos20intf_traffic_rates_tneERK20intf_traffic_rates_t"></span><span id="eos::intf_traffic_rates_t::neq-operator__intf_traffic_rates_tCRC"></span><span class="target" id="classeos_1_1intf__traffic__rates__t_1a7b37c9956c27761fdb0e06a5265be367"></span>bool <code class="descname">operator!=</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos20intf_traffic_rates_tE" title="eos::intf_traffic_rates_t">intf_traffic_rates_t</a> <em class="property">const</em> &amp;<em>other</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos20intf_traffic_rates_tneERK20intf_traffic_rates_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4NK3eos20intf_traffic_rates_t4hashEv">
+<span id="_CPPv3NK3eos20intf_traffic_rates_t4hashEv"></span><span id="_CPPv2NK3eos20intf_traffic_rates_t4hashEv"></span><span id="eos::intf_traffic_rates_t::hashC"></span><span class="target" id="classeos_1_1intf__traffic__rates__t_1a6388bf321a37bcfa8c52a0cd3c83ca2b"></span>uint32_t <code class="descname">hash</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos20intf_traffic_rates_t4hashEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>The hash function for type <a class="reference internal" href="#classeos_1_1intf__traffic__rates__t"><span class="std std-ref">intf_traffic_rates_t</span></a>. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4NK3eos20intf_traffic_rates_t6mix_meER8hash_mix">
+<span id="_CPPv3NK3eos20intf_traffic_rates_t6mix_meER8hash_mix"></span><span id="_CPPv2NK3eos20intf_traffic_rates_t6mix_meER8hash_mix"></span><span id="eos::intf_traffic_rates_t::mix_me__hash_mixRC"></span><span class="target" id="classeos_1_1intf__traffic__rates__t_1adddc92168a20b2ea9091a5f87f08e65b"></span>void <code class="descname">mix_me</code><span class="sig-paren">(</span><a class="reference internal" href="hash_mix.html#_CPPv4N3eos8hash_mixE" title="eos::hash_mix">hash_mix</a> &amp;<em>h</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos20intf_traffic_rates_t6mix_meER8hash_mix" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>The hash mix function for type <a class="reference internal" href="#classeos_1_1intf__traffic__rates__t"><span class="std std-ref">intf_traffic_rates_t</span></a>. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4NK3eos20intf_traffic_rates_t9to_stringEv">
+<span id="_CPPv3NK3eos20intf_traffic_rates_t9to_stringEv"></span><span id="_CPPv2NK3eos20intf_traffic_rates_t9to_stringEv"></span><span id="eos::intf_traffic_rates_t::to_stringC"></span><span class="target" id="classeos_1_1intf__traffic__rates__t_1a6692ce99644935790305bb50c855c7d6"></span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::string <code class="descname">to_string</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos20intf_traffic_rates_t9to_stringEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Returns a string representation of the current object’s values. </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Private Members</p>
+<dl class="member">
+<dt id="_CPPv4N3eos20intf_traffic_rates_t5pimplE">
+<span id="_CPPv3N3eos20intf_traffic_rates_t5pimplE"></span><span id="_CPPv2N3eos20intf_traffic_rates_t5pimplE"></span><span id="eos::intf_traffic_rates_t::pimpl__std::shared_ptr:intf_traffic_rates_impl_t:"></span><span class="target" id="classeos_1_1intf__traffic__rates__t_1ad9fd09a627192212688086b98101a3b0"></span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::shared_ptr&lt;intf_traffic_rates_impl_t&gt; <code class="descname">pimpl</code><a class="headerlink" href="#_CPPv4N3eos20intf_traffic_rates_t5pimplE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Friends</p>
+<dl class="function">
+<dt id="_CPPv4lsRNSt7ostreamERK20intf_traffic_rates_t">
+<span id="_CPPv3lsRNSt7ostreamERK20intf_traffic_rates_t"></span><span id="_CPPv2lsRNSt7ostreamERK20intf_traffic_rates_t"></span><span id="lshift-operator__osR.intf_traffic_rates_tCR"></span><span class="target" id="classeos_1_1intf__traffic__rates__t_1a33c552e1a45d003df07b37f7e8b79a22"></span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::ostream &amp;<code class="descname">operator&lt;&lt;</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::ostream &amp;<em>os</em>, <em class="property">const</em> intf_traffic_rates_t &amp;<em>obj</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4lsRNSt7ostreamERK20intf_traffic_rates_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>A utility stream operator that adds a string representation of <a class="reference internal" href="#classeos_1_1intf__traffic__rates__t"><span class="std std-ref">intf_traffic_rates_t</span></a> to the ostream. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="class">
+<dt id="_CPPv4N3eos23no_such_interface_errorE">
+<span id="_CPPv3N3eos23no_such_interface_errorE"></span><span id="_CPPv2N3eos23no_such_interface_errorE"></span><span id="eos::no_such_interface_error"></span><span class="target" id="classeos_1_1no__such__interface__error"></span><em class="property">class </em><code class="descname">no_such_interface_error</code> : <em class="property">public</em> <a class="reference internal" href="acl.html#_CPPv43eos" title="eos">eos</a>::<a class="reference internal" href="exception.html#_CPPv4N3eos5errorE" title="eos::error">error</a><a class="headerlink" href="#_CPPv4N3eos23no_such_interface_errorE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><em>#include &lt;intf.h&gt;</em><p>Non-existent interface error. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="function">
+<dt id="_CPPv4N3eos23no_such_interface_error23no_such_interface_errorE9intf_id_t">
+<span id="_CPPv3N3eos23no_such_interface_error23no_such_interface_errorE9intf_id_t"></span><span id="_CPPv2N3eos23no_such_interface_error23no_such_interface_errorE9intf_id_t"></span><span id="eos::no_such_interface_error::no_such_interface_error__intf_id_t"></span><span class="target" id="classeos_1_1no__such__interface__error_1af64d5b817e25a8e44e42494d0222e4dd"></span><code class="descname">no_such_interface_error</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos9intf_id_tE" title="eos::intf_id_t">intf_id_t</a> <em>intf</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos23no_such_interface_error23no_such_interface_errorE9intf_id_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N3eos23no_such_interface_error23no_such_interface_errorERKNSt6stringE">
+<span id="_CPPv3N3eos23no_such_interface_error23no_such_interface_errorERKNSt6stringE"></span><span id="_CPPv2N3eos23no_such_interface_error23no_such_interface_errorERKNSt6stringE"></span><span id="eos::no_such_interface_error::no_such_interface_error__ssCR"></span><span class="target" id="classeos_1_1no__such__interface__error_1a87e6156f4a1dc5d7309fe1c35c057bf7"></span><code class="descname">no_such_interface_error</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::string <em class="property">const</em> &amp;<em>intfName</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos23no_such_interface_error23no_such_interface_errorERKNSt6stringE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N3eos23no_such_interface_errorD0Ev">
+<span id="_CPPv3N3eos23no_such_interface_errorD0Ev"></span><span id="_CPPv2N3eos23no_such_interface_errorD0Ev"></span><span id="eos::no_such_interface_error::~no_such_interface_error"></span><span class="target" id="classeos_1_1no__such__interface__error_1a36692be016ea12a78422ee6e79ab27ff"></span><code class="descname">~no_such_interface_error</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos23no_such_interface_errorD0Ev" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4NK3eos23no_such_interface_error4intfEv">
+<span id="_CPPv3NK3eos23no_such_interface_error4intfEv"></span><span id="_CPPv2NK3eos23no_such_interface_error4intfEv"></span><span id="eos::no_such_interface_error::intfC"></span><span class="target" id="classeos_1_1no__such__interface__error_1a8900b700b7444584bfb10e9e14670365"></span><a class="reference internal" href="#_CPPv4N3eos9intf_id_tE" title="eos::intf_id_t">intf_id_t</a> <code class="descname">intf</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos23no_such_interface_error4intfEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4NK3eos23no_such_interface_error5raiseEv">
+<span id="_CPPv3NK3eos23no_such_interface_error5raiseEv"></span><span id="_CPPv2NK3eos23no_such_interface_error5raiseEv"></span><span id="eos::no_such_interface_error::raiseC"></span><span class="target" id="classeos_1_1no__such__interface__error_1ae7715a1ed9a4e2d938976833895d9384"></span>void <code class="descname">raise</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos23no_such_interface_error5raiseEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Throws this exception. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4NK3eos23no_such_interface_error4hashEv">
+<span id="_CPPv3NK3eos23no_such_interface_error4hashEv"></span><span id="_CPPv2NK3eos23no_such_interface_error4hashEv"></span><span id="eos::no_such_interface_error::hashC"></span><span class="target" id="classeos_1_1no__such__interface__error_1a2244f22a5ddbdf2565390a513528d281"></span>uint32_t <code class="descname">hash</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos23no_such_interface_error4hashEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>The hash function for type <a class="reference internal" href="#classeos_1_1no__such__interface__error"><span class="std std-ref">no_such_interface_error</span></a>. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4NK3eos23no_such_interface_error6mix_meER8hash_mix">
+<span id="_CPPv3NK3eos23no_such_interface_error6mix_meER8hash_mix"></span><span id="_CPPv2NK3eos23no_such_interface_error6mix_meER8hash_mix"></span><span id="eos::no_such_interface_error::mix_me__hash_mixRC"></span><span class="target" id="classeos_1_1no__such__interface__error_1a3d07582c15d89f9d349e7dd08d8b39c1"></span>void <code class="descname">mix_me</code><span class="sig-paren">(</span><a class="reference internal" href="hash_mix.html#_CPPv4N3eos8hash_mixE" title="eos::hash_mix">hash_mix</a> &amp;<em>h</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos23no_such_interface_error6mix_meER8hash_mix" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>The hash mix function for type <a class="reference internal" href="#classeos_1_1no__such__interface__error"><span class="std std-ref">no_such_interface_error</span></a>. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4NK3eos23no_such_interface_error9to_stringEv">
+<span id="_CPPv3NK3eos23no_such_interface_error9to_stringEv"></span><span id="_CPPv2NK3eos23no_such_interface_error9to_stringEv"></span><span id="eos::no_such_interface_error::to_stringC"></span><span class="target" id="classeos_1_1no__such__interface__error_1ab5208a7b88d16dfb510f28f7a238aac8"></span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::string <code class="descname">to_string</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos23no_such_interface_error9to_stringEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Returns a string representation of the current object’s values. </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Private Members</p>
+<dl class="member">
+<dt id="_CPPv4N3eos23no_such_interface_error5intf_E">
+<span id="_CPPv3N3eos23no_such_interface_error5intf_E"></span><span id="_CPPv2N3eos23no_such_interface_error5intf_E"></span><span id="eos::no_such_interface_error::intf___intf_id_t"></span><span class="target" id="classeos_1_1no__such__interface__error_1ab476b1d10d69fa578ba105b7a58466e4"></span><a class="reference internal" href="#_CPPv4N3eos9intf_id_tE" title="eos::intf_id_t">intf_id_t</a> <code class="descname">intf_</code><a class="headerlink" href="#_CPPv4N3eos23no_such_interface_error5intf_E" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Friends</p>
+<dl class="function">
+<dt id="_CPPv4lsRNSt7ostreamERK23no_such_interface_error">
+<span id="_CPPv3lsRNSt7ostreamERK23no_such_interface_error"></span><span id="_CPPv2lsRNSt7ostreamERK23no_such_interface_error"></span><span id="lshift-operator__osR.no_such_interface_errorCR"></span><span class="target" id="classeos_1_1no__such__interface__error_1ab0a1a508503c696e6c9e74bb017ceb07"></span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::ostream &amp;<code class="descname">operator&lt;&lt;</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::ostream &amp;<em>os</em>, <em class="property">const</em> no_such_interface_error &amp;<em>obj</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4lsRNSt7ostreamERK23no_such_interface_error" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>A utility stream operator that adds a string representation of <a class="reference internal" href="#classeos_1_1no__such__interface__error"><span class="std std-ref">no_such_interface_error</span></a> to the ostream. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="class">
+<dt id="_CPPv4N3eos29not_switchport_eligible_errorE">
+<span id="_CPPv3N3eos29not_switchport_eligible_errorE"></span><span id="_CPPv2N3eos29not_switchport_eligible_errorE"></span><span id="eos::not_switchport_eligible_error"></span><span class="target" id="classeos_1_1not__switchport__eligible__error"></span><em class="property">class </em><code class="descname">not_switchport_eligible_error</code> : <em class="property">public</em> <a class="reference internal" href="acl.html#_CPPv43eos" title="eos">eos</a>::<a class="reference internal" href="exception.html#_CPPv4N3eos5errorE" title="eos::error">error</a><a class="headerlink" href="#_CPPv4N3eos29not_switchport_eligible_errorE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><em>#include &lt;intf.h&gt;</em><p>Error of configuring an interface as a routed port that cannot be a routed port. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="function">
+<dt id="_CPPv4N3eos29not_switchport_eligible_error29not_switchport_eligible_errorE9intf_id_t">
+<span id="_CPPv3N3eos29not_switchport_eligible_error29not_switchport_eligible_errorE9intf_id_t"></span><span id="_CPPv2N3eos29not_switchport_eligible_error29not_switchport_eligible_errorE9intf_id_t"></span><span id="eos::not_switchport_eligible_error::not_switchport_eligible_error__intf_id_t"></span><span class="target" id="classeos_1_1not__switchport__eligible__error_1ab2746d32bc7ebbb4d2ce45de13261a56"></span><code class="descname">not_switchport_eligible_error</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos9intf_id_tE" title="eos::intf_id_t">intf_id_t</a> <em>intf</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos29not_switchport_eligible_error29not_switchport_eligible_errorE9intf_id_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N3eos29not_switchport_eligible_errorD0Ev">
+<span id="_CPPv3N3eos29not_switchport_eligible_errorD0Ev"></span><span id="_CPPv2N3eos29not_switchport_eligible_errorD0Ev"></span><span id="eos::not_switchport_eligible_error::~not_switchport_eligible_error"></span><span class="target" id="classeos_1_1not__switchport__eligible__error_1a427b8dedc60983a6fa11c4f3990ee25c"></span><code class="descname">~not_switchport_eligible_error</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos29not_switchport_eligible_errorD0Ev" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4NK3eos29not_switchport_eligible_error4intfEv">
+<span id="_CPPv3NK3eos29not_switchport_eligible_error4intfEv"></span><span id="_CPPv2NK3eos29not_switchport_eligible_error4intfEv"></span><span id="eos::not_switchport_eligible_error::intfC"></span><span class="target" id="classeos_1_1not__switchport__eligible__error_1a1c70ca2c374bc39b34506ab0bb81b156"></span><a class="reference internal" href="#_CPPv4N3eos9intf_id_tE" title="eos::intf_id_t">intf_id_t</a> <code class="descname">intf</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos29not_switchport_eligible_error4intfEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4NK3eos29not_switchport_eligible_error5raiseEv">
+<span id="_CPPv3NK3eos29not_switchport_eligible_error5raiseEv"></span><span id="_CPPv2NK3eos29not_switchport_eligible_error5raiseEv"></span><span id="eos::not_switchport_eligible_error::raiseC"></span><span class="target" id="classeos_1_1not__switchport__eligible__error_1a3a0f47be73da0a49195cd3c4b047a4fe"></span>void <code class="descname">raise</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos29not_switchport_eligible_error5raiseEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Throws this exception. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4NK3eos29not_switchport_eligible_error4hashEv">
+<span id="_CPPv3NK3eos29not_switchport_eligible_error4hashEv"></span><span id="_CPPv2NK3eos29not_switchport_eligible_error4hashEv"></span><span id="eos::not_switchport_eligible_error::hashC"></span><span class="target" id="classeos_1_1not__switchport__eligible__error_1a217649878fc902e2998bbc927de69168"></span>uint32_t <code class="descname">hash</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos29not_switchport_eligible_error4hashEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>The hash function for type <a class="reference internal" href="#classeos_1_1not__switchport__eligible__error"><span class="std std-ref">not_switchport_eligible_error</span></a>. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4NK3eos29not_switchport_eligible_error6mix_meER8hash_mix">
+<span id="_CPPv3NK3eos29not_switchport_eligible_error6mix_meER8hash_mix"></span><span id="_CPPv2NK3eos29not_switchport_eligible_error6mix_meER8hash_mix"></span><span id="eos::not_switchport_eligible_error::mix_me__hash_mixRC"></span><span class="target" id="classeos_1_1not__switchport__eligible__error_1ad57d3cd431f8d1d4924205a1d0597dbb"></span>void <code class="descname">mix_me</code><span class="sig-paren">(</span><a class="reference internal" href="hash_mix.html#_CPPv4N3eos8hash_mixE" title="eos::hash_mix">hash_mix</a> &amp;<em>h</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos29not_switchport_eligible_error6mix_meER8hash_mix" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>The hash mix function for type <a class="reference internal" href="#classeos_1_1not__switchport__eligible__error"><span class="std std-ref">not_switchport_eligible_error</span></a>. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4NK3eos29not_switchport_eligible_error9to_stringEv">
+<span id="_CPPv3NK3eos29not_switchport_eligible_error9to_stringEv"></span><span id="_CPPv2NK3eos29not_switchport_eligible_error9to_stringEv"></span><span id="eos::not_switchport_eligible_error::to_stringC"></span><span class="target" id="classeos_1_1not__switchport__eligible__error_1abd3bc8868de40faf9cb39c9e38281e66"></span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::string <code class="descname">to_string</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos29not_switchport_eligible_error9to_stringEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Returns a string representation of the current object’s values. </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Private Members</p>
+<dl class="member">
+<dt id="_CPPv4N3eos29not_switchport_eligible_error5intf_E">
+<span id="_CPPv3N3eos29not_switchport_eligible_error5intf_E"></span><span id="_CPPv2N3eos29not_switchport_eligible_error5intf_E"></span><span id="eos::not_switchport_eligible_error::intf___intf_id_t"></span><span class="target" id="classeos_1_1not__switchport__eligible__error_1a69c2a342a38d3a2482672b47eb411bf9"></span><a class="reference internal" href="#_CPPv4N3eos9intf_id_tE" title="eos::intf_id_t">intf_id_t</a> <code class="descname">intf_</code><a class="headerlink" href="#_CPPv4N3eos29not_switchport_eligible_error5intf_E" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Friends</p>
+<dl class="function">
+<dt id="_CPPv4lsRNSt7ostreamERK29not_switchport_eligible_error">
+<span id="_CPPv3lsRNSt7ostreamERK29not_switchport_eligible_error"></span><span id="_CPPv2lsRNSt7ostreamERK29not_switchport_eligible_error"></span><span id="lshift-operator__osR.not_switchport_eligible_errorCR"></span><span class="target" id="classeos_1_1not__switchport__eligible__error_1aea8f168d9647f7e39e6b84421867303d"></span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::ostream &amp;<code class="descname">operator&lt;&lt;</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::ostream &amp;<em>os</em>, <em class="property">const</em> not_switchport_eligible_error &amp;<em>obj</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4lsRNSt7ostreamERK29not_switchport_eligible_error" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>A utility stream operator that adds a string representation of <a class="reference internal" href="#classeos_1_1not__switchport__eligible__error"><span class="std std-ref">not_switchport_eligible_error</span></a> to the ostream. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#"><strong>intf</strong></a><ul>
+<li><a class="reference internal" href="#type-definitions-in-intf">Type definitions in <strong>intf</strong></a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="hash_mix.html"
+                        title="previous chapter"><strong>hash_mix</strong></a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="ip.html"
+                        title="next chapter"><strong>ip</strong></a></p>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="ip.html" title="ip"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="hash_mix.html" title="hash_mix"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Arista EOS SDK 2.22.2 reference</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2014, Arista Networks.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.4.
+    </div>
+  </body>
+</html>

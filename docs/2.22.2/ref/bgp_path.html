@@ -1,0 +1,873 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge" />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <title>bgp_path &#8212; Arista EOS SDK 2.22.2 reference</title>
+    <link rel="stylesheet" href="_static/eossdk.css" type="text/css" />
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <script type="text/javascript" id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script type="text/javascript" src="_static/jquery.js"></script>
+    <script type="text/javascript" src="_static/underscore.js"></script>
+    <script type="text/javascript" src="_static/doctools.js"></script>
+    <script type="text/javascript" src="_static/language_data.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="class_map" href="class_map.html" />
+    <link rel="prev" title="bgp" href="bgp.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="class_map.html" title="class_map"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="bgp.html" title="bgp"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Arista EOS SDK 2.22.2 reference</a> &#187;</li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="bgp-path">
+<h1><strong>bgp_path</strong><a class="headerlink" href="#bgp-path" title="Permalink to this headline">¶</a></h1>
+<p>BGP path management module.</p>
+<p>Border Gateway Protocol (BGP) is a standardized exterior gateway routing protocol designed to exchange routing and reachability information among autonomous systems (AS). In EOS, BGP follows RFC4271.</p>
+<p>This module provides APIs to query BGP paths in the Adj-RIB-In.</p>
+<p>An example of the API usage is in examples/BgpPathAgent.cpp. </p>
+<dl class="type">
+<dt id="_CPPv43eos">
+<span id="_CPPv33eos"></span><span id="_CPPv23eos"></span><span id="eos"></span><span class="target" id="namespaceeos"></span><em class="property">namespace </em><code class="descname">eos</code><br /></dt>
+<dd><dl class="class">
+<dt id="_CPPv4N3eos15bgp_path_iter_tE">
+<span id="_CPPv3N3eos15bgp_path_iter_tE"></span><span id="_CPPv2N3eos15bgp_path_iter_tE"></span><span id="eos::bgp_path_iter_t"></span><span class="target" id="classeos_1_1bgp__path__iter__t"></span><em class="property">class </em><code class="descname">bgp_path_iter_t</code> : <em class="property">public</em> <a class="reference internal" href="acl.html#_CPPv43eos" title="eos">eos</a>::iter_base&lt;<a class="reference internal" href="#_CPPv4N3eos10bgp_path_tE" title="eos::bgp_path_t">bgp_path_t</a>, bgp_path_iter_impl&gt;<a class="headerlink" href="#_CPPv4N3eos15bgp_path_iter_tE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><em>#include &lt;bgp_path.h&gt;</em><p>An iterator that yields an <a class="reference internal" href="#classeos_1_1bgp__path__t"><span class="std std-ref">bgp_path_t</span></a> for each BGP path in Adj-RIB-In. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Private Functions</p>
+<dl class="function">
+<dt id="_CPPv4N3eos15bgp_path_iter_t15bgp_path_iter_tEPC18bgp_path_iter_impl">
+<span id="_CPPv3N3eos15bgp_path_iter_t15bgp_path_iter_tEPC18bgp_path_iter_impl"></span><span id="_CPPv2N3eos15bgp_path_iter_t15bgp_path_iter_tEPC18bgp_path_iter_impl"></span><span id="eos::bgp_path_iter_t::bgp_path_iter_t__bgp_path_iter_implPC"></span><span class="target" id="classeos_1_1bgp__path__iter__t_1aee23ff6b51bcc7b3a810c9ee089bfb60"></span><code class="descname">bgp_path_iter_t</code><span class="sig-paren">(</span>bgp_path_iter_impl *<em class="property">const</em> <span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos15bgp_path_iter_t15bgp_path_iter_tEPC18bgp_path_iter_impl" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Friends</p>
+<dl class="function">
+<dt>
+<span class="target" id="classeos_1_1bgp__path__iter__t_1acda0d5c015b21e446366bbd70919ae0c"></span><em class="property">friend </em><code class="descname">eos::bgp_path_iter_impl</code></dt>
+<dd></dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="class">
+<dt id="_CPPv4N3eos16bgp_path_handlerE">
+<span id="_CPPv3N3eos16bgp_path_handlerE"></span><span id="_CPPv2N3eos16bgp_path_handlerE"></span><span id="eos::bgp_path_handler"></span><span class="target" id="classeos_1_1bgp__path__handler"></span><em class="property">class </em><code class="descname">bgp_path_handler</code> : <em class="property">public</em> <a class="reference internal" href="acl.html#_CPPv43eos" title="eos">eos</a>::base_handler&lt;<a class="reference internal" href="#_CPPv4N3eos12bgp_path_mgrE" title="eos::bgp_path_mgr">bgp_path_mgr</a>, <a class="reference internal" href="#_CPPv4N3eos16bgp_path_handlerE" title="eos::bgp_path_handler">bgp_path_handler</a>&gt;<a class="headerlink" href="#_CPPv4N3eos16bgp_path_handlerE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><em>#include &lt;bgp_path.h&gt;</em><p>The BGP path handler.</p>
+<p>This class provides handler APIs to react to BGP path changes in Adj-RIB-In. New path updates are notified once BGP has converged. An iterator must be used to retreive the existing paths after BGP convergence. This is only supported under multi-agent mode. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="function">
+<dt id="_CPPv4N3eos16bgp_path_handler16bgp_path_handlerEP12bgp_path_mgr">
+<span id="_CPPv3N3eos16bgp_path_handler16bgp_path_handlerEP12bgp_path_mgr"></span><span id="_CPPv2N3eos16bgp_path_handler16bgp_path_handlerEP12bgp_path_mgr"></span><span id="eos::bgp_path_handler::bgp_path_handler__bgp_path_mgrP"></span><span class="target" id="classeos_1_1bgp__path__handler_1ae48578fb4262b1866af88fe511f8eedf"></span><code class="descname">bgp_path_handler</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos12bgp_path_mgrE" title="eos::bgp_path_mgr">bgp_path_mgr</a> *<em>mgr</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos16bgp_path_handler16bgp_path_handlerEP12bgp_path_mgr" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4NK3eos16bgp_path_handler16get_bgp_path_mgrEv">
+<span id="_CPPv3NK3eos16bgp_path_handler16get_bgp_path_mgrEv"></span><span id="_CPPv2NK3eos16bgp_path_handler16get_bgp_path_mgrEv"></span><span id="eos::bgp_path_handler::get_bgp_path_mgrC"></span><span class="target" id="classeos_1_1bgp__path__handler_1a9b581e5c86e49f3d61fc02ff189f0a80"></span><a class="reference internal" href="#_CPPv4N3eos12bgp_path_mgrE" title="eos::bgp_path_mgr">bgp_path_mgr</a> *<code class="descname">get_bgp_path_mgr</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos16bgp_path_handler16get_bgp_path_mgrEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N3eos16bgp_path_handler15watch_all_pathsEb">
+<span id="_CPPv3N3eos16bgp_path_handler15watch_all_pathsEb"></span><span id="_CPPv2N3eos16bgp_path_handler15watch_all_pathsEb"></span><span id="eos::bgp_path_handler::watch_all_paths__b"></span><span class="target" id="classeos_1_1bgp__path__handler_1a5b2381659002f6c5a240219efc528f97"></span>void <code class="descname">watch_all_paths</code><span class="sig-paren">(</span>bool<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos16bgp_path_handler15watch_all_pathsEb" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Register to receive notifications when any path has changed. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N3eos16bgp_path_handler24watch_ipv4_unicast_pathsEb">
+<span id="_CPPv3N3eos16bgp_path_handler24watch_ipv4_unicast_pathsEb"></span><span id="_CPPv2N3eos16bgp_path_handler24watch_ipv4_unicast_pathsEb"></span><span id="eos::bgp_path_handler::watch_ipv4_unicast_paths__b"></span><span class="target" id="classeos_1_1bgp__path__handler_1a669c061e9e283bd835cc8956cf0cc9f5"></span>void <code class="descname">watch_ipv4_unicast_paths</code><span class="sig-paren">(</span>bool<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos16bgp_path_handler24watch_ipv4_unicast_pathsEb" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Register to receive notifications when any IPv4 unicast path has changed. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N3eos16bgp_path_handler24watch_ipv6_unicast_pathsEb">
+<span id="_CPPv3N3eos16bgp_path_handler24watch_ipv6_unicast_pathsEb"></span><span id="_CPPv2N3eos16bgp_path_handler24watch_ipv6_unicast_pathsEb"></span><span id="eos::bgp_path_handler::watch_ipv6_unicast_paths__b"></span><span class="target" id="classeos_1_1bgp__path__handler_1acc9f09b16cce5c6accb87e774954ac7c"></span>void <code class="descname">watch_ipv6_unicast_paths</code><span class="sig-paren">(</span>bool<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos16bgp_path_handler24watch_ipv6_unicast_pathsEb" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Register to receive notifications when any IPv6 unicast path has changed. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N3eos16bgp_path_handler20on_ipv4_unicast_pathERK14bgp_path_key_t">
+<span id="_CPPv3N3eos16bgp_path_handler20on_ipv4_unicast_pathERK14bgp_path_key_t"></span><span id="_CPPv2N3eos16bgp_path_handler20on_ipv4_unicast_pathERK14bgp_path_key_t"></span><span id="eos::bgp_path_handler::on_ipv4_unicast_path__bgp_path_key_tCR"></span><span class="target" id="classeos_1_1bgp__path__handler_1a72c401ef55e67a99baaf4fca7d453c24"></span><em class="property">virtual</em> void <code class="descname">on_ipv4_unicast_path</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos14bgp_path_key_tE" title="eos::bgp_path_key_t">bgp_path_key_t</a> <em class="property">const</em> &amp;<em>path_key</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos16bgp_path_handler20on_ipv4_unicast_pathERK14bgp_path_key_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Handler called when a BGP IPv4 unicast path has changed in Adj-RIB-In. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N3eos16bgp_path_handler29on_ipv4_unicast_bgp_convergedEb">
+<span id="_CPPv3N3eos16bgp_path_handler29on_ipv4_unicast_bgp_convergedEb"></span><span id="_CPPv2N3eos16bgp_path_handler29on_ipv4_unicast_bgp_convergedEb"></span><span id="eos::bgp_path_handler::on_ipv4_unicast_bgp_converged__b"></span><span class="target" id="classeos_1_1bgp__path__handler_1a7a4d7e5264c3809f801949da0d2ccf4f"></span><em class="property">virtual</em> void <code class="descname">on_ipv4_unicast_bgp_converged</code><span class="sig-paren">(</span>bool <em>converged</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos16bgp_path_handler29on_ipv4_unicast_bgp_convergedEb" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Handler called when BGP convergence has changed in IPv4 unicast address family. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N3eos16bgp_path_handler20on_ipv6_unicast_pathERK14bgp_path_key_t">
+<span id="_CPPv3N3eos16bgp_path_handler20on_ipv6_unicast_pathERK14bgp_path_key_t"></span><span id="_CPPv2N3eos16bgp_path_handler20on_ipv6_unicast_pathERK14bgp_path_key_t"></span><span id="eos::bgp_path_handler::on_ipv6_unicast_path__bgp_path_key_tCR"></span><span class="target" id="classeos_1_1bgp__path__handler_1a1f9d9e6bd3635d57d4f4caefd6412a95"></span><em class="property">virtual</em> void <code class="descname">on_ipv6_unicast_path</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos14bgp_path_key_tE" title="eos::bgp_path_key_t">bgp_path_key_t</a> <em class="property">const</em> &amp;<em>path_key</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos16bgp_path_handler20on_ipv6_unicast_pathERK14bgp_path_key_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Handler called when a BGP IPv6 unicast path has changed in Adj-RIB-In. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N3eos16bgp_path_handler29on_ipv6_unicast_bgp_convergedEb">
+<span id="_CPPv3N3eos16bgp_path_handler29on_ipv6_unicast_bgp_convergedEb"></span><span id="_CPPv2N3eos16bgp_path_handler29on_ipv6_unicast_bgp_convergedEb"></span><span id="eos::bgp_path_handler::on_ipv6_unicast_bgp_converged__b"></span><span class="target" id="classeos_1_1bgp__path__handler_1a5ea2cb6da50bc36c4e3c8e96777cea39"></span><em class="property">virtual</em> void <code class="descname">on_ipv6_unicast_bgp_converged</code><span class="sig-paren">(</span>bool <em>converged</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos16bgp_path_handler29on_ipv6_unicast_bgp_convergedEb" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Handler called when BGP convergence has changed in IPv6 unicast address family. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="class">
+<dt id="_CPPv4N3eos12bgp_path_mgrE">
+<span id="_CPPv3N3eos12bgp_path_mgrE"></span><span id="_CPPv2N3eos12bgp_path_mgrE"></span><span id="eos::bgp_path_mgr"></span><span class="target" id="classeos_1_1bgp__path__mgr"></span><em class="property">class </em><code class="descname">bgp_path_mgr</code> : <em class="property">public</em> <a class="reference internal" href="acl.html#_CPPv43eos" title="eos">eos</a>::base_mgr&lt;<a class="reference internal" href="#_CPPv4N3eos16bgp_path_handlerE" title="eos::bgp_path_handler">bgp_path_handler</a>, <a class="reference internal" href="#_CPPv4N3eos14bgp_afi_safi_tE" title="eos::bgp_afi_safi_t">bgp_afi_safi_t</a>&gt;<a class="headerlink" href="#_CPPv4N3eos12bgp_path_mgrE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><em>#include &lt;bgp_path.h&gt;</em><p>A manager of BGP RIB paths. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="function">
+<dt id="_CPPv4N3eos12bgp_path_mgrD0Ev">
+<span id="_CPPv3N3eos12bgp_path_mgrD0Ev"></span><span id="_CPPv2N3eos12bgp_path_mgrD0Ev"></span><span id="eos::bgp_path_mgr::~bgp_path_mgr"></span><span class="target" id="classeos_1_1bgp__path__mgr_1a7f87899fed570c9339833d7fb967ee57"></span><em class="property">virtual</em> <code class="descname">~bgp_path_mgr</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos12bgp_path_mgrD0Ev" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4NK3eos12bgp_path_mgr22ipv4_unicast_path_iterER18bgp_path_options_t">
+<span id="_CPPv3NK3eos12bgp_path_mgr22ipv4_unicast_path_iterER18bgp_path_options_t"></span><span id="_CPPv2NK3eos12bgp_path_mgr22ipv4_unicast_path_iterER18bgp_path_options_t"></span><span id="eos::bgp_path_mgr::ipv4_unicast_path_iter__bgp_path_options_tRC"></span><span class="target" id="classeos_1_1bgp__path__mgr_1a58dfc7e2f5a74fd9b95fea09223a66ad"></span><em class="property">virtual</em> <a class="reference internal" href="#_CPPv4N3eos15bgp_path_iter_tE" title="eos::bgp_path_iter_t">bgp_path_iter_t</a> <code class="descname">ipv4_unicast_path_iter</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos18bgp_path_options_tE" title="eos::bgp_path_options_t">bgp_path_options_t</a>&amp;<span class="sig-paren">)</span> <em class="property">const</em> = 0<a class="headerlink" href="#_CPPv4NK3eos12bgp_path_mgr22ipv4_unicast_path_iterER18bgp_path_options_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Returns an iterator over IPv4 Unicast BGP paths in Adj-RIB-In, which contains unprocessed routing information that has been advertised to the local BGP speaker by its peers. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N3eos12bgp_path_mgr17ipv4_unicast_pathERK14bgp_path_key_tR18bgp_path_options_t">
+<span id="_CPPv3N3eos12bgp_path_mgr17ipv4_unicast_pathERK14bgp_path_key_tR18bgp_path_options_t"></span><span id="_CPPv2N3eos12bgp_path_mgr17ipv4_unicast_pathERK14bgp_path_key_tR18bgp_path_options_t"></span><span id="eos::bgp_path_mgr::ipv4_unicast_path__bgp_path_key_tCR.bgp_path_options_tR"></span><span class="target" id="classeos_1_1bgp__path__mgr_1abfcf2ffdb0bb3cc5cf1e978342025e1b"></span><em class="property">virtual</em> <a class="reference internal" href="#_CPPv4N3eos10bgp_path_tE" title="eos::bgp_path_t">bgp_path_t</a> <code class="descname">ipv4_unicast_path</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos14bgp_path_key_tE" title="eos::bgp_path_key_t">bgp_path_key_t</a> <em class="property">const</em>&amp;, <a class="reference internal" href="#_CPPv4N3eos18bgp_path_options_tE" title="eos::bgp_path_options_t">bgp_path_options_t</a>&amp;<span class="sig-paren">)</span> = 0<a class="headerlink" href="#_CPPv4N3eos12bgp_path_mgr17ipv4_unicast_pathERK14bgp_path_key_tR18bgp_path_options_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Returns an IPv4 Unicast BGP path in Adj-RIB-In with the corresponding path key. Returns an empty <a class="reference internal" href="#classeos_1_1bgp__path__t"><span class="std std-ref">bgp_path_t</span></a> if no matching path was found. This is only supported under multi-agent mode. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N3eos12bgp_path_mgr28ipv4_unicast_bgp_convergenceEv">
+<span id="_CPPv3N3eos12bgp_path_mgr28ipv4_unicast_bgp_convergenceEv"></span><span id="_CPPv2N3eos12bgp_path_mgr28ipv4_unicast_bgp_convergenceEv"></span><span id="eos::bgp_path_mgr::ipv4_unicast_bgp_convergence"></span><span class="target" id="classeos_1_1bgp__path__mgr_1a96e6100a443873ac35fb597ee94ec965"></span><em class="property">virtual</em> bool <code class="descname">ipv4_unicast_bgp_convergence</code><span class="sig-paren">(</span><span class="sig-paren">)</span> = 0<a class="headerlink" href="#_CPPv4N3eos12bgp_path_mgr28ipv4_unicast_bgp_convergenceEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Returns true if bgp is converged for IPv4 Unicast address family This is only supported under multi-agent mode. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4NK3eos12bgp_path_mgr22ipv6_unicast_path_iterER18bgp_path_options_t">
+<span id="_CPPv3NK3eos12bgp_path_mgr22ipv6_unicast_path_iterER18bgp_path_options_t"></span><span id="_CPPv2NK3eos12bgp_path_mgr22ipv6_unicast_path_iterER18bgp_path_options_t"></span><span id="eos::bgp_path_mgr::ipv6_unicast_path_iter__bgp_path_options_tRC"></span><span class="target" id="classeos_1_1bgp__path__mgr_1a48e5f5a48f8e3f7f5fc2c6728c358234"></span><em class="property">virtual</em> <a class="reference internal" href="#_CPPv4N3eos15bgp_path_iter_tE" title="eos::bgp_path_iter_t">bgp_path_iter_t</a> <code class="descname">ipv6_unicast_path_iter</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos18bgp_path_options_tE" title="eos::bgp_path_options_t">bgp_path_options_t</a>&amp;<span class="sig-paren">)</span> <em class="property">const</em> = 0<a class="headerlink" href="#_CPPv4NK3eos12bgp_path_mgr22ipv6_unicast_path_iterER18bgp_path_options_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Returns an iterator over IPv6 Unicast BGP paths in Adj-RIB-In, which contains unprocessed routing information that has been advertised to the local BGP speaker by its peers. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N3eos12bgp_path_mgr17ipv6_unicast_pathERK14bgp_path_key_tR18bgp_path_options_t">
+<span id="_CPPv3N3eos12bgp_path_mgr17ipv6_unicast_pathERK14bgp_path_key_tR18bgp_path_options_t"></span><span id="_CPPv2N3eos12bgp_path_mgr17ipv6_unicast_pathERK14bgp_path_key_tR18bgp_path_options_t"></span><span id="eos::bgp_path_mgr::ipv6_unicast_path__bgp_path_key_tCR.bgp_path_options_tR"></span><span class="target" id="classeos_1_1bgp__path__mgr_1a01ed59faa84bfee7686e570d13bb3831"></span><em class="property">virtual</em> <a class="reference internal" href="#_CPPv4N3eos10bgp_path_tE" title="eos::bgp_path_t">bgp_path_t</a> <code class="descname">ipv6_unicast_path</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos14bgp_path_key_tE" title="eos::bgp_path_key_t">bgp_path_key_t</a> <em class="property">const</em>&amp;, <a class="reference internal" href="#_CPPv4N3eos18bgp_path_options_tE" title="eos::bgp_path_options_t">bgp_path_options_t</a>&amp;<span class="sig-paren">)</span> = 0<a class="headerlink" href="#_CPPv4N3eos12bgp_path_mgr17ipv6_unicast_pathERK14bgp_path_key_tR18bgp_path_options_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Returns an IPv6 Unicast BGP path in Adj-RIB-In with the corresponding path key. Returns an empty <a class="reference internal" href="#classeos_1_1bgp__path__t"><span class="std std-ref">bgp_path_t</span></a> if no matching path was found. This is only supported under multi-agent mode. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N3eos12bgp_path_mgr28ipv6_unicast_bgp_convergenceEv">
+<span id="_CPPv3N3eos12bgp_path_mgr28ipv6_unicast_bgp_convergenceEv"></span><span id="_CPPv2N3eos12bgp_path_mgr28ipv6_unicast_bgp_convergenceEv"></span><span id="eos::bgp_path_mgr::ipv6_unicast_bgp_convergence"></span><span class="target" id="classeos_1_1bgp__path__mgr_1af446822e40377ccfd7a7ac1ae165b3f0"></span><em class="property">virtual</em> bool <code class="descname">ipv6_unicast_bgp_convergence</code><span class="sig-paren">(</span><span class="sig-paren">)</span> = 0<a class="headerlink" href="#_CPPv4N3eos12bgp_path_mgr28ipv6_unicast_bgp_convergenceEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Returns true if bgp is converged for IPv6 Unicast address family This is only supported under multi-agent mode. </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Protected Functions</p>
+<dl class="function">
+<dt id="_CPPv4N3eos12bgp_path_mgr12bgp_path_mgrEv">
+<span id="_CPPv3N3eos12bgp_path_mgr12bgp_path_mgrEv"></span><span id="_CPPv2N3eos12bgp_path_mgr12bgp_path_mgrEv"></span><span id="eos::bgp_path_mgr::bgp_path_mgr"></span><span class="target" id="classeos_1_1bgp__path__mgr_1acd8cf8289281926aa81af565a6ba4f2d"></span><code class="descname">bgp_path_mgr</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos12bgp_path_mgr12bgp_path_mgrEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Private Members</p>
+<dl class="member">
+<dt>
+<span class="target" id="classeos_1_1bgp__path__mgr_1a71a753babfff3b2b652cde19ea9a0a55"></span><code class="descname">eos::bgp_path_mgr::bgp_path_mgr</code></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Friends</p>
+<dl class="function">
+<dt>
+<span class="target" id="classeos_1_1bgp__path__mgr_1a9bdda9142fae9b631d3ad85fb44266ec"></span><em class="property">friend </em><code class="descname">eos::bgp_path_handler</code></dt>
+<dd></dd></dl>
+
+</div>
+</dd></dl>
+
+</dd></dl>
+
+<div class="section" id="type-definitions-in-bgp-path">
+<h2>Type definitions in <strong>bgp_path</strong><a class="headerlink" href="#type-definitions-in-bgp-path" title="Permalink to this headline">¶</a></h2>
+<dl class="type">
+<dt id="_CPPv43eos">
+<span id="_CPPv33eos"></span><span id="_CPPv23eos"></span><span class="target" id="namespaceeos"></span><em class="property">namespace </em><code class="descname">eos</code><br /></dt>
+<dd><div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Enums</p>
+<dl class="enum">
+<dt id="_CPPv4N3eos14bgp_afi_safi_tE">
+<span id="_CPPv3N3eos14bgp_afi_safi_tE"></span><span id="_CPPv2N3eos14bgp_afi_safi_tE"></span><span class="target" id="namespaceeos_1a6a5f96eeac55601a0f434663820b377e"></span><em class="property">enum </em><code class="descname">bgp_afi_safi_t</code><a class="headerlink" href="#_CPPv4N3eos14bgp_afi_safi_tE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>BGP Address Family Identifiers and Subsequent Address Family Identifiers. </p>
+<p><em>Values:</em></p>
+<dl class="enumerator">
+<dt id="_CPPv4N3eos16BGP_IPV4_UNICASTE">
+<span id="_CPPv3N3eos16BGP_IPV4_UNICASTE"></span><span id="_CPPv2N3eos16BGP_IPV4_UNICASTE"></span><span class="target" id="namespaceeos_1a6a5f96eeac55601a0f434663820b377ea20705fdd044b1134e614915c16ea3fab"></span><code class="descname">BGP_IPV4_UNICAST</code><a class="headerlink" href="#_CPPv4N3eos16BGP_IPV4_UNICASTE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="enumerator">
+<dt id="_CPPv4N3eos16BGP_IPV6_UNICASTE">
+<span id="_CPPv3N3eos16BGP_IPV6_UNICASTE"></span><span id="_CPPv2N3eos16BGP_IPV6_UNICASTE"></span><span class="target" id="namespaceeos_1a6a5f96eeac55601a0f434663820b377ea8b67a027e54c7832957e5ce54b845aa8"></span><code class="descname">BGP_IPV6_UNICAST</code><a class="headerlink" href="#_CPPv4N3eos16BGP_IPV6_UNICASTE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="enum">
+<dt id="_CPPv4N3eos25bgp_receive_route_stage_tE">
+<span id="_CPPv3N3eos25bgp_receive_route_stage_tE"></span><span id="_CPPv2N3eos25bgp_receive_route_stage_tE"></span><span class="target" id="namespaceeos_1a81d13cf5cb40350cb3cbfbe710b696b4"></span><em class="property">enum </em><code class="descname">bgp_receive_route_stage_t</code><a class="headerlink" href="#_CPPv4N3eos25bgp_receive_route_stage_tE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>The BGP path stage before/after the inbound policies are applied on the route. </p>
+<p><em>Values:</em></p>
+<dl class="enumerator">
+<dt id="_CPPv4N3eos19BGP_PATH_PRE_POLICYE">
+<span id="_CPPv3N3eos19BGP_PATH_PRE_POLICYE"></span><span id="_CPPv2N3eos19BGP_PATH_PRE_POLICYE"></span><span class="target" id="namespaceeos_1a81d13cf5cb40350cb3cbfbe710b696b4a2d56ae624ef118fc987d2d4ef1367737"></span><code class="descname">BGP_PATH_PRE_POLICY</code><a class="headerlink" href="#_CPPv4N3eos19BGP_PATH_PRE_POLICYE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="enumerator">
+<dt id="_CPPv4N3eos20BGP_PATH_POST_POLICYE">
+<span id="_CPPv3N3eos20BGP_PATH_POST_POLICYE"></span><span id="_CPPv2N3eos20BGP_PATH_POST_POLICYE"></span><span class="target" id="namespaceeos_1a81d13cf5cb40350cb3cbfbe710b696b4a19e1d974741fdcabc9fe7e9b21a1d0be"></span><code class="descname">BGP_PATH_POST_POLICY</code><a class="headerlink" href="#_CPPv4N3eos20BGP_PATH_POST_POLICYE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<dl class="class">
+<dt id="_CPPv4N3eos22bgp_path_attr_fields_tE">
+<span id="_CPPv3N3eos22bgp_path_attr_fields_tE"></span><span id="_CPPv2N3eos22bgp_path_attr_fields_tE"></span><span id="eos::bgp_path_attr_fields_t"></span><span class="target" id="classeos_1_1bgp__path__attr__fields__t"></span><em class="property">class </em><code class="descname">bgp_path_attr_fields_t</code><a class="headerlink" href="#_CPPv4N3eos22bgp_path_attr_fields_tE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><em>#include &lt;bgp_path.h&gt;</em><p>The BGP path option to enable lookup of additional path attributes fields. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="function">
+<dt id="_CPPv4N3eos22bgp_path_attr_fields_t22bgp_path_attr_fields_tEv">
+<span id="_CPPv3N3eos22bgp_path_attr_fields_t22bgp_path_attr_fields_tEv"></span><span id="_CPPv2N3eos22bgp_path_attr_fields_t22bgp_path_attr_fields_tEv"></span><span id="eos::bgp_path_attr_fields_t::bgp_path_attr_fields_t"></span><span class="target" id="classeos_1_1bgp__path__attr__fields__t_1a21e05e6e910a0d3c18dfbb5c56517210"></span><code class="descname">bgp_path_attr_fields_t</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos22bgp_path_attr_fields_t22bgp_path_attr_fields_tEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N3eos22bgp_path_attr_fields_t22bgp_path_attr_fields_tEb">
+<span id="_CPPv3N3eos22bgp_path_attr_fields_t22bgp_path_attr_fields_tEb"></span><span id="_CPPv2N3eos22bgp_path_attr_fields_t22bgp_path_attr_fields_tEb"></span><span id="eos::bgp_path_attr_fields_t::bgp_path_attr_fields_t__b"></span><span class="target" id="classeos_1_1bgp__path__attr__fields__t_1accc2898d8143533a4203e9df1e813d94"></span><code class="descname">bgp_path_attr_fields_t</code><span class="sig-paren">(</span>bool <em>next_hop</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos22bgp_path_attr_fields_t22bgp_path_attr_fields_tEb" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Create BGP path attribute field options. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N3eos22bgp_path_attr_fields_t22bgp_path_attr_fields_tERK22bgp_path_attr_fields_t">
+<span id="_CPPv3N3eos22bgp_path_attr_fields_t22bgp_path_attr_fields_tERK22bgp_path_attr_fields_t"></span><span id="_CPPv2N3eos22bgp_path_attr_fields_t22bgp_path_attr_fields_tERK22bgp_path_attr_fields_t"></span><span id="eos::bgp_path_attr_fields_t::bgp_path_attr_fields_t__bgp_path_attr_fields_tCR"></span><span class="target" id="classeos_1_1bgp__path__attr__fields__t_1a840676117f915eb961d30a9c7b7df35c"></span><code class="descname">bgp_path_attr_fields_t</code><span class="sig-paren">(</span><em class="property">const</em> <a class="reference internal" href="#_CPPv4N3eos22bgp_path_attr_fields_t22bgp_path_attr_fields_tEv" title="eos::bgp_path_attr_fields_t::bgp_path_attr_fields_t">bgp_path_attr_fields_t</a> &amp;<em>other</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos22bgp_path_attr_fields_t22bgp_path_attr_fields_tERK22bgp_path_attr_fields_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N3eos22bgp_path_attr_fields_taSERK22bgp_path_attr_fields_t">
+<span id="_CPPv3N3eos22bgp_path_attr_fields_taSERK22bgp_path_attr_fields_t"></span><span id="_CPPv2N3eos22bgp_path_attr_fields_taSERK22bgp_path_attr_fields_t"></span><span id="eos::bgp_path_attr_fields_t::assign-operator__bgp_path_attr_fields_tCR"></span><span class="target" id="classeos_1_1bgp__path__attr__fields__t_1ac5dd36fc0cffe03ea4c9643340176a87"></span><a class="reference internal" href="#_CPPv4N3eos22bgp_path_attr_fields_tE" title="eos::bgp_path_attr_fields_t">bgp_path_attr_fields_t</a> &amp;<code class="descname">operator=</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos22bgp_path_attr_fields_tE" title="eos::bgp_path_attr_fields_t">bgp_path_attr_fields_t</a> <em class="property">const</em> &amp;<em>other</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos22bgp_path_attr_fields_taSERK22bgp_path_attr_fields_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4NK3eos22bgp_path_attr_fields_t8next_hopEv">
+<span id="_CPPv3NK3eos22bgp_path_attr_fields_t8next_hopEv"></span><span id="_CPPv2NK3eos22bgp_path_attr_fields_t8next_hopEv"></span><span id="eos::bgp_path_attr_fields_t::next_hopC"></span><span class="target" id="classeos_1_1bgp__path__attr__fields__t_1af955bf4f9990fde80dec8c885705204b"></span>bool <code class="descname">next_hop</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos22bgp_path_attr_fields_t8next_hopEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Getter for ‘next_hop’: true if these path attribute options enable next hop lookup, false otherwise. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N3eos22bgp_path_attr_fields_t11next_hop_isEb">
+<span id="_CPPv3N3eos22bgp_path_attr_fields_t11next_hop_isEb"></span><span id="_CPPv2N3eos22bgp_path_attr_fields_t11next_hop_isEb"></span><span id="eos::bgp_path_attr_fields_t::next_hop_is__b"></span><span class="target" id="classeos_1_1bgp__path__attr__fields__t_1ad5853d7ad17b9d2be37aa55908bc1e5f"></span>void <code class="descname">next_hop_is</code><span class="sig-paren">(</span>bool <em>next_hop</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos22bgp_path_attr_fields_t11next_hop_isEb" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Setter for ‘next_hop’. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4NK3eos22bgp_path_attr_fields_t14community_listEv">
+<span id="_CPPv3NK3eos22bgp_path_attr_fields_t14community_listEv"></span><span id="_CPPv2NK3eos22bgp_path_attr_fields_t14community_listEv"></span><span id="eos::bgp_path_attr_fields_t::community_listC"></span><span class="target" id="classeos_1_1bgp__path__attr__fields__t_1a492e8f052786335b52033ed1261040f0"></span>bool <code class="descname">community_list</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos22bgp_path_attr_fields_t14community_listEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Getter for ‘community_list’: true if these path attribute options enable community list lookup, false otherwise. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N3eos22bgp_path_attr_fields_t17community_list_isEb">
+<span id="_CPPv3N3eos22bgp_path_attr_fields_t17community_list_isEb"></span><span id="_CPPv2N3eos22bgp_path_attr_fields_t17community_list_isEb"></span><span id="eos::bgp_path_attr_fields_t::community_list_is__b"></span><span class="target" id="classeos_1_1bgp__path__attr__fields__t_1aeb14f7eb90fb37270713bcbbf0ac33d6"></span>void <code class="descname">community_list_is</code><span class="sig-paren">(</span>bool <em>community_list</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos22bgp_path_attr_fields_t17community_list_isEb" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Setter for ‘community_list’. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4NK3eos22bgp_path_attr_fields_teqERK22bgp_path_attr_fields_t">
+<span id="_CPPv3NK3eos22bgp_path_attr_fields_teqERK22bgp_path_attr_fields_t"></span><span id="_CPPv2NK3eos22bgp_path_attr_fields_teqERK22bgp_path_attr_fields_t"></span><span id="eos::bgp_path_attr_fields_t::eq-operator__bgp_path_attr_fields_tCRC"></span><span class="target" id="classeos_1_1bgp__path__attr__fields__t_1a471121127a082bba8859a56a4c94869f"></span>bool <code class="descname">operator==</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos22bgp_path_attr_fields_tE" title="eos::bgp_path_attr_fields_t">bgp_path_attr_fields_t</a> <em class="property">const</em> &amp;<em>other</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos22bgp_path_attr_fields_teqERK22bgp_path_attr_fields_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4NK3eos22bgp_path_attr_fields_tneERK22bgp_path_attr_fields_t">
+<span id="_CPPv3NK3eos22bgp_path_attr_fields_tneERK22bgp_path_attr_fields_t"></span><span id="_CPPv2NK3eos22bgp_path_attr_fields_tneERK22bgp_path_attr_fields_t"></span><span id="eos::bgp_path_attr_fields_t::neq-operator__bgp_path_attr_fields_tCRC"></span><span class="target" id="classeos_1_1bgp__path__attr__fields__t_1a3d676f16bf76e482313b7f09a9088c68"></span>bool <code class="descname">operator!=</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos22bgp_path_attr_fields_tE" title="eos::bgp_path_attr_fields_t">bgp_path_attr_fields_t</a> <em class="property">const</em> &amp;<em>other</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos22bgp_path_attr_fields_tneERK22bgp_path_attr_fields_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4NK3eos22bgp_path_attr_fields_t4hashEv">
+<span id="_CPPv3NK3eos22bgp_path_attr_fields_t4hashEv"></span><span id="_CPPv2NK3eos22bgp_path_attr_fields_t4hashEv"></span><span id="eos::bgp_path_attr_fields_t::hashC"></span><span class="target" id="classeos_1_1bgp__path__attr__fields__t_1aa09b5df25c5fe5bde5f2371d9e2d24f8"></span>uint32_t <code class="descname">hash</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos22bgp_path_attr_fields_t4hashEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>The hash function for type <a class="reference internal" href="#classeos_1_1bgp__path__attr__fields__t"><span class="std std-ref">bgp_path_attr_fields_t</span></a>. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4NK3eos22bgp_path_attr_fields_t6mix_meER8hash_mix">
+<span id="_CPPv3NK3eos22bgp_path_attr_fields_t6mix_meER8hash_mix"></span><span id="_CPPv2NK3eos22bgp_path_attr_fields_t6mix_meER8hash_mix"></span><span id="eos::bgp_path_attr_fields_t::mix_me__hash_mixRC"></span><span class="target" id="classeos_1_1bgp__path__attr__fields__t_1a754bf0c5a71eaea9b2162a3a5686b8c6"></span>void <code class="descname">mix_me</code><span class="sig-paren">(</span><a class="reference internal" href="hash_mix.html#_CPPv4N3eos8hash_mixE" title="eos::hash_mix">hash_mix</a> &amp;<em>h</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos22bgp_path_attr_fields_t6mix_meER8hash_mix" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>The hash mix function for type <a class="reference internal" href="#classeos_1_1bgp__path__attr__fields__t"><span class="std std-ref">bgp_path_attr_fields_t</span></a>. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4NK3eos22bgp_path_attr_fields_t9to_stringEv">
+<span id="_CPPv3NK3eos22bgp_path_attr_fields_t9to_stringEv"></span><span id="_CPPv2NK3eos22bgp_path_attr_fields_t9to_stringEv"></span><span id="eos::bgp_path_attr_fields_t::to_stringC"></span><span class="target" id="classeos_1_1bgp__path__attr__fields__t_1ae9723153d7f39d8e13206d2ebe5e2c2a"></span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::string <code class="descname">to_string</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos22bgp_path_attr_fields_t9to_stringEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Returns a string representation of the current object’s values. </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Private Members</p>
+<dl class="member">
+<dt id="_CPPv4N3eos22bgp_path_attr_fields_t5pimplE">
+<span id="_CPPv3N3eos22bgp_path_attr_fields_t5pimplE"></span><span id="_CPPv2N3eos22bgp_path_attr_fields_t5pimplE"></span><span id="eos::bgp_path_attr_fields_t::pimpl__std::shared_ptr:bgp_path_attr_fields_impl_t:"></span><span class="target" id="classeos_1_1bgp__path__attr__fields__t_1a9b064198bb958bc1c29a8f2c3cbe1b4e"></span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::shared_ptr&lt;bgp_path_attr_fields_impl_t&gt; <code class="descname">pimpl</code><a class="headerlink" href="#_CPPv4N3eos22bgp_path_attr_fields_t5pimplE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Friends</p>
+<dl class="function">
+<dt id="_CPPv4lsRNSt7ostreamERK22bgp_path_attr_fields_t">
+<span id="_CPPv3lsRNSt7ostreamERK22bgp_path_attr_fields_t"></span><span id="_CPPv2lsRNSt7ostreamERK22bgp_path_attr_fields_t"></span><span id="lshift-operator__osR.bgp_path_attr_fields_tCR"></span><span class="target" id="classeos_1_1bgp__path__attr__fields__t_1ad25a3186395235816e2189bec3bef8be"></span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::ostream &amp;<code class="descname">operator&lt;&lt;</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::ostream &amp;<em>os</em>, <em class="property">const</em> bgp_path_attr_fields_t &amp;<em>obj</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4lsRNSt7ostreamERK22bgp_path_attr_fields_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>A utility stream operator that adds a string representation of <a class="reference internal" href="#classeos_1_1bgp__path__attr__fields__t"><span class="std std-ref">bgp_path_attr_fields_t</span></a> to the ostream. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="class">
+<dt id="_CPPv4N3eos18bgp_path_options_tE">
+<span id="_CPPv3N3eos18bgp_path_options_tE"></span><span id="_CPPv2N3eos18bgp_path_options_tE"></span><span id="eos::bgp_path_options_t"></span><span class="target" id="classeos_1_1bgp__path__options__t"></span><em class="property">class </em><code class="descname">bgp_path_options_t</code><a class="headerlink" href="#_CPPv4N3eos18bgp_path_options_tE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><em>#include &lt;bgp_path.h&gt;</em><p>The BGP path lookup options. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="function">
+<dt id="_CPPv4N3eos18bgp_path_options_t18bgp_path_options_tEv">
+<span id="_CPPv3N3eos18bgp_path_options_t18bgp_path_options_tEv"></span><span id="_CPPv2N3eos18bgp_path_options_t18bgp_path_options_tEv"></span><span id="eos::bgp_path_options_t::bgp_path_options_t"></span><span class="target" id="classeos_1_1bgp__path__options__t_1aff1454ad7cd077a8f971cc9423a7bf06"></span><code class="descname">bgp_path_options_t</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos18bgp_path_options_t18bgp_path_options_tEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N3eos18bgp_path_options_t18bgp_path_options_tE25bgp_receive_route_stage_t">
+<span id="_CPPv3N3eos18bgp_path_options_t18bgp_path_options_tE25bgp_receive_route_stage_t"></span><span id="_CPPv2N3eos18bgp_path_options_t18bgp_path_options_tE25bgp_receive_route_stage_t"></span><span id="eos::bgp_path_options_t::bgp_path_options_t__bgp_receive_route_stage_t"></span><span class="target" id="classeos_1_1bgp__path__options__t_1abaeee8ba484df3bd64501f095c4e5c43"></span><code class="descname">bgp_path_options_t</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos25bgp_receive_route_stage_tE" title="eos::bgp_receive_route_stage_t">bgp_receive_route_stage_t</a> <em>receive_route_stage</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos18bgp_path_options_t18bgp_path_options_tE25bgp_receive_route_stage_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Create BGP path options. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N3eos18bgp_path_options_t18bgp_path_options_tERK18bgp_path_options_t">
+<span id="_CPPv3N3eos18bgp_path_options_t18bgp_path_options_tERK18bgp_path_options_t"></span><span id="_CPPv2N3eos18bgp_path_options_t18bgp_path_options_tERK18bgp_path_options_t"></span><span id="eos::bgp_path_options_t::bgp_path_options_t__bgp_path_options_tCR"></span><span class="target" id="classeos_1_1bgp__path__options__t_1a9d0c5d208da2d225a7467e98d08cbb59"></span><code class="descname">bgp_path_options_t</code><span class="sig-paren">(</span><em class="property">const</em> <a class="reference internal" href="#_CPPv4N3eos18bgp_path_options_t18bgp_path_options_tEv" title="eos::bgp_path_options_t::bgp_path_options_t">bgp_path_options_t</a> &amp;<em>other</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos18bgp_path_options_t18bgp_path_options_tERK18bgp_path_options_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N3eos18bgp_path_options_taSERK18bgp_path_options_t">
+<span id="_CPPv3N3eos18bgp_path_options_taSERK18bgp_path_options_t"></span><span id="_CPPv2N3eos18bgp_path_options_taSERK18bgp_path_options_t"></span><span id="eos::bgp_path_options_t::assign-operator__bgp_path_options_tCR"></span><span class="target" id="classeos_1_1bgp__path__options__t_1aaba5c36f4e510aecc79a01a725aafef0"></span><a class="reference internal" href="#_CPPv4N3eos18bgp_path_options_tE" title="eos::bgp_path_options_t">bgp_path_options_t</a> &amp;<code class="descname">operator=</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos18bgp_path_options_tE" title="eos::bgp_path_options_t">bgp_path_options_t</a> <em class="property">const</em> &amp;<em>other</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos18bgp_path_options_taSERK18bgp_path_options_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4NK3eos18bgp_path_options_t19receive_route_stageEv">
+<span id="_CPPv3NK3eos18bgp_path_options_t19receive_route_stageEv"></span><span id="_CPPv2NK3eos18bgp_path_options_t19receive_route_stageEv"></span><span id="eos::bgp_path_options_t::receive_route_stageC"></span><span class="target" id="classeos_1_1bgp__path__options__t_1aba619fc8f95e2707a5769dfc6020cfca"></span><a class="reference internal" href="#_CPPv4N3eos25bgp_receive_route_stage_tE" title="eos::bgp_receive_route_stage_t">bgp_receive_route_stage_t</a> <code class="descname">receive_route_stage</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos18bgp_path_options_t19receive_route_stageEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Getter for ‘receive_route_stage’: The received routes stage of a path to lookup when retrieving the path entry. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N3eos18bgp_path_options_t22receive_route_stage_isE25bgp_receive_route_stage_t">
+<span id="_CPPv3N3eos18bgp_path_options_t22receive_route_stage_isE25bgp_receive_route_stage_t"></span><span id="_CPPv2N3eos18bgp_path_options_t22receive_route_stage_isE25bgp_receive_route_stage_t"></span><span id="eos::bgp_path_options_t::receive_route_stage_is__bgp_receive_route_stage_t"></span><span class="target" id="classeos_1_1bgp__path__options__t_1adcc48bf0071e912e5013af537858fcdb"></span>void <code class="descname">receive_route_stage_is</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos25bgp_receive_route_stage_tE" title="eos::bgp_receive_route_stage_t">bgp_receive_route_stage_t</a> <em>receive_route_stage</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos18bgp_path_options_t22receive_route_stage_isE25bgp_receive_route_stage_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Setter for ‘receive_route_stage’. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4NK3eos18bgp_path_options_t16path_attr_fieldsEv">
+<span id="_CPPv3NK3eos18bgp_path_options_t16path_attr_fieldsEv"></span><span id="_CPPv2NK3eos18bgp_path_options_t16path_attr_fieldsEv"></span><span id="eos::bgp_path_options_t::path_attr_fieldsC"></span><span class="target" id="classeos_1_1bgp__path__options__t_1a66b636483c2d03bb99ad06425bbc4854"></span><a class="reference internal" href="#_CPPv4N3eos22bgp_path_attr_fields_tE" title="eos::bgp_path_attr_fields_t">bgp_path_attr_fields_t</a> <code class="descname">path_attr_fields</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos18bgp_path_options_t16path_attr_fieldsEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Getter for ‘path_attr_fields’: The additional path attributes to populate when retrieving the path entry. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N3eos18bgp_path_options_t19path_attr_fields_isERK22bgp_path_attr_fields_t">
+<span id="_CPPv3N3eos18bgp_path_options_t19path_attr_fields_isERK22bgp_path_attr_fields_t"></span><span id="_CPPv2N3eos18bgp_path_options_t19path_attr_fields_isERK22bgp_path_attr_fields_t"></span><span id="eos::bgp_path_options_t::path_attr_fields_is__bgp_path_attr_fields_tCR"></span><span class="target" id="classeos_1_1bgp__path__options__t_1a0533599d2d87569120011f9f689b2738"></span>void <code class="descname">path_attr_fields_is</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos22bgp_path_attr_fields_tE" title="eos::bgp_path_attr_fields_t">bgp_path_attr_fields_t</a> <em class="property">const</em> &amp;<em>path_attr_fields</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos18bgp_path_options_t19path_attr_fields_isERK22bgp_path_attr_fields_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Setter for ‘path_attr_fields’. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4NK3eos18bgp_path_options_teqERK18bgp_path_options_t">
+<span id="_CPPv3NK3eos18bgp_path_options_teqERK18bgp_path_options_t"></span><span id="_CPPv2NK3eos18bgp_path_options_teqERK18bgp_path_options_t"></span><span id="eos::bgp_path_options_t::eq-operator__bgp_path_options_tCRC"></span><span class="target" id="classeos_1_1bgp__path__options__t_1a507126b120af3866094daa085f641977"></span>bool <code class="descname">operator==</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos18bgp_path_options_tE" title="eos::bgp_path_options_t">bgp_path_options_t</a> <em class="property">const</em> &amp;<em>other</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos18bgp_path_options_teqERK18bgp_path_options_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4NK3eos18bgp_path_options_tneERK18bgp_path_options_t">
+<span id="_CPPv3NK3eos18bgp_path_options_tneERK18bgp_path_options_t"></span><span id="_CPPv2NK3eos18bgp_path_options_tneERK18bgp_path_options_t"></span><span id="eos::bgp_path_options_t::neq-operator__bgp_path_options_tCRC"></span><span class="target" id="classeos_1_1bgp__path__options__t_1a54beeff1b051206a23e21b491e1daf76"></span>bool <code class="descname">operator!=</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos18bgp_path_options_tE" title="eos::bgp_path_options_t">bgp_path_options_t</a> <em class="property">const</em> &amp;<em>other</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos18bgp_path_options_tneERK18bgp_path_options_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4NK3eos18bgp_path_options_t4hashEv">
+<span id="_CPPv3NK3eos18bgp_path_options_t4hashEv"></span><span id="_CPPv2NK3eos18bgp_path_options_t4hashEv"></span><span id="eos::bgp_path_options_t::hashC"></span><span class="target" id="classeos_1_1bgp__path__options__t_1a944e7ee75bbf7d8959277bd051089d13"></span>uint32_t <code class="descname">hash</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos18bgp_path_options_t4hashEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>The hash function for type <a class="reference internal" href="#classeos_1_1bgp__path__options__t"><span class="std std-ref">bgp_path_options_t</span></a>. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4NK3eos18bgp_path_options_t6mix_meER8hash_mix">
+<span id="_CPPv3NK3eos18bgp_path_options_t6mix_meER8hash_mix"></span><span id="_CPPv2NK3eos18bgp_path_options_t6mix_meER8hash_mix"></span><span id="eos::bgp_path_options_t::mix_me__hash_mixRC"></span><span class="target" id="classeos_1_1bgp__path__options__t_1a86c0d7e764ed0af6463e998e1bacf5a3"></span>void <code class="descname">mix_me</code><span class="sig-paren">(</span><a class="reference internal" href="hash_mix.html#_CPPv4N3eos8hash_mixE" title="eos::hash_mix">hash_mix</a> &amp;<em>h</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos18bgp_path_options_t6mix_meER8hash_mix" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>The hash mix function for type <a class="reference internal" href="#classeos_1_1bgp__path__options__t"><span class="std std-ref">bgp_path_options_t</span></a>. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4NK3eos18bgp_path_options_t9to_stringEv">
+<span id="_CPPv3NK3eos18bgp_path_options_t9to_stringEv"></span><span id="_CPPv2NK3eos18bgp_path_options_t9to_stringEv"></span><span id="eos::bgp_path_options_t::to_stringC"></span><span class="target" id="classeos_1_1bgp__path__options__t_1a40259f8975574d50f885b1bca39ecf70"></span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::string <code class="descname">to_string</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos18bgp_path_options_t9to_stringEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Returns a string representation of the current object’s values. </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Private Members</p>
+<dl class="member">
+<dt id="_CPPv4N3eos18bgp_path_options_t5pimplE">
+<span id="_CPPv3N3eos18bgp_path_options_t5pimplE"></span><span id="_CPPv2N3eos18bgp_path_options_t5pimplE"></span><span id="eos::bgp_path_options_t::pimpl__std::shared_ptr:bgp_path_options_impl_t:"></span><span class="target" id="classeos_1_1bgp__path__options__t_1a3e54f3387541d17b900748986fabf165"></span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::shared_ptr&lt;bgp_path_options_impl_t&gt; <code class="descname">pimpl</code><a class="headerlink" href="#_CPPv4N3eos18bgp_path_options_t5pimplE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Friends</p>
+<dl class="function">
+<dt id="_CPPv4lsRNSt7ostreamERK18bgp_path_options_t">
+<span id="_CPPv3lsRNSt7ostreamERK18bgp_path_options_t"></span><span id="_CPPv2lsRNSt7ostreamERK18bgp_path_options_t"></span><span id="lshift-operator__osR.bgp_path_options_tCR"></span><span class="target" id="classeos_1_1bgp__path__options__t_1a58028e0c8a4ce3bd264da9935f938e36"></span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::ostream &amp;<code class="descname">operator&lt;&lt;</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::ostream &amp;<em>os</em>, <em class="property">const</em> bgp_path_options_t &amp;<em>obj</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4lsRNSt7ostreamERK18bgp_path_options_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>A utility stream operator that adds a string representation of <a class="reference internal" href="#classeos_1_1bgp__path__options__t"><span class="std std-ref">bgp_path_options_t</span></a> to the ostream. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="class">
+<dt id="_CPPv4N3eos15bgp_path_attr_tE">
+<span id="_CPPv3N3eos15bgp_path_attr_tE"></span><span id="_CPPv2N3eos15bgp_path_attr_tE"></span><span id="eos::bgp_path_attr_t"></span><span class="target" id="classeos_1_1bgp__path__attr__t"></span><em class="property">class </em><code class="descname">bgp_path_attr_t</code><a class="headerlink" href="#_CPPv4N3eos15bgp_path_attr_tE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><em>#include &lt;bgp_path.h&gt;</em><p>The BGP path attribute entry. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="function">
+<dt id="_CPPv4N3eos15bgp_path_attr_t15bgp_path_attr_tEv">
+<span id="_CPPv3N3eos15bgp_path_attr_t15bgp_path_attr_tEv"></span><span id="_CPPv2N3eos15bgp_path_attr_t15bgp_path_attr_tEv"></span><span id="eos::bgp_path_attr_t::bgp_path_attr_t"></span><span class="target" id="classeos_1_1bgp__path__attr__t_1ada70c03247bbd1c3942ef9b6dc8c89fb"></span><code class="descname">bgp_path_attr_t</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos15bgp_path_attr_t15bgp_path_attr_tEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N3eos15bgp_path_attr_t15bgp_path_attr_tE7uint8_t8uint32_t8uint32_t">
+<span id="_CPPv3N3eos15bgp_path_attr_t15bgp_path_attr_tE7uint8_t8uint32_t8uint32_t"></span><span id="_CPPv2N3eos15bgp_path_attr_t15bgp_path_attr_tE7uint8_t8uint32_t8uint32_t"></span><span id="eos::bgp_path_attr_t::bgp_path_attr_t__uint8_t.uint32_t.uint32_t"></span><span class="target" id="classeos_1_1bgp__path__attr__t_1ad1f83b7645d6a6eb74083c2b2877979f"></span><code class="descname">bgp_path_attr_t</code><span class="sig-paren">(</span>uint8_t <em>origin</em>, uint32_t <em>med</em>, uint32_t <em>local_pref</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos15bgp_path_attr_t15bgp_path_attr_tE7uint8_t8uint32_t8uint32_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N3eos15bgp_path_attr_t15bgp_path_attr_tERK15bgp_path_attr_t">
+<span id="_CPPv3N3eos15bgp_path_attr_t15bgp_path_attr_tERK15bgp_path_attr_t"></span><span id="_CPPv2N3eos15bgp_path_attr_t15bgp_path_attr_tERK15bgp_path_attr_t"></span><span id="eos::bgp_path_attr_t::bgp_path_attr_t__bgp_path_attr_tCR"></span><span class="target" id="classeos_1_1bgp__path__attr__t_1a8c75630968105aa60b8df10243fa1c83"></span><code class="descname">bgp_path_attr_t</code><span class="sig-paren">(</span><em class="property">const</em> <a class="reference internal" href="#_CPPv4N3eos15bgp_path_attr_t15bgp_path_attr_tEv" title="eos::bgp_path_attr_t::bgp_path_attr_t">bgp_path_attr_t</a> &amp;<em>other</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos15bgp_path_attr_t15bgp_path_attr_tERK15bgp_path_attr_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N3eos15bgp_path_attr_taSERK15bgp_path_attr_t">
+<span id="_CPPv3N3eos15bgp_path_attr_taSERK15bgp_path_attr_t"></span><span id="_CPPv2N3eos15bgp_path_attr_taSERK15bgp_path_attr_t"></span><span id="eos::bgp_path_attr_t::assign-operator__bgp_path_attr_tCR"></span><span class="target" id="classeos_1_1bgp__path__attr__t_1ab7db3fbcbb6d5ff1c6504ee828407c12"></span><a class="reference internal" href="#_CPPv4N3eos15bgp_path_attr_tE" title="eos::bgp_path_attr_t">bgp_path_attr_t</a> &amp;<code class="descname">operator=</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos15bgp_path_attr_tE" title="eos::bgp_path_attr_t">bgp_path_attr_t</a> <em class="property">const</em> &amp;<em>other</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos15bgp_path_attr_taSERK15bgp_path_attr_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4NK3eos15bgp_path_attr_t8next_hopEv">
+<span id="_CPPv3NK3eos15bgp_path_attr_t8next_hopEv"></span><span id="_CPPv2NK3eos15bgp_path_attr_t8next_hopEv"></span><span id="eos::bgp_path_attr_t::next_hopC"></span><span class="target" id="classeos_1_1bgp__path__attr__t_1a454da4d752dfff43c5c23f964784de05"></span><a class="reference internal" href="ip.html#_CPPv4N3eos9ip_addr_tE" title="eos::ip_addr_t">ip_addr_t</a> <code class="descname">next_hop</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos15bgp_path_attr_t8next_hopEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Getter for ‘next_hop’: The nexthop address for the route. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N3eos15bgp_path_attr_t11next_hop_isERK9ip_addr_t">
+<span id="_CPPv3N3eos15bgp_path_attr_t11next_hop_isERK9ip_addr_t"></span><span id="_CPPv2N3eos15bgp_path_attr_t11next_hop_isERK9ip_addr_t"></span><span id="eos::bgp_path_attr_t::next_hop_is__ip_addr_tCR"></span><span class="target" id="classeos_1_1bgp__path__attr__t_1a7170e7671ee8f06f94ba807817a1a652"></span>void <code class="descname">next_hop_is</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#_CPPv4N3eos9ip_addr_tE" title="eos::ip_addr_t">ip_addr_t</a> <em class="property">const</em> &amp;<em>next_hop</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos15bgp_path_attr_t11next_hop_isERK9ip_addr_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Setter for ‘next_hop’. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4NK3eos15bgp_path_attr_t6originEv">
+<span id="_CPPv3NK3eos15bgp_path_attr_t6originEv"></span><span id="_CPPv2NK3eos15bgp_path_attr_t6originEv"></span><span id="eos::bgp_path_attr_t::originC"></span><span class="target" id="classeos_1_1bgp__path__attr__t_1a600f0ee7969401f30a62e3e924136fad"></span>uint8_t <code class="descname">origin</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos15bgp_path_attr_t6originEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Getter for ‘origin’: The route origin. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N3eos15bgp_path_attr_t9origin_isE7uint8_t">
+<span id="_CPPv3N3eos15bgp_path_attr_t9origin_isE7uint8_t"></span><span id="_CPPv2N3eos15bgp_path_attr_t9origin_isE7uint8_t"></span><span id="eos::bgp_path_attr_t::origin_is__uint8_t"></span><span class="target" id="classeos_1_1bgp__path__attr__t_1acda3974ea55db161e43b5daf196a8aa0"></span>void <code class="descname">origin_is</code><span class="sig-paren">(</span>uint8_t <em>origin</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos15bgp_path_attr_t9origin_isE7uint8_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Setter for ‘origin’. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4NK3eos15bgp_path_attr_t3medEv">
+<span id="_CPPv3NK3eos15bgp_path_attr_t3medEv"></span><span id="_CPPv2NK3eos15bgp_path_attr_t3medEv"></span><span id="eos::bgp_path_attr_t::medC"></span><span class="target" id="classeos_1_1bgp__path__attr__t_1a87c60693de7a417e53b6560cda1256ff"></span>uint32_t <code class="descname">med</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos15bgp_path_attr_t3medEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Getter for ‘med’: The Multi Exit Discriminator for the route. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N3eos15bgp_path_attr_t6med_isE8uint32_t">
+<span id="_CPPv3N3eos15bgp_path_attr_t6med_isE8uint32_t"></span><span id="_CPPv2N3eos15bgp_path_attr_t6med_isE8uint32_t"></span><span id="eos::bgp_path_attr_t::med_is__uint32_t"></span><span class="target" id="classeos_1_1bgp__path__attr__t_1adedc92835a06e6ea612c17df1c77a078"></span>void <code class="descname">med_is</code><span class="sig-paren">(</span>uint32_t <em>med</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos15bgp_path_attr_t6med_isE8uint32_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Setter for ‘med’. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4NK3eos15bgp_path_attr_t10local_prefEv">
+<span id="_CPPv3NK3eos15bgp_path_attr_t10local_prefEv"></span><span id="_CPPv2NK3eos15bgp_path_attr_t10local_prefEv"></span><span id="eos::bgp_path_attr_t::local_prefC"></span><span class="target" id="classeos_1_1bgp__path__attr__t_1a0b1c5ba5cbea56591c294753ad4efb72"></span>uint32_t <code class="descname">local_pref</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos15bgp_path_attr_t10local_prefEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Getter for ‘local_pref’: The I-BGP Local preference indicator. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N3eos15bgp_path_attr_t13local_pref_isE8uint32_t">
+<span id="_CPPv3N3eos15bgp_path_attr_t13local_pref_isE8uint32_t"></span><span id="_CPPv2N3eos15bgp_path_attr_t13local_pref_isE8uint32_t"></span><span id="eos::bgp_path_attr_t::local_pref_is__uint32_t"></span><span class="target" id="classeos_1_1bgp__path__attr__t_1a32d1e371c0d5723be5796d7d1528a400"></span>void <code class="descname">local_pref_is</code><span class="sig-paren">(</span>uint32_t <em>local_pref</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos15bgp_path_attr_t13local_pref_isE8uint32_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Setter for ‘local_pref’. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4NK3eos15bgp_path_attr_t14community_listEv">
+<span id="_CPPv3NK3eos15bgp_path_attr_t14community_listEv"></span><span id="_CPPv2NK3eos15bgp_path_attr_t14community_listEv"></span><span id="eos::bgp_path_attr_t::community_listC"></span><span class="target" id="classeos_1_1bgp__path__attr__t_1a0f320d32e65fda201a2c913a70fb4ee7"></span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::unordered_set&lt;uint32_t&gt; <em class="property">const</em> &amp;<code class="descname">community_list</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos15bgp_path_attr_t14community_listEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Getter for ‘community_list’: The route community list. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N3eos15bgp_path_attr_t17community_list_isERKNSt13unordered_setI8uint32_tEE">
+<span id="_CPPv3N3eos15bgp_path_attr_t17community_list_isERKNSt13unordered_setI8uint32_tEE"></span><span id="_CPPv2N3eos15bgp_path_attr_t17community_list_isERKNSt13unordered_setI8uint32_tEE"></span><span id="eos::bgp_path_attr_t::community_list_is__std::unordered_set:uint32_t:CR"></span><span class="target" id="classeos_1_1bgp__path__attr__t_1abd6a9e5d4e3ab4b12d549358bef870a1"></span>void <code class="descname">community_list_is</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::unordered_set&lt;uint32_t&gt; <em class="property">const</em> &amp;<em>community_list</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos15bgp_path_attr_t17community_list_isERKNSt13unordered_setI8uint32_tEE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Setter for ‘community_list’. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N3eos15bgp_path_attr_t18community_list_setERK8uint32_t">
+<span id="_CPPv3N3eos15bgp_path_attr_t18community_list_setERK8uint32_t"></span><span id="_CPPv2N3eos15bgp_path_attr_t18community_list_setERK8uint32_t"></span><span id="eos::bgp_path_attr_t::community_list_set__uint32_tCR"></span><span class="target" id="classeos_1_1bgp__path__attr__t_1ad8f4869f0e2a9c007c39620e3a2f7995"></span>void <code class="descname">community_list_set</code><span class="sig-paren">(</span>uint32_t <em class="property">const</em> &amp;<em>value</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos15bgp_path_attr_t18community_list_setERK8uint32_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Inserts one community_list of ‘value’ to the set. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N3eos15bgp_path_attr_t18community_list_delERK8uint32_t">
+<span id="_CPPv3N3eos15bgp_path_attr_t18community_list_delERK8uint32_t"></span><span id="_CPPv2N3eos15bgp_path_attr_t18community_list_delERK8uint32_t"></span><span id="eos::bgp_path_attr_t::community_list_del__uint32_tCR"></span><span class="target" id="classeos_1_1bgp__path__attr__t_1aab2302a8e74d6884a383edb2f0924b8c"></span>void <code class="descname">community_list_del</code><span class="sig-paren">(</span>uint32_t <em class="property">const</em> &amp;<em>value</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos15bgp_path_attr_t18community_list_delERK8uint32_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Deletes one community_list of ‘value’ from the set. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4NK3eos15bgp_path_attr_teqERK15bgp_path_attr_t">
+<span id="_CPPv3NK3eos15bgp_path_attr_teqERK15bgp_path_attr_t"></span><span id="_CPPv2NK3eos15bgp_path_attr_teqERK15bgp_path_attr_t"></span><span id="eos::bgp_path_attr_t::eq-operator__bgp_path_attr_tCRC"></span><span class="target" id="classeos_1_1bgp__path__attr__t_1a90d681531aa084fa93a9eeb21c1d6b81"></span>bool <code class="descname">operator==</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos15bgp_path_attr_tE" title="eos::bgp_path_attr_t">bgp_path_attr_t</a> <em class="property">const</em> &amp;<em>other</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos15bgp_path_attr_teqERK15bgp_path_attr_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4NK3eos15bgp_path_attr_tneERK15bgp_path_attr_t">
+<span id="_CPPv3NK3eos15bgp_path_attr_tneERK15bgp_path_attr_t"></span><span id="_CPPv2NK3eos15bgp_path_attr_tneERK15bgp_path_attr_t"></span><span id="eos::bgp_path_attr_t::neq-operator__bgp_path_attr_tCRC"></span><span class="target" id="classeos_1_1bgp__path__attr__t_1a5c7d87c76da659eb9081c61d5ae2eaeb"></span>bool <code class="descname">operator!=</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos15bgp_path_attr_tE" title="eos::bgp_path_attr_t">bgp_path_attr_t</a> <em class="property">const</em> &amp;<em>other</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos15bgp_path_attr_tneERK15bgp_path_attr_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4NK3eos15bgp_path_attr_t4hashEv">
+<span id="_CPPv3NK3eos15bgp_path_attr_t4hashEv"></span><span id="_CPPv2NK3eos15bgp_path_attr_t4hashEv"></span><span id="eos::bgp_path_attr_t::hashC"></span><span class="target" id="classeos_1_1bgp__path__attr__t_1a5128e6bd97901ffac61aa680e7713b71"></span>uint32_t <code class="descname">hash</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos15bgp_path_attr_t4hashEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>The hash function for type <a class="reference internal" href="#classeos_1_1bgp__path__attr__t"><span class="std std-ref">bgp_path_attr_t</span></a>. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4NK3eos15bgp_path_attr_t6mix_meER8hash_mix">
+<span id="_CPPv3NK3eos15bgp_path_attr_t6mix_meER8hash_mix"></span><span id="_CPPv2NK3eos15bgp_path_attr_t6mix_meER8hash_mix"></span><span id="eos::bgp_path_attr_t::mix_me__hash_mixRC"></span><span class="target" id="classeos_1_1bgp__path__attr__t_1a8259aeb2a5ae2225d0a8e5783d63d08e"></span>void <code class="descname">mix_me</code><span class="sig-paren">(</span><a class="reference internal" href="hash_mix.html#_CPPv4N3eos8hash_mixE" title="eos::hash_mix">hash_mix</a> &amp;<em>h</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos15bgp_path_attr_t6mix_meER8hash_mix" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>The hash mix function for type <a class="reference internal" href="#classeos_1_1bgp__path__attr__t"><span class="std std-ref">bgp_path_attr_t</span></a>. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4NK3eos15bgp_path_attr_t9to_stringEv">
+<span id="_CPPv3NK3eos15bgp_path_attr_t9to_stringEv"></span><span id="_CPPv2NK3eos15bgp_path_attr_t9to_stringEv"></span><span id="eos::bgp_path_attr_t::to_stringC"></span><span class="target" id="classeos_1_1bgp__path__attr__t_1aeb36d18bb973e9ef99e71518efa055fc"></span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::string <code class="descname">to_string</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos15bgp_path_attr_t9to_stringEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Returns a string representation of the current object’s values. </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Private Members</p>
+<dl class="member">
+<dt id="_CPPv4N3eos15bgp_path_attr_t5pimplE">
+<span id="_CPPv3N3eos15bgp_path_attr_t5pimplE"></span><span id="_CPPv2N3eos15bgp_path_attr_t5pimplE"></span><span id="eos::bgp_path_attr_t::pimpl__std::shared_ptr:bgp_path_attr_impl_t:"></span><span class="target" id="classeos_1_1bgp__path__attr__t_1a0af897de80b920bd6c43ed9a0225c335"></span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::shared_ptr&lt;bgp_path_attr_impl_t&gt; <code class="descname">pimpl</code><a class="headerlink" href="#_CPPv4N3eos15bgp_path_attr_t5pimplE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Friends</p>
+<dl class="function">
+<dt id="_CPPv4lsRNSt7ostreamERK15bgp_path_attr_t">
+<span id="_CPPv3lsRNSt7ostreamERK15bgp_path_attr_t"></span><span id="_CPPv2lsRNSt7ostreamERK15bgp_path_attr_t"></span><span id="lshift-operator__osR.bgp_path_attr_tCR"></span><span class="target" id="classeos_1_1bgp__path__attr__t_1a91a74a0fd152eb7b8195a7af66cd0f2f"></span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::ostream &amp;<code class="descname">operator&lt;&lt;</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::ostream &amp;<em>os</em>, <em class="property">const</em> bgp_path_attr_t &amp;<em>obj</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4lsRNSt7ostreamERK15bgp_path_attr_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>A utility stream operator that adds a string representation of <a class="reference internal" href="#classeos_1_1bgp__path__attr__t"><span class="std std-ref">bgp_path_attr_t</span></a> to the ostream. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="class">
+<dt id="_CPPv4N3eos14bgp_path_key_tE">
+<span id="_CPPv3N3eos14bgp_path_key_tE"></span><span id="_CPPv2N3eos14bgp_path_key_tE"></span><span id="eos::bgp_path_key_t"></span><span class="target" id="classeos_1_1bgp__path__key__t"></span><em class="property">class </em><code class="descname">bgp_path_key_t</code><a class="headerlink" href="#_CPPv4N3eos14bgp_path_key_tE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><em>#include &lt;bgp_path.h&gt;</em><p>The key which uniquely identifies a BGP path. Supports IPV4/IPV6 Unicast. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="function">
+<dt id="_CPPv4N3eos14bgp_path_key_t14bgp_path_key_tEv">
+<span id="_CPPv3N3eos14bgp_path_key_t14bgp_path_key_tEv"></span><span id="_CPPv2N3eos14bgp_path_key_t14bgp_path_key_tEv"></span><span id="eos::bgp_path_key_t::bgp_path_key_t"></span><span class="target" id="classeos_1_1bgp__path__key__t_1a63ba78d7a9180c1cde30b21314dddcc3"></span><code class="descname">bgp_path_key_t</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos14bgp_path_key_t14bgp_path_key_tEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N3eos14bgp_path_key_t14bgp_path_key_tERK11ip_prefix_tRK9ip_addr_tRKNSt6stringE">
+<span id="_CPPv3N3eos14bgp_path_key_t14bgp_path_key_tERK11ip_prefix_tRK9ip_addr_tRKNSt6stringE"></span><span id="_CPPv2N3eos14bgp_path_key_t14bgp_path_key_tERK11ip_prefix_tRK9ip_addr_tRKNSt6stringE"></span><span id="eos::bgp_path_key_t::bgp_path_key_t__ip_prefix_tCR.ip_addr_tCR.ssCR"></span><span class="target" id="classeos_1_1bgp__path__key__t_1aaaf570efa0c3bd172e87e62a67004099"></span><code class="descname">bgp_path_key_t</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#_CPPv4N3eos11ip_prefix_tE" title="eos::ip_prefix_t">ip_prefix_t</a> <em class="property">const</em> &amp;<em>prefix</em>, <a class="reference internal" href="ip.html#_CPPv4N3eos9ip_addr_tE" title="eos::ip_addr_t">ip_addr_t</a> <em class="property">const</em> &amp;<em>peer_addr</em>, <a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::string <em class="property">const</em> &amp;<em>vrf_name</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos14bgp_path_key_t14bgp_path_key_tERK11ip_prefix_tRK9ip_addr_tRKNSt6stringE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Create BGP path key. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N3eos14bgp_path_key_t14bgp_path_key_tERK14bgp_path_key_t">
+<span id="_CPPv3N3eos14bgp_path_key_t14bgp_path_key_tERK14bgp_path_key_t"></span><span id="_CPPv2N3eos14bgp_path_key_t14bgp_path_key_tERK14bgp_path_key_t"></span><span id="eos::bgp_path_key_t::bgp_path_key_t__bgp_path_key_tCR"></span><span class="target" id="classeos_1_1bgp__path__key__t_1a820b7a5d17bc6a6c07f132bc4843e9c9"></span><code class="descname">bgp_path_key_t</code><span class="sig-paren">(</span><em class="property">const</em> <a class="reference internal" href="#_CPPv4N3eos14bgp_path_key_t14bgp_path_key_tEv" title="eos::bgp_path_key_t::bgp_path_key_t">bgp_path_key_t</a> &amp;<em>other</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos14bgp_path_key_t14bgp_path_key_tERK14bgp_path_key_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N3eos14bgp_path_key_taSERK14bgp_path_key_t">
+<span id="_CPPv3N3eos14bgp_path_key_taSERK14bgp_path_key_t"></span><span id="_CPPv2N3eos14bgp_path_key_taSERK14bgp_path_key_t"></span><span id="eos::bgp_path_key_t::assign-operator__bgp_path_key_tCR"></span><span class="target" id="classeos_1_1bgp__path__key__t_1a2e74e73356a3272f9a5f28c856d0a4d1"></span><a class="reference internal" href="#_CPPv4N3eos14bgp_path_key_tE" title="eos::bgp_path_key_t">bgp_path_key_t</a> &amp;<code class="descname">operator=</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos14bgp_path_key_tE" title="eos::bgp_path_key_t">bgp_path_key_t</a> <em class="property">const</em> &amp;<em>other</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos14bgp_path_key_taSERK14bgp_path_key_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4NK3eos14bgp_path_key_t6prefixEv">
+<span id="_CPPv3NK3eos14bgp_path_key_t6prefixEv"></span><span id="_CPPv2NK3eos14bgp_path_key_t6prefixEv"></span><span id="eos::bgp_path_key_t::prefixC"></span><span class="target" id="classeos_1_1bgp__path__key__t_1ac17b1649bd95742d67f68f70bc1c6f47"></span><a class="reference internal" href="ip.html#_CPPv4N3eos11ip_prefix_tE" title="eos::ip_prefix_t">ip_prefix_t</a> <code class="descname">prefix</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos14bgp_path_key_t6prefixEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Getter for ‘prefix’: IPv4/IPv6 network prefix. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N3eos14bgp_path_key_t9prefix_isERK11ip_prefix_t">
+<span id="_CPPv3N3eos14bgp_path_key_t9prefix_isERK11ip_prefix_t"></span><span id="_CPPv2N3eos14bgp_path_key_t9prefix_isERK11ip_prefix_t"></span><span id="eos::bgp_path_key_t::prefix_is__ip_prefix_tCR"></span><span class="target" id="classeos_1_1bgp__path__key__t_1ab10bb9a4a46ae3dd1577fe0918b5bbf5"></span>void <code class="descname">prefix_is</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#_CPPv4N3eos11ip_prefix_tE" title="eos::ip_prefix_t">ip_prefix_t</a> <em class="property">const</em> &amp;<em>prefix</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos14bgp_path_key_t9prefix_isERK11ip_prefix_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Setter for ‘prefix’. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4NK3eos14bgp_path_key_t9peer_addrEv">
+<span id="_CPPv3NK3eos14bgp_path_key_t9peer_addrEv"></span><span id="_CPPv2NK3eos14bgp_path_key_t9peer_addrEv"></span><span id="eos::bgp_path_key_t::peer_addrC"></span><span class="target" id="classeos_1_1bgp__path__key__t_1a0f5a82fd9cd638f10c5f795d020f6461"></span><a class="reference internal" href="ip.html#_CPPv4N3eos9ip_addr_tE" title="eos::ip_addr_t">ip_addr_t</a> <code class="descname">peer_addr</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos14bgp_path_key_t9peer_addrEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Getter for ‘peer_addr’: BGP peer address. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N3eos14bgp_path_key_t12peer_addr_isERK9ip_addr_t">
+<span id="_CPPv3N3eos14bgp_path_key_t12peer_addr_isERK9ip_addr_t"></span><span id="_CPPv2N3eos14bgp_path_key_t12peer_addr_isERK9ip_addr_t"></span><span id="eos::bgp_path_key_t::peer_addr_is__ip_addr_tCR"></span><span class="target" id="classeos_1_1bgp__path__key__t_1aa527cad62c54e084b4cf68ea78133c28"></span>void <code class="descname">peer_addr_is</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#_CPPv4N3eos9ip_addr_tE" title="eos::ip_addr_t">ip_addr_t</a> <em class="property">const</em> &amp;<em>peer_addr</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos14bgp_path_key_t12peer_addr_isERK9ip_addr_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Setter for ‘peer_addr’. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4NK3eos14bgp_path_key_t8vrf_nameEv">
+<span id="_CPPv3NK3eos14bgp_path_key_t8vrf_nameEv"></span><span id="_CPPv2NK3eos14bgp_path_key_t8vrf_nameEv"></span><span id="eos::bgp_path_key_t::vrf_nameC"></span><span class="target" id="classeos_1_1bgp__path__key__t_1a849b19cc41ab9c73cabae667109ba305"></span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::string <code class="descname">vrf_name</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos14bgp_path_key_t8vrf_nameEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Getter for ‘vrf_name’: VRF name. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N3eos14bgp_path_key_t11vrf_name_isERKNSt6stringE">
+<span id="_CPPv3N3eos14bgp_path_key_t11vrf_name_isERKNSt6stringE"></span><span id="_CPPv2N3eos14bgp_path_key_t11vrf_name_isERKNSt6stringE"></span><span id="eos::bgp_path_key_t::vrf_name_is__ssCR"></span><span class="target" id="classeos_1_1bgp__path__key__t_1a3c8d15aa6ba1703606e9bfdfbf43339d"></span>void <code class="descname">vrf_name_is</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::string <em class="property">const</em> &amp;<em>vrf_name</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos14bgp_path_key_t11vrf_name_isERKNSt6stringE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Setter for ‘vrf_name’. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4NK3eos14bgp_path_key_teqERK14bgp_path_key_t">
+<span id="_CPPv3NK3eos14bgp_path_key_teqERK14bgp_path_key_t"></span><span id="_CPPv2NK3eos14bgp_path_key_teqERK14bgp_path_key_t"></span><span id="eos::bgp_path_key_t::eq-operator__bgp_path_key_tCRC"></span><span class="target" id="classeos_1_1bgp__path__key__t_1ace556e596aa38d67c04ab579355ba9a9"></span>bool <code class="descname">operator==</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos14bgp_path_key_tE" title="eos::bgp_path_key_t">bgp_path_key_t</a> <em class="property">const</em> &amp;<em>other</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos14bgp_path_key_teqERK14bgp_path_key_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4NK3eos14bgp_path_key_tneERK14bgp_path_key_t">
+<span id="_CPPv3NK3eos14bgp_path_key_tneERK14bgp_path_key_t"></span><span id="_CPPv2NK3eos14bgp_path_key_tneERK14bgp_path_key_t"></span><span id="eos::bgp_path_key_t::neq-operator__bgp_path_key_tCRC"></span><span class="target" id="classeos_1_1bgp__path__key__t_1abad773a00cfb3e4cf764d7cad1fff4e1"></span>bool <code class="descname">operator!=</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos14bgp_path_key_tE" title="eos::bgp_path_key_t">bgp_path_key_t</a> <em class="property">const</em> &amp;<em>other</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos14bgp_path_key_tneERK14bgp_path_key_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4NK3eos14bgp_path_key_tltERK14bgp_path_key_t">
+<span id="_CPPv3NK3eos14bgp_path_key_tltERK14bgp_path_key_t"></span><span id="_CPPv2NK3eos14bgp_path_key_tltERK14bgp_path_key_t"></span><span id="eos::bgp_path_key_t::lt-operator__bgp_path_key_tCRC"></span><span class="target" id="classeos_1_1bgp__path__key__t_1a992800315b5ecad5d1584d8be6793836"></span>bool <code class="descname">operator&lt;</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos14bgp_path_key_tE" title="eos::bgp_path_key_t">bgp_path_key_t</a> <em class="property">const</em> &amp;<em>other</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos14bgp_path_key_tltERK14bgp_path_key_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4NK3eos14bgp_path_key_t4hashEv">
+<span id="_CPPv3NK3eos14bgp_path_key_t4hashEv"></span><span id="_CPPv2NK3eos14bgp_path_key_t4hashEv"></span><span id="eos::bgp_path_key_t::hashC"></span><span class="target" id="classeos_1_1bgp__path__key__t_1ac02d2f1866690b735fdad7170241d2c9"></span>uint32_t <code class="descname">hash</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos14bgp_path_key_t4hashEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>The hash function for type <a class="reference internal" href="#classeos_1_1bgp__path__key__t"><span class="std std-ref">bgp_path_key_t</span></a>. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4NK3eos14bgp_path_key_t6mix_meER8hash_mix">
+<span id="_CPPv3NK3eos14bgp_path_key_t6mix_meER8hash_mix"></span><span id="_CPPv2NK3eos14bgp_path_key_t6mix_meER8hash_mix"></span><span id="eos::bgp_path_key_t::mix_me__hash_mixRC"></span><span class="target" id="classeos_1_1bgp__path__key__t_1a2f291a4cf6f53c9f421ac13548912c71"></span>void <code class="descname">mix_me</code><span class="sig-paren">(</span><a class="reference internal" href="hash_mix.html#_CPPv4N3eos8hash_mixE" title="eos::hash_mix">hash_mix</a> &amp;<em>h</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos14bgp_path_key_t6mix_meER8hash_mix" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>The hash mix function for type <a class="reference internal" href="#classeos_1_1bgp__path__key__t"><span class="std std-ref">bgp_path_key_t</span></a>. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4NK3eos14bgp_path_key_t9to_stringEv">
+<span id="_CPPv3NK3eos14bgp_path_key_t9to_stringEv"></span><span id="_CPPv2NK3eos14bgp_path_key_t9to_stringEv"></span><span id="eos::bgp_path_key_t::to_stringC"></span><span class="target" id="classeos_1_1bgp__path__key__t_1a5a6c3bedc962faaf1cea14b27d8701dd"></span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::string <code class="descname">to_string</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos14bgp_path_key_t9to_stringEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Returns a string representation of the current object’s values. </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Private Members</p>
+<dl class="member">
+<dt id="_CPPv4N3eos14bgp_path_key_t5pimplE">
+<span id="_CPPv3N3eos14bgp_path_key_t5pimplE"></span><span id="_CPPv2N3eos14bgp_path_key_t5pimplE"></span><span id="eos::bgp_path_key_t::pimpl__std::shared_ptr:bgp_path_key_impl_t:"></span><span class="target" id="classeos_1_1bgp__path__key__t_1a4d8c42cc530f170bc274eda498cb4932"></span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::shared_ptr&lt;bgp_path_key_impl_t&gt; <code class="descname">pimpl</code><a class="headerlink" href="#_CPPv4N3eos14bgp_path_key_t5pimplE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Friends</p>
+<dl class="function">
+<dt id="_CPPv4lsRNSt7ostreamERK14bgp_path_key_t">
+<span id="_CPPv3lsRNSt7ostreamERK14bgp_path_key_t"></span><span id="_CPPv2lsRNSt7ostreamERK14bgp_path_key_t"></span><span id="lshift-operator__osR.bgp_path_key_tCR"></span><span class="target" id="classeos_1_1bgp__path__key__t_1ac269f5f6c840b909dc9f43d3cb62b5cd"></span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::ostream &amp;<code class="descname">operator&lt;&lt;</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::ostream &amp;<em>os</em>, <em class="property">const</em> bgp_path_key_t &amp;<em>obj</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4lsRNSt7ostreamERK14bgp_path_key_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>A utility stream operator that adds a string representation of <a class="reference internal" href="#classeos_1_1bgp__path__key__t"><span class="std std-ref">bgp_path_key_t</span></a> to the ostream. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="class">
+<dt id="_CPPv4N3eos10bgp_path_tE">
+<span id="_CPPv3N3eos10bgp_path_tE"></span><span id="_CPPv2N3eos10bgp_path_tE"></span><span id="eos::bgp_path_t"></span><span class="target" id="classeos_1_1bgp__path__t"></span><em class="property">class </em><code class="descname">bgp_path_t</code><a class="headerlink" href="#_CPPv4N3eos10bgp_path_tE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><em>#include &lt;bgp_path.h&gt;</em><p>The BGP path entry. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="function">
+<dt id="_CPPv4N3eos10bgp_path_t10bgp_path_tEv">
+<span id="_CPPv3N3eos10bgp_path_t10bgp_path_tEv"></span><span id="_CPPv2N3eos10bgp_path_t10bgp_path_tEv"></span><span id="eos::bgp_path_t::bgp_path_t"></span><span class="target" id="classeos_1_1bgp__path__t_1a6f8371c3c4b6d22fc63c04ba7e08a82f"></span><code class="descname">bgp_path_t</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos10bgp_path_t10bgp_path_tEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N3eos10bgp_path_t10bgp_path_tERK14bgp_path_key_t">
+<span id="_CPPv3N3eos10bgp_path_t10bgp_path_tERK14bgp_path_key_t"></span><span id="_CPPv2N3eos10bgp_path_t10bgp_path_tERK14bgp_path_key_t"></span><span id="eos::bgp_path_t::bgp_path_t__bgp_path_key_tCR"></span><span class="target" id="classeos_1_1bgp__path__t_1a035a98824fe3d321a941ecc27aab3209"></span><code class="descname">bgp_path_t</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos14bgp_path_key_tE" title="eos::bgp_path_key_t">bgp_path_key_t</a> <em class="property">const</em> &amp;<em>path_key</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos10bgp_path_t10bgp_path_tERK14bgp_path_key_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N3eos10bgp_path_t10bgp_path_tERK10bgp_path_t">
+<span id="_CPPv3N3eos10bgp_path_t10bgp_path_tERK10bgp_path_t"></span><span id="_CPPv2N3eos10bgp_path_t10bgp_path_tERK10bgp_path_t"></span><span id="eos::bgp_path_t::bgp_path_t__bgp_path_tCR"></span><span class="target" id="classeos_1_1bgp__path__t_1a8a7dc5bf57d934ee6bc4edb426d38bed"></span><code class="descname">bgp_path_t</code><span class="sig-paren">(</span><em class="property">const</em> <a class="reference internal" href="#_CPPv4N3eos10bgp_path_t10bgp_path_tEv" title="eos::bgp_path_t::bgp_path_t">bgp_path_t</a> &amp;<em>other</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos10bgp_path_t10bgp_path_tERK10bgp_path_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N3eos10bgp_path_taSERK10bgp_path_t">
+<span id="_CPPv3N3eos10bgp_path_taSERK10bgp_path_t"></span><span id="_CPPv2N3eos10bgp_path_taSERK10bgp_path_t"></span><span id="eos::bgp_path_t::assign-operator__bgp_path_tCR"></span><span class="target" id="classeos_1_1bgp__path__t_1aaeeb4f8d83f0abd4f8eda04e136d95b8"></span><a class="reference internal" href="#_CPPv4N3eos10bgp_path_tE" title="eos::bgp_path_t">bgp_path_t</a> &amp;<code class="descname">operator=</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos10bgp_path_tE" title="eos::bgp_path_t">bgp_path_t</a> <em class="property">const</em> &amp;<em>other</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos10bgp_path_taSERK10bgp_path_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4NK3eos10bgp_path_t8path_keyEv">
+<span id="_CPPv3NK3eos10bgp_path_t8path_keyEv"></span><span id="_CPPv2NK3eos10bgp_path_t8path_keyEv"></span><span id="eos::bgp_path_t::path_keyC"></span><span class="target" id="classeos_1_1bgp__path__t_1a74b0faf0d037bec187d8265e5c6ec28d"></span><a class="reference internal" href="#_CPPv4N3eos14bgp_path_key_tE" title="eos::bgp_path_key_t">bgp_path_key_t</a> <code class="descname">path_key</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos10bgp_path_t8path_keyEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Getter for ‘path_key’: The BGP path key. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N3eos10bgp_path_t11path_key_isERK14bgp_path_key_t">
+<span id="_CPPv3N3eos10bgp_path_t11path_key_isERK14bgp_path_key_t"></span><span id="_CPPv2N3eos10bgp_path_t11path_key_isERK14bgp_path_key_t"></span><span id="eos::bgp_path_t::path_key_is__bgp_path_key_tCR"></span><span class="target" id="classeos_1_1bgp__path__t_1af8b2d5c130e87b381faa167ba1a99e9f"></span>void <code class="descname">path_key_is</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos14bgp_path_key_tE" title="eos::bgp_path_key_t">bgp_path_key_t</a> <em class="property">const</em> &amp;<em>path_key</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos10bgp_path_t11path_key_isERK14bgp_path_key_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Setter for ‘path_key’. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4NK3eos10bgp_path_t9path_attrEv">
+<span id="_CPPv3NK3eos10bgp_path_t9path_attrEv"></span><span id="_CPPv2NK3eos10bgp_path_t9path_attrEv"></span><span id="eos::bgp_path_t::path_attrC"></span><span class="target" id="classeos_1_1bgp__path__t_1a1a2aaf67cbdb9d93a44494e19e77f21f"></span><a class="reference internal" href="#_CPPv4N3eos15bgp_path_attr_tE" title="eos::bgp_path_attr_t">bgp_path_attr_t</a> <code class="descname">path_attr</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos10bgp_path_t9path_attrEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Getter for ‘path_attr’: The BGP path attributes. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4N3eos10bgp_path_t12path_attr_isERK15bgp_path_attr_t">
+<span id="_CPPv3N3eos10bgp_path_t12path_attr_isERK15bgp_path_attr_t"></span><span id="_CPPv2N3eos10bgp_path_t12path_attr_isERK15bgp_path_attr_t"></span><span id="eos::bgp_path_t::path_attr_is__bgp_path_attr_tCR"></span><span class="target" id="classeos_1_1bgp__path__t_1ab81c3f91ba79c9251fcc60939603e11a"></span>void <code class="descname">path_attr_is</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos15bgp_path_attr_tE" title="eos::bgp_path_attr_t">bgp_path_attr_t</a> <em class="property">const</em> &amp;<em>path_attr</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos10bgp_path_t12path_attr_isERK15bgp_path_attr_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Setter for ‘path_attr’. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4NK3eos10bgp_path_teqERK10bgp_path_t">
+<span id="_CPPv3NK3eos10bgp_path_teqERK10bgp_path_t"></span><span id="_CPPv2NK3eos10bgp_path_teqERK10bgp_path_t"></span><span id="eos::bgp_path_t::eq-operator__bgp_path_tCRC"></span><span class="target" id="classeos_1_1bgp__path__t_1a3552684f2825bb3ac6fc31a95c9ef095"></span>bool <code class="descname">operator==</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos10bgp_path_tE" title="eos::bgp_path_t">bgp_path_t</a> <em class="property">const</em> &amp;<em>other</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos10bgp_path_teqERK10bgp_path_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4NK3eos10bgp_path_tneERK10bgp_path_t">
+<span id="_CPPv3NK3eos10bgp_path_tneERK10bgp_path_t"></span><span id="_CPPv2NK3eos10bgp_path_tneERK10bgp_path_t"></span><span id="eos::bgp_path_t::neq-operator__bgp_path_tCRC"></span><span class="target" id="classeos_1_1bgp__path__t_1afe30c3c6d63e0e166bc6a6a96d833d9b"></span>bool <code class="descname">operator!=</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos10bgp_path_tE" title="eos::bgp_path_t">bgp_path_t</a> <em class="property">const</em> &amp;<em>other</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos10bgp_path_tneERK10bgp_path_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4NK3eos10bgp_path_t4hashEv">
+<span id="_CPPv3NK3eos10bgp_path_t4hashEv"></span><span id="_CPPv2NK3eos10bgp_path_t4hashEv"></span><span id="eos::bgp_path_t::hashC"></span><span class="target" id="classeos_1_1bgp__path__t_1ab7b576952cad4bab06b05a4f58510d0b"></span>uint32_t <code class="descname">hash</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos10bgp_path_t4hashEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>The hash function for type <a class="reference internal" href="#classeos_1_1bgp__path__t"><span class="std std-ref">bgp_path_t</span></a>. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4NK3eos10bgp_path_t6mix_meER8hash_mix">
+<span id="_CPPv3NK3eos10bgp_path_t6mix_meER8hash_mix"></span><span id="_CPPv2NK3eos10bgp_path_t6mix_meER8hash_mix"></span><span id="eos::bgp_path_t::mix_me__hash_mixRC"></span><span class="target" id="classeos_1_1bgp__path__t_1a33cc2c14a8702995b37c008fcfee7072"></span>void <code class="descname">mix_me</code><span class="sig-paren">(</span><a class="reference internal" href="hash_mix.html#_CPPv4N3eos8hash_mixE" title="eos::hash_mix">hash_mix</a> &amp;<em>h</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos10bgp_path_t6mix_meER8hash_mix" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>The hash mix function for type <a class="reference internal" href="#classeos_1_1bgp__path__t"><span class="std std-ref">bgp_path_t</span></a>. </p>
+</dd></dl>
+
+<dl class="function">
+<dt id="_CPPv4NK3eos10bgp_path_t9to_stringEv">
+<span id="_CPPv3NK3eos10bgp_path_t9to_stringEv"></span><span id="_CPPv2NK3eos10bgp_path_t9to_stringEv"></span><span id="eos::bgp_path_t::to_stringC"></span><span class="target" id="classeos_1_1bgp__path__t_1a526ad1af222d4cfce9c9750c5d22deed"></span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::string <code class="descname">to_string</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos10bgp_path_t9to_stringEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Returns a string representation of the current object’s values. </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Private Members</p>
+<dl class="member">
+<dt id="_CPPv4N3eos10bgp_path_t5pimplE">
+<span id="_CPPv3N3eos10bgp_path_t5pimplE"></span><span id="_CPPv2N3eos10bgp_path_t5pimplE"></span><span id="eos::bgp_path_t::pimpl__std::shared_ptr:bgp_path_impl_t:"></span><span class="target" id="classeos_1_1bgp__path__t_1ad87406a81301f96fcbe058882cebaaf2"></span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::shared_ptr&lt;bgp_path_impl_t&gt; <code class="descname">pimpl</code><a class="headerlink" href="#_CPPv4N3eos10bgp_path_t5pimplE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Friends</p>
+<dl class="function">
+<dt id="_CPPv4lsRNSt7ostreamERK10bgp_path_t">
+<span id="_CPPv3lsRNSt7ostreamERK10bgp_path_t"></span><span id="_CPPv2lsRNSt7ostreamERK10bgp_path_t"></span><span id="lshift-operator__osR.bgp_path_tCR"></span><span class="target" id="classeos_1_1bgp__path__t_1ad6775dcec67906f1ff2a7edc7d086697"></span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::ostream &amp;<code class="descname">operator&lt;&lt;</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::ostream &amp;<em>os</em>, <em class="property">const</em> bgp_path_t &amp;<em>obj</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4lsRNSt7ostreamERK10bgp_path_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>A utility stream operator that adds a string representation of <a class="reference internal" href="#classeos_1_1bgp__path__t"><span class="std std-ref">bgp_path_t</span></a> to the ostream. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+
+
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#"><strong>bgp_path</strong></a><ul>
+<li><a class="reference internal" href="#type-definitions-in-bgp-path">Type definitions in <strong>bgp_path</strong></a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="bgp.html"
+                        title="previous chapter"><strong>bgp</strong></a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="class_map.html"
+                        title="next chapter"><strong>class_map</strong></a></p>
+<div id="searchbox" style="display: none" role="search">
+  <h3>Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" />
+      <input type="submit" value="Go" />
+      <input type="hidden" name="check_keywords" value="yes" />
+      <input type="hidden" name="area" value="default" />
+    </form>
+    </div>
+</div>
+<script type="text/javascript">$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="class_map.html" title="class_map"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="bgp.html" title="bgp"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Arista EOS SDK 2.22.2 reference</a> &#187;</li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2014, Arista Networks.
+      Created using <a href="http://sphinx-doc.org/">Sphinx</a> 1.8.4.
+    </div>
+  </body>
+</html>
