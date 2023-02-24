@@ -1,4 +1,4 @@
-// Copyright (c) 2022 Arista Networks, Inc.  All rights reserved.
+// Copyright (c) 2023 Arista Networks, Inc.  All rights reserved.
 // Arista Networks, Inc. Confidential and Proprietary.
 
 #ifndef EOS_INLINE_TYPES_NEXTHOP_GROUP_H
@@ -484,6 +484,14 @@ nexthop_group_t::counters_persistent() const {
 void
 nexthop_group_t::counters_persistent_is(bool counters_persistent) {
    pimpl->counters_persistent_is(counters_persistent);
+}
+uint16_t
+nexthop_group_t::version_id() const {
+   return pimpl->version_id();
+}
+void
+nexthop_group_t::version_id_is(uint16_t version_id) {
+   pimpl->version_id_is(version_id);
 }
 bool
 nexthop_group_t::operator==(nexthop_group_t const & other) const {

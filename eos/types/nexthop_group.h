@@ -1,4 +1,4 @@
-// Copyright (c) 2022 Arista Networks, Inc.  All rights reserved.
+// Copyright (c) 2023 Arista Networks, Inc.  All rights reserved.
 // Arista Networks, Inc. Confidential and Proprietary.
 
 #ifndef EOS_TYPES_NEXTHOP_GROUP_H
@@ -344,6 +344,15 @@ class EOS_SDK_PUBLIC nexthop_group_t {
    bool counters_persistent() const;
    /** Setter for 'counters_persistent'. */
    void counters_persistent_is(bool counters_persistent);
+
+   /**
+    * Getter for 'version_id': Current version of the nexthop group when returned
+    * by nexthop_group or programmed_nexthop_group. Changing this value has no
+    * effect in nexthop_group_set.
+    */
+   uint16_t version_id() const;
+   /** Setter for 'version_id'. */
+   void version_id_is(uint16_t version_id);
 
    bool operator==(nexthop_group_t const & other) const;
    bool operator!=(nexthop_group_t const & other) const;
