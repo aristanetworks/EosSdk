@@ -1,0 +1,125 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Arista EOS SDK reference guide &#8212; Arista EOS SDK 2.22.4 reference</title>
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/eossdk.css" type="text/css" />
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="acl" href="acl.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="acl.html" title="acl"
+             accesskey="N">next</a> |</li>
+        <li class="nav-item nav-item-0"><a href="#">Arista EOS SDK 2.22.4 reference</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Arista EOS SDK reference guide</a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="arista-eos-sdk-reference-guide">
+<h1>Arista EOS SDK reference guide<a class="headerlink" href="#arista-eos-sdk-reference-guide" title="Permalink to this headline">¶</a></h1>
+<p>The Arista EOS SDK allows development of high performance on switch
+agents that react to and interact directly with EOS. These agents can
+bridge feature configuration with existing systems or provide
+automated system maintenance facilities due to the SDK’s state based
+programming approach. Refer to the EOS SDK <a class="reference external" href="https://github.com/aristanetworks/EosSdk/wiki">wiki</a> for more information
+including example code using the SDK.</p>
+<div class="section" id="switch-management-modules">
+<h2>Switch management modules<a class="headerlink" href="#switch-management-modules" title="Permalink to this headline">¶</a></h2>
+<p>The SDK is split up into modules that manage one particular part of
+the system, such as the <code class="docutils literal notranslate"><span class="pre">intf</span></code> module for generic interface management
+(admin state, description) or the <code class="docutils literal notranslate"><span class="pre">acl</span></code> module for configuration of
+Access Control Lists. Each module consists of a module manager class,
+such as <code class="docutils literal notranslate"><span class="pre">eos::intf_mgr</span></code>. Modules that provide notifications also have
+a handler class, e.g., <code class="docutils literal notranslate"><span class="pre">eos::intf_handler</span></code>. Handler sub-classes are
+provided by your implementation and provide the notification callbacks
+for notifications from EOS.</p>
+<div class="line-block">
+<div class="line"><a class="reference internal" href="acl.html"><span class="doc">acl</span></a> | <a class="reference internal" href="bfd.html"><span class="doc">bfd</span></a> | <a class="reference internal" href="bgp.html"><span class="doc">bgp</span></a> | <a class="reference internal" href="bgp_path.html"><span class="doc">bgp_path</span></a> | <a class="reference internal" href="class_map.html"><span class="doc">class_map</span></a> | <a class="reference internal" href="decap_group.html"><span class="doc">decap_group</span></a> | <a class="reference internal" href="directflow.html"><span class="doc">directflow</span></a> | <a class="reference internal" href="eapi.html"><span class="doc">eapi</span></a> | <a class="reference internal" href="eth.html"><span class="doc">eth</span></a> | <a class="reference internal" href="eth_intf.html"><span class="doc">eth_intf</span></a> | <a class="reference internal" href="eth_lag_intf.html"><span class="doc">eth_lag_intf</span></a> | <a class="reference internal" href="eth_phy_intf.html"><span class="doc">eth_phy_intf</span></a> | <a class="reference internal" href="fib.html"><span class="doc">fib</span></a> | <a class="reference internal" href="hardware_table.html"><span class="doc">hardware_table</span></a> | <a class="reference internal" href="intf.html"><span class="doc">intf</span></a> | <a class="reference internal" href="ip.html"><span class="doc">ip</span></a> | <a class="reference internal" href="ip_intf.html"><span class="doc">ip_intf</span></a> | <a class="reference internal" href="ip_route.html"><span class="doc">ip_route</span></a> | <a class="reference internal" href="lldp.html"><span class="doc">lldp</span></a> | <a class="reference internal" href="mac_table.html"><span class="doc">mac_table</span></a> | <a class="reference internal" href="macsec.html"><span class="doc">macsec</span></a> | <a class="reference internal" href="mlag.html"><span class="doc">mlag</span></a> | <a class="reference internal" href="mpls.html"><span class="doc">mpls</span></a> | <a class="reference internal" href="mpls_route.html"><span class="doc">mpls_route</span></a> | <a class="reference internal" href="mpls_vrf_label.html"><span class="doc">mpls_vrf_label</span></a> | <a class="reference internal" href="neighbor_table.html"><span class="doc">neighbor_table</span></a> | <a class="reference internal" href="nexthop_group.html"><span class="doc">nexthop_group</span></a> | <a class="reference internal" href="nexthop_group_tunnel.html"><span class="doc">nexthop_group_tunnel</span></a> | <a class="reference internal" href="policy_map.html"><span class="doc">policy_map</span></a> | <a class="reference internal" href="route_map.html"><span class="doc">route_map</span></a> | <a class="reference internal" href="structured_filter.html"><span class="doc">structured_filter</span></a> | <a class="reference internal" href="subintf.html"><span class="doc">subintf</span></a> | <a class="reference internal" href="vrf.html"><span class="doc">vrf</span></a> | <a class="reference internal" href="xcvr.html"><span class="doc">xcvr</span></a></div>
+</div>
+</div>
+<div class="section" id="infrastructure-modules">
+<h2>Infrastructure modules<a class="headerlink" href="#infrastructure-modules" title="Permalink to this headline">¶</a></h2>
+<p>In addition, there are a number of framework modules that provide
+access to the SDK components (<code class="docutils literal notranslate"><span class="pre">sdk</span></code>), offer an asynchronous
+file-descriptor interface for use with asynchronous networking
+libraries (<code class="docutils literal notranslate"><span class="pre">fd</span></code>) and provide debug logging facilities (<code class="docutils literal notranslate"><span class="pre">tracing</span></code>).</p>
+<div class="line-block">
+<div class="line"><a class="reference internal" href="agent.html"><span class="doc">agent</span></a> | <a class="reference internal" href="aresolve.html"><span class="doc">aresolve</span></a> | <a class="reference internal" href="base.html"><span class="doc">base</span></a> | <a class="reference internal" href="base_handler.html"><span class="doc">base_handler</span></a> | <a class="reference internal" href="base_mgr.html"><span class="doc">base_mgr</span></a> | <a class="reference internal" href="event_loop.html"><span class="doc">event_loop</span></a> | <a class="reference internal" href="exception.html"><span class="doc">exception</span></a> | <a class="reference internal" href="fd.html"><span class="doc">fd</span></a> | <a class="reference internal" href="hash_mix.html"><span class="doc">hash_mix</span></a> | <a class="reference internal" href="iterator.html"><span class="doc">iterator</span></a> | <a class="reference internal" href="panic.html"><span class="doc">panic</span></a> | <a class="reference internal" href="sdk.html"><span class="doc">sdk</span></a> | <a class="reference internal" href="system.html"><span class="doc">system</span></a> | <a class="reference internal" href="timer.html"><span class="doc">timer</span></a> | <a class="reference internal" href="tracing.html"><span class="doc">tracing</span></a> | <a class="reference internal" href="utility.html"><span class="doc">utility</span></a> | <a class="reference internal" href="version.html"><span class="doc">version</span></a></div>
+</div>
+<div class="toctree-wrapper compound">
+</div>
+</div>
+</div>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="#">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#">Arista EOS SDK reference guide</a><ul>
+<li><a class="reference internal" href="#switch-management-modules">Switch management modules</a></li>
+<li><a class="reference internal" href="#infrastructure-modules">Infrastructure modules</a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Next topic</h4>
+  <p class="topless"><a href="acl.html"
+                        title="next chapter"><strong>acl</strong></a></p>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="acl.html" title="acl"
+             >next</a> |</li>
+        <li class="nav-item nav-item-0"><a href="#">Arista EOS SDK 2.22.4 reference</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href="">Arista EOS SDK reference guide</a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2014, Arista Networks.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.4.3.
+    </div>
+  </body>
+</html>

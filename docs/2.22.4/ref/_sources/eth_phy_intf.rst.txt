@@ -1,0 +1,13 @@
+**eth_phy_intf**
+----------------
+
+
+.. doxygenfile:: eos/eth_phy_intf.h
+   :project: eossdk
+
+Type definitions in **eth_phy_intf**
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. doxygenfile:: eos/types/eth_phy_intf.h
+   :project: eossdk
+

@@ -1,0 +1,356 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>decap_group &#8212; Arista EOS SDK 2.22.4 reference</title>
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/eossdk.css" type="text/css" />
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="directflow" href="directflow.html" />
+    <link rel="prev" title="class_map" href="class_map.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="directflow.html" title="directflow"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="class_map.html" title="class_map"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Arista EOS SDK 2.22.4 reference</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href=""><strong>decap_group</strong></a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="decap-group">
+<h1><strong>decap_group</strong><a class="headerlink" href="#decap-group" title="Permalink to this headline">¶</a></h1>
+<p>Tunnel decapsulation group management.</p>
+<p>This module manages tunnel decapsulation for traffic arriving at the switch (on any interface). This allows the switch to act as a tunnel endpoint.</p>
+<p>By configuring a “decap group”, the switch will decapsulate traffic matching the specified outer (tunnel) header destination IP address and IP protocol. Presently only GRE traffic (protocol 47) is supported by decap groups. Traffic arriving at the switch matching the group’s parameters will be decapsulated and forwarded normally based on the inner protocol headers.</p>
+<p>In this example, a decap group named “gre_tunnel1” is configured for GRE traffic arriving at the switch with a tunnel destination address of 172.12.0.1. That address may either be bound to a local switch interface or announced by the switch in routing protocols.</p>
+<p><div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">//</span> <span class="n">Configures</span> <span class="n">a</span> <span class="n">decapsulation</span> <span class="n">group</span> <span class="n">to</span> <span class="n">unwrap</span> <span class="n">received</span> <span class="n">GRE</span> <span class="n">traffic</span>
+<span class="n">eos</span><span class="p">::</span><span class="n">decap_group_t</span> <span class="n">tunnel</span><span class="p">(</span><span class="s2">&quot;gre_tunnel1&quot;</span><span class="p">,</span>
+                          <span class="n">eos</span><span class="p">::</span><span class="n">ip_addr_t</span><span class="p">(</span><span class="s2">&quot;172.12.0.1&quot;</span><span class="p">),</span>
+                          <span class="n">eos</span><span class="p">::</span><span class="n">PROTOCOL_TYPE_GRE</span><span class="p">);</span>
+<span class="n">mgr</span><span class="o">-&gt;</span><span class="n">decap_group_set</span><span class="p">(</span><span class="n">tunnel</span><span class="p">);</span>
+</pre></div>
+</div>
+ </p>
+<dl class="cpp type">
+<dt id="_CPPv43eos">
+<span id="_CPPv33eos"></span><span id="_CPPv23eos"></span><span id="eos"></span><span class="target" id="namespaceeos"></span><em class="property">namespace </em><code class="sig-name descname">eos</code><br /></dt>
+<dd><dl class="cpp class">
+<dt id="_CPPv4N3eos18decap_group_iter_tE">
+<span id="_CPPv3N3eos18decap_group_iter_tE"></span><span id="_CPPv2N3eos18decap_group_iter_tE"></span><span id="eos::decap_group_iter_t"></span><span class="target" id="classeos_1_1decap__group__iter__t"></span><em class="property">class </em><code class="sig-name descname">decap_group_iter_t</code> : <em class="property">public</em> <a class="reference internal" href="acl.html#_CPPv43eos" title="eos">eos</a>::<a class="reference internal" href="iterator.html#_CPPv4I00EN3eos9iter_baseE" title="eos::iter_base">iter_base</a>&lt;<a class="reference internal" href="#_CPPv4N3eos13decap_group_tE" title="eos::decap_group_t">decap_group_t</a>, decap_group_iter_impl&gt;<a class="headerlink" href="#_CPPv4N3eos18decap_group_iter_tE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><div class="docutils container">
+<em>#include &lt;decap_group.h&gt;</em></div>
+<p>An iterator that yields a <code class="docutils literal notranslate"><a class="reference internal" href="#classeos_1_1decap__group__t"><span class="std std-ref"><span class="pre">decap_group_t</span></span></a></code> for each configured decap group. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-private-functions">Private Functions</p>
+<dl class="cpp function">
+<dt id="_CPPv4N3eos18decap_group_iter_t18decap_group_iter_tEPC21decap_group_iter_impl">
+<span id="_CPPv3N3eos18decap_group_iter_t18decap_group_iter_tEPC21decap_group_iter_impl"></span><span id="_CPPv2N3eos18decap_group_iter_t18decap_group_iter_tEPC21decap_group_iter_impl"></span><span id="eos::decap_group_iter_t::decap_group_iter_t__decap_group_iter_implPC"></span><span class="target" id="classeos_1_1decap__group__iter__t_1a9510b8065e917152dd6b2cf09f66c883"></span><em class="property">explicit</em> <code class="sig-name descname">decap_group_iter_t</code><span class="sig-paren">(</span>decap_group_iter_impl*<em class="property">const</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos18decap_group_iter_t18decap_group_iter_tEPC21decap_group_iter_impl" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-friends">Friends</p>
+<dl class="friendclass">
+<dt>
+<em class="property">friend class</em> decap_group_iter_impl</dt>
+</dl>
+
+</div>
+</dd></dl>
+
+<dl class="cpp class">
+<dt id="_CPPv4N3eos15decap_group_mgrE">
+<span id="_CPPv3N3eos15decap_group_mgrE"></span><span id="_CPPv2N3eos15decap_group_mgrE"></span><span id="eos::decap_group_mgr"></span><span class="target" id="classeos_1_1decap__group__mgr"></span><em class="property">class </em><code class="sig-name descname">decap_group_mgr</code><a class="headerlink" href="#_CPPv4N3eos15decap_group_mgrE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><div class="docutils container">
+<em>#include &lt;decap_group.h&gt;</em></div>
+<p>A manager of ‘ip decap-group’ configurations.</p>
+<p>Create one of these via sdk object prior to starting the agent main loop. When your <a class="reference internal" href="agent.html#classeos_1_1agent__handler_1ad558b16ee9a283bd9b153400743c4b1c"><span class="std std-ref">eos::agent_handler::on_initialized</span></a> virtual function is called, the manager is valid for use. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
+<dl class="cpp function">
+<dt id="_CPPv4N3eos15decap_group_mgrD0Ev">
+<span id="_CPPv3N3eos15decap_group_mgrD0Ev"></span><span id="_CPPv2N3eos15decap_group_mgrD0Ev"></span><span id="eos::decap_group_mgr::~decap_group_mgr"></span><span class="target" id="classeos_1_1decap__group__mgr_1aef5d97ebae6c299b6c4df359b024f30d"></span><em class="property">virtual</em> <code class="sig-name descname">~decap_group_mgr</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos15decap_group_mgrD0Ev" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos15decap_group_mgr11resync_initEv">
+<span id="_CPPv3N3eos15decap_group_mgr11resync_initEv"></span><span id="_CPPv2N3eos15decap_group_mgr11resync_initEv"></span><span id="eos::decap_group_mgr::resync_init"></span><span class="target" id="classeos_1_1decap__group__mgr_1aee44bd35f6a16bc01bb111174224cff5"></span><em class="property">virtual</em> void <code class="sig-name descname">resync_init</code><span class="sig-paren">(</span><span class="sig-paren">)</span> = 0<a class="headerlink" href="#_CPPv4N3eos15decap_group_mgr11resync_initEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Enter resync mode.</p>
+<p>At this point the <a class="reference internal" href="#classeos_1_1decap__group__mgr"><span class="std std-ref">decap_group_mgr</span></a> will start tracking which groups you’ve added. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos15decap_group_mgr15resync_completeEv">
+<span id="_CPPv3N3eos15decap_group_mgr15resync_completeEv"></span><span id="_CPPv2N3eos15decap_group_mgr15resync_completeEv"></span><span id="eos::decap_group_mgr::resync_complete"></span><span class="target" id="classeos_1_1decap__group__mgr_1a122f03de7c78587a5453668482812677"></span><em class="property">virtual</em> void <code class="sig-name descname">resync_complete</code><span class="sig-paren">(</span><span class="sig-paren">)</span> = 0<a class="headerlink" href="#_CPPv4N3eos15decap_group_mgr15resync_completeEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Exit resync mode.</p>
+<p>All decap groups in Sysdb that you haven’t re-added during this resync period will now be deleted. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos15decap_group_mgr16decap_group_iterEv">
+<span id="_CPPv3NK3eos15decap_group_mgr16decap_group_iterEv"></span><span id="_CPPv2NK3eos15decap_group_mgr16decap_group_iterEv"></span><span id="eos::decap_group_mgr::decap_group_iterC"></span><span class="target" id="classeos_1_1decap__group__mgr_1a622110213527da6746cce310af015131"></span><em class="property">virtual</em> <a class="reference internal" href="#_CPPv4N3eos18decap_group_iter_tE" title="eos::decap_group_iter_t">decap_group_iter_t</a> <code class="sig-name descname">decap_group_iter</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em> = 0<a class="headerlink" href="#_CPPv4NK3eos15decap_group_mgr16decap_group_iterEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Iterates over all the decap groups currently configured. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos15decap_group_mgr11decap_groupERKNSt6stringE">
+<span id="_CPPv3NK3eos15decap_group_mgr11decap_groupERKNSt6stringE"></span><span id="_CPPv2NK3eos15decap_group_mgr11decap_groupERKNSt6stringE"></span><span id="eos::decap_group_mgr::decap_group__ssCRC"></span><span class="target" id="classeos_1_1decap__group__mgr_1ab13b9035643eae18238c85b5f97d597d"></span><em class="property">virtual</em> <a class="reference internal" href="#_CPPv4N3eos13decap_group_tE" title="eos::decap_group_t">decap_group_t</a> <code class="sig-name descname">decap_group</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::string <em class="property">const</em> &amp;<em>decap_group_name</em><span class="sig-paren">)</span> <em class="property">const</em> = 0<a class="headerlink" href="#_CPPv4NK3eos15decap_group_mgr11decap_groupERKNSt6stringE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Returns the current configuration of a decap group</p>
+<p>If no decap group exists, this returns an empty <code class="docutils literal notranslate"><span class="pre">decap_group_t()</span></code> </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos15decap_group_mgr15decap_group_setERK13decap_group_t">
+<span id="_CPPv3N3eos15decap_group_mgr15decap_group_setERK13decap_group_t"></span><span id="_CPPv2N3eos15decap_group_mgr15decap_group_setERK13decap_group_t"></span><span id="eos::decap_group_mgr::decap_group_set__decap_group_tCR"></span><span class="target" id="classeos_1_1decap__group__mgr_1abd0f7497480d855b754d16bc00e7b6c8"></span><em class="property">virtual</em> void <code class="sig-name descname">decap_group_set</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos13decap_group_tE" title="eos::decap_group_t">decap_group_t</a> <em class="property">const</em>&amp;<span class="sig-paren">)</span> = 0<a class="headerlink" href="#_CPPv4N3eos15decap_group_mgr15decap_group_setERK13decap_group_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Adds the specified decap group to the system configuration.</p>
+<p>Either creates or updates a decap group (keyed by the group name). </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos15decap_group_mgr15decap_group_delERKNSt6stringE">
+<span id="_CPPv3N3eos15decap_group_mgr15decap_group_delERKNSt6stringE"></span><span id="_CPPv2N3eos15decap_group_mgr15decap_group_delERKNSt6stringE"></span><span id="eos::decap_group_mgr::decap_group_del__ssCR"></span><span class="target" id="classeos_1_1decap__group__mgr_1a4aa1f0b23b39daf8516e01029636e053"></span><em class="property">virtual</em> void <code class="sig-name descname">decap_group_del</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::string <em class="property">const</em> &amp;<em>decap_group_name</em><span class="sig-paren">)</span> = 0<a class="headerlink" href="#_CPPv4N3eos15decap_group_mgr15decap_group_delERKNSt6stringE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Removes the named decap group from the configuration.</p>
+<p>If the specified group name does not exist, no action is taken. </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-protected-functions">Protected Functions</p>
+<dl class="cpp function">
+<dt id="_CPPv4N3eos15decap_group_mgr15decap_group_mgrEv">
+<span id="_CPPv3N3eos15decap_group_mgr15decap_group_mgrEv"></span><span id="_CPPv2N3eos15decap_group_mgr15decap_group_mgrEv"></span><span id="eos::decap_group_mgr::decap_group_mgr"></span><span class="target" id="classeos_1_1decap__group__mgr_1a4a381e2e7fe3b3fef103e9f0716bf62c"></span><code class="sig-name descname">decap_group_mgr</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos15decap_group_mgr15decap_group_mgrEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-private-members">Private Members</p>
+<dl class="cpp var">
+<dt>
+<span class="target" id="classeos_1_1decap__group__mgr_1ada8ffa4822637482040c4ce82b661924"></span><code class="sig-name descname">decap_group_mgr</code></dt>
+<dd></dd></dl>
+
+</div>
+</dd></dl>
+
+</dd></dl>
+
+<div class="section" id="type-definitions-in-decap-group">
+<h2>Type definitions in <strong>decap_group</strong><a class="headerlink" href="#type-definitions-in-decap-group" title="Permalink to this headline">¶</a></h2>
+<dl class="cpp type">
+<dt>
+<span class="target" id="namespaceeos"></span><em class="property">namespace </em><code class="sig-name descname">eos</code><br /></dt>
+<dd><div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-enums">Enums</p>
+<dl class="cpp enum">
+<dt id="_CPPv4N3eos21decap_protocol_type_tE">
+<span id="_CPPv3N3eos21decap_protocol_type_tE"></span><span id="_CPPv2N3eos21decap_protocol_type_tE"></span><span class="target" id="namespaceeos_1a14e1fda000ea17f0ee85179630705a44"></span><em class="property">enum </em><code class="sig-name descname">decap_protocol_type_t</code><a class="headerlink" href="#_CPPv4N3eos21decap_protocol_type_tE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Inner (IP) protocol to match for a decap group, only the GRE protocol is presently supported. </p>
+<p><em>Values:</em></p>
+<dl class="cpp enumerator">
+<dt id="_CPPv4N3eos21decap_protocol_type_t18PROTOCOL_TYPE_NULLE">
+<span id="_CPPv3N3eos21decap_protocol_type_t18PROTOCOL_TYPE_NULLE"></span><span id="_CPPv2N3eos21decap_protocol_type_t18PROTOCOL_TYPE_NULLE"></span><span class="target" id="namespaceeos_1a14e1fda000ea17f0ee85179630705a44a695c865a5847bb4f693dda29e30e2fd7"></span><em class="property">enumerator </em><code class="sig-name descname">PROTOCOL_TYPE_NULL</code><a class="headerlink" href="#_CPPv4N3eos21decap_protocol_type_t18PROTOCOL_TYPE_NULLE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt id="_CPPv4N3eos21decap_protocol_type_t17PROTOCOL_TYPE_GREE">
+<span id="_CPPv3N3eos21decap_protocol_type_t17PROTOCOL_TYPE_GREE"></span><span id="_CPPv2N3eos21decap_protocol_type_t17PROTOCOL_TYPE_GREE"></span><span class="target" id="namespaceeos_1a14e1fda000ea17f0ee85179630705a44a851c85a484c622f3b473f01b5e17022d"></span><em class="property">enumerator </em><code class="sig-name descname">PROTOCOL_TYPE_GRE</code><a class="headerlink" href="#_CPPv4N3eos21decap_protocol_type_t17PROTOCOL_TYPE_GREE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<dl class="cpp class">
+<dt id="_CPPv4N3eos13decap_group_tE">
+<span id="_CPPv3N3eos13decap_group_tE"></span><span id="_CPPv2N3eos13decap_group_tE"></span><span id="eos::decap_group_t"></span><span class="target" id="classeos_1_1decap__group__t"></span><em class="property">class </em><code class="sig-name descname">decap_group_t</code><a class="headerlink" href="#_CPPv4N3eos13decap_group_tE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><div class="docutils container">
+<em>#include &lt;decap_group.h&gt;</em></div>
+<p>An IP decap group configuration model. At this time, all decap groups are configured in the default VRF. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
+<dl class="cpp function">
+<dt id="_CPPv4N3eos13decap_group_t13decap_group_tEv">
+<span id="_CPPv3N3eos13decap_group_t13decap_group_tEv"></span><span id="_CPPv2N3eos13decap_group_t13decap_group_tEv"></span><span id="eos::decap_group_t::decap_group_t"></span><span class="target" id="classeos_1_1decap__group__t_1aa655919c2353b508d394f6a04d7786c7"></span><code class="sig-name descname">decap_group_t</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos13decap_group_t13decap_group_tEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos13decap_group_t13decap_group_tERKNSt6stringERK9ip_addr_t21decap_protocol_type_t">
+<span id="_CPPv3N3eos13decap_group_t13decap_group_tERKNSt6stringERK9ip_addr_t21decap_protocol_type_t"></span><span id="_CPPv2N3eos13decap_group_t13decap_group_tERKNSt6stringERK9ip_addr_t21decap_protocol_type_t"></span><span id="eos::decap_group_t::decap_group_t__ssCR.ip_addr_tCR.decap_protocol_type_t"></span><span class="target" id="classeos_1_1decap__group__t_1a4165e6ae3cd06c68bdaeed39a0a6bc1f"></span><code class="sig-name descname">decap_group_t</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::string <em class="property">const</em> &amp;<em>group_name</em>, <a class="reference internal" href="ip.html#_CPPv4N3eos9ip_addr_tE" title="eos::ip_addr_t">ip_addr_t</a> <em class="property">const</em> &amp;<em>destination_addr</em>, <a class="reference internal" href="#_CPPv4N3eos21decap_protocol_type_tE" title="eos::decap_protocol_type_t">decap_protocol_type_t</a> <em>protocol_type</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos13decap_group_t13decap_group_tERKNSt6stringERK9ip_addr_t21decap_protocol_type_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos13decap_group_t13decap_group_tERK13decap_group_t">
+<span id="_CPPv3N3eos13decap_group_t13decap_group_tERK13decap_group_t"></span><span id="_CPPv2N3eos13decap_group_t13decap_group_tERK13decap_group_t"></span><span id="eos::decap_group_t::decap_group_t__decap_group_tCR"></span><span class="target" id="classeos_1_1decap__group__t_1a0f072a23ac0f25e06189c90f63c70eab"></span><code class="sig-name descname">decap_group_t</code><span class="sig-paren">(</span><em class="property">const</em> <a class="reference internal" href="#_CPPv4N3eos13decap_group_t13decap_group_tERK13decap_group_t" title="eos::decap_group_t::decap_group_t">decap_group_t</a> &amp;<em>other</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos13decap_group_t13decap_group_tERK13decap_group_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos13decap_group_taSERK13decap_group_t">
+<span id="_CPPv3N3eos13decap_group_taSERK13decap_group_t"></span><span id="_CPPv2N3eos13decap_group_taSERK13decap_group_t"></span><span id="eos::decap_group_t::assign-operator__decap_group_tCR"></span><span class="target" id="classeos_1_1decap__group__t_1aed9e2aa858ac241a7dc49c93279e1101"></span><a class="reference internal" href="#_CPPv4N3eos13decap_group_tE" title="eos::decap_group_t">decap_group_t</a> &amp;<code class="sig-name descname">operator=</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos13decap_group_tE" title="eos::decap_group_t">decap_group_t</a> <em class="property">const</em> &amp;<em>other</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos13decap_group_taSERK13decap_group_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos13decap_group_t10group_nameEv">
+<span id="_CPPv3NK3eos13decap_group_t10group_nameEv"></span><span id="_CPPv2NK3eos13decap_group_t10group_nameEv"></span><span id="eos::decap_group_t::group_nameC"></span><span class="target" id="classeos_1_1decap__group__t_1a1797b9b1b18979a781b7d65924f13ad1"></span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::string <code class="sig-name descname">group_name</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos13decap_group_t10group_nameEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Getter for ‘group_name’: the decap group name. Used to uniquely identify this group. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos13decap_group_t16destination_addrEv">
+<span id="_CPPv3NK3eos13decap_group_t16destination_addrEv"></span><span id="_CPPv2NK3eos13decap_group_t16destination_addrEv"></span><span id="eos::decap_group_t::destination_addrC"></span><span class="target" id="classeos_1_1decap__group__t_1a0e469eb04b701459696d1d1f1b0572fc"></span><a class="reference internal" href="ip.html#_CPPv4N3eos9ip_addr_tE" title="eos::ip_addr_t">ip_addr_t</a> <code class="sig-name descname">destination_addr</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos13decap_group_t16destination_addrEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Getter for ‘destination_addr’: match this destination IP on the outermost IP header. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos13decap_group_t19destination_addr_isERK9ip_addr_t">
+<span id="_CPPv3N3eos13decap_group_t19destination_addr_isERK9ip_addr_t"></span><span id="_CPPv2N3eos13decap_group_t19destination_addr_isERK9ip_addr_t"></span><span id="eos::decap_group_t::destination_addr_is__ip_addr_tCR"></span><span class="target" id="classeos_1_1decap__group__t_1ac5035b1818e83f462a053a7612a2e754"></span>void <code class="sig-name descname">destination_addr_is</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#_CPPv4N3eos9ip_addr_tE" title="eos::ip_addr_t">ip_addr_t</a> <em class="property">const</em> &amp;<em>destination_addr</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos13decap_group_t19destination_addr_isERK9ip_addr_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Setter for ‘destination_addr’. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos13decap_group_t13protocol_typeEv">
+<span id="_CPPv3NK3eos13decap_group_t13protocol_typeEv"></span><span id="_CPPv2NK3eos13decap_group_t13protocol_typeEv"></span><span id="eos::decap_group_t::protocol_typeC"></span><span class="target" id="classeos_1_1decap__group__t_1acd93b738d03f8b287acd2a0b3f274836"></span><a class="reference internal" href="#_CPPv4N3eos21decap_protocol_type_tE" title="eos::decap_protocol_type_t">decap_protocol_type_t</a> <code class="sig-name descname">protocol_type</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos13decap_group_t13protocol_typeEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Getter for ‘protocol_type’: decapsulate only packets matching this outer IP protocol type. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos13decap_group_t16protocol_type_isE21decap_protocol_type_t">
+<span id="_CPPv3N3eos13decap_group_t16protocol_type_isE21decap_protocol_type_t"></span><span id="_CPPv2N3eos13decap_group_t16protocol_type_isE21decap_protocol_type_t"></span><span id="eos::decap_group_t::protocol_type_is__decap_protocol_type_t"></span><span class="target" id="classeos_1_1decap__group__t_1a5afb256c7bd9d6fdc89107949c177db5"></span>void <code class="sig-name descname">protocol_type_is</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos21decap_protocol_type_tE" title="eos::decap_protocol_type_t">decap_protocol_type_t</a> <em>protocol_type</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos13decap_group_t16protocol_type_isE21decap_protocol_type_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Setter for ‘protocol_type’. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos13decap_group_teqERK13decap_group_t">
+<span id="_CPPv3NK3eos13decap_group_teqERK13decap_group_t"></span><span id="_CPPv2NK3eos13decap_group_teqERK13decap_group_t"></span><span id="eos::decap_group_t::eq-operator__decap_group_tCRC"></span><span class="target" id="classeos_1_1decap__group__t_1a8cfb01a8cd695814b4d6cc1aff4189b2"></span>bool <code class="sig-name descname">operator==</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos13decap_group_tE" title="eos::decap_group_t">decap_group_t</a> <em class="property">const</em> &amp;<em>other</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos13decap_group_teqERK13decap_group_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos13decap_group_tneERK13decap_group_t">
+<span id="_CPPv3NK3eos13decap_group_tneERK13decap_group_t"></span><span id="_CPPv2NK3eos13decap_group_tneERK13decap_group_t"></span><span id="eos::decap_group_t::neq-operator__decap_group_tCRC"></span><span class="target" id="classeos_1_1decap__group__t_1a662a20747e70bef541e3d22873334a2a"></span>bool <code class="sig-name descname">operator!=</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos13decap_group_tE" title="eos::decap_group_t">decap_group_t</a> <em class="property">const</em> &amp;<em>other</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos13decap_group_tneERK13decap_group_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos13decap_group_tltERK13decap_group_t">
+<span id="_CPPv3NK3eos13decap_group_tltERK13decap_group_t"></span><span id="_CPPv2NK3eos13decap_group_tltERK13decap_group_t"></span><span id="eos::decap_group_t::lt-operator__decap_group_tCRC"></span><span class="target" id="classeos_1_1decap__group__t_1ac616ffe38aa2aada0b8afc79e25103cb"></span>bool <code class="sig-name descname">operator&lt;</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos13decap_group_tE" title="eos::decap_group_t">decap_group_t</a> <em class="property">const</em> &amp;<em>other</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos13decap_group_tltERK13decap_group_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos13decap_group_t4hashEv">
+<span id="_CPPv3NK3eos13decap_group_t4hashEv"></span><span id="_CPPv2NK3eos13decap_group_t4hashEv"></span><span id="eos::decap_group_t::hashC"></span><span class="target" id="classeos_1_1decap__group__t_1a818b574f6c0695ac248c1b19da9c7db5"></span>uint32_t <code class="sig-name descname">hash</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos13decap_group_t4hashEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>The hash function for type <a class="reference internal" href="#classeos_1_1decap__group__t"><span class="std std-ref">decap_group_t</span></a>. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos13decap_group_t6mix_meER8hash_mix">
+<span id="_CPPv3NK3eos13decap_group_t6mix_meER8hash_mix"></span><span id="_CPPv2NK3eos13decap_group_t6mix_meER8hash_mix"></span><span id="eos::decap_group_t::mix_me__hash_mixRC"></span><span class="target" id="classeos_1_1decap__group__t_1abf7e446b9fc05e7361328c48ce25a725"></span>void <code class="sig-name descname">mix_me</code><span class="sig-paren">(</span><a class="reference internal" href="hash_mix.html#_CPPv4N3eos8hash_mixE" title="eos::hash_mix">hash_mix</a> &amp;<em>h</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos13decap_group_t6mix_meER8hash_mix" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>The hash mix function for type <a class="reference internal" href="#classeos_1_1decap__group__t"><span class="std std-ref">decap_group_t</span></a>. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos13decap_group_t9to_stringEv">
+<span id="_CPPv3NK3eos13decap_group_t9to_stringEv"></span><span id="_CPPv2NK3eos13decap_group_t9to_stringEv"></span><span id="eos::decap_group_t::to_stringC"></span><span class="target" id="classeos_1_1decap__group__t_1acdde4804e0bcac59cc99d7adc475a3e4"></span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::string <code class="sig-name descname">to_string</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos13decap_group_t9to_stringEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Returns a string representation of the current object’s values. </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-private-members">Private Members</p>
+<dl class="cpp var">
+<dt id="_CPPv4N3eos13decap_group_t5pimplE">
+<span id="_CPPv3N3eos13decap_group_t5pimplE"></span><span id="_CPPv2N3eos13decap_group_t5pimplE"></span><span id="eos::decap_group_t::pimpl__std::shared_ptr:decap_group_impl_t:"></span><span class="target" id="classeos_1_1decap__group__t_1afb39aad6816b862ca54e1b2076549b71"></span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::shared_ptr&lt;decap_group_impl_t&gt; <code class="sig-name descname">pimpl</code><a class="headerlink" href="#_CPPv4N3eos13decap_group_t5pimplE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-friends">Friends</p>
+<dl class="cpp function">
+<dt id="_CPPv4N3eos13decap_group_tlsERNSt7ostreamERK13decap_group_t">
+<span id="_CPPv3N3eos13decap_group_tlsERNSt7ostreamERK13decap_group_t"></span><span id="_CPPv2N3eos13decap_group_tlsERNSt7ostreamERK13decap_group_t"></span><span id="eos::decap_group_t::lshift-operator__osR.decap_group_tCR"></span><span class="target" id="classeos_1_1decap__group__t_1a061f1afb3fcdf07461ebc3fd9bcf5cb7"></span><em class="property">friend</em> <a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::ostream &amp;<code class="sig-name descname">operator&lt;&lt;</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::ostream &amp;<em>os</em>, <em class="property">const</em> <a class="reference internal" href="#_CPPv4N3eos13decap_group_tE" title="eos::decap_group_t">decap_group_t</a> &amp;<em>obj</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos13decap_group_tlsERNSt7ostreamERK13decap_group_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>A utility stream operator that adds a string representation of <a class="reference internal" href="#classeos_1_1decap__group__t"><span class="std std-ref">decap_group_t</span></a> to the ostream. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#"><strong>decap_group</strong></a><ul>
+<li><a class="reference internal" href="#type-definitions-in-decap-group">Type definitions in <strong>decap_group</strong></a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="class_map.html"
+                        title="previous chapter"><strong>class_map</strong></a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="directflow.html"
+                        title="next chapter"><strong>directflow</strong></a></p>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="directflow.html" title="directflow"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="class_map.html" title="class_map"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Arista EOS SDK 2.22.4 reference</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href=""><strong>decap_group</strong></a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2014, Arista Networks.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.4.3.
+    </div>
+  </body>
+</html>

@@ -1,0 +1,688 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>route_map &#8212; Arista EOS SDK 2.22.4 reference</title>
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/eossdk.css" type="text/css" />
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="sdk" href="sdk.html" />
+    <link rel="prev" title="policy_map" href="policy_map.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="sdk.html" title="sdk"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="policy_map.html" title="policy_map"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Arista EOS SDK 2.22.4 reference</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href=""><strong>route_map</strong></a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="route-map">
+<h1><strong>route_map</strong><a class="headerlink" href="#route-map" title="Permalink to this headline">¶</a></h1>
+<p>Route Map management module.</p>
+<p>Route map is a ordered set of route map entry statement that manage the redistribution of IP routes into the protocol domain and modify the attrbutes of routes.</p>
+<p>This module provides APIs to query Route Map information. </p>
+<dl class="cpp type">
+<dt id="_CPPv43eos">
+<span id="_CPPv33eos"></span><span id="_CPPv23eos"></span><span id="eos"></span><span class="target" id="namespaceeos"></span><em class="property">namespace </em><code class="sig-name descname">eos</code><br /></dt>
+<dd><dl class="cpp class">
+<dt id="_CPPv4N3eos13route_map_mgrE">
+<span id="_CPPv3N3eos13route_map_mgrE"></span><span id="_CPPv2N3eos13route_map_mgrE"></span><span id="eos::route_map_mgr"></span><span class="target" id="classeos_1_1route__map__mgr"></span><em class="property">class </em><code class="sig-name descname">route_map_mgr</code><a class="headerlink" href="#_CPPv4N3eos13route_map_mgrE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><div class="docutils container">
+<em>#include &lt;route_map.h&gt;</em></div>
+<p>A manager of route map configurations.</p>
+<p>A example of the API usage is in example/RouteMapAgent.cpp </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
+<dl class="cpp function">
+<dt id="_CPPv4N3eos13route_map_mgrD0Ev">
+<span id="_CPPv3N3eos13route_map_mgrD0Ev"></span><span id="_CPPv2N3eos13route_map_mgrD0Ev"></span><span id="eos::route_map_mgr::~route_map_mgr"></span><span class="target" id="classeos_1_1route__map__mgr_1a7df23da6ac2e0c3a21614474ed3bc801"></span><em class="property">virtual</em> <code class="sig-name descname">~route_map_mgr</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos13route_map_mgrD0Ev" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos13route_map_mgr8priorityEv">
+<span id="_CPPv3NK3eos13route_map_mgr8priorityEv"></span><span id="_CPPv2NK3eos13route_map_mgr8priorityEv"></span><span id="eos::route_map_mgr::priorityC"></span><span class="target" id="classeos_1_1route__map__mgr_1a1c75646b21abaab3f55d43b3e6324578"></span><em class="property">virtual</em> uint8_t <code class="sig-name descname">priority</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em> = 0<a class="headerlink" href="#_CPPv4NK3eos13route_map_mgr8priorityEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Returns the priority value of eossdk route map configuration. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos13route_map_mgr11priority_isE7uint8_t">
+<span id="_CPPv3N3eos13route_map_mgr11priority_isE7uint8_t"></span><span id="_CPPv2N3eos13route_map_mgr11priority_isE7uint8_t"></span><span id="eos::route_map_mgr::priority_is__uint8_t"></span><span class="target" id="classeos_1_1route__map__mgr_1a5200114c352b6dd58f345a61f087f413"></span><em class="property">virtual</em> void <code class="sig-name descname">priority_is</code><span class="sig-paren">(</span>uint8_t<span class="sig-paren">)</span> = 0<a class="headerlink" href="#_CPPv4N3eos13route_map_mgr11priority_isE7uint8_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Configures the priority value of eossdk route map configuration. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos13route_map_mgr9route_mapERK16route_map_name_t">
+<span id="_CPPv3NK3eos13route_map_mgr9route_mapERK16route_map_name_t"></span><span id="_CPPv2NK3eos13route_map_mgr9route_mapERK16route_map_name_t"></span><span id="eos::route_map_mgr::route_map__route_map_name_tCRC"></span><span class="target" id="classeos_1_1route__map__mgr_1a2b0ce6167a1229d5fde0401013e12270"></span><em class="property">virtual</em> <a class="reference internal" href="#_CPPv4N3eos11route_map_tE" title="eos::route_map_t">route_map_t</a> <code class="sig-name descname">route_map</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos16route_map_name_tE" title="eos::route_map_name_t">route_map_name_t</a> <em class="property">const</em>&amp;<span class="sig-paren">)</span> <em class="property">const</em> = 0<a class="headerlink" href="#_CPPv4NK3eos13route_map_mgr9route_mapERK16route_map_name_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Returns a eossdk route map with corresponding route map name, which contains route map entries. Returns an empty <a class="reference internal" href="#classeos_1_1route__map__t"><span class="std std-ref">route_map_t</span></a> if no matching route map was found. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos13route_map_mgr15route_map_entryERK16route_map_name_t27route_map_sequence_number_t">
+<span id="_CPPv3NK3eos13route_map_mgr15route_map_entryERK16route_map_name_t27route_map_sequence_number_t"></span><span id="_CPPv2NK3eos13route_map_mgr15route_map_entryERK16route_map_name_t27route_map_sequence_number_t"></span><span id="eos::route_map_mgr::route_map_entry__route_map_name_tCR.route_map_sequence_number_tC"></span><span class="target" id="classeos_1_1route__map__mgr_1a41f53b61212f43c7f57c6661a5419f29"></span><em class="property">virtual</em> <a class="reference internal" href="#_CPPv4N3eos17route_map_entry_tE" title="eos::route_map_entry_t">route_map_entry_t</a> <code class="sig-name descname">route_map_entry</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos16route_map_name_tE" title="eos::route_map_name_t">route_map_name_t</a> <em class="property">const</em>&amp;, <a class="reference internal" href="#_CPPv4N3eos27route_map_sequence_number_tE" title="eos::route_map_sequence_number_t">route_map_sequence_number_t</a><span class="sig-paren">)</span> <em class="property">const</em> = 0<a class="headerlink" href="#_CPPv4NK3eos13route_map_mgr15route_map_entryERK16route_map_name_t27route_map_sequence_number_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Returns a route map entry with the corresponding sequence number in corresponding route map. Returns an empty <a class="reference internal" href="#classeos_1_1route__map__entry__t"><span class="std std-ref">route_map_entry_t</span></a> if no matching route map entry was found. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos13route_map_mgr13route_map_setERK16route_map_name_tRK11route_map_t">
+<span id="_CPPv3N3eos13route_map_mgr13route_map_setERK16route_map_name_tRK11route_map_t"></span><span id="_CPPv2N3eos13route_map_mgr13route_map_setERK16route_map_name_tRK11route_map_t"></span><span id="eos::route_map_mgr::route_map_set__route_map_name_tCR.route_map_tCR"></span><span class="target" id="classeos_1_1route__map__mgr_1a8e713ab664824ddc5a35345f855eadf8"></span><em class="property">virtual</em> void <code class="sig-name descname">route_map_set</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos16route_map_name_tE" title="eos::route_map_name_t">route_map_name_t</a> <em class="property">const</em>&amp;, <a class="reference internal" href="#_CPPv4N3eos11route_map_tE" title="eos::route_map_t">route_map_t</a> <em class="property">const</em>&amp;<span class="sig-paren">)</span> = 0<a class="headerlink" href="#_CPPv4N3eos13route_map_mgr13route_map_setERK16route_map_name_tRK11route_map_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Creates or updates a route map. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos13route_map_mgr19route_map_entry_setERK16route_map_name_t27route_map_sequence_number_tRK17route_map_entry_t">
+<span id="_CPPv3N3eos13route_map_mgr19route_map_entry_setERK16route_map_name_t27route_map_sequence_number_tRK17route_map_entry_t"></span><span id="_CPPv2N3eos13route_map_mgr19route_map_entry_setERK16route_map_name_t27route_map_sequence_number_tRK17route_map_entry_t"></span><span id="eos::route_map_mgr::route_map_entry_set__route_map_name_tCR.route_map_sequence_number_t.route_map_entry_tCR"></span><span class="target" id="classeos_1_1route__map__mgr_1ab77dc80267a23f0c43f36d9d35714cdd"></span><em class="property">virtual</em> void <code class="sig-name descname">route_map_entry_set</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos16route_map_name_tE" title="eos::route_map_name_t">route_map_name_t</a> <em class="property">const</em>&amp;, <a class="reference internal" href="#_CPPv4N3eos27route_map_sequence_number_tE" title="eos::route_map_sequence_number_t">route_map_sequence_number_t</a>, <a class="reference internal" href="#_CPPv4N3eos17route_map_entry_tE" title="eos::route_map_entry_t">route_map_entry_t</a> <em class="property">const</em>&amp;<span class="sig-paren">)</span> = 0<a class="headerlink" href="#_CPPv4N3eos13route_map_mgr19route_map_entry_setERK16route_map_name_t27route_map_sequence_number_tRK17route_map_entry_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Creates or updates a route map entry in corresponding route map. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos13route_map_mgr13route_map_delERK16route_map_name_t">
+<span id="_CPPv3N3eos13route_map_mgr13route_map_delERK16route_map_name_t"></span><span id="_CPPv2N3eos13route_map_mgr13route_map_delERK16route_map_name_t"></span><span id="eos::route_map_mgr::route_map_del__route_map_name_tCR"></span><span class="target" id="classeos_1_1route__map__mgr_1a9a69230ce1f479935cadfc25e9dd8890"></span><em class="property">virtual</em> void <code class="sig-name descname">route_map_del</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos16route_map_name_tE" title="eos::route_map_name_t">route_map_name_t</a> <em class="property">const</em>&amp;<span class="sig-paren">)</span> = 0<a class="headerlink" href="#_CPPv4N3eos13route_map_mgr13route_map_delERK16route_map_name_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Removes the corresponding route map from the configuration if exists. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos13route_map_mgr19route_map_entry_delERK16route_map_name_t27route_map_sequence_number_t">
+<span id="_CPPv3N3eos13route_map_mgr19route_map_entry_delERK16route_map_name_t27route_map_sequence_number_t"></span><span id="_CPPv2N3eos13route_map_mgr19route_map_entry_delERK16route_map_name_t27route_map_sequence_number_t"></span><span id="eos::route_map_mgr::route_map_entry_del__route_map_name_tCR.route_map_sequence_number_t"></span><span class="target" id="classeos_1_1route__map__mgr_1a8151abbd33b43cafe5d78f13413cef30"></span><em class="property">virtual</em> void <code class="sig-name descname">route_map_entry_del</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos16route_map_name_tE" title="eos::route_map_name_t">route_map_name_t</a> <em class="property">const</em>&amp;, <a class="reference internal" href="#_CPPv4N3eos27route_map_sequence_number_tE" title="eos::route_map_sequence_number_t">route_map_sequence_number_t</a><span class="sig-paren">)</span> = 0<a class="headerlink" href="#_CPPv4N3eos13route_map_mgr19route_map_entry_delERK16route_map_name_t27route_map_sequence_number_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Removes the corresponding route map entry from a given route map. </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-protected-functions">Protected Functions</p>
+<dl class="cpp function">
+<dt id="_CPPv4N3eos13route_map_mgr13route_map_mgrEv">
+<span id="_CPPv3N3eos13route_map_mgr13route_map_mgrEv"></span><span id="_CPPv2N3eos13route_map_mgr13route_map_mgrEv"></span><span id="eos::route_map_mgr::route_map_mgr"></span><span class="target" id="classeos_1_1route__map__mgr_1a970d55fe1f4e790ec72177ca57e14ffd"></span><code class="sig-name descname">route_map_mgr</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos13route_map_mgr13route_map_mgrEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-private-members">Private Members</p>
+<dl class="cpp var">
+<dt>
+<span class="target" id="classeos_1_1route__map__mgr_1ae869f6cbb47252bbadcf48307b50971a"></span><code class="sig-name descname">route_map_mgr</code></dt>
+<dd></dd></dl>
+
+</div>
+</dd></dl>
+
+</dd></dl>
+
+<div class="section" id="type-definitions-in-route-map">
+<h2>Type definitions in <strong>route_map</strong><a class="headerlink" href="#type-definitions-in-route-map" title="Permalink to this headline">¶</a></h2>
+<dl class="cpp type">
+<dt>
+<span class="target" id="namespaceeos"></span><em class="property">namespace </em><code class="sig-name descname">eos</code><br /></dt>
+<dd><div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-typedefs">Typedefs</p>
+<dl class="cpp type">
+<dt id="_CPPv4N3eos16route_map_name_tE">
+<span id="_CPPv3N3eos16route_map_name_tE"></span><span id="_CPPv2N3eos16route_map_name_tE"></span><span id="eos::route_map_name_t"></span><span class="target" id="namespaceeos_1a7d5a9782ae87b2905d41fc5c5bd33e09"></span><em class="property">typedef </em><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::string <code class="sig-name descname">route_map_name_t</code><a class="headerlink" href="#_CPPv4N3eos16route_map_name_tE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp type">
+<dt id="_CPPv4N3eos27route_map_sequence_number_tE">
+<span id="_CPPv3N3eos27route_map_sequence_number_tE"></span><span id="_CPPv2N3eos27route_map_sequence_number_tE"></span><span id="eos::route_map_sequence_number_t"></span><span class="target" id="namespaceeos_1a6002f7959ed4605a8b2fe8e040e9ebf0"></span><em class="property">typedef </em>uint32_t <code class="sig-name descname">route_map_sequence_number_t</code><a class="headerlink" href="#_CPPv4N3eos27route_map_sequence_number_tE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-enums">Enums</p>
+<dl class="cpp enum">
+<dt id="_CPPv4N3eos16bandwidth_unit_tE">
+<span id="_CPPv3N3eos16bandwidth_unit_tE"></span><span id="_CPPv2N3eos16bandwidth_unit_tE"></span><span class="target" id="namespaceeos_1af2f13d2a03440ecff4115d3e39fbed81"></span><em class="property">enum </em><code class="sig-name descname">bandwidth_unit_t</code><a class="headerlink" href="#_CPPv4N3eos16bandwidth_unit_tE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p><em>Values:</em></p>
+<dl class="cpp enumerator">
+<dt id="_CPPv4N3eos16bandwidth_unit_t23LINK_BANDWIDTH_UNIT_BITE">
+<span id="_CPPv3N3eos16bandwidth_unit_t23LINK_BANDWIDTH_UNIT_BITE"></span><span id="_CPPv2N3eos16bandwidth_unit_t23LINK_BANDWIDTH_UNIT_BITE"></span><span class="target" id="namespaceeos_1af2f13d2a03440ecff4115d3e39fbed81a23adccdab8d6a6fc8adad575c3b81399"></span><em class="property">enumerator </em><code class="sig-name descname">LINK_BANDWIDTH_UNIT_BIT</code><a class="headerlink" href="#_CPPv4N3eos16bandwidth_unit_t23LINK_BANDWIDTH_UNIT_BITE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt id="_CPPv4N3eos16bandwidth_unit_t27LINK_BANDWIDTH_UNIT_KILOBITE">
+<span id="_CPPv3N3eos16bandwidth_unit_t27LINK_BANDWIDTH_UNIT_KILOBITE"></span><span id="_CPPv2N3eos16bandwidth_unit_t27LINK_BANDWIDTH_UNIT_KILOBITE"></span><span class="target" id="namespaceeos_1af2f13d2a03440ecff4115d3e39fbed81a4db8f1be451597a9a7fef6e067242912"></span><em class="property">enumerator </em><code class="sig-name descname">LINK_BANDWIDTH_UNIT_KILOBIT</code><a class="headerlink" href="#_CPPv4N3eos16bandwidth_unit_t27LINK_BANDWIDTH_UNIT_KILOBITE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt id="_CPPv4N3eos16bandwidth_unit_t27LINK_BANDWIDTH_UNIT_MEGABITE">
+<span id="_CPPv3N3eos16bandwidth_unit_t27LINK_BANDWIDTH_UNIT_MEGABITE"></span><span id="_CPPv2N3eos16bandwidth_unit_t27LINK_BANDWIDTH_UNIT_MEGABITE"></span><span class="target" id="namespaceeos_1af2f13d2a03440ecff4115d3e39fbed81af2d33ccee400677e569258f00fabd864"></span><em class="property">enumerator </em><code class="sig-name descname">LINK_BANDWIDTH_UNIT_MEGABIT</code><a class="headerlink" href="#_CPPv4N3eos16bandwidth_unit_t27LINK_BANDWIDTH_UNIT_MEGABITE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt id="_CPPv4N3eos16bandwidth_unit_t27LINK_BANDWIDTH_UNIT_GIGABITE">
+<span id="_CPPv3N3eos16bandwidth_unit_t27LINK_BANDWIDTH_UNIT_GIGABITE"></span><span id="_CPPv2N3eos16bandwidth_unit_t27LINK_BANDWIDTH_UNIT_GIGABITE"></span><span class="target" id="namespaceeos_1af2f13d2a03440ecff4115d3e39fbed81ac91f24e1964a94e29e8a3c196d0651b0"></span><em class="property">enumerator </em><code class="sig-name descname">LINK_BANDWIDTH_UNIT_GIGABIT</code><a class="headerlink" href="#_CPPv4N3eos16bandwidth_unit_t27LINK_BANDWIDTH_UNIT_GIGABITE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="cpp enum">
+<dt id="_CPPv4N3eos26route_map_operation_type_tE">
+<span id="_CPPv3N3eos26route_map_operation_type_tE"></span><span id="_CPPv2N3eos26route_map_operation_type_tE"></span><span class="target" id="namespaceeos_1a6c2cf658c45a521a7549dd113a60b649"></span><em class="property">enum </em><code class="sig-name descname">route_map_operation_type_t</code><a class="headerlink" href="#_CPPv4N3eos26route_map_operation_type_tE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Route map extended community link bandwidth operation type. </p>
+<p><em>Values:</em></p>
+<dl class="cpp enumerator">
+<dt id="_CPPv4N3eos26route_map_operation_type_t19OPERATION_TYPE_NONEE">
+<span id="_CPPv3N3eos26route_map_operation_type_t19OPERATION_TYPE_NONEE"></span><span id="_CPPv2N3eos26route_map_operation_type_t19OPERATION_TYPE_NONEE"></span><span class="target" id="namespaceeos_1a6c2cf658c45a521a7549dd113a60b649a7e39ef18cd7854bf503dd65d20198fd7"></span><em class="property">enumerator </em><code class="sig-name descname">OPERATION_TYPE_NONE</code><a class="headerlink" href="#_CPPv4N3eos26route_map_operation_type_t19OPERATION_TYPE_NONEE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt id="_CPPv4N3eos26route_map_operation_type_t18OPERATION_TYPE_SETE">
+<span id="_CPPv3N3eos26route_map_operation_type_t18OPERATION_TYPE_SETE"></span><span id="_CPPv2N3eos26route_map_operation_type_t18OPERATION_TYPE_SETE"></span><span class="target" id="namespaceeos_1a6c2cf658c45a521a7549dd113a60b649a3f9cb70f3535d6e12e4b802cdea6d905"></span><em class="property">enumerator </em><code class="sig-name descname">OPERATION_TYPE_SET</code><a class="headerlink" href="#_CPPv4N3eos26route_map_operation_type_t18OPERATION_TYPE_SETE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt id="_CPPv4N3eos26route_map_operation_type_t21OPERATION_TYPE_DELETEE">
+<span id="_CPPv3N3eos26route_map_operation_type_t21OPERATION_TYPE_DELETEE"></span><span id="_CPPv2N3eos26route_map_operation_type_t21OPERATION_TYPE_DELETEE"></span><span class="target" id="namespaceeos_1a6c2cf658c45a521a7549dd113a60b649ac4f63b2786363a0f8d4095e5d6ecedbc"></span><em class="property">enumerator </em><code class="sig-name descname">OPERATION_TYPE_DELETE</code><a class="headerlink" href="#_CPPv4N3eos26route_map_operation_type_t21OPERATION_TYPE_DELETEE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<dl class="cpp class">
+<dt id="_CPPv4N3eos16link_bandwidth_tE">
+<span id="_CPPv3N3eos16link_bandwidth_tE"></span><span id="_CPPv2N3eos16link_bandwidth_tE"></span><span id="eos::link_bandwidth_t"></span><span class="target" id="classeos_1_1link__bandwidth__t"></span><em class="property">class </em><code class="sig-name descname">link_bandwidth_t</code><a class="headerlink" href="#_CPPv4N3eos16link_bandwidth_tE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><div class="docutils container">
+<em>#include &lt;route_map.h&gt;</em></div>
+<p>Extended community link bandwidth value. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
+<dl class="cpp function">
+<dt id="_CPPv4N3eos16link_bandwidth_t16link_bandwidth_tEf16bandwidth_unit_t">
+<span id="_CPPv3N3eos16link_bandwidth_t16link_bandwidth_tEf16bandwidth_unit_t"></span><span id="_CPPv2N3eos16link_bandwidth_t16link_bandwidth_tEf16bandwidth_unit_t"></span><span id="eos::link_bandwidth_t::link_bandwidth_t__float.bandwidth_unit_t"></span><span class="target" id="classeos_1_1link__bandwidth__t_1a27bfa7b71a98d112f9be232a3c95f083"></span><code class="sig-name descname">link_bandwidth_t</code><span class="sig-paren">(</span>float <em>value</em>, <a class="reference internal" href="#_CPPv4N3eos16bandwidth_unit_tE" title="eos::bandwidth_unit_t">bandwidth_unit_t</a> <em>unit</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos16link_bandwidth_t16link_bandwidth_tEf16bandwidth_unit_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos16link_bandwidth_t16link_bandwidth_tEf">
+<span id="_CPPv3N3eos16link_bandwidth_t16link_bandwidth_tEf"></span><span id="_CPPv2N3eos16link_bandwidth_t16link_bandwidth_tEf"></span><span id="eos::link_bandwidth_t::link_bandwidth_t__float"></span><span class="target" id="classeos_1_1link__bandwidth__t_1a86d41bb987c7495a749b7db4cc3f9fe0"></span><em class="property">explicit</em> <code class="sig-name descname">link_bandwidth_t</code><span class="sig-paren">(</span>float <em>value</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos16link_bandwidth_t16link_bandwidth_tEf" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos16link_bandwidth_t16link_bandwidth_tEv">
+<span id="_CPPv3N3eos16link_bandwidth_t16link_bandwidth_tEv"></span><span id="_CPPv2N3eos16link_bandwidth_t16link_bandwidth_tEv"></span><span id="eos::link_bandwidth_t::link_bandwidth_t"></span><span class="target" id="classeos_1_1link__bandwidth__t_1a205ff711f25606e96188a93c3dc8a1bf"></span><code class="sig-name descname">link_bandwidth_t</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos16link_bandwidth_t16link_bandwidth_tEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos16link_bandwidth_t16link_bandwidth_tERK16link_bandwidth_t">
+<span id="_CPPv3N3eos16link_bandwidth_t16link_bandwidth_tERK16link_bandwidth_t"></span><span id="_CPPv2N3eos16link_bandwidth_t16link_bandwidth_tERK16link_bandwidth_t"></span><span id="eos::link_bandwidth_t::link_bandwidth_t__link_bandwidth_tCR"></span><span class="target" id="classeos_1_1link__bandwidth__t_1ac6563ac804291c3b41fdd7b9d63f1fed"></span><code class="sig-name descname">link_bandwidth_t</code><span class="sig-paren">(</span><em class="property">const</em> <a class="reference internal" href="#_CPPv4N3eos16link_bandwidth_t16link_bandwidth_tERK16link_bandwidth_t" title="eos::link_bandwidth_t::link_bandwidth_t">link_bandwidth_t</a> &amp;<em>other</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos16link_bandwidth_t16link_bandwidth_tERK16link_bandwidth_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos16link_bandwidth_taSERK16link_bandwidth_t">
+<span id="_CPPv3N3eos16link_bandwidth_taSERK16link_bandwidth_t"></span><span id="_CPPv2N3eos16link_bandwidth_taSERK16link_bandwidth_t"></span><span id="eos::link_bandwidth_t::assign-operator__link_bandwidth_tCR"></span><span class="target" id="classeos_1_1link__bandwidth__t_1ac45046ee9e12a248ca513282cf402490"></span><a class="reference internal" href="#_CPPv4N3eos16link_bandwidth_tE" title="eos::link_bandwidth_t">link_bandwidth_t</a> &amp;<code class="sig-name descname">operator=</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos16link_bandwidth_tE" title="eos::link_bandwidth_t">link_bandwidth_t</a> <em class="property">const</em> &amp;<em>other</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos16link_bandwidth_taSERK16link_bandwidth_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos16link_bandwidth_t5valueEv">
+<span id="_CPPv3NK3eos16link_bandwidth_t5valueEv"></span><span id="_CPPv2NK3eos16link_bandwidth_t5valueEv"></span><span id="eos::link_bandwidth_t::valueC"></span><span class="target" id="classeos_1_1link__bandwidth__t_1a430d362f7d36280736d893f56bc33c5c"></span>float <code class="sig-name descname">value</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos16link_bandwidth_t5valueEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Getter for ‘value’: The link bandwidth value. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos16link_bandwidth_t8value_isEf">
+<span id="_CPPv3N3eos16link_bandwidth_t8value_isEf"></span><span id="_CPPv2N3eos16link_bandwidth_t8value_isEf"></span><span id="eos::link_bandwidth_t::value_is__float"></span><span class="target" id="classeos_1_1link__bandwidth__t_1a5761cc110b43010baa6b0cd50ab986fe"></span>void <code class="sig-name descname">value_is</code><span class="sig-paren">(</span>float <em>value</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos16link_bandwidth_t8value_isEf" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Setter for ‘value’. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos16link_bandwidth_t4unitEv">
+<span id="_CPPv3NK3eos16link_bandwidth_t4unitEv"></span><span id="_CPPv2NK3eos16link_bandwidth_t4unitEv"></span><span id="eos::link_bandwidth_t::unitC"></span><span class="target" id="classeos_1_1link__bandwidth__t_1ab29172daa2361cb86b0bdc0744f376c3"></span><a class="reference internal" href="#_CPPv4N3eos16bandwidth_unit_tE" title="eos::bandwidth_unit_t">bandwidth_unit_t</a> <code class="sig-name descname">unit</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos16link_bandwidth_t4unitEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Getter for ‘unit’: The link bandwidth bitrate unit. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos16link_bandwidth_t7unit_isE16bandwidth_unit_t">
+<span id="_CPPv3N3eos16link_bandwidth_t7unit_isE16bandwidth_unit_t"></span><span id="_CPPv2N3eos16link_bandwidth_t7unit_isE16bandwidth_unit_t"></span><span id="eos::link_bandwidth_t::unit_is__bandwidth_unit_t"></span><span class="target" id="classeos_1_1link__bandwidth__t_1a966382c98c4d7ffebc48abe350fd5c44"></span>void <code class="sig-name descname">unit_is</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos16bandwidth_unit_tE" title="eos::bandwidth_unit_t">bandwidth_unit_t</a> <em>unit</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos16link_bandwidth_t7unit_isE16bandwidth_unit_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Setter for ‘unit’. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos16link_bandwidth_teqERK16link_bandwidth_t">
+<span id="_CPPv3NK3eos16link_bandwidth_teqERK16link_bandwidth_t"></span><span id="_CPPv2NK3eos16link_bandwidth_teqERK16link_bandwidth_t"></span><span id="eos::link_bandwidth_t::eq-operator__link_bandwidth_tCRC"></span><span class="target" id="classeos_1_1link__bandwidth__t_1ab078925809c6fa1900db3e9b7d95fec4"></span>bool <code class="sig-name descname">operator==</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos16link_bandwidth_tE" title="eos::link_bandwidth_t">link_bandwidth_t</a> <em class="property">const</em> &amp;<em>other</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos16link_bandwidth_teqERK16link_bandwidth_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos16link_bandwidth_tneERK16link_bandwidth_t">
+<span id="_CPPv3NK3eos16link_bandwidth_tneERK16link_bandwidth_t"></span><span id="_CPPv2NK3eos16link_bandwidth_tneERK16link_bandwidth_t"></span><span id="eos::link_bandwidth_t::neq-operator__link_bandwidth_tCRC"></span><span class="target" id="classeos_1_1link__bandwidth__t_1a7dec1d5f1f8b4b3e88a7e8736fbf85a7"></span>bool <code class="sig-name descname">operator!=</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos16link_bandwidth_tE" title="eos::link_bandwidth_t">link_bandwidth_t</a> <em class="property">const</em> &amp;<em>other</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos16link_bandwidth_tneERK16link_bandwidth_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos16link_bandwidth_tltERK16link_bandwidth_t">
+<span id="_CPPv3NK3eos16link_bandwidth_tltERK16link_bandwidth_t"></span><span id="_CPPv2NK3eos16link_bandwidth_tltERK16link_bandwidth_t"></span><span id="eos::link_bandwidth_t::lt-operator__link_bandwidth_tCRC"></span><span class="target" id="classeos_1_1link__bandwidth__t_1aa6bcd4c0eda1349db048cc16cd0fb3d2"></span>bool <code class="sig-name descname">operator&lt;</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos16link_bandwidth_tE" title="eos::link_bandwidth_t">link_bandwidth_t</a> <em class="property">const</em> &amp;<em>other</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos16link_bandwidth_tltERK16link_bandwidth_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos16link_bandwidth_t4hashEv">
+<span id="_CPPv3NK3eos16link_bandwidth_t4hashEv"></span><span id="_CPPv2NK3eos16link_bandwidth_t4hashEv"></span><span id="eos::link_bandwidth_t::hashC"></span><span class="target" id="classeos_1_1link__bandwidth__t_1a3f301e80411bf8ba5600000432ac39e0"></span>uint32_t <code class="sig-name descname">hash</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos16link_bandwidth_t4hashEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>The hash function for type <a class="reference internal" href="#classeos_1_1link__bandwidth__t"><span class="std std-ref">link_bandwidth_t</span></a>. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos16link_bandwidth_t6mix_meER8hash_mix">
+<span id="_CPPv3NK3eos16link_bandwidth_t6mix_meER8hash_mix"></span><span id="_CPPv2NK3eos16link_bandwidth_t6mix_meER8hash_mix"></span><span id="eos::link_bandwidth_t::mix_me__hash_mixRC"></span><span class="target" id="classeos_1_1link__bandwidth__t_1aea9acba72e99cfd40c08d6e1c307ecf3"></span>void <code class="sig-name descname">mix_me</code><span class="sig-paren">(</span><a class="reference internal" href="hash_mix.html#_CPPv4N3eos8hash_mixE" title="eos::hash_mix">hash_mix</a> &amp;<em>h</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos16link_bandwidth_t6mix_meER8hash_mix" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>The hash mix function for type <a class="reference internal" href="#classeos_1_1link__bandwidth__t"><span class="std std-ref">link_bandwidth_t</span></a>. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos16link_bandwidth_t9to_stringEv">
+<span id="_CPPv3NK3eos16link_bandwidth_t9to_stringEv"></span><span id="_CPPv2NK3eos16link_bandwidth_t9to_stringEv"></span><span id="eos::link_bandwidth_t::to_stringC"></span><span class="target" id="classeos_1_1link__bandwidth__t_1a77d57698e3a40dc5f0691c96c9c734f5"></span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::string <code class="sig-name descname">to_string</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos16link_bandwidth_t9to_stringEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Returns a string representation of the current object’s values. </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-private-members">Private Members</p>
+<dl class="cpp var">
+<dt id="_CPPv4N3eos16link_bandwidth_t5pimplE">
+<span id="_CPPv3N3eos16link_bandwidth_t5pimplE"></span><span id="_CPPv2N3eos16link_bandwidth_t5pimplE"></span><span id="eos::link_bandwidth_t::pimpl__std::shared_ptr:link_bandwidth_impl_t:"></span><span class="target" id="classeos_1_1link__bandwidth__t_1a02e8d887d508821029407dbbb495a83c"></span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::shared_ptr&lt;link_bandwidth_impl_t&gt; <code class="sig-name descname">pimpl</code><a class="headerlink" href="#_CPPv4N3eos16link_bandwidth_t5pimplE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-friends">Friends</p>
+<dl class="cpp function">
+<dt id="_CPPv4N3eos16link_bandwidth_tlsERNSt7ostreamERK16link_bandwidth_t">
+<span id="_CPPv3N3eos16link_bandwidth_tlsERNSt7ostreamERK16link_bandwidth_t"></span><span id="_CPPv2N3eos16link_bandwidth_tlsERNSt7ostreamERK16link_bandwidth_t"></span><span id="eos::link_bandwidth_t::lshift-operator__osR.link_bandwidth_tCR"></span><span class="target" id="classeos_1_1link__bandwidth__t_1a186ab040333057e20e570c942d79e23c"></span><em class="property">friend</em> <a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::ostream &amp;<code class="sig-name descname">operator&lt;&lt;</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::ostream &amp;<em>os</em>, <em class="property">const</em> <a class="reference internal" href="#_CPPv4N3eos16link_bandwidth_tE" title="eos::link_bandwidth_t">link_bandwidth_t</a> &amp;<em>obj</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos16link_bandwidth_tlsERNSt7ostreamERK16link_bandwidth_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>A utility stream operator that adds a string representation of <a class="reference internal" href="#classeos_1_1link__bandwidth__t"><span class="std std-ref">link_bandwidth_t</span></a> to the ostream. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="cpp class">
+<dt id="_CPPv4N3eos26route_map_link_bandwidth_tE">
+<span id="_CPPv3N3eos26route_map_link_bandwidth_tE"></span><span id="_CPPv2N3eos26route_map_link_bandwidth_tE"></span><span id="eos::route_map_link_bandwidth_t"></span><span class="target" id="classeos_1_1route__map__link__bandwidth__t"></span><em class="property">class </em><code class="sig-name descname">route_map_link_bandwidth_t</code><a class="headerlink" href="#_CPPv4N3eos26route_map_link_bandwidth_tE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><div class="docutils container">
+<em>#include &lt;route_map.h&gt;</em></div>
+<p>Route map link bandwidth operation attribute information. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
+<dl class="cpp function">
+<dt id="_CPPv4N3eos26route_map_link_bandwidth_t26route_map_link_bandwidth_tEv">
+<span id="_CPPv3N3eos26route_map_link_bandwidth_t26route_map_link_bandwidth_tEv"></span><span id="_CPPv2N3eos26route_map_link_bandwidth_t26route_map_link_bandwidth_tEv"></span><span id="eos::route_map_link_bandwidth_t::route_map_link_bandwidth_t"></span><span class="target" id="classeos_1_1route__map__link__bandwidth__t_1a09c1327d8a91866bc86b92806c588f4d"></span><code class="sig-name descname">route_map_link_bandwidth_t</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos26route_map_link_bandwidth_t26route_map_link_bandwidth_tEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Create route map link bandwidth. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos26route_map_link_bandwidth_t26route_map_link_bandwidth_tERK26route_map_link_bandwidth_t">
+<span id="_CPPv3N3eos26route_map_link_bandwidth_t26route_map_link_bandwidth_tERK26route_map_link_bandwidth_t"></span><span id="_CPPv2N3eos26route_map_link_bandwidth_t26route_map_link_bandwidth_tERK26route_map_link_bandwidth_t"></span><span id="eos::route_map_link_bandwidth_t::route_map_link_bandwidth_t__route_map_link_bandwidth_tCR"></span><span class="target" id="classeos_1_1route__map__link__bandwidth__t_1a2814b47b35b88c21a49361af95be57a6"></span><code class="sig-name descname">route_map_link_bandwidth_t</code><span class="sig-paren">(</span><em class="property">const</em> <a class="reference internal" href="#_CPPv4N3eos26route_map_link_bandwidth_t26route_map_link_bandwidth_tERK26route_map_link_bandwidth_t" title="eos::route_map_link_bandwidth_t::route_map_link_bandwidth_t">route_map_link_bandwidth_t</a> &amp;<em>other</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos26route_map_link_bandwidth_t26route_map_link_bandwidth_tERK26route_map_link_bandwidth_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos26route_map_link_bandwidth_taSERK26route_map_link_bandwidth_t">
+<span id="_CPPv3N3eos26route_map_link_bandwidth_taSERK26route_map_link_bandwidth_t"></span><span id="_CPPv2N3eos26route_map_link_bandwidth_taSERK26route_map_link_bandwidth_t"></span><span id="eos::route_map_link_bandwidth_t::assign-operator__route_map_link_bandwidth_tCR"></span><span class="target" id="classeos_1_1route__map__link__bandwidth__t_1a29ab656b4b9a454f5cc159992d1f8833"></span><a class="reference internal" href="#_CPPv4N3eos26route_map_link_bandwidth_tE" title="eos::route_map_link_bandwidth_t">route_map_link_bandwidth_t</a> &amp;<code class="sig-name descname">operator=</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos26route_map_link_bandwidth_tE" title="eos::route_map_link_bandwidth_t">route_map_link_bandwidth_t</a> <em class="property">const</em> &amp;<em>other</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos26route_map_link_bandwidth_taSERK26route_map_link_bandwidth_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos26route_map_link_bandwidth_t9operationEv">
+<span id="_CPPv3NK3eos26route_map_link_bandwidth_t9operationEv"></span><span id="_CPPv2NK3eos26route_map_link_bandwidth_t9operationEv"></span><span id="eos::route_map_link_bandwidth_t::operationC"></span><span class="target" id="classeos_1_1route__map__link__bandwidth__t_1a53acbacc727c4ab7d36a9342d3661530"></span><a class="reference internal" href="#_CPPv4N3eos26route_map_operation_type_tE" title="eos::route_map_operation_type_t">route_map_operation_type_t</a> <code class="sig-name descname">operation</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos26route_map_link_bandwidth_t9operationEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Getter for ‘operation’: Operation type. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos26route_map_link_bandwidth_t3asnEv">
+<span id="_CPPv3NK3eos26route_map_link_bandwidth_t3asnEv"></span><span id="_CPPv2NK3eos26route_map_link_bandwidth_t3asnEv"></span><span id="eos::route_map_link_bandwidth_t::asnC"></span><span class="target" id="classeos_1_1route__map__link__bandwidth__t_1ae61cd1c45adb8e7cb76f10a58cd0d294"></span><a class="reference internal" href="bgp.html#_CPPv4N3eos9bgp_asn_tE" title="eos::bgp_asn_t">bgp_asn_t</a> <code class="sig-name descname">asn</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos26route_map_link_bandwidth_t3asnEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Getter for ‘asn’: Peer AS number. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos26route_map_link_bandwidth_t9bandwidthEv">
+<span id="_CPPv3NK3eos26route_map_link_bandwidth_t9bandwidthEv"></span><span id="_CPPv2NK3eos26route_map_link_bandwidth_t9bandwidthEv"></span><span id="eos::route_map_link_bandwidth_t::bandwidthC"></span><span class="target" id="classeos_1_1route__map__link__bandwidth__t_1a40a5457a0fd7a0589a8195fda0f75edb"></span><a class="reference internal" href="#_CPPv4N3eos16link_bandwidth_tE" title="eos::link_bandwidth_t">link_bandwidth_t</a> <code class="sig-name descname">bandwidth</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos26route_map_link_bandwidth_t9bandwidthEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Getter for ‘bandwidth’: Link bandwidth value. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos26route_map_link_bandwidth_t31route_map_operation_type_set_isE16link_bandwidth_t">
+<span id="_CPPv3N3eos26route_map_link_bandwidth_t31route_map_operation_type_set_isE16link_bandwidth_t"></span><span id="_CPPv2N3eos26route_map_link_bandwidth_t31route_map_operation_type_set_isE16link_bandwidth_t"></span><span id="eos::route_map_link_bandwidth_t::route_map_operation_type_set_is__link_bandwidth_t"></span><span class="target" id="classeos_1_1route__map__link__bandwidth__t_1a8719f2863d81685491c94dd849acdf82"></span>void <code class="sig-name descname">route_map_operation_type_set_is</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos16link_bandwidth_tE" title="eos::link_bandwidth_t">link_bandwidth_t</a> <em>bandwidth</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos26route_map_link_bandwidth_t31route_map_operation_type_set_isE16link_bandwidth_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos26route_map_link_bandwidth_t34route_map_operation_type_delete_isE16link_bandwidth_t9bgp_asn_t">
+<span id="_CPPv3N3eos26route_map_link_bandwidth_t34route_map_operation_type_delete_isE16link_bandwidth_t9bgp_asn_t"></span><span id="_CPPv2N3eos26route_map_link_bandwidth_t34route_map_operation_type_delete_isE16link_bandwidth_t9bgp_asn_t"></span><span id="eos::route_map_link_bandwidth_t::route_map_operation_type_delete_is__link_bandwidth_t.bgp_asn_t"></span><span class="target" id="classeos_1_1route__map__link__bandwidth__t_1ab39ced573dcfce905f3e2e3b49d71f8b"></span>void <code class="sig-name descname">route_map_operation_type_delete_is</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos16link_bandwidth_tE" title="eos::link_bandwidth_t">link_bandwidth_t</a> <em>bandwidth</em>, <a class="reference internal" href="bgp.html#_CPPv4N3eos9bgp_asn_tE" title="eos::bgp_asn_t">bgp_asn_t</a> <em>asn</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos26route_map_link_bandwidth_t34route_map_operation_type_delete_isE16link_bandwidth_t9bgp_asn_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos26route_map_link_bandwidth_teqERK26route_map_link_bandwidth_t">
+<span id="_CPPv3NK3eos26route_map_link_bandwidth_teqERK26route_map_link_bandwidth_t"></span><span id="_CPPv2NK3eos26route_map_link_bandwidth_teqERK26route_map_link_bandwidth_t"></span><span id="eos::route_map_link_bandwidth_t::eq-operator__route_map_link_bandwidth_tCRC"></span><span class="target" id="classeos_1_1route__map__link__bandwidth__t_1afc4aa25edbfefa97a958bf0c08a9c055"></span>bool <code class="sig-name descname">operator==</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos26route_map_link_bandwidth_tE" title="eos::route_map_link_bandwidth_t">route_map_link_bandwidth_t</a> <em class="property">const</em> &amp;<em>other</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos26route_map_link_bandwidth_teqERK26route_map_link_bandwidth_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos26route_map_link_bandwidth_tneERK26route_map_link_bandwidth_t">
+<span id="_CPPv3NK3eos26route_map_link_bandwidth_tneERK26route_map_link_bandwidth_t"></span><span id="_CPPv2NK3eos26route_map_link_bandwidth_tneERK26route_map_link_bandwidth_t"></span><span id="eos::route_map_link_bandwidth_t::neq-operator__route_map_link_bandwidth_tCRC"></span><span class="target" id="classeos_1_1route__map__link__bandwidth__t_1ad4b529599f8f87578a0268ac8ffef253"></span>bool <code class="sig-name descname">operator!=</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos26route_map_link_bandwidth_tE" title="eos::route_map_link_bandwidth_t">route_map_link_bandwidth_t</a> <em class="property">const</em> &amp;<em>other</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos26route_map_link_bandwidth_tneERK26route_map_link_bandwidth_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos26route_map_link_bandwidth_tltERK26route_map_link_bandwidth_t">
+<span id="_CPPv3NK3eos26route_map_link_bandwidth_tltERK26route_map_link_bandwidth_t"></span><span id="_CPPv2NK3eos26route_map_link_bandwidth_tltERK26route_map_link_bandwidth_t"></span><span id="eos::route_map_link_bandwidth_t::lt-operator__route_map_link_bandwidth_tCRC"></span><span class="target" id="classeos_1_1route__map__link__bandwidth__t_1ac81ec0dbce2aa2db107baadeda4f79ee"></span>bool <code class="sig-name descname">operator&lt;</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos26route_map_link_bandwidth_tE" title="eos::route_map_link_bandwidth_t">route_map_link_bandwidth_t</a> <em class="property">const</em> &amp;<em>other</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos26route_map_link_bandwidth_tltERK26route_map_link_bandwidth_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos26route_map_link_bandwidth_t4hashEv">
+<span id="_CPPv3NK3eos26route_map_link_bandwidth_t4hashEv"></span><span id="_CPPv2NK3eos26route_map_link_bandwidth_t4hashEv"></span><span id="eos::route_map_link_bandwidth_t::hashC"></span><span class="target" id="classeos_1_1route__map__link__bandwidth__t_1a4d6fd9b9a3a364bb33067ac17757b441"></span>uint32_t <code class="sig-name descname">hash</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos26route_map_link_bandwidth_t4hashEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>The hash function for type <a class="reference internal" href="#classeos_1_1route__map__link__bandwidth__t"><span class="std std-ref">route_map_link_bandwidth_t</span></a>. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos26route_map_link_bandwidth_t6mix_meER8hash_mix">
+<span id="_CPPv3NK3eos26route_map_link_bandwidth_t6mix_meER8hash_mix"></span><span id="_CPPv2NK3eos26route_map_link_bandwidth_t6mix_meER8hash_mix"></span><span id="eos::route_map_link_bandwidth_t::mix_me__hash_mixRC"></span><span class="target" id="classeos_1_1route__map__link__bandwidth__t_1adb29ce86dabf3cc6479917e97d5ee651"></span>void <code class="sig-name descname">mix_me</code><span class="sig-paren">(</span><a class="reference internal" href="hash_mix.html#_CPPv4N3eos8hash_mixE" title="eos::hash_mix">hash_mix</a> &amp;<em>h</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos26route_map_link_bandwidth_t6mix_meER8hash_mix" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>The hash mix function for type <a class="reference internal" href="#classeos_1_1route__map__link__bandwidth__t"><span class="std std-ref">route_map_link_bandwidth_t</span></a>. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos26route_map_link_bandwidth_t9to_stringEv">
+<span id="_CPPv3NK3eos26route_map_link_bandwidth_t9to_stringEv"></span><span id="_CPPv2NK3eos26route_map_link_bandwidth_t9to_stringEv"></span><span id="eos::route_map_link_bandwidth_t::to_stringC"></span><span class="target" id="classeos_1_1route__map__link__bandwidth__t_1ae63b2c853117ddec3691ea8e2ae4b71c"></span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::string <code class="sig-name descname">to_string</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos26route_map_link_bandwidth_t9to_stringEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Returns a string representation of the current object’s values. </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-private-members">Private Members</p>
+<dl class="cpp var">
+<dt id="_CPPv4N3eos26route_map_link_bandwidth_t5pimplE">
+<span id="_CPPv3N3eos26route_map_link_bandwidth_t5pimplE"></span><span id="_CPPv2N3eos26route_map_link_bandwidth_t5pimplE"></span><span id="eos::route_map_link_bandwidth_t::pimpl__std::shared_ptr:route_map_link_bandwidth_impl_t:"></span><span class="target" id="classeos_1_1route__map__link__bandwidth__t_1a7c70e17a0a518c92765c4e77cad55446"></span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::shared_ptr&lt;route_map_link_bandwidth_impl_t&gt; <code class="sig-name descname">pimpl</code><a class="headerlink" href="#_CPPv4N3eos26route_map_link_bandwidth_t5pimplE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-friends">Friends</p>
+<dl class="cpp function">
+<dt id="_CPPv4N3eos26route_map_link_bandwidth_tlsERNSt7ostreamERK26route_map_link_bandwidth_t">
+<span id="_CPPv3N3eos26route_map_link_bandwidth_tlsERNSt7ostreamERK26route_map_link_bandwidth_t"></span><span id="_CPPv2N3eos26route_map_link_bandwidth_tlsERNSt7ostreamERK26route_map_link_bandwidth_t"></span><span id="eos::route_map_link_bandwidth_t::lshift-operator__osR.route_map_link_bandwidth_tCR"></span><span class="target" id="classeos_1_1route__map__link__bandwidth__t_1ac2bdf904a82e65c842ac3168ae9d2069"></span><em class="property">friend</em> <a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::ostream &amp;<code class="sig-name descname">operator&lt;&lt;</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::ostream &amp;<em>os</em>, <em class="property">const</em> <a class="reference internal" href="#_CPPv4N3eos26route_map_link_bandwidth_tE" title="eos::route_map_link_bandwidth_t">route_map_link_bandwidth_t</a> &amp;<em>obj</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos26route_map_link_bandwidth_tlsERNSt7ostreamERK26route_map_link_bandwidth_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>A utility stream operator that adds a string representation of <a class="reference internal" href="#classeos_1_1route__map__link__bandwidth__t"><span class="std std-ref">route_map_link_bandwidth_t</span></a> to the ostream. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="cpp class">
+<dt id="_CPPv4N3eos17route_map_entry_tE">
+<span id="_CPPv3N3eos17route_map_entry_tE"></span><span id="_CPPv2N3eos17route_map_entry_tE"></span><span id="eos::route_map_entry_t"></span><span class="target" id="classeos_1_1route__map__entry__t"></span><em class="property">class </em><code class="sig-name descname">route_map_entry_t</code><a class="headerlink" href="#_CPPv4N3eos17route_map_entry_tE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><div class="docutils container">
+<em>#include &lt;route_map.h&gt;</em></div>
+<p>Route map entry sequence. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
+<dl class="cpp function">
+<dt id="_CPPv4N3eos17route_map_entry_t17route_map_entry_tEv">
+<span id="_CPPv3N3eos17route_map_entry_t17route_map_entry_tEv"></span><span id="_CPPv2N3eos17route_map_entry_t17route_map_entry_tEv"></span><span id="eos::route_map_entry_t::route_map_entry_t"></span><span class="target" id="classeos_1_1route__map__entry__t_1a9156ae2e793a74597051470bb7754794"></span><code class="sig-name descname">route_map_entry_t</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos17route_map_entry_t17route_map_entry_tEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos17route_map_entry_t17route_map_entry_tEb">
+<span id="_CPPv3N3eos17route_map_entry_t17route_map_entry_tEb"></span><span id="_CPPv2N3eos17route_map_entry_t17route_map_entry_tEb"></span><span id="eos::route_map_entry_t::route_map_entry_t__b"></span><span class="target" id="classeos_1_1route__map__entry__t_1a248b965e71df702a96ec6741982c6603"></span><em class="property">explicit</em> <code class="sig-name descname">route_map_entry_t</code><span class="sig-paren">(</span>bool <em>permit</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos17route_map_entry_t17route_map_entry_tEb" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos17route_map_entry_t17route_map_entry_tERK17route_map_entry_t">
+<span id="_CPPv3N3eos17route_map_entry_t17route_map_entry_tERK17route_map_entry_t"></span><span id="_CPPv2N3eos17route_map_entry_t17route_map_entry_tERK17route_map_entry_t"></span><span id="eos::route_map_entry_t::route_map_entry_t__route_map_entry_tCR"></span><span class="target" id="classeos_1_1route__map__entry__t_1a436cb6dbca3b356e7513b0a81795c2e3"></span><code class="sig-name descname">route_map_entry_t</code><span class="sig-paren">(</span><em class="property">const</em> <a class="reference internal" href="#_CPPv4N3eos17route_map_entry_t17route_map_entry_tERK17route_map_entry_t" title="eos::route_map_entry_t::route_map_entry_t">route_map_entry_t</a> &amp;<em>other</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos17route_map_entry_t17route_map_entry_tERK17route_map_entry_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos17route_map_entry_taSERK17route_map_entry_t">
+<span id="_CPPv3N3eos17route_map_entry_taSERK17route_map_entry_t"></span><span id="_CPPv2N3eos17route_map_entry_taSERK17route_map_entry_t"></span><span id="eos::route_map_entry_t::assign-operator__route_map_entry_tCR"></span><span class="target" id="classeos_1_1route__map__entry__t_1a1b09e51bb828b399ea879a5d7e414abf"></span><a class="reference internal" href="#_CPPv4N3eos17route_map_entry_tE" title="eos::route_map_entry_t">route_map_entry_t</a> &amp;<code class="sig-name descname">operator=</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos17route_map_entry_tE" title="eos::route_map_entry_t">route_map_entry_t</a> <em class="property">const</em> &amp;<em>other</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos17route_map_entry_taSERK17route_map_entry_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos17route_map_entry_t6permitEv">
+<span id="_CPPv3NK3eos17route_map_entry_t6permitEv"></span><span id="_CPPv2NK3eos17route_map_entry_t6permitEv"></span><span id="eos::route_map_entry_t::permitC"></span><span class="target" id="classeos_1_1route__map__entry__t_1a5ee6c3c51ca391a18924dfd6ae880a16"></span>bool <code class="sig-name descname">permit</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos17route_map_entry_t6permitEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Getter for ‘permit’: Permit sequence entry when true, deny otherwise. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos17route_map_entry_t9permit_isEb">
+<span id="_CPPv3N3eos17route_map_entry_t9permit_isEb"></span><span id="_CPPv2N3eos17route_map_entry_t9permit_isEb"></span><span id="eos::route_map_entry_t::permit_is__b"></span><span class="target" id="classeos_1_1route__map__entry__t_1a74cdf6b0b304905ea24c6de5d4233b20"></span>void <code class="sig-name descname">permit_is</code><span class="sig-paren">(</span>bool <em>permit</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos17route_map_entry_t9permit_isEb" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Setter for ‘permit’. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos17route_map_entry_t17continue_sequenceEv">
+<span id="_CPPv3NK3eos17route_map_entry_t17continue_sequenceEv"></span><span id="_CPPv2NK3eos17route_map_entry_t17continue_sequenceEv"></span><span id="eos::route_map_entry_t::continue_sequenceC"></span><span class="target" id="classeos_1_1route__map__entry__t_1a1276f44d81dc7aec75b39c1e9f988189"></span><a class="reference internal" href="#_CPPv4N3eos27route_map_sequence_number_tE" title="eos::route_map_sequence_number_t">route_map_sequence_number_t</a> <code class="sig-name descname">continue_sequence</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos17route_map_entry_t17continue_sequenceEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Getter for ‘continue_sequence’: Continue to a different map entry. Set to 0 for deletion. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos17route_map_entry_t20continue_sequence_isE27route_map_sequence_number_t">
+<span id="_CPPv3N3eos17route_map_entry_t20continue_sequence_isE27route_map_sequence_number_t"></span><span id="_CPPv2N3eos17route_map_entry_t20continue_sequence_isE27route_map_sequence_number_t"></span><span id="eos::route_map_entry_t::continue_sequence_is__route_map_sequence_number_t"></span><span class="target" id="classeos_1_1route__map__entry__t_1a991356a17a5c8d405fe34594163d712b"></span>void <code class="sig-name descname">continue_sequence_is</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos27route_map_sequence_number_tE" title="eos::route_map_sequence_number_t">route_map_sequence_number_t</a> <em>continue_sequence</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos17route_map_entry_t20continue_sequence_isE27route_map_sequence_number_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Setter for ‘continue_sequence’. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos17route_map_entry_t14link_bandwidthEv">
+<span id="_CPPv3NK3eos17route_map_entry_t14link_bandwidthEv"></span><span id="_CPPv2NK3eos17route_map_entry_t14link_bandwidthEv"></span><span id="eos::route_map_entry_t::link_bandwidthC"></span><span class="target" id="classeos_1_1route__map__entry__t_1a1c0d0605a14d179620ea3eca0afd100d"></span><a class="reference internal" href="#_CPPv4N3eos26route_map_link_bandwidth_tE" title="eos::route_map_link_bandwidth_t">route_map_link_bandwidth_t</a> <code class="sig-name descname">link_bandwidth</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos17route_map_entry_t14link_bandwidthEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Getter for ‘link_bandwidth’: BGP extended community link bandwidth attribute. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos17route_map_entry_t17link_bandwidth_isERK26route_map_link_bandwidth_t">
+<span id="_CPPv3N3eos17route_map_entry_t17link_bandwidth_isERK26route_map_link_bandwidth_t"></span><span id="_CPPv2N3eos17route_map_entry_t17link_bandwidth_isERK26route_map_link_bandwidth_t"></span><span id="eos::route_map_entry_t::link_bandwidth_is__route_map_link_bandwidth_tCR"></span><span class="target" id="classeos_1_1route__map__entry__t_1ad392dcda3c6d7639a7a0ea3c6ec331c1"></span>void <code class="sig-name descname">link_bandwidth_is</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos26route_map_link_bandwidth_tE" title="eos::route_map_link_bandwidth_t">route_map_link_bandwidth_t</a> <em class="property">const</em> &amp;<em>link_bandwidth</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos17route_map_entry_t17link_bandwidth_isERK26route_map_link_bandwidth_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Setter for ‘link_bandwidth’. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos17route_map_entry_t18link_bandwidth_delEv">
+<span id="_CPPv3N3eos17route_map_entry_t18link_bandwidth_delEv"></span><span id="_CPPv2N3eos17route_map_entry_t18link_bandwidth_delEv"></span><span id="eos::route_map_entry_t::link_bandwidth_del"></span><span class="target" id="classeos_1_1route__map__entry__t_1abed556cf7f75b080489ad5442d4ba389"></span>void <code class="sig-name descname">link_bandwidth_del</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos17route_map_entry_t18link_bandwidth_delEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Remove the link bandwidth configuration. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos17route_map_entry_teqERK17route_map_entry_t">
+<span id="_CPPv3NK3eos17route_map_entry_teqERK17route_map_entry_t"></span><span id="_CPPv2NK3eos17route_map_entry_teqERK17route_map_entry_t"></span><span id="eos::route_map_entry_t::eq-operator__route_map_entry_tCRC"></span><span class="target" id="classeos_1_1route__map__entry__t_1a3850ecdff75f4358b8c504906af80549"></span>bool <code class="sig-name descname">operator==</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos17route_map_entry_tE" title="eos::route_map_entry_t">route_map_entry_t</a> <em class="property">const</em> &amp;<em>other</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos17route_map_entry_teqERK17route_map_entry_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos17route_map_entry_tneERK17route_map_entry_t">
+<span id="_CPPv3NK3eos17route_map_entry_tneERK17route_map_entry_t"></span><span id="_CPPv2NK3eos17route_map_entry_tneERK17route_map_entry_t"></span><span id="eos::route_map_entry_t::neq-operator__route_map_entry_tCRC"></span><span class="target" id="classeos_1_1route__map__entry__t_1a59c3fcdca2e0fee78079a6038683e401"></span>bool <code class="sig-name descname">operator!=</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos17route_map_entry_tE" title="eos::route_map_entry_t">route_map_entry_t</a> <em class="property">const</em> &amp;<em>other</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos17route_map_entry_tneERK17route_map_entry_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos17route_map_entry_t4hashEv">
+<span id="_CPPv3NK3eos17route_map_entry_t4hashEv"></span><span id="_CPPv2NK3eos17route_map_entry_t4hashEv"></span><span id="eos::route_map_entry_t::hashC"></span><span class="target" id="classeos_1_1route__map__entry__t_1af962b9f090cb5e6635a4489f47838c10"></span>uint32_t <code class="sig-name descname">hash</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos17route_map_entry_t4hashEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>The hash function for type <a class="reference internal" href="#classeos_1_1route__map__entry__t"><span class="std std-ref">route_map_entry_t</span></a>. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos17route_map_entry_t6mix_meER8hash_mix">
+<span id="_CPPv3NK3eos17route_map_entry_t6mix_meER8hash_mix"></span><span id="_CPPv2NK3eos17route_map_entry_t6mix_meER8hash_mix"></span><span id="eos::route_map_entry_t::mix_me__hash_mixRC"></span><span class="target" id="classeos_1_1route__map__entry__t_1a32977b12f4e1e9f60fad48410e47947a"></span>void <code class="sig-name descname">mix_me</code><span class="sig-paren">(</span><a class="reference internal" href="hash_mix.html#_CPPv4N3eos8hash_mixE" title="eos::hash_mix">hash_mix</a> &amp;<em>h</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos17route_map_entry_t6mix_meER8hash_mix" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>The hash mix function for type <a class="reference internal" href="#classeos_1_1route__map__entry__t"><span class="std std-ref">route_map_entry_t</span></a>. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos17route_map_entry_t9to_stringEv">
+<span id="_CPPv3NK3eos17route_map_entry_t9to_stringEv"></span><span id="_CPPv2NK3eos17route_map_entry_t9to_stringEv"></span><span id="eos::route_map_entry_t::to_stringC"></span><span class="target" id="classeos_1_1route__map__entry__t_1a8c07241c96d489913527fd9d8d103b5b"></span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::string <code class="sig-name descname">to_string</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos17route_map_entry_t9to_stringEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Returns a string representation of the current object’s values. </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-private-members">Private Members</p>
+<dl class="cpp var">
+<dt id="_CPPv4N3eos17route_map_entry_t5pimplE">
+<span id="_CPPv3N3eos17route_map_entry_t5pimplE"></span><span id="_CPPv2N3eos17route_map_entry_t5pimplE"></span><span id="eos::route_map_entry_t::pimpl__std::shared_ptr:route_map_entry_impl_t:"></span><span class="target" id="classeos_1_1route__map__entry__t_1a384d2476ba7b0a84741cd9a9240c6210"></span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::shared_ptr&lt;route_map_entry_impl_t&gt; <code class="sig-name descname">pimpl</code><a class="headerlink" href="#_CPPv4N3eos17route_map_entry_t5pimplE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-friends">Friends</p>
+<dl class="cpp function">
+<dt id="_CPPv4N3eos17route_map_entry_tlsERNSt7ostreamERK17route_map_entry_t">
+<span id="_CPPv3N3eos17route_map_entry_tlsERNSt7ostreamERK17route_map_entry_t"></span><span id="_CPPv2N3eos17route_map_entry_tlsERNSt7ostreamERK17route_map_entry_t"></span><span id="eos::route_map_entry_t::lshift-operator__osR.route_map_entry_tCR"></span><span class="target" id="classeos_1_1route__map__entry__t_1afa4de19a0141f54ac4cf3d237a1eb67d"></span><em class="property">friend</em> <a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::ostream &amp;<code class="sig-name descname">operator&lt;&lt;</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::ostream &amp;<em>os</em>, <em class="property">const</em> <a class="reference internal" href="#_CPPv4N3eos17route_map_entry_tE" title="eos::route_map_entry_t">route_map_entry_t</a> &amp;<em>obj</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos17route_map_entry_tlsERNSt7ostreamERK17route_map_entry_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>A utility stream operator that adds a string representation of <a class="reference internal" href="#classeos_1_1route__map__entry__t"><span class="std std-ref">route_map_entry_t</span></a> to the ostream. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="cpp class">
+<dt id="_CPPv4N3eos11route_map_tE">
+<span id="_CPPv3N3eos11route_map_tE"></span><span id="_CPPv2N3eos11route_map_tE"></span><span id="eos::route_map_t"></span><span class="target" id="classeos_1_1route__map__t"></span><em class="property">class </em><code class="sig-name descname">route_map_t</code><a class="headerlink" href="#_CPPv4N3eos11route_map_tE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
+<dl class="cpp function">
+<dt id="_CPPv4N3eos11route_map_t11route_map_tEv">
+<span id="_CPPv3N3eos11route_map_t11route_map_tEv"></span><span id="_CPPv2N3eos11route_map_t11route_map_tEv"></span><span id="eos::route_map_t::route_map_t"></span><span class="target" id="classeos_1_1route__map__t_1a128f13d3ef8625cf5cba3522098262b1"></span><code class="sig-name descname">route_map_t</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos11route_map_t11route_map_tEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos11route_map_t11route_map_tERK11route_map_t">
+<span id="_CPPv3N3eos11route_map_t11route_map_tERK11route_map_t"></span><span id="_CPPv2N3eos11route_map_t11route_map_tERK11route_map_t"></span><span id="eos::route_map_t::route_map_t__route_map_tCR"></span><span class="target" id="classeos_1_1route__map__t_1a88230b7cf4419e90164c1d02ecc8221f"></span><code class="sig-name descname">route_map_t</code><span class="sig-paren">(</span><em class="property">const</em> <a class="reference internal" href="#_CPPv4N3eos11route_map_t11route_map_tERK11route_map_t" title="eos::route_map_t::route_map_t">route_map_t</a> &amp;<em>other</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos11route_map_t11route_map_tERK11route_map_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos11route_map_taSERK11route_map_t">
+<span id="_CPPv3N3eos11route_map_taSERK11route_map_t"></span><span id="_CPPv2N3eos11route_map_taSERK11route_map_t"></span><span id="eos::route_map_t::assign-operator__route_map_tCR"></span><span class="target" id="classeos_1_1route__map__t_1a5c2668f9c81826ee5b90e7527f646921"></span><a class="reference internal" href="#_CPPv4N3eos11route_map_tE" title="eos::route_map_t">route_map_t</a> &amp;<code class="sig-name descname">operator=</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos11route_map_tE" title="eos::route_map_t">route_map_t</a> <em class="property">const</em> &amp;<em>other</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos11route_map_taSERK11route_map_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos11route_map_t9map_entryEv">
+<span id="_CPPv3NK3eos11route_map_t9map_entryEv"></span><span id="_CPPv2NK3eos11route_map_t9map_entryEv"></span><span id="eos::route_map_t::map_entryC"></span><span class="target" id="classeos_1_1route__map__t_1a271d4c7153567d03bcbe8845ad0ea705"></span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::map&lt;<a class="reference internal" href="#_CPPv4N3eos27route_map_sequence_number_tE" title="eos::route_map_sequence_number_t">route_map_sequence_number_t</a>, <a class="reference internal" href="#_CPPv4N3eos17route_map_entry_tE" title="eos::route_map_entry_t">route_map_entry_t</a>&gt; <em class="property">const</em> &amp;<code class="sig-name descname">map_entry</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos11route_map_t9map_entryEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Getter for ‘map_entry’: A map of route map entries, keyed by sequence number. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos11route_map_t12map_entry_isERKNSt3mapI27route_map_sequence_number_t17route_map_entry_tEE">
+<span id="_CPPv3N3eos11route_map_t12map_entry_isERKNSt3mapI27route_map_sequence_number_t17route_map_entry_tEE"></span><span id="_CPPv2N3eos11route_map_t12map_entry_isERKNSt3mapI27route_map_sequence_number_t17route_map_entry_tEE"></span><span id="eos::route_map_t::map_entry_is__std::map:route_map_sequence_number_t.route_map_entry_t:CR"></span><span class="target" id="classeos_1_1route__map__t_1a6f4ac4389c933ab222c6b2905528fb4a"></span>void <code class="sig-name descname">map_entry_is</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::map&lt;<a class="reference internal" href="#_CPPv4N3eos27route_map_sequence_number_tE" title="eos::route_map_sequence_number_t">route_map_sequence_number_t</a>, <a class="reference internal" href="#_CPPv4N3eos17route_map_entry_tE" title="eos::route_map_entry_t">route_map_entry_t</a>&gt; <em class="property">const</em> &amp;<em>map_entry</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos11route_map_t12map_entry_isERKNSt3mapI27route_map_sequence_number_t17route_map_entry_tEE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Setter for ‘map_entry’. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos11route_map_t13map_entry_setERK27route_map_sequence_number_tRK17route_map_entry_t">
+<span id="_CPPv3N3eos11route_map_t13map_entry_setERK27route_map_sequence_number_tRK17route_map_entry_t"></span><span id="_CPPv2N3eos11route_map_t13map_entry_setERK27route_map_sequence_number_tRK17route_map_entry_t"></span><span id="eos::route_map_t::map_entry_set__route_map_sequence_number_tCR.route_map_entry_tCR"></span><span class="target" id="classeos_1_1route__map__t_1a2dcc3bcc09cccefe5c184948bf79a5f1"></span>void <code class="sig-name descname">map_entry_set</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos27route_map_sequence_number_tE" title="eos::route_map_sequence_number_t">route_map_sequence_number_t</a> <em class="property">const</em> &amp;<em>key</em>, <a class="reference internal" href="#_CPPv4N3eos17route_map_entry_tE" title="eos::route_map_entry_t">route_map_entry_t</a> <em class="property">const</em> &amp;<em>value</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos11route_map_t13map_entry_setERK27route_map_sequence_number_tRK17route_map_entry_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Inserts key/value pair to the map. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos11route_map_t13map_entry_delERK27route_map_sequence_number_t">
+<span id="_CPPv3N3eos11route_map_t13map_entry_delERK27route_map_sequence_number_t"></span><span id="_CPPv2N3eos11route_map_t13map_entry_delERK27route_map_sequence_number_t"></span><span id="eos::route_map_t::map_entry_del__route_map_sequence_number_tCR"></span><span class="target" id="classeos_1_1route__map__t_1ab9ec722a5667a06bb6d385982d7af385"></span>void <code class="sig-name descname">map_entry_del</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos27route_map_sequence_number_tE" title="eos::route_map_sequence_number_t">route_map_sequence_number_t</a> <em class="property">const</em> &amp;<em>key</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos11route_map_t13map_entry_delERK27route_map_sequence_number_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Deletes the key/value pair from the map. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos11route_map_teqERK11route_map_t">
+<span id="_CPPv3NK3eos11route_map_teqERK11route_map_t"></span><span id="_CPPv2NK3eos11route_map_teqERK11route_map_t"></span><span id="eos::route_map_t::eq-operator__route_map_tCRC"></span><span class="target" id="classeos_1_1route__map__t_1a3155793c21b81cf5131829baef32974d"></span>bool <code class="sig-name descname">operator==</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos11route_map_tE" title="eos::route_map_t">route_map_t</a> <em class="property">const</em> &amp;<em>other</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos11route_map_teqERK11route_map_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos11route_map_tneERK11route_map_t">
+<span id="_CPPv3NK3eos11route_map_tneERK11route_map_t"></span><span id="_CPPv2NK3eos11route_map_tneERK11route_map_t"></span><span id="eos::route_map_t::neq-operator__route_map_tCRC"></span><span class="target" id="classeos_1_1route__map__t_1af406543ffc0907c29c93b554030318b5"></span>bool <code class="sig-name descname">operator!=</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos11route_map_tE" title="eos::route_map_t">route_map_t</a> <em class="property">const</em> &amp;<em>other</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos11route_map_tneERK11route_map_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos11route_map_t4hashEv">
+<span id="_CPPv3NK3eos11route_map_t4hashEv"></span><span id="_CPPv2NK3eos11route_map_t4hashEv"></span><span id="eos::route_map_t::hashC"></span><span class="target" id="classeos_1_1route__map__t_1ac913b044721957bec465a9d7b143cfcc"></span>uint32_t <code class="sig-name descname">hash</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos11route_map_t4hashEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>The hash function for type <a class="reference internal" href="#classeos_1_1route__map__t"><span class="std std-ref">route_map_t</span></a>. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos11route_map_t6mix_meER8hash_mix">
+<span id="_CPPv3NK3eos11route_map_t6mix_meER8hash_mix"></span><span id="_CPPv2NK3eos11route_map_t6mix_meER8hash_mix"></span><span id="eos::route_map_t::mix_me__hash_mixRC"></span><span class="target" id="classeos_1_1route__map__t_1a96efdee05c3aabd5d0cdc871e1bf8b25"></span>void <code class="sig-name descname">mix_me</code><span class="sig-paren">(</span><a class="reference internal" href="hash_mix.html#_CPPv4N3eos8hash_mixE" title="eos::hash_mix">hash_mix</a> &amp;<em>h</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos11route_map_t6mix_meER8hash_mix" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>The hash mix function for type <a class="reference internal" href="#classeos_1_1route__map__t"><span class="std std-ref">route_map_t</span></a>. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos11route_map_t9to_stringEv">
+<span id="_CPPv3NK3eos11route_map_t9to_stringEv"></span><span id="_CPPv2NK3eos11route_map_t9to_stringEv"></span><span id="eos::route_map_t::to_stringC"></span><span class="target" id="classeos_1_1route__map__t_1a02a08b738876135dca293f561d2e43ae"></span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::string <code class="sig-name descname">to_string</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos11route_map_t9to_stringEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Returns a string representation of the current object’s values. </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-private-members">Private Members</p>
+<dl class="cpp var">
+<dt id="_CPPv4N3eos11route_map_t5pimplE">
+<span id="_CPPv3N3eos11route_map_t5pimplE"></span><span id="_CPPv2N3eos11route_map_t5pimplE"></span><span id="eos::route_map_t::pimpl__std::shared_ptr:route_map_impl_t:"></span><span class="target" id="classeos_1_1route__map__t_1a2e6071904678fd9ba8dc013b92c071f4"></span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::shared_ptr&lt;route_map_impl_t&gt; <code class="sig-name descname">pimpl</code><a class="headerlink" href="#_CPPv4N3eos11route_map_t5pimplE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-friends">Friends</p>
+<dl class="cpp function">
+<dt id="_CPPv4N3eos11route_map_tlsERNSt7ostreamERK11route_map_t">
+<span id="_CPPv3N3eos11route_map_tlsERNSt7ostreamERK11route_map_t"></span><span id="_CPPv2N3eos11route_map_tlsERNSt7ostreamERK11route_map_t"></span><span id="eos::route_map_t::lshift-operator__osR.route_map_tCR"></span><span class="target" id="classeos_1_1route__map__t_1a4a3286d165e927b5dd9defc5dd2c99b8"></span><em class="property">friend</em> <a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::ostream &amp;<code class="sig-name descname">operator&lt;&lt;</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::ostream &amp;<em>os</em>, <em class="property">const</em> <a class="reference internal" href="#_CPPv4N3eos11route_map_tE" title="eos::route_map_t">route_map_t</a> &amp;<em>obj</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos11route_map_tlsERNSt7ostreamERK11route_map_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>A utility stream operator that adds a string representation of <a class="reference internal" href="#classeos_1_1route__map__t"><span class="std std-ref">route_map_t</span></a> to the ostream. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#"><strong>route_map</strong></a><ul>
+<li><a class="reference internal" href="#type-definitions-in-route-map">Type definitions in <strong>route_map</strong></a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="policy_map.html"
+                        title="previous chapter"><strong>policy_map</strong></a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="sdk.html"
+                        title="next chapter"><strong>sdk</strong></a></p>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="sdk.html" title="sdk"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="policy_map.html" title="policy_map"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Arista EOS SDK 2.22.4 reference</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href=""><strong>route_map</strong></a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2014, Arista Networks.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.4.3.
+    </div>
+  </body>
+</html>

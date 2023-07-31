@@ -1,0 +1,1188 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>bfd &#8212; Arista EOS SDK 2.22.4 reference</title>
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/eossdk.css" type="text/css" />
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="bgp" href="bgp.html" />
+    <link rel="prev" title="base_mgr" href="base_mgr.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="bgp.html" title="bgp"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="base_mgr.html" title="base_mgr"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Arista EOS SDK 2.22.4 reference</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href=""><strong>bfd</strong></a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="bfd">
+<h1><strong>bfd</strong><a class="headerlink" href="#bfd" title="Permalink to this headline">¶</a></h1>
+<p>The bfd module manages BFD sessions</p>
+<p>Bi-directional Forwarding Detection (BFD) is a low-latency protocol designed to detect faults between two forwarding planes. The protocol itself is independent from media, link and routing protocols. In EOS, BFD is implemented on top of IP encapuslations, conforming to RFC5881.</p>
+<p>This module provides APIs to provision BFD. APIs include<ul class="simple">
+<li><p>BFD session creation</p></li>
+<li><p>BFD session getter</p></li>
+<li><p>BFD session deletion</p></li>
+<li><p>BFD global interval timers setter/getter</p></li>
+<li><p>BFD interface timers setter/getter</p></li>
+<li><p>BFD session status getter</p></li>
+</ul>
+</p>
+<p>An iterator is also provided to iterate through all BFD sessions that are configured via EosSdk in the system. </p>
+<dl class="cpp type">
+<dt id="_CPPv43eos">
+<span id="_CPPv33eos"></span><span id="_CPPv23eos"></span><span id="eos"></span><span class="target" id="namespaceeos"></span><em class="property">namespace </em><code class="sig-name descname">eos</code><br /></dt>
+<dd><dl class="cpp class">
+<dt id="_CPPv4N3eos19bfd_session_handlerE">
+<span id="_CPPv3N3eos19bfd_session_handlerE"></span><span id="_CPPv2N3eos19bfd_session_handlerE"></span><span id="eos::bfd_session_handler"></span><span class="target" id="classeos_1_1bfd__session__handler"></span><em class="property">class </em><code class="sig-name descname">bfd_session_handler</code> : <em class="property">public</em> <a class="reference internal" href="acl.html#_CPPv43eos" title="eos">eos</a>::<a class="reference internal" href="base_handler.html#_CPPv4I00EN3eos12base_handlerE" title="eos::base_handler">base_handler</a>&lt;<a class="reference internal" href="#_CPPv4N3eos15bfd_session_mgrE" title="eos::bfd_session_mgr">bfd_session_mgr</a>, <a class="reference internal" href="#_CPPv4N3eos19bfd_session_handlerE" title="eos::bfd_session_handler">bfd_session_handler</a>&gt;<a class="headerlink" href="#_CPPv4N3eos19bfd_session_handlerE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><div class="docutils container">
+<em>#include &lt;bfd.h&gt;</em></div>
+<p>The BFD handler.</p>
+<p>This class provides handler APIs to react to a BFD’s session state change. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
+<dl class="cpp function">
+<dt id="_CPPv4N3eos19bfd_session_handler19bfd_session_handlerEP15bfd_session_mgr">
+<span id="_CPPv3N3eos19bfd_session_handler19bfd_session_handlerEP15bfd_session_mgr"></span><span id="_CPPv2N3eos19bfd_session_handler19bfd_session_handlerEP15bfd_session_mgr"></span><span id="eos::bfd_session_handler::bfd_session_handler__bfd_session_mgrP"></span><span class="target" id="classeos_1_1bfd__session__handler_1a388da87175ba9389c147088b7cfa70bb"></span><em class="property">explicit</em> <code class="sig-name descname">bfd_session_handler</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos15bfd_session_mgrE" title="eos::bfd_session_mgr">bfd_session_mgr</a> *<em>mgr</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos19bfd_session_handler19bfd_session_handlerEP15bfd_session_mgr" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos19bfd_session_handler19get_bfd_session_mgrEv">
+<span id="_CPPv3NK3eos19bfd_session_handler19get_bfd_session_mgrEv"></span><span id="_CPPv2NK3eos19bfd_session_handler19get_bfd_session_mgrEv"></span><span id="eos::bfd_session_handler::get_bfd_session_mgrC"></span><span class="target" id="classeos_1_1bfd__session__handler_1ab294900f506e8eb2964d79d8e4003ce5"></span><em class="property">inline</em> <a class="reference internal" href="#_CPPv4N3eos15bfd_session_mgrE" title="eos::bfd_session_mgr">bfd_session_mgr</a> *<code class="sig-name descname">get_bfd_session_mgr</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos19bfd_session_handler19get_bfd_session_mgrEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos19bfd_session_handler22watch_all_bfd_sessionsEb">
+<span id="_CPPv3N3eos19bfd_session_handler22watch_all_bfd_sessionsEb"></span><span id="_CPPv2N3eos19bfd_session_handler22watch_all_bfd_sessionsEb"></span><span id="eos::bfd_session_handler::watch_all_bfd_sessions__b"></span><span class="target" id="classeos_1_1bfd__session__handler_1a8826c6016f0ea2be0c5e2d089ae38323"></span>void <code class="sig-name descname">watch_all_bfd_sessions</code><span class="sig-paren">(</span>bool<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos19bfd_session_handler22watch_all_bfd_sessionsEb" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Registers this class to receive change updates on all BFD sessions.</p>
+<p>Expects a boolean signifying whether notifications should be generated for all BFD sessions created by EosSdk or not.</p>
+<p>This controls notifications on:<ul class="simple">
+<li><p><a class="reference internal" href="#classeos_1_1bfd__session__handler_1ae5142267cede4db98edc9d3c509853e1"><span class="std std-ref">on_bfd_session_status()</span></a></p></li>
+<li><p><a class="reference internal" href="#classeos_1_1bfd__session__handler_1a2aa871aaa7aabc86dcd17761e8a8569e"><span class="std std-ref">on_bfd_session_set()</span></a></p></li>
+<li><p><a class="reference internal" href="#classeos_1_1bfd__session__handler_1a585b7309b912021cde7f288dd0511bed"><span class="std std-ref">on_bfd_session_del()</span></a> </p></li>
+</ul>
+</p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos19bfd_session_handler17watch_bfd_sessionERK17bfd_session_key_tb">
+<span id="_CPPv3N3eos19bfd_session_handler17watch_bfd_sessionERK17bfd_session_key_tb"></span><span id="_CPPv2N3eos19bfd_session_handler17watch_bfd_sessionERK17bfd_session_key_tb"></span><span id="eos::bfd_session_handler::watch_bfd_session__bfd_session_key_tCR.b"></span><span class="target" id="classeos_1_1bfd__session__handler_1a8b50b9c49c04f0d99ca7533d0e016ab6"></span>void <code class="sig-name descname">watch_bfd_session</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos17bfd_session_key_tE" title="eos::bfd_session_key_t">bfd_session_key_t</a> <em class="property">const</em>&amp;, bool<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos19bfd_session_handler17watch_bfd_sessionERK17bfd_session_key_tb" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Registers this class to receive change updates on the given BFD session.</p>
+<p>Expects the session key of the corresponding BFD session and a boolean signifying whether notifications should be propagated to this BFD session or not. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos19bfd_session_handler21on_bfd_session_statusERK17bfd_session_key_t20bfd_session_status_t">
+<span id="_CPPv3N3eos19bfd_session_handler21on_bfd_session_statusERK17bfd_session_key_t20bfd_session_status_t"></span><span id="_CPPv2N3eos19bfd_session_handler21on_bfd_session_statusERK17bfd_session_key_t20bfd_session_status_t"></span><span id="eos::bfd_session_handler::on_bfd_session_status__bfd_session_key_tCR.bfd_session_status_t"></span><span class="target" id="classeos_1_1bfd__session__handler_1ae5142267cede4db98edc9d3c509853e1"></span><em class="property">virtual</em> void <code class="sig-name descname">on_bfd_session_status</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos17bfd_session_key_tE" title="eos::bfd_session_key_t">bfd_session_key_t</a> <em class="property">const</em>&amp;, <a class="reference internal" href="#_CPPv4N3eos20bfd_session_status_tE" title="eos::bfd_session_status_t">bfd_session_status_t</a><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos19bfd_session_handler21on_bfd_session_statusERK17bfd_session_key_t20bfd_session_status_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Handler called when the status of a BFD session status changes.</p>
+<p>Possible status are: BFD_SESSION_STATUS_NULL BFD_SESSION_STATUS_DOWN BFD_SESSION_STATUS_INIT BFD_SESSION_STATUS_UP BFD_SESSION_STATUS_ADMIN_DOWN </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos19bfd_session_handler18on_bfd_session_setERK17bfd_session_key_t">
+<span id="_CPPv3N3eos19bfd_session_handler18on_bfd_session_setERK17bfd_session_key_t"></span><span id="_CPPv2N3eos19bfd_session_handler18on_bfd_session_setERK17bfd_session_key_t"></span><span id="eos::bfd_session_handler::on_bfd_session_set__bfd_session_key_tCR"></span><span class="target" id="classeos_1_1bfd__session__handler_1a2aa871aaa7aabc86dcd17761e8a8569e"></span><em class="property">virtual</em> void <code class="sig-name descname">on_bfd_session_set</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos17bfd_session_key_tE" title="eos::bfd_session_key_t">bfd_session_key_t</a> <em class="property">const</em>&amp;<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos19bfd_session_handler18on_bfd_session_setERK17bfd_session_key_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Handler called when a BFD session is created </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos19bfd_session_handler18on_bfd_session_delERK17bfd_session_key_t">
+<span id="_CPPv3N3eos19bfd_session_handler18on_bfd_session_delERK17bfd_session_key_t"></span><span id="_CPPv2N3eos19bfd_session_handler18on_bfd_session_delERK17bfd_session_key_t"></span><span id="eos::bfd_session_handler::on_bfd_session_del__bfd_session_key_tCR"></span><span class="target" id="classeos_1_1bfd__session__handler_1a585b7309b912021cde7f288dd0511bed"></span><em class="property">virtual</em> void <code class="sig-name descname">on_bfd_session_del</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos17bfd_session_key_tE" title="eos::bfd_session_key_t">bfd_session_key_t</a> <em class="property">const</em>&amp;<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos19bfd_session_handler18on_bfd_session_delERK17bfd_session_key_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Handler called when a BFD session is deleted </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos19bfd_session_handler28watch_all_sbfd_echo_sessionsEb">
+<span id="_CPPv3N3eos19bfd_session_handler28watch_all_sbfd_echo_sessionsEb"></span><span id="_CPPv2N3eos19bfd_session_handler28watch_all_sbfd_echo_sessionsEb"></span><span id="eos::bfd_session_handler::watch_all_sbfd_echo_sessions__b"></span><span class="target" id="classeos_1_1bfd__session__handler_1aa5bff26bb05a5bd46500c9ff1c75d917"></span>void <code class="sig-name descname">watch_all_sbfd_echo_sessions</code><span class="sig-paren">(</span>bool<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos19bfd_session_handler28watch_all_sbfd_echo_sessionsEb" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Registers this class to receive change updates on all sBFD echo sessions created by EosSdk.</p>
+<p>Expects a boolean signifying whether notifications should be generated for all sBFD echo sessions created by EosSdk or not.</p>
+<p>This controls notifications on:<ul class="simple">
+<li><p><a class="reference internal" href="#classeos_1_1bfd__session__handler_1aefe3fa15167451f07076cfcba11f1a1f"><span class="std std-ref">on_sbfd_echo_session_status()</span></a></p></li>
+<li><p><a class="reference internal" href="#classeos_1_1bfd__session__handler_1a8646e3343b09779f5e87420f7fd1d1d1"><span class="std std-ref">on_sbfd_echo_session_set()</span></a></p></li>
+<li><p><a class="reference internal" href="#classeos_1_1bfd__session__handler_1a58fdfb0bab47b6f14de87ea5e36a0032"><span class="std std-ref">on_sbfd_echo_session_del()</span></a> </p></li>
+</ul>
+</p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos19bfd_session_handler23watch_sbfd_echo_sessionERK23sbfd_echo_session_key_tb">
+<span id="_CPPv3N3eos19bfd_session_handler23watch_sbfd_echo_sessionERK23sbfd_echo_session_key_tb"></span><span id="_CPPv2N3eos19bfd_session_handler23watch_sbfd_echo_sessionERK23sbfd_echo_session_key_tb"></span><span id="eos::bfd_session_handler::watch_sbfd_echo_session__sbfd_echo_session_key_tCR.b"></span><span class="target" id="classeos_1_1bfd__session__handler_1aaa64cf2ddf7cc71e79198a4f9f061b36"></span>void <code class="sig-name descname">watch_sbfd_echo_session</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos23sbfd_echo_session_key_tE" title="eos::sbfd_echo_session_key_t">sbfd_echo_session_key_t</a> <em class="property">const</em>&amp;, bool<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos19bfd_session_handler23watch_sbfd_echo_sessionERK23sbfd_echo_session_key_tb" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Registers this class to receive change updates on the given sBFD echo session.</p>
+<p>Expects the session key of the corresponding sBFD echo session. and a boolean signifying whether notifications should be propagated to this sBFD echo session or not. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos19bfd_session_handler27on_sbfd_echo_session_statusERK23sbfd_echo_session_key_t20bfd_session_status_t">
+<span id="_CPPv3N3eos19bfd_session_handler27on_sbfd_echo_session_statusERK23sbfd_echo_session_key_t20bfd_session_status_t"></span><span id="_CPPv2N3eos19bfd_session_handler27on_sbfd_echo_session_statusERK23sbfd_echo_session_key_t20bfd_session_status_t"></span><span id="eos::bfd_session_handler::on_sbfd_echo_session_status__sbfd_echo_session_key_tCR.bfd_session_status_t"></span><span class="target" id="classeos_1_1bfd__session__handler_1aefe3fa15167451f07076cfcba11f1a1f"></span><em class="property">virtual</em> void <code class="sig-name descname">on_sbfd_echo_session_status</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos23sbfd_echo_session_key_tE" title="eos::sbfd_echo_session_key_t">sbfd_echo_session_key_t</a> <em class="property">const</em>&amp;, <a class="reference internal" href="#_CPPv4N3eos20bfd_session_status_tE" title="eos::bfd_session_status_t">bfd_session_status_t</a><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos19bfd_session_handler27on_sbfd_echo_session_statusERK23sbfd_echo_session_key_t20bfd_session_status_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Handler called when the status of a sBFD echo session status changes.</p>
+<p>Possible status are: BFD_SESSION_STATUS_NULL BFD_SESSION_STATUS_DOWN BFD_SESSION_STATUS_INIT BFD_SESSION_STATUS_UP BFD_SESSION_STATUS_ADMIN_DOWN </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos19bfd_session_handler24on_sbfd_echo_session_setERK23sbfd_echo_session_key_t">
+<span id="_CPPv3N3eos19bfd_session_handler24on_sbfd_echo_session_setERK23sbfd_echo_session_key_t"></span><span id="_CPPv2N3eos19bfd_session_handler24on_sbfd_echo_session_setERK23sbfd_echo_session_key_t"></span><span id="eos::bfd_session_handler::on_sbfd_echo_session_set__sbfd_echo_session_key_tCR"></span><span class="target" id="classeos_1_1bfd__session__handler_1a8646e3343b09779f5e87420f7fd1d1d1"></span><em class="property">virtual</em> void <code class="sig-name descname">on_sbfd_echo_session_set</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos23sbfd_echo_session_key_tE" title="eos::sbfd_echo_session_key_t">sbfd_echo_session_key_t</a> <em class="property">const</em>&amp;<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos19bfd_session_handler24on_sbfd_echo_session_setERK23sbfd_echo_session_key_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Handler called when a sBFD echo session is created. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos19bfd_session_handler24on_sbfd_echo_session_delERK23sbfd_echo_session_key_t">
+<span id="_CPPv3N3eos19bfd_session_handler24on_sbfd_echo_session_delERK23sbfd_echo_session_key_t"></span><span id="_CPPv2N3eos19bfd_session_handler24on_sbfd_echo_session_delERK23sbfd_echo_session_key_t"></span><span id="eos::bfd_session_handler::on_sbfd_echo_session_del__sbfd_echo_session_key_tCR"></span><span class="target" id="classeos_1_1bfd__session__handler_1a58fdfb0bab47b6f14de87ea5e36a0032"></span><em class="property">virtual</em> void <code class="sig-name descname">on_sbfd_echo_session_del</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos23sbfd_echo_session_key_tE" title="eos::sbfd_echo_session_key_t">sbfd_echo_session_key_t</a> <em class="property">const</em>&amp;<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos19bfd_session_handler24on_sbfd_echo_session_delERK23sbfd_echo_session_key_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Handler called when a sBFD echo session is deleted. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos19bfd_session_handler24on_sbfd_echo_session_rttERK23sbfd_echo_session_key_tRK29sbfd_echo_session_rtt_stats_t">
+<span id="_CPPv3N3eos19bfd_session_handler24on_sbfd_echo_session_rttERK23sbfd_echo_session_key_tRK29sbfd_echo_session_rtt_stats_t"></span><span id="_CPPv2N3eos19bfd_session_handler24on_sbfd_echo_session_rttERK23sbfd_echo_session_key_tRK29sbfd_echo_session_rtt_stats_t"></span><span id="eos::bfd_session_handler::on_sbfd_echo_session_rtt__sbfd_echo_session_key_tCR.sbfd_echo_session_rtt_stats_tCR"></span><span class="target" id="classeos_1_1bfd__session__handler_1a66fd471770dcfc797bc462bf3377d8b4"></span><em class="property">virtual</em> void <code class="sig-name descname">on_sbfd_echo_session_rtt</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos23sbfd_echo_session_key_tE" title="eos::sbfd_echo_session_key_t">sbfd_echo_session_key_t</a> <em class="property">const</em>&amp;, <a class="reference internal" href="#_CPPv4N3eos29sbfd_echo_session_rtt_stats_tE" title="eos::sbfd_echo_session_rtt_stats_t">sbfd_echo_session_rtt_stats_t</a> <em class="property">const</em>&amp;<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos19bfd_session_handler24on_sbfd_echo_session_rttERK23sbfd_echo_session_key_tRK29sbfd_echo_session_rtt_stats_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Handler called periodically for sBFD echo sessions where RTT statistics have been enabled with sbfd_echo_rtt_enabled_set. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="cpp class">
+<dt id="_CPPv4N3eos18bfd_session_iter_tE">
+<span id="_CPPv3N3eos18bfd_session_iter_tE"></span><span id="_CPPv2N3eos18bfd_session_iter_tE"></span><span id="eos::bfd_session_iter_t"></span><span class="target" id="classeos_1_1bfd__session__iter__t"></span><em class="property">class </em><code class="sig-name descname">bfd_session_iter_t</code> : <em class="property">public</em> <a class="reference internal" href="acl.html#_CPPv43eos" title="eos">eos</a>::<a class="reference internal" href="iterator.html#_CPPv4I00EN3eos9iter_baseE" title="eos::iter_base">iter_base</a>&lt;<a class="reference internal" href="#_CPPv4N3eos17bfd_session_key_tE" title="eos::bfd_session_key_t">bfd_session_key_t</a>, bfd_session_iter_impl&gt;<a class="headerlink" href="#_CPPv4N3eos18bfd_session_iter_tE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><div class="docutils container">
+<em>#include &lt;bfd.h&gt;</em></div>
+<p>An iterator that yields an <a class="reference internal" href="#classeos_1_1bfd__session__key__t"><span class="std std-ref">bfd_session_key_t</span></a> for each configured BFD session </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-private-functions">Private Functions</p>
+<dl class="cpp function">
+<dt id="_CPPv4N3eos18bfd_session_iter_t18bfd_session_iter_tEPC21bfd_session_iter_impl">
+<span id="_CPPv3N3eos18bfd_session_iter_t18bfd_session_iter_tEPC21bfd_session_iter_impl"></span><span id="_CPPv2N3eos18bfd_session_iter_t18bfd_session_iter_tEPC21bfd_session_iter_impl"></span><span id="eos::bfd_session_iter_t::bfd_session_iter_t__bfd_session_iter_implPC"></span><span class="target" id="classeos_1_1bfd__session__iter__t_1af616ee8039d2e3f6bac2101d7310fd0f"></span><em class="property">explicit</em> <code class="sig-name descname">bfd_session_iter_t</code><span class="sig-paren">(</span>bfd_session_iter_impl*<em class="property">const</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos18bfd_session_iter_t18bfd_session_iter_tEPC21bfd_session_iter_impl" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-friends">Friends</p>
+<dl class="friendclass">
+<dt>
+<em class="property">friend class</em> bfd_session_iter_impl</dt>
+</dl>
+
+</div>
+</dd></dl>
+
+<dl class="cpp class">
+<dt id="_CPPv4N3eos24sbfd_echo_session_iter_tE">
+<span id="_CPPv3N3eos24sbfd_echo_session_iter_tE"></span><span id="_CPPv2N3eos24sbfd_echo_session_iter_tE"></span><span id="eos::sbfd_echo_session_iter_t"></span><span class="target" id="classeos_1_1sbfd__echo__session__iter__t"></span><em class="property">class </em><code class="sig-name descname">sbfd_echo_session_iter_t</code> : <em class="property">public</em> <a class="reference internal" href="acl.html#_CPPv43eos" title="eos">eos</a>::<a class="reference internal" href="iterator.html#_CPPv4I00EN3eos9iter_baseE" title="eos::iter_base">iter_base</a>&lt;<a class="reference internal" href="#_CPPv4N3eos23sbfd_echo_session_key_tE" title="eos::sbfd_echo_session_key_t">sbfd_echo_session_key_t</a>, sbfd_echo_session_iter_impl&gt;<a class="headerlink" href="#_CPPv4N3eos24sbfd_echo_session_iter_tE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><div class="docutils container">
+<em>#include &lt;bfd.h&gt;</em></div>
+<p>An iterator that yields an <a class="reference internal" href="#classeos_1_1sbfd__echo__session__key__t"><span class="std std-ref">sbfd_echo_session_key_t</span></a> for each configured sBFD echo session </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-private-functions">Private Functions</p>
+<dl class="cpp function">
+<dt id="_CPPv4N3eos24sbfd_echo_session_iter_t24sbfd_echo_session_iter_tEPC27sbfd_echo_session_iter_impl">
+<span id="_CPPv3N3eos24sbfd_echo_session_iter_t24sbfd_echo_session_iter_tEPC27sbfd_echo_session_iter_impl"></span><span id="_CPPv2N3eos24sbfd_echo_session_iter_t24sbfd_echo_session_iter_tEPC27sbfd_echo_session_iter_impl"></span><span id="eos::sbfd_echo_session_iter_t::sbfd_echo_session_iter_t__sbfd_echo_session_iter_implPC"></span><span class="target" id="classeos_1_1sbfd__echo__session__iter__t_1a1905dbe0118233e2e03da44aa9239945"></span><em class="property">explicit</em> <code class="sig-name descname">sbfd_echo_session_iter_t</code><span class="sig-paren">(</span>sbfd_echo_session_iter_impl*<em class="property">const</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos24sbfd_echo_session_iter_t24sbfd_echo_session_iter_tEPC27sbfd_echo_session_iter_impl" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-friends">Friends</p>
+<dl class="friendclass">
+<dt>
+<em class="property">friend class</em> sbfd_echo_session_iter_impl</dt>
+</dl>
+
+</div>
+</dd></dl>
+
+<dl class="cpp class">
+<dt id="_CPPv4N3eos15bfd_session_mgrE">
+<span id="_CPPv3N3eos15bfd_session_mgrE"></span><span id="_CPPv2N3eos15bfd_session_mgrE"></span><span id="eos::bfd_session_mgr"></span><span class="target" id="classeos_1_1bfd__session__mgr"></span><em class="property">class </em><code class="sig-name descname">bfd_session_mgr</code> : <em class="property">public</em> <a class="reference internal" href="acl.html#_CPPv43eos" title="eos">eos</a>::<a class="reference internal" href="base_mgr.html#_CPPv4I00EN3eos8base_mgrE" title="eos::base_mgr">base_mgr</a>&lt;<a class="reference internal" href="#_CPPv4N3eos19bfd_session_handlerE" title="eos::bfd_session_handler">bfd_session_handler</a>, <a class="reference internal" href="#_CPPv4N3eos17bfd_session_key_tE" title="eos::bfd_session_key_t">bfd_session_key_t</a>&gt;<a class="headerlink" href="#_CPPv4N3eos15bfd_session_mgrE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><div class="docutils container">
+<em>#include &lt;bfd.h&gt;</em></div>
+<p>A manager of BFD session configurations for EosSdk client</p>
+<p>Create one of these via an sdk object prior to starting the agent main loop. When your <a class="reference internal" href="agent.html#classeos_1_1agent__handler_1ad558b16ee9a283bd9b153400743c4b1c"><span class="std std-ref">eos::agent_handler::on_initialized</span></a> virtual function is called, the manager is valid for use. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
+<dl class="cpp function">
+<dt id="_CPPv4N3eos15bfd_session_mgrD0Ev">
+<span id="_CPPv3N3eos15bfd_session_mgrD0Ev"></span><span id="_CPPv2N3eos15bfd_session_mgrD0Ev"></span><span id="eos::bfd_session_mgr::~bfd_session_mgr"></span><span class="target" id="classeos_1_1bfd__session__mgr_1ae8bd674608f3d2c4324650692fb304ed"></span><em class="property">virtual</em> <code class="sig-name descname">~bfd_session_mgr</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos15bfd_session_mgrD0Ev" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos15bfd_session_mgr12session_iterEv">
+<span id="_CPPv3NK3eos15bfd_session_mgr12session_iterEv"></span><span id="_CPPv2NK3eos15bfd_session_mgr12session_iterEv"></span><span id="eos::bfd_session_mgr::session_iterC"></span><span class="target" id="classeos_1_1bfd__session__mgr_1a3ee8b0672df12a30ddd14cb9348581ed"></span><em class="property">virtual</em> <a class="reference internal" href="#_CPPv4N3eos18bfd_session_iter_tE" title="eos::bfd_session_iter_t">bfd_session_iter_t</a> <code class="sig-name descname">session_iter</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em> = 0<a class="headerlink" href="#_CPPv4NK3eos15bfd_session_mgr12session_iterEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Returns an iterator over all BFD sessions configured through EosSdk on the system. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos15bfd_session_mgr6existsERK17bfd_session_key_t">
+<span id="_CPPv3NK3eos15bfd_session_mgr6existsERK17bfd_session_key_t"></span><span id="_CPPv2NK3eos15bfd_session_mgr6existsERK17bfd_session_key_t"></span><span id="eos::bfd_session_mgr::exists__bfd_session_key_tCRC"></span><span class="target" id="classeos_1_1bfd__session__mgr_1ae73b829970abac4417fbdeaee3bb823f"></span><em class="property">virtual</em> bool <code class="sig-name descname">exists</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos17bfd_session_key_tE" title="eos::bfd_session_key_t">bfd_session_key_t</a> <em class="property">const</em>&amp;<span class="sig-paren">)</span> <em class="property">const</em> = 0<a class="headerlink" href="#_CPPv4NK3eos15bfd_session_mgr6existsERK17bfd_session_key_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Return true if the BFD session is configured. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos15bfd_session_mgr11session_setERK17bfd_session_key_t">
+<span id="_CPPv3N3eos15bfd_session_mgr11session_setERK17bfd_session_key_t"></span><span id="_CPPv2N3eos15bfd_session_mgr11session_setERK17bfd_session_key_t"></span><span id="eos::bfd_session_mgr::session_set__bfd_session_key_tCR"></span><span class="target" id="classeos_1_1bfd__session__mgr_1afb45e7e980221287e43f254d94126d9e"></span><em class="property">virtual</em> void <code class="sig-name descname">session_set</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos17bfd_session_key_tE" title="eos::bfd_session_key_t">bfd_session_key_t</a> <em class="property">const</em>&amp;<span class="sig-paren">)</span> = 0<a class="headerlink" href="#_CPPv4N3eos15bfd_session_mgr11session_setERK17bfd_session_key_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Creates a BFD session. If an existing session has already been created by other client (i.e. BGP, OSPF), no new BFD session will be created. Instead, EsoSdk will be added to the list of clients that will receive BFD session status change notifications. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos15bfd_session_mgr7sessionERK17bfd_session_key_t">
+<span id="_CPPv3NK3eos15bfd_session_mgr7sessionERK17bfd_session_key_t"></span><span id="_CPPv2NK3eos15bfd_session_mgr7sessionERK17bfd_session_key_t"></span><span id="eos::bfd_session_mgr::session__bfd_session_key_tCRC"></span><span class="target" id="classeos_1_1bfd__session__mgr_1a211d1e6be882387f0f58e0bcb4fe8769"></span><em class="property">virtual</em> <a class="reference internal" href="#_CPPv4N3eos13bfd_session_tE" title="eos::bfd_session_t">bfd_session_t</a> <code class="sig-name descname">session</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos17bfd_session_key_tE" title="eos::bfd_session_key_t">bfd_session_key_t</a> <em class="property">const</em>&amp;<span class="sig-paren">)</span> <em class="property">const</em> = 0<a class="headerlink" href="#_CPPv4NK3eos15bfd_session_mgr7sessionERK17bfd_session_key_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Returns the BFD session with the specified key. Will return an empty <a class="reference internal" href="#classeos_1_1bfd__session__t"><span class="std std-ref">bfd_session_t</span></a> if the BFD session does not exist already. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos15bfd_session_mgr11session_delERK17bfd_session_key_t">
+<span id="_CPPv3N3eos15bfd_session_mgr11session_delERK17bfd_session_key_t"></span><span id="_CPPv2N3eos15bfd_session_mgr11session_delERK17bfd_session_key_t"></span><span id="eos::bfd_session_mgr::session_del__bfd_session_key_tCR"></span><span class="target" id="classeos_1_1bfd__session__mgr_1a600dc4bc28c1c82836ca1940bca1e2e5"></span><em class="property">virtual</em> void <code class="sig-name descname">session_del</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos17bfd_session_key_tE" title="eos::bfd_session_key_t">bfd_session_key_t</a> <em class="property">const</em>&amp;<span class="sig-paren">)</span> = 0<a class="headerlink" href="#_CPPv4N3eos15bfd_session_mgr11session_delERK17bfd_session_key_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Remove a BFD session if it exists. It is a no-op if the specified BFD session does not exist. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos15bfd_session_mgr19default_interval_isERK14bfd_interval_t">
+<span id="_CPPv3N3eos15bfd_session_mgr19default_interval_isERK14bfd_interval_t"></span><span id="_CPPv2N3eos15bfd_session_mgr19default_interval_isERK14bfd_interval_t"></span><span id="eos::bfd_session_mgr::default_interval_is__bfd_interval_tCR"></span><span class="target" id="classeos_1_1bfd__session__mgr_1a00e452eb6e42dfa335abc70b5e436102"></span><em class="property">virtual</em> void <code class="sig-name descname">default_interval_is</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos14bfd_interval_tE" title="eos::bfd_interval_t">bfd_interval_t</a> <em class="property">const</em>&amp;<span class="sig-paren">)</span> = 0<a class="headerlink" href="#_CPPv4N3eos15bfd_session_mgr19default_interval_isERK14bfd_interval_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Set BFD default interval value. It will be applied to all interface unless overridden by per-interface interval configuration. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos15bfd_session_mgr16default_intervalEv">
+<span id="_CPPv3NK3eos15bfd_session_mgr16default_intervalEv"></span><span id="_CPPv2NK3eos15bfd_session_mgr16default_intervalEv"></span><span id="eos::bfd_session_mgr::default_intervalC"></span><span class="target" id="classeos_1_1bfd__session__mgr_1ae669099a74f3e38613bada435885b465"></span><em class="property">virtual</em> <a class="reference internal" href="#_CPPv4N3eos14bfd_interval_tE" title="eos::bfd_interval_t">bfd_interval_t</a> <code class="sig-name descname">default_interval</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em> = 0<a class="headerlink" href="#_CPPv4NK3eos15bfd_session_mgr16default_intervalEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Get global BFD interval configuration. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos15bfd_session_mgr11interval_isE9intf_id_tRK14bfd_interval_t">
+<span id="_CPPv3N3eos15bfd_session_mgr11interval_isE9intf_id_tRK14bfd_interval_t"></span><span id="_CPPv2N3eos15bfd_session_mgr11interval_isE9intf_id_tRK14bfd_interval_t"></span><span id="eos::bfd_session_mgr::interval_is__intf_id_t.bfd_interval_tCR"></span><span class="target" id="classeos_1_1bfd__session__mgr_1a29a50636151423adee9b7031fcf60e17"></span><em class="property">virtual</em> void <code class="sig-name descname">interval_is</code><span class="sig-paren">(</span><a class="reference internal" href="intf.html#_CPPv4N3eos9intf_id_tE" title="eos::intf_id_t">intf_id_t</a> <em>intf</em>, <a class="reference internal" href="#_CPPv4N3eos14bfd_interval_tE" title="eos::bfd_interval_t">bfd_interval_t</a> <em class="property">const</em>&amp;<span class="sig-paren">)</span> = 0<a class="headerlink" href="#_CPPv4N3eos15bfd_session_mgr11interval_isE9intf_id_tRK14bfd_interval_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Set BFD interval on an interface. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos15bfd_session_mgr8intervalE9intf_id_t">
+<span id="_CPPv3NK3eos15bfd_session_mgr8intervalE9intf_id_t"></span><span id="_CPPv2NK3eos15bfd_session_mgr8intervalE9intf_id_t"></span><span id="eos::bfd_session_mgr::interval__intf_id_tC"></span><span class="target" id="classeos_1_1bfd__session__mgr_1a77fae10c05b7d83b3618ba3c6c0904da"></span><em class="property">virtual</em> <a class="reference internal" href="#_CPPv4N3eos14bfd_interval_tE" title="eos::bfd_interval_t">bfd_interval_t</a> <code class="sig-name descname">interval</code><span class="sig-paren">(</span><a class="reference internal" href="intf.html#_CPPv4N3eos9intf_id_tE" title="eos::intf_id_t">intf_id_t</a> <em>intf</em><span class="sig-paren">)</span> <em class="property">const</em> = 0<a class="headerlink" href="#_CPPv4NK3eos15bfd_session_mgr8intervalE9intf_id_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Get BFD interval configuration on an interface. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos15bfd_session_mgr14interval_resetE9intf_id_t">
+<span id="_CPPv3N3eos15bfd_session_mgr14interval_resetE9intf_id_t"></span><span id="_CPPv2N3eos15bfd_session_mgr14interval_resetE9intf_id_t"></span><span id="eos::bfd_session_mgr::interval_reset__intf_id_t"></span><span class="target" id="classeos_1_1bfd__session__mgr_1aad5267cf9c5a4dc2eabb2fa3dfb430e9"></span><em class="property">virtual</em> void <code class="sig-name descname">interval_reset</code><span class="sig-paren">(</span><a class="reference internal" href="intf.html#_CPPv4N3eos9intf_id_tE" title="eos::intf_id_t">intf_id_t</a> <em>intf</em><span class="sig-paren">)</span> = 0<a class="headerlink" href="#_CPPv4N3eos15bfd_session_mgr14interval_resetE9intf_id_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Reset BFD interval configuration on an interface back to value configured by bfd_default_interval_is(). If bfd_default_interval_is() has not been explicitly called to configure a default interval, the interval will be reset to tx=300ms, rx=300ms and mult=3. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos15bfd_session_mgr14session_statusERK17bfd_session_key_t">
+<span id="_CPPv3NK3eos15bfd_session_mgr14session_statusERK17bfd_session_key_t"></span><span id="_CPPv2NK3eos15bfd_session_mgr14session_statusERK17bfd_session_key_t"></span><span id="eos::bfd_session_mgr::session_status__bfd_session_key_tCRC"></span><span class="target" id="classeos_1_1bfd__session__mgr_1a4d703760e0507f636c442787e314c3e1"></span><em class="property">virtual</em> <a class="reference internal" href="#_CPPv4N3eos20bfd_session_status_tE" title="eos::bfd_session_status_t">bfd_session_status_t</a> <code class="sig-name descname">session_status</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos17bfd_session_key_tE" title="eos::bfd_session_key_t">bfd_session_key_t</a> <em class="property">const</em>&amp;<span class="sig-paren">)</span> <em class="property">const</em> = 0<a class="headerlink" href="#_CPPv4NK3eos15bfd_session_mgr14session_statusERK17bfd_session_key_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Return the BFD status given a BFD session key. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos15bfd_session_mgr22sbfd_echo_session_iterEv">
+<span id="_CPPv3NK3eos15bfd_session_mgr22sbfd_echo_session_iterEv"></span><span id="_CPPv2NK3eos15bfd_session_mgr22sbfd_echo_session_iterEv"></span><span id="eos::bfd_session_mgr::sbfd_echo_session_iterC"></span><span class="target" id="classeos_1_1bfd__session__mgr_1a2b6a3a7e7f2c098dd848b2b7796c2a48"></span><em class="property">virtual</em> <a class="reference internal" href="#_CPPv4N3eos24sbfd_echo_session_iter_tE" title="eos::sbfd_echo_session_iter_t">sbfd_echo_session_iter_t</a> <code class="sig-name descname">sbfd_echo_session_iter</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em> = 0<a class="headerlink" href="#_CPPv4NK3eos15bfd_session_mgr22sbfd_echo_session_iterEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>sBFD echo sessions.</p>
+<p>Only a single EosSdk application can use the sbfd_echo_* APIs, if a second application attempts to use them, it will result in a panic / exception. Returns an iterator over all sBFD echo sessions configured through EosSdk on the system. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos15bfd_session_mgr24sbfd_echo_session_existsERK23sbfd_echo_session_key_t">
+<span id="_CPPv3NK3eos15bfd_session_mgr24sbfd_echo_session_existsERK23sbfd_echo_session_key_t"></span><span id="_CPPv2NK3eos15bfd_session_mgr24sbfd_echo_session_existsERK23sbfd_echo_session_key_t"></span><span id="eos::bfd_session_mgr::sbfd_echo_session_exists__sbfd_echo_session_key_tCRC"></span><span class="target" id="classeos_1_1bfd__session__mgr_1aa10d6ff1bfe7db57ecab7f11a9cdf2b8"></span><em class="property">virtual</em> bool <code class="sig-name descname">sbfd_echo_session_exists</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos23sbfd_echo_session_key_tE" title="eos::sbfd_echo_session_key_t">sbfd_echo_session_key_t</a> <em class="property">const</em>&amp;<span class="sig-paren">)</span> <em class="property">const</em> = 0<a class="headerlink" href="#_CPPv4NK3eos15bfd_session_mgr24sbfd_echo_session_existsERK23sbfd_echo_session_key_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Return true if the sBFD echo session is configured. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos15bfd_session_mgr21sbfd_echo_session_setERK23sbfd_echo_session_key_t">
+<span id="_CPPv3N3eos15bfd_session_mgr21sbfd_echo_session_setERK23sbfd_echo_session_key_t"></span><span id="_CPPv2N3eos15bfd_session_mgr21sbfd_echo_session_setERK23sbfd_echo_session_key_t"></span><span id="eos::bfd_session_mgr::sbfd_echo_session_set__sbfd_echo_session_key_tCR"></span><span class="target" id="classeos_1_1bfd__session__mgr_1af0d02db7178f2a3b38b6fdd3fbe6e3c2"></span><em class="property">virtual</em> void <code class="sig-name descname">sbfd_echo_session_set</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos23sbfd_echo_session_key_tE" title="eos::sbfd_echo_session_key_t">sbfd_echo_session_key_t</a> <em class="property">const</em>&amp;<span class="sig-paren">)</span> = 0<a class="headerlink" href="#_CPPv4N3eos15bfd_session_mgr21sbfd_echo_session_setERK23sbfd_echo_session_key_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Create a sBFD echo session. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos15bfd_session_mgr21sbfd_echo_session_delERK23sbfd_echo_session_key_t">
+<span id="_CPPv3N3eos15bfd_session_mgr21sbfd_echo_session_delERK23sbfd_echo_session_key_t"></span><span id="_CPPv2N3eos15bfd_session_mgr21sbfd_echo_session_delERK23sbfd_echo_session_key_t"></span><span id="eos::bfd_session_mgr::sbfd_echo_session_del__sbfd_echo_session_key_tCR"></span><span class="target" id="classeos_1_1bfd__session__mgr_1a0fdfc3b47895fec870f061c58f0ee542"></span><em class="property">virtual</em> void <code class="sig-name descname">sbfd_echo_session_del</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos23sbfd_echo_session_key_tE" title="eos::sbfd_echo_session_key_t">sbfd_echo_session_key_t</a> <em class="property">const</em>&amp;<span class="sig-paren">)</span> = 0<a class="headerlink" href="#_CPPv4N3eos15bfd_session_mgr21sbfd_echo_session_delERK23sbfd_echo_session_key_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Remove a sBFD echo session if it exists. It is a no-op if the specified sBFD session does not exist. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos15bfd_session_mgr30sbfd_echo_default_interval_setERK15sbfd_interval_t">
+<span id="_CPPv3N3eos15bfd_session_mgr30sbfd_echo_default_interval_setERK15sbfd_interval_t"></span><span id="_CPPv2N3eos15bfd_session_mgr30sbfd_echo_default_interval_setERK15sbfd_interval_t"></span><span id="eos::bfd_session_mgr::sbfd_echo_default_interval_set__sbfd_interval_tCR"></span><span class="target" id="classeos_1_1bfd__session__mgr_1a666cf43d688cb089221b7e941eebc5ce"></span><em class="property">virtual</em> void <code class="sig-name descname">sbfd_echo_default_interval_set</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos15sbfd_interval_tE" title="eos::sbfd_interval_t">sbfd_interval_t</a> <em class="property">const</em>&amp;<span class="sig-paren">)</span> = 0<a class="headerlink" href="#_CPPv4N3eos15bfd_session_mgr30sbfd_echo_default_interval_setERK15sbfd_interval_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Set sBFD echo session default interval value. It will be applied to all sBFD echo session. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos15bfd_session_mgr26sbfd_echo_default_intervalEv">
+<span id="_CPPv3NK3eos15bfd_session_mgr26sbfd_echo_default_intervalEv"></span><span id="_CPPv2NK3eos15bfd_session_mgr26sbfd_echo_default_intervalEv"></span><span id="eos::bfd_session_mgr::sbfd_echo_default_intervalC"></span><span class="target" id="classeos_1_1bfd__session__mgr_1a0c4dd300529d251063385c7bd9515f13"></span><em class="property">virtual</em> <a class="reference internal" href="#_CPPv4N3eos15sbfd_interval_tE" title="eos::sbfd_interval_t">sbfd_interval_t</a> <code class="sig-name descname">sbfd_echo_default_interval</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em> = 0<a class="headerlink" href="#_CPPv4NK3eos15bfd_session_mgr26sbfd_echo_default_intervalEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Get global sBFD echo session interval configuration. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos15bfd_session_mgr22sbfd_echo_interval_setERK23sbfd_echo_session_key_tRK15sbfd_interval_t">
+<span id="_CPPv3N3eos15bfd_session_mgr22sbfd_echo_interval_setERK23sbfd_echo_session_key_tRK15sbfd_interval_t"></span><span id="_CPPv2N3eos15bfd_session_mgr22sbfd_echo_interval_setERK23sbfd_echo_session_key_tRK15sbfd_interval_t"></span><span id="eos::bfd_session_mgr::sbfd_echo_interval_set__sbfd_echo_session_key_tCR.sbfd_interval_tCR"></span><span class="target" id="classeos_1_1bfd__session__mgr_1a7e0a99abe13b63d654473ad8e8420cfb"></span><em class="property">virtual</em> void <code class="sig-name descname">sbfd_echo_interval_set</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos23sbfd_echo_session_key_tE" title="eos::sbfd_echo_session_key_t">sbfd_echo_session_key_t</a> <em class="property">const</em>&amp;, <a class="reference internal" href="#_CPPv4N3eos15sbfd_interval_tE" title="eos::sbfd_interval_t">sbfd_interval_t</a> <em class="property">const</em>&amp;<span class="sig-paren">)</span> = 0<a class="headerlink" href="#_CPPv4N3eos15bfd_session_mgr22sbfd_echo_interval_setERK23sbfd_echo_session_key_tRK15sbfd_interval_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Set sBFD echo session interval value per session </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos15bfd_session_mgr18sbfd_echo_intervalERK23sbfd_echo_session_key_t">
+<span id="_CPPv3NK3eos15bfd_session_mgr18sbfd_echo_intervalERK23sbfd_echo_session_key_t"></span><span id="_CPPv2NK3eos15bfd_session_mgr18sbfd_echo_intervalERK23sbfd_echo_session_key_t"></span><span id="eos::bfd_session_mgr::sbfd_echo_interval__sbfd_echo_session_key_tCRC"></span><span class="target" id="classeos_1_1bfd__session__mgr_1ae971ad0504f44b0e64ec76fa1982f106"></span><em class="property">virtual</em> <a class="reference internal" href="#_CPPv4N3eos15sbfd_interval_tE" title="eos::sbfd_interval_t">sbfd_interval_t</a> <code class="sig-name descname">sbfd_echo_interval</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos23sbfd_echo_session_key_tE" title="eos::sbfd_echo_session_key_t">sbfd_echo_session_key_t</a> <em class="property">const</em>&amp;<span class="sig-paren">)</span> <em class="property">const</em> = 0<a class="headerlink" href="#_CPPv4NK3eos15bfd_session_mgr18sbfd_echo_intervalERK23sbfd_echo_session_key_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Get sBFD echo session interval configuration. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos15bfd_session_mgr24sbfd_echo_interval_resetERK23sbfd_echo_session_key_t">
+<span id="_CPPv3N3eos15bfd_session_mgr24sbfd_echo_interval_resetERK23sbfd_echo_session_key_t"></span><span id="_CPPv2N3eos15bfd_session_mgr24sbfd_echo_interval_resetERK23sbfd_echo_session_key_t"></span><span id="eos::bfd_session_mgr::sbfd_echo_interval_reset__sbfd_echo_session_key_tCR"></span><span class="target" id="classeos_1_1bfd__session__mgr_1a957ead5b7e7a7be9538ac559bace670a"></span><em class="property">virtual</em> void <code class="sig-name descname">sbfd_echo_interval_reset</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos23sbfd_echo_session_key_tE" title="eos::sbfd_echo_session_key_t">sbfd_echo_session_key_t</a> <em class="property">const</em>&amp;<span class="sig-paren">)</span> = 0<a class="headerlink" href="#_CPPv4N3eos15bfd_session_mgr24sbfd_echo_interval_resetERK23sbfd_echo_session_key_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Reset sBFD echo session interval configuration on a session back to value configured by <a class="reference internal" href="#classeos_1_1bfd__session__mgr_1a666cf43d688cb089221b7e941eebc5ce"><span class="std std-ref">sbfd_echo_default_interval_set()</span></a>. If <a class="reference internal" href="#classeos_1_1bfd__session__mgr_1a666cf43d688cb089221b7e941eebc5ce"><span class="std std-ref">sbfd_echo_default_interval_set()</span></a> has not been explicitly called to configure a default interval, the interval will be reset to tx=300ms and mult=3. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos15bfd_session_mgr25sbfd_echo_rtt_enabled_setERK23sbfd_echo_session_key_tb">
+<span id="_CPPv3N3eos15bfd_session_mgr25sbfd_echo_rtt_enabled_setERK23sbfd_echo_session_key_tb"></span><span id="_CPPv2N3eos15bfd_session_mgr25sbfd_echo_rtt_enabled_setERK23sbfd_echo_session_key_tb"></span><span id="eos::bfd_session_mgr::sbfd_echo_rtt_enabled_set__sbfd_echo_session_key_tCR.b"></span><span class="target" id="classeos_1_1bfd__session__mgr_1a288c7f6295664a91c1dfbe4cfb682bb0"></span><em class="property">virtual</em> void <code class="sig-name descname">sbfd_echo_rtt_enabled_set</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos23sbfd_echo_session_key_tE" title="eos::sbfd_echo_session_key_t">sbfd_echo_session_key_t</a> <em class="property">const</em>&amp;, bool<span class="sig-paren">)</span> = 0<a class="headerlink" href="#_CPPv4N3eos15bfd_session_mgr25sbfd_echo_rtt_enabled_setERK23sbfd_echo_session_key_tb" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Request RTT measurements for the sBFD probe packets.</p>
+<p>RTTs will be reported via the on_sbfd_echo_session_rtt at intervals configured by</p>
+<p>router bfd session stats snapshot interval ((dangerous &lt;1-9&gt;)|&lt;10-3600 seconds&gt;) </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos15bfd_session_mgr21sbfd_echo_rtt_enabledERK23sbfd_echo_session_key_t">
+<span id="_CPPv3NK3eos15bfd_session_mgr21sbfd_echo_rtt_enabledERK23sbfd_echo_session_key_t"></span><span id="_CPPv2NK3eos15bfd_session_mgr21sbfd_echo_rtt_enabledERK23sbfd_echo_session_key_t"></span><span id="eos::bfd_session_mgr::sbfd_echo_rtt_enabled__sbfd_echo_session_key_tCRC"></span><span class="target" id="classeos_1_1bfd__session__mgr_1a8b298d3e4222a73b2fb5670074ee44da"></span><em class="property">virtual</em> bool <code class="sig-name descname">sbfd_echo_rtt_enabled</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos23sbfd_echo_session_key_tE" title="eos::sbfd_echo_session_key_t">sbfd_echo_session_key_t</a> <em class="property">const</em>&amp;<span class="sig-paren">)</span> <em class="property">const</em> = 0<a class="headerlink" href="#_CPPv4NK3eos15bfd_session_mgr21sbfd_echo_rtt_enabledERK23sbfd_echo_session_key_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Is sBFD RTT measurements enabled? </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos15bfd_session_mgr24sbfd_echo_session_statusERK23sbfd_echo_session_key_t">
+<span id="_CPPv3NK3eos15bfd_session_mgr24sbfd_echo_session_statusERK23sbfd_echo_session_key_t"></span><span id="_CPPv2NK3eos15bfd_session_mgr24sbfd_echo_session_statusERK23sbfd_echo_session_key_t"></span><span id="eos::bfd_session_mgr::sbfd_echo_session_status__sbfd_echo_session_key_tCRC"></span><span class="target" id="classeos_1_1bfd__session__mgr_1a9ca236b090c276d7eb25d144c58b65a3"></span><em class="property">virtual</em> <a class="reference internal" href="#_CPPv4N3eos20bfd_session_status_tE" title="eos::bfd_session_status_t">bfd_session_status_t</a> <code class="sig-name descname">sbfd_echo_session_status</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos23sbfd_echo_session_key_tE" title="eos::sbfd_echo_session_key_t">sbfd_echo_session_key_t</a> <em class="property">const</em>&amp;<span class="sig-paren">)</span> <em class="property">const</em> = 0<a class="headerlink" href="#_CPPv4NK3eos15bfd_session_mgr24sbfd_echo_session_statusERK23sbfd_echo_session_key_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Return the BFD status given a sBFD echo session key. </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-protected-functions">Protected Functions</p>
+<dl class="cpp function">
+<dt id="_CPPv4N3eos15bfd_session_mgr15bfd_session_mgrEv">
+<span id="_CPPv3N3eos15bfd_session_mgr15bfd_session_mgrEv"></span><span id="_CPPv2N3eos15bfd_session_mgr15bfd_session_mgrEv"></span><span id="eos::bfd_session_mgr::bfd_session_mgr"></span><span class="target" id="classeos_1_1bfd__session__mgr_1a3f681a17c8063b603e88ef6c02d0f7c6"></span><code class="sig-name descname">bfd_session_mgr</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos15bfd_session_mgr15bfd_session_mgrEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-private-members">Private Members</p>
+<dl class="cpp var">
+<dt>
+<span class="target" id="classeos_1_1bfd__session__mgr_1a37f2b96a8c97531bc08091e4f837eeca"></span><code class="sig-name descname">bfd_session_mgr</code></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-friends">Friends</p>
+<dl class="friendclass">
+<dt>
+<em class="property">friend class</em> bfd_session_handler</dt>
+</dl>
+
+</div>
+</dd></dl>
+
+</dd></dl>
+
+<div class="section" id="type-definitions-in-bfd">
+<h2>Type definitions in <strong>bfd</strong><a class="headerlink" href="#type-definitions-in-bfd" title="Permalink to this headline">¶</a></h2>
+<dl class="cpp type">
+<dt>
+<span class="target" id="namespaceeos"></span><em class="property">namespace </em><code class="sig-name descname">eos</code><br /></dt>
+<dd><div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-enums">Enums</p>
+<dl class="cpp enum">
+<dt id="_CPPv4N3eos20bfd_session_status_tE">
+<span id="_CPPv3N3eos20bfd_session_status_tE"></span><span id="_CPPv2N3eos20bfd_session_status_tE"></span><span class="target" id="namespaceeos_1a34211e7ff756ec5b99c82f4e26be104c"></span><em class="property">enum </em><code class="sig-name descname">bfd_session_status_t</code><a class="headerlink" href="#_CPPv4N3eos20bfd_session_status_tE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>BFD session status. </p>
+<p><em>Values:</em></p>
+<dl class="cpp enumerator">
+<dt id="_CPPv4N3eos20bfd_session_status_t23BFD_SESSION_STATUS_NULLE">
+<span id="_CPPv3N3eos20bfd_session_status_t23BFD_SESSION_STATUS_NULLE"></span><span id="_CPPv2N3eos20bfd_session_status_t23BFD_SESSION_STATUS_NULLE"></span><span class="target" id="namespaceeos_1a34211e7ff756ec5b99c82f4e26be104cad4de9c29e3b1ef273f47eeb30ae4ddf2"></span><em class="property">enumerator </em><code class="sig-name descname">BFD_SESSION_STATUS_NULL</code><a class="headerlink" href="#_CPPv4N3eos20bfd_session_status_t23BFD_SESSION_STATUS_NULLE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt id="_CPPv4N3eos20bfd_session_status_t23BFD_SESSION_STATUS_DOWNE">
+<span id="_CPPv3N3eos20bfd_session_status_t23BFD_SESSION_STATUS_DOWNE"></span><span id="_CPPv2N3eos20bfd_session_status_t23BFD_SESSION_STATUS_DOWNE"></span><span class="target" id="namespaceeos_1a34211e7ff756ec5b99c82f4e26be104ca04c8017468c102a2a5a9a4c675c6873a"></span><em class="property">enumerator </em><code class="sig-name descname">BFD_SESSION_STATUS_DOWN</code><a class="headerlink" href="#_CPPv4N3eos20bfd_session_status_t23BFD_SESSION_STATUS_DOWNE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt id="_CPPv4N3eos20bfd_session_status_t23BFD_SESSION_STATUS_INITE">
+<span id="_CPPv3N3eos20bfd_session_status_t23BFD_SESSION_STATUS_INITE"></span><span id="_CPPv2N3eos20bfd_session_status_t23BFD_SESSION_STATUS_INITE"></span><span class="target" id="namespaceeos_1a34211e7ff756ec5b99c82f4e26be104ca195896f7f49d37bf8d89d78eb4740906"></span><em class="property">enumerator </em><code class="sig-name descname">BFD_SESSION_STATUS_INIT</code><a class="headerlink" href="#_CPPv4N3eos20bfd_session_status_t23BFD_SESSION_STATUS_INITE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt id="_CPPv4N3eos20bfd_session_status_t21BFD_SESSION_STATUS_UPE">
+<span id="_CPPv3N3eos20bfd_session_status_t21BFD_SESSION_STATUS_UPE"></span><span id="_CPPv2N3eos20bfd_session_status_t21BFD_SESSION_STATUS_UPE"></span><span class="target" id="namespaceeos_1a34211e7ff756ec5b99c82f4e26be104cad18810f0be54545d88f17cba4e800746"></span><em class="property">enumerator </em><code class="sig-name descname">BFD_SESSION_STATUS_UP</code><a class="headerlink" href="#_CPPv4N3eos20bfd_session_status_t21BFD_SESSION_STATUS_UPE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt id="_CPPv4N3eos20bfd_session_status_t29BFD_SESSION_STATUS_ADMIN_DOWNE">
+<span id="_CPPv3N3eos20bfd_session_status_t29BFD_SESSION_STATUS_ADMIN_DOWNE"></span><span id="_CPPv2N3eos20bfd_session_status_t29BFD_SESSION_STATUS_ADMIN_DOWNE"></span><span class="target" id="namespaceeos_1a34211e7ff756ec5b99c82f4e26be104caf13f060bae4e8e6edb5585fb1549a931"></span><em class="property">enumerator </em><code class="sig-name descname">BFD_SESSION_STATUS_ADMIN_DOWN</code><a class="headerlink" href="#_CPPv4N3eos20bfd_session_status_t29BFD_SESSION_STATUS_ADMIN_DOWNE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="cpp enum">
+<dt id="_CPPv4N3eos18bfd_session_type_tE">
+<span id="_CPPv3N3eos18bfd_session_type_tE"></span><span id="_CPPv2N3eos18bfd_session_type_tE"></span><span class="target" id="namespaceeos_1a387fa9843d2b742ebbf129e21d3190e2"></span><em class="property">enum </em><code class="sig-name descname">bfd_session_type_t</code><a class="headerlink" href="#_CPPv4N3eos18bfd_session_type_tE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>BFD session type. </p>
+<p><em>Values:</em></p>
+<dl class="cpp enumerator">
+<dt id="_CPPv4N3eos18bfd_session_type_t21BFD_SESSION_TYPE_NULLE">
+<span id="_CPPv3N3eos18bfd_session_type_t21BFD_SESSION_TYPE_NULLE"></span><span id="_CPPv2N3eos18bfd_session_type_t21BFD_SESSION_TYPE_NULLE"></span><span class="target" id="namespaceeos_1a387fa9843d2b742ebbf129e21d3190e2af1f24ad8bf595a9e9e94e1c3ae08e732"></span><em class="property">enumerator </em><code class="sig-name descname">BFD_SESSION_TYPE_NULL</code><a class="headerlink" href="#_CPPv4N3eos18bfd_session_type_t21BFD_SESSION_TYPE_NULLE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt id="_CPPv4N3eos18bfd_session_type_t23BFD_SESSION_TYPE_NORMALE">
+<span id="_CPPv3N3eos18bfd_session_type_t23BFD_SESSION_TYPE_NORMALE"></span><span id="_CPPv2N3eos18bfd_session_type_t23BFD_SESSION_TYPE_NORMALE"></span><span class="target" id="namespaceeos_1a387fa9843d2b742ebbf129e21d3190e2aa8de93e9b3efe0a946eb3d45730e17c2"></span><em class="property">enumerator </em><code class="sig-name descname">BFD_SESSION_TYPE_NORMAL</code><a class="headerlink" href="#_CPPv4N3eos18bfd_session_type_t23BFD_SESSION_TYPE_NORMALE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt id="_CPPv4N3eos18bfd_session_type_t22BFD_SESSION_TYPE_MICROE">
+<span id="_CPPv3N3eos18bfd_session_type_t22BFD_SESSION_TYPE_MICROE"></span><span id="_CPPv2N3eos18bfd_session_type_t22BFD_SESSION_TYPE_MICROE"></span><span class="target" id="namespaceeos_1a387fa9843d2b742ebbf129e21d3190e2abc4915aeaa19ee65afad4a708d60ad72"></span><em class="property">enumerator </em><code class="sig-name descname">BFD_SESSION_TYPE_MICRO</code><a class="headerlink" href="#_CPPv4N3eos18bfd_session_type_t22BFD_SESSION_TYPE_MICROE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt id="_CPPv4N3eos18bfd_session_type_t28BFD_SESSION_TYPE_VXLANTUNNELE">
+<span id="_CPPv3N3eos18bfd_session_type_t28BFD_SESSION_TYPE_VXLANTUNNELE"></span><span id="_CPPv2N3eos18bfd_session_type_t28BFD_SESSION_TYPE_VXLANTUNNELE"></span><span class="target" id="namespaceeos_1a387fa9843d2b742ebbf129e21d3190e2a609b8a5a0c62b8cc25d5a312d7864770"></span><em class="property">enumerator </em><code class="sig-name descname">BFD_SESSION_TYPE_VXLANTUNNEL</code><a class="headerlink" href="#_CPPv4N3eos18bfd_session_type_t28BFD_SESSION_TYPE_VXLANTUNNELE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt id="_CPPv4N3eos18bfd_session_type_t27BFD_SESSION_TYPE_LAGRFC7130E">
+<span id="_CPPv3N3eos18bfd_session_type_t27BFD_SESSION_TYPE_LAGRFC7130E"></span><span id="_CPPv2N3eos18bfd_session_type_t27BFD_SESSION_TYPE_LAGRFC7130E"></span><span class="target" id="namespaceeos_1a387fa9843d2b742ebbf129e21d3190e2a5fd19d1ddc4eb51de07e7de18a3665a3"></span><em class="property">enumerator </em><code class="sig-name descname">BFD_SESSION_TYPE_LAGRFC7130</code><a class="headerlink" href="#_CPPv4N3eos18bfd_session_type_t27BFD_SESSION_TYPE_LAGRFC7130E" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt id="_CPPv4N3eos18bfd_session_type_t29BFD_SESSION_TYPE_MICRORFC7130E">
+<span id="_CPPv3N3eos18bfd_session_type_t29BFD_SESSION_TYPE_MICRORFC7130E"></span><span id="_CPPv2N3eos18bfd_session_type_t29BFD_SESSION_TYPE_MICRORFC7130E"></span><span class="target" id="namespaceeos_1a387fa9843d2b742ebbf129e21d3190e2a793c9b56f415627dd7d609485dac49e8"></span><em class="property">enumerator </em><code class="sig-name descname">BFD_SESSION_TYPE_MICRORFC7130</code><a class="headerlink" href="#_CPPv4N3eos18bfd_session_type_t29BFD_SESSION_TYPE_MICRORFC7130E" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt id="_CPPv4N3eos18bfd_session_type_t25BFD_SESSION_TYPE_MULTIHOPE">
+<span id="_CPPv3N3eos18bfd_session_type_t25BFD_SESSION_TYPE_MULTIHOPE"></span><span id="_CPPv2N3eos18bfd_session_type_t25BFD_SESSION_TYPE_MULTIHOPE"></span><span class="target" id="namespaceeos_1a387fa9843d2b742ebbf129e21d3190e2a652abc1bcaf4e507db3f99f6c222f8dd"></span><em class="property">enumerator </em><code class="sig-name descname">BFD_SESSION_TYPE_MULTIHOP</code><a class="headerlink" href="#_CPPv4N3eos18bfd_session_type_t25BFD_SESSION_TYPE_MULTIHOPE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt id="_CPPv4N3eos18bfd_session_type_t31BFD_SESSION_TYPE_SBFD_INITIATORE">
+<span id="_CPPv3N3eos18bfd_session_type_t31BFD_SESSION_TYPE_SBFD_INITIATORE"></span><span id="_CPPv2N3eos18bfd_session_type_t31BFD_SESSION_TYPE_SBFD_INITIATORE"></span><span class="target" id="namespaceeos_1a387fa9843d2b742ebbf129e21d3190e2ad7410fc1823e939305afc597ee9960c7"></span><em class="property">enumerator </em><code class="sig-name descname">BFD_SESSION_TYPE_SBFD_INITIATOR</code><a class="headerlink" href="#_CPPv4N3eos18bfd_session_type_t31BFD_SESSION_TYPE_SBFD_INITIATORE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt id="_CPPv4N3eos18bfd_session_type_t31BFD_SESSION_TYPE_SBFD_REFLECTORE">
+<span id="_CPPv3N3eos18bfd_session_type_t31BFD_SESSION_TYPE_SBFD_REFLECTORE"></span><span id="_CPPv2N3eos18bfd_session_type_t31BFD_SESSION_TYPE_SBFD_REFLECTORE"></span><span class="target" id="namespaceeos_1a387fa9843d2b742ebbf129e21d3190e2a65d2851eddd1d711d7320523620ca439"></span><em class="property">enumerator </em><code class="sig-name descname">BFD_SESSION_TYPE_SBFD_REFLECTOR</code><a class="headerlink" href="#_CPPv4N3eos18bfd_session_type_t31BFD_SESSION_TYPE_SBFD_REFLECTORE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<dl class="cpp class">
+<dt id="_CPPv4N3eos17bfd_session_key_tE">
+<span id="_CPPv3N3eos17bfd_session_key_tE"></span><span id="_CPPv2N3eos17bfd_session_key_tE"></span><span id="eos::bfd_session_key_t"></span><span class="target" id="classeos_1_1bfd__session__key__t"></span><em class="property">class </em><code class="sig-name descname">bfd_session_key_t</code><a class="headerlink" href="#_CPPv4N3eos17bfd_session_key_tE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><div class="docutils container">
+<em>#include &lt;bfd.h&gt;</em></div>
+<p>BFD session key class. Used to identify a BFD session on a switch. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
+<dl class="cpp function">
+<dt id="_CPPv4N3eos17bfd_session_key_t17bfd_session_key_tEv">
+<span id="_CPPv3N3eos17bfd_session_key_t17bfd_session_key_tEv"></span><span id="_CPPv2N3eos17bfd_session_key_t17bfd_session_key_tEv"></span><span id="eos::bfd_session_key_t::bfd_session_key_t"></span><span class="target" id="classeos_1_1bfd__session__key__t_1a9a476bfaf336f5fc4bf4259a29b9c3e4"></span><code class="sig-name descname">bfd_session_key_t</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos17bfd_session_key_t17bfd_session_key_tEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos17bfd_session_key_t17bfd_session_key_tE9ip_addr_tNSt6stringE18bfd_session_type_t9intf_id_t">
+<span id="_CPPv3N3eos17bfd_session_key_t17bfd_session_key_tE9ip_addr_tNSt6stringE18bfd_session_type_t9intf_id_t"></span><span id="_CPPv2N3eos17bfd_session_key_t17bfd_session_key_tE9ip_addr_tNSt6stringE18bfd_session_type_t9intf_id_t"></span><span id="eos::bfd_session_key_t::bfd_session_key_t__ip_addr_t.ss.bfd_session_type_t.intf_id_t"></span><span class="target" id="classeos_1_1bfd__session__key__t_1aa11f5d57e8785980408e895113f3cb07"></span><code class="sig-name descname">bfd_session_key_t</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#_CPPv4N3eos9ip_addr_tE" title="eos::ip_addr_t">ip_addr_t</a> <em>ip_addr</em>, <a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::string <em>vrf</em>, <a class="reference internal" href="#_CPPv4N3eos18bfd_session_type_tE" title="eos::bfd_session_type_t">bfd_session_type_t</a> <em>type</em>, <a class="reference internal" href="intf.html#_CPPv4N3eos9intf_id_tE" title="eos::intf_id_t">intf_id_t</a> <em>intf</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos17bfd_session_key_t17bfd_session_key_tE9ip_addr_tNSt6stringE18bfd_session_type_t9intf_id_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos17bfd_session_key_t17bfd_session_key_tE9ip_addr_tNSt6stringE18bfd_session_type_t9intf_id_t9ip_addr_t">
+<span id="_CPPv3N3eos17bfd_session_key_t17bfd_session_key_tE9ip_addr_tNSt6stringE18bfd_session_type_t9intf_id_t9ip_addr_t"></span><span id="_CPPv2N3eos17bfd_session_key_t17bfd_session_key_tE9ip_addr_tNSt6stringE18bfd_session_type_t9intf_id_t9ip_addr_t"></span><span id="eos::bfd_session_key_t::bfd_session_key_t__ip_addr_t.ss.bfd_session_type_t.intf_id_t.ip_addr_t"></span><span class="target" id="classeos_1_1bfd__session__key__t_1adb57276eae5dbbc801a05ab2754cbd8f"></span><code class="sig-name descname">bfd_session_key_t</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#_CPPv4N3eos9ip_addr_tE" title="eos::ip_addr_t">ip_addr_t</a> <em>ip_addr</em>, <a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::string <em>vrf</em>, <a class="reference internal" href="#_CPPv4N3eos18bfd_session_type_tE" title="eos::bfd_session_type_t">bfd_session_type_t</a> <em>type</em>, <a class="reference internal" href="intf.html#_CPPv4N3eos9intf_id_tE" title="eos::intf_id_t">intf_id_t</a> <em>intf</em>, <a class="reference internal" href="ip.html#_CPPv4N3eos9ip_addr_tE" title="eos::ip_addr_t">ip_addr_t</a> <em>src_ip_addr</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos17bfd_session_key_t17bfd_session_key_tE9ip_addr_tNSt6stringE18bfd_session_type_t9intf_id_t9ip_addr_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos17bfd_session_key_t17bfd_session_key_tE9ip_addr_tNSt6stringE18bfd_session_type_t8uint64_t">
+<span id="_CPPv3N3eos17bfd_session_key_t17bfd_session_key_tE9ip_addr_tNSt6stringE18bfd_session_type_t8uint64_t"></span><span id="_CPPv2N3eos17bfd_session_key_t17bfd_session_key_tE9ip_addr_tNSt6stringE18bfd_session_type_t8uint64_t"></span><span id="eos::bfd_session_key_t::bfd_session_key_t__ip_addr_t.ss.bfd_session_type_t.uint64_t"></span><span class="target" id="classeos_1_1bfd__session__key__t_1a436423ef120ff32d769cfb6fea5aa57f"></span><code class="sig-name descname">bfd_session_key_t</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#_CPPv4N3eos9ip_addr_tE" title="eos::ip_addr_t">ip_addr_t</a> <em>ip_addr</em>, <a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::string <em>vrf</em>, <a class="reference internal" href="#_CPPv4N3eos18bfd_session_type_tE" title="eos::bfd_session_type_t">bfd_session_type_t</a> <em>type</em>, uint64_t <em>tunnel_id</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos17bfd_session_key_t17bfd_session_key_tE9ip_addr_tNSt6stringE18bfd_session_type_t8uint64_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos17bfd_session_key_t17bfd_session_key_tE9ip_addr_tNSt6stringE18bfd_session_type_t9intf_id_t9ip_addr_t8uint64_t">
+<span id="_CPPv3N3eos17bfd_session_key_t17bfd_session_key_tE9ip_addr_tNSt6stringE18bfd_session_type_t9intf_id_t9ip_addr_t8uint64_t"></span><span id="_CPPv2N3eos17bfd_session_key_t17bfd_session_key_tE9ip_addr_tNSt6stringE18bfd_session_type_t9intf_id_t9ip_addr_t8uint64_t"></span><span id="eos::bfd_session_key_t::bfd_session_key_t__ip_addr_t.ss.bfd_session_type_t.intf_id_t.ip_addr_t.uint64_t"></span><span class="target" id="classeos_1_1bfd__session__key__t_1a435367cd0a4f53cdcd192753d11e0873"></span><code class="sig-name descname">bfd_session_key_t</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#_CPPv4N3eos9ip_addr_tE" title="eos::ip_addr_t">ip_addr_t</a> <em>ip_addr</em>, <a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::string <em>vrf</em>, <a class="reference internal" href="#_CPPv4N3eos18bfd_session_type_tE" title="eos::bfd_session_type_t">bfd_session_type_t</a> <em>type</em>, <a class="reference internal" href="intf.html#_CPPv4N3eos9intf_id_tE" title="eos::intf_id_t">intf_id_t</a> <em>intf</em>, <a class="reference internal" href="ip.html#_CPPv4N3eos9ip_addr_tE" title="eos::ip_addr_t">ip_addr_t</a> <em>src_ip_addr</em>, uint64_t <em>tunnel_id</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos17bfd_session_key_t17bfd_session_key_tE9ip_addr_tNSt6stringE18bfd_session_type_t9intf_id_t9ip_addr_t8uint64_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos17bfd_session_key_t17bfd_session_key_tERK17bfd_session_key_t">
+<span id="_CPPv3N3eos17bfd_session_key_t17bfd_session_key_tERK17bfd_session_key_t"></span><span id="_CPPv2N3eos17bfd_session_key_t17bfd_session_key_tERK17bfd_session_key_t"></span><span id="eos::bfd_session_key_t::bfd_session_key_t__bfd_session_key_tCR"></span><span class="target" id="classeos_1_1bfd__session__key__t_1aa3b3f43f0944bbeab864ab78ceb0cf4c"></span><code class="sig-name descname">bfd_session_key_t</code><span class="sig-paren">(</span><em class="property">const</em> <a class="reference internal" href="#_CPPv4N3eos17bfd_session_key_t17bfd_session_key_tERK17bfd_session_key_t" title="eos::bfd_session_key_t::bfd_session_key_t">bfd_session_key_t</a> &amp;<em>other</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos17bfd_session_key_t17bfd_session_key_tERK17bfd_session_key_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos17bfd_session_key_taSERK17bfd_session_key_t">
+<span id="_CPPv3N3eos17bfd_session_key_taSERK17bfd_session_key_t"></span><span id="_CPPv2N3eos17bfd_session_key_taSERK17bfd_session_key_t"></span><span id="eos::bfd_session_key_t::assign-operator__bfd_session_key_tCR"></span><span class="target" id="classeos_1_1bfd__session__key__t_1ad324ff9afba9b81fefb8e0fdffed11dd"></span><a class="reference internal" href="#_CPPv4N3eos17bfd_session_key_tE" title="eos::bfd_session_key_t">bfd_session_key_t</a> &amp;<code class="sig-name descname">operator=</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos17bfd_session_key_tE" title="eos::bfd_session_key_t">bfd_session_key_t</a> <em class="property">const</em> &amp;<em>other</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos17bfd_session_key_taSERK17bfd_session_key_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos17bfd_session_key_t7ip_addrEv">
+<span id="_CPPv3NK3eos17bfd_session_key_t7ip_addrEv"></span><span id="_CPPv2NK3eos17bfd_session_key_t7ip_addrEv"></span><span id="eos::bfd_session_key_t::ip_addrC"></span><span class="target" id="classeos_1_1bfd__session__key__t_1ae98e6babfd7b823b03282effbaf89841"></span><a class="reference internal" href="ip.html#_CPPv4N3eos9ip_addr_tE" title="eos::ip_addr_t">ip_addr_t</a> <code class="sig-name descname">ip_addr</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos17bfd_session_key_t7ip_addrEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Getter for ‘ip_addr’: IP address of the peer. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos17bfd_session_key_t3vrfEv">
+<span id="_CPPv3NK3eos17bfd_session_key_t3vrfEv"></span><span id="_CPPv2NK3eos17bfd_session_key_t3vrfEv"></span><span id="eos::bfd_session_key_t::vrfC"></span><span class="target" id="classeos_1_1bfd__session__key__t_1a6c8c80a678d57e7e3b87d647232c6dda"></span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::string <code class="sig-name descname">vrf</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos17bfd_session_key_t3vrfEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Getter for ‘vrf’: vrf associated with the BFD session. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos17bfd_session_key_t4typeEv">
+<span id="_CPPv3NK3eos17bfd_session_key_t4typeEv"></span><span id="_CPPv2NK3eos17bfd_session_key_t4typeEv"></span><span id="eos::bfd_session_key_t::typeC"></span><span class="target" id="classeos_1_1bfd__session__key__t_1a7cf3fcbf7c98dec84ef7417fb3bdb463"></span><a class="reference internal" href="#_CPPv4N3eos18bfd_session_type_tE" title="eos::bfd_session_type_t">bfd_session_type_t</a> <code class="sig-name descname">type</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos17bfd_session_key_t4typeEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Getter for ‘type’: type associated with the BFD session. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos17bfd_session_key_t4intfEv">
+<span id="_CPPv3NK3eos17bfd_session_key_t4intfEv"></span><span id="_CPPv2NK3eos17bfd_session_key_t4intfEv"></span><span id="eos::bfd_session_key_t::intfC"></span><span class="target" id="classeos_1_1bfd__session__key__t_1a8e3251f7efd82e11c06517f0e8854b39"></span><a class="reference internal" href="intf.html#_CPPv4N3eos9intf_id_tE" title="eos::intf_id_t">intf_id_t</a> <code class="sig-name descname">intf</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos17bfd_session_key_t4intfEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Getter for ‘intf’: local interface associated with the BFD session. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos17bfd_session_key_t11src_ip_addrEv">
+<span id="_CPPv3NK3eos17bfd_session_key_t11src_ip_addrEv"></span><span id="_CPPv2NK3eos17bfd_session_key_t11src_ip_addrEv"></span><span id="eos::bfd_session_key_t::src_ip_addrC"></span><span class="target" id="classeos_1_1bfd__session__key__t_1afa2b1e218ed9043b0675c6249129141b"></span><a class="reference internal" href="ip.html#_CPPv4N3eos9ip_addr_tE" title="eos::ip_addr_t">ip_addr_t</a> <code class="sig-name descname">src_ip_addr</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos17bfd_session_key_t11src_ip_addrEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Getter for ‘src_ip_addr’: Src IP address associated with the BFD session. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos17bfd_session_key_t9tunnel_idEv">
+<span id="_CPPv3NK3eos17bfd_session_key_t9tunnel_idEv"></span><span id="_CPPv2NK3eos17bfd_session_key_t9tunnel_idEv"></span><span id="eos::bfd_session_key_t::tunnel_idC"></span><span class="target" id="classeos_1_1bfd__session__key__t_1a4808f34b1c2a58d2693509d49f4a5f81"></span>uint64_t <code class="sig-name descname">tunnel_id</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos17bfd_session_key_t9tunnel_idEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Getter for ‘tunnel_id’: Tunnel Id associated with the BFD session. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos17bfd_session_key_teqERK17bfd_session_key_t">
+<span id="_CPPv3NK3eos17bfd_session_key_teqERK17bfd_session_key_t"></span><span id="_CPPv2NK3eos17bfd_session_key_teqERK17bfd_session_key_t"></span><span id="eos::bfd_session_key_t::eq-operator__bfd_session_key_tCRC"></span><span class="target" id="classeos_1_1bfd__session__key__t_1ad5db8c173f2f7d1a55d9a2f56a8a1b1b"></span>bool <code class="sig-name descname">operator==</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos17bfd_session_key_tE" title="eos::bfd_session_key_t">bfd_session_key_t</a> <em class="property">const</em> &amp;<em>other</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos17bfd_session_key_teqERK17bfd_session_key_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos17bfd_session_key_tneERK17bfd_session_key_t">
+<span id="_CPPv3NK3eos17bfd_session_key_tneERK17bfd_session_key_t"></span><span id="_CPPv2NK3eos17bfd_session_key_tneERK17bfd_session_key_t"></span><span id="eos::bfd_session_key_t::neq-operator__bfd_session_key_tCRC"></span><span class="target" id="classeos_1_1bfd__session__key__t_1ae0c5897efd091ec34596c53cb4fe1e71"></span>bool <code class="sig-name descname">operator!=</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos17bfd_session_key_tE" title="eos::bfd_session_key_t">bfd_session_key_t</a> <em class="property">const</em> &amp;<em>other</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos17bfd_session_key_tneERK17bfd_session_key_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos17bfd_session_key_tltERK17bfd_session_key_t">
+<span id="_CPPv3NK3eos17bfd_session_key_tltERK17bfd_session_key_t"></span><span id="_CPPv2NK3eos17bfd_session_key_tltERK17bfd_session_key_t"></span><span id="eos::bfd_session_key_t::lt-operator__bfd_session_key_tCRC"></span><span class="target" id="classeos_1_1bfd__session__key__t_1a97e7c61eed71e299fe8659368495d99d"></span>bool <code class="sig-name descname">operator&lt;</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos17bfd_session_key_tE" title="eos::bfd_session_key_t">bfd_session_key_t</a> <em class="property">const</em> &amp;<em>other</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos17bfd_session_key_tltERK17bfd_session_key_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos17bfd_session_key_t4hashEv">
+<span id="_CPPv3NK3eos17bfd_session_key_t4hashEv"></span><span id="_CPPv2NK3eos17bfd_session_key_t4hashEv"></span><span id="eos::bfd_session_key_t::hashC"></span><span class="target" id="classeos_1_1bfd__session__key__t_1a9217de80f95bfa2205d06e78d8e7f10e"></span>uint32_t <code class="sig-name descname">hash</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos17bfd_session_key_t4hashEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>The hash function for type <a class="reference internal" href="#classeos_1_1bfd__session__key__t"><span class="std std-ref">bfd_session_key_t</span></a>. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos17bfd_session_key_t6mix_meER8hash_mix">
+<span id="_CPPv3NK3eos17bfd_session_key_t6mix_meER8hash_mix"></span><span id="_CPPv2NK3eos17bfd_session_key_t6mix_meER8hash_mix"></span><span id="eos::bfd_session_key_t::mix_me__hash_mixRC"></span><span class="target" id="classeos_1_1bfd__session__key__t_1a7eb78f3b75590f95cff09fcfb9ac2a8f"></span>void <code class="sig-name descname">mix_me</code><span class="sig-paren">(</span><a class="reference internal" href="hash_mix.html#_CPPv4N3eos8hash_mixE" title="eos::hash_mix">hash_mix</a> &amp;<em>h</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos17bfd_session_key_t6mix_meER8hash_mix" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>The hash mix function for type <a class="reference internal" href="#classeos_1_1bfd__session__key__t"><span class="std std-ref">bfd_session_key_t</span></a>. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos17bfd_session_key_t9to_stringEv">
+<span id="_CPPv3NK3eos17bfd_session_key_t9to_stringEv"></span><span id="_CPPv2NK3eos17bfd_session_key_t9to_stringEv"></span><span id="eos::bfd_session_key_t::to_stringC"></span><span class="target" id="classeos_1_1bfd__session__key__t_1af0334baa4061ac814ad69dd54e5272b4"></span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::string <code class="sig-name descname">to_string</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos17bfd_session_key_t9to_stringEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Returns a string representation of the current object’s values. </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-private-members">Private Members</p>
+<dl class="cpp var">
+<dt id="_CPPv4N3eos17bfd_session_key_t5pimplE">
+<span id="_CPPv3N3eos17bfd_session_key_t5pimplE"></span><span id="_CPPv2N3eos17bfd_session_key_t5pimplE"></span><span id="eos::bfd_session_key_t::pimpl__std::shared_ptr:bfd_session_key_impl_t:"></span><span class="target" id="classeos_1_1bfd__session__key__t_1aa8bc459c97c6b60edd6909f37922b35f"></span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::shared_ptr&lt;bfd_session_key_impl_t&gt; <code class="sig-name descname">pimpl</code><a class="headerlink" href="#_CPPv4N3eos17bfd_session_key_t5pimplE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-friends">Friends</p>
+<dl class="cpp function">
+<dt id="_CPPv4N3eos17bfd_session_key_tlsERNSt7ostreamERK17bfd_session_key_t">
+<span id="_CPPv3N3eos17bfd_session_key_tlsERNSt7ostreamERK17bfd_session_key_t"></span><span id="_CPPv2N3eos17bfd_session_key_tlsERNSt7ostreamERK17bfd_session_key_t"></span><span id="eos::bfd_session_key_t::lshift-operator__osR.bfd_session_key_tCR"></span><span class="target" id="classeos_1_1bfd__session__key__t_1a3affc740be3cd411b1c33463c1c4ab02"></span><em class="property">friend</em> <a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::ostream &amp;<code class="sig-name descname">operator&lt;&lt;</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::ostream &amp;<em>os</em>, <em class="property">const</em> <a class="reference internal" href="#_CPPv4N3eos17bfd_session_key_tE" title="eos::bfd_session_key_t">bfd_session_key_t</a> &amp;<em>obj</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos17bfd_session_key_tlsERNSt7ostreamERK17bfd_session_key_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>A utility stream operator that adds a string representation of <a class="reference internal" href="#classeos_1_1bfd__session__key__t"><span class="std std-ref">bfd_session_key_t</span></a> to the ostream. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="cpp class">
+<dt id="_CPPv4N3eos14bfd_interval_tE">
+<span id="_CPPv3N3eos14bfd_interval_tE"></span><span id="_CPPv2N3eos14bfd_interval_tE"></span><span id="eos::bfd_interval_t"></span><span class="target" id="classeos_1_1bfd__interval__t"></span><em class="property">class </em><code class="sig-name descname">bfd_interval_t</code><a class="headerlink" href="#_CPPv4N3eos14bfd_interval_tE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><div class="docutils container">
+<em>#include &lt;bfd.h&gt;</em></div>
+<p>BFD interval configuration class. Used to specify BFD timer interval. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
+<dl class="cpp function">
+<dt id="_CPPv4N3eos14bfd_interval_t14bfd_interval_tEv">
+<span id="_CPPv3N3eos14bfd_interval_t14bfd_interval_tEv"></span><span id="_CPPv2N3eos14bfd_interval_t14bfd_interval_tEv"></span><span id="eos::bfd_interval_t::bfd_interval_t"></span><span class="target" id="classeos_1_1bfd__interval__t_1aaab62e69d714ed713ce35a99c2d4f71f"></span><code class="sig-name descname">bfd_interval_t</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos14bfd_interval_t14bfd_interval_tEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos14bfd_interval_t14bfd_interval_tE8uint16_t8uint16_t7uint8_t">
+<span id="_CPPv3N3eos14bfd_interval_t14bfd_interval_tE8uint16_t8uint16_t7uint8_t"></span><span id="_CPPv2N3eos14bfd_interval_t14bfd_interval_tE8uint16_t8uint16_t7uint8_t"></span><span id="eos::bfd_interval_t::bfd_interval_t__uint16_t.uint16_t.uint8_t"></span><span class="target" id="classeos_1_1bfd__interval__t_1a751c20451911a698a1f2a8c38d98695c"></span><code class="sig-name descname">bfd_interval_t</code><span class="sig-paren">(</span>uint16_t <em>tx</em>, uint16_t <em>rx</em>, uint8_t <em>mult</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos14bfd_interval_t14bfd_interval_tE8uint16_t8uint16_t7uint8_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos14bfd_interval_t14bfd_interval_tERK14bfd_interval_t">
+<span id="_CPPv3N3eos14bfd_interval_t14bfd_interval_tERK14bfd_interval_t"></span><span id="_CPPv2N3eos14bfd_interval_t14bfd_interval_tERK14bfd_interval_t"></span><span id="eos::bfd_interval_t::bfd_interval_t__bfd_interval_tCR"></span><span class="target" id="classeos_1_1bfd__interval__t_1a899327473f93ad4fdd88f4fcd57ead84"></span><code class="sig-name descname">bfd_interval_t</code><span class="sig-paren">(</span><em class="property">const</em> <a class="reference internal" href="#_CPPv4N3eos14bfd_interval_t14bfd_interval_tERK14bfd_interval_t" title="eos::bfd_interval_t::bfd_interval_t">bfd_interval_t</a> &amp;<em>other</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos14bfd_interval_t14bfd_interval_tERK14bfd_interval_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos14bfd_interval_taSERK14bfd_interval_t">
+<span id="_CPPv3N3eos14bfd_interval_taSERK14bfd_interval_t"></span><span id="_CPPv2N3eos14bfd_interval_taSERK14bfd_interval_t"></span><span id="eos::bfd_interval_t::assign-operator__bfd_interval_tCR"></span><span class="target" id="classeos_1_1bfd__interval__t_1a1c1927329a3a9ad2232f7c3fd6d413cb"></span><a class="reference internal" href="#_CPPv4N3eos14bfd_interval_tE" title="eos::bfd_interval_t">bfd_interval_t</a> &amp;<code class="sig-name descname">operator=</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos14bfd_interval_tE" title="eos::bfd_interval_t">bfd_interval_t</a> <em class="property">const</em> &amp;<em>other</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos14bfd_interval_taSERK14bfd_interval_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos14bfd_interval_t2txEv">
+<span id="_CPPv3NK3eos14bfd_interval_t2txEv"></span><span id="_CPPv2NK3eos14bfd_interval_t2txEv"></span><span id="eos::bfd_interval_t::txC"></span><span class="target" id="classeos_1_1bfd__interval__t_1a1cc8d8ef5304611901e9893c6fc749d4"></span>uint16_t <code class="sig-name descname">tx</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos14bfd_interval_t2txEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Getter for ‘tx’: desired minimum tx interval. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos14bfd_interval_t2rxEv">
+<span id="_CPPv3NK3eos14bfd_interval_t2rxEv"></span><span id="_CPPv2NK3eos14bfd_interval_t2rxEv"></span><span id="eos::bfd_interval_t::rxC"></span><span class="target" id="classeos_1_1bfd__interval__t_1a547913fc6dc13b4268c4af80b465669e"></span>uint16_t <code class="sig-name descname">rx</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos14bfd_interval_t2rxEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Getter for ‘rx’: required minimum rx interval. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos14bfd_interval_t4multEv">
+<span id="_CPPv3NK3eos14bfd_interval_t4multEv"></span><span id="_CPPv2NK3eos14bfd_interval_t4multEv"></span><span id="eos::bfd_interval_t::multC"></span><span class="target" id="classeos_1_1bfd__interval__t_1aeb29d4cd186deb004e7357ebc367d410"></span>uint8_t <code class="sig-name descname">mult</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos14bfd_interval_t4multEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Getter for ‘mult’: detection multiplier. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos14bfd_interval_teqERK14bfd_interval_t">
+<span id="_CPPv3NK3eos14bfd_interval_teqERK14bfd_interval_t"></span><span id="_CPPv2NK3eos14bfd_interval_teqERK14bfd_interval_t"></span><span id="eos::bfd_interval_t::eq-operator__bfd_interval_tCRC"></span><span class="target" id="classeos_1_1bfd__interval__t_1a6241354c6c16129e6311e7b2da2a73bf"></span>bool <code class="sig-name descname">operator==</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos14bfd_interval_tE" title="eos::bfd_interval_t">bfd_interval_t</a> <em class="property">const</em> &amp;<em>other</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos14bfd_interval_teqERK14bfd_interval_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos14bfd_interval_tneERK14bfd_interval_t">
+<span id="_CPPv3NK3eos14bfd_interval_tneERK14bfd_interval_t"></span><span id="_CPPv2NK3eos14bfd_interval_tneERK14bfd_interval_t"></span><span id="eos::bfd_interval_t::neq-operator__bfd_interval_tCRC"></span><span class="target" id="classeos_1_1bfd__interval__t_1acc31d22f4808977b83f3ab6455d48c8a"></span>bool <code class="sig-name descname">operator!=</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos14bfd_interval_tE" title="eos::bfd_interval_t">bfd_interval_t</a> <em class="property">const</em> &amp;<em>other</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos14bfd_interval_tneERK14bfd_interval_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos14bfd_interval_t4hashEv">
+<span id="_CPPv3NK3eos14bfd_interval_t4hashEv"></span><span id="_CPPv2NK3eos14bfd_interval_t4hashEv"></span><span id="eos::bfd_interval_t::hashC"></span><span class="target" id="classeos_1_1bfd__interval__t_1a56cca0a1415ea92c8c1f2b3d6b85f457"></span>uint32_t <code class="sig-name descname">hash</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos14bfd_interval_t4hashEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>The hash function for type <a class="reference internal" href="#classeos_1_1bfd__interval__t"><span class="std std-ref">bfd_interval_t</span></a>. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos14bfd_interval_t6mix_meER8hash_mix">
+<span id="_CPPv3NK3eos14bfd_interval_t6mix_meER8hash_mix"></span><span id="_CPPv2NK3eos14bfd_interval_t6mix_meER8hash_mix"></span><span id="eos::bfd_interval_t::mix_me__hash_mixRC"></span><span class="target" id="classeos_1_1bfd__interval__t_1a92e2ba833a4c0eeb96b4bf565656df0e"></span>void <code class="sig-name descname">mix_me</code><span class="sig-paren">(</span><a class="reference internal" href="hash_mix.html#_CPPv4N3eos8hash_mixE" title="eos::hash_mix">hash_mix</a> &amp;<em>h</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos14bfd_interval_t6mix_meER8hash_mix" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>The hash mix function for type <a class="reference internal" href="#classeos_1_1bfd__interval__t"><span class="std std-ref">bfd_interval_t</span></a>. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos14bfd_interval_t9to_stringEv">
+<span id="_CPPv3NK3eos14bfd_interval_t9to_stringEv"></span><span id="_CPPv2NK3eos14bfd_interval_t9to_stringEv"></span><span id="eos::bfd_interval_t::to_stringC"></span><span class="target" id="classeos_1_1bfd__interval__t_1a31c31333584a7edd9bdb7d97fa408b4c"></span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::string <code class="sig-name descname">to_string</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos14bfd_interval_t9to_stringEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Returns a string representation of the current object’s values. </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-private-members">Private Members</p>
+<dl class="cpp var">
+<dt id="_CPPv4N3eos14bfd_interval_t5pimplE">
+<span id="_CPPv3N3eos14bfd_interval_t5pimplE"></span><span id="_CPPv2N3eos14bfd_interval_t5pimplE"></span><span id="eos::bfd_interval_t::pimpl__std::shared_ptr:bfd_interval_impl_t:"></span><span class="target" id="classeos_1_1bfd__interval__t_1aef7572d4f36a083b9856025805582df4"></span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::shared_ptr&lt;bfd_interval_impl_t&gt; <code class="sig-name descname">pimpl</code><a class="headerlink" href="#_CPPv4N3eos14bfd_interval_t5pimplE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-friends">Friends</p>
+<dl class="cpp function">
+<dt id="_CPPv4N3eos14bfd_interval_tlsERNSt7ostreamERK14bfd_interval_t">
+<span id="_CPPv3N3eos14bfd_interval_tlsERNSt7ostreamERK14bfd_interval_t"></span><span id="_CPPv2N3eos14bfd_interval_tlsERNSt7ostreamERK14bfd_interval_t"></span><span id="eos::bfd_interval_t::lshift-operator__osR.bfd_interval_tCR"></span><span class="target" id="classeos_1_1bfd__interval__t_1ae9588cbb2e7e526be84d5a31caa9af56"></span><em class="property">friend</em> <a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::ostream &amp;<code class="sig-name descname">operator&lt;&lt;</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::ostream &amp;<em>os</em>, <em class="property">const</em> <a class="reference internal" href="#_CPPv4N3eos14bfd_interval_tE" title="eos::bfd_interval_t">bfd_interval_t</a> &amp;<em>obj</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos14bfd_interval_tlsERNSt7ostreamERK14bfd_interval_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>A utility stream operator that adds a string representation of <a class="reference internal" href="#classeos_1_1bfd__interval__t"><span class="std std-ref">bfd_interval_t</span></a> to the ostream. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="cpp class">
+<dt id="_CPPv4N3eos13bfd_session_tE">
+<span id="_CPPv3N3eos13bfd_session_tE"></span><span id="_CPPv2N3eos13bfd_session_tE"></span><span id="eos::bfd_session_t"></span><span class="target" id="classeos_1_1bfd__session__t"></span><em class="property">class </em><code class="sig-name descname">bfd_session_t</code><a class="headerlink" href="#_CPPv4N3eos13bfd_session_tE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><div class="docutils container">
+<em>#include &lt;bfd.h&gt;</em></div>
+<p>This data structure is used to describe a BFD session. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
+<dl class="cpp function">
+<dt id="_CPPv4N3eos13bfd_session_t13bfd_session_tEv">
+<span id="_CPPv3N3eos13bfd_session_t13bfd_session_tEv"></span><span id="_CPPv2N3eos13bfd_session_t13bfd_session_tEv"></span><span id="eos::bfd_session_t::bfd_session_t"></span><span class="target" id="classeos_1_1bfd__session__t_1a9ca0b0cc995178b2581107dab46c322d"></span><code class="sig-name descname">bfd_session_t</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos13bfd_session_t13bfd_session_tEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos13bfd_session_t13bfd_session_tE17bfd_session_key_t20bfd_session_status_t">
+<span id="_CPPv3N3eos13bfd_session_t13bfd_session_tE17bfd_session_key_t20bfd_session_status_t"></span><span id="_CPPv2N3eos13bfd_session_t13bfd_session_tE17bfd_session_key_t20bfd_session_status_t"></span><span id="eos::bfd_session_t::bfd_session_t__bfd_session_key_t.bfd_session_status_t"></span><span class="target" id="classeos_1_1bfd__session__t_1a41e3af25d72b57f842c1609f18cfd8b8"></span><code class="sig-name descname">bfd_session_t</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos17bfd_session_key_tE" title="eos::bfd_session_key_t">bfd_session_key_t</a> <em>peer</em>, <a class="reference internal" href="#_CPPv4N3eos20bfd_session_status_tE" title="eos::bfd_session_status_t">bfd_session_status_t</a> <em>status</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos13bfd_session_t13bfd_session_tE17bfd_session_key_t20bfd_session_status_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos13bfd_session_t13bfd_session_tERK13bfd_session_t">
+<span id="_CPPv3N3eos13bfd_session_t13bfd_session_tERK13bfd_session_t"></span><span id="_CPPv2N3eos13bfd_session_t13bfd_session_tERK13bfd_session_t"></span><span id="eos::bfd_session_t::bfd_session_t__bfd_session_tCR"></span><span class="target" id="classeos_1_1bfd__session__t_1af69790dea2016be49e488b09c668ae67"></span><code class="sig-name descname">bfd_session_t</code><span class="sig-paren">(</span><em class="property">const</em> <a class="reference internal" href="#_CPPv4N3eos13bfd_session_t13bfd_session_tERK13bfd_session_t" title="eos::bfd_session_t::bfd_session_t">bfd_session_t</a> &amp;<em>other</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos13bfd_session_t13bfd_session_tERK13bfd_session_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos13bfd_session_taSERK13bfd_session_t">
+<span id="_CPPv3N3eos13bfd_session_taSERK13bfd_session_t"></span><span id="_CPPv2N3eos13bfd_session_taSERK13bfd_session_t"></span><span id="eos::bfd_session_t::assign-operator__bfd_session_tCR"></span><span class="target" id="classeos_1_1bfd__session__t_1a063eb6ed82fae8631bb463aeb8fba0b0"></span><a class="reference internal" href="#_CPPv4N3eos13bfd_session_tE" title="eos::bfd_session_t">bfd_session_t</a> &amp;<code class="sig-name descname">operator=</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos13bfd_session_tE" title="eos::bfd_session_t">bfd_session_t</a> <em class="property">const</em> &amp;<em>other</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos13bfd_session_taSERK13bfd_session_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos13bfd_session_t4peerEv">
+<span id="_CPPv3NK3eos13bfd_session_t4peerEv"></span><span id="_CPPv2NK3eos13bfd_session_t4peerEv"></span><span id="eos::bfd_session_t::peerC"></span><span class="target" id="classeos_1_1bfd__session__t_1a44080e4317a095b0df76c71ae96143df"></span><a class="reference internal" href="#_CPPv4N3eos17bfd_session_key_tE" title="eos::bfd_session_key_t">bfd_session_key_t</a> <code class="sig-name descname">peer</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos13bfd_session_t4peerEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Getter for ‘peer’: the peer for this BFD session. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos13bfd_session_t6statusEv">
+<span id="_CPPv3NK3eos13bfd_session_t6statusEv"></span><span id="_CPPv2NK3eos13bfd_session_t6statusEv"></span><span id="eos::bfd_session_t::statusC"></span><span class="target" id="classeos_1_1bfd__session__t_1a4870c6069bd1f4fcbed6683f008216d3"></span><a class="reference internal" href="#_CPPv4N3eos20bfd_session_status_tE" title="eos::bfd_session_status_t">bfd_session_status_t</a> <code class="sig-name descname">status</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos13bfd_session_t6statusEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Getter for ‘status’: the status of the BFD session. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos13bfd_session_teqERK13bfd_session_t">
+<span id="_CPPv3NK3eos13bfd_session_teqERK13bfd_session_t"></span><span id="_CPPv2NK3eos13bfd_session_teqERK13bfd_session_t"></span><span id="eos::bfd_session_t::eq-operator__bfd_session_tCRC"></span><span class="target" id="classeos_1_1bfd__session__t_1a2a82fbb1f66ec6b598bdb448179724cb"></span>bool <code class="sig-name descname">operator==</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos13bfd_session_tE" title="eos::bfd_session_t">bfd_session_t</a> <em class="property">const</em> &amp;<em>other</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos13bfd_session_teqERK13bfd_session_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos13bfd_session_tneERK13bfd_session_t">
+<span id="_CPPv3NK3eos13bfd_session_tneERK13bfd_session_t"></span><span id="_CPPv2NK3eos13bfd_session_tneERK13bfd_session_t"></span><span id="eos::bfd_session_t::neq-operator__bfd_session_tCRC"></span><span class="target" id="classeos_1_1bfd__session__t_1a3090fd143b9df8be69f51ee994050a5e"></span>bool <code class="sig-name descname">operator!=</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos13bfd_session_tE" title="eos::bfd_session_t">bfd_session_t</a> <em class="property">const</em> &amp;<em>other</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos13bfd_session_tneERK13bfd_session_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos13bfd_session_tltERK13bfd_session_t">
+<span id="_CPPv3NK3eos13bfd_session_tltERK13bfd_session_t"></span><span id="_CPPv2NK3eos13bfd_session_tltERK13bfd_session_t"></span><span id="eos::bfd_session_t::lt-operator__bfd_session_tCRC"></span><span class="target" id="classeos_1_1bfd__session__t_1a7750ba55458152472feaca96a0a18b28"></span>bool <code class="sig-name descname">operator&lt;</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos13bfd_session_tE" title="eos::bfd_session_t">bfd_session_t</a> <em class="property">const</em> &amp;<em>other</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos13bfd_session_tltERK13bfd_session_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos13bfd_session_t4hashEv">
+<span id="_CPPv3NK3eos13bfd_session_t4hashEv"></span><span id="_CPPv2NK3eos13bfd_session_t4hashEv"></span><span id="eos::bfd_session_t::hashC"></span><span class="target" id="classeos_1_1bfd__session__t_1abdef80dde69c10e8e5847d29ab784460"></span>uint32_t <code class="sig-name descname">hash</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos13bfd_session_t4hashEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>The hash function for type <a class="reference internal" href="#classeos_1_1bfd__session__t"><span class="std std-ref">bfd_session_t</span></a>. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos13bfd_session_t6mix_meER8hash_mix">
+<span id="_CPPv3NK3eos13bfd_session_t6mix_meER8hash_mix"></span><span id="_CPPv2NK3eos13bfd_session_t6mix_meER8hash_mix"></span><span id="eos::bfd_session_t::mix_me__hash_mixRC"></span><span class="target" id="classeos_1_1bfd__session__t_1a4c17da35683958bfdc3c7244f73381dc"></span>void <code class="sig-name descname">mix_me</code><span class="sig-paren">(</span><a class="reference internal" href="hash_mix.html#_CPPv4N3eos8hash_mixE" title="eos::hash_mix">hash_mix</a> &amp;<em>h</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos13bfd_session_t6mix_meER8hash_mix" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>The hash mix function for type <a class="reference internal" href="#classeos_1_1bfd__session__t"><span class="std std-ref">bfd_session_t</span></a>. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos13bfd_session_t9to_stringEv">
+<span id="_CPPv3NK3eos13bfd_session_t9to_stringEv"></span><span id="_CPPv2NK3eos13bfd_session_t9to_stringEv"></span><span id="eos::bfd_session_t::to_stringC"></span><span class="target" id="classeos_1_1bfd__session__t_1ab4bc72bf36800f80d63ab1694b87ce98"></span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::string <code class="sig-name descname">to_string</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos13bfd_session_t9to_stringEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Returns a string representation of the current object’s values. </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-private-members">Private Members</p>
+<dl class="cpp var">
+<dt id="_CPPv4N3eos13bfd_session_t5pimplE">
+<span id="_CPPv3N3eos13bfd_session_t5pimplE"></span><span id="_CPPv2N3eos13bfd_session_t5pimplE"></span><span id="eos::bfd_session_t::pimpl__std::shared_ptr:bfd_session_impl_t:"></span><span class="target" id="classeos_1_1bfd__session__t_1a570b3228d6bb2b4b75e8cdf7f45d2aa8"></span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::shared_ptr&lt;bfd_session_impl_t&gt; <code class="sig-name descname">pimpl</code><a class="headerlink" href="#_CPPv4N3eos13bfd_session_t5pimplE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-friends">Friends</p>
+<dl class="cpp function">
+<dt id="_CPPv4N3eos13bfd_session_tlsERNSt7ostreamERK13bfd_session_t">
+<span id="_CPPv3N3eos13bfd_session_tlsERNSt7ostreamERK13bfd_session_t"></span><span id="_CPPv2N3eos13bfd_session_tlsERNSt7ostreamERK13bfd_session_t"></span><span id="eos::bfd_session_t::lshift-operator__osR.bfd_session_tCR"></span><span class="target" id="classeos_1_1bfd__session__t_1a8e7f479a6487bd66415db92622a1d3ee"></span><em class="property">friend</em> <a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::ostream &amp;<code class="sig-name descname">operator&lt;&lt;</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::ostream &amp;<em>os</em>, <em class="property">const</em> <a class="reference internal" href="#_CPPv4N3eos13bfd_session_tE" title="eos::bfd_session_t">bfd_session_t</a> &amp;<em>obj</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos13bfd_session_tlsERNSt7ostreamERK13bfd_session_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>A utility stream operator that adds a string representation of <a class="reference internal" href="#classeos_1_1bfd__session__t"><span class="std std-ref">bfd_session_t</span></a> to the ostream. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="cpp class">
+<dt id="_CPPv4N3eos23sbfd_echo_session_key_tE">
+<span id="_CPPv3N3eos23sbfd_echo_session_key_tE"></span><span id="_CPPv2N3eos23sbfd_echo_session_key_tE"></span><span id="eos::sbfd_echo_session_key_t"></span><span class="target" id="classeos_1_1sbfd__echo__session__key__t"></span><em class="property">class </em><code class="sig-name descname">sbfd_echo_session_key_t</code><a class="headerlink" href="#_CPPv4N3eos23sbfd_echo_session_key_tE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><div class="docutils container">
+<em>#include &lt;bfd.h&gt;</em></div>
+<p>sBFD echo session key class. Used to identify a sBFD echo session on a switch. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
+<dl class="cpp function">
+<dt id="_CPPv4N3eos23sbfd_echo_session_key_t23sbfd_echo_session_key_tEv">
+<span id="_CPPv3N3eos23sbfd_echo_session_key_t23sbfd_echo_session_key_tEv"></span><span id="_CPPv2N3eos23sbfd_echo_session_key_t23sbfd_echo_session_key_tEv"></span><span id="eos::sbfd_echo_session_key_t::sbfd_echo_session_key_t"></span><span class="target" id="classeos_1_1sbfd__echo__session__key__t_1a1394ea14539fe364a4ae725538c88417"></span><code class="sig-name descname">sbfd_echo_session_key_t</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos23sbfd_echo_session_key_t23sbfd_echo_session_key_tEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos23sbfd_echo_session_key_t23sbfd_echo_session_key_tE9ip_addr_t9intf_id_tRKNSt12forward_listI12mpls_label_tEE7uint8_t7uint8_t">
+<span id="_CPPv3N3eos23sbfd_echo_session_key_t23sbfd_echo_session_key_tE9ip_addr_t9intf_id_tRKNSt12forward_listI12mpls_label_tEE7uint8_t7uint8_t"></span><span id="_CPPv2N3eos23sbfd_echo_session_key_t23sbfd_echo_session_key_tE9ip_addr_t9intf_id_tRKNSt12forward_listI12mpls_label_tEE7uint8_t7uint8_t"></span><span id="eos::sbfd_echo_session_key_t::sbfd_echo_session_key_t__ip_addr_t.intf_id_t.std::forward_list:mpls_label_t:CR.uint8_t.uint8_t"></span><span class="target" id="classeos_1_1sbfd__echo__session__key__t_1af9e17f0f41baca8e869e1cacf210b604"></span><code class="sig-name descname">sbfd_echo_session_key_t</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#_CPPv4N3eos9ip_addr_tE" title="eos::ip_addr_t">ip_addr_t</a> <em>nexthop</em>, <a class="reference internal" href="intf.html#_CPPv4N3eos9intf_id_tE" title="eos::intf_id_t">intf_id_t</a> <em>nexthop_intf</em>, <a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::forward_list&lt;<a class="reference internal" href="mpls.html#_CPPv4N3eos12mpls_label_tE" title="eos::mpls_label_t">mpls_label_t</a>&gt; <em class="property">const</em> &amp;<em>labels</em>, uint8_t <em>ip_dscp</em>, uint8_t <em>mpls_exp</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos23sbfd_echo_session_key_t23sbfd_echo_session_key_tE9ip_addr_t9intf_id_tRKNSt12forward_listI12mpls_label_tEE7uint8_t7uint8_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos23sbfd_echo_session_key_t23sbfd_echo_session_key_tE9ip_addr_t9intf_id_tRKNSt12forward_listI12mpls_label_tEE">
+<span id="_CPPv3N3eos23sbfd_echo_session_key_t23sbfd_echo_session_key_tE9ip_addr_t9intf_id_tRKNSt12forward_listI12mpls_label_tEE"></span><span id="_CPPv2N3eos23sbfd_echo_session_key_t23sbfd_echo_session_key_tE9ip_addr_t9intf_id_tRKNSt12forward_listI12mpls_label_tEE"></span><span id="eos::sbfd_echo_session_key_t::sbfd_echo_session_key_t__ip_addr_t.intf_id_t.std::forward_list:mpls_label_t:CR"></span><span class="target" id="classeos_1_1sbfd__echo__session__key__t_1a2888ee8bdbafb5f5f9b96c88631d16ac"></span><code class="sig-name descname">sbfd_echo_session_key_t</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#_CPPv4N3eos9ip_addr_tE" title="eos::ip_addr_t">ip_addr_t</a> <em>nexthop</em>, <a class="reference internal" href="intf.html#_CPPv4N3eos9intf_id_tE" title="eos::intf_id_t">intf_id_t</a> <em>nexthop_intf</em>, <a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::forward_list&lt;<a class="reference internal" href="mpls.html#_CPPv4N3eos12mpls_label_tE" title="eos::mpls_label_t">mpls_label_t</a>&gt; <em class="property">const</em> &amp;<em>labels</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos23sbfd_echo_session_key_t23sbfd_echo_session_key_tE9ip_addr_t9intf_id_tRKNSt12forward_listI12mpls_label_tEE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>ip_dscp &amp; mpls_exp defaults to CS6 and 6 respectively. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos23sbfd_echo_session_key_t23sbfd_echo_session_key_tERK23sbfd_echo_session_key_t">
+<span id="_CPPv3N3eos23sbfd_echo_session_key_t23sbfd_echo_session_key_tERK23sbfd_echo_session_key_t"></span><span id="_CPPv2N3eos23sbfd_echo_session_key_t23sbfd_echo_session_key_tERK23sbfd_echo_session_key_t"></span><span id="eos::sbfd_echo_session_key_t::sbfd_echo_session_key_t__sbfd_echo_session_key_tCR"></span><span class="target" id="classeos_1_1sbfd__echo__session__key__t_1a147915864399873e5d14a7bf1b44ed0c"></span><code class="sig-name descname">sbfd_echo_session_key_t</code><span class="sig-paren">(</span><em class="property">const</em> <a class="reference internal" href="#_CPPv4N3eos23sbfd_echo_session_key_t23sbfd_echo_session_key_tERK23sbfd_echo_session_key_t" title="eos::sbfd_echo_session_key_t::sbfd_echo_session_key_t">sbfd_echo_session_key_t</a> &amp;<em>other</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos23sbfd_echo_session_key_t23sbfd_echo_session_key_tERK23sbfd_echo_session_key_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos23sbfd_echo_session_key_taSERK23sbfd_echo_session_key_t">
+<span id="_CPPv3N3eos23sbfd_echo_session_key_taSERK23sbfd_echo_session_key_t"></span><span id="_CPPv2N3eos23sbfd_echo_session_key_taSERK23sbfd_echo_session_key_t"></span><span id="eos::sbfd_echo_session_key_t::assign-operator__sbfd_echo_session_key_tCR"></span><span class="target" id="classeos_1_1sbfd__echo__session__key__t_1aacae08b865f17d421e02bb840f7c3bd0"></span><a class="reference internal" href="#_CPPv4N3eos23sbfd_echo_session_key_tE" title="eos::sbfd_echo_session_key_t">sbfd_echo_session_key_t</a> &amp;<code class="sig-name descname">operator=</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos23sbfd_echo_session_key_tE" title="eos::sbfd_echo_session_key_t">sbfd_echo_session_key_t</a> <em class="property">const</em> &amp;<em>other</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos23sbfd_echo_session_key_taSERK23sbfd_echo_session_key_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos23sbfd_echo_session_key_t7nexthopEv">
+<span id="_CPPv3NK3eos23sbfd_echo_session_key_t7nexthopEv"></span><span id="_CPPv2NK3eos23sbfd_echo_session_key_t7nexthopEv"></span><span id="eos::sbfd_echo_session_key_t::nexthopC"></span><span class="target" id="classeos_1_1sbfd__echo__session__key__t_1a6bbb737c63a57dfd329485fea795c005"></span><a class="reference internal" href="ip.html#_CPPv4N3eos9ip_addr_tE" title="eos::ip_addr_t">ip_addr_t</a> <code class="sig-name descname">nexthop</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos23sbfd_echo_session_key_t7nexthopEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Getter for ‘nexthop’: nexthop IP address to send the probes to. If the nexthop is an IPv4 address, the probes will be IPv4 packets, if the nexthop is an IPv6 packet, the probes will be IPv6 packets. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos23sbfd_echo_session_key_t12nexthop_intfEv">
+<span id="_CPPv3NK3eos23sbfd_echo_session_key_t12nexthop_intfEv"></span><span id="_CPPv2NK3eos23sbfd_echo_session_key_t12nexthop_intfEv"></span><span id="eos::sbfd_echo_session_key_t::nexthop_intfC"></span><span class="target" id="classeos_1_1sbfd__echo__session__key__t_1a534a099df33abe749d138ee24889e562"></span><a class="reference internal" href="intf.html#_CPPv4N3eos9intf_id_tE" title="eos::intf_id_t">intf_id_t</a> <code class="sig-name descname">nexthop_intf</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos23sbfd_echo_session_key_t12nexthop_intfEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Getter for ‘nexthop_intf’: local interface to send probes on. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos23sbfd_echo_session_key_t6labelsEv">
+<span id="_CPPv3NK3eos23sbfd_echo_session_key_t6labelsEv"></span><span id="_CPPv2NK3eos23sbfd_echo_session_key_t6labelsEv"></span><span id="eos::sbfd_echo_session_key_t::labelsC"></span><span class="target" id="classeos_1_1sbfd__echo__session__key__t_1a5f80ee64fc7584a7b2ac1e6ec0526892"></span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::forward_list&lt;<a class="reference internal" href="mpls.html#_CPPv4N3eos12mpls_label_tE" title="eos::mpls_label_t">mpls_label_t</a>&gt; <em class="property">const</em> &amp;<code class="sig-name descname">labels</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos23sbfd_echo_session_key_t6labelsEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Getter for ‘labels’: MPLS labels to impose on the probes.</p>
+<p>The first element in iteration order is the outermost label, the last element in iteration order is the innermost label. When using std::forward_list&lt; eos::mpls_label_t &gt;::push_front to build the label stack, the first element pushed will be the innermost label, also known as bottom of stack. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos23sbfd_echo_session_key_t7ip_dscpEv">
+<span id="_CPPv3NK3eos23sbfd_echo_session_key_t7ip_dscpEv"></span><span id="_CPPv2NK3eos23sbfd_echo_session_key_t7ip_dscpEv"></span><span id="eos::sbfd_echo_session_key_t::ip_dscpC"></span><span class="target" id="classeos_1_1sbfd__echo__session__key__t_1a3ab7a0c1aa5f43d1775d9ac0c256955c"></span>uint8_t <code class="sig-name descname">ip_dscp</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos23sbfd_echo_session_key_t7ip_dscpEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Getter for ‘ip_dscp’: IPv4/IPv6 DSCP value of the probe. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos23sbfd_echo_session_key_t8mpls_expEv">
+<span id="_CPPv3NK3eos23sbfd_echo_session_key_t8mpls_expEv"></span><span id="_CPPv2NK3eos23sbfd_echo_session_key_t8mpls_expEv"></span><span id="eos::sbfd_echo_session_key_t::mpls_expC"></span><span class="target" id="classeos_1_1sbfd__echo__session__key__t_1ac0884009a5d166888795adaa609169e1"></span>uint8_t <code class="sig-name descname">mpls_exp</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos23sbfd_echo_session_key_t8mpls_expEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Getter for ‘mpls_exp’: MPLS exp value of the probe. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos23sbfd_echo_session_key_teqERK23sbfd_echo_session_key_t">
+<span id="_CPPv3NK3eos23sbfd_echo_session_key_teqERK23sbfd_echo_session_key_t"></span><span id="_CPPv2NK3eos23sbfd_echo_session_key_teqERK23sbfd_echo_session_key_t"></span><span id="eos::sbfd_echo_session_key_t::eq-operator__sbfd_echo_session_key_tCRC"></span><span class="target" id="classeos_1_1sbfd__echo__session__key__t_1a756ac8c33083ee19010da19b9a72d257"></span>bool <code class="sig-name descname">operator==</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos23sbfd_echo_session_key_tE" title="eos::sbfd_echo_session_key_t">sbfd_echo_session_key_t</a> <em class="property">const</em> &amp;<em>other</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos23sbfd_echo_session_key_teqERK23sbfd_echo_session_key_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos23sbfd_echo_session_key_tneERK23sbfd_echo_session_key_t">
+<span id="_CPPv3NK3eos23sbfd_echo_session_key_tneERK23sbfd_echo_session_key_t"></span><span id="_CPPv2NK3eos23sbfd_echo_session_key_tneERK23sbfd_echo_session_key_t"></span><span id="eos::sbfd_echo_session_key_t::neq-operator__sbfd_echo_session_key_tCRC"></span><span class="target" id="classeos_1_1sbfd__echo__session__key__t_1a0ed055e00d862dd24d3a1e69041289f5"></span>bool <code class="sig-name descname">operator!=</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos23sbfd_echo_session_key_tE" title="eos::sbfd_echo_session_key_t">sbfd_echo_session_key_t</a> <em class="property">const</em> &amp;<em>other</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos23sbfd_echo_session_key_tneERK23sbfd_echo_session_key_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos23sbfd_echo_session_key_tltERK23sbfd_echo_session_key_t">
+<span id="_CPPv3NK3eos23sbfd_echo_session_key_tltERK23sbfd_echo_session_key_t"></span><span id="_CPPv2NK3eos23sbfd_echo_session_key_tltERK23sbfd_echo_session_key_t"></span><span id="eos::sbfd_echo_session_key_t::lt-operator__sbfd_echo_session_key_tCRC"></span><span class="target" id="classeos_1_1sbfd__echo__session__key__t_1a8ef5a901e0e6ca2f27ef7f1b21ba508f"></span>bool <code class="sig-name descname">operator&lt;</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos23sbfd_echo_session_key_tE" title="eos::sbfd_echo_session_key_t">sbfd_echo_session_key_t</a> <em class="property">const</em> &amp;<em>other</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos23sbfd_echo_session_key_tltERK23sbfd_echo_session_key_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos23sbfd_echo_session_key_t4hashEv">
+<span id="_CPPv3NK3eos23sbfd_echo_session_key_t4hashEv"></span><span id="_CPPv2NK3eos23sbfd_echo_session_key_t4hashEv"></span><span id="eos::sbfd_echo_session_key_t::hashC"></span><span class="target" id="classeos_1_1sbfd__echo__session__key__t_1a7218785d5ba026bb8225eb626b01fe10"></span>uint32_t <code class="sig-name descname">hash</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos23sbfd_echo_session_key_t4hashEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>The hash function for type <a class="reference internal" href="#classeos_1_1sbfd__echo__session__key__t"><span class="std std-ref">sbfd_echo_session_key_t</span></a>. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos23sbfd_echo_session_key_t6mix_meER8hash_mix">
+<span id="_CPPv3NK3eos23sbfd_echo_session_key_t6mix_meER8hash_mix"></span><span id="_CPPv2NK3eos23sbfd_echo_session_key_t6mix_meER8hash_mix"></span><span id="eos::sbfd_echo_session_key_t::mix_me__hash_mixRC"></span><span class="target" id="classeos_1_1sbfd__echo__session__key__t_1a751d447b907aa547792c38a992168cf3"></span>void <code class="sig-name descname">mix_me</code><span class="sig-paren">(</span><a class="reference internal" href="hash_mix.html#_CPPv4N3eos8hash_mixE" title="eos::hash_mix">hash_mix</a> &amp;<em>h</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos23sbfd_echo_session_key_t6mix_meER8hash_mix" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>The hash mix function for type <a class="reference internal" href="#classeos_1_1sbfd__echo__session__key__t"><span class="std std-ref">sbfd_echo_session_key_t</span></a>. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos23sbfd_echo_session_key_t9to_stringEv">
+<span id="_CPPv3NK3eos23sbfd_echo_session_key_t9to_stringEv"></span><span id="_CPPv2NK3eos23sbfd_echo_session_key_t9to_stringEv"></span><span id="eos::sbfd_echo_session_key_t::to_stringC"></span><span class="target" id="classeos_1_1sbfd__echo__session__key__t_1a0d7df812433f320ff8eb9c18bab6d9fc"></span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::string <code class="sig-name descname">to_string</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos23sbfd_echo_session_key_t9to_stringEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Returns a string representation of the current object’s values. </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-private-members">Private Members</p>
+<dl class="cpp var">
+<dt id="_CPPv4N3eos23sbfd_echo_session_key_t5pimplE">
+<span id="_CPPv3N3eos23sbfd_echo_session_key_t5pimplE"></span><span id="_CPPv2N3eos23sbfd_echo_session_key_t5pimplE"></span><span id="eos::sbfd_echo_session_key_t::pimpl__std::shared_ptr:sbfd_echo_session_key_impl_t:"></span><span class="target" id="classeos_1_1sbfd__echo__session__key__t_1a029815d28feef6ffa8b4111c2cbe7bb8"></span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::shared_ptr&lt;sbfd_echo_session_key_impl_t&gt; <code class="sig-name descname">pimpl</code><a class="headerlink" href="#_CPPv4N3eos23sbfd_echo_session_key_t5pimplE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-friends">Friends</p>
+<dl class="cpp function">
+<dt id="_CPPv4N3eos23sbfd_echo_session_key_tlsERNSt7ostreamERK23sbfd_echo_session_key_t">
+<span id="_CPPv3N3eos23sbfd_echo_session_key_tlsERNSt7ostreamERK23sbfd_echo_session_key_t"></span><span id="_CPPv2N3eos23sbfd_echo_session_key_tlsERNSt7ostreamERK23sbfd_echo_session_key_t"></span><span id="eos::sbfd_echo_session_key_t::lshift-operator__osR.sbfd_echo_session_key_tCR"></span><span class="target" id="classeos_1_1sbfd__echo__session__key__t_1ae1d6a1e0ee0c1751e4b9efdfd4c7c491"></span><em class="property">friend</em> <a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::ostream &amp;<code class="sig-name descname">operator&lt;&lt;</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::ostream &amp;<em>os</em>, <em class="property">const</em> <a class="reference internal" href="#_CPPv4N3eos23sbfd_echo_session_key_tE" title="eos::sbfd_echo_session_key_t">sbfd_echo_session_key_t</a> &amp;<em>obj</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos23sbfd_echo_session_key_tlsERNSt7ostreamERK23sbfd_echo_session_key_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>A utility stream operator that adds a string representation of <a class="reference internal" href="#classeos_1_1sbfd__echo__session__key__t"><span class="std std-ref">sbfd_echo_session_key_t</span></a> to the ostream. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="cpp class">
+<dt id="_CPPv4N3eos15sbfd_interval_tE">
+<span id="_CPPv3N3eos15sbfd_interval_tE"></span><span id="_CPPv2N3eos15sbfd_interval_tE"></span><span id="eos::sbfd_interval_t"></span><span class="target" id="classeos_1_1sbfd__interval__t"></span><em class="property">class </em><code class="sig-name descname">sbfd_interval_t</code><a class="headerlink" href="#_CPPv4N3eos15sbfd_interval_tE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><div class="docutils container">
+<em>#include &lt;bfd.h&gt;</em></div>
+<p>sBFD echo interval configuration class. Used to specify sBFD echo timer interval. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
+<dl class="cpp function">
+<dt id="_CPPv4N3eos15sbfd_interval_t15sbfd_interval_tEv">
+<span id="_CPPv3N3eos15sbfd_interval_t15sbfd_interval_tEv"></span><span id="_CPPv2N3eos15sbfd_interval_t15sbfd_interval_tEv"></span><span id="eos::sbfd_interval_t::sbfd_interval_t"></span><span class="target" id="classeos_1_1sbfd__interval__t_1addd383a4c0d9c3e24a2958ed9eeee89d"></span><code class="sig-name descname">sbfd_interval_t</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos15sbfd_interval_t15sbfd_interval_tEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos15sbfd_interval_t15sbfd_interval_tE8uint16_t7uint8_t">
+<span id="_CPPv3N3eos15sbfd_interval_t15sbfd_interval_tE8uint16_t7uint8_t"></span><span id="_CPPv2N3eos15sbfd_interval_t15sbfd_interval_tE8uint16_t7uint8_t"></span><span id="eos::sbfd_interval_t::sbfd_interval_t__uint16_t.uint8_t"></span><span class="target" id="classeos_1_1sbfd__interval__t_1a21f6cb3b82872ab1b652f63cbe4bf017"></span><code class="sig-name descname">sbfd_interval_t</code><span class="sig-paren">(</span>uint16_t <em>tx</em>, uint8_t <em>mult</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos15sbfd_interval_t15sbfd_interval_tE8uint16_t7uint8_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos15sbfd_interval_t15sbfd_interval_tERK15sbfd_interval_t">
+<span id="_CPPv3N3eos15sbfd_interval_t15sbfd_interval_tERK15sbfd_interval_t"></span><span id="_CPPv2N3eos15sbfd_interval_t15sbfd_interval_tERK15sbfd_interval_t"></span><span id="eos::sbfd_interval_t::sbfd_interval_t__sbfd_interval_tCR"></span><span class="target" id="classeos_1_1sbfd__interval__t_1af610cccecca3aa349bac8add814e653c"></span><code class="sig-name descname">sbfd_interval_t</code><span class="sig-paren">(</span><em class="property">const</em> <a class="reference internal" href="#_CPPv4N3eos15sbfd_interval_t15sbfd_interval_tERK15sbfd_interval_t" title="eos::sbfd_interval_t::sbfd_interval_t">sbfd_interval_t</a> &amp;<em>other</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos15sbfd_interval_t15sbfd_interval_tERK15sbfd_interval_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos15sbfd_interval_taSERK15sbfd_interval_t">
+<span id="_CPPv3N3eos15sbfd_interval_taSERK15sbfd_interval_t"></span><span id="_CPPv2N3eos15sbfd_interval_taSERK15sbfd_interval_t"></span><span id="eos::sbfd_interval_t::assign-operator__sbfd_interval_tCR"></span><span class="target" id="classeos_1_1sbfd__interval__t_1aa4d182c634be1416bedead0b26a69ff7"></span><a class="reference internal" href="#_CPPv4N3eos15sbfd_interval_tE" title="eos::sbfd_interval_t">sbfd_interval_t</a> &amp;<code class="sig-name descname">operator=</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos15sbfd_interval_tE" title="eos::sbfd_interval_t">sbfd_interval_t</a> <em class="property">const</em> &amp;<em>other</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos15sbfd_interval_taSERK15sbfd_interval_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos15sbfd_interval_t2txEv">
+<span id="_CPPv3NK3eos15sbfd_interval_t2txEv"></span><span id="_CPPv2NK3eos15sbfd_interval_t2txEv"></span><span id="eos::sbfd_interval_t::txC"></span><span class="target" id="classeos_1_1sbfd__interval__t_1a73a5e5b8b20e05af0a780570b525b639"></span>uint16_t <code class="sig-name descname">tx</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos15sbfd_interval_t2txEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Getter for ‘tx’: desired minimum tx interval, in milliseconds. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos15sbfd_interval_t4multEv">
+<span id="_CPPv3NK3eos15sbfd_interval_t4multEv"></span><span id="_CPPv2NK3eos15sbfd_interval_t4multEv"></span><span id="eos::sbfd_interval_t::multC"></span><span class="target" id="classeos_1_1sbfd__interval__t_1aa4228fc1cd1d7cfcfa78a1603c065b53"></span>uint8_t <code class="sig-name descname">mult</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos15sbfd_interval_t4multEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Getter for ‘mult’: detection multiplier. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos15sbfd_interval_teqERK15sbfd_interval_t">
+<span id="_CPPv3NK3eos15sbfd_interval_teqERK15sbfd_interval_t"></span><span id="_CPPv2NK3eos15sbfd_interval_teqERK15sbfd_interval_t"></span><span id="eos::sbfd_interval_t::eq-operator__sbfd_interval_tCRC"></span><span class="target" id="classeos_1_1sbfd__interval__t_1abd0e15e6d55cb4fce485aec89cee47cf"></span>bool <code class="sig-name descname">operator==</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos15sbfd_interval_tE" title="eos::sbfd_interval_t">sbfd_interval_t</a> <em class="property">const</em> &amp;<em>other</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos15sbfd_interval_teqERK15sbfd_interval_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos15sbfd_interval_tneERK15sbfd_interval_t">
+<span id="_CPPv3NK3eos15sbfd_interval_tneERK15sbfd_interval_t"></span><span id="_CPPv2NK3eos15sbfd_interval_tneERK15sbfd_interval_t"></span><span id="eos::sbfd_interval_t::neq-operator__sbfd_interval_tCRC"></span><span class="target" id="classeos_1_1sbfd__interval__t_1afe86ecf244f7c857164abc550ce53953"></span>bool <code class="sig-name descname">operator!=</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos15sbfd_interval_tE" title="eos::sbfd_interval_t">sbfd_interval_t</a> <em class="property">const</em> &amp;<em>other</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos15sbfd_interval_tneERK15sbfd_interval_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos15sbfd_interval_t4hashEv">
+<span id="_CPPv3NK3eos15sbfd_interval_t4hashEv"></span><span id="_CPPv2NK3eos15sbfd_interval_t4hashEv"></span><span id="eos::sbfd_interval_t::hashC"></span><span class="target" id="classeos_1_1sbfd__interval__t_1a397268481ef5071aacba88b249a72bd5"></span>uint32_t <code class="sig-name descname">hash</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos15sbfd_interval_t4hashEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>The hash function for type <a class="reference internal" href="#classeos_1_1sbfd__interval__t"><span class="std std-ref">sbfd_interval_t</span></a>. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos15sbfd_interval_t6mix_meER8hash_mix">
+<span id="_CPPv3NK3eos15sbfd_interval_t6mix_meER8hash_mix"></span><span id="_CPPv2NK3eos15sbfd_interval_t6mix_meER8hash_mix"></span><span id="eos::sbfd_interval_t::mix_me__hash_mixRC"></span><span class="target" id="classeos_1_1sbfd__interval__t_1a4a787ae02a1eb860d68d1e2157128791"></span>void <code class="sig-name descname">mix_me</code><span class="sig-paren">(</span><a class="reference internal" href="hash_mix.html#_CPPv4N3eos8hash_mixE" title="eos::hash_mix">hash_mix</a> &amp;<em>h</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos15sbfd_interval_t6mix_meER8hash_mix" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>The hash mix function for type <a class="reference internal" href="#classeos_1_1sbfd__interval__t"><span class="std std-ref">sbfd_interval_t</span></a>. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos15sbfd_interval_t9to_stringEv">
+<span id="_CPPv3NK3eos15sbfd_interval_t9to_stringEv"></span><span id="_CPPv2NK3eos15sbfd_interval_t9to_stringEv"></span><span id="eos::sbfd_interval_t::to_stringC"></span><span class="target" id="classeos_1_1sbfd__interval__t_1ad08dd578cb52f28137285d9dc83549e6"></span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::string <code class="sig-name descname">to_string</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos15sbfd_interval_t9to_stringEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Returns a string representation of the current object’s values. </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-private-members">Private Members</p>
+<dl class="cpp var">
+<dt id="_CPPv4N3eos15sbfd_interval_t5pimplE">
+<span id="_CPPv3N3eos15sbfd_interval_t5pimplE"></span><span id="_CPPv2N3eos15sbfd_interval_t5pimplE"></span><span id="eos::sbfd_interval_t::pimpl__std::shared_ptr:sbfd_interval_impl_t:"></span><span class="target" id="classeos_1_1sbfd__interval__t_1a1f5cbf5141e64ccf105b3f5ec47ec16e"></span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::shared_ptr&lt;sbfd_interval_impl_t&gt; <code class="sig-name descname">pimpl</code><a class="headerlink" href="#_CPPv4N3eos15sbfd_interval_t5pimplE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-friends">Friends</p>
+<dl class="cpp function">
+<dt id="_CPPv4N3eos15sbfd_interval_tlsERNSt7ostreamERK15sbfd_interval_t">
+<span id="_CPPv3N3eos15sbfd_interval_tlsERNSt7ostreamERK15sbfd_interval_t"></span><span id="_CPPv2N3eos15sbfd_interval_tlsERNSt7ostreamERK15sbfd_interval_t"></span><span id="eos::sbfd_interval_t::lshift-operator__osR.sbfd_interval_tCR"></span><span class="target" id="classeos_1_1sbfd__interval__t_1acc1413eca2186dc70be6c2a6a75252f3"></span><em class="property">friend</em> <a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::ostream &amp;<code class="sig-name descname">operator&lt;&lt;</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::ostream &amp;<em>os</em>, <em class="property">const</em> <a class="reference internal" href="#_CPPv4N3eos15sbfd_interval_tE" title="eos::sbfd_interval_t">sbfd_interval_t</a> &amp;<em>obj</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos15sbfd_interval_tlsERNSt7ostreamERK15sbfd_interval_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>A utility stream operator that adds a string representation of <a class="reference internal" href="#classeos_1_1sbfd__interval__t"><span class="std std-ref">sbfd_interval_t</span></a> to the ostream. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="cpp class">
+<dt id="_CPPv4N3eos29sbfd_echo_session_rtt_stats_tE">
+<span id="_CPPv3N3eos29sbfd_echo_session_rtt_stats_tE"></span><span id="_CPPv2N3eos29sbfd_echo_session_rtt_stats_tE"></span><span id="eos::sbfd_echo_session_rtt_stats_t"></span><span class="target" id="classeos_1_1sbfd__echo__session__rtt__stats__t"></span><em class="property">class </em><code class="sig-name descname">sbfd_echo_session_rtt_stats_t</code><a class="headerlink" href="#_CPPv4N3eos29sbfd_echo_session_rtt_stats_tE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><div class="docutils container">
+<em>#include &lt;bfd.h&gt;</em></div>
+<p>sBFD RTT statistics class. Used to report RTT statistics. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
+<dl class="cpp function">
+<dt id="_CPPv4N3eos29sbfd_echo_session_rtt_stats_t29sbfd_echo_session_rtt_stats_tE8uint32_t8uint32_t8uint32_t8uint32_t8uint32_t8uint32_t8uint32_t">
+<span id="_CPPv3N3eos29sbfd_echo_session_rtt_stats_t29sbfd_echo_session_rtt_stats_tE8uint32_t8uint32_t8uint32_t8uint32_t8uint32_t8uint32_t8uint32_t"></span><span id="_CPPv2N3eos29sbfd_echo_session_rtt_stats_t29sbfd_echo_session_rtt_stats_tE8uint32_t8uint32_t8uint32_t8uint32_t8uint32_t8uint32_t8uint32_t"></span><span id="eos::sbfd_echo_session_rtt_stats_t::sbfd_echo_session_rtt_stats_t__uint32_t.uint32_t.uint32_t.uint32_t.uint32_t.uint32_t.uint32_t"></span><span class="target" id="classeos_1_1sbfd__echo__session__rtt__stats__t_1aed088350e1dff71fa3b25d407fa866fe"></span><code class="sig-name descname">sbfd_echo_session_rtt_stats_t</code><span class="sig-paren">(</span>uint32_t <em>last_rtt</em>, uint32_t <em>min_rtt</em>, uint32_t <em>avg_rtt</em>, uint32_t <em>max_rtt</em>, uint32_t <em>snapshot_min_rtt</em>, uint32_t <em>snapshot_avg_rtt</em>, uint32_t <em>snapshot_max_rtt</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos29sbfd_echo_session_rtt_stats_t29sbfd_echo_session_rtt_stats_tE8uint32_t8uint32_t8uint32_t8uint32_t8uint32_t8uint32_t8uint32_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos29sbfd_echo_session_rtt_stats_t29sbfd_echo_session_rtt_stats_tERK29sbfd_echo_session_rtt_stats_t">
+<span id="_CPPv3N3eos29sbfd_echo_session_rtt_stats_t29sbfd_echo_session_rtt_stats_tERK29sbfd_echo_session_rtt_stats_t"></span><span id="_CPPv2N3eos29sbfd_echo_session_rtt_stats_t29sbfd_echo_session_rtt_stats_tERK29sbfd_echo_session_rtt_stats_t"></span><span id="eos::sbfd_echo_session_rtt_stats_t::sbfd_echo_session_rtt_stats_t__sbfd_echo_session_rtt_stats_tCR"></span><span class="target" id="classeos_1_1sbfd__echo__session__rtt__stats__t_1ab5bf732fa9cff0dce1b55b321004a415"></span><code class="sig-name descname">sbfd_echo_session_rtt_stats_t</code><span class="sig-paren">(</span><em class="property">const</em> <a class="reference internal" href="#_CPPv4N3eos29sbfd_echo_session_rtt_stats_t29sbfd_echo_session_rtt_stats_tERK29sbfd_echo_session_rtt_stats_t" title="eos::sbfd_echo_session_rtt_stats_t::sbfd_echo_session_rtt_stats_t">sbfd_echo_session_rtt_stats_t</a> &amp;<em>other</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos29sbfd_echo_session_rtt_stats_t29sbfd_echo_session_rtt_stats_tERK29sbfd_echo_session_rtt_stats_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos29sbfd_echo_session_rtt_stats_taSERK29sbfd_echo_session_rtt_stats_t">
+<span id="_CPPv3N3eos29sbfd_echo_session_rtt_stats_taSERK29sbfd_echo_session_rtt_stats_t"></span><span id="_CPPv2N3eos29sbfd_echo_session_rtt_stats_taSERK29sbfd_echo_session_rtt_stats_t"></span><span id="eos::sbfd_echo_session_rtt_stats_t::assign-operator__sbfd_echo_session_rtt_stats_tCR"></span><span class="target" id="classeos_1_1sbfd__echo__session__rtt__stats__t_1ab3b9266cda81214cdd650d3fc15e4027"></span><a class="reference internal" href="#_CPPv4N3eos29sbfd_echo_session_rtt_stats_tE" title="eos::sbfd_echo_session_rtt_stats_t">sbfd_echo_session_rtt_stats_t</a> &amp;<code class="sig-name descname">operator=</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos29sbfd_echo_session_rtt_stats_tE" title="eos::sbfd_echo_session_rtt_stats_t">sbfd_echo_session_rtt_stats_t</a> <em class="property">const</em> &amp;<em>other</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos29sbfd_echo_session_rtt_stats_taSERK29sbfd_echo_session_rtt_stats_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos29sbfd_echo_session_rtt_stats_t8last_rttEv">
+<span id="_CPPv3NK3eos29sbfd_echo_session_rtt_stats_t8last_rttEv"></span><span id="_CPPv2NK3eos29sbfd_echo_session_rtt_stats_t8last_rttEv"></span><span id="eos::sbfd_echo_session_rtt_stats_t::last_rttC"></span><span class="target" id="classeos_1_1sbfd__echo__session__rtt__stats__t_1a3de534664bd6a4d0016454d0f63ec03f"></span>uint32_t <code class="sig-name descname">last_rtt</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos29sbfd_echo_session_rtt_stats_t8last_rttEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Getter for ‘last_rtt’: RTT of the last received probe, in microseconds. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos29sbfd_echo_session_rtt_stats_t7min_rttEv">
+<span id="_CPPv3NK3eos29sbfd_echo_session_rtt_stats_t7min_rttEv"></span><span id="_CPPv2NK3eos29sbfd_echo_session_rtt_stats_t7min_rttEv"></span><span id="eos::sbfd_echo_session_rtt_stats_t::min_rttC"></span><span class="target" id="classeos_1_1sbfd__echo__session__rtt__stats__t_1a6510e8d09ec2af39a6363c9b087dbf65"></span>uint32_t <code class="sig-name descname">min_rtt</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos29sbfd_echo_session_rtt_stats_t7min_rttEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Getter for ‘min_rtt’: Minimum RTT for lifetime of session, in microseconds. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos29sbfd_echo_session_rtt_stats_t7avg_rttEv">
+<span id="_CPPv3NK3eos29sbfd_echo_session_rtt_stats_t7avg_rttEv"></span><span id="_CPPv2NK3eos29sbfd_echo_session_rtt_stats_t7avg_rttEv"></span><span id="eos::sbfd_echo_session_rtt_stats_t::avg_rttC"></span><span class="target" id="classeos_1_1sbfd__echo__session__rtt__stats__t_1a8f399a6042d0105d5634d8dec0e2d29c"></span>uint32_t <code class="sig-name descname">avg_rtt</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos29sbfd_echo_session_rtt_stats_t7avg_rttEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Getter for ‘avg_rtt’: Average RTT for lifetime of session, in microseconds. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos29sbfd_echo_session_rtt_stats_t7max_rttEv">
+<span id="_CPPv3NK3eos29sbfd_echo_session_rtt_stats_t7max_rttEv"></span><span id="_CPPv2NK3eos29sbfd_echo_session_rtt_stats_t7max_rttEv"></span><span id="eos::sbfd_echo_session_rtt_stats_t::max_rttC"></span><span class="target" id="classeos_1_1sbfd__echo__session__rtt__stats__t_1a6999ef9c80a8a4ec82491ff9e0d3342c"></span>uint32_t <code class="sig-name descname">max_rtt</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos29sbfd_echo_session_rtt_stats_t7max_rttEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Getter for ‘max_rtt’: Maximum RTT for lifetime of session, in microseconds. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos29sbfd_echo_session_rtt_stats_t16snapshot_min_rttEv">
+<span id="_CPPv3NK3eos29sbfd_echo_session_rtt_stats_t16snapshot_min_rttEv"></span><span id="_CPPv2NK3eos29sbfd_echo_session_rtt_stats_t16snapshot_min_rttEv"></span><span id="eos::sbfd_echo_session_rtt_stats_t::snapshot_min_rttC"></span><span class="target" id="classeos_1_1sbfd__echo__session__rtt__stats__t_1aa61c404acc560f615735fd17c2accde6"></span>uint32_t <code class="sig-name descname">snapshot_min_rtt</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos29sbfd_echo_session_rtt_stats_t16snapshot_min_rttEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Getter for ‘snapshot_min_rtt’: Minimum RTT since last RTT report, in microseconds. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos29sbfd_echo_session_rtt_stats_t16snapshot_avg_rttEv">
+<span id="_CPPv3NK3eos29sbfd_echo_session_rtt_stats_t16snapshot_avg_rttEv"></span><span id="_CPPv2NK3eos29sbfd_echo_session_rtt_stats_t16snapshot_avg_rttEv"></span><span id="eos::sbfd_echo_session_rtt_stats_t::snapshot_avg_rttC"></span><span class="target" id="classeos_1_1sbfd__echo__session__rtt__stats__t_1a3d28dc3ef7c38bdc33e9c967f522bdce"></span>uint32_t <code class="sig-name descname">snapshot_avg_rtt</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos29sbfd_echo_session_rtt_stats_t16snapshot_avg_rttEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Getter for ‘snapshot_avg_rtt’: Average RTT since last RTT report, in microseconds. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos29sbfd_echo_session_rtt_stats_t16snapshot_max_rttEv">
+<span id="_CPPv3NK3eos29sbfd_echo_session_rtt_stats_t16snapshot_max_rttEv"></span><span id="_CPPv2NK3eos29sbfd_echo_session_rtt_stats_t16snapshot_max_rttEv"></span><span id="eos::sbfd_echo_session_rtt_stats_t::snapshot_max_rttC"></span><span class="target" id="classeos_1_1sbfd__echo__session__rtt__stats__t_1a63fc2cb3bcada3dfdbe77ab3b9d78d2a"></span>uint32_t <code class="sig-name descname">snapshot_max_rtt</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos29sbfd_echo_session_rtt_stats_t16snapshot_max_rttEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Getter for ‘snapshot_max_rtt’: Maximum RTT since last RTT report, in microseconds. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos29sbfd_echo_session_rtt_stats_teqERK29sbfd_echo_session_rtt_stats_t">
+<span id="_CPPv3NK3eos29sbfd_echo_session_rtt_stats_teqERK29sbfd_echo_session_rtt_stats_t"></span><span id="_CPPv2NK3eos29sbfd_echo_session_rtt_stats_teqERK29sbfd_echo_session_rtt_stats_t"></span><span id="eos::sbfd_echo_session_rtt_stats_t::eq-operator__sbfd_echo_session_rtt_stats_tCRC"></span><span class="target" id="classeos_1_1sbfd__echo__session__rtt__stats__t_1a8ad2a9e5afc3d5e754b1ebda7fe4309f"></span>bool <code class="sig-name descname">operator==</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos29sbfd_echo_session_rtt_stats_tE" title="eos::sbfd_echo_session_rtt_stats_t">sbfd_echo_session_rtt_stats_t</a> <em class="property">const</em> &amp;<em>other</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos29sbfd_echo_session_rtt_stats_teqERK29sbfd_echo_session_rtt_stats_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos29sbfd_echo_session_rtt_stats_tneERK29sbfd_echo_session_rtt_stats_t">
+<span id="_CPPv3NK3eos29sbfd_echo_session_rtt_stats_tneERK29sbfd_echo_session_rtt_stats_t"></span><span id="_CPPv2NK3eos29sbfd_echo_session_rtt_stats_tneERK29sbfd_echo_session_rtt_stats_t"></span><span id="eos::sbfd_echo_session_rtt_stats_t::neq-operator__sbfd_echo_session_rtt_stats_tCRC"></span><span class="target" id="classeos_1_1sbfd__echo__session__rtt__stats__t_1a31270675625d5297e40265dbb5eb5ba3"></span>bool <code class="sig-name descname">operator!=</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos29sbfd_echo_session_rtt_stats_tE" title="eos::sbfd_echo_session_rtt_stats_t">sbfd_echo_session_rtt_stats_t</a> <em class="property">const</em> &amp;<em>other</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos29sbfd_echo_session_rtt_stats_tneERK29sbfd_echo_session_rtt_stats_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos29sbfd_echo_session_rtt_stats_t4hashEv">
+<span id="_CPPv3NK3eos29sbfd_echo_session_rtt_stats_t4hashEv"></span><span id="_CPPv2NK3eos29sbfd_echo_session_rtt_stats_t4hashEv"></span><span id="eos::sbfd_echo_session_rtt_stats_t::hashC"></span><span class="target" id="classeos_1_1sbfd__echo__session__rtt__stats__t_1a852b309a65b8186e67821014cea68178"></span>uint32_t <code class="sig-name descname">hash</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos29sbfd_echo_session_rtt_stats_t4hashEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>The hash function for type <a class="reference internal" href="#classeos_1_1sbfd__echo__session__rtt__stats__t"><span class="std std-ref">sbfd_echo_session_rtt_stats_t</span></a>. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos29sbfd_echo_session_rtt_stats_t6mix_meER8hash_mix">
+<span id="_CPPv3NK3eos29sbfd_echo_session_rtt_stats_t6mix_meER8hash_mix"></span><span id="_CPPv2NK3eos29sbfd_echo_session_rtt_stats_t6mix_meER8hash_mix"></span><span id="eos::sbfd_echo_session_rtt_stats_t::mix_me__hash_mixRC"></span><span class="target" id="classeos_1_1sbfd__echo__session__rtt__stats__t_1ab03d1c19ba0cae6a6c74298ddd73d9d8"></span>void <code class="sig-name descname">mix_me</code><span class="sig-paren">(</span><a class="reference internal" href="hash_mix.html#_CPPv4N3eos8hash_mixE" title="eos::hash_mix">hash_mix</a> &amp;<em>h</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos29sbfd_echo_session_rtt_stats_t6mix_meER8hash_mix" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>The hash mix function for type <a class="reference internal" href="#classeos_1_1sbfd__echo__session__rtt__stats__t"><span class="std std-ref">sbfd_echo_session_rtt_stats_t</span></a>. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos29sbfd_echo_session_rtt_stats_t9to_stringEv">
+<span id="_CPPv3NK3eos29sbfd_echo_session_rtt_stats_t9to_stringEv"></span><span id="_CPPv2NK3eos29sbfd_echo_session_rtt_stats_t9to_stringEv"></span><span id="eos::sbfd_echo_session_rtt_stats_t::to_stringC"></span><span class="target" id="classeos_1_1sbfd__echo__session__rtt__stats__t_1a8cae18040c021816664cc616e809123c"></span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::string <code class="sig-name descname">to_string</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos29sbfd_echo_session_rtt_stats_t9to_stringEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Returns a string representation of the current object’s values. </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-private-members">Private Members</p>
+<dl class="cpp var">
+<dt id="_CPPv4N3eos29sbfd_echo_session_rtt_stats_t5pimplE">
+<span id="_CPPv3N3eos29sbfd_echo_session_rtt_stats_t5pimplE"></span><span id="_CPPv2N3eos29sbfd_echo_session_rtt_stats_t5pimplE"></span><span id="eos::sbfd_echo_session_rtt_stats_t::pimpl__std::shared_ptr:sbfd_echo_session_rtt_stats_impl_t:"></span><span class="target" id="classeos_1_1sbfd__echo__session__rtt__stats__t_1a792d752de34082cc7b0f47b6f044500f"></span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::shared_ptr&lt;sbfd_echo_session_rtt_stats_impl_t&gt; <code class="sig-name descname">pimpl</code><a class="headerlink" href="#_CPPv4N3eos29sbfd_echo_session_rtt_stats_t5pimplE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-friends">Friends</p>
+<dl class="cpp function">
+<dt id="_CPPv4N3eos29sbfd_echo_session_rtt_stats_tlsERNSt7ostreamERK29sbfd_echo_session_rtt_stats_t">
+<span id="_CPPv3N3eos29sbfd_echo_session_rtt_stats_tlsERNSt7ostreamERK29sbfd_echo_session_rtt_stats_t"></span><span id="_CPPv2N3eos29sbfd_echo_session_rtt_stats_tlsERNSt7ostreamERK29sbfd_echo_session_rtt_stats_t"></span><span id="eos::sbfd_echo_session_rtt_stats_t::lshift-operator__osR.sbfd_echo_session_rtt_stats_tCR"></span><span class="target" id="classeos_1_1sbfd__echo__session__rtt__stats__t_1aa8bfacbed4c6dd03815caab2c327ce2f"></span><em class="property">friend</em> <a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::ostream &amp;<code class="sig-name descname">operator&lt;&lt;</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::ostream &amp;<em>os</em>, <em class="property">const</em> <a class="reference internal" href="#_CPPv4N3eos29sbfd_echo_session_rtt_stats_tE" title="eos::sbfd_echo_session_rtt_stats_t">sbfd_echo_session_rtt_stats_t</a> &amp;<em>obj</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos29sbfd_echo_session_rtt_stats_tlsERNSt7ostreamERK29sbfd_echo_session_rtt_stats_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>A utility stream operator that adds a string representation of <a class="reference internal" href="#classeos_1_1sbfd__echo__session__rtt__stats__t"><span class="std std-ref">sbfd_echo_session_rtt_stats_t</span></a> to the ostream. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#"><strong>bfd</strong></a><ul>
+<li><a class="reference internal" href="#type-definitions-in-bfd">Type definitions in <strong>bfd</strong></a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="base_mgr.html"
+                        title="previous chapter"><strong>base_mgr</strong></a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="bgp.html"
+                        title="next chapter"><strong>bgp</strong></a></p>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="bgp.html" title="bgp"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="base_mgr.html" title="base_mgr"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Arista EOS SDK 2.22.4 reference</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href=""><strong>bfd</strong></a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2014, Arista Networks.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.4.3.
+    </div>
+  </body>
+</html>
