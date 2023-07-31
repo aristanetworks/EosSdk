@@ -61,6 +61,13 @@ policy_map_handler::on_policy_map_config_set(policy_map_key_t const & name) {
    // TODO: no op impl.
 }
 
+#if TRAFFIC_POLICY_ENABLED
+void
+policy_map_handler::on_traffic_policy_config_set( policy_map_key_t const & name ) {
+   // TODO: no op impl.
+}
+#endif
+
 class policy_map_mgr_impl : public policy_map_mgr {
  public:
    policy_map_mgr_impl() {
@@ -76,6 +83,12 @@ class policy_map_mgr_impl : public policy_map_mgr {
       return false;
    }
 
+   #if TRAFFIC_POLICY_ENABLED
+   bool traffic_policy_exists(std::string const & key) const {
+      return false;
+   }
+   #endif
+
    policy_map_t policy_map(policy_map_key_t const & key) const {
       return policy_map_t();
    }
@@ -86,14 +99,39 @@ class policy_map_mgr_impl : public policy_map_mgr {
    void policy_map_del(policy_map_key_t const & key) {
    }
 
+   #if TRAFFIC_POLICY_ENABLED
+   traffic_policy_t traffic_policy(std::string const & tpName) const {
+      return traffic_policy_t("");
+   }
+
+   void traffic_policy_is(traffic_policy_t const & tp) {
+   }
+
+   void traffic_policy_del(std::string const & tpName) {
+   }
+   #endif
+
    policy_map_iter_t policy_map_iter(policy_feature_t) const {
       policy_map_iter_t * nop = 0;
       return *nop;
    }
 
+   #if TRAFFIC_POLICY_ENABLED
+   policy_map_iter_t traffic_policy_iter() const {
+      policy_map_iter_t * nop = 0;
+      return *nop;
+   }
+   #endif
+
    void policy_map_apply(policy_map_key_t const &, intf_id_t,
                          acl_direction_t, bool apply) {
    }
+
+   #if TRAFFIC_POLICY_ENABLED
+   void traffic_policy_apply(std::string const &, intf_id_t,
+                             traffic_policy_direction_t, bool apply) {
+   }
+   #endif
 
    policy_map_hw_status_iter_t policy_map_hw_status_iter(policy_feature_t) const {
       policy_map_hw_status_iter_t *nop = 0;

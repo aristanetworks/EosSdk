@@ -1,9 +1,7 @@
 # Copyright (c) 2014 Arista Networks, Inc.  All rights reserved.
 # Arista Networks, Inc. Confidential and Proprietary.
 
-from __future__ import absolute_import, division, print_function
 import jsonrpclib
-import socket
 import time
 import sys
 
@@ -75,8 +73,8 @@ class TimeoutError(Error):
       Error.__init__(self, msg)
 
 
-class TestLib(object):
-   def __init__(self, host_name, user_name, password, port=None, is_secure=False):
+class TestLib:
+   def __init__( self, host_name, user_name, password, port=None, is_secure=False ):
       """ Establish the eAPI session.
 
           host_name: the host name or ip address of the switch against which the
@@ -102,8 +100,9 @@ class TestLib(object):
       # setup the eApi connection
       proto = SERVER_PROTOCOL_HTTPS if self.is_secure_ else SERVER_PROTOCOL_HTTP
       port_string = self.port_ if self.port_ else ''
-      url = "%s://%s:%s@%s%s/command-api" % (proto, self.user_name_, self.password_,
-                                             self.host_name_, port_string)
+      url = "{}://{}:{}@{}{}/command-api".format( proto,
+                                                  self.user_name_, self.password_,
+                                                  self.host_name_, port_string )
       self.history_ = jsonrpclib.history.History()
       self.eapi_ = jsonrpclib.Server(url, history=self.history_)
 
@@ -138,8 +137,8 @@ class TestLib(object):
 
       try:
          response_list = self.eapi_.runCmds(1, cmds, data_format)
-      except socket.error as e:
-         raise ConnectionError(e.strerror)
+      except OSError as e:
+         raise ConnectionError( e.strerror )
       except jsonrpclib.jsonrpc.TransportError as e:
          raise ProtocolError(e.errcode, e.errmsg, str(e.msg))
       except jsonrpclib.jsonrpc.ProtocolError:
@@ -155,7 +154,7 @@ class TestLib(object):
       return response_list
 
 
-class AgentLib(object):
+class AgentLib:
    def __init__(self, test_lib, agent_name, agent_binary_path, args=None):
       """ This class handles all functions needed for an agent.
 
@@ -190,10 +189,10 @@ class AgentLib(object):
           won't be started.
           Once started, the agent is running as a daemon on switch. """
 
-      cmds = ["enable", "configure terminal",
-              "daemon %s" % self.agent_name,
-              "exec %s %s" % (self.agent_binary_path, self.args),
-              "no shutdown"]
+      cmds = [ "enable", "configure terminal",
+               "daemon %s" % self.agent_name,
+               f"exec {self.agent_binary_path} {self.args}",
+               "no shutdown" ]
 
       self.test_lib.run_cmds( cmds )
       wait_for(self.agent_running, "agent running", timeout=600)
@@ -214,11 +213,11 @@ class AgentLib(object):
    def agent_option_is(self, key, value):
       """ Configures an option/value pair for this agent by issuing
           'option opt value val' command."""
-      self.test_lib.run_cmds(["enable", "configure terminal",
-                              "daemon %s" % self.agent_name,
-                              "option %s value %s" % (key, value)])
+      self.test_lib.run_cmds( [ "enable", "configure terminal",
+                                "daemon %s" % self.agent_name,
+                                f"option {key} value {value}" ] )
 
-   def agent_option_del(self, key):
+   def agent_option_del( self, key ):
       """ Removes an option/value pair from this daemon's configuration. """
       self.test_lib.run_cmds(["enable", "configure terminal",
                               "daemon %s" % self.agent_name,
@@ -294,11 +293,11 @@ class AgentLib(object):
       def get_status():
          data = self.agent_data()
          return expected_value == data['data'][key]
-      wait_for(get_status,
-               "status '%s' to be '%s'" % (key, expected_value),
-               timeout=600)
+      wait_for( get_status,
+                f"status '{key}' to be '{expected_value}'",
+                timeout=600 )
 
-   def wait_for(self, func, description, timeout=300.0):
+   def wait_for( self, func, description, timeout=300.0 ):
       """ The jump from EosSdkGenericTestLib.AgentLib.wait_for to
           EosSdkGenericTestLib.wait_for is kept for legacy reasons in case some
           customers were relying on it.

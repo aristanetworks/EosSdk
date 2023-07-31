@@ -28,15 +28,12 @@ class eth_phy_intf_mgr;
 class eth_phy_intf_counter_mgr;
 class event_loop;
 class fib_mgr;
-class fpga_mgr;
-class ham_mgr;
 class hardware_table_mgr;
 class intf_mgr_helper;
 class intf_mgr;
 class intf_counter_mgr;
 class ip_intf_mgr;
 class ip_route_mgr;
-class l1_source_mgr;
 class lldp_mgr;
 class macsec_mgr;
 class mac_table_mgr;
@@ -128,14 +125,11 @@ class EOS_SDK_PUBLIC sdk::SdkImpl {
    void init_eth_phy_intf_counter_mgr();
    void init_event_loop();
    void init_fib_mgr(mgr_mode_type_t mode=MODE_TYPE_READ_ONLY);
-   void init_fpga_mgr();
-   void init_ham_mgr();
    void init_hardware_table_mgr();
    void init_intf_mgr();
    void init_intf_counter_mgr();
    void init_ip_intf_mgr();
    void init_ip_route_mgr();
-   void init_l1_source_mgr();
    void init_lldp_mgr();
    void init_macsec_mgr();
    void init_mac_table_mgr();
@@ -169,14 +163,11 @@ class EOS_SDK_PUBLIC sdk::SdkImpl {
    eth_phy_intf_counter_mgr * get_eth_phy_intf_counter_mgr();
    event_loop * get_event_loop();
    fib_mgr * get_fib_mgr(mgr_mode_type_t mode=MODE_TYPE_READ_ONLY);
-   fpga_mgr * get_fpga_mgr();
-   ham_mgr * get_ham_mgr();
    hardware_table_mgr * get_hardware_table_mgr();
    intf_mgr * get_intf_mgr();
    intf_counter_mgr * get_intf_counter_mgr();
    ip_intf_mgr * get_ip_intf_mgr();
    ip_route_mgr * get_ip_route_mgr();
-   l1_source_mgr * get_l1_source_mgr();
    lldp_mgr * get_lldp_mgr();
    macsec_mgr * get_macsec_mgr();
    mac_table_mgr * get_mac_table_mgr();
@@ -218,15 +209,12 @@ class EOS_SDK_PUBLIC sdk::SdkImpl {
    eth_lag_intf_mgr * eth_lag_intf_mgr_;
    event_loop * event_loop_;
    fib_mgr * fib_mgr_;
-   fpga_mgr * fpga_mgr_;
-   ham_mgr * ham_mgr_;
    hardware_table_mgr * hardware_table_mgr_;
    intf_mgr_helper * intf_mgr_helper_;
    intf_mgr * intf_mgr_;
    intf_counter_mgr * intf_counter_mgr_;
    ip_intf_mgr * ip_intf_mgr_;
    ip_route_mgr * ip_route_mgr_;
-   l1_source_mgr * l1_source_mgr_;
    lldp_mgr * lldp_mgr_;
    macsec_mgr * macsec_mgr_;
    mac_table_mgr * mac_table_mgr_;
@@ -370,14 +358,6 @@ inline fib_mgr * sdk::SdkImpl::get_fib_mgr(mgr_mode_type_t mode) {
    return fib_mgr_;
 }
 
-inline fpga_mgr * sdk::SdkImpl::get_fpga_mgr() {
-   GET_MGR(fpga)
-}
-
-inline ham_mgr * sdk::SdkImpl::get_ham_mgr() {
-   GET_MGR(ham)
-}
-
 inline hardware_table_mgr * sdk::SdkImpl::get_hardware_table_mgr() {
    GET_MGR(hardware_table)
 }
@@ -410,10 +390,6 @@ inline intf_mgr_helper * sdk::SdkImpl::get_intf_mgr_helper() {
       init_intf_mgr_helper();
    }
    return intf_mgr_helper_;
-}
-
-inline l1_source_mgr * sdk::SdkImpl::get_l1_source_mgr() {
-   GET_MGR(l1_source)
 }
 
 inline macsec_mgr * sdk::SdkImpl::get_macsec_mgr() {

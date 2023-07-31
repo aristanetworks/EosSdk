@@ -14,7 +14,13 @@ using namespace ::apache::thrift::protocol;
 using namespace ::apache::thrift::transport;
 using namespace ::apache::thrift::server;
 
+#include "thriftconfig.h"
+#ifdef HAVE_RECENT_THRIFT
+#include <thrift/transport/TNonblockingServerSocket.h>
+using std::shared_ptr;
+#else
 using boost::shared_ptr;
+#endif
 
 using namespace eos;
 
@@ -78,8 +84,14 @@ int main(int argc, char **argv) {
   event_base_holder base;
   libevent_loop loop(sdk, base.ptr());
   shared_ptr<TProcessor> processor(new ThriftSdkProcessor(handler));
+#ifdef HAVE_RECENT_THRIFT
+  shared_ptr<transport::TNonblockingServerSocket> socket;
 
+  socket.reset(new transport::TNonblockingServerSocket(port));
+  TNonblockingServer server(processor, socket);
+#else
   TNonblockingServer server(processor, port);
+#endif
   loop.init();
   server.registerEvents(base.ptr());
   event_base_dispatch(base.ptr());

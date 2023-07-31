@@ -32,12 +32,10 @@
 #include "eos/eth_lag_intf.h"
 #include "eos/eth_phy_intf.h"
 #include "eos/fib.h"
-#include "eos/fpga.h"
 #include "eos/hardware_table.h"
 #include "eos/intf.h"
 #include "eos/ip.h"
 #include "eos/ip_route.h"
-#include "eos/l1_source.h"
 #include "eos/lldp.h"
 #include "eos/macsec.h"
 #include "eos/mac_table.h"
@@ -52,10 +50,10 @@
 #include "eos/route_map.h"
 #include "eos/subintf.h"
 #include "eos/vrf.h"
-#include "eos/ham.h"
 
 #include "eos/types/sdk.h"
 #include "eos/types/acl.h"
+#include "eos/types/structured_filter.h"
 #include "eos/types/aresolve.h"
 #include "eos/types/bfd.h"
 #include "eos/types/bgp.h"
@@ -69,12 +67,10 @@
 #include "eos/types/eth_lag_intf.h"
 #include "eos/types/eth_phy_intf.h"
 #include "eos/types/fib.h"
-#include "eos/types/fpga.h"
 #include "eos/types/hardware_table.h"
 #include "eos/types/intf.h"
 #include "eos/types/ip.h"
 #include "eos/types/ip_route.h"
-#include "eos/types/l1_source.h"
 #include "eos/types/lldp.h"
 #include "eos/types/macsec.h"
 #include "eos/types/mac_table.h"
@@ -89,9 +85,9 @@
 #include "eos/types/route_map.h"
 #include "eos/types/subintf.h"
 #include "eos/types/vrf.h"
-#include "eos/types/ham.h"
 
 #include "eos/types/acl_impl.h"
+#include "eos/types/structured_filter_impl.h"
 #include "eos/types/aresolve_impl.h"
 #include "eos/types/bfd_impl.h"
 #include "eos/types/bgp_impl.h"
@@ -105,12 +101,10 @@
 #include "eos/types/eth_lag_intf_impl.h"
 #include "eos/types/eth_phy_intf_impl.h"
 #include "eos/types/fib_impl.h"
-#include "eos/types/fpga_impl.h"
 #include "eos/types/hardware_table_impl.h"
 #include "eos/types/intf_impl.h"
 #include "eos/types/ip_impl.h"
 #include "eos/types/ip_route_impl.h"
-#include "eos/types/l1_source_impl.h"
 #include "eos/types/lldp_impl.h"
 #include "eos/types/macsec_impl.h"
 #include "eos/types/mac_table_impl.h"
@@ -125,9 +119,9 @@
 #include "eos/types/route_map_impl.h"
 #include "eos/types/subintf_impl.h"
 #include "eos/types/vrf_impl.h"
-#include "eos/types/ham_impl.h"
 
 #include "eos/inline/types/acl_impl.h"
+#include "eos/inline/types/structured_filter_impl.h"
 #include "eos/inline/types/aresolve_impl.h"
 #include "eos/inline/types/bfd_impl.h"
 #include "eos/inline/types/bgp_impl.h"
@@ -141,12 +135,10 @@
 #include "eos/inline/types/eth_lag_intf_impl.h"
 #include "eos/inline/types/eth_phy_intf_impl.h"
 #include "eos/inline/types/fib_impl.h"
-#include "eos/inline/types/fpga_impl.h"
 #include "eos/inline/types/hardware_table_impl.h"
 #include "eos/inline/types/intf_impl.h"
 #include "eos/inline/types/ip_impl.h"
 #include "eos/inline/types/ip_route_impl.h"
-#include "eos/inline/types/l1_source_impl.h"
 #include "eos/inline/types/lldp_impl.h"
 #include "eos/inline/types/macsec_impl.h"
 #include "eos/inline/types/mac_table_impl.h"
@@ -161,10 +153,10 @@
 #include "eos/inline/types/route_map_impl.h"
 #include "eos/inline/types/subintf_impl.h"
 #include "eos/inline/types/vrf_impl.h"
-#include "eos/inline/types/ham_impl.h"
 
 #include "eos/inline/types/sdk.h"
 #include "eos/inline/types/acl.h"
+#include "eos/inline/types/structured_filter.h"
 #include "eos/inline/types/aresolve.h"
 #include "eos/inline/types/bfd.h"
 #include "eos/inline/types/bgp.h"
@@ -178,12 +170,10 @@
 #include "eos/inline/types/eth_lag_intf.h"
 #include "eos/inline/types/eth_phy_intf.h"
 #include "eos/inline/types/fib.h"
-#include "eos/inline/types/fpga.h"
 #include "eos/inline/types/hardware_table.h"
 #include "eos/inline/types/intf.h"
 #include "eos/inline/types/ip.h"
 #include "eos/inline/types/ip_route.h"
-#include "eos/inline/types/l1_source.h"
 #include "eos/inline/types/lldp.h"
 #include "eos/inline/types/macsec.h"
 #include "eos/inline/types/mac_table.h"
@@ -198,7 +188,6 @@
 #include "eos/inline/types/route_map.h"
 #include "eos/inline/types/subintf.h"
 #include "eos/inline/types/vrf.h"
-#include "eos/inline/types/ham.h"
 
 namespace eos {
 
@@ -294,14 +283,6 @@ fib_mgr * sdk::get_fib_mgr(mgr_mode_type_t mode) {
    return sdkImpl->get_fib_mgr(mode);
 }
 
-fpga_mgr * sdk::get_fpga_mgr() {
-   return sdkImpl->get_fpga_mgr();
-}
-
-ham_mgr * sdk::get_ham_mgr() {
-   return sdkImpl->get_ham_mgr();
-}
-
 hardware_table_mgr * sdk::get_hardware_table_mgr() {
    return sdkImpl->get_hardware_table_mgr();
 }
@@ -327,10 +308,6 @@ intf_mgr_helper * sdk::get_intf_mgr_helper() {
    return sdkImpl->get_intf_mgr_helper() {
 }
 #endif
-
-l1_source_mgr * sdk::get_l1_source_mgr() {
-   return sdkImpl->get_l1_source_mgr();
-}
 
 xcvr_mgr * sdk::get_xcvr_mgr() {
    return sdkImpl->get_xcvr_mgr();

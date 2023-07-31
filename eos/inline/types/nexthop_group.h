@@ -522,6 +522,86 @@ operator<<(std::ostream& os, const nexthop_group_t& obj) {
    return operator<<(os, *obj.pimpl);
 }
 
+
+EOS_SDK_PUBLIC std::ostream&
+operator<<(std::ostream& os, const nexthop_group_counter_state_t & enum_val) {
+   if (enum_val==NEXTHOP_GROUP_COUNTER_INACTIVE) {
+      os << "NEXTHOP_GROUP_COUNTER_INACTIVE";
+   } else if (enum_val==NEXTHOP_GROUP_COUNTER_PROGRAMMING_FAILED) {
+      os << "NEXTHOP_GROUP_COUNTER_PROGRAMMING_FAILED";
+   } else if (enum_val==NEXTHOP_GROUP_COUNTER_PROGRAMMING_COMPLETE) {
+      os << "NEXTHOP_GROUP_COUNTER_PROGRAMMING_COMPLETE";
+   } else {
+      os << "Unknown value";
+   }
+   return os;
+}
+
+
+nexthop_group_programmed_status_t::nexthop_group_programmed_status_t() {
+   pimpl = std::shared_ptr<nexthop_group_programmed_status_impl_t>(
+      new nexthop_group_programmed_status_impl_t()
+   );
+}
+nexthop_group_programmed_status_t::nexthop_group_programmed_status_t(
+         nexthop_group_counter_state_t counter_state) {
+   pimpl = std::shared_ptr<nexthop_group_programmed_status_impl_t>(
+      new nexthop_group_programmed_status_impl_t(
+         counter_state
+      )
+   );
+}
+nexthop_group_programmed_status_t::nexthop_group_programmed_status_t(
+   const nexthop_group_programmed_status_t& other)
+{
+   pimpl = std::make_unique<nexthop_group_programmed_status_impl_t>(
+      nexthop_group_programmed_status_impl_t(*other.pimpl));
+}
+nexthop_group_programmed_status_t&
+nexthop_group_programmed_status_t::operator=(
+   nexthop_group_programmed_status_t const & other)
+{
+   pimpl = std::shared_ptr<nexthop_group_programmed_status_impl_t>(
+      new nexthop_group_programmed_status_impl_t(*other.pimpl));
+   return *this;
+}
+
+nexthop_group_counter_state_t
+nexthop_group_programmed_status_t::counter_state() const {
+   return pimpl->counter_state();
+}
+bool
+nexthop_group_programmed_status_t::operator==(
+         nexthop_group_programmed_status_t const & other) const {
+   return pimpl->operator==(*other.pimpl);
+}
+bool
+nexthop_group_programmed_status_t::operator!=(
+         nexthop_group_programmed_status_t const & other) const {
+   return pimpl->operator!=(*other.pimpl);
+}
+bool
+nexthop_group_programmed_status_t::operator<(
+         nexthop_group_programmed_status_t const & other) const {
+   return pimpl->operator<(*other.pimpl);
+}
+uint32_t
+nexthop_group_programmed_status_t::hash() const {
+   return pimpl->hash();
+}
+void
+nexthop_group_programmed_status_t::mix_me(hash_mix & h) const {
+   pimpl->mix_me(h);
+}
+std::string
+nexthop_group_programmed_status_t::to_string() const {
+   return pimpl->to_string();
+}
+std::ostream&
+operator<<(std::ostream& os, const nexthop_group_programmed_status_t& obj) {
+   return operator<<(os, *obj.pimpl);
+}
+
 }
 
 #endif // EOS_INLINE_TYPES_NEXTHOP_GROUP_H

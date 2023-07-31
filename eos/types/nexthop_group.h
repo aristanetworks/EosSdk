@@ -375,6 +375,75 @@ class EOS_SDK_PUBLIC nexthop_group_t {
 
 EOS_SDK_PUBLIC
 std::ostream& operator<<(std::ostream& os, const nexthop_group_t& obj);
+
+/**
+ * The current counter programming status for a nexthop group.
+ *
+ * Counter State is a summary of the entire nexthop group and will not
+ * note which specific entries are in the provided state.
+ */
+enum nexthop_group_counter_state_t {
+   /** Nexthop group entry counters are not configured for this group. */
+   NEXTHOP_GROUP_COUNTER_INACTIVE,
+   /**
+    * At least one nexthop group entry counter has failed to
+    * be programmed in hardware.
+    */
+   NEXTHOP_GROUP_COUNTER_PROGRAMMING_FAILED,
+   /**
+    * All nexthop group entry counters have been successfully
+    * programmed in hardware.
+    */
+   NEXTHOP_GROUP_COUNTER_PROGRAMMING_COMPLETE,
+};
+/**
+ * Appends a string representation of enum nexthop_group_counter_state_t value to
+ * the ostream.
+ */
+EOS_SDK_PUBLIC std::ostream& operator<<(
+         std::ostream& os, const nexthop_group_counter_state_t & enum_val);
+
+class nexthop_group_programmed_status_impl_t;
+/** Status for the associated nexthop group. */
+class EOS_SDK_PUBLIC nexthop_group_programmed_status_t {
+ public:
+   nexthop_group_programmed_status_t();
+   explicit nexthop_group_programmed_status_t(
+         nexthop_group_counter_state_t counter_state);
+   nexthop_group_programmed_status_t(const nexthop_group_programmed_status_t& other);
+   nexthop_group_programmed_status_t& operator=(
+      nexthop_group_programmed_status_t const & other);
+
+
+   /**
+    * Getter for 'counter_state': The status of the counter programming for this
+    * nexthop group.
+    */
+   nexthop_group_counter_state_t counter_state() const;
+
+   bool operator==(nexthop_group_programmed_status_t const & other) const;
+   bool operator!=(nexthop_group_programmed_status_t const & other) const;
+   bool operator<(nexthop_group_programmed_status_t const & other) const;
+   /** The hash function for type nexthop_group_programmed_status_t. */
+   uint32_t hash() const;
+   /** The hash mix function for type nexthop_group_programmed_status_t. */
+   void mix_me(hash_mix & h) const;
+   /** Returns a string representation of the current object's values. */
+   std::string to_string() const;
+   /**
+    * A utility stream operator that adds a string representation of
+    * nexthop_group_programmed_status_t to the ostream.
+    */
+   friend std::ostream& operator<<(std::ostream& os,
+                                   const nexthop_group_programmed_status_t& obj);
+
+ private:
+   std::shared_ptr<nexthop_group_programmed_status_impl_t> pimpl;
+};
+
+EOS_SDK_PUBLIC
+std::ostream& operator<<(std::ostream& os,
+                         const nexthop_group_programmed_status_t& obj);
 }
 
 #endif // EOS_TYPES_NEXTHOP_GROUP_H

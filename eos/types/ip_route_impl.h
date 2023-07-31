@@ -82,6 +82,14 @@ class EOS_SDK_PUBLIC ip_route_impl_t {
    /** Setter for 'rib_bypass'. */
    void rib_bypass_is(bool rib_bypass);
 
+   /**
+    * Getter for 'command_tag': Associates the route with a command_tag, which
+    * might be used to manipulate configuration externally to the agent.
+    */
+   std::string command_tag() const;
+   /** Setter for 'command_tag'. */
+   void command_tag_is(std::string const & command_tag);
+
    bool operator==(ip_route_impl_t const & other) const;
    bool operator!=(ip_route_impl_t const & other) const;
    /** The hash function for type ip_route_t. */
@@ -100,6 +108,7 @@ class EOS_SDK_PUBLIC ip_route_impl_t {
    ip_route_key_t key_;
    ip_route_tag_t tag_;
    bool rib_bypass_;
+   std::string command_tag_;
 };
 
 /**
@@ -188,6 +197,11 @@ class EOS_SDK_PUBLIC ip_route_via_impl_t {
    /** Setter for 'vtep_sip_validation'. */
    void vtep_sip_validation_is(bool vtep_sip_validation);
 
+   /** Getter for 'weight': the weight for this via. */
+   ip_via_weight_t weight() const;
+   /** Setter for 'weight'. */
+   void weight_is(ip_via_weight_t weight);
+
    bool operator==(ip_route_via_impl_t const & other) const;
    bool operator!=(ip_route_via_impl_t const & other) const;
    /** The hash function for type ip_route_via_t. */
@@ -216,6 +230,7 @@ class EOS_SDK_PUBLIC ip_route_via_impl_t {
    ip_via_metric_t metric_;
    intf_id_t vxlan_intf_;
    bool vtep_sip_validation_;
+   ip_via_weight_t weight_;
 };
 }
 

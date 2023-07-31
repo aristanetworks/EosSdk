@@ -100,12 +100,15 @@ class BgpPathTestAgent : public eos::agent_handler,
 
    void dump_bgp_paths() {
       t.trace0("Dumping paths");
+#pragma GCC diagnostic push
+#pragma GCC diagnostic ignored "-Wformat-security"
       for(auto & iter : ipv4_unicast_paths) {
          t.trace2(iter.second.to_string().c_str());
       }
       for(auto & iter : ipv6_unicast_paths) {
          t.trace2(iter.second.to_string().c_str());
       }
+#pragma GCC diagnostic pop
    }
 
    void on_ipv4_unicast_bgp_converged(bool converged) {

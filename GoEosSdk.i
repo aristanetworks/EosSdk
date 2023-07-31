@@ -27,7 +27,7 @@
 // Change all some_class_t names to just SomeClass:
 // The <<""< uses automatic string concatination to get around the
 // conflict marker limitation.
-%rename("%(command:python $SRCDIR/SwigRenamer.py --classname --go <<""<)s", %$isclass) "";
+%rename("%(command:python3 $SRCDIR/SwigRenamer.py --classname --go <<""<)s", %$isclass) "";
 // Don't do anything for enum values, functions or variables.
 
 // Cause SWIG to produce basic documentation in the generated eossdk.go
@@ -80,14 +80,11 @@ typedef uint64_t uint64_be_t;
 %feature("nodirector") eos::eth_phy_intf_mgr;
 %feature("nodirector") eos::eth_phy_intf_counter_mgr;
 %feature("nodirector") eos::fib_mgr;
-%feature("nodirector") eos::fpga_mgr;
-%feature("nodirector") eos::ham_mgr;
 %feature("nodirector") eos::hardware_table_mgr;
 %feature("nodirector") eos::intf_mgr;
 %feature("nodirector") eos::intf_counter_mgr;
 %feature("nodirector") eos::ip_intf_mgr;
 %feature("nodirector") eos::ip_route_mgr;
-%feature("nodirector") eos::l1_source_mgr;
 %feature("nodirector") eos::lldp_mgr;
 %feature("nodirector") eos::macsec_mgr;
 %feature("nodirector") eos::mac_table_mgr;
@@ -124,8 +121,6 @@ typedef uint64_t uint64_be_t;
 #include "eos/exception.h"
 #include "eos/fd.h"
 #include "eos/fib.h"
-#include "eos/fpga.h"
-#include "eos/ham.h"
 #include "eos/hardware_table.h"
 #include "eos/hash_mix.h"
 #include "eos/intf.h"
@@ -133,7 +128,6 @@ typedef uint64_t uint64_be_t;
 #include "eos/ip_intf.h"
 #include "eos/ip_route.h"
 #include "eos/iterator.h"
-#include "eos/l1_source.h"
 #include "eos/lldp.h"
 #include "eos/macsec.h"
 #include "eos/mac_table.h"
@@ -237,7 +231,6 @@ wrap_iterator(eos::class_map_iter_t, eos::class_map_iter_impl, eos::class_map_ke
 wrap_iterator(eos::fib_fec_iter_t, eos::fib_fec_iter_impl, eos::fib_fec_t);
 wrap_iterator(eos::fib_route_iter_t, eos::fib_route_iter_impl, eos::fib_route_t);
 wrap_iterator(eos::flow_entry_iter_t, eos::flow_entry_iter_impl, eos::flow_entry_t);
-wrap_iterator(eos::fpga_iter_t, eos::fpga_iter_impl, eos::fpga_t);
 wrap_iterator(eos::eth_intf_iter_t, eos::eth_intf_iter_impl, eos::intf_id_t);
 wrap_iterator(eos::eth_lag_intf_iter_t, eos::eth_lag_intf_iter_impl, eos::intf_id_t);
 wrap_iterator(eos::eth_lag_intf_member_iter_t, eos::eth_lag_intf_member_iter_impl, eos::intf_id_t);
@@ -247,7 +240,6 @@ wrap_iterator(eos::intf_iter_t, eos::intf_iter_impl, eos::intf_id_t);
 wrap_iterator(eos::ip_route_iter_t, eos::ip_route_iter_impl, eos::ip_route_t);
 wrap_iterator(eos::ip_route_via_iter_t, eos::ip_route_via_iter_impl, eos::ip_route_via_t);
 wrap_iterator(eos::decap_group_iter_t, eos::decap_group_iter_impl, eos::decap_group_t);
-wrap_iterator(eos::l1_source_iter_t, eos::l1_source_iter_impl, eos::intf_id_t);
 wrap_iterator(eos::lldp_remote_system_iter_t, eos::lldp_remote_system_iter_impl, lldp_remote_system_t);
 wrap_iterator(eos::lldp_intf_iter_t, eos::lldp_intf_iter_impl, intf_id_t);
 wrap_iterator(eos::lldp_neighbor_iter_t, eos::lldp_neighbor_iter_impl, lldp_neighbor_t);

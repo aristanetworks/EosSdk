@@ -66,6 +66,7 @@
 #include <eos/intf.h>
 
 #include <eos/types/acl.h>
+#include <eos/types/structured_filter.h>
 
 namespace eos {
 

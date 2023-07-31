@@ -12,12 +12,10 @@
 #include "eos/eth_lag_intf.h"
 #include "eos/eth_phy_intf.h"
 #include "eos/fib.h"
-#include "eos/fpga.h"
 #include "eos/hardware_table.h"
 #include "eos/intf.h"
 #include "eos/ip_route.h"
 #include "eos/iterator.h"
-#include "eos/l1_source.h"
 #include "eos/macsec.h"
 #include "eos/mac_table.h"
 #include "eos/mpls_route.h"
@@ -122,9 +120,6 @@ INSTANTIATE_ITERATOR(decap_group_t, decap_group_iter_impl);
 INSTANTIATE_ITERATOR(fib_fec_t, fib_fec_iter_impl);
 INSTANTIATE_ITERATOR(fib_route_t, fib_route_iter_impl);
 INSTANTIATE_ITERATOR(flow_entry_t, flow_entry_iter_impl);
-INSTANTIATE_ITERATOR(fpga_t, fpga_iter_impl);
-INSTANTIATE_ITERATOR(fpga_reservation_t, fpga_reservation_iter_impl);
-INSTANTIATE_ITERATOR(fpga_reservation_status_t, fpga_reservation_status_iter_impl);
 INSTANTIATE_ITERATOR(hardware_table_key_t, hardware_table_iter_impl);
 INSTANTIATE_ITERATOR(intf_id_t, intf_iter_impl);
 INSTANTIATE_ITERATOR(intf_id_t, eth_intf_iter_impl);
@@ -133,7 +128,6 @@ INSTANTIATE_ITERATOR(intf_id_t, eth_lag_intf_member_iter_impl);
 INSTANTIATE_ITERATOR(intf_id_t, eth_phy_intf_iter_impl);
 INSTANTIATE_ITERATOR(ip_route_t, ip_route_iter_impl);
 INSTANTIATE_ITERATOR(ip_route_via_t, ip_route_via_iter_impl);
-INSTANTIATE_ITERATOR(intf_id_t, l1_source_iter_impl);
 INSTANTIATE_ITERATOR(mac_key_t, mac_table_iter_impl);
 INSTANTIATE_ITERATOR(mac_key_t, mac_table_status_iter_impl);
 INSTANTIATE_ITERATOR(mpls_route_t, mpls_route_iter_impl);

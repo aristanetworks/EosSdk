@@ -16,6 +16,13 @@ using namespace apache::thrift::protocol;
 using namespace apache::thrift::transport;
 namespace po = boost::program_options;
 
+#include "thriftconfig.h"
+#ifdef HAVE_RECENT_THRIFT
+using std::shared_ptr;
+#else
+using boost::shared_ptr;
+#endif
+
 using namespace eos;
 
 int main(int argc, char **argv) {
@@ -43,9 +50,9 @@ int main(int argc, char **argv) {
   }
   po::notify(flags);
 
-  boost::shared_ptr<TSocket> socket(new TSocket(server, port));
-  boost::shared_ptr<TTransport> transport(new TFramedTransport(socket));
-  boost::shared_ptr<TProtocol> protocol(new TBinaryProtocol(transport));
+  shared_ptr<TSocket> socket(new TSocket(server, port));
+  shared_ptr<TTransport> transport(new TFramedTransport(socket));
+  shared_ptr<TProtocol> protocol(new TBinaryProtocol(transport));
 
   ThriftSdkClient client(protocol);
   transport->open();

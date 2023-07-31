@@ -63,6 +63,11 @@ class nexthop_group_mgr_impl : public nexthop_group_mgr {
       return nexthop_group_t();
    }
 
+   nexthop_group_counter_state_t get_nexthop_group_counter_state(
+         std::string const & nexthop_group_name) const {
+      return NEXTHOP_GROUP_COUNTER_INACTIVE;
+   }
+
 };
 
 DEFINE_STUB_MGR_CTOR(nexthop_group_mgr);
@@ -103,4 +108,13 @@ nexthop_group_handler_v2::on_nexthop_group_programmed(std::string const & group_
    // TODO: No op impl.
 }
 
+nexthop_group_handler_v3::nexthop_group_handler_v3(nexthop_group_mgr * mgr) :
+      nexthop_group_handler(mgr) {
+}
+
+void
+nexthop_group_handler_v3::on_nexthop_group_programmed(std::string const & group_name,
+   uint16_t version_id, nexthop_group_programmed_status_t const & status) {
+   // TODO: No op impl.
+}
 }

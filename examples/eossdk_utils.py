@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 # Copyright (c) 2015 Arista Networks, Inc.  All rights reserved.
 # Arista Networks, Inc. Confidential and Proprietary.
 
@@ -34,7 +34,7 @@ def debug_fn(func):
    @wraps(func)
    def wrapped_fn(*args, **kwargs):
       try:
-         func(*args, **kwargs)
+         return func(*args, **kwargs)
       except Exception as e:
          traceback.print_exc()
          if sys.stdout.isatty():

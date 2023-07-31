@@ -1,8 +1,7 @@
-#!/usr/bin/env pychooser
+#!/usr/bin/env python3
 # Copyright (c) 2014 Arista Networks, Inc.  All rights reserved.
 # Arista Networks, Inc. Confidential and Proprietary.
 
-from __future__ import absolute_import, division, print_function
 import argparse
 import EosSdkGenericTestLib
 from EosSdkGenericTestLib import AgentLib
@@ -14,8 +13,8 @@ from EosSdkGenericTestLib import AgentLib
 # run this test script.
 
 
-class HelloWorldTest(object):
-   def __init__(self, test_lib, agent_name, agent_binary_path, args=None):
+class HelloWorldTest:
+   def __init__( self, test_lib, agent_name, agent_binary_path, args=None ):
       self.test_lib = test_lib
       self.agent_name = agent_name
       self.agent_binary_path = agent_binary_path

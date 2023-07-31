@@ -694,6 +694,73 @@ operator<<(std::ostream& os, const nexthop_group_impl_t& obj) {
 }
 
 
+
+
+
+nexthop_group_programmed_status_impl_t::nexthop_group_programmed_status_impl_t()
+       :
+      counter_state_(NEXTHOP_GROUP_COUNTER_INACTIVE) {
+}
+
+nexthop_group_programmed_status_impl_t::nexthop_group_programmed_status_impl_t(
+         nexthop_group_counter_state_t counter_state) :
+      counter_state_(counter_state) {
+}
+
+nexthop_group_counter_state_t
+nexthop_group_programmed_status_impl_t::counter_state() const {
+   return counter_state_;
+}
+
+bool
+nexthop_group_programmed_status_impl_t::operator==(
+         nexthop_group_programmed_status_impl_t const & other) const {
+   return counter_state_ == other.counter_state_;
+}
+
+bool
+nexthop_group_programmed_status_impl_t::operator!=(
+         nexthop_group_programmed_status_impl_t const & other) const {
+   return !operator==(other);
+}
+
+bool
+nexthop_group_programmed_status_impl_t::operator<(
+         nexthop_group_programmed_status_impl_t const & other) const {
+   if(counter_state_ != other.counter_state_) {
+      return counter_state_ < other.counter_state_;
+   }
+   return false;
+}
+
+uint32_t
+nexthop_group_programmed_status_impl_t::hash() const {
+   hash_mix h;
+   mix_me(h);
+   return h.result();
+}
+
+void
+nexthop_group_programmed_status_impl_t::mix_me(hash_mix & h) const {
+   h.mix(counter_state_); // nexthop_group_counter_state_t
+}
+
+std::string
+nexthop_group_programmed_status_impl_t::to_string() const {
+   std::ostringstream ss;
+   ss << "nexthop_group_programmed_status_t(";
+   ss << "counter_state=" << counter_state_;
+   ss << ")";
+   return ss.str();
+}
+
+std::ostream&
+operator<<(std::ostream& os, const nexthop_group_programmed_status_impl_t& obj) {
+   os << obj.to_string();
+   return os;
+}
+
+
 }
 
 #include <eos/inline/types/nexthop_group.h>

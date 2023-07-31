@@ -1,14 +1,12 @@
-#!/usr/bin/env pychooser
+#!/usr/bin/env python3
 # Copyright (c) 2016 Arista Networks, Inc.  All rights reserved.
 # Arista Networks, Inc. Confidential and Proprietary.
 
-from __future__ import absolute_import, division, print_function
 import EosSdkGenericTestLib
-import six
 
 
-class InterfaceMonitorTest(object):
-   def __init__(self, test_lib, agent_name, sintfs, agent_binary_path, args=None):
+class InterfaceMonitorTest:
+   def __init__( self, test_lib, agent_name, sintfs, agent_binary_path, args=None ):
       self.test_lib = test_lib
       self.agent_name = agent_name
       self.agent_binary_path = agent_binary_path
@@ -21,8 +19,8 @@ class InterfaceMonitorTest(object):
       # to receive two "on_oper_status" notifications. Otherwise 1 is returned.
 
       response = self.test_lib.run_cmds(["show interfaces status"])[0]
-      for intf, status in six.iteritems( response[ "interfaceStatuses" ] ):
-         if status["linkStatus"] == 'connected' and "Ma" not in intf:
+      for intf, status in response[ "interfaceStatuses" ].items():
+         if status[ "linkStatus" ] == 'connected' and "Ma" not in intf:
             if intf in self.sintfs:
                return intf, 2
             else:

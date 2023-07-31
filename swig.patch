@@ -35,3 +35,12 @@
  
      // Access iterator method, required by Python
      virtual PyObject *value() const = 0;
+@@ -11477,7 +11477,7 @@ SWIGINTERN PyObject *_wrap__BitSet4096__
+     try {
+       {
+         SWIG_PYTHON_THREAD_BEGIN_ALLOW;
+-        result = (bool)((std::bitset< 4096 > const *)arg1)->operator !=((std::bitset< 4096 > const &)*arg2);
++        result = !(bool)((std::bitset< 4096 > const *)arg1)->operator ==((std::bitset< 4096 > const &)*arg2);
+         SWIG_PYTHON_THREAD_END_ALLOW;
+       }
+     } catch (error const & e) {

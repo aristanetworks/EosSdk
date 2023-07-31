@@ -231,7 +231,13 @@ class EOS_SDK_PUBLIC macsec_profile_t {
     * protection : deprecated in favour of lldp_bypass_level.
     */
    bool bypass_lldp() const;
-   /** Setter for 'bypass_lldp': deprecated in favour of lldp_bypass_level_is. */
+   /**
+    * Setter for 'bypass_lldp': deprecated in favour of lldp_bypass_level_is.
+    * Both `bypass_lldp` and `lldp_bypass_level` operate on the same internal
+    * attribute.
+    * A value of false corresponds to the macsec_bypass_t value BYPASS_NULL while a
+    * value of true corresponds to BYPASS_AUTHORIZED.
+    */
    void bypass_lldp_is(bool bypass_lldp);
    /**
     * Getter for 'lldp_bypass_level': If set, transmit/receive LLDP frames without

@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 # Copyright (c) 2015 Arista Networks, Inc.  All rights reserved.
 # Arista Networks, Inc. Confidential and Proprietary.
 
@@ -41,16 +41,16 @@ class InotifyHandler(pyinotify.ProcessEvent):
       self.p = parent  # pylint: disable-msg=W0201
 
    def process_IN_MODIFY(self, event):
-      print "File changed"
+      print( "File changed" )
       self.p.process_file()
 
    def process_IN_CREATE(self, event):
-      print "File created"
+      print( "File created" )
       self.p.process_file()
 
    def process_IN_DELETE(self, event):
       # In this example, we don't take an action on file deletion.
-      print "File deleted"
+      print( "File deleted" )
 
 
 class FileWatcher(eossdk_utils.EosSdkAgent,

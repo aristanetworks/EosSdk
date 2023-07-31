@@ -84,11 +84,11 @@ operator<<(std::ostream& os, const ip_route_key_impl_t& obj) {
 
 
 ip_route_impl_t::ip_route_impl_t() :
-      key_(), tag_(0), rib_bypass_() {
+      key_(), tag_(0), rib_bypass_(), command_tag_() {
 }
 
 ip_route_impl_t::ip_route_impl_t(ip_route_key_t const & key) :
-      key_(key), tag_(0), rib_bypass_() {
+      key_(key), tag_(0), rib_bypass_(), command_tag_() {
 }
 
 ip_route_key_t
@@ -121,11 +121,22 @@ ip_route_impl_t::rib_bypass_is(bool rib_bypass) {
    rib_bypass_ = rib_bypass;
 }
 
+std::string
+ip_route_impl_t::command_tag() const {
+   return command_tag_;
+}
+
+void
+ip_route_impl_t::command_tag_is(std::string const & command_tag) {
+   command_tag_ = command_tag;
+}
+
 bool
 ip_route_impl_t::operator==(ip_route_impl_t const & other) const {
    return key_ == other.key_ &&
           tag_ == other.tag_ &&
-          rib_bypass_ == other.rib_bypass_;
+          rib_bypass_ == other.rib_bypass_ &&
+          command_tag_ == other.command_tag_;
 }
 
 bool
@@ -145,6 +156,7 @@ ip_route_impl_t::mix_me(hash_mix & h) const {
    h.mix(key_); // ip_route_key_t
    h.mix(tag_); // ip_route_tag_t
    h.mix(rib_bypass_); // bool
+   h.mix(command_tag_); // std::string
 }
 
 std::string
@@ -154,6 +166,7 @@ ip_route_impl_t::to_string() const {
    ss << "key=" << key_;
    ss << ", tag=" << tag_;
    ss << ", rib_bypass=" << rib_bypass_;
+   ss << ", command_tag='" << command_tag_ << "'";
    ss << ")";
    return ss.str();
 }
@@ -169,13 +182,13 @@ operator<<(std::ostream& os, const ip_route_impl_t& obj) {
 ip_route_via_impl_t::ip_route_via_impl_t() :
       route_key_(), hop_(), intf_(), nexthop_group_(), mpls_label_(), vni_(),
       vtep_addr_(), router_mac_(), egress_vrf_(), metric_(0), vxlan_intf_(),
-      vtep_sip_validation_() {
+      vtep_sip_validation_(), weight_() {
 }
 
 ip_route_via_impl_t::ip_route_via_impl_t(ip_route_key_t const & route_key) :
       route_key_(route_key), hop_(), intf_(), nexthop_group_(), mpls_label_(),
       vni_(), vtep_addr_(), router_mac_(), egress_vrf_(), metric_(0),
-      vxlan_intf_(), vtep_sip_validation_() {
+      vxlan_intf_(), vtep_sip_validation_(), weight_() {
 }
 
 ip_route_key_t
@@ -298,6 +311,16 @@ ip_route_via_impl_t::vtep_sip_validation_is(bool vtep_sip_validation) {
    vtep_sip_validation_ = vtep_sip_validation;
 }
 
+ip_via_weight_t
+ip_route_via_impl_t::weight() const {
+   return weight_;
+}
+
+void
+ip_route_via_impl_t::weight_is(ip_via_weight_t weight) {
+   weight_ = weight;
+}
+
 bool
 ip_route_via_impl_t::operator==(ip_route_via_impl_t const & other) const {
    return route_key_ == other.route_key_ &&
@@ -311,7 +334,8 @@ ip_route_via_impl_t::operator==(ip_route_via_impl_t const & other) const {
           egress_vrf_ == other.egress_vrf_ &&
           metric_ == other.metric_ &&
           vxlan_intf_ == other.vxlan_intf_ &&
-          vtep_sip_validation_ == other.vtep_sip_validation_;
+          vtep_sip_validation_ == other.vtep_sip_validation_ &&
+          weight_ == other.weight_;
 }
 
 bool
@@ -340,6 +364,7 @@ ip_route_via_impl_t::mix_me(hash_mix & h) const {
    h.mix(metric_); // ip_via_metric_t
    h.mix(vxlan_intf_); // intf_id_t
    h.mix(vtep_sip_validation_); // bool
+   h.mix(weight_); // ip_via_weight_t
 }
 
 std::string
@@ -358,6 +383,7 @@ ip_route_via_impl_t::to_string() const {
    ss << ", metric=" << metric_;
    ss << ", vxlan_intf=" << vxlan_intf_;
    ss << ", vtep_sip_validation=" << vtep_sip_validation_;
+   ss << ", weight=" << weight_;
    ss << ")";
    return ss.str();
 }

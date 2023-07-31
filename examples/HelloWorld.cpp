@@ -5,10 +5,10 @@
 #include <eos/sdk.h>
 #include <eos/tracing.h>
 
-// This simple agent says "hi" to a user when the user configures his
-// or her name, and demonstrates how to use the various components of
-// the SDK. To run this agent, first build this agent and copy the
-// resulting binary to switch. Then, from the CLI, run:
+// This simple agent says "hi" to a user when the user configures their
+// name, and demonstrates how to use the various components of the SDK.
+// To run this agent, first build this agent and copy the resulting 
+// binary to switch. Then, from the CLI, run:
 
 //    switch# configure
 //    switch(conf)# daemon HelloAgent

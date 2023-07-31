@@ -204,6 +204,15 @@ class EOS_SDK_PUBLIC policy_map_handler : public base_handler<policy_map_mgr,
     */
    virtual void on_policy_map_config_set(policy_map_key_t const &);
 
+   #if TRAFFIC_POLICY_ENABLED
+   /**
+    * Callback fired when traffic policy configuration changes.
+    *
+    * @param policy_map_key_t The key identifying the updated traffic policy.
+    */
+   virtual void on_traffic_policy_config_set(policy_map_key_t const &);
+   #endif
+
  protected:
    policy_map_mgr * policy_map_mgr_;
    policy_feature_t feature_;
@@ -265,6 +274,24 @@ class EOS_SDK_PUBLIC policy_map_mgr : public base_mgr<policy_map_handler,
     * Returns the hardware status for a policy map key.
     */
    virtual policy_map_hw_statuses_t hw_status(policy_map_key_t const &key) const = 0;
+
+   /**
+    * Traffic policy specific implemenations of policy-map calls. For now, we
+    * have traffic-policy APIs in the policy-map manager but it is an
+    * orthogonal feature with some exceptions, i.e. makes use of an iterator
+    * that returns a policy_map_key_t as well as watch/on_foo APIs used by
+    * policy-map.
+    */
+   #if TRAFFIC_POLICY_ENABLED
+   virtual bool traffic_policy_exists(std::string const & tpName) const = 0;
+   virtual traffic_policy_t traffic_policy(std::string const & tpName) const = 0;
+   virtual void traffic_policy_is(traffic_policy_t const & traffic_policy) = 0;
+   virtual void traffic_policy_del(std::string const & tpName) = 0;
+   virtual policy_map_iter_t traffic_policy_iter() const = 0;
+   virtual void traffic_policy_apply(std::string const &, intf_id_t,
+                                     traffic_policy_direction_t, bool apply) = 0;
+   #endif
+
  protected:
    policy_map_mgr() EOS_SDK_PRIVATE;
    friend class policy_map_handler;

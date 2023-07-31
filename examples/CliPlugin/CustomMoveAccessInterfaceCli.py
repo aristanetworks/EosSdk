@@ -1,4 +1,4 @@
-#!/usr/bin/env pychooser
+#!/usr/bin/env python3
 # Copyright (c) 2015 Arista Networks, Inc.  All rights reserved.
 # Arista Networks, Inc. Confidential and Proprietary.
 
@@ -22,7 +22,6 @@ installed at /usr/lib/python2.7/site-packages/CliPlugin/ on switch, then user wi
 need to issue "killall FastCli" to reload all CLIs so the new CLI will take effect.
 """
 
-from __future__ import absolute_import, division, print_function
 import BasicCli
 import CliMatcher
 import CliCommand

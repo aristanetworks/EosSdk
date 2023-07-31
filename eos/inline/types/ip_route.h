@@ -152,6 +152,14 @@ void
 ip_route_t::rib_bypass_is(bool rib_bypass) {
    pimpl->rib_bypass_is(rib_bypass);
 }
+std::string
+ip_route_t::command_tag() const {
+   return pimpl->command_tag();
+}
+void
+ip_route_t::command_tag_is(std::string const & command_tag) {
+   pimpl->command_tag_is(command_tag);
+}
 bool
 ip_route_t::operator==(ip_route_t const & other) const {
    return pimpl->operator==(*other.pimpl);
@@ -300,6 +308,14 @@ ip_route_via_t::vtep_sip_validation() const {
 void
 ip_route_via_t::vtep_sip_validation_is(bool vtep_sip_validation) {
    pimpl->vtep_sip_validation_is(vtep_sip_validation);
+}
+ip_via_weight_t
+ip_route_via_t::weight() const {
+   return pimpl->weight();
+}
+void
+ip_route_via_t::weight_is(ip_via_weight_t weight) {
+   pimpl->weight_is(weight);
 }
 bool
 ip_route_via_t::operator==(ip_route_via_t const & other) const {

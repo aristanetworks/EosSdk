@@ -1,8 +1,7 @@
-#!/usr/bin/env pychooser
+#!/usr/bin/env python3
 # Copyright (c) 2014 Arista Networks, Inc.  All rights reserved.
 # Arista Networks, Inc. Confidential and Proprietary.
 
-from __future__ import absolute_import, division, print_function
 import argparse
 import socket
 
@@ -20,7 +19,7 @@ VRF_YELLOW = 'vrfYellow'
 VRF_BLUE = 'vrfBlue'
 
 
-class VrfTest(object):
+class VrfTest:
    def __init__(self, test_lib, switch_ip, intf, intf_ip,
                 agent_name, agent_binary_path, args=None):
       self.switch_ip = switch_ip

@@ -2,7 +2,9 @@ lib_LTLIBRARIES = libeos.la
 
 AM_CXXFLAGS = -fvisibility=hidden
 AM_CXXFLAGS += -Wextra -Wall -Wnon-virtual-dtor -Werror -Wno-unused-parameter -Wno-error=unused-value
+AM_CXXFLAGS += $(EXTRA_CFLAGS)
 AM_LDFLAGS = -Wl,--no-undefined
+
 
 PUBLISHED_HEADER_FILES := $(wildcard eos/*.h) $(wildcard eos/inline/*.h) $(wildcard eos/types/*.h) $(wildcard eos/inline/types/*.h)
 nobase_include_HEADERS = $(PUBLISHED_HEADER_FILES)
@@ -39,7 +41,6 @@ libeos_la_SOURCES += eth_phy_intf.cpp
 libeos_la_SOURCES += event_loop.cpp
 libeos_la_SOURCES += exception.cpp
 libeos_la_SOURCES += fd.cpp
-libeos_la_SOURCES += ham.cpp
 libeos_la_SOURCES += hardware_table.cpp
 libeos_la_SOURCES += intf.cpp
 libeos_la_SOURCES += intf_types.cpp
@@ -49,9 +50,7 @@ libeos_la_SOURCES += ip_types.cpp
 libeos_la_SOURCES += ip_intf.cpp
 libeos_la_SOURCES += ip_route.cpp
 libeos_la_SOURCES += fib.cpp
-libeos_la_SOURCES += fpga.cpp
 libeos_la_SOURCES += iterator.cpp
-libeos_la_SOURCES += l1_source.cpp
 libeos_la_SOURCES += macsec.cpp
 libeos_la_SOURCES += mac_table.cpp
 libeos_la_SOURCES += mlag.cpp
@@ -79,13 +78,14 @@ libeos_la_SOURCES += lldp.cpp
 libeos_la_SOURCES += xcvr.cpp
 libeos_la_SOURCES += nexthop_group_tunnel.cpp
 
-libeos_la_CPPFLAGS = $(AM_CPPFLAGS) $(SHIPPING_FLAG)
+libeos_la_CPPFLAGS = $(AM_CPPFLAGS) $(SHIPPING_FLAG) -fPIC -fPIE
 libeos_la_LDFLAGS = -version-info $(SDK_LIBTOOL_VERSION) -lrt
 libeos_la_LDFLAGS += -soname libeos.so.$(SDK_VERSION_MAJOR).$(SDK_VERSION_MINOR)
 
 noinst_PROGRAMS = HelloWorld
 HelloWorld_SOURCES = examples/HelloWorld.cpp
 HelloWorld_LDADD = libeos.la
+HelloWorld_CPPFLAGS = -fPIE
 
 # --------- #
 # SWIG libs #
@@ -106,8 +106,7 @@ _eossdk_la_CPPFLAGS = -I/usr/include/python$(PYTHON_VERSION)
 _eossdk_la_LIBADD = libeos.la
 
 $(srcdir)/eossdk_wrap.cpp: $(SWIG_FILES) $(nobase_include_HEADERS) $(srcdir)/eossdk_wrap.cpp
-	echo ./build_eossdk_wrap_py2 # built in python2 virtual-env
-	SRCDIR=$(srcdir) prefix [stubs-swig] $(SWIG) -threads -c++ -python -dirvtable -O -I$(srcdir) -o $@-t $(srcdir)/EosSdk.i
+	SRCDIR=$(srcdir) prefix [stubs-swig] $(SWIG) -threads -c++ -python -py3 -dirvtable -O -I$(srcdir) -o $@-t $(srcdir)/EosSdk.i
 	patch --batch --no-backup-if-mismatch -p0 <$(srcdir)/swig.patch
 	mv $@-t $@
 	sed 's/#define PyString_AS_STRING.x. PyUnicode_AS_STRING.x./#define PyString_AS_STRING(x) PyBytes_AS_STRING(x)/' -i eossdk_wrap.cpp

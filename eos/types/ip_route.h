@@ -21,6 +21,7 @@ typedef uint32_t ip_route_metric_t;
 /** Valid range of 1 - (2^24)-1, set to 0 if unused. */
 typedef uint32_t vni_t;
 typedef uint32_t ip_via_metric_t;
+typedef uint32_t ip_via_weight_t;
 
 /**
  * The type of the ip_route_t. This is determined by the ip_route_via_t's attached
@@ -114,6 +115,14 @@ class EOS_SDK_PUBLIC ip_route_t {
    bool rib_bypass() const;
    /** Setter for 'rib_bypass'. */
    void rib_bypass_is(bool rib_bypass);
+
+   /**
+    * Getter for 'command_tag': Associates the route with a command_tag, which
+    * might be used to manipulate configuration externally to the agent.
+    */
+   std::string command_tag() const;
+   /** Setter for 'command_tag'. */
+   void command_tag_is(std::string const & command_tag);
 
    bool operator==(ip_route_t const & other) const;
    bool operator!=(ip_route_t const & other) const;
@@ -226,6 +235,11 @@ class EOS_SDK_PUBLIC ip_route_via_t {
    bool vtep_sip_validation() const;
    /** Setter for 'vtep_sip_validation'. */
    void vtep_sip_validation_is(bool vtep_sip_validation);
+
+   /** Getter for 'weight': the weight for this via. */
+   ip_via_weight_t weight() const;
+   /** Setter for 'weight'. */
+   void weight_is(ip_via_weight_t weight);
 
    bool operator==(ip_route_via_t const & other) const;
    bool operator!=(ip_route_via_t const & other) const;

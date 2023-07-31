@@ -2,7 +2,6 @@
 # Copyright (c) 2019 Arista Networks, Inc.  All rights reserved.
 # Arista Networks, Inc. Confidential and Proprietary.
 
-from __future__ import absolute_import, division, print_function
 import eossdk
 import sys
 
@@ -86,7 +85,7 @@ class RouteUpdater(eossdk.AgentHandler, eossdk.TimeoutHandler):
       self.handle_phase()
 
    def on_agent_option(self, name, value):
-      self.tracer.trace3("on_agent_option: key={}, value={}".format(name, value))
+      self.tracer.trace3( f"on_agent_option: key={name}, value={value}" )
       if name == "insert_vrf_routes":
          if value == "ip":
             self.insert_routes_vrf(0, INITIAL_ROUTES, "blue")
@@ -117,7 +116,7 @@ class RouteUpdater(eossdk.AgentHandler, eossdk.TimeoutHandler):
          self.timeout_time_is(eossdk.now() + 5)
 
    def handle_phase(self):
-      self.tracer.trace0("Starting phase {}".format(self.phase))
+      self.tracer.trace0( f"Starting phase {self.phase}" )
 
       if self.phase == 0:
          self.clear_routes()
@@ -128,7 +127,7 @@ class RouteUpdater(eossdk.AgentHandler, eossdk.TimeoutHandler):
       elif self.phase == 2:
          self.re_insert_routes()
 
-      self.tracer.trace0("Finished phase {}".format(self.phase))
+      self.tracer.trace0( f"Finished phase {self.phase}" )
       self.phase += 1
 
    def clear_routes(self):
@@ -230,7 +229,7 @@ class RouteUpdater(eossdk.AgentHandler, eossdk.TimeoutHandler):
       for i in range(start, end):
          first = (i / 65536) % 65536
          second = i % 65536
-         addrStr = "%04x:%04x::" % (first, second)
+         addrStr = f"{first:04x}:{second:04x}::"
          ip = eossdk.IpAddr(addrStr)
          prefix6 = eossdk.IpPrefix(ip, 64)
          rkey6 = eossdk.IpRouteKey(prefix6)
@@ -280,7 +279,7 @@ class RouteUpdater(eossdk.AgentHandler, eossdk.TimeoutHandler):
    def create_ip_v6_route_key(self, i):
       first = (i / 65536) % 65536
       second = i % 65536
-      addrStr = "%04x:%04x::" % (first, second)
+      addrStr = f"{first:04x}:{second:04x}::"
       ip = eossdk.IpAddr(addrStr)
       prefix6 = eossdk.IpPrefix(ip, 64)
       rkey6 = eossdk.IpRouteKey(prefix6)

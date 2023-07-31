@@ -126,6 +126,30 @@ class EOS_SDK_PUBLIC nexthop_group_handler_v2 : public nexthop_group_handler {
                                             uint16_t version_id);
 };
 
+/**
+ * This class handles changes to a nexthop group's status and provides its version
+ * ID as well as a nexthop_group_status attribute in the programmed callback.
+ */
+class EOS_SDK_PUBLIC nexthop_group_handler_v3 : public nexthop_group_handler {
+ public:
+   explicit nexthop_group_handler_v3(nexthop_group_mgr *);
+
+   /**
+    * Do not override this function. Instead override the alternative programmed
+    * handler.
+    */
+   virtual void on_nexthop_group_programmed(std::string const & nexthop_group_name)
+      override final {}
+    /**
+     * Alternative handler called when a nexthop group is programmed in response to
+     * a configuration change. Provides the nexthop group's version ID along with 
+     * the status for the nexthop group that triggered the callback
+     */
+   virtual void on_nexthop_group_programmed(
+      std::string const & nexthop_group_name, uint16_t version_id, 
+      nexthop_group_programmed_status_t const & callback_status);
+};
+
 class nexthop_group_iter_impl;
 
 // An iterator that yields nexthop group for each configured nexthop group
@@ -214,15 +238,22 @@ class EOS_SDK_PUBLIC nexthop_group_mgr :
    virtual nexthop_group_t 
       programmed_nexthop_group(std::string const & nexthop_group_name)
       const = 0;
+
+   // Creates or updates a nexthop group and provides its version ID.
+   virtual void nexthop_group_set(nexthop_group_t const & group,
+                                  uint16_t * version_id) = 0;
+
+   // Returns the current entry counter state for the nexthop group associated with
+   // the provided nexthop group name
+   virtual nexthop_group_counter_state_t 
+      get_nexthop_group_counter_state(std::string const & nexthop_group_name)
+      const = 0;
+
  protected:
    nexthop_group_mgr() EOS_SDK_PRIVATE;
    friend class nexthop_group_handler;
  private:
    EOS_SDK_DISALLOW_COPY_CTOR(nexthop_group_mgr);
- public:
-   // Creates or updates a nexthop group and provides its version ID.
-   virtual void nexthop_group_set(nexthop_group_t const & group,
-                                  uint16_t * version_id) = 0;
 };
 
 } // end namespace eos

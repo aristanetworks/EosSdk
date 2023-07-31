@@ -110,7 +110,7 @@ operator<<(std::ostream& os, const macsec_key_impl_t& obj) {
 macsec_profile_impl_t::macsec_profile_impl_t() :
       name_(), primary_key_(), fallback_key_(), key_server_priority_(16),
       rekey_period_(0), mka_life_time_(6), cipher_(GCM_AES_XPN_128), dot1x_(false),
-      include_sci_(false), bypass_lldp_(false), lldp_bypass_level_(BYPASS_NULL),
+      include_sci_(false), lldp_bypass_level_(BYPASS_NULL),
       traffic_policy_(TRAFFIC_POLICY_ACTIVE_SAK), replay_protection_(true),
       replay_protection_window_(0), key_retirement_immediate_(false), intfs_() {
 }
@@ -118,7 +118,7 @@ macsec_profile_impl_t::macsec_profile_impl_t() :
 macsec_profile_impl_t::macsec_profile_impl_t(macsec_profile_name_t name) :
       name_(name), primary_key_(), fallback_key_(), key_server_priority_(16),
       rekey_period_(0), mka_life_time_(6), cipher_(GCM_AES_XPN_128), dot1x_(false),
-      include_sci_(false), bypass_lldp_(false), lldp_bypass_level_(BYPASS_NULL),
+      include_sci_(false), lldp_bypass_level_(BYPASS_NULL),
       traffic_policy_(TRAFFIC_POLICY_ACTIVE_SAK), replay_protection_(true),
       replay_protection_window_(0), key_retirement_immediate_(false), intfs_() {
 }
@@ -302,7 +302,6 @@ macsec_profile_impl_t::operator==(macsec_profile_impl_t const & other) const {
           cipher_ == other.cipher_ &&
           dot1x_ == other.dot1x_ &&
           include_sci_ == other.include_sci_ &&
-          bypass_lldp_ == other.bypass_lldp_ &&
           lldp_bypass_level_ == other.lldp_bypass_level_ &&
           traffic_policy_ == other.traffic_policy_ &&
           replay_protection_ == other.replay_protection_ &&
@@ -336,8 +335,6 @@ macsec_profile_impl_t::operator<(macsec_profile_impl_t const & other) const {
       return dot1x_ < other.dot1x_;
    } else if(include_sci_ != other.include_sci_) {
       return include_sci_ < other.include_sci_;
-   } else if(bypass_lldp_ != other.bypass_lldp_) {
-      return bypass_lldp_ < other.bypass_lldp_;
    } else if(lldp_bypass_level_ != other.lldp_bypass_level_) {
       return lldp_bypass_level_ < other.lldp_bypass_level_;
    } else if(traffic_policy_ != other.traffic_policy_) {
@@ -372,7 +369,6 @@ macsec_profile_impl_t::mix_me(hash_mix & h) const {
    h.mix(cipher_); // macsec_cipher_suite_t
    h.mix(dot1x_); // bool
    h.mix(include_sci_); // bool
-   h.mix(bypass_lldp_); // bool
    h.mix(lldp_bypass_level_); // macsec_bypass_t
    h.mix(traffic_policy_); // macsec_profile_traffic_policy_t
    h.mix(replay_protection_); // bool
@@ -397,7 +393,6 @@ macsec_profile_impl_t::to_string() const {
    ss << ", cipher=" << cipher_;
    ss << ", dot1x=" << dot1x_;
    ss << ", include_sci=" << include_sci_;
-   ss << ", bypass_lldp=" << bypass_lldp_;
    ss << ", lldp_bypass_level=" << lldp_bypass_level_;
    ss << ", traffic_policy=" << traffic_policy_;
    ss << ", replay_protection=" << replay_protection_;

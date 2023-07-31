@@ -1,11 +1,10 @@
 # Copyright (c) 2020 Arista Networks, Inc.  All rights reserved.
 # Arista Networks, Inc. Confidential and Proprietary.
 
-from __future__ import absolute_import, division, print_function
 import EosSdkGenericTestLib
 
 
-class FibTestAgent( object ):
+class FibTestAgent:
 
    def __init__( self, test_lib, switch_ip, intf, intf_ip, intf2, intf2_ip,
                  agent_name, agent_binary_path, args=None ):

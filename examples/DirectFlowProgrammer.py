@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 # Copyright (c) 2014 Arista Networks, Inc.  All rights reserved.
 # Arista Networks, Inc. Confidential and Proprietary.
 
@@ -120,7 +120,7 @@ class DirectFlowProgrammer(eossdk.AgentHandler,
       # NAME (add|delete) IPADDR INTERFACE
       # and adds/deletes a flow that matches on that destination ip address
       # and outputs that flow on the given interface
-      buf = os.read(fd, 4096).strip()
+      buf = os.read( fd, 4096 ).decode().strip()
       if not buf:
          self.agentMgr_.exit()
       for line in buf.split("\n"):
@@ -128,7 +128,7 @@ class DirectFlowProgrammer(eossdk.AgentHandler,
             continue
          m = re.search(r"(\S+) (add|delete) (\d+.\d+.\d+.\d+) +(\S+)", line)
          if not m:
-            print "Could not match line:", line
+            print( "Could not match line:", line )
             continue
          name = m.group(1)
          operation = m.group(2)
@@ -148,7 +148,7 @@ class DirectFlowProgrammer(eossdk.AgentHandler,
             self.directFlowMgr_.flow_entry_del(name)
 
    def on_flow_status(self, name, status):
-      print "Flow", name, "status changed to", status
+      print( "Flow", name, "status changed to", status )
       self.changes += 1
 
 
@@ -156,7 +156,7 @@ def main(args):
    sdk = eossdk.Sdk("DirectFlowProgrammer")
    programmer = DirectFlowProgrammer(sdk.get_agent_mgr(), sdk.get_directflow_mgr())
    sdk.main_loop(sys.argv)
-   print "Saw %d flow status changes" % programmer.changes
+   print( "Saw %d flow status changes" % programmer.changes )
 
 
 if __name__ == '__main__':

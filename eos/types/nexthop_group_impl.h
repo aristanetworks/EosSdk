@@ -318,6 +318,39 @@ class EOS_SDK_PUBLIC nexthop_group_impl_t {
    bool counters_persistent_;
    uint16_t version_id_;
 };
+
+/** Status for the associated nexthop group. */
+class EOS_SDK_PUBLIC nexthop_group_programmed_status_impl_t {
+ public:
+   nexthop_group_programmed_status_impl_t();
+   explicit nexthop_group_programmed_status_impl_t(
+         nexthop_group_counter_state_t counter_state);
+
+   /**
+    * Getter for 'counter_state': The status of the counter programming for this
+    * nexthop group.
+    */
+   nexthop_group_counter_state_t counter_state() const;
+
+   bool operator==(nexthop_group_programmed_status_impl_t const & other) const;
+   bool operator!=(nexthop_group_programmed_status_impl_t const & other) const;
+   bool operator<(nexthop_group_programmed_status_impl_t const & other) const;
+   /** The hash function for type nexthop_group_programmed_status_t. */
+   uint32_t hash() const;
+   /** The hash mix function for type nexthop_group_programmed_status_t. */
+   void mix_me(hash_mix & h) const;
+   /** Returns a string representation of the current object's values. */
+   std::string to_string() const;
+   /**
+    * A utility stream operator that adds a string representation of
+    * nexthop_group_programmed_status_t to the ostream.
+    */
+   friend std::ostream& operator<<(
+         std::ostream& os, const nexthop_group_programmed_status_impl_t& obj);
+
+ private:
+   nexthop_group_counter_state_t counter_state_;
+};
 }
 
 #endif // EOS_TYPES_NEXTHOP_GROUP_IMPL_H

@@ -1,4 +1,4 @@
-#!/usr/bin/env pychooser
+#!/usr/bin/env python3
 # Copyright (c) 2014 Arista Networks, Inc.  All rights reserved.
 # Arista Networks, Inc. Confidential and Proprietary.
 
@@ -21,14 +21,12 @@ To install this on a switch build an RPM also containing pyinotify and
 install that using the EOS extension manager.
 """
 
-from __future__ import absolute_import, division, print_function
-import simplejson as json
+import json
 import collections
 import datetime
 import functools
 import os
 import sys
-import six
 
 import pyinotify
 
@@ -66,7 +64,7 @@ CONFIG_SECTIONS = frozenset(('match',
                              'nexthop_group',
                              'interface_policy'))
 
-MANDATORY_CONFIG_SECTIONS = CONFIG_SECTIONS - set(['nexthop_group'])
+MANDATORY_CONFIG_SECTIONS = CONFIG_SECTIONS - { 'nexthop_group' }
 
 # Configuration data structures
 Filter = collections.namedtuple(
@@ -94,7 +92,7 @@ Config = collections.namedtuple('Config',
 
 def load_match(d):
    acls = {}
-   for k, vs in sorted(six.iteritems(d)):
+   for k, vs in sorted( d.items() ):
       acls.setdefault(k, [])
       for v in vs:
          ace = Filter(src_ip=v.get('src_ip'),
@@ -110,7 +108,7 @@ def load_match(d):
 
 def load_classifier(d):
    c = {}
-   for k, v in six.iteritems(d):
+   for k, v in d.items():
       matches = [Match(type=None, acl_name=x.get('match')) for x in v]
       c[k] = Classifier(matches=matches)
    return c
@@ -118,7 +116,7 @@ def load_classifier(d):
 
 def load_action(d):
    a = {}
-   for k, v in six.iteritems(d):
+   for k, v in d.items():
       a[k] = Action(v.get('type'),
                     nexthop_group=v.get('nexthop_group'),
                     nexthops=v.get('nexthops'),
@@ -128,21 +126,21 @@ def load_action(d):
 
 def load_policy(d):
    p = {}
-   for k, v in six.iteritems(d):
+   for k, v in d.items():
       p[k] = Policy(**v)
    return p
 
 
 def load_apply(d):
    a = {}
-   for k, v in six.iteritems(d):
+   for k, v in d.items():
       a[k] = Apply(policy=v)
    return a
 
 
 def load_nexthop_group(d):
    g = {}
-   for k, v in six.iteritems(d):
+   for k, v in d.items():
       g[k] = NexthopGroup(type=v.get('type', 'ipinip'),
                           src_intf=v.get('src_intf'),
                           src_ips=v.get('src_ips', []),
@@ -183,7 +181,7 @@ def load_config_file_obj(f):
       return None
 
 
-class PolicyRouter(object):
+class PolicyRouter:
    """The policy router state and context."""
 
    def __init__(self, acl_mgr, agent_mgr, class_map_mgr,
@@ -210,8 +208,8 @@ class PolicyRouter(object):
          self.buildPolicy()
 
    def _buildAcls(self):
-      for aclname, aclrules in six.iteritems(self.config.match):
-         key = eossdk.AclKey(aclname, eossdk.ACL_TYPE_IPV4)
+      for aclname, aclrules in self.config.match.items():
+         key = eossdk.AclKey( aclname, eossdk.ACL_TYPE_IPV4 )
 
          # todo support ipv6 also
          for i, rule in enumerate(aclrules):
@@ -287,8 +285,8 @@ class PolicyRouter(object):
 
    def _buildClassMaps(self):
       classifiers = self.config_.classifiers
-      for name, classifier in six.iteritems(classifiers):
-         key = eossdk.PolicyMapKey(name, eossdk.POLICY_FEATURE_PBR)
+      for name, classifier in classifiers.items():
+         key = eossdk.PolicyMapKey( name, eossdk.POLICY_FEATURE_PBR )
          class_map = eossdk.ClassMap(key)
 
          for rule_index, match in enumerate(classifier.matches):
@@ -302,7 +300,7 @@ class PolicyRouter(object):
          print( 'Set class map:', name, 'now with', len(cm.rules()), 'rules' )
 
    def _buildActions(self):
-      for name, action in six.iteritems(self.config_.actions):
+      for name, action in self.config_.actions.items():
          if action.type == 'drop':
             act = eossdk.PolicyMapAction(eossdk.POLICY_ACTION_DROP)
          elif action.type == 'nexthop_group' and action.nexthop_group:
@@ -320,7 +318,7 @@ class PolicyRouter(object):
 
    def _buildNexthopGroups(self):
       groups = self.config_.nexthop_groups
-      for name, data in six.iteritems(groups):
+      for name, data in groups.items():
          if data.type not in NEXTHOP_GROUP_TYPE:
             sys.stderr.write('Unknown nexthop group type="%s"' % data.type)
             continue
@@ -347,7 +345,7 @@ class PolicyRouter(object):
 
    def _buildPolicyMaps(self):
       policies = self.config_.policy
-      for name, data in six.iteritems(policies):
+      for name, data in policies.items():
          # add the class map
          rule_key = eossdk.PolicyMapKey(data.classifier,
                                         eossdk.POLICY_FEATURE_PBR)
@@ -364,8 +362,9 @@ class PolicyRouter(object):
 
    def _applyToInterfaces(self):
       interface_policy = self.config_.interface_policy
-      for intf_name, data in six.iteritems(interface_policy):
-         policy_map_key = eossdk.PolicyMapKey(data.policy, eossdk.POLICY_FEATURE_PBR)
+      for intf_name, data in interface_policy.items():
+         policy_map_key = eossdk.PolicyMapKey( data.policy,
+                                               eossdk.POLICY_FEATURE_PBR )
          intf_id = eossdk.IntfId(intf_name)
          if self.intf_mgr.exists(intf_id):
             print( 'Interface %s exists, applying policy' % intf_id.to_string() )
@@ -540,7 +539,7 @@ def get_ip_addr(ip_addr):
    try:
       return eossdk.IpAddr(ip_addr)
    except eossdk.Error as e:
-      sys.stderr.write('Invalid IP address: %s (%s)' % (ip_addr, e))
+      sys.stderr.write( f'Invalid IP address: {ip_addr} ({e})' )
 
 
 def main():

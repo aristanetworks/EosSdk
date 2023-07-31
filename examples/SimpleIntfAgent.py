@@ -1,8 +1,7 @@
-#!/usr/bin/env pychooser
+#!/usr/bin/env python3
 # Copyright (c) 2014 Arista Networks, Inc.  All rights reserved.
 # Arista Networks, Inc. Confidential and Proprietary.
 
-from __future__ import absolute_import, division, print_function
 import sys
 
 import eossdk
@@ -33,7 +32,7 @@ class MyTestAgent(eossdk.AgentHandler, eossdk.FdHandler):
       print( "- Fd %d is readable" % fd )
       curEnabledStatus = ("enabled" if self.intfMgr_.admin_enabled(self.intfObj_)
                           else "disabled")
-      print( "- %s is currently %s" % (self.intfObj_.to_string(), curEnabledStatus) )
+      print( f"- {self.intfObj_.to_string()} is currently {curEnabledStatus}" )
       msg = sys.stdin.readline()
       if msg.startswith("shut"):
          print( "Shutting down %s" % self.intfObj_.to_string() )

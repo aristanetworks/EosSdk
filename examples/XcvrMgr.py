@@ -1,8 +1,7 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 # Copyright (c) 2014 Arista Networks, Inc.  All rights reserved.
 # Arista Networks, Inc. Confidential and Proprietary.
 
-from __future__ import absolute_import, division, print_function
 import eossdk
 import argparse
 import sys
@@ -47,7 +46,7 @@ class XcvrAgent( eossdk.AgentHandler ):
          print( "   tx turnup: 0x%X" % self.xcvrMgr_.tx_turnup_state( intfId ) )
          print( "   rx turnup: 0x%X" % self.xcvrMgr_.rx_turnup_state( intfId ) )
          if self.addr is not None:
-            print( "   Addr: 0x%X Data: 0x%X" % (
+            print( "   Addr: 0x{:X} Data: 0x{:X}".format(
                self.addr, self.xcvrMgr_.register_read( intfId, self.addr ) ) )
 
       self.agentMgr_.exit()

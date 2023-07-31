@@ -29,6 +29,8 @@ operator<<(std::ostream& os, const policy_feature_t & enum_val) {
       os << "POLICY_FEATURE_QOS";
    } else if (enum_val==POLICY_FEATURE_TAP_AGG) {
       os << "POLICY_FEATURE_TAP_AGG";
+   } else if (enum_val==POLICY_FEATURE_TRAFFIC_POLICY) {
+      os << "POLICY_FEATURE_TRAFFIC_POLICY";
    } else {
       os << "Unknown value";
    }
@@ -52,6 +54,56 @@ operator<<(std::ostream& os, const policy_action_type_t & enum_val) {
       os << "POLICY_ACTION_DSCP";
    } else if (enum_val==POLICY_ACTION_TRAFFIC_CLASS) {
       os << "POLICY_ACTION_TRAFFIC_CLASS";
+   } else {
+      os << "Unknown value";
+   }
+   return os;
+}
+
+
+EOS_SDK_PUBLIC std::ostream&
+operator<<(std::ostream& os, const traffic_policy_action_type_t & enum_val) {
+   if (enum_val==TRAFFIC_POLICY_ACTION_DROP) {
+      os << "TRAFFIC_POLICY_ACTION_DROP";
+   } else if (enum_val==TRAFFIC_POLICY_ACTION_POLICE) {
+      os << "TRAFFIC_POLICY_ACTION_POLICE";
+   } else if (enum_val==TRAFFIC_POLICY_ACTION_COUNT) {
+      os << "TRAFFIC_POLICY_ACTION_COUNT";
+   } else if (enum_val==TRAFFIC_POLICY_ACTION_LOG) {
+      os << "TRAFFIC_POLICY_ACTION_LOG";
+   } else if (enum_val==TRAFFIC_POLICY_ACTION_GOTO) {
+      os << "TRAFFIC_POLICY_ACTION_GOTO";
+   } else if (enum_val==TRAFFIC_POLICY_ACTION_DSCP) {
+      os << "TRAFFIC_POLICY_ACTION_DSCP";
+   } else if (enum_val==TRAFFIC_POLICY_ACTION_TRAFFIC_CLASS) {
+      os << "TRAFFIC_POLICY_ACTION_TRAFFIC_CLASS";
+   } else if (enum_val==TRAFFIC_POLICY_ACTION_SET_VRF) {
+      os << "TRAFFIC_POLICY_ACTION_SET_VRF";
+   } else if (enum_val==TRAFFIC_POLICY_ACTION_SET_VRF_SECONDARY) {
+      os << "TRAFFIC_POLICY_ACTION_SET_VRF_SECONDARY";
+   } else if (enum_val==TRAFFIC_POLICY_ACTION_USE_VRF_SECONDARY) {
+      os << "TRAFFIC_POLICY_ACTION_USE_VRF_SECONDARY";
+   } else if (enum_val==TRAFFIC_POLICY_ACTION_MIRROR) {
+      os << "TRAFFIC_POLICY_ACTION_MIRROR";
+   } else if (enum_val==TRAFFIC_POLICY_ACTION_SFLOW) {
+      os << "TRAFFIC_POLICY_ACTION_SFLOW";
+   } else if (enum_val==TRAFFIC_POLICY_ACTION_NEXTHOP) {
+      os << "TRAFFIC_POLICY_ACTION_NEXTHOP";
+   } else if (enum_val==TRAFFIC_POLICY_ACTION_NEXTHOP_GROUP) {
+      os << "TRAFFIC_POLICY_ACTION_NEXTHOP_GROUP";
+   } else {
+      os << "Unknown value";
+   }
+   return os;
+}
+
+
+EOS_SDK_PUBLIC std::ostream&
+operator<<(std::ostream& os, const traffic_policy_direction_t & enum_val) {
+   if (enum_val==TRAFFIC_POLICY_DIRECTION_NULL) {
+      os << "TRAFFIC_POLICY_DIRECTION_NULL";
+   } else if (enum_val==TRAFFIC_POLICY_DIRECTION_INPUT) {
+      os << "TRAFFIC_POLICY_DIRECTION_INPUT";
    } else {
       os << "Unknown value";
    }
@@ -149,7 +201,39 @@ operator<<(std::ostream& os, const policy_map_key_t& obj) {
 }
 
 
-// Default constructor.
+EOS_SDK_PUBLIC std::ostream&
+operator<<(std::ostream& os, const police_rate_unit_t & enum_val) {
+   if (enum_val==BPS) {
+      os << "BPS";
+   } else if (enum_val==KBPS) {
+      os << "KBPS";
+   } else if (enum_val==MBPS) {
+      os << "MBPS";
+   } else if (enum_val==GBPS) {
+      os << "GBPS";
+   } else {
+      os << "Unknown value";
+   }
+   return os;
+}
+
+
+EOS_SDK_PUBLIC std::ostream&
+operator<<(std::ostream& os, const police_burst_unit_t & enum_val) {
+   if (enum_val==BYTES) {
+      os << "BYTES";
+   } else if (enum_val==KBYTES) {
+      os << "KBYTES";
+   } else if (enum_val==MBYTES) {
+      os << "MBYTES";
+   } else {
+      os << "Unknown value";
+   }
+   return os;
+}
+
+
+// Default constructor of a PBR/QOS action.
 policy_map_action_t::policy_map_action_t() {
    pimpl = std::shared_ptr<policy_map_action_impl_t>(
       new policy_map_action_impl_t()
@@ -263,6 +347,193 @@ policy_map_action_t::to_string() const {
 }
 std::ostream&
 operator<<(std::ostream& os, const policy_map_action_t& obj) {
+   return operator<<(os, *obj.pimpl);
+}
+
+
+// Default constructor of a traffic-policy action.
+traffic_policy_action_t::traffic_policy_action_t() {
+   pimpl = std::shared_ptr<traffic_policy_action_impl_t>(
+      new traffic_policy_action_impl_t()
+   );
+}
+traffic_policy_action_t::traffic_policy_action_t(
+         traffic_policy_action_type_t action_type) {
+   pimpl = std::shared_ptr<traffic_policy_action_impl_t>(
+      new traffic_policy_action_impl_t(
+         action_type
+      )
+   );
+}
+traffic_policy_action_t::traffic_policy_action_t(
+   const traffic_policy_action_t& other)
+{
+   pimpl = std::make_unique<traffic_policy_action_impl_t>(
+      traffic_policy_action_impl_t(*other.pimpl));
+}
+traffic_policy_action_t&
+traffic_policy_action_t::operator=(
+   traffic_policy_action_t const & other)
+{
+   pimpl = std::shared_ptr<traffic_policy_action_impl_t>(
+      new traffic_policy_action_impl_t(*other.pimpl));
+   return *this;
+}
+
+
+traffic_policy_action_t::~traffic_policy_action_t() {
+
+}
+traffic_policy_action_type_t
+traffic_policy_action_t::action_type() const {
+   return pimpl->action_type();
+}
+void
+traffic_policy_action_t::action_type_is(traffic_policy_action_type_t action_type) {
+   pimpl->action_type_is(action_type);
+}
+std::string
+traffic_policy_action_t::goto_class_name() const {
+   return pimpl->goto_class_name();
+}
+void
+traffic_policy_action_t::goto_class_name_is(std::string const & goto_class_name) {
+   pimpl->goto_class_name_is(goto_class_name);
+}
+bool
+traffic_policy_action_t::goto_next() const {
+   return pimpl->goto_next();
+}
+void
+traffic_policy_action_t::goto_next_is(bool const & goto_next) {
+   pimpl->goto_next_is(goto_next);
+}
+uint8_t
+traffic_policy_action_t::dscp() const {
+   return pimpl->dscp();
+}
+void
+traffic_policy_action_t::dscp_is(uint8_t dscp) {
+   pimpl->dscp_is(dscp);
+}
+uint8_t
+traffic_policy_action_t::traffic_class() const {
+   return pimpl->traffic_class();
+}
+void
+traffic_policy_action_t::traffic_class_is(uint8_t traffic_class) {
+   pimpl->traffic_class_is(traffic_class);
+}
+std::string
+traffic_policy_action_t::vrf() const {
+   return pimpl->vrf();
+}
+void
+traffic_policy_action_t::vrf_is(std::string const & vrf) {
+   pimpl->vrf_is(vrf);
+}
+std::string
+traffic_policy_action_t::mirror_session() const {
+   return pimpl->mirror_session();
+}
+void
+traffic_policy_action_t::mirror_session_is(std::string const & mirror_session) {
+   pimpl->mirror_session_is(mirror_session);
+}
+uint64_t
+traffic_policy_action_t::police_rate() const {
+   return pimpl->police_rate();
+}
+void
+traffic_policy_action_t::police_rate_is(uint64_t const & police_rate) {
+   pimpl->police_rate_is(police_rate);
+}
+uint64_t
+traffic_policy_action_t::police_burst_size() const {
+   return pimpl->police_burst_size();
+}
+void
+traffic_policy_action_t::police_burst_size_is(uint64_t const & police_burst_size) {
+   pimpl->police_burst_size_is(police_burst_size);
+}
+police_rate_unit_t
+traffic_policy_action_t::police_rate_unit() const {
+   return pimpl->police_rate_unit();
+}
+void
+traffic_policy_action_t::police_rate_unit_is(
+         police_rate_unit_t const & police_rate_unit) {
+   pimpl->police_rate_unit_is(police_rate_unit);
+}
+police_burst_unit_t
+traffic_policy_action_t::police_burst_unit() const {
+   return pimpl->police_burst_unit();
+}
+void
+traffic_policy_action_t::police_burst_unit_is(
+         police_burst_unit_t const & police_burst_unit) {
+   pimpl->police_burst_unit_is(police_burst_unit);
+}
+std::unordered_set<std::string> const &
+traffic_policy_action_t::nexthop_groups() const {
+   return pimpl->nexthop_groups();
+}
+void
+traffic_policy_action_t::nexthop_groups_is(
+         std::unordered_set<std::string> const & nexthop_groups) {
+   pimpl->nexthop_groups_is(nexthop_groups);
+}
+void
+traffic_policy_action_t::nexthop_group_set(std::string const & value) {
+   pimpl->nexthop_group_set(value);
+}
+void
+traffic_policy_action_t::nexthop_group_del(std::string const & value) {
+   pimpl->nexthop_group_del(value);
+}
+std::unordered_set<ip_addr_t> const &
+traffic_policy_action_t::nexthops() const {
+   return pimpl->nexthops();
+}
+void
+traffic_policy_action_t::nexthops_is(
+         std::unordered_set<ip_addr_t> const & nexthops) {
+   pimpl->nexthops_is(nexthops);
+}
+void
+traffic_policy_action_t::nexthop_set(ip_addr_t const & value) {
+   pimpl->nexthop_set(value);
+}
+void
+traffic_policy_action_t::nexthop_del(ip_addr_t const & value) {
+   pimpl->nexthop_del(value);
+}
+bool
+traffic_policy_action_t::operator==(traffic_policy_action_t const & other) const {
+   return pimpl->operator==(*other.pimpl);
+}
+bool
+traffic_policy_action_t::operator!=(traffic_policy_action_t const & other) const {
+   return pimpl->operator!=(*other.pimpl);
+}
+bool
+traffic_policy_action_t::operator<(traffic_policy_action_t const & other) const {
+   return pimpl->operator<(*other.pimpl);
+}
+uint32_t
+traffic_policy_action_t::hash() const {
+   return pimpl->hash();
+}
+void
+traffic_policy_action_t::mix_me(hash_mix & h) const {
+   pimpl->mix_me(h);
+}
+std::string
+traffic_policy_action_t::to_string() const {
+   return pimpl->to_string();
+}
+std::ostream&
+operator<<(std::ostream& os, const traffic_policy_action_t& obj) {
    return operator<<(os, *obj.pimpl);
 }
 
@@ -451,6 +722,176 @@ policy_map_t::to_string() const {
 }
 std::ostream&
 operator<<(std::ostream& os, const policy_map_t& obj) {
+   return operator<<(os, *obj.pimpl);
+}
+
+
+traffic_policy_rule_t::traffic_policy_rule_t() {
+   pimpl = std::shared_ptr<traffic_policy_rule_impl_t>(
+      new traffic_policy_rule_impl_t()
+   );
+}
+traffic_policy_rule_t::traffic_policy_rule_t(
+         std::string match_rule_name,
+         traffic_policy_rule_type_t traffic_policy_rule_type) {
+   pimpl = std::shared_ptr<traffic_policy_rule_impl_t>(
+      new traffic_policy_rule_impl_t(
+         match_rule_name,
+         traffic_policy_rule_type
+      )
+   );
+}
+traffic_policy_rule_t::traffic_policy_rule_t(
+   const traffic_policy_rule_t& other)
+{
+   pimpl = std::make_unique<traffic_policy_rule_impl_t>(
+      traffic_policy_rule_impl_t(*other.pimpl));
+}
+traffic_policy_rule_t&
+traffic_policy_rule_t::operator=(
+   traffic_policy_rule_t const & other)
+{
+   pimpl = std::shared_ptr<traffic_policy_rule_impl_t>(
+      new traffic_policy_rule_impl_t(*other.pimpl));
+   return *this;
+}
+
+std::string
+traffic_policy_rule_t::match_rule_name() const {
+   return pimpl->match_rule_name();
+}
+traffic_policy_rule_type_t
+traffic_policy_rule_t::traffic_policy_rule_type() const {
+   return pimpl->traffic_policy_rule_type();
+}
+tp_rule_filter_t
+traffic_policy_rule_t::raw_rule() const {
+   return pimpl->raw_rule();
+}
+std::set<traffic_policy_action_t> const &
+traffic_policy_rule_t::actions() const {
+   return pimpl->actions();
+}
+void
+traffic_policy_rule_t::actions_is(
+         std::set<traffic_policy_action_t> const & actions) {
+   pimpl->actions_is(actions);
+}
+void
+traffic_policy_rule_t::action_set(traffic_policy_action_t const & value) {
+   pimpl->action_set(value);
+}
+void
+traffic_policy_rule_t::action_del(traffic_policy_action_t const & value) {
+   pimpl->action_del(value);
+}
+void
+traffic_policy_rule_t::raw_rule_is(tp_rule_filter_t const & raw_rule) {
+   pimpl->raw_rule_is(raw_rule);
+}
+void
+traffic_policy_rule_t::action_del(traffic_policy_action_type_t action_type) {
+   pimpl->action_del(action_type);
+}
+bool
+traffic_policy_rule_t::operator==(traffic_policy_rule_t const & other) const {
+   return pimpl->operator==(*other.pimpl);
+}
+bool
+traffic_policy_rule_t::operator!=(traffic_policy_rule_t const & other) const {
+   return pimpl->operator!=(*other.pimpl);
+}
+bool
+traffic_policy_rule_t::operator<(traffic_policy_rule_t const & other) const {
+   return pimpl->operator<(*other.pimpl);
+}
+uint32_t
+traffic_policy_rule_t::hash() const {
+   return pimpl->hash();
+}
+void
+traffic_policy_rule_t::mix_me(hash_mix & h) const {
+   pimpl->mix_me(h);
+}
+std::string
+traffic_policy_rule_t::to_string() const {
+   return pimpl->to_string();
+}
+std::ostream&
+operator<<(std::ostream& os, const traffic_policy_rule_t& obj) {
+   return operator<<(os, *obj.pimpl);
+}
+
+
+traffic_policy_t::traffic_policy_t(std::string const & key) {
+   pimpl = std::shared_ptr<traffic_policy_impl_t>(
+      new traffic_policy_impl_t(
+         key
+      )
+   );
+}
+traffic_policy_t::traffic_policy_t(
+   const traffic_policy_t& other)
+{
+   pimpl = std::make_unique<traffic_policy_impl_t>(
+      traffic_policy_impl_t(*other.pimpl));
+}
+traffic_policy_t&
+traffic_policy_t::operator=(
+   traffic_policy_t const & other)
+{
+   pimpl = std::shared_ptr<traffic_policy_impl_t>(
+      new traffic_policy_impl_t(*other.pimpl));
+   return *this;
+}
+
+std::string
+traffic_policy_t::key() const {
+   return pimpl->key();
+}
+std::map<uint32_t, traffic_policy_rule_t> const &
+traffic_policy_t::rules() const {
+   return pimpl->rules();
+}
+void
+traffic_policy_t::rules_is(std::map<uint32_t, traffic_policy_rule_t> const & rules)
+       {
+   pimpl->rules_is(rules);
+}
+void
+traffic_policy_t::rule_set(uint32_t key, traffic_policy_rule_t const & value) {
+   pimpl->rule_set(key, value);
+}
+void
+traffic_policy_t::rule_del(uint32_t key) {
+   pimpl->rule_del(key);
+}
+bool
+traffic_policy_t::operator==(traffic_policy_t const & other) const {
+   return pimpl->operator==(*other.pimpl);
+}
+bool
+traffic_policy_t::operator!=(traffic_policy_t const & other) const {
+   return pimpl->operator!=(*other.pimpl);
+}
+bool
+traffic_policy_t::operator<(traffic_policy_t const & other) const {
+   return pimpl->operator<(*other.pimpl);
+}
+uint32_t
+traffic_policy_t::hash() const {
+   return pimpl->hash();
+}
+void
+traffic_policy_t::mix_me(hash_mix & h) const {
+   pimpl->mix_me(h);
+}
+std::string
+traffic_policy_t::to_string() const {
+   return pimpl->to_string();
+}
+std::ostream&
+operator<<(std::ostream& os, const traffic_policy_t& obj) {
    return operator<<(os, *obj.pimpl);
 }
 
