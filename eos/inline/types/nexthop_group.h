@@ -280,6 +280,15 @@ void
 nexthop_group_entry_t::intf_is(intf_id_t const & intf) {
    pimpl->intf_is(intf);
 }
+sbfd_echo_session_key_t
+nexthop_group_entry_t::sbfd_session_key() const {
+   return pimpl->sbfd_session_key();
+}
+void
+nexthop_group_entry_t::sbfd_session_key_is(
+         sbfd_echo_session_key_t const & sbfd_session_key) {
+   pimpl->sbfd_session_key_is(sbfd_session_key);
+}
 std::string
 nexthop_group_entry_t::child_nexthop_group() const {
    return pimpl->child_nexthop_group();

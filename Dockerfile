@@ -40,7 +40,7 @@
 #-----------------------------------------------------------------------------------
 
 FROM centos:7
-ARG version=2.22.3
+ARG version=2.22.5
 ARG arch="m32"
 
 # Set eossdk version as label and environ variable.

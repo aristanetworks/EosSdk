@@ -336,7 +336,6 @@ inline eth_phy_intf_mgr * sdk::SdkImpl::get_eth_phy_intf_mgr() {
 
 inline eth_phy_intf_counter_mgr * sdk::SdkImpl::get_eth_phy_intf_counter_mgr() {
    eos::print_profiles::add_profile("IntfMgrHelper");
-   eos::print_profiles::add_profile("eth_phy_intf");
    GET_NO_MOUNT_MGR(eth_phy_intf_counter)
 }
 
@@ -368,7 +367,8 @@ inline intf_mgr * sdk::SdkImpl::get_intf_mgr() {
 }
 
 inline intf_counter_mgr * sdk::SdkImpl::get_intf_counter_mgr() {
-   eos::print_profiles::add_profile("intf");
+   eos::print_profiles::add_profile( "IntfMgrHelper" );
+   eos::print_profiles::add_profile( "intf" );
    GET_NO_MOUNT_MGR(intf_counter)
 }
 

@@ -212,22 +212,25 @@ operator<<(std::ostream& os, const nexthop_group_entry_counter_impl_t& obj) {
 
 
 nexthop_group_entry_impl_t::nexthop_group_entry_impl_t() :
-      mpls_action_(), nexthop_(), intf_(), child_nexthop_group_() {
+      mpls_action_(), nexthop_(), intf_(), sbfd_session_key_(),
+      child_nexthop_group_() {
 }
 
 nexthop_group_entry_impl_t::nexthop_group_entry_impl_t(
          ip_addr_t const & nexthop) :
-      mpls_action_(), nexthop_(nexthop), intf_(), child_nexthop_group_() {
+      mpls_action_(), nexthop_(nexthop), intf_(), sbfd_session_key_(),
+      child_nexthop_group_() {
 }
 
 nexthop_group_entry_impl_t::nexthop_group_entry_impl_t(
          ip_addr_t const & nexthop, intf_id_t const & intf) :
-      mpls_action_(), nexthop_(nexthop), intf_(intf), child_nexthop_group_() {
+      mpls_action_(), nexthop_(nexthop), intf_(intf), sbfd_session_key_(),
+      child_nexthop_group_() {
 }
 
 nexthop_group_entry_impl_t::nexthop_group_entry_impl_t(
          std::string const & child_nexthop_group) :
-      mpls_action_(), nexthop_(), intf_(),
+      mpls_action_(), nexthop_(), intf_(), sbfd_session_key_(),
       child_nexthop_group_(child_nexthop_group) {
 }
 
@@ -274,6 +277,17 @@ nexthop_group_entry_impl_t::intf_is(intf_id_t const & intf) {
    intf_ = intf;
 }
 
+sbfd_echo_session_key_t
+nexthop_group_entry_impl_t::sbfd_session_key() const {
+   return sbfd_session_key_;
+}
+
+void
+nexthop_group_entry_impl_t::sbfd_session_key_is(
+         sbfd_echo_session_key_t const & sbfd_session_key) {
+   sbfd_session_key_ = sbfd_session_key;
+}
+
 std::string
 nexthop_group_entry_impl_t::child_nexthop_group() const {
    return child_nexthop_group_;
@@ -297,6 +311,7 @@ nexthop_group_entry_impl_t::operator==(nexthop_group_entry_impl_t const & other)
    return mpls_action_ == other.mpls_action_ &&
           nexthop_ == other.nexthop_ &&
           intf_ == other.intf_ &&
+          sbfd_session_key_ == other.sbfd_session_key_ &&
           child_nexthop_group_ == other.child_nexthop_group_;
 }
 
@@ -315,6 +330,8 @@ nexthop_group_entry_impl_t::operator<(nexthop_group_entry_impl_t const & other)
       return nexthop_ < other.nexthop_;
    } else if(intf_ != other.intf_) {
       return intf_ < other.intf_;
+   } else if(sbfd_session_key_ != other.sbfd_session_key_) {
+      return sbfd_session_key_ < other.sbfd_session_key_;
    } else if(child_nexthop_group_ != other.child_nexthop_group_) {
       return child_nexthop_group_ < other.child_nexthop_group_;
    }
@@ -333,6 +350,7 @@ nexthop_group_entry_impl_t::mix_me(hash_mix & h) const {
    h.mix(mpls_action_); // nexthop_group_mpls_action_t
    h.mix(nexthop_); // ip_addr_t
    h.mix(intf_); // intf_id_t
+   h.mix(sbfd_session_key_); // sbfd_echo_session_key_t
    h.mix(child_nexthop_group_); // std::string
 }
 
@@ -343,6 +361,7 @@ nexthop_group_entry_impl_t::to_string() const {
    ss << "mpls_action=" << mpls_action_;
    ss << ", nexthop=" << nexthop_;
    ss << ", intf=" << intf_;
+   ss << ", sbfd_session_key=" << sbfd_session_key_;
    ss << ", child_nexthop_group='" << child_nexthop_group_ << "'";
    ss << ")";
    return ss.str();

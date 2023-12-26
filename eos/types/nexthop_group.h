@@ -4,6 +4,7 @@
 #ifndef EOS_TYPES_NEXTHOP_GROUP_H
 #define EOS_TYPES_NEXTHOP_GROUP_H
 
+#include <eos/bfd.h>
 #include <eos/hash_mix.h>
 #include <eos/panic.h>
 #include <eos/utility.h>
@@ -197,6 +198,11 @@ class EOS_SDK_PUBLIC nexthop_group_entry_t {
    intf_id_t intf() const;
    /** Setter for 'intf'. */
    void intf_is(intf_id_t const & intf);
+
+   /** Getter for 'sbfd_session_key': the optional key to an sBFD session. */
+   sbfd_echo_session_key_t sbfd_session_key() const;
+   /** Setter for 'sbfd_session_key'. */
+   void sbfd_session_key_is(sbfd_echo_session_key_t const & sbfd_session_key);
 
    /** Getter for 'child_nexthop_group': the name of next level nexthop-group. */
    std::string child_nexthop_group() const;

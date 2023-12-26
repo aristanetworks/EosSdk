@@ -355,6 +355,7 @@ void throw_py_error(error const& err) {
 %template() std::pair<uint32_t, eos::acl_rule_eth_t>;
 %template() std::unordered_set<uint32_t>;
 %template() std::unordered_set<eos::ip_addr_t>;
+%template() std::unordered_set<std::string>;
 %template() std::map<eos::lldp_tlv_type_t, std::string>;
 %template() std::list<eos::lldp_management_address_t>;
 %template() std::vector<std::string>;
