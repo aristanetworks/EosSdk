@@ -1,0 +1,440 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>class_map &#8212; Arista EOS SDK 2.22.5 reference</title>
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/eossdk.css" type="text/css" />
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="decap_group" href="decap_group.html" />
+    <link rel="prev" title="bgp_path" href="bgp_path.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="decap_group.html" title="decap_group"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="bgp_path.html" title="bgp_path"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Arista EOS SDK 2.22.5 reference</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href=""><strong>class_map</strong></a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="class-map">
+<h1><strong>class_map</strong><a class="headerlink" href="#class-map" title="Permalink to this headline">¶</a></h1>
+<p>Class map manipulation.</p>
+<p>This module provides access to the management of class maps. Classification or “class” maps, provide a way for the network operator to classify packets arriving on an interface. Together with the policy_map_mgr in policy_map.h, classified traffic can drive policy features, such as PBR. </p>
+<dl class="cpp type">
+<dt id="_CPPv43eos">
+<span id="_CPPv33eos"></span><span id="_CPPv23eos"></span><span id="eos"></span><span class="target" id="namespaceeos"></span><em class="property">namespace </em><code class="sig-name descname">eos</code><br /></dt>
+<dd><dl class="cpp class">
+<dt id="_CPPv4N3eos16class_map_iter_tE">
+<span id="_CPPv3N3eos16class_map_iter_tE"></span><span id="_CPPv2N3eos16class_map_iter_tE"></span><span id="eos::class_map_iter_t"></span><span class="target" id="classeos_1_1class__map__iter__t"></span><em class="property">class </em><code class="sig-name descname">class_map_iter_t</code> : <em class="property">public</em> <a class="reference internal" href="acl.html#_CPPv43eos" title="eos">eos</a>::<a class="reference internal" href="iterator.html#_CPPv4I00EN3eos9iter_baseE" title="eos::iter_base">iter_base</a>&lt;<a class="reference internal" href="#_CPPv4N3eos15class_map_key_tE" title="eos::class_map_key_t">class_map_key_t</a>, class_map_iter_impl&gt;<a class="headerlink" href="#_CPPv4N3eos16class_map_iter_tE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><div class="docutils container">
+<em>#include &lt;class_map.h&gt;</em></div>
+<p>An iterator providing forwards only iteration over collections of class maps. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-private-functions">Private Functions</p>
+<dl class="cpp function">
+<dt id="_CPPv4N3eos16class_map_iter_t16class_map_iter_tEPC19class_map_iter_impl">
+<span id="_CPPv3N3eos16class_map_iter_t16class_map_iter_tEPC19class_map_iter_impl"></span><span id="_CPPv2N3eos16class_map_iter_t16class_map_iter_tEPC19class_map_iter_impl"></span><span id="eos::class_map_iter_t::class_map_iter_t__class_map_iter_implPC"></span><span class="target" id="classeos_1_1class__map__iter__t_1a7fc711aa1720a0205e31b8c1c4209a57"></span><em class="property">explicit</em> <code class="sig-name descname">class_map_iter_t</code><span class="sig-paren">(</span>class_map_iter_impl*<em class="property">const</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos16class_map_iter_t16class_map_iter_tEPC19class_map_iter_impl" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-friends">Friends</p>
+<dl class="friendclass">
+<dt>
+<em class="property">friend class</em> class_map_iter_impl</dt>
+</dl>
+
+</div>
+</dd></dl>
+
+<dl class="cpp class">
+<dt id="_CPPv4N3eos13class_map_mgrE">
+<span id="_CPPv3N3eos13class_map_mgrE"></span><span id="_CPPv2N3eos13class_map_mgrE"></span><span id="eos::class_map_mgr"></span><span class="target" id="classeos_1_1class__map__mgr"></span><em class="property">class </em><code class="sig-name descname">class_map_mgr</code><a class="headerlink" href="#_CPPv4N3eos13class_map_mgrE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><div class="docutils container">
+<em>#include &lt;class_map.h&gt;</em></div>
+<p>EOS class map manager.</p>
+<p><p>This manager provides access to EOS traffic classifiers, or “class</p>
+<p>maps”. Class maps are referred to by policy maps (policy_map.h) to classify traffic that should be subject to the policy’s actions.</p>
+</p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
+<dl class="cpp function">
+<dt id="_CPPv4N3eos13class_map_mgrD0Ev">
+<span id="_CPPv3N3eos13class_map_mgrD0Ev"></span><span id="_CPPv2N3eos13class_map_mgrD0Ev"></span><span id="eos::class_map_mgr::~class_map_mgr"></span><span class="target" id="classeos_1_1class__map__mgr_1ad774c1cffb6afd9dce2848bf04b3d9da"></span><em class="property">virtual</em> <code class="sig-name descname">~class_map_mgr</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos13class_map_mgrD0Ev" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos13class_map_mgr11resync_initEv">
+<span id="_CPPv3N3eos13class_map_mgr11resync_initEv"></span><span id="_CPPv2N3eos13class_map_mgr11resync_initEv"></span><span id="eos::class_map_mgr::resync_init"></span><span class="target" id="classeos_1_1class__map__mgr_1a1486cac1f5293ce97353519ff5246fa1"></span><em class="property">virtual</em> void <code class="sig-name descname">resync_init</code><span class="sig-paren">(</span><span class="sig-paren">)</span> = 0<a class="headerlink" href="#_CPPv4N3eos13class_map_mgr11resync_initEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Resync mediates class map configuration into a known good state.</p>
+<p>To start a resync, call <a class="reference internal" href="#classeos_1_1class__map__mgr_1a1486cac1f5293ce97353519ff5246fa1"><span class="std std-ref">resync_init()</span></a> and then use the functions in the module to manipulate class maps like normal, setting them with <a class="reference internal" href="#classeos_1_1class__map__mgr_1a11d6407f31872015c3c6a64c5256ee03"><span class="std std-ref">class_map_is()</span></a>. After all entries have been set, call <a class="reference internal" href="#classeos_1_1class__map__mgr_1afb2987441ec3b9e954c8dd7aa85cd3a5"><span class="std std-ref">resync_complete()</span></a>, which will delete existing class_maps that were not added or modified during resync.</p>
+<p>During resync, this manager will act like it is referencing a temporary table that starts off empty. Thus, methods like exist, del, and getters will act only on that temporary table, regardless of the real values in Sysdb. The one exception is iteration; they will traverse the table stored in Sysdb, regardless of whether or not the manager is in resync mode. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos13class_map_mgr15resync_completeEv">
+<span id="_CPPv3N3eos13class_map_mgr15resync_completeEv"></span><span id="_CPPv2N3eos13class_map_mgr15resync_completeEv"></span><span id="eos::class_map_mgr::resync_complete"></span><span class="target" id="classeos_1_1class__map__mgr_1afb2987441ec3b9e954c8dd7aa85cd3a5"></span><em class="property">virtual</em> void <code class="sig-name descname">resync_complete</code><span class="sig-paren">(</span><span class="sig-paren">)</span> = 0<a class="headerlink" href="#_CPPv4N3eos13class_map_mgr15resync_completeEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Completes any underway resync operation. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos13class_map_mgr6existsERK15class_map_key_t">
+<span id="_CPPv3NK3eos13class_map_mgr6existsERK15class_map_key_t"></span><span id="_CPPv2NK3eos13class_map_mgr6existsERK15class_map_key_t"></span><span id="eos::class_map_mgr::exists__class_map_key_tCRC"></span><span class="target" id="classeos_1_1class__map__mgr_1ad97f9833956e1b9183ee3a581acff8f7"></span><em class="property">virtual</em> bool <code class="sig-name descname">exists</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos15class_map_key_tE" title="eos::class_map_key_t">class_map_key_t</a> <em class="property">const</em> &amp;<em>key</em><span class="sig-paren">)</span> <em class="property">const</em> = 0<a class="headerlink" href="#_CPPv4NK3eos13class_map_mgr6existsERK15class_map_key_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Returns true if and only if the provided key exists in the system config. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos13class_map_mgr9class_mapERK15class_map_key_t">
+<span id="_CPPv3NK3eos13class_map_mgr9class_mapERK15class_map_key_t"></span><span id="_CPPv2NK3eos13class_map_mgr9class_mapERK15class_map_key_t"></span><span id="eos::class_map_mgr::class_map__class_map_key_tCRC"></span><span class="target" id="classeos_1_1class__map__mgr_1ae9fae98a8613816f0da8764c2b1deee5"></span><em class="property">virtual</em> <a class="reference internal" href="#_CPPv4N3eos11class_map_tE" title="eos::class_map_t">class_map_t</a> <code class="sig-name descname">class_map</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos15class_map_key_tE" title="eos::class_map_key_t">class_map_key_t</a> <em class="property">const</em> &amp;<em>key</em><span class="sig-paren">)</span> <em class="property">const</em> = 0<a class="headerlink" href="#_CPPv4NK3eos13class_map_mgr9class_mapERK15class_map_key_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Returns the class map for the provided class map key. If there is no class map for the key, returns a default <a class="reference internal" href="#classeos_1_1class__map__t"><span class="std std-ref">class_map_t</span></a> </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos13class_map_mgr12class_map_isERK11class_map_t">
+<span id="_CPPv3N3eos13class_map_mgr12class_map_isERK11class_map_t"></span><span id="_CPPv2N3eos13class_map_mgr12class_map_isERK11class_map_t"></span><span id="eos::class_map_mgr::class_map_is__class_map_tCR"></span><span class="target" id="classeos_1_1class__map__mgr_1a11d6407f31872015c3c6a64c5256ee03"></span><em class="property">virtual</em> void <code class="sig-name descname">class_map_is</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos11class_map_tE" title="eos::class_map_t">class_map_t</a> <em class="property">const</em> &amp;<em>class_map</em><span class="sig-paren">)</span> = 0<a class="headerlink" href="#_CPPv4N3eos13class_map_mgr12class_map_isERK11class_map_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Sets a class map and commits its configuration. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos13class_map_mgr14class_map_iterE16policy_feature_t">
+<span id="_CPPv3NK3eos13class_map_mgr14class_map_iterE16policy_feature_t"></span><span id="_CPPv2NK3eos13class_map_mgr14class_map_iterE16policy_feature_t"></span><span id="eos::class_map_mgr::class_map_iter__policy_feature_tC"></span><span class="target" id="classeos_1_1class__map__mgr_1a5619f26a374be27d7f8daaa671972db3"></span><em class="property">virtual</em> <a class="reference internal" href="#_CPPv4N3eos16class_map_iter_tE" title="eos::class_map_iter_t">class_map_iter_t</a> <code class="sig-name descname">class_map_iter</code><span class="sig-paren">(</span><a class="reference internal" href="policy_map.html#_CPPv4N3eos16policy_feature_tE" title="eos::policy_feature_t">policy_feature_t</a><span class="sig-paren">)</span> <em class="property">const</em> = 0<a class="headerlink" href="#_CPPv4NK3eos13class_map_mgr14class_map_iterE16policy_feature_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Provides iteration over the configured class maps for a feature. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos13class_map_mgr13class_map_delERK15class_map_key_t">
+<span id="_CPPv3N3eos13class_map_mgr13class_map_delERK15class_map_key_t"></span><span id="_CPPv2N3eos13class_map_mgr13class_map_delERK15class_map_key_t"></span><span id="eos::class_map_mgr::class_map_del__class_map_key_tCR"></span><span class="target" id="classeos_1_1class__map__mgr_1ae1d21bf98f47708b8758b34fd90d8e82"></span><em class="property">virtual</em> void <code class="sig-name descname">class_map_del</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos15class_map_key_tE" title="eos::class_map_key_t">class_map_key_t</a> <em class="property">const</em> &amp;<em>key</em><span class="sig-paren">)</span> = 0<a class="headerlink" href="#_CPPv4N3eos13class_map_mgr13class_map_delERK15class_map_key_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Deletes the class map specified. </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-protected-functions">Protected Functions</p>
+<dl class="cpp function">
+<dt id="_CPPv4N3eos13class_map_mgr13class_map_mgrEv">
+<span id="_CPPv3N3eos13class_map_mgr13class_map_mgrEv"></span><span id="_CPPv2N3eos13class_map_mgr13class_map_mgrEv"></span><span id="eos::class_map_mgr::class_map_mgr"></span><span class="target" id="classeos_1_1class__map__mgr_1abb2fe18db2a118eefdf9087f3a86e327"></span><code class="sig-name descname">class_map_mgr</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos13class_map_mgr13class_map_mgrEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-private-members">Private Members</p>
+<dl class="cpp var">
+<dt>
+<span class="target" id="classeos_1_1class__map__mgr_1a8d1bd07dc613ad529e6ad86567e1d90a"></span><code class="sig-name descname">class_map_mgr</code></dt>
+<dd></dd></dl>
+
+</div>
+</dd></dl>
+
+</dd></dl>
+
+<div class="section" id="type-definitions-in-class-map">
+<h2>Type definitions in <strong>class_map</strong><a class="headerlink" href="#type-definitions-in-class-map" title="Permalink to this headline">¶</a></h2>
+<dl class="cpp type">
+<dt>
+<span class="target" id="namespaceeos"></span><em class="property">namespace </em><code class="sig-name descname">eos</code><br /></dt>
+<dd><div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-typedefs">Typedefs</p>
+<dl class="cpp type">
+<dt id="_CPPv4N3eos15class_map_key_tE">
+<span id="_CPPv3N3eos15class_map_key_tE"></span><span id="_CPPv2N3eos15class_map_key_tE"></span><span id="eos::class_map_key_t"></span><span class="target" id="namespaceeos_1a9edf4629cf4bbd4de34bf5283bc71870"></span><em class="property">typedef </em><a class="reference internal" href="policy_map.html#_CPPv4N3eos16policy_map_key_tE" title="eos::policy_map_key_t">policy_map_key_t</a> <code class="sig-name descname">class_map_key_t</code><a class="headerlink" href="#_CPPv4N3eos15class_map_key_tE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-variables">Variables</p>
+<dl class="cpp var">
+<dt id="_CPPv4N3eos18CLASS_MAP_MPLS_ANYE">
+<span id="_CPPv3N3eos18CLASS_MAP_MPLS_ANYE"></span><span id="_CPPv2N3eos18CLASS_MAP_MPLS_ANYE"></span><span id="eos::CLASS_MAP_MPLS_ANY__ssC"></span><span class="target" id="namespaceeos_1a4d4979298330a3884b05b641e63afeda"></span><em class="property">static</em> <a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::string <em class="property">const</em> <code class="sig-name descname">CLASS_MAP_MPLS_ANY</code> = &quot;__mpls_permit_any__&quot;<a class="headerlink" href="#_CPPv4N3eos18CLASS_MAP_MPLS_ANYE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>A special class map name which means “match all MPLS traffic.”</p>
+<p>Use as follows when defining a class_map_key_t:</p>
+<p><div class="highlight-default notranslate"><div class="highlight"><pre><span></span>   <span class="n">eos</span><span class="p">::</span><span class="n">class_map_key_t</span> <span class="n">key</span><span class="p">(</span><span class="n">eos</span><span class="p">::</span><span class="n">CLASS_MAP_MPLS_ANY</span><span class="p">,</span>
+<span class="n">eos</span><span class="p">::</span><span class="n">POLICY_FEATURE_PBR</span><span class="p">);</span>
+   <span class="n">eos</span><span class="p">::</span><span class="n">class_map_t</span> <span class="n">cm</span><span class="p">(</span><span class="n">key</span><span class="p">);</span>
+</pre></div>
+</div>
+</p>
+<p>Only one such rule can be set on any one policy map. </p>
+</dd></dl>
+
+</div>
+<dl class="cpp class">
+<dt id="_CPPv4N3eos16class_map_rule_tE">
+<span id="_CPPv3N3eos16class_map_rule_tE"></span><span id="_CPPv2N3eos16class_map_rule_tE"></span><span id="eos::class_map_rule_t"></span><span class="target" id="classeos_1_1class__map__rule__t"></span><em class="property">class </em><code class="sig-name descname">class_map_rule_t</code><a class="headerlink" href="#_CPPv4N3eos16class_map_rule_tE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><div class="docutils container">
+<em>#include &lt;class_map.h&gt;</em></div>
+<p>A class map match rule uses an ACL to match classified traffic. Values of this type are returned from the class map’s rules() function. To program class map rules first add them to a class map and then add that to EOS SDK using <a class="reference internal" href="#classeos_1_1class__map__mgr"><span class="std std-ref">class_map_mgr</span></a>’s class_map_is(). </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
+<dl class="cpp function">
+<dt id="_CPPv4N3eos16class_map_rule_t16class_map_rule_tEv">
+<span id="_CPPv3N3eos16class_map_rule_t16class_map_rule_tEv"></span><span id="_CPPv2N3eos16class_map_rule_t16class_map_rule_tEv"></span><span id="eos::class_map_rule_t::class_map_rule_t"></span><span class="target" id="classeos_1_1class__map__rule__t_1a4f594444e083b4d60799c29820732c3e"></span><code class="sig-name descname">class_map_rule_t</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos16class_map_rule_t16class_map_rule_tEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos16class_map_rule_t16class_map_rule_tERK9acl_key_t">
+<span id="_CPPv3N3eos16class_map_rule_t16class_map_rule_tERK9acl_key_t"></span><span id="_CPPv2N3eos16class_map_rule_t16class_map_rule_tERK9acl_key_t"></span><span id="eos::class_map_rule_t::class_map_rule_t__acl_key_tCR"></span><span class="target" id="classeos_1_1class__map__rule__t_1ac6585f1284e674643505bfe27f7877aa"></span><em class="property">explicit</em> <code class="sig-name descname">class_map_rule_t</code><span class="sig-paren">(</span><a class="reference internal" href="acl.html#_CPPv4N3eos9acl_key_tE" title="eos::acl_key_t">acl_key_t</a> <em class="property">const</em> &amp;<em>acl_key</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos16class_map_rule_t16class_map_rule_tERK9acl_key_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos16class_map_rule_t16class_map_rule_tERK16class_map_rule_t">
+<span id="_CPPv3N3eos16class_map_rule_t16class_map_rule_tERK16class_map_rule_t"></span><span id="_CPPv2N3eos16class_map_rule_t16class_map_rule_tERK16class_map_rule_t"></span><span id="eos::class_map_rule_t::class_map_rule_t__class_map_rule_tCR"></span><span class="target" id="classeos_1_1class__map__rule__t_1a823a98c542ccbeffc1566e27d54eeeda"></span><code class="sig-name descname">class_map_rule_t</code><span class="sig-paren">(</span><em class="property">const</em> <a class="reference internal" href="#_CPPv4N3eos16class_map_rule_t16class_map_rule_tERK16class_map_rule_t" title="eos::class_map_rule_t::class_map_rule_t">class_map_rule_t</a> &amp;<em>other</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos16class_map_rule_t16class_map_rule_tERK16class_map_rule_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos16class_map_rule_taSERK16class_map_rule_t">
+<span id="_CPPv3N3eos16class_map_rule_taSERK16class_map_rule_t"></span><span id="_CPPv2N3eos16class_map_rule_taSERK16class_map_rule_t"></span><span id="eos::class_map_rule_t::assign-operator__class_map_rule_tCR"></span><span class="target" id="classeos_1_1class__map__rule__t_1a7b6fa8e0fe54545cd945be90f27f878b"></span><a class="reference internal" href="#_CPPv4N3eos16class_map_rule_tE" title="eos::class_map_rule_t">class_map_rule_t</a> &amp;<code class="sig-name descname">operator=</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos16class_map_rule_tE" title="eos::class_map_rule_t">class_map_rule_t</a> <em class="property">const</em> &amp;<em>other</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos16class_map_rule_taSERK16class_map_rule_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos16class_map_rule_t7acl_keyEv">
+<span id="_CPPv3NK3eos16class_map_rule_t7acl_keyEv"></span><span id="_CPPv2NK3eos16class_map_rule_t7acl_keyEv"></span><span id="eos::class_map_rule_t::acl_keyC"></span><span class="target" id="classeos_1_1class__map__rule__t_1a727f2104887222a34ac3b4db5473e9ed"></span><a class="reference internal" href="acl.html#_CPPv4N3eos9acl_key_tE" title="eos::acl_key_t">acl_key_t</a> <code class="sig-name descname">acl_key</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos16class_map_rule_t7acl_keyEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Getter for ‘acl_key’: the ACL name and type to use as a class map match rule. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos16class_map_rule_teqERK16class_map_rule_t">
+<span id="_CPPv3NK3eos16class_map_rule_teqERK16class_map_rule_t"></span><span id="_CPPv2NK3eos16class_map_rule_teqERK16class_map_rule_t"></span><span id="eos::class_map_rule_t::eq-operator__class_map_rule_tCRC"></span><span class="target" id="classeos_1_1class__map__rule__t_1a08df58a52a051f4ea002c5cb53cea618"></span>bool <code class="sig-name descname">operator==</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos16class_map_rule_tE" title="eos::class_map_rule_t">class_map_rule_t</a> <em class="property">const</em> &amp;<em>other</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos16class_map_rule_teqERK16class_map_rule_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos16class_map_rule_tneERK16class_map_rule_t">
+<span id="_CPPv3NK3eos16class_map_rule_tneERK16class_map_rule_t"></span><span id="_CPPv2NK3eos16class_map_rule_tneERK16class_map_rule_t"></span><span id="eos::class_map_rule_t::neq-operator__class_map_rule_tCRC"></span><span class="target" id="classeos_1_1class__map__rule__t_1ac1b7ace90ef4929269ca12215afbbd76"></span>bool <code class="sig-name descname">operator!=</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos16class_map_rule_tE" title="eos::class_map_rule_t">class_map_rule_t</a> <em class="property">const</em> &amp;<em>other</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos16class_map_rule_tneERK16class_map_rule_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos16class_map_rule_t4hashEv">
+<span id="_CPPv3NK3eos16class_map_rule_t4hashEv"></span><span id="_CPPv2NK3eos16class_map_rule_t4hashEv"></span><span id="eos::class_map_rule_t::hashC"></span><span class="target" id="classeos_1_1class__map__rule__t_1afe0b29624e2d617648baa87726aeccb5"></span>uint32_t <code class="sig-name descname">hash</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos16class_map_rule_t4hashEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>The hash function for type <a class="reference internal" href="#classeos_1_1class__map__rule__t"><span class="std std-ref">class_map_rule_t</span></a>. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos16class_map_rule_t6mix_meER8hash_mix">
+<span id="_CPPv3NK3eos16class_map_rule_t6mix_meER8hash_mix"></span><span id="_CPPv2NK3eos16class_map_rule_t6mix_meER8hash_mix"></span><span id="eos::class_map_rule_t::mix_me__hash_mixRC"></span><span class="target" id="classeos_1_1class__map__rule__t_1a1a14a98fae4395e8ae668d860d3e3bb6"></span>void <code class="sig-name descname">mix_me</code><span class="sig-paren">(</span><a class="reference internal" href="hash_mix.html#_CPPv4N3eos8hash_mixE" title="eos::hash_mix">hash_mix</a> &amp;<em>h</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos16class_map_rule_t6mix_meER8hash_mix" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>The hash mix function for type <a class="reference internal" href="#classeos_1_1class__map__rule__t"><span class="std std-ref">class_map_rule_t</span></a>. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos16class_map_rule_t9to_stringEv">
+<span id="_CPPv3NK3eos16class_map_rule_t9to_stringEv"></span><span id="_CPPv2NK3eos16class_map_rule_t9to_stringEv"></span><span id="eos::class_map_rule_t::to_stringC"></span><span class="target" id="classeos_1_1class__map__rule__t_1a7c7c2957aa53e263b575007d0fe78f1d"></span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::string <code class="sig-name descname">to_string</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos16class_map_rule_t9to_stringEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Returns a string representation of the current object’s values. </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-private-members">Private Members</p>
+<dl class="cpp var">
+<dt id="_CPPv4N3eos16class_map_rule_t5pimplE">
+<span id="_CPPv3N3eos16class_map_rule_t5pimplE"></span><span id="_CPPv2N3eos16class_map_rule_t5pimplE"></span><span id="eos::class_map_rule_t::pimpl__std::shared_ptr:class_map_rule_impl_t:"></span><span class="target" id="classeos_1_1class__map__rule__t_1a9a6e5df97b4ad3306e8309b3a8aef75a"></span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::shared_ptr&lt;class_map_rule_impl_t&gt; <code class="sig-name descname">pimpl</code><a class="headerlink" href="#_CPPv4N3eos16class_map_rule_t5pimplE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-friends">Friends</p>
+<dl class="cpp function">
+<dt id="_CPPv4N3eos16class_map_rule_tlsERNSt7ostreamERK16class_map_rule_t">
+<span id="_CPPv3N3eos16class_map_rule_tlsERNSt7ostreamERK16class_map_rule_t"></span><span id="_CPPv2N3eos16class_map_rule_tlsERNSt7ostreamERK16class_map_rule_t"></span><span id="eos::class_map_rule_t::lshift-operator__osR.class_map_rule_tCR"></span><span class="target" id="classeos_1_1class__map__rule__t_1a88187a1393a018c0f98f514105f2a15b"></span><em class="property">friend</em> <a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::ostream &amp;<code class="sig-name descname">operator&lt;&lt;</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::ostream &amp;<em>os</em>, <em class="property">const</em> <a class="reference internal" href="#_CPPv4N3eos16class_map_rule_tE" title="eos::class_map_rule_t">class_map_rule_t</a> &amp;<em>obj</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos16class_map_rule_tlsERNSt7ostreamERK16class_map_rule_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>A utility stream operator that adds a string representation of <a class="reference internal" href="#classeos_1_1class__map__rule__t"><span class="std std-ref">class_map_rule_t</span></a> to the ostream. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="cpp class">
+<dt id="_CPPv4N3eos11class_map_tE">
+<span id="_CPPv3N3eos11class_map_tE"></span><span id="_CPPv2N3eos11class_map_tE"></span><span id="eos::class_map_t"></span><span class="target" id="classeos_1_1class__map__t"></span><em class="property">class </em><code class="sig-name descname">class_map_t</code><a class="headerlink" href="#_CPPv4N3eos11class_map_tE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><div class="docutils container">
+<em>#include &lt;class_map.h&gt;</em></div>
+<p>A class map classifies traffic to apply policy features to.</p>
+<p>A class map can match IP or MPLS traffic. To match IP traffic, specify a class map matching one or more IPv4 ACLs (for PBR). </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
+<dl class="cpp function">
+<dt id="_CPPv4N3eos11class_map_t11class_map_tEv">
+<span id="_CPPv3N3eos11class_map_t11class_map_tEv"></span><span id="_CPPv2N3eos11class_map_t11class_map_tEv"></span><span id="eos::class_map_t::class_map_t"></span><span class="target" id="classeos_1_1class__map__t_1ae672dffa0df194b0f118bdf9a9d4b8b3"></span><code class="sig-name descname">class_map_t</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos11class_map_t11class_map_tEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos11class_map_t11class_map_tERK15class_map_key_t">
+<span id="_CPPv3N3eos11class_map_t11class_map_tERK15class_map_key_t"></span><span id="_CPPv2N3eos11class_map_t11class_map_tERK15class_map_key_t"></span><span id="eos::class_map_t::class_map_t__class_map_key_tCR"></span><span class="target" id="classeos_1_1class__map__t_1a8b62e0af340827787d4d949d8f0357b1"></span><em class="property">explicit</em> <code class="sig-name descname">class_map_t</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos15class_map_key_tE" title="eos::class_map_key_t">class_map_key_t</a> <em class="property">const</em> &amp;<em>key</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos11class_map_t11class_map_tERK15class_map_key_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos11class_map_t11class_map_tERK11class_map_t">
+<span id="_CPPv3N3eos11class_map_t11class_map_tERK11class_map_t"></span><span id="_CPPv2N3eos11class_map_t11class_map_tERK11class_map_t"></span><span id="eos::class_map_t::class_map_t__class_map_tCR"></span><span class="target" id="classeos_1_1class__map__t_1ad394c4e7cc32ce352cbb7fcbd9313184"></span><code class="sig-name descname">class_map_t</code><span class="sig-paren">(</span><em class="property">const</em> <a class="reference internal" href="#_CPPv4N3eos11class_map_t11class_map_tERK11class_map_t" title="eos::class_map_t::class_map_t">class_map_t</a> &amp;<em>other</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos11class_map_t11class_map_tERK11class_map_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos11class_map_taSERK11class_map_t">
+<span id="_CPPv3N3eos11class_map_taSERK11class_map_t"></span><span id="_CPPv2N3eos11class_map_taSERK11class_map_t"></span><span id="eos::class_map_t::assign-operator__class_map_tCR"></span><span class="target" id="classeos_1_1class__map__t_1ad12e311f33f01e93bd0ad36827be988b"></span><a class="reference internal" href="#_CPPv4N3eos11class_map_tE" title="eos::class_map_t">class_map_t</a> &amp;<code class="sig-name descname">operator=</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos11class_map_tE" title="eos::class_map_t">class_map_t</a> <em class="property">const</em> &amp;<em>other</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos11class_map_taSERK11class_map_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos11class_map_t3keyEv">
+<span id="_CPPv3NK3eos11class_map_t3keyEv"></span><span id="_CPPv2NK3eos11class_map_t3keyEv"></span><span id="eos::class_map_t::keyC"></span><span class="target" id="classeos_1_1class__map__t_1ada092e443d95c6c31be0cbc88a7541b3"></span><a class="reference internal" href="#_CPPv4N3eos15class_map_key_tE" title="eos::class_map_key_t">class_map_key_t</a> <code class="sig-name descname">key</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos11class_map_t3keyEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Getter for ‘key’: the class map key. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos11class_map_t6key_isERK15class_map_key_t">
+<span id="_CPPv3N3eos11class_map_t6key_isERK15class_map_key_t"></span><span id="_CPPv2N3eos11class_map_t6key_isERK15class_map_key_t"></span><span id="eos::class_map_t::key_is__class_map_key_tCR"></span><span class="target" id="classeos_1_1class__map__t_1ac88b834ab0e210a3b6d8f157cf86a690"></span>void <code class="sig-name descname">key_is</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos15class_map_key_tE" title="eos::class_map_key_t">class_map_key_t</a> <em class="property">const</em> &amp;<em>key</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos11class_map_t6key_isERK15class_map_key_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Setter for ‘key’. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos11class_map_t5rulesEv">
+<span id="_CPPv3NK3eos11class_map_t5rulesEv"></span><span id="_CPPv2NK3eos11class_map_t5rulesEv"></span><span id="eos::class_map_t::rulesC"></span><span class="target" id="classeos_1_1class__map__t_1a2d78b9cacd1d6c3830e09d963cc42e2a"></span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::map&lt;uint32_t, <a class="reference internal" href="#_CPPv4N3eos16class_map_rule_tE" title="eos::class_map_rule_t">class_map_rule_t</a>&gt; <em class="property">const</em> &amp;<code class="sig-name descname">rules</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos11class_map_t5rulesEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Getter for ‘rules’: the sequence of class map rules. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos11class_map_t8rules_isERKNSt3mapI8uint32_t16class_map_rule_tEE">
+<span id="_CPPv3N3eos11class_map_t8rules_isERKNSt3mapI8uint32_t16class_map_rule_tEE"></span><span id="_CPPv2N3eos11class_map_t8rules_isERKNSt3mapI8uint32_t16class_map_rule_tEE"></span><span id="eos::class_map_t::rules_is__std::map:uint32_t.class_map_rule_t:CR"></span><span class="target" id="classeos_1_1class__map__t_1a8a6c566b6fb9ce56b6d05a3689776ba2"></span>void <code class="sig-name descname">rules_is</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::map&lt;uint32_t, <a class="reference internal" href="#_CPPv4N3eos16class_map_rule_tE" title="eos::class_map_rule_t">class_map_rule_t</a>&gt; <em class="property">const</em> &amp;<em>rules</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos11class_map_t8rules_isERKNSt3mapI8uint32_t16class_map_rule_tEE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Setter for ‘rules’. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos11class_map_t8rule_setE8uint32_tRK16class_map_rule_t">
+<span id="_CPPv3N3eos11class_map_t8rule_setE8uint32_tRK16class_map_rule_t"></span><span id="_CPPv2N3eos11class_map_t8rule_setE8uint32_tRK16class_map_rule_t"></span><span id="eos::class_map_t::rule_set__uint32_t.class_map_rule_tCR"></span><span class="target" id="classeos_1_1class__map__t_1a5391fe75947aa58dff670d60046e04e6"></span>void <code class="sig-name descname">rule_set</code><span class="sig-paren">(</span>uint32_t <em>key</em>, <a class="reference internal" href="#_CPPv4N3eos16class_map_rule_tE" title="eos::class_map_rule_t">class_map_rule_t</a> <em class="property">const</em> &amp;<em>value</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos11class_map_t8rule_setE8uint32_tRK16class_map_rule_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Inserts key/value pair to the map. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos11class_map_t8rule_delE8uint32_t">
+<span id="_CPPv3N3eos11class_map_t8rule_delE8uint32_t"></span><span id="_CPPv2N3eos11class_map_t8rule_delE8uint32_t"></span><span id="eos::class_map_t::rule_del__uint32_t"></span><span class="target" id="classeos_1_1class__map__t_1aee330f54305e59419233883d71b51087"></span>void <code class="sig-name descname">rule_del</code><span class="sig-paren">(</span>uint32_t <em>key</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos11class_map_t8rule_delE8uint32_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Deletes the key/value pair from the map. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos11class_map_teqERK11class_map_t">
+<span id="_CPPv3NK3eos11class_map_teqERK11class_map_t"></span><span id="_CPPv2NK3eos11class_map_teqERK11class_map_t"></span><span id="eos::class_map_t::eq-operator__class_map_tCRC"></span><span class="target" id="classeos_1_1class__map__t_1a922134d0c33ada21bb74a5b677ee4ba2"></span>bool <code class="sig-name descname">operator==</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos11class_map_tE" title="eos::class_map_t">class_map_t</a> <em class="property">const</em> &amp;<em>other</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos11class_map_teqERK11class_map_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos11class_map_tneERK11class_map_t">
+<span id="_CPPv3NK3eos11class_map_tneERK11class_map_t"></span><span id="_CPPv2NK3eos11class_map_tneERK11class_map_t"></span><span id="eos::class_map_t::neq-operator__class_map_tCRC"></span><span class="target" id="classeos_1_1class__map__t_1a44992bbfa9cb73673d09773d17c4ac3a"></span>bool <code class="sig-name descname">operator!=</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos11class_map_tE" title="eos::class_map_t">class_map_t</a> <em class="property">const</em> &amp;<em>other</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos11class_map_tneERK11class_map_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos11class_map_t4hashEv">
+<span id="_CPPv3NK3eos11class_map_t4hashEv"></span><span id="_CPPv2NK3eos11class_map_t4hashEv"></span><span id="eos::class_map_t::hashC"></span><span class="target" id="classeos_1_1class__map__t_1a16d5bb30bf8f55287b2c1855f259d1f3"></span>uint32_t <code class="sig-name descname">hash</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos11class_map_t4hashEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>The hash function for type <a class="reference internal" href="#classeos_1_1class__map__t"><span class="std std-ref">class_map_t</span></a>. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos11class_map_t6mix_meER8hash_mix">
+<span id="_CPPv3NK3eos11class_map_t6mix_meER8hash_mix"></span><span id="_CPPv2NK3eos11class_map_t6mix_meER8hash_mix"></span><span id="eos::class_map_t::mix_me__hash_mixRC"></span><span class="target" id="classeos_1_1class__map__t_1aa56055f98334aee2700fa0fdcd590fd9"></span>void <code class="sig-name descname">mix_me</code><span class="sig-paren">(</span><a class="reference internal" href="hash_mix.html#_CPPv4N3eos8hash_mixE" title="eos::hash_mix">hash_mix</a> &amp;<em>h</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos11class_map_t6mix_meER8hash_mix" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>The hash mix function for type <a class="reference internal" href="#classeos_1_1class__map__t"><span class="std std-ref">class_map_t</span></a>. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos11class_map_t9to_stringEv">
+<span id="_CPPv3NK3eos11class_map_t9to_stringEv"></span><span id="_CPPv2NK3eos11class_map_t9to_stringEv"></span><span id="eos::class_map_t::to_stringC"></span><span class="target" id="classeos_1_1class__map__t_1aa863176b85b7c234d77e7c1d7bdefcfb"></span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::string <code class="sig-name descname">to_string</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos11class_map_t9to_stringEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Returns a string representation of the current object’s values. </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-private-members">Private Members</p>
+<dl class="cpp var">
+<dt id="_CPPv4N3eos11class_map_t5pimplE">
+<span id="_CPPv3N3eos11class_map_t5pimplE"></span><span id="_CPPv2N3eos11class_map_t5pimplE"></span><span id="eos::class_map_t::pimpl__std::shared_ptr:class_map_impl_t:"></span><span class="target" id="classeos_1_1class__map__t_1afa33a8fd68b67ff54b558b688f100bd5"></span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::shared_ptr&lt;class_map_impl_t&gt; <code class="sig-name descname">pimpl</code><a class="headerlink" href="#_CPPv4N3eos11class_map_t5pimplE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-friends">Friends</p>
+<dl class="cpp function">
+<dt id="_CPPv4N3eos11class_map_tlsERNSt7ostreamERK11class_map_t">
+<span id="_CPPv3N3eos11class_map_tlsERNSt7ostreamERK11class_map_t"></span><span id="_CPPv2N3eos11class_map_tlsERNSt7ostreamERK11class_map_t"></span><span id="eos::class_map_t::lshift-operator__osR.class_map_tCR"></span><span class="target" id="classeos_1_1class__map__t_1a6bdf9473f6354ca2b5e3f6b283a3cd22"></span><em class="property">friend</em> <a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::ostream &amp;<code class="sig-name descname">operator&lt;&lt;</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::ostream &amp;<em>os</em>, <em class="property">const</em> <a class="reference internal" href="#_CPPv4N3eos11class_map_tE" title="eos::class_map_t">class_map_t</a> &amp;<em>obj</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos11class_map_tlsERNSt7ostreamERK11class_map_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>A utility stream operator that adds a string representation of <a class="reference internal" href="#classeos_1_1class__map__t"><span class="std std-ref">class_map_t</span></a> to the ostream. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#"><strong>class_map</strong></a><ul>
+<li><a class="reference internal" href="#type-definitions-in-class-map">Type definitions in <strong>class_map</strong></a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="bgp_path.html"
+                        title="previous chapter"><strong>bgp_path</strong></a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="decap_group.html"
+                        title="next chapter"><strong>decap_group</strong></a></p>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="decap_group.html" title="decap_group"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="bgp_path.html" title="bgp_path"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Arista EOS SDK 2.22.5 reference</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href=""><strong>class_map</strong></a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2014, Arista Networks.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.4.3.
+    </div>
+  </body>
+</html>

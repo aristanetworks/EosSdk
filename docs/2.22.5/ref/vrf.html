@@ -1,0 +1,419 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>vrf &#8212; Arista EOS SDK 2.22.5 reference</title>
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/eossdk.css" type="text/css" />
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="xcvr" href="xcvr.html" />
+    <link rel="prev" title="version" href="version.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="xcvr.html" title="xcvr"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="version.html" title="version"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Arista EOS SDK 2.22.5 reference</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href=""><strong>vrf</strong></a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="vrf">
+<h1><strong>vrf</strong><a class="headerlink" href="#vrf" title="Permalink to this headline">¶</a></h1>
+<p>VRF management</p>
+<p>This module manages Virtual Routing &amp; Forwarding instances, known commonly as VRFs. VRFs let you partition your switch’s routing tables so you can have unique IP domains.</p>
+<p>VRFs are keyed by a unique name across the system, and can be used in other modules to configure routes and nexthops in different domains. If a route is not programmed in a specific VRF, it belongs to the VRF named “default”. </p>
+<dl class="cpp type">
+<dt id="_CPPv43eos">
+<span id="_CPPv33eos"></span><span id="_CPPv23eos"></span><span id="eos"></span><span class="target" id="namespaceeos"></span><em class="property">namespace </em><code class="sig-name descname">eos</code><br /></dt>
+<dd><dl class="cpp class">
+<dt id="_CPPv4N3eos11vrf_handlerE">
+<span id="_CPPv3N3eos11vrf_handlerE"></span><span id="_CPPv2N3eos11vrf_handlerE"></span><span id="eos::vrf_handler"></span><span class="target" id="classeos_1_1vrf__handler"></span><em class="property">class </em><code class="sig-name descname">vrf_handler</code> : <em class="property">public</em> <a class="reference internal" href="acl.html#_CPPv43eos" title="eos">eos</a>::<a class="reference internal" href="base_handler.html#_CPPv4I00EN3eos12base_handlerE" title="eos::base_handler">base_handler</a>&lt;<a class="reference internal" href="#_CPPv4N3eos7vrf_mgrE" title="eos::vrf_mgr">vrf_mgr</a>, <a class="reference internal" href="#_CPPv4N3eos11vrf_handlerE" title="eos::vrf_handler">vrf_handler</a>&gt;<a class="headerlink" href="#_CPPv4N3eos11vrf_handlerE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><div class="docutils container">
+<em>#include &lt;vrf.h&gt;</em></div>
+<p>The VRF handler.</p>
+<p>This class provides handler APIs to react to a VRF’s operational state change. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
+<dl class="cpp function">
+<dt id="_CPPv4N3eos11vrf_handler11vrf_handlerEP7vrf_mgr">
+<span id="_CPPv3N3eos11vrf_handler11vrf_handlerEP7vrf_mgr"></span><span id="_CPPv2N3eos11vrf_handler11vrf_handlerEP7vrf_mgr"></span><span id="eos::vrf_handler::vrf_handler__vrf_mgrP"></span><span class="target" id="classeos_1_1vrf__handler_1ad3987c59c01970c1ed0111b77a04c514"></span><em class="property">explicit</em> <code class="sig-name descname">vrf_handler</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos7vrf_mgrE" title="eos::vrf_mgr">vrf_mgr</a> *<em>mgr</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos11vrf_handler11vrf_handlerEP7vrf_mgr" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos11vrf_handler11get_vrf_mgrEv">
+<span id="_CPPv3NK3eos11vrf_handler11get_vrf_mgrEv"></span><span id="_CPPv2NK3eos11vrf_handler11get_vrf_mgrEv"></span><span id="eos::vrf_handler::get_vrf_mgrC"></span><span class="target" id="classeos_1_1vrf__handler_1a1ea560243378c42ee9eb2a2482ce4c8a"></span><em class="property">inline</em> <a class="reference internal" href="#_CPPv4N3eos7vrf_mgrE" title="eos::vrf_mgr">vrf_mgr</a> *<code class="sig-name descname">get_vrf_mgr</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos11vrf_handler11get_vrf_mgrEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos11vrf_handler14watch_all_vrfsEb">
+<span id="_CPPv3N3eos11vrf_handler14watch_all_vrfsEb"></span><span id="_CPPv2N3eos11vrf_handler14watch_all_vrfsEb"></span><span id="eos::vrf_handler::watch_all_vrfs__b"></span><span class="target" id="classeos_1_1vrf__handler_1a358b8cd13e5126ea0a383dc9d8708e06"></span>void <code class="sig-name descname">watch_all_vrfs</code><span class="sig-paren">(</span>bool<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos11vrf_handler14watch_all_vrfsEb" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Register to receive notifications when any VRF on the system changes state. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos11vrf_handler9watch_vrfERKNSt6stringEb">
+<span id="_CPPv3N3eos11vrf_handler9watch_vrfERKNSt6stringEb"></span><span id="_CPPv2N3eos11vrf_handler9watch_vrfERKNSt6stringEb"></span><span id="eos::vrf_handler::watch_vrf__ssCR.b"></span><span class="target" id="classeos_1_1vrf__handler_1a034368cc1f0ec037c27c26472efe091e"></span>void <code class="sig-name descname">watch_vrf</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::string <em class="property">const</em> &amp;<em>vrf_name</em>, bool<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos11vrf_handler9watch_vrfERKNSt6stringEb" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Register to receive notifications when the specified VRF on the system changes state. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos11vrf_handler12on_vrf_stateENSt6stringE11vrf_state_t">
+<span id="_CPPv3N3eos11vrf_handler12on_vrf_stateENSt6stringE11vrf_state_t"></span><span id="_CPPv2N3eos11vrf_handler12on_vrf_stateENSt6stringE11vrf_state_t"></span><span id="eos::vrf_handler::on_vrf_state__ss.vrf_state_t"></span><span class="target" id="classeos_1_1vrf__handler_1afab6d46316501241b768916d6df2e6bc"></span><em class="property">virtual</em> void <code class="sig-name descname">on_vrf_state</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::string <em>vrf_name</em>, <a class="reference internal" href="#_CPPv4N3eos11vrf_state_tE" title="eos::vrf_state_t">vrf_state_t</a> <em>vrf_state</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos11vrf_handler12on_vrf_stateENSt6stringE11vrf_state_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Called when a VRF’s operational state changes. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="cpp class">
+<dt id="_CPPv4N3eos10vrf_iter_tE">
+<span id="_CPPv3N3eos10vrf_iter_tE"></span><span id="_CPPv2N3eos10vrf_iter_tE"></span><span id="eos::vrf_iter_t"></span><span class="target" id="classeos_1_1vrf__iter__t"></span><em class="property">class </em><code class="sig-name descname">vrf_iter_t</code> : <em class="property">public</em> <a class="reference internal" href="acl.html#_CPPv43eos" title="eos">eos</a>::<a class="reference internal" href="iterator.html#_CPPv4I00EN3eos9iter_baseE" title="eos::iter_base">iter_base</a>&lt;<a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::string, vrf_iter_impl&gt;<a class="headerlink" href="#_CPPv4N3eos10vrf_iter_tE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><div class="docutils container">
+<em>#include &lt;vrf.h&gt;</em></div>
+<p>An iterator that yields a <a class="reference internal" href="#classeos_1_1vrf__t"><span class="std std-ref">vrf_t</span></a> for each VRF on the system. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-private-functions">Private Functions</p>
+<dl class="cpp function">
+<dt id="_CPPv4N3eos10vrf_iter_t10vrf_iter_tEPC13vrf_iter_impl">
+<span id="_CPPv3N3eos10vrf_iter_t10vrf_iter_tEPC13vrf_iter_impl"></span><span id="_CPPv2N3eos10vrf_iter_t10vrf_iter_tEPC13vrf_iter_impl"></span><span id="eos::vrf_iter_t::vrf_iter_t__vrf_iter_implPC"></span><span class="target" id="classeos_1_1vrf__iter__t_1af98344f62083c0cac4400ff49d4aa03a"></span><em class="property">explicit</em> <code class="sig-name descname">vrf_iter_t</code><span class="sig-paren">(</span>vrf_iter_impl*<em class="property">const</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos10vrf_iter_t10vrf_iter_tEPC13vrf_iter_impl" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-friends">Friends</p>
+<dl class="friendclass">
+<dt>
+<em class="property">friend class</em> vrf_iter_impl</dt>
+</dl>
+
+</div>
+</dd></dl>
+
+<dl class="cpp class">
+<dt id="_CPPv4N3eos7vrf_mgrE">
+<span id="_CPPv3N3eos7vrf_mgrE"></span><span id="_CPPv2N3eos7vrf_mgrE"></span><span id="eos::vrf_mgr"></span><span class="target" id="classeos_1_1vrf__mgr"></span><em class="property">class </em><code class="sig-name descname">vrf_mgr</code> : <em class="property">public</em> <a class="reference internal" href="acl.html#_CPPv43eos" title="eos">eos</a>::<a class="reference internal" href="base_mgr.html#_CPPv4I00EN3eos8base_mgrE" title="eos::base_mgr">base_mgr</a>&lt;<a class="reference internal" href="#_CPPv4N3eos11vrf_handlerE" title="eos::vrf_handler">vrf_handler</a>, <a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::string&gt;<a class="headerlink" href="#_CPPv4N3eos7vrf_mgrE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><div class="docutils container">
+<em>#include &lt;vrf.h&gt;</em></div>
+<p>The manager for VRF, this is the main entry point for applications to use EosSdk VRF APIs. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
+<dl class="cpp function">
+<dt id="_CPPv4N3eos7vrf_mgrD0Ev">
+<span id="_CPPv3N3eos7vrf_mgrD0Ev"></span><span id="_CPPv2N3eos7vrf_mgrD0Ev"></span><span id="eos::vrf_mgr::~vrf_mgr"></span><span class="target" id="classeos_1_1vrf__mgr_1a0bb283b4eee4aa5d535c48af643d777b"></span><em class="property">virtual</em> <code class="sig-name descname">~vrf_mgr</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos7vrf_mgrD0Ev" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos7vrf_mgr8vrf_iterEv">
+<span id="_CPPv3NK3eos7vrf_mgr8vrf_iterEv"></span><span id="_CPPv2NK3eos7vrf_mgr8vrf_iterEv"></span><span id="eos::vrf_mgr::vrf_iterC"></span><span class="target" id="classeos_1_1vrf__mgr_1ac37b50c47aa7242c7ea56166fa4b2939"></span><em class="property">virtual</em> <a class="reference internal" href="#_CPPv4N3eos10vrf_iter_tE" title="eos::vrf_iter_t">vrf_iter_t</a> <code class="sig-name descname">vrf_iter</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em> = 0<a class="headerlink" href="#_CPPv4NK3eos7vrf_mgr8vrf_iterEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Iterates through all configured VRFs on the system, yielding a <a class="reference internal" href="#classeos_1_1vrf__t"><span class="std std-ref">vrf_t</span></a> for each VRF. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos7vrf_mgr6existsERKNSt6stringE">
+<span id="_CPPv3NK3eos7vrf_mgr6existsERKNSt6stringE"></span><span id="_CPPv2NK3eos7vrf_mgr6existsERKNSt6stringE"></span><span id="eos::vrf_mgr::exists__ssCRC"></span><span class="target" id="classeos_1_1vrf__mgr_1af10d2893ae30f9adbbc94396ad3d7d8a"></span><em class="property">virtual</em> bool <code class="sig-name descname">exists</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::string <em class="property">const</em> &amp;<em>vrf_name</em><span class="sig-paren">)</span> <em class="property">const</em> = 0<a class="headerlink" href="#_CPPv4NK3eos7vrf_mgr6existsERKNSt6stringE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Returns true if the VRF is currently configured. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos7vrf_mgr2rdERKNSt6stringE">
+<span id="_CPPv3NK3eos7vrf_mgr2rdERKNSt6stringE"></span><span id="_CPPv2NK3eos7vrf_mgr2rdERKNSt6stringE"></span><span id="eos::vrf_mgr::rd__ssCRC"></span><span class="target" id="classeos_1_1vrf__mgr_1a7fe62f776b1a1d77c50909b9e1fb3232"></span><em class="property">virtual</em> uint64_t <code class="sig-name descname">rd</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::string <em class="property">const</em> &amp;<em>vrf_name</em><span class="sig-paren">)</span> <em class="property">const</em> = 0<a class="headerlink" href="#_CPPv4NK3eos7vrf_mgr2rdERKNSt6stringE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Returns the route distinguisher associated with this VRF. The returned value is obtained from status that is the result of the RD configuration under the ‘vrf definition’ submode and the RD configuration under the ‘router bgp vrf’ submode. When configuration for the VRF exists in both locations, the value configured under ‘router bgp’ takes precedence and is returned.</p>
+<p>If no VRF matches the given name, this returns 0. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos7vrf_mgr5stateERKNSt6stringE">
+<span id="_CPPv3NK3eos7vrf_mgr5stateERKNSt6stringE"></span><span id="_CPPv2NK3eos7vrf_mgr5stateERKNSt6stringE"></span><span id="eos::vrf_mgr::state__ssCRC"></span><span class="target" id="classeos_1_1vrf__mgr_1a64f366ee4c5344364f03bd92b5c3e8e2"></span><em class="property">virtual</em> <a class="reference internal" href="#_CPPv4N3eos11vrf_state_tE" title="eos::vrf_state_t">vrf_state_t</a> <code class="sig-name descname">state</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::string <em class="property">const</em> &amp;<em>vrf_name</em><span class="sig-paren">)</span> <em class="property">const</em> = 0<a class="headerlink" href="#_CPPv4NK3eos7vrf_mgr5stateERKNSt6stringE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Returns the operational status of this VRF.</p>
+<p>If the given VRF name does not have a current status (e.g. a newly configured VRF), or if it does not match any VRFs on the system, this returns VRF_STATE_NULL. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos7vrf_mgr9socket_atEiiiRKNSt6stringE">
+<span id="_CPPv3N3eos7vrf_mgr9socket_atEiiiRKNSt6stringE"></span><span id="_CPPv2N3eos7vrf_mgr9socket_atEiiiRKNSt6stringE"></span><span id="eos::vrf_mgr::socket_at__i.i.i.ssCR"></span><span class="target" id="classeos_1_1vrf__mgr_1a2d771486d8c9dd6cf0da9208022a6880"></span><em class="property">virtual</em> int <code class="sig-name descname">socket_at</code><span class="sig-paren">(</span>int <em>domain</em>, int <em>type</em>, int <em>protocol</em>, <a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::string <em class="property">const</em> &amp;<em>vrf_name</em><span class="sig-paren">)</span> = 0<a class="headerlink" href="#_CPPv4N3eos7vrf_mgr9socket_atEiiiRKNSt6stringE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Opens a socket inside a VRF specified by ‘vrf_name’.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>domain</strong> – A communication domain, same as in socket(). </p></li>
+<li><p><strong>type</strong> – The communication semantics, such as SOCK_STREAM, same as in socket(). </p></li>
+<li><p><strong>protocol</strong> – The protocol to be used with the socket, same as in socket(). </p></li>
+<li><p><strong>vrf_name</strong> – The name of the vrf_name in which the socket will be created. </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>fd on success, -1 on error, and errno is set appropriately. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos7vrf_mgr3vrfERKNSt6stringE">
+<span id="_CPPv3NK3eos7vrf_mgr3vrfERKNSt6stringE"></span><span id="_CPPv2NK3eos7vrf_mgr3vrfERKNSt6stringE"></span><span id="eos::vrf_mgr::vrf__ssCRC"></span><span class="target" id="classeos_1_1vrf__mgr_1a799e57beebf8cefc8d605b63a9a2802a"></span><em class="property">virtual</em> <a class="reference internal" href="#_CPPv4N3eos5vrf_tE" title="eos::vrf_t">vrf_t</a> <code class="sig-name descname">vrf</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::string <em class="property">const</em> &amp;<em>vrf_name</em><span class="sig-paren">)</span> <em class="property">const</em> = 0<a class="headerlink" href="#_CPPv4NK3eos7vrf_mgr3vrfERKNSt6stringE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Returns a composite <code class="docutils literal notranslate"><a class="reference internal" href="#classeos_1_1vrf__t"><span class="std std-ref"><span class="pre">vrf_t</span></span></a></code> for the named VRF, or a default VRF object if it does not exist.</p>
+<p><dl class="xrefsect">
+<dt>
+<em>Deprecated:</em></dt>
+<dd><p>, please use the <a class="reference internal" href="#classeos_1_1vrf__mgr_1a64f366ee4c5344364f03bd92b5c3e8e2"><span class="std std-ref">state()</span></a>, <a class="reference internal" href="#classeos_1_1vrf__mgr_1af10d2893ae30f9adbbc94396ad3d7d8a"><span class="std std-ref">exists()</span></a>, and <a class="reference internal" href="#classeos_1_1vrf__mgr_1a7fe62f776b1a1d77c50909b9e1fb3232"><span class="std std-ref">rd()</span></a> methods instead. </p>
+</dd></dl>
+
+</p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-protected-functions">Protected Functions</p>
+<dl class="cpp function">
+<dt id="_CPPv4N3eos7vrf_mgr7vrf_mgrEv">
+<span id="_CPPv3N3eos7vrf_mgr7vrf_mgrEv"></span><span id="_CPPv2N3eos7vrf_mgr7vrf_mgrEv"></span><span id="eos::vrf_mgr::vrf_mgr"></span><span class="target" id="classeos_1_1vrf__mgr_1a72a52bfcdb82fcb36d01b735ea92b330"></span><code class="sig-name descname">vrf_mgr</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos7vrf_mgr7vrf_mgrEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-private-members">Private Members</p>
+<dl class="cpp var">
+<dt>
+<span class="target" id="classeos_1_1vrf__mgr_1a7060454791c4c10580ecea74b9354d25"></span><code class="sig-name descname">vrf_mgr</code></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-friends">Friends</p>
+<dl class="friendclass">
+<dt>
+<em class="property">friend class</em> vrf_handler</dt>
+</dl>
+
+</div>
+</dd></dl>
+
+</dd></dl>
+
+<div class="section" id="type-definitions-in-vrf">
+<h2>Type definitions in <strong>vrf</strong><a class="headerlink" href="#type-definitions-in-vrf" title="Permalink to this headline">¶</a></h2>
+<dl class="cpp type">
+<dt>
+<span class="target" id="namespaceeos"></span><em class="property">namespace </em><code class="sig-name descname">eos</code><br /></dt>
+<dd><div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-enums">Enums</p>
+<dl class="cpp enum">
+<dt id="_CPPv4N3eos11vrf_state_tE">
+<span id="_CPPv3N3eos11vrf_state_tE"></span><span id="_CPPv2N3eos11vrf_state_tE"></span><span class="target" id="namespaceeos_1a0f717c5a4f87d4674f57a498e7a63429"></span><em class="property">enum </em><code class="sig-name descname">vrf_state_t</code><a class="headerlink" href="#_CPPv4N3eos11vrf_state_tE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>VRF state. </p>
+<p><em>Values:</em></p>
+<dl class="cpp enumerator">
+<dt id="_CPPv4N3eos11vrf_state_t8VRF_NULLE">
+<span id="_CPPv3N3eos11vrf_state_t8VRF_NULLE"></span><span id="_CPPv2N3eos11vrf_state_t8VRF_NULLE"></span><span class="target" id="namespaceeos_1a0f717c5a4f87d4674f57a498e7a63429abca41ebc953064613a9370858645e188"></span><em class="property">enumerator </em><code class="sig-name descname">VRF_NULL</code><a class="headerlink" href="#_CPPv4N3eos11vrf_state_t8VRF_NULLE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>VRF does not exist. </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt id="_CPPv4N3eos11vrf_state_t16VRF_INITIALIZINGE">
+<span id="_CPPv3N3eos11vrf_state_t16VRF_INITIALIZINGE"></span><span id="_CPPv2N3eos11vrf_state_t16VRF_INITIALIZINGE"></span><span class="target" id="namespaceeos_1a0f717c5a4f87d4674f57a498e7a63429a7dc82d30ab0e727cb5f6b305c521f453"></span><em class="property">enumerator </em><code class="sig-name descname">VRF_INITIALIZING</code><a class="headerlink" href="#_CPPv4N3eos11vrf_state_t16VRF_INITIALIZINGE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>VRF is being initialized. </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt id="_CPPv4N3eos11vrf_state_t10VRF_ACTIVEE">
+<span id="_CPPv3N3eos11vrf_state_t10VRF_ACTIVEE"></span><span id="_CPPv2N3eos11vrf_state_t10VRF_ACTIVEE"></span><span class="target" id="namespaceeos_1a0f717c5a4f87d4674f57a498e7a63429abb70e1788f30f91d6f74004681002f83"></span><em class="property">enumerator </em><code class="sig-name descname">VRF_ACTIVE</code><a class="headerlink" href="#_CPPv4N3eos11vrf_state_t10VRF_ACTIVEE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>VRF is active. </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt id="_CPPv4N3eos11vrf_state_t12VRF_DELETINGE">
+<span id="_CPPv3N3eos11vrf_state_t12VRF_DELETINGE"></span><span id="_CPPv2N3eos11vrf_state_t12VRF_DELETINGE"></span><span class="target" id="namespaceeos_1a0f717c5a4f87d4674f57a498e7a63429a8d0ec5be2729d918b1bb8942fa5b2d08"></span><em class="property">enumerator </em><code class="sig-name descname">VRF_DELETING</code><a class="headerlink" href="#_CPPv4N3eos11vrf_state_t12VRF_DELETINGE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>VRF is being deleted. </p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<dl class="cpp class">
+<dt id="_CPPv4N3eos5vrf_tE">
+<span id="_CPPv3N3eos5vrf_tE"></span><span id="_CPPv2N3eos5vrf_tE"></span><span id="eos::vrf_t"></span><span class="target" id="classeos_1_1vrf__t"></span><em class="property">class </em><code class="sig-name descname">vrf_t</code><a class="headerlink" href="#_CPPv4N3eos5vrf_tE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><div class="docutils container">
+<em>#include &lt;vrf.h&gt;</em></div>
+<p><dl class="xrefsect">
+<dt>
+<em>Deprecated:</em></dt>
+<dd><p>. This data structure is used to describe a VRF on a switch. </p>
+</dd></dl>
+
+</p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
+<dl class="cpp function">
+<dt id="_CPPv4N3eos5vrf_t5vrf_tEv">
+<span id="_CPPv3N3eos5vrf_t5vrf_tEv"></span><span id="_CPPv2N3eos5vrf_t5vrf_tEv"></span><span id="eos::vrf_t::vrf_t"></span><span class="target" id="classeos_1_1vrf__t_1aa5f592430838bbbb57d5703efb4449c9"></span><code class="sig-name descname">vrf_t</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos5vrf_t5vrf_tEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos5vrf_t5vrf_tENSt6stringE11vrf_state_t8uint64_t">
+<span id="_CPPv3N3eos5vrf_t5vrf_tENSt6stringE11vrf_state_t8uint64_t"></span><span id="_CPPv2N3eos5vrf_t5vrf_tENSt6stringE11vrf_state_t8uint64_t"></span><span id="eos::vrf_t::vrf_t__ss.vrf_state_t.uint64_t"></span><span class="target" id="classeos_1_1vrf__t_1adad3ac6f171aa468d7f3dc1fb26fc757"></span><code class="sig-name descname">vrf_t</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::string <em>name</em>, <a class="reference internal" href="#_CPPv4N3eos11vrf_state_tE" title="eos::vrf_state_t">vrf_state_t</a> <em>state</em>, uint64_t <em>rd</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos5vrf_t5vrf_tENSt6stringE11vrf_state_t8uint64_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos5vrf_t5vrf_tERK5vrf_t">
+<span id="_CPPv3N3eos5vrf_t5vrf_tERK5vrf_t"></span><span id="_CPPv2N3eos5vrf_t5vrf_tERK5vrf_t"></span><span id="eos::vrf_t::vrf_t__vrf_tCR"></span><span class="target" id="classeos_1_1vrf__t_1a77b94881d6c97631d815099a19e363c0"></span><code class="sig-name descname">vrf_t</code><span class="sig-paren">(</span><em class="property">const</em> <a class="reference internal" href="#_CPPv4N3eos5vrf_t5vrf_tERK5vrf_t" title="eos::vrf_t::vrf_t">vrf_t</a> &amp;<em>other</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos5vrf_t5vrf_tERK5vrf_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos5vrf_taSERK5vrf_t">
+<span id="_CPPv3N3eos5vrf_taSERK5vrf_t"></span><span id="_CPPv2N3eos5vrf_taSERK5vrf_t"></span><span id="eos::vrf_t::assign-operator__vrf_tCR"></span><span class="target" id="classeos_1_1vrf__t_1a5a425222c5366bba462bb84723c484d6"></span><a class="reference internal" href="#_CPPv4N3eos5vrf_tE" title="eos::vrf_t">vrf_t</a> &amp;<code class="sig-name descname">operator=</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos5vrf_tE" title="eos::vrf_t">vrf_t</a> <em class="property">const</em> &amp;<em>other</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos5vrf_taSERK5vrf_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos5vrf_t4nameEv">
+<span id="_CPPv3NK3eos5vrf_t4nameEv"></span><span id="_CPPv2NK3eos5vrf_t4nameEv"></span><span id="eos::vrf_t::nameC"></span><span class="target" id="classeos_1_1vrf__t_1a68e4a2f77de45a4f8bf40679a47dcc0c"></span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::string <code class="sig-name descname">name</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos5vrf_t4nameEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Getter for ‘name’: the name of the VRF. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos5vrf_t5stateEv">
+<span id="_CPPv3NK3eos5vrf_t5stateEv"></span><span id="_CPPv2NK3eos5vrf_t5stateEv"></span><span id="eos::vrf_t::stateC"></span><span class="target" id="classeos_1_1vrf__t_1a2d45b34ef65042df15933ce2fcc1b029"></span><a class="reference internal" href="#_CPPv4N3eos11vrf_state_tE" title="eos::vrf_state_t">vrf_state_t</a> <code class="sig-name descname">state</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos5vrf_t5stateEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Getter for ‘state’: the state of this VRF. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos5vrf_t2rdEv">
+<span id="_CPPv3NK3eos5vrf_t2rdEv"></span><span id="_CPPv2NK3eos5vrf_t2rdEv"></span><span id="eos::vrf_t::rdC"></span><span class="target" id="classeos_1_1vrf__t_1a50342267a83aee52ef16e7d47efb0bf7"></span>uint64_t <code class="sig-name descname">rd</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos5vrf_t2rdEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Getter for ‘rd’: the route distinguisher of the VRF. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos5vrf_teqERK5vrf_t">
+<span id="_CPPv3NK3eos5vrf_teqERK5vrf_t"></span><span id="_CPPv2NK3eos5vrf_teqERK5vrf_t"></span><span id="eos::vrf_t::eq-operator__vrf_tCRC"></span><span class="target" id="classeos_1_1vrf__t_1add1a8de79e9e9cf6ee25ad9a20330365"></span>bool <code class="sig-name descname">operator==</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos5vrf_tE" title="eos::vrf_t">vrf_t</a> <em class="property">const</em> &amp;<em>other</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos5vrf_teqERK5vrf_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos5vrf_tneERK5vrf_t">
+<span id="_CPPv3NK3eos5vrf_tneERK5vrf_t"></span><span id="_CPPv2NK3eos5vrf_tneERK5vrf_t"></span><span id="eos::vrf_t::neq-operator__vrf_tCRC"></span><span class="target" id="classeos_1_1vrf__t_1adee2a69f08eb06282765d5501f9be84f"></span>bool <code class="sig-name descname">operator!=</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos5vrf_tE" title="eos::vrf_t">vrf_t</a> <em class="property">const</em> &amp;<em>other</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos5vrf_tneERK5vrf_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos5vrf_tltERK5vrf_t">
+<span id="_CPPv3NK3eos5vrf_tltERK5vrf_t"></span><span id="_CPPv2NK3eos5vrf_tltERK5vrf_t"></span><span id="eos::vrf_t::lt-operator__vrf_tCRC"></span><span class="target" id="classeos_1_1vrf__t_1a6a22e27e44078af0ea5965b467a7d768"></span>bool <code class="sig-name descname">operator&lt;</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos5vrf_tE" title="eos::vrf_t">vrf_t</a> <em class="property">const</em> &amp;<em>other</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos5vrf_tltERK5vrf_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos5vrf_t4hashEv">
+<span id="_CPPv3NK3eos5vrf_t4hashEv"></span><span id="_CPPv2NK3eos5vrf_t4hashEv"></span><span id="eos::vrf_t::hashC"></span><span class="target" id="classeos_1_1vrf__t_1adaccb6256192de7ca6c2dc7d0c23ef97"></span>uint32_t <code class="sig-name descname">hash</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos5vrf_t4hashEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>The hash function for type <a class="reference internal" href="#classeos_1_1vrf__t"><span class="std std-ref">vrf_t</span></a>. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos5vrf_t6mix_meER8hash_mix">
+<span id="_CPPv3NK3eos5vrf_t6mix_meER8hash_mix"></span><span id="_CPPv2NK3eos5vrf_t6mix_meER8hash_mix"></span><span id="eos::vrf_t::mix_me__hash_mixRC"></span><span class="target" id="classeos_1_1vrf__t_1a86ec82776917c21a8e8c71ee9b386587"></span>void <code class="sig-name descname">mix_me</code><span class="sig-paren">(</span><a class="reference internal" href="hash_mix.html#_CPPv4N3eos8hash_mixE" title="eos::hash_mix">hash_mix</a> &amp;<em>h</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos5vrf_t6mix_meER8hash_mix" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>The hash mix function for type <a class="reference internal" href="#classeos_1_1vrf__t"><span class="std std-ref">vrf_t</span></a>. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos5vrf_t9to_stringEv">
+<span id="_CPPv3NK3eos5vrf_t9to_stringEv"></span><span id="_CPPv2NK3eos5vrf_t9to_stringEv"></span><span id="eos::vrf_t::to_stringC"></span><span class="target" id="classeos_1_1vrf__t_1a5b06c6ba68af6ceb108d7ecc3b7ae53e"></span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::string <code class="sig-name descname">to_string</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos5vrf_t9to_stringEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Returns a string representation of the current object’s values. </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-private-members">Private Members</p>
+<dl class="cpp var">
+<dt id="_CPPv4N3eos5vrf_t5pimplE">
+<span id="_CPPv3N3eos5vrf_t5pimplE"></span><span id="_CPPv2N3eos5vrf_t5pimplE"></span><span id="eos::vrf_t::pimpl__std::shared_ptr:vrf_impl_t:"></span><span class="target" id="classeos_1_1vrf__t_1add6dc5846e71c88cc282ef2b9b0f9b15"></span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::shared_ptr&lt;vrf_impl_t&gt; <code class="sig-name descname">pimpl</code><a class="headerlink" href="#_CPPv4N3eos5vrf_t5pimplE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-friends">Friends</p>
+<dl class="cpp function">
+<dt id="_CPPv4N3eos5vrf_tlsERNSt7ostreamERK5vrf_t">
+<span id="_CPPv3N3eos5vrf_tlsERNSt7ostreamERK5vrf_t"></span><span id="_CPPv2N3eos5vrf_tlsERNSt7ostreamERK5vrf_t"></span><span id="eos::vrf_t::lshift-operator__osR.vrf_tCR"></span><span class="target" id="classeos_1_1vrf__t_1adf17bd5ce317f270525c6455b33eb918"></span><em class="property">friend</em> <a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::ostream &amp;<code class="sig-name descname">operator&lt;&lt;</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::ostream &amp;<em>os</em>, <em class="property">const</em> <a class="reference internal" href="#_CPPv4N3eos5vrf_tE" title="eos::vrf_t">vrf_t</a> &amp;<em>obj</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos5vrf_tlsERNSt7ostreamERK5vrf_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>A utility stream operator that adds a string representation of <a class="reference internal" href="#classeos_1_1vrf__t"><span class="std std-ref">vrf_t</span></a> to the ostream. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#"><strong>vrf</strong></a><ul>
+<li><a class="reference internal" href="#type-definitions-in-vrf">Type definitions in <strong>vrf</strong></a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="version.html"
+                        title="previous chapter"><strong>version</strong></a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="xcvr.html"
+                        title="next chapter"><strong>xcvr</strong></a></p>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="xcvr.html" title="xcvr"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="version.html" title="version"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Arista EOS SDK 2.22.5 reference</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href=""><strong>vrf</strong></a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2014, Arista Networks.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.4.3.
+    </div>
+  </body>
+</html>

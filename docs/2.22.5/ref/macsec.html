@@ -1,0 +1,1098 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>macsec &#8212; Arista EOS SDK 2.22.5 reference</title>
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/eossdk.css" type="text/css" />
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="mlag" href="mlag.html" />
+    <link rel="prev" title="mac_table" href="mac_table.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="mlag.html" title="mlag"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="mac_table.html" title="mac_table"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Arista EOS SDK 2.22.5 reference</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href=""><strong>macsec</strong></a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="macsec">
+<h1><strong>macsec</strong><a class="headerlink" href="#macsec" title="Permalink to this headline">¶</a></h1>
+<p>MACsec management module.</p>
+<p>A MACsec profile contains the configuration required to setup a MACsec session. A profile contains a primary key and a fallback key. Each key contains a connectivity association key name (CKN) and a connectivity association key (CAK). Both the CKN and the CAK must be nonzero hex strings, and the CKN of the primary and fallback key cannot be the same.</p>
+<p>Note: Must have a valid MACsec license configured for this API to work.</p>
+<p>The following is an example of configuring a MACsec profile and attaching it to an interface.</p>
+<p><div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">//</span> <span class="n">Creating</span> <span class="n">profile</span> <span class="s2">&quot;test1&quot;</span> <span class="k">with</span> <span class="n">a</span> <span class="n">primary</span> <span class="ow">and</span> <span class="n">fallback</span> <span class="n">key</span>
+<span class="o">//</span> <span class="ow">and</span> <span class="n">a</span> <span class="n">rekey</span> <span class="n">period</span> <span class="n">of</span> <span class="mi">300</span><span class="n">s</span>
+<span class="n">eos</span><span class="p">::</span><span class="n">macsec_profile_t</span> <span class="n">profile</span><span class="p">(</span><span class="s2">&quot;test1&quot;</span><span class="p">);</span>
+<span class="n">eos</span><span class="p">::</span><span class="n">macsec_key_t</span> <span class="n">primary</span><span class="p">;</span>
+<span class="n">primary</span><span class="o">.</span><span class="n">ckn_is</span><span class="p">(</span><span class="s2">&quot;aaaa&quot;</span><span class="p">);</span>
+<span class="n">primary</span><span class="o">.</span><span class="n">cak_is</span><span class="p">(</span><span class="s2">&quot;123&quot;</span><span class="p">);</span>
+<span class="n">eos</span><span class="p">::</span><span class="n">macsec_key_t</span> <span class="n">fallback</span><span class="p">;</span>
+<span class="n">fallback</span><span class="o">.</span><span class="n">ckn_is</span><span class="p">(</span><span class="s2">&quot;bbbb&quot;</span><span class="p">);</span>
+<span class="n">fallback</span><span class="o">.</span><span class="n">cak_is</span><span class="p">(</span><span class="s2">&quot;234&quot;</span><span class="p">);</span>
+<span class="n">profile</span><span class="o">.</span><span class="n">primary_key_is</span><span class="p">(</span><span class="n">primary</span><span class="p">);</span>
+<span class="n">profile</span><span class="o">.</span><span class="n">fallback_key_is</span><span class="p">(</span><span class="n">fallback</span><span class="p">);</span>
+<span class="n">profile</span><span class="o">.</span><span class="n">rekey_period_is</span><span class="p">(</span><span class="mi">300</span><span class="p">);</span>
+
+<span class="o">//</span> <span class="n">writing</span> <span class="n">profile</span> <span class="s1">&#39;test1&#39;</span>
+<span class="n">get_macsec_mgr</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">profile_set</span><span class="p">(</span><span class="n">profile</span><span class="p">);</span>
+
+<span class="o">//</span> <span class="n">attaching</span> <span class="n">the</span> <span class="n">new</span> <span class="n">profile</span> <span class="s1">&#39;test1&#39;</span> <span class="n">to</span> <span class="n">interface</span> <span class="n">Ethernet1</span><span class="o">/</span><span class="mi">1</span>
+<span class="n">eos</span><span class="p">::</span><span class="n">intf_id_t</span> <span class="n">intfId</span><span class="p">(</span><span class="s2">&quot;Ethernet1/1&quot;</span><span class="p">);</span>
+<span class="n">get_macsec_mgr</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">intf_profile_is</span><span class="p">(</span><span class="n">intfId</span><span class="p">,</span> <span class="s2">&quot;test1&quot;</span><span class="p">);</span>  
+</pre></div>
+</div>
+ </p>
+<dl class="cpp type">
+<dt id="_CPPv43eos">
+<span id="_CPPv33eos"></span><span id="_CPPv23eos"></span><span id="eos"></span><span class="target" id="namespaceeos"></span><em class="property">namespace </em><code class="sig-name descname">eos</code><br /></dt>
+<dd><dl class="cpp class">
+<dt id="_CPPv4N3eos14macsec_handlerE">
+<span id="_CPPv3N3eos14macsec_handlerE"></span><span id="_CPPv2N3eos14macsec_handlerE"></span><span id="eos::macsec_handler"></span><span class="target" id="classeos_1_1macsec__handler"></span><em class="property">class </em><code class="sig-name descname">macsec_handler</code> : <em class="property">public</em> <a class="reference internal" href="acl.html#_CPPv43eos" title="eos">eos</a>::<a class="reference internal" href="base_handler.html#_CPPv4I00EN3eos12base_handlerE" title="eos::base_handler">base_handler</a>&lt;<a class="reference internal" href="#_CPPv4N3eos10macsec_mgrE" title="eos::macsec_mgr">macsec_mgr</a>, <a class="reference internal" href="#_CPPv4N3eos14macsec_handlerE" title="eos::macsec_handler">macsec_handler</a>&gt;<a class="headerlink" href="#_CPPv4N3eos14macsec_handlerE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><div class="docutils container">
+<em>#include &lt;macsec.h&gt;</em></div>
+<p>This handler provides notifications when the MACsec status of an interface changes. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
+<dl class="cpp function">
+<dt id="_CPPv4N3eos14macsec_handler14macsec_handlerEP10macsec_mgr">
+<span id="_CPPv3N3eos14macsec_handler14macsec_handlerEP10macsec_mgr"></span><span id="_CPPv2N3eos14macsec_handler14macsec_handlerEP10macsec_mgr"></span><span id="eos::macsec_handler::macsec_handler__macsec_mgrP"></span><span class="target" id="classeos_1_1macsec__handler_1aa74cd0e0d73c0e96bc11c9aac8071f58"></span><em class="property">explicit</em> <code class="sig-name descname">macsec_handler</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos10macsec_mgrE" title="eos::macsec_mgr">macsec_mgr</a>*<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos14macsec_handler14macsec_handlerEP10macsec_mgr" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos14macsec_handler14get_macsec_mgrEv">
+<span id="_CPPv3NK3eos14macsec_handler14get_macsec_mgrEv"></span><span id="_CPPv2NK3eos14macsec_handler14get_macsec_mgrEv"></span><span id="eos::macsec_handler::get_macsec_mgrC"></span><span class="target" id="classeos_1_1macsec__handler_1a08c5efc71b1cb822f07d87d9231a3d44"></span><em class="property">inline</em> <a class="reference internal" href="#_CPPv4N3eos10macsec_mgrE" title="eos::macsec_mgr">macsec_mgr</a> *<code class="sig-name descname">get_macsec_mgr</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos14macsec_handler14get_macsec_mgrEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos14macsec_handler15watch_all_intfsEb">
+<span id="_CPPv3N3eos14macsec_handler15watch_all_intfsEb"></span><span id="_CPPv2N3eos14macsec_handler15watch_all_intfsEb"></span><span id="eos::macsec_handler::watch_all_intfs__b"></span><span class="target" id="classeos_1_1macsec__handler_1ac8acc4e87f6ebaca3a61e2eeb5bd4655"></span>void <code class="sig-name descname">watch_all_intfs</code><span class="sig-paren">(</span>bool<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos14macsec_handler15watch_all_intfsEb" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Registers this class to receive change updates on all interfaces.</p>
+<p>Expects a boolean signifying whether notifications should be propagated to this instance or not. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos14macsec_handler10watch_intfE9intf_id_tb">
+<span id="_CPPv3N3eos14macsec_handler10watch_intfE9intf_id_tb"></span><span id="_CPPv2N3eos14macsec_handler10watch_intfE9intf_id_tb"></span><span id="eos::macsec_handler::watch_intf__intf_id_t.b"></span><span class="target" id="classeos_1_1macsec__handler_1a8f73641cda98329c1a563a801f2e5211"></span>void <code class="sig-name descname">watch_intf</code><span class="sig-paren">(</span><a class="reference internal" href="intf.html#_CPPv4N3eos9intf_id_tE" title="eos::intf_id_t">intf_id_t</a>, bool<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos14macsec_handler10watch_intfE9intf_id_tb" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Registers this class to receive change updates on the given interface.</p>
+<p>Expects the id of the corresponding interface and a boolean signifying whether notifications should be propagated to this instance or not. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos14macsec_handler14on_intf_statusE9intf_id_tRK20macsec_intf_status_t">
+<span id="_CPPv3N3eos14macsec_handler14on_intf_statusE9intf_id_tRK20macsec_intf_status_t"></span><span id="_CPPv2N3eos14macsec_handler14on_intf_statusE9intf_id_tRK20macsec_intf_status_t"></span><span id="eos::macsec_handler::on_intf_status__intf_id_t.macsec_intf_status_tCR"></span><span class="target" id="classeos_1_1macsec__handler_1ac282f27cce88fb0c823ace566dfafb5e"></span><em class="property">virtual</em> void <code class="sig-name descname">on_intf_status</code><span class="sig-paren">(</span><a class="reference internal" href="intf.html#_CPPv4N3eos9intf_id_tE" title="eos::intf_id_t">intf_id_t</a>, <a class="reference internal" href="#_CPPv4N3eos20macsec_intf_status_tE" title="eos::macsec_intf_status_t">macsec_intf_status_t</a> <em class="property">const</em>&amp;<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos14macsec_handler14on_intf_statusE9intf_id_tRK20macsec_intf_status_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Called when the key or traffic status of a MACsec interface changes. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="cpp class">
+<dt id="_CPPv4N3eos21macsec_profile_iter_tE">
+<span id="_CPPv3N3eos21macsec_profile_iter_tE"></span><span id="_CPPv2N3eos21macsec_profile_iter_tE"></span><span id="eos::macsec_profile_iter_t"></span><span class="target" id="classeos_1_1macsec__profile__iter__t"></span><em class="property">class </em><code class="sig-name descname">macsec_profile_iter_t</code> : <em class="property">public</em> <a class="reference internal" href="acl.html#_CPPv43eos" title="eos">eos</a>::<a class="reference internal" href="iterator.html#_CPPv4I00EN3eos9iter_baseE" title="eos::iter_base">iter_base</a>&lt;<a class="reference internal" href="#_CPPv4N3eos21macsec_profile_name_tE" title="eos::macsec_profile_name_t">macsec_profile_name_t</a>, macsec_profile_iter_impl&gt;<a class="headerlink" href="#_CPPv4N3eos21macsec_profile_iter_tE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-private-functions">Private Functions</p>
+<dl class="cpp function">
+<dt id="_CPPv4N3eos21macsec_profile_iter_t21macsec_profile_iter_tEPC24macsec_profile_iter_impl">
+<span id="_CPPv3N3eos21macsec_profile_iter_t21macsec_profile_iter_tEPC24macsec_profile_iter_impl"></span><span id="_CPPv2N3eos21macsec_profile_iter_t21macsec_profile_iter_tEPC24macsec_profile_iter_impl"></span><span id="eos::macsec_profile_iter_t::macsec_profile_iter_t__macsec_profile_iter_implPC"></span><span class="target" id="classeos_1_1macsec__profile__iter__t_1af0cf73ab6accd6f5c54cd1d34d222782"></span><em class="property">explicit</em> <code class="sig-name descname">macsec_profile_iter_t</code><span class="sig-paren">(</span>macsec_profile_iter_impl*<em class="property">const</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos21macsec_profile_iter_t21macsec_profile_iter_tEPC24macsec_profile_iter_impl" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-friends">Friends</p>
+<dl class="friendclass">
+<dt>
+<em class="property">friend class</em> macsec_profile_iter_impl</dt>
+</dl>
+
+</div>
+</dd></dl>
+
+<dl class="cpp class">
+<dt id="_CPPv4N3eos25macsec_intf_status_iter_tE">
+<span id="_CPPv3N3eos25macsec_intf_status_iter_tE"></span><span id="_CPPv2N3eos25macsec_intf_status_iter_tE"></span><span id="eos::macsec_intf_status_iter_t"></span><span class="target" id="classeos_1_1macsec__intf__status__iter__t"></span><em class="property">class </em><code class="sig-name descname">macsec_intf_status_iter_t</code> : <em class="property">public</em> <a class="reference internal" href="acl.html#_CPPv43eos" title="eos">eos</a>::<a class="reference internal" href="iterator.html#_CPPv4I00EN3eos9iter_baseE" title="eos::iter_base">iter_base</a>&lt;<a class="reference internal" href="intf.html#_CPPv4N3eos9intf_id_tE" title="eos::intf_id_t">intf_id_t</a>, macsec_intf_status_iter_impl&gt;<a class="headerlink" href="#_CPPv4N3eos25macsec_intf_status_iter_tE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-private-functions">Private Functions</p>
+<dl class="cpp function">
+<dt id="_CPPv4N3eos25macsec_intf_status_iter_t25macsec_intf_status_iter_tEPC28macsec_intf_status_iter_impl">
+<span id="_CPPv3N3eos25macsec_intf_status_iter_t25macsec_intf_status_iter_tEPC28macsec_intf_status_iter_impl"></span><span id="_CPPv2N3eos25macsec_intf_status_iter_t25macsec_intf_status_iter_tEPC28macsec_intf_status_iter_impl"></span><span id="eos::macsec_intf_status_iter_t::macsec_intf_status_iter_t__macsec_intf_status_iter_implPC"></span><span class="target" id="classeos_1_1macsec__intf__status__iter__t_1a1fc64a9a79af9b015280d793b51f91ed"></span><em class="property">explicit</em> <code class="sig-name descname">macsec_intf_status_iter_t</code><span class="sig-paren">(</span>macsec_intf_status_iter_impl*<em class="property">const</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos25macsec_intf_status_iter_t25macsec_intf_status_iter_tEPC28macsec_intf_status_iter_impl" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-friends">Friends</p>
+<dl class="friendclass">
+<dt>
+<em class="property">friend class</em> macsec_intf_status_iter_impl</dt>
+</dl>
+
+</div>
+</dd></dl>
+
+<dl class="cpp class">
+<dt id="_CPPv4N3eos10macsec_mgrE">
+<span id="_CPPv3N3eos10macsec_mgrE"></span><span id="_CPPv2N3eos10macsec_mgrE"></span><span id="eos::macsec_mgr"></span><span class="target" id="classeos_1_1macsec__mgr"></span><em class="property">class </em><code class="sig-name descname">macsec_mgr</code> : <em class="property">public</em> <a class="reference internal" href="acl.html#_CPPv43eos" title="eos">eos</a>::<a class="reference internal" href="base_mgr.html#_CPPv4I00EN3eos8base_mgrE" title="eos::base_mgr">base_mgr</a>&lt;<a class="reference internal" href="#_CPPv4N3eos14macsec_handlerE" title="eos::macsec_handler">macsec_handler</a>, <a class="reference internal" href="intf.html#_CPPv4N3eos9intf_id_tE" title="eos::intf_id_t">intf_id_t</a>&gt;<a class="headerlink" href="#_CPPv4N3eos10macsec_mgrE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><div class="docutils container">
+<em>#include &lt;macsec.h&gt;</em></div>
+<p>The MACsec manager. This class inspects and configures MACsec profiles. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
+<dl class="cpp function">
+<dt id="_CPPv4N3eos10macsec_mgrD0Ev">
+<span id="_CPPv3N3eos10macsec_mgrD0Ev"></span><span id="_CPPv2N3eos10macsec_mgrD0Ev"></span><span id="eos::macsec_mgr::~macsec_mgr"></span><span class="target" id="classeos_1_1macsec__mgr_1ae638aa374ce7ddbd321e1b28b30b2bcc"></span><em class="property">virtual</em> <code class="sig-name descname">~macsec_mgr</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos10macsec_mgrD0Ev" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos10macsec_mgr6existsERK21macsec_profile_name_t">
+<span id="_CPPv3NK3eos10macsec_mgr6existsERK21macsec_profile_name_t"></span><span id="_CPPv2NK3eos10macsec_mgr6existsERK21macsec_profile_name_t"></span><span id="eos::macsec_mgr::exists__macsec_profile_name_tCRC"></span><span class="target" id="classeos_1_1macsec__mgr_1ae0e8ce9f30ec60a49b3d4fb4827ba82d"></span><em class="property">virtual</em> bool <code class="sig-name descname">exists</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos21macsec_profile_name_tE" title="eos::macsec_profile_name_t">macsec_profile_name_t</a> <em class="property">const</em>&amp;<span class="sig-paren">)</span> <em class="property">const</em> = 0<a class="headerlink" href="#_CPPv4NK3eos10macsec_mgr6existsERK21macsec_profile_name_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Returns whether or not a profile with the given name exists. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos10macsec_mgr7profileERK21macsec_profile_name_t">
+<span id="_CPPv3NK3eos10macsec_mgr7profileERK21macsec_profile_name_t"></span><span id="_CPPv2NK3eos10macsec_mgr7profileERK21macsec_profile_name_t"></span><span id="eos::macsec_mgr::profile__macsec_profile_name_tCRC"></span><span class="target" id="classeos_1_1macsec__mgr_1aacdbb4baf0d686f8e2402c69c1e222bb"></span><em class="property">virtual</em> <a class="reference internal" href="#_CPPv4N3eos16macsec_profile_tE" title="eos::macsec_profile_t">macsec_profile_t</a> <code class="sig-name descname">profile</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos21macsec_profile_name_tE" title="eos::macsec_profile_name_t">macsec_profile_name_t</a> <em class="property">const</em>&amp;<span class="sig-paren">)</span> <em class="property">const</em> = 0<a class="headerlink" href="#_CPPv4NK3eos10macsec_mgr7profileERK21macsec_profile_name_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Returns the <a class="reference internal" href="#classeos_1_1macsec__profile__t"><span class="std std-ref">macsec_profile_t</span></a> with the given name. If no such profile exists, then return an empty profile with nothing configured. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos10macsec_mgr11profile_setERK16macsec_profile_t">
+<span id="_CPPv3N3eos10macsec_mgr11profile_setERK16macsec_profile_t"></span><span id="_CPPv2N3eos10macsec_mgr11profile_setERK16macsec_profile_t"></span><span id="eos::macsec_mgr::profile_set__macsec_profile_tCR"></span><span class="target" id="classeos_1_1macsec__mgr_1a2f8786f6aa0e7c720c5a4a714dc72de2"></span><em class="property">virtual</em> void <code class="sig-name descname">profile_set</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos16macsec_profile_tE" title="eos::macsec_profile_t">macsec_profile_t</a> <em class="property">const</em>&amp;<span class="sig-paren">)</span> = 0<a class="headerlink" href="#_CPPv4N3eos10macsec_mgr11profile_setERK16macsec_profile_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Writes the given profile to MACsec config. If a profile with the given name already exists, update it with the configuration from the given <a class="reference internal" href="#classeos_1_1macsec__profile__t"><span class="std std-ref">macsec_profile_t</span></a>. An unencoded input CAK will be encoded if the <a class="reference internal" href="#classeos_1_1macsec__key__t"><span class="std std-ref">macsec_key_t</span></a>’s encoded attribute is set to false. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos10macsec_mgr11profile_delERK21macsec_profile_name_t">
+<span id="_CPPv3N3eos10macsec_mgr11profile_delERK21macsec_profile_name_t"></span><span id="_CPPv2N3eos10macsec_mgr11profile_delERK21macsec_profile_name_t"></span><span id="eos::macsec_mgr::profile_del__macsec_profile_name_tCR"></span><span class="target" id="classeos_1_1macsec__mgr_1a622f0047ef1baa7c1d80cc054431bb4f"></span><em class="property">virtual</em> void <code class="sig-name descname">profile_del</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos21macsec_profile_name_tE" title="eos::macsec_profile_name_t">macsec_profile_name_t</a> <em class="property">const</em>&amp;<span class="sig-paren">)</span> = 0<a class="headerlink" href="#_CPPv4N3eos10macsec_mgr11profile_delERK21macsec_profile_name_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Deletes the profile with the given name if such a profile exists. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos10macsec_mgr12intf_profileE9intf_id_t">
+<span id="_CPPv3NK3eos10macsec_mgr12intf_profileE9intf_id_t"></span><span id="_CPPv2NK3eos10macsec_mgr12intf_profileE9intf_id_t"></span><span id="eos::macsec_mgr::intf_profile__intf_id_tC"></span><span class="target" id="classeos_1_1macsec__mgr_1a6a3aa35ec673997bbac38688fb271ff8"></span><em class="property">virtual</em> <a class="reference internal" href="#_CPPv4N3eos21macsec_profile_name_tE" title="eos::macsec_profile_name_t">macsec_profile_name_t</a> <code class="sig-name descname">intf_profile</code><span class="sig-paren">(</span><a class="reference internal" href="intf.html#_CPPv4N3eos9intf_id_tE" title="eos::intf_id_t">intf_id_t</a><span class="sig-paren">)</span> <em class="property">const</em> = 0<a class="headerlink" href="#_CPPv4NK3eos10macsec_mgr12intf_profileE9intf_id_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Returns the profile name of the profile attached to the interface. If there is no profile configured, return an empty string. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos10macsec_mgr15intf_profile_isE9intf_id_tRK21macsec_profile_name_t">
+<span id="_CPPv3N3eos10macsec_mgr15intf_profile_isE9intf_id_tRK21macsec_profile_name_t"></span><span id="_CPPv2N3eos10macsec_mgr15intf_profile_isE9intf_id_tRK21macsec_profile_name_t"></span><span id="eos::macsec_mgr::intf_profile_is__intf_id_t.macsec_profile_name_tCR"></span><span class="target" id="classeos_1_1macsec__mgr_1a8400c875581560971d5eb5e295bc6a95"></span><em class="property">virtual</em> void <code class="sig-name descname">intf_profile_is</code><span class="sig-paren">(</span><a class="reference internal" href="intf.html#_CPPv4N3eos9intf_id_tE" title="eos::intf_id_t">intf_id_t</a>, <a class="reference internal" href="#_CPPv4N3eos21macsec_profile_name_tE" title="eos::macsec_profile_name_t">macsec_profile_name_t</a> <em class="property">const</em>&amp;<span class="sig-paren">)</span> = 0<a class="headerlink" href="#_CPPv4N3eos10macsec_mgr15intf_profile_isE9intf_id_tRK21macsec_profile_name_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Configures the given interface to use the given MACsec profile. An interface can only have one MACsec profile applied at a time. Applying a new profile to an interface which is already associated with a different profile will overwrite the previous profile. If an empty string is provided as profile name, any existing profile will be removed. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos10macsec_mgr11intf_statusE9intf_id_t">
+<span id="_CPPv3NK3eos10macsec_mgr11intf_statusE9intf_id_t"></span><span id="_CPPv2NK3eos10macsec_mgr11intf_statusE9intf_id_t"></span><span id="eos::macsec_mgr::intf_status__intf_id_tC"></span><span class="target" id="classeos_1_1macsec__mgr_1a3b15e17be18c84f6c5086fcf3bdca1e5"></span><em class="property">virtual</em> <a class="reference internal" href="#_CPPv4N3eos20macsec_intf_status_tE" title="eos::macsec_intf_status_t">macsec_intf_status_t</a> <code class="sig-name descname">intf_status</code><span class="sig-paren">(</span><a class="reference internal" href="intf.html#_CPPv4N3eos9intf_id_tE" title="eos::intf_id_t">intf_id_t</a><span class="sig-paren">)</span> <em class="property">const</em> = 0<a class="headerlink" href="#_CPPv4NK3eos10macsec_mgr11intf_statusE9intf_id_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Returns an object containing MACsec related status information of the given interface. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos10macsec_mgr14macsec_capableE9intf_id_t">
+<span id="_CPPv3NK3eos10macsec_mgr14macsec_capableE9intf_id_t"></span><span id="_CPPv2NK3eos10macsec_mgr14macsec_capableE9intf_id_t"></span><span id="eos::macsec_mgr::macsec_capable__intf_id_tC"></span><span class="target" id="classeos_1_1macsec__mgr_1a1eaad626f783c95c7b2a3327fe4a98ff"></span><em class="property">virtual</em> bool <code class="sig-name descname">macsec_capable</code><span class="sig-paren">(</span><a class="reference internal" href="intf.html#_CPPv4N3eos9intf_id_tE" title="eos::intf_id_t">intf_id_t</a><span class="sig-paren">)</span> <em class="property">const</em> = 0<a class="headerlink" href="#_CPPv4NK3eos10macsec_mgr14macsec_capableE9intf_id_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Returns whether or not an interface supports MACsec. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos10macsec_mgr13intf_countersE9intf_id_t">
+<span id="_CPPv3N3eos10macsec_mgr13intf_countersE9intf_id_t"></span><span id="_CPPv2N3eos10macsec_mgr13intf_countersE9intf_id_t"></span><span id="eos::macsec_mgr::intf_counters__intf_id_t"></span><span class="target" id="classeos_1_1macsec__mgr_1a5aeecf769289c6b551e014e9a15bc8a4"></span><em class="property">virtual</em> <a class="reference internal" href="#_CPPv4N3eos22macsec_intf_counters_tE" title="eos::macsec_intf_counters_t">macsec_intf_counters_t</a> <code class="sig-name descname">intf_counters</code><span class="sig-paren">(</span><a class="reference internal" href="intf.html#_CPPv4N3eos9intf_id_tE" title="eos::intf_id_t">intf_id_t</a><span class="sig-paren">)</span> = 0<a class="headerlink" href="#_CPPv4N3eos10macsec_mgr13intf_countersE9intf_id_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos10macsec_mgr19macsec_profile_iterEv">
+<span id="_CPPv3NK3eos10macsec_mgr19macsec_profile_iterEv"></span><span id="_CPPv2NK3eos10macsec_mgr19macsec_profile_iterEv"></span><span id="eos::macsec_mgr::macsec_profile_iterC"></span><span class="target" id="classeos_1_1macsec__mgr_1af07ac4f1f29479dd0db2a33f73e7e1d4"></span><em class="property">virtual</em> <a class="reference internal" href="#_CPPv4N3eos21macsec_profile_iter_tE" title="eos::macsec_profile_iter_t">macsec_profile_iter_t</a> <code class="sig-name descname">macsec_profile_iter</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em> = 0<a class="headerlink" href="#_CPPv4NK3eos10macsec_mgr19macsec_profile_iterEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos10macsec_mgr23macsec_intf_status_iterEv">
+<span id="_CPPv3NK3eos10macsec_mgr23macsec_intf_status_iterEv"></span><span id="_CPPv2NK3eos10macsec_mgr23macsec_intf_status_iterEv"></span><span id="eos::macsec_mgr::macsec_intf_status_iterC"></span><span class="target" id="classeos_1_1macsec__mgr_1a4e926e8047690fc17d49677e4392ab3a"></span><em class="property">virtual</em> <a class="reference internal" href="#_CPPv4N3eos25macsec_intf_status_iter_tE" title="eos::macsec_intf_status_iter_t">macsec_intf_status_iter_t</a> <code class="sig-name descname">macsec_intf_status_iter</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em> = 0<a class="headerlink" href="#_CPPv4NK3eos10macsec_mgr23macsec_intf_status_iterEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-protected-functions">Protected Functions</p>
+<dl class="cpp function">
+<dt id="_CPPv4N3eos10macsec_mgr10macsec_mgrEv">
+<span id="_CPPv3N3eos10macsec_mgr10macsec_mgrEv"></span><span id="_CPPv2N3eos10macsec_mgr10macsec_mgrEv"></span><span id="eos::macsec_mgr::macsec_mgr"></span><span class="target" id="classeos_1_1macsec__mgr_1acd47c0b8746a5de93044bc40ceba4aa0"></span><code class="sig-name descname">macsec_mgr</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos10macsec_mgr10macsec_mgrEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-private-members">Private Members</p>
+<dl class="cpp var">
+<dt>
+<span class="target" id="classeos_1_1macsec__mgr_1a50054dd822d448ca2edab49aa9572b34"></span><code class="sig-name descname">macsec_mgr</code></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-friends">Friends</p>
+<dl class="friendclass">
+<dt>
+<em class="property">friend class</em> macsec_handler</dt>
+</dl>
+
+</div>
+</dd></dl>
+
+</dd></dl>
+
+<div class="section" id="type-definitions-in-macsec">
+<h2>Type definitions in <strong>macsec</strong><a class="headerlink" href="#type-definitions-in-macsec" title="Permalink to this headline">¶</a></h2>
+<dl class="cpp type">
+<dt>
+<span class="target" id="namespaceeos"></span><em class="property">namespace </em><code class="sig-name descname">eos</code><br /></dt>
+<dd><div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-typedefs">Typedefs</p>
+<dl class="cpp type">
+<dt id="_CPPv4N3eos21macsec_profile_name_tE">
+<span id="_CPPv3N3eos21macsec_profile_name_tE"></span><span id="_CPPv2N3eos21macsec_profile_name_tE"></span><span id="eos::macsec_profile_name_t"></span><span class="target" id="namespaceeos_1a706ec1924a169a609d055ca2095c4bdb"></span><em class="property">typedef </em><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::string <code class="sig-name descname">macsec_profile_name_t</code><a class="headerlink" href="#_CPPv4N3eos21macsec_profile_name_tE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-enums">Enums</p>
+<dl class="cpp enum">
+<dt id="_CPPv4N3eos21macsec_cipher_suite_tE">
+<span id="_CPPv3N3eos21macsec_cipher_suite_tE"></span><span id="_CPPv2N3eos21macsec_cipher_suite_tE"></span><span class="target" id="namespaceeos_1acf7a7d2be7fd986b722216eb89df202a"></span><em class="property">enum </em><code class="sig-name descname">macsec_cipher_suite_t</code><a class="headerlink" href="#_CPPv4N3eos21macsec_cipher_suite_tE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Cipher suite used for MACsec. </p>
+<p><em>Values:</em></p>
+<dl class="cpp enumerator">
+<dt id="_CPPv4N3eos21macsec_cipher_suite_t11CIPHER_NULLE">
+<span id="_CPPv3N3eos21macsec_cipher_suite_t11CIPHER_NULLE"></span><span id="_CPPv2N3eos21macsec_cipher_suite_t11CIPHER_NULLE"></span><span class="target" id="namespaceeos_1acf7a7d2be7fd986b722216eb89df202aa74f3ad9841ecad8b669f991e71e6430e"></span><em class="property">enumerator </em><code class="sig-name descname">CIPHER_NULL</code><a class="headerlink" href="#_CPPv4N3eos21macsec_cipher_suite_t11CIPHER_NULLE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt id="_CPPv4N3eos21macsec_cipher_suite_t11GCM_AES_128E">
+<span id="_CPPv3N3eos21macsec_cipher_suite_t11GCM_AES_128E"></span><span id="_CPPv2N3eos21macsec_cipher_suite_t11GCM_AES_128E"></span><span class="target" id="namespaceeos_1acf7a7d2be7fd986b722216eb89df202aa649b681ca53caf58e7722147014b115c"></span><em class="property">enumerator </em><code class="sig-name descname">GCM_AES_128</code><a class="headerlink" href="#_CPPv4N3eos21macsec_cipher_suite_t11GCM_AES_128E" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt id="_CPPv4N3eos21macsec_cipher_suite_t11GCM_AES_256E">
+<span id="_CPPv3N3eos21macsec_cipher_suite_t11GCM_AES_256E"></span><span id="_CPPv2N3eos21macsec_cipher_suite_t11GCM_AES_256E"></span><span class="target" id="namespaceeos_1acf7a7d2be7fd986b722216eb89df202aa594a9717d42e29fceed2b2fbb83ff4d9"></span><em class="property">enumerator </em><code class="sig-name descname">GCM_AES_256</code><a class="headerlink" href="#_CPPv4N3eos21macsec_cipher_suite_t11GCM_AES_256E" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt id="_CPPv4N3eos21macsec_cipher_suite_t15GCM_AES_XPN_128E">
+<span id="_CPPv3N3eos21macsec_cipher_suite_t15GCM_AES_XPN_128E"></span><span id="_CPPv2N3eos21macsec_cipher_suite_t15GCM_AES_XPN_128E"></span><span class="target" id="namespaceeos_1acf7a7d2be7fd986b722216eb89df202aab4e89696943b275bd648508e4cae451e"></span><em class="property">enumerator </em><code class="sig-name descname">GCM_AES_XPN_128</code><a class="headerlink" href="#_CPPv4N3eos21macsec_cipher_suite_t15GCM_AES_XPN_128E" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt id="_CPPv4N3eos21macsec_cipher_suite_t15GCM_AES_XPN_256E">
+<span id="_CPPv3N3eos21macsec_cipher_suite_t15GCM_AES_XPN_256E"></span><span id="_CPPv2N3eos21macsec_cipher_suite_t15GCM_AES_XPN_256E"></span><span class="target" id="namespaceeos_1acf7a7d2be7fd986b722216eb89df202aa52827d82e06bfdc8c4299f106101cb99"></span><em class="property">enumerator </em><code class="sig-name descname">GCM_AES_XPN_256</code><a class="headerlink" href="#_CPPv4N3eos21macsec_cipher_suite_t15GCM_AES_XPN_256E" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="cpp enum">
+<dt id="_CPPv4N3eos24macsec_intf_key_status_tE">
+<span id="_CPPv3N3eos24macsec_intf_key_status_tE"></span><span id="_CPPv2N3eos24macsec_intf_key_status_tE"></span><span class="target" id="namespaceeos_1a3e951fc05e55939716358b5ae4b2cfd5"></span><em class="property">enum </em><code class="sig-name descname">macsec_intf_key_status_t</code><a class="headerlink" href="#_CPPv4N3eos24macsec_intf_key_status_tE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Which key an interface is using if a profile is configured. </p>
+<p><em>Values:</em></p>
+<dl class="cpp enumerator">
+<dt id="_CPPv4N3eos24macsec_intf_key_status_t17MACSEC_NO_PROFILEE">
+<span id="_CPPv3N3eos24macsec_intf_key_status_t17MACSEC_NO_PROFILEE"></span><span id="_CPPv2N3eos24macsec_intf_key_status_t17MACSEC_NO_PROFILEE"></span><span class="target" id="namespaceeos_1a3e951fc05e55939716358b5ae4b2cfd5aeba1bbc98f7cd826d59eb42da42fbad1"></span><em class="property">enumerator </em><code class="sig-name descname">MACSEC_NO_PROFILE</code><a class="headerlink" href="#_CPPv4N3eos24macsec_intf_key_status_t17MACSEC_NO_PROFILEE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>MacSec is not configured on the interface. </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt id="_CPPv4N3eos24macsec_intf_key_status_t15MACSEC_KEY_NONEE">
+<span id="_CPPv3N3eos24macsec_intf_key_status_t15MACSEC_KEY_NONEE"></span><span id="_CPPv2N3eos24macsec_intf_key_status_t15MACSEC_KEY_NONEE"></span><span class="target" id="namespaceeos_1a3e951fc05e55939716358b5ae4b2cfd5a2faaa98acf327bf46a34aaf1e3e5de96"></span><em class="property">enumerator </em><code class="sig-name descname">MACSEC_KEY_NONE</code><a class="headerlink" href="#_CPPv4N3eos24macsec_intf_key_status_t15MACSEC_KEY_NONEE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>None of the CAK/CKN could be selected as principal. </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt id="_CPPv4N3eos24macsec_intf_key_status_t18MACSEC_KEY_PRIMARYE">
+<span id="_CPPv3N3eos24macsec_intf_key_status_t18MACSEC_KEY_PRIMARYE"></span><span id="_CPPv2N3eos24macsec_intf_key_status_t18MACSEC_KEY_PRIMARYE"></span><span class="target" id="namespaceeos_1a3e951fc05e55939716358b5ae4b2cfd5ab213c55108c89098fbfdd3770016a47f"></span><em class="property">enumerator </em><code class="sig-name descname">MACSEC_KEY_PRIMARY</code><a class="headerlink" href="#_CPPv4N3eos24macsec_intf_key_status_t18MACSEC_KEY_PRIMARYE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Configured primary CAK/CKN is selected as principal. </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt id="_CPPv4N3eos24macsec_intf_key_status_t19MACSEC_KEY_FALLBACKE">
+<span id="_CPPv3N3eos24macsec_intf_key_status_t19MACSEC_KEY_FALLBACKE"></span><span id="_CPPv2N3eos24macsec_intf_key_status_t19MACSEC_KEY_FALLBACKE"></span><span class="target" id="namespaceeos_1a3e951fc05e55939716358b5ae4b2cfd5ab70ebfd5af81b65efae3c293c0b2a9e0"></span><em class="property">enumerator </em><code class="sig-name descname">MACSEC_KEY_FALLBACK</code><a class="headerlink" href="#_CPPv4N3eos24macsec_intf_key_status_t19MACSEC_KEY_FALLBACKE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Configured fallback CAK/CKN is selected as principal. </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt id="_CPPv4N3eos24macsec_intf_key_status_t25MACSEC_KEY_PRIMARY_CACHEDE">
+<span id="_CPPv3N3eos24macsec_intf_key_status_t25MACSEC_KEY_PRIMARY_CACHEDE"></span><span id="_CPPv2N3eos24macsec_intf_key_status_t25MACSEC_KEY_PRIMARY_CACHEDE"></span><span class="target" id="namespaceeos_1a3e951fc05e55939716358b5ae4b2cfd5a95eac480f88b17d2205fd900f029a23b"></span><em class="property">enumerator </em><code class="sig-name descname">MACSEC_KEY_PRIMARY_CACHED</code><a class="headerlink" href="#_CPPv4N3eos24macsec_intf_key_status_t25MACSEC_KEY_PRIMARY_CACHEDE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Previously configured primary CAK/CKN is selected as principal. </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt id="_CPPv4N3eos24macsec_intf_key_status_t26MACSEC_KEY_FALLBACK_CACHEDE">
+<span id="_CPPv3N3eos24macsec_intf_key_status_t26MACSEC_KEY_FALLBACK_CACHEDE"></span><span id="_CPPv2N3eos24macsec_intf_key_status_t26MACSEC_KEY_FALLBACK_CACHEDE"></span><span class="target" id="namespaceeos_1a3e951fc05e55939716358b5ae4b2cfd5a91ebc0efaa7a28807d6748da801e346b"></span><em class="property">enumerator </em><code class="sig-name descname">MACSEC_KEY_FALLBACK_CACHED</code><a class="headerlink" href="#_CPPv4N3eos24macsec_intf_key_status_t26MACSEC_KEY_FALLBACK_CACHEDE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Previously configured fallback CAK/CKN is selected as principal. </p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="cpp enum">
+<dt id="_CPPv4N3eos28macsec_intf_traffic_status_tE">
+<span id="_CPPv3N3eos28macsec_intf_traffic_status_tE"></span><span id="_CPPv2N3eos28macsec_intf_traffic_status_tE"></span><span class="target" id="namespaceeos_1ab6661e20252aa1309c01ef3d8287e6c2"></span><em class="property">enum </em><code class="sig-name descname">macsec_intf_traffic_status_t</code><a class="headerlink" href="#_CPPv4N3eos28macsec_intf_traffic_status_tE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Traffic status on an interface. </p>
+<p><em>Values:</em></p>
+<dl class="cpp enumerator">
+<dt id="_CPPv4N3eos28macsec_intf_traffic_status_t24MACSEC_TRAFFIC_PROTECTEDE">
+<span id="_CPPv3N3eos28macsec_intf_traffic_status_t24MACSEC_TRAFFIC_PROTECTEDE"></span><span id="_CPPv2N3eos28macsec_intf_traffic_status_t24MACSEC_TRAFFIC_PROTECTEDE"></span><span class="target" id="namespaceeos_1ab6661e20252aa1309c01ef3d8287e6c2a5989e314647b83d2943460b596538456"></span><em class="property">enumerator </em><code class="sig-name descname">MACSEC_TRAFFIC_PROTECTED</code><a class="headerlink" href="#_CPPv4N3eos28macsec_intf_traffic_status_t24MACSEC_TRAFFIC_PROTECTEDE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Traffic through the interface is protected. </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt id="_CPPv4N3eos28macsec_intf_traffic_status_t26MACSEC_TRAFFIC_UNPROTECTEDE">
+<span id="_CPPv3N3eos28macsec_intf_traffic_status_t26MACSEC_TRAFFIC_UNPROTECTEDE"></span><span id="_CPPv2N3eos28macsec_intf_traffic_status_t26MACSEC_TRAFFIC_UNPROTECTEDE"></span><span class="target" id="namespaceeos_1ab6661e20252aa1309c01ef3d8287e6c2a135465903dd15ded5dbc58b3b0aa2df5"></span><em class="property">enumerator </em><code class="sig-name descname">MACSEC_TRAFFIC_UNPROTECTED</code><a class="headerlink" href="#_CPPv4N3eos28macsec_intf_traffic_status_t26MACSEC_TRAFFIC_UNPROTECTEDE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Traffic through the interface is unprotected. </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt id="_CPPv4N3eos28macsec_intf_traffic_status_t22MACSEC_TRAFFIC_BLOCKEDE">
+<span id="_CPPv3N3eos28macsec_intf_traffic_status_t22MACSEC_TRAFFIC_BLOCKEDE"></span><span id="_CPPv2N3eos28macsec_intf_traffic_status_t22MACSEC_TRAFFIC_BLOCKEDE"></span><span class="target" id="namespaceeos_1ab6661e20252aa1309c01ef3d8287e6c2ae57a371ee19f229472726f9ecbd978d5"></span><em class="property">enumerator </em><code class="sig-name descname">MACSEC_TRAFFIC_BLOCKED</code><a class="headerlink" href="#_CPPv4N3eos28macsec_intf_traffic_status_t22MACSEC_TRAFFIC_BLOCKEDE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Traffic through the interface is blocked. </p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="cpp enum">
+<dt id="_CPPv4N3eos15macsec_bypass_tE">
+<span id="_CPPv3N3eos15macsec_bypass_tE"></span><span id="_CPPv2N3eos15macsec_bypass_tE"></span><span class="target" id="namespaceeos_1ae9a5c056e0e80b8a08dddce97ed2d9f2"></span><em class="property">enum </em><code class="sig-name descname">macsec_bypass_t</code><a class="headerlink" href="#_CPPv4N3eos15macsec_bypass_tE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Bypass level for a protocol. </p>
+<p><em>Values:</em></p>
+<dl class="cpp enumerator">
+<dt id="_CPPv4N3eos15macsec_bypass_t11BYPASS_NULLE">
+<span id="_CPPv3N3eos15macsec_bypass_t11BYPASS_NULLE"></span><span id="_CPPv2N3eos15macsec_bypass_t11BYPASS_NULLE"></span><span class="target" id="namespaceeos_1ae9a5c056e0e80b8a08dddce97ed2d9f2a3832c08ae67b7a2f1393cf8baa4d14c5"></span><em class="property">enumerator </em><code class="sig-name descname">BYPASS_NULL</code><a class="headerlink" href="#_CPPv4N3eos15macsec_bypass_t11BYPASS_NULLE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Allow transmit/receive of protocol with MACsec encryption only. </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt id="_CPPv4N3eos15macsec_bypass_t17BYPASS_AUTHORIZEDE">
+<span id="_CPPv3N3eos15macsec_bypass_t17BYPASS_AUTHORIZEDE"></span><span id="_CPPv2N3eos15macsec_bypass_t17BYPASS_AUTHORIZEDE"></span><span class="target" id="namespaceeos_1ae9a5c056e0e80b8a08dddce97ed2d9f2ad55cd36aa2fc0016514de47d30c63b3c"></span><em class="property">enumerator </em><code class="sig-name descname">BYPASS_AUTHORIZED</code><a class="headerlink" href="#_CPPv4N3eos15macsec_bypass_t17BYPASS_AUTHORIZEDE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Allow transmit/receive of protocol packets when port is authorized. </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt id="_CPPv4N3eos15macsec_bypass_t19BYPASS_UNAUTHORIZEDE">
+<span id="_CPPv3N3eos15macsec_bypass_t19BYPASS_UNAUTHORIZEDE"></span><span id="_CPPv2N3eos15macsec_bypass_t19BYPASS_UNAUTHORIZEDE"></span><span class="target" id="namespaceeos_1ae9a5c056e0e80b8a08dddce97ed2d9f2aacc90b5d10bcaae31bc94266eddcb6be"></span><em class="property">enumerator </em><code class="sig-name descname">BYPASS_UNAUTHORIZED</code><a class="headerlink" href="#_CPPv4N3eos15macsec_bypass_t19BYPASS_UNAUTHORIZEDE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Allow transmit/receive of protocol packets when port is authorized or unauthorized. </p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="cpp enum">
+<dt id="_CPPv4N3eos31macsec_profile_traffic_policy_tE">
+<span id="_CPPv3N3eos31macsec_profile_traffic_policy_tE"></span><span id="_CPPv2N3eos31macsec_profile_traffic_policy_tE"></span><span class="target" id="namespaceeos_1acb63bb19fddbd5cc7b25e50d8c16f21f"></span><em class="property">enum </em><code class="sig-name descname">macsec_profile_traffic_policy_t</code><a class="headerlink" href="#_CPPv4N3eos31macsec_profile_traffic_policy_tE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Traffic policy on a profile. </p>
+<p><em>Values:</em></p>
+<dl class="cpp enumerator">
+<dt id="_CPPv4N3eos31macsec_profile_traffic_policy_t19TRAFFIC_POLICY_NULLE">
+<span id="_CPPv3N3eos31macsec_profile_traffic_policy_t19TRAFFIC_POLICY_NULLE"></span><span id="_CPPv2N3eos31macsec_profile_traffic_policy_t19TRAFFIC_POLICY_NULLE"></span><span class="target" id="namespaceeos_1acb63bb19fddbd5cc7b25e50d8c16f21fa748bc0b8fdeb80180a8d1ab7ca8d82b4"></span><em class="property">enumerator </em><code class="sig-name descname">TRAFFIC_POLICY_NULL</code><a class="headerlink" href="#_CPPv4N3eos31macsec_profile_traffic_policy_t19TRAFFIC_POLICY_NULLE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt id="_CPPv4N3eos31macsec_profile_traffic_policy_t25TRAFFIC_POLICY_ACTIVE_SAKE">
+<span id="_CPPv3N3eos31macsec_profile_traffic_policy_t25TRAFFIC_POLICY_ACTIVE_SAKE"></span><span id="_CPPv2N3eos31macsec_profile_traffic_policy_t25TRAFFIC_POLICY_ACTIVE_SAKE"></span><span class="target" id="namespaceeos_1acb63bb19fddbd5cc7b25e50d8c16f21fa706aa1ed39aadbb6aba67b5481877fc2"></span><em class="property">enumerator </em><code class="sig-name descname">TRAFFIC_POLICY_ACTIVE_SAK</code><a class="headerlink" href="#_CPPv4N3eos31macsec_profile_traffic_policy_t25TRAFFIC_POLICY_ACTIVE_SAKE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Allow transmit/receive of encrypted traffic using operational SAK and block otherwise. </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt id="_CPPv4N3eos31macsec_profile_traffic_policy_t26TRAFFIC_POLICY_UNPROTECTEDE">
+<span id="_CPPv3N3eos31macsec_profile_traffic_policy_t26TRAFFIC_POLICY_UNPROTECTEDE"></span><span id="_CPPv2N3eos31macsec_profile_traffic_policy_t26TRAFFIC_POLICY_UNPROTECTEDE"></span><span class="target" id="namespaceeos_1acb63bb19fddbd5cc7b25e50d8c16f21fa3b6d2b229eb2421503e5c962996f1cbe"></span><em class="property">enumerator </em><code class="sig-name descname">TRAFFIC_POLICY_UNPROTECTED</code><a class="headerlink" href="#_CPPv4N3eos31macsec_profile_traffic_policy_t26TRAFFIC_POLICY_UNPROTECTEDE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Allow transmit/receive of unprotected traffic. </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt id="_CPPv4N3eos31macsec_profile_traffic_policy_t22TRAFFIC_POLICY_BLOCKEDE">
+<span id="_CPPv3N3eos31macsec_profile_traffic_policy_t22TRAFFIC_POLICY_BLOCKEDE"></span><span id="_CPPv2N3eos31macsec_profile_traffic_policy_t22TRAFFIC_POLICY_BLOCKEDE"></span><span class="target" id="namespaceeos_1acb63bb19fddbd5cc7b25e50d8c16f21face4fdb29dca18c219d92a7bea188a050"></span><em class="property">enumerator </em><code class="sig-name descname">TRAFFIC_POLICY_BLOCKED</code><a class="headerlink" href="#_CPPv4N3eos31macsec_profile_traffic_policy_t22TRAFFIC_POLICY_BLOCKEDE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Block transmit/receive of unprotected traffic. </p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<dl class="cpp class">
+<dt id="_CPPv4N3eos12macsec_key_tE">
+<span id="_CPPv3N3eos12macsec_key_tE"></span><span id="_CPPv2N3eos12macsec_key_tE"></span><span id="eos::macsec_key_t"></span><span class="target" id="classeos_1_1macsec__key__t"></span><em class="property">class </em><code class="sig-name descname">macsec_key_t</code><a class="headerlink" href="#_CPPv4N3eos12macsec_key_tE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><div class="docutils container">
+<em>#include &lt;macsec.h&gt;</em></div>
+<p>A connectivity association key. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
+<dl class="cpp function">
+<dt id="_CPPv4N3eos12macsec_key_t12macsec_key_tEv">
+<span id="_CPPv3N3eos12macsec_key_t12macsec_key_tEv"></span><span id="_CPPv2N3eos12macsec_key_t12macsec_key_tEv"></span><span id="eos::macsec_key_t::macsec_key_t"></span><span class="target" id="classeos_1_1macsec__key__t_1aa06208d0904943b396a557ea6f142627"></span><code class="sig-name descname">macsec_key_t</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos12macsec_key_t12macsec_key_tEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos12macsec_key_t12macsec_key_tERK12macsec_key_t">
+<span id="_CPPv3N3eos12macsec_key_t12macsec_key_tERK12macsec_key_t"></span><span id="_CPPv2N3eos12macsec_key_t12macsec_key_tERK12macsec_key_t"></span><span id="eos::macsec_key_t::macsec_key_t__macsec_key_tCR"></span><span class="target" id="classeos_1_1macsec__key__t_1a7b62d857d27f80f949afdacb6bc2f38b"></span><code class="sig-name descname">macsec_key_t</code><span class="sig-paren">(</span><em class="property">const</em> <a class="reference internal" href="#_CPPv4N3eos12macsec_key_t12macsec_key_tERK12macsec_key_t" title="eos::macsec_key_t::macsec_key_t">macsec_key_t</a> &amp;<em>other</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos12macsec_key_t12macsec_key_tERK12macsec_key_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos12macsec_key_taSERK12macsec_key_t">
+<span id="_CPPv3N3eos12macsec_key_taSERK12macsec_key_t"></span><span id="_CPPv2N3eos12macsec_key_taSERK12macsec_key_t"></span><span id="eos::macsec_key_t::assign-operator__macsec_key_tCR"></span><span class="target" id="classeos_1_1macsec__key__t_1a5d1733c795fe20812a9fddcf0a949357"></span><a class="reference internal" href="#_CPPv4N3eos12macsec_key_tE" title="eos::macsec_key_t">macsec_key_t</a> &amp;<code class="sig-name descname">operator=</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos12macsec_key_tE" title="eos::macsec_key_t">macsec_key_t</a> <em class="property">const</em> &amp;<em>other</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos12macsec_key_taSERK12macsec_key_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos12macsec_key_t3cakEv">
+<span id="_CPPv3NK3eos12macsec_key_t3cakEv"></span><span id="_CPPv2NK3eos12macsec_key_t3cakEv"></span><span id="eos::macsec_key_t::cakC"></span><span class="target" id="classeos_1_1macsec__key__t_1aec84739e3533da5b000cb8153b66ba72"></span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::string <code class="sig-name descname">cak</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos12macsec_key_t3cakEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Getter for ‘cak’: connectivity association key (CAK). CAK is a hex string. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos12macsec_key_t6cak_isENSt6stringE">
+<span id="_CPPv3N3eos12macsec_key_t6cak_isENSt6stringE"></span><span id="_CPPv2N3eos12macsec_key_t6cak_isENSt6stringE"></span><span id="eos::macsec_key_t::cak_is__ss"></span><span class="target" id="classeos_1_1macsec__key__t_1ade96c6b0d3943b0a2666b8469e84b021"></span>void <code class="sig-name descname">cak_is</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::string <em>cak</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos12macsec_key_t6cak_isENSt6stringE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Setter for ‘cak’. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos12macsec_key_t3cknEv">
+<span id="_CPPv3NK3eos12macsec_key_t3cknEv"></span><span id="_CPPv2NK3eos12macsec_key_t3cknEv"></span><span id="eos::macsec_key_t::cknC"></span><span class="target" id="classeos_1_1macsec__key__t_1af8bcb497723d3c30e3cfc52b4577f3c1"></span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::string <code class="sig-name descname">ckn</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos12macsec_key_t3cknEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Getter for ‘ckn’: connectivity association key name (CKN). CKN is a hex string. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos12macsec_key_t6ckn_isENSt6stringE">
+<span id="_CPPv3N3eos12macsec_key_t6ckn_isENSt6stringE"></span><span id="_CPPv2N3eos12macsec_key_t6ckn_isENSt6stringE"></span><span id="eos::macsec_key_t::ckn_is__ss"></span><span class="target" id="classeos_1_1macsec__key__t_1a90b195be9f203b5a89a04bc7bf0b0b2a"></span>void <code class="sig-name descname">ckn_is</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::string <em>ckn</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos12macsec_key_t6ckn_isENSt6stringE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Setter for ‘ckn’. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos12macsec_key_t7encodedEv">
+<span id="_CPPv3NK3eos12macsec_key_t7encodedEv"></span><span id="_CPPv2NK3eos12macsec_key_t7encodedEv"></span><span id="eos::macsec_key_t::encodedC"></span><span class="target" id="classeos_1_1macsec__key__t_1a78449e6f500686795ab2d3e585d6a4a4"></span>bool <code class="sig-name descname">encoded</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos12macsec_key_t7encodedEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Getter for ‘encoded’: whether or not the CAK has been encoded. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos12macsec_key_t10encoded_isEb">
+<span id="_CPPv3N3eos12macsec_key_t10encoded_isEb"></span><span id="_CPPv2N3eos12macsec_key_t10encoded_isEb"></span><span id="eos::macsec_key_t::encoded_is__b"></span><span class="target" id="classeos_1_1macsec__key__t_1ab66d24491f8d46d4d6618b2ef8df2cba"></span>void <code class="sig-name descname">encoded_is</code><span class="sig-paren">(</span>bool <em>encoded</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos12macsec_key_t10encoded_isEb" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Setter for ‘encoded’. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos12macsec_key_teqERK12macsec_key_t">
+<span id="_CPPv3NK3eos12macsec_key_teqERK12macsec_key_t"></span><span id="_CPPv2NK3eos12macsec_key_teqERK12macsec_key_t"></span><span id="eos::macsec_key_t::eq-operator__macsec_key_tCRC"></span><span class="target" id="classeos_1_1macsec__key__t_1ad43f6ae1f6f62893efc5d1f358139b21"></span>bool <code class="sig-name descname">operator==</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos12macsec_key_tE" title="eos::macsec_key_t">macsec_key_t</a> <em class="property">const</em> &amp;<em>other</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos12macsec_key_teqERK12macsec_key_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos12macsec_key_tneERK12macsec_key_t">
+<span id="_CPPv3NK3eos12macsec_key_tneERK12macsec_key_t"></span><span id="_CPPv2NK3eos12macsec_key_tneERK12macsec_key_t"></span><span id="eos::macsec_key_t::neq-operator__macsec_key_tCRC"></span><span class="target" id="classeos_1_1macsec__key__t_1a91165ccd055b541fa421189ac62fdb93"></span>bool <code class="sig-name descname">operator!=</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos12macsec_key_tE" title="eos::macsec_key_t">macsec_key_t</a> <em class="property">const</em> &amp;<em>other</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos12macsec_key_tneERK12macsec_key_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos12macsec_key_tltERK12macsec_key_t">
+<span id="_CPPv3NK3eos12macsec_key_tltERK12macsec_key_t"></span><span id="_CPPv2NK3eos12macsec_key_tltERK12macsec_key_t"></span><span id="eos::macsec_key_t::lt-operator__macsec_key_tCRC"></span><span class="target" id="classeos_1_1macsec__key__t_1a6f7b27627e8157051d64accba9649cc2"></span>bool <code class="sig-name descname">operator&lt;</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos12macsec_key_tE" title="eos::macsec_key_t">macsec_key_t</a> <em class="property">const</em> &amp;<em>other</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos12macsec_key_tltERK12macsec_key_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos12macsec_key_t4hashEv">
+<span id="_CPPv3NK3eos12macsec_key_t4hashEv"></span><span id="_CPPv2NK3eos12macsec_key_t4hashEv"></span><span id="eos::macsec_key_t::hashC"></span><span class="target" id="classeos_1_1macsec__key__t_1a30d26f5a341569e320d3168e3ff02f59"></span>uint32_t <code class="sig-name descname">hash</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos12macsec_key_t4hashEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>The hash function for type <a class="reference internal" href="#classeos_1_1macsec__key__t"><span class="std std-ref">macsec_key_t</span></a>. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos12macsec_key_t6mix_meER8hash_mix">
+<span id="_CPPv3NK3eos12macsec_key_t6mix_meER8hash_mix"></span><span id="_CPPv2NK3eos12macsec_key_t6mix_meER8hash_mix"></span><span id="eos::macsec_key_t::mix_me__hash_mixRC"></span><span class="target" id="classeos_1_1macsec__key__t_1a0a0b6c38bc04224c34f371af129fc321"></span>void <code class="sig-name descname">mix_me</code><span class="sig-paren">(</span><a class="reference internal" href="hash_mix.html#_CPPv4N3eos8hash_mixE" title="eos::hash_mix">hash_mix</a> &amp;<em>h</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos12macsec_key_t6mix_meER8hash_mix" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>The hash mix function for type <a class="reference internal" href="#classeos_1_1macsec__key__t"><span class="std std-ref">macsec_key_t</span></a>. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos12macsec_key_t9to_stringEv">
+<span id="_CPPv3NK3eos12macsec_key_t9to_stringEv"></span><span id="_CPPv2NK3eos12macsec_key_t9to_stringEv"></span><span id="eos::macsec_key_t::to_stringC"></span><span class="target" id="classeos_1_1macsec__key__t_1aa519363777cdb0411ae26089404c0547"></span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::string <code class="sig-name descname">to_string</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos12macsec_key_t9to_stringEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Returns a string representation of the current object’s values. </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-private-members">Private Members</p>
+<dl class="cpp var">
+<dt id="_CPPv4N3eos12macsec_key_t5pimplE">
+<span id="_CPPv3N3eos12macsec_key_t5pimplE"></span><span id="_CPPv2N3eos12macsec_key_t5pimplE"></span><span id="eos::macsec_key_t::pimpl__std::shared_ptr:macsec_key_impl_t:"></span><span class="target" id="classeos_1_1macsec__key__t_1a80211b9e4e42af15ef030de216bbf0a2"></span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::shared_ptr&lt;macsec_key_impl_t&gt; <code class="sig-name descname">pimpl</code><a class="headerlink" href="#_CPPv4N3eos12macsec_key_t5pimplE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-friends">Friends</p>
+<dl class="cpp function">
+<dt id="_CPPv4N3eos12macsec_key_tlsERNSt7ostreamERK12macsec_key_t">
+<span id="_CPPv3N3eos12macsec_key_tlsERNSt7ostreamERK12macsec_key_t"></span><span id="_CPPv2N3eos12macsec_key_tlsERNSt7ostreamERK12macsec_key_t"></span><span id="eos::macsec_key_t::lshift-operator__osR.macsec_key_tCR"></span><span class="target" id="classeos_1_1macsec__key__t_1afab9b64e4c267ded94393ed475b4013f"></span><em class="property">friend</em> <a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::ostream &amp;<code class="sig-name descname">operator&lt;&lt;</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::ostream &amp;<em>os</em>, <em class="property">const</em> <a class="reference internal" href="#_CPPv4N3eos12macsec_key_tE" title="eos::macsec_key_t">macsec_key_t</a> &amp;<em>obj</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos12macsec_key_tlsERNSt7ostreamERK12macsec_key_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>A utility stream operator that adds a string representation of <a class="reference internal" href="#classeos_1_1macsec__key__t"><span class="std std-ref">macsec_key_t</span></a> to the ostream. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="cpp class">
+<dt id="_CPPv4N3eos16macsec_profile_tE">
+<span id="_CPPv3N3eos16macsec_profile_tE"></span><span id="_CPPv2N3eos16macsec_profile_tE"></span><span id="eos::macsec_profile_t"></span><span class="target" id="classeos_1_1macsec__profile__t"></span><em class="property">class </em><code class="sig-name descname">macsec_profile_t</code><a class="headerlink" href="#_CPPv4N3eos16macsec_profile_tE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><div class="docutils container">
+<em>#include &lt;macsec.h&gt;</em></div>
+<p>A MACsec profile which can be attached to an interface. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
+<dl class="cpp function">
+<dt id="_CPPv4N3eos16macsec_profile_t16macsec_profile_tEv">
+<span id="_CPPv3N3eos16macsec_profile_t16macsec_profile_tEv"></span><span id="_CPPv2N3eos16macsec_profile_t16macsec_profile_tEv"></span><span id="eos::macsec_profile_t::macsec_profile_t"></span><span class="target" id="classeos_1_1macsec__profile__t_1a4c029183de7fbe0a3489d70c169787dd"></span><code class="sig-name descname">macsec_profile_t</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos16macsec_profile_t16macsec_profile_tEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos16macsec_profile_t16macsec_profile_tE21macsec_profile_name_t">
+<span id="_CPPv3N3eos16macsec_profile_t16macsec_profile_tE21macsec_profile_name_t"></span><span id="_CPPv2N3eos16macsec_profile_t16macsec_profile_tE21macsec_profile_name_t"></span><span id="eos::macsec_profile_t::macsec_profile_t__macsec_profile_name_t"></span><span class="target" id="classeos_1_1macsec__profile__t_1a89a154b5fe1272fe10a0e3693397bf9c"></span><em class="property">explicit</em> <code class="sig-name descname">macsec_profile_t</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos21macsec_profile_name_tE" title="eos::macsec_profile_name_t">macsec_profile_name_t</a> <em>name</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos16macsec_profile_t16macsec_profile_tE21macsec_profile_name_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos16macsec_profile_t16macsec_profile_tERK16macsec_profile_t">
+<span id="_CPPv3N3eos16macsec_profile_t16macsec_profile_tERK16macsec_profile_t"></span><span id="_CPPv2N3eos16macsec_profile_t16macsec_profile_tERK16macsec_profile_t"></span><span id="eos::macsec_profile_t::macsec_profile_t__macsec_profile_tCR"></span><span class="target" id="classeos_1_1macsec__profile__t_1a81617e84651df145819b88c4cfa8f818"></span><code class="sig-name descname">macsec_profile_t</code><span class="sig-paren">(</span><em class="property">const</em> <a class="reference internal" href="#_CPPv4N3eos16macsec_profile_t16macsec_profile_tERK16macsec_profile_t" title="eos::macsec_profile_t::macsec_profile_t">macsec_profile_t</a> &amp;<em>other</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos16macsec_profile_t16macsec_profile_tERK16macsec_profile_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos16macsec_profile_taSERK16macsec_profile_t">
+<span id="_CPPv3N3eos16macsec_profile_taSERK16macsec_profile_t"></span><span id="_CPPv2N3eos16macsec_profile_taSERK16macsec_profile_t"></span><span id="eos::macsec_profile_t::assign-operator__macsec_profile_tCR"></span><span class="target" id="classeos_1_1macsec__profile__t_1a0a400cba047f0a14c65f166ba20e3c4a"></span><a class="reference internal" href="#_CPPv4N3eos16macsec_profile_tE" title="eos::macsec_profile_t">macsec_profile_t</a> &amp;<code class="sig-name descname">operator=</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos16macsec_profile_tE" title="eos::macsec_profile_t">macsec_profile_t</a> <em class="property">const</em> &amp;<em>other</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos16macsec_profile_taSERK16macsec_profile_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos16macsec_profile_t4nameEv">
+<span id="_CPPv3NK3eos16macsec_profile_t4nameEv"></span><span id="_CPPv2NK3eos16macsec_profile_t4nameEv"></span><span id="eos::macsec_profile_t::nameC"></span><span class="target" id="classeos_1_1macsec__profile__t_1acc87be88b609a250abfb1e2b8e730028"></span><a class="reference internal" href="#_CPPv4N3eos21macsec_profile_name_tE" title="eos::macsec_profile_name_t">macsec_profile_name_t</a> <code class="sig-name descname">name</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos16macsec_profile_t4nameEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Getter for ‘name’: the name of the profile. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos16macsec_profile_t7name_isE21macsec_profile_name_t">
+<span id="_CPPv3N3eos16macsec_profile_t7name_isE21macsec_profile_name_t"></span><span id="_CPPv2N3eos16macsec_profile_t7name_isE21macsec_profile_name_t"></span><span id="eos::macsec_profile_t::name_is__macsec_profile_name_t"></span><span class="target" id="classeos_1_1macsec__profile__t_1a13323bc9d432c0496421bae20a18d36d"></span>void <code class="sig-name descname">name_is</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos21macsec_profile_name_tE" title="eos::macsec_profile_name_t">macsec_profile_name_t</a> <em>name</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos16macsec_profile_t7name_isE21macsec_profile_name_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Setter for ‘name’. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos16macsec_profile_t11primary_keyEv">
+<span id="_CPPv3NK3eos16macsec_profile_t11primary_keyEv"></span><span id="_CPPv2NK3eos16macsec_profile_t11primary_keyEv"></span><span id="eos::macsec_profile_t::primary_keyC"></span><span class="target" id="classeos_1_1macsec__profile__t_1a4736de23e4135c126899f725ccef0dfe"></span><a class="reference internal" href="#_CPPv4N3eos12macsec_key_tE" title="eos::macsec_key_t">macsec_key_t</a> <code class="sig-name descname">primary_key</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos16macsec_profile_t11primary_keyEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Getter for ‘primary_key’: the primary key, which is represented by a CKN and an associated CAK. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos16macsec_profile_t14primary_key_isE12macsec_key_t">
+<span id="_CPPv3N3eos16macsec_profile_t14primary_key_isE12macsec_key_t"></span><span id="_CPPv2N3eos16macsec_profile_t14primary_key_isE12macsec_key_t"></span><span id="eos::macsec_profile_t::primary_key_is__macsec_key_t"></span><span class="target" id="classeos_1_1macsec__profile__t_1a92621eddecef33a41a65f58c9f65828a"></span>void <code class="sig-name descname">primary_key_is</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos12macsec_key_tE" title="eos::macsec_key_t">macsec_key_t</a> <em>primary_key</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos16macsec_profile_t14primary_key_isE12macsec_key_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Setter for ‘primary_key’. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos16macsec_profile_t12fallback_keyEv">
+<span id="_CPPv3NK3eos16macsec_profile_t12fallback_keyEv"></span><span id="_CPPv2NK3eos16macsec_profile_t12fallback_keyEv"></span><span id="eos::macsec_profile_t::fallback_keyC"></span><span class="target" id="classeos_1_1macsec__profile__t_1a80946321e90fbd85768d98a3bbf87c21"></span><a class="reference internal" href="#_CPPv4N3eos12macsec_key_tE" title="eos::macsec_key_t">macsec_key_t</a> <code class="sig-name descname">fallback_key</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos16macsec_profile_t12fallback_keyEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Getter for ‘fallback_key’: the fallback, or default, key, which is used when the primary is not successful. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos16macsec_profile_t15fallback_key_isE12macsec_key_t">
+<span id="_CPPv3N3eos16macsec_profile_t15fallback_key_isE12macsec_key_t"></span><span id="_CPPv2N3eos16macsec_profile_t15fallback_key_isE12macsec_key_t"></span><span id="eos::macsec_profile_t::fallback_key_is__macsec_key_t"></span><span class="target" id="classeos_1_1macsec__profile__t_1a3a47c1245a2d9681a0c2eaab63af26d6"></span>void <code class="sig-name descname">fallback_key_is</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos12macsec_key_tE" title="eos::macsec_key_t">macsec_key_t</a> <em>fallback_key</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos16macsec_profile_t15fallback_key_isE12macsec_key_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Setter for ‘fallback_key’. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos16macsec_profile_t19key_server_priorityEv">
+<span id="_CPPv3NK3eos16macsec_profile_t19key_server_priorityEv"></span><span id="_CPPv2NK3eos16macsec_profile_t19key_server_priorityEv"></span><span id="eos::macsec_profile_t::key_server_priorityC"></span><span class="target" id="classeos_1_1macsec__profile__t_1a6f0d1da253a253cd8d8d3b98ac5d5a5a"></span>uint8_t <code class="sig-name descname">key_server_priority</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos16macsec_profile_t19key_server_priorityEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Getter for ‘key_server_priority’: MACsec Key Agreement (MKA) protocol key server priority. 255 is the highest priority. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos16macsec_profile_t22key_server_priority_isE7uint8_t">
+<span id="_CPPv3N3eos16macsec_profile_t22key_server_priority_isE7uint8_t"></span><span id="_CPPv2N3eos16macsec_profile_t22key_server_priority_isE7uint8_t"></span><span id="eos::macsec_profile_t::key_server_priority_is__uint8_t"></span><span class="target" id="classeos_1_1macsec__profile__t_1a81de401301b288f786b36789780fc4ce"></span>void <code class="sig-name descname">key_server_priority_is</code><span class="sig-paren">(</span>uint8_t <em>key_server_priority</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos16macsec_profile_t22key_server_priority_isE7uint8_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Setter for ‘key_server_priority’. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos16macsec_profile_t12rekey_periodEv">
+<span id="_CPPv3NK3eos16macsec_profile_t12rekey_periodEv"></span><span id="_CPPv2NK3eos16macsec_profile_t12rekey_periodEv"></span><span id="eos::macsec_profile_t::rekey_periodC"></span><span class="target" id="classeos_1_1macsec__profile__t_1ae5a369be3b25f8571e1590085a961744"></span>uint32_t <code class="sig-name descname">rekey_period</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos16macsec_profile_t12rekey_periodEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Getter for ‘rekey_period’: MKA session re-key period in seconds. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos16macsec_profile_t15rekey_period_isE8uint32_t">
+<span id="_CPPv3N3eos16macsec_profile_t15rekey_period_isE8uint32_t"></span><span id="_CPPv2N3eos16macsec_profile_t15rekey_period_isE8uint32_t"></span><span id="eos::macsec_profile_t::rekey_period_is__uint32_t"></span><span class="target" id="classeos_1_1macsec__profile__t_1a9591c3101337bd55c8e857b9b32b2709"></span>void <code class="sig-name descname">rekey_period_is</code><span class="sig-paren">(</span>uint32_t <em>rekey_period</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos16macsec_profile_t15rekey_period_isE8uint32_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Setter for ‘rekey_period’. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos16macsec_profile_t13mka_life_timeEv">
+<span id="_CPPv3NK3eos16macsec_profile_t13mka_life_timeEv"></span><span id="_CPPv2NK3eos16macsec_profile_t13mka_life_timeEv"></span><span id="eos::macsec_profile_t::mka_life_timeC"></span><span class="target" id="classeos_1_1macsec__profile__t_1acd44e9d4c14f4332fa9e29e7cedcfdbd"></span>uint32_t <code class="sig-name descname">mka_life_time</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos16macsec_profile_t13mka_life_timeEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Getter for ‘mka_life_time’: MKA session lifetime in seconds. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos16macsec_profile_t16mka_life_time_isE8uint32_t">
+<span id="_CPPv3N3eos16macsec_profile_t16mka_life_time_isE8uint32_t"></span><span id="_CPPv2N3eos16macsec_profile_t16mka_life_time_isE8uint32_t"></span><span id="eos::macsec_profile_t::mka_life_time_is__uint32_t"></span><span class="target" id="classeos_1_1macsec__profile__t_1a3980dd6a6edba5cdef662a05c70f8e76"></span>void <code class="sig-name descname">mka_life_time_is</code><span class="sig-paren">(</span>uint32_t <em>mka_life_time</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos16macsec_profile_t16mka_life_time_isE8uint32_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Setter for ‘mka_life_time’. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos16macsec_profile_t6cipherEv">
+<span id="_CPPv3NK3eos16macsec_profile_t6cipherEv"></span><span id="_CPPv2NK3eos16macsec_profile_t6cipherEv"></span><span id="eos::macsec_profile_t::cipherC"></span><span class="target" id="classeos_1_1macsec__profile__t_1a0c32360b8a25cf7e3dd610ece297135e"></span><a class="reference internal" href="#_CPPv4N3eos21macsec_cipher_suite_tE" title="eos::macsec_cipher_suite_t">macsec_cipher_suite_t</a> <code class="sig-name descname">cipher</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos16macsec_profile_t6cipherEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Getter for ‘cipher’: which encryption standard to use. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos16macsec_profile_t9cipher_isE21macsec_cipher_suite_t">
+<span id="_CPPv3N3eos16macsec_profile_t9cipher_isE21macsec_cipher_suite_t"></span><span id="_CPPv2N3eos16macsec_profile_t9cipher_isE21macsec_cipher_suite_t"></span><span id="eos::macsec_profile_t::cipher_is__macsec_cipher_suite_t"></span><span class="target" id="classeos_1_1macsec__profile__t_1aaa18cf3a572a80b7887c1f1f47411225"></span>void <code class="sig-name descname">cipher_is</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos21macsec_cipher_suite_tE" title="eos::macsec_cipher_suite_t">macsec_cipher_suite_t</a> <em>cipher</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos16macsec_profile_t9cipher_isE21macsec_cipher_suite_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Setter for ‘cipher’. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos16macsec_profile_t5dot1xEv">
+<span id="_CPPv3NK3eos16macsec_profile_t5dot1xEv"></span><span id="_CPPv2NK3eos16macsec_profile_t5dot1xEv"></span><span id="eos::macsec_profile_t::dot1xC"></span><span class="target" id="classeos_1_1macsec__profile__t_1a8b3cda3f0ae03e5263413e29c4767fe3"></span>bool <code class="sig-name descname">dot1x</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos16macsec_profile_t5dot1xEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Getter for ‘dot1x’: if set, derive MAC security keys from IEEE 802.1X based port authentication. This will be disabled if a key is provided manually. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos16macsec_profile_t8dot1x_isEb">
+<span id="_CPPv3N3eos16macsec_profile_t8dot1x_isEb"></span><span id="_CPPv2N3eos16macsec_profile_t8dot1x_isEb"></span><span id="eos::macsec_profile_t::dot1x_is__b"></span><span class="target" id="classeos_1_1macsec__profile__t_1a6665f96e8603e433202bcde47db49503"></span>void <code class="sig-name descname">dot1x_is</code><span class="sig-paren">(</span>bool <em>dot1x</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos16macsec_profile_t8dot1x_isEb" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Setter for ‘dot1x’. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos16macsec_profile_t11include_sciEv">
+<span id="_CPPv3NK3eos16macsec_profile_t11include_sciEv"></span><span id="_CPPv2NK3eos16macsec_profile_t11include_sciEv"></span><span id="eos::macsec_profile_t::include_sciC"></span><span class="target" id="classeos_1_1macsec__profile__t_1a8c10ebc87a0ffbe2e053f9eec7f3058f"></span>bool <code class="sig-name descname">include_sci</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos16macsec_profile_t11include_sciEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Getter for ‘include_sci’: if set, include secure channel identifier (SCI) in data packets. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos16macsec_profile_t14include_sci_isEb">
+<span id="_CPPv3N3eos16macsec_profile_t14include_sci_isEb"></span><span id="_CPPv2N3eos16macsec_profile_t14include_sci_isEb"></span><span id="eos::macsec_profile_t::include_sci_is__b"></span><span class="target" id="classeos_1_1macsec__profile__t_1a852164b8a48c6bee9f0fbc2080cb9d72"></span>void <code class="sig-name descname">include_sci_is</code><span class="sig-paren">(</span>bool <em>include_sci</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos16macsec_profile_t14include_sci_isEb" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Setter for ‘include_sci’. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos16macsec_profile_t11bypass_lldpEv">
+<span id="_CPPv3NK3eos16macsec_profile_t11bypass_lldpEv"></span><span id="_CPPv2NK3eos16macsec_profile_t11bypass_lldpEv"></span><span id="eos::macsec_profile_t::bypass_lldpC"></span><span class="target" id="classeos_1_1macsec__profile__t_1a81f5dfb236b82127f6feec8141ad7ca4"></span>bool <code class="sig-name descname">bypass_lldp</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos16macsec_profile_t11bypass_lldpEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Getter for ‘bypass_lldp’: if set, transmit/receive LLDP frames without protection : deprecated in favour of lldp_bypass_level. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos16macsec_profile_t14bypass_lldp_isEb">
+<span id="_CPPv3N3eos16macsec_profile_t14bypass_lldp_isEb"></span><span id="_CPPv2N3eos16macsec_profile_t14bypass_lldp_isEb"></span><span id="eos::macsec_profile_t::bypass_lldp_is__b"></span><span class="target" id="classeos_1_1macsec__profile__t_1a9713b7972a4f67cf2b94af0e6c5c5e05"></span>void <code class="sig-name descname">bypass_lldp_is</code><span class="sig-paren">(</span>bool <em>bypass_lldp</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos16macsec_profile_t14bypass_lldp_isEb" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Setter for ‘bypass_lldp’: deprecated in favour of lldp_bypass_level_is. Both <code class="docutils literal notranslate"><span class="pre">bypass_lldp</span></code> and <code class="docutils literal notranslate"><span class="pre">lldp_bypass_level</span></code> operate on the same internal attribute. A value of false corresponds to the macsec_bypass_t value BYPASS_NULL while a value of true corresponds to BYPASS_AUTHORIZED. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos16macsec_profile_t17lldp_bypass_levelEv">
+<span id="_CPPv3NK3eos16macsec_profile_t17lldp_bypass_levelEv"></span><span id="_CPPv2NK3eos16macsec_profile_t17lldp_bypass_levelEv"></span><span id="eos::macsec_profile_t::lldp_bypass_levelC"></span><span class="target" id="classeos_1_1macsec__profile__t_1a2eaed74d1cfad46325f34fd176f0a716"></span><a class="reference internal" href="#_CPPv4N3eos15macsec_bypass_tE" title="eos::macsec_bypass_t">macsec_bypass_t</a> <code class="sig-name descname">lldp_bypass_level</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos16macsec_profile_t17lldp_bypass_levelEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Getter for ‘lldp_bypass_level’: If set, transmit/receive LLDP frames without Macsec encryption when port is authorized/unauthorized. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos16macsec_profile_t20lldp_bypass_level_isE15macsec_bypass_t">
+<span id="_CPPv3N3eos16macsec_profile_t20lldp_bypass_level_isE15macsec_bypass_t"></span><span id="_CPPv2N3eos16macsec_profile_t20lldp_bypass_level_isE15macsec_bypass_t"></span><span id="eos::macsec_profile_t::lldp_bypass_level_is__macsec_bypass_t"></span><span class="target" id="classeos_1_1macsec__profile__t_1abf213f5af2301a1fb1a326bd9d810ce2"></span>void <code class="sig-name descname">lldp_bypass_level_is</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos15macsec_bypass_tE" title="eos::macsec_bypass_t">macsec_bypass_t</a> <em>lldp_bypass_level</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos16macsec_profile_t20lldp_bypass_level_isE15macsec_bypass_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Setter for ‘lldp_bypass_level’. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos16macsec_profile_t14traffic_policyEv">
+<span id="_CPPv3NK3eos16macsec_profile_t14traffic_policyEv"></span><span id="_CPPv2NK3eos16macsec_profile_t14traffic_policyEv"></span><span id="eos::macsec_profile_t::traffic_policyC"></span><span class="target" id="classeos_1_1macsec__profile__t_1a28b50ea44271cb5acab9cfb3e100c516"></span><a class="reference internal" href="#_CPPv4N3eos31macsec_profile_traffic_policy_tE" title="eos::macsec_profile_traffic_policy_t">macsec_profile_traffic_policy_t</a> <code class="sig-name descname">traffic_policy</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos16macsec_profile_t14traffic_policyEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Getter for ‘traffic_policy’: traffic policy to be used by an interface. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos16macsec_profile_t17traffic_policy_isE31macsec_profile_traffic_policy_t">
+<span id="_CPPv3N3eos16macsec_profile_t17traffic_policy_isE31macsec_profile_traffic_policy_t"></span><span id="_CPPv2N3eos16macsec_profile_t17traffic_policy_isE31macsec_profile_traffic_policy_t"></span><span id="eos::macsec_profile_t::traffic_policy_is__macsec_profile_traffic_policy_t"></span><span class="target" id="classeos_1_1macsec__profile__t_1ae642abb1c0ed225b7b671c1acebedcc4"></span>void <code class="sig-name descname">traffic_policy_is</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos31macsec_profile_traffic_policy_tE" title="eos::macsec_profile_traffic_policy_t">macsec_profile_traffic_policy_t</a> <em>traffic_policy</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos16macsec_profile_t17traffic_policy_isE31macsec_profile_traffic_policy_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Setter for ‘traffic_policy’. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos16macsec_profile_t17allow_unprotectedEv">
+<span id="_CPPv3NK3eos16macsec_profile_t17allow_unprotectedEv"></span><span id="_CPPv2NK3eos16macsec_profile_t17allow_unprotectedEv"></span><span id="eos::macsec_profile_t::allow_unprotectedC"></span><span class="target" id="classeos_1_1macsec__profile__t_1a1ec4e55af46df8b432b5662033e8cca4"></span>bool <code class="sig-name descname">allow_unprotected</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos16macsec_profile_t17allow_unprotectedEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Getter for ‘allow_unprotected’: deprecated in favour of traffic_policy. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos16macsec_profile_t20allow_unprotected_isEb">
+<span id="_CPPv3N3eos16macsec_profile_t20allow_unprotected_isEb"></span><span id="_CPPv2N3eos16macsec_profile_t20allow_unprotected_isEb"></span><span id="eos::macsec_profile_t::allow_unprotected_is__b"></span><span class="target" id="classeos_1_1macsec__profile__t_1a80292297ac13e788eec0bd92884e5163"></span>void <code class="sig-name descname">allow_unprotected_is</code><span class="sig-paren">(</span>bool <em>allow_unprotected</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos16macsec_profile_t20allow_unprotected_isEb" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Setter for ‘allow_unprotected’: deprecated in favour of traffic_policy. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos16macsec_profile_t17replay_protectionEv">
+<span id="_CPPv3NK3eos16macsec_profile_t17replay_protectionEv"></span><span id="_CPPv2NK3eos16macsec_profile_t17replay_protectionEv"></span><span id="eos::macsec_profile_t::replay_protectionC"></span><span class="target" id="classeos_1_1macsec__profile__t_1a4c76f32b3f2c7212201051435d275b2c"></span>bool <code class="sig-name descname">replay_protection</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos16macsec_profile_t17replay_protectionEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Getter for ‘replay_protection’: if set, enable replay protection. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos16macsec_profile_t20replay_protection_isEb">
+<span id="_CPPv3N3eos16macsec_profile_t20replay_protection_isEb"></span><span id="_CPPv2N3eos16macsec_profile_t20replay_protection_isEb"></span><span id="eos::macsec_profile_t::replay_protection_is__b"></span><span class="target" id="classeos_1_1macsec__profile__t_1af561cbe31df95e52e67d1e9fd29f1c2f"></span>void <code class="sig-name descname">replay_protection_is</code><span class="sig-paren">(</span>bool <em>replay_protection</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos16macsec_profile_t20replay_protection_isEb" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Setter for ‘replay_protection’. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos16macsec_profile_t24replay_protection_windowEv">
+<span id="_CPPv3NK3eos16macsec_profile_t24replay_protection_windowEv"></span><span id="_CPPv2NK3eos16macsec_profile_t24replay_protection_windowEv"></span><span id="eos::macsec_profile_t::replay_protection_windowC"></span><span class="target" id="classeos_1_1macsec__profile__t_1a89c68e33d07bcda4bf3213f81c1754ba"></span>uint32_t <code class="sig-name descname">replay_protection_window</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos16macsec_profile_t24replay_protection_windowEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Getter for ‘replay_protection_window’: replay protection window size. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos16macsec_profile_t27replay_protection_window_isE8uint32_t">
+<span id="_CPPv3N3eos16macsec_profile_t27replay_protection_window_isE8uint32_t"></span><span id="_CPPv2N3eos16macsec_profile_t27replay_protection_window_isE8uint32_t"></span><span id="eos::macsec_profile_t::replay_protection_window_is__uint32_t"></span><span class="target" id="classeos_1_1macsec__profile__t_1af65f762f7b090cbb0d5794ffc8517af5"></span>void <code class="sig-name descname">replay_protection_window_is</code><span class="sig-paren">(</span>uint32_t <em>replay_protection_window</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos16macsec_profile_t27replay_protection_window_isE8uint32_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Setter for ‘replay_protection_window’. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos16macsec_profile_t24key_retirement_immediateEv">
+<span id="_CPPv3NK3eos16macsec_profile_t24key_retirement_immediateEv"></span><span id="_CPPv2NK3eos16macsec_profile_t24key_retirement_immediateEv"></span><span id="eos::macsec_profile_t::key_retirement_immediateC"></span><span class="target" id="classeos_1_1macsec__profile__t_1a6070f157ee6a6f3572d27e588d251992"></span>bool <code class="sig-name descname">key_retirement_immediate</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos16macsec_profile_t24key_retirement_immediateEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Getter for ‘key_retirement_immediate’: if set, enable key retirement. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos16macsec_profile_t27key_retirement_immediate_isEb">
+<span id="_CPPv3N3eos16macsec_profile_t27key_retirement_immediate_isEb"></span><span id="_CPPv2N3eos16macsec_profile_t27key_retirement_immediate_isEb"></span><span id="eos::macsec_profile_t::key_retirement_immediate_is__b"></span><span class="target" id="classeos_1_1macsec__profile__t_1ad2a690b6aee5ebc81d209320e283734b"></span>void <code class="sig-name descname">key_retirement_immediate_is</code><span class="sig-paren">(</span>bool <em>key_retirement_immediate</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos16macsec_profile_t27key_retirement_immediate_isEb" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Setter for ‘key_retirement_immediate’. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos16macsec_profile_t5intfsEv">
+<span id="_CPPv3NK3eos16macsec_profile_t5intfsEv"></span><span id="_CPPv2NK3eos16macsec_profile_t5intfsEv"></span><span id="eos::macsec_profile_t::intfsC"></span><span class="target" id="classeos_1_1macsec__profile__t_1ad2b749442f5a76162c95d879d02266f0"></span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::forward_list&lt;<a class="reference internal" href="intf.html#_CPPv4N3eos9intf_id_tE" title="eos::intf_id_t">intf_id_t</a>&gt; <em class="property">const</em> &amp;<code class="sig-name descname">intfs</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos16macsec_profile_t5intfsEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Getter for ‘intfs’: Interfaces with this profile configured. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos16macsec_profile_teqERK16macsec_profile_t">
+<span id="_CPPv3NK3eos16macsec_profile_teqERK16macsec_profile_t"></span><span id="_CPPv2NK3eos16macsec_profile_teqERK16macsec_profile_t"></span><span id="eos::macsec_profile_t::eq-operator__macsec_profile_tCRC"></span><span class="target" id="classeos_1_1macsec__profile__t_1ae537a662cabe188ae78a282880744210"></span>bool <code class="sig-name descname">operator==</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos16macsec_profile_tE" title="eos::macsec_profile_t">macsec_profile_t</a> <em class="property">const</em> &amp;<em>other</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos16macsec_profile_teqERK16macsec_profile_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos16macsec_profile_tneERK16macsec_profile_t">
+<span id="_CPPv3NK3eos16macsec_profile_tneERK16macsec_profile_t"></span><span id="_CPPv2NK3eos16macsec_profile_tneERK16macsec_profile_t"></span><span id="eos::macsec_profile_t::neq-operator__macsec_profile_tCRC"></span><span class="target" id="classeos_1_1macsec__profile__t_1adb64b5adf5d4a2b64f6154b0af9359e8"></span>bool <code class="sig-name descname">operator!=</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos16macsec_profile_tE" title="eos::macsec_profile_t">macsec_profile_t</a> <em class="property">const</em> &amp;<em>other</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos16macsec_profile_tneERK16macsec_profile_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos16macsec_profile_tltERK16macsec_profile_t">
+<span id="_CPPv3NK3eos16macsec_profile_tltERK16macsec_profile_t"></span><span id="_CPPv2NK3eos16macsec_profile_tltERK16macsec_profile_t"></span><span id="eos::macsec_profile_t::lt-operator__macsec_profile_tCRC"></span><span class="target" id="classeos_1_1macsec__profile__t_1a7076e5fc9b1e80451c008eabdfd1e2f1"></span>bool <code class="sig-name descname">operator&lt;</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos16macsec_profile_tE" title="eos::macsec_profile_t">macsec_profile_t</a> <em class="property">const</em> &amp;<em>other</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos16macsec_profile_tltERK16macsec_profile_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos16macsec_profile_t4hashEv">
+<span id="_CPPv3NK3eos16macsec_profile_t4hashEv"></span><span id="_CPPv2NK3eos16macsec_profile_t4hashEv"></span><span id="eos::macsec_profile_t::hashC"></span><span class="target" id="classeos_1_1macsec__profile__t_1ab929fc6e4356306228b2c0889e3478c7"></span>uint32_t <code class="sig-name descname">hash</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos16macsec_profile_t4hashEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>The hash function for type <a class="reference internal" href="#classeos_1_1macsec__profile__t"><span class="std std-ref">macsec_profile_t</span></a>. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos16macsec_profile_t6mix_meER8hash_mix">
+<span id="_CPPv3NK3eos16macsec_profile_t6mix_meER8hash_mix"></span><span id="_CPPv2NK3eos16macsec_profile_t6mix_meER8hash_mix"></span><span id="eos::macsec_profile_t::mix_me__hash_mixRC"></span><span class="target" id="classeos_1_1macsec__profile__t_1a5144842d7f7ba35f58b09c8f2ac28818"></span>void <code class="sig-name descname">mix_me</code><span class="sig-paren">(</span><a class="reference internal" href="hash_mix.html#_CPPv4N3eos8hash_mixE" title="eos::hash_mix">hash_mix</a> &amp;<em>h</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos16macsec_profile_t6mix_meER8hash_mix" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>The hash mix function for type <a class="reference internal" href="#classeos_1_1macsec__profile__t"><span class="std std-ref">macsec_profile_t</span></a>. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos16macsec_profile_t9to_stringEv">
+<span id="_CPPv3NK3eos16macsec_profile_t9to_stringEv"></span><span id="_CPPv2NK3eos16macsec_profile_t9to_stringEv"></span><span id="eos::macsec_profile_t::to_stringC"></span><span class="target" id="classeos_1_1macsec__profile__t_1a8a664923b6018d2ee286b51b57d6a9cb"></span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::string <code class="sig-name descname">to_string</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos16macsec_profile_t9to_stringEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Returns a string representation of the current object’s values. </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-private-members">Private Members</p>
+<dl class="cpp var">
+<dt id="_CPPv4N3eos16macsec_profile_t5pimplE">
+<span id="_CPPv3N3eos16macsec_profile_t5pimplE"></span><span id="_CPPv2N3eos16macsec_profile_t5pimplE"></span><span id="eos::macsec_profile_t::pimpl__std::shared_ptr:macsec_profile_impl_t:"></span><span class="target" id="classeos_1_1macsec__profile__t_1a6180fe4e1e3fd7db761ebf23b76fd0e5"></span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::shared_ptr&lt;macsec_profile_impl_t&gt; <code class="sig-name descname">pimpl</code><a class="headerlink" href="#_CPPv4N3eos16macsec_profile_t5pimplE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-friends">Friends</p>
+<dl class="cpp function">
+<dt id="_CPPv4N3eos16macsec_profile_tlsERNSt7ostreamERK16macsec_profile_t">
+<span id="_CPPv3N3eos16macsec_profile_tlsERNSt7ostreamERK16macsec_profile_t"></span><span id="_CPPv2N3eos16macsec_profile_tlsERNSt7ostreamERK16macsec_profile_t"></span><span id="eos::macsec_profile_t::lshift-operator__osR.macsec_profile_tCR"></span><span class="target" id="classeos_1_1macsec__profile__t_1ab86821ac9c99a483e5b9bbe56a254292"></span><em class="property">friend</em> <a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::ostream &amp;<code class="sig-name descname">operator&lt;&lt;</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::ostream &amp;<em>os</em>, <em class="property">const</em> <a class="reference internal" href="#_CPPv4N3eos16macsec_profile_tE" title="eos::macsec_profile_t">macsec_profile_t</a> &amp;<em>obj</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos16macsec_profile_tlsERNSt7ostreamERK16macsec_profile_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>A utility stream operator that adds a string representation of <a class="reference internal" href="#classeos_1_1macsec__profile__t"><span class="std std-ref">macsec_profile_t</span></a> to the ostream. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos16macsec_profile_t7addIntfER16macsec_profile_t9intf_id_t">
+<span id="_CPPv3N3eos16macsec_profile_t7addIntfER16macsec_profile_t9intf_id_t"></span><span id="_CPPv2N3eos16macsec_profile_t7addIntfER16macsec_profile_t9intf_id_t"></span><span id="eos::macsec_profile_t::addIntf__macsec_profile_tR.intf_id_t"></span><span class="target" id="classeos_1_1macsec__profile__t_1ad342f27468313ebc916aff5182b27c75"></span><em class="property">friend</em> void <code class="sig-name descname">addIntf</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos16macsec_profile_tE" title="eos::macsec_profile_t">macsec_profile_t</a> &amp;<em>profile</em>, <a class="reference internal" href="intf.html#_CPPv4N3eos9intf_id_tE" title="eos::intf_id_t">intf_id_t</a> <em>intfId</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos16macsec_profile_t7addIntfER16macsec_profile_t9intf_id_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="cpp class">
+<dt id="_CPPv4N3eos20macsec_intf_status_tE">
+<span id="_CPPv3N3eos20macsec_intf_status_tE"></span><span id="_CPPv2N3eos20macsec_intf_status_tE"></span><span id="eos::macsec_intf_status_t"></span><span class="target" id="classeos_1_1macsec__intf__status__t"></span><em class="property">class </em><code class="sig-name descname">macsec_intf_status_t</code><a class="headerlink" href="#_CPPv4N3eos20macsec_intf_status_tE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><div class="docutils container">
+<em>#include &lt;macsec.h&gt;</em></div>
+<p>Information regarding the MACsec status of an interface. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
+<dl class="cpp function">
+<dt id="_CPPv4N3eos20macsec_intf_status_t20macsec_intf_status_tEv">
+<span id="_CPPv3N3eos20macsec_intf_status_t20macsec_intf_status_tEv"></span><span id="_CPPv2N3eos20macsec_intf_status_t20macsec_intf_status_tEv"></span><span id="eos::macsec_intf_status_t::macsec_intf_status_t"></span><span class="target" id="classeos_1_1macsec__intf__status__t_1a47c0f5e2dc9d68f61ff2f2fb9ebf360e"></span><code class="sig-name descname">macsec_intf_status_t</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos20macsec_intf_status_t20macsec_intf_status_tEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos20macsec_intf_status_t20macsec_intf_status_tERK20macsec_intf_status_t">
+<span id="_CPPv3N3eos20macsec_intf_status_t20macsec_intf_status_tERK20macsec_intf_status_t"></span><span id="_CPPv2N3eos20macsec_intf_status_t20macsec_intf_status_tERK20macsec_intf_status_t"></span><span id="eos::macsec_intf_status_t::macsec_intf_status_t__macsec_intf_status_tCR"></span><span class="target" id="classeos_1_1macsec__intf__status__t_1a58f6fe3398c32e499bd2ffb022c576f7"></span><code class="sig-name descname">macsec_intf_status_t</code><span class="sig-paren">(</span><em class="property">const</em> <a class="reference internal" href="#_CPPv4N3eos20macsec_intf_status_t20macsec_intf_status_tERK20macsec_intf_status_t" title="eos::macsec_intf_status_t::macsec_intf_status_t">macsec_intf_status_t</a> &amp;<em>other</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos20macsec_intf_status_t20macsec_intf_status_tERK20macsec_intf_status_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos20macsec_intf_status_taSERK20macsec_intf_status_t">
+<span id="_CPPv3N3eos20macsec_intf_status_taSERK20macsec_intf_status_t"></span><span id="_CPPv2N3eos20macsec_intf_status_taSERK20macsec_intf_status_t"></span><span id="eos::macsec_intf_status_t::assign-operator__macsec_intf_status_tCR"></span><span class="target" id="classeos_1_1macsec__intf__status__t_1a560f041aa89b549cc3ae668c0c08f24a"></span><a class="reference internal" href="#_CPPv4N3eos20macsec_intf_status_tE" title="eos::macsec_intf_status_t">macsec_intf_status_t</a> &amp;<code class="sig-name descname">operator=</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos20macsec_intf_status_tE" title="eos::macsec_intf_status_t">macsec_intf_status_t</a> <em class="property">const</em> &amp;<em>other</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos20macsec_intf_status_taSERK20macsec_intf_status_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos20macsec_intf_status_t10key_statusEv">
+<span id="_CPPv3NK3eos20macsec_intf_status_t10key_statusEv"></span><span id="_CPPv2NK3eos20macsec_intf_status_t10key_statusEv"></span><span id="eos::macsec_intf_status_t::key_statusC"></span><span class="target" id="classeos_1_1macsec__intf__status__t_1a90d943e4087518be36bb814d55eccdfc"></span><a class="reference internal" href="#_CPPv4N3eos24macsec_intf_key_status_tE" title="eos::macsec_intf_key_status_t">macsec_intf_key_status_t</a> <code class="sig-name descname">key_status</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos20macsec_intf_status_t10key_statusEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos20macsec_intf_status_t14traffic_statusEv">
+<span id="_CPPv3NK3eos20macsec_intf_status_t14traffic_statusEv"></span><span id="_CPPv2NK3eos20macsec_intf_status_t14traffic_statusEv"></span><span id="eos::macsec_intf_status_t::traffic_statusC"></span><span class="target" id="classeos_1_1macsec__intf__status__t_1a29e5ffc0e14b94b80aac28cc3e266c30"></span><a class="reference internal" href="#_CPPv4N3eos28macsec_intf_traffic_status_tE" title="eos::macsec_intf_traffic_status_t">macsec_intf_traffic_status_t</a> <code class="sig-name descname">traffic_status</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos20macsec_intf_status_t14traffic_statusEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos20macsec_intf_status_t9status_isE24macsec_intf_key_status_t">
+<span id="_CPPv3N3eos20macsec_intf_status_t9status_isE24macsec_intf_key_status_t"></span><span id="_CPPv2N3eos20macsec_intf_status_t9status_isE24macsec_intf_key_status_t"></span><span id="eos::macsec_intf_status_t::status_is__macsec_intf_key_status_t"></span><span class="target" id="classeos_1_1macsec__intf__status__t_1a3665854fd3613edde35c8ef7c15a28e3"></span>void <code class="sig-name descname">status_is</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos24macsec_intf_key_status_tE" title="eos::macsec_intf_key_status_t">macsec_intf_key_status_t</a> <em>status</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos20macsec_intf_status_t9status_isE24macsec_intf_key_status_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Deprecated: Setter for ‘status’. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos20macsec_intf_status_t6statusEv">
+<span id="_CPPv3NK3eos20macsec_intf_status_t6statusEv"></span><span id="_CPPv2NK3eos20macsec_intf_status_t6statusEv"></span><span id="eos::macsec_intf_status_t::statusC"></span><span class="target" id="classeos_1_1macsec__intf__status__t_1a60a2445bbcf0c50af3c4f55a63d37d62"></span><a class="reference internal" href="#_CPPv4N3eos24macsec_intf_key_status_tE" title="eos::macsec_intf_key_status_t">macsec_intf_key_status_t</a> <code class="sig-name descname">status</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos20macsec_intf_status_t6statusEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Deprecated: Getter for ‘status’. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos20macsec_intf_status_teqERK20macsec_intf_status_t">
+<span id="_CPPv3NK3eos20macsec_intf_status_teqERK20macsec_intf_status_t"></span><span id="_CPPv2NK3eos20macsec_intf_status_teqERK20macsec_intf_status_t"></span><span id="eos::macsec_intf_status_t::eq-operator__macsec_intf_status_tCRC"></span><span class="target" id="classeos_1_1macsec__intf__status__t_1ab69c5c8d138335b30713eb436cafebd9"></span>bool <code class="sig-name descname">operator==</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos20macsec_intf_status_tE" title="eos::macsec_intf_status_t">macsec_intf_status_t</a> <em class="property">const</em> &amp;<em>other</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos20macsec_intf_status_teqERK20macsec_intf_status_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos20macsec_intf_status_tneERK20macsec_intf_status_t">
+<span id="_CPPv3NK3eos20macsec_intf_status_tneERK20macsec_intf_status_t"></span><span id="_CPPv2NK3eos20macsec_intf_status_tneERK20macsec_intf_status_t"></span><span id="eos::macsec_intf_status_t::neq-operator__macsec_intf_status_tCRC"></span><span class="target" id="classeos_1_1macsec__intf__status__t_1a2c3ef10ffa9205246ae63a6f9c2b89da"></span>bool <code class="sig-name descname">operator!=</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos20macsec_intf_status_tE" title="eos::macsec_intf_status_t">macsec_intf_status_t</a> <em class="property">const</em> &amp;<em>other</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos20macsec_intf_status_tneERK20macsec_intf_status_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos20macsec_intf_status_tltERK20macsec_intf_status_t">
+<span id="_CPPv3NK3eos20macsec_intf_status_tltERK20macsec_intf_status_t"></span><span id="_CPPv2NK3eos20macsec_intf_status_tltERK20macsec_intf_status_t"></span><span id="eos::macsec_intf_status_t::lt-operator__macsec_intf_status_tCRC"></span><span class="target" id="classeos_1_1macsec__intf__status__t_1adaa848c8da75e32e1d60464580f4f5b3"></span>bool <code class="sig-name descname">operator&lt;</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos20macsec_intf_status_tE" title="eos::macsec_intf_status_t">macsec_intf_status_t</a> <em class="property">const</em> &amp;<em>other</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos20macsec_intf_status_tltERK20macsec_intf_status_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos20macsec_intf_status_t4hashEv">
+<span id="_CPPv3NK3eos20macsec_intf_status_t4hashEv"></span><span id="_CPPv2NK3eos20macsec_intf_status_t4hashEv"></span><span id="eos::macsec_intf_status_t::hashC"></span><span class="target" id="classeos_1_1macsec__intf__status__t_1a1394152dbef9738b4ba35a2c15055818"></span>uint32_t <code class="sig-name descname">hash</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos20macsec_intf_status_t4hashEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>The hash function for type <a class="reference internal" href="#classeos_1_1macsec__intf__status__t"><span class="std std-ref">macsec_intf_status_t</span></a>. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos20macsec_intf_status_t6mix_meER8hash_mix">
+<span id="_CPPv3NK3eos20macsec_intf_status_t6mix_meER8hash_mix"></span><span id="_CPPv2NK3eos20macsec_intf_status_t6mix_meER8hash_mix"></span><span id="eos::macsec_intf_status_t::mix_me__hash_mixRC"></span><span class="target" id="classeos_1_1macsec__intf__status__t_1aef027da03011424be40bd392dca57bf2"></span>void <code class="sig-name descname">mix_me</code><span class="sig-paren">(</span><a class="reference internal" href="hash_mix.html#_CPPv4N3eos8hash_mixE" title="eos::hash_mix">hash_mix</a> &amp;<em>h</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos20macsec_intf_status_t6mix_meER8hash_mix" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>The hash mix function for type <a class="reference internal" href="#classeos_1_1macsec__intf__status__t"><span class="std std-ref">macsec_intf_status_t</span></a>. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos20macsec_intf_status_t9to_stringEv">
+<span id="_CPPv3NK3eos20macsec_intf_status_t9to_stringEv"></span><span id="_CPPv2NK3eos20macsec_intf_status_t9to_stringEv"></span><span id="eos::macsec_intf_status_t::to_stringC"></span><span class="target" id="classeos_1_1macsec__intf__status__t_1a7322eeef5ed828bbc81d8329cf9adee3"></span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::string <code class="sig-name descname">to_string</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos20macsec_intf_status_t9to_stringEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Returns a string representation of the current object’s values. </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-private-members">Private Members</p>
+<dl class="cpp var">
+<dt id="_CPPv4N3eos20macsec_intf_status_t5pimplE">
+<span id="_CPPv3N3eos20macsec_intf_status_t5pimplE"></span><span id="_CPPv2N3eos20macsec_intf_status_t5pimplE"></span><span id="eos::macsec_intf_status_t::pimpl__std::shared_ptr:macsec_intf_status_impl_t:"></span><span class="target" id="classeos_1_1macsec__intf__status__t_1a7dcf564aed1681a3aa81843641b1bae3"></span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::shared_ptr&lt;macsec_intf_status_impl_t&gt; <code class="sig-name descname">pimpl</code><a class="headerlink" href="#_CPPv4N3eos20macsec_intf_status_t5pimplE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-friends">Friends</p>
+<dl class="cpp function">
+<dt id="_CPPv4N3eos20macsec_intf_status_tlsERNSt7ostreamERK20macsec_intf_status_t">
+<span id="_CPPv3N3eos20macsec_intf_status_tlsERNSt7ostreamERK20macsec_intf_status_t"></span><span id="_CPPv2N3eos20macsec_intf_status_tlsERNSt7ostreamERK20macsec_intf_status_t"></span><span id="eos::macsec_intf_status_t::lshift-operator__osR.macsec_intf_status_tCR"></span><span class="target" id="classeos_1_1macsec__intf__status__t_1a3e0e18c308ece4d114b254967a74ba50"></span><em class="property">friend</em> <a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::ostream &amp;<code class="sig-name descname">operator&lt;&lt;</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::ostream &amp;<em>os</em>, <em class="property">const</em> <a class="reference internal" href="#_CPPv4N3eos20macsec_intf_status_tE" title="eos::macsec_intf_status_t">macsec_intf_status_t</a> &amp;<em>obj</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos20macsec_intf_status_tlsERNSt7ostreamERK20macsec_intf_status_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>A utility stream operator that adds a string representation of <a class="reference internal" href="#classeos_1_1macsec__intf__status__t"><span class="std std-ref">macsec_intf_status_t</span></a> to the ostream. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos20macsec_intf_status_t9status_isER20macsec_intf_status_t24macsec_intf_key_status_t28macsec_intf_traffic_status_t">
+<span id="_CPPv3N3eos20macsec_intf_status_t9status_isER20macsec_intf_status_t24macsec_intf_key_status_t28macsec_intf_traffic_status_t"></span><span id="_CPPv2N3eos20macsec_intf_status_t9status_isER20macsec_intf_status_t24macsec_intf_key_status_t28macsec_intf_traffic_status_t"></span><span id="eos::macsec_intf_status_t::status_is__macsec_intf_status_tR.macsec_intf_key_status_t.macsec_intf_traffic_status_t"></span><span class="target" id="classeos_1_1macsec__intf__status__t_1a600ce121452fedf82368282598cf5f5c"></span><em class="property">friend</em> void <code class="sig-name descname">status_is</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos20macsec_intf_status_tE" title="eos::macsec_intf_status_t">macsec_intf_status_t</a> &amp;<em>status</em>, <a class="reference internal" href="#_CPPv4N3eos24macsec_intf_key_status_tE" title="eos::macsec_intf_key_status_t">macsec_intf_key_status_t</a> <em>keyStatus</em>, <a class="reference internal" href="#_CPPv4N3eos28macsec_intf_traffic_status_tE" title="eos::macsec_intf_traffic_status_t">macsec_intf_traffic_status_t</a> <em>trafficStatus</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos20macsec_intf_status_t9status_isER20macsec_intf_status_t24macsec_intf_key_status_t28macsec_intf_traffic_status_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="cpp class">
+<dt id="_CPPv4N3eos22macsec_intf_counters_tE">
+<span id="_CPPv3N3eos22macsec_intf_counters_tE"></span><span id="_CPPv2N3eos22macsec_intf_counters_tE"></span><span id="eos::macsec_intf_counters_t"></span><span class="target" id="classeos_1_1macsec__intf__counters__t"></span><em class="property">class </em><code class="sig-name descname">macsec_intf_counters_t</code><a class="headerlink" href="#_CPPv4N3eos22macsec_intf_counters_tE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><div class="docutils container">
+<em>#include &lt;macsec.h&gt;</em></div>
+<p>MACsec interface counters class. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
+<dl class="cpp function">
+<dt id="_CPPv4N3eos22macsec_intf_counters_t22macsec_intf_counters_tEv">
+<span id="_CPPv3N3eos22macsec_intf_counters_t22macsec_intf_counters_tEv"></span><span id="_CPPv2N3eos22macsec_intf_counters_t22macsec_intf_counters_tEv"></span><span id="eos::macsec_intf_counters_t::macsec_intf_counters_t"></span><span class="target" id="classeos_1_1macsec__intf__counters__t_1aa42ed56b137b8906df30507248c84727"></span><code class="sig-name descname">macsec_intf_counters_t</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos22macsec_intf_counters_t22macsec_intf_counters_tEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos22macsec_intf_counters_t22macsec_intf_counters_tE8uint64_t8uint64_t8uint64_t8uint64_t8uint64_t">
+<span id="_CPPv3N3eos22macsec_intf_counters_t22macsec_intf_counters_tE8uint64_t8uint64_t8uint64_t8uint64_t8uint64_t"></span><span id="_CPPv2N3eos22macsec_intf_counters_t22macsec_intf_counters_tE8uint64_t8uint64_t8uint64_t8uint64_t8uint64_t"></span><span id="eos::macsec_intf_counters_t::macsec_intf_counters_t__uint64_t.uint64_t.uint64_t.uint64_t.uint64_t"></span><span class="target" id="classeos_1_1macsec__intf__counters__t_1a7a7288400b6158ddf617a9fbce6e1410"></span><code class="sig-name descname">macsec_intf_counters_t</code><span class="sig-paren">(</span>uint64_t <em>out_pkts_encrypted</em>, uint64_t <em>out_octets_encrypted</em>, uint64_t <em>in_pkts_decrypted</em>, uint64_t <em>in_octets_decrypted</em>, uint64_t <em>in_pkts_not_valid</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos22macsec_intf_counters_t22macsec_intf_counters_tE8uint64_t8uint64_t8uint64_t8uint64_t8uint64_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos22macsec_intf_counters_t22macsec_intf_counters_tERK22macsec_intf_counters_t">
+<span id="_CPPv3N3eos22macsec_intf_counters_t22macsec_intf_counters_tERK22macsec_intf_counters_t"></span><span id="_CPPv2N3eos22macsec_intf_counters_t22macsec_intf_counters_tERK22macsec_intf_counters_t"></span><span id="eos::macsec_intf_counters_t::macsec_intf_counters_t__macsec_intf_counters_tCR"></span><span class="target" id="classeos_1_1macsec__intf__counters__t_1abd3dc918e82dede08b10553472285160"></span><code class="sig-name descname">macsec_intf_counters_t</code><span class="sig-paren">(</span><em class="property">const</em> <a class="reference internal" href="#_CPPv4N3eos22macsec_intf_counters_t22macsec_intf_counters_tERK22macsec_intf_counters_t" title="eos::macsec_intf_counters_t::macsec_intf_counters_t">macsec_intf_counters_t</a> &amp;<em>other</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos22macsec_intf_counters_t22macsec_intf_counters_tERK22macsec_intf_counters_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos22macsec_intf_counters_taSERK22macsec_intf_counters_t">
+<span id="_CPPv3N3eos22macsec_intf_counters_taSERK22macsec_intf_counters_t"></span><span id="_CPPv2N3eos22macsec_intf_counters_taSERK22macsec_intf_counters_t"></span><span id="eos::macsec_intf_counters_t::assign-operator__macsec_intf_counters_tCR"></span><span class="target" id="classeos_1_1macsec__intf__counters__t_1ae822d7116b522feb5f60dd3bebc35893"></span><a class="reference internal" href="#_CPPv4N3eos22macsec_intf_counters_tE" title="eos::macsec_intf_counters_t">macsec_intf_counters_t</a> &amp;<code class="sig-name descname">operator=</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos22macsec_intf_counters_tE" title="eos::macsec_intf_counters_t">macsec_intf_counters_t</a> <em class="property">const</em> &amp;<em>other</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos22macsec_intf_counters_taSERK22macsec_intf_counters_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos22macsec_intf_counters_t18out_pkts_encryptedEv">
+<span id="_CPPv3NK3eos22macsec_intf_counters_t18out_pkts_encryptedEv"></span><span id="_CPPv2NK3eos22macsec_intf_counters_t18out_pkts_encryptedEv"></span><span id="eos::macsec_intf_counters_t::out_pkts_encryptedC"></span><span class="target" id="classeos_1_1macsec__intf__counters__t_1a2ee0def4c979452801d9bfcb0b473ac0"></span>uint64_t <code class="sig-name descname">out_pkts_encrypted</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos22macsec_intf_counters_t18out_pkts_encryptedEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos22macsec_intf_counters_t20out_octets_encryptedEv">
+<span id="_CPPv3NK3eos22macsec_intf_counters_t20out_octets_encryptedEv"></span><span id="_CPPv2NK3eos22macsec_intf_counters_t20out_octets_encryptedEv"></span><span id="eos::macsec_intf_counters_t::out_octets_encryptedC"></span><span class="target" id="classeos_1_1macsec__intf__counters__t_1a0f16ef8cda135cd7af70eb45a4ae151b"></span>uint64_t <code class="sig-name descname">out_octets_encrypted</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos22macsec_intf_counters_t20out_octets_encryptedEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos22macsec_intf_counters_t17in_pkts_decryptedEv">
+<span id="_CPPv3NK3eos22macsec_intf_counters_t17in_pkts_decryptedEv"></span><span id="_CPPv2NK3eos22macsec_intf_counters_t17in_pkts_decryptedEv"></span><span id="eos::macsec_intf_counters_t::in_pkts_decryptedC"></span><span class="target" id="classeos_1_1macsec__intf__counters__t_1ab11cdbe0928652d05c018728e88f40ac"></span>uint64_t <code class="sig-name descname">in_pkts_decrypted</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos22macsec_intf_counters_t17in_pkts_decryptedEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos22macsec_intf_counters_t19in_octets_decryptedEv">
+<span id="_CPPv3NK3eos22macsec_intf_counters_t19in_octets_decryptedEv"></span><span id="_CPPv2NK3eos22macsec_intf_counters_t19in_octets_decryptedEv"></span><span id="eos::macsec_intf_counters_t::in_octets_decryptedC"></span><span class="target" id="classeos_1_1macsec__intf__counters__t_1a6854c17cde7123a8819be90a965e588b"></span>uint64_t <code class="sig-name descname">in_octets_decrypted</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos22macsec_intf_counters_t19in_octets_decryptedEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos22macsec_intf_counters_t17in_pkts_not_validEv">
+<span id="_CPPv3NK3eos22macsec_intf_counters_t17in_pkts_not_validEv"></span><span id="_CPPv2NK3eos22macsec_intf_counters_t17in_pkts_not_validEv"></span><span id="eos::macsec_intf_counters_t::in_pkts_not_validC"></span><span class="target" id="classeos_1_1macsec__intf__counters__t_1a85d6944741528f222cb4ea0452c40094"></span>uint64_t <code class="sig-name descname">in_pkts_not_valid</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos22macsec_intf_counters_t17in_pkts_not_validEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos22macsec_intf_counters_teqERK22macsec_intf_counters_t">
+<span id="_CPPv3NK3eos22macsec_intf_counters_teqERK22macsec_intf_counters_t"></span><span id="_CPPv2NK3eos22macsec_intf_counters_teqERK22macsec_intf_counters_t"></span><span id="eos::macsec_intf_counters_t::eq-operator__macsec_intf_counters_tCRC"></span><span class="target" id="classeos_1_1macsec__intf__counters__t_1a8a24077d6bb537d595ae62d0023560a0"></span>bool <code class="sig-name descname">operator==</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos22macsec_intf_counters_tE" title="eos::macsec_intf_counters_t">macsec_intf_counters_t</a> <em class="property">const</em> &amp;<em>other</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos22macsec_intf_counters_teqERK22macsec_intf_counters_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos22macsec_intf_counters_tneERK22macsec_intf_counters_t">
+<span id="_CPPv3NK3eos22macsec_intf_counters_tneERK22macsec_intf_counters_t"></span><span id="_CPPv2NK3eos22macsec_intf_counters_tneERK22macsec_intf_counters_t"></span><span id="eos::macsec_intf_counters_t::neq-operator__macsec_intf_counters_tCRC"></span><span class="target" id="classeos_1_1macsec__intf__counters__t_1a19671c6a95a3f4a441aa3db145bcc5f6"></span>bool <code class="sig-name descname">operator!=</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos22macsec_intf_counters_tE" title="eos::macsec_intf_counters_t">macsec_intf_counters_t</a> <em class="property">const</em> &amp;<em>other</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos22macsec_intf_counters_tneERK22macsec_intf_counters_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos22macsec_intf_counters_tltERK22macsec_intf_counters_t">
+<span id="_CPPv3NK3eos22macsec_intf_counters_tltERK22macsec_intf_counters_t"></span><span id="_CPPv2NK3eos22macsec_intf_counters_tltERK22macsec_intf_counters_t"></span><span id="eos::macsec_intf_counters_t::lt-operator__macsec_intf_counters_tCRC"></span><span class="target" id="classeos_1_1macsec__intf__counters__t_1a1e59360c0831e1ec7a53793b16d5735f"></span>bool <code class="sig-name descname">operator&lt;</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos22macsec_intf_counters_tE" title="eos::macsec_intf_counters_t">macsec_intf_counters_t</a> <em class="property">const</em> &amp;<em>other</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos22macsec_intf_counters_tltERK22macsec_intf_counters_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos22macsec_intf_counters_t4hashEv">
+<span id="_CPPv3NK3eos22macsec_intf_counters_t4hashEv"></span><span id="_CPPv2NK3eos22macsec_intf_counters_t4hashEv"></span><span id="eos::macsec_intf_counters_t::hashC"></span><span class="target" id="classeos_1_1macsec__intf__counters__t_1a8cb9931c0dc8517b61b14f8c140b16ef"></span>uint32_t <code class="sig-name descname">hash</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos22macsec_intf_counters_t4hashEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>The hash function for type <a class="reference internal" href="#classeos_1_1macsec__intf__counters__t"><span class="std std-ref">macsec_intf_counters_t</span></a>. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos22macsec_intf_counters_t6mix_meER8hash_mix">
+<span id="_CPPv3NK3eos22macsec_intf_counters_t6mix_meER8hash_mix"></span><span id="_CPPv2NK3eos22macsec_intf_counters_t6mix_meER8hash_mix"></span><span id="eos::macsec_intf_counters_t::mix_me__hash_mixRC"></span><span class="target" id="classeos_1_1macsec__intf__counters__t_1acb958b0c38f9072d6b13b4771af90aad"></span>void <code class="sig-name descname">mix_me</code><span class="sig-paren">(</span><a class="reference internal" href="hash_mix.html#_CPPv4N3eos8hash_mixE" title="eos::hash_mix">hash_mix</a> &amp;<em>h</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos22macsec_intf_counters_t6mix_meER8hash_mix" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>The hash mix function for type <a class="reference internal" href="#classeos_1_1macsec__intf__counters__t"><span class="std std-ref">macsec_intf_counters_t</span></a>. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos22macsec_intf_counters_t9to_stringEv">
+<span id="_CPPv3NK3eos22macsec_intf_counters_t9to_stringEv"></span><span id="_CPPv2NK3eos22macsec_intf_counters_t9to_stringEv"></span><span id="eos::macsec_intf_counters_t::to_stringC"></span><span class="target" id="classeos_1_1macsec__intf__counters__t_1a91936d1af89766ca91b8a80a810ff73a"></span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::string <code class="sig-name descname">to_string</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos22macsec_intf_counters_t9to_stringEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Returns a string representation of the current object’s values. </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-private-members">Private Members</p>
+<dl class="cpp var">
+<dt id="_CPPv4N3eos22macsec_intf_counters_t5pimplE">
+<span id="_CPPv3N3eos22macsec_intf_counters_t5pimplE"></span><span id="_CPPv2N3eos22macsec_intf_counters_t5pimplE"></span><span id="eos::macsec_intf_counters_t::pimpl__std::shared_ptr:macsec_intf_counters_impl_t:"></span><span class="target" id="classeos_1_1macsec__intf__counters__t_1acdbdd4b51c486454927ef3464f129a81"></span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::shared_ptr&lt;macsec_intf_counters_impl_t&gt; <code class="sig-name descname">pimpl</code><a class="headerlink" href="#_CPPv4N3eos22macsec_intf_counters_t5pimplE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-friends">Friends</p>
+<dl class="cpp function">
+<dt id="_CPPv4N3eos22macsec_intf_counters_tlsERNSt7ostreamERK22macsec_intf_counters_t">
+<span id="_CPPv3N3eos22macsec_intf_counters_tlsERNSt7ostreamERK22macsec_intf_counters_t"></span><span id="_CPPv2N3eos22macsec_intf_counters_tlsERNSt7ostreamERK22macsec_intf_counters_t"></span><span id="eos::macsec_intf_counters_t::lshift-operator__osR.macsec_intf_counters_tCR"></span><span class="target" id="classeos_1_1macsec__intf__counters__t_1a0143bf1184d24b1f9436e4521a43b012"></span><em class="property">friend</em> <a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::ostream &amp;<code class="sig-name descname">operator&lt;&lt;</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::ostream &amp;<em>os</em>, <em class="property">const</em> <a class="reference internal" href="#_CPPv4N3eos22macsec_intf_counters_tE" title="eos::macsec_intf_counters_t">macsec_intf_counters_t</a> &amp;<em>obj</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos22macsec_intf_counters_tlsERNSt7ostreamERK22macsec_intf_counters_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>A utility stream operator that adds a string representation of <a class="reference internal" href="#classeos_1_1macsec__intf__counters__t"><span class="std std-ref">macsec_intf_counters_t</span></a> to the ostream. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#"><strong>macsec</strong></a><ul>
+<li><a class="reference internal" href="#type-definitions-in-macsec">Type definitions in <strong>macsec</strong></a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="mac_table.html"
+                        title="previous chapter"><strong>mac_table</strong></a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="mlag.html"
+                        title="next chapter"><strong>mlag</strong></a></p>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="mlag.html" title="mlag"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="mac_table.html" title="mac_table"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Arista EOS SDK 2.22.5 reference</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href=""><strong>macsec</strong></a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2014, Arista Networks.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.4.3.
+    </div>
+  </body>
+</html>
