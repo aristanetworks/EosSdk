@@ -1,0 +1,404 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>eth &#8212; Arista EOS SDK 2.22.5.1 reference</title>
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/eossdk.css" type="text/css" />
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="eth_intf" href="eth_intf.html" />
+    <link rel="prev" title="eapi" href="eapi.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="eth_intf.html" title="eth_intf"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="eapi.html" title="eapi"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Arista EOS SDK 2.22.5.1 reference</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href=""><strong>eth</strong></a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="eth">
+<h1><strong>eth</strong><a class="headerlink" href="#eth" title="Permalink to this headline">¶</a></h1>
+<dl class="cpp type">
+<dt id="_CPPv43eos">
+<span id="_CPPv33eos"></span><span id="_CPPv23eos"></span><span id="eos"></span><span class="target" id="namespaceeos"></span><em class="property">namespace </em><code class="sig-name descname">eos</code><br /></dt>
+<dd></dd></dl>
+
+<div class="section" id="type-definitions-in-eth">
+<h2>Type definitions in <strong>eth</strong><a class="headerlink" href="#type-definitions-in-eth" title="Permalink to this headline">¶</a></h2>
+<dl class="cpp type">
+<dt>
+<span class="target" id="namespaceeos"></span><em class="property">namespace </em><code class="sig-name descname">eos</code><br /></dt>
+<dd><div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-typedefs">Typedefs</p>
+<dl class="cpp type">
+<dt id="_CPPv4N3eos8vlan_setE">
+<span id="_CPPv3N3eos8vlan_setE"></span><span id="_CPPv2N3eos8vlan_setE"></span><span id="eos::vlan_set"></span><span class="target" id="namespaceeos_1a4be71fc1c9db7d61cf74dc3b97d7cb5c"></span><em class="property">typedef </em><a class="reference internal" href="#_CPPv4N3eos10vlan_set_tE" title="eos::vlan_set_t">vlan_set_t</a> <code class="sig-name descname">vlan_set</code><a class="headerlink" href="#_CPPv4N3eos8vlan_setE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>A deprecated alias. Use <a class="reference internal" href="#classeos_1_1vlan__set__t"><span class="std std-ref">eos::vlan_set_t</span></a> instead. </p>
+</dd></dl>
+
+<dl class="cpp type">
+<dt id="_CPPv4N3eos9vlan_id_tE">
+<span id="_CPPv3N3eos9vlan_id_tE"></span><span id="_CPPv2N3eos9vlan_id_tE"></span><span id="eos::vlan_id_t"></span><span class="target" id="namespaceeos_1a6da249f9fdf1d5b4651bb73921dae47b"></span><em class="property">typedef </em>uint16_t <code class="sig-name descname">vlan_id_t</code><a class="headerlink" href="#_CPPv4N3eos9vlan_id_tE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Valid range of 1-4094 (0/4095 are reserved). </p>
+</dd></dl>
+
+</div>
+<dl class="cpp class">
+<dt id="_CPPv4N3eos10vlan_set_tE">
+<span id="_CPPv3N3eos10vlan_set_tE"></span><span id="_CPPv2N3eos10vlan_set_tE"></span><span id="eos::vlan_set_t"></span><span class="target" id="classeos_1_1vlan__set__t"></span><em class="property">class </em><code class="sig-name descname">vlan_set_t</code> : <em class="property">public</em> <a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::bitset&lt;4096&gt;<a class="headerlink" href="#_CPPv4N3eos10vlan_set_tE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><div class="docutils container">
+<em>#include &lt;eth.h&gt;</em></div>
+<p>A bitset representing a collection of VLAN IDs. </p>
+</dd></dl>
+
+<dl class="cpp class">
+<dt id="_CPPv4N3eos10eth_addr_tE">
+<span id="_CPPv3N3eos10eth_addr_tE"></span><span id="_CPPv2N3eos10eth_addr_tE"></span><span id="eos::eth_addr_t"></span><span class="target" id="classeos_1_1eth__addr__t"></span><em class="property">class </em><code class="sig-name descname">eth_addr_t</code><a class="headerlink" href="#_CPPv4N3eos10eth_addr_tE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><div class="docutils container">
+<em>#include &lt;eth.h&gt;</em></div>
+<p>An Ethernet address. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
+<dl class="cpp function">
+<dt id="_CPPv4N3eos10eth_addr_t10eth_addr_tEv">
+<span id="_CPPv3N3eos10eth_addr_t10eth_addr_tEv"></span><span id="_CPPv2N3eos10eth_addr_t10eth_addr_tEv"></span><span id="eos::eth_addr_t::eth_addr_t"></span><span class="target" id="classeos_1_1eth__addr__t_1a6b9d9963478e4d3c59d41c2b81cd2db4"></span><code class="sig-name descname">eth_addr_t</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos10eth_addr_t10eth_addr_tEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Default constructor. Copy constructor and assignment operator implicitly declared. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos10eth_addr_t10eth_addr_tEPKc">
+<span id="_CPPv3N3eos10eth_addr_t10eth_addr_tEPKc"></span><span id="_CPPv2N3eos10eth_addr_t10eth_addr_tEPKc"></span><span id="eos::eth_addr_t::eth_addr_t__cCP"></span><span class="target" id="classeos_1_1eth__addr__t_1a24a821f8b8010fb421251a518b0b2c62"></span><em class="property">explicit</em> <code class="sig-name descname">eth_addr_t</code><span class="sig-paren">(</span>char <em class="property">const</em> *<em>addr</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos10eth_addr_t10eth_addr_tEPKc" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Constructs an address from a char *. Supported formats are xx:xx:xx:xx:xx:xx, xx-xx-xx-xx-xx-xx, or xxxx.xxxx.xxxx. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos10eth_addr_t10eth_addr_tERKNSt6stringE">
+<span id="_CPPv3N3eos10eth_addr_t10eth_addr_tERKNSt6stringE"></span><span id="_CPPv2N3eos10eth_addr_t10eth_addr_tERKNSt6stringE"></span><span id="eos::eth_addr_t::eth_addr_t__ssCR"></span><span class="target" id="classeos_1_1eth__addr__t_1a075300cede5157a9bb3f93c0337a4f9d"></span><em class="property">explicit</em> <code class="sig-name descname">eth_addr_t</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::string <em class="property">const</em> &amp;<em>addr</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos10eth_addr_t10eth_addr_tERKNSt6stringE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Constructs an address from a std::string. Supported formats are xx:xx:xx:xx:xx:xx, xx-xx-xx-xx-xx-xx, or xxxx.xxxx.xxxx. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos10eth_addr_t10eth_addr_tE7uint8_t7uint8_t7uint8_t7uint8_t7uint8_t7uint8_t">
+<span id="_CPPv3N3eos10eth_addr_t10eth_addr_tE7uint8_t7uint8_t7uint8_t7uint8_t7uint8_t7uint8_t"></span><span id="_CPPv2N3eos10eth_addr_t10eth_addr_tE7uint8_t7uint8_t7uint8_t7uint8_t7uint8_t7uint8_t"></span><span id="eos::eth_addr_t::eth_addr_t__uint8_t.uint8_t.uint8_t.uint8_t.uint8_t.uint8_t"></span><span class="target" id="classeos_1_1eth__addr__t_1a351a30b336d45a932d25de6dde1125cb"></span><code class="sig-name descname">eth_addr_t</code><span class="sig-paren">(</span>uint8_t <em>byte0</em>, uint8_t <em>byte1</em>, uint8_t <em>byte2</em>, uint8_t <em>byte3</em>, uint8_t <em>byte4</em>, uint8_t <em>byte5</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos10eth_addr_t10eth_addr_tE7uint8_t7uint8_t7uint8_t7uint8_t7uint8_t7uint8_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Constructs an address from the 6 bytes that make it up. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos10eth_addr_t10eth_addr_tEAL6E_K7uint8_t">
+<span id="_CPPv3N3eos10eth_addr_t10eth_addr_tEAL6E_K7uint8_t"></span><span id="_CPPv2N3eos10eth_addr_t10eth_addr_tEA6_K7uint8_t"></span><span id="eos::eth_addr_t::eth_addr_t__uint8_tCA"></span><span class="target" id="classeos_1_1eth__addr__t_1a549c14fa8a9a5d3605e077a5ce72fdf1"></span><em class="property">explicit</em> <code class="sig-name descname">eth_addr_t</code><span class="sig-paren">(</span>uint8_t <em class="property">const</em> <em>bytes</em>[6]<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos10eth_addr_t10eth_addr_tEAL6E_K7uint8_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Constructs an address from a byte array. The array will be copied. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos10eth_addr_t9to_stringEv">
+<span id="_CPPv3NK3eos10eth_addr_t9to_stringEv"></span><span id="_CPPv2NK3eos10eth_addr_t9to_stringEv"></span><span id="eos::eth_addr_t::to_stringC"></span><span class="target" id="classeos_1_1eth__addr__t_1a69631159b040f58934fe33f4aea07f19"></span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::string <code class="sig-name descname">to_string</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos10eth_addr_t9to_stringEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>String representation of a Ethernet address, e.g “xx:xx:xx:xx:xx:xx”. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos10eth_addr_tntEv">
+<span id="_CPPv3NK3eos10eth_addr_tntEv"></span><span id="_CPPv2NK3eos10eth_addr_tntEv"></span><span id="eos::eth_addr_t::not-operatorC"></span><span class="target" id="classeos_1_1eth__addr__t_1ae988cd221c65be36ca00a0050f0ea471"></span>bool <code class="sig-name descname">operator!</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos10eth_addr_tntEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Only the default MAC address (all zeros) evaluates to false. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos10eth_addr_teqE10eth_addr_t">
+<span id="_CPPv3NK3eos10eth_addr_teqE10eth_addr_t"></span><span id="_CPPv2NK3eos10eth_addr_teqE10eth_addr_t"></span><span id="eos::eth_addr_t::eq-operator__eth_addr_tC"></span><span class="target" id="classeos_1_1eth__addr__t_1a14df43f8437a3687d3f0955a6349ab7c"></span>bool <code class="sig-name descname">operator==</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos10eth_addr_tE" title="eos::eth_addr_t">eth_addr_t</a> <em>other</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos10eth_addr_teqE10eth_addr_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos10eth_addr_tneE10eth_addr_t">
+<span id="_CPPv3NK3eos10eth_addr_tneE10eth_addr_t"></span><span id="_CPPv2NK3eos10eth_addr_tneE10eth_addr_t"></span><span id="eos::eth_addr_t::neq-operator__eth_addr_tC"></span><span class="target" id="classeos_1_1eth__addr__t_1aeb0fac25ac43c5cafca14c98df8f0cd3"></span>bool <code class="sig-name descname">operator!=</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos10eth_addr_tE" title="eos::eth_addr_t">eth_addr_t</a> <em>other</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos10eth_addr_tneE10eth_addr_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos10eth_addr_tltE10eth_addr_t">
+<span id="_CPPv3NK3eos10eth_addr_tltE10eth_addr_t"></span><span id="_CPPv2NK3eos10eth_addr_tltE10eth_addr_t"></span><span id="eos::eth_addr_t::lt-operator__eth_addr_tC"></span><span class="target" id="classeos_1_1eth__addr__t_1a901be98392be7c35f19562939a5805c3"></span>bool <code class="sig-name descname">operator&lt;</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos10eth_addr_tE" title="eos::eth_addr_t">eth_addr_t</a> <em>other</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos10eth_addr_tltE10eth_addr_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos10eth_addr_tcvbEv">
+<span id="_CPPv3NK3eos10eth_addr_tcvbEv"></span><span id="_CPPv2NK3eos10eth_addr_tcvbEv"></span><span id="eos::eth_addr_t::castto-b-operatorC"></span><span class="target" id="classeos_1_1eth__addr__t_1a7cd44c2a8160e9e2b2bba429e9268dc3"></span><em class="property">explicit</em> <code class="sig-name descname">operator bool</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos10eth_addr_tcvbEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos10eth_addr_t4hashEv">
+<span id="_CPPv3NK3eos10eth_addr_t4hashEv"></span><span id="_CPPv2NK3eos10eth_addr_t4hashEv"></span><span id="eos::eth_addr_t::hashC"></span><span class="target" id="classeos_1_1eth__addr__t_1a4386c6c2dca5b091557d315d55f8d760"></span>uint32_t <code class="sig-name descname">hash</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos10eth_addr_t4hashEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>The hash function for type <a class="reference internal" href="#classeos_1_1eth__addr__t"><span class="std std-ref">eth_addr_t</span></a>. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos10eth_addr_t6mix_meER8hash_mix">
+<span id="_CPPv3NK3eos10eth_addr_t6mix_meER8hash_mix"></span><span id="_CPPv2NK3eos10eth_addr_t6mix_meER8hash_mix"></span><span id="eos::eth_addr_t::mix_me__hash_mixRC"></span><span class="target" id="classeos_1_1eth__addr__t_1a1ac34f1958b2517a3a1d03de9e8dcec1"></span>void <code class="sig-name descname">mix_me</code><span class="sig-paren">(</span><a class="reference internal" href="hash_mix.html#_CPPv4N3eos8hash_mixE" title="eos::hash_mix">hash_mix</a> &amp;<em>h</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos10eth_addr_t6mix_meER8hash_mix" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>The hash mix function for type <a class="reference internal" href="#classeos_1_1eth__addr__t"><span class="std std-ref">eth_addr_t</span></a>. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos10eth_addr_t4byteEi">
+<span id="_CPPv3NK3eos10eth_addr_t4byteEi"></span><span id="_CPPv2NK3eos10eth_addr_t4byteEi"></span><span id="eos::eth_addr_t::byte__iC"></span><span class="target" id="classeos_1_1eth__addr__t_1a66ebfbff9d8a1e913369755644ada988"></span>uint8_t <code class="sig-name descname">byte</code><span class="sig-paren">(</span>int <em>index</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos10eth_addr_t4byteEi" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Returns the given byte from the address. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos10eth_addr_t5bytesEPv">
+<span id="_CPPv3NK3eos10eth_addr_t5bytesEPv"></span><span id="_CPPv2NK3eos10eth_addr_t5bytesEPv"></span><span id="eos::eth_addr_t::bytes__voidPC"></span><span class="target" id="classeos_1_1eth__addr__t_1abe29f7c75749aeb559231aa9aaa8d2b9"></span>void <code class="sig-name descname">bytes</code><span class="sig-paren">(</span>void *<em>arr</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos10eth_addr_t5bytesEPv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Copies the bytes of the Ethernet address to the given address. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos10eth_addr_t10is_unicastEv">
+<span id="_CPPv3NK3eos10eth_addr_t10is_unicastEv"></span><span id="_CPPv2NK3eos10eth_addr_t10is_unicastEv"></span><span id="eos::eth_addr_t::is_unicastC"></span><span class="target" id="classeos_1_1eth__addr__t_1ad4c3f43d7158c318e72e565d3ea9e7b3"></span>bool <code class="sig-name descname">is_unicast</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos10eth_addr_t10is_unicastEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Returns true if the Ethernet address is a unicast address. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos10eth_addr_t12is_multicastEv">
+<span id="_CPPv3NK3eos10eth_addr_t12is_multicastEv"></span><span id="_CPPv2NK3eos10eth_addr_t12is_multicastEv"></span><span id="eos::eth_addr_t::is_multicastC"></span><span class="target" id="classeos_1_1eth__addr__t_1aa477c97b0189464677b8ce4dad28144c"></span>bool <code class="sig-name descname">is_multicast</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos10eth_addr_t12is_multicastEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Returns true if the Ethernet address is a multicast address. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos10eth_addr_t12is_broadcastEv">
+<span id="_CPPv3NK3eos10eth_addr_t12is_broadcastEv"></span><span id="_CPPv2NK3eos10eth_addr_t12is_broadcastEv"></span><span id="eos::eth_addr_t::is_broadcastC"></span><span class="target" id="classeos_1_1eth__addr__t_1aab51f61b7567629056d24e02c0b5969b"></span>bool <code class="sig-name descname">is_broadcast</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos10eth_addr_t12is_broadcastEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Returns true if the Ethernet address is a broadcast address. </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-private-members">Private Members</p>
+<dl class="cpp var">
+<dt id="_CPPv4N3eos10eth_addr_t6bytes_E">
+<span id="_CPPv3N3eos10eth_addr_t6bytes_E"></span><span id="_CPPv2N3eos10eth_addr_t6bytes_E"></span><span id="eos::eth_addr_t::bytes___uint8_tA"></span><span class="target" id="classeos_1_1eth__addr__t_1a9f9af6dd8235d587a8f825a8f73cecd5"></span>uint8_t <code class="sig-name descname">bytes_</code>[6]<a class="headerlink" href="#_CPPv4N3eos10eth_addr_t6bytes_E" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-friends">Friends</p>
+<dl class="cpp function">
+<dt id="_CPPv4N3eos10eth_addr_tlsERNSt7ostreamERK10eth_addr_t">
+<span id="_CPPv3N3eos10eth_addr_tlsERNSt7ostreamERK10eth_addr_t"></span><span id="_CPPv2N3eos10eth_addr_tlsERNSt7ostreamERK10eth_addr_t"></span><span id="eos::eth_addr_t::lshift-operator__osR.eth_addr_tCR"></span><span class="target" id="classeos_1_1eth__addr__t_1a203970138b83b039358deafdfa8e8689"></span><em class="property">friend</em> <a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::ostream &amp;<code class="sig-name descname">operator&lt;&lt;</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::ostream &amp;<em>os</em>, <em class="property">const</em> <a class="reference internal" href="#_CPPv4N3eos10eth_addr_tE" title="eos::eth_addr_t">eth_addr_t</a> &amp;<em>obj</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos10eth_addr_tlsERNSt7ostreamERK10eth_addr_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>A utility stream operator that adds a string representation of <a class="reference internal" href="#classeos_1_1eth__addr__t"><span class="std std-ref">eth_addr_t</span></a> to the ostream. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="cpp class">
+<dt id="_CPPv4N3eos18invalid_vlan_errorE">
+<span id="_CPPv3N3eos18invalid_vlan_errorE"></span><span id="_CPPv2N3eos18invalid_vlan_errorE"></span><span id="eos::invalid_vlan_error"></span><span class="target" id="classeos_1_1invalid__vlan__error"></span><em class="property">class </em><code class="sig-name descname">invalid_vlan_error</code> : <em class="property">public</em> <a class="reference internal" href="acl.html#_CPPv43eos" title="eos">eos</a>::<a class="reference internal" href="exception.html#_CPPv4N3eos5errorE" title="eos::error">error</a><a class="headerlink" href="#_CPPv4N3eos18invalid_vlan_errorE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><div class="docutils container">
+<em>#include &lt;eth.h&gt;</em></div>
+<p>The given VLAN number was invalid (for example 0 or 4095). </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
+<dl class="cpp function">
+<dt id="_CPPv4N3eos18invalid_vlan_error18invalid_vlan_errorE9vlan_id_t">
+<span id="_CPPv3N3eos18invalid_vlan_error18invalid_vlan_errorE9vlan_id_t"></span><span id="_CPPv2N3eos18invalid_vlan_error18invalid_vlan_errorE9vlan_id_t"></span><span id="eos::invalid_vlan_error::invalid_vlan_error__vlan_id_t"></span><span class="target" id="classeos_1_1invalid__vlan__error_1a9fcf6f57e568c5f058550fde7c8eded9"></span><em class="property">explicit</em> <code class="sig-name descname">invalid_vlan_error</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos9vlan_id_tE" title="eos::vlan_id_t">vlan_id_t</a> <em>vlan</em><span class="sig-paren">)</span> <em class="property">noexcept</em><a class="headerlink" href="#_CPPv4N3eos18invalid_vlan_error18invalid_vlan_errorE9vlan_id_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos18invalid_vlan_errorD0Ev">
+<span id="_CPPv3N3eos18invalid_vlan_errorD0Ev"></span><span id="_CPPv2N3eos18invalid_vlan_errorD0Ev"></span><span id="eos::invalid_vlan_error::~invalid_vlan_error"></span><span class="target" id="classeos_1_1invalid__vlan__error_1ac4bea1a21ad20def53e5cd29cb70975c"></span><em class="property">virtual</em> <code class="sig-name descname">~invalid_vlan_error</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">noexcept</em><a class="headerlink" href="#_CPPv4N3eos18invalid_vlan_errorD0Ev" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos18invalid_vlan_error4vlanEv">
+<span id="_CPPv3NK3eos18invalid_vlan_error4vlanEv"></span><span id="_CPPv2NK3eos18invalid_vlan_error4vlanEv"></span><span id="eos::invalid_vlan_error::vlanC"></span><span class="target" id="classeos_1_1invalid__vlan__error_1aade5619a327446531c37863aca52afbe"></span><a class="reference internal" href="#_CPPv4N3eos9vlan_id_tE" title="eos::vlan_id_t">vlan_id_t</a> <code class="sig-name descname">vlan</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em> <em class="property">noexcept</em><a class="headerlink" href="#_CPPv4NK3eos18invalid_vlan_error4vlanEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos18invalid_vlan_error5raiseEv">
+<span id="_CPPv3NK3eos18invalid_vlan_error5raiseEv"></span><span id="_CPPv2NK3eos18invalid_vlan_error5raiseEv"></span><span id="eos::invalid_vlan_error::raiseC"></span><span class="target" id="classeos_1_1invalid__vlan__error_1a068a780637aa572f3a3556ece817c6b8"></span><em class="property">virtual</em> void <code class="sig-name descname">raise</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos18invalid_vlan_error5raiseEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Throws this exception. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos18invalid_vlan_error4hashEv">
+<span id="_CPPv3NK3eos18invalid_vlan_error4hashEv"></span><span id="_CPPv2NK3eos18invalid_vlan_error4hashEv"></span><span id="eos::invalid_vlan_error::hashC"></span><span class="target" id="classeos_1_1invalid__vlan__error_1a85139a039e19be848e22b1be5806dea1"></span>uint32_t <code class="sig-name descname">hash</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos18invalid_vlan_error4hashEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>The hash function for type <a class="reference internal" href="#classeos_1_1invalid__vlan__error"><span class="std std-ref">invalid_vlan_error</span></a>. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos18invalid_vlan_error6mix_meER8hash_mix">
+<span id="_CPPv3NK3eos18invalid_vlan_error6mix_meER8hash_mix"></span><span id="_CPPv2NK3eos18invalid_vlan_error6mix_meER8hash_mix"></span><span id="eos::invalid_vlan_error::mix_me__hash_mixRC"></span><span class="target" id="classeos_1_1invalid__vlan__error_1aa8a52ddc70d63c67ad4bd4cf5f161ca4"></span>void <code class="sig-name descname">mix_me</code><span class="sig-paren">(</span><a class="reference internal" href="hash_mix.html#_CPPv4N3eos8hash_mixE" title="eos::hash_mix">hash_mix</a> &amp;<em>h</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos18invalid_vlan_error6mix_meER8hash_mix" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>The hash mix function for type <a class="reference internal" href="#classeos_1_1invalid__vlan__error"><span class="std std-ref">invalid_vlan_error</span></a>. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos18invalid_vlan_error9to_stringEv">
+<span id="_CPPv3NK3eos18invalid_vlan_error9to_stringEv"></span><span id="_CPPv2NK3eos18invalid_vlan_error9to_stringEv"></span><span id="eos::invalid_vlan_error::to_stringC"></span><span class="target" id="classeos_1_1invalid__vlan__error_1a6e37da78ee6a7072dffacabd5347fc1d"></span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::string <code class="sig-name descname">to_string</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos18invalid_vlan_error9to_stringEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Returns a string representation of the current object’s values. </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-private-members">Private Members</p>
+<dl class="cpp var">
+<dt id="_CPPv4N3eos18invalid_vlan_error5vlan_E">
+<span id="_CPPv3N3eos18invalid_vlan_error5vlan_E"></span><span id="_CPPv2N3eos18invalid_vlan_error5vlan_E"></span><span id="eos::invalid_vlan_error::vlan___vlan_id_t"></span><span class="target" id="classeos_1_1invalid__vlan__error_1aff54fd79fe1970c382ccb48fbfa0795f"></span><a class="reference internal" href="#_CPPv4N3eos9vlan_id_tE" title="eos::vlan_id_t">vlan_id_t</a> <code class="sig-name descname">vlan_</code><a class="headerlink" href="#_CPPv4N3eos18invalid_vlan_error5vlan_E" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-friends">Friends</p>
+<dl class="cpp function">
+<dt id="_CPPv4N3eos18invalid_vlan_errorlsERNSt7ostreamERK18invalid_vlan_error">
+<span id="_CPPv3N3eos18invalid_vlan_errorlsERNSt7ostreamERK18invalid_vlan_error"></span><span id="_CPPv2N3eos18invalid_vlan_errorlsERNSt7ostreamERK18invalid_vlan_error"></span><span id="eos::invalid_vlan_error::lshift-operator__osR.invalid_vlan_errorCR"></span><span class="target" id="classeos_1_1invalid__vlan__error_1a7a0680fc2d2ab227afe4eb3a1154a899"></span><em class="property">friend</em> <a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::ostream &amp;<code class="sig-name descname">operator&lt;&lt;</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::ostream &amp;<em>os</em>, <em class="property">const</em> <a class="reference internal" href="#_CPPv4N3eos18invalid_vlan_errorE" title="eos::invalid_vlan_error">invalid_vlan_error</a> &amp;<em>obj</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos18invalid_vlan_errorlsERNSt7ostreamERK18invalid_vlan_error" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>A utility stream operator that adds a string representation of <a class="reference internal" href="#classeos_1_1invalid__vlan__error"><span class="std std-ref">invalid_vlan_error</span></a> to the ostream. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="cpp class">
+<dt id="_CPPv4N3eos19internal_vlan_errorE">
+<span id="_CPPv3N3eos19internal_vlan_errorE"></span><span id="_CPPv2N3eos19internal_vlan_errorE"></span><span id="eos::internal_vlan_error"></span><span class="target" id="classeos_1_1internal__vlan__error"></span><em class="property">class </em><code class="sig-name descname">internal_vlan_error</code> : <em class="property">public</em> <a class="reference internal" href="acl.html#_CPPv43eos" title="eos">eos</a>::<a class="reference internal" href="exception.html#_CPPv4N3eos19configuration_errorE" title="eos::configuration_error">configuration_error</a><a class="headerlink" href="#_CPPv4N3eos19internal_vlan_errorE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><div class="docutils container">
+<em>#include &lt;eth.h&gt;</em></div>
+<p>Tried to configure an internal VLAN on a trunk port. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
+<dl class="cpp function">
+<dt id="_CPPv4N3eos19internal_vlan_error19internal_vlan_errorE9vlan_id_t">
+<span id="_CPPv3N3eos19internal_vlan_error19internal_vlan_errorE9vlan_id_t"></span><span id="_CPPv2N3eos19internal_vlan_error19internal_vlan_errorE9vlan_id_t"></span><span id="eos::internal_vlan_error::internal_vlan_error__vlan_id_t"></span><span class="target" id="classeos_1_1internal__vlan__error_1ac94aac7372a079a097ab37b07e28c895"></span><em class="property">explicit</em> <code class="sig-name descname">internal_vlan_error</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos9vlan_id_tE" title="eos::vlan_id_t">vlan_id_t</a> <em>vlan</em><span class="sig-paren">)</span> <em class="property">noexcept</em><a class="headerlink" href="#_CPPv4N3eos19internal_vlan_error19internal_vlan_errorE9vlan_id_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos19internal_vlan_errorD0Ev">
+<span id="_CPPv3N3eos19internal_vlan_errorD0Ev"></span><span id="_CPPv2N3eos19internal_vlan_errorD0Ev"></span><span id="eos::internal_vlan_error::~internal_vlan_error"></span><span class="target" id="classeos_1_1internal__vlan__error_1a426c01bbe3686cdfa64d2db42192853f"></span><em class="property">virtual</em> <code class="sig-name descname">~internal_vlan_error</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">noexcept</em><a class="headerlink" href="#_CPPv4N3eos19internal_vlan_errorD0Ev" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos19internal_vlan_error4vlanEv">
+<span id="_CPPv3NK3eos19internal_vlan_error4vlanEv"></span><span id="_CPPv2NK3eos19internal_vlan_error4vlanEv"></span><span id="eos::internal_vlan_error::vlanC"></span><span class="target" id="classeos_1_1internal__vlan__error_1a98f0d767472b8aa5e77eb27997202608"></span><a class="reference internal" href="#_CPPv4N3eos9vlan_id_tE" title="eos::vlan_id_t">vlan_id_t</a> <code class="sig-name descname">vlan</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em> <em class="property">noexcept</em><a class="headerlink" href="#_CPPv4NK3eos19internal_vlan_error4vlanEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos19internal_vlan_error5raiseEv">
+<span id="_CPPv3NK3eos19internal_vlan_error5raiseEv"></span><span id="_CPPv2NK3eos19internal_vlan_error5raiseEv"></span><span id="eos::internal_vlan_error::raiseC"></span><span class="target" id="classeos_1_1internal__vlan__error_1a6f9be23f6596e3a61fdd5fabb8b4205c"></span><em class="property">virtual</em> void <code class="sig-name descname">raise</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos19internal_vlan_error5raiseEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Throws this exception. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos19internal_vlan_error4hashEv">
+<span id="_CPPv3NK3eos19internal_vlan_error4hashEv"></span><span id="_CPPv2NK3eos19internal_vlan_error4hashEv"></span><span id="eos::internal_vlan_error::hashC"></span><span class="target" id="classeos_1_1internal__vlan__error_1a60ad9ea93092b7c347b3dbe3cded9f7f"></span>uint32_t <code class="sig-name descname">hash</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos19internal_vlan_error4hashEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>The hash function for type <a class="reference internal" href="#classeos_1_1internal__vlan__error"><span class="std std-ref">internal_vlan_error</span></a>. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos19internal_vlan_error6mix_meER8hash_mix">
+<span id="_CPPv3NK3eos19internal_vlan_error6mix_meER8hash_mix"></span><span id="_CPPv2NK3eos19internal_vlan_error6mix_meER8hash_mix"></span><span id="eos::internal_vlan_error::mix_me__hash_mixRC"></span><span class="target" id="classeos_1_1internal__vlan__error_1a7f20b993d1c92a1c69fa28b92e5b1340"></span>void <code class="sig-name descname">mix_me</code><span class="sig-paren">(</span><a class="reference internal" href="hash_mix.html#_CPPv4N3eos8hash_mixE" title="eos::hash_mix">hash_mix</a> &amp;<em>h</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos19internal_vlan_error6mix_meER8hash_mix" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>The hash mix function for type <a class="reference internal" href="#classeos_1_1internal__vlan__error"><span class="std std-ref">internal_vlan_error</span></a>. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos19internal_vlan_error9to_stringEv">
+<span id="_CPPv3NK3eos19internal_vlan_error9to_stringEv"></span><span id="_CPPv2NK3eos19internal_vlan_error9to_stringEv"></span><span id="eos::internal_vlan_error::to_stringC"></span><span class="target" id="classeos_1_1internal__vlan__error_1a9889d57ff82c5469964bd241354cf920"></span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::string <code class="sig-name descname">to_string</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos19internal_vlan_error9to_stringEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Returns a string representation of the current object’s values. </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-private-members">Private Members</p>
+<dl class="cpp var">
+<dt id="_CPPv4N3eos19internal_vlan_error5vlan_E">
+<span id="_CPPv3N3eos19internal_vlan_error5vlan_E"></span><span id="_CPPv2N3eos19internal_vlan_error5vlan_E"></span><span id="eos::internal_vlan_error::vlan___vlan_id_t"></span><span class="target" id="classeos_1_1internal__vlan__error_1a779958ccd081ce13b0613a67816f44ba"></span><a class="reference internal" href="#_CPPv4N3eos9vlan_id_tE" title="eos::vlan_id_t">vlan_id_t</a> <code class="sig-name descname">vlan_</code><a class="headerlink" href="#_CPPv4N3eos19internal_vlan_error5vlan_E" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-friends">Friends</p>
+<dl class="cpp function">
+<dt id="_CPPv4N3eos19internal_vlan_errorlsERNSt7ostreamERK19internal_vlan_error">
+<span id="_CPPv3N3eos19internal_vlan_errorlsERNSt7ostreamERK19internal_vlan_error"></span><span id="_CPPv2N3eos19internal_vlan_errorlsERNSt7ostreamERK19internal_vlan_error"></span><span id="eos::internal_vlan_error::lshift-operator__osR.internal_vlan_errorCR"></span><span class="target" id="classeos_1_1internal__vlan__error_1af2f5a9d3f7a5e7d7d3c1e41996f226e4"></span><em class="property">friend</em> <a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::ostream &amp;<code class="sig-name descname">operator&lt;&lt;</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::ostream &amp;<em>os</em>, <em class="property">const</em> <a class="reference internal" href="#_CPPv4N3eos19internal_vlan_errorE" title="eos::internal_vlan_error">internal_vlan_error</a> &amp;<em>obj</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos19internal_vlan_errorlsERNSt7ostreamERK19internal_vlan_error" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>A utility stream operator that adds a string representation of <a class="reference internal" href="#classeos_1_1internal__vlan__error"><span class="std std-ref">internal_vlan_error</span></a> to the ostream. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#"><strong>eth</strong></a><ul>
+<li><a class="reference internal" href="#type-definitions-in-eth">Type definitions in <strong>eth</strong></a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="eapi.html"
+                        title="previous chapter"><strong>eapi</strong></a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="eth_intf.html"
+                        title="next chapter"><strong>eth_intf</strong></a></p>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="eth_intf.html" title="eth_intf"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="eapi.html" title="eapi"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Arista EOS SDK 2.22.5.1 reference</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href=""><strong>eth</strong></a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2014, Arista Networks.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.4.3.
+    </div>
+  </body>
+</html>

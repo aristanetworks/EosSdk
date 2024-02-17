@@ -1,0 +1,929 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ip_route &#8212; Arista EOS SDK 2.22.5.1 reference</title>
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/eossdk.css" type="text/css" />
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="iterator" href="iterator.html" />
+    <link rel="prev" title="ip_intf" href="ip_intf.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="iterator.html" title="iterator"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="ip_intf.html" title="ip_intf"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Arista EOS SDK 2.22.5.1 reference</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href=""><strong>ip_route</strong></a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="ip-route">
+<h1><strong>ip_route</strong><a class="headerlink" href="#ip-route" title="Permalink to this headline">¶</a></h1>
+<dl class="cpp type">
+<dt id="_CPPv43eos">
+<span id="_CPPv33eos"></span><span id="_CPPv23eos"></span><span id="eos"></span><span class="target" id="namespaceeos"></span><em class="property">namespace </em><code class="sig-name descname">eos</code><br /></dt>
+<dd><dl class="cpp class">
+<dt id="_CPPv4N3eos15ip_route_iter_tE">
+<span id="_CPPv3N3eos15ip_route_iter_tE"></span><span id="_CPPv2N3eos15ip_route_iter_tE"></span><span id="eos::ip_route_iter_t"></span><span class="target" id="classeos_1_1ip__route__iter__t"></span><em class="property">class </em><code class="sig-name descname">ip_route_iter_t</code> : <em class="property">public</em> <a class="reference internal" href="acl.html#_CPPv43eos" title="eos">eos</a>::<a class="reference internal" href="iterator.html#_CPPv4I00EN3eos9iter_baseE" title="eos::iter_base">iter_base</a>&lt;<a class="reference internal" href="#_CPPv4N3eos10ip_route_tE" title="eos::ip_route_t">ip_route_t</a>, ip_route_iter_impl&gt;<a class="headerlink" href="#_CPPv4N3eos15ip_route_iter_tE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><div class="docutils container">
+<em>#include &lt;ip_route.h&gt;</em></div>
+<p>An IP route iterator. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-private-functions">Private Functions</p>
+<dl class="cpp function">
+<dt id="_CPPv4N3eos15ip_route_iter_t15ip_route_iter_tEPC18ip_route_iter_impl">
+<span id="_CPPv3N3eos15ip_route_iter_t15ip_route_iter_tEPC18ip_route_iter_impl"></span><span id="_CPPv2N3eos15ip_route_iter_t15ip_route_iter_tEPC18ip_route_iter_impl"></span><span id="eos::ip_route_iter_t::ip_route_iter_t__ip_route_iter_implPC"></span><span class="target" id="classeos_1_1ip__route__iter__t_1a1423c2ca53e0968ee166f7cce72841c5"></span><em class="property">explicit</em> <code class="sig-name descname">ip_route_iter_t</code><span class="sig-paren">(</span>ip_route_iter_impl*<em class="property">const</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos15ip_route_iter_t15ip_route_iter_tEPC18ip_route_iter_impl" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-friends">Friends</p>
+<dl class="friendclass">
+<dt>
+<em class="property">friend class</em> ip_route_iter_impl</dt>
+</dl>
+
+</div>
+</dd></dl>
+
+<dl class="cpp class">
+<dt id="_CPPv4N3eos19ip_route_via_iter_tE">
+<span id="_CPPv3N3eos19ip_route_via_iter_tE"></span><span id="_CPPv2N3eos19ip_route_via_iter_tE"></span><span id="eos::ip_route_via_iter_t"></span><span class="target" id="classeos_1_1ip__route__via__iter__t"></span><em class="property">class </em><code class="sig-name descname">ip_route_via_iter_t</code> : <em class="property">public</em> <a class="reference internal" href="acl.html#_CPPv43eos" title="eos">eos</a>::<a class="reference internal" href="iterator.html#_CPPv4I00EN3eos9iter_baseE" title="eos::iter_base">iter_base</a>&lt;<a class="reference internal" href="#_CPPv4N3eos14ip_route_via_tE" title="eos::ip_route_via_t">ip_route_via_t</a>, ip_route_via_iter_impl&gt;<a class="headerlink" href="#_CPPv4N3eos19ip_route_via_iter_tE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><div class="docutils container">
+<em>#include &lt;ip_route.h&gt;</em></div>
+<p>A route via iterator. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-private-functions">Private Functions</p>
+<dl class="cpp function">
+<dt id="_CPPv4N3eos19ip_route_via_iter_t19ip_route_via_iter_tEPC22ip_route_via_iter_impl">
+<span id="_CPPv3N3eos19ip_route_via_iter_t19ip_route_via_iter_tEPC22ip_route_via_iter_impl"></span><span id="_CPPv2N3eos19ip_route_via_iter_t19ip_route_via_iter_tEPC22ip_route_via_iter_impl"></span><span id="eos::ip_route_via_iter_t::ip_route_via_iter_t__ip_route_via_iter_implPC"></span><span class="target" id="classeos_1_1ip__route__via__iter__t_1aabb5f9b3c11a957c4b210eb52f4b37c5"></span><em class="property">explicit</em> <code class="sig-name descname">ip_route_via_iter_t</code><span class="sig-paren">(</span>ip_route_via_iter_impl*<em class="property">const</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos19ip_route_via_iter_t19ip_route_via_iter_tEPC22ip_route_via_iter_impl" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-friends">Friends</p>
+<dl class="friendclass">
+<dt>
+<em class="property">friend class</em> ip_route_via_iter_impl</dt>
+</dl>
+
+</div>
+</dd></dl>
+
+<dl class="cpp class">
+<dt id="_CPPv4N3eos12ip_route_mgrE">
+<span id="_CPPv3N3eos12ip_route_mgrE"></span><span id="_CPPv2N3eos12ip_route_mgrE"></span><span id="eos::ip_route_mgr"></span><span class="target" id="classeos_1_1ip__route__mgr"></span><em class="property">class </em><code class="sig-name descname">ip_route_mgr</code><a class="headerlink" href="#_CPPv4N3eos12ip_route_mgrE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><div class="docutils container">
+<em>#include &lt;ip_route.h&gt;</em></div>
+<p>The manager for IP static route configuration. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
+<dl class="cpp function">
+<dt id="_CPPv4N3eos12ip_route_mgrD0Ev">
+<span id="_CPPv3N3eos12ip_route_mgrD0Ev"></span><span id="_CPPv2N3eos12ip_route_mgrD0Ev"></span><span id="eos::ip_route_mgr::~ip_route_mgr"></span><span class="target" id="classeos_1_1ip__route__mgr_1a8aeeff213bd047c0422ce61899dba16a"></span><em class="property">virtual</em> <code class="sig-name descname">~ip_route_mgr</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos12ip_route_mgrD0Ev" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos12ip_route_mgr6tag_isE8uint32_t">
+<span id="_CPPv3N3eos12ip_route_mgr6tag_isE8uint32_t"></span><span id="_CPPv2N3eos12ip_route_mgr6tag_isE8uint32_t"></span><span id="eos::ip_route_mgr::tag_is__uint32_t"></span><span class="target" id="classeos_1_1ip__route__mgr_1a8faf0b8e5c0c7766a9573b31fd1c5d30"></span><em class="property">virtual</em> void <code class="sig-name descname">tag_is</code><span class="sig-paren">(</span>uint32_t<span class="sig-paren">)</span> = 0<a class="headerlink" href="#_CPPv4N3eos12ip_route_mgr6tag_isE8uint32_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Set the manager to only interact with routes with the given tag.</p>
+<p>If this tag is set to a non-zero number, then methods on this class will only affect or expose routes with the given tag. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos12ip_route_mgr3tagEv">
+<span id="_CPPv3NK3eos12ip_route_mgr3tagEv"></span><span id="_CPPv2NK3eos12ip_route_mgr3tagEv"></span><span id="eos::ip_route_mgr::tagC"></span><span class="target" id="classeos_1_1ip__route__mgr_1ab98e3a2fbdaa7ce929528f98acc80d38"></span><em class="property">virtual</em> uint32_t <code class="sig-name descname">tag</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em> = 0<a class="headerlink" href="#_CPPv4NK3eos12ip_route_mgr3tagEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Returns the current tag, or 0 if no tag is set. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos12ip_route_mgr11resync_initEv">
+<span id="_CPPv3N3eos12ip_route_mgr11resync_initEv"></span><span id="_CPPv2N3eos12ip_route_mgr11resync_initEv"></span><span id="eos::ip_route_mgr::resync_init"></span><span class="target" id="classeos_1_1ip__route__mgr_1aa3ef1ffe1b6a8770b7c324237b8908a4"></span><em class="property">virtual</em> void <code class="sig-name descname">resync_init</code><span class="sig-paren">(</span><span class="sig-paren">)</span> = 0<a class="headerlink" href="#_CPPv4N3eos12ip_route_mgr11resync_initEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Resync provides a mechanism to set routes to a known state.</p>
+<p>To start a resync, call <a class="reference internal" href="#classeos_1_1ip__route__mgr_1aa3ef1ffe1b6a8770b7c324237b8908a4"><span class="std std-ref">resync_init()</span></a> and then use <a class="reference internal" href="#classeos_1_1ip__route__mgr_1a228e33a9dc1b8089c4ce98b69624de50"><span class="std std-ref">ip_route_set()</span></a> and <a class="reference internal" href="#classeos_1_1ip__route__mgr_1a57c88c6b97cd608fe1c565d53f14c680"><span class="std std-ref">ip_route_via_set()</span></a> to populate the static routing table with the known entries. After all entries have been set, call <a class="reference internal" href="#classeos_1_1ip__route__mgr_1a3f4eccfc9727fc6e43c9d19682441ac6"><span class="std std-ref">resync_complete()</span></a>, which will delete all existing routes and vias that were not added or modified during resync. If a tag is set, resync will only delete routes and vias corresponding to the current tag.</p>
+<p>During resync, this manager will act like it is referencing a temporary table that starts off empty. Thus, methods like exist, del, and getters will act only on that temporary table, regardless of the real values in Sysdb. The one exception is iteration; they will traverse the table stored in Sysdb, regardless of whether or not the manager is in resync mode. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos12ip_route_mgr15resync_completeEv">
+<span id="_CPPv3N3eos12ip_route_mgr15resync_completeEv"></span><span id="_CPPv2N3eos12ip_route_mgr15resync_completeEv"></span><span id="eos::ip_route_mgr::resync_complete"></span><span class="target" id="classeos_1_1ip__route__mgr_1a3f4eccfc9727fc6e43c9d19682441ac6"></span><em class="property">virtual</em> void <code class="sig-name descname">resync_complete</code><span class="sig-paren">(</span><span class="sig-paren">)</span> = 0<a class="headerlink" href="#_CPPv4N3eos12ip_route_mgr15resync_completeEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Completes any underway resync operation. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos12ip_route_mgr13ip_route_iterEv">
+<span id="_CPPv3NK3eos12ip_route_mgr13ip_route_iterEv"></span><span id="_CPPv2NK3eos12ip_route_mgr13ip_route_iterEv"></span><span id="eos::ip_route_mgr::ip_route_iterC"></span><span class="target" id="classeos_1_1ip__route__mgr_1a805cc0958b4a18e60a2d9bb7a5051a87"></span><em class="property">virtual</em> <a class="reference internal" href="#_CPPv4N3eos15ip_route_iter_tE" title="eos::ip_route_iter_t">ip_route_iter_t</a> <code class="sig-name descname">ip_route_iter</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em> = 0<a class="headerlink" href="#_CPPv4NK3eos12ip_route_mgr13ip_route_iterEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Iterates across all configured static routes. If a tag is set, only return routes that match the current tag. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos12ip_route_mgr13ip_route_iterENSt6stringE">
+<span id="_CPPv3NK3eos12ip_route_mgr13ip_route_iterENSt6stringE"></span><span id="_CPPv2NK3eos12ip_route_mgr13ip_route_iterENSt6stringE"></span><span id="eos::ip_route_mgr::ip_route_iter__ssC"></span><span class="target" id="classeos_1_1ip__route__mgr_1a7a7c7f338170998ad91bb595dafb89af"></span><a class="reference internal" href="#_CPPv4N3eos15ip_route_iter_tE" title="eos::ip_route_iter_t">ip_route_iter_t</a> <code class="sig-name descname">ip_route_iter</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::string <em>vrf</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos12ip_route_mgr13ip_route_iterENSt6stringE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Iterates across configured static routes in the specified VRF. returns empty iterator if the VRF does not exist. If a tag is set, only return routes that match the current tag. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos12ip_route_mgr17ip_route_via_iterERK14ip_route_key_t">
+<span id="_CPPv3NK3eos12ip_route_mgr17ip_route_via_iterERK14ip_route_key_t"></span><span id="_CPPv2NK3eos12ip_route_mgr17ip_route_via_iterERK14ip_route_key_t"></span><span id="eos::ip_route_mgr::ip_route_via_iter__ip_route_key_tCRC"></span><span class="target" id="classeos_1_1ip__route__mgr_1a4c645cca6f77e716a3115dedc1be839d"></span><em class="property">virtual</em> <a class="reference internal" href="#_CPPv4N3eos19ip_route_via_iter_tE" title="eos::ip_route_via_iter_t">ip_route_via_iter_t</a> <code class="sig-name descname">ip_route_via_iter</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos14ip_route_key_tE" title="eos::ip_route_key_t">ip_route_key_t</a> <em class="property">const</em>&amp;<span class="sig-paren">)</span> <em class="property">const</em> = 0<a class="headerlink" href="#_CPPv4NK3eos12ip_route_mgr17ip_route_via_iterERK14ip_route_key_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Iterates across configured nexthops for a given route key, i.e., emit all <a class="reference internal" href="#classeos_1_1ip__route__via__t"><span class="std std-ref">ip_route_via_t</span></a>’s for a given route key. If a tag is set, only return vias on routes that match the current tag. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos12ip_route_mgr17ip_route_via_iterERK14ip_route_key_tNSt6stringE">
+<span id="_CPPv3NK3eos12ip_route_mgr17ip_route_via_iterERK14ip_route_key_tNSt6stringE"></span><span id="_CPPv2NK3eos12ip_route_mgr17ip_route_via_iterERK14ip_route_key_tNSt6stringE"></span><span id="eos::ip_route_mgr::ip_route_via_iter__ip_route_key_tCR.ssC"></span><span class="target" id="classeos_1_1ip__route__mgr_1a9cd913b3754d5418669dd234aa23f2dc"></span><em class="property">virtual</em> <a class="reference internal" href="#_CPPv4N3eos19ip_route_via_iter_tE" title="eos::ip_route_via_iter_t">ip_route_via_iter_t</a> <code class="sig-name descname">ip_route_via_iter</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos14ip_route_key_tE" title="eos::ip_route_key_t">ip_route_key_t</a> <em class="property">const</em>&amp;, <a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::string <em>vrfName</em><span class="sig-paren">)</span> <em class="property">const</em> = 0<a class="headerlink" href="#_CPPv4NK3eos12ip_route_mgr17ip_route_via_iterERK14ip_route_key_tNSt6stringE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos12ip_route_mgr6existsERK14ip_route_key_t">
+<span id="_CPPv3NK3eos12ip_route_mgr6existsERK14ip_route_key_t"></span><span id="_CPPv2NK3eos12ip_route_mgr6existsERK14ip_route_key_t"></span><span id="eos::ip_route_mgr::exists__ip_route_key_tCRC"></span><span class="target" id="classeos_1_1ip__route__mgr_1a38c3ddd9b4b69d0dbcd0b9b9ba6616cd"></span><em class="property">virtual</em> bool <code class="sig-name descname">exists</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos14ip_route_key_tE" title="eos::ip_route_key_t">ip_route_key_t</a> <em class="property">const</em>&amp;<span class="sig-paren">)</span> <em class="property">const</em> = 0<a class="headerlink" href="#_CPPv4NK3eos12ip_route_mgr6existsERK14ip_route_key_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Tests for existence of any routes matching the route key in the config. If a tag is set and the route belongs to a different tag, this function returns false. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos12ip_route_mgr6existsERK14ip_route_key_tNSt6stringE">
+<span id="_CPPv3NK3eos12ip_route_mgr6existsERK14ip_route_key_tNSt6stringE"></span><span id="_CPPv2NK3eos12ip_route_mgr6existsERK14ip_route_key_tNSt6stringE"></span><span id="eos::ip_route_mgr::exists__ip_route_key_tCR.ssC"></span><span class="target" id="classeos_1_1ip__route__mgr_1a2daaae673978762512e56354de8b5c27"></span><em class="property">virtual</em> bool <code class="sig-name descname">exists</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos14ip_route_key_tE" title="eos::ip_route_key_t">ip_route_key_t</a> <em class="property">const</em>&amp;, <a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::string <em>vrfName</em><span class="sig-paren">)</span> <em class="property">const</em> = 0<a class="headerlink" href="#_CPPv4NK3eos12ip_route_mgr6existsERK14ip_route_key_tNSt6stringE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos12ip_route_mgr6existsERK14ip_route_via_t">
+<span id="_CPPv3NK3eos12ip_route_mgr6existsERK14ip_route_via_t"></span><span id="_CPPv2NK3eos12ip_route_mgr6existsERK14ip_route_via_t"></span><span id="eos::ip_route_mgr::exists__ip_route_via_tCRC"></span><span class="target" id="classeos_1_1ip__route__mgr_1af5701368553a7639c6a1198a628d9995"></span><em class="property">virtual</em> bool <code class="sig-name descname">exists</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos14ip_route_via_tE" title="eos::ip_route_via_t">ip_route_via_t</a> <em class="property">const</em>&amp;<span class="sig-paren">)</span> <em class="property">const</em> = 0<a class="headerlink" href="#_CPPv4NK3eos12ip_route_mgr6existsERK14ip_route_via_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Tests if the given via exists. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos12ip_route_mgr6existsERK14ip_route_via_tNSt6stringE">
+<span id="_CPPv3NK3eos12ip_route_mgr6existsERK14ip_route_via_tNSt6stringE"></span><span id="_CPPv2NK3eos12ip_route_mgr6existsERK14ip_route_via_tNSt6stringE"></span><span id="eos::ip_route_mgr::exists__ip_route_via_tCR.ssC"></span><span class="target" id="classeos_1_1ip__route__mgr_1aa84d005dee5c0e380ca0f2143782cc77"></span><em class="property">virtual</em> bool <code class="sig-name descname">exists</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos14ip_route_via_tE" title="eos::ip_route_via_t">ip_route_via_t</a> <em class="property">const</em>&amp;, <a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::string <em>vrfName</em><span class="sig-paren">)</span> <em class="property">const</em> = 0<a class="headerlink" href="#_CPPv4NK3eos12ip_route_mgr6existsERK14ip_route_via_tNSt6stringE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos12ip_route_mgr8ip_routeERK14ip_route_key_t">
+<span id="_CPPv3N3eos12ip_route_mgr8ip_routeERK14ip_route_key_t"></span><span id="_CPPv2N3eos12ip_route_mgr8ip_routeERK14ip_route_key_t"></span><span id="eos::ip_route_mgr::ip_route__ip_route_key_tCR"></span><span class="target" id="classeos_1_1ip__route__mgr_1a539b1961b4c97c035e7af408765389fb"></span><em class="property">virtual</em> <a class="reference internal" href="#_CPPv4N3eos10ip_route_tE" title="eos::ip_route_t">ip_route_t</a> <code class="sig-name descname">ip_route</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos14ip_route_key_tE" title="eos::ip_route_key_t">ip_route_key_t</a> <em class="property">const</em>&amp;<span class="sig-paren">)</span> = 0<a class="headerlink" href="#_CPPv4N3eos12ip_route_mgr8ip_routeERK14ip_route_key_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Gets the IP route with the corresponding <a class="reference internal" href="#classeos_1_1ip__route__key__t"><span class="std std-ref">ip_route_key_t</span></a>. Returns an empty ip_route_t() if no matching route is found. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos12ip_route_mgr8ip_routeERK14ip_route_key_tNSt6stringE">
+<span id="_CPPv3N3eos12ip_route_mgr8ip_routeERK14ip_route_key_tNSt6stringE"></span><span id="_CPPv2N3eos12ip_route_mgr8ip_routeERK14ip_route_key_tNSt6stringE"></span><span id="eos::ip_route_mgr::ip_route__ip_route_key_tCR.ss"></span><span class="target" id="classeos_1_1ip__route__mgr_1aa57428b41505c7b01ce5729576cf4aeb"></span><em class="property">virtual</em> <a class="reference internal" href="#_CPPv4N3eos10ip_route_tE" title="eos::ip_route_t">ip_route_t</a> <code class="sig-name descname">ip_route</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos14ip_route_key_tE" title="eos::ip_route_key_t">ip_route_key_t</a> <em class="property">const</em>&amp;, <a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::string <em>vrfName</em><span class="sig-paren">)</span> = 0<a class="headerlink" href="#_CPPv4N3eos12ip_route_mgr8ip_routeERK14ip_route_key_tNSt6stringE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos12ip_route_mgr12ip_route_setERK10ip_route_t">
+<span id="_CPPv3N3eos12ip_route_mgr12ip_route_setERK10ip_route_t"></span><span id="_CPPv2N3eos12ip_route_mgr12ip_route_setERK10ip_route_t"></span><span id="eos::ip_route_mgr::ip_route_set__ip_route_tCR"></span><span class="target" id="classeos_1_1ip__route__mgr_1a228e33a9dc1b8089c4ce98b69624de50"></span><em class="property">virtual</em> void <code class="sig-name descname">ip_route_set</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos10ip_route_tE" title="eos::ip_route_t">ip_route_t</a> <em class="property">const</em>&amp;<span class="sig-paren">)</span> = 0<a class="headerlink" href="#_CPPv4N3eos12ip_route_mgr12ip_route_setERK10ip_route_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Inserts or updates a static route into the switch configuration. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos12ip_route_mgr12ip_route_setERK10ip_route_t17ip_route_action_t">
+<span id="_CPPv3N3eos12ip_route_mgr12ip_route_setERK10ip_route_t17ip_route_action_t"></span><span id="_CPPv2N3eos12ip_route_mgr12ip_route_setERK10ip_route_t17ip_route_action_t"></span><span id="eos::ip_route_mgr::ip_route_set__ip_route_tCR.ip_route_action_t"></span><span class="target" id="classeos_1_1ip__route__mgr_1af948587f51f13062638a6cea30671a46"></span><em class="property">virtual</em> void <code class="sig-name descname">ip_route_set</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos10ip_route_tE" title="eos::ip_route_t">ip_route_t</a> <em class="property">const</em>&amp;, <a class="reference internal" href="#_CPPv4N3eos17ip_route_action_tE" title="eos::ip_route_action_t">ip_route_action_t</a> <em>expected_type</em><span class="sig-paren">)</span> = 0<a class="headerlink" href="#_CPPv4N3eos12ip_route_mgr12ip_route_setERK10ip_route_t17ip_route_action_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Performs the same operation as <code class="docutils literal notranslate"><span class="pre">ip_route_set</span></code>, but lets an agent hint what type of vias will be attached to this route. For example, if the agent knows it will be adding nexthop group vias to this route, it can pass <code class="docutils literal notranslate"><span class="pre">eos::IP_ROUTE_ACTION_NEXTHOP_GROUP</span></code>, which allows EOS to more efficiently program routes. Routes are created by ‘forward’ routes if no additional information is provided. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos12ip_route_mgr12ip_route_setERK10ip_route_tNSt6stringE">
+<span id="_CPPv3N3eos12ip_route_mgr12ip_route_setERK10ip_route_tNSt6stringE"></span><span id="_CPPv2N3eos12ip_route_mgr12ip_route_setERK10ip_route_tNSt6stringE"></span><span id="eos::ip_route_mgr::ip_route_set__ip_route_tCR.ss"></span><span class="target" id="classeos_1_1ip__route__mgr_1aca3a862e8ddda95269cbb3b6c5d2cd66"></span><em class="property">virtual</em> void <code class="sig-name descname">ip_route_set</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos10ip_route_tE" title="eos::ip_route_t">ip_route_t</a> <em class="property">const</em>&amp;, <a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::string <em>vrfName</em><span class="sig-paren">)</span> = 0<a class="headerlink" href="#_CPPv4N3eos12ip_route_mgr12ip_route_setERK10ip_route_tNSt6stringE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Inserts or updates a static route for a given vrf into the switch configuration. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos12ip_route_mgr12ip_route_delERK14ip_route_key_tNSt6stringE">
+<span id="_CPPv3N3eos12ip_route_mgr12ip_route_delERK14ip_route_key_tNSt6stringE"></span><span id="_CPPv2N3eos12ip_route_mgr12ip_route_delERK14ip_route_key_tNSt6stringE"></span><span id="eos::ip_route_mgr::ip_route_del__ip_route_key_tCR.ss"></span><span class="target" id="classeos_1_1ip__route__mgr_1adba0c245ca2a6d2eb967ed03408fe5c2"></span><em class="property">virtual</em> void <code class="sig-name descname">ip_route_del</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos14ip_route_key_tE" title="eos::ip_route_key_t">ip_route_key_t</a> <em class="property">const</em>&amp;, <a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::string <em>vrfName</em><span class="sig-paren">)</span> = 0<a class="headerlink" href="#_CPPv4N3eos12ip_route_mgr12ip_route_delERK14ip_route_key_tNSt6stringE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Delete an existing static route for a given vrf from the switch configuration. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos12ip_route_mgr12ip_route_delERK14ip_route_key_t">
+<span id="_CPPv3N3eos12ip_route_mgr12ip_route_delERK14ip_route_key_t"></span><span id="_CPPv2N3eos12ip_route_mgr12ip_route_delERK14ip_route_key_t"></span><span id="eos::ip_route_mgr::ip_route_del__ip_route_key_tCR"></span><span class="target" id="classeos_1_1ip__route__mgr_1ad26a6311f644f0d53dc52fff33348bfb"></span><em class="property">virtual</em> void <code class="sig-name descname">ip_route_del</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos14ip_route_key_tE" title="eos::ip_route_key_t">ip_route_key_t</a> <em class="property">const</em>&amp;<span class="sig-paren">)</span> = 0<a class="headerlink" href="#_CPPv4N3eos12ip_route_mgr12ip_route_delERK14ip_route_key_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Removes all ECMP vias matching the route key, and the route itself. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos12ip_route_mgr16ip_route_via_setERK14ip_route_via_t">
+<span id="_CPPv3N3eos12ip_route_mgr16ip_route_via_setERK14ip_route_via_t"></span><span id="_CPPv2N3eos12ip_route_mgr16ip_route_via_setERK14ip_route_via_t"></span><span id="eos::ip_route_mgr::ip_route_via_set__ip_route_via_tCR"></span><span class="target" id="classeos_1_1ip__route__mgr_1a57c88c6b97cd608fe1c565d53f14c680"></span><em class="property">virtual</em> void <code class="sig-name descname">ip_route_via_set</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos14ip_route_via_tE" title="eos::ip_route_via_t">ip_route_via_t</a> <em class="property">const</em>&amp;<span class="sig-paren">)</span> = 0<a class="headerlink" href="#_CPPv4N3eos12ip_route_mgr16ip_route_via_setERK14ip_route_via_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Adds a via to an <a class="reference internal" href="#classeos_1_1ip__route__t"><span class="std std-ref">ip_route_t</span></a>.</p>
+<p>A via is associated with an <a class="reference internal" href="#classeos_1_1ip__route__t"><span class="std std-ref">ip_route_t</span></a> by their <code class="docutils literal notranslate"><a class="reference internal" href="#classeos_1_1ip__route__key__t"><span class="std std-ref"><span class="pre">ip_route_key_t</span></span></a></code> attributes. If an agent adds multiple vias with a hop or intf set, EOS will ECMP across these “forward” routes. If it programs a ‘drop’ via (by setting the intf attribute to Null0), all other vias attached to this route will be removed, and all traffic on this route will be dropped. Similarly, if the nexthop_group attribute is set, all other vias with the same <code class="docutils literal notranslate"><a class="reference internal" href="#classeos_1_1ip__route__key__t"><span class="std std-ref"><span class="pre">ip_route_key_t</span></span></a></code> will be removed, and the new nexthop group via will be programmed in their place. This function will call panic() if the route does not match the currently configured tag.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Throws</dt>
+<dd class="field-odd"><p><a class="reference internal" href="exception.html#_CPPv4N3eos22invalid_argument_errorE" title="eos::invalid_argument_error"><strong>eos::invalid_argument_error</strong></a> – If the passed via has no IP address, interface or nexthop group set. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos12ip_route_mgr16ip_route_via_setERK14ip_route_via_tNSt6stringE">
+<span id="_CPPv3N3eos12ip_route_mgr16ip_route_via_setERK14ip_route_via_tNSt6stringE"></span><span id="_CPPv2N3eos12ip_route_mgr16ip_route_via_setERK14ip_route_via_tNSt6stringE"></span><span id="eos::ip_route_mgr::ip_route_via_set__ip_route_via_tCR.ss"></span><span class="target" id="classeos_1_1ip__route__mgr_1ae7e4969fb939242c492986327aa8b779"></span><em class="property">virtual</em> void <code class="sig-name descname">ip_route_via_set</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos14ip_route_via_tE" title="eos::ip_route_via_t">ip_route_via_t</a> <em class="property">const</em>&amp;, <a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::string <em>vrfName</em><span class="sig-paren">)</span> = 0<a class="headerlink" href="#_CPPv4N3eos12ip_route_mgr16ip_route_via_setERK14ip_route_via_tNSt6stringE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos12ip_route_mgr16ip_route_via_delERK14ip_route_via_t">
+<span id="_CPPv3N3eos12ip_route_mgr16ip_route_via_delERK14ip_route_via_t"></span><span id="_CPPv2N3eos12ip_route_mgr16ip_route_via_delERK14ip_route_via_t"></span><span id="eos::ip_route_mgr::ip_route_via_del__ip_route_via_tCR"></span><span class="target" id="classeos_1_1ip__route__mgr_1af5c77e93a3940dec9059f3ebf99fdc52"></span><em class="property">virtual</em> void <code class="sig-name descname">ip_route_via_del</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos14ip_route_via_tE" title="eos::ip_route_via_t">ip_route_via_t</a> <em class="property">const</em>&amp;<span class="sig-paren">)</span> = 0<a class="headerlink" href="#_CPPv4N3eos12ip_route_mgr16ip_route_via_delERK14ip_route_via_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Removes a via from an <a class="reference internal" href="#classeos_1_1ip__route__t"><span class="std std-ref">ip_route_t</span></a>. When all vias are removed, the route still exists with no nexthop information. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos12ip_route_mgr16ip_route_via_delERK14ip_route_via_tNSt6stringE">
+<span id="_CPPv3N3eos12ip_route_mgr16ip_route_via_delERK14ip_route_via_tNSt6stringE"></span><span id="_CPPv2N3eos12ip_route_mgr16ip_route_via_delERK14ip_route_via_tNSt6stringE"></span><span id="eos::ip_route_mgr::ip_route_via_del__ip_route_via_tCR.ss"></span><span class="target" id="classeos_1_1ip__route__mgr_1a7b8b267f881e7e8908a14516fb4b5fc1"></span><em class="property">virtual</em> void <code class="sig-name descname">ip_route_via_del</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos14ip_route_via_tE" title="eos::ip_route_via_t">ip_route_via_t</a> <em class="property">const</em>&amp;, <a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::string <em>vrfName</em><span class="sig-paren">)</span> = 0<a class="headerlink" href="#_CPPv4N3eos12ip_route_mgr16ip_route_via_delERK14ip_route_via_tNSt6stringE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-protected-functions">Protected Functions</p>
+<dl class="cpp function">
+<dt id="_CPPv4N3eos12ip_route_mgr12ip_route_mgrEv">
+<span id="_CPPv3N3eos12ip_route_mgr12ip_route_mgrEv"></span><span id="_CPPv2N3eos12ip_route_mgr12ip_route_mgrEv"></span><span id="eos::ip_route_mgr::ip_route_mgr"></span><span class="target" id="classeos_1_1ip__route__mgr_1ae7e7d13e9436d6b567f0a91c08bcddeb"></span><code class="sig-name descname">ip_route_mgr</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos12ip_route_mgr12ip_route_mgrEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-private-members">Private Members</p>
+<dl class="cpp var">
+<dt>
+<span class="target" id="classeos_1_1ip__route__mgr_1a1cdf667acfd6f2cd4601a9d52a8fabbc"></span><code class="sig-name descname">ip_route_mgr</code></dt>
+<dd></dd></dl>
+
+</div>
+</dd></dl>
+
+</dd></dl>
+
+<div class="section" id="type-definitions-in-ip-route">
+<h2>Type definitions in <strong>ip_route</strong><a class="headerlink" href="#type-definitions-in-ip-route" title="Permalink to this headline">¶</a></h2>
+<dl class="cpp type">
+<dt>
+<span class="target" id="namespaceeos"></span><em class="property">namespace </em><code class="sig-name descname">eos</code><br /></dt>
+<dd><div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-typedefs">Typedefs</p>
+<dl class="cpp type">
+<dt id="_CPPv4N3eos14ip_route_tag_tE">
+<span id="_CPPv3N3eos14ip_route_tag_tE"></span><span id="_CPPv2N3eos14ip_route_tag_tE"></span><span id="eos::ip_route_tag_t"></span><span class="target" id="namespaceeos_1aa1021bc3b14f65603b18ee460a0b5ddb"></span><em class="property">typedef </em>uint32_t <code class="sig-name descname">ip_route_tag_t</code><a class="headerlink" href="#_CPPv4N3eos14ip_route_tag_tE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp type">
+<dt id="_CPPv4N3eos21ip_route_preference_tE">
+<span id="_CPPv3N3eos21ip_route_preference_tE"></span><span id="_CPPv2N3eos21ip_route_preference_tE"></span><span id="eos::ip_route_preference_t"></span><span class="target" id="namespaceeos_1a2f754bc228f59f8192b341fdb92b5f27"></span><em class="property">typedef </em>uint8_t <code class="sig-name descname">ip_route_preference_t</code><a class="headerlink" href="#_CPPv4N3eos21ip_route_preference_tE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp type">
+<dt id="_CPPv4N3eos17ip_route_metric_tE">
+<span id="_CPPv3N3eos17ip_route_metric_tE"></span><span id="_CPPv2N3eos17ip_route_metric_tE"></span><span id="eos::ip_route_metric_t"></span><span class="target" id="namespaceeos_1afa9cf454d9ad07ec32b06b534badea9e"></span><em class="property">typedef </em>uint32_t <code class="sig-name descname">ip_route_metric_t</code><a class="headerlink" href="#_CPPv4N3eos17ip_route_metric_tE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp type">
+<dt id="_CPPv4N3eos5vni_tE">
+<span id="_CPPv3N3eos5vni_tE"></span><span id="_CPPv2N3eos5vni_tE"></span><span id="eos::vni_t"></span><span class="target" id="namespaceeos_1a2938f9f2edf91e04d91a8f566233cabd"></span><em class="property">typedef </em>uint32_t <code class="sig-name descname">vni_t</code><a class="headerlink" href="#_CPPv4N3eos5vni_tE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Valid range of 1 - (2^24)-1, set to 0 if unused. </p>
+</dd></dl>
+
+<dl class="cpp type">
+<dt id="_CPPv4N3eos15ip_via_metric_tE">
+<span id="_CPPv3N3eos15ip_via_metric_tE"></span><span id="_CPPv2N3eos15ip_via_metric_tE"></span><span id="eos::ip_via_metric_t"></span><span class="target" id="namespaceeos_1a92f6263e6144e1d9496bc89b127e7f0b"></span><em class="property">typedef </em>uint32_t <code class="sig-name descname">ip_via_metric_t</code><a class="headerlink" href="#_CPPv4N3eos15ip_via_metric_tE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp type">
+<dt id="_CPPv4N3eos15ip_via_weight_tE">
+<span id="_CPPv3N3eos15ip_via_weight_tE"></span><span id="_CPPv2N3eos15ip_via_weight_tE"></span><span id="eos::ip_via_weight_t"></span><span class="target" id="namespaceeos_1ac6bcd2c5fd10bd50ae1149cbc30cce4a"></span><em class="property">typedef </em>uint32_t <code class="sig-name descname">ip_via_weight_t</code><a class="headerlink" href="#_CPPv4N3eos15ip_via_weight_tE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-enums">Enums</p>
+<dl class="cpp enum">
+<dt id="_CPPv4N3eos17ip_route_action_tE">
+<span id="_CPPv3N3eos17ip_route_action_tE"></span><span id="_CPPv2N3eos17ip_route_action_tE"></span><span class="target" id="namespaceeos_1a479d04a6d6e98111ff7164759c45edff"></span><em class="property">enum </em><code class="sig-name descname">ip_route_action_t</code><a class="headerlink" href="#_CPPv4N3eos17ip_route_action_tE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>The type of the <a class="reference internal" href="#classeos_1_1ip__route__t"><span class="std std-ref">ip_route_t</span></a>. This is determined by the <a class="reference internal" href="#classeos_1_1ip__route__via__t"><span class="std std-ref">ip_route_via_t</span></a>’s attached to this route. </p>
+<p><em>Values:</em></p>
+<dl class="cpp enumerator">
+<dt id="_CPPv4N3eos17ip_route_action_t20IP_ROUTE_ACTION_NULLE">
+<span id="_CPPv3N3eos17ip_route_action_t20IP_ROUTE_ACTION_NULLE"></span><span id="_CPPv2N3eos17ip_route_action_t20IP_ROUTE_ACTION_NULLE"></span><span class="target" id="namespaceeos_1a479d04a6d6e98111ff7164759c45edffa28a5338e4e6666a9e653fe78d939e554"></span><em class="property">enumerator </em><code class="sig-name descname">IP_ROUTE_ACTION_NULL</code><a class="headerlink" href="#_CPPv4N3eos17ip_route_action_t20IP_ROUTE_ACTION_NULLE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt id="_CPPv4N3eos17ip_route_action_t23IP_ROUTE_ACTION_FORWARDE">
+<span id="_CPPv3N3eos17ip_route_action_t23IP_ROUTE_ACTION_FORWARDE"></span><span id="_CPPv2N3eos17ip_route_action_t23IP_ROUTE_ACTION_FORWARDE"></span><span class="target" id="namespaceeos_1a479d04a6d6e98111ff7164759c45edffae35d9b6c63c96321d9d12ac40e5a44c3"></span><em class="property">enumerator </em><code class="sig-name descname">IP_ROUTE_ACTION_FORWARD</code><a class="headerlink" href="#_CPPv4N3eos17ip_route_action_t23IP_ROUTE_ACTION_FORWARDE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt id="_CPPv4N3eos17ip_route_action_t20IP_ROUTE_ACTION_DROPE">
+<span id="_CPPv3N3eos17ip_route_action_t20IP_ROUTE_ACTION_DROPE"></span><span id="_CPPv2N3eos17ip_route_action_t20IP_ROUTE_ACTION_DROPE"></span><span class="target" id="namespaceeos_1a479d04a6d6e98111ff7164759c45edffa02039a13646c269d1317c249e93aa2b7"></span><em class="property">enumerator </em><code class="sig-name descname">IP_ROUTE_ACTION_DROP</code><a class="headerlink" href="#_CPPv4N3eos17ip_route_action_t20IP_ROUTE_ACTION_DROPE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt id="_CPPv4N3eos17ip_route_action_t29IP_ROUTE_ACTION_NEXTHOP_GROUPE">
+<span id="_CPPv3N3eos17ip_route_action_t29IP_ROUTE_ACTION_NEXTHOP_GROUPE"></span><span id="_CPPv2N3eos17ip_route_action_t29IP_ROUTE_ACTION_NEXTHOP_GROUPE"></span><span class="target" id="namespaceeos_1a479d04a6d6e98111ff7164759c45edffa05b9b3cd5bd63aa6a190de7a4d9685cd"></span><em class="property">enumerator </em><code class="sig-name descname">IP_ROUTE_ACTION_NEXTHOP_GROUP</code><a class="headerlink" href="#_CPPv4N3eos17ip_route_action_t29IP_ROUTE_ACTION_NEXTHOP_GROUPE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<dl class="cpp class">
+<dt id="_CPPv4N3eos14ip_route_key_tE">
+<span id="_CPPv3N3eos14ip_route_key_tE"></span><span id="_CPPv2N3eos14ip_route_key_tE"></span><span id="eos::ip_route_key_t"></span><span class="target" id="classeos_1_1ip__route__key__t"></span><em class="property">class </em><code class="sig-name descname">ip_route_key_t</code><a class="headerlink" href="#_CPPv4N3eos14ip_route_key_tE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><div class="docutils container">
+<em>#include &lt;ip_route.h&gt;</em></div>
+<p>An IP route key, consisting of a prefix and preference. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
+<dl class="cpp function">
+<dt id="_CPPv4N3eos14ip_route_key_t14ip_route_key_tEv">
+<span id="_CPPv3N3eos14ip_route_key_t14ip_route_key_tEv"></span><span id="_CPPv2N3eos14ip_route_key_t14ip_route_key_tEv"></span><span id="eos::ip_route_key_t::ip_route_key_t"></span><span class="target" id="classeos_1_1ip__route__key__t_1ae74a11846568a40f708bdec10587f08a"></span><code class="sig-name descname">ip_route_key_t</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos14ip_route_key_t14ip_route_key_tEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos14ip_route_key_t14ip_route_key_tERK11ip_prefix_t">
+<span id="_CPPv3N3eos14ip_route_key_t14ip_route_key_tERK11ip_prefix_t"></span><span id="_CPPv2N3eos14ip_route_key_t14ip_route_key_tERK11ip_prefix_t"></span><span id="eos::ip_route_key_t::ip_route_key_t__ip_prefix_tCR"></span><span class="target" id="classeos_1_1ip__route__key__t_1a22e3bf32a604f8ff656d337e6455f252"></span><em class="property">explicit</em> <code class="sig-name descname">ip_route_key_t</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#_CPPv4N3eos11ip_prefix_tE" title="eos::ip_prefix_t">ip_prefix_t</a> <em class="property">const</em> &amp;<em>prefix</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos14ip_route_key_t14ip_route_key_tERK11ip_prefix_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos14ip_route_key_t14ip_route_key_tERK11ip_prefix_t21ip_route_preference_t">
+<span id="_CPPv3N3eos14ip_route_key_t14ip_route_key_tERK11ip_prefix_t21ip_route_preference_t"></span><span id="_CPPv2N3eos14ip_route_key_t14ip_route_key_tERK11ip_prefix_t21ip_route_preference_t"></span><span id="eos::ip_route_key_t::ip_route_key_t__ip_prefix_tCR.ip_route_preference_t"></span><span class="target" id="classeos_1_1ip__route__key__t_1a67a59c7b03c20354b51294157b332bc1"></span><code class="sig-name descname">ip_route_key_t</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#_CPPv4N3eos11ip_prefix_tE" title="eos::ip_prefix_t">ip_prefix_t</a> <em class="property">const</em> &amp;<em>prefix</em>, <a class="reference internal" href="#_CPPv4N3eos21ip_route_preference_tE" title="eos::ip_route_preference_t">ip_route_preference_t</a> <em>preference</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos14ip_route_key_t14ip_route_key_tERK11ip_prefix_t21ip_route_preference_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos14ip_route_key_t14ip_route_key_tERK14ip_route_key_t">
+<span id="_CPPv3N3eos14ip_route_key_t14ip_route_key_tERK14ip_route_key_t"></span><span id="_CPPv2N3eos14ip_route_key_t14ip_route_key_tERK14ip_route_key_t"></span><span id="eos::ip_route_key_t::ip_route_key_t__ip_route_key_tCR"></span><span class="target" id="classeos_1_1ip__route__key__t_1a6b125c998bc6d7d95730863f885dc927"></span><code class="sig-name descname">ip_route_key_t</code><span class="sig-paren">(</span><em class="property">const</em> <a class="reference internal" href="#_CPPv4N3eos14ip_route_key_t14ip_route_key_tERK14ip_route_key_t" title="eos::ip_route_key_t::ip_route_key_t">ip_route_key_t</a> &amp;<em>other</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos14ip_route_key_t14ip_route_key_tERK14ip_route_key_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos14ip_route_key_taSERK14ip_route_key_t">
+<span id="_CPPv3N3eos14ip_route_key_taSERK14ip_route_key_t"></span><span id="_CPPv2N3eos14ip_route_key_taSERK14ip_route_key_t"></span><span id="eos::ip_route_key_t::assign-operator__ip_route_key_tCR"></span><span class="target" id="classeos_1_1ip__route__key__t_1aee0286c4c348654688d2234501f15ae0"></span><a class="reference internal" href="#_CPPv4N3eos14ip_route_key_tE" title="eos::ip_route_key_t">ip_route_key_t</a> &amp;<code class="sig-name descname">operator=</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos14ip_route_key_tE" title="eos::ip_route_key_t">ip_route_key_t</a> <em class="property">const</em> &amp;<em>other</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos14ip_route_key_taSERK14ip_route_key_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos14ip_route_key_t6prefixEv">
+<span id="_CPPv3NK3eos14ip_route_key_t6prefixEv"></span><span id="_CPPv2NK3eos14ip_route_key_t6prefixEv"></span><span id="eos::ip_route_key_t::prefixC"></span><span class="target" id="classeos_1_1ip__route__key__t_1aab13e1baee0a7e08d584723b0355b926"></span><a class="reference internal" href="ip.html#_CPPv4N3eos11ip_prefix_tE" title="eos::ip_prefix_t">ip_prefix_t</a> <code class="sig-name descname">prefix</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos14ip_route_key_t6prefixEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Getter for ‘prefix’: the IP v4/v6 network prefix. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos14ip_route_key_t9prefix_isERK11ip_prefix_t">
+<span id="_CPPv3N3eos14ip_route_key_t9prefix_isERK11ip_prefix_t"></span><span id="_CPPv2N3eos14ip_route_key_t9prefix_isERK11ip_prefix_t"></span><span id="eos::ip_route_key_t::prefix_is__ip_prefix_tCR"></span><span class="target" id="classeos_1_1ip__route__key__t_1a54dea4e92106d91fff513447d4f94138"></span>void <code class="sig-name descname">prefix_is</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#_CPPv4N3eos11ip_prefix_tE" title="eos::ip_prefix_t">ip_prefix_t</a> <em class="property">const</em> &amp;<em>prefix</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos14ip_route_key_t9prefix_isERK11ip_prefix_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Setter for ‘prefix’. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos14ip_route_key_t10preferenceEv">
+<span id="_CPPv3NK3eos14ip_route_key_t10preferenceEv"></span><span id="_CPPv2NK3eos14ip_route_key_t10preferenceEv"></span><span id="eos::ip_route_key_t::preferenceC"></span><span class="target" id="classeos_1_1ip__route__key__t_1a3bbc0b82411c1a630f418e5bf9190f79"></span><a class="reference internal" href="#_CPPv4N3eos21ip_route_preference_tE" title="eos::ip_route_preference_t">ip_route_preference_t</a> <code class="sig-name descname">preference</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos14ip_route_key_t10preferenceEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Getter for ‘preference’: a value 0..255, defaults to 1. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos14ip_route_key_t13preference_isE21ip_route_preference_t">
+<span id="_CPPv3N3eos14ip_route_key_t13preference_isE21ip_route_preference_t"></span><span id="_CPPv2N3eos14ip_route_key_t13preference_isE21ip_route_preference_t"></span><span id="eos::ip_route_key_t::preference_is__ip_route_preference_t"></span><span class="target" id="classeos_1_1ip__route__key__t_1a7a9e2263c43ab4046db328be24f1d052"></span>void <code class="sig-name descname">preference_is</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos21ip_route_preference_tE" title="eos::ip_route_preference_t">ip_route_preference_t</a> <em>preference</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos14ip_route_key_t13preference_isE21ip_route_preference_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Setter for ‘preference’. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos14ip_route_key_t2afEv">
+<span id="_CPPv3NK3eos14ip_route_key_t2afEv"></span><span id="_CPPv2NK3eos14ip_route_key_t2afEv"></span><span id="eos::ip_route_key_t::afC"></span><span class="target" id="classeos_1_1ip__route__key__t_1ae4cc36e0fb6a34e55b6d3963808957af"></span><a class="reference internal" href="ip.html#_CPPv4N3eos4af_tE" title="eos::af_t">af_t</a> <code class="sig-name descname">af</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos14ip_route_key_t2afEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>The address family of the route_key_t prefix. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos14ip_route_key_teqERK14ip_route_key_t">
+<span id="_CPPv3NK3eos14ip_route_key_teqERK14ip_route_key_t"></span><span id="_CPPv2NK3eos14ip_route_key_teqERK14ip_route_key_t"></span><span id="eos::ip_route_key_t::eq-operator__ip_route_key_tCRC"></span><span class="target" id="classeos_1_1ip__route__key__t_1aac9183e48bcebdb0dae6a3f2ef2c0857"></span>bool <code class="sig-name descname">operator==</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos14ip_route_key_tE" title="eos::ip_route_key_t">ip_route_key_t</a> <em class="property">const</em> &amp;<em>other</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos14ip_route_key_teqERK14ip_route_key_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos14ip_route_key_tneERK14ip_route_key_t">
+<span id="_CPPv3NK3eos14ip_route_key_tneERK14ip_route_key_t"></span><span id="_CPPv2NK3eos14ip_route_key_tneERK14ip_route_key_t"></span><span id="eos::ip_route_key_t::neq-operator__ip_route_key_tCRC"></span><span class="target" id="classeos_1_1ip__route__key__t_1ab9c6839f41bd2e8e3fbb0ce950c78037"></span>bool <code class="sig-name descname">operator!=</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos14ip_route_key_tE" title="eos::ip_route_key_t">ip_route_key_t</a> <em class="property">const</em> &amp;<em>other</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos14ip_route_key_tneERK14ip_route_key_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos14ip_route_key_t4hashEv">
+<span id="_CPPv3NK3eos14ip_route_key_t4hashEv"></span><span id="_CPPv2NK3eos14ip_route_key_t4hashEv"></span><span id="eos::ip_route_key_t::hashC"></span><span class="target" id="classeos_1_1ip__route__key__t_1a3f131c2368ae6994257b871f2bf4b3e9"></span>uint32_t <code class="sig-name descname">hash</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos14ip_route_key_t4hashEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>The hash function for type <a class="reference internal" href="#classeos_1_1ip__route__key__t"><span class="std std-ref">ip_route_key_t</span></a>. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos14ip_route_key_t6mix_meER8hash_mix">
+<span id="_CPPv3NK3eos14ip_route_key_t6mix_meER8hash_mix"></span><span id="_CPPv2NK3eos14ip_route_key_t6mix_meER8hash_mix"></span><span id="eos::ip_route_key_t::mix_me__hash_mixRC"></span><span class="target" id="classeos_1_1ip__route__key__t_1a578b2f3298438367b7419b4ca68bcb57"></span>void <code class="sig-name descname">mix_me</code><span class="sig-paren">(</span><a class="reference internal" href="hash_mix.html#_CPPv4N3eos8hash_mixE" title="eos::hash_mix">hash_mix</a> &amp;<em>h</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos14ip_route_key_t6mix_meER8hash_mix" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>The hash mix function for type <a class="reference internal" href="#classeos_1_1ip__route__key__t"><span class="std std-ref">ip_route_key_t</span></a>. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos14ip_route_key_t9to_stringEv">
+<span id="_CPPv3NK3eos14ip_route_key_t9to_stringEv"></span><span id="_CPPv2NK3eos14ip_route_key_t9to_stringEv"></span><span id="eos::ip_route_key_t::to_stringC"></span><span class="target" id="classeos_1_1ip__route__key__t_1a85e2d9f8fdacc326873394ed15b2757e"></span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::string <code class="sig-name descname">to_string</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos14ip_route_key_t9to_stringEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Returns a string representation of the current object’s values. </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-static-functions">Public Static Functions</p>
+<dl class="cpp function">
+<dt id="_CPPv4N3eos14ip_route_key_tnwENSt6size_tEPv">
+<span id="_CPPv3N3eos14ip_route_key_tnwENSt6size_tEPv"></span><span id="_CPPv2N3eos14ip_route_key_tnwENSt6size_tEPv"></span><span id="eos::ip_route_key_t::new-operator__std::s.voidP"></span><span class="target" id="classeos_1_1ip__route__key__t_1ae6b61458ca25a077c56f6b25a5370378"></span><em class="property">static</em> <em class="property">inline</em> void *<code class="sig-name descname">operator new</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::size_t, void *<em>ptr</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos14ip_route_key_tnwENSt6size_tEPv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos14ip_route_key_tnwENSt6size_tE">
+<span id="_CPPv3N3eos14ip_route_key_tnwENSt6size_tE"></span><span id="_CPPv2N3eos14ip_route_key_tnwENSt6size_tE"></span><span id="eos::ip_route_key_t::new-operator__std::s"></span><span class="target" id="classeos_1_1ip__route__key__t_1af7a8af7b02d9c848052b9ef2805aeeb7"></span><em class="property">static</em> void *<code class="sig-name descname">operator new</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::size_t<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos14ip_route_key_tnwENSt6size_tE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos14ip_route_key_tdlEPv">
+<span id="_CPPv3N3eos14ip_route_key_tdlEPv"></span><span id="_CPPv2N3eos14ip_route_key_tdlEPv"></span><span id="eos::ip_route_key_t::delete-operator__voidP"></span><span class="target" id="classeos_1_1ip__route__key__t_1a81bc14240e0f4fba706790c5a67da972"></span><em class="property">static</em> void <code class="sig-name descname">operator delete</code><span class="sig-paren">(</span>void*<span class="sig-paren">)</span> <em class="property">noexcept</em><a class="headerlink" href="#_CPPv4N3eos14ip_route_key_tdlEPv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-private-members">Private Members</p>
+<dl class="cpp var">
+<dt id="_CPPv4N3eos14ip_route_key_t5pimplE">
+<span id="_CPPv3N3eos14ip_route_key_t5pimplE"></span><span id="_CPPv2N3eos14ip_route_key_t5pimplE"></span><span id="eos::ip_route_key_t::pimpl__std::shared_ptr:ip_route_key_impl_t:"></span><span class="target" id="classeos_1_1ip__route__key__t_1ab63a3d1fe8d600ccf2eff46fc620def9"></span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::shared_ptr&lt;ip_route_key_impl_t&gt; <code class="sig-name descname">pimpl</code><a class="headerlink" href="#_CPPv4N3eos14ip_route_key_t5pimplE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-friends">Friends</p>
+<dl class="cpp function">
+<dt id="_CPPv4N3eos14ip_route_key_tlsERNSt7ostreamERK14ip_route_key_t">
+<span id="_CPPv3N3eos14ip_route_key_tlsERNSt7ostreamERK14ip_route_key_t"></span><span id="_CPPv2N3eos14ip_route_key_tlsERNSt7ostreamERK14ip_route_key_t"></span><span id="eos::ip_route_key_t::lshift-operator__osR.ip_route_key_tCR"></span><span class="target" id="classeos_1_1ip__route__key__t_1ab651f30a836b767562d196e772334678"></span><em class="property">friend</em> <a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::ostream &amp;<code class="sig-name descname">operator&lt;&lt;</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::ostream &amp;<em>os</em>, <em class="property">const</em> <a class="reference internal" href="#_CPPv4N3eos14ip_route_key_tE" title="eos::ip_route_key_t">ip_route_key_t</a> &amp;<em>obj</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos14ip_route_key_tlsERNSt7ostreamERK14ip_route_key_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>A utility stream operator that adds a string representation of <a class="reference internal" href="#classeos_1_1ip__route__key__t"><span class="std std-ref">ip_route_key_t</span></a> to the ostream. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="cpp class">
+<dt id="_CPPv4N3eos10ip_route_tE">
+<span id="_CPPv3N3eos10ip_route_tE"></span><span id="_CPPv2N3eos10ip_route_tE"></span><span id="eos::ip_route_t"></span><span class="target" id="classeos_1_1ip__route__t"></span><em class="property">class </em><code class="sig-name descname">ip_route_t</code><a class="headerlink" href="#_CPPv4N3eos10ip_route_tE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><div class="docutils container">
+<em>#include &lt;ip_route.h&gt;</em></div>
+<p>An IP v4/v6 static route. “Via”, or nexthops, for this route are stored separately and are associated by route key. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
+<dl class="cpp function">
+<dt id="_CPPv4N3eos10ip_route_t10ip_route_tEv">
+<span id="_CPPv3N3eos10ip_route_t10ip_route_tEv"></span><span id="_CPPv2N3eos10ip_route_t10ip_route_tEv"></span><span id="eos::ip_route_t::ip_route_t"></span><span class="target" id="classeos_1_1ip__route__t_1ae84dbadeca160f55a433f5f3430b1fd5"></span><code class="sig-name descname">ip_route_t</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos10ip_route_t10ip_route_tEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos10ip_route_t10ip_route_tERK14ip_route_key_t">
+<span id="_CPPv3N3eos10ip_route_t10ip_route_tERK14ip_route_key_t"></span><span id="_CPPv2N3eos10ip_route_t10ip_route_tERK14ip_route_key_t"></span><span id="eos::ip_route_t::ip_route_t__ip_route_key_tCR"></span><span class="target" id="classeos_1_1ip__route__t_1af2957a9b9b9ab9988a186895d12cf688"></span><em class="property">explicit</em> <code class="sig-name descname">ip_route_t</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos14ip_route_key_tE" title="eos::ip_route_key_t">ip_route_key_t</a> <em class="property">const</em> &amp;<em>key</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos10ip_route_t10ip_route_tERK14ip_route_key_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Creates an IP static route for the route key. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos10ip_route_t10ip_route_tERK10ip_route_t">
+<span id="_CPPv3N3eos10ip_route_t10ip_route_tERK10ip_route_t"></span><span id="_CPPv2N3eos10ip_route_t10ip_route_tERK10ip_route_t"></span><span id="eos::ip_route_t::ip_route_t__ip_route_tCR"></span><span class="target" id="classeos_1_1ip__route__t_1a06014bb98358caa1d6af34670b8d69de"></span><code class="sig-name descname">ip_route_t</code><span class="sig-paren">(</span><em class="property">const</em> <a class="reference internal" href="#_CPPv4N3eos10ip_route_t10ip_route_tERK10ip_route_t" title="eos::ip_route_t::ip_route_t">ip_route_t</a> &amp;<em>other</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos10ip_route_t10ip_route_tERK10ip_route_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos10ip_route_taSERK10ip_route_t">
+<span id="_CPPv3N3eos10ip_route_taSERK10ip_route_t"></span><span id="_CPPv2N3eos10ip_route_taSERK10ip_route_t"></span><span id="eos::ip_route_t::assign-operator__ip_route_tCR"></span><span class="target" id="classeos_1_1ip__route__t_1a4738115cf3e1e83f9e08e57ec6d3a8f2"></span><a class="reference internal" href="#_CPPv4N3eos10ip_route_tE" title="eos::ip_route_t">ip_route_t</a> &amp;<code class="sig-name descname">operator=</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos10ip_route_tE" title="eos::ip_route_t">ip_route_t</a> <em class="property">const</em> &amp;<em>other</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos10ip_route_taSERK10ip_route_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos10ip_route_t3keyEv">
+<span id="_CPPv3NK3eos10ip_route_t3keyEv"></span><span id="_CPPv2NK3eos10ip_route_t3keyEv"></span><span id="eos::ip_route_t::keyC"></span><span class="target" id="classeos_1_1ip__route__t_1ae0e3d1e9c4040547accc586c929615aa"></span><a class="reference internal" href="#_CPPv4N3eos14ip_route_key_tE" title="eos::ip_route_key_t">ip_route_key_t</a> <code class="sig-name descname">key</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos10ip_route_t3keyEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Getter for ‘key’: the route’s key. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos10ip_route_t6key_isERK14ip_route_key_t">
+<span id="_CPPv3N3eos10ip_route_t6key_isERK14ip_route_key_t"></span><span id="_CPPv2N3eos10ip_route_t6key_isERK14ip_route_key_t"></span><span id="eos::ip_route_t::key_is__ip_route_key_tCR"></span><span class="target" id="classeos_1_1ip__route__t_1a288134a79151eb60d31d05873343f793"></span>void <code class="sig-name descname">key_is</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos14ip_route_key_tE" title="eos::ip_route_key_t">ip_route_key_t</a> <em class="property">const</em> &amp;<em>key</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos10ip_route_t6key_isERK14ip_route_key_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Setter for ‘key’. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos10ip_route_t3tagEv">
+<span id="_CPPv3NK3eos10ip_route_t3tagEv"></span><span id="_CPPv2NK3eos10ip_route_t3tagEv"></span><span id="eos::ip_route_t::tagC"></span><span class="target" id="classeos_1_1ip__route__t_1a82b87b7064154890801244530e99c1e0"></span><a class="reference internal" href="#_CPPv4N3eos14ip_route_tag_tE" title="eos::ip_route_tag_t">ip_route_tag_t</a> <code class="sig-name descname">tag</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos10ip_route_t3tagEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Getter for ‘tag’: a numbered tag, used for table segregation. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos10ip_route_t6tag_isE14ip_route_tag_t">
+<span id="_CPPv3N3eos10ip_route_t6tag_isE14ip_route_tag_t"></span><span id="_CPPv2N3eos10ip_route_t6tag_isE14ip_route_tag_t"></span><span id="eos::ip_route_t::tag_is__ip_route_tag_t"></span><span class="target" id="classeos_1_1ip__route__t_1ac9352ec9ff1df07e99cf2650800e3837"></span>void <code class="sig-name descname">tag_is</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos14ip_route_tag_tE" title="eos::ip_route_tag_t">ip_route_tag_t</a> <em>tag</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos10ip_route_t6tag_isE14ip_route_tag_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Setter for ‘tag’. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos10ip_route_t10rib_bypassEv">
+<span id="_CPPv3NK3eos10ip_route_t10rib_bypassEv"></span><span id="_CPPv2NK3eos10ip_route_t10rib_bypassEv"></span><span id="eos::ip_route_t::rib_bypassC"></span><span class="target" id="classeos_1_1ip__route__t_1ab81a3175d0f52cd9a1d90b6dfdde1c36"></span>bool <code class="sig-name descname">rib_bypass</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos10ip_route_t10rib_bypassEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Getter for ‘rib_bypass’: Enables EVPN routes to bypass IpRib and be handled by RouteCache instead. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos10ip_route_t13rib_bypass_isEb">
+<span id="_CPPv3N3eos10ip_route_t13rib_bypass_isEb"></span><span id="_CPPv2N3eos10ip_route_t13rib_bypass_isEb"></span><span id="eos::ip_route_t::rib_bypass_is__b"></span><span class="target" id="classeos_1_1ip__route__t_1a5daacadaa5eff6b435058b0aadc53d66"></span>void <code class="sig-name descname">rib_bypass_is</code><span class="sig-paren">(</span>bool <em>rib_bypass</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos10ip_route_t13rib_bypass_isEb" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Setter for ‘rib_bypass’. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos10ip_route_t11command_tagEv">
+<span id="_CPPv3NK3eos10ip_route_t11command_tagEv"></span><span id="_CPPv2NK3eos10ip_route_t11command_tagEv"></span><span id="eos::ip_route_t::command_tagC"></span><span class="target" id="classeos_1_1ip__route__t_1a4de91aaa5a95415bb7ba54ff8108217c"></span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::string <code class="sig-name descname">command_tag</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos10ip_route_t11command_tagEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Getter for ‘command_tag’: Associates the route with a command_tag, which might be used to manipulate configuration externally to the agent. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos10ip_route_t14command_tag_isERKNSt6stringE">
+<span id="_CPPv3N3eos10ip_route_t14command_tag_isERKNSt6stringE"></span><span id="_CPPv2N3eos10ip_route_t14command_tag_isERKNSt6stringE"></span><span id="eos::ip_route_t::command_tag_is__ssCR"></span><span class="target" id="classeos_1_1ip__route__t_1aa980c68b720b943b9ea8415436944b23"></span>void <code class="sig-name descname">command_tag_is</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::string <em class="property">const</em> &amp;<em>command_tag</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos10ip_route_t14command_tag_isERKNSt6stringE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Setter for ‘command_tag’. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos10ip_route_t2afEv">
+<span id="_CPPv3NK3eos10ip_route_t2afEv"></span><span id="_CPPv2NK3eos10ip_route_t2afEv"></span><span id="eos::ip_route_t::afC"></span><span class="target" id="classeos_1_1ip__route__t_1abb76420928765740c8377175fdac8e3e"></span><a class="reference internal" href="ip.html#_CPPv4N3eos4af_tE" title="eos::af_t">af_t</a> <code class="sig-name descname">af</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos10ip_route_t2afEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>The address family of the route_key_t prefix. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos10ip_route_teqERK10ip_route_t">
+<span id="_CPPv3NK3eos10ip_route_teqERK10ip_route_t"></span><span id="_CPPv2NK3eos10ip_route_teqERK10ip_route_t"></span><span id="eos::ip_route_t::eq-operator__ip_route_tCRC"></span><span class="target" id="classeos_1_1ip__route__t_1a216c95a8979d33d9f77f62b6477e425e"></span>bool <code class="sig-name descname">operator==</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos10ip_route_tE" title="eos::ip_route_t">ip_route_t</a> <em class="property">const</em> &amp;<em>other</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos10ip_route_teqERK10ip_route_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos10ip_route_tneERK10ip_route_t">
+<span id="_CPPv3NK3eos10ip_route_tneERK10ip_route_t"></span><span id="_CPPv2NK3eos10ip_route_tneERK10ip_route_t"></span><span id="eos::ip_route_t::neq-operator__ip_route_tCRC"></span><span class="target" id="classeos_1_1ip__route__t_1a038d123e443ff3b9f9993d78c6aedebf"></span>bool <code class="sig-name descname">operator!=</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos10ip_route_tE" title="eos::ip_route_t">ip_route_t</a> <em class="property">const</em> &amp;<em>other</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos10ip_route_tneERK10ip_route_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos10ip_route_t4hashEv">
+<span id="_CPPv3NK3eos10ip_route_t4hashEv"></span><span id="_CPPv2NK3eos10ip_route_t4hashEv"></span><span id="eos::ip_route_t::hashC"></span><span class="target" id="classeos_1_1ip__route__t_1af2a03a4b2cf64f402b6e30d660648d81"></span>uint32_t <code class="sig-name descname">hash</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos10ip_route_t4hashEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>The hash function for type <a class="reference internal" href="#classeos_1_1ip__route__t"><span class="std std-ref">ip_route_t</span></a>. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos10ip_route_t6mix_meER8hash_mix">
+<span id="_CPPv3NK3eos10ip_route_t6mix_meER8hash_mix"></span><span id="_CPPv2NK3eos10ip_route_t6mix_meER8hash_mix"></span><span id="eos::ip_route_t::mix_me__hash_mixRC"></span><span class="target" id="classeos_1_1ip__route__t_1a94e12d44969b35151ed5f2db59ad27a6"></span>void <code class="sig-name descname">mix_me</code><span class="sig-paren">(</span><a class="reference internal" href="hash_mix.html#_CPPv4N3eos8hash_mixE" title="eos::hash_mix">hash_mix</a> &amp;<em>h</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos10ip_route_t6mix_meER8hash_mix" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>The hash mix function for type <a class="reference internal" href="#classeos_1_1ip__route__t"><span class="std std-ref">ip_route_t</span></a>. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos10ip_route_t9to_stringEv">
+<span id="_CPPv3NK3eos10ip_route_t9to_stringEv"></span><span id="_CPPv2NK3eos10ip_route_t9to_stringEv"></span><span id="eos::ip_route_t::to_stringC"></span><span class="target" id="classeos_1_1ip__route__t_1a55fe24e60d7575c1bc9078d100c1b158"></span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::string <code class="sig-name descname">to_string</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos10ip_route_t9to_stringEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Returns a string representation of the current object’s values. </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-static-functions">Public Static Functions</p>
+<dl class="cpp function">
+<dt id="_CPPv4N3eos10ip_route_tnwENSt6size_tEPv">
+<span id="_CPPv3N3eos10ip_route_tnwENSt6size_tEPv"></span><span id="_CPPv2N3eos10ip_route_tnwENSt6size_tEPv"></span><span id="eos::ip_route_t::new-operator__std::s.voidP"></span><span class="target" id="classeos_1_1ip__route__t_1aff5491435d27f09ace1bbc900cb61d09"></span><em class="property">static</em> <em class="property">inline</em> void *<code class="sig-name descname">operator new</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::size_t, void *<em>ptr</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos10ip_route_tnwENSt6size_tEPv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos10ip_route_tnwENSt6size_tE">
+<span id="_CPPv3N3eos10ip_route_tnwENSt6size_tE"></span><span id="_CPPv2N3eos10ip_route_tnwENSt6size_tE"></span><span id="eos::ip_route_t::new-operator__std::s"></span><span class="target" id="classeos_1_1ip__route__t_1a7ecca299c0ca917b55ad287628545f31"></span><em class="property">static</em> void *<code class="sig-name descname">operator new</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::size_t<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos10ip_route_tnwENSt6size_tE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos10ip_route_tdlEPv">
+<span id="_CPPv3N3eos10ip_route_tdlEPv"></span><span id="_CPPv2N3eos10ip_route_tdlEPv"></span><span id="eos::ip_route_t::delete-operator__voidP"></span><span class="target" id="classeos_1_1ip__route__t_1a9563b99bf8b14f2a9a9244e843950da3"></span><em class="property">static</em> void <code class="sig-name descname">operator delete</code><span class="sig-paren">(</span>void*<span class="sig-paren">)</span> <em class="property">noexcept</em><a class="headerlink" href="#_CPPv4N3eos10ip_route_tdlEPv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-private-members">Private Members</p>
+<dl class="cpp var">
+<dt id="_CPPv4N3eos10ip_route_t5pimplE">
+<span id="_CPPv3N3eos10ip_route_t5pimplE"></span><span id="_CPPv2N3eos10ip_route_t5pimplE"></span><span id="eos::ip_route_t::pimpl__std::shared_ptr:ip_route_impl_t:"></span><span class="target" id="classeos_1_1ip__route__t_1ad9f5dc05a03749672e14eae160af8a00"></span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::shared_ptr&lt;ip_route_impl_t&gt; <code class="sig-name descname">pimpl</code><a class="headerlink" href="#_CPPv4N3eos10ip_route_t5pimplE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-friends">Friends</p>
+<dl class="cpp function">
+<dt id="_CPPv4N3eos10ip_route_tlsERNSt7ostreamERK10ip_route_t">
+<span id="_CPPv3N3eos10ip_route_tlsERNSt7ostreamERK10ip_route_t"></span><span id="_CPPv2N3eos10ip_route_tlsERNSt7ostreamERK10ip_route_t"></span><span id="eos::ip_route_t::lshift-operator__osR.ip_route_tCR"></span><span class="target" id="classeos_1_1ip__route__t_1a35535286179bf6edd9e95372c93e08bc"></span><em class="property">friend</em> <a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::ostream &amp;<code class="sig-name descname">operator&lt;&lt;</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::ostream &amp;<em>os</em>, <em class="property">const</em> <a class="reference internal" href="#_CPPv4N3eos10ip_route_tE" title="eos::ip_route_t">ip_route_t</a> &amp;<em>obj</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos10ip_route_tlsERNSt7ostreamERK10ip_route_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>A utility stream operator that adds a string representation of <a class="reference internal" href="#classeos_1_1ip__route__t"><span class="std std-ref">ip_route_t</span></a> to the ostream. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="cpp class">
+<dt id="_CPPv4N3eos14ip_route_via_tE">
+<span id="_CPPv3N3eos14ip_route_via_tE"></span><span id="_CPPv2N3eos14ip_route_via_tE"></span><span id="eos::ip_route_via_t"></span><span class="target" id="classeos_1_1ip__route__via__t"></span><em class="property">class </em><code class="sig-name descname">ip_route_via_t</code><a class="headerlink" href="#_CPPv4N3eos14ip_route_via_tE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><div class="docutils container">
+<em>#include &lt;ip_route.h&gt;</em></div>
+<p>A Via describing a particular set of nexthop information. A Via can describe either a nexthop group name to either forward traffic to, or drop traffic if the interface is Null0. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
+<dl class="cpp function">
+<dt id="_CPPv4N3eos14ip_route_via_t14ip_route_via_tEv">
+<span id="_CPPv3N3eos14ip_route_via_t14ip_route_via_tEv"></span><span id="_CPPv2N3eos14ip_route_via_t14ip_route_via_tEv"></span><span id="eos::ip_route_via_t::ip_route_via_t"></span><span class="target" id="classeos_1_1ip__route__via__t_1a8354d1434893e604d0b9e084e90ecbca"></span><code class="sig-name descname">ip_route_via_t</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos14ip_route_via_t14ip_route_via_tEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos14ip_route_via_t14ip_route_via_tERK14ip_route_key_t">
+<span id="_CPPv3N3eos14ip_route_via_t14ip_route_via_tERK14ip_route_key_t"></span><span id="_CPPv2N3eos14ip_route_via_t14ip_route_via_tERK14ip_route_key_t"></span><span id="eos::ip_route_via_t::ip_route_via_t__ip_route_key_tCR"></span><span class="target" id="classeos_1_1ip__route__via__t_1a7604d063a8de858c920d130208ed8ebb"></span><em class="property">explicit</em> <code class="sig-name descname">ip_route_via_t</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos14ip_route_key_tE" title="eos::ip_route_key_t">ip_route_key_t</a> <em class="property">const</em> &amp;<em>route_key</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos14ip_route_via_t14ip_route_via_tERK14ip_route_key_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Creates a route via for a route key. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos14ip_route_via_t14ip_route_via_tERK14ip_route_via_t">
+<span id="_CPPv3N3eos14ip_route_via_t14ip_route_via_tERK14ip_route_via_t"></span><span id="_CPPv2N3eos14ip_route_via_t14ip_route_via_tERK14ip_route_via_t"></span><span id="eos::ip_route_via_t::ip_route_via_t__ip_route_via_tCR"></span><span class="target" id="classeos_1_1ip__route__via__t_1a9a0cc546999aadd05f462ac1aa36e983"></span><code class="sig-name descname">ip_route_via_t</code><span class="sig-paren">(</span><em class="property">const</em> <a class="reference internal" href="#_CPPv4N3eos14ip_route_via_t14ip_route_via_tERK14ip_route_via_t" title="eos::ip_route_via_t::ip_route_via_t">ip_route_via_t</a> &amp;<em>other</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos14ip_route_via_t14ip_route_via_tERK14ip_route_via_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos14ip_route_via_taSERK14ip_route_via_t">
+<span id="_CPPv3N3eos14ip_route_via_taSERK14ip_route_via_t"></span><span id="_CPPv2N3eos14ip_route_via_taSERK14ip_route_via_t"></span><span id="eos::ip_route_via_t::assign-operator__ip_route_via_tCR"></span><span class="target" id="classeos_1_1ip__route__via__t_1aed0379e40b530dc156de41ac9ec03c12"></span><a class="reference internal" href="#_CPPv4N3eos14ip_route_via_tE" title="eos::ip_route_via_t">ip_route_via_t</a> &amp;<code class="sig-name descname">operator=</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos14ip_route_via_tE" title="eos::ip_route_via_t">ip_route_via_t</a> <em class="property">const</em> &amp;<em>other</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos14ip_route_via_taSERK14ip_route_via_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos14ip_route_via_t9route_keyEv">
+<span id="_CPPv3NK3eos14ip_route_via_t9route_keyEv"></span><span id="_CPPv2NK3eos14ip_route_via_t9route_keyEv"></span><span id="eos::ip_route_via_t::route_keyC"></span><span class="target" id="classeos_1_1ip__route__via__t_1a684206b4aa4a91055fe2a25369873eb7"></span><a class="reference internal" href="#_CPPv4N3eos14ip_route_key_tE" title="eos::ip_route_key_t">ip_route_key_t</a> <code class="sig-name descname">route_key</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos14ip_route_via_t9route_keyEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Getter for ‘route_key’: key for the route that this via is attached to. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos14ip_route_via_t12route_key_isERK14ip_route_key_t">
+<span id="_CPPv3N3eos14ip_route_via_t12route_key_isERK14ip_route_key_t"></span><span id="_CPPv2N3eos14ip_route_via_t12route_key_isERK14ip_route_key_t"></span><span id="eos::ip_route_via_t::route_key_is__ip_route_key_tCR"></span><span class="target" id="classeos_1_1ip__route__via__t_1a654422fcb04de8ca68b65200d2d3d104"></span>void <code class="sig-name descname">route_key_is</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos14ip_route_key_tE" title="eos::ip_route_key_t">ip_route_key_t</a> <em class="property">const</em> &amp;<em>route_key</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos14ip_route_via_t12route_key_isERK14ip_route_key_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Setter for ‘route_key’. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos14ip_route_via_t3hopEv">
+<span id="_CPPv3NK3eos14ip_route_via_t3hopEv"></span><span id="_CPPv2NK3eos14ip_route_via_t3hopEv"></span><span id="eos::ip_route_via_t::hopC"></span><span class="target" id="classeos_1_1ip__route__via__t_1a870d0462f5a2f96a49759735d610f8fb"></span><a class="reference internal" href="ip.html#_CPPv4N3eos9ip_addr_tE" title="eos::ip_addr_t">ip_addr_t</a> <code class="sig-name descname">hop</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos14ip_route_via_t3hopEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Getter for ‘hop’: IP v4/v6 nexthop address, or a default <a class="reference internal" href="ip.html#classeos_1_1ip__addr__t"><span class="std std-ref">ip_addr_t</span></a> if not set. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos14ip_route_via_t6hop_isERK9ip_addr_t">
+<span id="_CPPv3N3eos14ip_route_via_t6hop_isERK9ip_addr_t"></span><span id="_CPPv2N3eos14ip_route_via_t6hop_isERK9ip_addr_t"></span><span id="eos::ip_route_via_t::hop_is__ip_addr_tCR"></span><span class="target" id="classeos_1_1ip__route__via__t_1abe49e26435e9186d8ecf60ac4f055e03"></span>void <code class="sig-name descname">hop_is</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#_CPPv4N3eos9ip_addr_tE" title="eos::ip_addr_t">ip_addr_t</a> <em class="property">const</em> &amp;<em>hop</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos14ip_route_via_t6hop_isERK9ip_addr_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Setter for ‘hop’. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos14ip_route_via_t4intfEv">
+<span id="_CPPv3NK3eos14ip_route_via_t4intfEv"></span><span id="_CPPv2NK3eos14ip_route_via_t4intfEv"></span><span id="eos::ip_route_via_t::intfC"></span><span class="target" id="classeos_1_1ip__route__via__t_1a5a1457ed4bb369e436c3c98f69004348"></span><a class="reference internal" href="intf.html#_CPPv4N3eos9intf_id_tE" title="eos::intf_id_t">intf_id_t</a> <code class="sig-name descname">intf</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos14ip_route_via_t4intfEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Getter for ‘intf’: use the named interface if not a default <a class="reference internal" href="intf.html#classeos_1_1intf__id__t"><span class="std std-ref">intf_id_t</span></a>. Using intf Null0 installs a “drop” route for the given prefix and preference. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos14ip_route_via_t7intf_isE9intf_id_t">
+<span id="_CPPv3N3eos14ip_route_via_t7intf_isE9intf_id_t"></span><span id="_CPPv2N3eos14ip_route_via_t7intf_isE9intf_id_t"></span><span id="eos::ip_route_via_t::intf_is__intf_id_t"></span><span class="target" id="classeos_1_1ip__route__via__t_1a1cacc3ffa3cd028b085d8dbd5b80e66c"></span>void <code class="sig-name descname">intf_is</code><span class="sig-paren">(</span><a class="reference internal" href="intf.html#_CPPv4N3eos9intf_id_tE" title="eos::intf_id_t">intf_id_t</a> <em>intf</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos14ip_route_via_t7intf_isE9intf_id_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Setter for ‘intf’. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos14ip_route_via_t13nexthop_groupEv">
+<span id="_CPPv3NK3eos14ip_route_via_t13nexthop_groupEv"></span><span id="_CPPv2NK3eos14ip_route_via_t13nexthop_groupEv"></span><span id="eos::ip_route_via_t::nexthop_groupC"></span><span class="target" id="classeos_1_1ip__route__via__t_1a865e79354617d0468c1b368249f17e78"></span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::string <code class="sig-name descname">nexthop_group</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos14ip_route_via_t13nexthop_groupEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Getter for ‘nexthop_group’: name of the next-hop group to use. If this string is non-empty, the next-hop group of the given name will be used, and both “hop” and “intf” must be left to their default value otherwise we will panic(). Note this is currently only supported for IPv4 routes. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos14ip_route_via_t16nexthop_group_isERKNSt6stringE">
+<span id="_CPPv3N3eos14ip_route_via_t16nexthop_group_isERKNSt6stringE"></span><span id="_CPPv2N3eos14ip_route_via_t16nexthop_group_isERKNSt6stringE"></span><span id="eos::ip_route_via_t::nexthop_group_is__ssCR"></span><span class="target" id="classeos_1_1ip__route__via__t_1aff2dda691f5cc9e4140a2eeb615ec734"></span>void <code class="sig-name descname">nexthop_group_is</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::string <em class="property">const</em> &amp;<em>nexthop_group</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos14ip_route_via_t16nexthop_group_isERKNSt6stringE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Setter for ‘nexthop_group’. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos14ip_route_via_t10mpls_labelEv">
+<span id="_CPPv3NK3eos14ip_route_via_t10mpls_labelEv"></span><span id="_CPPv2NK3eos14ip_route_via_t10mpls_labelEv"></span><span id="eos::ip_route_via_t::mpls_labelC"></span><span class="target" id="classeos_1_1ip__route__via__t_1ab468dadee531c943e4b6a59132ed979b"></span><a class="reference internal" href="mpls.html#_CPPv4N3eos12mpls_label_tE" title="eos::mpls_label_t">mpls_label_t</a> <code class="sig-name descname">mpls_label</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos14ip_route_via_t10mpls_labelEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Getter for ‘mpls_label’: Push this MPLS label onto packets using this route. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos14ip_route_via_t13mpls_label_isE12mpls_label_t">
+<span id="_CPPv3N3eos14ip_route_via_t13mpls_label_isE12mpls_label_t"></span><span id="_CPPv2N3eos14ip_route_via_t13mpls_label_isE12mpls_label_t"></span><span id="eos::ip_route_via_t::mpls_label_is__mpls_label_t"></span><span class="target" id="classeos_1_1ip__route__via__t_1a37491bb5a13fd27a36a2a22718506c91"></span>void <code class="sig-name descname">mpls_label_is</code><span class="sig-paren">(</span><a class="reference internal" href="mpls.html#_CPPv4N3eos12mpls_label_tE" title="eos::mpls_label_t">mpls_label_t</a> <em>mpls_label</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos14ip_route_via_t13mpls_label_isE12mpls_label_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Setter for ‘mpls_label’. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos14ip_route_via_t3vniEv">
+<span id="_CPPv3NK3eos14ip_route_via_t3vniEv"></span><span id="_CPPv2NK3eos14ip_route_via_t3vniEv"></span><span id="eos::ip_route_via_t::vniC"></span><span class="target" id="classeos_1_1ip__route__via__t_1a390b05f80c274cfaa0280a6089a0e076"></span><a class="reference internal" href="#_CPPv4N3eos5vni_tE" title="eos::vni_t">vni_t</a> <code class="sig-name descname">vni</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos14ip_route_via_t3vniEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Getter for ‘vni’: the VNI to use in the underlay tunnel vxlan header. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos14ip_route_via_t6vni_isE5vni_t">
+<span id="_CPPv3N3eos14ip_route_via_t6vni_isE5vni_t"></span><span id="_CPPv2N3eos14ip_route_via_t6vni_isE5vni_t"></span><span id="eos::ip_route_via_t::vni_is__vni_t"></span><span class="target" id="classeos_1_1ip__route__via__t_1a834554dc439a389f3abd5ab71eb179db"></span>void <code class="sig-name descname">vni_is</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos5vni_tE" title="eos::vni_t">vni_t</a> <em>vni</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos14ip_route_via_t6vni_isE5vni_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Setter for ‘vni’. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos14ip_route_via_t9vtep_addrEv">
+<span id="_CPPv3NK3eos14ip_route_via_t9vtep_addrEv"></span><span id="_CPPv2NK3eos14ip_route_via_t9vtep_addrEv"></span><span id="eos::ip_route_via_t::vtep_addrC"></span><span class="target" id="classeos_1_1ip__route__via__t_1a783d1a122d25ae180bc782147f5e6487"></span><a class="reference internal" href="ip.html#_CPPv4N3eos9ip_addr_tE" title="eos::ip_addr_t">ip_addr_t</a> <code class="sig-name descname">vtep_addr</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos14ip_route_via_t9vtep_addrEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Getter for ‘vtep_addr’: IP v4 destination address for the underlay IP header. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos14ip_route_via_t12vtep_addr_isE9ip_addr_t">
+<span id="_CPPv3N3eos14ip_route_via_t12vtep_addr_isE9ip_addr_t"></span><span id="_CPPv2N3eos14ip_route_via_t12vtep_addr_isE9ip_addr_t"></span><span id="eos::ip_route_via_t::vtep_addr_is__ip_addr_t"></span><span class="target" id="classeos_1_1ip__route__via__t_1a0634f4eac6ae0ecdc701d264c321f5ff"></span>void <code class="sig-name descname">vtep_addr_is</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#_CPPv4N3eos9ip_addr_tE" title="eos::ip_addr_t">ip_addr_t</a> <em>vtep_addr</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos14ip_route_via_t12vtep_addr_isE9ip_addr_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Setter for ‘vtep_addr’. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos14ip_route_via_t10router_macEv">
+<span id="_CPPv3NK3eos14ip_route_via_t10router_macEv"></span><span id="_CPPv2NK3eos14ip_route_via_t10router_macEv"></span><span id="eos::ip_route_via_t::router_macC"></span><span class="target" id="classeos_1_1ip__route__via__t_1ac290ce4e33d48feb10bfd37a62e99bb3"></span><a class="reference internal" href="eth.html#_CPPv4N3eos10eth_addr_tE" title="eos::eth_addr_t">eth_addr_t</a> <code class="sig-name descname">router_mac</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos14ip_route_via_t10router_macEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Getter for ‘router_mac’: DMAC to use in the underlay ethernet header. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos14ip_route_via_t13router_mac_isE10eth_addr_t">
+<span id="_CPPv3N3eos14ip_route_via_t13router_mac_isE10eth_addr_t"></span><span id="_CPPv2N3eos14ip_route_via_t13router_mac_isE10eth_addr_t"></span><span id="eos::ip_route_via_t::router_mac_is__eth_addr_t"></span><span class="target" id="classeos_1_1ip__route__via__t_1accbabf28f9a86744f915cebb99f734f1"></span>void <code class="sig-name descname">router_mac_is</code><span class="sig-paren">(</span><a class="reference internal" href="eth.html#_CPPv4N3eos10eth_addr_tE" title="eos::eth_addr_t">eth_addr_t</a> <em>router_mac</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos14ip_route_via_t13router_mac_isE10eth_addr_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Setter for ‘router_mac’. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos14ip_route_via_t10egress_vrfEv">
+<span id="_CPPv3NK3eos14ip_route_via_t10egress_vrfEv"></span><span id="_CPPv2NK3eos14ip_route_via_t10egress_vrfEv"></span><span id="eos::ip_route_via_t::egress_vrfC"></span><span class="target" id="classeos_1_1ip__route__via__t_1a671e2449ee68cf52b53bf8243f48fed9"></span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::string <code class="sig-name descname">egress_vrf</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos14ip_route_via_t10egress_vrfEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Getter for ‘egress_vrf’: VRF name in which nexthop IP address is. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos14ip_route_via_t13egress_vrf_isERKNSt6stringE">
+<span id="_CPPv3N3eos14ip_route_via_t13egress_vrf_isERKNSt6stringE"></span><span id="_CPPv2N3eos14ip_route_via_t13egress_vrf_isERKNSt6stringE"></span><span id="eos::ip_route_via_t::egress_vrf_is__ssCR"></span><span class="target" id="classeos_1_1ip__route__via__t_1a5e33dc59257e7f88698822d2e0dccf2e"></span>void <code class="sig-name descname">egress_vrf_is</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::string <em class="property">const</em> &amp;<em>egress_vrf</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos14ip_route_via_t13egress_vrf_isERKNSt6stringE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Setter for ‘egress_vrf’. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos14ip_route_via_t6metricEv">
+<span id="_CPPv3NK3eos14ip_route_via_t6metricEv"></span><span id="_CPPv2NK3eos14ip_route_via_t6metricEv"></span><span id="eos::ip_route_via_t::metricC"></span><span class="target" id="classeos_1_1ip__route__via__t_1a9a64aa1d907945e967ca9fc154eeb03c"></span><a class="reference internal" href="#_CPPv4N3eos15ip_via_metric_tE" title="eos::ip_via_metric_t">ip_via_metric_t</a> <code class="sig-name descname">metric</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos14ip_route_via_t6metricEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Getter for ‘metric’: metric for the via. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos14ip_route_via_t9metric_isE15ip_via_metric_t">
+<span id="_CPPv3N3eos14ip_route_via_t9metric_isE15ip_via_metric_t"></span><span id="_CPPv2N3eos14ip_route_via_t9metric_isE15ip_via_metric_t"></span><span id="eos::ip_route_via_t::metric_is__ip_via_metric_t"></span><span class="target" id="classeos_1_1ip__route__via__t_1a53c04b30b23999d7ebc278540deed185"></span>void <code class="sig-name descname">metric_is</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos15ip_via_metric_tE" title="eos::ip_via_metric_t">ip_via_metric_t</a> <em>metric</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos14ip_route_via_t9metric_isE15ip_via_metric_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Setter for ‘metric’. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos14ip_route_via_t10vxlan_intfEv">
+<span id="_CPPv3NK3eos14ip_route_via_t10vxlan_intfEv"></span><span id="_CPPv2NK3eos14ip_route_via_t10vxlan_intfEv"></span><span id="eos::ip_route_via_t::vxlan_intfC"></span><span class="target" id="classeos_1_1ip__route__via__t_1a42e27758f6eba8dcabd81fa14e44001b"></span><a class="reference internal" href="intf.html#_CPPv4N3eos9intf_id_tE" title="eos::intf_id_t">intf_id_t</a> <code class="sig-name descname">vxlan_intf</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos14ip_route_via_t10vxlan_intfEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Getter for ‘vxlan_intf’: VXLAN source interface. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos14ip_route_via_t13vxlan_intf_isE9intf_id_t">
+<span id="_CPPv3N3eos14ip_route_via_t13vxlan_intf_isE9intf_id_t"></span><span id="_CPPv2N3eos14ip_route_via_t13vxlan_intf_isE9intf_id_t"></span><span id="eos::ip_route_via_t::vxlan_intf_is__intf_id_t"></span><span class="target" id="classeos_1_1ip__route__via__t_1aa57f7908a3518430abe117a1913ce632"></span>void <code class="sig-name descname">vxlan_intf_is</code><span class="sig-paren">(</span><a class="reference internal" href="intf.html#_CPPv4N3eos9intf_id_tE" title="eos::intf_id_t">intf_id_t</a> <em>vxlan_intf</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos14ip_route_via_t13vxlan_intf_isE9intf_id_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Setter for ‘vxlan_intf’. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos14ip_route_via_t19vtep_sip_validationEv">
+<span id="_CPPv3NK3eos14ip_route_via_t19vtep_sip_validationEv"></span><span id="_CPPv2NK3eos14ip_route_via_t19vtep_sip_validationEv"></span><span id="eos::ip_route_via_t::vtep_sip_validationC"></span><span class="target" id="classeos_1_1ip__route__via__t_1a7360350d42589305ad06e2d2598f0738"></span>bool <code class="sig-name descname">vtep_sip_validation</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos14ip_route_via_t19vtep_sip_validationEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Getter for ‘vtep_sip_validation’: Enables VTEP SIP validation for this via. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos14ip_route_via_t22vtep_sip_validation_isEb">
+<span id="_CPPv3N3eos14ip_route_via_t22vtep_sip_validation_isEb"></span><span id="_CPPv2N3eos14ip_route_via_t22vtep_sip_validation_isEb"></span><span id="eos::ip_route_via_t::vtep_sip_validation_is__b"></span><span class="target" id="classeos_1_1ip__route__via__t_1a4771bb668a3da52bdf11272a84ae8818"></span>void <code class="sig-name descname">vtep_sip_validation_is</code><span class="sig-paren">(</span>bool <em>vtep_sip_validation</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos14ip_route_via_t22vtep_sip_validation_isEb" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Setter for ‘vtep_sip_validation’. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos14ip_route_via_t6weightEv">
+<span id="_CPPv3NK3eos14ip_route_via_t6weightEv"></span><span id="_CPPv2NK3eos14ip_route_via_t6weightEv"></span><span id="eos::ip_route_via_t::weightC"></span><span class="target" id="classeos_1_1ip__route__via__t_1abd69d8060689dcdcbd3588a8db61749a"></span><a class="reference internal" href="#_CPPv4N3eos15ip_via_weight_tE" title="eos::ip_via_weight_t">ip_via_weight_t</a> <code class="sig-name descname">weight</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos14ip_route_via_t6weightEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Getter for ‘weight’: the weight for this via. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos14ip_route_via_t9weight_isE15ip_via_weight_t">
+<span id="_CPPv3N3eos14ip_route_via_t9weight_isE15ip_via_weight_t"></span><span id="_CPPv2N3eos14ip_route_via_t9weight_isE15ip_via_weight_t"></span><span id="eos::ip_route_via_t::weight_is__ip_via_weight_t"></span><span class="target" id="classeos_1_1ip__route__via__t_1a4a48f218f028d92928a94572f984edd6"></span>void <code class="sig-name descname">weight_is</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos15ip_via_weight_tE" title="eos::ip_via_weight_t">ip_via_weight_t</a> <em>weight</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos14ip_route_via_t9weight_isE15ip_via_weight_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Setter for ‘weight’. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos14ip_route_via_teqERK14ip_route_via_t">
+<span id="_CPPv3NK3eos14ip_route_via_teqERK14ip_route_via_t"></span><span id="_CPPv2NK3eos14ip_route_via_teqERK14ip_route_via_t"></span><span id="eos::ip_route_via_t::eq-operator__ip_route_via_tCRC"></span><span class="target" id="classeos_1_1ip__route__via__t_1ad0e79e9d0582deba453bacb3357f380b"></span>bool <code class="sig-name descname">operator==</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos14ip_route_via_tE" title="eos::ip_route_via_t">ip_route_via_t</a> <em class="property">const</em> &amp;<em>other</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos14ip_route_via_teqERK14ip_route_via_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos14ip_route_via_tneERK14ip_route_via_t">
+<span id="_CPPv3NK3eos14ip_route_via_tneERK14ip_route_via_t"></span><span id="_CPPv2NK3eos14ip_route_via_tneERK14ip_route_via_t"></span><span id="eos::ip_route_via_t::neq-operator__ip_route_via_tCRC"></span><span class="target" id="classeos_1_1ip__route__via__t_1a37218ddb935492300a3cea7b8350ec78"></span>bool <code class="sig-name descname">operator!=</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos14ip_route_via_tE" title="eos::ip_route_via_t">ip_route_via_t</a> <em class="property">const</em> &amp;<em>other</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos14ip_route_via_tneERK14ip_route_via_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos14ip_route_via_t4hashEv">
+<span id="_CPPv3NK3eos14ip_route_via_t4hashEv"></span><span id="_CPPv2NK3eos14ip_route_via_t4hashEv"></span><span id="eos::ip_route_via_t::hashC"></span><span class="target" id="classeos_1_1ip__route__via__t_1a5a9e65023bb502de12044a268d3488af"></span>uint32_t <code class="sig-name descname">hash</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos14ip_route_via_t4hashEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>The hash function for type <a class="reference internal" href="#classeos_1_1ip__route__via__t"><span class="std std-ref">ip_route_via_t</span></a>. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos14ip_route_via_t6mix_meER8hash_mix">
+<span id="_CPPv3NK3eos14ip_route_via_t6mix_meER8hash_mix"></span><span id="_CPPv2NK3eos14ip_route_via_t6mix_meER8hash_mix"></span><span id="eos::ip_route_via_t::mix_me__hash_mixRC"></span><span class="target" id="classeos_1_1ip__route__via__t_1afca17ca411107d9090e5eab315948589"></span>void <code class="sig-name descname">mix_me</code><span class="sig-paren">(</span><a class="reference internal" href="hash_mix.html#_CPPv4N3eos8hash_mixE" title="eos::hash_mix">hash_mix</a> &amp;<em>h</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos14ip_route_via_t6mix_meER8hash_mix" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>The hash mix function for type <a class="reference internal" href="#classeos_1_1ip__route__via__t"><span class="std std-ref">ip_route_via_t</span></a>. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos14ip_route_via_t9to_stringEv">
+<span id="_CPPv3NK3eos14ip_route_via_t9to_stringEv"></span><span id="_CPPv2NK3eos14ip_route_via_t9to_stringEv"></span><span id="eos::ip_route_via_t::to_stringC"></span><span class="target" id="classeos_1_1ip__route__via__t_1a15ccb609f80b8dc50865887ae63f23a1"></span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::string <code class="sig-name descname">to_string</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos14ip_route_via_t9to_stringEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Returns a string representation of the current object’s values. </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-static-functions">Public Static Functions</p>
+<dl class="cpp function">
+<dt id="_CPPv4N3eos14ip_route_via_tnwENSt6size_tEPv">
+<span id="_CPPv3N3eos14ip_route_via_tnwENSt6size_tEPv"></span><span id="_CPPv2N3eos14ip_route_via_tnwENSt6size_tEPv"></span><span id="eos::ip_route_via_t::new-operator__std::s.voidP"></span><span class="target" id="classeos_1_1ip__route__via__t_1ae09a2a4ff49ab54663c51dc9f76a183c"></span><em class="property">static</em> <em class="property">inline</em> void *<code class="sig-name descname">operator new</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::size_t, void *<em>ptr</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos14ip_route_via_tnwENSt6size_tEPv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos14ip_route_via_tnwENSt6size_tE">
+<span id="_CPPv3N3eos14ip_route_via_tnwENSt6size_tE"></span><span id="_CPPv2N3eos14ip_route_via_tnwENSt6size_tE"></span><span id="eos::ip_route_via_t::new-operator__std::s"></span><span class="target" id="classeos_1_1ip__route__via__t_1a1833369677a46c2a1a25b6a8c80f83ca"></span><em class="property">static</em> void *<code class="sig-name descname">operator new</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::size_t<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos14ip_route_via_tnwENSt6size_tE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos14ip_route_via_tdlEPv">
+<span id="_CPPv3N3eos14ip_route_via_tdlEPv"></span><span id="_CPPv2N3eos14ip_route_via_tdlEPv"></span><span id="eos::ip_route_via_t::delete-operator__voidP"></span><span class="target" id="classeos_1_1ip__route__via__t_1a686cd31cd813f8a1094d341139aa579b"></span><em class="property">static</em> void <code class="sig-name descname">operator delete</code><span class="sig-paren">(</span>void*<span class="sig-paren">)</span> <em class="property">noexcept</em><a class="headerlink" href="#_CPPv4N3eos14ip_route_via_tdlEPv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-private-members">Private Members</p>
+<dl class="cpp var">
+<dt id="_CPPv4N3eos14ip_route_via_t5pimplE">
+<span id="_CPPv3N3eos14ip_route_via_t5pimplE"></span><span id="_CPPv2N3eos14ip_route_via_t5pimplE"></span><span id="eos::ip_route_via_t::pimpl__std::shared_ptr:ip_route_via_impl_t:"></span><span class="target" id="classeos_1_1ip__route__via__t_1a38a563bf249dcfdff1c61ab495650ca5"></span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::shared_ptr&lt;ip_route_via_impl_t&gt; <code class="sig-name descname">pimpl</code><a class="headerlink" href="#_CPPv4N3eos14ip_route_via_t5pimplE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-friends">Friends</p>
+<dl class="cpp function">
+<dt id="_CPPv4N3eos14ip_route_via_tlsERNSt7ostreamERK14ip_route_via_t">
+<span id="_CPPv3N3eos14ip_route_via_tlsERNSt7ostreamERK14ip_route_via_t"></span><span id="_CPPv2N3eos14ip_route_via_tlsERNSt7ostreamERK14ip_route_via_t"></span><span id="eos::ip_route_via_t::lshift-operator__osR.ip_route_via_tCR"></span><span class="target" id="classeos_1_1ip__route__via__t_1a62f1dbeede6ef9734017954fc12684cb"></span><em class="property">friend</em> <a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::ostream &amp;<code class="sig-name descname">operator&lt;&lt;</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::ostream &amp;<em>os</em>, <em class="property">const</em> <a class="reference internal" href="#_CPPv4N3eos14ip_route_via_tE" title="eos::ip_route_via_t">ip_route_via_t</a> &amp;<em>obj</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos14ip_route_via_tlsERNSt7ostreamERK14ip_route_via_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>A utility stream operator that adds a string representation of <a class="reference internal" href="#classeos_1_1ip__route__via__t"><span class="std std-ref">ip_route_via_t</span></a> to the ostream. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#"><strong>ip_route</strong></a><ul>
+<li><a class="reference internal" href="#type-definitions-in-ip-route">Type definitions in <strong>ip_route</strong></a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="ip_intf.html"
+                        title="previous chapter"><strong>ip_intf</strong></a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="iterator.html"
+                        title="next chapter"><strong>iterator</strong></a></p>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="iterator.html" title="iterator"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="ip_intf.html" title="ip_intf"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Arista EOS SDK 2.22.5.1 reference</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href=""><strong>ip_route</strong></a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2014, Arista Networks.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.4.3.
+    </div>
+  </body>
+</html>

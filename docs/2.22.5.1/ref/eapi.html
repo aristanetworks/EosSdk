@@ -1,0 +1,289 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>eapi &#8212; Arista EOS SDK 2.22.5.1 reference</title>
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/eossdk.css" type="text/css" />
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="eth" href="eth.html" />
+    <link rel="prev" title="directflow" href="directflow.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="eth.html" title="eth"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="directflow.html" title="directflow"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Arista EOS SDK 2.22.5.1 reference</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href=""><strong>eapi</strong></a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="eapi">
+<h1><strong>eapi</strong><a class="headerlink" href="#eapi" title="Permalink to this headline">¶</a></h1>
+<p>EOS eAPI interaction module. This module allows interaction with the CLI via eAPI command requests. This allows EOS SDK applications access to configuration and status of EOS state for which EOS SDK APIs do not yet exist. Note that each method is a synchronous call, and opens a unix-domain socket. Therefore, this is not intended to be a replacement for other EosSdk modules.</p>
+<p>For more information about eAPI, please visit <a class="reference external" href="https://eos.arista.com/arista-eapi-101/">https://eos.arista.com/arista-eapi-101/</a></p>
+<p>The following snippet shows how to load an eAPI response into a json_t object from the jansson library, although any json library to convert from json-formatted text will do. Based on the jansson library documentation: <a class="reference external" href="https://jansson.readthedocs.io/en/2.10/tutorial.html">https://jansson.readthedocs.io/en/2.10/tutorial.html</a> <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>eapi_response_t show_interfaces = eapiMgr-&gt;run_show_cmd(&quot;show interfaces&quot;);
+json_t* root;
+json_error_t error;
+if (show_interfaces.success()) {
+   root = json_loads(show_interfaces.responses()[0], 0, &amp;error);
+}
+if (!root) {
+   fprintf(stderr, &quot;error: on line %d: %s\n&quot;, error.line, error.text);
+}
+json_t* interfaces = json_object_get(root, &quot;interfaces&quot;);
+json_t* intf1 = json_object_get(interfaces, &quot;Ethernet1&quot;);
+json_t* desc1 = json_object_get(intf1, &quot;description&quot;);
+
+printf(&quot;Ethernet1&#39;s description: &quot; &lt;&lt; json_string_value(desc1));
+...
+</pre></div>
+</div>
+ </p>
+<dl class="cpp type">
+<dt id="_CPPv43eos">
+<span id="_CPPv33eos"></span><span id="_CPPv23eos"></span><span id="eos"></span><span class="target" id="namespaceeos"></span><em class="property">namespace </em><code class="sig-name descname">eos</code><br /></dt>
+<dd><dl class="cpp class">
+<dt id="_CPPv4N3eos8eapi_mgrE">
+<span id="_CPPv3N3eos8eapi_mgrE"></span><span id="_CPPv2N3eos8eapi_mgrE"></span><span id="eos::eapi_mgr"></span><span class="target" id="classeos_1_1eapi__mgr"></span><em class="property">class </em><code class="sig-name descname">eapi_mgr</code><a class="headerlink" href="#_CPPv4N3eos8eapi_mgrE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><div class="docutils container">
+<em>#include &lt;eapi.h&gt;</em></div>
+<p>eAPI manager. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
+<dl class="cpp function">
+<dt id="_CPPv4N3eos8eapi_mgrD0Ev">
+<span id="_CPPv3N3eos8eapi_mgrD0Ev"></span><span id="_CPPv2N3eos8eapi_mgrD0Ev"></span><span id="eos::eapi_mgr::~eapi_mgr"></span><span class="target" id="classeos_1_1eapi__mgr_1ad85f2c1eecfb862c66314f2e036350b1"></span><em class="property">virtual</em> <code class="sig-name descname">~eapi_mgr</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos8eapi_mgrD0Ev" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos8eapi_mgr12run_show_cmdERKNSt6stringE">
+<span id="_CPPv3NK3eos8eapi_mgr12run_show_cmdERKNSt6stringE"></span><span id="_CPPv2NK3eos8eapi_mgr12run_show_cmdERKNSt6stringE"></span><span id="eos::eapi_mgr::run_show_cmd__ssCRC"></span><span class="target" id="classeos_1_1eapi__mgr_1a39ae8ccafb8c5041ed792c8dfd58c97a"></span><em class="property">virtual</em> <a class="reference internal" href="#_CPPv4N3eos15eapi_response_tE" title="eos::eapi_response_t">eapi_response_t</a> <code class="sig-name descname">run_show_cmd</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::string <em class="property">const</em>&amp;<span class="sig-paren">)</span> <em class="property">const</em> = 0<a class="headerlink" href="#_CPPv4NK3eos8eapi_mgr12run_show_cmdERKNSt6stringE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Executes a “show” CLI command in enable mode. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos8eapi_mgr15run_config_cmdsERKNSt6vectorINSt6stringEEE">
+<span id="_CPPv3NK3eos8eapi_mgr15run_config_cmdsERKNSt6vectorINSt6stringEEE"></span><span id="_CPPv2NK3eos8eapi_mgr15run_config_cmdsERKNSt6vectorINSt6stringEEE"></span><span id="eos::eapi_mgr::run_config_cmds__std::vector:ss:CRC"></span><span class="target" id="classeos_1_1eapi__mgr_1a41897a491a87242b36d369fcaef04e2f"></span><em class="property">virtual</em> <a class="reference internal" href="#_CPPv4N3eos15eapi_response_tE" title="eos::eapi_response_t">eapi_response_t</a> <code class="sig-name descname">run_config_cmds</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::vector&lt;<a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::string&gt; <em class="property">const</em>&amp;<span class="sig-paren">)</span> <em class="property">const</em> = 0<a class="headerlink" href="#_CPPv4NK3eos8eapi_mgr15run_config_cmdsERKNSt6vectorINSt6stringEEE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Executes one or many CLI commands in configuration mode. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos8eapi_mgr17run_show_cmd_textERKNSt6stringE">
+<span id="_CPPv3NK3eos8eapi_mgr17run_show_cmd_textERKNSt6stringE"></span><span id="_CPPv2NK3eos8eapi_mgr17run_show_cmd_textERKNSt6stringE"></span><span id="eos::eapi_mgr::run_show_cmd_text__ssCRC"></span><span class="target" id="classeos_1_1eapi__mgr_1a0097baa655d508a1dedc6eaa2a61cc5f"></span><em class="property">virtual</em> <a class="reference internal" href="#_CPPv4N3eos15eapi_response_tE" title="eos::eapi_response_t">eapi_response_t</a> <code class="sig-name descname">run_show_cmd_text</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::string <em class="property">const</em>&amp;<span class="sig-paren">)</span> <em class="property">const</em> = 0<a class="headerlink" href="#_CPPv4NK3eos8eapi_mgr17run_show_cmd_textERKNSt6stringE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>like “run_show_cmd” but returns “text” formatted output (instead of json) </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-protected-functions">Protected Functions</p>
+<dl class="cpp function">
+<dt id="_CPPv4N3eos8eapi_mgr8eapi_mgrEv">
+<span id="_CPPv3N3eos8eapi_mgr8eapi_mgrEv"></span><span id="_CPPv2N3eos8eapi_mgr8eapi_mgrEv"></span><span id="eos::eapi_mgr::eapi_mgr"></span><span class="target" id="classeos_1_1eapi__mgr_1a481e31cf6ad904edd3feb0c941f8ca46"></span><code class="sig-name descname">eapi_mgr</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos8eapi_mgr8eapi_mgrEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-private-members">Private Members</p>
+<dl class="cpp var">
+<dt>
+<span class="target" id="classeos_1_1eapi__mgr_1af4db9732606cdc1bde01e06d1b272dd0"></span><code class="sig-name descname">eapi_mgr</code></dt>
+<dd></dd></dl>
+
+</div>
+</dd></dl>
+
+</dd></dl>
+
+<div class="section" id="type-definitions-in-eapi">
+<h2>Type definitions in <strong>eapi</strong><a class="headerlink" href="#type-definitions-in-eapi" title="Permalink to this headline">¶</a></h2>
+<dl class="cpp type">
+<dt>
+<span class="target" id="namespaceeos"></span><em class="property">namespace </em><code class="sig-name descname">eos</code><br /></dt>
+<dd><dl class="cpp class">
+<dt id="_CPPv4N3eos15eapi_response_tE">
+<span id="_CPPv3N3eos15eapi_response_tE"></span><span id="_CPPv2N3eos15eapi_response_tE"></span><span id="eos::eapi_response_t"></span><span class="target" id="classeos_1_1eapi__response__t"></span><em class="property">class </em><code class="sig-name descname">eapi_response_t</code><a class="headerlink" href="#_CPPv4N3eos15eapi_response_tE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><div class="docutils container">
+<em>#include &lt;eapi.h&gt;</em></div>
+<p>An eAPI response from the Cli server. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
+<dl class="cpp function">
+<dt id="_CPPv4N3eos15eapi_response_t15eapi_response_tEv">
+<span id="_CPPv3N3eos15eapi_response_t15eapi_response_tEv"></span><span id="_CPPv2N3eos15eapi_response_t15eapi_response_tEv"></span><span id="eos::eapi_response_t::eapi_response_t"></span><span class="target" id="classeos_1_1eapi__response__t_1a01faf62702ea072302de3637ffde9664"></span><code class="sig-name descname">eapi_response_t</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos15eapi_response_t15eapi_response_tEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Default constructor. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos15eapi_response_t15eapi_response_tEb8uint32_tRKNSt6stringERKNSt6vectorINSt6stringEEE">
+<span id="_CPPv3N3eos15eapi_response_t15eapi_response_tEb8uint32_tRKNSt6stringERKNSt6vectorINSt6stringEEE"></span><span id="_CPPv2N3eos15eapi_response_t15eapi_response_tEb8uint32_tRKNSt6stringERKNSt6vectorINSt6stringEEE"></span><span id="eos::eapi_response_t::eapi_response_t__b.uint32_t.ssCR.std::vector:ss:CR"></span><span class="target" id="classeos_1_1eapi__response__t_1a0f310f846e1424a1c7f29cdc5dc0542e"></span><code class="sig-name descname">eapi_response_t</code><span class="sig-paren">(</span>bool <em>success</em>, uint32_t <em>error_code</em>, <a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::string <em class="property">const</em> &amp;<em>error_message</em>, <a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::vector&lt;<a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::string&gt; <em class="property">const</em> &amp;<em>responses</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos15eapi_response_t15eapi_response_tEb8uint32_tRKNSt6stringERKNSt6vectorINSt6stringEEE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Full constructor. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos15eapi_response_t15eapi_response_tERK15eapi_response_t">
+<span id="_CPPv3N3eos15eapi_response_t15eapi_response_tERK15eapi_response_t"></span><span id="_CPPv2N3eos15eapi_response_t15eapi_response_tERK15eapi_response_t"></span><span id="eos::eapi_response_t::eapi_response_t__eapi_response_tCR"></span><span class="target" id="classeos_1_1eapi__response__t_1a5c3ce7aff0af11bccc6d4aa421233a58"></span><code class="sig-name descname">eapi_response_t</code><span class="sig-paren">(</span><em class="property">const</em> <a class="reference internal" href="#_CPPv4N3eos15eapi_response_t15eapi_response_tERK15eapi_response_t" title="eos::eapi_response_t::eapi_response_t">eapi_response_t</a> &amp;<em>other</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos15eapi_response_t15eapi_response_tERK15eapi_response_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos15eapi_response_taSERK15eapi_response_t">
+<span id="_CPPv3N3eos15eapi_response_taSERK15eapi_response_t"></span><span id="_CPPv2N3eos15eapi_response_taSERK15eapi_response_t"></span><span id="eos::eapi_response_t::assign-operator__eapi_response_tCR"></span><span class="target" id="classeos_1_1eapi__response__t_1a13b56e5095abafbf51504de0d8c4a43f"></span><a class="reference internal" href="#_CPPv4N3eos15eapi_response_tE" title="eos::eapi_response_t">eapi_response_t</a> &amp;<code class="sig-name descname">operator=</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos15eapi_response_tE" title="eos::eapi_response_t">eapi_response_t</a> <em class="property">const</em> &amp;<em>other</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos15eapi_response_taSERK15eapi_response_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos15eapi_response_t7successEv">
+<span id="_CPPv3NK3eos15eapi_response_t7successEv"></span><span id="_CPPv2NK3eos15eapi_response_t7successEv"></span><span id="eos::eapi_response_t::successC"></span><span class="target" id="classeos_1_1eapi__response__t_1a888e6db2c7347577f1724c45fa41927a"></span>bool <code class="sig-name descname">success</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos15eapi_response_t7successEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Getter for ‘success’: indicates if a response was received. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos15eapi_response_t10error_codeEv">
+<span id="_CPPv3NK3eos15eapi_response_t10error_codeEv"></span><span id="_CPPv2NK3eos15eapi_response_t10error_codeEv"></span><span id="eos::eapi_response_t::error_codeC"></span><span class="target" id="classeos_1_1eapi__response__t_1a092dde2a7e4774fbb74bcbf46ac7e9a4"></span>uint32_t <code class="sig-name descname">error_code</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos15eapi_response_t10error_codeEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Getter for ‘error_code’: error code from eAPI response. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos15eapi_response_t13error_messageEv">
+<span id="_CPPv3NK3eos15eapi_response_t13error_messageEv"></span><span id="_CPPv2NK3eos15eapi_response_t13error_messageEv"></span><span id="eos::eapi_response_t::error_messageC"></span><span class="target" id="classeos_1_1eapi__response__t_1af789ea0638b438822968f5b7afc7747b"></span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::string <code class="sig-name descname">error_message</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos15eapi_response_t13error_messageEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Getter for ‘error_message’: error message from response. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos15eapi_response_t9responsesEv">
+<span id="_CPPv3NK3eos15eapi_response_t9responsesEv"></span><span id="_CPPv2NK3eos15eapi_response_t9responsesEv"></span><span id="eos::eapi_response_t::responsesC"></span><span class="target" id="classeos_1_1eapi__response__t_1abac91b756c1d486e508a6779af06eb08"></span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::vector&lt;<a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::string&gt; <em class="property">const</em> &amp;<code class="sig-name descname">responses</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos15eapi_response_t9responsesEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Getter for ‘responses’: the set of strings that constitute an eAPI response. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos15eapi_response_t12raw_responseEv">
+<span id="_CPPv3NK3eos15eapi_response_t12raw_responseEv"></span><span id="_CPPv2NK3eos15eapi_response_t12raw_responseEv"></span><span id="eos::eapi_response_t::raw_responseC"></span><span class="target" id="classeos_1_1eapi__response__t_1acf90078fce75e85726ceb2cbaadaf141"></span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::string <code class="sig-name descname">raw_response</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos15eapi_response_t12raw_responseEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Getter for ‘raw_response’: raw eAPI response (if requested). </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos15eapi_response_t9to_stringEv">
+<span id="_CPPv3NK3eos15eapi_response_t9to_stringEv"></span><span id="_CPPv2NK3eos15eapi_response_t9to_stringEv"></span><span id="eos::eapi_response_t::to_stringC"></span><span class="target" id="classeos_1_1eapi__response__t_1a2023ab0a9690cf9757964f46d4da82eb"></span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::string <code class="sig-name descname">to_string</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos15eapi_response_t9to_stringEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Returns a string representation of the current object’s values. </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-static-functions">Public Static Functions</p>
+<dl class="cpp function">
+<dt id="_CPPv4N3eos15eapi_response_tnwENSt6size_tEPv">
+<span id="_CPPv3N3eos15eapi_response_tnwENSt6size_tEPv"></span><span id="_CPPv2N3eos15eapi_response_tnwENSt6size_tEPv"></span><span id="eos::eapi_response_t::new-operator__std::s.voidP"></span><span class="target" id="classeos_1_1eapi__response__t_1a87864f79416145e62234717662cc41fd"></span><em class="property">static</em> <em class="property">inline</em> void *<code class="sig-name descname">operator new</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::size_t, void *<em>ptr</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos15eapi_response_tnwENSt6size_tEPv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos15eapi_response_tnwENSt6size_tE">
+<span id="_CPPv3N3eos15eapi_response_tnwENSt6size_tE"></span><span id="_CPPv2N3eos15eapi_response_tnwENSt6size_tE"></span><span id="eos::eapi_response_t::new-operator__std::s"></span><span class="target" id="classeos_1_1eapi__response__t_1a95882fe53dcbbeea44fe8e8cec0512b0"></span><em class="property">static</em> void *<code class="sig-name descname">operator new</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::size_t<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos15eapi_response_tnwENSt6size_tE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos15eapi_response_tdlEPv">
+<span id="_CPPv3N3eos15eapi_response_tdlEPv"></span><span id="_CPPv2N3eos15eapi_response_tdlEPv"></span><span id="eos::eapi_response_t::delete-operator__voidP"></span><span class="target" id="classeos_1_1eapi__response__t_1a40c4033bc7a1c567ad7d26e53358d6a4"></span><em class="property">static</em> void <code class="sig-name descname">operator delete</code><span class="sig-paren">(</span>void*<span class="sig-paren">)</span> <em class="property">noexcept</em><a class="headerlink" href="#_CPPv4N3eos15eapi_response_tdlEPv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-private-members">Private Members</p>
+<dl class="cpp var">
+<dt id="_CPPv4N3eos15eapi_response_t5pimplE">
+<span id="_CPPv3N3eos15eapi_response_t5pimplE"></span><span id="_CPPv2N3eos15eapi_response_t5pimplE"></span><span id="eos::eapi_response_t::pimpl__std::shared_ptr:eapi_response_impl_t:"></span><span class="target" id="classeos_1_1eapi__response__t_1aaa6d3df0a234b6ff54571a761a5b9a19"></span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::shared_ptr&lt;eapi_response_impl_t&gt; <code class="sig-name descname">pimpl</code><a class="headerlink" href="#_CPPv4N3eos15eapi_response_t5pimplE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-friends">Friends</p>
+<dl class="cpp function">
+<dt id="_CPPv4N3eos15eapi_response_tlsERNSt7ostreamERK15eapi_response_t">
+<span id="_CPPv3N3eos15eapi_response_tlsERNSt7ostreamERK15eapi_response_t"></span><span id="_CPPv2N3eos15eapi_response_tlsERNSt7ostreamERK15eapi_response_t"></span><span id="eos::eapi_response_t::lshift-operator__osR.eapi_response_tCR"></span><span class="target" id="classeos_1_1eapi__response__t_1abb5c159fc1d07ad3d4f9b6d6c5aa4081"></span><em class="property">friend</em> <a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::ostream &amp;<code class="sig-name descname">operator&lt;&lt;</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::ostream &amp;<em>os</em>, <em class="property">const</em> <a class="reference internal" href="#_CPPv4N3eos15eapi_response_tE" title="eos::eapi_response_t">eapi_response_t</a> &amp;<em>obj</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos15eapi_response_tlsERNSt7ostreamERK15eapi_response_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>A utility stream operator that adds a string representation of <a class="reference internal" href="#classeos_1_1eapi__response__t"><span class="std std-ref">eapi_response_t</span></a> to the ostream. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#"><strong>eapi</strong></a><ul>
+<li><a class="reference internal" href="#type-definitions-in-eapi">Type definitions in <strong>eapi</strong></a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="directflow.html"
+                        title="previous chapter"><strong>directflow</strong></a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="eth.html"
+                        title="next chapter"><strong>eth</strong></a></p>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="eth.html" title="eth"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="directflow.html" title="directflow"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Arista EOS SDK 2.22.5.1 reference</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href=""><strong>eapi</strong></a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2014, Arista Networks.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.4.3.
+    </div>
+  </body>
+</html>

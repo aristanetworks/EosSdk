@@ -1,0 +1,889 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>eth_lag_intf &#8212; Arista EOS SDK 2.22.5.1 reference</title>
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/eossdk.css" type="text/css" />
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="eth_phy_intf" href="eth_phy_intf.html" />
+    <link rel="prev" title="eth_intf" href="eth_intf.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="eth_phy_intf.html" title="eth_phy_intf"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="eth_intf.html" title="eth_intf"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Arista EOS SDK 2.22.5.1 reference</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href=""><strong>eth_lag_intf</strong></a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="eth-lag-intf">
+<h1><strong>eth_lag_intf</strong><a class="headerlink" href="#eth-lag-intf" title="Permalink to this headline">¶</a></h1>
+<p>The eth_lag_intf module manages link aggregation groups (LAGs), also known as Port Channels.</p>
+<p>LAGs bundle physical interfaces together into a single logical link to provide combined bandwidth and other benefits. This module provides APIs to provision LAG interfaces. APIs include LAG creation, deletion, retrieval, member interface adding to or removal from LAG interfaces. Two iterators are also provided to allow iteration through all the LAG interfaces and also all the member interfaces that are configured on the system. </p>
+<dl class="cpp type">
+<dt id="_CPPv43eos">
+<span id="_CPPv33eos"></span><span id="_CPPv23eos"></span><span id="eos"></span><span class="target" id="namespaceeos"></span><em class="property">namespace </em><code class="sig-name descname">eos</code><br /></dt>
+<dd><dl class="cpp class">
+<dt id="_CPPv4N3eos20eth_lag_intf_handlerE">
+<span id="_CPPv3N3eos20eth_lag_intf_handlerE"></span><span id="_CPPv2N3eos20eth_lag_intf_handlerE"></span><span id="eos::eth_lag_intf_handler"></span><span class="target" id="classeos_1_1eth__lag__intf__handler"></span><em class="property">class </em><code class="sig-name descname">eth_lag_intf_handler</code> : <em class="property">public</em> <a class="reference internal" href="acl.html#_CPPv43eos" title="eos">eos</a>::<a class="reference internal" href="base_handler.html#_CPPv4I00EN3eos12base_handlerE" title="eos::base_handler">base_handler</a>&lt;<a class="reference internal" href="#_CPPv4N3eos16eth_lag_intf_mgrE" title="eos::eth_lag_intf_mgr">eth_lag_intf_mgr</a>, <a class="reference internal" href="#_CPPv4N3eos20eth_lag_intf_handlerE" title="eos::eth_lag_intf_handler">eth_lag_intf_handler</a>&gt;<a class="headerlink" href="#_CPPv4N3eos20eth_lag_intf_handlerE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><div class="docutils container">
+<em>#include &lt;eth_lag_intf.h&gt;</em></div>
+<p>The handler for LAG interface events. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
+<dl class="cpp function">
+<dt id="_CPPv4N3eos20eth_lag_intf_handler20eth_lag_intf_handlerEP16eth_lag_intf_mgr">
+<span id="_CPPv3N3eos20eth_lag_intf_handler20eth_lag_intf_handlerEP16eth_lag_intf_mgr"></span><span id="_CPPv2N3eos20eth_lag_intf_handler20eth_lag_intf_handlerEP16eth_lag_intf_mgr"></span><span id="eos::eth_lag_intf_handler::eth_lag_intf_handler__eth_lag_intf_mgrP"></span><span class="target" id="classeos_1_1eth__lag__intf__handler_1aaba18e2325e3adddf728f810e3dccbf6"></span><em class="property">explicit</em> <code class="sig-name descname">eth_lag_intf_handler</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos16eth_lag_intf_mgrE" title="eos::eth_lag_intf_mgr">eth_lag_intf_mgr</a>*<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos20eth_lag_intf_handler20eth_lag_intf_handlerEP16eth_lag_intf_mgr" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos20eth_lag_intf_handlerD0Ev">
+<span id="_CPPv3N3eos20eth_lag_intf_handlerD0Ev"></span><span id="_CPPv2N3eos20eth_lag_intf_handlerD0Ev"></span><span id="eos::eth_lag_intf_handler::~eth_lag_intf_handler"></span><span class="target" id="classeos_1_1eth__lag__intf__handler_1acb3a7fc25d97a1e9dd953873dd4c9ed8"></span><em class="property">virtual</em> <code class="sig-name descname">~eth_lag_intf_handler</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos20eth_lag_intf_handlerD0Ev" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos20eth_lag_intf_handler20get_eth_lag_intf_mgrEv">
+<span id="_CPPv3NK3eos20eth_lag_intf_handler20get_eth_lag_intf_mgrEv"></span><span id="_CPPv2NK3eos20eth_lag_intf_handler20get_eth_lag_intf_mgrEv"></span><span id="eos::eth_lag_intf_handler::get_eth_lag_intf_mgrC"></span><span class="target" id="classeos_1_1eth__lag__intf__handler_1ae68db9f2eb538325a0b0de693412dc5e"></span><em class="property">inline</em> <a class="reference internal" href="#_CPPv4N3eos16eth_lag_intf_mgrE" title="eos::eth_lag_intf_mgr">eth_lag_intf_mgr</a> *<code class="sig-name descname">get_eth_lag_intf_mgr</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos20eth_lag_intf_handler20get_eth_lag_intf_mgrEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos20eth_lag_intf_handler23watch_all_eth_lag_intfsEb">
+<span id="_CPPv3N3eos20eth_lag_intf_handler23watch_all_eth_lag_intfsEb"></span><span id="_CPPv2N3eos20eth_lag_intf_handler23watch_all_eth_lag_intfsEb"></span><span id="eos::eth_lag_intf_handler::watch_all_eth_lag_intfs__b"></span><span class="target" id="classeos_1_1eth__lag__intf__handler_1af2b46e9ae2dca40a28a12a0071e68cd1"></span>void <code class="sig-name descname">watch_all_eth_lag_intfs</code><span class="sig-paren">(</span>bool<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos20eth_lag_intf_handler23watch_all_eth_lag_intfsEb" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Registers this class to receive change updates on all interfaces.</p>
+<p>Expects a boolean signifying whether notifications should be enabled on all interfaces and propogated to this instance. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos20eth_lag_intf_handler18watch_eth_lag_intfE9intf_id_tb">
+<span id="_CPPv3N3eos20eth_lag_intf_handler18watch_eth_lag_intfE9intf_id_tb"></span><span id="_CPPv2N3eos20eth_lag_intf_handler18watch_eth_lag_intfE9intf_id_tb"></span><span id="eos::eth_lag_intf_handler::watch_eth_lag_intf__intf_id_t.b"></span><span class="target" id="classeos_1_1eth__lag__intf__handler_1ac726753cedfcdf98a74e0a9ad7746795"></span>void <code class="sig-name descname">watch_eth_lag_intf</code><span class="sig-paren">(</span><a class="reference internal" href="intf.html#_CPPv4N3eos9intf_id_tE" title="eos::intf_id_t">intf_id_t</a>, bool<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos20eth_lag_intf_handler18watch_eth_lag_intfE9intf_id_tb" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Registers this class to receive change updates on the given interface.</p>
+<p>Expects the ID of the corresponding LAG interface and a boolean signifying whether notifications should be propagated to this instance or not. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos20eth_lag_intf_handler22on_eth_lag_intf_createE9intf_id_t">
+<span id="_CPPv3N3eos20eth_lag_intf_handler22on_eth_lag_intf_createE9intf_id_t"></span><span id="_CPPv2N3eos20eth_lag_intf_handler22on_eth_lag_intf_createE9intf_id_t"></span><span id="eos::eth_lag_intf_handler::on_eth_lag_intf_create__intf_id_t"></span><span class="target" id="classeos_1_1eth__lag__intf__handler_1ad2e0e98a9b75ad53e7ac2484109e4b11"></span><em class="property">virtual</em> void <code class="sig-name descname">on_eth_lag_intf_create</code><span class="sig-paren">(</span><a class="reference internal" href="intf.html#_CPPv4N3eos9intf_id_tE" title="eos::intf_id_t">intf_id_t</a><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos20eth_lag_intf_handler22on_eth_lag_intf_createE9intf_id_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Handler called when a LAG ethernet interface is created.</p>
+<p>After on_eth_lag_intf_create is called, the given intf_id is guaranteed to exist (ie <a class="reference internal" href="#classeos_1_1eth__lag__intf__mgr_1ac0de2cadbe579c5c2a77ec867b244905"><span class="std std-ref">eth_lag_intf_mgr::exists</span></a> will return true). At that point, the intf_id can be used will all methods of the <a class="reference internal" href="#classeos_1_1eth__lag__intf__mgr"><span class="std std-ref">eth_lag_intf_mgr</span></a> class.</p>
+<p>This also means that the intf_id can be used with all other relevant *intf_mgr classes (ie <a class="reference internal" href="intf.html#classeos_1_1intf__mgr"><span class="std std-ref">intf_mgr</span></a> and <a class="reference internal" href="eth_intf.html#classeos_1_1eth__intf__mgr"><span class="std std-ref">eth_intf_mgr</span></a>). </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos20eth_lag_intf_handler22on_eth_lag_intf_deleteE9intf_id_t">
+<span id="_CPPv3N3eos20eth_lag_intf_handler22on_eth_lag_intf_deleteE9intf_id_t"></span><span id="_CPPv2N3eos20eth_lag_intf_handler22on_eth_lag_intf_deleteE9intf_id_t"></span><span id="eos::eth_lag_intf_handler::on_eth_lag_intf_delete__intf_id_t"></span><span class="target" id="classeos_1_1eth__lag__intf__handler_1ac57deaf6faac66438feb12e42603055c"></span><em class="property">virtual</em> void <code class="sig-name descname">on_eth_lag_intf_delete</code><span class="sig-paren">(</span><a class="reference internal" href="intf.html#_CPPv4N3eos9intf_id_tE" title="eos::intf_id_t">intf_id_t</a><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos20eth_lag_intf_handler22on_eth_lag_intf_deleteE9intf_id_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Handler called when a LAG ethernet interface is deleted.</p>
+<p>After on_eth_lag_intf_delete is called, the given intf_id is guaranteed to not exist (ie <a class="reference internal" href="#classeos_1_1eth__lag__intf__mgr_1ac0de2cadbe579c5c2a77ec867b244905"><span class="std std-ref">eth_lag_intf_mgr::exists</span></a> will return false). At that point, the intf_id cannot be used will any methods in the <a class="reference internal" href="#classeos_1_1eth__lag__intf__mgr"><span class="std std-ref">eth_lag_intf_mgr</span></a> class, with the exception of methods used to create new LAG interfaces.</p>
+<p>This also means that the intf_id can no longer be used with all other relevant *intf_mgr classes (ie <a class="reference internal" href="intf.html#classeos_1_1intf__mgr"><span class="std std-ref">intf_mgr</span></a> and <a class="reference internal" href="eth_intf.html#classeos_1_1eth__intf__mgr"><span class="std std-ref">eth_intf_mgr</span></a>). </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos20eth_lag_intf_handler17on_lag_member_setE9intf_id_t9intf_id_t">
+<span id="_CPPv3N3eos20eth_lag_intf_handler17on_lag_member_setE9intf_id_t9intf_id_t"></span><span id="_CPPv2N3eos20eth_lag_intf_handler17on_lag_member_setE9intf_id_t9intf_id_t"></span><span id="eos::eth_lag_intf_handler::on_lag_member_set__intf_id_t.intf_id_t"></span><span class="target" id="classeos_1_1eth__lag__intf__handler_1a97600f8990044eb9fd24a7bdd0a78f74"></span><em class="property">virtual</em> void <code class="sig-name descname">on_lag_member_set</code><span class="sig-paren">(</span><a class="reference internal" href="intf.html#_CPPv4N3eos9intf_id_tE" title="eos::intf_id_t">intf_id_t</a> <em>lag</em>, <a class="reference internal" href="intf.html#_CPPv4N3eos9intf_id_tE" title="eos::intf_id_t">intf_id_t</a> <em>member</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos20eth_lag_intf_handler17on_lag_member_setE9intf_id_t9intf_id_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Handler called when a member interface is added to a watched LAG. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos20eth_lag_intf_handler17on_lag_member_delE9intf_id_t9intf_id_t">
+<span id="_CPPv3N3eos20eth_lag_intf_handler17on_lag_member_delE9intf_id_t9intf_id_t"></span><span id="_CPPv2N3eos20eth_lag_intf_handler17on_lag_member_delE9intf_id_t9intf_id_t"></span><span id="eos::eth_lag_intf_handler::on_lag_member_del__intf_id_t.intf_id_t"></span><span class="target" id="classeos_1_1eth__lag__intf__handler_1a6338bc0c86b9f339ad83e4cc6449fc28"></span><em class="property">virtual</em> void <code class="sig-name descname">on_lag_member_del</code><span class="sig-paren">(</span><a class="reference internal" href="intf.html#_CPPv4N3eos9intf_id_tE" title="eos::intf_id_t">intf_id_t</a> <em>lag</em>, <a class="reference internal" href="intf.html#_CPPv4N3eos9intf_id_tE" title="eos::intf_id_t">intf_id_t</a> <em>member</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos20eth_lag_intf_handler17on_lag_member_delE9intf_id_t9intf_id_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Handler called when a member interface is removed from a watched LAG. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos20eth_lag_intf_handler17on_lag_intf_speedE9intf_id_t8uint64_t">
+<span id="_CPPv3N3eos20eth_lag_intf_handler17on_lag_intf_speedE9intf_id_t8uint64_t"></span><span id="_CPPv2N3eos20eth_lag_intf_handler17on_lag_intf_speedE9intf_id_t8uint64_t"></span><span id="eos::eth_lag_intf_handler::on_lag_intf_speed__intf_id_t.uint64_t"></span><span class="target" id="classeos_1_1eth__lag__intf__handler_1a4f6bda8f08c87b0571d383dce4d62ac7"></span><em class="property">virtual</em> void <code class="sig-name descname">on_lag_intf_speed</code><span class="sig-paren">(</span><a class="reference internal" href="intf.html#_CPPv4N3eos9intf_id_tE" title="eos::intf_id_t">intf_id_t</a> <em>lag</em>, uint64_t <em>speed</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos20eth_lag_intf_handler17on_lag_intf_speedE9intf_id_t8uint64_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Handler called when a LAG interface’s speed changes </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="cpp class">
+<dt id="_CPPv4N3eos19eth_lag_intf_iter_tE">
+<span id="_CPPv3N3eos19eth_lag_intf_iter_tE"></span><span id="_CPPv2N3eos19eth_lag_intf_iter_tE"></span><span id="eos::eth_lag_intf_iter_t"></span><span class="target" id="classeos_1_1eth__lag__intf__iter__t"></span><em class="property">class </em><code class="sig-name descname">eth_lag_intf_iter_t</code> : <em class="property">public</em> <a class="reference internal" href="acl.html#_CPPv43eos" title="eos">eos</a>::<a class="reference internal" href="iterator.html#_CPPv4I00EN3eos9iter_baseE" title="eos::iter_base">iter_base</a>&lt;<a class="reference internal" href="intf.html#_CPPv4N3eos9intf_id_tE" title="eos::intf_id_t">intf_id_t</a>, eth_lag_intf_iter_impl&gt;<a class="headerlink" href="#_CPPv4N3eos19eth_lag_intf_iter_tE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><div class="docutils container">
+<em>#include &lt;eth_lag_intf.h&gt;</em></div>
+<p>An LAG interface iterator for iterating through all LAG interfaces created in the system. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-private-functions">Private Functions</p>
+<dl class="cpp function">
+<dt id="_CPPv4N3eos19eth_lag_intf_iter_t19eth_lag_intf_iter_tEPC22eth_lag_intf_iter_impl">
+<span id="_CPPv3N3eos19eth_lag_intf_iter_t19eth_lag_intf_iter_tEPC22eth_lag_intf_iter_impl"></span><span id="_CPPv2N3eos19eth_lag_intf_iter_t19eth_lag_intf_iter_tEPC22eth_lag_intf_iter_impl"></span><span id="eos::eth_lag_intf_iter_t::eth_lag_intf_iter_t__eth_lag_intf_iter_implPC"></span><span class="target" id="classeos_1_1eth__lag__intf__iter__t_1ac0419a335b9a489071761648860eba82"></span><em class="property">explicit</em> <code class="sig-name descname">eth_lag_intf_iter_t</code><span class="sig-paren">(</span>eth_lag_intf_iter_impl*<em class="property">const</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos19eth_lag_intf_iter_t19eth_lag_intf_iter_tEPC22eth_lag_intf_iter_impl" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-friends">Friends</p>
+<dl class="friendclass">
+<dt>
+<em class="property">friend class</em> eth_lag_intf_iter_impl</dt>
+</dl>
+
+</div>
+</dd></dl>
+
+<dl class="cpp class">
+<dt id="_CPPv4N3eos26eth_lag_intf_member_iter_tE">
+<span id="_CPPv3N3eos26eth_lag_intf_member_iter_tE"></span><span id="_CPPv2N3eos26eth_lag_intf_member_iter_tE"></span><span id="eos::eth_lag_intf_member_iter_t"></span><span class="target" id="classeos_1_1eth__lag__intf__member__iter__t"></span><em class="property">class </em><code class="sig-name descname">eth_lag_intf_member_iter_t</code> : <em class="property">public</em> <a class="reference internal" href="acl.html#_CPPv43eos" title="eos">eos</a>::<a class="reference internal" href="iterator.html#_CPPv4I00EN3eos9iter_baseE" title="eos::iter_base">iter_base</a>&lt;<a class="reference internal" href="intf.html#_CPPv4N3eos9intf_id_tE" title="eos::intf_id_t">intf_id_t</a>, eth_lag_intf_member_iter_impl&gt;<a class="headerlink" href="#_CPPv4N3eos26eth_lag_intf_member_iter_tE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><div class="docutils container">
+<em>#include &lt;eth_lag_intf.h&gt;</em></div>
+<p>An LAG member iterator for iterating through all interfaces configured as a member of one LAG interface in the system. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-private-functions">Private Functions</p>
+<dl class="cpp function">
+<dt id="_CPPv4N3eos26eth_lag_intf_member_iter_t26eth_lag_intf_member_iter_tEPC29eth_lag_intf_member_iter_impl">
+<span id="_CPPv3N3eos26eth_lag_intf_member_iter_t26eth_lag_intf_member_iter_tEPC29eth_lag_intf_member_iter_impl"></span><span id="_CPPv2N3eos26eth_lag_intf_member_iter_t26eth_lag_intf_member_iter_tEPC29eth_lag_intf_member_iter_impl"></span><span id="eos::eth_lag_intf_member_iter_t::eth_lag_intf_member_iter_t__eth_lag_intf_member_iter_implPC"></span><span class="target" id="classeos_1_1eth__lag__intf__member__iter__t_1a35b9df006f1f06b877f0578ea80d467b"></span><em class="property">explicit</em> <code class="sig-name descname">eth_lag_intf_member_iter_t</code><span class="sig-paren">(</span>eth_lag_intf_member_iter_impl*<em class="property">const</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos26eth_lag_intf_member_iter_t26eth_lag_intf_member_iter_tEPC29eth_lag_intf_member_iter_impl" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-friends">Friends</p>
+<dl class="friendclass">
+<dt>
+<em class="property">friend class</em> eth_lag_intf_member_iter_impl</dt>
+</dl>
+
+</div>
+</dd></dl>
+
+<dl class="cpp class">
+<dt id="_CPPv4N3eos16eth_lag_intf_mgrE">
+<span id="_CPPv3N3eos16eth_lag_intf_mgrE"></span><span id="_CPPv2N3eos16eth_lag_intf_mgrE"></span><span id="eos::eth_lag_intf_mgr"></span><span class="target" id="classeos_1_1eth__lag__intf__mgr"></span><em class="property">class </em><code class="sig-name descname">eth_lag_intf_mgr</code> : <em class="property">public</em> <a class="reference internal" href="acl.html#_CPPv43eos" title="eos">eos</a>::<a class="reference internal" href="base_mgr.html#_CPPv4I00EN3eos8base_mgrE" title="eos::base_mgr">base_mgr</a>&lt;<a class="reference internal" href="#_CPPv4N3eos20eth_lag_intf_handlerE" title="eos::eth_lag_intf_handler">eth_lag_intf_handler</a>, <a class="reference internal" href="intf.html#_CPPv4N3eos9intf_id_tE" title="eos::intf_id_t">intf_id_t</a>&gt;<a class="headerlink" href="#_CPPv4N3eos16eth_lag_intf_mgrE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><div class="docutils container">
+<em>#include &lt;eth_lag_intf.h&gt;</em></div>
+<p>The manager for LAG interfaces. This is the main entry point for applications to use EosSdk LAG APIs. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
+<dl class="cpp function">
+<dt id="_CPPv4N3eos16eth_lag_intf_mgrD0Ev">
+<span id="_CPPv3N3eos16eth_lag_intf_mgrD0Ev"></span><span id="_CPPv2N3eos16eth_lag_intf_mgrD0Ev"></span><span id="eos::eth_lag_intf_mgr::~eth_lag_intf_mgr"></span><span class="target" id="classeos_1_1eth__lag__intf__mgr_1a4b4afacf4c566c008e85897f5166c4ad"></span><em class="property">virtual</em> <code class="sig-name descname">~eth_lag_intf_mgr</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos16eth_lag_intf_mgrD0Ev" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos16eth_lag_intf_mgr17eth_lag_intf_iterEv">
+<span id="_CPPv3NK3eos16eth_lag_intf_mgr17eth_lag_intf_iterEv"></span><span id="_CPPv2NK3eos16eth_lag_intf_mgr17eth_lag_intf_iterEv"></span><span id="eos::eth_lag_intf_mgr::eth_lag_intf_iterC"></span><span class="target" id="classeos_1_1eth__lag__intf__mgr_1a97dc174a5f0c5f0e7756a45419a8c3e1"></span><em class="property">virtual</em> <a class="reference internal" href="#_CPPv4N3eos19eth_lag_intf_iter_tE" title="eos::eth_lag_intf_iter_t">eth_lag_intf_iter_t</a> <code class="sig-name descname">eth_lag_intf_iter</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em> = 0<a class="headerlink" href="#_CPPv4NK3eos16eth_lag_intf_mgr17eth_lag_intf_iterEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Iterates through the LAG interfaces in system. An <a class="reference internal" href="intf.html#classeos_1_1intf__id__t"><span class="std std-ref">intf_id_t</span></a> pointer is returned for each LAG interface. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos16eth_lag_intf_mgr6existsE9intf_id_t">
+<span id="_CPPv3NK3eos16eth_lag_intf_mgr6existsE9intf_id_t"></span><span id="_CPPv2NK3eos16eth_lag_intf_mgr6existsE9intf_id_t"></span><span id="eos::eth_lag_intf_mgr::exists__intf_id_tC"></span><span class="target" id="classeos_1_1eth__lag__intf__mgr_1ac0de2cadbe579c5c2a77ec867b244905"></span><em class="property">virtual</em> bool <code class="sig-name descname">exists</code><span class="sig-paren">(</span><a class="reference internal" href="intf.html#_CPPv4N3eos9intf_id_tE" title="eos::intf_id_t">intf_id_t</a><span class="sig-paren">)</span> <em class="property">const</em> = 0<a class="headerlink" href="#_CPPv4NK3eos16eth_lag_intf_mgr6existsE9intf_id_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Returns whether the given ethernet LAG interface exists.</p>
+<p>If exists returns true, then this <a class="reference internal" href="intf.html#classeos_1_1intf__id__t"><span class="std std-ref">intf_id_t</span></a> can be successfully passed into every method of the <a class="reference internal" href="#classeos_1_1eth__lag__intf__mgr"><span class="std std-ref">eth_lag_intf_mgr</span></a>. If not, then methods of the <a class="reference internal" href="#classeos_1_1eth__lag__intf__mgr"><span class="std std-ref">eth_lag_intf_mgr</span></a> can throw a <a class="reference internal" href="intf.html#classeos_1_1no__such__interface__error"><span class="std std-ref">no_such_interface_error</span></a> exception, or return empty data like intf_id_t().</p>
+<p>The exists method of all *intf_mgr classes that manage a given interface (ie <a class="reference internal" href="intf.html#classeos_1_1intf__mgr"><span class="std std-ref">intf_mgr</span></a>, <a class="reference internal" href="eth_intf.html#classeos_1_1eth__intf__mgr"><span class="std std-ref">eth_intf_mgr</span></a>, and <a class="reference internal" href="#classeos_1_1eth__lag__intf__mgr"><span class="std std-ref">eth_lag_intf_mgr</span></a> for LAG interfaces) are all guaranteed to return the same result. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos16eth_lag_intf_mgr24eth_lag_intf_member_iterEv">
+<span id="_CPPv3NK3eos16eth_lag_intf_mgr24eth_lag_intf_member_iterEv"></span><span id="_CPPv2NK3eos16eth_lag_intf_mgr24eth_lag_intf_member_iterEv"></span><span id="eos::eth_lag_intf_mgr::eth_lag_intf_member_iterC"></span><span class="target" id="classeos_1_1eth__lag__intf__mgr_1a12e80f4fbb2b716d5d7ff78aaace332e"></span><em class="property">virtual</em> <a class="reference internal" href="#_CPPv4N3eos26eth_lag_intf_member_iter_tE" title="eos::eth_lag_intf_member_iter_t">eth_lag_intf_member_iter_t</a> <code class="sig-name descname">eth_lag_intf_member_iter</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em> = 0<a class="headerlink" href="#_CPPv4NK3eos16eth_lag_intf_mgr24eth_lag_intf_member_iterEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Iterates over physical interfaces configured as a member of any LAG interface in system. Note the interface may not be in a LAG interface yet, but still shows up if its priority/mode/timeout set. Yields an <a class="reference internal" href="intf.html#classeos_1_1intf__id__t"><span class="std std-ref">intf_id_t</span></a> for each member. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos16eth_lag_intf_mgr24eth_lag_intf_member_iterE9intf_id_t">
+<span id="_CPPv3NK3eos16eth_lag_intf_mgr24eth_lag_intf_member_iterE9intf_id_t"></span><span id="_CPPv2NK3eos16eth_lag_intf_mgr24eth_lag_intf_member_iterE9intf_id_t"></span><span id="eos::eth_lag_intf_mgr::eth_lag_intf_member_iter__intf_id_tC"></span><span class="target" id="classeos_1_1eth__lag__intf__mgr_1a89cfad32bc997d073b63a9c76ad9686a"></span><em class="property">virtual</em> <a class="reference internal" href="#_CPPv4N3eos26eth_lag_intf_member_iter_tE" title="eos::eth_lag_intf_member_iter_t">eth_lag_intf_member_iter_t</a> <code class="sig-name descname">eth_lag_intf_member_iter</code><span class="sig-paren">(</span><a class="reference internal" href="intf.html#_CPPv4N3eos9intf_id_tE" title="eos::intf_id_t">intf_id_t</a> <em>eth_lag_intf_id</em><span class="sig-paren">)</span> <em class="property">const</em> = 0<a class="headerlink" href="#_CPPv4NK3eos16eth_lag_intf_mgr24eth_lag_intf_member_iterE9intf_id_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Iterates over physical interfaces configured as members of a given LAG interface. Yields an <a class="reference internal" href="intf.html#classeos_1_1intf__id__t"><span class="std std-ref">intf_id_t</span></a> for each member. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos16eth_lag_intf_mgr15eth_lag_intf_isE9intf_id_t">
+<span id="_CPPv3N3eos16eth_lag_intf_mgr15eth_lag_intf_isE9intf_id_t"></span><span id="_CPPv2N3eos16eth_lag_intf_mgr15eth_lag_intf_isE9intf_id_t"></span><span id="eos::eth_lag_intf_mgr::eth_lag_intf_is__intf_id_t"></span><span class="target" id="classeos_1_1eth__lag__intf__mgr_1a8ed2fd2adc00cf4d316d86de35f2b9dc"></span><em class="property">virtual</em> void <code class="sig-name descname">eth_lag_intf_is</code><span class="sig-paren">(</span><a class="reference internal" href="intf.html#_CPPv4N3eos9intf_id_tE" title="eos::intf_id_t">intf_id_t</a> <em>eth_lag_intf_id</em><span class="sig-paren">)</span> = 0<a class="headerlink" href="#_CPPv4N3eos16eth_lag_intf_mgr15eth_lag_intf_isE9intf_id_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Creates a LAG interface, when given the LAG interface. No action will be taken if the LAG exists already. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos16eth_lag_intf_mgr12eth_lag_intfE9intf_id_t">
+<span id="_CPPv3NK3eos16eth_lag_intf_mgr12eth_lag_intfE9intf_id_t"></span><span id="_CPPv2NK3eos16eth_lag_intf_mgr12eth_lag_intfE9intf_id_t"></span><span id="eos::eth_lag_intf_mgr::eth_lag_intf__intf_id_tC"></span><span class="target" id="classeos_1_1eth__lag__intf__mgr_1ac73b97bccd363a525e11b39e28550042"></span><em class="property">virtual</em> <a class="reference internal" href="#_CPPv4N3eos14eth_lag_intf_tE" title="eos::eth_lag_intf_t">eth_lag_intf_t</a> <code class="sig-name descname">eth_lag_intf</code><span class="sig-paren">(</span><a class="reference internal" href="intf.html#_CPPv4N3eos9intf_id_tE" title="eos::intf_id_t">intf_id_t</a> <em>eth_lag_intf_id</em><span class="sig-paren">)</span> <em class="property">const</em> = 0<a class="headerlink" href="#_CPPv4NK3eos16eth_lag_intf_mgr12eth_lag_intfE9intf_id_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Returns a LAG interface with the specified LAG interface. Will return an empty <a class="reference internal" href="#classeos_1_1eth__lag__intf__t"><span class="std std-ref">eth_lag_intf_t</span></a> if the LAG does not exist already. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos16eth_lag_intf_mgr16eth_lag_intf_delE9intf_id_t">
+<span id="_CPPv3N3eos16eth_lag_intf_mgr16eth_lag_intf_delE9intf_id_t"></span><span id="_CPPv2N3eos16eth_lag_intf_mgr16eth_lag_intf_delE9intf_id_t"></span><span id="eos::eth_lag_intf_mgr::eth_lag_intf_del__intf_id_t"></span><span class="target" id="classeos_1_1eth__lag__intf__mgr_1ada9a51dc8987c308027979d2ef151a20"></span><em class="property">virtual</em> void <code class="sig-name descname">eth_lag_intf_del</code><span class="sig-paren">(</span><a class="reference internal" href="intf.html#_CPPv4N3eos9intf_id_tE" title="eos::intf_id_t">intf_id_t</a> <em>eth_lag_intf_id</em><span class="sig-paren">)</span> = 0<a class="headerlink" href="#_CPPv4N3eos16eth_lag_intf_mgr16eth_lag_intf_delE9intf_id_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>This API deletes a LAG interface. It is a no-op if the specified LAG interface doesn’t exist. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos16eth_lag_intf_mgr5speedE9intf_id_t">
+<span id="_CPPv3NK3eos16eth_lag_intf_mgr5speedE9intf_id_t"></span><span id="_CPPv2NK3eos16eth_lag_intf_mgr5speedE9intf_id_t"></span><span id="eos::eth_lag_intf_mgr::speed__intf_id_tC"></span><span class="target" id="classeos_1_1eth__lag__intf__mgr_1a461afd090b5be22bdc812b3c013c8493"></span><em class="property">virtual</em> uint64_t <code class="sig-name descname">speed</code><span class="sig-paren">(</span><a class="reference internal" href="intf.html#_CPPv4N3eos9intf_id_tE" title="eos::intf_id_t">intf_id_t</a> <em>eth_lag_intf_id</em><span class="sig-paren">)</span> <em class="property">const</em> = 0<a class="headerlink" href="#_CPPv4NK3eos16eth_lag_intf_mgr5speedE9intf_id_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Returns the speed of a LAG interface in megabits. If the interface does not exist, 0 is returned. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos16eth_lag_intf_mgr12min_links_isE9intf_id_t8uint32_t">
+<span id="_CPPv3N3eos16eth_lag_intf_mgr12min_links_isE9intf_id_t8uint32_t"></span><span id="_CPPv2N3eos16eth_lag_intf_mgr12min_links_isE9intf_id_t8uint32_t"></span><span id="eos::eth_lag_intf_mgr::min_links_is__intf_id_t.uint32_t"></span><span class="target" id="classeos_1_1eth__lag__intf__mgr_1a4a94445c4fcd088ce7366a3cada39180"></span><em class="property">virtual</em> void <code class="sig-name descname">min_links_is</code><span class="sig-paren">(</span><a class="reference internal" href="intf.html#_CPPv4N3eos9intf_id_tE" title="eos::intf_id_t">intf_id_t</a> <em>eth_lag_intf_id</em>, uint32_t <em>min_links</em><span class="sig-paren">)</span> = 0<a class="headerlink" href="#_CPPv4N3eos16eth_lag_intf_mgr12min_links_isE9intf_id_t8uint32_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Sets the min links for a LAG interface. It’s a no-op if the specified LAG interface does not exist. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos16eth_lag_intf_mgr9min_linksE9intf_id_t">
+<span id="_CPPv3NK3eos16eth_lag_intf_mgr9min_linksE9intf_id_t"></span><span id="_CPPv2NK3eos16eth_lag_intf_mgr9min_linksE9intf_id_t"></span><span id="eos::eth_lag_intf_mgr::min_links__intf_id_tC"></span><span class="target" id="classeos_1_1eth__lag__intf__mgr_1aadb76a78a1a6582154f461e4fa6d11a3"></span><em class="property">virtual</em> uint32_t <code class="sig-name descname">min_links</code><span class="sig-paren">(</span><a class="reference internal" href="intf.html#_CPPv4N3eos9intf_id_tE" title="eos::intf_id_t">intf_id_t</a> <em>eth_lag_intf_id</em><span class="sig-paren">)</span> <em class="property">const</em> = 0<a class="headerlink" href="#_CPPv4NK3eos16eth_lag_intf_mgr9min_linksE9intf_id_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Returns the minimum number of member interfaces required to be <code class="docutils literal notranslate"><span class="pre">OPER_STATUS_UP</span></code> before this LAG interface considered <code class="docutils literal notranslate"><span class="pre">OPER_STATUS_UP</span></code>. If the LAG interface does not exist, 0 will be returned. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos16eth_lag_intf_mgr16fallback_type_isE9intf_id_t28eth_lag_intf_fallback_type_t">
+<span id="_CPPv3N3eos16eth_lag_intf_mgr16fallback_type_isE9intf_id_t28eth_lag_intf_fallback_type_t"></span><span id="_CPPv2N3eos16eth_lag_intf_mgr16fallback_type_isE9intf_id_t28eth_lag_intf_fallback_type_t"></span><span id="eos::eth_lag_intf_mgr::fallback_type_is__intf_id_t.eth_lag_intf_fallback_type_t"></span><span class="target" id="classeos_1_1eth__lag__intf__mgr_1a164686a9d0c08afccee62ea138522d8a"></span><em class="property">virtual</em> void <code class="sig-name descname">fallback_type_is</code><span class="sig-paren">(</span><a class="reference internal" href="intf.html#_CPPv4N3eos9intf_id_tE" title="eos::intf_id_t">intf_id_t</a> <em>eth_lag_intf_id</em>, <a class="reference internal" href="#_CPPv4N3eos28eth_lag_intf_fallback_type_tE" title="eos::eth_lag_intf_fallback_type_t">eth_lag_intf_fallback_type_t</a> <em>fallback_type</em><span class="sig-paren">)</span> = 0<a class="headerlink" href="#_CPPv4N3eos16eth_lag_intf_mgr16fallback_type_isE9intf_id_t28eth_lag_intf_fallback_type_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Sets the fallback type for a LAG interface. It’s a no-op if the LAG interface does not exist. Throws “invalid_argument_error” exception if invalid fallback type is passed in. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos16eth_lag_intf_mgr13fallback_typeE9intf_id_t">
+<span id="_CPPv3NK3eos16eth_lag_intf_mgr13fallback_typeE9intf_id_t"></span><span id="_CPPv2NK3eos16eth_lag_intf_mgr13fallback_typeE9intf_id_t"></span><span id="eos::eth_lag_intf_mgr::fallback_type__intf_id_tC"></span><span class="target" id="classeos_1_1eth__lag__intf__mgr_1aafb2187f3fa145db399aba6a66a6df94"></span><em class="property">virtual</em> <a class="reference internal" href="#_CPPv4N3eos28eth_lag_intf_fallback_type_tE" title="eos::eth_lag_intf_fallback_type_t">eth_lag_intf_fallback_type_t</a> <code class="sig-name descname">fallback_type</code><span class="sig-paren">(</span><a class="reference internal" href="intf.html#_CPPv4N3eos9intf_id_tE" title="eos::intf_id_t">intf_id_t</a> <em>eth_lag_intf_id</em><span class="sig-paren">)</span> <em class="property">const</em> = 0<a class="headerlink" href="#_CPPv4NK3eos16eth_lag_intf_mgr13fallback_typeE9intf_id_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Returns the fallback mode for a LAG interface. ETH_LAG_INTF_FALLBACK_NULL is returned if the LAG interface does not exist. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos16eth_lag_intf_mgr19fallback_timeout_isE9intf_id_t8uint16_t">
+<span id="_CPPv3N3eos16eth_lag_intf_mgr19fallback_timeout_isE9intf_id_t8uint16_t"></span><span id="_CPPv2N3eos16eth_lag_intf_mgr19fallback_timeout_isE9intf_id_t8uint16_t"></span><span id="eos::eth_lag_intf_mgr::fallback_timeout_is__intf_id_t.uint16_t"></span><span class="target" id="classeos_1_1eth__lag__intf__mgr_1ad396950c60587d1a961bc08d13087ae9"></span><em class="property">virtual</em> void <code class="sig-name descname">fallback_timeout_is</code><span class="sig-paren">(</span><a class="reference internal" href="intf.html#_CPPv4N3eos9intf_id_tE" title="eos::intf_id_t">intf_id_t</a> <em>eth_lag_intf_id</em>, uint16_t <em>fallback_timeout</em><span class="sig-paren">)</span> = 0<a class="headerlink" href="#_CPPv4N3eos16eth_lag_intf_mgr19fallback_timeout_isE9intf_id_t8uint16_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Sets the fallback timeout for a LAG interface. It’s a no-op if the LAG interface does not exist. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos16eth_lag_intf_mgr16fallback_timeoutE9intf_id_t">
+<span id="_CPPv3NK3eos16eth_lag_intf_mgr16fallback_timeoutE9intf_id_t"></span><span id="_CPPv2NK3eos16eth_lag_intf_mgr16fallback_timeoutE9intf_id_t"></span><span id="eos::eth_lag_intf_mgr::fallback_timeout__intf_id_tC"></span><span class="target" id="classeos_1_1eth__lag__intf__mgr_1af8a3c40f3e9c7a94ec6e845dfbc997fc"></span><em class="property">virtual</em> uint16_t <code class="sig-name descname">fallback_timeout</code><span class="sig-paren">(</span><a class="reference internal" href="intf.html#_CPPv4N3eos9intf_id_tE" title="eos::intf_id_t">intf_id_t</a> <em>eth_lag_intf_id</em><span class="sig-paren">)</span> <em class="property">const</em> = 0<a class="headerlink" href="#_CPPv4NK3eos16eth_lag_intf_mgr16fallback_timeoutE9intf_id_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Returns the LACP active mode timeout value in seconds. 0 is returned if the LAG interface does not exist. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos16eth_lag_intf_mgr24fallback_timeout_defaultE9intf_id_t">
+<span id="_CPPv3NK3eos16eth_lag_intf_mgr24fallback_timeout_defaultE9intf_id_t"></span><span id="_CPPv2NK3eos16eth_lag_intf_mgr24fallback_timeout_defaultE9intf_id_t"></span><span id="eos::eth_lag_intf_mgr::fallback_timeout_default__intf_id_tC"></span><span class="target" id="classeos_1_1eth__lag__intf__mgr_1af1cf4ed1a8ad78c10dd2751af4f54840"></span><em class="property">virtual</em> uint16_t <code class="sig-name descname">fallback_timeout_default</code><span class="sig-paren">(</span><a class="reference internal" href="intf.html#_CPPv4N3eos9intf_id_tE" title="eos::intf_id_t">intf_id_t</a> <em>eth_lag_intf_id</em><span class="sig-paren">)</span> <em class="property">const</em> = 0<a class="headerlink" href="#_CPPv4NK3eos16eth_lag_intf_mgr24fallback_timeout_defaultE9intf_id_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Returns the default fallback timeout value in seconds. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos16eth_lag_intf_mgr14membership_setE9intf_id_t9intf_id_t31eth_lag_intf_member_lacp_mode_t">
+<span id="_CPPv3N3eos16eth_lag_intf_mgr14membership_setE9intf_id_t9intf_id_t31eth_lag_intf_member_lacp_mode_t"></span><span id="_CPPv2N3eos16eth_lag_intf_mgr14membership_setE9intf_id_t9intf_id_t31eth_lag_intf_member_lacp_mode_t"></span><span id="eos::eth_lag_intf_mgr::membership_set__intf_id_t.intf_id_t.eth_lag_intf_member_lacp_mode_t"></span><span class="target" id="classeos_1_1eth__lag__intf__mgr_1a5f91aa42a3004ffb9723864a36bad460"></span><em class="property">virtual</em> void <code class="sig-name descname">membership_set</code><span class="sig-paren">(</span><a class="reference internal" href="intf.html#_CPPv4N3eos9intf_id_tE" title="eos::intf_id_t">intf_id_t</a> <em>member_intf_id</em>, <a class="reference internal" href="intf.html#_CPPv4N3eos9intf_id_tE" title="eos::intf_id_t">intf_id_t</a> <em>eth_lag_intf_id</em>, <a class="reference internal" href="#_CPPv4N3eos31eth_lag_intf_member_lacp_mode_tE" title="eos::eth_lag_intf_member_lacp_mode_t">eth_lag_intf_member_lacp_mode_t</a> <em>mode</em><span class="sig-paren">)</span> = 0<a class="headerlink" href="#_CPPv4N3eos16eth_lag_intf_mgr14membership_setE9intf_id_t9intf_id_t31eth_lag_intf_member_lacp_mode_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Adds a physical interface to a LAG interface.</p>
+<p>This API may throw “Invalid_argument_error” exception if the interface’s mode is not compatible with the LAG interface mode or the LAG interface’s type is INTF_TYPE_NULL. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos16eth_lag_intf_mgr14membership_delE9intf_id_t">
+<span id="_CPPv3N3eos16eth_lag_intf_mgr14membership_delE9intf_id_t"></span><span id="_CPPv2N3eos16eth_lag_intf_mgr14membership_delE9intf_id_t"></span><span id="eos::eth_lag_intf_mgr::membership_del__intf_id_t"></span><span class="target" id="classeos_1_1eth__lag__intf__mgr_1aced01ce5c993cb0359799ccc6e7c31c6"></span><em class="property">virtual</em> void <code class="sig-name descname">membership_del</code><span class="sig-paren">(</span><a class="reference internal" href="intf.html#_CPPv4N3eos9intf_id_tE" title="eos::intf_id_t">intf_id_t</a> <em>member_intf_id</em><span class="sig-paren">)</span> = 0<a class="headerlink" href="#_CPPv4N3eos16eth_lag_intf_mgr14membership_delE9intf_id_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Removes an interface from a LAG interface.</p>
+<p>This API returns directly if the interface is invalid or not in a LAG. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos16eth_lag_intf_mgr10membershipE9intf_id_t">
+<span id="_CPPv3NK3eos16eth_lag_intf_mgr10membershipE9intf_id_t"></span><span id="_CPPv2NK3eos16eth_lag_intf_mgr10membershipE9intf_id_t"></span><span id="eos::eth_lag_intf_mgr::membership__intf_id_tC"></span><span class="target" id="classeos_1_1eth__lag__intf__mgr_1aa0e688e8026c34e0f486a4fbc318dd12"></span><em class="property">virtual</em> <a class="reference internal" href="intf.html#_CPPv4N3eos9intf_id_tE" title="eos::intf_id_t">intf_id_t</a> <code class="sig-name descname">membership</code><span class="sig-paren">(</span><a class="reference internal" href="intf.html#_CPPv4N3eos9intf_id_tE" title="eos::intf_id_t">intf_id_t</a> <em>member_intf_id</em><span class="sig-paren">)</span> <em class="property">const</em> = 0<a class="headerlink" href="#_CPPv4NK3eos16eth_lag_intf_mgr10membershipE9intf_id_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Returns the LAG interface ID to which the physical interface is configured to belong. An empty <a class="reference internal" href="intf.html#classeos_1_1intf__id__t"><span class="std std-ref">intf_id_t</span></a> is returned if the physical interface is not configured or is not in a LAG. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos16eth_lag_intf_mgr17membership_statusE9intf_id_t">
+<span id="_CPPv3NK3eos16eth_lag_intf_mgr17membership_statusE9intf_id_t"></span><span id="_CPPv2NK3eos16eth_lag_intf_mgr17membership_statusE9intf_id_t"></span><span id="eos::eth_lag_intf_mgr::membership_status__intf_id_tC"></span><span class="target" id="classeos_1_1eth__lag__intf__mgr_1a3a32f6aa65e1e51be85812bb6b59e5ed"></span><em class="property">virtual</em> <a class="reference internal" href="#_CPPv4N3eos25eth_lag_intf_membership_tE" title="eos::eth_lag_intf_membership_t">eth_lag_intf_membership_t</a> <code class="sig-name descname">membership_status</code><span class="sig-paren">(</span><a class="reference internal" href="intf.html#_CPPv4N3eos9intf_id_tE" title="eos::intf_id_t">intf_id_t</a> <em>member_intf_id</em><span class="sig-paren">)</span> <em class="property">const</em> = 0<a class="headerlink" href="#_CPPv4NK3eos16eth_lag_intf_mgr17membership_statusE9intf_id_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Returns the member interface’s status details. Will return empty <a class="reference internal" href="#classeos_1_1eth__lag__intf__membership__t"><span class="std std-ref">eth_lag_intf_membership_t</span></a> if the physical interface is not configured, or it’s not active in a LAG. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos16eth_lag_intf_mgr18member_priority_isE9intf_id_t8uint16_t">
+<span id="_CPPv3N3eos16eth_lag_intf_mgr18member_priority_isE9intf_id_t8uint16_t"></span><span id="_CPPv2N3eos16eth_lag_intf_mgr18member_priority_isE9intf_id_t8uint16_t"></span><span id="eos::eth_lag_intf_mgr::member_priority_is__intf_id_t.uint16_t"></span><span class="target" id="classeos_1_1eth__lag__intf__mgr_1aeb55fb83c6e3f2acd8c84c0350dfded8"></span><em class="property">virtual</em> void <code class="sig-name descname">member_priority_is</code><span class="sig-paren">(</span><a class="reference internal" href="intf.html#_CPPv4N3eos9intf_id_tE" title="eos::intf_id_t">intf_id_t</a> <em>member_intf_id</em>, uint16_t <em>priority</em><span class="sig-paren">)</span> = 0<a class="headerlink" href="#_CPPv4N3eos16eth_lag_intf_mgr18member_priority_isE9intf_id_t8uint16_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Sets the port LACP priority. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos16eth_lag_intf_mgr15member_priorityE9intf_id_t">
+<span id="_CPPv3NK3eos16eth_lag_intf_mgr15member_priorityE9intf_id_t"></span><span id="_CPPv2NK3eos16eth_lag_intf_mgr15member_priorityE9intf_id_t"></span><span id="eos::eth_lag_intf_mgr::member_priority__intf_id_tC"></span><span class="target" id="classeos_1_1eth__lag__intf__mgr_1a5333c94101b281739538298aaefea765"></span><em class="property">virtual</em> uint16_t <code class="sig-name descname">member_priority</code><span class="sig-paren">(</span><a class="reference internal" href="intf.html#_CPPv4N3eos9intf_id_tE" title="eos::intf_id_t">intf_id_t</a> <em>member_intf_id</em><span class="sig-paren">)</span> <em class="property">const</em> = 0<a class="headerlink" href="#_CPPv4NK3eos16eth_lag_intf_mgr15member_priorityE9intf_id_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Gets the interface’s configured LACP priority. 0 will be returned if the member interface is not existing. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos16eth_lag_intf_mgr14member_mode_isE9intf_id_t31eth_lag_intf_member_lacp_mode_t">
+<span id="_CPPv3N3eos16eth_lag_intf_mgr14member_mode_isE9intf_id_t31eth_lag_intf_member_lacp_mode_t"></span><span id="_CPPv2N3eos16eth_lag_intf_mgr14member_mode_isE9intf_id_t31eth_lag_intf_member_lacp_mode_t"></span><span id="eos::eth_lag_intf_mgr::member_mode_is__intf_id_t.eth_lag_intf_member_lacp_mode_t"></span><span class="target" id="classeos_1_1eth__lag__intf__mgr_1ad9284052356b5460578bb963d2c39d58"></span><em class="property">virtual</em> void <code class="sig-name descname">member_mode_is</code><span class="sig-paren">(</span><a class="reference internal" href="intf.html#_CPPv4N3eos9intf_id_tE" title="eos::intf_id_t">intf_id_t</a> <em>member_intf_id</em>, <a class="reference internal" href="#_CPPv4N3eos31eth_lag_intf_member_lacp_mode_tE" title="eos::eth_lag_intf_member_lacp_mode_t">eth_lag_intf_member_lacp_mode_t</a> <em>mode</em><span class="sig-paren">)</span> = 0<a class="headerlink" href="#_CPPv4N3eos16eth_lag_intf_mgr14member_mode_isE9intf_id_t31eth_lag_intf_member_lacp_mode_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Sets the mode of this member in a LAG interface. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos16eth_lag_intf_mgr11member_modeE9intf_id_t">
+<span id="_CPPv3NK3eos16eth_lag_intf_mgr11member_modeE9intf_id_t"></span><span id="_CPPv2NK3eos16eth_lag_intf_mgr11member_modeE9intf_id_t"></span><span id="eos::eth_lag_intf_mgr::member_mode__intf_id_tC"></span><span class="target" id="classeos_1_1eth__lag__intf__mgr_1a82d4d067dee5f79e9e1d953337fcf7da"></span><em class="property">virtual</em> <a class="reference internal" href="#_CPPv4N3eos31eth_lag_intf_member_lacp_mode_tE" title="eos::eth_lag_intf_member_lacp_mode_t">eth_lag_intf_member_lacp_mode_t</a> <code class="sig-name descname">member_mode</code><span class="sig-paren">(</span><a class="reference internal" href="intf.html#_CPPv4N3eos9intf_id_tE" title="eos::intf_id_t">intf_id_t</a> <em>member_intf_id</em><span class="sig-paren">)</span> <em class="property">const</em> = 0<a class="headerlink" href="#_CPPv4NK3eos16eth_lag_intf_mgr11member_modeE9intf_id_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Returns the mode of this member in a LAG interface. If the member interface is not existing, ETH_LAG_INTF_MEMBER_LACP_MODE_NULL is returned. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos16eth_lag_intf_mgr17member_timeout_isE9intf_id_t34eth_lag_intf_member_lacp_timeout_t">
+<span id="_CPPv3N3eos16eth_lag_intf_mgr17member_timeout_isE9intf_id_t34eth_lag_intf_member_lacp_timeout_t"></span><span id="_CPPv2N3eos16eth_lag_intf_mgr17member_timeout_isE9intf_id_t34eth_lag_intf_member_lacp_timeout_t"></span><span id="eos::eth_lag_intf_mgr::member_timeout_is__intf_id_t.eth_lag_intf_member_lacp_timeout_t"></span><span class="target" id="classeos_1_1eth__lag__intf__mgr_1ab0d331cd0c6f5812695d0c5d7c30e99c"></span><em class="property">virtual</em> void <code class="sig-name descname">member_timeout_is</code><span class="sig-paren">(</span><a class="reference internal" href="intf.html#_CPPv4N3eos9intf_id_tE" title="eos::intf_id_t">intf_id_t</a> <em>member_intf_id</em>, <a class="reference internal" href="#_CPPv4N3eos34eth_lag_intf_member_lacp_timeout_tE" title="eos::eth_lag_intf_member_lacp_timeout_t">eth_lag_intf_member_lacp_timeout_t</a> <em>timeout</em><span class="sig-paren">)</span> = 0<a class="headerlink" href="#_CPPv4N3eos16eth_lag_intf_mgr17member_timeout_isE9intf_id_t34eth_lag_intf_member_lacp_timeout_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Sets the LACP timeout for a member in a LAG. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos16eth_lag_intf_mgr14member_timeoutE9intf_id_t">
+<span id="_CPPv3NK3eos16eth_lag_intf_mgr14member_timeoutE9intf_id_t"></span><span id="_CPPv2NK3eos16eth_lag_intf_mgr14member_timeoutE9intf_id_t"></span><span id="eos::eth_lag_intf_mgr::member_timeout__intf_id_tC"></span><span class="target" id="classeos_1_1eth__lag__intf__mgr_1aa1e25f4891e3110ca98eb127a77b4ca0"></span><em class="property">virtual</em> <a class="reference internal" href="#_CPPv4N3eos34eth_lag_intf_member_lacp_timeout_tE" title="eos::eth_lag_intf_member_lacp_timeout_t">eth_lag_intf_member_lacp_timeout_t</a> <code class="sig-name descname">member_timeout</code><span class="sig-paren">(</span><a class="reference internal" href="intf.html#_CPPv4N3eos9intf_id_tE" title="eos::intf_id_t">intf_id_t</a> <em>member_intf_id</em><span class="sig-paren">)</span> <em class="property">const</em> = 0<a class="headerlink" href="#_CPPv4NK3eos16eth_lag_intf_mgr14member_timeoutE9intf_id_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Gets the configured LACP timeout for a member in a LAG. If the member interface does not exist, ETH_LAG_INTF_MEMBER_LACP_TIMEOUT_NULL will be returned. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos16eth_lag_intf_mgr13member_activeE9intf_id_t">
+<span id="_CPPv3NK3eos16eth_lag_intf_mgr13member_activeE9intf_id_t"></span><span id="_CPPv2NK3eos16eth_lag_intf_mgr13member_activeE9intf_id_t"></span><span id="eos::eth_lag_intf_mgr::member_active__intf_id_tC"></span><span class="target" id="classeos_1_1eth__lag__intf__mgr_1a23c5dde74d19bb90ba5bba0c908bae2d"></span><em class="property">virtual</em> bool <code class="sig-name descname">member_active</code><span class="sig-paren">(</span><a class="reference internal" href="intf.html#_CPPv4N3eos9intf_id_tE" title="eos::intf_id_t">intf_id_t</a> <em>member_intf_id</em><span class="sig-paren">)</span> <em class="property">const</em> = 0<a class="headerlink" href="#_CPPv4NK3eos16eth_lag_intf_mgr13member_activeE9intf_id_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Returns whether this interface is active in a LAG. False is returned if the member interface does not exist. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos16eth_lag_intf_mgr11member_timeE9intf_id_t">
+<span id="_CPPv3NK3eos16eth_lag_intf_mgr11member_timeE9intf_id_t"></span><span id="_CPPv2NK3eos16eth_lag_intf_mgr11member_timeE9intf_id_t"></span><span id="eos::eth_lag_intf_mgr::member_time__intf_id_tC"></span><span class="target" id="classeos_1_1eth__lag__intf__mgr_1ad44da3cdce3d468a906c9a79f6bf0e22"></span><em class="property">virtual</em> double <code class="sig-name descname">member_time</code><span class="sig-paren">(</span><a class="reference internal" href="intf.html#_CPPv4N3eos9intf_id_tE" title="eos::intf_id_t">intf_id_t</a> <em>member_intf_id</em><span class="sig-paren">)</span> <em class="property">const</em> = 0<a class="headerlink" href="#_CPPv4NK3eos16eth_lag_intf_mgr11member_timeE9intf_id_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Returns the time in seconds since reboot when this interface was last added or removed as a member from a LAG. If this interface has never been a LAG member, this returns 0. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos16eth_lag_intf_mgr13member_reasonE9intf_id_t">
+<span id="_CPPv3NK3eos16eth_lag_intf_mgr13member_reasonE9intf_id_t"></span><span id="_CPPv2NK3eos16eth_lag_intf_mgr13member_reasonE9intf_id_t"></span><span id="eos::eth_lag_intf_mgr::member_reason__intf_id_tC"></span><span class="target" id="classeos_1_1eth__lag__intf__mgr_1a2d06f99f7bcb2e923dda3a723527385e"></span><em class="property">virtual</em> <a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::string <code class="sig-name descname">member_reason</code><span class="sig-paren">(</span><a class="reference internal" href="intf.html#_CPPv4N3eos9intf_id_tE" title="eos::intf_id_t">intf_id_t</a> <em>member_intf_id</em><span class="sig-paren">)</span> <em class="property">const</em> = 0<a class="headerlink" href="#_CPPv4NK3eos16eth_lag_intf_mgr13member_reasonE9intf_id_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Returns the reason this interface isn’t active in LAG. Returns the empty string if the interface is not configured to be in any LAG, or if the interface is active in the LAg. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos16eth_lag_intf_mgr30eth_lag_intf_membership_statusE9intf_id_t">
+<span id="_CPPv3NK3eos16eth_lag_intf_mgr30eth_lag_intf_membership_statusE9intf_id_t"></span><span id="_CPPv2NK3eos16eth_lag_intf_mgr30eth_lag_intf_membership_statusE9intf_id_t"></span><span id="eos::eth_lag_intf_mgr::eth_lag_intf_membership_status__intf_id_tC"></span><span class="target" id="classeos_1_1eth__lag__intf__mgr_1a799a3e5f871b25f0e43cd2616e6c0221"></span><em class="property">virtual</em> <a class="reference internal" href="#_CPPv4N3eos25eth_lag_intf_membership_tE" title="eos::eth_lag_intf_membership_t">eth_lag_intf_membership_t</a> <code class="sig-name descname">eth_lag_intf_membership_status</code><span class="sig-paren">(</span><a class="reference internal" href="intf.html#_CPPv4N3eos9intf_id_tE" title="eos::intf_id_t">intf_id_t</a> <em>member_intf_id</em><span class="sig-paren">)</span> <em class="property">const</em> = 0<a class="headerlink" href="#_CPPv4NK3eos16eth_lag_intf_mgr30eth_lag_intf_membership_statusE9intf_id_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p><dl class="xrefsect">
+<dt>
+<em>Deprecated:</em></dt>
+<dd><p>Please use the more succinctly named ‘membership_status’ instead. </p>
+</dd></dl>
+
+</p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos16eth_lag_intf_mgr30eth_lag_intf_member_timeout_isE9intf_id_t34eth_lag_intf_member_lacp_timeout_t">
+<span id="_CPPv3N3eos16eth_lag_intf_mgr30eth_lag_intf_member_timeout_isE9intf_id_t34eth_lag_intf_member_lacp_timeout_t"></span><span id="_CPPv2N3eos16eth_lag_intf_mgr30eth_lag_intf_member_timeout_isE9intf_id_t34eth_lag_intf_member_lacp_timeout_t"></span><span id="eos::eth_lag_intf_mgr::eth_lag_intf_member_timeout_is__intf_id_t.eth_lag_intf_member_lacp_timeout_t"></span><span class="target" id="classeos_1_1eth__lag__intf__mgr_1a7d7c745a80d9bf3a6a06b762587bf156"></span><em class="property">virtual</em> void <code class="sig-name descname">eth_lag_intf_member_timeout_is</code><span class="sig-paren">(</span><a class="reference internal" href="intf.html#_CPPv4N3eos9intf_id_tE" title="eos::intf_id_t">intf_id_t</a> <em>member_intf_id</em>, <a class="reference internal" href="#_CPPv4N3eos34eth_lag_intf_member_lacp_timeout_tE" title="eos::eth_lag_intf_member_lacp_timeout_t">eth_lag_intf_member_lacp_timeout_t</a> <em>timeout</em><span class="sig-paren">)</span> = 0<a class="headerlink" href="#_CPPv4N3eos16eth_lag_intf_mgr30eth_lag_intf_member_timeout_isE9intf_id_t34eth_lag_intf_member_lacp_timeout_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p><dl class="xrefsect">
+<dt>
+<em>Deprecated:</em></dt>
+<dd><p>Please use <a class="reference internal" href="#classeos_1_1eth__lag__intf__mgr_1ab0d331cd0c6f5812695d0c5d7c30e99c"><span class="std std-ref">member_timeout_is()</span></a> instead. </p>
+</dd></dl>
+
+</p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos16eth_lag_intf_mgr31eth_lag_intf_member_priority_isE9intf_id_t8uint16_t">
+<span id="_CPPv3N3eos16eth_lag_intf_mgr31eth_lag_intf_member_priority_isE9intf_id_t8uint16_t"></span><span id="_CPPv2N3eos16eth_lag_intf_mgr31eth_lag_intf_member_priority_isE9intf_id_t8uint16_t"></span><span id="eos::eth_lag_intf_mgr::eth_lag_intf_member_priority_is__intf_id_t.uint16_t"></span><span class="target" id="classeos_1_1eth__lag__intf__mgr_1afc9e52ef6abef4f0de24a113a47ef1f7"></span><em class="property">virtual</em> void <code class="sig-name descname">eth_lag_intf_member_priority_is</code><span class="sig-paren">(</span><a class="reference internal" href="intf.html#_CPPv4N3eos9intf_id_tE" title="eos::intf_id_t">intf_id_t</a> <em>member_intf_id</em>, uint16_t <em>priority</em><span class="sig-paren">)</span> = 0<a class="headerlink" href="#_CPPv4N3eos16eth_lag_intf_mgr31eth_lag_intf_member_priority_isE9intf_id_t8uint16_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p><dl class="xrefsect">
+<dt>
+<em>Deprecated:</em></dt>
+<dd><p>Please use <a class="reference internal" href="#classeos_1_1eth__lag__intf__mgr_1aeb55fb83c6e3f2acd8c84c0350dfded8"><span class="std std-ref">member_priority_is()</span></a> instead. </p>
+</dd></dl>
+
+</p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos16eth_lag_intf_mgr27eth_lag_intf_member_mode_isE9intf_id_t31eth_lag_intf_member_lacp_mode_t">
+<span id="_CPPv3N3eos16eth_lag_intf_mgr27eth_lag_intf_member_mode_isE9intf_id_t31eth_lag_intf_member_lacp_mode_t"></span><span id="_CPPv2N3eos16eth_lag_intf_mgr27eth_lag_intf_member_mode_isE9intf_id_t31eth_lag_intf_member_lacp_mode_t"></span><span id="eos::eth_lag_intf_mgr::eth_lag_intf_member_mode_is__intf_id_t.eth_lag_intf_member_lacp_mode_t"></span><span class="target" id="classeos_1_1eth__lag__intf__mgr_1af1b98995af339c45b37f2af85876dae7"></span><em class="property">virtual</em> void <code class="sig-name descname">eth_lag_intf_member_mode_is</code><span class="sig-paren">(</span><a class="reference internal" href="intf.html#_CPPv4N3eos9intf_id_tE" title="eos::intf_id_t">intf_id_t</a> <em>member_intf_id</em>, <a class="reference internal" href="#_CPPv4N3eos31eth_lag_intf_member_lacp_mode_tE" title="eos::eth_lag_intf_member_lacp_mode_t">eth_lag_intf_member_lacp_mode_t</a> <em>mode</em><span class="sig-paren">)</span> = 0<a class="headerlink" href="#_CPPv4N3eos16eth_lag_intf_mgr27eth_lag_intf_member_mode_isE9intf_id_t31eth_lag_intf_member_lacp_mode_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p><dl class="xrefsect">
+<dt>
+<em>Deprecated:</em></dt>
+<dd><p>Please use <a class="reference internal" href="#classeos_1_1eth__lag__intf__mgr_1ad9284052356b5460578bb963d2c39d58"><span class="std std-ref">member_mode_is()</span></a> instead. </p>
+</dd></dl>
+
+</p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-protected-functions">Protected Functions</p>
+<dl class="cpp function">
+<dt id="_CPPv4N3eos16eth_lag_intf_mgr16eth_lag_intf_mgrEv">
+<span id="_CPPv3N3eos16eth_lag_intf_mgr16eth_lag_intf_mgrEv"></span><span id="_CPPv2N3eos16eth_lag_intf_mgr16eth_lag_intf_mgrEv"></span><span id="eos::eth_lag_intf_mgr::eth_lag_intf_mgr"></span><span class="target" id="classeos_1_1eth__lag__intf__mgr_1a2c15cd4a905ec16e33b1fe61f1e4c2b2"></span><code class="sig-name descname">eth_lag_intf_mgr</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos16eth_lag_intf_mgr16eth_lag_intf_mgrEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-private-members">Private Members</p>
+<dl class="cpp var">
+<dt>
+<span class="target" id="classeos_1_1eth__lag__intf__mgr_1a93a463417f321fbfcfa476cd3bdbf1ed"></span><code class="sig-name descname">eth_lag_intf_mgr</code></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-friends">Friends</p>
+<dl class="friendclass">
+<dt>
+<em class="property">friend class</em> eth_lag_intf_handler</dt>
+</dl>
+
+</div>
+</dd></dl>
+
+</dd></dl>
+
+<div class="section" id="type-definitions-in-eth-lag-intf">
+<h2>Type definitions in <strong>eth_lag_intf</strong><a class="headerlink" href="#type-definitions-in-eth-lag-intf" title="Permalink to this headline">¶</a></h2>
+<dl class="cpp type">
+<dt>
+<span class="target" id="namespaceeos"></span><em class="property">namespace </em><code class="sig-name descname">eos</code><br /></dt>
+<dd><div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-enums">Enums</p>
+<dl class="cpp enum">
+<dt id="_CPPv4N3eos28eth_lag_intf_fallback_type_tE">
+<span id="_CPPv3N3eos28eth_lag_intf_fallback_type_tE"></span><span id="_CPPv2N3eos28eth_lag_intf_fallback_type_tE"></span><span class="target" id="namespaceeos_1ac9a25f4bd97a6e1c726d0f4d3e285dcd"></span><em class="property">enum </em><code class="sig-name descname">eth_lag_intf_fallback_type_t</code><a class="headerlink" href="#_CPPv4N3eos28eth_lag_intf_fallback_type_tE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>LAG interface fallback type. </p>
+<p><em>Values:</em></p>
+<dl class="cpp enumerator">
+<dt id="_CPPv4N3eos28eth_lag_intf_fallback_type_t26ETH_LAG_INTF_FALLBACK_NULLE">
+<span id="_CPPv3N3eos28eth_lag_intf_fallback_type_t26ETH_LAG_INTF_FALLBACK_NULLE"></span><span id="_CPPv2N3eos28eth_lag_intf_fallback_type_t26ETH_LAG_INTF_FALLBACK_NULLE"></span><span class="target" id="namespaceeos_1ac9a25f4bd97a6e1c726d0f4d3e285dcdaea6c1f68e9a0af318132ec153738c147"></span><em class="property">enumerator </em><code class="sig-name descname">ETH_LAG_INTF_FALLBACK_NULL</code><a class="headerlink" href="#_CPPv4N3eos28eth_lag_intf_fallback_type_t26ETH_LAG_INTF_FALLBACK_NULLE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Not a valid fallback type. </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt id="_CPPv4N3eos28eth_lag_intf_fallback_type_t26ETH_LAG_INTF_FALLBACK_NONEE">
+<span id="_CPPv3N3eos28eth_lag_intf_fallback_type_t26ETH_LAG_INTF_FALLBACK_NONEE"></span><span id="_CPPv2N3eos28eth_lag_intf_fallback_type_t26ETH_LAG_INTF_FALLBACK_NONEE"></span><span class="target" id="namespaceeos_1ac9a25f4bd97a6e1c726d0f4d3e285dcdab7e01fd3e123a8d0cd0ef4d414fbd8c4"></span><em class="property">enumerator </em><code class="sig-name descname">ETH_LAG_INTF_FALLBACK_NONE</code><a class="headerlink" href="#_CPPv4N3eos28eth_lag_intf_fallback_type_t26ETH_LAG_INTF_FALLBACK_NONEE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>No fallback if no LACPDUs seen. </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt id="_CPPv4N3eos28eth_lag_intf_fallback_type_t28ETH_LAG_INTF_FALLBACK_STATICE">
+<span id="_CPPv3N3eos28eth_lag_intf_fallback_type_t28ETH_LAG_INTF_FALLBACK_STATICE"></span><span id="_CPPv2N3eos28eth_lag_intf_fallback_type_t28ETH_LAG_INTF_FALLBACK_STATICE"></span><span class="target" id="namespaceeos_1ac9a25f4bd97a6e1c726d0f4d3e285dcdab5cdcbc1a690f16ed98fc7fceabae3bb"></span><em class="property">enumerator </em><code class="sig-name descname">ETH_LAG_INTF_FALLBACK_STATIC</code><a class="headerlink" href="#_CPPv4N3eos28eth_lag_intf_fallback_type_t28ETH_LAG_INTF_FALLBACK_STATICE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Fallback to static mode. </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt id="_CPPv4N3eos28eth_lag_intf_fallback_type_t32ETH_LAG_INTF_FALLBACK_INDIVIDUALE">
+<span id="_CPPv3N3eos28eth_lag_intf_fallback_type_t32ETH_LAG_INTF_FALLBACK_INDIVIDUALE"></span><span id="_CPPv2N3eos28eth_lag_intf_fallback_type_t32ETH_LAG_INTF_FALLBACK_INDIVIDUALE"></span><span class="target" id="namespaceeos_1ac9a25f4bd97a6e1c726d0f4d3e285dcda7c7b38f91be4f53309a7a0a090035143"></span><em class="property">enumerator </em><code class="sig-name descname">ETH_LAG_INTF_FALLBACK_INDIVIDUAL</code><a class="headerlink" href="#_CPPv4N3eos28eth_lag_intf_fallback_type_t32ETH_LAG_INTF_FALLBACK_INDIVIDUALE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Fallback to individual mode. </p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="cpp enum">
+<dt id="_CPPv4N3eos39eth_lag_intf_fallback_timeout_default_tE">
+<span id="_CPPv3N3eos39eth_lag_intf_fallback_timeout_default_tE"></span><span id="_CPPv2N3eos39eth_lag_intf_fallback_timeout_default_tE"></span><span class="target" id="namespaceeos_1a3a3d7053bcb2b85c1b17002be086063b"></span><em class="property">enum </em><code class="sig-name descname">eth_lag_intf_fallback_timeout_default_t</code><a class="headerlink" href="#_CPPv4N3eos39eth_lag_intf_fallback_timeout_default_tE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>How long to wait for LACP before fallback. </p>
+<p><em>Values:</em></p>
+<dl class="cpp enumerator">
+<dt id="_CPPv4N3eos39eth_lag_intf_fallback_timeout_default_t37ETH_LAG_INTF_FALLBACK_TIMEOUT_DEFAULTE">
+<span id="_CPPv3N3eos39eth_lag_intf_fallback_timeout_default_t37ETH_LAG_INTF_FALLBACK_TIMEOUT_DEFAULTE"></span><span id="_CPPv2N3eos39eth_lag_intf_fallback_timeout_default_t37ETH_LAG_INTF_FALLBACK_TIMEOUT_DEFAULTE"></span><span class="target" id="namespaceeos_1a3a3d7053bcb2b85c1b17002be086063baf3e699b04030873365d871b195ff9b0c"></span><em class="property">enumerator </em><code class="sig-name descname">ETH_LAG_INTF_FALLBACK_TIMEOUT_DEFAULT</code><a class="headerlink" href="#_CPPv4N3eos39eth_lag_intf_fallback_timeout_default_t37ETH_LAG_INTF_FALLBACK_TIMEOUT_DEFAULTE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="cpp enum">
+<dt id="_CPPv4N3eos30eth_lag_intf_member_priority_tE">
+<span id="_CPPv3N3eos30eth_lag_intf_member_priority_tE"></span><span id="_CPPv2N3eos30eth_lag_intf_member_priority_tE"></span><span class="target" id="namespaceeos_1a2fcfb5e341b2abb4087c716fa6839df6"></span><em class="property">enum </em><code class="sig-name descname">eth_lag_intf_member_priority_t</code><a class="headerlink" href="#_CPPv4N3eos30eth_lag_intf_member_priority_tE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p><em>Values:</em></p>
+<dl class="cpp enumerator">
+<dt id="_CPPv4N3eos30eth_lag_intf_member_priority_t34ETH_LAG_INTF_PORT_PRIORITY_DEFAULTE">
+<span id="_CPPv3N3eos30eth_lag_intf_member_priority_t34ETH_LAG_INTF_PORT_PRIORITY_DEFAULTE"></span><span id="_CPPv2N3eos30eth_lag_intf_member_priority_t34ETH_LAG_INTF_PORT_PRIORITY_DEFAULTE"></span><span class="target" id="namespaceeos_1a2fcfb5e341b2abb4087c716fa6839df6ad1f7e9199b42aa18e8fcd12969f050a7"></span><em class="property">enumerator </em><code class="sig-name descname">ETH_LAG_INTF_PORT_PRIORITY_DEFAULT</code><a class="headerlink" href="#_CPPv4N3eos30eth_lag_intf_member_priority_t34ETH_LAG_INTF_PORT_PRIORITY_DEFAULTE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="cpp enum">
+<dt id="_CPPv4N3eos31eth_lag_intf_member_lacp_mode_tE">
+<span id="_CPPv3N3eos31eth_lag_intf_member_lacp_mode_tE"></span><span id="_CPPv2N3eos31eth_lag_intf_member_lacp_mode_tE"></span><span class="target" id="namespaceeos_1ab6a9a0c49eb6426718a7f2aeebf75bb8"></span><em class="property">enum </em><code class="sig-name descname">eth_lag_intf_member_lacp_mode_t</code><a class="headerlink" href="#_CPPv4N3eos31eth_lag_intf_member_lacp_mode_tE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>LAG interface mebmer LACP mode. </p>
+<p><em>Values:</em></p>
+<dl class="cpp enumerator">
+<dt id="_CPPv4N3eos31eth_lag_intf_member_lacp_mode_t34ETH_LAG_INTF_MEMBER_LACP_MODE_NULLE">
+<span id="_CPPv3N3eos31eth_lag_intf_member_lacp_mode_t34ETH_LAG_INTF_MEMBER_LACP_MODE_NULLE"></span><span id="_CPPv2N3eos31eth_lag_intf_member_lacp_mode_t34ETH_LAG_INTF_MEMBER_LACP_MODE_NULLE"></span><span class="target" id="namespaceeos_1ab6a9a0c49eb6426718a7f2aeebf75bb8a88cdc894aaf9d6cd5db51c646b8760e2"></span><em class="property">enumerator </em><code class="sig-name descname">ETH_LAG_INTF_MEMBER_LACP_MODE_NULL</code><a class="headerlink" href="#_CPPv4N3eos31eth_lag_intf_member_lacp_mode_t34ETH_LAG_INTF_MEMBER_LACP_MODE_NULLE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt id="_CPPv4N3eos31eth_lag_intf_member_lacp_mode_t33ETH_LAG_INTF_MEMBER_LACP_MODE_OFFE">
+<span id="_CPPv3N3eos31eth_lag_intf_member_lacp_mode_t33ETH_LAG_INTF_MEMBER_LACP_MODE_OFFE"></span><span id="_CPPv2N3eos31eth_lag_intf_member_lacp_mode_t33ETH_LAG_INTF_MEMBER_LACP_MODE_OFFE"></span><span class="target" id="namespaceeos_1ab6a9a0c49eb6426718a7f2aeebf75bb8a5c1eca9f540922c463fac5d36241bae7"></span><em class="property">enumerator </em><code class="sig-name descname">ETH_LAG_INTF_MEMBER_LACP_MODE_OFF</code><a class="headerlink" href="#_CPPv4N3eos31eth_lag_intf_member_lacp_mode_t33ETH_LAG_INTF_MEMBER_LACP_MODE_OFFE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt id="_CPPv4N3eos31eth_lag_intf_member_lacp_mode_t37ETH_LAG_INTF_MEMBER_LACP_MODE_PASSIVEE">
+<span id="_CPPv3N3eos31eth_lag_intf_member_lacp_mode_t37ETH_LAG_INTF_MEMBER_LACP_MODE_PASSIVEE"></span><span id="_CPPv2N3eos31eth_lag_intf_member_lacp_mode_t37ETH_LAG_INTF_MEMBER_LACP_MODE_PASSIVEE"></span><span class="target" id="namespaceeos_1ab6a9a0c49eb6426718a7f2aeebf75bb8a233964634181f3d946785cf74a19c12e"></span><em class="property">enumerator </em><code class="sig-name descname">ETH_LAG_INTF_MEMBER_LACP_MODE_PASSIVE</code><a class="headerlink" href="#_CPPv4N3eos31eth_lag_intf_member_lacp_mode_t37ETH_LAG_INTF_MEMBER_LACP_MODE_PASSIVEE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt id="_CPPv4N3eos31eth_lag_intf_member_lacp_mode_t36ETH_LAG_INTF_MEMBER_LACP_MODE_ACTIVEE">
+<span id="_CPPv3N3eos31eth_lag_intf_member_lacp_mode_t36ETH_LAG_INTF_MEMBER_LACP_MODE_ACTIVEE"></span><span id="_CPPv2N3eos31eth_lag_intf_member_lacp_mode_t36ETH_LAG_INTF_MEMBER_LACP_MODE_ACTIVEE"></span><span class="target" id="namespaceeos_1ab6a9a0c49eb6426718a7f2aeebf75bb8ae26aaeba6ce56ae4de913e6273b162e5"></span><em class="property">enumerator </em><code class="sig-name descname">ETH_LAG_INTF_MEMBER_LACP_MODE_ACTIVE</code><a class="headerlink" href="#_CPPv4N3eos31eth_lag_intf_member_lacp_mode_t36ETH_LAG_INTF_MEMBER_LACP_MODE_ACTIVEE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="cpp enum">
+<dt id="_CPPv4N3eos34eth_lag_intf_member_lacp_timeout_tE">
+<span id="_CPPv3N3eos34eth_lag_intf_member_lacp_timeout_tE"></span><span id="_CPPv2N3eos34eth_lag_intf_member_lacp_timeout_tE"></span><span class="target" id="namespaceeos_1a073cda72a621c927166367236972e0dc"></span><em class="property">enum </em><code class="sig-name descname">eth_lag_intf_member_lacp_timeout_t</code><a class="headerlink" href="#_CPPv4N3eos34eth_lag_intf_member_lacp_timeout_tE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>LAG interface mebmer timeout values. </p>
+<p><em>Values:</em></p>
+<dl class="cpp enumerator">
+<dt id="_CPPv4N3eos34eth_lag_intf_member_lacp_timeout_t37ETH_LAG_INTF_MEMBER_LACP_TIMEOUT_NULLE">
+<span id="_CPPv3N3eos34eth_lag_intf_member_lacp_timeout_t37ETH_LAG_INTF_MEMBER_LACP_TIMEOUT_NULLE"></span><span id="_CPPv2N3eos34eth_lag_intf_member_lacp_timeout_t37ETH_LAG_INTF_MEMBER_LACP_TIMEOUT_NULLE"></span><span class="target" id="namespaceeos_1a073cda72a621c927166367236972e0dca86a3d55dc4f3ab38c8a96d025fd8d937"></span><em class="property">enumerator </em><code class="sig-name descname">ETH_LAG_INTF_MEMBER_LACP_TIMEOUT_NULL</code><a class="headerlink" href="#_CPPv4N3eos34eth_lag_intf_member_lacp_timeout_t37ETH_LAG_INTF_MEMBER_LACP_TIMEOUT_NULLE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt id="_CPPv4N3eos34eth_lag_intf_member_lacp_timeout_t38ETH_LAG_INTF_MEMBER_LACP_TIMEOUT_SHORTE">
+<span id="_CPPv3N3eos34eth_lag_intf_member_lacp_timeout_t38ETH_LAG_INTF_MEMBER_LACP_TIMEOUT_SHORTE"></span><span id="_CPPv2N3eos34eth_lag_intf_member_lacp_timeout_t38ETH_LAG_INTF_MEMBER_LACP_TIMEOUT_SHORTE"></span><span class="target" id="namespaceeos_1a073cda72a621c927166367236972e0dcae01c72c2a9671d9652e34db187f86011"></span><em class="property">enumerator </em><code class="sig-name descname">ETH_LAG_INTF_MEMBER_LACP_TIMEOUT_SHORT</code><a class="headerlink" href="#_CPPv4N3eos34eth_lag_intf_member_lacp_timeout_t38ETH_LAG_INTF_MEMBER_LACP_TIMEOUT_SHORTE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt id="_CPPv4N3eos34eth_lag_intf_member_lacp_timeout_t37ETH_LAG_INTF_MEMBER_LACP_TIMEOUT_LONGE">
+<span id="_CPPv3N3eos34eth_lag_intf_member_lacp_timeout_t37ETH_LAG_INTF_MEMBER_LACP_TIMEOUT_LONGE"></span><span id="_CPPv2N3eos34eth_lag_intf_member_lacp_timeout_t37ETH_LAG_INTF_MEMBER_LACP_TIMEOUT_LONGE"></span><span class="target" id="namespaceeos_1a073cda72a621c927166367236972e0dca66e01bc17821e94a6243f7e991018d09"></span><em class="property">enumerator </em><code class="sig-name descname">ETH_LAG_INTF_MEMBER_LACP_TIMEOUT_LONG</code><a class="headerlink" href="#_CPPv4N3eos34eth_lag_intf_member_lacp_timeout_t37ETH_LAG_INTF_MEMBER_LACP_TIMEOUT_LONGE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<dl class="cpp class">
+<dt id="_CPPv4N3eos25eth_lag_intf_membership_tE">
+<span id="_CPPv3N3eos25eth_lag_intf_membership_tE"></span><span id="_CPPv2N3eos25eth_lag_intf_membership_tE"></span><span id="eos::eth_lag_intf_membership_t"></span><span class="target" id="classeos_1_1eth__lag__intf__membership__t"></span><em class="property">class </em><code class="sig-name descname">eth_lag_intf_membership_t</code><a class="headerlink" href="#_CPPv4N3eos25eth_lag_intf_membership_tE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><div class="docutils container">
+<em>#include &lt;eth_lag_intf.h&gt;</em></div>
+<p>This data structure is used to describe the operational status of an interface configured in an LAG interface. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
+<dl class="cpp function">
+<dt id="_CPPv4N3eos25eth_lag_intf_membership_t25eth_lag_intf_membership_tEv">
+<span id="_CPPv3N3eos25eth_lag_intf_membership_t25eth_lag_intf_membership_tEv"></span><span id="_CPPv2N3eos25eth_lag_intf_membership_t25eth_lag_intf_membership_tEv"></span><span id="eos::eth_lag_intf_membership_t::eth_lag_intf_membership_t"></span><span class="target" id="classeos_1_1eth__lag__intf__membership__t_1a742993d46552006cbbff63c0808a0a90"></span><code class="sig-name descname">eth_lag_intf_membership_t</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos25eth_lag_intf_membership_t25eth_lag_intf_membership_tEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos25eth_lag_intf_membership_t25eth_lag_intf_membership_tE9intf_id_tbRKNSt6stringEd31eth_lag_intf_member_lacp_mode_t">
+<span id="_CPPv3N3eos25eth_lag_intf_membership_t25eth_lag_intf_membership_tE9intf_id_tbRKNSt6stringEd31eth_lag_intf_member_lacp_mode_t"></span><span id="_CPPv2N3eos25eth_lag_intf_membership_t25eth_lag_intf_membership_tE9intf_id_tbRKNSt6stringEd31eth_lag_intf_member_lacp_mode_t"></span><span id="eos::eth_lag_intf_membership_t::eth_lag_intf_membership_t__intf_id_t.b.ssCR.double.eth_lag_intf_member_lacp_mode_t"></span><span class="target" id="classeos_1_1eth__lag__intf__membership__t_1ae0e753a75a1ccaf9a790cde24bbabfbf"></span><code class="sig-name descname">eth_lag_intf_membership_t</code><span class="sig-paren">(</span><a class="reference internal" href="intf.html#_CPPv4N3eos9intf_id_tE" title="eos::intf_id_t">intf_id_t</a> <em>eth_lag_intf_id</em>, bool <em>active</em>, <a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::string <em class="property">const</em> &amp;<em>reason</em>, double <em>member_time</em>, <a class="reference internal" href="#_CPPv4N3eos31eth_lag_intf_member_lacp_mode_tE" title="eos::eth_lag_intf_member_lacp_mode_t">eth_lag_intf_member_lacp_mode_t</a> <em>mode</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos25eth_lag_intf_membership_t25eth_lag_intf_membership_tE9intf_id_tbRKNSt6stringEd31eth_lag_intf_member_lacp_mode_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Constructor with paremeters. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos25eth_lag_intf_membership_t25eth_lag_intf_membership_tERK25eth_lag_intf_membership_t">
+<span id="_CPPv3N3eos25eth_lag_intf_membership_t25eth_lag_intf_membership_tERK25eth_lag_intf_membership_t"></span><span id="_CPPv2N3eos25eth_lag_intf_membership_t25eth_lag_intf_membership_tERK25eth_lag_intf_membership_t"></span><span id="eos::eth_lag_intf_membership_t::eth_lag_intf_membership_t__eth_lag_intf_membership_tCR"></span><span class="target" id="classeos_1_1eth__lag__intf__membership__t_1a906fc5ef923ab00f9b7528f38029a360"></span><code class="sig-name descname">eth_lag_intf_membership_t</code><span class="sig-paren">(</span><em class="property">const</em> <a class="reference internal" href="#_CPPv4N3eos25eth_lag_intf_membership_t25eth_lag_intf_membership_tERK25eth_lag_intf_membership_t" title="eos::eth_lag_intf_membership_t::eth_lag_intf_membership_t">eth_lag_intf_membership_t</a> &amp;<em>other</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos25eth_lag_intf_membership_t25eth_lag_intf_membership_tERK25eth_lag_intf_membership_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos25eth_lag_intf_membership_taSERK25eth_lag_intf_membership_t">
+<span id="_CPPv3N3eos25eth_lag_intf_membership_taSERK25eth_lag_intf_membership_t"></span><span id="_CPPv2N3eos25eth_lag_intf_membership_taSERK25eth_lag_intf_membership_t"></span><span id="eos::eth_lag_intf_membership_t::assign-operator__eth_lag_intf_membership_tCR"></span><span class="target" id="classeos_1_1eth__lag__intf__membership__t_1ad51662dda818b08cd804571e09a113fd"></span><a class="reference internal" href="#_CPPv4N3eos25eth_lag_intf_membership_tE" title="eos::eth_lag_intf_membership_t">eth_lag_intf_membership_t</a> &amp;<code class="sig-name descname">operator=</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos25eth_lag_intf_membership_tE" title="eos::eth_lag_intf_membership_t">eth_lag_intf_membership_t</a> <em class="property">const</em> &amp;<em>other</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos25eth_lag_intf_membership_taSERK25eth_lag_intf_membership_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos25eth_lag_intf_membership_t15eth_lag_intf_idEv">
+<span id="_CPPv3NK3eos25eth_lag_intf_membership_t15eth_lag_intf_idEv"></span><span id="_CPPv2NK3eos25eth_lag_intf_membership_t15eth_lag_intf_idEv"></span><span id="eos::eth_lag_intf_membership_t::eth_lag_intf_idC"></span><span class="target" id="classeos_1_1eth__lag__intf__membership__t_1aaba53ec4ac55690d1a239fb34769473f"></span><a class="reference internal" href="intf.html#_CPPv4N3eos9intf_id_tE" title="eos::intf_id_t">intf_id_t</a> <code class="sig-name descname">eth_lag_intf_id</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos25eth_lag_intf_membership_t15eth_lag_intf_idEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Getter for ‘eth_lag_intf_id’: the LAG interface id this interface is configured to be in. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos25eth_lag_intf_membership_t18eth_lag_intf_id_isE9intf_id_t">
+<span id="_CPPv3N3eos25eth_lag_intf_membership_t18eth_lag_intf_id_isE9intf_id_t"></span><span id="_CPPv2N3eos25eth_lag_intf_membership_t18eth_lag_intf_id_isE9intf_id_t"></span><span id="eos::eth_lag_intf_membership_t::eth_lag_intf_id_is__intf_id_t"></span><span class="target" id="classeos_1_1eth__lag__intf__membership__t_1a4f16af197641c78e065d8e1ae4e42eb4"></span>void <code class="sig-name descname">eth_lag_intf_id_is</code><span class="sig-paren">(</span><a class="reference internal" href="intf.html#_CPPv4N3eos9intf_id_tE" title="eos::intf_id_t">intf_id_t</a> <em>eth_lag_intf_id</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos25eth_lag_intf_membership_t18eth_lag_intf_id_isE9intf_id_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Setter for ‘eth_lag_intf_id’. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos25eth_lag_intf_membership_t6activeEv">
+<span id="_CPPv3NK3eos25eth_lag_intf_membership_t6activeEv"></span><span id="_CPPv2NK3eos25eth_lag_intf_membership_t6activeEv"></span><span id="eos::eth_lag_intf_membership_t::activeC"></span><span class="target" id="classeos_1_1eth__lag__intf__membership__t_1a8787c2f7ed9d3606568188d30de75a30"></span>bool <code class="sig-name descname">active</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos25eth_lag_intf_membership_t6activeEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Getter for ‘active’: the attribute indicating whether this interface is active in an LAG. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos25eth_lag_intf_membership_t6reasonEv">
+<span id="_CPPv3NK3eos25eth_lag_intf_membership_t6reasonEv"></span><span id="_CPPv2NK3eos25eth_lag_intf_membership_t6reasonEv"></span><span id="eos::eth_lag_intf_membership_t::reasonC"></span><span class="target" id="classeos_1_1eth__lag__intf__membership__t_1a4b0876276f0fa07cf08348645b98f103"></span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::string <code class="sig-name descname">reason</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos25eth_lag_intf_membership_t6reasonEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Getter for ‘reason’: if populated, reason this interface isn’t in LAG. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos25eth_lag_intf_membership_t9reason_isERKNSt6stringE">
+<span id="_CPPv3N3eos25eth_lag_intf_membership_t9reason_isERKNSt6stringE"></span><span id="_CPPv2N3eos25eth_lag_intf_membership_t9reason_isERKNSt6stringE"></span><span id="eos::eth_lag_intf_membership_t::reason_is__ssCR"></span><span class="target" id="classeos_1_1eth__lag__intf__membership__t_1a6121e967c054905a078aee85d08bfd3b"></span>void <code class="sig-name descname">reason_is</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::string <em class="property">const</em> &amp;<em>reason</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos25eth_lag_intf_membership_t9reason_isERKNSt6stringE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Setter for ‘reason’. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos25eth_lag_intf_membership_t11member_timeEv">
+<span id="_CPPv3NK3eos25eth_lag_intf_membership_t11member_timeEv"></span><span id="_CPPv2NK3eos25eth_lag_intf_membership_t11member_timeEv"></span><span id="eos::eth_lag_intf_membership_t::member_timeC"></span><span class="target" id="classeos_1_1eth__lag__intf__membership__t_1af477ed29fef41f2ed403ec4db77504d2"></span>double <code class="sig-name descname">member_time</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos25eth_lag_intf_membership_t11member_timeEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Getter for ‘member_time’: the time when this interface became member of an LAG. If never a member, then the value is 0; if once was member, but now is not, then this is the time the interface was removed from member. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos25eth_lag_intf_membership_t4modeEv">
+<span id="_CPPv3NK3eos25eth_lag_intf_membership_t4modeEv"></span><span id="_CPPv2NK3eos25eth_lag_intf_membership_t4modeEv"></span><span id="eos::eth_lag_intf_membership_t::modeC"></span><span class="target" id="classeos_1_1eth__lag__intf__membership__t_1a8f2a41f443892746091f17428bbd31b7"></span><a class="reference internal" href="#_CPPv4N3eos31eth_lag_intf_member_lacp_mode_tE" title="eos::eth_lag_intf_member_lacp_mode_t">eth_lag_intf_member_lacp_mode_t</a> <code class="sig-name descname">mode</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos25eth_lag_intf_membership_t4modeEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Getter for ‘mode’: the LACP mode this interface is configured. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos25eth_lag_intf_membership_teqERK25eth_lag_intf_membership_t">
+<span id="_CPPv3NK3eos25eth_lag_intf_membership_teqERK25eth_lag_intf_membership_t"></span><span id="_CPPv2NK3eos25eth_lag_intf_membership_teqERK25eth_lag_intf_membership_t"></span><span id="eos::eth_lag_intf_membership_t::eq-operator__eth_lag_intf_membership_tCRC"></span><span class="target" id="classeos_1_1eth__lag__intf__membership__t_1ad9d1b84474070d3058ff74b7f1628063"></span>bool <code class="sig-name descname">operator==</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos25eth_lag_intf_membership_tE" title="eos::eth_lag_intf_membership_t">eth_lag_intf_membership_t</a> <em class="property">const</em> &amp;<em>other</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos25eth_lag_intf_membership_teqERK25eth_lag_intf_membership_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos25eth_lag_intf_membership_tneERK25eth_lag_intf_membership_t">
+<span id="_CPPv3NK3eos25eth_lag_intf_membership_tneERK25eth_lag_intf_membership_t"></span><span id="_CPPv2NK3eos25eth_lag_intf_membership_tneERK25eth_lag_intf_membership_t"></span><span id="eos::eth_lag_intf_membership_t::neq-operator__eth_lag_intf_membership_tCRC"></span><span class="target" id="classeos_1_1eth__lag__intf__membership__t_1a7c448d07b3ff2d549ecd1abcbe22e236"></span>bool <code class="sig-name descname">operator!=</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos25eth_lag_intf_membership_tE" title="eos::eth_lag_intf_membership_t">eth_lag_intf_membership_t</a> <em class="property">const</em> &amp;<em>other</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos25eth_lag_intf_membership_tneERK25eth_lag_intf_membership_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos25eth_lag_intf_membership_tltERK25eth_lag_intf_membership_t">
+<span id="_CPPv3NK3eos25eth_lag_intf_membership_tltERK25eth_lag_intf_membership_t"></span><span id="_CPPv2NK3eos25eth_lag_intf_membership_tltERK25eth_lag_intf_membership_t"></span><span id="eos::eth_lag_intf_membership_t::lt-operator__eth_lag_intf_membership_tCRC"></span><span class="target" id="classeos_1_1eth__lag__intf__membership__t_1aa5542af546d687f538bf9c23785cb4d7"></span>bool <code class="sig-name descname">operator&lt;</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos25eth_lag_intf_membership_tE" title="eos::eth_lag_intf_membership_t">eth_lag_intf_membership_t</a> <em class="property">const</em> &amp;<em>other</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos25eth_lag_intf_membership_tltERK25eth_lag_intf_membership_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos25eth_lag_intf_membership_t4hashEv">
+<span id="_CPPv3NK3eos25eth_lag_intf_membership_t4hashEv"></span><span id="_CPPv2NK3eos25eth_lag_intf_membership_t4hashEv"></span><span id="eos::eth_lag_intf_membership_t::hashC"></span><span class="target" id="classeos_1_1eth__lag__intf__membership__t_1a94ee41a1bb91a6a77cf3bac90e8d3435"></span>uint32_t <code class="sig-name descname">hash</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos25eth_lag_intf_membership_t4hashEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>The hash function for type <a class="reference internal" href="#classeos_1_1eth__lag__intf__membership__t"><span class="std std-ref">eth_lag_intf_membership_t</span></a>. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos25eth_lag_intf_membership_t6mix_meER8hash_mix">
+<span id="_CPPv3NK3eos25eth_lag_intf_membership_t6mix_meER8hash_mix"></span><span id="_CPPv2NK3eos25eth_lag_intf_membership_t6mix_meER8hash_mix"></span><span id="eos::eth_lag_intf_membership_t::mix_me__hash_mixRC"></span><span class="target" id="classeos_1_1eth__lag__intf__membership__t_1ab342476e0425a893ba8df495fd8ca0f3"></span>void <code class="sig-name descname">mix_me</code><span class="sig-paren">(</span><a class="reference internal" href="hash_mix.html#_CPPv4N3eos8hash_mixE" title="eos::hash_mix">hash_mix</a> &amp;<em>h</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos25eth_lag_intf_membership_t6mix_meER8hash_mix" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>The hash mix function for type <a class="reference internal" href="#classeos_1_1eth__lag__intf__membership__t"><span class="std std-ref">eth_lag_intf_membership_t</span></a>. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos25eth_lag_intf_membership_t9to_stringEv">
+<span id="_CPPv3NK3eos25eth_lag_intf_membership_t9to_stringEv"></span><span id="_CPPv2NK3eos25eth_lag_intf_membership_t9to_stringEv"></span><span id="eos::eth_lag_intf_membership_t::to_stringC"></span><span class="target" id="classeos_1_1eth__lag__intf__membership__t_1a92fb6cdd7d8225765eb93ea458ff8355"></span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::string <code class="sig-name descname">to_string</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos25eth_lag_intf_membership_t9to_stringEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Returns a string representation of the current object’s values. </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-static-functions">Public Static Functions</p>
+<dl class="cpp function">
+<dt id="_CPPv4N3eos25eth_lag_intf_membership_tnwENSt6size_tEPv">
+<span id="_CPPv3N3eos25eth_lag_intf_membership_tnwENSt6size_tEPv"></span><span id="_CPPv2N3eos25eth_lag_intf_membership_tnwENSt6size_tEPv"></span><span id="eos::eth_lag_intf_membership_t::new-operator__std::s.voidP"></span><span class="target" id="classeos_1_1eth__lag__intf__membership__t_1aebff9b9e2eb4192b4323aca36e812d0a"></span><em class="property">static</em> <em class="property">inline</em> void *<code class="sig-name descname">operator new</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::size_t, void *<em>ptr</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos25eth_lag_intf_membership_tnwENSt6size_tEPv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos25eth_lag_intf_membership_tnwENSt6size_tE">
+<span id="_CPPv3N3eos25eth_lag_intf_membership_tnwENSt6size_tE"></span><span id="_CPPv2N3eos25eth_lag_intf_membership_tnwENSt6size_tE"></span><span id="eos::eth_lag_intf_membership_t::new-operator__std::s"></span><span class="target" id="classeos_1_1eth__lag__intf__membership__t_1a01d54e72a9d422e93ae493af33682715"></span><em class="property">static</em> void *<code class="sig-name descname">operator new</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::size_t<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos25eth_lag_intf_membership_tnwENSt6size_tE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos25eth_lag_intf_membership_tdlEPv">
+<span id="_CPPv3N3eos25eth_lag_intf_membership_tdlEPv"></span><span id="_CPPv2N3eos25eth_lag_intf_membership_tdlEPv"></span><span id="eos::eth_lag_intf_membership_t::delete-operator__voidP"></span><span class="target" id="classeos_1_1eth__lag__intf__membership__t_1abda14484f5d78ac14b7c6748b00ec37a"></span><em class="property">static</em> void <code class="sig-name descname">operator delete</code><span class="sig-paren">(</span>void*<span class="sig-paren">)</span> <em class="property">noexcept</em><a class="headerlink" href="#_CPPv4N3eos25eth_lag_intf_membership_tdlEPv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-private-members">Private Members</p>
+<dl class="cpp var">
+<dt id="_CPPv4N3eos25eth_lag_intf_membership_t5pimplE">
+<span id="_CPPv3N3eos25eth_lag_intf_membership_t5pimplE"></span><span id="_CPPv2N3eos25eth_lag_intf_membership_t5pimplE"></span><span id="eos::eth_lag_intf_membership_t::pimpl__std::shared_ptr:eth_lag_intf_membership_impl_t:"></span><span class="target" id="classeos_1_1eth__lag__intf__membership__t_1aa691be1874f0ee9a3c93ffdd92417cc7"></span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::shared_ptr&lt;eth_lag_intf_membership_impl_t&gt; <code class="sig-name descname">pimpl</code><a class="headerlink" href="#_CPPv4N3eos25eth_lag_intf_membership_t5pimplE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-friends">Friends</p>
+<dl class="cpp function">
+<dt id="_CPPv4N3eos25eth_lag_intf_membership_tlsERNSt7ostreamERK25eth_lag_intf_membership_t">
+<span id="_CPPv3N3eos25eth_lag_intf_membership_tlsERNSt7ostreamERK25eth_lag_intf_membership_t"></span><span id="_CPPv2N3eos25eth_lag_intf_membership_tlsERNSt7ostreamERK25eth_lag_intf_membership_t"></span><span id="eos::eth_lag_intf_membership_t::lshift-operator__osR.eth_lag_intf_membership_tCR"></span><span class="target" id="classeos_1_1eth__lag__intf__membership__t_1a21f5aa6b8297f9261e0d536e5d44a95b"></span><em class="property">friend</em> <a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::ostream &amp;<code class="sig-name descname">operator&lt;&lt;</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::ostream &amp;<em>os</em>, <em class="property">const</em> <a class="reference internal" href="#_CPPv4N3eos25eth_lag_intf_membership_tE" title="eos::eth_lag_intf_membership_t">eth_lag_intf_membership_t</a> &amp;<em>obj</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos25eth_lag_intf_membership_tlsERNSt7ostreamERK25eth_lag_intf_membership_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>A utility stream operator that adds a string representation of <a class="reference internal" href="#classeos_1_1eth__lag__intf__membership__t"><span class="std std-ref">eth_lag_intf_membership_t</span></a> to the ostream. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="cpp class">
+<dt id="_CPPv4N3eos14eth_lag_intf_tE">
+<span id="_CPPv3N3eos14eth_lag_intf_tE"></span><span id="_CPPv2N3eos14eth_lag_intf_tE"></span><span id="eos::eth_lag_intf_t"></span><span class="target" id="classeos_1_1eth__lag__intf__t"></span><em class="property">class </em><code class="sig-name descname">eth_lag_intf_t</code><a class="headerlink" href="#_CPPv4N3eos14eth_lag_intf_tE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><div class="docutils container">
+<em>#include &lt;eth_lag_intf.h&gt;</em></div>
+<p>This data structure defines a LAG interface, which is also known as a Link-Aggregation Group, or Port-Channel. LAGs bundle physical interfaces together into a single logical link to provide combined bandwidth and other benefits. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
+<dl class="cpp function">
+<dt id="_CPPv4N3eos14eth_lag_intf_t14eth_lag_intf_tEv">
+<span id="_CPPv3N3eos14eth_lag_intf_t14eth_lag_intf_tEv"></span><span id="_CPPv2N3eos14eth_lag_intf_t14eth_lag_intf_tEv"></span><span id="eos::eth_lag_intf_t::eth_lag_intf_t"></span><span class="target" id="classeos_1_1eth__lag__intf__t_1a75815fd30c4990c55bfbc567243c6c4d"></span><code class="sig-name descname">eth_lag_intf_t</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos14eth_lag_intf_t14eth_lag_intf_tEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos14eth_lag_intf_t14eth_lag_intf_tE9intf_id_t">
+<span id="_CPPv3N3eos14eth_lag_intf_t14eth_lag_intf_tE9intf_id_t"></span><span id="_CPPv2N3eos14eth_lag_intf_t14eth_lag_intf_tE9intf_id_t"></span><span id="eos::eth_lag_intf_t::eth_lag_intf_t__intf_id_t"></span><span class="target" id="classeos_1_1eth__lag__intf__t_1a462e916d78ec93bc96825e8a67f5a683"></span><em class="property">explicit</em> <code class="sig-name descname">eth_lag_intf_t</code><span class="sig-paren">(</span><a class="reference internal" href="intf.html#_CPPv4N3eos9intf_id_tE" title="eos::intf_id_t">intf_id_t</a> <em>intf</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos14eth_lag_intf_t14eth_lag_intf_tE9intf_id_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Constructor with interface id. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos14eth_lag_intf_t14eth_lag_intf_tE9intf_id_t8uint32_t8uint64_t28eth_lag_intf_fallback_type_t8uint16_t">
+<span id="_CPPv3N3eos14eth_lag_intf_t14eth_lag_intf_tE9intf_id_t8uint32_t8uint64_t28eth_lag_intf_fallback_type_t8uint16_t"></span><span id="_CPPv2N3eos14eth_lag_intf_t14eth_lag_intf_tE9intf_id_t8uint32_t8uint64_t28eth_lag_intf_fallback_type_t8uint16_t"></span><span id="eos::eth_lag_intf_t::eth_lag_intf_t__intf_id_t.uint32_t.uint64_t.eth_lag_intf_fallback_type_t.uint16_t"></span><span class="target" id="classeos_1_1eth__lag__intf__t_1a2a2002fa2aa3de0d9b6cd90674013f87"></span><code class="sig-name descname">eth_lag_intf_t</code><span class="sig-paren">(</span><a class="reference internal" href="intf.html#_CPPv4N3eos9intf_id_tE" title="eos::intf_id_t">intf_id_t</a> <em>intf</em>, uint32_t <em>min_links</em>, uint64_t <em>speed</em>, <a class="reference internal" href="#_CPPv4N3eos28eth_lag_intf_fallback_type_tE" title="eos::eth_lag_intf_fallback_type_t">eth_lag_intf_fallback_type_t</a> <em>fallback_type</em>, uint16_t <em>fallback_timeout</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos14eth_lag_intf_t14eth_lag_intf_tE9intf_id_t8uint32_t8uint64_t28eth_lag_intf_fallback_type_t8uint16_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Constructor with interface id. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos14eth_lag_intf_t14eth_lag_intf_tERK14eth_lag_intf_t">
+<span id="_CPPv3N3eos14eth_lag_intf_t14eth_lag_intf_tERK14eth_lag_intf_t"></span><span id="_CPPv2N3eos14eth_lag_intf_t14eth_lag_intf_tERK14eth_lag_intf_t"></span><span id="eos::eth_lag_intf_t::eth_lag_intf_t__eth_lag_intf_tCR"></span><span class="target" id="classeos_1_1eth__lag__intf__t_1a5de4a3b15dba20b25a629afc52fe4920"></span><code class="sig-name descname">eth_lag_intf_t</code><span class="sig-paren">(</span><em class="property">const</em> <a class="reference internal" href="#_CPPv4N3eos14eth_lag_intf_t14eth_lag_intf_tERK14eth_lag_intf_t" title="eos::eth_lag_intf_t::eth_lag_intf_t">eth_lag_intf_t</a> &amp;<em>other</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos14eth_lag_intf_t14eth_lag_intf_tERK14eth_lag_intf_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos14eth_lag_intf_taSERK14eth_lag_intf_t">
+<span id="_CPPv3N3eos14eth_lag_intf_taSERK14eth_lag_intf_t"></span><span id="_CPPv2N3eos14eth_lag_intf_taSERK14eth_lag_intf_t"></span><span id="eos::eth_lag_intf_t::assign-operator__eth_lag_intf_tCR"></span><span class="target" id="classeos_1_1eth__lag__intf__t_1a7a79af90fd96160fa03b0c0823d22f1a"></span><a class="reference internal" href="#_CPPv4N3eos14eth_lag_intf_tE" title="eos::eth_lag_intf_t">eth_lag_intf_t</a> &amp;<code class="sig-name descname">operator=</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos14eth_lag_intf_tE" title="eos::eth_lag_intf_t">eth_lag_intf_t</a> <em class="property">const</em> &amp;<em>other</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos14eth_lag_intf_taSERK14eth_lag_intf_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos14eth_lag_intf_t4intfEv">
+<span id="_CPPv3NK3eos14eth_lag_intf_t4intfEv"></span><span id="_CPPv2NK3eos14eth_lag_intf_t4intfEv"></span><span id="eos::eth_lag_intf_t::intfC"></span><span class="target" id="classeos_1_1eth__lag__intf__t_1a7dcf675ec729ccf423e72fd45a9076f0"></span><a class="reference internal" href="intf.html#_CPPv4N3eos9intf_id_tE" title="eos::intf_id_t">intf_id_t</a> <code class="sig-name descname">intf</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos14eth_lag_intf_t4intfEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Getter for ‘intf’: the id of this LAG interface. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos14eth_lag_intf_t5speedEv">
+<span id="_CPPv3NK3eos14eth_lag_intf_t5speedEv"></span><span id="_CPPv2NK3eos14eth_lag_intf_t5speedEv"></span><span id="eos::eth_lag_intf_t::speedC"></span><span class="target" id="classeos_1_1eth__lag__intf__t_1a55454ec4036bfe996d2c266facebdcf2"></span>uint64_t <code class="sig-name descname">speed</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos14eth_lag_intf_t5speedEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Getter for ‘speed’: the aggregated capacity (speed) of this LAG interface in megabits. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos14eth_lag_intf_t9min_linksEv">
+<span id="_CPPv3NK3eos14eth_lag_intf_t9min_linksEv"></span><span id="_CPPv2NK3eos14eth_lag_intf_t9min_linksEv"></span><span id="eos::eth_lag_intf_t::min_linksC"></span><span class="target" id="classeos_1_1eth__lag__intf__t_1aee5f2492770896a8d965191736168fa2"></span>uint32_t <code class="sig-name descname">min_links</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos14eth_lag_intf_t9min_linksEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Getter for ‘min_links’: the min links required up before bringing up an LAG interface. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos14eth_lag_intf_t13fallback_typeEv">
+<span id="_CPPv3NK3eos14eth_lag_intf_t13fallback_typeEv"></span><span id="_CPPv2NK3eos14eth_lag_intf_t13fallback_typeEv"></span><span id="eos::eth_lag_intf_t::fallback_typeC"></span><span class="target" id="classeos_1_1eth__lag__intf__t_1a1533bbb51d16cf7eec4b29f41b0631ff"></span><a class="reference internal" href="#_CPPv4N3eos28eth_lag_intf_fallback_type_tE" title="eos::eth_lag_intf_fallback_type_t">eth_lag_intf_fallback_type_t</a> <code class="sig-name descname">fallback_type</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos14eth_lag_intf_t13fallback_typeEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Getter for ‘fallback_type’: the fallback mode for this LAG interface. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos14eth_lag_intf_t16fallback_timeoutEv">
+<span id="_CPPv3NK3eos14eth_lag_intf_t16fallback_timeoutEv"></span><span id="_CPPv2NK3eos14eth_lag_intf_t16fallback_timeoutEv"></span><span id="eos::eth_lag_intf_t::fallback_timeoutC"></span><span class="target" id="classeos_1_1eth__lag__intf__t_1a04e16b967285b452ddff3609a2c35c1a"></span>uint16_t <code class="sig-name descname">fallback_timeout</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos14eth_lag_intf_t16fallback_timeoutEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Getter for ‘fallback_timeout’: the LACP active mode timeout value in seconds. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos14eth_lag_intf_t24fallback_timeout_defaultEv">
+<span id="_CPPv3NK3eos14eth_lag_intf_t24fallback_timeout_defaultEv"></span><span id="_CPPv2NK3eos14eth_lag_intf_t24fallback_timeout_defaultEv"></span><span id="eos::eth_lag_intf_t::fallback_timeout_defaultC"></span><span class="target" id="classeos_1_1eth__lag__intf__t_1ae1cdea77034e3391e95dd90ee3e84365"></span>uint16_t <code class="sig-name descname">fallback_timeout_default</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos14eth_lag_intf_t24fallback_timeout_defaultEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Returns the default fallback timeout value in seconds. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos14eth_lag_intf_teqERK14eth_lag_intf_t">
+<span id="_CPPv3NK3eos14eth_lag_intf_teqERK14eth_lag_intf_t"></span><span id="_CPPv2NK3eos14eth_lag_intf_teqERK14eth_lag_intf_t"></span><span id="eos::eth_lag_intf_t::eq-operator__eth_lag_intf_tCRC"></span><span class="target" id="classeos_1_1eth__lag__intf__t_1ae346bc8d969ff87148f2fd4af9c43669"></span>bool <code class="sig-name descname">operator==</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos14eth_lag_intf_tE" title="eos::eth_lag_intf_t">eth_lag_intf_t</a> <em class="property">const</em> &amp;<em>other</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos14eth_lag_intf_teqERK14eth_lag_intf_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos14eth_lag_intf_tneERK14eth_lag_intf_t">
+<span id="_CPPv3NK3eos14eth_lag_intf_tneERK14eth_lag_intf_t"></span><span id="_CPPv2NK3eos14eth_lag_intf_tneERK14eth_lag_intf_t"></span><span id="eos::eth_lag_intf_t::neq-operator__eth_lag_intf_tCRC"></span><span class="target" id="classeos_1_1eth__lag__intf__t_1ad5101c86261ce283cdf5456524acddc7"></span>bool <code class="sig-name descname">operator!=</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos14eth_lag_intf_tE" title="eos::eth_lag_intf_t">eth_lag_intf_t</a> <em class="property">const</em> &amp;<em>other</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos14eth_lag_intf_tneERK14eth_lag_intf_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos14eth_lag_intf_tltERK14eth_lag_intf_t">
+<span id="_CPPv3NK3eos14eth_lag_intf_tltERK14eth_lag_intf_t"></span><span id="_CPPv2NK3eos14eth_lag_intf_tltERK14eth_lag_intf_t"></span><span id="eos::eth_lag_intf_t::lt-operator__eth_lag_intf_tCRC"></span><span class="target" id="classeos_1_1eth__lag__intf__t_1af0b33abf66585ea3779e49d4f16d4671"></span>bool <code class="sig-name descname">operator&lt;</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos14eth_lag_intf_tE" title="eos::eth_lag_intf_t">eth_lag_intf_t</a> <em class="property">const</em> &amp;<em>other</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos14eth_lag_intf_tltERK14eth_lag_intf_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos14eth_lag_intf_t4hashEv">
+<span id="_CPPv3NK3eos14eth_lag_intf_t4hashEv"></span><span id="_CPPv2NK3eos14eth_lag_intf_t4hashEv"></span><span id="eos::eth_lag_intf_t::hashC"></span><span class="target" id="classeos_1_1eth__lag__intf__t_1a68755d68cb6ab26d3c9a7ef35d3f5d5d"></span>uint32_t <code class="sig-name descname">hash</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos14eth_lag_intf_t4hashEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>The hash function for type <a class="reference internal" href="#classeos_1_1eth__lag__intf__t"><span class="std std-ref">eth_lag_intf_t</span></a>. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos14eth_lag_intf_t6mix_meER8hash_mix">
+<span id="_CPPv3NK3eos14eth_lag_intf_t6mix_meER8hash_mix"></span><span id="_CPPv2NK3eos14eth_lag_intf_t6mix_meER8hash_mix"></span><span id="eos::eth_lag_intf_t::mix_me__hash_mixRC"></span><span class="target" id="classeos_1_1eth__lag__intf__t_1a574ac51234e1c0e1d3d33b2ad7141d03"></span>void <code class="sig-name descname">mix_me</code><span class="sig-paren">(</span><a class="reference internal" href="hash_mix.html#_CPPv4N3eos8hash_mixE" title="eos::hash_mix">hash_mix</a> &amp;<em>h</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos14eth_lag_intf_t6mix_meER8hash_mix" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>The hash mix function for type <a class="reference internal" href="#classeos_1_1eth__lag__intf__t"><span class="std std-ref">eth_lag_intf_t</span></a>. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos14eth_lag_intf_t9to_stringEv">
+<span id="_CPPv3NK3eos14eth_lag_intf_t9to_stringEv"></span><span id="_CPPv2NK3eos14eth_lag_intf_t9to_stringEv"></span><span id="eos::eth_lag_intf_t::to_stringC"></span><span class="target" id="classeos_1_1eth__lag__intf__t_1a7bf5cec024061b182fcda8716d0f7622"></span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::string <code class="sig-name descname">to_string</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos14eth_lag_intf_t9to_stringEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Returns a string representation of the current object’s values. </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-static-functions">Public Static Functions</p>
+<dl class="cpp function">
+<dt id="_CPPv4N3eos14eth_lag_intf_tnwENSt6size_tEPv">
+<span id="_CPPv3N3eos14eth_lag_intf_tnwENSt6size_tEPv"></span><span id="_CPPv2N3eos14eth_lag_intf_tnwENSt6size_tEPv"></span><span id="eos::eth_lag_intf_t::new-operator__std::s.voidP"></span><span class="target" id="classeos_1_1eth__lag__intf__t_1ac1ed8d26c294272d488717de4b81b008"></span><em class="property">static</em> <em class="property">inline</em> void *<code class="sig-name descname">operator new</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::size_t, void *<em>ptr</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos14eth_lag_intf_tnwENSt6size_tEPv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos14eth_lag_intf_tnwENSt6size_tE">
+<span id="_CPPv3N3eos14eth_lag_intf_tnwENSt6size_tE"></span><span id="_CPPv2N3eos14eth_lag_intf_tnwENSt6size_tE"></span><span id="eos::eth_lag_intf_t::new-operator__std::s"></span><span class="target" id="classeos_1_1eth__lag__intf__t_1abb4e37778afbed7708c788f50a3fc4cd"></span><em class="property">static</em> void *<code class="sig-name descname">operator new</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::size_t<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos14eth_lag_intf_tnwENSt6size_tE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos14eth_lag_intf_tdlEPv">
+<span id="_CPPv3N3eos14eth_lag_intf_tdlEPv"></span><span id="_CPPv2N3eos14eth_lag_intf_tdlEPv"></span><span id="eos::eth_lag_intf_t::delete-operator__voidP"></span><span class="target" id="classeos_1_1eth__lag__intf__t_1ac9e1ead217a44568981c81c79ce4d64d"></span><em class="property">static</em> void <code class="sig-name descname">operator delete</code><span class="sig-paren">(</span>void*<span class="sig-paren">)</span> <em class="property">noexcept</em><a class="headerlink" href="#_CPPv4N3eos14eth_lag_intf_tdlEPv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-private-members">Private Members</p>
+<dl class="cpp var">
+<dt id="_CPPv4N3eos14eth_lag_intf_t5pimplE">
+<span id="_CPPv3N3eos14eth_lag_intf_t5pimplE"></span><span id="_CPPv2N3eos14eth_lag_intf_t5pimplE"></span><span id="eos::eth_lag_intf_t::pimpl__std::shared_ptr:eth_lag_intf_impl_t:"></span><span class="target" id="classeos_1_1eth__lag__intf__t_1a5c165c0c22f7a9f10050f74639a67e8b"></span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::shared_ptr&lt;eth_lag_intf_impl_t&gt; <code class="sig-name descname">pimpl</code><a class="headerlink" href="#_CPPv4N3eos14eth_lag_intf_t5pimplE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-friends">Friends</p>
+<dl class="cpp function">
+<dt id="_CPPv4N3eos14eth_lag_intf_tlsERNSt7ostreamERK14eth_lag_intf_t">
+<span id="_CPPv3N3eos14eth_lag_intf_tlsERNSt7ostreamERK14eth_lag_intf_t"></span><span id="_CPPv2N3eos14eth_lag_intf_tlsERNSt7ostreamERK14eth_lag_intf_t"></span><span id="eos::eth_lag_intf_t::lshift-operator__osR.eth_lag_intf_tCR"></span><span class="target" id="classeos_1_1eth__lag__intf__t_1aa598de1e3b1390caa40268e368f2bf6c"></span><em class="property">friend</em> <a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::ostream &amp;<code class="sig-name descname">operator&lt;&lt;</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::ostream &amp;<em>os</em>, <em class="property">const</em> <a class="reference internal" href="#_CPPv4N3eos14eth_lag_intf_tE" title="eos::eth_lag_intf_t">eth_lag_intf_t</a> &amp;<em>obj</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos14eth_lag_intf_tlsERNSt7ostreamERK14eth_lag_intf_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>A utility stream operator that adds a string representation of <a class="reference internal" href="#classeos_1_1eth__lag__intf__t"><span class="std std-ref">eth_lag_intf_t</span></a> to the ostream. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#"><strong>eth_lag_intf</strong></a><ul>
+<li><a class="reference internal" href="#type-definitions-in-eth-lag-intf">Type definitions in <strong>eth_lag_intf</strong></a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="eth_intf.html"
+                        title="previous chapter"><strong>eth_intf</strong></a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="eth_phy_intf.html"
+                        title="next chapter"><strong>eth_phy_intf</strong></a></p>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="eth_phy_intf.html" title="eth_phy_intf"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="eth_intf.html" title="eth_intf"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Arista EOS SDK 2.22.5.1 reference</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href=""><strong>eth_lag_intf</strong></a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2014, Arista Networks.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.4.3.
+    </div>
+  </body>
+</html>
