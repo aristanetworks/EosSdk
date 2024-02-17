@@ -127,7 +127,7 @@ class EOS_SDK_PUBLIC sdk::SdkImpl {
    void init_fib_mgr(mgr_mode_type_t mode=MODE_TYPE_READ_ONLY);
    void init_hardware_table_mgr();
    void init_intf_mgr();
-   void init_intf_counter_mgr();
+   void init_intf_counter_mgr(mgr_mode_type_t mode=MODE_TYPE_READ_ONLY);
    void init_ip_intf_mgr();
    void init_ip_route_mgr();
    void init_lldp_mgr();
@@ -166,6 +166,7 @@ class EOS_SDK_PUBLIC sdk::SdkImpl {
    hardware_table_mgr * get_hardware_table_mgr();
    intf_mgr * get_intf_mgr();
    intf_counter_mgr * get_intf_counter_mgr();
+   intf_counter_mgr * get_intf_counter_mgr(mgr_mode_type_t mode);
    ip_intf_mgr * get_ip_intf_mgr();
    ip_route_mgr * get_ip_route_mgr();
    lldp_mgr * get_lldp_mgr();
@@ -235,6 +236,7 @@ class EOS_SDK_PUBLIC sdk::SdkImpl {
 
    std::string name_;
    void * eossdk_context_;
+   mgr_mode_type_t intf_counter_mgr_init_mode_;
 
    friend class mount_mgr;
 };
@@ -367,9 +369,23 @@ inline intf_mgr * sdk::SdkImpl::get_intf_mgr() {
 }
 
 inline intf_counter_mgr * sdk::SdkImpl::get_intf_counter_mgr() {
+   if ( !intf_counter_mgr_ ) {
+      get_intf_counter_mgr( MODE_TYPE_READ_ONLY ) ;
+   }
+   return intf_counter_mgr_;
+}
+
+inline intf_counter_mgr * sdk::SdkImpl::get_intf_counter_mgr(
+                                             mgr_mode_type_t mode ) {
    eos::print_profiles::add_profile( "IntfMgrHelper" );
    eos::print_profiles::add_profile( "intf" );
-   GET_NO_MOUNT_MGR(intf_counter)
+   if ( !intf_counter_mgr_ ) {
+      intf_counter_mgr_init_mode_ = mode;
+      init_intf_counter_mgr( mode ) ;
+   } else if ( intf_counter_mgr_init_mode_ != mode ) {
+      panic( "Requested manager mode is different than mode on initialization" );
+   }
+   return intf_counter_mgr_;
 }
 
 inline ip_intf_mgr * sdk::SdkImpl::get_ip_intf_mgr() {

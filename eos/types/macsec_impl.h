@@ -1,4 +1,4 @@
-// Copyright (c) 2023 Arista Networks, Inc.  All rights reserved.
+// Copyright (c) 2024 Arista Networks, Inc.  All rights reserved.
 // Arista Networks, Inc. Confidential and Proprietary.
 
 #ifndef EOS_TYPES_MACSEC_IMPL_H
@@ -6,6 +6,7 @@
 
 #include <eos/exception.h>
 #include <eos/hash_mix.h>
+#include <eos/intf.h>
 #include <eos/panic.h>
 #include <eos/utility.h>
 #include <forward_list>

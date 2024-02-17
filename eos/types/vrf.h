@@ -1,4 +1,4 @@
-// Copyright (c) 2023 Arista Networks, Inc.  All rights reserved.
+// Copyright (c) 2024 Arista Networks, Inc.  All rights reserved.
 // Arista Networks, Inc. Confidential and Proprietary.
 
 #ifndef EOS_TYPES_VRF_H
@@ -36,6 +36,11 @@ class EOS_SDK_PUBLIC vrf_t {
    vrf_t& operator=(
       vrf_t const & other);
 
+   static void * operator new( std::size_t, void * ptr ) {
+      return ptr;
+   }
+   static void * operator new( std::size_t );
+   static void operator delete( void * ) noexcept;
 
    /** Getter for 'name': the name of the VRF. */
    std::string name() const;

@@ -442,3 +442,23 @@ default_iterator(eos::intf_mgr, intf_iter);
 default_iterator(eos::ip_route_mgr, ip_route_iter);
 default_iterator(eos::mpls_route_mgr, mpls_route_iter);
 default_iterator(eos::subintf_mgr, subintf_iter);
+
+
+
+%{
+    /*
+       SWIG generates code for Swig::Director, that includes a static field
+       containing a heap-allocated python lock. If the code using that director
+       lock is not used here, then the lock is created, but never used, and the
+       compiler can eliminate the store of the constructed lock to the static
+       variable that holds it. Make sure there's a public path to use the lock,
+       so that elision doesn't happen, and we don't see the allocation as a
+       memory leak.
+     */
+[[gnu::visibility("default")]]
+void _EOSSDK_SWIG_NO_ELIDE_STATICS(PyObject *pyo, void *vptr) {
+    Swig::Director director(pyo);
+    director.swig_acquire_ownership_obj(vptr, true);
+}
+
+%}

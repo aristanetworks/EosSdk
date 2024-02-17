@@ -1,4 +1,4 @@
-// Copyright (c) 2023 Arista Networks, Inc.  All rights reserved.
+// Copyright (c) 2024 Arista Networks, Inc.  All rights reserved.
 // Arista Networks, Inc. Confidential and Proprietary.
 
 #ifndef EOS_TYPES_EAPI_H
@@ -25,6 +25,11 @@ class EOS_SDK_PUBLIC eapi_response_t {
    eapi_response_t& operator=(
       eapi_response_t const & other);
 
+   static void * operator new( std::size_t, void * ptr ) {
+      return ptr;
+   }
+   static void * operator new( std::size_t );
+   static void operator delete( void * ) noexcept;
 
    /** Getter for 'success': indicates if a response was received. */
    bool success() const;

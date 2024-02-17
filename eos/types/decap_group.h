@@ -1,4 +1,4 @@
-// Copyright (c) 2023 Arista Networks, Inc.  All rights reserved.
+// Copyright (c) 2024 Arista Networks, Inc.  All rights reserved.
 // Arista Networks, Inc. Confidential and Proprietary.
 
 #ifndef EOS_TYPES_DECAP_GROUP_H
@@ -42,6 +42,11 @@ class EOS_SDK_PUBLIC decap_group_t {
    decap_group_t& operator=(
       decap_group_t const & other);
 
+   static void * operator new( std::size_t, void * ptr ) {
+      return ptr;
+   }
+   static void * operator new( std::size_t );
+   static void operator delete( void * ) noexcept;
 
    /**
     * Getter for 'group_name': the decap group name. Used to uniquely identify this

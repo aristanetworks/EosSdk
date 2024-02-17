@@ -1,4 +1,4 @@
-// Copyright (c) 2023 Arista Networks, Inc.  All rights reserved.
+// Copyright (c) 2024 Arista Networks, Inc.  All rights reserved.
 // Arista Networks, Inc. Confidential and Proprietary.
 
 #ifndef EOS_INLINE_TYPES_MACSEC_H
@@ -93,26 +93,6 @@ operator<<(std::ostream& os, const macsec_profile_traffic_policy_t & enum_val) {
 }
 
 
-macsec_key_t::macsec_key_t() {
-   pimpl = std::shared_ptr<macsec_key_impl_t>(
-      new macsec_key_impl_t()
-   );
-}
-macsec_key_t::macsec_key_t(
-   const macsec_key_t& other)
-{
-   pimpl = std::make_unique<macsec_key_impl_t>(
-      macsec_key_impl_t(*other.pimpl));
-}
-macsec_key_t&
-macsec_key_t::operator=(
-   macsec_key_t const & other)
-{
-   pimpl = std::shared_ptr<macsec_key_impl_t>(
-      new macsec_key_impl_t(*other.pimpl));
-   return *this;
-}
-
 std::string
 macsec_key_t::cak() const {
    return pimpl->cak();
@@ -166,33 +146,6 @@ operator<<(std::ostream& os, const macsec_key_t& obj) {
    return operator<<(os, *obj.pimpl);
 }
 
-
-macsec_profile_t::macsec_profile_t() {
-   pimpl = std::shared_ptr<macsec_profile_impl_t>(
-      new macsec_profile_impl_t()
-   );
-}
-macsec_profile_t::macsec_profile_t(macsec_profile_name_t name) {
-   pimpl = std::shared_ptr<macsec_profile_impl_t>(
-      new macsec_profile_impl_t(
-         name
-      )
-   );
-}
-macsec_profile_t::macsec_profile_t(
-   const macsec_profile_t& other)
-{
-   pimpl = std::make_unique<macsec_profile_impl_t>(
-      macsec_profile_impl_t(*other.pimpl));
-}
-macsec_profile_t&
-macsec_profile_t::operator=(
-   macsec_profile_t const & other)
-{
-   pimpl = std::shared_ptr<macsec_profile_impl_t>(
-      new macsec_profile_impl_t(*other.pimpl));
-   return *this;
-}
 
 macsec_profile_name_t
 macsec_profile_t::name() const {
@@ -357,26 +310,6 @@ operator<<(std::ostream& os, const macsec_profile_t& obj) {
 }
 
 
-macsec_intf_status_t::macsec_intf_status_t() {
-   pimpl = std::shared_ptr<macsec_intf_status_impl_t>(
-      new macsec_intf_status_impl_t()
-   );
-}
-macsec_intf_status_t::macsec_intf_status_t(
-   const macsec_intf_status_t& other)
-{
-   pimpl = std::make_unique<macsec_intf_status_impl_t>(
-      macsec_intf_status_impl_t(*other.pimpl));
-}
-macsec_intf_status_t&
-macsec_intf_status_t::operator=(
-   macsec_intf_status_t const & other)
-{
-   pimpl = std::shared_ptr<macsec_intf_status_impl_t>(
-      new macsec_intf_status_impl_t(*other.pimpl));
-   return *this;
-}
-
 macsec_intf_key_status_t
 macsec_intf_status_t::key_status() const {
    return pimpl->key_status();
@@ -422,40 +355,6 @@ operator<<(std::ostream& os, const macsec_intf_status_t& obj) {
    return operator<<(os, *obj.pimpl);
 }
 
-
-macsec_intf_counters_t::macsec_intf_counters_t() {
-   pimpl = std::shared_ptr<macsec_intf_counters_impl_t>(
-      new macsec_intf_counters_impl_t()
-   );
-}
-macsec_intf_counters_t::macsec_intf_counters_t(
-         uint64_t out_pkts_encrypted, uint64_t out_octets_encrypted,
-         uint64_t in_pkts_decrypted, uint64_t in_octets_decrypted,
-         uint64_t in_pkts_not_valid) {
-   pimpl = std::shared_ptr<macsec_intf_counters_impl_t>(
-      new macsec_intf_counters_impl_t(
-         out_pkts_encrypted,
-         out_octets_encrypted,
-         in_pkts_decrypted,
-         in_octets_decrypted,
-         in_pkts_not_valid
-      )
-   );
-}
-macsec_intf_counters_t::macsec_intf_counters_t(
-   const macsec_intf_counters_t& other)
-{
-   pimpl = std::make_unique<macsec_intf_counters_impl_t>(
-      macsec_intf_counters_impl_t(*other.pimpl));
-}
-macsec_intf_counters_t&
-macsec_intf_counters_t::operator=(
-   macsec_intf_counters_t const & other)
-{
-   pimpl = std::shared_ptr<macsec_intf_counters_impl_t>(
-      new macsec_intf_counters_impl_t(*other.pimpl));
-   return *this;
-}
 
 uint64_t
 macsec_intf_counters_t::out_pkts_encrypted() const {

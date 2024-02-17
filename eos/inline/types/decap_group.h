@@ -1,4 +1,4 @@
-// Copyright (c) 2023 Arista Networks, Inc.  All rights reserved.
+// Copyright (c) 2024 Arista Networks, Inc.  All rights reserved.
 // Arista Networks, Inc. Confidential and Proprietary.
 
 #ifndef EOS_INLINE_TYPES_DECAP_GROUP_H
@@ -18,38 +18,6 @@ operator<<(std::ostream& os, const decap_protocol_type_t & enum_val) {
    return os;
 }
 
-
-// Default constructor, sets NULL protocol type.
-decap_group_t::decap_group_t() {
-   pimpl = std::shared_ptr<decap_group_impl_t>(
-      new decap_group_impl_t()
-   );
-}
-decap_group_t::decap_group_t(std::string const & group_name,
-                                    ip_addr_t const & destination_addr,
-                                    decap_protocol_type_t protocol_type) {
-   pimpl = std::shared_ptr<decap_group_impl_t>(
-      new decap_group_impl_t(
-         group_name,
-         destination_addr,
-         protocol_type
-      )
-   );
-}
-decap_group_t::decap_group_t(
-   const decap_group_t& other)
-{
-   pimpl = std::make_unique<decap_group_impl_t>(
-      decap_group_impl_t(*other.pimpl));
-}
-decap_group_t&
-decap_group_t::operator=(
-   decap_group_t const & other)
-{
-   pimpl = std::shared_ptr<decap_group_impl_t>(
-      new decap_group_impl_t(*other.pimpl));
-   return *this;
-}
 
 std::string
 decap_group_t::group_name() const {

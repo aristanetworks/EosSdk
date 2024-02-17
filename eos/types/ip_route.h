@@ -1,4 +1,4 @@
-// Copyright (c) 2023 Arista Networks, Inc.  All rights reserved.
+// Copyright (c) 2024 Arista Networks, Inc.  All rights reserved.
 // Arista Networks, Inc. Confidential and Proprietary.
 
 #ifndef EOS_TYPES_IP_ROUTE_H
@@ -50,6 +50,11 @@ class EOS_SDK_PUBLIC ip_route_key_t {
    ip_route_key_t& operator=(
       ip_route_key_t const & other);
 
+   static void * operator new( std::size_t, void * ptr ) {
+      return ptr;
+   }
+   static void * operator new( std::size_t );
+   static void operator delete( void * ) noexcept;
 
    /** Getter for 'prefix': the IP v4/v6 network prefix. */
    ip_prefix_t prefix() const;
@@ -61,6 +66,8 @@ class EOS_SDK_PUBLIC ip_route_key_t {
    /** Setter for 'preference'. */
    void preference_is(ip_route_preference_t preference);
 
+   /** The address family of the route_key_t prefix. */
+   af_t af() const;
    bool operator==(ip_route_key_t const & other) const;
    bool operator!=(ip_route_key_t const & other) const;
    /** The hash function for type ip_route_key_t. */
@@ -97,6 +104,11 @@ class EOS_SDK_PUBLIC ip_route_t {
    ip_route_t& operator=(
       ip_route_t const & other);
 
+   static void * operator new( std::size_t, void * ptr ) {
+      return ptr;
+   }
+   static void * operator new( std::size_t );
+   static void operator delete( void * ) noexcept;
 
    /** Getter for 'key': the route's key. */
    ip_route_key_t key() const;
@@ -124,6 +136,8 @@ class EOS_SDK_PUBLIC ip_route_t {
    /** Setter for 'command_tag'. */
    void command_tag_is(std::string const & command_tag);
 
+   /** The address family of the route_key_t prefix. */
+   af_t af() const;
    bool operator==(ip_route_t const & other) const;
    bool operator!=(ip_route_t const & other) const;
    /** The hash function for type ip_route_t. */
@@ -160,6 +174,11 @@ class EOS_SDK_PUBLIC ip_route_via_t {
    ip_route_via_t& operator=(
       ip_route_via_t const & other);
 
+   static void * operator new( std::size_t, void * ptr ) {
+      return ptr;
+   }
+   static void * operator new( std::size_t );
+   static void operator delete( void * ) noexcept;
 
    /** Getter for 'route_key': key for the route that this via is attached to. */
    ip_route_key_t route_key() const;

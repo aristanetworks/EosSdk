@@ -1,10 +1,12 @@
-// Copyright (c) 2023 Arista Networks, Inc.  All rights reserved.
+// Copyright (c) 2024 Arista Networks, Inc.  All rights reserved.
 // Arista Networks, Inc. Confidential and Proprietary.
 
 #ifndef EOS_TYPES_ACL_IMPL_H
 #define EOS_TYPES_ACL_IMPL_H
 
+#include <eos/eth.h>
 #include <eos/hash_mix.h>
+#include <eos/ip.h>
 #include <eos/utility.h>
 #include <list>
 #include <memory>
@@ -121,10 +123,7 @@ class EOS_SDK_PUBLIC acl_port_spec_impl_t {
  */
 class EOS_SDK_PUBLIC acl_rule_base_impl_t {
  public:
- protected:
    acl_rule_base_impl_t();
-   friend class acl_rule_base_t;
- public:
 
    acl_action_t action() const;
    void action_is(acl_action_t action);

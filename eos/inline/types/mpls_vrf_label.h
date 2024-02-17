@@ -1,39 +1,10 @@
-// Copyright (c) 2023 Arista Networks, Inc.  All rights reserved.
+// Copyright (c) 2024 Arista Networks, Inc.  All rights reserved.
 // Arista Networks, Inc. Confidential and Proprietary.
 
 #ifndef EOS_INLINE_TYPES_MPLS_VRF_LABEL_H
 #define EOS_INLINE_TYPES_MPLS_VRF_LABEL_H
 
 namespace eos {
-
-// Default constructor.
-mpls_vrf_label_t::mpls_vrf_label_t() {
-   pimpl = std::shared_ptr<mpls_vrf_label_impl_t>(
-      new mpls_vrf_label_impl_t()
-   );
-}
-mpls_vrf_label_t::mpls_vrf_label_t(mpls_label_t label, std::string vrf_name) {
-   pimpl = std::shared_ptr<mpls_vrf_label_impl_t>(
-      new mpls_vrf_label_impl_t(
-         label,
-         vrf_name
-      )
-   );
-}
-mpls_vrf_label_t::mpls_vrf_label_t(
-   const mpls_vrf_label_t& other)
-{
-   pimpl = std::make_unique<mpls_vrf_label_impl_t>(
-      mpls_vrf_label_impl_t(*other.pimpl));
-}
-mpls_vrf_label_t&
-mpls_vrf_label_t::operator=(
-   mpls_vrf_label_t const & other)
-{
-   pimpl = std::shared_ptr<mpls_vrf_label_impl_t>(
-      new mpls_vrf_label_impl_t(*other.pimpl));
-   return *this;
-}
 
 mpls_label_t
 mpls_vrf_label_t::label() const {

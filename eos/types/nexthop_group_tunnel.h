@@ -1,4 +1,4 @@
-// Copyright (c) 2023 Arista Networks, Inc.  All rights reserved.
+// Copyright (c) 2024 Arista Networks, Inc.  All rights reserved.
 // Arista Networks, Inc. Confidential and Proprietary.
 
 #ifndef EOS_TYPES_NEXTHOP_GROUP_TUNNEL_H
@@ -34,6 +34,11 @@ class EOS_SDK_PUBLIC nexthop_group_tunnel_t {
    nexthop_group_tunnel_t& operator=(
       nexthop_group_tunnel_t const & other);
 
+   static void * operator new( std::size_t, void * ptr ) {
+      return ptr;
+   }
+   static void * operator new( std::size_t );
+   static void operator delete( void * ) noexcept;
 
    /** Getter for 'tunnel_endpoint': IP v4/v6 prefix. */
    ip_prefix_t tunnel_endpoint() const;

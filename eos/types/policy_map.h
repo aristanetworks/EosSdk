@@ -1,4 +1,4 @@
-// Copyright (c) 2023 Arista Networks, Inc.  All rights reserved.
+// Copyright (c) 2024 Arista Networks, Inc.  All rights reserved.
 // Arista Networks, Inc. Confidential and Proprietary.
 
 #ifndef EOS_TYPES_POLICY_MAP_H
@@ -147,6 +147,11 @@ class EOS_SDK_PUBLIC policy_map_key_t {
    policy_map_key_t& operator=(
       policy_map_key_t const & other);
 
+   static void * operator new( std::size_t, void * ptr ) {
+      return ptr;
+   }
+   static void * operator new( std::size_t );
+   static void operator delete( void * ) noexcept;
 
    std::string name() const;
    void name_is(std::string const & name);
@@ -228,6 +233,11 @@ class EOS_SDK_PUBLIC policy_map_action_t {
    policy_map_action_t& operator=(
       policy_map_action_t const & other);
 
+   static void * operator new( std::size_t, void * ptr ) {
+      return ptr;
+   }
+   static void * operator new( std::size_t );
+   static void operator delete( void * ) noexcept;
    virtual ~policy_map_action_t();
 
    policy_action_type_t action_type() const;
@@ -324,10 +334,20 @@ class EOS_SDK_PUBLIC traffic_policy_action_t {
    traffic_policy_action_t& operator=(
       traffic_policy_action_t const & other);
 
+   static void * operator new( std::size_t, void * ptr ) {
+      return ptr;
+   }
+   static void * operator new( std::size_t );
+   static void operator delete( void * ) noexcept;
    virtual ~traffic_policy_action_t();
 
    traffic_policy_action_type_t action_type() const;
    void action_type_is(traffic_policy_action_type_t action_type);
+
+   /** Getter for 'counter_name': the name of counter for count action. */
+   std::string counter_name() const;
+   /** Setter for 'counter_name'. */
+   void counter_name_is(std::string const & counter_name);
 
    /** Getter for 'goto_class_name': the name of class for goto action. */
    std::string goto_class_name() const;
@@ -460,6 +480,11 @@ class EOS_SDK_PUBLIC policy_map_rule_t {
    policy_map_rule_t& operator=(
       policy_map_rule_t const & other);
 
+   static void * operator new( std::size_t, void * ptr ) {
+      return ptr;
+   }
+   static void * operator new( std::size_t );
+   static void operator delete( void * ) noexcept;
 
    /**
     * Getter for 'class_map_key': the class map key (name is CLASS_MAP_MPLS_ANY if
@@ -535,6 +560,11 @@ class EOS_SDK_PUBLIC policy_map_t {
    policy_map_t& operator=(
       policy_map_t const & other);
 
+   static void * operator new( std::size_t, void * ptr ) {
+      return ptr;
+   }
+   static void * operator new( std::size_t );
+   static void operator delete( void * ) noexcept;
 
    policy_map_key_t key() const;
    void key_is(policy_map_key_t const & key);
@@ -586,6 +616,11 @@ class EOS_SDK_PUBLIC traffic_policy_rule_t {
    traffic_policy_rule_t& operator=(
       traffic_policy_rule_t const & other);
 
+   static void * operator new( std::size_t, void * ptr ) {
+      return ptr;
+   }
+   static void * operator new( std::size_t );
+   static void operator delete( void * ) noexcept;
 
    std::string match_rule_name() const;
 
@@ -650,8 +685,20 @@ class EOS_SDK_PUBLIC traffic_policy_t {
    traffic_policy_t& operator=(
       traffic_policy_t const & other);
 
+   static void * operator new( std::size_t, void * ptr ) {
+      return ptr;
+   }
+   static void * operator new( std::size_t );
+   static void operator delete( void * ) noexcept;
 
    std::string key() const;
+
+   std::unordered_set<std::string> const & named_counters() const;
+   void named_counters_is(std::unordered_set<std::string> const & named_counters);
+   /** Inserts one named_counter of 'value' to the set. */
+   void named_counter_set(std::string const & value);
+   /** Deletes one named_counter of 'value' from the set. */
+   void named_counter_del(std::string const & value);
 
    std::map<uint32_t, traffic_policy_rule_t> const & rules() const;
 
@@ -735,6 +782,11 @@ class EOS_SDK_PUBLIC policy_map_hw_status_key_t {
    policy_map_hw_status_key_t& operator=(
       policy_map_hw_status_key_t const & other);
 
+   static void * operator new( std::size_t, void * ptr ) {
+      return ptr;
+   }
+   static void * operator new( std::size_t );
+   static void operator delete( void * ) noexcept;
 
    /**
     * Getter for 'intf_id': Interface ID at with a policy map is applied.
@@ -786,6 +838,11 @@ class EOS_SDK_PUBLIC policy_map_hw_statuses_t {
    policy_map_hw_statuses_t& operator=(
       policy_map_hw_statuses_t const & other);
 
+   static void * operator new( std::size_t, void * ptr ) {
+      return ptr;
+   }
+   static void * operator new( std::size_t );
+   static void operator delete( void * ) noexcept;
 
    /** Getter for 'intf_statuses': A map of interface key and policy map status. */
    std::map<policy_map_hw_status_key_t, policy_map_status_t> const & intf_statuses()

@@ -1,4 +1,4 @@
-// Copyright (c) 2023 Arista Networks, Inc.  All rights reserved.
+// Copyright (c) 2024 Arista Networks, Inc.  All rights reserved.
 // Arista Networks, Inc. Confidential and Proprietary.
 
 #ifndef EOS_INLINE_TYPES_DIRECTFLOW_H
@@ -56,26 +56,6 @@ operator<<(std::ostream& os, const flow_match_field_set_t& obj) {
 }
 
 
-
-flow_match_t::flow_match_t() {
-   pimpl = std::shared_ptr<flow_match_impl_t>(
-      new flow_match_impl_t()
-   );
-}
-flow_match_t::flow_match_t(
-   const flow_match_t& other)
-{
-   pimpl = std::make_unique<flow_match_impl_t>(
-      flow_match_impl_t(*other.pimpl));
-}
-flow_match_t&
-flow_match_t::operator=(
-   flow_match_t const & other)
-{
-   pimpl = std::shared_ptr<flow_match_impl_t>(
-      new flow_match_impl_t(*other.pimpl));
-   return *this;
-}
 
 flow_match_field_set_t
 flow_match_t::match_field_set() const {
@@ -290,26 +270,6 @@ operator<<(std::ostream& os, const flow_action_set_t& obj) {
 
 
 
-flow_action_t::flow_action_t() {
-   pimpl = std::shared_ptr<flow_action_impl_t>(
-      new flow_action_impl_t()
-   );
-}
-flow_action_t::flow_action_t(
-   const flow_action_t& other)
-{
-   pimpl = std::make_unique<flow_action_impl_t>(
-      flow_action_impl_t(*other.pimpl));
-}
-flow_action_t&
-flow_action_t::operator=(
-   flow_action_t const & other)
-{
-   pimpl = std::shared_ptr<flow_action_impl_t>(
-      new flow_action_impl_t(*other.pimpl));
-   return *this;
-}
-
 flow_action_set_t
 flow_action_t::action_set() const {
    return pimpl->action_set();
@@ -408,37 +368,6 @@ operator<<(std::ostream& os, const flow_action_t& obj) {
 }
 
 
-flow_entry_t::flow_entry_t() {
-   pimpl = std::shared_ptr<flow_entry_impl_t>(
-      new flow_entry_impl_t()
-   );
-}
-flow_entry_t::flow_entry_t(std::string const & name, flow_match_t match,
-                                  flow_action_t action, flow_priority_t priority) {
-   pimpl = std::shared_ptr<flow_entry_impl_t>(
-      new flow_entry_impl_t(
-         name,
-         match,
-         action,
-         priority
-      )
-   );
-}
-flow_entry_t::flow_entry_t(
-   const flow_entry_t& other)
-{
-   pimpl = std::make_unique<flow_entry_impl_t>(
-      flow_entry_impl_t(*other.pimpl));
-}
-flow_entry_t&
-flow_entry_t::operator=(
-   flow_entry_t const & other)
-{
-   pimpl = std::shared_ptr<flow_entry_impl_t>(
-      new flow_entry_impl_t(*other.pimpl));
-   return *this;
-}
-
 std::string
 flow_entry_t::name() const {
    return pimpl->name();
@@ -480,26 +409,6 @@ operator<<(std::ostream& os, const flow_entry_t& obj) {
    return operator<<(os, *obj.pimpl);
 }
 
-
-flow_counters_t::flow_counters_t() {
-   pimpl = std::shared_ptr<flow_counters_impl_t>(
-      new flow_counters_impl_t()
-   );
-}
-flow_counters_t::flow_counters_t(
-   const flow_counters_t& other)
-{
-   pimpl = std::make_unique<flow_counters_impl_t>(
-      flow_counters_impl_t(*other.pimpl));
-}
-flow_counters_t&
-flow_counters_t::operator=(
-   flow_counters_t const & other)
-{
-   pimpl = std::shared_ptr<flow_counters_impl_t>(
-      new flow_counters_impl_t(*other.pimpl));
-   return *this;
-}
 
 uint64_t
 flow_counters_t::bytes() const {

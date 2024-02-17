@@ -288,8 +288,8 @@ stream_handler::on_readable(int notifying_fd) {
    }
    if(bytes_recvd == 0) {
       tracer.trace0("Connection to %d closed", fd);
-      on_connection_closed();
       watch_stream(fd, false);
+      on_connection_closed();
       return;
    }
    bytes_read += bytes_recvd;

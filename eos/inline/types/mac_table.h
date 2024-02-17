@@ -1,4 +1,4 @@
-// Copyright (c) 2023 Arista Networks, Inc.  All rights reserved.
+// Copyright (c) 2024 Arista Networks, Inc.  All rights reserved.
 // Arista Networks, Inc. Confidential and Proprietary.
 
 #ifndef EOS_INLINE_TYPES_MAC_TABLE_H
@@ -75,34 +75,6 @@ operator<<(std::ostream& os, const mac_entry_type_t & enum_val) {
 }
 
 
-mac_key_t::mac_key_t() {
-   pimpl = std::shared_ptr<mac_key_impl_t>(
-      new mac_key_impl_t()
-   );
-}
-mac_key_t::mac_key_t(vlan_id_t vlan_id, eth_addr_t const & eth_addr) {
-   pimpl = std::shared_ptr<mac_key_impl_t>(
-      new mac_key_impl_t(
-         vlan_id,
-         eth_addr
-      )
-   );
-}
-mac_key_t::mac_key_t(
-   const mac_key_t& other)
-{
-   pimpl = std::make_unique<mac_key_impl_t>(
-      mac_key_impl_t(*other.pimpl));
-}
-mac_key_t&
-mac_key_t::operator=(
-   mac_key_t const & other)
-{
-   pimpl = std::shared_ptr<mac_key_impl_t>(
-      new mac_key_impl_t(*other.pimpl));
-   return *this;
-}
-
 vlan_id_t
 mac_key_t::vlan_id() const {
    return pimpl->vlan_id();
@@ -144,66 +116,6 @@ operator<<(std::ostream& os, const mac_key_t& obj) {
    return operator<<(os, *obj.pimpl);
 }
 
-
-mac_entry_t::mac_entry_t() {
-   pimpl = std::shared_ptr<mac_entry_impl_t>(
-      new mac_entry_impl_t()
-   );
-}
-mac_entry_t::mac_entry_t(mac_key_t const & mac_key) {
-   pimpl = std::shared_ptr<mac_entry_impl_t>(
-      new mac_entry_impl_t(
-         mac_key
-      )
-   );
-}
-mac_entry_t::mac_entry_t(mac_key_t const & mac_key, intf_id_t intf) {
-   pimpl = std::shared_ptr<mac_entry_impl_t>(
-      new mac_entry_impl_t(
-         mac_key,
-         intf
-      )
-   );
-}
-mac_entry_t::mac_entry_t(mac_key_t const & mac_key,
-                                std::set<intf_id_t> const & intfs) {
-   pimpl = std::shared_ptr<mac_entry_impl_t>(
-      new mac_entry_impl_t(
-         mac_key,
-         intfs
-      )
-   );
-}
-mac_entry_t::mac_entry_t(vlan_id_t vlan_id, eth_addr_t eth_addr) {
-   pimpl = std::shared_ptr<mac_entry_impl_t>(
-      new mac_entry_impl_t(
-         vlan_id,
-         eth_addr
-      )
-   );
-}
-mac_entry_t::mac_entry_t(eth_addr_t eth_addr, intf_id_t intf) {
-   pimpl = std::shared_ptr<mac_entry_impl_t>(
-      new mac_entry_impl_t(
-         eth_addr,
-         intf
-      )
-   );
-}
-mac_entry_t::mac_entry_t(
-   const mac_entry_t& other)
-{
-   pimpl = std::make_unique<mac_entry_impl_t>(
-      mac_entry_impl_t(*other.pimpl));
-}
-mac_entry_t&
-mac_entry_t::operator=(
-   mac_entry_t const & other)
-{
-   pimpl = std::shared_ptr<mac_entry_impl_t>(
-      new mac_entry_impl_t(*other.pimpl));
-   return *this;
-}
 
 mac_key_t
 mac_entry_t::mac_key() const {

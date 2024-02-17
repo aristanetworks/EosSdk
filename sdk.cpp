@@ -295,6 +295,10 @@ intf_counter_mgr * sdk::get_intf_counter_mgr() {
    return sdkImpl->get_intf_counter_mgr();
 }
 
+intf_counter_mgr * sdk::get_intf_counter_mgr_with_mode(mgr_mode_type_t mode) {
+   return sdkImpl->get_intf_counter_mgr(mode);
+}
+
 ip_intf_mgr * sdk::get_ip_intf_mgr() {
    return sdkImpl->get_ip_intf_mgr();
 }

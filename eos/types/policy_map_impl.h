@@ -1,4 +1,4 @@
-// Copyright (c) 2023 Arista Networks, Inc.  All rights reserved.
+// Copyright (c) 2024 Arista Networks, Inc.  All rights reserved.
 // Arista Networks, Inc. Confidential and Proprietary.
 
 #ifndef EOS_TYPES_POLICY_MAP_IMPL_H
@@ -168,6 +168,11 @@ class EOS_SDK_PUBLIC traffic_policy_action_impl_t {
    traffic_policy_action_type_t action_type() const;
    void action_type_is(traffic_policy_action_type_t action_type);
 
+   /** Getter for 'counter_name': the name of counter for count action. */
+   std::string counter_name() const;
+   /** Setter for 'counter_name'. */
+   void counter_name_is(std::string const & counter_name);
+
    /** Getter for 'goto_class_name': the name of class for goto action. */
    std::string goto_class_name() const;
    /** Setter for 'goto_class_name'. */
@@ -269,6 +274,7 @@ class EOS_SDK_PUBLIC traffic_policy_action_impl_t {
 
  private:
    traffic_policy_action_type_t action_type_;
+   std::string counter_name_;
    std::string goto_class_name_;
    bool goto_next_;
    uint8_t dscp_;
@@ -480,6 +486,13 @@ class EOS_SDK_PUBLIC traffic_policy_impl_t {
 
    std::string key() const;
 
+   std::unordered_set<std::string> const & named_counters() const;
+   void named_counters_is(std::unordered_set<std::string> const & named_counters);
+   /** Inserts one named_counter of 'value' to the set. */
+   void named_counter_set(std::string const & value);
+   /** Deletes one named_counter of 'value' from the set. */
+   void named_counter_del(std::string const & value);
+
    std::map<uint32_t, traffic_policy_rule_t> const & rules() const;
 
    void rules_is(std::map<uint32_t, traffic_policy_rule_t> const & rules);
@@ -503,6 +516,7 @@ class EOS_SDK_PUBLIC traffic_policy_impl_t {
 
  private:
    std::string key_;
+   std::unordered_set<std::string> named_counters_;
    std::map<uint32_t, traffic_policy_rule_t> rules_;
 };
 

@@ -1,4 +1,4 @@
-// Copyright (c) 2023 Arista Networks, Inc.  All rights reserved.
+// Copyright (c) 2024 Arista Networks, Inc.  All rights reserved.
 // Arista Networks, Inc. Confidential and Proprietary.
 
 #ifndef EOS_TYPES_SUBINTF_H
@@ -23,6 +23,11 @@ class EOS_SDK_PUBLIC subintf_t {
    subintf_t& operator=(
       subintf_t const & other);
 
+   static void * operator new( std::size_t, void * ptr ) {
+      return ptr;
+   }
+   static void * operator new( std::size_t );
+   static void operator delete( void * ) noexcept;
 
    /** Getter for 'intf_id': the interface ID of this subinterface. */
    intf_id_t intf_id() const;

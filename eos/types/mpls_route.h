@@ -1,4 +1,4 @@
-// Copyright (c) 2023 Arista Networks, Inc.  All rights reserved.
+// Copyright (c) 2024 Arista Networks, Inc.  All rights reserved.
 // Arista Networks, Inc. Confidential and Proprietary.
 
 #ifndef EOS_TYPES_MPLS_ROUTE_H
@@ -43,6 +43,11 @@ class EOS_SDK_PUBLIC mpls_route_key_t {
    mpls_route_key_t& operator=(
       mpls_route_key_t const & other);
 
+   static void * operator new( std::size_t, void * ptr ) {
+      return ptr;
+   }
+   static void * operator new( std::size_t );
+   static void operator delete( void * ) noexcept;
 
    /**
     * Getter for 'labels': a list of labels ( [ TOP, ..., BOT ] ) to match on
@@ -107,6 +112,11 @@ class EOS_SDK_PUBLIC mpls_route_t {
    mpls_route_t& operator=(
       mpls_route_t const & other);
 
+   static void * operator new( std::size_t, void * ptr ) {
+      return ptr;
+   }
+   static void * operator new( std::size_t );
+   static void operator delete( void * ) noexcept;
 
    /** Getter for 'key': the MPLS route key. */
    mpls_route_key_t key() const;
@@ -146,6 +156,11 @@ class EOS_SDK_PUBLIC mpls_route_via_t {
    mpls_route_via_t& operator=(
       mpls_route_via_t const & other);
 
+   static void * operator new( std::size_t, void * ptr ) {
+      return ptr;
+   }
+   static void * operator new( std::size_t );
+   static void operator delete( void * ) noexcept;
 
    mpls_route_key_t route_key() const;
    void route_key_is(mpls_route_key_t route_key);
@@ -234,6 +249,11 @@ class EOS_SDK_PUBLIC mpls_fec_id_t {
    mpls_fec_id_t& operator=(
       mpls_fec_id_t const & other);
 
+   static void * operator new( std::size_t, void * ptr ) {
+      return ptr;
+   }
+   static void * operator new( std::size_t );
+   static void operator delete( void * ) noexcept;
 
    /**
     * Getter for 'id': the internal ID of this FEC.

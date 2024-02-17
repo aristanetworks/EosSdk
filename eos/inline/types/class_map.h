@@ -1,38 +1,10 @@
-// Copyright (c) 2023 Arista Networks, Inc.  All rights reserved.
+// Copyright (c) 2024 Arista Networks, Inc.  All rights reserved.
 // Arista Networks, Inc. Confidential and Proprietary.
 
 #ifndef EOS_INLINE_TYPES_CLASS_MAP_H
 #define EOS_INLINE_TYPES_CLASS_MAP_H
 
 namespace eos {
-
-// Default constructor.
-class_map_rule_t::class_map_rule_t() {
-   pimpl = std::shared_ptr<class_map_rule_impl_t>(
-      new class_map_rule_impl_t()
-   );
-}
-class_map_rule_t::class_map_rule_t(acl_key_t const & acl_key) {
-   pimpl = std::shared_ptr<class_map_rule_impl_t>(
-      new class_map_rule_impl_t(
-         acl_key
-      )
-   );
-}
-class_map_rule_t::class_map_rule_t(
-   const class_map_rule_t& other)
-{
-   pimpl = std::make_unique<class_map_rule_impl_t>(
-      class_map_rule_impl_t(*other.pimpl));
-}
-class_map_rule_t&
-class_map_rule_t::operator=(
-   class_map_rule_t const & other)
-{
-   pimpl = std::shared_ptr<class_map_rule_impl_t>(
-      new class_map_rule_impl_t(*other.pimpl));
-   return *this;
-}
 
 acl_key_t
 class_map_rule_t::acl_key() const {
@@ -63,34 +35,6 @@ operator<<(std::ostream& os, const class_map_rule_t& obj) {
    return operator<<(os, *obj.pimpl);
 }
 
-
-// Default constructor.
-class_map_t::class_map_t() {
-   pimpl = std::shared_ptr<class_map_impl_t>(
-      new class_map_impl_t()
-   );
-}
-class_map_t::class_map_t(class_map_key_t const & key) {
-   pimpl = std::shared_ptr<class_map_impl_t>(
-      new class_map_impl_t(
-         key
-      )
-   );
-}
-class_map_t::class_map_t(
-   const class_map_t& other)
-{
-   pimpl = std::make_unique<class_map_impl_t>(
-      class_map_impl_t(*other.pimpl));
-}
-class_map_t&
-class_map_t::operator=(
-   class_map_t const & other)
-{
-   pimpl = std::shared_ptr<class_map_impl_t>(
-      new class_map_impl_t(*other.pimpl));
-   return *this;
-}
 
 class_map_key_t
 class_map_t::key() const {

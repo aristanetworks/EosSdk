@@ -1,4 +1,4 @@
-// Copyright (c) 2023 Arista Networks, Inc.  All rights reserved.
+// Copyright (c) 2024 Arista Networks, Inc.  All rights reserved.
 // Arista Networks, Inc. Confidential and Proprietary.
 
 #ifndef EOS_TYPES_HARDWARE_TABLE_H
@@ -25,6 +25,11 @@ class EOS_SDK_PUBLIC hardware_table_key_t {
    hardware_table_key_t& operator=(
       hardware_table_key_t const & other);
 
+   static void * operator new( std::size_t, void * ptr ) {
+      return ptr;
+   }
+   static void * operator new( std::size_t );
+   static void operator delete( void * ) noexcept;
 
    /**
     * Getter for 'table_name': the name of the hardware resource. For example, this
@@ -77,6 +82,11 @@ class EOS_SDK_PUBLIC hardware_table_high_watermark_t {
    hardware_table_high_watermark_t& operator=(
       hardware_table_high_watermark_t const & other);
 
+   static void * operator new( std::size_t, void * ptr ) {
+      return ptr;
+   }
+   static void * operator new( std::size_t );
+   static void operator delete( void * ) noexcept;
 
    /** Getter for 'max_entries': the maximum number of entries used so far. */
    uint32_t max_entries() const;
@@ -119,6 +129,11 @@ class EOS_SDK_PUBLIC hardware_table_usage_t {
    hardware_table_usage_t& operator=(
       hardware_table_usage_t const & other);
 
+   static void * operator new( std::size_t, void * ptr ) {
+      return ptr;
+   }
+   static void * operator new( std::size_t );
+   static void operator delete( void * ) noexcept;
 
    /**
     * Getter for 'used_entries': number of entries used by this feature on this
@@ -175,6 +190,11 @@ class EOS_SDK_PUBLIC hardware_table_entry_t {
    hardware_table_entry_t& operator=(
       hardware_table_entry_t const & other);
 
+   static void * operator new( std::size_t, void * ptr ) {
+      return ptr;
+   }
+   static void * operator new( std::size_t );
+   static void operator delete( void * ) noexcept;
 
    /** Getter for 'usage': the compound usage statistics. */
    hardware_table_usage_t usage() const;

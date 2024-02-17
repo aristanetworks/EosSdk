@@ -1,4 +1,4 @@
-// Copyright (c) 2023 Arista Networks, Inc.  All rights reserved.
+// Copyright (c) 2024 Arista Networks, Inc.  All rights reserved.
 // Arista Networks, Inc. Confidential and Proprietary.
 
 #ifndef EOS_TYPES_ROUTE_MAP_H
@@ -34,6 +34,11 @@ class EOS_SDK_PUBLIC link_bandwidth_t {
    link_bandwidth_t& operator=(
       link_bandwidth_t const & other);
 
+   static void * operator new( std::size_t, void * ptr ) {
+      return ptr;
+   }
+   static void * operator new( std::size_t );
+   static void operator delete( void * ) noexcept;
 
    /** Getter for 'value': The link bandwidth value. */
    float value() const;
@@ -94,6 +99,11 @@ class EOS_SDK_PUBLIC route_map_link_bandwidth_t {
    route_map_link_bandwidth_t& operator=(
       route_map_link_bandwidth_t const & other);
 
+   static void * operator new( std::size_t, void * ptr ) {
+      return ptr;
+   }
+   static void * operator new( std::size_t );
+   static void operator delete( void * ) noexcept;
 
    /** Getter for 'operation': Operation type. */
    route_map_operation_type_t operation() const;
@@ -140,6 +150,11 @@ class EOS_SDK_PUBLIC route_map_entry_t {
    route_map_entry_t& operator=(
       route_map_entry_t const & other);
 
+   static void * operator new( std::size_t, void * ptr ) {
+      return ptr;
+   }
+   static void * operator new( std::size_t );
+   static void operator delete( void * ) noexcept;
 
    /** Getter for 'permit': Permit sequence entry when true, deny otherwise. */
    bool permit() const;
@@ -192,6 +207,11 @@ class EOS_SDK_PUBLIC route_map_t {
    route_map_t& operator=(
       route_map_t const & other);
 
+   static void * operator new( std::size_t, void * ptr ) {
+      return ptr;
+   }
+   static void * operator new( std::size_t );
+   static void operator delete( void * ) noexcept;
 
    /**
     * Getter for 'map_entry': A map of route map entries, keyed by sequence number.

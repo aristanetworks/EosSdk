@@ -1,4 +1,4 @@
-// Copyright (c) 2023 Arista Networks, Inc.  All rights reserved.
+// Copyright (c) 2024 Arista Networks, Inc.  All rights reserved.
 // Arista Networks, Inc. Confidential and Proprietary.
 
 #ifndef EOS_INLINE_TYPES_STRUCTURED_FILTER_H
@@ -18,26 +18,6 @@ operator<<(std::ostream& os, const tp_max_values_t & enum_val) {
    return os;
 }
 
-
-protocol_range_t::protocol_range_t() {
-   pimpl = std::shared_ptr<protocol_range_impl_t>(
-      new protocol_range_impl_t()
-   );
-}
-protocol_range_t::protocol_range_t(
-   const protocol_range_t& other)
-{
-   pimpl = std::make_unique<protocol_range_impl_t>(
-      protocol_range_impl_t(*other.pimpl));
-}
-protocol_range_t&
-protocol_range_t::operator=(
-   protocol_range_t const & other)
-{
-   pimpl = std::shared_ptr<protocol_range_impl_t>(
-      new protocol_range_impl_t(*other.pimpl));
-   return *this;
-}
 
 uint32_t
 protocol_range_t::range_start() const {
@@ -85,26 +65,6 @@ operator<<(std::ostream& os, const protocol_range_t& obj) {
 }
 
 
-port_range_t::port_range_t() {
-   pimpl = std::shared_ptr<port_range_impl_t>(
-      new port_range_impl_t()
-   );
-}
-port_range_t::port_range_t(
-   const port_range_t& other)
-{
-   pimpl = std::make_unique<port_range_impl_t>(
-      port_range_impl_t(*other.pimpl));
-}
-port_range_t&
-port_range_t::operator=(
-   port_range_t const & other)
-{
-   pimpl = std::shared_ptr<port_range_impl_t>(
-      new port_range_impl_t(*other.pimpl));
-   return *this;
-}
-
 uint32_t
 port_range_t::range_start() const {
    return pimpl->range_start();
@@ -150,26 +110,6 @@ operator<<(std::ostream& os, const port_range_t& obj) {
    return operator<<(os, *obj.pimpl);
 }
 
-
-port_field_t::port_field_t() {
-   pimpl = std::shared_ptr<port_field_impl_t>(
-      new port_field_impl_t()
-   );
-}
-port_field_t::port_field_t(
-   const port_field_t& other)
-{
-   pimpl = std::make_unique<port_field_impl_t>(
-      port_field_impl_t(*other.pimpl));
-}
-port_field_t&
-port_field_t::operator=(
-   port_field_t const & other)
-{
-   pimpl = std::shared_ptr<port_field_impl_t>(
-      new port_field_impl_t(*other.pimpl));
-   return *this;
-}
 
 std::set<port_range_t> const &
 port_field_t::src_ports() const {
@@ -267,26 +207,6 @@ operator<<(std::ostream& os, const port_field_t& obj) {
 }
 
 
-protocol_field_t::protocol_field_t() {
-   pimpl = std::shared_ptr<protocol_field_impl_t>(
-      new protocol_field_impl_t()
-   );
-}
-protocol_field_t::protocol_field_t(
-   const protocol_field_t& other)
-{
-   pimpl = std::make_unique<protocol_field_impl_t>(
-      protocol_field_impl_t(*other.pimpl));
-}
-protocol_field_t&
-protocol_field_t::operator=(
-   protocol_field_t const & other)
-{
-   pimpl = std::shared_ptr<protocol_field_impl_t>(
-      new protocol_field_impl_t(*other.pimpl));
-   return *this;
-}
-
 std::map<uint32_t, port_field_t> const &
 protocol_field_t::ports() const {
    return pimpl->ports();
@@ -355,33 +275,6 @@ operator<<(std::ostream& os, const traffic_policy_rule_type_t & enum_val) {
 
 
 
-
-tp_rule_filter_t::tp_rule_filter_t() {
-   pimpl = std::shared_ptr<tp_rule_filter_impl_t>(
-      new tp_rule_filter_impl_t()
-   );
-}
-tp_rule_filter_t::tp_rule_filter_t(traffic_policy_rule_type_t filter_type) {
-   pimpl = std::shared_ptr<tp_rule_filter_impl_t>(
-      new tp_rule_filter_impl_t(
-         filter_type
-      )
-   );
-}
-tp_rule_filter_t::tp_rule_filter_t(
-   const tp_rule_filter_t& other)
-{
-   pimpl = std::make_unique<tp_rule_filter_impl_t>(
-      tp_rule_filter_impl_t(*other.pimpl));
-}
-tp_rule_filter_t&
-tp_rule_filter_t::operator=(
-   tp_rule_filter_t const & other)
-{
-   pimpl = std::shared_ptr<tp_rule_filter_impl_t>(
-      new tp_rule_filter_impl_t(*other.pimpl));
-   return *this;
-}
 
 std::set<ip_addr_mask_t> const &
 tp_rule_filter_t::src_addrs() const {

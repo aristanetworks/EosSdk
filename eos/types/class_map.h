@@ -1,4 +1,4 @@
-// Copyright (c) 2023 Arista Networks, Inc.  All rights reserved.
+// Copyright (c) 2024 Arista Networks, Inc.  All rights reserved.
 // Arista Networks, Inc. Confidential and Proprietary.
 
 #ifndef EOS_TYPES_CLASS_MAP_H
@@ -46,6 +46,11 @@ class EOS_SDK_PUBLIC class_map_rule_t {
    class_map_rule_t& operator=(
       class_map_rule_t const & other);
 
+   static void * operator new( std::size_t, void * ptr ) {
+      return ptr;
+   }
+   static void * operator new( std::size_t );
+   static void operator delete( void * ) noexcept;
 
    /**
     * Getter for 'acl_key': the ACL name and type to use as a class map match rule.
@@ -88,6 +93,11 @@ class EOS_SDK_PUBLIC class_map_t {
    class_map_t& operator=(
       class_map_t const & other);
 
+   static void * operator new( std::size_t, void * ptr ) {
+      return ptr;
+   }
+   static void * operator new( std::size_t );
+   static void operator delete( void * ) noexcept;
 
    /** Getter for 'key': the class map key. */
    class_map_key_t key() const;

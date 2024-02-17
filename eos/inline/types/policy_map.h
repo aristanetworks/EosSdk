@@ -1,4 +1,4 @@
-// Copyright (c) 2023 Arista Networks, Inc.  All rights reserved.
+// Copyright (c) 2024 Arista Networks, Inc.  All rights reserved.
 // Arista Networks, Inc. Confidential and Proprietary.
 
 #ifndef EOS_INLINE_TYPES_POLICY_MAP_H
@@ -126,35 +126,6 @@ operator<<(std::ostream& os, const policy_map_rule_type_t & enum_val) {
 }
 
 
-policy_map_key_t::policy_map_key_t() {
-   pimpl = std::shared_ptr<policy_map_key_impl_t>(
-      new policy_map_key_impl_t()
-   );
-}
-policy_map_key_t::policy_map_key_t(std::string const & name,
-                                          policy_feature_t feature) {
-   pimpl = std::shared_ptr<policy_map_key_impl_t>(
-      new policy_map_key_impl_t(
-         name,
-         feature
-      )
-   );
-}
-policy_map_key_t::policy_map_key_t(
-   const policy_map_key_t& other)
-{
-   pimpl = std::make_unique<policy_map_key_impl_t>(
-      policy_map_key_impl_t(*other.pimpl));
-}
-policy_map_key_t&
-policy_map_key_t::operator=(
-   policy_map_key_t const & other)
-{
-   pimpl = std::shared_ptr<policy_map_key_impl_t>(
-      new policy_map_key_impl_t(*other.pimpl));
-   return *this;
-}
-
 std::string
 policy_map_key_t::name() const {
    return pimpl->name();
@@ -232,34 +203,6 @@ operator<<(std::ostream& os, const police_burst_unit_t & enum_val) {
    return os;
 }
 
-
-// Default constructor of a PBR/QOS action.
-policy_map_action_t::policy_map_action_t() {
-   pimpl = std::shared_ptr<policy_map_action_impl_t>(
-      new policy_map_action_impl_t()
-   );
-}
-policy_map_action_t::policy_map_action_t(policy_action_type_t action_type) {
-   pimpl = std::shared_ptr<policy_map_action_impl_t>(
-      new policy_map_action_impl_t(
-         action_type
-      )
-   );
-}
-policy_map_action_t::policy_map_action_t(
-   const policy_map_action_t& other)
-{
-   pimpl = std::make_unique<policy_map_action_impl_t>(
-      policy_map_action_impl_t(*other.pimpl));
-}
-policy_map_action_t&
-policy_map_action_t::operator=(
-   policy_map_action_t const & other)
-{
-   pimpl = std::shared_ptr<policy_map_action_impl_t>(
-      new policy_map_action_impl_t(*other.pimpl));
-   return *this;
-}
 
 
 policy_map_action_t::~policy_map_action_t() {
@@ -351,35 +294,6 @@ operator<<(std::ostream& os, const policy_map_action_t& obj) {
 }
 
 
-// Default constructor of a traffic-policy action.
-traffic_policy_action_t::traffic_policy_action_t() {
-   pimpl = std::shared_ptr<traffic_policy_action_impl_t>(
-      new traffic_policy_action_impl_t()
-   );
-}
-traffic_policy_action_t::traffic_policy_action_t(
-         traffic_policy_action_type_t action_type) {
-   pimpl = std::shared_ptr<traffic_policy_action_impl_t>(
-      new traffic_policy_action_impl_t(
-         action_type
-      )
-   );
-}
-traffic_policy_action_t::traffic_policy_action_t(
-   const traffic_policy_action_t& other)
-{
-   pimpl = std::make_unique<traffic_policy_action_impl_t>(
-      traffic_policy_action_impl_t(*other.pimpl));
-}
-traffic_policy_action_t&
-traffic_policy_action_t::operator=(
-   traffic_policy_action_t const & other)
-{
-   pimpl = std::shared_ptr<traffic_policy_action_impl_t>(
-      new traffic_policy_action_impl_t(*other.pimpl));
-   return *this;
-}
-
 
 traffic_policy_action_t::~traffic_policy_action_t() {
 
@@ -391,6 +305,14 @@ traffic_policy_action_t::action_type() const {
 void
 traffic_policy_action_t::action_type_is(traffic_policy_action_type_t action_type) {
    pimpl->action_type_is(action_type);
+}
+std::string
+traffic_policy_action_t::counter_name() const {
+   return pimpl->counter_name();
+}
+void
+traffic_policy_action_t::counter_name_is(std::string const & counter_name) {
+   pimpl->counter_name_is(counter_name);
 }
 std::string
 traffic_policy_action_t::goto_class_name() const {
@@ -538,33 +460,6 @@ operator<<(std::ostream& os, const traffic_policy_action_t& obj) {
 }
 
 
-policy_map_rule_t::policy_map_rule_t() {
-   pimpl = std::shared_ptr<policy_map_rule_impl_t>(
-      new policy_map_rule_impl_t()
-   );
-}
-policy_map_rule_t::policy_map_rule_t(class_map_key_t const & class_map_key) {
-   pimpl = std::shared_ptr<policy_map_rule_impl_t>(
-      new policy_map_rule_impl_t(
-         class_map_key
-      )
-   );
-}
-policy_map_rule_t::policy_map_rule_t(
-   const policy_map_rule_t& other)
-{
-   pimpl = std::make_unique<policy_map_rule_impl_t>(
-      policy_map_rule_impl_t(*other.pimpl));
-}
-policy_map_rule_t&
-policy_map_rule_t::operator=(
-   policy_map_rule_t const & other)
-{
-   pimpl = std::shared_ptr<policy_map_rule_impl_t>(
-      new policy_map_rule_impl_t(*other.pimpl));
-   return *this;
-}
-
 class_map_key_t
 policy_map_rule_t::class_map_key() const {
    return pimpl->class_map_key();
@@ -645,33 +540,6 @@ operator<<(std::ostream& os, const policy_map_rule_t& obj) {
 }
 
 
-policy_map_t::policy_map_t() {
-   pimpl = std::shared_ptr<policy_map_impl_t>(
-      new policy_map_impl_t()
-   );
-}
-policy_map_t::policy_map_t(policy_map_key_t const & key) {
-   pimpl = std::shared_ptr<policy_map_impl_t>(
-      new policy_map_impl_t(
-         key
-      )
-   );
-}
-policy_map_t::policy_map_t(
-   const policy_map_t& other)
-{
-   pimpl = std::make_unique<policy_map_impl_t>(
-      policy_map_impl_t(*other.pimpl));
-}
-policy_map_t&
-policy_map_t::operator=(
-   policy_map_t const & other)
-{
-   pimpl = std::shared_ptr<policy_map_impl_t>(
-      new policy_map_impl_t(*other.pimpl));
-   return *this;
-}
-
 policy_map_key_t
 policy_map_t::key() const {
    return pimpl->key();
@@ -725,36 +593,6 @@ operator<<(std::ostream& os, const policy_map_t& obj) {
    return operator<<(os, *obj.pimpl);
 }
 
-
-traffic_policy_rule_t::traffic_policy_rule_t() {
-   pimpl = std::shared_ptr<traffic_policy_rule_impl_t>(
-      new traffic_policy_rule_impl_t()
-   );
-}
-traffic_policy_rule_t::traffic_policy_rule_t(
-         std::string match_rule_name,
-         traffic_policy_rule_type_t traffic_policy_rule_type) {
-   pimpl = std::shared_ptr<traffic_policy_rule_impl_t>(
-      new traffic_policy_rule_impl_t(
-         match_rule_name,
-         traffic_policy_rule_type
-      )
-   );
-}
-traffic_policy_rule_t::traffic_policy_rule_t(
-   const traffic_policy_rule_t& other)
-{
-   pimpl = std::make_unique<traffic_policy_rule_impl_t>(
-      traffic_policy_rule_impl_t(*other.pimpl));
-}
-traffic_policy_rule_t&
-traffic_policy_rule_t::operator=(
-   traffic_policy_rule_t const & other)
-{
-   pimpl = std::shared_ptr<traffic_policy_rule_impl_t>(
-      new traffic_policy_rule_impl_t(*other.pimpl));
-   return *this;
-}
 
 std::string
 traffic_policy_rule_t::match_rule_name() const {
@@ -823,31 +661,26 @@ operator<<(std::ostream& os, const traffic_policy_rule_t& obj) {
 }
 
 
-traffic_policy_t::traffic_policy_t(std::string const & key) {
-   pimpl = std::shared_ptr<traffic_policy_impl_t>(
-      new traffic_policy_impl_t(
-         key
-      )
-   );
-}
-traffic_policy_t::traffic_policy_t(
-   const traffic_policy_t& other)
-{
-   pimpl = std::make_unique<traffic_policy_impl_t>(
-      traffic_policy_impl_t(*other.pimpl));
-}
-traffic_policy_t&
-traffic_policy_t::operator=(
-   traffic_policy_t const & other)
-{
-   pimpl = std::shared_ptr<traffic_policy_impl_t>(
-      new traffic_policy_impl_t(*other.pimpl));
-   return *this;
-}
-
 std::string
 traffic_policy_t::key() const {
    return pimpl->key();
+}
+std::unordered_set<std::string> const &
+traffic_policy_t::named_counters() const {
+   return pimpl->named_counters();
+}
+void
+traffic_policy_t::named_counters_is(
+         std::unordered_set<std::string> const & named_counters) {
+   pimpl->named_counters_is(named_counters);
+}
+void
+traffic_policy_t::named_counter_set(std::string const & value) {
+   pimpl->named_counter_set(value);
+}
+void
+traffic_policy_t::named_counter_del(std::string const & value) {
+   pimpl->named_counter_del(value);
 }
 std::map<uint32_t, traffic_policy_rule_t> const &
 traffic_policy_t::rules() const {
@@ -964,35 +797,6 @@ operator<<(std::ostream& os, const policy_map_status_t & enum_val) {
 }
 
 
-policy_map_hw_status_key_t::policy_map_hw_status_key_t() {
-   pimpl = std::shared_ptr<policy_map_hw_status_key_impl_t>(
-      new policy_map_hw_status_key_impl_t()
-   );
-}
-policy_map_hw_status_key_t::policy_map_hw_status_key_t(
-         intf_id_t intf_id, acl_direction_t direction) {
-   pimpl = std::shared_ptr<policy_map_hw_status_key_impl_t>(
-      new policy_map_hw_status_key_impl_t(
-         intf_id,
-         direction
-      )
-   );
-}
-policy_map_hw_status_key_t::policy_map_hw_status_key_t(
-   const policy_map_hw_status_key_t& other)
-{
-   pimpl = std::make_unique<policy_map_hw_status_key_impl_t>(
-      policy_map_hw_status_key_impl_t(*other.pimpl));
-}
-policy_map_hw_status_key_t&
-policy_map_hw_status_key_t::operator=(
-   policy_map_hw_status_key_t const & other)
-{
-   pimpl = std::shared_ptr<policy_map_hw_status_key_impl_t>(
-      new policy_map_hw_status_key_impl_t(*other.pimpl));
-   return *this;
-}
-
 intf_id_t
 policy_map_hw_status_key_t::intf_id() const {
    return pimpl->intf_id();
@@ -1041,36 +845,6 @@ operator<<(std::ostream& os, const policy_map_hw_status_key_t& obj) {
    return operator<<(os, *obj.pimpl);
 }
 
-
-policy_map_hw_statuses_t::policy_map_hw_statuses_t() {
-   pimpl = std::shared_ptr<policy_map_hw_statuses_impl_t>(
-      new policy_map_hw_statuses_impl_t()
-   );
-}
-policy_map_hw_statuses_t::policy_map_hw_statuses_t(
-         
-         std::map<policy_map_hw_status_key_t, policy_map_status_t> const &
-         intf_statuses) {
-   pimpl = std::shared_ptr<policy_map_hw_statuses_impl_t>(
-      new policy_map_hw_statuses_impl_t(
-         intf_statuses
-      )
-   );
-}
-policy_map_hw_statuses_t::policy_map_hw_statuses_t(
-   const policy_map_hw_statuses_t& other)
-{
-   pimpl = std::make_unique<policy_map_hw_statuses_impl_t>(
-      policy_map_hw_statuses_impl_t(*other.pimpl));
-}
-policy_map_hw_statuses_t&
-policy_map_hw_statuses_t::operator=(
-   policy_map_hw_statuses_t const & other)
-{
-   pimpl = std::shared_ptr<policy_map_hw_statuses_impl_t>(
-      new policy_map_hw_statuses_impl_t(*other.pimpl));
-   return *this;
-}
 
 std::map<policy_map_hw_status_key_t, policy_map_status_t> const &
 policy_map_hw_statuses_t::intf_statuses() const {

@@ -1,4 +1,4 @@
-// Copyright (c) 2023 Arista Networks, Inc.  All rights reserved.
+// Copyright (c) 2024 Arista Networks, Inc.  All rights reserved.
 // Arista Networks, Inc. Confidential and Proprietary.
 
 #ifndef EOS_TYPES_FIB_H
@@ -25,6 +25,11 @@ class EOS_SDK_PUBLIC fib_route_key_t {
    fib_route_key_t& operator=(
       fib_route_key_t const & other);
 
+   static void * operator new( std::size_t, void * ptr ) {
+      return ptr;
+   }
+   static void * operator new( std::size_t );
+   static void operator delete( void * ) noexcept;
 
    /** Getter for 'prefix': IP v4/v6 network prefix. */
    ip_prefix_t prefix() const;
@@ -104,6 +109,11 @@ class EOS_SDK_PUBLIC fib_route_t {
    fib_route_t& operator=(
       fib_route_t const & other);
 
+   static void * operator new( std::size_t, void * ptr ) {
+      return ptr;
+   }
+   static void * operator new( std::size_t );
+   static void operator delete( void * ) noexcept;
 
    /** Getter for 'route_key': IP v4/v6 network route key consisting of prefix. */
    fib_route_key_t route_key() const;
@@ -157,6 +167,11 @@ class EOS_SDK_PUBLIC fib_fec_key_t {
    fib_fec_key_t& operator=(
       fib_fec_key_t const & other);
 
+   static void * operator new( std::size_t, void * ptr ) {
+      return ptr;
+   }
+   static void * operator new( std::size_t );
+   static void operator delete( void * ) noexcept;
 
    /**
     * Getter for 'fec_id': fec_id[56:63] denotes the feature, 0: fib Fec, 1:
@@ -197,6 +212,11 @@ class EOS_SDK_PUBLIC fib_via_t {
    fib_via_t& operator=(
       fib_via_t const & other);
 
+   static void * operator new( std::size_t, void * ptr ) {
+      return ptr;
+   }
+   static void * operator new( std::size_t );
+   static void operator delete( void * ) noexcept;
 
    ip_addr_t hop() const;
    void hop_is(ip_addr_t const & hop);
@@ -255,6 +275,11 @@ class EOS_SDK_PUBLIC fib_fec_t {
    fib_fec_t& operator=(
       fib_fec_t const & other);
 
+   static void * operator new( std::size_t, void * ptr ) {
+      return ptr;
+   }
+   static void * operator new( std::size_t );
+   static void operator delete( void * ) noexcept;
 
    /** Getter for 'fec_key': fec_key consisting of fec_id. */
    fib_fec_key_t fec_key() const;

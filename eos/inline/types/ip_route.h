@@ -1,4 +1,4 @@
-// Copyright (c) 2023 Arista Networks, Inc.  All rights reserved.
+// Copyright (c) 2024 Arista Networks, Inc.  All rights reserved.
 // Arista Networks, Inc. Confidential and Proprietary.
 
 #ifndef EOS_INLINE_TYPES_IP_ROUTE_H
@@ -23,42 +23,6 @@ operator<<(std::ostream& os, const ip_route_action_t & enum_val) {
 }
 
 
-ip_route_key_t::ip_route_key_t() {
-   pimpl = std::shared_ptr<ip_route_key_impl_t>(
-      new ip_route_key_impl_t()
-   );
-}
-ip_route_key_t::ip_route_key_t(ip_prefix_t const & prefix) {
-   pimpl = std::shared_ptr<ip_route_key_impl_t>(
-      new ip_route_key_impl_t(
-         prefix
-      )
-   );
-}
-ip_route_key_t::ip_route_key_t(ip_prefix_t const & prefix,
-                                      ip_route_preference_t preference) {
-   pimpl = std::shared_ptr<ip_route_key_impl_t>(
-      new ip_route_key_impl_t(
-         prefix,
-         preference
-      )
-   );
-}
-ip_route_key_t::ip_route_key_t(
-   const ip_route_key_t& other)
-{
-   pimpl = std::make_unique<ip_route_key_impl_t>(
-      ip_route_key_impl_t(*other.pimpl));
-}
-ip_route_key_t&
-ip_route_key_t::operator=(
-   ip_route_key_t const & other)
-{
-   pimpl = std::shared_ptr<ip_route_key_impl_t>(
-      new ip_route_key_impl_t(*other.pimpl));
-   return *this;
-}
-
 ip_prefix_t
 ip_route_key_t::prefix() const {
    return pimpl->prefix();
@@ -74,6 +38,10 @@ ip_route_key_t::preference() const {
 void
 ip_route_key_t::preference_is(ip_route_preference_t preference) {
    pimpl->preference_is(preference);
+}
+af_t
+ip_route_key_t::af() const {
+   return pimpl->af();
 }
 bool
 ip_route_key_t::operator==(ip_route_key_t const & other) const {
@@ -100,33 +68,6 @@ operator<<(std::ostream& os, const ip_route_key_t& obj) {
    return operator<<(os, *obj.pimpl);
 }
 
-
-ip_route_t::ip_route_t() {
-   pimpl = std::shared_ptr<ip_route_impl_t>(
-      new ip_route_impl_t()
-   );
-}
-ip_route_t::ip_route_t(ip_route_key_t const & key) {
-   pimpl = std::shared_ptr<ip_route_impl_t>(
-      new ip_route_impl_t(
-         key
-      )
-   );
-}
-ip_route_t::ip_route_t(
-   const ip_route_t& other)
-{
-   pimpl = std::make_unique<ip_route_impl_t>(
-      ip_route_impl_t(*other.pimpl));
-}
-ip_route_t&
-ip_route_t::operator=(
-   ip_route_t const & other)
-{
-   pimpl = std::shared_ptr<ip_route_impl_t>(
-      new ip_route_impl_t(*other.pimpl));
-   return *this;
-}
 
 ip_route_key_t
 ip_route_t::key() const {
@@ -160,6 +101,10 @@ void
 ip_route_t::command_tag_is(std::string const & command_tag) {
    pimpl->command_tag_is(command_tag);
 }
+af_t
+ip_route_t::af() const {
+   return pimpl->af();
+}
 bool
 ip_route_t::operator==(ip_route_t const & other) const {
    return pimpl->operator==(*other.pimpl);
@@ -185,33 +130,6 @@ operator<<(std::ostream& os, const ip_route_t& obj) {
    return operator<<(os, *obj.pimpl);
 }
 
-
-ip_route_via_t::ip_route_via_t() {
-   pimpl = std::shared_ptr<ip_route_via_impl_t>(
-      new ip_route_via_impl_t()
-   );
-}
-ip_route_via_t::ip_route_via_t(ip_route_key_t const & route_key) {
-   pimpl = std::shared_ptr<ip_route_via_impl_t>(
-      new ip_route_via_impl_t(
-         route_key
-      )
-   );
-}
-ip_route_via_t::ip_route_via_t(
-   const ip_route_via_t& other)
-{
-   pimpl = std::make_unique<ip_route_via_impl_t>(
-      ip_route_via_impl_t(*other.pimpl));
-}
-ip_route_via_t&
-ip_route_via_t::operator=(
-   ip_route_via_t const & other)
-{
-   pimpl = std::shared_ptr<ip_route_via_impl_t>(
-      new ip_route_via_impl_t(*other.pimpl));
-   return *this;
-}
 
 ip_route_key_t
 ip_route_via_t::route_key() const {

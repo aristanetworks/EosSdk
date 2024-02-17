@@ -1,4 +1,4 @@
-// Copyright (c) 2023 Arista Networks, Inc.  All rights reserved.
+// Copyright (c) 2024 Arista Networks, Inc.  All rights reserved.
 // Arista Networks, Inc. Confidential and Proprietary.
 
 #ifndef EOS_INLINE_TYPES_NEIGHBOR_TABLE_H
@@ -20,42 +20,6 @@ operator<<(std::ostream& os, const neighbor_entry_type_t & enum_val) {
    return os;
 }
 
-
-// Default constructor.
-neighbor_key_t::neighbor_key_t() {
-   pimpl = std::shared_ptr<neighbor_key_impl_t>(
-      new neighbor_key_impl_t()
-   );
-}
-neighbor_key_t::neighbor_key_t(ip_addr_t const & ip_addr) {
-   pimpl = std::shared_ptr<neighbor_key_impl_t>(
-      new neighbor_key_impl_t(
-         ip_addr
-      )
-   );
-}
-neighbor_key_t::neighbor_key_t(ip_addr_t const & ip_addr, intf_id_t intf_id) {
-   pimpl = std::shared_ptr<neighbor_key_impl_t>(
-      new neighbor_key_impl_t(
-         ip_addr,
-         intf_id
-      )
-   );
-}
-neighbor_key_t::neighbor_key_t(
-   const neighbor_key_t& other)
-{
-   pimpl = std::make_unique<neighbor_key_impl_t>(
-      neighbor_key_impl_t(*other.pimpl));
-}
-neighbor_key_t&
-neighbor_key_t::operator=(
-   neighbor_key_t const & other)
-{
-   pimpl = std::shared_ptr<neighbor_key_impl_t>(
-      new neighbor_key_impl_t(*other.pimpl));
-   return *this;
-}
 
 ip_addr_t
 neighbor_key_t::ip_addr() const {
@@ -94,38 +58,6 @@ operator<<(std::ostream& os, const neighbor_key_t& obj) {
    return operator<<(os, *obj.pimpl);
 }
 
-
-// Default constructor.
-neighbor_entry_t::neighbor_entry_t() {
-   pimpl = std::shared_ptr<neighbor_entry_impl_t>(
-      new neighbor_entry_impl_t()
-   );
-}
-neighbor_entry_t::neighbor_entry_t(neighbor_key_t const & neighbor_key,
-                                          eth_addr_t eth_addr,
-                                          neighbor_entry_type_t entry_type) {
-   pimpl = std::shared_ptr<neighbor_entry_impl_t>(
-      new neighbor_entry_impl_t(
-         neighbor_key,
-         eth_addr,
-         entry_type
-      )
-   );
-}
-neighbor_entry_t::neighbor_entry_t(
-   const neighbor_entry_t& other)
-{
-   pimpl = std::make_unique<neighbor_entry_impl_t>(
-      neighbor_entry_impl_t(*other.pimpl));
-}
-neighbor_entry_t&
-neighbor_entry_t::operator=(
-   neighbor_entry_t const & other)
-{
-   pimpl = std::shared_ptr<neighbor_entry_impl_t>(
-      new neighbor_entry_impl_t(*other.pimpl));
-   return *this;
-}
 
 neighbor_key_t
 neighbor_entry_t::neighbor_key() const {

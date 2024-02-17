@@ -1,4 +1,4 @@
-// Copyright (c) 2023 Arista Networks, Inc.  All rights reserved.
+// Copyright (c) 2024 Arista Networks, Inc.  All rights reserved.
 // Arista Networks, Inc. Confidential and Proprietary.
 
 #ifndef EOS_TYPES_DIRECTFLOW_H
@@ -76,6 +76,11 @@ class EOS_SDK_PUBLIC flow_match_t {
    flow_match_t& operator=(
       flow_match_t const & other);
 
+   static void * operator new( std::size_t, void * ptr ) {
+      return ptr;
+   }
+   static void * operator new( std::size_t );
+   static void operator delete( void * ) noexcept;
 
    /** Getter for 'match_field_set': the fields to match on. */
    flow_match_field_set_t match_field_set() const;
@@ -233,6 +238,11 @@ class EOS_SDK_PUBLIC flow_action_t {
    flow_action_t& operator=(
       flow_action_t const & other);
 
+   static void * operator new( std::size_t, void * ptr ) {
+      return ptr;
+   }
+   static void * operator new( std::size_t );
+   static void operator delete( void * ) noexcept;
 
    /** Getter for 'action_set': actions that are enabled. */
    flow_action_set_t action_set() const;
@@ -311,6 +321,11 @@ class EOS_SDK_PUBLIC flow_entry_t {
    flow_entry_t& operator=(
       flow_entry_t const & other);
 
+   static void * operator new( std::size_t, void * ptr ) {
+      return ptr;
+   }
+   static void * operator new( std::size_t );
+   static void operator delete( void * ) noexcept;
 
    std::string name() const;
 
@@ -350,6 +365,11 @@ class EOS_SDK_PUBLIC flow_counters_t {
    flow_counters_t& operator=(
       flow_counters_t const & other);
 
+   static void * operator new( std::size_t, void * ptr ) {
+      return ptr;
+   }
+   static void * operator new( std::size_t );
+   static void operator delete( void * ) noexcept;
 
    uint64_t bytes() const;
 

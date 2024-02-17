@@ -1,4 +1,4 @@
-// Copyright (c) 2023 Arista Networks, Inc.  All rights reserved.
+// Copyright (c) 2024 Arista Networks, Inc.  All rights reserved.
 // Arista Networks, Inc. Confidential and Proprietary.
 
 #ifndef EOS_TYPES_MACSEC_H
@@ -6,6 +6,7 @@
 
 #include <eos/exception.h>
 #include <eos/hash_mix.h>
+#include <eos/intf.h>
 #include <eos/panic.h>
 #include <eos/utility.h>
 #include <forward_list>
@@ -114,6 +115,11 @@ class EOS_SDK_PUBLIC macsec_key_t {
    macsec_key_t& operator=(
       macsec_key_t const & other);
 
+   static void * operator new( std::size_t, void * ptr ) {
+      return ptr;
+   }
+   static void * operator new( std::size_t );
+   static void operator delete( void * ) noexcept;
 
    /** Getter for 'cak': connectivity association key (CAK). CAK is a hex string. */
    std::string cak() const;
@@ -165,6 +171,11 @@ class EOS_SDK_PUBLIC macsec_profile_t {
    macsec_profile_t& operator=(
       macsec_profile_t const & other);
 
+   static void * operator new( std::size_t, void * ptr ) {
+      return ptr;
+   }
+   static void * operator new( std::size_t );
+   static void operator delete( void * ) noexcept;
 
    /** Getter for 'name': the name of the profile. */
    macsec_profile_name_t name() const;
@@ -306,6 +317,11 @@ class EOS_SDK_PUBLIC macsec_intf_status_t {
    macsec_intf_status_t& operator=(
       macsec_intf_status_t const & other);
 
+   static void * operator new( std::size_t, void * ptr ) {
+      return ptr;
+   }
+   static void * operator new( std::size_t );
+   static void operator delete( void * ) noexcept;
 
    macsec_intf_key_status_t key_status() const;
 
@@ -354,6 +370,11 @@ class EOS_SDK_PUBLIC macsec_intf_counters_t {
    macsec_intf_counters_t& operator=(
       macsec_intf_counters_t const & other);
 
+   static void * operator new( std::size_t, void * ptr ) {
+      return ptr;
+   }
+   static void * operator new( std::size_t );
+   static void operator delete( void * ) noexcept;
 
    uint64_t out_pkts_encrypted() const;
 

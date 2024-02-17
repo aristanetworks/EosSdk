@@ -1,4 +1,4 @@
-// Copyright (c) 2023 Arista Networks, Inc.  All rights reserved.
+// Copyright (c) 2024 Arista Networks, Inc.  All rights reserved.
 // Arista Networks, Inc. Confidential and Proprietary.
 
 #ifndef EOS_TYPES_MAC_TABLE_H
@@ -68,6 +68,11 @@ class EOS_SDK_PUBLIC mac_key_t {
    mac_key_t& operator=(
       mac_key_t const & other);
 
+   static void * operator new( std::size_t, void * ptr ) {
+      return ptr;
+   }
+   static void * operator new( std::size_t );
+   static void operator delete( void * ) noexcept;
 
    /** Getter for 'vlan_id': the VLAN subdomain identifier. */
    vlan_id_t vlan_id() const;
@@ -122,6 +127,11 @@ class EOS_SDK_PUBLIC mac_entry_t {
    mac_entry_t& operator=(
       mac_entry_t const & other);
 
+   static void * operator new( std::size_t, void * ptr ) {
+      return ptr;
+   }
+   static void * operator new( std::size_t );
+   static void operator delete( void * ) noexcept;
 
    /** Getter for 'mac_key': the key of the MAC entry. */
    mac_key_t mac_key() const;

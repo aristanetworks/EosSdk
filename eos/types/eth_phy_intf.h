@@ -1,4 +1,4 @@
-// Copyright (c) 2023 Arista Networks, Inc.  All rights reserved.
+// Copyright (c) 2024 Arista Networks, Inc.  All rights reserved.
 // Arista Networks, Inc. Confidential and Proprietary.
 
 #ifndef EOS_TYPES_ETH_PHY_INTF_H
@@ -60,6 +60,11 @@ class EOS_SDK_PUBLIC eth_phy_intf_counters_t {
    eth_phy_intf_counters_t& operator=(
       eth_phy_intf_counters_t const & other);
 
+   static void * operator new( std::size_t, void * ptr ) {
+      return ptr;
+   }
+   static void * operator new( std::size_t );
+   static void operator delete( void * ) noexcept;
 
    /**
     * Getter for 'single_collision_frames': Etherlike-MIB singleCollisionFrames
@@ -190,6 +195,11 @@ class EOS_SDK_PUBLIC eth_phy_intf_bin_counters_t {
    eth_phy_intf_bin_counters_t& operator=(
       eth_phy_intf_bin_counters_t const & other);
 
+   static void * operator new( std::size_t, void * ptr ) {
+      return ptr;
+   }
+   static void * operator new( std::size_t );
+   static void operator delete( void * ) noexcept;
 
    /** Getter for 'in_64_octet_frames': Input 64 octet frame counter. */
    uint64_t in_64_octet_frames() const;
