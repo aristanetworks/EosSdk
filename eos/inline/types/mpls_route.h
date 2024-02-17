@@ -1,48 +1,10 @@
-// Copyright (c) 2023 Arista Networks, Inc.  All rights reserved.
+// Copyright (c) 2024 Arista Networks, Inc.  All rights reserved.
 // Arista Networks, Inc. Confidential and Proprietary.
 
 #ifndef EOS_INLINE_TYPES_MPLS_ROUTE_H
 #define EOS_INLINE_TYPES_MPLS_ROUTE_H
 
 namespace eos {
-
-mpls_route_key_t::mpls_route_key_t() {
-   pimpl = std::shared_ptr<mpls_route_key_impl_t>(
-      new mpls_route_key_impl_t()
-   );
-}
-mpls_route_key_t::mpls_route_key_t(mpls_label_t top_label,
-                                          mpls_route_metric_t metric) {
-   pimpl = std::shared_ptr<mpls_route_key_impl_t>(
-      new mpls_route_key_impl_t(
-         top_label,
-         metric
-      )
-   );
-}
-mpls_route_key_t::mpls_route_key_t(std::vector<mpls_label_t> const & labels,
-                                          mpls_route_metric_t metric) {
-   pimpl = std::shared_ptr<mpls_route_key_impl_t>(
-      new mpls_route_key_impl_t(
-         labels,
-         metric
-      )
-   );
-}
-mpls_route_key_t::mpls_route_key_t(
-   const mpls_route_key_t& other)
-{
-   pimpl = std::make_unique<mpls_route_key_impl_t>(
-      mpls_route_key_impl_t(*other.pimpl));
-}
-mpls_route_key_t&
-mpls_route_key_t::operator=(
-   mpls_route_key_t const & other)
-{
-   pimpl = std::shared_ptr<mpls_route_key_impl_t>(
-      new mpls_route_key_impl_t(*other.pimpl));
-   return *this;
-}
 
 std::vector<mpls_label_t> const &
 mpls_route_key_t::labels() const {
@@ -106,33 +68,6 @@ operator<<(std::ostream& os, const mpls_route_key_t& obj) {
 }
 
 
-mpls_route_t::mpls_route_t() {
-   pimpl = std::shared_ptr<mpls_route_impl_t>(
-      new mpls_route_impl_t()
-   );
-}
-mpls_route_t::mpls_route_t(mpls_route_key_t key) {
-   pimpl = std::shared_ptr<mpls_route_impl_t>(
-      new mpls_route_impl_t(
-         key
-      )
-   );
-}
-mpls_route_t::mpls_route_t(
-   const mpls_route_t& other)
-{
-   pimpl = std::make_unique<mpls_route_impl_t>(
-      mpls_route_impl_t(*other.pimpl));
-}
-mpls_route_t&
-mpls_route_t::operator=(
-   mpls_route_t const & other)
-{
-   pimpl = std::shared_ptr<mpls_route_impl_t>(
-      new mpls_route_impl_t(*other.pimpl));
-   return *this;
-}
-
 mpls_route_key_t
 mpls_route_t::key() const {
    return pimpl->key();
@@ -166,42 +101,6 @@ operator<<(std::ostream& os, const mpls_route_t& obj) {
    return operator<<(os, *obj.pimpl);
 }
 
-
-mpls_route_via_t::mpls_route_via_t() {
-   pimpl = std::shared_ptr<mpls_route_via_impl_t>(
-      new mpls_route_via_impl_t()
-   );
-}
-mpls_route_via_t::mpls_route_via_t(mpls_route_key_t route_key) {
-   pimpl = std::shared_ptr<mpls_route_via_impl_t>(
-      new mpls_route_via_impl_t(
-         route_key
-      )
-   );
-}
-mpls_route_via_t::mpls_route_via_t(mpls_route_key_t route_key,
-                                          mpls_action_t label_action) {
-   pimpl = std::shared_ptr<mpls_route_via_impl_t>(
-      new mpls_route_via_impl_t(
-         route_key,
-         label_action
-      )
-   );
-}
-mpls_route_via_t::mpls_route_via_t(
-   const mpls_route_via_t& other)
-{
-   pimpl = std::make_unique<mpls_route_via_impl_t>(
-      mpls_route_via_impl_t(*other.pimpl));
-}
-mpls_route_via_t&
-mpls_route_via_t::operator=(
-   mpls_route_via_t const & other)
-{
-   pimpl = std::shared_ptr<mpls_route_via_impl_t>(
-      new mpls_route_via_impl_t(*other.pimpl));
-   return *this;
-}
 
 mpls_route_key_t
 mpls_route_via_t::route_key() const {
@@ -300,33 +199,6 @@ operator<<(std::ostream& os, const mpls_route_via_t& obj) {
    return operator<<(os, *obj.pimpl);
 }
 
-
-mpls_fec_id_t::mpls_fec_id_t() {
-   pimpl = std::shared_ptr<mpls_fec_id_impl_t>(
-      new mpls_fec_id_impl_t()
-   );
-}
-mpls_fec_id_t::mpls_fec_id_t(uint64_t id) {
-   pimpl = std::shared_ptr<mpls_fec_id_impl_t>(
-      new mpls_fec_id_impl_t(
-         id
-      )
-   );
-}
-mpls_fec_id_t::mpls_fec_id_t(
-   const mpls_fec_id_t& other)
-{
-   pimpl = std::make_unique<mpls_fec_id_impl_t>(
-      mpls_fec_id_impl_t(*other.pimpl));
-}
-mpls_fec_id_t&
-mpls_fec_id_t::operator=(
-   mpls_fec_id_t const & other)
-{
-   pimpl = std::shared_ptr<mpls_fec_id_impl_t>(
-      new mpls_fec_id_impl_t(*other.pimpl));
-   return *this;
-}
 
 uint64_t
 mpls_fec_id_t::id() const {

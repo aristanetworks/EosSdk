@@ -1,4 +1,4 @@
-// Copyright (c) 2023 Arista Networks, Inc.  All rights reserved.
+// Copyright (c) 2024 Arista Networks, Inc.  All rights reserved.
 // Arista Networks, Inc. Confidential and Proprietary.
 
 #ifndef EOS_TYPES_ETH_H
@@ -63,7 +63,7 @@ class EOS_SDK_PUBLIC eth_addr_t {
    bool operator==(eth_addr_t other) const;
    bool operator!=(eth_addr_t other) const;
    bool operator<(eth_addr_t other) const;
-   operator bool() const;
+   explicit operator bool() const;
    /** The hash function for type eth_addr_t. */
    uint32_t hash() const;
    /** The hash mix function for type eth_addr_t. */

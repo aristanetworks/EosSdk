@@ -1,39 +1,10 @@
-// Copyright (c) 2023 Arista Networks, Inc.  All rights reserved.
+// Copyright (c) 2024 Arista Networks, Inc.  All rights reserved.
 // Arista Networks, Inc. Confidential and Proprietary.
 
 #ifndef EOS_INLINE_TYPES_BGP_H
 #define EOS_INLINE_TYPES_BGP_H
 
 namespace eos {
-
-bgp_peer_key_t::bgp_peer_key_t() {
-   pimpl = std::shared_ptr<bgp_peer_key_impl_t>(
-      new bgp_peer_key_impl_t()
-   );
-}
-bgp_peer_key_t::bgp_peer_key_t(std::string const & vrf_name,
-                                      ip_addr_t const & peer_addr) {
-   pimpl = std::shared_ptr<bgp_peer_key_impl_t>(
-      new bgp_peer_key_impl_t(
-         vrf_name,
-         peer_addr
-      )
-   );
-}
-bgp_peer_key_t::bgp_peer_key_t(
-   const bgp_peer_key_t& other)
-{
-   pimpl = std::make_unique<bgp_peer_key_impl_t>(
-      bgp_peer_key_impl_t(*other.pimpl));
-}
-bgp_peer_key_t&
-bgp_peer_key_t::operator=(
-   bgp_peer_key_t const & other)
-{
-   pimpl = std::shared_ptr<bgp_peer_key_impl_t>(
-      new bgp_peer_key_impl_t(*other.pimpl));
-   return *this;
-}
 
 std::string
 bgp_peer_key_t::vrf_name() const {

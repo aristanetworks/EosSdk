@@ -1,4 +1,4 @@
-// Copyright (c) 2023 Arista Networks, Inc.  All rights reserved.
+// Copyright (c) 2024 Arista Networks, Inc.  All rights reserved.
 // Arista Networks, Inc. Confidential and Proprietary.
 
 #ifndef EOS_TYPES_BGP_PATH_H
@@ -45,6 +45,11 @@ class EOS_SDK_PUBLIC bgp_path_attr_fields_t {
    bgp_path_attr_fields_t& operator=(
       bgp_path_attr_fields_t const & other);
 
+   static void * operator new( std::size_t, void * ptr ) {
+      return ptr;
+   }
+   static void * operator new( std::size_t );
+   static void operator delete( void * ) noexcept;
 
    /**
     * Getter for 'next_hop': true if these path attribute options enable next hop
@@ -95,6 +100,11 @@ class EOS_SDK_PUBLIC bgp_path_options_t {
    bgp_path_options_t& operator=(
       bgp_path_options_t const & other);
 
+   static void * operator new( std::size_t, void * ptr ) {
+      return ptr;
+   }
+   static void * operator new( std::size_t );
+   static void operator delete( void * ) noexcept;
 
    /**
     * Getter for 'receive_route_stage': The received routes stage of a path to
@@ -143,6 +153,11 @@ class EOS_SDK_PUBLIC bgp_path_attr_t {
    bgp_path_attr_t& operator=(
       bgp_path_attr_t const & other);
 
+   static void * operator new( std::size_t, void * ptr ) {
+      return ptr;
+   }
+   static void * operator new( std::size_t );
+   static void operator delete( void * ) noexcept;
 
    /** Getter for 'next_hop': The nexthop address for the route. */
    ip_addr_t next_hop() const;
@@ -206,6 +221,11 @@ class EOS_SDK_PUBLIC bgp_path_key_t {
    bgp_path_key_t& operator=(
       bgp_path_key_t const & other);
 
+   static void * operator new( std::size_t, void * ptr ) {
+      return ptr;
+   }
+   static void * operator new( std::size_t );
+   static void operator delete( void * ) noexcept;
 
    /** Getter for 'prefix': IPv4/IPv6 network prefix. */
    ip_prefix_t prefix() const;
@@ -254,6 +274,11 @@ class EOS_SDK_PUBLIC bgp_path_t {
    bgp_path_t& operator=(
       bgp_path_t const & other);
 
+   static void * operator new( std::size_t, void * ptr ) {
+      return ptr;
+   }
+   static void * operator new( std::size_t );
+   static void operator delete( void * ) noexcept;
 
    /** Getter for 'path_key': The BGP path key. */
    bgp_path_key_t path_key() const;

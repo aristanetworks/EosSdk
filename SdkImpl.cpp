@@ -111,7 +111,6 @@ INIT_STUB_MGR(eth_phy_intf_counter_mgr)
 INIT_STUB_MGR(eth_lag_intf_mgr)
 INIT_STUB_MGR(hardware_table_mgr)
 INIT_STUB_MGR(intf_mgr)
-INIT_STUB_MGR(intf_counter_mgr)
 INIT_STUB_MGR(ip_intf_mgr)
 INIT_STUB_MGR(ip_route_mgr)
 INIT_STUB_MGR(lldp_mgr)
@@ -139,6 +138,14 @@ void sdk::SdkImpl::init_event_loop() {
 
 void sdk::SdkImpl::init_fib_mgr(mgr_mode_type_t mode) {
    // TODO: No op impl.
+}
+
+// Explicit definition for counter manager init with arguments
+intf_counter_mgr * new_intf_counter_mgr();
+void sdk::SdkImpl::init_intf_counter_mgr( mgr_mode_type_t ) {
+   if(!intf_counter_mgr_) {
+         intf_counter_mgr_ = new_intf_counter_mgr();
+   }
 }
 
 void sdk::SdkImpl::init_mount_mgr() {

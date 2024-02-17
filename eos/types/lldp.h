@@ -1,4 +1,4 @@
-// Copyright (c) 2023 Arista Networks, Inc.  All rights reserved.
+// Copyright (c) 2024 Arista Networks, Inc.  All rights reserved.
 // Arista Networks, Inc. Confidential and Proprietary.
 
 #ifndef EOS_TYPES_LLDP_H
@@ -6,6 +6,7 @@
 
 #include <arpa/inet.h>
 #include <eos/hash_mix.h>
+#include <eos/intf.h>
 #include <eos/utility.h>
 #include <memory>
 #include <netinet/ether.h>
@@ -23,6 +24,11 @@ class EOS_SDK_PUBLIC lldp_tlv_type_t {
    lldp_tlv_type_t& operator=(
       lldp_tlv_type_t const & other);
 
+   static void * operator new( std::size_t, void * ptr ) {
+      return ptr;
+   }
+   static void * operator new( std::size_t );
+   static void operator delete( void * ) noexcept;
 
    /**
     * Getter for 'organization': IEEE assigned Organizationally Unique Identifier
@@ -89,6 +95,11 @@ class EOS_SDK_PUBLIC lldp_std_tlv_type_t {
    lldp_std_tlv_type_t& operator=(
       lldp_std_tlv_type_t const & other);
 
+   static void * operator new( std::size_t, void * ptr ) {
+      return ptr;
+   }
+   static void * operator new( std::size_t );
+   static void operator delete( void * ) noexcept;
 
    void chassis_id_is(bool enabled);
    void intf_id_is(bool enabled);
@@ -157,6 +168,11 @@ class EOS_SDK_PUBLIC lldp_syscap_t {
    lldp_syscap_t& operator=(
       lldp_syscap_t const & other);
 
+   static void * operator new( std::size_t, void * ptr ) {
+      return ptr;
+   }
+   static void * operator new( std::size_t );
+   static void operator delete( void * ) noexcept;
 
    bool other() const;
    bool repeater() const;
@@ -196,6 +212,11 @@ class EOS_SDK_PUBLIC lldp_management_address_t {
    lldp_management_address_t& operator=(
       lldp_management_address_t const & other);
 
+   static void * operator new( std::size_t, void * ptr ) {
+      return ptr;
+   }
+   static void * operator new( std::size_t );
+   static void operator delete( void * ) noexcept;
 
    /**
     * Getter for 'address_family': Type of address encoded in address field (see
@@ -252,6 +273,11 @@ class EOS_SDK_PUBLIC lldp_lacp_t {
    lldp_lacp_t& operator=(
       lldp_lacp_t const & other);
 
+   static void * operator new( std::size_t, void * ptr ) {
+      return ptr;
+   }
+   static void * operator new( std::size_t );
+   static void operator delete( void * ) noexcept;
 
    /** Getter for 'capable': if port can become a member of a port-channel. */
    bool capable() const;
@@ -303,6 +329,11 @@ class EOS_SDK_PUBLIC lldp_phy_t {
    lldp_phy_t& operator=(
       lldp_phy_t const & other);
 
+   static void * operator new( std::size_t, void * ptr ) {
+      return ptr;
+   }
+   static void * operator new( std::size_t );
+   static void operator delete( void * ) noexcept;
 
    /** Getter for 'autonegSupported': if auto-negotiation supported. */
    bool autonegSupported() const;
@@ -379,6 +410,11 @@ class EOS_SDK_PUBLIC lldp_chassis_id_t {
    lldp_chassis_id_t& operator=(
       lldp_chassis_id_t const & other);
 
+   static void * operator new( std::size_t, void * ptr ) {
+      return ptr;
+   }
+   static void * operator new( std::size_t );
+   static void operator delete( void * ) noexcept;
 
    lldp_chassis_id_encoding_t encoding() const;
 
@@ -437,6 +473,11 @@ class EOS_SDK_PUBLIC lldp_intf_id_t {
    lldp_intf_id_t& operator=(
       lldp_intf_id_t const & other);
 
+   static void * operator new( std::size_t, void * ptr ) {
+      return ptr;
+   }
+   static void * operator new( std::size_t );
+   static void operator delete( void * ) noexcept;
 
    lldp_intf_id_encoding_t encoding() const;
 
@@ -476,6 +517,11 @@ class EOS_SDK_PUBLIC lldp_remote_system_t {
    lldp_remote_system_t& operator=(
       lldp_remote_system_t const & other);
 
+   static void * operator new( std::size_t, void * ptr ) {
+      return ptr;
+   }
+   static void * operator new( std::size_t );
+   static void operator delete( void * ) noexcept;
 
    /** Getter for 'chassis': The chassis-id of the remote system. */
    lldp_chassis_id_t chassis() const;
@@ -523,6 +569,11 @@ class EOS_SDK_PUBLIC lldp_neighbor_t {
    lldp_neighbor_t& operator=(
       lldp_neighbor_t const & other);
 
+   static void * operator new( std::size_t, void * ptr ) {
+      return ptr;
+   }
+   static void * operator new( std::size_t );
+   static void operator delete( void * ) noexcept;
 
    /** Getter for 'intf': The local interface that sees this neighbor. */
    intf_id_t intf() const;

@@ -1,4 +1,4 @@
-// Copyright (c) 2023 Arista Networks, Inc.  All rights reserved.
+// Copyright (c) 2024 Arista Networks, Inc.  All rights reserved.
 // Arista Networks, Inc. Confidential and Proprietary.
 
 #ifndef EOS_TYPES_BGP_H
@@ -25,6 +25,11 @@ class EOS_SDK_PUBLIC bgp_peer_key_t {
    bgp_peer_key_t& operator=(
       bgp_peer_key_t const & other);
 
+   static void * operator new( std::size_t, void * ptr ) {
+      return ptr;
+   }
+   static void * operator new( std::size_t );
+   static void operator delete( void * ) noexcept;
 
    /** Getter for 'vrf_name': VRF name. */
    std::string vrf_name() const;

@@ -1,4 +1,4 @@
-// Copyright (c) 2023 Arista Networks, Inc.  All rights reserved.
+// Copyright (c) 2024 Arista Networks, Inc.  All rights reserved.
 // Arista Networks, Inc. Confidential and Proprietary.
 
 #ifndef EOS_INLINE_TYPES_BGP_PATH_H
@@ -31,33 +31,6 @@ operator<<(std::ostream& os, const bgp_receive_route_stage_t & enum_val) {
    return os;
 }
 
-
-bgp_path_attr_fields_t::bgp_path_attr_fields_t() {
-   pimpl = std::shared_ptr<bgp_path_attr_fields_impl_t>(
-      new bgp_path_attr_fields_impl_t()
-   );
-}
-bgp_path_attr_fields_t::bgp_path_attr_fields_t(bool next_hop) {
-   pimpl = std::shared_ptr<bgp_path_attr_fields_impl_t>(
-      new bgp_path_attr_fields_impl_t(
-         next_hop
-      )
-   );
-}
-bgp_path_attr_fields_t::bgp_path_attr_fields_t(
-   const bgp_path_attr_fields_t& other)
-{
-   pimpl = std::make_unique<bgp_path_attr_fields_impl_t>(
-      bgp_path_attr_fields_impl_t(*other.pimpl));
-}
-bgp_path_attr_fields_t&
-bgp_path_attr_fields_t::operator=(
-   bgp_path_attr_fields_t const & other)
-{
-   pimpl = std::shared_ptr<bgp_path_attr_fields_impl_t>(
-      new bgp_path_attr_fields_impl_t(*other.pimpl));
-   return *this;
-}
 
 bool
 bgp_path_attr_fields_t::next_hop() const {
@@ -100,34 +73,6 @@ operator<<(std::ostream& os, const bgp_path_attr_fields_t& obj) {
    return operator<<(os, *obj.pimpl);
 }
 
-
-bgp_path_options_t::bgp_path_options_t() {
-   pimpl = std::shared_ptr<bgp_path_options_impl_t>(
-      new bgp_path_options_impl_t()
-   );
-}
-bgp_path_options_t::bgp_path_options_t(
-         bgp_receive_route_stage_t receive_route_stage) {
-   pimpl = std::shared_ptr<bgp_path_options_impl_t>(
-      new bgp_path_options_impl_t(
-         receive_route_stage
-      )
-   );
-}
-bgp_path_options_t::bgp_path_options_t(
-   const bgp_path_options_t& other)
-{
-   pimpl = std::make_unique<bgp_path_options_impl_t>(
-      bgp_path_options_impl_t(*other.pimpl));
-}
-bgp_path_options_t&
-bgp_path_options_t::operator=(
-   bgp_path_options_t const & other)
-{
-   pimpl = std::shared_ptr<bgp_path_options_impl_t>(
-      new bgp_path_options_impl_t(*other.pimpl));
-   return *this;
-}
 
 bgp_receive_route_stage_t
 bgp_path_options_t::receive_route_stage() const {
@@ -172,36 +117,6 @@ operator<<(std::ostream& os, const bgp_path_options_t& obj) {
    return operator<<(os, *obj.pimpl);
 }
 
-
-bgp_path_attr_t::bgp_path_attr_t() {
-   pimpl = std::shared_ptr<bgp_path_attr_impl_t>(
-      new bgp_path_attr_impl_t()
-   );
-}
-bgp_path_attr_t::bgp_path_attr_t(uint8_t origin, uint32_t med,
-                                        uint32_t local_pref) {
-   pimpl = std::shared_ptr<bgp_path_attr_impl_t>(
-      new bgp_path_attr_impl_t(
-         origin,
-         med,
-         local_pref
-      )
-   );
-}
-bgp_path_attr_t::bgp_path_attr_t(
-   const bgp_path_attr_t& other)
-{
-   pimpl = std::make_unique<bgp_path_attr_impl_t>(
-      bgp_path_attr_impl_t(*other.pimpl));
-}
-bgp_path_attr_t&
-bgp_path_attr_t::operator=(
-   bgp_path_attr_t const & other)
-{
-   pimpl = std::shared_ptr<bgp_path_attr_impl_t>(
-      new bgp_path_attr_impl_t(*other.pimpl));
-   return *this;
-}
 
 ip_addr_t
 bgp_path_attr_t::next_hop() const {
@@ -278,37 +193,6 @@ operator<<(std::ostream& os, const bgp_path_attr_t& obj) {
 }
 
 
-bgp_path_key_t::bgp_path_key_t() {
-   pimpl = std::shared_ptr<bgp_path_key_impl_t>(
-      new bgp_path_key_impl_t()
-   );
-}
-bgp_path_key_t::bgp_path_key_t(ip_prefix_t const & prefix,
-                                      ip_addr_t const & peer_addr,
-                                      std::string const & vrf_name) {
-   pimpl = std::shared_ptr<bgp_path_key_impl_t>(
-      new bgp_path_key_impl_t(
-         prefix,
-         peer_addr,
-         vrf_name
-      )
-   );
-}
-bgp_path_key_t::bgp_path_key_t(
-   const bgp_path_key_t& other)
-{
-   pimpl = std::make_unique<bgp_path_key_impl_t>(
-      bgp_path_key_impl_t(*other.pimpl));
-}
-bgp_path_key_t&
-bgp_path_key_t::operator=(
-   bgp_path_key_t const & other)
-{
-   pimpl = std::shared_ptr<bgp_path_key_impl_t>(
-      new bgp_path_key_impl_t(*other.pimpl));
-   return *this;
-}
-
 ip_prefix_t
 bgp_path_key_t::prefix() const {
    return pimpl->prefix();
@@ -362,33 +246,6 @@ operator<<(std::ostream& os, const bgp_path_key_t& obj) {
    return operator<<(os, *obj.pimpl);
 }
 
-
-bgp_path_t::bgp_path_t() {
-   pimpl = std::shared_ptr<bgp_path_impl_t>(
-      new bgp_path_impl_t()
-   );
-}
-bgp_path_t::bgp_path_t(bgp_path_key_t const & path_key) {
-   pimpl = std::shared_ptr<bgp_path_impl_t>(
-      new bgp_path_impl_t(
-         path_key
-      )
-   );
-}
-bgp_path_t::bgp_path_t(
-   const bgp_path_t& other)
-{
-   pimpl = std::make_unique<bgp_path_impl_t>(
-      bgp_path_impl_t(*other.pimpl));
-}
-bgp_path_t&
-bgp_path_t::operator=(
-   bgp_path_t const & other)
-{
-   pimpl = std::shared_ptr<bgp_path_impl_t>(
-      new bgp_path_impl_t(*other.pimpl));
-   return *this;
-}
 
 bgp_path_key_t
 bgp_path_t::path_key() const {

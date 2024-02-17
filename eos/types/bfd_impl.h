@@ -1,10 +1,13 @@
-// Copyright (c) 2023 Arista Networks, Inc.  All rights reserved.
+// Copyright (c) 2024 Arista Networks, Inc.  All rights reserved.
 // Arista Networks, Inc. Confidential and Proprietary.
 
 #ifndef EOS_TYPES_BFD_IMPL_H
 #define EOS_TYPES_BFD_IMPL_H
 
 #include <eos/hash_mix.h>
+#include <eos/intf.h>
+#include <eos/ip.h>
+#include <eos/mpls.h>
 #include <eos/utility.h>
 #include <forward_list>
 #include <memory>

@@ -1,4 +1,4 @@
-// Copyright (c) 2023 Arista Networks, Inc.  All rights reserved.
+// Copyright (c) 2024 Arista Networks, Inc.  All rights reserved.
 // Arista Networks, Inc. Confidential and Proprietary.
 
 #ifndef EOS_TYPES_NEXTHOP_GROUP_H
@@ -79,6 +79,11 @@ class EOS_SDK_PUBLIC nexthop_group_mpls_action_t {
    nexthop_group_mpls_action_t& operator=(
       nexthop_group_mpls_action_t const & other);
 
+   static void * operator new( std::size_t, void * ptr ) {
+      return ptr;
+   }
+   static void * operator new( std::size_t );
+   static void operator delete( void * ) noexcept;
 
    /** Getter for 'action_type': the MPLS switching operation for this action. */
    mpls_action_t action_type() const;
@@ -135,6 +140,11 @@ class EOS_SDK_PUBLIC nexthop_group_entry_counter_t {
    nexthop_group_entry_counter_t& operator=(
       nexthop_group_entry_counter_t const & other);
 
+   static void * operator new( std::size_t, void * ptr ) {
+      return ptr;
+   }
+   static void * operator new( std::size_t );
+   static void operator delete( void * ) noexcept;
 
    uint64_t packets() const;
 
@@ -183,6 +193,11 @@ class EOS_SDK_PUBLIC nexthop_group_entry_t {
    nexthop_group_entry_t& operator=(
       nexthop_group_entry_t const & other);
 
+   static void * operator new( std::size_t, void * ptr ) {
+      return ptr;
+   }
+   static void * operator new( std::size_t );
+   static void operator delete( void * ) noexcept;
 
    /** Getter for 'mpls_action': MPLS label switching stack for this entry. */
    nexthop_group_mpls_action_t mpls_action() const;
@@ -252,6 +267,11 @@ class EOS_SDK_PUBLIC nexthop_group_t {
    nexthop_group_t& operator=(
       nexthop_group_t const & other);
 
+   static void * operator new( std::size_t, void * ptr ) {
+      return ptr;
+   }
+   static void * operator new( std::size_t );
+   static void operator delete( void * ) noexcept;
 
    /** Getter for 'name': the unique name of the nexthop group. */
    std::string name() const;
@@ -420,6 +440,11 @@ class EOS_SDK_PUBLIC nexthop_group_programmed_status_t {
    nexthop_group_programmed_status_t& operator=(
       nexthop_group_programmed_status_t const & other);
 
+   static void * operator new( std::size_t, void * ptr ) {
+      return ptr;
+   }
+   static void * operator new( std::size_t );
+   static void operator delete( void * ) noexcept;
 
    /**
     * Getter for 'counter_state': The status of the counter programming for this

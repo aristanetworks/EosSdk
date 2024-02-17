@@ -1,10 +1,10 @@
 lib_LTLIBRARIES = libeos.la
 
 AM_CXXFLAGS = -fvisibility=hidden
-AM_CXXFLAGS += -Wextra -Wall -Wnon-virtual-dtor -Werror -Wno-unused-parameter -Wno-error=unused-value
 AM_CXXFLAGS += $(EXTRA_CFLAGS)
-AM_LDFLAGS = -Wl,--no-undefined
-
+AM_CXXFLAGS += -Wextra -Wall -Wnon-virtual-dtor -Werror -Wno-unused-parameter -Wno-error=unused-value -fPIC -fPIE -fvisibility-inlines-hidden
+AM_CXXFLAGS += -DTRAFFIC_POLICY_ENABLED
+AM_LDFLAGS = -Wl,--no-undefined -fPIC -fPIE
 
 PUBLISHED_HEADER_FILES := $(wildcard eos/*.h) $(wildcard eos/inline/*.h) $(wildcard eos/types/*.h) $(wildcard eos/inline/types/*.h)
 nobase_include_HEADERS = $(PUBLISHED_HEADER_FILES)
@@ -77,6 +77,35 @@ libeos_la_SOURCES += bgp_path.cpp
 libeos_la_SOURCES += lldp.cpp
 libeos_la_SOURCES += xcvr.cpp
 libeos_la_SOURCES += nexthop_group_tunnel.cpp
+# Add in auto generated X_gen.cpp files too.
+libeos_la_SOURCES += acl_gen.cpp
+libeos_la_SOURCES += bfd_gen.cpp
+libeos_la_SOURCES += bgp_path_gen.cpp
+libeos_la_SOURCES += bgp_gen.cpp
+libeos_la_SOURCES += class_map_gen.cpp
+libeos_la_SOURCES += decap_group_gen.cpp
+libeos_la_SOURCES += directflow_gen.cpp
+libeos_la_SOURCES += eapi_gen.cpp
+libeos_la_SOURCES += eth_lag_intf_gen.cpp
+libeos_la_SOURCES += eth_phy_intf_gen.cpp
+libeos_la_SOURCES += fib_gen.cpp
+libeos_la_SOURCES += hardware_table_gen.cpp
+libeos_la_SOURCES += intf_gen.cpp
+libeos_la_SOURCES += ip_route_gen.cpp
+libeos_la_SOURCES += ip_gen.cpp
+libeos_la_SOURCES += lldp_gen.cpp
+libeos_la_SOURCES += macsec_gen.cpp
+libeos_la_SOURCES += mac_table_gen.cpp
+libeos_la_SOURCES += mpls_route_gen.cpp
+libeos_la_SOURCES += mpls_vrf_label_gen.cpp
+libeos_la_SOURCES += neighbor_table_gen.cpp
+libeos_la_SOURCES += nexthop_group_tunnel_gen.cpp
+libeos_la_SOURCES += nexthop_group_gen.cpp
+libeos_la_SOURCES += policy_map_gen.cpp
+libeos_la_SOURCES += route_map_gen.cpp
+libeos_la_SOURCES += structured_filter_gen.cpp
+libeos_la_SOURCES += subintf_gen.cpp
+libeos_la_SOURCES += vrf_gen.cpp
 
 libeos_la_CPPFLAGS = $(AM_CPPFLAGS) $(SHIPPING_FLAG) -fPIC -fPIE
 libeos_la_LDFLAGS = -version-info $(SDK_LIBTOOL_VERSION) -lrt

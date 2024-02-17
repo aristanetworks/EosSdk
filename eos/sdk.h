@@ -159,6 +159,7 @@ class EOS_SDK_PUBLIC sdk {
    hardware_table_mgr * get_hardware_table_mgr();
    intf_mgr * get_intf_mgr();
    intf_counter_mgr * get_intf_counter_mgr();
+   intf_counter_mgr * get_intf_counter_mgr_with_mode(mgr_mode_type_t mode);
    ip_intf_mgr * get_ip_intf_mgr();
    ip_route_mgr * get_ip_route_mgr();
    lldp_mgr * get_lldp_mgr();

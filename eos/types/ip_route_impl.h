@@ -1,4 +1,4 @@
-// Copyright (c) 2023 Arista Networks, Inc.  All rights reserved.
+// Copyright (c) 2024 Arista Networks, Inc.  All rights reserved.
 // Arista Networks, Inc. Confidential and Proprietary.
 
 #ifndef EOS_TYPES_IP_ROUTE_IMPL_H
@@ -33,6 +33,8 @@ class EOS_SDK_PUBLIC ip_route_key_impl_t {
    /** Setter for 'preference'. */
    void preference_is(ip_route_preference_t preference);
 
+   /** The address family of the route_key_t prefix. */
+   af_t af() const;
    bool operator==(ip_route_key_impl_t const & other) const;
    bool operator!=(ip_route_key_impl_t const & other) const;
    /** The hash function for type ip_route_key_t. */
@@ -90,6 +92,8 @@ class EOS_SDK_PUBLIC ip_route_impl_t {
    /** Setter for 'command_tag'. */
    void command_tag_is(std::string const & command_tag);
 
+   /** The address family of the route_key_t prefix. */
+   af_t af() const;
    bool operator==(ip_route_impl_t const & other) const;
    bool operator!=(ip_route_impl_t const & other) const;
    /** The hash function for type ip_route_t. */

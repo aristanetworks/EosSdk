@@ -1,4 +1,4 @@
-// Copyright (c) 2023 Arista Networks, Inc.  All rights reserved.
+// Copyright (c) 2024 Arista Networks, Inc.  All rights reserved.
 // Arista Networks, Inc. Confidential and Proprietary.
 
 #ifndef EOS_TYPES_IP_H
@@ -84,7 +84,7 @@ class EOS_SDK_PUBLIC ip_addr_t {
    /** String representation of the IP address, e.g. "1.2.3.4" or "f00d::1". */
    std::string to_string() const;
 
-   operator bool() const;
+   explicit operator bool() const;
    /** The hash function for type ip_addr_t. */
    uint32_t hash() const;
    /** The hash mix function for type ip_addr_t. */
@@ -187,6 +187,11 @@ class EOS_SDK_PUBLIC ip_addr_mask_t {
    ip_addr_mask_t& operator=(
       ip_addr_mask_t const & other);
 
+   static void * operator new( std::size_t, void * ptr ) {
+      return ptr;
+   }
+   static void * operator new( std::size_t );
+   static void operator delete( void * ) noexcept;
 
    /** Getter for 'addr': the address/mask's IP address. */
    ip_addr_t addr() const;

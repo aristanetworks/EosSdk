@@ -1,4 +1,4 @@
-// Copyright (c) 2023 Arista Networks, Inc.  All rights reserved.
+// Copyright (c) 2024 Arista Networks, Inc.  All rights reserved.
 // Arista Networks, Inc. Confidential and Proprietary.
 
 #ifndef EOS_INLINE_TYPES_POLICY_MAP_IMPL_H
@@ -278,15 +278,16 @@ operator<<(std::ostream& os, const policy_map_action_impl_t& obj) {
 
 // Default constructor of a traffic-policy action.
 traffic_policy_action_impl_t::traffic_policy_action_impl_t() :
-      action_type_(), goto_class_name_(), goto_next_(), dscp_(), traffic_class_(),
-      vrf_(), mirror_session_(), police_rate_(), police_burst_size_(),
-      police_rate_unit_(), police_burst_unit_(), nexthop_groups_(), nexthops_() {
+      action_type_(), counter_name_(), goto_class_name_(), goto_next_(), dscp_(),
+      traffic_class_(), vrf_(), mirror_session_(), police_rate_(),
+      police_burst_size_(), police_rate_unit_(), police_burst_unit_(),
+      nexthop_groups_(), nexthops_() {
 }
 
 traffic_policy_action_impl_t::traffic_policy_action_impl_t(
          traffic_policy_action_type_t action_type) :
-      action_type_(action_type), goto_class_name_(), goto_next_(), dscp_(),
-      traffic_class_(), vrf_(), mirror_session_(), police_rate_(),
+      action_type_(action_type), counter_name_(), goto_class_name_(), goto_next_(),
+      dscp_(), traffic_class_(), vrf_(), mirror_session_(), police_rate_(),
       police_burst_size_(), police_rate_unit_(), police_burst_unit_(),
       nexthop_groups_(), nexthops_() {
 }
@@ -305,6 +306,16 @@ void
 traffic_policy_action_impl_t::action_type_is(
          traffic_policy_action_type_t action_type) {
    action_type_ = action_type;
+}
+
+std::string
+traffic_policy_action_impl_t::counter_name() const {
+   return counter_name_;
+}
+
+void
+traffic_policy_action_impl_t::counter_name_is(std::string const & counter_name) {
+   counter_name_ = counter_name;
 }
 
 std::string
@@ -458,6 +469,7 @@ bool
 traffic_policy_action_impl_t::operator==(
          traffic_policy_action_impl_t const & other) const {
    return action_type_ == other.action_type_ &&
+          counter_name_ == other.counter_name_ &&
           goto_class_name_ == other.goto_class_name_ &&
           goto_next_ == other.goto_next_ &&
           dscp_ == other.dscp_ &&
@@ -483,6 +495,8 @@ traffic_policy_action_impl_t::operator<(traffic_policy_action_impl_t const & oth
        const {
    if(action_type_ != other.action_type_) {
       return action_type_ < other.action_type_;
+   } else if(counter_name_ != other.counter_name_) {
+      return counter_name_ < other.counter_name_;
    } else if(goto_class_name_ != other.goto_class_name_) {
       return goto_class_name_ < other.goto_class_name_;
    } else if(goto_next_ != other.goto_next_) {
@@ -517,6 +531,7 @@ traffic_policy_action_impl_t::hash() const {
 void
 traffic_policy_action_impl_t::mix_me(hash_mix & h) const {
    h.mix(action_type_); // traffic_policy_action_type_t
+   h.mix(counter_name_); // std::string
    h.mix(goto_class_name_); // std::string
    h.mix(goto_next_); // bool
    h.mix(dscp_); // uint8_t
@@ -542,6 +557,7 @@ traffic_policy_action_impl_t::to_string() const {
    std::ostringstream ss;
    ss << "traffic_policy_action_t(";
    ss << "action_type=" << action_type_;
+   ss << ", counter_name='" << counter_name_ << "'";
    ss << ", goto_class_name='" << goto_class_name_ << "'";
    ss << ", goto_next=" << goto_next_;
    ss << ", dscp=" << dscp_;
@@ -1063,12 +1079,33 @@ operator<<(std::ostream& os, const traffic_policy_rule_impl_t& obj) {
 
 
 traffic_policy_impl_t::traffic_policy_impl_t(std::string const & key) :
-      key_(key), rules_() {
+      key_(key), named_counters_(), rules_() {
 }
 
 std::string
 traffic_policy_impl_t::key() const {
    return key_;
+}
+
+std::unordered_set<std::string> const &
+traffic_policy_impl_t::named_counters() const {
+   return named_counters_;
+}
+
+void
+traffic_policy_impl_t::named_counters_is(
+         std::unordered_set<std::string> const & named_counters) {
+   named_counters_ = named_counters;
+}
+
+void
+traffic_policy_impl_t::named_counter_set(std::string const & value) {
+   named_counters_.insert(value);
+}
+
+void
+traffic_policy_impl_t::named_counter_del(std::string const & value) {
+   named_counters_.erase(value);
 }
 
 std::map<uint32_t, traffic_policy_rule_t> const &
@@ -1095,6 +1132,7 @@ traffic_policy_impl_t::rule_del(uint32_t key) {
 bool
 traffic_policy_impl_t::operator==(traffic_policy_impl_t const & other) const {
    return key_ == other.key_ &&
+          named_counters_ == other.named_counters_ &&
           rules_ == other.rules_;
 }
 
@@ -1123,6 +1161,10 @@ traffic_policy_impl_t::hash() const {
 void
 traffic_policy_impl_t::mix_me(hash_mix & h) const {
    h.mix(key_); // std::string
+   for (auto it=named_counters_.cbegin();
+        it!=named_counters_.cend(); ++it) {
+      h.mix(*it); // std::string
+   }
    for (auto it=rules_.cbegin();
         it!=rules_.cend(); ++it) {
       h.mix(it->first); // uint32_t
@@ -1135,6 +1177,18 @@ traffic_policy_impl_t::to_string() const {
    std::ostringstream ss;
    ss << "traffic_policy_t(";
    ss << "key='" << key_ << "'";
+   ss << ", named_counters=" <<"'";
+   bool first_named_counters = true;
+   for (auto it=named_counters_.cbegin();
+        it!=named_counters_.cend(); ++it) {
+      if (first_named_counters) {
+         ss << (*it);
+         first_named_counters = false;
+      } else {
+         ss << "," << (*it);
+      }
+   }
+   ss << "'";
    ss << ", rules=" <<"'";
    bool first_rules = true;
    for (auto it=rules_.cbegin();

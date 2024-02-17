@@ -1,4 +1,4 @@
-// Copyright (c) 2023 Arista Networks, Inc.  All rights reserved.
+// Copyright (c) 2024 Arista Networks, Inc.  All rights reserved.
 // Arista Networks, Inc. Confidential and Proprietary.
 
 #ifndef EOS_INLINE_TYPES_IP_H
@@ -250,34 +250,6 @@ operator<<(std::ostream& os, const ip_prefix_t& obj) {
 }
 
 
-
-ip_addr_mask_t::ip_addr_mask_t() {
-   pimpl = std::shared_ptr<ip_addr_mask_impl_t>(
-      new ip_addr_mask_impl_t()
-   );
-}
-ip_addr_mask_t::ip_addr_mask_t(ip_addr_t const & addr, uint8_t mask_length) {
-   pimpl = std::shared_ptr<ip_addr_mask_impl_t>(
-      new ip_addr_mask_impl_t(
-         addr,
-         mask_length
-      )
-   );
-}
-ip_addr_mask_t::ip_addr_mask_t(
-   const ip_addr_mask_t& other)
-{
-   pimpl = std::make_unique<ip_addr_mask_impl_t>(
-      ip_addr_mask_impl_t(*other.pimpl));
-}
-ip_addr_mask_t&
-ip_addr_mask_t::operator=(
-   ip_addr_mask_t const & other)
-{
-   pimpl = std::shared_ptr<ip_addr_mask_impl_t>(
-      new ip_addr_mask_impl_t(*other.pimpl));
-   return *this;
-}
 
 ip_addr_t
 ip_addr_mask_t::addr() const {

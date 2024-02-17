@@ -1,4 +1,4 @@
-// Copyright (c) 2023 Arista Networks, Inc.  All rights reserved.
+// Copyright (c) 2024 Arista Networks, Inc.  All rights reserved.
 // Arista Networks, Inc. Confidential and Proprietary.
 
 #ifndef EOS_INLINE_TYPES_IP_ROUTE_IMPL_H
@@ -39,6 +39,11 @@ ip_route_key_impl_t::preference() const {
 void
 ip_route_key_impl_t::preference_is(ip_route_preference_t preference) {
    preference_ = preference;
+}
+
+af_t
+ip_route_key_impl_t::af() const {
+   return prefix_.af();
 }
 
 bool
@@ -129,6 +134,11 @@ ip_route_impl_t::command_tag() const {
 void
 ip_route_impl_t::command_tag_is(std::string const & command_tag) {
    command_tag_ = command_tag;
+}
+
+af_t
+ip_route_impl_t::af() const {
+   return key_.af();
 }
 
 bool

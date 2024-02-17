@@ -72,7 +72,7 @@ class Message(object):
       # First put the length of this packet
       ret = struct.pack(Message.header_format, 1, self.pid, self.egress_tunnel_key,
                         self.msg_id, len(self.tunnel_liveness))
-      for tunnel_key, is_alive in self.tunnel_liveness.iteritems():
+      for tunnel_key, is_alive in self.tunnel_liveness.items():
          ret += struct.pack(Message.tunnel_entry_format, tunnel_key, is_alive)
       if len(ret) > MAX_PKT_SIZE:
          assert False, "Packet %s too large to send!" % self.__str__()
@@ -286,12 +286,12 @@ class MplsTunnelLivenessAgent(eossdk_utils.EosSdkAgent,
       check if we haven't heard about any of our tunnels recently, and
       if so, mark them as dead. """
       cur_time = time.time()
-      for host in self.remote_switches.itervalues():
+      for host in self.remote_switches.values():
          liveness_dict = host.liveness_dict(cur_time)
          host.last_tx_msg_id += 1
          if host.last_tx_msg_id > MAX_INT:
             host.last_tx_msg_id = 1
-         for key, tunnel in host.egress_tunnels.iteritems():
+         for key, tunnel in host.egress_tunnels.items():
             msg = Message(self.pid, key, host.last_tx_msg_id, liveness_dict)
             self.send_packet(host.destination_ip, tunnel, msg)
             if tunnel.is_alive and (
@@ -365,7 +365,7 @@ class MplsTunnelLivenessAgent(eossdk_utils.EosSdkAgent,
          return
 
       remote_switch.last_rx_msg_id = msg.msg_id
-      for tunnel_key, is_alive in msg.tunnel_liveness.iteritems():
+      for tunnel_key, is_alive in msg.tunnel_liveness.items():
          if tunnel_key not in remote_switch.egress_tunnels:
             # They are telling us about one of our egress tunnels that
             # we have no record of...
@@ -468,7 +468,7 @@ class MplsTunnelLivenessAgent(eossdk_utils.EosSdkAgent,
       for rs in cfg["remote_switches"]:
          dst_ip = rs["destination_ip"]
          dst = RemoteSwitch(dst_ip)
-         for tunnel_key_str, tunnel_info in rs["tunnels"].iteritems():
+         for tunnel_key_str, tunnel_info in rs["tunnels"].items():
             tunnel_key = int(tunnel_key_str)
             dst.egress_tunnels[tunnel_key] = EgressTunnel(
                tunnel_info["label"], tunnel_info["nexthop_ip"])
@@ -479,8 +479,8 @@ class MplsTunnelLivenessAgent(eossdk_utils.EosSdkAgent,
 
    def resolve_config(self):
       self.tracer.trace2("Resolving all of our configured tunnels")
-      for host in self.remote_switches.itervalues():
-         for tunnel in host.egress_tunnels.itervalues():
+      for host in self.remote_switches.values():
+         for tunnel in host.egress_tunnels.values():
             tunnel.last_update_time = time.time() + STARTUP_GRACEPERIOD
             self.resolve_egress_tunnel(tunnel)
       self.timeout_time_is(eossdk.now() + POLL_TIME)

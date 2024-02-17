@@ -1,4 +1,4 @@
-// Copyright (c) 2023 Arista Networks, Inc.  All rights reserved.
+// Copyright (c) 2024 Arista Networks, Inc.  All rights reserved.
 // Arista Networks, Inc. Confidential and Proprietary.
 
 #ifndef EOS_INLINE_TYPES_ROUTE_MAP_H
@@ -22,41 +22,6 @@ operator<<(std::ostream& os, const bandwidth_unit_t & enum_val) {
    return os;
 }
 
-
-link_bandwidth_t::link_bandwidth_t(float value, bandwidth_unit_t unit) {
-   pimpl = std::shared_ptr<link_bandwidth_impl_t>(
-      new link_bandwidth_impl_t(
-         value,
-         unit
-      )
-   );
-}
-link_bandwidth_t::link_bandwidth_t(float value) {
-   pimpl = std::shared_ptr<link_bandwidth_impl_t>(
-      new link_bandwidth_impl_t(
-         value
-      )
-   );
-}
-link_bandwidth_t::link_bandwidth_t() {
-   pimpl = std::shared_ptr<link_bandwidth_impl_t>(
-      new link_bandwidth_impl_t()
-   );
-}
-link_bandwidth_t::link_bandwidth_t(
-   const link_bandwidth_t& other)
-{
-   pimpl = std::make_unique<link_bandwidth_impl_t>(
-      link_bandwidth_impl_t(*other.pimpl));
-}
-link_bandwidth_t&
-link_bandwidth_t::operator=(
-   link_bandwidth_t const & other)
-{
-   pimpl = std::shared_ptr<link_bandwidth_impl_t>(
-      new link_bandwidth_impl_t(*other.pimpl));
-   return *this;
-}
 
 float
 link_bandwidth_t::value() const {
@@ -119,26 +84,6 @@ operator<<(std::ostream& os, const route_map_operation_type_t & enum_val) {
 }
 
 
-route_map_link_bandwidth_t::route_map_link_bandwidth_t() {
-   pimpl = std::shared_ptr<route_map_link_bandwidth_impl_t>(
-      new route_map_link_bandwidth_impl_t()
-   );
-}
-route_map_link_bandwidth_t::route_map_link_bandwidth_t(
-   const route_map_link_bandwidth_t& other)
-{
-   pimpl = std::make_unique<route_map_link_bandwidth_impl_t>(
-      route_map_link_bandwidth_impl_t(*other.pimpl));
-}
-route_map_link_bandwidth_t&
-route_map_link_bandwidth_t::operator=(
-   route_map_link_bandwidth_t const & other)
-{
-   pimpl = std::shared_ptr<route_map_link_bandwidth_impl_t>(
-      new route_map_link_bandwidth_impl_t(*other.pimpl));
-   return *this;
-}
-
 route_map_operation_type_t
 route_map_link_bandwidth_t::operation() const {
    return pimpl->operation();
@@ -193,33 +138,6 @@ operator<<(std::ostream& os, const route_map_link_bandwidth_t& obj) {
    return operator<<(os, *obj.pimpl);
 }
 
-
-route_map_entry_t::route_map_entry_t() {
-   pimpl = std::shared_ptr<route_map_entry_impl_t>(
-      new route_map_entry_impl_t()
-   );
-}
-route_map_entry_t::route_map_entry_t(bool permit) {
-   pimpl = std::shared_ptr<route_map_entry_impl_t>(
-      new route_map_entry_impl_t(
-         permit
-      )
-   );
-}
-route_map_entry_t::route_map_entry_t(
-   const route_map_entry_t& other)
-{
-   pimpl = std::make_unique<route_map_entry_impl_t>(
-      route_map_entry_impl_t(*other.pimpl));
-}
-route_map_entry_t&
-route_map_entry_t::operator=(
-   route_map_entry_t const & other)
-{
-   pimpl = std::shared_ptr<route_map_entry_impl_t>(
-      new route_map_entry_impl_t(*other.pimpl));
-   return *this;
-}
 
 bool
 route_map_entry_t::permit() const {
@@ -276,26 +194,6 @@ operator<<(std::ostream& os, const route_map_entry_t& obj) {
    return operator<<(os, *obj.pimpl);
 }
 
-
-route_map_t::route_map_t() {
-   pimpl = std::shared_ptr<route_map_impl_t>(
-      new route_map_impl_t()
-   );
-}
-route_map_t::route_map_t(
-   const route_map_t& other)
-{
-   pimpl = std::make_unique<route_map_impl_t>(
-      route_map_impl_t(*other.pimpl));
-}
-route_map_t&
-route_map_t::operator=(
-   route_map_t const & other)
-{
-   pimpl = std::shared_ptr<route_map_impl_t>(
-      new route_map_impl_t(*other.pimpl));
-   return *this;
-}
 
 std::map<route_map_sequence_number_t, route_map_entry_t> const &
 route_map_t::map_entry() const {

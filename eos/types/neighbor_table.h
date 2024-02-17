@@ -1,4 +1,4 @@
-// Copyright (c) 2023 Arista Networks, Inc.  All rights reserved.
+// Copyright (c) 2024 Arista Networks, Inc.  All rights reserved.
 // Arista Networks, Inc. Confidential and Proprietary.
 
 #ifndef EOS_TYPES_NEIGHBOR_TABLE_H
@@ -43,6 +43,11 @@ class EOS_SDK_PUBLIC neighbor_key_t {
    neighbor_key_t& operator=(
       neighbor_key_t const & other);
 
+   static void * operator new( std::size_t, void * ptr ) {
+      return ptr;
+   }
+   static void * operator new( std::size_t );
+   static void operator delete( void * ) noexcept;
 
    /** Getter for 'ip_addr': the ip address of the neighbor entry. */
    ip_addr_t ip_addr() const;
@@ -83,6 +88,11 @@ class EOS_SDK_PUBLIC neighbor_entry_t {
    neighbor_entry_t& operator=(
       neighbor_entry_t const & other);
 
+   static void * operator new( std::size_t, void * ptr ) {
+      return ptr;
+   }
+   static void * operator new( std::size_t );
+   static void operator delete( void * ) noexcept;
 
    /** Getter for 'neighbor_key': the key of the neighbor entry. */
    neighbor_key_t neighbor_key() const;

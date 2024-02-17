@@ -1,38 +1,10 @@
-// Copyright (c) 2023 Arista Networks, Inc.  All rights reserved.
+// Copyright (c) 2024 Arista Networks, Inc.  All rights reserved.
 // Arista Networks, Inc. Confidential and Proprietary.
 
 #ifndef EOS_INLINE_TYPES_FIB_H
 #define EOS_INLINE_TYPES_FIB_H
 
 namespace eos {
-
-// Default constructor.
-fib_route_key_t::fib_route_key_t() {
-   pimpl = std::shared_ptr<fib_route_key_impl_t>(
-      new fib_route_key_impl_t()
-   );
-}
-fib_route_key_t::fib_route_key_t(ip_prefix_t const & prefix) {
-   pimpl = std::shared_ptr<fib_route_key_impl_t>(
-      new fib_route_key_impl_t(
-         prefix
-      )
-   );
-}
-fib_route_key_t::fib_route_key_t(
-   const fib_route_key_t& other)
-{
-   pimpl = std::make_unique<fib_route_key_impl_t>(
-      fib_route_key_impl_t(*other.pimpl));
-}
-fib_route_key_t&
-fib_route_key_t::operator=(
-   fib_route_key_t const & other)
-{
-   pimpl = std::shared_ptr<fib_route_key_impl_t>(
-      new fib_route_key_impl_t(*other.pimpl));
-   return *this;
-}
 
 ip_prefix_t
 fib_route_key_t::prefix() const {
@@ -131,34 +103,6 @@ operator<<(std::ostream& os, const fib_route_type_t & enum_val) {
 }
 
 
-// Default constructor.
-fib_route_t::fib_route_t() {
-   pimpl = std::shared_ptr<fib_route_impl_t>(
-      new fib_route_impl_t()
-   );
-}
-fib_route_t::fib_route_t(fib_route_key_t const & route_key) {
-   pimpl = std::shared_ptr<fib_route_impl_t>(
-      new fib_route_impl_t(
-         route_key
-      )
-   );
-}
-fib_route_t::fib_route_t(
-   const fib_route_t& other)
-{
-   pimpl = std::make_unique<fib_route_impl_t>(
-      fib_route_impl_t(*other.pimpl));
-}
-fib_route_t&
-fib_route_t::operator=(
-   fib_route_t const & other)
-{
-   pimpl = std::shared_ptr<fib_route_impl_t>(
-      new fib_route_impl_t(*other.pimpl));
-   return *this;
-}
-
 fib_route_key_t
 fib_route_t::route_key() const {
    return pimpl->route_key();
@@ -225,34 +169,6 @@ operator<<(std::ostream& os, const fib_route_t& obj) {
 }
 
 
-// Default constructor.
-fib_fec_key_t::fib_fec_key_t() {
-   pimpl = std::shared_ptr<fib_fec_key_impl_t>(
-      new fib_fec_key_impl_t()
-   );
-}
-fib_fec_key_t::fib_fec_key_t(uint64_t fec_id) {
-   pimpl = std::shared_ptr<fib_fec_key_impl_t>(
-      new fib_fec_key_impl_t(
-         fec_id
-      )
-   );
-}
-fib_fec_key_t::fib_fec_key_t(
-   const fib_fec_key_t& other)
-{
-   pimpl = std::make_unique<fib_fec_key_impl_t>(
-      fib_fec_key_impl_t(*other.pimpl));
-}
-fib_fec_key_t&
-fib_fec_key_t::operator=(
-   fib_fec_key_t const & other)
-{
-   pimpl = std::shared_ptr<fib_fec_key_impl_t>(
-      new fib_fec_key_impl_t(*other.pimpl));
-   return *this;
-}
-
 uint64_t
 fib_fec_key_t::fec_id() const {
    return pimpl->fec_id();
@@ -286,35 +202,6 @@ operator<<(std::ostream& os, const fib_fec_key_t& obj) {
    return operator<<(os, *obj.pimpl);
 }
 
-
-// Default constructor.
-fib_via_t::fib_via_t() {
-   pimpl = std::shared_ptr<fib_via_impl_t>(
-      new fib_via_impl_t()
-   );
-}
-fib_via_t::fib_via_t(ip_addr_t const & hop, intf_id_t intf) {
-   pimpl = std::shared_ptr<fib_via_impl_t>(
-      new fib_via_impl_t(
-         hop,
-         intf
-      )
-   );
-}
-fib_via_t::fib_via_t(
-   const fib_via_t& other)
-{
-   pimpl = std::make_unique<fib_via_impl_t>(
-      fib_via_impl_t(*other.pimpl));
-}
-fib_via_t&
-fib_via_t::operator=(
-   fib_via_t const & other)
-{
-   pimpl = std::shared_ptr<fib_via_impl_t>(
-      new fib_via_impl_t(*other.pimpl));
-   return *this;
-}
 
 ip_addr_t
 fib_via_t::hop() const {
@@ -390,34 +277,6 @@ operator<<(std::ostream& os, const fib_fec_type_t & enum_val) {
    return os;
 }
 
-
-// Default constructor.
-fib_fec_t::fib_fec_t() {
-   pimpl = std::shared_ptr<fib_fec_impl_t>(
-      new fib_fec_impl_t()
-   );
-}
-fib_fec_t::fib_fec_t(fib_fec_key_t fec_key) {
-   pimpl = std::shared_ptr<fib_fec_impl_t>(
-      new fib_fec_impl_t(
-         fec_key
-      )
-   );
-}
-fib_fec_t::fib_fec_t(
-   const fib_fec_t& other)
-{
-   pimpl = std::make_unique<fib_fec_impl_t>(
-      fib_fec_impl_t(*other.pimpl));
-}
-fib_fec_t&
-fib_fec_t::operator=(
-   fib_fec_t const & other)
-{
-   pimpl = std::shared_ptr<fib_fec_impl_t>(
-      new fib_fec_impl_t(*other.pimpl));
-   return *this;
-}
 
 fib_fec_key_t
 fib_fec_t::fec_key() const {

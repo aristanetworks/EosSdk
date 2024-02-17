@@ -1,4 +1,4 @@
-// Copyright (c) 2023 Arista Networks, Inc.  All rights reserved.
+// Copyright (c) 2024 Arista Networks, Inc.  All rights reserved.
 // Arista Networks, Inc. Confidential and Proprietary.
 
 #ifndef EOS_TYPES_STRUCTURED_FILTER_H
@@ -6,6 +6,7 @@
 
 #include <eos/exception.h>
 #include <eos/hash_mix.h>
+#include <eos/ip.h>
 #include <eos/utility.h>
 #include <map>
 #include <memory>
@@ -36,6 +37,11 @@ class EOS_SDK_PUBLIC protocol_range_t {
    protocol_range_t& operator=(
       protocol_range_t const & other);
 
+   static void * operator new( std::size_t, void * ptr ) {
+      return ptr;
+   }
+   static void * operator new( std::size_t );
+   static void operator delete( void * ) noexcept;
 
    uint32_t range_start() const;
    void range_start_is(uint32_t range_start);
@@ -74,6 +80,11 @@ class EOS_SDK_PUBLIC port_range_t {
    port_range_t& operator=(
       port_range_t const & other);
 
+   static void * operator new( std::size_t, void * ptr ) {
+      return ptr;
+   }
+   static void * operator new( std::size_t );
+   static void operator delete( void * ) noexcept;
 
    uint32_t range_start() const;
    void range_start_is(uint32_t range_start);
@@ -112,6 +123,11 @@ class EOS_SDK_PUBLIC port_field_t {
    port_field_t& operator=(
       port_field_t const & other);
 
+   static void * operator new( std::size_t, void * ptr ) {
+      return ptr;
+   }
+   static void * operator new( std::size_t );
+   static void operator delete( void * ) noexcept;
 
    std::set<port_range_t> const & src_ports() const;
    void src_ports_is(std::set<port_range_t> const & src_ports);
@@ -174,6 +190,11 @@ class EOS_SDK_PUBLIC protocol_field_t {
    protocol_field_t& operator=(
       protocol_field_t const & other);
 
+   static void * operator new( std::size_t, void * ptr ) {
+      return ptr;
+   }
+   static void * operator new( std::size_t );
+   static void operator delete( void * ) noexcept;
 
    /** Getter for 'ports': the key of the map ports should be an unique id. */
    std::map<uint32_t, port_field_t> const & ports() const;
@@ -232,6 +253,11 @@ class EOS_SDK_PUBLIC tp_rule_filter_t {
    tp_rule_filter_t& operator=(
       tp_rule_filter_t const & other);
 
+   static void * operator new( std::size_t, void * ptr ) {
+      return ptr;
+   }
+   static void * operator new( std::size_t );
+   static void operator delete( void * ) noexcept;
 
    std::set<ip_addr_mask_t> const & src_addrs() const;
 

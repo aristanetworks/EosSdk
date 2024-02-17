@@ -1,10 +1,13 @@
-// Copyright (c) 2023 Arista Networks, Inc.  All rights reserved.
+// Copyright (c) 2024 Arista Networks, Inc.  All rights reserved.
 // Arista Networks, Inc. Confidential and Proprietary.
 
 #ifndef EOS_TYPES_BFD_H
 #define EOS_TYPES_BFD_H
 
 #include <eos/hash_mix.h>
+#include <eos/intf.h>
+#include <eos/ip.h>
+#include <eos/mpls.h>
 #include <eos/utility.h>
 #include <forward_list>
 #include <memory>
@@ -65,6 +68,11 @@ class EOS_SDK_PUBLIC bfd_session_key_t {
    bfd_session_key_t& operator=(
       bfd_session_key_t const & other);
 
+   static void * operator new( std::size_t, void * ptr ) {
+      return ptr;
+   }
+   static void * operator new( std::size_t );
+   static void operator delete( void * ) noexcept;
 
    /** Getter for 'ip_addr': IP address of the peer. */
    ip_addr_t ip_addr() const;
@@ -119,6 +127,11 @@ class EOS_SDK_PUBLIC bfd_interval_t {
    bfd_interval_t& operator=(
       bfd_interval_t const & other);
 
+   static void * operator new( std::size_t, void * ptr ) {
+      return ptr;
+   }
+   static void * operator new( std::size_t );
+   static void operator delete( void * ) noexcept;
 
    /** Getter for 'tx': desired minimum tx interval. */
    uint16_t tx() const;
@@ -160,6 +173,11 @@ class EOS_SDK_PUBLIC bfd_session_t {
    bfd_session_t& operator=(
       bfd_session_t const & other);
 
+   static void * operator new( std::size_t, void * ptr ) {
+      return ptr;
+   }
+   static void * operator new( std::size_t );
+   static void operator delete( void * ) noexcept;
 
    /** Getter for 'peer': the peer for this BFD session. */
    bfd_session_key_t peer() const;
@@ -207,6 +225,11 @@ class EOS_SDK_PUBLIC sbfd_echo_session_key_t {
    sbfd_echo_session_key_t& operator=(
       sbfd_echo_session_key_t const & other);
 
+   static void * operator new( std::size_t, void * ptr ) {
+      return ptr;
+   }
+   static void * operator new( std::size_t );
+   static void operator delete( void * ) noexcept;
 
    /**
     * Getter for 'nexthop': nexthop IP address to send the probes to.
@@ -271,6 +294,11 @@ class EOS_SDK_PUBLIC sbfd_interval_t {
    sbfd_interval_t& operator=(
       sbfd_interval_t const & other);
 
+   static void * operator new( std::size_t, void * ptr ) {
+      return ptr;
+   }
+   static void * operator new( std::size_t );
+   static void operator delete( void * ) noexcept;
 
    /** Getter for 'tx': desired minimum tx interval, in milliseconds. */
    uint16_t tx() const;
@@ -315,6 +343,11 @@ class EOS_SDK_PUBLIC sbfd_echo_session_rtt_stats_t {
    sbfd_echo_session_rtt_stats_t& operator=(
       sbfd_echo_session_rtt_stats_t const & other);
 
+   static void * operator new( std::size_t, void * ptr ) {
+      return ptr;
+   }
+   static void * operator new( std::size_t );
+   static void operator delete( void * ) noexcept;
 
    /** Getter for 'last_rtt': RTT of the last received probe, in microseconds. */
    uint32_t last_rtt() const;

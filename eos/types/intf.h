@@ -1,4 +1,4 @@
-// Copyright (c) 2023 Arista Networks, Inc.  All rights reserved.
+// Copyright (c) 2024 Arista Networks, Inc.  All rights reserved.
 // Arista Networks, Inc. Confidential and Proprietary.
 
 #ifndef EOS_TYPES_INTF_H
@@ -115,6 +115,11 @@ class EOS_SDK_PUBLIC intf_counters_t {
    intf_counters_t& operator=(
       intf_counters_t const & other);
 
+   static void * operator new( std::size_t, void * ptr ) {
+      return ptr;
+   }
+   static void * operator new( std::size_t );
+   static void operator delete( void * ) noexcept;
 
    /**
     * Getter for 'out_ucast_pkts': IF-MIB ifOutUcastPkts.
@@ -212,6 +217,11 @@ class EOS_SDK_PUBLIC intf_traffic_rates_t {
    intf_traffic_rates_t& operator=(
       intf_traffic_rates_t const & other);
 
+   static void * operator new( std::size_t, void * ptr ) {
+      return ptr;
+   }
+   static void * operator new( std::size_t );
+   static void operator delete( void * ) noexcept;
 
    /** Getter for 'out_pkts_rate': output packets per second. */
    double out_pkts_rate() const;

@@ -1,4 +1,4 @@
-// Copyright (c) 2023 Arista Networks, Inc.  All rights reserved.
+// Copyright (c) 2024 Arista Networks, Inc.  All rights reserved.
 // Arista Networks, Inc. Confidential and Proprietary.
 
 #ifndef EOS_INLINE_TYPES_ACL_H
@@ -120,37 +120,6 @@ operator<<(std::ostream& os, const acl_ip_type_t & enum_val) {
 }
 
 
-// Default constructor.
-acl_ttl_spec_t::acl_ttl_spec_t() {
-   pimpl = std::shared_ptr<acl_ttl_spec_impl_t>(
-      new acl_ttl_spec_impl_t()
-   );
-}
-// Constructor for different ttl specs, note if oper is ACL_RANGE_ANY, the ttl
-// should be set to 0.
-acl_ttl_spec_t::acl_ttl_spec_t(acl_range_operator_t oper, uint8_t ttl) {
-   pimpl = std::shared_ptr<acl_ttl_spec_impl_t>(
-      new acl_ttl_spec_impl_t(
-         oper,
-         ttl
-      )
-   );
-}
-acl_ttl_spec_t::acl_ttl_spec_t(
-   const acl_ttl_spec_t& other)
-{
-   pimpl = std::make_unique<acl_ttl_spec_impl_t>(
-      acl_ttl_spec_impl_t(*other.pimpl));
-}
-acl_ttl_spec_t&
-acl_ttl_spec_t::operator=(
-   acl_ttl_spec_t const & other)
-{
-   pimpl = std::shared_ptr<acl_ttl_spec_impl_t>(
-      new acl_ttl_spec_impl_t(*other.pimpl));
-   return *this;
-}
-
 acl_range_operator_t
 acl_ttl_spec_t::oper() const {
    return pimpl->oper();
@@ -196,35 +165,6 @@ operator<<(std::ostream& os, const acl_ttl_spec_t& obj) {
    return operator<<(os, *obj.pimpl);
 }
 
-
-acl_port_spec_t::acl_port_spec_t() {
-   pimpl = std::shared_ptr<acl_port_spec_impl_t>(
-      new acl_port_spec_impl_t()
-   );
-}
-acl_port_spec_t::acl_port_spec_t(acl_range_operator_t oper,
-                                        std::list<uint16_t> const & ports) {
-   pimpl = std::shared_ptr<acl_port_spec_impl_t>(
-      new acl_port_spec_impl_t(
-         oper,
-         ports
-      )
-   );
-}
-acl_port_spec_t::acl_port_spec_t(
-   const acl_port_spec_t& other)
-{
-   pimpl = std::make_unique<acl_port_spec_impl_t>(
-      acl_port_spec_impl_t(*other.pimpl));
-}
-acl_port_spec_t&
-acl_port_spec_t::operator=(
-   acl_port_spec_t const & other)
-{
-   pimpl = std::shared_ptr<acl_port_spec_impl_t>(
-      new acl_port_spec_impl_t(*other.pimpl));
-   return *this;
-}
 
 acl_range_operator_t
 acl_port_spec_t::oper() const {
@@ -361,26 +301,6 @@ operator<<(std::ostream& os, const acl_key_t& obj) {
 
 
 
-acl_rule_base_t::acl_rule_base_t() {
-   pimpl = std::shared_ptr<acl_rule_base_impl_t>(
-      new acl_rule_base_impl_t()
-   );
-}
-acl_rule_base_t::acl_rule_base_t(
-   const acl_rule_base_t& other)
-{
-   pimpl = std::make_unique<acl_rule_base_impl_t>(
-      acl_rule_base_impl_t(*other.pimpl));
-}
-acl_rule_base_t&
-acl_rule_base_t::operator=(
-   acl_rule_base_t const & other)
-{
-   pimpl = std::shared_ptr<acl_rule_base_impl_t>(
-      new acl_rule_base_impl_t(*other.pimpl));
-   return *this;
-}
-
 acl_action_t
 acl_rule_base_t::action() const {
    return pimpl->action();
@@ -422,28 +342,6 @@ operator<<(std::ostream& os, const acl_rule_base_t& obj) {
    return operator<<(os, *obj.pimpl);
 }
 
-
-// Constructor for concrete rule ip type passed to acl_add_rule() variants.
-acl_rule_ip_t::acl_rule_ip_t(): acl_rule_base_t() {
-   pimpl = std::shared_ptr<acl_rule_ip_impl_t>(
-      new acl_rule_ip_impl_t()
-   );
-}
-acl_rule_ip_t::acl_rule_ip_t(
-   const acl_rule_ip_t& other): acl_rule_base_t(other)
-{
-   pimpl = std::make_unique<acl_rule_ip_impl_t>(
-      acl_rule_ip_impl_t(*other.pimpl));
-}
-acl_rule_ip_t&
-acl_rule_ip_t::operator=(
-   acl_rule_ip_t const & other)
-{
-   acl_rule_base_t::operator=(other);
-   pimpl = std::shared_ptr<acl_rule_ip_impl_t>(
-      new acl_rule_ip_impl_t(*other.pimpl));
-   return *this;
-}
 
 vlan_id_t
 acl_rule_ip_t::vlan() const {
@@ -634,27 +532,6 @@ operator<<(std::ostream& os, const acl_rule_ip_t& obj) {
    return operator<<(os, *obj.pimpl);
 }
 
-
-acl_rule_eth_t::acl_rule_eth_t(): acl_rule_base_t() {
-   pimpl = std::shared_ptr<acl_rule_eth_impl_t>(
-      new acl_rule_eth_impl_t()
-   );
-}
-acl_rule_eth_t::acl_rule_eth_t(
-   const acl_rule_eth_t& other): acl_rule_base_t(other)
-{
-   pimpl = std::make_unique<acl_rule_eth_impl_t>(
-      acl_rule_eth_impl_t(*other.pimpl));
-}
-acl_rule_eth_t&
-acl_rule_eth_t::operator=(
-   acl_rule_eth_t const & other)
-{
-   acl_rule_base_t::operator=(other);
-   pimpl = std::shared_ptr<acl_rule_eth_impl_t>(
-      new acl_rule_eth_impl_t(*other.pimpl));
-   return *this;
-}
 
 vlan_id_t
 acl_rule_eth_t::vlan() const {

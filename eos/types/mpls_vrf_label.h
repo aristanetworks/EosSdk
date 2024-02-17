@@ -1,10 +1,11 @@
-// Copyright (c) 2023 Arista Networks, Inc.  All rights reserved.
+// Copyright (c) 2024 Arista Networks, Inc.  All rights reserved.
 // Arista Networks, Inc. Confidential and Proprietary.
 
 #ifndef EOS_TYPES_MPLS_VRF_LABEL_H
 #define EOS_TYPES_MPLS_VRF_LABEL_H
 
 #include <eos/hash_mix.h>
+#include <eos/mpls.h>
 #include <eos/utility.h>
 #include <memory>
 #include <sstream>
@@ -21,6 +22,11 @@ class EOS_SDK_PUBLIC mpls_vrf_label_t {
    mpls_vrf_label_t& operator=(
       mpls_vrf_label_t const & other);
 
+   static void * operator new( std::size_t, void * ptr ) {
+      return ptr;
+   }
+   static void * operator new( std::size_t );
+   static void operator delete( void * ) noexcept;
 
    /** Getter for 'label': the decap label. */
    mpls_label_t label() const;

@@ -1,4 +1,4 @@
-// Copyright (c) 2023 Arista Networks, Inc.  All rights reserved.
+// Copyright (c) 2024 Arista Networks, Inc.  All rights reserved.
 // Arista Networks, Inc. Confidential and Proprietary.
 
 #ifndef EOS_INLINE_TYPES_ETH_LAG_INTF_H
@@ -78,40 +78,6 @@ operator<<(std::ostream& os, const eth_lag_intf_member_lacp_timeout_t & enum_val
 }
 
 
-// Default constructor.
-eth_lag_intf_membership_t::eth_lag_intf_membership_t() {
-   pimpl = std::shared_ptr<eth_lag_intf_membership_impl_t>(
-      new eth_lag_intf_membership_impl_t()
-   );
-}
-eth_lag_intf_membership_t::eth_lag_intf_membership_t(
-         intf_id_t eth_lag_intf_id, bool active, std::string const & reason,
-         double member_time, eth_lag_intf_member_lacp_mode_t mode) {
-   pimpl = std::shared_ptr<eth_lag_intf_membership_impl_t>(
-      new eth_lag_intf_membership_impl_t(
-         eth_lag_intf_id,
-         active,
-         reason,
-         member_time,
-         mode
-      )
-   );
-}
-eth_lag_intf_membership_t::eth_lag_intf_membership_t(
-   const eth_lag_intf_membership_t& other)
-{
-   pimpl = std::make_unique<eth_lag_intf_membership_impl_t>(
-      eth_lag_intf_membership_impl_t(*other.pimpl));
-}
-eth_lag_intf_membership_t&
-eth_lag_intf_membership_t::operator=(
-   eth_lag_intf_membership_t const & other)
-{
-   pimpl = std::shared_ptr<eth_lag_intf_membership_impl_t>(
-      new eth_lag_intf_membership_impl_t(*other.pimpl));
-   return *this;
-}
-
 intf_id_t
 eth_lag_intf_membership_t::eth_lag_intf_id() const {
    return pimpl->eth_lag_intf_id();
@@ -172,48 +138,6 @@ operator<<(std::ostream& os, const eth_lag_intf_membership_t& obj) {
    return operator<<(os, *obj.pimpl);
 }
 
-
-// Default constructor.
-eth_lag_intf_t::eth_lag_intf_t() {
-   pimpl = std::shared_ptr<eth_lag_intf_impl_t>(
-      new eth_lag_intf_impl_t()
-   );
-}
-eth_lag_intf_t::eth_lag_intf_t(intf_id_t intf) {
-   pimpl = std::shared_ptr<eth_lag_intf_impl_t>(
-      new eth_lag_intf_impl_t(
-         intf
-      )
-   );
-}
-eth_lag_intf_t::eth_lag_intf_t(intf_id_t intf, uint32_t min_links,
-                                      uint64_t speed,
-                                      eth_lag_intf_fallback_type_t fallback_type,
-                                      uint16_t fallback_timeout) {
-   pimpl = std::shared_ptr<eth_lag_intf_impl_t>(
-      new eth_lag_intf_impl_t(
-         intf,
-         min_links,
-         speed,
-         fallback_type,
-         fallback_timeout
-      )
-   );
-}
-eth_lag_intf_t::eth_lag_intf_t(
-   const eth_lag_intf_t& other)
-{
-   pimpl = std::make_unique<eth_lag_intf_impl_t>(
-      eth_lag_intf_impl_t(*other.pimpl));
-}
-eth_lag_intf_t&
-eth_lag_intf_t::operator=(
-   eth_lag_intf_t const & other)
-{
-   pimpl = std::shared_ptr<eth_lag_intf_impl_t>(
-      new eth_lag_intf_impl_t(*other.pimpl));
-   return *this;
-}
 
 intf_id_t
 eth_lag_intf_t::intf() const {

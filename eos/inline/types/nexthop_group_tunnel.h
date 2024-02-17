@@ -1,39 +1,10 @@
-// Copyright (c) 2023 Arista Networks, Inc.  All rights reserved.
+// Copyright (c) 2024 Arista Networks, Inc.  All rights reserved.
 // Arista Networks, Inc. Confidential and Proprietary.
 
 #ifndef EOS_INLINE_TYPES_NEXTHOP_GROUP_TUNNEL_H
 #define EOS_INLINE_TYPES_NEXTHOP_GROUP_TUNNEL_H
 
 namespace eos {
-
-nexthop_group_tunnel_t::nexthop_group_tunnel_t() {
-   pimpl = std::shared_ptr<nexthop_group_tunnel_impl_t>(
-      new nexthop_group_tunnel_impl_t()
-   );
-}
-nexthop_group_tunnel_t::nexthop_group_tunnel_t(
-         ip_prefix_t const & tunnel_endpoint, std::string const & nhg_name) {
-   pimpl = std::shared_ptr<nexthop_group_tunnel_impl_t>(
-      new nexthop_group_tunnel_impl_t(
-         tunnel_endpoint,
-         nhg_name
-      )
-   );
-}
-nexthop_group_tunnel_t::nexthop_group_tunnel_t(
-   const nexthop_group_tunnel_t& other)
-{
-   pimpl = std::make_unique<nexthop_group_tunnel_impl_t>(
-      nexthop_group_tunnel_impl_t(*other.pimpl));
-}
-nexthop_group_tunnel_t&
-nexthop_group_tunnel_t::operator=(
-   nexthop_group_tunnel_t const & other)
-{
-   pimpl = std::shared_ptr<nexthop_group_tunnel_impl_t>(
-      new nexthop_group_tunnel_impl_t(*other.pimpl));
-   return *this;
-}
 
 ip_prefix_t
 nexthop_group_tunnel_t::tunnel_endpoint() const {

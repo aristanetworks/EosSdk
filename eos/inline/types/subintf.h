@@ -1,39 +1,10 @@
-// Copyright (c) 2023 Arista Networks, Inc.  All rights reserved.
+// Copyright (c) 2024 Arista Networks, Inc.  All rights reserved.
 // Arista Networks, Inc. Confidential and Proprietary.
 
 #ifndef EOS_INLINE_TYPES_SUBINTF_H
 #define EOS_INLINE_TYPES_SUBINTF_H
 
 namespace eos {
-
-// Default constructor.
-subintf_t::subintf_t() {
-   pimpl = std::shared_ptr<subintf_impl_t>(
-      new subintf_impl_t()
-   );
-}
-subintf_t::subintf_t(intf_id_t intf_id, vlan_id_t vlan_id) {
-   pimpl = std::shared_ptr<subintf_impl_t>(
-      new subintf_impl_t(
-         intf_id,
-         vlan_id
-      )
-   );
-}
-subintf_t::subintf_t(
-   const subintf_t& other)
-{
-   pimpl = std::make_unique<subintf_impl_t>(
-      subintf_impl_t(*other.pimpl));
-}
-subintf_t&
-subintf_t::operator=(
-   subintf_t const & other)
-{
-   pimpl = std::shared_ptr<subintf_impl_t>(
-      new subintf_impl_t(*other.pimpl));
-   return *this;
-}
 
 intf_id_t
 subintf_t::intf_id() const {

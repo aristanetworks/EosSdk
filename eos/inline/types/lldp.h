@@ -1,4 +1,4 @@
-// Copyright (c) 2023 Arista Networks, Inc.  All rights reserved.
+// Copyright (c) 2024 Arista Networks, Inc.  All rights reserved.
 // Arista Networks, Inc. Confidential and Proprietary.
 
 #ifndef EOS_INLINE_TYPES_LLDP_H
@@ -7,36 +7,6 @@
 namespace eos {
 
 
-
-// TLV Type, default constructor.
-lldp_tlv_type_t::lldp_tlv_type_t() {
-   pimpl = std::shared_ptr<lldp_tlv_type_impl_t>(
-      new lldp_tlv_type_impl_t()
-   );
-}
-// TLV Type, full constructor.
-lldp_tlv_type_t::lldp_tlv_type_t(uint32_t organization, uint8_t subtype) {
-   pimpl = std::shared_ptr<lldp_tlv_type_impl_t>(
-      new lldp_tlv_type_impl_t(
-         organization,
-         subtype
-      )
-   );
-}
-lldp_tlv_type_t::lldp_tlv_type_t(
-   const lldp_tlv_type_t& other)
-{
-   pimpl = std::make_unique<lldp_tlv_type_impl_t>(
-      lldp_tlv_type_impl_t(*other.pimpl));
-}
-lldp_tlv_type_t&
-lldp_tlv_type_t::operator=(
-   lldp_tlv_type_t const & other)
-{
-   pimpl = std::shared_ptr<lldp_tlv_type_impl_t>(
-      new lldp_tlv_type_impl_t(*other.pimpl));
-   return *this;
-}
 
 uint32_t
 lldp_tlv_type_t::organization() const {
@@ -114,26 +84,6 @@ operator<<(std::ostream& os, const lldp_std_tlv_type_bit_t & enum_val) {
    return os;
 }
 
-
-lldp_std_tlv_type_t::lldp_std_tlv_type_t() {
-   pimpl = std::shared_ptr<lldp_std_tlv_type_impl_t>(
-      new lldp_std_tlv_type_impl_t()
-   );
-}
-lldp_std_tlv_type_t::lldp_std_tlv_type_t(
-   const lldp_std_tlv_type_t& other)
-{
-   pimpl = std::make_unique<lldp_std_tlv_type_impl_t>(
-      lldp_std_tlv_type_impl_t(*other.pimpl));
-}
-lldp_std_tlv_type_t&
-lldp_std_tlv_type_t::operator=(
-   lldp_std_tlv_type_t const & other)
-{
-   pimpl = std::shared_ptr<lldp_std_tlv_type_impl_t>(
-      new lldp_std_tlv_type_impl_t(*other.pimpl));
-   return *this;
-}
 
 void
 lldp_std_tlv_type_t::chassis_id_is(bool enabled) {
@@ -258,34 +208,6 @@ operator<<(std::ostream& os, const lldp_syscap_bits_t & enum_val) {
 }
 
 
-lldp_syscap_t::lldp_syscap_t() {
-   pimpl = std::shared_ptr<lldp_syscap_impl_t>(
-      new lldp_syscap_impl_t()
-   );
-}
-// syscap, full constructor.
-lldp_syscap_t::lldp_syscap_t(lldp_syscap_bits_t bitset) {
-   pimpl = std::shared_ptr<lldp_syscap_impl_t>(
-      new lldp_syscap_impl_t(
-         bitset
-      )
-   );
-}
-lldp_syscap_t::lldp_syscap_t(
-   const lldp_syscap_t& other)
-{
-   pimpl = std::make_unique<lldp_syscap_impl_t>(
-      lldp_syscap_impl_t(*other.pimpl));
-}
-lldp_syscap_t&
-lldp_syscap_t::operator=(
-   lldp_syscap_t const & other)
-{
-   pimpl = std::shared_ptr<lldp_syscap_impl_t>(
-      new lldp_syscap_impl_t(*other.pimpl));
-   return *this;
-}
-
 bool
 lldp_syscap_t::other() const {
    return pimpl->other();
@@ -336,39 +258,6 @@ operator<<(std::ostream& os, const lldp_syscap_t& obj) {
 }
 
 
-lldp_management_address_t::lldp_management_address_t() {
-   pimpl = std::shared_ptr<lldp_management_address_impl_t>(
-      new lldp_management_address_impl_t()
-   );
-}
-// Managment Info constructor.
-lldp_management_address_t::lldp_management_address_t(
-         uint32_t address_family, std::string address, uint32_t snmp_ifindex,
-         std::string oid) {
-   pimpl = std::shared_ptr<lldp_management_address_impl_t>(
-      new lldp_management_address_impl_t(
-         address_family,
-         address,
-         snmp_ifindex,
-         oid
-      )
-   );
-}
-lldp_management_address_t::lldp_management_address_t(
-   const lldp_management_address_t& other)
-{
-   pimpl = std::make_unique<lldp_management_address_impl_t>(
-      lldp_management_address_impl_t(*other.pimpl));
-}
-lldp_management_address_t&
-lldp_management_address_t::operator=(
-   lldp_management_address_t const & other)
-{
-   pimpl = std::shared_ptr<lldp_management_address_impl_t>(
-      new lldp_management_address_impl_t(*other.pimpl));
-   return *this;
-}
-
 uint32_t
 lldp_management_address_t::address_family() const {
    return pimpl->address_family();
@@ -408,38 +297,6 @@ operator<<(std::ostream& os, const lldp_management_address_t& obj) {
 }
 
 
-lldp_lacp_t::lldp_lacp_t() {
-   pimpl = std::shared_ptr<lldp_lacp_impl_t>(
-      new lldp_lacp_impl_t()
-   );
-}
-// LACP Info constructor.
-lldp_lacp_t::lldp_lacp_t(bool capable, bool enabled, uint32_t id,
-                                bool valid) {
-   pimpl = std::shared_ptr<lldp_lacp_impl_t>(
-      new lldp_lacp_impl_t(
-         capable,
-         enabled,
-         id,
-         valid
-      )
-   );
-}
-lldp_lacp_t::lldp_lacp_t(
-   const lldp_lacp_t& other)
-{
-   pimpl = std::make_unique<lldp_lacp_impl_t>(
-      lldp_lacp_impl_t(*other.pimpl));
-}
-lldp_lacp_t&
-lldp_lacp_t::operator=(
-   lldp_lacp_t const & other)
-{
-   pimpl = std::shared_ptr<lldp_lacp_impl_t>(
-      new lldp_lacp_impl_t(*other.pimpl));
-   return *this;
-}
-
 bool
 lldp_lacp_t::capable() const {
    return pimpl->capable();
@@ -477,38 +334,6 @@ operator<<(std::ostream& os, const lldp_lacp_t& obj) {
    return operator<<(os, *obj.pimpl);
 }
 
-
-lldp_phy_t::lldp_phy_t() {
-   pimpl = std::shared_ptr<lldp_phy_impl_t>(
-      new lldp_phy_impl_t()
-   );
-}
-// PHY Info constructor.
-lldp_phy_t::lldp_phy_t(bool autonegSupported, bool autonegEnabled,
-                              uint16_t autonegCapabilitiesBm, bool valid) {
-   pimpl = std::shared_ptr<lldp_phy_impl_t>(
-      new lldp_phy_impl_t(
-         autonegSupported,
-         autonegEnabled,
-         autonegCapabilitiesBm,
-         valid
-      )
-   );
-}
-lldp_phy_t::lldp_phy_t(
-   const lldp_phy_t& other)
-{
-   pimpl = std::make_unique<lldp_phy_impl_t>(
-      lldp_phy_impl_t(*other.pimpl));
-}
-lldp_phy_t&
-lldp_phy_t::operator=(
-   lldp_phy_t const & other)
-{
-   pimpl = std::shared_ptr<lldp_phy_impl_t>(
-      new lldp_phy_impl_t(*other.pimpl));
-   return *this;
-}
 
 bool
 lldp_phy_t::autonegSupported() const {
@@ -590,36 +415,6 @@ operator<<(std::ostream& os, const lldp_chassis_id_encoding_t & enum_val) {
 }
 
 
-lldp_chassis_id_t::lldp_chassis_id_t() {
-   pimpl = std::shared_ptr<lldp_chassis_id_impl_t>(
-      new lldp_chassis_id_impl_t()
-   );
-}
-// chassis name, full constructor.
-lldp_chassis_id_t::lldp_chassis_id_t(lldp_chassis_id_encoding_t encoding,
-                                            std::string value) {
-   pimpl = std::shared_ptr<lldp_chassis_id_impl_t>(
-      new lldp_chassis_id_impl_t(
-         encoding,
-         value
-      )
-   );
-}
-lldp_chassis_id_t::lldp_chassis_id_t(
-   const lldp_chassis_id_t& other)
-{
-   pimpl = std::make_unique<lldp_chassis_id_impl_t>(
-      lldp_chassis_id_impl_t(*other.pimpl));
-}
-lldp_chassis_id_t&
-lldp_chassis_id_t::operator=(
-   lldp_chassis_id_t const & other)
-{
-   pimpl = std::shared_ptr<lldp_chassis_id_impl_t>(
-      new lldp_chassis_id_impl_t(*other.pimpl));
-   return *this;
-}
-
 lldp_chassis_id_encoding_t
 lldp_chassis_id_t::encoding() const {
    return pimpl->encoding();
@@ -689,36 +484,6 @@ operator<<(std::ostream& os, const lldp_intf_id_encoding_t & enum_val) {
 }
 
 
-lldp_intf_id_t::lldp_intf_id_t() {
-   pimpl = std::shared_ptr<lldp_intf_id_impl_t>(
-      new lldp_intf_id_impl_t()
-   );
-}
-// interface name, full constructor.
-lldp_intf_id_t::lldp_intf_id_t(lldp_intf_id_encoding_t encoding,
-                                      std::string value) {
-   pimpl = std::shared_ptr<lldp_intf_id_impl_t>(
-      new lldp_intf_id_impl_t(
-         encoding,
-         value
-      )
-   );
-}
-lldp_intf_id_t::lldp_intf_id_t(
-   const lldp_intf_id_t& other)
-{
-   pimpl = std::make_unique<lldp_intf_id_impl_t>(
-      lldp_intf_id_impl_t(*other.pimpl));
-}
-lldp_intf_id_t&
-lldp_intf_id_t::operator=(
-   lldp_intf_id_t const & other)
-{
-   pimpl = std::shared_ptr<lldp_intf_id_impl_t>(
-      new lldp_intf_id_impl_t(*other.pimpl));
-   return *this;
-}
-
 lldp_intf_id_encoding_t
 lldp_intf_id_t::encoding() const {
    return pimpl->encoding();
@@ -760,37 +525,6 @@ operator<<(std::ostream& os, const lldp_intf_id_t& obj) {
    return operator<<(os, *obj.pimpl);
 }
 
-
-// remote system, default constructor.
-lldp_remote_system_t::lldp_remote_system_t() {
-   pimpl = std::shared_ptr<lldp_remote_system_impl_t>(
-      new lldp_remote_system_impl_t()
-   );
-}
-// remote system, full constructor.
-lldp_remote_system_t::lldp_remote_system_t(lldp_chassis_id_t chassis,
-                                                  lldp_intf_id_t port) {
-   pimpl = std::shared_ptr<lldp_remote_system_impl_t>(
-      new lldp_remote_system_impl_t(
-         chassis,
-         port
-      )
-   );
-}
-lldp_remote_system_t::lldp_remote_system_t(
-   const lldp_remote_system_t& other)
-{
-   pimpl = std::make_unique<lldp_remote_system_impl_t>(
-      lldp_remote_system_impl_t(*other.pimpl));
-}
-lldp_remote_system_t&
-lldp_remote_system_t::operator=(
-   lldp_remote_system_t const & other)
-{
-   pimpl = std::shared_ptr<lldp_remote_system_impl_t>(
-      new lldp_remote_system_impl_t(*other.pimpl));
-   return *this;
-}
 
 lldp_chassis_id_t
 lldp_remote_system_t::chassis() const {
@@ -841,45 +575,6 @@ operator<<(std::ostream& os, const lldp_remote_system_t& obj) {
    return operator<<(os, *obj.pimpl);
 }
 
-
-// remote system, default constructor.
-lldp_neighbor_t::lldp_neighbor_t() {
-   pimpl = std::shared_ptr<lldp_neighbor_impl_t>(
-      new lldp_neighbor_impl_t()
-   );
-}
-// first remote system.
-lldp_neighbor_t::lldp_neighbor_t(intf_id_t intf) {
-   pimpl = std::shared_ptr<lldp_neighbor_impl_t>(
-      new lldp_neighbor_impl_t(
-         intf
-      )
-   );
-}
-// specific remote system.
-lldp_neighbor_t::lldp_neighbor_t(intf_id_t intf,
-                                        lldp_remote_system_t remote_system) {
-   pimpl = std::shared_ptr<lldp_neighbor_impl_t>(
-      new lldp_neighbor_impl_t(
-         intf,
-         remote_system
-      )
-   );
-}
-lldp_neighbor_t::lldp_neighbor_t(
-   const lldp_neighbor_t& other)
-{
-   pimpl = std::make_unique<lldp_neighbor_impl_t>(
-      lldp_neighbor_impl_t(*other.pimpl));
-}
-lldp_neighbor_t&
-lldp_neighbor_t::operator=(
-   lldp_neighbor_t const & other)
-{
-   pimpl = std::shared_ptr<lldp_neighbor_impl_t>(
-      new lldp_neighbor_impl_t(*other.pimpl));
-   return *this;
-}
 
 intf_id_t
 lldp_neighbor_t::intf() const {
