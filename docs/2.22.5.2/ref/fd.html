@@ -1,0 +1,167 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>fd &#8212; Arista EOS SDK 2.22.5.2 reference</title>
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/eossdk.css" type="text/css" />
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="fib" href="fib.html" />
+    <link rel="prev" title="exception" href="exception.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="fib.html" title="fib"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="exception.html" title="exception"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Arista EOS SDK 2.22.5.2 reference</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href=""><strong>fd</strong></a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="fd">
+<h1><strong>fd</strong><a class="headerlink" href="#fd" title="Permalink to this headline">¶</a></h1>
+<p>File descriptor support module.</p>
+<p>The handler within this module allows you to react to events on file descriptors created in your application. Set up a network socket and then watch the fd number with the watch_* methods of the fd_handler. Watched sockets cause reaction events within the EOS agent asynchronous event loop. </p>
+<dl class="cpp type">
+<dt id="_CPPv43eos">
+<span id="_CPPv33eos"></span><span id="_CPPv23eos"></span><span id="eos"></span><span class="target" id="namespaceeos"></span><em class="property">namespace </em><code class="sig-name descname">eos</code><br /></dt>
+<dd><dl class="cpp class">
+<dt id="_CPPv4N3eos10fd_handlerE">
+<span id="_CPPv3N3eos10fd_handlerE"></span><span id="_CPPv2N3eos10fd_handlerE"></span><span id="eos::fd_handler"></span><span class="target" id="classeos_1_1fd__handler"></span><em class="property">class </em><code class="sig-name descname">fd_handler</code><a class="headerlink" href="#_CPPv4N3eos10fd_handlerE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><em>#include &lt;fd.h&gt;</em><p>This class manages file descriptors within the event loop context.</p>
+<p>There are two main components to handling file* descriptors. The ‘watch_*()’ register a file descriptor to react to events on the descriptor state. The ‘on_*()’ methods should be overridden to actually handle these changes to the file descriptor’s state. For example if you’re managing a network connection with a client, invoking ‘watch_readable(fd, true)’ will cause ‘on_readable(fd)’ to be called whenever data has been received.</p>
+<p>Note that it is not necessary to always watch_*() attributes of a file descriptor, that is, you are free to write to a socket even if watch_writeable has not been set. Continuing with the network connection example, on_writeable will be continuously called when ‘watch_writeable(fd, true)’ is set, as the descriptor is almost always writeable. If the other side of the connection overruns its TCP backlog, though, your descriptor will return an error on write, indicating that the socket is no longer writeable, and it is at that point that ‘watch_writeable(fd, true)’ should be invoked. When the other end of the connection </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="cpp function">
+<dt id="_CPPv4N3eos10fd_handler10fd_handlerEv">
+<span id="_CPPv3N3eos10fd_handler10fd_handlerEv"></span><span id="_CPPv2N3eos10fd_handler10fd_handlerEv"></span><span id="eos::fd_handler::fd_handler"></span><span class="target" id="classeos_1_1fd__handler_1aa67391a5286b289c940429d0340f6322"></span><code class="sig-name descname">fd_handler</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos10fd_handler10fd_handlerEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Creates a file descriptor handler, which can react to any number of FDs. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos10fd_handlerD0Ev">
+<span id="_CPPv3N3eos10fd_handlerD0Ev"></span><span id="_CPPv2N3eos10fd_handlerD0Ev"></span><span id="eos::fd_handler::~fd_handler"></span><span class="target" id="classeos_1_1fd__handler_1aae3d05a6ae5c9aabe7ca572cfd3beecd"></span><em class="property">virtual</em> <code class="sig-name descname">~fd_handler</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos10fd_handlerD0Ev" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos10fd_handler11on_readableEi">
+<span id="_CPPv3N3eos10fd_handler11on_readableEi"></span><span id="_CPPv2N3eos10fd_handler11on_readableEi"></span><span id="eos::fd_handler::on_readable__i"></span><span class="target" id="classeos_1_1fd__handler_1a7fcd4f42338a54572d9556ede049338a"></span><em class="property">virtual</em> void <code class="sig-name descname">on_readable</code><span class="sig-paren">(</span>int <em>fd</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos10fd_handler11on_readableEi" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Called when the file descriptor number is readable. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos10fd_handler11on_writableEi">
+<span id="_CPPv3N3eos10fd_handler11on_writableEi"></span><span id="_CPPv2N3eos10fd_handler11on_writableEi"></span><span id="eos::fd_handler::on_writable__i"></span><span class="target" id="classeos_1_1fd__handler_1a883cbca0a63088129c6617d15ff3150d"></span><em class="property">virtual</em> void <code class="sig-name descname">on_writable</code><span class="sig-paren">(</span>int <em>fd</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos10fd_handler11on_writableEi" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Called when the file descriptor number is writable. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos10fd_handler12on_exceptionEi">
+<span id="_CPPv3N3eos10fd_handler12on_exceptionEi"></span><span id="_CPPv2N3eos10fd_handler12on_exceptionEi"></span><span id="eos::fd_handler::on_exception__i"></span><span class="target" id="classeos_1_1fd__handler_1a47c4a164b3c25b19b2bfd6d258e22e23"></span><em class="property">virtual</em> void <code class="sig-name descname">on_exception</code><span class="sig-paren">(</span>int <em>fd</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos10fd_handler12on_exceptionEi" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Called when the file descriptor number has exceptions. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos10fd_handler14watch_readableEib">
+<span id="_CPPv3N3eos10fd_handler14watch_readableEib"></span><span id="_CPPv2N3eos10fd_handler14watch_readableEib"></span><span id="eos::fd_handler::watch_readable__i.b"></span><span class="target" id="classeos_1_1fd__handler_1aa072f72d630d725762da9f806fc87e08"></span>void <code class="sig-name descname">watch_readable</code><span class="sig-paren">(</span>int <em>fd</em>, bool<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos10fd_handler14watch_readableEib" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Notifies this handler when the passed file descriptor is readable. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos10fd_handler14watch_writableEib">
+<span id="_CPPv3N3eos10fd_handler14watch_writableEib"></span><span id="_CPPv2N3eos10fd_handler14watch_writableEib"></span><span id="eos::fd_handler::watch_writable__i.b"></span><span class="target" id="classeos_1_1fd__handler_1ad5c16e3a7dfb4ba8cf5f752b14fe4904"></span>void <code class="sig-name descname">watch_writable</code><span class="sig-paren">(</span>int <em>fd</em>, bool<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos10fd_handler14watch_writableEib" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Notifies this handler when the passed file descriptor is writable. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos10fd_handler15watch_exceptionEib">
+<span id="_CPPv3N3eos10fd_handler15watch_exceptionEib"></span><span id="_CPPv2N3eos10fd_handler15watch_exceptionEib"></span><span id="eos::fd_handler::watch_exception__i.b"></span><span class="target" id="classeos_1_1fd__handler_1ab2e9b5a36ab6c87bc4c5d977250cc322"></span>void <code class="sig-name descname">watch_exception</code><span class="sig-paren">(</span>int <em>fd</em>, bool<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos10fd_handler15watch_exceptionEib" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Notifies this handler when the passed file descriptor has exceptions. </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Private Members</p>
+<dl class="cpp var">
+<dt id="_CPPv4N3eos10fd_handler3fd_E">
+<span id="_CPPv3N3eos10fd_handler3fd_E"></span><span id="_CPPv2N3eos10fd_handler3fd_E"></span><span id="eos::fd_handler::fd___fd_internalP"></span><span class="target" id="classeos_1_1fd__handler_1a58e2a64c00bfae6a5f7f1297918d389e"></span>fd_internal *<code class="sig-name descname">fd_</code><a class="headerlink" href="#_CPPv4N3eos10fd_handler3fd_E" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="exception.html"
+                        title="previous chapter"><strong>exception</strong></a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="fib.html"
+                        title="next chapter"><strong>fib</strong></a></p>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="fib.html" title="fib"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="exception.html" title="exception"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Arista EOS SDK 2.22.5.2 reference</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href=""><strong>fd</strong></a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2014, Arista Networks.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.4.3.
+    </div>
+  </body>
+</html>

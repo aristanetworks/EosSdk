@@ -1,0 +1,1015 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>mpls_route &#8212; Arista EOS SDK 2.22.5.2 reference</title>
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/eossdk.css" type="text/css" />
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="mpls_vrf_label" href="mpls_vrf_label.html" />
+    <link rel="prev" title="mpls" href="mpls.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="mpls_vrf_label.html" title="mpls_vrf_label"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="mpls.html" title="mpls"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Arista EOS SDK 2.22.5.2 reference</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href=""><strong>mpls_route</strong></a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="mpls-route">
+<h1><strong>mpls_route</strong><a class="headerlink" href="#mpls-route" title="Permalink to this headline">¶</a></h1>
+<dl class="cpp type">
+<dt id="_CPPv43eos">
+<span id="_CPPv33eos"></span><span id="_CPPv23eos"></span><span id="eos"></span><span class="target" id="namespaceeos"></span><em class="property">namespace </em><code class="sig-name descname">eos</code><br /></dt>
+<dd><dl class="cpp class">
+<dt id="_CPPv4N3eos18mpls_route_handlerE">
+<span id="_CPPv3N3eos18mpls_route_handlerE"></span><span id="_CPPv2N3eos18mpls_route_handlerE"></span><span id="eos::mpls_route_handler"></span><span class="target" id="classeos_1_1mpls__route__handler"></span><em class="property">class </em><code class="sig-name descname">mpls_route_handler</code> : <em class="property">public</em> <a class="reference internal" href="acl.html#_CPPv43eos" title="eos">eos</a>::<a class="reference internal" href="base_handler.html#_CPPv4I00EN3eos12base_handlerE" title="eos::base_handler">base_handler</a>&lt;<a class="reference internal" href="#_CPPv4N3eos14mpls_route_mgrE" title="eos::mpls_route_mgr">mpls_route_mgr</a>, <a class="reference internal" href="#_CPPv4N3eos18mpls_route_handlerE" title="eos::mpls_route_handler">mpls_route_handler</a>&gt;<a class="headerlink" href="#_CPPv4N3eos18mpls_route_handlerE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><em>#include &lt;mpls_route.h&gt;</em><p>The MPLS route handler.</p>
+<p>This class provides handler APIs to react to a MPLS route’s addition/deletion in the hardware. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="cpp function">
+<dt id="_CPPv4N3eos18mpls_route_handler18mpls_route_handlerEP14mpls_route_mgr">
+<span id="_CPPv3N3eos18mpls_route_handler18mpls_route_handlerEP14mpls_route_mgr"></span><span id="_CPPv2N3eos18mpls_route_handler18mpls_route_handlerEP14mpls_route_mgr"></span><span id="eos::mpls_route_handler::mpls_route_handler__mpls_route_mgrP"></span><span class="target" id="classeos_1_1mpls__route__handler_1a540c84877679c95c38042855e95040af"></span><em class="property">explicit</em> <code class="sig-name descname">mpls_route_handler</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos14mpls_route_mgrE" title="eos::mpls_route_mgr">mpls_route_mgr</a> *<em>mgr</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos18mpls_route_handler18mpls_route_handlerEP14mpls_route_mgr" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos18mpls_route_handler18get_mpls_route_mgrEv">
+<span id="_CPPv3NK3eos18mpls_route_handler18get_mpls_route_mgrEv"></span><span id="_CPPv2NK3eos18mpls_route_handler18get_mpls_route_mgrEv"></span><span id="eos::mpls_route_handler::get_mpls_route_mgrC"></span><span class="target" id="classeos_1_1mpls__route__handler_1a1d2380a7efcb8f747ea8733fbe37d2c3"></span><em class="property">inline</em> <a class="reference internal" href="#_CPPv4N3eos14mpls_route_mgrE" title="eos::mpls_route_mgr">mpls_route_mgr</a> *<code class="sig-name descname">get_mpls_route_mgr</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos18mpls_route_handler18get_mpls_route_mgrEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos18mpls_route_handler21watch_all_mpls_routesEb">
+<span id="_CPPv3N3eos18mpls_route_handler21watch_all_mpls_routesEb"></span><span id="_CPPv2N3eos18mpls_route_handler21watch_all_mpls_routesEb"></span><span id="eos::mpls_route_handler::watch_all_mpls_routes__b"></span><span class="target" id="classeos_1_1mpls__route__handler_1a2eb74e7cada671d5c8f690b050dfd240"></span>void <code class="sig-name descname">watch_all_mpls_routes</code><span class="sig-paren">(</span>bool<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos18mpls_route_handler21watch_all_mpls_routesEb" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Register to receive a notification when any MPLS route in the hardware gets deleted or added. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos18mpls_route_handler16watch_mpls_routeERK12mpls_label_tb">
+<span id="_CPPv3N3eos18mpls_route_handler16watch_mpls_routeERK12mpls_label_tb"></span><span id="_CPPv2N3eos18mpls_route_handler16watch_mpls_routeERK12mpls_label_tb"></span><span id="eos::mpls_route_handler::watch_mpls_route__mpls_label_tCR.b"></span><span class="target" id="classeos_1_1mpls__route__handler_1a010b1f5aa8794ebfe6bb4d403d63f001"></span>void <code class="sig-name descname">watch_mpls_route</code><span class="sig-paren">(</span><a class="reference internal" href="mpls.html#_CPPv4N3eos12mpls_label_tE" title="eos::mpls_label_t">mpls_label_t</a> <em class="property">const</em> &amp;<em>label</em>, bool<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos18mpls_route_handler16watch_mpls_routeERK12mpls_label_tb" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Legacy method to register to receive a notification when a particular single-label MPLS route with the given label is added to or removed from hardware. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos18mpls_route_handler16watch_mpls_routeERK16mpls_route_key_tb">
+<span id="_CPPv3N3eos18mpls_route_handler16watch_mpls_routeERK16mpls_route_key_tb"></span><span id="_CPPv2N3eos18mpls_route_handler16watch_mpls_routeERK16mpls_route_key_tb"></span><span id="eos::mpls_route_handler::watch_mpls_route__mpls_route_key_tCR.b"></span><span class="target" id="classeos_1_1mpls__route__handler_1aa3c53ec7e3b4b1999f95887410181380"></span>void <code class="sig-name descname">watch_mpls_route</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos16mpls_route_key_tE" title="eos::mpls_route_key_t">mpls_route_key_t</a> <em class="property">const</em> &amp;<em>route_key</em>, bool<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos18mpls_route_handler16watch_mpls_routeERK16mpls_route_key_tb" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Register to receive a notification when a particular MPLS route with the given label stack is added to or removed from hardware. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos18mpls_route_handler17on_mpls_route_setE12mpls_label_t13mpls_fec_id_t">
+<span id="_CPPv3N3eos18mpls_route_handler17on_mpls_route_setE12mpls_label_t13mpls_fec_id_t"></span><span id="_CPPv2N3eos18mpls_route_handler17on_mpls_route_setE12mpls_label_t13mpls_fec_id_t"></span><span id="eos::mpls_route_handler::on_mpls_route_set__mpls_label_t.mpls_fec_id_t"></span><span class="target" id="classeos_1_1mpls__route__handler_1a505921136bca207cb9ea908ba46b3b0e"></span><em class="property">virtual</em> void <code class="sig-name descname">on_mpls_route_set</code><span class="sig-paren">(</span><a class="reference internal" href="mpls.html#_CPPv4N3eos12mpls_label_tE" title="eos::mpls_label_t">mpls_label_t</a> <em>label</em>, <a class="reference internal" href="#_CPPv4N3eos13mpls_fec_id_tE" title="eos::mpls_fec_id_t">mpls_fec_id_t</a> <em>fec</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos18mpls_route_handler17on_mpls_route_setE12mpls_label_t13mpls_fec_id_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Legacy handler for when a single-label MPLS route is to be programmed into hardware or when it is assigned a new FEC ID. Note: Only one of the on_mpls_route_set methods should be implemented. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos18mpls_route_handler17on_mpls_route_setERK16mpls_route_key_t13mpls_fec_id_t">
+<span id="_CPPv3N3eos18mpls_route_handler17on_mpls_route_setERK16mpls_route_key_t13mpls_fec_id_t"></span><span id="_CPPv2N3eos18mpls_route_handler17on_mpls_route_setERK16mpls_route_key_t13mpls_fec_id_t"></span><span id="eos::mpls_route_handler::on_mpls_route_set__mpls_route_key_tCR.mpls_fec_id_t"></span><span class="target" id="classeos_1_1mpls__route__handler_1ae3a60a040b402167132ab7bc772ef3e2"></span><em class="property">virtual</em> void <code class="sig-name descname">on_mpls_route_set</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos16mpls_route_key_tE" title="eos::mpls_route_key_t">mpls_route_key_t</a> <em class="property">const</em> &amp;<em>route_key</em>, <a class="reference internal" href="#_CPPv4N3eos13mpls_fec_id_tE" title="eos::mpls_fec_id_t">mpls_fec_id_t</a> <em>fec</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos18mpls_route_handler17on_mpls_route_setERK16mpls_route_key_t13mpls_fec_id_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Handler when an MPLS route is to be programmed into hardware or when it is assigned a new FEC ID. Note: Only one of the on_mpls_route_set methods should be implemented. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos18mpls_route_handler17on_mpls_route_delE12mpls_label_t">
+<span id="_CPPv3N3eos18mpls_route_handler17on_mpls_route_delE12mpls_label_t"></span><span id="_CPPv2N3eos18mpls_route_handler17on_mpls_route_delE12mpls_label_t"></span><span id="eos::mpls_route_handler::on_mpls_route_del__mpls_label_t"></span><span class="target" id="classeos_1_1mpls__route__handler_1a4d6bfa19b77aefaa9baa49655a6e7c2a"></span><em class="property">virtual</em> void <code class="sig-name descname">on_mpls_route_del</code><span class="sig-paren">(</span><a class="reference internal" href="mpls.html#_CPPv4N3eos12mpls_label_tE" title="eos::mpls_label_t">mpls_label_t</a> <em>label</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos18mpls_route_handler17on_mpls_route_delE12mpls_label_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Legacy handler for when a single-label MPLS route is deleted from hardware. Note: Only one of the on_mpls_route_del methods should be implemented. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos18mpls_route_handler17on_mpls_route_delERK16mpls_route_key_t">
+<span id="_CPPv3N3eos18mpls_route_handler17on_mpls_route_delERK16mpls_route_key_t"></span><span id="_CPPv2N3eos18mpls_route_handler17on_mpls_route_delERK16mpls_route_key_t"></span><span id="eos::mpls_route_handler::on_mpls_route_del__mpls_route_key_tCR"></span><span class="target" id="classeos_1_1mpls__route__handler_1a77e8ba604a4a47fafeff225671225dd8"></span><em class="property">virtual</em> void <code class="sig-name descname">on_mpls_route_del</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos16mpls_route_key_tE" title="eos::mpls_route_key_t">mpls_route_key_t</a> <em class="property">const</em> &amp;<em>route_key</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos18mpls_route_handler17on_mpls_route_delERK16mpls_route_key_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Handler when an MPLS route is deleted from hardware. Note: Only one of the on_mpls_route_del methods should be implemented. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos18mpls_route_handler15on_mpls_fec_setE13mpls_fec_id_t">
+<span id="_CPPv3N3eos18mpls_route_handler15on_mpls_fec_setE13mpls_fec_id_t"></span><span id="_CPPv2N3eos18mpls_route_handler15on_mpls_fec_setE13mpls_fec_id_t"></span><span id="eos::mpls_route_handler::on_mpls_fec_set__mpls_fec_id_t"></span><span class="target" id="classeos_1_1mpls__route__handler_1afa5906a0dab5d27c9c2499095986075f"></span><em class="property">virtual</em> void <code class="sig-name descname">on_mpls_fec_set</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos13mpls_fec_id_tE" title="eos::mpls_fec_id_t">mpls_fec_id_t</a> <em>fec</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos18mpls_route_handler15on_mpls_fec_setE13mpls_fec_id_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Handler that describes when an MPLS FEC is created or updated in hardware. This FEC represents a set of vias that one or more routes points to. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos18mpls_route_handler15on_mpls_fec_delE13mpls_fec_id_t">
+<span id="_CPPv3N3eos18mpls_route_handler15on_mpls_fec_delE13mpls_fec_id_t"></span><span id="_CPPv2N3eos18mpls_route_handler15on_mpls_fec_delE13mpls_fec_id_t"></span><span id="eos::mpls_route_handler::on_mpls_fec_del__mpls_fec_id_t"></span><span class="target" id="classeos_1_1mpls__route__handler_1a28851dcd3c686b980abb35560475652a"></span><em class="property">virtual</em> void <code class="sig-name descname">on_mpls_fec_del</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos13mpls_fec_id_tE" title="eos::mpls_fec_id_t">mpls_fec_id_t</a> <em>fec</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos18mpls_route_handler15on_mpls_fec_delE13mpls_fec_id_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Handler called when an MPLS FEC is removed. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="cpp class">
+<dt id="_CPPv4N3eos17mpls_route_iter_tE">
+<span id="_CPPv3N3eos17mpls_route_iter_tE"></span><span id="_CPPv2N3eos17mpls_route_iter_tE"></span><span id="eos::mpls_route_iter_t"></span><span class="target" id="classeos_1_1mpls__route__iter__t"></span><em class="property">class </em><code class="sig-name descname">mpls_route_iter_t</code> : <em class="property">public</em> <a class="reference internal" href="acl.html#_CPPv43eos" title="eos">eos</a>::<a class="reference internal" href="iterator.html#_CPPv4I00EN3eos9iter_baseE" title="eos::iter_base">iter_base</a>&lt;<a class="reference internal" href="#_CPPv4N3eos12mpls_route_tE" title="eos::mpls_route_t">mpls_route_t</a>, mpls_route_iter_impl&gt;<a class="headerlink" href="#_CPPv4N3eos17mpls_route_iter_tE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><em>#include &lt;mpls_route.h&gt;</em><p>An iterator over configured MPLS routes. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Private Functions</p>
+<dl class="cpp function">
+<dt id="_CPPv4N3eos17mpls_route_iter_t17mpls_route_iter_tEPC20mpls_route_iter_impl">
+<span id="_CPPv3N3eos17mpls_route_iter_t17mpls_route_iter_tEPC20mpls_route_iter_impl"></span><span id="_CPPv2N3eos17mpls_route_iter_t17mpls_route_iter_tEPC20mpls_route_iter_impl"></span><span id="eos::mpls_route_iter_t::mpls_route_iter_t__mpls_route_iter_implPC"></span><span class="target" id="classeos_1_1mpls__route__iter__t_1aa274aa5f937bc8af4f9ef393354a46a4"></span><em class="property">explicit</em> <code class="sig-name descname">mpls_route_iter_t</code><span class="sig-paren">(</span>mpls_route_iter_impl*<em class="property">const</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos17mpls_route_iter_t17mpls_route_iter_tEPC20mpls_route_iter_impl" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Friends</p>
+<dl class="friendclass">
+<dt>
+<em class="property">friend class</em> mpls_route_iter_impl</dt>
+</dl>
+
+</div>
+</dd></dl>
+
+<dl class="cpp class">
+<dt id="_CPPv4N3eos21mpls_route_via_iter_tE">
+<span id="_CPPv3N3eos21mpls_route_via_iter_tE"></span><span id="_CPPv2N3eos21mpls_route_via_iter_tE"></span><span id="eos::mpls_route_via_iter_t"></span><span class="target" id="classeos_1_1mpls__route__via__iter__t"></span><em class="property">class </em><code class="sig-name descname">mpls_route_via_iter_t</code> : <em class="property">public</em> <a class="reference internal" href="acl.html#_CPPv43eos" title="eos">eos</a>::<a class="reference internal" href="iterator.html#_CPPv4I00EN3eos9iter_baseE" title="eos::iter_base">iter_base</a>&lt;<a class="reference internal" href="#_CPPv4N3eos16mpls_route_via_tE" title="eos::mpls_route_via_t">mpls_route_via_t</a>, mpls_route_via_iter_impl&gt;<a class="headerlink" href="#_CPPv4N3eos21mpls_route_via_iter_tE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><em>#include &lt;mpls_route.h&gt;</em><p>An iterator over configured MPLS route vias. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Private Functions</p>
+<dl class="cpp function">
+<dt id="_CPPv4N3eos21mpls_route_via_iter_t21mpls_route_via_iter_tEPC24mpls_route_via_iter_impl">
+<span id="_CPPv3N3eos21mpls_route_via_iter_t21mpls_route_via_iter_tEPC24mpls_route_via_iter_impl"></span><span id="_CPPv2N3eos21mpls_route_via_iter_t21mpls_route_via_iter_tEPC24mpls_route_via_iter_impl"></span><span id="eos::mpls_route_via_iter_t::mpls_route_via_iter_t__mpls_route_via_iter_implPC"></span><span class="target" id="classeos_1_1mpls__route__via__iter__t_1a41d67b82f1d73f9ad5a5e3c9215978fa"></span><em class="property">explicit</em> <code class="sig-name descname">mpls_route_via_iter_t</code><span class="sig-paren">(</span>mpls_route_via_iter_impl*<em class="property">const</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos21mpls_route_via_iter_t21mpls_route_via_iter_tEPC24mpls_route_via_iter_impl" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Friends</p>
+<dl class="friendclass">
+<dt>
+<em class="property">friend class</em> mpls_route_via_iter_impl</dt>
+</dl>
+
+</div>
+</dd></dl>
+
+<dl class="cpp class">
+<dt id="_CPPv4N3eos24mpls_route_status_iter_tE">
+<span id="_CPPv3N3eos24mpls_route_status_iter_tE"></span><span id="_CPPv2N3eos24mpls_route_status_iter_tE"></span><span id="eos::mpls_route_status_iter_t"></span><span class="target" id="classeos_1_1mpls__route__status__iter__t"></span><em class="property">class </em><code class="sig-name descname">mpls_route_status_iter_t</code> : <em class="property">public</em> <a class="reference internal" href="acl.html#_CPPv43eos" title="eos">eos</a>::<a class="reference internal" href="iterator.html#_CPPv4I00EN3eos9iter_baseE" title="eos::iter_base">iter_base</a>&lt;<a class="reference internal" href="#_CPPv4N3eos16mpls_route_key_tE" title="eos::mpls_route_key_t">mpls_route_key_t</a>, mpls_route_status_iter_impl&gt;<a class="headerlink" href="#_CPPv4N3eos24mpls_route_status_iter_tE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><em>#include &lt;mpls_route.h&gt;</em><p>An iterator over MPLS routes in hardware. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Private Functions</p>
+<dl class="cpp function">
+<dt id="_CPPv4N3eos24mpls_route_status_iter_t24mpls_route_status_iter_tEPC27mpls_route_status_iter_impl">
+<span id="_CPPv3N3eos24mpls_route_status_iter_t24mpls_route_status_iter_tEPC27mpls_route_status_iter_impl"></span><span id="_CPPv2N3eos24mpls_route_status_iter_t24mpls_route_status_iter_tEPC27mpls_route_status_iter_impl"></span><span id="eos::mpls_route_status_iter_t::mpls_route_status_iter_t__mpls_route_status_iter_implPC"></span><span class="target" id="classeos_1_1mpls__route__status__iter__t_1a7e37ea63b14b54d0dc1e4260d6b3160e"></span><em class="property">explicit</em> <code class="sig-name descname">mpls_route_status_iter_t</code><span class="sig-paren">(</span>mpls_route_status_iter_impl*<em class="property">const</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos24mpls_route_status_iter_t24mpls_route_status_iter_tEPC27mpls_route_status_iter_impl" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Friends</p>
+<dl class="friendclass">
+<dt>
+<em class="property">friend class</em> mpls_route_status_iter_impl</dt>
+</dl>
+
+</div>
+</dd></dl>
+
+<dl class="cpp class">
+<dt id="_CPPv4N3eos28mpls_route_via_status_iter_tE">
+<span id="_CPPv3N3eos28mpls_route_via_status_iter_tE"></span><span id="_CPPv2N3eos28mpls_route_via_status_iter_tE"></span><span id="eos::mpls_route_via_status_iter_t"></span><span class="target" id="classeos_1_1mpls__route__via__status__iter__t"></span><em class="property">class </em><code class="sig-name descname">mpls_route_via_status_iter_t</code> : <em class="property">public</em> <a class="reference internal" href="acl.html#_CPPv43eos" title="eos">eos</a>::<a class="reference internal" href="iterator.html#_CPPv4I00EN3eos9iter_baseE" title="eos::iter_base">iter_base</a>&lt;<a class="reference internal" href="#_CPPv4N3eos16mpls_route_via_tE" title="eos::mpls_route_via_t">mpls_route_via_t</a>, mpls_route_via_status_iter_impl&gt;<a class="headerlink" href="#_CPPv4N3eos28mpls_route_via_status_iter_tE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><em>#include &lt;mpls_route.h&gt;</em><p>An iterator over MPLS route vias in hardware. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Private Functions</p>
+<dl class="cpp function">
+<dt id="_CPPv4N3eos28mpls_route_via_status_iter_t28mpls_route_via_status_iter_tEPC31mpls_route_via_status_iter_impl">
+<span id="_CPPv3N3eos28mpls_route_via_status_iter_t28mpls_route_via_status_iter_tEPC31mpls_route_via_status_iter_impl"></span><span id="_CPPv2N3eos28mpls_route_via_status_iter_t28mpls_route_via_status_iter_tEPC31mpls_route_via_status_iter_impl"></span><span id="eos::mpls_route_via_status_iter_t::mpls_route_via_status_iter_t__mpls_route_via_status_iter_implPC"></span><span class="target" id="classeos_1_1mpls__route__via__status__iter__t_1af68790d7edd31251c17206d3665aa47d"></span><em class="property">explicit</em> <code class="sig-name descname">mpls_route_via_status_iter_t</code><span class="sig-paren">(</span>mpls_route_via_status_iter_impl*<em class="property">const</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos28mpls_route_via_status_iter_t28mpls_route_via_status_iter_tEPC31mpls_route_via_status_iter_impl" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Friends</p>
+<dl class="friendclass">
+<dt>
+<em class="property">friend class</em> mpls_route_via_status_iter_impl</dt>
+</dl>
+
+</div>
+</dd></dl>
+
+<dl class="cpp class">
+<dt id="_CPPv4N3eos14mpls_route_mgrE">
+<span id="_CPPv3N3eos14mpls_route_mgrE"></span><span id="_CPPv2N3eos14mpls_route_mgrE"></span><span id="eos::mpls_route_mgr"></span><span class="target" id="classeos_1_1mpls__route__mgr"></span><em class="property">class </em><code class="sig-name descname">mpls_route_mgr</code> : <em class="property">public</em> <a class="reference internal" href="acl.html#_CPPv43eos" title="eos">eos</a>::<a class="reference internal" href="base_mgr.html#_CPPv4I00EN3eos8base_mgrE" title="eos::base_mgr">base_mgr</a>&lt;<a class="reference internal" href="#_CPPv4N3eos18mpls_route_handlerE" title="eos::mpls_route_handler">mpls_route_handler</a>, <a class="reference internal" href="#_CPPv4N3eos16mpls_route_key_tE" title="eos::mpls_route_key_t">mpls_route_key_t</a>&gt;<a class="headerlink" href="#_CPPv4N3eos14mpls_route_mgrE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><em>#include &lt;mpls_route.h&gt;</em><p>The IP static route manager. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="cpp function">
+<dt id="_CPPv4N3eos14mpls_route_mgrD0Ev">
+<span id="_CPPv3N3eos14mpls_route_mgrD0Ev"></span><span id="_CPPv2N3eos14mpls_route_mgrD0Ev"></span><span id="eos::mpls_route_mgr::~mpls_route_mgr"></span><span class="target" id="classeos_1_1mpls__route__mgr_1a6077f3cfeae96e33d2305565668ba957"></span><em class="property">virtual</em> <code class="sig-name descname">~mpls_route_mgr</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos14mpls_route_mgrD0Ev" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos14mpls_route_mgr11resync_initEv">
+<span id="_CPPv3N3eos14mpls_route_mgr11resync_initEv"></span><span id="_CPPv2N3eos14mpls_route_mgr11resync_initEv"></span><span id="eos::mpls_route_mgr::resync_init"></span><span class="target" id="classeos_1_1mpls__route__mgr_1af3f41c6fa6b628223c325a6b5946be0a"></span><em class="property">virtual</em> void <code class="sig-name descname">resync_init</code><span class="sig-paren">(</span><span class="sig-paren">)</span> = 0<a class="headerlink" href="#_CPPv4N3eos14mpls_route_mgr11resync_initEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Begin resync mode. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos14mpls_route_mgr15resync_completeEv">
+<span id="_CPPv3N3eos14mpls_route_mgr15resync_completeEv"></span><span id="_CPPv2N3eos14mpls_route_mgr15resync_completeEv"></span><span id="eos::mpls_route_mgr::resync_complete"></span><span class="target" id="classeos_1_1mpls__route__mgr_1affa9c219d3721424975af1204ba548f5"></span><em class="property">virtual</em> void <code class="sig-name descname">resync_complete</code><span class="sig-paren">(</span><span class="sig-paren">)</span> = 0<a class="headerlink" href="#_CPPv4N3eos14mpls_route_mgr15resync_completeEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Complete resync mode, ready for regular updates. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos14mpls_route_mgr15mpls_route_iterEv">
+<span id="_CPPv3NK3eos14mpls_route_mgr15mpls_route_iterEv"></span><span id="_CPPv2NK3eos14mpls_route_mgr15mpls_route_iterEv"></span><span id="eos::mpls_route_mgr::mpls_route_iterC"></span><span class="target" id="classeos_1_1mpls__route__mgr_1acb092c3b6401360b64305085a2e3218c"></span><em class="property">virtual</em> <a class="reference internal" href="#_CPPv4N3eos17mpls_route_iter_tE" title="eos::mpls_route_iter_t">mpls_route_iter_t</a> <code class="sig-name descname">mpls_route_iter</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em> = 0<a class="headerlink" href="#_CPPv4NK3eos14mpls_route_mgr15mpls_route_iterEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Returns an iterator over configured MPLS routes. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos14mpls_route_mgr22mpls_route_status_iterEv">
+<span id="_CPPv3NK3eos14mpls_route_mgr22mpls_route_status_iterEv"></span><span id="_CPPv2NK3eos14mpls_route_mgr22mpls_route_status_iterEv"></span><span id="eos::mpls_route_mgr::mpls_route_status_iterC"></span><span class="target" id="classeos_1_1mpls__route__mgr_1a965985d925547eb7f3d4dd4213dec6ea"></span><em class="property">virtual</em> <a class="reference internal" href="#_CPPv4N3eos24mpls_route_status_iter_tE" title="eos::mpls_route_status_iter_t">mpls_route_status_iter_t</a> <code class="sig-name descname">mpls_route_status_iter</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em> = 0<a class="headerlink" href="#_CPPv4NK3eos14mpls_route_mgr22mpls_route_status_iterEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Returns an iterator for MPLS routes in hardware. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos14mpls_route_mgr19mpls_route_via_iterERK16mpls_route_key_t">
+<span id="_CPPv3NK3eos14mpls_route_mgr19mpls_route_via_iterERK16mpls_route_key_t"></span><span id="_CPPv2NK3eos14mpls_route_mgr19mpls_route_via_iterERK16mpls_route_key_t"></span><span id="eos::mpls_route_mgr::mpls_route_via_iter__mpls_route_key_tCRC"></span><span class="target" id="classeos_1_1mpls__route__mgr_1a5a945d1d36d2c5e90f1579f5c9de70f1"></span><em class="property">virtual</em> <a class="reference internal" href="#_CPPv4N3eos21mpls_route_via_iter_tE" title="eos::mpls_route_via_iter_t">mpls_route_via_iter_t</a> <code class="sig-name descname">mpls_route_via_iter</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos16mpls_route_key_tE" title="eos::mpls_route_key_t">mpls_route_key_t</a> <em class="property">const</em>&amp;<span class="sig-paren">)</span> <em class="property">const</em> = 0<a class="headerlink" href="#_CPPv4NK3eos14mpls_route_mgr19mpls_route_via_iterERK16mpls_route_key_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Returns a configured MPLS vias iterator for a given route (key). </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos14mpls_route_mgr26mpls_route_via_status_iterEK12mpls_label_t">
+<span id="_CPPv3NK3eos14mpls_route_mgr26mpls_route_via_status_iterEK12mpls_label_t"></span><span id="_CPPv2NK3eos14mpls_route_mgr26mpls_route_via_status_iterEK12mpls_label_t"></span><span id="eos::mpls_route_mgr::mpls_route_via_status_iter__mpls_label_tCC"></span><span class="target" id="classeos_1_1mpls__route__mgr_1a1a1b75bd1b036ca963a2b0fb37e2bbc4"></span><em class="property">virtual</em> <a class="reference internal" href="#_CPPv4N3eos28mpls_route_via_status_iter_tE" title="eos::mpls_route_via_status_iter_t">mpls_route_via_status_iter_t</a> <code class="sig-name descname">mpls_route_via_status_iter</code><span class="sig-paren">(</span><a class="reference internal" href="mpls.html#_CPPv4N3eos12mpls_label_tE" title="eos::mpls_label_t">mpls_label_t</a> <em class="property">const</em><span class="sig-paren">)</span> <em class="property">const</em> = 0<a class="headerlink" href="#_CPPv4NK3eos14mpls_route_mgr26mpls_route_via_status_iterEK12mpls_label_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Legacy method that returns an iterator for MPLS vias in hardware for a given label. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos14mpls_route_mgr26mpls_route_via_status_iterERK16mpls_route_key_t">
+<span id="_CPPv3NK3eos14mpls_route_mgr26mpls_route_via_status_iterERK16mpls_route_key_t"></span><span id="_CPPv2NK3eos14mpls_route_mgr26mpls_route_via_status_iterERK16mpls_route_key_t"></span><span id="eos::mpls_route_mgr::mpls_route_via_status_iter__mpls_route_key_tCRC"></span><span class="target" id="classeos_1_1mpls__route__mgr_1a64ee1584ddc4510c9616dd5a7401c852"></span><em class="property">virtual</em> <a class="reference internal" href="#_CPPv4N3eos28mpls_route_via_status_iter_tE" title="eos::mpls_route_via_status_iter_t">mpls_route_via_status_iter_t</a> <code class="sig-name descname">mpls_route_via_status_iter</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos16mpls_route_key_tE" title="eos::mpls_route_key_t">mpls_route_key_t</a> <em class="property">const</em>&amp;<span class="sig-paren">)</span> <em class="property">const</em> = 0<a class="headerlink" href="#_CPPv4NK3eos14mpls_route_mgr26mpls_route_via_status_iterERK16mpls_route_key_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Returns an iterator for MPLS vias in hardware for a given route key. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos14mpls_route_mgr26mpls_route_via_status_iterE13mpls_fec_id_t">
+<span id="_CPPv3NK3eos14mpls_route_mgr26mpls_route_via_status_iterE13mpls_fec_id_t"></span><span id="_CPPv2NK3eos14mpls_route_mgr26mpls_route_via_status_iterE13mpls_fec_id_t"></span><span id="eos::mpls_route_mgr::mpls_route_via_status_iter__mpls_fec_id_tC"></span><span class="target" id="classeos_1_1mpls__route__mgr_1a37427ddfab1511693f178c1700474685"></span><em class="property">virtual</em> <a class="reference internal" href="#_CPPv4N3eos28mpls_route_via_status_iter_tE" title="eos::mpls_route_via_status_iter_t">mpls_route_via_status_iter_t</a> <code class="sig-name descname">mpls_route_via_status_iter</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos13mpls_fec_id_tE" title="eos::mpls_fec_id_t">mpls_fec_id_t</a><span class="sig-paren">)</span> <em class="property">const</em> = 0<a class="headerlink" href="#_CPPv4NK3eos14mpls_route_mgr26mpls_route_via_status_iterE13mpls_fec_id_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Returns an iterator for MPLS vias in hardware for a given MPLS FEC. The vias returned from this iterator are unbound, meaning they have an empty <a class="reference internal" href="#classeos_1_1mpls__route__key__t"><span class="std std-ref">mpls_route_key_t</span></a>. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos14mpls_route_mgr6existsERK16mpls_route_key_t">
+<span id="_CPPv3NK3eos14mpls_route_mgr6existsERK16mpls_route_key_t"></span><span id="_CPPv2NK3eos14mpls_route_mgr6existsERK16mpls_route_key_t"></span><span id="eos::mpls_route_mgr::exists__mpls_route_key_tCRC"></span><span class="target" id="classeos_1_1mpls__route__mgr_1a07a2cf64dc86e6a6463d4c6e92ee020a"></span><em class="property">virtual</em> bool <code class="sig-name descname">exists</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos16mpls_route_key_tE" title="eos::mpls_route_key_t">mpls_route_key_t</a> <em class="property">const</em>&amp;<span class="sig-paren">)</span> <em class="property">const</em> = 0<a class="headerlink" href="#_CPPv4NK3eos14mpls_route_mgr6existsERK16mpls_route_key_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Tests for existence of any routes matching the route key in the switch config. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos14mpls_route_mgr6existsERK16mpls_route_via_t">
+<span id="_CPPv3NK3eos14mpls_route_mgr6existsERK16mpls_route_via_t"></span><span id="_CPPv2NK3eos14mpls_route_mgr6existsERK16mpls_route_via_t"></span><span id="eos::mpls_route_mgr::exists__mpls_route_via_tCRC"></span><span class="target" id="classeos_1_1mpls__route__mgr_1aa8b1d91ce7eaa8298c2c88ccb55d8480"></span><em class="property">virtual</em> bool <code class="sig-name descname">exists</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos16mpls_route_via_tE" title="eos::mpls_route_via_t">mpls_route_via_t</a> <em class="property">const</em>&amp;<span class="sig-paren">)</span> <em class="property">const</em> = 0<a class="headerlink" href="#_CPPv4NK3eos14mpls_route_mgr6existsERK16mpls_route_via_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Tests if the given via exists in the switch config. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos14mpls_route_mgr14mpls_route_setERK12mpls_route_t">
+<span id="_CPPv3N3eos14mpls_route_mgr14mpls_route_setERK12mpls_route_t"></span><span id="_CPPv2N3eos14mpls_route_mgr14mpls_route_setERK12mpls_route_t"></span><span id="eos::mpls_route_mgr::mpls_route_set__mpls_route_tCR"></span><span class="target" id="classeos_1_1mpls__route__mgr_1a560a8a54eb95bff9173467f17a25b999"></span><em class="property">virtual</em> void <code class="sig-name descname">mpls_route_set</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos12mpls_route_tE" title="eos::mpls_route_t">mpls_route_t</a> <em class="property">const</em>&amp;<span class="sig-paren">)</span> = 0<a class="headerlink" href="#_CPPv4N3eos14mpls_route_mgr14mpls_route_setERK12mpls_route_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>MPLS route management functions. </p>
+<p>Inserts or updates MPLS static route in the switch configuration </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos14mpls_route_mgr14mpls_route_delERK16mpls_route_key_t">
+<span id="_CPPv3N3eos14mpls_route_mgr14mpls_route_delERK16mpls_route_key_t"></span><span id="_CPPv2N3eos14mpls_route_mgr14mpls_route_delERK16mpls_route_key_t"></span><span id="eos::mpls_route_mgr::mpls_route_del__mpls_route_key_tCR"></span><span class="target" id="classeos_1_1mpls__route__mgr_1ac989c325ec7ed0a59cccd60dd0e20a7d"></span><em class="property">virtual</em> void <code class="sig-name descname">mpls_route_del</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos16mpls_route_key_tE" title="eos::mpls_route_key_t">mpls_route_key_t</a> <em class="property">const</em>&amp;<span class="sig-paren">)</span> = 0<a class="headerlink" href="#_CPPv4N3eos14mpls_route_mgr14mpls_route_delERK16mpls_route_key_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Removes the MPLS route and all vias matching the route key. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos14mpls_route_mgr18mpls_route_via_setERK16mpls_route_via_t">
+<span id="_CPPv3N3eos14mpls_route_mgr18mpls_route_via_setERK16mpls_route_via_t"></span><span id="_CPPv2N3eos14mpls_route_mgr18mpls_route_via_setERK16mpls_route_via_t"></span><span id="eos::mpls_route_mgr::mpls_route_via_set__mpls_route_via_tCR"></span><span class="target" id="classeos_1_1mpls__route__mgr_1a53db1b597c557ad56787b3386b3a979a"></span><em class="property">virtual</em> void <code class="sig-name descname">mpls_route_via_set</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos16mpls_route_via_tE" title="eos::mpls_route_via_t">mpls_route_via_t</a> <em class="property">const</em>&amp;<span class="sig-paren">)</span> = 0<a class="headerlink" href="#_CPPv4N3eos14mpls_route_mgr18mpls_route_via_setERK16mpls_route_via_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Adds a via to an <a class="reference internal" href="#classeos_1_1mpls__route__t"><span class="std std-ref">mpls_route_t</span></a>. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos14mpls_route_mgr18mpls_route_via_delERK16mpls_route_via_t">
+<span id="_CPPv3N3eos14mpls_route_mgr18mpls_route_via_delERK16mpls_route_via_t"></span><span id="_CPPv2N3eos14mpls_route_mgr18mpls_route_via_delERK16mpls_route_via_t"></span><span id="eos::mpls_route_mgr::mpls_route_via_del__mpls_route_via_tCR"></span><span class="target" id="classeos_1_1mpls__route__mgr_1a8b067a9fb6e1f6a0d664c73957511335"></span><em class="property">virtual</em> void <code class="sig-name descname">mpls_route_via_del</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos16mpls_route_via_tE" title="eos::mpls_route_via_t">mpls_route_via_t</a> <em class="property">const</em>&amp;<span class="sig-paren">)</span> = 0<a class="headerlink" href="#_CPPv4N3eos14mpls_route_mgr18mpls_route_via_delERK16mpls_route_via_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Removes a via from an <a class="reference internal" href="#classeos_1_1mpls__route__t"><span class="std std-ref">mpls_route_t</span></a>. When all vias are removed, the route still exists with no nexthop information. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos14mpls_route_mgr6fec_idE12mpls_label_t">
+<span id="_CPPv3NK3eos14mpls_route_mgr6fec_idE12mpls_label_t"></span><span id="_CPPv2NK3eos14mpls_route_mgr6fec_idE12mpls_label_t"></span><span id="eos::mpls_route_mgr::fec_id__mpls_label_tC"></span><span class="target" id="classeos_1_1mpls__route__mgr_1aa50944a4436a94405922b62e81738bc4"></span><em class="property">virtual</em> <a class="reference internal" href="#_CPPv4N3eos13mpls_fec_id_tE" title="eos::mpls_fec_id_t">mpls_fec_id_t</a> <code class="sig-name descname">fec_id</code><span class="sig-paren">(</span><a class="reference internal" href="mpls.html#_CPPv4N3eos12mpls_label_tE" title="eos::mpls_label_t">mpls_label_t</a><span class="sig-paren">)</span> <em class="property">const</em> = 0<a class="headerlink" href="#_CPPv4NK3eos14mpls_route_mgr6fec_idE12mpls_label_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Legacy method that returns the FEC ID corresponding to the given MPLS label if this route is programmed in hardware, or an empty <a class="reference internal" href="#classeos_1_1mpls__fec__id__t"><span class="std std-ref">mpls_fec_id_t</span></a> otherwise. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos14mpls_route_mgr6fec_idERK16mpls_route_key_t">
+<span id="_CPPv3NK3eos14mpls_route_mgr6fec_idERK16mpls_route_key_t"></span><span id="_CPPv2NK3eos14mpls_route_mgr6fec_idERK16mpls_route_key_t"></span><span id="eos::mpls_route_mgr::fec_id__mpls_route_key_tCRC"></span><span class="target" id="classeos_1_1mpls__route__mgr_1a089fe9886b4f4f31ff7e1e68711a8fb4"></span><em class="property">virtual</em> <a class="reference internal" href="#_CPPv4N3eos13mpls_fec_id_tE" title="eos::mpls_fec_id_t">mpls_fec_id_t</a> <code class="sig-name descname">fec_id</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos16mpls_route_key_tE" title="eos::mpls_route_key_t">mpls_route_key_t</a> <em class="property">const</em>&amp;<span class="sig-paren">)</span> <em class="property">const</em> = 0<a class="headerlink" href="#_CPPv4NK3eos14mpls_route_mgr6fec_idERK16mpls_route_key_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Returns the FEC ID corresponding to the given MPLS route key if this route is programmed in hardware, or an empty <a class="reference internal" href="#classeos_1_1mpls__fec__id__t"><span class="std std-ref">mpls_fec_id_t</span></a> otherwise. Note: The metric value in the route key is not used </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos14mpls_route_mgr6metricE12mpls_label_t">
+<span id="_CPPv3NK3eos14mpls_route_mgr6metricE12mpls_label_t"></span><span id="_CPPv2NK3eos14mpls_route_mgr6metricE12mpls_label_t"></span><span id="eos::mpls_route_mgr::metric__mpls_label_tC"></span><span class="target" id="classeos_1_1mpls__route__mgr_1affbd1a2a12ccca10189926a509854470"></span><em class="property">virtual</em> <a class="reference internal" href="#_CPPv4N3eos19mpls_route_metric_tE" title="eos::mpls_route_metric_t">mpls_route_metric_t</a> <code class="sig-name descname">metric</code><span class="sig-paren">(</span><a class="reference internal" href="mpls.html#_CPPv4N3eos12mpls_label_tE" title="eos::mpls_label_t">mpls_label_t</a><span class="sig-paren">)</span> <em class="property">const</em> = 0<a class="headerlink" href="#_CPPv4NK3eos14mpls_route_mgr6metricE12mpls_label_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Legacy method that returns the active metric that is being used in hardware to forward traffic for the given label, or 0 if the label does not have any active vias programmed. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos14mpls_route_mgr6metricERK16mpls_route_key_t">
+<span id="_CPPv3NK3eos14mpls_route_mgr6metricERK16mpls_route_key_t"></span><span id="_CPPv2NK3eos14mpls_route_mgr6metricERK16mpls_route_key_t"></span><span id="eos::mpls_route_mgr::metric__mpls_route_key_tCRC"></span><span class="target" id="classeos_1_1mpls__route__mgr_1afd8b4bf5296cc214db66561448970fc8"></span><em class="property">virtual</em> <a class="reference internal" href="#_CPPv4N3eos19mpls_route_metric_tE" title="eos::mpls_route_metric_t">mpls_route_metric_t</a> <code class="sig-name descname">metric</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos16mpls_route_key_tE" title="eos::mpls_route_key_t">mpls_route_key_t</a> <em class="property">const</em>&amp;<span class="sig-paren">)</span> <em class="property">const</em> = 0<a class="headerlink" href="#_CPPv4NK3eos14mpls_route_mgr6metricERK16mpls_route_key_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Returns the active metric that is being used in hardware to forward traffic for the given MPLS route key, or 0 if the route key does not have any active vias programmed. Note: The metric value in the route key is not used </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Protected Functions</p>
+<dl class="cpp function">
+<dt id="_CPPv4N3eos14mpls_route_mgr14mpls_route_mgrEv">
+<span id="_CPPv3N3eos14mpls_route_mgr14mpls_route_mgrEv"></span><span id="_CPPv2N3eos14mpls_route_mgr14mpls_route_mgrEv"></span><span id="eos::mpls_route_mgr::mpls_route_mgr"></span><span class="target" id="classeos_1_1mpls__route__mgr_1a88fc57cef70c16dda26ff77779c718f7"></span><code class="sig-name descname">mpls_route_mgr</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos14mpls_route_mgr14mpls_route_mgrEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Private Members</p>
+<dl class="cpp var">
+<dt>
+<span class="target" id="classeos_1_1mpls__route__mgr_1a34f2448b2d00c3a29a89399819c26fe2"></span><code class="sig-name descname">mpls_route_mgr</code></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Friends</p>
+<dl class="friendclass">
+<dt>
+<em class="property">friend class</em> mpls_route_handler</dt>
+</dl>
+
+</div>
+</dd></dl>
+
+</dd></dl>
+
+<div class="section" id="type-definitions-in-mpls-route">
+<h2>Type definitions in <strong>mpls_route</strong><a class="headerlink" href="#type-definitions-in-mpls-route" title="Permalink to this headline">¶</a></h2>
+<dl class="cpp type">
+<dt>
+<span class="target" id="namespaceeos"></span><em class="property">namespace </em><code class="sig-name descname">eos</code><br /></dt>
+<dd><div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Typedefs</p>
+<dl class="cpp type">
+<dt id="_CPPv4N3eos19mpls_route_metric_tE">
+<span id="_CPPv3N3eos19mpls_route_metric_tE"></span><span id="_CPPv2N3eos19mpls_route_metric_tE"></span><span id="eos::mpls_route_metric_t"></span><span class="target" id="types_2mpls__route_8h_1a567a82c79deeded8d52d4ad290d8e2fa"></span><em class="property">typedef </em>uint8_t <code class="sig-name descname">mpls_route_metric_t</code><a class="headerlink" href="#_CPPv4N3eos19mpls_route_metric_tE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>1..255; default/null is 0. </p>
+</dd></dl>
+
+</div>
+<dl class="cpp class">
+<dt id="_CPPv4N3eos16mpls_route_key_tE">
+<span id="_CPPv3N3eos16mpls_route_key_tE"></span><span id="_CPPv2N3eos16mpls_route_key_tE"></span><span id="eos::mpls_route_key_t"></span><span class="target" id="classeos_1_1mpls__route__key__t"></span><em class="property">class </em><code class="sig-name descname">mpls_route_key_t</code><a class="headerlink" href="#_CPPv4N3eos16mpls_route_key_tE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><em>#include &lt;mpls_route.h&gt;</em><p>An MPLS route key is used for MPLS RIB configuration. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="cpp function">
+<dt id="_CPPv4N3eos16mpls_route_key_t16mpls_route_key_tEv">
+<span id="_CPPv3N3eos16mpls_route_key_t16mpls_route_key_tEv"></span><span id="_CPPv2N3eos16mpls_route_key_t16mpls_route_key_tEv"></span><span id="eos::mpls_route_key_t::mpls_route_key_t"></span><span class="target" id="classeos_1_1mpls__route__key__t_1a09f894f17fdb90f3a82e8784a5cb11fc"></span><code class="sig-name descname">mpls_route_key_t</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos16mpls_route_key_t16mpls_route_key_tEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos16mpls_route_key_t16mpls_route_key_tE12mpls_label_t19mpls_route_metric_t">
+<span id="_CPPv3N3eos16mpls_route_key_t16mpls_route_key_tE12mpls_label_t19mpls_route_metric_t"></span><span id="_CPPv2N3eos16mpls_route_key_t16mpls_route_key_tE12mpls_label_t19mpls_route_metric_t"></span><span id="eos::mpls_route_key_t::mpls_route_key_t__mpls_label_t.mpls_route_metric_t"></span><span class="target" id="classeos_1_1mpls__route__key__t_1a89262630b2e4b1663ed282fde0a13a6a"></span><code class="sig-name descname">mpls_route_key_t</code><span class="sig-paren">(</span><a class="reference internal" href="mpls.html#_CPPv4N3eos12mpls_label_tE" title="eos::mpls_label_t">mpls_label_t</a> <em>top_label</em>, <a class="reference internal" href="#_CPPv4N3eos19mpls_route_metric_tE" title="eos::mpls_route_metric_t">mpls_route_metric_t</a> <em>metric</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos16mpls_route_key_t16mpls_route_key_tE12mpls_label_t19mpls_route_metric_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Constructor taking an ingress MPLS route label and a metric. <dl class="simple">
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><a class="reference internal" href="mpls.html#classeos_1_1mpls__label__t"><span class="std std-ref"><span class="pre">mpls_label_t</span></span></a></code>: The MPLS label to match on ingress for this route. </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">mpls_route_metric_t</span></code>: A metric value between 0 and 255. If it is set to 0, the routing agent will assume a default metric value of 100. </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos16mpls_route_key_t16mpls_route_key_tERKNSt6vectorI12mpls_label_tEE19mpls_route_metric_t">
+<span id="_CPPv3N3eos16mpls_route_key_t16mpls_route_key_tERKNSt6vectorI12mpls_label_tEE19mpls_route_metric_t"></span><span id="_CPPv2N3eos16mpls_route_key_t16mpls_route_key_tERKNSt6vectorI12mpls_label_tEE19mpls_route_metric_t"></span><span id="eos::mpls_route_key_t::mpls_route_key_t__std::vector:mpls_label_t:CR.mpls_route_metric_t"></span><span class="target" id="classeos_1_1mpls__route__key__t_1abc7567aa5acf83a34e2666649694e37c"></span><code class="sig-name descname">mpls_route_key_t</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::vector&lt;<a class="reference internal" href="mpls.html#_CPPv4N3eos12mpls_label_tE" title="eos::mpls_label_t">mpls_label_t</a>&gt; <em class="property">const</em> &amp;<em>labels</em>, <a class="reference internal" href="#_CPPv4N3eos19mpls_route_metric_tE" title="eos::mpls_route_metric_t">mpls_route_metric_t</a> <em>metric</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos16mpls_route_key_t16mpls_route_key_tERKNSt6vectorI12mpls_label_tEE19mpls_route_metric_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Constructor taking a list of ingress MPLS route labels and a metric. <dl class="simple">
+<dt><strong>Parameters</strong></dt><dd><ul class="breatheparameterlist simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">const</span></code>: std::vector&lt;mpls_label_t&gt; The MPLS labels to match on ingress for this route. </p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">mpls_route_metric_t</span></code>: A metric value between 0 and 255. If it is set to 0, the routing agent will assume a default metric value of 100. </p></li>
+</ul>
+</dd>
+</dl>
+</p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos16mpls_route_key_t16mpls_route_key_tERK16mpls_route_key_t">
+<span id="_CPPv3N3eos16mpls_route_key_t16mpls_route_key_tERK16mpls_route_key_t"></span><span id="_CPPv2N3eos16mpls_route_key_t16mpls_route_key_tERK16mpls_route_key_t"></span><span id="eos::mpls_route_key_t::mpls_route_key_t__mpls_route_key_tCR"></span><span class="target" id="classeos_1_1mpls__route__key__t_1a81e6d4591c21fcfd5ac743f472f775ad"></span><code class="sig-name descname">mpls_route_key_t</code><span class="sig-paren">(</span><em class="property">const</em> <a class="reference internal" href="#_CPPv4N3eos16mpls_route_key_t16mpls_route_key_tERK16mpls_route_key_t" title="eos::mpls_route_key_t::mpls_route_key_t">mpls_route_key_t</a> &amp;<em>other</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos16mpls_route_key_t16mpls_route_key_tERK16mpls_route_key_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos16mpls_route_key_taSERK16mpls_route_key_t">
+<span id="_CPPv3N3eos16mpls_route_key_taSERK16mpls_route_key_t"></span><span id="_CPPv2N3eos16mpls_route_key_taSERK16mpls_route_key_t"></span><span id="eos::mpls_route_key_t::assign-operator__mpls_route_key_tCR"></span><span class="target" id="classeos_1_1mpls__route__key__t_1afc7288cd7f21fc83fdee7df01801f287"></span><a class="reference internal" href="#_CPPv4N3eos16mpls_route_key_tE" title="eos::mpls_route_key_t">mpls_route_key_t</a> &amp;<code class="sig-name descname">operator=</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos16mpls_route_key_tE" title="eos::mpls_route_key_t">mpls_route_key_t</a> <em class="property">const</em> &amp;<em>other</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos16mpls_route_key_taSERK16mpls_route_key_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos16mpls_route_key_t6labelsEv">
+<span id="_CPPv3NK3eos16mpls_route_key_t6labelsEv"></span><span id="_CPPv2NK3eos16mpls_route_key_t6labelsEv"></span><span id="eos::mpls_route_key_t::labelsC"></span><span class="target" id="classeos_1_1mpls__route__key__t_1afc4f111f25594fb8b24fd48f7ae57552"></span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::vector&lt;<a class="reference internal" href="mpls.html#_CPPv4N3eos12mpls_label_tE" title="eos::mpls_label_t">mpls_label_t</a>&gt; <em class="property">const</em> &amp;<code class="sig-name descname">labels</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos16mpls_route_key_t6labelsEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Getter for ‘labels’: a list of labels ( [ TOP, …, BOT ] ) to match on ingress route lookup. 0 is the null metric; valid MPLS routes must have a metric in range 1..255. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos16mpls_route_key_t9labels_isERKNSt6vectorI12mpls_label_tEE">
+<span id="_CPPv3N3eos16mpls_route_key_t9labels_isERKNSt6vectorI12mpls_label_tEE"></span><span id="_CPPv2N3eos16mpls_route_key_t9labels_isERKNSt6vectorI12mpls_label_tEE"></span><span id="eos::mpls_route_key_t::labels_is__std::vector:mpls_label_t:CR"></span><span class="target" id="classeos_1_1mpls__route__key__t_1acccc4a23bfc0af4df0b765220d6a478b"></span>void <code class="sig-name descname">labels_is</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::vector&lt;<a class="reference internal" href="mpls.html#_CPPv4N3eos12mpls_label_tE" title="eos::mpls_label_t">mpls_label_t</a>&gt; <em class="property">const</em> &amp;<em>labels</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos16mpls_route_key_t9labels_isERKNSt6vectorI12mpls_label_tEE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Setter for ‘labels’. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos16mpls_route_key_t9label_setE8uint32_tRK12mpls_label_t">
+<span id="_CPPv3N3eos16mpls_route_key_t9label_setE8uint32_tRK12mpls_label_t"></span><span id="_CPPv2N3eos16mpls_route_key_t9label_setE8uint32_tRK12mpls_label_t"></span><span id="eos::mpls_route_key_t::label_set__uint32_t.mpls_label_tCR"></span><span class="target" id="classeos_1_1mpls__route__key__t_1a12ec63608027d87cb0eeb0f565a10bad"></span>void <code class="sig-name descname">label_set</code><span class="sig-paren">(</span>uint32_t <em>index</em>, <a class="reference internal" href="mpls.html#_CPPv4N3eos12mpls_label_tE" title="eos::mpls_label_t">mpls_label_t</a> <em class="property">const</em> &amp;<em>value</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos16mpls_route_key_t9label_setE8uint32_tRK12mpls_label_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos16mpls_route_key_t9label_delE8uint32_t">
+<span id="_CPPv3N3eos16mpls_route_key_t9label_delE8uint32_t"></span><span id="_CPPv2N3eos16mpls_route_key_t9label_delE8uint32_t"></span><span id="eos::mpls_route_key_t::label_del__uint32_t"></span><span class="target" id="classeos_1_1mpls__route__key__t_1a61c29135b00531112018e77d0b9ea4b6"></span>void <code class="sig-name descname">label_del</code><span class="sig-paren">(</span>uint32_t <em>index</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos16mpls_route_key_t9label_delE8uint32_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos16mpls_route_key_t6metricEv">
+<span id="_CPPv3NK3eos16mpls_route_key_t6metricEv"></span><span id="_CPPv2NK3eos16mpls_route_key_t6metricEv"></span><span id="eos::mpls_route_key_t::metricC"></span><span class="target" id="classeos_1_1mpls__route__key__t_1a23511e31411108d16348b11327d3a38d"></span><a class="reference internal" href="#_CPPv4N3eos19mpls_route_metric_tE" title="eos::mpls_route_metric_t">mpls_route_metric_t</a> <code class="sig-name descname">metric</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos16mpls_route_key_t6metricEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Getter for ‘metric’: the MPLS route metric. Lower metric routes are preferred. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos16mpls_route_key_t9metric_isE19mpls_route_metric_t">
+<span id="_CPPv3N3eos16mpls_route_key_t9metric_isE19mpls_route_metric_t"></span><span id="_CPPv2N3eos16mpls_route_key_t9metric_isE19mpls_route_metric_t"></span><span id="eos::mpls_route_key_t::metric_is__mpls_route_metric_t"></span><span class="target" id="classeos_1_1mpls__route__key__t_1a827c955291fab91d407e645439c171c5"></span>void <code class="sig-name descname">metric_is</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos19mpls_route_metric_tE" title="eos::mpls_route_metric_t">mpls_route_metric_t</a> <em>metric</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos16mpls_route_key_t9metric_isE19mpls_route_metric_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Setter for ‘metric’. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos16mpls_route_key_t9top_labelEv">
+<span id="_CPPv3NK3eos16mpls_route_key_t9top_labelEv"></span><span id="_CPPv2NK3eos16mpls_route_key_t9top_labelEv"></span><span id="eos::mpls_route_key_t::top_labelC"></span><span class="target" id="classeos_1_1mpls__route__key__t_1a03af3a62c432498ea0fedb3b458350e5"></span><a class="reference internal" href="mpls.html#_CPPv4N3eos12mpls_label_tE" title="eos::mpls_label_t">mpls_label_t</a> <code class="sig-name descname">top_label</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos16mpls_route_key_t9top_labelEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Getter for the label to match on ingress route lookup. This API exists for legacy reasons, from when only one label could be matched. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos16mpls_route_key_t12top_label_isE12mpls_label_t">
+<span id="_CPPv3N3eos16mpls_route_key_t12top_label_isE12mpls_label_t"></span><span id="_CPPv2N3eos16mpls_route_key_t12top_label_isE12mpls_label_t"></span><span id="eos::mpls_route_key_t::top_label_is__mpls_label_t"></span><span class="target" id="classeos_1_1mpls__route__key__t_1a42e6a88c775c48eca14709f71f06fc24"></span>void <code class="sig-name descname">top_label_is</code><span class="sig-paren">(</span><a class="reference internal" href="mpls.html#_CPPv4N3eos12mpls_label_tE" title="eos::mpls_label_t">mpls_label_t</a> <em>top_label</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos16mpls_route_key_t12top_label_isE12mpls_label_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Replaces the label stack with a new vector only containing the given top_label. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos16mpls_route_key_teqERK16mpls_route_key_t">
+<span id="_CPPv3NK3eos16mpls_route_key_teqERK16mpls_route_key_t"></span><span id="_CPPv2NK3eos16mpls_route_key_teqERK16mpls_route_key_t"></span><span id="eos::mpls_route_key_t::eq-operator__mpls_route_key_tCRC"></span><span class="target" id="classeos_1_1mpls__route__key__t_1a22700af7e6241a68d614dc2df58c0fd7"></span>bool <code class="sig-name descname">operator==</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos16mpls_route_key_tE" title="eos::mpls_route_key_t">mpls_route_key_t</a> <em class="property">const</em> &amp;<em>other</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos16mpls_route_key_teqERK16mpls_route_key_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos16mpls_route_key_tneERK16mpls_route_key_t">
+<span id="_CPPv3NK3eos16mpls_route_key_tneERK16mpls_route_key_t"></span><span id="_CPPv2NK3eos16mpls_route_key_tneERK16mpls_route_key_t"></span><span id="eos::mpls_route_key_t::neq-operator__mpls_route_key_tCRC"></span><span class="target" id="classeos_1_1mpls__route__key__t_1ac557c31c1ebcd4418cbd3076773fd3d6"></span>bool <code class="sig-name descname">operator!=</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos16mpls_route_key_tE" title="eos::mpls_route_key_t">mpls_route_key_t</a> <em class="property">const</em> &amp;<em>other</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos16mpls_route_key_tneERK16mpls_route_key_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos16mpls_route_key_tltERK16mpls_route_key_t">
+<span id="_CPPv3NK3eos16mpls_route_key_tltERK16mpls_route_key_t"></span><span id="_CPPv2NK3eos16mpls_route_key_tltERK16mpls_route_key_t"></span><span id="eos::mpls_route_key_t::lt-operator__mpls_route_key_tCRC"></span><span class="target" id="classeos_1_1mpls__route__key__t_1acd3bbcad5cb42670316e7d1facf859ee"></span>bool <code class="sig-name descname">operator&lt;</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos16mpls_route_key_tE" title="eos::mpls_route_key_t">mpls_route_key_t</a> <em class="property">const</em> &amp;<em>other</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos16mpls_route_key_tltERK16mpls_route_key_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos16mpls_route_key_t4hashEv">
+<span id="_CPPv3NK3eos16mpls_route_key_t4hashEv"></span><span id="_CPPv2NK3eos16mpls_route_key_t4hashEv"></span><span id="eos::mpls_route_key_t::hashC"></span><span class="target" id="classeos_1_1mpls__route__key__t_1a1378f552c5ebc309ef5f4e22fe4ff2ab"></span>uint32_t <code class="sig-name descname">hash</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos16mpls_route_key_t4hashEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>The hash function for type <a class="reference internal" href="#classeos_1_1mpls__route__key__t"><span class="std std-ref">mpls_route_key_t</span></a>. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos16mpls_route_key_t6mix_meER8hash_mix">
+<span id="_CPPv3NK3eos16mpls_route_key_t6mix_meER8hash_mix"></span><span id="_CPPv2NK3eos16mpls_route_key_t6mix_meER8hash_mix"></span><span id="eos::mpls_route_key_t::mix_me__hash_mixRC"></span><span class="target" id="classeos_1_1mpls__route__key__t_1a7d72919a9306391025f1063b608fd42d"></span>void <code class="sig-name descname">mix_me</code><span class="sig-paren">(</span><a class="reference internal" href="hash_mix.html#_CPPv4N3eos8hash_mixE" title="eos::hash_mix">hash_mix</a> &amp;<em>h</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos16mpls_route_key_t6mix_meER8hash_mix" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>The hash mix function for type <a class="reference internal" href="#classeos_1_1mpls__route__key__t"><span class="std std-ref">mpls_route_key_t</span></a>. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos16mpls_route_key_t9to_stringEv">
+<span id="_CPPv3NK3eos16mpls_route_key_t9to_stringEv"></span><span id="_CPPv2NK3eos16mpls_route_key_t9to_stringEv"></span><span id="eos::mpls_route_key_t::to_stringC"></span><span class="target" id="classeos_1_1mpls__route__key__t_1a68020f01cf648176ccdd244cbbbd12b3"></span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::string <code class="sig-name descname">to_string</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos16mpls_route_key_t9to_stringEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Returns a string representation of the current object’s values. </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Static Functions</p>
+<dl class="cpp function">
+<dt id="_CPPv4N3eos16mpls_route_key_tnwENSt6size_tEPv">
+<span id="_CPPv3N3eos16mpls_route_key_tnwENSt6size_tEPv"></span><span id="_CPPv2N3eos16mpls_route_key_tnwENSt6size_tEPv"></span><span id="eos::mpls_route_key_t::new-operator__std::s.voidP"></span><span class="target" id="classeos_1_1mpls__route__key__t_1aef414cfb3e45e4563dd32074726f47cd"></span><em class="property">static</em> <em class="property">inline</em> void *<code class="sig-name descname">operator new</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::size_t, void *<em>ptr</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos16mpls_route_key_tnwENSt6size_tEPv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos16mpls_route_key_tnwENSt6size_tE">
+<span id="_CPPv3N3eos16mpls_route_key_tnwENSt6size_tE"></span><span id="_CPPv2N3eos16mpls_route_key_tnwENSt6size_tE"></span><span id="eos::mpls_route_key_t::new-operator__std::s"></span><span class="target" id="classeos_1_1mpls__route__key__t_1ab8e0405fe962d23b61c79313f79b3acd"></span><em class="property">static</em> void *<code class="sig-name descname">operator new</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::size_t<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos16mpls_route_key_tnwENSt6size_tE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos16mpls_route_key_tdlEPv">
+<span id="_CPPv3N3eos16mpls_route_key_tdlEPv"></span><span id="_CPPv2N3eos16mpls_route_key_tdlEPv"></span><span id="eos::mpls_route_key_t::delete-operator__voidP"></span><span class="target" id="classeos_1_1mpls__route__key__t_1a75d56d605166fb673011b27dc5f30563"></span><em class="property">static</em> void <code class="sig-name descname">operator delete</code><span class="sig-paren">(</span>void*<span class="sig-paren">)</span> <em class="property">noexcept</em><a class="headerlink" href="#_CPPv4N3eos16mpls_route_key_tdlEPv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Private Members</p>
+<dl class="cpp var">
+<dt id="_CPPv4N3eos16mpls_route_key_t5pimplE">
+<span id="_CPPv3N3eos16mpls_route_key_t5pimplE"></span><span id="_CPPv2N3eos16mpls_route_key_t5pimplE"></span><span id="eos::mpls_route_key_t::pimpl__std::shared_ptr:mpls_route_key_impl_t:"></span><span class="target" id="classeos_1_1mpls__route__key__t_1a196afafb7623570fb9e5ef6c9e777629"></span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::shared_ptr&lt;mpls_route_key_impl_t&gt; <code class="sig-name descname">pimpl</code><a class="headerlink" href="#_CPPv4N3eos16mpls_route_key_t5pimplE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Friends</p>
+<dl class="cpp function">
+<dt id="_CPPv4N3eos16mpls_route_key_tlsERNSt7ostreamERK16mpls_route_key_t">
+<span id="_CPPv3N3eos16mpls_route_key_tlsERNSt7ostreamERK16mpls_route_key_t"></span><span id="_CPPv2N3eos16mpls_route_key_tlsERNSt7ostreamERK16mpls_route_key_t"></span><span id="eos::mpls_route_key_t::lshift-operator__osR.mpls_route_key_tCR"></span><span class="target" id="classeos_1_1mpls__route__key__t_1a85cb2a74b1d039bfd9bd14753f9bf342"></span><em class="property">friend</em> <a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::ostream &amp;<code class="sig-name descname">operator&lt;&lt;</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::ostream &amp;<em>os</em>, <em class="property">const</em> <a class="reference internal" href="#_CPPv4N3eos16mpls_route_key_tE" title="eos::mpls_route_key_t">mpls_route_key_t</a> &amp;<em>obj</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos16mpls_route_key_tlsERNSt7ostreamERK16mpls_route_key_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>A utility stream operator that adds a string representation of <a class="reference internal" href="#classeos_1_1mpls__route__key__t"><span class="std std-ref">mpls_route_key_t</span></a> to the ostream. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="cpp class">
+<dt id="_CPPv4N3eos12mpls_route_tE">
+<span id="_CPPv3N3eos12mpls_route_tE"></span><span id="_CPPv2N3eos12mpls_route_tE"></span><span id="eos::mpls_route_t"></span><span class="target" id="classeos_1_1mpls__route__t"></span><em class="property">class </em><code class="sig-name descname">mpls_route_t</code><a class="headerlink" href="#_CPPv4N3eos12mpls_route_tE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><em>#include &lt;mpls_route.h&gt;</em><p>An MPLS v4/v6 static route. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="cpp function">
+<dt id="_CPPv4N3eos12mpls_route_t12mpls_route_tEv">
+<span id="_CPPv3N3eos12mpls_route_t12mpls_route_tEv"></span><span id="_CPPv2N3eos12mpls_route_t12mpls_route_tEv"></span><span id="eos::mpls_route_t::mpls_route_t"></span><span class="target" id="classeos_1_1mpls__route__t_1ab25fd3e6fd7ab3319cbd3dd510e5264a"></span><code class="sig-name descname">mpls_route_t</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos12mpls_route_t12mpls_route_tEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Default value constructor. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos12mpls_route_t12mpls_route_tE16mpls_route_key_t">
+<span id="_CPPv3N3eos12mpls_route_t12mpls_route_tE16mpls_route_key_t"></span><span id="_CPPv2N3eos12mpls_route_t12mpls_route_tE16mpls_route_key_t"></span><span id="eos::mpls_route_t::mpls_route_t__mpls_route_key_t"></span><span class="target" id="classeos_1_1mpls__route__t_1acc7505eb7f565555bf05e953aa11d484"></span><em class="property">explicit</em> <code class="sig-name descname">mpls_route_t</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos16mpls_route_key_tE" title="eos::mpls_route_key_t">mpls_route_key_t</a> <em>key</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos12mpls_route_t12mpls_route_tE16mpls_route_key_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>MPLS route constructor taking an MPLS route key. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos12mpls_route_t12mpls_route_tERK12mpls_route_t">
+<span id="_CPPv3N3eos12mpls_route_t12mpls_route_tERK12mpls_route_t"></span><span id="_CPPv2N3eos12mpls_route_t12mpls_route_tERK12mpls_route_t"></span><span id="eos::mpls_route_t::mpls_route_t__mpls_route_tCR"></span><span class="target" id="classeos_1_1mpls__route__t_1a45fe6e306b5f3121a289acc12ac32af7"></span><code class="sig-name descname">mpls_route_t</code><span class="sig-paren">(</span><em class="property">const</em> <a class="reference internal" href="#_CPPv4N3eos12mpls_route_t12mpls_route_tERK12mpls_route_t" title="eos::mpls_route_t::mpls_route_t">mpls_route_t</a> &amp;<em>other</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos12mpls_route_t12mpls_route_tERK12mpls_route_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos12mpls_route_taSERK12mpls_route_t">
+<span id="_CPPv3N3eos12mpls_route_taSERK12mpls_route_t"></span><span id="_CPPv2N3eos12mpls_route_taSERK12mpls_route_t"></span><span id="eos::mpls_route_t::assign-operator__mpls_route_tCR"></span><span class="target" id="classeos_1_1mpls__route__t_1af0c99e0590a69ac9e65c4df54162f445"></span><a class="reference internal" href="#_CPPv4N3eos12mpls_route_tE" title="eos::mpls_route_t">mpls_route_t</a> &amp;<code class="sig-name descname">operator=</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos12mpls_route_tE" title="eos::mpls_route_t">mpls_route_t</a> <em class="property">const</em> &amp;<em>other</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos12mpls_route_taSERK12mpls_route_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos12mpls_route_t3keyEv">
+<span id="_CPPv3NK3eos12mpls_route_t3keyEv"></span><span id="_CPPv2NK3eos12mpls_route_t3keyEv"></span><span id="eos::mpls_route_t::keyC"></span><span class="target" id="classeos_1_1mpls__route__t_1a54c79bc4d2741baf225b0d9fcde6454a"></span><a class="reference internal" href="#_CPPv4N3eos16mpls_route_key_tE" title="eos::mpls_route_key_t">mpls_route_key_t</a> <code class="sig-name descname">key</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos12mpls_route_t3keyEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Getter for ‘key’: the MPLS route key. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos12mpls_route_t6key_isE16mpls_route_key_t">
+<span id="_CPPv3N3eos12mpls_route_t6key_isE16mpls_route_key_t"></span><span id="_CPPv2N3eos12mpls_route_t6key_isE16mpls_route_key_t"></span><span id="eos::mpls_route_t::key_is__mpls_route_key_t"></span><span class="target" id="classeos_1_1mpls__route__t_1a1cdf3ac4e514a57cc6f8854a194d174a"></span>void <code class="sig-name descname">key_is</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos16mpls_route_key_tE" title="eos::mpls_route_key_t">mpls_route_key_t</a> <em>key</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos12mpls_route_t6key_isE16mpls_route_key_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Setter for ‘key’. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos12mpls_route_teqERK12mpls_route_t">
+<span id="_CPPv3NK3eos12mpls_route_teqERK12mpls_route_t"></span><span id="_CPPv2NK3eos12mpls_route_teqERK12mpls_route_t"></span><span id="eos::mpls_route_t::eq-operator__mpls_route_tCRC"></span><span class="target" id="classeos_1_1mpls__route__t_1ae196bfddf37ffe601a7bd1b1766cdf24"></span>bool <code class="sig-name descname">operator==</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos12mpls_route_tE" title="eos::mpls_route_t">mpls_route_t</a> <em class="property">const</em> &amp;<em>other</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos12mpls_route_teqERK12mpls_route_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos12mpls_route_tneERK12mpls_route_t">
+<span id="_CPPv3NK3eos12mpls_route_tneERK12mpls_route_t"></span><span id="_CPPv2NK3eos12mpls_route_tneERK12mpls_route_t"></span><span id="eos::mpls_route_t::neq-operator__mpls_route_tCRC"></span><span class="target" id="classeos_1_1mpls__route__t_1aee4b48a4bc2df0a0985cb8abace993ab"></span>bool <code class="sig-name descname">operator!=</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos12mpls_route_tE" title="eos::mpls_route_t">mpls_route_t</a> <em class="property">const</em> &amp;<em>other</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos12mpls_route_tneERK12mpls_route_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos12mpls_route_t4hashEv">
+<span id="_CPPv3NK3eos12mpls_route_t4hashEv"></span><span id="_CPPv2NK3eos12mpls_route_t4hashEv"></span><span id="eos::mpls_route_t::hashC"></span><span class="target" id="classeos_1_1mpls__route__t_1a189d67879e2587bdd1b7f6693e131d0b"></span>uint32_t <code class="sig-name descname">hash</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos12mpls_route_t4hashEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>The hash function for type <a class="reference internal" href="#classeos_1_1mpls__route__t"><span class="std std-ref">mpls_route_t</span></a>. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos12mpls_route_t6mix_meER8hash_mix">
+<span id="_CPPv3NK3eos12mpls_route_t6mix_meER8hash_mix"></span><span id="_CPPv2NK3eos12mpls_route_t6mix_meER8hash_mix"></span><span id="eos::mpls_route_t::mix_me__hash_mixRC"></span><span class="target" id="classeos_1_1mpls__route__t_1ad3a8d84056fd6a994410d428edee27f2"></span>void <code class="sig-name descname">mix_me</code><span class="sig-paren">(</span><a class="reference internal" href="hash_mix.html#_CPPv4N3eos8hash_mixE" title="eos::hash_mix">hash_mix</a> &amp;<em>h</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos12mpls_route_t6mix_meER8hash_mix" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>The hash mix function for type <a class="reference internal" href="#classeos_1_1mpls__route__t"><span class="std std-ref">mpls_route_t</span></a>. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos12mpls_route_t9to_stringEv">
+<span id="_CPPv3NK3eos12mpls_route_t9to_stringEv"></span><span id="_CPPv2NK3eos12mpls_route_t9to_stringEv"></span><span id="eos::mpls_route_t::to_stringC"></span><span class="target" id="classeos_1_1mpls__route__t_1a4c212bbb4f568dd20793a74ba40719f4"></span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::string <code class="sig-name descname">to_string</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos12mpls_route_t9to_stringEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Returns a string representation of the current object’s values. </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Static Functions</p>
+<dl class="cpp function">
+<dt id="_CPPv4N3eos12mpls_route_tnwENSt6size_tEPv">
+<span id="_CPPv3N3eos12mpls_route_tnwENSt6size_tEPv"></span><span id="_CPPv2N3eos12mpls_route_tnwENSt6size_tEPv"></span><span id="eos::mpls_route_t::new-operator__std::s.voidP"></span><span class="target" id="classeos_1_1mpls__route__t_1aefb541a486d12de0efa8d78444ef8666"></span><em class="property">static</em> <em class="property">inline</em> void *<code class="sig-name descname">operator new</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::size_t, void *<em>ptr</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos12mpls_route_tnwENSt6size_tEPv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos12mpls_route_tnwENSt6size_tE">
+<span id="_CPPv3N3eos12mpls_route_tnwENSt6size_tE"></span><span id="_CPPv2N3eos12mpls_route_tnwENSt6size_tE"></span><span id="eos::mpls_route_t::new-operator__std::s"></span><span class="target" id="classeos_1_1mpls__route__t_1a728328e95f48a2a16465dbdf3915dd81"></span><em class="property">static</em> void *<code class="sig-name descname">operator new</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::size_t<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos12mpls_route_tnwENSt6size_tE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos12mpls_route_tdlEPv">
+<span id="_CPPv3N3eos12mpls_route_tdlEPv"></span><span id="_CPPv2N3eos12mpls_route_tdlEPv"></span><span id="eos::mpls_route_t::delete-operator__voidP"></span><span class="target" id="classeos_1_1mpls__route__t_1ab7cd04b8b0de9b7942d3491b9cb23555"></span><em class="property">static</em> void <code class="sig-name descname">operator delete</code><span class="sig-paren">(</span>void*<span class="sig-paren">)</span> <em class="property">noexcept</em><a class="headerlink" href="#_CPPv4N3eos12mpls_route_tdlEPv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Private Members</p>
+<dl class="cpp var">
+<dt id="_CPPv4N3eos12mpls_route_t5pimplE">
+<span id="_CPPv3N3eos12mpls_route_t5pimplE"></span><span id="_CPPv2N3eos12mpls_route_t5pimplE"></span><span id="eos::mpls_route_t::pimpl__std::shared_ptr:mpls_route_impl_t:"></span><span class="target" id="classeos_1_1mpls__route__t_1a8978ad18ea72624e4a8ba032533feb20"></span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::shared_ptr&lt;mpls_route_impl_t&gt; <code class="sig-name descname">pimpl</code><a class="headerlink" href="#_CPPv4N3eos12mpls_route_t5pimplE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Friends</p>
+<dl class="cpp function">
+<dt id="_CPPv4N3eos12mpls_route_tlsERNSt7ostreamERK12mpls_route_t">
+<span id="_CPPv3N3eos12mpls_route_tlsERNSt7ostreamERK12mpls_route_t"></span><span id="_CPPv2N3eos12mpls_route_tlsERNSt7ostreamERK12mpls_route_t"></span><span id="eos::mpls_route_t::lshift-operator__osR.mpls_route_tCR"></span><span class="target" id="classeos_1_1mpls__route__t_1af2df49962d6acd8bab29481e3c8dcf00"></span><em class="property">friend</em> <a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::ostream &amp;<code class="sig-name descname">operator&lt;&lt;</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::ostream &amp;<em>os</em>, <em class="property">const</em> <a class="reference internal" href="#_CPPv4N3eos12mpls_route_tE" title="eos::mpls_route_t">mpls_route_t</a> &amp;<em>obj</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos12mpls_route_tlsERNSt7ostreamERK12mpls_route_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>A utility stream operator that adds a string representation of <a class="reference internal" href="#classeos_1_1mpls__route__t"><span class="std std-ref">mpls_route_t</span></a> to the ostream. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="cpp class">
+<dt id="_CPPv4N3eos16mpls_route_via_tE">
+<span id="_CPPv3N3eos16mpls_route_via_tE"></span><span id="_CPPv2N3eos16mpls_route_via_tE"></span><span id="eos::mpls_route_via_t"></span><span class="target" id="classeos_1_1mpls__route__via__t"></span><em class="property">class </em><code class="sig-name descname">mpls_route_via_t</code><a class="headerlink" href="#_CPPv4N3eos16mpls_route_via_tE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><em>#include &lt;mpls_route.h&gt;</em><p>An MPLS route via, defining the action to take for a given MPLS route. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="cpp function">
+<dt id="_CPPv4N3eos16mpls_route_via_t16mpls_route_via_tEv">
+<span id="_CPPv3N3eos16mpls_route_via_t16mpls_route_via_tEv"></span><span id="_CPPv2N3eos16mpls_route_via_t16mpls_route_via_tEv"></span><span id="eos::mpls_route_via_t::mpls_route_via_t"></span><span class="target" id="classeos_1_1mpls__route__via__t_1a3790c908cb6d77dcedee745ceb84b7e7"></span><code class="sig-name descname">mpls_route_via_t</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos16mpls_route_via_t16mpls_route_via_tEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos16mpls_route_via_t16mpls_route_via_tE16mpls_route_key_t">
+<span id="_CPPv3N3eos16mpls_route_via_t16mpls_route_via_tE16mpls_route_key_t"></span><span id="_CPPv2N3eos16mpls_route_via_t16mpls_route_via_tE16mpls_route_key_t"></span><span id="eos::mpls_route_via_t::mpls_route_via_t__mpls_route_key_t"></span><span class="target" id="classeos_1_1mpls__route__via__t_1a097a431878862338f0dd3c8382e53a0e"></span><em class="property">explicit</em> <code class="sig-name descname">mpls_route_via_t</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos16mpls_route_key_tE" title="eos::mpls_route_key_t">mpls_route_key_t</a> <em>route_key</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos16mpls_route_via_t16mpls_route_via_tE16mpls_route_key_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos16mpls_route_via_t16mpls_route_via_tE16mpls_route_key_t13mpls_action_t">
+<span id="_CPPv3N3eos16mpls_route_via_t16mpls_route_via_tE16mpls_route_key_t13mpls_action_t"></span><span id="_CPPv2N3eos16mpls_route_via_t16mpls_route_via_tE16mpls_route_key_t13mpls_action_t"></span><span id="eos::mpls_route_via_t::mpls_route_via_t__mpls_route_key_t.mpls_action_t"></span><span class="target" id="classeos_1_1mpls__route__via__t_1aed8de7a20ca45359c23e5c559d85dd20"></span><em class="property">explicit</em> <code class="sig-name descname">mpls_route_via_t</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos16mpls_route_key_tE" title="eos::mpls_route_key_t">mpls_route_key_t</a> <em>route_key</em>, <a class="reference internal" href="mpls.html#_CPPv4N3eos13mpls_action_tE" title="eos::mpls_action_t">mpls_action_t</a> <em>label_action</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos16mpls_route_via_t16mpls_route_via_tE16mpls_route_key_t13mpls_action_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos16mpls_route_via_t16mpls_route_via_tERK16mpls_route_via_t">
+<span id="_CPPv3N3eos16mpls_route_via_t16mpls_route_via_tERK16mpls_route_via_t"></span><span id="_CPPv2N3eos16mpls_route_via_t16mpls_route_via_tERK16mpls_route_via_t"></span><span id="eos::mpls_route_via_t::mpls_route_via_t__mpls_route_via_tCR"></span><span class="target" id="classeos_1_1mpls__route__via__t_1a9125d42e4cd9c72a8782fc82a8032bce"></span><code class="sig-name descname">mpls_route_via_t</code><span class="sig-paren">(</span><em class="property">const</em> <a class="reference internal" href="#_CPPv4N3eos16mpls_route_via_t16mpls_route_via_tERK16mpls_route_via_t" title="eos::mpls_route_via_t::mpls_route_via_t">mpls_route_via_t</a> &amp;<em>other</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos16mpls_route_via_t16mpls_route_via_tERK16mpls_route_via_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos16mpls_route_via_taSERK16mpls_route_via_t">
+<span id="_CPPv3N3eos16mpls_route_via_taSERK16mpls_route_via_t"></span><span id="_CPPv2N3eos16mpls_route_via_taSERK16mpls_route_via_t"></span><span id="eos::mpls_route_via_t::assign-operator__mpls_route_via_tCR"></span><span class="target" id="classeos_1_1mpls__route__via__t_1abcf609d098f37c8b2779319382e92da6"></span><a class="reference internal" href="#_CPPv4N3eos16mpls_route_via_tE" title="eos::mpls_route_via_t">mpls_route_via_t</a> &amp;<code class="sig-name descname">operator=</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos16mpls_route_via_tE" title="eos::mpls_route_via_t">mpls_route_via_t</a> <em class="property">const</em> &amp;<em>other</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos16mpls_route_via_taSERK16mpls_route_via_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos16mpls_route_via_t9route_keyEv">
+<span id="_CPPv3NK3eos16mpls_route_via_t9route_keyEv"></span><span id="_CPPv2NK3eos16mpls_route_via_t9route_keyEv"></span><span id="eos::mpls_route_via_t::route_keyC"></span><span class="target" id="classeos_1_1mpls__route__via__t_1aaa826ba99ff0f82d3a7d63da2de3e44e"></span><a class="reference internal" href="#_CPPv4N3eos16mpls_route_key_tE" title="eos::mpls_route_key_t">mpls_route_key_t</a> <code class="sig-name descname">route_key</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos16mpls_route_via_t9route_keyEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos16mpls_route_via_t12route_key_isE16mpls_route_key_t">
+<span id="_CPPv3N3eos16mpls_route_via_t12route_key_isE16mpls_route_key_t"></span><span id="_CPPv2N3eos16mpls_route_via_t12route_key_isE16mpls_route_key_t"></span><span id="eos::mpls_route_via_t::route_key_is__mpls_route_key_t"></span><span class="target" id="classeos_1_1mpls__route__via__t_1a40d95cc2a4c1b1b0b0915e54f00df338"></span>void <code class="sig-name descname">route_key_is</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos16mpls_route_key_tE" title="eos::mpls_route_key_t">mpls_route_key_t</a> <em>route_key</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos16mpls_route_via_t12route_key_isE16mpls_route_key_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos16mpls_route_via_t3hopEv">
+<span id="_CPPv3NK3eos16mpls_route_via_t3hopEv"></span><span id="_CPPv2NK3eos16mpls_route_via_t3hopEv"></span><span id="eos::mpls_route_via_t::hopC"></span><span class="target" id="classeos_1_1mpls__route__via__t_1a58cf7caee5d7c89801a0b83abd8803cf"></span><a class="reference internal" href="ip.html#_CPPv4N3eos9ip_addr_tE" title="eos::ip_addr_t">ip_addr_t</a> <code class="sig-name descname">hop</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos16mpls_route_via_t3hopEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Getter for ‘hop’: IP v4/v6 nexthop address (for decap and IP forward). </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos16mpls_route_via_t6hop_isERK9ip_addr_t">
+<span id="_CPPv3N3eos16mpls_route_via_t6hop_isERK9ip_addr_t"></span><span id="_CPPv2N3eos16mpls_route_via_t6hop_isERK9ip_addr_t"></span><span id="eos::mpls_route_via_t::hop_is__ip_addr_tCR"></span><span class="target" id="classeos_1_1mpls__route__via__t_1ac133a7eb6e4e1274c32409bde1328f74"></span>void <code class="sig-name descname">hop_is</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#_CPPv4N3eos9ip_addr_tE" title="eos::ip_addr_t">ip_addr_t</a> <em class="property">const</em> &amp;<em>hop</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos16mpls_route_via_t6hop_isERK9ip_addr_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Setter for ‘hop’. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos16mpls_route_via_t4intfEv">
+<span id="_CPPv3NK3eos16mpls_route_via_t4intfEv"></span><span id="_CPPv2NK3eos16mpls_route_via_t4intfEv"></span><span id="eos::mpls_route_via_t::intfC"></span><span class="target" id="classeos_1_1mpls__route__via__t_1aa769d90764ae86a7fb7700165399d7c6"></span><a class="reference internal" href="intf.html#_CPPv4N3eos9intf_id_tE" title="eos::intf_id_t">intf_id_t</a> <code class="sig-name descname">intf</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos16mpls_route_via_t4intfEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Getter for ‘intf’: sets the nexthop interface. Use the named interface if not a default <a class="reference internal" href="intf.html#classeos_1_1intf__id__t"><span class="std std-ref">intf_id_t</span></a>. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos16mpls_route_via_t7intf_isERK9intf_id_t">
+<span id="_CPPv3N3eos16mpls_route_via_t7intf_isERK9intf_id_t"></span><span id="_CPPv2N3eos16mpls_route_via_t7intf_isERK9intf_id_t"></span><span id="eos::mpls_route_via_t::intf_is__intf_id_tCR"></span><span class="target" id="classeos_1_1mpls__route__via__t_1a5253d5023c529b56717bb4e9319ce684"></span>void <code class="sig-name descname">intf_is</code><span class="sig-paren">(</span><a class="reference internal" href="intf.html#_CPPv4N3eos9intf_id_tE" title="eos::intf_id_t">intf_id_t</a> <em class="property">const</em> &amp;<em>intf</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos16mpls_route_via_t7intf_isERK9intf_id_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Setter for ‘intf’. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos16mpls_route_via_t14pushswap_labelEv">
+<span id="_CPPv3NK3eos16mpls_route_via_t14pushswap_labelEv"></span><span id="_CPPv2NK3eos16mpls_route_via_t14pushswap_labelEv"></span><span id="eos::mpls_route_via_t::pushswap_labelC"></span><span class="target" id="classeos_1_1mpls__route__via__t_1afb901cfaa414d591cb7d9bd00e26bab3"></span><a class="reference internal" href="mpls.html#_CPPv4N3eos12mpls_label_tE" title="eos::mpls_label_t">mpls_label_t</a> <code class="sig-name descname">pushswap_label</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos16mpls_route_via_t14pushswap_labelEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Getter for ‘pushswap_label’: push or swap this label. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos16mpls_route_via_t17pushswap_label_isE12mpls_label_t">
+<span id="_CPPv3N3eos16mpls_route_via_t17pushswap_label_isE12mpls_label_t"></span><span id="_CPPv2N3eos16mpls_route_via_t17pushswap_label_isE12mpls_label_t"></span><span id="eos::mpls_route_via_t::pushswap_label_is__mpls_label_t"></span><span class="target" id="classeos_1_1mpls__route__via__t_1a5ae7b26a536874c3333605f2cae8868c"></span>void <code class="sig-name descname">pushswap_label_is</code><span class="sig-paren">(</span><a class="reference internal" href="mpls.html#_CPPv4N3eos12mpls_label_tE" title="eos::mpls_label_t">mpls_label_t</a> <em>pushswap_label</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos16mpls_route_via_t17pushswap_label_isE12mpls_label_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Setter for ‘pushswap_label’. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos16mpls_route_via_t12label_actionEv">
+<span id="_CPPv3NK3eos16mpls_route_via_t12label_actionEv"></span><span id="_CPPv2NK3eos16mpls_route_via_t12label_actionEv"></span><span id="eos::mpls_route_via_t::label_actionC"></span><span class="target" id="classeos_1_1mpls__route__via__t_1af3e755515b62c5b8cdc1a2bae589802b"></span><a class="reference internal" href="mpls.html#_CPPv4N3eos13mpls_action_tE" title="eos::mpls_action_t">mpls_action_t</a> <code class="sig-name descname">label_action</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos16mpls_route_via_t12label_actionEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Getter for ‘label_action’: perform this MPLS operation. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos16mpls_route_via_t15label_action_isE13mpls_action_t">
+<span id="_CPPv3N3eos16mpls_route_via_t15label_action_isE13mpls_action_t"></span><span id="_CPPv2N3eos16mpls_route_via_t15label_action_isE13mpls_action_t"></span><span id="eos::mpls_route_via_t::label_action_is__mpls_action_t"></span><span class="target" id="classeos_1_1mpls__route__via__t_1a77e000b465246f77ef4a426f9adbc58e"></span>void <code class="sig-name descname">label_action_is</code><span class="sig-paren">(</span><a class="reference internal" href="mpls.html#_CPPv4N3eos13mpls_action_tE" title="eos::mpls_action_t">mpls_action_t</a> <em>label_action</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos16mpls_route_via_t15label_action_isE13mpls_action_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Setter for ‘label_action’. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos16mpls_route_via_t8ttl_modeEv">
+<span id="_CPPv3NK3eos16mpls_route_via_t8ttl_modeEv"></span><span id="_CPPv2NK3eos16mpls_route_via_t8ttl_modeEv"></span><span id="eos::mpls_route_via_t::ttl_modeC"></span><span class="target" id="classeos_1_1mpls__route__via__t_1a21d78c6de09fdb886260c7ebcc0bb36f"></span><a class="reference internal" href="mpls.html#_CPPv4N3eos15mpls_ttl_mode_tE" title="eos::mpls_ttl_mode_t">mpls_ttl_mode_t</a> <code class="sig-name descname">ttl_mode</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos16mpls_route_via_t8ttl_modeEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Getter for ‘ttl_mode’: applies to push and pop. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos16mpls_route_via_t11ttl_mode_isE15mpls_ttl_mode_t">
+<span id="_CPPv3N3eos16mpls_route_via_t11ttl_mode_isE15mpls_ttl_mode_t"></span><span id="_CPPv2N3eos16mpls_route_via_t11ttl_mode_isE15mpls_ttl_mode_t"></span><span id="eos::mpls_route_via_t::ttl_mode_is__mpls_ttl_mode_t"></span><span class="target" id="classeos_1_1mpls__route__via__t_1a13affe6a8164ce768c15b238977ea2c6"></span>void <code class="sig-name descname">ttl_mode_is</code><span class="sig-paren">(</span><a class="reference internal" href="mpls.html#_CPPv4N3eos15mpls_ttl_mode_tE" title="eos::mpls_ttl_mode_t">mpls_ttl_mode_t</a> <em>ttl_mode</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos16mpls_route_via_t11ttl_mode_isE15mpls_ttl_mode_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Setter for ‘ttl_mode’. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos16mpls_route_via_t12payload_typeEv">
+<span id="_CPPv3NK3eos16mpls_route_via_t12payload_typeEv"></span><span id="_CPPv2NK3eos16mpls_route_via_t12payload_typeEv"></span><span id="eos::mpls_route_via_t::payload_typeC"></span><span class="target" id="classeos_1_1mpls__route__via__t_1a96a855bcf404ccd62e506122e5a87773"></span><a class="reference internal" href="mpls.html#_CPPv4N3eos19mpls_payload_type_tE" title="eos::mpls_payload_type_t">mpls_payload_type_t</a> <code class="sig-name descname">payload_type</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos16mpls_route_via_t12payload_typeEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Getter for ‘payload_type’: used to assign ethertype after final pop. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos16mpls_route_via_t15payload_type_isE19mpls_payload_type_t">
+<span id="_CPPv3N3eos16mpls_route_via_t15payload_type_isE19mpls_payload_type_t"></span><span id="_CPPv2N3eos16mpls_route_via_t15payload_type_isE19mpls_payload_type_t"></span><span id="eos::mpls_route_via_t::payload_type_is__mpls_payload_type_t"></span><span class="target" id="classeos_1_1mpls__route__via__t_1a42f1e8480a5bbba5eaa12edefcd51598"></span>void <code class="sig-name descname">payload_type_is</code><span class="sig-paren">(</span><a class="reference internal" href="mpls.html#_CPPv4N3eos19mpls_payload_type_tE" title="eos::mpls_payload_type_t">mpls_payload_type_t</a> <em>payload_type</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos16mpls_route_via_t15payload_type_isE19mpls_payload_type_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Setter for ‘payload_type’. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos16mpls_route_via_t15skip_egress_aclEv">
+<span id="_CPPv3NK3eos16mpls_route_via_t15skip_egress_aclEv"></span><span id="_CPPv2NK3eos16mpls_route_via_t15skip_egress_aclEv"></span><span id="eos::mpls_route_via_t::skip_egress_aclC"></span><span class="target" id="classeos_1_1mpls__route__via__t_1a2b7bad7423348b8e6a83954909659934"></span>bool <code class="sig-name descname">skip_egress_acl</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos16mpls_route_via_t15skip_egress_aclEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Getter for ‘skip_egress_acl’: set if matching packets should ignore the egress ACL. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos16mpls_route_via_t18skip_egress_acl_isEb">
+<span id="_CPPv3N3eos16mpls_route_via_t18skip_egress_acl_isEb"></span><span id="_CPPv2N3eos16mpls_route_via_t18skip_egress_acl_isEb"></span><span id="eos::mpls_route_via_t::skip_egress_acl_is__b"></span><span class="target" id="classeos_1_1mpls__route__via__t_1acf5b1e027f97dd086fc2a914d809a70a"></span>void <code class="sig-name descname">skip_egress_acl_is</code><span class="sig-paren">(</span>bool <em>skip_egress_acl</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos16mpls_route_via_t18skip_egress_acl_isEb" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Setter for ‘skip_egress_acl’. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos16mpls_route_via_t13nexthop_groupEv">
+<span id="_CPPv3NK3eos16mpls_route_via_t13nexthop_groupEv"></span><span id="_CPPv2NK3eos16mpls_route_via_t13nexthop_groupEv"></span><span id="eos::mpls_route_via_t::nexthop_groupC"></span><span class="target" id="classeos_1_1mpls__route__via__t_1a85177912d207d904d0ad6fabcbc68f50"></span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::string <code class="sig-name descname">nexthop_group</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos16mpls_route_via_t13nexthop_groupEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Getter for ‘nexthop_group’: set when packets are forwarded into a nexthop- group. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos16mpls_route_via_t16nexthop_group_isENSt6stringE">
+<span id="_CPPv3N3eos16mpls_route_via_t16nexthop_group_isENSt6stringE"></span><span id="_CPPv2N3eos16mpls_route_via_t16nexthop_group_isENSt6stringE"></span><span id="eos::mpls_route_via_t::nexthop_group_is__ss"></span><span class="target" id="classeos_1_1mpls__route__via__t_1a55c688a17d57e2e2088c28165b52d397"></span>void <code class="sig-name descname">nexthop_group_is</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::string <em>nexthop_group</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos16mpls_route_via_t16nexthop_group_isENSt6stringE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Setter for ‘nexthop_group’. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos16mpls_route_via_teqERK16mpls_route_via_t">
+<span id="_CPPv3NK3eos16mpls_route_via_teqERK16mpls_route_via_t"></span><span id="_CPPv2NK3eos16mpls_route_via_teqERK16mpls_route_via_t"></span><span id="eos::mpls_route_via_t::eq-operator__mpls_route_via_tCRC"></span><span class="target" id="classeos_1_1mpls__route__via__t_1af3e8a1e1ac6fad3e3a60bfbc7d08db83"></span>bool <code class="sig-name descname">operator==</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos16mpls_route_via_tE" title="eos::mpls_route_via_t">mpls_route_via_t</a> <em class="property">const</em> &amp;<em>other</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos16mpls_route_via_teqERK16mpls_route_via_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos16mpls_route_via_tneERK16mpls_route_via_t">
+<span id="_CPPv3NK3eos16mpls_route_via_tneERK16mpls_route_via_t"></span><span id="_CPPv2NK3eos16mpls_route_via_tneERK16mpls_route_via_t"></span><span id="eos::mpls_route_via_t::neq-operator__mpls_route_via_tCRC"></span><span class="target" id="classeos_1_1mpls__route__via__t_1a61e9e9e26273404219e2560ec32bd611"></span>bool <code class="sig-name descname">operator!=</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos16mpls_route_via_tE" title="eos::mpls_route_via_t">mpls_route_via_t</a> <em class="property">const</em> &amp;<em>other</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos16mpls_route_via_tneERK16mpls_route_via_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos16mpls_route_via_t4hashEv">
+<span id="_CPPv3NK3eos16mpls_route_via_t4hashEv"></span><span id="_CPPv2NK3eos16mpls_route_via_t4hashEv"></span><span id="eos::mpls_route_via_t::hashC"></span><span class="target" id="classeos_1_1mpls__route__via__t_1ac24bf57e826293cca6539598de7b2537"></span>uint32_t <code class="sig-name descname">hash</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos16mpls_route_via_t4hashEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>The hash function for type <a class="reference internal" href="#classeos_1_1mpls__route__via__t"><span class="std std-ref">mpls_route_via_t</span></a>. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos16mpls_route_via_t6mix_meER8hash_mix">
+<span id="_CPPv3NK3eos16mpls_route_via_t6mix_meER8hash_mix"></span><span id="_CPPv2NK3eos16mpls_route_via_t6mix_meER8hash_mix"></span><span id="eos::mpls_route_via_t::mix_me__hash_mixRC"></span><span class="target" id="classeos_1_1mpls__route__via__t_1a2e8d60848b24f2c6051dfd69a3f6da85"></span>void <code class="sig-name descname">mix_me</code><span class="sig-paren">(</span><a class="reference internal" href="hash_mix.html#_CPPv4N3eos8hash_mixE" title="eos::hash_mix">hash_mix</a> &amp;<em>h</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos16mpls_route_via_t6mix_meER8hash_mix" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>The hash mix function for type <a class="reference internal" href="#classeos_1_1mpls__route__via__t"><span class="std std-ref">mpls_route_via_t</span></a>. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos16mpls_route_via_t9to_stringEv">
+<span id="_CPPv3NK3eos16mpls_route_via_t9to_stringEv"></span><span id="_CPPv2NK3eos16mpls_route_via_t9to_stringEv"></span><span id="eos::mpls_route_via_t::to_stringC"></span><span class="target" id="classeos_1_1mpls__route__via__t_1af21bcf0b4612faad5fdf6132307c00ef"></span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::string <code class="sig-name descname">to_string</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos16mpls_route_via_t9to_stringEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Returns a string representation of the current object’s values. </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Static Functions</p>
+<dl class="cpp function">
+<dt id="_CPPv4N3eos16mpls_route_via_tnwENSt6size_tEPv">
+<span id="_CPPv3N3eos16mpls_route_via_tnwENSt6size_tEPv"></span><span id="_CPPv2N3eos16mpls_route_via_tnwENSt6size_tEPv"></span><span id="eos::mpls_route_via_t::new-operator__std::s.voidP"></span><span class="target" id="classeos_1_1mpls__route__via__t_1a41ed9d1f936a5ec0b3732ca49ed0784f"></span><em class="property">static</em> <em class="property">inline</em> void *<code class="sig-name descname">operator new</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::size_t, void *<em>ptr</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos16mpls_route_via_tnwENSt6size_tEPv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos16mpls_route_via_tnwENSt6size_tE">
+<span id="_CPPv3N3eos16mpls_route_via_tnwENSt6size_tE"></span><span id="_CPPv2N3eos16mpls_route_via_tnwENSt6size_tE"></span><span id="eos::mpls_route_via_t::new-operator__std::s"></span><span class="target" id="classeos_1_1mpls__route__via__t_1a9aac19e86e3dd65fdc66c01a873ab3e6"></span><em class="property">static</em> void *<code class="sig-name descname">operator new</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::size_t<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos16mpls_route_via_tnwENSt6size_tE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos16mpls_route_via_tdlEPv">
+<span id="_CPPv3N3eos16mpls_route_via_tdlEPv"></span><span id="_CPPv2N3eos16mpls_route_via_tdlEPv"></span><span id="eos::mpls_route_via_t::delete-operator__voidP"></span><span class="target" id="classeos_1_1mpls__route__via__t_1afedcce4325c7f7e4d525335cf6c38a1f"></span><em class="property">static</em> void <code class="sig-name descname">operator delete</code><span class="sig-paren">(</span>void*<span class="sig-paren">)</span> <em class="property">noexcept</em><a class="headerlink" href="#_CPPv4N3eos16mpls_route_via_tdlEPv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Private Members</p>
+<dl class="cpp var">
+<dt id="_CPPv4N3eos16mpls_route_via_t5pimplE">
+<span id="_CPPv3N3eos16mpls_route_via_t5pimplE"></span><span id="_CPPv2N3eos16mpls_route_via_t5pimplE"></span><span id="eos::mpls_route_via_t::pimpl__std::shared_ptr:mpls_route_via_impl_t:"></span><span class="target" id="classeos_1_1mpls__route__via__t_1a2a9e24d2e08343302d31223a328524b4"></span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::shared_ptr&lt;mpls_route_via_impl_t&gt; <code class="sig-name descname">pimpl</code><a class="headerlink" href="#_CPPv4N3eos16mpls_route_via_t5pimplE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Friends</p>
+<dl class="cpp function">
+<dt id="_CPPv4N3eos16mpls_route_via_tlsERNSt7ostreamERK16mpls_route_via_t">
+<span id="_CPPv3N3eos16mpls_route_via_tlsERNSt7ostreamERK16mpls_route_via_t"></span><span id="_CPPv2N3eos16mpls_route_via_tlsERNSt7ostreamERK16mpls_route_via_t"></span><span id="eos::mpls_route_via_t::lshift-operator__osR.mpls_route_via_tCR"></span><span class="target" id="classeos_1_1mpls__route__via__t_1a0cc25be91edd4329f81dd117f0260d77"></span><em class="property">friend</em> <a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::ostream &amp;<code class="sig-name descname">operator&lt;&lt;</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::ostream &amp;<em>os</em>, <em class="property">const</em> <a class="reference internal" href="#_CPPv4N3eos16mpls_route_via_tE" title="eos::mpls_route_via_t">mpls_route_via_t</a> &amp;<em>obj</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos16mpls_route_via_tlsERNSt7ostreamERK16mpls_route_via_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>A utility stream operator that adds a string representation of <a class="reference internal" href="#classeos_1_1mpls__route__via__t"><span class="std std-ref">mpls_route_via_t</span></a> to the ostream. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="cpp class">
+<dt id="_CPPv4N3eos13mpls_fec_id_tE">
+<span id="_CPPv3N3eos13mpls_fec_id_tE"></span><span id="_CPPv2N3eos13mpls_fec_id_tE"></span><span id="eos::mpls_fec_id_t"></span><span class="target" id="classeos_1_1mpls__fec__id__t"></span><em class="property">class </em><code class="sig-name descname">mpls_fec_id_t</code><a class="headerlink" href="#_CPPv4N3eos13mpls_fec_id_tE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><em>#include &lt;mpls_route.h&gt;</em><p>Represents a forward equivalency class (FEC) for an MPLS route. One or more routes points to a FEC, and the FEC corresponds to a set of MPLS vias that are programmed into hardware. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="cpp function">
+<dt id="_CPPv4N3eos13mpls_fec_id_t13mpls_fec_id_tEv">
+<span id="_CPPv3N3eos13mpls_fec_id_t13mpls_fec_id_tEv"></span><span id="_CPPv2N3eos13mpls_fec_id_t13mpls_fec_id_tEv"></span><span id="eos::mpls_fec_id_t::mpls_fec_id_t"></span><span class="target" id="classeos_1_1mpls__fec__id__t_1a8a9e2a4b6d9bc4d36c301dfd872d81d1"></span><code class="sig-name descname">mpls_fec_id_t</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos13mpls_fec_id_t13mpls_fec_id_tEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos13mpls_fec_id_t13mpls_fec_id_tE8uint64_t">
+<span id="_CPPv3N3eos13mpls_fec_id_t13mpls_fec_id_tE8uint64_t"></span><span id="_CPPv2N3eos13mpls_fec_id_t13mpls_fec_id_tE8uint64_t"></span><span id="eos::mpls_fec_id_t::mpls_fec_id_t__uint64_t"></span><span class="target" id="classeos_1_1mpls__fec__id__t_1a2cd1346ca1b2c29f55c5aa5637d72b14"></span><em class="property">explicit</em> <code class="sig-name descname">mpls_fec_id_t</code><span class="sig-paren">(</span>uint64_t <em>id</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos13mpls_fec_id_t13mpls_fec_id_tE8uint64_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos13mpls_fec_id_t13mpls_fec_id_tERK13mpls_fec_id_t">
+<span id="_CPPv3N3eos13mpls_fec_id_t13mpls_fec_id_tERK13mpls_fec_id_t"></span><span id="_CPPv2N3eos13mpls_fec_id_t13mpls_fec_id_tERK13mpls_fec_id_t"></span><span id="eos::mpls_fec_id_t::mpls_fec_id_t__mpls_fec_id_tCR"></span><span class="target" id="classeos_1_1mpls__fec__id__t_1a797203e3762fa103d37375ae95ad44e6"></span><code class="sig-name descname">mpls_fec_id_t</code><span class="sig-paren">(</span><em class="property">const</em> <a class="reference internal" href="#_CPPv4N3eos13mpls_fec_id_t13mpls_fec_id_tERK13mpls_fec_id_t" title="eos::mpls_fec_id_t::mpls_fec_id_t">mpls_fec_id_t</a> &amp;<em>other</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos13mpls_fec_id_t13mpls_fec_id_tERK13mpls_fec_id_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos13mpls_fec_id_taSERK13mpls_fec_id_t">
+<span id="_CPPv3N3eos13mpls_fec_id_taSERK13mpls_fec_id_t"></span><span id="_CPPv2N3eos13mpls_fec_id_taSERK13mpls_fec_id_t"></span><span id="eos::mpls_fec_id_t::assign-operator__mpls_fec_id_tCR"></span><span class="target" id="classeos_1_1mpls__fec__id__t_1a40893f178c807c6cd587b47fa25fd4c9"></span><a class="reference internal" href="#_CPPv4N3eos13mpls_fec_id_tE" title="eos::mpls_fec_id_t">mpls_fec_id_t</a> &amp;<code class="sig-name descname">operator=</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos13mpls_fec_id_tE" title="eos::mpls_fec_id_t">mpls_fec_id_t</a> <em class="property">const</em> &amp;<em>other</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos13mpls_fec_id_taSERK13mpls_fec_id_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos13mpls_fec_id_t2idEv">
+<span id="_CPPv3NK3eos13mpls_fec_id_t2idEv"></span><span id="_CPPv2NK3eos13mpls_fec_id_t2idEv"></span><span id="eos::mpls_fec_id_t::idC"></span><span class="target" id="classeos_1_1mpls__fec__id__t_1a31401141bc2c2a658aa83bab5fe91d01"></span>uint64_t <code class="sig-name descname">id</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos13mpls_fec_id_t2idEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Getter for ‘id’: the internal ID of this FEC. A value of 0 denotes that the FEC ID is not set. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos13mpls_fec_id_t5id_isE8uint64_t">
+<span id="_CPPv3N3eos13mpls_fec_id_t5id_isE8uint64_t"></span><span id="_CPPv2N3eos13mpls_fec_id_t5id_isE8uint64_t"></span><span id="eos::mpls_fec_id_t::id_is__uint64_t"></span><span class="target" id="classeos_1_1mpls__fec__id__t_1ac33fec7d6474f40fcee37fc8abcd6123"></span>void <code class="sig-name descname">id_is</code><span class="sig-paren">(</span>uint64_t <em>id</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos13mpls_fec_id_t5id_isE8uint64_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Setter for ‘id’. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos13mpls_fec_id_teqERK13mpls_fec_id_t">
+<span id="_CPPv3NK3eos13mpls_fec_id_teqERK13mpls_fec_id_t"></span><span id="_CPPv2NK3eos13mpls_fec_id_teqERK13mpls_fec_id_t"></span><span id="eos::mpls_fec_id_t::eq-operator__mpls_fec_id_tCRC"></span><span class="target" id="classeos_1_1mpls__fec__id__t_1a6150db26f5fe39a5764b7186f052f213"></span>bool <code class="sig-name descname">operator==</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos13mpls_fec_id_tE" title="eos::mpls_fec_id_t">mpls_fec_id_t</a> <em class="property">const</em> &amp;<em>other</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos13mpls_fec_id_teqERK13mpls_fec_id_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos13mpls_fec_id_tneERK13mpls_fec_id_t">
+<span id="_CPPv3NK3eos13mpls_fec_id_tneERK13mpls_fec_id_t"></span><span id="_CPPv2NK3eos13mpls_fec_id_tneERK13mpls_fec_id_t"></span><span id="eos::mpls_fec_id_t::neq-operator__mpls_fec_id_tCRC"></span><span class="target" id="classeos_1_1mpls__fec__id__t_1a8bda5a35c7b615bda0e293c9c17dfbb8"></span>bool <code class="sig-name descname">operator!=</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos13mpls_fec_id_tE" title="eos::mpls_fec_id_t">mpls_fec_id_t</a> <em class="property">const</em> &amp;<em>other</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos13mpls_fec_id_tneERK13mpls_fec_id_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos13mpls_fec_id_tltERK13mpls_fec_id_t">
+<span id="_CPPv3NK3eos13mpls_fec_id_tltERK13mpls_fec_id_t"></span><span id="_CPPv2NK3eos13mpls_fec_id_tltERK13mpls_fec_id_t"></span><span id="eos::mpls_fec_id_t::lt-operator__mpls_fec_id_tCRC"></span><span class="target" id="classeos_1_1mpls__fec__id__t_1ae13934a24b54bab008aa43db7628c7d8"></span>bool <code class="sig-name descname">operator&lt;</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos13mpls_fec_id_tE" title="eos::mpls_fec_id_t">mpls_fec_id_t</a> <em class="property">const</em> &amp;<em>other</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos13mpls_fec_id_tltERK13mpls_fec_id_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos13mpls_fec_id_t4hashEv">
+<span id="_CPPv3NK3eos13mpls_fec_id_t4hashEv"></span><span id="_CPPv2NK3eos13mpls_fec_id_t4hashEv"></span><span id="eos::mpls_fec_id_t::hashC"></span><span class="target" id="classeos_1_1mpls__fec__id__t_1a801c0d0d8a1bab5f889086423592b65f"></span>uint32_t <code class="sig-name descname">hash</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos13mpls_fec_id_t4hashEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>The hash function for type <a class="reference internal" href="#classeos_1_1mpls__fec__id__t"><span class="std std-ref">mpls_fec_id_t</span></a>. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos13mpls_fec_id_t6mix_meER8hash_mix">
+<span id="_CPPv3NK3eos13mpls_fec_id_t6mix_meER8hash_mix"></span><span id="_CPPv2NK3eos13mpls_fec_id_t6mix_meER8hash_mix"></span><span id="eos::mpls_fec_id_t::mix_me__hash_mixRC"></span><span class="target" id="classeos_1_1mpls__fec__id__t_1ab6a1758807a4d5631dddca2aa1d58241"></span>void <code class="sig-name descname">mix_me</code><span class="sig-paren">(</span><a class="reference internal" href="hash_mix.html#_CPPv4N3eos8hash_mixE" title="eos::hash_mix">hash_mix</a> &amp;<em>h</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos13mpls_fec_id_t6mix_meER8hash_mix" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>The hash mix function for type <a class="reference internal" href="#classeos_1_1mpls__fec__id__t"><span class="std std-ref">mpls_fec_id_t</span></a>. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos13mpls_fec_id_t9to_stringEv">
+<span id="_CPPv3NK3eos13mpls_fec_id_t9to_stringEv"></span><span id="_CPPv2NK3eos13mpls_fec_id_t9to_stringEv"></span><span id="eos::mpls_fec_id_t::to_stringC"></span><span class="target" id="classeos_1_1mpls__fec__id__t_1a9a572fb66bc34825d61e5ede9ab8098a"></span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::string <code class="sig-name descname">to_string</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos13mpls_fec_id_t9to_stringEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Returns a string representation of the current object’s values. </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Static Functions</p>
+<dl class="cpp function">
+<dt id="_CPPv4N3eos13mpls_fec_id_tnwENSt6size_tEPv">
+<span id="_CPPv3N3eos13mpls_fec_id_tnwENSt6size_tEPv"></span><span id="_CPPv2N3eos13mpls_fec_id_tnwENSt6size_tEPv"></span><span id="eos::mpls_fec_id_t::new-operator__std::s.voidP"></span><span class="target" id="classeos_1_1mpls__fec__id__t_1ab178b1ed6c945ed695ff66ff86c71bc7"></span><em class="property">static</em> <em class="property">inline</em> void *<code class="sig-name descname">operator new</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::size_t, void *<em>ptr</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos13mpls_fec_id_tnwENSt6size_tEPv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos13mpls_fec_id_tnwENSt6size_tE">
+<span id="_CPPv3N3eos13mpls_fec_id_tnwENSt6size_tE"></span><span id="_CPPv2N3eos13mpls_fec_id_tnwENSt6size_tE"></span><span id="eos::mpls_fec_id_t::new-operator__std::s"></span><span class="target" id="classeos_1_1mpls__fec__id__t_1a6bf1c4e46011c71aec7b00519d59e21f"></span><em class="property">static</em> void *<code class="sig-name descname">operator new</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::size_t<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos13mpls_fec_id_tnwENSt6size_tE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos13mpls_fec_id_tdlEPv">
+<span id="_CPPv3N3eos13mpls_fec_id_tdlEPv"></span><span id="_CPPv2N3eos13mpls_fec_id_tdlEPv"></span><span id="eos::mpls_fec_id_t::delete-operator__voidP"></span><span class="target" id="classeos_1_1mpls__fec__id__t_1a523bbdd9bf8caee0cc6d34ff67f14c20"></span><em class="property">static</em> void <code class="sig-name descname">operator delete</code><span class="sig-paren">(</span>void*<span class="sig-paren">)</span> <em class="property">noexcept</em><a class="headerlink" href="#_CPPv4N3eos13mpls_fec_id_tdlEPv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Private Members</p>
+<dl class="cpp var">
+<dt id="_CPPv4N3eos13mpls_fec_id_t5pimplE">
+<span id="_CPPv3N3eos13mpls_fec_id_t5pimplE"></span><span id="_CPPv2N3eos13mpls_fec_id_t5pimplE"></span><span id="eos::mpls_fec_id_t::pimpl__std::shared_ptr:mpls_fec_id_impl_t:"></span><span class="target" id="classeos_1_1mpls__fec__id__t_1a873ee7fa766fde5fb22b328596c349c7"></span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::shared_ptr&lt;mpls_fec_id_impl_t&gt; <code class="sig-name descname">pimpl</code><a class="headerlink" href="#_CPPv4N3eos13mpls_fec_id_t5pimplE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Friends</p>
+<dl class="cpp function">
+<dt id="_CPPv4N3eos13mpls_fec_id_tlsERNSt7ostreamERK13mpls_fec_id_t">
+<span id="_CPPv3N3eos13mpls_fec_id_tlsERNSt7ostreamERK13mpls_fec_id_t"></span><span id="_CPPv2N3eos13mpls_fec_id_tlsERNSt7ostreamERK13mpls_fec_id_t"></span><span id="eos::mpls_fec_id_t::lshift-operator__osR.mpls_fec_id_tCR"></span><span class="target" id="classeos_1_1mpls__fec__id__t_1af460f9ab3045887d40ced5e080388aa1"></span><em class="property">friend</em> <a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::ostream &amp;<code class="sig-name descname">operator&lt;&lt;</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::ostream &amp;<em>os</em>, <em class="property">const</em> <a class="reference internal" href="#_CPPv4N3eos13mpls_fec_id_tE" title="eos::mpls_fec_id_t">mpls_fec_id_t</a> &amp;<em>obj</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos13mpls_fec_id_tlsERNSt7ostreamERK13mpls_fec_id_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>A utility stream operator that adds a string representation of <a class="reference internal" href="#classeos_1_1mpls__fec__id__t"><span class="std std-ref">mpls_fec_id_t</span></a> to the ostream. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#"><strong>mpls_route</strong></a><ul>
+<li><a class="reference internal" href="#type-definitions-in-mpls-route">Type definitions in <strong>mpls_route</strong></a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="mpls.html"
+                        title="previous chapter"><strong>mpls</strong></a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="mpls_vrf_label.html"
+                        title="next chapter"><strong>mpls_vrf_label</strong></a></p>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="mpls_vrf_label.html" title="mpls_vrf_label"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="mpls.html" title="mpls"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Arista EOS SDK 2.22.5.2 reference</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href=""><strong>mpls_route</strong></a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2014, Arista Networks.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.4.3.
+    </div>
+  </body>
+</html>
