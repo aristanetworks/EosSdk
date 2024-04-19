@@ -21,6 +21,7 @@ typedef uint32_t ip_route_metric_t;
 /** Valid range of 1 - (2^24)-1, set to 0 if unused. */
 typedef uint32_t vni_t;
 typedef uint32_t ip_via_metric_t;
+/** Valid range of 1 - (2^24)-1, set to 0 if unused. */
 typedef uint32_t ip_via_weight_t;
 
 /**

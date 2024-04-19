@@ -2,6 +2,7 @@
 # Arista Networks, Inc. Confidential and Proprietary.
 
 import EosSdkGenericTestLib
+from Toggles.IpLibToggleLib import toggleDeprecateRibdEnabled
 
 
 class FibTestAgent:
@@ -148,22 +149,35 @@ class FibTestAgent:
 
          addIpRoute( '3.3.3.0/24', '2.2.2.2' )
          # check that the new route points to the new fec
-         getFecIdForPrefix( '3.3.3.0/24' )
-         verifyRoute( '3.3.3.0/24', fecId2, '1' )
+         fecId3 = getFecIdForPrefix( '3.3.3.0/24' )
+         if not toggleDeprecateRibdEnabled():
+            verifyRoute( '3.3.3.0/24', fecId2, '1' )
+         else:
+            # for multi-agent, fecs are not deduped.
+            assert fecId2 != fecId3
+            verifyRoute( '3.3.3.0/24', fecId3, '1' )
 
          # test that the deletion of the lower preference route results in
          # the fec + route changing for 2.2.2.0/24 and the fec for 3.3.3.0/24
          delIpRoute('2.2.2.0/24', '4.4.4.5', '2')
          verifyRoute( '2.2.2.0/24', fecId1, '3', localPref=10 )
-         verifyRoute( '3.3.3.0/24', fecId1, '2' )
+         if not toggleDeprecateRibdEnabled():
+            verifyRoute( '3.3.3.0/24', fecId1, '2' )
+         else:
+            # No effects for fec of 3.3.3.0 on multi-agent
+            verifyRoute( '3.3.3.0/24', fecId3, '1' )
 
          # delete the route 2.2.2.0/24 and ensure that 3.3.3.0/24 is del as well
          delIpRoute( '2.2.2.0/24' )
          verifyRoute( '2.2.2.0/24', fecId1, '0', present=False )
          # deleting 2.2.2.0/24 causes 3.3.3.0/24 to get deleted
-         verifyRoute( '3.3.3.0/24', fecId1, '0', present=False )
+         if not toggleDeprecateRibdEnabled():
+            verifyRoute( '3.3.3.0/24', fecId1, '0', present=False )
+         else:
+            verifyRoute( '3.3.3.0/24', fecId3, '0', present=False )
          # with all routes deleted the fec goes away
          verifyFec( fecId1, present=False )
+         verifyFec( fecId3, present=False )
 
          al.stop_agent()
          al.remove_agent()
