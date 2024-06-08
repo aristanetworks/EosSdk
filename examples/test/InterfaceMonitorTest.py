@@ -2,6 +2,8 @@
 # Copyright (c) 2016 Arista Networks, Inc.  All rights reserved.
 # Arista Networks, Inc. Confidential and Proprietary.
 
+# pylint: disable=consider-using-f-string
+
 import EosSdkGenericTestLib
 
 
@@ -71,6 +73,7 @@ if __name__ == "__main__":
    # The EosSdk extension and the agent executable need to be installed
    # on the device before running this test.
    generic_test_lib = EosSdkGenericTestLib.TestLib("localhost", "admin", "")
+   # pylint: disable-next=no-value-for-parameter
    intf_monitor_test = InterfaceMonitorTest(generic_test_lib,
                                             "InterfaceMonitorTest",
                                             "/mnt/flash/InterfaceMonitor.py")

@@ -1,41 +1,47 @@
-# Copyright (c) 2024 Arista Networks, Inc.  All rights reserved.
+# Copyright (c) 2020 Arista Networks, Inc.  All rights reserved.
 # Arista Networks, Inc. Confidential and Proprietary.
 
 #-----------------------------------------------------------------------------------
-# This Dockerfile can be used to build a docker image that can then be used to create
-# a docker container that will be able to compile EosSdk applications in exactly the
-# same way as EOS native applications are compiled (and thus binary compatible with
-# EOS libraries).
+# This Dockerfile can be used to build a docker image. 
+# Docker containers of this image can be used to build EosSdk applications.
+# The following build options are provided:
+#       arch : Use 'm32' to build a 32-bit EosSdk application otherwise use 'm64'
+#              to build a 64-bit EosSdk application.
+#              Default value is set to 'm32'.
+# Example:
+# Steps to build an application using EosSdk docker container.
+# 1) Build Docker image with tag as arista-eossdk:latest:
+#    a) Docker image with a 32-bit libeos.so
+#       "docker build -t arista-eossdk --build-arg arch=m32 ."
+#       or "docker build -t arista-eossdk ."
+#       
+#    OR
+#    b) Docker image with a 64-bit libeos.so
+#       "docker build -t arista-eossdk --build-arg arch=m64 ."
 #
-# 1) Build Docker image (we will call it 'arista-eossdk')
-#  docker build . -f <this Dockerfile> -t arista-eossdk
+# 2) Run Docker container:
+#    docker run -v /home/sdk-app:/sdk-app --name <name> -it arista-eossdk bash
+#    This will mount /home/sdk-app as sdk-app inside the container.
+#    Place the application code and necessary dependencies in /home/sdk-app
 #
-# 2) Create container: (assuming application code to be compiled is at /code on the
-#    host machine that starts the container)
-#  docker run -v /code:/code -itd --name arista-eossdk-c1 arista-eossdk
+# 3) Compile application binary:
+#    Run the following command from /sdk-app.
+#    For 32-bit binary: "g++ -m32 --std=gnu++0x -o <target> <source file> -leos"
+#    For 64-bit binary: "g++ -m64 --std=gnu++0x -o <target> <source file> -leos"
+#    The generated binary will also be available in /home/sdk-app on the host
+#    machine.
 #
-# 3) Go into the container and build the application
-#  docker exec -it arista-eossdk-c1 /bin/bash
-#  cd /code
-#  g++      -std=gnu++20 -o /code/build/HelloWorld.o -c /code/HelloWorld.cpp
-#  g++      -std=gnu++20 -o /code/build/HelloWorld      /code/HelloWorld.o  -leos -lrt
-#  g++ -m32 -std=gnu++20 -o /code/build/HelloWorld.o -c /code/HelloWorld.cpp
-#  g++ -m32 -std=gnu++20 -o /code/build/HelloWorld32    /code/HelloWorld.o  -leos -lrt
-#
-# 4) Load the application (in /code/build on your host) onto an Arista switch
+#4) Load the application on Arista switch:
 #    Further instructions to run the application on Arista switch can be found here:
 #    https://github.com/aristanetworks/EosSdk/wiki/Quickstart%3A-Hello-World
-#
-# 5) Cleanup
-#    docker rm arista-eossdk-c1
-#    docker rmi arista-eossdk
 #
 # To learn more about EosSdk visit the following link.
 # https://github.com/aristanetworks/EosSdk/wiki
 #-----------------------------------------------------------------------------------
 
-FROM almalinux:9
-ARG version=2.22.5.2
+FROM centos:7
+ARG version=2.23.0
+ARG arch="m32"
 
 # Set eossdk version as label and environ variable.
 LABEL version=$version
@@ -51,32 +57,29 @@ RUN \
    && yum -y install wget \
    && yum -y install patch \
    && yum -y install libtool \
-   && yum -y install diffutils
+   && yum -y install diffutils \
+   && yum -y install swig3 \
+   && yum -y install python-devel \
+   && yum -y install python3-devel
+
+WORKDIR /usr/src/EosSdk-stubs-$version
+ADD ./ ./
 
 # Download cross-compiler.
-RUN wget -O /tmp/arista-cross-compiler.rpm \
-       https://github.com/aristanetworks/EosSdk-cross-compiler/releases/download/v4.32.0/arista-gcc-11.i686.rpm
+RUN \
+ wget -O /tmp/arista-cross-compiler.rpm \
+ https://github.com/aristanetworks/EosSdk-cross-compiler/releases/download/v4.25.0/arista-centos7.5-gcc8.4.0-glibc2.17-1.0-0.i686.rpm
 
 # Install the cross compiler.
-RUN rpm --force --nodeps -Uvh /tmp/arista-cross-compiler.rpm
+RUN yum -y install /tmp/arista-cross-compiler.rpm
+
+ENV PATH=/opt/arista/centos7.5-gcc8.4.0-glibc2.17/bin:$PATH
+
+RUN test -f Makefile && rm -f Makefile
+RUN test -f configure && rm -f configure
+# Build EosSdk stubs.
+RUN ./build.sh --$arch
+RUN make install
 
 # Delete the cross compiler rpm.
 RUN rm -f /tmp/arista-cross-compiler.rpm
-
-ENV PATH=/opt/arista/gcc11/bin:$PATH
-
-# Download the EosSdk stubs
-RUN wget -O /tmp/stubs.tar.gz \
-       https://github.com/aristanetworks/EosSdk/archive/refs/tags/v$version.tar.gz
-
-# Build EosSdk stubs and install libeos and headerfiles for both m32 and m64
-RUN cd /tmp; tar -xzf stubs.tar.gz; cd EosSdk-* ;\
-    ./build.sh -m32 >& ../build32.log           ;\
-    make install >& ../install32.log            ;\
-    rm -rf /tmp/EosSdk-*                        ;\
-    cd /tmp; tar -xzf stubs.tar.gz; cd EosSdk-* ;\
-    ./build.sh -m64 >& ../build64.log           ;\
-    make install >& ../install64.log            ;\
-    cd ..                                       ;\
-    rm -rf /tmp/EosSdk-*                        ;\
-    rm stubs.tar.gz

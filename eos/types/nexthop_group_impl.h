@@ -226,6 +226,11 @@ class EOS_SDK_PUBLIC nexthop_group_impl_t {
     * group.
     */
    uint16_t size() const;
+   /**
+    * Utility method to return the number of entries configured in the nexthop
+    * group.
+    */
+   uint16_t backup_size() const;
    /** Getter for 'nexthops': array index to nexthop group entry map. */
    std::map<uint16_t, nexthop_group_entry_t> const & nexthops() const;
    /** Setter for 'nexthops'. */
@@ -234,6 +239,18 @@ class EOS_SDK_PUBLIC nexthop_group_impl_t {
    void nexthop_set(uint16_t key, nexthop_group_entry_t const & value);
    /** Deletes the key/value pair from the map. */
    void nexthop_del(uint16_t key);
+
+   /**
+    * Getter for 'backup_nexthops': array index to nexthop group backup entry map.
+    */
+   std::map<uint16_t, nexthop_group_entry_t> const & backup_nexthops() const;
+   /** Setter for 'backup_nexthops'. */
+   void backup_nexthops_is(
+         std::map<uint16_t, nexthop_group_entry_t> const & backup_nexthops);
+   /** Inserts key/value pair to the map. */
+   void backup_nexthop_set(uint16_t key, nexthop_group_entry_t const & value);
+   /** Deletes the key/value pair from the map. */
+   void backup_nexthop_del(uint16_t key);
 
    /**
     * Getter for 'destination_ips': array index to IP address map.
@@ -319,6 +336,7 @@ class EOS_SDK_PUBLIC nexthop_group_impl_t {
    intf_id_t source_intf_;
    bool autosize_;
    std::map<uint16_t, nexthop_group_entry_t> nexthops_;
+   std::map<uint16_t, nexthop_group_entry_t> backup_nexthops_;
    std::map<uint16_t, ip_addr_t> destination_ips_;
    bool counters_unshared_;
    bool hierarchical_fecs_enabled_;

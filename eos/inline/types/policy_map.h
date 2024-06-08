@@ -729,6 +729,129 @@ operator<<(std::ostream& os, const traffic_policy_t& obj) {
 }
 
 
+uint64_t
+traffic_policy_counter_data_t::pktHits() const {
+   return pimpl->pktHits();
+}
+uint64_t
+traffic_policy_counter_data_t::byteHits() const {
+   return pimpl->byteHits();
+}
+uint64_t
+traffic_policy_counter_data_t::pktDrops() const {
+   return pimpl->pktDrops();
+}
+uint64_t
+traffic_policy_counter_data_t::byteDrops() const {
+   return pimpl->byteDrops();
+}
+bool
+traffic_policy_counter_data_t::operator==(
+         traffic_policy_counter_data_t const & other) const {
+   return pimpl->operator==(*other.pimpl);
+}
+bool
+traffic_policy_counter_data_t::operator!=(
+         traffic_policy_counter_data_t const & other) const {
+   return pimpl->operator!=(*other.pimpl);
+}
+bool
+traffic_policy_counter_data_t::operator<(
+         traffic_policy_counter_data_t const & other) const {
+   return pimpl->operator<(*other.pimpl);
+}
+uint32_t
+traffic_policy_counter_data_t::hash() const {
+   return pimpl->hash();
+}
+void
+traffic_policy_counter_data_t::mix_me(hash_mix & h) const {
+   pimpl->mix_me(h);
+}
+std::string
+traffic_policy_counter_data_t::to_string() const {
+   return pimpl->to_string();
+}
+std::ostream&
+operator<<(std::ostream& os, const traffic_policy_counter_data_t& obj) {
+   return operator<<(os, *obj.pimpl);
+}
+
+
+std::string
+traffic_policy_counter_t::key() const {
+   return pimpl->key();
+}
+std::map<std::string, traffic_policy_counter_data_t> const &
+traffic_policy_counter_t::named_counter_data() const {
+   return pimpl->named_counter_data();
+}
+void
+traffic_policy_counter_t::named_counter_data_is(
+         
+         std::map<std::string, traffic_policy_counter_data_t> const &
+         named_counter_data) {
+   pimpl->named_counter_data_is(named_counter_data);
+}
+void
+traffic_policy_counter_t::named_counter_data_set(
+         std::string const & key, traffic_policy_counter_data_t const & value) {
+   pimpl->named_counter_data_set(key, value);
+}
+void
+traffic_policy_counter_t::named_counter_data_del(std::string const & key) {
+   pimpl->named_counter_data_del(key);
+}
+std::map<std::string, traffic_policy_counter_data_t> const &
+traffic_policy_counter_t::class_counter_data() const {
+   return pimpl->class_counter_data();
+}
+void
+traffic_policy_counter_t::class_counter_data_is(
+         
+         std::map<std::string, traffic_policy_counter_data_t> const &
+         class_counter_data) {
+   pimpl->class_counter_data_is(class_counter_data);
+}
+void
+traffic_policy_counter_t::class_counter_data_set(
+         std::string const & key, traffic_policy_counter_data_t const & value) {
+   pimpl->class_counter_data_set(key, value);
+}
+void
+traffic_policy_counter_t::class_counter_data_del(std::string const & key) {
+   pimpl->class_counter_data_del(key);
+}
+bool
+traffic_policy_counter_t::operator==(traffic_policy_counter_t const & other) const {
+   return pimpl->operator==(*other.pimpl);
+}
+bool
+traffic_policy_counter_t::operator!=(traffic_policy_counter_t const & other) const {
+   return pimpl->operator!=(*other.pimpl);
+}
+bool
+traffic_policy_counter_t::operator<(traffic_policy_counter_t const & other) const {
+   return pimpl->operator<(*other.pimpl);
+}
+uint32_t
+traffic_policy_counter_t::hash() const {
+   return pimpl->hash();
+}
+void
+traffic_policy_counter_t::mix_me(hash_mix & h) const {
+   pimpl->mix_me(h);
+}
+std::string
+traffic_policy_counter_t::to_string() const {
+   return pimpl->to_string();
+}
+std::ostream&
+operator<<(std::ostream& os, const traffic_policy_counter_t& obj) {
+   return operator<<(os, *obj.pimpl);
+}
+
+
 unsupported_policy_feature_error::unsupported_policy_feature_error(
          policy_feature_t policy_feature) noexcept :
       unsupported_error(std::string("Unsupported policy feature")),

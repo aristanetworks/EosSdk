@@ -25,10 +25,12 @@ class HelloWorldTest:
                     self.agent_binary_path, args=self.args) as al:
          al.start_agent()
          al.wait_for(al.pid, "agent pid")
+         # pylint: disable-next=consider-using-f-string
          print( "Agent PID is %s" % al.pid() )
 
          al.wait_for_status("greeting",
                             "Welcome! What is your name?")
+         # pylint: disable-next=consider-using-f-string
          print( "Agent %s started." % self.agent_name )
 
          al.agent_option_is("name", "Robert Metcalfe")
@@ -47,6 +49,7 @@ class HelloWorldTest:
 
          al.stop_agent()
          al.wait_for_status("greeting", "Adios!")
+         # pylint: disable-next=consider-using-f-string
          print( "Stopped agent %s." % self.agent_name )
          al.remove_agent()
 

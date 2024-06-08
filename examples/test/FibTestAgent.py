@@ -1,6 +1,8 @@
 # Copyright (c) 2020 Arista Networks, Inc.  All rights reserved.
 # Arista Networks, Inc. Confidential and Proprietary.
 
+# pylint: disable=consider-using-f-string
+
 import EosSdkGenericTestLib
 from Toggles.IpLibToggleLib import toggleDeprecateRibdEnabled
 
@@ -52,6 +54,7 @@ class FibTestAgent:
 
          def getFecIdForPrefix( prefix, invalidFec='' ):
             fecId = invalidFec
+            # pylint: disable-next=consider-using-in
             while fecId == '' or fecId == invalidFec:
                fecId = self.test_lib.run_cmds( [ 'enable',
                                                  'configure',

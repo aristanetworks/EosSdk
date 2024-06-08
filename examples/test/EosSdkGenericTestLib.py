@@ -1,6 +1,8 @@
 # Copyright (c) 2014 Arista Networks, Inc.  All rights reserved.
 # Arista Networks, Inc. Confidential and Proprietary.
 
+# pylint: disable=consider-using-f-string
+
 import jsonrpclib
 import time
 import sys
@@ -38,7 +40,7 @@ class ProtocolError(Error):
       Error.__init__(self, (code, message, data))
 
 
-class ConnectionError(Error):
+class ConnectionError(Error):  # pylint: disable=redefined-builtin
    """ Connection exception, 'error' gives out error details """
    def __init__(self, error):
       Error.__init__(self,
@@ -64,7 +66,7 @@ class ClientError(Error):
       Error.__init__(self, (code, msg, data))
 
 
-class TimeoutError(Error):
+class TimeoutError(Error):  # pylint: disable=redefined-builtin
    """ This error can be raised whenever something not happening within a specified
        time period. One example can be if user changes some configuration and
        expects the corresponding status to be changed.
@@ -138,18 +140,21 @@ class TestLib:
       try:
          response_list = self.eapi_.runCmds(1, cmds, data_format)
       except OSError as e:
-         raise ConnectionError( e.strerror )
+         raise ConnectionError( e.strerror )  # pylint: disable=raise-missing-from
       except jsonrpclib.jsonrpc.TransportError as e:
+         # pylint: disable-next=raise-missing-from
          raise ProtocolError(e.errcode, e.errmsg, str(e.msg))
       except jsonrpclib.jsonrpc.ProtocolError:
          response_list = jsonrpclib.loads(self.history_.response)
          code = response_list['error']['code']
          msg = response_list['error']['message']
          data = response_list['error']['data']
+         # pylint: disable-next=no-else-raise
          if code < -32000:  # JSON-RPC 2.0 defined errors
+            # pylint: disable-next=raise-missing-from
             raise ProtocolError(code, msg, data)
          else:  # eapi errors
-            raise ClientError(code, msg, data)
+            raise ClientError(code, msg, data)  # pylint: disable=raise-missing-from
 
       return response_list
 
@@ -250,7 +255,7 @@ class AgentLib:
       except ClientError:
          return False
 
-   def pid(self):
+   def pid(self):  # pylint: disable=inconsistent-return-statements
       """Returns the PID of the agent if found"""
       try:
          data = self.agent_data()

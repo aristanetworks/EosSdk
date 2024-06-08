@@ -378,16 +378,16 @@ operator<<(std::ostream& os, const nexthop_group_entry_impl_t& obj) {
 nexthop_group_impl_t::nexthop_group_impl_t() :
       name_(), type_(), gre_key_type_(NEXTHOP_GROUP_GRE_KEY_NULL), ttl_(64),
       source_ip_(), source_intf_(), autosize_(false), nexthops_(),
-      destination_ips_(), counters_unshared_(), hierarchical_fecs_enabled_(false),
-      counters_persistent_(), version_id_() {
+      backup_nexthops_(), destination_ips_(), counters_unshared_(),
+      hierarchical_fecs_enabled_(false), counters_persistent_(), version_id_() {
 }
 
 nexthop_group_impl_t::nexthop_group_impl_t(std::string name,
                                                   nexthop_group_encap_t type) :
       name_(name), type_(type), gre_key_type_(NEXTHOP_GROUP_GRE_KEY_NULL),
       ttl_(64), source_ip_(), source_intf_(), autosize_(false), nexthops_(),
-      destination_ips_(), counters_unshared_(), hierarchical_fecs_enabled_(false),
-      counters_persistent_(), version_id_() {
+      backup_nexthops_(), destination_ips_(), counters_unshared_(),
+      hierarchical_fecs_enabled_(false), counters_persistent_(), version_id_() {
 }
 
 nexthop_group_impl_t::nexthop_group_impl_t(
@@ -395,15 +395,15 @@ nexthop_group_impl_t::nexthop_group_impl_t(
          nexthop_group_gre_key_t gre_key_type) :
       name_(name), type_(type), gre_key_type_(gre_key_type), ttl_(64),
       source_ip_(), source_intf_(), autosize_(false), nexthops_(),
-      destination_ips_(), counters_unshared_(), hierarchical_fecs_enabled_(false),
-      counters_persistent_(), version_id_() {
+      backup_nexthops_(), destination_ips_(), counters_unshared_(),
+      hierarchical_fecs_enabled_(false), counters_persistent_(), version_id_() {
 }
 
 nexthop_group_impl_t::nexthop_group_impl_t(std::string name,
                                                   ip_addr_t const & source_ip) :
       name_(name), type_(), gre_key_type_(), ttl_(), source_ip_(source_ip),
-      source_intf_(), autosize_(), nexthops_(), destination_ips_(),
-      counters_unshared_(), hierarchical_fecs_enabled_(false),
+      source_intf_(), autosize_(), nexthops_(), backup_nexthops_(),
+      destination_ips_(), counters_unshared_(), hierarchical_fecs_enabled_(false),
       counters_persistent_(), version_id_() {
 }
 
@@ -411,8 +411,8 @@ nexthop_group_impl_t::nexthop_group_impl_t(
          std::string name, ip_addr_t const & source_ip,
          std::map<uint16_t, nexthop_group_entry_t> const & nexthops) :
       name_(name), type_(), gre_key_type_(), ttl_(), source_ip_(source_ip),
-      source_intf_(), autosize_(), nexthops_(nexthops), destination_ips_(),
-      counters_unshared_(), hierarchical_fecs_enabled_(false),
+      source_intf_(), autosize_(), nexthops_(nexthops), backup_nexthops_(),
+      destination_ips_(), counters_unshared_(), hierarchical_fecs_enabled_(false),
       counters_persistent_(), version_id_() {
 }
 
@@ -494,6 +494,15 @@ nexthop_group_impl_t::size() const {
    return nexthops_.rbegin()->first + 1;
 }
 
+uint16_t
+nexthop_group_impl_t::backup_size() const {
+
+   if (backup_nexthops_.empty()) {
+      return 0;
+   }
+   return backup_nexthops_.rbegin()->first + 1;
+}
+
 std::map<uint16_t, nexthop_group_entry_t> const &
 nexthop_group_impl_t::nexthops() const {
    return nexthops_;
@@ -514,6 +523,28 @@ nexthop_group_impl_t::nexthop_set(uint16_t key,
 void
 nexthop_group_impl_t::nexthop_del(uint16_t key) {
    nexthops_.erase(key);
+}
+
+std::map<uint16_t, nexthop_group_entry_t> const &
+nexthop_group_impl_t::backup_nexthops() const {
+   return backup_nexthops_;
+}
+
+void
+nexthop_group_impl_t::backup_nexthops_is(
+         std::map<uint16_t, nexthop_group_entry_t> const & backup_nexthops) {
+   backup_nexthops_ = backup_nexthops;
+}
+
+void
+nexthop_group_impl_t::backup_nexthop_set(uint16_t key,
+                                         nexthop_group_entry_t const & value) {
+   backup_nexthops_[key] = value;
+}
+
+void
+nexthop_group_impl_t::backup_nexthop_del(uint16_t key) {
+   backup_nexthops_.erase(key);
 }
 
 std::map<uint16_t, ip_addr_t> const &
@@ -587,6 +618,7 @@ nexthop_group_impl_t::operator==(nexthop_group_impl_t const & other) const {
           source_intf_ == other.source_intf_ &&
           autosize_ == other.autosize_ &&
           nexthops_ == other.nexthops_ &&
+          backup_nexthops_ == other.backup_nexthops_ &&
           destination_ips_ == other.destination_ips_ &&
           counters_unshared_ == other.counters_unshared_ &&
           hierarchical_fecs_enabled_ == other.hierarchical_fecs_enabled_ &&
@@ -617,6 +649,8 @@ nexthop_group_impl_t::operator<(nexthop_group_impl_t const & other) const {
       return autosize_ < other.autosize_;
    } else if(nexthops_ != other.nexthops_) {
       return nexthops_ < other.nexthops_;
+   } else if(backup_nexthops_ != other.backup_nexthops_) {
+      return backup_nexthops_ < other.backup_nexthops_;
    } else if(destination_ips_ != other.destination_ips_) {
       return destination_ips_ < other.destination_ips_;
    } else if(counters_unshared_ != other.counters_unshared_) {
@@ -652,6 +686,11 @@ nexthop_group_impl_t::mix_me(hash_mix & h) const {
       h.mix(it->first); // uint16_t
       h.mix(it->second); // nexthop_group_entry_t
    }
+   for (auto it=backup_nexthops_.cbegin();
+        it!=backup_nexthops_.cend(); ++it) {
+      h.mix(it->first); // uint16_t
+      h.mix(it->second); // nexthop_group_entry_t
+   }
    for (auto it=destination_ips_.cbegin();
         it!=destination_ips_.cend(); ++it) {
       h.mix(it->first); // uint16_t
@@ -681,6 +720,18 @@ nexthop_group_impl_t::to_string() const {
       if (first_nexthops) {
          ss << it->first << "=" << it->second;
          first_nexthops = false;
+      } else {
+         ss << "," << it->first << "=" << it->second;
+      }
+   }
+   ss << "'";
+   ss << ", backup_nexthops=" <<"'";
+   bool first_backup_nexthops = true;
+   for (auto it=backup_nexthops_.cbegin();
+        it!=backup_nexthops_.cend(); ++it) {
+      if (first_backup_nexthops) {
+         ss << it->first << "=" << it->second;
+         first_backup_nexthops = false;
       } else {
          ss << "," << it->first << "=" << it->second;
       }

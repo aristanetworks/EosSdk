@@ -1213,6 +1213,250 @@ operator<<(std::ostream& os, const traffic_policy_impl_t& obj) {
 
 
 
+traffic_policy_counter_data_impl_t::traffic_policy_counter_data_impl_t() :
+      pktHits_(), byteHits_(), pktDrops_(), byteDrops_() {
+}
+
+traffic_policy_counter_data_impl_t::traffic_policy_counter_data_impl_t(
+         uint64_t pktHits, uint64_t byteHits, uint64_t pktDrops,
+         uint64_t byteDrops) :
+      pktHits_(pktHits), byteHits_(byteHits), pktDrops_(pktDrops),
+      byteDrops_(byteDrops) {
+}
+
+uint64_t
+traffic_policy_counter_data_impl_t::pktHits() const {
+   return pktHits_;
+}
+
+uint64_t
+traffic_policy_counter_data_impl_t::byteHits() const {
+   return byteHits_;
+}
+
+uint64_t
+traffic_policy_counter_data_impl_t::pktDrops() const {
+   return pktDrops_;
+}
+
+uint64_t
+traffic_policy_counter_data_impl_t::byteDrops() const {
+   return byteDrops_;
+}
+
+bool
+traffic_policy_counter_data_impl_t::operator==(
+         traffic_policy_counter_data_impl_t const & other) const {
+   return pktHits_ == other.pktHits_ &&
+          byteHits_ == other.byteHits_ &&
+          pktDrops_ == other.pktDrops_ &&
+          byteDrops_ == other.byteDrops_;
+}
+
+bool
+traffic_policy_counter_data_impl_t::operator!=(
+         traffic_policy_counter_data_impl_t const & other) const {
+   return !operator==(other);
+}
+
+bool
+traffic_policy_counter_data_impl_t::operator<(
+         traffic_policy_counter_data_impl_t const & other) const {
+   if(pktHits_ != other.pktHits_) {
+      return pktHits_ < other.pktHits_;
+   } else if(byteHits_ != other.byteHits_) {
+      return byteHits_ < other.byteHits_;
+   } else if(pktDrops_ != other.pktDrops_) {
+      return pktDrops_ < other.pktDrops_;
+   } else if(byteDrops_ != other.byteDrops_) {
+      return byteDrops_ < other.byteDrops_;
+   }
+   return false;
+}
+
+uint32_t
+traffic_policy_counter_data_impl_t::hash() const {
+   hash_mix h;
+   mix_me(h);
+   return h.result();
+}
+
+void
+traffic_policy_counter_data_impl_t::mix_me(hash_mix & h) const {
+   h.mix(pktHits_); // uint64_t
+   h.mix(byteHits_); // uint64_t
+   h.mix(pktDrops_); // uint64_t
+   h.mix(byteDrops_); // uint64_t
+}
+
+std::string
+traffic_policy_counter_data_impl_t::to_string() const {
+   std::ostringstream ss;
+   ss << "traffic_policy_counter_data_t(";
+   ss << "pktHits=" << pktHits_;
+   ss << ", byteHits=" << byteHits_;
+   ss << ", pktDrops=" << pktDrops_;
+   ss << ", byteDrops=" << byteDrops_;
+   ss << ")";
+   return ss.str();
+}
+
+std::ostream&
+operator<<(std::ostream& os, const traffic_policy_counter_data_impl_t& obj) {
+   os << obj.to_string();
+   return os;
+}
+
+
+
+traffic_policy_counter_impl_t::traffic_policy_counter_impl_t(
+         std::string const & key) :
+      key_(key), named_counter_data_(), class_counter_data_() {
+}
+
+std::string
+traffic_policy_counter_impl_t::key() const {
+   return key_;
+}
+
+std::map<std::string, traffic_policy_counter_data_t> const &
+traffic_policy_counter_impl_t::named_counter_data() const {
+   return named_counter_data_;
+}
+
+void
+traffic_policy_counter_impl_t::named_counter_data_is(
+         
+         std::map<std::string, traffic_policy_counter_data_t> const &
+         named_counter_data) {
+   named_counter_data_ = named_counter_data;
+}
+
+void
+traffic_policy_counter_impl_t::named_counter_data_set(
+         std::string const & key, traffic_policy_counter_data_t const & value) {
+   named_counter_data_[key] = value;
+}
+
+void
+traffic_policy_counter_impl_t::named_counter_data_del(std::string const & key) {
+   named_counter_data_.erase(key);
+}
+
+std::map<std::string, traffic_policy_counter_data_t> const &
+traffic_policy_counter_impl_t::class_counter_data() const {
+   return class_counter_data_;
+}
+
+void
+traffic_policy_counter_impl_t::class_counter_data_is(
+         
+         std::map<std::string, traffic_policy_counter_data_t> const &
+         class_counter_data) {
+   class_counter_data_ = class_counter_data;
+}
+
+void
+traffic_policy_counter_impl_t::class_counter_data_set(
+         std::string const & key, traffic_policy_counter_data_t const & value) {
+   class_counter_data_[key] = value;
+}
+
+void
+traffic_policy_counter_impl_t::class_counter_data_del(std::string const & key) {
+   class_counter_data_.erase(key);
+}
+
+bool
+traffic_policy_counter_impl_t::operator==(
+         traffic_policy_counter_impl_t const & other) const {
+   return key_ == other.key_ &&
+          named_counter_data_ == other.named_counter_data_ &&
+          class_counter_data_ == other.class_counter_data_;
+}
+
+bool
+traffic_policy_counter_impl_t::operator!=(
+         traffic_policy_counter_impl_t const & other) const {
+   return !operator==(other);
+}
+
+bool
+traffic_policy_counter_impl_t::operator<(
+         traffic_policy_counter_impl_t const & other) const {
+   if(key_ != other.key_) {
+      return key_ < other.key_;
+   } else if(named_counter_data_ != other.named_counter_data_) {
+      return named_counter_data_ < other.named_counter_data_;
+   } else if(class_counter_data_ != other.class_counter_data_) {
+      return class_counter_data_ < other.class_counter_data_;
+   }
+   return false;
+}
+
+uint32_t
+traffic_policy_counter_impl_t::hash() const {
+   hash_mix h;
+   mix_me(h);
+   return h.result();
+}
+
+void
+traffic_policy_counter_impl_t::mix_me(hash_mix & h) const {
+   h.mix(key_); // std::string
+   for (auto it=named_counter_data_.cbegin();
+        it!=named_counter_data_.cend(); ++it) {
+      h.mix(it->first); // std::string
+      h.mix(it->second); // traffic_policy_counter_data_t
+   }
+   for (auto it=class_counter_data_.cbegin();
+        it!=class_counter_data_.cend(); ++it) {
+      h.mix(it->first); // std::string
+      h.mix(it->second); // traffic_policy_counter_data_t
+   }
+}
+
+std::string
+traffic_policy_counter_impl_t::to_string() const {
+   std::ostringstream ss;
+   ss << "traffic_policy_counter_t(";
+   ss << "key='" << key_ << "'";
+   ss << ", named_counter_data=" <<"'";
+   bool first_named_counter_data = true;
+   for (auto it=named_counter_data_.cbegin();
+        it!=named_counter_data_.cend(); ++it) {
+      if (first_named_counter_data) {
+         ss << it->first << "=" << it->second;
+         first_named_counter_data = false;
+      } else {
+         ss << "," << it->first << "=" << it->second;
+      }
+   }
+   ss << "'";
+   ss << ", class_counter_data=" <<"'";
+   bool first_class_counter_data = true;
+   for (auto it=class_counter_data_.cbegin();
+        it!=class_counter_data_.cend(); ++it) {
+      if (first_class_counter_data) {
+         ss << it->first << "=" << it->second;
+         first_class_counter_data = false;
+      } else {
+         ss << "," << it->first << "=" << it->second;
+      }
+   }
+   ss << "'";
+   ss << ")";
+   return ss.str();
+}
+
+std::ostream&
+operator<<(std::ostream& os, const traffic_policy_counter_impl_t& obj) {
+   os << obj.to_string();
+   return os;
+}
+
+
+
 
 
 

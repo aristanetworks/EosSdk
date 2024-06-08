@@ -24,10 +24,10 @@
 
 #include <eos/base.h>
 
-#define EOSSDK_VERSION "2.22.5.2"
+#define EOSSDK_VERSION "2.23.0"
 #define EOSSDK_MAJOR 2
-#define EOSSDK_MINOR 22
-#define EOSSDK_PATCH 5
+#define EOSSDK_MINOR 23
+#define EOSSDK_PATCH 0
 
 namespace eos {
 

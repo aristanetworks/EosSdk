@@ -237,6 +237,74 @@ traffic_policy_t::operator delete( void * p ) noexcept {
 
 
 
+traffic_policy_counter_data_t::traffic_policy_counter_data_t() :
+   pimpl(std::make_shared<traffic_policy_counter_data_impl_t>()) {}
+traffic_policy_counter_data_t::traffic_policy_counter_data_t(uint64_t pktHits,
+                                                             uint64_t byteHits,
+                                                             uint64_t pktDrops,
+                                                             uint64_t byteDrops) :
+   pimpl(std::make_shared<traffic_policy_counter_data_impl_t>(
+      pktHits,
+      byteHits,
+      pktDrops,
+      byteDrops
+   )) {}
+EOS_SDK_PUBLIC traffic_policy_counter_data_t::traffic_policy_counter_data_t(
+   const traffic_policy_counter_data_t& other) :
+   pimpl(std::make_shared<traffic_policy_counter_data_impl_t>(
+      *other.pimpl)) {}
+EOS_SDK_PUBLIC traffic_policy_counter_data_t&
+traffic_policy_counter_data_t::operator=(
+   traffic_policy_counter_data_t const & other)
+{
+   if(this != &other) {
+      pimpl = std::make_shared<traffic_policy_counter_data_impl_t>(
+         *other.pimpl);
+   }
+   return *this;
+}
+
+EOS_SDK_PUBLIC void *
+traffic_policy_counter_data_t::operator new( std::size_t size ) {
+   return ::operator new( size );
+}
+EOS_SDK_PUBLIC void
+traffic_policy_counter_data_t::operator delete( void * p ) noexcept {
+   ::operator delete( p );
+}
+
+
+
+traffic_policy_counter_t::traffic_policy_counter_t(std::string const & key) :
+   pimpl(std::make_shared<traffic_policy_counter_impl_t>(
+      key
+   )) {}
+EOS_SDK_PUBLIC traffic_policy_counter_t::traffic_policy_counter_t(
+   const traffic_policy_counter_t& other) :
+   pimpl(std::make_shared<traffic_policy_counter_impl_t>(
+      *other.pimpl)) {}
+EOS_SDK_PUBLIC traffic_policy_counter_t&
+traffic_policy_counter_t::operator=(
+   traffic_policy_counter_t const & other)
+{
+   if(this != &other) {
+      pimpl = std::make_shared<traffic_policy_counter_impl_t>(
+         *other.pimpl);
+   }
+   return *this;
+}
+
+EOS_SDK_PUBLIC void *
+traffic_policy_counter_t::operator new( std::size_t size ) {
+   return ::operator new( size );
+}
+EOS_SDK_PUBLIC void
+traffic_policy_counter_t::operator delete( void * p ) noexcept {
+   ::operator delete( p );
+}
+
+
+
 policy_map_hw_status_key_t::policy_map_hw_status_key_t() :
    pimpl(std::make_shared<policy_map_hw_status_key_impl_t>()) {}
 policy_map_hw_status_key_t::policy_map_hw_status_key_t(intf_id_t intf_id,

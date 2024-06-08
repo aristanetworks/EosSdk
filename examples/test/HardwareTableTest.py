@@ -29,11 +29,13 @@ class HardwareTableTest:
          # Start agent
          al.start_agent()
          al.wait_for_status( "hardware_table_test", "initialized" )
+         # pylint: disable-next=consider-using-f-string
          print( "Agent %s started." % self.agent_name )
 
          # Test iterator: get total number of table keys
          al.agent_option_is( "test_iterator", "count" )
          al.wait_for_status_exists( "number_of_keys" )
+         # pylint: disable-next=consider-using-f-string
          print( "Iterated over %s table keys."
                 % al.agent_data()[ "data" ][ "number_of_keys" ] )
 
@@ -68,6 +70,7 @@ class HardwareTableTest:
          # Stop and remove agent
          al.stop_agent()
          al.remove_agent()
+         # pylint: disable-next=consider-using-f-string
          print( "Agent %s stopped and removed." % self.agent_name )
 
 if __name__ == "__main__":

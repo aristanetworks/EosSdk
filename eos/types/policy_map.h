@@ -727,6 +727,123 @@ class EOS_SDK_PUBLIC traffic_policy_t {
 EOS_SDK_PUBLIC
 std::ostream& operator<<(std::ostream& os, const traffic_policy_t& obj);
 
+class traffic_policy_counter_data_impl_t;
+/** Traffic policy counter data. */
+class EOS_SDK_PUBLIC traffic_policy_counter_data_t {
+ public:
+   traffic_policy_counter_data_t();
+   traffic_policy_counter_data_t(uint64_t pktHits, uint64_t byteHits,
+                                 uint64_t pktDrops, uint64_t byteDrops);
+   traffic_policy_counter_data_t(const traffic_policy_counter_data_t& other);
+   traffic_policy_counter_data_t& operator=(
+      traffic_policy_counter_data_t const & other);
+
+   static void * operator new( std::size_t, void * ptr ) {
+      return ptr;
+   }
+   static void * operator new( std::size_t );
+   static void operator delete( void * ) noexcept;
+
+   uint64_t pktHits() const;
+
+   uint64_t byteHits() const;
+
+   uint64_t pktDrops() const;
+
+   uint64_t byteDrops() const;
+
+   bool operator==(traffic_policy_counter_data_t const & other) const;
+   bool operator!=(traffic_policy_counter_data_t const & other) const;
+   bool operator<(traffic_policy_counter_data_t const & other) const;
+   /** The hash function for type traffic_policy_counter_data_t. */
+   uint32_t hash() const;
+   /** The hash mix function for type traffic_policy_counter_data_t. */
+   void mix_me(hash_mix & h) const;
+   /** Returns a string representation of the current object's values. */
+   std::string to_string() const;
+   /**
+    * A utility stream operator that adds a string representation of
+    * traffic_policy_counter_data_t to the ostream.
+    */
+   friend std::ostream& operator<<(std::ostream& os,
+                                   const traffic_policy_counter_data_t& obj);
+
+ private:
+   std::shared_ptr<traffic_policy_counter_data_impl_t> pimpl;
+};
+
+EOS_SDK_PUBLIC
+std::ostream& operator<<(std::ostream& os,
+                         const traffic_policy_counter_data_t& obj);
+
+class traffic_policy_counter_impl_t;
+/**
+ * A traffic policy counter instance.
+ *
+ * Traffic policy counters are obtained using the policy_map_mgr.
+ */
+class EOS_SDK_PUBLIC traffic_policy_counter_t {
+ public:
+   explicit traffic_policy_counter_t(std::string const & key);
+   traffic_policy_counter_t(const traffic_policy_counter_t& other);
+   traffic_policy_counter_t& operator=(
+      traffic_policy_counter_t const & other);
+
+   static void * operator new( std::size_t, void * ptr ) {
+      return ptr;
+   }
+   static void * operator new( std::size_t );
+   static void operator delete( void * ) noexcept;
+
+   std::string key() const;
+
+   std::map<std::string, traffic_policy_counter_data_t> const & named_counter_data()
+          const;
+   void named_counter_data_is(
+         
+         std::map<std::string, traffic_policy_counter_data_t> const &
+         named_counter_data);
+   /** Inserts key/value pair to the map. */
+   void named_counter_data_set(std::string const & key,
+                               traffic_policy_counter_data_t const & value);
+   /** Deletes the key/value pair from the map. */
+   void named_counter_data_del(std::string const & key);
+
+   std::map<std::string, traffic_policy_counter_data_t> const & class_counter_data()
+          const;
+   void class_counter_data_is(
+         
+         std::map<std::string, traffic_policy_counter_data_t> const &
+         class_counter_data);
+   /** Inserts key/value pair to the map. */
+   void class_counter_data_set(std::string const & key,
+                               traffic_policy_counter_data_t const & value);
+   /** Deletes the key/value pair from the map. */
+   void class_counter_data_del(std::string const & key);
+
+   bool operator==(traffic_policy_counter_t const & other) const;
+   bool operator!=(traffic_policy_counter_t const & other) const;
+   bool operator<(traffic_policy_counter_t const & other) const;
+   /** The hash function for type traffic_policy_counter_t. */
+   uint32_t hash() const;
+   /** The hash mix function for type traffic_policy_counter_t. */
+   void mix_me(hash_mix & h) const;
+   /** Returns a string representation of the current object's values. */
+   std::string to_string() const;
+   /**
+    * A utility stream operator that adds a string representation of
+    * traffic_policy_counter_t to the ostream.
+    */
+   friend std::ostream& operator<<(std::ostream& os,
+                                   const traffic_policy_counter_t& obj);
+
+ private:
+   std::shared_ptr<traffic_policy_counter_impl_t> pimpl;
+};
+
+EOS_SDK_PUBLIC
+std::ostream& operator<<(std::ostream& os, const traffic_policy_counter_t& obj);
+
 /** The policy feature requested is unavailable in this SDK release. */
 class EOS_SDK_PUBLIC unsupported_policy_feature_error : public unsupported_error {
  public:

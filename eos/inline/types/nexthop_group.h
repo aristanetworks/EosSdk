@@ -264,6 +264,10 @@ uint16_t
 nexthop_group_t::size() const {
    return pimpl->size();
 }
+uint16_t
+nexthop_group_t::backup_size() const {
+   return pimpl->backup_size();
+}
 std::map<uint16_t, nexthop_group_entry_t> const &
 nexthop_group_t::nexthops() const {
    return pimpl->nexthops();
@@ -280,6 +284,24 @@ nexthop_group_t::nexthop_set(uint16_t key, nexthop_group_entry_t const & value) 
 void
 nexthop_group_t::nexthop_del(uint16_t key) {
    pimpl->nexthop_del(key);
+}
+std::map<uint16_t, nexthop_group_entry_t> const &
+nexthop_group_t::backup_nexthops() const {
+   return pimpl->backup_nexthops();
+}
+void
+nexthop_group_t::backup_nexthops_is(
+         std::map<uint16_t, nexthop_group_entry_t> const & backup_nexthops) {
+   pimpl->backup_nexthops_is(backup_nexthops);
+}
+void
+nexthop_group_t::backup_nexthop_set(uint16_t key,
+                                    nexthop_group_entry_t const & value) {
+   pimpl->backup_nexthop_set(key, value);
+}
+void
+nexthop_group_t::backup_nexthop_del(uint16_t key) {
+   pimpl->backup_nexthop_del(key);
 }
 std::map<uint16_t, ip_addr_t> const &
 nexthop_group_t::destination_ips() const {

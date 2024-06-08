@@ -2,6 +2,8 @@
 # Copyright (c) 2014 Arista Networks, Inc.  All rights reserved.
 # Arista Networks, Inc. Confidential and Proprietary.
 
+# pylint: disable=consider-using-f-string
+
 """The EOS SDK Policy Router.
 
 The policy router is an EOS SDK application usable on Arista switches
@@ -331,7 +333,7 @@ class PolicyRouter:
                print( 'Adding IP' )
                group.destination_ip_set(i, ip)
 
-         if t == 'ipinip' or t == 'gre':
+         if t == 'ipinip' or t == 'gre':  # pylint: disable=consider-using-in
             if data.src_intf:
                if self.intf_mgr.exists(eossdk.IntfId(data.src_intf)):
                   group.source_intf_is(eossdk.IntfId(data.src_intf))
@@ -409,6 +411,7 @@ class InotifyPoller(eossdk.TimeoutHandler):
       self.policy_handler_ = policy_handler
       self.poll_interval_ = poll_interval
       self.wm_ = pyinotify.WatchManager()
+      # pylint: disable-next=no-member
       mask = pyinotify.IN_MODIFY | pyinotify.IN_CREATE | pyinotify.IN_DELETE
       handler = functools.partial(InotifyHandler, handler=policy_handler)
       # Allow coalescing, so that delete/recreate (as opposed to modify) doesn't
@@ -535,7 +538,7 @@ class InotifyHandler(pyinotify.ProcessEvent):
       self.handler_ = kwargs['handler']
 
 
-def get_ip_addr(ip_addr):
+def get_ip_addr(ip_addr):  # pylint: disable=inconsistent-return-statements
    try:
       return eossdk.IpAddr(ip_addr)
    except eossdk.Error as e:
