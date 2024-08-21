@@ -14,6 +14,27 @@
 #include <set>
 #include <sstream>
 
+#ifdef SWIG
+%ignore eos::flow_match_t(eos::flow_match_t &&) noexcept;
+%ignore eos::flow_match_t::operator=(eos::flow_match_t &&) noexcept;
+%ignore eos::flow_match_t::input_intfs_is(std::set<intf_id_t> &&);
+%ignore eos::input_intf_set(intf_id_t &&);
+%ignore eos::flow_match_t::ip_src_is(eos::ip_addr_t &&);
+%ignore eos::flow_match_t::ip_src_mask_is(eos::ip_addr_t &&);
+%ignore eos::flow_match_t::ip_dst_is(eos::ip_addr_t &&);
+%ignore eos::flow_match_t::ip_dst_mask_is(eos::ip_addr_t &&);
+%ignore eos::flow_action_t(eos::flow_action_t &&) noexcept;
+%ignore eos::flow_action_t::operator=(eos::flow_action_t &&) noexcept;
+%ignore eos::flow_action_t::output_intfs_is(std::set<intf_id_t> &&);
+%ignore eos::output_intf_set(intf_id_t &&);
+%ignore eos::flow_action_t::ip_src_is(eos::ip_addr_t &&);
+%ignore eos::flow_action_t::ip_dst_is(eos::ip_addr_t &&);
+%ignore eos::flow_entry_t(eos::flow_entry_t &&) noexcept;
+%ignore eos::flow_entry_t::operator=(eos::flow_entry_t &&) noexcept;
+%ignore eos::flow_counters_t(eos::flow_counters_t &&) noexcept;
+%ignore eos::flow_counters_t::operator=(eos::flow_counters_t &&) noexcept;
+#endif
+
 namespace eos {
 
 typedef uint16_t flow_priority_t;
@@ -76,6 +97,8 @@ class EOS_SDK_PUBLIC flow_match_t {
    flow_match_t& operator=(
       flow_match_t const & other);
 
+   flow_match_t(flow_match_t && other) noexcept;
+   flow_match_t & operator=(flow_match_t && other) noexcept;
    static void * operator new( std::size_t, void * ptr ) {
       return ptr;
    }
@@ -91,8 +114,12 @@ class EOS_SDK_PUBLIC flow_match_t {
    std::set<intf_id_t> const & input_intfs() const;
    /** Setter for 'input_intfs'. */
    void input_intfs_is(std::set<intf_id_t> const & input_intfs);
+   /** Moving Setter for 'input_intfs'. */
+   void input_intfs_is(std::set<intf_id_t> && input_intfs);
    /** Inserts one input_intf of 'value' to the set. */
    void input_intf_set(intf_id_t const & value);
+   /** Inserts one input_intf of 'value' to the set. */
+   void input_intf_set(intf_id_t && value);
    /** Deletes one input_intf of 'value' from the set. */
    void input_intf_del(intf_id_t const & value);
 
@@ -143,21 +170,27 @@ class EOS_SDK_PUBLIC flow_match_t {
    ip_addr_t ip_src() const;
    /** Setter for 'ip_src'. */
    void ip_src_is(ip_addr_t const & ip_src);
+   /** Moving Setter for 'ip_src'. */
+   void ip_src_is(ip_addr_t && ip_src);
 
    void ip_src_is(ip_addr_t const & src, ip_addr_t const & mask);
 
    ip_addr_t ip_src_mask() const;
    void ip_src_mask_is(ip_addr_t const & ip_src_mask);
+   void ip_src_mask_is(ip_addr_t && ip_src_mask);
 
    /** Getter for 'ip_dst': the destination IPv4 address to match on. */
    ip_addr_t ip_dst() const;
    /** Setter for 'ip_dst'. */
    void ip_dst_is(ip_addr_t const & ip_dst);
+   /** Moving Setter for 'ip_dst'. */
+   void ip_dst_is(ip_addr_t && ip_dst);
 
    void ip_dst_is(ip_addr_t const & dst, ip_addr_t const & mask);
 
    ip_addr_t ip_dst_mask() const;
    void ip_dst_mask_is(ip_addr_t const & ip_dst_mask);
+   void ip_dst_mask_is(ip_addr_t && ip_dst_mask);
 
    bool operator==(flow_match_t const & other) const;
    bool operator!=(flow_match_t const & other) const;
@@ -238,6 +271,8 @@ class EOS_SDK_PUBLIC flow_action_t {
    flow_action_t& operator=(
       flow_action_t const & other);
 
+   flow_action_t(flow_action_t && other) noexcept;
+   flow_action_t & operator=(flow_action_t && other) noexcept;
    static void * operator new( std::size_t, void * ptr ) {
       return ptr;
    }
@@ -256,8 +291,12 @@ class EOS_SDK_PUBLIC flow_action_t {
    std::set<intf_id_t> const & output_intfs() const;
    /** Setter for 'output_intfs'. */
    void output_intfs_is(std::set<intf_id_t> const & output_intfs);
+   /** Moving Setter for 'output_intfs'. */
+   void output_intfs_is(std::set<intf_id_t> && output_intfs);
    /** Inserts one output_intf of 'value' to the set. */
    void output_intf_set(intf_id_t const & value);
+   /** Inserts one output_intf of 'value' to the set. */
+   void output_intf_set(intf_id_t && value);
    /** Deletes one output_intf of 'value' from the set. */
    void output_intf_del(intf_id_t const & value);
 
@@ -283,11 +322,15 @@ class EOS_SDK_PUBLIC flow_action_t {
    ip_addr_t ip_src() const;
    /** Setter for 'ip_src'. */
    void ip_src_is(ip_addr_t const & ip_src);
+   /** Moving Setter for 'ip_src'. */
+   void ip_src_is(ip_addr_t && ip_src);
 
    /** Getter for 'ip_dst': the destination IPv4 address. */
    ip_addr_t ip_dst() const;
    /** Setter for 'ip_dst'. */
    void ip_dst_is(ip_addr_t const & ip_dst);
+   /** Moving Setter for 'ip_dst'. */
+   void ip_dst_is(ip_addr_t && ip_dst);
 
    bool operator==(flow_action_t const & other) const;
    bool operator!=(flow_action_t const & other) const;
@@ -321,6 +364,8 @@ class EOS_SDK_PUBLIC flow_entry_t {
    flow_entry_t& operator=(
       flow_entry_t const & other);
 
+   flow_entry_t(flow_entry_t && other) noexcept;
+   flow_entry_t & operator=(flow_entry_t && other) noexcept;
    static void * operator new( std::size_t, void * ptr ) {
       return ptr;
    }
@@ -365,6 +410,8 @@ class EOS_SDK_PUBLIC flow_counters_t {
    flow_counters_t& operator=(
       flow_counters_t const & other);
 
+   flow_counters_t(flow_counters_t && other) noexcept;
+   flow_counters_t & operator=(flow_counters_t && other) noexcept;
    static void * operator new( std::size_t, void * ptr ) {
       return ptr;
    }

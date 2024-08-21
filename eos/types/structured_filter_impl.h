@@ -86,31 +86,45 @@ class EOS_SDK_PUBLIC port_field_impl_t {
 
    std::set<port_range_t> const & src_ports() const;
    void src_ports_is(std::set<port_range_t> const & src_ports);
+   void src_ports_is(std::set<port_range_t> && src_ports);
    /** Inserts one src_port of 'value' to the set. */
    void src_port_set(port_range_t const & value);
+   /** Inserts one src_port of 'value' to the set. */
+   void src_port_set(port_range_t && value);
    /** Deletes one src_port of 'value' from the set. */
    void src_port_del(port_range_t const & value);
 
    std::set<port_range_t> const & dst_ports() const;
    void dst_ports_is(std::set<port_range_t> const & dst_ports);
+   void dst_ports_is(std::set<port_range_t> && dst_ports);
    /** Inserts one dst_port of 'value' to the set. */
    void dst_port_set(port_range_t const & value);
+   /** Inserts one dst_port of 'value' to the set. */
+   void dst_port_set(port_range_t && value);
    /** Deletes one dst_port of 'value' from the set. */
    void dst_port_del(port_range_t const & value);
 
    std::unordered_set<std::string> const & src_port_field_sets() const;
    void src_port_field_sets_is(
          std::unordered_set<std::string> const & src_port_field_sets);
+   void src_port_field_sets_is(
+         std::unordered_set<std::string> && src_port_field_sets);
    /** Inserts one src_port_field_set of 'value' to the set. */
    void src_port_field_set_set(std::string const & value);
+   /** Inserts one src_port_field_set of 'value' to the set. */
+   void src_port_field_set_set(std::string && value);
    /** Deletes one src_port_field_set of 'value' from the set. */
    void src_port_field_set_del(std::string const & value);
 
    std::unordered_set<std::string> const & dst_port_field_sets() const;
    void dst_port_field_sets_is(
          std::unordered_set<std::string> const & dst_port_field_sets);
+   void dst_port_field_sets_is(
+         std::unordered_set<std::string> && dst_port_field_sets);
    /** Inserts one dst_port_field_set of 'value' to the set. */
    void dst_port_field_set_set(std::string const & value);
+   /** Inserts one dst_port_field_set of 'value' to the set. */
+   void dst_port_field_set_set(std::string && value);
    /** Deletes one dst_port_field_set of 'value' from the set. */
    void dst_port_field_set_del(std::string const & value);
 
@@ -145,8 +159,12 @@ class EOS_SDK_PUBLIC protocol_field_impl_t {
    std::map<uint32_t, port_field_t> const & ports() const;
    /** Setter for 'ports'. */
    void ports_is(std::map<uint32_t, port_field_t> const & ports);
+   /** Moving Setter for 'ports'. */
+   void ports_is(std::map<uint32_t, port_field_t> && ports);
    /** Inserts key/value pair to the map. */
    void port_set(uint32_t key, port_field_t const & value);
+   /** Inserts key/value pair to the map. */
+   void port_set(uint32_t key, port_field_t && value);
    /** Deletes the key/value pair from the map. */
    void port_del(uint32_t key);
 
@@ -190,8 +208,11 @@ class EOS_SDK_PUBLIC tp_rule_filter_impl_t {
    std::map<protocol_range_t, protocol_field_t> const & protocols() const;
    void protocols_is(
          std::map<protocol_range_t, protocol_field_t> const & protocols);
+   void protocols_is(std::map<protocol_range_t, protocol_field_t> && protocols);
    /** Inserts key/value pair to the map. */
    void protocol_set(protocol_range_t key, protocol_field_t const & value);
+   /** Inserts key/value pair to the map. */
+   void protocol_set(protocol_range_t key, protocol_field_t && value);
    /** Deletes the key/value pair from the map. */
    void protocol_del(protocol_range_t key);
 

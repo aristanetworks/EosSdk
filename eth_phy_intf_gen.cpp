@@ -56,6 +56,19 @@ eth_phy_intf_counters_t::operator=(
    return *this;
 }
 
+EOS_SDK_PUBLIC eth_phy_intf_counters_t::eth_phy_intf_counters_t(
+   eth_phy_intf_counters_t && other) noexcept  :
+   pimpl(std::move(other.pimpl)) {}
+EOS_SDK_PUBLIC eth_phy_intf_counters_t&
+eth_phy_intf_counters_t::operator=(
+   eth_phy_intf_counters_t && other) noexcept 
+{
+   if(this != &other) {
+      std::swap(pimpl, other.pimpl);
+   }
+   return *this;
+}
+
 EOS_SDK_PUBLIC void *
 eth_phy_intf_counters_t::operator new( std::size_t size ) {
    return ::operator new( size );
@@ -108,6 +121,19 @@ eth_phy_intf_bin_counters_t::operator=(
    if(this != &other) {
       pimpl = std::make_shared<eth_phy_intf_bin_counters_impl_t>(
          *other.pimpl);
+   }
+   return *this;
+}
+
+EOS_SDK_PUBLIC eth_phy_intf_bin_counters_t::eth_phy_intf_bin_counters_t(
+   eth_phy_intf_bin_counters_t && other) noexcept  :
+   pimpl(std::move(other.pimpl)) {}
+EOS_SDK_PUBLIC eth_phy_intf_bin_counters_t&
+eth_phy_intf_bin_counters_t::operator=(
+   eth_phy_intf_bin_counters_t && other) noexcept 
+{
+   if(this != &other) {
+      std::swap(pimpl, other.pimpl);
    }
    return *this;
 }

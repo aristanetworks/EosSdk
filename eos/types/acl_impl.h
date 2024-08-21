@@ -76,8 +76,11 @@ class EOS_SDK_PUBLIC acl_port_spec_impl_t {
 
    std::list<uint16_t> const & ports() const;
    void ports_is(std::list<uint16_t> const & ports);
+   void ports_is(std::list<uint16_t> && ports);
    /** Prepend one port to the list. */
    void port_set(uint16_t const & ports);
+   /** Prepend one port to the list. */
+   void port_set(uint16_t && ports);
    /** Remove all matching port elements. */
    void port_del(uint16_t const & ports);
 
@@ -178,9 +181,11 @@ class EOS_SDK_PUBLIC acl_rule_ip_impl_t {
 
    ip_addr_mask_t source_addr() const;
    void source_addr_is(ip_addr_mask_t const & source_addr);
+   void source_addr_is(ip_addr_mask_t && source_addr);
 
    ip_addr_mask_t destination_addr() const;
    void destination_addr_is(ip_addr_mask_t const & destination_addr);
+   void destination_addr_is(ip_addr_mask_t && destination_addr);
 
    acl_port_spec_t source_port() const;
    void source_port_is(acl_port_spec_t source_port);

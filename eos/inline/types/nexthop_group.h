@@ -58,8 +58,17 @@ nexthop_group_mpls_action_t::label_stack_is(
    pimpl->label_stack_is(label_stack);
 }
 void
+nexthop_group_mpls_action_t::label_stack_is(
+         std::forward_list<mpls_label_t> && label_stack) {
+   pimpl->label_stack_is(std::move(label_stack));
+}
+void
 nexthop_group_mpls_action_t::label_stack_set(mpls_label_t const & label_stack) {
    pimpl->label_stack_set(label_stack);
+}
+void
+nexthop_group_mpls_action_t::label_stack_set(mpls_label_t && label_stack) {
+   pimpl->label_stack_set(std::move(label_stack));
 }
 void
 nexthop_group_mpls_action_t::label_stack_del(mpls_label_t const & label_stack) {
@@ -152,6 +161,10 @@ nexthop_group_entry_t::mpls_action_is(
          nexthop_group_mpls_action_t const & mpls_action) {
    pimpl->mpls_action_is(mpls_action);
 }
+void
+nexthop_group_entry_t::mpls_action_is(nexthop_group_mpls_action_t && mpls_action) {
+   pimpl->mpls_action_is(std::move(mpls_action));
+}
 ip_addr_t
 nexthop_group_entry_t::nexthop() const {
    return pimpl->nexthop();
@@ -160,6 +173,10 @@ void
 nexthop_group_entry_t::nexthop_is(ip_addr_t const & nexthop) {
    pimpl->nexthop_is(nexthop);
 }
+void
+nexthop_group_entry_t::nexthop_is(ip_addr_t && nexthop) {
+   pimpl->nexthop_is(std::move(nexthop));
+}
 intf_id_t
 nexthop_group_entry_t::intf() const {
    return pimpl->intf();
@@ -167,6 +184,10 @@ nexthop_group_entry_t::intf() const {
 void
 nexthop_group_entry_t::intf_is(intf_id_t const & intf) {
    pimpl->intf_is(intf);
+}
+void
+nexthop_group_entry_t::intf_is(intf_id_t && intf) {
+   pimpl->intf_is(std::move(intf));
 }
 sbfd_echo_session_key_t
 nexthop_group_entry_t::sbfd_session_key() const {
@@ -177,6 +198,11 @@ nexthop_group_entry_t::sbfd_session_key_is(
          sbfd_echo_session_key_t const & sbfd_session_key) {
    pimpl->sbfd_session_key_is(sbfd_session_key);
 }
+void
+nexthop_group_entry_t::sbfd_session_key_is(
+         sbfd_echo_session_key_t && sbfd_session_key) {
+   pimpl->sbfd_session_key_is(std::move(sbfd_session_key));
+}
 std::string
 nexthop_group_entry_t::child_nexthop_group() const {
    return pimpl->child_nexthop_group();
@@ -185,6 +211,10 @@ void
 nexthop_group_entry_t::child_nexthop_group_is(
          std::string const & child_nexthop_group) {
    pimpl->child_nexthop_group_is(child_nexthop_group);
+}
+void
+nexthop_group_entry_t::child_nexthop_group_is(std::string && child_nexthop_group) {
+   pimpl->child_nexthop_group_is(std::move(child_nexthop_group));
 }
 bool
 nexthop_group_entry_t::operator==(nexthop_group_entry_t const & other) const {
@@ -244,6 +274,10 @@ void
 nexthop_group_t::source_ip_is(ip_addr_t const & source_ip) {
    pimpl->source_ip_is(source_ip);
 }
+void
+nexthop_group_t::source_ip_is(ip_addr_t && source_ip) {
+   pimpl->source_ip_is(std::move(source_ip));
+}
 intf_id_t
 nexthop_group_t::source_intf() const {
    return pimpl->source_intf();
@@ -278,8 +312,17 @@ nexthop_group_t::nexthops_is(
    pimpl->nexthops_is(nexthops);
 }
 void
+nexthop_group_t::nexthops_is(std::map<uint16_t, nexthop_group_entry_t> && nexthops)
+       {
+   pimpl->nexthops_is(std::move(nexthops));
+}
+void
 nexthop_group_t::nexthop_set(uint16_t key, nexthop_group_entry_t const & value) {
    pimpl->nexthop_set(key, value);
+}
+void
+nexthop_group_t::nexthop_set(uint16_t key, nexthop_group_entry_t && value) {
+   pimpl->nexthop_set(key, std::move(value));
 }
 void
 nexthop_group_t::nexthop_del(uint16_t key) {
@@ -295,9 +338,18 @@ nexthop_group_t::backup_nexthops_is(
    pimpl->backup_nexthops_is(backup_nexthops);
 }
 void
+nexthop_group_t::backup_nexthops_is(
+         std::map<uint16_t, nexthop_group_entry_t> && backup_nexthops) {
+   pimpl->backup_nexthops_is(std::move(backup_nexthops));
+}
+void
 nexthop_group_t::backup_nexthop_set(uint16_t key,
                                     nexthop_group_entry_t const & value) {
    pimpl->backup_nexthop_set(key, value);
+}
+void
+nexthop_group_t::backup_nexthop_set(uint16_t key, nexthop_group_entry_t && value) {
+   pimpl->backup_nexthop_set(key, std::move(value));
 }
 void
 nexthop_group_t::backup_nexthop_del(uint16_t key) {
@@ -313,8 +365,17 @@ nexthop_group_t::destination_ips_is(
    pimpl->destination_ips_is(destination_ips);
 }
 void
+nexthop_group_t::destination_ips_is(
+         std::map<uint16_t, ip_addr_t> && destination_ips) {
+   pimpl->destination_ips_is(std::move(destination_ips));
+}
+void
 nexthop_group_t::destination_ip_set(uint16_t key, ip_addr_t const & value) {
    pimpl->destination_ip_set(key, value);
+}
+void
+nexthop_group_t::destination_ip_set(uint16_t key, ip_addr_t && value) {
+   pimpl->destination_ip_set(key, std::move(value));
 }
 void
 nexthop_group_t::destination_ip_del(uint16_t key) {
@@ -385,11 +446,26 @@ operator<<(std::ostream& os, const nexthop_group_t& obj) {
 EOS_SDK_PUBLIC std::ostream&
 operator<<(std::ostream& os, const nexthop_group_counter_state_t & enum_val) {
    if (enum_val==NEXTHOP_GROUP_COUNTER_INACTIVE) {
-      os << "NEXTHOP_GROUP_COUNTER_INACTIVE";
+      os << "0";
    } else if (enum_val==NEXTHOP_GROUP_COUNTER_PROGRAMMING_FAILED) {
-      os << "NEXTHOP_GROUP_COUNTER_PROGRAMMING_FAILED";
+      os << "1";
    } else if (enum_val==NEXTHOP_GROUP_COUNTER_PROGRAMMING_COMPLETE) {
-      os << "NEXTHOP_GROUP_COUNTER_PROGRAMMING_COMPLETE";
+      os << "2";
+   } else {
+      os << "Unknown value";
+   }
+   return os;
+}
+
+
+EOS_SDK_PUBLIC std::ostream&
+operator<<(std::ostream& os, const nexthop_group_programmed_hw_state_t & enum_val) {
+   if (enum_val==NEXTHOP_GROUP_HW_DROP) {
+      os << "0";
+   } else if (enum_val==NEXTHOP_GROUP_HW_PARTIALLY_PROGRAMMED) {
+      os << "1";
+   } else if (enum_val==NEXTHOP_GROUP_HW_ALL_PROGRAMMED) {
+      os << "2";
    } else {
       os << "Unknown value";
    }
@@ -400,6 +476,10 @@ operator<<(std::ostream& os, const nexthop_group_counter_state_t & enum_val) {
 nexthop_group_counter_state_t
 nexthop_group_programmed_status_t::counter_state() const {
    return pimpl->counter_state();
+}
+nexthop_group_programmed_hw_state_t
+nexthop_group_programmed_status_t::hw_state() const {
+   return pimpl->hw_state();
 }
 bool
 nexthop_group_programmed_status_t::operator==(

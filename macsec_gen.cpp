@@ -24,6 +24,19 @@ macsec_key_t::operator=(
    return *this;
 }
 
+EOS_SDK_PUBLIC macsec_key_t::macsec_key_t(
+   macsec_key_t && other) noexcept  :
+   pimpl(std::move(other.pimpl)) {}
+EOS_SDK_PUBLIC macsec_key_t&
+macsec_key_t::operator=(
+   macsec_key_t && other) noexcept 
+{
+   if(this != &other) {
+      std::swap(pimpl, other.pimpl);
+   }
+   return *this;
+}
+
 EOS_SDK_PUBLIC void *
 macsec_key_t::operator new( std::size_t size ) {
    return ::operator new( size );
@@ -56,6 +69,19 @@ macsec_profile_t::operator=(
    return *this;
 }
 
+EOS_SDK_PUBLIC macsec_profile_t::macsec_profile_t(
+   macsec_profile_t && other) noexcept  :
+   pimpl(std::move(other.pimpl)) {}
+EOS_SDK_PUBLIC macsec_profile_t&
+macsec_profile_t::operator=(
+   macsec_profile_t && other) noexcept 
+{
+   if(this != &other) {
+      std::swap(pimpl, other.pimpl);
+   }
+   return *this;
+}
+
 EOS_SDK_PUBLIC void *
 macsec_profile_t::operator new( std::size_t size ) {
    return ::operator new( size );
@@ -80,6 +106,19 @@ macsec_intf_status_t::operator=(
    if(this != &other) {
       pimpl = std::make_shared<macsec_intf_status_impl_t>(
          *other.pimpl);
+   }
+   return *this;
+}
+
+EOS_SDK_PUBLIC macsec_intf_status_t::macsec_intf_status_t(
+   macsec_intf_status_t && other) noexcept  :
+   pimpl(std::move(other.pimpl)) {}
+EOS_SDK_PUBLIC macsec_intf_status_t&
+macsec_intf_status_t::operator=(
+   macsec_intf_status_t && other) noexcept 
+{
+   if(this != &other) {
+      std::swap(pimpl, other.pimpl);
    }
    return *this;
 }
@@ -120,6 +159,19 @@ macsec_intf_counters_t::operator=(
    if(this != &other) {
       pimpl = std::make_shared<macsec_intf_counters_impl_t>(
          *other.pimpl);
+   }
+   return *this;
+}
+
+EOS_SDK_PUBLIC macsec_intf_counters_t::macsec_intf_counters_t(
+   macsec_intf_counters_t && other) noexcept  :
+   pimpl(std::move(other.pimpl)) {}
+EOS_SDK_PUBLIC macsec_intf_counters_t&
+macsec_intf_counters_t::operator=(
+   macsec_intf_counters_t && other) noexcept 
+{
+   if(this != &other) {
+      std::swap(pimpl, other.pimpl);
    }
    return *this;
 }

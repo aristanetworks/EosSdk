@@ -10,6 +10,12 @@
 #include <memory>
 #include <sstream>
 
+#ifdef SWIG
+%ignore eos::decap_group_t(eos::decap_group_t &&) noexcept;
+%ignore eos::decap_group_t::operator=(eos::decap_group_t &&) noexcept;
+%ignore eos::decap_group_t::destination_addr_is(eos::ip_addr_t &&);
+#endif
+
 namespace eos {
 
 /**
@@ -42,6 +48,8 @@ class EOS_SDK_PUBLIC decap_group_t {
    decap_group_t& operator=(
       decap_group_t const & other);
 
+   decap_group_t(decap_group_t && other) noexcept;
+   decap_group_t & operator=(decap_group_t && other) noexcept;
    static void * operator new( std::size_t, void * ptr ) {
       return ptr;
    }
@@ -61,6 +69,8 @@ class EOS_SDK_PUBLIC decap_group_t {
    ip_addr_t destination_addr() const;
    /** Setter for 'destination_addr'. */
    void destination_addr_is(ip_addr_t const & destination_addr);
+   /** Moving Setter for 'destination_addr'. */
+   void destination_addr_is(ip_addr_t && destination_addr);
 
    /**
     * Getter for 'protocol_type': decapsulate only packets matching this outer IP

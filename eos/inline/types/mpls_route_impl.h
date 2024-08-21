@@ -39,8 +39,18 @@ mpls_route_key_impl_t::labels_is(std::vector<mpls_label_t> const & labels) {
 }
 
 void
+mpls_route_key_impl_t::labels_is(std::vector<mpls_label_t> && labels) {
+   labels_ = std::move(labels);
+}
+
+void
 mpls_route_key_impl_t::label_set(uint32_t index, mpls_label_t const & value) {
    labels_.insert(labels_.begin() + index, value);
+}
+
+void
+mpls_route_key_impl_t::label_set(uint32_t index, mpls_label_t && value) {
+   labels_.emplace(labels_.begin() + index, std::move(value));
 }
 
 void
@@ -143,11 +153,17 @@ operator<<(std::ostream& os, const mpls_route_key_impl_t& obj) {
 
 
 mpls_route_impl_t::mpls_route_impl_t() :
-      key_() {
+      key_(), version_id_() {
 }
 
 mpls_route_impl_t::mpls_route_impl_t(mpls_route_key_t key) :
-      key_(key) {
+      key_(key), version_id_() {
+   version_id_ = 0;
+}
+
+mpls_route_impl_t::mpls_route_impl_t(mpls_route_key_t key,
+                                            uint32_t version_id) :
+      key_(key), version_id_(version_id) {
 }
 
 mpls_route_key_t
@@ -160,9 +176,20 @@ mpls_route_impl_t::key_is(mpls_route_key_t key) {
    key_ = key;
 }
 
+uint32_t
+mpls_route_impl_t::version_id() const {
+   return version_id_;
+}
+
+void
+mpls_route_impl_t::version_id_is(uint32_t version_id) {
+   version_id_ = version_id;
+}
+
 bool
 mpls_route_impl_t::operator==(mpls_route_impl_t const & other) const {
-   return key_ == other.key_;
+   return key_ == other.key_ &&
+          version_id_ == other.version_id_;
 }
 
 bool
@@ -180,6 +207,7 @@ mpls_route_impl_t::hash() const {
 void
 mpls_route_impl_t::mix_me(hash_mix & h) const {
    h.mix(key_); // mpls_route_key_t
+   h.mix(version_id_); // uint32_t
 }
 
 std::string
@@ -187,6 +215,7 @@ mpls_route_impl_t::to_string() const {
    std::ostringstream ss;
    ss << "mpls_route_t(";
    ss << "key=" << key_;
+   ss << ", version_id=" << version_id_;
    ss << ")";
    return ss.str();
 }
@@ -241,6 +270,11 @@ mpls_route_via_impl_t::hop_is(ip_addr_t const & hop) {
    hop_ = hop;
 }
 
+void
+mpls_route_via_impl_t::hop_is(ip_addr_t && hop) {
+   hop_ = std::move(hop);
+}
+
 intf_id_t
 mpls_route_via_impl_t::intf() const {
    return intf_;
@@ -249,6 +283,11 @@ mpls_route_via_impl_t::intf() const {
 void
 mpls_route_via_impl_t::intf_is(intf_id_t const & intf) {
    intf_ = intf;
+}
+
+void
+mpls_route_via_impl_t::intf_is(intf_id_t && intf) {
+   intf_ = std::move(intf);
 }
 
 mpls_label_t

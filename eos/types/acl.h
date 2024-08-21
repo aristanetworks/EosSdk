@@ -12,6 +12,23 @@
 #include <memory>
 #include <sstream>
 
+#ifdef SWIG
+%ignore eos::acl_ttl_spec_t(eos::acl_ttl_spec_t &&) noexcept;
+%ignore eos::acl_ttl_spec_t::operator=(eos::acl_ttl_spec_t &&) noexcept;
+%ignore eos::acl_port_spec_t(eos::acl_port_spec_t &&) noexcept;
+%ignore eos::acl_port_spec_t::operator=(eos::acl_port_spec_t &&) noexcept;
+%ignore eos::acl_port_spec_t::ports_is(std::list<uint16_t> &&);
+%ignore eos::port_set(uint16_t &&);
+%ignore eos::acl_rule_base_t(eos::acl_rule_base_t &&) noexcept;
+%ignore eos::acl_rule_base_t::operator=(eos::acl_rule_base_t &&) noexcept;
+%ignore eos::acl_rule_ip_t(eos::acl_rule_ip_t &&) noexcept;
+%ignore eos::acl_rule_ip_t::operator=(eos::acl_rule_ip_t &&) noexcept;
+%ignore eos::acl_rule_ip_t::source_addr_is(eos::ip_addr_mask_t &&);
+%ignore eos::acl_rule_ip_t::destination_addr_is(eos::ip_addr_mask_t &&);
+%ignore eos::acl_rule_eth_t(eos::acl_rule_eth_t &&) noexcept;
+%ignore eos::acl_rule_eth_t::operator=(eos::acl_rule_eth_t &&) noexcept;
+#endif
+
 namespace eos {
 
 enum  {
@@ -122,6 +139,8 @@ class EOS_SDK_PUBLIC acl_ttl_spec_t {
    acl_ttl_spec_t& operator=(
       acl_ttl_spec_t const & other);
 
+   acl_ttl_spec_t(acl_ttl_spec_t && other) noexcept;
+   acl_ttl_spec_t & operator=(acl_ttl_spec_t && other) noexcept;
    static void * operator new( std::size_t, void * ptr ) {
       return ptr;
    }
@@ -178,6 +197,8 @@ class EOS_SDK_PUBLIC acl_port_spec_t {
    acl_port_spec_t& operator=(
       acl_port_spec_t const & other);
 
+   acl_port_spec_t(acl_port_spec_t && other) noexcept;
+   acl_port_spec_t & operator=(acl_port_spec_t && other) noexcept;
    static void * operator new( std::size_t, void * ptr ) {
       return ptr;
    }
@@ -189,8 +210,11 @@ class EOS_SDK_PUBLIC acl_port_spec_t {
 
    std::list<uint16_t> const & ports() const;
    void ports_is(std::list<uint16_t> const & ports);
+   void ports_is(std::list<uint16_t> && ports);
    /** Prepend one port to the list. */
    void port_set(uint16_t const & ports);
+   /** Prepend one port to the list. */
+   void port_set(uint16_t && ports);
    /** Remove all matching port elements. */
    void port_del(uint16_t const & ports);
 
@@ -301,6 +325,8 @@ class EOS_SDK_PUBLIC acl_rule_base_t {
    acl_rule_base_t& operator=(
       acl_rule_base_t const & other);
 
+   acl_rule_base_t(acl_rule_base_t && other) noexcept;
+   acl_rule_base_t & operator=(acl_rule_base_t && other) noexcept;
    static void * operator new( std::size_t, void * ptr ) {
       return ptr;
    }
@@ -344,6 +370,8 @@ class EOS_SDK_PUBLIC acl_rule_ip_t : public acl_rule_base_t {
    acl_rule_ip_t& operator=(
       acl_rule_ip_t const & other);
 
+   acl_rule_ip_t(acl_rule_ip_t && other) noexcept;
+   acl_rule_ip_t & operator=(acl_rule_ip_t && other) noexcept;
    static void * operator new( std::size_t, void * ptr ) {
       return ptr;
    }
@@ -370,9 +398,11 @@ class EOS_SDK_PUBLIC acl_rule_ip_t : public acl_rule_base_t {
 
    ip_addr_mask_t source_addr() const;
    void source_addr_is(ip_addr_mask_t const & source_addr);
+   void source_addr_is(ip_addr_mask_t && source_addr);
 
    ip_addr_mask_t destination_addr() const;
    void destination_addr_is(ip_addr_mask_t const & destination_addr);
+   void destination_addr_is(ip_addr_mask_t && destination_addr);
 
    acl_port_spec_t source_port() const;
    void source_port_is(acl_port_spec_t source_port);
@@ -475,6 +505,8 @@ class EOS_SDK_PUBLIC acl_rule_eth_t : public acl_rule_base_t {
    acl_rule_eth_t& operator=(
       acl_rule_eth_t const & other);
 
+   acl_rule_eth_t(acl_rule_eth_t && other) noexcept;
+   acl_rule_eth_t & operator=(acl_rule_eth_t && other) noexcept;
    static void * operator new( std::size_t, void * ptr ) {
       return ptr;
    }

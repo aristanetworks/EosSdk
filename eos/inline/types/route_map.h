@@ -166,6 +166,10 @@ route_map_entry_t::link_bandwidth_is(
    pimpl->link_bandwidth_is(link_bandwidth);
 }
 void
+route_map_entry_t::link_bandwidth_is(route_map_link_bandwidth_t && link_bandwidth) {
+   pimpl->link_bandwidth_is(std::move(link_bandwidth));
+}
+void
 route_map_entry_t::link_bandwidth_del() {
    pimpl->link_bandwidth_del();
 }
@@ -207,13 +211,33 @@ route_map_t::map_entry_is(
    pimpl->map_entry_is(map_entry);
 }
 void
+route_map_t::map_entry_is(
+         std::map<route_map_sequence_number_t, route_map_entry_t> && map_entry) {
+   pimpl->map_entry_is(std::move(map_entry));
+}
+void
 route_map_t::map_entry_set(route_map_sequence_number_t const & key,
                            route_map_entry_t const & value) {
    pimpl->map_entry_set(key, value);
 }
 void
+route_map_t::map_entry_set(route_map_sequence_number_t const & key,
+                           route_map_entry_t && value) {
+   pimpl->map_entry_set(key, std::move(value));
+}
+void
 route_map_t::map_entry_del(route_map_sequence_number_t const & key) {
    pimpl->map_entry_del(key);
+}
+void
+route_map_t::map_entry_set(route_map_sequence_number_t && key,
+                           route_map_entry_t const & value) {
+   pimpl->map_entry_set(std::move(key), value);
+}
+void
+route_map_t::map_entry_set(route_map_sequence_number_t && key,
+                           route_map_entry_t && value) {
+   pimpl->map_entry_set(std::move(key), std::move(value));
 }
 bool
 route_map_t::operator==(route_map_t const & other) const {

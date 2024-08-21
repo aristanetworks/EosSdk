@@ -10,6 +10,11 @@
 #include <memory>
 #include <sstream>
 
+#ifdef SWIG
+%ignore eos::mpls_vrf_label_t(eos::mpls_vrf_label_t &&) noexcept;
+%ignore eos::mpls_vrf_label_t::operator=(eos::mpls_vrf_label_t &&) noexcept;
+#endif
+
 namespace eos {
 
 class mpls_vrf_label_impl_t;
@@ -22,6 +27,8 @@ class EOS_SDK_PUBLIC mpls_vrf_label_t {
    mpls_vrf_label_t& operator=(
       mpls_vrf_label_t const & other);
 
+   mpls_vrf_label_t(mpls_vrf_label_t && other) noexcept;
+   mpls_vrf_label_t & operator=(mpls_vrf_label_t && other) noexcept;
    static void * operator new( std::size_t, void * ptr ) {
       return ptr;
    }

@@ -13,6 +13,42 @@
 #include <memory>
 #include <sstream>
 
+#ifdef SWIG
+%ignore eos::nexthop_group_mpls_action_t(eos::nexthop_group_mpls_action_t &&)
+   noexcept;
+%ignore eos::nexthop_group_mpls_action_t::operator=(
+   eos::nexthop_group_mpls_action_t &&) noexcept;
+%ignore eos::nexthop_group_mpls_action_t::label_stack_is(
+         std::forward_list<eos::mpls_label_t> &&);
+%ignore eos::label_stack_set(eos::mpls_label_t &&);
+%ignore eos::nexthop_group_entry_counter_t(eos::nexthop_group_entry_counter_t &&)
+   noexcept;
+%ignore eos::nexthop_group_entry_counter_t::operator=(
+   eos::nexthop_group_entry_counter_t &&) noexcept;
+%ignore eos::nexthop_group_entry_t(eos::nexthop_group_entry_t &&) noexcept;
+%ignore eos::nexthop_group_entry_t::operator=(eos::nexthop_group_entry_t &&)
+   noexcept;
+%ignore eos::nexthop_group_entry_t::mpls_action_is(
+         eos::nexthop_group_mpls_action_t &&);
+%ignore eos::nexthop_group_entry_t::nexthop_is(eos::ip_addr_t &&);
+%ignore eos::nexthop_group_entry_t::intf_is(intf_id_t &&);
+%ignore eos::nexthop_group_entry_t::sbfd_session_key_is(
+         eos::sbfd_echo_session_key_t &&);
+%ignore eos::nexthop_group_entry_t::child_nexthop_group_is(std::string &&);
+%ignore eos::nexthop_group_t(eos::nexthop_group_t &&) noexcept;
+%ignore eos::nexthop_group_t::operator=(eos::nexthop_group_t &&) noexcept;
+%ignore eos::nexthop_group_t::source_ip_is(eos::ip_addr_t &&);
+%ignore eos::nexthop_group_t::nexthops_is(
+         std::map<uint16_t, nexthop_group_entry_t> &&);
+%ignore eos::nexthop_group_t::backup_nexthops_is(
+         std::map<uint16_t, nexthop_group_entry_t> &&);
+%ignore eos::nexthop_group_t::destination_ips_is(std::map<uint16_t, ip_addr_t> &&);
+%ignore eos::nexthop_group_programmed_status_t(
+   eos::nexthop_group_programmed_status_t &&) noexcept;
+%ignore eos::nexthop_group_programmed_status_t::operator=(
+   eos::nexthop_group_programmed_status_t &&) noexcept;
+#endif
+
 namespace eos {
 
 /**
@@ -79,6 +115,9 @@ class EOS_SDK_PUBLIC nexthop_group_mpls_action_t {
    nexthop_group_mpls_action_t& operator=(
       nexthop_group_mpls_action_t const & other);
 
+   nexthop_group_mpls_action_t(nexthop_group_mpls_action_t && other) noexcept;
+   nexthop_group_mpls_action_t & operator=(nexthop_group_mpls_action_t && other)
+      noexcept;
    static void * operator new( std::size_t, void * ptr ) {
       return ptr;
    }
@@ -102,8 +141,12 @@ class EOS_SDK_PUBLIC nexthop_group_mpls_action_t {
    std::forward_list<mpls_label_t> const & label_stack() const;
    /** Setter for 'label_stack'. */
    void label_stack_is(std::forward_list<mpls_label_t> const & label_stack);
+   /** Moving Setter for 'label_stack'. */
+   void label_stack_is(std::forward_list<mpls_label_t> && label_stack);
    /** Prepend one label_stack to the list. */
    void label_stack_set(mpls_label_t const & label_stack);
+   /** Prepend one label_stack to the list. */
+   void label_stack_set(mpls_label_t && label_stack);
    /** Remove all matching label_stack elements. */
    void label_stack_del(mpls_label_t const & label_stack);
 
@@ -140,6 +183,9 @@ class EOS_SDK_PUBLIC nexthop_group_entry_counter_t {
    nexthop_group_entry_counter_t& operator=(
       nexthop_group_entry_counter_t const & other);
 
+   nexthop_group_entry_counter_t(nexthop_group_entry_counter_t && other) noexcept;
+   nexthop_group_entry_counter_t & operator=(nexthop_group_entry_counter_t && other)
+      noexcept;
    static void * operator new( std::size_t, void * ptr ) {
       return ptr;
    }
@@ -193,6 +239,8 @@ class EOS_SDK_PUBLIC nexthop_group_entry_t {
    nexthop_group_entry_t& operator=(
       nexthop_group_entry_t const & other);
 
+   nexthop_group_entry_t(nexthop_group_entry_t && other) noexcept;
+   nexthop_group_entry_t & operator=(nexthop_group_entry_t && other) noexcept;
    static void * operator new( std::size_t, void * ptr ) {
       return ptr;
    }
@@ -203,26 +251,36 @@ class EOS_SDK_PUBLIC nexthop_group_entry_t {
    nexthop_group_mpls_action_t mpls_action() const;
    /** Setter for 'mpls_action'. */
    void mpls_action_is(nexthop_group_mpls_action_t const & mpls_action);
+   /** Moving Setter for 'mpls_action'. */
+   void mpls_action_is(nexthop_group_mpls_action_t && mpls_action);
 
    /** Getter for 'nexthop': the next hop IP address for this entry. */
    ip_addr_t nexthop() const;
    /** Setter for 'nexthop'. */
    void nexthop_is(ip_addr_t const & nexthop);
+   /** Moving Setter for 'nexthop'. */
+   void nexthop_is(ip_addr_t && nexthop);
 
    /** Getter for 'intf': the next hop egress interface. */
    intf_id_t intf() const;
    /** Setter for 'intf'. */
    void intf_is(intf_id_t const & intf);
+   /** Moving Setter for 'intf'. */
+   void intf_is(intf_id_t && intf);
 
    /** Getter for 'sbfd_session_key': the optional key to an sBFD session. */
    sbfd_echo_session_key_t sbfd_session_key() const;
    /** Setter for 'sbfd_session_key'. */
    void sbfd_session_key_is(sbfd_echo_session_key_t const & sbfd_session_key);
+   /** Moving Setter for 'sbfd_session_key'. */
+   void sbfd_session_key_is(sbfd_echo_session_key_t && sbfd_session_key);
 
    /** Getter for 'child_nexthop_group': the name of next level nexthop-group. */
    std::string child_nexthop_group() const;
    /** Setter for 'child_nexthop_group'. */
    void child_nexthop_group_is(std::string const & child_nexthop_group);
+   /** Moving Setter for 'child_nexthop_group'. */
+   void child_nexthop_group_is(std::string && child_nexthop_group);
 
    bool operator==(nexthop_group_entry_t const & other) const;
    bool operator!=(nexthop_group_entry_t const & other) const;
@@ -267,6 +325,8 @@ class EOS_SDK_PUBLIC nexthop_group_t {
    nexthop_group_t& operator=(
       nexthop_group_t const & other);
 
+   nexthop_group_t(nexthop_group_t && other) noexcept;
+   nexthop_group_t & operator=(nexthop_group_t && other) noexcept;
    static void * operator new( std::size_t, void * ptr ) {
       return ptr;
    }
@@ -291,6 +351,8 @@ class EOS_SDK_PUBLIC nexthop_group_t {
    ip_addr_t source_ip() const;
    /** Setter for 'source_ip'. */
    void source_ip_is(ip_addr_t const & source_ip);
+   /** Moving Setter for 'source_ip'. */
+   void source_ip_is(ip_addr_t && source_ip);
 
    /** Getter for 'source_intf': the source interface to use. */
    intf_id_t source_intf() const;
@@ -321,8 +383,12 @@ class EOS_SDK_PUBLIC nexthop_group_t {
    std::map<uint16_t, nexthop_group_entry_t> const & nexthops() const;
    /** Setter for 'nexthops'. */
    void nexthops_is(std::map<uint16_t, nexthop_group_entry_t> const & nexthops);
+   /** Moving Setter for 'nexthops'. */
+   void nexthops_is(std::map<uint16_t, nexthop_group_entry_t> && nexthops);
    /** Inserts key/value pair to the map. */
    void nexthop_set(uint16_t key, nexthop_group_entry_t const & value);
+   /** Inserts key/value pair to the map. */
+   void nexthop_set(uint16_t key, nexthop_group_entry_t && value);
    /** Deletes the key/value pair from the map. */
    void nexthop_del(uint16_t key);
 
@@ -333,8 +399,13 @@ class EOS_SDK_PUBLIC nexthop_group_t {
    /** Setter for 'backup_nexthops'. */
    void backup_nexthops_is(
          std::map<uint16_t, nexthop_group_entry_t> const & backup_nexthops);
+   /** Moving Setter for 'backup_nexthops'. */
+   void backup_nexthops_is(
+         std::map<uint16_t, nexthop_group_entry_t> && backup_nexthops);
    /** Inserts key/value pair to the map. */
    void backup_nexthop_set(uint16_t key, nexthop_group_entry_t const & value);
+   /** Inserts key/value pair to the map. */
+   void backup_nexthop_set(uint16_t key, nexthop_group_entry_t && value);
    /** Deletes the key/value pair from the map. */
    void backup_nexthop_del(uint16_t key);
 
@@ -345,8 +416,12 @@ class EOS_SDK_PUBLIC nexthop_group_t {
    std::map<uint16_t, ip_addr_t> const & destination_ips() const;
    /** Setter for 'destination_ips'. */
    void destination_ips_is(std::map<uint16_t, ip_addr_t> const & destination_ips);
+   /** Moving Setter for 'destination_ips'. */
+   void destination_ips_is(std::map<uint16_t, ip_addr_t> && destination_ips);
    /** Inserts key/value pair to the map. */
    void destination_ip_set(uint16_t key, ip_addr_t const & value);
+   /** Inserts key/value pair to the map. */
+   void destination_ip_set(uint16_t key, ip_addr_t && value);
    /** Deletes the key/value pair from the map. */
    void destination_ip_del(uint16_t key);
 
@@ -432,12 +507,12 @@ enum nexthop_group_counter_state_t {
     * At least one nexthop group entry counter has failed to
     * be programmed in hardware.
     */
-   NEXTHOP_GROUP_COUNTER_PROGRAMMING_FAILED,
+   NEXTHOP_GROUP_COUNTER_PROGRAMMING_FAILED = 1,
    /**
     * All nexthop group entry counters have been successfully
     * programmed in hardware.
     */
-   NEXTHOP_GROUP_COUNTER_PROGRAMMING_COMPLETE,
+   NEXTHOP_GROUP_COUNTER_PROGRAMMING_COMPLETE = 2,
 };
 /**
  * Appends a string representation of enum nexthop_group_counter_state_t value to
@@ -446,17 +521,48 @@ enum nexthop_group_counter_state_t {
 EOS_SDK_PUBLIC std::ostream& operator<<(
          std::ostream& os, const nexthop_group_counter_state_t & enum_val);
 
+/**
+ * The current vias hardware programmed state for a nexthop group.
+ *
+ * Programmed HW State is a summary of the entire nexthop group and
+ * will not note which specific entry is in the provided state.
+ */
+enum nexthop_group_programmed_hw_state_t {
+   /** All nexthop group entries are not programmed in hardware. */
+   NEXTHOP_GROUP_HW_DROP,
+   /**
+    * At least one nexthop group entry is programmed in
+    * hardware.
+    */
+   NEXTHOP_GROUP_HW_PARTIALLY_PROGRAMMED = 1,
+   /**
+    * All nexthop group entries are programmed in
+    * hardware.
+    */
+   NEXTHOP_GROUP_HW_ALL_PROGRAMMED = 2,
+};
+/**
+ * Appends a string representation of enum nexthop_group_programmed_hw_state_t
+ * value to the ostream.
+ */
+EOS_SDK_PUBLIC std::ostream& operator<<(
+         std::ostream& os, const nexthop_group_programmed_hw_state_t & enum_val);
+
 class nexthop_group_programmed_status_impl_t;
 /** Status for the associated nexthop group. */
 class EOS_SDK_PUBLIC nexthop_group_programmed_status_t {
  public:
    nexthop_group_programmed_status_t();
-   explicit nexthop_group_programmed_status_t(
-         nexthop_group_counter_state_t counter_state);
+   nexthop_group_programmed_status_t(nexthop_group_counter_state_t counter_state,
+                                     nexthop_group_programmed_hw_state_t hw_state);
    nexthop_group_programmed_status_t(const nexthop_group_programmed_status_t& other);
    nexthop_group_programmed_status_t& operator=(
       nexthop_group_programmed_status_t const & other);
 
+   nexthop_group_programmed_status_t(nexthop_group_programmed_status_t && other)
+      noexcept;
+   nexthop_group_programmed_status_t & operator=(
+      nexthop_group_programmed_status_t && other) noexcept;
    static void * operator new( std::size_t, void * ptr ) {
       return ptr;
    }
@@ -468,6 +574,12 @@ class EOS_SDK_PUBLIC nexthop_group_programmed_status_t {
     * nexthop group.
     */
    nexthop_group_counter_state_t counter_state() const;
+
+   /**
+    * Getter for 'hw_state': The status of the hardware programmed entries for this
+    * nexthop group.
+    */
+   nexthop_group_programmed_hw_state_t hw_state() const;
 
    bool operator==(nexthop_group_programmed_status_t const & other) const;
    bool operator!=(nexthop_group_programmed_status_t const & other) const;

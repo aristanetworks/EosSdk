@@ -12,6 +12,15 @@
 #include <memory>
 #include <sstream>
 
+#ifdef SWIG
+%ignore eos::class_map_rule_t(eos::class_map_rule_t &&) noexcept;
+%ignore eos::class_map_rule_t::operator=(eos::class_map_rule_t &&) noexcept;
+%ignore eos::class_map_t(eos::class_map_t &&) noexcept;
+%ignore eos::class_map_t::operator=(eos::class_map_t &&) noexcept;
+%ignore eos::class_map_t::key_is(eos::class_map_key_t &&);
+%ignore eos::class_map_t::rules_is(std::map<uint32_t, class_map_rule_t> &&);
+#endif
+
 namespace eos {
 /**
  * A special class map name which means "match all MPLS traffic."
@@ -46,6 +55,8 @@ class EOS_SDK_PUBLIC class_map_rule_t {
    class_map_rule_t& operator=(
       class_map_rule_t const & other);
 
+   class_map_rule_t(class_map_rule_t && other) noexcept;
+   class_map_rule_t & operator=(class_map_rule_t && other) noexcept;
    static void * operator new( std::size_t, void * ptr ) {
       return ptr;
    }
@@ -93,6 +104,8 @@ class EOS_SDK_PUBLIC class_map_t {
    class_map_t& operator=(
       class_map_t const & other);
 
+   class_map_t(class_map_t && other) noexcept;
+   class_map_t & operator=(class_map_t && other) noexcept;
    static void * operator new( std::size_t, void * ptr ) {
       return ptr;
    }
@@ -103,13 +116,19 @@ class EOS_SDK_PUBLIC class_map_t {
    class_map_key_t key() const;
    /** Setter for 'key'. */
    void key_is(class_map_key_t const & key);
+   /** Moving Setter for 'key'. */
+   void key_is(class_map_key_t && key);
 
    /** Getter for 'rules': the sequence of class map rules. */
    std::map<uint32_t, class_map_rule_t> const & rules() const;
    /** Setter for 'rules'. */
    void rules_is(std::map<uint32_t, class_map_rule_t> const & rules);
+   /** Moving Setter for 'rules'. */
+   void rules_is(std::map<uint32_t, class_map_rule_t> && rules);
    /** Inserts key/value pair to the map. */
    void rule_set(uint32_t key, class_map_rule_t const & value);
+   /** Inserts key/value pair to the map. */
+   void rule_set(uint32_t key, class_map_rule_t && value);
    /** Deletes the key/value pair from the map. */
    void rule_del(uint32_t key);
 

@@ -35,8 +35,18 @@ flow_match_impl_t::input_intfs_is(std::set<intf_id_t> const & input_intfs) {
 }
 
 void
+flow_match_impl_t::input_intfs_is(std::set<intf_id_t> && input_intfs) {
+   input_intfs_ = std::move(input_intfs);
+}
+
+void
 flow_match_impl_t::input_intf_set(intf_id_t const & value) {
    input_intfs_.insert(value);
+}
+
+void
+flow_match_impl_t::input_intf_set(intf_id_t && value) {
+   input_intfs_.emplace(std::move(value));
 }
 
 void
@@ -153,6 +163,11 @@ flow_match_impl_t::ip_src_is(ip_addr_t const & ip_src) {
 }
 
 void
+flow_match_impl_t::ip_src_is(ip_addr_t && ip_src) {
+   ip_src_ = std::move(ip_src);
+}
+
+void
 flow_match_impl_t::ip_src_is(ip_addr_t const & src, ip_addr_t const & mask) {
    ip_src_ = src;
    ip_src_mask_ = mask;
@@ -168,6 +183,11 @@ flow_match_impl_t::ip_src_mask_is(ip_addr_t const & ip_src_mask) {
    ip_src_mask_ = ip_src_mask;
 }
 
+void
+flow_match_impl_t::ip_src_mask_is(ip_addr_t && ip_src_mask) {
+   ip_src_mask_ = std::move(ip_src_mask);
+}
+
 ip_addr_t
 flow_match_impl_t::ip_dst() const {
    return ip_dst_;
@@ -176,6 +196,11 @@ flow_match_impl_t::ip_dst() const {
 void
 flow_match_impl_t::ip_dst_is(ip_addr_t const & ip_dst) {
    ip_dst_ = ip_dst;
+}
+
+void
+flow_match_impl_t::ip_dst_is(ip_addr_t && ip_dst) {
+   ip_dst_ = std::move(ip_dst);
 }
 
 void
@@ -192,6 +217,11 @@ flow_match_impl_t::ip_dst_mask() const {
 void
 flow_match_impl_t::ip_dst_mask_is(ip_addr_t const & ip_dst_mask) {
    ip_dst_mask_ = ip_dst_mask;
+}
+
+void
+flow_match_impl_t::ip_dst_mask_is(ip_addr_t && ip_dst_mask) {
+   ip_dst_mask_ = std::move(ip_dst_mask);
 }
 
 bool
@@ -348,8 +378,18 @@ flow_action_impl_t::output_intfs_is(std::set<intf_id_t> const & output_intfs) {
 }
 
 void
+flow_action_impl_t::output_intfs_is(std::set<intf_id_t> && output_intfs) {
+   output_intfs_ = std::move(output_intfs);
+}
+
+void
 flow_action_impl_t::output_intf_set(intf_id_t const & value) {
    output_intfs_.insert(value);
+}
+
+void
+flow_action_impl_t::output_intf_set(intf_id_t && value) {
+   output_intfs_.emplace(std::move(value));
 }
 
 void
@@ -413,6 +453,11 @@ flow_action_impl_t::ip_src_is(ip_addr_t const & ip_src) {
    ip_src_ = ip_src;
 }
 
+void
+flow_action_impl_t::ip_src_is(ip_addr_t && ip_src) {
+   ip_src_ = std::move(ip_src);
+}
+
 ip_addr_t
 flow_action_impl_t::ip_dst() const {
    return ip_dst_;
@@ -421,6 +466,11 @@ flow_action_impl_t::ip_dst() const {
 void
 flow_action_impl_t::ip_dst_is(ip_addr_t const & ip_dst) {
    ip_dst_ = ip_dst;
+}
+
+void
+flow_action_impl_t::ip_dst_is(ip_addr_t && ip_dst) {
+   ip_dst_ = std::move(ip_dst);
 }
 
 bool

@@ -35,6 +35,19 @@ eth_lag_intf_membership_t::operator=(
    return *this;
 }
 
+EOS_SDK_PUBLIC eth_lag_intf_membership_t::eth_lag_intf_membership_t(
+   eth_lag_intf_membership_t && other) noexcept  :
+   pimpl(std::move(other.pimpl)) {}
+EOS_SDK_PUBLIC eth_lag_intf_membership_t&
+eth_lag_intf_membership_t::operator=(
+   eth_lag_intf_membership_t && other) noexcept 
+{
+   if(this != &other) {
+      std::swap(pimpl, other.pimpl);
+   }
+   return *this;
+}
+
 EOS_SDK_PUBLIC void *
 eth_lag_intf_membership_t::operator new( std::size_t size ) {
    return ::operator new( size );
@@ -55,13 +68,14 @@ eth_lag_intf_t::eth_lag_intf_t(intf_id_t intf) :
    )) {}
 eth_lag_intf_t::eth_lag_intf_t(intf_id_t intf, uint32_t min_links, uint64_t speed,
                                eth_lag_intf_fallback_type_t fallback_type,
-                               uint16_t fallback_timeout) :
+                               uint16_t fallback_timeout, uint64_t min_speed) :
    pimpl(std::make_shared<eth_lag_intf_impl_t>(
       intf,
       min_links,
       speed,
       fallback_type,
-      fallback_timeout
+      fallback_timeout,
+      min_speed
    )) {}
 EOS_SDK_PUBLIC eth_lag_intf_t::eth_lag_intf_t(
    const eth_lag_intf_t& other) :
@@ -74,6 +88,19 @@ eth_lag_intf_t::operator=(
    if(this != &other) {
       pimpl = std::make_shared<eth_lag_intf_impl_t>(
          *other.pimpl);
+   }
+   return *this;
+}
+
+EOS_SDK_PUBLIC eth_lag_intf_t::eth_lag_intf_t(
+   eth_lag_intf_t && other) noexcept  :
+   pimpl(std::move(other.pimpl)) {}
+EOS_SDK_PUBLIC eth_lag_intf_t&
+eth_lag_intf_t::operator=(
+   eth_lag_intf_t && other) noexcept 
+{
+   if(this != &other) {
+      std::swap(pimpl, other.pimpl);
    }
    return *this;
 }

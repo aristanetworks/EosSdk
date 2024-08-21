@@ -14,6 +14,10 @@ void
 nexthop_group_tunnel_t::tunnel_endpoint_is(ip_prefix_t const & tunnel_endpoint) {
    pimpl->tunnel_endpoint_is(tunnel_endpoint);
 }
+void
+nexthop_group_tunnel_t::tunnel_endpoint_is(ip_prefix_t && tunnel_endpoint) {
+   pimpl->tunnel_endpoint_is(std::move(tunnel_endpoint));
+}
 std::string
 nexthop_group_tunnel_t::nhg_name() const {
    return pimpl->nhg_name();
@@ -21,6 +25,10 @@ nexthop_group_tunnel_t::nhg_name() const {
 void
 nexthop_group_tunnel_t::nhg_name_is(std::string const & nhg_name) {
    pimpl->nhg_name_is(nhg_name);
+}
+void
+nexthop_group_tunnel_t::nhg_name_is(std::string && nhg_name) {
+   pimpl->nhg_name_is(std::move(nhg_name));
 }
 uint8_t
 nexthop_group_tunnel_t::igp_pref() const {

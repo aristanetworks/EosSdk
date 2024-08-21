@@ -33,6 +33,19 @@ decap_group_t::operator=(
    return *this;
 }
 
+EOS_SDK_PUBLIC decap_group_t::decap_group_t(
+   decap_group_t && other) noexcept  :
+   pimpl(std::move(other.pimpl)) {}
+EOS_SDK_PUBLIC decap_group_t&
+decap_group_t::operator=(
+   decap_group_t && other) noexcept 
+{
+   if(this != &other) {
+      std::swap(pimpl, other.pimpl);
+   }
+   return *this;
+}
+
 EOS_SDK_PUBLIC void *
 decap_group_t::operator new( std::size_t size ) {
    return ::operator new( size );

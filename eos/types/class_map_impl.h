@@ -64,13 +64,19 @@ class EOS_SDK_PUBLIC class_map_impl_t {
    class_map_key_t key() const;
    /** Setter for 'key'. */
    void key_is(class_map_key_t const & key);
+   /** Moving Setter for 'key'. */
+   void key_is(class_map_key_t && key);
 
    /** Getter for 'rules': the sequence of class map rules. */
    std::map<uint32_t, class_map_rule_t> const & rules() const;
    /** Setter for 'rules'. */
    void rules_is(std::map<uint32_t, class_map_rule_t> const & rules);
+   /** Moving Setter for 'rules'. */
+   void rules_is(std::map<uint32_t, class_map_rule_t> && rules);
    /** Inserts key/value pair to the map. */
    void rule_set(uint32_t key, class_map_rule_t const & value);
+   /** Inserts key/value pair to the map. */
+   void rule_set(uint32_t key, class_map_rule_t && value);
    /** Deletes the key/value pair from the map. */
    void rule_del(uint32_t key);
 

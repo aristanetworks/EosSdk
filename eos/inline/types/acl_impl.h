@@ -137,8 +137,18 @@ acl_port_spec_impl_t::ports_is(std::list<uint16_t> const & ports) {
 }
 
 void
+acl_port_spec_impl_t::ports_is(std::list<uint16_t> && ports) {
+   ports_ = std::move(ports);
+}
+
+void
 acl_port_spec_impl_t::port_set(uint16_t const & ports) {
    ports_.push_front(ports);
+}
+
+void
+acl_port_spec_impl_t::port_set(uint16_t && ports) {
+   ports_.push_front(std::move(ports));
 }
 
 void
@@ -414,6 +424,11 @@ acl_rule_ip_impl_t::source_addr_is(ip_addr_mask_t const & source_addr) {
    source_addr_ = source_addr;
 }
 
+void
+acl_rule_ip_impl_t::source_addr_is(ip_addr_mask_t && source_addr) {
+   source_addr_ = std::move(source_addr);
+}
+
 ip_addr_mask_t
 acl_rule_ip_impl_t::destination_addr() const {
    return destination_addr_;
@@ -422,6 +437,11 @@ acl_rule_ip_impl_t::destination_addr() const {
 void
 acl_rule_ip_impl_t::destination_addr_is(ip_addr_mask_t const & destination_addr) {
    destination_addr_ = destination_addr;
+}
+
+void
+acl_rule_ip_impl_t::destination_addr_is(ip_addr_mask_t && destination_addr) {
+   destination_addr_ = std::move(destination_addr);
 }
 
 acl_port_spec_t

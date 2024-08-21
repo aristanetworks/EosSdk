@@ -96,6 +96,14 @@ class eth_lag_intf_mgr_impl : public eth_lag_intf_mgr {
       return 8;
    }
 
+   void min_speed_is(intf_id_t eth_lag_intf_id, uint64_t min_speed) {
+      return;
+   }
+
+   uint64_t min_speed(intf_id_t eth_lag_intf_id) const {
+      return 0;
+   }
+
    void fallback_type_is(intf_id_t eth_lag_intf_id,
                          eth_lag_intf_fallback_type_t fallback_type) {
       return;
@@ -184,6 +192,19 @@ class eth_lag_intf_mgr_impl : public eth_lag_intf_mgr {
       return "Hello World";
    }
 };
+
+// -- pimpl wrappers to min_speed/min_speed_is
+
+uint64_t eth_lag_intf_mgr::min_speed(intf_id_t eth_lag_intf_id) const {
+   return static_cast<eth_lag_intf_mgr_impl const*>(this)->min_speed(
+       eth_lag_intf_id);
+}
+
+void eth_lag_intf_mgr::min_speed_is(intf_id_t eth_lag_intf_id, uint64_t speed) {
+   static_cast<eth_lag_intf_mgr_impl*>(this)->min_speed_is(eth_lag_intf_id, speed);
+}
+
+// -- end of wrappers
 
 DEFINE_STUB_MGR_CTOR(eth_lag_intf_mgr)
 

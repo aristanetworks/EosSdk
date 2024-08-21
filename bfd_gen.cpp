@@ -64,6 +64,19 @@ bfd_session_key_t::operator=(
    return *this;
 }
 
+EOS_SDK_PUBLIC bfd_session_key_t::bfd_session_key_t(
+   bfd_session_key_t && other) noexcept  :
+   pimpl(std::move(other.pimpl)) {}
+EOS_SDK_PUBLIC bfd_session_key_t&
+bfd_session_key_t::operator=(
+   bfd_session_key_t && other) noexcept 
+{
+   if(this != &other) {
+      std::swap(pimpl, other.pimpl);
+   }
+   return *this;
+}
+
 EOS_SDK_PUBLIC void *
 bfd_session_key_t::operator new( std::size_t size ) {
    return ::operator new( size );
@@ -99,6 +112,19 @@ bfd_interval_t::operator=(
    return *this;
 }
 
+EOS_SDK_PUBLIC bfd_interval_t::bfd_interval_t(
+   bfd_interval_t && other) noexcept  :
+   pimpl(std::move(other.pimpl)) {}
+EOS_SDK_PUBLIC bfd_interval_t&
+bfd_interval_t::operator=(
+   bfd_interval_t && other) noexcept 
+{
+   if(this != &other) {
+      std::swap(pimpl, other.pimpl);
+   }
+   return *this;
+}
+
 EOS_SDK_PUBLIC void *
 bfd_interval_t::operator new( std::size_t size ) {
    return ::operator new( size );
@@ -129,6 +155,19 @@ bfd_session_t::operator=(
    if(this != &other) {
       pimpl = std::make_shared<bfd_session_impl_t>(
          *other.pimpl);
+   }
+   return *this;
+}
+
+EOS_SDK_PUBLIC bfd_session_t::bfd_session_t(
+   bfd_session_t && other) noexcept  :
+   pimpl(std::move(other.pimpl)) {}
+EOS_SDK_PUBLIC bfd_session_t&
+bfd_session_t::operator=(
+   bfd_session_t && other) noexcept 
+{
+   if(this != &other) {
+      std::swap(pimpl, other.pimpl);
    }
    return *this;
 }
@@ -181,6 +220,19 @@ sbfd_echo_session_key_t::operator=(
    return *this;
 }
 
+EOS_SDK_PUBLIC sbfd_echo_session_key_t::sbfd_echo_session_key_t(
+   sbfd_echo_session_key_t && other) noexcept  :
+   pimpl(std::move(other.pimpl)) {}
+EOS_SDK_PUBLIC sbfd_echo_session_key_t&
+sbfd_echo_session_key_t::operator=(
+   sbfd_echo_session_key_t && other) noexcept 
+{
+   if(this != &other) {
+      std::swap(pimpl, other.pimpl);
+   }
+   return *this;
+}
+
 EOS_SDK_PUBLIC void *
 sbfd_echo_session_key_t::operator new( std::size_t size ) {
    return ::operator new( size );
@@ -211,6 +263,19 @@ sbfd_interval_t::operator=(
    if(this != &other) {
       pimpl = std::make_shared<sbfd_interval_impl_t>(
          *other.pimpl);
+   }
+   return *this;
+}
+
+EOS_SDK_PUBLIC sbfd_interval_t::sbfd_interval_t(
+   sbfd_interval_t && other) noexcept  :
+   pimpl(std::move(other.pimpl)) {}
+EOS_SDK_PUBLIC sbfd_interval_t&
+sbfd_interval_t::operator=(
+   sbfd_interval_t && other) noexcept 
+{
+   if(this != &other) {
+      std::swap(pimpl, other.pimpl);
    }
    return *this;
 }
@@ -250,6 +315,19 @@ sbfd_echo_session_rtt_stats_t::operator=(
    if(this != &other) {
       pimpl = std::make_shared<sbfd_echo_session_rtt_stats_impl_t>(
          *other.pimpl);
+   }
+   return *this;
+}
+
+EOS_SDK_PUBLIC sbfd_echo_session_rtt_stats_t::sbfd_echo_session_rtt_stats_t(
+   sbfd_echo_session_rtt_stats_t && other) noexcept  :
+   pimpl(std::move(other.pimpl)) {}
+EOS_SDK_PUBLIC sbfd_echo_session_rtt_stats_t&
+sbfd_echo_session_rtt_stats_t::operator=(
+   sbfd_echo_session_rtt_stats_t && other) noexcept 
+{
+   if(this != &other) {
+      std::swap(pimpl, other.pimpl);
    }
    return *this;
 }

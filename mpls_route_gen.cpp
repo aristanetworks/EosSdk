@@ -36,6 +36,19 @@ mpls_route_key_t::operator=(
    return *this;
 }
 
+EOS_SDK_PUBLIC mpls_route_key_t::mpls_route_key_t(
+   mpls_route_key_t && other) noexcept  :
+   pimpl(std::move(other.pimpl)) {}
+EOS_SDK_PUBLIC mpls_route_key_t&
+mpls_route_key_t::operator=(
+   mpls_route_key_t && other) noexcept 
+{
+   if(this != &other) {
+      std::swap(pimpl, other.pimpl);
+   }
+   return *this;
+}
+
 EOS_SDK_PUBLIC void *
 mpls_route_key_t::operator new( std::size_t size ) {
    return ::operator new( size );
@@ -53,6 +66,11 @@ mpls_route_t::mpls_route_t(mpls_route_key_t key) :
    pimpl(std::make_shared<mpls_route_impl_t>(
       key
    )) {}
+mpls_route_t::mpls_route_t(mpls_route_key_t key, uint32_t version_id) :
+   pimpl(std::make_shared<mpls_route_impl_t>(
+      key,
+      version_id
+   )) {}
 EOS_SDK_PUBLIC mpls_route_t::mpls_route_t(
    const mpls_route_t& other) :
    pimpl(std::make_shared<mpls_route_impl_t>(
@@ -64,6 +82,19 @@ mpls_route_t::operator=(
    if(this != &other) {
       pimpl = std::make_shared<mpls_route_impl_t>(
          *other.pimpl);
+   }
+   return *this;
+}
+
+EOS_SDK_PUBLIC mpls_route_t::mpls_route_t(
+   mpls_route_t && other) noexcept  :
+   pimpl(std::move(other.pimpl)) {}
+EOS_SDK_PUBLIC mpls_route_t&
+mpls_route_t::operator=(
+   mpls_route_t && other) noexcept 
+{
+   if(this != &other) {
+      std::swap(pimpl, other.pimpl);
    }
    return *this;
 }
@@ -106,6 +137,19 @@ mpls_route_via_t::operator=(
    return *this;
 }
 
+EOS_SDK_PUBLIC mpls_route_via_t::mpls_route_via_t(
+   mpls_route_via_t && other) noexcept  :
+   pimpl(std::move(other.pimpl)) {}
+EOS_SDK_PUBLIC mpls_route_via_t&
+mpls_route_via_t::operator=(
+   mpls_route_via_t && other) noexcept 
+{
+   if(this != &other) {
+      std::swap(pimpl, other.pimpl);
+   }
+   return *this;
+}
+
 EOS_SDK_PUBLIC void *
 mpls_route_via_t::operator new( std::size_t size ) {
    return ::operator new( size );
@@ -134,6 +178,19 @@ mpls_fec_id_t::operator=(
    if(this != &other) {
       pimpl = std::make_shared<mpls_fec_id_impl_t>(
          *other.pimpl);
+   }
+   return *this;
+}
+
+EOS_SDK_PUBLIC mpls_fec_id_t::mpls_fec_id_t(
+   mpls_fec_id_t && other) noexcept  :
+   pimpl(std::move(other.pimpl)) {}
+EOS_SDK_PUBLIC mpls_fec_id_t&
+mpls_fec_id_t::operator=(
+   mpls_fec_id_t && other) noexcept 
+{
+   if(this != &other) {
+      std::swap(pimpl, other.pimpl);
    }
    return *this;
 }

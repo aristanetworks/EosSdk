@@ -16,6 +16,79 @@
 #include <sstream>
 #include <unordered_set>
 
+#ifdef SWIG
+%ignore eos::policy_map_key_t(eos::policy_map_key_t &&) noexcept;
+%ignore eos::policy_map_key_t::operator=(eos::policy_map_key_t &&) noexcept;
+%ignore eos::policy_map_key_t::name_is(std::string &&);
+%ignore eos::policy_map_action_t(eos::policy_map_action_t &&) noexcept;
+%ignore eos::policy_map_action_t::operator=(eos::policy_map_action_t &&) noexcept;
+%ignore eos::policy_map_action_t::nexthop_group_name_is(std::string &&);
+%ignore eos::policy_map_action_t::nexthops_is(
+         std::unordered_set<eos::ip_addr_t> &&);
+%ignore eos::nexthop_set(eos::ip_addr_t &&);
+%ignore eos::policy_map_action_t::vrf_is(std::string &&);
+%ignore eos::traffic_policy_action_t(eos::traffic_policy_action_t &&) noexcept;
+%ignore eos::traffic_policy_action_t::operator=(eos::traffic_policy_action_t &&)
+   noexcept;
+%ignore eos::traffic_policy_action_t::counter_name_is(std::string &&);
+%ignore eos::traffic_policy_action_t::goto_class_name_is(std::string &&);
+%ignore eos::traffic_policy_action_t::goto_next_is(bool &&);
+%ignore eos::traffic_policy_action_t::vrf_is(std::string &&);
+%ignore eos::traffic_policy_action_t::mirror_session_is(std::string &&);
+%ignore eos::traffic_policy_action_t::police_rate_is(uint64_t &&);
+%ignore eos::traffic_policy_action_t::police_burst_size_is(uint64_t &&);
+%ignore eos::traffic_policy_action_t::police_rate_unit_is(
+         eos::police_rate_unit_t &&);
+%ignore eos::traffic_policy_action_t::police_burst_unit_is(
+         eos::police_burst_unit_t &&);
+%ignore eos::traffic_policy_action_t::nexthop_groups_is(
+         std::unordered_set<std::string> &&);
+%ignore eos::nexthop_group_set(std::string &&);
+%ignore eos::traffic_policy_action_t::nexthops_is(
+         std::unordered_set<eos::ip_addr_t> &&);
+%ignore eos::nexthop_set(eos::ip_addr_t &&);
+%ignore eos::policy_map_rule_t(eos::policy_map_rule_t &&) noexcept;
+%ignore eos::policy_map_rule_t::operator=(eos::policy_map_rule_t &&) noexcept;
+%ignore eos::policy_map_rule_t::class_map_key_is(eos::class_map_key_t &&);
+%ignore eos::policy_map_rule_t::actions_is(std::set<eos::policy_map_action_t> &&);
+%ignore eos::action_set(eos::policy_map_action_t &&);
+%ignore eos::policy_map_t(eos::policy_map_t &&) noexcept;
+%ignore eos::policy_map_t::operator=(eos::policy_map_t &&) noexcept;
+%ignore eos::policy_map_t::key_is(eos::policy_map_key_t &&);
+%ignore eos::policy_map_t::rules_is(std::map<uint32_t, policy_map_rule_t> &&);
+%ignore eos::traffic_policy_rule_t(eos::traffic_policy_rule_t &&) noexcept;
+%ignore eos::traffic_policy_rule_t::operator=(eos::traffic_policy_rule_t &&)
+   noexcept;
+%ignore eos::traffic_policy_rule_t::actions_is(
+         std::set<eos::traffic_policy_action_t> &&);
+%ignore eos::action_set(eos::traffic_policy_action_t &&);
+%ignore eos::traffic_policy_t(eos::traffic_policy_t &&) noexcept;
+%ignore eos::traffic_policy_t::operator=(eos::traffic_policy_t &&) noexcept;
+%ignore eos::traffic_policy_t::named_counters_is(
+         std::unordered_set<std::string> &&);
+%ignore eos::named_counter_set(std::string &&);
+%ignore eos::traffic_policy_counter_data_t(eos::traffic_policy_counter_data_t &&)
+   noexcept;
+%ignore eos::traffic_policy_counter_data_t::operator=(
+   eos::traffic_policy_counter_data_t &&) noexcept;
+%ignore eos::traffic_policy_counter_t(eos::traffic_policy_counter_t &&) noexcept;
+%ignore eos::traffic_policy_counter_t::operator=(eos::traffic_policy_counter_t &&)
+   noexcept;
+%ignore eos::traffic_policy_counter_t::named_counter_data_is(
+         std::map<std::string, traffic_policy_counter_data_t> &&);
+%ignore eos::traffic_policy_counter_t::class_counter_data_is(
+         std::map<std::string, traffic_policy_counter_data_t> &&);
+%ignore eos::policy_map_hw_status_key_t(eos::policy_map_hw_status_key_t &&)
+   noexcept;
+%ignore eos::policy_map_hw_status_key_t::operator=(
+   eos::policy_map_hw_status_key_t &&) noexcept;
+%ignore eos::policy_map_hw_statuses_t(eos::policy_map_hw_statuses_t &&) noexcept;
+%ignore eos::policy_map_hw_statuses_t::operator=(eos::policy_map_hw_statuses_t &&)
+   noexcept;
+%ignore eos::policy_map_hw_statuses_t::intf_statuses_is(
+         std::map<policy_map_hw_status_key_t, policy_map_status_t> &&);
+#endif
+
 namespace eos {
 
 
@@ -147,6 +220,8 @@ class EOS_SDK_PUBLIC policy_map_key_t {
    policy_map_key_t& operator=(
       policy_map_key_t const & other);
 
+   policy_map_key_t(policy_map_key_t && other) noexcept;
+   policy_map_key_t & operator=(policy_map_key_t && other) noexcept;
    static void * operator new( std::size_t, void * ptr ) {
       return ptr;
    }
@@ -155,6 +230,7 @@ class EOS_SDK_PUBLIC policy_map_key_t {
 
    std::string name() const;
    void name_is(std::string const & name);
+   void name_is(std::string && name);
 
    policy_feature_t feature() const;
    void feature_is(policy_feature_t feature);
@@ -233,6 +309,8 @@ class EOS_SDK_PUBLIC policy_map_action_t {
    policy_map_action_t& operator=(
       policy_map_action_t const & other);
 
+   policy_map_action_t(policy_map_action_t && other) noexcept;
+   policy_map_action_t & operator=(policy_map_action_t && other) noexcept;
    static void * operator new( std::size_t, void * ptr ) {
       return ptr;
    }
@@ -253,11 +331,16 @@ class EOS_SDK_PUBLIC policy_map_action_t {
    std::string nexthop_group_name() const;
    /** Setter for 'nexthop_group_name'. */
    void nexthop_group_name_is(std::string const & nexthop_group_name);
+   /** Moving Setter for 'nexthop_group_name'. */
+   void nexthop_group_name_is(std::string && nexthop_group_name);
 
    std::unordered_set<ip_addr_t> const & nexthops() const;
    void nexthops_is(std::unordered_set<ip_addr_t> const & nexthops);
+   void nexthops_is(std::unordered_set<ip_addr_t> && nexthops);
    /** Inserts one nexthop of 'value' to the set. */
    void nexthop_set(ip_addr_t const & value);
+   /** Inserts one nexthop of 'value' to the set. */
+   void nexthop_set(ip_addr_t && value);
    /** Deletes one nexthop of 'value' from the set. */
    void nexthop_del(ip_addr_t const & value);
 
@@ -265,6 +348,8 @@ class EOS_SDK_PUBLIC policy_map_action_t {
    std::string vrf() const;
    /** Setter for 'vrf'. */
    void vrf_is(std::string const & vrf);
+   /** Moving Setter for 'vrf'. */
+   void vrf_is(std::string && vrf);
 
    /**
     * Getter for 'dscp': the DiffServ Code Point on matching IPv4/IPv6 packets.
@@ -334,6 +419,8 @@ class EOS_SDK_PUBLIC traffic_policy_action_t {
    traffic_policy_action_t& operator=(
       traffic_policy_action_t const & other);
 
+   traffic_policy_action_t(traffic_policy_action_t && other) noexcept;
+   traffic_policy_action_t & operator=(traffic_policy_action_t && other) noexcept;
    static void * operator new( std::size_t, void * ptr ) {
       return ptr;
    }
@@ -348,16 +435,22 @@ class EOS_SDK_PUBLIC traffic_policy_action_t {
    std::string counter_name() const;
    /** Setter for 'counter_name'. */
    void counter_name_is(std::string const & counter_name);
+   /** Moving Setter for 'counter_name'. */
+   void counter_name_is(std::string && counter_name);
 
    /** Getter for 'goto_class_name': the name of class for goto action. */
    std::string goto_class_name() const;
    /** Setter for 'goto_class_name'. */
    void goto_class_name_is(std::string const & goto_class_name);
+   /** Moving Setter for 'goto_class_name'. */
+   void goto_class_name_is(std::string && goto_class_name);
 
    /** Getter for 'goto_next': the flag indicating if it is goto next action. */
    bool goto_next() const;
    /** Setter for 'goto_next'. */
    void goto_next_is(bool const & goto_next);
+   /** Moving Setter for 'goto_next'. */
+   void goto_next_is(bool && goto_next);
 
    /**
     * Getter for 'dscp': the DiffServ Code Point on matching IPv4/IPv6 packets.
@@ -384,16 +477,22 @@ class EOS_SDK_PUBLIC traffic_policy_action_t {
    std::string vrf() const;
    /** Setter for 'vrf'. */
    void vrf_is(std::string const & vrf);
+   /** Moving Setter for 'vrf'. */
+   void vrf_is(std::string && vrf);
 
    /** Getter for 'mirror_session': the name of mirror session for mirror action. */
    std::string mirror_session() const;
    /** Setter for 'mirror_session'. */
    void mirror_session_is(std::string const & mirror_session);
+   /** Moving Setter for 'mirror_session'. */
+   void mirror_session_is(std::string && mirror_session);
 
    /** Getter for 'police_rate': the police rate value for police action. */
    uint64_t police_rate() const;
    /** Setter for 'police_rate'. */
    void police_rate_is(uint64_t const & police_rate);
+   /** Moving Setter for 'police_rate'. */
+   void police_rate_is(uint64_t && police_rate);
 
    /**
     * Getter for 'police_burst_size': the police burst size value for police
@@ -402,16 +501,22 @@ class EOS_SDK_PUBLIC traffic_policy_action_t {
    uint64_t police_burst_size() const;
    /** Setter for 'police_burst_size'. */
    void police_burst_size_is(uint64_t const & police_burst_size);
+   /** Moving Setter for 'police_burst_size'. */
+   void police_burst_size_is(uint64_t && police_burst_size);
 
    /** Getter for 'police_rate_unit': the police rate unit for police action. */
    police_rate_unit_t police_rate_unit() const;
    /** Setter for 'police_rate_unit'. */
    void police_rate_unit_is(police_rate_unit_t const & police_rate_unit);
+   /** Moving Setter for 'police_rate_unit'. */
+   void police_rate_unit_is(police_rate_unit_t && police_rate_unit);
 
    /** Getter for 'police_burst_unit': the police burst unit for police action. */
    police_burst_unit_t police_burst_unit() const;
    /** Setter for 'police_burst_unit'. */
    void police_burst_unit_is(police_burst_unit_t const & police_burst_unit);
+   /** Moving Setter for 'police_burst_unit'. */
+   void police_burst_unit_is(police_burst_unit_t && police_burst_unit);
 
    /**
     * Getter for 'nexthop_groups': the set of nexthop group names for traffic-
@@ -420,15 +525,22 @@ class EOS_SDK_PUBLIC traffic_policy_action_t {
    std::unordered_set<std::string> const & nexthop_groups() const;
    /** Setter for 'nexthop_groups'. */
    void nexthop_groups_is(std::unordered_set<std::string> const & nexthop_groups);
+   /** Moving Setter for 'nexthop_groups'. */
+   void nexthop_groups_is(std::unordered_set<std::string> && nexthop_groups);
    /** Inserts one nexthop_group of 'value' to the set. */
    void nexthop_group_set(std::string const & value);
+   /** Inserts one nexthop_group of 'value' to the set. */
+   void nexthop_group_set(std::string && value);
    /** Deletes one nexthop_group of 'value' from the set. */
    void nexthop_group_del(std::string const & value);
 
    std::unordered_set<ip_addr_t> const & nexthops() const;
    void nexthops_is(std::unordered_set<ip_addr_t> const & nexthops);
+   void nexthops_is(std::unordered_set<ip_addr_t> && nexthops);
    /** Inserts one nexthop of 'value' to the set. */
    void nexthop_set(ip_addr_t const & value);
+   /** Inserts one nexthop of 'value' to the set. */
+   void nexthop_set(ip_addr_t && value);
    /** Deletes one nexthop of 'value' from the set. */
    void nexthop_del(ip_addr_t const & value);
 
@@ -480,6 +592,8 @@ class EOS_SDK_PUBLIC policy_map_rule_t {
    policy_map_rule_t& operator=(
       policy_map_rule_t const & other);
 
+   policy_map_rule_t(policy_map_rule_t && other) noexcept;
+   policy_map_rule_t & operator=(policy_map_rule_t && other) noexcept;
    static void * operator new( std::size_t, void * ptr ) {
       return ptr;
    }
@@ -493,6 +607,8 @@ class EOS_SDK_PUBLIC policy_map_rule_t {
    class_map_key_t class_map_key() const;
    /** Setter for 'class_map_key'. */
    void class_map_key_is(class_map_key_t const & class_map_key);
+   /** Moving Setter for 'class_map_key'. */
+   void class_map_key_is(class_map_key_t && class_map_key);
 
    /**
     * Getter for 'policy_map_rule_type': the rule type. Set the rule type to
@@ -516,8 +632,12 @@ class EOS_SDK_PUBLIC policy_map_rule_t {
    std::set<policy_map_action_t> const & actions() const;
    /** Setter for 'actions'. */
    void actions_is(std::set<policy_map_action_t> const & actions);
+   /** Moving Setter for 'actions'. */
+   void actions_is(std::set<policy_map_action_t> && actions);
    /** Inserts one action of 'value' to the set. */
    void action_set(policy_map_action_t const & value);
+   /** Inserts one action of 'value' to the set. */
+   void action_set(policy_map_action_t && value);
    /** Deletes one action of 'value' from the set. */
    void action_del(policy_map_action_t const & value);
 
@@ -560,6 +680,8 @@ class EOS_SDK_PUBLIC policy_map_t {
    policy_map_t& operator=(
       policy_map_t const & other);
 
+   policy_map_t(policy_map_t && other) noexcept;
+   policy_map_t & operator=(policy_map_t && other) noexcept;
    static void * operator new( std::size_t, void * ptr ) {
       return ptr;
    }
@@ -568,12 +690,18 @@ class EOS_SDK_PUBLIC policy_map_t {
 
    policy_map_key_t key() const;
    void key_is(policy_map_key_t const & key);
+   void key_is(policy_map_key_t && key);
 
    std::map<uint32_t, policy_map_rule_t> const & rules() const;
-
    void rules_is(std::map<uint32_t, policy_map_rule_t> const & rules);
+   void rules_is(std::map<uint32_t, policy_map_rule_t> && rules);
+   /** Inserts key/value pair to the map. */
    void rule_set(uint32_t key, policy_map_rule_t const & value);
+   /** Inserts key/value pair to the map. */
+   void rule_set(uint32_t key, policy_map_rule_t && value);
+   /** Deletes the key/value pair from the map. */
    void rule_del(uint32_t key);
+
    bool operator==(policy_map_t const & other) const;
    bool operator!=(policy_map_t const & other) const;
    bool operator<(policy_map_t const & other) const;
@@ -616,6 +744,8 @@ class EOS_SDK_PUBLIC traffic_policy_rule_t {
    traffic_policy_rule_t& operator=(
       traffic_policy_rule_t const & other);
 
+   traffic_policy_rule_t(traffic_policy_rule_t && other) noexcept;
+   traffic_policy_rule_t & operator=(traffic_policy_rule_t && other) noexcept;
    static void * operator new( std::size_t, void * ptr ) {
       return ptr;
    }
@@ -641,8 +771,12 @@ class EOS_SDK_PUBLIC traffic_policy_rule_t {
    std::set<traffic_policy_action_t> const & actions() const;
    /** Setter for 'actions'. */
    void actions_is(std::set<traffic_policy_action_t> const & actions);
+   /** Moving Setter for 'actions'. */
+   void actions_is(std::set<traffic_policy_action_t> && actions);
    /** Inserts one action of 'value' to the set. */
    void action_set(traffic_policy_action_t const & value);
+   /** Inserts one action of 'value' to the set. */
+   void action_set(traffic_policy_action_t && value);
    /** Deletes one action of 'value' from the set. */
    void action_del(traffic_policy_action_t const & value);
 
@@ -685,6 +819,8 @@ class EOS_SDK_PUBLIC traffic_policy_t {
    traffic_policy_t& operator=(
       traffic_policy_t const & other);
 
+   traffic_policy_t(traffic_policy_t && other) noexcept;
+   traffic_policy_t & operator=(traffic_policy_t && other) noexcept;
    static void * operator new( std::size_t, void * ptr ) {
       return ptr;
    }
@@ -695,8 +831,11 @@ class EOS_SDK_PUBLIC traffic_policy_t {
 
    std::unordered_set<std::string> const & named_counters() const;
    void named_counters_is(std::unordered_set<std::string> const & named_counters);
+   void named_counters_is(std::unordered_set<std::string> && named_counters);
    /** Inserts one named_counter of 'value' to the set. */
    void named_counter_set(std::string const & value);
+   /** Inserts one named_counter of 'value' to the set. */
+   void named_counter_set(std::string && value);
    /** Deletes one named_counter of 'value' from the set. */
    void named_counter_del(std::string const & value);
 
@@ -738,6 +877,9 @@ class EOS_SDK_PUBLIC traffic_policy_counter_data_t {
    traffic_policy_counter_data_t& operator=(
       traffic_policy_counter_data_t const & other);
 
+   traffic_policy_counter_data_t(traffic_policy_counter_data_t && other) noexcept;
+   traffic_policy_counter_data_t & operator=(traffic_policy_counter_data_t && other)
+      noexcept;
    static void * operator new( std::size_t, void * ptr ) {
       return ptr;
    }
@@ -789,6 +931,8 @@ class EOS_SDK_PUBLIC traffic_policy_counter_t {
    traffic_policy_counter_t& operator=(
       traffic_policy_counter_t const & other);
 
+   traffic_policy_counter_t(traffic_policy_counter_t && other) noexcept;
+   traffic_policy_counter_t & operator=(traffic_policy_counter_t && other) noexcept;
    static void * operator new( std::size_t, void * ptr ) {
       return ptr;
    }
@@ -803,11 +947,24 @@ class EOS_SDK_PUBLIC traffic_policy_counter_t {
          
          std::map<std::string, traffic_policy_counter_data_t> const &
          named_counter_data);
+   void named_counter_data_is(
+         
+         std::map<std::string, traffic_policy_counter_data_t> &&
+         named_counter_data);
    /** Inserts key/value pair to the map. */
    void named_counter_data_set(std::string const & key,
                                traffic_policy_counter_data_t const & value);
+   /** Inserts key/value pair to the map. */
+   void named_counter_data_set(std::string const & key,
+                               traffic_policy_counter_data_t && value);
    /** Deletes the key/value pair from the map. */
    void named_counter_data_del(std::string const & key);
+   /** Inserts key/value pair to the map. */
+   void named_counter_data_set(std::string && key,
+                               traffic_policy_counter_data_t const & value);
+   /** Inserts key/value pair to the map. */
+   void named_counter_data_set(std::string && key,
+                               traffic_policy_counter_data_t && value);
 
    std::map<std::string, traffic_policy_counter_data_t> const & class_counter_data()
           const;
@@ -815,11 +972,24 @@ class EOS_SDK_PUBLIC traffic_policy_counter_t {
          
          std::map<std::string, traffic_policy_counter_data_t> const &
          class_counter_data);
+   void class_counter_data_is(
+         
+         std::map<std::string, traffic_policy_counter_data_t> &&
+         class_counter_data);
    /** Inserts key/value pair to the map. */
    void class_counter_data_set(std::string const & key,
                                traffic_policy_counter_data_t const & value);
+   /** Inserts key/value pair to the map. */
+   void class_counter_data_set(std::string const & key,
+                               traffic_policy_counter_data_t && value);
    /** Deletes the key/value pair from the map. */
    void class_counter_data_del(std::string const & key);
+   /** Inserts key/value pair to the map. */
+   void class_counter_data_set(std::string && key,
+                               traffic_policy_counter_data_t const & value);
+   /** Inserts key/value pair to the map. */
+   void class_counter_data_set(std::string && key,
+                               traffic_policy_counter_data_t && value);
 
    bool operator==(traffic_policy_counter_t const & other) const;
    bool operator!=(traffic_policy_counter_t const & other) const;
@@ -899,6 +1069,9 @@ class EOS_SDK_PUBLIC policy_map_hw_status_key_t {
    policy_map_hw_status_key_t& operator=(
       policy_map_hw_status_key_t const & other);
 
+   policy_map_hw_status_key_t(policy_map_hw_status_key_t && other) noexcept;
+   policy_map_hw_status_key_t & operator=(policy_map_hw_status_key_t && other)
+      noexcept;
    static void * operator new( std::size_t, void * ptr ) {
       return ptr;
    }
@@ -955,6 +1128,8 @@ class EOS_SDK_PUBLIC policy_map_hw_statuses_t {
    policy_map_hw_statuses_t& operator=(
       policy_map_hw_statuses_t const & other);
 
+   policy_map_hw_statuses_t(policy_map_hw_statuses_t && other) noexcept;
+   policy_map_hw_statuses_t & operator=(policy_map_hw_statuses_t && other) noexcept;
    static void * operator new( std::size_t, void * ptr ) {
       return ptr;
    }
@@ -969,11 +1144,25 @@ class EOS_SDK_PUBLIC policy_map_hw_statuses_t {
          
          std::map<policy_map_hw_status_key_t, policy_map_status_t> const &
          intf_statuses);
+   /** Moving Setter for 'intf_statuses'. */
+   void intf_statuses_is(
+         
+         std::map<policy_map_hw_status_key_t, policy_map_status_t> &&
+         intf_statuses);
    /** Inserts key/value pair to the map. */
    void intf_statuse_set(policy_map_hw_status_key_t const & key,
                          policy_map_status_t const & value);
+   /** Inserts key/value pair to the map. */
+   void intf_statuse_set(policy_map_hw_status_key_t const & key,
+                         policy_map_status_t && value);
    /** Deletes the key/value pair from the map. */
    void intf_statuse_del(policy_map_hw_status_key_t const & key);
+   /** Inserts key/value pair to the map. */
+   void intf_statuse_set(policy_map_hw_status_key_t && key,
+                         policy_map_status_t const & value);
+   /** Inserts key/value pair to the map. */
+   void intf_statuse_set(policy_map_hw_status_key_t && key,
+                         policy_map_status_t && value);
 
    bool operator==(policy_map_hw_statuses_t const & other) const;
    bool operator!=(policy_map_hw_statuses_t const & other) const;

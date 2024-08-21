@@ -9,6 +9,21 @@
 #include <memory>
 #include <sstream>
 
+#ifdef SWIG
+%ignore eos::hardware_table_key_t(eos::hardware_table_key_t &&) noexcept;
+%ignore eos::hardware_table_key_t::operator=(eos::hardware_table_key_t &&) noexcept;
+%ignore eos::hardware_table_high_watermark_t(
+   eos::hardware_table_high_watermark_t &&) noexcept;
+%ignore eos::hardware_table_high_watermark_t::operator=(
+   eos::hardware_table_high_watermark_t &&) noexcept;
+%ignore eos::hardware_table_usage_t(eos::hardware_table_usage_t &&) noexcept;
+%ignore eos::hardware_table_usage_t::operator=(eos::hardware_table_usage_t &&)
+   noexcept;
+%ignore eos::hardware_table_entry_t(eos::hardware_table_entry_t &&) noexcept;
+%ignore eos::hardware_table_entry_t::operator=(eos::hardware_table_entry_t &&)
+   noexcept;
+#endif
+
 namespace eos {
 
 class hardware_table_key_impl_t;
@@ -25,6 +40,8 @@ class EOS_SDK_PUBLIC hardware_table_key_t {
    hardware_table_key_t& operator=(
       hardware_table_key_t const & other);
 
+   hardware_table_key_t(hardware_table_key_t && other) noexcept;
+   hardware_table_key_t & operator=(hardware_table_key_t && other) noexcept;
    static void * operator new( std::size_t, void * ptr ) {
       return ptr;
    }
@@ -82,6 +99,10 @@ class EOS_SDK_PUBLIC hardware_table_high_watermark_t {
    hardware_table_high_watermark_t& operator=(
       hardware_table_high_watermark_t const & other);
 
+   hardware_table_high_watermark_t(hardware_table_high_watermark_t && other)
+      noexcept;
+   hardware_table_high_watermark_t & operator=(
+      hardware_table_high_watermark_t && other) noexcept;
    static void * operator new( std::size_t, void * ptr ) {
       return ptr;
    }
@@ -129,6 +150,8 @@ class EOS_SDK_PUBLIC hardware_table_usage_t {
    hardware_table_usage_t& operator=(
       hardware_table_usage_t const & other);
 
+   hardware_table_usage_t(hardware_table_usage_t && other) noexcept;
+   hardware_table_usage_t & operator=(hardware_table_usage_t && other) noexcept;
    static void * operator new( std::size_t, void * ptr ) {
       return ptr;
    }
@@ -190,6 +213,8 @@ class EOS_SDK_PUBLIC hardware_table_entry_t {
    hardware_table_entry_t& operator=(
       hardware_table_entry_t const & other);
 
+   hardware_table_entry_t(hardware_table_entry_t && other) noexcept;
+   hardware_table_entry_t & operator=(hardware_table_entry_t && other) noexcept;
    static void * operator new( std::size_t, void * ptr ) {
       return ptr;
    }

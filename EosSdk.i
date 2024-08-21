@@ -362,6 +362,9 @@ void throw_py_error(error const& err) {
 %template() std::vector<eos::mpls_label_t>;
 %template() std::set<eos::policy_map_action_t>;
 
+STD_FORWARD_LIST(fib_via_t)
+STD_FORWARD_LIST(mpls_label_t)
+
 
 // For vlan_set_t
 %template(_BitSet4096) std::bitset<4096>;

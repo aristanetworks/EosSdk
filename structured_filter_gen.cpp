@@ -24,6 +24,19 @@ protocol_range_t::operator=(
    return *this;
 }
 
+EOS_SDK_PUBLIC protocol_range_t::protocol_range_t(
+   protocol_range_t && other) noexcept  :
+   pimpl(std::move(other.pimpl)) {}
+EOS_SDK_PUBLIC protocol_range_t&
+protocol_range_t::operator=(
+   protocol_range_t && other) noexcept 
+{
+   if(this != &other) {
+      std::swap(pimpl, other.pimpl);
+   }
+   return *this;
+}
+
 EOS_SDK_PUBLIC void *
 protocol_range_t::operator new( std::size_t size ) {
    return ::operator new( size );
@@ -48,6 +61,19 @@ port_range_t::operator=(
    if(this != &other) {
       pimpl = std::make_shared<port_range_impl_t>(
          *other.pimpl);
+   }
+   return *this;
+}
+
+EOS_SDK_PUBLIC port_range_t::port_range_t(
+   port_range_t && other) noexcept  :
+   pimpl(std::move(other.pimpl)) {}
+EOS_SDK_PUBLIC port_range_t&
+port_range_t::operator=(
+   port_range_t && other) noexcept 
+{
+   if(this != &other) {
+      std::swap(pimpl, other.pimpl);
    }
    return *this;
 }
@@ -80,6 +106,19 @@ port_field_t::operator=(
    return *this;
 }
 
+EOS_SDK_PUBLIC port_field_t::port_field_t(
+   port_field_t && other) noexcept  :
+   pimpl(std::move(other.pimpl)) {}
+EOS_SDK_PUBLIC port_field_t&
+port_field_t::operator=(
+   port_field_t && other) noexcept 
+{
+   if(this != &other) {
+      std::swap(pimpl, other.pimpl);
+   }
+   return *this;
+}
+
 EOS_SDK_PUBLIC void *
 port_field_t::operator new( std::size_t size ) {
    return ::operator new( size );
@@ -104,6 +143,19 @@ protocol_field_t::operator=(
    if(this != &other) {
       pimpl = std::make_shared<protocol_field_impl_t>(
          *other.pimpl);
+   }
+   return *this;
+}
+
+EOS_SDK_PUBLIC protocol_field_t::protocol_field_t(
+   protocol_field_t && other) noexcept  :
+   pimpl(std::move(other.pimpl)) {}
+EOS_SDK_PUBLIC protocol_field_t&
+protocol_field_t::operator=(
+   protocol_field_t && other) noexcept 
+{
+   if(this != &other) {
+      std::swap(pimpl, other.pimpl);
    }
    return *this;
 }
@@ -136,6 +188,19 @@ tp_rule_filter_t::operator=(
    if(this != &other) {
       pimpl = std::make_shared<tp_rule_filter_impl_t>(
          *other.pimpl);
+   }
+   return *this;
+}
+
+EOS_SDK_PUBLIC tp_rule_filter_t::tp_rule_filter_t(
+   tp_rule_filter_t && other) noexcept  :
+   pimpl(std::move(other.pimpl)) {}
+EOS_SDK_PUBLIC tp_rule_filter_t&
+tp_rule_filter_t::operator=(
+   tp_rule_filter_t && other) noexcept 
+{
+   if(this != &other) {
+      std::swap(pimpl, other.pimpl);
    }
    return *this;
 }

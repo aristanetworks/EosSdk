@@ -125,6 +125,10 @@ void
 mac_entry_t::mac_key_is(mac_key_t const & mac_key) {
    pimpl->mac_key_is(mac_key);
 }
+void
+mac_entry_t::mac_key_is(mac_key_t && mac_key) {
+   pimpl->mac_key_is(std::move(mac_key));
+}
 std::set<intf_id_t> const &
 mac_entry_t::intfs() const {
    return pimpl->intfs();
@@ -134,8 +138,16 @@ mac_entry_t::intfs_is(std::set<intf_id_t> const & intfs) {
    pimpl->intfs_is(intfs);
 }
 void
+mac_entry_t::intfs_is(std::set<intf_id_t> && intfs) {
+   pimpl->intfs_is(std::move(intfs));
+}
+void
 mac_entry_t::intf_set(intf_id_t const & value) {
    pimpl->intf_set(value);
+}
+void
+mac_entry_t::intf_set(intf_id_t && value) {
+   pimpl->intf_set(std::move(value));
 }
 void
 mac_entry_t::intf_del(intf_id_t const & value) {

@@ -25,6 +25,11 @@ fib_route_key_impl_t::prefix_is(ip_prefix_t const & prefix) {
    prefix_ = prefix;
 }
 
+void
+fib_route_key_impl_t::prefix_is(ip_prefix_t && prefix) {
+   prefix_ = std::move(prefix);
+}
+
 bool
 fib_route_key_impl_t::operator==(fib_route_key_impl_t const & other) const {
    return prefix_ == other.prefix_;
@@ -83,6 +88,11 @@ fib_route_impl_t::route_key() const {
 void
 fib_route_impl_t::route_key_is(fib_route_key_t const & route_key) {
    route_key_ = route_key;
+}
+
+void
+fib_route_impl_t::route_key_is(fib_route_key_t && route_key) {
+   route_key_ = std::move(route_key);
 }
 
 ip_route_preference_t
@@ -253,6 +263,11 @@ fib_via_impl_t::hop_is(ip_addr_t const & hop) {
    hop_ = hop;
 }
 
+void
+fib_via_impl_t::hop_is(ip_addr_t && hop) {
+   hop_ = std::move(hop);
+}
+
 intf_id_t
 fib_via_impl_t::intf() const {
    return intf_;
@@ -370,8 +385,18 @@ fib_fec_impl_t::via_is(std::forward_list<fib_via_t> const & via) {
 }
 
 void
+fib_fec_impl_t::via_is(std::forward_list<fib_via_t> && via) {
+   via_ = std::move(via);
+}
+
+void
 fib_fec_impl_t::via_set(fib_via_t const & via) {
    via_.push_front(via);
+}
+
+void
+fib_fec_impl_t::via_set(fib_via_t && via) {
+   via_.push_front(std::move(via));
 }
 
 void

@@ -14,6 +14,10 @@ void
 bgp_peer_key_t::vrf_name_is(std::string const & vrf_name) {
    pimpl->vrf_name_is(vrf_name);
 }
+void
+bgp_peer_key_t::vrf_name_is(std::string && vrf_name) {
+   pimpl->vrf_name_is(std::move(vrf_name));
+}
 ip_addr_t
 bgp_peer_key_t::peer_addr() const {
    return pimpl->peer_addr();
@@ -21,6 +25,10 @@ bgp_peer_key_t::peer_addr() const {
 void
 bgp_peer_key_t::peer_addr_is(ip_addr_t const & peer_addr) {
    pimpl->peer_addr_is(peer_addr);
+}
+void
+bgp_peer_key_t::peer_addr_is(ip_addr_t && peer_addr) {
+   pimpl->peer_addr_is(std::move(peer_addr));
 }
 bool
 bgp_peer_key_t::operator==(bgp_peer_key_t const & other) const {

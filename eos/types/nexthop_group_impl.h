@@ -49,8 +49,12 @@ class EOS_SDK_PUBLIC nexthop_group_mpls_action_impl_t {
    std::forward_list<mpls_label_t> const & label_stack() const;
    /** Setter for 'label_stack'. */
    void label_stack_is(std::forward_list<mpls_label_t> const & label_stack);
+   /** Moving Setter for 'label_stack'. */
+   void label_stack_is(std::forward_list<mpls_label_t> && label_stack);
    /** Prepend one label_stack to the list. */
    void label_stack_set(mpls_label_t const & label_stack);
+   /** Prepend one label_stack to the list. */
+   void label_stack_set(mpls_label_t && label_stack);
    /** Remove all matching label_stack elements. */
    void label_stack_del(mpls_label_t const & label_stack);
 
@@ -126,26 +130,36 @@ class EOS_SDK_PUBLIC nexthop_group_entry_impl_t {
    nexthop_group_mpls_action_t mpls_action() const;
    /** Setter for 'mpls_action'. */
    void mpls_action_is(nexthop_group_mpls_action_t const & mpls_action);
+   /** Moving Setter for 'mpls_action'. */
+   void mpls_action_is(nexthop_group_mpls_action_t && mpls_action);
 
    /** Getter for 'nexthop': the next hop IP address for this entry. */
    ip_addr_t nexthop() const;
    /** Setter for 'nexthop'. */
    void nexthop_is(ip_addr_t const & nexthop);
+   /** Moving Setter for 'nexthop'. */
+   void nexthop_is(ip_addr_t && nexthop);
 
    /** Getter for 'intf': the next hop egress interface. */
    intf_id_t intf() const;
    /** Setter for 'intf'. */
    void intf_is(intf_id_t const & intf);
+   /** Moving Setter for 'intf'. */
+   void intf_is(intf_id_t && intf);
 
    /** Getter for 'sbfd_session_key': the optional key to an sBFD session. */
    sbfd_echo_session_key_t sbfd_session_key() const;
    /** Setter for 'sbfd_session_key'. */
    void sbfd_session_key_is(sbfd_echo_session_key_t const & sbfd_session_key);
+   /** Moving Setter for 'sbfd_session_key'. */
+   void sbfd_session_key_is(sbfd_echo_session_key_t && sbfd_session_key);
 
    /** Getter for 'child_nexthop_group': the name of next level nexthop-group. */
    std::string child_nexthop_group() const;
    /** Setter for 'child_nexthop_group'. */
    void child_nexthop_group_is(std::string const & child_nexthop_group);
+   /** Moving Setter for 'child_nexthop_group'. */
+   void child_nexthop_group_is(std::string && child_nexthop_group);
 
    bool operator==(nexthop_group_entry_impl_t const & other) const;
    bool operator!=(nexthop_group_entry_impl_t const & other) const;
@@ -205,6 +219,8 @@ class EOS_SDK_PUBLIC nexthop_group_impl_t {
    ip_addr_t source_ip() const;
    /** Setter for 'source_ip'. */
    void source_ip_is(ip_addr_t const & source_ip);
+   /** Moving Setter for 'source_ip'. */
+   void source_ip_is(ip_addr_t && source_ip);
 
    /** Getter for 'source_intf': the source interface to use. */
    intf_id_t source_intf() const;
@@ -235,8 +251,12 @@ class EOS_SDK_PUBLIC nexthop_group_impl_t {
    std::map<uint16_t, nexthop_group_entry_t> const & nexthops() const;
    /** Setter for 'nexthops'. */
    void nexthops_is(std::map<uint16_t, nexthop_group_entry_t> const & nexthops);
+   /** Moving Setter for 'nexthops'. */
+   void nexthops_is(std::map<uint16_t, nexthop_group_entry_t> && nexthops);
    /** Inserts key/value pair to the map. */
    void nexthop_set(uint16_t key, nexthop_group_entry_t const & value);
+   /** Inserts key/value pair to the map. */
+   void nexthop_set(uint16_t key, nexthop_group_entry_t && value);
    /** Deletes the key/value pair from the map. */
    void nexthop_del(uint16_t key);
 
@@ -247,8 +267,13 @@ class EOS_SDK_PUBLIC nexthop_group_impl_t {
    /** Setter for 'backup_nexthops'. */
    void backup_nexthops_is(
          std::map<uint16_t, nexthop_group_entry_t> const & backup_nexthops);
+   /** Moving Setter for 'backup_nexthops'. */
+   void backup_nexthops_is(
+         std::map<uint16_t, nexthop_group_entry_t> && backup_nexthops);
    /** Inserts key/value pair to the map. */
    void backup_nexthop_set(uint16_t key, nexthop_group_entry_t const & value);
+   /** Inserts key/value pair to the map. */
+   void backup_nexthop_set(uint16_t key, nexthop_group_entry_t && value);
    /** Deletes the key/value pair from the map. */
    void backup_nexthop_del(uint16_t key);
 
@@ -259,8 +284,12 @@ class EOS_SDK_PUBLIC nexthop_group_impl_t {
    std::map<uint16_t, ip_addr_t> const & destination_ips() const;
    /** Setter for 'destination_ips'. */
    void destination_ips_is(std::map<uint16_t, ip_addr_t> const & destination_ips);
+   /** Moving Setter for 'destination_ips'. */
+   void destination_ips_is(std::map<uint16_t, ip_addr_t> && destination_ips);
    /** Inserts key/value pair to the map. */
    void destination_ip_set(uint16_t key, ip_addr_t const & value);
+   /** Inserts key/value pair to the map. */
+   void destination_ip_set(uint16_t key, ip_addr_t && value);
    /** Deletes the key/value pair from the map. */
    void destination_ip_del(uint16_t key);
 
@@ -348,14 +377,21 @@ class EOS_SDK_PUBLIC nexthop_group_impl_t {
 class EOS_SDK_PUBLIC nexthop_group_programmed_status_impl_t {
  public:
    nexthop_group_programmed_status_impl_t();
-   explicit nexthop_group_programmed_status_impl_t(
-         nexthop_group_counter_state_t counter_state);
+   nexthop_group_programmed_status_impl_t(
+         nexthop_group_counter_state_t counter_state,
+         nexthop_group_programmed_hw_state_t hw_state);
 
    /**
     * Getter for 'counter_state': The status of the counter programming for this
     * nexthop group.
     */
    nexthop_group_counter_state_t counter_state() const;
+
+   /**
+    * Getter for 'hw_state': The status of the hardware programmed entries for this
+    * nexthop group.
+    */
+   nexthop_group_programmed_hw_state_t hw_state() const;
 
    bool operator==(nexthop_group_programmed_status_impl_t const & other) const;
    bool operator!=(nexthop_group_programmed_status_impl_t const & other) const;
@@ -375,6 +411,7 @@ class EOS_SDK_PUBLIC nexthop_group_programmed_status_impl_t {
 
  private:
    nexthop_group_counter_state_t counter_state_;
+   nexthop_group_programmed_hw_state_t hw_state_;
 };
 }
 

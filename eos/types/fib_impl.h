@@ -25,6 +25,8 @@ class EOS_SDK_PUBLIC fib_route_key_impl_t {
    ip_prefix_t prefix() const;
    /** Setter for 'prefix'. */
    void prefix_is(ip_prefix_t const & prefix);
+   /** Moving Setter for 'prefix'. */
+   void prefix_is(ip_prefix_t && prefix);
 
    bool operator==(fib_route_key_impl_t const & other) const;
    bool operator!=(fib_route_key_impl_t const & other) const;
@@ -59,6 +61,8 @@ class EOS_SDK_PUBLIC fib_route_impl_t {
    fib_route_key_t route_key() const;
    /** Setter for 'route_key'. */
    void route_key_is(fib_route_key_t const & route_key);
+   /** Moving Setter for 'route_key'. */
+   void route_key_is(fib_route_key_t && route_key);
 
    /** Getter for 'preference': 0..255 only, defaults to 1. */
    ip_route_preference_t preference() const;
@@ -138,6 +142,7 @@ class EOS_SDK_PUBLIC fib_via_impl_t {
 
    ip_addr_t hop() const;
    void hop_is(ip_addr_t const & hop);
+   void hop_is(ip_addr_t && hop);
 
    intf_id_t intf() const;
    void intf_is(intf_id_t intf);
@@ -197,8 +202,12 @@ class EOS_SDK_PUBLIC fib_fec_impl_t {
    std::forward_list<fib_via_t> const & via() const;
    /** Setter for 'via'. */
    void via_is(std::forward_list<fib_via_t> const & via);
+   /** Moving Setter for 'via'. */
+   void via_is(std::forward_list<fib_via_t> && via);
    /** Prepend one via to the list. */
    void via_set(fib_via_t const & via);
+   /** Prepend one via to the list. */
+   void via_set(fib_via_t && via);
    /** Remove all matching via elements. */
    void via_del(fib_via_t const & via);
 

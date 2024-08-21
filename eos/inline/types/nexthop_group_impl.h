@@ -47,9 +47,20 @@ nexthop_group_mpls_action_impl_t::label_stack_is(
 }
 
 void
+nexthop_group_mpls_action_impl_t::label_stack_is(
+         std::forward_list<mpls_label_t> && label_stack) {
+   label_stack_ = std::move(label_stack);
+}
+
+void
 nexthop_group_mpls_action_impl_t::label_stack_set(mpls_label_t const & label_stack)
        {
    label_stack_.push_front(label_stack);
+}
+
+void
+nexthop_group_mpls_action_impl_t::label_stack_set(mpls_label_t && label_stack) {
+   label_stack_.push_front(std::move(label_stack));
 }
 
 void
@@ -245,6 +256,12 @@ nexthop_group_entry_impl_t::mpls_action_is(
    mpls_action_ = mpls_action;
 }
 
+void
+nexthop_group_entry_impl_t::mpls_action_is(
+         nexthop_group_mpls_action_t && mpls_action) {
+   mpls_action_ = std::move(mpls_action);
+}
+
 ip_addr_t
 nexthop_group_entry_impl_t::nexthop() const {
    return nexthop_;
@@ -259,6 +276,17 @@ nexthop_group_entry_impl_t::nexthop_is(ip_addr_t const & nexthop) {
         "cannot be set together"));
    }
    nexthop_ = nexthop;
+}
+
+void
+nexthop_group_entry_impl_t::nexthop_is(ip_addr_t && nexthop) {
+   if (!!nexthop && !child_nexthop_group_.empty()) {
+      panic(invalid_argument_error(
+        "child_nexthop_group", 
+        "Next level nexthop group name and nexthop ip "
+        "cannot be set together"));
+   }
+   nexthop_ = std::move(nexthop);
 }
 
 intf_id_t
@@ -277,6 +305,17 @@ nexthop_group_entry_impl_t::intf_is(intf_id_t const & intf) {
    intf_ = intf;
 }
 
+void
+nexthop_group_entry_impl_t::intf_is(intf_id_t && intf) {
+   if (!!intf && !child_nexthop_group_.empty()) {
+      panic(invalid_argument_error(
+        "child_nexthop_group", 
+        "Next level nexthop group name and interface "
+        "cannot be set together"));
+   }
+   intf_ = std::move(intf);
+}
+
 sbfd_echo_session_key_t
 nexthop_group_entry_impl_t::sbfd_session_key() const {
    return sbfd_session_key_;
@@ -286,6 +325,12 @@ void
 nexthop_group_entry_impl_t::sbfd_session_key_is(
          sbfd_echo_session_key_t const & sbfd_session_key) {
    sbfd_session_key_ = sbfd_session_key;
+}
+
+void
+nexthop_group_entry_impl_t::sbfd_session_key_is(
+         sbfd_echo_session_key_t && sbfd_session_key) {
+   sbfd_session_key_ = std::move(sbfd_session_key);
 }
 
 std::string
@@ -303,6 +348,18 @@ nexthop_group_entry_impl_t::child_nexthop_group_is(
         "(or interface) cannot be set together"));
    }
    child_nexthop_group_ = child_nexthop_group;
+}
+
+void
+nexthop_group_entry_impl_t::child_nexthop_group_is(
+         std::string && child_nexthop_group) {
+   if ((!!nexthop_ || !!intf_) && !child_nexthop_group.empty()) {
+      panic(invalid_argument_error(
+        "child_nexthop_group", 
+        "Next level nexthop group name and nexthop ip "
+        "(or interface) cannot be set together"));
+   }
+   child_nexthop_group_ = std::move(child_nexthop_group);
 }
 
 bool
@@ -460,6 +517,20 @@ nexthop_group_impl_t::source_ip_is(ip_addr_t const & source_ip) {
    source_ip_ = source_ip;
 }
 
+void
+nexthop_group_impl_t::source_ip_is(ip_addr_t && source_ip) {
+   if (type_ == NEXTHOP_GROUP_MPLS && !!source_ip) {
+      panic(invalid_argument_error(
+                  "source_ip",
+                  "MPLS nexthop group cannot specify a source IP"));
+   } else if (!!source_ip) {
+      // If we're setting a source ip, clear any
+      // source interface configuration
+      source_intf_is(intf_id_t());
+   }
+   source_ip_ = std::move(source_ip);
+}
+
 intf_id_t
 nexthop_group_impl_t::source_intf() const {
    return source_intf_;
@@ -515,9 +586,20 @@ nexthop_group_impl_t::nexthops_is(
 }
 
 void
+nexthop_group_impl_t::nexthops_is(
+         std::map<uint16_t, nexthop_group_entry_t> && nexthops) {
+   nexthops_ = std::move(nexthops);
+}
+
+void
 nexthop_group_impl_t::nexthop_set(uint16_t key,
                                   nexthop_group_entry_t const & value) {
    nexthops_[key] = value;
+}
+
+void
+nexthop_group_impl_t::nexthop_set(uint16_t key, nexthop_group_entry_t && value) {
+   nexthops_[key] = std::move(value);
 }
 
 void
@@ -537,9 +619,21 @@ nexthop_group_impl_t::backup_nexthops_is(
 }
 
 void
+nexthop_group_impl_t::backup_nexthops_is(
+         std::map<uint16_t, nexthop_group_entry_t> && backup_nexthops) {
+   backup_nexthops_ = std::move(backup_nexthops);
+}
+
+void
 nexthop_group_impl_t::backup_nexthop_set(uint16_t key,
                                          nexthop_group_entry_t const & value) {
    backup_nexthops_[key] = value;
+}
+
+void
+nexthop_group_impl_t::backup_nexthop_set(uint16_t key,
+                                         nexthop_group_entry_t && value) {
+   backup_nexthops_[key] = std::move(value);
 }
 
 void
@@ -559,8 +653,19 @@ nexthop_group_impl_t::destination_ips_is(
 }
 
 void
+nexthop_group_impl_t::destination_ips_is(
+         std::map<uint16_t, ip_addr_t> && destination_ips) {
+   destination_ips_ = std::move(destination_ips);
+}
+
+void
 nexthop_group_impl_t::destination_ip_set(uint16_t key, ip_addr_t const & value) {
    destination_ips_[key] = value;
+}
+
+void
+nexthop_group_impl_t::destination_ip_set(uint16_t key, ip_addr_t && value) {
+   destination_ips_[key] = std::move(value);
 }
 
 void
@@ -767,14 +872,18 @@ operator<<(std::ostream& os, const nexthop_group_impl_t& obj) {
 
 
 
+
+
 nexthop_group_programmed_status_impl_t::nexthop_group_programmed_status_impl_t()
        :
-      counter_state_(NEXTHOP_GROUP_COUNTER_INACTIVE) {
+      counter_state_(NEXTHOP_GROUP_COUNTER_INACTIVE),
+      hw_state_(NEXTHOP_GROUP_HW_DROP) {
 }
 
 nexthop_group_programmed_status_impl_t::nexthop_group_programmed_status_impl_t(
-         nexthop_group_counter_state_t counter_state) :
-      counter_state_(counter_state) {
+         nexthop_group_counter_state_t counter_state,
+         nexthop_group_programmed_hw_state_t hw_state) :
+      counter_state_(counter_state), hw_state_(hw_state) {
 }
 
 nexthop_group_counter_state_t
@@ -782,10 +891,16 @@ nexthop_group_programmed_status_impl_t::counter_state() const {
    return counter_state_;
 }
 
+nexthop_group_programmed_hw_state_t
+nexthop_group_programmed_status_impl_t::hw_state() const {
+   return hw_state_;
+}
+
 bool
 nexthop_group_programmed_status_impl_t::operator==(
          nexthop_group_programmed_status_impl_t const & other) const {
-   return counter_state_ == other.counter_state_;
+   return counter_state_ == other.counter_state_ &&
+          hw_state_ == other.hw_state_;
 }
 
 bool
@@ -799,6 +914,8 @@ nexthop_group_programmed_status_impl_t::operator<(
          nexthop_group_programmed_status_impl_t const & other) const {
    if(counter_state_ != other.counter_state_) {
       return counter_state_ < other.counter_state_;
+   } else if(hw_state_ != other.hw_state_) {
+      return hw_state_ < other.hw_state_;
    }
    return false;
 }
@@ -813,6 +930,7 @@ nexthop_group_programmed_status_impl_t::hash() const {
 void
 nexthop_group_programmed_status_impl_t::mix_me(hash_mix & h) const {
    h.mix(counter_state_); // nexthop_group_counter_state_t
+   h.mix(hw_state_); // nexthop_group_programmed_hw_state_t
 }
 
 std::string
@@ -820,6 +938,7 @@ nexthop_group_programmed_status_impl_t::to_string() const {
    std::ostringstream ss;
    ss << "nexthop_group_programmed_status_t(";
    ss << "counter_state=" << counter_state_;
+   ss << ", hw_state=" << hw_state_;
    ss << ")";
    return ss.str();
 }

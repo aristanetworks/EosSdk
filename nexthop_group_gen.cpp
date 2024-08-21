@@ -35,6 +35,19 @@ nexthop_group_mpls_action_t::operator=(
    return *this;
 }
 
+EOS_SDK_PUBLIC nexthop_group_mpls_action_t::nexthop_group_mpls_action_t(
+   nexthop_group_mpls_action_t && other) noexcept  :
+   pimpl(std::move(other.pimpl)) {}
+EOS_SDK_PUBLIC nexthop_group_mpls_action_t&
+nexthop_group_mpls_action_t::operator=(
+   nexthop_group_mpls_action_t && other) noexcept 
+{
+   if(this != &other) {
+      std::swap(pimpl, other.pimpl);
+   }
+   return *this;
+}
+
 EOS_SDK_PUBLIC void *
 nexthop_group_mpls_action_t::operator new( std::size_t size ) {
    return ::operator new( size );
@@ -67,6 +80,19 @@ nexthop_group_entry_counter_t::operator=(
    if(this != &other) {
       pimpl = std::make_shared<nexthop_group_entry_counter_impl_t>(
          *other.pimpl);
+   }
+   return *this;
+}
+
+EOS_SDK_PUBLIC nexthop_group_entry_counter_t::nexthop_group_entry_counter_t(
+   nexthop_group_entry_counter_t && other) noexcept  :
+   pimpl(std::move(other.pimpl)) {}
+EOS_SDK_PUBLIC nexthop_group_entry_counter_t&
+nexthop_group_entry_counter_t::operator=(
+   nexthop_group_entry_counter_t && other) noexcept 
+{
+   if(this != &other) {
+      std::swap(pimpl, other.pimpl);
    }
    return *this;
 }
@@ -110,6 +136,19 @@ nexthop_group_entry_t::operator=(
    if(this != &other) {
       pimpl = std::make_shared<nexthop_group_entry_impl_t>(
          *other.pimpl);
+   }
+   return *this;
+}
+
+EOS_SDK_PUBLIC nexthop_group_entry_t::nexthop_group_entry_t(
+   nexthop_group_entry_t && other) noexcept  :
+   pimpl(std::move(other.pimpl)) {}
+EOS_SDK_PUBLIC nexthop_group_entry_t&
+nexthop_group_entry_t::operator=(
+   nexthop_group_entry_t && other) noexcept 
+{
+   if(this != &other) {
+      std::swap(pimpl, other.pimpl);
    }
    return *this;
 }
@@ -167,6 +206,19 @@ nexthop_group_t::operator=(
    return *this;
 }
 
+EOS_SDK_PUBLIC nexthop_group_t::nexthop_group_t(
+   nexthop_group_t && other) noexcept  :
+   pimpl(std::move(other.pimpl)) {}
+EOS_SDK_PUBLIC nexthop_group_t&
+nexthop_group_t::operator=(
+   nexthop_group_t && other) noexcept 
+{
+   if(this != &other) {
+      std::swap(pimpl, other.pimpl);
+   }
+   return *this;
+}
+
 EOS_SDK_PUBLIC void *
 nexthop_group_t::operator new( std::size_t size ) {
    return ::operator new( size );
@@ -181,9 +233,11 @@ nexthop_group_t::operator delete( void * p ) noexcept {
 nexthop_group_programmed_status_t::nexthop_group_programmed_status_t() :
    pimpl(std::make_shared<nexthop_group_programmed_status_impl_t>()) {}
 nexthop_group_programmed_status_t::nexthop_group_programmed_status_t(
-         nexthop_group_counter_state_t counter_state) :
+         nexthop_group_counter_state_t counter_state,
+         nexthop_group_programmed_hw_state_t hw_state) :
    pimpl(std::make_shared<nexthop_group_programmed_status_impl_t>(
-      counter_state
+      counter_state,
+      hw_state
    )) {}
 EOS_SDK_PUBLIC nexthop_group_programmed_status_t::nexthop_group_programmed_status_t(
    const nexthop_group_programmed_status_t& other) :
@@ -196,6 +250,19 @@ nexthop_group_programmed_status_t::operator=(
    if(this != &other) {
       pimpl = std::make_shared<nexthop_group_programmed_status_impl_t>(
          *other.pimpl);
+   }
+   return *this;
+}
+
+EOS_SDK_PUBLIC nexthop_group_programmed_status_t::nexthop_group_programmed_status_t(
+   nexthop_group_programmed_status_t && other) noexcept  :
+   pimpl(std::move(other.pimpl)) {}
+EOS_SDK_PUBLIC nexthop_group_programmed_status_t&
+nexthop_group_programmed_status_t::operator=(
+   nexthop_group_programmed_status_t && other) noexcept 
+{
+   if(this != &other) {
+      std::swap(pimpl, other.pimpl);
    }
    return *this;
 }

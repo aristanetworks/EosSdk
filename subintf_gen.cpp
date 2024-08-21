@@ -30,6 +30,19 @@ subintf_t::operator=(
    return *this;
 }
 
+EOS_SDK_PUBLIC subintf_t::subintf_t(
+   subintf_t && other) noexcept  :
+   pimpl(std::move(other.pimpl)) {}
+EOS_SDK_PUBLIC subintf_t&
+subintf_t::operator=(
+   subintf_t && other) noexcept 
+{
+   if(this != &other) {
+      std::swap(pimpl, other.pimpl);
+   }
+   return *this;
+}
+
 EOS_SDK_PUBLIC void *
 subintf_t::operator new( std::size_t size ) {
    return ::operator new( size );

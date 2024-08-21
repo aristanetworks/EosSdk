@@ -31,6 +31,11 @@ ip_route_key_impl_t::prefix_is(ip_prefix_t const & prefix) {
    prefix_ = prefix;
 }
 
+void
+ip_route_key_impl_t::prefix_is(ip_prefix_t && prefix) {
+   prefix_ = std::move(prefix);
+}
+
 ip_route_preference_t
 ip_route_key_impl_t::preference() const {
    return preference_;
@@ -106,6 +111,11 @@ ip_route_impl_t::key_is(ip_route_key_t const & key) {
    key_ = key;
 }
 
+void
+ip_route_impl_t::key_is(ip_route_key_t && key) {
+   key_ = std::move(key);
+}
+
 ip_route_tag_t
 ip_route_impl_t::tag() const {
    return tag_;
@@ -134,6 +144,11 @@ ip_route_impl_t::command_tag() const {
 void
 ip_route_impl_t::command_tag_is(std::string const & command_tag) {
    command_tag_ = command_tag;
+}
+
+void
+ip_route_impl_t::command_tag_is(std::string && command_tag) {
+   command_tag_ = std::move(command_tag);
 }
 
 af_t
@@ -211,6 +226,11 @@ ip_route_via_impl_t::route_key_is(ip_route_key_t const & route_key) {
    route_key_ = route_key;
 }
 
+void
+ip_route_via_impl_t::route_key_is(ip_route_key_t && route_key) {
+   route_key_ = std::move(route_key);
+}
+
 ip_addr_t
 ip_route_via_impl_t::hop() const {
    return hop_;
@@ -219,6 +239,11 @@ ip_route_via_impl_t::hop() const {
 void
 ip_route_via_impl_t::hop_is(ip_addr_t const & hop) {
    hop_ = hop;
+}
+
+void
+ip_route_via_impl_t::hop_is(ip_addr_t && hop) {
+   hop_ = std::move(hop);
 }
 
 intf_id_t
@@ -239,6 +264,11 @@ ip_route_via_impl_t::nexthop_group() const {
 void
 ip_route_via_impl_t::nexthop_group_is(std::string const & nexthop_group) {
    nexthop_group_ = nexthop_group;
+}
+
+void
+ip_route_via_impl_t::nexthop_group_is(std::string && nexthop_group) {
+   nexthop_group_ = std::move(nexthop_group);
 }
 
 mpls_label_t
@@ -289,6 +319,11 @@ ip_route_via_impl_t::egress_vrf() const {
 void
 ip_route_via_impl_t::egress_vrf_is(std::string const & egress_vrf) {
    egress_vrf_ = egress_vrf;
+}
+
+void
+ip_route_via_impl_t::egress_vrf_is(std::string && egress_vrf) {
+   egress_vrf_ = std::move(egress_vrf);
 }
 
 ip_via_metric_t

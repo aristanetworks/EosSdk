@@ -9,6 +9,16 @@
 #include <memory>
 #include <sstream>
 
+#ifdef SWIG
+%ignore eos::eth_phy_intf_counters_t(eos::eth_phy_intf_counters_t &&) noexcept;
+%ignore eos::eth_phy_intf_counters_t::operator=(eos::eth_phy_intf_counters_t &&)
+   noexcept;
+%ignore eos::eth_phy_intf_bin_counters_t(eos::eth_phy_intf_bin_counters_t &&)
+   noexcept;
+%ignore eos::eth_phy_intf_bin_counters_t::operator=(
+   eos::eth_phy_intf_bin_counters_t &&) noexcept;
+#endif
+
 namespace eos {
 
 /** Possible interface link speeds. */
@@ -60,6 +70,8 @@ class EOS_SDK_PUBLIC eth_phy_intf_counters_t {
    eth_phy_intf_counters_t& operator=(
       eth_phy_intf_counters_t const & other);
 
+   eth_phy_intf_counters_t(eth_phy_intf_counters_t && other) noexcept;
+   eth_phy_intf_counters_t & operator=(eth_phy_intf_counters_t && other) noexcept;
    static void * operator new( std::size_t, void * ptr ) {
       return ptr;
    }
@@ -195,6 +207,9 @@ class EOS_SDK_PUBLIC eth_phy_intf_bin_counters_t {
    eth_phy_intf_bin_counters_t& operator=(
       eth_phy_intf_bin_counters_t const & other);
 
+   eth_phy_intf_bin_counters_t(eth_phy_intf_bin_counters_t && other) noexcept;
+   eth_phy_intf_bin_counters_t & operator=(eth_phy_intf_bin_counters_t && other)
+      noexcept;
    static void * operator new( std::size_t, void * ptr ) {
       return ptr;
    }

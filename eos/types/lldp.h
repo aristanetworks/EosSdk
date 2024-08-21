@@ -12,6 +12,30 @@
 #include <netinet/ether.h>
 #include <sstream>
 
+#ifdef SWIG
+%ignore eos::lldp_tlv_type_t(eos::lldp_tlv_type_t &&) noexcept;
+%ignore eos::lldp_tlv_type_t::operator=(eos::lldp_tlv_type_t &&) noexcept;
+%ignore eos::lldp_std_tlv_type_t(eos::lldp_std_tlv_type_t &&) noexcept;
+%ignore eos::lldp_std_tlv_type_t::operator=(eos::lldp_std_tlv_type_t &&) noexcept;
+%ignore eos::lldp_syscap_t(eos::lldp_syscap_t &&) noexcept;
+%ignore eos::lldp_syscap_t::operator=(eos::lldp_syscap_t &&) noexcept;
+%ignore eos::lldp_management_address_t(eos::lldp_management_address_t &&) noexcept;
+%ignore eos::lldp_management_address_t::operator=(eos::lldp_management_address_t &&)
+   noexcept;
+%ignore eos::lldp_lacp_t(eos::lldp_lacp_t &&) noexcept;
+%ignore eos::lldp_lacp_t::operator=(eos::lldp_lacp_t &&) noexcept;
+%ignore eos::lldp_phy_t(eos::lldp_phy_t &&) noexcept;
+%ignore eos::lldp_phy_t::operator=(eos::lldp_phy_t &&) noexcept;
+%ignore eos::lldp_chassis_id_t(eos::lldp_chassis_id_t &&) noexcept;
+%ignore eos::lldp_chassis_id_t::operator=(eos::lldp_chassis_id_t &&) noexcept;
+%ignore eos::lldp_intf_id_t(eos::lldp_intf_id_t &&) noexcept;
+%ignore eos::lldp_intf_id_t::operator=(eos::lldp_intf_id_t &&) noexcept;
+%ignore eos::lldp_remote_system_t(eos::lldp_remote_system_t &&) noexcept;
+%ignore eos::lldp_remote_system_t::operator=(eos::lldp_remote_system_t &&) noexcept;
+%ignore eos::lldp_neighbor_t(eos::lldp_neighbor_t &&) noexcept;
+%ignore eos::lldp_neighbor_t::operator=(eos::lldp_neighbor_t &&) noexcept;
+#endif
+
 namespace eos {
 
 class lldp_tlv_type_impl_t;
@@ -24,6 +48,8 @@ class EOS_SDK_PUBLIC lldp_tlv_type_t {
    lldp_tlv_type_t& operator=(
       lldp_tlv_type_t const & other);
 
+   lldp_tlv_type_t(lldp_tlv_type_t && other) noexcept;
+   lldp_tlv_type_t & operator=(lldp_tlv_type_t && other) noexcept;
    static void * operator new( std::size_t, void * ptr ) {
       return ptr;
    }
@@ -95,6 +121,8 @@ class EOS_SDK_PUBLIC lldp_std_tlv_type_t {
    lldp_std_tlv_type_t& operator=(
       lldp_std_tlv_type_t const & other);
 
+   lldp_std_tlv_type_t(lldp_std_tlv_type_t && other) noexcept;
+   lldp_std_tlv_type_t & operator=(lldp_std_tlv_type_t && other) noexcept;
    static void * operator new( std::size_t, void * ptr ) {
       return ptr;
    }
@@ -168,6 +196,8 @@ class EOS_SDK_PUBLIC lldp_syscap_t {
    lldp_syscap_t& operator=(
       lldp_syscap_t const & other);
 
+   lldp_syscap_t(lldp_syscap_t && other) noexcept;
+   lldp_syscap_t & operator=(lldp_syscap_t && other) noexcept;
    static void * operator new( std::size_t, void * ptr ) {
       return ptr;
    }
@@ -212,6 +242,9 @@ class EOS_SDK_PUBLIC lldp_management_address_t {
    lldp_management_address_t& operator=(
       lldp_management_address_t const & other);
 
+   lldp_management_address_t(lldp_management_address_t && other) noexcept;
+   lldp_management_address_t & operator=(lldp_management_address_t && other)
+      noexcept;
    static void * operator new( std::size_t, void * ptr ) {
       return ptr;
    }
@@ -273,6 +306,8 @@ class EOS_SDK_PUBLIC lldp_lacp_t {
    lldp_lacp_t& operator=(
       lldp_lacp_t const & other);
 
+   lldp_lacp_t(lldp_lacp_t && other) noexcept;
+   lldp_lacp_t & operator=(lldp_lacp_t && other) noexcept;
    static void * operator new( std::size_t, void * ptr ) {
       return ptr;
    }
@@ -329,6 +364,8 @@ class EOS_SDK_PUBLIC lldp_phy_t {
    lldp_phy_t& operator=(
       lldp_phy_t const & other);
 
+   lldp_phy_t(lldp_phy_t && other) noexcept;
+   lldp_phy_t & operator=(lldp_phy_t && other) noexcept;
    static void * operator new( std::size_t, void * ptr ) {
       return ptr;
    }
@@ -410,6 +447,8 @@ class EOS_SDK_PUBLIC lldp_chassis_id_t {
    lldp_chassis_id_t& operator=(
       lldp_chassis_id_t const & other);
 
+   lldp_chassis_id_t(lldp_chassis_id_t && other) noexcept;
+   lldp_chassis_id_t & operator=(lldp_chassis_id_t && other) noexcept;
    static void * operator new( std::size_t, void * ptr ) {
       return ptr;
    }
@@ -473,6 +512,8 @@ class EOS_SDK_PUBLIC lldp_intf_id_t {
    lldp_intf_id_t& operator=(
       lldp_intf_id_t const & other);
 
+   lldp_intf_id_t(lldp_intf_id_t && other) noexcept;
+   lldp_intf_id_t & operator=(lldp_intf_id_t && other) noexcept;
    static void * operator new( std::size_t, void * ptr ) {
       return ptr;
    }
@@ -517,6 +558,8 @@ class EOS_SDK_PUBLIC lldp_remote_system_t {
    lldp_remote_system_t& operator=(
       lldp_remote_system_t const & other);
 
+   lldp_remote_system_t(lldp_remote_system_t && other) noexcept;
+   lldp_remote_system_t & operator=(lldp_remote_system_t && other) noexcept;
    static void * operator new( std::size_t, void * ptr ) {
       return ptr;
    }
@@ -569,6 +612,8 @@ class EOS_SDK_PUBLIC lldp_neighbor_t {
    lldp_neighbor_t& operator=(
       lldp_neighbor_t const & other);
 
+   lldp_neighbor_t(lldp_neighbor_t && other) noexcept;
+   lldp_neighbor_t & operator=(lldp_neighbor_t && other) noexcept;
    static void * operator new( std::size_t, void * ptr ) {
       return ptr;
    }

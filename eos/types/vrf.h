@@ -9,6 +9,11 @@
 #include <memory>
 #include <sstream>
 
+#ifdef SWIG
+%ignore eos::vrf_t(eos::vrf_t &&) noexcept;
+%ignore eos::vrf_t::operator=(eos::vrf_t &&) noexcept;
+#endif
+
 namespace eos {
 
 /** VRF state. */
@@ -36,6 +41,8 @@ class EOS_SDK_PUBLIC vrf_t {
    vrf_t& operator=(
       vrf_t const & other);
 
+   vrf_t(vrf_t && other) noexcept;
+   vrf_t & operator=(vrf_t && other) noexcept;
    static void * operator new( std::size_t, void * ptr ) {
       return ptr;
    }

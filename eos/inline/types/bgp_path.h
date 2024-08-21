@@ -92,6 +92,11 @@ bgp_path_options_t::path_attr_fields_is(
          bgp_path_attr_fields_t const & path_attr_fields) {
    pimpl->path_attr_fields_is(path_attr_fields);
 }
+void
+bgp_path_options_t::path_attr_fields_is(bgp_path_attr_fields_t && path_attr_fields)
+       {
+   pimpl->path_attr_fields_is(std::move(path_attr_fields));
+}
 bool
 bgp_path_options_t::operator==(bgp_path_options_t const & other) const {
    return pimpl->operator==(*other.pimpl);
@@ -125,6 +130,10 @@ bgp_path_attr_t::next_hop() const {
 void
 bgp_path_attr_t::next_hop_is(ip_addr_t const & next_hop) {
    pimpl->next_hop_is(next_hop);
+}
+void
+bgp_path_attr_t::next_hop_is(ip_addr_t && next_hop) {
+   pimpl->next_hop_is(std::move(next_hop));
 }
 uint8_t
 bgp_path_attr_t::origin() const {
@@ -160,8 +169,16 @@ bgp_path_attr_t::community_list_is(
    pimpl->community_list_is(community_list);
 }
 void
+bgp_path_attr_t::community_list_is(std::unordered_set<uint32_t> && community_list) {
+   pimpl->community_list_is(std::move(community_list));
+}
+void
 bgp_path_attr_t::community_list_set(uint32_t const & value) {
    pimpl->community_list_set(value);
+}
+void
+bgp_path_attr_t::community_list_set(uint32_t && value) {
+   pimpl->community_list_set(std::move(value));
 }
 void
 bgp_path_attr_t::community_list_del(uint32_t const & value) {
@@ -201,6 +218,10 @@ void
 bgp_path_key_t::prefix_is(ip_prefix_t const & prefix) {
    pimpl->prefix_is(prefix);
 }
+void
+bgp_path_key_t::prefix_is(ip_prefix_t && prefix) {
+   pimpl->prefix_is(std::move(prefix));
+}
 ip_addr_t
 bgp_path_key_t::peer_addr() const {
    return pimpl->peer_addr();
@@ -209,6 +230,10 @@ void
 bgp_path_key_t::peer_addr_is(ip_addr_t const & peer_addr) {
    pimpl->peer_addr_is(peer_addr);
 }
+void
+bgp_path_key_t::peer_addr_is(ip_addr_t && peer_addr) {
+   pimpl->peer_addr_is(std::move(peer_addr));
+}
 std::string
 bgp_path_key_t::vrf_name() const {
    return pimpl->vrf_name();
@@ -216,6 +241,10 @@ bgp_path_key_t::vrf_name() const {
 void
 bgp_path_key_t::vrf_name_is(std::string const & vrf_name) {
    pimpl->vrf_name_is(vrf_name);
+}
+void
+bgp_path_key_t::vrf_name_is(std::string && vrf_name) {
+   pimpl->vrf_name_is(std::move(vrf_name));
 }
 bool
 bgp_path_key_t::operator==(bgp_path_key_t const & other) const {
@@ -255,6 +284,10 @@ void
 bgp_path_t::path_key_is(bgp_path_key_t const & path_key) {
    pimpl->path_key_is(path_key);
 }
+void
+bgp_path_t::path_key_is(bgp_path_key_t && path_key) {
+   pimpl->path_key_is(std::move(path_key));
+}
 bgp_path_attr_t
 bgp_path_t::path_attr() const {
    return pimpl->path_attr();
@@ -262,6 +295,10 @@ bgp_path_t::path_attr() const {
 void
 bgp_path_t::path_attr_is(bgp_path_attr_t const & path_attr) {
    pimpl->path_attr_is(path_attr);
+}
+void
+bgp_path_t::path_attr_is(bgp_path_attr_t && path_attr) {
+   pimpl->path_attr_is(std::move(path_attr));
 }
 bool
 bgp_path_t::operator==(bgp_path_t const & other) const {

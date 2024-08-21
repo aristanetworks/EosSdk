@@ -54,6 +54,11 @@ eth_lag_intf_membership_impl_t::reason_is(std::string const & reason) {
    reason_ = reason;
 }
 
+void
+eth_lag_intf_membership_impl_t::reason_is(std::string && reason) {
+   reason_ = std::move(reason);
+}
+
 double
 eth_lag_intf_membership_impl_t::member_time() const {
    return member_time_;
@@ -137,19 +142,23 @@ operator<<(std::ostream& os, const eth_lag_intf_membership_impl_t& obj) {
 // Default constructor.
 eth_lag_intf_impl_t::eth_lag_intf_impl_t() :
       intf_(intf_id_t()), speed_(0), min_links_(0),
-      fallback_type_(ETH_LAG_INTF_FALLBACK_NONE), fallback_timeout_(90) {
+      fallback_type_(ETH_LAG_INTF_FALLBACK_NONE), fallback_timeout_(90),
+      min_speed_(0) {
 }
 
 eth_lag_intf_impl_t::eth_lag_intf_impl_t(intf_id_t intf) :
       intf_(intf), speed_(0), min_links_(0),
-      fallback_type_(ETH_LAG_INTF_FALLBACK_NONE), fallback_timeout_(90) {
+      fallback_type_(ETH_LAG_INTF_FALLBACK_NONE), fallback_timeout_(90),
+      min_speed_(0) {
 }
 
 eth_lag_intf_impl_t::eth_lag_intf_impl_t(
          intf_id_t intf, uint32_t min_links, uint64_t speed,
-         eth_lag_intf_fallback_type_t fallback_type, uint16_t fallback_timeout) :
+         eth_lag_intf_fallback_type_t fallback_type, uint16_t fallback_timeout,
+         uint64_t min_speed) :
       intf_(intf), speed_(speed), min_links_(min_links),
-      fallback_type_(fallback_type), fallback_timeout_(fallback_timeout) {
+      fallback_type_(fallback_type), fallback_timeout_(fallback_timeout),
+      min_speed_(min_speed) {
 }
 
 intf_id_t
@@ -177,6 +186,11 @@ eth_lag_intf_impl_t::fallback_timeout() const {
    return fallback_timeout_;
 }
 
+uint64_t
+eth_lag_intf_impl_t::min_speed() const {
+   return min_speed_;
+}
+
 uint16_t
 eth_lag_intf_impl_t::fallback_timeout_default() const {
    return ETH_LAG_INTF_FALLBACK_TIMEOUT_DEFAULT;
@@ -188,7 +202,8 @@ eth_lag_intf_impl_t::operator==(eth_lag_intf_impl_t const & other) const {
           speed_ == other.speed_ &&
           min_links_ == other.min_links_ &&
           fallback_type_ == other.fallback_type_ &&
-          fallback_timeout_ == other.fallback_timeout_;
+          fallback_timeout_ == other.fallback_timeout_ &&
+          min_speed_ == other.min_speed_;
 }
 
 bool
@@ -208,6 +223,8 @@ eth_lag_intf_impl_t::operator<(eth_lag_intf_impl_t const & other) const {
       return fallback_type_ < other.fallback_type_;
    } else if(fallback_timeout_ != other.fallback_timeout_) {
       return fallback_timeout_ < other.fallback_timeout_;
+   } else if(min_speed_ != other.min_speed_) {
+      return min_speed_ < other.min_speed_;
    }
    return false;
 }
@@ -226,6 +243,7 @@ eth_lag_intf_impl_t::mix_me(hash_mix & h) const {
    h.mix(min_links_); // uint32_t
    h.mix(fallback_type_); // eth_lag_intf_fallback_type_t
    h.mix(fallback_timeout_); // uint16_t
+   h.mix(min_speed_); // uint64_t
 }
 
 std::string
@@ -237,6 +255,7 @@ eth_lag_intf_impl_t::to_string() const {
    ss << ", min_links=" << min_links_;
    ss << ", fallback_type=" << fallback_type_;
    ss << ", fallback_timeout=" << fallback_timeout_;
+   ss << ", min_speed=" << min_speed_;
    ss << ")";
    return ss.str();
 }

@@ -75,6 +75,8 @@ class EOS_SDK_PUBLIC mac_entry_impl_t {
    mac_key_t mac_key() const;
    /** Setter for 'mac_key'. */
    void mac_key_is(mac_key_t const & mac_key);
+   /** Moving Setter for 'mac_key'. */
+   void mac_key_is(mac_key_t && mac_key);
 
    /**
     * Getter for 'intfs': the set of interfaces that this key forwards to. For
@@ -85,8 +87,12 @@ class EOS_SDK_PUBLIC mac_entry_impl_t {
    std::set<intf_id_t> const & intfs() const;
    /** Setter for 'intfs'. */
    void intfs_is(std::set<intf_id_t> const & intfs);
+   /** Moving Setter for 'intfs'. */
+   void intfs_is(std::set<intf_id_t> && intfs);
    /** Inserts one intf of 'value' to the set. */
    void intf_set(intf_id_t const & value);
+   /** Inserts one intf of 'value' to the set. */
+   void intf_set(intf_id_t && value);
    /** Deletes one intf of 'value' from the set. */
    void intf_del(intf_id_t const & value);
 

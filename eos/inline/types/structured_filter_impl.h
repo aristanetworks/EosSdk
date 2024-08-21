@@ -187,8 +187,18 @@ port_field_impl_t::src_ports_is(std::set<port_range_t> const & src_ports) {
 }
 
 void
+port_field_impl_t::src_ports_is(std::set<port_range_t> && src_ports) {
+   src_ports_ = std::move(src_ports);
+}
+
+void
 port_field_impl_t::src_port_set(port_range_t const & value) {
    src_ports_.insert(value);
+}
+
+void
+port_field_impl_t::src_port_set(port_range_t && value) {
+   src_ports_.emplace(std::move(value));
 }
 
 void
@@ -207,8 +217,18 @@ port_field_impl_t::dst_ports_is(std::set<port_range_t> const & dst_ports) {
 }
 
 void
+port_field_impl_t::dst_ports_is(std::set<port_range_t> && dst_ports) {
+   dst_ports_ = std::move(dst_ports);
+}
+
+void
 port_field_impl_t::dst_port_set(port_range_t const & value) {
    dst_ports_.insert(value);
+}
+
+void
+port_field_impl_t::dst_port_set(port_range_t && value) {
+   dst_ports_.emplace(std::move(value));
 }
 
 void
@@ -228,8 +248,19 @@ port_field_impl_t::src_port_field_sets_is(
 }
 
 void
+port_field_impl_t::src_port_field_sets_is(
+         std::unordered_set<std::string> && src_port_field_sets) {
+   src_port_field_sets_ = std::move(src_port_field_sets);
+}
+
+void
 port_field_impl_t::src_port_field_set_set(std::string const & value) {
    src_port_field_sets_.insert(value);
+}
+
+void
+port_field_impl_t::src_port_field_set_set(std::string && value) {
+   src_port_field_sets_.emplace(std::move(value));
 }
 
 void
@@ -249,8 +280,19 @@ port_field_impl_t::dst_port_field_sets_is(
 }
 
 void
+port_field_impl_t::dst_port_field_sets_is(
+         std::unordered_set<std::string> && dst_port_field_sets) {
+   dst_port_field_sets_ = std::move(dst_port_field_sets);
+}
+
+void
 port_field_impl_t::dst_port_field_set_set(std::string const & value) {
    dst_port_field_sets_.insert(value);
+}
+
+void
+port_field_impl_t::dst_port_field_set_set(std::string && value) {
+   dst_port_field_sets_.emplace(std::move(value));
 }
 
 void
@@ -387,8 +429,18 @@ protocol_field_impl_t::ports_is(std::map<uint32_t, port_field_t> const & ports) 
 }
 
 void
+protocol_field_impl_t::ports_is(std::map<uint32_t, port_field_t> && ports) {
+   ports_ = std::move(ports);
+}
+
+void
 protocol_field_impl_t::port_set(uint32_t key, port_field_t const & value) {
    ports_[key] = value;
+}
+
+void
+protocol_field_impl_t::port_set(uint32_t key, port_field_t && value) {
+   ports_[key] = std::move(value);
 }
 
 void
@@ -551,9 +603,21 @@ tp_rule_filter_impl_t::protocols_is(
 }
 
 void
+tp_rule_filter_impl_t::protocols_is(
+         std::map<protocol_range_t, protocol_field_t> && protocols) {
+   protocols_ = std::move(protocols);
+}
+
+void
 tp_rule_filter_impl_t::protocol_set(protocol_range_t key,
                                     protocol_field_t const & value) {
    protocols_[key] = value;
+}
+
+void
+tp_rule_filter_impl_t::protocol_set(protocol_range_t key,
+                                    protocol_field_t && value) {
+   protocols_[key] = std::move(value);
 }
 
 void

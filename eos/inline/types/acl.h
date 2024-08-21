@@ -183,8 +183,16 @@ acl_port_spec_t::ports_is(std::list<uint16_t> const & ports) {
    pimpl->ports_is(ports);
 }
 void
+acl_port_spec_t::ports_is(std::list<uint16_t> && ports) {
+   pimpl->ports_is(std::move(ports));
+}
+void
 acl_port_spec_t::port_set(uint16_t const & ports) {
    pimpl->port_set(ports);
+}
+void
+acl_port_spec_t::port_set(uint16_t && ports) {
+   pimpl->port_set(std::move(ports));
 }
 void
 acl_port_spec_t::port_del(uint16_t const & ports) {
@@ -399,6 +407,10 @@ void
 acl_rule_ip_t::source_addr_is(ip_addr_mask_t const & source_addr) {
    pimpl->source_addr_is(source_addr);
 }
+void
+acl_rule_ip_t::source_addr_is(ip_addr_mask_t && source_addr) {
+   pimpl->source_addr_is(std::move(source_addr));
+}
 ip_addr_mask_t
 acl_rule_ip_t::destination_addr() const {
    return pimpl->destination_addr();
@@ -406,6 +418,10 @@ acl_rule_ip_t::destination_addr() const {
 void
 acl_rule_ip_t::destination_addr_is(ip_addr_mask_t const & destination_addr) {
    pimpl->destination_addr_is(destination_addr);
+}
+void
+acl_rule_ip_t::destination_addr_is(ip_addr_mask_t && destination_addr) {
+   pimpl->destination_addr_is(std::move(destination_addr));
 }
 acl_port_spec_t
 acl_rule_ip_t::source_port() const {

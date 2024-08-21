@@ -207,6 +207,19 @@ class EOS_SDK_PUBLIC eth_lag_intf_mgr
    virtual uint32_t min_links(intf_id_t eth_lag_intf_id) const = 0;
 
    /**
+    * Returns the minimum speed in Mbps required before this LAG interface
+    * is considered `OPER_STATUS_UP`.
+    * If the LAG interface does not exist, 0 will be returned.
+    */
+   uint64_t min_speed(intf_id_t eth_lag_intf_id) const;
+
+   /**
+    * Sets the min speed for a LAG interface, in Mbps. It's a no-op if the specified
+    * LAG interface does not exist.
+    */
+   void min_speed_is(intf_id_t eth_lag_intf_id, uint64_t min_speed);
+
+   /**
     * Sets the fallback type for a LAG interface. It's a no-op if the LAG
     * interface does not exist. Throws "invalid_argument_error" exception if
     * invalid fallback type is passed in.

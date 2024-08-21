@@ -31,8 +31,12 @@ class EOS_SDK_PUBLIC flow_match_impl_t {
    std::set<intf_id_t> const & input_intfs() const;
    /** Setter for 'input_intfs'. */
    void input_intfs_is(std::set<intf_id_t> const & input_intfs);
+   /** Moving Setter for 'input_intfs'. */
+   void input_intfs_is(std::set<intf_id_t> && input_intfs);
    /** Inserts one input_intf of 'value' to the set. */
    void input_intf_set(intf_id_t const & value);
+   /** Inserts one input_intf of 'value' to the set. */
+   void input_intf_set(intf_id_t && value);
    /** Deletes one input_intf of 'value' from the set. */
    void input_intf_del(intf_id_t const & value);
 
@@ -83,21 +87,27 @@ class EOS_SDK_PUBLIC flow_match_impl_t {
    ip_addr_t ip_src() const;
    /** Setter for 'ip_src'. */
    void ip_src_is(ip_addr_t const & ip_src);
+   /** Moving Setter for 'ip_src'. */
+   void ip_src_is(ip_addr_t && ip_src);
 
    void ip_src_is(ip_addr_t const & src, ip_addr_t const & mask);
 
    ip_addr_t ip_src_mask() const;
    void ip_src_mask_is(ip_addr_t const & ip_src_mask);
+   void ip_src_mask_is(ip_addr_t && ip_src_mask);
 
    /** Getter for 'ip_dst': the destination IPv4 address to match on. */
    ip_addr_t ip_dst() const;
    /** Setter for 'ip_dst'. */
    void ip_dst_is(ip_addr_t const & ip_dst);
+   /** Moving Setter for 'ip_dst'. */
+   void ip_dst_is(ip_addr_t && ip_dst);
 
    void ip_dst_is(ip_addr_t const & dst, ip_addr_t const & mask);
 
    ip_addr_t ip_dst_mask() const;
    void ip_dst_mask_is(ip_addr_t const & ip_dst_mask);
+   void ip_dst_mask_is(ip_addr_t && ip_dst_mask);
 
    bool operator==(flow_match_impl_t const & other) const;
    bool operator!=(flow_match_impl_t const & other) const;
@@ -149,8 +159,12 @@ class EOS_SDK_PUBLIC flow_action_impl_t {
    std::set<intf_id_t> const & output_intfs() const;
    /** Setter for 'output_intfs'. */
    void output_intfs_is(std::set<intf_id_t> const & output_intfs);
+   /** Moving Setter for 'output_intfs'. */
+   void output_intfs_is(std::set<intf_id_t> && output_intfs);
    /** Inserts one output_intf of 'value' to the set. */
    void output_intf_set(intf_id_t const & value);
+   /** Inserts one output_intf of 'value' to the set. */
+   void output_intf_set(intf_id_t && value);
    /** Deletes one output_intf of 'value' from the set. */
    void output_intf_del(intf_id_t const & value);
 
@@ -176,11 +190,15 @@ class EOS_SDK_PUBLIC flow_action_impl_t {
    ip_addr_t ip_src() const;
    /** Setter for 'ip_src'. */
    void ip_src_is(ip_addr_t const & ip_src);
+   /** Moving Setter for 'ip_src'. */
+   void ip_src_is(ip_addr_t && ip_src);
 
    /** Getter for 'ip_dst': the destination IPv4 address. */
    ip_addr_t ip_dst() const;
    /** Setter for 'ip_dst'. */
    void ip_dst_is(ip_addr_t const & ip_dst);
+   /** Moving Setter for 'ip_dst'. */
+   void ip_dst_is(ip_addr_t && ip_dst);
 
    bool operator==(flow_action_impl_t const & other) const;
    bool operator!=(flow_action_impl_t const & other) const;

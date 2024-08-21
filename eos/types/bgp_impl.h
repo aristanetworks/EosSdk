@@ -23,11 +23,15 @@ class EOS_SDK_PUBLIC bgp_peer_key_impl_t {
    std::string vrf_name() const;
    /** Setter for 'vrf_name'. */
    void vrf_name_is(std::string const & vrf_name);
+   /** Moving Setter for 'vrf_name'. */
+   void vrf_name_is(std::string && vrf_name);
 
    /** Getter for 'peer_addr': BGP peer address. */
    ip_addr_t peer_addr() const;
    /** Setter for 'peer_addr'. */
    void peer_addr_is(ip_addr_t const & peer_addr);
+   /** Moving Setter for 'peer_addr'. */
+   void peer_addr_is(ip_addr_t && peer_addr);
 
    bool operator==(bgp_peer_key_impl_t const & other) const;
    bool operator!=(bgp_peer_key_impl_t const & other) const;

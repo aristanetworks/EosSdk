@@ -36,6 +36,8 @@ class EOS_SDK_PUBLIC decap_group_impl_t {
    ip_addr_t destination_addr() const;
    /** Setter for 'destination_addr'. */
    void destination_addr_is(ip_addr_t const & destination_addr);
+   /** Moving Setter for 'destination_addr'. */
+   void destination_addr_is(ip_addr_t && destination_addr);
 
    /**
     * Getter for 'protocol_type': decapsulate only packets matching this outer IP

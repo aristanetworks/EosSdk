@@ -24,6 +24,19 @@ flow_match_t::operator=(
    return *this;
 }
 
+EOS_SDK_PUBLIC flow_match_t::flow_match_t(
+   flow_match_t && other) noexcept  :
+   pimpl(std::move(other.pimpl)) {}
+EOS_SDK_PUBLIC flow_match_t&
+flow_match_t::operator=(
+   flow_match_t && other) noexcept 
+{
+   if(this != &other) {
+      std::swap(pimpl, other.pimpl);
+   }
+   return *this;
+}
+
 EOS_SDK_PUBLIC void *
 flow_match_t::operator new( std::size_t size ) {
    return ::operator new( size );
@@ -48,6 +61,19 @@ flow_action_t::operator=(
    if(this != &other) {
       pimpl = std::make_shared<flow_action_impl_t>(
          *other.pimpl);
+   }
+   return *this;
+}
+
+EOS_SDK_PUBLIC flow_action_t::flow_action_t(
+   flow_action_t && other) noexcept  :
+   pimpl(std::move(other.pimpl)) {}
+EOS_SDK_PUBLIC flow_action_t&
+flow_action_t::operator=(
+   flow_action_t && other) noexcept 
+{
+   if(this != &other) {
+      std::swap(pimpl, other.pimpl);
    }
    return *this;
 }
@@ -88,6 +114,19 @@ flow_entry_t::operator=(
    return *this;
 }
 
+EOS_SDK_PUBLIC flow_entry_t::flow_entry_t(
+   flow_entry_t && other) noexcept  :
+   pimpl(std::move(other.pimpl)) {}
+EOS_SDK_PUBLIC flow_entry_t&
+flow_entry_t::operator=(
+   flow_entry_t && other) noexcept 
+{
+   if(this != &other) {
+      std::swap(pimpl, other.pimpl);
+   }
+   return *this;
+}
+
 EOS_SDK_PUBLIC void *
 flow_entry_t::operator new( std::size_t size ) {
    return ::operator new( size );
@@ -112,6 +151,19 @@ flow_counters_t::operator=(
    if(this != &other) {
       pimpl = std::make_shared<flow_counters_impl_t>(
          *other.pimpl);
+   }
+   return *this;
+}
+
+EOS_SDK_PUBLIC flow_counters_t::flow_counters_t(
+   flow_counters_t && other) noexcept  :
+   pimpl(std::move(other.pimpl)) {}
+EOS_SDK_PUBLIC flow_counters_t&
+flow_counters_t::operator=(
+   flow_counters_t && other) noexcept 
+{
+   if(this != &other) {
+      std::swap(pimpl, other.pimpl);
    }
    return *this;
 }

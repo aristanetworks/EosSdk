@@ -134,6 +134,10 @@ void
 policy_map_key_t::name_is(std::string const & name) {
    pimpl->name_is(name);
 }
+void
+policy_map_key_t::name_is(std::string && name) {
+   pimpl->name_is(std::move(name));
+}
 policy_feature_t
 policy_map_key_t::feature() const {
    return pimpl->feature();
@@ -224,6 +228,10 @@ void
 policy_map_action_t::nexthop_group_name_is(std::string const & nexthop_group_name) {
    pimpl->nexthop_group_name_is(nexthop_group_name);
 }
+void
+policy_map_action_t::nexthop_group_name_is(std::string && nexthop_group_name) {
+   pimpl->nexthop_group_name_is(std::move(nexthop_group_name));
+}
 std::unordered_set<ip_addr_t> const &
 policy_map_action_t::nexthops() const {
    return pimpl->nexthops();
@@ -233,8 +241,16 @@ policy_map_action_t::nexthops_is(std::unordered_set<ip_addr_t> const & nexthops)
    pimpl->nexthops_is(nexthops);
 }
 void
+policy_map_action_t::nexthops_is(std::unordered_set<ip_addr_t> && nexthops) {
+   pimpl->nexthops_is(std::move(nexthops));
+}
+void
 policy_map_action_t::nexthop_set(ip_addr_t const & value) {
    pimpl->nexthop_set(value);
+}
+void
+policy_map_action_t::nexthop_set(ip_addr_t && value) {
+   pimpl->nexthop_set(std::move(value));
 }
 void
 policy_map_action_t::nexthop_del(ip_addr_t const & value) {
@@ -247,6 +263,10 @@ policy_map_action_t::vrf() const {
 void
 policy_map_action_t::vrf_is(std::string const & vrf) {
    pimpl->vrf_is(vrf);
+}
+void
+policy_map_action_t::vrf_is(std::string && vrf) {
+   pimpl->vrf_is(std::move(vrf));
 }
 uint8_t
 policy_map_action_t::dscp() const {
@@ -314,6 +334,10 @@ void
 traffic_policy_action_t::counter_name_is(std::string const & counter_name) {
    pimpl->counter_name_is(counter_name);
 }
+void
+traffic_policy_action_t::counter_name_is(std::string && counter_name) {
+   pimpl->counter_name_is(std::move(counter_name));
+}
 std::string
 traffic_policy_action_t::goto_class_name() const {
    return pimpl->goto_class_name();
@@ -322,6 +346,10 @@ void
 traffic_policy_action_t::goto_class_name_is(std::string const & goto_class_name) {
    pimpl->goto_class_name_is(goto_class_name);
 }
+void
+traffic_policy_action_t::goto_class_name_is(std::string && goto_class_name) {
+   pimpl->goto_class_name_is(std::move(goto_class_name));
+}
 bool
 traffic_policy_action_t::goto_next() const {
    return pimpl->goto_next();
@@ -329,6 +357,10 @@ traffic_policy_action_t::goto_next() const {
 void
 traffic_policy_action_t::goto_next_is(bool const & goto_next) {
    pimpl->goto_next_is(goto_next);
+}
+void
+traffic_policy_action_t::goto_next_is(bool && goto_next) {
+   pimpl->goto_next_is(std::move(goto_next));
 }
 uint8_t
 traffic_policy_action_t::dscp() const {
@@ -354,6 +386,10 @@ void
 traffic_policy_action_t::vrf_is(std::string const & vrf) {
    pimpl->vrf_is(vrf);
 }
+void
+traffic_policy_action_t::vrf_is(std::string && vrf) {
+   pimpl->vrf_is(std::move(vrf));
+}
 std::string
 traffic_policy_action_t::mirror_session() const {
    return pimpl->mirror_session();
@@ -361,6 +397,10 @@ traffic_policy_action_t::mirror_session() const {
 void
 traffic_policy_action_t::mirror_session_is(std::string const & mirror_session) {
    pimpl->mirror_session_is(mirror_session);
+}
+void
+traffic_policy_action_t::mirror_session_is(std::string && mirror_session) {
+   pimpl->mirror_session_is(std::move(mirror_session));
 }
 uint64_t
 traffic_policy_action_t::police_rate() const {
@@ -370,6 +410,10 @@ void
 traffic_policy_action_t::police_rate_is(uint64_t const & police_rate) {
    pimpl->police_rate_is(police_rate);
 }
+void
+traffic_policy_action_t::police_rate_is(uint64_t && police_rate) {
+   pimpl->police_rate_is(std::move(police_rate));
+}
 uint64_t
 traffic_policy_action_t::police_burst_size() const {
    return pimpl->police_burst_size();
@@ -377,6 +421,10 @@ traffic_policy_action_t::police_burst_size() const {
 void
 traffic_policy_action_t::police_burst_size_is(uint64_t const & police_burst_size) {
    pimpl->police_burst_size_is(police_burst_size);
+}
+void
+traffic_policy_action_t::police_burst_size_is(uint64_t && police_burst_size) {
+   pimpl->police_burst_size_is(std::move(police_burst_size));
 }
 police_rate_unit_t
 traffic_policy_action_t::police_rate_unit() const {
@@ -387,6 +435,11 @@ traffic_policy_action_t::police_rate_unit_is(
          police_rate_unit_t const & police_rate_unit) {
    pimpl->police_rate_unit_is(police_rate_unit);
 }
+void
+traffic_policy_action_t::police_rate_unit_is(
+         police_rate_unit_t && police_rate_unit) {
+   pimpl->police_rate_unit_is(std::move(police_rate_unit));
+}
 police_burst_unit_t
 traffic_policy_action_t::police_burst_unit() const {
    return pimpl->police_burst_unit();
@@ -395,6 +448,11 @@ void
 traffic_policy_action_t::police_burst_unit_is(
          police_burst_unit_t const & police_burst_unit) {
    pimpl->police_burst_unit_is(police_burst_unit);
+}
+void
+traffic_policy_action_t::police_burst_unit_is(
+         police_burst_unit_t && police_burst_unit) {
+   pimpl->police_burst_unit_is(std::move(police_burst_unit));
 }
 std::unordered_set<std::string> const &
 traffic_policy_action_t::nexthop_groups() const {
@@ -406,8 +464,17 @@ traffic_policy_action_t::nexthop_groups_is(
    pimpl->nexthop_groups_is(nexthop_groups);
 }
 void
+traffic_policy_action_t::nexthop_groups_is(
+         std::unordered_set<std::string> && nexthop_groups) {
+   pimpl->nexthop_groups_is(std::move(nexthop_groups));
+}
+void
 traffic_policy_action_t::nexthop_group_set(std::string const & value) {
    pimpl->nexthop_group_set(value);
+}
+void
+traffic_policy_action_t::nexthop_group_set(std::string && value) {
+   pimpl->nexthop_group_set(std::move(value));
 }
 void
 traffic_policy_action_t::nexthop_group_del(std::string const & value) {
@@ -423,8 +490,16 @@ traffic_policy_action_t::nexthops_is(
    pimpl->nexthops_is(nexthops);
 }
 void
+traffic_policy_action_t::nexthops_is(std::unordered_set<ip_addr_t> && nexthops) {
+   pimpl->nexthops_is(std::move(nexthops));
+}
+void
 traffic_policy_action_t::nexthop_set(ip_addr_t const & value) {
    pimpl->nexthop_set(value);
+}
+void
+traffic_policy_action_t::nexthop_set(ip_addr_t && value) {
+   pimpl->nexthop_set(std::move(value));
 }
 void
 traffic_policy_action_t::nexthop_del(ip_addr_t const & value) {
@@ -468,6 +543,10 @@ void
 policy_map_rule_t::class_map_key_is(class_map_key_t const & class_map_key) {
    pimpl->class_map_key_is(class_map_key);
 }
+void
+policy_map_rule_t::class_map_key_is(class_map_key_t && class_map_key) {
+   pimpl->class_map_key_is(std::move(class_map_key));
+}
 policy_map_rule_type_t
 policy_map_rule_t::policy_map_rule_type() const {
    return pimpl->policy_map_rule_type();
@@ -494,8 +573,16 @@ policy_map_rule_t::actions_is(std::set<policy_map_action_t> const & actions) {
    pimpl->actions_is(actions);
 }
 void
+policy_map_rule_t::actions_is(std::set<policy_map_action_t> && actions) {
+   pimpl->actions_is(std::move(actions));
+}
+void
 policy_map_rule_t::action_set(policy_map_action_t const & value) {
    pimpl->action_set(value);
+}
+void
+policy_map_rule_t::action_set(policy_map_action_t && value) {
+   pimpl->action_set(std::move(value));
 }
 void
 policy_map_rule_t::action_del(policy_map_action_t const & value) {
@@ -548,6 +635,10 @@ void
 policy_map_t::key_is(policy_map_key_t const & key) {
    pimpl->key_is(key);
 }
+void
+policy_map_t::key_is(policy_map_key_t && key) {
+   pimpl->key_is(std::move(key));
+}
 std::map<uint32_t, policy_map_rule_t> const &
 policy_map_t::rules() const {
    return pimpl->rules();
@@ -557,8 +648,16 @@ policy_map_t::rules_is(std::map<uint32_t, policy_map_rule_t> const & rules) {
    pimpl->rules_is(rules);
 }
 void
+policy_map_t::rules_is(std::map<uint32_t, policy_map_rule_t> && rules) {
+   pimpl->rules_is(std::move(rules));
+}
+void
 policy_map_t::rule_set(uint32_t key, policy_map_rule_t const & value) {
    pimpl->rule_set(key, value);
+}
+void
+policy_map_t::rule_set(uint32_t key, policy_map_rule_t && value) {
+   pimpl->rule_set(key, std::move(value));
 }
 void
 policy_map_t::rule_del(uint32_t key) {
@@ -616,8 +715,16 @@ traffic_policy_rule_t::actions_is(
    pimpl->actions_is(actions);
 }
 void
+traffic_policy_rule_t::actions_is(std::set<traffic_policy_action_t> && actions) {
+   pimpl->actions_is(std::move(actions));
+}
+void
 traffic_policy_rule_t::action_set(traffic_policy_action_t const & value) {
    pimpl->action_set(value);
+}
+void
+traffic_policy_rule_t::action_set(traffic_policy_action_t && value) {
+   pimpl->action_set(std::move(value));
 }
 void
 traffic_policy_rule_t::action_del(traffic_policy_action_t const & value) {
@@ -675,8 +782,17 @@ traffic_policy_t::named_counters_is(
    pimpl->named_counters_is(named_counters);
 }
 void
+traffic_policy_t::named_counters_is(
+         std::unordered_set<std::string> && named_counters) {
+   pimpl->named_counters_is(std::move(named_counters));
+}
+void
 traffic_policy_t::named_counter_set(std::string const & value) {
    pimpl->named_counter_set(value);
+}
+void
+traffic_policy_t::named_counter_set(std::string && value) {
+   pimpl->named_counter_set(std::move(value));
 }
 void
 traffic_policy_t::named_counter_del(std::string const & value) {
@@ -794,13 +910,35 @@ traffic_policy_counter_t::named_counter_data_is(
    pimpl->named_counter_data_is(named_counter_data);
 }
 void
+traffic_policy_counter_t::named_counter_data_is(
+         
+         std::map<std::string, traffic_policy_counter_data_t> &&
+         named_counter_data) {
+   pimpl->named_counter_data_is(std::move(named_counter_data));
+}
+void
 traffic_policy_counter_t::named_counter_data_set(
          std::string const & key, traffic_policy_counter_data_t const & value) {
    pimpl->named_counter_data_set(key, value);
 }
 void
+traffic_policy_counter_t::named_counter_data_set(
+         std::string const & key, traffic_policy_counter_data_t && value) {
+   pimpl->named_counter_data_set(key, std::move(value));
+}
+void
 traffic_policy_counter_t::named_counter_data_del(std::string const & key) {
    pimpl->named_counter_data_del(key);
+}
+void
+traffic_policy_counter_t::named_counter_data_set(
+         std::string && key, traffic_policy_counter_data_t const & value) {
+   pimpl->named_counter_data_set(std::move(key), value);
+}
+void
+traffic_policy_counter_t::named_counter_data_set(
+         std::string && key, traffic_policy_counter_data_t && value) {
+   pimpl->named_counter_data_set(std::move(key), std::move(value));
 }
 std::map<std::string, traffic_policy_counter_data_t> const &
 traffic_policy_counter_t::class_counter_data() const {
@@ -814,13 +952,35 @@ traffic_policy_counter_t::class_counter_data_is(
    pimpl->class_counter_data_is(class_counter_data);
 }
 void
+traffic_policy_counter_t::class_counter_data_is(
+         
+         std::map<std::string, traffic_policy_counter_data_t> &&
+         class_counter_data) {
+   pimpl->class_counter_data_is(std::move(class_counter_data));
+}
+void
 traffic_policy_counter_t::class_counter_data_set(
          std::string const & key, traffic_policy_counter_data_t const & value) {
    pimpl->class_counter_data_set(key, value);
 }
 void
+traffic_policy_counter_t::class_counter_data_set(
+         std::string const & key, traffic_policy_counter_data_t && value) {
+   pimpl->class_counter_data_set(key, std::move(value));
+}
+void
 traffic_policy_counter_t::class_counter_data_del(std::string const & key) {
    pimpl->class_counter_data_del(key);
+}
+void
+traffic_policy_counter_t::class_counter_data_set(
+         std::string && key, traffic_policy_counter_data_t const & value) {
+   pimpl->class_counter_data_set(std::move(key), value);
+}
+void
+traffic_policy_counter_t::class_counter_data_set(
+         std::string && key, traffic_policy_counter_data_t && value) {
+   pimpl->class_counter_data_set(std::move(key), std::move(value));
 }
 bool
 traffic_policy_counter_t::operator==(traffic_policy_counter_t const & other) const {
@@ -981,13 +1141,35 @@ policy_map_hw_statuses_t::intf_statuses_is(
    pimpl->intf_statuses_is(intf_statuses);
 }
 void
+policy_map_hw_statuses_t::intf_statuses_is(
+         
+         std::map<policy_map_hw_status_key_t, policy_map_status_t> &&
+         intf_statuses) {
+   pimpl->intf_statuses_is(std::move(intf_statuses));
+}
+void
 policy_map_hw_statuses_t::intf_statuse_set(policy_map_hw_status_key_t const & key,
                                            policy_map_status_t const & value) {
    pimpl->intf_statuse_set(key, value);
 }
 void
+policy_map_hw_statuses_t::intf_statuse_set(policy_map_hw_status_key_t const & key,
+                                           policy_map_status_t && value) {
+   pimpl->intf_statuse_set(key, std::move(value));
+}
+void
 policy_map_hw_statuses_t::intf_statuse_del(policy_map_hw_status_key_t const & key) {
    pimpl->intf_statuse_del(key);
+}
+void
+policy_map_hw_statuses_t::intf_statuse_set(policy_map_hw_status_key_t && key,
+                                           policy_map_status_t const & value) {
+   pimpl->intf_statuse_set(std::move(key), value);
+}
+void
+policy_map_hw_statuses_t::intf_statuse_set(policy_map_hw_status_key_t && key,
+                                           policy_map_status_t && value) {
+   pimpl->intf_statuse_set(std::move(key), std::move(value));
 }
 bool
 policy_map_hw_statuses_t::operator==(policy_map_hw_statuses_t const & other) const {

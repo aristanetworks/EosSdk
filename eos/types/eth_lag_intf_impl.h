@@ -42,6 +42,8 @@ class EOS_SDK_PUBLIC eth_lag_intf_membership_impl_t {
    std::string reason() const;
    /** Setter for 'reason'. */
    void reason_is(std::string const & reason);
+   /** Moving Setter for 'reason'. */
+   void reason_is(std::string && reason);
 
    /**
     * Getter for 'member_time': the time when this interface became member of an
@@ -91,7 +93,7 @@ class EOS_SDK_PUBLIC eth_lag_intf_impl_t {
    /** Constructor with interface id. */
    eth_lag_intf_impl_t(intf_id_t intf, uint32_t min_links, uint64_t speed,
                        eth_lag_intf_fallback_type_t fallback_type,
-                       uint16_t fallback_timeout);
+                       uint16_t fallback_timeout, uint64_t min_speed);
 
    /** Getter for 'intf': the id of this LAG interface. */
    intf_id_t intf() const;
@@ -115,6 +117,11 @@ class EOS_SDK_PUBLIC eth_lag_intf_impl_t {
     * Getter for 'fallback_timeout': the LACP active mode timeout value in seconds.
     */
    uint16_t fallback_timeout() const;
+
+   /**
+    * Getter for 'min_speed': minimal speed required to keep the LAG interface up.
+    */
+   uint64_t min_speed() const;
 
    /** Returns the default fallback timeout value in seconds. */
    uint16_t fallback_timeout_default() const;
@@ -141,6 +148,7 @@ class EOS_SDK_PUBLIC eth_lag_intf_impl_t {
    uint32_t min_links_;
    eth_lag_intf_fallback_type_t fallback_type_;
    uint16_t fallback_timeout_;
+   uint64_t min_speed_;
 };
 }
 

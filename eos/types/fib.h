@@ -13,6 +13,24 @@
 #include <memory>
 #include <sstream>
 
+#ifdef SWIG
+%ignore eos::fib_route_key_t(eos::fib_route_key_t &&) noexcept;
+%ignore eos::fib_route_key_t::operator=(eos::fib_route_key_t &&) noexcept;
+%ignore eos::fib_route_key_t::prefix_is(eos::ip_prefix_t &&);
+%ignore eos::fib_route_t(eos::fib_route_t &&) noexcept;
+%ignore eos::fib_route_t::operator=(eos::fib_route_t &&) noexcept;
+%ignore eos::fib_route_t::route_key_is(eos::fib_route_key_t &&);
+%ignore eos::fib_fec_key_t(eos::fib_fec_key_t &&) noexcept;
+%ignore eos::fib_fec_key_t::operator=(eos::fib_fec_key_t &&) noexcept;
+%ignore eos::fib_via_t(eos::fib_via_t &&) noexcept;
+%ignore eos::fib_via_t::operator=(eos::fib_via_t &&) noexcept;
+%ignore eos::fib_via_t::hop_is(eos::ip_addr_t &&);
+%ignore eos::fib_fec_t(eos::fib_fec_t &&) noexcept;
+%ignore eos::fib_fec_t::operator=(eos::fib_fec_t &&) noexcept;
+%ignore eos::fib_fec_t::via_is(std::forward_list<eos::fib_via_t> &&);
+%ignore eos::via_set(eos::fib_via_t &&);
+#endif
+
 namespace eos {
 
 class fib_route_key_impl_t;
@@ -25,6 +43,8 @@ class EOS_SDK_PUBLIC fib_route_key_t {
    fib_route_key_t& operator=(
       fib_route_key_t const & other);
 
+   fib_route_key_t(fib_route_key_t && other) noexcept;
+   fib_route_key_t & operator=(fib_route_key_t && other) noexcept;
    static void * operator new( std::size_t, void * ptr ) {
       return ptr;
    }
@@ -35,6 +55,8 @@ class EOS_SDK_PUBLIC fib_route_key_t {
    ip_prefix_t prefix() const;
    /** Setter for 'prefix'. */
    void prefix_is(ip_prefix_t const & prefix);
+   /** Moving Setter for 'prefix'. */
+   void prefix_is(ip_prefix_t && prefix);
 
    bool operator==(fib_route_key_t const & other) const;
    bool operator!=(fib_route_key_t const & other) const;
@@ -109,6 +131,8 @@ class EOS_SDK_PUBLIC fib_route_t {
    fib_route_t& operator=(
       fib_route_t const & other);
 
+   fib_route_t(fib_route_t && other) noexcept;
+   fib_route_t & operator=(fib_route_t && other) noexcept;
    static void * operator new( std::size_t, void * ptr ) {
       return ptr;
    }
@@ -119,6 +143,8 @@ class EOS_SDK_PUBLIC fib_route_t {
    fib_route_key_t route_key() const;
    /** Setter for 'route_key'. */
    void route_key_is(fib_route_key_t const & route_key);
+   /** Moving Setter for 'route_key'. */
+   void route_key_is(fib_route_key_t && route_key);
 
    /** Getter for 'preference': 0..255 only, defaults to 1. */
    ip_route_preference_t preference() const;
@@ -167,6 +193,8 @@ class EOS_SDK_PUBLIC fib_fec_key_t {
    fib_fec_key_t& operator=(
       fib_fec_key_t const & other);
 
+   fib_fec_key_t(fib_fec_key_t && other) noexcept;
+   fib_fec_key_t & operator=(fib_fec_key_t && other) noexcept;
    static void * operator new( std::size_t, void * ptr ) {
       return ptr;
    }
@@ -212,6 +240,8 @@ class EOS_SDK_PUBLIC fib_via_t {
    fib_via_t& operator=(
       fib_via_t const & other);
 
+   fib_via_t(fib_via_t && other) noexcept;
+   fib_via_t & operator=(fib_via_t && other) noexcept;
    static void * operator new( std::size_t, void * ptr ) {
       return ptr;
    }
@@ -220,6 +250,7 @@ class EOS_SDK_PUBLIC fib_via_t {
 
    ip_addr_t hop() const;
    void hop_is(ip_addr_t const & hop);
+   void hop_is(ip_addr_t && hop);
 
    intf_id_t intf() const;
    void intf_is(intf_id_t intf);
@@ -275,6 +306,8 @@ class EOS_SDK_PUBLIC fib_fec_t {
    fib_fec_t& operator=(
       fib_fec_t const & other);
 
+   fib_fec_t(fib_fec_t && other) noexcept;
+   fib_fec_t & operator=(fib_fec_t && other) noexcept;
    static void * operator new( std::size_t, void * ptr ) {
       return ptr;
    }
@@ -304,8 +337,12 @@ class EOS_SDK_PUBLIC fib_fec_t {
    std::forward_list<fib_via_t> const & via() const;
    /** Setter for 'via'. */
    void via_is(std::forward_list<fib_via_t> const & via);
+   /** Moving Setter for 'via'. */
+   void via_is(std::forward_list<fib_via_t> && via);
    /** Prepend one via to the list. */
    void via_set(fib_via_t const & via);
+   /** Prepend one via to the list. */
+   void via_set(fib_via_t && via);
    /** Remove all matching via elements. */
    void via_del(fib_via_t const & via);
 

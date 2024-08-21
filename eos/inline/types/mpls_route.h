@@ -15,8 +15,16 @@ mpls_route_key_t::labels_is(std::vector<mpls_label_t> const & labels) {
    pimpl->labels_is(labels);
 }
 void
+mpls_route_key_t::labels_is(std::vector<mpls_label_t> && labels) {
+   pimpl->labels_is(std::move(labels));
+}
+void
 mpls_route_key_t::label_set(uint32_t index, mpls_label_t const & value) {
    pimpl->label_set(index, value);
+}
+void
+mpls_route_key_t::label_set(uint32_t index, mpls_label_t && value) {
+   pimpl->label_set(index, std::move(value));
 }
 void
 mpls_route_key_t::label_del(uint32_t index) {
@@ -76,6 +84,14 @@ void
 mpls_route_t::key_is(mpls_route_key_t key) {
    pimpl->key_is(key);
 }
+uint32_t
+mpls_route_t::version_id() const {
+   return pimpl->version_id();
+}
+void
+mpls_route_t::version_id_is(uint32_t version_id) {
+   pimpl->version_id_is(version_id);
+}
 bool
 mpls_route_t::operator==(mpls_route_t const & other) const {
    return pimpl->operator==(*other.pimpl);
@@ -118,6 +134,10 @@ void
 mpls_route_via_t::hop_is(ip_addr_t const & hop) {
    pimpl->hop_is(hop);
 }
+void
+mpls_route_via_t::hop_is(ip_addr_t && hop) {
+   pimpl->hop_is(std::move(hop));
+}
 intf_id_t
 mpls_route_via_t::intf() const {
    return pimpl->intf();
@@ -125,6 +145,10 @@ mpls_route_via_t::intf() const {
 void
 mpls_route_via_t::intf_is(intf_id_t const & intf) {
    pimpl->intf_is(intf);
+}
+void
+mpls_route_via_t::intf_is(intf_id_t && intf) {
+   pimpl->intf_is(std::move(intf));
 }
 mpls_label_t
 mpls_route_via_t::pushswap_label() const {

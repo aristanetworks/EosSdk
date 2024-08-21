@@ -12,6 +12,13 @@
 #include <memory>
 #include <sstream>
 
+#ifdef SWIG
+%ignore eos::neighbor_key_t(eos::neighbor_key_t &&) noexcept;
+%ignore eos::neighbor_key_t::operator=(eos::neighbor_key_t &&) noexcept;
+%ignore eos::neighbor_entry_t(eos::neighbor_entry_t &&) noexcept;
+%ignore eos::neighbor_entry_t::operator=(eos::neighbor_entry_t &&) noexcept;
+#endif
+
 namespace eos {
 
 /** Neighbor entry types. */
@@ -43,6 +50,8 @@ class EOS_SDK_PUBLIC neighbor_key_t {
    neighbor_key_t& operator=(
       neighbor_key_t const & other);
 
+   neighbor_key_t(neighbor_key_t && other) noexcept;
+   neighbor_key_t & operator=(neighbor_key_t && other) noexcept;
    static void * operator new( std::size_t, void * ptr ) {
       return ptr;
    }
@@ -88,6 +97,8 @@ class EOS_SDK_PUBLIC neighbor_entry_t {
    neighbor_entry_t& operator=(
       neighbor_entry_t const & other);
 
+   neighbor_entry_t(neighbor_entry_t && other) noexcept;
+   neighbor_entry_t & operator=(neighbor_entry_t && other) noexcept;
    static void * operator new( std::size_t, void * ptr ) {
       return ptr;
    }

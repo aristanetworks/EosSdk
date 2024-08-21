@@ -28,6 +28,19 @@ bgp_path_attr_fields_t::operator=(
    return *this;
 }
 
+EOS_SDK_PUBLIC bgp_path_attr_fields_t::bgp_path_attr_fields_t(
+   bgp_path_attr_fields_t && other) noexcept  :
+   pimpl(std::move(other.pimpl)) {}
+EOS_SDK_PUBLIC bgp_path_attr_fields_t&
+bgp_path_attr_fields_t::operator=(
+   bgp_path_attr_fields_t && other) noexcept 
+{
+   if(this != &other) {
+      std::swap(pimpl, other.pimpl);
+   }
+   return *this;
+}
+
 EOS_SDK_PUBLIC void *
 bgp_path_attr_fields_t::operator new( std::size_t size ) {
    return ::operator new( size );
@@ -57,6 +70,19 @@ bgp_path_options_t::operator=(
    if(this != &other) {
       pimpl = std::make_shared<bgp_path_options_impl_t>(
          *other.pimpl);
+   }
+   return *this;
+}
+
+EOS_SDK_PUBLIC bgp_path_options_t::bgp_path_options_t(
+   bgp_path_options_t && other) noexcept  :
+   pimpl(std::move(other.pimpl)) {}
+EOS_SDK_PUBLIC bgp_path_options_t&
+bgp_path_options_t::operator=(
+   bgp_path_options_t && other) noexcept 
+{
+   if(this != &other) {
+      std::swap(pimpl, other.pimpl);
    }
    return *this;
 }
@@ -91,6 +117,19 @@ bgp_path_attr_t::operator=(
    if(this != &other) {
       pimpl = std::make_shared<bgp_path_attr_impl_t>(
          *other.pimpl);
+   }
+   return *this;
+}
+
+EOS_SDK_PUBLIC bgp_path_attr_t::bgp_path_attr_t(
+   bgp_path_attr_t && other) noexcept  :
+   pimpl(std::move(other.pimpl)) {}
+EOS_SDK_PUBLIC bgp_path_attr_t&
+bgp_path_attr_t::operator=(
+   bgp_path_attr_t && other) noexcept 
+{
+   if(this != &other) {
+      std::swap(pimpl, other.pimpl);
    }
    return *this;
 }
@@ -131,6 +170,19 @@ bgp_path_key_t::operator=(
    return *this;
 }
 
+EOS_SDK_PUBLIC bgp_path_key_t::bgp_path_key_t(
+   bgp_path_key_t && other) noexcept  :
+   pimpl(std::move(other.pimpl)) {}
+EOS_SDK_PUBLIC bgp_path_key_t&
+bgp_path_key_t::operator=(
+   bgp_path_key_t && other) noexcept 
+{
+   if(this != &other) {
+      std::swap(pimpl, other.pimpl);
+   }
+   return *this;
+}
+
 EOS_SDK_PUBLIC void *
 bgp_path_key_t::operator new( std::size_t size ) {
    return ::operator new( size );
@@ -159,6 +211,19 @@ bgp_path_t::operator=(
    if(this != &other) {
       pimpl = std::make_shared<bgp_path_impl_t>(
          *other.pimpl);
+   }
+   return *this;
+}
+
+EOS_SDK_PUBLIC bgp_path_t::bgp_path_t(
+   bgp_path_t && other) noexcept  :
+   pimpl(std::move(other.pimpl)) {}
+EOS_SDK_PUBLIC bgp_path_t&
+bgp_path_t::operator=(
+   bgp_path_t && other) noexcept 
+{
+   if(this != &other) {
+      std::swap(pimpl, other.pimpl);
    }
    return *this;
 }

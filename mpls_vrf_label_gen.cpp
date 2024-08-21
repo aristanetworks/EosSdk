@@ -30,6 +30,19 @@ mpls_vrf_label_t::operator=(
    return *this;
 }
 
+EOS_SDK_PUBLIC mpls_vrf_label_t::mpls_vrf_label_t(
+   mpls_vrf_label_t && other) noexcept  :
+   pimpl(std::move(other.pimpl)) {}
+EOS_SDK_PUBLIC mpls_vrf_label_t&
+mpls_vrf_label_t::operator=(
+   mpls_vrf_label_t && other) noexcept 
+{
+   if(this != &other) {
+      std::swap(pimpl, other.pimpl);
+   }
+   return *this;
+}
+
 EOS_SDK_PUBLIC void *
 mpls_vrf_label_t::operator new( std::size_t size ) {
    return ::operator new( size );

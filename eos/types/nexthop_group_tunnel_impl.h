@@ -34,11 +34,15 @@ class EOS_SDK_PUBLIC nexthop_group_tunnel_impl_t {
    ip_prefix_t tunnel_endpoint() const;
    /** Setter for 'tunnel_endpoint'. */
    void tunnel_endpoint_is(ip_prefix_t const & tunnel_endpoint);
+   /** Moving Setter for 'tunnel_endpoint'. */
+   void tunnel_endpoint_is(ip_prefix_t && tunnel_endpoint);
 
    /** Getter for 'nhg_name': nexthop group name. */
    std::string nhg_name() const;
    /** Setter for 'nhg_name'. */
    void nhg_name_is(std::string const & nhg_name);
+   /** Moving Setter for 'nhg_name'. */
+   void nhg_name_is(std::string && nhg_name);
 
    /** Getter for 'igp_pref': the IGP preference of the tunnel endpoint. */
    uint8_t igp_pref() const;

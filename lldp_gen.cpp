@@ -31,6 +31,19 @@ lldp_tlv_type_t::operator=(
    return *this;
 }
 
+EOS_SDK_PUBLIC lldp_tlv_type_t::lldp_tlv_type_t(
+   lldp_tlv_type_t && other) noexcept  :
+   pimpl(std::move(other.pimpl)) {}
+EOS_SDK_PUBLIC lldp_tlv_type_t&
+lldp_tlv_type_t::operator=(
+   lldp_tlv_type_t && other) noexcept 
+{
+   if(this != &other) {
+      std::swap(pimpl, other.pimpl);
+   }
+   return *this;
+}
+
 EOS_SDK_PUBLIC void *
 lldp_tlv_type_t::operator new( std::size_t size ) {
    return ::operator new( size );
@@ -55,6 +68,19 @@ lldp_std_tlv_type_t::operator=(
    if(this != &other) {
       pimpl = std::make_shared<lldp_std_tlv_type_impl_t>(
          *other.pimpl);
+   }
+   return *this;
+}
+
+EOS_SDK_PUBLIC lldp_std_tlv_type_t::lldp_std_tlv_type_t(
+   lldp_std_tlv_type_t && other) noexcept  :
+   pimpl(std::move(other.pimpl)) {}
+EOS_SDK_PUBLIC lldp_std_tlv_type_t&
+lldp_std_tlv_type_t::operator=(
+   lldp_std_tlv_type_t && other) noexcept 
+{
+   if(this != &other) {
+      std::swap(pimpl, other.pimpl);
    }
    return *this;
 }
@@ -88,6 +114,19 @@ lldp_syscap_t::operator=(
    if(this != &other) {
       pimpl = std::make_shared<lldp_syscap_impl_t>(
          *other.pimpl);
+   }
+   return *this;
+}
+
+EOS_SDK_PUBLIC lldp_syscap_t::lldp_syscap_t(
+   lldp_syscap_t && other) noexcept  :
+   pimpl(std::move(other.pimpl)) {}
+EOS_SDK_PUBLIC lldp_syscap_t&
+lldp_syscap_t::operator=(
+   lldp_syscap_t && other) noexcept 
+{
+   if(this != &other) {
+      std::swap(pimpl, other.pimpl);
    }
    return *this;
 }
@@ -131,6 +170,19 @@ lldp_management_address_t::operator=(
    return *this;
 }
 
+EOS_SDK_PUBLIC lldp_management_address_t::lldp_management_address_t(
+   lldp_management_address_t && other) noexcept  :
+   pimpl(std::move(other.pimpl)) {}
+EOS_SDK_PUBLIC lldp_management_address_t&
+lldp_management_address_t::operator=(
+   lldp_management_address_t && other) noexcept 
+{
+   if(this != &other) {
+      std::swap(pimpl, other.pimpl);
+   }
+   return *this;
+}
+
 EOS_SDK_PUBLIC void *
 lldp_management_address_t::operator new( std::size_t size ) {
    return ::operator new( size );
@@ -163,6 +215,19 @@ lldp_lacp_t::operator=(
    if(this != &other) {
       pimpl = std::make_shared<lldp_lacp_impl_t>(
          *other.pimpl);
+   }
+   return *this;
+}
+
+EOS_SDK_PUBLIC lldp_lacp_t::lldp_lacp_t(
+   lldp_lacp_t && other) noexcept  :
+   pimpl(std::move(other.pimpl)) {}
+EOS_SDK_PUBLIC lldp_lacp_t&
+lldp_lacp_t::operator=(
+   lldp_lacp_t && other) noexcept 
+{
+   if(this != &other) {
+      std::swap(pimpl, other.pimpl);
    }
    return *this;
 }
@@ -204,6 +269,19 @@ lldp_phy_t::operator=(
    return *this;
 }
 
+EOS_SDK_PUBLIC lldp_phy_t::lldp_phy_t(
+   lldp_phy_t && other) noexcept  :
+   pimpl(std::move(other.pimpl)) {}
+EOS_SDK_PUBLIC lldp_phy_t&
+lldp_phy_t::operator=(
+   lldp_phy_t && other) noexcept 
+{
+   if(this != &other) {
+      std::swap(pimpl, other.pimpl);
+   }
+   return *this;
+}
+
 EOS_SDK_PUBLIC void *
 lldp_phy_t::operator new( std::size_t size ) {
    return ::operator new( size );
@@ -235,6 +313,19 @@ lldp_chassis_id_t::operator=(
    if(this != &other) {
       pimpl = std::make_shared<lldp_chassis_id_impl_t>(
          *other.pimpl);
+   }
+   return *this;
+}
+
+EOS_SDK_PUBLIC lldp_chassis_id_t::lldp_chassis_id_t(
+   lldp_chassis_id_t && other) noexcept  :
+   pimpl(std::move(other.pimpl)) {}
+EOS_SDK_PUBLIC lldp_chassis_id_t&
+lldp_chassis_id_t::operator=(
+   lldp_chassis_id_t && other) noexcept 
+{
+   if(this != &other) {
+      std::swap(pimpl, other.pimpl);
    }
    return *this;
 }
@@ -273,6 +364,19 @@ lldp_intf_id_t::operator=(
    return *this;
 }
 
+EOS_SDK_PUBLIC lldp_intf_id_t::lldp_intf_id_t(
+   lldp_intf_id_t && other) noexcept  :
+   pimpl(std::move(other.pimpl)) {}
+EOS_SDK_PUBLIC lldp_intf_id_t&
+lldp_intf_id_t::operator=(
+   lldp_intf_id_t && other) noexcept 
+{
+   if(this != &other) {
+      std::swap(pimpl, other.pimpl);
+   }
+   return *this;
+}
+
 EOS_SDK_PUBLIC void *
 lldp_intf_id_t::operator new( std::size_t size ) {
    return ::operator new( size );
@@ -305,6 +409,19 @@ lldp_remote_system_t::operator=(
    if(this != &other) {
       pimpl = std::make_shared<lldp_remote_system_impl_t>(
          *other.pimpl);
+   }
+   return *this;
+}
+
+EOS_SDK_PUBLIC lldp_remote_system_t::lldp_remote_system_t(
+   lldp_remote_system_t && other) noexcept  :
+   pimpl(std::move(other.pimpl)) {}
+EOS_SDK_PUBLIC lldp_remote_system_t&
+lldp_remote_system_t::operator=(
+   lldp_remote_system_t && other) noexcept 
+{
+   if(this != &other) {
+      std::swap(pimpl, other.pimpl);
    }
    return *this;
 }
@@ -346,6 +463,19 @@ lldp_neighbor_t::operator=(
    if(this != &other) {
       pimpl = std::make_shared<lldp_neighbor_impl_t>(
          *other.pimpl);
+   }
+   return *this;
+}
+
+EOS_SDK_PUBLIC lldp_neighbor_t::lldp_neighbor_t(
+   lldp_neighbor_t && other) noexcept  :
+   pimpl(std::move(other.pimpl)) {}
+EOS_SDK_PUBLIC lldp_neighbor_t&
+lldp_neighbor_t::operator=(
+   lldp_neighbor_t && other) noexcept 
+{
+   if(this != &other) {
+      std::swap(pimpl, other.pimpl);
    }
    return *this;
 }

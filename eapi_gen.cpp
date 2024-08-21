@@ -33,6 +33,19 @@ eapi_response_t::operator=(
    return *this;
 }
 
+EOS_SDK_PUBLIC eapi_response_t::eapi_response_t(
+   eapi_response_t && other) noexcept  :
+   pimpl(std::move(other.pimpl)) {}
+EOS_SDK_PUBLIC eapi_response_t&
+eapi_response_t::operator=(
+   eapi_response_t && other) noexcept 
+{
+   if(this != &other) {
+      std::swap(pimpl, other.pimpl);
+   }
+   return *this;
+}
+
 EOS_SDK_PUBLIC void *
 eapi_response_t::operator new( std::size_t size ) {
    return ::operator new( size );

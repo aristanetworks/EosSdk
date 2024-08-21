@@ -37,6 +37,11 @@ policy_map_key_impl_t::name_is(std::string const & name) {
    name_ = name;
 }
 
+void
+policy_map_key_impl_t::name_is(std::string && name) {
+   name_ = std::move(name);
+}
+
 policy_feature_t
 policy_map_key_impl_t::feature() const {
    return feature_;
@@ -141,6 +146,11 @@ policy_map_action_impl_t::nexthop_group_name_is(
    nexthop_group_name_ = nexthop_group_name;
 }
 
+void
+policy_map_action_impl_t::nexthop_group_name_is(std::string && nexthop_group_name) {
+   nexthop_group_name_ = std::move(nexthop_group_name);
+}
+
 std::unordered_set<ip_addr_t> const &
 policy_map_action_impl_t::nexthops() const {
    return nexthops_;
@@ -153,8 +163,18 @@ policy_map_action_impl_t::nexthops_is(
 }
 
 void
+policy_map_action_impl_t::nexthops_is(std::unordered_set<ip_addr_t> && nexthops) {
+   nexthops_ = std::move(nexthops);
+}
+
+void
 policy_map_action_impl_t::nexthop_set(ip_addr_t const & value) {
    nexthops_.insert(value);
+}
+
+void
+policy_map_action_impl_t::nexthop_set(ip_addr_t && value) {
+   nexthops_.emplace(std::move(value));
 }
 
 void
@@ -170,6 +190,11 @@ policy_map_action_impl_t::vrf() const {
 void
 policy_map_action_impl_t::vrf_is(std::string const & vrf) {
    vrf_ = vrf;
+}
+
+void
+policy_map_action_impl_t::vrf_is(std::string && vrf) {
+   vrf_ = std::move(vrf);
 }
 
 uint8_t
@@ -318,6 +343,11 @@ traffic_policy_action_impl_t::counter_name_is(std::string const & counter_name) 
    counter_name_ = counter_name;
 }
 
+void
+traffic_policy_action_impl_t::counter_name_is(std::string && counter_name) {
+   counter_name_ = std::move(counter_name);
+}
+
 std::string
 traffic_policy_action_impl_t::goto_class_name() const {
    return goto_class_name_;
@@ -329,6 +359,11 @@ traffic_policy_action_impl_t::goto_class_name_is(
    goto_class_name_ = goto_class_name;
 }
 
+void
+traffic_policy_action_impl_t::goto_class_name_is(std::string && goto_class_name) {
+   goto_class_name_ = std::move(goto_class_name);
+}
+
 bool
 traffic_policy_action_impl_t::goto_next() const {
    return goto_next_;
@@ -337,6 +372,11 @@ traffic_policy_action_impl_t::goto_next() const {
 void
 traffic_policy_action_impl_t::goto_next_is(bool const & goto_next) {
    goto_next_ = goto_next;
+}
+
+void
+traffic_policy_action_impl_t::goto_next_is(bool && goto_next) {
+   goto_next_ = std::move(goto_next);
 }
 
 uint8_t
@@ -369,6 +409,11 @@ traffic_policy_action_impl_t::vrf_is(std::string const & vrf) {
    vrf_ = vrf;
 }
 
+void
+traffic_policy_action_impl_t::vrf_is(std::string && vrf) {
+   vrf_ = std::move(vrf);
+}
+
 std::string
 traffic_policy_action_impl_t::mirror_session() const {
    return mirror_session_;
@@ -380,6 +425,11 @@ traffic_policy_action_impl_t::mirror_session_is(std::string const & mirror_sessi
    mirror_session_ = mirror_session;
 }
 
+void
+traffic_policy_action_impl_t::mirror_session_is(std::string && mirror_session) {
+   mirror_session_ = std::move(mirror_session);
+}
+
 uint64_t
 traffic_policy_action_impl_t::police_rate() const {
    return police_rate_;
@@ -388,6 +438,11 @@ traffic_policy_action_impl_t::police_rate() const {
 void
 traffic_policy_action_impl_t::police_rate_is(uint64_t const & police_rate) {
    police_rate_ = police_rate;
+}
+
+void
+traffic_policy_action_impl_t::police_rate_is(uint64_t && police_rate) {
+   police_rate_ = std::move(police_rate);
 }
 
 uint64_t
@@ -401,6 +456,11 @@ traffic_policy_action_impl_t::police_burst_size_is(
    police_burst_size_ = police_burst_size;
 }
 
+void
+traffic_policy_action_impl_t::police_burst_size_is(uint64_t && police_burst_size) {
+   police_burst_size_ = std::move(police_burst_size);
+}
+
 police_rate_unit_t
 traffic_policy_action_impl_t::police_rate_unit() const {
    return police_rate_unit_;
@@ -412,6 +472,12 @@ traffic_policy_action_impl_t::police_rate_unit_is(
    police_rate_unit_ = police_rate_unit;
 }
 
+void
+traffic_policy_action_impl_t::police_rate_unit_is(
+         police_rate_unit_t && police_rate_unit) {
+   police_rate_unit_ = std::move(police_rate_unit);
+}
+
 police_burst_unit_t
 traffic_policy_action_impl_t::police_burst_unit() const {
    return police_burst_unit_;
@@ -421,6 +487,12 @@ void
 traffic_policy_action_impl_t::police_burst_unit_is(
          police_burst_unit_t const & police_burst_unit) {
    police_burst_unit_ = police_burst_unit;
+}
+
+void
+traffic_policy_action_impl_t::police_burst_unit_is(
+         police_burst_unit_t && police_burst_unit) {
+   police_burst_unit_ = std::move(police_burst_unit);
 }
 
 std::unordered_set<std::string> const &
@@ -435,8 +507,19 @@ traffic_policy_action_impl_t::nexthop_groups_is(
 }
 
 void
+traffic_policy_action_impl_t::nexthop_groups_is(
+         std::unordered_set<std::string> && nexthop_groups) {
+   nexthop_groups_ = std::move(nexthop_groups);
+}
+
+void
 traffic_policy_action_impl_t::nexthop_group_set(std::string const & value) {
    nexthop_groups_.insert(value);
+}
+
+void
+traffic_policy_action_impl_t::nexthop_group_set(std::string && value) {
+   nexthop_groups_.emplace(std::move(value));
 }
 
 void
@@ -456,8 +539,19 @@ traffic_policy_action_impl_t::nexthops_is(
 }
 
 void
+traffic_policy_action_impl_t::nexthops_is(
+         std::unordered_set<ip_addr_t> && nexthops) {
+   nexthops_ = std::move(nexthops);
+}
+
+void
 traffic_policy_action_impl_t::nexthop_set(ip_addr_t const & value) {
    nexthops_.insert(value);
+}
+
+void
+traffic_policy_action_impl_t::nexthop_set(ip_addr_t && value) {
+   nexthops_.emplace(std::move(value));
 }
 
 void
@@ -625,6 +719,11 @@ policy_map_rule_impl_t::class_map_key_is(class_map_key_t const & class_map_key) 
    class_map_key_ = class_map_key;
 }
 
+void
+policy_map_rule_impl_t::class_map_key_is(class_map_key_t && class_map_key) {
+   class_map_key_ = std::move(class_map_key);
+}
+
 policy_map_rule_type_t
 policy_map_rule_impl_t::policy_map_rule_type() const {
    return policy_map_rule_type_;
@@ -657,8 +756,18 @@ policy_map_rule_impl_t::actions_is(std::set<policy_map_action_t> const & actions
 }
 
 void
+policy_map_rule_impl_t::actions_is(std::set<policy_map_action_t> && actions) {
+   actions_ = std::move(actions);
+}
+
+void
 policy_map_rule_impl_t::action_set(policy_map_action_t const & value) {
    actions_.insert(value);
+}
+
+void
+policy_map_rule_impl_t::action_set(policy_map_action_t && value) {
+   actions_.emplace(std::move(value));
 }
 
 void
@@ -779,6 +888,11 @@ policy_map_impl_t::key_is(policy_map_key_t const & key) {
    key_ = key;
 }
 
+void
+policy_map_impl_t::key_is(policy_map_key_t && key) {
+   key_ = std::move(key);
+}
+
 std::map<uint32_t, policy_map_rule_t> const &
 policy_map_impl_t::rules() const {
    return rules_;
@@ -786,74 +900,134 @@ policy_map_impl_t::rules() const {
 
 void
 policy_map_impl_t::rules_is(std::map<uint32_t, policy_map_rule_t> const & rules) {
-
-      uint32_t mpls_ = 0;
-      uint32_t non_mpls_ = 0;
-      std::string const QOS_RULE_CONFIG_ERROR_ = \
-         "QoS policy maps do not support MPLS match rules";
-      std::string const QOS_RAW_RULE_CONFIG_ERROR_ = \
-         "QoS policy maps do not support raw match statements";
-      std::string const CLASS_MAP_MPLS_ANY_ = "__mpls_permit_any__";
-      std::string const RULE_CONFIG_ERROR_ = \
-          "Policy maps have either one MPLS match rule or "
-          "a collection of other rules";
-
-      for(auto it = rules.cbegin(); it != rules.cend(); ++it) {
-         if (it->second.class_map_key().name() == CLASS_MAP_MPLS_ANY_) {
-            mpls_++;
-         } else {
-            non_mpls_++;
-         }
-         if((key_.feature() == POLICY_FEATURE_QOS) &&
-            (it->second.policy_map_rule_type() != POLICY_RULE_TYPE_CLASSMAP)) {
-            panic(configuration_error(QOS_RAW_RULE_CONFIG_ERROR_));
-         }
+   uint32_t mpls_ = 0;
+   uint32_t non_mpls_ = 0;
+   std::string const QOS_RULE_CONFIG_ERROR_ = \
+      "QoS policy maps do not support MPLS match rules";
+   std::string const QOS_RAW_RULE_CONFIG_ERROR_ = \
+      "QoS policy maps do not support raw match statements";
+   std::string const CLASS_MAP_MPLS_ANY_ = "__mpls_permit_any__";
+   std::string const RULE_CONFIG_ERROR_ = \
+       "Policy maps have either one MPLS match rule or "
+       "a collection of other rules";
+   for(auto it = rules.cbegin(); it != rules.cend(); ++it) {
+      if (it->second.class_map_key().name() == CLASS_MAP_MPLS_ANY_) {
+         mpls_++;
+      } else {
+         non_mpls_++;
       }
-      // Check if the collection's invariant has been invalidated
-      if((non_mpls_ > 0 && mpls_ > 0) || mpls_ > 1) {
-         panic(configuration_error(RULE_CONFIG_ERROR_));
+      if((key_.feature() == POLICY_FEATURE_QOS) &&
+         (it->second.policy_map_rule_type() != POLICY_RULE_TYPE_CLASSMAP)) {
+         panic(configuration_error(QOS_RAW_RULE_CONFIG_ERROR_));
       }
-      if(mpls_ != 0 && key_.feature() == POLICY_FEATURE_QOS) {
-         panic(configuration_error(QOS_RULE_CONFIG_ERROR_));
-      }
-      rules_ = rules;
+   }
+   // Check if the collection's invariant has been invalidated
+   if((non_mpls_ > 0 && mpls_ > 0) || mpls_ > 1) {
+      panic(configuration_error(RULE_CONFIG_ERROR_));
+   }
+   if(mpls_ != 0 && key_.feature() == POLICY_FEATURE_QOS) {
+      panic(configuration_error(QOS_RULE_CONFIG_ERROR_));
+   }
+   rules_ = rules;
+}
 
+void
+policy_map_impl_t::rules_is(std::map<uint32_t, policy_map_rule_t> && rules) {
+   uint32_t mpls_ = 0;
+   uint32_t non_mpls_ = 0;
+   std::string const QOS_RULE_CONFIG_ERROR_ = \
+      "QoS policy maps do not support MPLS match rules";
+   std::string const QOS_RAW_RULE_CONFIG_ERROR_ = \
+      "QoS policy maps do not support raw match statements";
+   std::string const CLASS_MAP_MPLS_ANY_ = "__mpls_permit_any__";
+   std::string const RULE_CONFIG_ERROR_ = \
+       "Policy maps have either one MPLS match rule or "
+       "a collection of other rules";
+   for(auto it = rules.cbegin(); it != rules.cend(); ++it) {
+      if (it->second.class_map_key().name() == CLASS_MAP_MPLS_ANY_) {
+         mpls_++;
+      } else {
+         non_mpls_++;
+      }
+      if((key_.feature() == POLICY_FEATURE_QOS) &&
+         (it->second.policy_map_rule_type() != POLICY_RULE_TYPE_CLASSMAP)) {
+         panic(configuration_error(QOS_RAW_RULE_CONFIG_ERROR_));
+      }
+   }
+   // Check if the collection's invariant has been invalidated
+   if((non_mpls_ > 0 && mpls_ > 0) || mpls_ > 1) {
+      panic(configuration_error(RULE_CONFIG_ERROR_));
+   }
+   if(mpls_ != 0 && key_.feature() == POLICY_FEATURE_QOS) {
+      panic(configuration_error(QOS_RULE_CONFIG_ERROR_));
+   }
+   rules_ = std::move(rules);
 }
 
 void
 policy_map_impl_t::rule_set(uint32_t key, policy_map_rule_t const & value) {
-
-      std::string const QOS_RULE_CONFIG_ERROR_ = \
-         "QoS policy maps do not support MPLS match rules";
-      std::string const QOS_RAW_RULE_CONFIG_ERROR_ = \
-         "QoS policy maps do not support raw match statements";
-      std::string const CLASS_MAP_MPLS_ANY_ = "__mpls_permit_any__";
-      std::string const RULE_CONFIG_ERROR_ = \
-          "Policy maps have either one MPLS match rule or "
-          "a collection of other rules";
-
-      if(value.class_map_key().name() == CLASS_MAP_MPLS_ANY_ &&
-         key_.feature() == POLICY_FEATURE_QOS) {
-         panic(configuration_error(QOS_RULE_CONFIG_ERROR_));
-      }
-      if((key_.feature() == POLICY_FEATURE_QOS) &&
-         (value.policy_map_rule_type() != POLICY_RULE_TYPE_CLASSMAP)) {
-         panic(configuration_error(QOS_RAW_RULE_CONFIG_ERROR_));
-      }
-      // We can set only one MPLS rule and no others in a map.
-      if(rules_.size() > 1 ||
-           (rules_.size() && rules_.cbegin()->first != key)) {
-         if(value.class_map_key().name() == CLASS_MAP_MPLS_ANY_){
+   std::string const QOS_RULE_CONFIG_ERROR_ = \
+      "QoS policy maps do not support MPLS match rules";
+   std::string const QOS_RAW_RULE_CONFIG_ERROR_ = \
+      "QoS policy maps do not support raw match statements";
+   std::string const CLASS_MAP_MPLS_ANY_ = "__mpls_permit_any__";
+   std::string const RULE_CONFIG_ERROR_ = \
+       "Policy maps have either one MPLS match rule or "
+       "a collection of other rules";
+   if(value.class_map_key().name() == CLASS_MAP_MPLS_ANY_ &&
+      key_.feature() == POLICY_FEATURE_QOS) {
+      panic(configuration_error(QOS_RULE_CONFIG_ERROR_));
+   }
+   if((key_.feature() == POLICY_FEATURE_QOS) &&
+      (value.policy_map_rule_type() != POLICY_RULE_TYPE_CLASSMAP)) {
+      panic(configuration_error(QOS_RAW_RULE_CONFIG_ERROR_));
+   }
+   // We can set only one MPLS rule and no others in a map.
+   if(rules_.size() > 1 ||
+        (rules_.size() && rules_.cbegin()->first != key)) {
+      if(value.class_map_key().name() == CLASS_MAP_MPLS_ANY_){
+         panic(configuration_error(RULE_CONFIG_ERROR_));
+      } else {
+         if(rules_.cbegin()->second.class_map_key().name() ==
+               CLASS_MAP_MPLS_ANY_) {
             panic(configuration_error(RULE_CONFIG_ERROR_));
-         } else {
-            if(rules_.cbegin()->second.class_map_key().name() ==
-                  CLASS_MAP_MPLS_ANY_) {
-               panic(configuration_error(RULE_CONFIG_ERROR_));
-            }
          }
       }
-      rules_[key] = value;
+   }
+   rules_[key] = value;
+}
 
+void
+policy_map_impl_t::rule_set(uint32_t key, policy_map_rule_t && value) {
+   std::string const QOS_RULE_CONFIG_ERROR_ = \
+      "QoS policy maps do not support MPLS match rules";
+   std::string const QOS_RAW_RULE_CONFIG_ERROR_ = \
+      "QoS policy maps do not support raw match statements";
+   std::string const CLASS_MAP_MPLS_ANY_ = "__mpls_permit_any__";
+   std::string const RULE_CONFIG_ERROR_ = \
+       "Policy maps have either one MPLS match rule or "
+       "a collection of other rules";
+   if(value.class_map_key().name() == CLASS_MAP_MPLS_ANY_ &&
+      key_.feature() == POLICY_FEATURE_QOS) {
+      panic(configuration_error(QOS_RULE_CONFIG_ERROR_));
+   }
+   if((key_.feature() == POLICY_FEATURE_QOS) &&
+      (value.policy_map_rule_type() != POLICY_RULE_TYPE_CLASSMAP)) {
+      panic(configuration_error(QOS_RAW_RULE_CONFIG_ERROR_));
+   }
+   // We can set only one MPLS rule and no others in a map.
+   if(rules_.size() > 1 ||
+        (rules_.size() && rules_.cbegin()->first != key)) {
+      if(value.class_map_key().name() == CLASS_MAP_MPLS_ANY_){
+         panic(configuration_error(RULE_CONFIG_ERROR_));
+      } else {
+         if(rules_.cbegin()->second.class_map_key().name() ==
+               CLASS_MAP_MPLS_ANY_) {
+            panic(configuration_error(RULE_CONFIG_ERROR_));
+         }
+      }
+   }
+   rules_[key] = std::move(value);
 }
 
 void
@@ -966,8 +1140,19 @@ traffic_policy_rule_impl_t::actions_is(
 }
 
 void
+traffic_policy_rule_impl_t::actions_is(
+         std::set<traffic_policy_action_t> && actions) {
+   actions_ = std::move(actions);
+}
+
+void
 traffic_policy_rule_impl_t::action_set(traffic_policy_action_t const & value) {
    actions_.insert(value);
+}
+
+void
+traffic_policy_rule_impl_t::action_set(traffic_policy_action_t && value) {
+   actions_.emplace(std::move(value));
 }
 
 void
@@ -1099,8 +1284,19 @@ traffic_policy_impl_t::named_counters_is(
 }
 
 void
+traffic_policy_impl_t::named_counters_is(
+         std::unordered_set<std::string> && named_counters) {
+   named_counters_ = std::move(named_counters);
+}
+
+void
 traffic_policy_impl_t::named_counter_set(std::string const & value) {
    named_counters_.insert(value);
+}
+
+void
+traffic_policy_impl_t::named_counter_set(std::string && value) {
+   named_counters_.emplace(std::move(value));
 }
 
 void
@@ -1333,14 +1529,40 @@ traffic_policy_counter_impl_t::named_counter_data_is(
 }
 
 void
+traffic_policy_counter_impl_t::named_counter_data_is(
+         
+         std::map<std::string, traffic_policy_counter_data_t> &&
+         named_counter_data) {
+   named_counter_data_ = std::move(named_counter_data);
+}
+
+void
 traffic_policy_counter_impl_t::named_counter_data_set(
          std::string const & key, traffic_policy_counter_data_t const & value) {
    named_counter_data_[key] = value;
 }
 
 void
+traffic_policy_counter_impl_t::named_counter_data_set(
+         std::string const & key, traffic_policy_counter_data_t && value) {
+   named_counter_data_[key] = std::move(value);
+}
+
+void
 traffic_policy_counter_impl_t::named_counter_data_del(std::string const & key) {
    named_counter_data_.erase(key);
+}
+
+void
+traffic_policy_counter_impl_t::named_counter_data_set(
+         std::string && key, traffic_policy_counter_data_t const & value) {
+   named_counter_data_[std::move(key)] = value;
+}
+
+void
+traffic_policy_counter_impl_t::named_counter_data_set(
+         std::string && key, traffic_policy_counter_data_t && value) {
+   named_counter_data_[std::move(key)] = std::move(value);
 }
 
 std::map<std::string, traffic_policy_counter_data_t> const &
@@ -1357,14 +1579,40 @@ traffic_policy_counter_impl_t::class_counter_data_is(
 }
 
 void
+traffic_policy_counter_impl_t::class_counter_data_is(
+         
+         std::map<std::string, traffic_policy_counter_data_t> &&
+         class_counter_data) {
+   class_counter_data_ = std::move(class_counter_data);
+}
+
+void
 traffic_policy_counter_impl_t::class_counter_data_set(
          std::string const & key, traffic_policy_counter_data_t const & value) {
    class_counter_data_[key] = value;
 }
 
 void
+traffic_policy_counter_impl_t::class_counter_data_set(
+         std::string const & key, traffic_policy_counter_data_t && value) {
+   class_counter_data_[key] = std::move(value);
+}
+
+void
 traffic_policy_counter_impl_t::class_counter_data_del(std::string const & key) {
    class_counter_data_.erase(key);
+}
+
+void
+traffic_policy_counter_impl_t::class_counter_data_set(
+         std::string && key, traffic_policy_counter_data_t const & value) {
+   class_counter_data_[std::move(key)] = value;
+}
+
+void
+traffic_policy_counter_impl_t::class_counter_data_set(
+         std::string && key, traffic_policy_counter_data_t && value) {
+   class_counter_data_[std::move(key)] = std::move(value);
 }
 
 bool
@@ -1570,6 +1818,14 @@ policy_map_hw_statuses_impl_t::intf_statuses_is(
 }
 
 void
+policy_map_hw_statuses_impl_t::intf_statuses_is(
+         
+         std::map<policy_map_hw_status_key_t, policy_map_status_t> &&
+         intf_statuses) {
+   intf_statuses_ = std::move(intf_statuses);
+}
+
+void
 policy_map_hw_statuses_impl_t::intf_statuse_set(
          policy_map_hw_status_key_t const & key, policy_map_status_t const & value)
        {
@@ -1577,9 +1833,27 @@ policy_map_hw_statuses_impl_t::intf_statuse_set(
 }
 
 void
+policy_map_hw_statuses_impl_t::intf_statuse_set(
+         policy_map_hw_status_key_t const & key, policy_map_status_t && value) {
+   intf_statuses_[key] = std::move(value);
+}
+
+void
 policy_map_hw_statuses_impl_t::intf_statuse_del(
          policy_map_hw_status_key_t const & key) {
    intf_statuses_.erase(key);
+}
+
+void
+policy_map_hw_statuses_impl_t::intf_statuse_set(policy_map_hw_status_key_t && key,
+                                                policy_map_status_t const & value) {
+   intf_statuses_[std::move(key)] = value;
+}
+
+void
+policy_map_hw_statuses_impl_t::intf_statuse_set(policy_map_hw_status_key_t && key,
+                                                policy_map_status_t && value) {
+   intf_statuses_[std::move(key)] = std::move(value);
 }
 
 bool

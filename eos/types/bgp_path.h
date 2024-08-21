@@ -11,6 +11,30 @@
 #include <sstream>
 #include <unordered_set>
 
+#ifdef SWIG
+%ignore eos::bgp_path_attr_fields_t(eos::bgp_path_attr_fields_t &&) noexcept;
+%ignore eos::bgp_path_attr_fields_t::operator=(eos::bgp_path_attr_fields_t &&)
+   noexcept;
+%ignore eos::bgp_path_options_t(eos::bgp_path_options_t &&) noexcept;
+%ignore eos::bgp_path_options_t::operator=(eos::bgp_path_options_t &&) noexcept;
+%ignore eos::bgp_path_options_t::path_attr_fields_is(
+         eos::bgp_path_attr_fields_t &&);
+%ignore eos::bgp_path_attr_t(eos::bgp_path_attr_t &&) noexcept;
+%ignore eos::bgp_path_attr_t::operator=(eos::bgp_path_attr_t &&) noexcept;
+%ignore eos::bgp_path_attr_t::next_hop_is(eos::ip_addr_t &&);
+%ignore eos::bgp_path_attr_t::community_list_is(std::unordered_set<uint32_t> &&);
+%ignore eos::community_list_set(uint32_t &&);
+%ignore eos::bgp_path_key_t(eos::bgp_path_key_t &&) noexcept;
+%ignore eos::bgp_path_key_t::operator=(eos::bgp_path_key_t &&) noexcept;
+%ignore eos::bgp_path_key_t::prefix_is(eos::ip_prefix_t &&);
+%ignore eos::bgp_path_key_t::peer_addr_is(eos::ip_addr_t &&);
+%ignore eos::bgp_path_key_t::vrf_name_is(std::string &&);
+%ignore eos::bgp_path_t(eos::bgp_path_t &&) noexcept;
+%ignore eos::bgp_path_t::operator=(eos::bgp_path_t &&) noexcept;
+%ignore eos::bgp_path_t::path_key_is(eos::bgp_path_key_t &&);
+%ignore eos::bgp_path_t::path_attr_is(eos::bgp_path_attr_t &&);
+#endif
+
 namespace eos {
 
 /** BGP Address Family Identifiers and Subsequent Address Family Identifiers. */
@@ -45,6 +69,8 @@ class EOS_SDK_PUBLIC bgp_path_attr_fields_t {
    bgp_path_attr_fields_t& operator=(
       bgp_path_attr_fields_t const & other);
 
+   bgp_path_attr_fields_t(bgp_path_attr_fields_t && other) noexcept;
+   bgp_path_attr_fields_t & operator=(bgp_path_attr_fields_t && other) noexcept;
    static void * operator new( std::size_t, void * ptr ) {
       return ptr;
    }
@@ -100,6 +126,8 @@ class EOS_SDK_PUBLIC bgp_path_options_t {
    bgp_path_options_t& operator=(
       bgp_path_options_t const & other);
 
+   bgp_path_options_t(bgp_path_options_t && other) noexcept;
+   bgp_path_options_t & operator=(bgp_path_options_t && other) noexcept;
    static void * operator new( std::size_t, void * ptr ) {
       return ptr;
    }
@@ -121,6 +149,8 @@ class EOS_SDK_PUBLIC bgp_path_options_t {
    bgp_path_attr_fields_t path_attr_fields() const;
    /** Setter for 'path_attr_fields'. */
    void path_attr_fields_is(bgp_path_attr_fields_t const & path_attr_fields);
+   /** Moving Setter for 'path_attr_fields'. */
+   void path_attr_fields_is(bgp_path_attr_fields_t && path_attr_fields);
 
    bool operator==(bgp_path_options_t const & other) const;
    bool operator!=(bgp_path_options_t const & other) const;
@@ -153,6 +183,8 @@ class EOS_SDK_PUBLIC bgp_path_attr_t {
    bgp_path_attr_t& operator=(
       bgp_path_attr_t const & other);
 
+   bgp_path_attr_t(bgp_path_attr_t && other) noexcept;
+   bgp_path_attr_t & operator=(bgp_path_attr_t && other) noexcept;
    static void * operator new( std::size_t, void * ptr ) {
       return ptr;
    }
@@ -163,6 +195,8 @@ class EOS_SDK_PUBLIC bgp_path_attr_t {
    ip_addr_t next_hop() const;
    /** Setter for 'next_hop'. */
    void next_hop_is(ip_addr_t const & next_hop);
+   /** Moving Setter for 'next_hop'. */
+   void next_hop_is(ip_addr_t && next_hop);
 
    /** Getter for 'origin': The route origin. */
    uint8_t origin() const;
@@ -183,8 +217,12 @@ class EOS_SDK_PUBLIC bgp_path_attr_t {
    std::unordered_set<uint32_t> const & community_list() const;
    /** Setter for 'community_list'. */
    void community_list_is(std::unordered_set<uint32_t> const & community_list);
+   /** Moving Setter for 'community_list'. */
+   void community_list_is(std::unordered_set<uint32_t> && community_list);
    /** Inserts one community_list of 'value' to the set. */
    void community_list_set(uint32_t const & value);
+   /** Inserts one community_list of 'value' to the set. */
+   void community_list_set(uint32_t && value);
    /** Deletes one community_list of 'value' from the set. */
    void community_list_del(uint32_t const & value);
 
@@ -221,6 +259,8 @@ class EOS_SDK_PUBLIC bgp_path_key_t {
    bgp_path_key_t& operator=(
       bgp_path_key_t const & other);
 
+   bgp_path_key_t(bgp_path_key_t && other) noexcept;
+   bgp_path_key_t & operator=(bgp_path_key_t && other) noexcept;
    static void * operator new( std::size_t, void * ptr ) {
       return ptr;
    }
@@ -231,16 +271,22 @@ class EOS_SDK_PUBLIC bgp_path_key_t {
    ip_prefix_t prefix() const;
    /** Setter for 'prefix'. */
    void prefix_is(ip_prefix_t const & prefix);
+   /** Moving Setter for 'prefix'. */
+   void prefix_is(ip_prefix_t && prefix);
 
    /** Getter for 'peer_addr': BGP peer address. */
    ip_addr_t peer_addr() const;
    /** Setter for 'peer_addr'. */
    void peer_addr_is(ip_addr_t const & peer_addr);
+   /** Moving Setter for 'peer_addr'. */
+   void peer_addr_is(ip_addr_t && peer_addr);
 
    /** Getter for 'vrf_name': VRF name. */
    std::string vrf_name() const;
    /** Setter for 'vrf_name'. */
    void vrf_name_is(std::string const & vrf_name);
+   /** Moving Setter for 'vrf_name'. */
+   void vrf_name_is(std::string && vrf_name);
 
    bool operator==(bgp_path_key_t const & other) const;
    bool operator!=(bgp_path_key_t const & other) const;
@@ -274,6 +320,8 @@ class EOS_SDK_PUBLIC bgp_path_t {
    bgp_path_t& operator=(
       bgp_path_t const & other);
 
+   bgp_path_t(bgp_path_t && other) noexcept;
+   bgp_path_t & operator=(bgp_path_t && other) noexcept;
    static void * operator new( std::size_t, void * ptr ) {
       return ptr;
    }
@@ -284,11 +332,15 @@ class EOS_SDK_PUBLIC bgp_path_t {
    bgp_path_key_t path_key() const;
    /** Setter for 'path_key'. */
    void path_key_is(bgp_path_key_t const & path_key);
+   /** Moving Setter for 'path_key'. */
+   void path_key_is(bgp_path_key_t && path_key);
 
    /** Getter for 'path_attr': The BGP path attributes. */
    bgp_path_attr_t path_attr() const;
    /** Setter for 'path_attr'. */
    void path_attr_is(bgp_path_attr_t const & path_attr);
+   /** Moving Setter for 'path_attr'. */
+   void path_attr_is(bgp_path_attr_t && path_attr);
 
    bool operator==(bgp_path_t const & other) const;
    bool operator!=(bgp_path_t const & other) const;

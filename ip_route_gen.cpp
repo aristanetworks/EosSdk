@@ -34,6 +34,19 @@ ip_route_key_t::operator=(
    return *this;
 }
 
+EOS_SDK_PUBLIC ip_route_key_t::ip_route_key_t(
+   ip_route_key_t && other) noexcept  :
+   pimpl(std::move(other.pimpl)) {}
+EOS_SDK_PUBLIC ip_route_key_t&
+ip_route_key_t::operator=(
+   ip_route_key_t && other) noexcept 
+{
+   if(this != &other) {
+      std::swap(pimpl, other.pimpl);
+   }
+   return *this;
+}
+
 EOS_SDK_PUBLIC void *
 ip_route_key_t::operator new( std::size_t size ) {
    return ::operator new( size );
@@ -66,6 +79,19 @@ ip_route_t::operator=(
    return *this;
 }
 
+EOS_SDK_PUBLIC ip_route_t::ip_route_t(
+   ip_route_t && other) noexcept  :
+   pimpl(std::move(other.pimpl)) {}
+EOS_SDK_PUBLIC ip_route_t&
+ip_route_t::operator=(
+   ip_route_t && other) noexcept 
+{
+   if(this != &other) {
+      std::swap(pimpl, other.pimpl);
+   }
+   return *this;
+}
+
 EOS_SDK_PUBLIC void *
 ip_route_t::operator new( std::size_t size ) {
    return ::operator new( size );
@@ -94,6 +120,19 @@ ip_route_via_t::operator=(
    if(this != &other) {
       pimpl = std::make_shared<ip_route_via_impl_t>(
          *other.pimpl);
+   }
+   return *this;
+}
+
+EOS_SDK_PUBLIC ip_route_via_t::ip_route_via_t(
+   ip_route_via_t && other) noexcept  :
+   pimpl(std::move(other.pimpl)) {}
+EOS_SDK_PUBLIC ip_route_via_t&
+ip_route_via_t::operator=(
+   ip_route_via_t && other) noexcept 
+{
+   if(this != &other) {
+      std::swap(pimpl, other.pimpl);
    }
    return *this;
 }

@@ -29,6 +29,19 @@ mac_key_t::operator=(
    return *this;
 }
 
+EOS_SDK_PUBLIC mac_key_t::mac_key_t(
+   mac_key_t && other) noexcept  :
+   pimpl(std::move(other.pimpl)) {}
+EOS_SDK_PUBLIC mac_key_t&
+mac_key_t::operator=(
+   mac_key_t && other) noexcept 
+{
+   if(this != &other) {
+      std::swap(pimpl, other.pimpl);
+   }
+   return *this;
+}
+
 EOS_SDK_PUBLIC void *
 mac_key_t::operator new( std::size_t size ) {
    return ::operator new( size );
@@ -78,6 +91,19 @@ mac_entry_t::operator=(
    if(this != &other) {
       pimpl = std::make_shared<mac_entry_impl_t>(
          *other.pimpl);
+   }
+   return *this;
+}
+
+EOS_SDK_PUBLIC mac_entry_t::mac_entry_t(
+   mac_entry_t && other) noexcept  :
+   pimpl(std::move(other.pimpl)) {}
+EOS_SDK_PUBLIC mac_entry_t&
+mac_entry_t::operator=(
+   mac_entry_t && other) noexcept 
+{
+   if(this != &other) {
+      std::swap(pimpl, other.pimpl);
    }
    return *this;
 }

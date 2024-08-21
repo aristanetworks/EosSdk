@@ -44,7 +44,10 @@ class EOS_SDK_PUBLIC mpls_route_key_impl_t {
    std::vector<mpls_label_t> const & labels() const;
    /** Setter for 'labels'. */
    void labels_is(std::vector<mpls_label_t> const & labels);
+   /** Moving Setter for 'labels'. */
+   void labels_is(std::vector<mpls_label_t> && labels);
    void label_set(uint32_t index, mpls_label_t const & value);
+   void label_set(uint32_t index, mpls_label_t && value);
    void label_del(uint32_t index);
 
    /**
@@ -93,11 +96,18 @@ class EOS_SDK_PUBLIC mpls_route_impl_t {
    mpls_route_impl_t();
    /** MPLS route constructor taking an MPLS route key. */
    explicit mpls_route_impl_t(mpls_route_key_t key);
+   /** MPLS route constructor taking an MPLS route key and a version. */
+   explicit mpls_route_impl_t(mpls_route_key_t key, uint32_t version_id);
 
    /** Getter for 'key': the MPLS route key. */
    mpls_route_key_t key() const;
    /** Setter for 'key'. */
    void key_is(mpls_route_key_t key);
+
+   /** Getter for 'version_id': the MPLS route version. */
+   uint32_t version_id() const;
+   /** Setter for 'version_id'. */
+   void version_id_is(uint32_t version_id);
 
    bool operator==(mpls_route_impl_t const & other) const;
    bool operator!=(mpls_route_impl_t const & other) const;
@@ -115,6 +125,7 @@ class EOS_SDK_PUBLIC mpls_route_impl_t {
 
  private:
    mpls_route_key_t key_;
+   uint32_t version_id_;
 };
 
 /** An MPLS route via, defining the action to take for a given MPLS route. */
@@ -132,6 +143,8 @@ class EOS_SDK_PUBLIC mpls_route_via_impl_t {
    ip_addr_t hop() const;
    /** Setter for 'hop'. */
    void hop_is(ip_addr_t const & hop);
+   /** Moving Setter for 'hop'. */
+   void hop_is(ip_addr_t && hop);
 
    /**
     * Getter for 'intf': sets the nexthop interface.
@@ -140,6 +153,8 @@ class EOS_SDK_PUBLIC mpls_route_via_impl_t {
    intf_id_t intf() const;
    /** Setter for 'intf'. */
    void intf_is(intf_id_t const & intf);
+   /** Moving Setter for 'intf'. */
+   void intf_is(intf_id_t && intf);
 
    /** Getter for 'pushswap_label': push or swap this label. */
    mpls_label_t pushswap_label() const;

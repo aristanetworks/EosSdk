@@ -13,6 +13,21 @@
 #include <sstream>
 #include <vector>
 
+#ifdef SWIG
+%ignore eos::mpls_route_key_t(eos::mpls_route_key_t &&) noexcept;
+%ignore eos::mpls_route_key_t::operator=(eos::mpls_route_key_t &&) noexcept;
+%ignore eos::mpls_route_key_t::labels_is(std::vector<eos::mpls_label_t> &&);
+%ignore eos::label_set(uint32_t, eos::mpls_label_t &&);
+%ignore eos::mpls_route_t(eos::mpls_route_t &&) noexcept;
+%ignore eos::mpls_route_t::operator=(eos::mpls_route_t &&) noexcept;
+%ignore eos::mpls_route_via_t(eos::mpls_route_via_t &&) noexcept;
+%ignore eos::mpls_route_via_t::operator=(eos::mpls_route_via_t &&) noexcept;
+%ignore eos::mpls_route_via_t::hop_is(eos::ip_addr_t &&);
+%ignore eos::mpls_route_via_t::intf_is(intf_id_t &&);
+%ignore eos::mpls_fec_id_t(eos::mpls_fec_id_t &&) noexcept;
+%ignore eos::mpls_fec_id_t::operator=(eos::mpls_fec_id_t &&) noexcept;
+#endif
+
 namespace eos {
 
 /** 1..255; default/null is 0. */
@@ -43,6 +58,8 @@ class EOS_SDK_PUBLIC mpls_route_key_t {
    mpls_route_key_t& operator=(
       mpls_route_key_t const & other);
 
+   mpls_route_key_t(mpls_route_key_t && other) noexcept;
+   mpls_route_key_t & operator=(mpls_route_key_t && other) noexcept;
    static void * operator new( std::size_t, void * ptr ) {
       return ptr;
    }
@@ -57,7 +74,10 @@ class EOS_SDK_PUBLIC mpls_route_key_t {
    std::vector<mpls_label_t> const & labels() const;
    /** Setter for 'labels'. */
    void labels_is(std::vector<mpls_label_t> const & labels);
+   /** Moving Setter for 'labels'. */
+   void labels_is(std::vector<mpls_label_t> && labels);
    void label_set(uint32_t index, mpls_label_t const & value);
+   void label_set(uint32_t index, mpls_label_t && value);
    void label_del(uint32_t index);
 
    /**
@@ -108,10 +128,14 @@ class EOS_SDK_PUBLIC mpls_route_t {
    mpls_route_t();
    /** MPLS route constructor taking an MPLS route key. */
    explicit mpls_route_t(mpls_route_key_t key);
+   /** MPLS route constructor taking an MPLS route key and a version. */
+   explicit mpls_route_t(mpls_route_key_t key, uint32_t version_id);
    mpls_route_t(const mpls_route_t& other);
    mpls_route_t& operator=(
       mpls_route_t const & other);
 
+   mpls_route_t(mpls_route_t && other) noexcept;
+   mpls_route_t & operator=(mpls_route_t && other) noexcept;
    static void * operator new( std::size_t, void * ptr ) {
       return ptr;
    }
@@ -122,6 +146,11 @@ class EOS_SDK_PUBLIC mpls_route_t {
    mpls_route_key_t key() const;
    /** Setter for 'key'. */
    void key_is(mpls_route_key_t key);
+
+   /** Getter for 'version_id': the MPLS route version. */
+   uint32_t version_id() const;
+   /** Setter for 'version_id'. */
+   void version_id_is(uint32_t version_id);
 
    bool operator==(mpls_route_t const & other) const;
    bool operator!=(mpls_route_t const & other) const;
@@ -156,6 +185,8 @@ class EOS_SDK_PUBLIC mpls_route_via_t {
    mpls_route_via_t& operator=(
       mpls_route_via_t const & other);
 
+   mpls_route_via_t(mpls_route_via_t && other) noexcept;
+   mpls_route_via_t & operator=(mpls_route_via_t && other) noexcept;
    static void * operator new( std::size_t, void * ptr ) {
       return ptr;
    }
@@ -169,6 +200,8 @@ class EOS_SDK_PUBLIC mpls_route_via_t {
    ip_addr_t hop() const;
    /** Setter for 'hop'. */
    void hop_is(ip_addr_t const & hop);
+   /** Moving Setter for 'hop'. */
+   void hop_is(ip_addr_t && hop);
 
    /**
     * Getter for 'intf': sets the nexthop interface.
@@ -177,6 +210,8 @@ class EOS_SDK_PUBLIC mpls_route_via_t {
    intf_id_t intf() const;
    /** Setter for 'intf'. */
    void intf_is(intf_id_t const & intf);
+   /** Moving Setter for 'intf'. */
+   void intf_is(intf_id_t && intf);
 
    /** Getter for 'pushswap_label': push or swap this label. */
    mpls_label_t pushswap_label() const;
@@ -249,6 +284,8 @@ class EOS_SDK_PUBLIC mpls_fec_id_t {
    mpls_fec_id_t& operator=(
       mpls_fec_id_t const & other);
 
+   mpls_fec_id_t(mpls_fec_id_t && other) noexcept;
+   mpls_fec_id_t & operator=(mpls_fec_id_t && other) noexcept;
    static void * operator new( std::size_t, void * ptr ) {
       return ptr;
    }

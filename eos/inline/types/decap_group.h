@@ -31,6 +31,10 @@ void
 decap_group_t::destination_addr_is(ip_addr_t const & destination_addr) {
    pimpl->destination_addr_is(destination_addr);
 }
+void
+decap_group_t::destination_addr_is(ip_addr_t && destination_addr) {
+   pimpl->destination_addr_is(std::move(destination_addr));
+}
 decap_protocol_type_t
 decap_group_t::protocol_type() const {
    return pimpl->protocol_type();

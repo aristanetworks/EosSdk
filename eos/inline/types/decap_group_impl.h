@@ -38,6 +38,11 @@ decap_group_impl_t::destination_addr_is(ip_addr_t const & destination_addr) {
    destination_addr_ = destination_addr;
 }
 
+void
+decap_group_impl_t::destination_addr_is(ip_addr_t && destination_addr) {
+   destination_addr_ = std::move(destination_addr);
+}
+
 decap_protocol_type_t
 decap_group_impl_t::protocol_type() const {
    return protocol_type_;

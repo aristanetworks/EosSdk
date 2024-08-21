@@ -61,10 +61,10 @@ namespace std {
    };
 }
 
-%define STD_FORWARD_LIST(data_type)
+%define STD_FORWARD_LIST_IN(data_type, cvref)
 
 // Python --> C
-%typemap(in) std::forward_list<eos::##data_type> const & {
+%typemap(in) std::forward_list<eos::##data_type> cvref {
    PyObject *t = $input;
    if (PyTuple_Check(t) != true) {
       PyErr_SetString(PyExc_TypeError, "argument must be a tuple");
@@ -92,8 +92,12 @@ namespace std {
    $1 = a;
 }
 
+%enddef
+
+%define STD_FORWARD_LIST_OUT(data_type, cvref)
+
 // C --> Python
-%typemap(out) std::forward_list<eos::##data_type> const & {
+%typemap(out) std::forward_list<eos::##data_type> cvref {
    std::forward_list<eos::##data_type> *a = $1;
    std::forward_list<eos::##data_type>::const_iterator it;
    int count = 0;
@@ -113,8 +117,14 @@ namespace std {
 }
 %enddef
 
-STD_FORWARD_LIST(fib_via_t)
-STD_FORWARD_LIST(mpls_label_t)
+%define STD_FORWARD_LIST( data_type )
+
+STD_FORWARD_LIST_IN( data_type, const & );
+STD_FORWARD_LIST_OUT( data_type, const & );
+STD_FORWARD_LIST_IN( data_type, && );
+STD_FORWARD_LIST_OUT( data_type, && );
+
+%enddef
 
 // policy_map_hw_status_t::intf_statuses_is() conversion from Python to C++
 %typemap(in) std::map<eos::policy_map_hw_status_key_t, eos::policy_map_status_t> const & {

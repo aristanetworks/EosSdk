@@ -33,6 +33,19 @@ link_bandwidth_t::operator=(
    return *this;
 }
 
+EOS_SDK_PUBLIC link_bandwidth_t::link_bandwidth_t(
+   link_bandwidth_t && other) noexcept  :
+   pimpl(std::move(other.pimpl)) {}
+EOS_SDK_PUBLIC link_bandwidth_t&
+link_bandwidth_t::operator=(
+   link_bandwidth_t && other) noexcept 
+{
+   if(this != &other) {
+      std::swap(pimpl, other.pimpl);
+   }
+   return *this;
+}
+
 EOS_SDK_PUBLIC void *
 link_bandwidth_t::operator new( std::size_t size ) {
    return ::operator new( size );
@@ -57,6 +70,19 @@ route_map_link_bandwidth_t::operator=(
    if(this != &other) {
       pimpl = std::make_shared<route_map_link_bandwidth_impl_t>(
          *other.pimpl);
+   }
+   return *this;
+}
+
+EOS_SDK_PUBLIC route_map_link_bandwidth_t::route_map_link_bandwidth_t(
+   route_map_link_bandwidth_t && other) noexcept  :
+   pimpl(std::move(other.pimpl)) {}
+EOS_SDK_PUBLIC route_map_link_bandwidth_t&
+route_map_link_bandwidth_t::operator=(
+   route_map_link_bandwidth_t && other) noexcept 
+{
+   if(this != &other) {
+      std::swap(pimpl, other.pimpl);
    }
    return *this;
 }
@@ -93,6 +119,19 @@ route_map_entry_t::operator=(
    return *this;
 }
 
+EOS_SDK_PUBLIC route_map_entry_t::route_map_entry_t(
+   route_map_entry_t && other) noexcept  :
+   pimpl(std::move(other.pimpl)) {}
+EOS_SDK_PUBLIC route_map_entry_t&
+route_map_entry_t::operator=(
+   route_map_entry_t && other) noexcept 
+{
+   if(this != &other) {
+      std::swap(pimpl, other.pimpl);
+   }
+   return *this;
+}
+
 EOS_SDK_PUBLIC void *
 route_map_entry_t::operator new( std::size_t size ) {
    return ::operator new( size );
@@ -117,6 +156,19 @@ route_map_t::operator=(
    if(this != &other) {
       pimpl = std::make_shared<route_map_impl_t>(
          *other.pimpl);
+   }
+   return *this;
+}
+
+EOS_SDK_PUBLIC route_map_t::route_map_t(
+   route_map_t && other) noexcept  :
+   pimpl(std::move(other.pimpl)) {}
+EOS_SDK_PUBLIC route_map_t&
+route_map_t::operator=(
+   route_map_t && other) noexcept 
+{
+   if(this != &other) {
+      std::swap(pimpl, other.pimpl);
    }
    return *this;
 }

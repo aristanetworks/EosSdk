@@ -113,6 +113,12 @@ bgp_path_options_impl_t::path_attr_fields_is(
    path_attr_fields_ = path_attr_fields;
 }
 
+void
+bgp_path_options_impl_t::path_attr_fields_is(
+         bgp_path_attr_fields_t && path_attr_fields) {
+   path_attr_fields_ = std::move(path_attr_fields);
+}
+
 bool
 bgp_path_options_impl_t::operator==(bgp_path_options_impl_t const & other) const {
    return receive_route_stage_ == other.receive_route_stage_ &&
@@ -175,6 +181,11 @@ bgp_path_attr_impl_t::next_hop_is(ip_addr_t const & next_hop) {
    next_hop_ = next_hop;
 }
 
+void
+bgp_path_attr_impl_t::next_hop_is(ip_addr_t && next_hop) {
+   next_hop_ = std::move(next_hop);
+}
+
 uint8_t
 bgp_path_attr_impl_t::origin() const {
    return origin_;
@@ -217,8 +228,19 @@ bgp_path_attr_impl_t::community_list_is(
 }
 
 void
+bgp_path_attr_impl_t::community_list_is(
+         std::unordered_set<uint32_t> && community_list) {
+   community_list_ = std::move(community_list);
+}
+
+void
 bgp_path_attr_impl_t::community_list_set(uint32_t const & value) {
    community_list_.insert(value);
+}
+
+void
+bgp_path_attr_impl_t::community_list_set(uint32_t && value) {
+   community_list_.emplace(std::move(value));
 }
 
 void
@@ -311,6 +333,11 @@ bgp_path_key_impl_t::prefix_is(ip_prefix_t const & prefix) {
    prefix_ = prefix;
 }
 
+void
+bgp_path_key_impl_t::prefix_is(ip_prefix_t && prefix) {
+   prefix_ = std::move(prefix);
+}
+
 ip_addr_t
 bgp_path_key_impl_t::peer_addr() const {
    return peer_addr_;
@@ -321,6 +348,11 @@ bgp_path_key_impl_t::peer_addr_is(ip_addr_t const & peer_addr) {
    peer_addr_ = peer_addr;
 }
 
+void
+bgp_path_key_impl_t::peer_addr_is(ip_addr_t && peer_addr) {
+   peer_addr_ = std::move(peer_addr);
+}
+
 std::string
 bgp_path_key_impl_t::vrf_name() const {
    return vrf_name_;
@@ -329,6 +361,11 @@ bgp_path_key_impl_t::vrf_name() const {
 void
 bgp_path_key_impl_t::vrf_name_is(std::string const & vrf_name) {
    vrf_name_ = vrf_name;
+}
+
+void
+bgp_path_key_impl_t::vrf_name_is(std::string && vrf_name) {
+   vrf_name_ = std::move(vrf_name);
 }
 
 bool
@@ -406,6 +443,11 @@ bgp_path_impl_t::path_key_is(bgp_path_key_t const & path_key) {
    path_key_ = path_key;
 }
 
+void
+bgp_path_impl_t::path_key_is(bgp_path_key_t && path_key) {
+   path_key_ = std::move(path_key);
+}
+
 bgp_path_attr_t
 bgp_path_impl_t::path_attr() const {
    return path_attr_;
@@ -414,6 +456,11 @@ bgp_path_impl_t::path_attr() const {
 void
 bgp_path_impl_t::path_attr_is(bgp_path_attr_t const & path_attr) {
    path_attr_ = path_attr;
+}
+
+void
+bgp_path_impl_t::path_attr_is(bgp_path_attr_t && path_attr) {
+   path_attr_ = std::move(path_attr);
 }
 
 bool

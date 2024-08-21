@@ -10,6 +10,13 @@
 #include <memory>
 #include <sstream>
 
+#ifdef SWIG
+%ignore eos::bgp_peer_key_t(eos::bgp_peer_key_t &&) noexcept;
+%ignore eos::bgp_peer_key_t::operator=(eos::bgp_peer_key_t &&) noexcept;
+%ignore eos::bgp_peer_key_t::vrf_name_is(std::string &&);
+%ignore eos::bgp_peer_key_t::peer_addr_is(eos::ip_addr_t &&);
+#endif
+
 namespace eos {
 
 typedef uint32_t bgp_asn_t;
@@ -25,6 +32,8 @@ class EOS_SDK_PUBLIC bgp_peer_key_t {
    bgp_peer_key_t& operator=(
       bgp_peer_key_t const & other);
 
+   bgp_peer_key_t(bgp_peer_key_t && other) noexcept;
+   bgp_peer_key_t & operator=(bgp_peer_key_t && other) noexcept;
    static void * operator new( std::size_t, void * ptr ) {
       return ptr;
    }
@@ -35,11 +44,15 @@ class EOS_SDK_PUBLIC bgp_peer_key_t {
    std::string vrf_name() const;
    /** Setter for 'vrf_name'. */
    void vrf_name_is(std::string const & vrf_name);
+   /** Moving Setter for 'vrf_name'. */
+   void vrf_name_is(std::string && vrf_name);
 
    /** Getter for 'peer_addr': BGP peer address. */
    ip_addr_t peer_addr() const;
    /** Setter for 'peer_addr'. */
    void peer_addr_is(ip_addr_t const & peer_addr);
+   /** Moving Setter for 'peer_addr'. */
+   void peer_addr_is(ip_addr_t && peer_addr);
 
    bool operator==(bgp_peer_key_t const & other) const;
    bool operator!=(bgp_peer_key_t const & other) const;

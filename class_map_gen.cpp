@@ -29,6 +29,19 @@ class_map_rule_t::operator=(
    return *this;
 }
 
+EOS_SDK_PUBLIC class_map_rule_t::class_map_rule_t(
+   class_map_rule_t && other) noexcept  :
+   pimpl(std::move(other.pimpl)) {}
+EOS_SDK_PUBLIC class_map_rule_t&
+class_map_rule_t::operator=(
+   class_map_rule_t && other) noexcept 
+{
+   if(this != &other) {
+      std::swap(pimpl, other.pimpl);
+   }
+   return *this;
+}
+
 EOS_SDK_PUBLIC void *
 class_map_rule_t::operator new( std::size_t size ) {
    return ::operator new( size );
@@ -58,6 +71,19 @@ class_map_t::operator=(
    if(this != &other) {
       pimpl = std::make_shared<class_map_impl_t>(
          *other.pimpl);
+   }
+   return *this;
+}
+
+EOS_SDK_PUBLIC class_map_t::class_map_t(
+   class_map_t && other) noexcept  :
+   pimpl(std::move(other.pimpl)) {}
+EOS_SDK_PUBLIC class_map_t&
+class_map_t::operator=(
+   class_map_t && other) noexcept 
+{
+   if(this != &other) {
+      std::swap(pimpl, other.pimpl);
    }
    return *this;
 }

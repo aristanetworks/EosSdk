@@ -49,6 +49,19 @@ intf_counters_t::operator=(
    return *this;
 }
 
+EOS_SDK_PUBLIC intf_counters_t::intf_counters_t(
+   intf_counters_t && other) noexcept  :
+   pimpl(std::move(other.pimpl)) {}
+EOS_SDK_PUBLIC intf_counters_t&
+intf_counters_t::operator=(
+   intf_counters_t && other) noexcept 
+{
+   if(this != &other) {
+      std::swap(pimpl, other.pimpl);
+   }
+   return *this;
+}
+
 EOS_SDK_PUBLIC void *
 intf_counters_t::operator new( std::size_t size ) {
    return ::operator new( size );
@@ -86,6 +99,19 @@ intf_traffic_rates_t::operator=(
    if(this != &other) {
       pimpl = std::make_shared<intf_traffic_rates_impl_t>(
          *other.pimpl);
+   }
+   return *this;
+}
+
+EOS_SDK_PUBLIC intf_traffic_rates_t::intf_traffic_rates_t(
+   intf_traffic_rates_t && other) noexcept  :
+   pimpl(std::move(other.pimpl)) {}
+EOS_SDK_PUBLIC intf_traffic_rates_t&
+intf_traffic_rates_t::operator=(
+   intf_traffic_rates_t && other) noexcept 
+{
+   if(this != &other) {
+      std::swap(pimpl, other.pimpl);
    }
    return *this;
 }

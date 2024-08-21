@@ -11,6 +11,13 @@
 #include <memory>
 #include <sstream>
 
+#ifdef SWIG
+%ignore eos::intf_counters_t(eos::intf_counters_t &&) noexcept;
+%ignore eos::intf_counters_t::operator=(eos::intf_counters_t &&) noexcept;
+%ignore eos::intf_traffic_rates_t(eos::intf_traffic_rates_t &&) noexcept;
+%ignore eos::intf_traffic_rates_t::operator=(eos::intf_traffic_rates_t &&) noexcept;
+#endif
+
 namespace eos {
 
 /** The operational status of an interface. */
@@ -115,6 +122,8 @@ class EOS_SDK_PUBLIC intf_counters_t {
    intf_counters_t& operator=(
       intf_counters_t const & other);
 
+   intf_counters_t(intf_counters_t && other) noexcept;
+   intf_counters_t & operator=(intf_counters_t && other) noexcept;
    static void * operator new( std::size_t, void * ptr ) {
       return ptr;
    }
@@ -217,6 +226,8 @@ class EOS_SDK_PUBLIC intf_traffic_rates_t {
    intf_traffic_rates_t& operator=(
       intf_traffic_rates_t const & other);
 
+   intf_traffic_rates_t(intf_traffic_rates_t && other) noexcept;
+   intf_traffic_rates_t & operator=(intf_traffic_rates_t && other) noexcept;
    static void * operator new( std::size_t, void * ptr ) {
       return ptr;
    }

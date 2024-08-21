@@ -12,6 +12,16 @@
 #include <set>
 #include <sstream>
 
+#ifdef SWIG
+%ignore eos::mac_key_t(eos::mac_key_t &&) noexcept;
+%ignore eos::mac_key_t::operator=(eos::mac_key_t &&) noexcept;
+%ignore eos::mac_entry_t(eos::mac_entry_t &&) noexcept;
+%ignore eos::mac_entry_t::operator=(eos::mac_entry_t &&) noexcept;
+%ignore eos::mac_entry_t::mac_key_is(eos::mac_key_t &&);
+%ignore eos::mac_entry_t::intfs_is(std::set<intf_id_t> &&);
+%ignore eos::intf_set(intf_id_t &&);
+#endif
+
 namespace eos {
 
 /** Types of MAC entries. */
@@ -68,6 +78,8 @@ class EOS_SDK_PUBLIC mac_key_t {
    mac_key_t& operator=(
       mac_key_t const & other);
 
+   mac_key_t(mac_key_t && other) noexcept;
+   mac_key_t & operator=(mac_key_t && other) noexcept;
    static void * operator new( std::size_t, void * ptr ) {
       return ptr;
    }
@@ -127,6 +139,8 @@ class EOS_SDK_PUBLIC mac_entry_t {
    mac_entry_t& operator=(
       mac_entry_t const & other);
 
+   mac_entry_t(mac_entry_t && other) noexcept;
+   mac_entry_t & operator=(mac_entry_t && other) noexcept;
    static void * operator new( std::size_t, void * ptr ) {
       return ptr;
    }
@@ -137,6 +151,8 @@ class EOS_SDK_PUBLIC mac_entry_t {
    mac_key_t mac_key() const;
    /** Setter for 'mac_key'. */
    void mac_key_is(mac_key_t const & mac_key);
+   /** Moving Setter for 'mac_key'. */
+   void mac_key_is(mac_key_t && mac_key);
 
    /**
     * Getter for 'intfs': the set of interfaces that this key forwards to. For
@@ -147,8 +163,12 @@ class EOS_SDK_PUBLIC mac_entry_t {
    std::set<intf_id_t> const & intfs() const;
    /** Setter for 'intfs'. */
    void intfs_is(std::set<intf_id_t> const & intfs);
+   /** Moving Setter for 'intfs'. */
+   void intfs_is(std::set<intf_id_t> && intfs);
    /** Inserts one intf of 'value' to the set. */
    void intf_set(intf_id_t const & value);
+   /** Inserts one intf of 'value' to the set. */
+   void intf_set(intf_id_t && value);
    /** Deletes one intf of 'value' from the set. */
    void intf_del(intf_id_t const & value);
 

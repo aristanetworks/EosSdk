@@ -11,6 +11,11 @@
 #include <memory>
 #include <sstream>
 
+#ifdef SWIG
+%ignore eos::subintf_t(eos::subintf_t &&) noexcept;
+%ignore eos::subintf_t::operator=(eos::subintf_t &&) noexcept;
+#endif
+
 namespace eos {
 
 class subintf_impl_t;
@@ -23,6 +28,8 @@ class EOS_SDK_PUBLIC subintf_t {
    subintf_t& operator=(
       subintf_t const & other);
 
+   subintf_t(subintf_t && other) noexcept;
+   subintf_t & operator=(subintf_t && other) noexcept;
    static void * operator new( std::size_t, void * ptr ) {
       return ptr;
    }

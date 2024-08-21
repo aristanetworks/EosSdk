@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 LANG=C
 export LANG
 unset DISPLAY
@@ -18,7 +18,7 @@ libdir="lib"
 # Other arguments will be passed to `make'.  This is so that one can
 # do something along the lines of `./build.sh --enable-python check',
 # for instance.
-configure_flags=''
+configure_flags='--host=x86_64-pc-linux-gnu'
 for arg; do
    case $arg in
       (--enable-*|--disable-*|--with-*|--without-*|--host=*|--build=*|--prefix=*|--libdir=*)
@@ -46,7 +46,6 @@ if $target_32b; then
    CFLAGS="$CFLAGS $CFLAGS_32B"
    CXXFLAGS="$CXXFLAGS $CXXFLAGS_32B"
    LDFLAGS="$LDFLAGS $LDFLAGS_32B"
-   configure_flags='--host=x86_64-pc-linux-gnu'
 fi
 
 sysroot=$($(which gcc) --print-sysroot) || sysroot = ""

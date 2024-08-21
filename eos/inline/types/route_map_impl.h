@@ -231,6 +231,12 @@ route_map_entry_impl_t::link_bandwidth_is(
 }
 
 void
+route_map_entry_impl_t::link_bandwidth_is(
+         route_map_link_bandwidth_t && link_bandwidth) {
+   link_bandwidth_ = std::move(link_bandwidth);
+}
+
+void
 route_map_entry_impl_t::link_bandwidth_del() {
    link_bandwidth_ = route_map_link_bandwidth_t();
 }
@@ -298,14 +304,38 @@ route_map_impl_t::map_entry_is(
 }
 
 void
+route_map_impl_t::map_entry_is(
+         std::map<route_map_sequence_number_t, route_map_entry_t> && map_entry) {
+   map_entry_ = std::move(map_entry);
+}
+
+void
 route_map_impl_t::map_entry_set(route_map_sequence_number_t const & key,
                                 route_map_entry_t const & value) {
    map_entry_[key] = value;
 }
 
 void
+route_map_impl_t::map_entry_set(route_map_sequence_number_t const & key,
+                                route_map_entry_t && value) {
+   map_entry_[key] = std::move(value);
+}
+
+void
 route_map_impl_t::map_entry_del(route_map_sequence_number_t const & key) {
    map_entry_.erase(key);
+}
+
+void
+route_map_impl_t::map_entry_set(route_map_sequence_number_t && key,
+                                route_map_entry_t const & value) {
+   map_entry_[std::move(key)] = value;
+}
+
+void
+route_map_impl_t::map_entry_set(route_map_sequence_number_t && key,
+                                route_map_entry_t && value) {
+   map_entry_[std::move(key)] = std::move(value);
 }
 
 bool

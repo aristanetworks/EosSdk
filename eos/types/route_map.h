@@ -11,6 +11,23 @@
 #include <memory>
 #include <sstream>
 
+#ifdef SWIG
+%ignore eos::link_bandwidth_t(eos::link_bandwidth_t &&) noexcept;
+%ignore eos::link_bandwidth_t::operator=(eos::link_bandwidth_t &&) noexcept;
+%ignore eos::route_map_link_bandwidth_t(eos::route_map_link_bandwidth_t &&)
+   noexcept;
+%ignore eos::route_map_link_bandwidth_t::operator=(
+   eos::route_map_link_bandwidth_t &&) noexcept;
+%ignore eos::route_map_entry_t(eos::route_map_entry_t &&) noexcept;
+%ignore eos::route_map_entry_t::operator=(eos::route_map_entry_t &&) noexcept;
+%ignore eos::route_map_entry_t::link_bandwidth_is(
+         eos::route_map_link_bandwidth_t &&);
+%ignore eos::route_map_t(eos::route_map_t &&) noexcept;
+%ignore eos::route_map_t::operator=(eos::route_map_t &&) noexcept;
+%ignore eos::route_map_t::map_entry_is(
+         std::map<route_map_sequence_number_t, route_map_entry_t> &&);
+#endif
+
 namespace eos {
 
 enum bandwidth_unit_t {
@@ -34,6 +51,8 @@ class EOS_SDK_PUBLIC link_bandwidth_t {
    link_bandwidth_t& operator=(
       link_bandwidth_t const & other);
 
+   link_bandwidth_t(link_bandwidth_t && other) noexcept;
+   link_bandwidth_t & operator=(link_bandwidth_t && other) noexcept;
    static void * operator new( std::size_t, void * ptr ) {
       return ptr;
    }
@@ -99,6 +118,9 @@ class EOS_SDK_PUBLIC route_map_link_bandwidth_t {
    route_map_link_bandwidth_t& operator=(
       route_map_link_bandwidth_t const & other);
 
+   route_map_link_bandwidth_t(route_map_link_bandwidth_t && other) noexcept;
+   route_map_link_bandwidth_t & operator=(route_map_link_bandwidth_t && other)
+      noexcept;
    static void * operator new( std::size_t, void * ptr ) {
       return ptr;
    }
@@ -150,6 +172,8 @@ class EOS_SDK_PUBLIC route_map_entry_t {
    route_map_entry_t& operator=(
       route_map_entry_t const & other);
 
+   route_map_entry_t(route_map_entry_t && other) noexcept;
+   route_map_entry_t & operator=(route_map_entry_t && other) noexcept;
    static void * operator new( std::size_t, void * ptr ) {
       return ptr;
    }
@@ -175,6 +199,8 @@ class EOS_SDK_PUBLIC route_map_entry_t {
    route_map_link_bandwidth_t link_bandwidth() const;
    /** Setter for 'link_bandwidth'. */
    void link_bandwidth_is(route_map_link_bandwidth_t const & link_bandwidth);
+   /** Moving Setter for 'link_bandwidth'. */
+   void link_bandwidth_is(route_map_link_bandwidth_t && link_bandwidth);
 
    /** Remove the link bandwidth configuration. */
    void link_bandwidth_del();
@@ -207,6 +233,8 @@ class EOS_SDK_PUBLIC route_map_t {
    route_map_t& operator=(
       route_map_t const & other);
 
+   route_map_t(route_map_t && other) noexcept;
+   route_map_t & operator=(route_map_t && other) noexcept;
    static void * operator new( std::size_t, void * ptr ) {
       return ptr;
    }
@@ -223,11 +251,23 @@ class EOS_SDK_PUBLIC route_map_t {
          
          std::map<route_map_sequence_number_t, route_map_entry_t> const &
          map_entry);
+   /** Moving Setter for 'map_entry'. */
+   void map_entry_is(
+         std::map<route_map_sequence_number_t, route_map_entry_t> && map_entry);
    /** Inserts key/value pair to the map. */
    void map_entry_set(route_map_sequence_number_t const & key,
                       route_map_entry_t const & value);
+   /** Inserts key/value pair to the map. */
+   void map_entry_set(route_map_sequence_number_t const & key,
+                      route_map_entry_t && value);
    /** Deletes the key/value pair from the map. */
    void map_entry_del(route_map_sequence_number_t const & key);
+   /** Inserts key/value pair to the map. */
+   void map_entry_set(route_map_sequence_number_t && key,
+                      route_map_entry_t const & value);
+   /** Inserts key/value pair to the map. */
+   void map_entry_set(route_map_sequence_number_t && key,
+                      route_map_entry_t && value);
 
    bool operator==(route_map_t const & other) const;
    bool operator!=(route_map_t const & other) const;

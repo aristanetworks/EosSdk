@@ -30,6 +30,19 @@ policy_map_key_t::operator=(
    return *this;
 }
 
+EOS_SDK_PUBLIC policy_map_key_t::policy_map_key_t(
+   policy_map_key_t && other) noexcept  :
+   pimpl(std::move(other.pimpl)) {}
+EOS_SDK_PUBLIC policy_map_key_t&
+policy_map_key_t::operator=(
+   policy_map_key_t && other) noexcept 
+{
+   if(this != &other) {
+      std::swap(pimpl, other.pimpl);
+   }
+   return *this;
+}
+
 EOS_SDK_PUBLIC void *
 policy_map_key_t::operator new( std::size_t size ) {
    return ::operator new( size );
@@ -59,6 +72,19 @@ policy_map_action_t::operator=(
    if(this != &other) {
       pimpl = std::make_shared<policy_map_action_impl_t>(
          *other.pimpl);
+   }
+   return *this;
+}
+
+EOS_SDK_PUBLIC policy_map_action_t::policy_map_action_t(
+   policy_map_action_t && other) noexcept  :
+   pimpl(std::move(other.pimpl)) {}
+EOS_SDK_PUBLIC policy_map_action_t&
+policy_map_action_t::operator=(
+   policy_map_action_t && other) noexcept 
+{
+   if(this != &other) {
+      std::swap(pimpl, other.pimpl);
    }
    return *this;
 }
@@ -97,6 +123,19 @@ traffic_policy_action_t::operator=(
    return *this;
 }
 
+EOS_SDK_PUBLIC traffic_policy_action_t::traffic_policy_action_t(
+   traffic_policy_action_t && other) noexcept  :
+   pimpl(std::move(other.pimpl)) {}
+EOS_SDK_PUBLIC traffic_policy_action_t&
+traffic_policy_action_t::operator=(
+   traffic_policy_action_t && other) noexcept 
+{
+   if(this != &other) {
+      std::swap(pimpl, other.pimpl);
+   }
+   return *this;
+}
+
 EOS_SDK_PUBLIC void *
 traffic_policy_action_t::operator new( std::size_t size ) {
    return ::operator new( size );
@@ -129,6 +168,19 @@ policy_map_rule_t::operator=(
    return *this;
 }
 
+EOS_SDK_PUBLIC policy_map_rule_t::policy_map_rule_t(
+   policy_map_rule_t && other) noexcept  :
+   pimpl(std::move(other.pimpl)) {}
+EOS_SDK_PUBLIC policy_map_rule_t&
+policy_map_rule_t::operator=(
+   policy_map_rule_t && other) noexcept 
+{
+   if(this != &other) {
+      std::swap(pimpl, other.pimpl);
+   }
+   return *this;
+}
+
 EOS_SDK_PUBLIC void *
 policy_map_rule_t::operator new( std::size_t size ) {
    return ::operator new( size );
@@ -157,6 +209,19 @@ policy_map_t::operator=(
    if(this != &other) {
       pimpl = std::make_shared<policy_map_impl_t>(
          *other.pimpl);
+   }
+   return *this;
+}
+
+EOS_SDK_PUBLIC policy_map_t::policy_map_t(
+   policy_map_t && other) noexcept  :
+   pimpl(std::move(other.pimpl)) {}
+EOS_SDK_PUBLIC policy_map_t&
+policy_map_t::operator=(
+   policy_map_t && other) noexcept 
+{
+   if(this != &other) {
+      std::swap(pimpl, other.pimpl);
    }
    return *this;
 }
@@ -196,6 +261,19 @@ traffic_policy_rule_t::operator=(
    return *this;
 }
 
+EOS_SDK_PUBLIC traffic_policy_rule_t::traffic_policy_rule_t(
+   traffic_policy_rule_t && other) noexcept  :
+   pimpl(std::move(other.pimpl)) {}
+EOS_SDK_PUBLIC traffic_policy_rule_t&
+traffic_policy_rule_t::operator=(
+   traffic_policy_rule_t && other) noexcept 
+{
+   if(this != &other) {
+      std::swap(pimpl, other.pimpl);
+   }
+   return *this;
+}
+
 EOS_SDK_PUBLIC void *
 traffic_policy_rule_t::operator new( std::size_t size ) {
    return ::operator new( size );
@@ -222,6 +300,19 @@ traffic_policy_t::operator=(
    if(this != &other) {
       pimpl = std::make_shared<traffic_policy_impl_t>(
          *other.pimpl);
+   }
+   return *this;
+}
+
+EOS_SDK_PUBLIC traffic_policy_t::traffic_policy_t(
+   traffic_policy_t && other) noexcept  :
+   pimpl(std::move(other.pimpl)) {}
+EOS_SDK_PUBLIC traffic_policy_t&
+traffic_policy_t::operator=(
+   traffic_policy_t && other) noexcept 
+{
+   if(this != &other) {
+      std::swap(pimpl, other.pimpl);
    }
    return *this;
 }
@@ -264,6 +355,19 @@ traffic_policy_counter_data_t::operator=(
    return *this;
 }
 
+EOS_SDK_PUBLIC traffic_policy_counter_data_t::traffic_policy_counter_data_t(
+   traffic_policy_counter_data_t && other) noexcept  :
+   pimpl(std::move(other.pimpl)) {}
+EOS_SDK_PUBLIC traffic_policy_counter_data_t&
+traffic_policy_counter_data_t::operator=(
+   traffic_policy_counter_data_t && other) noexcept 
+{
+   if(this != &other) {
+      std::swap(pimpl, other.pimpl);
+   }
+   return *this;
+}
+
 EOS_SDK_PUBLIC void *
 traffic_policy_counter_data_t::operator new( std::size_t size ) {
    return ::operator new( size );
@@ -290,6 +394,19 @@ traffic_policy_counter_t::operator=(
    if(this != &other) {
       pimpl = std::make_shared<traffic_policy_counter_impl_t>(
          *other.pimpl);
+   }
+   return *this;
+}
+
+EOS_SDK_PUBLIC traffic_policy_counter_t::traffic_policy_counter_t(
+   traffic_policy_counter_t && other) noexcept  :
+   pimpl(std::move(other.pimpl)) {}
+EOS_SDK_PUBLIC traffic_policy_counter_t&
+traffic_policy_counter_t::operator=(
+   traffic_policy_counter_t && other) noexcept 
+{
+   if(this != &other) {
+      std::swap(pimpl, other.pimpl);
    }
    return *this;
 }
@@ -328,6 +445,19 @@ policy_map_hw_status_key_t::operator=(
    return *this;
 }
 
+EOS_SDK_PUBLIC policy_map_hw_status_key_t::policy_map_hw_status_key_t(
+   policy_map_hw_status_key_t && other) noexcept  :
+   pimpl(std::move(other.pimpl)) {}
+EOS_SDK_PUBLIC policy_map_hw_status_key_t&
+policy_map_hw_status_key_t::operator=(
+   policy_map_hw_status_key_t && other) noexcept 
+{
+   if(this != &other) {
+      std::swap(pimpl, other.pimpl);
+   }
+   return *this;
+}
+
 EOS_SDK_PUBLIC void *
 policy_map_hw_status_key_t::operator new( std::size_t size ) {
    return ::operator new( size );
@@ -359,6 +489,19 @@ policy_map_hw_statuses_t::operator=(
    if(this != &other) {
       pimpl = std::make_shared<policy_map_hw_statuses_impl_t>(
          *other.pimpl);
+   }
+   return *this;
+}
+
+EOS_SDK_PUBLIC policy_map_hw_statuses_t::policy_map_hw_statuses_t(
+   policy_map_hw_statuses_t && other) noexcept  :
+   pimpl(std::move(other.pimpl)) {}
+EOS_SDK_PUBLIC policy_map_hw_statuses_t&
+policy_map_hw_statuses_t::operator=(
+   policy_map_hw_statuses_t && other) noexcept 
+{
+   if(this != &other) {
+      std::swap(pimpl, other.pimpl);
    }
    return *this;
 }

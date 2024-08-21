@@ -74,8 +74,16 @@ flow_match_t::input_intfs_is(std::set<intf_id_t> const & input_intfs) {
    pimpl->input_intfs_is(input_intfs);
 }
 void
+flow_match_t::input_intfs_is(std::set<intf_id_t> && input_intfs) {
+   pimpl->input_intfs_is(std::move(input_intfs));
+}
+void
 flow_match_t::input_intf_set(intf_id_t const & value) {
    pimpl->input_intf_set(value);
+}
+void
+flow_match_t::input_intf_set(intf_id_t && value) {
+   pimpl->input_intf_set(std::move(value));
 }
 void
 flow_match_t::input_intf_del(intf_id_t const & value) {
@@ -166,6 +174,10 @@ flow_match_t::ip_src_is(ip_addr_t const & ip_src) {
    pimpl->ip_src_is(ip_src);
 }
 void
+flow_match_t::ip_src_is(ip_addr_t && ip_src) {
+   pimpl->ip_src_is(std::move(ip_src));
+}
+void
 flow_match_t::ip_src_is(ip_addr_t const & src, ip_addr_t const & mask) {
    pimpl->ip_src_is(src, mask);
 }
@@ -177,6 +189,10 @@ void
 flow_match_t::ip_src_mask_is(ip_addr_t const & ip_src_mask) {
    pimpl->ip_src_mask_is(ip_src_mask);
 }
+void
+flow_match_t::ip_src_mask_is(ip_addr_t && ip_src_mask) {
+   pimpl->ip_src_mask_is(std::move(ip_src_mask));
+}
 ip_addr_t
 flow_match_t::ip_dst() const {
    return pimpl->ip_dst();
@@ -184,6 +200,10 @@ flow_match_t::ip_dst() const {
 void
 flow_match_t::ip_dst_is(ip_addr_t const & ip_dst) {
    pimpl->ip_dst_is(ip_dst);
+}
+void
+flow_match_t::ip_dst_is(ip_addr_t && ip_dst) {
+   pimpl->ip_dst_is(std::move(ip_dst));
 }
 void
 flow_match_t::ip_dst_is(ip_addr_t const & dst, ip_addr_t const & mask) {
@@ -196,6 +216,10 @@ flow_match_t::ip_dst_mask() const {
 void
 flow_match_t::ip_dst_mask_is(ip_addr_t const & ip_dst_mask) {
    pimpl->ip_dst_mask_is(ip_dst_mask);
+}
+void
+flow_match_t::ip_dst_mask_is(ip_addr_t && ip_dst_mask) {
+   pimpl->ip_dst_mask_is(std::move(ip_dst_mask));
 }
 bool
 flow_match_t::operator==(flow_match_t const & other) const {
@@ -287,8 +311,16 @@ flow_action_t::output_intfs_is(std::set<intf_id_t> const & output_intfs) {
    pimpl->output_intfs_is(output_intfs);
 }
 void
+flow_action_t::output_intfs_is(std::set<intf_id_t> && output_intfs) {
+   pimpl->output_intfs_is(std::move(output_intfs));
+}
+void
 flow_action_t::output_intf_set(intf_id_t const & value) {
    pimpl->output_intf_set(value);
+}
+void
+flow_action_t::output_intf_set(intf_id_t && value) {
+   pimpl->output_intf_set(std::move(value));
 }
 void
 flow_action_t::output_intf_del(intf_id_t const & value) {
@@ -334,6 +366,10 @@ void
 flow_action_t::ip_src_is(ip_addr_t const & ip_src) {
    pimpl->ip_src_is(ip_src);
 }
+void
+flow_action_t::ip_src_is(ip_addr_t && ip_src) {
+   pimpl->ip_src_is(std::move(ip_src));
+}
 ip_addr_t
 flow_action_t::ip_dst() const {
    return pimpl->ip_dst();
@@ -341,6 +377,10 @@ flow_action_t::ip_dst() const {
 void
 flow_action_t::ip_dst_is(ip_addr_t const & ip_dst) {
    pimpl->ip_dst_is(ip_dst);
+}
+void
+flow_action_t::ip_dst_is(ip_addr_t && ip_dst) {
+   pimpl->ip_dst_is(std::move(ip_dst));
 }
 bool
 flow_action_t::operator==(flow_action_t const & other) const {

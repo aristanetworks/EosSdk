@@ -13,6 +13,18 @@
 #include <memory>
 #include <sstream>
 
+#ifdef SWIG
+%ignore eos::macsec_key_t(eos::macsec_key_t &&) noexcept;
+%ignore eos::macsec_key_t::operator=(eos::macsec_key_t &&) noexcept;
+%ignore eos::macsec_profile_t(eos::macsec_profile_t &&) noexcept;
+%ignore eos::macsec_profile_t::operator=(eos::macsec_profile_t &&) noexcept;
+%ignore eos::macsec_intf_status_t(eos::macsec_intf_status_t &&) noexcept;
+%ignore eos::macsec_intf_status_t::operator=(eos::macsec_intf_status_t &&) noexcept;
+%ignore eos::macsec_intf_counters_t(eos::macsec_intf_counters_t &&) noexcept;
+%ignore eos::macsec_intf_counters_t::operator=(eos::macsec_intf_counters_t &&)
+   noexcept;
+#endif
+
 namespace eos {
 
 typedef std::string macsec_profile_name_t;
@@ -115,6 +127,8 @@ class EOS_SDK_PUBLIC macsec_key_t {
    macsec_key_t& operator=(
       macsec_key_t const & other);
 
+   macsec_key_t(macsec_key_t && other) noexcept;
+   macsec_key_t & operator=(macsec_key_t && other) noexcept;
    static void * operator new( std::size_t, void * ptr ) {
       return ptr;
    }
@@ -171,6 +185,8 @@ class EOS_SDK_PUBLIC macsec_profile_t {
    macsec_profile_t& operator=(
       macsec_profile_t const & other);
 
+   macsec_profile_t(macsec_profile_t && other) noexcept;
+   macsec_profile_t & operator=(macsec_profile_t && other) noexcept;
    static void * operator new( std::size_t, void * ptr ) {
       return ptr;
    }
@@ -317,6 +333,8 @@ class EOS_SDK_PUBLIC macsec_intf_status_t {
    macsec_intf_status_t& operator=(
       macsec_intf_status_t const & other);
 
+   macsec_intf_status_t(macsec_intf_status_t && other) noexcept;
+   macsec_intf_status_t & operator=(macsec_intf_status_t && other) noexcept;
    static void * operator new( std::size_t, void * ptr ) {
       return ptr;
    }
@@ -370,6 +388,8 @@ class EOS_SDK_PUBLIC macsec_intf_counters_t {
    macsec_intf_counters_t& operator=(
       macsec_intf_counters_t const & other);
 
+   macsec_intf_counters_t(macsec_intf_counters_t && other) noexcept;
+   macsec_intf_counters_t & operator=(macsec_intf_counters_t && other) noexcept;
    static void * operator new( std::size_t, void * ptr ) {
       return ptr;
    }

@@ -32,6 +32,19 @@ acl_ttl_spec_t::operator=(
    return *this;
 }
 
+EOS_SDK_PUBLIC acl_ttl_spec_t::acl_ttl_spec_t(
+   acl_ttl_spec_t && other) noexcept  :
+   pimpl(std::move(other.pimpl)) {}
+EOS_SDK_PUBLIC acl_ttl_spec_t&
+acl_ttl_spec_t::operator=(
+   acl_ttl_spec_t && other) noexcept 
+{
+   if(this != &other) {
+      std::swap(pimpl, other.pimpl);
+   }
+   return *this;
+}
+
 EOS_SDK_PUBLIC void *
 acl_ttl_spec_t::operator new( std::size_t size ) {
    return ::operator new( size );
@@ -66,6 +79,19 @@ acl_port_spec_t::operator=(
    return *this;
 }
 
+EOS_SDK_PUBLIC acl_port_spec_t::acl_port_spec_t(
+   acl_port_spec_t && other) noexcept  :
+   pimpl(std::move(other.pimpl)) {}
+EOS_SDK_PUBLIC acl_port_spec_t&
+acl_port_spec_t::operator=(
+   acl_port_spec_t && other) noexcept 
+{
+   if(this != &other) {
+      std::swap(pimpl, other.pimpl);
+   }
+   return *this;
+}
+
 EOS_SDK_PUBLIC void *
 acl_port_spec_t::operator new( std::size_t size ) {
    return ::operator new( size );
@@ -90,6 +116,19 @@ acl_rule_base_t::operator=(
    if(this != &other) {
       pimpl = std::make_shared<acl_rule_base_impl_t>(
          *other.pimpl);
+   }
+   return *this;
+}
+
+EOS_SDK_PUBLIC acl_rule_base_t::acl_rule_base_t(
+   acl_rule_base_t && other) noexcept  :
+   pimpl(std::move(other.pimpl)) {}
+EOS_SDK_PUBLIC acl_rule_base_t&
+acl_rule_base_t::operator=(
+   acl_rule_base_t && other) noexcept 
+{
+   if(this != &other) {
+      std::swap(pimpl, other.pimpl);
    }
    return *this;
 }
@@ -125,6 +164,21 @@ acl_rule_ip_t::operator=(
    return *this;
 }
 
+EOS_SDK_PUBLIC acl_rule_ip_t::acl_rule_ip_t(
+   acl_rule_ip_t && other) noexcept  :
+   acl_rule_base_t(std::move(other)),
+   pimpl(std::move(other.pimpl)) {}
+EOS_SDK_PUBLIC acl_rule_ip_t&
+acl_rule_ip_t::operator=(
+   acl_rule_ip_t && other) noexcept 
+{
+   if(this != &other) {
+      acl_rule_base_t::operator=(std::move(other));
+      std::swap(pimpl, other.pimpl);
+   }
+   return *this;
+}
+
 EOS_SDK_PUBLIC void *
 acl_rule_ip_t::operator new( std::size_t size ) {
    return ::operator new( size );
@@ -151,6 +205,21 @@ acl_rule_eth_t::operator=(
       acl_rule_base_t::operator=(other);
       pimpl = std::make_shared<acl_rule_eth_impl_t>(
          *other.pimpl);
+   }
+   return *this;
+}
+
+EOS_SDK_PUBLIC acl_rule_eth_t::acl_rule_eth_t(
+   acl_rule_eth_t && other) noexcept  :
+   acl_rule_base_t(std::move(other)),
+   pimpl(std::move(other.pimpl)) {}
+EOS_SDK_PUBLIC acl_rule_eth_t&
+acl_rule_eth_t::operator=(
+   acl_rule_eth_t && other) noexcept 
+{
+   if(this != &other) {
+      acl_rule_base_t::operator=(std::move(other));
+      std::swap(pimpl, other.pimpl);
    }
    return *this;
 }

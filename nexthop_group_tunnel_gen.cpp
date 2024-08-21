@@ -30,6 +30,19 @@ nexthop_group_tunnel_t::operator=(
    return *this;
 }
 
+EOS_SDK_PUBLIC nexthop_group_tunnel_t::nexthop_group_tunnel_t(
+   nexthop_group_tunnel_t && other) noexcept  :
+   pimpl(std::move(other.pimpl)) {}
+EOS_SDK_PUBLIC nexthop_group_tunnel_t&
+nexthop_group_tunnel_t::operator=(
+   nexthop_group_tunnel_t && other) noexcept 
+{
+   if(this != &other) {
+      std::swap(pimpl, other.pimpl);
+   }
+   return *this;
+}
+
 EOS_SDK_PUBLIC void *
 nexthop_group_tunnel_t::operator new( std::size_t size ) {
    return ::operator new( size );

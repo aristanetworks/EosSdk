@@ -42,6 +42,19 @@ hardware_table_key_t::operator=(
    return *this;
 }
 
+EOS_SDK_PUBLIC hardware_table_key_t::hardware_table_key_t(
+   hardware_table_key_t && other) noexcept  :
+   pimpl(std::move(other.pimpl)) {}
+EOS_SDK_PUBLIC hardware_table_key_t&
+hardware_table_key_t::operator=(
+   hardware_table_key_t && other) noexcept 
+{
+   if(this != &other) {
+      std::swap(pimpl, other.pimpl);
+   }
+   return *this;
+}
+
 EOS_SDK_PUBLIC void *
 hardware_table_key_t::operator new( std::size_t size ) {
    return ::operator new( size );
@@ -72,6 +85,19 @@ hardware_table_high_watermark_t::operator=(
    if(this != &other) {
       pimpl = std::make_shared<hardware_table_high_watermark_impl_t>(
          *other.pimpl);
+   }
+   return *this;
+}
+
+EOS_SDK_PUBLIC hardware_table_high_watermark_t::hardware_table_high_watermark_t(
+   hardware_table_high_watermark_t && other) noexcept  :
+   pimpl(std::move(other.pimpl)) {}
+EOS_SDK_PUBLIC hardware_table_high_watermark_t&
+hardware_table_high_watermark_t::operator=(
+   hardware_table_high_watermark_t && other) noexcept 
+{
+   if(this != &other) {
+      std::swap(pimpl, other.pimpl);
    }
    return *this;
 }
@@ -112,6 +138,19 @@ hardware_table_usage_t::operator=(
    return *this;
 }
 
+EOS_SDK_PUBLIC hardware_table_usage_t::hardware_table_usage_t(
+   hardware_table_usage_t && other) noexcept  :
+   pimpl(std::move(other.pimpl)) {}
+EOS_SDK_PUBLIC hardware_table_usage_t&
+hardware_table_usage_t::operator=(
+   hardware_table_usage_t && other) noexcept 
+{
+   if(this != &other) {
+      std::swap(pimpl, other.pimpl);
+   }
+   return *this;
+}
+
 EOS_SDK_PUBLIC void *
 hardware_table_usage_t::operator new( std::size_t size ) {
    return ::operator new( size );
@@ -144,6 +183,19 @@ hardware_table_entry_t::operator=(
    if(this != &other) {
       pimpl = std::make_shared<hardware_table_entry_impl_t>(
          *other.pimpl);
+   }
+   return *this;
+}
+
+EOS_SDK_PUBLIC hardware_table_entry_t::hardware_table_entry_t(
+   hardware_table_entry_t && other) noexcept  :
+   pimpl(std::move(other.pimpl)) {}
+EOS_SDK_PUBLIC hardware_table_entry_t&
+hardware_table_entry_t::operator=(
+   hardware_table_entry_t && other) noexcept 
+{
+   if(this != &other) {
+      std::swap(pimpl, other.pimpl);
    }
    return *this;
 }

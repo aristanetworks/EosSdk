@@ -78,6 +78,11 @@ class_map_impl_t::key_is(class_map_key_t const & key) {
    key_ = key;
 }
 
+void
+class_map_impl_t::key_is(class_map_key_t && key) {
+   key_ = std::move(key);
+}
+
 std::map<uint32_t, class_map_rule_t> const &
 class_map_impl_t::rules() const {
    return rules_;
@@ -89,8 +94,18 @@ class_map_impl_t::rules_is(std::map<uint32_t, class_map_rule_t> const & rules) {
 }
 
 void
+class_map_impl_t::rules_is(std::map<uint32_t, class_map_rule_t> && rules) {
+   rules_ = std::move(rules);
+}
+
+void
 class_map_impl_t::rule_set(uint32_t key, class_map_rule_t const & value) {
    rules_[key] = value;
+}
+
+void
+class_map_impl_t::rule_set(uint32_t key, class_map_rule_t && value) {
+   rules_[key] = std::move(value);
 }
 
 void

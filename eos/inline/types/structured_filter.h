@@ -120,8 +120,16 @@ port_field_t::src_ports_is(std::set<port_range_t> const & src_ports) {
    pimpl->src_ports_is(src_ports);
 }
 void
+port_field_t::src_ports_is(std::set<port_range_t> && src_ports) {
+   pimpl->src_ports_is(std::move(src_ports));
+}
+void
 port_field_t::src_port_set(port_range_t const & value) {
    pimpl->src_port_set(value);
+}
+void
+port_field_t::src_port_set(port_range_t && value) {
+   pimpl->src_port_set(std::move(value));
 }
 void
 port_field_t::src_port_del(port_range_t const & value) {
@@ -136,8 +144,16 @@ port_field_t::dst_ports_is(std::set<port_range_t> const & dst_ports) {
    pimpl->dst_ports_is(dst_ports);
 }
 void
+port_field_t::dst_ports_is(std::set<port_range_t> && dst_ports) {
+   pimpl->dst_ports_is(std::move(dst_ports));
+}
+void
 port_field_t::dst_port_set(port_range_t const & value) {
    pimpl->dst_port_set(value);
+}
+void
+port_field_t::dst_port_set(port_range_t && value) {
+   pimpl->dst_port_set(std::move(value));
 }
 void
 port_field_t::dst_port_del(port_range_t const & value) {
@@ -153,8 +169,17 @@ port_field_t::src_port_field_sets_is(
    pimpl->src_port_field_sets_is(src_port_field_sets);
 }
 void
+port_field_t::src_port_field_sets_is(
+         std::unordered_set<std::string> && src_port_field_sets) {
+   pimpl->src_port_field_sets_is(std::move(src_port_field_sets));
+}
+void
 port_field_t::src_port_field_set_set(std::string const & value) {
    pimpl->src_port_field_set_set(value);
+}
+void
+port_field_t::src_port_field_set_set(std::string && value) {
+   pimpl->src_port_field_set_set(std::move(value));
 }
 void
 port_field_t::src_port_field_set_del(std::string const & value) {
@@ -170,8 +195,17 @@ port_field_t::dst_port_field_sets_is(
    pimpl->dst_port_field_sets_is(dst_port_field_sets);
 }
 void
+port_field_t::dst_port_field_sets_is(
+         std::unordered_set<std::string> && dst_port_field_sets) {
+   pimpl->dst_port_field_sets_is(std::move(dst_port_field_sets));
+}
+void
 port_field_t::dst_port_field_set_set(std::string const & value) {
    pimpl->dst_port_field_set_set(value);
+}
+void
+port_field_t::dst_port_field_set_set(std::string && value) {
+   pimpl->dst_port_field_set_set(std::move(value));
 }
 void
 port_field_t::dst_port_field_set_del(std::string const & value) {
@@ -216,8 +250,16 @@ protocol_field_t::ports_is(std::map<uint32_t, port_field_t> const & ports) {
    pimpl->ports_is(ports);
 }
 void
+protocol_field_t::ports_is(std::map<uint32_t, port_field_t> && ports) {
+   pimpl->ports_is(std::move(ports));
+}
+void
 protocol_field_t::port_set(uint32_t key, port_field_t const & value) {
    pimpl->port_set(key, value);
+}
+void
+protocol_field_t::port_set(uint32_t key, port_field_t && value) {
+   pimpl->port_set(key, std::move(value));
 }
 void
 protocol_field_t::port_del(uint32_t key) {
@@ -302,9 +344,18 @@ tp_rule_filter_t::protocols_is(
    pimpl->protocols_is(protocols);
 }
 void
+tp_rule_filter_t::protocols_is(
+         std::map<protocol_range_t, protocol_field_t> && protocols) {
+   pimpl->protocols_is(std::move(protocols));
+}
+void
 tp_rule_filter_t::protocol_set(protocol_range_t key,
                                protocol_field_t const & value) {
    pimpl->protocol_set(key, value);
+}
+void
+tp_rule_filter_t::protocol_set(protocol_range_t key, protocol_field_t && value) {
+   pimpl->protocol_set(key, std::move(value));
 }
 void
 tp_rule_filter_t::protocol_del(protocol_range_t key) {

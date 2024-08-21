@@ -13,6 +13,22 @@
 #include <memory>
 #include <sstream>
 
+#ifdef SWIG
+%ignore eos::ip_route_key_t(eos::ip_route_key_t &&) noexcept;
+%ignore eos::ip_route_key_t::operator=(eos::ip_route_key_t &&) noexcept;
+%ignore eos::ip_route_key_t::prefix_is(eos::ip_prefix_t &&);
+%ignore eos::ip_route_t(eos::ip_route_t &&) noexcept;
+%ignore eos::ip_route_t::operator=(eos::ip_route_t &&) noexcept;
+%ignore eos::ip_route_t::key_is(eos::ip_route_key_t &&);
+%ignore eos::ip_route_t::command_tag_is(std::string &&);
+%ignore eos::ip_route_via_t(eos::ip_route_via_t &&) noexcept;
+%ignore eos::ip_route_via_t::operator=(eos::ip_route_via_t &&) noexcept;
+%ignore eos::ip_route_via_t::route_key_is(eos::ip_route_key_t &&);
+%ignore eos::ip_route_via_t::hop_is(eos::ip_addr_t &&);
+%ignore eos::ip_route_via_t::nexthop_group_is(std::string &&);
+%ignore eos::ip_route_via_t::egress_vrf_is(std::string &&);
+#endif
+
 namespace eos {
 
 typedef uint32_t ip_route_tag_t;
@@ -51,6 +67,8 @@ class EOS_SDK_PUBLIC ip_route_key_t {
    ip_route_key_t& operator=(
       ip_route_key_t const & other);
 
+   ip_route_key_t(ip_route_key_t && other) noexcept;
+   ip_route_key_t & operator=(ip_route_key_t && other) noexcept;
    static void * operator new( std::size_t, void * ptr ) {
       return ptr;
    }
@@ -61,6 +79,8 @@ class EOS_SDK_PUBLIC ip_route_key_t {
    ip_prefix_t prefix() const;
    /** Setter for 'prefix'. */
    void prefix_is(ip_prefix_t const & prefix);
+   /** Moving Setter for 'prefix'. */
+   void prefix_is(ip_prefix_t && prefix);
 
    /** Getter for 'preference': a value 0..255, defaults to 1. */
    ip_route_preference_t preference() const;
@@ -105,6 +125,8 @@ class EOS_SDK_PUBLIC ip_route_t {
    ip_route_t& operator=(
       ip_route_t const & other);
 
+   ip_route_t(ip_route_t && other) noexcept;
+   ip_route_t & operator=(ip_route_t && other) noexcept;
    static void * operator new( std::size_t, void * ptr ) {
       return ptr;
    }
@@ -115,6 +137,8 @@ class EOS_SDK_PUBLIC ip_route_t {
    ip_route_key_t key() const;
    /** Setter for 'key'. */
    void key_is(ip_route_key_t const & key);
+   /** Moving Setter for 'key'. */
+   void key_is(ip_route_key_t && key);
 
    /** Getter for 'tag': a numbered tag, used for table segregation. */
    ip_route_tag_t tag() const;
@@ -136,6 +160,8 @@ class EOS_SDK_PUBLIC ip_route_t {
    std::string command_tag() const;
    /** Setter for 'command_tag'. */
    void command_tag_is(std::string const & command_tag);
+   /** Moving Setter for 'command_tag'. */
+   void command_tag_is(std::string && command_tag);
 
    /** The address family of the route_key_t prefix. */
    af_t af() const;
@@ -175,6 +201,8 @@ class EOS_SDK_PUBLIC ip_route_via_t {
    ip_route_via_t& operator=(
       ip_route_via_t const & other);
 
+   ip_route_via_t(ip_route_via_t && other) noexcept;
+   ip_route_via_t & operator=(ip_route_via_t && other) noexcept;
    static void * operator new( std::size_t, void * ptr ) {
       return ptr;
    }
@@ -185,6 +213,8 @@ class EOS_SDK_PUBLIC ip_route_via_t {
    ip_route_key_t route_key() const;
    /** Setter for 'route_key'. */
    void route_key_is(ip_route_key_t const & route_key);
+   /** Moving Setter for 'route_key'. */
+   void route_key_is(ip_route_key_t && route_key);
 
    /**
     * Getter for 'hop': IP v4/v6 nexthop address, or a default ip_addr_t if not
@@ -193,6 +223,8 @@ class EOS_SDK_PUBLIC ip_route_via_t {
    ip_addr_t hop() const;
    /** Setter for 'hop'. */
    void hop_is(ip_addr_t const & hop);
+   /** Moving Setter for 'hop'. */
+   void hop_is(ip_addr_t && hop);
 
    /**
     * Getter for 'intf': use the named interface if not a default intf_id_t. Using
@@ -211,6 +243,8 @@ class EOS_SDK_PUBLIC ip_route_via_t {
    std::string nexthop_group() const;
    /** Setter for 'nexthop_group'. */
    void nexthop_group_is(std::string const & nexthop_group);
+   /** Moving Setter for 'nexthop_group'. */
+   void nexthop_group_is(std::string && nexthop_group);
 
    /**
     * Getter for 'mpls_label': Push this MPLS label onto packets using this route.
@@ -240,6 +274,8 @@ class EOS_SDK_PUBLIC ip_route_via_t {
    std::string egress_vrf() const;
    /** Setter for 'egress_vrf'. */
    void egress_vrf_is(std::string const & egress_vrf);
+   /** Moving Setter for 'egress_vrf'. */
+   void egress_vrf_is(std::string && egress_vrf);
 
    /** Getter for 'metric': metric for the via. */
    ip_via_metric_t metric() const;

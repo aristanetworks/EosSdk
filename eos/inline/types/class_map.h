@@ -44,6 +44,10 @@ void
 class_map_t::key_is(class_map_key_t const & key) {
    pimpl->key_is(key);
 }
+void
+class_map_t::key_is(class_map_key_t && key) {
+   pimpl->key_is(std::move(key));
+}
 std::map<uint32_t, class_map_rule_t> const &
 class_map_t::rules() const {
    return pimpl->rules();
@@ -53,8 +57,16 @@ class_map_t::rules_is(std::map<uint32_t, class_map_rule_t> const & rules) {
    pimpl->rules_is(rules);
 }
 void
+class_map_t::rules_is(std::map<uint32_t, class_map_rule_t> && rules) {
+   pimpl->rules_is(std::move(rules));
+}
+void
 class_map_t::rule_set(uint32_t key, class_map_rule_t const & value) {
    pimpl->rule_set(key, value);
+}
+void
+class_map_t::rule_set(uint32_t key, class_map_rule_t && value) {
+   pimpl->rule_set(key, std::move(value));
 }
 void
 class_map_t::rule_del(uint32_t key) {

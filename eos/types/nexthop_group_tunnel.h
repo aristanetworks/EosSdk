@@ -11,6 +11,14 @@
 #include <memory>
 #include <sstream>
 
+#ifdef SWIG
+%ignore eos::nexthop_group_tunnel_t(eos::nexthop_group_tunnel_t &&) noexcept;
+%ignore eos::nexthop_group_tunnel_t::operator=(eos::nexthop_group_tunnel_t &&)
+   noexcept;
+%ignore eos::nexthop_group_tunnel_t::tunnel_endpoint_is(eos::ip_prefix_t &&);
+%ignore eos::nexthop_group_tunnel_t::nhg_name_is(std::string &&);
+#endif
+
 namespace eos {
 
 class nexthop_group_tunnel_impl_t;
@@ -34,6 +42,8 @@ class EOS_SDK_PUBLIC nexthop_group_tunnel_t {
    nexthop_group_tunnel_t& operator=(
       nexthop_group_tunnel_t const & other);
 
+   nexthop_group_tunnel_t(nexthop_group_tunnel_t && other) noexcept;
+   nexthop_group_tunnel_t & operator=(nexthop_group_tunnel_t && other) noexcept;
    static void * operator new( std::size_t, void * ptr ) {
       return ptr;
    }
@@ -44,11 +54,15 @@ class EOS_SDK_PUBLIC nexthop_group_tunnel_t {
    ip_prefix_t tunnel_endpoint() const;
    /** Setter for 'tunnel_endpoint'. */
    void tunnel_endpoint_is(ip_prefix_t const & tunnel_endpoint);
+   /** Moving Setter for 'tunnel_endpoint'. */
+   void tunnel_endpoint_is(ip_prefix_t && tunnel_endpoint);
 
    /** Getter for 'nhg_name': nexthop group name. */
    std::string nhg_name() const;
    /** Setter for 'nhg_name'. */
    void nhg_name_is(std::string const & nhg_name);
+   /** Moving Setter for 'nhg_name'. */
+   void nhg_name_is(std::string && nhg_name);
 
    /** Getter for 'igp_pref': the IGP preference of the tunnel endpoint. */
    uint8_t igp_pref() const;

@@ -31,6 +31,10 @@ void
 ip_route_key_t::prefix_is(ip_prefix_t const & prefix) {
    pimpl->prefix_is(prefix);
 }
+void
+ip_route_key_t::prefix_is(ip_prefix_t && prefix) {
+   pimpl->prefix_is(std::move(prefix));
+}
 ip_route_preference_t
 ip_route_key_t::preference() const {
    return pimpl->preference();
@@ -77,6 +81,10 @@ void
 ip_route_t::key_is(ip_route_key_t const & key) {
    pimpl->key_is(key);
 }
+void
+ip_route_t::key_is(ip_route_key_t && key) {
+   pimpl->key_is(std::move(key));
+}
 ip_route_tag_t
 ip_route_t::tag() const {
    return pimpl->tag();
@@ -100,6 +108,10 @@ ip_route_t::command_tag() const {
 void
 ip_route_t::command_tag_is(std::string const & command_tag) {
    pimpl->command_tag_is(command_tag);
+}
+void
+ip_route_t::command_tag_is(std::string && command_tag) {
+   pimpl->command_tag_is(std::move(command_tag));
 }
 af_t
 ip_route_t::af() const {
@@ -139,6 +151,10 @@ void
 ip_route_via_t::route_key_is(ip_route_key_t const & route_key) {
    pimpl->route_key_is(route_key);
 }
+void
+ip_route_via_t::route_key_is(ip_route_key_t && route_key) {
+   pimpl->route_key_is(std::move(route_key));
+}
 ip_addr_t
 ip_route_via_t::hop() const {
    return pimpl->hop();
@@ -146,6 +162,10 @@ ip_route_via_t::hop() const {
 void
 ip_route_via_t::hop_is(ip_addr_t const & hop) {
    pimpl->hop_is(hop);
+}
+void
+ip_route_via_t::hop_is(ip_addr_t && hop) {
+   pimpl->hop_is(std::move(hop));
 }
 intf_id_t
 ip_route_via_t::intf() const {
@@ -162,6 +182,10 @@ ip_route_via_t::nexthop_group() const {
 void
 ip_route_via_t::nexthop_group_is(std::string const & nexthop_group) {
    pimpl->nexthop_group_is(nexthop_group);
+}
+void
+ip_route_via_t::nexthop_group_is(std::string && nexthop_group) {
+   pimpl->nexthop_group_is(std::move(nexthop_group));
 }
 mpls_label_t
 ip_route_via_t::mpls_label() const {
@@ -202,6 +226,10 @@ ip_route_via_t::egress_vrf() const {
 void
 ip_route_via_t::egress_vrf_is(std::string const & egress_vrf) {
    pimpl->egress_vrf_is(egress_vrf);
+}
+void
+ip_route_via_t::egress_vrf_is(std::string && egress_vrf) {
+   pimpl->egress_vrf_is(std::move(egress_vrf));
 }
 ip_via_metric_t
 ip_route_via_t::metric() const {

@@ -98,6 +98,10 @@ void
 eth_lag_intf_membership_t::reason_is(std::string const & reason) {
    pimpl->reason_is(reason);
 }
+void
+eth_lag_intf_membership_t::reason_is(std::string && reason) {
+   pimpl->reason_is(std::move(reason));
+}
 double
 eth_lag_intf_membership_t::member_time() const {
    return pimpl->member_time();
@@ -158,6 +162,10 @@ eth_lag_intf_t::fallback_type() const {
 uint16_t
 eth_lag_intf_t::fallback_timeout() const {
    return pimpl->fallback_timeout();
+}
+uint64_t
+eth_lag_intf_t::min_speed() const {
+   return pimpl->min_speed();
 }
 uint16_t
 eth_lag_intf_t::fallback_timeout_default() const {

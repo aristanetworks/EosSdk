@@ -34,6 +34,19 @@ neighbor_key_t::operator=(
    return *this;
 }
 
+EOS_SDK_PUBLIC neighbor_key_t::neighbor_key_t(
+   neighbor_key_t && other) noexcept  :
+   pimpl(std::move(other.pimpl)) {}
+EOS_SDK_PUBLIC neighbor_key_t&
+neighbor_key_t::operator=(
+   neighbor_key_t && other) noexcept 
+{
+   if(this != &other) {
+      std::swap(pimpl, other.pimpl);
+   }
+   return *this;
+}
+
 EOS_SDK_PUBLIC void *
 neighbor_key_t::operator new( std::size_t size ) {
    return ::operator new( size );
@@ -67,6 +80,19 @@ neighbor_entry_t::operator=(
    if(this != &other) {
       pimpl = std::make_shared<neighbor_entry_impl_t>(
          *other.pimpl);
+   }
+   return *this;
+}
+
+EOS_SDK_PUBLIC neighbor_entry_t::neighbor_entry_t(
+   neighbor_entry_t && other) noexcept  :
+   pimpl(std::move(other.pimpl)) {}
+EOS_SDK_PUBLIC neighbor_entry_t&
+neighbor_entry_t::operator=(
+   neighbor_entry_t && other) noexcept 
+{
+   if(this != &other) {
+      std::swap(pimpl, other.pimpl);
    }
    return *this;
 }

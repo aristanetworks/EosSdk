@@ -13,6 +13,24 @@
 #include <memory>
 #include <sstream>
 
+#ifdef SWIG
+%ignore eos::bfd_session_key_t(eos::bfd_session_key_t &&) noexcept;
+%ignore eos::bfd_session_key_t::operator=(eos::bfd_session_key_t &&) noexcept;
+%ignore eos::bfd_interval_t(eos::bfd_interval_t &&) noexcept;
+%ignore eos::bfd_interval_t::operator=(eos::bfd_interval_t &&) noexcept;
+%ignore eos::bfd_session_t(eos::bfd_session_t &&) noexcept;
+%ignore eos::bfd_session_t::operator=(eos::bfd_session_t &&) noexcept;
+%ignore eos::sbfd_echo_session_key_t(eos::sbfd_echo_session_key_t &&) noexcept;
+%ignore eos::sbfd_echo_session_key_t::operator=(eos::sbfd_echo_session_key_t &&)
+   noexcept;
+%ignore eos::sbfd_interval_t(eos::sbfd_interval_t &&) noexcept;
+%ignore eos::sbfd_interval_t::operator=(eos::sbfd_interval_t &&) noexcept;
+%ignore eos::sbfd_echo_session_rtt_stats_t(eos::sbfd_echo_session_rtt_stats_t &&)
+   noexcept;
+%ignore eos::sbfd_echo_session_rtt_stats_t::operator=(
+   eos::sbfd_echo_session_rtt_stats_t &&) noexcept;
+#endif
+
 namespace eos {
 
 /** BFD session status. */
@@ -68,6 +86,8 @@ class EOS_SDK_PUBLIC bfd_session_key_t {
    bfd_session_key_t& operator=(
       bfd_session_key_t const & other);
 
+   bfd_session_key_t(bfd_session_key_t && other) noexcept;
+   bfd_session_key_t & operator=(bfd_session_key_t && other) noexcept;
    static void * operator new( std::size_t, void * ptr ) {
       return ptr;
    }
@@ -127,6 +147,8 @@ class EOS_SDK_PUBLIC bfd_interval_t {
    bfd_interval_t& operator=(
       bfd_interval_t const & other);
 
+   bfd_interval_t(bfd_interval_t && other) noexcept;
+   bfd_interval_t & operator=(bfd_interval_t && other) noexcept;
    static void * operator new( std::size_t, void * ptr ) {
       return ptr;
    }
@@ -173,6 +195,8 @@ class EOS_SDK_PUBLIC bfd_session_t {
    bfd_session_t& operator=(
       bfd_session_t const & other);
 
+   bfd_session_t(bfd_session_t && other) noexcept;
+   bfd_session_t & operator=(bfd_session_t && other) noexcept;
    static void * operator new( std::size_t, void * ptr ) {
       return ptr;
    }
@@ -225,6 +249,8 @@ class EOS_SDK_PUBLIC sbfd_echo_session_key_t {
    sbfd_echo_session_key_t& operator=(
       sbfd_echo_session_key_t const & other);
 
+   sbfd_echo_session_key_t(sbfd_echo_session_key_t && other) noexcept;
+   sbfd_echo_session_key_t & operator=(sbfd_echo_session_key_t && other) noexcept;
    static void * operator new( std::size_t, void * ptr ) {
       return ptr;
    }
@@ -294,6 +320,8 @@ class EOS_SDK_PUBLIC sbfd_interval_t {
    sbfd_interval_t& operator=(
       sbfd_interval_t const & other);
 
+   sbfd_interval_t(sbfd_interval_t && other) noexcept;
+   sbfd_interval_t & operator=(sbfd_interval_t && other) noexcept;
    static void * operator new( std::size_t, void * ptr ) {
       return ptr;
    }
@@ -343,6 +371,9 @@ class EOS_SDK_PUBLIC sbfd_echo_session_rtt_stats_t {
    sbfd_echo_session_rtt_stats_t& operator=(
       sbfd_echo_session_rtt_stats_t const & other);
 
+   sbfd_echo_session_rtt_stats_t(sbfd_echo_session_rtt_stats_t && other) noexcept;
+   sbfd_echo_session_rtt_stats_t & operator=(sbfd_echo_session_rtt_stats_t && other)
+      noexcept;
    static void * operator new( std::size_t, void * ptr ) {
       return ptr;
    }

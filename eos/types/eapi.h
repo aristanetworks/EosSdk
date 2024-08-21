@@ -9,6 +9,11 @@
 #include <sstream>
 #include <vector>
 
+#ifdef SWIG
+%ignore eos::eapi_response_t(eos::eapi_response_t &&) noexcept;
+%ignore eos::eapi_response_t::operator=(eos::eapi_response_t &&) noexcept;
+#endif
+
 namespace eos {
 
 class eapi_response_impl_t;
@@ -25,6 +30,8 @@ class EOS_SDK_PUBLIC eapi_response_t {
    eapi_response_t& operator=(
       eapi_response_t const & other);
 
+   eapi_response_t(eapi_response_t && other) noexcept;
+   eapi_response_t & operator=(eapi_response_t && other) noexcept;
    static void * operator new( std::size_t, void * ptr ) {
       return ptr;
    }

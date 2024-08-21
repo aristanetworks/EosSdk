@@ -120,6 +120,11 @@ mac_entry_impl_t::mac_key_is(mac_key_t const & mac_key) {
    mac_key_ = mac_key;
 }
 
+void
+mac_entry_impl_t::mac_key_is(mac_key_t && mac_key) {
+   mac_key_ = std::move(mac_key);
+}
+
 std::set<intf_id_t> const &
 mac_entry_impl_t::intfs() const {
    return intfs_;
@@ -131,8 +136,18 @@ mac_entry_impl_t::intfs_is(std::set<intf_id_t> const & intfs) {
 }
 
 void
+mac_entry_impl_t::intfs_is(std::set<intf_id_t> && intfs) {
+   intfs_ = std::move(intfs);
+}
+
+void
 mac_entry_impl_t::intf_set(intf_id_t const & value) {
    intfs_.insert(value);
+}
+
+void
+mac_entry_impl_t::intf_set(intf_id_t && value) {
+   intfs_.emplace(std::move(value));
 }
 
 void

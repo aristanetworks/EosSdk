@@ -17,6 +17,11 @@
 #include <stdio.h>
 #include <string.h>
 
+#ifdef SWIG
+%ignore eos::ip_addr_mask_t(eos::ip_addr_mask_t &&) noexcept;
+%ignore eos::ip_addr_mask_t::operator=(eos::ip_addr_mask_t &&) noexcept;
+#endif
+
 namespace eos {
 
 /** The address family of an IP address. */
@@ -187,6 +192,8 @@ class EOS_SDK_PUBLIC ip_addr_mask_t {
    ip_addr_mask_t& operator=(
       ip_addr_mask_t const & other);
 
+   ip_addr_mask_t(ip_addr_mask_t && other) noexcept;
+   ip_addr_mask_t & operator=(ip_addr_mask_t && other) noexcept;
    static void * operator new( std::size_t, void * ptr ) {
       return ptr;
    }
