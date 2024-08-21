@@ -1,0 +1,997 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>structured_filter &#8212; Arista EOS SDK 2.23.1 reference</title>
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/eossdk.css" type="text/css" />
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="subintf" href="subintf.html" />
+    <link rel="prev" title="sdk" href="sdk.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="subintf.html" title="subintf"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="sdk.html" title="sdk"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Arista EOS SDK 2.23.1 reference</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href=""><strong>structured_filter</strong></a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="structured-filter">
+<h1><strong>structured_filter</strong><a class="headerlink" href="#structured-filter" title="Permalink to this headline">¶</a></h1>
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>doxygenfile: Cannot find file “eos/structured_filter.h </p>
+</div>
+<div class="section" id="type-definitions-in-structured-filter">
+<h2>Type definitions in <strong>structured_filter</strong><a class="headerlink" href="#type-definitions-in-structured-filter" title="Permalink to this headline">¶</a></h2>
+<dl class="cpp type">
+<dt id="_CPPv43eos">
+<span id="_CPPv33eos"></span><span id="_CPPv23eos"></span><span id="eos"></span><span class="target" id="namespaceeos"></span><em class="property">namespace </em><code class="sig-name descname">eos</code><br /></dt>
+<dd><div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Enums</p>
+<dl class="cpp enum">
+<dt id="_CPPv4N3eos15tp_max_values_tE">
+<span id="_CPPv3N3eos15tp_max_values_tE"></span><span id="_CPPv2N3eos15tp_max_values_tE"></span><span class="target" id="types_2structured__filter_8h_1a27c073b91132f331cc8450e8b058a94b"></span><em class="property">enum </em><code class="sig-name descname">tp_max_values_t</code><a class="headerlink" href="#_CPPv4N3eos15tp_max_values_tE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Constant enums for traffic-policy to define the maximum values of fields (protocols, l4-ports). </p>
+<p><em>Values:</em></p>
+<dl class="cpp enumerator">
+<dt id="_CPPv4N3eos15tp_max_values_t12TP_MAX_PROTOE">
+<span id="_CPPv3N3eos15tp_max_values_t12TP_MAX_PROTOE"></span><span id="_CPPv2N3eos15tp_max_values_t12TP_MAX_PROTOE"></span><span class="target" id="types_2structured__filter_8h_1a27c073b91132f331cc8450e8b058a94ba210b3148c3437cf490cd3ab309f2e303"></span><em class="property">enumerator </em><code class="sig-name descname">TP_MAX_PROTO</code><a class="headerlink" href="#_CPPv4N3eos15tp_max_values_t12TP_MAX_PROTOE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt id="_CPPv4N3eos15tp_max_values_t13TP_MAX_L4PORTE">
+<span id="_CPPv3N3eos15tp_max_values_t13TP_MAX_L4PORTE"></span><span id="_CPPv2N3eos15tp_max_values_t13TP_MAX_L4PORTE"></span><span class="target" id="types_2structured__filter_8h_1a27c073b91132f331cc8450e8b058a94ba163665aef86a7b352b57fab0b318876e"></span><em class="property">enumerator </em><code class="sig-name descname">TP_MAX_L4PORT</code><a class="headerlink" href="#_CPPv4N3eos15tp_max_values_t13TP_MAX_L4PORTE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="cpp enum">
+<dt id="_CPPv4N3eos26traffic_policy_rule_type_tE">
+<span id="_CPPv3N3eos26traffic_policy_rule_type_tE"></span><span id="_CPPv2N3eos26traffic_policy_rule_type_tE"></span><span class="target" id="types_2structured__filter_8h_1aa56f541c0cc0779ec222a030a45c1c62"></span><em class="property">enum </em><code class="sig-name descname">traffic_policy_rule_type_t</code><a class="headerlink" href="#_CPPv4N3eos26traffic_policy_rule_type_tE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>The traffic policy rule type. Valid types are IPV4 and IPV6. </p>
+<p><em>Values:</em></p>
+<dl class="cpp enumerator">
+<dt id="_CPPv4N3eos26traffic_policy_rule_type_t29TRAFFIC_POLICY_RULE_TYPE_NULLE">
+<span id="_CPPv3N3eos26traffic_policy_rule_type_t29TRAFFIC_POLICY_RULE_TYPE_NULLE"></span><span id="_CPPv2N3eos26traffic_policy_rule_type_t29TRAFFIC_POLICY_RULE_TYPE_NULLE"></span><span class="target" id="types_2structured__filter_8h_1aa56f541c0cc0779ec222a030a45c1c62a04cd5bc86643c0276a08f17952da8efa"></span><em class="property">enumerator </em><code class="sig-name descname">TRAFFIC_POLICY_RULE_TYPE_NULL</code><a class="headerlink" href="#_CPPv4N3eos26traffic_policy_rule_type_t29TRAFFIC_POLICY_RULE_TYPE_NULLE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt id="_CPPv4N3eos26traffic_policy_rule_type_t29TRAFFIC_POLICY_RULE_TYPE_IPV4E">
+<span id="_CPPv3N3eos26traffic_policy_rule_type_t29TRAFFIC_POLICY_RULE_TYPE_IPV4E"></span><span id="_CPPv2N3eos26traffic_policy_rule_type_t29TRAFFIC_POLICY_RULE_TYPE_IPV4E"></span><span class="target" id="types_2structured__filter_8h_1aa56f541c0cc0779ec222a030a45c1c62a2980893fe2363fd2460155ec12085f32"></span><em class="property">enumerator </em><code class="sig-name descname">TRAFFIC_POLICY_RULE_TYPE_IPV4</code><a class="headerlink" href="#_CPPv4N3eos26traffic_policy_rule_type_t29TRAFFIC_POLICY_RULE_TYPE_IPV4E" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt id="_CPPv4N3eos26traffic_policy_rule_type_t29TRAFFIC_POLICY_RULE_TYPE_IPV6E">
+<span id="_CPPv3N3eos26traffic_policy_rule_type_t29TRAFFIC_POLICY_RULE_TYPE_IPV6E"></span><span id="_CPPv2N3eos26traffic_policy_rule_type_t29TRAFFIC_POLICY_RULE_TYPE_IPV6E"></span><span class="target" id="types_2structured__filter_8h_1aa56f541c0cc0779ec222a030a45c1c62aaada30373a5071f8f0a264a61d6e77cd"></span><em class="property">enumerator </em><code class="sig-name descname">TRAFFIC_POLICY_RULE_TYPE_IPV6</code><a class="headerlink" href="#_CPPv4N3eos26traffic_policy_rule_type_t29TRAFFIC_POLICY_RULE_TYPE_IPV6E" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<dl class="cpp class">
+<dt id="_CPPv4N3eos16protocol_range_tE">
+<span id="_CPPv3N3eos16protocol_range_tE"></span><span id="_CPPv2N3eos16protocol_range_tE"></span><span id="eos::protocol_range_t"></span><span class="target" id="classeos_1_1protocol__range__t"></span><em class="property">class </em><code class="sig-name descname">protocol_range_t</code><a class="headerlink" href="#_CPPv4N3eos16protocol_range_tE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><em>#include &lt;structured_filter.h&gt;</em><p>Range type for configuring protocol ranges of traffic-policy. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="cpp function">
+<dt id="_CPPv4N3eos16protocol_range_t16protocol_range_tEv">
+<span id="_CPPv3N3eos16protocol_range_t16protocol_range_tEv"></span><span id="_CPPv2N3eos16protocol_range_t16protocol_range_tEv"></span><span id="eos::protocol_range_t::protocol_range_t"></span><span class="target" id="classeos_1_1protocol__range__t_1a19d0173d8d014d3a9ace8a9db1a074ec"></span><code class="sig-name descname">protocol_range_t</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos16protocol_range_t16protocol_range_tEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos16protocol_range_t16protocol_range_tERK16protocol_range_t">
+<span id="_CPPv3N3eos16protocol_range_t16protocol_range_tERK16protocol_range_t"></span><span id="_CPPv2N3eos16protocol_range_t16protocol_range_tERK16protocol_range_t"></span><span id="eos::protocol_range_t::protocol_range_t__protocol_range_tCR"></span><span class="target" id="classeos_1_1protocol__range__t_1a2fd67468b6e8d5e0c3a70ec927085d25"></span><code class="sig-name descname">protocol_range_t</code><span class="sig-paren">(</span><em class="property">const</em> <a class="reference internal" href="#_CPPv4N3eos16protocol_range_t16protocol_range_tERK16protocol_range_t" title="eos::protocol_range_t::protocol_range_t">protocol_range_t</a> &amp;<em>other</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos16protocol_range_t16protocol_range_tERK16protocol_range_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos16protocol_range_taSERK16protocol_range_t">
+<span id="_CPPv3N3eos16protocol_range_taSERK16protocol_range_t"></span><span id="_CPPv2N3eos16protocol_range_taSERK16protocol_range_t"></span><span id="eos::protocol_range_t::assign-operator__protocol_range_tCR"></span><span class="target" id="classeos_1_1protocol__range__t_1ac84d35dd4622d9b876cc4f0410de0ebb"></span><a class="reference internal" href="#_CPPv4N3eos16protocol_range_tE" title="eos::protocol_range_t">protocol_range_t</a> &amp;<code class="sig-name descname">operator=</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos16protocol_range_tE" title="eos::protocol_range_t">protocol_range_t</a> <em class="property">const</em> &amp;<em>other</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos16protocol_range_taSERK16protocol_range_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos16protocol_range_t16protocol_range_tERR16protocol_range_t">
+<span id="_CPPv3N3eos16protocol_range_t16protocol_range_tERR16protocol_range_t"></span><span id="_CPPv2N3eos16protocol_range_t16protocol_range_tERR16protocol_range_t"></span><span id="eos::protocol_range_t::protocol_range_t__protocol_range_tRR"></span><span class="target" id="classeos_1_1protocol__range__t_1a7b90e0b6d6347788b9a322918f839149"></span><code class="sig-name descname">protocol_range_t</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos16protocol_range_t16protocol_range_tERR16protocol_range_t" title="eos::protocol_range_t::protocol_range_t">protocol_range_t</a> &amp;&amp;<em>other</em><span class="sig-paren">)</span> <em class="property">noexcept</em><a class="headerlink" href="#_CPPv4N3eos16protocol_range_t16protocol_range_tERR16protocol_range_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos16protocol_range_taSERR16protocol_range_t">
+<span id="_CPPv3N3eos16protocol_range_taSERR16protocol_range_t"></span><span id="_CPPv2N3eos16protocol_range_taSERR16protocol_range_t"></span><span id="eos::protocol_range_t::assign-operator__protocol_range_tRR"></span><span class="target" id="classeos_1_1protocol__range__t_1a6d64d120907c25fe22232fdc8419feca"></span><a class="reference internal" href="#_CPPv4N3eos16protocol_range_tE" title="eos::protocol_range_t">protocol_range_t</a> &amp;<code class="sig-name descname">operator=</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos16protocol_range_tE" title="eos::protocol_range_t">protocol_range_t</a> &amp;&amp;<em>other</em><span class="sig-paren">)</span> <em class="property">noexcept</em><a class="headerlink" href="#_CPPv4N3eos16protocol_range_taSERR16protocol_range_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos16protocol_range_t11range_startEv">
+<span id="_CPPv3NK3eos16protocol_range_t11range_startEv"></span><span id="_CPPv2NK3eos16protocol_range_t11range_startEv"></span><span id="eos::protocol_range_t::range_startC"></span><span class="target" id="classeos_1_1protocol__range__t_1ad15b58293902c7dfdd99ae7f81471a60"></span>uint32_t <code class="sig-name descname">range_start</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos16protocol_range_t11range_startEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos16protocol_range_t14range_start_isE8uint32_t">
+<span id="_CPPv3N3eos16protocol_range_t14range_start_isE8uint32_t"></span><span id="_CPPv2N3eos16protocol_range_t14range_start_isE8uint32_t"></span><span id="eos::protocol_range_t::range_start_is__uint32_t"></span><span class="target" id="classeos_1_1protocol__range__t_1a83e48e0b6c0ebcb54d6a32bb6d6b9782"></span>void <code class="sig-name descname">range_start_is</code><span class="sig-paren">(</span>uint32_t <em>range_start</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos16protocol_range_t14range_start_isE8uint32_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos16protocol_range_t9range_endEv">
+<span id="_CPPv3NK3eos16protocol_range_t9range_endEv"></span><span id="_CPPv2NK3eos16protocol_range_t9range_endEv"></span><span id="eos::protocol_range_t::range_endC"></span><span class="target" id="classeos_1_1protocol__range__t_1a5e3be1845392379a7cb62129e16f8ff0"></span>uint32_t <code class="sig-name descname">range_end</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos16protocol_range_t9range_endEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos16protocol_range_t12range_end_isE8uint32_t">
+<span id="_CPPv3N3eos16protocol_range_t12range_end_isE8uint32_t"></span><span id="_CPPv2N3eos16protocol_range_t12range_end_isE8uint32_t"></span><span id="eos::protocol_range_t::range_end_is__uint32_t"></span><span class="target" id="classeos_1_1protocol__range__t_1a3e53fb219266562365284cb41d154075"></span>void <code class="sig-name descname">range_end_is</code><span class="sig-paren">(</span>uint32_t <em>range_end</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos16protocol_range_t12range_end_isE8uint32_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos16protocol_range_teqERK16protocol_range_t">
+<span id="_CPPv3NK3eos16protocol_range_teqERK16protocol_range_t"></span><span id="_CPPv2NK3eos16protocol_range_teqERK16protocol_range_t"></span><span id="eos::protocol_range_t::eq-operator__protocol_range_tCRC"></span><span class="target" id="classeos_1_1protocol__range__t_1a6a37c172e5e5e336a2c8e43075065a47"></span>bool <code class="sig-name descname">operator==</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos16protocol_range_tE" title="eos::protocol_range_t">protocol_range_t</a> <em class="property">const</em> &amp;<em>other</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos16protocol_range_teqERK16protocol_range_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos16protocol_range_tneERK16protocol_range_t">
+<span id="_CPPv3NK3eos16protocol_range_tneERK16protocol_range_t"></span><span id="_CPPv2NK3eos16protocol_range_tneERK16protocol_range_t"></span><span id="eos::protocol_range_t::neq-operator__protocol_range_tCRC"></span><span class="target" id="classeos_1_1protocol__range__t_1a0c611d6391348d4449b47daf3cd07aad"></span>bool <code class="sig-name descname">operator!=</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos16protocol_range_tE" title="eos::protocol_range_t">protocol_range_t</a> <em class="property">const</em> &amp;<em>other</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos16protocol_range_tneERK16protocol_range_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos16protocol_range_tltERK16protocol_range_t">
+<span id="_CPPv3NK3eos16protocol_range_tltERK16protocol_range_t"></span><span id="_CPPv2NK3eos16protocol_range_tltERK16protocol_range_t"></span><span id="eos::protocol_range_t::lt-operator__protocol_range_tCRC"></span><span class="target" id="classeos_1_1protocol__range__t_1a5a0acf6b26f205817e4d84a5b001300e"></span>bool <code class="sig-name descname">operator&lt;</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos16protocol_range_tE" title="eos::protocol_range_t">protocol_range_t</a> <em class="property">const</em> &amp;<em>other</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos16protocol_range_tltERK16protocol_range_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos16protocol_range_t4hashEv">
+<span id="_CPPv3NK3eos16protocol_range_t4hashEv"></span><span id="_CPPv2NK3eos16protocol_range_t4hashEv"></span><span id="eos::protocol_range_t::hashC"></span><span class="target" id="classeos_1_1protocol__range__t_1a831f0a6eac280cc5b09aded30c555884"></span>uint32_t <code class="sig-name descname">hash</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos16protocol_range_t4hashEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>The hash function for type <a class="reference internal" href="#classeos_1_1protocol__range__t"><span class="std std-ref">protocol_range_t</span></a>. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos16protocol_range_t6mix_meER8hash_mix">
+<span id="_CPPv3NK3eos16protocol_range_t6mix_meER8hash_mix"></span><span id="_CPPv2NK3eos16protocol_range_t6mix_meER8hash_mix"></span><span id="eos::protocol_range_t::mix_me__hash_mixRC"></span><span class="target" id="classeos_1_1protocol__range__t_1a130d8f0632de85a8bf4206a7912a8901"></span>void <code class="sig-name descname">mix_me</code><span class="sig-paren">(</span><a class="reference internal" href="hash_mix.html#_CPPv4N3eos8hash_mixE" title="eos::hash_mix">hash_mix</a> &amp;<em>h</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos16protocol_range_t6mix_meER8hash_mix" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>The hash mix function for type <a class="reference internal" href="#classeos_1_1protocol__range__t"><span class="std std-ref">protocol_range_t</span></a>. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos16protocol_range_t9to_stringEv">
+<span id="_CPPv3NK3eos16protocol_range_t9to_stringEv"></span><span id="_CPPv2NK3eos16protocol_range_t9to_stringEv"></span><span id="eos::protocol_range_t::to_stringC"></span><span class="target" id="classeos_1_1protocol__range__t_1a6aeb9c7472d5616372a792825be6e074"></span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::string <code class="sig-name descname">to_string</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos16protocol_range_t9to_stringEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Returns a string representation of the current object’s values. </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Static Functions</p>
+<dl class="cpp function">
+<dt id="_CPPv4N3eos16protocol_range_tnwENSt6size_tEPv">
+<span id="_CPPv3N3eos16protocol_range_tnwENSt6size_tEPv"></span><span id="_CPPv2N3eos16protocol_range_tnwENSt6size_tEPv"></span><span id="eos::protocol_range_t::new-operator__std::s.voidP"></span><span class="target" id="classeos_1_1protocol__range__t_1a061b5eae6a41da042bf0791486a19328"></span><em class="property">static</em> <em class="property">inline</em> void *<code class="sig-name descname">operator new</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::size_t, void *<em>ptr</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos16protocol_range_tnwENSt6size_tEPv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos16protocol_range_tnwENSt6size_tE">
+<span id="_CPPv3N3eos16protocol_range_tnwENSt6size_tE"></span><span id="_CPPv2N3eos16protocol_range_tnwENSt6size_tE"></span><span id="eos::protocol_range_t::new-operator__std::s"></span><span class="target" id="classeos_1_1protocol__range__t_1a34f198a42ec834cc68a5fbe4039dacec"></span><em class="property">static</em> void *<code class="sig-name descname">operator new</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::size_t<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos16protocol_range_tnwENSt6size_tE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos16protocol_range_tdlEPv">
+<span id="_CPPv3N3eos16protocol_range_tdlEPv"></span><span id="_CPPv2N3eos16protocol_range_tdlEPv"></span><span id="eos::protocol_range_t::delete-operator__voidP"></span><span class="target" id="classeos_1_1protocol__range__t_1ad4e2d722cc6f8f1b3e7bc372db0ba5d1"></span><em class="property">static</em> void <code class="sig-name descname">operator delete</code><span class="sig-paren">(</span>void*<span class="sig-paren">)</span> <em class="property">noexcept</em><a class="headerlink" href="#_CPPv4N3eos16protocol_range_tdlEPv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Private Members</p>
+<dl class="cpp var">
+<dt id="_CPPv4N3eos16protocol_range_t5pimplE">
+<span id="_CPPv3N3eos16protocol_range_t5pimplE"></span><span id="_CPPv2N3eos16protocol_range_t5pimplE"></span><span id="eos::protocol_range_t::pimpl__std::shared_ptr:protocol_range_impl_t:"></span><span class="target" id="classeos_1_1protocol__range__t_1a038d3094bed455acde6689ee3915b1ca"></span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::shared_ptr&lt;protocol_range_impl_t&gt; <code class="sig-name descname">pimpl</code><a class="headerlink" href="#_CPPv4N3eos16protocol_range_t5pimplE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Friends</p>
+<dl class="cpp function">
+<dt id="_CPPv4N3eos16protocol_range_tlsERNSt7ostreamERK16protocol_range_t">
+<span id="_CPPv3N3eos16protocol_range_tlsERNSt7ostreamERK16protocol_range_t"></span><span id="_CPPv2N3eos16protocol_range_tlsERNSt7ostreamERK16protocol_range_t"></span><span id="eos::protocol_range_t::lshift-operator__osR.protocol_range_tCR"></span><span class="target" id="classeos_1_1protocol__range__t_1a7bdfdb282b5a150324b0e0855aa5c699"></span><em class="property">friend</em> <a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::ostream &amp;<code class="sig-name descname">operator&lt;&lt;</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::ostream &amp;<em>os</em>, <em class="property">const</em> <a class="reference internal" href="#_CPPv4N3eos16protocol_range_tE" title="eos::protocol_range_t">protocol_range_t</a> &amp;<em>obj</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos16protocol_range_tlsERNSt7ostreamERK16protocol_range_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>A utility stream operator that adds a string representation of <a class="reference internal" href="#classeos_1_1protocol__range__t"><span class="std std-ref">protocol_range_t</span></a> to the ostream. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="cpp class">
+<dt id="_CPPv4N3eos12port_range_tE">
+<span id="_CPPv3N3eos12port_range_tE"></span><span id="_CPPv2N3eos12port_range_tE"></span><span id="eos::port_range_t"></span><span class="target" id="classeos_1_1port__range__t"></span><em class="property">class </em><code class="sig-name descname">port_range_t</code><a class="headerlink" href="#_CPPv4N3eos12port_range_tE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><em>#include &lt;structured_filter.h&gt;</em><p>Range type for configuring port ranges of traffic-policy. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="cpp function">
+<dt id="_CPPv4N3eos12port_range_t12port_range_tEv">
+<span id="_CPPv3N3eos12port_range_t12port_range_tEv"></span><span id="_CPPv2N3eos12port_range_t12port_range_tEv"></span><span id="eos::port_range_t::port_range_t"></span><span class="target" id="classeos_1_1port__range__t_1aa30eb0915a07bddcffc74bbeff1558ad"></span><code class="sig-name descname">port_range_t</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos12port_range_t12port_range_tEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos12port_range_t12port_range_tERK12port_range_t">
+<span id="_CPPv3N3eos12port_range_t12port_range_tERK12port_range_t"></span><span id="_CPPv2N3eos12port_range_t12port_range_tERK12port_range_t"></span><span id="eos::port_range_t::port_range_t__port_range_tCR"></span><span class="target" id="classeos_1_1port__range__t_1aa669f2ee7c1e62591f72a27198cd1671"></span><code class="sig-name descname">port_range_t</code><span class="sig-paren">(</span><em class="property">const</em> <a class="reference internal" href="#_CPPv4N3eos12port_range_t12port_range_tERK12port_range_t" title="eos::port_range_t::port_range_t">port_range_t</a> &amp;<em>other</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos12port_range_t12port_range_tERK12port_range_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos12port_range_taSERK12port_range_t">
+<span id="_CPPv3N3eos12port_range_taSERK12port_range_t"></span><span id="_CPPv2N3eos12port_range_taSERK12port_range_t"></span><span id="eos::port_range_t::assign-operator__port_range_tCR"></span><span class="target" id="classeos_1_1port__range__t_1a49a70020e8d3f3faf2f782599f7dd5aa"></span><a class="reference internal" href="#_CPPv4N3eos12port_range_tE" title="eos::port_range_t">port_range_t</a> &amp;<code class="sig-name descname">operator=</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos12port_range_tE" title="eos::port_range_t">port_range_t</a> <em class="property">const</em> &amp;<em>other</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos12port_range_taSERK12port_range_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos12port_range_t12port_range_tERR12port_range_t">
+<span id="_CPPv3N3eos12port_range_t12port_range_tERR12port_range_t"></span><span id="_CPPv2N3eos12port_range_t12port_range_tERR12port_range_t"></span><span id="eos::port_range_t::port_range_t__port_range_tRR"></span><span class="target" id="classeos_1_1port__range__t_1a1d0f9d1d6c8c2d33e0cacdc9732f36e9"></span><code class="sig-name descname">port_range_t</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos12port_range_t12port_range_tERR12port_range_t" title="eos::port_range_t::port_range_t">port_range_t</a> &amp;&amp;<em>other</em><span class="sig-paren">)</span> <em class="property">noexcept</em><a class="headerlink" href="#_CPPv4N3eos12port_range_t12port_range_tERR12port_range_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos12port_range_taSERR12port_range_t">
+<span id="_CPPv3N3eos12port_range_taSERR12port_range_t"></span><span id="_CPPv2N3eos12port_range_taSERR12port_range_t"></span><span id="eos::port_range_t::assign-operator__port_range_tRR"></span><span class="target" id="classeos_1_1port__range__t_1ae7800823e9b61fe1669e66974a730df1"></span><a class="reference internal" href="#_CPPv4N3eos12port_range_tE" title="eos::port_range_t">port_range_t</a> &amp;<code class="sig-name descname">operator=</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos12port_range_tE" title="eos::port_range_t">port_range_t</a> &amp;&amp;<em>other</em><span class="sig-paren">)</span> <em class="property">noexcept</em><a class="headerlink" href="#_CPPv4N3eos12port_range_taSERR12port_range_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos12port_range_t11range_startEv">
+<span id="_CPPv3NK3eos12port_range_t11range_startEv"></span><span id="_CPPv2NK3eos12port_range_t11range_startEv"></span><span id="eos::port_range_t::range_startC"></span><span class="target" id="classeos_1_1port__range__t_1a18131ea6d0b7f4ee0fdf29a941c227b2"></span>uint32_t <code class="sig-name descname">range_start</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos12port_range_t11range_startEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos12port_range_t14range_start_isE8uint32_t">
+<span id="_CPPv3N3eos12port_range_t14range_start_isE8uint32_t"></span><span id="_CPPv2N3eos12port_range_t14range_start_isE8uint32_t"></span><span id="eos::port_range_t::range_start_is__uint32_t"></span><span class="target" id="classeos_1_1port__range__t_1a43f054bcc58a426f2d085f796e57851c"></span>void <code class="sig-name descname">range_start_is</code><span class="sig-paren">(</span>uint32_t <em>range_start</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos12port_range_t14range_start_isE8uint32_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos12port_range_t9range_endEv">
+<span id="_CPPv3NK3eos12port_range_t9range_endEv"></span><span id="_CPPv2NK3eos12port_range_t9range_endEv"></span><span id="eos::port_range_t::range_endC"></span><span class="target" id="classeos_1_1port__range__t_1abb4b3d904a117decf8fb502047ad0610"></span>uint32_t <code class="sig-name descname">range_end</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos12port_range_t9range_endEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos12port_range_t12range_end_isE8uint32_t">
+<span id="_CPPv3N3eos12port_range_t12range_end_isE8uint32_t"></span><span id="_CPPv2N3eos12port_range_t12range_end_isE8uint32_t"></span><span id="eos::port_range_t::range_end_is__uint32_t"></span><span class="target" id="classeos_1_1port__range__t_1aceb70949e70847533279e1bd75ff3fbb"></span>void <code class="sig-name descname">range_end_is</code><span class="sig-paren">(</span>uint32_t <em>range_end</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos12port_range_t12range_end_isE8uint32_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos12port_range_teqERK12port_range_t">
+<span id="_CPPv3NK3eos12port_range_teqERK12port_range_t"></span><span id="_CPPv2NK3eos12port_range_teqERK12port_range_t"></span><span id="eos::port_range_t::eq-operator__port_range_tCRC"></span><span class="target" id="classeos_1_1port__range__t_1ab61a3855af178774d80c2a03c0782d12"></span>bool <code class="sig-name descname">operator==</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos12port_range_tE" title="eos::port_range_t">port_range_t</a> <em class="property">const</em> &amp;<em>other</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos12port_range_teqERK12port_range_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos12port_range_tneERK12port_range_t">
+<span id="_CPPv3NK3eos12port_range_tneERK12port_range_t"></span><span id="_CPPv2NK3eos12port_range_tneERK12port_range_t"></span><span id="eos::port_range_t::neq-operator__port_range_tCRC"></span><span class="target" id="classeos_1_1port__range__t_1a60749e2d181c2dfba1a58a6bde614e40"></span>bool <code class="sig-name descname">operator!=</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos12port_range_tE" title="eos::port_range_t">port_range_t</a> <em class="property">const</em> &amp;<em>other</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos12port_range_tneERK12port_range_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos12port_range_tltERK12port_range_t">
+<span id="_CPPv3NK3eos12port_range_tltERK12port_range_t"></span><span id="_CPPv2NK3eos12port_range_tltERK12port_range_t"></span><span id="eos::port_range_t::lt-operator__port_range_tCRC"></span><span class="target" id="classeos_1_1port__range__t_1a93626b103f4ebe430258c0b292048347"></span>bool <code class="sig-name descname">operator&lt;</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos12port_range_tE" title="eos::port_range_t">port_range_t</a> <em class="property">const</em> &amp;<em>other</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos12port_range_tltERK12port_range_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos12port_range_t4hashEv">
+<span id="_CPPv3NK3eos12port_range_t4hashEv"></span><span id="_CPPv2NK3eos12port_range_t4hashEv"></span><span id="eos::port_range_t::hashC"></span><span class="target" id="classeos_1_1port__range__t_1a466574d2a7c49d448de31bf9ed72db7f"></span>uint32_t <code class="sig-name descname">hash</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos12port_range_t4hashEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>The hash function for type <a class="reference internal" href="#classeos_1_1port__range__t"><span class="std std-ref">port_range_t</span></a>. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos12port_range_t6mix_meER8hash_mix">
+<span id="_CPPv3NK3eos12port_range_t6mix_meER8hash_mix"></span><span id="_CPPv2NK3eos12port_range_t6mix_meER8hash_mix"></span><span id="eos::port_range_t::mix_me__hash_mixRC"></span><span class="target" id="classeos_1_1port__range__t_1a175b7a4a2d5860fe77eaa76bac90904a"></span>void <code class="sig-name descname">mix_me</code><span class="sig-paren">(</span><a class="reference internal" href="hash_mix.html#_CPPv4N3eos8hash_mixE" title="eos::hash_mix">hash_mix</a> &amp;<em>h</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos12port_range_t6mix_meER8hash_mix" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>The hash mix function for type <a class="reference internal" href="#classeos_1_1port__range__t"><span class="std std-ref">port_range_t</span></a>. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos12port_range_t9to_stringEv">
+<span id="_CPPv3NK3eos12port_range_t9to_stringEv"></span><span id="_CPPv2NK3eos12port_range_t9to_stringEv"></span><span id="eos::port_range_t::to_stringC"></span><span class="target" id="classeos_1_1port__range__t_1a581009b67253e9eaeddb0aa2b743a643"></span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::string <code class="sig-name descname">to_string</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos12port_range_t9to_stringEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Returns a string representation of the current object’s values. </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Static Functions</p>
+<dl class="cpp function">
+<dt id="_CPPv4N3eos12port_range_tnwENSt6size_tEPv">
+<span id="_CPPv3N3eos12port_range_tnwENSt6size_tEPv"></span><span id="_CPPv2N3eos12port_range_tnwENSt6size_tEPv"></span><span id="eos::port_range_t::new-operator__std::s.voidP"></span><span class="target" id="classeos_1_1port__range__t_1aa1abe1e6f5e82eea9a2060a7ed9cc0a7"></span><em class="property">static</em> <em class="property">inline</em> void *<code class="sig-name descname">operator new</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::size_t, void *<em>ptr</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos12port_range_tnwENSt6size_tEPv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos12port_range_tnwENSt6size_tE">
+<span id="_CPPv3N3eos12port_range_tnwENSt6size_tE"></span><span id="_CPPv2N3eos12port_range_tnwENSt6size_tE"></span><span id="eos::port_range_t::new-operator__std::s"></span><span class="target" id="classeos_1_1port__range__t_1a093cbbc821914b9196aab9f496272349"></span><em class="property">static</em> void *<code class="sig-name descname">operator new</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::size_t<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos12port_range_tnwENSt6size_tE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos12port_range_tdlEPv">
+<span id="_CPPv3N3eos12port_range_tdlEPv"></span><span id="_CPPv2N3eos12port_range_tdlEPv"></span><span id="eos::port_range_t::delete-operator__voidP"></span><span class="target" id="classeos_1_1port__range__t_1ad32b0ec6c6dd678a03a01ee2adee51ce"></span><em class="property">static</em> void <code class="sig-name descname">operator delete</code><span class="sig-paren">(</span>void*<span class="sig-paren">)</span> <em class="property">noexcept</em><a class="headerlink" href="#_CPPv4N3eos12port_range_tdlEPv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Private Members</p>
+<dl class="cpp var">
+<dt id="_CPPv4N3eos12port_range_t5pimplE">
+<span id="_CPPv3N3eos12port_range_t5pimplE"></span><span id="_CPPv2N3eos12port_range_t5pimplE"></span><span id="eos::port_range_t::pimpl__std::shared_ptr:port_range_impl_t:"></span><span class="target" id="classeos_1_1port__range__t_1a0083c4e003ad91b29baf3e675b20dcc1"></span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::shared_ptr&lt;port_range_impl_t&gt; <code class="sig-name descname">pimpl</code><a class="headerlink" href="#_CPPv4N3eos12port_range_t5pimplE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Friends</p>
+<dl class="cpp function">
+<dt id="_CPPv4N3eos12port_range_tlsERNSt7ostreamERK12port_range_t">
+<span id="_CPPv3N3eos12port_range_tlsERNSt7ostreamERK12port_range_t"></span><span id="_CPPv2N3eos12port_range_tlsERNSt7ostreamERK12port_range_t"></span><span id="eos::port_range_t::lshift-operator__osR.port_range_tCR"></span><span class="target" id="classeos_1_1port__range__t_1a7e795aae34f9189f518933cae916db00"></span><em class="property">friend</em> <a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::ostream &amp;<code class="sig-name descname">operator&lt;&lt;</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::ostream &amp;<em>os</em>, <em class="property">const</em> <a class="reference internal" href="#_CPPv4N3eos12port_range_tE" title="eos::port_range_t">port_range_t</a> &amp;<em>obj</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos12port_range_tlsERNSt7ostreamERK12port_range_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>A utility stream operator that adds a string representation of <a class="reference internal" href="#classeos_1_1port__range__t"><span class="std std-ref">port_range_t</span></a> to the ostream. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="cpp class">
+<dt id="_CPPv4N3eos12port_field_tE">
+<span id="_CPPv3N3eos12port_field_tE"></span><span id="_CPPv2N3eos12port_field_tE"></span><span id="eos::port_field_t"></span><span class="target" id="classeos_1_1port__field__t"></span><em class="property">class </em><code class="sig-name descname">port_field_t</code><a class="headerlink" href="#_CPPv4N3eos12port_field_tE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><em>#include &lt;structured_filter.h&gt;</em><p>Field type used to configure the port ranges or port field-sets. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="cpp function">
+<dt id="_CPPv4N3eos12port_field_t12port_field_tEv">
+<span id="_CPPv3N3eos12port_field_t12port_field_tEv"></span><span id="_CPPv2N3eos12port_field_t12port_field_tEv"></span><span id="eos::port_field_t::port_field_t"></span><span class="target" id="classeos_1_1port__field__t_1ada82c2f84d4373955b1163863222c146"></span><code class="sig-name descname">port_field_t</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos12port_field_t12port_field_tEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos12port_field_t12port_field_tERK12port_field_t">
+<span id="_CPPv3N3eos12port_field_t12port_field_tERK12port_field_t"></span><span id="_CPPv2N3eos12port_field_t12port_field_tERK12port_field_t"></span><span id="eos::port_field_t::port_field_t__port_field_tCR"></span><span class="target" id="classeos_1_1port__field__t_1a716bbf6baca0de1ce65af7d60e534649"></span><code class="sig-name descname">port_field_t</code><span class="sig-paren">(</span><em class="property">const</em> <a class="reference internal" href="#_CPPv4N3eos12port_field_t12port_field_tERK12port_field_t" title="eos::port_field_t::port_field_t">port_field_t</a> &amp;<em>other</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos12port_field_t12port_field_tERK12port_field_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos12port_field_taSERK12port_field_t">
+<span id="_CPPv3N3eos12port_field_taSERK12port_field_t"></span><span id="_CPPv2N3eos12port_field_taSERK12port_field_t"></span><span id="eos::port_field_t::assign-operator__port_field_tCR"></span><span class="target" id="classeos_1_1port__field__t_1a08502969cd3bb529dad25949bd887433"></span><a class="reference internal" href="#_CPPv4N3eos12port_field_tE" title="eos::port_field_t">port_field_t</a> &amp;<code class="sig-name descname">operator=</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos12port_field_tE" title="eos::port_field_t">port_field_t</a> <em class="property">const</em> &amp;<em>other</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos12port_field_taSERK12port_field_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos12port_field_t12port_field_tERR12port_field_t">
+<span id="_CPPv3N3eos12port_field_t12port_field_tERR12port_field_t"></span><span id="_CPPv2N3eos12port_field_t12port_field_tERR12port_field_t"></span><span id="eos::port_field_t::port_field_t__port_field_tRR"></span><span class="target" id="classeos_1_1port__field__t_1a029d86ac5360e05a2cef803875766263"></span><code class="sig-name descname">port_field_t</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos12port_field_t12port_field_tERR12port_field_t" title="eos::port_field_t::port_field_t">port_field_t</a> &amp;&amp;<em>other</em><span class="sig-paren">)</span> <em class="property">noexcept</em><a class="headerlink" href="#_CPPv4N3eos12port_field_t12port_field_tERR12port_field_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos12port_field_taSERR12port_field_t">
+<span id="_CPPv3N3eos12port_field_taSERR12port_field_t"></span><span id="_CPPv2N3eos12port_field_taSERR12port_field_t"></span><span id="eos::port_field_t::assign-operator__port_field_tRR"></span><span class="target" id="classeos_1_1port__field__t_1a78b4993d12cceaec753c13c1a4193955"></span><a class="reference internal" href="#_CPPv4N3eos12port_field_tE" title="eos::port_field_t">port_field_t</a> &amp;<code class="sig-name descname">operator=</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos12port_field_tE" title="eos::port_field_t">port_field_t</a> &amp;&amp;<em>other</em><span class="sig-paren">)</span> <em class="property">noexcept</em><a class="headerlink" href="#_CPPv4N3eos12port_field_taSERR12port_field_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos12port_field_t9src_portsEv">
+<span id="_CPPv3NK3eos12port_field_t9src_portsEv"></span><span id="_CPPv2NK3eos12port_field_t9src_portsEv"></span><span id="eos::port_field_t::src_portsC"></span><span class="target" id="classeos_1_1port__field__t_1af0334cae5ce6b9ff53252a35d71a585e"></span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::set&lt;<a class="reference internal" href="#_CPPv4N3eos12port_range_tE" title="eos::port_range_t">port_range_t</a>&gt; <em class="property">const</em> &amp;<code class="sig-name descname">src_ports</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos12port_field_t9src_portsEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos12port_field_t12src_ports_isERKNSt3setI12port_range_tEE">
+<span id="_CPPv3N3eos12port_field_t12src_ports_isERKNSt3setI12port_range_tEE"></span><span id="_CPPv2N3eos12port_field_t12src_ports_isERKNSt3setI12port_range_tEE"></span><span id="eos::port_field_t::src_ports_is__std::set:port_range_t:CR"></span><span class="target" id="classeos_1_1port__field__t_1acc0e791639f298ba2d1837599a37d47f"></span>void <code class="sig-name descname">src_ports_is</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::set&lt;<a class="reference internal" href="#_CPPv4N3eos12port_range_tE" title="eos::port_range_t">port_range_t</a>&gt; <em class="property">const</em> &amp;<em>src_ports</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos12port_field_t12src_ports_isERKNSt3setI12port_range_tEE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos12port_field_t12src_ports_isERRNSt3setI12port_range_tEE">
+<span id="_CPPv3N3eos12port_field_t12src_ports_isERRNSt3setI12port_range_tEE"></span><span id="_CPPv2N3eos12port_field_t12src_ports_isERRNSt3setI12port_range_tEE"></span><span id="eos::port_field_t::src_ports_is__std::set:port_range_t:RR"></span><span class="target" id="classeos_1_1port__field__t_1ab99031ba43321fe9d91363757490481c"></span>void <code class="sig-name descname">src_ports_is</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::set&lt;<a class="reference internal" href="#_CPPv4N3eos12port_range_tE" title="eos::port_range_t">port_range_t</a>&gt; &amp;&amp;<em>src_ports</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos12port_field_t12src_ports_isERRNSt3setI12port_range_tEE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos12port_field_t12src_port_setERK12port_range_t">
+<span id="_CPPv3N3eos12port_field_t12src_port_setERK12port_range_t"></span><span id="_CPPv2N3eos12port_field_t12src_port_setERK12port_range_t"></span><span id="eos::port_field_t::src_port_set__port_range_tCR"></span><span class="target" id="classeos_1_1port__field__t_1aed45475a18941ef76d1aa098a4188196"></span>void <code class="sig-name descname">src_port_set</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos12port_range_tE" title="eos::port_range_t">port_range_t</a> <em class="property">const</em> &amp;<em>value</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos12port_field_t12src_port_setERK12port_range_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Inserts one src_port of ‘value’ to the set. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos12port_field_t12src_port_setERR12port_range_t">
+<span id="_CPPv3N3eos12port_field_t12src_port_setERR12port_range_t"></span><span id="_CPPv2N3eos12port_field_t12src_port_setERR12port_range_t"></span><span id="eos::port_field_t::src_port_set__port_range_tRR"></span><span class="target" id="classeos_1_1port__field__t_1a9fe41b007db72bc4b5123c10846652f5"></span>void <code class="sig-name descname">src_port_set</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos12port_range_tE" title="eos::port_range_t">port_range_t</a> &amp;&amp;<em>value</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos12port_field_t12src_port_setERR12port_range_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Inserts one src_port of ‘value’ to the set. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos12port_field_t12src_port_delERK12port_range_t">
+<span id="_CPPv3N3eos12port_field_t12src_port_delERK12port_range_t"></span><span id="_CPPv2N3eos12port_field_t12src_port_delERK12port_range_t"></span><span id="eos::port_field_t::src_port_del__port_range_tCR"></span><span class="target" id="classeos_1_1port__field__t_1af631fa1d3f0105148077a268233a14c4"></span>void <code class="sig-name descname">src_port_del</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos12port_range_tE" title="eos::port_range_t">port_range_t</a> <em class="property">const</em> &amp;<em>value</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos12port_field_t12src_port_delERK12port_range_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Deletes one src_port of ‘value’ from the set. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos12port_field_t9dst_portsEv">
+<span id="_CPPv3NK3eos12port_field_t9dst_portsEv"></span><span id="_CPPv2NK3eos12port_field_t9dst_portsEv"></span><span id="eos::port_field_t::dst_portsC"></span><span class="target" id="classeos_1_1port__field__t_1aee47c4fe9e3fa26e10bedab04c037d75"></span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::set&lt;<a class="reference internal" href="#_CPPv4N3eos12port_range_tE" title="eos::port_range_t">port_range_t</a>&gt; <em class="property">const</em> &amp;<code class="sig-name descname">dst_ports</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos12port_field_t9dst_portsEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos12port_field_t12dst_ports_isERKNSt3setI12port_range_tEE">
+<span id="_CPPv3N3eos12port_field_t12dst_ports_isERKNSt3setI12port_range_tEE"></span><span id="_CPPv2N3eos12port_field_t12dst_ports_isERKNSt3setI12port_range_tEE"></span><span id="eos::port_field_t::dst_ports_is__std::set:port_range_t:CR"></span><span class="target" id="classeos_1_1port__field__t_1a678da9a7b1e0271f91b34059fbe250ad"></span>void <code class="sig-name descname">dst_ports_is</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::set&lt;<a class="reference internal" href="#_CPPv4N3eos12port_range_tE" title="eos::port_range_t">port_range_t</a>&gt; <em class="property">const</em> &amp;<em>dst_ports</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos12port_field_t12dst_ports_isERKNSt3setI12port_range_tEE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos12port_field_t12dst_ports_isERRNSt3setI12port_range_tEE">
+<span id="_CPPv3N3eos12port_field_t12dst_ports_isERRNSt3setI12port_range_tEE"></span><span id="_CPPv2N3eos12port_field_t12dst_ports_isERRNSt3setI12port_range_tEE"></span><span id="eos::port_field_t::dst_ports_is__std::set:port_range_t:RR"></span><span class="target" id="classeos_1_1port__field__t_1a9b558718f8482df8f6278f2bdb365870"></span>void <code class="sig-name descname">dst_ports_is</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::set&lt;<a class="reference internal" href="#_CPPv4N3eos12port_range_tE" title="eos::port_range_t">port_range_t</a>&gt; &amp;&amp;<em>dst_ports</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos12port_field_t12dst_ports_isERRNSt3setI12port_range_tEE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos12port_field_t12dst_port_setERK12port_range_t">
+<span id="_CPPv3N3eos12port_field_t12dst_port_setERK12port_range_t"></span><span id="_CPPv2N3eos12port_field_t12dst_port_setERK12port_range_t"></span><span id="eos::port_field_t::dst_port_set__port_range_tCR"></span><span class="target" id="classeos_1_1port__field__t_1a267d9c78f5f48911b0902ca9aaed49d9"></span>void <code class="sig-name descname">dst_port_set</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos12port_range_tE" title="eos::port_range_t">port_range_t</a> <em class="property">const</em> &amp;<em>value</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos12port_field_t12dst_port_setERK12port_range_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Inserts one dst_port of ‘value’ to the set. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos12port_field_t12dst_port_setERR12port_range_t">
+<span id="_CPPv3N3eos12port_field_t12dst_port_setERR12port_range_t"></span><span id="_CPPv2N3eos12port_field_t12dst_port_setERR12port_range_t"></span><span id="eos::port_field_t::dst_port_set__port_range_tRR"></span><span class="target" id="classeos_1_1port__field__t_1ad9a5d82bf45b04f5b091d20e0567d85b"></span>void <code class="sig-name descname">dst_port_set</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos12port_range_tE" title="eos::port_range_t">port_range_t</a> &amp;&amp;<em>value</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos12port_field_t12dst_port_setERR12port_range_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Inserts one dst_port of ‘value’ to the set. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos12port_field_t12dst_port_delERK12port_range_t">
+<span id="_CPPv3N3eos12port_field_t12dst_port_delERK12port_range_t"></span><span id="_CPPv2N3eos12port_field_t12dst_port_delERK12port_range_t"></span><span id="eos::port_field_t::dst_port_del__port_range_tCR"></span><span class="target" id="classeos_1_1port__field__t_1a000ac34d91ee6f052f2580968c7e0264"></span>void <code class="sig-name descname">dst_port_del</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos12port_range_tE" title="eos::port_range_t">port_range_t</a> <em class="property">const</em> &amp;<em>value</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos12port_field_t12dst_port_delERK12port_range_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Deletes one dst_port of ‘value’ from the set. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos12port_field_t19src_port_field_setsEv">
+<span id="_CPPv3NK3eos12port_field_t19src_port_field_setsEv"></span><span id="_CPPv2NK3eos12port_field_t19src_port_field_setsEv"></span><span id="eos::port_field_t::src_port_field_setsC"></span><span class="target" id="classeos_1_1port__field__t_1a8b66e3b7751923d65bfa85a71aa4feec"></span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::unordered_set&lt;<a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::string&gt; <em class="property">const</em> &amp;<code class="sig-name descname">src_port_field_sets</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos12port_field_t19src_port_field_setsEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos12port_field_t22src_port_field_sets_isERKNSt13unordered_setINSt6stringEEE">
+<span id="_CPPv3N3eos12port_field_t22src_port_field_sets_isERKNSt13unordered_setINSt6stringEEE"></span><span id="_CPPv2N3eos12port_field_t22src_port_field_sets_isERKNSt13unordered_setINSt6stringEEE"></span><span id="eos::port_field_t::src_port_field_sets_is__std::unordered_set:ss:CR"></span><span class="target" id="classeos_1_1port__field__t_1acde76f3aba49bcf87edb5ad0b4106a1d"></span>void <code class="sig-name descname">src_port_field_sets_is</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::unordered_set&lt;<a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::string&gt; <em class="property">const</em> &amp;<em>src_port_field_sets</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos12port_field_t22src_port_field_sets_isERKNSt13unordered_setINSt6stringEEE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos12port_field_t22src_port_field_sets_isERRNSt13unordered_setINSt6stringEEE">
+<span id="_CPPv3N3eos12port_field_t22src_port_field_sets_isERRNSt13unordered_setINSt6stringEEE"></span><span id="_CPPv2N3eos12port_field_t22src_port_field_sets_isERRNSt13unordered_setINSt6stringEEE"></span><span id="eos::port_field_t::src_port_field_sets_is__std::unordered_set:ss:RR"></span><span class="target" id="classeos_1_1port__field__t_1a7dafb24c4b40c84f3145e9516e395b54"></span>void <code class="sig-name descname">src_port_field_sets_is</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::unordered_set&lt;<a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::string&gt; &amp;&amp;<em>src_port_field_sets</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos12port_field_t22src_port_field_sets_isERRNSt13unordered_setINSt6stringEEE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos12port_field_t22src_port_field_set_setERKNSt6stringE">
+<span id="_CPPv3N3eos12port_field_t22src_port_field_set_setERKNSt6stringE"></span><span id="_CPPv2N3eos12port_field_t22src_port_field_set_setERKNSt6stringE"></span><span id="eos::port_field_t::src_port_field_set_set__ssCR"></span><span class="target" id="classeos_1_1port__field__t_1aa3f47a091e4049e6c2730327cbf0fe3c"></span>void <code class="sig-name descname">src_port_field_set_set</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::string <em class="property">const</em> &amp;<em>value</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos12port_field_t22src_port_field_set_setERKNSt6stringE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Inserts one src_port_field_set of ‘value’ to the set. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos12port_field_t22src_port_field_set_setERRNSt6stringE">
+<span id="_CPPv3N3eos12port_field_t22src_port_field_set_setERRNSt6stringE"></span><span id="_CPPv2N3eos12port_field_t22src_port_field_set_setERRNSt6stringE"></span><span id="eos::port_field_t::src_port_field_set_set__ssRR"></span><span class="target" id="classeos_1_1port__field__t_1ad6aa2b49f71885fbc23f94d129237f57"></span>void <code class="sig-name descname">src_port_field_set_set</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::string &amp;&amp;<em>value</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos12port_field_t22src_port_field_set_setERRNSt6stringE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Inserts one src_port_field_set of ‘value’ to the set. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos12port_field_t22src_port_field_set_delERKNSt6stringE">
+<span id="_CPPv3N3eos12port_field_t22src_port_field_set_delERKNSt6stringE"></span><span id="_CPPv2N3eos12port_field_t22src_port_field_set_delERKNSt6stringE"></span><span id="eos::port_field_t::src_port_field_set_del__ssCR"></span><span class="target" id="classeos_1_1port__field__t_1ad489f87b6aff2c57ccb7f9edf72baf8a"></span>void <code class="sig-name descname">src_port_field_set_del</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::string <em class="property">const</em> &amp;<em>value</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos12port_field_t22src_port_field_set_delERKNSt6stringE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Deletes one src_port_field_set of ‘value’ from the set. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos12port_field_t19dst_port_field_setsEv">
+<span id="_CPPv3NK3eos12port_field_t19dst_port_field_setsEv"></span><span id="_CPPv2NK3eos12port_field_t19dst_port_field_setsEv"></span><span id="eos::port_field_t::dst_port_field_setsC"></span><span class="target" id="classeos_1_1port__field__t_1afe7e1fdeb7ac64279376879643eef8c9"></span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::unordered_set&lt;<a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::string&gt; <em class="property">const</em> &amp;<code class="sig-name descname">dst_port_field_sets</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos12port_field_t19dst_port_field_setsEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos12port_field_t22dst_port_field_sets_isERKNSt13unordered_setINSt6stringEEE">
+<span id="_CPPv3N3eos12port_field_t22dst_port_field_sets_isERKNSt13unordered_setINSt6stringEEE"></span><span id="_CPPv2N3eos12port_field_t22dst_port_field_sets_isERKNSt13unordered_setINSt6stringEEE"></span><span id="eos::port_field_t::dst_port_field_sets_is__std::unordered_set:ss:CR"></span><span class="target" id="classeos_1_1port__field__t_1a5b2da01f3dec90ef821d2b95817c7ac1"></span>void <code class="sig-name descname">dst_port_field_sets_is</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::unordered_set&lt;<a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::string&gt; <em class="property">const</em> &amp;<em>dst_port_field_sets</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos12port_field_t22dst_port_field_sets_isERKNSt13unordered_setINSt6stringEEE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos12port_field_t22dst_port_field_sets_isERRNSt13unordered_setINSt6stringEEE">
+<span id="_CPPv3N3eos12port_field_t22dst_port_field_sets_isERRNSt13unordered_setINSt6stringEEE"></span><span id="_CPPv2N3eos12port_field_t22dst_port_field_sets_isERRNSt13unordered_setINSt6stringEEE"></span><span id="eos::port_field_t::dst_port_field_sets_is__std::unordered_set:ss:RR"></span><span class="target" id="classeos_1_1port__field__t_1ae75d68310fd553a29453702699ac1d55"></span>void <code class="sig-name descname">dst_port_field_sets_is</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::unordered_set&lt;<a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::string&gt; &amp;&amp;<em>dst_port_field_sets</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos12port_field_t22dst_port_field_sets_isERRNSt13unordered_setINSt6stringEEE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos12port_field_t22dst_port_field_set_setERKNSt6stringE">
+<span id="_CPPv3N3eos12port_field_t22dst_port_field_set_setERKNSt6stringE"></span><span id="_CPPv2N3eos12port_field_t22dst_port_field_set_setERKNSt6stringE"></span><span id="eos::port_field_t::dst_port_field_set_set__ssCR"></span><span class="target" id="classeos_1_1port__field__t_1a49e5492e3c79d6bdd096d6abb957300c"></span>void <code class="sig-name descname">dst_port_field_set_set</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::string <em class="property">const</em> &amp;<em>value</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos12port_field_t22dst_port_field_set_setERKNSt6stringE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Inserts one dst_port_field_set of ‘value’ to the set. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos12port_field_t22dst_port_field_set_setERRNSt6stringE">
+<span id="_CPPv3N3eos12port_field_t22dst_port_field_set_setERRNSt6stringE"></span><span id="_CPPv2N3eos12port_field_t22dst_port_field_set_setERRNSt6stringE"></span><span id="eos::port_field_t::dst_port_field_set_set__ssRR"></span><span class="target" id="classeos_1_1port__field__t_1a2731c0747aeffcf41d98f074d62b0a29"></span>void <code class="sig-name descname">dst_port_field_set_set</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::string &amp;&amp;<em>value</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos12port_field_t22dst_port_field_set_setERRNSt6stringE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Inserts one dst_port_field_set of ‘value’ to the set. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos12port_field_t22dst_port_field_set_delERKNSt6stringE">
+<span id="_CPPv3N3eos12port_field_t22dst_port_field_set_delERKNSt6stringE"></span><span id="_CPPv2N3eos12port_field_t22dst_port_field_set_delERKNSt6stringE"></span><span id="eos::port_field_t::dst_port_field_set_del__ssCR"></span><span class="target" id="classeos_1_1port__field__t_1a81530c6073ea022398ed619b2d82af57"></span>void <code class="sig-name descname">dst_port_field_set_del</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::string <em class="property">const</em> &amp;<em>value</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos12port_field_t22dst_port_field_set_delERKNSt6stringE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Deletes one dst_port_field_set of ‘value’ from the set. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos12port_field_teqERK12port_field_t">
+<span id="_CPPv3NK3eos12port_field_teqERK12port_field_t"></span><span id="_CPPv2NK3eos12port_field_teqERK12port_field_t"></span><span id="eos::port_field_t::eq-operator__port_field_tCRC"></span><span class="target" id="classeos_1_1port__field__t_1aa85498e97ed424c662890729b79aea17"></span>bool <code class="sig-name descname">operator==</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos12port_field_tE" title="eos::port_field_t">port_field_t</a> <em class="property">const</em> &amp;<em>other</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos12port_field_teqERK12port_field_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos12port_field_tneERK12port_field_t">
+<span id="_CPPv3NK3eos12port_field_tneERK12port_field_t"></span><span id="_CPPv2NK3eos12port_field_tneERK12port_field_t"></span><span id="eos::port_field_t::neq-operator__port_field_tCRC"></span><span class="target" id="classeos_1_1port__field__t_1ac8250d9189cece69706b77cfe817760f"></span>bool <code class="sig-name descname">operator!=</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos12port_field_tE" title="eos::port_field_t">port_field_t</a> <em class="property">const</em> &amp;<em>other</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos12port_field_tneERK12port_field_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos12port_field_tltERK12port_field_t">
+<span id="_CPPv3NK3eos12port_field_tltERK12port_field_t"></span><span id="_CPPv2NK3eos12port_field_tltERK12port_field_t"></span><span id="eos::port_field_t::lt-operator__port_field_tCRC"></span><span class="target" id="classeos_1_1port__field__t_1aa219989da81222e988d1830c18a450f2"></span>bool <code class="sig-name descname">operator&lt;</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos12port_field_tE" title="eos::port_field_t">port_field_t</a> <em class="property">const</em> &amp;<em>other</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos12port_field_tltERK12port_field_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos12port_field_t4hashEv">
+<span id="_CPPv3NK3eos12port_field_t4hashEv"></span><span id="_CPPv2NK3eos12port_field_t4hashEv"></span><span id="eos::port_field_t::hashC"></span><span class="target" id="classeos_1_1port__field__t_1af10d71f7d15fb9771cdb029575edfa80"></span>uint32_t <code class="sig-name descname">hash</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos12port_field_t4hashEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>The hash function for type <a class="reference internal" href="#classeos_1_1port__field__t"><span class="std std-ref">port_field_t</span></a>. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos12port_field_t6mix_meER8hash_mix">
+<span id="_CPPv3NK3eos12port_field_t6mix_meER8hash_mix"></span><span id="_CPPv2NK3eos12port_field_t6mix_meER8hash_mix"></span><span id="eos::port_field_t::mix_me__hash_mixRC"></span><span class="target" id="classeos_1_1port__field__t_1ae4e6166ebdf93236135fd2bb7ff07e5c"></span>void <code class="sig-name descname">mix_me</code><span class="sig-paren">(</span><a class="reference internal" href="hash_mix.html#_CPPv4N3eos8hash_mixE" title="eos::hash_mix">hash_mix</a> &amp;<em>h</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos12port_field_t6mix_meER8hash_mix" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>The hash mix function for type <a class="reference internal" href="#classeos_1_1port__field__t"><span class="std std-ref">port_field_t</span></a>. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos12port_field_t9to_stringEv">
+<span id="_CPPv3NK3eos12port_field_t9to_stringEv"></span><span id="_CPPv2NK3eos12port_field_t9to_stringEv"></span><span id="eos::port_field_t::to_stringC"></span><span class="target" id="classeos_1_1port__field__t_1acda761623dfbbce229f3880df0ac6d35"></span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::string <code class="sig-name descname">to_string</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos12port_field_t9to_stringEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Returns a string representation of the current object’s values. </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Static Functions</p>
+<dl class="cpp function">
+<dt id="_CPPv4N3eos12port_field_tnwENSt6size_tEPv">
+<span id="_CPPv3N3eos12port_field_tnwENSt6size_tEPv"></span><span id="_CPPv2N3eos12port_field_tnwENSt6size_tEPv"></span><span id="eos::port_field_t::new-operator__std::s.voidP"></span><span class="target" id="classeos_1_1port__field__t_1a0294ec3e5588993da1ffa2cd5376cddf"></span><em class="property">static</em> <em class="property">inline</em> void *<code class="sig-name descname">operator new</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::size_t, void *<em>ptr</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos12port_field_tnwENSt6size_tEPv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos12port_field_tnwENSt6size_tE">
+<span id="_CPPv3N3eos12port_field_tnwENSt6size_tE"></span><span id="_CPPv2N3eos12port_field_tnwENSt6size_tE"></span><span id="eos::port_field_t::new-operator__std::s"></span><span class="target" id="classeos_1_1port__field__t_1aabd1ade4d910ff6eb0a407f31edd80d0"></span><em class="property">static</em> void *<code class="sig-name descname">operator new</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::size_t<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos12port_field_tnwENSt6size_tE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos12port_field_tdlEPv">
+<span id="_CPPv3N3eos12port_field_tdlEPv"></span><span id="_CPPv2N3eos12port_field_tdlEPv"></span><span id="eos::port_field_t::delete-operator__voidP"></span><span class="target" id="classeos_1_1port__field__t_1ae7aa78ea7dfbc872118a52cc218f7ef9"></span><em class="property">static</em> void <code class="sig-name descname">operator delete</code><span class="sig-paren">(</span>void*<span class="sig-paren">)</span> <em class="property">noexcept</em><a class="headerlink" href="#_CPPv4N3eos12port_field_tdlEPv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Private Members</p>
+<dl class="cpp var">
+<dt id="_CPPv4N3eos12port_field_t5pimplE">
+<span id="_CPPv3N3eos12port_field_t5pimplE"></span><span id="_CPPv2N3eos12port_field_t5pimplE"></span><span id="eos::port_field_t::pimpl__std::shared_ptr:port_field_impl_t:"></span><span class="target" id="classeos_1_1port__field__t_1a6af22483c3c4169ca13b170efbfae4f1"></span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::shared_ptr&lt;port_field_impl_t&gt; <code class="sig-name descname">pimpl</code><a class="headerlink" href="#_CPPv4N3eos12port_field_t5pimplE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Friends</p>
+<dl class="cpp function">
+<dt id="_CPPv4N3eos12port_field_tlsERNSt7ostreamERK12port_field_t">
+<span id="_CPPv3N3eos12port_field_tlsERNSt7ostreamERK12port_field_t"></span><span id="_CPPv2N3eos12port_field_tlsERNSt7ostreamERK12port_field_t"></span><span id="eos::port_field_t::lshift-operator__osR.port_field_tCR"></span><span class="target" id="classeos_1_1port__field__t_1a4cdd6aaad8b8a5c34c5cc65c46b958e9"></span><em class="property">friend</em> <a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::ostream &amp;<code class="sig-name descname">operator&lt;&lt;</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::ostream &amp;<em>os</em>, <em class="property">const</em> <a class="reference internal" href="#_CPPv4N3eos12port_field_tE" title="eos::port_field_t">port_field_t</a> &amp;<em>obj</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos12port_field_tlsERNSt7ostreamERK12port_field_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>A utility stream operator that adds a string representation of <a class="reference internal" href="#classeos_1_1port__field__t"><span class="std std-ref">port_field_t</span></a> to the ostream. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="cpp class">
+<dt id="_CPPv4N3eos16protocol_field_tE">
+<span id="_CPPv3N3eos16protocol_field_tE"></span><span id="_CPPv2N3eos16protocol_field_tE"></span><span id="eos::protocol_field_t"></span><span class="target" id="classeos_1_1protocol__field__t"></span><em class="property">class </em><code class="sig-name descname">protocol_field_t</code><a class="headerlink" href="#_CPPv4N3eos16protocol_field_tE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><em>#include &lt;structured_filter.h&gt;</em><p>Field type used to configure the protocol ranges or protocol field-sets. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="cpp function">
+<dt id="_CPPv4N3eos16protocol_field_t16protocol_field_tEv">
+<span id="_CPPv3N3eos16protocol_field_t16protocol_field_tEv"></span><span id="_CPPv2N3eos16protocol_field_t16protocol_field_tEv"></span><span id="eos::protocol_field_t::protocol_field_t"></span><span class="target" id="classeos_1_1protocol__field__t_1a3dfc2bcda49f3e55fbb9d58a345fc4e9"></span><code class="sig-name descname">protocol_field_t</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos16protocol_field_t16protocol_field_tEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos16protocol_field_t16protocol_field_tERK16protocol_field_t">
+<span id="_CPPv3N3eos16protocol_field_t16protocol_field_tERK16protocol_field_t"></span><span id="_CPPv2N3eos16protocol_field_t16protocol_field_tERK16protocol_field_t"></span><span id="eos::protocol_field_t::protocol_field_t__protocol_field_tCR"></span><span class="target" id="classeos_1_1protocol__field__t_1a62d3ed07dfefd6cfe2ea7be4076c0b82"></span><code class="sig-name descname">protocol_field_t</code><span class="sig-paren">(</span><em class="property">const</em> <a class="reference internal" href="#_CPPv4N3eos16protocol_field_t16protocol_field_tERK16protocol_field_t" title="eos::protocol_field_t::protocol_field_t">protocol_field_t</a> &amp;<em>other</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos16protocol_field_t16protocol_field_tERK16protocol_field_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos16protocol_field_taSERK16protocol_field_t">
+<span id="_CPPv3N3eos16protocol_field_taSERK16protocol_field_t"></span><span id="_CPPv2N3eos16protocol_field_taSERK16protocol_field_t"></span><span id="eos::protocol_field_t::assign-operator__protocol_field_tCR"></span><span class="target" id="classeos_1_1protocol__field__t_1a7a3c09969db5ed029bd8abd1d681cc9c"></span><a class="reference internal" href="#_CPPv4N3eos16protocol_field_tE" title="eos::protocol_field_t">protocol_field_t</a> &amp;<code class="sig-name descname">operator=</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos16protocol_field_tE" title="eos::protocol_field_t">protocol_field_t</a> <em class="property">const</em> &amp;<em>other</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos16protocol_field_taSERK16protocol_field_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos16protocol_field_t16protocol_field_tERR16protocol_field_t">
+<span id="_CPPv3N3eos16protocol_field_t16protocol_field_tERR16protocol_field_t"></span><span id="_CPPv2N3eos16protocol_field_t16protocol_field_tERR16protocol_field_t"></span><span id="eos::protocol_field_t::protocol_field_t__protocol_field_tRR"></span><span class="target" id="classeos_1_1protocol__field__t_1ac9864e1af9a8ef485fe10aefc757cc8e"></span><code class="sig-name descname">protocol_field_t</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos16protocol_field_t16protocol_field_tERR16protocol_field_t" title="eos::protocol_field_t::protocol_field_t">protocol_field_t</a> &amp;&amp;<em>other</em><span class="sig-paren">)</span> <em class="property">noexcept</em><a class="headerlink" href="#_CPPv4N3eos16protocol_field_t16protocol_field_tERR16protocol_field_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos16protocol_field_taSERR16protocol_field_t">
+<span id="_CPPv3N3eos16protocol_field_taSERR16protocol_field_t"></span><span id="_CPPv2N3eos16protocol_field_taSERR16protocol_field_t"></span><span id="eos::protocol_field_t::assign-operator__protocol_field_tRR"></span><span class="target" id="classeos_1_1protocol__field__t_1ac6b57aca6fbcc1b63b6b5b534b7d39ca"></span><a class="reference internal" href="#_CPPv4N3eos16protocol_field_tE" title="eos::protocol_field_t">protocol_field_t</a> &amp;<code class="sig-name descname">operator=</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos16protocol_field_tE" title="eos::protocol_field_t">protocol_field_t</a> &amp;&amp;<em>other</em><span class="sig-paren">)</span> <em class="property">noexcept</em><a class="headerlink" href="#_CPPv4N3eos16protocol_field_taSERR16protocol_field_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos16protocol_field_t5portsEv">
+<span id="_CPPv3NK3eos16protocol_field_t5portsEv"></span><span id="_CPPv2NK3eos16protocol_field_t5portsEv"></span><span id="eos::protocol_field_t::portsC"></span><span class="target" id="classeos_1_1protocol__field__t_1af2b03de866abca61fe74cf55b34fdd4e"></span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::map&lt;uint32_t, <a class="reference internal" href="#_CPPv4N3eos12port_field_tE" title="eos::port_field_t">port_field_t</a>&gt; <em class="property">const</em> &amp;<code class="sig-name descname">ports</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos16protocol_field_t5portsEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Getter for ‘ports’: the key of the map ports should be an unique id. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos16protocol_field_t8ports_isERKNSt3mapI8uint32_t12port_field_tEE">
+<span id="_CPPv3N3eos16protocol_field_t8ports_isERKNSt3mapI8uint32_t12port_field_tEE"></span><span id="_CPPv2N3eos16protocol_field_t8ports_isERKNSt3mapI8uint32_t12port_field_tEE"></span><span id="eos::protocol_field_t::ports_is__std::map:uint32_t.port_field_t:CR"></span><span class="target" id="classeos_1_1protocol__field__t_1ae2e2f6ebd0142a2d51b91311b62749f6"></span>void <code class="sig-name descname">ports_is</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::map&lt;uint32_t, <a class="reference internal" href="#_CPPv4N3eos12port_field_tE" title="eos::port_field_t">port_field_t</a>&gt; <em class="property">const</em> &amp;<em>ports</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos16protocol_field_t8ports_isERKNSt3mapI8uint32_t12port_field_tEE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Setter for ‘ports’. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos16protocol_field_t8ports_isERRNSt3mapI8uint32_t12port_field_tEE">
+<span id="_CPPv3N3eos16protocol_field_t8ports_isERRNSt3mapI8uint32_t12port_field_tEE"></span><span id="_CPPv2N3eos16protocol_field_t8ports_isERRNSt3mapI8uint32_t12port_field_tEE"></span><span id="eos::protocol_field_t::ports_is__std::map:uint32_t.port_field_t:RR"></span><span class="target" id="classeos_1_1protocol__field__t_1a7a14dd0a309a95f31a8654364788a5b5"></span>void <code class="sig-name descname">ports_is</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::map&lt;uint32_t, <a class="reference internal" href="#_CPPv4N3eos12port_field_tE" title="eos::port_field_t">port_field_t</a>&gt; &amp;&amp;<em>ports</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos16protocol_field_t8ports_isERRNSt3mapI8uint32_t12port_field_tEE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Moving Setter for ‘ports’. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos16protocol_field_t8port_setE8uint32_tRK12port_field_t">
+<span id="_CPPv3N3eos16protocol_field_t8port_setE8uint32_tRK12port_field_t"></span><span id="_CPPv2N3eos16protocol_field_t8port_setE8uint32_tRK12port_field_t"></span><span id="eos::protocol_field_t::port_set__uint32_t.port_field_tCR"></span><span class="target" id="classeos_1_1protocol__field__t_1aaa43eaf70158e2d898f36ef9ba93f96d"></span>void <code class="sig-name descname">port_set</code><span class="sig-paren">(</span>uint32_t <em>key</em>, <a class="reference internal" href="#_CPPv4N3eos12port_field_tE" title="eos::port_field_t">port_field_t</a> <em class="property">const</em> &amp;<em>value</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos16protocol_field_t8port_setE8uint32_tRK12port_field_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Inserts key/value pair to the map. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos16protocol_field_t8port_setE8uint32_tRR12port_field_t">
+<span id="_CPPv3N3eos16protocol_field_t8port_setE8uint32_tRR12port_field_t"></span><span id="_CPPv2N3eos16protocol_field_t8port_setE8uint32_tRR12port_field_t"></span><span id="eos::protocol_field_t::port_set__uint32_t.port_field_tRR"></span><span class="target" id="classeos_1_1protocol__field__t_1aa43a2d56fcaf7f3d9dda27fb3d85e4f0"></span>void <code class="sig-name descname">port_set</code><span class="sig-paren">(</span>uint32_t <em>key</em>, <a class="reference internal" href="#_CPPv4N3eos12port_field_tE" title="eos::port_field_t">port_field_t</a> &amp;&amp;<em>value</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos16protocol_field_t8port_setE8uint32_tRR12port_field_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Inserts key/value pair to the map. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos16protocol_field_t8port_delE8uint32_t">
+<span id="_CPPv3N3eos16protocol_field_t8port_delE8uint32_t"></span><span id="_CPPv2N3eos16protocol_field_t8port_delE8uint32_t"></span><span id="eos::protocol_field_t::port_del__uint32_t"></span><span class="target" id="classeos_1_1protocol__field__t_1a2434acbbe2a1252e879aa73f190635e9"></span>void <code class="sig-name descname">port_del</code><span class="sig-paren">(</span>uint32_t <em>key</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos16protocol_field_t8port_delE8uint32_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Deletes the key/value pair from the map. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos16protocol_field_teqERK16protocol_field_t">
+<span id="_CPPv3NK3eos16protocol_field_teqERK16protocol_field_t"></span><span id="_CPPv2NK3eos16protocol_field_teqERK16protocol_field_t"></span><span id="eos::protocol_field_t::eq-operator__protocol_field_tCRC"></span><span class="target" id="classeos_1_1protocol__field__t_1ad45ad669e4172769be7721dbdad3f95b"></span>bool <code class="sig-name descname">operator==</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos16protocol_field_tE" title="eos::protocol_field_t">protocol_field_t</a> <em class="property">const</em> &amp;<em>other</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos16protocol_field_teqERK16protocol_field_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos16protocol_field_tneERK16protocol_field_t">
+<span id="_CPPv3NK3eos16protocol_field_tneERK16protocol_field_t"></span><span id="_CPPv2NK3eos16protocol_field_tneERK16protocol_field_t"></span><span id="eos::protocol_field_t::neq-operator__protocol_field_tCRC"></span><span class="target" id="classeos_1_1protocol__field__t_1af26bd6dbfe9974fba7dafda3fa198a3b"></span>bool <code class="sig-name descname">operator!=</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos16protocol_field_tE" title="eos::protocol_field_t">protocol_field_t</a> <em class="property">const</em> &amp;<em>other</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos16protocol_field_tneERK16protocol_field_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos16protocol_field_tltERK16protocol_field_t">
+<span id="_CPPv3NK3eos16protocol_field_tltERK16protocol_field_t"></span><span id="_CPPv2NK3eos16protocol_field_tltERK16protocol_field_t"></span><span id="eos::protocol_field_t::lt-operator__protocol_field_tCRC"></span><span class="target" id="classeos_1_1protocol__field__t_1a39439e1c89311a8cbb502db56a33f883"></span>bool <code class="sig-name descname">operator&lt;</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos16protocol_field_tE" title="eos::protocol_field_t">protocol_field_t</a> <em class="property">const</em> &amp;<em>other</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos16protocol_field_tltERK16protocol_field_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos16protocol_field_t4hashEv">
+<span id="_CPPv3NK3eos16protocol_field_t4hashEv"></span><span id="_CPPv2NK3eos16protocol_field_t4hashEv"></span><span id="eos::protocol_field_t::hashC"></span><span class="target" id="classeos_1_1protocol__field__t_1a7a4af8c82fd85383e7450683485497ef"></span>uint32_t <code class="sig-name descname">hash</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos16protocol_field_t4hashEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>The hash function for type <a class="reference internal" href="#classeos_1_1protocol__field__t"><span class="std std-ref">protocol_field_t</span></a>. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos16protocol_field_t6mix_meER8hash_mix">
+<span id="_CPPv3NK3eos16protocol_field_t6mix_meER8hash_mix"></span><span id="_CPPv2NK3eos16protocol_field_t6mix_meER8hash_mix"></span><span id="eos::protocol_field_t::mix_me__hash_mixRC"></span><span class="target" id="classeos_1_1protocol__field__t_1af78c8b2ffe04e6989d7a6659add0d2a8"></span>void <code class="sig-name descname">mix_me</code><span class="sig-paren">(</span><a class="reference internal" href="hash_mix.html#_CPPv4N3eos8hash_mixE" title="eos::hash_mix">hash_mix</a> &amp;<em>h</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos16protocol_field_t6mix_meER8hash_mix" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>The hash mix function for type <a class="reference internal" href="#classeos_1_1protocol__field__t"><span class="std std-ref">protocol_field_t</span></a>. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos16protocol_field_t9to_stringEv">
+<span id="_CPPv3NK3eos16protocol_field_t9to_stringEv"></span><span id="_CPPv2NK3eos16protocol_field_t9to_stringEv"></span><span id="eos::protocol_field_t::to_stringC"></span><span class="target" id="classeos_1_1protocol__field__t_1a8be812a78dcba6f8a7ec1ec8da6de7e3"></span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::string <code class="sig-name descname">to_string</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos16protocol_field_t9to_stringEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Returns a string representation of the current object’s values. </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Static Functions</p>
+<dl class="cpp function">
+<dt id="_CPPv4N3eos16protocol_field_tnwENSt6size_tEPv">
+<span id="_CPPv3N3eos16protocol_field_tnwENSt6size_tEPv"></span><span id="_CPPv2N3eos16protocol_field_tnwENSt6size_tEPv"></span><span id="eos::protocol_field_t::new-operator__std::s.voidP"></span><span class="target" id="classeos_1_1protocol__field__t_1a64e17986d031da3d3fb3bdef4610f5ce"></span><em class="property">static</em> <em class="property">inline</em> void *<code class="sig-name descname">operator new</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::size_t, void *<em>ptr</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos16protocol_field_tnwENSt6size_tEPv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos16protocol_field_tnwENSt6size_tE">
+<span id="_CPPv3N3eos16protocol_field_tnwENSt6size_tE"></span><span id="_CPPv2N3eos16protocol_field_tnwENSt6size_tE"></span><span id="eos::protocol_field_t::new-operator__std::s"></span><span class="target" id="classeos_1_1protocol__field__t_1a07f3b168d6704ca2780f0e811c6f02c7"></span><em class="property">static</em> void *<code class="sig-name descname">operator new</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::size_t<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos16protocol_field_tnwENSt6size_tE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos16protocol_field_tdlEPv">
+<span id="_CPPv3N3eos16protocol_field_tdlEPv"></span><span id="_CPPv2N3eos16protocol_field_tdlEPv"></span><span id="eos::protocol_field_t::delete-operator__voidP"></span><span class="target" id="classeos_1_1protocol__field__t_1aff98d39ed620543c8acb472817313891"></span><em class="property">static</em> void <code class="sig-name descname">operator delete</code><span class="sig-paren">(</span>void*<span class="sig-paren">)</span> <em class="property">noexcept</em><a class="headerlink" href="#_CPPv4N3eos16protocol_field_tdlEPv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Private Members</p>
+<dl class="cpp var">
+<dt id="_CPPv4N3eos16protocol_field_t5pimplE">
+<span id="_CPPv3N3eos16protocol_field_t5pimplE"></span><span id="_CPPv2N3eos16protocol_field_t5pimplE"></span><span id="eos::protocol_field_t::pimpl__std::shared_ptr:protocol_field_impl_t:"></span><span class="target" id="classeos_1_1protocol__field__t_1a084d9ff6b53dffff31a451432a42576e"></span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::shared_ptr&lt;protocol_field_impl_t&gt; <code class="sig-name descname">pimpl</code><a class="headerlink" href="#_CPPv4N3eos16protocol_field_t5pimplE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Friends</p>
+<dl class="cpp function">
+<dt id="_CPPv4N3eos16protocol_field_tlsERNSt7ostreamERK16protocol_field_t">
+<span id="_CPPv3N3eos16protocol_field_tlsERNSt7ostreamERK16protocol_field_t"></span><span id="_CPPv2N3eos16protocol_field_tlsERNSt7ostreamERK16protocol_field_t"></span><span id="eos::protocol_field_t::lshift-operator__osR.protocol_field_tCR"></span><span class="target" id="classeos_1_1protocol__field__t_1a3d89074c66b54f18434f9625c1fa6ec0"></span><em class="property">friend</em> <a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::ostream &amp;<code class="sig-name descname">operator&lt;&lt;</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::ostream &amp;<em>os</em>, <em class="property">const</em> <a class="reference internal" href="#_CPPv4N3eos16protocol_field_tE" title="eos::protocol_field_t">protocol_field_t</a> &amp;<em>obj</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos16protocol_field_tlsERNSt7ostreamERK16protocol_field_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>A utility stream operator that adds a string representation of <a class="reference internal" href="#classeos_1_1protocol__field__t"><span class="std std-ref">protocol_field_t</span></a> to the ostream. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="cpp class">
+<dt id="_CPPv4N3eos16tp_rule_filter_tE">
+<span id="_CPPv3N3eos16tp_rule_filter_tE"></span><span id="_CPPv2N3eos16tp_rule_filter_tE"></span><span id="eos::tp_rule_filter_t"></span><span class="target" id="classeos_1_1tp__rule__filter__t"></span><em class="property">class </em><code class="sig-name descname">tp_rule_filter_t</code><a class="headerlink" href="#_CPPv4N3eos16tp_rule_filter_tE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><em>#include &lt;structured_filter.h&gt;</em><p>This type is used to store the configs of all match fields of a traffic-policy rule. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="cpp function">
+<dt id="_CPPv4N3eos16tp_rule_filter_t16tp_rule_filter_tEv">
+<span id="_CPPv3N3eos16tp_rule_filter_t16tp_rule_filter_tEv"></span><span id="_CPPv2N3eos16tp_rule_filter_t16tp_rule_filter_tEv"></span><span id="eos::tp_rule_filter_t::tp_rule_filter_t"></span><span class="target" id="classeos_1_1tp__rule__filter__t_1ad380494b2d3efb315af1e811077d6810"></span><code class="sig-name descname">tp_rule_filter_t</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos16tp_rule_filter_t16tp_rule_filter_tEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos16tp_rule_filter_t16tp_rule_filter_tE26traffic_policy_rule_type_t">
+<span id="_CPPv3N3eos16tp_rule_filter_t16tp_rule_filter_tE26traffic_policy_rule_type_t"></span><span id="_CPPv2N3eos16tp_rule_filter_t16tp_rule_filter_tE26traffic_policy_rule_type_t"></span><span id="eos::tp_rule_filter_t::tp_rule_filter_t__traffic_policy_rule_type_t"></span><span class="target" id="classeos_1_1tp__rule__filter__t_1a9d8f03ed6e6ab8b8158821dfee64e281"></span><em class="property">explicit</em> <code class="sig-name descname">tp_rule_filter_t</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos26traffic_policy_rule_type_tE" title="eos::traffic_policy_rule_type_t">traffic_policy_rule_type_t</a> <em>filter_type</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos16tp_rule_filter_t16tp_rule_filter_tE26traffic_policy_rule_type_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos16tp_rule_filter_t16tp_rule_filter_tERK16tp_rule_filter_t">
+<span id="_CPPv3N3eos16tp_rule_filter_t16tp_rule_filter_tERK16tp_rule_filter_t"></span><span id="_CPPv2N3eos16tp_rule_filter_t16tp_rule_filter_tERK16tp_rule_filter_t"></span><span id="eos::tp_rule_filter_t::tp_rule_filter_t__tp_rule_filter_tCR"></span><span class="target" id="classeos_1_1tp__rule__filter__t_1a6258c3b897e2b00fded074ee97a5ce92"></span><code class="sig-name descname">tp_rule_filter_t</code><span class="sig-paren">(</span><em class="property">const</em> <a class="reference internal" href="#_CPPv4N3eos16tp_rule_filter_t16tp_rule_filter_tERK16tp_rule_filter_t" title="eos::tp_rule_filter_t::tp_rule_filter_t">tp_rule_filter_t</a> &amp;<em>other</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos16tp_rule_filter_t16tp_rule_filter_tERK16tp_rule_filter_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos16tp_rule_filter_taSERK16tp_rule_filter_t">
+<span id="_CPPv3N3eos16tp_rule_filter_taSERK16tp_rule_filter_t"></span><span id="_CPPv2N3eos16tp_rule_filter_taSERK16tp_rule_filter_t"></span><span id="eos::tp_rule_filter_t::assign-operator__tp_rule_filter_tCR"></span><span class="target" id="classeos_1_1tp__rule__filter__t_1a7988cd05534d0d1b47553199548ac779"></span><a class="reference internal" href="#_CPPv4N3eos16tp_rule_filter_tE" title="eos::tp_rule_filter_t">tp_rule_filter_t</a> &amp;<code class="sig-name descname">operator=</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos16tp_rule_filter_tE" title="eos::tp_rule_filter_t">tp_rule_filter_t</a> <em class="property">const</em> &amp;<em>other</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos16tp_rule_filter_taSERK16tp_rule_filter_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos16tp_rule_filter_t16tp_rule_filter_tERR16tp_rule_filter_t">
+<span id="_CPPv3N3eos16tp_rule_filter_t16tp_rule_filter_tERR16tp_rule_filter_t"></span><span id="_CPPv2N3eos16tp_rule_filter_t16tp_rule_filter_tERR16tp_rule_filter_t"></span><span id="eos::tp_rule_filter_t::tp_rule_filter_t__tp_rule_filter_tRR"></span><span class="target" id="classeos_1_1tp__rule__filter__t_1a3faa132b016f843ed8253964d075dcda"></span><code class="sig-name descname">tp_rule_filter_t</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos16tp_rule_filter_t16tp_rule_filter_tERR16tp_rule_filter_t" title="eos::tp_rule_filter_t::tp_rule_filter_t">tp_rule_filter_t</a> &amp;&amp;<em>other</em><span class="sig-paren">)</span> <em class="property">noexcept</em><a class="headerlink" href="#_CPPv4N3eos16tp_rule_filter_t16tp_rule_filter_tERR16tp_rule_filter_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos16tp_rule_filter_taSERR16tp_rule_filter_t">
+<span id="_CPPv3N3eos16tp_rule_filter_taSERR16tp_rule_filter_t"></span><span id="_CPPv2N3eos16tp_rule_filter_taSERR16tp_rule_filter_t"></span><span id="eos::tp_rule_filter_t::assign-operator__tp_rule_filter_tRR"></span><span class="target" id="classeos_1_1tp__rule__filter__t_1a5d55737841cedd5c3e76d400580ee911"></span><a class="reference internal" href="#_CPPv4N3eos16tp_rule_filter_tE" title="eos::tp_rule_filter_t">tp_rule_filter_t</a> &amp;<code class="sig-name descname">operator=</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos16tp_rule_filter_tE" title="eos::tp_rule_filter_t">tp_rule_filter_t</a> &amp;&amp;<em>other</em><span class="sig-paren">)</span> <em class="property">noexcept</em><a class="headerlink" href="#_CPPv4N3eos16tp_rule_filter_taSERR16tp_rule_filter_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos16tp_rule_filter_t9src_addrsEv">
+<span id="_CPPv3NK3eos16tp_rule_filter_t9src_addrsEv"></span><span id="_CPPv2NK3eos16tp_rule_filter_t9src_addrsEv"></span><span id="eos::tp_rule_filter_t::src_addrsC"></span><span class="target" id="classeos_1_1tp__rule__filter__t_1afa8158cafe24e597835280e86427459c"></span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::set&lt;<a class="reference internal" href="ip.html#_CPPv4N3eos14ip_addr_mask_tE" title="eos::ip_addr_mask_t">ip_addr_mask_t</a>&gt; <em class="property">const</em> &amp;<code class="sig-name descname">src_addrs</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos16tp_rule_filter_t9src_addrsEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos16tp_rule_filter_t19src_addr_field_setsEv">
+<span id="_CPPv3NK3eos16tp_rule_filter_t19src_addr_field_setsEv"></span><span id="_CPPv2NK3eos16tp_rule_filter_t19src_addr_field_setsEv"></span><span id="eos::tp_rule_filter_t::src_addr_field_setsC"></span><span class="target" id="classeos_1_1tp__rule__filter__t_1a21d4c954345ba93e958da654c9efb6fe"></span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::unordered_set&lt;<a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::string&gt; <em class="property">const</em> &amp;<code class="sig-name descname">src_addr_field_sets</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos16tp_rule_filter_t19src_addr_field_setsEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos16tp_rule_filter_t9dst_addrsEv">
+<span id="_CPPv3NK3eos16tp_rule_filter_t9dst_addrsEv"></span><span id="_CPPv2NK3eos16tp_rule_filter_t9dst_addrsEv"></span><span id="eos::tp_rule_filter_t::dst_addrsC"></span><span class="target" id="classeos_1_1tp__rule__filter__t_1af5c83c8a4206e7cbc84d17e00d2f71cc"></span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::set&lt;<a class="reference internal" href="ip.html#_CPPv4N3eos14ip_addr_mask_tE" title="eos::ip_addr_mask_t">ip_addr_mask_t</a>&gt; <em class="property">const</em> &amp;<code class="sig-name descname">dst_addrs</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos16tp_rule_filter_t9dst_addrsEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos16tp_rule_filter_t19dst_addr_field_setsEv">
+<span id="_CPPv3NK3eos16tp_rule_filter_t19dst_addr_field_setsEv"></span><span id="_CPPv2NK3eos16tp_rule_filter_t19dst_addr_field_setsEv"></span><span id="eos::tp_rule_filter_t::dst_addr_field_setsC"></span><span class="target" id="classeos_1_1tp__rule__filter__t_1a6fbc429646930f603d76baefa8b2a4d2"></span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::unordered_set&lt;<a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::string&gt; <em class="property">const</em> &amp;<code class="sig-name descname">dst_addr_field_sets</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos16tp_rule_filter_t19dst_addr_field_setsEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos16tp_rule_filter_t9protocolsEv">
+<span id="_CPPv3NK3eos16tp_rule_filter_t9protocolsEv"></span><span id="_CPPv2NK3eos16tp_rule_filter_t9protocolsEv"></span><span id="eos::tp_rule_filter_t::protocolsC"></span><span class="target" id="classeos_1_1tp__rule__filter__t_1a395df955aa3f0d7b836f4e4a09dbee39"></span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::map&lt;<a class="reference internal" href="#_CPPv4N3eos16protocol_range_tE" title="eos::protocol_range_t">protocol_range_t</a>, <a class="reference internal" href="#_CPPv4N3eos16protocol_field_tE" title="eos::protocol_field_t">protocol_field_t</a>&gt; <em class="property">const</em> &amp;<code class="sig-name descname">protocols</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos16tp_rule_filter_t9protocolsEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos16tp_rule_filter_t12protocols_isERKNSt3mapI16protocol_range_t16protocol_field_tEE">
+<span id="_CPPv3N3eos16tp_rule_filter_t12protocols_isERKNSt3mapI16protocol_range_t16protocol_field_tEE"></span><span id="_CPPv2N3eos16tp_rule_filter_t12protocols_isERKNSt3mapI16protocol_range_t16protocol_field_tEE"></span><span id="eos::tp_rule_filter_t::protocols_is__std::map:protocol_range_t.protocol_field_t:CR"></span><span class="target" id="classeos_1_1tp__rule__filter__t_1aea209737f9b629c02046deaca1143f33"></span>void <code class="sig-name descname">protocols_is</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::map&lt;<a class="reference internal" href="#_CPPv4N3eos16protocol_range_tE" title="eos::protocol_range_t">protocol_range_t</a>, <a class="reference internal" href="#_CPPv4N3eos16protocol_field_tE" title="eos::protocol_field_t">protocol_field_t</a>&gt; <em class="property">const</em> &amp;<em>protocols</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos16tp_rule_filter_t12protocols_isERKNSt3mapI16protocol_range_t16protocol_field_tEE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos16tp_rule_filter_t12protocols_isERRNSt3mapI16protocol_range_t16protocol_field_tEE">
+<span id="_CPPv3N3eos16tp_rule_filter_t12protocols_isERRNSt3mapI16protocol_range_t16protocol_field_tEE"></span><span id="_CPPv2N3eos16tp_rule_filter_t12protocols_isERRNSt3mapI16protocol_range_t16protocol_field_tEE"></span><span id="eos::tp_rule_filter_t::protocols_is__std::map:protocol_range_t.protocol_field_t:RR"></span><span class="target" id="classeos_1_1tp__rule__filter__t_1a7c62fa1d9ffc1ec1a4687e6490498ed4"></span>void <code class="sig-name descname">protocols_is</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::map&lt;<a class="reference internal" href="#_CPPv4N3eos16protocol_range_tE" title="eos::protocol_range_t">protocol_range_t</a>, <a class="reference internal" href="#_CPPv4N3eos16protocol_field_tE" title="eos::protocol_field_t">protocol_field_t</a>&gt; &amp;&amp;<em>protocols</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos16tp_rule_filter_t12protocols_isERRNSt3mapI16protocol_range_t16protocol_field_tEE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos16tp_rule_filter_t12protocol_setE16protocol_range_tRK16protocol_field_t">
+<span id="_CPPv3N3eos16tp_rule_filter_t12protocol_setE16protocol_range_tRK16protocol_field_t"></span><span id="_CPPv2N3eos16tp_rule_filter_t12protocol_setE16protocol_range_tRK16protocol_field_t"></span><span id="eos::tp_rule_filter_t::protocol_set__protocol_range_t.protocol_field_tCR"></span><span class="target" id="classeos_1_1tp__rule__filter__t_1ac6a972d38be5a0f2969323edc79e4e6d"></span>void <code class="sig-name descname">protocol_set</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos16protocol_range_tE" title="eos::protocol_range_t">protocol_range_t</a> <em>key</em>, <a class="reference internal" href="#_CPPv4N3eos16protocol_field_tE" title="eos::protocol_field_t">protocol_field_t</a> <em class="property">const</em> &amp;<em>value</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos16tp_rule_filter_t12protocol_setE16protocol_range_tRK16protocol_field_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Inserts key/value pair to the map. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos16tp_rule_filter_t12protocol_setE16protocol_range_tRR16protocol_field_t">
+<span id="_CPPv3N3eos16tp_rule_filter_t12protocol_setE16protocol_range_tRR16protocol_field_t"></span><span id="_CPPv2N3eos16tp_rule_filter_t12protocol_setE16protocol_range_tRR16protocol_field_t"></span><span id="eos::tp_rule_filter_t::protocol_set__protocol_range_t.protocol_field_tRR"></span><span class="target" id="classeos_1_1tp__rule__filter__t_1aad58eace4f5b4d727156857b71354cc2"></span>void <code class="sig-name descname">protocol_set</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos16protocol_range_tE" title="eos::protocol_range_t">protocol_range_t</a> <em>key</em>, <a class="reference internal" href="#_CPPv4N3eos16protocol_field_tE" title="eos::protocol_field_t">protocol_field_t</a> &amp;&amp;<em>value</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos16tp_rule_filter_t12protocol_setE16protocol_range_tRR16protocol_field_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Inserts key/value pair to the map. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos16tp_rule_filter_t12protocol_delE16protocol_range_t">
+<span id="_CPPv3N3eos16tp_rule_filter_t12protocol_delE16protocol_range_t"></span><span id="_CPPv2N3eos16tp_rule_filter_t12protocol_delE16protocol_range_t"></span><span id="eos::tp_rule_filter_t::protocol_del__protocol_range_t"></span><span class="target" id="classeos_1_1tp__rule__filter__t_1a13a18ed1be45f9f3afef2012639556b1"></span>void <code class="sig-name descname">protocol_del</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos16protocol_range_tE" title="eos::protocol_range_t">protocol_range_t</a> <em>key</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos16tp_rule_filter_t12protocol_delE16protocol_range_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Deletes the key/value pair from the map. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos16tp_rule_filter_t11filter_typeEv">
+<span id="_CPPv3NK3eos16tp_rule_filter_t11filter_typeEv"></span><span id="_CPPv2NK3eos16tp_rule_filter_t11filter_typeEv"></span><span id="eos::tp_rule_filter_t::filter_typeC"></span><span class="target" id="classeos_1_1tp__rule__filter__t_1a96bbc30b71bd31cf6bfd5688da3565fb"></span><a class="reference internal" href="#_CPPv4N3eos26traffic_policy_rule_type_tE" title="eos::traffic_policy_rule_type_t">traffic_policy_rule_type_t</a> <code class="sig-name descname">filter_type</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos16tp_rule_filter_t11filter_typeEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos16tp_rule_filter_t12src_addr_setERK14ip_addr_mask_t">
+<span id="_CPPv3N3eos16tp_rule_filter_t12src_addr_setERK14ip_addr_mask_t"></span><span id="_CPPv2N3eos16tp_rule_filter_t12src_addr_setERK14ip_addr_mask_t"></span><span id="eos::tp_rule_filter_t::src_addr_set__ip_addr_mask_tCR"></span><span class="target" id="classeos_1_1tp__rule__filter__t_1aa3f847b501beb29a0df6bca51b957007"></span>void <code class="sig-name descname">src_addr_set</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#_CPPv4N3eos14ip_addr_mask_tE" title="eos::ip_addr_mask_t">ip_addr_mask_t</a> <em class="property">const</em> &amp;<em>value</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos16tp_rule_filter_t12src_addr_setERK14ip_addr_mask_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos16tp_rule_filter_t12src_addr_delERK14ip_addr_mask_t">
+<span id="_CPPv3N3eos16tp_rule_filter_t12src_addr_delERK14ip_addr_mask_t"></span><span id="_CPPv2N3eos16tp_rule_filter_t12src_addr_delERK14ip_addr_mask_t"></span><span id="eos::tp_rule_filter_t::src_addr_del__ip_addr_mask_tCR"></span><span class="target" id="classeos_1_1tp__rule__filter__t_1a048a9e369904c791768d3763914f9e6e"></span>void <code class="sig-name descname">src_addr_del</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#_CPPv4N3eos14ip_addr_mask_tE" title="eos::ip_addr_mask_t">ip_addr_mask_t</a> <em class="property">const</em> &amp;<em>value</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos16tp_rule_filter_t12src_addr_delERK14ip_addr_mask_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos16tp_rule_filter_t12src_addrs_isERKNSt3setI14ip_addr_mask_tEE">
+<span id="_CPPv3N3eos16tp_rule_filter_t12src_addrs_isERKNSt3setI14ip_addr_mask_tEE"></span><span id="_CPPv2N3eos16tp_rule_filter_t12src_addrs_isERKNSt3setI14ip_addr_mask_tEE"></span><span id="eos::tp_rule_filter_t::src_addrs_is__std::set:ip_addr_mask_t:CR"></span><span class="target" id="classeos_1_1tp__rule__filter__t_1a63d317a99a2925785eb3fa6b1693b75c"></span>void <code class="sig-name descname">src_addrs_is</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::set&lt;<a class="reference internal" href="ip.html#_CPPv4N3eos14ip_addr_mask_tE" title="eos::ip_addr_mask_t">ip_addr_mask_t</a>&gt; <em class="property">const</em> &amp;<em>src_addrs</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos16tp_rule_filter_t12src_addrs_isERKNSt3setI14ip_addr_mask_tEE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos16tp_rule_filter_t12dst_addr_setERK14ip_addr_mask_t">
+<span id="_CPPv3N3eos16tp_rule_filter_t12dst_addr_setERK14ip_addr_mask_t"></span><span id="_CPPv2N3eos16tp_rule_filter_t12dst_addr_setERK14ip_addr_mask_t"></span><span id="eos::tp_rule_filter_t::dst_addr_set__ip_addr_mask_tCR"></span><span class="target" id="classeos_1_1tp__rule__filter__t_1a2fc77c29fdc66983d0c9f74069dce40a"></span>void <code class="sig-name descname">dst_addr_set</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#_CPPv4N3eos14ip_addr_mask_tE" title="eos::ip_addr_mask_t">ip_addr_mask_t</a> <em class="property">const</em> &amp;<em>value</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos16tp_rule_filter_t12dst_addr_setERK14ip_addr_mask_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos16tp_rule_filter_t12dst_addr_delERK14ip_addr_mask_t">
+<span id="_CPPv3N3eos16tp_rule_filter_t12dst_addr_delERK14ip_addr_mask_t"></span><span id="_CPPv2N3eos16tp_rule_filter_t12dst_addr_delERK14ip_addr_mask_t"></span><span id="eos::tp_rule_filter_t::dst_addr_del__ip_addr_mask_tCR"></span><span class="target" id="classeos_1_1tp__rule__filter__t_1a91404b87a021b251077685deb73a4a53"></span>void <code class="sig-name descname">dst_addr_del</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#_CPPv4N3eos14ip_addr_mask_tE" title="eos::ip_addr_mask_t">ip_addr_mask_t</a> <em class="property">const</em> &amp;<em>value</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos16tp_rule_filter_t12dst_addr_delERK14ip_addr_mask_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos16tp_rule_filter_t12dst_addrs_isERKNSt3setI14ip_addr_mask_tEE">
+<span id="_CPPv3N3eos16tp_rule_filter_t12dst_addrs_isERKNSt3setI14ip_addr_mask_tEE"></span><span id="_CPPv2N3eos16tp_rule_filter_t12dst_addrs_isERKNSt3setI14ip_addr_mask_tEE"></span><span id="eos::tp_rule_filter_t::dst_addrs_is__std::set:ip_addr_mask_t:CR"></span><span class="target" id="classeos_1_1tp__rule__filter__t_1a0579ead4ca6f60717e4a9ecac3a47e35"></span>void <code class="sig-name descname">dst_addrs_is</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::set&lt;<a class="reference internal" href="ip.html#_CPPv4N3eos14ip_addr_mask_tE" title="eos::ip_addr_mask_t">ip_addr_mask_t</a>&gt; <em class="property">const</em> &amp;<em>dst_addrs</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos16tp_rule_filter_t12dst_addrs_isERKNSt3setI14ip_addr_mask_tEE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos16tp_rule_filter_t22src_addr_field_set_setERKNSt6stringE">
+<span id="_CPPv3N3eos16tp_rule_filter_t22src_addr_field_set_setERKNSt6stringE"></span><span id="_CPPv2N3eos16tp_rule_filter_t22src_addr_field_set_setERKNSt6stringE"></span><span id="eos::tp_rule_filter_t::src_addr_field_set_set__ssCR"></span><span class="target" id="classeos_1_1tp__rule__filter__t_1a402a05f9ab245785ed43ea0d5fc90a33"></span>void <code class="sig-name descname">src_addr_field_set_set</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::string <em class="property">const</em> &amp;<em>value</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos16tp_rule_filter_t22src_addr_field_set_setERKNSt6stringE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos16tp_rule_filter_t22src_addr_field_set_delERKNSt6stringE">
+<span id="_CPPv3N3eos16tp_rule_filter_t22src_addr_field_set_delERKNSt6stringE"></span><span id="_CPPv2N3eos16tp_rule_filter_t22src_addr_field_set_delERKNSt6stringE"></span><span id="eos::tp_rule_filter_t::src_addr_field_set_del__ssCR"></span><span class="target" id="classeos_1_1tp__rule__filter__t_1a6fb07c904ffdd990a51266a6f05c176f"></span>void <code class="sig-name descname">src_addr_field_set_del</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::string <em class="property">const</em> &amp;<em>value</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos16tp_rule_filter_t22src_addr_field_set_delERKNSt6stringE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos16tp_rule_filter_t22src_addr_field_sets_isERKNSt13unordered_setINSt6stringEEE">
+<span id="_CPPv3N3eos16tp_rule_filter_t22src_addr_field_sets_isERKNSt13unordered_setINSt6stringEEE"></span><span id="_CPPv2N3eos16tp_rule_filter_t22src_addr_field_sets_isERKNSt13unordered_setINSt6stringEEE"></span><span id="eos::tp_rule_filter_t::src_addr_field_sets_is__std::unordered_set:ss:CR"></span><span class="target" id="classeos_1_1tp__rule__filter__t_1a03552cd3d3786a6808687049fc2ab19a"></span>void <code class="sig-name descname">src_addr_field_sets_is</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::unordered_set&lt;<a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::string&gt; <em class="property">const</em> &amp;<em>src_addr_field_sets</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos16tp_rule_filter_t22src_addr_field_sets_isERKNSt13unordered_setINSt6stringEEE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos16tp_rule_filter_t22dst_addr_field_set_setERKNSt6stringE">
+<span id="_CPPv3N3eos16tp_rule_filter_t22dst_addr_field_set_setERKNSt6stringE"></span><span id="_CPPv2N3eos16tp_rule_filter_t22dst_addr_field_set_setERKNSt6stringE"></span><span id="eos::tp_rule_filter_t::dst_addr_field_set_set__ssCR"></span><span class="target" id="classeos_1_1tp__rule__filter__t_1a5f48de3c2dfd6fb951a54f37a175cc80"></span>void <code class="sig-name descname">dst_addr_field_set_set</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::string <em class="property">const</em> &amp;<em>value</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos16tp_rule_filter_t22dst_addr_field_set_setERKNSt6stringE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos16tp_rule_filter_t22dst_addr_field_set_delERKNSt6stringE">
+<span id="_CPPv3N3eos16tp_rule_filter_t22dst_addr_field_set_delERKNSt6stringE"></span><span id="_CPPv2N3eos16tp_rule_filter_t22dst_addr_field_set_delERKNSt6stringE"></span><span id="eos::tp_rule_filter_t::dst_addr_field_set_del__ssCR"></span><span class="target" id="classeos_1_1tp__rule__filter__t_1a796b45b28fea87a7820a0d3a4d90329d"></span>void <code class="sig-name descname">dst_addr_field_set_del</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::string <em class="property">const</em> &amp;<em>value</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos16tp_rule_filter_t22dst_addr_field_set_delERKNSt6stringE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos16tp_rule_filter_t22dst_addr_field_sets_isERKNSt13unordered_setINSt6stringEEE">
+<span id="_CPPv3N3eos16tp_rule_filter_t22dst_addr_field_sets_isERKNSt13unordered_setINSt6stringEEE"></span><span id="_CPPv2N3eos16tp_rule_filter_t22dst_addr_field_sets_isERKNSt13unordered_setINSt6stringEEE"></span><span id="eos::tp_rule_filter_t::dst_addr_field_sets_is__std::unordered_set:ss:CR"></span><span class="target" id="classeos_1_1tp__rule__filter__t_1a0f424da1e649ba55e96e91d7d438f776"></span>void <code class="sig-name descname">dst_addr_field_sets_is</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::unordered_set&lt;<a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::string&gt; <em class="property">const</em> &amp;<em>dst_addr_field_sets</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos16tp_rule_filter_t22dst_addr_field_sets_isERKNSt13unordered_setINSt6stringEEE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos16tp_rule_filter_teqERK16tp_rule_filter_t">
+<span id="_CPPv3NK3eos16tp_rule_filter_teqERK16tp_rule_filter_t"></span><span id="_CPPv2NK3eos16tp_rule_filter_teqERK16tp_rule_filter_t"></span><span id="eos::tp_rule_filter_t::eq-operator__tp_rule_filter_tCRC"></span><span class="target" id="classeos_1_1tp__rule__filter__t_1a45427c37d041ca2f8afefdd9a729eb2b"></span>bool <code class="sig-name descname">operator==</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos16tp_rule_filter_tE" title="eos::tp_rule_filter_t">tp_rule_filter_t</a> <em class="property">const</em> &amp;<em>other</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos16tp_rule_filter_teqERK16tp_rule_filter_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos16tp_rule_filter_tneERK16tp_rule_filter_t">
+<span id="_CPPv3NK3eos16tp_rule_filter_tneERK16tp_rule_filter_t"></span><span id="_CPPv2NK3eos16tp_rule_filter_tneERK16tp_rule_filter_t"></span><span id="eos::tp_rule_filter_t::neq-operator__tp_rule_filter_tCRC"></span><span class="target" id="classeos_1_1tp__rule__filter__t_1a0fc7fda79afb6fbb25214bbb6a9dfe1d"></span>bool <code class="sig-name descname">operator!=</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos16tp_rule_filter_tE" title="eos::tp_rule_filter_t">tp_rule_filter_t</a> <em class="property">const</em> &amp;<em>other</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos16tp_rule_filter_tneERK16tp_rule_filter_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos16tp_rule_filter_tltERK16tp_rule_filter_t">
+<span id="_CPPv3NK3eos16tp_rule_filter_tltERK16tp_rule_filter_t"></span><span id="_CPPv2NK3eos16tp_rule_filter_tltERK16tp_rule_filter_t"></span><span id="eos::tp_rule_filter_t::lt-operator__tp_rule_filter_tCRC"></span><span class="target" id="classeos_1_1tp__rule__filter__t_1a00afb669a30be48bc34b3bd319143c8b"></span>bool <code class="sig-name descname">operator&lt;</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos16tp_rule_filter_tE" title="eos::tp_rule_filter_t">tp_rule_filter_t</a> <em class="property">const</em> &amp;<em>other</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos16tp_rule_filter_tltERK16tp_rule_filter_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos16tp_rule_filter_t4hashEv">
+<span id="_CPPv3NK3eos16tp_rule_filter_t4hashEv"></span><span id="_CPPv2NK3eos16tp_rule_filter_t4hashEv"></span><span id="eos::tp_rule_filter_t::hashC"></span><span class="target" id="classeos_1_1tp__rule__filter__t_1aef0e77869dae899eb2426dfedf349a91"></span>uint32_t <code class="sig-name descname">hash</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos16tp_rule_filter_t4hashEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>The hash function for type <a class="reference internal" href="#classeos_1_1tp__rule__filter__t"><span class="std std-ref">tp_rule_filter_t</span></a>. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos16tp_rule_filter_t6mix_meER8hash_mix">
+<span id="_CPPv3NK3eos16tp_rule_filter_t6mix_meER8hash_mix"></span><span id="_CPPv2NK3eos16tp_rule_filter_t6mix_meER8hash_mix"></span><span id="eos::tp_rule_filter_t::mix_me__hash_mixRC"></span><span class="target" id="classeos_1_1tp__rule__filter__t_1a951f96c59c459673f6ff9a72766e12ad"></span>void <code class="sig-name descname">mix_me</code><span class="sig-paren">(</span><a class="reference internal" href="hash_mix.html#_CPPv4N3eos8hash_mixE" title="eos::hash_mix">hash_mix</a> &amp;<em>h</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos16tp_rule_filter_t6mix_meER8hash_mix" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>The hash mix function for type <a class="reference internal" href="#classeos_1_1tp__rule__filter__t"><span class="std std-ref">tp_rule_filter_t</span></a>. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos16tp_rule_filter_t9to_stringEv">
+<span id="_CPPv3NK3eos16tp_rule_filter_t9to_stringEv"></span><span id="_CPPv2NK3eos16tp_rule_filter_t9to_stringEv"></span><span id="eos::tp_rule_filter_t::to_stringC"></span><span class="target" id="classeos_1_1tp__rule__filter__t_1a8e10f0315496ba6a1123565ff026a085"></span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::string <code class="sig-name descname">to_string</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos16tp_rule_filter_t9to_stringEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Returns a string representation of the current object’s values. </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Static Functions</p>
+<dl class="cpp function">
+<dt id="_CPPv4N3eos16tp_rule_filter_tnwENSt6size_tEPv">
+<span id="_CPPv3N3eos16tp_rule_filter_tnwENSt6size_tEPv"></span><span id="_CPPv2N3eos16tp_rule_filter_tnwENSt6size_tEPv"></span><span id="eos::tp_rule_filter_t::new-operator__std::s.voidP"></span><span class="target" id="classeos_1_1tp__rule__filter__t_1a639d76436230cb6e30c3f78a5bfb9164"></span><em class="property">static</em> <em class="property">inline</em> void *<code class="sig-name descname">operator new</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::size_t, void *<em>ptr</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos16tp_rule_filter_tnwENSt6size_tEPv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos16tp_rule_filter_tnwENSt6size_tE">
+<span id="_CPPv3N3eos16tp_rule_filter_tnwENSt6size_tE"></span><span id="_CPPv2N3eos16tp_rule_filter_tnwENSt6size_tE"></span><span id="eos::tp_rule_filter_t::new-operator__std::s"></span><span class="target" id="classeos_1_1tp__rule__filter__t_1aa05c663e65377f59ae865e115ec65599"></span><em class="property">static</em> void *<code class="sig-name descname">operator new</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::size_t<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos16tp_rule_filter_tnwENSt6size_tE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos16tp_rule_filter_tdlEPv">
+<span id="_CPPv3N3eos16tp_rule_filter_tdlEPv"></span><span id="_CPPv2N3eos16tp_rule_filter_tdlEPv"></span><span id="eos::tp_rule_filter_t::delete-operator__voidP"></span><span class="target" id="classeos_1_1tp__rule__filter__t_1ada1582c645ee544bd68bf0095d552d47"></span><em class="property">static</em> void <code class="sig-name descname">operator delete</code><span class="sig-paren">(</span>void*<span class="sig-paren">)</span> <em class="property">noexcept</em><a class="headerlink" href="#_CPPv4N3eos16tp_rule_filter_tdlEPv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Private Members</p>
+<dl class="cpp var">
+<dt id="_CPPv4N3eos16tp_rule_filter_t5pimplE">
+<span id="_CPPv3N3eos16tp_rule_filter_t5pimplE"></span><span id="_CPPv2N3eos16tp_rule_filter_t5pimplE"></span><span id="eos::tp_rule_filter_t::pimpl__std::shared_ptr:tp_rule_filter_impl_t:"></span><span class="target" id="classeos_1_1tp__rule__filter__t_1aed6f171421a964d9801f15b77df36171"></span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::shared_ptr&lt;tp_rule_filter_impl_t&gt; <code class="sig-name descname">pimpl</code><a class="headerlink" href="#_CPPv4N3eos16tp_rule_filter_t5pimplE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Friends</p>
+<dl class="cpp function">
+<dt id="_CPPv4N3eos16tp_rule_filter_tlsERNSt7ostreamERK16tp_rule_filter_t">
+<span id="_CPPv3N3eos16tp_rule_filter_tlsERNSt7ostreamERK16tp_rule_filter_t"></span><span id="_CPPv2N3eos16tp_rule_filter_tlsERNSt7ostreamERK16tp_rule_filter_t"></span><span id="eos::tp_rule_filter_t::lshift-operator__osR.tp_rule_filter_tCR"></span><span class="target" id="classeos_1_1tp__rule__filter__t_1a392f93e5b8470ea31bb2a0147c559ce2"></span><em class="property">friend</em> <a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::ostream &amp;<code class="sig-name descname">operator&lt;&lt;</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::ostream &amp;<em>os</em>, <em class="property">const</em> <a class="reference internal" href="#_CPPv4N3eos16tp_rule_filter_tE" title="eos::tp_rule_filter_t">tp_rule_filter_t</a> &amp;<em>obj</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos16tp_rule_filter_tlsERNSt7ostreamERK16tp_rule_filter_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>A utility stream operator that adds a string representation of <a class="reference internal" href="#classeos_1_1tp__rule__filter__t"><span class="std std-ref">tp_rule_filter_t</span></a> to the ostream. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#"><strong>structured_filter</strong></a><ul>
+<li><a class="reference internal" href="#type-definitions-in-structured-filter">Type definitions in <strong>structured_filter</strong></a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="sdk.html"
+                        title="previous chapter"><strong>sdk</strong></a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="subintf.html"
+                        title="next chapter"><strong>subintf</strong></a></p>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="subintf.html" title="subintf"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="sdk.html" title="sdk"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Arista EOS SDK 2.23.1 reference</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href=""><strong>structured_filter</strong></a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2014, Arista Networks.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.4.3.
+    </div>
+  </body>
+</html>
