@@ -1,0 +1,554 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>neighbor_table &#8212; Arista EOS SDK 2.23.2 reference</title>
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/eossdk.css" type="text/css" />
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="nexthop_group" href="nexthop_group.html" />
+    <link rel="prev" title="mpls_vrf_label" href="mpls_vrf_label.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="nexthop_group.html" title="nexthop_group"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="mpls_vrf_label.html" title="mpls_vrf_label"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Arista EOS SDK 2.23.2 reference</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href=""><strong>neighbor_table</strong></a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="neighbor-table">
+<h1><strong>neighbor_table</strong><a class="headerlink" href="#neighbor-table" title="Permalink to this headline">¶</a></h1>
+<p>The neighbor_table module manages IP/MAC mapping tables, including IPv4 ARP table and IPv6 neighbor table.</p>
+<p>This module provides APIs to create and delete static IPv4/IPv6 entries. It also provides APIs to query the configured static entries and the learned (both static/dynamic) entries on the system from IPv4 ARP table and IPv6 neighbor table.</p>
+<p>Two handler APIs are provided to allow 3rd party agents to react to the addition and deletion of entries in the learned ARP table or neighbor table on the system. </p>
+<dl class="cpp type">
+<dt id="_CPPv43eos">
+<span id="_CPPv33eos"></span><span id="_CPPv23eos"></span><span id="eos"></span><span class="target" id="namespaceeos"></span><em class="property">namespace </em><code class="sig-name descname">eos</code><br /></dt>
+<dd><dl class="cpp class">
+<dt id="_CPPv4N3eos22neighbor_table_handlerE">
+<span id="_CPPv3N3eos22neighbor_table_handlerE"></span><span id="_CPPv2N3eos22neighbor_table_handlerE"></span><span id="eos::neighbor_table_handler"></span><span class="target" id="classeos_1_1neighbor__table__handler"></span><em class="property">class </em><code class="sig-name descname">neighbor_table_handler</code> : <em class="property">public</em> <a class="reference internal" href="acl.html#_CPPv43eos" title="eos">eos</a>::<a class="reference internal" href="base_handler.html#_CPPv4I00EN3eos12base_handlerE" title="eos::base_handler">base_handler</a>&lt;<a class="reference internal" href="#_CPPv4N3eos18neighbor_table_mgrE" title="eos::neighbor_table_mgr">neighbor_table_mgr</a>, <a class="reference internal" href="#_CPPv4N3eos22neighbor_table_handlerE" title="eos::neighbor_table_handler">neighbor_table_handler</a>&gt;<a class="headerlink" href="#_CPPv4N3eos22neighbor_table_handlerE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><em>#include &lt;neighbor_table.h&gt;</em><p>The neighbor table handler.</p>
+<p>This class provides handler APIs to react to neighbor table entry deletion and addition. It works for both the IPv4 ARP table and IPv6 neighbor table. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="cpp function">
+<dt id="_CPPv4N3eos22neighbor_table_handler22neighbor_table_handlerEP18neighbor_table_mgr">
+<span id="_CPPv3N3eos22neighbor_table_handler22neighbor_table_handlerEP18neighbor_table_mgr"></span><span id="_CPPv2N3eos22neighbor_table_handler22neighbor_table_handlerEP18neighbor_table_mgr"></span><span id="eos::neighbor_table_handler::neighbor_table_handler__neighbor_table_mgrP"></span><span class="target" id="classeos_1_1neighbor__table__handler_1a569db262bc0cdebe534c739773647169"></span><em class="property">explicit</em> <code class="sig-name descname">neighbor_table_handler</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos18neighbor_table_mgrE" title="eos::neighbor_table_mgr">neighbor_table_mgr</a> *<em>mgr</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos22neighbor_table_handler22neighbor_table_handlerEP18neighbor_table_mgr" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos22neighbor_table_handler22get_neighbor_table_mgrEv">
+<span id="_CPPv3NK3eos22neighbor_table_handler22get_neighbor_table_mgrEv"></span><span id="_CPPv2NK3eos22neighbor_table_handler22get_neighbor_table_mgrEv"></span><span id="eos::neighbor_table_handler::get_neighbor_table_mgrC"></span><span class="target" id="classeos_1_1neighbor__table__handler_1a685bd6ac7e89210a908688d5cfe0467e"></span><em class="property">inline</em> <a class="reference internal" href="#_CPPv4N3eos18neighbor_table_mgrE" title="eos::neighbor_table_mgr">neighbor_table_mgr</a> *<code class="sig-name descname">get_neighbor_table_mgr</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos22neighbor_table_handler22get_neighbor_table_mgrEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos22neighbor_table_handler26watch_all_neighbor_entriesEb">
+<span id="_CPPv3N3eos22neighbor_table_handler26watch_all_neighbor_entriesEb"></span><span id="_CPPv2N3eos22neighbor_table_handler26watch_all_neighbor_entriesEb"></span><span id="eos::neighbor_table_handler::watch_all_neighbor_entries__b"></span><span class="target" id="classeos_1_1neighbor__table__handler_1a1b372991fa41c0e3b468b0bba7faf587"></span>void <code class="sig-name descname">watch_all_neighbor_entries</code><span class="sig-paren">(</span>bool <em>interest</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos22neighbor_table_handler26watch_all_neighbor_entriesEb" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Registers this class to receive change updates on all neighbor entries. This includes both IPv4 ARP table entries and IPv6 Neighbor Discovery table entries. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos22neighbor_table_handler20watch_neighbor_entryERK14neighbor_key_tb">
+<span id="_CPPv3N3eos22neighbor_table_handler20watch_neighbor_entryERK14neighbor_key_tb"></span><span id="_CPPv2N3eos22neighbor_table_handler20watch_neighbor_entryERK14neighbor_key_tb"></span><span id="eos::neighbor_table_handler::watch_neighbor_entry__neighbor_key_tCR.b"></span><span class="target" id="classeos_1_1neighbor__table__handler_1adc3c130fba6b8afb25b1666a73a0a462"></span>void <code class="sig-name descname">watch_neighbor_entry</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos14neighbor_key_tE" title="eos::neighbor_key_t">neighbor_key_t</a> <em class="property">const</em> &amp;<em>key</em>, bool <em>interest</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos22neighbor_table_handler20watch_neighbor_entryERK14neighbor_key_tb" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Registers this class to receive change updates on a given neighbor entry. This includes both IPv4 ARP table entries and IPv6 Neighbor Discovery table entries. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos22neighbor_table_handler21on_neighbor_entry_setERK16neighbor_entry_t">
+<span id="_CPPv3N3eos22neighbor_table_handler21on_neighbor_entry_setERK16neighbor_entry_t"></span><span id="_CPPv2N3eos22neighbor_table_handler21on_neighbor_entry_setERK16neighbor_entry_t"></span><span id="eos::neighbor_table_handler::on_neighbor_entry_set__neighbor_entry_tCR"></span><span class="target" id="classeos_1_1neighbor__table__handler_1ac9ff6c17c8a8a3ce7ea895203d59c6bb"></span><em class="property">virtual</em> void <code class="sig-name descname">on_neighbor_entry_set</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos16neighbor_entry_tE" title="eos::neighbor_entry_t">neighbor_entry_t</a> <em class="property">const</em> &amp;<em>entry</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos22neighbor_table_handler21on_neighbor_entry_setERK16neighbor_entry_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos22neighbor_table_handler21on_neighbor_entry_delERK14neighbor_key_t">
+<span id="_CPPv3N3eos22neighbor_table_handler21on_neighbor_entry_delERK14neighbor_key_t"></span><span id="_CPPv2N3eos22neighbor_table_handler21on_neighbor_entry_delERK14neighbor_key_t"></span><span id="eos::neighbor_table_handler::on_neighbor_entry_del__neighbor_key_tCR"></span><span class="target" id="classeos_1_1neighbor__table__handler_1ab37803ea3cdf6ebad15d10ce15b61d06"></span><em class="property">virtual</em> void <code class="sig-name descname">on_neighbor_entry_del</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos14neighbor_key_tE" title="eos::neighbor_key_t">neighbor_key_t</a> <em class="property">const</em> &amp;<em>key</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos22neighbor_table_handler21on_neighbor_entry_delERK14neighbor_key_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="cpp class">
+<dt id="_CPPv4N3eos21neighbor_table_iter_tE">
+<span id="_CPPv3N3eos21neighbor_table_iter_tE"></span><span id="_CPPv2N3eos21neighbor_table_iter_tE"></span><span id="eos::neighbor_table_iter_t"></span><span class="target" id="classeos_1_1neighbor__table__iter__t"></span><em class="property">class </em><code class="sig-name descname">neighbor_table_iter_t</code> : <em class="property">public</em> <a class="reference internal" href="acl.html#_CPPv43eos" title="eos">eos</a>::<a class="reference internal" href="iterator.html#_CPPv4I00EN3eos9iter_baseE" title="eos::iter_base">iter_base</a>&lt;<a class="reference internal" href="#_CPPv4N3eos14neighbor_key_tE" title="eos::neighbor_key_t">neighbor_key_t</a>, neighbor_table_iter_impl&gt;<a class="headerlink" href="#_CPPv4N3eos21neighbor_table_iter_tE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><em>#include &lt;neighbor_table.h&gt;</em><p>An iterator over the configured ARP and Neighbor Discovery tables. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Private Functions</p>
+<dl class="cpp function">
+<dt id="_CPPv4N3eos21neighbor_table_iter_t21neighbor_table_iter_tEPC24neighbor_table_iter_impl">
+<span id="_CPPv3N3eos21neighbor_table_iter_t21neighbor_table_iter_tEPC24neighbor_table_iter_impl"></span><span id="_CPPv2N3eos21neighbor_table_iter_t21neighbor_table_iter_tEPC24neighbor_table_iter_impl"></span><span id="eos::neighbor_table_iter_t::neighbor_table_iter_t__neighbor_table_iter_implPC"></span><span class="target" id="classeos_1_1neighbor__table__iter__t_1a0ff73b133a2f0658f8aaa5aaf4df1eb2"></span><em class="property">explicit</em> <code class="sig-name descname">neighbor_table_iter_t</code><span class="sig-paren">(</span>neighbor_table_iter_impl*<em class="property">const</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos21neighbor_table_iter_t21neighbor_table_iter_tEPC24neighbor_table_iter_impl" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Friends</p>
+<dl class="friendclass">
+<dt>
+<em class="property">friend class</em> neighbor_table_iter_impl</dt>
+</dl>
+
+</div>
+</dd></dl>
+
+<dl class="cpp class">
+<dt id="_CPPv4N3eos28neighbor_table_status_iter_tE">
+<span id="_CPPv3N3eos28neighbor_table_status_iter_tE"></span><span id="_CPPv2N3eos28neighbor_table_status_iter_tE"></span><span id="eos::neighbor_table_status_iter_t"></span><span class="target" id="classeos_1_1neighbor__table__status__iter__t"></span><em class="property">class </em><code class="sig-name descname">neighbor_table_status_iter_t</code> : <em class="property">public</em> <a class="reference internal" href="acl.html#_CPPv43eos" title="eos">eos</a>::<a class="reference internal" href="iterator.html#_CPPv4I00EN3eos9iter_baseE" title="eos::iter_base">iter_base</a>&lt;<a class="reference internal" href="#_CPPv4N3eos14neighbor_key_tE" title="eos::neighbor_key_t">neighbor_key_t</a>, neighbor_table_status_iter_impl&gt;<a class="headerlink" href="#_CPPv4N3eos28neighbor_table_status_iter_tE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><em>#include &lt;neighbor_table.h&gt;</em><p>An iterator over the resolved ARP and Neighbor Discovery tables. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Private Functions</p>
+<dl class="cpp function">
+<dt id="_CPPv4N3eos28neighbor_table_status_iter_t28neighbor_table_status_iter_tEPC31neighbor_table_status_iter_impl">
+<span id="_CPPv3N3eos28neighbor_table_status_iter_t28neighbor_table_status_iter_tEPC31neighbor_table_status_iter_impl"></span><span id="_CPPv2N3eos28neighbor_table_status_iter_t28neighbor_table_status_iter_tEPC31neighbor_table_status_iter_impl"></span><span id="eos::neighbor_table_status_iter_t::neighbor_table_status_iter_t__neighbor_table_status_iter_implPC"></span><span class="target" id="classeos_1_1neighbor__table__status__iter__t_1ac04b0cd6e81c9c3cf112c4b4f754de8e"></span><em class="property">explicit</em> <code class="sig-name descname">neighbor_table_status_iter_t</code><span class="sig-paren">(</span>neighbor_table_status_iter_impl*<em class="property">const</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos28neighbor_table_status_iter_t28neighbor_table_status_iter_tEPC31neighbor_table_status_iter_impl" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Friends</p>
+<dl class="friendclass">
+<dt>
+<em class="property">friend class</em> neighbor_table_status_iter_impl</dt>
+</dl>
+
+</div>
+</dd></dl>
+
+<dl class="cpp class">
+<dt id="_CPPv4N3eos18neighbor_table_mgrE">
+<span id="_CPPv3N3eos18neighbor_table_mgrE"></span><span id="_CPPv2N3eos18neighbor_table_mgrE"></span><span id="eos::neighbor_table_mgr"></span><span class="target" id="classeos_1_1neighbor__table__mgr"></span><em class="property">class </em><code class="sig-name descname">neighbor_table_mgr</code> : <em class="property">public</em> <a class="reference internal" href="acl.html#_CPPv43eos" title="eos">eos</a>::<a class="reference internal" href="base_mgr.html#_CPPv4I00EN3eos8base_mgrE" title="eos::base_mgr">base_mgr</a>&lt;<a class="reference internal" href="#_CPPv4N3eos22neighbor_table_handlerE" title="eos::neighbor_table_handler">neighbor_table_handler</a>, <a class="reference internal" href="#_CPPv4N3eos14neighbor_key_tE" title="eos::neighbor_key_t">neighbor_key_t</a>&gt;<a class="headerlink" href="#_CPPv4N3eos18neighbor_table_mgrE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><em>#include &lt;neighbor_table.h&gt;</em><p>The neighbor table manager.</p>
+<p>This class provides access to the resolved MAC address for a given IP address off of an L3 interface (aka the ARP table for IPv4 addresses and the Neighbor Discovery table for IPv6 addresses). It also provides APIs to delete/add v4 static ARP entry and v6 static neighbor table entries. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="cpp function">
+<dt id="_CPPv4N3eos18neighbor_table_mgrD0Ev">
+<span id="_CPPv3N3eos18neighbor_table_mgrD0Ev"></span><span id="_CPPv2N3eos18neighbor_table_mgrD0Ev"></span><span id="eos::neighbor_table_mgr::~neighbor_table_mgr"></span><span class="target" id="classeos_1_1neighbor__table__mgr_1aca308436bc2235cd0c6a75c81b3282da"></span><em class="property">virtual</em> <code class="sig-name descname">~neighbor_table_mgr</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos18neighbor_table_mgrD0Ev" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos18neighbor_table_mgr19neighbor_table_iterEv">
+<span id="_CPPv3NK3eos18neighbor_table_mgr19neighbor_table_iterEv"></span><span id="_CPPv2NK3eos18neighbor_table_mgr19neighbor_table_iterEv"></span><span id="eos::neighbor_table_mgr::neighbor_table_iterC"></span><span class="target" id="classeos_1_1neighbor__table__mgr_1a9cfcd224e08a5bd7b45605c373ed1abf"></span><em class="property">virtual</em> <a class="reference internal" href="#_CPPv4N3eos21neighbor_table_iter_tE" title="eos::neighbor_table_iter_t">neighbor_table_iter_t</a> <code class="sig-name descname">neighbor_table_iter</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em> = 0<a class="headerlink" href="#_CPPv4NK3eos18neighbor_table_mgr19neighbor_table_iterEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Iterates through the statically configured ARP and Neighbor Discovery tables. A <a class="reference internal" href="#classeos_1_1neighbor__key__t"><span class="std std-ref">neighbor_key_t</span></a> is returned for each entry. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos18neighbor_table_mgr26neighbor_table_status_iterEv">
+<span id="_CPPv3NK3eos18neighbor_table_mgr26neighbor_table_status_iterEv"></span><span id="_CPPv2NK3eos18neighbor_table_mgr26neighbor_table_status_iterEv"></span><span id="eos::neighbor_table_mgr::neighbor_table_status_iterC"></span><span class="target" id="classeos_1_1neighbor__table__mgr_1a9fd965c3d0090882c094ce55122fceb7"></span><em class="property">virtual</em> <a class="reference internal" href="#_CPPv4N3eos28neighbor_table_status_iter_tE" title="eos::neighbor_table_status_iter_t">neighbor_table_status_iter_t</a> <code class="sig-name descname">neighbor_table_status_iter</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em> = 0<a class="headerlink" href="#_CPPv4NK3eos18neighbor_table_mgr26neighbor_table_status_iterEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Iterates through the resolved ARP and Neighbor Discovery tables. A <a class="reference internal" href="#classeos_1_1neighbor__key__t"><span class="std std-ref">neighbor_key_t</span></a> is returned for each entry. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos18neighbor_table_mgr21neighbor_entry_statusERK14neighbor_key_t">
+<span id="_CPPv3NK3eos18neighbor_table_mgr21neighbor_entry_statusERK14neighbor_key_t"></span><span id="_CPPv2NK3eos18neighbor_table_mgr21neighbor_entry_statusERK14neighbor_key_t"></span><span id="eos::neighbor_table_mgr::neighbor_entry_status__neighbor_key_tCRC"></span><span class="target" id="classeos_1_1neighbor__table__mgr_1adf64306229a7635cb718500ed57fcaa7"></span><em class="property">virtual</em> <a class="reference internal" href="#_CPPv4N3eos16neighbor_entry_tE" title="eos::neighbor_entry_t">neighbor_entry_t</a> <code class="sig-name descname">neighbor_entry_status</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos14neighbor_key_tE" title="eos::neighbor_key_t">neighbor_key_t</a> <em class="property">const</em> &amp;<em>key</em><span class="sig-paren">)</span> <em class="property">const</em> = 0<a class="headerlink" href="#_CPPv4NK3eos18neighbor_table_mgr21neighbor_entry_statusERK14neighbor_key_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Looks up a resolved neighbor entry for a given L3 interface and IP address. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos18neighbor_table_mgr18neighbor_entry_setERK16neighbor_entry_t">
+<span id="_CPPv3N3eos18neighbor_table_mgr18neighbor_entry_setERK16neighbor_entry_t"></span><span id="_CPPv2N3eos18neighbor_table_mgr18neighbor_entry_setERK16neighbor_entry_t"></span><span id="eos::neighbor_table_mgr::neighbor_entry_set__neighbor_entry_tCR"></span><span class="target" id="classeos_1_1neighbor__table__mgr_1a70d17dcf4fd888843ec8e80d6116f330"></span><em class="property">virtual</em> void <code class="sig-name descname">neighbor_entry_set</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos16neighbor_entry_tE" title="eos::neighbor_entry_t">neighbor_entry_t</a> <em class="property">const</em> &amp;<em>entry</em><span class="sig-paren">)</span> = 0<a class="headerlink" href="#_CPPv4N3eos18neighbor_table_mgr18neighbor_entry_setERK16neighbor_entry_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Configures a new static entry in either ARP table for IPv4 or Neighbor table for IPv6. Note “intf_id” is needed only for v6 case, since the IP/MAC pair may not be unique. It’s not needed for v4 case. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos18neighbor_table_mgr18neighbor_entry_delERK14neighbor_key_t">
+<span id="_CPPv3N3eos18neighbor_table_mgr18neighbor_entry_delERK14neighbor_key_t"></span><span id="_CPPv2N3eos18neighbor_table_mgr18neighbor_entry_delERK14neighbor_key_t"></span><span id="eos::neighbor_table_mgr::neighbor_entry_del__neighbor_key_tCR"></span><span class="target" id="classeos_1_1neighbor__table__mgr_1a0cdcbe078356d601a070bedcb445ae74"></span><em class="property">virtual</em> void <code class="sig-name descname">neighbor_entry_del</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos14neighbor_key_tE" title="eos::neighbor_key_t">neighbor_key_t</a> <em class="property">const</em> &amp;<em>key</em><span class="sig-paren">)</span> = 0<a class="headerlink" href="#_CPPv4N3eos18neighbor_table_mgr18neighbor_entry_delERK14neighbor_key_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Deletes a static entry in either ARP table (IPv4) or Neighbor table for IPv6. Note “intf_id” is needed only for v6 case, since the IP/MAC pair may not be unique. It’s not needed for v4 case. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos18neighbor_table_mgr14neighbor_entryERK14neighbor_key_t">
+<span id="_CPPv3NK3eos18neighbor_table_mgr14neighbor_entryERK14neighbor_key_t"></span><span id="_CPPv2NK3eos18neighbor_table_mgr14neighbor_entryERK14neighbor_key_t"></span><span id="eos::neighbor_table_mgr::neighbor_entry__neighbor_key_tCRC"></span><span class="target" id="classeos_1_1neighbor__table__mgr_1a14e18abaa9f4ac47fc7d37fd332e3937"></span><em class="property">virtual</em> <a class="reference internal" href="#_CPPv4N3eos16neighbor_entry_tE" title="eos::neighbor_entry_t">neighbor_entry_t</a> <code class="sig-name descname">neighbor_entry</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos14neighbor_key_tE" title="eos::neighbor_key_t">neighbor_key_t</a> <em class="property">const</em> &amp;<em>key</em><span class="sig-paren">)</span> <em class="property">const</em> = 0<a class="headerlink" href="#_CPPv4NK3eos18neighbor_table_mgr14neighbor_entryERK14neighbor_key_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Looks up a configured neighbor entry for a given L3 interface and IP address. </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Protected Functions</p>
+<dl class="cpp function">
+<dt id="_CPPv4N3eos18neighbor_table_mgr18neighbor_table_mgrEv">
+<span id="_CPPv3N3eos18neighbor_table_mgr18neighbor_table_mgrEv"></span><span id="_CPPv2N3eos18neighbor_table_mgr18neighbor_table_mgrEv"></span><span id="eos::neighbor_table_mgr::neighbor_table_mgr"></span><span class="target" id="classeos_1_1neighbor__table__mgr_1a6ea34037e5219e64281e7ba83152bd82"></span><code class="sig-name descname">neighbor_table_mgr</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos18neighbor_table_mgr18neighbor_table_mgrEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Private Members</p>
+<dl class="cpp var">
+<dt>
+<span class="target" id="classeos_1_1neighbor__table__mgr_1ad777a099142dab6cacee2a2d1169ee0e"></span><code class="sig-name descname">neighbor_table_mgr</code></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Friends</p>
+<dl class="friendclass">
+<dt>
+<em class="property">friend class</em> neighbor_table_handler</dt>
+</dl>
+
+</div>
+</dd></dl>
+
+</dd></dl>
+
+<div class="section" id="type-definitions-in-neighbor-table">
+<h2>Type definitions in <strong>neighbor_table</strong><a class="headerlink" href="#type-definitions-in-neighbor-table" title="Permalink to this headline">¶</a></h2>
+<dl class="cpp type">
+<dt>
+<span class="target" id="namespaceeos"></span><em class="property">namespace </em><code class="sig-name descname">eos</code><br /></dt>
+<dd><div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Enums</p>
+<dl class="cpp enum">
+<dt id="_CPPv4N3eos21neighbor_entry_type_tE">
+<span id="_CPPv3N3eos21neighbor_entry_type_tE"></span><span id="_CPPv2N3eos21neighbor_entry_type_tE"></span><span class="target" id="types_2neighbor__table_8h_1a4ac071df32b979cd14974d6aebfed5a5"></span><em class="property">enum </em><code class="sig-name descname">neighbor_entry_type_t</code><a class="headerlink" href="#_CPPv4N3eos21neighbor_entry_type_tE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Neighbor entry types. </p>
+<p><em>Values:</em></p>
+<dl class="cpp enumerator">
+<dt id="_CPPv4N3eos21neighbor_entry_type_t24NEIGHBOR_ENTRY_TYPE_NULLE">
+<span id="_CPPv3N3eos21neighbor_entry_type_t24NEIGHBOR_ENTRY_TYPE_NULLE"></span><span id="_CPPv2N3eos21neighbor_entry_type_t24NEIGHBOR_ENTRY_TYPE_NULLE"></span><span class="target" id="types_2neighbor__table_8h_1a4ac071df32b979cd14974d6aebfed5a5a1f972eb0972f7126b2b4cc03bf005b5d"></span><em class="property">enumerator </em><code class="sig-name descname">NEIGHBOR_ENTRY_TYPE_NULL</code><a class="headerlink" href="#_CPPv4N3eos21neighbor_entry_type_t24NEIGHBOR_ENTRY_TYPE_NULLE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt id="_CPPv4N3eos21neighbor_entry_type_t27NEIGHBOR_ENTRY_TYPE_DYNAMICE">
+<span id="_CPPv3N3eos21neighbor_entry_type_t27NEIGHBOR_ENTRY_TYPE_DYNAMICE"></span><span id="_CPPv2N3eos21neighbor_entry_type_t27NEIGHBOR_ENTRY_TYPE_DYNAMICE"></span><span class="target" id="types_2neighbor__table_8h_1a4ac071df32b979cd14974d6aebfed5a5a44adbcc9aa7d1f34738370ff7689f8d1"></span><em class="property">enumerator </em><code class="sig-name descname">NEIGHBOR_ENTRY_TYPE_DYNAMIC</code><a class="headerlink" href="#_CPPv4N3eos21neighbor_entry_type_t27NEIGHBOR_ENTRY_TYPE_DYNAMICE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt id="_CPPv4N3eos21neighbor_entry_type_t26NEIGHBOR_ENTRY_TYPE_STATICE">
+<span id="_CPPv3N3eos21neighbor_entry_type_t26NEIGHBOR_ENTRY_TYPE_STATICE"></span><span id="_CPPv2N3eos21neighbor_entry_type_t26NEIGHBOR_ENTRY_TYPE_STATICE"></span><span class="target" id="types_2neighbor__table_8h_1a4ac071df32b979cd14974d6aebfed5a5aeace13e077766f93fd1a92fbd22991ac"></span><em class="property">enumerator </em><code class="sig-name descname">NEIGHBOR_ENTRY_TYPE_STATIC</code><a class="headerlink" href="#_CPPv4N3eos21neighbor_entry_type_t26NEIGHBOR_ENTRY_TYPE_STATICE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<dl class="cpp class">
+<dt id="_CPPv4N3eos14neighbor_key_tE">
+<span id="_CPPv3N3eos14neighbor_key_tE"></span><span id="_CPPv2N3eos14neighbor_key_tE"></span><span id="eos::neighbor_key_t"></span><span class="target" id="classeos_1_1neighbor__key__t"></span><em class="property">class </em><code class="sig-name descname">neighbor_key_t</code><a class="headerlink" href="#_CPPv4N3eos14neighbor_key_tE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><em>#include &lt;neighbor_table.h&gt;</em><p>The neighbor entry key class. Maps an IP address to its associated MAC address on a specific interface. Note: the “intf_id” attribute is only relevant for IPv6 neighbors. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="cpp function">
+<dt id="_CPPv4N3eos14neighbor_key_t14neighbor_key_tEv">
+<span id="_CPPv3N3eos14neighbor_key_t14neighbor_key_tEv"></span><span id="_CPPv2N3eos14neighbor_key_t14neighbor_key_tEv"></span><span id="eos::neighbor_key_t::neighbor_key_t"></span><span class="target" id="classeos_1_1neighbor__key__t_1a196cbb5bdaa8dcb0853d7cb28c16b914"></span><code class="sig-name descname">neighbor_key_t</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos14neighbor_key_t14neighbor_key_tEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos14neighbor_key_t14neighbor_key_tERK9ip_addr_t">
+<span id="_CPPv3N3eos14neighbor_key_t14neighbor_key_tERK9ip_addr_t"></span><span id="_CPPv2N3eos14neighbor_key_t14neighbor_key_tERK9ip_addr_t"></span><span id="eos::neighbor_key_t::neighbor_key_t__ip_addr_tCR"></span><span class="target" id="classeos_1_1neighbor__key__t_1a64fc00b85934a485c4028b585d4b9919"></span><em class="property">explicit</em> <code class="sig-name descname">neighbor_key_t</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#_CPPv4N3eos9ip_addr_tE" title="eos::ip_addr_t">ip_addr_t</a> <em class="property">const</em> &amp;<em>ip_addr</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos14neighbor_key_t14neighbor_key_tERK9ip_addr_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos14neighbor_key_t14neighbor_key_tERK9ip_addr_t9intf_id_t">
+<span id="_CPPv3N3eos14neighbor_key_t14neighbor_key_tERK9ip_addr_t9intf_id_t"></span><span id="_CPPv2N3eos14neighbor_key_t14neighbor_key_tERK9ip_addr_t9intf_id_t"></span><span id="eos::neighbor_key_t::neighbor_key_t__ip_addr_tCR.intf_id_t"></span><span class="target" id="classeos_1_1neighbor__key__t_1a837c60cfe3d8f7e90d090e51328ee3f5"></span><code class="sig-name descname">neighbor_key_t</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#_CPPv4N3eos9ip_addr_tE" title="eos::ip_addr_t">ip_addr_t</a> <em class="property">const</em> &amp;<em>ip_addr</em>, <a class="reference internal" href="intf.html#_CPPv4N3eos9intf_id_tE" title="eos::intf_id_t">intf_id_t</a> <em>intf_id</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos14neighbor_key_t14neighbor_key_tERK9ip_addr_t9intf_id_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>IPv6 neighbor keys include an interface ID. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos14neighbor_key_t14neighbor_key_tERK14neighbor_key_t">
+<span id="_CPPv3N3eos14neighbor_key_t14neighbor_key_tERK14neighbor_key_t"></span><span id="_CPPv2N3eos14neighbor_key_t14neighbor_key_tERK14neighbor_key_t"></span><span id="eos::neighbor_key_t::neighbor_key_t__neighbor_key_tCR"></span><span class="target" id="classeos_1_1neighbor__key__t_1a797726984ebbf741981309a3eb03840c"></span><code class="sig-name descname">neighbor_key_t</code><span class="sig-paren">(</span><em class="property">const</em> <a class="reference internal" href="#_CPPv4N3eos14neighbor_key_t14neighbor_key_tERK14neighbor_key_t" title="eos::neighbor_key_t::neighbor_key_t">neighbor_key_t</a> &amp;<em>other</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos14neighbor_key_t14neighbor_key_tERK14neighbor_key_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos14neighbor_key_taSERK14neighbor_key_t">
+<span id="_CPPv3N3eos14neighbor_key_taSERK14neighbor_key_t"></span><span id="_CPPv2N3eos14neighbor_key_taSERK14neighbor_key_t"></span><span id="eos::neighbor_key_t::assign-operator__neighbor_key_tCR"></span><span class="target" id="classeos_1_1neighbor__key__t_1ae0a04975fd22589ac08cb04fef0845c0"></span><a class="reference internal" href="#_CPPv4N3eos14neighbor_key_tE" title="eos::neighbor_key_t">neighbor_key_t</a> &amp;<code class="sig-name descname">operator=</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos14neighbor_key_tE" title="eos::neighbor_key_t">neighbor_key_t</a> <em class="property">const</em> &amp;<em>other</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos14neighbor_key_taSERK14neighbor_key_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos14neighbor_key_t14neighbor_key_tERR14neighbor_key_t">
+<span id="_CPPv3N3eos14neighbor_key_t14neighbor_key_tERR14neighbor_key_t"></span><span id="_CPPv2N3eos14neighbor_key_t14neighbor_key_tERR14neighbor_key_t"></span><span id="eos::neighbor_key_t::neighbor_key_t__neighbor_key_tRR"></span><span class="target" id="classeos_1_1neighbor__key__t_1a6a7f3f80fbaddd50bf51b3f9c60dad8f"></span><code class="sig-name descname">neighbor_key_t</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos14neighbor_key_t14neighbor_key_tERR14neighbor_key_t" title="eos::neighbor_key_t::neighbor_key_t">neighbor_key_t</a> &amp;&amp;<em>other</em><span class="sig-paren">)</span> <em class="property">noexcept</em><a class="headerlink" href="#_CPPv4N3eos14neighbor_key_t14neighbor_key_tERR14neighbor_key_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos14neighbor_key_taSERR14neighbor_key_t">
+<span id="_CPPv3N3eos14neighbor_key_taSERR14neighbor_key_t"></span><span id="_CPPv2N3eos14neighbor_key_taSERR14neighbor_key_t"></span><span id="eos::neighbor_key_t::assign-operator__neighbor_key_tRR"></span><span class="target" id="classeos_1_1neighbor__key__t_1afd15a0ecf1a9c20b5bbfc7defdba561a"></span><a class="reference internal" href="#_CPPv4N3eos14neighbor_key_tE" title="eos::neighbor_key_t">neighbor_key_t</a> &amp;<code class="sig-name descname">operator=</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos14neighbor_key_tE" title="eos::neighbor_key_t">neighbor_key_t</a> &amp;&amp;<em>other</em><span class="sig-paren">)</span> <em class="property">noexcept</em><a class="headerlink" href="#_CPPv4N3eos14neighbor_key_taSERR14neighbor_key_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos14neighbor_key_t7ip_addrEv">
+<span id="_CPPv3NK3eos14neighbor_key_t7ip_addrEv"></span><span id="_CPPv2NK3eos14neighbor_key_t7ip_addrEv"></span><span id="eos::neighbor_key_t::ip_addrC"></span><span class="target" id="classeos_1_1neighbor__key__t_1aacc0fb8e5a7f4fe5719ac6b4360fa075"></span><a class="reference internal" href="ip.html#_CPPv4N3eos9ip_addr_tE" title="eos::ip_addr_t">ip_addr_t</a> <code class="sig-name descname">ip_addr</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos14neighbor_key_t7ip_addrEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Getter for ‘ip_addr’: the ip address of the neighbor entry. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos14neighbor_key_t7intf_idEv">
+<span id="_CPPv3NK3eos14neighbor_key_t7intf_idEv"></span><span id="_CPPv2NK3eos14neighbor_key_t7intf_idEv"></span><span id="eos::neighbor_key_t::intf_idC"></span><span class="target" id="classeos_1_1neighbor__key__t_1ac8a24dd7f18d34ece0e7e185ff3ecec9"></span><a class="reference internal" href="intf.html#_CPPv4N3eos9intf_id_tE" title="eos::intf_id_t">intf_id_t</a> <code class="sig-name descname">intf_id</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos14neighbor_key_t7intf_idEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Getter for ‘intf_id’: the interface of the neighbor entry. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos14neighbor_key_teqERK14neighbor_key_t">
+<span id="_CPPv3NK3eos14neighbor_key_teqERK14neighbor_key_t"></span><span id="_CPPv2NK3eos14neighbor_key_teqERK14neighbor_key_t"></span><span id="eos::neighbor_key_t::eq-operator__neighbor_key_tCRC"></span><span class="target" id="classeos_1_1neighbor__key__t_1ad3d7f4b8eb6322fdf2ada6f2ac758bd1"></span>bool <code class="sig-name descname">operator==</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos14neighbor_key_tE" title="eos::neighbor_key_t">neighbor_key_t</a> <em class="property">const</em> &amp;<em>other</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos14neighbor_key_teqERK14neighbor_key_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos14neighbor_key_tneERK14neighbor_key_t">
+<span id="_CPPv3NK3eos14neighbor_key_tneERK14neighbor_key_t"></span><span id="_CPPv2NK3eos14neighbor_key_tneERK14neighbor_key_t"></span><span id="eos::neighbor_key_t::neq-operator__neighbor_key_tCRC"></span><span class="target" id="classeos_1_1neighbor__key__t_1a4a436ea104e2856bfabd0b8007793d47"></span>bool <code class="sig-name descname">operator!=</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos14neighbor_key_tE" title="eos::neighbor_key_t">neighbor_key_t</a> <em class="property">const</em> &amp;<em>other</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos14neighbor_key_tneERK14neighbor_key_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos14neighbor_key_tltERK14neighbor_key_t">
+<span id="_CPPv3NK3eos14neighbor_key_tltERK14neighbor_key_t"></span><span id="_CPPv2NK3eos14neighbor_key_tltERK14neighbor_key_t"></span><span id="eos::neighbor_key_t::lt-operator__neighbor_key_tCRC"></span><span class="target" id="classeos_1_1neighbor__key__t_1a68fccd9e7ed219723675c804260efea1"></span>bool <code class="sig-name descname">operator&lt;</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos14neighbor_key_tE" title="eos::neighbor_key_t">neighbor_key_t</a> <em class="property">const</em> &amp;<em>other</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos14neighbor_key_tltERK14neighbor_key_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos14neighbor_key_t4hashEv">
+<span id="_CPPv3NK3eos14neighbor_key_t4hashEv"></span><span id="_CPPv2NK3eos14neighbor_key_t4hashEv"></span><span id="eos::neighbor_key_t::hashC"></span><span class="target" id="classeos_1_1neighbor__key__t_1ae0b00b146a793d15e1cd90ce04201693"></span>uint32_t <code class="sig-name descname">hash</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos14neighbor_key_t4hashEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>The hash function for type <a class="reference internal" href="#classeos_1_1neighbor__key__t"><span class="std std-ref">neighbor_key_t</span></a>. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos14neighbor_key_t6mix_meER8hash_mix">
+<span id="_CPPv3NK3eos14neighbor_key_t6mix_meER8hash_mix"></span><span id="_CPPv2NK3eos14neighbor_key_t6mix_meER8hash_mix"></span><span id="eos::neighbor_key_t::mix_me__hash_mixRC"></span><span class="target" id="classeos_1_1neighbor__key__t_1a52e92bc0541675404314d04a29d50be7"></span>void <code class="sig-name descname">mix_me</code><span class="sig-paren">(</span><a class="reference internal" href="hash_mix.html#_CPPv4N3eos8hash_mixE" title="eos::hash_mix">hash_mix</a> &amp;<em>h</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos14neighbor_key_t6mix_meER8hash_mix" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>The hash mix function for type <a class="reference internal" href="#classeos_1_1neighbor__key__t"><span class="std std-ref">neighbor_key_t</span></a>. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos14neighbor_key_t9to_stringEv">
+<span id="_CPPv3NK3eos14neighbor_key_t9to_stringEv"></span><span id="_CPPv2NK3eos14neighbor_key_t9to_stringEv"></span><span id="eos::neighbor_key_t::to_stringC"></span><span class="target" id="classeos_1_1neighbor__key__t_1a3cc262460d8349605034a08dd7629f15"></span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::string <code class="sig-name descname">to_string</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos14neighbor_key_t9to_stringEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Returns a string representation of the current object’s values. </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Static Functions</p>
+<dl class="cpp function">
+<dt id="_CPPv4N3eos14neighbor_key_tnwENSt6size_tEPv">
+<span id="_CPPv3N3eos14neighbor_key_tnwENSt6size_tEPv"></span><span id="_CPPv2N3eos14neighbor_key_tnwENSt6size_tEPv"></span><span id="eos::neighbor_key_t::new-operator__std::s.voidP"></span><span class="target" id="classeos_1_1neighbor__key__t_1aea158c6dc47cabf5e4b77f6f8caf21ba"></span><em class="property">static</em> <em class="property">inline</em> void *<code class="sig-name descname">operator new</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::size_t, void *<em>ptr</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos14neighbor_key_tnwENSt6size_tEPv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos14neighbor_key_tnwENSt6size_tE">
+<span id="_CPPv3N3eos14neighbor_key_tnwENSt6size_tE"></span><span id="_CPPv2N3eos14neighbor_key_tnwENSt6size_tE"></span><span id="eos::neighbor_key_t::new-operator__std::s"></span><span class="target" id="classeos_1_1neighbor__key__t_1a1a2f59797f937e00c892431d3a344702"></span><em class="property">static</em> void *<code class="sig-name descname">operator new</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::size_t<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos14neighbor_key_tnwENSt6size_tE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos14neighbor_key_tdlEPv">
+<span id="_CPPv3N3eos14neighbor_key_tdlEPv"></span><span id="_CPPv2N3eos14neighbor_key_tdlEPv"></span><span id="eos::neighbor_key_t::delete-operator__voidP"></span><span class="target" id="classeos_1_1neighbor__key__t_1aa08013c2d0199fa786b5ddb8aa8c22ec"></span><em class="property">static</em> void <code class="sig-name descname">operator delete</code><span class="sig-paren">(</span>void*<span class="sig-paren">)</span> <em class="property">noexcept</em><a class="headerlink" href="#_CPPv4N3eos14neighbor_key_tdlEPv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Private Members</p>
+<dl class="cpp var">
+<dt id="_CPPv4N3eos14neighbor_key_t5pimplE">
+<span id="_CPPv3N3eos14neighbor_key_t5pimplE"></span><span id="_CPPv2N3eos14neighbor_key_t5pimplE"></span><span id="eos::neighbor_key_t::pimpl__std::shared_ptr:neighbor_key_impl_t:"></span><span class="target" id="classeos_1_1neighbor__key__t_1ad9f161fc6a8b6a8941e1e8f87a93effc"></span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::shared_ptr&lt;neighbor_key_impl_t&gt; <code class="sig-name descname">pimpl</code><a class="headerlink" href="#_CPPv4N3eos14neighbor_key_t5pimplE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Friends</p>
+<dl class="cpp function">
+<dt id="_CPPv4N3eos14neighbor_key_tlsERNSt7ostreamERK14neighbor_key_t">
+<span id="_CPPv3N3eos14neighbor_key_tlsERNSt7ostreamERK14neighbor_key_t"></span><span id="_CPPv2N3eos14neighbor_key_tlsERNSt7ostreamERK14neighbor_key_t"></span><span id="eos::neighbor_key_t::lshift-operator__osR.neighbor_key_tCR"></span><span class="target" id="classeos_1_1neighbor__key__t_1a0bcf808fc47bdb0d63f853720b8caafd"></span><em class="property">friend</em> <a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::ostream &amp;<code class="sig-name descname">operator&lt;&lt;</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::ostream &amp;<em>os</em>, <em class="property">const</em> <a class="reference internal" href="#_CPPv4N3eos14neighbor_key_tE" title="eos::neighbor_key_t">neighbor_key_t</a> &amp;<em>obj</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos14neighbor_key_tlsERNSt7ostreamERK14neighbor_key_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>A utility stream operator that adds a string representation of <a class="reference internal" href="#classeos_1_1neighbor__key__t"><span class="std std-ref">neighbor_key_t</span></a> to the ostream. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="cpp class">
+<dt id="_CPPv4N3eos16neighbor_entry_tE">
+<span id="_CPPv3N3eos16neighbor_entry_tE"></span><span id="_CPPv2N3eos16neighbor_entry_tE"></span><span id="eos::neighbor_entry_t"></span><span class="target" id="classeos_1_1neighbor__entry__t"></span><em class="property">class </em><code class="sig-name descname">neighbor_entry_t</code><a class="headerlink" href="#_CPPv4N3eos16neighbor_entry_tE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><em>#include &lt;neighbor_table.h&gt;</em><p>The neighbor entry class. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="cpp function">
+<dt id="_CPPv4N3eos16neighbor_entry_t16neighbor_entry_tEv">
+<span id="_CPPv3N3eos16neighbor_entry_t16neighbor_entry_tEv"></span><span id="_CPPv2N3eos16neighbor_entry_t16neighbor_entry_tEv"></span><span id="eos::neighbor_entry_t::neighbor_entry_t"></span><span class="target" id="classeos_1_1neighbor__entry__t_1a9dd23fad6ccf484064622bfb436270db"></span><code class="sig-name descname">neighbor_entry_t</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos16neighbor_entry_t16neighbor_entry_tEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos16neighbor_entry_t16neighbor_entry_tERK14neighbor_key_t10eth_addr_t21neighbor_entry_type_t">
+<span id="_CPPv3N3eos16neighbor_entry_t16neighbor_entry_tERK14neighbor_key_t10eth_addr_t21neighbor_entry_type_t"></span><span id="_CPPv2N3eos16neighbor_entry_t16neighbor_entry_tERK14neighbor_key_t10eth_addr_t21neighbor_entry_type_t"></span><span id="eos::neighbor_entry_t::neighbor_entry_t__neighbor_key_tCR.eth_addr_t.neighbor_entry_type_t"></span><span class="target" id="classeos_1_1neighbor__entry__t_1a1f44def262de6113f5e4c8d2481d4a89"></span><code class="sig-name descname">neighbor_entry_t</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos14neighbor_key_tE" title="eos::neighbor_key_t">neighbor_key_t</a> <em class="property">const</em> &amp;<em>neighbor_key</em>, <a class="reference internal" href="eth.html#_CPPv4N3eos10eth_addr_tE" title="eos::eth_addr_t">eth_addr_t</a> <em>eth_addr</em>, <a class="reference internal" href="#_CPPv4N3eos21neighbor_entry_type_tE" title="eos::neighbor_entry_type_t">neighbor_entry_type_t</a> <em>entry_type</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos16neighbor_entry_t16neighbor_entry_tERK14neighbor_key_t10eth_addr_t21neighbor_entry_type_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos16neighbor_entry_t16neighbor_entry_tERK16neighbor_entry_t">
+<span id="_CPPv3N3eos16neighbor_entry_t16neighbor_entry_tERK16neighbor_entry_t"></span><span id="_CPPv2N3eos16neighbor_entry_t16neighbor_entry_tERK16neighbor_entry_t"></span><span id="eos::neighbor_entry_t::neighbor_entry_t__neighbor_entry_tCR"></span><span class="target" id="classeos_1_1neighbor__entry__t_1a36e9aa6be192dc1373c00c370f7aa5d8"></span><code class="sig-name descname">neighbor_entry_t</code><span class="sig-paren">(</span><em class="property">const</em> <a class="reference internal" href="#_CPPv4N3eos16neighbor_entry_t16neighbor_entry_tERK16neighbor_entry_t" title="eos::neighbor_entry_t::neighbor_entry_t">neighbor_entry_t</a> &amp;<em>other</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos16neighbor_entry_t16neighbor_entry_tERK16neighbor_entry_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos16neighbor_entry_taSERK16neighbor_entry_t">
+<span id="_CPPv3N3eos16neighbor_entry_taSERK16neighbor_entry_t"></span><span id="_CPPv2N3eos16neighbor_entry_taSERK16neighbor_entry_t"></span><span id="eos::neighbor_entry_t::assign-operator__neighbor_entry_tCR"></span><span class="target" id="classeos_1_1neighbor__entry__t_1a9b499508fd32372d8d63c294be6fce8a"></span><a class="reference internal" href="#_CPPv4N3eos16neighbor_entry_tE" title="eos::neighbor_entry_t">neighbor_entry_t</a> &amp;<code class="sig-name descname">operator=</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos16neighbor_entry_tE" title="eos::neighbor_entry_t">neighbor_entry_t</a> <em class="property">const</em> &amp;<em>other</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos16neighbor_entry_taSERK16neighbor_entry_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos16neighbor_entry_t16neighbor_entry_tERR16neighbor_entry_t">
+<span id="_CPPv3N3eos16neighbor_entry_t16neighbor_entry_tERR16neighbor_entry_t"></span><span id="_CPPv2N3eos16neighbor_entry_t16neighbor_entry_tERR16neighbor_entry_t"></span><span id="eos::neighbor_entry_t::neighbor_entry_t__neighbor_entry_tRR"></span><span class="target" id="classeos_1_1neighbor__entry__t_1aa121f9029e0b7d533cec443e76205160"></span><code class="sig-name descname">neighbor_entry_t</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos16neighbor_entry_t16neighbor_entry_tERR16neighbor_entry_t" title="eos::neighbor_entry_t::neighbor_entry_t">neighbor_entry_t</a> &amp;&amp;<em>other</em><span class="sig-paren">)</span> <em class="property">noexcept</em><a class="headerlink" href="#_CPPv4N3eos16neighbor_entry_t16neighbor_entry_tERR16neighbor_entry_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos16neighbor_entry_taSERR16neighbor_entry_t">
+<span id="_CPPv3N3eos16neighbor_entry_taSERR16neighbor_entry_t"></span><span id="_CPPv2N3eos16neighbor_entry_taSERR16neighbor_entry_t"></span><span id="eos::neighbor_entry_t::assign-operator__neighbor_entry_tRR"></span><span class="target" id="classeos_1_1neighbor__entry__t_1a087061d871887de417237550b206acf3"></span><a class="reference internal" href="#_CPPv4N3eos16neighbor_entry_tE" title="eos::neighbor_entry_t">neighbor_entry_t</a> &amp;<code class="sig-name descname">operator=</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos16neighbor_entry_tE" title="eos::neighbor_entry_t">neighbor_entry_t</a> &amp;&amp;<em>other</em><span class="sig-paren">)</span> <em class="property">noexcept</em><a class="headerlink" href="#_CPPv4N3eos16neighbor_entry_taSERR16neighbor_entry_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos16neighbor_entry_t12neighbor_keyEv">
+<span id="_CPPv3NK3eos16neighbor_entry_t12neighbor_keyEv"></span><span id="_CPPv2NK3eos16neighbor_entry_t12neighbor_keyEv"></span><span id="eos::neighbor_entry_t::neighbor_keyC"></span><span class="target" id="classeos_1_1neighbor__entry__t_1a4ca6062f7fe844a51ebcec3006047ea1"></span><a class="reference internal" href="#_CPPv4N3eos14neighbor_key_tE" title="eos::neighbor_key_t">neighbor_key_t</a> <code class="sig-name descname">neighbor_key</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos16neighbor_entry_t12neighbor_keyEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Getter for ‘neighbor_key’: the key of the neighbor entry. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos16neighbor_entry_t8eth_addrEv">
+<span id="_CPPv3NK3eos16neighbor_entry_t8eth_addrEv"></span><span id="_CPPv2NK3eos16neighbor_entry_t8eth_addrEv"></span><span id="eos::neighbor_entry_t::eth_addrC"></span><span class="target" id="classeos_1_1neighbor__entry__t_1a43d78bae302e5e5537492b3df73e3dc9"></span><a class="reference internal" href="eth.html#_CPPv4N3eos10eth_addr_tE" title="eos::eth_addr_t">eth_addr_t</a> <code class="sig-name descname">eth_addr</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos16neighbor_entry_t8eth_addrEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Getter for ‘eth_addr’: the Ethernet address of the neighbor entry. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos16neighbor_entry_t10entry_typeEv">
+<span id="_CPPv3NK3eos16neighbor_entry_t10entry_typeEv"></span><span id="_CPPv2NK3eos16neighbor_entry_t10entry_typeEv"></span><span id="eos::neighbor_entry_t::entry_typeC"></span><span class="target" id="classeos_1_1neighbor__entry__t_1a3549afcf8c258ee5e4acf68a29208ebc"></span><a class="reference internal" href="#_CPPv4N3eos21neighbor_entry_type_tE" title="eos::neighbor_entry_type_t">neighbor_entry_type_t</a> <code class="sig-name descname">entry_type</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos16neighbor_entry_t10entry_typeEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Getter for ‘entry_type’: the type of neighbor entry, it will be either STATIC or DYNAMIC. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos16neighbor_entry_teqERK16neighbor_entry_t">
+<span id="_CPPv3NK3eos16neighbor_entry_teqERK16neighbor_entry_t"></span><span id="_CPPv2NK3eos16neighbor_entry_teqERK16neighbor_entry_t"></span><span id="eos::neighbor_entry_t::eq-operator__neighbor_entry_tCRC"></span><span class="target" id="classeos_1_1neighbor__entry__t_1a4bd6200cfca17ac10d1b9d98af11d19f"></span>bool <code class="sig-name descname">operator==</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos16neighbor_entry_tE" title="eos::neighbor_entry_t">neighbor_entry_t</a> <em class="property">const</em> &amp;<em>other</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos16neighbor_entry_teqERK16neighbor_entry_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos16neighbor_entry_tneERK16neighbor_entry_t">
+<span id="_CPPv3NK3eos16neighbor_entry_tneERK16neighbor_entry_t"></span><span id="_CPPv2NK3eos16neighbor_entry_tneERK16neighbor_entry_t"></span><span id="eos::neighbor_entry_t::neq-operator__neighbor_entry_tCRC"></span><span class="target" id="classeos_1_1neighbor__entry__t_1a63c167ea7f1fdf379e45ff3572ee7ffd"></span>bool <code class="sig-name descname">operator!=</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos16neighbor_entry_tE" title="eos::neighbor_entry_t">neighbor_entry_t</a> <em class="property">const</em> &amp;<em>other</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos16neighbor_entry_tneERK16neighbor_entry_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos16neighbor_entry_tltERK16neighbor_entry_t">
+<span id="_CPPv3NK3eos16neighbor_entry_tltERK16neighbor_entry_t"></span><span id="_CPPv2NK3eos16neighbor_entry_tltERK16neighbor_entry_t"></span><span id="eos::neighbor_entry_t::lt-operator__neighbor_entry_tCRC"></span><span class="target" id="classeos_1_1neighbor__entry__t_1afe732b73e860e803e8d5fd457ed3224c"></span>bool <code class="sig-name descname">operator&lt;</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos16neighbor_entry_tE" title="eos::neighbor_entry_t">neighbor_entry_t</a> <em class="property">const</em> &amp;<em>other</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos16neighbor_entry_tltERK16neighbor_entry_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos16neighbor_entry_t4hashEv">
+<span id="_CPPv3NK3eos16neighbor_entry_t4hashEv"></span><span id="_CPPv2NK3eos16neighbor_entry_t4hashEv"></span><span id="eos::neighbor_entry_t::hashC"></span><span class="target" id="classeos_1_1neighbor__entry__t_1a0ed54463df8328505f544f2648fe59db"></span>uint32_t <code class="sig-name descname">hash</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos16neighbor_entry_t4hashEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>The hash function for type <a class="reference internal" href="#classeos_1_1neighbor__entry__t"><span class="std std-ref">neighbor_entry_t</span></a>. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos16neighbor_entry_t6mix_meER8hash_mix">
+<span id="_CPPv3NK3eos16neighbor_entry_t6mix_meER8hash_mix"></span><span id="_CPPv2NK3eos16neighbor_entry_t6mix_meER8hash_mix"></span><span id="eos::neighbor_entry_t::mix_me__hash_mixRC"></span><span class="target" id="classeos_1_1neighbor__entry__t_1afc2aa0135a44c0cd5158f9952b687168"></span>void <code class="sig-name descname">mix_me</code><span class="sig-paren">(</span><a class="reference internal" href="hash_mix.html#_CPPv4N3eos8hash_mixE" title="eos::hash_mix">hash_mix</a> &amp;<em>h</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos16neighbor_entry_t6mix_meER8hash_mix" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>The hash mix function for type <a class="reference internal" href="#classeos_1_1neighbor__entry__t"><span class="std std-ref">neighbor_entry_t</span></a>. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos16neighbor_entry_t9to_stringEv">
+<span id="_CPPv3NK3eos16neighbor_entry_t9to_stringEv"></span><span id="_CPPv2NK3eos16neighbor_entry_t9to_stringEv"></span><span id="eos::neighbor_entry_t::to_stringC"></span><span class="target" id="classeos_1_1neighbor__entry__t_1ab6e94ed76332e709a02a1abed6721eb6"></span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::string <code class="sig-name descname">to_string</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos16neighbor_entry_t9to_stringEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Returns a string representation of the current object’s values. </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Static Functions</p>
+<dl class="cpp function">
+<dt id="_CPPv4N3eos16neighbor_entry_tnwENSt6size_tEPv">
+<span id="_CPPv3N3eos16neighbor_entry_tnwENSt6size_tEPv"></span><span id="_CPPv2N3eos16neighbor_entry_tnwENSt6size_tEPv"></span><span id="eos::neighbor_entry_t::new-operator__std::s.voidP"></span><span class="target" id="classeos_1_1neighbor__entry__t_1aa1f0322df0097aad859c6b42a8e6567e"></span><em class="property">static</em> <em class="property">inline</em> void *<code class="sig-name descname">operator new</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::size_t, void *<em>ptr</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos16neighbor_entry_tnwENSt6size_tEPv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos16neighbor_entry_tnwENSt6size_tE">
+<span id="_CPPv3N3eos16neighbor_entry_tnwENSt6size_tE"></span><span id="_CPPv2N3eos16neighbor_entry_tnwENSt6size_tE"></span><span id="eos::neighbor_entry_t::new-operator__std::s"></span><span class="target" id="classeos_1_1neighbor__entry__t_1ac709b3c7d600601349196068db4be107"></span><em class="property">static</em> void *<code class="sig-name descname">operator new</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::size_t<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos16neighbor_entry_tnwENSt6size_tE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos16neighbor_entry_tdlEPv">
+<span id="_CPPv3N3eos16neighbor_entry_tdlEPv"></span><span id="_CPPv2N3eos16neighbor_entry_tdlEPv"></span><span id="eos::neighbor_entry_t::delete-operator__voidP"></span><span class="target" id="classeos_1_1neighbor__entry__t_1a9ee1408a5d0940374a29213ed0ab5d7f"></span><em class="property">static</em> void <code class="sig-name descname">operator delete</code><span class="sig-paren">(</span>void*<span class="sig-paren">)</span> <em class="property">noexcept</em><a class="headerlink" href="#_CPPv4N3eos16neighbor_entry_tdlEPv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Private Members</p>
+<dl class="cpp var">
+<dt id="_CPPv4N3eos16neighbor_entry_t5pimplE">
+<span id="_CPPv3N3eos16neighbor_entry_t5pimplE"></span><span id="_CPPv2N3eos16neighbor_entry_t5pimplE"></span><span id="eos::neighbor_entry_t::pimpl__std::shared_ptr:neighbor_entry_impl_t:"></span><span class="target" id="classeos_1_1neighbor__entry__t_1ad9a57ce92d38284df09b49bcb41f73ce"></span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::shared_ptr&lt;neighbor_entry_impl_t&gt; <code class="sig-name descname">pimpl</code><a class="headerlink" href="#_CPPv4N3eos16neighbor_entry_t5pimplE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Friends</p>
+<dl class="cpp function">
+<dt id="_CPPv4N3eos16neighbor_entry_tlsERNSt7ostreamERK16neighbor_entry_t">
+<span id="_CPPv3N3eos16neighbor_entry_tlsERNSt7ostreamERK16neighbor_entry_t"></span><span id="_CPPv2N3eos16neighbor_entry_tlsERNSt7ostreamERK16neighbor_entry_t"></span><span id="eos::neighbor_entry_t::lshift-operator__osR.neighbor_entry_tCR"></span><span class="target" id="classeos_1_1neighbor__entry__t_1adc516d699b1e159e77ef57af60e1a5c0"></span><em class="property">friend</em> <a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::ostream &amp;<code class="sig-name descname">operator&lt;&lt;</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::ostream &amp;<em>os</em>, <em class="property">const</em> <a class="reference internal" href="#_CPPv4N3eos16neighbor_entry_tE" title="eos::neighbor_entry_t">neighbor_entry_t</a> &amp;<em>obj</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos16neighbor_entry_tlsERNSt7ostreamERK16neighbor_entry_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>A utility stream operator that adds a string representation of <a class="reference internal" href="#classeos_1_1neighbor__entry__t"><span class="std std-ref">neighbor_entry_t</span></a> to the ostream. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#"><strong>neighbor_table</strong></a><ul>
+<li><a class="reference internal" href="#type-definitions-in-neighbor-table">Type definitions in <strong>neighbor_table</strong></a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="mpls_vrf_label.html"
+                        title="previous chapter"><strong>mpls_vrf_label</strong></a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="nexthop_group.html"
+                        title="next chapter"><strong>nexthop_group</strong></a></p>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="nexthop_group.html" title="nexthop_group"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="mpls_vrf_label.html" title="mpls_vrf_label"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Arista EOS SDK 2.23.2 reference</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href=""><strong>neighbor_table</strong></a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2014, Arista Networks.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.4.3.
+    </div>
+  </body>
+</html>

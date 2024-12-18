@@ -1,0 +1,174 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>version &#8212; Arista EOS SDK 2.23.2 reference</title>
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/eossdk.css" type="text/css" />
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="vrf" href="vrf.html" />
+    <link rel="prev" title="utility" href="utility.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="vrf.html" title="vrf"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="utility.html" title="utility"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Arista EOS SDK 2.23.2 reference</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href=""><strong>version</strong></a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="version">
+<h1><strong>version</strong><a class="headerlink" href="#version" title="Permalink to this headline">¶</a></h1>
+<p>The version module. It provides EosSdk version information.</p>
+<p>This module provides access to EosSdk version information, including version major number, version minor number and version patch number.</p>
+<p>To access the version information, application will need to include “eos/version.h”, then it can access it directly, as following: eos::version_major eos::version_minor eos::version_patch eos::version</p>
+<p>Note: eos::version is of type “char *” while version_major, version_minor and version_patch are of type “uint8_t”. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Defines</p>
+<dl class="cpp macro">
+<dt id="c.EOSSDK_VERSION">
+<span class="target" id="version_8h_1aa09f65cda4f2165655447740d7adb847"></span><code class="sig-name descname">EOSSDK_VERSION</code><a class="headerlink" href="#c.EOSSDK_VERSION" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp macro">
+<dt id="c.EOSSDK_MAJOR">
+<span class="target" id="version_8h_1a83154e8726565eb9944c202adfe1c1fd"></span><code class="sig-name descname">EOSSDK_MAJOR</code><a class="headerlink" href="#c.EOSSDK_MAJOR" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp macro">
+<dt id="c.EOSSDK_MINOR">
+<span class="target" id="version_8h_1ad2bb02582a2b6b253141c87bf1d18db0"></span><code class="sig-name descname">EOSSDK_MINOR</code><a class="headerlink" href="#c.EOSSDK_MINOR" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp macro">
+<dt id="c.EOSSDK_PATCH">
+<span class="target" id="version_8h_1a5099db22d876c3be1ac2f6641c762437"></span><code class="sig-name descname">EOSSDK_PATCH</code><a class="headerlink" href="#c.EOSSDK_PATCH" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<dl class="cpp type">
+<dt id="_CPPv43eos">
+<span id="_CPPv33eos"></span><span id="_CPPv23eos"></span><span id="eos"></span><span class="target" id="namespaceeos"></span><em class="property">namespace </em><code class="sig-name descname">eos</code><br /></dt>
+<dd><div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Variables</p>
+<dl class="cpp var">
+<dt id="_CPPv4N3eos7versionE">
+<span id="_CPPv3N3eos7versionE"></span><span id="_CPPv2N3eos7versionE"></span><span id="eos::version__cCPC"></span><span class="target" id="version_8h_1a685204fd661bb1b3a88c286ed17b8f23"></span><em class="property">const</em> char *<em class="property">const</em> <code class="sig-name descname">version</code><a class="headerlink" href="#_CPPv4N3eos7versionE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp var">
+<dt id="_CPPv4N3eos13version_majorE">
+<span id="_CPPv3N3eos13version_majorE"></span><span id="_CPPv2N3eos13version_majorE"></span><span id="eos::version_major__uint8_tC"></span><span class="target" id="version_8h_1ab22c0079489d55381ccd282527fe59c8"></span><em class="property">const</em> uint8_t <code class="sig-name descname">version_major</code><a class="headerlink" href="#_CPPv4N3eos13version_majorE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp var">
+<dt id="_CPPv4N3eos13version_minorE">
+<span id="_CPPv3N3eos13version_minorE"></span><span id="_CPPv2N3eos13version_minorE"></span><span id="eos::version_minor__uint8_tC"></span><span class="target" id="version_8h_1ad568c56a164bea8b4e4aa7298dd913cf"></span><em class="property">const</em> uint8_t <code class="sig-name descname">version_minor</code><a class="headerlink" href="#_CPPv4N3eos13version_minorE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp var">
+<dt id="_CPPv4N3eos13version_patchE">
+<span id="_CPPv3N3eos13version_patchE"></span><span id="_CPPv2N3eos13version_patchE"></span><span id="eos::version_patch__uint8_tC"></span><span class="target" id="version_8h_1ae2e09bafeeedf990afbbabe5e9e9d3b4"></span><em class="property">const</em> uint8_t <code class="sig-name descname">version_patch</code><a class="headerlink" href="#_CPPv4N3eos13version_patchE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp var">
+<dt id="_CPPv4N3eos13build_projectE">
+<span id="_CPPv3N3eos13build_projectE"></span><span id="_CPPv2N3eos13build_projectE"></span><span id="eos::build_project__cCPC"></span><span class="target" id="version_8h_1a5a34c73d06a4a4c65635a40c7fa1f0e4"></span><em class="property">const</em> char *<em class="property">const</em> <code class="sig-name descname">build_project</code><a class="headerlink" href="#_CPPv4N3eos13build_projectE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp var">
+<dt id="_CPPv4N3eos10build_userE">
+<span id="_CPPv3N3eos10build_userE"></span><span id="_CPPv2N3eos10build_userE"></span><span id="eos::build_user__cCPC"></span><span class="target" id="version_8h_1a3922f1eed2a5a6b8f8f244638038eb8f"></span><em class="property">const</em> char *<em class="property">const</em> <code class="sig-name descname">build_user</code><a class="headerlink" href="#_CPPv4N3eos10build_userE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp var">
+<dt id="_CPPv4N3eos10build_pathE">
+<span id="_CPPv3N3eos10build_pathE"></span><span id="_CPPv2N3eos10build_pathE"></span><span id="eos::build_path__cCPC"></span><span class="target" id="version_8h_1a267a3d322a6f054c41f389fff4ea5c72"></span><em class="property">const</em> char *<em class="property">const</em> <code class="sig-name descname">build_path</code><a class="headerlink" href="#_CPPv4N3eos10build_pathE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp var">
+<dt id="_CPPv4N3eos8build_clE">
+<span id="_CPPv3N3eos8build_clE"></span><span id="_CPPv2N3eos8build_clE"></span><span id="eos::build_cl__uint32_tC"></span><span class="target" id="version_8h_1a717e08601a955fe22b1fed61474709d8"></span><em class="property">const</em> uint32_t <code class="sig-name descname">build_cl</code><a class="headerlink" href="#_CPPv4N3eos8build_clE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp var">
+<dt id="_CPPv4N3eos15build_timestampE">
+<span id="_CPPv3N3eos15build_timestampE"></span><span id="_CPPv2N3eos15build_timestampE"></span><span id="eos::build_timestamp__uint64_tC"></span><span class="target" id="version_8h_1ae96d0f5ef6587a04c9973470359f567b"></span><em class="property">const</em> uint64_t <code class="sig-name descname">build_timestamp</code><a class="headerlink" href="#_CPPv4N3eos15build_timestampE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+</dd></dl>
+
+</div>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="utility.html"
+                        title="previous chapter"><strong>utility</strong></a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="vrf.html"
+                        title="next chapter"><strong>vrf</strong></a></p>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="vrf.html" title="vrf"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="utility.html" title="utility"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Arista EOS SDK 2.23.2 reference</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href=""><strong>version</strong></a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2014, Arista Networks.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.4.3.
+    </div>
+  </body>
+</html>

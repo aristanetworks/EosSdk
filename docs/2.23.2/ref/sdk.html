@@ -1,0 +1,466 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>sdk &#8212; Arista EOS SDK 2.23.2 reference</title>
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/eossdk.css" type="text/css" />
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="structured_filter" href="structured_filter.html" />
+    <link rel="prev" title="route_map" href="route_map.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="structured_filter.html" title="structured_filter"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="route_map.html" title="route_map"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Arista EOS SDK 2.23.2 reference</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href=""><strong>sdk</strong></a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="sdk">
+<h1><strong>sdk</strong><a class="headerlink" href="#sdk" title="Permalink to this headline">¶</a></h1>
+<dl class="cpp type">
+<dt id="_CPPv43eos">
+<span id="_CPPv33eos"></span><span id="_CPPv23eos"></span><span id="eos"></span><span class="target" id="namespaceeos"></span><em class="property">namespace </em><code class="sig-name descname">eos</code><br /></dt>
+<dd><div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Functions</p>
+<dl class="cpp function">
+<dt id="_CPPv4N3eos22default_signal_handlerEi">
+<span id="_CPPv3N3eos22default_signal_handlerEi"></span><span id="_CPPv2N3eos22default_signal_handlerEi"></span><span id="eos::default_signal_handler__i"></span><span class="target" id="sdk_8h_1a0eb94888b634a66920c9c578b200a839"></span>void <code class="sig-name descname">default_signal_handler</code><span class="sig-paren">(</span>int <em>signal</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos22default_signal_handlerEi" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>A reference to the default signal handler.</p>
+<p>This handler is installed for SIGTERM and SIGINT so agents cleanly exit the event loop upon receiving those signals. This function is exposed for agents that install their own signal handlers. If desired, the agent can call this function from its new signal handler, or re-install this if it no longer wants to use a custom signal handler. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos34internal_connection_buffer_size_isE8uint32_t">
+<span id="_CPPv3N3eos34internal_connection_buffer_size_isE8uint32_t"></span><span id="_CPPv2N3eos34internal_connection_buffer_size_isE8uint32_t"></span><span id="eos::internal_connection_buffer_size_is__uint32_t"></span><span class="target" id="sdk_8h_1a4be9d901b2777c5d1c1dfdcc9352b865"></span>void <code class="sig-name descname">internal_connection_buffer_size_is</code><span class="sig-paren">(</span>uint32_t <em>bytes</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos34internal_connection_buffer_size_isE8uint32_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p><dl class="xrefsect">
+<dt>
+<em>Deprecated:</em></dt>
+<dd><p>This method changes the size of the internal buffer used for enqueuing state updates.</p>
+</dd></dl>
+
+</p>
+<p>It should be used for specific applications that attempt to do large numbers of updates without yielding to the event loop. It should only be rarely used, and future versions of EOS will eliminate the need for this method entirely. At that point, this method will be removed, so please contact the EOS SDK developers before using this method.</p>
+<p>To use, call this method at the beginning of your on_initialized() callback.</p>
+<p>This method takes in a number of bytes that the buffer should be. By default, this buffer size is set to 8.3 MB (which the kernel doubles to 16.7 MB) - the max kernel buffer size.</p>
+<p>Unlike setsockopt, the number of bytes you pass to this function is NOT doubled for setting the actual socket buffer size. Note though that the new buffer size may not exactly match the requested buffer size, but we guarantee that it the new size is at least as big as the requested size. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos19api_trace_enable_isEb">
+<span id="_CPPv3N3eos19api_trace_enable_isEb"></span><span id="_CPPv2N3eos19api_trace_enable_isEb"></span><span id="eos::api_trace_enable_is__b"></span><span class="target" id="sdk_8h_1ae3302387e14c95ba642e83dd047ff804"></span>void <code class="sig-name descname">api_trace_enable_is</code><span class="sig-paren">(</span>bool <em>new_api_trace</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos19api_trace_enable_isEb" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>This function enables (default) or disables API Tracing. Tracing begins once an sdk object is created; to avoid all tracing, use this before instantiating an sdk object. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos21param_trace_enable_isEb">
+<span id="_CPPv3N3eos21param_trace_enable_isEb"></span><span id="_CPPv2N3eos21param_trace_enable_isEb"></span><span id="eos::param_trace_enable_is__b"></span><span class="target" id="sdk_8h_1a92a41822c4cf723a4718868a953971db"></span>void <code class="sig-name descname">param_trace_enable_is</code><span class="sig-paren">(</span>bool <em>new_param_trace</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos21param_trace_enable_isEb" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>This function does the same as the above, but controls whether function parameters get traced or not. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos25api_trace_buffer_sizes_isERAL10E_i">
+<span id="_CPPv3N3eos25api_trace_buffer_sizes_isERAL10E_i"></span><span id="_CPPv2N3eos25api_trace_buffer_sizes_isERA10_i"></span><span class="target" id="sdk_8h_1a1e7a29f12b37ea96c075da16a3bc72e7"></span>void <code class="sig-name descname">api_trace_buffer_sizes_is</code><span class="sig-paren">(</span>int (&amp;<em>size_spec</em>)[10]<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos25api_trace_buffer_sizes_isERAL10E_i" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Change the size of quick trace ring buffers, per level. Default 10kb per level. If this is used before sdk object constructor, the constructor will reset the buffers to default size. </p>
+</dd></dl>
+
+</div>
+<dl class="cpp class">
+<dt id="_CPPv4N3eos15sdk_scoped_lockE">
+<span id="_CPPv3N3eos15sdk_scoped_lockE"></span><span id="_CPPv2N3eos15sdk_scoped_lockE"></span><span id="eos::sdk_scoped_lock"></span><span class="target" id="classeos_1_1sdk__scoped__lock"></span><em class="property">class </em><code class="sig-name descname">sdk_scoped_lock</code><a class="headerlink" href="#_CPPv4N3eos15sdk_scoped_lockE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><em>#include &lt;sdk.h&gt;</em><p>The following lock lets multiple threads use the SDK simultaneously. This lock uses the RAII idiom; in multithreaded environments, instantiate an <a class="reference internal" href="#classeos_1_1sdk__scoped__lock"><span class="std std-ref">eos::sdk_scoped_lock</span></a> before using any <a class="reference internal" href="#classeos_1_1sdk"><span class="std std-ref">eos::sdk</span></a> features. Users do not need to grab a lock if they only have one thread, or if they perform all operations on the SDK from the thread which owns the <code class="docutils literal notranslate"><span class="pre">main_loop</span></code>, as the SDK grabs the lock before calling any *_handler callbacks and before performing any internal bookkeeping. Do note that the lock is re-entrant, so attempting to grab the lock twice is fine. Example usage:</p>
+<p>Thread 1: running <a class="reference internal" href="#classeos_1_1sdk_1af9bfd712acb3615a337cc001cee2db4f"><span class="std std-ref">sdk.main_loop()</span></a></p>
+<p>Thread 2: { // Start a new scope to hold the lock <a class="reference internal" href="#classeos_1_1sdk__scoped__lock"><span class="std std-ref">eos::sdk_scoped_lock</span></a> ssl; sdk.get_agent_mgr()-&gt;status_set(“Look”, “I can interact with Sysdb!”); } // End the scope, causing the <a class="reference internal" href="#classeos_1_1sdk__scoped__lock"><span class="std std-ref">sdk_scoped_lock</span></a> to be destructed and released </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="cpp function">
+<dt id="_CPPv4N3eos15sdk_scoped_lock15sdk_scoped_lockEv">
+<span id="_CPPv3N3eos15sdk_scoped_lock15sdk_scoped_lockEv"></span><span id="_CPPv2N3eos15sdk_scoped_lock15sdk_scoped_lockEv"></span><span id="eos::sdk_scoped_lock::sdk_scoped_lock"></span><span class="target" id="classeos_1_1sdk__scoped__lock_1a6ee007cd062d0e24fa7901d76dd9efd4"></span><code class="sig-name descname">sdk_scoped_lock</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos15sdk_scoped_lock15sdk_scoped_lockEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos15sdk_scoped_lockD0Ev">
+<span id="_CPPv3N3eos15sdk_scoped_lockD0Ev"></span><span id="_CPPv2N3eos15sdk_scoped_lockD0Ev"></span><span id="eos::sdk_scoped_lock::~sdk_scoped_lock"></span><span class="target" id="classeos_1_1sdk__scoped__lock_1a218903e66472a5ddca472a4d92881a95"></span><code class="sig-name descname">~sdk_scoped_lock</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos15sdk_scoped_lockD0Ev" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Private Members</p>
+<dl class="cpp var">
+<dt id="_CPPv4N3eos15sdk_scoped_lock4lockE">
+<span id="_CPPv3N3eos15sdk_scoped_lock4lockE"></span><span id="_CPPv2N3eos15sdk_scoped_lock4lockE"></span><span id="eos::sdk_scoped_lock::lock__voidP"></span><span class="target" id="classeos_1_1sdk__scoped__lock_1a3a7d210d659d066a0119d7449a1fbb92"></span>void *<code class="sig-name descname">lock</code><a class="headerlink" href="#_CPPv4N3eos15sdk_scoped_lock4lockE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="cpp class">
+<dt id="_CPPv4N3eos3sdkE">
+<span id="_CPPv3N3eos3sdkE"></span><span id="_CPPv2N3eos3sdkE"></span><span id="eos::sdk"></span><span class="target" id="classeos_1_1sdk"></span><em class="property">class </em><code class="sig-name descname">sdk</code><a class="headerlink" href="#_CPPv4N3eos3sdkE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><em>#include &lt;sdk.h&gt;</em><p>Manages the different managers of the SDK. One manager of each type can be linked to a SDK object.</p>
+<p>As managers must be initialized at the beginning of the program, the init_*_mgr() functions should be called for any managers you plan to use. Since the get_*_mgr() functions also call their respective init_*_mgr() functions if necessary, accessing the managers at the beginning of the code (before the agent_loop is called) is enough to initialize them. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Public Functions</p>
+<dl class="cpp function">
+<dt id="_CPPv4N3eos3sdk3sdkEv">
+<span id="_CPPv3N3eos3sdk3sdkEv"></span><span id="_CPPv2N3eos3sdk3sdkEv"></span><span id="eos::sdk::sdk"></span><span class="target" id="classeos_1_1sdk_1a778cd7aa316e9240fb80e8acc9bfa9eb"></span><code class="sig-name descname">sdk</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos3sdk3sdkEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Constructs a top level SDK object.</p>
+<p>This constructor will read the AGENT_PROCESS_NAME environment variable to determine the operational name of the agent. When running this agent via the CLI, this variable will be set automatically. If running an agent that uses this constructor manually, the AGENT_PROCESS_NAME variable must be set. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos3sdk3sdkEKNSt6stringEPv">
+<span id="_CPPv3N3eos3sdk3sdkEKNSt6stringEPv"></span><span id="_CPPv2N3eos3sdk3sdkEKNSt6stringEPv"></span><span id="eos::sdk::sdk__ssC.voidP"></span><span class="target" id="classeos_1_1sdk_1a586b1b0959540ea4e681ad560ab34433"></span><em class="property">explicit</em> <code class="sig-name descname">sdk</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::string <em class="property">const</em> <em>agent_name</em>, void *<em>eossdk_context</em> = NULL<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos3sdk3sdkEKNSt6stringEPv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Construct an SDK object with an explicitly set name. If running an agent using this constructor from the CLI, note that the name used here must match the name used in the CLI configuration. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos3sdkD0Ev">
+<span id="_CPPv3N3eos3sdkD0Ev"></span><span id="_CPPv2N3eos3sdkD0Ev"></span><span id="eos::sdk::~sdk"></span><span class="target" id="classeos_1_1sdk_1a820c24afe10f3d72e09c953322365d6b"></span><code class="sig-name descname">~sdk</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos3sdkD0Ev" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos3sdk18initialize_contextEv">
+<span id="_CPPv3N3eos3sdk18initialize_contextEv"></span><span id="_CPPv2N3eos3sdk18initialize_contextEv"></span><span id="eos::sdk::initialize_context"></span><span class="target" id="classeos_1_1sdk_1a8238de4405ee5e3857b780100418699d"></span>void <code class="sig-name descname">initialize_context</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos3sdk18initialize_contextEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos3sdk4nameEv">
+<span id="_CPPv3N3eos3sdk4nameEv"></span><span id="_CPPv2N3eos3sdk4nameEv"></span><span id="eos::sdk::name"></span><span class="target" id="classeos_1_1sdk_1a0d4e47e5e581a356efbb08125fd15e01"></span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::string <code class="sig-name descname">name</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos3sdk4nameEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Return the name of this SDK object.</p>
+<p>This variable is used to register the process with EOS’s various agent services, including the process name, the name used in the log file, as well as the namespace for custom agent configuration and status. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos3sdk9main_loopEiPPc">
+<span id="_CPPv3N3eos3sdk9main_loopEiPPc"></span><span id="_CPPv2N3eos3sdk9main_loopEiPPc"></span><span id="eos::sdk::main_loop__i.cPP"></span><span class="target" id="classeos_1_1sdk_1af9bfd712acb3615a337cc001cee2db4f"></span>void <code class="sig-name descname">main_loop</code><span class="sig-paren">(</span>int <em>argc</em>, char **<em>argv</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos3sdk9main_loopEiPPc" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Begin the agent’s event loop.</p>
+<p>This function initializes the underlying infrastructure for your agent. It first registers itself as an EOS agent, then synchronizes any needed state with Sysdb, and finally starts the event loop. Before this function is called, no managers are valid (as no state has been synchronized with Sysdb), and no handlers will be triggered (as the event loop is not running). This function will not return unless the agent is disabled or it explicitly calls the <a class="reference internal" href="agent.html#classeos_1_1agent__mgr"><span class="std std-ref">agent_mgr</span></a>’s exit() code. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos3sdk11get_acl_mgrEv">
+<span id="_CPPv3N3eos3sdk11get_acl_mgrEv"></span><span id="_CPPv2N3eos3sdk11get_acl_mgrEv"></span><span id="eos::sdk::get_acl_mgr"></span><span class="target" id="classeos_1_1sdk_1a6700cb5752df7c6ebf39e576ec9cb0d8"></span><a class="reference internal" href="acl.html#_CPPv4N3eos7acl_mgrE" title="eos::acl_mgr">acl_mgr</a> *<code class="sig-name descname">get_acl_mgr</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos3sdk11get_acl_mgrEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos3sdk13get_agent_mgrEv">
+<span id="_CPPv3N3eos3sdk13get_agent_mgrEv"></span><span id="_CPPv2N3eos3sdk13get_agent_mgrEv"></span><span id="eos::sdk::get_agent_mgr"></span><span class="target" id="classeos_1_1sdk_1aaa018b1591084a5a571a59f56cd3ffe2"></span><a class="reference internal" href="agent.html#_CPPv4N3eos9agent_mgrE" title="eos::agent_mgr">agent_mgr</a> *<code class="sig-name descname">get_agent_mgr</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos3sdk13get_agent_mgrEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos3sdk16get_aresolve_mgrEv">
+<span id="_CPPv3N3eos3sdk16get_aresolve_mgrEv"></span><span id="_CPPv2N3eos3sdk16get_aresolve_mgrEv"></span><span id="eos::sdk::get_aresolve_mgr"></span><span class="target" id="classeos_1_1sdk_1a0b8c9c03ca7a833e4b9670f839b5ca04"></span><a class="reference internal" href="aresolve.html#_CPPv4N3eos12aresolve_mgrE" title="eos::aresolve_mgr">aresolve_mgr</a> *<code class="sig-name descname">get_aresolve_mgr</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos3sdk16get_aresolve_mgrEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos3sdk19get_bfd_session_mgrEv">
+<span id="_CPPv3N3eos3sdk19get_bfd_session_mgrEv"></span><span id="_CPPv2N3eos3sdk19get_bfd_session_mgrEv"></span><span id="eos::sdk::get_bfd_session_mgr"></span><span class="target" id="classeos_1_1sdk_1a363e8c71fec6f24787f707fa2eae5f3c"></span><a class="reference internal" href="bfd.html#_CPPv4N3eos15bfd_session_mgrE" title="eos::bfd_session_mgr">bfd_session_mgr</a> *<code class="sig-name descname">get_bfd_session_mgr</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos3sdk19get_bfd_session_mgrEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos3sdk11get_bgp_mgrEv">
+<span id="_CPPv3N3eos3sdk11get_bgp_mgrEv"></span><span id="_CPPv2N3eos3sdk11get_bgp_mgrEv"></span><span id="eos::sdk::get_bgp_mgr"></span><span class="target" id="classeos_1_1sdk_1aaef12e3307eb88c8d56222537d483fba"></span><a class="reference internal" href="bgp.html#_CPPv4N3eos7bgp_mgrE" title="eos::bgp_mgr">bgp_mgr</a> *<code class="sig-name descname">get_bgp_mgr</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos3sdk11get_bgp_mgrEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos3sdk16get_bgp_path_mgrEv">
+<span id="_CPPv3N3eos3sdk16get_bgp_path_mgrEv"></span><span id="_CPPv2N3eos3sdk16get_bgp_path_mgrEv"></span><span id="eos::sdk::get_bgp_path_mgr"></span><span class="target" id="classeos_1_1sdk_1a5b02b15c48c451bb79d2140b7f0e200b"></span><a class="reference internal" href="bgp_path.html#_CPPv4N3eos12bgp_path_mgrE" title="eos::bgp_path_mgr">bgp_path_mgr</a> *<code class="sig-name descname">get_bgp_path_mgr</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos3sdk16get_bgp_path_mgrEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos3sdk17get_class_map_mgrEv">
+<span id="_CPPv3N3eos3sdk17get_class_map_mgrEv"></span><span id="_CPPv2N3eos3sdk17get_class_map_mgrEv"></span><span id="eos::sdk::get_class_map_mgr"></span><span class="target" id="classeos_1_1sdk_1a95f3947b2582036d66e956089e6236b9"></span><a class="reference internal" href="class_map.html#_CPPv4N3eos13class_map_mgrE" title="eos::class_map_mgr">class_map_mgr</a> *<code class="sig-name descname">get_class_map_mgr</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos3sdk17get_class_map_mgrEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos3sdk19get_decap_group_mgrEv">
+<span id="_CPPv3N3eos3sdk19get_decap_group_mgrEv"></span><span id="_CPPv2N3eos3sdk19get_decap_group_mgrEv"></span><span id="eos::sdk::get_decap_group_mgr"></span><span class="target" id="classeos_1_1sdk_1ace3c2b08f697d9a54057b6e6a8bb7a13"></span><a class="reference internal" href="decap_group.html#_CPPv4N3eos15decap_group_mgrE" title="eos::decap_group_mgr">decap_group_mgr</a> *<code class="sig-name descname">get_decap_group_mgr</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos3sdk19get_decap_group_mgrEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos3sdk18get_directflow_mgrEv">
+<span id="_CPPv3N3eos3sdk18get_directflow_mgrEv"></span><span id="_CPPv2N3eos3sdk18get_directflow_mgrEv"></span><span id="eos::sdk::get_directflow_mgr"></span><span class="target" id="classeos_1_1sdk_1a9e262d8fbfa5307a6f7ae0030574b8a3"></span><a class="reference internal" href="directflow.html#_CPPv4N3eos14directflow_mgrE" title="eos::directflow_mgr">directflow_mgr</a> *<code class="sig-name descname">get_directflow_mgr</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos3sdk18get_directflow_mgrEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos3sdk12get_eapi_mgrEv">
+<span id="_CPPv3N3eos3sdk12get_eapi_mgrEv"></span><span id="_CPPv2N3eos3sdk12get_eapi_mgrEv"></span><span id="eos::sdk::get_eapi_mgr"></span><span class="target" id="classeos_1_1sdk_1ae49d1bce3d59b89c97acc08311b7e8dd"></span><a class="reference internal" href="eapi.html#_CPPv4N3eos8eapi_mgrE" title="eos::eapi_mgr">eapi_mgr</a> *<code class="sig-name descname">get_eapi_mgr</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos3sdk12get_eapi_mgrEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos3sdk16get_eth_intf_mgrEv">
+<span id="_CPPv3N3eos3sdk16get_eth_intf_mgrEv"></span><span id="_CPPv2N3eos3sdk16get_eth_intf_mgrEv"></span><span id="eos::sdk::get_eth_intf_mgr"></span><span class="target" id="classeos_1_1sdk_1a9766009db1b95296cc15c3225b5b34e9"></span><a class="reference internal" href="eth_intf.html#_CPPv4N3eos12eth_intf_mgrE" title="eos::eth_intf_mgr">eth_intf_mgr</a> *<code class="sig-name descname">get_eth_intf_mgr</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos3sdk16get_eth_intf_mgrEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos3sdk20get_eth_lag_intf_mgrEv">
+<span id="_CPPv3N3eos3sdk20get_eth_lag_intf_mgrEv"></span><span id="_CPPv2N3eos3sdk20get_eth_lag_intf_mgrEv"></span><span id="eos::sdk::get_eth_lag_intf_mgr"></span><span class="target" id="classeos_1_1sdk_1a14503e7c16d6da437bbb456009bdc42d"></span><a class="reference internal" href="eth_lag_intf.html#_CPPv4N3eos16eth_lag_intf_mgrE" title="eos::eth_lag_intf_mgr">eth_lag_intf_mgr</a> *<code class="sig-name descname">get_eth_lag_intf_mgr</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos3sdk20get_eth_lag_intf_mgrEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos3sdk20get_eth_phy_intf_mgrEv">
+<span id="_CPPv3N3eos3sdk20get_eth_phy_intf_mgrEv"></span><span id="_CPPv2N3eos3sdk20get_eth_phy_intf_mgrEv"></span><span id="eos::sdk::get_eth_phy_intf_mgr"></span><span class="target" id="classeos_1_1sdk_1a3d9e1cb38e56a86215008bc6c2248a05"></span><a class="reference internal" href="eth_phy_intf.html#_CPPv4N3eos16eth_phy_intf_mgrE" title="eos::eth_phy_intf_mgr">eth_phy_intf_mgr</a> *<code class="sig-name descname">get_eth_phy_intf_mgr</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos3sdk20get_eth_phy_intf_mgrEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos3sdk28get_eth_phy_intf_counter_mgrEv">
+<span id="_CPPv3N3eos3sdk28get_eth_phy_intf_counter_mgrEv"></span><span id="_CPPv2N3eos3sdk28get_eth_phy_intf_counter_mgrEv"></span><span id="eos::sdk::get_eth_phy_intf_counter_mgr"></span><span class="target" id="classeos_1_1sdk_1ab91bf779998785a6189cbf778265a5d2"></span><a class="reference internal" href="eth_phy_intf.html#_CPPv4N3eos24eth_phy_intf_counter_mgrE" title="eos::eth_phy_intf_counter_mgr">eth_phy_intf_counter_mgr</a> *<code class="sig-name descname">get_eth_phy_intf_counter_mgr</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos3sdk28get_eth_phy_intf_counter_mgrEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos3sdk14get_event_loopEv">
+<span id="_CPPv3N3eos3sdk14get_event_loopEv"></span><span id="_CPPv2N3eos3sdk14get_event_loopEv"></span><span id="eos::sdk::get_event_loop"></span><span class="target" id="classeos_1_1sdk_1a3e5a372cbc5ef252dcb387d2032e9341"></span><a class="reference internal" href="event_loop.html#_CPPv4N3eos10event_loopE" title="eos::event_loop">event_loop</a> *<code class="sig-name descname">get_event_loop</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos3sdk14get_event_loopEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos3sdk11get_fib_mgrE15mgr_mode_type_t">
+<span id="_CPPv3N3eos3sdk11get_fib_mgrE15mgr_mode_type_t"></span><span id="_CPPv2N3eos3sdk11get_fib_mgrE15mgr_mode_type_t"></span><span id="eos::sdk::get_fib_mgr__mgr_mode_type_t"></span><span class="target" id="classeos_1_1sdk_1a387f27ee1ee6de2de81f1d44e73b3716"></span><a class="reference internal" href="fib.html#_CPPv4N3eos7fib_mgrE" title="eos::fib_mgr">fib_mgr</a> *<code class="sig-name descname">get_fib_mgr</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos15mgr_mode_type_tE" title="eos::mgr_mode_type_t">mgr_mode_type_t</a> <em>mode</em> = <a class="reference internal" href="#_CPPv4N3eos15mgr_mode_type_t19MODE_TYPE_READ_ONLYE" title="eos::MODE_TYPE_READ_ONLY">MODE_TYPE_READ_ONLY</a><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos3sdk11get_fib_mgrE15mgr_mode_type_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos3sdk22get_hardware_table_mgrEv">
+<span id="_CPPv3N3eos3sdk22get_hardware_table_mgrEv"></span><span id="_CPPv2N3eos3sdk22get_hardware_table_mgrEv"></span><span id="eos::sdk::get_hardware_table_mgr"></span><span class="target" id="classeos_1_1sdk_1adcb77db412c3cd322232c6bfe99647b5"></span><a class="reference internal" href="hardware_table.html#_CPPv4N3eos18hardware_table_mgrE" title="eos::hardware_table_mgr">hardware_table_mgr</a> *<code class="sig-name descname">get_hardware_table_mgr</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos3sdk22get_hardware_table_mgrEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos3sdk12get_intf_mgrEv">
+<span id="_CPPv3N3eos3sdk12get_intf_mgrEv"></span><span id="_CPPv2N3eos3sdk12get_intf_mgrEv"></span><span id="eos::sdk::get_intf_mgr"></span><span class="target" id="classeos_1_1sdk_1a946fef548060d80b3def424ff7390e07"></span><a class="reference internal" href="intf.html#_CPPv4N3eos8intf_mgrE" title="eos::intf_mgr">intf_mgr</a> *<code class="sig-name descname">get_intf_mgr</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos3sdk12get_intf_mgrEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos3sdk20get_intf_counter_mgrEv">
+<span id="_CPPv3N3eos3sdk20get_intf_counter_mgrEv"></span><span id="_CPPv2N3eos3sdk20get_intf_counter_mgrEv"></span><span id="eos::sdk::get_intf_counter_mgr"></span><span class="target" id="classeos_1_1sdk_1a35d3233a12430d7e19f359157258a9fa"></span><a class="reference internal" href="intf.html#_CPPv4N3eos16intf_counter_mgrE" title="eos::intf_counter_mgr">intf_counter_mgr</a> *<code class="sig-name descname">get_intf_counter_mgr</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos3sdk20get_intf_counter_mgrEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos3sdk30get_intf_counter_mgr_with_modeE15mgr_mode_type_t">
+<span id="_CPPv3N3eos3sdk30get_intf_counter_mgr_with_modeE15mgr_mode_type_t"></span><span id="_CPPv2N3eos3sdk30get_intf_counter_mgr_with_modeE15mgr_mode_type_t"></span><span id="eos::sdk::get_intf_counter_mgr_with_mode__mgr_mode_type_t"></span><span class="target" id="classeos_1_1sdk_1a7616d479531a121507db8bfd1369b081"></span><a class="reference internal" href="intf.html#_CPPv4N3eos16intf_counter_mgrE" title="eos::intf_counter_mgr">intf_counter_mgr</a> *<code class="sig-name descname">get_intf_counter_mgr_with_mode</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos15mgr_mode_type_tE" title="eos::mgr_mode_type_t">mgr_mode_type_t</a> <em>mode</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos3sdk30get_intf_counter_mgr_with_modeE15mgr_mode_type_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos3sdk15get_ip_intf_mgrEv">
+<span id="_CPPv3N3eos3sdk15get_ip_intf_mgrEv"></span><span id="_CPPv2N3eos3sdk15get_ip_intf_mgrEv"></span><span id="eos::sdk::get_ip_intf_mgr"></span><span class="target" id="classeos_1_1sdk_1afa9759284dea0b055e390ef95c08f4f5"></span><a class="reference internal" href="ip_intf.html#_CPPv4N3eos11ip_intf_mgrE" title="eos::ip_intf_mgr">ip_intf_mgr</a> *<code class="sig-name descname">get_ip_intf_mgr</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos3sdk15get_ip_intf_mgrEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos3sdk16get_ip_route_mgrEv">
+<span id="_CPPv3N3eos3sdk16get_ip_route_mgrEv"></span><span id="_CPPv2N3eos3sdk16get_ip_route_mgrEv"></span><span id="eos::sdk::get_ip_route_mgr"></span><span class="target" id="classeos_1_1sdk_1a1b382355029b934befbf0e4d0cb9cf6f"></span><a class="reference internal" href="ip_route.html#_CPPv4N3eos12ip_route_mgrE" title="eos::ip_route_mgr">ip_route_mgr</a> *<code class="sig-name descname">get_ip_route_mgr</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos3sdk16get_ip_route_mgrEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos3sdk12get_lldp_mgrEv">
+<span id="_CPPv3N3eos3sdk12get_lldp_mgrEv"></span><span id="_CPPv2N3eos3sdk12get_lldp_mgrEv"></span><span id="eos::sdk::get_lldp_mgr"></span><span class="target" id="classeos_1_1sdk_1ae4922d7cf9e16f100663f17469e57aea"></span><a class="reference internal" href="lldp.html#_CPPv4N3eos8lldp_mgrE" title="eos::lldp_mgr">lldp_mgr</a> *<code class="sig-name descname">get_lldp_mgr</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos3sdk12get_lldp_mgrEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos3sdk14get_macsec_mgrEv">
+<span id="_CPPv3N3eos3sdk14get_macsec_mgrEv"></span><span id="_CPPv2N3eos3sdk14get_macsec_mgrEv"></span><span id="eos::sdk::get_macsec_mgr"></span><span class="target" id="classeos_1_1sdk_1a5fef2500f45c12a6bdbdb16bb16cf664"></span><a class="reference internal" href="macsec.html#_CPPv4N3eos10macsec_mgrE" title="eos::macsec_mgr">macsec_mgr</a> *<code class="sig-name descname">get_macsec_mgr</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos3sdk14get_macsec_mgrEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos3sdk17get_mac_table_mgrEv">
+<span id="_CPPv3N3eos3sdk17get_mac_table_mgrEv"></span><span id="_CPPv2N3eos3sdk17get_mac_table_mgrEv"></span><span id="eos::sdk::get_mac_table_mgr"></span><span class="target" id="classeos_1_1sdk_1a3e1db083a097c2d2159d3d0b03587ca6"></span><a class="reference internal" href="mac_table.html#_CPPv4N3eos13mac_table_mgrE" title="eos::mac_table_mgr">mac_table_mgr</a> *<code class="sig-name descname">get_mac_table_mgr</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos3sdk17get_mac_table_mgrEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos3sdk12get_mlag_mgrEv">
+<span id="_CPPv3N3eos3sdk12get_mlag_mgrEv"></span><span id="_CPPv2N3eos3sdk12get_mlag_mgrEv"></span><span id="eos::sdk::get_mlag_mgr"></span><span class="target" id="classeos_1_1sdk_1a9aeda1294cd797b99836aa14f7821614"></span><a class="reference internal" href="mlag.html#_CPPv4N3eos8mlag_mgrE" title="eos::mlag_mgr">mlag_mgr</a> *<code class="sig-name descname">get_mlag_mgr</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos3sdk12get_mlag_mgrEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos3sdk13get_mount_mgrEv">
+<span id="_CPPv3N3eos3sdk13get_mount_mgrEv"></span><span id="_CPPv2N3eos3sdk13get_mount_mgrEv"></span><span id="eos::sdk::get_mount_mgr"></span><span class="target" id="classeos_1_1sdk_1af2a5bfe4187c500d8fbee7cb226a548a"></span>mount_mgr *<code class="sig-name descname">get_mount_mgr</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos3sdk13get_mount_mgrEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos3sdk18get_mpls_route_mgrEv">
+<span id="_CPPv3N3eos3sdk18get_mpls_route_mgrEv"></span><span id="_CPPv2N3eos3sdk18get_mpls_route_mgrEv"></span><span id="eos::sdk::get_mpls_route_mgr"></span><span class="target" id="classeos_1_1sdk_1a9f2e4ac77dd4e355a16ade4fa85e942e"></span><a class="reference internal" href="mpls_route.html#_CPPv4N3eos14mpls_route_mgrE" title="eos::mpls_route_mgr">mpls_route_mgr</a> *<code class="sig-name descname">get_mpls_route_mgr</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos3sdk18get_mpls_route_mgrEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos3sdk22get_mpls_vrf_label_mgrEv">
+<span id="_CPPv3N3eos3sdk22get_mpls_vrf_label_mgrEv"></span><span id="_CPPv2N3eos3sdk22get_mpls_vrf_label_mgrEv"></span><span id="eos::sdk::get_mpls_vrf_label_mgr"></span><span class="target" id="classeos_1_1sdk_1af6208b19fe22230ded5fff0021beac4b"></span><a class="reference internal" href="mpls_vrf_label.html#_CPPv4N3eos18mpls_vrf_label_mgrE" title="eos::mpls_vrf_label_mgr">mpls_vrf_label_mgr</a> *<code class="sig-name descname">get_mpls_vrf_label_mgr</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos3sdk22get_mpls_vrf_label_mgrEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos3sdk22get_neighbor_table_mgrEv">
+<span id="_CPPv3N3eos3sdk22get_neighbor_table_mgrEv"></span><span id="_CPPv2N3eos3sdk22get_neighbor_table_mgrEv"></span><span id="eos::sdk::get_neighbor_table_mgr"></span><span class="target" id="classeos_1_1sdk_1a16b554119690bdd8a9b9a91ad5621cc1"></span><a class="reference internal" href="neighbor_table.html#_CPPv4N3eos18neighbor_table_mgrE" title="eos::neighbor_table_mgr">neighbor_table_mgr</a> *<code class="sig-name descname">get_neighbor_table_mgr</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos3sdk22get_neighbor_table_mgrEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos3sdk21get_nexthop_group_mgrEv">
+<span id="_CPPv3N3eos3sdk21get_nexthop_group_mgrEv"></span><span id="_CPPv2N3eos3sdk21get_nexthop_group_mgrEv"></span><span id="eos::sdk::get_nexthop_group_mgr"></span><span class="target" id="classeos_1_1sdk_1ab6376b2fad17b96e0bf228aa8d955b3d"></span><a class="reference internal" href="nexthop_group.html#_CPPv4N3eos17nexthop_group_mgrE" title="eos::nexthop_group_mgr">nexthop_group_mgr</a> *<code class="sig-name descname">get_nexthop_group_mgr</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos3sdk21get_nexthop_group_mgrEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos3sdk28get_nexthop_group_tunnel_mgrEv">
+<span id="_CPPv3N3eos3sdk28get_nexthop_group_tunnel_mgrEv"></span><span id="_CPPv2N3eos3sdk28get_nexthop_group_tunnel_mgrEv"></span><span id="eos::sdk::get_nexthop_group_tunnel_mgr"></span><span class="target" id="classeos_1_1sdk_1a3881a5df9f12ff6a5cd4863381b9ebdd"></span><a class="reference internal" href="nexthop_group_tunnel.html#_CPPv4N3eos24nexthop_group_tunnel_mgrE" title="eos::nexthop_group_tunnel_mgr">nexthop_group_tunnel_mgr</a> *<code class="sig-name descname">get_nexthop_group_tunnel_mgr</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos3sdk28get_nexthop_group_tunnel_mgrEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos3sdk18get_policy_map_mgrEv">
+<span id="_CPPv3N3eos3sdk18get_policy_map_mgrEv"></span><span id="_CPPv2N3eos3sdk18get_policy_map_mgrEv"></span><span id="eos::sdk::get_policy_map_mgr"></span><span class="target" id="classeos_1_1sdk_1ad37d04622d6bc56306703661ee4bfede"></span><a class="reference internal" href="policy_map.html#_CPPv4N3eos14policy_map_mgrE" title="eos::policy_map_mgr">policy_map_mgr</a> *<code class="sig-name descname">get_policy_map_mgr</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos3sdk18get_policy_map_mgrEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos3sdk17get_route_map_mgrEv">
+<span id="_CPPv3N3eos3sdk17get_route_map_mgrEv"></span><span id="_CPPv2N3eos3sdk17get_route_map_mgrEv"></span><span id="eos::sdk::get_route_map_mgr"></span><span class="target" id="classeos_1_1sdk_1a34298694b7e115119e526380d48be6b9"></span><a class="reference internal" href="route_map.html#_CPPv4N3eos13route_map_mgrE" title="eos::route_map_mgr">route_map_mgr</a> *<code class="sig-name descname">get_route_map_mgr</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos3sdk17get_route_map_mgrEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos3sdk15get_subintf_mgrEv">
+<span id="_CPPv3N3eos3sdk15get_subintf_mgrEv"></span><span id="_CPPv2N3eos3sdk15get_subintf_mgrEv"></span><span id="eos::sdk::get_subintf_mgr"></span><span class="target" id="classeos_1_1sdk_1a260b8fab24085a02478782edfddaaf51"></span><a class="reference internal" href="subintf.html#_CPPv4N3eos11subintf_mgrE" title="eos::subintf_mgr">subintf_mgr</a> *<code class="sig-name descname">get_subintf_mgr</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos3sdk15get_subintf_mgrEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos3sdk14get_system_mgrEv">
+<span id="_CPPv3N3eos3sdk14get_system_mgrEv"></span><span id="_CPPv2N3eos3sdk14get_system_mgrEv"></span><span id="eos::sdk::get_system_mgr"></span><span class="target" id="classeos_1_1sdk_1a01c3e8917e5e4f7a1ec02f5372335375"></span><a class="reference internal" href="system.html#_CPPv4N3eos10system_mgrE" title="eos::system_mgr">system_mgr</a> *<code class="sig-name descname">get_system_mgr</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos3sdk14get_system_mgrEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos3sdk15get_timeout_mgrEv">
+<span id="_CPPv3N3eos3sdk15get_timeout_mgrEv"></span><span id="_CPPv2N3eos3sdk15get_timeout_mgrEv"></span><span id="eos::sdk::get_timeout_mgr"></span><span class="target" id="classeos_1_1sdk_1aae18c493ac6a55b7a32859aa9626968a"></span><a class="reference internal" href="timer.html#_CPPv4N3eos11timeout_mgrE" title="eos::timeout_mgr">timeout_mgr</a> *<code class="sig-name descname">get_timeout_mgr</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos3sdk15get_timeout_mgrEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos3sdk11get_vrf_mgrEv">
+<span id="_CPPv3N3eos3sdk11get_vrf_mgrEv"></span><span id="_CPPv2N3eos3sdk11get_vrf_mgrEv"></span><span id="eos::sdk::get_vrf_mgr"></span><span class="target" id="classeos_1_1sdk_1afec060fcfc3cafde708b3677ae9b06ff"></span><a class="reference internal" href="vrf.html#_CPPv4N3eos7vrf_mgrE" title="eos::vrf_mgr">vrf_mgr</a> *<code class="sig-name descname">get_vrf_mgr</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos3sdk11get_vrf_mgrEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos3sdk12get_xcvr_mgrEv">
+<span id="_CPPv3N3eos3sdk12get_xcvr_mgrEv"></span><span id="_CPPv2N3eos3sdk12get_xcvr_mgrEv"></span><span id="eos::sdk::get_xcvr_mgr"></span><span class="target" id="classeos_1_1sdk_1a83daa39d953bace4d5a366f305280b84"></span><a class="reference internal" href="xcvr.html#_CPPv4N3eos8xcvr_mgrE" title="eos::xcvr_mgr">xcvr_mgr</a> *<code class="sig-name descname">get_xcvr_mgr</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos3sdk12get_xcvr_mgrEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Private Members</p>
+<dl class="cpp var">
+<dt id="_CPPv4N3eos3sdk7sdkImplE">
+<span id="_CPPv3N3eos3sdk7sdkImplE"></span><span id="_CPPv2N3eos3sdk7sdkImplE"></span><span id="eos::sdk::sdkImpl__std::unique_ptr:SdkImpl:"></span><span class="target" id="classeos_1_1sdk_1a14fa6b242aca7730a63b2fa35e8025c2"></span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::unique_ptr&lt;SdkImpl&gt; <code class="sig-name descname">sdkImpl</code><a class="headerlink" href="#_CPPv4N3eos3sdk7sdkImplE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+</dd></dl>
+
+</dd></dl>
+
+<div class="section" id="type-definitions-in-sdk">
+<h2>Type definitions in <strong>sdk</strong><a class="headerlink" href="#type-definitions-in-sdk" title="Permalink to this headline">¶</a></h2>
+<dl class="cpp type">
+<dt>
+<span class="target" id="namespaceeos"></span><em class="property">namespace </em><code class="sig-name descname">eos</code><br /></dt>
+<dd><div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric">Enums</p>
+<dl class="cpp enum">
+<dt id="_CPPv4N3eos15mgr_mode_type_tE">
+<span id="_CPPv3N3eos15mgr_mode_type_tE"></span><span id="_CPPv2N3eos15mgr_mode_type_tE"></span><span class="target" id="types_2sdk_8h_1a759658f14077931593154c41fb928230"></span><em class="property">enum </em><code class="sig-name descname">mgr_mode_type_t</code><a class="headerlink" href="#_CPPv4N3eos15mgr_mode_type_tE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Enums for Manager mode type. </p>
+<p><em>Values:</em></p>
+<dl class="cpp enumerator">
+<dt id="_CPPv4N3eos15mgr_mode_type_t19MODE_TYPE_READ_ONLYE">
+<span id="_CPPv3N3eos15mgr_mode_type_t19MODE_TYPE_READ_ONLYE"></span><span id="_CPPv2N3eos15mgr_mode_type_t19MODE_TYPE_READ_ONLYE"></span><span class="target" id="types_2sdk_8h_1a759658f14077931593154c41fb928230afe960b084fbed36728fe05c2ee0aafdb"></span><em class="property">enumerator </em><code class="sig-name descname">MODE_TYPE_READ_ONLY</code><a class="headerlink" href="#_CPPv4N3eos15mgr_mode_type_t19MODE_TYPE_READ_ONLYE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Reader without notifications. </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt id="_CPPv4N3eos15mgr_mode_type_t24MODE_TYPE_READ_NOTIFYINGE">
+<span id="_CPPv3N3eos15mgr_mode_type_t24MODE_TYPE_READ_NOTIFYINGE"></span><span id="_CPPv2N3eos15mgr_mode_type_t24MODE_TYPE_READ_NOTIFYINGE"></span><span class="target" id="types_2sdk_8h_1a759658f14077931593154c41fb928230a7d9785d06e28889e6f952eac2595728e"></span><em class="property">enumerator </em><code class="sig-name descname">MODE_TYPE_READ_NOTIFYING</code><a class="headerlink" href="#_CPPv4N3eos15mgr_mode_type_t24MODE_TYPE_READ_NOTIFYINGE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Reader with notifications. </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt id="_CPPv4N3eos15mgr_mode_type_t15MODE_TYPE_WRITEE">
+<span id="_CPPv3N3eos15mgr_mode_type_t15MODE_TYPE_WRITEE"></span><span id="_CPPv2N3eos15mgr_mode_type_t15MODE_TYPE_WRITEE"></span><span class="target" id="types_2sdk_8h_1a759658f14077931593154c41fb928230a71f907771b8a3e49104f5289096a7273"></span><em class="property">enumerator </em><code class="sig-name descname">MODE_TYPE_WRITE</code><a class="headerlink" href="#_CPPv4N3eos15mgr_mode_type_t15MODE_TYPE_WRITEE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Writer, manager can read and write state. </p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</dd></dl>
+
+</div>
+</div>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#"><strong>sdk</strong></a><ul>
+<li><a class="reference internal" href="#type-definitions-in-sdk">Type definitions in <strong>sdk</strong></a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="route_map.html"
+                        title="previous chapter"><strong>route_map</strong></a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="structured_filter.html"
+                        title="next chapter"><strong>structured_filter</strong></a></p>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="structured_filter.html" title="structured_filter"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="route_map.html" title="route_map"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Arista EOS SDK 2.23.2 reference</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href=""><strong>sdk</strong></a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2014, Arista Networks.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.4.3.
+    </div>
+  </body>
+</html>
