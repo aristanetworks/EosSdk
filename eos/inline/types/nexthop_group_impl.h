@@ -436,7 +436,8 @@ nexthop_group_impl_t::nexthop_group_impl_t() :
       name_(), type_(), gre_key_type_(NEXTHOP_GROUP_GRE_KEY_NULL), ttl_(64),
       source_ip_(), source_intf_(), autosize_(false), nexthops_(),
       backup_nexthops_(), destination_ips_(), counters_unshared_(),
-      hierarchical_fecs_enabled_(false), counters_persistent_(), version_id_() {
+      hierarchical_fecs_enabled_(false), counters_persistent_(), version_id_(),
+      per_entry_backups_(false) {
 }
 
 nexthop_group_impl_t::nexthop_group_impl_t(std::string name,
@@ -444,7 +445,8 @@ nexthop_group_impl_t::nexthop_group_impl_t(std::string name,
       name_(name), type_(type), gre_key_type_(NEXTHOP_GROUP_GRE_KEY_NULL),
       ttl_(64), source_ip_(), source_intf_(), autosize_(false), nexthops_(),
       backup_nexthops_(), destination_ips_(), counters_unshared_(),
-      hierarchical_fecs_enabled_(false), counters_persistent_(), version_id_() {
+      hierarchical_fecs_enabled_(false), counters_persistent_(), version_id_(),
+      per_entry_backups_(false) {
 }
 
 nexthop_group_impl_t::nexthop_group_impl_t(
@@ -453,7 +455,8 @@ nexthop_group_impl_t::nexthop_group_impl_t(
       name_(name), type_(type), gre_key_type_(gre_key_type), ttl_(64),
       source_ip_(), source_intf_(), autosize_(false), nexthops_(),
       backup_nexthops_(), destination_ips_(), counters_unshared_(),
-      hierarchical_fecs_enabled_(false), counters_persistent_(), version_id_() {
+      hierarchical_fecs_enabled_(false), counters_persistent_(), version_id_(),
+      per_entry_backups_(false) {
 }
 
 nexthop_group_impl_t::nexthop_group_impl_t(std::string name,
@@ -461,7 +464,7 @@ nexthop_group_impl_t::nexthop_group_impl_t(std::string name,
       name_(name), type_(), gre_key_type_(), ttl_(), source_ip_(source_ip),
       source_intf_(), autosize_(), nexthops_(), backup_nexthops_(),
       destination_ips_(), counters_unshared_(), hierarchical_fecs_enabled_(false),
-      counters_persistent_(), version_id_() {
+      counters_persistent_(), version_id_(), per_entry_backups_(false) {
 }
 
 nexthop_group_impl_t::nexthop_group_impl_t(
@@ -470,7 +473,7 @@ nexthop_group_impl_t::nexthop_group_impl_t(
       name_(name), type_(), gre_key_type_(), ttl_(), source_ip_(source_ip),
       source_intf_(), autosize_(), nexthops_(nexthops), backup_nexthops_(),
       destination_ips_(), counters_unshared_(), hierarchical_fecs_enabled_(false),
-      counters_persistent_(), version_id_() {
+      counters_persistent_(), version_id_(), per_entry_backups_(false) {
 }
 
 std::string
@@ -714,6 +717,16 @@ nexthop_group_impl_t::version_id_is(uint16_t version_id) {
 }
 
 bool
+nexthop_group_impl_t::per_entry_backups() const {
+   return per_entry_backups_;
+}
+
+void
+nexthop_group_impl_t::per_entry_backups_is(bool per_entry_backups) {
+   per_entry_backups_ = per_entry_backups;
+}
+
+bool
 nexthop_group_impl_t::operator==(nexthop_group_impl_t const & other) const {
    return name_ == other.name_ &&
           type_ == other.type_ &&
@@ -728,7 +741,8 @@ nexthop_group_impl_t::operator==(nexthop_group_impl_t const & other) const {
           counters_unshared_ == other.counters_unshared_ &&
           hierarchical_fecs_enabled_ == other.hierarchical_fecs_enabled_ &&
           counters_persistent_ == other.counters_persistent_ &&
-          version_id_ == other.version_id_;
+          version_id_ == other.version_id_ &&
+          per_entry_backups_ == other.per_entry_backups_;
 }
 
 bool
@@ -766,6 +780,8 @@ nexthop_group_impl_t::operator<(nexthop_group_impl_t const & other) const {
       return counters_persistent_ < other.counters_persistent_;
    } else if(version_id_ != other.version_id_) {
       return version_id_ < other.version_id_;
+   } else if(per_entry_backups_ != other.per_entry_backups_) {
+      return per_entry_backups_ < other.per_entry_backups_;
    }
    return false;
 }
@@ -805,6 +821,7 @@ nexthop_group_impl_t::mix_me(hash_mix & h) const {
    h.mix(hierarchical_fecs_enabled_); // bool
    h.mix(counters_persistent_); // bool
    h.mix(version_id_); // uint16_t
+   h.mix(per_entry_backups_); // bool
 }
 
 std::string
@@ -858,6 +875,7 @@ nexthop_group_impl_t::to_string() const {
    ss << ", hierarchical_fecs_enabled=" << hierarchical_fecs_enabled_;
    ss << ", counters_persistent=" << counters_persistent_;
    ss << ", version_id=" << version_id_;
+   ss << ", per_entry_backups=" << per_entry_backups_;
    ss << ")";
    return ss.str();
 }

@@ -3,7 +3,6 @@ lib_LTLIBRARIES = libeos.la
 AM_CXXFLAGS = -fvisibility=hidden
 AM_CXXFLAGS += $(EXTRA_CFLAGS)
 AM_CXXFLAGS += -Wextra -Wall -Wnon-virtual-dtor -Werror -Wno-unused-parameter -Wno-error=unused-value -fPIC -fPIE -fvisibility-inlines-hidden
-AM_CXXFLAGS += -DTRAFFIC_POLICY_ENABLED
 AM_LDFLAGS = -Wl,--no-undefined -fPIC -fPIE
 
 PUBLISHED_HEADER_FILES := $(wildcard eos/*.h) $(wildcard eos/inline/*.h) $(wildcard eos/types/*.h) $(wildcard eos/inline/types/*.h)

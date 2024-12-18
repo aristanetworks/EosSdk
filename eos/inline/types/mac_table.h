@@ -68,6 +68,8 @@ operator<<(std::ostream& os, const mac_entry_type_t & enum_val) {
       os << "MAC_ENTRY_VPLS_DYNAMIC_REMOTE";
    } else if (enum_val==MAC_ENTRY_SOFTWARE_LEARNED_DYNAMIC) {
       os << "MAC_ENTRY_SOFTWARE_LEARNED_DYNAMIC";
+   } else if (enum_val==MAC_ENTRY_DFW_CONFIGURED_STATIC) {
+      os << "MAC_ENTRY_DFW_CONFIGURED_STATIC";
    } else {
       os << "Unknown value";
    }

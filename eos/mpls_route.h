@@ -149,6 +149,9 @@ class EOS_SDK_PUBLIC mpls_route_mgr : public base_mgr<mpls_route_handler,
    virtual mpls_route_via_iter_t mpls_route_via_iter(mpls_route_key_t const &)
       const = 0;
 
+   /// Returns a configured MPLS backup vias iterator for a given route (key).
+   mpls_route_via_iter_t mpls_route_backup_via_iter(mpls_route_key_t const&);
+
    /// Legacy method that returns an iterator for MPLS vias in hardware for a given
    /// label.
    virtual mpls_route_via_status_iter_t mpls_route_via_status_iter(
@@ -186,6 +189,14 @@ class EOS_SDK_PUBLIC mpls_route_mgr : public base_mgr<mpls_route_handler,
     * nexthop information.
     */
    virtual void mpls_route_via_del(mpls_route_via_t const &) = 0;
+
+   /// Adds a backup via to an mpls_route_t
+   void mpls_route_backup_via_set(mpls_route_via_t const&);
+
+   /**
+    * Removes a backup via from an mpls_route_t.
+    */
+   void mpls_route_backup_via_del(mpls_route_via_t const&);
 
    /**
     * Legacy method that returns the FEC ID corresponding to the given MPLS label if

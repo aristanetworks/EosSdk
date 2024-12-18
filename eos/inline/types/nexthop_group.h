@@ -414,6 +414,14 @@ nexthop_group_t::version_id_is(uint16_t version_id) {
    pimpl->version_id_is(version_id);
 }
 bool
+nexthop_group_t::per_entry_backups() const {
+   return pimpl->per_entry_backups();
+}
+void
+nexthop_group_t::per_entry_backups_is(bool per_entry_backups) {
+   pimpl->per_entry_backups_is(per_entry_backups);
+}
+bool
 nexthop_group_t::operator==(nexthop_group_t const & other) const {
    return pimpl->operator==(*other.pimpl);
 }

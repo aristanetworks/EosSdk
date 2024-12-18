@@ -340,6 +340,17 @@ class EOS_SDK_PUBLIC nexthop_group_impl_t {
    /** Setter for 'version_id'. */
    void version_id_is(uint16_t version_id);
 
+   /**
+    * Getter for 'per_entry_backups': Defines whether the backup entries present in
+    * backup_nexthops are on a per entry basis or are a collective set of backups.
+    * If enabled, the backup entry in position N of backup_nexthops will be
+    * activated in the event that the entry in position N of nexthops is not
+    * available to be programmed. The flag is disabled (set to false) by default.
+    */
+   bool per_entry_backups() const;
+   /** Setter for 'per_entry_backups'. */
+   void per_entry_backups_is(bool per_entry_backups);
+
    bool operator==(nexthop_group_impl_t const & other) const;
    bool operator!=(nexthop_group_impl_t const & other) const;
    bool operator<(nexthop_group_impl_t const & other) const;
@@ -371,6 +382,7 @@ class EOS_SDK_PUBLIC nexthop_group_impl_t {
    bool hierarchical_fecs_enabled_;
    bool counters_persistent_;
    uint16_t version_id_;
+   bool per_entry_backups_;
 };
 
 /** Status for the associated nexthop group. */

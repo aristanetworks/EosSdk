@@ -45,6 +45,10 @@ class mpls_route_mgr_impl : public mpls_route_mgr {
       // TODO: No op impl.
    }
 
+   void mpls_route_backup_via_set(mpls_route_via_t const & route_via) {
+      // TODO: No op impl.
+   }
+
    void mpls_route_del(mpls_route_key_t const & route_key) {
       // TODO: No op impl.
    }
@@ -53,7 +57,17 @@ class mpls_route_mgr_impl : public mpls_route_mgr {
       // TODO: No op impl.
    }
 
+   void mpls_route_backup_via_del(mpls_route_via_t const & route_via) {
+      // TODO: No op impl.
+   }
+
    mpls_route_via_iter_t mpls_route_via_iter(mpls_route_key_t const & key) const {
+      mpls_route_via_iter_t * nop = 0;
+      return *nop;  // TODO: No op impl.
+   }
+
+   mpls_route_via_iter_t mpls_route_backup_via_iter(
+         mpls_route_key_t const & key ) const {
       mpls_route_via_iter_t * nop = 0;
       return *nop;  // TODO: No op impl.
    }
@@ -96,6 +110,24 @@ class mpls_route_mgr_impl : public mpls_route_mgr {
       return 0;
    }
 };
+
+// -- pimpl wrappers to mpls_route_backup functions
+
+mpls_route_via_iter_t mpls_route_mgr::mpls_route_backup_via_iter(
+    mpls_route_key_t const& route_key) {
+   return static_cast<mpls_route_mgr_impl*>(this)->mpls_route_backup_via_iter(
+       route_key);
+}
+
+void mpls_route_mgr::mpls_route_backup_via_set(mpls_route_via_t const& via) {
+   return static_cast<mpls_route_mgr_impl*>(this)->mpls_route_backup_via_set(via);
+}
+
+void mpls_route_mgr::mpls_route_backup_via_del(mpls_route_via_t const& via) {
+   return static_cast<mpls_route_mgr_impl*>(this)->mpls_route_backup_via_del(via);
+}
+
+// -- end of wrappers
 
 DEFINE_STUB_MGR_CTOR(mpls_route_mgr)
 
