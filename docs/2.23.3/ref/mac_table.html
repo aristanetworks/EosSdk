@@ -1,0 +1,838 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>mac_table &#8212; Arista EOS SDK 2.23.3 reference</title>
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/eossdk.css" type="text/css" />
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="macsec" href="macsec.html" />
+    <link rel="prev" title="lldp" href="lldp.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="macsec.html" title="macsec"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="lldp.html" title="lldp"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Arista EOS SDK 2.23.3 reference</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href=""><strong>mac_table</strong></a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="mac-table">
+<h1><strong>mac_table</strong><a class="headerlink" href="#mac-table" title="Permalink to this headline">¶</a></h1>
+<p>MAC address table management module.</p>
+<p>This module offers a MAC address table manager, used to define MAC addresses in system configuration.</p>
+<p>This module also offers a handler that provides notifications when a MAC address has been learned (or forgotten).</p>
+<p>Please refer to examples/SimpleMac.cpp for an example. </p>
+<dl class="cpp type">
+<dt id="_CPPv43eos">
+<span id="_CPPv33eos"></span><span id="_CPPv23eos"></span><span id="eos"></span><span class="target" id="namespaceeos"></span><em class="property">namespace </em><code class="sig-name descname">eos</code><br /></dt>
+<dd><dl class="cpp class">
+<dt id="_CPPv4N3eos17mac_table_handlerE">
+<span id="_CPPv3N3eos17mac_table_handlerE"></span><span id="_CPPv2N3eos17mac_table_handlerE"></span><span id="eos::mac_table_handler"></span><span class="target" id="classeos_1_1mac__table__handler"></span><em class="property">class </em><code class="sig-name descname">mac_table_handler</code> : <em class="property">public</em> <a class="reference internal" href="acl.html#_CPPv43eos" title="eos">eos</a>::<a class="reference internal" href="base_handler.html#_CPPv4I00EN3eos12base_handlerE" title="eos::base_handler">base_handler</a>&lt;<a class="reference internal" href="#_CPPv4N3eos13mac_table_mgrE" title="eos::mac_table_mgr">mac_table_mgr</a>, <a class="reference internal" href="#_CPPv4N3eos17mac_table_handlerE" title="eos::mac_table_handler">mac_table_handler</a>&gt;<a class="headerlink" href="#_CPPv4N3eos17mac_table_handlerE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><div class="docutils container">
+<em>#include &lt;mac_table.h&gt;</em></div>
+<p>Handler for the MAC table.</p>
+<p>This handler provides notifications when MAC addresses are learned on or removed from an interface. Note: This handler currently only provides notifications for unicast MAC addresses. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
+<dl class="cpp function">
+<dt id="_CPPv4N3eos17mac_table_handler17mac_table_handlerEP13mac_table_mgr">
+<span id="_CPPv3N3eos17mac_table_handler17mac_table_handlerEP13mac_table_mgr"></span><span id="_CPPv2N3eos17mac_table_handler17mac_table_handlerEP13mac_table_mgr"></span><span id="eos::mac_table_handler::mac_table_handler__mac_table_mgrP"></span><span class="target" id="classeos_1_1mac__table__handler_1a48e0b1d8bd0fd18853e07e6c665f3c6a"></span><em class="property">explicit</em> <code class="sig-name descname">mac_table_handler</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos13mac_table_mgrE" title="eos::mac_table_mgr">mac_table_mgr</a> *<em>mgr</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos17mac_table_handler17mac_table_handlerEP13mac_table_mgr" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos17mac_table_handler17get_mac_table_mgrEv">
+<span id="_CPPv3NK3eos17mac_table_handler17get_mac_table_mgrEv"></span><span id="_CPPv2NK3eos17mac_table_handler17get_mac_table_mgrEv"></span><span id="eos::mac_table_handler::get_mac_table_mgrC"></span><span class="target" id="classeos_1_1mac__table__handler_1a01945ad2c316323d636a3310f9bf05e2"></span><em class="property">inline</em> <a class="reference internal" href="#_CPPv4N3eos13mac_table_mgrE" title="eos::mac_table_mgr">mac_table_mgr</a> *<code class="sig-name descname">get_mac_table_mgr</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos17mac_table_handler17get_mac_table_mgrEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos17mac_table_handler21watch_all_mac_entriesEb">
+<span id="_CPPv3N3eos17mac_table_handler21watch_all_mac_entriesEb"></span><span id="_CPPv2N3eos17mac_table_handler21watch_all_mac_entriesEb"></span><span id="eos::mac_table_handler::watch_all_mac_entries__b"></span><span class="target" id="classeos_1_1mac__table__handler_1a17ead844c01a4c2b11ac6cdf078f21ff"></span>void <code class="sig-name descname">watch_all_mac_entries</code><span class="sig-paren">(</span>bool<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos17mac_table_handler21watch_all_mac_entriesEb" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Registers this class to receive change updates from the MAC table.</p>
+<p>Expects a boolean signifying whether notifications should be propagated to this instance or not. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos17mac_table_handler15watch_mac_entryERK9mac_key_tb">
+<span id="_CPPv3N3eos17mac_table_handler15watch_mac_entryERK9mac_key_tb"></span><span id="_CPPv2N3eos17mac_table_handler15watch_mac_entryERK9mac_key_tb"></span><span id="eos::mac_table_handler::watch_mac_entry__mac_key_tCR.b"></span><span class="target" id="classeos_1_1mac__table__handler_1a996aa0b0a12d4a10016265118c58d63f"></span>void <code class="sig-name descname">watch_mac_entry</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos9mac_key_tE" title="eos::mac_key_t">mac_key_t</a> <em class="property">const</em> &amp;<em>key</em>, bool<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos17mac_table_handler15watch_mac_entryERK9mac_key_tb" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Registers this class to receive change updates on the given MAC entry.</p>
+<p>Expects the key of the corresponding MAC address and a boolean signifying whether notifications should be propagated to this instance or not. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos17mac_table_handler16on_mac_entry_setERK11mac_entry_t">
+<span id="_CPPv3N3eos17mac_table_handler16on_mac_entry_setERK11mac_entry_t"></span><span id="_CPPv2N3eos17mac_table_handler16on_mac_entry_setERK11mac_entry_t"></span><span id="eos::mac_table_handler::on_mac_entry_set__mac_entry_tCR"></span><span class="target" id="classeos_1_1mac__table__handler_1a21aa4b135606ba7e96624d649eaadc00"></span><em class="property">virtual</em> void <code class="sig-name descname">on_mac_entry_set</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos11mac_entry_tE" title="eos::mac_entry_t">mac_entry_t</a> <em class="property">const</em> &amp;<em>entry</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos17mac_table_handler16on_mac_entry_setERK11mac_entry_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>This handler is called when a unicast MAC entry is learned for the first time, or when a unicast MAC entry has moved to a different interface. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos17mac_table_handler16on_mac_entry_delERK9mac_key_t">
+<span id="_CPPv3N3eos17mac_table_handler16on_mac_entry_delERK9mac_key_t"></span><span id="_CPPv2N3eos17mac_table_handler16on_mac_entry_delERK9mac_key_t"></span><span id="eos::mac_table_handler::on_mac_entry_del__mac_key_tCR"></span><span class="target" id="classeos_1_1mac__table__handler_1ac16a7d8340aeea8457a78fefc5cdfd4a"></span><em class="property">virtual</em> void <code class="sig-name descname">on_mac_entry_del</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos9mac_key_tE" title="eos::mac_key_t">mac_key_t</a> <em class="property">const</em> &amp;<em>key</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos17mac_table_handler16on_mac_entry_delERK9mac_key_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>This handler is called when a unicast entry is removed from the MAC address table. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="cpp class">
+<dt id="_CPPv4N3eos16mac_table_iter_tE">
+<span id="_CPPv3N3eos16mac_table_iter_tE"></span><span id="_CPPv2N3eos16mac_table_iter_tE"></span><span id="eos::mac_table_iter_t"></span><span class="target" id="classeos_1_1mac__table__iter__t"></span><em class="property">class </em><code class="sig-name descname">mac_table_iter_t</code> : <em class="property">public</em> <a class="reference internal" href="acl.html#_CPPv43eos" title="eos">eos</a>::<a class="reference internal" href="iterator.html#_CPPv4I00EN3eos9iter_baseE" title="eos::iter_base">iter_base</a>&lt;<a class="reference internal" href="#_CPPv4N3eos9mac_key_tE" title="eos::mac_key_t">mac_key_t</a>, mac_table_iter_impl&gt;<a class="headerlink" href="#_CPPv4N3eos16mac_table_iter_tE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-private-functions">Private Functions</p>
+<dl class="cpp function">
+<dt id="_CPPv4N3eos16mac_table_iter_t16mac_table_iter_tEPC19mac_table_iter_impl">
+<span id="_CPPv3N3eos16mac_table_iter_t16mac_table_iter_tEPC19mac_table_iter_impl"></span><span id="_CPPv2N3eos16mac_table_iter_t16mac_table_iter_tEPC19mac_table_iter_impl"></span><span id="eos::mac_table_iter_t::mac_table_iter_t__mac_table_iter_implPC"></span><span class="target" id="classeos_1_1mac__table__iter__t_1a1fe32b0315b178adbc0f8e50ac1107fa"></span><em class="property">explicit</em> <code class="sig-name descname">mac_table_iter_t</code><span class="sig-paren">(</span>mac_table_iter_impl*<em class="property">const</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos16mac_table_iter_t16mac_table_iter_tEPC19mac_table_iter_impl" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-friends">Friends</p>
+<dl class="friendclass">
+<dt>
+<em class="property">friend class</em> mac_table_iter_impl</dt>
+</dl>
+
+</div>
+</dd></dl>
+
+<dl class="cpp class">
+<dt id="_CPPv4N3eos23mac_table_status_iter_tE">
+<span id="_CPPv3N3eos23mac_table_status_iter_tE"></span><span id="_CPPv2N3eos23mac_table_status_iter_tE"></span><span id="eos::mac_table_status_iter_t"></span><span class="target" id="classeos_1_1mac__table__status__iter__t"></span><em class="property">class </em><code class="sig-name descname">mac_table_status_iter_t</code> : <em class="property">public</em> <a class="reference internal" href="acl.html#_CPPv43eos" title="eos">eos</a>::<a class="reference internal" href="iterator.html#_CPPv4I00EN3eos9iter_baseE" title="eos::iter_base">iter_base</a>&lt;<a class="reference internal" href="#_CPPv4N3eos9mac_key_tE" title="eos::mac_key_t">mac_key_t</a>, mac_table_status_iter_impl&gt;<a class="headerlink" href="#_CPPv4N3eos23mac_table_status_iter_tE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-private-functions">Private Functions</p>
+<dl class="cpp function">
+<dt id="_CPPv4N3eos23mac_table_status_iter_t23mac_table_status_iter_tEPC26mac_table_status_iter_impl">
+<span id="_CPPv3N3eos23mac_table_status_iter_t23mac_table_status_iter_tEPC26mac_table_status_iter_impl"></span><span id="_CPPv2N3eos23mac_table_status_iter_t23mac_table_status_iter_tEPC26mac_table_status_iter_impl"></span><span id="eos::mac_table_status_iter_t::mac_table_status_iter_t__mac_table_status_iter_implPC"></span><span class="target" id="classeos_1_1mac__table__status__iter__t_1a8e3f432c0c341192c9b8ca20721cfbda"></span><em class="property">explicit</em> <code class="sig-name descname">mac_table_status_iter_t</code><span class="sig-paren">(</span>mac_table_status_iter_impl*<em class="property">const</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos23mac_table_status_iter_t23mac_table_status_iter_tEPC26mac_table_status_iter_impl" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-friends">Friends</p>
+<dl class="friendclass">
+<dt>
+<em class="property">friend class</em> mac_table_status_iter_impl</dt>
+</dl>
+
+</div>
+</dd></dl>
+
+<dl class="cpp class">
+<dt id="_CPPv4N3eos13mac_table_mgrE">
+<span id="_CPPv3N3eos13mac_table_mgrE"></span><span id="_CPPv2N3eos13mac_table_mgrE"></span><span id="eos::mac_table_mgr"></span><span class="target" id="classeos_1_1mac__table__mgr"></span><em class="property">class </em><code class="sig-name descname">mac_table_mgr</code> : <em class="property">public</em> <a class="reference internal" href="acl.html#_CPPv43eos" title="eos">eos</a>::<a class="reference internal" href="base_mgr.html#_CPPv4I00EN3eos8base_mgrE" title="eos::base_mgr">base_mgr</a>&lt;<a class="reference internal" href="#_CPPv4N3eos17mac_table_handlerE" title="eos::mac_table_handler">mac_table_handler</a>, <a class="reference internal" href="#_CPPv4N3eos9mac_key_tE" title="eos::mac_key_t">mac_key_t</a>&gt;<a class="headerlink" href="#_CPPv4N3eos13mac_table_mgrE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><div class="docutils container">
+<em>#include &lt;mac_table.h&gt;</em></div>
+<p>Manager for the MAC address table. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
+<dl class="cpp function">
+<dt id="_CPPv4N3eos13mac_table_mgrD0Ev">
+<span id="_CPPv3N3eos13mac_table_mgrD0Ev"></span><span id="_CPPv2N3eos13mac_table_mgrD0Ev"></span><span id="eos::mac_table_mgr::~mac_table_mgr"></span><span class="target" id="classeos_1_1mac__table__mgr_1a39f32fde4ecba77d67f2b479957ee474"></span><em class="property">virtual</em> <code class="sig-name descname">~mac_table_mgr</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos13mac_table_mgrD0Ev" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos13mac_table_mgr14mac_table_iterEv">
+<span id="_CPPv3NK3eos13mac_table_mgr14mac_table_iterEv"></span><span id="_CPPv2NK3eos13mac_table_mgr14mac_table_iterEv"></span><span id="eos::mac_table_mgr::mac_table_iterC"></span><span class="target" id="classeos_1_1mac__table__mgr_1a318903a51b76995fc0b1df1e5fc94470"></span><em class="property">virtual</em> <a class="reference internal" href="#_CPPv4N3eos16mac_table_iter_tE" title="eos::mac_table_iter_t">mac_table_iter_t</a> <code class="sig-name descname">mac_table_iter</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em> = 0<a class="headerlink" href="#_CPPv4NK3eos13mac_table_mgr14mac_table_iterEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Iterator for all configured MAC addresses. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos13mac_table_mgr21mac_table_status_iterEv">
+<span id="_CPPv3NK3eos13mac_table_mgr21mac_table_status_iterEv"></span><span id="_CPPv2NK3eos13mac_table_mgr21mac_table_status_iterEv"></span><span id="eos::mac_table_mgr::mac_table_status_iterC"></span><span class="target" id="classeos_1_1mac__table__mgr_1a247c6d69e89490dcdad87fa90c08313b"></span><em class="property">virtual</em> <a class="reference internal" href="#_CPPv4N3eos23mac_table_status_iter_tE" title="eos::mac_table_status_iter_t">mac_table_status_iter_t</a> <code class="sig-name descname">mac_table_status_iter</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em> = 0<a class="headerlink" href="#_CPPv4NK3eos13mac_table_mgr21mac_table_status_iterEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Iterator for the MAC address table. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos13mac_table_mgr9mac_entryERK9mac_key_t">
+<span id="_CPPv3NK3eos13mac_table_mgr9mac_entryERK9mac_key_t"></span><span id="_CPPv2NK3eos13mac_table_mgr9mac_entryERK9mac_key_t"></span><span id="eos::mac_table_mgr::mac_entry__mac_key_tCRC"></span><span class="target" id="classeos_1_1mac__table__mgr_1abdd4015489ea5af7ab3f2cda1b5bcf0b"></span><em class="property">virtual</em> <a class="reference internal" href="#_CPPv4N3eos11mac_entry_tE" title="eos::mac_entry_t">mac_entry_t</a> <code class="sig-name descname">mac_entry</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos9mac_key_tE" title="eos::mac_key_t">mac_key_t</a> <em class="property">const</em> &amp;<em>key</em><span class="sig-paren">)</span> <em class="property">const</em> = 0<a class="headerlink" href="#_CPPv4NK3eos13mac_table_mgr9mac_entryERK9mac_key_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Retrieves a <a class="reference internal" href="#classeos_1_1mac__entry__t"><span class="std std-ref">mac_entry_t</span></a> given the VLAN and MAC address key from the collection of configured entries.</p>
+<p>This entry contains the interface (or, for multicast entries, the interfaces) that the given key was configured on. If the entry has not been configured, an empty mac_entry_t() is returned. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>mac_key_t</strong> – The MAC address key object, consisting of a VLAN and a MAC address, which are used to retrieve that unique MAC entry. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos13mac_table_mgr9mac_entryE9vlan_id_t10eth_addr_t">
+<span id="_CPPv3NK3eos13mac_table_mgr9mac_entryE9vlan_id_t10eth_addr_t"></span><span id="_CPPv2NK3eos13mac_table_mgr9mac_entryE9vlan_id_t10eth_addr_t"></span><span id="eos::mac_table_mgr::mac_entry__vlan_id_t.eth_addr_tC"></span><span class="target" id="classeos_1_1mac__table__mgr_1a9a5f0739a0d56e048bce06f85a9aa011"></span><em class="property">virtual</em> <a class="reference internal" href="#_CPPv4N3eos11mac_entry_tE" title="eos::mac_entry_t">mac_entry_t</a> <code class="sig-name descname">mac_entry</code><span class="sig-paren">(</span><a class="reference internal" href="eth.html#_CPPv4N3eos9vlan_id_tE" title="eos::vlan_id_t">vlan_id_t</a> <em>vlan</em>, <a class="reference internal" href="eth.html#_CPPv4N3eos10eth_addr_tE" title="eos::eth_addr_t">eth_addr_t</a> <em>mac</em><span class="sig-paren">)</span> <em class="property">const</em> = 0<a class="headerlink" href="#_CPPv4NK3eos13mac_table_mgr9mac_entryE9vlan_id_t10eth_addr_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Returns a <a class="reference internal" href="#classeos_1_1mac__entry__t"><span class="std std-ref">mac_entry_t</span></a> given a VLAN and MAC address from the collection of configured entries.</p>
+<p><dl class="xrefsect">
+<dt>
+<em>Deprecated:</em></dt>
+<dd><p>, please use mac_entry(mac_key_t const &amp; key) method instead. </p>
+</dd></dl>
+
+</p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos13mac_table_mgr16mac_entry_statusERK9mac_key_t">
+<span id="_CPPv3NK3eos13mac_table_mgr16mac_entry_statusERK9mac_key_t"></span><span id="_CPPv2NK3eos13mac_table_mgr16mac_entry_statusERK9mac_key_t"></span><span id="eos::mac_table_mgr::mac_entry_status__mac_key_tCRC"></span><span class="target" id="classeos_1_1mac__table__mgr_1af5abbd0e70c9614c9477721e941f68ce"></span><em class="property">virtual</em> <a class="reference internal" href="#_CPPv4N3eos11mac_entry_tE" title="eos::mac_entry_t">mac_entry_t</a> <code class="sig-name descname">mac_entry_status</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos9mac_key_tE" title="eos::mac_key_t">mac_key_t</a> <em class="property">const</em> &amp;<em>key</em><span class="sig-paren">)</span> <em class="property">const</em> = 0<a class="headerlink" href="#_CPPv4NK3eos13mac_table_mgr16mac_entry_statusERK9mac_key_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Retrieves a <a class="reference internal" href="#classeos_1_1mac__entry__t"><span class="std std-ref">mac_entry_t</span></a> given the VLAN and MAC address key from the collection of entries either learned dynamically or explicitly configured.</p>
+<p>This entry contains the interface (or, for multicast entries, the interfaces) that the given key has been learned on. If the entry has not been learned, an empty mac_entry_t() is returned. Note: At this time, a multicast MAC entry’s status directly mirrors its configuration and does not reflect whether or not the entry has been programmed into hardware. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>mac_key_t</strong> – The MAC address key object, consisting of a VLAN and a MAC address, which are used to retrieve that unique MAC entry. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos13mac_table_mgr4typeERK9mac_key_t">
+<span id="_CPPv3NK3eos13mac_table_mgr4typeERK9mac_key_t"></span><span id="_CPPv2NK3eos13mac_table_mgr4typeERK9mac_key_t"></span><span id="eos::mac_table_mgr::type__mac_key_tCRC"></span><span class="target" id="classeos_1_1mac__table__mgr_1aaae7918fa7cbdbb3986e89c548d6add8"></span><em class="property">virtual</em> <a class="reference internal" href="#_CPPv4N3eos16mac_entry_type_tE" title="eos::mac_entry_type_t">mac_entry_type_t</a> <code class="sig-name descname">type</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos9mac_key_tE" title="eos::mac_key_t">mac_key_t</a> <em class="property">const</em> &amp;<em>key</em><span class="sig-paren">)</span> <em class="property">const</em> = 0<a class="headerlink" href="#_CPPv4NK3eos13mac_table_mgr4typeERK9mac_key_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Returns the type of the programmed MAC entry. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos13mac_table_mgr5movesERK9mac_key_t">
+<span id="_CPPv3NK3eos13mac_table_mgr5movesERK9mac_key_t"></span><span id="_CPPv2NK3eos13mac_table_mgr5movesERK9mac_key_t"></span><span id="eos::mac_table_mgr::moves__mac_key_tCRC"></span><span class="target" id="classeos_1_1mac__table__mgr_1a42298a63af129441fb3cdac10493748d"></span><em class="property">virtual</em> uint32_t <code class="sig-name descname">moves</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos9mac_key_tE" title="eos::mac_key_t">mac_key_t</a> <em class="property">const</em> &amp;<em>key</em><span class="sig-paren">)</span> <em class="property">const</em> = 0<a class="headerlink" href="#_CPPv4NK3eos13mac_table_mgr5movesERK9mac_key_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Returns the number of times the MAC entry has moved. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos13mac_table_mgr14last_move_timeERK9mac_key_t">
+<span id="_CPPv3NK3eos13mac_table_mgr14last_move_timeERK9mac_key_t"></span><span id="_CPPv2NK3eos13mac_table_mgr14last_move_timeERK9mac_key_t"></span><span id="eos::mac_table_mgr::last_move_time__mac_key_tCRC"></span><span class="target" id="classeos_1_1mac__table__mgr_1a38fa210624f6b6411351dc6c15a08d47"></span><em class="property">virtual</em> <a class="reference internal" href="base.html#_CPPv4N3eos9seconds_tE" title="eos::seconds_t">seconds_t</a> <code class="sig-name descname">last_move_time</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos9mac_key_tE" title="eos::mac_key_t">mac_key_t</a> <em class="property">const</em> &amp;<em>key</em><span class="sig-paren">)</span> <em class="property">const</em> = 0<a class="headerlink" href="#_CPPv4NK3eos13mac_table_mgr14last_move_timeERK9mac_key_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Returns the time at which the MAC entry last moved (since boot). </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos13mac_table_mgr13mac_entry_setERK11mac_entry_t">
+<span id="_CPPv3N3eos13mac_table_mgr13mac_entry_setERK11mac_entry_t"></span><span id="_CPPv2N3eos13mac_table_mgr13mac_entry_setERK11mac_entry_t"></span><span id="eos::mac_table_mgr::mac_entry_set__mac_entry_tCR"></span><span class="target" id="classeos_1_1mac__table__mgr_1a42221ad6b4e0246ab1d0a6aecc14e715"></span><em class="property">virtual</em> void <code class="sig-name descname">mac_entry_set</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos11mac_entry_tE" title="eos::mac_entry_t">mac_entry_t</a> <em class="property">const</em> &amp;<em>entry</em><span class="sig-paren">)</span> = 0<a class="headerlink" href="#_CPPv4N3eos13mac_table_mgr13mac_entry_setERK11mac_entry_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Configure a MAC address statically as “learned” on a given interface (or set of interfaces for multicast MAC entries). </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos13mac_table_mgr13mac_entry_delERK9mac_key_t">
+<span id="_CPPv3N3eos13mac_table_mgr13mac_entry_delERK9mac_key_t"></span><span id="_CPPv2N3eos13mac_table_mgr13mac_entry_delERK9mac_key_t"></span><span id="eos::mac_table_mgr::mac_entry_del__mac_key_tCR"></span><span class="target" id="classeos_1_1mac__table__mgr_1a83a016278e5fd59102dd9104a98bb4df"></span><em class="property">virtual</em> void <code class="sig-name descname">mac_entry_del</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos9mac_key_tE" title="eos::mac_key_t">mac_key_t</a> <em class="property">const</em> &amp;<em>key</em><span class="sig-paren">)</span> = 0<a class="headerlink" href="#_CPPv4N3eos13mac_table_mgr13mac_entry_delERK9mac_key_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Remove a MAC entry with the given key from the collection of entries that were either learned dynamically or configured explicitly. </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-protected-functions">Protected Functions</p>
+<dl class="cpp function">
+<dt id="_CPPv4N3eos13mac_table_mgr13mac_table_mgrEv">
+<span id="_CPPv3N3eos13mac_table_mgr13mac_table_mgrEv"></span><span id="_CPPv2N3eos13mac_table_mgr13mac_table_mgrEv"></span><span id="eos::mac_table_mgr::mac_table_mgr"></span><span class="target" id="classeos_1_1mac__table__mgr_1a81186350b7bf7fb56b53f6716b8b5fd5"></span><code class="sig-name descname">mac_table_mgr</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos13mac_table_mgr13mac_table_mgrEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-private-members">Private Members</p>
+<dl class="cpp var">
+<dt>
+<span class="target" id="classeos_1_1mac__table__mgr_1a61a6213e9455137cbacbdc4692fb2e21"></span><code class="sig-name descname">mac_table_mgr</code></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-friends">Friends</p>
+<dl class="friendclass">
+<dt>
+<em class="property">friend class</em> mac_table_handler</dt>
+</dl>
+
+</div>
+</dd></dl>
+
+</dd></dl>
+
+<div class="section" id="type-definitions-in-mac-table">
+<h2>Type definitions in <strong>mac_table</strong><a class="headerlink" href="#type-definitions-in-mac-table" title="Permalink to this headline">¶</a></h2>
+<dl class="cpp type">
+<dt>
+<span class="target" id="namespaceeos"></span><em class="property">namespace </em><code class="sig-name descname">eos</code><br /></dt>
+<dd><div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-enums">Enums</p>
+<dl class="cpp enum">
+<dt id="_CPPv4N3eos16mac_entry_type_tE">
+<span id="_CPPv3N3eos16mac_entry_type_tE"></span><span id="_CPPv2N3eos16mac_entry_type_tE"></span><span class="target" id="types_2mac__table_8h_1a419ab8952d47f590b27021118da9154f"></span><em class="property">enum </em><code class="sig-name descname">mac_entry_type_t</code><a class="headerlink" href="#_CPPv4N3eos16mac_entry_type_tE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Types of MAC entries. </p>
+<p><em>Values:</em></p>
+<dl class="cpp enumerator">
+<dt id="_CPPv4N3eos16mac_entry_type_t14MAC_ENTRY_NULLE">
+<span id="_CPPv3N3eos16mac_entry_type_t14MAC_ENTRY_NULLE"></span><span id="_CPPv2N3eos16mac_entry_type_t14MAC_ENTRY_NULLE"></span><span class="target" id="types_2mac__table_8h_1a419ab8952d47f590b27021118da9154faa7839e2edcf3c5091d1fefedf4ea4676"></span><em class="property">enumerator </em><code class="sig-name descname">MAC_ENTRY_NULL</code><a class="headerlink" href="#_CPPv4N3eos16mac_entry_type_t14MAC_ENTRY_NULLE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt id="_CPPv4N3eos16mac_entry_type_t25MAC_ENTRY_LEARNED_DYNAMICE">
+<span id="_CPPv3N3eos16mac_entry_type_t25MAC_ENTRY_LEARNED_DYNAMICE"></span><span id="_CPPv2N3eos16mac_entry_type_t25MAC_ENTRY_LEARNED_DYNAMICE"></span><span class="target" id="types_2mac__table_8h_1a419ab8952d47f590b27021118da9154faf55d9e386f4a0e74f450b60e8c520dbc"></span><em class="property">enumerator </em><code class="sig-name descname">MAC_ENTRY_LEARNED_DYNAMIC</code><a class="headerlink" href="#_CPPv4N3eos16mac_entry_type_t25MAC_ENTRY_LEARNED_DYNAMICE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt id="_CPPv4N3eos16mac_entry_type_t24MAC_ENTRY_LEARNED_SECUREE">
+<span id="_CPPv3N3eos16mac_entry_type_t24MAC_ENTRY_LEARNED_SECUREE"></span><span id="_CPPv2N3eos16mac_entry_type_t24MAC_ENTRY_LEARNED_SECUREE"></span><span class="target" id="types_2mac__table_8h_1a419ab8952d47f590b27021118da9154fad3ac7254b3b204ed4835f322db92baa8"></span><em class="property">enumerator </em><code class="sig-name descname">MAC_ENTRY_LEARNED_SECURE</code><a class="headerlink" href="#_CPPv4N3eos16mac_entry_type_t24MAC_ENTRY_LEARNED_SECUREE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt id="_CPPv4N3eos16mac_entry_type_t28MAC_ENTRY_CONFIGURED_DYNAMICE">
+<span id="_CPPv3N3eos16mac_entry_type_t28MAC_ENTRY_CONFIGURED_DYNAMICE"></span><span id="_CPPv2N3eos16mac_entry_type_t28MAC_ENTRY_CONFIGURED_DYNAMICE"></span><span class="target" id="types_2mac__table_8h_1a419ab8952d47f590b27021118da9154faa74fceac777d671a1ca6d59924dcddd4"></span><em class="property">enumerator </em><code class="sig-name descname">MAC_ENTRY_CONFIGURED_DYNAMIC</code><a class="headerlink" href="#_CPPv4N3eos16mac_entry_type_t28MAC_ENTRY_CONFIGURED_DYNAMICE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt id="_CPPv4N3eos16mac_entry_type_t27MAC_ENTRY_CONFIGURED_SECUREE">
+<span id="_CPPv3N3eos16mac_entry_type_t27MAC_ENTRY_CONFIGURED_SECUREE"></span><span id="_CPPv2N3eos16mac_entry_type_t27MAC_ENTRY_CONFIGURED_SECUREE"></span><span class="target" id="types_2mac__table_8h_1a419ab8952d47f590b27021118da9154fa159c385f9f7fea2f49df853c75584922"></span><em class="property">enumerator </em><code class="sig-name descname">MAC_ENTRY_CONFIGURED_SECURE</code><a class="headerlink" href="#_CPPv4N3eos16mac_entry_type_t27MAC_ENTRY_CONFIGURED_SECUREE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt id="_CPPv4N3eos16mac_entry_type_t27MAC_ENTRY_CONFIGURED_STATICE">
+<span id="_CPPv3N3eos16mac_entry_type_t27MAC_ENTRY_CONFIGURED_STATICE"></span><span id="_CPPv2N3eos16mac_entry_type_t27MAC_ENTRY_CONFIGURED_STATICE"></span><span class="target" id="types_2mac__table_8h_1a419ab8952d47f590b27021118da9154fa9f3a4ed51c402f8b72e3f648d1972cd4"></span><em class="property">enumerator </em><code class="sig-name descname">MAC_ENTRY_CONFIGURED_STATIC</code><a class="headerlink" href="#_CPPv4N3eos16mac_entry_type_t27MAC_ENTRY_CONFIGURED_STATICE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt id="_CPPv4N3eos16mac_entry_type_t22MAC_ENTRY_PEER_DYNAMICE">
+<span id="_CPPv3N3eos16mac_entry_type_t22MAC_ENTRY_PEER_DYNAMICE"></span><span id="_CPPv2N3eos16mac_entry_type_t22MAC_ENTRY_PEER_DYNAMICE"></span><span class="target" id="types_2mac__table_8h_1a419ab8952d47f590b27021118da9154fa72460622db544d9b0b7a9415dbeb0e7e"></span><em class="property">enumerator </em><code class="sig-name descname">MAC_ENTRY_PEER_DYNAMIC</code><a class="headerlink" href="#_CPPv4N3eos16mac_entry_type_t22MAC_ENTRY_PEER_DYNAMICE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt id="_CPPv4N3eos16mac_entry_type_t21MAC_ENTRY_PEER_STATICE">
+<span id="_CPPv3N3eos16mac_entry_type_t21MAC_ENTRY_PEER_STATICE"></span><span id="_CPPv2N3eos16mac_entry_type_t21MAC_ENTRY_PEER_STATICE"></span><span class="target" id="types_2mac__table_8h_1a419ab8952d47f590b27021118da9154fa743f30b89ffbfaef064f14264ea04559"></span><em class="property">enumerator </em><code class="sig-name descname">MAC_ENTRY_PEER_STATIC</code><a class="headerlink" href="#_CPPv4N3eos16mac_entry_type_t21MAC_ENTRY_PEER_STATICE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt id="_CPPv4N3eos16mac_entry_type_t21MAC_ENTRY_PEER_SECUREE">
+<span id="_CPPv3N3eos16mac_entry_type_t21MAC_ENTRY_PEER_SECUREE"></span><span id="_CPPv2N3eos16mac_entry_type_t21MAC_ENTRY_PEER_SECUREE"></span><span class="target" id="types_2mac__table_8h_1a419ab8952d47f590b27021118da9154fa2a7ee00c84c031e63428b9cce88b4040"></span><em class="property">enumerator </em><code class="sig-name descname">MAC_ENTRY_PEER_SECURE</code><a class="headerlink" href="#_CPPv4N3eos16mac_entry_type_t21MAC_ENTRY_PEER_SECUREE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt id="_CPPv4N3eos16mac_entry_type_t24MAC_ENTRY_LEARNED_REMOTEE">
+<span id="_CPPv3N3eos16mac_entry_type_t24MAC_ENTRY_LEARNED_REMOTEE"></span><span id="_CPPv2N3eos16mac_entry_type_t24MAC_ENTRY_LEARNED_REMOTEE"></span><span class="target" id="types_2mac__table_8h_1a419ab8952d47f590b27021118da9154fabf10072075cd5e4a3ceff9924d994e65"></span><em class="property">enumerator </em><code class="sig-name descname">MAC_ENTRY_LEARNED_REMOTE</code><a class="headerlink" href="#_CPPv4N3eos16mac_entry_type_t24MAC_ENTRY_LEARNED_REMOTEE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt id="_CPPv4N3eos16mac_entry_type_t27MAC_ENTRY_CONFIGURED_REMOTEE">
+<span id="_CPPv3N3eos16mac_entry_type_t27MAC_ENTRY_CONFIGURED_REMOTEE"></span><span id="_CPPv2N3eos16mac_entry_type_t27MAC_ENTRY_CONFIGURED_REMOTEE"></span><span class="target" id="types_2mac__table_8h_1a419ab8952d47f590b27021118da9154fa83c7383fd182738311f1a6e15d6e0677"></span><em class="property">enumerator </em><code class="sig-name descname">MAC_ENTRY_CONFIGURED_REMOTE</code><a class="headerlink" href="#_CPPv4N3eos16mac_entry_type_t27MAC_ENTRY_CONFIGURED_REMOTEE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt id="_CPPv4N3eos16mac_entry_type_t25MAC_ENTRY_RECEIVED_REMOTEE">
+<span id="_CPPv3N3eos16mac_entry_type_t25MAC_ENTRY_RECEIVED_REMOTEE"></span><span id="_CPPv2N3eos16mac_entry_type_t25MAC_ENTRY_RECEIVED_REMOTEE"></span><span class="target" id="types_2mac__table_8h_1a419ab8952d47f590b27021118da9154fa0a4580abecc744c2587daf7e9131c669"></span><em class="property">enumerator </em><code class="sig-name descname">MAC_ENTRY_RECEIVED_REMOTE</code><a class="headerlink" href="#_CPPv4N3eos16mac_entry_type_t25MAC_ENTRY_RECEIVED_REMOTEE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt id="_CPPv4N3eos16mac_entry_type_t29MAC_ENTRY_PEER_LEARNED_REMOTEE">
+<span id="_CPPv3N3eos16mac_entry_type_t29MAC_ENTRY_PEER_LEARNED_REMOTEE"></span><span id="_CPPv2N3eos16mac_entry_type_t29MAC_ENTRY_PEER_LEARNED_REMOTEE"></span><span class="target" id="types_2mac__table_8h_1a419ab8952d47f590b27021118da9154fa171afe0595f9fe3d0a3d688b8ddccd95"></span><em class="property">enumerator </em><code class="sig-name descname">MAC_ENTRY_PEER_LEARNED_REMOTE</code><a class="headerlink" href="#_CPPv4N3eos16mac_entry_type_t29MAC_ENTRY_PEER_LEARNED_REMOTEE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt id="_CPPv4N3eos16mac_entry_type_t32MAC_ENTRY_PEER_CONFIGURED_REMOTEE">
+<span id="_CPPv3N3eos16mac_entry_type_t32MAC_ENTRY_PEER_CONFIGURED_REMOTEE"></span><span id="_CPPv2N3eos16mac_entry_type_t32MAC_ENTRY_PEER_CONFIGURED_REMOTEE"></span><span class="target" id="types_2mac__table_8h_1a419ab8952d47f590b27021118da9154fadc7c9cbe28f7126c99fa6aa5c89ff82b"></span><em class="property">enumerator </em><code class="sig-name descname">MAC_ENTRY_PEER_CONFIGURED_REMOTE</code><a class="headerlink" href="#_CPPv4N3eos16mac_entry_type_t32MAC_ENTRY_PEER_CONFIGURED_REMOTEE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt id="_CPPv4N3eos16mac_entry_type_t30MAC_ENTRY_PEER_RECEIVED_REMOTEE">
+<span id="_CPPv3N3eos16mac_entry_type_t30MAC_ENTRY_PEER_RECEIVED_REMOTEE"></span><span id="_CPPv2N3eos16mac_entry_type_t30MAC_ENTRY_PEER_RECEIVED_REMOTEE"></span><span class="target" id="types_2mac__table_8h_1a419ab8952d47f590b27021118da9154fab71e165fccb1ed61e4b33252f2745042"></span><em class="property">enumerator </em><code class="sig-name descname">MAC_ENTRY_PEER_RECEIVED_REMOTE</code><a class="headerlink" href="#_CPPv4N3eos16mac_entry_type_t30MAC_ENTRY_PEER_RECEIVED_REMOTEE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt id="_CPPv4N3eos16mac_entry_type_t29MAC_ENTRY_EVPN_DYNAMIC_REMOTEE">
+<span id="_CPPv3N3eos16mac_entry_type_t29MAC_ENTRY_EVPN_DYNAMIC_REMOTEE"></span><span id="_CPPv2N3eos16mac_entry_type_t29MAC_ENTRY_EVPN_DYNAMIC_REMOTEE"></span><span class="target" id="types_2mac__table_8h_1a419ab8952d47f590b27021118da9154fafe954b670f3f4e0ec64a75f281e808ee"></span><em class="property">enumerator </em><code class="sig-name descname">MAC_ENTRY_EVPN_DYNAMIC_REMOTE</code><a class="headerlink" href="#_CPPv4N3eos16mac_entry_type_t29MAC_ENTRY_EVPN_DYNAMIC_REMOTEE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt id="_CPPv4N3eos16mac_entry_type_t32MAC_ENTRY_EVPN_CONFIGURED_REMOTEE">
+<span id="_CPPv3N3eos16mac_entry_type_t32MAC_ENTRY_EVPN_CONFIGURED_REMOTEE"></span><span id="_CPPv2N3eos16mac_entry_type_t32MAC_ENTRY_EVPN_CONFIGURED_REMOTEE"></span><span class="target" id="types_2mac__table_8h_1a419ab8952d47f590b27021118da9154fabfc9afc27332844d49ccc5318c82a042"></span><em class="property">enumerator </em><code class="sig-name descname">MAC_ENTRY_EVPN_CONFIGURED_REMOTE</code><a class="headerlink" href="#_CPPv4N3eos16mac_entry_type_t32MAC_ENTRY_EVPN_CONFIGURED_REMOTEE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt id="_CPPv4N3eos16mac_entry_type_t26MAC_ENTRY_PEER_EVPN_REMOTEE">
+<span id="_CPPv3N3eos16mac_entry_type_t26MAC_ENTRY_PEER_EVPN_REMOTEE"></span><span id="_CPPv2N3eos16mac_entry_type_t26MAC_ENTRY_PEER_EVPN_REMOTEE"></span><span class="target" id="types_2mac__table_8h_1a419ab8952d47f590b27021118da9154fa0c394635b9e5c5af2b4f72f59edd6f2c"></span><em class="property">enumerator </em><code class="sig-name descname">MAC_ENTRY_PEER_EVPN_REMOTE</code><a class="headerlink" href="#_CPPv4N3eos16mac_entry_type_t26MAC_ENTRY_PEER_EVPN_REMOTEE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt id="_CPPv4N3eos16mac_entry_type_t27MAC_ENTRY_CONFIGURED_ROUTERE">
+<span id="_CPPv3N3eos16mac_entry_type_t27MAC_ENTRY_CONFIGURED_ROUTERE"></span><span id="_CPPv2N3eos16mac_entry_type_t27MAC_ENTRY_CONFIGURED_ROUTERE"></span><span class="target" id="types_2mac__table_8h_1a419ab8952d47f590b27021118da9154fa728553286a3f9904e4264e3c0dad6253"></span><em class="property">enumerator </em><code class="sig-name descname">MAC_ENTRY_CONFIGURED_ROUTER</code><a class="headerlink" href="#_CPPv4N3eos16mac_entry_type_t27MAC_ENTRY_CONFIGURED_ROUTERE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt id="_CPPv4N3eos16mac_entry_type_t21MAC_ENTRY_PEER_ROUTERE">
+<span id="_CPPv3N3eos16mac_entry_type_t21MAC_ENTRY_PEER_ROUTERE"></span><span id="_CPPv2N3eos16mac_entry_type_t21MAC_ENTRY_PEER_ROUTERE"></span><span class="target" id="types_2mac__table_8h_1a419ab8952d47f590b27021118da9154fab45f78b93def28c9a024a102a2586642"></span><em class="property">enumerator </em><code class="sig-name descname">MAC_ENTRY_PEER_ROUTER</code><a class="headerlink" href="#_CPPv4N3eos16mac_entry_type_t21MAC_ENTRY_PEER_ROUTERE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt id="_CPPv4N3eos16mac_entry_type_t19MAC_ENTRY_EVPN_INTFE">
+<span id="_CPPv3N3eos16mac_entry_type_t19MAC_ENTRY_EVPN_INTFE"></span><span id="_CPPv2N3eos16mac_entry_type_t19MAC_ENTRY_EVPN_INTFE"></span><span class="target" id="types_2mac__table_8h_1a419ab8952d47f590b27021118da9154fa1f6e9a11949b00319511d02dfd41f3ae"></span><em class="property">enumerator </em><code class="sig-name descname">MAC_ENTRY_EVPN_INTF</code><a class="headerlink" href="#_CPPv4N3eos16mac_entry_type_t19MAC_ENTRY_EVPN_INTFE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Deprecated. </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt id="_CPPv4N3eos16mac_entry_type_t25MAC_ENTRY_EVPN_REMOTE_MACE">
+<span id="_CPPv3N3eos16mac_entry_type_t25MAC_ENTRY_EVPN_REMOTE_MACE"></span><span id="_CPPv2N3eos16mac_entry_type_t25MAC_ENTRY_EVPN_REMOTE_MACE"></span><span class="target" id="types_2mac__table_8h_1a419ab8952d47f590b27021118da9154fadadef6b4898edb9169f1bd3ed116e106"></span><em class="property">enumerator </em><code class="sig-name descname">MAC_ENTRY_EVPN_REMOTE_MAC</code><a class="headerlink" href="#_CPPv4N3eos16mac_entry_type_t25MAC_ENTRY_EVPN_REMOTE_MACE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Deprecated. </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt id="_CPPv4N3eos16mac_entry_type_t30MAC_ENTRY_PEER_EVPN_REMOTE_MACE">
+<span id="_CPPv3N3eos16mac_entry_type_t30MAC_ENTRY_PEER_EVPN_REMOTE_MACE"></span><span id="_CPPv2N3eos16mac_entry_type_t30MAC_ENTRY_PEER_EVPN_REMOTE_MACE"></span><span class="target" id="types_2mac__table_8h_1a419ab8952d47f590b27021118da9154fa0589e745394cfd62ec90b9787987ff3c"></span><em class="property">enumerator </em><code class="sig-name descname">MAC_ENTRY_PEER_EVPN_REMOTE_MAC</code><a class="headerlink" href="#_CPPv4N3eos16mac_entry_type_t30MAC_ENTRY_PEER_EVPN_REMOTE_MACE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Deprecated. </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt id="_CPPv4N3eos16mac_entry_type_t27MAC_ENTRY_EVPN_INTF_DYNAMICE">
+<span id="_CPPv3N3eos16mac_entry_type_t27MAC_ENTRY_EVPN_INTF_DYNAMICE"></span><span id="_CPPv2N3eos16mac_entry_type_t27MAC_ENTRY_EVPN_INTF_DYNAMICE"></span><span class="target" id="types_2mac__table_8h_1a419ab8952d47f590b27021118da9154fa6b657ed11f78b33ceab836060b5f9d5f"></span><em class="property">enumerator </em><code class="sig-name descname">MAC_ENTRY_EVPN_INTF_DYNAMIC</code><a class="headerlink" href="#_CPPv4N3eos16mac_entry_type_t27MAC_ENTRY_EVPN_INTF_DYNAMICE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt id="_CPPv4N3eos16mac_entry_type_t26MAC_ENTRY_EVPN_INTF_STATICE">
+<span id="_CPPv3N3eos16mac_entry_type_t26MAC_ENTRY_EVPN_INTF_STATICE"></span><span id="_CPPv2N3eos16mac_entry_type_t26MAC_ENTRY_EVPN_INTF_STATICE"></span><span class="target" id="types_2mac__table_8h_1a419ab8952d47f590b27021118da9154fa0454bce9aba2c0185a9f47ac923fb77c"></span><em class="property">enumerator </em><code class="sig-name descname">MAC_ENTRY_EVPN_INTF_STATIC</code><a class="headerlink" href="#_CPPv4N3eos16mac_entry_type_t26MAC_ENTRY_EVPN_INTF_STATICE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt id="_CPPv4N3eos16mac_entry_type_t23MAC_ENTRY_AUTHENTICATEDE">
+<span id="_CPPv3N3eos16mac_entry_type_t23MAC_ENTRY_AUTHENTICATEDE"></span><span id="_CPPv2N3eos16mac_entry_type_t23MAC_ENTRY_AUTHENTICATEDE"></span><span class="target" id="types_2mac__table_8h_1a419ab8952d47f590b27021118da9154faa338281ce5ff7ceb88d64f2a43d25ca0"></span><em class="property">enumerator </em><code class="sig-name descname">MAC_ENTRY_AUTHENTICATED</code><a class="headerlink" href="#_CPPv4N3eos16mac_entry_type_t23MAC_ENTRY_AUTHENTICATEDE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt id="_CPPv4N3eos16mac_entry_type_t28MAC_ENTRY_PEER_AUTHENTICATEDE">
+<span id="_CPPv3N3eos16mac_entry_type_t28MAC_ENTRY_PEER_AUTHENTICATEDE"></span><span id="_CPPv2N3eos16mac_entry_type_t28MAC_ENTRY_PEER_AUTHENTICATEDE"></span><span class="target" id="types_2mac__table_8h_1a419ab8952d47f590b27021118da9154fa21d80f1d916e420bb742b01ba33acaee"></span><em class="property">enumerator </em><code class="sig-name descname">MAC_ENTRY_PEER_AUTHENTICATED</code><a class="headerlink" href="#_CPPv4N3eos16mac_entry_type_t28MAC_ENTRY_PEER_AUTHENTICATEDE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt id="_CPPv4N3eos16mac_entry_type_t24MAC_ENTRY_PENDING_SECUREE">
+<span id="_CPPv3N3eos16mac_entry_type_t24MAC_ENTRY_PENDING_SECUREE"></span><span id="_CPPv2N3eos16mac_entry_type_t24MAC_ENTRY_PENDING_SECUREE"></span><span class="target" id="types_2mac__table_8h_1a419ab8952d47f590b27021118da9154fa19f080c88435175582e49ff49033f3a7"></span><em class="property">enumerator </em><code class="sig-name descname">MAC_ENTRY_PENDING_SECURE</code><a class="headerlink" href="#_CPPv4N3eos16mac_entry_type_t24MAC_ENTRY_PENDING_SECUREE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt id="_CPPv4N3eos16mac_entry_type_t29MAC_ENTRY_VPLS_DYNAMIC_REMOTEE">
+<span id="_CPPv3N3eos16mac_entry_type_t29MAC_ENTRY_VPLS_DYNAMIC_REMOTEE"></span><span id="_CPPv2N3eos16mac_entry_type_t29MAC_ENTRY_VPLS_DYNAMIC_REMOTEE"></span><span class="target" id="types_2mac__table_8h_1a419ab8952d47f590b27021118da9154fa35fd1cf9f38641208af6256c11c21da6"></span><em class="property">enumerator </em><code class="sig-name descname">MAC_ENTRY_VPLS_DYNAMIC_REMOTE</code><a class="headerlink" href="#_CPPv4N3eos16mac_entry_type_t29MAC_ENTRY_VPLS_DYNAMIC_REMOTEE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt id="_CPPv4N3eos16mac_entry_type_t34MAC_ENTRY_SOFTWARE_LEARNED_DYNAMICE">
+<span id="_CPPv3N3eos16mac_entry_type_t34MAC_ENTRY_SOFTWARE_LEARNED_DYNAMICE"></span><span id="_CPPv2N3eos16mac_entry_type_t34MAC_ENTRY_SOFTWARE_LEARNED_DYNAMICE"></span><span class="target" id="types_2mac__table_8h_1a419ab8952d47f590b27021118da9154fa77047589837a286bf77948e3bc7097e6"></span><em class="property">enumerator </em><code class="sig-name descname">MAC_ENTRY_SOFTWARE_LEARNED_DYNAMIC</code><a class="headerlink" href="#_CPPv4N3eos16mac_entry_type_t34MAC_ENTRY_SOFTWARE_LEARNED_DYNAMICE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt id="_CPPv4N3eos16mac_entry_type_t31MAC_ENTRY_DFW_CONFIGURED_STATICE">
+<span id="_CPPv3N3eos16mac_entry_type_t31MAC_ENTRY_DFW_CONFIGURED_STATICE"></span><span id="_CPPv2N3eos16mac_entry_type_t31MAC_ENTRY_DFW_CONFIGURED_STATICE"></span><span class="target" id="types_2mac__table_8h_1a419ab8952d47f590b27021118da9154faa60d9bf85c90c768feaa891ce68923b3"></span><em class="property">enumerator </em><code class="sig-name descname">MAC_ENTRY_DFW_CONFIGURED_STATIC</code><a class="headerlink" href="#_CPPv4N3eos16mac_entry_type_t31MAC_ENTRY_DFW_CONFIGURED_STATICE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<dl class="cpp class">
+<dt id="_CPPv4N3eos9mac_key_tE">
+<span id="_CPPv3N3eos9mac_key_tE"></span><span id="_CPPv2N3eos9mac_key_tE"></span><span id="eos::mac_key_t"></span><span class="target" id="classeos_1_1mac__key__t"></span><em class="property">class </em><code class="sig-name descname">mac_key_t</code><a class="headerlink" href="#_CPPv4N3eos9mac_key_tE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><div class="docutils container">
+<em>#include &lt;mac_table.h&gt;</em></div>
+<p>The MAC entry key class. Maps a MAC address with a specific VLAN ID to an interface. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
+<dl class="cpp function">
+<dt id="_CPPv4N3eos9mac_key_t9mac_key_tEv">
+<span id="_CPPv3N3eos9mac_key_t9mac_key_tEv"></span><span id="_CPPv2N3eos9mac_key_t9mac_key_tEv"></span><span id="eos::mac_key_t::mac_key_t"></span><span class="target" id="classeos_1_1mac__key__t_1a88f15a139efa8c1d5914efb8ce6d5ef3"></span><code class="sig-name descname">mac_key_t</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos9mac_key_t9mac_key_tEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Default constructor. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos9mac_key_t9mac_key_tE9vlan_id_tRK10eth_addr_t">
+<span id="_CPPv3N3eos9mac_key_t9mac_key_tE9vlan_id_tRK10eth_addr_t"></span><span id="_CPPv2N3eos9mac_key_t9mac_key_tE9vlan_id_tRK10eth_addr_t"></span><span id="eos::mac_key_t::mac_key_t__vlan_id_t.eth_addr_tCR"></span><span class="target" id="classeos_1_1mac__key__t_1a5478bbbdfab6c9f28a0e57c0be2f27a0"></span><code class="sig-name descname">mac_key_t</code><span class="sig-paren">(</span><a class="reference internal" href="eth.html#_CPPv4N3eos9vlan_id_tE" title="eos::vlan_id_t">vlan_id_t</a> <em>vlan_id</em>, <a class="reference internal" href="eth.html#_CPPv4N3eos10eth_addr_tE" title="eos::eth_addr_t">eth_addr_t</a> <em class="property">const</em> &amp;<em>eth_addr</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos9mac_key_t9mac_key_tE9vlan_id_tRK10eth_addr_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos9mac_key_t9mac_key_tERK9mac_key_t">
+<span id="_CPPv3N3eos9mac_key_t9mac_key_tERK9mac_key_t"></span><span id="_CPPv2N3eos9mac_key_t9mac_key_tERK9mac_key_t"></span><span id="eos::mac_key_t::mac_key_t__mac_key_tCR"></span><span class="target" id="classeos_1_1mac__key__t_1a9c2b39651b0bd606e2cd0040519e8751"></span><code class="sig-name descname">mac_key_t</code><span class="sig-paren">(</span><em class="property">const</em> <a class="reference internal" href="#_CPPv4N3eos9mac_key_t9mac_key_tERK9mac_key_t" title="eos::mac_key_t::mac_key_t">mac_key_t</a> &amp;<em>other</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos9mac_key_t9mac_key_tERK9mac_key_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos9mac_key_taSERK9mac_key_t">
+<span id="_CPPv3N3eos9mac_key_taSERK9mac_key_t"></span><span id="_CPPv2N3eos9mac_key_taSERK9mac_key_t"></span><span id="eos::mac_key_t::assign-operator__mac_key_tCR"></span><span class="target" id="classeos_1_1mac__key__t_1a88ff0c0f8fcacba2ccbdf89a18774a21"></span><a class="reference internal" href="#_CPPv4N3eos9mac_key_tE" title="eos::mac_key_t">mac_key_t</a> &amp;<code class="sig-name descname">operator=</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos9mac_key_tE" title="eos::mac_key_t">mac_key_t</a> <em class="property">const</em> &amp;<em>other</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos9mac_key_taSERK9mac_key_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos9mac_key_t9mac_key_tERR9mac_key_t">
+<span id="_CPPv3N3eos9mac_key_t9mac_key_tERR9mac_key_t"></span><span id="_CPPv2N3eos9mac_key_t9mac_key_tERR9mac_key_t"></span><span id="eos::mac_key_t::mac_key_t__mac_key_tRR"></span><span class="target" id="classeos_1_1mac__key__t_1a6001ee85fb42a561af9c61afaa33efad"></span><code class="sig-name descname">mac_key_t</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos9mac_key_t9mac_key_tERR9mac_key_t" title="eos::mac_key_t::mac_key_t">mac_key_t</a> &amp;&amp;<em>other</em><span class="sig-paren">)</span> <em class="property">noexcept</em><a class="headerlink" href="#_CPPv4N3eos9mac_key_t9mac_key_tERR9mac_key_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos9mac_key_taSERR9mac_key_t">
+<span id="_CPPv3N3eos9mac_key_taSERR9mac_key_t"></span><span id="_CPPv2N3eos9mac_key_taSERR9mac_key_t"></span><span id="eos::mac_key_t::assign-operator__mac_key_tRR"></span><span class="target" id="classeos_1_1mac__key__t_1ad6ba28727220fa746f86d1c17e023cca"></span><a class="reference internal" href="#_CPPv4N3eos9mac_key_tE" title="eos::mac_key_t">mac_key_t</a> &amp;<code class="sig-name descname">operator=</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos9mac_key_tE" title="eos::mac_key_t">mac_key_t</a> &amp;&amp;<em>other</em><span class="sig-paren">)</span> <em class="property">noexcept</em><a class="headerlink" href="#_CPPv4N3eos9mac_key_taSERR9mac_key_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos9mac_key_t7vlan_idEv">
+<span id="_CPPv3NK3eos9mac_key_t7vlan_idEv"></span><span id="_CPPv2NK3eos9mac_key_t7vlan_idEv"></span><span id="eos::mac_key_t::vlan_idC"></span><span class="target" id="classeos_1_1mac__key__t_1accb1f8bdb45d187eebbe940f185b4706"></span><a class="reference internal" href="eth.html#_CPPv4N3eos9vlan_id_tE" title="eos::vlan_id_t">vlan_id_t</a> <code class="sig-name descname">vlan_id</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos9mac_key_t7vlan_idEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Getter for ‘vlan_id’: the VLAN subdomain identifier. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos9mac_key_t8eth_addrEv">
+<span id="_CPPv3NK3eos9mac_key_t8eth_addrEv"></span><span id="_CPPv2NK3eos9mac_key_t8eth_addrEv"></span><span id="eos::mac_key_t::eth_addrC"></span><span class="target" id="classeos_1_1mac__key__t_1a75a5ae03752a021cf3da8e17ea604308"></span><a class="reference internal" href="eth.html#_CPPv4N3eos10eth_addr_tE" title="eos::eth_addr_t">eth_addr_t</a> <code class="sig-name descname">eth_addr</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos9mac_key_t8eth_addrEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Getter for ‘eth_addr’: the Ethernet address of the MAC entry. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos9mac_key_tntEv">
+<span id="_CPPv3NK3eos9mac_key_tntEv"></span><span id="_CPPv2NK3eos9mac_key_tntEv"></span><span id="eos::mac_key_t::not-operatorC"></span><span class="target" id="classeos_1_1mac__key__t_1af0ff4d6edaff4743828e2e1c13f44aeb"></span>bool <code class="sig-name descname">operator!</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos9mac_key_tntEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Non-existent keys are effectively false(so this returns true). </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos9mac_key_teqERK9mac_key_t">
+<span id="_CPPv3NK3eos9mac_key_teqERK9mac_key_t"></span><span id="_CPPv2NK3eos9mac_key_teqERK9mac_key_t"></span><span id="eos::mac_key_t::eq-operator__mac_key_tCRC"></span><span class="target" id="classeos_1_1mac__key__t_1a3be57602af653b3c00d000c39de2e58a"></span>bool <code class="sig-name descname">operator==</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos9mac_key_tE" title="eos::mac_key_t">mac_key_t</a> <em class="property">const</em> &amp;<em>other</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos9mac_key_teqERK9mac_key_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos9mac_key_tneERK9mac_key_t">
+<span id="_CPPv3NK3eos9mac_key_tneERK9mac_key_t"></span><span id="_CPPv2NK3eos9mac_key_tneERK9mac_key_t"></span><span id="eos::mac_key_t::neq-operator__mac_key_tCRC"></span><span class="target" id="classeos_1_1mac__key__t_1a8812aecf7027d83939db12aee9290b7a"></span>bool <code class="sig-name descname">operator!=</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos9mac_key_tE" title="eos::mac_key_t">mac_key_t</a> <em class="property">const</em> &amp;<em>other</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos9mac_key_tneERK9mac_key_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos9mac_key_tltERK9mac_key_t">
+<span id="_CPPv3NK3eos9mac_key_tltERK9mac_key_t"></span><span id="_CPPv2NK3eos9mac_key_tltERK9mac_key_t"></span><span id="eos::mac_key_t::lt-operator__mac_key_tCRC"></span><span class="target" id="classeos_1_1mac__key__t_1ab357694ceb8574d6ce74e6537bffaf9d"></span>bool <code class="sig-name descname">operator&lt;</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos9mac_key_tE" title="eos::mac_key_t">mac_key_t</a> <em class="property">const</em> &amp;<em>other</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos9mac_key_tltERK9mac_key_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos9mac_key_t4hashEv">
+<span id="_CPPv3NK3eos9mac_key_t4hashEv"></span><span id="_CPPv2NK3eos9mac_key_t4hashEv"></span><span id="eos::mac_key_t::hashC"></span><span class="target" id="classeos_1_1mac__key__t_1ae34e53a6cfaf27ad83d0538dc7bd43da"></span>uint32_t <code class="sig-name descname">hash</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos9mac_key_t4hashEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>The hash function for type <a class="reference internal" href="#classeos_1_1mac__key__t"><span class="std std-ref">mac_key_t</span></a>. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos9mac_key_t6mix_meER8hash_mix">
+<span id="_CPPv3NK3eos9mac_key_t6mix_meER8hash_mix"></span><span id="_CPPv2NK3eos9mac_key_t6mix_meER8hash_mix"></span><span id="eos::mac_key_t::mix_me__hash_mixRC"></span><span class="target" id="classeos_1_1mac__key__t_1a9a7da29f1ec3f09c881f94a53e32ba4d"></span>void <code class="sig-name descname">mix_me</code><span class="sig-paren">(</span><a class="reference internal" href="hash_mix.html#_CPPv4N3eos8hash_mixE" title="eos::hash_mix">hash_mix</a> &amp;<em>h</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos9mac_key_t6mix_meER8hash_mix" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>The hash mix function for type <a class="reference internal" href="#classeos_1_1mac__key__t"><span class="std std-ref">mac_key_t</span></a>. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos9mac_key_t9to_stringEv">
+<span id="_CPPv3NK3eos9mac_key_t9to_stringEv"></span><span id="_CPPv2NK3eos9mac_key_t9to_stringEv"></span><span id="eos::mac_key_t::to_stringC"></span><span class="target" id="classeos_1_1mac__key__t_1a6b46913608c938e715f624e39af51646"></span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::string <code class="sig-name descname">to_string</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos9mac_key_t9to_stringEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Returns a string representation of the current object’s values. </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-static-functions">Public Static Functions</p>
+<dl class="cpp function">
+<dt id="_CPPv4N3eos9mac_key_tnwENSt6size_tEPv">
+<span id="_CPPv3N3eos9mac_key_tnwENSt6size_tEPv"></span><span id="_CPPv2N3eos9mac_key_tnwENSt6size_tEPv"></span><span id="eos::mac_key_t::new-operator__std::s.voidP"></span><span class="target" id="classeos_1_1mac__key__t_1a51c286bbf0e6a6838fb0e44588672627"></span><em class="property">static</em> <em class="property">inline</em> void *<code class="sig-name descname">operator new</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::size_t, void *<em>ptr</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos9mac_key_tnwENSt6size_tEPv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos9mac_key_tnwENSt6size_tE">
+<span id="_CPPv3N3eos9mac_key_tnwENSt6size_tE"></span><span id="_CPPv2N3eos9mac_key_tnwENSt6size_tE"></span><span id="eos::mac_key_t::new-operator__std::s"></span><span class="target" id="classeos_1_1mac__key__t_1aef99c7b8363360f464eec527e2c4752c"></span><em class="property">static</em> void *<code class="sig-name descname">operator new</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::size_t<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos9mac_key_tnwENSt6size_tE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos9mac_key_tdlEPv">
+<span id="_CPPv3N3eos9mac_key_tdlEPv"></span><span id="_CPPv2N3eos9mac_key_tdlEPv"></span><span id="eos::mac_key_t::delete-operator__voidP"></span><span class="target" id="classeos_1_1mac__key__t_1a4d579319607a9a2709efc5b567567f42"></span><em class="property">static</em> void <code class="sig-name descname">operator delete</code><span class="sig-paren">(</span>void*<span class="sig-paren">)</span> <em class="property">noexcept</em><a class="headerlink" href="#_CPPv4N3eos9mac_key_tdlEPv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-private-members">Private Members</p>
+<dl class="cpp var">
+<dt id="_CPPv4N3eos9mac_key_t5pimplE">
+<span id="_CPPv3N3eos9mac_key_t5pimplE"></span><span id="_CPPv2N3eos9mac_key_t5pimplE"></span><span id="eos::mac_key_t::pimpl__std::shared_ptr:mac_key_impl_t:"></span><span class="target" id="classeos_1_1mac__key__t_1a65c841e9e80b20e851f33545433619aa"></span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::shared_ptr&lt;mac_key_impl_t&gt; <code class="sig-name descname">pimpl</code><a class="headerlink" href="#_CPPv4N3eos9mac_key_t5pimplE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-friends">Friends</p>
+<dl class="cpp function">
+<dt id="_CPPv4N3eos9mac_key_tlsERNSt7ostreamERK9mac_key_t">
+<span id="_CPPv3N3eos9mac_key_tlsERNSt7ostreamERK9mac_key_t"></span><span id="_CPPv2N3eos9mac_key_tlsERNSt7ostreamERK9mac_key_t"></span><span id="eos::mac_key_t::lshift-operator__osR.mac_key_tCR"></span><span class="target" id="classeos_1_1mac__key__t_1ab10161489b11dabccda4a69fa9abb531"></span><em class="property">friend</em> <a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::ostream &amp;<code class="sig-name descname">operator&lt;&lt;</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::ostream &amp;<em>os</em>, <em class="property">const</em> <a class="reference internal" href="#_CPPv4N3eos9mac_key_tE" title="eos::mac_key_t">mac_key_t</a> &amp;<em>obj</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos9mac_key_tlsERNSt7ostreamERK9mac_key_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>A utility stream operator that adds a string representation of <a class="reference internal" href="#classeos_1_1mac__key__t"><span class="std std-ref">mac_key_t</span></a> to the ostream. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="cpp class">
+<dt id="_CPPv4N3eos11mac_entry_tE">
+<span id="_CPPv3N3eos11mac_entry_tE"></span><span id="_CPPv2N3eos11mac_entry_tE"></span><span id="eos::mac_entry_t"></span><span class="target" id="classeos_1_1mac__entry__t"></span><em class="property">class </em><code class="sig-name descname">mac_entry_t</code><a class="headerlink" href="#_CPPv4N3eos11mac_entry_tE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><div class="docutils container">
+<em>#include &lt;mac_table.h&gt;</em></div>
+<p>An entry from the MAC address table. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
+<dl class="cpp function">
+<dt id="_CPPv4N3eos11mac_entry_t11mac_entry_tEv">
+<span id="_CPPv3N3eos11mac_entry_t11mac_entry_tEv"></span><span id="_CPPv2N3eos11mac_entry_t11mac_entry_tEv"></span><span id="eos::mac_entry_t::mac_entry_t"></span><span class="target" id="classeos_1_1mac__entry__t_1a41c2b44f87e4e573e7e59488db06d8ec"></span><code class="sig-name descname">mac_entry_t</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos11mac_entry_t11mac_entry_tEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Default constructor. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos11mac_entry_t11mac_entry_tERK9mac_key_t">
+<span id="_CPPv3N3eos11mac_entry_t11mac_entry_tERK9mac_key_t"></span><span id="_CPPv2N3eos11mac_entry_t11mac_entry_tERK9mac_key_t"></span><span id="eos::mac_entry_t::mac_entry_t__mac_key_tCR"></span><span class="target" id="classeos_1_1mac__entry__t_1a1b0e0ef4265942c2d5186648c4e52195"></span><em class="property">explicit</em> <code class="sig-name descname">mac_entry_t</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos9mac_key_tE" title="eos::mac_key_t">mac_key_t</a> <em class="property">const</em> &amp;<em>mac_key</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos11mac_entry_t11mac_entry_tERK9mac_key_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Constructor for basic MAC entry. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos11mac_entry_t11mac_entry_tERK9mac_key_t9intf_id_t">
+<span id="_CPPv3N3eos11mac_entry_t11mac_entry_tERK9mac_key_t9intf_id_t"></span><span id="_CPPv2N3eos11mac_entry_t11mac_entry_tERK9mac_key_t9intf_id_t"></span><span id="eos::mac_entry_t::mac_entry_t__mac_key_tCR.intf_id_t"></span><span class="target" id="classeos_1_1mac__entry__t_1ad5c99882e03da1b7a5346ad412752ac0"></span><code class="sig-name descname">mac_entry_t</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos9mac_key_tE" title="eos::mac_key_t">mac_key_t</a> <em class="property">const</em> &amp;<em>mac_key</em>, <a class="reference internal" href="intf.html#_CPPv4N3eos9intf_id_tE" title="eos::intf_id_t">intf_id_t</a> <em>intf</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos11mac_entry_t11mac_entry_tERK9mac_key_t9intf_id_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Constructor for unicast MAC entry and interface. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos11mac_entry_t11mac_entry_tERK9mac_key_tRKNSt3setI9intf_id_tEE">
+<span id="_CPPv3N3eos11mac_entry_t11mac_entry_tERK9mac_key_tRKNSt3setI9intf_id_tEE"></span><span id="_CPPv2N3eos11mac_entry_t11mac_entry_tERK9mac_key_tRKNSt3setI9intf_id_tEE"></span><span id="eos::mac_entry_t::mac_entry_t__mac_key_tCR.std::set:intf_id_t:CR"></span><span class="target" id="classeos_1_1mac__entry__t_1a6ea0f082dfc68c30751af0a683b0f45c"></span><code class="sig-name descname">mac_entry_t</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos9mac_key_tE" title="eos::mac_key_t">mac_key_t</a> <em class="property">const</em> &amp;<em>mac_key</em>, <a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::set&lt;<a class="reference internal" href="intf.html#_CPPv4N3eos9intf_id_tE" title="eos::intf_id_t">intf_id_t</a>&gt; <em class="property">const</em> &amp;<em>intfs</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos11mac_entry_t11mac_entry_tERK9mac_key_tRKNSt3setI9intf_id_tEE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Constructor for multicast MAC entry and interfaces. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos11mac_entry_t11mac_entry_tE9vlan_id_t10eth_addr_t">
+<span id="_CPPv3N3eos11mac_entry_t11mac_entry_tE9vlan_id_t10eth_addr_t"></span><span id="_CPPv2N3eos11mac_entry_t11mac_entry_tE9vlan_id_t10eth_addr_t"></span><span id="eos::mac_entry_t::mac_entry_t__vlan_id_t.eth_addr_t"></span><span class="target" id="classeos_1_1mac__entry__t_1a6353334ba1ee759861d411cb967ed77f"></span><code class="sig-name descname">mac_entry_t</code><span class="sig-paren">(</span><a class="reference internal" href="eth.html#_CPPv4N3eos9vlan_id_tE" title="eos::vlan_id_t">vlan_id_t</a> <em>vlan_id</em>, <a class="reference internal" href="eth.html#_CPPv4N3eos10eth_addr_tE" title="eos::eth_addr_t">eth_addr_t</a> <em>eth_addr</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos11mac_entry_t11mac_entry_tE9vlan_id_t10eth_addr_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Deprecated constructor. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos11mac_entry_t11mac_entry_tE10eth_addr_t9intf_id_t">
+<span id="_CPPv3N3eos11mac_entry_t11mac_entry_tE10eth_addr_t9intf_id_t"></span><span id="_CPPv2N3eos11mac_entry_t11mac_entry_tE10eth_addr_t9intf_id_t"></span><span id="eos::mac_entry_t::mac_entry_t__eth_addr_t.intf_id_t"></span><span class="target" id="classeos_1_1mac__entry__t_1af9e0539ca354d2d3f6c8abe84d7f3612"></span><code class="sig-name descname">mac_entry_t</code><span class="sig-paren">(</span><a class="reference internal" href="eth.html#_CPPv4N3eos10eth_addr_tE" title="eos::eth_addr_t">eth_addr_t</a> <em>eth_addr</em>, <a class="reference internal" href="intf.html#_CPPv4N3eos9intf_id_tE" title="eos::intf_id_t">intf_id_t</a> <em>intf</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos11mac_entry_t11mac_entry_tE10eth_addr_t9intf_id_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Deprecated constructor. Default VLAN identifier is 0. Please use method mac_key_is with a VLAN ID and the eth_addr attribute to set a valid VLAN ID. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos11mac_entry_t11mac_entry_tERK11mac_entry_t">
+<span id="_CPPv3N3eos11mac_entry_t11mac_entry_tERK11mac_entry_t"></span><span id="_CPPv2N3eos11mac_entry_t11mac_entry_tERK11mac_entry_t"></span><span id="eos::mac_entry_t::mac_entry_t__mac_entry_tCR"></span><span class="target" id="classeos_1_1mac__entry__t_1ad27ca52f47054897b66fe4aa5470d273"></span><code class="sig-name descname">mac_entry_t</code><span class="sig-paren">(</span><em class="property">const</em> <a class="reference internal" href="#_CPPv4N3eos11mac_entry_t11mac_entry_tERK11mac_entry_t" title="eos::mac_entry_t::mac_entry_t">mac_entry_t</a> &amp;<em>other</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos11mac_entry_t11mac_entry_tERK11mac_entry_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos11mac_entry_taSERK11mac_entry_t">
+<span id="_CPPv3N3eos11mac_entry_taSERK11mac_entry_t"></span><span id="_CPPv2N3eos11mac_entry_taSERK11mac_entry_t"></span><span id="eos::mac_entry_t::assign-operator__mac_entry_tCR"></span><span class="target" id="classeos_1_1mac__entry__t_1a7790302b828588deee9e63be4f8db697"></span><a class="reference internal" href="#_CPPv4N3eos11mac_entry_tE" title="eos::mac_entry_t">mac_entry_t</a> &amp;<code class="sig-name descname">operator=</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos11mac_entry_tE" title="eos::mac_entry_t">mac_entry_t</a> <em class="property">const</em> &amp;<em>other</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos11mac_entry_taSERK11mac_entry_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos11mac_entry_t11mac_entry_tERR11mac_entry_t">
+<span id="_CPPv3N3eos11mac_entry_t11mac_entry_tERR11mac_entry_t"></span><span id="_CPPv2N3eos11mac_entry_t11mac_entry_tERR11mac_entry_t"></span><span id="eos::mac_entry_t::mac_entry_t__mac_entry_tRR"></span><span class="target" id="classeos_1_1mac__entry__t_1a4fa079b0b54c6ac8170230ee81a13879"></span><code class="sig-name descname">mac_entry_t</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos11mac_entry_t11mac_entry_tERR11mac_entry_t" title="eos::mac_entry_t::mac_entry_t">mac_entry_t</a> &amp;&amp;<em>other</em><span class="sig-paren">)</span> <em class="property">noexcept</em><a class="headerlink" href="#_CPPv4N3eos11mac_entry_t11mac_entry_tERR11mac_entry_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos11mac_entry_taSERR11mac_entry_t">
+<span id="_CPPv3N3eos11mac_entry_taSERR11mac_entry_t"></span><span id="_CPPv2N3eos11mac_entry_taSERR11mac_entry_t"></span><span id="eos::mac_entry_t::assign-operator__mac_entry_tRR"></span><span class="target" id="classeos_1_1mac__entry__t_1a1c38d91fa804b51a09cc74d3d06da88e"></span><a class="reference internal" href="#_CPPv4N3eos11mac_entry_tE" title="eos::mac_entry_t">mac_entry_t</a> &amp;<code class="sig-name descname">operator=</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos11mac_entry_tE" title="eos::mac_entry_t">mac_entry_t</a> &amp;&amp;<em>other</em><span class="sig-paren">)</span> <em class="property">noexcept</em><a class="headerlink" href="#_CPPv4N3eos11mac_entry_taSERR11mac_entry_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos11mac_entry_t7mac_keyEv">
+<span id="_CPPv3NK3eos11mac_entry_t7mac_keyEv"></span><span id="_CPPv2NK3eos11mac_entry_t7mac_keyEv"></span><span id="eos::mac_entry_t::mac_keyC"></span><span class="target" id="classeos_1_1mac__entry__t_1affb7709bf7276167265b87027ca6b56d"></span><a class="reference internal" href="#_CPPv4N3eos9mac_key_tE" title="eos::mac_key_t">mac_key_t</a> <code class="sig-name descname">mac_key</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos11mac_entry_t7mac_keyEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Getter for ‘mac_key’: the key of the MAC entry. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos11mac_entry_t10mac_key_isERK9mac_key_t">
+<span id="_CPPv3N3eos11mac_entry_t10mac_key_isERK9mac_key_t"></span><span id="_CPPv2N3eos11mac_entry_t10mac_key_isERK9mac_key_t"></span><span id="eos::mac_entry_t::mac_key_is__mac_key_tCR"></span><span class="target" id="classeos_1_1mac__entry__t_1a835c01ac041549b4f6e8e282dcdfc8ee"></span>void <code class="sig-name descname">mac_key_is</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos9mac_key_tE" title="eos::mac_key_t">mac_key_t</a> <em class="property">const</em> &amp;<em>mac_key</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos11mac_entry_t10mac_key_isERK9mac_key_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Setter for ‘mac_key’. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos11mac_entry_t10mac_key_isERR9mac_key_t">
+<span id="_CPPv3N3eos11mac_entry_t10mac_key_isERR9mac_key_t"></span><span id="_CPPv2N3eos11mac_entry_t10mac_key_isERR9mac_key_t"></span><span id="eos::mac_entry_t::mac_key_is__mac_key_tRR"></span><span class="target" id="classeos_1_1mac__entry__t_1ac264e7d9ce57eb5a207fbc9b3c8d1471"></span>void <code class="sig-name descname">mac_key_is</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos9mac_key_tE" title="eos::mac_key_t">mac_key_t</a> &amp;&amp;<em>mac_key</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos11mac_entry_t10mac_key_isERR9mac_key_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Moving Setter for ‘mac_key’. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos11mac_entry_t5intfsEv">
+<span id="_CPPv3NK3eos11mac_entry_t5intfsEv"></span><span id="_CPPv2NK3eos11mac_entry_t5intfsEv"></span><span id="eos::mac_entry_t::intfsC"></span><span class="target" id="classeos_1_1mac__entry__t_1a547ec205141550dbb8f884808509da49"></span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::set&lt;<a class="reference internal" href="intf.html#_CPPv4N3eos9intf_id_tE" title="eos::intf_id_t">intf_id_t</a>&gt; <em class="property">const</em> &amp;<code class="sig-name descname">intfs</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos11mac_entry_t5intfsEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Getter for ‘intfs’: the set of interfaces that this key forwards to. For unicast MAC entries, this expects a set with either 1 interface or 0 interfaces to signify a drop. If passed a multicast MAC address, ‘intfs’ can contain one or more output interfaces. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos11mac_entry_t8intfs_isERKNSt3setI9intf_id_tEE">
+<span id="_CPPv3N3eos11mac_entry_t8intfs_isERKNSt3setI9intf_id_tEE"></span><span id="_CPPv2N3eos11mac_entry_t8intfs_isERKNSt3setI9intf_id_tEE"></span><span id="eos::mac_entry_t::intfs_is__std::set:intf_id_t:CR"></span><span class="target" id="classeos_1_1mac__entry__t_1ae121670e38f738e3a4650d1923086da8"></span>void <code class="sig-name descname">intfs_is</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::set&lt;<a class="reference internal" href="intf.html#_CPPv4N3eos9intf_id_tE" title="eos::intf_id_t">intf_id_t</a>&gt; <em class="property">const</em> &amp;<em>intfs</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos11mac_entry_t8intfs_isERKNSt3setI9intf_id_tEE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Setter for ‘intfs’. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos11mac_entry_t8intfs_isERRNSt3setI9intf_id_tEE">
+<span id="_CPPv3N3eos11mac_entry_t8intfs_isERRNSt3setI9intf_id_tEE"></span><span id="_CPPv2N3eos11mac_entry_t8intfs_isERRNSt3setI9intf_id_tEE"></span><span id="eos::mac_entry_t::intfs_is__std::set:intf_id_t:RR"></span><span class="target" id="classeos_1_1mac__entry__t_1a5064eb0af43aeeb4d196b26582ff365d"></span>void <code class="sig-name descname">intfs_is</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::set&lt;<a class="reference internal" href="intf.html#_CPPv4N3eos9intf_id_tE" title="eos::intf_id_t">intf_id_t</a>&gt; &amp;&amp;<em>intfs</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos11mac_entry_t8intfs_isERRNSt3setI9intf_id_tEE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Moving Setter for ‘intfs’. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos11mac_entry_t8intf_setERK9intf_id_t">
+<span id="_CPPv3N3eos11mac_entry_t8intf_setERK9intf_id_t"></span><span id="_CPPv2N3eos11mac_entry_t8intf_setERK9intf_id_t"></span><span id="eos::mac_entry_t::intf_set__intf_id_tCR"></span><span class="target" id="classeos_1_1mac__entry__t_1a6ec88287cb3a91d206a8a9fb6ea1e832"></span>void <code class="sig-name descname">intf_set</code><span class="sig-paren">(</span><a class="reference internal" href="intf.html#_CPPv4N3eos9intf_id_tE" title="eos::intf_id_t">intf_id_t</a> <em class="property">const</em> &amp;<em>value</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos11mac_entry_t8intf_setERK9intf_id_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Inserts one intf of ‘value’ to the set. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos11mac_entry_t8intf_setERR9intf_id_t">
+<span id="_CPPv3N3eos11mac_entry_t8intf_setERR9intf_id_t"></span><span id="_CPPv2N3eos11mac_entry_t8intf_setERR9intf_id_t"></span><span id="eos::mac_entry_t::intf_set__intf_id_tRR"></span><span class="target" id="classeos_1_1mac__entry__t_1a5facb7718b608dc8a4579db7ccc2f4d0"></span>void <code class="sig-name descname">intf_set</code><span class="sig-paren">(</span><a class="reference internal" href="intf.html#_CPPv4N3eos9intf_id_tE" title="eos::intf_id_t">intf_id_t</a> &amp;&amp;<em>value</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos11mac_entry_t8intf_setERR9intf_id_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Inserts one intf of ‘value’ to the set. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos11mac_entry_t8intf_delERK9intf_id_t">
+<span id="_CPPv3N3eos11mac_entry_t8intf_delERK9intf_id_t"></span><span id="_CPPv2N3eos11mac_entry_t8intf_delERK9intf_id_t"></span><span id="eos::mac_entry_t::intf_del__intf_id_tCR"></span><span class="target" id="classeos_1_1mac__entry__t_1afecfe5ab42f58f93ffeeae1d92381340"></span>void <code class="sig-name descname">intf_del</code><span class="sig-paren">(</span><a class="reference internal" href="intf.html#_CPPv4N3eos9intf_id_tE" title="eos::intf_id_t">intf_id_t</a> <em class="property">const</em> &amp;<em>value</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos11mac_entry_t8intf_delERK9intf_id_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Deletes one intf of ‘value’ from the set. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos11mac_entry_tntEv">
+<span id="_CPPv3NK3eos11mac_entry_tntEv"></span><span id="_CPPv2NK3eos11mac_entry_tntEv"></span><span id="eos::mac_entry_t::not-operatorC"></span><span class="target" id="classeos_1_1mac__entry__t_1ab85acb071541a8f3af8a3f73724fa637"></span>bool <code class="sig-name descname">operator!</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos11mac_entry_tntEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Returns ‘true’ if this key is “empty”, that is if neither the VLAN nor the MAC address is set. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos11mac_entry_t7vlan_idEv">
+<span id="_CPPv3NK3eos11mac_entry_t7vlan_idEv"></span><span id="_CPPv2NK3eos11mac_entry_t7vlan_idEv"></span><span id="eos::mac_entry_t::vlan_idC"></span><span class="target" id="classeos_1_1mac__entry__t_1ab03f8715599b9ac5a90282977c527dd9"></span><a class="reference internal" href="eth.html#_CPPv4N3eos9vlan_id_tE" title="eos::vlan_id_t">vlan_id_t</a> <code class="sig-name descname">vlan_id</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos11mac_entry_t7vlan_idEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>The VLAN subdomain identifier of the MAC entry. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos11mac_entry_t8eth_addrEv">
+<span id="_CPPv3NK3eos11mac_entry_t8eth_addrEv"></span><span id="_CPPv2NK3eos11mac_entry_t8eth_addrEv"></span><span id="eos::mac_entry_t::eth_addrC"></span><span class="target" id="classeos_1_1mac__entry__t_1a9f1842d88c8260640f77b688ed38d5bb"></span><a class="reference internal" href="eth.html#_CPPv4N3eos10eth_addr_tE" title="eos::eth_addr_t">eth_addr_t</a> <code class="sig-name descname">eth_addr</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos11mac_entry_t8eth_addrEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>The Ethernet address of the MAC entry. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos11mac_entry_t4intfEv">
+<span id="_CPPv3NK3eos11mac_entry_t4intfEv"></span><span id="_CPPv2NK3eos11mac_entry_t4intfEv"></span><span id="eos::mac_entry_t::intfC"></span><span class="target" id="classeos_1_1mac__entry__t_1abe0e2d29f4f228d256251610f8e4ad9b"></span><a class="reference internal" href="intf.html#_CPPv4N3eos9intf_id_tE" title="eos::intf_id_t">intf_id_t</a> <code class="sig-name descname">intf</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos11mac_entry_t4intfEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Return the interface of the unicast MAC entry, the first interface of a multicast MAC entry, or an empty object if the entry is a drop entry. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos11mac_entry_t7intf_isE9intf_id_t">
+<span id="_CPPv3N3eos11mac_entry_t7intf_isE9intf_id_t"></span><span id="_CPPv2N3eos11mac_entry_t7intf_isE9intf_id_t"></span><span id="eos::mac_entry_t::intf_is__intf_id_t"></span><span class="target" id="classeos_1_1mac__entry__t_1a8795e90ba9f166c559b9c72af3758bff"></span>void <code class="sig-name descname">intf_is</code><span class="sig-paren">(</span><a class="reference internal" href="intf.html#_CPPv4N3eos9intf_id_tE" title="eos::intf_id_t">intf_id_t</a> <em>intf</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos11mac_entry_t7intf_isE9intf_id_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Setter for ‘intf’: a single interface in a MAC entry. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos11mac_entry_teqERK11mac_entry_t">
+<span id="_CPPv3NK3eos11mac_entry_teqERK11mac_entry_t"></span><span id="_CPPv2NK3eos11mac_entry_teqERK11mac_entry_t"></span><span id="eos::mac_entry_t::eq-operator__mac_entry_tCRC"></span><span class="target" id="classeos_1_1mac__entry__t_1ab6a8a0d79b5f0ace589e184287a4479d"></span>bool <code class="sig-name descname">operator==</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos11mac_entry_tE" title="eos::mac_entry_t">mac_entry_t</a> <em class="property">const</em> &amp;<em>other</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos11mac_entry_teqERK11mac_entry_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos11mac_entry_tneERK11mac_entry_t">
+<span id="_CPPv3NK3eos11mac_entry_tneERK11mac_entry_t"></span><span id="_CPPv2NK3eos11mac_entry_tneERK11mac_entry_t"></span><span id="eos::mac_entry_t::neq-operator__mac_entry_tCRC"></span><span class="target" id="classeos_1_1mac__entry__t_1ae192274ef28cb772a21e97a84c45e30b"></span>bool <code class="sig-name descname">operator!=</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos11mac_entry_tE" title="eos::mac_entry_t">mac_entry_t</a> <em class="property">const</em> &amp;<em>other</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos11mac_entry_tneERK11mac_entry_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos11mac_entry_t4hashEv">
+<span id="_CPPv3NK3eos11mac_entry_t4hashEv"></span><span id="_CPPv2NK3eos11mac_entry_t4hashEv"></span><span id="eos::mac_entry_t::hashC"></span><span class="target" id="classeos_1_1mac__entry__t_1a1ca20da9686d183742d9579028b2ad60"></span>uint32_t <code class="sig-name descname">hash</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos11mac_entry_t4hashEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>The hash function for type <a class="reference internal" href="#classeos_1_1mac__entry__t"><span class="std std-ref">mac_entry_t</span></a>. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos11mac_entry_t6mix_meER8hash_mix">
+<span id="_CPPv3NK3eos11mac_entry_t6mix_meER8hash_mix"></span><span id="_CPPv2NK3eos11mac_entry_t6mix_meER8hash_mix"></span><span id="eos::mac_entry_t::mix_me__hash_mixRC"></span><span class="target" id="classeos_1_1mac__entry__t_1aab9e99d1ec741a3be95d6a957fd66e02"></span>void <code class="sig-name descname">mix_me</code><span class="sig-paren">(</span><a class="reference internal" href="hash_mix.html#_CPPv4N3eos8hash_mixE" title="eos::hash_mix">hash_mix</a> &amp;<em>h</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos11mac_entry_t6mix_meER8hash_mix" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>The hash mix function for type <a class="reference internal" href="#classeos_1_1mac__entry__t"><span class="std std-ref">mac_entry_t</span></a>. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos11mac_entry_t9to_stringEv">
+<span id="_CPPv3NK3eos11mac_entry_t9to_stringEv"></span><span id="_CPPv2NK3eos11mac_entry_t9to_stringEv"></span><span id="eos::mac_entry_t::to_stringC"></span><span class="target" id="classeos_1_1mac__entry__t_1a5e7cdcb6cde2d4ffde44231a20fc56f2"></span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::string <code class="sig-name descname">to_string</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos11mac_entry_t9to_stringEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Returns a string representation of the current object’s values. </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-static-functions">Public Static Functions</p>
+<dl class="cpp function">
+<dt id="_CPPv4N3eos11mac_entry_tnwENSt6size_tEPv">
+<span id="_CPPv3N3eos11mac_entry_tnwENSt6size_tEPv"></span><span id="_CPPv2N3eos11mac_entry_tnwENSt6size_tEPv"></span><span id="eos::mac_entry_t::new-operator__std::s.voidP"></span><span class="target" id="classeos_1_1mac__entry__t_1a3afa363e5f93953e52162c5bb7873b0e"></span><em class="property">static</em> <em class="property">inline</em> void *<code class="sig-name descname">operator new</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::size_t, void *<em>ptr</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos11mac_entry_tnwENSt6size_tEPv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos11mac_entry_tnwENSt6size_tE">
+<span id="_CPPv3N3eos11mac_entry_tnwENSt6size_tE"></span><span id="_CPPv2N3eos11mac_entry_tnwENSt6size_tE"></span><span id="eos::mac_entry_t::new-operator__std::s"></span><span class="target" id="classeos_1_1mac__entry__t_1ab2333acbe04606cededc8b0b2849e814"></span><em class="property">static</em> void *<code class="sig-name descname">operator new</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::size_t<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos11mac_entry_tnwENSt6size_tE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos11mac_entry_tdlEPv">
+<span id="_CPPv3N3eos11mac_entry_tdlEPv"></span><span id="_CPPv2N3eos11mac_entry_tdlEPv"></span><span id="eos::mac_entry_t::delete-operator__voidP"></span><span class="target" id="classeos_1_1mac__entry__t_1aa82bcdfd14304bd144fbde46740c4ced"></span><em class="property">static</em> void <code class="sig-name descname">operator delete</code><span class="sig-paren">(</span>void*<span class="sig-paren">)</span> <em class="property">noexcept</em><a class="headerlink" href="#_CPPv4N3eos11mac_entry_tdlEPv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-private-members">Private Members</p>
+<dl class="cpp var">
+<dt id="_CPPv4N3eos11mac_entry_t5pimplE">
+<span id="_CPPv3N3eos11mac_entry_t5pimplE"></span><span id="_CPPv2N3eos11mac_entry_t5pimplE"></span><span id="eos::mac_entry_t::pimpl__std::shared_ptr:mac_entry_impl_t:"></span><span class="target" id="classeos_1_1mac__entry__t_1a7cc7b1d98aad8988c309facc14558a1a"></span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::shared_ptr&lt;mac_entry_impl_t&gt; <code class="sig-name descname">pimpl</code><a class="headerlink" href="#_CPPv4N3eos11mac_entry_t5pimplE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-friends">Friends</p>
+<dl class="cpp function">
+<dt id="_CPPv4N3eos11mac_entry_tlsERNSt7ostreamERK11mac_entry_t">
+<span id="_CPPv3N3eos11mac_entry_tlsERNSt7ostreamERK11mac_entry_t"></span><span id="_CPPv2N3eos11mac_entry_tlsERNSt7ostreamERK11mac_entry_t"></span><span id="eos::mac_entry_t::lshift-operator__osR.mac_entry_tCR"></span><span class="target" id="classeos_1_1mac__entry__t_1ac9837cda6d1839eb6096ab023be18b20"></span><em class="property">friend</em> <a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::ostream &amp;<code class="sig-name descname">operator&lt;&lt;</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::ostream &amp;<em>os</em>, <em class="property">const</em> <a class="reference internal" href="#_CPPv4N3eos11mac_entry_tE" title="eos::mac_entry_t">mac_entry_t</a> &amp;<em>obj</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos11mac_entry_tlsERNSt7ostreamERK11mac_entry_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>A utility stream operator that adds a string representation of <a class="reference internal" href="#classeos_1_1mac__entry__t"><span class="std std-ref">mac_entry_t</span></a> to the ostream. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#"><strong>mac_table</strong></a><ul>
+<li><a class="reference internal" href="#type-definitions-in-mac-table">Type definitions in <strong>mac_table</strong></a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="lldp.html"
+                        title="previous chapter"><strong>lldp</strong></a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="macsec.html"
+                        title="next chapter"><strong>macsec</strong></a></p>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="macsec.html" title="macsec"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="lldp.html" title="lldp"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Arista EOS SDK 2.23.3 reference</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href=""><strong>mac_table</strong></a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2014, Arista Networks.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.4.3.
+    </div>
+  </body>
+</html>

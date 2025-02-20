@@ -1,0 +1,1247 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>fib &#8212; Arista EOS SDK 2.23.3 reference</title>
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/eossdk.css" type="text/css" />
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="hardware_table" href="hardware_table.html" />
+    <link rel="prev" title="fd" href="fd.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="hardware_table.html" title="hardware_table"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="fd.html" title="fd"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Arista EOS SDK 2.23.3 reference</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href=""><strong>fib</strong></a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="fib">
+<h1><strong>fib</strong><a class="headerlink" href="#fib" title="Permalink to this headline">¶</a></h1>
+<p>System Forwarding Information Base (FIB) management</p>
+<p>The FIB represents the system forwarding tables. In this way, it is generally the result of the programming of any routing agents in the system including static and dynamic routing protocols.</p>
+<p>This module allows for direct manipulation of the FIB, as well as a means of reacting to the contents of the table as well as perform queries. </p>
+<dl class="cpp type">
+<dt id="_CPPv43eos">
+<span id="_CPPv33eos"></span><span id="_CPPv23eos"></span><span id="eos"></span><span class="target" id="namespaceeos"></span><em class="property">namespace </em><code class="sig-name descname">eos</code><br /></dt>
+<dd><dl class="cpp class">
+<dt id="_CPPv4N3eos16fib_route_iter_tE">
+<span id="_CPPv3N3eos16fib_route_iter_tE"></span><span id="_CPPv2N3eos16fib_route_iter_tE"></span><span id="eos::fib_route_iter_t"></span><span class="target" id="classeos_1_1fib__route__iter__t"></span><em class="property">class </em><code class="sig-name descname">fib_route_iter_t</code> : <em class="property">public</em> <a class="reference internal" href="acl.html#_CPPv43eos" title="eos">eos</a>::<a class="reference internal" href="iterator.html#_CPPv4I00EN3eos9iter_baseE" title="eos::iter_base">iter_base</a>&lt;<a class="reference internal" href="#_CPPv4N3eos11fib_route_tE" title="eos::fib_route_t">fib_route_t</a>, fib_route_iter_impl&gt;<a class="headerlink" href="#_CPPv4N3eos16fib_route_iter_tE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-private-functions">Private Functions</p>
+<dl class="cpp function">
+<dt id="_CPPv4N3eos16fib_route_iter_t16fib_route_iter_tEPC19fib_route_iter_impl">
+<span id="_CPPv3N3eos16fib_route_iter_t16fib_route_iter_tEPC19fib_route_iter_impl"></span><span id="_CPPv2N3eos16fib_route_iter_t16fib_route_iter_tEPC19fib_route_iter_impl"></span><span id="eos::fib_route_iter_t::fib_route_iter_t__fib_route_iter_implPC"></span><span class="target" id="classeos_1_1fib__route__iter__t_1abd2cfb629b17c3b861bc760be65ba80e"></span><em class="property">explicit</em> <code class="sig-name descname">fib_route_iter_t</code><span class="sig-paren">(</span>fib_route_iter_impl*<em class="property">const</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos16fib_route_iter_t16fib_route_iter_tEPC19fib_route_iter_impl" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-friends">Friends</p>
+<dl class="friendclass">
+<dt>
+<em class="property">friend class</em> fib_route_iter_impl</dt>
+</dl>
+
+</div>
+</dd></dl>
+
+<dl class="cpp class">
+<dt id="_CPPv4N3eos14fib_fec_iter_tE">
+<span id="_CPPv3N3eos14fib_fec_iter_tE"></span><span id="_CPPv2N3eos14fib_fec_iter_tE"></span><span id="eos::fib_fec_iter_t"></span><span class="target" id="classeos_1_1fib__fec__iter__t"></span><em class="property">class </em><code class="sig-name descname">fib_fec_iter_t</code> : <em class="property">public</em> <a class="reference internal" href="acl.html#_CPPv43eos" title="eos">eos</a>::<a class="reference internal" href="iterator.html#_CPPv4I00EN3eos9iter_baseE" title="eos::iter_base">iter_base</a>&lt;<a class="reference internal" href="#_CPPv4N3eos9fib_fec_tE" title="eos::fib_fec_t">fib_fec_t</a>, fib_fec_iter_impl&gt;<a class="headerlink" href="#_CPPv4N3eos14fib_fec_iter_tE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-private-functions">Private Functions</p>
+<dl class="cpp function">
+<dt id="_CPPv4N3eos14fib_fec_iter_t14fib_fec_iter_tEPC17fib_fec_iter_impl">
+<span id="_CPPv3N3eos14fib_fec_iter_t14fib_fec_iter_tEPC17fib_fec_iter_impl"></span><span id="_CPPv2N3eos14fib_fec_iter_t14fib_fec_iter_tEPC17fib_fec_iter_impl"></span><span id="eos::fib_fec_iter_t::fib_fec_iter_t__fib_fec_iter_implPC"></span><span class="target" id="classeos_1_1fib__fec__iter__t_1ae8e154cfe8d48e7a056f7c0708e3777f"></span><em class="property">explicit</em> <code class="sig-name descname">fib_fec_iter_t</code><span class="sig-paren">(</span>fib_fec_iter_impl*<em class="property">const</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos14fib_fec_iter_t14fib_fec_iter_tEPC17fib_fec_iter_impl" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-friends">Friends</p>
+<dl class="friendclass">
+<dt>
+<em class="property">friend class</em> fib_fec_iter_impl</dt>
+</dl>
+
+</div>
+</dd></dl>
+
+<dl class="cpp class">
+<dt id="_CPPv4N3eos11fib_handlerE">
+<span id="_CPPv3N3eos11fib_handlerE"></span><span id="_CPPv2N3eos11fib_handlerE"></span><span id="eos::fib_handler"></span><span class="target" id="classeos_1_1fib__handler"></span><em class="property">class </em><code class="sig-name descname">fib_handler</code> : <em class="property">public</em> <a class="reference internal" href="acl.html#_CPPv43eos" title="eos">eos</a>::<a class="reference internal" href="base_handler.html#_CPPv4I00EN3eos12base_handlerE" title="eos::base_handler">base_handler</a>&lt;<a class="reference internal" href="#_CPPv4N3eos7fib_mgrE" title="eos::fib_mgr">fib_mgr</a>, <a class="reference internal" href="#_CPPv4N3eos11fib_handlerE" title="eos::fib_handler">fib_handler</a>&gt;<a class="headerlink" href="#_CPPv4N3eos11fib_handlerE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><div class="docutils container">
+<em>#include &lt;fib.h&gt;</em></div>
+<p>This class receives changes route/fec collection. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
+<dl class="cpp function">
+<dt id="_CPPv4N3eos11fib_handler11fib_handlerEP7fib_mgr">
+<span id="_CPPv3N3eos11fib_handler11fib_handlerEP7fib_mgr"></span><span id="_CPPv2N3eos11fib_handler11fib_handlerEP7fib_mgr"></span><span id="eos::fib_handler::fib_handler__fib_mgrP"></span><span class="target" id="classeos_1_1fib__handler_1a36dd97505fa572667d841546d85d75b7"></span><em class="property">explicit</em> <code class="sig-name descname">fib_handler</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos7fib_mgrE" title="eos::fib_mgr">fib_mgr</a>*<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos11fib_handler11fib_handlerEP7fib_mgr" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos11fib_handler11get_fib_mgrEv">
+<span id="_CPPv3NK3eos11fib_handler11get_fib_mgrEv"></span><span id="_CPPv2NK3eos11fib_handler11get_fib_mgrEv"></span><span id="eos::fib_handler::get_fib_mgrC"></span><span class="target" id="classeos_1_1fib__handler_1aef0f31a45bd6b892c549394c88e86e78"></span><em class="property">inline</em> <a class="reference internal" href="#_CPPv4N3eos7fib_mgrE" title="eos::fib_mgr">fib_mgr</a> *<code class="sig-name descname">get_fib_mgr</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos11fib_handler11get_fib_mgrEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos11fib_handler12on_route_setERK11fib_route_t">
+<span id="_CPPv3N3eos11fib_handler12on_route_setERK11fib_route_t"></span><span id="_CPPv2N3eos11fib_handler12on_route_setERK11fib_route_t"></span><span id="eos::fib_handler::on_route_set__fib_route_tCR"></span><span class="target" id="classeos_1_1fib__handler_1ad4e0a81382bd7838ab09d68d0172cc45"></span><em class="property">virtual</em> void <code class="sig-name descname">on_route_set</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos11fib_route_tE" title="eos::fib_route_t">fib_route_t</a> <em class="property">const</em>&amp;<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos11fib_handler12on_route_setERK11fib_route_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Handler called when a route gets added or updated. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos11fib_handler12on_route_delERK15fib_route_key_t">
+<span id="_CPPv3N3eos11fib_handler12on_route_delERK15fib_route_key_t"></span><span id="_CPPv2N3eos11fib_handler12on_route_delERK15fib_route_key_t"></span><span id="eos::fib_handler::on_route_del__fib_route_key_tCR"></span><span class="target" id="classeos_1_1fib__handler_1ab0d56795ff8643ae72149c8fae8ac878"></span><em class="property">virtual</em> void <code class="sig-name descname">on_route_del</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos15fib_route_key_tE" title="eos::fib_route_key_t">fib_route_key_t</a> <em class="property">const</em>&amp;<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos11fib_handler12on_route_delERK15fib_route_key_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Handler called when a route gets deleted. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos11fib_handler10on_fec_setERK9fib_fec_t">
+<span id="_CPPv3N3eos11fib_handler10on_fec_setERK9fib_fec_t"></span><span id="_CPPv2N3eos11fib_handler10on_fec_setERK9fib_fec_t"></span><span id="eos::fib_handler::on_fec_set__fib_fec_tCR"></span><span class="target" id="classeos_1_1fib__handler_1a2f4aec5d7dd1e1633fcf1c5fd861f8bc"></span><em class="property">virtual</em> void <code class="sig-name descname">on_fec_set</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos9fib_fec_tE" title="eos::fib_fec_t">fib_fec_t</a> <em class="property">const</em>&amp;<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos11fib_handler10on_fec_setERK9fib_fec_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Handler called when a FEC gets added or updated. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos11fib_handler10on_fec_delERK13fib_fec_key_t">
+<span id="_CPPv3N3eos11fib_handler10on_fec_delERK13fib_fec_key_t"></span><span id="_CPPv2N3eos11fib_handler10on_fec_delERK13fib_fec_key_t"></span><span id="eos::fib_handler::on_fec_del__fib_fec_key_tCR"></span><span class="target" id="classeos_1_1fib__handler_1acada0d4cdcb515611c27f9ac3a490d11"></span><em class="property">virtual</em> void <code class="sig-name descname">on_fec_del</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos13fib_fec_key_tE" title="eos::fib_fec_key_t">fib_fec_key_t</a> <em class="property">const</em>&amp;<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos11fib_handler10on_fec_delERK13fib_fec_key_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Handler called when a FEC gets deleted. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="cpp class">
+<dt id="_CPPv4N3eos7fib_mgrE">
+<span id="_CPPv3N3eos7fib_mgrE"></span><span id="_CPPv2N3eos7fib_mgrE"></span><span id="eos::fib_mgr"></span><span class="target" id="classeos_1_1fib__mgr"></span><em class="property">class </em><code class="sig-name descname">fib_mgr</code> : <em class="property">public</em> <a class="reference internal" href="acl.html#_CPPv43eos" title="eos">eos</a>::<a class="reference internal" href="base_mgr.html#_CPPv4I00EN3eos8base_mgrE" title="eos::base_mgr">base_mgr</a>&lt;<a class="reference internal" href="#_CPPv4N3eos11fib_handlerE" title="eos::fib_handler">fib_handler</a>&gt;<a class="headerlink" href="#_CPPv4N3eos7fib_mgrE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><div class="docutils container">
+<em>#include &lt;fib.h&gt;</em></div>
+<p>The FIB Manager. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
+<dl class="cpp function">
+<dt id="_CPPv4N3eos7fib_mgrD0Ev">
+<span id="_CPPv3N3eos7fib_mgrD0Ev"></span><span id="_CPPv2N3eos7fib_mgrD0Ev"></span><span id="eos::fib_mgr::~fib_mgr"></span><span class="target" id="classeos_1_1fib__mgr_1a25e97fe5595eb4587ef9f94bea5721ab"></span><em class="property">virtual</em> <code class="sig-name descname">~fib_mgr</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos7fib_mgrD0Ev" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos7fib_mgr18set_routeinit_taskEKi">
+<span id="_CPPv3N3eos7fib_mgr18set_routeinit_taskEKi"></span><span id="_CPPv2N3eos7fib_mgr18set_routeinit_taskEKi"></span><span id="eos::fib_mgr::set_routeinit_task__iC"></span><span class="target" id="classeos_1_1fib__mgr_1ac46677e7d371c99c1bb6c7529e8d0779"></span><em class="property">virtual</em> void <code class="sig-name descname">set_routeinit_task</code><span class="sig-paren">(</span>int <em class="property">const</em><span class="sig-paren">)</span> = 0<a class="headerlink" href="#_CPPv4N3eos7fib_mgr18set_routeinit_taskEKi" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos7fib_mgr19set_route6init_taskEKi">
+<span id="_CPPv3N3eos7fib_mgr19set_route6init_taskEKi"></span><span id="_CPPv2N3eos7fib_mgr19set_route6init_taskEKi"></span><span id="eos::fib_mgr::set_route6init_task__iC"></span><span class="target" id="classeos_1_1fib__mgr_1a5fe9637dfc8dbf5e8426c39358a42660"></span><em class="property">virtual</em> void <code class="sig-name descname">set_route6init_task</code><span class="sig-paren">(</span>int <em class="property">const</em><span class="sig-paren">)</span> = 0<a class="headerlink" href="#_CPPv4N3eos7fib_mgr19set_route6init_taskEKi" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos7fib_mgr16set_fecinit_taskEKi">
+<span id="_CPPv3N3eos7fib_mgr16set_fecinit_taskEKi"></span><span id="_CPPv2N3eos7fib_mgr16set_fecinit_taskEKi"></span><span id="eos::fib_mgr::set_fecinit_task__iC"></span><span class="target" id="classeos_1_1fib__mgr_1ac708ede00f4ec14b95b9df68983f57f0"></span><em class="property">virtual</em> void <code class="sig-name descname">set_fecinit_task</code><span class="sig-paren">(</span>int <em class="property">const</em><span class="sig-paren">)</span> = 0<a class="headerlink" href="#_CPPv4N3eos7fib_mgr16set_fecinit_taskEKi" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p><dl class="xrefsect">
+<dt>
+<em>Deprecated:</em></dt>
+<dd><p>Please use ‘set_fecGeninit_task()’ instead. </p>
+</dd></dl>
+
+</p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos7fib_mgr17set_fec6init_taskEKi">
+<span id="_CPPv3N3eos7fib_mgr17set_fec6init_taskEKi"></span><span id="_CPPv2N3eos7fib_mgr17set_fec6init_taskEKi"></span><span id="eos::fib_mgr::set_fec6init_task__iC"></span><span class="target" id="classeos_1_1fib__mgr_1abb7ab9793825eeee2802cb8133449c03"></span><em class="property">virtual</em> void <code class="sig-name descname">set_fec6init_task</code><span class="sig-paren">(</span>int <em class="property">const</em><span class="sig-paren">)</span> = 0<a class="headerlink" href="#_CPPv4N3eos7fib_mgr17set_fec6init_taskEKi" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p><dl class="xrefsect">
+<dt>
+<em>Deprecated:</em></dt>
+<dd><p>Please use ‘set_fecGeninit_task()’ instead. </p>
+</dd></dl>
+
+</p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos7fib_mgr19set_fecGeninit_taskEKi">
+<span id="_CPPv3N3eos7fib_mgr19set_fecGeninit_taskEKi"></span><span id="_CPPv2N3eos7fib_mgr19set_fecGeninit_taskEKi"></span><span id="eos::fib_mgr::set_fecGeninit_task__iC"></span><span class="target" id="classeos_1_1fib__mgr_1a9145b599584d902a3f2eaac81aa7b0fe"></span><em class="property">virtual</em> void <code class="sig-name descname">set_fecGeninit_task</code><span class="sig-paren">(</span>int <em class="property">const</em><span class="sig-paren">)</span> = 0<a class="headerlink" href="#_CPPv4N3eos7fib_mgr19set_fecGeninit_taskEKi" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos7fib_mgr14fib_route_iterEv">
+<span id="_CPPv3NK3eos7fib_mgr14fib_route_iterEv"></span><span id="_CPPv2NK3eos7fib_mgr14fib_route_iterEv"></span><span id="eos::fib_mgr::fib_route_iterC"></span><span class="target" id="classeos_1_1fib__mgr_1ad8f9521decc272dc9c51175ff6d1a62e"></span><em class="property">virtual</em> <a class="reference internal" href="#_CPPv4N3eos16fib_route_iter_tE" title="eos::fib_route_iter_t">fib_route_iter_t</a> <code class="sig-name descname">fib_route_iter</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em> = 0<a class="headerlink" href="#_CPPv4NK3eos7fib_mgr14fib_route_iterEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos7fib_mgr12fib_fec_iterEv">
+<span id="_CPPv3NK3eos7fib_mgr12fib_fec_iterEv"></span><span id="_CPPv2NK3eos7fib_mgr12fib_fec_iterEv"></span><span id="eos::fib_mgr::fib_fec_iterC"></span><span class="target" id="classeos_1_1fib__mgr_1a3ff7150c9cb64d79afce74b749665527"></span><em class="property">virtual</em> <a class="reference internal" href="#_CPPv4N3eos14fib_fec_iter_tE" title="eos::fib_fec_iter_t">fib_fec_iter_t</a> <code class="sig-name descname">fib_fec_iter</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em> = 0<a class="headerlink" href="#_CPPv4NK3eos7fib_mgr12fib_fec_iterEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos7fib_mgr11fib_fec_setERK9fib_fec_t">
+<span id="_CPPv3N3eos7fib_mgr11fib_fec_setERK9fib_fec_t"></span><span id="_CPPv2N3eos7fib_mgr11fib_fec_setERK9fib_fec_t"></span><span id="eos::fib_mgr::fib_fec_set__fib_fec_tCR"></span><span class="target" id="classeos_1_1fib__mgr_1af50dc1b1422ea327f8dc07a893a67f54"></span><em class="property">virtual</em> bool <code class="sig-name descname">fib_fec_set</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos9fib_fec_tE" title="eos::fib_fec_t">fib_fec_t</a> <em class="property">const</em>&amp;<span class="sig-paren">)</span> = 0<a class="headerlink" href="#_CPPv4N3eos7fib_mgr11fib_fec_setERK9fib_fec_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos7fib_mgr11fib_fec_delERK13fib_fec_key_t">
+<span id="_CPPv3N3eos7fib_mgr11fib_fec_delERK13fib_fec_key_t"></span><span id="_CPPv2N3eos7fib_mgr11fib_fec_delERK13fib_fec_key_t"></span><span id="eos::fib_mgr::fib_fec_del__fib_fec_key_tCR"></span><span class="target" id="classeos_1_1fib__mgr_1acd149a8f459bc2ade6c96970d6c56198"></span><em class="property">virtual</em> void <code class="sig-name descname">fib_fec_del</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos13fib_fec_key_tE" title="eos::fib_fec_key_t">fib_fec_key_t</a> <em class="property">const</em>&amp;<span class="sig-paren">)</span> = 0<a class="headerlink" href="#_CPPv4N3eos7fib_mgr11fib_fec_delERK13fib_fec_key_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos7fib_mgr14fib_fec_existsERK13fib_fec_key_t">
+<span id="_CPPv3N3eos7fib_mgr14fib_fec_existsERK13fib_fec_key_t"></span><span id="_CPPv2N3eos7fib_mgr14fib_fec_existsERK13fib_fec_key_t"></span><span id="eos::fib_mgr::fib_fec_exists__fib_fec_key_tCR"></span><span class="target" id="classeos_1_1fib__mgr_1ace7ff52c49ba233d4e2b4de277c2d7a8"></span><em class="property">virtual</em> bool <code class="sig-name descname">fib_fec_exists</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos13fib_fec_key_tE" title="eos::fib_fec_key_t">fib_fec_key_t</a> <em class="property">const</em>&amp;<span class="sig-paren">)</span> = 0<a class="headerlink" href="#_CPPv4N3eos7fib_mgr14fib_fec_existsERK13fib_fec_key_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos7fib_mgr7fib_fecERK13fib_fec_key_t">
+<span id="_CPPv3N3eos7fib_mgr7fib_fecERK13fib_fec_key_t"></span><span id="_CPPv2N3eos7fib_mgr7fib_fecERK13fib_fec_key_t"></span><span id="eos::fib_mgr::fib_fec__fib_fec_key_tCR"></span><span class="target" id="classeos_1_1fib__mgr_1a1b0a8f97a25a50aaa81b83d0b63ac138"></span><em class="property">virtual</em> <a class="reference internal" href="#_CPPv4N3eos9fib_fec_tE" title="eos::fib_fec_t">fib_fec_t</a> <code class="sig-name descname">fib_fec</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos13fib_fec_key_tE" title="eos::fib_fec_key_t">fib_fec_key_t</a> <em class="property">const</em>&amp;<span class="sig-paren">)</span> = 0<a class="headerlink" href="#_CPPv4N3eos7fib_mgr7fib_fecERK13fib_fec_key_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos7fib_mgr13fib_route_setERK11fib_route_t">
+<span id="_CPPv3N3eos7fib_mgr13fib_route_setERK11fib_route_t"></span><span id="_CPPv2N3eos7fib_mgr13fib_route_setERK11fib_route_t"></span><span id="eos::fib_mgr::fib_route_set__fib_route_tCR"></span><span class="target" id="classeos_1_1fib__mgr_1aa55c460614eed88af98da429adb74cec"></span><em class="property">virtual</em> bool <code class="sig-name descname">fib_route_set</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos11fib_route_tE" title="eos::fib_route_t">fib_route_t</a> <em class="property">const</em>&amp;<span class="sig-paren">)</span> = 0<a class="headerlink" href="#_CPPv4N3eos7fib_mgr13fib_route_setERK11fib_route_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos7fib_mgr13fib_route_delERK15fib_route_key_t">
+<span id="_CPPv3N3eos7fib_mgr13fib_route_delERK15fib_route_key_t"></span><span id="_CPPv2N3eos7fib_mgr13fib_route_delERK15fib_route_key_t"></span><span id="eos::fib_mgr::fib_route_del__fib_route_key_tCR"></span><span class="target" id="classeos_1_1fib__mgr_1a9fad77e07390f082596f16d295301061"></span><em class="property">virtual</em> void <code class="sig-name descname">fib_route_del</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos15fib_route_key_tE" title="eos::fib_route_key_t">fib_route_key_t</a> <em class="property">const</em>&amp;<span class="sig-paren">)</span> = 0<a class="headerlink" href="#_CPPv4N3eos7fib_mgr13fib_route_delERK15fib_route_key_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos7fib_mgr16fib_route_existsERK15fib_route_key_t">
+<span id="_CPPv3N3eos7fib_mgr16fib_route_existsERK15fib_route_key_t"></span><span id="_CPPv2N3eos7fib_mgr16fib_route_existsERK15fib_route_key_t"></span><span id="eos::fib_mgr::fib_route_exists__fib_route_key_tCR"></span><span class="target" id="classeos_1_1fib__mgr_1ad42afe150b629eda7025df1050014782"></span><em class="property">virtual</em> bool <code class="sig-name descname">fib_route_exists</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos15fib_route_key_tE" title="eos::fib_route_key_t">fib_route_key_t</a> <em class="property">const</em>&amp;<span class="sig-paren">)</span> = 0<a class="headerlink" href="#_CPPv4N3eos7fib_mgr16fib_route_existsERK15fib_route_key_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos7fib_mgr9fib_routeERK15fib_route_key_t">
+<span id="_CPPv3N3eos7fib_mgr9fib_routeERK15fib_route_key_t"></span><span id="_CPPv2N3eos7fib_mgr9fib_routeERK15fib_route_key_t"></span><span id="eos::fib_mgr::fib_route__fib_route_key_tCR"></span><span class="target" id="classeos_1_1fib__mgr_1afd964c6349b5527f030d24f0ca0f79b0"></span><em class="property">virtual</em> <a class="reference internal" href="#_CPPv4N3eos11fib_route_tE" title="eos::fib_route_t">fib_route_t</a> <code class="sig-name descname">fib_route</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos15fib_route_key_tE" title="eos::fib_route_key_t">fib_route_key_t</a> <em class="property">const</em>&amp;<span class="sig-paren">)</span> = 0<a class="headerlink" href="#_CPPv4N3eos7fib_mgr9fib_routeERK15fib_route_key_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos7fib_mgr12register_vrfERKNSt6stringEb">
+<span id="_CPPv3N3eos7fib_mgr12register_vrfERKNSt6stringEb"></span><span id="_CPPv2N3eos7fib_mgr12register_vrfERKNSt6stringEb"></span><span id="eos::fib_mgr::register_vrf__ssCR.b"></span><span class="target" id="classeos_1_1fib__mgr_1a0425c8824a87e7ecdcf75ddf5fad8133"></span><em class="property">virtual</em> bool <code class="sig-name descname">register_vrf</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::string <em class="property">const</em>&amp;, bool<span class="sig-paren">)</span> = 0<a class="headerlink" href="#_CPPv4N3eos7fib_mgr12register_vrfERKNSt6stringEb" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos7fib_mgr9mode_typeEv">
+<span id="_CPPv3N3eos7fib_mgr9mode_typeEv"></span><span id="_CPPv2N3eos7fib_mgr9mode_typeEv"></span><span id="eos::fib_mgr::mode_type"></span><span class="target" id="classeos_1_1fib__mgr_1a5ffe4a7d76981f4735762c76e15e4045"></span><em class="property">virtual</em> <a class="reference internal" href="sdk.html#_CPPv4N3eos15mgr_mode_type_tE" title="eos::mgr_mode_type_t">mgr_mode_type_t</a> <code class="sig-name descname">mode_type</code><span class="sig-paren">(</span><span class="sig-paren">)</span> = 0<a class="headerlink" href="#_CPPv4N3eos7fib_mgr9mode_typeEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Returns the mode this manager is in. This mode is set during the construction of the manager, i.e.: <code class="docutils literal notranslate"><span class="pre">sdk.get_fib_mgr(MODE_TYPE_READ_NOTIFYING)</span></code>. If MODE_TYPE_READ_ONLY, only the getters and iterators of this manager will function. </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-protected-functions">Protected Functions</p>
+<dl class="cpp function">
+<dt id="_CPPv4N3eos7fib_mgr7fib_mgrEv">
+<span id="_CPPv3N3eos7fib_mgr7fib_mgrEv"></span><span id="_CPPv2N3eos7fib_mgr7fib_mgrEv"></span><span id="eos::fib_mgr::fib_mgr"></span><span class="target" id="classeos_1_1fib__mgr_1ab64e84177cc747c33f5a048d0475a998"></span><code class="sig-name descname">fib_mgr</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos7fib_mgr7fib_mgrEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-private-members">Private Members</p>
+<dl class="cpp var">
+<dt>
+<span class="target" id="classeos_1_1fib__mgr_1a10d3704340c0c0ead2fef181f115464c"></span><code class="sig-name descname">fib_mgr</code></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-friends">Friends</p>
+<dl class="friendclass">
+<dt>
+<em class="property">friend class</em> fib_handler</dt>
+</dl>
+
+</div>
+</dd></dl>
+
+</dd></dl>
+
+<div class="section" id="type-definitions-in-fib">
+<h2>Type definitions in <strong>fib</strong><a class="headerlink" href="#type-definitions-in-fib" title="Permalink to this headline">¶</a></h2>
+<dl class="cpp type">
+<dt>
+<span class="target" id="namespaceeos"></span><em class="property">namespace </em><code class="sig-name descname">eos</code><br /></dt>
+<dd><div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-enums">Enums</p>
+<dl class="cpp enum">
+<dt id="_CPPv4N3eos16fib_route_type_tE">
+<span id="_CPPv3N3eos16fib_route_type_tE"></span><span id="_CPPv2N3eos16fib_route_type_tE"></span><span class="target" id="types_2fib_8h_1a41c1065ec2e8b8144985253e8f2cb399"></span><em class="property">enum </em><code class="sig-name descname">fib_route_type_t</code><a class="headerlink" href="#_CPPv4N3eos16fib_route_type_tE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Enums for host routes and FIB routes. </p>
+<p><em>Values:</em></p>
+<dl class="cpp enumerator">
+<dt id="_CPPv4N3eos16fib_route_type_t18ROUTE_TYPE_INVALIDE">
+<span id="_CPPv3N3eos16fib_route_type_t18ROUTE_TYPE_INVALIDE"></span><span id="_CPPv2N3eos16fib_route_type_t18ROUTE_TYPE_INVALIDE"></span><span class="target" id="types_2fib_8h_1a41c1065ec2e8b8144985253e8f2cb399a47d1f51e729fe7eec3278f0c8e577b94"></span><em class="property">enumerator </em><code class="sig-name descname">ROUTE_TYPE_INVALID</code><a class="headerlink" href="#_CPPv4N3eos16fib_route_type_t18ROUTE_TYPE_INVALIDE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt id="_CPPv4N3eos16fib_route_type_t18ROUTE_TYPE_RECEIVEE">
+<span id="_CPPv3N3eos16fib_route_type_t18ROUTE_TYPE_RECEIVEE"></span><span id="_CPPv2N3eos16fib_route_type_t18ROUTE_TYPE_RECEIVEE"></span><span class="target" id="types_2fib_8h_1a41c1065ec2e8b8144985253e8f2cb399a90a672f37b1c2c2f22726a6fe6b502c7"></span><em class="property">enumerator </em><code class="sig-name descname">ROUTE_TYPE_RECEIVE</code><a class="headerlink" href="#_CPPv4N3eos16fib_route_type_t18ROUTE_TYPE_RECEIVEE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Host routes. </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt id="_CPPv4N3eos16fib_route_type_t24ROUTE_TYPE_RECEIVE_BCASTE">
+<span id="_CPPv3N3eos16fib_route_type_t24ROUTE_TYPE_RECEIVE_BCASTE"></span><span id="_CPPv2N3eos16fib_route_type_t24ROUTE_TYPE_RECEIVE_BCASTE"></span><span class="target" id="types_2fib_8h_1a41c1065ec2e8b8144985253e8f2cb399ad33d34f6dd8d81e1cd22488c8926bf90"></span><em class="property">enumerator </em><code class="sig-name descname">ROUTE_TYPE_RECEIVE_BCAST</code><a class="headerlink" href="#_CPPv4N3eos16fib_route_type_t24ROUTE_TYPE_RECEIVE_BCASTE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt id="_CPPv4N3eos16fib_route_type_t19ROUTE_TYPE_ATTACHEDE">
+<span id="_CPPv3N3eos16fib_route_type_t19ROUTE_TYPE_ATTACHEDE"></span><span id="_CPPv2N3eos16fib_route_type_t19ROUTE_TYPE_ATTACHEDE"></span><span class="target" id="types_2fib_8h_1a41c1065ec2e8b8144985253e8f2cb399ac09e94b140e6b1b65d50b9de81e3acaa"></span><em class="property">enumerator </em><code class="sig-name descname">ROUTE_TYPE_ATTACHED</code><a class="headerlink" href="#_CPPv4N3eos16fib_route_type_t19ROUTE_TYPE_ATTACHEDE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt id="_CPPv4N3eos16fib_route_type_t18ROUTE_TYPE_UNKNOWNE">
+<span id="_CPPv3N3eos16fib_route_type_t18ROUTE_TYPE_UNKNOWNE"></span><span id="_CPPv2N3eos16fib_route_type_t18ROUTE_TYPE_UNKNOWNE"></span><span class="target" id="types_2fib_8h_1a41c1065ec2e8b8144985253e8f2cb399a6757fdd866333135a22e91733b356b40"></span><em class="property">enumerator </em><code class="sig-name descname">ROUTE_TYPE_UNKNOWN</code><a class="headerlink" href="#_CPPv4N3eos16fib_route_type_t18ROUTE_TYPE_UNKNOWNE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Unknows routing protocol. </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt id="_CPPv4N3eos16fib_route_type_t24ROUTE_TYPE_STATIC_CONFIGE">
+<span id="_CPPv3N3eos16fib_route_type_t24ROUTE_TYPE_STATIC_CONFIGE"></span><span id="_CPPv2N3eos16fib_route_type_t24ROUTE_TYPE_STATIC_CONFIGE"></span><span class="target" id="types_2fib_8h_1a41c1065ec2e8b8144985253e8f2cb399ae4cbfd94a31fbc78a5d09ecfbd0f8ac3"></span><em class="property">enumerator </em><code class="sig-name descname">ROUTE_TYPE_STATIC_CONFIG</code><a class="headerlink" href="#_CPPv4N3eos16fib_route_type_t24ROUTE_TYPE_STATIC_CONFIGE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>FIB routes. </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt id="_CPPv4N3eos16fib_route_type_t17ROUTE_TYPE_KERNELE">
+<span id="_CPPv3N3eos16fib_route_type_t17ROUTE_TYPE_KERNELE"></span><span id="_CPPv2N3eos16fib_route_type_t17ROUTE_TYPE_KERNELE"></span><span class="target" id="types_2fib_8h_1a41c1065ec2e8b8144985253e8f2cb399a841e311046ea51289f2a5ff832d07a57"></span><em class="property">enumerator </em><code class="sig-name descname">ROUTE_TYPE_KERNEL</code><a class="headerlink" href="#_CPPv4N3eos16fib_route_type_t17ROUTE_TYPE_KERNELE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt id="_CPPv4N3eos16fib_route_type_t14ROUTE_TYPE_RIPE">
+<span id="_CPPv3N3eos16fib_route_type_t14ROUTE_TYPE_RIPE"></span><span id="_CPPv2N3eos16fib_route_type_t14ROUTE_TYPE_RIPE"></span><span class="target" id="types_2fib_8h_1a41c1065ec2e8b8144985253e8f2cb399aa17560a6e783af222140cd6b03f5f5c4"></span><em class="property">enumerator </em><code class="sig-name descname">ROUTE_TYPE_RIP</code><a class="headerlink" href="#_CPPv4N3eos16fib_route_type_t14ROUTE_TYPE_RIPE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt id="_CPPv4N3eos16fib_route_type_t20ROUTE_TYPE_CONNECTEDE">
+<span id="_CPPv3N3eos16fib_route_type_t20ROUTE_TYPE_CONNECTEDE"></span><span id="_CPPv2N3eos16fib_route_type_t20ROUTE_TYPE_CONNECTEDE"></span><span class="target" id="types_2fib_8h_1a41c1065ec2e8b8144985253e8f2cb399ae55c33bf8eec5bbb0ba78d4c68f3c32d"></span><em class="property">enumerator </em><code class="sig-name descname">ROUTE_TYPE_CONNECTED</code><a class="headerlink" href="#_CPPv4N3eos16fib_route_type_t20ROUTE_TYPE_CONNECTEDE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt id="_CPPv4N3eos16fib_route_type_t19ROUTE_TYPE_REDIRECTE">
+<span id="_CPPv3N3eos16fib_route_type_t19ROUTE_TYPE_REDIRECTE"></span><span id="_CPPv2N3eos16fib_route_type_t19ROUTE_TYPE_REDIRECTE"></span><span class="target" id="types_2fib_8h_1a41c1065ec2e8b8144985253e8f2cb399a7e7976583251a79616677de01af6ae81"></span><em class="property">enumerator </em><code class="sig-name descname">ROUTE_TYPE_REDIRECT</code><a class="headerlink" href="#_CPPv4N3eos16fib_route_type_t19ROUTE_TYPE_REDIRECTE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt id="_CPPv4N3eos16fib_route_type_t24ROUTE_TYPE_BGP_AGGREGATEE">
+<span id="_CPPv3N3eos16fib_route_type_t24ROUTE_TYPE_BGP_AGGREGATEE"></span><span id="_CPPv2N3eos16fib_route_type_t24ROUTE_TYPE_BGP_AGGREGATEE"></span><span class="target" id="types_2fib_8h_1a41c1065ec2e8b8144985253e8f2cb399aa7072be5f6ca80d6cb62ad398de46434"></span><em class="property">enumerator </em><code class="sig-name descname">ROUTE_TYPE_BGP_AGGREGATE</code><a class="headerlink" href="#_CPPv4N3eos16fib_route_type_t24ROUTE_TYPE_BGP_AGGREGATEE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt id="_CPPv4N3eos16fib_route_type_t25ROUTE_TYPE_OSPF_AGGREGATEE">
+<span id="_CPPv3N3eos16fib_route_type_t25ROUTE_TYPE_OSPF_AGGREGATEE"></span><span id="_CPPv2N3eos16fib_route_type_t25ROUTE_TYPE_OSPF_AGGREGATEE"></span><span class="target" id="types_2fib_8h_1a41c1065ec2e8b8144985253e8f2cb399a10dacc7818d7e0af9ae9074e85473b11"></span><em class="property">enumerator </em><code class="sig-name descname">ROUTE_TYPE_OSPF_AGGREGATE</code><a class="headerlink" href="#_CPPv4N3eos16fib_route_type_t25ROUTE_TYPE_OSPF_AGGREGATEE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt id="_CPPv4N3eos16fib_route_type_t26ROUTE_TYPE_OSPF_INTRA_AREAE">
+<span id="_CPPv3N3eos16fib_route_type_t26ROUTE_TYPE_OSPF_INTRA_AREAE"></span><span id="_CPPv2N3eos16fib_route_type_t26ROUTE_TYPE_OSPF_INTRA_AREAE"></span><span class="target" id="types_2fib_8h_1a41c1065ec2e8b8144985253e8f2cb399aeb6d1445b0cbf042e576ba50f2271b2e"></span><em class="property">enumerator </em><code class="sig-name descname">ROUTE_TYPE_OSPF_INTRA_AREA</code><a class="headerlink" href="#_CPPv4N3eos16fib_route_type_t26ROUTE_TYPE_OSPF_INTRA_AREAE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt id="_CPPv4N3eos16fib_route_type_t26ROUTE_TYPE_OSPF_INTER_AREAE">
+<span id="_CPPv3N3eos16fib_route_type_t26ROUTE_TYPE_OSPF_INTER_AREAE"></span><span id="_CPPv2N3eos16fib_route_type_t26ROUTE_TYPE_OSPF_INTER_AREAE"></span><span class="target" id="types_2fib_8h_1a41c1065ec2e8b8144985253e8f2cb399ab7c5f75789349b9a92eef8d09c7a0ba5"></span><em class="property">enumerator </em><code class="sig-name descname">ROUTE_TYPE_OSPF_INTER_AREA</code><a class="headerlink" href="#_CPPv4N3eos16fib_route_type_t26ROUTE_TYPE_OSPF_INTER_AREAE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt id="_CPPv4N3eos16fib_route_type_t30ROUTE_TYPE_OSPF_EXTERNAL_TYPE1E">
+<span id="_CPPv3N3eos16fib_route_type_t30ROUTE_TYPE_OSPF_EXTERNAL_TYPE1E"></span><span id="_CPPv2N3eos16fib_route_type_t30ROUTE_TYPE_OSPF_EXTERNAL_TYPE1E"></span><span class="target" id="types_2fib_8h_1a41c1065ec2e8b8144985253e8f2cb399ab51680dac49b51f0ca941c0aab4352c3"></span><em class="property">enumerator </em><code class="sig-name descname">ROUTE_TYPE_OSPF_EXTERNAL_TYPE1</code><a class="headerlink" href="#_CPPv4N3eos16fib_route_type_t30ROUTE_TYPE_OSPF_EXTERNAL_TYPE1E" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt id="_CPPv4N3eos16fib_route_type_t30ROUTE_TYPE_OSPF_EXTERNAL_TYPE2E">
+<span id="_CPPv3N3eos16fib_route_type_t30ROUTE_TYPE_OSPF_EXTERNAL_TYPE2E"></span><span id="_CPPv2N3eos16fib_route_type_t30ROUTE_TYPE_OSPF_EXTERNAL_TYPE2E"></span><span class="target" id="types_2fib_8h_1a41c1065ec2e8b8144985253e8f2cb399a3ca3542ee2e0a16ae894b01dd8830dc7"></span><em class="property">enumerator </em><code class="sig-name descname">ROUTE_TYPE_OSPF_EXTERNAL_TYPE2</code><a class="headerlink" href="#_CPPv4N3eos16fib_route_type_t30ROUTE_TYPE_OSPF_EXTERNAL_TYPE2E" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt id="_CPPv4N3eos16fib_route_type_t35ROUTE_TYPE_OSPF_NSSA_EXTERNAL_TYPE1E">
+<span id="_CPPv3N3eos16fib_route_type_t35ROUTE_TYPE_OSPF_NSSA_EXTERNAL_TYPE1E"></span><span id="_CPPv2N3eos16fib_route_type_t35ROUTE_TYPE_OSPF_NSSA_EXTERNAL_TYPE1E"></span><span class="target" id="types_2fib_8h_1a41c1065ec2e8b8144985253e8f2cb399aeeb699e060127449b99fbbb523961403"></span><em class="property">enumerator </em><code class="sig-name descname">ROUTE_TYPE_OSPF_NSSA_EXTERNAL_TYPE1</code><a class="headerlink" href="#_CPPv4N3eos16fib_route_type_t35ROUTE_TYPE_OSPF_NSSA_EXTERNAL_TYPE1E" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt id="_CPPv4N3eos16fib_route_type_t35ROUTE_TYPE_OSPF_NSSA_EXTERNAL_TYPE2E">
+<span id="_CPPv3N3eos16fib_route_type_t35ROUTE_TYPE_OSPF_NSSA_EXTERNAL_TYPE2E"></span><span id="_CPPv2N3eos16fib_route_type_t35ROUTE_TYPE_OSPF_NSSA_EXTERNAL_TYPE2E"></span><span class="target" id="types_2fib_8h_1a41c1065ec2e8b8144985253e8f2cb399a32cbd55d97394fd335969fc22eb84116"></span><em class="property">enumerator </em><code class="sig-name descname">ROUTE_TYPE_OSPF_NSSA_EXTERNAL_TYPE2</code><a class="headerlink" href="#_CPPv4N3eos16fib_route_type_t35ROUTE_TYPE_OSPF_NSSA_EXTERNAL_TYPE2E" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt id="_CPPv4N3eos16fib_route_type_t14ROUTE_TYPE_BGPE">
+<span id="_CPPv3N3eos16fib_route_type_t14ROUTE_TYPE_BGPE"></span><span id="_CPPv2N3eos16fib_route_type_t14ROUTE_TYPE_BGPE"></span><span class="target" id="types_2fib_8h_1a41c1065ec2e8b8144985253e8f2cb399aa96493b5e50c3f25977338d4ad8b67be"></span><em class="property">enumerator </em><code class="sig-name descname">ROUTE_TYPE_BGP</code><a class="headerlink" href="#_CPPv4N3eos16fib_route_type_t14ROUTE_TYPE_BGPE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt id="_CPPv4N3eos16fib_route_type_t15ROUTE_TYPE_IBGPE">
+<span id="_CPPv3N3eos16fib_route_type_t15ROUTE_TYPE_IBGPE"></span><span id="_CPPv2N3eos16fib_route_type_t15ROUTE_TYPE_IBGPE"></span><span class="target" id="types_2fib_8h_1a41c1065ec2e8b8144985253e8f2cb399a7d855aa069839cba50ddc44cd8e94f3a"></span><em class="property">enumerator </em><code class="sig-name descname">ROUTE_TYPE_IBGP</code><a class="headerlink" href="#_CPPv4N3eos16fib_route_type_t15ROUTE_TYPE_IBGPE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt id="_CPPv4N3eos16fib_route_type_t15ROUTE_TYPE_EBGPE">
+<span id="_CPPv3N3eos16fib_route_type_t15ROUTE_TYPE_EBGPE"></span><span id="_CPPv2N3eos16fib_route_type_t15ROUTE_TYPE_EBGPE"></span><span class="target" id="types_2fib_8h_1a41c1065ec2e8b8144985253e8f2cb399a4aa5b9917e63f56142fe2a6d00c36586"></span><em class="property">enumerator </em><code class="sig-name descname">ROUTE_TYPE_EBGP</code><a class="headerlink" href="#_CPPv4N3eos16fib_route_type_t15ROUTE_TYPE_EBGPE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt id="_CPPv4N3eos16fib_route_type_t15ROUTE_TYPE_LBGPE">
+<span id="_CPPv3N3eos16fib_route_type_t15ROUTE_TYPE_LBGPE"></span><span id="_CPPv2N3eos16fib_route_type_t15ROUTE_TYPE_LBGPE"></span><span class="target" id="types_2fib_8h_1a41c1065ec2e8b8144985253e8f2cb399af93aa3c19a79e7ef3e96fff320922b2b"></span><em class="property">enumerator </em><code class="sig-name descname">ROUTE_TYPE_LBGP</code><a class="headerlink" href="#_CPPv4N3eos16fib_route_type_t15ROUTE_TYPE_LBGPE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt id="_CPPv4N3eos16fib_route_type_t15ROUTE_TYPE_ISISE">
+<span id="_CPPv3N3eos16fib_route_type_t15ROUTE_TYPE_ISISE"></span><span id="_CPPv2N3eos16fib_route_type_t15ROUTE_TYPE_ISISE"></span><span class="target" id="types_2fib_8h_1a41c1065ec2e8b8144985253e8f2cb399a84343b168194b1fc3f08477ad2ee0608"></span><em class="property">enumerator </em><code class="sig-name descname">ROUTE_TYPE_ISIS</code><a class="headerlink" href="#_CPPv4N3eos16fib_route_type_t15ROUTE_TYPE_ISISE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Unused in EOS 4.15.1, use ROUTE_TYPE_ISIS_LEVEL1/2 instead. </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt id="_CPPv4N3eos16fib_route_type_t22ROUTE_TYPE_ISIS_LEVEL1E">
+<span id="_CPPv3N3eos16fib_route_type_t22ROUTE_TYPE_ISIS_LEVEL1E"></span><span id="_CPPv2N3eos16fib_route_type_t22ROUTE_TYPE_ISIS_LEVEL1E"></span><span class="target" id="types_2fib_8h_1a41c1065ec2e8b8144985253e8f2cb399a5be313c22690c382ce37b890a5c6fa21"></span><em class="property">enumerator </em><code class="sig-name descname">ROUTE_TYPE_ISIS_LEVEL1</code><a class="headerlink" href="#_CPPv4N3eos16fib_route_type_t22ROUTE_TYPE_ISIS_LEVEL1E" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt id="_CPPv4N3eos16fib_route_type_t22ROUTE_TYPE_ISIS_LEVEL2E">
+<span id="_CPPv3N3eos16fib_route_type_t22ROUTE_TYPE_ISIS_LEVEL2E"></span><span id="_CPPv2N3eos16fib_route_type_t22ROUTE_TYPE_ISIS_LEVEL2E"></span><span class="target" id="types_2fib_8h_1a41c1065ec2e8b8144985253e8f2cb399ae3c690d6922e018ba253f33f5e778421"></span><em class="property">enumerator </em><code class="sig-name descname">ROUTE_TYPE_ISIS_LEVEL2</code><a class="headerlink" href="#_CPPv4N3eos16fib_route_type_t22ROUTE_TYPE_ISIS_LEVEL2E" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt id="_CPPv4N3eos16fib_route_type_t24ROUTE_TYPE_NEXTHOP_GROUPE">
+<span id="_CPPv3N3eos16fib_route_type_t24ROUTE_TYPE_NEXTHOP_GROUPE"></span><span id="_CPPv2N3eos16fib_route_type_t24ROUTE_TYPE_NEXTHOP_GROUPE"></span><span class="target" id="types_2fib_8h_1a41c1065ec2e8b8144985253e8f2cb399a71366beb4b16fb694e5c5fa73034f4d9"></span><em class="property">enumerator </em><code class="sig-name descname">ROUTE_TYPE_NEXTHOP_GROUP</code><a class="headerlink" href="#_CPPv4N3eos16fib_route_type_t24ROUTE_TYPE_NEXTHOP_GROUPE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt id="_CPPv4N3eos16fib_route_type_t16ROUTE_TYPE_OSPF3E">
+<span id="_CPPv3N3eos16fib_route_type_t16ROUTE_TYPE_OSPF3E"></span><span id="_CPPv2N3eos16fib_route_type_t16ROUTE_TYPE_OSPF3E"></span><span class="target" id="types_2fib_8h_1a41c1065ec2e8b8144985253e8f2cb399a03fc8100089c241a7d71e7e88400a02c"></span><em class="property">enumerator </em><code class="sig-name descname">ROUTE_TYPE_OSPF3</code><a class="headerlink" href="#_CPPv4N3eos16fib_route_type_t16ROUTE_TYPE_OSPF3E" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+<dl class="cpp enum">
+<dt id="_CPPv4N3eos14fib_fec_type_tE">
+<span id="_CPPv3N3eos14fib_fec_type_tE"></span><span id="_CPPv2N3eos14fib_fec_type_tE"></span><span class="target" id="types_2fib_8h_1add6d44f65e901f5d8eb72f108a7240b8"></span><em class="property">enum </em><code class="sig-name descname">fib_fec_type_t</code><a class="headerlink" href="#_CPPv4N3eos14fib_fec_type_tE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p><em>Values:</em></p>
+<dl class="cpp enumerator">
+<dt id="_CPPv4N3eos14fib_fec_type_t16FEC_TYPE_FORWARDE">
+<span id="_CPPv3N3eos14fib_fec_type_t16FEC_TYPE_FORWARDE"></span><span id="_CPPv2N3eos14fib_fec_type_t16FEC_TYPE_FORWARDE"></span><span class="target" id="types_2fib_8h_1add6d44f65e901f5d8eb72f108a7240b8a42e48a1f69661bf67b5737f3ddaac46d"></span><em class="property">enumerator </em><code class="sig-name descname">FEC_TYPE_FORWARD</code><a class="headerlink" href="#_CPPv4N3eos14fib_fec_type_t16FEC_TYPE_FORWARDE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt id="_CPPv4N3eos14fib_fec_type_t13FEC_TYPE_DROPE">
+<span id="_CPPv3N3eos14fib_fec_type_t13FEC_TYPE_DROPE"></span><span id="_CPPv2N3eos14fib_fec_type_t13FEC_TYPE_DROPE"></span><span class="target" id="types_2fib_8h_1add6d44f65e901f5d8eb72f108a7240b8a3cfbb54de3b2559ff4b69daa5089a665"></span><em class="property">enumerator </em><code class="sig-name descname">FEC_TYPE_DROP</code><a class="headerlink" href="#_CPPv4N3eos14fib_fec_type_t13FEC_TYPE_DROPE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt id="_CPPv4N3eos14fib_fec_type_t16FEC_TYPE_RECEIVEE">
+<span id="_CPPv3N3eos14fib_fec_type_t16FEC_TYPE_RECEIVEE"></span><span id="_CPPv2N3eos14fib_fec_type_t16FEC_TYPE_RECEIVEE"></span><span class="target" id="types_2fib_8h_1add6d44f65e901f5d8eb72f108a7240b8ae70a8aa3cf7798e108ffd97916caba4c"></span><em class="property">enumerator </em><code class="sig-name descname">FEC_TYPE_RECEIVE</code><a class="headerlink" href="#_CPPv4N3eos14fib_fec_type_t16FEC_TYPE_RECEIVEE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt id="_CPPv4N3eos14fib_fec_type_t17FEC_TYPE_ATTACHEDE">
+<span id="_CPPv3N3eos14fib_fec_type_t17FEC_TYPE_ATTACHEDE"></span><span id="_CPPv2N3eos14fib_fec_type_t17FEC_TYPE_ATTACHEDE"></span><span class="target" id="types_2fib_8h_1add6d44f65e901f5d8eb72f108a7240b8a585124d060b7336013d3f2b3743dc4f0"></span><em class="property">enumerator </em><code class="sig-name descname">FEC_TYPE_ATTACHED</code><a class="headerlink" href="#_CPPv4N3eos14fib_fec_type_t17FEC_TYPE_ATTACHEDE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt id="_CPPv4N3eos14fib_fec_type_t22FEC_TYPE_RECEIVE_BCASTE">
+<span id="_CPPv3N3eos14fib_fec_type_t22FEC_TYPE_RECEIVE_BCASTE"></span><span id="_CPPv2N3eos14fib_fec_type_t22FEC_TYPE_RECEIVE_BCASTE"></span><span class="target" id="types_2fib_8h_1add6d44f65e901f5d8eb72f108a7240b8a79b9edddb9793d4f8fa3bbfcefb2f28d"></span><em class="property">enumerator </em><code class="sig-name descname">FEC_TYPE_RECEIVE_BCAST</code><a class="headerlink" href="#_CPPv4N3eos14fib_fec_type_t22FEC_TYPE_RECEIVE_BCASTE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt id="_CPPv4N3eos14fib_fec_type_t22FEC_TYPE_NEXTHOP_GROUPE">
+<span id="_CPPv3N3eos14fib_fec_type_t22FEC_TYPE_NEXTHOP_GROUPE"></span><span id="_CPPv2N3eos14fib_fec_type_t22FEC_TYPE_NEXTHOP_GROUPE"></span><span class="target" id="types_2fib_8h_1add6d44f65e901f5d8eb72f108a7240b8a6e4de596c629ef10fed90f0f40fa7e92"></span><em class="property">enumerator </em><code class="sig-name descname">FEC_TYPE_NEXTHOP_GROUP</code><a class="headerlink" href="#_CPPv4N3eos14fib_fec_type_t22FEC_TYPE_NEXTHOP_GROUPE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt id="_CPPv4N3eos14fib_fec_type_t15FEC_TYPE_KERNELE">
+<span id="_CPPv3N3eos14fib_fec_type_t15FEC_TYPE_KERNELE"></span><span id="_CPPv2N3eos14fib_fec_type_t15FEC_TYPE_KERNELE"></span><span class="target" id="types_2fib_8h_1add6d44f65e901f5d8eb72f108a7240b8aa2ded16c022e021f492a1886f7120cb7"></span><em class="property">enumerator </em><code class="sig-name descname">FEC_TYPE_KERNEL</code><a class="headerlink" href="#_CPPv4N3eos14fib_fec_type_t15FEC_TYPE_KERNELE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt id="_CPPv4N3eos14fib_fec_type_t16FEC_TYPE_UNKNOWNE">
+<span id="_CPPv3N3eos14fib_fec_type_t16FEC_TYPE_UNKNOWNE"></span><span id="_CPPv2N3eos14fib_fec_type_t16FEC_TYPE_UNKNOWNE"></span><span class="target" id="types_2fib_8h_1add6d44f65e901f5d8eb72f108a7240b8a21f45347a9707fdba4e97dd6d8ce053d"></span><em class="property">enumerator </em><code class="sig-name descname">FEC_TYPE_UNKNOWN</code><a class="headerlink" href="#_CPPv4N3eos14fib_fec_type_t16FEC_TYPE_UNKNOWNE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<dl class="cpp class">
+<dt id="_CPPv4N3eos15fib_route_key_tE">
+<span id="_CPPv3N3eos15fib_route_key_tE"></span><span id="_CPPv2N3eos15fib_route_key_tE"></span><span id="eos::fib_route_key_t"></span><span class="target" id="classeos_1_1fib__route__key__t"></span><em class="property">class </em><code class="sig-name descname">fib_route_key_t</code><a class="headerlink" href="#_CPPv4N3eos15fib_route_key_tE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><div class="docutils container">
+<em>#include &lt;fib.h&gt;</em></div>
+<p>An IP route key that goes in FIB. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
+<dl class="cpp function">
+<dt id="_CPPv4N3eos15fib_route_key_t15fib_route_key_tEv">
+<span id="_CPPv3N3eos15fib_route_key_t15fib_route_key_tEv"></span><span id="_CPPv2N3eos15fib_route_key_t15fib_route_key_tEv"></span><span id="eos::fib_route_key_t::fib_route_key_t"></span><span class="target" id="classeos_1_1fib__route__key__t_1affe7e8cd4830de816e36f4cb44c7e810"></span><code class="sig-name descname">fib_route_key_t</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos15fib_route_key_t15fib_route_key_tEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos15fib_route_key_t15fib_route_key_tERK11ip_prefix_t">
+<span id="_CPPv3N3eos15fib_route_key_t15fib_route_key_tERK11ip_prefix_t"></span><span id="_CPPv2N3eos15fib_route_key_t15fib_route_key_tERK11ip_prefix_t"></span><span id="eos::fib_route_key_t::fib_route_key_t__ip_prefix_tCR"></span><span class="target" id="classeos_1_1fib__route__key__t_1af4c328c03cb10d0c6b7981382120a2ce"></span><em class="property">explicit</em> <code class="sig-name descname">fib_route_key_t</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#_CPPv4N3eos11ip_prefix_tE" title="eos::ip_prefix_t">ip_prefix_t</a> <em class="property">const</em> &amp;<em>prefix</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos15fib_route_key_t15fib_route_key_tERK11ip_prefix_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos15fib_route_key_t15fib_route_key_tERK15fib_route_key_t">
+<span id="_CPPv3N3eos15fib_route_key_t15fib_route_key_tERK15fib_route_key_t"></span><span id="_CPPv2N3eos15fib_route_key_t15fib_route_key_tERK15fib_route_key_t"></span><span id="eos::fib_route_key_t::fib_route_key_t__fib_route_key_tCR"></span><span class="target" id="classeos_1_1fib__route__key__t_1a3001ce8b7e3efe0c4ab2828e61d288b7"></span><code class="sig-name descname">fib_route_key_t</code><span class="sig-paren">(</span><em class="property">const</em> <a class="reference internal" href="#_CPPv4N3eos15fib_route_key_t15fib_route_key_tERK15fib_route_key_t" title="eos::fib_route_key_t::fib_route_key_t">fib_route_key_t</a> &amp;<em>other</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos15fib_route_key_t15fib_route_key_tERK15fib_route_key_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos15fib_route_key_taSERK15fib_route_key_t">
+<span id="_CPPv3N3eos15fib_route_key_taSERK15fib_route_key_t"></span><span id="_CPPv2N3eos15fib_route_key_taSERK15fib_route_key_t"></span><span id="eos::fib_route_key_t::assign-operator__fib_route_key_tCR"></span><span class="target" id="classeos_1_1fib__route__key__t_1aa0982fec0c4f6af7fa54227bdcee167b"></span><a class="reference internal" href="#_CPPv4N3eos15fib_route_key_tE" title="eos::fib_route_key_t">fib_route_key_t</a> &amp;<code class="sig-name descname">operator=</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos15fib_route_key_tE" title="eos::fib_route_key_t">fib_route_key_t</a> <em class="property">const</em> &amp;<em>other</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos15fib_route_key_taSERK15fib_route_key_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos15fib_route_key_t15fib_route_key_tERR15fib_route_key_t">
+<span id="_CPPv3N3eos15fib_route_key_t15fib_route_key_tERR15fib_route_key_t"></span><span id="_CPPv2N3eos15fib_route_key_t15fib_route_key_tERR15fib_route_key_t"></span><span id="eos::fib_route_key_t::fib_route_key_t__fib_route_key_tRR"></span><span class="target" id="classeos_1_1fib__route__key__t_1ab1c03c4edf2a051d9ef7ec41bc179458"></span><code class="sig-name descname">fib_route_key_t</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos15fib_route_key_t15fib_route_key_tERR15fib_route_key_t" title="eos::fib_route_key_t::fib_route_key_t">fib_route_key_t</a> &amp;&amp;<em>other</em><span class="sig-paren">)</span> <em class="property">noexcept</em><a class="headerlink" href="#_CPPv4N3eos15fib_route_key_t15fib_route_key_tERR15fib_route_key_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos15fib_route_key_taSERR15fib_route_key_t">
+<span id="_CPPv3N3eos15fib_route_key_taSERR15fib_route_key_t"></span><span id="_CPPv2N3eos15fib_route_key_taSERR15fib_route_key_t"></span><span id="eos::fib_route_key_t::assign-operator__fib_route_key_tRR"></span><span class="target" id="classeos_1_1fib__route__key__t_1a60713c9ff688fa7a5b91dd635c349c66"></span><a class="reference internal" href="#_CPPv4N3eos15fib_route_key_tE" title="eos::fib_route_key_t">fib_route_key_t</a> &amp;<code class="sig-name descname">operator=</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos15fib_route_key_tE" title="eos::fib_route_key_t">fib_route_key_t</a> &amp;&amp;<em>other</em><span class="sig-paren">)</span> <em class="property">noexcept</em><a class="headerlink" href="#_CPPv4N3eos15fib_route_key_taSERR15fib_route_key_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos15fib_route_key_t6prefixEv">
+<span id="_CPPv3NK3eos15fib_route_key_t6prefixEv"></span><span id="_CPPv2NK3eos15fib_route_key_t6prefixEv"></span><span id="eos::fib_route_key_t::prefixC"></span><span class="target" id="classeos_1_1fib__route__key__t_1ae9ad1ef2e894a0d43709b6acb4b25cc2"></span><a class="reference internal" href="ip.html#_CPPv4N3eos11ip_prefix_tE" title="eos::ip_prefix_t">ip_prefix_t</a> <code class="sig-name descname">prefix</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos15fib_route_key_t6prefixEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Getter for ‘prefix’: IP v4/v6 network prefix. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos15fib_route_key_t9prefix_isERK11ip_prefix_t">
+<span id="_CPPv3N3eos15fib_route_key_t9prefix_isERK11ip_prefix_t"></span><span id="_CPPv2N3eos15fib_route_key_t9prefix_isERK11ip_prefix_t"></span><span id="eos::fib_route_key_t::prefix_is__ip_prefix_tCR"></span><span class="target" id="classeos_1_1fib__route__key__t_1a4c2ba57a101d208acb24c28377553794"></span>void <code class="sig-name descname">prefix_is</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#_CPPv4N3eos11ip_prefix_tE" title="eos::ip_prefix_t">ip_prefix_t</a> <em class="property">const</em> &amp;<em>prefix</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos15fib_route_key_t9prefix_isERK11ip_prefix_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Setter for ‘prefix’. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos15fib_route_key_t9prefix_isERR11ip_prefix_t">
+<span id="_CPPv3N3eos15fib_route_key_t9prefix_isERR11ip_prefix_t"></span><span id="_CPPv2N3eos15fib_route_key_t9prefix_isERR11ip_prefix_t"></span><span id="eos::fib_route_key_t::prefix_is__ip_prefix_tRR"></span><span class="target" id="classeos_1_1fib__route__key__t_1a83b72730845203037d9241977cf9d822"></span>void <code class="sig-name descname">prefix_is</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#_CPPv4N3eos11ip_prefix_tE" title="eos::ip_prefix_t">ip_prefix_t</a> &amp;&amp;<em>prefix</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos15fib_route_key_t9prefix_isERR11ip_prefix_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Moving Setter for ‘prefix’. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos15fib_route_key_teqERK15fib_route_key_t">
+<span id="_CPPv3NK3eos15fib_route_key_teqERK15fib_route_key_t"></span><span id="_CPPv2NK3eos15fib_route_key_teqERK15fib_route_key_t"></span><span id="eos::fib_route_key_t::eq-operator__fib_route_key_tCRC"></span><span class="target" id="classeos_1_1fib__route__key__t_1a143a53e987b14add5a00236170c13f52"></span>bool <code class="sig-name descname">operator==</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos15fib_route_key_tE" title="eos::fib_route_key_t">fib_route_key_t</a> <em class="property">const</em> &amp;<em>other</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos15fib_route_key_teqERK15fib_route_key_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos15fib_route_key_tneERK15fib_route_key_t">
+<span id="_CPPv3NK3eos15fib_route_key_tneERK15fib_route_key_t"></span><span id="_CPPv2NK3eos15fib_route_key_tneERK15fib_route_key_t"></span><span id="eos::fib_route_key_t::neq-operator__fib_route_key_tCRC"></span><span class="target" id="classeos_1_1fib__route__key__t_1aa6dc2ebfe63ab678e9f0d89d870bb29a"></span>bool <code class="sig-name descname">operator!=</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos15fib_route_key_tE" title="eos::fib_route_key_t">fib_route_key_t</a> <em class="property">const</em> &amp;<em>other</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos15fib_route_key_tneERK15fib_route_key_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos15fib_route_key_t4hashEv">
+<span id="_CPPv3NK3eos15fib_route_key_t4hashEv"></span><span id="_CPPv2NK3eos15fib_route_key_t4hashEv"></span><span id="eos::fib_route_key_t::hashC"></span><span class="target" id="classeos_1_1fib__route__key__t_1ae64f771eea77c49b14459f4e1d680a89"></span>uint32_t <code class="sig-name descname">hash</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos15fib_route_key_t4hashEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>The hash function for type <a class="reference internal" href="#classeos_1_1fib__route__key__t"><span class="std std-ref">fib_route_key_t</span></a>. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos15fib_route_key_t6mix_meER8hash_mix">
+<span id="_CPPv3NK3eos15fib_route_key_t6mix_meER8hash_mix"></span><span id="_CPPv2NK3eos15fib_route_key_t6mix_meER8hash_mix"></span><span id="eos::fib_route_key_t::mix_me__hash_mixRC"></span><span class="target" id="classeos_1_1fib__route__key__t_1ac6425c83a671c25b8299d06bceb072a6"></span>void <code class="sig-name descname">mix_me</code><span class="sig-paren">(</span><a class="reference internal" href="hash_mix.html#_CPPv4N3eos8hash_mixE" title="eos::hash_mix">hash_mix</a> &amp;<em>h</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos15fib_route_key_t6mix_meER8hash_mix" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>The hash mix function for type <a class="reference internal" href="#classeos_1_1fib__route__key__t"><span class="std std-ref">fib_route_key_t</span></a>. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos15fib_route_key_t9to_stringEv">
+<span id="_CPPv3NK3eos15fib_route_key_t9to_stringEv"></span><span id="_CPPv2NK3eos15fib_route_key_t9to_stringEv"></span><span id="eos::fib_route_key_t::to_stringC"></span><span class="target" id="classeos_1_1fib__route__key__t_1abd6277d833bf53691f7e33bece13bafa"></span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::string <code class="sig-name descname">to_string</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos15fib_route_key_t9to_stringEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Returns a string representation of the current object’s values. </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-static-functions">Public Static Functions</p>
+<dl class="cpp function">
+<dt id="_CPPv4N3eos15fib_route_key_tnwENSt6size_tEPv">
+<span id="_CPPv3N3eos15fib_route_key_tnwENSt6size_tEPv"></span><span id="_CPPv2N3eos15fib_route_key_tnwENSt6size_tEPv"></span><span id="eos::fib_route_key_t::new-operator__std::s.voidP"></span><span class="target" id="classeos_1_1fib__route__key__t_1a70b0557f9e07fb11ee25795195002606"></span><em class="property">static</em> <em class="property">inline</em> void *<code class="sig-name descname">operator new</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::size_t, void *<em>ptr</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos15fib_route_key_tnwENSt6size_tEPv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos15fib_route_key_tnwENSt6size_tE">
+<span id="_CPPv3N3eos15fib_route_key_tnwENSt6size_tE"></span><span id="_CPPv2N3eos15fib_route_key_tnwENSt6size_tE"></span><span id="eos::fib_route_key_t::new-operator__std::s"></span><span class="target" id="classeos_1_1fib__route__key__t_1a93f50d36bed204298357fb7f834606cd"></span><em class="property">static</em> void *<code class="sig-name descname">operator new</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::size_t<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos15fib_route_key_tnwENSt6size_tE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos15fib_route_key_tdlEPv">
+<span id="_CPPv3N3eos15fib_route_key_tdlEPv"></span><span id="_CPPv2N3eos15fib_route_key_tdlEPv"></span><span id="eos::fib_route_key_t::delete-operator__voidP"></span><span class="target" id="classeos_1_1fib__route__key__t_1a59a186b249e15b0c819c5de714b4572f"></span><em class="property">static</em> void <code class="sig-name descname">operator delete</code><span class="sig-paren">(</span>void*<span class="sig-paren">)</span> <em class="property">noexcept</em><a class="headerlink" href="#_CPPv4N3eos15fib_route_key_tdlEPv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-private-members">Private Members</p>
+<dl class="cpp var">
+<dt id="_CPPv4N3eos15fib_route_key_t5pimplE">
+<span id="_CPPv3N3eos15fib_route_key_t5pimplE"></span><span id="_CPPv2N3eos15fib_route_key_t5pimplE"></span><span id="eos::fib_route_key_t::pimpl__std::shared_ptr:fib_route_key_impl_t:"></span><span class="target" id="classeos_1_1fib__route__key__t_1a2ef766cea1d2af65808bd72e21bfe5e6"></span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::shared_ptr&lt;fib_route_key_impl_t&gt; <code class="sig-name descname">pimpl</code><a class="headerlink" href="#_CPPv4N3eos15fib_route_key_t5pimplE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-friends">Friends</p>
+<dl class="cpp function">
+<dt id="_CPPv4N3eos15fib_route_key_tlsERNSt7ostreamERK15fib_route_key_t">
+<span id="_CPPv3N3eos15fib_route_key_tlsERNSt7ostreamERK15fib_route_key_t"></span><span id="_CPPv2N3eos15fib_route_key_tlsERNSt7ostreamERK15fib_route_key_t"></span><span id="eos::fib_route_key_t::lshift-operator__osR.fib_route_key_tCR"></span><span class="target" id="classeos_1_1fib__route__key__t_1aef5bb92db57e88c1c3bfc0ea9e462935"></span><em class="property">friend</em> <a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::ostream &amp;<code class="sig-name descname">operator&lt;&lt;</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::ostream &amp;<em>os</em>, <em class="property">const</em> <a class="reference internal" href="#_CPPv4N3eos15fib_route_key_tE" title="eos::fib_route_key_t">fib_route_key_t</a> &amp;<em>obj</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos15fib_route_key_tlsERNSt7ostreamERK15fib_route_key_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>A utility stream operator that adds a string representation of <a class="reference internal" href="#classeos_1_1fib__route__key__t"><span class="std std-ref">fib_route_key_t</span></a> to the ostream. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="cpp class">
+<dt id="_CPPv4N3eos11fib_route_tE">
+<span id="_CPPv3N3eos11fib_route_tE"></span><span id="_CPPv2N3eos11fib_route_tE"></span><span id="eos::fib_route_t"></span><span class="target" id="classeos_1_1fib__route__t"></span><em class="property">class </em><code class="sig-name descname">fib_route_t</code><a class="headerlink" href="#_CPPv4N3eos11fib_route_tE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><div class="docutils container">
+<em>#include &lt;fib.h&gt;</em></div>
+<p>An IP route that goes in FIB. The “fec_id” represents the fec a.k.a adjacency associated with the route. Note FEC stands for Forwarding Equivalence Class. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
+<dl class="cpp function">
+<dt id="_CPPv4N3eos11fib_route_t11fib_route_tEv">
+<span id="_CPPv3N3eos11fib_route_t11fib_route_tEv"></span><span id="_CPPv2N3eos11fib_route_t11fib_route_tEv"></span><span id="eos::fib_route_t::fib_route_t"></span><span class="target" id="classeos_1_1fib__route__t_1aa465c7611b6ea9d3ec602e2a6bc68d74"></span><code class="sig-name descname">fib_route_t</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos11fib_route_t11fib_route_tEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos11fib_route_t11fib_route_tERK15fib_route_key_t">
+<span id="_CPPv3N3eos11fib_route_t11fib_route_tERK15fib_route_key_t"></span><span id="_CPPv2N3eos11fib_route_t11fib_route_tERK15fib_route_key_t"></span><span id="eos::fib_route_t::fib_route_t__fib_route_key_tCR"></span><span class="target" id="classeos_1_1fib__route__t_1ad2876bb981e96b5590faed59de200b70"></span><em class="property">explicit</em> <code class="sig-name descname">fib_route_t</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos15fib_route_key_tE" title="eos::fib_route_key_t">fib_route_key_t</a> <em class="property">const</em> &amp;<em>route_key</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos11fib_route_t11fib_route_tERK15fib_route_key_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos11fib_route_t11fib_route_tERK11fib_route_t">
+<span id="_CPPv3N3eos11fib_route_t11fib_route_tERK11fib_route_t"></span><span id="_CPPv2N3eos11fib_route_t11fib_route_tERK11fib_route_t"></span><span id="eos::fib_route_t::fib_route_t__fib_route_tCR"></span><span class="target" id="classeos_1_1fib__route__t_1ac48b71e189a6ddbb236835f28a5d2588"></span><code class="sig-name descname">fib_route_t</code><span class="sig-paren">(</span><em class="property">const</em> <a class="reference internal" href="#_CPPv4N3eos11fib_route_t11fib_route_tERK11fib_route_t" title="eos::fib_route_t::fib_route_t">fib_route_t</a> &amp;<em>other</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos11fib_route_t11fib_route_tERK11fib_route_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos11fib_route_taSERK11fib_route_t">
+<span id="_CPPv3N3eos11fib_route_taSERK11fib_route_t"></span><span id="_CPPv2N3eos11fib_route_taSERK11fib_route_t"></span><span id="eos::fib_route_t::assign-operator__fib_route_tCR"></span><span class="target" id="classeos_1_1fib__route__t_1a183e2854b3655f99e2614d70204df3de"></span><a class="reference internal" href="#_CPPv4N3eos11fib_route_tE" title="eos::fib_route_t">fib_route_t</a> &amp;<code class="sig-name descname">operator=</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos11fib_route_tE" title="eos::fib_route_t">fib_route_t</a> <em class="property">const</em> &amp;<em>other</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos11fib_route_taSERK11fib_route_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos11fib_route_t11fib_route_tERR11fib_route_t">
+<span id="_CPPv3N3eos11fib_route_t11fib_route_tERR11fib_route_t"></span><span id="_CPPv2N3eos11fib_route_t11fib_route_tERR11fib_route_t"></span><span id="eos::fib_route_t::fib_route_t__fib_route_tRR"></span><span class="target" id="classeos_1_1fib__route__t_1af4c4ec164cf4929af07c6e2cbc5390da"></span><code class="sig-name descname">fib_route_t</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos11fib_route_t11fib_route_tERR11fib_route_t" title="eos::fib_route_t::fib_route_t">fib_route_t</a> &amp;&amp;<em>other</em><span class="sig-paren">)</span> <em class="property">noexcept</em><a class="headerlink" href="#_CPPv4N3eos11fib_route_t11fib_route_tERR11fib_route_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos11fib_route_taSERR11fib_route_t">
+<span id="_CPPv3N3eos11fib_route_taSERR11fib_route_t"></span><span id="_CPPv2N3eos11fib_route_taSERR11fib_route_t"></span><span id="eos::fib_route_t::assign-operator__fib_route_tRR"></span><span class="target" id="classeos_1_1fib__route__t_1a7f408ae69ef28dea2e6ed8029bd7182d"></span><a class="reference internal" href="#_CPPv4N3eos11fib_route_tE" title="eos::fib_route_t">fib_route_t</a> &amp;<code class="sig-name descname">operator=</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos11fib_route_tE" title="eos::fib_route_t">fib_route_t</a> &amp;&amp;<em>other</em><span class="sig-paren">)</span> <em class="property">noexcept</em><a class="headerlink" href="#_CPPv4N3eos11fib_route_taSERR11fib_route_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos11fib_route_t9route_keyEv">
+<span id="_CPPv3NK3eos11fib_route_t9route_keyEv"></span><span id="_CPPv2NK3eos11fib_route_t9route_keyEv"></span><span id="eos::fib_route_t::route_keyC"></span><span class="target" id="classeos_1_1fib__route__t_1ad0a04aabd9b6067deea0ed8492d42ccd"></span><a class="reference internal" href="#_CPPv4N3eos15fib_route_key_tE" title="eos::fib_route_key_t">fib_route_key_t</a> <code class="sig-name descname">route_key</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos11fib_route_t9route_keyEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Getter for ‘route_key’: IP v4/v6 network route key consisting of prefix. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos11fib_route_t12route_key_isERK15fib_route_key_t">
+<span id="_CPPv3N3eos11fib_route_t12route_key_isERK15fib_route_key_t"></span><span id="_CPPv2N3eos11fib_route_t12route_key_isERK15fib_route_key_t"></span><span id="eos::fib_route_t::route_key_is__fib_route_key_tCR"></span><span class="target" id="classeos_1_1fib__route__t_1af95d074a74e30928dc0cae57e4bc9c9f"></span>void <code class="sig-name descname">route_key_is</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos15fib_route_key_tE" title="eos::fib_route_key_t">fib_route_key_t</a> <em class="property">const</em> &amp;<em>route_key</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos11fib_route_t12route_key_isERK15fib_route_key_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Setter for ‘route_key’. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos11fib_route_t12route_key_isERR15fib_route_key_t">
+<span id="_CPPv3N3eos11fib_route_t12route_key_isERR15fib_route_key_t"></span><span id="_CPPv2N3eos11fib_route_t12route_key_isERR15fib_route_key_t"></span><span id="eos::fib_route_t::route_key_is__fib_route_key_tRR"></span><span class="target" id="classeos_1_1fib__route__t_1a282ea85d5d7d32f61a020c996cf7fef5"></span>void <code class="sig-name descname">route_key_is</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos15fib_route_key_tE" title="eos::fib_route_key_t">fib_route_key_t</a> &amp;&amp;<em>route_key</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos11fib_route_t12route_key_isERR15fib_route_key_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Moving Setter for ‘route_key’. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos11fib_route_t10preferenceEv">
+<span id="_CPPv3NK3eos11fib_route_t10preferenceEv"></span><span id="_CPPv2NK3eos11fib_route_t10preferenceEv"></span><span id="eos::fib_route_t::preferenceC"></span><span class="target" id="classeos_1_1fib__route__t_1ae5000ca9a5a1ab24f1508b29425d865a"></span><a class="reference internal" href="ip_route.html#_CPPv4N3eos21ip_route_preference_tE" title="eos::ip_route_preference_t">ip_route_preference_t</a> <code class="sig-name descname">preference</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos11fib_route_t10preferenceEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Getter for ‘preference’: 0..255 only, defaults to 1. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos11fib_route_t13preference_isE21ip_route_preference_t">
+<span id="_CPPv3N3eos11fib_route_t13preference_isE21ip_route_preference_t"></span><span id="_CPPv2N3eos11fib_route_t13preference_isE21ip_route_preference_t"></span><span id="eos::fib_route_t::preference_is__ip_route_preference_t"></span><span class="target" id="classeos_1_1fib__route__t_1a12604f64b7b38b20e5c7abe37ecae624"></span>void <code class="sig-name descname">preference_is</code><span class="sig-paren">(</span><a class="reference internal" href="ip_route.html#_CPPv4N3eos21ip_route_preference_tE" title="eos::ip_route_preference_t">ip_route_preference_t</a> <em>preference</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos11fib_route_t13preference_isE21ip_route_preference_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Setter for ‘preference’. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos11fib_route_t6metricEv">
+<span id="_CPPv3NK3eos11fib_route_t6metricEv"></span><span id="_CPPv2NK3eos11fib_route_t6metricEv"></span><span id="eos::fib_route_t::metricC"></span><span class="target" id="classeos_1_1fib__route__t_1a5beb72fe4d5327afadbaf9a302953e88"></span><a class="reference internal" href="ip_route.html#_CPPv4N3eos17ip_route_metric_tE" title="eos::ip_route_metric_t">ip_route_metric_t</a> <code class="sig-name descname">metric</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos11fib_route_t6metricEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos11fib_route_t9metric_isE17ip_route_metric_t">
+<span id="_CPPv3N3eos11fib_route_t9metric_isE17ip_route_metric_t"></span><span id="_CPPv2N3eos11fib_route_t9metric_isE17ip_route_metric_t"></span><span id="eos::fib_route_t::metric_is__ip_route_metric_t"></span><span class="target" id="classeos_1_1fib__route__t_1aa28e06454e634dbe627846c7b447af83"></span>void <code class="sig-name descname">metric_is</code><span class="sig-paren">(</span><a class="reference internal" href="ip_route.html#_CPPv4N3eos17ip_route_metric_tE" title="eos::ip_route_metric_t">ip_route_metric_t</a> <em>metric</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos11fib_route_t9metric_isE17ip_route_metric_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos11fib_route_t10route_typeEv">
+<span id="_CPPv3NK3eos11fib_route_t10route_typeEv"></span><span id="_CPPv2NK3eos11fib_route_t10route_typeEv"></span><span id="eos::fib_route_t::route_typeC"></span><span class="target" id="classeos_1_1fib__route__t_1a854599268071d4b84452ff5271002f74"></span><a class="reference internal" href="#_CPPv4N3eos16fib_route_type_tE" title="eos::fib_route_type_t">fib_route_type_t</a> <code class="sig-name descname">route_type</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos11fib_route_t10route_typeEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos11fib_route_t13route_type_isE16fib_route_type_t">
+<span id="_CPPv3N3eos11fib_route_t13route_type_isE16fib_route_type_t"></span><span id="_CPPv2N3eos11fib_route_t13route_type_isE16fib_route_type_t"></span><span id="eos::fib_route_t::route_type_is__fib_route_type_t"></span><span class="target" id="classeos_1_1fib__route__t_1a60d9a9811c76e2bcbfd3961c7c61e2f1"></span>void <code class="sig-name descname">route_type_is</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos16fib_route_type_tE" title="eos::fib_route_type_t">fib_route_type_t</a> <em>route_type</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos11fib_route_t13route_type_isE16fib_route_type_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos11fib_route_t6fec_idEv">
+<span id="_CPPv3NK3eos11fib_route_t6fec_idEv"></span><span id="_CPPv2NK3eos11fib_route_t6fec_idEv"></span><span id="eos::fib_route_t::fec_idC"></span><span class="target" id="classeos_1_1fib__route__t_1af0ddbae008fe1716ab2df2927e319bb8"></span>uint64_t <code class="sig-name descname">fec_id</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos11fib_route_t6fec_idEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Getter for ‘fec_id’: id that links prefix to the fec a.k.a Adjacency. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos11fib_route_t9fec_id_isE8uint64_t">
+<span id="_CPPv3N3eos11fib_route_t9fec_id_isE8uint64_t"></span><span id="_CPPv2N3eos11fib_route_t9fec_id_isE8uint64_t"></span><span id="eos::fib_route_t::fec_id_is__uint64_t"></span><span class="target" id="classeos_1_1fib__route__t_1a3d3fbc241a15fe857966ff4743318a4d"></span>void <code class="sig-name descname">fec_id_is</code><span class="sig-paren">(</span>uint64_t <em>fec_id</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos11fib_route_t9fec_id_isE8uint64_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Setter for ‘fec_id’. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos11fib_route_teqERK11fib_route_t">
+<span id="_CPPv3NK3eos11fib_route_teqERK11fib_route_t"></span><span id="_CPPv2NK3eos11fib_route_teqERK11fib_route_t"></span><span id="eos::fib_route_t::eq-operator__fib_route_tCRC"></span><span class="target" id="classeos_1_1fib__route__t_1a3f4c57a7692e5bf62543d2a450582aea"></span>bool <code class="sig-name descname">operator==</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos11fib_route_tE" title="eos::fib_route_t">fib_route_t</a> <em class="property">const</em> &amp;<em>other</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos11fib_route_teqERK11fib_route_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos11fib_route_tneERK11fib_route_t">
+<span id="_CPPv3NK3eos11fib_route_tneERK11fib_route_t"></span><span id="_CPPv2NK3eos11fib_route_tneERK11fib_route_t"></span><span id="eos::fib_route_t::neq-operator__fib_route_tCRC"></span><span class="target" id="classeos_1_1fib__route__t_1a1bdac1c94167775fd131b91b97fda26e"></span>bool <code class="sig-name descname">operator!=</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos11fib_route_tE" title="eos::fib_route_t">fib_route_t</a> <em class="property">const</em> &amp;<em>other</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos11fib_route_tneERK11fib_route_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos11fib_route_t4hashEv">
+<span id="_CPPv3NK3eos11fib_route_t4hashEv"></span><span id="_CPPv2NK3eos11fib_route_t4hashEv"></span><span id="eos::fib_route_t::hashC"></span><span class="target" id="classeos_1_1fib__route__t_1aafe3d7c35a50dca6245164c4233ab5fc"></span>uint32_t <code class="sig-name descname">hash</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos11fib_route_t4hashEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>The hash function for type <a class="reference internal" href="#classeos_1_1fib__route__t"><span class="std std-ref">fib_route_t</span></a>. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos11fib_route_t6mix_meER8hash_mix">
+<span id="_CPPv3NK3eos11fib_route_t6mix_meER8hash_mix"></span><span id="_CPPv2NK3eos11fib_route_t6mix_meER8hash_mix"></span><span id="eos::fib_route_t::mix_me__hash_mixRC"></span><span class="target" id="classeos_1_1fib__route__t_1a56e2b38f6575f7e4637bc40c0d6da9b2"></span>void <code class="sig-name descname">mix_me</code><span class="sig-paren">(</span><a class="reference internal" href="hash_mix.html#_CPPv4N3eos8hash_mixE" title="eos::hash_mix">hash_mix</a> &amp;<em>h</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos11fib_route_t6mix_meER8hash_mix" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>The hash mix function for type <a class="reference internal" href="#classeos_1_1fib__route__t"><span class="std std-ref">fib_route_t</span></a>. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos11fib_route_t9to_stringEv">
+<span id="_CPPv3NK3eos11fib_route_t9to_stringEv"></span><span id="_CPPv2NK3eos11fib_route_t9to_stringEv"></span><span id="eos::fib_route_t::to_stringC"></span><span class="target" id="classeos_1_1fib__route__t_1a3b483ea952577e00f23cd65f43e66e12"></span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::string <code class="sig-name descname">to_string</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos11fib_route_t9to_stringEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Returns a string representation of the current object’s values. </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-static-functions">Public Static Functions</p>
+<dl class="cpp function">
+<dt id="_CPPv4N3eos11fib_route_tnwENSt6size_tEPv">
+<span id="_CPPv3N3eos11fib_route_tnwENSt6size_tEPv"></span><span id="_CPPv2N3eos11fib_route_tnwENSt6size_tEPv"></span><span id="eos::fib_route_t::new-operator__std::s.voidP"></span><span class="target" id="classeos_1_1fib__route__t_1aff99e9b83d3bd8b2241d8eb47072c118"></span><em class="property">static</em> <em class="property">inline</em> void *<code class="sig-name descname">operator new</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::size_t, void *<em>ptr</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos11fib_route_tnwENSt6size_tEPv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos11fib_route_tnwENSt6size_tE">
+<span id="_CPPv3N3eos11fib_route_tnwENSt6size_tE"></span><span id="_CPPv2N3eos11fib_route_tnwENSt6size_tE"></span><span id="eos::fib_route_t::new-operator__std::s"></span><span class="target" id="classeos_1_1fib__route__t_1a02ec415867fe8dde48355504567140d8"></span><em class="property">static</em> void *<code class="sig-name descname">operator new</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::size_t<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos11fib_route_tnwENSt6size_tE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos11fib_route_tdlEPv">
+<span id="_CPPv3N3eos11fib_route_tdlEPv"></span><span id="_CPPv2N3eos11fib_route_tdlEPv"></span><span id="eos::fib_route_t::delete-operator__voidP"></span><span class="target" id="classeos_1_1fib__route__t_1a40708471bade7c4e9714a8bee12d9a50"></span><em class="property">static</em> void <code class="sig-name descname">operator delete</code><span class="sig-paren">(</span>void*<span class="sig-paren">)</span> <em class="property">noexcept</em><a class="headerlink" href="#_CPPv4N3eos11fib_route_tdlEPv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-private-members">Private Members</p>
+<dl class="cpp var">
+<dt id="_CPPv4N3eos11fib_route_t5pimplE">
+<span id="_CPPv3N3eos11fib_route_t5pimplE"></span><span id="_CPPv2N3eos11fib_route_t5pimplE"></span><span id="eos::fib_route_t::pimpl__std::shared_ptr:fib_route_impl_t:"></span><span class="target" id="classeos_1_1fib__route__t_1aef4bc3eee768374188f87204621b05bb"></span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::shared_ptr&lt;fib_route_impl_t&gt; <code class="sig-name descname">pimpl</code><a class="headerlink" href="#_CPPv4N3eos11fib_route_t5pimplE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-friends">Friends</p>
+<dl class="cpp function">
+<dt id="_CPPv4N3eos11fib_route_tlsERNSt7ostreamERK11fib_route_t">
+<span id="_CPPv3N3eos11fib_route_tlsERNSt7ostreamERK11fib_route_t"></span><span id="_CPPv2N3eos11fib_route_tlsERNSt7ostreamERK11fib_route_t"></span><span id="eos::fib_route_t::lshift-operator__osR.fib_route_tCR"></span><span class="target" id="classeos_1_1fib__route__t_1a8094a482cec512efde35f040798631df"></span><em class="property">friend</em> <a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::ostream &amp;<code class="sig-name descname">operator&lt;&lt;</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::ostream &amp;<em>os</em>, <em class="property">const</em> <a class="reference internal" href="#_CPPv4N3eos11fib_route_tE" title="eos::fib_route_t">fib_route_t</a> &amp;<em>obj</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos11fib_route_tlsERNSt7ostreamERK11fib_route_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>A utility stream operator that adds a string representation of <a class="reference internal" href="#classeos_1_1fib__route__t"><span class="std std-ref">fib_route_t</span></a> to the ostream. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="cpp class">
+<dt id="_CPPv4N3eos13fib_fec_key_tE">
+<span id="_CPPv3N3eos13fib_fec_key_tE"></span><span id="_CPPv2N3eos13fib_fec_key_tE"></span><span id="eos::fib_fec_key_t"></span><span class="target" id="classeos_1_1fib__fec__key__t"></span><em class="property">class </em><code class="sig-name descname">fib_fec_key_t</code><a class="headerlink" href="#_CPPv4N3eos13fib_fec_key_tE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><div class="docutils container">
+<em>#include &lt;fib.h&gt;</em></div>
+<p>FEC key that goes in FIB. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
+<dl class="cpp function">
+<dt id="_CPPv4N3eos13fib_fec_key_t13fib_fec_key_tEv">
+<span id="_CPPv3N3eos13fib_fec_key_t13fib_fec_key_tEv"></span><span id="_CPPv2N3eos13fib_fec_key_t13fib_fec_key_tEv"></span><span id="eos::fib_fec_key_t::fib_fec_key_t"></span><span class="target" id="classeos_1_1fib__fec__key__t_1afc451e5ab97e4c628cf6de3b40b40426"></span><code class="sig-name descname">fib_fec_key_t</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos13fib_fec_key_t13fib_fec_key_tEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos13fib_fec_key_t13fib_fec_key_tE8uint64_t">
+<span id="_CPPv3N3eos13fib_fec_key_t13fib_fec_key_tE8uint64_t"></span><span id="_CPPv2N3eos13fib_fec_key_t13fib_fec_key_tE8uint64_t"></span><span id="eos::fib_fec_key_t::fib_fec_key_t__uint64_t"></span><span class="target" id="classeos_1_1fib__fec__key__t_1a2ecfb1a862ff77fb70baae4e90ab40a5"></span><em class="property">explicit</em> <code class="sig-name descname">fib_fec_key_t</code><span class="sig-paren">(</span>uint64_t <em>fec_id</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos13fib_fec_key_t13fib_fec_key_tE8uint64_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos13fib_fec_key_t13fib_fec_key_tERK13fib_fec_key_t">
+<span id="_CPPv3N3eos13fib_fec_key_t13fib_fec_key_tERK13fib_fec_key_t"></span><span id="_CPPv2N3eos13fib_fec_key_t13fib_fec_key_tERK13fib_fec_key_t"></span><span id="eos::fib_fec_key_t::fib_fec_key_t__fib_fec_key_tCR"></span><span class="target" id="classeos_1_1fib__fec__key__t_1a70bbe20cefe9829fd9faefa8c6612842"></span><code class="sig-name descname">fib_fec_key_t</code><span class="sig-paren">(</span><em class="property">const</em> <a class="reference internal" href="#_CPPv4N3eos13fib_fec_key_t13fib_fec_key_tERK13fib_fec_key_t" title="eos::fib_fec_key_t::fib_fec_key_t">fib_fec_key_t</a> &amp;<em>other</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos13fib_fec_key_t13fib_fec_key_tERK13fib_fec_key_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos13fib_fec_key_taSERK13fib_fec_key_t">
+<span id="_CPPv3N3eos13fib_fec_key_taSERK13fib_fec_key_t"></span><span id="_CPPv2N3eos13fib_fec_key_taSERK13fib_fec_key_t"></span><span id="eos::fib_fec_key_t::assign-operator__fib_fec_key_tCR"></span><span class="target" id="classeos_1_1fib__fec__key__t_1a722ffc254395091960d16b2f07d5f1bf"></span><a class="reference internal" href="#_CPPv4N3eos13fib_fec_key_tE" title="eos::fib_fec_key_t">fib_fec_key_t</a> &amp;<code class="sig-name descname">operator=</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos13fib_fec_key_tE" title="eos::fib_fec_key_t">fib_fec_key_t</a> <em class="property">const</em> &amp;<em>other</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos13fib_fec_key_taSERK13fib_fec_key_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos13fib_fec_key_t13fib_fec_key_tERR13fib_fec_key_t">
+<span id="_CPPv3N3eos13fib_fec_key_t13fib_fec_key_tERR13fib_fec_key_t"></span><span id="_CPPv2N3eos13fib_fec_key_t13fib_fec_key_tERR13fib_fec_key_t"></span><span id="eos::fib_fec_key_t::fib_fec_key_t__fib_fec_key_tRR"></span><span class="target" id="classeos_1_1fib__fec__key__t_1a0b1d0234cadba2ad2c49ffeee9682b02"></span><code class="sig-name descname">fib_fec_key_t</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos13fib_fec_key_t13fib_fec_key_tERR13fib_fec_key_t" title="eos::fib_fec_key_t::fib_fec_key_t">fib_fec_key_t</a> &amp;&amp;<em>other</em><span class="sig-paren">)</span> <em class="property">noexcept</em><a class="headerlink" href="#_CPPv4N3eos13fib_fec_key_t13fib_fec_key_tERR13fib_fec_key_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos13fib_fec_key_taSERR13fib_fec_key_t">
+<span id="_CPPv3N3eos13fib_fec_key_taSERR13fib_fec_key_t"></span><span id="_CPPv2N3eos13fib_fec_key_taSERR13fib_fec_key_t"></span><span id="eos::fib_fec_key_t::assign-operator__fib_fec_key_tRR"></span><span class="target" id="classeos_1_1fib__fec__key__t_1a963985d56045083fe5fb4690a3de9e13"></span><a class="reference internal" href="#_CPPv4N3eos13fib_fec_key_tE" title="eos::fib_fec_key_t">fib_fec_key_t</a> &amp;<code class="sig-name descname">operator=</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos13fib_fec_key_tE" title="eos::fib_fec_key_t">fib_fec_key_t</a> &amp;&amp;<em>other</em><span class="sig-paren">)</span> <em class="property">noexcept</em><a class="headerlink" href="#_CPPv4N3eos13fib_fec_key_taSERR13fib_fec_key_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos13fib_fec_key_t6fec_idEv">
+<span id="_CPPv3NK3eos13fib_fec_key_t6fec_idEv"></span><span id="_CPPv2NK3eos13fib_fec_key_t6fec_idEv"></span><span id="eos::fib_fec_key_t::fec_idC"></span><span class="target" id="classeos_1_1fib__fec__key__t_1a852b8c44c0d8883b6b03feca8e8d7357"></span>uint64_t <code class="sig-name descname">fec_id</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos13fib_fec_key_t6fec_idEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Getter for ‘fec_id’: fec_id[56:63] denotes the feature, 0: fib Fec, 1: resilientEcmp feature, 2: nextHopGroup feature. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos13fib_fec_key_t9fec_id_isE8uint64_t">
+<span id="_CPPv3N3eos13fib_fec_key_t9fec_id_isE8uint64_t"></span><span id="_CPPv2N3eos13fib_fec_key_t9fec_id_isE8uint64_t"></span><span id="eos::fib_fec_key_t::fec_id_is__uint64_t"></span><span class="target" id="classeos_1_1fib__fec__key__t_1a4c97360bed17b5f2b5d2ab21a434b700"></span>void <code class="sig-name descname">fec_id_is</code><span class="sig-paren">(</span>uint64_t <em>fec_id</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos13fib_fec_key_t9fec_id_isE8uint64_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Setter for ‘fec_id’. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos13fib_fec_key_teqERK13fib_fec_key_t">
+<span id="_CPPv3NK3eos13fib_fec_key_teqERK13fib_fec_key_t"></span><span id="_CPPv2NK3eos13fib_fec_key_teqERK13fib_fec_key_t"></span><span id="eos::fib_fec_key_t::eq-operator__fib_fec_key_tCRC"></span><span class="target" id="classeos_1_1fib__fec__key__t_1ac83cd00c1f10362d5650b65b22ff4386"></span>bool <code class="sig-name descname">operator==</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos13fib_fec_key_tE" title="eos::fib_fec_key_t">fib_fec_key_t</a> <em class="property">const</em> &amp;<em>other</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos13fib_fec_key_teqERK13fib_fec_key_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos13fib_fec_key_tneERK13fib_fec_key_t">
+<span id="_CPPv3NK3eos13fib_fec_key_tneERK13fib_fec_key_t"></span><span id="_CPPv2NK3eos13fib_fec_key_tneERK13fib_fec_key_t"></span><span id="eos::fib_fec_key_t::neq-operator__fib_fec_key_tCRC"></span><span class="target" id="classeos_1_1fib__fec__key__t_1aace7d58b40c058718a3036f5b0fb6f0f"></span>bool <code class="sig-name descname">operator!=</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos13fib_fec_key_tE" title="eos::fib_fec_key_t">fib_fec_key_t</a> <em class="property">const</em> &amp;<em>other</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos13fib_fec_key_tneERK13fib_fec_key_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos13fib_fec_key_t4hashEv">
+<span id="_CPPv3NK3eos13fib_fec_key_t4hashEv"></span><span id="_CPPv2NK3eos13fib_fec_key_t4hashEv"></span><span id="eos::fib_fec_key_t::hashC"></span><span class="target" id="classeos_1_1fib__fec__key__t_1a2d98208c92c6ba2e3d21fc0a05e0e076"></span>uint32_t <code class="sig-name descname">hash</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos13fib_fec_key_t4hashEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>The hash function for type <a class="reference internal" href="#classeos_1_1fib__fec__key__t"><span class="std std-ref">fib_fec_key_t</span></a>. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos13fib_fec_key_t6mix_meER8hash_mix">
+<span id="_CPPv3NK3eos13fib_fec_key_t6mix_meER8hash_mix"></span><span id="_CPPv2NK3eos13fib_fec_key_t6mix_meER8hash_mix"></span><span id="eos::fib_fec_key_t::mix_me__hash_mixRC"></span><span class="target" id="classeos_1_1fib__fec__key__t_1a37d328a81169f36106f1bb9e053ab01b"></span>void <code class="sig-name descname">mix_me</code><span class="sig-paren">(</span><a class="reference internal" href="hash_mix.html#_CPPv4N3eos8hash_mixE" title="eos::hash_mix">hash_mix</a> &amp;<em>h</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos13fib_fec_key_t6mix_meER8hash_mix" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>The hash mix function for type <a class="reference internal" href="#classeos_1_1fib__fec__key__t"><span class="std std-ref">fib_fec_key_t</span></a>. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos13fib_fec_key_t9to_stringEv">
+<span id="_CPPv3NK3eos13fib_fec_key_t9to_stringEv"></span><span id="_CPPv2NK3eos13fib_fec_key_t9to_stringEv"></span><span id="eos::fib_fec_key_t::to_stringC"></span><span class="target" id="classeos_1_1fib__fec__key__t_1af6179a775a87dff2b031e7a2762073d2"></span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::string <code class="sig-name descname">to_string</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos13fib_fec_key_t9to_stringEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Returns a string representation of the current object’s values. </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-static-functions">Public Static Functions</p>
+<dl class="cpp function">
+<dt id="_CPPv4N3eos13fib_fec_key_tnwENSt6size_tEPv">
+<span id="_CPPv3N3eos13fib_fec_key_tnwENSt6size_tEPv"></span><span id="_CPPv2N3eos13fib_fec_key_tnwENSt6size_tEPv"></span><span id="eos::fib_fec_key_t::new-operator__std::s.voidP"></span><span class="target" id="classeos_1_1fib__fec__key__t_1a412cdc366285dfe9a5f8a546f7726cd8"></span><em class="property">static</em> <em class="property">inline</em> void *<code class="sig-name descname">operator new</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::size_t, void *<em>ptr</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos13fib_fec_key_tnwENSt6size_tEPv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos13fib_fec_key_tnwENSt6size_tE">
+<span id="_CPPv3N3eos13fib_fec_key_tnwENSt6size_tE"></span><span id="_CPPv2N3eos13fib_fec_key_tnwENSt6size_tE"></span><span id="eos::fib_fec_key_t::new-operator__std::s"></span><span class="target" id="classeos_1_1fib__fec__key__t_1a7632e3fcf667e98ce6a7a2782d0c283d"></span><em class="property">static</em> void *<code class="sig-name descname">operator new</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::size_t<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos13fib_fec_key_tnwENSt6size_tE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos13fib_fec_key_tdlEPv">
+<span id="_CPPv3N3eos13fib_fec_key_tdlEPv"></span><span id="_CPPv2N3eos13fib_fec_key_tdlEPv"></span><span id="eos::fib_fec_key_t::delete-operator__voidP"></span><span class="target" id="classeos_1_1fib__fec__key__t_1ae6d919ea377f1070a00dac6a3d4d2871"></span><em class="property">static</em> void <code class="sig-name descname">operator delete</code><span class="sig-paren">(</span>void*<span class="sig-paren">)</span> <em class="property">noexcept</em><a class="headerlink" href="#_CPPv4N3eos13fib_fec_key_tdlEPv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-private-members">Private Members</p>
+<dl class="cpp var">
+<dt id="_CPPv4N3eos13fib_fec_key_t5pimplE">
+<span id="_CPPv3N3eos13fib_fec_key_t5pimplE"></span><span id="_CPPv2N3eos13fib_fec_key_t5pimplE"></span><span id="eos::fib_fec_key_t::pimpl__std::shared_ptr:fib_fec_key_impl_t:"></span><span class="target" id="classeos_1_1fib__fec__key__t_1a9f3e0c04ab82dae1e82a4323d16dbc0c"></span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::shared_ptr&lt;fib_fec_key_impl_t&gt; <code class="sig-name descname">pimpl</code><a class="headerlink" href="#_CPPv4N3eos13fib_fec_key_t5pimplE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-friends">Friends</p>
+<dl class="cpp function">
+<dt id="_CPPv4N3eos13fib_fec_key_tlsERNSt7ostreamERK13fib_fec_key_t">
+<span id="_CPPv3N3eos13fib_fec_key_tlsERNSt7ostreamERK13fib_fec_key_t"></span><span id="_CPPv2N3eos13fib_fec_key_tlsERNSt7ostreamERK13fib_fec_key_t"></span><span id="eos::fib_fec_key_t::lshift-operator__osR.fib_fec_key_tCR"></span><span class="target" id="classeos_1_1fib__fec__key__t_1ad7f63de75ac9ae342345de1b63ba2871"></span><em class="property">friend</em> <a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::ostream &amp;<code class="sig-name descname">operator&lt;&lt;</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::ostream &amp;<em>os</em>, <em class="property">const</em> <a class="reference internal" href="#_CPPv4N3eos13fib_fec_key_tE" title="eos::fib_fec_key_t">fib_fec_key_t</a> &amp;<em>obj</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos13fib_fec_key_tlsERNSt7ostreamERK13fib_fec_key_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>A utility stream operator that adds a string representation of <a class="reference internal" href="#classeos_1_1fib__fec__key__t"><span class="std std-ref">fib_fec_key_t</span></a> to the ostream. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="cpp class">
+<dt id="_CPPv4N3eos9fib_via_tE">
+<span id="_CPPv3N3eos9fib_via_tE"></span><span id="_CPPv2N3eos9fib_via_tE"></span><span id="eos::fib_via_t"></span><span class="target" id="classeos_1_1fib__via__t"></span><em class="property">class </em><code class="sig-name descname">fib_via_t</code><a class="headerlink" href="#_CPPv4N3eos9fib_via_tE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><div class="docutils container">
+<em>#include &lt;fib.h&gt;</em></div>
+<p>via (nexthop) information. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
+<dl class="cpp function">
+<dt id="_CPPv4N3eos9fib_via_t9fib_via_tEv">
+<span id="_CPPv3N3eos9fib_via_t9fib_via_tEv"></span><span id="_CPPv2N3eos9fib_via_t9fib_via_tEv"></span><span id="eos::fib_via_t::fib_via_t"></span><span class="target" id="classeos_1_1fib__via__t_1ac9c6670c66409d71be8ddce4d729f0ba"></span><code class="sig-name descname">fib_via_t</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos9fib_via_t9fib_via_tEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos9fib_via_t9fib_via_tERK9ip_addr_t9intf_id_t">
+<span id="_CPPv3N3eos9fib_via_t9fib_via_tERK9ip_addr_t9intf_id_t"></span><span id="_CPPv2N3eos9fib_via_t9fib_via_tERK9ip_addr_t9intf_id_t"></span><span id="eos::fib_via_t::fib_via_t__ip_addr_tCR.intf_id_t"></span><span class="target" id="classeos_1_1fib__via__t_1a5b40f44c5b7d75fce621d89de1e8fdcc"></span><code class="sig-name descname">fib_via_t</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#_CPPv4N3eos9ip_addr_tE" title="eos::ip_addr_t">ip_addr_t</a> <em class="property">const</em> &amp;<em>hop</em>, <a class="reference internal" href="intf.html#_CPPv4N3eos9intf_id_tE" title="eos::intf_id_t">intf_id_t</a> <em>intf</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos9fib_via_t9fib_via_tERK9ip_addr_t9intf_id_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos9fib_via_t9fib_via_tERK9fib_via_t">
+<span id="_CPPv3N3eos9fib_via_t9fib_via_tERK9fib_via_t"></span><span id="_CPPv2N3eos9fib_via_t9fib_via_tERK9fib_via_t"></span><span id="eos::fib_via_t::fib_via_t__fib_via_tCR"></span><span class="target" id="classeos_1_1fib__via__t_1ac9dc908903d1aaf3456e973865bee2ae"></span><code class="sig-name descname">fib_via_t</code><span class="sig-paren">(</span><em class="property">const</em> <a class="reference internal" href="#_CPPv4N3eos9fib_via_t9fib_via_tERK9fib_via_t" title="eos::fib_via_t::fib_via_t">fib_via_t</a> &amp;<em>other</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos9fib_via_t9fib_via_tERK9fib_via_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos9fib_via_taSERK9fib_via_t">
+<span id="_CPPv3N3eos9fib_via_taSERK9fib_via_t"></span><span id="_CPPv2N3eos9fib_via_taSERK9fib_via_t"></span><span id="eos::fib_via_t::assign-operator__fib_via_tCR"></span><span class="target" id="classeos_1_1fib__via__t_1a0e38d213dec9ecdbcfda210ce64b2ad8"></span><a class="reference internal" href="#_CPPv4N3eos9fib_via_tE" title="eos::fib_via_t">fib_via_t</a> &amp;<code class="sig-name descname">operator=</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos9fib_via_tE" title="eos::fib_via_t">fib_via_t</a> <em class="property">const</em> &amp;<em>other</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos9fib_via_taSERK9fib_via_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos9fib_via_t9fib_via_tERR9fib_via_t">
+<span id="_CPPv3N3eos9fib_via_t9fib_via_tERR9fib_via_t"></span><span id="_CPPv2N3eos9fib_via_t9fib_via_tERR9fib_via_t"></span><span id="eos::fib_via_t::fib_via_t__fib_via_tRR"></span><span class="target" id="classeos_1_1fib__via__t_1ae0834024ec9da3d3a3f8439dbc9c742a"></span><code class="sig-name descname">fib_via_t</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos9fib_via_t9fib_via_tERR9fib_via_t" title="eos::fib_via_t::fib_via_t">fib_via_t</a> &amp;&amp;<em>other</em><span class="sig-paren">)</span> <em class="property">noexcept</em><a class="headerlink" href="#_CPPv4N3eos9fib_via_t9fib_via_tERR9fib_via_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos9fib_via_taSERR9fib_via_t">
+<span id="_CPPv3N3eos9fib_via_taSERR9fib_via_t"></span><span id="_CPPv2N3eos9fib_via_taSERR9fib_via_t"></span><span id="eos::fib_via_t::assign-operator__fib_via_tRR"></span><span class="target" id="classeos_1_1fib__via__t_1a1a9d8b9fba9705c2cf055f853ff20463"></span><a class="reference internal" href="#_CPPv4N3eos9fib_via_tE" title="eos::fib_via_t">fib_via_t</a> &amp;<code class="sig-name descname">operator=</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos9fib_via_tE" title="eos::fib_via_t">fib_via_t</a> &amp;&amp;<em>other</em><span class="sig-paren">)</span> <em class="property">noexcept</em><a class="headerlink" href="#_CPPv4N3eos9fib_via_taSERR9fib_via_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos9fib_via_t3hopEv">
+<span id="_CPPv3NK3eos9fib_via_t3hopEv"></span><span id="_CPPv2NK3eos9fib_via_t3hopEv"></span><span id="eos::fib_via_t::hopC"></span><span class="target" id="classeos_1_1fib__via__t_1af7c118a42928eb6affe99574fff76149"></span><a class="reference internal" href="ip.html#_CPPv4N3eos9ip_addr_tE" title="eos::ip_addr_t">ip_addr_t</a> <code class="sig-name descname">hop</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos9fib_via_t3hopEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos9fib_via_t6hop_isERK9ip_addr_t">
+<span id="_CPPv3N3eos9fib_via_t6hop_isERK9ip_addr_t"></span><span id="_CPPv2N3eos9fib_via_t6hop_isERK9ip_addr_t"></span><span id="eos::fib_via_t::hop_is__ip_addr_tCR"></span><span class="target" id="classeos_1_1fib__via__t_1abed1f0c6a166bf473c266d3e90eef48f"></span>void <code class="sig-name descname">hop_is</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#_CPPv4N3eos9ip_addr_tE" title="eos::ip_addr_t">ip_addr_t</a> <em class="property">const</em> &amp;<em>hop</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos9fib_via_t6hop_isERK9ip_addr_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos9fib_via_t6hop_isERR9ip_addr_t">
+<span id="_CPPv3N3eos9fib_via_t6hop_isERR9ip_addr_t"></span><span id="_CPPv2N3eos9fib_via_t6hop_isERR9ip_addr_t"></span><span id="eos::fib_via_t::hop_is__ip_addr_tRR"></span><span class="target" id="classeos_1_1fib__via__t_1a589db01481cf6ec24d8f52761f483a38"></span>void <code class="sig-name descname">hop_is</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#_CPPv4N3eos9ip_addr_tE" title="eos::ip_addr_t">ip_addr_t</a> &amp;&amp;<em>hop</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos9fib_via_t6hop_isERR9ip_addr_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos9fib_via_t4intfEv">
+<span id="_CPPv3NK3eos9fib_via_t4intfEv"></span><span id="_CPPv2NK3eos9fib_via_t4intfEv"></span><span id="eos::fib_via_t::intfC"></span><span class="target" id="classeos_1_1fib__via__t_1a03f01a60b2aad9448150e904eae707e1"></span><a class="reference internal" href="intf.html#_CPPv4N3eos9intf_id_tE" title="eos::intf_id_t">intf_id_t</a> <code class="sig-name descname">intf</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos9fib_via_t4intfEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos9fib_via_t7intf_isE9intf_id_t">
+<span id="_CPPv3N3eos9fib_via_t7intf_isE9intf_id_t"></span><span id="_CPPv2N3eos9fib_via_t7intf_isE9intf_id_t"></span><span id="eos::fib_via_t::intf_is__intf_id_t"></span><span class="target" id="classeos_1_1fib__via__t_1ac21a332c91c293596973a120b7a9ccb6"></span>void <code class="sig-name descname">intf_is</code><span class="sig-paren">(</span><a class="reference internal" href="intf.html#_CPPv4N3eos9intf_id_tE" title="eos::intf_id_t">intf_id_t</a> <em>intf</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos9fib_via_t7intf_isE9intf_id_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos9fib_via_t10mpls_labelEv">
+<span id="_CPPv3NK3eos9fib_via_t10mpls_labelEv"></span><span id="_CPPv2NK3eos9fib_via_t10mpls_labelEv"></span><span id="eos::fib_via_t::mpls_labelC"></span><span class="target" id="classeos_1_1fib__via__t_1ac508802125b513d13fe8332f4fa46d19"></span><a class="reference internal" href="mpls.html#_CPPv4N3eos12mpls_label_tE" title="eos::mpls_label_t">mpls_label_t</a> <code class="sig-name descname">mpls_label</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos9fib_via_t10mpls_labelEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos9fib_via_t13mpls_label_isE12mpls_label_t">
+<span id="_CPPv3N3eos9fib_via_t13mpls_label_isE12mpls_label_t"></span><span id="_CPPv2N3eos9fib_via_t13mpls_label_isE12mpls_label_t"></span><span id="eos::fib_via_t::mpls_label_is__mpls_label_t"></span><span class="target" id="classeos_1_1fib__via__t_1acd1f791ea4fb7cc59fe6db15714251f6"></span>void <code class="sig-name descname">mpls_label_is</code><span class="sig-paren">(</span><a class="reference internal" href="mpls.html#_CPPv4N3eos12mpls_label_tE" title="eos::mpls_label_t">mpls_label_t</a> <em>mpls_label</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos9fib_via_t13mpls_label_isE12mpls_label_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos9fib_via_teqERK9fib_via_t">
+<span id="_CPPv3NK3eos9fib_via_teqERK9fib_via_t"></span><span id="_CPPv2NK3eos9fib_via_teqERK9fib_via_t"></span><span id="eos::fib_via_t::eq-operator__fib_via_tCRC"></span><span class="target" id="classeos_1_1fib__via__t_1a9cf2226f62e7607932d153e607eedabb"></span>bool <code class="sig-name descname">operator==</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos9fib_via_tE" title="eos::fib_via_t">fib_via_t</a> <em class="property">const</em> &amp;<em>other</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos9fib_via_teqERK9fib_via_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos9fib_via_tneERK9fib_via_t">
+<span id="_CPPv3NK3eos9fib_via_tneERK9fib_via_t"></span><span id="_CPPv2NK3eos9fib_via_tneERK9fib_via_t"></span><span id="eos::fib_via_t::neq-operator__fib_via_tCRC"></span><span class="target" id="classeos_1_1fib__via__t_1aef3a15b0eea5b033310fd64318664459"></span>bool <code class="sig-name descname">operator!=</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos9fib_via_tE" title="eos::fib_via_t">fib_via_t</a> <em class="property">const</em> &amp;<em>other</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos9fib_via_tneERK9fib_via_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos9fib_via_t4hashEv">
+<span id="_CPPv3NK3eos9fib_via_t4hashEv"></span><span id="_CPPv2NK3eos9fib_via_t4hashEv"></span><span id="eos::fib_via_t::hashC"></span><span class="target" id="classeos_1_1fib__via__t_1ad326007c3c5574e6aa323db7ce3f82a2"></span>uint32_t <code class="sig-name descname">hash</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos9fib_via_t4hashEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>The hash function for type <a class="reference internal" href="#classeos_1_1fib__via__t"><span class="std std-ref">fib_via_t</span></a>. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos9fib_via_t6mix_meER8hash_mix">
+<span id="_CPPv3NK3eos9fib_via_t6mix_meER8hash_mix"></span><span id="_CPPv2NK3eos9fib_via_t6mix_meER8hash_mix"></span><span id="eos::fib_via_t::mix_me__hash_mixRC"></span><span class="target" id="classeos_1_1fib__via__t_1a92e334ed74dd1349fd67de73efcb72da"></span>void <code class="sig-name descname">mix_me</code><span class="sig-paren">(</span><a class="reference internal" href="hash_mix.html#_CPPv4N3eos8hash_mixE" title="eos::hash_mix">hash_mix</a> &amp;<em>h</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos9fib_via_t6mix_meER8hash_mix" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>The hash mix function for type <a class="reference internal" href="#classeos_1_1fib__via__t"><span class="std std-ref">fib_via_t</span></a>. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos9fib_via_t9to_stringEv">
+<span id="_CPPv3NK3eos9fib_via_t9to_stringEv"></span><span id="_CPPv2NK3eos9fib_via_t9to_stringEv"></span><span id="eos::fib_via_t::to_stringC"></span><span class="target" id="classeos_1_1fib__via__t_1a0eac1b525aa0a03999eb086249e8bcb9"></span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::string <code class="sig-name descname">to_string</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos9fib_via_t9to_stringEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Returns a string representation of the current object’s values. </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-static-functions">Public Static Functions</p>
+<dl class="cpp function">
+<dt id="_CPPv4N3eos9fib_via_tnwENSt6size_tEPv">
+<span id="_CPPv3N3eos9fib_via_tnwENSt6size_tEPv"></span><span id="_CPPv2N3eos9fib_via_tnwENSt6size_tEPv"></span><span id="eos::fib_via_t::new-operator__std::s.voidP"></span><span class="target" id="classeos_1_1fib__via__t_1ac3bed67c29c2436e7f4752b8ea379132"></span><em class="property">static</em> <em class="property">inline</em> void *<code class="sig-name descname">operator new</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::size_t, void *<em>ptr</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos9fib_via_tnwENSt6size_tEPv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos9fib_via_tnwENSt6size_tE">
+<span id="_CPPv3N3eos9fib_via_tnwENSt6size_tE"></span><span id="_CPPv2N3eos9fib_via_tnwENSt6size_tE"></span><span id="eos::fib_via_t::new-operator__std::s"></span><span class="target" id="classeos_1_1fib__via__t_1ae8f70a7d36c872a9e7e459026caec6f8"></span><em class="property">static</em> void *<code class="sig-name descname">operator new</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::size_t<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos9fib_via_tnwENSt6size_tE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos9fib_via_tdlEPv">
+<span id="_CPPv3N3eos9fib_via_tdlEPv"></span><span id="_CPPv2N3eos9fib_via_tdlEPv"></span><span id="eos::fib_via_t::delete-operator__voidP"></span><span class="target" id="classeos_1_1fib__via__t_1af9e246ce4c242225516c89565e8fa84c"></span><em class="property">static</em> void <code class="sig-name descname">operator delete</code><span class="sig-paren">(</span>void*<span class="sig-paren">)</span> <em class="property">noexcept</em><a class="headerlink" href="#_CPPv4N3eos9fib_via_tdlEPv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-private-members">Private Members</p>
+<dl class="cpp var">
+<dt id="_CPPv4N3eos9fib_via_t5pimplE">
+<span id="_CPPv3N3eos9fib_via_t5pimplE"></span><span id="_CPPv2N3eos9fib_via_t5pimplE"></span><span id="eos::fib_via_t::pimpl__std::shared_ptr:fib_via_impl_t:"></span><span class="target" id="classeos_1_1fib__via__t_1ac8f6cc67b9e5784f8bb822e2d6c54f04"></span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::shared_ptr&lt;fib_via_impl_t&gt; <code class="sig-name descname">pimpl</code><a class="headerlink" href="#_CPPv4N3eos9fib_via_t5pimplE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-friends">Friends</p>
+<dl class="cpp function">
+<dt id="_CPPv4N3eos9fib_via_tlsERNSt7ostreamERK9fib_via_t">
+<span id="_CPPv3N3eos9fib_via_tlsERNSt7ostreamERK9fib_via_t"></span><span id="_CPPv2N3eos9fib_via_tlsERNSt7ostreamERK9fib_via_t"></span><span id="eos::fib_via_t::lshift-operator__osR.fib_via_tCR"></span><span class="target" id="classeos_1_1fib__via__t_1a959459c390e5363a0786fa1c6dee55a9"></span><em class="property">friend</em> <a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::ostream &amp;<code class="sig-name descname">operator&lt;&lt;</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::ostream &amp;<em>os</em>, <em class="property">const</em> <a class="reference internal" href="#_CPPv4N3eos9fib_via_tE" title="eos::fib_via_t">fib_via_t</a> &amp;<em>obj</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos9fib_via_tlsERNSt7ostreamERK9fib_via_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>A utility stream operator that adds a string representation of <a class="reference internal" href="#classeos_1_1fib__via__t"><span class="std std-ref">fib_via_t</span></a> to the ostream. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="cpp class">
+<dt id="_CPPv4N3eos9fib_fec_tE">
+<span id="_CPPv3N3eos9fib_fec_tE"></span><span id="_CPPv2N3eos9fib_fec_tE"></span><span id="eos::fib_fec_t"></span><span class="target" id="classeos_1_1fib__fec__t"></span><em class="property">class </em><code class="sig-name descname">fib_fec_t</code><a class="headerlink" href="#_CPPv4N3eos9fib_fec_tE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><div class="docutils container">
+<em>#include &lt;fib.h&gt;</em></div>
+<p>FEC (Forwarding Equivalence Class), consists of collection (one or more) vias. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
+<dl class="cpp function">
+<dt id="_CPPv4N3eos9fib_fec_t9fib_fec_tEv">
+<span id="_CPPv3N3eos9fib_fec_t9fib_fec_tEv"></span><span id="_CPPv2N3eos9fib_fec_t9fib_fec_tEv"></span><span id="eos::fib_fec_t::fib_fec_t"></span><span class="target" id="classeos_1_1fib__fec__t_1a6d0b250e422b36ee3a9200b4be1595b5"></span><code class="sig-name descname">fib_fec_t</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos9fib_fec_t9fib_fec_tEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos9fib_fec_t9fib_fec_tE13fib_fec_key_t">
+<span id="_CPPv3N3eos9fib_fec_t9fib_fec_tE13fib_fec_key_t"></span><span id="_CPPv2N3eos9fib_fec_t9fib_fec_tE13fib_fec_key_t"></span><span id="eos::fib_fec_t::fib_fec_t__fib_fec_key_t"></span><span class="target" id="classeos_1_1fib__fec__t_1a445f9fbf48fd9d3bc3bae0979950de7a"></span><em class="property">explicit</em> <code class="sig-name descname">fib_fec_t</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos13fib_fec_key_tE" title="eos::fib_fec_key_t">fib_fec_key_t</a> <em>fec_key</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos9fib_fec_t9fib_fec_tE13fib_fec_key_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos9fib_fec_t9fib_fec_tERK9fib_fec_t">
+<span id="_CPPv3N3eos9fib_fec_t9fib_fec_tERK9fib_fec_t"></span><span id="_CPPv2N3eos9fib_fec_t9fib_fec_tERK9fib_fec_t"></span><span id="eos::fib_fec_t::fib_fec_t__fib_fec_tCR"></span><span class="target" id="classeos_1_1fib__fec__t_1ab239b98746b9a4b13ff656654423be2f"></span><code class="sig-name descname">fib_fec_t</code><span class="sig-paren">(</span><em class="property">const</em> <a class="reference internal" href="#_CPPv4N3eos9fib_fec_t9fib_fec_tERK9fib_fec_t" title="eos::fib_fec_t::fib_fec_t">fib_fec_t</a> &amp;<em>other</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos9fib_fec_t9fib_fec_tERK9fib_fec_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos9fib_fec_taSERK9fib_fec_t">
+<span id="_CPPv3N3eos9fib_fec_taSERK9fib_fec_t"></span><span id="_CPPv2N3eos9fib_fec_taSERK9fib_fec_t"></span><span id="eos::fib_fec_t::assign-operator__fib_fec_tCR"></span><span class="target" id="classeos_1_1fib__fec__t_1aa84d7359357e8b528809c50d864bf360"></span><a class="reference internal" href="#_CPPv4N3eos9fib_fec_tE" title="eos::fib_fec_t">fib_fec_t</a> &amp;<code class="sig-name descname">operator=</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos9fib_fec_tE" title="eos::fib_fec_t">fib_fec_t</a> <em class="property">const</em> &amp;<em>other</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos9fib_fec_taSERK9fib_fec_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos9fib_fec_t9fib_fec_tERR9fib_fec_t">
+<span id="_CPPv3N3eos9fib_fec_t9fib_fec_tERR9fib_fec_t"></span><span id="_CPPv2N3eos9fib_fec_t9fib_fec_tERR9fib_fec_t"></span><span id="eos::fib_fec_t::fib_fec_t__fib_fec_tRR"></span><span class="target" id="classeos_1_1fib__fec__t_1acb82ab92c759175ec107e3c35ba3d7fb"></span><code class="sig-name descname">fib_fec_t</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos9fib_fec_t9fib_fec_tERR9fib_fec_t" title="eos::fib_fec_t::fib_fec_t">fib_fec_t</a> &amp;&amp;<em>other</em><span class="sig-paren">)</span> <em class="property">noexcept</em><a class="headerlink" href="#_CPPv4N3eos9fib_fec_t9fib_fec_tERR9fib_fec_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos9fib_fec_taSERR9fib_fec_t">
+<span id="_CPPv3N3eos9fib_fec_taSERR9fib_fec_t"></span><span id="_CPPv2N3eos9fib_fec_taSERR9fib_fec_t"></span><span id="eos::fib_fec_t::assign-operator__fib_fec_tRR"></span><span class="target" id="classeos_1_1fib__fec__t_1ac0fd4e5216ce8cb2d5430a119f154dff"></span><a class="reference internal" href="#_CPPv4N3eos9fib_fec_tE" title="eos::fib_fec_t">fib_fec_t</a> &amp;<code class="sig-name descname">operator=</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos9fib_fec_tE" title="eos::fib_fec_t">fib_fec_t</a> &amp;&amp;<em>other</em><span class="sig-paren">)</span> <em class="property">noexcept</em><a class="headerlink" href="#_CPPv4N3eos9fib_fec_taSERR9fib_fec_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos9fib_fec_t7fec_keyEv">
+<span id="_CPPv3NK3eos9fib_fec_t7fec_keyEv"></span><span id="_CPPv2NK3eos9fib_fec_t7fec_keyEv"></span><span id="eos::fib_fec_t::fec_keyC"></span><span class="target" id="classeos_1_1fib__fec__t_1a1332bc140ba8370e04487907cb61c35c"></span><a class="reference internal" href="#_CPPv4N3eos13fib_fec_key_tE" title="eos::fib_fec_key_t">fib_fec_key_t</a> <code class="sig-name descname">fec_key</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos9fib_fec_t7fec_keyEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Getter for ‘fec_key’: fec_key consisting of fec_id. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos9fib_fec_t10fec_key_isE13fib_fec_key_t">
+<span id="_CPPv3N3eos9fib_fec_t10fec_key_isE13fib_fec_key_t"></span><span id="_CPPv2N3eos9fib_fec_t10fec_key_isE13fib_fec_key_t"></span><span id="eos::fib_fec_t::fec_key_is__fib_fec_key_t"></span><span class="target" id="classeos_1_1fib__fec__t_1aded79cf9aeace742f5fc648791d4fda1"></span>void <code class="sig-name descname">fec_key_is</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos13fib_fec_key_tE" title="eos::fib_fec_key_t">fib_fec_key_t</a> <em>fec_key</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos9fib_fec_t10fec_key_isE13fib_fec_key_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Setter for ‘fec_key’. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos9fib_fec_t8fec_typeEv">
+<span id="_CPPv3NK3eos9fib_fec_t8fec_typeEv"></span><span id="_CPPv2NK3eos9fib_fec_t8fec_typeEv"></span><span id="eos::fib_fec_t::fec_typeC"></span><span class="target" id="classeos_1_1fib__fec__t_1a230b8fbb5bedd404a2bf506e80f4eead"></span><a class="reference internal" href="#_CPPv4N3eos14fib_fec_type_tE" title="eos::fib_fec_type_t">fib_fec_type_t</a> <code class="sig-name descname">fec_type</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos9fib_fec_t8fec_typeEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos9fib_fec_t11fec_type_isE14fib_fec_type_t">
+<span id="_CPPv3N3eos9fib_fec_t11fec_type_isE14fib_fec_type_t"></span><span id="_CPPv2N3eos9fib_fec_t11fec_type_isE14fib_fec_type_t"></span><span id="eos::fib_fec_t::fec_type_is__fib_fec_type_t"></span><span class="target" id="classeos_1_1fib__fec__t_1a5ba9ecd1e473e8cceadc46fc42986e92"></span>void <code class="sig-name descname">fec_type_is</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos14fib_fec_type_tE" title="eos::fib_fec_type_t">fib_fec_type_t</a> <em>fec_type</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos9fib_fec_t11fec_type_isE14fib_fec_type_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos9fib_fec_t18nexthop_group_nameEv">
+<span id="_CPPv3NK3eos9fib_fec_t18nexthop_group_nameEv"></span><span id="_CPPv2NK3eos9fib_fec_t18nexthop_group_nameEv"></span><span id="eos::fib_fec_t::nexthop_group_nameC"></span><span class="target" id="classeos_1_1fib__fec__t_1a710a1838e11e8d196869e10adbd45fe5"></span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::string <code class="sig-name descname">nexthop_group_name</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos9fib_fec_t18nexthop_group_nameEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Getter for ‘nexthop_group_name’: Name of the nexthop group, in case fec_type is FEC_TYPE_NEXTHOP_GROUP. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos9fib_fec_t21nexthop_group_name_isENSt6stringE">
+<span id="_CPPv3N3eos9fib_fec_t21nexthop_group_name_isENSt6stringE"></span><span id="_CPPv2N3eos9fib_fec_t21nexthop_group_name_isENSt6stringE"></span><span id="eos::fib_fec_t::nexthop_group_name_is__ss"></span><span class="target" id="classeos_1_1fib__fec__t_1a776bd9f9219547031310f17b618dff20"></span>void <code class="sig-name descname">nexthop_group_name_is</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::string <em>nexthop_group_name</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos9fib_fec_t21nexthop_group_name_isENSt6stringE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Setter for ‘nexthop_group_name’. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos9fib_fec_t3viaEv">
+<span id="_CPPv3NK3eos9fib_fec_t3viaEv"></span><span id="_CPPv2NK3eos9fib_fec_t3viaEv"></span><span id="eos::fib_fec_t::viaC"></span><span class="target" id="classeos_1_1fib__fec__t_1aad48c59658b6b38dafea033cc8c102f9"></span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::forward_list&lt;<a class="reference internal" href="#_CPPv4N3eos9fib_via_tE" title="eos::fib_via_t">fib_via_t</a>&gt; <em class="property">const</em> &amp;<code class="sig-name descname">via</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos9fib_fec_t3viaEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Getter for ‘via’: A list of vias that traffic will be distributed amongst. Duplicate vias will be weighted heavily. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos9fib_fec_t6via_isERKNSt12forward_listI9fib_via_tEE">
+<span id="_CPPv3N3eos9fib_fec_t6via_isERKNSt12forward_listI9fib_via_tEE"></span><span id="_CPPv2N3eos9fib_fec_t6via_isERKNSt12forward_listI9fib_via_tEE"></span><span id="eos::fib_fec_t::via_is__std::forward_list:fib_via_t:CR"></span><span class="target" id="classeos_1_1fib__fec__t_1a3f5df4b89a0008ffa5c15aa763167c2c"></span>void <code class="sig-name descname">via_is</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::forward_list&lt;<a class="reference internal" href="#_CPPv4N3eos9fib_via_tE" title="eos::fib_via_t">fib_via_t</a>&gt; <em class="property">const</em> &amp;<em>via</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos9fib_fec_t6via_isERKNSt12forward_listI9fib_via_tEE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Setter for ‘via’. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos9fib_fec_t6via_isERRNSt12forward_listI9fib_via_tEE">
+<span id="_CPPv3N3eos9fib_fec_t6via_isERRNSt12forward_listI9fib_via_tEE"></span><span id="_CPPv2N3eos9fib_fec_t6via_isERRNSt12forward_listI9fib_via_tEE"></span><span id="eos::fib_fec_t::via_is__std::forward_list:fib_via_t:RR"></span><span class="target" id="classeos_1_1fib__fec__t_1a6df93776ade806c5f80d937e385ade83"></span>void <code class="sig-name descname">via_is</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::forward_list&lt;<a class="reference internal" href="#_CPPv4N3eos9fib_via_tE" title="eos::fib_via_t">fib_via_t</a>&gt; &amp;&amp;<em>via</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos9fib_fec_t6via_isERRNSt12forward_listI9fib_via_tEE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Moving Setter for ‘via’. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos9fib_fec_t7via_setERK9fib_via_t">
+<span id="_CPPv3N3eos9fib_fec_t7via_setERK9fib_via_t"></span><span id="_CPPv2N3eos9fib_fec_t7via_setERK9fib_via_t"></span><span id="eos::fib_fec_t::via_set__fib_via_tCR"></span><span class="target" id="classeos_1_1fib__fec__t_1ae9490250e1ad9be1a465dec4afa4bc0a"></span>void <code class="sig-name descname">via_set</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos9fib_via_tE" title="eos::fib_via_t">fib_via_t</a> <em class="property">const</em> &amp;<em>via</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos9fib_fec_t7via_setERK9fib_via_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Prepend one via to the list. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos9fib_fec_t7via_setERR9fib_via_t">
+<span id="_CPPv3N3eos9fib_fec_t7via_setERR9fib_via_t"></span><span id="_CPPv2N3eos9fib_fec_t7via_setERR9fib_via_t"></span><span id="eos::fib_fec_t::via_set__fib_via_tRR"></span><span class="target" id="classeos_1_1fib__fec__t_1a11dea1bdd548b0415c2c1691aa367254"></span>void <code class="sig-name descname">via_set</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos9fib_via_tE" title="eos::fib_via_t">fib_via_t</a> &amp;&amp;<em>via</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos9fib_fec_t7via_setERR9fib_via_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Prepend one via to the list. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos9fib_fec_t7via_delERK9fib_via_t">
+<span id="_CPPv3N3eos9fib_fec_t7via_delERK9fib_via_t"></span><span id="_CPPv2N3eos9fib_fec_t7via_delERK9fib_via_t"></span><span id="eos::fib_fec_t::via_del__fib_via_tCR"></span><span class="target" id="classeos_1_1fib__fec__t_1a0d3a35b12fee89f90757d1af24bffb21"></span>void <code class="sig-name descname">via_del</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos9fib_via_tE" title="eos::fib_via_t">fib_via_t</a> <em class="property">const</em> &amp;<em>via</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos9fib_fec_t7via_delERK9fib_via_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Remove all matching via elements. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos9fib_fec_t4hashEv">
+<span id="_CPPv3NK3eos9fib_fec_t4hashEv"></span><span id="_CPPv2NK3eos9fib_fec_t4hashEv"></span><span id="eos::fib_fec_t::hashC"></span><span class="target" id="classeos_1_1fib__fec__t_1af4523e0a3337dd105a9aded2f27aa948"></span>uint32_t <code class="sig-name descname">hash</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos9fib_fec_t4hashEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>The hash function for type <a class="reference internal" href="#classeos_1_1fib__fec__t"><span class="std std-ref">fib_fec_t</span></a>. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos9fib_fec_t6mix_meER8hash_mix">
+<span id="_CPPv3NK3eos9fib_fec_t6mix_meER8hash_mix"></span><span id="_CPPv2NK3eos9fib_fec_t6mix_meER8hash_mix"></span><span id="eos::fib_fec_t::mix_me__hash_mixRC"></span><span class="target" id="classeos_1_1fib__fec__t_1a39a9352859d5dc62a2855f72b88790b7"></span>void <code class="sig-name descname">mix_me</code><span class="sig-paren">(</span><a class="reference internal" href="hash_mix.html#_CPPv4N3eos8hash_mixE" title="eos::hash_mix">hash_mix</a> &amp;<em>h</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos9fib_fec_t6mix_meER8hash_mix" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>The hash mix function for type <a class="reference internal" href="#classeos_1_1fib__fec__t"><span class="std std-ref">fib_fec_t</span></a>. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos9fib_fec_t9to_stringEv">
+<span id="_CPPv3NK3eos9fib_fec_t9to_stringEv"></span><span id="_CPPv2NK3eos9fib_fec_t9to_stringEv"></span><span id="eos::fib_fec_t::to_stringC"></span><span class="target" id="classeos_1_1fib__fec__t_1ae85e0ae547ec25e6e2706d7f0ed19e4a"></span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::string <code class="sig-name descname">to_string</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos9fib_fec_t9to_stringEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Returns a string representation of the current object’s values. </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-static-functions">Public Static Functions</p>
+<dl class="cpp function">
+<dt id="_CPPv4N3eos9fib_fec_tnwENSt6size_tEPv">
+<span id="_CPPv3N3eos9fib_fec_tnwENSt6size_tEPv"></span><span id="_CPPv2N3eos9fib_fec_tnwENSt6size_tEPv"></span><span id="eos::fib_fec_t::new-operator__std::s.voidP"></span><span class="target" id="classeos_1_1fib__fec__t_1a797fdc9258df69cf53ecf0e555c6e45c"></span><em class="property">static</em> <em class="property">inline</em> void *<code class="sig-name descname">operator new</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::size_t, void *<em>ptr</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos9fib_fec_tnwENSt6size_tEPv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos9fib_fec_tnwENSt6size_tE">
+<span id="_CPPv3N3eos9fib_fec_tnwENSt6size_tE"></span><span id="_CPPv2N3eos9fib_fec_tnwENSt6size_tE"></span><span id="eos::fib_fec_t::new-operator__std::s"></span><span class="target" id="classeos_1_1fib__fec__t_1ac1896fe6273fcae2cb29983f6a7c49d3"></span><em class="property">static</em> void *<code class="sig-name descname">operator new</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::size_t<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos9fib_fec_tnwENSt6size_tE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos9fib_fec_tdlEPv">
+<span id="_CPPv3N3eos9fib_fec_tdlEPv"></span><span id="_CPPv2N3eos9fib_fec_tdlEPv"></span><span id="eos::fib_fec_t::delete-operator__voidP"></span><span class="target" id="classeos_1_1fib__fec__t_1a3274a6bbb5ec9683d9e2219db3c0d215"></span><em class="property">static</em> void <code class="sig-name descname">operator delete</code><span class="sig-paren">(</span>void*<span class="sig-paren">)</span> <em class="property">noexcept</em><a class="headerlink" href="#_CPPv4N3eos9fib_fec_tdlEPv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-private-members">Private Members</p>
+<dl class="cpp var">
+<dt id="_CPPv4N3eos9fib_fec_t5pimplE">
+<span id="_CPPv3N3eos9fib_fec_t5pimplE"></span><span id="_CPPv2N3eos9fib_fec_t5pimplE"></span><span id="eos::fib_fec_t::pimpl__std::shared_ptr:fib_fec_impl_t:"></span><span class="target" id="classeos_1_1fib__fec__t_1a3df40446c880755b7477c8f042b77569"></span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::shared_ptr&lt;fib_fec_impl_t&gt; <code class="sig-name descname">pimpl</code><a class="headerlink" href="#_CPPv4N3eos9fib_fec_t5pimplE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-friends">Friends</p>
+<dl class="cpp function">
+<dt id="_CPPv4N3eos9fib_fec_tlsERNSt7ostreamERK9fib_fec_t">
+<span id="_CPPv3N3eos9fib_fec_tlsERNSt7ostreamERK9fib_fec_t"></span><span id="_CPPv2N3eos9fib_fec_tlsERNSt7ostreamERK9fib_fec_t"></span><span id="eos::fib_fec_t::lshift-operator__osR.fib_fec_tCR"></span><span class="target" id="classeos_1_1fib__fec__t_1a4bf2f73c30440d60eabe04b41c897049"></span><em class="property">friend</em> <a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::ostream &amp;<code class="sig-name descname">operator&lt;&lt;</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::ostream &amp;<em>os</em>, <em class="property">const</em> <a class="reference internal" href="#_CPPv4N3eos9fib_fec_tE" title="eos::fib_fec_t">fib_fec_t</a> &amp;<em>obj</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos9fib_fec_tlsERNSt7ostreamERK9fib_fec_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>A utility stream operator that adds a string representation of <a class="reference internal" href="#classeos_1_1fib__fec__t"><span class="std std-ref">fib_fec_t</span></a> to the ostream. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#"><strong>fib</strong></a><ul>
+<li><a class="reference internal" href="#type-definitions-in-fib">Type definitions in <strong>fib</strong></a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="fd.html"
+                        title="previous chapter"><strong>fd</strong></a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="hardware_table.html"
+                        title="next chapter"><strong>hardware_table</strong></a></p>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="hardware_table.html" title="hardware_table"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="fd.html" title="fd"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Arista EOS SDK 2.23.3 reference</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href=""><strong>fib</strong></a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2014, Arista Networks.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.4.3.
+    </div>
+  </body>
+</html>

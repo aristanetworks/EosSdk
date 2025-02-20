@@ -1,0 +1,7 @@
+**hash_mix**
+------------
+
+
+.. doxygenfile:: eos/hash_mix.h
+   :project: eossdk
+

@@ -1,0 +1,215 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>timer &#8212; Arista EOS SDK 2.23.3 reference</title>
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/eossdk.css" type="text/css" />
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="tracing" href="tracing.html" />
+    <link rel="prev" title="system" href="system.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="tracing.html" title="tracing"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="system.html" title="system"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Arista EOS SDK 2.23.3 reference</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href=""><strong>timer</strong></a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="timer">
+<h1><strong>timer</strong><a class="headerlink" href="#timer" title="Permalink to this headline">¶</a></h1>
+<p>Periodic timeout support.</p>
+<p>This module allows timeouts to be set for a callback to be called as soon as possible after some future time. </p>
+<dl class="cpp type">
+<dt id="_CPPv43eos">
+<span id="_CPPv33eos"></span><span id="_CPPv23eos"></span><span id="eos"></span><span class="target" id="namespaceeos"></span><em class="property">namespace </em><code class="sig-name descname">eos</code><br /></dt>
+<dd><div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-functions">Functions</p>
+<dl class="cpp function">
+<dt id="_CPPv4N3eos3nowEv">
+<span id="_CPPv3N3eos3nowEv"></span><span id="_CPPv2N3eos3nowEv"></span><span id="eos::now"></span><span class="target" id="timer_8h_1a26f6edcc0823c54a231f5654959770af"></span><a class="reference internal" href="base.html#_CPPv4N3eos9seconds_tE" title="eos::seconds_t">seconds_t</a> <code class="sig-name descname">now</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos3nowEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Monotonically increasing time in seconds.</p>
+<p>Corresponds to the number of seconds since system boot plus an arbitrary offset. As such, this value does not permit derivation of a wallclock time (use time() from time.h for that).</p>
+<p>Instead, <a class="reference internal" href="#timer_8h_1a26f6edcc0823c54a231f5654959770af"><span class="std std-ref">now()</span></a> provides a monotonically increasing value unaffected by leap seconds. </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-variables">Variables</p>
+<dl class="cpp var">
+<dt id="_CPPv4N3eos5neverE">
+<span id="_CPPv3N3eos5neverE"></span><span id="_CPPv2N3eos5neverE"></span><span id="eos::never__seconds_tC"></span><span class="target" id="timer_8h_1a8daf10dd06cc92d9f798ae1ebcaad60b"></span><em class="property">static</em> <em class="property">const</em> <a class="reference internal" href="base.html#_CPPv4N3eos9seconds_tE" title="eos::seconds_t">seconds_t</a> <code class="sig-name descname">never</code> = 0<a class="headerlink" href="#_CPPv4N3eos5neverE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>‘never’ represents a future time that <a class="reference internal" href="#timer_8h_1a26f6edcc0823c54a231f5654959770af"><span class="std std-ref">now()</span></a> can never reach. </p>
+</dd></dl>
+
+</div>
+<dl class="cpp class">
+<dt id="_CPPv4N3eos15timeout_handlerE">
+<span id="_CPPv3N3eos15timeout_handlerE"></span><span id="_CPPv2N3eos15timeout_handlerE"></span><span id="eos::timeout_handler"></span><span class="target" id="classeos_1_1timeout__handler"></span><em class="property">class </em><code class="sig-name descname">timeout_handler</code> : <em class="property">public</em> <a class="reference internal" href="acl.html#_CPPv43eos" title="eos">eos</a>::<a class="reference internal" href="base_handler.html#_CPPv4I00EN3eos12base_handlerE" title="eos::base_handler">base_handler</a>&lt;<a class="reference internal" href="#_CPPv4N3eos11timeout_mgrE" title="eos::timeout_mgr">timeout_mgr</a>, <a class="reference internal" href="#_CPPv4N3eos15timeout_handlerE" title="eos::timeout_handler">timeout_handler</a>&gt;<a class="headerlink" href="#_CPPv4N3eos15timeout_handlerE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><div class="docutils container">
+<em>#include &lt;timer.h&gt;</em></div>
+<p>The ‘<a class="reference internal" href="#classeos_1_1timeout__handler"><span class="std std-ref">timeout_handler</span></a>’ class manages a single instance of a timer.</p>
+<p>To schedule a timeout, call <a class="reference internal" href="#classeos_1_1timeout__handler_1a2d28ed821ecd2196902b1e9a5ac2b5bc"><span class="std std-ref">timeout_time_is()</span></a> using an absolute time greater than <a class="reference internal" href="#timer_8h_1a26f6edcc0823c54a231f5654959770af"><span class="std std-ref">now()</span></a>. When the timeout_time has been exceeded, <a class="reference internal" href="#classeos_1_1timeout__handler_1a83181130affd53bbf24c171f5d6ceb6f"><span class="std std-ref">on_timeout()</span></a> is called and the timer is unset. To cancel a timer, set the timeout to the ‘never’ constant.</p>
+<p>There are no guarantees that <a class="reference internal" href="#classeos_1_1timeout__handler_1a83181130affd53bbf24c171f5d6ceb6f"><span class="std std-ref">on_timeout()</span></a> will be called exactly at the configured timeout, though we guarantee this will never be called <em>before</em> the configured timeout </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
+<dl class="cpp function">
+<dt id="_CPPv4N3eos15timeout_handler15timeout_handlerEP11timeout_mgr">
+<span id="_CPPv3N3eos15timeout_handler15timeout_handlerEP11timeout_mgr"></span><span id="_CPPv2N3eos15timeout_handler15timeout_handlerEP11timeout_mgr"></span><span id="eos::timeout_handler::timeout_handler__timeout_mgrP"></span><span class="target" id="classeos_1_1timeout__handler_1aa88af4595ce6326cb3febf0d78e89e65"></span><em class="property">explicit</em> <code class="sig-name descname">timeout_handler</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos11timeout_mgrE" title="eos::timeout_mgr">timeout_mgr</a> *<em>mgr</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos15timeout_handler15timeout_handlerEP11timeout_mgr" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos15timeout_handlerD0Ev">
+<span id="_CPPv3N3eos15timeout_handlerD0Ev"></span><span id="_CPPv2N3eos15timeout_handlerD0Ev"></span><span id="eos::timeout_handler::~timeout_handler"></span><span class="target" id="classeos_1_1timeout__handler_1a25274d6cef85ea9cbbc442aad4d76af9"></span><em class="property">virtual</em> <code class="sig-name descname">~timeout_handler</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos15timeout_handlerD0Ev" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos15timeout_handler15timeout_time_isE9seconds_t">
+<span id="_CPPv3N3eos15timeout_handler15timeout_time_isE9seconds_t"></span><span id="_CPPv2N3eos15timeout_handler15timeout_time_isE9seconds_t"></span><span id="eos::timeout_handler::timeout_time_is__seconds_t"></span><span class="target" id="classeos_1_1timeout__handler_1a2d28ed821ecd2196902b1e9a5ac2b5bc"></span>void <code class="sig-name descname">timeout_time_is</code><span class="sig-paren">(</span><a class="reference internal" href="base.html#_CPPv4N3eos9seconds_tE" title="eos::seconds_t">seconds_t</a><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos15timeout_handler15timeout_time_isE9seconds_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Sets the next time <a class="reference internal" href="#classeos_1_1timeout__handler_1a83181130affd53bbf24c171f5d6ceb6f"><span class="std std-ref">on_timeout()</span></a> will be called.</p>
+<p>The <a class="reference internal" href="#classeos_1_1timeout__handler_1a83181130affd53bbf24c171f5d6ceb6f"><span class="std std-ref">on_timeout()</span></a> callback will be called as soon as possible after the provided time. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos15timeout_handler10on_timeoutEv">
+<span id="_CPPv3N3eos15timeout_handler10on_timeoutEv"></span><span id="_CPPv2N3eos15timeout_handler10on_timeoutEv"></span><span id="eos::timeout_handler::on_timeout"></span><span class="target" id="classeos_1_1timeout__handler_1a83181130affd53bbf24c171f5d6ceb6f"></span><em class="property">virtual</em> void <code class="sig-name descname">on_timeout</code><span class="sig-paren">(</span><span class="sig-paren">)</span> = 0<a class="headerlink" href="#_CPPv4N3eos15timeout_handler10on_timeoutEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Returns the next timeout value. </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-private-members">Private Members</p>
+<dl class="cpp var">
+<dt id="_CPPv4N3eos15timeout_handler6timer_E">
+<span id="_CPPv3N3eos15timeout_handler6timer_E"></span><span id="_CPPv2N3eos15timeout_handler6timer_E"></span><span id="eos::timeout_handler::timer___timer_internalP"></span><span class="target" id="classeos_1_1timeout__handler_1ac54d62ec6d4cf00e8d2b97474bf9e2cb"></span>timer_internal *<code class="sig-name descname">timer_</code><a class="headerlink" href="#_CPPv4N3eos15timeout_handler6timer_E" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-friends">Friends</p>
+<dl class="friendclass">
+<dt>
+<em class="property">friend class</em> timer_internal</dt>
+</dl>
+
+</div>
+</dd></dl>
+
+<dl class="cpp class">
+<dt id="_CPPv4N3eos11timeout_mgrE">
+<span id="_CPPv3N3eos11timeout_mgrE"></span><span id="_CPPv2N3eos11timeout_mgrE"></span><span id="eos::timeout_mgr"></span><span class="target" id="classeos_1_1timeout__mgr"></span><em class="property">class </em><code class="sig-name descname">timeout_mgr</code> : <em class="property">public</em> <a class="reference internal" href="acl.html#_CPPv43eos" title="eos">eos</a>::<a class="reference internal" href="base_mgr.html#_CPPv4I00EN3eos8base_mgrE" title="eos::base_mgr">base_mgr</a>&lt;<a class="reference internal" href="#_CPPv4N3eos15timeout_handlerE" title="eos::timeout_handler">timeout_handler</a>&gt;<a class="headerlink" href="#_CPPv4N3eos11timeout_mgrE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
+<dl class="cpp function">
+<dt id="_CPPv4N3eos11timeout_mgrD0Ev">
+<span id="_CPPv3N3eos11timeout_mgrD0Ev"></span><span id="_CPPv2N3eos11timeout_mgrD0Ev"></span><span id="eos::timeout_mgr::~timeout_mgr"></span><span class="target" id="classeos_1_1timeout__mgr_1a39a2e32e82fc98dbfc05dfd3f2563d7e"></span><em class="property">virtual</em> <code class="sig-name descname">~timeout_mgr</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos11timeout_mgrD0Ev" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-protected-functions">Protected Functions</p>
+<dl class="cpp function">
+<dt id="_CPPv4N3eos11timeout_mgr12init_handlerEP15timeout_handler">
+<span id="_CPPv3N3eos11timeout_mgr12init_handlerEP15timeout_handler"></span><span id="_CPPv2N3eos11timeout_mgr12init_handlerEP15timeout_handler"></span><span id="eos::timeout_mgr::init_handler__timeout_handlerP"></span><span class="target" id="classeos_1_1timeout__mgr_1adfbd8e68eb003db4ead44daf023b1662"></span><em class="property">virtual</em> void <code class="sig-name descname">init_handler</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos15timeout_handlerE" title="eos::timeout_handler">timeout_handler</a>*<span class="sig-paren">)</span> = 0<a class="headerlink" href="#_CPPv4N3eos11timeout_mgr12init_handlerEP15timeout_handler" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos11timeout_mgr11timeout_mgrEv">
+<span id="_CPPv3N3eos11timeout_mgr11timeout_mgrEv"></span><span id="_CPPv2N3eos11timeout_mgr11timeout_mgrEv"></span><span id="eos::timeout_mgr::timeout_mgr"></span><span class="target" id="classeos_1_1timeout__mgr_1a149d8b1761b2f69a1843dae0b2c90a16"></span><code class="sig-name descname">timeout_mgr</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos11timeout_mgr11timeout_mgrEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-private-members">Private Members</p>
+<dl class="cpp var">
+<dt>
+<span class="target" id="classeos_1_1timeout__mgr_1adb3271e4c07a6e88e8df52b5efd0f22b"></span><code class="sig-name descname">timeout_mgr</code></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-friends">Friends</p>
+<dl class="friendclass">
+<dt>
+<em class="property">friend class</em> timeout_handler</dt>
+</dl>
+
+</div>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="system.html"
+                        title="previous chapter"><strong>system</strong></a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="tracing.html"
+                        title="next chapter"><strong>tracing</strong></a></p>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="tracing.html" title="tracing"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="system.html" title="system"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Arista EOS SDK 2.23.3 reference</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href=""><strong>timer</strong></a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2014, Arista Networks.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.4.3.
+    </div>
+  </body>
+</html>
