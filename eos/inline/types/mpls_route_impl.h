@@ -1,4 +1,4 @@
-// Copyright (c) 2024 Arista Networks, Inc.  All rights reserved.
+// Copyright (c) 2025 Arista Networks, Inc.  All rights reserved.
 // Arista Networks, Inc. Confidential and Proprietary.
 
 #ifndef EOS_INLINE_TYPES_MPLS_ROUTE_IMPL_H
@@ -229,25 +229,28 @@ operator<<(std::ostream& os, const mpls_route_impl_t& obj) {
 
 
 mpls_route_via_impl_t::mpls_route_via_impl_t() :
-      route_key_(), hop_(), intf_(), pushswap_label_(0),
+      route_key_(), hop_(), intf_(), pushswap_label_(),
       label_action_(MPLS_ACTION_NULL), ttl_mode_(MPLS_TTLMODE_NULL),
       payload_type_(MPLS_PAYLOAD_TYPE_NULL), skip_egress_acl_(false),
-      nexthop_group_() {
+      nexthop_group_(),
+      pushswap_label_stack_(std::forward_list <mpls_label_t> {0}) {
 }
 
 mpls_route_via_impl_t::mpls_route_via_impl_t(mpls_route_key_t route_key) :
-      route_key_(route_key), hop_(), intf_(), pushswap_label_(0),
+      route_key_(route_key), hop_(), intf_(), pushswap_label_(),
       label_action_(MPLS_ACTION_NULL), ttl_mode_(MPLS_TTLMODE_NULL),
       payload_type_(MPLS_PAYLOAD_TYPE_NULL), skip_egress_acl_(false),
-      nexthop_group_() {
+      nexthop_group_(),
+      pushswap_label_stack_(std::forward_list <mpls_label_t> {0}) {
 }
 
 mpls_route_via_impl_t::mpls_route_via_impl_t(mpls_route_key_t route_key,
                                                     mpls_action_t label_action) :
-      route_key_(route_key), hop_(), intf_(), pushswap_label_(0),
+      route_key_(route_key), hop_(), intf_(), pushswap_label_(),
       label_action_(label_action), ttl_mode_(MPLS_TTLMODE_NULL),
       payload_type_(MPLS_PAYLOAD_TYPE_NULL), skip_egress_acl_(false),
-      nexthop_group_() {
+      nexthop_group_(),
+      pushswap_label_stack_(std::forward_list <mpls_label_t> {0}) {
 }
 
 mpls_route_key_t
@@ -292,12 +295,16 @@ mpls_route_via_impl_t::intf_is(intf_id_t && intf) {
 
 mpls_label_t
 mpls_route_via_impl_t::pushswap_label() const {
-   return pushswap_label_;
+   if(pushswap_label_stack().empty()) {
+      return mpls_label_t();
+   }
+   return *pushswap_label_stack().begin();
 }
 
 void
-mpls_route_via_impl_t::pushswap_label_is(mpls_label_t pushswap_label) {
-   pushswap_label_ = pushswap_label;
+mpls_route_via_impl_t::pushswap_label_is(mpls_label_t top_label) {
+   std::forward_list <mpls_label_t> labels{top_label};
+   pushswap_label_stack_is(labels);
 }
 
 mpls_action_t
@@ -350,6 +357,41 @@ mpls_route_via_impl_t::nexthop_group_is(std::string nexthop_group) {
    nexthop_group_ = nexthop_group;
 }
 
+std::forward_list<mpls_label_t> const &
+mpls_route_via_impl_t::pushswap_label_stack() const {
+   return pushswap_label_stack_;
+}
+
+void
+mpls_route_via_impl_t::pushswap_label_stack_is(
+         std::forward_list<mpls_label_t> const & pushswap_label_stack) {
+   pushswap_label_stack_ = pushswap_label_stack;
+}
+
+void
+mpls_route_via_impl_t::pushswap_label_stack_is(
+         std::forward_list<mpls_label_t> && pushswap_label_stack) {
+   pushswap_label_stack_ = std::move(pushswap_label_stack);
+}
+
+void
+mpls_route_via_impl_t::pushswap_label_stack_set(
+         mpls_label_t const & pushswap_label_stack) {
+   pushswap_label_stack_.push_front(pushswap_label_stack);
+}
+
+void
+mpls_route_via_impl_t::pushswap_label_stack_set(
+         mpls_label_t && pushswap_label_stack) {
+   pushswap_label_stack_.push_front(std::move(pushswap_label_stack));
+}
+
+void
+mpls_route_via_impl_t::pushswap_label_stack_del(
+         mpls_label_t const & pushswap_label_stack) {
+   pushswap_label_stack_.remove(pushswap_label_stack);
+}
+
 bool
 mpls_route_via_impl_t::operator==(mpls_route_via_impl_t const & other) const {
    return route_key_ == other.route_key_ &&
@@ -360,7 +402,8 @@ mpls_route_via_impl_t::operator==(mpls_route_via_impl_t const & other) const {
           ttl_mode_ == other.ttl_mode_ &&
           payload_type_ == other.payload_type_ &&
           skip_egress_acl_ == other.skip_egress_acl_ &&
-          nexthop_group_ == other.nexthop_group_;
+          nexthop_group_ == other.nexthop_group_ &&
+          pushswap_label_stack_ == other.pushswap_label_stack_;
 }
 
 bool
@@ -386,6 +429,10 @@ mpls_route_via_impl_t::mix_me(hash_mix & h) const {
    h.mix(payload_type_); // mpls_payload_type_t
    h.mix(skip_egress_acl_); // bool
    h.mix(nexthop_group_); // std::string
+   for (auto it=pushswap_label_stack_.cbegin();
+        it!=pushswap_label_stack_.cend(); ++it) {
+      h.mix(*it); // mpls_label_t
+   }
 }
 
 std::string
@@ -401,6 +448,18 @@ mpls_route_via_impl_t::to_string() const {
    ss << ", payload_type=" << payload_type_;
    ss << ", skip_egress_acl=" << skip_egress_acl_;
    ss << ", nexthop_group='" << nexthop_group_ << "'";
+   ss << ", pushswap_label_stack=" <<"'";
+   bool first_pushswap_label_stack = true;
+   for (auto it=pushswap_label_stack_.cbegin();
+        it!=pushswap_label_stack_.cend(); ++it) {
+      if (first_pushswap_label_stack) {
+         ss << (*it);
+         first_pushswap_label_stack = false;
+      } else {
+         ss << "," << (*it);
+      }
+   }
+   ss << "'";
    ss << ")";
    return ss.str();
 }

@@ -1,4 +1,4 @@
-// Copyright (c) 2024 Arista Networks, Inc.  All rights reserved.
+// Copyright (c) 2025 Arista Networks, Inc.  All rights reserved.
 // Arista Networks, Inc. Confidential and Proprietary.
 
 #ifndef EOS_INLINE_TYPES_MPLS_ROUTE_H
@@ -155,8 +155,8 @@ mpls_route_via_t::pushswap_label() const {
    return pimpl->pushswap_label();
 }
 void
-mpls_route_via_t::pushswap_label_is(mpls_label_t pushswap_label) {
-   pimpl->pushswap_label_is(pushswap_label);
+mpls_route_via_t::pushswap_label_is(mpls_label_t top_label) {
+   pimpl->pushswap_label_is(top_label);
 }
 mpls_action_t
 mpls_route_via_t::label_action() const {
@@ -197,6 +197,34 @@ mpls_route_via_t::nexthop_group() const {
 void
 mpls_route_via_t::nexthop_group_is(std::string nexthop_group) {
    pimpl->nexthop_group_is(nexthop_group);
+}
+std::forward_list<mpls_label_t> const &
+mpls_route_via_t::pushswap_label_stack() const {
+   return pimpl->pushswap_label_stack();
+}
+void
+mpls_route_via_t::pushswap_label_stack_is(
+         std::forward_list<mpls_label_t> const & pushswap_label_stack) {
+   pimpl->pushswap_label_stack_is(pushswap_label_stack);
+}
+void
+mpls_route_via_t::pushswap_label_stack_is(
+         std::forward_list<mpls_label_t> && pushswap_label_stack) {
+   pimpl->pushswap_label_stack_is(std::move(pushswap_label_stack));
+}
+void
+mpls_route_via_t::pushswap_label_stack_set(
+         mpls_label_t const & pushswap_label_stack) {
+   pimpl->pushswap_label_stack_set(pushswap_label_stack);
+}
+void
+mpls_route_via_t::pushswap_label_stack_set(mpls_label_t && pushswap_label_stack) {
+   pimpl->pushswap_label_stack_set(std::move(pushswap_label_stack));
+}
+void
+mpls_route_via_t::pushswap_label_stack_del(
+         mpls_label_t const & pushswap_label_stack) {
+   pimpl->pushswap_label_stack_del(pushswap_label_stack);
 }
 bool
 mpls_route_via_t::operator==(mpls_route_via_t const & other) const {

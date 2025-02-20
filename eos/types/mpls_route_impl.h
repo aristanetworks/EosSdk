@@ -1,4 +1,4 @@
-// Copyright (c) 2024 Arista Networks, Inc.  All rights reserved.
+// Copyright (c) 2025 Arista Networks, Inc.  All rights reserved.
 // Arista Networks, Inc. Confidential and Proprietary.
 
 #ifndef EOS_TYPES_MPLS_ROUTE_IMPL_H
@@ -9,6 +9,7 @@
 #include <eos/ip.h>
 #include <eos/mpls.h>
 #include <eos/utility.h>
+#include <forward_list>
 #include <memory>
 #include <sstream>
 #include <vector>
@@ -156,11 +157,10 @@ class EOS_SDK_PUBLIC mpls_route_via_impl_t {
    /** Moving Setter for 'intf'. */
    void intf_is(intf_id_t && intf);
 
-   /** Getter for 'pushswap_label': push or swap this label. */
+   /** Getter for "pushswap_label": deprecated in favor of "pushswap_label_stack". */
    mpls_label_t pushswap_label() const;
-   /** Setter for 'pushswap_label'. */
-   void pushswap_label_is(mpls_label_t pushswap_label);
-
+   /** Setter for "pushswap_label": Deprecated in favor of "pushswap_label_stack". */
+   void pushswap_label_is(mpls_label_t top_label);
    /** Getter for 'label_action': perform this MPLS operation. */
    mpls_action_t label_action() const;
    /** Setter for 'label_action'. */
@@ -192,6 +192,21 @@ class EOS_SDK_PUBLIC mpls_route_via_impl_t {
    /** Setter for 'nexthop_group'. */
    void nexthop_group_is(std::string nexthop_group);
 
+   /** Getter for 'pushswap_label_stack': push or swap this label stack. */
+   std::forward_list<mpls_label_t> const & pushswap_label_stack() const;
+   /** Setter for 'pushswap_label_stack'. */
+   void pushswap_label_stack_is(
+         std::forward_list<mpls_label_t> const & pushswap_label_stack);
+   /** Moving Setter for 'pushswap_label_stack'. */
+   void pushswap_label_stack_is(
+         std::forward_list<mpls_label_t> && pushswap_label_stack);
+   /** Prepend one pushswap_label_stack to the list. */
+   void pushswap_label_stack_set(mpls_label_t const & pushswap_label_stack);
+   /** Prepend one pushswap_label_stack to the list. */
+   void pushswap_label_stack_set(mpls_label_t && pushswap_label_stack);
+   /** Remove all matching pushswap_label_stack elements. */
+   void pushswap_label_stack_del(mpls_label_t const & pushswap_label_stack);
+
    bool operator==(mpls_route_via_impl_t const & other) const;
    bool operator!=(mpls_route_via_impl_t const & other) const;
    /** The hash function for type mpls_route_via_t. */
@@ -217,6 +232,7 @@ class EOS_SDK_PUBLIC mpls_route_via_impl_t {
    mpls_payload_type_t payload_type_;
    bool skip_egress_acl_;
    std::string nexthop_group_;
+   std::forward_list<mpls_label_t> pushswap_label_stack_;
 };
 
 /**
