@@ -55,7 +55,7 @@ RUN \
 
 # Download cross-compiler.
 RUN wget -O /tmp/arista-cross-compiler.rpm \
-       https://github.com/aristanetworks/EosSdk-cross-compiler/releases/download/v4.32.0/arista-gcc-11.i686.rpm
+       https://github.com/aristanetworks/EosSdk-cross-compiler/releases/download/v4.32.0/arista-gcc11.i686.rpm
 
 # Install the cross compiler.
 RUN rpm --force --nodeps -Uvh /tmp/arista-cross-compiler.rpm
