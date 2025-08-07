@@ -1,0 +1,424 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>nexthop_group_tunnel &#8212; Arista EOS SDK 2.23.4 reference</title>
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/eossdk.css" type="text/css" />
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="panic" href="panic.html" />
+    <link rel="prev" title="nexthop_group" href="nexthop_group.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="panic.html" title="panic"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="nexthop_group.html" title="nexthop_group"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Arista EOS SDK 2.23.4 reference</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href=""><strong>nexthop_group_tunnel</strong></a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="nexthop-group-tunnel">
+<h1><strong>nexthop_group_tunnel</strong><a class="headerlink" href="#nexthop-group-tunnel" title="Permalink to this headline">¶</a></h1>
+<p>Nexthop Group tunnels are a tunneling abstraction in EOS.</p>
+<p>A nexthop group tunnel is comprised of a tunnel endpoint (IP prefix) and a nexthop group name representing the underlying nexthop group that forwards the traffic.</p>
+<p>The underlying nexthop group must be manually maintained by the agent. If the underlying nexthop group is not configured, the tunnel endpoint will be unreachable until the given nexthop group is configured.</p>
+<p>The following example creates a nexthop group tunnel which has an underlying nexthop group “nhg1” that performs IP-in-IP encapsulation of traffic sent to it. For a usage of a nexthop group, see the nexthop_group.h file.</p>
+<p><div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">//</span> <span class="n">Specify</span> <span class="n">a</span> <span class="n">tunnel</span> <span class="n">endpoint</span> <span class="ow">and</span> <span class="n">a</span> <span class="n">nexthop</span> <span class="n">group</span> <span class="n">name</span>
+<span class="n">eos</span><span class="p">::</span><span class="n">nexthop_group_tunnel_t</span> <span class="n">nhg_tunnel</span><span class="p">(</span><span class="n">eos</span><span class="p">::</span><span class="n">ip_prefix_t</span><span class="p">(</span><span class="s2">&quot;10.0.0.1/32&quot;</span><span class="p">),</span> <span class="s2">&quot;nhg1&quot;</span><span class="p">);</span>
+<span class="n">nexthop_group_tunnel_mgr</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">nexthop_group_tunnel_set</span><span class="p">(</span><span class="n">nhg_tunnel</span><span class="p">);</span>
+<span class="o">//</span> <span class="n">Configure</span> <span class="n">the</span> <span class="n">underlying</span> <span class="n">nexthop</span> <span class="n">group</span>
+<span class="n">eos</span><span class="p">::</span><span class="n">nexthop_group_t</span> <span class="n">nhg</span><span class="p">(</span><span class="s2">&quot;nhg1&quot;</span><span class="p">,</span> <span class="n">eos</span><span class="p">::</span><span class="n">NEXTHOP_GROUP_IP_IN_IP</span><span class="p">);</span>
+<span class="n">eos</span><span class="p">::</span><span class="n">nexthop_group_entry_t</span> <span class="n">nhe1</span><span class="p">(</span><span class="n">eos</span><span class="p">::</span><span class="n">ip_addr_t</span><span class="p">(</span><span class="s2">&quot;172.12.1.1&quot;</span><span class="p">));</span>
+<span class="n">nhg</span><span class="o">.</span><span class="n">nexthop_set</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">nhe1</span><span class="p">);</span>
+<span class="n">nexthop_group_mgr</span><span class="p">()</span><span class="o">-&gt;</span><span class="n">nexthop_set</span><span class="p">(</span><span class="n">nhg1</span><span class="p">);</span>
+</pre></div>
+</div>
+ </p>
+<dl class="cpp type">
+<dt id="_CPPv43eos">
+<span id="_CPPv33eos"></span><span id="_CPPv23eos"></span><span id="eos"></span><span class="target" id="namespaceeos"></span><em class="property">namespace </em><code class="sig-name descname">eos</code><br /></dt>
+<dd><dl class="cpp class">
+<dt id="_CPPv4N3eos28nexthop_group_tunnel_handlerE">
+<span id="_CPPv3N3eos28nexthop_group_tunnel_handlerE"></span><span id="_CPPv2N3eos28nexthop_group_tunnel_handlerE"></span><span id="eos::nexthop_group_tunnel_handler"></span><span class="target" id="classeos_1_1nexthop__group__tunnel__handler"></span><em class="property">class </em><code class="sig-name descname">nexthop_group_tunnel_handler</code> : <em class="property">public</em> <a class="reference internal" href="acl.html#_CPPv43eos" title="eos">eos</a>::<a class="reference internal" href="base_handler.html#_CPPv4I00EN3eos12base_handlerE" title="eos::base_handler">base_handler</a>&lt;<a class="reference internal" href="#_CPPv4N3eos24nexthop_group_tunnel_mgrE" title="eos::nexthop_group_tunnel_mgr">nexthop_group_tunnel_mgr</a>, <a class="reference internal" href="#_CPPv4N3eos28nexthop_group_tunnel_handlerE" title="eos::nexthop_group_tunnel_handler">nexthop_group_tunnel_handler</a>&gt;<a class="headerlink" href="#_CPPv4N3eos28nexthop_group_tunnel_handlerE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><div class="docutils container">
+<em>#include &lt;nexthop_group_tunnel.h&gt;</em></div>
+<p>The nexthop group tunnel handler. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
+<dl class="cpp function">
+<dt id="_CPPv4N3eos28nexthop_group_tunnel_handler28nexthop_group_tunnel_handlerEP24nexthop_group_tunnel_mgr">
+<span id="_CPPv3N3eos28nexthop_group_tunnel_handler28nexthop_group_tunnel_handlerEP24nexthop_group_tunnel_mgr"></span><span id="_CPPv2N3eos28nexthop_group_tunnel_handler28nexthop_group_tunnel_handlerEP24nexthop_group_tunnel_mgr"></span><span id="eos::nexthop_group_tunnel_handler::nexthop_group_tunnel_handler__nexthop_group_tunnel_mgrP"></span><span class="target" id="classeos_1_1nexthop__group__tunnel__handler_1ad20c424555b4fed9ed7d2ff102bb0287"></span><em class="property">explicit</em> <code class="sig-name descname">nexthop_group_tunnel_handler</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos24nexthop_group_tunnel_mgrE" title="eos::nexthop_group_tunnel_mgr">nexthop_group_tunnel_mgr</a>*<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos28nexthop_group_tunnel_handler28nexthop_group_tunnel_handlerEP24nexthop_group_tunnel_mgr" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos28nexthop_group_tunnel_handler28get_nexthop_group_tunnel_mgrEv">
+<span id="_CPPv3NK3eos28nexthop_group_tunnel_handler28get_nexthop_group_tunnel_mgrEv"></span><span id="_CPPv2NK3eos28nexthop_group_tunnel_handler28get_nexthop_group_tunnel_mgrEv"></span><span id="eos::nexthop_group_tunnel_handler::get_nexthop_group_tunnel_mgrC"></span><span class="target" id="classeos_1_1nexthop__group__tunnel__handler_1aa76e08aacee15291645a6ad4c9a1d85a"></span><em class="property">inline</em> <a class="reference internal" href="#_CPPv4N3eos24nexthop_group_tunnel_mgrE" title="eos::nexthop_group_tunnel_mgr">nexthop_group_tunnel_mgr</a> *<code class="sig-name descname">get_nexthop_group_tunnel_mgr</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos28nexthop_group_tunnel_handler28get_nexthop_group_tunnel_mgrEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="cpp class">
+<dt id="_CPPv4N3eos27nexthop_group_tunnel_iter_tE">
+<span id="_CPPv3N3eos27nexthop_group_tunnel_iter_tE"></span><span id="_CPPv2N3eos27nexthop_group_tunnel_iter_tE"></span><span id="eos::nexthop_group_tunnel_iter_t"></span><span class="target" id="classeos_1_1nexthop__group__tunnel__iter__t"></span><em class="property">class </em><code class="sig-name descname">nexthop_group_tunnel_iter_t</code> : <em class="property">public</em> <a class="reference internal" href="acl.html#_CPPv43eos" title="eos">eos</a>::<a class="reference internal" href="iterator.html#_CPPv4I00EN3eos9iter_baseE" title="eos::iter_base">iter_base</a>&lt;<a class="reference internal" href="#_CPPv4N3eos22nexthop_group_tunnel_tE" title="eos::nexthop_group_tunnel_t">nexthop_group_tunnel_t</a>, nexthop_group_tunnel_iter_impl&gt;<a class="headerlink" href="#_CPPv4N3eos27nexthop_group_tunnel_iter_tE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><div class="docutils container">
+<em>#include &lt;nexthop_group_tunnel.h&gt;</em></div>
+<p>An iterator over configured nexthop group tunnel. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-private-functions">Private Functions</p>
+<dl class="cpp function">
+<dt id="_CPPv4N3eos27nexthop_group_tunnel_iter_t27nexthop_group_tunnel_iter_tEPC30nexthop_group_tunnel_iter_impl">
+<span id="_CPPv3N3eos27nexthop_group_tunnel_iter_t27nexthop_group_tunnel_iter_tEPC30nexthop_group_tunnel_iter_impl"></span><span id="_CPPv2N3eos27nexthop_group_tunnel_iter_t27nexthop_group_tunnel_iter_tEPC30nexthop_group_tunnel_iter_impl"></span><span id="eos::nexthop_group_tunnel_iter_t::nexthop_group_tunnel_iter_t__nexthop_group_tunnel_iter_implPC"></span><span class="target" id="classeos_1_1nexthop__group__tunnel__iter__t_1abefcc5e28288133f17a7ea42e520742f"></span><em class="property">explicit</em> <code class="sig-name descname">nexthop_group_tunnel_iter_t</code><span class="sig-paren">(</span>nexthop_group_tunnel_iter_impl*<em class="property">const</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos27nexthop_group_tunnel_iter_t27nexthop_group_tunnel_iter_tEPC30nexthop_group_tunnel_iter_impl" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-friends">Friends</p>
+<dl class="friendclass">
+<dt>
+<em class="property">friend class</em> nexthop_group_tunnel_iter_impl</dt>
+</dl>
+
+</div>
+</dd></dl>
+
+<dl class="cpp class">
+<dt id="_CPPv4N3eos24nexthop_group_tunnel_mgrE">
+<span id="_CPPv3N3eos24nexthop_group_tunnel_mgrE"></span><span id="_CPPv2N3eos24nexthop_group_tunnel_mgrE"></span><span id="eos::nexthop_group_tunnel_mgr"></span><span class="target" id="classeos_1_1nexthop__group__tunnel__mgr"></span><em class="property">class </em><code class="sig-name descname">nexthop_group_tunnel_mgr</code> : <em class="property">public</em> <a class="reference internal" href="acl.html#_CPPv43eos" title="eos">eos</a>::<a class="reference internal" href="base_mgr.html#_CPPv4I00EN3eos8base_mgrE" title="eos::base_mgr">base_mgr</a>&lt;<a class="reference internal" href="#_CPPv4N3eos28nexthop_group_tunnel_handlerE" title="eos::nexthop_group_tunnel_handler">nexthop_group_tunnel_handler</a>, <a class="reference internal" href="ip.html#_CPPv4N3eos11ip_prefix_tE" title="eos::ip_prefix_t">ip_prefix_t</a>&gt;<a class="headerlink" href="#_CPPv4N3eos24nexthop_group_tunnel_mgrE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><div class="docutils container">
+<em>#include &lt;nexthop_group_tunnel.h&gt;</em></div>
+<p>The nexthop group tunnel manager. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
+<dl class="cpp function">
+<dt id="_CPPv4N3eos24nexthop_group_tunnel_mgrD0Ev">
+<span id="_CPPv3N3eos24nexthop_group_tunnel_mgrD0Ev"></span><span id="_CPPv2N3eos24nexthop_group_tunnel_mgrD0Ev"></span><span id="eos::nexthop_group_tunnel_mgr::~nexthop_group_tunnel_mgr"></span><span class="target" id="classeos_1_1nexthop__group__tunnel__mgr_1ae0ba6cc20eabd0626b9a81245477432e"></span><em class="property">virtual</em> <code class="sig-name descname">~nexthop_group_tunnel_mgr</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos24nexthop_group_tunnel_mgrD0Ev" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos24nexthop_group_tunnel_mgr11resync_initEv">
+<span id="_CPPv3N3eos24nexthop_group_tunnel_mgr11resync_initEv"></span><span id="_CPPv2N3eos24nexthop_group_tunnel_mgr11resync_initEv"></span><span id="eos::nexthop_group_tunnel_mgr::resync_init"></span><span class="target" id="classeos_1_1nexthop__group__tunnel__mgr_1a93a29034bc2b8546f849a4998839eb49"></span><em class="property">virtual</em> void <code class="sig-name descname">resync_init</code><span class="sig-paren">(</span><span class="sig-paren">)</span> = 0<a class="headerlink" href="#_CPPv4N3eos24nexthop_group_tunnel_mgr11resync_initEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Begin resync mode. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos24nexthop_group_tunnel_mgr15resync_completeEv">
+<span id="_CPPv3N3eos24nexthop_group_tunnel_mgr15resync_completeEv"></span><span id="_CPPv2N3eos24nexthop_group_tunnel_mgr15resync_completeEv"></span><span id="eos::nexthop_group_tunnel_mgr::resync_complete"></span><span class="target" id="classeos_1_1nexthop__group__tunnel__mgr_1a5cdf0aa60ce8a28ed9d66baac51a06b5"></span><em class="property">virtual</em> void <code class="sig-name descname">resync_complete</code><span class="sig-paren">(</span><span class="sig-paren">)</span> = 0<a class="headerlink" href="#_CPPv4N3eos24nexthop_group_tunnel_mgr15resync_completeEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Complete resync mode, ready for regular updates. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos24nexthop_group_tunnel_mgr25nexthop_group_tunnel_iterEv">
+<span id="_CPPv3NK3eos24nexthop_group_tunnel_mgr25nexthop_group_tunnel_iterEv"></span><span id="_CPPv2NK3eos24nexthop_group_tunnel_mgr25nexthop_group_tunnel_iterEv"></span><span id="eos::nexthop_group_tunnel_mgr::nexthop_group_tunnel_iterC"></span><span class="target" id="classeos_1_1nexthop__group__tunnel__mgr_1a926f5266aed7a9c45ed0d10997939b5c"></span><em class="property">virtual</em> <a class="reference internal" href="#_CPPv4N3eos27nexthop_group_tunnel_iter_tE" title="eos::nexthop_group_tunnel_iter_t">nexthop_group_tunnel_iter_t</a> <code class="sig-name descname">nexthop_group_tunnel_iter</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em> = 0<a class="headerlink" href="#_CPPv4NK3eos24nexthop_group_tunnel_mgr25nexthop_group_tunnel_iterEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Returns an iterator over configured nexthop group tunnel. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos24nexthop_group_tunnel_mgr20nexthop_group_tunnelERK11ip_prefix_t">
+<span id="_CPPv3NK3eos24nexthop_group_tunnel_mgr20nexthop_group_tunnelERK11ip_prefix_t"></span><span id="_CPPv2NK3eos24nexthop_group_tunnel_mgr20nexthop_group_tunnelERK11ip_prefix_t"></span><span id="eos::nexthop_group_tunnel_mgr::nexthop_group_tunnel__ip_prefix_tCRC"></span><span class="target" id="classeos_1_1nexthop__group__tunnel__mgr_1afdda56db3768e3a68a7308a3633a3acc"></span><em class="property">virtual</em> <a class="reference internal" href="#_CPPv4N3eos22nexthop_group_tunnel_tE" title="eos::nexthop_group_tunnel_t">nexthop_group_tunnel_t</a> <code class="sig-name descname">nexthop_group_tunnel</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#_CPPv4N3eos11ip_prefix_tE" title="eos::ip_prefix_t">ip_prefix_t</a> <em class="property">const</em> &amp;<em>tunnel_endpoint</em><span class="sig-paren">)</span> <em class="property">const</em> = 0<a class="headerlink" href="#_CPPv4NK3eos24nexthop_group_tunnel_mgr20nexthop_group_tunnelERK11ip_prefix_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Retrieves an existing <a class="reference internal" href="#classeos_1_1nexthop__group__tunnel__t"><span class="std std-ref">nexthop_group_tunnel_t</span></a> by tunnel endpoint, if it exists. Otherwise this returns an empty <code class="docutils literal notranslate"><span class="pre">nexthop_group_tunnel_t()</span></code> </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos24nexthop_group_tunnel_mgr6existsERK11ip_prefix_t">
+<span id="_CPPv3NK3eos24nexthop_group_tunnel_mgr6existsERK11ip_prefix_t"></span><span id="_CPPv2NK3eos24nexthop_group_tunnel_mgr6existsERK11ip_prefix_t"></span><span id="eos::nexthop_group_tunnel_mgr::exists__ip_prefix_tCRC"></span><span class="target" id="classeos_1_1nexthop__group__tunnel__mgr_1adb3e02d1019b8dad4f868f8a283013d4"></span><em class="property">virtual</em> bool <code class="sig-name descname">exists</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#_CPPv4N3eos11ip_prefix_tE" title="eos::ip_prefix_t">ip_prefix_t</a> <em class="property">const</em> &amp;<em>tunnel_endpoint</em><span class="sig-paren">)</span> <em class="property">const</em> = 0<a class="headerlink" href="#_CPPv4NK3eos24nexthop_group_tunnel_mgr6existsERK11ip_prefix_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Returns true if a nexthop group tunnel with the given tunnel endpoint has been configured. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos24nexthop_group_tunnel_mgr24nexthop_group_tunnel_setERK22nexthop_group_tunnel_t">
+<span id="_CPPv3N3eos24nexthop_group_tunnel_mgr24nexthop_group_tunnel_setERK22nexthop_group_tunnel_t"></span><span id="_CPPv2N3eos24nexthop_group_tunnel_mgr24nexthop_group_tunnel_setERK22nexthop_group_tunnel_t"></span><span id="eos::nexthop_group_tunnel_mgr::nexthop_group_tunnel_set__nexthop_group_tunnel_tCR"></span><span class="target" id="classeos_1_1nexthop__group__tunnel__mgr_1adbafa617ebf413b8a3f6a417ef5cf55e"></span><em class="property">virtual</em> void <code class="sig-name descname">nexthop_group_tunnel_set</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos22nexthop_group_tunnel_tE" title="eos::nexthop_group_tunnel_t">nexthop_group_tunnel_t</a> <em class="property">const</em>&amp;<span class="sig-paren">)</span> = 0<a class="headerlink" href="#_CPPv4N3eos24nexthop_group_tunnel_mgr24nexthop_group_tunnel_setERK22nexthop_group_tunnel_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Creates or updates a nexthop group tunnel. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos24nexthop_group_tunnel_mgr24nexthop_group_tunnel_delERK11ip_prefix_t">
+<span id="_CPPv3N3eos24nexthop_group_tunnel_mgr24nexthop_group_tunnel_delERK11ip_prefix_t"></span><span id="_CPPv2N3eos24nexthop_group_tunnel_mgr24nexthop_group_tunnel_delERK11ip_prefix_t"></span><span id="eos::nexthop_group_tunnel_mgr::nexthop_group_tunnel_del__ip_prefix_tCR"></span><span class="target" id="classeos_1_1nexthop__group__tunnel__mgr_1a38d74d8a3665e7e8e2e644320105f95b"></span><em class="property">virtual</em> void <code class="sig-name descname">nexthop_group_tunnel_del</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#_CPPv4N3eos11ip_prefix_tE" title="eos::ip_prefix_t">ip_prefix_t</a> <em class="property">const</em> &amp;<em>tunnel_endpoint</em><span class="sig-paren">)</span> = 0<a class="headerlink" href="#_CPPv4N3eos24nexthop_group_tunnel_mgr24nexthop_group_tunnel_delERK11ip_prefix_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Removes the nexthop group tunnel with the given tunnel endpoint if exists. </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-protected-functions">Protected Functions</p>
+<dl class="cpp function">
+<dt id="_CPPv4N3eos24nexthop_group_tunnel_mgr24nexthop_group_tunnel_mgrEv">
+<span id="_CPPv3N3eos24nexthop_group_tunnel_mgr24nexthop_group_tunnel_mgrEv"></span><span id="_CPPv2N3eos24nexthop_group_tunnel_mgr24nexthop_group_tunnel_mgrEv"></span><span id="eos::nexthop_group_tunnel_mgr::nexthop_group_tunnel_mgr"></span><span class="target" id="classeos_1_1nexthop__group__tunnel__mgr_1a23f1eb64e94092bbc1827cdf1ff367c9"></span><code class="sig-name descname">nexthop_group_tunnel_mgr</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos24nexthop_group_tunnel_mgr24nexthop_group_tunnel_mgrEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-private-members">Private Members</p>
+<dl class="cpp var">
+<dt>
+<span class="target" id="classeos_1_1nexthop__group__tunnel__mgr_1ac94d47fc5860f2fd4d8d1cae3e4c2622"></span><code class="sig-name descname">nexthop_group_tunnel_mgr</code></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-friends">Friends</p>
+<dl class="friendclass">
+<dt>
+<em class="property">friend class</em> nexthop_group_tunnel_handler</dt>
+</dl>
+
+</div>
+</dd></dl>
+
+</dd></dl>
+
+<div class="section" id="type-definitions-in-nexthop-group-tunnel">
+<h2>Type definitions in <strong>nexthop_group_tunnel</strong><a class="headerlink" href="#type-definitions-in-nexthop-group-tunnel" title="Permalink to this headline">¶</a></h2>
+<dl class="cpp type">
+<dt>
+<span class="target" id="namespaceeos"></span><em class="property">namespace </em><code class="sig-name descname">eos</code><br /></dt>
+<dd><dl class="cpp class">
+<dt id="_CPPv4N3eos22nexthop_group_tunnel_tE">
+<span id="_CPPv3N3eos22nexthop_group_tunnel_tE"></span><span id="_CPPv2N3eos22nexthop_group_tunnel_tE"></span><span id="eos::nexthop_group_tunnel_t"></span><span class="target" id="classeos_1_1nexthop__group__tunnel__t"></span><em class="property">class </em><code class="sig-name descname">nexthop_group_tunnel_t</code><a class="headerlink" href="#_CPPv4N3eos22nexthop_group_tunnel_tE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><div class="docutils container">
+<em>#include &lt;nexthop_group_tunnel.h&gt;</em></div>
+<p>An IP nexthop group tunnel.</p>
+<p>An IP nexthop group tunnel represents a tunnel over a nexthop-group. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
+<dl class="cpp function">
+<dt id="_CPPv4N3eos22nexthop_group_tunnel_t22nexthop_group_tunnel_tEv">
+<span id="_CPPv3N3eos22nexthop_group_tunnel_t22nexthop_group_tunnel_tEv"></span><span id="_CPPv2N3eos22nexthop_group_tunnel_t22nexthop_group_tunnel_tEv"></span><span id="eos::nexthop_group_tunnel_t::nexthop_group_tunnel_t"></span><span class="target" id="classeos_1_1nexthop__group__tunnel__t_1a906679085ad7780c6fbf5dcb0311d58f"></span><code class="sig-name descname">nexthop_group_tunnel_t</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos22nexthop_group_tunnel_t22nexthop_group_tunnel_tEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Default constructor. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos22nexthop_group_tunnel_t22nexthop_group_tunnel_tERK11ip_prefix_tRKNSt6stringE">
+<span id="_CPPv3N3eos22nexthop_group_tunnel_t22nexthop_group_tunnel_tERK11ip_prefix_tRKNSt6stringE"></span><span id="_CPPv2N3eos22nexthop_group_tunnel_t22nexthop_group_tunnel_tERK11ip_prefix_tRKNSt6stringE"></span><span id="eos::nexthop_group_tunnel_t::nexthop_group_tunnel_t__ip_prefix_tCR.ssCR"></span><span class="target" id="classeos_1_1nexthop__group__tunnel__t_1ade4cea487ab3eec05d5c580629c44764"></span><em class="property">explicit</em> <code class="sig-name descname">nexthop_group_tunnel_t</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#_CPPv4N3eos11ip_prefix_tE" title="eos::ip_prefix_t">ip_prefix_t</a> <em class="property">const</em> &amp;<em>tunnel_endpoint</em>, <a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::string <em class="property">const</em> &amp;<em>nhg_name</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos22nexthop_group_tunnel_t22nexthop_group_tunnel_tERK11ip_prefix_tRKNSt6stringE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Creates an ip nexthop group tunnel for a given tunnel endpoint prefix and nexthop-group. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos22nexthop_group_tunnel_t22nexthop_group_tunnel_tERK22nexthop_group_tunnel_t">
+<span id="_CPPv3N3eos22nexthop_group_tunnel_t22nexthop_group_tunnel_tERK22nexthop_group_tunnel_t"></span><span id="_CPPv2N3eos22nexthop_group_tunnel_t22nexthop_group_tunnel_tERK22nexthop_group_tunnel_t"></span><span id="eos::nexthop_group_tunnel_t::nexthop_group_tunnel_t__nexthop_group_tunnel_tCR"></span><span class="target" id="classeos_1_1nexthop__group__tunnel__t_1a49efb1a4f477e5537e5cbb1f9d94f457"></span><code class="sig-name descname">nexthop_group_tunnel_t</code><span class="sig-paren">(</span><em class="property">const</em> <a class="reference internal" href="#_CPPv4N3eos22nexthop_group_tunnel_t22nexthop_group_tunnel_tERK22nexthop_group_tunnel_t" title="eos::nexthop_group_tunnel_t::nexthop_group_tunnel_t">nexthop_group_tunnel_t</a> &amp;<em>other</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos22nexthop_group_tunnel_t22nexthop_group_tunnel_tERK22nexthop_group_tunnel_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos22nexthop_group_tunnel_taSERK22nexthop_group_tunnel_t">
+<span id="_CPPv3N3eos22nexthop_group_tunnel_taSERK22nexthop_group_tunnel_t"></span><span id="_CPPv2N3eos22nexthop_group_tunnel_taSERK22nexthop_group_tunnel_t"></span><span id="eos::nexthop_group_tunnel_t::assign-operator__nexthop_group_tunnel_tCR"></span><span class="target" id="classeos_1_1nexthop__group__tunnel__t_1a74940da69758044df84a8bc8ee63d9ea"></span><a class="reference internal" href="#_CPPv4N3eos22nexthop_group_tunnel_tE" title="eos::nexthop_group_tunnel_t">nexthop_group_tunnel_t</a> &amp;<code class="sig-name descname">operator=</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos22nexthop_group_tunnel_tE" title="eos::nexthop_group_tunnel_t">nexthop_group_tunnel_t</a> <em class="property">const</em> &amp;<em>other</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos22nexthop_group_tunnel_taSERK22nexthop_group_tunnel_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos22nexthop_group_tunnel_t22nexthop_group_tunnel_tERR22nexthop_group_tunnel_t">
+<span id="_CPPv3N3eos22nexthop_group_tunnel_t22nexthop_group_tunnel_tERR22nexthop_group_tunnel_t"></span><span id="_CPPv2N3eos22nexthop_group_tunnel_t22nexthop_group_tunnel_tERR22nexthop_group_tunnel_t"></span><span id="eos::nexthop_group_tunnel_t::nexthop_group_tunnel_t__nexthop_group_tunnel_tRR"></span><span class="target" id="classeos_1_1nexthop__group__tunnel__t_1a751ce60ed76476ccc0489a6a3ce4f952"></span><code class="sig-name descname">nexthop_group_tunnel_t</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos22nexthop_group_tunnel_t22nexthop_group_tunnel_tERR22nexthop_group_tunnel_t" title="eos::nexthop_group_tunnel_t::nexthop_group_tunnel_t">nexthop_group_tunnel_t</a> &amp;&amp;<em>other</em><span class="sig-paren">)</span> <em class="property">noexcept</em><a class="headerlink" href="#_CPPv4N3eos22nexthop_group_tunnel_t22nexthop_group_tunnel_tERR22nexthop_group_tunnel_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos22nexthop_group_tunnel_taSERR22nexthop_group_tunnel_t">
+<span id="_CPPv3N3eos22nexthop_group_tunnel_taSERR22nexthop_group_tunnel_t"></span><span id="_CPPv2N3eos22nexthop_group_tunnel_taSERR22nexthop_group_tunnel_t"></span><span id="eos::nexthop_group_tunnel_t::assign-operator__nexthop_group_tunnel_tRR"></span><span class="target" id="classeos_1_1nexthop__group__tunnel__t_1aa66b7e427ff4b4800b5c975a68d9c6a3"></span><a class="reference internal" href="#_CPPv4N3eos22nexthop_group_tunnel_tE" title="eos::nexthop_group_tunnel_t">nexthop_group_tunnel_t</a> &amp;<code class="sig-name descname">operator=</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos22nexthop_group_tunnel_tE" title="eos::nexthop_group_tunnel_t">nexthop_group_tunnel_t</a> &amp;&amp;<em>other</em><span class="sig-paren">)</span> <em class="property">noexcept</em><a class="headerlink" href="#_CPPv4N3eos22nexthop_group_tunnel_taSERR22nexthop_group_tunnel_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos22nexthop_group_tunnel_t15tunnel_endpointEv">
+<span id="_CPPv3NK3eos22nexthop_group_tunnel_t15tunnel_endpointEv"></span><span id="_CPPv2NK3eos22nexthop_group_tunnel_t15tunnel_endpointEv"></span><span id="eos::nexthop_group_tunnel_t::tunnel_endpointC"></span><span class="target" id="classeos_1_1nexthop__group__tunnel__t_1a80ce7773a23339c46c149679d43a1259"></span><a class="reference internal" href="ip.html#_CPPv4N3eos11ip_prefix_tE" title="eos::ip_prefix_t">ip_prefix_t</a> <code class="sig-name descname">tunnel_endpoint</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos22nexthop_group_tunnel_t15tunnel_endpointEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Getter for ‘tunnel_endpoint’: IP v4/v6 prefix. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos22nexthop_group_tunnel_t18tunnel_endpoint_isERK11ip_prefix_t">
+<span id="_CPPv3N3eos22nexthop_group_tunnel_t18tunnel_endpoint_isERK11ip_prefix_t"></span><span id="_CPPv2N3eos22nexthop_group_tunnel_t18tunnel_endpoint_isERK11ip_prefix_t"></span><span id="eos::nexthop_group_tunnel_t::tunnel_endpoint_is__ip_prefix_tCR"></span><span class="target" id="classeos_1_1nexthop__group__tunnel__t_1a7d7094013a24721aba0b107ba9ea49bf"></span>void <code class="sig-name descname">tunnel_endpoint_is</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#_CPPv4N3eos11ip_prefix_tE" title="eos::ip_prefix_t">ip_prefix_t</a> <em class="property">const</em> &amp;<em>tunnel_endpoint</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos22nexthop_group_tunnel_t18tunnel_endpoint_isERK11ip_prefix_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Setter for ‘tunnel_endpoint’. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos22nexthop_group_tunnel_t18tunnel_endpoint_isERR11ip_prefix_t">
+<span id="_CPPv3N3eos22nexthop_group_tunnel_t18tunnel_endpoint_isERR11ip_prefix_t"></span><span id="_CPPv2N3eos22nexthop_group_tunnel_t18tunnel_endpoint_isERR11ip_prefix_t"></span><span id="eos::nexthop_group_tunnel_t::tunnel_endpoint_is__ip_prefix_tRR"></span><span class="target" id="classeos_1_1nexthop__group__tunnel__t_1ab60e2cffa4576269c4833a4215747ce1"></span>void <code class="sig-name descname">tunnel_endpoint_is</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#_CPPv4N3eos11ip_prefix_tE" title="eos::ip_prefix_t">ip_prefix_t</a> &amp;&amp;<em>tunnel_endpoint</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos22nexthop_group_tunnel_t18tunnel_endpoint_isERR11ip_prefix_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Moving Setter for ‘tunnel_endpoint’. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos22nexthop_group_tunnel_t8nhg_nameEv">
+<span id="_CPPv3NK3eos22nexthop_group_tunnel_t8nhg_nameEv"></span><span id="_CPPv2NK3eos22nexthop_group_tunnel_t8nhg_nameEv"></span><span id="eos::nexthop_group_tunnel_t::nhg_nameC"></span><span class="target" id="classeos_1_1nexthop__group__tunnel__t_1af528fb1379f45a7ed300e22346f333de"></span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::string <code class="sig-name descname">nhg_name</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos22nexthop_group_tunnel_t8nhg_nameEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Getter for ‘nhg_name’: nexthop group name. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos22nexthop_group_tunnel_t11nhg_name_isERKNSt6stringE">
+<span id="_CPPv3N3eos22nexthop_group_tunnel_t11nhg_name_isERKNSt6stringE"></span><span id="_CPPv2N3eos22nexthop_group_tunnel_t11nhg_name_isERKNSt6stringE"></span><span id="eos::nexthop_group_tunnel_t::nhg_name_is__ssCR"></span><span class="target" id="classeos_1_1nexthop__group__tunnel__t_1acf022c30026fc4d260a30b509eb96483"></span>void <code class="sig-name descname">nhg_name_is</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::string <em class="property">const</em> &amp;<em>nhg_name</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos22nexthop_group_tunnel_t11nhg_name_isERKNSt6stringE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Setter for ‘nhg_name’. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos22nexthop_group_tunnel_t11nhg_name_isERRNSt6stringE">
+<span id="_CPPv3N3eos22nexthop_group_tunnel_t11nhg_name_isERRNSt6stringE"></span><span id="_CPPv2N3eos22nexthop_group_tunnel_t11nhg_name_isERRNSt6stringE"></span><span id="eos::nexthop_group_tunnel_t::nhg_name_is__ssRR"></span><span class="target" id="classeos_1_1nexthop__group__tunnel__t_1ae2638f4ab72fdc2f0dc04ec9cd7d068c"></span>void <code class="sig-name descname">nhg_name_is</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::string &amp;&amp;<em>nhg_name</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos22nexthop_group_tunnel_t11nhg_name_isERRNSt6stringE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Moving Setter for ‘nhg_name’. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos22nexthop_group_tunnel_t8igp_prefEv">
+<span id="_CPPv3NK3eos22nexthop_group_tunnel_t8igp_prefEv"></span><span id="_CPPv2NK3eos22nexthop_group_tunnel_t8igp_prefEv"></span><span id="eos::nexthop_group_tunnel_t::igp_prefC"></span><span class="target" id="classeos_1_1nexthop__group__tunnel__t_1a48cd62fcda7136e2b26aa4b84e478294"></span>uint8_t <code class="sig-name descname">igp_pref</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos22nexthop_group_tunnel_t8igp_prefEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Getter for ‘igp_pref’: the IGP preference of the tunnel endpoint. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos22nexthop_group_tunnel_t11igp_pref_isE7uint8_t">
+<span id="_CPPv3N3eos22nexthop_group_tunnel_t11igp_pref_isE7uint8_t"></span><span id="_CPPv2N3eos22nexthop_group_tunnel_t11igp_pref_isE7uint8_t"></span><span id="eos::nexthop_group_tunnel_t::igp_pref_is__uint8_t"></span><span class="target" id="classeos_1_1nexthop__group__tunnel__t_1ac85f990c86add7a6e8ce6fafb609ea4f"></span>void <code class="sig-name descname">igp_pref_is</code><span class="sig-paren">(</span>uint8_t <em>igp_pref</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos22nexthop_group_tunnel_t11igp_pref_isE7uint8_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Setter for ‘igp_pref’. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos22nexthop_group_tunnel_t10igp_metricEv">
+<span id="_CPPv3NK3eos22nexthop_group_tunnel_t10igp_metricEv"></span><span id="_CPPv2NK3eos22nexthop_group_tunnel_t10igp_metricEv"></span><span id="eos::nexthop_group_tunnel_t::igp_metricC"></span><span class="target" id="classeos_1_1nexthop__group__tunnel__t_1a5ea83861bd0148a102ced2642b29fbcd"></span>uint32_t <code class="sig-name descname">igp_metric</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos22nexthop_group_tunnel_t10igp_metricEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Getter for ‘igp_metric’: the IGP metric of the tunnel endpoint. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos22nexthop_group_tunnel_t13igp_metric_isE8uint32_t">
+<span id="_CPPv3N3eos22nexthop_group_tunnel_t13igp_metric_isE8uint32_t"></span><span id="_CPPv2N3eos22nexthop_group_tunnel_t13igp_metric_isE8uint32_t"></span><span id="eos::nexthop_group_tunnel_t::igp_metric_is__uint32_t"></span><span class="target" id="classeos_1_1nexthop__group__tunnel__t_1a15b56d0778781da4261b55d693990cec"></span>void <code class="sig-name descname">igp_metric_is</code><span class="sig-paren">(</span>uint32_t <em>igp_metric</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos22nexthop_group_tunnel_t13igp_metric_isE8uint32_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Setter for ‘igp_metric’. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos22nexthop_group_tunnel_teqERK22nexthop_group_tunnel_t">
+<span id="_CPPv3NK3eos22nexthop_group_tunnel_teqERK22nexthop_group_tunnel_t"></span><span id="_CPPv2NK3eos22nexthop_group_tunnel_teqERK22nexthop_group_tunnel_t"></span><span id="eos::nexthop_group_tunnel_t::eq-operator__nexthop_group_tunnel_tCRC"></span><span class="target" id="classeos_1_1nexthop__group__tunnel__t_1a65a672f20124c3e9efd47b45184eecab"></span>bool <code class="sig-name descname">operator==</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos22nexthop_group_tunnel_tE" title="eos::nexthop_group_tunnel_t">nexthop_group_tunnel_t</a> <em class="property">const</em> &amp;<em>other</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos22nexthop_group_tunnel_teqERK22nexthop_group_tunnel_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos22nexthop_group_tunnel_tneERK22nexthop_group_tunnel_t">
+<span id="_CPPv3NK3eos22nexthop_group_tunnel_tneERK22nexthop_group_tunnel_t"></span><span id="_CPPv2NK3eos22nexthop_group_tunnel_tneERK22nexthop_group_tunnel_t"></span><span id="eos::nexthop_group_tunnel_t::neq-operator__nexthop_group_tunnel_tCRC"></span><span class="target" id="classeos_1_1nexthop__group__tunnel__t_1a082d80d14741ee55b574cd504fa42a41"></span>bool <code class="sig-name descname">operator!=</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos22nexthop_group_tunnel_tE" title="eos::nexthop_group_tunnel_t">nexthop_group_tunnel_t</a> <em class="property">const</em> &amp;<em>other</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos22nexthop_group_tunnel_tneERK22nexthop_group_tunnel_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos22nexthop_group_tunnel_t4hashEv">
+<span id="_CPPv3NK3eos22nexthop_group_tunnel_t4hashEv"></span><span id="_CPPv2NK3eos22nexthop_group_tunnel_t4hashEv"></span><span id="eos::nexthop_group_tunnel_t::hashC"></span><span class="target" id="classeos_1_1nexthop__group__tunnel__t_1a4654006015598b09ec48a6a57fca4875"></span>uint32_t <code class="sig-name descname">hash</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos22nexthop_group_tunnel_t4hashEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>The hash function for type <a class="reference internal" href="#classeos_1_1nexthop__group__tunnel__t"><span class="std std-ref">nexthop_group_tunnel_t</span></a>. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos22nexthop_group_tunnel_t6mix_meER8hash_mix">
+<span id="_CPPv3NK3eos22nexthop_group_tunnel_t6mix_meER8hash_mix"></span><span id="_CPPv2NK3eos22nexthop_group_tunnel_t6mix_meER8hash_mix"></span><span id="eos::nexthop_group_tunnel_t::mix_me__hash_mixRC"></span><span class="target" id="classeos_1_1nexthop__group__tunnel__t_1ac4c3cb678fda21d66b21f654db9dc247"></span>void <code class="sig-name descname">mix_me</code><span class="sig-paren">(</span><a class="reference internal" href="hash_mix.html#_CPPv4N3eos8hash_mixE" title="eos::hash_mix">hash_mix</a> &amp;<em>h</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos22nexthop_group_tunnel_t6mix_meER8hash_mix" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>The hash mix function for type <a class="reference internal" href="#classeos_1_1nexthop__group__tunnel__t"><span class="std std-ref">nexthop_group_tunnel_t</span></a>. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos22nexthop_group_tunnel_t9to_stringEv">
+<span id="_CPPv3NK3eos22nexthop_group_tunnel_t9to_stringEv"></span><span id="_CPPv2NK3eos22nexthop_group_tunnel_t9to_stringEv"></span><span id="eos::nexthop_group_tunnel_t::to_stringC"></span><span class="target" id="classeos_1_1nexthop__group__tunnel__t_1ab2e2960ae85584aaf4718b308ca4e91a"></span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::string <code class="sig-name descname">to_string</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos22nexthop_group_tunnel_t9to_stringEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Returns a string representation of the current object’s values. </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-static-functions">Public Static Functions</p>
+<dl class="cpp function">
+<dt id="_CPPv4N3eos22nexthop_group_tunnel_tnwENSt6size_tEPv">
+<span id="_CPPv3N3eos22nexthop_group_tunnel_tnwENSt6size_tEPv"></span><span id="_CPPv2N3eos22nexthop_group_tunnel_tnwENSt6size_tEPv"></span><span id="eos::nexthop_group_tunnel_t::new-operator__std::s.voidP"></span><span class="target" id="classeos_1_1nexthop__group__tunnel__t_1a63a4054e09c6eeede8819d9b3fa13954"></span><em class="property">static</em> <em class="property">inline</em> void *<code class="sig-name descname">operator new</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::size_t, void *<em>ptr</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos22nexthop_group_tunnel_tnwENSt6size_tEPv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos22nexthop_group_tunnel_tnwENSt6size_tE">
+<span id="_CPPv3N3eos22nexthop_group_tunnel_tnwENSt6size_tE"></span><span id="_CPPv2N3eos22nexthop_group_tunnel_tnwENSt6size_tE"></span><span id="eos::nexthop_group_tunnel_t::new-operator__std::s"></span><span class="target" id="classeos_1_1nexthop__group__tunnel__t_1ae58fb053dd5bb200d3a9133468356628"></span><em class="property">static</em> void *<code class="sig-name descname">operator new</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::size_t<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos22nexthop_group_tunnel_tnwENSt6size_tE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos22nexthop_group_tunnel_tdlEPv">
+<span id="_CPPv3N3eos22nexthop_group_tunnel_tdlEPv"></span><span id="_CPPv2N3eos22nexthop_group_tunnel_tdlEPv"></span><span id="eos::nexthop_group_tunnel_t::delete-operator__voidP"></span><span class="target" id="classeos_1_1nexthop__group__tunnel__t_1ac87c31f6ae893dab122921de59581024"></span><em class="property">static</em> void <code class="sig-name descname">operator delete</code><span class="sig-paren">(</span>void*<span class="sig-paren">)</span> <em class="property">noexcept</em><a class="headerlink" href="#_CPPv4N3eos22nexthop_group_tunnel_tdlEPv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-private-members">Private Members</p>
+<dl class="cpp var">
+<dt id="_CPPv4N3eos22nexthop_group_tunnel_t5pimplE">
+<span id="_CPPv3N3eos22nexthop_group_tunnel_t5pimplE"></span><span id="_CPPv2N3eos22nexthop_group_tunnel_t5pimplE"></span><span id="eos::nexthop_group_tunnel_t::pimpl__std::shared_ptr:nexthop_group_tunnel_impl_t:"></span><span class="target" id="classeos_1_1nexthop__group__tunnel__t_1a7c4c2bab8759bf47f011d7f38732c1d7"></span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::shared_ptr&lt;nexthop_group_tunnel_impl_t&gt; <code class="sig-name descname">pimpl</code><a class="headerlink" href="#_CPPv4N3eos22nexthop_group_tunnel_t5pimplE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-friends">Friends</p>
+<dl class="cpp function">
+<dt id="_CPPv4N3eos22nexthop_group_tunnel_tlsERNSt7ostreamERK22nexthop_group_tunnel_t">
+<span id="_CPPv3N3eos22nexthop_group_tunnel_tlsERNSt7ostreamERK22nexthop_group_tunnel_t"></span><span id="_CPPv2N3eos22nexthop_group_tunnel_tlsERNSt7ostreamERK22nexthop_group_tunnel_t"></span><span id="eos::nexthop_group_tunnel_t::lshift-operator__osR.nexthop_group_tunnel_tCR"></span><span class="target" id="classeos_1_1nexthop__group__tunnel__t_1abb20454411cbcb78436604f2339be687"></span><em class="property">friend</em> <a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::ostream &amp;<code class="sig-name descname">operator&lt;&lt;</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::ostream &amp;<em>os</em>, <em class="property">const</em> <a class="reference internal" href="#_CPPv4N3eos22nexthop_group_tunnel_tE" title="eos::nexthop_group_tunnel_t">nexthop_group_tunnel_t</a> &amp;<em>obj</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos22nexthop_group_tunnel_tlsERNSt7ostreamERK22nexthop_group_tunnel_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>A utility stream operator that adds a string representation of <a class="reference internal" href="#classeos_1_1nexthop__group__tunnel__t"><span class="std std-ref">nexthop_group_tunnel_t</span></a> to the ostream. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#"><strong>nexthop_group_tunnel</strong></a><ul>
+<li><a class="reference internal" href="#type-definitions-in-nexthop-group-tunnel">Type definitions in <strong>nexthop_group_tunnel</strong></a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="nexthop_group.html"
+                        title="previous chapter"><strong>nexthop_group</strong></a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="panic.html"
+                        title="next chapter"><strong>panic</strong></a></p>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="panic.html" title="panic"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="nexthop_group.html" title="nexthop_group"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Arista EOS SDK 2.23.4 reference</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href=""><strong>nexthop_group_tunnel</strong></a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2014, Arista Networks.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.4.3.
+    </div>
+  </body>
+</html>

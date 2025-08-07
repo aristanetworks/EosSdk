@@ -1,0 +1,382 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>eth_intf &#8212; Arista EOS SDK 2.23.4 reference</title>
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/eossdk.css" type="text/css" />
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="eth_lag_intf" href="eth_lag_intf.html" />
+    <link rel="prev" title="eth" href="eth.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="eth_lag_intf.html" title="eth_lag_intf"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="eth.html" title="eth"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Arista EOS SDK 2.23.4 reference</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href=""><strong>eth_intf</strong></a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="eth-intf">
+<h1><strong>eth_intf</strong><a class="headerlink" href="#eth-intf" title="Permalink to this headline">¶</a></h1>
+<dl class="cpp type">
+<dt id="_CPPv43eos">
+<span id="_CPPv33eos"></span><span id="_CPPv23eos"></span><span id="eos"></span><span class="target" id="namespaceeos"></span><em class="property">namespace </em><code class="sig-name descname">eos</code><br /></dt>
+<dd><dl class="cpp class">
+<dt id="_CPPv4N3eos16eth_intf_handlerE">
+<span id="_CPPv3N3eos16eth_intf_handlerE"></span><span id="_CPPv2N3eos16eth_intf_handlerE"></span><span id="eos::eth_intf_handler"></span><span class="target" id="classeos_1_1eth__intf__handler"></span><em class="property">class </em><code class="sig-name descname">eth_intf_handler</code> : <em class="property">public</em> <a class="reference internal" href="acl.html#_CPPv43eos" title="eos">eos</a>::<a class="reference internal" href="base_handler.html#_CPPv4I00EN3eos12base_handlerE" title="eos::base_handler">base_handler</a>&lt;<a class="reference internal" href="#_CPPv4N3eos12eth_intf_mgrE" title="eos::eth_intf_mgr">eth_intf_mgr</a>, <a class="reference internal" href="#_CPPv4N3eos16eth_intf_handlerE" title="eos::eth_intf_handler">eth_intf_handler</a>&gt;<a class="headerlink" href="#_CPPv4N3eos16eth_intf_handlerE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><div class="docutils container">
+<em>#include &lt;eth_intf.h&gt;</em></div>
+<p>Event handler for ethernet interface specific events.</p>
+<p>Handles events on ethernet interfaces. Includes physical interfaces and LAGs (port-channels) among other interface types. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
+<dl class="cpp function">
+<dt id="_CPPv4N3eos16eth_intf_handler16eth_intf_handlerEP12eth_intf_mgr">
+<span id="_CPPv3N3eos16eth_intf_handler16eth_intf_handlerEP12eth_intf_mgr"></span><span id="_CPPv2N3eos16eth_intf_handler16eth_intf_handlerEP12eth_intf_mgr"></span><span id="eos::eth_intf_handler::eth_intf_handler__eth_intf_mgrP"></span><span class="target" id="classeos_1_1eth__intf__handler_1a81bb7f03521db1a0a12d59bb547a7b95"></span><em class="property">explicit</em> <code class="sig-name descname">eth_intf_handler</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos12eth_intf_mgrE" title="eos::eth_intf_mgr">eth_intf_mgr</a>*<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos16eth_intf_handler16eth_intf_handlerEP12eth_intf_mgr" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos16eth_intf_handler16get_eth_intf_mgrEv">
+<span id="_CPPv3NK3eos16eth_intf_handler16get_eth_intf_mgrEv"></span><span id="_CPPv2NK3eos16eth_intf_handler16get_eth_intf_mgrEv"></span><span id="eos::eth_intf_handler::get_eth_intf_mgrC"></span><span class="target" id="classeos_1_1eth__intf__handler_1a368425611280e607f2a61aaf237eaa1f"></span><em class="property">inline</em> <a class="reference internal" href="#_CPPv4N3eos12eth_intf_mgrE" title="eos::eth_intf_mgr">eth_intf_mgr</a> *<code class="sig-name descname">get_eth_intf_mgr</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos16eth_intf_handler16get_eth_intf_mgrEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos16eth_intf_handler19watch_all_eth_intfsEb">
+<span id="_CPPv3N3eos16eth_intf_handler19watch_all_eth_intfsEb"></span><span id="_CPPv2N3eos16eth_intf_handler19watch_all_eth_intfsEb"></span><span id="eos::eth_intf_handler::watch_all_eth_intfs__b"></span><span class="target" id="classeos_1_1eth__intf__handler_1a04d3856d552f0e675a8e6c7442a8b70d"></span>void <code class="sig-name descname">watch_all_eth_intfs</code><span class="sig-paren">(</span>bool<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos16eth_intf_handler19watch_all_eth_intfsEb" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Registers to receive updates on changes to the interface.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>bool</strong> – Signifies whether notifications should be propagated to this handler instance or not. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos16eth_intf_handler14watch_eth_intfE9intf_id_tb">
+<span id="_CPPv3N3eos16eth_intf_handler14watch_eth_intfE9intf_id_tb"></span><span id="_CPPv2N3eos16eth_intf_handler14watch_eth_intfE9intf_id_tb"></span><span id="eos::eth_intf_handler::watch_eth_intf__intf_id_t.b"></span><span class="target" id="classeos_1_1eth__intf__handler_1a8cc4fea37d80bfe2843f74699e7edc68"></span>void <code class="sig-name descname">watch_eth_intf</code><span class="sig-paren">(</span><a class="reference internal" href="intf.html#_CPPv4N3eos9intf_id_tE" title="eos::intf_id_t">intf_id_t</a>, bool<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos16eth_intf_handler14watch_eth_intfE9intf_id_tb" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Registers this class to receive change updates on the given interface.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>intf_id_t</strong> – Signifies which interface to subscribe to. </p></li>
+<li><p><strong>bool</strong> – Signifies whether notifications should be propagated to this handler instance or not. </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos16eth_intf_handler18on_eth_intf_createE9intf_id_t">
+<span id="_CPPv3N3eos16eth_intf_handler18on_eth_intf_createE9intf_id_t"></span><span id="_CPPv2N3eos16eth_intf_handler18on_eth_intf_createE9intf_id_t"></span><span id="eos::eth_intf_handler::on_eth_intf_create__intf_id_t"></span><span class="target" id="classeos_1_1eth__intf__handler_1ac94e5e35fcca23d98aee7bd703b63af2"></span><em class="property">virtual</em> void <code class="sig-name descname">on_eth_intf_create</code><span class="sig-paren">(</span><a class="reference internal" href="intf.html#_CPPv4N3eos9intf_id_tE" title="eos::intf_id_t">intf_id_t</a><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos16eth_intf_handler18on_eth_intf_createE9intf_id_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Handler called when an ethernet interface is created.</p>
+<p>After on_eth_intf_create is called, the given intf_id is guaranteed to exist (ie <a class="reference internal" href="#classeos_1_1eth__intf__mgr_1ae37879fd40ac5b39cce04a7cc1e6da3e"><span class="std std-ref">eth_intf_mgr::exists</span></a> will return true). At that point, the intf_id can be used will all methods of the <a class="reference internal" href="#classeos_1_1eth__intf__mgr"><span class="std std-ref">eth_intf_mgr</span></a> class.</p>
+<p>This also means that the intf_id can be used with all other relevant *intf_mgr classes (ie <a class="reference internal" href="intf.html#classeos_1_1intf__mgr"><span class="std std-ref">intf_mgr</span></a>, <a class="reference internal" href="eth_phy_intf.html#classeos_1_1eth__phy__intf__mgr"><span class="std std-ref">eth_phy_intf_mgr</span></a>, <a class="reference internal" href="eth_lag_intf.html#classeos_1_1eth__lag__intf__mgr"><span class="std std-ref">eth_lag_intf_mgr</span></a>, and <a class="reference internal" href="subintf.html#classeos_1_1subintf__mgr"><span class="std std-ref">subintf_mgr</span></a> as appropriate based on the intf_type). </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos16eth_intf_handler18on_eth_intf_deleteE9intf_id_t">
+<span id="_CPPv3N3eos16eth_intf_handler18on_eth_intf_deleteE9intf_id_t"></span><span id="_CPPv2N3eos16eth_intf_handler18on_eth_intf_deleteE9intf_id_t"></span><span id="eos::eth_intf_handler::on_eth_intf_delete__intf_id_t"></span><span class="target" id="classeos_1_1eth__intf__handler_1a89c037464c7cce849241d2905e446553"></span><em class="property">virtual</em> void <code class="sig-name descname">on_eth_intf_delete</code><span class="sig-paren">(</span><a class="reference internal" href="intf.html#_CPPv4N3eos9intf_id_tE" title="eos::intf_id_t">intf_id_t</a><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos16eth_intf_handler18on_eth_intf_deleteE9intf_id_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Handler called when an ethernet interface is deleted.</p>
+<p>After on_eth_intf_delete is called, the given intf_id is guaranteed to not exist (ie <a class="reference internal" href="#classeos_1_1eth__intf__mgr_1ae37879fd40ac5b39cce04a7cc1e6da3e"><span class="std std-ref">eth_intf_mgr::exists</span></a> will return false). At that point, the intf_id cannot be used will any methods in the <a class="reference internal" href="#classeos_1_1eth__intf__mgr"><span class="std std-ref">eth_intf_mgr</span></a> class.</p>
+<p>This also means that the intf_id can no longer be used with all other relevant *intf_mgr classes (ie <a class="reference internal" href="intf.html#classeos_1_1intf__mgr"><span class="std std-ref">intf_mgr</span></a>, <a class="reference internal" href="eth_phy_intf.html#classeos_1_1eth__phy__intf__mgr"><span class="std std-ref">eth_phy_intf_mgr</span></a>, <a class="reference internal" href="eth_lag_intf.html#classeos_1_1eth__lag__intf__mgr"><span class="std std-ref">eth_lag_intf_mgr</span></a>, and <a class="reference internal" href="subintf.html#classeos_1_1subintf__mgr"><span class="std std-ref">subintf_mgr</span></a> as appropriate based on the intf_type). </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos16eth_intf_handler11on_eth_addrE9intf_id_t10eth_addr_t">
+<span id="_CPPv3N3eos16eth_intf_handler11on_eth_addrE9intf_id_t10eth_addr_t"></span><span id="_CPPv2N3eos16eth_intf_handler11on_eth_addrE9intf_id_t10eth_addr_t"></span><span id="eos::eth_intf_handler::on_eth_addr__intf_id_t.eth_addr_t"></span><span class="target" id="classeos_1_1eth__intf__handler_1a898bc7164d0bdccfbcdeef395c60048e"></span><em class="property">virtual</em> void <code class="sig-name descname">on_eth_addr</code><span class="sig-paren">(</span><a class="reference internal" href="intf.html#_CPPv4N3eos9intf_id_tE" title="eos::intf_id_t">intf_id_t</a>, <a class="reference internal" href="eth.html#_CPPv4N3eos10eth_addr_tE" title="eos::eth_addr_t">eth_addr_t</a><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos16eth_intf_handler11on_eth_addrE9intf_id_t10eth_addr_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Handler called when the mac address of an interface changes</p>
+<p>Note that for physical interfaces, the on_eth_addr handler will get called with the default <a class="reference internal" href="eth.html#classeos_1_1eth__addr__t"><span class="std std-ref">eth_addr_t</span></a> value when the hardware for that physical interface is removed. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="cpp class">
+<dt id="_CPPv4N3eos15eth_intf_iter_tE">
+<span id="_CPPv3N3eos15eth_intf_iter_tE"></span><span id="_CPPv2N3eos15eth_intf_iter_tE"></span><span id="eos::eth_intf_iter_t"></span><span class="target" id="classeos_1_1eth__intf__iter__t"></span><em class="property">class </em><code class="sig-name descname">eth_intf_iter_t</code> : <em class="property">public</em> <a class="reference internal" href="acl.html#_CPPv43eos" title="eos">eos</a>::<a class="reference internal" href="iterator.html#_CPPv4I00EN3eos9iter_baseE" title="eos::iter_base">iter_base</a>&lt;<a class="reference internal" href="intf.html#_CPPv4N3eos9intf_id_tE" title="eos::intf_id_t">intf_id_t</a>, eth_intf_iter_impl&gt;<a class="headerlink" href="#_CPPv4N3eos15eth_intf_iter_tE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><div class="docutils container">
+<em>#include &lt;eth_intf.h&gt;</em></div>
+<p>Iterator type for ethernet interfaces. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-private-functions">Private Functions</p>
+<dl class="cpp function">
+<dt id="_CPPv4N3eos15eth_intf_iter_t15eth_intf_iter_tEPC18eth_intf_iter_impl">
+<span id="_CPPv3N3eos15eth_intf_iter_t15eth_intf_iter_tEPC18eth_intf_iter_impl"></span><span id="_CPPv2N3eos15eth_intf_iter_t15eth_intf_iter_tEPC18eth_intf_iter_impl"></span><span id="eos::eth_intf_iter_t::eth_intf_iter_t__eth_intf_iter_implPC"></span><span class="target" id="classeos_1_1eth__intf__iter__t_1a991e83921171c1c83cb508ab475e1c33"></span><em class="property">explicit</em> <code class="sig-name descname">eth_intf_iter_t</code><span class="sig-paren">(</span>eth_intf_iter_impl*<em class="property">const</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos15eth_intf_iter_t15eth_intf_iter_tEPC18eth_intf_iter_impl" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-friends">Friends</p>
+<dl class="friendclass">
+<dt>
+<em class="property">friend class</em> eth_intf_iter_impl</dt>
+</dl>
+
+</div>
+</dd></dl>
+
+<dl class="cpp class">
+<dt id="_CPPv4N3eos12eth_intf_mgrE">
+<span id="_CPPv3N3eos12eth_intf_mgrE"></span><span id="_CPPv2N3eos12eth_intf_mgrE"></span><span id="eos::eth_intf_mgr"></span><span class="target" id="classeos_1_1eth__intf__mgr"></span><em class="property">class </em><code class="sig-name descname">eth_intf_mgr</code> : <em class="property">public</em> <a class="reference internal" href="acl.html#_CPPv43eos" title="eos">eos</a>::<a class="reference internal" href="base_mgr.html#_CPPv4I00EN3eos8base_mgrE" title="eos::base_mgr">base_mgr</a>&lt;<a class="reference internal" href="#_CPPv4N3eos16eth_intf_handlerE" title="eos::eth_intf_handler">eth_intf_handler</a>, <a class="reference internal" href="intf.html#_CPPv4N3eos9intf_id_tE" title="eos::intf_id_t">intf_id_t</a>&gt;<a class="headerlink" href="#_CPPv4N3eos12eth_intf_mgrE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><div class="docutils container">
+<em>#include &lt;eth_intf.h&gt;</em></div>
+<p>The ethernet interface manager. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
+<dl class="cpp function">
+<dt id="_CPPv4N3eos12eth_intf_mgrD0Ev">
+<span id="_CPPv3N3eos12eth_intf_mgrD0Ev"></span><span id="_CPPv2N3eos12eth_intf_mgrD0Ev"></span><span id="eos::eth_intf_mgr::~eth_intf_mgr"></span><span class="target" id="classeos_1_1eth__intf__mgr_1a09a9565a5d1a1ba698d5ab6dc33905a8"></span><em class="property">virtual</em> <code class="sig-name descname">~eth_intf_mgr</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos12eth_intf_mgrD0Ev" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos12eth_intf_mgr13eth_intf_iterEv">
+<span id="_CPPv3NK3eos12eth_intf_mgr13eth_intf_iterEv"></span><span id="_CPPv2NK3eos12eth_intf_mgr13eth_intf_iterEv"></span><span id="eos::eth_intf_mgr::eth_intf_iterC"></span><span class="target" id="classeos_1_1eth__intf__mgr_1ae3e375546395c42fad9d7923ff22b74c"></span><em class="property">virtual</em> <a class="reference internal" href="#_CPPv4N3eos15eth_intf_iter_tE" title="eos::eth_intf_iter_t">eth_intf_iter_t</a> <code class="sig-name descname">eth_intf_iter</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em> = 0<a class="headerlink" href="#_CPPv4NK3eos12eth_intf_mgr13eth_intf_iterEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos12eth_intf_mgr6existsE9intf_id_t">
+<span id="_CPPv3NK3eos12eth_intf_mgr6existsE9intf_id_t"></span><span id="_CPPv2NK3eos12eth_intf_mgr6existsE9intf_id_t"></span><span id="eos::eth_intf_mgr::exists__intf_id_tC"></span><span class="target" id="classeos_1_1eth__intf__mgr_1ae37879fd40ac5b39cce04a7cc1e6da3e"></span><em class="property">virtual</em> bool <code class="sig-name descname">exists</code><span class="sig-paren">(</span><a class="reference internal" href="intf.html#_CPPv4N3eos9intf_id_tE" title="eos::intf_id_t">intf_id_t</a><span class="sig-paren">)</span> <em class="property">const</em> = 0<a class="headerlink" href="#_CPPv4NK3eos12eth_intf_mgr6existsE9intf_id_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Returns whether the given ethernet interface exists.</p>
+<p>If exists returns true, then this <a class="reference internal" href="intf.html#classeos_1_1intf__id__t"><span class="std std-ref">intf_id_t</span></a> can be successfully passed into every method of the <a class="reference internal" href="#classeos_1_1eth__intf__mgr"><span class="std std-ref">eth_intf_mgr</span></a>. If not, then methods of the <a class="reference internal" href="#classeos_1_1eth__intf__mgr"><span class="std std-ref">eth_intf_mgr</span></a> can throw a <a class="reference internal" href="intf.html#classeos_1_1no__such__interface__error"><span class="std std-ref">no_such_interface_error</span></a> exception.</p>
+<p>The exists method of all *intf_mgr classes that manage a given interface (ie <a class="reference internal" href="intf.html#classeos_1_1intf__mgr"><span class="std std-ref">intf_mgr</span></a>, <a class="reference internal" href="#classeos_1_1eth__intf__mgr"><span class="std std-ref">eth_intf_mgr</span></a>, <a class="reference internal" href="eth_phy_intf.html#classeos_1_1eth__phy__intf__mgr"><span class="std std-ref">eth_phy_intf_mgr</span></a>, <a class="reference internal" href="eth_lag_intf.html#classeos_1_1eth__lag__intf__mgr"><span class="std std-ref">eth_lag_intf_mgr</span></a>, and/or <a class="reference internal" href="subintf.html#classeos_1_1subintf__mgr"><span class="std std-ref">subintf_mgr</span></a>) are all guaranteed to return the same result. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos12eth_intf_mgr8eth_addrE9intf_id_t">
+<span id="_CPPv3NK3eos12eth_intf_mgr8eth_addrE9intf_id_t"></span><span id="_CPPv2NK3eos12eth_intf_mgr8eth_addrE9intf_id_t"></span><span id="eos::eth_intf_mgr::eth_addr__intf_id_tC"></span><span class="target" id="classeos_1_1eth__intf__mgr_1a1a488b8bdc1a4929d94c84d7ef150256"></span><em class="property">virtual</em> <a class="reference internal" href="eth.html#_CPPv4N3eos10eth_addr_tE" title="eos::eth_addr_t">eth_addr_t</a> <code class="sig-name descname">eth_addr</code><span class="sig-paren">(</span><a class="reference internal" href="intf.html#_CPPv4N3eos9intf_id_tE" title="eos::intf_id_t">intf_id_t</a><span class="sig-paren">)</span> <em class="property">const</em> = 0<a class="headerlink" href="#_CPPv4NK3eos12eth_intf_mgr8eth_addrE9intf_id_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Returns the operational ethernet address of the interface. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos12eth_intf_mgr19configured_eth_addrE9intf_id_t">
+<span id="_CPPv3NK3eos12eth_intf_mgr19configured_eth_addrE9intf_id_t"></span><span id="_CPPv2NK3eos12eth_intf_mgr19configured_eth_addrE9intf_id_t"></span><span id="eos::eth_intf_mgr::configured_eth_addr__intf_id_tC"></span><span class="target" id="classeos_1_1eth__intf__mgr_1a26a8ace2f866fdd40d7d76c77744e572"></span><em class="property">virtual</em> <a class="reference internal" href="eth.html#_CPPv4N3eos10eth_addr_tE" title="eos::eth_addr_t">eth_addr_t</a> <code class="sig-name descname">configured_eth_addr</code><span class="sig-paren">(</span><a class="reference internal" href="intf.html#_CPPv4N3eos9intf_id_tE" title="eos::intf_id_t">intf_id_t</a><span class="sig-paren">)</span> <em class="property">const</em> = 0<a class="headerlink" href="#_CPPv4NK3eos12eth_intf_mgr19configured_eth_addrE9intf_id_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Returns the currently configured ethernet address. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos12eth_intf_mgr11eth_addr_isE9intf_id_t10eth_addr_t">
+<span id="_CPPv3N3eos12eth_intf_mgr11eth_addr_isE9intf_id_t10eth_addr_t"></span><span id="_CPPv2N3eos12eth_intf_mgr11eth_addr_isE9intf_id_t10eth_addr_t"></span><span id="eos::eth_intf_mgr::eth_addr_is__intf_id_t.eth_addr_t"></span><span class="target" id="classeos_1_1eth__intf__mgr_1aea224621c9444f12dcb53fbb9cc0c5bc"></span><em class="property">virtual</em> void <code class="sig-name descname">eth_addr_is</code><span class="sig-paren">(</span><a class="reference internal" href="intf.html#_CPPv4N3eos9intf_id_tE" title="eos::intf_id_t">intf_id_t</a>, <a class="reference internal" href="eth.html#_CPPv4N3eos10eth_addr_tE" title="eos::eth_addr_t">eth_addr_t</a><span class="sig-paren">)</span> = 0<a class="headerlink" href="#_CPPv4N3eos12eth_intf_mgr11eth_addr_isE9intf_id_t10eth_addr_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Configures the ethernet address of the interface </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>intf_id_t</strong> – The interface ID of the interface to change the address of </p></li>
+<li><p><strong>eth_addr_t</strong> – The address to set </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos12eth_intf_mgr15switchport_modeE9intf_id_t">
+<span id="_CPPv3NK3eos12eth_intf_mgr15switchport_modeE9intf_id_t"></span><span id="_CPPv2NK3eos12eth_intf_mgr15switchport_modeE9intf_id_t"></span><span id="eos::eth_intf_mgr::switchport_mode__intf_id_tC"></span><span class="target" id="classeos_1_1eth__intf__mgr_1a78c90800e79ccd46a17a23b2e396c59f"></span><em class="property">virtual</em> <a class="reference internal" href="#_CPPv4N3eos17switchport_mode_tE" title="eos::switchport_mode_t">switchport_mode_t</a> <code class="sig-name descname">switchport_mode</code><span class="sig-paren">(</span><a class="reference internal" href="intf.html#_CPPv4N3eos9intf_id_tE" title="eos::intf_id_t">intf_id_t</a><span class="sig-paren">)</span> <em class="property">const</em> = 0<a class="headerlink" href="#_CPPv4NK3eos12eth_intf_mgr15switchport_modeE9intf_id_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Returns the currently configured mode of operation of a given interface. Note that only Ethernet and Port-Channel interfaces can be switchports, using any other type of interface will lead to a panic. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos12eth_intf_mgr18switchport_mode_isE9intf_id_t17switchport_mode_t">
+<span id="_CPPv3N3eos12eth_intf_mgr18switchport_mode_isE9intf_id_t17switchport_mode_t"></span><span id="_CPPv2N3eos12eth_intf_mgr18switchport_mode_isE9intf_id_t17switchport_mode_t"></span><span id="eos::eth_intf_mgr::switchport_mode_is__intf_id_t.switchport_mode_t"></span><span class="target" id="classeos_1_1eth__intf__mgr_1af0e77e38bef27c40ee53978d7cac996d"></span><em class="property">virtual</em> void <code class="sig-name descname">switchport_mode_is</code><span class="sig-paren">(</span><a class="reference internal" href="intf.html#_CPPv4N3eos9intf_id_tE" title="eos::intf_id_t">intf_id_t</a>, <a class="reference internal" href="#_CPPv4N3eos17switchport_mode_tE" title="eos::switchport_mode_t">switchport_mode_t</a><span class="sig-paren">)</span> = 0<a class="headerlink" href="#_CPPv4N3eos12eth_intf_mgr18switchport_mode_isE9intf_id_t17switchport_mode_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Configures the mode of operation of a given interface. Note that only Ethernet and Port-Channel interfaces can be switchports, using any other type of interface will lead to a panic. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos12eth_intf_mgr12default_vlanE9intf_id_t">
+<span id="_CPPv3NK3eos12eth_intf_mgr12default_vlanE9intf_id_t"></span><span id="_CPPv2NK3eos12eth_intf_mgr12default_vlanE9intf_id_t"></span><span id="eos::eth_intf_mgr::default_vlan__intf_id_tC"></span><span class="target" id="classeos_1_1eth__intf__mgr_1af66620f156caf4c2ff33074a76127378"></span><em class="property">virtual</em> <a class="reference internal" href="eth.html#_CPPv4N3eos9vlan_id_tE" title="eos::vlan_id_t">vlan_id_t</a> <code class="sig-name descname">default_vlan</code><span class="sig-paren">(</span><a class="reference internal" href="intf.html#_CPPv4N3eos9intf_id_tE" title="eos::intf_id_t">intf_id_t</a><span class="sig-paren">)</span> <em class="property">const</em> = 0<a class="headerlink" href="#_CPPv4NK3eos12eth_intf_mgr12default_vlanE9intf_id_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Returns the ‘default’ VLAN of a given interface. The ‘default’ VLAN depends on the switchport mode of the interface. If the interface is in access mode, then the access VLAN is returned. If the interface is in tap or trunk mode, then the native VLAN is returned. If no native VLAN is configured, then 0 is returned. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos12eth_intf_mgr15default_vlan_isE9intf_id_t9vlan_id_t">
+<span id="_CPPv3N3eos12eth_intf_mgr15default_vlan_isE9intf_id_t9vlan_id_t"></span><span id="_CPPv2N3eos12eth_intf_mgr15default_vlan_isE9intf_id_t9vlan_id_t"></span><span id="eos::eth_intf_mgr::default_vlan_is__intf_id_t.vlan_id_t"></span><span class="target" id="classeos_1_1eth__intf__mgr_1a95202b800f34879da34cf6014ed7e878"></span><em class="property">virtual</em> void <code class="sig-name descname">default_vlan_is</code><span class="sig-paren">(</span><a class="reference internal" href="intf.html#_CPPv4N3eos9intf_id_tE" title="eos::intf_id_t">intf_id_t</a>, <a class="reference internal" href="eth.html#_CPPv4N3eos9vlan_id_tE" title="eos::vlan_id_t">vlan_id_t</a><span class="sig-paren">)</span> = 0<a class="headerlink" href="#_CPPv4N3eos12eth_intf_mgr15default_vlan_isE9intf_id_t9vlan_id_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Configures the ‘default’ VLAN of a given interface. The ‘default’ VLAN depends on the switchport mode of the interface. If the interface is in access mode, then the access VLAN is configured. If the interface is in tap or trunk mode, then the native VLAN is configured. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos12eth_intf_mgr11trunk_vlansE9intf_id_t">
+<span id="_CPPv3NK3eos12eth_intf_mgr11trunk_vlansE9intf_id_t"></span><span id="_CPPv2NK3eos12eth_intf_mgr11trunk_vlansE9intf_id_t"></span><span id="eos::eth_intf_mgr::trunk_vlans__intf_id_tC"></span><span class="target" id="classeos_1_1eth__intf__mgr_1a9b88f0a1f138fefc74e304ab13f2d0bf"></span><em class="property">virtual</em> <a class="reference internal" href="eth.html#_CPPv4N3eos10vlan_set_tE" title="eos::vlan_set_t">vlan_set_t</a> <code class="sig-name descname">trunk_vlans</code><span class="sig-paren">(</span><a class="reference internal" href="intf.html#_CPPv4N3eos9intf_id_tE" title="eos::intf_id_t">intf_id_t</a><span class="sig-paren">)</span> <em class="property">const</em> = 0<a class="headerlink" href="#_CPPv4NK3eos12eth_intf_mgr11trunk_vlansE9intf_id_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Returns the set of VLANs trunked on this interface. Note that by default all VLANs are trunked on all interfaces. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos12eth_intf_mgr14trunk_vlan_setE9intf_id_t9vlan_id_t">
+<span id="_CPPv3N3eos12eth_intf_mgr14trunk_vlan_setE9intf_id_t9vlan_id_t"></span><span id="_CPPv2N3eos12eth_intf_mgr14trunk_vlan_setE9intf_id_t9vlan_id_t"></span><span id="eos::eth_intf_mgr::trunk_vlan_set__intf_id_t.vlan_id_t"></span><span class="target" id="classeos_1_1eth__intf__mgr_1a11351836ff1a05209ca3487eb6f0e368"></span><em class="property">virtual</em> void <code class="sig-name descname">trunk_vlan_set</code><span class="sig-paren">(</span><a class="reference internal" href="intf.html#_CPPv4N3eos9intf_id_tE" title="eos::intf_id_t">intf_id_t</a>, <a class="reference internal" href="eth.html#_CPPv4N3eos9vlan_id_tE" title="eos::vlan_id_t">vlan_id_t</a><span class="sig-paren">)</span> = 0<a class="headerlink" href="#_CPPv4N3eos12eth_intf_mgr14trunk_vlan_setE9intf_id_t9vlan_id_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Adds a VLAN to the set of allowed VLANs when in trunk mode. If the interface isn’t in trunk mode, then the configuration is changed nevertheless, but the configuration won’t take effect until the interface is switched to trunk mode. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos12eth_intf_mgr13trunk_vlan_isE9intf_id_tRK10vlan_set_t">
+<span id="_CPPv3N3eos12eth_intf_mgr13trunk_vlan_isE9intf_id_tRK10vlan_set_t"></span><span id="_CPPv2N3eos12eth_intf_mgr13trunk_vlan_isE9intf_id_tRK10vlan_set_t"></span><span id="eos::eth_intf_mgr::trunk_vlan_is__intf_id_t.vlan_set_tCR"></span><span class="target" id="classeos_1_1eth__intf__mgr_1a06d4ac3792bc1556c3cc9c7c0b70b53d"></span><em class="property">virtual</em> void <code class="sig-name descname">trunk_vlan_is</code><span class="sig-paren">(</span><a class="reference internal" href="intf.html#_CPPv4N3eos9intf_id_tE" title="eos::intf_id_t">intf_id_t</a>, <a class="reference internal" href="eth.html#_CPPv4N3eos10vlan_set_tE" title="eos::vlan_set_t">vlan_set_t</a> <em class="property">const</em> &amp;<em>vlans</em><span class="sig-paren">)</span> = 0<a class="headerlink" href="#_CPPv4N3eos12eth_intf_mgr13trunk_vlan_isE9intf_id_tRK10vlan_set_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Configures the set of allowed VLANs when in trunk mode. If the interface isn’t in trunk mode, then the configuration is changed nevertheless, but the configuration won’t take effect until the interface is switched to trunk mode. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos12eth_intf_mgr14trunk_vlan_delE9intf_id_t9vlan_id_t">
+<span id="_CPPv3N3eos12eth_intf_mgr14trunk_vlan_delE9intf_id_t9vlan_id_t"></span><span id="_CPPv2N3eos12eth_intf_mgr14trunk_vlan_delE9intf_id_t9vlan_id_t"></span><span id="eos::eth_intf_mgr::trunk_vlan_del__intf_id_t.vlan_id_t"></span><span class="target" id="classeos_1_1eth__intf__mgr_1a8164bb071bc6e93dab2e1758dab62cc4"></span><em class="property">virtual</em> void <code class="sig-name descname">trunk_vlan_del</code><span class="sig-paren">(</span><a class="reference internal" href="intf.html#_CPPv4N3eos9intf_id_tE" title="eos::intf_id_t">intf_id_t</a>, <a class="reference internal" href="eth.html#_CPPv4N3eos9vlan_id_tE" title="eos::vlan_id_t">vlan_id_t</a><span class="sig-paren">)</span> = 0<a class="headerlink" href="#_CPPv4N3eos12eth_intf_mgr14trunk_vlan_delE9intf_id_t9vlan_id_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Removes a VLAN to the set of allowed VLANs when in trunk mode. If the interface isn’t in trunk mode, then the configuration is changed nevertheless, but the configuration won’t take effect until the interface is switched to trunk mode. </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-protected-functions">Protected Functions</p>
+<dl class="cpp function">
+<dt id="_CPPv4N3eos12eth_intf_mgr12eth_intf_mgrEv">
+<span id="_CPPv3N3eos12eth_intf_mgr12eth_intf_mgrEv"></span><span id="_CPPv2N3eos12eth_intf_mgr12eth_intf_mgrEv"></span><span id="eos::eth_intf_mgr::eth_intf_mgr"></span><span class="target" id="classeos_1_1eth__intf__mgr_1ab60e8dc7bc3c8ca31e33df0d438a2aa4"></span><code class="sig-name descname">eth_intf_mgr</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos12eth_intf_mgr12eth_intf_mgrEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-private-members">Private Members</p>
+<dl class="cpp var">
+<dt>
+<span class="target" id="classeos_1_1eth__intf__mgr_1ad0e30f559a7cfa2fda63220c1db87c5f"></span><code class="sig-name descname">eth_intf_mgr</code></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-friends">Friends</p>
+<dl class="friendclass">
+<dt>
+<em class="property">friend class</em> eth_intf_handler</dt>
+</dl>
+
+</div>
+</dd></dl>
+
+</dd></dl>
+
+<div class="section" id="type-definitions-in-eth-intf">
+<h2>Type definitions in <strong>eth_intf</strong><a class="headerlink" href="#type-definitions-in-eth-intf" title="Permalink to this headline">¶</a></h2>
+<dl class="cpp type">
+<dt>
+<span class="target" id="namespaceeos"></span><em class="property">namespace </em><code class="sig-name descname">eos</code><br /></dt>
+<dd><div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-enums">Enums</p>
+<dl class="cpp enum">
+<dt id="_CPPv4N3eos17switchport_mode_tE">
+<span id="_CPPv3N3eos17switchport_mode_tE"></span><span id="_CPPv2N3eos17switchport_mode_tE"></span><span class="target" id="types_2eth__intf_8h_1a49aed978d7f0717ad759c03bf240db60"></span><em class="property">enum </em><code class="sig-name descname">switchport_mode_t</code><a class="headerlink" href="#_CPPv4N3eos17switchport_mode_tE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>The mode of operation of a switch port. </p>
+<p><em>Values:</em></p>
+<dl class="cpp enumerator">
+<dt id="_CPPv4N3eos17switchport_mode_t22SWITCHPORT_MODE_ACCESSE">
+<span id="_CPPv3N3eos17switchport_mode_t22SWITCHPORT_MODE_ACCESSE"></span><span id="_CPPv2N3eos17switchport_mode_t22SWITCHPORT_MODE_ACCESSE"></span><span class="target" id="types_2eth__intf_8h_1a49aed978d7f0717ad759c03bf240db60a7e63a6121c4f8229aca2ff5361f213db"></span><em class="property">enumerator </em><code class="sig-name descname">SWITCHPORT_MODE_ACCESS</code><a class="headerlink" href="#_CPPv4N3eos17switchport_mode_t22SWITCHPORT_MODE_ACCESSE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Interface only has access to its access VLAN. </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt id="_CPPv4N3eos17switchport_mode_t21SWITCHPORT_MODE_TRUNKE">
+<span id="_CPPv3N3eos17switchport_mode_t21SWITCHPORT_MODE_TRUNKE"></span><span id="_CPPv2N3eos17switchport_mode_t21SWITCHPORT_MODE_TRUNKE"></span><span class="target" id="types_2eth__intf_8h_1a49aed978d7f0717ad759c03bf240db60a7e46af5731f0af620ec31346c11559bf"></span><em class="property">enumerator </em><code class="sig-name descname">SWITCHPORT_MODE_TRUNK</code><a class="headerlink" href="#_CPPv4N3eos17switchport_mode_t21SWITCHPORT_MODE_TRUNKE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Interface is in 802.1q mode (“trunk mode”). </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt id="_CPPv4N3eos17switchport_mode_t28SWITCHPORT_MODE_DOT1Q_TUNNELE">
+<span id="_CPPv3N3eos17switchport_mode_t28SWITCHPORT_MODE_DOT1Q_TUNNELE"></span><span id="_CPPv2N3eos17switchport_mode_t28SWITCHPORT_MODE_DOT1Q_TUNNELE"></span><span class="target" id="types_2eth__intf_8h_1a49aed978d7f0717ad759c03bf240db60a99112fbe7256f0e4900a50fb26118450"></span><em class="property">enumerator </em><code class="sig-name descname">SWITCHPORT_MODE_DOT1Q_TUNNEL</code><a class="headerlink" href="#_CPPv4N3eos17switchport_mode_t28SWITCHPORT_MODE_DOT1Q_TUNNELE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Interface is in 802.1ad mode (“QinQ mode”). </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt id="_CPPv4N3eos17switchport_mode_t19SWITCHPORT_MODE_TAPE">
+<span id="_CPPv3N3eos17switchport_mode_t19SWITCHPORT_MODE_TAPE"></span><span id="_CPPv2N3eos17switchport_mode_t19SWITCHPORT_MODE_TAPE"></span><span class="target" id="types_2eth__intf_8h_1a49aed978d7f0717ad759c03bf240db60a05a0429aa649c84a5fd82ee1485032a3"></span><em class="property">enumerator </em><code class="sig-name descname">SWITCHPORT_MODE_TAP</code><a class="headerlink" href="#_CPPv4N3eos17switchport_mode_t19SWITCHPORT_MODE_TAPE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Interface is in tap mode (“span mode”). </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt id="_CPPv4N3eos17switchport_mode_t20SWITCHPORT_MODE_TOOLE">
+<span id="_CPPv3N3eos17switchport_mode_t20SWITCHPORT_MODE_TOOLE"></span><span id="_CPPv2N3eos17switchport_mode_t20SWITCHPORT_MODE_TOOLE"></span><span class="target" id="types_2eth__intf_8h_1a49aed978d7f0717ad759c03bf240db60a57b7130410b2345b3014298882d24f1a"></span><em class="property">enumerator </em><code class="sig-name descname">SWITCHPORT_MODE_TOOL</code><a class="headerlink" href="#_CPPv4N3eos17switchport_mode_t20SWITCHPORT_MODE_TOOLE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Interface is a tool port (egress for a tap). </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt id="_CPPv4N3eos17switchport_mode_t22SWITCHPORT_MODE_ROUTEDE">
+<span id="_CPPv3N3eos17switchport_mode_t22SWITCHPORT_MODE_ROUTEDE"></span><span id="_CPPv2N3eos17switchport_mode_t22SWITCHPORT_MODE_ROUTEDE"></span><span class="target" id="types_2eth__intf_8h_1a49aed978d7f0717ad759c03bf240db60ad2c515406089c1fe3f3f3025d4721203"></span><em class="property">enumerator </em><code class="sig-name descname">SWITCHPORT_MODE_ROUTED</code><a class="headerlink" href="#_CPPv4N3eos17switchport_mode_t22SWITCHPORT_MODE_ROUTEDE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Interface is routed (“no switchport”). </p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</dd></dl>
+
+</div>
+</div>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#"><strong>eth_intf</strong></a><ul>
+<li><a class="reference internal" href="#type-definitions-in-eth-intf">Type definitions in <strong>eth_intf</strong></a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="eth.html"
+                        title="previous chapter"><strong>eth</strong></a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="eth_lag_intf.html"
+                        title="next chapter"><strong>eth_lag_intf</strong></a></p>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="eth_lag_intf.html" title="eth_lag_intf"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="eth.html" title="eth"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Arista EOS SDK 2.23.4 reference</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href=""><strong>eth_intf</strong></a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2014, Arista Networks.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.4.3.
+    </div>
+  </body>
+</html>

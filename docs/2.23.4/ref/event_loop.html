@@ -1,0 +1,248 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>event_loop &#8212; Arista EOS SDK 2.23.4 reference</title>
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/eossdk.css" type="text/css" />
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="exception" href="exception.html" />
+    <link rel="prev" title="eth_phy_intf" href="eth_phy_intf.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="exception.html" title="exception"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="eth_phy_intf.html" title="eth_phy_intf"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Arista EOS SDK 2.23.4 reference</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href=""><strong>event_loop</strong></a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="event-loop">
+<h1><strong>event_loop</strong><a class="headerlink" href="#event-loop" title="Permalink to this headline">¶</a></h1>
+<p>Externalized event loop for alternate agent lifecycles.</p>
+<p>This module exposes the SDK’s underlying event loop, which enables programs to be written without using the <code class="docutils literal notranslate"><span class="pre">sdk.main_loop()</span></code> infrastructure.</p>
+<p>The first way this module can be used is by writing SDK programs as scripts (instead of long-running agents), by grabbing an instance of the loop via <code class="docutils literal notranslate"><span class="pre">sdk.get_event_loop()</span></code>. Then grab any managers your script needs, and then call <code class="docutils literal notranslate"><span class="pre">loop-&gt;wait_for_initialized()</span></code>. At this point all managers are ready for use. To yield to the event loop at any time, call <code class="docutils literal notranslate"><span class="pre">loop-&gt;run()</span></code>, which gives the SDK time to synchronize with Sysdb and the rest of the system. When your script is finished, call <code class="docutils literal notranslate"><span class="pre">loop-&gt;flush()</span></code> to make sure all writes you’ve performed have been committed to Sysdb. For an example, see examples/NexthopGroupModifierScript.cpp.</p>
+<p>The other way this can be used is by integrating the event_loop_handler in an external event loop, for example, by integrating into a Thrift loop. To do this, the SDK exposes various file descriptors that should be watched by calling into a <code class="docutils literal notranslate"><span class="pre">event_loop_handler</span></code> that your program should subclass. For an example, see examples/Thrift[Client|Server].cpp’s interaction with the <code class="docutils literal notranslate"><span class="pre">libevent_loop</span></code> defined in <code class="docutils literal notranslate"><span class="pre">libevent.h</span></code>. </p>
+<dl class="cpp type">
+<dt id="_CPPv43eos">
+<span id="_CPPv33eos"></span><span id="_CPPv23eos"></span><span id="eos"></span><span class="target" id="namespaceeos"></span><em class="property">namespace </em><code class="sig-name descname">eos</code><br /></dt>
+<dd><dl class="cpp class">
+<dt id="_CPPv4N3eos18event_loop_handlerE">
+<span id="_CPPv3N3eos18event_loop_handlerE"></span><span id="_CPPv2N3eos18event_loop_handlerE"></span><span id="eos::event_loop_handler"></span><span class="target" id="classeos_1_1event__loop__handler"></span><em class="property">class </em><code class="sig-name descname">event_loop_handler</code><a class="headerlink" href="#_CPPv4N3eos18event_loop_handlerE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><div class="docutils container">
+<em>#include &lt;event_loop.h&gt;</em></div>
+<p>Adapter to integrate the EOS event loop with an external event loop. Subclass this class to be able to handle the file descriptors and timers that the EOS code needs to dispatch to your event loop implementation.</p>
+<p>When you provide your implementation of <a class="reference internal" href="#classeos_1_1event__loop__handler"><span class="std std-ref">event_loop_handler</span></a> to the <a class="reference internal" href="#classeos_1_1event__loop"><span class="std std-ref">event_loop</span></a>, EOS code will start calling the watch_* methods to (un)register its interest in various file descriptors, so that you can hook them up into your event loop implementation. When those file descriptors become ready, you must call the corresponding on_*() method in a timely fashion for the EOS code to run.</p>
+<p>The on_*() methods are all non-blocking methods. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
+<dl class="cpp function">
+<dt id="_CPPv4N3eos18event_loop_handlerD0Ev">
+<span id="_CPPv3N3eos18event_loop_handlerD0Ev"></span><span id="_CPPv2N3eos18event_loop_handlerD0Ev"></span><span id="eos::event_loop_handler::~event_loop_handler"></span><span class="target" id="classeos_1_1event__loop__handler_1ac6b8d910df508c510af1b66ed3dcfdcf"></span><em class="property">inline</em> <em class="property">virtual</em> <code class="sig-name descname">~event_loop_handler</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos18event_loop_handlerD0Ev" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos18event_loop_handler11on_readableEi">
+<span id="_CPPv3N3eos18event_loop_handler11on_readableEi"></span><span id="_CPPv2N3eos18event_loop_handler11on_readableEi"></span><span id="eos::event_loop_handler::on_readable__i"></span><span class="target" id="classeos_1_1event__loop__handler_1a1b55ea61199e01cd01bbc00cee364838"></span>void <code class="sig-name descname">on_readable</code><span class="sig-paren">(</span>int <em>fd</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos18event_loop_handler11on_readableEi" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Notifies the EOS event loop that the file descriptor is readable. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos18event_loop_handler11on_writableEi">
+<span id="_CPPv3N3eos18event_loop_handler11on_writableEi"></span><span id="_CPPv2N3eos18event_loop_handler11on_writableEi"></span><span id="eos::event_loop_handler::on_writable__i"></span><span class="target" id="classeos_1_1event__loop__handler_1abdd018ad544b7b3a8b76d46a67511ab7"></span>void <code class="sig-name descname">on_writable</code><span class="sig-paren">(</span>int <em>fd</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos18event_loop_handler11on_writableEi" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Notifies the EOS event loop that the file descriptor is writable. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos18event_loop_handler12on_exceptionEi">
+<span id="_CPPv3N3eos18event_loop_handler12on_exceptionEi"></span><span id="_CPPv2N3eos18event_loop_handler12on_exceptionEi"></span><span id="eos::event_loop_handler::on_exception__i"></span><span class="target" id="classeos_1_1event__loop__handler_1aba2b966957fbac9c7268f6a2643340ef"></span>void <code class="sig-name descname">on_exception</code><span class="sig-paren">(</span>int <em>fd</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos18event_loop_handler12on_exceptionEi" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Notifies the EOS event loop that the file descriptor has exceptions. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos18event_loop_handler10on_timeoutEv">
+<span id="_CPPv3N3eos18event_loop_handler10on_timeoutEv"></span><span id="_CPPv2N3eos18event_loop_handler10on_timeoutEv"></span><span id="eos::event_loop_handler::on_timeout"></span><span class="target" id="classeos_1_1event__loop__handler_1af9bd4b19989a9c8c64a6b0c0f9348bdc"></span>void <code class="sig-name descname">on_timeout</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos18event_loop_handler10on_timeoutEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Notifies the EOS event loop that its next timer has expired. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos18event_loop_handler14watch_readableEib">
+<span id="_CPPv3N3eos18event_loop_handler14watch_readableEib"></span><span id="_CPPv2N3eos18event_loop_handler14watch_readableEib"></span><span id="eos::event_loop_handler::watch_readable__i.b"></span><span class="target" id="classeos_1_1event__loop__handler_1aa347916f6c74320b706c9b46e12dc3eb"></span><em class="property">virtual</em> void <code class="sig-name descname">watch_readable</code><span class="sig-paren">(</span>int <em>fd</em>, bool <em>interested</em><span class="sig-paren">)</span> = 0<a class="headerlink" href="#_CPPv4N3eos18event_loop_handler14watch_readableEib" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Called by EOS to (un)register its interest in a fd being readable. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos18event_loop_handler14watch_writableEib">
+<span id="_CPPv3N3eos18event_loop_handler14watch_writableEib"></span><span id="_CPPv2N3eos18event_loop_handler14watch_writableEib"></span><span id="eos::event_loop_handler::watch_writable__i.b"></span><span class="target" id="classeos_1_1event__loop__handler_1a7be327e9cb34b9acbce5a0696206f360"></span><em class="property">virtual</em> void <code class="sig-name descname">watch_writable</code><span class="sig-paren">(</span>int <em>fd</em>, bool <em>interested</em><span class="sig-paren">)</span> = 0<a class="headerlink" href="#_CPPv4N3eos18event_loop_handler14watch_writableEib" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Called by EOS to (un)register its interest in a fd being writable. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos18event_loop_handler15watch_exceptionEib">
+<span id="_CPPv3N3eos18event_loop_handler15watch_exceptionEib"></span><span id="_CPPv2N3eos18event_loop_handler15watch_exceptionEib"></span><span id="eos::event_loop_handler::watch_exception__i.b"></span><span class="target" id="classeos_1_1event__loop__handler_1aabc4689e15506c0c73f711b4f5e2c668"></span><em class="property">virtual</em> void <code class="sig-name descname">watch_exception</code><span class="sig-paren">(</span>int <em>fd</em>, bool <em>interested</em><span class="sig-paren">)</span> = 0<a class="headerlink" href="#_CPPv4N3eos18event_loop_handler15watch_exceptionEib" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Called by EOS to (un)register its interest in a fd having exceptions. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos18event_loop_handler15timeout_time_isE7timeval">
+<span id="_CPPv3N3eos18event_loop_handler15timeout_time_isE7timeval"></span><span id="_CPPv2N3eos18event_loop_handler15timeout_time_isE7timeval"></span><span id="eos::event_loop_handler::timeout_time_is__timeval"></span><span class="target" id="classeos_1_1event__loop__handler_1a4a49df180a2c9a4e575eda56f962b6e2"></span><em class="property">virtual</em> void <code class="sig-name descname">timeout_time_is</code><span class="sig-paren">(</span><em class="property">struct</em> timeval <em>deadline</em><span class="sig-paren">)</span> = 0<a class="headerlink" href="#_CPPv4N3eos18event_loop_handler15timeout_time_isE7timeval" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Called to register when is the next timeout that EOS code must handle. The deadline passed in argument is relative to now (so for instance if the next timer the EOS code need to handle is in 5 seconds from now, then the deadline will be 5 seconds, not “now + 5s”). If this function is called multiple times, subsequent calls should override the timeout set by previous calls. In other words, there is only one timeout associated with this function, instead of each call creating a new timeout. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="cpp class">
+<dt id="_CPPv4N3eos10event_loopE">
+<span id="_CPPv3N3eos10event_loopE"></span><span id="_CPPv2N3eos10event_loopE"></span><span id="eos::event_loop"></span><span class="target" id="classeos_1_1event__loop"></span><em class="property">class </em><code class="sig-name descname">event_loop</code><a class="headerlink" href="#_CPPv4N3eos10event_loopE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><div class="docutils container">
+<em>#include &lt;event_loop.h&gt;</em></div>
+<p>The EOS event loop.</p>
+<p>This class represents the event loop that is built into EOS code. It can be used to run this loop on demand, or to integrate this event loop with an external event loop, such as that provided by libevent or other third-party code. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
+<dl class="cpp function">
+<dt id="_CPPv4N3eos10event_loopD0Ev">
+<span id="_CPPv3N3eos10event_loopD0Ev"></span><span id="_CPPv2N3eos10event_loopD0Ev"></span><span id="eos::event_loop::~event_loop"></span><span class="target" id="classeos_1_1event__loop_1aadaa7396af242b0159b6750c19d05bd3"></span><code class="sig-name descname">~event_loop</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos10event_loopD0Ev" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos10event_loop20wait_for_initializedEv">
+<span id="_CPPv3NK3eos10event_loop20wait_for_initializedEv"></span><span id="_CPPv2NK3eos10event_loop20wait_for_initializedEv"></span><span id="eos::event_loop::wait_for_initializedC"></span><span class="target" id="classeos_1_1event__loop_1a8da536eaf330bdb19e1592807350830d"></span>void <code class="sig-name descname">wait_for_initialized</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos10event_loop20wait_for_initializedEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Wait for all managers to be initialized. Generally called right after creating the <a class="reference internal" href="#classeos_1_1event__loop"><span class="std std-ref">event_loop</span></a>, as an alternative to creating an <a class="reference internal" href="agent.html#classeos_1_1agent__handler"><span class="std std-ref">agent_handler</span></a> and then waiting for on_initialized to be called.</p>
+<p>This method is a blocking method. It may block for any amount of time that is necessary to wait for the initial state sync from Sysdb. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos10event_loop3runE9seconds_t">
+<span id="_CPPv3NK3eos10event_loop3runE9seconds_t"></span><span id="_CPPv2NK3eos10event_loop3runE9seconds_t"></span><span id="eos::event_loop::run__seconds_tC"></span><span class="target" id="classeos_1_1event__loop_1ac11e6eef202d11b567c0a033c24962d6"></span>void <code class="sig-name descname">run</code><span class="sig-paren">(</span><a class="reference internal" href="base.html#_CPPv4N3eos9seconds_tE" title="eos::seconds_t">seconds_t</a> <em>duration</em> = 0<span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos10event_loop3runE9seconds_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Run the event loop for <code class="docutils literal notranslate"><span class="pre">duration</span></code> seconds. If no duration is specified, all pending events will be executed and control will be returned to the caller. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos10event_loop5flushEv">
+<span id="_CPPv3NK3eos10event_loop5flushEv"></span><span id="_CPPv2NK3eos10event_loop5flushEv"></span><span id="eos::event_loop::flushC"></span><span class="target" id="classeos_1_1event__loop_1ae1ae8bad7e0729fc64b08068efdfaacd"></span>void <code class="sig-name descname">flush</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos10event_loop5flushEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Drain the event loop of all outgoing writes.</p>
+<p>This function should be used in conjunction with EOS SDK scripts, and should be called before your agent exits. This ensures that all writes your script has performed will have made it to Sysdb. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos10event_loop16external_loop_isEP18event_loop_handler">
+<span id="_CPPv3N3eos10event_loop16external_loop_isEP18event_loop_handler"></span><span id="_CPPv2N3eos10event_loop16external_loop_isEP18event_loop_handler"></span><span id="eos::event_loop::external_loop_is__event_loop_handlerP"></span><span class="target" id="classeos_1_1event__loop_1a52dfe898951eba7bcf85b925a92af2a2"></span>void <code class="sig-name descname">external_loop_is</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos18event_loop_handlerE" title="eos::event_loop_handler">event_loop_handler</a> *<em>loop</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos10event_loop16external_loop_isEP18event_loop_handler" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Registers an external event loop to use instead of EOS’s.</p>
+<p>Upon calling this function, the EOS code will start registering its file descriptors and its next timeout with the given handler, and will start expecting that an external event loop will deliver events to the handler in a timely fashion.</p>
+<p>If <a class="reference internal" href="#classeos_1_1event__loop_1a8da536eaf330bdb19e1592807350830d"><span class="std std-ref">wait_for_initialized()</span></a> hasn’t been called already, this method is a blocking method. It may block for any amount of time that is necessary to wait for the initial state sync from Sysdb. </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-private-functions">Private Functions</p>
+<dl class="cpp function">
+<dt id="_CPPv4N3eos10event_loop10event_loopEP9mount_mgr">
+<span id="_CPPv3N3eos10event_loop10event_loopEP9mount_mgr"></span><span id="_CPPv2N3eos10event_loop10event_loopEP9mount_mgr"></span><span id="eos::event_loop::event_loop__mount_mgrP"></span><span class="target" id="classeos_1_1event__loop_1ad51b8071c626a12583fd278406d511e4"></span><em class="property">explicit</em> <code class="sig-name descname">event_loop</code><span class="sig-paren">(</span>mount_mgr*<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos10event_loop10event_loopEP9mount_mgr" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-private-members">Private Members</p>
+<dl class="cpp var">
+<dt>
+<span class="target" id="classeos_1_1event__loop_1a15859511bd2faaa6498414bb9f8be202"></span><code class="sig-name descname">event_loop</code></dt>
+<dd></dd></dl>
+
+<dl class="cpp var">
+<dt id="_CPPv4N3eos10event_loop10mount_mgr_E">
+<span id="_CPPv3N3eos10event_loop10mount_mgr_E"></span><span id="_CPPv2N3eos10event_loop10mount_mgr_E"></span><span id="eos::event_loop::mount_mgr___mount_mgrP"></span><span class="target" id="classeos_1_1event__loop_1a0d957f5b54b823e07d908e27b6c07480"></span>mount_mgr *<code class="sig-name descname">mount_mgr_</code><a class="headerlink" href="#_CPPv4N3eos10event_loop10mount_mgr_E" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp var">
+<dt id="_CPPv4N3eos10event_loop5loop_E">
+<span id="_CPPv3N3eos10event_loop5loop_E"></span><span id="_CPPv2N3eos10event_loop5loop_E"></span><span id="eos::event_loop::loop___event_loop_handlerP"></span><span class="target" id="classeos_1_1event__loop_1a0965adc86613c3230b700547fd8db276"></span><a class="reference internal" href="#_CPPv4N3eos18event_loop_handlerE" title="eos::event_loop_handler">event_loop_handler</a> *<code class="sig-name descname">loop_</code><a class="headerlink" href="#_CPPv4N3eos10event_loop5loop_E" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-friends">Friends</p>
+<dl class="friendclass">
+<dt>
+<em class="property">friend class</em> sdk</dt>
+</dl>
+
+</div>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="eth_phy_intf.html"
+                        title="previous chapter"><strong>eth_phy_intf</strong></a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="exception.html"
+                        title="next chapter"><strong>exception</strong></a></p>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="exception.html" title="exception"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="eth_phy_intf.html" title="eth_phy_intf"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Arista EOS SDK 2.23.4 reference</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href=""><strong>event_loop</strong></a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2014, Arista Networks.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.4.3.
+    </div>
+  </body>
+</html>

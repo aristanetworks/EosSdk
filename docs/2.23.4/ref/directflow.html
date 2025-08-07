@@ -1,0 +1,1468 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>directflow &#8212; Arista EOS SDK 2.23.4 reference</title>
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/eossdk.css" type="text/css" />
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="eapi" href="eapi.html" />
+    <link rel="prev" title="decap_group" href="decap_group.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="eapi.html" title="eapi"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="decap_group.html" title="decap_group"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Arista EOS SDK 2.23.4 reference</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href=""><strong>directflow</strong></a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="directflow">
+<h1><strong>directflow</strong><a class="headerlink" href="#directflow" title="Permalink to this headline">¶</a></h1>
+<p>DirectFlow management and status module</p>
+<p>DirectFlow is a software feature that allows OpenFlow-like rules to be programmed in switch hardware manually. Because a DirectFlow enabled switch allows normal forwarding features to operate, it gives operators a reliable way of building for the exceptional “just this one feature” parts of their network in a flexible manner. This module allows for the management of DirectFlow configuration as well as reactions to changes in status of flows. </p>
+<dl class="cpp type">
+<dt id="_CPPv43eos">
+<span id="_CPPv33eos"></span><span id="_CPPv23eos"></span><span id="eos"></span><span class="target" id="namespaceeos"></span><em class="property">namespace </em><code class="sig-name descname">eos</code><br /></dt>
+<dd><dl class="cpp class">
+<dt id="_CPPv4N3eos12flow_handlerE">
+<span id="_CPPv3N3eos12flow_handlerE"></span><span id="_CPPv2N3eos12flow_handlerE"></span><span id="eos::flow_handler"></span><span class="target" id="classeos_1_1flow__handler"></span><em class="property">class </em><code class="sig-name descname">flow_handler</code> : <em class="property">public</em> <a class="reference internal" href="acl.html#_CPPv43eos" title="eos">eos</a>::<a class="reference internal" href="base_handler.html#_CPPv4I00EN3eos12base_handlerE" title="eos::base_handler">base_handler</a>&lt;<a class="reference internal" href="#_CPPv4N3eos14directflow_mgrE" title="eos::directflow_mgr">directflow_mgr</a>, <a class="reference internal" href="#_CPPv4N3eos12flow_handlerE" title="eos::flow_handler">flow_handler</a>&gt;<a class="headerlink" href="#_CPPv4N3eos12flow_handlerE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><div class="docutils container">
+<em>#include &lt;directflow.h&gt;</em></div>
+<p>Flow handler.</p>
+<p>A flow handler is notified when the status of configured flows changes. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
+<dl class="cpp function">
+<dt id="_CPPv4N3eos12flow_handler12flow_handlerEP14directflow_mgr">
+<span id="_CPPv3N3eos12flow_handler12flow_handlerEP14directflow_mgr"></span><span id="_CPPv2N3eos12flow_handler12flow_handlerEP14directflow_mgr"></span><span id="eos::flow_handler::flow_handler__directflow_mgrP"></span><span class="target" id="classeos_1_1flow__handler_1a3c027232a4c7a427fc0b623266b6dbce"></span><em class="property">explicit</em> <code class="sig-name descname">flow_handler</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos14directflow_mgrE" title="eos::directflow_mgr">directflow_mgr</a>*<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos12flow_handler12flow_handlerEP14directflow_mgr" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos12flow_handler18get_directflow_mgrEv">
+<span id="_CPPv3NK3eos12flow_handler18get_directflow_mgrEv"></span><span id="_CPPv2NK3eos12flow_handler18get_directflow_mgrEv"></span><span id="eos::flow_handler::get_directflow_mgrC"></span><span class="target" id="classeos_1_1flow__handler_1a1f600bc6b6b7f79367b62ee1174910b7"></span><em class="property">inline</em> <a class="reference internal" href="#_CPPv4N3eos14directflow_mgrE" title="eos::directflow_mgr">directflow_mgr</a> *<code class="sig-name descname">get_directflow_mgr</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos12flow_handler18get_directflow_mgrEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos12flow_handler15watch_all_flowsEb">
+<span id="_CPPv3N3eos12flow_handler15watch_all_flowsEb"></span><span id="_CPPv2N3eos12flow_handler15watch_all_flowsEb"></span><span id="eos::flow_handler::watch_all_flows__b"></span><span class="target" id="classeos_1_1flow__handler_1a3883cb49a326c90ba5915cef6843af6d"></span>void <code class="sig-name descname">watch_all_flows</code><span class="sig-paren">(</span>bool<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos12flow_handler15watch_all_flowsEb" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Registers this class to receive updates on changes to flow state. Expects a boolean signifying whether notifications should be propagated to this instance or not. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos12flow_handler10watch_flowERKNSt6stringEb">
+<span id="_CPPv3N3eos12flow_handler10watch_flowERKNSt6stringEb"></span><span id="_CPPv2N3eos12flow_handler10watch_flowERKNSt6stringEb"></span><span id="eos::flow_handler::watch_flow__ssCR.b"></span><span class="target" id="classeos_1_1flow__handler_1af6bd98260d62ebb4029f94334d11a78f"></span>void <code class="sig-name descname">watch_flow</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::string <em class="property">const</em>&amp;, bool<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos12flow_handler10watch_flowERKNSt6stringEb" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Registers this class to receive updates on changes to flow state for the given flow name. Expects the name of the flow to watch and a boolean signifying whether notifications should be propagated to this instance or not. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos12flow_handler14on_flow_statusERKNSt6stringE13flow_status_t">
+<span id="_CPPv3N3eos12flow_handler14on_flow_statusERKNSt6stringE13flow_status_t"></span><span id="_CPPv2N3eos12flow_handler14on_flow_statusERKNSt6stringE13flow_status_t"></span><span id="eos::flow_handler::on_flow_status__ssCR.flow_status_t"></span><span class="target" id="classeos_1_1flow__handler_1a101bd781292e5aa5b10a54331a0206e5"></span><em class="property">virtual</em> void <code class="sig-name descname">on_flow_status</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::string <em class="property">const</em>&amp;, <a class="reference internal" href="#_CPPv4N3eos13flow_status_tE" title="eos::flow_status_t">flow_status_t</a><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos12flow_handler14on_flow_statusERKNSt6stringE13flow_status_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Handler called when flow status changes. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="cpp class">
+<dt id="_CPPv4N3eos17flow_entry_iter_tE">
+<span id="_CPPv3N3eos17flow_entry_iter_tE"></span><span id="_CPPv2N3eos17flow_entry_iter_tE"></span><span id="eos::flow_entry_iter_t"></span><span class="target" id="classeos_1_1flow__entry__iter__t"></span><em class="property">class </em><code class="sig-name descname">flow_entry_iter_t</code> : <em class="property">public</em> <a class="reference internal" href="acl.html#_CPPv43eos" title="eos">eos</a>::<a class="reference internal" href="iterator.html#_CPPv4I00EN3eos9iter_baseE" title="eos::iter_base">iter_base</a>&lt;<a class="reference internal" href="#_CPPv4N3eos12flow_entry_tE" title="eos::flow_entry_t">flow_entry_t</a>, flow_entry_iter_impl&gt;<a class="headerlink" href="#_CPPv4N3eos17flow_entry_iter_tE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><div class="docutils container">
+<em>#include &lt;directflow.h&gt;</em></div>
+<p>An iterator providing forwards iteration through the configured flows. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-private-functions">Private Functions</p>
+<dl class="cpp function">
+<dt id="_CPPv4N3eos17flow_entry_iter_t17flow_entry_iter_tEPC20flow_entry_iter_impl">
+<span id="_CPPv3N3eos17flow_entry_iter_t17flow_entry_iter_tEPC20flow_entry_iter_impl"></span><span id="_CPPv2N3eos17flow_entry_iter_t17flow_entry_iter_tEPC20flow_entry_iter_impl"></span><span id="eos::flow_entry_iter_t::flow_entry_iter_t__flow_entry_iter_implPC"></span><span class="target" id="classeos_1_1flow__entry__iter__t_1a2f70da1cf8ef469dbcc36ae3ea3cbb99"></span><em class="property">explicit</em> <code class="sig-name descname">flow_entry_iter_t</code><span class="sig-paren">(</span>flow_entry_iter_impl*<em class="property">const</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos17flow_entry_iter_t17flow_entry_iter_tEPC20flow_entry_iter_impl" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-friends">Friends</p>
+<dl class="friendclass">
+<dt>
+<em class="property">friend class</em> flow_entry_iter_impl</dt>
+</dl>
+
+</div>
+</dd></dl>
+
+<dl class="cpp class">
+<dt id="_CPPv4N3eos14directflow_mgrE">
+<span id="_CPPv3N3eos14directflow_mgrE"></span><span id="_CPPv2N3eos14directflow_mgrE"></span><span id="eos::directflow_mgr"></span><span class="target" id="classeos_1_1directflow__mgr"></span><em class="property">class </em><code class="sig-name descname">directflow_mgr</code> : <em class="property">public</em> <a class="reference internal" href="acl.html#_CPPv43eos" title="eos">eos</a>::<a class="reference internal" href="base_mgr.html#_CPPv4I00EN3eos8base_mgrE" title="eos::base_mgr">base_mgr</a>&lt;<a class="reference internal" href="#_CPPv4N3eos12flow_handlerE" title="eos::flow_handler">flow_handler</a>, <a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::string&gt;<a class="headerlink" href="#_CPPv4N3eos14directflow_mgrE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><div class="docutils container">
+<em>#include &lt;directflow.h&gt;</em></div>
+<p>DirectFlow configuration and status manager. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
+<dl class="cpp function">
+<dt id="_CPPv4N3eos14directflow_mgrD0Ev">
+<span id="_CPPv3N3eos14directflow_mgrD0Ev"></span><span id="_CPPv2N3eos14directflow_mgrD0Ev"></span><span id="eos::directflow_mgr::~directflow_mgr"></span><span class="target" id="classeos_1_1directflow__mgr_1a2f4f974e2105899e47657fe52df950c8"></span><em class="property">virtual</em> <code class="sig-name descname">~directflow_mgr</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos14directflow_mgrD0Ev" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos14directflow_mgr15flow_entry_iterEv">
+<span id="_CPPv3NK3eos14directflow_mgr15flow_entry_iterEv"></span><span id="_CPPv2NK3eos14directflow_mgr15flow_entry_iterEv"></span><span id="eos::directflow_mgr::flow_entry_iterC"></span><span class="target" id="classeos_1_1directflow__mgr_1a6bd7f8459789ec759dd55b6f4251995d"></span><em class="property">virtual</em> <a class="reference internal" href="#_CPPv4N3eos17flow_entry_iter_tE" title="eos::flow_entry_iter_t">flow_entry_iter_t</a> <code class="sig-name descname">flow_entry_iter</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em> = 0<a class="headerlink" href="#_CPPv4NK3eos14directflow_mgr15flow_entry_iterEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Iterate across all configured flows. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos14directflow_mgr6existsERKNSt6stringE">
+<span id="_CPPv3NK3eos14directflow_mgr6existsERKNSt6stringE"></span><span id="_CPPv2NK3eos14directflow_mgr6existsERKNSt6stringE"></span><span id="eos::directflow_mgr::exists__ssCRC"></span><span class="target" id="classeos_1_1directflow__mgr_1a3b942b48d80ecd9c98620a9c3aa919c9"></span><em class="property">virtual</em> bool <code class="sig-name descname">exists</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::string <em class="property">const</em>&amp;<span class="sig-paren">)</span> <em class="property">const</em> = 0<a class="headerlink" href="#_CPPv4NK3eos14directflow_mgr6existsERKNSt6stringE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Tests for existence of a flow entry with the given name. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos14directflow_mgr10flow_entryERKNSt6stringE">
+<span id="_CPPv3NK3eos14directflow_mgr10flow_entryERKNSt6stringE"></span><span id="_CPPv2NK3eos14directflow_mgr10flow_entryERKNSt6stringE"></span><span id="eos::directflow_mgr::flow_entry__ssCRC"></span><span class="target" id="classeos_1_1directflow__mgr_1a859826e061d329149d4c5f6b7863305b"></span><em class="property">virtual</em> <a class="reference internal" href="#_CPPv4N3eos12flow_entry_tE" title="eos::flow_entry_t">flow_entry_t</a> <code class="sig-name descname">flow_entry</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::string <em class="property">const</em>&amp;<span class="sig-paren">)</span> <em class="property">const</em> = 0<a class="headerlink" href="#_CPPv4NK3eos14directflow_mgr10flow_entryERKNSt6stringE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Return the flow entry with the given name. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos14directflow_mgr14flow_entry_setERK12flow_entry_t">
+<span id="_CPPv3N3eos14directflow_mgr14flow_entry_setERK12flow_entry_t"></span><span id="_CPPv2N3eos14directflow_mgr14flow_entry_setERK12flow_entry_t"></span><span id="eos::directflow_mgr::flow_entry_set__flow_entry_tCR"></span><span class="target" id="classeos_1_1directflow__mgr_1a396b63daefc83aa7f5b7e0beefbcb23c"></span><em class="property">virtual</em> void <code class="sig-name descname">flow_entry_set</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos12flow_entry_tE" title="eos::flow_entry_t">flow_entry_t</a> <em class="property">const</em>&amp;<span class="sig-paren">)</span> = 0<a class="headerlink" href="#_CPPv4N3eos14directflow_mgr14flow_entry_setERK12flow_entry_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Insert or update a flow. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos14directflow_mgr14flow_entry_delERKNSt6stringE">
+<span id="_CPPv3N3eos14directflow_mgr14flow_entry_delERKNSt6stringE"></span><span id="_CPPv2N3eos14directflow_mgr14flow_entry_delERKNSt6stringE"></span><span id="eos::directflow_mgr::flow_entry_del__ssCR"></span><span class="target" id="classeos_1_1directflow__mgr_1a437898024718f8dabc7a03e1525667e8"></span><em class="property">virtual</em> void <code class="sig-name descname">flow_entry_del</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::string <em class="property">const</em>&amp;<span class="sig-paren">)</span> = 0<a class="headerlink" href="#_CPPv4N3eos14directflow_mgr14flow_entry_delERKNSt6stringE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Delete a flow. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos14directflow_mgr11flow_statusERKNSt6stringE">
+<span id="_CPPv3NK3eos14directflow_mgr11flow_statusERKNSt6stringE"></span><span id="_CPPv2NK3eos14directflow_mgr11flow_statusERKNSt6stringE"></span><span id="eos::directflow_mgr::flow_status__ssCRC"></span><span class="target" id="classeos_1_1directflow__mgr_1a42251708939216ec88a43500a00bdded"></span><em class="property">virtual</em> <a class="reference internal" href="#_CPPv4N3eos13flow_status_tE" title="eos::flow_status_t">flow_status_t</a> <code class="sig-name descname">flow_status</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::string <em class="property">const</em> &amp;<em>name</em><span class="sig-paren">)</span> <em class="property">const</em> = 0<a class="headerlink" href="#_CPPv4NK3eos14directflow_mgr11flow_statusERKNSt6stringE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Return the status of the given flow. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos14directflow_mgr20flow_rejected_reasonERKNSt6stringE">
+<span id="_CPPv3NK3eos14directflow_mgr20flow_rejected_reasonERKNSt6stringE"></span><span id="_CPPv2NK3eos14directflow_mgr20flow_rejected_reasonERKNSt6stringE"></span><span id="eos::directflow_mgr::flow_rejected_reason__ssCRC"></span><span class="target" id="classeos_1_1directflow__mgr_1a20df166b4c3dbf9bb3b75ba603d976cb"></span><em class="property">virtual</em> <a class="reference internal" href="#_CPPv4N3eos22flow_rejected_reason_tE" title="eos::flow_rejected_reason_t">flow_rejected_reason_t</a> <code class="sig-name descname">flow_rejected_reason</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::string <em class="property">const</em> &amp;<em>name</em><span class="sig-paren">)</span> <em class="property">const</em> = 0<a class="headerlink" href="#_CPPv4NK3eos14directflow_mgr20flow_rejected_reasonERKNSt6stringE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>The reason a flow was not programmed. Only valid if the flow’s status is FLOW_REJECTED </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos14directflow_mgr13flow_countersERKNSt6stringE">
+<span id="_CPPv3NK3eos14directflow_mgr13flow_countersERKNSt6stringE"></span><span id="_CPPv2NK3eos14directflow_mgr13flow_countersERKNSt6stringE"></span><span id="eos::directflow_mgr::flow_counters__ssCRC"></span><span class="target" id="classeos_1_1directflow__mgr_1abca8bb4ad11a82b1945ff93d16caca79"></span><em class="property">virtual</em> <a class="reference internal" href="#_CPPv4N3eos15flow_counters_tE" title="eos::flow_counters_t">flow_counters_t</a> <code class="sig-name descname">flow_counters</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::string <em class="property">const</em> &amp;<em>name</em><span class="sig-paren">)</span> <em class="property">const</em> = 0<a class="headerlink" href="#_CPPv4NK3eos14directflow_mgr13flow_countersERKNSt6stringE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Return the counters for a flow. </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-protected-functions">Protected Functions</p>
+<dl class="cpp function">
+<dt id="_CPPv4N3eos14directflow_mgr14directflow_mgrEv">
+<span id="_CPPv3N3eos14directflow_mgr14directflow_mgrEv"></span><span id="_CPPv2N3eos14directflow_mgr14directflow_mgrEv"></span><span id="eos::directflow_mgr::directflow_mgr"></span><span class="target" id="classeos_1_1directflow__mgr_1a390437edae6b4f19dac7534014c02e3b"></span><code class="sig-name descname">directflow_mgr</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos14directflow_mgr14directflow_mgrEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-private-members">Private Members</p>
+<dl class="cpp var">
+<dt>
+<span class="target" id="classeos_1_1directflow__mgr_1a948bcb9e97c540a9a9a211dc5f325f05"></span><code class="sig-name descname">directflow_mgr</code></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-friends">Friends</p>
+<dl class="friendclass">
+<dt>
+<em class="property">friend class</em> flow_handler</dt>
+</dl>
+
+</div>
+</dd></dl>
+
+</dd></dl>
+
+<div class="section" id="type-definitions-in-directflow">
+<h2>Type definitions in <strong>directflow</strong><a class="headerlink" href="#type-definitions-in-directflow" title="Permalink to this headline">¶</a></h2>
+<dl class="cpp type">
+<dt>
+<span class="target" id="namespaceeos"></span><em class="property">namespace </em><code class="sig-name descname">eos</code><br /></dt>
+<dd><div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-typedefs">Typedefs</p>
+<dl class="cpp type">
+<dt id="_CPPv4N3eos15flow_priority_tE">
+<span id="_CPPv3N3eos15flow_priority_tE"></span><span id="_CPPv2N3eos15flow_priority_tE"></span><span id="eos::flow_priority_t"></span><span class="target" id="types_2directflow_8h_1a917aeadcaebc34823e4809ac4014d452"></span><em class="property">typedef </em>uint16_t <code class="sig-name descname">flow_priority_t</code><a class="headerlink" href="#_CPPv4N3eos15flow_priority_tE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp type">
+<dt id="_CPPv4N3eos10eth_type_tE">
+<span id="_CPPv3N3eos10eth_type_tE"></span><span id="_CPPv2N3eos10eth_type_tE"></span><span id="eos::eth_type_t"></span><span class="target" id="types_2directflow_8h_1a39b92feac90918df189b2e867ece3059"></span><em class="property">typedef </em>uint16_t <code class="sig-name descname">eth_type_t</code><a class="headerlink" href="#_CPPv4N3eos10eth_type_tE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp type">
+<dt id="_CPPv4N3eos5cos_tE">
+<span id="_CPPv3N3eos5cos_tE"></span><span id="_CPPv2N3eos5cos_tE"></span><span id="eos::cos_t"></span><span class="target" id="types_2directflow_8h_1acd6ad59f6483e0c4daed04b2a023d5f4"></span><em class="property">typedef </em>uint8_t <code class="sig-name descname">cos_t</code><a class="headerlink" href="#_CPPv4N3eos5cos_tE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-enums">Enums</p>
+<dl class="cpp enum">
+<dt id="_CPPv4N3eos13flow_status_tE">
+<span id="_CPPv3N3eos13flow_status_tE"></span><span id="_CPPv2N3eos13flow_status_tE"></span><span class="target" id="types_2directflow_8h_1ae24b73fa92de869d726f4af798e005f9"></span><em class="property">enum </em><code class="sig-name descname">flow_status_t</code><a class="headerlink" href="#_CPPv4N3eos13flow_status_tE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Flow entry status. </p>
+<p><em>Values:</em></p>
+<dl class="cpp enumerator">
+<dt id="_CPPv4N3eos13flow_status_t19FLOW_STATUS_UNKNOWNE">
+<span id="_CPPv3N3eos13flow_status_t19FLOW_STATUS_UNKNOWNE"></span><span id="_CPPv2N3eos13flow_status_t19FLOW_STATUS_UNKNOWNE"></span><span class="target" id="types_2directflow_8h_1ae24b73fa92de869d726f4af798e005f9ad293ecb187a8ce031f4b956be519dfcf"></span><em class="property">enumerator </em><code class="sig-name descname">FLOW_STATUS_UNKNOWN</code><a class="headerlink" href="#_CPPv4N3eos13flow_status_t19FLOW_STATUS_UNKNOWNE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt id="_CPPv4N3eos13flow_status_t12FLOW_CREATEDE">
+<span id="_CPPv3N3eos13flow_status_t12FLOW_CREATEDE"></span><span id="_CPPv2N3eos13flow_status_t12FLOW_CREATEDE"></span><span class="target" id="types_2directflow_8h_1ae24b73fa92de869d726f4af798e005f9a7b9b40011174782e9e3d8f78e0a979fb"></span><em class="property">enumerator </em><code class="sig-name descname">FLOW_CREATED</code><a class="headerlink" href="#_CPPv4N3eos13flow_status_t12FLOW_CREATEDE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Flow created or modified in hardware. </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt id="_CPPv4N3eos13flow_status_t12FLOW_DELETEDE">
+<span id="_CPPv3N3eos13flow_status_t12FLOW_DELETEDE"></span><span id="_CPPv2N3eos13flow_status_t12FLOW_DELETEDE"></span><span class="target" id="types_2directflow_8h_1ae24b73fa92de869d726f4af798e005f9a35094a4cd3830f6f718f06619b2cbe90"></span><em class="property">enumerator </em><code class="sig-name descname">FLOW_DELETED</code><a class="headerlink" href="#_CPPv4N3eos13flow_status_t12FLOW_DELETEDE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Flow removed from hardware. </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt id="_CPPv4N3eos13flow_status_t13FLOW_REJECTEDE">
+<span id="_CPPv3N3eos13flow_status_t13FLOW_REJECTEDE"></span><span id="_CPPv2N3eos13flow_status_t13FLOW_REJECTEDE"></span><span class="target" id="types_2directflow_8h_1ae24b73fa92de869d726f4af798e005f9ad6d130ce13d039bd7971481211454358"></span><em class="property">enumerator </em><code class="sig-name descname">FLOW_REJECTED</code><a class="headerlink" href="#_CPPv4N3eos13flow_status_t13FLOW_REJECTEDE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Flow not created. </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt id="_CPPv4N3eos13flow_status_t12FLOW_PENDINGE">
+<span id="_CPPv3N3eos13flow_status_t12FLOW_PENDINGE"></span><span id="_CPPv2N3eos13flow_status_t12FLOW_PENDINGE"></span><span class="target" id="types_2directflow_8h_1ae24b73fa92de869d726f4af798e005f9acd2acc0b85a4e82738dd5b0b9b30c747"></span><em class="property">enumerator </em><code class="sig-name descname">FLOW_PENDING</code><a class="headerlink" href="#_CPPv4N3eos13flow_status_t12FLOW_PENDINGE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Flow requesting hardware resources. </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt id="_CPPv4N3eos13flow_status_t21FLOW_HW_TABLE_PENDINGE">
+<span id="_CPPv3N3eos13flow_status_t21FLOW_HW_TABLE_PENDINGE"></span><span id="_CPPv2N3eos13flow_status_t21FLOW_HW_TABLE_PENDINGE"></span><span class="target" id="types_2directflow_8h_1ae24b73fa92de869d726f4af798e005f9ae0760389df642bd079fa039f55fd5a1c"></span><em class="property">enumerator </em><code class="sig-name descname">FLOW_HW_TABLE_PENDING</code><a class="headerlink" href="#_CPPv4N3eos13flow_status_t21FLOW_HW_TABLE_PENDINGE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Flow request submitted for tcam resource entry. </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt id="_CPPv4N3eos13flow_status_t21FLOW_REQUEST_ACCEPTEDE">
+<span id="_CPPv3N3eos13flow_status_t21FLOW_REQUEST_ACCEPTEDE"></span><span id="_CPPv2N3eos13flow_status_t21FLOW_REQUEST_ACCEPTEDE"></span><span class="target" id="types_2directflow_8h_1ae24b73fa92de869d726f4af798e005f9ada65f4f4952bfbd57889b63135f0913c"></span><em class="property">enumerator </em><code class="sig-name descname">FLOW_REQUEST_ACCEPTED</code><a class="headerlink" href="#_CPPv4N3eos13flow_status_t21FLOW_REQUEST_ACCEPTEDE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Flow request accepted. </p>
+</dd></dl>
+
+</dd></dl>
+
+<dl class="cpp enum">
+<dt id="_CPPv4N3eos22flow_rejected_reason_tE">
+<span id="_CPPv3N3eos22flow_rejected_reason_tE"></span><span id="_CPPv2N3eos22flow_rejected_reason_tE"></span><span class="target" id="types_2directflow_8h_1a8882a5abb72c595db631c656ae1e5ffd"></span><em class="property">enum </em><code class="sig-name descname">flow_rejected_reason_t</code><a class="headerlink" href="#_CPPv4N3eos22flow_rejected_reason_tE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Reason why a flow was not successfully created in hardware. </p>
+<p><em>Values:</em></p>
+<dl class="cpp enumerator">
+<dt id="_CPPv4N3eos22flow_rejected_reason_t23FLOW_REJECTED_BAD_MATCHE">
+<span id="_CPPv3N3eos22flow_rejected_reason_t23FLOW_REJECTED_BAD_MATCHE"></span><span id="_CPPv2N3eos22flow_rejected_reason_t23FLOW_REJECTED_BAD_MATCHE"></span><span class="target" id="types_2directflow_8h_1a8882a5abb72c595db631c656ae1e5ffda3caae55f3d23dbe783419ab130398210"></span><em class="property">enumerator </em><code class="sig-name descname">FLOW_REJECTED_BAD_MATCH</code><a class="headerlink" href="#_CPPv4N3eos22flow_rejected_reason_t23FLOW_REJECTED_BAD_MATCHE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Flow not created due to bad match criteria. </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt id="_CPPv4N3eos22flow_rejected_reason_t24FLOW_REJECTED_BAD_ACTIONE">
+<span id="_CPPv3N3eos22flow_rejected_reason_t24FLOW_REJECTED_BAD_ACTIONE"></span><span id="_CPPv2N3eos22flow_rejected_reason_t24FLOW_REJECTED_BAD_ACTIONE"></span><span class="target" id="types_2directflow_8h_1a8882a5abb72c595db631c656ae1e5ffda92b524da8953a292ccf39b37de7b9f36"></span><em class="property">enumerator </em><code class="sig-name descname">FLOW_REJECTED_BAD_ACTION</code><a class="headerlink" href="#_CPPv4N3eos22flow_rejected_reason_t24FLOW_REJECTED_BAD_ACTIONE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Flow not created due to bad action criteria. </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt id="_CPPv4N3eos22flow_rejected_reason_t27FLOW_REJECTED_HW_TABLE_FULLE">
+<span id="_CPPv3N3eos22flow_rejected_reason_t27FLOW_REJECTED_HW_TABLE_FULLE"></span><span id="_CPPv2N3eos22flow_rejected_reason_t27FLOW_REJECTED_HW_TABLE_FULLE"></span><span class="target" id="types_2directflow_8h_1a8882a5abb72c595db631c656ae1e5ffda63b539b48e9ccf8740b0967c76c17b4f"></span><em class="property">enumerator </em><code class="sig-name descname">FLOW_REJECTED_HW_TABLE_FULL</code><a class="headerlink" href="#_CPPv4N3eos22flow_rejected_reason_t27FLOW_REJECTED_HW_TABLE_FULLE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Flow not created due to insufficient resources. </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt id="_CPPv4N3eos22flow_rejected_reason_t19FLOW_REJECTED_OTHERE">
+<span id="_CPPv3N3eos22flow_rejected_reason_t19FLOW_REJECTED_OTHERE"></span><span id="_CPPv2N3eos22flow_rejected_reason_t19FLOW_REJECTED_OTHERE"></span><span class="target" id="types_2directflow_8h_1a8882a5abb72c595db631c656ae1e5ffda9c97b277e94200bc52689ae99baf4245"></span><em class="property">enumerator </em><code class="sig-name descname">FLOW_REJECTED_OTHER</code><a class="headerlink" href="#_CPPv4N3eos22flow_rejected_reason_t19FLOW_REJECTED_OTHERE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Flow not created for some other reason. </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt id="_CPPv4N3eos22flow_rejected_reason_t33FLOW_REJECTED_ACTIONS_UNSUPPORTEDE">
+<span id="_CPPv3N3eos22flow_rejected_reason_t33FLOW_REJECTED_ACTIONS_UNSUPPORTEDE"></span><span id="_CPPv2N3eos22flow_rejected_reason_t33FLOW_REJECTED_ACTIONS_UNSUPPORTEDE"></span><span class="target" id="types_2directflow_8h_1a8882a5abb72c595db631c656ae1e5ffdaadf1bb17c638d4631b59e4b9d3a67eb8"></span><em class="property">enumerator </em><code class="sig-name descname">FLOW_REJECTED_ACTIONS_UNSUPPORTED</code><a class="headerlink" href="#_CPPv4N3eos22flow_rejected_reason_t33FLOW_REJECTED_ACTIONS_UNSUPPORTEDE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Flow not created due to unsupported action set. </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt id="_CPPv4N3eos22flow_rejected_reason_t35FLOW_REJECTED_TIMEOUT_NOT_SUPPORTEDE">
+<span id="_CPPv3N3eos22flow_rejected_reason_t35FLOW_REJECTED_TIMEOUT_NOT_SUPPORTEDE"></span><span id="_CPPv2N3eos22flow_rejected_reason_t35FLOW_REJECTED_TIMEOUT_NOT_SUPPORTEDE"></span><span class="target" id="types_2directflow_8h_1a8882a5abb72c595db631c656ae1e5ffda4aeafb1e9f89534042085a11d872f4ff"></span><em class="property">enumerator </em><code class="sig-name descname">FLOW_REJECTED_TIMEOUT_NOT_SUPPORTED</code><a class="headerlink" href="#_CPPv4N3eos22flow_rejected_reason_t35FLOW_REJECTED_TIMEOUT_NOT_SUPPORTEDE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Flow not created due to unsupported timeouts set. </p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<dl class="cpp class">
+<dt id="_CPPv4N3eos22flow_match_field_set_tE">
+<span id="_CPPv3N3eos22flow_match_field_set_tE"></span><span id="_CPPv2N3eos22flow_match_field_set_tE"></span><span id="eos::flow_match_field_set_t"></span><span class="target" id="classeos_1_1flow__match__field__set__t"></span><em class="property">class </em><code class="sig-name descname">flow_match_field_set_t</code><a class="headerlink" href="#_CPPv4N3eos22flow_match_field_set_tE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><div class="docutils container">
+<em>#include &lt;directflow.h&gt;</em></div>
+<p>Defines the set of fields to match on flow. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
+<dl class="cpp function">
+<dt id="_CPPv4N3eos22flow_match_field_set_t22flow_match_field_set_tEv">
+<span id="_CPPv3N3eos22flow_match_field_set_t22flow_match_field_set_tEv"></span><span id="_CPPv2N3eos22flow_match_field_set_t22flow_match_field_set_tEv"></span><span id="eos::flow_match_field_set_t::flow_match_field_set_t"></span><span class="target" id="classeos_1_1flow__match__field__set__t_1a0a56c98c3ecbe27f72bb854886e0a5ec"></span><code class="sig-name descname">flow_match_field_set_t</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos22flow_match_field_set_t22flow_match_field_set_tEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos22flow_match_field_set_t14input_intfs_isEb">
+<span id="_CPPv3N3eos22flow_match_field_set_t14input_intfs_isEb"></span><span id="_CPPv2N3eos22flow_match_field_set_t14input_intfs_isEb"></span><span id="eos::flow_match_field_set_t::input_intfs_is__b"></span><span class="target" id="classeos_1_1flow__match__field__set__t_1aa13a2eb930c25ad6655ee1da27c6ecdf"></span>void <code class="sig-name descname">input_intfs_is</code><span class="sig-paren">(</span>bool <em>enabled</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos22flow_match_field_set_t14input_intfs_isEb" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos22flow_match_field_set_t11input_intfsEv">
+<span id="_CPPv3NK3eos22flow_match_field_set_t11input_intfsEv"></span><span id="_CPPv2NK3eos22flow_match_field_set_t11input_intfsEv"></span><span id="eos::flow_match_field_set_t::input_intfsC"></span><span class="target" id="classeos_1_1flow__match__field__set__t_1a68c70c966dede487b3d8c0475bbb8e55"></span>bool <code class="sig-name descname">input_intfs</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos22flow_match_field_set_t11input_intfsEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos22flow_match_field_set_t10eth_src_isEb">
+<span id="_CPPv3N3eos22flow_match_field_set_t10eth_src_isEb"></span><span id="_CPPv2N3eos22flow_match_field_set_t10eth_src_isEb"></span><span id="eos::flow_match_field_set_t::eth_src_is__b"></span><span class="target" id="classeos_1_1flow__match__field__set__t_1a218180a90498449698f34dc5edf877c2"></span>void <code class="sig-name descname">eth_src_is</code><span class="sig-paren">(</span>bool <em>enabled</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos22flow_match_field_set_t10eth_src_isEb" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos22flow_match_field_set_t7eth_srcEv">
+<span id="_CPPv3NK3eos22flow_match_field_set_t7eth_srcEv"></span><span id="_CPPv2NK3eos22flow_match_field_set_t7eth_srcEv"></span><span id="eos::flow_match_field_set_t::eth_srcC"></span><span class="target" id="classeos_1_1flow__match__field__set__t_1a49f4909b08cb93f7a57c20056c8d6425"></span>bool <code class="sig-name descname">eth_src</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos22flow_match_field_set_t7eth_srcEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos22flow_match_field_set_t10eth_dst_isEb">
+<span id="_CPPv3N3eos22flow_match_field_set_t10eth_dst_isEb"></span><span id="_CPPv2N3eos22flow_match_field_set_t10eth_dst_isEb"></span><span id="eos::flow_match_field_set_t::eth_dst_is__b"></span><span class="target" id="classeos_1_1flow__match__field__set__t_1a1623cd425ec46ad0a30f80d45f8988f8"></span>void <code class="sig-name descname">eth_dst_is</code><span class="sig-paren">(</span>bool <em>enabled</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos22flow_match_field_set_t10eth_dst_isEb" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos22flow_match_field_set_t7eth_dstEv">
+<span id="_CPPv3NK3eos22flow_match_field_set_t7eth_dstEv"></span><span id="_CPPv2NK3eos22flow_match_field_set_t7eth_dstEv"></span><span id="eos::flow_match_field_set_t::eth_dstC"></span><span class="target" id="classeos_1_1flow__match__field__set__t_1a19c411a1b412bf5fc2f2cb8222565490"></span>bool <code class="sig-name descname">eth_dst</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos22flow_match_field_set_t7eth_dstEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos22flow_match_field_set_t11eth_type_isEb">
+<span id="_CPPv3N3eos22flow_match_field_set_t11eth_type_isEb"></span><span id="_CPPv2N3eos22flow_match_field_set_t11eth_type_isEb"></span><span id="eos::flow_match_field_set_t::eth_type_is__b"></span><span class="target" id="classeos_1_1flow__match__field__set__t_1a0baea7dcc660462eaedd54e70e8b11ff"></span>void <code class="sig-name descname">eth_type_is</code><span class="sig-paren">(</span>bool <em>enabled</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos22flow_match_field_set_t11eth_type_isEb" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos22flow_match_field_set_t8eth_typeEv">
+<span id="_CPPv3NK3eos22flow_match_field_set_t8eth_typeEv"></span><span id="_CPPv2NK3eos22flow_match_field_set_t8eth_typeEv"></span><span id="eos::flow_match_field_set_t::eth_typeC"></span><span class="target" id="classeos_1_1flow__match__field__set__t_1a8118c254eaff46e45cf6092f81746bd3"></span>bool <code class="sig-name descname">eth_type</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos22flow_match_field_set_t8eth_typeEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos22flow_match_field_set_t10vlan_id_isEb">
+<span id="_CPPv3N3eos22flow_match_field_set_t10vlan_id_isEb"></span><span id="_CPPv2N3eos22flow_match_field_set_t10vlan_id_isEb"></span><span id="eos::flow_match_field_set_t::vlan_id_is__b"></span><span class="target" id="classeos_1_1flow__match__field__set__t_1aa1e19f651035fdb1ddce23903189d8fb"></span>void <code class="sig-name descname">vlan_id_is</code><span class="sig-paren">(</span>bool <em>enabled</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos22flow_match_field_set_t10vlan_id_isEb" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos22flow_match_field_set_t7vlan_idEv">
+<span id="_CPPv3NK3eos22flow_match_field_set_t7vlan_idEv"></span><span id="_CPPv2NK3eos22flow_match_field_set_t7vlan_idEv"></span><span id="eos::flow_match_field_set_t::vlan_idC"></span><span class="target" id="classeos_1_1flow__match__field__set__t_1a628c50ded68348abd69b8b2c210d787b"></span>bool <code class="sig-name descname">vlan_id</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos22flow_match_field_set_t7vlan_idEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos22flow_match_field_set_t6cos_isEb">
+<span id="_CPPv3N3eos22flow_match_field_set_t6cos_isEb"></span><span id="_CPPv2N3eos22flow_match_field_set_t6cos_isEb"></span><span id="eos::flow_match_field_set_t::cos_is__b"></span><span class="target" id="classeos_1_1flow__match__field__set__t_1a2812e5655cb573fafe8e7dbafe68e051"></span>void <code class="sig-name descname">cos_is</code><span class="sig-paren">(</span>bool <em>enabled</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos22flow_match_field_set_t6cos_isEb" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos22flow_match_field_set_t3cosEv">
+<span id="_CPPv3NK3eos22flow_match_field_set_t3cosEv"></span><span id="_CPPv2NK3eos22flow_match_field_set_t3cosEv"></span><span id="eos::flow_match_field_set_t::cosC"></span><span class="target" id="classeos_1_1flow__match__field__set__t_1aaf1bdf1c22180a810fc4fac7ffe0c350"></span>bool <code class="sig-name descname">cos</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos22flow_match_field_set_t3cosEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos22flow_match_field_set_t9ip_src_isEb">
+<span id="_CPPv3N3eos22flow_match_field_set_t9ip_src_isEb"></span><span id="_CPPv2N3eos22flow_match_field_set_t9ip_src_isEb"></span><span id="eos::flow_match_field_set_t::ip_src_is__b"></span><span class="target" id="classeos_1_1flow__match__field__set__t_1a9720f095cc06c8903401877911791d13"></span>void <code class="sig-name descname">ip_src_is</code><span class="sig-paren">(</span>bool <em>enabled</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos22flow_match_field_set_t9ip_src_isEb" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos22flow_match_field_set_t6ip_srcEv">
+<span id="_CPPv3NK3eos22flow_match_field_set_t6ip_srcEv"></span><span id="_CPPv2NK3eos22flow_match_field_set_t6ip_srcEv"></span><span id="eos::flow_match_field_set_t::ip_srcC"></span><span class="target" id="classeos_1_1flow__match__field__set__t_1a0ce1ba60dc8ea0de4d43396cc4b70c31"></span>bool <code class="sig-name descname">ip_src</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos22flow_match_field_set_t6ip_srcEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos22flow_match_field_set_t9ip_dst_isEb">
+<span id="_CPPv3N3eos22flow_match_field_set_t9ip_dst_isEb"></span><span id="_CPPv2N3eos22flow_match_field_set_t9ip_dst_isEb"></span><span id="eos::flow_match_field_set_t::ip_dst_is__b"></span><span class="target" id="classeos_1_1flow__match__field__set__t_1a95abbfec17b3a208e4b0719eed947bd2"></span>void <code class="sig-name descname">ip_dst_is</code><span class="sig-paren">(</span>bool <em>enabled</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos22flow_match_field_set_t9ip_dst_isEb" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos22flow_match_field_set_t6ip_dstEv">
+<span id="_CPPv3NK3eos22flow_match_field_set_t6ip_dstEv"></span><span id="_CPPv2NK3eos22flow_match_field_set_t6ip_dstEv"></span><span id="eos::flow_match_field_set_t::ip_dstC"></span><span class="target" id="classeos_1_1flow__match__field__set__t_1a55a6192256582aa3be8bcfb84f6cee25"></span>bool <code class="sig-name descname">ip_dst</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos22flow_match_field_set_t6ip_dstEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos22flow_match_field_set_teqERK22flow_match_field_set_t">
+<span id="_CPPv3NK3eos22flow_match_field_set_teqERK22flow_match_field_set_t"></span><span id="_CPPv2NK3eos22flow_match_field_set_teqERK22flow_match_field_set_t"></span><span id="eos::flow_match_field_set_t::eq-operator__flow_match_field_set_tCRC"></span><span class="target" id="classeos_1_1flow__match__field__set__t_1a780153ef132e204ed44d44f9a2ff7ffd"></span>bool <code class="sig-name descname">operator==</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos22flow_match_field_set_tE" title="eos::flow_match_field_set_t">flow_match_field_set_t</a> <em class="property">const</em> &amp;<em>other</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos22flow_match_field_set_teqERK22flow_match_field_set_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos22flow_match_field_set_tneERK22flow_match_field_set_t">
+<span id="_CPPv3NK3eos22flow_match_field_set_tneERK22flow_match_field_set_t"></span><span id="_CPPv2NK3eos22flow_match_field_set_tneERK22flow_match_field_set_t"></span><span id="eos::flow_match_field_set_t::neq-operator__flow_match_field_set_tCRC"></span><span class="target" id="classeos_1_1flow__match__field__set__t_1a68950120b7c0c9ff21f46b50709f58db"></span>bool <code class="sig-name descname">operator!=</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos22flow_match_field_set_tE" title="eos::flow_match_field_set_t">flow_match_field_set_t</a> <em class="property">const</em> &amp;<em>other</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos22flow_match_field_set_tneERK22flow_match_field_set_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos22flow_match_field_set_tltERK22flow_match_field_set_t">
+<span id="_CPPv3NK3eos22flow_match_field_set_tltERK22flow_match_field_set_t"></span><span id="_CPPv2NK3eos22flow_match_field_set_tltERK22flow_match_field_set_t"></span><span id="eos::flow_match_field_set_t::lt-operator__flow_match_field_set_tCRC"></span><span class="target" id="classeos_1_1flow__match__field__set__t_1af07102d33de0a0d313e5eb031a7a1229"></span>bool <code class="sig-name descname">operator&lt;</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos22flow_match_field_set_tE" title="eos::flow_match_field_set_t">flow_match_field_set_t</a> <em class="property">const</em> &amp;<em>other</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos22flow_match_field_set_tltERK22flow_match_field_set_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos22flow_match_field_set_t4hashEv">
+<span id="_CPPv3NK3eos22flow_match_field_set_t4hashEv"></span><span id="_CPPv2NK3eos22flow_match_field_set_t4hashEv"></span><span id="eos::flow_match_field_set_t::hashC"></span><span class="target" id="classeos_1_1flow__match__field__set__t_1a31dc65ca44f7759c7b64ad39983a71af"></span>uint32_t <code class="sig-name descname">hash</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos22flow_match_field_set_t4hashEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>The hash function for type <a class="reference internal" href="#classeos_1_1flow__match__field__set__t"><span class="std std-ref">flow_match_field_set_t</span></a>. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos22flow_match_field_set_t6mix_meER8hash_mix">
+<span id="_CPPv3NK3eos22flow_match_field_set_t6mix_meER8hash_mix"></span><span id="_CPPv2NK3eos22flow_match_field_set_t6mix_meER8hash_mix"></span><span id="eos::flow_match_field_set_t::mix_me__hash_mixRC"></span><span class="target" id="classeos_1_1flow__match__field__set__t_1a492001d4480db23adfb1be072d277f83"></span>void <code class="sig-name descname">mix_me</code><span class="sig-paren">(</span><a class="reference internal" href="hash_mix.html#_CPPv4N3eos8hash_mixE" title="eos::hash_mix">hash_mix</a> &amp;<em>h</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos22flow_match_field_set_t6mix_meER8hash_mix" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>The hash mix function for type <a class="reference internal" href="#classeos_1_1flow__match__field__set__t"><span class="std std-ref">flow_match_field_set_t</span></a>. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos22flow_match_field_set_t9to_stringEv">
+<span id="_CPPv3NK3eos22flow_match_field_set_t9to_stringEv"></span><span id="_CPPv2NK3eos22flow_match_field_set_t9to_stringEv"></span><span id="eos::flow_match_field_set_t::to_stringC"></span><span class="target" id="classeos_1_1flow__match__field__set__t_1aeaf8bbe34adee737d8dad1d7752c826c"></span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::string <code class="sig-name descname">to_string</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos22flow_match_field_set_t9to_stringEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Returns a string representation of the current object’s values. </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-private-members">Private Members</p>
+<dl class="cpp var">
+<dt id="_CPPv4N3eos22flow_match_field_set_t13match_bitset_E">
+<span id="_CPPv3N3eos22flow_match_field_set_t13match_bitset_E"></span><span id="_CPPv2N3eos22flow_match_field_set_t13match_bitset_E"></span><span id="eos::flow_match_field_set_t::match_bitset___uint32_t"></span><span class="target" id="classeos_1_1flow__match__field__set__t_1a746c249e2f54c2f25583c2a1c9bd6e88"></span>uint32_t <code class="sig-name descname">match_bitset_</code><a class="headerlink" href="#_CPPv4N3eos22flow_match_field_set_t13match_bitset_E" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-friends">Friends</p>
+<dl class="friendclass">
+<dt>
+<em class="property">friend class</em> flow_helper</dt>
+</dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos22flow_match_field_set_tlsERNSt7ostreamERK22flow_match_field_set_t">
+<span id="_CPPv3N3eos22flow_match_field_set_tlsERNSt7ostreamERK22flow_match_field_set_t"></span><span id="_CPPv2N3eos22flow_match_field_set_tlsERNSt7ostreamERK22flow_match_field_set_t"></span><span id="eos::flow_match_field_set_t::lshift-operator__osR.flow_match_field_set_tCR"></span><span class="target" id="classeos_1_1flow__match__field__set__t_1a1f39649b170b8b375d3f6597d5664e00"></span><em class="property">friend</em> <a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::ostream &amp;<code class="sig-name descname">operator&lt;&lt;</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::ostream &amp;<em>os</em>, <em class="property">const</em> <a class="reference internal" href="#_CPPv4N3eos22flow_match_field_set_tE" title="eos::flow_match_field_set_t">flow_match_field_set_t</a> &amp;<em>obj</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos22flow_match_field_set_tlsERNSt7ostreamERK22flow_match_field_set_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>A utility stream operator that adds a string representation of <a class="reference internal" href="#classeos_1_1flow__match__field__set__t"><span class="std std-ref">flow_match_field_set_t</span></a> to the ostream. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="cpp class">
+<dt id="_CPPv4N3eos12flow_match_tE">
+<span id="_CPPv3N3eos12flow_match_tE"></span><span id="_CPPv2N3eos12flow_match_tE"></span><span id="eos::flow_match_t"></span><span class="target" id="classeos_1_1flow__match__t"></span><em class="property">class </em><code class="sig-name descname">flow_match_t</code><a class="headerlink" href="#_CPPv4N3eos12flow_match_tE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><div class="docutils container">
+<em>#include &lt;directflow.h&gt;</em></div>
+<p>Match criteria for a flow. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
+<dl class="cpp function">
+<dt id="_CPPv4N3eos12flow_match_t12flow_match_tEv">
+<span id="_CPPv3N3eos12flow_match_t12flow_match_tEv"></span><span id="_CPPv2N3eos12flow_match_t12flow_match_tEv"></span><span id="eos::flow_match_t::flow_match_t"></span><span class="target" id="classeos_1_1flow__match__t_1a692638dbb0d097715042a981ab71de0b"></span><code class="sig-name descname">flow_match_t</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos12flow_match_t12flow_match_tEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos12flow_match_t12flow_match_tERK12flow_match_t">
+<span id="_CPPv3N3eos12flow_match_t12flow_match_tERK12flow_match_t"></span><span id="_CPPv2N3eos12flow_match_t12flow_match_tERK12flow_match_t"></span><span id="eos::flow_match_t::flow_match_t__flow_match_tCR"></span><span class="target" id="classeos_1_1flow__match__t_1a666f8d39e3d537c52b816fc88e6da431"></span><code class="sig-name descname">flow_match_t</code><span class="sig-paren">(</span><em class="property">const</em> <a class="reference internal" href="#_CPPv4N3eos12flow_match_t12flow_match_tERK12flow_match_t" title="eos::flow_match_t::flow_match_t">flow_match_t</a> &amp;<em>other</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos12flow_match_t12flow_match_tERK12flow_match_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos12flow_match_taSERK12flow_match_t">
+<span id="_CPPv3N3eos12flow_match_taSERK12flow_match_t"></span><span id="_CPPv2N3eos12flow_match_taSERK12flow_match_t"></span><span id="eos::flow_match_t::assign-operator__flow_match_tCR"></span><span class="target" id="classeos_1_1flow__match__t_1a8d67d32fa56d4fde3ed2403ddc0d3fef"></span><a class="reference internal" href="#_CPPv4N3eos12flow_match_tE" title="eos::flow_match_t">flow_match_t</a> &amp;<code class="sig-name descname">operator=</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos12flow_match_tE" title="eos::flow_match_t">flow_match_t</a> <em class="property">const</em> &amp;<em>other</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos12flow_match_taSERK12flow_match_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos12flow_match_t12flow_match_tERR12flow_match_t">
+<span id="_CPPv3N3eos12flow_match_t12flow_match_tERR12flow_match_t"></span><span id="_CPPv2N3eos12flow_match_t12flow_match_tERR12flow_match_t"></span><span id="eos::flow_match_t::flow_match_t__flow_match_tRR"></span><span class="target" id="classeos_1_1flow__match__t_1a1cd926c0f22f010c301a1d902ce0d3de"></span><code class="sig-name descname">flow_match_t</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos12flow_match_t12flow_match_tERR12flow_match_t" title="eos::flow_match_t::flow_match_t">flow_match_t</a> &amp;&amp;<em>other</em><span class="sig-paren">)</span> <em class="property">noexcept</em><a class="headerlink" href="#_CPPv4N3eos12flow_match_t12flow_match_tERR12flow_match_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos12flow_match_taSERR12flow_match_t">
+<span id="_CPPv3N3eos12flow_match_taSERR12flow_match_t"></span><span id="_CPPv2N3eos12flow_match_taSERR12flow_match_t"></span><span id="eos::flow_match_t::assign-operator__flow_match_tRR"></span><span class="target" id="classeos_1_1flow__match__t_1a0f10c6e795b248df49b611a6854d440a"></span><a class="reference internal" href="#_CPPv4N3eos12flow_match_tE" title="eos::flow_match_t">flow_match_t</a> &amp;<code class="sig-name descname">operator=</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos12flow_match_tE" title="eos::flow_match_t">flow_match_t</a> &amp;&amp;<em>other</em><span class="sig-paren">)</span> <em class="property">noexcept</em><a class="headerlink" href="#_CPPv4N3eos12flow_match_taSERR12flow_match_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos12flow_match_t15match_field_setEv">
+<span id="_CPPv3NK3eos12flow_match_t15match_field_setEv"></span><span id="_CPPv2NK3eos12flow_match_t15match_field_setEv"></span><span id="eos::flow_match_t::match_field_setC"></span><span class="target" id="classeos_1_1flow__match__t_1a9d86dddb31240f5a4bd36285a8512621"></span><a class="reference internal" href="#_CPPv4N3eos22flow_match_field_set_tE" title="eos::flow_match_field_set_t">flow_match_field_set_t</a> <code class="sig-name descname">match_field_set</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos12flow_match_t15match_field_setEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Getter for ‘match_field_set’: the fields to match on. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos12flow_match_t18match_field_set_isE22flow_match_field_set_t">
+<span id="_CPPv3N3eos12flow_match_t18match_field_set_isE22flow_match_field_set_t"></span><span id="_CPPv2N3eos12flow_match_t18match_field_set_isE22flow_match_field_set_t"></span><span id="eos::flow_match_t::match_field_set_is__flow_match_field_set_t"></span><span class="target" id="classeos_1_1flow__match__t_1a6f2fbf5998d26f666749714d0950ec68"></span>void <code class="sig-name descname">match_field_set_is</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos22flow_match_field_set_tE" title="eos::flow_match_field_set_t">flow_match_field_set_t</a> <em>match_field_set</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos12flow_match_t18match_field_set_isE22flow_match_field_set_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Setter for ‘match_field_set’. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos12flow_match_t11input_intfsEv">
+<span id="_CPPv3NK3eos12flow_match_t11input_intfsEv"></span><span id="_CPPv2NK3eos12flow_match_t11input_intfsEv"></span><span id="eos::flow_match_t::input_intfsC"></span><span class="target" id="classeos_1_1flow__match__t_1ab8cac9171f8fb55f7f6c8cccf52f8a55"></span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::set&lt;<a class="reference internal" href="intf.html#_CPPv4N3eos9intf_id_tE" title="eos::intf_id_t">intf_id_t</a>&gt; <em class="property">const</em> &amp;<code class="sig-name descname">input_intfs</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos12flow_match_t11input_intfsEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Getter for ‘input_intfs’: the input interfaces to match on. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos12flow_match_t14input_intfs_isERKNSt3setI9intf_id_tEE">
+<span id="_CPPv3N3eos12flow_match_t14input_intfs_isERKNSt3setI9intf_id_tEE"></span><span id="_CPPv2N3eos12flow_match_t14input_intfs_isERKNSt3setI9intf_id_tEE"></span><span id="eos::flow_match_t::input_intfs_is__std::set:intf_id_t:CR"></span><span class="target" id="classeos_1_1flow__match__t_1a94409eda0faa1f0423a83eedaf6c38f1"></span>void <code class="sig-name descname">input_intfs_is</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::set&lt;<a class="reference internal" href="intf.html#_CPPv4N3eos9intf_id_tE" title="eos::intf_id_t">intf_id_t</a>&gt; <em class="property">const</em> &amp;<em>input_intfs</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos12flow_match_t14input_intfs_isERKNSt3setI9intf_id_tEE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Setter for ‘input_intfs’. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos12flow_match_t14input_intfs_isERRNSt3setI9intf_id_tEE">
+<span id="_CPPv3N3eos12flow_match_t14input_intfs_isERRNSt3setI9intf_id_tEE"></span><span id="_CPPv2N3eos12flow_match_t14input_intfs_isERRNSt3setI9intf_id_tEE"></span><span id="eos::flow_match_t::input_intfs_is__std::set:intf_id_t:RR"></span><span class="target" id="classeos_1_1flow__match__t_1a16b69c1b1485c7f1976cc74dd2e892d9"></span>void <code class="sig-name descname">input_intfs_is</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::set&lt;<a class="reference internal" href="intf.html#_CPPv4N3eos9intf_id_tE" title="eos::intf_id_t">intf_id_t</a>&gt; &amp;&amp;<em>input_intfs</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos12flow_match_t14input_intfs_isERRNSt3setI9intf_id_tEE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Moving Setter for ‘input_intfs’. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos12flow_match_t14input_intf_setERK9intf_id_t">
+<span id="_CPPv3N3eos12flow_match_t14input_intf_setERK9intf_id_t"></span><span id="_CPPv2N3eos12flow_match_t14input_intf_setERK9intf_id_t"></span><span id="eos::flow_match_t::input_intf_set__intf_id_tCR"></span><span class="target" id="classeos_1_1flow__match__t_1aa94f3156369adfebbaa2ed1fab9e29a2"></span>void <code class="sig-name descname">input_intf_set</code><span class="sig-paren">(</span><a class="reference internal" href="intf.html#_CPPv4N3eos9intf_id_tE" title="eos::intf_id_t">intf_id_t</a> <em class="property">const</em> &amp;<em>value</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos12flow_match_t14input_intf_setERK9intf_id_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Inserts one input_intf of ‘value’ to the set. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos12flow_match_t14input_intf_setERR9intf_id_t">
+<span id="_CPPv3N3eos12flow_match_t14input_intf_setERR9intf_id_t"></span><span id="_CPPv2N3eos12flow_match_t14input_intf_setERR9intf_id_t"></span><span id="eos::flow_match_t::input_intf_set__intf_id_tRR"></span><span class="target" id="classeos_1_1flow__match__t_1aaafc87ee25d4b0c133fce03eccd7ad6d"></span>void <code class="sig-name descname">input_intf_set</code><span class="sig-paren">(</span><a class="reference internal" href="intf.html#_CPPv4N3eos9intf_id_tE" title="eos::intf_id_t">intf_id_t</a> &amp;&amp;<em>value</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos12flow_match_t14input_intf_setERR9intf_id_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Inserts one input_intf of ‘value’ to the set. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos12flow_match_t14input_intf_delERK9intf_id_t">
+<span id="_CPPv3N3eos12flow_match_t14input_intf_delERK9intf_id_t"></span><span id="_CPPv2N3eos12flow_match_t14input_intf_delERK9intf_id_t"></span><span id="eos::flow_match_t::input_intf_del__intf_id_tCR"></span><span class="target" id="classeos_1_1flow__match__t_1ae3fcf39680256eb144f69f7821d594c6"></span>void <code class="sig-name descname">input_intf_del</code><span class="sig-paren">(</span><a class="reference internal" href="intf.html#_CPPv4N3eos9intf_id_tE" title="eos::intf_id_t">intf_id_t</a> <em class="property">const</em> &amp;<em>value</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos12flow_match_t14input_intf_delERK9intf_id_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Deletes one input_intf of ‘value’ from the set. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos12flow_match_t7eth_srcEv">
+<span id="_CPPv3NK3eos12flow_match_t7eth_srcEv"></span><span id="_CPPv2NK3eos12flow_match_t7eth_srcEv"></span><span id="eos::flow_match_t::eth_srcC"></span><span class="target" id="classeos_1_1flow__match__t_1a5995121e2ce3b58ae7786da89f987a14"></span><a class="reference internal" href="eth.html#_CPPv4N3eos10eth_addr_tE" title="eos::eth_addr_t">eth_addr_t</a> <code class="sig-name descname">eth_src</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos12flow_match_t7eth_srcEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Getter for ‘eth_src’: the source Ethernet address to match on. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos12flow_match_t10eth_src_isE10eth_addr_t">
+<span id="_CPPv3N3eos12flow_match_t10eth_src_isE10eth_addr_t"></span><span id="_CPPv2N3eos12flow_match_t10eth_src_isE10eth_addr_t"></span><span id="eos::flow_match_t::eth_src_is__eth_addr_t"></span><span class="target" id="classeos_1_1flow__match__t_1ae0ac375b27ea6aabc8cad13269e2d7ae"></span>void <code class="sig-name descname">eth_src_is</code><span class="sig-paren">(</span><a class="reference internal" href="eth.html#_CPPv4N3eos10eth_addr_tE" title="eos::eth_addr_t">eth_addr_t</a> <em>eth_src</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos12flow_match_t10eth_src_isE10eth_addr_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Setter for ‘eth_src’. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos12flow_match_t10eth_src_isE10eth_addr_t10eth_addr_t">
+<span id="_CPPv3N3eos12flow_match_t10eth_src_isE10eth_addr_t10eth_addr_t"></span><span id="_CPPv2N3eos12flow_match_t10eth_src_isE10eth_addr_t10eth_addr_t"></span><span id="eos::flow_match_t::eth_src_is__eth_addr_t.eth_addr_t"></span><span class="target" id="classeos_1_1flow__match__t_1a772565420ad17407b7826cc70005e26b"></span>void <code class="sig-name descname">eth_src_is</code><span class="sig-paren">(</span><a class="reference internal" href="eth.html#_CPPv4N3eos10eth_addr_tE" title="eos::eth_addr_t">eth_addr_t</a> <em>src</em>, <a class="reference internal" href="eth.html#_CPPv4N3eos10eth_addr_tE" title="eos::eth_addr_t">eth_addr_t</a> <em>mask</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos12flow_match_t10eth_src_isE10eth_addr_t10eth_addr_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos12flow_match_t12eth_src_maskEv">
+<span id="_CPPv3NK3eos12flow_match_t12eth_src_maskEv"></span><span id="_CPPv2NK3eos12flow_match_t12eth_src_maskEv"></span><span id="eos::flow_match_t::eth_src_maskC"></span><span class="target" id="classeos_1_1flow__match__t_1ab77503c4036c751dcae3c1756d6e858b"></span><a class="reference internal" href="eth.html#_CPPv4N3eos10eth_addr_tE" title="eos::eth_addr_t">eth_addr_t</a> <code class="sig-name descname">eth_src_mask</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos12flow_match_t12eth_src_maskEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos12flow_match_t15eth_src_mask_isE10eth_addr_t">
+<span id="_CPPv3N3eos12flow_match_t15eth_src_mask_isE10eth_addr_t"></span><span id="_CPPv2N3eos12flow_match_t15eth_src_mask_isE10eth_addr_t"></span><span id="eos::flow_match_t::eth_src_mask_is__eth_addr_t"></span><span class="target" id="classeos_1_1flow__match__t_1a6ded974b9a8fa4aed28f7aef7a6e266d"></span>void <code class="sig-name descname">eth_src_mask_is</code><span class="sig-paren">(</span><a class="reference internal" href="eth.html#_CPPv4N3eos10eth_addr_tE" title="eos::eth_addr_t">eth_addr_t</a> <em>eth_src_mask</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos12flow_match_t15eth_src_mask_isE10eth_addr_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos12flow_match_t7eth_dstEv">
+<span id="_CPPv3NK3eos12flow_match_t7eth_dstEv"></span><span id="_CPPv2NK3eos12flow_match_t7eth_dstEv"></span><span id="eos::flow_match_t::eth_dstC"></span><span class="target" id="classeos_1_1flow__match__t_1a1e03901a66879900b0657c7696c83279"></span><a class="reference internal" href="eth.html#_CPPv4N3eos10eth_addr_tE" title="eos::eth_addr_t">eth_addr_t</a> <code class="sig-name descname">eth_dst</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos12flow_match_t7eth_dstEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Getter for ‘eth_dst’: the destination Ethernet address to match on. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos12flow_match_t10eth_dst_isE10eth_addr_t">
+<span id="_CPPv3N3eos12flow_match_t10eth_dst_isE10eth_addr_t"></span><span id="_CPPv2N3eos12flow_match_t10eth_dst_isE10eth_addr_t"></span><span id="eos::flow_match_t::eth_dst_is__eth_addr_t"></span><span class="target" id="classeos_1_1flow__match__t_1ac82de563928c27f71a407a257bc3f70a"></span>void <code class="sig-name descname">eth_dst_is</code><span class="sig-paren">(</span><a class="reference internal" href="eth.html#_CPPv4N3eos10eth_addr_tE" title="eos::eth_addr_t">eth_addr_t</a> <em>eth_dst</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos12flow_match_t10eth_dst_isE10eth_addr_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Setter for ‘eth_dst’. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos12flow_match_t10eth_dst_isE10eth_addr_t10eth_addr_t">
+<span id="_CPPv3N3eos12flow_match_t10eth_dst_isE10eth_addr_t10eth_addr_t"></span><span id="_CPPv2N3eos12flow_match_t10eth_dst_isE10eth_addr_t10eth_addr_t"></span><span id="eos::flow_match_t::eth_dst_is__eth_addr_t.eth_addr_t"></span><span class="target" id="classeos_1_1flow__match__t_1a44698b559331c1e89e3772fff005ae6a"></span>void <code class="sig-name descname">eth_dst_is</code><span class="sig-paren">(</span><a class="reference internal" href="eth.html#_CPPv4N3eos10eth_addr_tE" title="eos::eth_addr_t">eth_addr_t</a> <em>dst</em>, <a class="reference internal" href="eth.html#_CPPv4N3eos10eth_addr_tE" title="eos::eth_addr_t">eth_addr_t</a> <em>mask</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos12flow_match_t10eth_dst_isE10eth_addr_t10eth_addr_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos12flow_match_t12eth_dst_maskEv">
+<span id="_CPPv3NK3eos12flow_match_t12eth_dst_maskEv"></span><span id="_CPPv2NK3eos12flow_match_t12eth_dst_maskEv"></span><span id="eos::flow_match_t::eth_dst_maskC"></span><span class="target" id="classeos_1_1flow__match__t_1a20ed2a62a4f09c560dd2a5610af20a51"></span><a class="reference internal" href="eth.html#_CPPv4N3eos10eth_addr_tE" title="eos::eth_addr_t">eth_addr_t</a> <code class="sig-name descname">eth_dst_mask</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos12flow_match_t12eth_dst_maskEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos12flow_match_t15eth_dst_mask_isE10eth_addr_t">
+<span id="_CPPv3N3eos12flow_match_t15eth_dst_mask_isE10eth_addr_t"></span><span id="_CPPv2N3eos12flow_match_t15eth_dst_mask_isE10eth_addr_t"></span><span id="eos::flow_match_t::eth_dst_mask_is__eth_addr_t"></span><span class="target" id="classeos_1_1flow__match__t_1a69235fcc0f4f8c93371809a3ae936769"></span>void <code class="sig-name descname">eth_dst_mask_is</code><span class="sig-paren">(</span><a class="reference internal" href="eth.html#_CPPv4N3eos10eth_addr_tE" title="eos::eth_addr_t">eth_addr_t</a> <em>eth_dst_mask</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos12flow_match_t15eth_dst_mask_isE10eth_addr_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos12flow_match_t8eth_typeEv">
+<span id="_CPPv3NK3eos12flow_match_t8eth_typeEv"></span><span id="_CPPv2NK3eos12flow_match_t8eth_typeEv"></span><span id="eos::flow_match_t::eth_typeC"></span><span class="target" id="classeos_1_1flow__match__t_1ac41fb4f244331f25c8bca6a8d126f780"></span><a class="reference internal" href="#_CPPv4N3eos10eth_type_tE" title="eos::eth_type_t">eth_type_t</a> <code class="sig-name descname">eth_type</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos12flow_match_t8eth_typeEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Getter for ‘eth_type’: the Ethernet type to match on. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos12flow_match_t11eth_type_isE10eth_type_t">
+<span id="_CPPv3N3eos12flow_match_t11eth_type_isE10eth_type_t"></span><span id="_CPPv2N3eos12flow_match_t11eth_type_isE10eth_type_t"></span><span id="eos::flow_match_t::eth_type_is__eth_type_t"></span><span class="target" id="classeos_1_1flow__match__t_1ae204c7bcf532b6afcebc4a7417c003e0"></span>void <code class="sig-name descname">eth_type_is</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos10eth_type_tE" title="eos::eth_type_t">eth_type_t</a> <em>eth_type</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos12flow_match_t11eth_type_isE10eth_type_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Setter for ‘eth_type’. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos12flow_match_t7vlan_idEv">
+<span id="_CPPv3NK3eos12flow_match_t7vlan_idEv"></span><span id="_CPPv2NK3eos12flow_match_t7vlan_idEv"></span><span id="eos::flow_match_t::vlan_idC"></span><span class="target" id="classeos_1_1flow__match__t_1abc83a5a6fc17c21d0d117dbe5da498bb"></span><a class="reference internal" href="eth.html#_CPPv4N3eos9vlan_id_tE" title="eos::vlan_id_t">vlan_id_t</a> <code class="sig-name descname">vlan_id</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos12flow_match_t7vlan_idEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Getter for ‘vlan_id’: the VLAN id to match. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos12flow_match_t10vlan_id_isE9vlan_id_t">
+<span id="_CPPv3N3eos12flow_match_t10vlan_id_isE9vlan_id_t"></span><span id="_CPPv2N3eos12flow_match_t10vlan_id_isE9vlan_id_t"></span><span id="eos::flow_match_t::vlan_id_is__vlan_id_t"></span><span class="target" id="classeos_1_1flow__match__t_1ab63de94e9257356fddb25eb9dc622653"></span>void <code class="sig-name descname">vlan_id_is</code><span class="sig-paren">(</span><a class="reference internal" href="eth.html#_CPPv4N3eos9vlan_id_tE" title="eos::vlan_id_t">vlan_id_t</a> <em>vlan_id</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos12flow_match_t10vlan_id_isE9vlan_id_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Setter for ‘vlan_id’. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos12flow_match_t10vlan_id_isE9vlan_id_t8uint16_t">
+<span id="_CPPv3N3eos12flow_match_t10vlan_id_isE9vlan_id_t8uint16_t"></span><span id="_CPPv2N3eos12flow_match_t10vlan_id_isE9vlan_id_t8uint16_t"></span><span id="eos::flow_match_t::vlan_id_is__vlan_id_t.uint16_t"></span><span class="target" id="classeos_1_1flow__match__t_1a802a7b37a8c7a16c369f7ac6abcd6a21"></span>void <code class="sig-name descname">vlan_id_is</code><span class="sig-paren">(</span><a class="reference internal" href="eth.html#_CPPv4N3eos9vlan_id_tE" title="eos::vlan_id_t">vlan_id_t</a> <em>vlan_id</em>, uint16_t <em>mask</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos12flow_match_t10vlan_id_isE9vlan_id_t8uint16_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos12flow_match_t12vlan_id_maskEv">
+<span id="_CPPv3NK3eos12flow_match_t12vlan_id_maskEv"></span><span id="_CPPv2NK3eos12flow_match_t12vlan_id_maskEv"></span><span id="eos::flow_match_t::vlan_id_maskC"></span><span class="target" id="classeos_1_1flow__match__t_1a3e2a855c0910bb1fd0cf85c727776a94"></span><a class="reference internal" href="eth.html#_CPPv4N3eos9vlan_id_tE" title="eos::vlan_id_t">vlan_id_t</a> <code class="sig-name descname">vlan_id_mask</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos12flow_match_t12vlan_id_maskEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos12flow_match_t15vlan_id_mask_isE9vlan_id_t">
+<span id="_CPPv3N3eos12flow_match_t15vlan_id_mask_isE9vlan_id_t"></span><span id="_CPPv2N3eos12flow_match_t15vlan_id_mask_isE9vlan_id_t"></span><span id="eos::flow_match_t::vlan_id_mask_is__vlan_id_t"></span><span class="target" id="classeos_1_1flow__match__t_1a8c70063d955134dcb230d3addb4570b7"></span>void <code class="sig-name descname">vlan_id_mask_is</code><span class="sig-paren">(</span><a class="reference internal" href="eth.html#_CPPv4N3eos9vlan_id_tE" title="eos::vlan_id_t">vlan_id_t</a> <em>vlan_id_mask</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos12flow_match_t15vlan_id_mask_isE9vlan_id_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos12flow_match_t3cosEv">
+<span id="_CPPv3NK3eos12flow_match_t3cosEv"></span><span id="_CPPv2NK3eos12flow_match_t3cosEv"></span><span id="eos::flow_match_t::cosC"></span><span class="target" id="classeos_1_1flow__match__t_1a9e4bcfde777db7a5dc1fcc8c4979c8db"></span><a class="reference internal" href="#_CPPv4N3eos5cos_tE" title="eos::cos_t">cos_t</a> <code class="sig-name descname">cos</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos12flow_match_t3cosEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Getter for ‘cos’: the class of service to match on, only used if vlan_id is set to something other than 0. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos12flow_match_t6cos_isE5cos_t">
+<span id="_CPPv3N3eos12flow_match_t6cos_isE5cos_t"></span><span id="_CPPv2N3eos12flow_match_t6cos_isE5cos_t"></span><span id="eos::flow_match_t::cos_is__cos_t"></span><span class="target" id="classeos_1_1flow__match__t_1a736bf2c93114f8d43690ce474b04be67"></span>void <code class="sig-name descname">cos_is</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos5cos_tE" title="eos::cos_t">cos_t</a> <em>cos</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos12flow_match_t6cos_isE5cos_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Setter for ‘cos’. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos12flow_match_t6ip_srcEv">
+<span id="_CPPv3NK3eos12flow_match_t6ip_srcEv"></span><span id="_CPPv2NK3eos12flow_match_t6ip_srcEv"></span><span id="eos::flow_match_t::ip_srcC"></span><span class="target" id="classeos_1_1flow__match__t_1a3bf046af90387d24babfd120ee200220"></span><a class="reference internal" href="ip.html#_CPPv4N3eos9ip_addr_tE" title="eos::ip_addr_t">ip_addr_t</a> <code class="sig-name descname">ip_src</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos12flow_match_t6ip_srcEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Getter for ‘ip_src’: the source IPv4 address to match on. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos12flow_match_t9ip_src_isERK9ip_addr_t">
+<span id="_CPPv3N3eos12flow_match_t9ip_src_isERK9ip_addr_t"></span><span id="_CPPv2N3eos12flow_match_t9ip_src_isERK9ip_addr_t"></span><span id="eos::flow_match_t::ip_src_is__ip_addr_tCR"></span><span class="target" id="classeos_1_1flow__match__t_1a34b58f2ca44bd0d17439c40f0720062f"></span>void <code class="sig-name descname">ip_src_is</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#_CPPv4N3eos9ip_addr_tE" title="eos::ip_addr_t">ip_addr_t</a> <em class="property">const</em> &amp;<em>ip_src</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos12flow_match_t9ip_src_isERK9ip_addr_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Setter for ‘ip_src’. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos12flow_match_t9ip_src_isERR9ip_addr_t">
+<span id="_CPPv3N3eos12flow_match_t9ip_src_isERR9ip_addr_t"></span><span id="_CPPv2N3eos12flow_match_t9ip_src_isERR9ip_addr_t"></span><span id="eos::flow_match_t::ip_src_is__ip_addr_tRR"></span><span class="target" id="classeos_1_1flow__match__t_1a61b1401b4800b04442254c3d76ab56c2"></span>void <code class="sig-name descname">ip_src_is</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#_CPPv4N3eos9ip_addr_tE" title="eos::ip_addr_t">ip_addr_t</a> &amp;&amp;<em>ip_src</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos12flow_match_t9ip_src_isERR9ip_addr_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Moving Setter for ‘ip_src’. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos12flow_match_t9ip_src_isERK9ip_addr_tRK9ip_addr_t">
+<span id="_CPPv3N3eos12flow_match_t9ip_src_isERK9ip_addr_tRK9ip_addr_t"></span><span id="_CPPv2N3eos12flow_match_t9ip_src_isERK9ip_addr_tRK9ip_addr_t"></span><span id="eos::flow_match_t::ip_src_is__ip_addr_tCR.ip_addr_tCR"></span><span class="target" id="classeos_1_1flow__match__t_1a0984c724fcf2a73d0c58b7fc88424785"></span>void <code class="sig-name descname">ip_src_is</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#_CPPv4N3eos9ip_addr_tE" title="eos::ip_addr_t">ip_addr_t</a> <em class="property">const</em> &amp;<em>src</em>, <a class="reference internal" href="ip.html#_CPPv4N3eos9ip_addr_tE" title="eos::ip_addr_t">ip_addr_t</a> <em class="property">const</em> &amp;<em>mask</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos12flow_match_t9ip_src_isERK9ip_addr_tRK9ip_addr_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos12flow_match_t11ip_src_maskEv">
+<span id="_CPPv3NK3eos12flow_match_t11ip_src_maskEv"></span><span id="_CPPv2NK3eos12flow_match_t11ip_src_maskEv"></span><span id="eos::flow_match_t::ip_src_maskC"></span><span class="target" id="classeos_1_1flow__match__t_1a405e083008407db728ac61c0a5febc65"></span><a class="reference internal" href="ip.html#_CPPv4N3eos9ip_addr_tE" title="eos::ip_addr_t">ip_addr_t</a> <code class="sig-name descname">ip_src_mask</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos12flow_match_t11ip_src_maskEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos12flow_match_t14ip_src_mask_isERK9ip_addr_t">
+<span id="_CPPv3N3eos12flow_match_t14ip_src_mask_isERK9ip_addr_t"></span><span id="_CPPv2N3eos12flow_match_t14ip_src_mask_isERK9ip_addr_t"></span><span id="eos::flow_match_t::ip_src_mask_is__ip_addr_tCR"></span><span class="target" id="classeos_1_1flow__match__t_1a88c5b826b2c4b028cd4d13d3e0546712"></span>void <code class="sig-name descname">ip_src_mask_is</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#_CPPv4N3eos9ip_addr_tE" title="eos::ip_addr_t">ip_addr_t</a> <em class="property">const</em> &amp;<em>ip_src_mask</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos12flow_match_t14ip_src_mask_isERK9ip_addr_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos12flow_match_t14ip_src_mask_isERR9ip_addr_t">
+<span id="_CPPv3N3eos12flow_match_t14ip_src_mask_isERR9ip_addr_t"></span><span id="_CPPv2N3eos12flow_match_t14ip_src_mask_isERR9ip_addr_t"></span><span id="eos::flow_match_t::ip_src_mask_is__ip_addr_tRR"></span><span class="target" id="classeos_1_1flow__match__t_1ab41571bf852f8ae770cf1a36f99ca20f"></span>void <code class="sig-name descname">ip_src_mask_is</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#_CPPv4N3eos9ip_addr_tE" title="eos::ip_addr_t">ip_addr_t</a> &amp;&amp;<em>ip_src_mask</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos12flow_match_t14ip_src_mask_isERR9ip_addr_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos12flow_match_t6ip_dstEv">
+<span id="_CPPv3NK3eos12flow_match_t6ip_dstEv"></span><span id="_CPPv2NK3eos12flow_match_t6ip_dstEv"></span><span id="eos::flow_match_t::ip_dstC"></span><span class="target" id="classeos_1_1flow__match__t_1afcae65383522b081eed2e1e5c5fee2eb"></span><a class="reference internal" href="ip.html#_CPPv4N3eos9ip_addr_tE" title="eos::ip_addr_t">ip_addr_t</a> <code class="sig-name descname">ip_dst</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos12flow_match_t6ip_dstEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Getter for ‘ip_dst’: the destination IPv4 address to match on. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos12flow_match_t9ip_dst_isERK9ip_addr_t">
+<span id="_CPPv3N3eos12flow_match_t9ip_dst_isERK9ip_addr_t"></span><span id="_CPPv2N3eos12flow_match_t9ip_dst_isERK9ip_addr_t"></span><span id="eos::flow_match_t::ip_dst_is__ip_addr_tCR"></span><span class="target" id="classeos_1_1flow__match__t_1a767efaca2fb444797f7732386ba6b621"></span>void <code class="sig-name descname">ip_dst_is</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#_CPPv4N3eos9ip_addr_tE" title="eos::ip_addr_t">ip_addr_t</a> <em class="property">const</em> &amp;<em>ip_dst</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos12flow_match_t9ip_dst_isERK9ip_addr_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Setter for ‘ip_dst’. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos12flow_match_t9ip_dst_isERR9ip_addr_t">
+<span id="_CPPv3N3eos12flow_match_t9ip_dst_isERR9ip_addr_t"></span><span id="_CPPv2N3eos12flow_match_t9ip_dst_isERR9ip_addr_t"></span><span id="eos::flow_match_t::ip_dst_is__ip_addr_tRR"></span><span class="target" id="classeos_1_1flow__match__t_1ae6dda00b19140bc0110d11e0b4d45030"></span>void <code class="sig-name descname">ip_dst_is</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#_CPPv4N3eos9ip_addr_tE" title="eos::ip_addr_t">ip_addr_t</a> &amp;&amp;<em>ip_dst</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos12flow_match_t9ip_dst_isERR9ip_addr_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Moving Setter for ‘ip_dst’. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos12flow_match_t9ip_dst_isERK9ip_addr_tRK9ip_addr_t">
+<span id="_CPPv3N3eos12flow_match_t9ip_dst_isERK9ip_addr_tRK9ip_addr_t"></span><span id="_CPPv2N3eos12flow_match_t9ip_dst_isERK9ip_addr_tRK9ip_addr_t"></span><span id="eos::flow_match_t::ip_dst_is__ip_addr_tCR.ip_addr_tCR"></span><span class="target" id="classeos_1_1flow__match__t_1a7b4e6f50c03d561ed86fb123090c9833"></span>void <code class="sig-name descname">ip_dst_is</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#_CPPv4N3eos9ip_addr_tE" title="eos::ip_addr_t">ip_addr_t</a> <em class="property">const</em> &amp;<em>dst</em>, <a class="reference internal" href="ip.html#_CPPv4N3eos9ip_addr_tE" title="eos::ip_addr_t">ip_addr_t</a> <em class="property">const</em> &amp;<em>mask</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos12flow_match_t9ip_dst_isERK9ip_addr_tRK9ip_addr_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos12flow_match_t11ip_dst_maskEv">
+<span id="_CPPv3NK3eos12flow_match_t11ip_dst_maskEv"></span><span id="_CPPv2NK3eos12flow_match_t11ip_dst_maskEv"></span><span id="eos::flow_match_t::ip_dst_maskC"></span><span class="target" id="classeos_1_1flow__match__t_1a321b01285215c74de5830bc9bfb235cb"></span><a class="reference internal" href="ip.html#_CPPv4N3eos9ip_addr_tE" title="eos::ip_addr_t">ip_addr_t</a> <code class="sig-name descname">ip_dst_mask</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos12flow_match_t11ip_dst_maskEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos12flow_match_t14ip_dst_mask_isERK9ip_addr_t">
+<span id="_CPPv3N3eos12flow_match_t14ip_dst_mask_isERK9ip_addr_t"></span><span id="_CPPv2N3eos12flow_match_t14ip_dst_mask_isERK9ip_addr_t"></span><span id="eos::flow_match_t::ip_dst_mask_is__ip_addr_tCR"></span><span class="target" id="classeos_1_1flow__match__t_1a376813431b5bacc976216afa45dd8c11"></span>void <code class="sig-name descname">ip_dst_mask_is</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#_CPPv4N3eos9ip_addr_tE" title="eos::ip_addr_t">ip_addr_t</a> <em class="property">const</em> &amp;<em>ip_dst_mask</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos12flow_match_t14ip_dst_mask_isERK9ip_addr_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos12flow_match_t14ip_dst_mask_isERR9ip_addr_t">
+<span id="_CPPv3N3eos12flow_match_t14ip_dst_mask_isERR9ip_addr_t"></span><span id="_CPPv2N3eos12flow_match_t14ip_dst_mask_isERR9ip_addr_t"></span><span id="eos::flow_match_t::ip_dst_mask_is__ip_addr_tRR"></span><span class="target" id="classeos_1_1flow__match__t_1aa9ace7d0ba0b6e99d919710a1af499b1"></span>void <code class="sig-name descname">ip_dst_mask_is</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#_CPPv4N3eos9ip_addr_tE" title="eos::ip_addr_t">ip_addr_t</a> &amp;&amp;<em>ip_dst_mask</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos12flow_match_t14ip_dst_mask_isERR9ip_addr_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos12flow_match_teqERK12flow_match_t">
+<span id="_CPPv3NK3eos12flow_match_teqERK12flow_match_t"></span><span id="_CPPv2NK3eos12flow_match_teqERK12flow_match_t"></span><span id="eos::flow_match_t::eq-operator__flow_match_tCRC"></span><span class="target" id="classeos_1_1flow__match__t_1a79a8c9a7fb4078cfbb3aebd694d14bd7"></span>bool <code class="sig-name descname">operator==</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos12flow_match_tE" title="eos::flow_match_t">flow_match_t</a> <em class="property">const</em> &amp;<em>other</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos12flow_match_teqERK12flow_match_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos12flow_match_tneERK12flow_match_t">
+<span id="_CPPv3NK3eos12flow_match_tneERK12flow_match_t"></span><span id="_CPPv2NK3eos12flow_match_tneERK12flow_match_t"></span><span id="eos::flow_match_t::neq-operator__flow_match_tCRC"></span><span class="target" id="classeos_1_1flow__match__t_1afb238b76be509f39dfed9768b3b622aa"></span>bool <code class="sig-name descname">operator!=</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos12flow_match_tE" title="eos::flow_match_t">flow_match_t</a> <em class="property">const</em> &amp;<em>other</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos12flow_match_tneERK12flow_match_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos12flow_match_tltERK12flow_match_t">
+<span id="_CPPv3NK3eos12flow_match_tltERK12flow_match_t"></span><span id="_CPPv2NK3eos12flow_match_tltERK12flow_match_t"></span><span id="eos::flow_match_t::lt-operator__flow_match_tCRC"></span><span class="target" id="classeos_1_1flow__match__t_1ac18f63dc0ee3e537ab3ab0d91c6cff53"></span>bool <code class="sig-name descname">operator&lt;</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos12flow_match_tE" title="eos::flow_match_t">flow_match_t</a> <em class="property">const</em> &amp;<em>other</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos12flow_match_tltERK12flow_match_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos12flow_match_t4hashEv">
+<span id="_CPPv3NK3eos12flow_match_t4hashEv"></span><span id="_CPPv2NK3eos12flow_match_t4hashEv"></span><span id="eos::flow_match_t::hashC"></span><span class="target" id="classeos_1_1flow__match__t_1a5a9959be8e32292be6053409c3f8ab2f"></span>uint32_t <code class="sig-name descname">hash</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos12flow_match_t4hashEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>The hash function for type <a class="reference internal" href="#classeos_1_1flow__match__t"><span class="std std-ref">flow_match_t</span></a>. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos12flow_match_t6mix_meER8hash_mix">
+<span id="_CPPv3NK3eos12flow_match_t6mix_meER8hash_mix"></span><span id="_CPPv2NK3eos12flow_match_t6mix_meER8hash_mix"></span><span id="eos::flow_match_t::mix_me__hash_mixRC"></span><span class="target" id="classeos_1_1flow__match__t_1a958b40e67aacc824c47d9ad90759bd48"></span>void <code class="sig-name descname">mix_me</code><span class="sig-paren">(</span><a class="reference internal" href="hash_mix.html#_CPPv4N3eos8hash_mixE" title="eos::hash_mix">hash_mix</a> &amp;<em>h</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos12flow_match_t6mix_meER8hash_mix" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>The hash mix function for type <a class="reference internal" href="#classeos_1_1flow__match__t"><span class="std std-ref">flow_match_t</span></a>. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos12flow_match_t9to_stringEv">
+<span id="_CPPv3NK3eos12flow_match_t9to_stringEv"></span><span id="_CPPv2NK3eos12flow_match_t9to_stringEv"></span><span id="eos::flow_match_t::to_stringC"></span><span class="target" id="classeos_1_1flow__match__t_1a5d96878a212882c2328ba1428e3b5f1c"></span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::string <code class="sig-name descname">to_string</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos12flow_match_t9to_stringEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Returns a string representation of the current object’s values. </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-static-functions">Public Static Functions</p>
+<dl class="cpp function">
+<dt id="_CPPv4N3eos12flow_match_tnwENSt6size_tEPv">
+<span id="_CPPv3N3eos12flow_match_tnwENSt6size_tEPv"></span><span id="_CPPv2N3eos12flow_match_tnwENSt6size_tEPv"></span><span id="eos::flow_match_t::new-operator__std::s.voidP"></span><span class="target" id="classeos_1_1flow__match__t_1a92ed7ae719e4dd2c19cf2c0851ad4585"></span><em class="property">static</em> <em class="property">inline</em> void *<code class="sig-name descname">operator new</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::size_t, void *<em>ptr</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos12flow_match_tnwENSt6size_tEPv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos12flow_match_tnwENSt6size_tE">
+<span id="_CPPv3N3eos12flow_match_tnwENSt6size_tE"></span><span id="_CPPv2N3eos12flow_match_tnwENSt6size_tE"></span><span id="eos::flow_match_t::new-operator__std::s"></span><span class="target" id="classeos_1_1flow__match__t_1a244d6f65fdd7abfb6fc59844c0eb746d"></span><em class="property">static</em> void *<code class="sig-name descname">operator new</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::size_t<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos12flow_match_tnwENSt6size_tE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos12flow_match_tdlEPv">
+<span id="_CPPv3N3eos12flow_match_tdlEPv"></span><span id="_CPPv2N3eos12flow_match_tdlEPv"></span><span id="eos::flow_match_t::delete-operator__voidP"></span><span class="target" id="classeos_1_1flow__match__t_1af4caed9905b9c7620a97367b9a0fd1f0"></span><em class="property">static</em> void <code class="sig-name descname">operator delete</code><span class="sig-paren">(</span>void*<span class="sig-paren">)</span> <em class="property">noexcept</em><a class="headerlink" href="#_CPPv4N3eos12flow_match_tdlEPv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-private-members">Private Members</p>
+<dl class="cpp var">
+<dt id="_CPPv4N3eos12flow_match_t5pimplE">
+<span id="_CPPv3N3eos12flow_match_t5pimplE"></span><span id="_CPPv2N3eos12flow_match_t5pimplE"></span><span id="eos::flow_match_t::pimpl__std::shared_ptr:flow_match_impl_t:"></span><span class="target" id="classeos_1_1flow__match__t_1a548f7800230786d14d1655c87dcf28f5"></span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::shared_ptr&lt;flow_match_impl_t&gt; <code class="sig-name descname">pimpl</code><a class="headerlink" href="#_CPPv4N3eos12flow_match_t5pimplE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-friends">Friends</p>
+<dl class="cpp function">
+<dt id="_CPPv4N3eos12flow_match_tlsERNSt7ostreamERK12flow_match_t">
+<span id="_CPPv3N3eos12flow_match_tlsERNSt7ostreamERK12flow_match_t"></span><span id="_CPPv2N3eos12flow_match_tlsERNSt7ostreamERK12flow_match_t"></span><span id="eos::flow_match_t::lshift-operator__osR.flow_match_tCR"></span><span class="target" id="classeos_1_1flow__match__t_1a1dac9b1e4509683851c6e814d7e3cdc0"></span><em class="property">friend</em> <a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::ostream &amp;<code class="sig-name descname">operator&lt;&lt;</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::ostream &amp;<em>os</em>, <em class="property">const</em> <a class="reference internal" href="#_CPPv4N3eos12flow_match_tE" title="eos::flow_match_t">flow_match_t</a> &amp;<em>obj</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos12flow_match_tlsERNSt7ostreamERK12flow_match_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>A utility stream operator that adds a string representation of <a class="reference internal" href="#classeos_1_1flow__match__t"><span class="std std-ref">flow_match_t</span></a> to the ostream. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="cpp class">
+<dt id="_CPPv4N3eos17flow_action_set_tE">
+<span id="_CPPv3N3eos17flow_action_set_tE"></span><span id="_CPPv2N3eos17flow_action_set_tE"></span><span id="eos::flow_action_set_t"></span><span class="target" id="classeos_1_1flow__action__set__t"></span><em class="property">class </em><code class="sig-name descname">flow_action_set_t</code><a class="headerlink" href="#_CPPv4N3eos17flow_action_set_tE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><div class="docutils container">
+<em>#include &lt;directflow.h&gt;</em></div>
+<p>Defines the set of enabled actions. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
+<dl class="cpp function">
+<dt id="_CPPv4N3eos17flow_action_set_t17flow_action_set_tEv">
+<span id="_CPPv3N3eos17flow_action_set_t17flow_action_set_tEv"></span><span id="_CPPv2N3eos17flow_action_set_t17flow_action_set_tEv"></span><span id="eos::flow_action_set_t::flow_action_set_t"></span><span class="target" id="classeos_1_1flow__action__set__t_1ab78135b021804341ed7bed22c3cebe9e"></span><code class="sig-name descname">flow_action_set_t</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos17flow_action_set_t17flow_action_set_tEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos17flow_action_set_t19set_output_intfs_isEb">
+<span id="_CPPv3N3eos17flow_action_set_t19set_output_intfs_isEb"></span><span id="_CPPv2N3eos17flow_action_set_t19set_output_intfs_isEb"></span><span id="eos::flow_action_set_t::set_output_intfs_is__b"></span><span class="target" id="classeos_1_1flow__action__set__t_1a6c834282449921fb496bfbf1ed864ce4"></span>void <code class="sig-name descname">set_output_intfs_is</code><span class="sig-paren">(</span>bool <em>enabled</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos17flow_action_set_t19set_output_intfs_isEb" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos17flow_action_set_t16set_output_intfsEv">
+<span id="_CPPv3NK3eos17flow_action_set_t16set_output_intfsEv"></span><span id="_CPPv2NK3eos17flow_action_set_t16set_output_intfsEv"></span><span id="eos::flow_action_set_t::set_output_intfsC"></span><span class="target" id="classeos_1_1flow__action__set__t_1a6ccf7850a778e566d0dc212119d954bc"></span>bool <code class="sig-name descname">set_output_intfs</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos17flow_action_set_t16set_output_intfsEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos17flow_action_set_t14set_vlan_id_isEb">
+<span id="_CPPv3N3eos17flow_action_set_t14set_vlan_id_isEb"></span><span id="_CPPv2N3eos17flow_action_set_t14set_vlan_id_isEb"></span><span id="eos::flow_action_set_t::set_vlan_id_is__b"></span><span class="target" id="classeos_1_1flow__action__set__t_1a9ff3cdffe0830cd00c939b23960edfc6"></span>void <code class="sig-name descname">set_vlan_id_is</code><span class="sig-paren">(</span>bool <em>enabled</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos17flow_action_set_t14set_vlan_id_isEb" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos17flow_action_set_t11set_vlan_idEv">
+<span id="_CPPv3NK3eos17flow_action_set_t11set_vlan_idEv"></span><span id="_CPPv2NK3eos17flow_action_set_t11set_vlan_idEv"></span><span id="eos::flow_action_set_t::set_vlan_idC"></span><span class="target" id="classeos_1_1flow__action__set__t_1a6f3ee52c13684efe55dac7767007e66d"></span>bool <code class="sig-name descname">set_vlan_id</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos17flow_action_set_t11set_vlan_idEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos17flow_action_set_t10set_cos_isEb">
+<span id="_CPPv3N3eos17flow_action_set_t10set_cos_isEb"></span><span id="_CPPv2N3eos17flow_action_set_t10set_cos_isEb"></span><span id="eos::flow_action_set_t::set_cos_is__b"></span><span class="target" id="classeos_1_1flow__action__set__t_1ace6d9ab3f750eaa7070ff321a96c8843"></span>void <code class="sig-name descname">set_cos_is</code><span class="sig-paren">(</span>bool <em>enabled</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos17flow_action_set_t10set_cos_isEb" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos17flow_action_set_t7set_cosEv">
+<span id="_CPPv3NK3eos17flow_action_set_t7set_cosEv"></span><span id="_CPPv2NK3eos17flow_action_set_t7set_cosEv"></span><span id="eos::flow_action_set_t::set_cosC"></span><span class="target" id="classeos_1_1flow__action__set__t_1a893196ef00403e4aaa8d4c97c3754b13"></span>bool <code class="sig-name descname">set_cos</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos17flow_action_set_t7set_cosEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos17flow_action_set_t14set_eth_src_isEb">
+<span id="_CPPv3N3eos17flow_action_set_t14set_eth_src_isEb"></span><span id="_CPPv2N3eos17flow_action_set_t14set_eth_src_isEb"></span><span id="eos::flow_action_set_t::set_eth_src_is__b"></span><span class="target" id="classeos_1_1flow__action__set__t_1ace553d6b8d0ddb80134e83784d9957bf"></span>void <code class="sig-name descname">set_eth_src_is</code><span class="sig-paren">(</span>bool <em>enabled</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos17flow_action_set_t14set_eth_src_isEb" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos17flow_action_set_t11set_eth_srcEv">
+<span id="_CPPv3NK3eos17flow_action_set_t11set_eth_srcEv"></span><span id="_CPPv2NK3eos17flow_action_set_t11set_eth_srcEv"></span><span id="eos::flow_action_set_t::set_eth_srcC"></span><span class="target" id="classeos_1_1flow__action__set__t_1ab484b1846e5b7afd2246af79fb4a289c"></span>bool <code class="sig-name descname">set_eth_src</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos17flow_action_set_t11set_eth_srcEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos17flow_action_set_t14set_eth_dst_isEb">
+<span id="_CPPv3N3eos17flow_action_set_t14set_eth_dst_isEb"></span><span id="_CPPv2N3eos17flow_action_set_t14set_eth_dst_isEb"></span><span id="eos::flow_action_set_t::set_eth_dst_is__b"></span><span class="target" id="classeos_1_1flow__action__set__t_1a77f460bea1deff5a8b16f2b90ea58b43"></span>void <code class="sig-name descname">set_eth_dst_is</code><span class="sig-paren">(</span>bool <em>enabled</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos17flow_action_set_t14set_eth_dst_isEb" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos17flow_action_set_t11set_eth_dstEv">
+<span id="_CPPv3NK3eos17flow_action_set_t11set_eth_dstEv"></span><span id="_CPPv2NK3eos17flow_action_set_t11set_eth_dstEv"></span><span id="eos::flow_action_set_t::set_eth_dstC"></span><span class="target" id="classeos_1_1flow__action__set__t_1a0671e318da87e1c9c4b4149a104350df"></span>bool <code class="sig-name descname">set_eth_dst</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos17flow_action_set_t11set_eth_dstEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos17flow_action_set_t13set_ip_src_isEb">
+<span id="_CPPv3N3eos17flow_action_set_t13set_ip_src_isEb"></span><span id="_CPPv2N3eos17flow_action_set_t13set_ip_src_isEb"></span><span id="eos::flow_action_set_t::set_ip_src_is__b"></span><span class="target" id="classeos_1_1flow__action__set__t_1abb5988a6cdbdb91fc16999f4a4319142"></span>void <code class="sig-name descname">set_ip_src_is</code><span class="sig-paren">(</span>bool <em>enabled</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos17flow_action_set_t13set_ip_src_isEb" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos17flow_action_set_t10set_ip_srcEv">
+<span id="_CPPv3NK3eos17flow_action_set_t10set_ip_srcEv"></span><span id="_CPPv2NK3eos17flow_action_set_t10set_ip_srcEv"></span><span id="eos::flow_action_set_t::set_ip_srcC"></span><span class="target" id="classeos_1_1flow__action__set__t_1a5c3245714dc2e9723394ef17ace64a05"></span>bool <code class="sig-name descname">set_ip_src</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos17flow_action_set_t10set_ip_srcEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos17flow_action_set_t13set_ip_dst_isEb">
+<span id="_CPPv3N3eos17flow_action_set_t13set_ip_dst_isEb"></span><span id="_CPPv2N3eos17flow_action_set_t13set_ip_dst_isEb"></span><span id="eos::flow_action_set_t::set_ip_dst_is__b"></span><span class="target" id="classeos_1_1flow__action__set__t_1a6a8ca5b8bbda393ae5ceae734c4b7b91"></span>void <code class="sig-name descname">set_ip_dst_is</code><span class="sig-paren">(</span>bool <em>enabled</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos17flow_action_set_t13set_ip_dst_isEb" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos17flow_action_set_t10set_ip_dstEv">
+<span id="_CPPv3NK3eos17flow_action_set_t10set_ip_dstEv"></span><span id="_CPPv2NK3eos17flow_action_set_t10set_ip_dstEv"></span><span id="eos::flow_action_set_t::set_ip_dstC"></span><span class="target" id="classeos_1_1flow__action__set__t_1a8b40e018e501692006118fe1b08b69a6"></span>bool <code class="sig-name descname">set_ip_dst</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos17flow_action_set_t10set_ip_dstEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos17flow_action_set_teqERK17flow_action_set_t">
+<span id="_CPPv3NK3eos17flow_action_set_teqERK17flow_action_set_t"></span><span id="_CPPv2NK3eos17flow_action_set_teqERK17flow_action_set_t"></span><span id="eos::flow_action_set_t::eq-operator__flow_action_set_tCRC"></span><span class="target" id="classeos_1_1flow__action__set__t_1a82abf084b9f5087bc317207919eb0ada"></span>bool <code class="sig-name descname">operator==</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos17flow_action_set_tE" title="eos::flow_action_set_t">flow_action_set_t</a> <em class="property">const</em> &amp;<em>other</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos17flow_action_set_teqERK17flow_action_set_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos17flow_action_set_tneERK17flow_action_set_t">
+<span id="_CPPv3NK3eos17flow_action_set_tneERK17flow_action_set_t"></span><span id="_CPPv2NK3eos17flow_action_set_tneERK17flow_action_set_t"></span><span id="eos::flow_action_set_t::neq-operator__flow_action_set_tCRC"></span><span class="target" id="classeos_1_1flow__action__set__t_1a84c49ac99587cfd12f85de623f9027b1"></span>bool <code class="sig-name descname">operator!=</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos17flow_action_set_tE" title="eos::flow_action_set_t">flow_action_set_t</a> <em class="property">const</em> &amp;<em>other</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos17flow_action_set_tneERK17flow_action_set_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos17flow_action_set_t4hashEv">
+<span id="_CPPv3NK3eos17flow_action_set_t4hashEv"></span><span id="_CPPv2NK3eos17flow_action_set_t4hashEv"></span><span id="eos::flow_action_set_t::hashC"></span><span class="target" id="classeos_1_1flow__action__set__t_1a93975e8ad9586fbb311a1be8cfcff023"></span>uint32_t <code class="sig-name descname">hash</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos17flow_action_set_t4hashEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>The hash function for type <a class="reference internal" href="#classeos_1_1flow__action__set__t"><span class="std std-ref">flow_action_set_t</span></a>. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos17flow_action_set_t6mix_meER8hash_mix">
+<span id="_CPPv3NK3eos17flow_action_set_t6mix_meER8hash_mix"></span><span id="_CPPv2NK3eos17flow_action_set_t6mix_meER8hash_mix"></span><span id="eos::flow_action_set_t::mix_me__hash_mixRC"></span><span class="target" id="classeos_1_1flow__action__set__t_1a97fb1c5ca6daa2e08ea8014bbe10dd10"></span>void <code class="sig-name descname">mix_me</code><span class="sig-paren">(</span><a class="reference internal" href="hash_mix.html#_CPPv4N3eos8hash_mixE" title="eos::hash_mix">hash_mix</a> &amp;<em>h</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos17flow_action_set_t6mix_meER8hash_mix" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>The hash mix function for type <a class="reference internal" href="#classeos_1_1flow__action__set__t"><span class="std std-ref">flow_action_set_t</span></a>. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos17flow_action_set_t9to_stringEv">
+<span id="_CPPv3NK3eos17flow_action_set_t9to_stringEv"></span><span id="_CPPv2NK3eos17flow_action_set_t9to_stringEv"></span><span id="eos::flow_action_set_t::to_stringC"></span><span class="target" id="classeos_1_1flow__action__set__t_1af1ed8474389f083b957ca0c612310069"></span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::string <code class="sig-name descname">to_string</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos17flow_action_set_t9to_stringEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Returns a string representation of the current object’s values. </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-private-members">Private Members</p>
+<dl class="cpp var">
+<dt id="_CPPv4N3eos17flow_action_set_t14action_bitset_E">
+<span id="_CPPv3N3eos17flow_action_set_t14action_bitset_E"></span><span id="_CPPv2N3eos17flow_action_set_t14action_bitset_E"></span><span id="eos::flow_action_set_t::action_bitset___uint32_t"></span><span class="target" id="classeos_1_1flow__action__set__t_1a4a06d90f4da6f05bb09754fc29f05ad8"></span>uint32_t <code class="sig-name descname">action_bitset_</code><a class="headerlink" href="#_CPPv4N3eos17flow_action_set_t14action_bitset_E" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-friends">Friends</p>
+<dl class="friendclass">
+<dt>
+<em class="property">friend class</em> flow_helper</dt>
+</dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos17flow_action_set_tlsERNSt7ostreamERK17flow_action_set_t">
+<span id="_CPPv3N3eos17flow_action_set_tlsERNSt7ostreamERK17flow_action_set_t"></span><span id="_CPPv2N3eos17flow_action_set_tlsERNSt7ostreamERK17flow_action_set_t"></span><span id="eos::flow_action_set_t::lshift-operator__osR.flow_action_set_tCR"></span><span class="target" id="classeos_1_1flow__action__set__t_1a916a5f225dfeb755ed06d1a452a9def3"></span><em class="property">friend</em> <a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::ostream &amp;<code class="sig-name descname">operator&lt;&lt;</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::ostream &amp;<em>os</em>, <em class="property">const</em> <a class="reference internal" href="#_CPPv4N3eos17flow_action_set_tE" title="eos::flow_action_set_t">flow_action_set_t</a> &amp;<em>obj</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos17flow_action_set_tlsERNSt7ostreamERK17flow_action_set_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>A utility stream operator that adds a string representation of <a class="reference internal" href="#classeos_1_1flow__action__set__t"><span class="std std-ref">flow_action_set_t</span></a> to the ostream. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="cpp class">
+<dt id="_CPPv4N3eos13flow_action_tE">
+<span id="_CPPv3N3eos13flow_action_tE"></span><span id="_CPPv2N3eos13flow_action_tE"></span><span id="eos::flow_action_t"></span><span class="target" id="classeos_1_1flow__action__t"></span><em class="property">class </em><code class="sig-name descname">flow_action_t</code><a class="headerlink" href="#_CPPv4N3eos13flow_action_tE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><div class="docutils container">
+<em>#include &lt;directflow.h&gt;</em></div>
+<p>Defines the actions to take on a matching flow. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
+<dl class="cpp function">
+<dt id="_CPPv4N3eos13flow_action_t13flow_action_tEv">
+<span id="_CPPv3N3eos13flow_action_t13flow_action_tEv"></span><span id="_CPPv2N3eos13flow_action_t13flow_action_tEv"></span><span id="eos::flow_action_t::flow_action_t"></span><span class="target" id="classeos_1_1flow__action__t_1a04bb6341f91f54da817ced1738005035"></span><code class="sig-name descname">flow_action_t</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos13flow_action_t13flow_action_tEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos13flow_action_t13flow_action_tERK13flow_action_t">
+<span id="_CPPv3N3eos13flow_action_t13flow_action_tERK13flow_action_t"></span><span id="_CPPv2N3eos13flow_action_t13flow_action_tERK13flow_action_t"></span><span id="eos::flow_action_t::flow_action_t__flow_action_tCR"></span><span class="target" id="classeos_1_1flow__action__t_1ab849fdb80e0fc1cca129655f9bc06c4e"></span><code class="sig-name descname">flow_action_t</code><span class="sig-paren">(</span><em class="property">const</em> <a class="reference internal" href="#_CPPv4N3eos13flow_action_t13flow_action_tERK13flow_action_t" title="eos::flow_action_t::flow_action_t">flow_action_t</a> &amp;<em>other</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos13flow_action_t13flow_action_tERK13flow_action_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos13flow_action_taSERK13flow_action_t">
+<span id="_CPPv3N3eos13flow_action_taSERK13flow_action_t"></span><span id="_CPPv2N3eos13flow_action_taSERK13flow_action_t"></span><span id="eos::flow_action_t::assign-operator__flow_action_tCR"></span><span class="target" id="classeos_1_1flow__action__t_1afc2d7547cb8e0a15806ec84ea69232b8"></span><a class="reference internal" href="#_CPPv4N3eos13flow_action_tE" title="eos::flow_action_t">flow_action_t</a> &amp;<code class="sig-name descname">operator=</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos13flow_action_tE" title="eos::flow_action_t">flow_action_t</a> <em class="property">const</em> &amp;<em>other</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos13flow_action_taSERK13flow_action_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos13flow_action_t13flow_action_tERR13flow_action_t">
+<span id="_CPPv3N3eos13flow_action_t13flow_action_tERR13flow_action_t"></span><span id="_CPPv2N3eos13flow_action_t13flow_action_tERR13flow_action_t"></span><span id="eos::flow_action_t::flow_action_t__flow_action_tRR"></span><span class="target" id="classeos_1_1flow__action__t_1acddcffc05b663176a4e321760f606ed8"></span><code class="sig-name descname">flow_action_t</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos13flow_action_t13flow_action_tERR13flow_action_t" title="eos::flow_action_t::flow_action_t">flow_action_t</a> &amp;&amp;<em>other</em><span class="sig-paren">)</span> <em class="property">noexcept</em><a class="headerlink" href="#_CPPv4N3eos13flow_action_t13flow_action_tERR13flow_action_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos13flow_action_taSERR13flow_action_t">
+<span id="_CPPv3N3eos13flow_action_taSERR13flow_action_t"></span><span id="_CPPv2N3eos13flow_action_taSERR13flow_action_t"></span><span id="eos::flow_action_t::assign-operator__flow_action_tRR"></span><span class="target" id="classeos_1_1flow__action__t_1ac72d0cc84e879b366d492df26f91830a"></span><a class="reference internal" href="#_CPPv4N3eos13flow_action_tE" title="eos::flow_action_t">flow_action_t</a> &amp;<code class="sig-name descname">operator=</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos13flow_action_tE" title="eos::flow_action_t">flow_action_t</a> &amp;&amp;<em>other</em><span class="sig-paren">)</span> <em class="property">noexcept</em><a class="headerlink" href="#_CPPv4N3eos13flow_action_taSERR13flow_action_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos13flow_action_t10action_setEv">
+<span id="_CPPv3NK3eos13flow_action_t10action_setEv"></span><span id="_CPPv2NK3eos13flow_action_t10action_setEv"></span><span id="eos::flow_action_t::action_setC"></span><span class="target" id="classeos_1_1flow__action__t_1a992c69eca9cd5d35bd202b826fe0d4ea"></span><a class="reference internal" href="#_CPPv4N3eos17flow_action_set_tE" title="eos::flow_action_set_t">flow_action_set_t</a> <code class="sig-name descname">action_set</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos13flow_action_t10action_setEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Getter for ‘action_set’: actions that are enabled. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos13flow_action_t13action_set_isE17flow_action_set_t">
+<span id="_CPPv3N3eos13flow_action_t13action_set_isE17flow_action_set_t"></span><span id="_CPPv2N3eos13flow_action_t13action_set_isE17flow_action_set_t"></span><span id="eos::flow_action_t::action_set_is__flow_action_set_t"></span><span class="target" id="classeos_1_1flow__action__t_1ac29357154ba78abb4c27a743b8c922dd"></span>void <code class="sig-name descname">action_set_is</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos17flow_action_set_tE" title="eos::flow_action_set_t">flow_action_set_t</a> <em>action_set</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos13flow_action_t13action_set_isE17flow_action_set_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Setter for ‘action_set’. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos13flow_action_t12output_intfsEv">
+<span id="_CPPv3NK3eos13flow_action_t12output_intfsEv"></span><span id="_CPPv2NK3eos13flow_action_t12output_intfsEv"></span><span id="eos::flow_action_t::output_intfsC"></span><span class="target" id="classeos_1_1flow__action__t_1a549dad1d68790ebae8d706c2e861ad05"></span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::set&lt;<a class="reference internal" href="intf.html#_CPPv4N3eos9intf_id_tE" title="eos::intf_id_t">intf_id_t</a>&gt; <em class="property">const</em> &amp;<code class="sig-name descname">output_intfs</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos13flow_action_t12output_intfsEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Getter for ‘output_intfs’: 0 or more the output interfaces, passing in the empty set will cause the packet to be dropped. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos13flow_action_t15output_intfs_isERKNSt3setI9intf_id_tEE">
+<span id="_CPPv3N3eos13flow_action_t15output_intfs_isERKNSt3setI9intf_id_tEE"></span><span id="_CPPv2N3eos13flow_action_t15output_intfs_isERKNSt3setI9intf_id_tEE"></span><span id="eos::flow_action_t::output_intfs_is__std::set:intf_id_t:CR"></span><span class="target" id="classeos_1_1flow__action__t_1a66b56b5834d809daae262a8d55c4e5e3"></span>void <code class="sig-name descname">output_intfs_is</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::set&lt;<a class="reference internal" href="intf.html#_CPPv4N3eos9intf_id_tE" title="eos::intf_id_t">intf_id_t</a>&gt; <em class="property">const</em> &amp;<em>output_intfs</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos13flow_action_t15output_intfs_isERKNSt3setI9intf_id_tEE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Setter for ‘output_intfs’. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos13flow_action_t15output_intfs_isERRNSt3setI9intf_id_tEE">
+<span id="_CPPv3N3eos13flow_action_t15output_intfs_isERRNSt3setI9intf_id_tEE"></span><span id="_CPPv2N3eos13flow_action_t15output_intfs_isERRNSt3setI9intf_id_tEE"></span><span id="eos::flow_action_t::output_intfs_is__std::set:intf_id_t:RR"></span><span class="target" id="classeos_1_1flow__action__t_1abdabbca5a45d86f9d7ebdbae204d1e85"></span>void <code class="sig-name descname">output_intfs_is</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::set&lt;<a class="reference internal" href="intf.html#_CPPv4N3eos9intf_id_tE" title="eos::intf_id_t">intf_id_t</a>&gt; &amp;&amp;<em>output_intfs</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos13flow_action_t15output_intfs_isERRNSt3setI9intf_id_tEE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Moving Setter for ‘output_intfs’. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos13flow_action_t15output_intf_setERK9intf_id_t">
+<span id="_CPPv3N3eos13flow_action_t15output_intf_setERK9intf_id_t"></span><span id="_CPPv2N3eos13flow_action_t15output_intf_setERK9intf_id_t"></span><span id="eos::flow_action_t::output_intf_set__intf_id_tCR"></span><span class="target" id="classeos_1_1flow__action__t_1a1b66474052b0441265f027cfebeb5b0c"></span>void <code class="sig-name descname">output_intf_set</code><span class="sig-paren">(</span><a class="reference internal" href="intf.html#_CPPv4N3eos9intf_id_tE" title="eos::intf_id_t">intf_id_t</a> <em class="property">const</em> &amp;<em>value</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos13flow_action_t15output_intf_setERK9intf_id_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Inserts one output_intf of ‘value’ to the set. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos13flow_action_t15output_intf_setERR9intf_id_t">
+<span id="_CPPv3N3eos13flow_action_t15output_intf_setERR9intf_id_t"></span><span id="_CPPv2N3eos13flow_action_t15output_intf_setERR9intf_id_t"></span><span id="eos::flow_action_t::output_intf_set__intf_id_tRR"></span><span class="target" id="classeos_1_1flow__action__t_1ad9e7d9c0139b56c9470b5ea9b8d8051b"></span>void <code class="sig-name descname">output_intf_set</code><span class="sig-paren">(</span><a class="reference internal" href="intf.html#_CPPv4N3eos9intf_id_tE" title="eos::intf_id_t">intf_id_t</a> &amp;&amp;<em>value</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos13flow_action_t15output_intf_setERR9intf_id_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Inserts one output_intf of ‘value’ to the set. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos13flow_action_t15output_intf_delERK9intf_id_t">
+<span id="_CPPv3N3eos13flow_action_t15output_intf_delERK9intf_id_t"></span><span id="_CPPv2N3eos13flow_action_t15output_intf_delERK9intf_id_t"></span><span id="eos::flow_action_t::output_intf_del__intf_id_tCR"></span><span class="target" id="classeos_1_1flow__action__t_1acc566e0a4130280b7e76ba593223529b"></span>void <code class="sig-name descname">output_intf_del</code><span class="sig-paren">(</span><a class="reference internal" href="intf.html#_CPPv4N3eos9intf_id_tE" title="eos::intf_id_t">intf_id_t</a> <em class="property">const</em> &amp;<em>value</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos13flow_action_t15output_intf_delERK9intf_id_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Deletes one output_intf of ‘value’ from the set. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos13flow_action_t7vlan_idEv">
+<span id="_CPPv3NK3eos13flow_action_t7vlan_idEv"></span><span id="_CPPv2NK3eos13flow_action_t7vlan_idEv"></span><span id="eos::flow_action_t::vlan_idC"></span><span class="target" id="classeos_1_1flow__action__t_1a7ce544729837c351d0ebf6c8b3b68095"></span><a class="reference internal" href="eth.html#_CPPv4N3eos9vlan_id_tE" title="eos::vlan_id_t">vlan_id_t</a> <code class="sig-name descname">vlan_id</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos13flow_action_t7vlan_idEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos13flow_action_t10vlan_id_isE9vlan_id_t">
+<span id="_CPPv3N3eos13flow_action_t10vlan_id_isE9vlan_id_t"></span><span id="_CPPv2N3eos13flow_action_t10vlan_id_isE9vlan_id_t"></span><span id="eos::flow_action_t::vlan_id_is__vlan_id_t"></span><span class="target" id="classeos_1_1flow__action__t_1a9f59cd9f766c774a2147c4a1fd036d1d"></span>void <code class="sig-name descname">vlan_id_is</code><span class="sig-paren">(</span><a class="reference internal" href="eth.html#_CPPv4N3eos9vlan_id_tE" title="eos::vlan_id_t">vlan_id_t</a> <em>vlan_id</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos13flow_action_t10vlan_id_isE9vlan_id_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos13flow_action_t3cosEv">
+<span id="_CPPv3NK3eos13flow_action_t3cosEv"></span><span id="_CPPv2NK3eos13flow_action_t3cosEv"></span><span id="eos::flow_action_t::cosC"></span><span class="target" id="classeos_1_1flow__action__t_1ae205eb1080cee921bd6d53f170411514"></span><a class="reference internal" href="#_CPPv4N3eos5cos_tE" title="eos::cos_t">cos_t</a> <code class="sig-name descname">cos</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos13flow_action_t3cosEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Getter for ‘cos’: the class of service. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos13flow_action_t6cos_isE5cos_t">
+<span id="_CPPv3N3eos13flow_action_t6cos_isE5cos_t"></span><span id="_CPPv2N3eos13flow_action_t6cos_isE5cos_t"></span><span id="eos::flow_action_t::cos_is__cos_t"></span><span class="target" id="classeos_1_1flow__action__t_1a4216b30953a8bf572b437f894f933f25"></span>void <code class="sig-name descname">cos_is</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos5cos_tE" title="eos::cos_t">cos_t</a> <em>cos</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos13flow_action_t6cos_isE5cos_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Setter for ‘cos’. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos13flow_action_t7eth_srcEv">
+<span id="_CPPv3NK3eos13flow_action_t7eth_srcEv"></span><span id="_CPPv2NK3eos13flow_action_t7eth_srcEv"></span><span id="eos::flow_action_t::eth_srcC"></span><span class="target" id="classeos_1_1flow__action__t_1a559bf29cfe7efe3b3d3d4c11d7c43366"></span><a class="reference internal" href="eth.html#_CPPv4N3eos10eth_addr_tE" title="eos::eth_addr_t">eth_addr_t</a> <code class="sig-name descname">eth_src</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos13flow_action_t7eth_srcEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Getter for ‘eth_src’: the source Ethernet address. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos13flow_action_t10eth_src_isE10eth_addr_t">
+<span id="_CPPv3N3eos13flow_action_t10eth_src_isE10eth_addr_t"></span><span id="_CPPv2N3eos13flow_action_t10eth_src_isE10eth_addr_t"></span><span id="eos::flow_action_t::eth_src_is__eth_addr_t"></span><span class="target" id="classeos_1_1flow__action__t_1a554be215fff3813cd1054cdbd8de06c1"></span>void <code class="sig-name descname">eth_src_is</code><span class="sig-paren">(</span><a class="reference internal" href="eth.html#_CPPv4N3eos10eth_addr_tE" title="eos::eth_addr_t">eth_addr_t</a> <em>eth_src</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos13flow_action_t10eth_src_isE10eth_addr_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Setter for ‘eth_src’. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos13flow_action_t7eth_dstEv">
+<span id="_CPPv3NK3eos13flow_action_t7eth_dstEv"></span><span id="_CPPv2NK3eos13flow_action_t7eth_dstEv"></span><span id="eos::flow_action_t::eth_dstC"></span><span class="target" id="classeos_1_1flow__action__t_1a2ffb8ff810b6ad5ff99a6618dbd88fb7"></span><a class="reference internal" href="eth.html#_CPPv4N3eos10eth_addr_tE" title="eos::eth_addr_t">eth_addr_t</a> <code class="sig-name descname">eth_dst</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos13flow_action_t7eth_dstEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Getter for ‘eth_dst’: the destination Ethernet address. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos13flow_action_t10eth_dst_isE10eth_addr_t">
+<span id="_CPPv3N3eos13flow_action_t10eth_dst_isE10eth_addr_t"></span><span id="_CPPv2N3eos13flow_action_t10eth_dst_isE10eth_addr_t"></span><span id="eos::flow_action_t::eth_dst_is__eth_addr_t"></span><span class="target" id="classeos_1_1flow__action__t_1ace9fa6fb4a7a62444b35b98e309414e5"></span>void <code class="sig-name descname">eth_dst_is</code><span class="sig-paren">(</span><a class="reference internal" href="eth.html#_CPPv4N3eos10eth_addr_tE" title="eos::eth_addr_t">eth_addr_t</a> <em>eth_dst</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos13flow_action_t10eth_dst_isE10eth_addr_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Setter for ‘eth_dst’. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos13flow_action_t6ip_srcEv">
+<span id="_CPPv3NK3eos13flow_action_t6ip_srcEv"></span><span id="_CPPv2NK3eos13flow_action_t6ip_srcEv"></span><span id="eos::flow_action_t::ip_srcC"></span><span class="target" id="classeos_1_1flow__action__t_1a89b923b005a718ce367eaeacf373742e"></span><a class="reference internal" href="ip.html#_CPPv4N3eos9ip_addr_tE" title="eos::ip_addr_t">ip_addr_t</a> <code class="sig-name descname">ip_src</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos13flow_action_t6ip_srcEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Getter for ‘ip_src’: the source IPv4 address. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos13flow_action_t9ip_src_isERK9ip_addr_t">
+<span id="_CPPv3N3eos13flow_action_t9ip_src_isERK9ip_addr_t"></span><span id="_CPPv2N3eos13flow_action_t9ip_src_isERK9ip_addr_t"></span><span id="eos::flow_action_t::ip_src_is__ip_addr_tCR"></span><span class="target" id="classeos_1_1flow__action__t_1a6c92f6f84ce51f337c3d764d091db34b"></span>void <code class="sig-name descname">ip_src_is</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#_CPPv4N3eos9ip_addr_tE" title="eos::ip_addr_t">ip_addr_t</a> <em class="property">const</em> &amp;<em>ip_src</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos13flow_action_t9ip_src_isERK9ip_addr_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Setter for ‘ip_src’. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos13flow_action_t9ip_src_isERR9ip_addr_t">
+<span id="_CPPv3N3eos13flow_action_t9ip_src_isERR9ip_addr_t"></span><span id="_CPPv2N3eos13flow_action_t9ip_src_isERR9ip_addr_t"></span><span id="eos::flow_action_t::ip_src_is__ip_addr_tRR"></span><span class="target" id="classeos_1_1flow__action__t_1a2ea3cb2096402425aa5897db5b28c0e0"></span>void <code class="sig-name descname">ip_src_is</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#_CPPv4N3eos9ip_addr_tE" title="eos::ip_addr_t">ip_addr_t</a> &amp;&amp;<em>ip_src</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos13flow_action_t9ip_src_isERR9ip_addr_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Moving Setter for ‘ip_src’. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos13flow_action_t6ip_dstEv">
+<span id="_CPPv3NK3eos13flow_action_t6ip_dstEv"></span><span id="_CPPv2NK3eos13flow_action_t6ip_dstEv"></span><span id="eos::flow_action_t::ip_dstC"></span><span class="target" id="classeos_1_1flow__action__t_1acbcf388bfb37851164e85f54c209b52a"></span><a class="reference internal" href="ip.html#_CPPv4N3eos9ip_addr_tE" title="eos::ip_addr_t">ip_addr_t</a> <code class="sig-name descname">ip_dst</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos13flow_action_t6ip_dstEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Getter for ‘ip_dst’: the destination IPv4 address. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos13flow_action_t9ip_dst_isERK9ip_addr_t">
+<span id="_CPPv3N3eos13flow_action_t9ip_dst_isERK9ip_addr_t"></span><span id="_CPPv2N3eos13flow_action_t9ip_dst_isERK9ip_addr_t"></span><span id="eos::flow_action_t::ip_dst_is__ip_addr_tCR"></span><span class="target" id="classeos_1_1flow__action__t_1a978d1316ebfb0c25c8e6c1906ead9f99"></span>void <code class="sig-name descname">ip_dst_is</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#_CPPv4N3eos9ip_addr_tE" title="eos::ip_addr_t">ip_addr_t</a> <em class="property">const</em> &amp;<em>ip_dst</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos13flow_action_t9ip_dst_isERK9ip_addr_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Setter for ‘ip_dst’. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos13flow_action_t9ip_dst_isERR9ip_addr_t">
+<span id="_CPPv3N3eos13flow_action_t9ip_dst_isERR9ip_addr_t"></span><span id="_CPPv2N3eos13flow_action_t9ip_dst_isERR9ip_addr_t"></span><span id="eos::flow_action_t::ip_dst_is__ip_addr_tRR"></span><span class="target" id="classeos_1_1flow__action__t_1ab80aa08df93291c8b3ebce8bb1eb7514"></span>void <code class="sig-name descname">ip_dst_is</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#_CPPv4N3eos9ip_addr_tE" title="eos::ip_addr_t">ip_addr_t</a> &amp;&amp;<em>ip_dst</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos13flow_action_t9ip_dst_isERR9ip_addr_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Moving Setter for ‘ip_dst’. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos13flow_action_teqERK13flow_action_t">
+<span id="_CPPv3NK3eos13flow_action_teqERK13flow_action_t"></span><span id="_CPPv2NK3eos13flow_action_teqERK13flow_action_t"></span><span id="eos::flow_action_t::eq-operator__flow_action_tCRC"></span><span class="target" id="classeos_1_1flow__action__t_1aedbc1b6c81261c098ed70b78c5d1a09d"></span>bool <code class="sig-name descname">operator==</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos13flow_action_tE" title="eos::flow_action_t">flow_action_t</a> <em class="property">const</em> &amp;<em>other</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos13flow_action_teqERK13flow_action_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos13flow_action_tneERK13flow_action_t">
+<span id="_CPPv3NK3eos13flow_action_tneERK13flow_action_t"></span><span id="_CPPv2NK3eos13flow_action_tneERK13flow_action_t"></span><span id="eos::flow_action_t::neq-operator__flow_action_tCRC"></span><span class="target" id="classeos_1_1flow__action__t_1ab53beb4e17fe0eee70d0d93d4b6d24b5"></span>bool <code class="sig-name descname">operator!=</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos13flow_action_tE" title="eos::flow_action_t">flow_action_t</a> <em class="property">const</em> &amp;<em>other</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos13flow_action_tneERK13flow_action_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos13flow_action_t4hashEv">
+<span id="_CPPv3NK3eos13flow_action_t4hashEv"></span><span id="_CPPv2NK3eos13flow_action_t4hashEv"></span><span id="eos::flow_action_t::hashC"></span><span class="target" id="classeos_1_1flow__action__t_1a5215fc1a30746147e88835705d3eae92"></span>uint32_t <code class="sig-name descname">hash</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos13flow_action_t4hashEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>The hash function for type <a class="reference internal" href="#classeos_1_1flow__action__t"><span class="std std-ref">flow_action_t</span></a>. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos13flow_action_t6mix_meER8hash_mix">
+<span id="_CPPv3NK3eos13flow_action_t6mix_meER8hash_mix"></span><span id="_CPPv2NK3eos13flow_action_t6mix_meER8hash_mix"></span><span id="eos::flow_action_t::mix_me__hash_mixRC"></span><span class="target" id="classeos_1_1flow__action__t_1a4a5eca8b9d84f048058d24e3cbce510a"></span>void <code class="sig-name descname">mix_me</code><span class="sig-paren">(</span><a class="reference internal" href="hash_mix.html#_CPPv4N3eos8hash_mixE" title="eos::hash_mix">hash_mix</a> &amp;<em>h</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos13flow_action_t6mix_meER8hash_mix" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>The hash mix function for type <a class="reference internal" href="#classeos_1_1flow__action__t"><span class="std std-ref">flow_action_t</span></a>. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos13flow_action_t9to_stringEv">
+<span id="_CPPv3NK3eos13flow_action_t9to_stringEv"></span><span id="_CPPv2NK3eos13flow_action_t9to_stringEv"></span><span id="eos::flow_action_t::to_stringC"></span><span class="target" id="classeos_1_1flow__action__t_1a6d086bbc6049bb66dcd2ee4ef4fff6a6"></span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::string <code class="sig-name descname">to_string</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos13flow_action_t9to_stringEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Returns a string representation of the current object’s values. </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-static-functions">Public Static Functions</p>
+<dl class="cpp function">
+<dt id="_CPPv4N3eos13flow_action_tnwENSt6size_tEPv">
+<span id="_CPPv3N3eos13flow_action_tnwENSt6size_tEPv"></span><span id="_CPPv2N3eos13flow_action_tnwENSt6size_tEPv"></span><span id="eos::flow_action_t::new-operator__std::s.voidP"></span><span class="target" id="classeos_1_1flow__action__t_1a9c5c4e10fd80d615ca65436d277763b3"></span><em class="property">static</em> <em class="property">inline</em> void *<code class="sig-name descname">operator new</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::size_t, void *<em>ptr</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos13flow_action_tnwENSt6size_tEPv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos13flow_action_tnwENSt6size_tE">
+<span id="_CPPv3N3eos13flow_action_tnwENSt6size_tE"></span><span id="_CPPv2N3eos13flow_action_tnwENSt6size_tE"></span><span id="eos::flow_action_t::new-operator__std::s"></span><span class="target" id="classeos_1_1flow__action__t_1a81f973251e82a9fbbdc8d106b88e6313"></span><em class="property">static</em> void *<code class="sig-name descname">operator new</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::size_t<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos13flow_action_tnwENSt6size_tE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos13flow_action_tdlEPv">
+<span id="_CPPv3N3eos13flow_action_tdlEPv"></span><span id="_CPPv2N3eos13flow_action_tdlEPv"></span><span id="eos::flow_action_t::delete-operator__voidP"></span><span class="target" id="classeos_1_1flow__action__t_1a019da746e5203ece6b732e24222157e7"></span><em class="property">static</em> void <code class="sig-name descname">operator delete</code><span class="sig-paren">(</span>void*<span class="sig-paren">)</span> <em class="property">noexcept</em><a class="headerlink" href="#_CPPv4N3eos13flow_action_tdlEPv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-private-members">Private Members</p>
+<dl class="cpp var">
+<dt id="_CPPv4N3eos13flow_action_t5pimplE">
+<span id="_CPPv3N3eos13flow_action_t5pimplE"></span><span id="_CPPv2N3eos13flow_action_t5pimplE"></span><span id="eos::flow_action_t::pimpl__std::shared_ptr:flow_action_impl_t:"></span><span class="target" id="classeos_1_1flow__action__t_1a4af84b71d97d47bb70653e935431660c"></span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::shared_ptr&lt;flow_action_impl_t&gt; <code class="sig-name descname">pimpl</code><a class="headerlink" href="#_CPPv4N3eos13flow_action_t5pimplE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-friends">Friends</p>
+<dl class="cpp function">
+<dt id="_CPPv4N3eos13flow_action_tlsERNSt7ostreamERK13flow_action_t">
+<span id="_CPPv3N3eos13flow_action_tlsERNSt7ostreamERK13flow_action_t"></span><span id="_CPPv2N3eos13flow_action_tlsERNSt7ostreamERK13flow_action_t"></span><span id="eos::flow_action_t::lshift-operator__osR.flow_action_tCR"></span><span class="target" id="classeos_1_1flow__action__t_1a100fb22c0da275a1ddc37c3d19033999"></span><em class="property">friend</em> <a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::ostream &amp;<code class="sig-name descname">operator&lt;&lt;</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::ostream &amp;<em>os</em>, <em class="property">const</em> <a class="reference internal" href="#_CPPv4N3eos13flow_action_tE" title="eos::flow_action_t">flow_action_t</a> &amp;<em>obj</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos13flow_action_tlsERNSt7ostreamERK13flow_action_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>A utility stream operator that adds a string representation of <a class="reference internal" href="#classeos_1_1flow__action__t"><span class="std std-ref">flow_action_t</span></a> to the ostream. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="cpp class">
+<dt id="_CPPv4N3eos12flow_entry_tE">
+<span id="_CPPv3N3eos12flow_entry_tE"></span><span id="_CPPv2N3eos12flow_entry_tE"></span><span id="eos::flow_entry_t"></span><span class="target" id="classeos_1_1flow__entry__t"></span><em class="property">class </em><code class="sig-name descname">flow_entry_t</code><a class="headerlink" href="#_CPPv4N3eos12flow_entry_tE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><div class="docutils container">
+<em>#include &lt;directflow.h&gt;</em></div>
+<p>Defines a flow entry. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
+<dl class="cpp function">
+<dt id="_CPPv4N3eos12flow_entry_t12flow_entry_tEv">
+<span id="_CPPv3N3eos12flow_entry_t12flow_entry_tEv"></span><span id="_CPPv2N3eos12flow_entry_t12flow_entry_tEv"></span><span id="eos::flow_entry_t::flow_entry_t"></span><span class="target" id="classeos_1_1flow__entry__t_1adb689dc105748b39a326307e3ad4925d"></span><code class="sig-name descname">flow_entry_t</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos12flow_entry_t12flow_entry_tEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos12flow_entry_t12flow_entry_tERKNSt6stringE12flow_match_t13flow_action_t15flow_priority_t">
+<span id="_CPPv3N3eos12flow_entry_t12flow_entry_tERKNSt6stringE12flow_match_t13flow_action_t15flow_priority_t"></span><span id="_CPPv2N3eos12flow_entry_t12flow_entry_tERKNSt6stringE12flow_match_t13flow_action_t15flow_priority_t"></span><span id="eos::flow_entry_t::flow_entry_t__ssCR.flow_match_t.flow_action_t.flow_priority_t"></span><span class="target" id="classeos_1_1flow__entry__t_1a0716fa3a44fb74d61b4941732ab8046b"></span><code class="sig-name descname">flow_entry_t</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::string <em class="property">const</em> &amp;<em>name</em>, <a class="reference internal" href="#_CPPv4N3eos12flow_match_tE" title="eos::flow_match_t">flow_match_t</a> <em>match</em>, <a class="reference internal" href="#_CPPv4N3eos13flow_action_tE" title="eos::flow_action_t">flow_action_t</a> <em>action</em>, <a class="reference internal" href="#_CPPv4N3eos15flow_priority_tE" title="eos::flow_priority_t">flow_priority_t</a> <em>priority</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos12flow_entry_t12flow_entry_tERKNSt6stringE12flow_match_t13flow_action_t15flow_priority_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos12flow_entry_t12flow_entry_tERK12flow_entry_t">
+<span id="_CPPv3N3eos12flow_entry_t12flow_entry_tERK12flow_entry_t"></span><span id="_CPPv2N3eos12flow_entry_t12flow_entry_tERK12flow_entry_t"></span><span id="eos::flow_entry_t::flow_entry_t__flow_entry_tCR"></span><span class="target" id="classeos_1_1flow__entry__t_1ae981a570f02d6d41c7e2f176a0d8a99f"></span><code class="sig-name descname">flow_entry_t</code><span class="sig-paren">(</span><em class="property">const</em> <a class="reference internal" href="#_CPPv4N3eos12flow_entry_t12flow_entry_tERK12flow_entry_t" title="eos::flow_entry_t::flow_entry_t">flow_entry_t</a> &amp;<em>other</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos12flow_entry_t12flow_entry_tERK12flow_entry_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos12flow_entry_taSERK12flow_entry_t">
+<span id="_CPPv3N3eos12flow_entry_taSERK12flow_entry_t"></span><span id="_CPPv2N3eos12flow_entry_taSERK12flow_entry_t"></span><span id="eos::flow_entry_t::assign-operator__flow_entry_tCR"></span><span class="target" id="classeos_1_1flow__entry__t_1af16b136de67d7aad104ea200004fd55c"></span><a class="reference internal" href="#_CPPv4N3eos12flow_entry_tE" title="eos::flow_entry_t">flow_entry_t</a> &amp;<code class="sig-name descname">operator=</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos12flow_entry_tE" title="eos::flow_entry_t">flow_entry_t</a> <em class="property">const</em> &amp;<em>other</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos12flow_entry_taSERK12flow_entry_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos12flow_entry_t12flow_entry_tERR12flow_entry_t">
+<span id="_CPPv3N3eos12flow_entry_t12flow_entry_tERR12flow_entry_t"></span><span id="_CPPv2N3eos12flow_entry_t12flow_entry_tERR12flow_entry_t"></span><span id="eos::flow_entry_t::flow_entry_t__flow_entry_tRR"></span><span class="target" id="classeos_1_1flow__entry__t_1a1c01f7995af30bdccc7f7330f312b8ec"></span><code class="sig-name descname">flow_entry_t</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos12flow_entry_t12flow_entry_tERR12flow_entry_t" title="eos::flow_entry_t::flow_entry_t">flow_entry_t</a> &amp;&amp;<em>other</em><span class="sig-paren">)</span> <em class="property">noexcept</em><a class="headerlink" href="#_CPPv4N3eos12flow_entry_t12flow_entry_tERR12flow_entry_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos12flow_entry_taSERR12flow_entry_t">
+<span id="_CPPv3N3eos12flow_entry_taSERR12flow_entry_t"></span><span id="_CPPv2N3eos12flow_entry_taSERR12flow_entry_t"></span><span id="eos::flow_entry_t::assign-operator__flow_entry_tRR"></span><span class="target" id="classeos_1_1flow__entry__t_1ad27c494b42a0b643664c0503d760bcbf"></span><a class="reference internal" href="#_CPPv4N3eos12flow_entry_tE" title="eos::flow_entry_t">flow_entry_t</a> &amp;<code class="sig-name descname">operator=</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos12flow_entry_tE" title="eos::flow_entry_t">flow_entry_t</a> &amp;&amp;<em>other</em><span class="sig-paren">)</span> <em class="property">noexcept</em><a class="headerlink" href="#_CPPv4N3eos12flow_entry_taSERR12flow_entry_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos12flow_entry_t4nameEv">
+<span id="_CPPv3NK3eos12flow_entry_t4nameEv"></span><span id="_CPPv2NK3eos12flow_entry_t4nameEv"></span><span id="eos::flow_entry_t::nameC"></span><span class="target" id="classeos_1_1flow__entry__t_1a5161f8c67df703c5984f8ebe60121bfb"></span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::string <code class="sig-name descname">name</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos12flow_entry_t4nameEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos12flow_entry_t5matchEv">
+<span id="_CPPv3NK3eos12flow_entry_t5matchEv"></span><span id="_CPPv2NK3eos12flow_entry_t5matchEv"></span><span id="eos::flow_entry_t::matchC"></span><span class="target" id="classeos_1_1flow__entry__t_1a0de0402c21106053400d920ceb47a4c2"></span><a class="reference internal" href="#_CPPv4N3eos12flow_match_tE" title="eos::flow_match_t">flow_match_t</a> <code class="sig-name descname">match</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos12flow_entry_t5matchEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos12flow_entry_t6actionEv">
+<span id="_CPPv3NK3eos12flow_entry_t6actionEv"></span><span id="_CPPv2NK3eos12flow_entry_t6actionEv"></span><span id="eos::flow_entry_t::actionC"></span><span class="target" id="classeos_1_1flow__entry__t_1abe7b41bd344fdebe014acafd424e77a8"></span><a class="reference internal" href="#_CPPv4N3eos13flow_action_tE" title="eos::flow_action_t">flow_action_t</a> <code class="sig-name descname">action</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos12flow_entry_t6actionEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos12flow_entry_t8priorityEv">
+<span id="_CPPv3NK3eos12flow_entry_t8priorityEv"></span><span id="_CPPv2NK3eos12flow_entry_t8priorityEv"></span><span id="eos::flow_entry_t::priorityC"></span><span class="target" id="classeos_1_1flow__entry__t_1a72102962991cf34cb569b85657d5aa99"></span><a class="reference internal" href="#_CPPv4N3eos15flow_priority_tE" title="eos::flow_priority_t">flow_priority_t</a> <code class="sig-name descname">priority</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos12flow_entry_t8priorityEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos12flow_entry_teqERK12flow_entry_t">
+<span id="_CPPv3NK3eos12flow_entry_teqERK12flow_entry_t"></span><span id="_CPPv2NK3eos12flow_entry_teqERK12flow_entry_t"></span><span id="eos::flow_entry_t::eq-operator__flow_entry_tCRC"></span><span class="target" id="classeos_1_1flow__entry__t_1ad3aaaced8cff9fe96803e8c90728dc7c"></span>bool <code class="sig-name descname">operator==</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos12flow_entry_tE" title="eos::flow_entry_t">flow_entry_t</a> <em class="property">const</em> &amp;<em>other</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos12flow_entry_teqERK12flow_entry_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos12flow_entry_tneERK12flow_entry_t">
+<span id="_CPPv3NK3eos12flow_entry_tneERK12flow_entry_t"></span><span id="_CPPv2NK3eos12flow_entry_tneERK12flow_entry_t"></span><span id="eos::flow_entry_t::neq-operator__flow_entry_tCRC"></span><span class="target" id="classeos_1_1flow__entry__t_1ad2cdc22a084fd29206c323df0912a073"></span>bool <code class="sig-name descname">operator!=</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos12flow_entry_tE" title="eos::flow_entry_t">flow_entry_t</a> <em class="property">const</em> &amp;<em>other</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos12flow_entry_tneERK12flow_entry_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos12flow_entry_t4hashEv">
+<span id="_CPPv3NK3eos12flow_entry_t4hashEv"></span><span id="_CPPv2NK3eos12flow_entry_t4hashEv"></span><span id="eos::flow_entry_t::hashC"></span><span class="target" id="classeos_1_1flow__entry__t_1a1c8cae183dd1a4e7636d072481727f6e"></span>uint32_t <code class="sig-name descname">hash</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos12flow_entry_t4hashEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>The hash function for type <a class="reference internal" href="#classeos_1_1flow__entry__t"><span class="std std-ref">flow_entry_t</span></a>. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos12flow_entry_t6mix_meER8hash_mix">
+<span id="_CPPv3NK3eos12flow_entry_t6mix_meER8hash_mix"></span><span id="_CPPv2NK3eos12flow_entry_t6mix_meER8hash_mix"></span><span id="eos::flow_entry_t::mix_me__hash_mixRC"></span><span class="target" id="classeos_1_1flow__entry__t_1a2243367a4c8f2b868904340a4aba598c"></span>void <code class="sig-name descname">mix_me</code><span class="sig-paren">(</span><a class="reference internal" href="hash_mix.html#_CPPv4N3eos8hash_mixE" title="eos::hash_mix">hash_mix</a> &amp;<em>h</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos12flow_entry_t6mix_meER8hash_mix" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>The hash mix function for type <a class="reference internal" href="#classeos_1_1flow__entry__t"><span class="std std-ref">flow_entry_t</span></a>. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos12flow_entry_t9to_stringEv">
+<span id="_CPPv3NK3eos12flow_entry_t9to_stringEv"></span><span id="_CPPv2NK3eos12flow_entry_t9to_stringEv"></span><span id="eos::flow_entry_t::to_stringC"></span><span class="target" id="classeos_1_1flow__entry__t_1a58befc5b86d5d0b312adfcc6a0ac780b"></span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::string <code class="sig-name descname">to_string</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos12flow_entry_t9to_stringEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Returns a string representation of the current object’s values. </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-static-functions">Public Static Functions</p>
+<dl class="cpp function">
+<dt id="_CPPv4N3eos12flow_entry_tnwENSt6size_tEPv">
+<span id="_CPPv3N3eos12flow_entry_tnwENSt6size_tEPv"></span><span id="_CPPv2N3eos12flow_entry_tnwENSt6size_tEPv"></span><span id="eos::flow_entry_t::new-operator__std::s.voidP"></span><span class="target" id="classeos_1_1flow__entry__t_1a57ef72958a124fddf1a8821e74e5cd76"></span><em class="property">static</em> <em class="property">inline</em> void *<code class="sig-name descname">operator new</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::size_t, void *<em>ptr</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos12flow_entry_tnwENSt6size_tEPv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos12flow_entry_tnwENSt6size_tE">
+<span id="_CPPv3N3eos12flow_entry_tnwENSt6size_tE"></span><span id="_CPPv2N3eos12flow_entry_tnwENSt6size_tE"></span><span id="eos::flow_entry_t::new-operator__std::s"></span><span class="target" id="classeos_1_1flow__entry__t_1a8b408e3bfb4c963be63b6b84b48c46ef"></span><em class="property">static</em> void *<code class="sig-name descname">operator new</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::size_t<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos12flow_entry_tnwENSt6size_tE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos12flow_entry_tdlEPv">
+<span id="_CPPv3N3eos12flow_entry_tdlEPv"></span><span id="_CPPv2N3eos12flow_entry_tdlEPv"></span><span id="eos::flow_entry_t::delete-operator__voidP"></span><span class="target" id="classeos_1_1flow__entry__t_1a9461ef86eeac6b079d4add5b0f480414"></span><em class="property">static</em> void <code class="sig-name descname">operator delete</code><span class="sig-paren">(</span>void*<span class="sig-paren">)</span> <em class="property">noexcept</em><a class="headerlink" href="#_CPPv4N3eos12flow_entry_tdlEPv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-private-members">Private Members</p>
+<dl class="cpp var">
+<dt id="_CPPv4N3eos12flow_entry_t5pimplE">
+<span id="_CPPv3N3eos12flow_entry_t5pimplE"></span><span id="_CPPv2N3eos12flow_entry_t5pimplE"></span><span id="eos::flow_entry_t::pimpl__std::shared_ptr:flow_entry_impl_t:"></span><span class="target" id="classeos_1_1flow__entry__t_1a0d589d821d62a12da6b1f9689c8e1b63"></span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::shared_ptr&lt;flow_entry_impl_t&gt; <code class="sig-name descname">pimpl</code><a class="headerlink" href="#_CPPv4N3eos12flow_entry_t5pimplE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-friends">Friends</p>
+<dl class="cpp function">
+<dt id="_CPPv4N3eos12flow_entry_tlsERNSt7ostreamERK12flow_entry_t">
+<span id="_CPPv3N3eos12flow_entry_tlsERNSt7ostreamERK12flow_entry_t"></span><span id="_CPPv2N3eos12flow_entry_tlsERNSt7ostreamERK12flow_entry_t"></span><span id="eos::flow_entry_t::lshift-operator__osR.flow_entry_tCR"></span><span class="target" id="classeos_1_1flow__entry__t_1a47adbd60575cdc8256a9530ad5e7c980"></span><em class="property">friend</em> <a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::ostream &amp;<code class="sig-name descname">operator&lt;&lt;</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::ostream &amp;<em>os</em>, <em class="property">const</em> <a class="reference internal" href="#_CPPv4N3eos12flow_entry_tE" title="eos::flow_entry_t">flow_entry_t</a> &amp;<em>obj</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos12flow_entry_tlsERNSt7ostreamERK12flow_entry_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>A utility stream operator that adds a string representation of <a class="reference internal" href="#classeos_1_1flow__entry__t"><span class="std std-ref">flow_entry_t</span></a> to the ostream. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="cpp class">
+<dt id="_CPPv4N3eos15flow_counters_tE">
+<span id="_CPPv3N3eos15flow_counters_tE"></span><span id="_CPPv2N3eos15flow_counters_tE"></span><span id="eos::flow_counters_t"></span><span class="target" id="classeos_1_1flow__counters__t"></span><em class="property">class </em><code class="sig-name descname">flow_counters_t</code><a class="headerlink" href="#_CPPv4N3eos15flow_counters_tE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><div class="docutils container">
+<em>#include &lt;directflow.h&gt;</em></div>
+<p>Defines counters for a flow. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
+<dl class="cpp function">
+<dt id="_CPPv4N3eos15flow_counters_t15flow_counters_tEv">
+<span id="_CPPv3N3eos15flow_counters_t15flow_counters_tEv"></span><span id="_CPPv2N3eos15flow_counters_t15flow_counters_tEv"></span><span id="eos::flow_counters_t::flow_counters_t"></span><span class="target" id="classeos_1_1flow__counters__t_1a6e9ae4a0c68b7d34f43f43745c7917a6"></span><code class="sig-name descname">flow_counters_t</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos15flow_counters_t15flow_counters_tEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos15flow_counters_t15flow_counters_tERK15flow_counters_t">
+<span id="_CPPv3N3eos15flow_counters_t15flow_counters_tERK15flow_counters_t"></span><span id="_CPPv2N3eos15flow_counters_t15flow_counters_tERK15flow_counters_t"></span><span id="eos::flow_counters_t::flow_counters_t__flow_counters_tCR"></span><span class="target" id="classeos_1_1flow__counters__t_1a29b5d730efa889a8f842676ebf251c85"></span><code class="sig-name descname">flow_counters_t</code><span class="sig-paren">(</span><em class="property">const</em> <a class="reference internal" href="#_CPPv4N3eos15flow_counters_t15flow_counters_tERK15flow_counters_t" title="eos::flow_counters_t::flow_counters_t">flow_counters_t</a> &amp;<em>other</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos15flow_counters_t15flow_counters_tERK15flow_counters_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos15flow_counters_taSERK15flow_counters_t">
+<span id="_CPPv3N3eos15flow_counters_taSERK15flow_counters_t"></span><span id="_CPPv2N3eos15flow_counters_taSERK15flow_counters_t"></span><span id="eos::flow_counters_t::assign-operator__flow_counters_tCR"></span><span class="target" id="classeos_1_1flow__counters__t_1a7f7832310593fabc042606ea64d769c4"></span><a class="reference internal" href="#_CPPv4N3eos15flow_counters_tE" title="eos::flow_counters_t">flow_counters_t</a> &amp;<code class="sig-name descname">operator=</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos15flow_counters_tE" title="eos::flow_counters_t">flow_counters_t</a> <em class="property">const</em> &amp;<em>other</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos15flow_counters_taSERK15flow_counters_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos15flow_counters_t15flow_counters_tERR15flow_counters_t">
+<span id="_CPPv3N3eos15flow_counters_t15flow_counters_tERR15flow_counters_t"></span><span id="_CPPv2N3eos15flow_counters_t15flow_counters_tERR15flow_counters_t"></span><span id="eos::flow_counters_t::flow_counters_t__flow_counters_tRR"></span><span class="target" id="classeos_1_1flow__counters__t_1ab67ec2f6a5fddd20e2b56d422a2a9cff"></span><code class="sig-name descname">flow_counters_t</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos15flow_counters_t15flow_counters_tERR15flow_counters_t" title="eos::flow_counters_t::flow_counters_t">flow_counters_t</a> &amp;&amp;<em>other</em><span class="sig-paren">)</span> <em class="property">noexcept</em><a class="headerlink" href="#_CPPv4N3eos15flow_counters_t15flow_counters_tERR15flow_counters_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos15flow_counters_taSERR15flow_counters_t">
+<span id="_CPPv3N3eos15flow_counters_taSERR15flow_counters_t"></span><span id="_CPPv2N3eos15flow_counters_taSERR15flow_counters_t"></span><span id="eos::flow_counters_t::assign-operator__flow_counters_tRR"></span><span class="target" id="classeos_1_1flow__counters__t_1a112a7192bc7e44a6bcf48d6985c2e5c6"></span><a class="reference internal" href="#_CPPv4N3eos15flow_counters_tE" title="eos::flow_counters_t">flow_counters_t</a> &amp;<code class="sig-name descname">operator=</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos15flow_counters_tE" title="eos::flow_counters_t">flow_counters_t</a> &amp;&amp;<em>other</em><span class="sig-paren">)</span> <em class="property">noexcept</em><a class="headerlink" href="#_CPPv4N3eos15flow_counters_taSERR15flow_counters_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos15flow_counters_t5bytesEv">
+<span id="_CPPv3NK3eos15flow_counters_t5bytesEv"></span><span id="_CPPv2NK3eos15flow_counters_t5bytesEv"></span><span id="eos::flow_counters_t::bytesC"></span><span class="target" id="classeos_1_1flow__counters__t_1a0cd4217ceabd2e0b46b9b1f3ff044665"></span>uint64_t <code class="sig-name descname">bytes</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos15flow_counters_t5bytesEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos15flow_counters_t7packetsEv">
+<span id="_CPPv3NK3eos15flow_counters_t7packetsEv"></span><span id="_CPPv2NK3eos15flow_counters_t7packetsEv"></span><span id="eos::flow_counters_t::packetsC"></span><span class="target" id="classeos_1_1flow__counters__t_1a1bd8c7a199d908bb31d40a67050e67b7"></span>uint64_t <code class="sig-name descname">packets</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos15flow_counters_t7packetsEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos15flow_counters_teqERK15flow_counters_t">
+<span id="_CPPv3NK3eos15flow_counters_teqERK15flow_counters_t"></span><span id="_CPPv2NK3eos15flow_counters_teqERK15flow_counters_t"></span><span id="eos::flow_counters_t::eq-operator__flow_counters_tCRC"></span><span class="target" id="classeos_1_1flow__counters__t_1abd4f790c4d2ee9c4db63ddbe910a59b8"></span>bool <code class="sig-name descname">operator==</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos15flow_counters_tE" title="eos::flow_counters_t">flow_counters_t</a> <em class="property">const</em> &amp;<em>other</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos15flow_counters_teqERK15flow_counters_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos15flow_counters_tneERK15flow_counters_t">
+<span id="_CPPv3NK3eos15flow_counters_tneERK15flow_counters_t"></span><span id="_CPPv2NK3eos15flow_counters_tneERK15flow_counters_t"></span><span id="eos::flow_counters_t::neq-operator__flow_counters_tCRC"></span><span class="target" id="classeos_1_1flow__counters__t_1ad6436e7109585acd934bee2ac7681e64"></span>bool <code class="sig-name descname">operator!=</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos15flow_counters_tE" title="eos::flow_counters_t">flow_counters_t</a> <em class="property">const</em> &amp;<em>other</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos15flow_counters_tneERK15flow_counters_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos15flow_counters_t4hashEv">
+<span id="_CPPv3NK3eos15flow_counters_t4hashEv"></span><span id="_CPPv2NK3eos15flow_counters_t4hashEv"></span><span id="eos::flow_counters_t::hashC"></span><span class="target" id="classeos_1_1flow__counters__t_1a22dc60b988e46bf47b4424b2723be7c8"></span>uint32_t <code class="sig-name descname">hash</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos15flow_counters_t4hashEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>The hash function for type <a class="reference internal" href="#classeos_1_1flow__counters__t"><span class="std std-ref">flow_counters_t</span></a>. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos15flow_counters_t6mix_meER8hash_mix">
+<span id="_CPPv3NK3eos15flow_counters_t6mix_meER8hash_mix"></span><span id="_CPPv2NK3eos15flow_counters_t6mix_meER8hash_mix"></span><span id="eos::flow_counters_t::mix_me__hash_mixRC"></span><span class="target" id="classeos_1_1flow__counters__t_1a858b8c0921f3ab88a62575c9b4dd7be1"></span>void <code class="sig-name descname">mix_me</code><span class="sig-paren">(</span><a class="reference internal" href="hash_mix.html#_CPPv4N3eos8hash_mixE" title="eos::hash_mix">hash_mix</a> &amp;<em>h</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos15flow_counters_t6mix_meER8hash_mix" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>The hash mix function for type <a class="reference internal" href="#classeos_1_1flow__counters__t"><span class="std std-ref">flow_counters_t</span></a>. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos15flow_counters_t9to_stringEv">
+<span id="_CPPv3NK3eos15flow_counters_t9to_stringEv"></span><span id="_CPPv2NK3eos15flow_counters_t9to_stringEv"></span><span id="eos::flow_counters_t::to_stringC"></span><span class="target" id="classeos_1_1flow__counters__t_1ab56d9fecfb8dd4e384642530e5fd779f"></span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::string <code class="sig-name descname">to_string</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos15flow_counters_t9to_stringEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Returns a string representation of the current object’s values. </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-static-functions">Public Static Functions</p>
+<dl class="cpp function">
+<dt id="_CPPv4N3eos15flow_counters_tnwENSt6size_tEPv">
+<span id="_CPPv3N3eos15flow_counters_tnwENSt6size_tEPv"></span><span id="_CPPv2N3eos15flow_counters_tnwENSt6size_tEPv"></span><span id="eos::flow_counters_t::new-operator__std::s.voidP"></span><span class="target" id="classeos_1_1flow__counters__t_1adaf2e57b1e5d63e13468a9621e29b286"></span><em class="property">static</em> <em class="property">inline</em> void *<code class="sig-name descname">operator new</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::size_t, void *<em>ptr</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos15flow_counters_tnwENSt6size_tEPv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos15flow_counters_tnwENSt6size_tE">
+<span id="_CPPv3N3eos15flow_counters_tnwENSt6size_tE"></span><span id="_CPPv2N3eos15flow_counters_tnwENSt6size_tE"></span><span id="eos::flow_counters_t::new-operator__std::s"></span><span class="target" id="classeos_1_1flow__counters__t_1ac6269fc5c5383db2b7bc83ebc8f401ab"></span><em class="property">static</em> void *<code class="sig-name descname">operator new</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::size_t<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos15flow_counters_tnwENSt6size_tE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos15flow_counters_tdlEPv">
+<span id="_CPPv3N3eos15flow_counters_tdlEPv"></span><span id="_CPPv2N3eos15flow_counters_tdlEPv"></span><span id="eos::flow_counters_t::delete-operator__voidP"></span><span class="target" id="classeos_1_1flow__counters__t_1a427ee02f56317b85522962f7d46a8c08"></span><em class="property">static</em> void <code class="sig-name descname">operator delete</code><span class="sig-paren">(</span>void*<span class="sig-paren">)</span> <em class="property">noexcept</em><a class="headerlink" href="#_CPPv4N3eos15flow_counters_tdlEPv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-private-members">Private Members</p>
+<dl class="cpp var">
+<dt id="_CPPv4N3eos15flow_counters_t5pimplE">
+<span id="_CPPv3N3eos15flow_counters_t5pimplE"></span><span id="_CPPv2N3eos15flow_counters_t5pimplE"></span><span id="eos::flow_counters_t::pimpl__std::shared_ptr:flow_counters_impl_t:"></span><span class="target" id="classeos_1_1flow__counters__t_1a5f71b1610d71babfc645b29b4bd030c2"></span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::shared_ptr&lt;flow_counters_impl_t&gt; <code class="sig-name descname">pimpl</code><a class="headerlink" href="#_CPPv4N3eos15flow_counters_t5pimplE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-friends">Friends</p>
+<dl class="friendclass">
+<dt>
+<em class="property">friend class</em> flow_helper</dt>
+</dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos15flow_counters_tlsERNSt7ostreamERK15flow_counters_t">
+<span id="_CPPv3N3eos15flow_counters_tlsERNSt7ostreamERK15flow_counters_t"></span><span id="_CPPv2N3eos15flow_counters_tlsERNSt7ostreamERK15flow_counters_t"></span><span id="eos::flow_counters_t::lshift-operator__osR.flow_counters_tCR"></span><span class="target" id="classeos_1_1flow__counters__t_1a4eea3c77860cb240f8e921e8bc9aa192"></span><em class="property">friend</em> <a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::ostream &amp;<code class="sig-name descname">operator&lt;&lt;</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::ostream &amp;<em>os</em>, <em class="property">const</em> <a class="reference internal" href="#_CPPv4N3eos15flow_counters_tE" title="eos::flow_counters_t">flow_counters_t</a> &amp;<em>obj</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos15flow_counters_tlsERNSt7ostreamERK15flow_counters_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>A utility stream operator that adds a string representation of <a class="reference internal" href="#classeos_1_1flow__counters__t"><span class="std std-ref">flow_counters_t</span></a> to the ostream. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#"><strong>directflow</strong></a><ul>
+<li><a class="reference internal" href="#type-definitions-in-directflow">Type definitions in <strong>directflow</strong></a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="decap_group.html"
+                        title="previous chapter"><strong>decap_group</strong></a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="eapi.html"
+                        title="next chapter"><strong>eapi</strong></a></p>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="eapi.html" title="eapi"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="decap_group.html" title="decap_group"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Arista EOS SDK 2.23.4 reference</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href=""><strong>directflow</strong></a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2014, Arista Networks.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.4.3.
+    </div>
+  </body>
+</html>

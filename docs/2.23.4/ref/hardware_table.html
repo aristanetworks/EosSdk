@@ -1,0 +1,773 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>hardware_table &#8212; Arista EOS SDK 2.23.4 reference</title>
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/eossdk.css" type="text/css" />
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="hash_mix" href="hash_mix.html" />
+    <link rel="prev" title="fib" href="fib.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="hash_mix.html" title="hash_mix"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="fib.html" title="fib"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Arista EOS SDK 2.23.4 reference</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href=""><strong>hardware_table</strong></a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="hardware-table">
+<h1><strong>hardware_table</strong><a class="headerlink" href="#hardware-table" title="Permalink to this headline">¶</a></h1>
+<p>Hardware table usage and capacity statistics</p>
+<p>This module exposes the usage statistics for the various hardware tables used by the system. This is useful for agents that want to track how many entries are used or available across the various tables, either for monitoring purposes or so they can take specific actions when a table is close to becoming full. Usage is exposed per unique table, feature, and chip combination. Example tables include ‘TCAM’, ‘LEM’, ‘ECMP’, and ‘LPM’ tables, while the features look like “IPV4”, “ACL”, “MPLS”, or even platform-specific features like “V6Hosts”.</p>
+<p>The usage statistics include the number of used, free, committed, maximum available entries, and the high watermark which records the maximum number of entries used by this feature so far and the time-stamp when the last high watermark value was hit. The capacity calculation is triggered every 10 seconds.</p>
+<p>For example, hardware table T has 1000 entries, and the allocation block size is 100. Table T is used by feature F1 and F2. 200 entries have been allocated to Feature F1, 101 are in use. 300 entries have been allocated to Feature F2, 299 are in use. 500 entries are still in the shared pool of available entries. Free entries are those that are committed but not used (200-101 </p>
+<dl class="cpp type">
+<dt id="_CPPv43eos">
+<span id="_CPPv33eos"></span><span id="_CPPv23eos"></span><span id="eos"></span><span class="target" id="namespaceeos"></span><em class="property">namespace </em><code class="sig-name descname">eos</code><br /></dt>
+<dd><dl class="cpp class">
+<dt id="_CPPv4N3eos22hardware_table_handlerE">
+<span id="_CPPv3N3eos22hardware_table_handlerE"></span><span id="_CPPv2N3eos22hardware_table_handlerE"></span><span id="eos::hardware_table_handler"></span><span class="target" id="classeos_1_1hardware__table__handler"></span><em class="property">class </em><code class="sig-name descname">hardware_table_handler</code> : <em class="property">public</em> <a class="reference internal" href="acl.html#_CPPv43eos" title="eos">eos</a>::<a class="reference internal" href="base_handler.html#_CPPv4I00EN3eos12base_handlerE" title="eos::base_handler">base_handler</a>&lt;<a class="reference internal" href="#_CPPv4N3eos18hardware_table_mgrE" title="eos::hardware_table_mgr">hardware_table_mgr</a>, <a class="reference internal" href="#_CPPv4N3eos22hardware_table_handlerE" title="eos::hardware_table_handler">hardware_table_handler</a>&gt;<a class="headerlink" href="#_CPPv4N3eos22hardware_table_handlerE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><div class="docutils container">
+<em>#include &lt;hardware_table.h&gt;</em></div>
+<p>This class provides handler APIs to receive changes of hardware table. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
+<dl class="cpp function">
+<dt id="_CPPv4N3eos22hardware_table_handler22hardware_table_handlerEP18hardware_table_mgr">
+<span id="_CPPv3N3eos22hardware_table_handler22hardware_table_handlerEP18hardware_table_mgr"></span><span id="_CPPv2N3eos22hardware_table_handler22hardware_table_handlerEP18hardware_table_mgr"></span><span id="eos::hardware_table_handler::hardware_table_handler__hardware_table_mgrP"></span><span class="target" id="classeos_1_1hardware__table__handler_1a9b45925413b922f49902af02c3961ed1"></span><em class="property">explicit</em> <code class="sig-name descname">hardware_table_handler</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos18hardware_table_mgrE" title="eos::hardware_table_mgr">hardware_table_mgr</a> *<em>mgr</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos22hardware_table_handler22hardware_table_handlerEP18hardware_table_mgr" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos22hardware_table_handler22get_hardware_table_mgrEv">
+<span id="_CPPv3NK3eos22hardware_table_handler22get_hardware_table_mgrEv"></span><span id="_CPPv2NK3eos22hardware_table_handler22get_hardware_table_mgrEv"></span><span id="eos::hardware_table_handler::get_hardware_table_mgrC"></span><span class="target" id="classeos_1_1hardware__table__handler_1aec987a4aaae049c9eda16af68f1b3454"></span><em class="property">inline</em> <a class="reference internal" href="#_CPPv4N3eos18hardware_table_mgrE" title="eos::hardware_table_mgr">hardware_table_mgr</a> *<code class="sig-name descname">get_hardware_table_mgr</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos22hardware_table_handler22get_hardware_table_mgrEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos22hardware_table_handler25watch_all_hardware_tablesEb">
+<span id="_CPPv3N3eos22hardware_table_handler25watch_all_hardware_tablesEb"></span><span id="_CPPv2N3eos22hardware_table_handler25watch_all_hardware_tablesEb"></span><span id="eos::hardware_table_handler::watch_all_hardware_tables__b"></span><span class="target" id="classeos_1_1hardware__table__handler_1a0d6486e744c8ef3b308626e8b483b359"></span>void <code class="sig-name descname">watch_all_hardware_tables</code><span class="sig-paren">(</span>bool <em>enable</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos22hardware_table_handler25watch_all_hardware_tablesEb" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Register this handler to receive usage updates for all features across all tables. To unsubscribe to events, pass ‘false’. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos22hardware_table_handler20watch_hardware_tableERK20hardware_table_key_tb">
+<span id="_CPPv3N3eos22hardware_table_handler20watch_hardware_tableERK20hardware_table_key_tb"></span><span id="_CPPv2N3eos22hardware_table_handler20watch_hardware_tableERK20hardware_table_key_tb"></span><span id="eos::hardware_table_handler::watch_hardware_table__hardware_table_key_tCR.b"></span><span class="target" id="classeos_1_1hardware__table__handler_1a522d0116e2c76900a48acb986533360b"></span>void <code class="sig-name descname">watch_hardware_table</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos20hardware_table_key_tE" title="eos::hardware_table_key_t">hardware_table_key_t</a> <em class="property">const</em> &amp;<em>key</em>, bool <em>enable</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos22hardware_table_handler20watch_hardware_tableERK20hardware_table_key_tb" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Register this handler to receive usage updates for a single table/feature/chip combination.</p>
+<p>If ‘chip’ is specified as “*” in the key, register this handler to receive all updates for the named feature/table combination. If this feature uses different numbers of entries per-chip, the handler will fire for updates on each chip. Otherwise this is equivalent to watching a unique hardware_table_key.</p>
+<p>If ‘feature’ is “*” in the key, register this handler to receive all updates for the named chip/table combination.</p>
+<p>If ‘chip’ and ‘feature’ are both “*” in the key, register this handler to receive all updates for the specified table. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos22hardware_table_handler27on_hardware_table_entry_setERK20hardware_table_key_tRK22hardware_table_entry_t">
+<span id="_CPPv3N3eos22hardware_table_handler27on_hardware_table_entry_setERK20hardware_table_key_tRK22hardware_table_entry_t"></span><span id="_CPPv2N3eos22hardware_table_handler27on_hardware_table_entry_setERK20hardware_table_key_tRK22hardware_table_entry_t"></span><span id="eos::hardware_table_handler::on_hardware_table_entry_set__hardware_table_key_tCR.hardware_table_entry_tCR"></span><span class="target" id="classeos_1_1hardware__table__handler_1acc5855ead3a1d5b1df52ffaa4bca5bf1"></span><em class="property">virtual</em> void <code class="sig-name descname">on_hardware_table_entry_set</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos20hardware_table_key_tE" title="eos::hardware_table_key_t">hardware_table_key_t</a> <em class="property">const</em> &amp;<em>key</em>, <a class="reference internal" href="#_CPPv4N3eos22hardware_table_entry_tE" title="eos::hardware_table_entry_t">hardware_table_entry_t</a> <em class="property">const</em> &amp;<em>entry</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos22hardware_table_handler27on_hardware_table_entry_setERK20hardware_table_key_tRK22hardware_table_entry_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Handler called when a new table key is created or any of the fields in an existing usage entry changes. The capacity calculation is triggered every 10 seconds.</p>
+<p>For example, enabling multicast will allocate space in the TCAM, triggering this callback with the new [‘TCAM’, ‘Multicast’] table key.</p>
+<p>The handler can also be triggered because the feature is now using more entries (e.g. the ‘IPv4’ feature learned and added more routes to hardware), because the feature has been allocated more committed entries (e.g. the ‘ACL’ feature now requires a second bank of the TCAM), or because another feature that shares this table has increased it’s used or committed entries, causing this feature’s free entries to decrease. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos22hardware_table_handler27on_hardware_table_entry_delERK20hardware_table_key_t">
+<span id="_CPPv3N3eos22hardware_table_handler27on_hardware_table_entry_delERK20hardware_table_key_t"></span><span id="_CPPv2N3eos22hardware_table_handler27on_hardware_table_entry_delERK20hardware_table_key_t"></span><span id="eos::hardware_table_handler::on_hardware_table_entry_del__hardware_table_key_tCR"></span><span class="target" id="classeos_1_1hardware__table__handler_1a86084f2a5e14fb8b239fbe6724e3e67c"></span><em class="property">virtual</em> void <code class="sig-name descname">on_hardware_table_entry_del</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos20hardware_table_key_tE" title="eos::hardware_table_key_t">hardware_table_key_t</a> <em class="property">const</em> &amp;<em>key</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos22hardware_table_handler27on_hardware_table_entry_delERK20hardware_table_key_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Handler called when a table key is deleted. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="cpp class">
+<dt id="_CPPv4N3eos21hardware_table_iter_tE">
+<span id="_CPPv3N3eos21hardware_table_iter_tE"></span><span id="_CPPv2N3eos21hardware_table_iter_tE"></span><span id="eos::hardware_table_iter_t"></span><span class="target" id="classeos_1_1hardware__table__iter__t"></span><em class="property">class </em><code class="sig-name descname">hardware_table_iter_t</code> : <em class="property">public</em> <a class="reference internal" href="acl.html#_CPPv43eos" title="eos">eos</a>::<a class="reference internal" href="iterator.html#_CPPv4I00EN3eos9iter_baseE" title="eos::iter_base">iter_base</a>&lt;<a class="reference internal" href="#_CPPv4N3eos20hardware_table_key_tE" title="eos::hardware_table_key_t">hardware_table_key_t</a>, hardware_table_iter_impl&gt;<a class="headerlink" href="#_CPPv4N3eos21hardware_table_iter_tE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-private-functions">Private Functions</p>
+<dl class="cpp function">
+<dt id="_CPPv4N3eos21hardware_table_iter_t21hardware_table_iter_tEPC24hardware_table_iter_impl">
+<span id="_CPPv3N3eos21hardware_table_iter_t21hardware_table_iter_tEPC24hardware_table_iter_impl"></span><span id="_CPPv2N3eos21hardware_table_iter_t21hardware_table_iter_tEPC24hardware_table_iter_impl"></span><span id="eos::hardware_table_iter_t::hardware_table_iter_t__hardware_table_iter_implPC"></span><span class="target" id="classeos_1_1hardware__table__iter__t_1aa72dafa863022cd247f97a4c0ae6037b"></span><em class="property">explicit</em> <code class="sig-name descname">hardware_table_iter_t</code><span class="sig-paren">(</span>hardware_table_iter_impl*<em class="property">const</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos21hardware_table_iter_t21hardware_table_iter_tEPC24hardware_table_iter_impl" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-friends">Friends</p>
+<dl class="friendclass">
+<dt>
+<em class="property">friend class</em> hardware_table_iter_impl</dt>
+</dl>
+
+</div>
+</dd></dl>
+
+<dl class="cpp class">
+<dt id="_CPPv4N3eos18hardware_table_mgrE">
+<span id="_CPPv3N3eos18hardware_table_mgrE"></span><span id="_CPPv2N3eos18hardware_table_mgrE"></span><span id="eos::hardware_table_mgr"></span><span class="target" id="classeos_1_1hardware__table__mgr"></span><em class="property">class </em><code class="sig-name descname">hardware_table_mgr</code> : <em class="property">public</em> <a class="reference internal" href="acl.html#_CPPv43eos" title="eos">eos</a>::<a class="reference internal" href="base_mgr.html#_CPPv4I00EN3eos8base_mgrE" title="eos::base_mgr">base_mgr</a>&lt;<a class="reference internal" href="#_CPPv4N3eos22hardware_table_handlerE" title="eos::hardware_table_handler">hardware_table_handler</a>, <a class="reference internal" href="#_CPPv4N3eos20hardware_table_key_tE" title="eos::hardware_table_key_t">hardware_table_key_t</a>&gt;<a class="headerlink" href="#_CPPv4N3eos18hardware_table_mgrE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><div class="docutils container">
+<em>#include &lt;hardware_table.h&gt;</em></div>
+<p>A manager that exposes information about the hardware table’s capacity and usage.</p>
+<p>Create one mgr by calling sdk.get_hardware_mgr() prior to starting the agent main loop. The manager can be used once the <a class="reference internal" href="agent.html#classeos_1_1agent__handler_1ad558b16ee9a283bd9b153400743c4b1c"><span class="std std-ref">agent_handler::on_initialized</span></a> function is called. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
+<dl class="cpp function">
+<dt id="_CPPv4N3eos18hardware_table_mgrD0Ev">
+<span id="_CPPv3N3eos18hardware_table_mgrD0Ev"></span><span id="_CPPv2N3eos18hardware_table_mgrD0Ev"></span><span id="eos::hardware_table_mgr::~hardware_table_mgr"></span><span class="target" id="classeos_1_1hardware__table__mgr_1af8bb60ad69508cf6c224654456b6c62e"></span><em class="property">virtual</em> <code class="sig-name descname">~hardware_table_mgr</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos18hardware_table_mgrD0Ev" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos18hardware_table_mgr6existsERK20hardware_table_key_t">
+<span id="_CPPv3NK3eos18hardware_table_mgr6existsERK20hardware_table_key_t"></span><span id="_CPPv2NK3eos18hardware_table_mgr6existsERK20hardware_table_key_t"></span><span id="eos::hardware_table_mgr::exists__hardware_table_key_tCRC"></span><span class="target" id="classeos_1_1hardware__table__mgr_1af489c43a059ef220766e66d0144fb76e"></span><em class="property">virtual</em> bool <code class="sig-name descname">exists</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos20hardware_table_key_tE" title="eos::hardware_table_key_t">hardware_table_key_t</a> <em class="property">const</em> &amp;<em>key</em><span class="sig-paren">)</span> <em class="property">const</em> = 0<a class="headerlink" href="#_CPPv4NK3eos18hardware_table_mgr6existsERK20hardware_table_key_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Check whether the hardware table key exists. That is, check whether the specified table key exposes usage data.</p>
+<p>If exists returns true, this <a class="reference internal" href="#classeos_1_1hardware__table__key__t"><span class="std std-ref">hardware_table_key_t</span></a> can be successfully passed into every method of this <a class="reference internal" href="#classeos_1_1hardware__table__mgr"><span class="std std-ref">hardware_table_mgr</span></a>. If not, these methods will return default data such as 0 or hardware_table_usage_t(). </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos18hardware_table_mgr19hardware_table_iterEv">
+<span id="_CPPv3NK3eos18hardware_table_mgr19hardware_table_iterEv"></span><span id="_CPPv2NK3eos18hardware_table_mgr19hardware_table_iterEv"></span><span id="eos::hardware_table_mgr::hardware_table_iterC"></span><span class="target" id="classeos_1_1hardware__table__mgr_1aeb641786497ebd92f03001c105bbb567"></span><em class="property">virtual</em> <a class="reference internal" href="#_CPPv4N3eos21hardware_table_iter_tE" title="eos::hardware_table_iter_t">hardware_table_iter_t</a> <code class="sig-name descname">hardware_table_iter</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em> = 0<a class="headerlink" href="#_CPPv4NK3eos18hardware_table_mgr19hardware_table_iterEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Get an iterator over the existing tables. Yields a <a class="reference internal" href="#classeos_1_1hardware__table__key__t"><span class="std std-ref">hardware_table_key_t</span></a> for each table, feature, and chip combination that is being tracked by software. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos18hardware_table_mgr5usageERK20hardware_table_key_t">
+<span id="_CPPv3NK3eos18hardware_table_mgr5usageERK20hardware_table_key_t"></span><span id="_CPPv2NK3eos18hardware_table_mgr5usageERK20hardware_table_key_t"></span><span id="eos::hardware_table_mgr::usage__hardware_table_key_tCRC"></span><span class="target" id="classeos_1_1hardware__table__mgr_1a27ab20c87943b0ae62712bb2bd9b11cf"></span><em class="property">virtual</em> <a class="reference internal" href="#_CPPv4N3eos22hardware_table_usage_tE" title="eos::hardware_table_usage_t">hardware_table_usage_t</a> <code class="sig-name descname">usage</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos20hardware_table_key_tE" title="eos::hardware_table_key_t">hardware_table_key_t</a> <em class="property">const</em> &amp;<em>key</em><span class="sig-paren">)</span> <em class="property">const</em> = 0<a class="headerlink" href="#_CPPv4NK3eos18hardware_table_mgr5usageERK20hardware_table_key_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Get the usage statistics for a given hardware_table_key. If the key does not exist, an empty <a class="reference internal" href="#classeos_1_1hardware__table__usage__t"><span class="std std-ref">hardware_table_usage_t</span></a> is returned. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos18hardware_table_mgr11max_entriesERK20hardware_table_key_t">
+<span id="_CPPv3NK3eos18hardware_table_mgr11max_entriesERK20hardware_table_key_t"></span><span id="_CPPv2NK3eos18hardware_table_mgr11max_entriesERK20hardware_table_key_t"></span><span id="eos::hardware_table_mgr::max_entries__hardware_table_key_tCRC"></span><span class="target" id="classeos_1_1hardware__table__mgr_1a1ff93d50f741bcb1f83b3f6f21664ba5"></span><em class="property">virtual</em> uint32_t <code class="sig-name descname">max_entries</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos20hardware_table_key_tE" title="eos::hardware_table_key_t">hardware_table_key_t</a> <em class="property">const</em> &amp;<em>key</em><span class="sig-paren">)</span> <em class="property">const</em> = 0<a class="headerlink" href="#_CPPv4NK3eos18hardware_table_mgr11max_entriesERK20hardware_table_key_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Get the theoretical maximum number of entries available, assuming no other features are using this table. If the key does not exist, 0 is returned. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos18hardware_table_mgr14high_watermarkERK20hardware_table_key_t">
+<span id="_CPPv3NK3eos18hardware_table_mgr14high_watermarkERK20hardware_table_key_t"></span><span id="_CPPv2NK3eos18hardware_table_mgr14high_watermarkERK20hardware_table_key_t"></span><span id="eos::hardware_table_mgr::high_watermark__hardware_table_key_tCRC"></span><span class="target" id="classeos_1_1hardware__table__mgr_1a959a402d5c60118d57d35872a2516961"></span><em class="property">virtual</em> <a class="reference internal" href="#_CPPv4N3eos31hardware_table_high_watermark_tE" title="eos::hardware_table_high_watermark_t">hardware_table_high_watermark_t</a> <code class="sig-name descname">high_watermark</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos20hardware_table_key_tE" title="eos::hardware_table_key_t">hardware_table_key_t</a> <em class="property">const</em> &amp;<em>key</em><span class="sig-paren">)</span> <em class="property">const</em> = 0<a class="headerlink" href="#_CPPv4NK3eos18hardware_table_mgr14high_watermarkERK20hardware_table_key_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-protected-functions">Protected Functions</p>
+<dl class="cpp function">
+<dt id="_CPPv4N3eos18hardware_table_mgr18hardware_table_mgrEv">
+<span id="_CPPv3N3eos18hardware_table_mgr18hardware_table_mgrEv"></span><span id="_CPPv2N3eos18hardware_table_mgr18hardware_table_mgrEv"></span><span id="eos::hardware_table_mgr::hardware_table_mgr"></span><span class="target" id="classeos_1_1hardware__table__mgr_1a8e5e6e123e4369551fab8e218d42da3c"></span><code class="sig-name descname">hardware_table_mgr</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos18hardware_table_mgr18hardware_table_mgrEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-private-members">Private Members</p>
+<dl class="cpp var">
+<dt>
+<span class="target" id="classeos_1_1hardware__table__mgr_1ad54408f79d76539d31bb2b11f860ab9c"></span><code class="sig-name descname">hardware_table_mgr</code></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-friends">Friends</p>
+<dl class="friendclass">
+<dt>
+<em class="property">friend class</em> hardware_table_handler</dt>
+</dl>
+
+</div>
+</dd></dl>
+
+</dd></dl>
+
+<div class="section" id="type-definitions-in-hardware-table">
+<h2>Type definitions in <strong>hardware_table</strong><a class="headerlink" href="#type-definitions-in-hardware-table" title="Permalink to this headline">¶</a></h2>
+<dl class="cpp type">
+<dt>
+<span class="target" id="namespaceeos"></span><em class="property">namespace </em><code class="sig-name descname">eos</code><br /></dt>
+<dd><dl class="cpp class">
+<dt id="_CPPv4N3eos20hardware_table_key_tE">
+<span id="_CPPv3N3eos20hardware_table_key_tE"></span><span id="_CPPv2N3eos20hardware_table_key_tE"></span><span id="eos::hardware_table_key_t"></span><span class="target" id="classeos_1_1hardware__table__key__t"></span><em class="property">class </em><code class="sig-name descname">hardware_table_key_t</code><a class="headerlink" href="#_CPPv4N3eos20hardware_table_key_tE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><div class="docutils container">
+<em>#include &lt;hardware_table.h&gt;</em></div>
+<p>The unique identifier for a hardware table. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
+<dl class="cpp function">
+<dt id="_CPPv4N3eos20hardware_table_key_t20hardware_table_key_tEv">
+<span id="_CPPv3N3eos20hardware_table_key_t20hardware_table_key_tEv"></span><span id="_CPPv2N3eos20hardware_table_key_t20hardware_table_key_tEv"></span><span id="eos::hardware_table_key_t::hardware_table_key_t"></span><span class="target" id="classeos_1_1hardware__table__key__t_1ab143281320b7462637a0c7df443e2eee"></span><code class="sig-name descname">hardware_table_key_t</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos20hardware_table_key_t20hardware_table_key_tEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos20hardware_table_key_t20hardware_table_key_tERKNSt6stringERKNSt6stringERKNSt6stringE">
+<span id="_CPPv3N3eos20hardware_table_key_t20hardware_table_key_tERKNSt6stringERKNSt6stringERKNSt6stringE"></span><span id="_CPPv2N3eos20hardware_table_key_t20hardware_table_key_tERKNSt6stringERKNSt6stringERKNSt6stringE"></span><span id="eos::hardware_table_key_t::hardware_table_key_t__ssCR.ssCR.ssCR"></span><span class="target" id="classeos_1_1hardware__table__key__t_1a8d217cdaa68f7fff0c40f1de610ef808"></span><code class="sig-name descname">hardware_table_key_t</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::string <em class="property">const</em> &amp;<em>table_name</em>, <a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::string <em class="property">const</em> &amp;<em>feature</em>, <a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::string <em class="property">const</em> &amp;<em>chip</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos20hardware_table_key_t20hardware_table_key_tERKNSt6stringERKNSt6stringERKNSt6stringE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos20hardware_table_key_t20hardware_table_key_tERKNSt6stringERKNSt6stringE">
+<span id="_CPPv3N3eos20hardware_table_key_t20hardware_table_key_tERKNSt6stringERKNSt6stringE"></span><span id="_CPPv2N3eos20hardware_table_key_t20hardware_table_key_tERKNSt6stringERKNSt6stringE"></span><span id="eos::hardware_table_key_t::hardware_table_key_t__ssCR.ssCR"></span><span class="target" id="classeos_1_1hardware__table__key__t_1a951ef7e6209628c438a675d717c89368"></span><code class="sig-name descname">hardware_table_key_t</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::string <em class="property">const</em> &amp;<em>table_name</em>, <a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::string <em class="property">const</em> &amp;<em>feature</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos20hardware_table_key_t20hardware_table_key_tERKNSt6stringERKNSt6stringE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos20hardware_table_key_t20hardware_table_key_tERKNSt6stringE">
+<span id="_CPPv3N3eos20hardware_table_key_t20hardware_table_key_tERKNSt6stringE"></span><span id="_CPPv2N3eos20hardware_table_key_t20hardware_table_key_tERKNSt6stringE"></span><span id="eos::hardware_table_key_t::hardware_table_key_t__ssCR"></span><span class="target" id="classeos_1_1hardware__table__key__t_1a4c7552162ab4200cd0262b8f2d3f70e2"></span><em class="property">explicit</em> <code class="sig-name descname">hardware_table_key_t</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::string <em class="property">const</em> &amp;<em>table_name</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos20hardware_table_key_t20hardware_table_key_tERKNSt6stringE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos20hardware_table_key_t20hardware_table_key_tERK20hardware_table_key_t">
+<span id="_CPPv3N3eos20hardware_table_key_t20hardware_table_key_tERK20hardware_table_key_t"></span><span id="_CPPv2N3eos20hardware_table_key_t20hardware_table_key_tERK20hardware_table_key_t"></span><span id="eos::hardware_table_key_t::hardware_table_key_t__hardware_table_key_tCR"></span><span class="target" id="classeos_1_1hardware__table__key__t_1a46458cda047442dafb042d88c6d4b883"></span><code class="sig-name descname">hardware_table_key_t</code><span class="sig-paren">(</span><em class="property">const</em> <a class="reference internal" href="#_CPPv4N3eos20hardware_table_key_t20hardware_table_key_tERK20hardware_table_key_t" title="eos::hardware_table_key_t::hardware_table_key_t">hardware_table_key_t</a> &amp;<em>other</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos20hardware_table_key_t20hardware_table_key_tERK20hardware_table_key_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos20hardware_table_key_taSERK20hardware_table_key_t">
+<span id="_CPPv3N3eos20hardware_table_key_taSERK20hardware_table_key_t"></span><span id="_CPPv2N3eos20hardware_table_key_taSERK20hardware_table_key_t"></span><span id="eos::hardware_table_key_t::assign-operator__hardware_table_key_tCR"></span><span class="target" id="classeos_1_1hardware__table__key__t_1a18b782f809cca9be58886a7deac764ba"></span><a class="reference internal" href="#_CPPv4N3eos20hardware_table_key_tE" title="eos::hardware_table_key_t">hardware_table_key_t</a> &amp;<code class="sig-name descname">operator=</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos20hardware_table_key_tE" title="eos::hardware_table_key_t">hardware_table_key_t</a> <em class="property">const</em> &amp;<em>other</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos20hardware_table_key_taSERK20hardware_table_key_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos20hardware_table_key_t20hardware_table_key_tERR20hardware_table_key_t">
+<span id="_CPPv3N3eos20hardware_table_key_t20hardware_table_key_tERR20hardware_table_key_t"></span><span id="_CPPv2N3eos20hardware_table_key_t20hardware_table_key_tERR20hardware_table_key_t"></span><span id="eos::hardware_table_key_t::hardware_table_key_t__hardware_table_key_tRR"></span><span class="target" id="classeos_1_1hardware__table__key__t_1ad1dc7f2472dc9150a734481e1231211f"></span><code class="sig-name descname">hardware_table_key_t</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos20hardware_table_key_t20hardware_table_key_tERR20hardware_table_key_t" title="eos::hardware_table_key_t::hardware_table_key_t">hardware_table_key_t</a> &amp;&amp;<em>other</em><span class="sig-paren">)</span> <em class="property">noexcept</em><a class="headerlink" href="#_CPPv4N3eos20hardware_table_key_t20hardware_table_key_tERR20hardware_table_key_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos20hardware_table_key_taSERR20hardware_table_key_t">
+<span id="_CPPv3N3eos20hardware_table_key_taSERR20hardware_table_key_t"></span><span id="_CPPv2N3eos20hardware_table_key_taSERR20hardware_table_key_t"></span><span id="eos::hardware_table_key_t::assign-operator__hardware_table_key_tRR"></span><span class="target" id="classeos_1_1hardware__table__key__t_1af9ac8655f2fc3f594d77dda293c77438"></span><a class="reference internal" href="#_CPPv4N3eos20hardware_table_key_tE" title="eos::hardware_table_key_t">hardware_table_key_t</a> &amp;<code class="sig-name descname">operator=</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos20hardware_table_key_tE" title="eos::hardware_table_key_t">hardware_table_key_t</a> &amp;&amp;<em>other</em><span class="sig-paren">)</span> <em class="property">noexcept</em><a class="headerlink" href="#_CPPv4N3eos20hardware_table_key_taSERR20hardware_table_key_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos20hardware_table_key_t10table_nameEv">
+<span id="_CPPv3NK3eos20hardware_table_key_t10table_nameEv"></span><span id="_CPPv2NK3eos20hardware_table_key_t10table_nameEv"></span><span id="eos::hardware_table_key_t::table_nameC"></span><span class="target" id="classeos_1_1hardware__table__key__t_1a0d73fa3308f690173f682decedba371b"></span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::string <code class="sig-name descname">table_name</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos20hardware_table_key_t10table_nameEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Getter for ‘table_name’: the name of the hardware resource. For example, this value could be ‘TCAM’, ‘LEM’, ‘ECMP’, ‘LPM’ etc. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos20hardware_table_key_t7featureEv">
+<span id="_CPPv3NK3eos20hardware_table_key_t7featureEv"></span><span id="_CPPv2NK3eos20hardware_table_key_t7featureEv"></span><span id="eos::hardware_table_key_t::featureC"></span><span class="target" id="classeos_1_1hardware__table__key__t_1a2d82e505ff7398a913f1a6d61bd01d93"></span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::string <code class="sig-name descname">feature</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos20hardware_table_key_t7featureEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Getter for ‘feature’: the name of the feature using the table, such as ‘Multicast’, ‘IPv6’ or ‘MPLS’. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos20hardware_table_key_t4chipEv">
+<span id="_CPPv3NK3eos20hardware_table_key_t4chipEv"></span><span id="_CPPv2NK3eos20hardware_table_key_t4chipEv"></span><span id="eos::hardware_table_key_t::chipC"></span><span class="target" id="classeos_1_1hardware__table__key__t_1a7343f79574f17241f3ab4d152f88ae6c"></span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::string <code class="sig-name descname">chip</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos20hardware_table_key_t4chipEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Getter for ‘chip’: which chip this table is located on. If empty, then this feature’s usage is identical across chips. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos20hardware_table_key_teqERK20hardware_table_key_t">
+<span id="_CPPv3NK3eos20hardware_table_key_teqERK20hardware_table_key_t"></span><span id="_CPPv2NK3eos20hardware_table_key_teqERK20hardware_table_key_t"></span><span id="eos::hardware_table_key_t::eq-operator__hardware_table_key_tCRC"></span><span class="target" id="classeos_1_1hardware__table__key__t_1ac46dcc1a3cc6eb5e6c7c1253a47dba2f"></span>bool <code class="sig-name descname">operator==</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos20hardware_table_key_tE" title="eos::hardware_table_key_t">hardware_table_key_t</a> <em class="property">const</em> &amp;<em>other</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos20hardware_table_key_teqERK20hardware_table_key_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos20hardware_table_key_tneERK20hardware_table_key_t">
+<span id="_CPPv3NK3eos20hardware_table_key_tneERK20hardware_table_key_t"></span><span id="_CPPv2NK3eos20hardware_table_key_tneERK20hardware_table_key_t"></span><span id="eos::hardware_table_key_t::neq-operator__hardware_table_key_tCRC"></span><span class="target" id="classeos_1_1hardware__table__key__t_1a5aa616e8a18c302b4a458b2b3dc1c97f"></span>bool <code class="sig-name descname">operator!=</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos20hardware_table_key_tE" title="eos::hardware_table_key_t">hardware_table_key_t</a> <em class="property">const</em> &amp;<em>other</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos20hardware_table_key_tneERK20hardware_table_key_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos20hardware_table_key_tltERK20hardware_table_key_t">
+<span id="_CPPv3NK3eos20hardware_table_key_tltERK20hardware_table_key_t"></span><span id="_CPPv2NK3eos20hardware_table_key_tltERK20hardware_table_key_t"></span><span id="eos::hardware_table_key_t::lt-operator__hardware_table_key_tCRC"></span><span class="target" id="classeos_1_1hardware__table__key__t_1a723e95ef2b6af4d180450ee5256b8c0e"></span>bool <code class="sig-name descname">operator&lt;</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos20hardware_table_key_tE" title="eos::hardware_table_key_t">hardware_table_key_t</a> <em class="property">const</em> &amp;<em>other</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos20hardware_table_key_tltERK20hardware_table_key_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos20hardware_table_key_t4hashEv">
+<span id="_CPPv3NK3eos20hardware_table_key_t4hashEv"></span><span id="_CPPv2NK3eos20hardware_table_key_t4hashEv"></span><span id="eos::hardware_table_key_t::hashC"></span><span class="target" id="classeos_1_1hardware__table__key__t_1a2889c2ed062294b630ff20c6b4083f07"></span>uint32_t <code class="sig-name descname">hash</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos20hardware_table_key_t4hashEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>The hash function for type <a class="reference internal" href="#classeos_1_1hardware__table__key__t"><span class="std std-ref">hardware_table_key_t</span></a>. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos20hardware_table_key_t6mix_meER8hash_mix">
+<span id="_CPPv3NK3eos20hardware_table_key_t6mix_meER8hash_mix"></span><span id="_CPPv2NK3eos20hardware_table_key_t6mix_meER8hash_mix"></span><span id="eos::hardware_table_key_t::mix_me__hash_mixRC"></span><span class="target" id="classeos_1_1hardware__table__key__t_1af62e5ed31156345fbd52223603c980da"></span>void <code class="sig-name descname">mix_me</code><span class="sig-paren">(</span><a class="reference internal" href="hash_mix.html#_CPPv4N3eos8hash_mixE" title="eos::hash_mix">hash_mix</a> &amp;<em>h</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos20hardware_table_key_t6mix_meER8hash_mix" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>The hash mix function for type <a class="reference internal" href="#classeos_1_1hardware__table__key__t"><span class="std std-ref">hardware_table_key_t</span></a>. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos20hardware_table_key_t9to_stringEv">
+<span id="_CPPv3NK3eos20hardware_table_key_t9to_stringEv"></span><span id="_CPPv2NK3eos20hardware_table_key_t9to_stringEv"></span><span id="eos::hardware_table_key_t::to_stringC"></span><span class="target" id="classeos_1_1hardware__table__key__t_1ad378f1f216816e085601ef2b6f33865e"></span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::string <code class="sig-name descname">to_string</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos20hardware_table_key_t9to_stringEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Returns a string representation of the current object’s values. </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-static-functions">Public Static Functions</p>
+<dl class="cpp function">
+<dt id="_CPPv4N3eos20hardware_table_key_tnwENSt6size_tEPv">
+<span id="_CPPv3N3eos20hardware_table_key_tnwENSt6size_tEPv"></span><span id="_CPPv2N3eos20hardware_table_key_tnwENSt6size_tEPv"></span><span id="eos::hardware_table_key_t::new-operator__std::s.voidP"></span><span class="target" id="classeos_1_1hardware__table__key__t_1a3854146b9a3f17fb76574bdac88016c9"></span><em class="property">static</em> <em class="property">inline</em> void *<code class="sig-name descname">operator new</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::size_t, void *<em>ptr</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos20hardware_table_key_tnwENSt6size_tEPv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos20hardware_table_key_tnwENSt6size_tE">
+<span id="_CPPv3N3eos20hardware_table_key_tnwENSt6size_tE"></span><span id="_CPPv2N3eos20hardware_table_key_tnwENSt6size_tE"></span><span id="eos::hardware_table_key_t::new-operator__std::s"></span><span class="target" id="classeos_1_1hardware__table__key__t_1abe7b33006ac671ad28d73a6f4d0205c4"></span><em class="property">static</em> void *<code class="sig-name descname">operator new</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::size_t<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos20hardware_table_key_tnwENSt6size_tE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos20hardware_table_key_tdlEPv">
+<span id="_CPPv3N3eos20hardware_table_key_tdlEPv"></span><span id="_CPPv2N3eos20hardware_table_key_tdlEPv"></span><span id="eos::hardware_table_key_t::delete-operator__voidP"></span><span class="target" id="classeos_1_1hardware__table__key__t_1ac7f111031a5345d7eed8c85585f3d13b"></span><em class="property">static</em> void <code class="sig-name descname">operator delete</code><span class="sig-paren">(</span>void*<span class="sig-paren">)</span> <em class="property">noexcept</em><a class="headerlink" href="#_CPPv4N3eos20hardware_table_key_tdlEPv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-private-members">Private Members</p>
+<dl class="cpp var">
+<dt id="_CPPv4N3eos20hardware_table_key_t5pimplE">
+<span id="_CPPv3N3eos20hardware_table_key_t5pimplE"></span><span id="_CPPv2N3eos20hardware_table_key_t5pimplE"></span><span id="eos::hardware_table_key_t::pimpl__std::shared_ptr:hardware_table_key_impl_t:"></span><span class="target" id="classeos_1_1hardware__table__key__t_1a5cece970ce989d8aa2be980865a696a8"></span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::shared_ptr&lt;hardware_table_key_impl_t&gt; <code class="sig-name descname">pimpl</code><a class="headerlink" href="#_CPPv4N3eos20hardware_table_key_t5pimplE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-friends">Friends</p>
+<dl class="cpp function">
+<dt id="_CPPv4N3eos20hardware_table_key_tlsERNSt7ostreamERK20hardware_table_key_t">
+<span id="_CPPv3N3eos20hardware_table_key_tlsERNSt7ostreamERK20hardware_table_key_t"></span><span id="_CPPv2N3eos20hardware_table_key_tlsERNSt7ostreamERK20hardware_table_key_t"></span><span id="eos::hardware_table_key_t::lshift-operator__osR.hardware_table_key_tCR"></span><span class="target" id="classeos_1_1hardware__table__key__t_1a7c20ad966f88fe42ab893363adf9ebaa"></span><em class="property">friend</em> <a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::ostream &amp;<code class="sig-name descname">operator&lt;&lt;</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::ostream &amp;<em>os</em>, <em class="property">const</em> <a class="reference internal" href="#_CPPv4N3eos20hardware_table_key_tE" title="eos::hardware_table_key_t">hardware_table_key_t</a> &amp;<em>obj</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos20hardware_table_key_tlsERNSt7ostreamERK20hardware_table_key_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>A utility stream operator that adds a string representation of <a class="reference internal" href="#classeos_1_1hardware__table__key__t"><span class="std std-ref">hardware_table_key_t</span></a> to the ostream. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="cpp class">
+<dt id="_CPPv4N3eos31hardware_table_high_watermark_tE">
+<span id="_CPPv3N3eos31hardware_table_high_watermark_tE"></span><span id="_CPPv2N3eos31hardware_table_high_watermark_tE"></span><span id="eos::hardware_table_high_watermark_t"></span><span class="target" id="classeos_1_1hardware__table__high__watermark__t"></span><em class="property">class </em><code class="sig-name descname">hardware_table_high_watermark_t</code><a class="headerlink" href="#_CPPv4N3eos31hardware_table_high_watermark_tE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><div class="docutils container">
+<em>#include &lt;hardware_table.h&gt;</em></div>
+<p>The compound high watermark statistics. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
+<dl class="cpp function">
+<dt id="_CPPv4N3eos31hardware_table_high_watermark_t31hardware_table_high_watermark_tEv">
+<span id="_CPPv3N3eos31hardware_table_high_watermark_t31hardware_table_high_watermark_tEv"></span><span id="_CPPv2N3eos31hardware_table_high_watermark_t31hardware_table_high_watermark_tEv"></span><span id="eos::hardware_table_high_watermark_t::hardware_table_high_watermark_t"></span><span class="target" id="classeos_1_1hardware__table__high__watermark__t_1ac3f529cf2e4ac47f99b4c4a4ba1b03cc"></span><code class="sig-name descname">hardware_table_high_watermark_t</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos31hardware_table_high_watermark_t31hardware_table_high_watermark_tEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos31hardware_table_high_watermark_t31hardware_table_high_watermark_tE8uint32_t6time_t">
+<span id="_CPPv3N3eos31hardware_table_high_watermark_t31hardware_table_high_watermark_tE8uint32_t6time_t"></span><span id="_CPPv2N3eos31hardware_table_high_watermark_t31hardware_table_high_watermark_tE8uint32_t6time_t"></span><span id="eos::hardware_table_high_watermark_t::hardware_table_high_watermark_t__uint32_t.time_t"></span><span class="target" id="classeos_1_1hardware__table__high__watermark__t_1ad206eb2ba79f6b3be5667bd041cf979b"></span><code class="sig-name descname">hardware_table_high_watermark_t</code><span class="sig-paren">(</span>uint32_t <em>max_entries</em>, time_t <em>timestamp</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos31hardware_table_high_watermark_t31hardware_table_high_watermark_tE8uint32_t6time_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos31hardware_table_high_watermark_t31hardware_table_high_watermark_tERK31hardware_table_high_watermark_t">
+<span id="_CPPv3N3eos31hardware_table_high_watermark_t31hardware_table_high_watermark_tERK31hardware_table_high_watermark_t"></span><span id="_CPPv2N3eos31hardware_table_high_watermark_t31hardware_table_high_watermark_tERK31hardware_table_high_watermark_t"></span><span id="eos::hardware_table_high_watermark_t::hardware_table_high_watermark_t__hardware_table_high_watermark_tCR"></span><span class="target" id="classeos_1_1hardware__table__high__watermark__t_1ae19034d847dfd77f5cf5a978443fa624"></span><code class="sig-name descname">hardware_table_high_watermark_t</code><span class="sig-paren">(</span><em class="property">const</em> <a class="reference internal" href="#_CPPv4N3eos31hardware_table_high_watermark_t31hardware_table_high_watermark_tERK31hardware_table_high_watermark_t" title="eos::hardware_table_high_watermark_t::hardware_table_high_watermark_t">hardware_table_high_watermark_t</a> &amp;<em>other</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos31hardware_table_high_watermark_t31hardware_table_high_watermark_tERK31hardware_table_high_watermark_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos31hardware_table_high_watermark_taSERK31hardware_table_high_watermark_t">
+<span id="_CPPv3N3eos31hardware_table_high_watermark_taSERK31hardware_table_high_watermark_t"></span><span id="_CPPv2N3eos31hardware_table_high_watermark_taSERK31hardware_table_high_watermark_t"></span><span id="eos::hardware_table_high_watermark_t::assign-operator__hardware_table_high_watermark_tCR"></span><span class="target" id="classeos_1_1hardware__table__high__watermark__t_1a98bea48a27eba43c6e2213166793a81c"></span><a class="reference internal" href="#_CPPv4N3eos31hardware_table_high_watermark_tE" title="eos::hardware_table_high_watermark_t">hardware_table_high_watermark_t</a> &amp;<code class="sig-name descname">operator=</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos31hardware_table_high_watermark_tE" title="eos::hardware_table_high_watermark_t">hardware_table_high_watermark_t</a> <em class="property">const</em> &amp;<em>other</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos31hardware_table_high_watermark_taSERK31hardware_table_high_watermark_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos31hardware_table_high_watermark_t31hardware_table_high_watermark_tERR31hardware_table_high_watermark_t">
+<span id="_CPPv3N3eos31hardware_table_high_watermark_t31hardware_table_high_watermark_tERR31hardware_table_high_watermark_t"></span><span id="_CPPv2N3eos31hardware_table_high_watermark_t31hardware_table_high_watermark_tERR31hardware_table_high_watermark_t"></span><span id="eos::hardware_table_high_watermark_t::hardware_table_high_watermark_t__hardware_table_high_watermark_tRR"></span><span class="target" id="classeos_1_1hardware__table__high__watermark__t_1a54bc777cf0b04fd5750d43913f2f06e5"></span><code class="sig-name descname">hardware_table_high_watermark_t</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos31hardware_table_high_watermark_t31hardware_table_high_watermark_tERR31hardware_table_high_watermark_t" title="eos::hardware_table_high_watermark_t::hardware_table_high_watermark_t">hardware_table_high_watermark_t</a> &amp;&amp;<em>other</em><span class="sig-paren">)</span> <em class="property">noexcept</em><a class="headerlink" href="#_CPPv4N3eos31hardware_table_high_watermark_t31hardware_table_high_watermark_tERR31hardware_table_high_watermark_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos31hardware_table_high_watermark_taSERR31hardware_table_high_watermark_t">
+<span id="_CPPv3N3eos31hardware_table_high_watermark_taSERR31hardware_table_high_watermark_t"></span><span id="_CPPv2N3eos31hardware_table_high_watermark_taSERR31hardware_table_high_watermark_t"></span><span id="eos::hardware_table_high_watermark_t::assign-operator__hardware_table_high_watermark_tRR"></span><span class="target" id="classeos_1_1hardware__table__high__watermark__t_1a375b6ed20ac870021f92e4ed1f092a07"></span><a class="reference internal" href="#_CPPv4N3eos31hardware_table_high_watermark_tE" title="eos::hardware_table_high_watermark_t">hardware_table_high_watermark_t</a> &amp;<code class="sig-name descname">operator=</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos31hardware_table_high_watermark_tE" title="eos::hardware_table_high_watermark_t">hardware_table_high_watermark_t</a> &amp;&amp;<em>other</em><span class="sig-paren">)</span> <em class="property">noexcept</em><a class="headerlink" href="#_CPPv4N3eos31hardware_table_high_watermark_taSERR31hardware_table_high_watermark_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos31hardware_table_high_watermark_t11max_entriesEv">
+<span id="_CPPv3NK3eos31hardware_table_high_watermark_t11max_entriesEv"></span><span id="_CPPv2NK3eos31hardware_table_high_watermark_t11max_entriesEv"></span><span id="eos::hardware_table_high_watermark_t::max_entriesC"></span><span class="target" id="classeos_1_1hardware__table__high__watermark__t_1a8feb1d4f6fc1b8d3ac119bab53d66849"></span>uint32_t <code class="sig-name descname">max_entries</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos31hardware_table_high_watermark_t11max_entriesEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Getter for ‘max_entries’: the maximum number of entries used so far. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos31hardware_table_high_watermark_t9timestampEv">
+<span id="_CPPv3NK3eos31hardware_table_high_watermark_t9timestampEv"></span><span id="_CPPv2NK3eos31hardware_table_high_watermark_t9timestampEv"></span><span id="eos::hardware_table_high_watermark_t::timestampC"></span><span class="target" id="classeos_1_1hardware__table__high__watermark__t_1a6177212069285af1aa98c16f869b4ee3"></span>time_t <code class="sig-name descname">timestamp</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos31hardware_table_high_watermark_t9timestampEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Getter for ‘timestamp’: the last time when high watermark reached. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos31hardware_table_high_watermark_teqERK31hardware_table_high_watermark_t">
+<span id="_CPPv3NK3eos31hardware_table_high_watermark_teqERK31hardware_table_high_watermark_t"></span><span id="_CPPv2NK3eos31hardware_table_high_watermark_teqERK31hardware_table_high_watermark_t"></span><span id="eos::hardware_table_high_watermark_t::eq-operator__hardware_table_high_watermark_tCRC"></span><span class="target" id="classeos_1_1hardware__table__high__watermark__t_1a90d28ecafc9754f9f55f1469565de317"></span>bool <code class="sig-name descname">operator==</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos31hardware_table_high_watermark_tE" title="eos::hardware_table_high_watermark_t">hardware_table_high_watermark_t</a> <em class="property">const</em> &amp;<em>other</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos31hardware_table_high_watermark_teqERK31hardware_table_high_watermark_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos31hardware_table_high_watermark_tneERK31hardware_table_high_watermark_t">
+<span id="_CPPv3NK3eos31hardware_table_high_watermark_tneERK31hardware_table_high_watermark_t"></span><span id="_CPPv2NK3eos31hardware_table_high_watermark_tneERK31hardware_table_high_watermark_t"></span><span id="eos::hardware_table_high_watermark_t::neq-operator__hardware_table_high_watermark_tCRC"></span><span class="target" id="classeos_1_1hardware__table__high__watermark__t_1a3832ab6fdf3adf80c695a536afcd69c7"></span>bool <code class="sig-name descname">operator!=</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos31hardware_table_high_watermark_tE" title="eos::hardware_table_high_watermark_t">hardware_table_high_watermark_t</a> <em class="property">const</em> &amp;<em>other</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos31hardware_table_high_watermark_tneERK31hardware_table_high_watermark_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos31hardware_table_high_watermark_tltERK31hardware_table_high_watermark_t">
+<span id="_CPPv3NK3eos31hardware_table_high_watermark_tltERK31hardware_table_high_watermark_t"></span><span id="_CPPv2NK3eos31hardware_table_high_watermark_tltERK31hardware_table_high_watermark_t"></span><span id="eos::hardware_table_high_watermark_t::lt-operator__hardware_table_high_watermark_tCRC"></span><span class="target" id="classeos_1_1hardware__table__high__watermark__t_1a4c3de2277066ec85a4a17a3407d1c2df"></span>bool <code class="sig-name descname">operator&lt;</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos31hardware_table_high_watermark_tE" title="eos::hardware_table_high_watermark_t">hardware_table_high_watermark_t</a> <em class="property">const</em> &amp;<em>other</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos31hardware_table_high_watermark_tltERK31hardware_table_high_watermark_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos31hardware_table_high_watermark_t4hashEv">
+<span id="_CPPv3NK3eos31hardware_table_high_watermark_t4hashEv"></span><span id="_CPPv2NK3eos31hardware_table_high_watermark_t4hashEv"></span><span id="eos::hardware_table_high_watermark_t::hashC"></span><span class="target" id="classeos_1_1hardware__table__high__watermark__t_1a3b82f7f0ac69f44335aed9d3405f5b54"></span>uint32_t <code class="sig-name descname">hash</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos31hardware_table_high_watermark_t4hashEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>The hash function for type <a class="reference internal" href="#classeos_1_1hardware__table__high__watermark__t"><span class="std std-ref">hardware_table_high_watermark_t</span></a>. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos31hardware_table_high_watermark_t6mix_meER8hash_mix">
+<span id="_CPPv3NK3eos31hardware_table_high_watermark_t6mix_meER8hash_mix"></span><span id="_CPPv2NK3eos31hardware_table_high_watermark_t6mix_meER8hash_mix"></span><span id="eos::hardware_table_high_watermark_t::mix_me__hash_mixRC"></span><span class="target" id="classeos_1_1hardware__table__high__watermark__t_1ad186feb64bf5269cc1b38e20a14a7c4f"></span>void <code class="sig-name descname">mix_me</code><span class="sig-paren">(</span><a class="reference internal" href="hash_mix.html#_CPPv4N3eos8hash_mixE" title="eos::hash_mix">hash_mix</a> &amp;<em>h</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos31hardware_table_high_watermark_t6mix_meER8hash_mix" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>The hash mix function for type <a class="reference internal" href="#classeos_1_1hardware__table__high__watermark__t"><span class="std std-ref">hardware_table_high_watermark_t</span></a>. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos31hardware_table_high_watermark_t9to_stringEv">
+<span id="_CPPv3NK3eos31hardware_table_high_watermark_t9to_stringEv"></span><span id="_CPPv2NK3eos31hardware_table_high_watermark_t9to_stringEv"></span><span id="eos::hardware_table_high_watermark_t::to_stringC"></span><span class="target" id="classeos_1_1hardware__table__high__watermark__t_1a65119efdd21089ce7a22af2cb8087b11"></span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::string <code class="sig-name descname">to_string</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos31hardware_table_high_watermark_t9to_stringEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Returns a string representation of the current object’s values. </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-static-functions">Public Static Functions</p>
+<dl class="cpp function">
+<dt id="_CPPv4N3eos31hardware_table_high_watermark_tnwENSt6size_tEPv">
+<span id="_CPPv3N3eos31hardware_table_high_watermark_tnwENSt6size_tEPv"></span><span id="_CPPv2N3eos31hardware_table_high_watermark_tnwENSt6size_tEPv"></span><span id="eos::hardware_table_high_watermark_t::new-operator__std::s.voidP"></span><span class="target" id="classeos_1_1hardware__table__high__watermark__t_1a236fc7cca617a1b74c7a84a9dc8c6158"></span><em class="property">static</em> <em class="property">inline</em> void *<code class="sig-name descname">operator new</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::size_t, void *<em>ptr</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos31hardware_table_high_watermark_tnwENSt6size_tEPv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos31hardware_table_high_watermark_tnwENSt6size_tE">
+<span id="_CPPv3N3eos31hardware_table_high_watermark_tnwENSt6size_tE"></span><span id="_CPPv2N3eos31hardware_table_high_watermark_tnwENSt6size_tE"></span><span id="eos::hardware_table_high_watermark_t::new-operator__std::s"></span><span class="target" id="classeos_1_1hardware__table__high__watermark__t_1ac739cebbdfeffe8c92fba6fa07765e4b"></span><em class="property">static</em> void *<code class="sig-name descname">operator new</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::size_t<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos31hardware_table_high_watermark_tnwENSt6size_tE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos31hardware_table_high_watermark_tdlEPv">
+<span id="_CPPv3N3eos31hardware_table_high_watermark_tdlEPv"></span><span id="_CPPv2N3eos31hardware_table_high_watermark_tdlEPv"></span><span id="eos::hardware_table_high_watermark_t::delete-operator__voidP"></span><span class="target" id="classeos_1_1hardware__table__high__watermark__t_1a62464c7c648673e9f4ec18628a74b8c9"></span><em class="property">static</em> void <code class="sig-name descname">operator delete</code><span class="sig-paren">(</span>void*<span class="sig-paren">)</span> <em class="property">noexcept</em><a class="headerlink" href="#_CPPv4N3eos31hardware_table_high_watermark_tdlEPv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-private-members">Private Members</p>
+<dl class="cpp var">
+<dt id="_CPPv4N3eos31hardware_table_high_watermark_t5pimplE">
+<span id="_CPPv3N3eos31hardware_table_high_watermark_t5pimplE"></span><span id="_CPPv2N3eos31hardware_table_high_watermark_t5pimplE"></span><span id="eos::hardware_table_high_watermark_t::pimpl__std::shared_ptr:hardware_table_high_watermark_impl_t:"></span><span class="target" id="classeos_1_1hardware__table__high__watermark__t_1aca5850f52059228dfafca3cc670cf46d"></span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::shared_ptr&lt;hardware_table_high_watermark_impl_t&gt; <code class="sig-name descname">pimpl</code><a class="headerlink" href="#_CPPv4N3eos31hardware_table_high_watermark_t5pimplE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-friends">Friends</p>
+<dl class="cpp function">
+<dt id="_CPPv4N3eos31hardware_table_high_watermark_tlsERNSt7ostreamERK31hardware_table_high_watermark_t">
+<span id="_CPPv3N3eos31hardware_table_high_watermark_tlsERNSt7ostreamERK31hardware_table_high_watermark_t"></span><span id="_CPPv2N3eos31hardware_table_high_watermark_tlsERNSt7ostreamERK31hardware_table_high_watermark_t"></span><span id="eos::hardware_table_high_watermark_t::lshift-operator__osR.hardware_table_high_watermark_tCR"></span><span class="target" id="classeos_1_1hardware__table__high__watermark__t_1a3f646e7f7bdc713da77f3a69e5e4bcd4"></span><em class="property">friend</em> <a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::ostream &amp;<code class="sig-name descname">operator&lt;&lt;</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::ostream &amp;<em>os</em>, <em class="property">const</em> <a class="reference internal" href="#_CPPv4N3eos31hardware_table_high_watermark_tE" title="eos::hardware_table_high_watermark_t">hardware_table_high_watermark_t</a> &amp;<em>obj</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos31hardware_table_high_watermark_tlsERNSt7ostreamERK31hardware_table_high_watermark_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>A utility stream operator that adds a string representation of <a class="reference internal" href="#classeos_1_1hardware__table__high__watermark__t"><span class="std std-ref">hardware_table_high_watermark_t</span></a> to the ostream. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="cpp class">
+<dt id="_CPPv4N3eos22hardware_table_usage_tE">
+<span id="_CPPv3N3eos22hardware_table_usage_tE"></span><span id="_CPPv2N3eos22hardware_table_usage_tE"></span><span id="eos::hardware_table_usage_t"></span><span class="target" id="classeos_1_1hardware__table__usage__t"></span><em class="property">class </em><code class="sig-name descname">hardware_table_usage_t</code><a class="headerlink" href="#_CPPv4N3eos22hardware_table_usage_tE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><div class="docutils container">
+<em>#include &lt;hardware_table.h&gt;</em></div>
+<p>The usage statistics for a given table (or partition of a table). </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
+<dl class="cpp function">
+<dt id="_CPPv4N3eos22hardware_table_usage_t22hardware_table_usage_tEv">
+<span id="_CPPv3N3eos22hardware_table_usage_t22hardware_table_usage_tEv"></span><span id="_CPPv2N3eos22hardware_table_usage_t22hardware_table_usage_tEv"></span><span id="eos::hardware_table_usage_t::hardware_table_usage_t"></span><span class="target" id="classeos_1_1hardware__table__usage__t_1af50731ba03dac5bdf69d935b08b9e68a"></span><code class="sig-name descname">hardware_table_usage_t</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos22hardware_table_usage_t22hardware_table_usage_tEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos22hardware_table_usage_t22hardware_table_usage_tE8uint32_t8uint32_t8uint32_t">
+<span id="_CPPv3N3eos22hardware_table_usage_t22hardware_table_usage_tE8uint32_t8uint32_t8uint32_t"></span><span id="_CPPv2N3eos22hardware_table_usage_t22hardware_table_usage_tE8uint32_t8uint32_t8uint32_t"></span><span id="eos::hardware_table_usage_t::hardware_table_usage_t__uint32_t.uint32_t.uint32_t"></span><span class="target" id="classeos_1_1hardware__table__usage__t_1a817a79b163e9db0f8800e41a497914a5"></span><code class="sig-name descname">hardware_table_usage_t</code><span class="sig-paren">(</span>uint32_t <em>used_entries</em>, uint32_t <em>free_entries</em>, uint32_t <em>committed_entries</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos22hardware_table_usage_t22hardware_table_usage_tE8uint32_t8uint32_t8uint32_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos22hardware_table_usage_t22hardware_table_usage_tERK22hardware_table_usage_t">
+<span id="_CPPv3N3eos22hardware_table_usage_t22hardware_table_usage_tERK22hardware_table_usage_t"></span><span id="_CPPv2N3eos22hardware_table_usage_t22hardware_table_usage_tERK22hardware_table_usage_t"></span><span id="eos::hardware_table_usage_t::hardware_table_usage_t__hardware_table_usage_tCR"></span><span class="target" id="classeos_1_1hardware__table__usage__t_1a61684e2d7c6a1504d544419001791846"></span><code class="sig-name descname">hardware_table_usage_t</code><span class="sig-paren">(</span><em class="property">const</em> <a class="reference internal" href="#_CPPv4N3eos22hardware_table_usage_t22hardware_table_usage_tERK22hardware_table_usage_t" title="eos::hardware_table_usage_t::hardware_table_usage_t">hardware_table_usage_t</a> &amp;<em>other</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos22hardware_table_usage_t22hardware_table_usage_tERK22hardware_table_usage_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos22hardware_table_usage_taSERK22hardware_table_usage_t">
+<span id="_CPPv3N3eos22hardware_table_usage_taSERK22hardware_table_usage_t"></span><span id="_CPPv2N3eos22hardware_table_usage_taSERK22hardware_table_usage_t"></span><span id="eos::hardware_table_usage_t::assign-operator__hardware_table_usage_tCR"></span><span class="target" id="classeos_1_1hardware__table__usage__t_1a4e645fe0bc0a9d810dd81118f9b05f01"></span><a class="reference internal" href="#_CPPv4N3eos22hardware_table_usage_tE" title="eos::hardware_table_usage_t">hardware_table_usage_t</a> &amp;<code class="sig-name descname">operator=</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos22hardware_table_usage_tE" title="eos::hardware_table_usage_t">hardware_table_usage_t</a> <em class="property">const</em> &amp;<em>other</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos22hardware_table_usage_taSERK22hardware_table_usage_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos22hardware_table_usage_t22hardware_table_usage_tERR22hardware_table_usage_t">
+<span id="_CPPv3N3eos22hardware_table_usage_t22hardware_table_usage_tERR22hardware_table_usage_t"></span><span id="_CPPv2N3eos22hardware_table_usage_t22hardware_table_usage_tERR22hardware_table_usage_t"></span><span id="eos::hardware_table_usage_t::hardware_table_usage_t__hardware_table_usage_tRR"></span><span class="target" id="classeos_1_1hardware__table__usage__t_1ae045773c2ea0e10013058b6cf0be36f2"></span><code class="sig-name descname">hardware_table_usage_t</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos22hardware_table_usage_t22hardware_table_usage_tERR22hardware_table_usage_t" title="eos::hardware_table_usage_t::hardware_table_usage_t">hardware_table_usage_t</a> &amp;&amp;<em>other</em><span class="sig-paren">)</span> <em class="property">noexcept</em><a class="headerlink" href="#_CPPv4N3eos22hardware_table_usage_t22hardware_table_usage_tERR22hardware_table_usage_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos22hardware_table_usage_taSERR22hardware_table_usage_t">
+<span id="_CPPv3N3eos22hardware_table_usage_taSERR22hardware_table_usage_t"></span><span id="_CPPv2N3eos22hardware_table_usage_taSERR22hardware_table_usage_t"></span><span id="eos::hardware_table_usage_t::assign-operator__hardware_table_usage_tRR"></span><span class="target" id="classeos_1_1hardware__table__usage__t_1a84cec9c016a5782868d9aa85210da332"></span><a class="reference internal" href="#_CPPv4N3eos22hardware_table_usage_tE" title="eos::hardware_table_usage_t">hardware_table_usage_t</a> &amp;<code class="sig-name descname">operator=</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos22hardware_table_usage_tE" title="eos::hardware_table_usage_t">hardware_table_usage_t</a> &amp;&amp;<em>other</em><span class="sig-paren">)</span> <em class="property">noexcept</em><a class="headerlink" href="#_CPPv4N3eos22hardware_table_usage_taSERR22hardware_table_usage_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos22hardware_table_usage_t12used_entriesEv">
+<span id="_CPPv3NK3eos22hardware_table_usage_t12used_entriesEv"></span><span id="_CPPv2NK3eos22hardware_table_usage_t12used_entriesEv"></span><span id="eos::hardware_table_usage_t::used_entriesC"></span><span class="target" id="classeos_1_1hardware__table__usage__t_1ab2019b09efc4dd51bd8a75d7d58b4c60"></span>uint32_t <code class="sig-name descname">used_entries</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos22hardware_table_usage_t12used_entriesEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Getter for ‘used_entries’: number of entries used by this feature on this table. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos22hardware_table_usage_t12free_entriesEv">
+<span id="_CPPv3NK3eos22hardware_table_usage_t12free_entriesEv"></span><span id="_CPPv2NK3eos22hardware_table_usage_t12free_entriesEv"></span><span id="eos::hardware_table_usage_t::free_entriesC"></span><span class="target" id="classeos_1_1hardware__table__usage__t_1a69352eaf4c9e8d9fee25bec9569766aa"></span>uint32_t <code class="sig-name descname">free_entries</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos22hardware_table_usage_t12free_entriesEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Getter for ‘free_entries’: the number of free entries available for this feature to use. For features that share a table, if a feature increases its used or committed entries, all other features’ free entries will decrease. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos22hardware_table_usage_t17committed_entriesEv">
+<span id="_CPPv3NK3eos22hardware_table_usage_t17committed_entriesEv"></span><span id="_CPPv2NK3eos22hardware_table_usage_t17committed_entriesEv"></span><span id="eos::hardware_table_usage_t::committed_entriesC"></span><span class="target" id="classeos_1_1hardware__table__usage__t_1af7d7637ffb660b523161310b515bef7a"></span>uint32_t <code class="sig-name descname">committed_entries</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos22hardware_table_usage_t17committed_entriesEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Getter for ‘committed_entries’: the number of entries currently allocated for this feature. For tables that have no explicit partitions, this value will be 0. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos22hardware_table_usage_teqERK22hardware_table_usage_t">
+<span id="_CPPv3NK3eos22hardware_table_usage_teqERK22hardware_table_usage_t"></span><span id="_CPPv2NK3eos22hardware_table_usage_teqERK22hardware_table_usage_t"></span><span id="eos::hardware_table_usage_t::eq-operator__hardware_table_usage_tCRC"></span><span class="target" id="classeos_1_1hardware__table__usage__t_1a61648c541533c25f7a2657f5a4e09927"></span>bool <code class="sig-name descname">operator==</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos22hardware_table_usage_tE" title="eos::hardware_table_usage_t">hardware_table_usage_t</a> <em class="property">const</em> &amp;<em>other</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos22hardware_table_usage_teqERK22hardware_table_usage_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos22hardware_table_usage_tneERK22hardware_table_usage_t">
+<span id="_CPPv3NK3eos22hardware_table_usage_tneERK22hardware_table_usage_t"></span><span id="_CPPv2NK3eos22hardware_table_usage_tneERK22hardware_table_usage_t"></span><span id="eos::hardware_table_usage_t::neq-operator__hardware_table_usage_tCRC"></span><span class="target" id="classeos_1_1hardware__table__usage__t_1a6f65f6969daa3d04be97598ece869da2"></span>bool <code class="sig-name descname">operator!=</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos22hardware_table_usage_tE" title="eos::hardware_table_usage_t">hardware_table_usage_t</a> <em class="property">const</em> &amp;<em>other</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos22hardware_table_usage_tneERK22hardware_table_usage_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos22hardware_table_usage_tltERK22hardware_table_usage_t">
+<span id="_CPPv3NK3eos22hardware_table_usage_tltERK22hardware_table_usage_t"></span><span id="_CPPv2NK3eos22hardware_table_usage_tltERK22hardware_table_usage_t"></span><span id="eos::hardware_table_usage_t::lt-operator__hardware_table_usage_tCRC"></span><span class="target" id="classeos_1_1hardware__table__usage__t_1a59c7da74a0201ec8b296e533ff8d3990"></span>bool <code class="sig-name descname">operator&lt;</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos22hardware_table_usage_tE" title="eos::hardware_table_usage_t">hardware_table_usage_t</a> <em class="property">const</em> &amp;<em>other</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos22hardware_table_usage_tltERK22hardware_table_usage_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos22hardware_table_usage_t4hashEv">
+<span id="_CPPv3NK3eos22hardware_table_usage_t4hashEv"></span><span id="_CPPv2NK3eos22hardware_table_usage_t4hashEv"></span><span id="eos::hardware_table_usage_t::hashC"></span><span class="target" id="classeos_1_1hardware__table__usage__t_1a50a913d45481de38dadef5f662ca5c36"></span>uint32_t <code class="sig-name descname">hash</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos22hardware_table_usage_t4hashEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>The hash function for type <a class="reference internal" href="#classeos_1_1hardware__table__usage__t"><span class="std std-ref">hardware_table_usage_t</span></a>. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos22hardware_table_usage_t6mix_meER8hash_mix">
+<span id="_CPPv3NK3eos22hardware_table_usage_t6mix_meER8hash_mix"></span><span id="_CPPv2NK3eos22hardware_table_usage_t6mix_meER8hash_mix"></span><span id="eos::hardware_table_usage_t::mix_me__hash_mixRC"></span><span class="target" id="classeos_1_1hardware__table__usage__t_1ac44b7ba9eaced110386e4f7a6e34a493"></span>void <code class="sig-name descname">mix_me</code><span class="sig-paren">(</span><a class="reference internal" href="hash_mix.html#_CPPv4N3eos8hash_mixE" title="eos::hash_mix">hash_mix</a> &amp;<em>h</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos22hardware_table_usage_t6mix_meER8hash_mix" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>The hash mix function for type <a class="reference internal" href="#classeos_1_1hardware__table__usage__t"><span class="std std-ref">hardware_table_usage_t</span></a>. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos22hardware_table_usage_t9to_stringEv">
+<span id="_CPPv3NK3eos22hardware_table_usage_t9to_stringEv"></span><span id="_CPPv2NK3eos22hardware_table_usage_t9to_stringEv"></span><span id="eos::hardware_table_usage_t::to_stringC"></span><span class="target" id="classeos_1_1hardware__table__usage__t_1a5ea4ddd31830ad382dbb5987442e4741"></span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::string <code class="sig-name descname">to_string</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos22hardware_table_usage_t9to_stringEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Returns a string representation of the current object’s values. </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-static-functions">Public Static Functions</p>
+<dl class="cpp function">
+<dt id="_CPPv4N3eos22hardware_table_usage_tnwENSt6size_tEPv">
+<span id="_CPPv3N3eos22hardware_table_usage_tnwENSt6size_tEPv"></span><span id="_CPPv2N3eos22hardware_table_usage_tnwENSt6size_tEPv"></span><span id="eos::hardware_table_usage_t::new-operator__std::s.voidP"></span><span class="target" id="classeos_1_1hardware__table__usage__t_1af1a1b59ee8d0ba52c2632597017104b7"></span><em class="property">static</em> <em class="property">inline</em> void *<code class="sig-name descname">operator new</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::size_t, void *<em>ptr</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos22hardware_table_usage_tnwENSt6size_tEPv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos22hardware_table_usage_tnwENSt6size_tE">
+<span id="_CPPv3N3eos22hardware_table_usage_tnwENSt6size_tE"></span><span id="_CPPv2N3eos22hardware_table_usage_tnwENSt6size_tE"></span><span id="eos::hardware_table_usage_t::new-operator__std::s"></span><span class="target" id="classeos_1_1hardware__table__usage__t_1ad43ba452a0d04f9ca683917f5f4d49ee"></span><em class="property">static</em> void *<code class="sig-name descname">operator new</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::size_t<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos22hardware_table_usage_tnwENSt6size_tE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos22hardware_table_usage_tdlEPv">
+<span id="_CPPv3N3eos22hardware_table_usage_tdlEPv"></span><span id="_CPPv2N3eos22hardware_table_usage_tdlEPv"></span><span id="eos::hardware_table_usage_t::delete-operator__voidP"></span><span class="target" id="classeos_1_1hardware__table__usage__t_1a9eb51f1fc4e52fc1d1547c5720da2f77"></span><em class="property">static</em> void <code class="sig-name descname">operator delete</code><span class="sig-paren">(</span>void*<span class="sig-paren">)</span> <em class="property">noexcept</em><a class="headerlink" href="#_CPPv4N3eos22hardware_table_usage_tdlEPv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-private-members">Private Members</p>
+<dl class="cpp var">
+<dt id="_CPPv4N3eos22hardware_table_usage_t5pimplE">
+<span id="_CPPv3N3eos22hardware_table_usage_t5pimplE"></span><span id="_CPPv2N3eos22hardware_table_usage_t5pimplE"></span><span id="eos::hardware_table_usage_t::pimpl__std::shared_ptr:hardware_table_usage_impl_t:"></span><span class="target" id="classeos_1_1hardware__table__usage__t_1a55aa7eb84bec49e3304835af9bdf8e7e"></span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::shared_ptr&lt;hardware_table_usage_impl_t&gt; <code class="sig-name descname">pimpl</code><a class="headerlink" href="#_CPPv4N3eos22hardware_table_usage_t5pimplE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-friends">Friends</p>
+<dl class="cpp function">
+<dt id="_CPPv4N3eos22hardware_table_usage_tlsERNSt7ostreamERK22hardware_table_usage_t">
+<span id="_CPPv3N3eos22hardware_table_usage_tlsERNSt7ostreamERK22hardware_table_usage_t"></span><span id="_CPPv2N3eos22hardware_table_usage_tlsERNSt7ostreamERK22hardware_table_usage_t"></span><span id="eos::hardware_table_usage_t::lshift-operator__osR.hardware_table_usage_tCR"></span><span class="target" id="classeos_1_1hardware__table__usage__t_1aa24786d5d24f08da728acf97f3115e87"></span><em class="property">friend</em> <a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::ostream &amp;<code class="sig-name descname">operator&lt;&lt;</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::ostream &amp;<em>os</em>, <em class="property">const</em> <a class="reference internal" href="#_CPPv4N3eos22hardware_table_usage_tE" title="eos::hardware_table_usage_t">hardware_table_usage_t</a> &amp;<em>obj</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos22hardware_table_usage_tlsERNSt7ostreamERK22hardware_table_usage_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>A utility stream operator that adds a string representation of <a class="reference internal" href="#classeos_1_1hardware__table__usage__t"><span class="std std-ref">hardware_table_usage_t</span></a> to the ostream. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="cpp class">
+<dt id="_CPPv4N3eos22hardware_table_entry_tE">
+<span id="_CPPv3N3eos22hardware_table_entry_tE"></span><span id="_CPPv2N3eos22hardware_table_entry_tE"></span><span id="eos::hardware_table_entry_t"></span><span class="target" id="classeos_1_1hardware__table__entry__t"></span><em class="property">class </em><code class="sig-name descname">hardware_table_entry_t</code><a class="headerlink" href="#_CPPv4N3eos22hardware_table_entry_tE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><div class="docutils container">
+<em>#include &lt;hardware_table.h&gt;</em></div>
+<p>The hardware table entry for a given table key. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
+<dl class="cpp function">
+<dt id="_CPPv4N3eos22hardware_table_entry_t22hardware_table_entry_tEv">
+<span id="_CPPv3N3eos22hardware_table_entry_t22hardware_table_entry_tEv"></span><span id="_CPPv2N3eos22hardware_table_entry_t22hardware_table_entry_tEv"></span><span id="eos::hardware_table_entry_t::hardware_table_entry_t"></span><span class="target" id="classeos_1_1hardware__table__entry__t_1ad286e414a7c7e0059e70788f341f025a"></span><code class="sig-name descname">hardware_table_entry_t</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos22hardware_table_entry_t22hardware_table_entry_tEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos22hardware_table_entry_t22hardware_table_entry_tERK22hardware_table_usage_t8uint32_tRK31hardware_table_high_watermark_t">
+<span id="_CPPv3N3eos22hardware_table_entry_t22hardware_table_entry_tERK22hardware_table_usage_t8uint32_tRK31hardware_table_high_watermark_t"></span><span id="_CPPv2N3eos22hardware_table_entry_t22hardware_table_entry_tERK22hardware_table_usage_t8uint32_tRK31hardware_table_high_watermark_t"></span><span id="eos::hardware_table_entry_t::hardware_table_entry_t__hardware_table_usage_tCR.uint32_t.hardware_table_high_watermark_tCR"></span><span class="target" id="classeos_1_1hardware__table__entry__t_1a40777e97aaf00b642ac6d7f59b7d0a33"></span><code class="sig-name descname">hardware_table_entry_t</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos22hardware_table_usage_tE" title="eos::hardware_table_usage_t">hardware_table_usage_t</a> <em class="property">const</em> &amp;<em>usage</em>, uint32_t <em>max_entries</em>, <a class="reference internal" href="#_CPPv4N3eos31hardware_table_high_watermark_tE" title="eos::hardware_table_high_watermark_t">hardware_table_high_watermark_t</a> <em class="property">const</em> &amp;<em>high_watermark</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos22hardware_table_entry_t22hardware_table_entry_tERK22hardware_table_usage_t8uint32_tRK31hardware_table_high_watermark_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos22hardware_table_entry_t22hardware_table_entry_tERK22hardware_table_entry_t">
+<span id="_CPPv3N3eos22hardware_table_entry_t22hardware_table_entry_tERK22hardware_table_entry_t"></span><span id="_CPPv2N3eos22hardware_table_entry_t22hardware_table_entry_tERK22hardware_table_entry_t"></span><span id="eos::hardware_table_entry_t::hardware_table_entry_t__hardware_table_entry_tCR"></span><span class="target" id="classeos_1_1hardware__table__entry__t_1a12115878359cfcfadcd9688e3c45c5a9"></span><code class="sig-name descname">hardware_table_entry_t</code><span class="sig-paren">(</span><em class="property">const</em> <a class="reference internal" href="#_CPPv4N3eos22hardware_table_entry_t22hardware_table_entry_tERK22hardware_table_entry_t" title="eos::hardware_table_entry_t::hardware_table_entry_t">hardware_table_entry_t</a> &amp;<em>other</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos22hardware_table_entry_t22hardware_table_entry_tERK22hardware_table_entry_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos22hardware_table_entry_taSERK22hardware_table_entry_t">
+<span id="_CPPv3N3eos22hardware_table_entry_taSERK22hardware_table_entry_t"></span><span id="_CPPv2N3eos22hardware_table_entry_taSERK22hardware_table_entry_t"></span><span id="eos::hardware_table_entry_t::assign-operator__hardware_table_entry_tCR"></span><span class="target" id="classeos_1_1hardware__table__entry__t_1add8dd2bc080ff36144a53c93df64ee80"></span><a class="reference internal" href="#_CPPv4N3eos22hardware_table_entry_tE" title="eos::hardware_table_entry_t">hardware_table_entry_t</a> &amp;<code class="sig-name descname">operator=</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos22hardware_table_entry_tE" title="eos::hardware_table_entry_t">hardware_table_entry_t</a> <em class="property">const</em> &amp;<em>other</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos22hardware_table_entry_taSERK22hardware_table_entry_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos22hardware_table_entry_t22hardware_table_entry_tERR22hardware_table_entry_t">
+<span id="_CPPv3N3eos22hardware_table_entry_t22hardware_table_entry_tERR22hardware_table_entry_t"></span><span id="_CPPv2N3eos22hardware_table_entry_t22hardware_table_entry_tERR22hardware_table_entry_t"></span><span id="eos::hardware_table_entry_t::hardware_table_entry_t__hardware_table_entry_tRR"></span><span class="target" id="classeos_1_1hardware__table__entry__t_1ab5d60721383ab71acd26594b29940b92"></span><code class="sig-name descname">hardware_table_entry_t</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos22hardware_table_entry_t22hardware_table_entry_tERR22hardware_table_entry_t" title="eos::hardware_table_entry_t::hardware_table_entry_t">hardware_table_entry_t</a> &amp;&amp;<em>other</em><span class="sig-paren">)</span> <em class="property">noexcept</em><a class="headerlink" href="#_CPPv4N3eos22hardware_table_entry_t22hardware_table_entry_tERR22hardware_table_entry_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos22hardware_table_entry_taSERR22hardware_table_entry_t">
+<span id="_CPPv3N3eos22hardware_table_entry_taSERR22hardware_table_entry_t"></span><span id="_CPPv2N3eos22hardware_table_entry_taSERR22hardware_table_entry_t"></span><span id="eos::hardware_table_entry_t::assign-operator__hardware_table_entry_tRR"></span><span class="target" id="classeos_1_1hardware__table__entry__t_1aea597f3f0858f7009c571e30ff7a0f06"></span><a class="reference internal" href="#_CPPv4N3eos22hardware_table_entry_tE" title="eos::hardware_table_entry_t">hardware_table_entry_t</a> &amp;<code class="sig-name descname">operator=</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos22hardware_table_entry_tE" title="eos::hardware_table_entry_t">hardware_table_entry_t</a> &amp;&amp;<em>other</em><span class="sig-paren">)</span> <em class="property">noexcept</em><a class="headerlink" href="#_CPPv4N3eos22hardware_table_entry_taSERR22hardware_table_entry_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos22hardware_table_entry_t5usageEv">
+<span id="_CPPv3NK3eos22hardware_table_entry_t5usageEv"></span><span id="_CPPv2NK3eos22hardware_table_entry_t5usageEv"></span><span id="eos::hardware_table_entry_t::usageC"></span><span class="target" id="classeos_1_1hardware__table__entry__t_1a0711ef7728b65a5dcb9c5c5d7eb2ba10"></span><a class="reference internal" href="#_CPPv4N3eos22hardware_table_usage_tE" title="eos::hardware_table_usage_t">hardware_table_usage_t</a> <code class="sig-name descname">usage</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos22hardware_table_entry_t5usageEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Getter for ‘usage’: the compound usage statistics. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos22hardware_table_entry_t11max_entriesEv">
+<span id="_CPPv3NK3eos22hardware_table_entry_t11max_entriesEv"></span><span id="_CPPv2NK3eos22hardware_table_entry_t11max_entriesEv"></span><span id="eos::hardware_table_entry_t::max_entriesC"></span><span class="target" id="classeos_1_1hardware__table__entry__t_1a26d6fe29a87561189920bf8c23ae3969"></span>uint32_t <code class="sig-name descname">max_entries</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos22hardware_table_entry_t11max_entriesEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Getter for ‘max_entries’: the theoretical maximum number of entries available. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos22hardware_table_entry_t14high_watermarkEv">
+<span id="_CPPv3NK3eos22hardware_table_entry_t14high_watermarkEv"></span><span id="_CPPv2NK3eos22hardware_table_entry_t14high_watermarkEv"></span><span id="eos::hardware_table_entry_t::high_watermarkC"></span><span class="target" id="classeos_1_1hardware__table__entry__t_1a6aaacd2aad0ca1ace9bfcb73404c1613"></span><a class="reference internal" href="#_CPPv4N3eos31hardware_table_high_watermark_tE" title="eos::hardware_table_high_watermark_t">hardware_table_high_watermark_t</a> <code class="sig-name descname">high_watermark</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos22hardware_table_entry_t14high_watermarkEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Getter for ‘high_watermark’: the compound high watermark statistics. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos22hardware_table_entry_teqERK22hardware_table_entry_t">
+<span id="_CPPv3NK3eos22hardware_table_entry_teqERK22hardware_table_entry_t"></span><span id="_CPPv2NK3eos22hardware_table_entry_teqERK22hardware_table_entry_t"></span><span id="eos::hardware_table_entry_t::eq-operator__hardware_table_entry_tCRC"></span><span class="target" id="classeos_1_1hardware__table__entry__t_1a59354d3f8c56a191409d08b9abe79afd"></span>bool <code class="sig-name descname">operator==</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos22hardware_table_entry_tE" title="eos::hardware_table_entry_t">hardware_table_entry_t</a> <em class="property">const</em> &amp;<em>other</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos22hardware_table_entry_teqERK22hardware_table_entry_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos22hardware_table_entry_tneERK22hardware_table_entry_t">
+<span id="_CPPv3NK3eos22hardware_table_entry_tneERK22hardware_table_entry_t"></span><span id="_CPPv2NK3eos22hardware_table_entry_tneERK22hardware_table_entry_t"></span><span id="eos::hardware_table_entry_t::neq-operator__hardware_table_entry_tCRC"></span><span class="target" id="classeos_1_1hardware__table__entry__t_1a1238200cd9ff71546f8c291f86a1f431"></span>bool <code class="sig-name descname">operator!=</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos22hardware_table_entry_tE" title="eos::hardware_table_entry_t">hardware_table_entry_t</a> <em class="property">const</em> &amp;<em>other</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos22hardware_table_entry_tneERK22hardware_table_entry_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos22hardware_table_entry_tltERK22hardware_table_entry_t">
+<span id="_CPPv3NK3eos22hardware_table_entry_tltERK22hardware_table_entry_t"></span><span id="_CPPv2NK3eos22hardware_table_entry_tltERK22hardware_table_entry_t"></span><span id="eos::hardware_table_entry_t::lt-operator__hardware_table_entry_tCRC"></span><span class="target" id="classeos_1_1hardware__table__entry__t_1a843007a5bcae0d612611229c0f6d5f16"></span>bool <code class="sig-name descname">operator&lt;</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos22hardware_table_entry_tE" title="eos::hardware_table_entry_t">hardware_table_entry_t</a> <em class="property">const</em> &amp;<em>other</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos22hardware_table_entry_tltERK22hardware_table_entry_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos22hardware_table_entry_t4hashEv">
+<span id="_CPPv3NK3eos22hardware_table_entry_t4hashEv"></span><span id="_CPPv2NK3eos22hardware_table_entry_t4hashEv"></span><span id="eos::hardware_table_entry_t::hashC"></span><span class="target" id="classeos_1_1hardware__table__entry__t_1ac5fcdd45dac3f624898380fb633d6e34"></span>uint32_t <code class="sig-name descname">hash</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos22hardware_table_entry_t4hashEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>The hash function for type <a class="reference internal" href="#classeos_1_1hardware__table__entry__t"><span class="std std-ref">hardware_table_entry_t</span></a>. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos22hardware_table_entry_t6mix_meER8hash_mix">
+<span id="_CPPv3NK3eos22hardware_table_entry_t6mix_meER8hash_mix"></span><span id="_CPPv2NK3eos22hardware_table_entry_t6mix_meER8hash_mix"></span><span id="eos::hardware_table_entry_t::mix_me__hash_mixRC"></span><span class="target" id="classeos_1_1hardware__table__entry__t_1abf8a1e02c4a8efb8f76eba3968cc5fd6"></span>void <code class="sig-name descname">mix_me</code><span class="sig-paren">(</span><a class="reference internal" href="hash_mix.html#_CPPv4N3eos8hash_mixE" title="eos::hash_mix">hash_mix</a> &amp;<em>h</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos22hardware_table_entry_t6mix_meER8hash_mix" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>The hash mix function for type <a class="reference internal" href="#classeos_1_1hardware__table__entry__t"><span class="std std-ref">hardware_table_entry_t</span></a>. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos22hardware_table_entry_t9to_stringEv">
+<span id="_CPPv3NK3eos22hardware_table_entry_t9to_stringEv"></span><span id="_CPPv2NK3eos22hardware_table_entry_t9to_stringEv"></span><span id="eos::hardware_table_entry_t::to_stringC"></span><span class="target" id="classeos_1_1hardware__table__entry__t_1a2184cc51b93f0e8b1a8146ec69b76aea"></span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::string <code class="sig-name descname">to_string</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos22hardware_table_entry_t9to_stringEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Returns a string representation of the current object’s values. </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-static-functions">Public Static Functions</p>
+<dl class="cpp function">
+<dt id="_CPPv4N3eos22hardware_table_entry_tnwENSt6size_tEPv">
+<span id="_CPPv3N3eos22hardware_table_entry_tnwENSt6size_tEPv"></span><span id="_CPPv2N3eos22hardware_table_entry_tnwENSt6size_tEPv"></span><span id="eos::hardware_table_entry_t::new-operator__std::s.voidP"></span><span class="target" id="classeos_1_1hardware__table__entry__t_1ab5de208eb4f1ff587e5e5f388cd5b604"></span><em class="property">static</em> <em class="property">inline</em> void *<code class="sig-name descname">operator new</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::size_t, void *<em>ptr</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos22hardware_table_entry_tnwENSt6size_tEPv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos22hardware_table_entry_tnwENSt6size_tE">
+<span id="_CPPv3N3eos22hardware_table_entry_tnwENSt6size_tE"></span><span id="_CPPv2N3eos22hardware_table_entry_tnwENSt6size_tE"></span><span id="eos::hardware_table_entry_t::new-operator__std::s"></span><span class="target" id="classeos_1_1hardware__table__entry__t_1a67e48606158ada7f11dd13325c5e71a1"></span><em class="property">static</em> void *<code class="sig-name descname">operator new</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::size_t<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos22hardware_table_entry_tnwENSt6size_tE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos22hardware_table_entry_tdlEPv">
+<span id="_CPPv3N3eos22hardware_table_entry_tdlEPv"></span><span id="_CPPv2N3eos22hardware_table_entry_tdlEPv"></span><span id="eos::hardware_table_entry_t::delete-operator__voidP"></span><span class="target" id="classeos_1_1hardware__table__entry__t_1a5c1e8464b6d7c8a4e841ecb7fd3d2979"></span><em class="property">static</em> void <code class="sig-name descname">operator delete</code><span class="sig-paren">(</span>void*<span class="sig-paren">)</span> <em class="property">noexcept</em><a class="headerlink" href="#_CPPv4N3eos22hardware_table_entry_tdlEPv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-private-members">Private Members</p>
+<dl class="cpp var">
+<dt id="_CPPv4N3eos22hardware_table_entry_t5pimplE">
+<span id="_CPPv3N3eos22hardware_table_entry_t5pimplE"></span><span id="_CPPv2N3eos22hardware_table_entry_t5pimplE"></span><span id="eos::hardware_table_entry_t::pimpl__std::shared_ptr:hardware_table_entry_impl_t:"></span><span class="target" id="classeos_1_1hardware__table__entry__t_1afd1fb888d04d3cb535f22b318087258e"></span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::shared_ptr&lt;hardware_table_entry_impl_t&gt; <code class="sig-name descname">pimpl</code><a class="headerlink" href="#_CPPv4N3eos22hardware_table_entry_t5pimplE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-friends">Friends</p>
+<dl class="cpp function">
+<dt id="_CPPv4N3eos22hardware_table_entry_tlsERNSt7ostreamERK22hardware_table_entry_t">
+<span id="_CPPv3N3eos22hardware_table_entry_tlsERNSt7ostreamERK22hardware_table_entry_t"></span><span id="_CPPv2N3eos22hardware_table_entry_tlsERNSt7ostreamERK22hardware_table_entry_t"></span><span id="eos::hardware_table_entry_t::lshift-operator__osR.hardware_table_entry_tCR"></span><span class="target" id="classeos_1_1hardware__table__entry__t_1a038ab5d0631fccf1bf2eecd196317933"></span><em class="property">friend</em> <a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::ostream &amp;<code class="sig-name descname">operator&lt;&lt;</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::ostream &amp;<em>os</em>, <em class="property">const</em> <a class="reference internal" href="#_CPPv4N3eos22hardware_table_entry_tE" title="eos::hardware_table_entry_t">hardware_table_entry_t</a> &amp;<em>obj</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos22hardware_table_entry_tlsERNSt7ostreamERK22hardware_table_entry_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>A utility stream operator that adds a string representation of <a class="reference internal" href="#classeos_1_1hardware__table__entry__t"><span class="std std-ref">hardware_table_entry_t</span></a> to the ostream. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#"><strong>hardware_table</strong></a><ul>
+<li><a class="reference internal" href="#type-definitions-in-hardware-table">Type definitions in <strong>hardware_table</strong></a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="fib.html"
+                        title="previous chapter"><strong>fib</strong></a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="hash_mix.html"
+                        title="next chapter"><strong>hash_mix</strong></a></p>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="hash_mix.html" title="hash_mix"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="fib.html" title="fib"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Arista EOS SDK 2.23.4 reference</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href=""><strong>hardware_table</strong></a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2014, Arista Networks.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.4.3.
+    </div>
+  </body>
+</html>

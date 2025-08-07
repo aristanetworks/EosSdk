@@ -1,0 +1,381 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>exception &#8212; Arista EOS SDK 2.23.4 reference</title>
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/eossdk.css" type="text/css" />
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="fd" href="fd.html" />
+    <link rel="prev" title="event_loop" href="event_loop.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="fd.html" title="fd"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="event_loop.html" title="event_loop"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Arista EOS SDK 2.23.4 reference</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href=""><strong>exception</strong></a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="exception">
+<h1><strong>exception</strong><a class="headerlink" href="#exception" title="Permalink to this headline">¶</a></h1>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-defines">Defines</p>
+<dl class="cpp macro">
+<dt id="c.noexcept">
+<span class="target" id="exception_8h_1a189faadd7f99f6c354db09acbb2aafcd"></span><code class="sig-name descname">noexcept</code><a class="headerlink" href="#c.noexcept" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<dl class="cpp type">
+<dt id="_CPPv43eos">
+<span id="_CPPv33eos"></span><span id="_CPPv23eos"></span><span id="eos"></span><span class="target" id="namespaceeos"></span><em class="property">namespace </em><code class="sig-name descname">eos</code><br /></dt>
+<dd><dl class="cpp class">
+<dt id="_CPPv4N3eos5errorE">
+<span id="_CPPv3N3eos5errorE"></span><span id="_CPPv2N3eos5errorE"></span><span id="eos::error"></span><span class="target" id="classeos_1_1error"></span><em class="property">class </em><code class="sig-name descname">error</code> : <em class="property">public</em> <a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::exception<a class="headerlink" href="#_CPPv4N3eos5errorE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><div class="docutils container">
+<em>#include &lt;exception.h&gt;</em></div>
+<p>Base exception type for all SDK-reported exceptions. </p>
+<p>Subclassed by <a class="reference internal" href="#classeos_1_1configuration__error"><span class="std std-ref">eos::configuration_error</span></a>, <a class="reference internal" href="#classeos_1_1invalid__argument__error"><span class="std std-ref">eos::invalid_argument_error</span></a>, <a class="reference internal" href="eth.html#classeos_1_1invalid__vlan__error"><span class="std std-ref">eos::invalid_vlan_error</span></a>, <a class="reference internal" href="#classeos_1_1no__scoped__lock__obtained__error"><span class="std std-ref">eos::no_scoped_lock_obtained_error</span></a>, <a class="reference internal" href="intf.html#classeos_1_1no__such__interface__error"><span class="std std-ref">eos::no_such_interface_error</span></a>, <a class="reference internal" href="intf.html#classeos_1_1not__switchport__eligible__error"><span class="std std-ref">eos::not_switchport_eligible_error</span></a>, <a class="reference internal" href="#classeos_1_1unsupported__error"><span class="std std-ref">eos::unsupported_error</span></a></p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
+<dl class="cpp function">
+<dt id="_CPPv4N3eos5errorD0Ev">
+<span id="_CPPv3N3eos5errorD0Ev"></span><span id="_CPPv2N3eos5errorD0Ev"></span><span id="eos::error::~error"></span><span class="target" id="classeos_1_1error_1a400e81ba2868ec404fd0d247ba2fdbbe"></span><em class="property">inline</em> <em class="property">virtual</em> <code class="sig-name descname">~error</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">noexcept</em><a class="headerlink" href="#_CPPv4N3eos5errorD0Ev" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos5error5errorERKNSt6stringE">
+<span id="_CPPv3N3eos5error5errorERKNSt6stringE"></span><span id="_CPPv2N3eos5error5errorERKNSt6stringE"></span><span id="eos::error::error__ssCR"></span><span class="target" id="classeos_1_1error_1a8328a2fc08bfd41ae3fe6f9fb08e95c2"></span><em class="property">inline</em> <em class="property">explicit</em> <code class="sig-name descname">error</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::string <em class="property">const</em> &amp;<em>msg</em><span class="sig-paren">)</span> <em class="property">noexcept</em><a class="headerlink" href="#_CPPv4N3eos5error5errorERKNSt6stringE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos5error3msgEv">
+<span id="_CPPv3NK3eos5error3msgEv"></span><span id="_CPPv2NK3eos5error3msgEv"></span><span id="eos::error::msgC"></span><span class="target" id="classeos_1_1error_1acf90a567dd770c436d05128a46e0e4bf"></span><em class="property">inline</em> <a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::string <em class="property">const</em> &amp;<code class="sig-name descname">msg</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em> <em class="property">noexcept</em><a class="headerlink" href="#_CPPv4NK3eos5error3msgEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos5error4whatEv">
+<span id="_CPPv3NK3eos5error4whatEv"></span><span id="_CPPv2NK3eos5error4whatEv"></span><span id="eos::error::whatC"></span><span class="target" id="classeos_1_1error_1acfd6d237df1cf458c762c8c8c0a96f2b"></span><em class="property">inline</em> <em class="property">virtual</em> <em class="property">const</em> char *<code class="sig-name descname">what</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em> <em class="property">noexcept</em><a class="headerlink" href="#_CPPv4NK3eos5error4whatEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos5error5raiseEv">
+<span id="_CPPv3NK3eos5error5raiseEv"></span><span id="_CPPv2NK3eos5error5raiseEv"></span><span id="eos::error::raiseC"></span><span class="target" id="classeos_1_1error_1ad2ea117997e427ecb62b53d38bf4e0c3"></span><em class="property">virtual</em> void <code class="sig-name descname">raise</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em> = 0<a class="headerlink" href="#_CPPv4NK3eos5error5raiseEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Throws this exception. </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-private-members">Private Members</p>
+<dl class="cpp var">
+<dt id="_CPPv4N3eos5error4msg_E">
+<span id="_CPPv3N3eos5error4msg_E"></span><span id="_CPPv2N3eos5error4msg_E"></span><span id="eos::error::msg___ss"></span><span class="target" id="classeos_1_1error_1a0a211389cce4598d4bc62664dffca0d9"></span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::string <code class="sig-name descname">msg_</code><a class="headerlink" href="#_CPPv4N3eos5error4msg_E" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="cpp class">
+<dt id="_CPPv4N3eos22invalid_argument_errorE">
+<span id="_CPPv3N3eos22invalid_argument_errorE"></span><span id="_CPPv2N3eos22invalid_argument_errorE"></span><span id="eos::invalid_argument_error"></span><span class="target" id="classeos_1_1invalid__argument__error"></span><em class="property">class </em><code class="sig-name descname">invalid_argument_error</code> : <em class="property">public</em> <a class="reference internal" href="acl.html#_CPPv43eos" title="eos">eos</a>::<a class="reference internal" href="#_CPPv4N3eos5errorE" title="eos::error">error</a><a class="headerlink" href="#_CPPv4N3eos22invalid_argument_errorE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><div class="docutils container">
+<em>#include &lt;exception.h&gt;</em></div>
+<p>Base exception for all cases where an attempt was made to configure the system with completely invalid arguments &amp;#8212; for example, an out-of-range VLAN ID (&gt;4095). </p>
+<p>Subclassed by <a class="reference internal" href="#classeos_1_1invalid__range__error"><span class="std std-ref">eos::invalid_range_error</span></a></p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
+<dl class="cpp function">
+<dt id="_CPPv4N3eos22invalid_argument_errorD0Ev">
+<span id="_CPPv3N3eos22invalid_argument_errorD0Ev"></span><span id="_CPPv2N3eos22invalid_argument_errorD0Ev"></span><span id="eos::invalid_argument_error::~invalid_argument_error"></span><span class="target" id="classeos_1_1invalid__argument__error_1a7bb5ff3e41909cf1cf76517e46e5bded"></span><em class="property">inline</em> <em class="property">virtual</em> <code class="sig-name descname">~invalid_argument_error</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">noexcept</em><a class="headerlink" href="#_CPPv4N3eos22invalid_argument_errorD0Ev" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos22invalid_argument_error22invalid_argument_errorERKNSt6stringE">
+<span id="_CPPv3N3eos22invalid_argument_error22invalid_argument_errorERKNSt6stringE"></span><span id="_CPPv2N3eos22invalid_argument_error22invalid_argument_errorERKNSt6stringE"></span><span id="eos::invalid_argument_error::invalid_argument_error__ssCR"></span><span class="target" id="classeos_1_1invalid__argument__error_1af04d2ddb440a2b2717dc1082c1d3ba5d"></span><em class="property">explicit</em> <code class="sig-name descname">invalid_argument_error</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::string <em class="property">const</em> &amp;<em>argument_name</em><span class="sig-paren">)</span> <em class="property">noexcept</em><a class="headerlink" href="#_CPPv4N3eos22invalid_argument_error22invalid_argument_errorERKNSt6stringE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos22invalid_argument_error22invalid_argument_errorERKNSt6stringERKNSt6stringE">
+<span id="_CPPv3N3eos22invalid_argument_error22invalid_argument_errorERKNSt6stringERKNSt6stringE"></span><span id="_CPPv2N3eos22invalid_argument_error22invalid_argument_errorERKNSt6stringERKNSt6stringE"></span><span id="eos::invalid_argument_error::invalid_argument_error__ssCR.ssCR"></span><span class="target" id="classeos_1_1invalid__argument__error_1ade9c6503e181905fd6326710b0cab736"></span><em class="property">explicit</em> <code class="sig-name descname">invalid_argument_error</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::string <em class="property">const</em> &amp;<em>argument_name</em>, <a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::string <em class="property">const</em> &amp;<em>error_details</em><span class="sig-paren">)</span> <em class="property">noexcept</em><a class="headerlink" href="#_CPPv4N3eos22invalid_argument_error22invalid_argument_errorERKNSt6stringERKNSt6stringE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos22invalid_argument_error5raiseEv">
+<span id="_CPPv3NK3eos22invalid_argument_error5raiseEv"></span><span id="_CPPv2NK3eos22invalid_argument_error5raiseEv"></span><span id="eos::invalid_argument_error::raiseC"></span><span class="target" id="classeos_1_1invalid__argument__error_1aa42089113fd582a629f52fbba0e15b37"></span><em class="property">inline</em> <em class="property">virtual</em> void <code class="sig-name descname">raise</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos22invalid_argument_error5raiseEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Throws this exception. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos22invalid_argument_error13argument_nameEv">
+<span id="_CPPv3NK3eos22invalid_argument_error13argument_nameEv"></span><span id="_CPPv2NK3eos22invalid_argument_error13argument_nameEv"></span><span id="eos::invalid_argument_error::argument_nameC"></span><span class="target" id="classeos_1_1invalid__argument__error_1a0aa6870c8b32eaf5a25174659904e441"></span><em class="property">inline</em> <a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::string <code class="sig-name descname">argument_name</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em> <em class="property">noexcept</em><a class="headerlink" href="#_CPPv4NK3eos22invalid_argument_error13argument_nameEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-private-members">Private Members</p>
+<dl class="cpp var">
+<dt id="_CPPv4N3eos22invalid_argument_error14argument_name_E">
+<span id="_CPPv3N3eos22invalid_argument_error14argument_name_E"></span><span id="_CPPv2N3eos22invalid_argument_error14argument_name_E"></span><span id="eos::invalid_argument_error::argument_name___ss"></span><span class="target" id="classeos_1_1invalid__argument__error_1a06a153b11036fa0bf259542b40b480b2"></span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::string <code class="sig-name descname">argument_name_</code><a class="headerlink" href="#_CPPv4N3eos22invalid_argument_error14argument_name_E" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="cpp class">
+<dt id="_CPPv4N3eos19invalid_range_errorE">
+<span id="_CPPv3N3eos19invalid_range_errorE"></span><span id="_CPPv2N3eos19invalid_range_errorE"></span><span id="eos::invalid_range_error"></span><span class="target" id="classeos_1_1invalid__range__error"></span><em class="property">class </em><code class="sig-name descname">invalid_range_error</code> : <em class="property">public</em> <a class="reference internal" href="acl.html#_CPPv43eos" title="eos">eos</a>::<a class="reference internal" href="#_CPPv4N3eos22invalid_argument_errorE" title="eos::invalid_argument_error">invalid_argument_error</a><a class="headerlink" href="#_CPPv4N3eos19invalid_range_errorE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><div class="docutils container">
+<em>#include &lt;exception.h&gt;</em></div>
+<p>The given argument was outside of the legal range of values for that argument (e.g., VLAN IDs must be between 1 and 4094). </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
+<dl class="cpp function">
+<dt id="_CPPv4N3eos19invalid_range_errorD0Ev">
+<span id="_CPPv3N3eos19invalid_range_errorD0Ev"></span><span id="_CPPv2N3eos19invalid_range_errorD0Ev"></span><span id="eos::invalid_range_error::~invalid_range_error"></span><span class="target" id="classeos_1_1invalid__range__error_1ad4b06d6a6e0458d8e5612c31266da867"></span><em class="property">inline</em> <em class="property">virtual</em> <code class="sig-name descname">~invalid_range_error</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">noexcept</em><a class="headerlink" href="#_CPPv4N3eos19invalid_range_errorD0Ev" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos19invalid_range_error19invalid_range_errorERKNSt6stringE8uint32_t8uint32_t">
+<span id="_CPPv3N3eos19invalid_range_error19invalid_range_errorERKNSt6stringE8uint32_t8uint32_t"></span><span id="_CPPv2N3eos19invalid_range_error19invalid_range_errorERKNSt6stringE8uint32_t8uint32_t"></span><span id="eos::invalid_range_error::invalid_range_error__ssCR.uint32_t.uint32_t"></span><span class="target" id="classeos_1_1invalid__range__error_1ac79d872baf41075d014f2cf7c4e94d31"></span><em class="property">explicit</em> <code class="sig-name descname">invalid_range_error</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::string <em class="property">const</em> &amp;<em>argument_name</em>, uint32_t <em>min_valid</em>, uint32_t <em>max_valid</em><span class="sig-paren">)</span> <em class="property">noexcept</em><a class="headerlink" href="#_CPPv4N3eos19invalid_range_error19invalid_range_errorERKNSt6stringE8uint32_t8uint32_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos19invalid_range_error5raiseEv">
+<span id="_CPPv3NK3eos19invalid_range_error5raiseEv"></span><span id="_CPPv2NK3eos19invalid_range_error5raiseEv"></span><span id="eos::invalid_range_error::raiseC"></span><span class="target" id="classeos_1_1invalid__range__error_1a37437b76440d7b4072bf8cc00cce2f5f"></span><em class="property">inline</em> <em class="property">virtual</em> void <code class="sig-name descname">raise</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos19invalid_range_error5raiseEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Throws this exception. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos19invalid_range_error9min_validEv">
+<span id="_CPPv3NK3eos19invalid_range_error9min_validEv"></span><span id="_CPPv2NK3eos19invalid_range_error9min_validEv"></span><span id="eos::invalid_range_error::min_validC"></span><span class="target" id="classeos_1_1invalid__range__error_1a72f2bdf5e1de836beb6bc10ad157f13e"></span><em class="property">inline</em> uint32_t <code class="sig-name descname">min_valid</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em> <em class="property">noexcept</em><a class="headerlink" href="#_CPPv4NK3eos19invalid_range_error9min_validEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos19invalid_range_error9max_validEv">
+<span id="_CPPv3NK3eos19invalid_range_error9max_validEv"></span><span id="_CPPv2NK3eos19invalid_range_error9max_validEv"></span><span id="eos::invalid_range_error::max_validC"></span><span class="target" id="classeos_1_1invalid__range__error_1ac7d1eb4bd5485b1d56df208ddfb5dd67"></span><em class="property">inline</em> uint32_t <code class="sig-name descname">max_valid</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em> <em class="property">noexcept</em><a class="headerlink" href="#_CPPv4NK3eos19invalid_range_error9max_validEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-private-members">Private Members</p>
+<dl class="cpp var">
+<dt id="_CPPv4N3eos19invalid_range_error10min_valid_E">
+<span id="_CPPv3N3eos19invalid_range_error10min_valid_E"></span><span id="_CPPv2N3eos19invalid_range_error10min_valid_E"></span><span id="eos::invalid_range_error::min_valid___uint32_t"></span><span class="target" id="classeos_1_1invalid__range__error_1a5f9de69619bf34ca64350ccc8ad1fa17"></span>uint32_t <code class="sig-name descname">min_valid_</code><a class="headerlink" href="#_CPPv4N3eos19invalid_range_error10min_valid_E" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp var">
+<dt id="_CPPv4N3eos19invalid_range_error10max_valid_E">
+<span id="_CPPv3N3eos19invalid_range_error10max_valid_E"></span><span id="_CPPv2N3eos19invalid_range_error10max_valid_E"></span><span id="eos::invalid_range_error::max_valid___uint32_t"></span><span class="target" id="classeos_1_1invalid__range__error_1a7eee7f5ff2a19114631d57a21518b1ce"></span>uint32_t <code class="sig-name descname">max_valid_</code><a class="headerlink" href="#_CPPv4N3eos19invalid_range_error10max_valid_E" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="cpp class">
+<dt id="_CPPv4N3eos19configuration_errorE">
+<span id="_CPPv3N3eos19configuration_errorE"></span><span id="_CPPv2N3eos19configuration_errorE"></span><span id="eos::configuration_error"></span><span class="target" id="classeos_1_1configuration__error"></span><em class="property">class </em><code class="sig-name descname">configuration_error</code> : <em class="property">public</em> <a class="reference internal" href="acl.html#_CPPv43eos" title="eos">eos</a>::<a class="reference internal" href="#_CPPv4N3eos5errorE" title="eos::error">error</a><a class="headerlink" href="#_CPPv4N3eos19configuration_errorE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><div class="docutils container">
+<em>#include &lt;exception.h&gt;</em></div>
+<p>Base exception type for all cases where the configuration requested could not be accepted because it’s impossible or invalid.</p>
+<p>The configuration may be invalid because of other conflicting configuration. For instance if a VLAN ID is already used as an internal VLAN on a routed port, trying to manually configure this VLAN ID on a trunk port would fail until the requested VLAN ID is no longer used as an internal VLAN on the routed port. </p>
+<p>Subclassed by <a class="reference internal" href="ip.html#classeos_1_1address__overlap__error"><span class="std std-ref">eos::address_overlap_error</span></a>, <a class="reference internal" href="eth.html#classeos_1_1internal__vlan__error"><span class="std std-ref">eos::internal_vlan_error</span></a>, <a class="reference internal" href="#classeos_1_1unconfigured__agent__error"><span class="std std-ref">eos::unconfigured_agent_error</span></a></p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
+<dl class="cpp function">
+<dt id="_CPPv4N3eos19configuration_errorD0Ev">
+<span id="_CPPv3N3eos19configuration_errorD0Ev"></span><span id="_CPPv2N3eos19configuration_errorD0Ev"></span><span id="eos::configuration_error::~configuration_error"></span><span class="target" id="classeos_1_1configuration__error_1a114229d96f27cd4d00c0cfccdfe2e37c"></span><em class="property">inline</em> <em class="property">virtual</em> <code class="sig-name descname">~configuration_error</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">noexcept</em><a class="headerlink" href="#_CPPv4N3eos19configuration_errorD0Ev" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos19configuration_error19configuration_errorERKNSt6stringE">
+<span id="_CPPv3N3eos19configuration_error19configuration_errorERKNSt6stringE"></span><span id="_CPPv2N3eos19configuration_error19configuration_errorERKNSt6stringE"></span><span id="eos::configuration_error::configuration_error__ssCR"></span><span class="target" id="classeos_1_1configuration__error_1a7e3f15e7feb6fe8f0d5197b835d6ee31"></span><em class="property">inline</em> <em class="property">explicit</em> <code class="sig-name descname">configuration_error</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::string <em class="property">const</em> &amp;<em>msg</em><span class="sig-paren">)</span> <em class="property">noexcept</em><a class="headerlink" href="#_CPPv4N3eos19configuration_error19configuration_errorERKNSt6stringE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos19configuration_error5raiseEv">
+<span id="_CPPv3NK3eos19configuration_error5raiseEv"></span><span id="_CPPv2NK3eos19configuration_error5raiseEv"></span><span id="eos::configuration_error::raiseC"></span><span class="target" id="classeos_1_1configuration__error_1ad766654cbcf947bfa0cb25d7a3ee6b99"></span><em class="property">inline</em> <em class="property">virtual</em> void <code class="sig-name descname">raise</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos19configuration_error5raiseEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Throws this exception. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="cpp class">
+<dt id="_CPPv4N3eos24unconfigured_agent_errorE">
+<span id="_CPPv3N3eos24unconfigured_agent_errorE"></span><span id="_CPPv2N3eos24unconfigured_agent_errorE"></span><span id="eos::unconfigured_agent_error"></span><span class="target" id="classeos_1_1unconfigured__agent__error"></span><em class="property">class </em><code class="sig-name descname">unconfigured_agent_error</code> : <em class="property">public</em> <a class="reference internal" href="acl.html#_CPPv43eos" title="eos">eos</a>::<a class="reference internal" href="#_CPPv4N3eos19configuration_errorE" title="eos::configuration_error">configuration_error</a><a class="headerlink" href="#_CPPv4N3eos24unconfigured_agent_errorE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><div class="docutils container">
+<em>#include &lt;exception.h&gt;</em></div>
+<p>The given agent has not been configured. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
+<dl class="cpp function">
+<dt id="_CPPv4N3eos24unconfigured_agent_errorD0Ev">
+<span id="_CPPv3N3eos24unconfigured_agent_errorD0Ev"></span><span id="_CPPv2N3eos24unconfigured_agent_errorD0Ev"></span><span id="eos::unconfigured_agent_error::~unconfigured_agent_error"></span><span class="target" id="classeos_1_1unconfigured__agent__error_1aaad3996f85f34c0399d89d0f0869fc5b"></span><em class="property">inline</em> <em class="property">virtual</em> <code class="sig-name descname">~unconfigured_agent_error</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">noexcept</em><a class="headerlink" href="#_CPPv4N3eos24unconfigured_agent_errorD0Ev" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos24unconfigured_agent_error24unconfigured_agent_errorERKNSt6stringE">
+<span id="_CPPv3N3eos24unconfigured_agent_error24unconfigured_agent_errorERKNSt6stringE"></span><span id="_CPPv2N3eos24unconfigured_agent_error24unconfigured_agent_errorERKNSt6stringE"></span><span id="eos::unconfigured_agent_error::unconfigured_agent_error__ssCR"></span><span class="target" id="classeos_1_1unconfigured__agent__error_1aea639e3f0bd7ef953b24ebc495c50f91"></span><em class="property">explicit</em> <code class="sig-name descname">unconfigured_agent_error</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::string <em class="property">const</em> &amp;<em>agent_name</em><span class="sig-paren">)</span> <em class="property">noexcept</em><a class="headerlink" href="#_CPPv4N3eos24unconfigured_agent_error24unconfigured_agent_errorERKNSt6stringE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos24unconfigured_agent_error5raiseEv">
+<span id="_CPPv3NK3eos24unconfigured_agent_error5raiseEv"></span><span id="_CPPv2NK3eos24unconfigured_agent_error5raiseEv"></span><span id="eos::unconfigured_agent_error::raiseC"></span><span class="target" id="classeos_1_1unconfigured__agent__error_1ab42abe617018f8c53b87585aeab38dff"></span><em class="property">inline</em> <em class="property">virtual</em> void <code class="sig-name descname">raise</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos24unconfigured_agent_error5raiseEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Throws this exception. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos24unconfigured_agent_error10agent_nameEv">
+<span id="_CPPv3NK3eos24unconfigured_agent_error10agent_nameEv"></span><span id="_CPPv2NK3eos24unconfigured_agent_error10agent_nameEv"></span><span id="eos::unconfigured_agent_error::agent_nameC"></span><span class="target" id="classeos_1_1unconfigured__agent__error_1a1138844028e5a2bf19b78cba59edfb8f"></span><em class="property">inline</em> <a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::string <code class="sig-name descname">agent_name</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em> <em class="property">noexcept</em><a class="headerlink" href="#_CPPv4NK3eos24unconfigured_agent_error10agent_nameEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-private-members">Private Members</p>
+<dl class="cpp var">
+<dt id="_CPPv4N3eos24unconfigured_agent_error11agent_name_E">
+<span id="_CPPv3N3eos24unconfigured_agent_error11agent_name_E"></span><span id="_CPPv2N3eos24unconfigured_agent_error11agent_name_E"></span><span id="eos::unconfigured_agent_error::agent_name___ss"></span><span class="target" id="classeos_1_1unconfigured__agent__error_1a87a48f268f0fdcbbdcef3387727980b9"></span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::string <code class="sig-name descname">agent_name_</code><a class="headerlink" href="#_CPPv4N3eos24unconfigured_agent_error11agent_name_E" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="cpp class">
+<dt id="_CPPv4N3eos17unsupported_errorE">
+<span id="_CPPv3N3eos17unsupported_errorE"></span><span id="_CPPv2N3eos17unsupported_errorE"></span><span id="eos::unsupported_error"></span><span class="target" id="classeos_1_1unsupported__error"></span><em class="property">class </em><code class="sig-name descname">unsupported_error</code> : <em class="property">public</em> <a class="reference internal" href="acl.html#_CPPv43eos" title="eos">eos</a>::<a class="reference internal" href="#_CPPv4N3eos5errorE" title="eos::error">error</a><a class="headerlink" href="#_CPPv4N3eos17unsupported_errorE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><div class="docutils container">
+<em>#include &lt;exception.h&gt;</em></div>
+<p>Base class for “unsupported” errors. </p>
+<p>Subclassed by <a class="reference internal" href="policy_map.html#classeos_1_1unsupported__policy__feature__error"><span class="std std-ref">eos::unsupported_policy_feature_error</span></a></p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
+<dl class="cpp function">
+<dt id="_CPPv4N3eos17unsupported_errorD0Ev">
+<span id="_CPPv3N3eos17unsupported_errorD0Ev"></span><span id="_CPPv2N3eos17unsupported_errorD0Ev"></span><span id="eos::unsupported_error::~unsupported_error"></span><span class="target" id="classeos_1_1unsupported__error_1a71ec37bfb7e558b273447b9f6ba2879b"></span><em class="property">inline</em> <em class="property">virtual</em> <code class="sig-name descname">~unsupported_error</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">noexcept</em><a class="headerlink" href="#_CPPv4N3eos17unsupported_errorD0Ev" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos17unsupported_error17unsupported_errorERKNSt6stringE">
+<span id="_CPPv3N3eos17unsupported_error17unsupported_errorERKNSt6stringE"></span><span id="_CPPv2N3eos17unsupported_error17unsupported_errorERKNSt6stringE"></span><span id="eos::unsupported_error::unsupported_error__ssCR"></span><span class="target" id="classeos_1_1unsupported__error_1aae50895a175a18a07101cf40e9235189"></span><em class="property">inline</em> <em class="property">explicit</em> <code class="sig-name descname">unsupported_error</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::string <em class="property">const</em> &amp;<em>msg</em><span class="sig-paren">)</span> <em class="property">noexcept</em><a class="headerlink" href="#_CPPv4N3eos17unsupported_error17unsupported_errorERKNSt6stringE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos17unsupported_error5raiseEv">
+<span id="_CPPv3NK3eos17unsupported_error5raiseEv"></span><span id="_CPPv2NK3eos17unsupported_error5raiseEv"></span><span id="eos::unsupported_error::raiseC"></span><span class="target" id="classeos_1_1unsupported__error_1adf26013f0ef37b99d828d4a77614bcc7"></span><em class="property">inline</em> <em class="property">virtual</em> void <code class="sig-name descname">raise</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos17unsupported_error5raiseEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Throws this exception. </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-private-members">Private Members</p>
+<dl class="cpp var">
+<dt id="_CPPv4N3eos17unsupported_error4msg_E">
+<span id="_CPPv3N3eos17unsupported_error4msg_E"></span><span id="_CPPv2N3eos17unsupported_error4msg_E"></span><span id="eos::unsupported_error::msg___ss"></span><span class="target" id="classeos_1_1unsupported__error_1a9f9c4ff90d4c44dfd4d498c3caaed404"></span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::string <code class="sig-name descname">msg_</code><a class="headerlink" href="#_CPPv4N3eos17unsupported_error4msg_E" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="cpp class">
+<dt id="_CPPv4N3eos29no_scoped_lock_obtained_errorE">
+<span id="_CPPv3N3eos29no_scoped_lock_obtained_errorE"></span><span id="_CPPv2N3eos29no_scoped_lock_obtained_errorE"></span><span id="eos::no_scoped_lock_obtained_error"></span><span class="target" id="classeos_1_1no__scoped__lock__obtained__error"></span><em class="property">class </em><code class="sig-name descname">no_scoped_lock_obtained_error</code> : <em class="property">public</em> <a class="reference internal" href="acl.html#_CPPv43eos" title="eos">eos</a>::<a class="reference internal" href="#_CPPv4N3eos5errorE" title="eos::error">error</a><a class="headerlink" href="#_CPPv4N3eos29no_scoped_lock_obtained_errorE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><div class="docutils container">
+<em>#include &lt;exception.h&gt;</em></div>
+<p>The class for “No scoped lock obtained” errors. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
+<dl class="cpp function">
+<dt id="_CPPv4N3eos29no_scoped_lock_obtained_errorD0Ev">
+<span id="_CPPv3N3eos29no_scoped_lock_obtained_errorD0Ev"></span><span id="_CPPv2N3eos29no_scoped_lock_obtained_errorD0Ev"></span><span id="eos::no_scoped_lock_obtained_error::~no_scoped_lock_obtained_error"></span><span class="target" id="classeos_1_1no__scoped__lock__obtained__error_1addb3686eb8cb325a0c01407b3bd8c193"></span><em class="property">inline</em> <em class="property">virtual</em> <code class="sig-name descname">~no_scoped_lock_obtained_error</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">noexcept</em><a class="headerlink" href="#_CPPv4N3eos29no_scoped_lock_obtained_errorD0Ev" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos29no_scoped_lock_obtained_error29no_scoped_lock_obtained_errorEv">
+<span id="_CPPv3N3eos29no_scoped_lock_obtained_error29no_scoped_lock_obtained_errorEv"></span><span id="_CPPv2N3eos29no_scoped_lock_obtained_error29no_scoped_lock_obtained_errorEv"></span><span id="eos::no_scoped_lock_obtained_error::no_scoped_lock_obtained_error"></span><span class="target" id="classeos_1_1no__scoped__lock__obtained__error_1a03146614a2de5c52356fa89b448db34d"></span><em class="property">inline</em> <em class="property">explicit</em> <code class="sig-name descname">no_scoped_lock_obtained_error</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">noexcept</em><a class="headerlink" href="#_CPPv4N3eos29no_scoped_lock_obtained_error29no_scoped_lock_obtained_errorEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos29no_scoped_lock_obtained_error5raiseEv">
+<span id="_CPPv3NK3eos29no_scoped_lock_obtained_error5raiseEv"></span><span id="_CPPv2NK3eos29no_scoped_lock_obtained_error5raiseEv"></span><span id="eos::no_scoped_lock_obtained_error::raiseC"></span><span class="target" id="classeos_1_1no__scoped__lock__obtained__error_1a9a033ec36182cac53407fb7284f4b35b"></span><em class="property">inline</em> <em class="property">virtual</em> void <code class="sig-name descname">raise</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos29no_scoped_lock_obtained_error5raiseEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Throws this exception. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="event_loop.html"
+                        title="previous chapter"><strong>event_loop</strong></a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="fd.html"
+                        title="next chapter"><strong>fd</strong></a></p>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="fd.html" title="fd"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="event_loop.html" title="event_loop"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Arista EOS SDK 2.23.4 reference</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href=""><strong>exception</strong></a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2014, Arista Networks.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.4.3.
+    </div>
+  </body>
+</html>

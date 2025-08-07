@@ -1,0 +1,827 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>eth_phy_intf &#8212; Arista EOS SDK 2.23.4 reference</title>
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/eossdk.css" type="text/css" />
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="event_loop" href="event_loop.html" />
+    <link rel="prev" title="eth_lag_intf" href="eth_lag_intf.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="event_loop.html" title="event_loop"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="eth_lag_intf.html" title="eth_lag_intf"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Arista EOS SDK 2.23.4 reference</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href=""><strong>eth_phy_intf</strong></a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="eth-phy-intf">
+<h1><strong>eth_phy_intf</strong><a class="headerlink" href="#eth-phy-intf" title="Permalink to this headline">¶</a></h1>
+<dl class="cpp type">
+<dt id="_CPPv43eos">
+<span id="_CPPv33eos"></span><span id="_CPPv23eos"></span><span id="eos"></span><span class="target" id="namespaceeos"></span><em class="property">namespace </em><code class="sig-name descname">eos</code><br /></dt>
+<dd><dl class="cpp class">
+<dt id="_CPPv4N3eos20eth_phy_intf_handlerE">
+<span id="_CPPv3N3eos20eth_phy_intf_handlerE"></span><span id="_CPPv2N3eos20eth_phy_intf_handlerE"></span><span id="eos::eth_phy_intf_handler"></span><span class="target" id="classeos_1_1eth__phy__intf__handler"></span><em class="property">class </em><code class="sig-name descname">eth_phy_intf_handler</code> : <em class="property">public</em> <a class="reference internal" href="acl.html#_CPPv43eos" title="eos">eos</a>::<a class="reference internal" href="base_handler.html#_CPPv4I00EN3eos12base_handlerE" title="eos::base_handler">base_handler</a>&lt;<a class="reference internal" href="#_CPPv4N3eos16eth_phy_intf_mgrE" title="eos::eth_phy_intf_mgr">eth_phy_intf_mgr</a>, <a class="reference internal" href="#_CPPv4N3eos20eth_phy_intf_handlerE" title="eos::eth_phy_intf_handler">eth_phy_intf_handler</a>&gt;<a class="headerlink" href="#_CPPv4N3eos20eth_phy_intf_handlerE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><div class="docutils container">
+<em>#include &lt;eth_phy_intf.h&gt;</em></div>
+<p>A handler for Ethernet Physical Interface events. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
+<dl class="cpp function">
+<dt id="_CPPv4N3eos20eth_phy_intf_handler20eth_phy_intf_handlerEP16eth_phy_intf_mgr">
+<span id="_CPPv3N3eos20eth_phy_intf_handler20eth_phy_intf_handlerEP16eth_phy_intf_mgr"></span><span id="_CPPv2N3eos20eth_phy_intf_handler20eth_phy_intf_handlerEP16eth_phy_intf_mgr"></span><span id="eos::eth_phy_intf_handler::eth_phy_intf_handler__eth_phy_intf_mgrP"></span><span class="target" id="classeos_1_1eth__phy__intf__handler_1acc09345ffae6d62c09b290480e66bcfb"></span><em class="property">explicit</em> <code class="sig-name descname">eth_phy_intf_handler</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos16eth_phy_intf_mgrE" title="eos::eth_phy_intf_mgr">eth_phy_intf_mgr</a>*<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos20eth_phy_intf_handler20eth_phy_intf_handlerEP16eth_phy_intf_mgr" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos20eth_phy_intf_handler20get_eth_phy_intf_mgrEv">
+<span id="_CPPv3NK3eos20eth_phy_intf_handler20get_eth_phy_intf_mgrEv"></span><span id="_CPPv2NK3eos20eth_phy_intf_handler20get_eth_phy_intf_mgrEv"></span><span id="eos::eth_phy_intf_handler::get_eth_phy_intf_mgrC"></span><span class="target" id="classeos_1_1eth__phy__intf__handler_1ac244c6fe09fe8a7012a8f02c99071c5f"></span><em class="property">inline</em> <a class="reference internal" href="#_CPPv4N3eos16eth_phy_intf_mgrE" title="eos::eth_phy_intf_mgr">eth_phy_intf_mgr</a> *<code class="sig-name descname">get_eth_phy_intf_mgr</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos20eth_phy_intf_handler20get_eth_phy_intf_mgrEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos20eth_phy_intf_handler23watch_all_eth_phy_intfsEb">
+<span id="_CPPv3N3eos20eth_phy_intf_handler23watch_all_eth_phy_intfsEb"></span><span id="_CPPv2N3eos20eth_phy_intf_handler23watch_all_eth_phy_intfsEb"></span><span id="eos::eth_phy_intf_handler::watch_all_eth_phy_intfs__b"></span><span class="target" id="classeos_1_1eth__phy__intf__handler_1aad6a9fefe505cc15e864297b6c871ef1"></span>void <code class="sig-name descname">watch_all_eth_phy_intfs</code><span class="sig-paren">(</span>bool<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos20eth_phy_intf_handler23watch_all_eth_phy_intfsEb" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Registers this class to receive interface change update notifications.</p>
+<p>Expects a boolean signifying whether notifications should be propagated to this instance or not. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos20eth_phy_intf_handler18watch_eth_phy_intfE9intf_id_tb">
+<span id="_CPPv3N3eos20eth_phy_intf_handler18watch_eth_phy_intfE9intf_id_tb"></span><span id="_CPPv2N3eos20eth_phy_intf_handler18watch_eth_phy_intfE9intf_id_tb"></span><span id="eos::eth_phy_intf_handler::watch_eth_phy_intf__intf_id_t.b"></span><span class="target" id="classeos_1_1eth__phy__intf__handler_1a02bf31fa9c201071419d2cdd01b4dac5"></span>void <code class="sig-name descname">watch_eth_phy_intf</code><span class="sig-paren">(</span><a class="reference internal" href="intf.html#_CPPv4N3eos9intf_id_tE" title="eos::intf_id_t">intf_id_t</a>, bool<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos20eth_phy_intf_handler18watch_eth_phy_intfE9intf_id_tb" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Registers this class to receive interface change update notifications for the given interface.</p>
+<p>Expects the id of the corresponding interface and a boolean signifying whether notifications should be propagated to this instance or not. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos20eth_phy_intf_handler22on_eth_phy_intf_createE9intf_id_t">
+<span id="_CPPv3N3eos20eth_phy_intf_handler22on_eth_phy_intf_createE9intf_id_t"></span><span id="_CPPv2N3eos20eth_phy_intf_handler22on_eth_phy_intf_createE9intf_id_t"></span><span id="eos::eth_phy_intf_handler::on_eth_phy_intf_create__intf_id_t"></span><span class="target" id="classeos_1_1eth__phy__intf__handler_1a393d1a6aba66e46296f0458d2070fda0"></span><em class="property">virtual</em> void <code class="sig-name descname">on_eth_phy_intf_create</code><span class="sig-paren">(</span><a class="reference internal" href="intf.html#_CPPv4N3eos9intf_id_tE" title="eos::intf_id_t">intf_id_t</a><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos20eth_phy_intf_handler22on_eth_phy_intf_createE9intf_id_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Handler called when a physical ethernet interface is created.</p>
+<p>After on_eth_phy_intf_create is called, the given intf_id is guaranteed to exist (ie <a class="reference internal" href="#classeos_1_1eth__phy__intf__mgr_1a3375ae104982a18ab2bb752427354c2b"><span class="std std-ref">eth_phy_intf_mgr::exists</span></a> will return true). At that point, the intf_id can be used will all methods of the <a class="reference internal" href="#classeos_1_1eth__phy__intf__mgr"><span class="std std-ref">eth_phy_intf_mgr</span></a> class.</p>
+<p>This also means that the intf_id can be used with all other relevant *intf_mgr classes (ie <a class="reference internal" href="intf.html#classeos_1_1intf__mgr"><span class="std std-ref">intf_mgr</span></a> and <a class="reference internal" href="eth_intf.html#classeos_1_1eth__intf__mgr"><span class="std std-ref">eth_intf_mgr</span></a>). </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos20eth_phy_intf_handler22on_eth_phy_intf_deleteE9intf_id_t">
+<span id="_CPPv3N3eos20eth_phy_intf_handler22on_eth_phy_intf_deleteE9intf_id_t"></span><span id="_CPPv2N3eos20eth_phy_intf_handler22on_eth_phy_intf_deleteE9intf_id_t"></span><span id="eos::eth_phy_intf_handler::on_eth_phy_intf_delete__intf_id_t"></span><span class="target" id="classeos_1_1eth__phy__intf__handler_1ac81248c5b18ecd05398e0aa0c41b445f"></span><em class="property">virtual</em> void <code class="sig-name descname">on_eth_phy_intf_delete</code><span class="sig-paren">(</span><a class="reference internal" href="intf.html#_CPPv4N3eos9intf_id_tE" title="eos::intf_id_t">intf_id_t</a><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos20eth_phy_intf_handler22on_eth_phy_intf_deleteE9intf_id_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Handler called when a physical ethernet interface is deleted.</p>
+<p>After on_eth_phy_intf_delete is called, the given intf_id is guaranteed to not exist (ie <a class="reference internal" href="#classeos_1_1eth__phy__intf__mgr_1a3375ae104982a18ab2bb752427354c2b"><span class="std std-ref">eth_phy_intf_mgr::exists</span></a> will return false). At that point, the intf_id cannot be used will any methods in the <a class="reference internal" href="#classeos_1_1eth__phy__intf__mgr"><span class="std std-ref">eth_phy_intf_mgr</span></a> class.</p>
+<p>This also means that the intf_id can no longer be used with all other relevant *intf_mgr classes (ie <a class="reference internal" href="intf.html#classeos_1_1intf__mgr"><span class="std std-ref">intf_mgr</span></a> and <a class="reference internal" href="eth_intf.html#classeos_1_1eth__intf__mgr"><span class="std std-ref">eth_intf_mgr</span></a>). </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos20eth_phy_intf_handler32on_eth_phy_intf_hardware_presentE9intf_id_tb">
+<span id="_CPPv3N3eos20eth_phy_intf_handler32on_eth_phy_intf_hardware_presentE9intf_id_tb"></span><span id="_CPPv2N3eos20eth_phy_intf_handler32on_eth_phy_intf_hardware_presentE9intf_id_tb"></span><span id="eos::eth_phy_intf_handler::on_eth_phy_intf_hardware_present__intf_id_t.b"></span><span class="target" id="classeos_1_1eth__phy__intf__handler_1ab3d3c3fa8c3db1b4fe6e6c9cfbd05942"></span><em class="property">virtual</em> void <code class="sig-name descname">on_eth_phy_intf_hardware_present</code><span class="sig-paren">(</span><a class="reference internal" href="intf.html#_CPPv4N3eos9intf_id_tE" title="eos::intf_id_t">intf_id_t</a>, bool <em>present</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos20eth_phy_intf_handler32on_eth_phy_intf_hardware_presentE9intf_id_tb" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Handler called when the presence of the underlying hardware for the physical ethernet interface changes.</p>
+<p>When a physical interface goes from not-present to present, only on_eth_phy_intf_hardware_present will get called even though other attributes (like the link_speed) of the eth_phy_intf may have changed. Similarly, when the physical interface hardware goes from present to not-present, attributes of the eth_phy_intf (like the link_speed) that are based on the underlying hardware will go back to their default values even though their explicit handlers are not called. It is up to the user to handle the new values of those attributes within the on_eth_phy_intf_hardware_present handler. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos20eth_phy_intf_handler26on_eth_phy_intf_link_speedE9intf_id_t16eth_link_speed_t">
+<span id="_CPPv3N3eos20eth_phy_intf_handler26on_eth_phy_intf_link_speedE9intf_id_t16eth_link_speed_t"></span><span id="_CPPv2N3eos20eth_phy_intf_handler26on_eth_phy_intf_link_speedE9intf_id_t16eth_link_speed_t"></span><span id="eos::eth_phy_intf_handler::on_eth_phy_intf_link_speed__intf_id_t.eth_link_speed_t"></span><span class="target" id="classeos_1_1eth__phy__intf__handler_1aa9c1f1372fa5c20e740fb103e8a1b644"></span><em class="property">virtual</em> void <code class="sig-name descname">on_eth_phy_intf_link_speed</code><span class="sig-paren">(</span><a class="reference internal" href="intf.html#_CPPv4N3eos9intf_id_tE" title="eos::intf_id_t">intf_id_t</a>, <a class="reference internal" href="#_CPPv4N3eos16eth_link_speed_tE" title="eos::eth_link_speed_t">eth_link_speed_t</a><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos20eth_phy_intf_handler26on_eth_phy_intf_link_speedE9intf_id_t16eth_link_speed_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Handler called when the operational link speed changes. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos20eth_phy_intf_handler35on_eth_phy_intf_transceiver_presentE9intf_id_tb">
+<span id="_CPPv3N3eos20eth_phy_intf_handler35on_eth_phy_intf_transceiver_presentE9intf_id_tb"></span><span id="_CPPv2N3eos20eth_phy_intf_handler35on_eth_phy_intf_transceiver_presentE9intf_id_tb"></span><span id="eos::eth_phy_intf_handler::on_eth_phy_intf_transceiver_present__intf_id_t.b"></span><span class="target" id="classeos_1_1eth__phy__intf__handler_1a272934a1afb85987219f8240d3731d46"></span><em class="property">virtual</em> void <code class="sig-name descname">on_eth_phy_intf_transceiver_present</code><span class="sig-paren">(</span><a class="reference internal" href="intf.html#_CPPv4N3eos9intf_id_tE" title="eos::intf_id_t">intf_id_t</a>, bool<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos20eth_phy_intf_handler35on_eth_phy_intf_transceiver_presentE9intf_id_tb" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Handler called when a transceiver insertion or removal is detected. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="cpp class">
+<dt id="_CPPv4N3eos19eth_phy_intf_iter_tE">
+<span id="_CPPv3N3eos19eth_phy_intf_iter_tE"></span><span id="_CPPv2N3eos19eth_phy_intf_iter_tE"></span><span id="eos::eth_phy_intf_iter_t"></span><span class="target" id="classeos_1_1eth__phy__intf__iter__t"></span><em class="property">class </em><code class="sig-name descname">eth_phy_intf_iter_t</code> : <em class="property">public</em> <a class="reference internal" href="acl.html#_CPPv43eos" title="eos">eos</a>::<a class="reference internal" href="iterator.html#_CPPv4I00EN3eos9iter_baseE" title="eos::iter_base">iter_base</a>&lt;<a class="reference internal" href="intf.html#_CPPv4N3eos9intf_id_tE" title="eos::intf_id_t">intf_id_t</a>, eth_phy_intf_iter_impl&gt;<a class="headerlink" href="#_CPPv4N3eos19eth_phy_intf_iter_tE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><div class="docutils container">
+<em>#include &lt;eth_phy_intf.h&gt;</em></div>
+<p>Iterator over physical interfaces. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-private-functions">Private Functions</p>
+<dl class="cpp function">
+<dt id="_CPPv4N3eos19eth_phy_intf_iter_t19eth_phy_intf_iter_tEPC22eth_phy_intf_iter_impl">
+<span id="_CPPv3N3eos19eth_phy_intf_iter_t19eth_phy_intf_iter_tEPC22eth_phy_intf_iter_impl"></span><span id="_CPPv2N3eos19eth_phy_intf_iter_t19eth_phy_intf_iter_tEPC22eth_phy_intf_iter_impl"></span><span id="eos::eth_phy_intf_iter_t::eth_phy_intf_iter_t__eth_phy_intf_iter_implPC"></span><span class="target" id="classeos_1_1eth__phy__intf__iter__t_1a185d5ad360b87f122df03e323e296a05"></span><em class="property">explicit</em> <code class="sig-name descname">eth_phy_intf_iter_t</code><span class="sig-paren">(</span>eth_phy_intf_iter_impl*<em class="property">const</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos19eth_phy_intf_iter_t19eth_phy_intf_iter_tEPC22eth_phy_intf_iter_impl" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-friends">Friends</p>
+<dl class="friendclass">
+<dt>
+<em class="property">friend class</em> eth_phy_intf_iter_impl</dt>
+</dl>
+
+</div>
+</dd></dl>
+
+<dl class="cpp class">
+<dt id="_CPPv4N3eos16eth_phy_intf_mgrE">
+<span id="_CPPv3N3eos16eth_phy_intf_mgrE"></span><span id="_CPPv2N3eos16eth_phy_intf_mgrE"></span><span id="eos::eth_phy_intf_mgr"></span><span class="target" id="classeos_1_1eth__phy__intf__mgr"></span><em class="property">class </em><code class="sig-name descname">eth_phy_intf_mgr</code> : <em class="property">public</em> <a class="reference internal" href="acl.html#_CPPv43eos" title="eos">eos</a>::<a class="reference internal" href="base_mgr.html#_CPPv4I00EN3eos8base_mgrE" title="eos::base_mgr">base_mgr</a>&lt;<a class="reference internal" href="#_CPPv4N3eos20eth_phy_intf_handlerE" title="eos::eth_phy_intf_handler">eth_phy_intf_handler</a>, <a class="reference internal" href="intf.html#_CPPv4N3eos9intf_id_tE" title="eos::intf_id_t">intf_id_t</a>&gt;<a class="headerlink" href="#_CPPv4N3eos16eth_phy_intf_mgrE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
+<dl class="cpp function">
+<dt id="_CPPv4N3eos16eth_phy_intf_mgrD0Ev">
+<span id="_CPPv3N3eos16eth_phy_intf_mgrD0Ev"></span><span id="_CPPv2N3eos16eth_phy_intf_mgrD0Ev"></span><span id="eos::eth_phy_intf_mgr::~eth_phy_intf_mgr"></span><span class="target" id="classeos_1_1eth__phy__intf__mgr_1a309694308b444321e3a49b181bd52720"></span><em class="property">virtual</em> <code class="sig-name descname">~eth_phy_intf_mgr</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos16eth_phy_intf_mgrD0Ev" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos16eth_phy_intf_mgr17eth_phy_intf_iterEv">
+<span id="_CPPv3NK3eos16eth_phy_intf_mgr17eth_phy_intf_iterEv"></span><span id="_CPPv2NK3eos16eth_phy_intf_mgr17eth_phy_intf_iterEv"></span><span id="eos::eth_phy_intf_mgr::eth_phy_intf_iterC"></span><span class="target" id="classeos_1_1eth__phy__intf__mgr_1a0144657ee37f4f556a8685eba9548f02"></span><em class="property">virtual</em> <a class="reference internal" href="#_CPPv4N3eos19eth_phy_intf_iter_tE" title="eos::eth_phy_intf_iter_t">eth_phy_intf_iter_t</a> <code class="sig-name descname">eth_phy_intf_iter</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em> = 0<a class="headerlink" href="#_CPPv4NK3eos16eth_phy_intf_mgr17eth_phy_intf_iterEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos16eth_phy_intf_mgr6existsE9intf_id_t">
+<span id="_CPPv3NK3eos16eth_phy_intf_mgr6existsE9intf_id_t"></span><span id="_CPPv2NK3eos16eth_phy_intf_mgr6existsE9intf_id_t"></span><span id="eos::eth_phy_intf_mgr::exists__intf_id_tC"></span><span class="target" id="classeos_1_1eth__phy__intf__mgr_1a3375ae104982a18ab2bb752427354c2b"></span><em class="property">virtual</em> bool <code class="sig-name descname">exists</code><span class="sig-paren">(</span><a class="reference internal" href="intf.html#_CPPv4N3eos9intf_id_tE" title="eos::intf_id_t">intf_id_t</a><span class="sig-paren">)</span> <em class="property">const</em> = 0<a class="headerlink" href="#_CPPv4NK3eos16eth_phy_intf_mgr6existsE9intf_id_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Returns whether the given physical ethernet interface exists.</p>
+<p>If exists returns true, then this <a class="reference internal" href="intf.html#classeos_1_1intf__id__t"><span class="std std-ref">intf_id_t</span></a> can be successfully passed into every method of the <a class="reference internal" href="eth_intf.html#classeos_1_1eth__intf__mgr"><span class="std std-ref">eth_intf_mgr</span></a>. If not, then methods of the <a class="reference internal" href="eth_intf.html#classeos_1_1eth__intf__mgr"><span class="std std-ref">eth_intf_mgr</span></a> can throw a <a class="reference internal" href="intf.html#classeos_1_1no__such__interface__error"><span class="std std-ref">no_such_interface_error</span></a> exception.</p>
+<p>The exists method of all *intf_mgr classes that manage a given interface (ie <a class="reference internal" href="intf.html#classeos_1_1intf__mgr"><span class="std std-ref">intf_mgr</span></a>, <a class="reference internal" href="eth_intf.html#classeos_1_1eth__intf__mgr"><span class="std std-ref">eth_intf_mgr</span></a>, and <a class="reference internal" href="#classeos_1_1eth__phy__intf__mgr"><span class="std std-ref">eth_phy_intf_mgr</span></a> for physical interfaces) are all guaranteed to return the same result. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos16eth_phy_intf_mgr16hardware_presentE9intf_id_t">
+<span id="_CPPv3NK3eos16eth_phy_intf_mgr16hardware_presentE9intf_id_t"></span><span id="_CPPv2NK3eos16eth_phy_intf_mgr16hardware_presentE9intf_id_t"></span><span id="eos::eth_phy_intf_mgr::hardware_present__intf_id_tC"></span><span class="target" id="classeos_1_1eth__phy__intf__mgr_1acf14f4c378d734ffccde7509b7e660b1"></span><em class="property">virtual</em> bool <code class="sig-name descname">hardware_present</code><span class="sig-paren">(</span><a class="reference internal" href="intf.html#_CPPv4N3eos9intf_id_tE" title="eos::intf_id_t">intf_id_t</a><span class="sig-paren">)</span> <em class="property">const</em> = 0<a class="headerlink" href="#_CPPv4NK3eos16eth_phy_intf_mgr16hardware_presentE9intf_id_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Returns whether the underlying hardware for this interface is present. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos16eth_phy_intf_mgr18burned_in_eth_addrE9intf_id_t">
+<span id="_CPPv3NK3eos16eth_phy_intf_mgr18burned_in_eth_addrE9intf_id_t"></span><span id="_CPPv2NK3eos16eth_phy_intf_mgr18burned_in_eth_addrE9intf_id_t"></span><span id="eos::eth_phy_intf_mgr::burned_in_eth_addr__intf_id_tC"></span><span class="target" id="classeos_1_1eth__phy__intf__mgr_1a6ad60840d1d3aed40228e555f74b5e70"></span><em class="property">virtual</em> <a class="reference internal" href="eth.html#_CPPv4N3eos10eth_addr_tE" title="eos::eth_addr_t">eth_addr_t</a> <code class="sig-name descname">burned_in_eth_addr</code><span class="sig-paren">(</span><a class="reference internal" href="intf.html#_CPPv4N3eos9intf_id_tE" title="eos::intf_id_t">intf_id_t</a><span class="sig-paren">)</span> <em class="property">const</em> = 0<a class="headerlink" href="#_CPPv4NK3eos16eth_phy_intf_mgr18burned_in_eth_addrE9intf_id_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Returns the “burned in” address of the interface.</p>
+<p>If the underlying hardware is not present, returns the default eth_addr_t(). Once hardware_present is true, burned_in_eth_addr is guaranteed to be available. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos16eth_phy_intf_mgr10link_speedE9intf_id_t">
+<span id="_CPPv3NK3eos16eth_phy_intf_mgr10link_speedE9intf_id_t"></span><span id="_CPPv2NK3eos16eth_phy_intf_mgr10link_speedE9intf_id_t"></span><span id="eos::eth_phy_intf_mgr::link_speed__intf_id_tC"></span><span class="target" id="classeos_1_1eth__phy__intf__mgr_1a6c78d0bb7ed2739b6c342ac19b8b42a2"></span><em class="property">virtual</em> <a class="reference internal" href="#_CPPv4N3eos16eth_link_speed_tE" title="eos::eth_link_speed_t">eth_link_speed_t</a> <code class="sig-name descname">link_speed</code><span class="sig-paren">(</span><a class="reference internal" href="intf.html#_CPPv4N3eos9intf_id_tE" title="eos::intf_id_t">intf_id_t</a><span class="sig-paren">)</span> <em class="property">const</em> = 0<a class="headerlink" href="#_CPPv4NK3eos16eth_phy_intf_mgr10link_speedE9intf_id_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Returns the operational link speed.</p>
+<p>If the underlying hardware is not present, returns LINK_SPEED_UNKNOWN. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos16eth_phy_intf_mgr19transceiver_presentE9intf_id_t">
+<span id="_CPPv3NK3eos16eth_phy_intf_mgr19transceiver_presentE9intf_id_t"></span><span id="_CPPv2NK3eos16eth_phy_intf_mgr19transceiver_presentE9intf_id_t"></span><span id="eos::eth_phy_intf_mgr::transceiver_present__intf_id_tC"></span><span class="target" id="classeos_1_1eth__phy__intf__mgr_1a549098e119c0c5d9b98962da146fce8f"></span><em class="property">virtual</em> bool <code class="sig-name descname">transceiver_present</code><span class="sig-paren">(</span><a class="reference internal" href="intf.html#_CPPv4N3eos9intf_id_tE" title="eos::intf_id_t">intf_id_t</a><span class="sig-paren">)</span> <em class="property">const</em> = 0<a class="headerlink" href="#_CPPv4NK3eos16eth_phy_intf_mgr19transceiver_presentE9intf_id_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-protected-functions">Protected Functions</p>
+<dl class="cpp function">
+<dt id="_CPPv4N3eos16eth_phy_intf_mgr16eth_phy_intf_mgrEv">
+<span id="_CPPv3N3eos16eth_phy_intf_mgr16eth_phy_intf_mgrEv"></span><span id="_CPPv2N3eos16eth_phy_intf_mgr16eth_phy_intf_mgrEv"></span><span id="eos::eth_phy_intf_mgr::eth_phy_intf_mgr"></span><span class="target" id="classeos_1_1eth__phy__intf__mgr_1a433d7887b5f4a3704dfff7b431e7a4ec"></span><code class="sig-name descname">eth_phy_intf_mgr</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos16eth_phy_intf_mgr16eth_phy_intf_mgrEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-private-members">Private Members</p>
+<dl class="cpp var">
+<dt>
+<span class="target" id="classeos_1_1eth__phy__intf__mgr_1ac3d12d6309027ee8652b12b75fcc4b4b"></span><code class="sig-name descname">eth_phy_intf_mgr</code></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-friends">Friends</p>
+<dl class="friendclass">
+<dt>
+<em class="property">friend class</em> eth_phy_intf_handler</dt>
+</dl>
+
+</div>
+</dd></dl>
+
+<dl class="cpp class">
+<dt id="_CPPv4N3eos24eth_phy_intf_counter_mgrE">
+<span id="_CPPv3N3eos24eth_phy_intf_counter_mgrE"></span><span id="_CPPv2N3eos24eth_phy_intf_counter_mgrE"></span><span id="eos::eth_phy_intf_counter_mgr"></span><span class="target" id="classeos_1_1eth__phy__intf__counter__mgr"></span><em class="property">class </em><code class="sig-name descname">eth_phy_intf_counter_mgr</code><a class="headerlink" href="#_CPPv4N3eos24eth_phy_intf_counter_mgrE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><div class="docutils container">
+<em>#include &lt;eth_phy_intf.h&gt;</em></div>
+<p>The Ethernet interface counter manager.</p>
+<p>This class inspects ethernet interface counters and statistics. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
+<dl class="cpp function">
+<dt id="_CPPv4N3eos24eth_phy_intf_counter_mgrD0Ev">
+<span id="_CPPv3N3eos24eth_phy_intf_counter_mgrD0Ev"></span><span id="_CPPv2N3eos24eth_phy_intf_counter_mgrD0Ev"></span><span id="eos::eth_phy_intf_counter_mgr::~eth_phy_intf_counter_mgr"></span><span class="target" id="classeos_1_1eth__phy__intf__counter__mgr_1a184d8863c49a33006fbc3e18af5d92e7"></span><em class="property">virtual</em> <code class="sig-name descname">~eth_phy_intf_counter_mgr</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos24eth_phy_intf_counter_mgrD0Ev" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos24eth_phy_intf_counter_mgr8countersE9intf_id_t">
+<span id="_CPPv3NK3eos24eth_phy_intf_counter_mgr8countersE9intf_id_t"></span><span id="_CPPv2NK3eos24eth_phy_intf_counter_mgr8countersE9intf_id_t"></span><span id="eos::eth_phy_intf_counter_mgr::counters__intf_id_tC"></span><span class="target" id="classeos_1_1eth__phy__intf__counter__mgr_1a127899c359c5efa2a7af1f23df2c279f"></span><em class="property">virtual</em> <a class="reference internal" href="#_CPPv4N3eos23eth_phy_intf_counters_tE" title="eos::eth_phy_intf_counters_t">eth_phy_intf_counters_t</a> <code class="sig-name descname">counters</code><span class="sig-paren">(</span><a class="reference internal" href="intf.html#_CPPv4N3eos9intf_id_tE" title="eos::intf_id_t">intf_id_t</a><span class="sig-paren">)</span> <em class="property">const</em> = 0<a class="headerlink" href="#_CPPv4NK3eos24eth_phy_intf_counter_mgr8countersE9intf_id_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Get the current counters of the given ethernet interface. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos24eth_phy_intf_counter_mgr12bin_countersE9intf_id_t">
+<span id="_CPPv3NK3eos24eth_phy_intf_counter_mgr12bin_countersE9intf_id_t"></span><span id="_CPPv2NK3eos24eth_phy_intf_counter_mgr12bin_countersE9intf_id_t"></span><span id="eos::eth_phy_intf_counter_mgr::bin_counters__intf_id_tC"></span><span class="target" id="classeos_1_1eth__phy__intf__counter__mgr_1acf3a4c7f038c2f727bad6c6fc2f06a03"></span><em class="property">virtual</em> <a class="reference internal" href="#_CPPv4N3eos27eth_phy_intf_bin_counters_tE" title="eos::eth_phy_intf_bin_counters_t">eth_phy_intf_bin_counters_t</a> <code class="sig-name descname">bin_counters</code><span class="sig-paren">(</span><a class="reference internal" href="intf.html#_CPPv4N3eos9intf_id_tE" title="eos::intf_id_t">intf_id_t</a><span class="sig-paren">)</span> <em class="property">const</em> = 0<a class="headerlink" href="#_CPPv4NK3eos24eth_phy_intf_counter_mgr12bin_countersE9intf_id_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Get the current bin counters of the given ethernet interface. </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-protected-functions">Protected Functions</p>
+<dl class="cpp function">
+<dt id="_CPPv4N3eos24eth_phy_intf_counter_mgr24eth_phy_intf_counter_mgrEv">
+<span id="_CPPv3N3eos24eth_phy_intf_counter_mgr24eth_phy_intf_counter_mgrEv"></span><span id="_CPPv2N3eos24eth_phy_intf_counter_mgr24eth_phy_intf_counter_mgrEv"></span><span id="eos::eth_phy_intf_counter_mgr::eth_phy_intf_counter_mgr"></span><span class="target" id="classeos_1_1eth__phy__intf__counter__mgr_1a416427b7ea72244aa657bcfd1c128838"></span><code class="sig-name descname">eth_phy_intf_counter_mgr</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos24eth_phy_intf_counter_mgr24eth_phy_intf_counter_mgrEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-private-members">Private Members</p>
+<dl class="cpp var">
+<dt>
+<span class="target" id="classeos_1_1eth__phy__intf__counter__mgr_1a09ef6d595d93caaf3390d38e7a5d03ff"></span><code class="sig-name descname">eth_phy_intf_counter_mgr</code></dt>
+<dd></dd></dl>
+
+</div>
+</dd></dl>
+
+</dd></dl>
+
+<div class="section" id="type-definitions-in-eth-phy-intf">
+<h2>Type definitions in <strong>eth_phy_intf</strong><a class="headerlink" href="#type-definitions-in-eth-phy-intf" title="Permalink to this headline">¶</a></h2>
+<dl class="cpp type">
+<dt>
+<span class="target" id="namespaceeos"></span><em class="property">namespace </em><code class="sig-name descname">eos</code><br /></dt>
+<dd><div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-enums">Enums</p>
+<dl class="cpp enum">
+<dt id="_CPPv4N3eos16eth_link_speed_tE">
+<span id="_CPPv3N3eos16eth_link_speed_tE"></span><span id="_CPPv2N3eos16eth_link_speed_tE"></span><span class="target" id="types_2eth__phy__intf_8h_1aa1db75ee8b74aa821e0470ea8b5ab5b6"></span><em class="property">enum </em><code class="sig-name descname">eth_link_speed_t</code><a class="headerlink" href="#_CPPv4N3eos16eth_link_speed_tE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Possible interface link speeds. </p>
+<p><em>Values:</em></p>
+<dl class="cpp enumerator">
+<dt id="_CPPv4N3eos16eth_link_speed_t18LINK_SPEED_UNKNOWNE">
+<span id="_CPPv3N3eos16eth_link_speed_t18LINK_SPEED_UNKNOWNE"></span><span id="_CPPv2N3eos16eth_link_speed_t18LINK_SPEED_UNKNOWNE"></span><span class="target" id="types_2eth__phy__intf_8h_1aa1db75ee8b74aa821e0470ea8b5ab5b6adbe385d3f692e47525a53eb43ca2c703"></span><em class="property">enumerator </em><code class="sig-name descname">LINK_SPEED_UNKNOWN</code><a class="headerlink" href="#_CPPv4N3eos16eth_link_speed_t18LINK_SPEED_UNKNOWNE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt id="_CPPv4N3eos16eth_link_speed_t17LINK_SPEED_10MBPSE">
+<span id="_CPPv3N3eos16eth_link_speed_t17LINK_SPEED_10MBPSE"></span><span id="_CPPv2N3eos16eth_link_speed_t17LINK_SPEED_10MBPSE"></span><span class="target" id="types_2eth__phy__intf_8h_1aa1db75ee8b74aa821e0470ea8b5ab5b6a525bbaae8aa8d18be318810a7278b700"></span><em class="property">enumerator </em><code class="sig-name descname">LINK_SPEED_10MBPS</code><a class="headerlink" href="#_CPPv4N3eos16eth_link_speed_t17LINK_SPEED_10MBPSE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt id="_CPPv4N3eos16eth_link_speed_t18LINK_SPEED_100MBPSE">
+<span id="_CPPv3N3eos16eth_link_speed_t18LINK_SPEED_100MBPSE"></span><span id="_CPPv2N3eos16eth_link_speed_t18LINK_SPEED_100MBPSE"></span><span class="target" id="types_2eth__phy__intf_8h_1aa1db75ee8b74aa821e0470ea8b5ab5b6af55c51c205d265b95bf1b27ab2750586"></span><em class="property">enumerator </em><code class="sig-name descname">LINK_SPEED_100MBPS</code><a class="headerlink" href="#_CPPv4N3eos16eth_link_speed_t18LINK_SPEED_100MBPSE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt id="_CPPv4N3eos16eth_link_speed_t16LINK_SPEED_1GBPSE">
+<span id="_CPPv3N3eos16eth_link_speed_t16LINK_SPEED_1GBPSE"></span><span id="_CPPv2N3eos16eth_link_speed_t16LINK_SPEED_1GBPSE"></span><span class="target" id="types_2eth__phy__intf_8h_1aa1db75ee8b74aa821e0470ea8b5ab5b6a07b6ce15d3f5a1fe115dc5d4f071c39f"></span><em class="property">enumerator </em><code class="sig-name descname">LINK_SPEED_1GBPS</code><a class="headerlink" href="#_CPPv4N3eos16eth_link_speed_t16LINK_SPEED_1GBPSE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt id="_CPPv4N3eos16eth_link_speed_t18LINK_SPEED_2P5GBPSE">
+<span id="_CPPv3N3eos16eth_link_speed_t18LINK_SPEED_2P5GBPSE"></span><span id="_CPPv2N3eos16eth_link_speed_t18LINK_SPEED_2P5GBPSE"></span><span class="target" id="types_2eth__phy__intf_8h_1aa1db75ee8b74aa821e0470ea8b5ab5b6aeb93adaa48d9e1796a116300915f7c9a"></span><em class="property">enumerator </em><code class="sig-name descname">LINK_SPEED_2P5GBPS</code><a class="headerlink" href="#_CPPv4N3eos16eth_link_speed_t18LINK_SPEED_2P5GBPSE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt id="_CPPv4N3eos16eth_link_speed_t16LINK_SPEED_5GBPSE">
+<span id="_CPPv3N3eos16eth_link_speed_t16LINK_SPEED_5GBPSE"></span><span id="_CPPv2N3eos16eth_link_speed_t16LINK_SPEED_5GBPSE"></span><span class="target" id="types_2eth__phy__intf_8h_1aa1db75ee8b74aa821e0470ea8b5ab5b6a6685a2a5829f365358f0acdb6d7bfd27"></span><em class="property">enumerator </em><code class="sig-name descname">LINK_SPEED_5GBPS</code><a class="headerlink" href="#_CPPv4N3eos16eth_link_speed_t16LINK_SPEED_5GBPSE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt id="_CPPv4N3eos16eth_link_speed_t17LINK_SPEED_10GBPSE">
+<span id="_CPPv3N3eos16eth_link_speed_t17LINK_SPEED_10GBPSE"></span><span id="_CPPv2N3eos16eth_link_speed_t17LINK_SPEED_10GBPSE"></span><span class="target" id="types_2eth__phy__intf_8h_1aa1db75ee8b74aa821e0470ea8b5ab5b6ae632029e75c97b261f1f0d1ee13467ca"></span><em class="property">enumerator </em><code class="sig-name descname">LINK_SPEED_10GBPS</code><a class="headerlink" href="#_CPPv4N3eos16eth_link_speed_t17LINK_SPEED_10GBPSE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt id="_CPPv4N3eos16eth_link_speed_t17LINK_SPEED_25GBPSE">
+<span id="_CPPv3N3eos16eth_link_speed_t17LINK_SPEED_25GBPSE"></span><span id="_CPPv2N3eos16eth_link_speed_t17LINK_SPEED_25GBPSE"></span><span class="target" id="types_2eth__phy__intf_8h_1aa1db75ee8b74aa821e0470ea8b5ab5b6a8fb18d70de087dd42b4b48257495eaff"></span><em class="property">enumerator </em><code class="sig-name descname">LINK_SPEED_25GBPS</code><a class="headerlink" href="#_CPPv4N3eos16eth_link_speed_t17LINK_SPEED_25GBPSE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt id="_CPPv4N3eos16eth_link_speed_t17LINK_SPEED_40GBPSE">
+<span id="_CPPv3N3eos16eth_link_speed_t17LINK_SPEED_40GBPSE"></span><span id="_CPPv2N3eos16eth_link_speed_t17LINK_SPEED_40GBPSE"></span><span class="target" id="types_2eth__phy__intf_8h_1aa1db75ee8b74aa821e0470ea8b5ab5b6a81d267cd836881d7838c6bd026061286"></span><em class="property">enumerator </em><code class="sig-name descname">LINK_SPEED_40GBPS</code><a class="headerlink" href="#_CPPv4N3eos16eth_link_speed_t17LINK_SPEED_40GBPSE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt id="_CPPv4N3eos16eth_link_speed_t17LINK_SPEED_50GBPSE">
+<span id="_CPPv3N3eos16eth_link_speed_t17LINK_SPEED_50GBPSE"></span><span id="_CPPv2N3eos16eth_link_speed_t17LINK_SPEED_50GBPSE"></span><span class="target" id="types_2eth__phy__intf_8h_1aa1db75ee8b74aa821e0470ea8b5ab5b6a16f9cf3a460b0534e529ced38a85707e"></span><em class="property">enumerator </em><code class="sig-name descname">LINK_SPEED_50GBPS</code><a class="headerlink" href="#_CPPv4N3eos16eth_link_speed_t17LINK_SPEED_50GBPSE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt id="_CPPv4N3eos16eth_link_speed_t18LINK_SPEED_100GBPSE">
+<span id="_CPPv3N3eos16eth_link_speed_t18LINK_SPEED_100GBPSE"></span><span id="_CPPv2N3eos16eth_link_speed_t18LINK_SPEED_100GBPSE"></span><span class="target" id="types_2eth__phy__intf_8h_1aa1db75ee8b74aa821e0470ea8b5ab5b6a3e2e23ed66b7f6131c476fe59e0df02b"></span><em class="property">enumerator </em><code class="sig-name descname">LINK_SPEED_100GBPS</code><a class="headerlink" href="#_CPPv4N3eos16eth_link_speed_t18LINK_SPEED_100GBPSE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt id="_CPPv4N3eos16eth_link_speed_t18LINK_SPEED_200GBPSE">
+<span id="_CPPv3N3eos16eth_link_speed_t18LINK_SPEED_200GBPSE"></span><span id="_CPPv2N3eos16eth_link_speed_t18LINK_SPEED_200GBPSE"></span><span class="target" id="types_2eth__phy__intf_8h_1aa1db75ee8b74aa821e0470ea8b5ab5b6aebc7893d9e91f87250e224b15fd4e853"></span><em class="property">enumerator </em><code class="sig-name descname">LINK_SPEED_200GBPS</code><a class="headerlink" href="#_CPPv4N3eos16eth_link_speed_t18LINK_SPEED_200GBPSE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt id="_CPPv4N3eos16eth_link_speed_t18LINK_SPEED_400GBPSE">
+<span id="_CPPv3N3eos16eth_link_speed_t18LINK_SPEED_400GBPSE"></span><span id="_CPPv2N3eos16eth_link_speed_t18LINK_SPEED_400GBPSE"></span><span class="target" id="types_2eth__phy__intf_8h_1aa1db75ee8b74aa821e0470ea8b5ab5b6aa7102ab1ecb55b5a2c2088bb20bfcecb"></span><em class="property">enumerator </em><code class="sig-name descname">LINK_SPEED_400GBPS</code><a class="headerlink" href="#_CPPv4N3eos16eth_link_speed_t18LINK_SPEED_400GBPSE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt id="_CPPv4N3eos16eth_link_speed_t18LINK_SPEED_800GBPSE">
+<span id="_CPPv3N3eos16eth_link_speed_t18LINK_SPEED_800GBPSE"></span><span id="_CPPv2N3eos16eth_link_speed_t18LINK_SPEED_800GBPSE"></span><span class="target" id="types_2eth__phy__intf_8h_1aa1db75ee8b74aa821e0470ea8b5ab5b6a3b8b9e0ad20d30f802ac3569a21f4191"></span><em class="property">enumerator </em><code class="sig-name descname">LINK_SPEED_800GBPS</code><a class="headerlink" href="#_CPPv4N3eos16eth_link_speed_t18LINK_SPEED_800GBPSE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt id="_CPPv4N3eos16eth_link_speed_t21LINK_SPEED_UNEXPECTEDE">
+<span id="_CPPv3N3eos16eth_link_speed_t21LINK_SPEED_UNEXPECTEDE"></span><span id="_CPPv2N3eos16eth_link_speed_t21LINK_SPEED_UNEXPECTEDE"></span><span class="target" id="types_2eth__phy__intf_8h_1aa1db75ee8b74aa821e0470ea8b5ab5b6a728a8ceae40082ea594f921e25525dc7"></span><em class="property">enumerator </em><code class="sig-name descname">LINK_SPEED_UNEXPECTED</code><a class="headerlink" href="#_CPPv4N3eos16eth_link_speed_t21LINK_SPEED_UNEXPECTEDE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp enumerator">
+<dt id="_CPPv4N3eos16eth_link_speed_t18LINK_SPEED_1P6TBPSE">
+<span id="_CPPv3N3eos16eth_link_speed_t18LINK_SPEED_1P6TBPSE"></span><span id="_CPPv2N3eos16eth_link_speed_t18LINK_SPEED_1P6TBPSE"></span><span class="target" id="types_2eth__phy__intf_8h_1aa1db75ee8b74aa821e0470ea8b5ab5b6ab5ec0a6df01bbd898f17a196b1fd99eb"></span><em class="property">enumerator </em><code class="sig-name descname">LINK_SPEED_1P6TBPS</code><a class="headerlink" href="#_CPPv4N3eos16eth_link_speed_t18LINK_SPEED_1P6TBPSE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</div>
+<dl class="cpp class">
+<dt id="_CPPv4N3eos23eth_phy_intf_counters_tE">
+<span id="_CPPv3N3eos23eth_phy_intf_counters_tE"></span><span id="_CPPv2N3eos23eth_phy_intf_counters_tE"></span><span id="eos::eth_phy_intf_counters_t"></span><span class="target" id="classeos_1_1eth__phy__intf__counters__t"></span><em class="property">class </em><code class="sig-name descname">eth_phy_intf_counters_t</code><a class="headerlink" href="#_CPPv4N3eos23eth_phy_intf_counters_tE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><div class="docutils container">
+<em>#include &lt;eth_phy_intf.h&gt;</em></div>
+<p>Ethernet interface counter class.</p>
+<p>All of these attributes have the same meanings as the corresponding objects in the Ethernetlike (RFC3635) and RMON (RFC2819) MIBs. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
+<dl class="cpp function">
+<dt id="_CPPv4N3eos23eth_phy_intf_counters_t23eth_phy_intf_counters_tEv">
+<span id="_CPPv3N3eos23eth_phy_intf_counters_t23eth_phy_intf_counters_tEv"></span><span id="_CPPv2N3eos23eth_phy_intf_counters_t23eth_phy_intf_counters_tEv"></span><span id="eos::eth_phy_intf_counters_t::eth_phy_intf_counters_t"></span><span class="target" id="classeos_1_1eth__phy__intf__counters__t_1ac62df413157ced1aa76586596aefeea4"></span><code class="sig-name descname">eth_phy_intf_counters_t</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos23eth_phy_intf_counters_t23eth_phy_intf_counters_tEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos23eth_phy_intf_counters_t23eth_phy_intf_counters_tE8uint64_t8uint64_t8uint64_t8uint64_t8uint64_t8uint64_t8uint64_t8uint64_t8uint64_t8uint64_t8uint64_t8uint64_t8uint64_t8uint64_t8uint64_t8uint64_t8uint64_t8uint64_t8uint64_t">
+<span id="_CPPv3N3eos23eth_phy_intf_counters_t23eth_phy_intf_counters_tE8uint64_t8uint64_t8uint64_t8uint64_t8uint64_t8uint64_t8uint64_t8uint64_t8uint64_t8uint64_t8uint64_t8uint64_t8uint64_t8uint64_t8uint64_t8uint64_t8uint64_t8uint64_t8uint64_t"></span><span id="_CPPv2N3eos23eth_phy_intf_counters_t23eth_phy_intf_counters_tE8uint64_t8uint64_t8uint64_t8uint64_t8uint64_t8uint64_t8uint64_t8uint64_t8uint64_t8uint64_t8uint64_t8uint64_t8uint64_t8uint64_t8uint64_t8uint64_t8uint64_t8uint64_t8uint64_t"></span><span id="eos::eth_phy_intf_counters_t::eth_phy_intf_counters_t__uint64_t.uint64_t.uint64_t.uint64_t.uint64_t.uint64_t.uint64_t.uint64_t.uint64_t.uint64_t.uint64_t.uint64_t.uint64_t.uint64_t.uint64_t.uint64_t.uint64_t.uint64_t.uint64_t"></span><span class="target" id="classeos_1_1eth__phy__intf__counters__t_1ac424550657e7e5bb01c859f28ff57f5c"></span><code class="sig-name descname">eth_phy_intf_counters_t</code><span class="sig-paren">(</span>uint64_t <em>single_collision_frames</em>, uint64_t <em>multiple_collision_frames</em>, uint64_t <em>fcs_errors</em>, uint64_t <em>alignment_errors</em>, uint64_t <em>deferred_transmissions</em>, uint64_t <em>late_collisions</em>, uint64_t <em>excessive_collisions</em>, uint64_t <em>internal_mac_transmit_errors</em>, uint64_t <em>carrier_sense_errors</em>, uint64_t <em>internal_mac_receive_errors</em>, uint64_t <em>frame_too_shorts</em>, uint64_t <em>frame_too_longs</em>, uint64_t <em>sqe_test_errors</em>, uint64_t <em>symbol_errors</em>, uint64_t <em>in_unknown_opcodes</em>, uint64_t <em>out_pause_frames</em>, uint64_t <em>in_pause_frames</em>, uint64_t <em>fragments</em>, uint64_t <em>jabbers</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos23eth_phy_intf_counters_t23eth_phy_intf_counters_tE8uint64_t8uint64_t8uint64_t8uint64_t8uint64_t8uint64_t8uint64_t8uint64_t8uint64_t8uint64_t8uint64_t8uint64_t8uint64_t8uint64_t8uint64_t8uint64_t8uint64_t8uint64_t8uint64_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos23eth_phy_intf_counters_t23eth_phy_intf_counters_tERK23eth_phy_intf_counters_t">
+<span id="_CPPv3N3eos23eth_phy_intf_counters_t23eth_phy_intf_counters_tERK23eth_phy_intf_counters_t"></span><span id="_CPPv2N3eos23eth_phy_intf_counters_t23eth_phy_intf_counters_tERK23eth_phy_intf_counters_t"></span><span id="eos::eth_phy_intf_counters_t::eth_phy_intf_counters_t__eth_phy_intf_counters_tCR"></span><span class="target" id="classeos_1_1eth__phy__intf__counters__t_1af7bce7132567d19797074017c02a99d8"></span><code class="sig-name descname">eth_phy_intf_counters_t</code><span class="sig-paren">(</span><em class="property">const</em> <a class="reference internal" href="#_CPPv4N3eos23eth_phy_intf_counters_t23eth_phy_intf_counters_tERK23eth_phy_intf_counters_t" title="eos::eth_phy_intf_counters_t::eth_phy_intf_counters_t">eth_phy_intf_counters_t</a> &amp;<em>other</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos23eth_phy_intf_counters_t23eth_phy_intf_counters_tERK23eth_phy_intf_counters_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos23eth_phy_intf_counters_taSERK23eth_phy_intf_counters_t">
+<span id="_CPPv3N3eos23eth_phy_intf_counters_taSERK23eth_phy_intf_counters_t"></span><span id="_CPPv2N3eos23eth_phy_intf_counters_taSERK23eth_phy_intf_counters_t"></span><span id="eos::eth_phy_intf_counters_t::assign-operator__eth_phy_intf_counters_tCR"></span><span class="target" id="classeos_1_1eth__phy__intf__counters__t_1a9103f9b6552ebbafcc06018314a3d1f4"></span><a class="reference internal" href="#_CPPv4N3eos23eth_phy_intf_counters_tE" title="eos::eth_phy_intf_counters_t">eth_phy_intf_counters_t</a> &amp;<code class="sig-name descname">operator=</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos23eth_phy_intf_counters_tE" title="eos::eth_phy_intf_counters_t">eth_phy_intf_counters_t</a> <em class="property">const</em> &amp;<em>other</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos23eth_phy_intf_counters_taSERK23eth_phy_intf_counters_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos23eth_phy_intf_counters_t23eth_phy_intf_counters_tERR23eth_phy_intf_counters_t">
+<span id="_CPPv3N3eos23eth_phy_intf_counters_t23eth_phy_intf_counters_tERR23eth_phy_intf_counters_t"></span><span id="_CPPv2N3eos23eth_phy_intf_counters_t23eth_phy_intf_counters_tERR23eth_phy_intf_counters_t"></span><span id="eos::eth_phy_intf_counters_t::eth_phy_intf_counters_t__eth_phy_intf_counters_tRR"></span><span class="target" id="classeos_1_1eth__phy__intf__counters__t_1a4e061a725b5ebd5d3292a40a3f153651"></span><code class="sig-name descname">eth_phy_intf_counters_t</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos23eth_phy_intf_counters_t23eth_phy_intf_counters_tERR23eth_phy_intf_counters_t" title="eos::eth_phy_intf_counters_t::eth_phy_intf_counters_t">eth_phy_intf_counters_t</a> &amp;&amp;<em>other</em><span class="sig-paren">)</span> <em class="property">noexcept</em><a class="headerlink" href="#_CPPv4N3eos23eth_phy_intf_counters_t23eth_phy_intf_counters_tERR23eth_phy_intf_counters_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos23eth_phy_intf_counters_taSERR23eth_phy_intf_counters_t">
+<span id="_CPPv3N3eos23eth_phy_intf_counters_taSERR23eth_phy_intf_counters_t"></span><span id="_CPPv2N3eos23eth_phy_intf_counters_taSERR23eth_phy_intf_counters_t"></span><span id="eos::eth_phy_intf_counters_t::assign-operator__eth_phy_intf_counters_tRR"></span><span class="target" id="classeos_1_1eth__phy__intf__counters__t_1ace60d0a226affa0b69c3b0568398e127"></span><a class="reference internal" href="#_CPPv4N3eos23eth_phy_intf_counters_tE" title="eos::eth_phy_intf_counters_t">eth_phy_intf_counters_t</a> &amp;<code class="sig-name descname">operator=</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos23eth_phy_intf_counters_tE" title="eos::eth_phy_intf_counters_t">eth_phy_intf_counters_t</a> &amp;&amp;<em>other</em><span class="sig-paren">)</span> <em class="property">noexcept</em><a class="headerlink" href="#_CPPv4N3eos23eth_phy_intf_counters_taSERR23eth_phy_intf_counters_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos23eth_phy_intf_counters_t23single_collision_framesEv">
+<span id="_CPPv3NK3eos23eth_phy_intf_counters_t23single_collision_framesEv"></span><span id="_CPPv2NK3eos23eth_phy_intf_counters_t23single_collision_framesEv"></span><span id="eos::eth_phy_intf_counters_t::single_collision_framesC"></span><span class="target" id="classeos_1_1eth__phy__intf__counters__t_1aef87cdeaeacc4e63975a7143f71459b7"></span>uint64_t <code class="sig-name descname">single_collision_frames</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos23eth_phy_intf_counters_t23single_collision_framesEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Getter for ‘single_collision_frames’: Etherlike-MIB singleCollisionFrames counter. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos23eth_phy_intf_counters_t25multiple_collision_framesEv">
+<span id="_CPPv3NK3eos23eth_phy_intf_counters_t25multiple_collision_framesEv"></span><span id="_CPPv2NK3eos23eth_phy_intf_counters_t25multiple_collision_framesEv"></span><span id="eos::eth_phy_intf_counters_t::multiple_collision_framesC"></span><span class="target" id="classeos_1_1eth__phy__intf__counters__t_1a7d00be0dc0dd2f4aa486bc58b05b1af3"></span>uint64_t <code class="sig-name descname">multiple_collision_frames</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos23eth_phy_intf_counters_t25multiple_collision_framesEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Getter for ‘multiple_collision_frames’: Etherlike-MIB multipleCollisionFrames counter. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos23eth_phy_intf_counters_t10fcs_errorsEv">
+<span id="_CPPv3NK3eos23eth_phy_intf_counters_t10fcs_errorsEv"></span><span id="_CPPv2NK3eos23eth_phy_intf_counters_t10fcs_errorsEv"></span><span id="eos::eth_phy_intf_counters_t::fcs_errorsC"></span><span class="target" id="classeos_1_1eth__phy__intf__counters__t_1aefffc31ef29eb07ca335dad1b7487fed"></span>uint64_t <code class="sig-name descname">fcs_errors</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos23eth_phy_intf_counters_t10fcs_errorsEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Getter for ‘fcs_errors’: Etherlike-MIB fcsErrors counter. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos23eth_phy_intf_counters_t16alignment_errorsEv">
+<span id="_CPPv3NK3eos23eth_phy_intf_counters_t16alignment_errorsEv"></span><span id="_CPPv2NK3eos23eth_phy_intf_counters_t16alignment_errorsEv"></span><span id="eos::eth_phy_intf_counters_t::alignment_errorsC"></span><span class="target" id="classeos_1_1eth__phy__intf__counters__t_1acfb4ebcfce74c549dccb914c1273275a"></span>uint64_t <code class="sig-name descname">alignment_errors</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos23eth_phy_intf_counters_t16alignment_errorsEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Getter for ‘alignment_errors’: Etherlike-MIB alignmentErrors counter. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos23eth_phy_intf_counters_t22deferred_transmissionsEv">
+<span id="_CPPv3NK3eos23eth_phy_intf_counters_t22deferred_transmissionsEv"></span><span id="_CPPv2NK3eos23eth_phy_intf_counters_t22deferred_transmissionsEv"></span><span id="eos::eth_phy_intf_counters_t::deferred_transmissionsC"></span><span class="target" id="classeos_1_1eth__phy__intf__counters__t_1a7718f90b836abb7ab0eb5a56dffadd2a"></span>uint64_t <code class="sig-name descname">deferred_transmissions</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos23eth_phy_intf_counters_t22deferred_transmissionsEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Getter for ‘deferred_transmissions’: Etherlike-MIB deferredTransmissions counter. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos23eth_phy_intf_counters_t15late_collisionsEv">
+<span id="_CPPv3NK3eos23eth_phy_intf_counters_t15late_collisionsEv"></span><span id="_CPPv2NK3eos23eth_phy_intf_counters_t15late_collisionsEv"></span><span id="eos::eth_phy_intf_counters_t::late_collisionsC"></span><span class="target" id="classeos_1_1eth__phy__intf__counters__t_1af0ab22aa8cca552c634d0cddb94f28a3"></span>uint64_t <code class="sig-name descname">late_collisions</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos23eth_phy_intf_counters_t15late_collisionsEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Getter for ‘late_collisions’: Etherlike-MIB lateCollisions counter. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos23eth_phy_intf_counters_t20excessive_collisionsEv">
+<span id="_CPPv3NK3eos23eth_phy_intf_counters_t20excessive_collisionsEv"></span><span id="_CPPv2NK3eos23eth_phy_intf_counters_t20excessive_collisionsEv"></span><span id="eos::eth_phy_intf_counters_t::excessive_collisionsC"></span><span class="target" id="classeos_1_1eth__phy__intf__counters__t_1a30f9946854e3215a88ce8190923a4194"></span>uint64_t <code class="sig-name descname">excessive_collisions</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos23eth_phy_intf_counters_t20excessive_collisionsEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Getter for ‘excessive_collisions’: Etherlike-MIB excessiveCollisions counter. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos23eth_phy_intf_counters_t28internal_mac_transmit_errorsEv">
+<span id="_CPPv3NK3eos23eth_phy_intf_counters_t28internal_mac_transmit_errorsEv"></span><span id="_CPPv2NK3eos23eth_phy_intf_counters_t28internal_mac_transmit_errorsEv"></span><span id="eos::eth_phy_intf_counters_t::internal_mac_transmit_errorsC"></span><span class="target" id="classeos_1_1eth__phy__intf__counters__t_1a5a6a51601d2bb049b1fd81aab6fef271"></span>uint64_t <code class="sig-name descname">internal_mac_transmit_errors</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos23eth_phy_intf_counters_t28internal_mac_transmit_errorsEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Getter for ‘internal_mac_transmit_errors’: Etherlike-MIB internalMacTransmitErrors counter. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos23eth_phy_intf_counters_t20carrier_sense_errorsEv">
+<span id="_CPPv3NK3eos23eth_phy_intf_counters_t20carrier_sense_errorsEv"></span><span id="_CPPv2NK3eos23eth_phy_intf_counters_t20carrier_sense_errorsEv"></span><span id="eos::eth_phy_intf_counters_t::carrier_sense_errorsC"></span><span class="target" id="classeos_1_1eth__phy__intf__counters__t_1a76ea400aa44dcc55e7a86a1e9dee658b"></span>uint64_t <code class="sig-name descname">carrier_sense_errors</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos23eth_phy_intf_counters_t20carrier_sense_errorsEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Getter for ‘carrier_sense_errors’: Etherlike-MIB carrierSenseErrors counter. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos23eth_phy_intf_counters_t27internal_mac_receive_errorsEv">
+<span id="_CPPv3NK3eos23eth_phy_intf_counters_t27internal_mac_receive_errorsEv"></span><span id="_CPPv2NK3eos23eth_phy_intf_counters_t27internal_mac_receive_errorsEv"></span><span id="eos::eth_phy_intf_counters_t::internal_mac_receive_errorsC"></span><span class="target" id="classeos_1_1eth__phy__intf__counters__t_1abe95a147313d4f79bf6a0d366e54ce75"></span>uint64_t <code class="sig-name descname">internal_mac_receive_errors</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos23eth_phy_intf_counters_t27internal_mac_receive_errorsEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Getter for ‘internal_mac_receive_errors’: Etherlike-MIB internalMacReceiveErrors counter. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos23eth_phy_intf_counters_t16frame_too_shortsEv">
+<span id="_CPPv3NK3eos23eth_phy_intf_counters_t16frame_too_shortsEv"></span><span id="_CPPv2NK3eos23eth_phy_intf_counters_t16frame_too_shortsEv"></span><span id="eos::eth_phy_intf_counters_t::frame_too_shortsC"></span><span class="target" id="classeos_1_1eth__phy__intf__counters__t_1a977516954e1dc252701e212a59ae57b0"></span>uint64_t <code class="sig-name descname">frame_too_shorts</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos23eth_phy_intf_counters_t16frame_too_shortsEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Getter for ‘frame_too_shorts’: Etherlike-MIB frameTooShorts counter. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos23eth_phy_intf_counters_t15frame_too_longsEv">
+<span id="_CPPv3NK3eos23eth_phy_intf_counters_t15frame_too_longsEv"></span><span id="_CPPv2NK3eos23eth_phy_intf_counters_t15frame_too_longsEv"></span><span id="eos::eth_phy_intf_counters_t::frame_too_longsC"></span><span class="target" id="classeos_1_1eth__phy__intf__counters__t_1a3cc02ec8c33035ae378506953e9807cb"></span>uint64_t <code class="sig-name descname">frame_too_longs</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos23eth_phy_intf_counters_t15frame_too_longsEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Getter for ‘frame_too_longs’: Etherlike-MIB frameTooLongs counter. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos23eth_phy_intf_counters_t15sqe_test_errorsEv">
+<span id="_CPPv3NK3eos23eth_phy_intf_counters_t15sqe_test_errorsEv"></span><span id="_CPPv2NK3eos23eth_phy_intf_counters_t15sqe_test_errorsEv"></span><span id="eos::eth_phy_intf_counters_t::sqe_test_errorsC"></span><span class="target" id="classeos_1_1eth__phy__intf__counters__t_1a01fedf46391528e51cee1ed97326013e"></span>uint64_t <code class="sig-name descname">sqe_test_errors</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos23eth_phy_intf_counters_t15sqe_test_errorsEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Getter for ‘sqe_test_errors’: Etherlike-MIB sqeTestErrors counter. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos23eth_phy_intf_counters_t13symbol_errorsEv">
+<span id="_CPPv3NK3eos23eth_phy_intf_counters_t13symbol_errorsEv"></span><span id="_CPPv2NK3eos23eth_phy_intf_counters_t13symbol_errorsEv"></span><span id="eos::eth_phy_intf_counters_t::symbol_errorsC"></span><span class="target" id="classeos_1_1eth__phy__intf__counters__t_1afa0aaa74f8df68e2875058c8e5f04e57"></span>uint64_t <code class="sig-name descname">symbol_errors</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos23eth_phy_intf_counters_t13symbol_errorsEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Getter for ‘symbol_errors’: Etherlike-MIB symbolErrors counter. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos23eth_phy_intf_counters_t18in_unknown_opcodesEv">
+<span id="_CPPv3NK3eos23eth_phy_intf_counters_t18in_unknown_opcodesEv"></span><span id="_CPPv2NK3eos23eth_phy_intf_counters_t18in_unknown_opcodesEv"></span><span id="eos::eth_phy_intf_counters_t::in_unknown_opcodesC"></span><span class="target" id="classeos_1_1eth__phy__intf__counters__t_1aa6bca112691153c034f87ecee5169c1f"></span>uint64_t <code class="sig-name descname">in_unknown_opcodes</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos23eth_phy_intf_counters_t18in_unknown_opcodesEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Getter for ‘in_unknown_opcodes’: Etherlike-MIB inUnknownOpcodes counter. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos23eth_phy_intf_counters_t16out_pause_framesEv">
+<span id="_CPPv3NK3eos23eth_phy_intf_counters_t16out_pause_framesEv"></span><span id="_CPPv2NK3eos23eth_phy_intf_counters_t16out_pause_framesEv"></span><span id="eos::eth_phy_intf_counters_t::out_pause_framesC"></span><span class="target" id="classeos_1_1eth__phy__intf__counters__t_1a6c925bccd975ffafc888b6bf80251d96"></span>uint64_t <code class="sig-name descname">out_pause_frames</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos23eth_phy_intf_counters_t16out_pause_framesEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Getter for ‘out_pause_frames’: Etherlike-MIB outPauseFrames counter. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos23eth_phy_intf_counters_t15in_pause_framesEv">
+<span id="_CPPv3NK3eos23eth_phy_intf_counters_t15in_pause_framesEv"></span><span id="_CPPv2NK3eos23eth_phy_intf_counters_t15in_pause_framesEv"></span><span id="eos::eth_phy_intf_counters_t::in_pause_framesC"></span><span class="target" id="classeos_1_1eth__phy__intf__counters__t_1ae300fa5f2ca82cf9e0e6f63c1dba3964"></span>uint64_t <code class="sig-name descname">in_pause_frames</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos23eth_phy_intf_counters_t15in_pause_framesEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Getter for ‘in_pause_frames’: Etherlike-MIB inPauseFrames counter. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos23eth_phy_intf_counters_t9fragmentsEv">
+<span id="_CPPv3NK3eos23eth_phy_intf_counters_t9fragmentsEv"></span><span id="_CPPv2NK3eos23eth_phy_intf_counters_t9fragmentsEv"></span><span id="eos::eth_phy_intf_counters_t::fragmentsC"></span><span class="target" id="classeos_1_1eth__phy__intf__counters__t_1a24c60027535c1166ad6d19f638c82d30"></span>uint64_t <code class="sig-name descname">fragments</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos23eth_phy_intf_counters_t9fragmentsEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Getter for ‘fragments’: RMON-MIB fragments counter. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos23eth_phy_intf_counters_t7jabbersEv">
+<span id="_CPPv3NK3eos23eth_phy_intf_counters_t7jabbersEv"></span><span id="_CPPv2NK3eos23eth_phy_intf_counters_t7jabbersEv"></span><span id="eos::eth_phy_intf_counters_t::jabbersC"></span><span class="target" id="classeos_1_1eth__phy__intf__counters__t_1a01deb94e25429eabe3e5c3286faca46e"></span>uint64_t <code class="sig-name descname">jabbers</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos23eth_phy_intf_counters_t7jabbersEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Getter for ‘jabbers’: RMON-MIB jabbers counter. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos23eth_phy_intf_counters_teqERK23eth_phy_intf_counters_t">
+<span id="_CPPv3NK3eos23eth_phy_intf_counters_teqERK23eth_phy_intf_counters_t"></span><span id="_CPPv2NK3eos23eth_phy_intf_counters_teqERK23eth_phy_intf_counters_t"></span><span id="eos::eth_phy_intf_counters_t::eq-operator__eth_phy_intf_counters_tCRC"></span><span class="target" id="classeos_1_1eth__phy__intf__counters__t_1ae016b9560019a04504255cc49cbfe6b5"></span>bool <code class="sig-name descname">operator==</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos23eth_phy_intf_counters_tE" title="eos::eth_phy_intf_counters_t">eth_phy_intf_counters_t</a> <em class="property">const</em> &amp;<em>other</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos23eth_phy_intf_counters_teqERK23eth_phy_intf_counters_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos23eth_phy_intf_counters_tneERK23eth_phy_intf_counters_t">
+<span id="_CPPv3NK3eos23eth_phy_intf_counters_tneERK23eth_phy_intf_counters_t"></span><span id="_CPPv2NK3eos23eth_phy_intf_counters_tneERK23eth_phy_intf_counters_t"></span><span id="eos::eth_phy_intf_counters_t::neq-operator__eth_phy_intf_counters_tCRC"></span><span class="target" id="classeos_1_1eth__phy__intf__counters__t_1a3756edf8387b2d02ed50146d5846053b"></span>bool <code class="sig-name descname">operator!=</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos23eth_phy_intf_counters_tE" title="eos::eth_phy_intf_counters_t">eth_phy_intf_counters_t</a> <em class="property">const</em> &amp;<em>other</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos23eth_phy_intf_counters_tneERK23eth_phy_intf_counters_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos23eth_phy_intf_counters_t4hashEv">
+<span id="_CPPv3NK3eos23eth_phy_intf_counters_t4hashEv"></span><span id="_CPPv2NK3eos23eth_phy_intf_counters_t4hashEv"></span><span id="eos::eth_phy_intf_counters_t::hashC"></span><span class="target" id="classeos_1_1eth__phy__intf__counters__t_1adc511fd32dbffc89fd1f80d4952c6739"></span>uint32_t <code class="sig-name descname">hash</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos23eth_phy_intf_counters_t4hashEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>The hash function for type <a class="reference internal" href="#classeos_1_1eth__phy__intf__counters__t"><span class="std std-ref">eth_phy_intf_counters_t</span></a>. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos23eth_phy_intf_counters_t6mix_meER8hash_mix">
+<span id="_CPPv3NK3eos23eth_phy_intf_counters_t6mix_meER8hash_mix"></span><span id="_CPPv2NK3eos23eth_phy_intf_counters_t6mix_meER8hash_mix"></span><span id="eos::eth_phy_intf_counters_t::mix_me__hash_mixRC"></span><span class="target" id="classeos_1_1eth__phy__intf__counters__t_1a4833e9c6989d183dda8d456840b3a7be"></span>void <code class="sig-name descname">mix_me</code><span class="sig-paren">(</span><a class="reference internal" href="hash_mix.html#_CPPv4N3eos8hash_mixE" title="eos::hash_mix">hash_mix</a> &amp;<em>h</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos23eth_phy_intf_counters_t6mix_meER8hash_mix" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>The hash mix function for type <a class="reference internal" href="#classeos_1_1eth__phy__intf__counters__t"><span class="std std-ref">eth_phy_intf_counters_t</span></a>. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos23eth_phy_intf_counters_t9to_stringEv">
+<span id="_CPPv3NK3eos23eth_phy_intf_counters_t9to_stringEv"></span><span id="_CPPv2NK3eos23eth_phy_intf_counters_t9to_stringEv"></span><span id="eos::eth_phy_intf_counters_t::to_stringC"></span><span class="target" id="classeos_1_1eth__phy__intf__counters__t_1a9860543dee5eaf6c08c13793fe6152f1"></span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::string <code class="sig-name descname">to_string</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos23eth_phy_intf_counters_t9to_stringEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Returns a string representation of the current object’s values. </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-static-functions">Public Static Functions</p>
+<dl class="cpp function">
+<dt id="_CPPv4N3eos23eth_phy_intf_counters_tnwENSt6size_tEPv">
+<span id="_CPPv3N3eos23eth_phy_intf_counters_tnwENSt6size_tEPv"></span><span id="_CPPv2N3eos23eth_phy_intf_counters_tnwENSt6size_tEPv"></span><span id="eos::eth_phy_intf_counters_t::new-operator__std::s.voidP"></span><span class="target" id="classeos_1_1eth__phy__intf__counters__t_1ab11e718d9bd61022e69aea3eb1c93e45"></span><em class="property">static</em> <em class="property">inline</em> void *<code class="sig-name descname">operator new</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::size_t, void *<em>ptr</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos23eth_phy_intf_counters_tnwENSt6size_tEPv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos23eth_phy_intf_counters_tnwENSt6size_tE">
+<span id="_CPPv3N3eos23eth_phy_intf_counters_tnwENSt6size_tE"></span><span id="_CPPv2N3eos23eth_phy_intf_counters_tnwENSt6size_tE"></span><span id="eos::eth_phy_intf_counters_t::new-operator__std::s"></span><span class="target" id="classeos_1_1eth__phy__intf__counters__t_1ac87f73dabb496c3472d1119867ad54e9"></span><em class="property">static</em> void *<code class="sig-name descname">operator new</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::size_t<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos23eth_phy_intf_counters_tnwENSt6size_tE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos23eth_phy_intf_counters_tdlEPv">
+<span id="_CPPv3N3eos23eth_phy_intf_counters_tdlEPv"></span><span id="_CPPv2N3eos23eth_phy_intf_counters_tdlEPv"></span><span id="eos::eth_phy_intf_counters_t::delete-operator__voidP"></span><span class="target" id="classeos_1_1eth__phy__intf__counters__t_1aa9b92e867749f34cd941bbe956eff247"></span><em class="property">static</em> void <code class="sig-name descname">operator delete</code><span class="sig-paren">(</span>void*<span class="sig-paren">)</span> <em class="property">noexcept</em><a class="headerlink" href="#_CPPv4N3eos23eth_phy_intf_counters_tdlEPv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-private-members">Private Members</p>
+<dl class="cpp var">
+<dt id="_CPPv4N3eos23eth_phy_intf_counters_t5pimplE">
+<span id="_CPPv3N3eos23eth_phy_intf_counters_t5pimplE"></span><span id="_CPPv2N3eos23eth_phy_intf_counters_t5pimplE"></span><span id="eos::eth_phy_intf_counters_t::pimpl__std::shared_ptr:eth_phy_intf_counters_impl_t:"></span><span class="target" id="classeos_1_1eth__phy__intf__counters__t_1a906736a083daa81216162332be33c714"></span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::shared_ptr&lt;eth_phy_intf_counters_impl_t&gt; <code class="sig-name descname">pimpl</code><a class="headerlink" href="#_CPPv4N3eos23eth_phy_intf_counters_t5pimplE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-friends">Friends</p>
+<dl class="cpp function">
+<dt id="_CPPv4N3eos23eth_phy_intf_counters_tlsERNSt7ostreamERK23eth_phy_intf_counters_t">
+<span id="_CPPv3N3eos23eth_phy_intf_counters_tlsERNSt7ostreamERK23eth_phy_intf_counters_t"></span><span id="_CPPv2N3eos23eth_phy_intf_counters_tlsERNSt7ostreamERK23eth_phy_intf_counters_t"></span><span id="eos::eth_phy_intf_counters_t::lshift-operator__osR.eth_phy_intf_counters_tCR"></span><span class="target" id="classeos_1_1eth__phy__intf__counters__t_1a213756dd4d90e5690cdc6f79de789016"></span><em class="property">friend</em> <a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::ostream &amp;<code class="sig-name descname">operator&lt;&lt;</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::ostream &amp;<em>os</em>, <em class="property">const</em> <a class="reference internal" href="#_CPPv4N3eos23eth_phy_intf_counters_tE" title="eos::eth_phy_intf_counters_t">eth_phy_intf_counters_t</a> &amp;<em>obj</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos23eth_phy_intf_counters_tlsERNSt7ostreamERK23eth_phy_intf_counters_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>A utility stream operator that adds a string representation of <a class="reference internal" href="#classeos_1_1eth__phy__intf__counters__t"><span class="std std-ref">eth_phy_intf_counters_t</span></a> to the ostream. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="cpp class">
+<dt id="_CPPv4N3eos27eth_phy_intf_bin_counters_tE">
+<span id="_CPPv3N3eos27eth_phy_intf_bin_counters_tE"></span><span id="_CPPv2N3eos27eth_phy_intf_bin_counters_tE"></span><span id="eos::eth_phy_intf_bin_counters_t"></span><span class="target" id="classeos_1_1eth__phy__intf__bin__counters__t"></span><em class="property">class </em><code class="sig-name descname">eth_phy_intf_bin_counters_t</code><a class="headerlink" href="#_CPPv4N3eos27eth_phy_intf_bin_counters_tE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><div class="docutils container">
+<em>#include &lt;eth_phy_intf.h&gt;</em></div>
+<p>Ethernet interface bin counters class.</p>
+<p>All of these attributes have the same meanings as the corresponding objects in the RMON MIB (RFC2819). </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
+<dl class="cpp function">
+<dt id="_CPPv4N3eos27eth_phy_intf_bin_counters_t27eth_phy_intf_bin_counters_tEv">
+<span id="_CPPv3N3eos27eth_phy_intf_bin_counters_t27eth_phy_intf_bin_counters_tEv"></span><span id="_CPPv2N3eos27eth_phy_intf_bin_counters_t27eth_phy_intf_bin_counters_tEv"></span><span id="eos::eth_phy_intf_bin_counters_t::eth_phy_intf_bin_counters_t"></span><span class="target" id="classeos_1_1eth__phy__intf__bin__counters__t_1a9fa0333fb4cc41faa065e837083a956f"></span><code class="sig-name descname">eth_phy_intf_bin_counters_t</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos27eth_phy_intf_bin_counters_t27eth_phy_intf_bin_counters_tEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos27eth_phy_intf_bin_counters_t27eth_phy_intf_bin_counters_tE8uint64_t8uint64_t8uint64_t8uint64_t8uint64_t8uint64_t8uint64_t8uint64_t8uint64_t8uint64_t8uint64_t8uint64_t8uint64_t8uint64_t">
+<span id="_CPPv3N3eos27eth_phy_intf_bin_counters_t27eth_phy_intf_bin_counters_tE8uint64_t8uint64_t8uint64_t8uint64_t8uint64_t8uint64_t8uint64_t8uint64_t8uint64_t8uint64_t8uint64_t8uint64_t8uint64_t8uint64_t"></span><span id="_CPPv2N3eos27eth_phy_intf_bin_counters_t27eth_phy_intf_bin_counters_tE8uint64_t8uint64_t8uint64_t8uint64_t8uint64_t8uint64_t8uint64_t8uint64_t8uint64_t8uint64_t8uint64_t8uint64_t8uint64_t8uint64_t"></span><span id="eos::eth_phy_intf_bin_counters_t::eth_phy_intf_bin_counters_t__uint64_t.uint64_t.uint64_t.uint64_t.uint64_t.uint64_t.uint64_t.uint64_t.uint64_t.uint64_t.uint64_t.uint64_t.uint64_t.uint64_t"></span><span class="target" id="classeos_1_1eth__phy__intf__bin__counters__t_1a8a27e56324e4f876b556999c5866c1cc"></span><code class="sig-name descname">eth_phy_intf_bin_counters_t</code><span class="sig-paren">(</span>uint64_t <em>in_64_octet_frames</em>, uint64_t <em>in_65_to_127_octet_frames</em>, uint64_t <em>in_128_to_255_octet_frames</em>, uint64_t <em>in_256_to_511_octet_frames</em>, uint64_t <em>in_512_to_1023_octet_frames</em>, uint64_t <em>in_1024_to_1522_octet_frames</em>, uint64_t <em>in_1523_to_max_octet_frames</em>, uint64_t <em>out_64_octet_frames</em>, uint64_t <em>out_65_to_127_octet_frames</em>, uint64_t <em>out_128_to_255_octet_frames</em>, uint64_t <em>out_256_to_511_octet_frames</em>, uint64_t <em>out_512_to_1023_octet_frames</em>, uint64_t <em>out_1024_to_1522_octet_frames</em>, uint64_t <em>out_1523_to_max_octet_frames</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos27eth_phy_intf_bin_counters_t27eth_phy_intf_bin_counters_tE8uint64_t8uint64_t8uint64_t8uint64_t8uint64_t8uint64_t8uint64_t8uint64_t8uint64_t8uint64_t8uint64_t8uint64_t8uint64_t8uint64_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos27eth_phy_intf_bin_counters_t27eth_phy_intf_bin_counters_tERK27eth_phy_intf_bin_counters_t">
+<span id="_CPPv3N3eos27eth_phy_intf_bin_counters_t27eth_phy_intf_bin_counters_tERK27eth_phy_intf_bin_counters_t"></span><span id="_CPPv2N3eos27eth_phy_intf_bin_counters_t27eth_phy_intf_bin_counters_tERK27eth_phy_intf_bin_counters_t"></span><span id="eos::eth_phy_intf_bin_counters_t::eth_phy_intf_bin_counters_t__eth_phy_intf_bin_counters_tCR"></span><span class="target" id="classeos_1_1eth__phy__intf__bin__counters__t_1a39e60d34f7fc3dc8881d41148c1b3846"></span><code class="sig-name descname">eth_phy_intf_bin_counters_t</code><span class="sig-paren">(</span><em class="property">const</em> <a class="reference internal" href="#_CPPv4N3eos27eth_phy_intf_bin_counters_t27eth_phy_intf_bin_counters_tERK27eth_phy_intf_bin_counters_t" title="eos::eth_phy_intf_bin_counters_t::eth_phy_intf_bin_counters_t">eth_phy_intf_bin_counters_t</a> &amp;<em>other</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos27eth_phy_intf_bin_counters_t27eth_phy_intf_bin_counters_tERK27eth_phy_intf_bin_counters_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos27eth_phy_intf_bin_counters_taSERK27eth_phy_intf_bin_counters_t">
+<span id="_CPPv3N3eos27eth_phy_intf_bin_counters_taSERK27eth_phy_intf_bin_counters_t"></span><span id="_CPPv2N3eos27eth_phy_intf_bin_counters_taSERK27eth_phy_intf_bin_counters_t"></span><span id="eos::eth_phy_intf_bin_counters_t::assign-operator__eth_phy_intf_bin_counters_tCR"></span><span class="target" id="classeos_1_1eth__phy__intf__bin__counters__t_1a8d3272958cf8c78f948ac59dcb8abef3"></span><a class="reference internal" href="#_CPPv4N3eos27eth_phy_intf_bin_counters_tE" title="eos::eth_phy_intf_bin_counters_t">eth_phy_intf_bin_counters_t</a> &amp;<code class="sig-name descname">operator=</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos27eth_phy_intf_bin_counters_tE" title="eos::eth_phy_intf_bin_counters_t">eth_phy_intf_bin_counters_t</a> <em class="property">const</em> &amp;<em>other</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos27eth_phy_intf_bin_counters_taSERK27eth_phy_intf_bin_counters_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos27eth_phy_intf_bin_counters_t27eth_phy_intf_bin_counters_tERR27eth_phy_intf_bin_counters_t">
+<span id="_CPPv3N3eos27eth_phy_intf_bin_counters_t27eth_phy_intf_bin_counters_tERR27eth_phy_intf_bin_counters_t"></span><span id="_CPPv2N3eos27eth_phy_intf_bin_counters_t27eth_phy_intf_bin_counters_tERR27eth_phy_intf_bin_counters_t"></span><span id="eos::eth_phy_intf_bin_counters_t::eth_phy_intf_bin_counters_t__eth_phy_intf_bin_counters_tRR"></span><span class="target" id="classeos_1_1eth__phy__intf__bin__counters__t_1abcdfb3b856514619703d3244ee0663ef"></span><code class="sig-name descname">eth_phy_intf_bin_counters_t</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos27eth_phy_intf_bin_counters_t27eth_phy_intf_bin_counters_tERR27eth_phy_intf_bin_counters_t" title="eos::eth_phy_intf_bin_counters_t::eth_phy_intf_bin_counters_t">eth_phy_intf_bin_counters_t</a> &amp;&amp;<em>other</em><span class="sig-paren">)</span> <em class="property">noexcept</em><a class="headerlink" href="#_CPPv4N3eos27eth_phy_intf_bin_counters_t27eth_phy_intf_bin_counters_tERR27eth_phy_intf_bin_counters_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos27eth_phy_intf_bin_counters_taSERR27eth_phy_intf_bin_counters_t">
+<span id="_CPPv3N3eos27eth_phy_intf_bin_counters_taSERR27eth_phy_intf_bin_counters_t"></span><span id="_CPPv2N3eos27eth_phy_intf_bin_counters_taSERR27eth_phy_intf_bin_counters_t"></span><span id="eos::eth_phy_intf_bin_counters_t::assign-operator__eth_phy_intf_bin_counters_tRR"></span><span class="target" id="classeos_1_1eth__phy__intf__bin__counters__t_1a9ad36b5acc5a296a6159a16d4b291bcd"></span><a class="reference internal" href="#_CPPv4N3eos27eth_phy_intf_bin_counters_tE" title="eos::eth_phy_intf_bin_counters_t">eth_phy_intf_bin_counters_t</a> &amp;<code class="sig-name descname">operator=</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos27eth_phy_intf_bin_counters_tE" title="eos::eth_phy_intf_bin_counters_t">eth_phy_intf_bin_counters_t</a> &amp;&amp;<em>other</em><span class="sig-paren">)</span> <em class="property">noexcept</em><a class="headerlink" href="#_CPPv4N3eos27eth_phy_intf_bin_counters_taSERR27eth_phy_intf_bin_counters_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos27eth_phy_intf_bin_counters_t18in_64_octet_framesEv">
+<span id="_CPPv3NK3eos27eth_phy_intf_bin_counters_t18in_64_octet_framesEv"></span><span id="_CPPv2NK3eos27eth_phy_intf_bin_counters_t18in_64_octet_framesEv"></span><span id="eos::eth_phy_intf_bin_counters_t::in_64_octet_framesC"></span><span class="target" id="classeos_1_1eth__phy__intf__bin__counters__t_1a40c2baba883b29ad86a7e286d21ed550"></span>uint64_t <code class="sig-name descname">in_64_octet_frames</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos27eth_phy_intf_bin_counters_t18in_64_octet_framesEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Getter for ‘in_64_octet_frames’: Input 64 octet frame counter. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos27eth_phy_intf_bin_counters_t25in_65_to_127_octet_framesEv">
+<span id="_CPPv3NK3eos27eth_phy_intf_bin_counters_t25in_65_to_127_octet_framesEv"></span><span id="_CPPv2NK3eos27eth_phy_intf_bin_counters_t25in_65_to_127_octet_framesEv"></span><span id="eos::eth_phy_intf_bin_counters_t::in_65_to_127_octet_framesC"></span><span class="target" id="classeos_1_1eth__phy__intf__bin__counters__t_1a350e7de5f86af173d83c3b6e3ab40560"></span>uint64_t <code class="sig-name descname">in_65_to_127_octet_frames</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos27eth_phy_intf_bin_counters_t25in_65_to_127_octet_framesEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Getter for ‘in_65_to_127_octet_frames’: Input 65 to 127 octet frame counter. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos27eth_phy_intf_bin_counters_t26in_128_to_255_octet_framesEv">
+<span id="_CPPv3NK3eos27eth_phy_intf_bin_counters_t26in_128_to_255_octet_framesEv"></span><span id="_CPPv2NK3eos27eth_phy_intf_bin_counters_t26in_128_to_255_octet_framesEv"></span><span id="eos::eth_phy_intf_bin_counters_t::in_128_to_255_octet_framesC"></span><span class="target" id="classeos_1_1eth__phy__intf__bin__counters__t_1a5c89b37c7fbd07d7683d47a70e9ecabc"></span>uint64_t <code class="sig-name descname">in_128_to_255_octet_frames</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos27eth_phy_intf_bin_counters_t26in_128_to_255_octet_framesEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Getter for ‘in_128_to_255_octet_frames’: Input 128 to 255 octet frame counter. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos27eth_phy_intf_bin_counters_t26in_256_to_511_octet_framesEv">
+<span id="_CPPv3NK3eos27eth_phy_intf_bin_counters_t26in_256_to_511_octet_framesEv"></span><span id="_CPPv2NK3eos27eth_phy_intf_bin_counters_t26in_256_to_511_octet_framesEv"></span><span id="eos::eth_phy_intf_bin_counters_t::in_256_to_511_octet_framesC"></span><span class="target" id="classeos_1_1eth__phy__intf__bin__counters__t_1a4a112f009111461c00a77309e4693e10"></span>uint64_t <code class="sig-name descname">in_256_to_511_octet_frames</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos27eth_phy_intf_bin_counters_t26in_256_to_511_octet_framesEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Getter for ‘in_256_to_511_octet_frames’: Input 256 to 511 octet frame counter. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos27eth_phy_intf_bin_counters_t27in_512_to_1023_octet_framesEv">
+<span id="_CPPv3NK3eos27eth_phy_intf_bin_counters_t27in_512_to_1023_octet_framesEv"></span><span id="_CPPv2NK3eos27eth_phy_intf_bin_counters_t27in_512_to_1023_octet_framesEv"></span><span id="eos::eth_phy_intf_bin_counters_t::in_512_to_1023_octet_framesC"></span><span class="target" id="classeos_1_1eth__phy__intf__bin__counters__t_1a1a2769c46c003dae7ae0ab601b4a47c4"></span>uint64_t <code class="sig-name descname">in_512_to_1023_octet_frames</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos27eth_phy_intf_bin_counters_t27in_512_to_1023_octet_framesEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Getter for ‘in_512_to_1023_octet_frames’: Input 512 to 1023 octet frame counter. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos27eth_phy_intf_bin_counters_t28in_1024_to_1522_octet_framesEv">
+<span id="_CPPv3NK3eos27eth_phy_intf_bin_counters_t28in_1024_to_1522_octet_framesEv"></span><span id="_CPPv2NK3eos27eth_phy_intf_bin_counters_t28in_1024_to_1522_octet_framesEv"></span><span id="eos::eth_phy_intf_bin_counters_t::in_1024_to_1522_octet_framesC"></span><span class="target" id="classeos_1_1eth__phy__intf__bin__counters__t_1a1f0c16713c44f0d1709849b26bae7f71"></span>uint64_t <code class="sig-name descname">in_1024_to_1522_octet_frames</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos27eth_phy_intf_bin_counters_t28in_1024_to_1522_octet_framesEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Getter for ‘in_1024_to_1522_octet_frames’: Input 1024 to 1522 octet frame counter. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos27eth_phy_intf_bin_counters_t27in_1523_to_max_octet_framesEv">
+<span id="_CPPv3NK3eos27eth_phy_intf_bin_counters_t27in_1523_to_max_octet_framesEv"></span><span id="_CPPv2NK3eos27eth_phy_intf_bin_counters_t27in_1523_to_max_octet_framesEv"></span><span id="eos::eth_phy_intf_bin_counters_t::in_1523_to_max_octet_framesC"></span><span class="target" id="classeos_1_1eth__phy__intf__bin__counters__t_1ae798a2ccaeeab7096a9614ca0d0301d5"></span>uint64_t <code class="sig-name descname">in_1523_to_max_octet_frames</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos27eth_phy_intf_bin_counters_t27in_1523_to_max_octet_framesEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Getter for ‘in_1523_to_max_octet_frames’: Input 1523 to max octet frame counter. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos27eth_phy_intf_bin_counters_t19out_64_octet_framesEv">
+<span id="_CPPv3NK3eos27eth_phy_intf_bin_counters_t19out_64_octet_framesEv"></span><span id="_CPPv2NK3eos27eth_phy_intf_bin_counters_t19out_64_octet_framesEv"></span><span id="eos::eth_phy_intf_bin_counters_t::out_64_octet_framesC"></span><span class="target" id="classeos_1_1eth__phy__intf__bin__counters__t_1ae72877ead9c041f04cd4e832c444128a"></span>uint64_t <code class="sig-name descname">out_64_octet_frames</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos27eth_phy_intf_bin_counters_t19out_64_octet_framesEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Getter for ‘out_64_octet_frames’: Output 64 octet frame counter. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos27eth_phy_intf_bin_counters_t26out_65_to_127_octet_framesEv">
+<span id="_CPPv3NK3eos27eth_phy_intf_bin_counters_t26out_65_to_127_octet_framesEv"></span><span id="_CPPv2NK3eos27eth_phy_intf_bin_counters_t26out_65_to_127_octet_framesEv"></span><span id="eos::eth_phy_intf_bin_counters_t::out_65_to_127_octet_framesC"></span><span class="target" id="classeos_1_1eth__phy__intf__bin__counters__t_1a21bae601319d981bb2f4dce67dae3845"></span>uint64_t <code class="sig-name descname">out_65_to_127_octet_frames</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos27eth_phy_intf_bin_counters_t26out_65_to_127_octet_framesEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Getter for ‘out_65_to_127_octet_frames’: Output 65 to 127 octet frame counter. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos27eth_phy_intf_bin_counters_t27out_128_to_255_octet_framesEv">
+<span id="_CPPv3NK3eos27eth_phy_intf_bin_counters_t27out_128_to_255_octet_framesEv"></span><span id="_CPPv2NK3eos27eth_phy_intf_bin_counters_t27out_128_to_255_octet_framesEv"></span><span id="eos::eth_phy_intf_bin_counters_t::out_128_to_255_octet_framesC"></span><span class="target" id="classeos_1_1eth__phy__intf__bin__counters__t_1a06472becd826e5131a2ba9250835154d"></span>uint64_t <code class="sig-name descname">out_128_to_255_octet_frames</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos27eth_phy_intf_bin_counters_t27out_128_to_255_octet_framesEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Getter for ‘out_128_to_255_octet_frames’: Output 128 to 255 octet frame counter. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos27eth_phy_intf_bin_counters_t27out_256_to_511_octet_framesEv">
+<span id="_CPPv3NK3eos27eth_phy_intf_bin_counters_t27out_256_to_511_octet_framesEv"></span><span id="_CPPv2NK3eos27eth_phy_intf_bin_counters_t27out_256_to_511_octet_framesEv"></span><span id="eos::eth_phy_intf_bin_counters_t::out_256_to_511_octet_framesC"></span><span class="target" id="classeos_1_1eth__phy__intf__bin__counters__t_1a5ad55407482b88d3345bed1a2f95369a"></span>uint64_t <code class="sig-name descname">out_256_to_511_octet_frames</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos27eth_phy_intf_bin_counters_t27out_256_to_511_octet_framesEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Getter for ‘out_256_to_511_octet_frames’: Output 256 to 511 octet frame counter. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos27eth_phy_intf_bin_counters_t28out_512_to_1023_octet_framesEv">
+<span id="_CPPv3NK3eos27eth_phy_intf_bin_counters_t28out_512_to_1023_octet_framesEv"></span><span id="_CPPv2NK3eos27eth_phy_intf_bin_counters_t28out_512_to_1023_octet_framesEv"></span><span id="eos::eth_phy_intf_bin_counters_t::out_512_to_1023_octet_framesC"></span><span class="target" id="classeos_1_1eth__phy__intf__bin__counters__t_1aa15ad0b2706873bb76038ed288175713"></span>uint64_t <code class="sig-name descname">out_512_to_1023_octet_frames</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos27eth_phy_intf_bin_counters_t28out_512_to_1023_octet_framesEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Getter for ‘out_512_to_1023_octet_frames’: Output 512 to 1023 octet frame counter. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos27eth_phy_intf_bin_counters_t29out_1024_to_1522_octet_framesEv">
+<span id="_CPPv3NK3eos27eth_phy_intf_bin_counters_t29out_1024_to_1522_octet_framesEv"></span><span id="_CPPv2NK3eos27eth_phy_intf_bin_counters_t29out_1024_to_1522_octet_framesEv"></span><span id="eos::eth_phy_intf_bin_counters_t::out_1024_to_1522_octet_framesC"></span><span class="target" id="classeos_1_1eth__phy__intf__bin__counters__t_1a568d1e63f3a5fec0d90e13588398fb04"></span>uint64_t <code class="sig-name descname">out_1024_to_1522_octet_frames</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos27eth_phy_intf_bin_counters_t29out_1024_to_1522_octet_framesEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Getter for ‘out_1024_to_1522_octet_frames’: Output 1024 to 1522 octet frame counter. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos27eth_phy_intf_bin_counters_t28out_1523_to_max_octet_framesEv">
+<span id="_CPPv3NK3eos27eth_phy_intf_bin_counters_t28out_1523_to_max_octet_framesEv"></span><span id="_CPPv2NK3eos27eth_phy_intf_bin_counters_t28out_1523_to_max_octet_framesEv"></span><span id="eos::eth_phy_intf_bin_counters_t::out_1523_to_max_octet_framesC"></span><span class="target" id="classeos_1_1eth__phy__intf__bin__counters__t_1a83a57529a90c23544043953e5d0da269"></span>uint64_t <code class="sig-name descname">out_1523_to_max_octet_frames</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos27eth_phy_intf_bin_counters_t28out_1523_to_max_octet_framesEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Getter for ‘out_1523_to_max_octet_frames’: Output 1523 to max octet frame counter. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos27eth_phy_intf_bin_counters_teqERK27eth_phy_intf_bin_counters_t">
+<span id="_CPPv3NK3eos27eth_phy_intf_bin_counters_teqERK27eth_phy_intf_bin_counters_t"></span><span id="_CPPv2NK3eos27eth_phy_intf_bin_counters_teqERK27eth_phy_intf_bin_counters_t"></span><span id="eos::eth_phy_intf_bin_counters_t::eq-operator__eth_phy_intf_bin_counters_tCRC"></span><span class="target" id="classeos_1_1eth__phy__intf__bin__counters__t_1aba21f640aef84bada0512a1a4407e15a"></span>bool <code class="sig-name descname">operator==</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos27eth_phy_intf_bin_counters_tE" title="eos::eth_phy_intf_bin_counters_t">eth_phy_intf_bin_counters_t</a> <em class="property">const</em> &amp;<em>other</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos27eth_phy_intf_bin_counters_teqERK27eth_phy_intf_bin_counters_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos27eth_phy_intf_bin_counters_tneERK27eth_phy_intf_bin_counters_t">
+<span id="_CPPv3NK3eos27eth_phy_intf_bin_counters_tneERK27eth_phy_intf_bin_counters_t"></span><span id="_CPPv2NK3eos27eth_phy_intf_bin_counters_tneERK27eth_phy_intf_bin_counters_t"></span><span id="eos::eth_phy_intf_bin_counters_t::neq-operator__eth_phy_intf_bin_counters_tCRC"></span><span class="target" id="classeos_1_1eth__phy__intf__bin__counters__t_1a675dd771c9c29615746e4f7e8ce6fe1b"></span>bool <code class="sig-name descname">operator!=</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos27eth_phy_intf_bin_counters_tE" title="eos::eth_phy_intf_bin_counters_t">eth_phy_intf_bin_counters_t</a> <em class="property">const</em> &amp;<em>other</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos27eth_phy_intf_bin_counters_tneERK27eth_phy_intf_bin_counters_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos27eth_phy_intf_bin_counters_t4hashEv">
+<span id="_CPPv3NK3eos27eth_phy_intf_bin_counters_t4hashEv"></span><span id="_CPPv2NK3eos27eth_phy_intf_bin_counters_t4hashEv"></span><span id="eos::eth_phy_intf_bin_counters_t::hashC"></span><span class="target" id="classeos_1_1eth__phy__intf__bin__counters__t_1a9ce10bee670c1225a9ad8c870edd7cc2"></span>uint32_t <code class="sig-name descname">hash</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos27eth_phy_intf_bin_counters_t4hashEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>The hash function for type <a class="reference internal" href="#classeos_1_1eth__phy__intf__bin__counters__t"><span class="std std-ref">eth_phy_intf_bin_counters_t</span></a>. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos27eth_phy_intf_bin_counters_t6mix_meER8hash_mix">
+<span id="_CPPv3NK3eos27eth_phy_intf_bin_counters_t6mix_meER8hash_mix"></span><span id="_CPPv2NK3eos27eth_phy_intf_bin_counters_t6mix_meER8hash_mix"></span><span id="eos::eth_phy_intf_bin_counters_t::mix_me__hash_mixRC"></span><span class="target" id="classeos_1_1eth__phy__intf__bin__counters__t_1ab912dd992b11382bde67628c7ffe4abd"></span>void <code class="sig-name descname">mix_me</code><span class="sig-paren">(</span><a class="reference internal" href="hash_mix.html#_CPPv4N3eos8hash_mixE" title="eos::hash_mix">hash_mix</a> &amp;<em>h</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos27eth_phy_intf_bin_counters_t6mix_meER8hash_mix" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>The hash mix function for type <a class="reference internal" href="#classeos_1_1eth__phy__intf__bin__counters__t"><span class="std std-ref">eth_phy_intf_bin_counters_t</span></a>. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos27eth_phy_intf_bin_counters_t9to_stringEv">
+<span id="_CPPv3NK3eos27eth_phy_intf_bin_counters_t9to_stringEv"></span><span id="_CPPv2NK3eos27eth_phy_intf_bin_counters_t9to_stringEv"></span><span id="eos::eth_phy_intf_bin_counters_t::to_stringC"></span><span class="target" id="classeos_1_1eth__phy__intf__bin__counters__t_1a3d3dea943dbda429a061d7c946a3198f"></span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::string <code class="sig-name descname">to_string</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos27eth_phy_intf_bin_counters_t9to_stringEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Returns a string representation of the current object’s values. </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-static-functions">Public Static Functions</p>
+<dl class="cpp function">
+<dt id="_CPPv4N3eos27eth_phy_intf_bin_counters_tnwENSt6size_tEPv">
+<span id="_CPPv3N3eos27eth_phy_intf_bin_counters_tnwENSt6size_tEPv"></span><span id="_CPPv2N3eos27eth_phy_intf_bin_counters_tnwENSt6size_tEPv"></span><span id="eos::eth_phy_intf_bin_counters_t::new-operator__std::s.voidP"></span><span class="target" id="classeos_1_1eth__phy__intf__bin__counters__t_1a6a5905b1cebcb4cb70dd307a67c4be4a"></span><em class="property">static</em> <em class="property">inline</em> void *<code class="sig-name descname">operator new</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::size_t, void *<em>ptr</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos27eth_phy_intf_bin_counters_tnwENSt6size_tEPv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos27eth_phy_intf_bin_counters_tnwENSt6size_tE">
+<span id="_CPPv3N3eos27eth_phy_intf_bin_counters_tnwENSt6size_tE"></span><span id="_CPPv2N3eos27eth_phy_intf_bin_counters_tnwENSt6size_tE"></span><span id="eos::eth_phy_intf_bin_counters_t::new-operator__std::s"></span><span class="target" id="classeos_1_1eth__phy__intf__bin__counters__t_1a3ed2a11bc5917fef9d72ec1192227049"></span><em class="property">static</em> void *<code class="sig-name descname">operator new</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::size_t<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos27eth_phy_intf_bin_counters_tnwENSt6size_tE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos27eth_phy_intf_bin_counters_tdlEPv">
+<span id="_CPPv3N3eos27eth_phy_intf_bin_counters_tdlEPv"></span><span id="_CPPv2N3eos27eth_phy_intf_bin_counters_tdlEPv"></span><span id="eos::eth_phy_intf_bin_counters_t::delete-operator__voidP"></span><span class="target" id="classeos_1_1eth__phy__intf__bin__counters__t_1a7253e5e71c934b4eb0e4758841940d4a"></span><em class="property">static</em> void <code class="sig-name descname">operator delete</code><span class="sig-paren">(</span>void*<span class="sig-paren">)</span> <em class="property">noexcept</em><a class="headerlink" href="#_CPPv4N3eos27eth_phy_intf_bin_counters_tdlEPv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-private-members">Private Members</p>
+<dl class="cpp var">
+<dt id="_CPPv4N3eos27eth_phy_intf_bin_counters_t5pimplE">
+<span id="_CPPv3N3eos27eth_phy_intf_bin_counters_t5pimplE"></span><span id="_CPPv2N3eos27eth_phy_intf_bin_counters_t5pimplE"></span><span id="eos::eth_phy_intf_bin_counters_t::pimpl__std::shared_ptr:eth_phy_intf_bin_counters_impl_t:"></span><span class="target" id="classeos_1_1eth__phy__intf__bin__counters__t_1a2718f235c75304e8da2352ab808b4eba"></span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::shared_ptr&lt;eth_phy_intf_bin_counters_impl_t&gt; <code class="sig-name descname">pimpl</code><a class="headerlink" href="#_CPPv4N3eos27eth_phy_intf_bin_counters_t5pimplE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-friends">Friends</p>
+<dl class="cpp function">
+<dt id="_CPPv4N3eos27eth_phy_intf_bin_counters_tlsERNSt7ostreamERK27eth_phy_intf_bin_counters_t">
+<span id="_CPPv3N3eos27eth_phy_intf_bin_counters_tlsERNSt7ostreamERK27eth_phy_intf_bin_counters_t"></span><span id="_CPPv2N3eos27eth_phy_intf_bin_counters_tlsERNSt7ostreamERK27eth_phy_intf_bin_counters_t"></span><span id="eos::eth_phy_intf_bin_counters_t::lshift-operator__osR.eth_phy_intf_bin_counters_tCR"></span><span class="target" id="classeos_1_1eth__phy__intf__bin__counters__t_1a5eccabeccaf9778f91dae85659c604fc"></span><em class="property">friend</em> <a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::ostream &amp;<code class="sig-name descname">operator&lt;&lt;</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::ostream &amp;<em>os</em>, <em class="property">const</em> <a class="reference internal" href="#_CPPv4N3eos27eth_phy_intf_bin_counters_tE" title="eos::eth_phy_intf_bin_counters_t">eth_phy_intf_bin_counters_t</a> &amp;<em>obj</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos27eth_phy_intf_bin_counters_tlsERNSt7ostreamERK27eth_phy_intf_bin_counters_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>A utility stream operator that adds a string representation of <a class="reference internal" href="#classeos_1_1eth__phy__intf__bin__counters__t"><span class="std std-ref">eth_phy_intf_bin_counters_t</span></a> to the ostream. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#"><strong>eth_phy_intf</strong></a><ul>
+<li><a class="reference internal" href="#type-definitions-in-eth-phy-intf">Type definitions in <strong>eth_phy_intf</strong></a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="eth_lag_intf.html"
+                        title="previous chapter"><strong>eth_lag_intf</strong></a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="event_loop.html"
+                        title="next chapter"><strong>event_loop</strong></a></p>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="event_loop.html" title="event_loop"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="eth_lag_intf.html" title="eth_lag_intf"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Arista EOS SDK 2.23.4 reference</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href=""><strong>eth_phy_intf</strong></a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2014, Arista Networks.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.4.3.
+    </div>
+  </body>
+</html>
