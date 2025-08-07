@@ -35,7 +35,7 @@
 #-----------------------------------------------------------------------------------
 
 FROM almalinux:9
-ARG version=2.23.2
+ARG version=2.23.4
 
 # Set eossdk version as label and environ variable.
 LABEL version=$version

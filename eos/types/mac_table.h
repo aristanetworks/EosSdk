@@ -59,7 +59,10 @@ enum mac_entry_type_t {
    MAC_ENTRY_PENDING_SECURE,
    MAC_ENTRY_VPLS_DYNAMIC_REMOTE,
    MAC_ENTRY_SOFTWARE_LEARNED_DYNAMIC,
+   /** Deprecated. */
    MAC_ENTRY_DFW_CONFIGURED_STATIC,
+   MAC_ENTRY_PROGRAMMED_STATIC,
+   MAC_ENTRY_EVPN_VESPA_DYNAMIC,
 };
 /** Appends a string representation of enum mac_entry_type_t value to the ostream. */
 EOS_SDK_PUBLIC std::ostream& operator<<(std::ostream& os,

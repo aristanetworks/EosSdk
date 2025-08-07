@@ -38,6 +38,8 @@ operator<<(std::ostream& os, const eth_link_speed_t & enum_val) {
       os << "LINK_SPEED_800GBPS";
    } else if (enum_val==LINK_SPEED_UNEXPECTED) {
       os << "LINK_SPEED_UNEXPECTED";
+   } else if (enum_val==LINK_SPEED_1P6TBPS) {
+      os << "LINK_SPEED_1P6TBPS";
    } else {
       os << "Unknown value";
    }

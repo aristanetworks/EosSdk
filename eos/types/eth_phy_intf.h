@@ -38,6 +38,7 @@ enum eth_link_speed_t {
    LINK_SPEED_400GBPS,
    LINK_SPEED_800GBPS,
    LINK_SPEED_UNEXPECTED,
+   LINK_SPEED_1P6TBPS,
 };
 /** Appends a string representation of enum eth_link_speed_t value to the ostream. */
 EOS_SDK_PUBLIC std::ostream& operator<<(std::ostream& os,

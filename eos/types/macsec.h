@@ -58,6 +58,8 @@ enum macsec_intf_key_status_t {
    MACSEC_KEY_PRIMARY_CACHED,
    /** Previously configured fallback CAK/CKN is selected as principal. */
    MACSEC_KEY_FALLBACK_CACHED,
+   /** Configured static sak is the active key. */
+   MACSEC_KEY_STATIC_SAK,
 };
 /**
  * Appends a string representation of enum macsec_intf_key_status_t value to the

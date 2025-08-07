@@ -252,6 +252,11 @@ class EOS_SDK_PUBLIC mpls_route_via_t {
    /** Setter for 'nexthop_group'. */
    void nexthop_group_is(std::string nexthop_group);
 
+   /** Getter for 'weight': the weight for this via. */
+   uint32_t weight() const;
+   /** Setter for 'weight'. */
+   void weight_is(uint32_t weight);
+
    /** Getter for 'pushswap_label_stack': push or swap this label stack. */
    std::forward_list<mpls_label_t> const & pushswap_label_stack() const;
    /** Setter for 'pushswap_label_stack'. */

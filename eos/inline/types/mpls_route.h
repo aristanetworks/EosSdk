@@ -198,6 +198,14 @@ void
 mpls_route_via_t::nexthop_group_is(std::string nexthop_group) {
    pimpl->nexthop_group_is(nexthop_group);
 }
+uint32_t
+mpls_route_via_t::weight() const {
+   return pimpl->weight();
+}
+void
+mpls_route_via_t::weight_is(uint32_t weight) {
+   pimpl->weight_is(weight);
+}
 std::forward_list<mpls_label_t> const &
 mpls_route_via_t::pushswap_label_stack() const {
    return pimpl->pushswap_label_stack();

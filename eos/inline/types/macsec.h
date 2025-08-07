@@ -39,6 +39,8 @@ operator<<(std::ostream& os, const macsec_intf_key_status_t & enum_val) {
       os << "MACSEC_KEY_PRIMARY_CACHED";
    } else if (enum_val==MACSEC_KEY_FALLBACK_CACHED) {
       os << "MACSEC_KEY_FALLBACK_CACHED";
+   } else if (enum_val==MACSEC_KEY_STATIC_SAK) {
+      os << "MACSEC_KEY_STATIC_SAK";
    } else {
       os << "Unknown value";
    }

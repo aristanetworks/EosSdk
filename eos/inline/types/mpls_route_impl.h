@@ -232,7 +232,7 @@ mpls_route_via_impl_t::mpls_route_via_impl_t() :
       route_key_(), hop_(), intf_(), pushswap_label_(),
       label_action_(MPLS_ACTION_NULL), ttl_mode_(MPLS_TTLMODE_NULL),
       payload_type_(MPLS_PAYLOAD_TYPE_NULL), skip_egress_acl_(false),
-      nexthop_group_(),
+      nexthop_group_(), weight_(1),
       pushswap_label_stack_(std::forward_list <mpls_label_t> {0}) {
 }
 
@@ -240,7 +240,7 @@ mpls_route_via_impl_t::mpls_route_via_impl_t(mpls_route_key_t route_key) :
       route_key_(route_key), hop_(), intf_(), pushswap_label_(),
       label_action_(MPLS_ACTION_NULL), ttl_mode_(MPLS_TTLMODE_NULL),
       payload_type_(MPLS_PAYLOAD_TYPE_NULL), skip_egress_acl_(false),
-      nexthop_group_(),
+      nexthop_group_(), weight_(1),
       pushswap_label_stack_(std::forward_list <mpls_label_t> {0}) {
 }
 
@@ -249,7 +249,7 @@ mpls_route_via_impl_t::mpls_route_via_impl_t(mpls_route_key_t route_key,
       route_key_(route_key), hop_(), intf_(), pushswap_label_(),
       label_action_(label_action), ttl_mode_(MPLS_TTLMODE_NULL),
       payload_type_(MPLS_PAYLOAD_TYPE_NULL), skip_egress_acl_(false),
-      nexthop_group_(),
+      nexthop_group_(), weight_(1),
       pushswap_label_stack_(std::forward_list <mpls_label_t> {0}) {
 }
 
@@ -357,6 +357,16 @@ mpls_route_via_impl_t::nexthop_group_is(std::string nexthop_group) {
    nexthop_group_ = nexthop_group;
 }
 
+uint32_t
+mpls_route_via_impl_t::weight() const {
+   return weight_;
+}
+
+void
+mpls_route_via_impl_t::weight_is(uint32_t weight) {
+   weight_ = weight;
+}
+
 std::forward_list<mpls_label_t> const &
 mpls_route_via_impl_t::pushswap_label_stack() const {
    return pushswap_label_stack_;
@@ -403,6 +413,7 @@ mpls_route_via_impl_t::operator==(mpls_route_via_impl_t const & other) const {
           payload_type_ == other.payload_type_ &&
           skip_egress_acl_ == other.skip_egress_acl_ &&
           nexthop_group_ == other.nexthop_group_ &&
+          weight_ == other.weight_ &&
           pushswap_label_stack_ == other.pushswap_label_stack_;
 }
 
@@ -429,6 +440,7 @@ mpls_route_via_impl_t::mix_me(hash_mix & h) const {
    h.mix(payload_type_); // mpls_payload_type_t
    h.mix(skip_egress_acl_); // bool
    h.mix(nexthop_group_); // std::string
+   h.mix(weight_); // uint32_t
    for (auto it=pushswap_label_stack_.cbegin();
         it!=pushswap_label_stack_.cend(); ++it) {
       h.mix(*it); // mpls_label_t
@@ -448,6 +460,7 @@ mpls_route_via_impl_t::to_string() const {
    ss << ", payload_type=" << payload_type_;
    ss << ", skip_egress_acl=" << skip_egress_acl_;
    ss << ", nexthop_group='" << nexthop_group_ << "'";
+   ss << ", weight=" << weight_;
    ss << ", pushswap_label_stack=" <<"'";
    bool first_pushswap_label_stack = true;
    for (auto it=pushswap_label_stack_.cbegin();
