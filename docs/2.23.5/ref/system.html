@@ -1,0 +1,225 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>system &#8212; Arista EOS SDK 2.23.5 reference</title>
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/eossdk.css" type="text/css" />
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="timer" href="timer.html" />
+    <link rel="prev" title="subintf" href="subintf.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="timer.html" title="timer"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="subintf.html" title="subintf"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Arista EOS SDK 2.23.5 reference</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href=""><strong>system</strong></a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="system">
+<h1><strong>system</strong><a class="headerlink" href="#system" title="Permalink to this headline">¶</a></h1>
+<p>Module for system identifying information.</p>
+<p>This module provides access to important identifying information of the system, similar to what is available from the ‘show version’ and ‘show hostname’ CLI commands. </p>
+<dl class="cpp type">
+<dt id="_CPPv43eos">
+<span id="_CPPv33eos"></span><span id="_CPPv23eos"></span><span id="eos"></span><span class="target" id="namespaceeos"></span><em class="property">namespace </em><code class="sig-name descname">eos</code><br /></dt>
+<dd><dl class="cpp class">
+<dt id="_CPPv4N3eos14system_handlerE">
+<span id="_CPPv3N3eos14system_handlerE"></span><span id="_CPPv2N3eos14system_handlerE"></span><span id="eos::system_handler"></span><span class="target" id="classeos_1_1system__handler"></span><em class="property">class </em><code class="sig-name descname">system_handler</code> : <em class="property">public</em> <a class="reference internal" href="acl.html#_CPPv43eos" title="eos">eos</a>::<a class="reference internal" href="base_handler.html#_CPPv4I00EN3eos12base_handlerE" title="eos::base_handler">base_handler</a>&lt;<a class="reference internal" href="#_CPPv4N3eos10system_mgrE" title="eos::system_mgr">system_mgr</a>, <a class="reference internal" href="#_CPPv4N3eos14system_handlerE" title="eos::system_handler">system_handler</a>&gt;<a class="headerlink" href="#_CPPv4N3eos14system_handlerE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><div class="docutils container">
+<em>#include &lt;system.h&gt;</em></div>
+<p>Handler class for changes in system identifying information. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
+<dl class="cpp function">
+<dt id="_CPPv4N3eos14system_handler14system_handlerEP10system_mgr">
+<span id="_CPPv3N3eos14system_handler14system_handlerEP10system_mgr"></span><span id="_CPPv2N3eos14system_handler14system_handlerEP10system_mgr"></span><span id="eos::system_handler::system_handler__system_mgrP"></span><span class="target" id="classeos_1_1system__handler_1aed0863f1d235b4a62940e0b9a4e2ab5b"></span><em class="property">explicit</em> <code class="sig-name descname">system_handler</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos10system_mgrE" title="eos::system_mgr">system_mgr</a>*<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos14system_handler14system_handlerEP10system_mgr" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos14system_handler14get_system_mgrEv">
+<span id="_CPPv3NK3eos14system_handler14get_system_mgrEv"></span><span id="_CPPv2NK3eos14system_handler14get_system_mgrEv"></span><span id="eos::system_handler::get_system_mgrC"></span><span class="target" id="classeos_1_1system__handler_1a3bbe606986f979b8b0bc5ef581ae63c6"></span><em class="property">inline</em> <a class="reference internal" href="#_CPPv4N3eos10system_mgrE" title="eos::system_mgr">system_mgr</a> *<code class="sig-name descname">get_system_mgr</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos14system_handler14get_system_mgrEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Returns the associated <a class="reference internal" href="#classeos_1_1system__mgr"><span class="std std-ref">system_mgr</span></a>. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos14system_handler11on_hostnameERKNSt6stringE">
+<span id="_CPPv3N3eos14system_handler11on_hostnameERKNSt6stringE"></span><span id="_CPPv2N3eos14system_handler11on_hostnameERKNSt6stringE"></span><span id="eos::system_handler::on_hostname__ssCR"></span><span class="target" id="classeos_1_1system__handler_1a0f71cb85cf70f585c2d184e84d397499"></span><em class="property">virtual</em> void <code class="sig-name descname">on_hostname</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::string <em class="property">const</em>&amp;<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos14system_handler11on_hostnameERKNSt6stringE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Handler called when the hostname changes. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos14system_handler7on_fqdnERKNSt6stringE">
+<span id="_CPPv3N3eos14system_handler7on_fqdnERKNSt6stringE"></span><span id="_CPPv2N3eos14system_handler7on_fqdnERKNSt6stringE"></span><span id="eos::system_handler::on_fqdn__ssCR"></span><span class="target" id="classeos_1_1system__handler_1ac0716af439ef9ea37e99d8becd0811f9"></span><em class="property">virtual</em> void <code class="sig-name descname">on_fqdn</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::string <em class="property">const</em>&amp;<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos14system_handler7on_fqdnERKNSt6stringE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Handler called when the fully qualified domain name changes. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos14system_handler26on_system_info_initializedEv">
+<span id="_CPPv3N3eos14system_handler26on_system_info_initializedEv"></span><span id="_CPPv2N3eos14system_handler26on_system_info_initializedEv"></span><span id="eos::system_handler::on_system_info_initialized"></span><span class="target" id="classeos_1_1system__handler_1aca6e83f76348926e5cb049c3c96749d2"></span><em class="property">virtual</em> void <code class="sig-name descname">on_system_info_initialized</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos14system_handler26on_system_info_initializedEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Handler called once the system identifying information is set.</p>
+<p>The <a class="reference internal" href="#classeos_1_1system__handler_1aca6e83f76348926e5cb049c3c96749d2"><span class="std std-ref">on_system_info_initialized()</span></a> method will be called when the serial_number and model_name have been discovered and are accessible via the <a class="reference internal" href="#classeos_1_1system__mgr"><span class="std std-ref">system_mgr</span></a> class. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="cpp class">
+<dt id="_CPPv4N3eos10system_mgrE">
+<span id="_CPPv3N3eos10system_mgrE"></span><span id="_CPPv2N3eos10system_mgrE"></span><span id="eos::system_mgr"></span><span class="target" id="classeos_1_1system__mgr"></span><em class="property">class </em><code class="sig-name descname">system_mgr</code> : <em class="property">public</em> <a class="reference internal" href="acl.html#_CPPv43eos" title="eos">eos</a>::<a class="reference internal" href="base_mgr.html#_CPPv4I00EN3eos8base_mgrE" title="eos::base_mgr">base_mgr</a>&lt;<a class="reference internal" href="#_CPPv4N3eos14system_handlerE" title="eos::system_handler">system_handler</a>&gt;<a class="headerlink" href="#_CPPv4N3eos10system_mgrE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><div class="docutils container">
+<em>#include &lt;system.h&gt;</em></div>
+<p>A manager for identifying information of the system.</p>
+<p>Create one of these via eos::get_system_mgr() prior to starting the agent main loop. When your <a class="reference internal" href="agent.html#classeos_1_1agent__handler_1ad558b16ee9a283bd9b153400743c4b1c"><span class="std std-ref">eos::agent_handler::on_initialized</span></a> virtual function is called, the manager is valid for use. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
+<dl class="cpp function">
+<dt id="_CPPv4N3eos10system_mgrD0Ev">
+<span id="_CPPv3N3eos10system_mgrD0Ev"></span><span id="_CPPv2N3eos10system_mgrD0Ev"></span><span id="eos::system_mgr::~system_mgr"></span><span class="target" id="classeos_1_1system__mgr_1a6ddeb4b881d78558e94f91f477ca8817"></span><em class="property">virtual</em> <code class="sig-name descname">~system_mgr</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos10system_mgrD0Ev" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos10system_mgr8hostnameEv">
+<span id="_CPPv3NK3eos10system_mgr8hostnameEv"></span><span id="_CPPv2NK3eos10system_mgr8hostnameEv"></span><span id="eos::system_mgr::hostnameC"></span><span class="target" id="classeos_1_1system__mgr_1aff5ba50647816a04d7ae5a887b37d972"></span><em class="property">virtual</em> <a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::string <code class="sig-name descname">hostname</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em> = 0<a class="headerlink" href="#_CPPv4NK3eos10system_mgr8hostnameEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Returns the system hostname. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos10system_mgr4fqdnEv">
+<span id="_CPPv3NK3eos10system_mgr4fqdnEv"></span><span id="_CPPv2NK3eos10system_mgr4fqdnEv"></span><span id="eos::system_mgr::fqdnC"></span><span class="target" id="classeos_1_1system__mgr_1a2bc2b7f958d3579462b772092284128c"></span><em class="property">virtual</em> <a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::string <code class="sig-name descname">fqdn</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em> = 0<a class="headerlink" href="#_CPPv4NK3eos10system_mgr4fqdnEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Returns the system fully qualified domain name. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos10system_mgr13serial_numberEv">
+<span id="_CPPv3NK3eos10system_mgr13serial_numberEv"></span><span id="_CPPv2NK3eos10system_mgr13serial_numberEv"></span><span id="eos::system_mgr::serial_numberC"></span><span class="target" id="classeos_1_1system__mgr_1a3002d9f99f50c17ea0e2620204d13097"></span><em class="property">virtual</em> <a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::string <code class="sig-name descname">serial_number</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em> = 0<a class="headerlink" href="#_CPPv4NK3eos10system_mgr13serial_numberEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Returns the system serial number. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos10system_mgr10model_nameEv">
+<span id="_CPPv3NK3eos10system_mgr10model_nameEv"></span><span id="_CPPv2NK3eos10system_mgr10model_nameEv"></span><span id="eos::system_mgr::model_nameC"></span><span class="target" id="classeos_1_1system__mgr_1ad6694417a004666748bd04f15dbbfbec"></span><em class="property">virtual</em> <a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::string <code class="sig-name descname">model_name</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em> = 0<a class="headerlink" href="#_CPPv4NK3eos10system_mgr10model_nameEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Returns the system model name. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos10system_mgr17hardware_revisionEv">
+<span id="_CPPv3NK3eos10system_mgr17hardware_revisionEv"></span><span id="_CPPv2NK3eos10system_mgr17hardware_revisionEv"></span><span id="eos::system_mgr::hardware_revisionC"></span><span class="target" id="classeos_1_1system__mgr_1a4e3780b267e524a81c1bb6a6e8e6d33c"></span><em class="property">virtual</em> <a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::string <code class="sig-name descname">hardware_revision</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em> = 0<a class="headerlink" href="#_CPPv4NK3eos10system_mgr17hardware_revisionEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Returns the hardware revision. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos10system_mgr17software_revisionEv">
+<span id="_CPPv3NK3eos10system_mgr17software_revisionEv"></span><span id="_CPPv2NK3eos10system_mgr17software_revisionEv"></span><span id="eos::system_mgr::software_revisionC"></span><span class="target" id="classeos_1_1system__mgr_1a598cb924e6a267830898d22f70dd912d"></span><em class="property">virtual</em> <a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::string <code class="sig-name descname">software_revision</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em> = 0<a class="headerlink" href="#_CPPv4NK3eos10system_mgr17software_revisionEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Returns the running software version. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos10system_mgr10system_macEv">
+<span id="_CPPv3NK3eos10system_mgr10system_macEv"></span><span id="_CPPv2NK3eos10system_mgr10system_macEv"></span><span id="eos::system_mgr::system_macC"></span><span class="target" id="classeos_1_1system__mgr_1afd3923b16fada7dfe75a9e10916cba49"></span><em class="property">virtual</em> <a class="reference internal" href="acl.html#_CPPv43eos" title="eos">eos</a>::<a class="reference internal" href="eth.html#_CPPv4N3eos10eth_addr_tE" title="eos::eth_addr_t">eth_addr_t</a> <code class="sig-name descname">system_mac</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em> = 0<a class="headerlink" href="#_CPPv4NK3eos10system_mgr10system_macEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Returns the system MAC address. </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-protected-functions">Protected Functions</p>
+<dl class="cpp function">
+<dt id="_CPPv4N3eos10system_mgr10system_mgrEv">
+<span id="_CPPv3N3eos10system_mgr10system_mgrEv"></span><span id="_CPPv2N3eos10system_mgr10system_mgrEv"></span><span id="eos::system_mgr::system_mgr"></span><span class="target" id="classeos_1_1system__mgr_1a25d7e240dbdc6a5d3e671839aa063e69"></span><code class="sig-name descname">system_mgr</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos10system_mgr10system_mgrEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-private-members">Private Members</p>
+<dl class="cpp var">
+<dt>
+<span class="target" id="classeos_1_1system__mgr_1afe23e10b75103c78afd120e550f01392"></span><code class="sig-name descname">system_mgr</code></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-friends">Friends</p>
+<dl class="friendclass">
+<dt>
+<em class="property">friend class</em> system_handler</dt>
+</dl>
+
+</div>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="subintf.html"
+                        title="previous chapter"><strong>subintf</strong></a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="timer.html"
+                        title="next chapter"><strong>timer</strong></a></p>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="timer.html" title="timer"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="subintf.html" title="subintf"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Arista EOS SDK 2.23.5 reference</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href=""><strong>system</strong></a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2014, Arista Networks.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.4.3.
+    </div>
+  </body>
+</html>

@@ -1,0 +1,757 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ip &#8212; Arista EOS SDK 2.23.5 reference</title>
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/eossdk.css" type="text/css" />
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="ip_intf" href="ip_intf.html" />
+    <link rel="prev" title="intf" href="intf.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="ip_intf.html" title="ip_intf"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="intf.html" title="intf"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Arista EOS SDK 2.23.5 reference</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href=""><strong>ip</strong></a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="ip">
+<h1><strong>ip</strong><a class="headerlink" href="#ip" title="Permalink to this headline">¶</a></h1>
+<p>IP address and prefix types.</p>
+<p>This module provides definitions of a variety of IP address types used throughout the SDK, including an IPv4 or IPv6 address, an IP prefix (a network address with a prefix length), and an IP address and mask. IPv4 and IPv6 are supported by each of these types, so there are no separate classes for each address family. For example, the <a class="reference internal" href="#classeos_1_1ip__addr__t"><span class="std std-ref">eos::ip_addr_t</span></a> IP address type has an af() accessor to inspect the address family.</p>
+<p>Utility functions are provided to parse or validate string format IP addresses and CIDR-style IP prefixes.</p>
+<p>Some examples of the manipulations available are as follows, see the function descriptions for more information.</p>
+<p><div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">//</span> <span class="n">Constructs</span> <span class="n">an</span> <span class="n">IPv4</span> <span class="n">address</span> <span class="kn">from</span> <span class="nn">a</span> <span class="n">string</span><span class="o">.</span> <span class="n">Must</span> <span class="n">be</span> <span class="n">a</span> <span class="n">valid</span> <span class="n">IP</span><span class="o">.</span>
+<span class="n">eos</span><span class="p">::</span><span class="n">ip_addr_t</span> <span class="n">v4</span><span class="p">(</span><span class="s2">&quot;1.2.3.4&quot;</span><span class="p">);</span>
+
+<span class="o">//</span> <span class="n">Constructs</span> <span class="n">an</span> <span class="n">IPv6</span> <span class="n">address</span> <span class="kn">from</span> <span class="nn">a</span> <span class="n">string</span><span class="o">.</span>
+<span class="n">eos</span><span class="p">::</span><span class="n">ip_addr_t</span> <span class="n">v6</span><span class="p">(</span><span class="s2">&quot;dead:beef::1&quot;</span><span class="p">);</span>
+
+<span class="o">//</span> <span class="n">Parses</span> <span class="ow">and</span> <span class="n">validates</span> <span class="n">an</span> <span class="n">IP</span> <span class="n">address</span>
+<span class="n">eos</span><span class="p">::</span><span class="n">ip_addr_t</span> <span class="n">address</span><span class="p">;</span>   <span class="o">//</span> <span class="n">the</span> <span class="n">IPv4</span><span class="o">/</span><span class="n">IPv6</span> <span class="n">address</span> <span class="nb">type</span>
+<span class="n">eos</span><span class="p">::</span><span class="n">ip_prefix_t</span> <span class="n">prefix</span><span class="p">;</span>  <span class="o">//</span> <span class="n">the</span> <span class="n">IPv4</span><span class="o">/</span><span class="n">IPv6</span> <span class="n">prefix</span> <span class="nb">type</span>
+<span class="nb">bool</span> <span class="n">valid</span><span class="p">;</span>
+
+<span class="o">//</span> <span class="n">valid</span> <span class="o">==</span> <span class="n">true</span><span class="p">,</span> <span class="ow">and</span> <span class="n">address</span> <span class="ow">is</span> <span class="n">changed</span> <span class="n">to</span> <span class="n">contain</span> <span class="n">the</span>
+<span class="o">//</span> <span class="n">representation</span> <span class="n">of</span> <span class="mf">1.1</span><span class="o">.</span><span class="mf">1.1</span> <span class="k">with</span> <span class="n">its</span> <span class="n">af</span><span class="p">()</span> <span class="o">==</span> <span class="n">eos</span><span class="p">::</span><span class="n">AF_IPV4</span>
+<span class="n">valid</span> <span class="o">=</span> <span class="n">eos</span><span class="p">::</span><span class="n">parse_ip_addr</span><span class="p">(</span><span class="s2">&quot;1.1.1.1&quot;</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">address</span><span class="p">);</span>
+<span class="o">//</span> <span class="n">valid</span> <span class="o">==</span> <span class="n">false</span><span class="p">,</span> <span class="n">address</span> <span class="ow">is</span> <span class="n">unchanged</span>
+<span class="n">valid</span> <span class="o">=</span> <span class="n">eos</span><span class="p">::</span><span class="n">parse_ip_addr</span><span class="p">(</span><span class="s2">&quot;not_an_ip&quot;</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">address</span><span class="p">);</span>
+
+<span class="o">//</span> <span class="n">Parses</span> <span class="ow">and</span> <span class="n">validates</span> <span class="n">an</span> <span class="n">IP</span> <span class="n">prefix</span>
+
+<span class="o">//</span> <span class="n">The</span> <span class="n">IP</span> <span class="n">address</span> <span class="n">must</span> <span class="n">be</span> <span class="n">the</span> <span class="n">prefix</span> <span class="n">network</span> <span class="n">address</span><span class="p">,</span> <span class="k">else</span> <span class="n">the</span>
+<span class="o">//</span> <span class="n">prefix</span> <span class="ow">is</span> <span class="n">invalid</span><span class="o">.</span> <span class="n">Like</span> <span class="n">parse_ip_address</span><span class="p">,</span> <span class="n">prefix</span> <span class="ow">is</span> <span class="n">updated</span> <span class="n">to</span>
+<span class="o">//</span> <span class="n">contain</span> <span class="n">the</span> <span class="n">representation</span> <span class="n">of</span> <span class="n">the</span> <span class="n">parsed</span> <span class="n">prefix</span> <span class="k">if</span> <span class="ow">and</span> <span class="n">only</span> <span class="k">if</span>
+<span class="o">//</span> <span class="n">valid</span> <span class="o">==</span> <span class="n">true</span><span class="o">.</span>
+<span class="n">valid</span> <span class="o">=</span> <span class="n">eos</span><span class="p">::</span><span class="n">parse_ip_prefix</span><span class="p">(</span><span class="s2">&quot;192.0.2.0/24&quot;</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">prefix</span><span class="p">);</span> <span class="o">//</span> <span class="n">valid</span> <span class="o">==</span> <span class="n">true</span>
+<span class="n">valid</span> <span class="o">=</span> <span class="n">eos</span><span class="p">::</span><span class="n">parse_ip_prefix</span><span class="p">(</span><span class="s2">&quot;192.0.2.1/24&quot;</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">prefix</span><span class="p">);</span> <span class="o">//</span> <span class="n">valid</span> <span class="o">==</span> <span class="n">false</span>
+<span class="n">valid</span> <span class="o">=</span> <span class="n">eos</span><span class="p">::</span><span class="n">parse_ip_prefix</span><span class="p">(</span><span class="s2">&quot;192.0.2.1/32&quot;</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">prefix</span><span class="p">);</span> <span class="o">//</span> <span class="n">valid</span> <span class="o">==</span> <span class="n">true</span>
+<span class="n">valid</span> <span class="o">=</span> <span class="n">eos</span><span class="p">::</span><span class="n">parse_ip_prefix</span><span class="p">(</span><span class="s2">&quot;::1/128&quot;</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">prefix</span><span class="p">);</span> <span class="o">//</span> <span class="n">valid</span> <span class="o">==</span> <span class="n">true</span>
+
+<span class="o">//</span> <span class="n">Construct</span> <span class="n">an</span> <span class="n">IP</span> <span class="n">address</span> <span class="ow">and</span> <span class="n">mask</span> <span class="k">for</span> <span class="mf">192.0</span><span class="o">.</span><span class="mf">2.200</span><span class="o">/</span><span class="mi">24</span> <span class="p">(</span><span class="n">e</span><span class="o">.</span><span class="n">g</span><span class="o">.</span><span class="p">,</span> <span class="n">used</span> <span class="n">to</span>
+<span class="o">//</span> <span class="n">plumb</span> <span class="n">a</span> <span class="n">network</span> <span class="n">interface</span> <span class="ow">in</span> <span class="n">ip_intf</span><span class="o">.</span><span class="n">h</span><span class="p">)</span>
+<span class="n">eos</span><span class="p">::</span><span class="n">ip_addr_t</span> <span class="n">intf_addr</span><span class="p">(</span><span class="s2">&quot;192.0.2.200&quot;</span><span class="p">);</span>
+<span class="n">eos</span><span class="p">::</span><span class="n">ip_addr_mask_t</span> <span class="n">intf_addr_mask</span><span class="p">(</span><span class="n">intf_addr</span><span class="p">,</span> <span class="mi">24</span><span class="p">);</span>
+</pre></div>
+</div>
+ </p>
+<dl class="cpp struct">
+<dt id="_CPPv4IENSt4hashIN3eos9ip_addr_tEEE">
+<span id="_CPPv3IENSt4hashIN3eos9ip_addr_tEEE"></span><span id="_CPPv2IENSt4hashIN3eos9ip_addr_tEEE"></span>template&lt;&gt;<br /><span class="target" id="structstd_1_1hash_3_01eos_1_1ip__addr__t_01_4"></span><em class="property">struct </em><code class="sig-name descname">hash</code>&lt;<a class="reference internal" href="acl.html#_CPPv43eos" title="eos">eos</a>::<a class="reference internal" href="#_CPPv4N3eos9ip_addr_tE" title="eos::ip_addr_t">ip_addr_t</a>&gt;<a class="headerlink" href="#_CPPv4IENSt4hashIN3eos9ip_addr_tEEE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
+<dl class="cpp function">
+<dt id="_CPPv4NKSt4hashIN3eos9ip_addr_tEEclERKN3eos9ip_addr_tE">
+<span id="_CPPv3NKSt4hashIN3eos9ip_addr_tEEclERKN3eos9ip_addr_tE"></span><span id="_CPPv2NKSt4hashIN3eos9ip_addr_tEEclERKN3eos9ip_addr_tE"></span><span id="std::hash:eos::ip_addr_t:::call-operator__eos::ip_addr_tCRC"></span><span class="target" id="structstd_1_1hash_3_01eos_1_1ip__addr__t_01_4_1a66d9ff983dd65d4b203323cf018da22d"></span>size_t <code class="sig-name descname">operator()</code><span class="sig-paren">(</span><a class="reference internal" href="acl.html#_CPPv43eos" title="eos">eos</a>::<a class="reference internal" href="#_CPPv4N3eos9ip_addr_tE" title="eos::ip_addr_t">ip_addr_t</a> <em class="property">const</em>&amp;<span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NKSt4hashIN3eos9ip_addr_tEEclERKN3eos9ip_addr_tE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="cpp type">
+<dt id="_CPPv43eos">
+<span id="_CPPv33eos"></span><span id="_CPPv23eos"></span><span id="eos"></span><span class="target" id="namespaceeos"></span><em class="property">namespace </em><code class="sig-name descname">eos</code><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp type">
+<dt id="_CPPv4St">
+<span id="_CPPv3St"></span><span id="_CPPv2St"></span><span id="std"></span><span class="target" id="namespacestd"></span><em class="property">namespace </em><code class="sig-name descname">std</code><a class="headerlink" href="#_CPPv4St" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>STL namespace. </p>
+<dl class="cpp struct">
+<dt>
+<span class="target" id="structstd_1_1hash_3_01eos_1_1ip__addr__t_01_4"></span><code class="sig-name descname">template&lt;&gt; ip_addr_t &gt;</code></dt>
+<dd><div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
+<dl class="cpp function">
+<dt id="_CPPv4NKSt19PhonyNameDueToErrorclERKN3eos9ip_addr_tE">
+<span id="_CPPv3NKSt19PhonyNameDueToErrorclERKN3eos9ip_addr_tE"></span><span id="_CPPv2NKSt19PhonyNameDueToErrorclERKN3eos9ip_addr_tE"></span><span id="std::PhonyNameDueToError::call-operator__eos::ip_addr_tCRC"></span><span class="target" id="structstd_1_1hash_3_01eos_1_1ip__addr__t_01_4_1a66d9ff983dd65d4b203323cf018da22d"></span>size_t <code class="sig-name descname">operator()</code><span class="sig-paren">(</span><a class="reference internal" href="acl.html#_CPPv43eos" title="eos">eos</a>::<a class="reference internal" href="#_CPPv4N3eos9ip_addr_tE" title="eos::ip_addr_t">ip_addr_t</a> <em class="property">const</em>&amp;<span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NKSt19PhonyNameDueToErrorclERKN3eos9ip_addr_tE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+</dd></dl>
+
+</dd></dl>
+
+<div class="section" id="type-definitions-in-ip">
+<h2>Type definitions in <strong>ip</strong><a class="headerlink" href="#type-definitions-in-ip" title="Permalink to this headline">¶</a></h2>
+<dl class="cpp type">
+<dt>
+<span class="target" id="namespaceeos"></span><em class="property">namespace </em><code class="sig-name descname">eos</code><br /></dt>
+<dd><div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-enums">Enums</p>
+<dl class="cpp enum">
+<dt id="_CPPv4N3eos4af_tE">
+<span id="_CPPv3N3eos4af_tE"></span><span id="_CPPv2N3eos4af_tE"></span><span class="target" id="types_2ip_8h_1a094ddcbf8862547ca5f82c04a2c41e36"></span><em class="property">enum </em><code class="sig-name descname">af_t</code><a class="headerlink" href="#_CPPv4N3eos4af_tE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>The address family of an IP address. </p>
+<p><em>Values:</em></p>
+<dl class="cpp enumerator">
+<dt id="_CPPv4N3eos4af_t7AF_NULLE">
+<span id="_CPPv3N3eos4af_t7AF_NULLE"></span><span id="_CPPv2N3eos4af_t7AF_NULLE"></span><span class="target" id="types_2ip_8h_1a094ddcbf8862547ca5f82c04a2c41e36a047ed9c6a41e538d7fb16f1f280bddd2"></span><em class="property">enumerator </em><code class="sig-name descname">AF_NULL</code><a class="headerlink" href="#_CPPv4N3eos4af_t7AF_NULLE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Not a valid address family (e.g., the default address). </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt id="_CPPv4N3eos4af_t7AF_IPV4E">
+<span id="_CPPv3N3eos4af_t7AF_IPV4E"></span><span id="_CPPv2N3eos4af_t7AF_IPV4E"></span><span class="target" id="types_2ip_8h_1a094ddcbf8862547ca5f82c04a2c41e36af3fcf2e6c20c5df21a0a488a83edd739"></span><em class="property">enumerator </em><code class="sig-name descname">AF_IPV4</code><a class="headerlink" href="#_CPPv4N3eos4af_t7AF_IPV4E" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>An IPv4 address. </p>
+</dd></dl>
+
+<dl class="cpp enumerator">
+<dt id="_CPPv4N3eos4af_t7AF_IPV6E">
+<span id="_CPPv3N3eos4af_t7AF_IPV6E"></span><span id="_CPPv2N3eos4af_t7AF_IPV6E"></span><span class="target" id="types_2ip_8h_1a094ddcbf8862547ca5f82c04a2c41e36a9c714c8f4e991790161d9c20d981a93d"></span><em class="property">enumerator </em><code class="sig-name descname">AF_IPV6</code><a class="headerlink" href="#_CPPv4N3eos4af_t7AF_IPV6E" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>An IPv6 address. </p>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-functions">Functions</p>
+<dl class="cpp function">
+<dt id="_CPPv4N3eos13parse_ip_addrEPKcP9ip_addr_t">
+<span id="_CPPv3N3eos13parse_ip_addrEPKcP9ip_addr_t"></span><span id="_CPPv2N3eos13parse_ip_addrEPKcP9ip_addr_t"></span><span id="eos::parse_ip_addr__cCP.ip_addr_tP"></span><span class="target" id="types_2ip_8h_1ab98bcdb639c84dfd0a68cc767fc31cf1"></span>bool <code class="sig-name descname">parse_ip_addr</code><span class="sig-paren">(</span>char <em class="property">const</em> *<em>addr</em>, <a class="reference internal" href="#_CPPv4N3eos9ip_addr_tE" title="eos::ip_addr_t">ip_addr_t</a> *<em>result</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos13parse_ip_addrEPKcP9ip_addr_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Parses a string IP address, returning true if the address is valid. Supports both IPv4 and IPv6 addresses.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>addr</strong> – <strong>[in]</strong> Pointer to a C string containing an address to parse. </p></li>
+<li><p><strong>result</strong> – <strong>[out]</strong> Mutable arugment to place a successfully parsed result into. </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>true if the address parsed successfully, false otherwise. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos15parse_ip_prefixEPKcP11ip_prefix_t">
+<span id="_CPPv3N3eos15parse_ip_prefixEPKcP11ip_prefix_t"></span><span id="_CPPv2N3eos15parse_ip_prefixEPKcP11ip_prefix_t"></span><span id="eos::parse_ip_prefix__cCP.ip_prefix_tP"></span><span class="target" id="types_2ip_8h_1ad5069b0b8625069c2d228e611830ef0a"></span>bool <code class="sig-name descname">parse_ip_prefix</code><span class="sig-paren">(</span>char <em class="property">const</em> *<em>addr</em>, <a class="reference internal" href="#_CPPv4N3eos11ip_prefix_tE" title="eos::ip_prefix_t">ip_prefix_t</a> *<em>result</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos15parse_ip_prefixEPKcP11ip_prefix_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Parses an IP route prefix, returns true if the prefix is valid. Supports both IPv4 and IPv6 route prefixes.</p>
+<p>For example, “10.1.2.0/24” or “fffe:abab:1234::/96” are legal, but “10.1.2.7/24” is not, as 10.1.2.7 is not a valid network address for a 24-bit prefix length.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>addr</strong> – <strong>[in]</strong> Pointer to a C string containing a prefix to parse. </p></li>
+<li><p><strong>result</strong> – <strong>[out]</strong> Mutable arugment to place a successfully parsed result into. </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>true if the route prefix parsed successfully, false otherwise. </p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+<dl class="cpp class">
+<dt id="_CPPv4N3eos9ip_addr_tE">
+<span id="_CPPv3N3eos9ip_addr_tE"></span><span id="_CPPv2N3eos9ip_addr_tE"></span><span id="eos::ip_addr_t"></span><span class="target" id="classeos_1_1ip__addr__t"></span><em class="property">class </em><code class="sig-name descname">ip_addr_t</code><a class="headerlink" href="#_CPPv4N3eos9ip_addr_tE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><div class="docutils container">
+<em>#include &lt;ip.h&gt;</em></div>
+<p>An IP address. Both IPv4 and IPv6 addresses are supported by this class. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
+<dl class="cpp function">
+<dt id="_CPPv4N3eos9ip_addr_t9ip_addr_tEv">
+<span id="_CPPv3N3eos9ip_addr_t9ip_addr_tEv"></span><span id="_CPPv2N3eos9ip_addr_t9ip_addr_tEv"></span><span id="eos::ip_addr_t::ip_addr_t"></span><span class="target" id="classeos_1_1ip__addr__t_1a1ef3f535c2ef460bbb3bfe5784868f15"></span><code class="sig-name descname">ip_addr_t</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos9ip_addr_t9ip_addr_tEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos9ip_addr_t9ip_addr_tE4af_tPK7uint8_t">
+<span id="_CPPv3N3eos9ip_addr_t9ip_addr_tE4af_tPK7uint8_t"></span><span id="_CPPv2N3eos9ip_addr_t9ip_addr_tE4af_tPK7uint8_t"></span><span id="eos::ip_addr_t::ip_addr_t__af_t.uint8_tCP"></span><span class="target" id="classeos_1_1ip__addr__t_1afc217c96d30c212e4145078976c53107"></span><code class="sig-name descname">ip_addr_t</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos4af_tE" title="eos::af_t">af_t</a> <em>af</em>, uint8_t <em class="property">const</em> *<em>addr</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos9ip_addr_t9ip_addr_tE4af_tPK7uint8_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Creates an address from an address family and a network order array of bytes. Pass exactly 4 bytes for AF_IPV4 address type or 16 bytes for AF_IPV6. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos9ip_addr_t9ip_addr_tERK7in_addr">
+<span id="_CPPv3N3eos9ip_addr_t9ip_addr_tERK7in_addr"></span><span id="_CPPv2N3eos9ip_addr_t9ip_addr_tERK7in_addr"></span><span id="eos::ip_addr_t::ip_addr_t__in_addrCR"></span><span class="target" id="classeos_1_1ip__addr__t_1a75015945c573d218c837f12d59be36a4"></span><em class="property">explicit</em> <code class="sig-name descname">ip_addr_t</code><span class="sig-paren">(</span>in_addr <em class="property">const</em> &amp;<em>addr</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos9ip_addr_t9ip_addr_tERK7in_addr" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Creates an IP address from a POSIX in_addr (IPv4). </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos9ip_addr_t9ip_addr_tERK8in6_addr">
+<span id="_CPPv3N3eos9ip_addr_t9ip_addr_tERK8in6_addr"></span><span id="_CPPv2N3eos9ip_addr_t9ip_addr_tERK8in6_addr"></span><span id="eos::ip_addr_t::ip_addr_t__in6_addrCR"></span><span class="target" id="classeos_1_1ip__addr__t_1afb41c468f4295a0edc1481654fcdd3bd"></span><em class="property">explicit</em> <code class="sig-name descname">ip_addr_t</code><span class="sig-paren">(</span>in6_addr <em class="property">const</em> &amp;<em>addr</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos9ip_addr_t9ip_addr_tERK8in6_addr" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Creates an IP address from a POSIX in6_addr (IPv6). </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos9ip_addr_t9ip_addr_tERKNSt6stringE">
+<span id="_CPPv3N3eos9ip_addr_t9ip_addr_tERKNSt6stringE"></span><span id="_CPPv2N3eos9ip_addr_t9ip_addr_tERKNSt6stringE"></span><span id="eos::ip_addr_t::ip_addr_t__ssCR"></span><span class="target" id="classeos_1_1ip__addr__t_1ae58f2a793f201d6965c4d75aa65c4537"></span><em class="property">explicit</em> <code class="sig-name descname">ip_addr_t</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4St" title="std">std</a>::string <em class="property">const</em> &amp;<em>address_string</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos9ip_addr_t9ip_addr_tERKNSt6stringE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Creates an IP address from the provided string. <a class="reference internal" href="panic.html#panic_8h_1a19da919b3c5802bfbb561e7f16c7d8ce"><span class="std std-ref">panic()</span></a> is called if an invalid (non IPv4 or IPv6) address is supplied. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>addr</strong> – <strong>[in]</strong> An IPv4 or IPv6 address as a string. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos9ip_addr_t9ip_addr_tEPKc">
+<span id="_CPPv3N3eos9ip_addr_t9ip_addr_tEPKc"></span><span id="_CPPv2N3eos9ip_addr_t9ip_addr_tEPKc"></span><span id="eos::ip_addr_t::ip_addr_t__cCP"></span><span class="target" id="classeos_1_1ip__addr__t_1a0a6398d3dc84a6a36601a5a57b788225"></span><em class="property">explicit</em> <code class="sig-name descname">ip_addr_t</code><span class="sig-paren">(</span>char <em class="property">const</em> *<em>address_string</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos9ip_addr_t9ip_addr_tEPKc" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Creates an IP address from the provided string. <a class="reference internal" href="panic.html#panic_8h_1a19da919b3c5802bfbb561e7f16c7d8ce"><span class="std std-ref">panic()</span></a> is called if an invalid (non IPv4 or IPv6) address is supplied. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>addr</strong> – <strong>[in]</strong> An IPv4 or IPv6 address as a string. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos9ip_addr_t9ip_addr_tE11uint32_be_t">
+<span id="_CPPv3N3eos9ip_addr_t9ip_addr_tE11uint32_be_t"></span><span id="_CPPv2N3eos9ip_addr_t9ip_addr_tE11uint32_be_t"></span><span id="eos::ip_addr_t::ip_addr_t__uint32_be_t"></span><span class="target" id="classeos_1_1ip__addr__t_1ab200b2c9cf33c387e6260867f93021d7"></span><em class="property">explicit</em> <code class="sig-name descname">ip_addr_t</code><span class="sig-paren">(</span><a class="reference internal" href="base.html#_CPPv4N3eos11uint32_be_tE" title="eos::uint32_be_t">uint32_be_t</a> <em>addr_v4</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos9ip_addr_t9ip_addr_tE11uint32_be_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Takes a network order 32-bit unsigned integer as an IPv4 address. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos9ip_addr_t2afEv">
+<span id="_CPPv3NK3eos9ip_addr_t2afEv"></span><span id="_CPPv2NK3eos9ip_addr_t2afEv"></span><span id="eos::ip_addr_t::afC"></span><span class="target" id="classeos_1_1ip__addr__t_1a8a4527dd79eeaadf3d6e9bf8854f23db"></span><a class="reference internal" href="#_CPPv4N3eos4af_tE" title="eos::af_t">af_t</a> <code class="sig-name descname">af</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos9ip_addr_t2afEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Getter for ‘af’: The address family of this IP address. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos9ip_addr_teqERK9ip_addr_t">
+<span id="_CPPv3NK3eos9ip_addr_teqERK9ip_addr_t"></span><span id="_CPPv2NK3eos9ip_addr_teqERK9ip_addr_t"></span><span id="eos::ip_addr_t::eq-operator__ip_addr_tCRC"></span><span class="target" id="classeos_1_1ip__addr__t_1a838bef4b388b70e7360b081526aafaaf"></span>bool <code class="sig-name descname">operator==</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos9ip_addr_tE" title="eos::ip_addr_t">ip_addr_t</a> <em class="property">const</em> &amp;<em>other</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos9ip_addr_teqERK9ip_addr_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos9ip_addr_tneERK9ip_addr_t">
+<span id="_CPPv3NK3eos9ip_addr_tneERK9ip_addr_t"></span><span id="_CPPv2NK3eos9ip_addr_tneERK9ip_addr_t"></span><span id="eos::ip_addr_t::neq-operator__ip_addr_tCRC"></span><span class="target" id="classeos_1_1ip__addr__t_1a10a7803edd881fa5b8f070fe8e28216c"></span>bool <code class="sig-name descname">operator!=</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos9ip_addr_tE" title="eos::ip_addr_t">ip_addr_t</a> <em class="property">const</em> &amp;<em>other</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos9ip_addr_tneERK9ip_addr_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos9ip_addr_tltERK9ip_addr_t">
+<span id="_CPPv3NK3eos9ip_addr_tltERK9ip_addr_t"></span><span id="_CPPv2NK3eos9ip_addr_tltERK9ip_addr_t"></span><span id="eos::ip_addr_t::lt-operator__ip_addr_tCRC"></span><span class="target" id="classeos_1_1ip__addr__t_1a7befd300f7ca3ff22002ba88956cfc69"></span>bool <code class="sig-name descname">operator&lt;</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos9ip_addr_tE" title="eos::ip_addr_t">ip_addr_t</a> <em class="property">const</em> &amp;<em>other</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos9ip_addr_tltERK9ip_addr_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos9ip_addr_t4addrEv">
+<span id="_CPPv3NK3eos9ip_addr_t4addrEv"></span><span id="_CPPv2NK3eos9ip_addr_t4addrEv"></span><span id="eos::ip_addr_t::addrC"></span><span class="target" id="classeos_1_1ip__addr__t_1ae5fc1683f0822b8a532bf53cc416033b"></span>uint8_t <em class="property">const</em> *<code class="sig-name descname">addr</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos9ip_addr_t4addrEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>The IP address as a big endian array of bytes. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>A byte array, 4 bytes long if <a class="reference internal" href="#classeos_1_1ip__addr__t_1a8a4527dd79eeaadf3d6e9bf8854f23db"><span class="std std-ref">af()</span></a> == AF_IPV4 and 16 for AF_IPV6. </p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos9ip_addr_t7addr_v4Ev">
+<span id="_CPPv3NK3eos9ip_addr_t7addr_v4Ev"></span><span id="_CPPv2NK3eos9ip_addr_t7addr_v4Ev"></span><span id="eos::ip_addr_t::addr_v4C"></span><span class="target" id="classeos_1_1ip__addr__t_1a106dc5c994542894a29fbbc6826b9974"></span><a class="reference internal" href="base.html#_CPPv4N3eos11uint32_be_tE" title="eos::uint32_be_t">uint32_be_t</a> <code class="sig-name descname">addr_v4</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos9ip_addr_t7addr_v4Ev" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>The IP address as a big endian 32-bit integer.</p>
+<p>Only valid for IPv4 addresses; <a class="reference internal" href="panic.html#panic_8h_1a19da919b3c5802bfbb561e7f16c7d8ce"><span class="std std-ref">panic()</span></a> is called if used on an AF_IPV6 family address. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos9ip_addr_t9to_stringEv">
+<span id="_CPPv3NK3eos9ip_addr_t9to_stringEv"></span><span id="_CPPv2NK3eos9ip_addr_t9to_stringEv"></span><span id="eos::ip_addr_t::to_stringC"></span><span class="target" id="classeos_1_1ip__addr__t_1afdf84b3508249015ac39cc80873b4cf1"></span><a class="reference internal" href="#_CPPv4St" title="std">std</a>::string <code class="sig-name descname">to_string</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos9ip_addr_t9to_stringEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>String representation of the IP address, e.g. “1.2.3.4” or “f00d::1”. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos9ip_addr_tcvbEv">
+<span id="_CPPv3NK3eos9ip_addr_tcvbEv"></span><span id="_CPPv2NK3eos9ip_addr_tcvbEv"></span><span id="eos::ip_addr_t::castto-b-operatorC"></span><span class="target" id="classeos_1_1ip__addr__t_1af6a5356fae22a66d11852128ba6387d1"></span><em class="property">explicit</em> <code class="sig-name descname">operator bool</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos9ip_addr_tcvbEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos9ip_addr_t4hashEv">
+<span id="_CPPv3NK3eos9ip_addr_t4hashEv"></span><span id="_CPPv2NK3eos9ip_addr_t4hashEv"></span><span id="eos::ip_addr_t::hashC"></span><span class="target" id="classeos_1_1ip__addr__t_1ae6a0aae31f91a812985ebbd6e36ba4da"></span>uint32_t <code class="sig-name descname">hash</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos9ip_addr_t4hashEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>The hash function for type <a class="reference internal" href="#classeos_1_1ip__addr__t"><span class="std std-ref">ip_addr_t</span></a>. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos9ip_addr_t6mix_meER8hash_mix">
+<span id="_CPPv3NK3eos9ip_addr_t6mix_meER8hash_mix"></span><span id="_CPPv2NK3eos9ip_addr_t6mix_meER8hash_mix"></span><span id="eos::ip_addr_t::mix_me__hash_mixRC"></span><span class="target" id="classeos_1_1ip__addr__t_1a32e3ab258ba0f37bb374cbd71e0db7ce"></span>void <code class="sig-name descname">mix_me</code><span class="sig-paren">(</span><a class="reference internal" href="hash_mix.html#_CPPv4N3eos8hash_mixE" title="eos::hash_mix">hash_mix</a> &amp;<em>h</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos9ip_addr_t6mix_meER8hash_mix" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>The hash mix function for type <a class="reference internal" href="#classeos_1_1ip__addr__t"><span class="std std-ref">ip_addr_t</span></a>. </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-members">Public Members</p>
+<dl class="cpp var">
+<dt id="_CPPv4N3eos9ip_addr_t5bytesE">
+<span id="_CPPv3N3eos9ip_addr_t5bytesE"></span><span id="_CPPv2N3eos9ip_addr_t5bytesE"></span><span id="eos::ip_addr_t::bytes__uint8_tA"></span><span class="target" id="classeos_1_1ip__addr__t_1a71a69bf0d8329c5e531b153a6a19e835"></span>uint8_t <code class="sig-name descname">bytes</code>[16]<a class="headerlink" href="#_CPPv4N3eos9ip_addr_t5bytesE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp var">
+<dt id="_CPPv4N3eos9ip_addr_t5wordsE">
+<span id="_CPPv3N3eos9ip_addr_t5wordsE"></span><span id="_CPPv2N3eos9ip_addr_t5wordsE"></span><span id="eos::ip_addr_t::words__uint32_tA"></span><span class="target" id="classeos_1_1ip__addr__t_1a170647efcc978e83632feffff231d9c1"></span>uint32_t <code class="sig-name descname">words</code>[4]<a class="headerlink" href="#_CPPv4N3eos9ip_addr_t5wordsE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-private-members">Private Members</p>
+<dl class="cpp var">
+<dt id="_CPPv4N3eos9ip_addr_t3af_E">
+<span id="_CPPv3N3eos9ip_addr_t3af_E"></span><span id="_CPPv2N3eos9ip_addr_t3af_E"></span><span id="eos::ip_addr_t::af___af_t"></span><span class="target" id="classeos_1_1ip__addr__t_1a685a6ab919a603b1b4d3cf75add84a80"></span><a class="reference internal" href="#_CPPv4N3eos4af_tE" title="eos::af_t">af_t</a> <code class="sig-name descname">af_</code><a class="headerlink" href="#_CPPv4N3eos9ip_addr_t3af_E" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp var">
+<dt id="_CPPv4N3eos9ip_addr_t5addr_E">
+<span id="_CPPv3N3eos9ip_addr_t5addr_E"></span><span id="_CPPv2N3eos9ip_addr_t5addr_E"></span><span class="target" id="classeos_1_1ip__addr__t_1aa7479fd1e8ea03849d4c3654b487da92"></span><em class="property">union</em> <a class="reference internal" href="acl.html#_CPPv43eos" title="eos">eos</a>::<a class="reference internal" href="#_CPPv4N3eos9ip_addr_tE" title="eos::ip_addr_t">ip_addr_t</a>::<strong>[anonymous]</strong> <code class="sig-name descname">addr_</code><a class="headerlink" href="#_CPPv4N3eos9ip_addr_t5addr_E" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-friends">Friends</p>
+<dl class="cpp function">
+<dt id="_CPPv4N3eos9ip_addr_tlsERNSt7ostreamERK9ip_addr_t">
+<span id="_CPPv3N3eos9ip_addr_tlsERNSt7ostreamERK9ip_addr_t"></span><span id="_CPPv2N3eos9ip_addr_tlsERNSt7ostreamERK9ip_addr_t"></span><span id="eos::ip_addr_t::lshift-operator__osR.ip_addr_tCR"></span><span class="target" id="classeos_1_1ip__addr__t_1aaceac88efe457f7fdeb72f2da59e8242"></span><em class="property">friend</em> <a class="reference internal" href="#_CPPv4St" title="std">std</a>::ostream &amp;<code class="sig-name descname">operator&lt;&lt;</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4St" title="std">std</a>::ostream &amp;<em>os</em>, <em class="property">const</em> <a class="reference internal" href="#_CPPv4N3eos9ip_addr_tE" title="eos::ip_addr_t">ip_addr_t</a> &amp;<em>obj</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos9ip_addr_tlsERNSt7ostreamERK9ip_addr_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>A utility stream operator that adds a string representation of <a class="reference internal" href="#classeos_1_1ip__addr__t"><span class="std std-ref">ip_addr_t</span></a> to the ostream. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos9ip_addr_t13parse_ip_addrEPKcP9ip_addr_t">
+<span id="_CPPv3N3eos9ip_addr_t13parse_ip_addrEPKcP9ip_addr_t"></span><span id="_CPPv2N3eos9ip_addr_t13parse_ip_addrEPKcP9ip_addr_t"></span><span id="eos::ip_addr_t::parse_ip_addr__cCP.ip_addr_tP"></span><span class="target" id="classeos_1_1ip__addr__t_1ab1df59a53fb3a0db993b25aff06892bc"></span><em class="property">friend</em> bool <code class="sig-name descname">parse_ip_addr</code><span class="sig-paren">(</span>char <em class="property">const</em>*, <a class="reference internal" href="#_CPPv4N3eos9ip_addr_tE" title="eos::ip_addr_t">ip_addr_t</a> *<em>result</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos9ip_addr_t13parse_ip_addrEPKcP9ip_addr_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Parses a string IP address, returning true if the address is valid. Supports both IPv4 and IPv6 addresses.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>addr</strong> – <strong>[in]</strong> Pointer to a C string containing an address to parse. </p></li>
+<li><p><strong>result</strong> – <strong>[out]</strong> Mutable arugment to place a successfully parsed result into. </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>true if the address parsed successfully, false otherwise. </p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="cpp class">
+<dt id="_CPPv4N3eos11ip_prefix_tE">
+<span id="_CPPv3N3eos11ip_prefix_tE"></span><span id="_CPPv2N3eos11ip_prefix_tE"></span><span id="eos::ip_prefix_t"></span><span class="target" id="classeos_1_1ip__prefix__t"></span><em class="property">class </em><code class="sig-name descname">ip_prefix_t</code><a class="headerlink" href="#_CPPv4N3eos11ip_prefix_tE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><div class="docutils container">
+<em>#include &lt;ip.h&gt;</em></div>
+<p>An IPv4 or IPv6 route prefix.</p>
+<p>A route prefix combines a network address and a prefix length. A network address has no 1 bits in the host component of the address (i.e., only the first prefix_length bits of the address can be non-zero). </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
+<dl class="cpp function">
+<dt id="_CPPv4N3eos11ip_prefix_t11ip_prefix_tEv">
+<span id="_CPPv3N3eos11ip_prefix_t11ip_prefix_tEv"></span><span id="_CPPv2N3eos11ip_prefix_t11ip_prefix_tEv"></span><span id="eos::ip_prefix_t::ip_prefix_t"></span><span class="target" id="classeos_1_1ip__prefix__t_1a040906d36c866347bb300e555e66a302"></span><code class="sig-name descname">ip_prefix_t</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos11ip_prefix_t11ip_prefix_tEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos11ip_prefix_t11ip_prefix_tERK9ip_addr_t7uint8_t">
+<span id="_CPPv3N3eos11ip_prefix_t11ip_prefix_tERK9ip_addr_t7uint8_t"></span><span id="_CPPv2N3eos11ip_prefix_t11ip_prefix_tERK9ip_addr_t7uint8_t"></span><span id="eos::ip_prefix_t::ip_prefix_t__ip_addr_tCR.uint8_t"></span><span class="target" id="classeos_1_1ip__prefix__t_1abf1ab72815d9f5c8d23a2fb8aaa38dc2"></span><code class="sig-name descname">ip_prefix_t</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos9ip_addr_tE" title="eos::ip_addr_t">ip_addr_t</a> <em class="property">const</em> &amp;<em>addr</em>, uint8_t <em>prefix_length</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos11ip_prefix_t11ip_prefix_tERK9ip_addr_t7uint8_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Constructs a prefix from an IP network address and prefix length in bits.</p>
+<p><a class="reference internal" href="panic.html#panic_8h_1a19da919b3c5802bfbb561e7f16c7d8ce"><span class="std std-ref">panic()</span></a> is called if the address provided is not a valid network address given the provided prefix length. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos11ip_prefix_t11ip_prefix_tEPKc">
+<span id="_CPPv3N3eos11ip_prefix_t11ip_prefix_tEPKc"></span><span id="_CPPv2N3eos11ip_prefix_t11ip_prefix_tEPKc"></span><span id="eos::ip_prefix_t::ip_prefix_t__cCP"></span><span class="target" id="classeos_1_1ip__prefix__t_1a44d2a4b019e5a5ce10f86f0eb6d3c936"></span><em class="property">explicit</em> <code class="sig-name descname">ip_prefix_t</code><span class="sig-paren">(</span>char <em class="property">const</em> *<em>prefix_string</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos11ip_prefix_t11ip_prefix_tEPKc" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Constructs a prefix with the provided IP prefix string. Supports IPv4 and IPv6 address prefixes. This constructor will call <a class="reference internal" href="panic.html#panic_8h_1a19da919b3c5802bfbb561e7f16c7d8ce"><span class="std std-ref">panic()</span></a> if the string passed is not a valid network prefix (e.g., “10.1.2.7/24” is invalid, while “10.1.2.0/24” is OK). </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos11ip_prefix_t13prefix_lengthEv">
+<span id="_CPPv3NK3eos11ip_prefix_t13prefix_lengthEv"></span><span id="_CPPv2NK3eos11ip_prefix_t13prefix_lengthEv"></span><span id="eos::ip_prefix_t::prefix_lengthC"></span><span class="target" id="classeos_1_1ip__prefix__t_1abeab3f74b8a68da5f51c907ff3232578"></span>uint8_t <code class="sig-name descname">prefix_length</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos11ip_prefix_t13prefix_lengthEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Getter for ‘prefix_length’: the prefix length in bits. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos11ip_prefix_t2afEv">
+<span id="_CPPv3NK3eos11ip_prefix_t2afEv"></span><span id="_CPPv2NK3eos11ip_prefix_t2afEv"></span><span id="eos::ip_prefix_t::afC"></span><span class="target" id="classeos_1_1ip__prefix__t_1a6daef72b6631375cd66b30cb76205c46"></span><a class="reference internal" href="#_CPPv4N3eos4af_tE" title="eos::af_t">af_t</a> <code class="sig-name descname">af</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos11ip_prefix_t2afEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>The address family of the prefix. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos11ip_prefix_t7networkEv">
+<span id="_CPPv3NK3eos11ip_prefix_t7networkEv"></span><span id="_CPPv2NK3eos11ip_prefix_t7networkEv"></span><span id="eos::ip_prefix_t::networkC"></span><span class="target" id="classeos_1_1ip__prefix__t_1af2544fb5e850877cebe5054d3b03a514"></span><a class="reference internal" href="#_CPPv4N3eos9ip_addr_tE" title="eos::ip_addr_t">ip_addr_t</a> <code class="sig-name descname">network</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos11ip_prefix_t7networkEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>The prefix’s network address. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos11ip_prefix_t4maskEv">
+<span id="_CPPv3NK3eos11ip_prefix_t4maskEv"></span><span id="_CPPv2NK3eos11ip_prefix_t4maskEv"></span><span id="eos::ip_prefix_t::maskC"></span><span class="target" id="classeos_1_1ip__prefix__t_1adc8e58c716f33b8f9ba82ea8aad5a27f"></span><a class="reference internal" href="#_CPPv4N3eos9ip_addr_tE" title="eos::ip_addr_t">ip_addr_t</a> <code class="sig-name descname">mask</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos11ip_prefix_t4maskEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>The prefix as mask. A prefix length of 8 on a v4 address will yield the mask 255.0.0.0. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos11ip_prefix_t9to_stringEv">
+<span id="_CPPv3NK3eos11ip_prefix_t9to_stringEv"></span><span id="_CPPv2NK3eos11ip_prefix_t9to_stringEv"></span><span id="eos::ip_prefix_t::to_stringC"></span><span class="target" id="classeos_1_1ip__prefix__t_1a7a8f624e77d28514033420157b8adc7f"></span><a class="reference internal" href="#_CPPv4St" title="std">std</a>::string <code class="sig-name descname">to_string</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos11ip_prefix_t9to_stringEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>String representation of the IP prefix, e.g. “10.2.3.4/24” or “cafe::1/218”. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos11ip_prefix_teqERK11ip_prefix_t">
+<span id="_CPPv3NK3eos11ip_prefix_teqERK11ip_prefix_t"></span><span id="_CPPv2NK3eos11ip_prefix_teqERK11ip_prefix_t"></span><span id="eos::ip_prefix_t::eq-operator__ip_prefix_tCRC"></span><span class="target" id="classeos_1_1ip__prefix__t_1ab37f20df15a1d546843bb13689469a83"></span>bool <code class="sig-name descname">operator==</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos11ip_prefix_tE" title="eos::ip_prefix_t">ip_prefix_t</a> <em class="property">const</em> &amp;<em>other</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos11ip_prefix_teqERK11ip_prefix_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos11ip_prefix_tneERK11ip_prefix_t">
+<span id="_CPPv3NK3eos11ip_prefix_tneERK11ip_prefix_t"></span><span id="_CPPv2NK3eos11ip_prefix_tneERK11ip_prefix_t"></span><span id="eos::ip_prefix_t::neq-operator__ip_prefix_tCRC"></span><span class="target" id="classeos_1_1ip__prefix__t_1a1653f338510e8815609bf4e549ebb54a"></span>bool <code class="sig-name descname">operator!=</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos11ip_prefix_tE" title="eos::ip_prefix_t">ip_prefix_t</a> <em class="property">const</em> &amp;<em>other</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos11ip_prefix_tneERK11ip_prefix_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos11ip_prefix_tltERK11ip_prefix_t">
+<span id="_CPPv3NK3eos11ip_prefix_tltERK11ip_prefix_t"></span><span id="_CPPv2NK3eos11ip_prefix_tltERK11ip_prefix_t"></span><span id="eos::ip_prefix_t::lt-operator__ip_prefix_tCRC"></span><span class="target" id="classeos_1_1ip__prefix__t_1a09530a96732804e47ee0b4c3b475d984"></span>bool <code class="sig-name descname">operator&lt;</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos11ip_prefix_tE" title="eos::ip_prefix_t">ip_prefix_t</a> <em class="property">const</em> &amp;<em>other</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos11ip_prefix_tltERK11ip_prefix_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos11ip_prefix_t4hashEv">
+<span id="_CPPv3NK3eos11ip_prefix_t4hashEv"></span><span id="_CPPv2NK3eos11ip_prefix_t4hashEv"></span><span id="eos::ip_prefix_t::hashC"></span><span class="target" id="classeos_1_1ip__prefix__t_1a2c681a81be0edbb0f397221ad72312b6"></span>uint32_t <code class="sig-name descname">hash</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos11ip_prefix_t4hashEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>The hash function for type <a class="reference internal" href="#classeos_1_1ip__prefix__t"><span class="std std-ref">ip_prefix_t</span></a>. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos11ip_prefix_t6mix_meER8hash_mix">
+<span id="_CPPv3NK3eos11ip_prefix_t6mix_meER8hash_mix"></span><span id="_CPPv2NK3eos11ip_prefix_t6mix_meER8hash_mix"></span><span id="eos::ip_prefix_t::mix_me__hash_mixRC"></span><span class="target" id="classeos_1_1ip__prefix__t_1a7e5a1a46f1ccf0e7af28480b71ab23d5"></span>void <code class="sig-name descname">mix_me</code><span class="sig-paren">(</span><a class="reference internal" href="hash_mix.html#_CPPv4N3eos8hash_mixE" title="eos::hash_mix">hash_mix</a> &amp;<em>h</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos11ip_prefix_t6mix_meER8hash_mix" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>The hash mix function for type <a class="reference internal" href="#classeos_1_1ip__prefix__t"><span class="std std-ref">ip_prefix_t</span></a>. </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-private-members">Private Members</p>
+<dl class="cpp var">
+<dt id="_CPPv4N3eos11ip_prefix_t5addr_E">
+<span id="_CPPv3N3eos11ip_prefix_t5addr_E"></span><span id="_CPPv2N3eos11ip_prefix_t5addr_E"></span><span id="eos::ip_prefix_t::addr___ip_addr_t"></span><span class="target" id="classeos_1_1ip__prefix__t_1a5fb88a1bf2ba1564ddfff737da0ca885"></span><a class="reference internal" href="#_CPPv4N3eos9ip_addr_tE" title="eos::ip_addr_t">ip_addr_t</a> <code class="sig-name descname">addr_</code><a class="headerlink" href="#_CPPv4N3eos11ip_prefix_t5addr_E" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp var">
+<dt id="_CPPv4N3eos11ip_prefix_t14prefix_length_E">
+<span id="_CPPv3N3eos11ip_prefix_t14prefix_length_E"></span><span id="_CPPv2N3eos11ip_prefix_t14prefix_length_E"></span><span id="eos::ip_prefix_t::prefix_length___uint8_t"></span><span class="target" id="classeos_1_1ip__prefix__t_1ae0da4601c1b859a0c0e03d35dc428634"></span>uint8_t <code class="sig-name descname">prefix_length_</code><a class="headerlink" href="#_CPPv4N3eos11ip_prefix_t14prefix_length_E" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-friends">Friends</p>
+<dl class="cpp function">
+<dt id="_CPPv4N3eos11ip_prefix_tlsERNSt7ostreamERK11ip_prefix_t">
+<span id="_CPPv3N3eos11ip_prefix_tlsERNSt7ostreamERK11ip_prefix_t"></span><span id="_CPPv2N3eos11ip_prefix_tlsERNSt7ostreamERK11ip_prefix_t"></span><span id="eos::ip_prefix_t::lshift-operator__osR.ip_prefix_tCR"></span><span class="target" id="classeos_1_1ip__prefix__t_1aca3ddb24d46dc8820068aa6f4c631c23"></span><em class="property">friend</em> <a class="reference internal" href="#_CPPv4St" title="std">std</a>::ostream &amp;<code class="sig-name descname">operator&lt;&lt;</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4St" title="std">std</a>::ostream &amp;<em>os</em>, <em class="property">const</em> <a class="reference internal" href="#_CPPv4N3eos11ip_prefix_tE" title="eos::ip_prefix_t">ip_prefix_t</a> &amp;<em>obj</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos11ip_prefix_tlsERNSt7ostreamERK11ip_prefix_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>A utility stream operator that adds a string representation of <a class="reference internal" href="#classeos_1_1ip__prefix__t"><span class="std std-ref">ip_prefix_t</span></a> to the ostream. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos11ip_prefix_t15parse_ip_prefixEPKcP11ip_prefix_t">
+<span id="_CPPv3N3eos11ip_prefix_t15parse_ip_prefixEPKcP11ip_prefix_t"></span><span id="_CPPv2N3eos11ip_prefix_t15parse_ip_prefixEPKcP11ip_prefix_t"></span><span id="eos::ip_prefix_t::parse_ip_prefix__cCP.ip_prefix_tP"></span><span class="target" id="classeos_1_1ip__prefix__t_1a14cba6eab99fe3746013e6e9d2741cea"></span><em class="property">friend</em> bool <code class="sig-name descname">parse_ip_prefix</code><span class="sig-paren">(</span>char <em class="property">const</em>*, <a class="reference internal" href="#_CPPv4N3eos11ip_prefix_tE" title="eos::ip_prefix_t">ip_prefix_t</a> *<em>result</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos11ip_prefix_t15parse_ip_prefixEPKcP11ip_prefix_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Parses an IP route prefix, returns true if the prefix is valid. Supports both IPv4 and IPv6 route prefixes.</p>
+<p>For example, “10.1.2.0/24” or “fffe:abab:1234::/96” are legal, but “10.1.2.7/24” is not, as 10.1.2.7 is not a valid network address for a 24-bit prefix length.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>addr</strong> – <strong>[in]</strong> Pointer to a C string containing a prefix to parse. </p></li>
+<li><p><strong>result</strong> – <strong>[out]</strong> Mutable arugment to place a successfully parsed result into. </p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>true if the route prefix parsed successfully, false otherwise. </p>
+</dd>
+</dl>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="cpp class">
+<dt id="_CPPv4N3eos14ip_addr_mask_tE">
+<span id="_CPPv3N3eos14ip_addr_mask_tE"></span><span id="_CPPv2N3eos14ip_addr_mask_tE"></span><span id="eos::ip_addr_mask_t"></span><span class="target" id="classeos_1_1ip__addr__mask__t"></span><em class="property">class </em><code class="sig-name descname">ip_addr_mask_t</code><a class="headerlink" href="#_CPPv4N3eos14ip_addr_mask_tE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><div class="docutils container">
+<em>#include &lt;ip.h&gt;</em></div>
+<p>An IP address with a subnet mask.</p>
+<p>This allows for contiguous subnet masks only for IPv4 and IPv6 addresses.</p>
+<p>IPv6 addresses in EOS only support contiguous masks, so for IPv6 addresses <a class="reference internal" href="#classeos_1_1ip__addr__mask__t_1a4ee249b31040b56fcea70e1b7dc35a5d"><span class="std std-ref">mask()</span></a> provides the same value as <a class="reference internal" href="#classeos_1_1ip__addr__mask__t_1a287979192bf3411bcadc93ac6aa81fea"><span class="std std-ref">mask_length()</span></a>. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
+<dl class="cpp function">
+<dt id="_CPPv4N3eos14ip_addr_mask_t14ip_addr_mask_tEv">
+<span id="_CPPv3N3eos14ip_addr_mask_t14ip_addr_mask_tEv"></span><span id="_CPPv2N3eos14ip_addr_mask_t14ip_addr_mask_tEv"></span><span id="eos::ip_addr_mask_t::ip_addr_mask_t"></span><span class="target" id="classeos_1_1ip__addr__mask__t_1a8b648194b061759fce61518959433e4c"></span><code class="sig-name descname">ip_addr_mask_t</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos14ip_addr_mask_t14ip_addr_mask_tEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos14ip_addr_mask_t14ip_addr_mask_tERK9ip_addr_t7uint8_t">
+<span id="_CPPv3N3eos14ip_addr_mask_t14ip_addr_mask_tERK9ip_addr_t7uint8_t"></span><span id="_CPPv2N3eos14ip_addr_mask_t14ip_addr_mask_tERK9ip_addr_t7uint8_t"></span><span id="eos::ip_addr_mask_t::ip_addr_mask_t__ip_addr_tCR.uint8_t"></span><span class="target" id="classeos_1_1ip__addr__mask__t_1a1ac5339f06a6dd811655c591d0b7c43a"></span><code class="sig-name descname">ip_addr_mask_t</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos9ip_addr_tE" title="eos::ip_addr_t">ip_addr_t</a> <em class="property">const</em> &amp;<em>addr</em>, uint8_t <em>mask_length</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos14ip_addr_mask_t14ip_addr_mask_tERK9ip_addr_t7uint8_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos14ip_addr_mask_t14ip_addr_mask_tERK14ip_addr_mask_t">
+<span id="_CPPv3N3eos14ip_addr_mask_t14ip_addr_mask_tERK14ip_addr_mask_t"></span><span id="_CPPv2N3eos14ip_addr_mask_t14ip_addr_mask_tERK14ip_addr_mask_t"></span><span id="eos::ip_addr_mask_t::ip_addr_mask_t__ip_addr_mask_tCR"></span><span class="target" id="classeos_1_1ip__addr__mask__t_1a7ef951c5a6ba08c2d639c7316f25effa"></span><code class="sig-name descname">ip_addr_mask_t</code><span class="sig-paren">(</span><em class="property">const</em> <a class="reference internal" href="#_CPPv4N3eos14ip_addr_mask_t14ip_addr_mask_tERK14ip_addr_mask_t" title="eos::ip_addr_mask_t::ip_addr_mask_t">ip_addr_mask_t</a> &amp;<em>other</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos14ip_addr_mask_t14ip_addr_mask_tERK14ip_addr_mask_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos14ip_addr_mask_taSERK14ip_addr_mask_t">
+<span id="_CPPv3N3eos14ip_addr_mask_taSERK14ip_addr_mask_t"></span><span id="_CPPv2N3eos14ip_addr_mask_taSERK14ip_addr_mask_t"></span><span id="eos::ip_addr_mask_t::assign-operator__ip_addr_mask_tCR"></span><span class="target" id="classeos_1_1ip__addr__mask__t_1ace30c70e22bf044b87cde8e2df26c54e"></span><a class="reference internal" href="#_CPPv4N3eos14ip_addr_mask_tE" title="eos::ip_addr_mask_t">ip_addr_mask_t</a> &amp;<code class="sig-name descname">operator=</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos14ip_addr_mask_tE" title="eos::ip_addr_mask_t">ip_addr_mask_t</a> <em class="property">const</em> &amp;<em>other</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos14ip_addr_mask_taSERK14ip_addr_mask_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos14ip_addr_mask_t14ip_addr_mask_tERR14ip_addr_mask_t">
+<span id="_CPPv3N3eos14ip_addr_mask_t14ip_addr_mask_tERR14ip_addr_mask_t"></span><span id="_CPPv2N3eos14ip_addr_mask_t14ip_addr_mask_tERR14ip_addr_mask_t"></span><span id="eos::ip_addr_mask_t::ip_addr_mask_t__ip_addr_mask_tRR"></span><span class="target" id="classeos_1_1ip__addr__mask__t_1a7f5d9805474d522ae7eed4429fb734ed"></span><code class="sig-name descname">ip_addr_mask_t</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos14ip_addr_mask_t14ip_addr_mask_tERR14ip_addr_mask_t" title="eos::ip_addr_mask_t::ip_addr_mask_t">ip_addr_mask_t</a> &amp;&amp;<em>other</em><span class="sig-paren">)</span> <em class="property">noexcept</em><a class="headerlink" href="#_CPPv4N3eos14ip_addr_mask_t14ip_addr_mask_tERR14ip_addr_mask_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos14ip_addr_mask_taSERR14ip_addr_mask_t">
+<span id="_CPPv3N3eos14ip_addr_mask_taSERR14ip_addr_mask_t"></span><span id="_CPPv2N3eos14ip_addr_mask_taSERR14ip_addr_mask_t"></span><span id="eos::ip_addr_mask_t::assign-operator__ip_addr_mask_tRR"></span><span class="target" id="classeos_1_1ip__addr__mask__t_1a034455ab9eeb66d54706aea472ad7481"></span><a class="reference internal" href="#_CPPv4N3eos14ip_addr_mask_tE" title="eos::ip_addr_mask_t">ip_addr_mask_t</a> &amp;<code class="sig-name descname">operator=</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos14ip_addr_mask_tE" title="eos::ip_addr_mask_t">ip_addr_mask_t</a> &amp;&amp;<em>other</em><span class="sig-paren">)</span> <em class="property">noexcept</em><a class="headerlink" href="#_CPPv4N3eos14ip_addr_mask_taSERR14ip_addr_mask_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos14ip_addr_mask_t4addrEv">
+<span id="_CPPv3NK3eos14ip_addr_mask_t4addrEv"></span><span id="_CPPv2NK3eos14ip_addr_mask_t4addrEv"></span><span id="eos::ip_addr_mask_t::addrC"></span><span class="target" id="classeos_1_1ip__addr__mask__t_1a60248b9229b8eff8abf9cb5325fc3349"></span><a class="reference internal" href="#_CPPv4N3eos9ip_addr_tE" title="eos::ip_addr_t">ip_addr_t</a> <code class="sig-name descname">addr</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos14ip_addr_mask_t4addrEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Getter for ‘addr’: the address/mask’s IP address. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos14ip_addr_mask_t11mask_lengthEv">
+<span id="_CPPv3NK3eos14ip_addr_mask_t11mask_lengthEv"></span><span id="_CPPv2NK3eos14ip_addr_mask_t11mask_lengthEv"></span><span id="eos::ip_addr_mask_t::mask_lengthC"></span><span class="target" id="classeos_1_1ip__addr__mask__t_1a287979192bf3411bcadc93ac6aa81fea"></span>uint8_t <code class="sig-name descname">mask_length</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos14ip_addr_mask_t11mask_lengthEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Getter for ‘mask_length’: the bit mask length, e.g., 24. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos14ip_addr_mask_t2afEv">
+<span id="_CPPv3NK3eos14ip_addr_mask_t2afEv"></span><span id="_CPPv2NK3eos14ip_addr_mask_t2afEv"></span><span id="eos::ip_addr_mask_t::afC"></span><span class="target" id="classeos_1_1ip__addr__mask__t_1ad2b35126dc938c612d96ddae30deed51"></span><a class="reference internal" href="#_CPPv4N3eos4af_tE" title="eos::af_t">af_t</a> <code class="sig-name descname">af</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos14ip_addr_mask_t2afEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>The address family of the prefix. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos14ip_addr_mask_t4maskEv">
+<span id="_CPPv3NK3eos14ip_addr_mask_t4maskEv"></span><span id="_CPPv2NK3eos14ip_addr_mask_t4maskEv"></span><span id="eos::ip_addr_mask_t::maskC"></span><span class="target" id="classeos_1_1ip__addr__mask__t_1a4ee249b31040b56fcea70e1b7dc35a5d"></span><a class="reference internal" href="base.html#_CPPv4N3eos11uint32_be_tE" title="eos::uint32_be_t">uint32_be_t</a> <code class="sig-name descname">mask</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos14ip_addr_mask_t4maskEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>The bit mask itself, e.g., 0xFFFFFF00 (IPv4). For IPv6, same as <a class="reference internal" href="#classeos_1_1ip__addr__mask__t_1a287979192bf3411bcadc93ac6aa81fea"><span class="std std-ref">mask_length()</span></a>. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos14ip_addr_mask_t9to_stringEv">
+<span id="_CPPv3NK3eos14ip_addr_mask_t9to_stringEv"></span><span id="_CPPv2NK3eos14ip_addr_mask_t9to_stringEv"></span><span id="eos::ip_addr_mask_t::to_stringC"></span><span class="target" id="classeos_1_1ip__addr__mask__t_1a4d3df0b097f8b4ad94609e5df9fe1a5d"></span><a class="reference internal" href="#_CPPv4St" title="std">std</a>::string <code class="sig-name descname">to_string</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos14ip_addr_mask_t9to_stringEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>The IP address and mask as a string, e.g., “192.0.2.1/0xFFFFFF00”. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos14ip_addr_mask_teqERK14ip_addr_mask_t">
+<span id="_CPPv3NK3eos14ip_addr_mask_teqERK14ip_addr_mask_t"></span><span id="_CPPv2NK3eos14ip_addr_mask_teqERK14ip_addr_mask_t"></span><span id="eos::ip_addr_mask_t::eq-operator__ip_addr_mask_tCRC"></span><span class="target" id="classeos_1_1ip__addr__mask__t_1add536110b101868a339467b1f14cefcf"></span>bool <code class="sig-name descname">operator==</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos14ip_addr_mask_tE" title="eos::ip_addr_mask_t">ip_addr_mask_t</a> <em class="property">const</em> &amp;<em>other</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos14ip_addr_mask_teqERK14ip_addr_mask_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos14ip_addr_mask_tneERK14ip_addr_mask_t">
+<span id="_CPPv3NK3eos14ip_addr_mask_tneERK14ip_addr_mask_t"></span><span id="_CPPv2NK3eos14ip_addr_mask_tneERK14ip_addr_mask_t"></span><span id="eos::ip_addr_mask_t::neq-operator__ip_addr_mask_tCRC"></span><span class="target" id="classeos_1_1ip__addr__mask__t_1ab4dc9cd65caeea50febf240684e2833f"></span>bool <code class="sig-name descname">operator!=</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos14ip_addr_mask_tE" title="eos::ip_addr_mask_t">ip_addr_mask_t</a> <em class="property">const</em> &amp;<em>other</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos14ip_addr_mask_tneERK14ip_addr_mask_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos14ip_addr_mask_tltERK14ip_addr_mask_t">
+<span id="_CPPv3NK3eos14ip_addr_mask_tltERK14ip_addr_mask_t"></span><span id="_CPPv2NK3eos14ip_addr_mask_tltERK14ip_addr_mask_t"></span><span id="eos::ip_addr_mask_t::lt-operator__ip_addr_mask_tCRC"></span><span class="target" id="classeos_1_1ip__addr__mask__t_1a8905c56694a8161304cdf69c56e35593"></span>bool <code class="sig-name descname">operator&lt;</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos14ip_addr_mask_tE" title="eos::ip_addr_mask_t">ip_addr_mask_t</a> <em class="property">const</em> &amp;<em>other</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos14ip_addr_mask_tltERK14ip_addr_mask_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos14ip_addr_mask_t4hashEv">
+<span id="_CPPv3NK3eos14ip_addr_mask_t4hashEv"></span><span id="_CPPv2NK3eos14ip_addr_mask_t4hashEv"></span><span id="eos::ip_addr_mask_t::hashC"></span><span class="target" id="classeos_1_1ip__addr__mask__t_1aeb2b8dd16d32de211b8ad86d5b293f89"></span>uint32_t <code class="sig-name descname">hash</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos14ip_addr_mask_t4hashEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>The hash function for type <a class="reference internal" href="#classeos_1_1ip__addr__mask__t"><span class="std std-ref">ip_addr_mask_t</span></a>. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos14ip_addr_mask_t6mix_meER8hash_mix">
+<span id="_CPPv3NK3eos14ip_addr_mask_t6mix_meER8hash_mix"></span><span id="_CPPv2NK3eos14ip_addr_mask_t6mix_meER8hash_mix"></span><span id="eos::ip_addr_mask_t::mix_me__hash_mixRC"></span><span class="target" id="classeos_1_1ip__addr__mask__t_1afb80a7b8c36208144b32abb7faaa7bbb"></span>void <code class="sig-name descname">mix_me</code><span class="sig-paren">(</span><a class="reference internal" href="hash_mix.html#_CPPv4N3eos8hash_mixE" title="eos::hash_mix">hash_mix</a> &amp;<em>h</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos14ip_addr_mask_t6mix_meER8hash_mix" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>The hash mix function for type <a class="reference internal" href="#classeos_1_1ip__addr__mask__t"><span class="std std-ref">ip_addr_mask_t</span></a>. </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-static-functions">Public Static Functions</p>
+<dl class="cpp function">
+<dt id="_CPPv4N3eos14ip_addr_mask_tnwENSt6size_tEPv">
+<span id="_CPPv3N3eos14ip_addr_mask_tnwENSt6size_tEPv"></span><span id="_CPPv2N3eos14ip_addr_mask_tnwENSt6size_tEPv"></span><span id="eos::ip_addr_mask_t::new-operator__std::s.voidP"></span><span class="target" id="classeos_1_1ip__addr__mask__t_1aad8259fca503a22920c54160936dc2b8"></span><em class="property">static</em> <em class="property">inline</em> void *<code class="sig-name descname">operator new</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4St" title="std">std</a>::size_t, void *<em>ptr</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos14ip_addr_mask_tnwENSt6size_tEPv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos14ip_addr_mask_tnwENSt6size_tE">
+<span id="_CPPv3N3eos14ip_addr_mask_tnwENSt6size_tE"></span><span id="_CPPv2N3eos14ip_addr_mask_tnwENSt6size_tE"></span><span id="eos::ip_addr_mask_t::new-operator__std::s"></span><span class="target" id="classeos_1_1ip__addr__mask__t_1ac71797279df4c225884ab274e83375a3"></span><em class="property">static</em> void *<code class="sig-name descname">operator new</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4St" title="std">std</a>::size_t<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos14ip_addr_mask_tnwENSt6size_tE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos14ip_addr_mask_tdlEPv">
+<span id="_CPPv3N3eos14ip_addr_mask_tdlEPv"></span><span id="_CPPv2N3eos14ip_addr_mask_tdlEPv"></span><span id="eos::ip_addr_mask_t::delete-operator__voidP"></span><span class="target" id="classeos_1_1ip__addr__mask__t_1a72cbfe87c5dfe3ee3adb83a1473a5b38"></span><em class="property">static</em> void <code class="sig-name descname">operator delete</code><span class="sig-paren">(</span>void*<span class="sig-paren">)</span> <em class="property">noexcept</em><a class="headerlink" href="#_CPPv4N3eos14ip_addr_mask_tdlEPv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-private-members">Private Members</p>
+<dl class="cpp var">
+<dt id="_CPPv4N3eos14ip_addr_mask_t5pimplE">
+<span id="_CPPv3N3eos14ip_addr_mask_t5pimplE"></span><span id="_CPPv2N3eos14ip_addr_mask_t5pimplE"></span><span id="eos::ip_addr_mask_t::pimpl__std::shared_ptr:ip_addr_mask_impl_t:"></span><span class="target" id="classeos_1_1ip__addr__mask__t_1a31d6e234efbcb129df2f3477f67adb9c"></span><a class="reference internal" href="#_CPPv4St" title="std">std</a>::shared_ptr&lt;ip_addr_mask_impl_t&gt; <code class="sig-name descname">pimpl</code><a class="headerlink" href="#_CPPv4N3eos14ip_addr_mask_t5pimplE" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-friends">Friends</p>
+<dl class="cpp function">
+<dt id="_CPPv4N3eos14ip_addr_mask_tlsERNSt7ostreamERK14ip_addr_mask_t">
+<span id="_CPPv3N3eos14ip_addr_mask_tlsERNSt7ostreamERK14ip_addr_mask_t"></span><span id="_CPPv2N3eos14ip_addr_mask_tlsERNSt7ostreamERK14ip_addr_mask_t"></span><span id="eos::ip_addr_mask_t::lshift-operator__osR.ip_addr_mask_tCR"></span><span class="target" id="classeos_1_1ip__addr__mask__t_1aa90cedd8fee07e3a9ed5f462d789a52d"></span><em class="property">friend</em> <a class="reference internal" href="#_CPPv4St" title="std">std</a>::ostream &amp;<code class="sig-name descname">operator&lt;&lt;</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4St" title="std">std</a>::ostream &amp;<em>os</em>, <em class="property">const</em> <a class="reference internal" href="#_CPPv4N3eos14ip_addr_mask_tE" title="eos::ip_addr_mask_t">ip_addr_mask_t</a> &amp;<em>obj</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos14ip_addr_mask_tlsERNSt7ostreamERK14ip_addr_mask_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>A utility stream operator that adds a string representation of <a class="reference internal" href="#classeos_1_1ip__addr__mask__t"><span class="std std-ref">ip_addr_mask_t</span></a> to the ostream. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="cpp class">
+<dt id="_CPPv4N3eos21address_overlap_errorE">
+<span id="_CPPv3N3eos21address_overlap_errorE"></span><span id="_CPPv2N3eos21address_overlap_errorE"></span><span id="eos::address_overlap_error"></span><span class="target" id="classeos_1_1address__overlap__error"></span><em class="property">class </em><code class="sig-name descname">address_overlap_error</code> : <em class="property">public</em> <a class="reference internal" href="acl.html#_CPPv43eos" title="eos">eos</a>::<a class="reference internal" href="exception.html#_CPPv4N3eos19configuration_errorE" title="eos::configuration_error">configuration_error</a><a class="headerlink" href="#_CPPv4N3eos21address_overlap_errorE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><div class="docutils container">
+<em>#include &lt;ip.h&gt;</em></div>
+<p>Tried to configure an internal VLAN on a trunk port. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
+<dl class="cpp function">
+<dt id="_CPPv4N3eos21address_overlap_error21address_overlap_errorERK14ip_addr_mask_t">
+<span id="_CPPv3N3eos21address_overlap_error21address_overlap_errorERK14ip_addr_mask_t"></span><span id="_CPPv2N3eos21address_overlap_error21address_overlap_errorERK14ip_addr_mask_t"></span><span id="eos::address_overlap_error::address_overlap_error__ip_addr_mask_tCR"></span><span class="target" id="classeos_1_1address__overlap__error_1a76a40ad61326d5a41bc1ff336b87113d"></span><em class="property">explicit</em> <code class="sig-name descname">address_overlap_error</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos14ip_addr_mask_tE" title="eos::ip_addr_mask_t">ip_addr_mask_t</a> <em class="property">const</em> &amp;<em>addr</em><span class="sig-paren">)</span> <em class="property">noexcept</em><a class="headerlink" href="#_CPPv4N3eos21address_overlap_error21address_overlap_errorERK14ip_addr_mask_t" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos21address_overlap_errorD0Ev">
+<span id="_CPPv3N3eos21address_overlap_errorD0Ev"></span><span id="_CPPv2N3eos21address_overlap_errorD0Ev"></span><span id="eos::address_overlap_error::~address_overlap_error"></span><span class="target" id="classeos_1_1address__overlap__error_1aaded0d8fd30af65bf57d7e5baab23f7c"></span><em class="property">virtual</em> <code class="sig-name descname">~address_overlap_error</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">noexcept</em><a class="headerlink" href="#_CPPv4N3eos21address_overlap_errorD0Ev" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos21address_overlap_error4addrEv">
+<span id="_CPPv3NK3eos21address_overlap_error4addrEv"></span><span id="_CPPv2NK3eos21address_overlap_error4addrEv"></span><span id="eos::address_overlap_error::addrC"></span><span class="target" id="classeos_1_1address__overlap__error_1af04a1351c822e66b77f31cc7c318222c"></span><a class="reference internal" href="#_CPPv4N3eos14ip_addr_mask_tE" title="eos::ip_addr_mask_t">ip_addr_mask_t</a> <code class="sig-name descname">addr</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em> <em class="property">noexcept</em><a class="headerlink" href="#_CPPv4NK3eos21address_overlap_error4addrEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos21address_overlap_error5raiseEv">
+<span id="_CPPv3NK3eos21address_overlap_error5raiseEv"></span><span id="_CPPv2NK3eos21address_overlap_error5raiseEv"></span><span id="eos::address_overlap_error::raiseC"></span><span class="target" id="classeos_1_1address__overlap__error_1a79d3cc246a3a27fd7a8e508efc6d58e2"></span><em class="property">virtual</em> void <code class="sig-name descname">raise</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos21address_overlap_error5raiseEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Throws this exception. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos21address_overlap_error4hashEv">
+<span id="_CPPv3NK3eos21address_overlap_error4hashEv"></span><span id="_CPPv2NK3eos21address_overlap_error4hashEv"></span><span id="eos::address_overlap_error::hashC"></span><span class="target" id="classeos_1_1address__overlap__error_1a73e91db6b949e94af1826100167ae407"></span>uint32_t <code class="sig-name descname">hash</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos21address_overlap_error4hashEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>The hash function for type <a class="reference internal" href="#classeos_1_1address__overlap__error"><span class="std std-ref">address_overlap_error</span></a>. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos21address_overlap_error6mix_meER8hash_mix">
+<span id="_CPPv3NK3eos21address_overlap_error6mix_meER8hash_mix"></span><span id="_CPPv2NK3eos21address_overlap_error6mix_meER8hash_mix"></span><span id="eos::address_overlap_error::mix_me__hash_mixRC"></span><span class="target" id="classeos_1_1address__overlap__error_1a45543c13c3afcedadb274d8980f5414c"></span>void <code class="sig-name descname">mix_me</code><span class="sig-paren">(</span><a class="reference internal" href="hash_mix.html#_CPPv4N3eos8hash_mixE" title="eos::hash_mix">hash_mix</a> &amp;<em>h</em><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos21address_overlap_error6mix_meER8hash_mix" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>The hash mix function for type <a class="reference internal" href="#classeos_1_1address__overlap__error"><span class="std std-ref">address_overlap_error</span></a>. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos21address_overlap_error9to_stringEv">
+<span id="_CPPv3NK3eos21address_overlap_error9to_stringEv"></span><span id="_CPPv2NK3eos21address_overlap_error9to_stringEv"></span><span id="eos::address_overlap_error::to_stringC"></span><span class="target" id="classeos_1_1address__overlap__error_1ab7e67daedd076fa0547bca0063dcfcb4"></span><a class="reference internal" href="#_CPPv4St" title="std">std</a>::string <code class="sig-name descname">to_string</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos21address_overlap_error9to_stringEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Returns a string representation of the current object’s values. </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-private-members">Private Members</p>
+<dl class="cpp var">
+<dt id="_CPPv4N3eos21address_overlap_error5addr_E">
+<span id="_CPPv3N3eos21address_overlap_error5addr_E"></span><span id="_CPPv2N3eos21address_overlap_error5addr_E"></span><span id="eos::address_overlap_error::addr___ip_addr_mask_t"></span><span class="target" id="classeos_1_1address__overlap__error_1aa98dbaa704b494609da55c4d2ac1b332"></span><a class="reference internal" href="#_CPPv4N3eos14ip_addr_mask_tE" title="eos::ip_addr_mask_t">ip_addr_mask_t</a> <code class="sig-name descname">addr_</code><a class="headerlink" href="#_CPPv4N3eos21address_overlap_error5addr_E" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-friends">Friends</p>
+<dl class="cpp function">
+<dt id="_CPPv4N3eos21address_overlap_errorlsERNSt7ostreamERK21address_overlap_error">
+<span id="_CPPv3N3eos21address_overlap_errorlsERNSt7ostreamERK21address_overlap_error"></span><span id="_CPPv2N3eos21address_overlap_errorlsERNSt7ostreamERK21address_overlap_error"></span><span id="eos::address_overlap_error::lshift-operator__osR.address_overlap_errorCR"></span><span class="target" id="classeos_1_1address__overlap__error_1a94aee6bba3528747575bfce70aad1b82"></span><em class="property">friend</em> <a class="reference internal" href="#_CPPv4St" title="std">std</a>::ostream &amp;<code class="sig-name descname">operator&lt;&lt;</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4St" title="std">std</a>::ostream &amp;<em>os</em>, <em class="property">const</em> <a class="reference internal" href="#_CPPv4N3eos21address_overlap_errorE" title="eos::address_overlap_error">address_overlap_error</a> &amp;<em>obj</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos21address_overlap_errorlsERNSt7ostreamERK21address_overlap_error" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>A utility stream operator that adds a string representation of <a class="reference internal" href="#classeos_1_1address__overlap__error"><span class="std std-ref">address_overlap_error</span></a> to the ostream. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+</div>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h3><a href="index.html">Table of Contents</a></h3>
+  <ul>
+<li><a class="reference internal" href="#"><strong>ip</strong></a><ul>
+<li><a class="reference internal" href="#type-definitions-in-ip">Type definitions in <strong>ip</strong></a></li>
+</ul>
+</li>
+</ul>
+
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="intf.html"
+                        title="previous chapter"><strong>intf</strong></a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="ip_intf.html"
+                        title="next chapter"><strong>ip_intf</strong></a></p>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="ip_intf.html" title="ip_intf"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="intf.html" title="intf"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Arista EOS SDK 2.23.5 reference</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href=""><strong>ip</strong></a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2014, Arista Networks.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.4.3.
+    </div>
+  </body>
+</html>
