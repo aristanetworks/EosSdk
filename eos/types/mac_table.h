@@ -63,6 +63,10 @@ enum mac_entry_type_t {
    MAC_ENTRY_DFW_CONFIGURED_STATIC,
    MAC_ENTRY_PROGRAMMED_STATIC,
    MAC_ENTRY_EVPN_VESPA_DYNAMIC,
+   MAC_ENTRY_EVPN_INTF_DYNAMIC_FRR,
+   MAC_ENTRY_EVPN_INTF_STATIC_FRR,
+   MAC_ENTRY_LEARNED_DYNAMIC_FRR,
+   MAC_ENTRY_CONFIGURED_STATIC_FRR,
 };
 /** Appends a string representation of enum mac_entry_type_t value to the ostream. */
 EOS_SDK_PUBLIC std::ostream& operator<<(std::ostream& os,

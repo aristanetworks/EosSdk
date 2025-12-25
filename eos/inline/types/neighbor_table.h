@@ -21,6 +21,14 @@ operator<<(std::ostream& os, const neighbor_entry_type_t & enum_val) {
 }
 
 
+std::string
+neighbor_key_t::vrf_name() const {
+   return pimpl->vrf_name();
+}
+void
+neighbor_key_t::vrf_name_is(std::string vrf_name) {
+   pimpl->vrf_name_is(vrf_name);
+}
 ip_addr_t
 neighbor_key_t::ip_addr() const {
    return pimpl->ip_addr();

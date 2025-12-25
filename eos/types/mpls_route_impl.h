@@ -110,6 +110,15 @@ class EOS_SDK_PUBLIC mpls_route_impl_t {
    /** Setter for 'version_id'. */
    void version_id_is(uint32_t version_id);
 
+   /**
+    * Getter for 'on_primary_via_restored': Define switchover behaviour when a
+    * primary via is restored.
+    */
+   mpls_on_primary_via_restored_t on_primary_via_restored() const;
+   /** Setter for 'on_primary_via_restored'. */
+   void on_primary_via_restored_is(
+         mpls_on_primary_via_restored_t on_primary_via_restored);
+
    bool operator==(mpls_route_impl_t const & other) const;
    bool operator!=(mpls_route_impl_t const & other) const;
    /** The hash function for type mpls_route_t. */
@@ -127,6 +136,7 @@ class EOS_SDK_PUBLIC mpls_route_impl_t {
  private:
    mpls_route_key_t key_;
    uint32_t version_id_;
+   mpls_on_primary_via_restored_t on_primary_via_restored_;
 };
 
 /** An MPLS route via, defining the action to take for a given MPLS route. */

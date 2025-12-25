@@ -61,8 +61,8 @@ class mpls_route_mgr_impl : public mpls_route_mgr {
       // TODO: No op impl.
    }
 
-   mpls_route_via_iter_t mpls_route_via_iter(mpls_route_key_t const & key) const {
-      mpls_route_via_iter_t * nop = 0;
+   mpls_route_via_iter_t mpls_route_via_iter(mpls_route_key_t const& key) const {
+      mpls_route_via_iter_t* nop = 0;
       return *nop;  // TODO: No op impl.
    }
 

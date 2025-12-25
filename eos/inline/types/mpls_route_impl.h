@@ -152,18 +152,23 @@ operator<<(std::ostream& os, const mpls_route_key_impl_t& obj) {
 
 
 
+
+
 mpls_route_impl_t::mpls_route_impl_t() :
-      key_(), version_id_() {
+      key_(), version_id_(),
+      on_primary_via_restored_(MPLS_ON_PRIMARY_VIA_RESTORED_REVERT_TO_PRIMARY) {
 }
 
 mpls_route_impl_t::mpls_route_impl_t(mpls_route_key_t key) :
-      key_(key), version_id_() {
+      key_(key), version_id_(),
+      on_primary_via_restored_(MPLS_ON_PRIMARY_VIA_RESTORED_REVERT_TO_PRIMARY) {
    version_id_ = 0;
 }
 
 mpls_route_impl_t::mpls_route_impl_t(mpls_route_key_t key,
                                             uint32_t version_id) :
-      key_(key), version_id_(version_id) {
+      key_(key), version_id_(version_id),
+      on_primary_via_restored_(MPLS_ON_PRIMARY_VIA_RESTORED_REVERT_TO_PRIMARY) {
 }
 
 mpls_route_key_t
@@ -186,10 +191,22 @@ mpls_route_impl_t::version_id_is(uint32_t version_id) {
    version_id_ = version_id;
 }
 
+mpls_on_primary_via_restored_t
+mpls_route_impl_t::on_primary_via_restored() const {
+   return on_primary_via_restored_;
+}
+
+void
+mpls_route_impl_t::on_primary_via_restored_is(
+         mpls_on_primary_via_restored_t on_primary_via_restored) {
+   on_primary_via_restored_ = on_primary_via_restored;
+}
+
 bool
 mpls_route_impl_t::operator==(mpls_route_impl_t const & other) const {
    return key_ == other.key_ &&
-          version_id_ == other.version_id_;
+          version_id_ == other.version_id_ &&
+          on_primary_via_restored_ == other.on_primary_via_restored_;
 }
 
 bool
@@ -208,6 +225,7 @@ void
 mpls_route_impl_t::mix_me(hash_mix & h) const {
    h.mix(key_); // mpls_route_key_t
    h.mix(version_id_); // uint32_t
+   h.mix(on_primary_via_restored_); // mpls_on_primary_via_restored_t
 }
 
 std::string
@@ -216,6 +234,7 @@ mpls_route_impl_t::to_string() const {
    ss << "mpls_route_t(";
    ss << "key=" << key_;
    ss << ", version_id=" << version_id_;
+   ss << ", on_primary_via_restored=" << on_primary_via_restored_;
    ss << ")";
    return ss.str();
 }

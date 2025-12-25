@@ -124,6 +124,26 @@ class EOS_SDK_PUBLIC mpls_route_key_t {
 EOS_SDK_PUBLIC
 std::ostream& operator<<(std::ostream& os, const mpls_route_key_t& obj);
 
+/**
+ * Defines the expected forwarding behaviour for a route when the primary via is
+ * restored after going down. The route will revert back to an available primary
+ * via if a
+ * config update is pushed regardless of this value.
+ */
+enum mpls_on_primary_via_restored_t {
+   MPLS_ON_PRIMARY_VIA_RESTORED_NULL,
+   /** Revert back to the primary via when it is restored. */
+   MPLS_ON_PRIMARY_VIA_RESTORED_REVERT_TO_PRIMARY,
+   /** Do not revert to the primary via after switching to the backup via. */
+   MPLS_ON_PRIMARY_VIA_RESTORED_STAY_ON_BACKUP,
+};
+/**
+ * Appends a string representation of enum mpls_on_primary_via_restored_t value to
+ * the ostream.
+ */
+EOS_SDK_PUBLIC std::ostream& operator<<(
+         std::ostream& os, const mpls_on_primary_via_restored_t & enum_val);
+
 class mpls_route_impl_t;
 /** An MPLS v4/v6 static route. */
 class EOS_SDK_PUBLIC mpls_route_t {
@@ -155,6 +175,15 @@ class EOS_SDK_PUBLIC mpls_route_t {
    uint32_t version_id() const;
    /** Setter for 'version_id'. */
    void version_id_is(uint32_t version_id);
+
+   /**
+    * Getter for 'on_primary_via_restored': Define switchover behaviour when a
+    * primary via is restored.
+    */
+   mpls_on_primary_via_restored_t on_primary_via_restored() const;
+   /** Setter for 'on_primary_via_restored'. */
+   void on_primary_via_restored_is(
+         mpls_on_primary_via_restored_t on_primary_via_restored);
 
    bool operator==(mpls_route_t const & other) const;
    bool operator!=(mpls_route_t const & other) const;

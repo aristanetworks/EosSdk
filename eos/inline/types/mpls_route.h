@@ -76,6 +76,21 @@ operator<<(std::ostream& os, const mpls_route_key_t& obj) {
 }
 
 
+EOS_SDK_PUBLIC std::ostream&
+operator<<(std::ostream& os, const mpls_on_primary_via_restored_t & enum_val) {
+   if (enum_val==MPLS_ON_PRIMARY_VIA_RESTORED_NULL) {
+      os << "MPLS_ON_PRIMARY_VIA_RESTORED_NULL";
+   } else if (enum_val==MPLS_ON_PRIMARY_VIA_RESTORED_REVERT_TO_PRIMARY) {
+      os << "MPLS_ON_PRIMARY_VIA_RESTORED_REVERT_TO_PRIMARY";
+   } else if (enum_val==MPLS_ON_PRIMARY_VIA_RESTORED_STAY_ON_BACKUP) {
+      os << "MPLS_ON_PRIMARY_VIA_RESTORED_STAY_ON_BACKUP";
+   } else {
+      os << "Unknown value";
+   }
+   return os;
+}
+
+
 mpls_route_key_t
 mpls_route_t::key() const {
    return pimpl->key();
@@ -91,6 +106,15 @@ mpls_route_t::version_id() const {
 void
 mpls_route_t::version_id_is(uint32_t version_id) {
    pimpl->version_id_is(version_id);
+}
+mpls_on_primary_via_restored_t
+mpls_route_t::on_primary_via_restored() const {
+   return pimpl->on_primary_via_restored();
+}
+void
+mpls_route_t::on_primary_via_restored_is(
+         mpls_on_primary_via_restored_t on_primary_via_restored) {
+   pimpl->on_primary_via_restored_is(on_primary_via_restored);
 }
 bool
 mpls_route_t::operator==(mpls_route_t const & other) const {

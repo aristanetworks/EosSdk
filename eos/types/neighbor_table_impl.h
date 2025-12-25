@@ -26,6 +26,9 @@ class EOS_SDK_PUBLIC neighbor_key_impl_t {
    /** IPv6 neighbor keys include an interface ID. */
    neighbor_key_impl_t(ip_addr_t const & ip_addr, intf_id_t intf_id);
 
+   std::string vrf_name() const;
+   void vrf_name_is(std::string vrf_name);
+
    /** Getter for 'ip_addr': the ip address of the neighbor entry. */
    ip_addr_t ip_addr() const;
 
@@ -49,6 +52,7 @@ class EOS_SDK_PUBLIC neighbor_key_impl_t {
                                    const neighbor_key_impl_t& obj);
 
  private:
+   std::string vrf_name_;
    ip_addr_t ip_addr_;
    intf_id_t intf_id_;
 };

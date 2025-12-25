@@ -50,7 +50,10 @@ class random_router : public eos::agent_handler,
       char buf[BUF_SIZE];
       int bytes = read(0, buf, BUF_SIZE - 1);
       if(bytes > 0) {
-         buf[bytes] = '\0';
+         buf[bytes--] = '\0';
+         while (bytes > 0 && buf[bytes] == '\n') {
+            buf[bytes--] = '\0';
+         }
          eos::ip_prefix_t new_prefix;
          bool valid_pfx = eos::parse_ip_prefix(buf, &new_prefix);
          if(!valid_pfx) {

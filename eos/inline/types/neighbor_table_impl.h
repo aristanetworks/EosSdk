@@ -10,16 +10,26 @@ namespace eos {
 
 // Default constructor.
 neighbor_key_impl_t::neighbor_key_impl_t() :
-      ip_addr_(), intf_id_() {
+      vrf_name_("default"), ip_addr_(), intf_id_() {
 }
 
 neighbor_key_impl_t::neighbor_key_impl_t(ip_addr_t const & ip_addr) :
-      ip_addr_(ip_addr), intf_id_() {
+      vrf_name_("default"), ip_addr_(ip_addr), intf_id_() {
 }
 
 neighbor_key_impl_t::neighbor_key_impl_t(ip_addr_t const & ip_addr,
                                                 intf_id_t intf_id) :
-      ip_addr_(ip_addr), intf_id_(intf_id) {
+      vrf_name_("default"), ip_addr_(ip_addr), intf_id_(intf_id) {
+}
+
+std::string
+neighbor_key_impl_t::vrf_name() const {
+   return vrf_name_;
+}
+
+void
+neighbor_key_impl_t::vrf_name_is(std::string vrf_name) {
+   vrf_name_ = vrf_name;
 }
 
 ip_addr_t
@@ -34,7 +44,8 @@ neighbor_key_impl_t::intf_id() const {
 
 bool
 neighbor_key_impl_t::operator==(neighbor_key_impl_t const & other) const {
-   return ip_addr_ == other.ip_addr_ &&
+   return vrf_name_ == other.vrf_name_ &&
+          ip_addr_ == other.ip_addr_ &&
           intf_id_ == other.intf_id_;
 }
 
@@ -45,7 +56,9 @@ neighbor_key_impl_t::operator!=(neighbor_key_impl_t const & other) const {
 
 bool
 neighbor_key_impl_t::operator<(neighbor_key_impl_t const & other) const {
-   if(ip_addr_ != other.ip_addr_) {
+   if(vrf_name_ != other.vrf_name_) {
+      return vrf_name_ < other.vrf_name_;
+   } else if(ip_addr_ != other.ip_addr_) {
       return ip_addr_ < other.ip_addr_;
    } else if(intf_id_ != other.intf_id_) {
       return intf_id_ < other.intf_id_;
@@ -62,6 +75,7 @@ neighbor_key_impl_t::hash() const {
 
 void
 neighbor_key_impl_t::mix_me(hash_mix & h) const {
+   h.mix(vrf_name_); // std::string
    h.mix(ip_addr_); // ip_addr_t
    h.mix(intf_id_); // intf_id_t
 }
@@ -70,7 +84,8 @@ std::string
 neighbor_key_impl_t::to_string() const {
    std::ostringstream ss;
    ss << "neighbor_key_t(";
-   ss << "ip_addr=" << ip_addr_;
+   ss << "vrf_name='" << vrf_name_ << "'";
+   ss << ", ip_addr=" << ip_addr_;
    ss << ", intf_id=" << intf_id_;
    ss << ")";
    return ss.str();

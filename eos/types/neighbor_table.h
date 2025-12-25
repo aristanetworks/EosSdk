@@ -58,6 +58,9 @@ class EOS_SDK_PUBLIC neighbor_key_t {
    static void * operator new( std::size_t );
    static void operator delete( void * ) noexcept;
 
+   std::string vrf_name() const;
+   void vrf_name_is(std::string vrf_name);
+
    /** Getter for 'ip_addr': the ip address of the neighbor entry. */
    ip_addr_t ip_addr() const;
 

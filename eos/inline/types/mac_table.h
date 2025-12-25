@@ -74,6 +74,14 @@ operator<<(std::ostream& os, const mac_entry_type_t & enum_val) {
       os << "MAC_ENTRY_PROGRAMMED_STATIC";
    } else if (enum_val==MAC_ENTRY_EVPN_VESPA_DYNAMIC) {
       os << "MAC_ENTRY_EVPN_VESPA_DYNAMIC";
+   } else if (enum_val==MAC_ENTRY_EVPN_INTF_DYNAMIC_FRR) {
+      os << "MAC_ENTRY_EVPN_INTF_DYNAMIC_FRR";
+   } else if (enum_val==MAC_ENTRY_EVPN_INTF_STATIC_FRR) {
+      os << "MAC_ENTRY_EVPN_INTF_STATIC_FRR";
+   } else if (enum_val==MAC_ENTRY_LEARNED_DYNAMIC_FRR) {
+      os << "MAC_ENTRY_LEARNED_DYNAMIC_FRR";
+   } else if (enum_val==MAC_ENTRY_CONFIGURED_STATIC_FRR) {
+      os << "MAC_ENTRY_CONFIGURED_STATIC_FRR";
    } else {
       os << "Unknown value";
    }
