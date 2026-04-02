@@ -1,0 +1,13 @@
+**aresolve**
+------------
+
+
+.. doxygenfile:: eos/aresolve.h
+   :project: eossdk
+
+Type definitions in **aresolve**
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. doxygenfile:: eos/types/aresolve.h
+   :project: eossdk
+

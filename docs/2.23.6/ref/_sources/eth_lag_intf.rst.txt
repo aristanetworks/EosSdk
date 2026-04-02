@@ -1,0 +1,13 @@
+**eth_lag_intf**
+----------------
+
+
+.. doxygenfile:: eos/eth_lag_intf.h
+   :project: eossdk
+
+Type definitions in **eth_lag_intf**
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. doxygenfile:: eos/types/eth_lag_intf.h
+   :project: eossdk
+

@@ -1,0 +1,7 @@
+**xcvr**
+--------
+
+
+.. doxygenfile:: eos/xcvr.h
+   :project: eossdk
+

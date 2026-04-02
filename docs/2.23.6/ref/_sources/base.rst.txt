@@ -1,0 +1,7 @@
+**base**
+--------
+
+
+.. doxygenfile:: eos/base.h
+   :project: eossdk
+

@@ -1,0 +1,13 @@
+**subintf**
+-----------
+
+
+.. doxygenfile:: eos/subintf.h
+   :project: eossdk
+
+Type definitions in **subintf**
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. doxygenfile:: eos/types/subintf.h
+   :project: eossdk
+
