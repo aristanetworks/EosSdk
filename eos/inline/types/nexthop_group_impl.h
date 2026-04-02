@@ -1,10 +1,12 @@
-// Copyright (c) 2025 Arista Networks, Inc.  All rights reserved.
+// Copyright (c) 2026 Arista Networks, Inc.  All rights reserved.
 // Arista Networks, Inc. Confidential and Proprietary.
 
 #ifndef EOS_INLINE_TYPES_NEXTHOP_GROUP_IMPL_H
 #define EOS_INLINE_TYPES_NEXTHOP_GROUP_IMPL_H
 
 namespace eos {
+
+
 
 
 
@@ -435,18 +437,18 @@ operator<<(std::ostream& os, const nexthop_group_entry_impl_t& obj) {
 nexthop_group_impl_t::nexthop_group_impl_t() :
       name_(), type_(), gre_key_type_(NEXTHOP_GROUP_GRE_KEY_NULL), ttl_(64),
       source_ip_(), source_intf_(), autosize_(false), nexthops_(),
-      backup_nexthops_(), destination_ips_(), counters_unshared_(),
-      hierarchical_fecs_enabled_(false), counters_persistent_(), version_id_(),
-      per_entry_backups_(false) {
+      backup_nexthops_(), destination_ips_(), hierarchical_fecs_enabled_(false),
+      counters_persistent_(), version_id_(), per_entry_backups_(false),
+      counter_type_(NEXTHOP_GROUP_ENTRY_COUNTERS_SHARED) {
 }
 
 nexthop_group_impl_t::nexthop_group_impl_t(std::string name,
                                                   nexthop_group_encap_t type) :
       name_(name), type_(type), gre_key_type_(NEXTHOP_GROUP_GRE_KEY_NULL),
       ttl_(64), source_ip_(), source_intf_(), autosize_(false), nexthops_(),
-      backup_nexthops_(), destination_ips_(), counters_unshared_(),
-      hierarchical_fecs_enabled_(false), counters_persistent_(), version_id_(),
-      per_entry_backups_(false) {
+      backup_nexthops_(), destination_ips_(), hierarchical_fecs_enabled_(false),
+      counters_persistent_(), version_id_(), per_entry_backups_(false),
+      counter_type_(NEXTHOP_GROUP_ENTRY_COUNTERS_SHARED) {
 }
 
 nexthop_group_impl_t::nexthop_group_impl_t(
@@ -454,17 +456,18 @@ nexthop_group_impl_t::nexthop_group_impl_t(
          nexthop_group_gre_key_t gre_key_type) :
       name_(name), type_(type), gre_key_type_(gre_key_type), ttl_(64),
       source_ip_(), source_intf_(), autosize_(false), nexthops_(),
-      backup_nexthops_(), destination_ips_(), counters_unshared_(),
-      hierarchical_fecs_enabled_(false), counters_persistent_(), version_id_(),
-      per_entry_backups_(false) {
+      backup_nexthops_(), destination_ips_(), hierarchical_fecs_enabled_(false),
+      counters_persistent_(), version_id_(), per_entry_backups_(false),
+      counter_type_(NEXTHOP_GROUP_ENTRY_COUNTERS_SHARED) {
 }
 
 nexthop_group_impl_t::nexthop_group_impl_t(std::string name,
                                                   ip_addr_t const & source_ip) :
       name_(name), type_(), gre_key_type_(), ttl_(), source_ip_(source_ip),
       source_intf_(), autosize_(), nexthops_(), backup_nexthops_(),
-      destination_ips_(), counters_unshared_(), hierarchical_fecs_enabled_(false),
-      counters_persistent_(), version_id_(), per_entry_backups_(false) {
+      destination_ips_(), hierarchical_fecs_enabled_(false),
+      counters_persistent_(), version_id_(), per_entry_backups_(false),
+      counter_type_(NEXTHOP_GROUP_ENTRY_COUNTERS_SHARED) {
 }
 
 nexthop_group_impl_t::nexthop_group_impl_t(
@@ -472,8 +475,9 @@ nexthop_group_impl_t::nexthop_group_impl_t(
          std::map<uint16_t, nexthop_group_entry_t> const & nexthops) :
       name_(name), type_(), gre_key_type_(), ttl_(), source_ip_(source_ip),
       source_intf_(), autosize_(), nexthops_(nexthops), backup_nexthops_(),
-      destination_ips_(), counters_unshared_(), hierarchical_fecs_enabled_(false),
-      counters_persistent_(), version_id_(), per_entry_backups_(false) {
+      destination_ips_(), hierarchical_fecs_enabled_(false),
+      counters_persistent_(), version_id_(), per_entry_backups_(false),
+      counter_type_(NEXTHOP_GROUP_ENTRY_COUNTERS_SHARED) {
 }
 
 std::string
@@ -677,16 +681,6 @@ nexthop_group_impl_t::destination_ip_del(uint16_t key) {
 }
 
 bool
-nexthop_group_impl_t::counters_unshared() const {
-   return counters_unshared_;
-}
-
-void
-nexthop_group_impl_t::counters_unshared_is(bool counters_unshared) {
-   counters_unshared_ = counters_unshared;
-}
-
-bool
 nexthop_group_impl_t::hierarchical_fecs_enabled() const {
    return hierarchical_fecs_enabled_;
 }
@@ -726,6 +720,27 @@ nexthop_group_impl_t::per_entry_backups_is(bool per_entry_backups) {
    per_entry_backups_ = per_entry_backups;
 }
 
+nexthop_group_counter_type_t
+nexthop_group_impl_t::counter_type() const {
+   return counter_type_;
+}
+
+void
+nexthop_group_impl_t::counter_type_is(nexthop_group_counter_type_t counter_type) {
+   counter_type_ = counter_type;
+}
+
+bool
+nexthop_group_impl_t::counters_unshared() const {
+   return counter_type() == NEXTHOP_GROUP_ENTRY_COUNTERS_UNSHARED;
+}
+
+void
+nexthop_group_impl_t::counters_unshared_is(bool counters_unshared) {
+   counter_type_is(counters_unshared ? NEXTHOP_GROUP_ENTRY_COUNTERS_UNSHARED :
+                                         NEXTHOP_GROUP_ENTRY_COUNTERS_SHARED);
+}
+
 bool
 nexthop_group_impl_t::operator==(nexthop_group_impl_t const & other) const {
    return name_ == other.name_ &&
@@ -738,11 +753,11 @@ nexthop_group_impl_t::operator==(nexthop_group_impl_t const & other) const {
           nexthops_ == other.nexthops_ &&
           backup_nexthops_ == other.backup_nexthops_ &&
           destination_ips_ == other.destination_ips_ &&
-          counters_unshared_ == other.counters_unshared_ &&
           hierarchical_fecs_enabled_ == other.hierarchical_fecs_enabled_ &&
           counters_persistent_ == other.counters_persistent_ &&
           version_id_ == other.version_id_ &&
-          per_entry_backups_ == other.per_entry_backups_;
+          per_entry_backups_ == other.per_entry_backups_ &&
+          counter_type_ == other.counter_type_;
 }
 
 bool
@@ -772,8 +787,6 @@ nexthop_group_impl_t::operator<(nexthop_group_impl_t const & other) const {
       return backup_nexthops_ < other.backup_nexthops_;
    } else if(destination_ips_ != other.destination_ips_) {
       return destination_ips_ < other.destination_ips_;
-   } else if(counters_unshared_ != other.counters_unshared_) {
-      return counters_unshared_ < other.counters_unshared_;
    } else if(hierarchical_fecs_enabled_ != other.hierarchical_fecs_enabled_) {
       return hierarchical_fecs_enabled_ < other.hierarchical_fecs_enabled_;
    } else if(counters_persistent_ != other.counters_persistent_) {
@@ -782,6 +795,8 @@ nexthop_group_impl_t::operator<(nexthop_group_impl_t const & other) const {
       return version_id_ < other.version_id_;
    } else if(per_entry_backups_ != other.per_entry_backups_) {
       return per_entry_backups_ < other.per_entry_backups_;
+   } else if(counter_type_ != other.counter_type_) {
+      return counter_type_ < other.counter_type_;
    }
    return false;
 }
@@ -817,11 +832,11 @@ nexthop_group_impl_t::mix_me(hash_mix & h) const {
       h.mix(it->first); // uint16_t
       h.mix(it->second); // ip_addr_t
    }
-   h.mix(counters_unshared_); // bool
    h.mix(hierarchical_fecs_enabled_); // bool
    h.mix(counters_persistent_); // bool
    h.mix(version_id_); // uint16_t
    h.mix(per_entry_backups_); // bool
+   h.mix(counter_type_); // nexthop_group_counter_type_t
 }
 
 std::string
@@ -871,11 +886,11 @@ nexthop_group_impl_t::to_string() const {
       }
    }
    ss << "'";
-   ss << ", counters_unshared=" << counters_unshared_;
    ss << ", hierarchical_fecs_enabled=" << hierarchical_fecs_enabled_;
    ss << ", counters_persistent=" << counters_persistent_;
    ss << ", version_id=" << version_id_;
    ss << ", per_entry_backups=" << per_entry_backups_;
+   ss << ", counter_type=" << counter_type_;
    ss << ")";
    return ss.str();
 }

@@ -1,4 +1,4 @@
-// Copyright (c) 2025 Arista Networks, Inc.  All rights reserved.
+// Copyright (c) 2026 Arista Networks, Inc.  All rights reserved.
 // Arista Networks, Inc. Confidential and Proprietary.
 
 #ifndef EOS_TYPES_NEXTHOP_GROUP_H
@@ -94,6 +94,28 @@ enum nexthop_group_gre_key_t {
  */
 EOS_SDK_PUBLIC std::ostream& operator<<(std::ostream& os,
                                         const nexthop_group_gre_key_t & enum_val);
+
+/** NexthopGroup Counter Type. */
+enum nexthop_group_counter_type_t {
+   NEXTHOP_GROUP_ENTRY_COUNTERS_NULL,
+   /** Shared counters. */
+   NEXTHOP_GROUP_ENTRY_COUNTERS_SHARED = 1,
+   /** Unshared counters. */
+   NEXTHOP_GROUP_ENTRY_COUNTERS_UNSHARED = 2,
+   /**
+    * Counters are disabled for this nexthop group.
+    * This enum value is not supported in this release.
+    * Setting the counter type to disabled will result in
+    * an error.
+    */
+   NEXTHOP_GROUP_ENTRY_COUNTERS_DISABLED = 3,
+};
+/**
+ * Appends a string representation of enum nexthop_group_counter_type_t value to
+ * the ostream.
+ */
+EOS_SDK_PUBLIC std::ostream& operator<<(
+         std::ostream& os, const nexthop_group_counter_type_t & enum_val);
 
 class nexthop_group_mpls_action_impl_t;
 /**
@@ -426,16 +448,6 @@ class EOS_SDK_PUBLIC nexthop_group_t {
    void destination_ip_del(uint16_t key);
 
    /**
-    * Getter for 'counters_unshared': Defines whether entry counters are unshared
-    * for the nexthop group. When set, do not share counter values between entries
-    * that share the same tunnel destination. Each entry will have its own unique
-    * counter. Disabled (i.e. set to false) by default.
-    */
-   bool counters_unshared() const;
-   /** Setter for 'counters_unshared'. */
-   void counters_unshared_is(bool counters_unshared);
-
-   /**
     * Getter for 'hierarchical_fecs_enabled': Enableing hierarchical fec resolution
     * for programming nexthop group entries. If this flag is true, the entry
     * resolved over a remote nexthop will be programmed hierarchically in the
@@ -483,6 +495,24 @@ class EOS_SDK_PUBLIC nexthop_group_t {
    /** Setter for 'per_entry_backups'. */
    void per_entry_backups_is(bool per_entry_backups);
 
+   /**
+    * Getter for 'counter_type': Defines type for the entry counters for the
+    * nexthop group. When set to unshared, do not share counter values between
+    * entries that share the same tunnel destination. Each entry will have its own
+    * unique counter. When set to disabled, disable counters for this nexthop
+    * group. Shared counters are used by default.
+    */
+   nexthop_group_counter_type_t counter_type() const;
+   /** Setter for 'counter_type'. */
+   void counter_type_is(nexthop_group_counter_type_t counter_type);
+
+   /** Getter for 'counters_unshared': deprecated in favour of counter_type. */
+   bool counters_unshared() const;
+   /**
+    * Setter for 'counters_unshared': deprecated in favour of counter_type. Setting
+    * this to false leads to shared counters.
+    */
+   void counters_unshared_is(bool counters_unshared);
    bool operator==(nexthop_group_t const & other) const;
    bool operator!=(nexthop_group_t const & other) const;
    bool operator<(nexthop_group_t const & other) const;

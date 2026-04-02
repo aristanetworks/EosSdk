@@ -1,4 +1,4 @@
-// Copyright (c) 2025 Arista Networks, Inc.  All rights reserved.
+// Copyright (c) 2026 Arista Networks, Inc.  All rights reserved.
 // Arista Networks, Inc. Confidential and Proprietary.
 
 #ifndef EOS_TYPES_NEXTHOP_GROUP_IMPL_H
@@ -294,16 +294,6 @@ class EOS_SDK_PUBLIC nexthop_group_impl_t {
    void destination_ip_del(uint16_t key);
 
    /**
-    * Getter for 'counters_unshared': Defines whether entry counters are unshared
-    * for the nexthop group. When set, do not share counter values between entries
-    * that share the same tunnel destination. Each entry will have its own unique
-    * counter. Disabled (i.e. set to false) by default.
-    */
-   bool counters_unshared() const;
-   /** Setter for 'counters_unshared'. */
-   void counters_unshared_is(bool counters_unshared);
-
-   /**
     * Getter for 'hierarchical_fecs_enabled': Enableing hierarchical fec resolution
     * for programming nexthop group entries. If this flag is true, the entry
     * resolved over a remote nexthop will be programmed hierarchically in the
@@ -351,6 +341,24 @@ class EOS_SDK_PUBLIC nexthop_group_impl_t {
    /** Setter for 'per_entry_backups'. */
    void per_entry_backups_is(bool per_entry_backups);
 
+   /**
+    * Getter for 'counter_type': Defines type for the entry counters for the
+    * nexthop group. When set to unshared, do not share counter values between
+    * entries that share the same tunnel destination. Each entry will have its own
+    * unique counter. When set to disabled, disable counters for this nexthop
+    * group. Shared counters are used by default.
+    */
+   nexthop_group_counter_type_t counter_type() const;
+   /** Setter for 'counter_type'. */
+   void counter_type_is(nexthop_group_counter_type_t counter_type);
+
+   /** Getter for 'counters_unshared': deprecated in favour of counter_type. */
+   bool counters_unshared() const;
+   /**
+    * Setter for 'counters_unshared': deprecated in favour of counter_type. Setting
+    * this to false leads to shared counters.
+    */
+   void counters_unshared_is(bool counters_unshared);
    bool operator==(nexthop_group_impl_t const & other) const;
    bool operator!=(nexthop_group_impl_t const & other) const;
    bool operator<(nexthop_group_impl_t const & other) const;
@@ -378,11 +386,11 @@ class EOS_SDK_PUBLIC nexthop_group_impl_t {
    std::map<uint16_t, nexthop_group_entry_t> nexthops_;
    std::map<uint16_t, nexthop_group_entry_t> backup_nexthops_;
    std::map<uint16_t, ip_addr_t> destination_ips_;
-   bool counters_unshared_;
    bool hierarchical_fecs_enabled_;
    bool counters_persistent_;
    uint16_t version_id_;
    bool per_entry_backups_;
+   nexthop_group_counter_type_t counter_type_;
 };
 
 /** Status for the associated nexthop group. */

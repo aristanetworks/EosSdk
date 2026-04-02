@@ -38,6 +38,7 @@ class neighbor_table_status_iter_impl;
  *
  * This class provides handler APIs to react to neighbor table entry deletion
  * and addition. It works for both the IPv4 ARP table and IPv6 neighbor table.
+ * However, it only generates callbacks for entries in the default VRF.
  */
 class EOS_SDK_PUBLIC neighbor_table_handler :
               public base_handler<neighbor_table_mgr, neighbor_table_handler> {
@@ -105,10 +106,17 @@ class EOS_SDK_PUBLIC neighbor_table_mgr : public base_mgr<neighbor_table_handler
    virtual ~neighbor_table_mgr();
 
    /**
-    * Iterates through the statically configured ARP and Neighbor Discovery tables.
+    * Iterates through the statically configured ARP and Neighbor Discovery tables in
+    * the default VRF.
     * A neighbor_key_t is returned for each entry.
     */
    virtual neighbor_table_iter_t neighbor_table_iter() const = 0;
+
+   /**
+    * Iterates through the statically configured ARP and Neighbor Discovery tables in
+    * the specified VRF.
+    */
+   neighbor_table_iter_t neighbor_table_iter(std::string const& vrf_name) const;
 
    /**
     * Iterates through the resolved ARP and Neighbor Discovery tables. 

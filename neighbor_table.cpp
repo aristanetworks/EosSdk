@@ -16,6 +16,11 @@ class neighbor_table_mgr_impl : public neighbor_table_mgr {
       return *nop;
    }
 
+   neighbor_table_iter_t neighbor_table_iter(std::string vrf_name) const {
+      neighbor_table_iter_t * nop = 0;
+      return *nop;
+   }
+
    neighbor_table_status_iter_t neighbor_table_status_iter() const {
       neighbor_table_status_iter_t * nop = 0;
       return *nop;
@@ -49,6 +54,12 @@ void neighbor_table_handler::watch_neighbor_entry(neighbor_key_t const & key,
 void neighbor_table_handler::on_neighbor_entry_del(neighbor_key_t const & key) {
 }
 void neighbor_table_handler::on_neighbor_entry_set(neighbor_entry_t const & entry) {
+}
+
+neighbor_table_iter_t
+neighbor_table_mgr::neighbor_table_iter(std::string const & vrf_name) const {
+   return static_cast<const neighbor_table_mgr_impl*>(
+         this)->neighbor_table_iter(vrf_name);
 }
 
 } // end eos namespace

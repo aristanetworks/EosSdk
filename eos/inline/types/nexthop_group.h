@@ -1,4 +1,4 @@
-// Copyright (c) 2025 Arista Networks, Inc.  All rights reserved.
+// Copyright (c) 2026 Arista Networks, Inc.  All rights reserved.
 // Arista Networks, Inc. Confidential and Proprietary.
 
 #ifndef EOS_INLINE_TYPES_NEXTHOP_GROUP_H
@@ -33,6 +33,23 @@ operator<<(std::ostream& os, const nexthop_group_gre_key_t & enum_val) {
       os << "NEXTHOP_GROUP_GRE_KEY_NULL";
    } else if (enum_val==NEXTHOP_GROUP_GRE_KEY_INGRESS_INTF) {
       os << "NEXTHOP_GROUP_GRE_KEY_INGRESS_INTF";
+   } else {
+      os << "Unknown value";
+   }
+   return os;
+}
+
+
+EOS_SDK_PUBLIC std::ostream&
+operator<<(std::ostream& os, const nexthop_group_counter_type_t & enum_val) {
+   if (enum_val==NEXTHOP_GROUP_ENTRY_COUNTERS_NULL) {
+      os << "NEXTHOP_GROUP_ENTRY_COUNTERS_NULL";
+   } else if (enum_val==NEXTHOP_GROUP_ENTRY_COUNTERS_SHARED) {
+      os << "NEXTHOP_GROUP_ENTRY_COUNTERS_SHARED";
+   } else if (enum_val==NEXTHOP_GROUP_ENTRY_COUNTERS_UNSHARED) {
+      os << "NEXTHOP_GROUP_ENTRY_COUNTERS_UNSHARED";
+   } else if (enum_val==NEXTHOP_GROUP_ENTRY_COUNTERS_DISABLED) {
+      os << "NEXTHOP_GROUP_ENTRY_COUNTERS_DISABLED";
    } else {
       os << "Unknown value";
    }
@@ -382,14 +399,6 @@ nexthop_group_t::destination_ip_del(uint16_t key) {
    pimpl->destination_ip_del(key);
 }
 bool
-nexthop_group_t::counters_unshared() const {
-   return pimpl->counters_unshared();
-}
-void
-nexthop_group_t::counters_unshared_is(bool counters_unshared) {
-   pimpl->counters_unshared_is(counters_unshared);
-}
-bool
 nexthop_group_t::hierarchical_fecs_enabled() const {
    return pimpl->hierarchical_fecs_enabled();
 }
@@ -420,6 +429,22 @@ nexthop_group_t::per_entry_backups() const {
 void
 nexthop_group_t::per_entry_backups_is(bool per_entry_backups) {
    pimpl->per_entry_backups_is(per_entry_backups);
+}
+nexthop_group_counter_type_t
+nexthop_group_t::counter_type() const {
+   return pimpl->counter_type();
+}
+void
+nexthop_group_t::counter_type_is(nexthop_group_counter_type_t counter_type) {
+   pimpl->counter_type_is(counter_type);
+}
+bool
+nexthop_group_t::counters_unshared() const {
+   return pimpl->counters_unshared();
+}
+void
+nexthop_group_t::counters_unshared_is(bool counters_unshared) {
+   pimpl->counters_unshared_is(counters_unshared);
 }
 bool
 nexthop_group_t::operator==(nexthop_group_t const & other) const {
