@@ -104,9 +104,8 @@ enum nexthop_group_counter_type_t {
    NEXTHOP_GROUP_ENTRY_COUNTERS_UNSHARED = 2,
    /**
     * Counters are disabled for this nexthop group.
-    * This enum value is not supported in this release.
-    * Setting the counter type to disabled will result in
-    * an error.
+    * This enum value is not supported on all platforms.
+    * Setting the counter type to disabled may result in an error.
     */
    NEXTHOP_GROUP_ENTRY_COUNTERS_DISABLED = 3,
 };
@@ -581,6 +580,8 @@ enum nexthop_group_programmed_hw_state_t {
     * hardware.
     */
    NEXTHOP_GROUP_HW_ALL_PROGRAMMED = 2,
+   /** Nexthop group hardware state is unknown. */
+   NEXTHOP_GROUP_HW_UNKNOWN = 3,
 };
 /**
  * Appends a string representation of enum nexthop_group_programmed_hw_state_t

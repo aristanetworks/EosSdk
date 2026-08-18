@@ -469,7 +469,7 @@ void MplsTunnelLivenessAgent::on_initialized() {
    timeout_time_is(eos::now() + TIMEOUT_LENGTH);
 }
 
-void MplsTunnelLivenessAgent::on_internal_vlan_id(eos::intf_id_t const & intf_id,
+void MplsTunnelLivenessAgent::on_internal_vlan_id(eos::intf_id_t intf_id,
                                                   eos::vlan_id_t vlan_id) {
    t.trace0("on_internal_vlan_id: intf_id %s vlan_id %d",
             intf_id.to_string().c_str(), vlan_id);

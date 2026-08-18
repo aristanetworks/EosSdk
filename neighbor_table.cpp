@@ -48,6 +48,8 @@ neighbor_table_handler::neighbor_table_handler(neighbor_table_mgr *mgr) :
 }
 void neighbor_table_handler::watch_all_neighbor_entries(bool interest) {
 }
+void neighbor_table_handler::watch_all_vrfs_neighbor_entries( bool interest ){
+}
 void neighbor_table_handler::watch_neighbor_entry(neighbor_key_t const & key,
                                                    bool interest) {
 }

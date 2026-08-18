@@ -499,6 +499,8 @@ operator<<(std::ostream& os, const nexthop_group_programmed_hw_state_t & enum_va
       os << "1";
    } else if (enum_val==NEXTHOP_GROUP_HW_ALL_PROGRAMMED) {
       os << "2";
+   } else if (enum_val==NEXTHOP_GROUP_HW_UNKNOWN) {
+      os << "3";
    } else {
       os << "Unknown value";
    }

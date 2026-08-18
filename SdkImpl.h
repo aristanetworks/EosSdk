@@ -14,6 +14,7 @@
 namespace eos {
 
 class acl_mgr;
+class agents_mgr;
 class aresolve_mgr;
 class bfd_session_mgr;
 class bgp_mgr;
@@ -111,6 +112,7 @@ class EOS_SDK_PUBLIC sdk::SdkImpl {
 
    void init_acl_mgr();
    void init_agent_mgr();
+   void init_agents_mgr();
    void init_aresolve_mgr();
    void init_bfd_session_mgr();
    void init_bgp_mgr();
@@ -149,6 +151,7 @@ class EOS_SDK_PUBLIC sdk::SdkImpl {
 
    acl_mgr * get_acl_mgr();
    agent_mgr * get_agent_mgr();
+   agents_mgr* get_agents_mgr();
    aresolve_mgr * get_aresolve_mgr();
    bfd_session_mgr * get_bfd_session_mgr();
    bgp_mgr * get_bgp_mgr();
@@ -196,6 +199,7 @@ class EOS_SDK_PUBLIC sdk::SdkImpl {
    EOS_SDK_DISALLOW_COPY_CTOR(SdkImpl);
    acl_mgr * acl_mgr_;
    agent_mgr * agent_mgr_;
+   agents_mgr* agents_mgr_;
    aresolve_mgr * aresolve_mgr_;
    bfd_session_mgr * bfd_session_mgr_;
    bgp_mgr * bgp_mgr_;
@@ -286,6 +290,10 @@ inline acl_mgr * sdk::SdkImpl::get_acl_mgr() {
 
 inline agent_mgr * sdk::SdkImpl::get_agent_mgr() {
    GET_MGR(agent)
+}
+
+inline agents_mgr* sdk::SdkImpl::get_agents_mgr() {
+   GET_MGR(agents)
 }
 
 inline aresolve_mgr * sdk::SdkImpl::get_aresolve_mgr() {

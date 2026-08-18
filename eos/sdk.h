@@ -12,6 +12,7 @@
 namespace eos {
 
 class acl_mgr;
+class agents_mgr;
 class aresolve_mgr;
 class bfd_session_mgr;
 class bgp_mgr;
@@ -142,6 +143,7 @@ class EOS_SDK_PUBLIC sdk {
 
    acl_mgr * get_acl_mgr();
    agent_mgr * get_agent_mgr();
+   agents_mgr* get_agents_mgr();
    aresolve_mgr * get_aresolve_mgr();
    bfd_session_mgr * get_bfd_session_mgr();
    bgp_mgr * get_bgp_mgr();

@@ -67,6 +67,7 @@ typedef uint64_t uint64_be_t;
 %feature("director");
 %feature("nodirector") eos::acl_mgr;
 %feature("nodirector") eos::agent_mgr;
+%feature("nodirector") eos::agents_mgr;
 %feature("nodirector") eos::aresolve_mgr;
 %feature("nodirector") eos::bfd_session_mgr;
 %feature("nodirector") eos::bgp_mgr;
@@ -105,6 +106,7 @@ typedef uint64_t uint64_be_t;
 %{
 //#include "eos/acl.h"
 #include "eos/agent.h"
+#include "eos/agents.h"
 #include "eos/aresolve.h"
 #include "eos/bfd.h"
 #include "eos/bgp.h"
@@ -225,6 +227,9 @@ wrap_iterator(eos::acl_rule_ip_iter_t, eos::acl_rule_ip_iter_impl, eos::acl_rule
 wrap_iterator(eos::acl_rule_eth_iter_t, eos::acl_rule_eth_iter_impl, eos::acl_rule_eth_entry_t);
 wrap_iterator(eos::agent_option_iter_t, eos::agent_option_iter_impl, std::string);
 wrap_iterator(eos::agent_status_iter_t, eos::agent_status_iter_impl, std::string);
+wrap_iterator(eos::agents_iter_t, eos::agents_iter_impl, std::string);
+wrap_iterator(eos::agents_option_iter_t, eos::agents_option_iter_impl, std::string);
+wrap_iterator(eos::agents_status_iter_t, eos::agents_status_iter_impl, std::string);
 wrap_iterator(eos::bfd_session_iter_t, eos::bfd_session_iter_impl, eos::bfd_session_key_t);
 wrap_iterator(eos::bgp_path_iter_t, eos::bgp_path_iter_impl, eos::bgp_path_t);
 wrap_iterator(eos::class_map_iter_t, eos::class_map_iter_impl, eos::class_map_key_t);

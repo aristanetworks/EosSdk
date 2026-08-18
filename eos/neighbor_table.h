@@ -38,7 +38,6 @@ class neighbor_table_status_iter_impl;
  *
  * This class provides handler APIs to react to neighbor table entry deletion
  * and addition. It works for both the IPv4 ARP table and IPv6 neighbor table.
- * However, it only generates callbacks for entries in the default VRF.
  */
 class EOS_SDK_PUBLIC neighbor_table_handler :
               public base_handler<neighbor_table_mgr, neighbor_table_handler> {
@@ -47,18 +46,25 @@ class EOS_SDK_PUBLIC neighbor_table_handler :
    neighbor_table_mgr * get_neighbor_table_mgr() const;
 
    /**
-    * Registers this class to receive change updates on all neighbor entries. This
-    * includes both IPv4 ARP table entries and IPv6 Neighbor Discovery table
-    * entries.
+    * Registers this class to receive change updates on all neighbor entries in the
+    * default VRF. This includes both IPv4 ARP table entries and IPv6 Neighbor
+    * Discovery table entries.
     */
    void watch_all_neighbor_entries(bool interest);
 
    /**
-    * Registers this class to receive change updates on a given neighbor entry. This
-    * includes both IPv4 ARP table entries and IPv6 Neighbor Discovery table
-    * entries.
+    * Registers this class to receive change updates on all neighbor entries in all
+    * VRFs. This includes both IPv4 ARP table entries and IPv6 Neighbor Discovery
+    * table entries.
     */
-   void watch_neighbor_entry(neighbor_key_t const & key, bool interest);
+   void watch_all_vrfs_neighbor_entries(bool interest);
+
+   /**
+    * Registers this class to receive change updates on a given neighbor entry in the
+    * default VRF. This includes both IPv4 ARP table entries and IPv6 Neighbor
+    * Discovery table entries.
+    */
+   void watch_neighbor_entry(neighbor_key_t const& key, bool interest);
 
    // Handler when an entry shows up in ARP table or Neighbor Discovery table.
    // The input parameter 'entry' is the newly created or updated neighbor entry.

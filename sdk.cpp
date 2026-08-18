@@ -20,6 +20,7 @@
 
 #include "eos/acl.h"
 #include "eos/aresolve.h"
+#include "eos/agents.h"
 #include "eos/bfd.h"
 #include "eos/bgp.h"
 #include "eos/bgp_path.h"
@@ -225,6 +226,10 @@ acl_mgr * sdk::get_acl_mgr() {
 
 agent_mgr * sdk::get_agent_mgr() {
    return sdkImpl->get_agent_mgr();
+}
+
+agents_mgr * sdk::get_agents_mgr() {
+   return sdkImpl->get_agents_mgr();
 }
 
 aresolve_mgr * sdk::get_aresolve_mgr() {

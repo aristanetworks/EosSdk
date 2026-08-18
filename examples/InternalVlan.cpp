@@ -37,7 +37,7 @@ class internal_vlan_id : public eos::agent_handler,
       t.trace0("Initialized");
    }
 
-   void on_internal_vlan_id(eos::intf_id_t const & i, eos::vlan_id_t vlan_id) {
+   void on_internal_vlan_id(eos::intf_id_t i, eos::vlan_id_t vlan_id) {
       t.trace0("on_internal_vlan_id: intf %s vlan_id %d",
                i.to_string().c_str(), vlan_id);
    }

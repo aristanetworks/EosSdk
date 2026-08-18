@@ -82,6 +82,8 @@ operator<<(std::ostream& os, const mac_entry_type_t & enum_val) {
       os << "MAC_ENTRY_LEARNED_DYNAMIC_FRR";
    } else if (enum_val==MAC_ENTRY_CONFIGURED_STATIC_FRR) {
       os << "MAC_ENTRY_CONFIGURED_STATIC_FRR";
+   } else if (enum_val==MAC_ENTRY_SYSTEM_MAC) {
+      os << "MAC_ENTRY_SYSTEM_MAC";
    } else {
       os << "Unknown value";
    }
