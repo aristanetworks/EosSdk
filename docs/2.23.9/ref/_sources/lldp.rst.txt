@@ -1,0 +1,13 @@
+**lldp**
+--------
+
+
+.. doxygenfile:: eos/lldp.h
+   :project: eossdk
+
+Type definitions in **lldp**
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. doxygenfile:: eos/types/lldp.h
+   :project: eossdk
+

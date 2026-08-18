@@ -1,0 +1,7 @@
+**exception**
+-------------
+
+
+.. doxygenfile:: eos/exception.h
+   :project: eossdk
+

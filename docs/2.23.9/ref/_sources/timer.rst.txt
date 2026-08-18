@@ -1,0 +1,7 @@
+**timer**
+---------
+
+
+.. doxygenfile:: eos/timer.h
+   :project: eossdk
+

@@ -1,0 +1,13 @@
+**nexthop_group_tunnel**
+------------------------
+
+
+.. doxygenfile:: eos/nexthop_group_tunnel.h
+   :project: eossdk
+
+Type definitions in **nexthop_group_tunnel**
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. doxygenfile:: eos/types/nexthop_group_tunnel.h
+   :project: eossdk
+

@@ -1,0 +1,328 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>agents &#8212; Arista EOS SDK 2.23.9 reference</title>
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/eossdk.css" type="text/css" />
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="aresolve" href="aresolve.html" />
+    <link rel="prev" title="agent" href="agent.html" /> 
+  </head><body>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             accesskey="I">index</a></li>
+        <li class="right" >
+          <a href="aresolve.html" title="aresolve"
+             accesskey="N">next</a> |</li>
+        <li class="right" >
+          <a href="agent.html" title="agent"
+             accesskey="P">previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Arista EOS SDK 2.23.9 reference</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href=""><strong>agents</strong></a></li> 
+      </ul>
+    </div>  
+
+    <div class="document">
+      <div class="documentwrapper">
+        <div class="bodywrapper">
+          <div class="body" role="main">
+            
+  <div class="section" id="agents">
+<h1><strong>agents</strong><a class="headerlink" href="#agents" title="Permalink to this headline">¶</a></h1>
+<dl class="cpp type">
+<dt id="_CPPv43eos">
+<span id="_CPPv33eos"></span><span id="_CPPv23eos"></span><span id="eos"></span><span class="target" id="namespaceeos"></span><em class="property">namespace </em><code class="sig-name descname">eos</code><br /></dt>
+<dd><dl class="cpp class">
+<dt id="_CPPv4N3eos14agents_handlerE">
+<span id="_CPPv3N3eos14agents_handlerE"></span><span id="_CPPv2N3eos14agents_handlerE"></span><span id="eos::agents_handler"></span><span class="target" id="classeos_1_1agents__handler"></span><em class="property">class </em><code class="sig-name descname">agents_handler</code> : <em class="property">public</em> <a class="reference internal" href="acl.html#_CPPv43eos" title="eos">eos</a>::<a class="reference internal" href="base_handler.html#_CPPv4I00EN3eos12base_handlerE" title="eos::base_handler">base_handler</a>&lt;<a class="reference internal" href="#_CPPv4N3eos10agents_mgrE" title="eos::agents_mgr">agents_mgr</a>, <a class="reference internal" href="#_CPPv4N3eos14agents_handlerE" title="eos::agents_handler">agents_handler</a>&gt;<a class="headerlink" href="#_CPPv4N3eos14agents_handlerE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><div class="docutils container">
+<em>#include &lt;agents.h&gt;</em></div>
+<p>Handler for cross-agent state-change notifications. To watch ALL agents, call watch_all_agents(true). To watch specific agents, call watch_agent(name, true). These two modes are mutually exclusive (consistent with <a class="reference internal" href="base_mgr.html#classeos_1_1base__mgr"><span class="std std-ref">base_mgr</span></a>). watch_all overrides any agent-specific watches. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
+<dl class="cpp function">
+<dt id="_CPPv4N3eos14agents_handler14agents_handlerEP10agents_mgr">
+<span id="_CPPv3N3eos14agents_handler14agents_handlerEP10agents_mgr"></span><span id="_CPPv2N3eos14agents_handler14agents_handlerEP10agents_mgr"></span><span id="eos::agents_handler::agents_handler__agents_mgrP"></span><span class="target" id="classeos_1_1agents__handler_1a035a37c15ae5fb877cba29bc0a126c24"></span><em class="property">explicit</em> <code class="sig-name descname">agents_handler</code><span class="sig-paren">(</span><a class="reference internal" href="#_CPPv4N3eos10agents_mgrE" title="eos::agents_mgr">agents_mgr</a> *<em>mgr</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos14agents_handler14agents_handlerEP10agents_mgr" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos14agents_handler14get_agents_mgrEv">
+<span id="_CPPv3NK3eos14agents_handler14get_agents_mgrEv"></span><span id="_CPPv2NK3eos14agents_handler14get_agents_mgrEv"></span><span id="eos::agents_handler::get_agents_mgrC"></span><span class="target" id="classeos_1_1agents__handler_1a7de8786163621bfb5ab4a176faaf6ca4"></span><em class="property">inline</em> <a class="reference internal" href="#_CPPv4N3eos10agents_mgrE" title="eos::agents_mgr">agents_mgr</a> *<code class="sig-name descname">get_agents_mgr</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em><a class="headerlink" href="#_CPPv4NK3eos14agents_handler14get_agents_mgrEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos14agents_handler16watch_all_agentsEb">
+<span id="_CPPv3N3eos14agents_handler16watch_all_agentsEb"></span><span id="_CPPv2N3eos14agents_handler16watch_all_agentsEb"></span><span id="eos::agents_handler::watch_all_agents__b"></span><span class="target" id="classeos_1_1agents__handler_1af2eb296a4dd89a232366f3abfc6ba3fd"></span>void <code class="sig-name descname">watch_all_agents</code><span class="sig-paren">(</span>bool<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos14agents_handler16watch_all_agentsEb" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Register handler to receive changes for all agents. To unsub, pass ‘false’. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos14agents_handler11watch_agentERKNSt6stringEb">
+<span id="_CPPv3N3eos14agents_handler11watch_agentERKNSt6stringEb"></span><span id="_CPPv2N3eos14agents_handler11watch_agentERKNSt6stringEb"></span><span id="eos::agents_handler::watch_agent__ssCR.b"></span><span class="target" id="classeos_1_1agents__handler_1a9b42c4f4aa29c0cec2a638fb222cb748"></span>void <code class="sig-name descname">watch_agent</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::string <em class="property">const</em> &amp;<em>agent_name</em>, bool<span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos14agents_handler11watch_agentERKNSt6stringEb" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Register this handler to receive changes for a specific agent. Only effective when watch_all_agents is not active. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos14agents_handler19on_agent_status_setERKNSt6stringERKNSt6stringERKNSt6stringE">
+<span id="_CPPv3N3eos14agents_handler19on_agent_status_setERKNSt6stringERKNSt6stringERKNSt6stringE"></span><span id="_CPPv2N3eos14agents_handler19on_agent_status_setERKNSt6stringERKNSt6stringERKNSt6stringE"></span><span id="eos::agents_handler::on_agent_status_set__ssCR.ssCR.ssCR"></span><span class="target" id="classeos_1_1agents__handler_1a9ec953ca6b5d3a120c969ce4d51a1922"></span><em class="property">virtual</em> void <code class="sig-name descname">on_agent_status_set</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::string <em class="property">const</em> &amp;<em>agent_name</em>, <a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::string <em class="property">const</em> &amp;<em>key</em>, <a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::string <em class="property">const</em> &amp;<em>value</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos14agents_handler19on_agent_status_setERKNSt6stringERKNSt6stringERKNSt6stringE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Called when an agent’s status key is created or changed. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>agent_name</strong> – The agent whose status changed. </p></li>
+<li><p><strong>key</strong> – The status key that changed. </p></li>
+<li><p><strong>value</strong> – The new value. </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos14agents_handler19on_agent_status_delERKNSt6stringERKNSt6stringE">
+<span id="_CPPv3N3eos14agents_handler19on_agent_status_delERKNSt6stringERKNSt6stringE"></span><span id="_CPPv2N3eos14agents_handler19on_agent_status_delERKNSt6stringERKNSt6stringE"></span><span id="eos::agents_handler::on_agent_status_del__ssCR.ssCR"></span><span class="target" id="classeos_1_1agents__handler_1af15d208e1ac3424e075c5ef9e90fa782"></span><em class="property">virtual</em> void <code class="sig-name descname">on_agent_status_del</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::string <em class="property">const</em> &amp;<em>agent_name</em>, <a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::string <em class="property">const</em> &amp;<em>key</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos14agents_handler19on_agent_status_delERKNSt6stringERKNSt6stringE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Called when an agent’s status key is deleted. </p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>agent_name</strong> – The agent whose status key was removed. </p></li>
+<li><p><strong>key</strong> – The status key that was deleted. </p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4N3eos14agents_handler20on_agent_enabled_setERKNSt6stringEb">
+<span id="_CPPv3N3eos14agents_handler20on_agent_enabled_setERKNSt6stringEb"></span><span id="_CPPv2N3eos14agents_handler20on_agent_enabled_setERKNSt6stringEb"></span><span id="eos::agents_handler::on_agent_enabled_set__ssCR.b"></span><span class="target" id="classeos_1_1agents__handler_1a331a9deb75acb0cf0cb615c8770ac1dd"></span><em class="property">virtual</em> void <code class="sig-name descname">on_agent_enabled_set</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::string <em class="property">const</em> &amp;<em>agent_name</em>, bool <em>enabled</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos14agents_handler20on_agent_enabled_setERKNSt6stringEb" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Called when an agent’s enabled state changes. </p>
+</dd></dl>
+
+</div>
+</dd></dl>
+
+<dl class="cpp class">
+<dt id="_CPPv4N3eos13agents_iter_tE">
+<span id="_CPPv3N3eos13agents_iter_tE"></span><span id="_CPPv2N3eos13agents_iter_tE"></span><span id="eos::agents_iter_t"></span><span class="target" id="classeos_1_1agents__iter__t"></span><em class="property">class </em><code class="sig-name descname">agents_iter_t</code> : <em class="property">public</em> iter_base&lt;<a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::string, agents_iter_impl&gt;<a class="headerlink" href="#_CPPv4N3eos13agents_iter_tE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><div class="docutils container">
+<em>#include &lt;agents.h&gt;</em></div>
+<p>Iterator over agent names. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-private-functions">Private Functions</p>
+<dl class="cpp function">
+<dt id="_CPPv4N3eos13agents_iter_t13agents_iter_tEPC16agents_iter_impl">
+<span id="_CPPv3N3eos13agents_iter_t13agents_iter_tEPC16agents_iter_impl"></span><span id="_CPPv2N3eos13agents_iter_t13agents_iter_tEPC16agents_iter_impl"></span><span id="eos::agents_iter_t::agents_iter_t__agents_iter_implPC"></span><span class="target" id="classeos_1_1agents__iter__t_1add4f121186694f6e6d8516cfe7c27f48"></span><em class="property">explicit</em> <code class="sig-name descname">agents_iter_t</code><span class="sig-paren">(</span>agents_iter_impl*<em class="property">const</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos13agents_iter_t13agents_iter_tEPC16agents_iter_impl" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-friends">Friends</p>
+<dl class="friendclass">
+<dt>
+<em class="property">friend class</em> agents_iter_impl</dt>
+</dl>
+
+</div>
+</dd></dl>
+
+<dl class="cpp class">
+<dt id="_CPPv4N3eos20agents_option_iter_tE">
+<span id="_CPPv3N3eos20agents_option_iter_tE"></span><span id="_CPPv2N3eos20agents_option_iter_tE"></span><span id="eos::agents_option_iter_t"></span><span class="target" id="classeos_1_1agents__option__iter__t"></span><em class="property">class </em><code class="sig-name descname">agents_option_iter_t</code> : <em class="property">public</em> iter_base&lt;<a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::string, agents_option_iter_impl&gt;<a class="headerlink" href="#_CPPv4N3eos20agents_option_iter_tE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><div class="docutils container">
+<em>#include &lt;agents.h&gt;</em></div>
+<p>Iterator over an agent’s config option names. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-private-functions">Private Functions</p>
+<dl class="cpp function">
+<dt id="_CPPv4N3eos20agents_option_iter_t20agents_option_iter_tEPC23agents_option_iter_impl">
+<span id="_CPPv3N3eos20agents_option_iter_t20agents_option_iter_tEPC23agents_option_iter_impl"></span><span id="_CPPv2N3eos20agents_option_iter_t20agents_option_iter_tEPC23agents_option_iter_impl"></span><span id="eos::agents_option_iter_t::agents_option_iter_t__agents_option_iter_implPC"></span><span class="target" id="classeos_1_1agents__option__iter__t_1ac5763e73649a87a52fc2568f71257df0"></span><em class="property">explicit</em> <code class="sig-name descname">agents_option_iter_t</code><span class="sig-paren">(</span>agents_option_iter_impl*<em class="property">const</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos20agents_option_iter_t20agents_option_iter_tEPC23agents_option_iter_impl" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-friends">Friends</p>
+<dl class="friendclass">
+<dt>
+<em class="property">friend class</em> agents_option_iter_impl</dt>
+</dl>
+
+</div>
+</dd></dl>
+
+<dl class="cpp class">
+<dt id="_CPPv4N3eos20agents_status_iter_tE">
+<span id="_CPPv3N3eos20agents_status_iter_tE"></span><span id="_CPPv2N3eos20agents_status_iter_tE"></span><span id="eos::agents_status_iter_t"></span><span class="target" id="classeos_1_1agents__status__iter__t"></span><em class="property">class </em><code class="sig-name descname">agents_status_iter_t</code> : <em class="property">public</em> iter_base&lt;<a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::string, agents_status_iter_impl&gt;<a class="headerlink" href="#_CPPv4N3eos20agents_status_iter_tE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><div class="docutils container">
+<em>#include &lt;agents.h&gt;</em></div>
+<p>Iterator over an agent’s status keys. </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-private-functions">Private Functions</p>
+<dl class="cpp function">
+<dt id="_CPPv4N3eos20agents_status_iter_t20agents_status_iter_tEPC23agents_status_iter_impl">
+<span id="_CPPv3N3eos20agents_status_iter_t20agents_status_iter_tEPC23agents_status_iter_impl"></span><span id="_CPPv2N3eos20agents_status_iter_t20agents_status_iter_tEPC23agents_status_iter_impl"></span><span id="eos::agents_status_iter_t::agents_status_iter_t__agents_status_iter_implPC"></span><span class="target" id="classeos_1_1agents__status__iter__t_1a69313e7a0d1154f909f6df102afce719"></span><em class="property">explicit</em> <code class="sig-name descname">agents_status_iter_t</code><span class="sig-paren">(</span>agents_status_iter_impl*<em class="property">const</em><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos20agents_status_iter_t20agents_status_iter_tEPC23agents_status_iter_impl" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-friends">Friends</p>
+<dl class="friendclass">
+<dt>
+<em class="property">friend class</em> agents_status_iter_impl</dt>
+</dl>
+
+</div>
+</dd></dl>
+
+<dl class="cpp class">
+<dt id="_CPPv4N3eos10agents_mgrE">
+<span id="_CPPv3N3eos10agents_mgrE"></span><span id="_CPPv2N3eos10agents_mgrE"></span><span id="eos::agents_mgr"></span><span class="target" id="classeos_1_1agents__mgr"></span><em class="property">class </em><code class="sig-name descname">agents_mgr</code> : <em class="property">public</em> <a class="reference internal" href="acl.html#_CPPv43eos" title="eos">eos</a>::<a class="reference internal" href="base_mgr.html#_CPPv4I00EN3eos8base_mgrE" title="eos::base_mgr">base_mgr</a>&lt;<a class="reference internal" href="#_CPPv4N3eos14agents_handlerE" title="eos::agents_handler">agents_handler</a>, <a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::string&gt;<a class="headerlink" href="#_CPPv4N3eos10agents_mgrE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><div class="docutils container">
+<em>#include &lt;agents.h&gt;</em></div>
+<p>Manager for reading other agents’ config and status. This manager provides read-only access to all agents’ config options and status keys. It doesn’t provide write access to other agents’ state. Agents communicate by writing to their own status and watching others’ status.</p>
+<p>Watch registration is done on the handler (watch_all_agents/watch_agent). </p>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-public-functions">Public Functions</p>
+<dl class="cpp function">
+<dt id="_CPPv4N3eos10agents_mgrD0Ev">
+<span id="_CPPv3N3eos10agents_mgrD0Ev"></span><span id="_CPPv2N3eos10agents_mgrD0Ev"></span><span id="eos::agents_mgr::~agents_mgr"></span><span class="target" id="classeos_1_1agents__mgr_1a7463b01b2090b6b6c4b544fabdcf9561"></span><em class="property">virtual</em> <code class="sig-name descname">~agents_mgr</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos10agents_mgrD0Ev" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos10agents_mgr11agents_iterEv">
+<span id="_CPPv3NK3eos10agents_mgr11agents_iterEv"></span><span id="_CPPv2NK3eos10agents_mgr11agents_iterEv"></span><span id="eos::agents_mgr::agents_iterC"></span><span class="target" id="classeos_1_1agents__mgr_1a65b0118b6948434d432edfaa90a6073b"></span><em class="property">virtual</em> <a class="reference internal" href="#_CPPv4N3eos13agents_iter_tE" title="eos::agents_iter_t">agents_iter_t</a> <code class="sig-name descname">agents_iter</code><span class="sig-paren">(</span><span class="sig-paren">)</span> <em class="property">const</em> = 0<a class="headerlink" href="#_CPPv4NK3eos10agents_mgr11agents_iterEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Iterate over all agent names. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos10agents_mgr12agent_existsERKNSt6stringE">
+<span id="_CPPv3NK3eos10agents_mgr12agent_existsERKNSt6stringE"></span><span id="_CPPv2NK3eos10agents_mgr12agent_existsERKNSt6stringE"></span><span id="eos::agents_mgr::agent_exists__ssCRC"></span><span class="target" id="classeos_1_1agents__mgr_1a6f386f79c5ce145fd7c78dbf952d7f9e"></span><em class="property">virtual</em> bool <code class="sig-name descname">agent_exists</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::string <em class="property">const</em> &amp;<em>agent_name</em><span class="sig-paren">)</span> <em class="property">const</em> = 0<a class="headerlink" href="#_CPPv4NK3eos10agents_mgr12agent_existsERKNSt6stringE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Check if agent with given name exists. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos10agents_mgr12agent_statusERKNSt6stringERKNSt6stringE">
+<span id="_CPPv3NK3eos10agents_mgr12agent_statusERKNSt6stringERKNSt6stringE"></span><span id="_CPPv2NK3eos10agents_mgr12agent_statusERKNSt6stringERKNSt6stringE"></span><span id="eos::agents_mgr::agent_status__ssCR.ssCRC"></span><span class="target" id="classeos_1_1agents__mgr_1aa6a21197fcf116879d6a588df11a47dc"></span><em class="property">virtual</em> <a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::string <code class="sig-name descname">agent_status</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::string <em class="property">const</em> &amp;<em>agent_name</em>, <a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::string <em class="property">const</em> &amp;<em>key</em><span class="sig-paren">)</span> <em class="property">const</em> = 0<a class="headerlink" href="#_CPPv4NK3eos10agents_mgr12agent_statusERKNSt6stringERKNSt6stringE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Get status value or returns empty string if the agent or key does not exist. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos10agents_mgr19agent_status_existsERKNSt6stringERKNSt6stringE">
+<span id="_CPPv3NK3eos10agents_mgr19agent_status_existsERKNSt6stringERKNSt6stringE"></span><span id="_CPPv2NK3eos10agents_mgr19agent_status_existsERKNSt6stringERKNSt6stringE"></span><span id="eos::agents_mgr::agent_status_exists__ssCR.ssCRC"></span><span class="target" id="classeos_1_1agents__mgr_1a12aa3a271c34ccc30b6f69e7f04bc0d9"></span><em class="property">virtual</em> bool <code class="sig-name descname">agent_status_exists</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::string <em class="property">const</em> &amp;<em>agent_name</em>, <a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::string <em class="property">const</em> &amp;<em>key</em><span class="sig-paren">)</span> <em class="property">const</em> = 0<a class="headerlink" href="#_CPPv4NK3eos10agents_mgr19agent_status_existsERKNSt6stringERKNSt6stringE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Check whether a status key exists for an agent. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos10agents_mgr17agent_status_iterERKNSt6stringE">
+<span id="_CPPv3NK3eos10agents_mgr17agent_status_iterERKNSt6stringE"></span><span id="_CPPv2NK3eos10agents_mgr17agent_status_iterERKNSt6stringE"></span><span id="eos::agents_mgr::agent_status_iter__ssCRC"></span><span class="target" id="classeos_1_1agents__mgr_1af6c2cf41f9cb2db935562e16c06a33d2"></span><em class="property">virtual</em> <a class="reference internal" href="#_CPPv4N3eos20agents_status_iter_tE" title="eos::agents_status_iter_t">agents_status_iter_t</a> <code class="sig-name descname">agent_status_iter</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::string <em class="property">const</em> &amp;<em>agent_name</em><span class="sig-paren">)</span> <em class="property">const</em> = 0<a class="headerlink" href="#_CPPv4NK3eos10agents_mgr17agent_status_iterERKNSt6stringE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Iterate over status keys for a specific agent. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos10agents_mgr12agent_optionERKNSt6stringERKNSt6stringE">
+<span id="_CPPv3NK3eos10agents_mgr12agent_optionERKNSt6stringERKNSt6stringE"></span><span id="_CPPv2NK3eos10agents_mgr12agent_optionERKNSt6stringERKNSt6stringE"></span><span id="eos::agents_mgr::agent_option__ssCR.ssCRC"></span><span class="target" id="classeos_1_1agents__mgr_1a321c516a9cc87e3e2a0502ef1b007f0e"></span><em class="property">virtual</em> <a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::string <code class="sig-name descname">agent_option</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::string <em class="property">const</em> &amp;<em>agent_name</em>, <a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::string <em class="property">const</em> &amp;<em>key</em><span class="sig-paren">)</span> <em class="property">const</em> = 0<a class="headerlink" href="#_CPPv4NK3eos10agents_mgr12agent_optionERKNSt6stringERKNSt6stringE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Get config option value or returns empty string if the agent or option does not exist. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos10agents_mgr19agent_option_existsERKNSt6stringERKNSt6stringE">
+<span id="_CPPv3NK3eos10agents_mgr19agent_option_existsERKNSt6stringERKNSt6stringE"></span><span id="_CPPv2NK3eos10agents_mgr19agent_option_existsERKNSt6stringERKNSt6stringE"></span><span id="eos::agents_mgr::agent_option_exists__ssCR.ssCRC"></span><span class="target" id="classeos_1_1agents__mgr_1a542247a0f35f7a3e5a713ef451fb8f92"></span><em class="property">virtual</em> bool <code class="sig-name descname">agent_option_exists</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::string <em class="property">const</em> &amp;<em>agent_name</em>, <a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::string <em class="property">const</em> &amp;<em>key</em><span class="sig-paren">)</span> <em class="property">const</em> = 0<a class="headerlink" href="#_CPPv4NK3eos10agents_mgr19agent_option_existsERKNSt6stringERKNSt6stringE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Check whether a config option exists for an agent. </p>
+</dd></dl>
+
+<dl class="cpp function">
+<dt id="_CPPv4NK3eos10agents_mgr17agent_option_iterERKNSt6stringE">
+<span id="_CPPv3NK3eos10agents_mgr17agent_option_iterERKNSt6stringE"></span><span id="_CPPv2NK3eos10agents_mgr17agent_option_iterERKNSt6stringE"></span><span id="eos::agents_mgr::agent_option_iter__ssCRC"></span><span class="target" id="classeos_1_1agents__mgr_1a2a707690e84ceb2b7518421c03653d54"></span><em class="property">virtual</em> <a class="reference internal" href="#_CPPv4N3eos20agents_option_iter_tE" title="eos::agents_option_iter_t">agents_option_iter_t</a> <code class="sig-name descname">agent_option_iter</code><span class="sig-paren">(</span><a class="reference internal" href="ip.html#_CPPv4St" title="std">std</a>::string <em class="property">const</em> &amp;<em>agent_name</em><span class="sig-paren">)</span> <em class="property">const</em> = 0<a class="headerlink" href="#_CPPv4NK3eos10agents_mgr17agent_option_iterERKNSt6stringE" title="Permalink to this definition">¶</a><br /></dt>
+<dd><p>Iterate over config option names for a specific agent. </p>
+</dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-protected-functions">Protected Functions</p>
+<dl class="cpp function">
+<dt id="_CPPv4N3eos10agents_mgr10agents_mgrEv">
+<span id="_CPPv3N3eos10agents_mgr10agents_mgrEv"></span><span id="_CPPv2N3eos10agents_mgr10agents_mgrEv"></span><span id="eos::agents_mgr::agents_mgr"></span><span class="target" id="classeos_1_1agents__mgr_1ac1aeb669b163295a9dbcd4810a1a3edd"></span><code class="sig-name descname">agents_mgr</code><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#_CPPv4N3eos10agents_mgr10agents_mgrEv" title="Permalink to this definition">¶</a><br /></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-private-members">Private Members</p>
+<dl class="cpp var">
+<dt>
+<span class="target" id="classeos_1_1agents__mgr_1a15994a9c303a0126b170a80d03e46bf8"></span><code class="sig-name descname">agents_mgr</code></dt>
+<dd></dd></dl>
+
+</div>
+<div class="breathe-sectiondef docutils container">
+<p class="breathe-sectiondef-title rubric" id="breathe-section-title-friends">Friends</p>
+<dl class="friendclass">
+<dt>
+<em class="property">friend class</em> agents_handler</dt>
+</dl>
+
+</div>
+</dd></dl>
+
+</dd></dl>
+
+</div>
+
+
+            <div class="clearer"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sphinxsidebar" role="navigation" aria-label="main navigation">
+        <div class="sphinxsidebarwrapper">
+  <h4>Previous topic</h4>
+  <p class="topless"><a href="agent.html"
+                        title="previous chapter"><strong>agent</strong></a></p>
+  <h4>Next topic</h4>
+  <p class="topless"><a href="aresolve.html"
+                        title="next chapter"><strong>aresolve</strong></a></p>
+<div id="searchbox" style="display: none" role="search">
+  <h3 id="searchlabel">Quick search</h3>
+    <div class="searchformwrapper">
+    <form class="search" action="search.html" method="get">
+      <input type="text" name="q" aria-labelledby="searchlabel" />
+      <input type="submit" value="Go" />
+    </form>
+    </div>
+</div>
+<script>$('#searchbox').show(0);</script>
+        </div>
+      </div>
+      <div class="clearer"></div>
+    </div>
+    <div class="related" role="navigation" aria-label="related navigation">
+      <h3>Navigation</h3>
+      <ul>
+        <li class="right" style="margin-right: 10px">
+          <a href="genindex.html" title="General Index"
+             >index</a></li>
+        <li class="right" >
+          <a href="aresolve.html" title="aresolve"
+             >next</a> |</li>
+        <li class="right" >
+          <a href="agent.html" title="agent"
+             >previous</a> |</li>
+        <li class="nav-item nav-item-0"><a href="index.html">Arista EOS SDK 2.23.9 reference</a> &#187;</li>
+        <li class="nav-item nav-item-this"><a href=""><strong>agents</strong></a></li> 
+      </ul>
+    </div>
+    <div class="footer" role="contentinfo">
+        &#169; Copyright 2014, Arista Networks.
+      Created using <a href="https://www.sphinx-doc.org/">Sphinx</a> 3.4.3.
+    </div>
+  </body>
+</html>

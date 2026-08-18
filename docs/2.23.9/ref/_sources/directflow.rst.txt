@@ -1,0 +1,13 @@
+**directflow**
+--------------
+
+
+.. doxygenfile:: eos/directflow.h
+   :project: eossdk
+
+Type definitions in **directflow**
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. doxygenfile:: eos/types/directflow.h
+   :project: eossdk
+

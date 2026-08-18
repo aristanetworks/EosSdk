@@ -1,0 +1,7 @@
+**version**
+-----------
+
+
+.. doxygenfile:: eos/version.h
+   :project: eossdk
+

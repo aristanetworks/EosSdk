@@ -1,0 +1,13 @@
+**mpls_vrf_label**
+------------------
+
+
+.. doxygenfile:: eos/mpls_vrf_label.h
+   :project: eossdk
+
+Type definitions in **mpls_vrf_label**
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. doxygenfile:: eos/types/mpls_vrf_label.h
+   :project: eossdk
+

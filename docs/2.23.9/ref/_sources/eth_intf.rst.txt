@@ -1,0 +1,13 @@
+**eth_intf**
+------------
+
+
+.. doxygenfile:: eos/eth_intf.h
+   :project: eossdk
+
+Type definitions in **eth_intf**
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. doxygenfile:: eos/types/eth_intf.h
+   :project: eossdk
+

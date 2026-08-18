@@ -1,0 +1,7 @@
+**iterator**
+------------
+
+
+.. doxygenfile:: eos/iterator.h
+   :project: eossdk
+

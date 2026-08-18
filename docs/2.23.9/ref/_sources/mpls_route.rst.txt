@@ -1,0 +1,13 @@
+**mpls_route**
+--------------
+
+
+.. doxygenfile:: eos/mpls_route.h
+   :project: eossdk
+
+Type definitions in **mpls_route**
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. doxygenfile:: eos/types/mpls_route.h
+   :project: eossdk
+

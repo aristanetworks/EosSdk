@@ -1,0 +1,13 @@
+**ip_route**
+------------
+
+
+.. doxygenfile:: eos/ip_route.h
+   :project: eossdk
+
+Type definitions in **ip_route**
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. doxygenfile:: eos/types/ip_route.h
+   :project: eossdk
+

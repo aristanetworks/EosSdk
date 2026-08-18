@@ -1,0 +1,13 @@
+**intf**
+--------
+
+
+.. doxygenfile:: eos/intf.h
+   :project: eossdk
+
+Type definitions in **intf**
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. doxygenfile:: eos/types/intf.h
+   :project: eossdk
+

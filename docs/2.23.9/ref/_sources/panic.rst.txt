@@ -1,0 +1,7 @@
+**panic**
+---------
+
+
+.. doxygenfile:: eos/panic.h
+   :project: eossdk
+

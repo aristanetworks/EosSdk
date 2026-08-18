@@ -1,0 +1,13 @@
+**class_map**
+-------------
+
+
+.. doxygenfile:: eos/class_map.h
+   :project: eossdk
+
+Type definitions in **class_map**
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. doxygenfile:: eos/types/class_map.h
+   :project: eossdk
+

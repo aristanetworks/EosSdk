@@ -1,0 +1,13 @@
+**structured_filter**
+---------------------
+
+
+.. doxygenfile:: eos/structured_filter.h
+   :project: eossdk
+
+Type definitions in **structured_filter**
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+.. doxygenfile:: eos/types/structured_filter.h
+   :project: eossdk
+
